@@ -2,8 +2,14 @@ import 'package:flutter/material.dart';
 //import 'package:flutter_svg/svg.dart';
 import 'package:flutter/cupertino.dart';
 
-const Color kPrimaryColor = Color(0xffbae1ff);
-const Color kSecondaryColor = Color(0xffffdfba);
+const Color kPrimaryColor = Color(0xff440a67);
+// const Color kPrimaryColor = (0xffbae1ff);
+ final Gradient fabGradient = LinearGradient(
+    colors: [Color(0xffffd194), Color(0xff70e1f5)],
+    begin: Alignment.centerLeft,
+    end: Alignment.centerRight);
+
+const Color kSecondaryColor = Color(0xFFFFFFFF);
  Color kIcon = Colors.grey[400];
 const Color kSubtitle = Color(0xFFABB6B8);
 const Color kUser = Color(0xFFAECCCC);

@@ -348,7 +348,7 @@ class Tab {
 }
 
 Widget mediaPreview;
-String activityItemText;
+Text activityItemText;
 
 class ActivityFeedItem extends StatelessWidget {
   final String username;
@@ -608,65 +608,65 @@ showServiceDash(context) {
     if (type == 'like') {
       return
 
-        activityItemText = "liked your post";
+        activityItemText = Text("liked your post", maxLines: 1,softWrap:false,overflow:TextOverflow.fade);
     }
    else if (type == 'bloglike') {
-      activityItemText = "liked your blog";
+      activityItemText =  Text("liked your blog", maxLines: 1,softWrap:false,overflow:TextOverflow.fade);
     }
    else if (type == 'CollectionLikes') {
-      activityItemText = "liked your Collection";
+      activityItemText = Text("liked your Collection", maxLines: 1,softWrap:false,overflow:TextOverflow.fade);
     }
    else if (type == 'Videolike') {
-      activityItemText = "liked your Video";
+      activityItemText =Text( "liked your Video", maxLines: 1,softWrap:false,overflow:TextOverflow.fade);
     }
     else if (type == 'follow') {
       return
-      activityItemText = "is following you";
+      activityItemText =Text( "is following you", maxLines: 1,softWrap:false,overflow:TextOverflow.fade);
     }
     else if (type == 'comment') {
-      activityItemText = 'Commented on your post: $commentData';
+      activityItemText =Text( 'Commented on your post: $commentData', maxLines: 1,softWrap:false,overflow:TextOverflow.fade);
     }
     else if (type == 'Payment') {
 
-      activityItemText = "$message";
+      activityItemText =Text( "$message", maxLines: 1,softWrap:false,overflow:TextOverflow.fade);
     }
     else if (type == 'ReqPayment') {
-      activityItemText = '$message';
+      activityItemText =Text( '$message', maxLines: 1,softWrap:false,overflow:TextOverflow.fade);
     }
     else if (type == 'ReqPaymentI') {
-      activityItemText = '$message';
+      activityItemText =Text( '$message', maxLines: 1,softWrap:false,overflow:TextOverflow.fade);
     }
     else if (type == 'ReviewC') {
-      activityItemText = '$message';
+      activityItemText = Text('$message', maxLines: 1,softWrap:false,overflow:TextOverflow.fade);
     }
     else if (type == 'ReviewO') {
-      activityItemText = '$message';
+      activityItemText =Text( '$message', maxLines: 1,softWrap:false,overflow:TextOverflow.fade);
     }
     else if (type == 'ServicePaymentI') {
-      activityItemText = '$message';
+      activityItemText =Text( '$message', maxLines: 1,softWrap:false,overflow:TextOverflow.fade);
     }
     else if (type == 'ServicePayment') {
-      activityItemText = '$message';
+      activityItemText =Text( '$message', maxLines: 1,softWrap:false,overflow:TextOverflow.fade);
     }
     else if (type == 'PaymentO') {
       return
-      activityItemText = "$message";
+      activityItemText =Text( "$message", maxLines: 1,softWrap:false,overflow:TextOverflow.fade);
     }
     else if (type == 'Videocomment') {
-      activityItemText = 'Commented on your video: $commentData';
+      activityItemText =Text( 'Commented on your video: $commentData', maxLines: 1,softWrap:false,overflow:TextOverflow.fade);
     }
     else if (type == 'blogcomment') {
-      activityItemText = 'Commented on your Blog: $commentData';
+      activityItemText =Text( 'Commented on your Blog: $commentData', maxLines: 1,softWrap:false,overflow:TextOverflow.fade);
     }
     else if (type == 'collectioncomment') {
-      activityItemText = 'Commented on your Collection: $commentData';
+      activityItemText =Text( 'Commented on your Collection: $commentData', maxLines: 1,softWrap:false,overflow:TextOverflow.fade);
     }
 else if (type == 'fav') {
-      activityItemText = 'Wishlisted an item in your shop';
+      activityItemText =Text( 'Wishlisted an item in your shop', maxLines: 1,softWrap:false,overflow:TextOverflow.fade);
     }
 
     else {
-      activityItemText = "Error: Unknown type '$type'";
+      activityItemText =Text( "Error: Unknown type '$type'", maxLines: 1,softWrap:false,overflow:TextOverflow.fade);
     }
   }
 

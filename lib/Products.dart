@@ -12780,7 +12780,7 @@ TeenSizes(){
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.stretch,
                         children: <Widget>[
-                          Text("$details",style: TextStyle(
+                          Text("$details", maxLines: 1,softWrap:false,overflow:TextOverflow.fade,style: TextStyle(
                             color: kText.withOpacity(0.5),
 //                          fontWeight: FontWeight.bold,
                           ),),SizedBox(height: 8,),
@@ -12798,7 +12798,7 @@ TeenSizes(){
                             color: kText.withOpacity(0.5),
                             fontWeight: FontWeight.bold,fontSize: 20,
                           ),),
-                          Text('$composition',style: TextStyle(
+                          Text('$composition', maxLines: 1,softWrap:false,overflow:TextOverflow.fade,style: TextStyle(
                             color: kText.withOpacity(0.5),
 //                          fontWeight: FontWeight.bold,
                           ),),SizedBox(height: 8,),
@@ -12806,7 +12806,7 @@ TeenSizes(){
                             color: kText.withOpacity(0.5),
                             fontWeight: FontWeight.bold,fontSize: 20,
                           ),),
-                          Text('$washandcare',style: TextStyle(
+                          Text('$washandcare', maxLines: 1,softWrap:false,overflow:TextOverflow.fade,style: TextStyle(
                             color: kText.withOpacity(0.5),
 //                          fontWeight: FontWeight.bold,
                           ),),
@@ -12841,7 +12841,7 @@ TeenSizes(){
                             color: kText.withOpacity(0.5),
                             fontWeight: FontWeight.bold,fontSize: 20,
                           ),),
-                          Text('$sizeandfit',style: TextStyle(
+                          Text('$sizeandfit', maxLines: 1,softWrap:false,overflow:TextOverflow.fade,style: TextStyle(
                             color: kText.withOpacity(0.5),
 //                          fontWeight: FontWeight.bold,
                           ),),
@@ -12875,7 +12875,7 @@ TeenSizes(){
                             color: kText.withOpacity(0.5),
                             fontWeight: FontWeight.bold,fontSize: 20,
                           ),),
-                          Text('',style: TextStyle(
+                          Text('', maxLines: 1,softWrap:false,overflow:TextOverflow.fade,style: TextStyle(
                             color: kText.withOpacity(0.5),
 //                          fontWeight: FontWeight.bold,
                           ),),
@@ -13156,7 +13156,7 @@ posteurope(){
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.stretch,
                         children: <Widget>[
-                          Text("$details",style: TextStyle(
+                          Text("$details", maxLines: 1,softWrap:false,overflow:TextOverflow.fade,style: TextStyle(
                             color: kText.withOpacity(0.5),
 //                          fontWeight: FontWeight.bold,
                           ),),SizedBox(height: 8,),
@@ -13174,7 +13174,7 @@ posteurope(){
                             color: kText.withOpacity(0.5),
                             fontWeight: FontWeight.bold,fontSize: 20,
                           ),),
-                          Text('$composition',style: TextStyle(
+                          Text('$composition', maxLines: 1,softWrap:false,overflow:TextOverflow.fade,style: TextStyle(
                             color: kText.withOpacity(0.5),
 //                          fontWeight: FontWeight.bold,
                           ),),SizedBox(height: 8,),
@@ -13182,7 +13182,7 @@ posteurope(){
                             color: kText.withOpacity(0.5),
                             fontWeight: FontWeight.bold,fontSize: 20,
                           ),),
-                          Text('$washandcare',style: TextStyle(
+                          Text('$washandcare', maxLines: 1,softWrap:false,overflow:TextOverflow.fade,style: TextStyle(
                             color: kText.withOpacity(0.5),
 //                          fontWeight: FontWeight.bold,
                           ),),
@@ -13217,7 +13217,7 @@ posteurope(){
                             color: kText.withOpacity(0.5),
                             fontWeight: FontWeight.bold,fontSize: 20,
                           ),),
-                          Text('$sizeandfit',style: TextStyle(
+                          Text('$sizeandfit', maxLines: 1,softWrap:false,overflow:TextOverflow.fade,style: TextStyle(
                             color: kText.withOpacity(0.5),
 //                          fontWeight: FontWeight.bold,
                           ),),
@@ -13251,7 +13251,7 @@ posteurope(){
                             color: kText.withOpacity(0.5),
                             fontWeight: FontWeight.bold,fontSize: 20,
                           ),),
-                          Text('',style: TextStyle(
+                          Text('', maxLines: 1,softWrap:false,overflow:TextOverflow.fade,style: TextStyle(
                             color: kText.withOpacity(0.5),
 //                          fontWeight: FontWeight.bold,
                           ),),
@@ -13260,6 +13260,7 @@ posteurope(){
                     ),                ],
                 ),
               ),
+
 
 
 
@@ -13532,7 +13533,7 @@ postuk(){
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.stretch,
                         children: <Widget>[
-                          Text("$details",style: TextStyle(
+                          Text("$details", maxLines: 1,softWrap:false,overflow:TextOverflow.fade,style: TextStyle(
                             color: kText.withOpacity(0.5),
 //                          fontWeight: FontWeight.bold,
                           ),),SizedBox(height: 8,),
@@ -13550,7 +13551,7 @@ postuk(){
                             color: kText.withOpacity(0.5),
                             fontWeight: FontWeight.bold,fontSize: 20,
                           ),),
-                          Text('$composition',style: TextStyle(
+                          Text('$composition', maxLines: 1,softWrap:false,overflow:TextOverflow.fade,style: TextStyle(
                             color: kText.withOpacity(0.5),
 //                          fontWeight: FontWeight.bold,
                           ),),SizedBox(height: 8,),
@@ -13558,7 +13559,7 @@ postuk(){
                             color: kText.withOpacity(0.5),
                             fontWeight: FontWeight.bold,fontSize: 20,
                           ),),
-                          Text('$washandcare',style: TextStyle(
+                          Text('$washandcare', maxLines: 1,softWrap:false,overflow:TextOverflow.fade,style: TextStyle(
                             color: kText.withOpacity(0.5),
 //                          fontWeight: FontWeight.bold,
                           ),),
@@ -13593,7 +13594,7 @@ postuk(){
                             color: kText.withOpacity(0.5),
                             fontWeight: FontWeight.bold,fontSize: 20,
                           ),),
-                          Text('$sizeandfit',style: TextStyle(
+                          Text('$sizeandfit', maxLines: 1,softWrap:false,overflow:TextOverflow.fade,style: TextStyle(
                             color: kText.withOpacity(0.5),
 //                          fontWeight: FontWeight.bold,
                           ),),
@@ -13627,7 +13628,7 @@ postuk(){
                             color: kText.withOpacity(0.5),
                             fontWeight: FontWeight.bold,fontSize: 20,
                           ),),
-                          Text('',style: TextStyle(
+                          Text('', maxLines: 1,softWrap:false,overflow:TextOverflow.fade,style: TextStyle(
                             color: kText.withOpacity(0.5),
 //                          fontWeight: FontWeight.bold,
                           ),),
@@ -13636,10 +13637,6 @@ postuk(){
                     ),                ],
                 ),
               ),
-
-
-
-
 
             ],
           ),
@@ -13908,7 +13905,7 @@ postusa() {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.stretch,
                         children: <Widget>[
-                          Text("$details",style: TextStyle(
+                          Text("$details", maxLines: 1,softWrap:false,overflow:TextOverflow.fade,style: TextStyle(
                             color: kText.withOpacity(0.5),
 //                          fontWeight: FontWeight.bold,
                           ),),SizedBox(height: 8,),
@@ -13926,7 +13923,7 @@ postusa() {
                             color: kText.withOpacity(0.5),
                             fontWeight: FontWeight.bold,fontSize: 20,
                           ),),
-                          Text('$composition',style: TextStyle(
+                          Text('$composition', maxLines: 1,softWrap:false,overflow:TextOverflow.fade,style: TextStyle(
                             color: kText.withOpacity(0.5),
 //                          fontWeight: FontWeight.bold,
                           ),),SizedBox(height: 8,),
@@ -13934,7 +13931,7 @@ postusa() {
                             color: kText.withOpacity(0.5),
                             fontWeight: FontWeight.bold,fontSize: 20,
                           ),),
-                          Text('$washandcare',style: TextStyle(
+                          Text('$washandcare', maxLines: 1,softWrap:false,overflow:TextOverflow.fade,style: TextStyle(
                             color: kText.withOpacity(0.5),
 //                          fontWeight: FontWeight.bold,
                           ),),
@@ -13969,7 +13966,7 @@ postusa() {
                             color: kText.withOpacity(0.5),
                             fontWeight: FontWeight.bold,fontSize: 20,
                           ),),
-                          Text('$sizeandfit',style: TextStyle(
+                          Text('$sizeandfit', maxLines: 1,softWrap:false,overflow:TextOverflow.fade,style: TextStyle(
                             color: kText.withOpacity(0.5),
 //                          fontWeight: FontWeight.bold,
                           ),),
@@ -14003,7 +14000,7 @@ postusa() {
                             color: kText.withOpacity(0.5),
                             fontWeight: FontWeight.bold,fontSize: 20,
                           ),),
-                          Text('',style: TextStyle(
+                          Text('', maxLines: 1,softWrap:false,overflow:TextOverflow.fade,style: TextStyle(
                             color: kText.withOpacity(0.5),
 //                          fontWeight: FontWeight.bold,
                           ),),
@@ -14012,11 +14009,6 @@ postusa() {
                     ),                ],
                 ),
               ),
-
-
-
-
-
             ],
           ),
         ),

@@ -42,7 +42,7 @@ class _ServiceFulfillState extends State<ServiceFulfill> {
       'fulfilled':'true',
       "timestamp": timestamp,
 
-      'courierId': courierIdController.text,
+      'remarks': courierIdController.text??"",
       'orderStatus':'Order Shipped',
     });
     Firestore.instance.collection('ordersCustomer')
@@ -53,7 +53,7 @@ class _ServiceFulfillState extends State<ServiceFulfill> {
       'fulfilled':'true',
       "timestamp": timestamp,
 
-      'courierId': courierIdController.text,
+      'remarks': courierIdController.text ?? "",
       'orderStatus':'Order Shipped',
     }); Firestore.instance.collection('feed')
         .document(currentUser.id)
@@ -73,53 +73,6 @@ class _ServiceFulfillState extends State<ServiceFulfill> {
 
   Client();
   }
-  AddCourier(){
-    showDialog(
-        context: context,
-        builder: (context) {
-          return
-            Form(
-              key: _formKey,
-              child: ListView(
-                children: [
-                  Center(child: Text('Enter Shipment tracking ID',style: TextStyle(color: kText)),),
-                   Text('Note:if tracking ID does not apply to this order,Enter customer name',style: TextStyle(color: kText)),
-
-                  TextFormField(
-                    controller: courierIdController,
-                    decoration: InputDecoration(
-                      enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
-                      focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
-
-                      labelText: 'Tracking ID',labelStyle: TextStyle(color: kText),
-                      hintText: 'Tracking ID',
-                    ),
-                    textAlign: TextAlign.center,
-                    validator: (text) {
-                      if ( text.isEmpty) {
-                        return 'Tracking ID is empty';
-                      }
-                      return null;
-                    },
-                  ),
-                  Center(
-                    child: RaisedButton(
-                      onPressed: () {
-                        if(_formKey.currentState.validate()) {
-                          // ignore: unnecessary_statements
-                          submit();
-                          Navigator.pop(context);
-                        }
-                      },
-                      color: kblue,
-                      child: Text('Submit',style: TextStyle(color: kText)),
-                    ),
-                  )
-                ],
-              ),
-            );
-        });
-  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -130,8 +83,8 @@ class _ServiceFulfillState extends State<ServiceFulfill> {
           // scrollDirection: Axis.vertical,
           children: [
             Container(child: Column(children:[
-              Center(child: Text('Enter Shipment tracking ID',style: TextStyle(color: kText)),),
-              Text('Note:if tracking ID does not apply to this order,Enter customer name',style: TextStyle(color: kText)),
+              // Center(child: Text('Remarks',style: TextStyle(color: kText)),),
+              Text('Remarks',style: TextStyle(color: kText)),
               TextFormField(
                 style: TextStyle(color: kText),
                 controller: courierIdController,
@@ -139,25 +92,20 @@ class _ServiceFulfillState extends State<ServiceFulfill> {
                   enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
                   focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
 
-                  labelText: 'Tracking ID',labelStyle: TextStyle(color: kText),
-                  hintText: 'Tracking ID',
+                  labelText: 'Remarks',labelStyle: TextStyle(color: kText),
+                  hintText: 'Remarks',
                 ),
                 textAlign: TextAlign.center,
-                validator: (text) {
-                  if ( text.isEmpty) {
-                    return 'Tracking ID is empty';
-                  }
-                  return null;
-                },
+
               ),
               Center(
                 child: RaisedButton(
                   onPressed: () {
-                    if(_formKey.currentState.validate()) {
+
                       // ignore: unnecessary_statements
                       submit();
                       Navigator.pop(context);
-                    }
+
                   },
                   color: kblue,
                   child: Text('Submit',style: TextStyle(color: kText)),
