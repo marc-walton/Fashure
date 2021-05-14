@@ -302,7 +302,6 @@ return
                     i++) {
                       listOfImages.add(CachedNetworkImage(imageUrl:snapshot
                           .data.documents[index].data['collmediaUrl'][i]));
-                      print(listOfImages);
                     }
                     return Column(
                       children: <Widget>[
@@ -310,7 +309,7 @@ return
                           margin: EdgeInsets.all(10.0),
 
                           decoration: BoxDecoration(
-                            color: Colors.black,
+                            color: Colors.transparent,
                           ),
                           width: MediaQuery
                               .of(context)
@@ -387,17 +386,12 @@ scrollDirection:Axis.vertical,
       child: Text(
       user.displayName,
       style: TextStyle(
-      color: Colors.white,
+      color:kText,
       fontWeight: FontWeight.bold,
       ),
       ),
     ),
-    subtitle:  GestureDetector(
-      onTap: () => showProfile(context, profileId: user.id),
-      child: Text(user.username,
-      style: TextStyle(color: kIcon),),
-    ),
-      trailing: IconButton(icon: Icon(Icons.more_horiz,color: Colors.white,),
+      trailing: IconButton(icon: Icon(Icons.more_horiz,color:kText,),
           onPressed: () {
             !isPostOwner?showDialog(
                 context: context,
@@ -442,18 +436,23 @@ scrollDirection:Axis.vertical,
                 }):handleDeletePost(context);
           }),
     ),
-    Text(title,
-    style: TextStyle(
-    color: Colors.white,
-    fontWeight: FontWeight.bold,
-    ),),
-        Text(source,
-          style: TextStyle(
-            color: Colors.white,
-            fontWeight: FontWeight.bold,
-          ),),
-        pics()  ,
+          ListTile(
+          leading:
+   Text(title,
+      style: TextStyle(
+      color: kText,
+      fontWeight: FontWeight.bold,
+      ),),
+    ),
 
+        pics()  ,
+        ListTile(
+          leading: Text(source,
+            style: TextStyle(
+              color:kText,
+              fontWeight: FontWeight.bold,
+            ),),
+        ),
 
     Row(
     mainAxisAlignment: MainAxisAlignment.start,
@@ -479,7 +478,7 @@ scrollDirection:Axis.vertical,
     child: Text(
     "$likeCount ",
     style: TextStyle(
-    color: Colors.black,
+    color: kText,
     fontSize: 15.0,
 //                      fontWeight: FontWeight.bold,
     ),

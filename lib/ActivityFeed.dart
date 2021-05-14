@@ -348,7 +348,7 @@ class Tab {
 }
 
 Widget mediaPreview;
-Text activityItemText;
+String activityItemText;
 
 class ActivityFeedItem extends StatelessWidget {
   final String username;
@@ -608,65 +608,65 @@ showServiceDash(context) {
     if (type == 'like') {
       return
 
-        activityItemText = Text("liked your post", maxLines: 1,softWrap:false,overflow:TextOverflow.fade);
+        activityItemText = "liked your post";
     }
    else if (type == 'bloglike') {
-      activityItemText =  Text("liked your blog", maxLines: 1,softWrap:false,overflow:TextOverflow.fade);
+      activityItemText =  "liked your blog";
     }
    else if (type == 'CollectionLikes') {
-      activityItemText = Text("liked your Collection", maxLines: 1,softWrap:false,overflow:TextOverflow.fade);
+      activityItemText = "liked your Collection";
     }
    else if (type == 'Videolike') {
-      activityItemText =Text( "liked your Video", maxLines: 1,softWrap:false,overflow:TextOverflow.fade);
+      activityItemText = "liked your Video";
     }
     else if (type == 'follow') {
       return
-      activityItemText =Text( "is following you", maxLines: 1,softWrap:false,overflow:TextOverflow.fade);
+      activityItemText = "is following you";
     }
     else if (type == 'comment') {
-      activityItemText =Text( 'Commented on your post: $commentData', maxLines: 1,softWrap:false,overflow:TextOverflow.fade);
+      activityItemText = 'Commented on your post: $commentData';
     }
     else if (type == 'Payment') {
 
-      activityItemText =Text( "$message", maxLines: 1,softWrap:false,overflow:TextOverflow.fade);
+      activityItemText = "$message";
     }
     else if (type == 'ReqPayment') {
-      activityItemText =Text( '$message', maxLines: 1,softWrap:false,overflow:TextOverflow.fade);
+      activityItemText = '$message';
     }
     else if (type == 'ReqPaymentI') {
-      activityItemText =Text( '$message', maxLines: 1,softWrap:false,overflow:TextOverflow.fade);
+      activityItemText = '$message';
     }
     else if (type == 'ReviewC') {
-      activityItemText = Text('$message', maxLines: 1,softWrap:false,overflow:TextOverflow.fade);
+      activityItemText = '$message';
     }
     else if (type == 'ReviewO') {
-      activityItemText =Text( '$message', maxLines: 1,softWrap:false,overflow:TextOverflow.fade);
+      activityItemText = '$message';
     }
     else if (type == 'ServicePaymentI') {
-      activityItemText =Text( '$message', maxLines: 1,softWrap:false,overflow:TextOverflow.fade);
+      activityItemText = '$message';
     }
     else if (type == 'ServicePayment') {
-      activityItemText =Text( '$message', maxLines: 1,softWrap:false,overflow:TextOverflow.fade);
+      activityItemText = '$message';
     }
     else if (type == 'PaymentO') {
       return
-      activityItemText =Text( "$message", maxLines: 1,softWrap:false,overflow:TextOverflow.fade);
+      activityItemText = "$message";
     }
     else if (type == 'Videocomment') {
-      activityItemText =Text( 'Commented on your video: $commentData', maxLines: 1,softWrap:false,overflow:TextOverflow.fade);
+      activityItemText = 'Commented on your video: $commentData';
     }
     else if (type == 'blogcomment') {
-      activityItemText =Text( 'Commented on your Blog: $commentData', maxLines: 1,softWrap:false,overflow:TextOverflow.fade);
+      activityItemText = 'Commented on your Blog: $commentData';
     }
     else if (type == 'collectioncomment') {
-      activityItemText =Text( 'Commented on your Collection: $commentData', maxLines: 1,softWrap:false,overflow:TextOverflow.fade);
+      activityItemText = 'Commented on your Collection: $commentData';
     }
 else if (type == 'fav') {
-      activityItemText =Text( 'Wishlisted an item in your shop', maxLines: 1,softWrap:false,overflow:TextOverflow.fade);
+      activityItemText = 'Wishlisted an item in your shop';
     }
 
     else {
-      activityItemText =Text( "Error: Unknown type '$type'", maxLines: 1,softWrap:false,overflow:TextOverflow.fade);
+      activityItemText = "Error: Unknown type '$type'";
     }
   }
 
@@ -682,8 +682,7 @@ payent(ParentContext){
             title: GestureDetector(
               onTap: () => showOrderView(ParentContext),
               child: RichText(
-                overflow: TextOverflow.ellipsis,
-                text: TextSpan(
+                maxLines: 1,softWrap:false,overflow:TextOverflow.fade,                    text: TextSpan(
                     style: TextStyle(
                       fontSize: 14.0,
                       color: kText,
@@ -725,8 +724,7 @@ blog(ParentContext){
             title: GestureDetector(
               onTap: () => showBlog(ParentContext),
               child: RichText(
-                overflow: TextOverflow.ellipsis,
-                text: TextSpan(
+                maxLines: 1,softWrap:false,overflow:TextOverflow.fade,                    text: TextSpan(
                     style: TextStyle(
                       fontSize: 14.0,
                       color: kText,
@@ -770,8 +768,7 @@ collection(ParentContext){
             title: GestureDetector(
               onTap: () => showColl(ParentContext),
               child: RichText(
-                overflow: TextOverflow.ellipsis,
-                text: TextSpan(
+                maxLines: 1,softWrap:false,overflow:TextOverflow.fade,                    text: TextSpan(
                     style: TextStyle(
                       fontSize: 14.0,
                       color: kText,
@@ -815,8 +812,7 @@ payo(ParentContext){
             title: GestureDetector(
               onTap: () => showSellerDash(ParentContext),
               child: RichText(
-                overflow: TextOverflow.ellipsis,
-                text: TextSpan(
+                maxLines: 1,softWrap:false,overflow:TextOverflow.fade,                    text: TextSpan(
                     style: TextStyle(
                       fontSize: 14.0,
                       color: kText,
@@ -860,8 +856,7 @@ prod(ParentContext){
             title: GestureDetector(
               onTap: () => showProduct(ParentContext),
               child: RichText(
-                overflow: TextOverflow.ellipsis,
-                text: TextSpan(
+                maxLines: 1,softWrap:false,overflow:TextOverflow.fade,                    text: TextSpan(
                     style: TextStyle(
                       fontSize: 14.0,
                       color: kText,
@@ -907,8 +902,7 @@ prod(ParentContext){
               title: GestureDetector(
                 onTap: () => showInvoiceView(ParentContext),
                 child: RichText(
-                  overflow: TextOverflow.ellipsis,
-                  text: TextSpan(
+                  maxLines: 1,softWrap:false,overflow:TextOverflow.fade,                  text: TextSpan(
                       style: TextStyle(
                         fontSize: 14.0,
                         color: kText,
@@ -952,8 +946,7 @@ ReqPaymentI(ParentContext){
             title: GestureDetector(
               onTap: () => showServiceDash(ParentContext),
               child: RichText(
-                overflow: TextOverflow.ellipsis,
-                text: TextSpan(
+                maxLines: 1,softWrap:false,overflow:TextOverflow.fade,                    text: TextSpan(
                     style: TextStyle(
                       fontSize: 14.0,
                       color: kText,
@@ -997,8 +990,7 @@ ReqPaymentI(ParentContext){
               title: GestureDetector(
                 onTap: () => showClient(ParentContext),
                 child: RichText(
-                  overflow: TextOverflow.ellipsis,
-                  text: TextSpan(
+                  maxLines: 1,softWrap:false,overflow:TextOverflow.fade,                      text: TextSpan(
                       style: TextStyle(
                         fontSize: 14.0,
                         color: kText,
@@ -1042,8 +1034,7 @@ ReviewO(ParentContext){
             title: GestureDetector(
               onTap: () => showProduct(ParentContext),
               child: RichText(
-                overflow: TextOverflow.ellipsis,
-                text: TextSpan(
+                maxLines: 1,softWrap:false,overflow:TextOverflow.fade,                    text: TextSpan(
                     style: TextStyle(
                       fontSize: 14.0,
                       color: kText,
@@ -1087,8 +1078,7 @@ ReviewO(ParentContext){
               title: GestureDetector(
                 onTap: () => showServiceDash(ParentContext),
                 child: RichText(
-                  overflow: TextOverflow.ellipsis,
-                  text: TextSpan(
+                  maxLines: 1,softWrap:false,overflow:TextOverflow.fade,                      text: TextSpan(
                       style: TextStyle(
                         fontSize: 14.0,
                         color: kText,
@@ -1132,8 +1122,7 @@ ServicePayment(ParentContext){
             title: GestureDetector(
               onTap: () => showInvoiceView(ParentContext),
               child: RichText(
-                overflow: TextOverflow.ellipsis,
-                text: TextSpan(
+                maxLines: 1,softWrap:false,overflow:TextOverflow.fade,                    text: TextSpan(
                     style: TextStyle(
                       fontSize: 14.0,
                       color: kText,
@@ -1167,499 +1156,6 @@ ServicePayment(ParentContext){
 }
 
    main(ParentContext){
-    // if(type == 'like'|| type == 'follow' || type == 'comment' || type == 'Videocomment'|| type == 'Videolike') {
-    //   return
-    //     Padding(
-    //       padding: EdgeInsets.only(bottom: 2.0),
-    //       child: ClipRRect(borderRadius: BorderRadius.circular(15.0),
-    //         child: Container(
-    //           color: Color(0XFFb3b3ff).withOpacity(0.3),
-    //           child: ListTile(
-    //             title: GestureDetector(
-    //               onTap: () => showProfile(ParentContext, profileId: userId),
-    //               child: RichText(
-    //                 overflow: TextOverflow.ellipsis,
-    //                 text: TextSpan(
-    //                     style: TextStyle(
-    //                       fontSize: 14.0,
-    //                       color: kText,
-    //                     ),
-    //                     children: [
-    //                       TextSpan(
-    //                         text: username,
-    //                         style: TextStyle(
-    //                             fontWeight: FontWeight.bold, color: kUser),
-    //                       ),
-    //                       TextSpan(
-    //                         text: ' $activityItemText',
-    //                       )
-    //                     ]),
-    //               ),
-    //             ),
-    //             leading: CircleAvatar(
-    //               backgroundImage: CachedNetworkImageProvider(userProfileImg),
-    //             ),
-    //             subtitle: Text(
-    //               timeago.format(timestamp.toDate()),
-    //               overflow: TextOverflow.ellipsis,
-    //               style: TextStyle(color: kSubtitle),
-    //             ),
-    //             trailing: mediaPreview,
-    //           ),
-    //         ),
-    //       ),
-    //     );
-    // }
-    // else if (type == 'bloglike'||type == 'blogcomment'){
-    //   return
-    //     Padding(
-    //       padding: EdgeInsets.only(bottom: 2.0),
-    //       child: ClipRRect(borderRadius: BorderRadius.circular(15.0),
-    //         child: Container(
-    //           color: Color(0XFFb3b3ff).withOpacity(0.3),
-    //           child: ListTile(
-    //             title: GestureDetector(
-    //               onTap: () => showBlog,
-    //               child: RichText(
-    //                 overflow: TextOverflow.ellipsis,
-    //                 text: TextSpan(
-    //                     style: TextStyle(
-    //                       fontSize: 14.0,
-    //                       color: kText,
-    //                     ),
-    //                     children: [
-    //                       TextSpan(
-    //                         text: username,
-    //                         style: TextStyle(
-    //                             fontWeight: FontWeight.bold, color: kUser),
-    //                       ),
-    //                       TextSpan(
-    //                         text: ' $activityItemText',
-    //                       )
-    //                     ]),
-    //               ),
-    //             ),
-    //             leading: CircleAvatar(
-    //               backgroundImage: CachedNetworkImageProvider(userProfileImg),
-    //             ),
-    //             subtitle: Text(
-    //               timeago.format(timestamp.toDate()),
-    //               overflow: TextOverflow.ellipsis,
-    //               style: TextStyle(color: kSubtitle),
-    //             ),
-    //             trailing: mediaPreview,
-    //           ),
-    //         ),
-    //       ),
-    //     );
-    //
-    // }
-    // else if (type == 'CollectionLikes'|| type == 'collectioncomment'){
-    //   return
-    //
-    //     Padding(
-    //       padding: EdgeInsets.only(bottom: 2.0),
-    //       child: ClipRRect(borderRadius: BorderRadius.circular(15.0),
-    //         child: Container(
-    //           color: Color(0XFFb3b3ff).withOpacity(0.3),
-    //           child: ListTile(
-    //             title: GestureDetector(
-    //               onTap: () => showColl,
-    //               child: RichText(
-    //                 overflow: TextOverflow.ellipsis,
-    //                 text: TextSpan(
-    //                     style: TextStyle(
-    //                       fontSize: 14.0,
-    //                       color: kText,
-    //                     ),
-    //                     children: [
-    //                       TextSpan(
-    //                         text: username,
-    //                         style: TextStyle(
-    //                             fontWeight: FontWeight.bold, color: kUser),
-    //                       ),
-    //                       TextSpan(
-    //                         text: ' $activityItemText',
-    //                       )
-    //                     ]),
-    //               ),
-    //             ),
-    //             leading: CircleAvatar(
-    //               backgroundImage: CachedNetworkImageProvider(userProfileImg),
-    //             ),
-    //             subtitle: Text(
-    //               timeago.format(timestamp.toDate()),
-    //               overflow: TextOverflow.ellipsis,
-    //               style: TextStyle(color: kSubtitle),
-    //             ),
-    //             trailing: mediaPreview,
-    //           ),
-    //         ),
-    //       ),
-    //     );
-    //
-    // }
-    // else if (type == 'payment'){
-    //   return
-    //
-    //     Padding(
-    //       padding: EdgeInsets.only(bottom: 2.0),
-    //       child: ClipRRect(borderRadius: BorderRadius.circular(15.0),
-    //         child: Container(
-    //           color: Color(0XFFb3b3ff).withOpacity(0.3),
-    //           child: ListTile(
-    //             title: GestureDetector(
-    //               onTap: () => showOrderView,
-    //               child: RichText(
-    //                 overflow: TextOverflow.ellipsis,
-    //                 text: TextSpan(
-    //                     style: TextStyle(
-    //                       fontSize: 14.0,
-    //                       color: kText,
-    //                     ),
-    //                     children: [
-    //                       TextSpan(
-    //                         text: username,
-    //                         style: TextStyle(
-    //                             fontWeight: FontWeight.bold, color: kUser),
-    //                       ),
-    //                       TextSpan(
-    //                         text: ' $activityItemText',
-    //                       )
-    //                     ]),
-    //               ),
-    //             ),
-    //             leading: CircleAvatar(
-    //               backgroundImage: CachedNetworkImageProvider(userProfileImg),
-    //             ),
-    //             subtitle: Text(
-    //               timeago.format(timestamp.toDate()),
-    //               overflow: TextOverflow.ellipsis,
-    //               style: TextStyle(color: kSubtitle),
-    //             ),
-    //             trailing: mediaPreview,
-    //           ),
-    //         ),
-    //       ),
-    //     );
-    //
-    // }
-    // else if (type == 'paymentO'){
-    //   return
-    //
-    //     Padding(
-    //       padding: EdgeInsets.only(bottom: 2.0),
-    //       child: ClipRRect(borderRadius: BorderRadius.circular(15.0),
-    //         child: Container(
-    //           color: Color(0XFFb3b3ff).withOpacity(0.3),
-    //           child: ListTile(
-    //             title: GestureDetector(
-    //               onTap: () => showSellerDash,
-    //               child: RichText(
-    //                 overflow: TextOverflow.ellipsis,
-    //                 text: TextSpan(
-    //                     style: TextStyle(
-    //                       fontSize: 14.0,
-    //                       color: kText,
-    //                     ),
-    //                     children: [
-    //                       TextSpan(
-    //                         text: username,
-    //                         style: TextStyle(
-    //                             fontWeight: FontWeight.bold, color: kUser),
-    //                       ),
-    //                       TextSpan(
-    //                         text: ' $activityItemText',
-    //                       )
-    //                     ]),
-    //               ),
-    //             ),
-    //             leading: CircleAvatar(
-    //               backgroundImage: CachedNetworkImageProvider(userProfileImg),
-    //             ),
-    //             subtitle: Text(
-    //               timeago.format(timestamp.toDate()),
-    //               overflow: TextOverflow.ellipsis,
-    //               style: TextStyle(color: kSubtitle),
-    //             ),
-    //             trailing: mediaPreview,
-    //           ),
-    //         ),
-    //       ),
-    //     );
-    //
-    // }
-    // else if (type == 'ReqPayment'){
-    //   return
-    //
-    //
-    //     Padding(
-    //       padding: EdgeInsets.only(bottom: 2.0),
-    //       child: ClipRRect(borderRadius: BorderRadius.circular(15.0),
-    //         child: Container(
-    //           color: Color(0XFFb3b3ff).withOpacity(0.3),
-    //           child: ListTile(
-    //             title: GestureDetector(
-    //               onTap: () => showInvoiceView,
-    //               child: RichText(
-    //                 overflow: TextOverflow.ellipsis,
-    //                 text: TextSpan(
-    //                     style: TextStyle(
-    //                       fontSize: 14.0,
-    //                       color: kText,
-    //                     ),
-    //                     children: [
-    //                       TextSpan(
-    //                         text: username,
-    //                         style: TextStyle(
-    //                             fontWeight: FontWeight.bold, color: kUser),
-    //                       ),
-    //                       TextSpan(
-    //                         text: ' $activityItemText',
-    //                       )
-    //                     ]),
-    //               ),
-    //             ),
-    //             leading: CircleAvatar(
-    //               backgroundImage: CachedNetworkImageProvider(userProfileImg),
-    //             ),
-    //             subtitle: Text(
-    //               timeago.format(timestamp.toDate()),
-    //               overflow: TextOverflow.ellipsis,
-    //               style: TextStyle(color: kSubtitle),
-    //             ),
-    //             trailing: mediaPreview,
-    //           ),
-    //         ),
-    //       ),
-    //     );
-    //
-    // }
-    // else if (type == 'ReqPaymentI'){
-    //   return
-    //
-    //     Padding(
-    //       padding: EdgeInsets.only(bottom: 2.0),
-    //       child: ClipRRect(borderRadius: BorderRadius.circular(15.0),
-    //         child: Container(
-    //           color: Color(0XFFb3b3ff).withOpacity(0.3),
-    //           child: ListTile(
-    //             title: GestureDetector(
-    //               onTap: () => showServiceDash,
-    //               child: RichText(
-    //                 overflow: TextOverflow.ellipsis,
-    //                 text: TextSpan(
-    //                     style: TextStyle(
-    //                       fontSize: 14.0,
-    //                       color: kText,
-    //                     ),
-    //                     children: [
-    //                       TextSpan(
-    //                         text: username,
-    //                         style: TextStyle(
-    //                             fontWeight: FontWeight.bold, color: kUser),
-    //                       ),
-    //                       TextSpan(
-    //                         text: ' $activityItemText',
-    //                       )
-    //                     ]),
-    //               ),
-    //             ),
-    //             leading: CircleAvatar(
-    //               backgroundImage: CachedNetworkImageProvider(userProfileImg),
-    //             ),
-    //             subtitle: Text(
-    //               timeago.format(timestamp.toDate()),
-    //               overflow: TextOverflow.ellipsis,
-    //               style: TextStyle(color: kSubtitle),
-    //             ),
-    //             trailing: mediaPreview,
-    //           ),
-    //         ),
-    //       ),
-    //     );
-    //
-    // }
-    // else if (type == 'ReviewC'){
-    //   return
-    //
-    //     Padding(
-    //       padding: EdgeInsets.only(bottom: 2.0),
-    //       child: ClipRRect(borderRadius: BorderRadius.circular(15.0),
-    //         child: Container(
-    //           color: Color(0XFFb3b3ff).withOpacity(0.3),
-    //           child: ListTile(
-    //             title: GestureDetector(
-    //               onTap: () => showClient,
-    //               child: RichText(
-    //                 overflow: TextOverflow.ellipsis,
-    //                 text: TextSpan(
-    //                     style: TextStyle(
-    //                       fontSize: 14.0,
-    //                       color: kText,
-    //                     ),
-    //                     children: [
-    //                       TextSpan(
-    //                         text: username,
-    //                         style: TextStyle(
-    //                             fontWeight: FontWeight.bold, color: kUser),
-    //                       ),
-    //                       TextSpan(
-    //                         text: ' $activityItemText',
-    //                       )
-    //                     ]),
-    //               ),
-    //             ),
-    //             leading: CircleAvatar(
-    //               backgroundImage: CachedNetworkImageProvider(userProfileImg),
-    //             ),
-    //             subtitle: Text(
-    //               timeago.format(timestamp.toDate()),
-    //               overflow: TextOverflow.ellipsis,
-    //               style: TextStyle(color: kSubtitle),
-    //             ),
-    //             trailing: mediaPreview,
-    //           ),
-    //         ),
-    //       ),
-    //     );
-    //
-    // }
-    // else if (type == 'ReviewO'){
-    //   return
-    //
-    //     Padding(
-    //       padding: EdgeInsets.only(bottom: 2.0),
-    //       child: ClipRRect(borderRadius: BorderRadius.circular(15.0),
-    //         child: Container(
-    //           color: Color(0XFFb3b3ff).withOpacity(0.3),
-    //           child: ListTile(
-    //             title: GestureDetector(
-    //               onTap: () => showProduct,
-    //               child: RichText(
-    //                 overflow: TextOverflow.ellipsis,
-    //                 text: TextSpan(
-    //                     style: TextStyle(
-    //                       fontSize: 14.0,
-    //                       color: kText,
-    //                     ),
-    //                     children: [
-    //                       TextSpan(
-    //                         text: username,
-    //                         style: TextStyle(
-    //                             fontWeight: FontWeight.bold, color: kUser),
-    //                       ),
-    //                       TextSpan(
-    //                         text: ' $activityItemText',
-    //                       )
-    //                     ]),
-    //               ),
-    //             ),
-    //             leading: CircleAvatar(
-    //               backgroundImage: CachedNetworkImageProvider(userProfileImg),
-    //             ),
-    //             subtitle: Text(
-    //               timeago.format(timestamp.toDate()),
-    //               overflow: TextOverflow.ellipsis,
-    //               style: TextStyle(color: kSubtitle),
-    //             ),
-    //             trailing: mediaPreview,
-    //           ),
-    //         ),
-    //       ),
-    //     );
-    //
-    // }
-    // else if (type == 'ServicePaymentI'){
-    //   return
-    //
-    //     Padding(
-    //       padding: EdgeInsets.only(bottom: 2.0),
-    //       child: ClipRRect(borderRadius: BorderRadius.circular(15.0),
-    //         child: Container(
-    //           color: Color(0XFFb3b3ff).withOpacity(0.3),
-    //           child: ListTile(
-    //             title: GestureDetector(
-    //               onTap: () => showServiceDash,
-    //               child: RichText(
-    //                 overflow: TextOverflow.ellipsis,
-    //                 text: TextSpan(
-    //                     style: TextStyle(
-    //                       fontSize: 14.0,
-    //                       color: kText,
-    //                     ),
-    //                     children: [
-    //                       TextSpan(
-    //                         text: username,
-    //                         style: TextStyle(
-    //                             fontWeight: FontWeight.bold, color: kUser),
-    //                       ),
-    //                       TextSpan(
-    //                         text: ' $activityItemText',
-    //                       )
-    //                     ]),
-    //               ),
-    //             ),
-    //             leading: CircleAvatar(
-    //               backgroundImage: CachedNetworkImageProvider(userProfileImg),
-    //             ),
-    //             subtitle: Text(
-    //               timeago.format(timestamp.toDate()),
-    //               overflow: TextOverflow.ellipsis,
-    //               style: TextStyle(color: kSubtitle),
-    //             ),
-    //             trailing: mediaPreview,
-    //           ),
-    //         ),
-    //       ),
-    //     );
-    //
-    // }
-    // else if (type == 'ServicePayment') {
-    //   return
-    //
-    //     Padding(
-    //       padding: EdgeInsets.only(bottom: 2.0),
-    //       child: ClipRRect(borderRadius: BorderRadius.circular(15.0),
-    //         child: Container(
-    //           color: Color(0XFFb3b3ff).withOpacity(0.3),
-    //           child: ListTile(
-    //             title: GestureDetector(
-    //               onTap: () => showInvoiceView,
-    //               child: RichText(
-    //                 overflow: TextOverflow.ellipsis,
-    //                 text: TextSpan(
-    //                     style: TextStyle(
-    //                       fontSize: 14.0,
-    //                       color: kText,
-    //                     ),
-    //                     children: [
-    //                       TextSpan(
-    //                         text: username,
-    //                         style: TextStyle(
-    //                             fontWeight: FontWeight.bold, color: kUser),
-    //                       ),
-    //                       TextSpan(
-    //                         text: ' $activityItemText',
-    //                       )
-    //                     ]),
-    //               ),
-    //             ),
-    //             leading: CircleAvatar(
-    //               backgroundImage: CachedNetworkImageProvider(userProfileImg),
-    //             ),
-    //             subtitle: Text(
-    //               timeago.format(timestamp.toDate()),
-    //               overflow: TextOverflow.ellipsis,
-    //               style: TextStyle(color: kSubtitle),
-    //             ),
-    //             trailing: mediaPreview,
-    //           ),
-    //         ),
-    //       ),
-    //     );
-    //
-    // }
 
      return
        Padding(
@@ -1671,8 +1167,7 @@ ServicePayment(ParentContext){
                title: GestureDetector(
                  onTap: () => showProfile(ParentContext, profileId: userId),
                  child: RichText(
-                   overflow: TextOverflow.ellipsis,
-                   text: TextSpan(
+                   maxLines: 1,softWrap:false,overflow:TextOverflow.fade,                       text: TextSpan(
                        style: TextStyle(
                          fontSize: 14.0,
                          color: kText,

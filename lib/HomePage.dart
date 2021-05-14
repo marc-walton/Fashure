@@ -655,28 +655,42 @@ print(loggedInUser.displayName);
 
     return Scaffold(
       key: _scaffoldKey,
-      body: PageView(
-        children: <Widget>[
+      body: Container(
+        decoration: BoxDecoration(
+          gradient: fabGradient
+          // LinearGradient(
+          //   begin: Alignment.topRight,
+          //   end: Alignment.bottomLeft,
+          //   colors:[ kPrimaryColor,
+          //     kSecondaryColor
+          //
+          //   ],
+          // ),
+        ) ,
+        alignment: Alignment.center,
+        child: PageView(
+          children: <Widget>[
 //          RaisedButton(
 //      child: Text('Log out'),
 //      onPressed: logout,
 //   ),
-          Timeline(),
-        Shop(currentUser: currentUser),
-          Designer(),
-          LiveTv(),
-        ActivityFeed(),
+            Timeline(),
+          Shop(currentUser: currentUser),
+            Designer(),
+            LiveTv(),
+          ActivityFeed(),
 //          Upload(currentUser,: currentUser),
-        ],
-        controller: pageController,
-        onPageChanged: onPageChanged,
-          physics: NeverScrollableScrollPhysics(),
+          ],
+          controller: pageController,
+          onPageChanged: onPageChanged,
+            physics: NeverScrollableScrollPhysics(),
+        ),
       ),
     bottomNavigationBar: CurvedNavigationBar(
 
 //    currentIndex : pageIndex,
     onTap: onTap,
-      color: kSecondaryColor,
+      color: kPrimaryColor,
     buttonBackgroundColor: Colors.transparent,
     backgroundColor:Colors.black38,
     animationCurve: Curves.elasticInOut,

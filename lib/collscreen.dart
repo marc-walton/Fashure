@@ -24,10 +24,11 @@ class CollScreen extends StatelessWidget {
         }
         Coll coll = Coll.fromDocument(snapshot.data);
         return Center(
-          child: Scaffold(
-            backgroundColor: kSecondaryColor,
+          child: Scaffold(              backgroundColor: kPrimaryColor,
+
             appBar: AppBar(
-              backgroundColor: kPrimaryColor,
+
+              backgroundColor: appbar,
 
               title: FittedBox(
                 fit: BoxFit.contain,
@@ -36,15 +37,20 @@ class CollScreen extends StatelessWidget {
                   style: TextStyle(color: Colors.white),
                 ),
               ),),
-            body: ListView(
-              children: <Widget>[
+            body: Container(
+              decoration: BoxDecoration(
+                  gradient: fabGradient
+              ) ,
+              alignment: Alignment.center,
+              child: ListView(
+                children: <Widget>[
 
-                Container(
-                  color: kPrimaryColor,
-                  child: coll,
-                ),
+                  Container(
+                    child: coll,
+                  ),
 
-              ],
+                ],
+              ),
             ),
           ),
         );

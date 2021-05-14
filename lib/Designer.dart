@@ -238,187 +238,115 @@ class _DesignerState extends State<Designer>  with  TickerProviderStateMixin{
   Widget build(BuildContext context) {
 
     return SafeArea(
-      child: Scaffold( appBar: PreferredSize(
+      child: Scaffold(            backgroundColor: kPrimaryColor,
+        appBar: PreferredSize(
         preferredSize: Size.fromHeight(100.0),
         child: AppBar(title:  FittedBox(fit:BoxFit.contain,child: Text("Freelancers",style: TextStyle(fontSize: 30,fontFamily: 'MajorMonoDisplay'),)),
-            backgroundColor: _myHandler.color,
+            backgroundColor: appbar,
 
             bottom: new TabBar(
 isScrollable: true,
               controller: _controller,
               tabs: <Widget>[
-                Column(
-                  children: [
-                    FaIcon(FontAwesomeIcons.rulerCombined),
-//                  MyTabs(text: _tabs[0].title, ),
-                    Text('Designer',style: TextStyle(fontSize: 20,color: kText,fontFamily: 'MajorMonoDisplay'),),
-                    ],
-                ),
-                Column(
-                  children: [
-                    FaIcon(FontAwesomeIcons.pencilRuler),
-                    Text('Illustrator',style: TextStyle(fontSize: 20,color: kText,fontFamily: 'MajorMonoDisplay'),),
-                  ],
-                ),
-                Column(
-                  children: [
-                    SvgPicture.asset(
+                FaIcon(FontAwesomeIcons.rulerCombined),
+                FaIcon(FontAwesomeIcons.pencilRuler),
+                SvgPicture.asset(
                   'assets/img/F-PRIVATE-MODE.svg',
-color: kText,
-                      height: 30,
+                  color: kText,
+                  height: 30,
                 ),
-                    Text('Stylist',style: TextStyle(fontSize: 20,color: kText,fontFamily: 'MajorMonoDisplay'),),
-                  ],
-                ),
-                Column(
-                  children: [
-                    Icon(Entypo.man,),
-                    Text('Model',style: TextStyle(fontSize: 20,color: kText,fontFamily: 'MajorMonoDisplay'),),
-                  ],
-                ),
-                Column(
+                Icon(Entypo.man,),
+                ImageIcon(
+                  AssetImage("assets/img/makeup.png"),),
+                FaIcon(FontAwesomeIcons.cut),
+                Icon(Icons.camera_alt,),
+                FaIcon(FontAwesomeIcons.personBooth),
 
-                  children: [
-                    ImageIcon(
-                      AssetImage("assets/img/makeup.png"),),
-                    Text('Makeup Artist',style: TextStyle(fontSize: 20,color: kText,fontFamily: 'MajorMonoDisplay'),),
-                  ],
-                ),
-                Column(
-                  children: [
-                    FaIcon(FontAwesomeIcons.cut),
-                    Text('Hair dresser',style: TextStyle(fontSize: 20,color: kText,fontFamily: 'MajorMonoDisplay'),),
-                  ],
-                ),
-                Column(
-                  children: [
-                    Icon(Icons.camera_alt,),
-                    Text('Photographer',style: TextStyle(fontSize: 20,color: kText,fontFamily: 'MajorMonoDisplay'),),
-                  ],
-                ),
-                Column(
-                  children: [
-                    FaIcon(FontAwesomeIcons.personBooth),
-                    Text('Choreographer',style: TextStyle(fontSize: 20,color: kText,fontFamily: 'MajorMonoDisplay'),),
-                  ],
-                ),
               ],
             ),
             iconTheme: new IconThemeData(color: kSecondaryColor),
-//            leading:IconButton(  icon: Icon(
-//              Icons.menu,
-//              color: Colors.blue,),
             actions: <Widget>[
 
 
             ]
         ),
       ),
-        backgroundColor: kSecondaryColor,
-//    body:  DefaultTabController(
-//      length: 7 ,
-//      child: SizedBox(
-//        height: double.maxFinite,
-//        child: Column(
-//          children: <Widget>[
-//            TabBar(
-//              tabs: <Widget>[
-//               Column(
-//                 children: [
-//                   FaIcon(FontAwesomeIcons.rulerCombined),
-//                   SizedBox(height: 4.0,),
-//
-//                    ],
-//               ),
-//                  SvgPicture.asset(
-//              'assets/img/F-PRIVATE-MODE.svg',
-//color: kText,
-//            ),
-//                Icon(Entypo.man,),
-//                ImageIcon(
-//                  AssetImage("assets/img/makeup.png"),
-////                  color: k
-//                ),
-//                FaIcon(FontAwesomeIcons.cut),
-//                Icon(Icons.camera_alt,),
-//                FaIcon(FontAwesomeIcons.personBooth),
-//              ],
-//            ),
       body:
-              TabBarView(
-                controller: _controller,
-                children: <Widget>[
-                  ListTile(
-                    title: Text(' Hire Designer ',style: TextStyle(
-                        color: kText,
-                        fontWeight: FontWeight.bold,
-                        fontFamily: "MajorMonoDisplay",
-                        fontSize: 30
-                    ),),
-                      subtitle:buildPostDesigner(),
-                  ),ListTile(
-                    title: Text(' Hire Illustrator ',style: TextStyle(
-                        color: kText,
-                        fontWeight: FontWeight.bold,
-                        fontFamily: "MajorMonoDisplay",
-                        fontSize: 30
-                    ),),
-                      subtitle:buildPostIllustrator(),
-                  ), ListTile(
-                    title: Text('Hire Stylist',style: TextStyle(
-                        color: kText,
-                        fontWeight: FontWeight.bold,
-                        fontFamily: "MajorMonoDisplay",
-                        fontSize: 30
-                    ),),
-                    subtitle:buildPostStylist(),
-                  ), ListTile(
-                    title: Text('Hire Model',style: TextStyle(
-                        color: kText,
-                        fontWeight: FontWeight.bold,
-                        fontFamily: "MajorMonoDisplay",
-                        fontSize: 30
-                    ),),
-                    subtitle:buildPostModel(),
-                  ), ListTile(
-                    title: Text('Hire Makeup Artist',style: TextStyle(
-                        color: kText,
-                        fontWeight: FontWeight.bold,
-                        fontFamily: "MajorMonoDisplay",
-                        fontSize: 30
-                    ),),
-                      subtitle:buildPostMakeup(),
-                  ), ListTile(
+              Container(  decoration: BoxDecoration(
+                  gradient: fabGradient
+              ) ,
+                alignment: Alignment.center,
+                child: TabBarView(
+                  controller: _controller,
+                  children: <Widget>[
+                    ListTile(
+                      title: Text(' Hire Designer ',style: TextStyle(
+                          color: kText,
+                          fontWeight: FontWeight.bold,
+                          fontFamily: "MajorMonoDisplay",
+                          fontSize: 30
+                      ),),
+                        subtitle:buildPostDesigner(),
+                    ),ListTile(
+                      title: Text(' Hire Illustrator ',style: TextStyle(
+                          color: kText,
+                          fontWeight: FontWeight.bold,
+                          fontFamily: "MajorMonoDisplay",
+                          fontSize: 30
+                      ),),
+                        subtitle:buildPostIllustrator(),
+                    ), ListTile(
+                      title: Text('Hire Stylist',style: TextStyle(
+                          color: kText,
+                          fontWeight: FontWeight.bold,
+                          fontFamily: "MajorMonoDisplay",
+                          fontSize: 30
+                      ),),
+                      subtitle:buildPostStylist(),
+                    ), ListTile(
+                      title: Text('Hire Model',style: TextStyle(
+                          color: kText,
+                          fontWeight: FontWeight.bold,
+                          fontFamily: "MajorMonoDisplay",
+                          fontSize: 30
+                      ),),
+                      subtitle:buildPostModel(),
+                    ), ListTile(
+                      title: Text('Hire Makeup Artist',style: TextStyle(
+                          color: kText,
+                          fontWeight: FontWeight.bold,
+                          fontFamily: "MajorMonoDisplay",
+                          fontSize: 30
+                      ),),
+                        subtitle:buildPostMakeup(),
+                    ), ListTile(
             title: Text('Hire HairDresser',style: TextStyle(
-              color: kText,
-              fontWeight: FontWeight.bold,
-              fontFamily: "MajorMonoDisplay",
-              fontSize: 30
+                color: kText,
+                fontWeight: FontWeight.bold,
+                fontFamily: "MajorMonoDisplay",
+                fontSize: 30
             ),),
             subtitle:buildPostHair(),
           ), ListTile(
-                    title: Text('Hire Photographer',style: TextStyle(
-                        color: kText,
-                        fontWeight: FontWeight.bold,
-                        fontFamily: "MajorMonoDisplay",
-                        fontSize: 30
-                    ),),
-                    subtitle:buildPostPhotographer(),
-                  ), ListTile(
-                    title: Text('Hire Choreographer',style: TextStyle(
-                        color: kText,
-                        fontWeight: FontWeight.bold,
-                        fontFamily: "MajorMonoDisplay",
-                        fontSize: 30
-                    ),),
-                    subtitle:buildPostChoreographer(),
-                  ),
-                ],
+                      title: Text('Hire Photographer',style: TextStyle(
+                          color: kText,
+                          fontWeight: FontWeight.bold,
+                          fontFamily: "MajorMonoDisplay",
+                          fontSize: 30
+                      ),),
+                      subtitle:buildPostPhotographer(),
+                    ), ListTile(
+                      title: Text('Hire Choreographer',style: TextStyle(
+                          color: kText,
+                          fontWeight: FontWeight.bold,
+                          fontFamily: "MajorMonoDisplay",
+                          fontSize: 30
+                      ),),
+                      subtitle:buildPostChoreographer(),
+                    ),
+                  ],
+                ),
               ),
-//          ],
-//        ),
-//      ),
-//    ),
 
 
         floatingActionButton: FloatingActionButton(

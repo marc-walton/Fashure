@@ -924,12 +924,12 @@ collectionGroup(){
 
     @override
     Widget build(BuildContext context) {
-          return Scaffold(backgroundColor: kPrimaryColor,
-            appBar: AppBar(backgroundColor: kSecondaryColor,
+          return Scaffold( backgroundColor: kPrimaryColor,
+            appBar: AppBar(backgroundColor: appbar,
                 automaticallyImplyLeading: false,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.vertical(bottom: Radius.circular(30))
-                ),
+                // shape: RoundedRectangleBorder(
+                //   borderRadius: BorderRadius.vertical(bottom: Radius.circular(30))
+                // ),
                 title: FittedBox(
                   fit:BoxFit.cover,
                   child: Text(   'FASHURE',
@@ -1002,13 +1002,19 @@ collectionGroup(){
             ),
 
       body:
-      RefreshIndicator(
-              onRefresh: () => getTimeLine(), child: TabBarView(controller: _tabController, children: [
-        buildTimeline(),
-        Collection(),
-        Blog(),
+      Container(
+        decoration: BoxDecoration(
+            gradient: fabGradient
+        ) ,
+        alignment: Alignment.center,
+        child: RefreshIndicator(
+                onRefresh: () => getTimeLine(), child: TabBarView(controller: _tabController, children: [
+          buildTimeline(),
+          Collection(),
+          Blog(),
 
-      ]),
+        ]),
+        ),
       ),
             floatingActionButton: _bottomButtons()
           );
