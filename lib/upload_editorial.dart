@@ -3,18 +3,11 @@ import 'dart:io';
 import 'dart:async';
 
 import 'package:quill_delta/quill_delta.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
-import 'package:multi_image_picker/multi_image_picker.dart';
-import 'package:smart_select/smart_select.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_currencies_tracker/flutter_currencies_tracker.dart';
-//import 'package:flutter_svg/svg.dart';
-import 'package:contained_tab_bar_view/contained_tab_bar_view.dart';
 import 'package:fashow/user.dart';
 
 
-import 'package:flutter_icons/flutter_icons.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:flutter/cupertino.dart';
@@ -26,7 +19,6 @@ import 'package:fashow/Constants.dart';
 import 'package:image/image.dart' as Im;
 import 'package:uuid/uuid.dart';
 import 'package:zefyr/zefyr.dart';
-//import 'package:flutter_form_builder/flutter_form_builder.dart';
 
 class UploadEdit extends StatefulWidget {
   final GlobalKey<ScaffoldState> globalKey;
@@ -39,18 +31,13 @@ class UploadEdit extends StatefulWidget {
 }
 
 class _UploadEditState extends State<UploadEdit>
-    with AutomaticKeepAliveClientMixin<UploadEdit> {
+     {
   /// Allows to control the editor and the document.
   ZefyrController _controller;
 ZefyrImageDelegate _imageDelegate;
   /// Zefyr editor like any other input field requires a focus node.
   FocusNode _focusNode;
-  // QuillController controller = QuillController.basic();
-  // final FocusNode focusNode = FocusNode();
-  // List<Asset> images = List<Asset>();
-  // List<File> image = List<File>();
-  // List<String> imageUrls = <String>[];
-  // String ImagesUrl;
+
   String _error = 'No Error Dectected';
   TextEditingController titleController = TextEditingController();
   TextEditingController sourceController = TextEditingController();
@@ -73,7 +60,6 @@ ZefyrImageDelegate _imageDelegate;
     final document = _loadDocument();
     _controller = ZefyrController(document);
     _focusNode = FocusNode();
-//    _imageDelegate =  MyAppZefyrImageDelegate();
   }
 
 
@@ -183,6 +169,7 @@ ZefyrImageDelegate _imageDelegate;
 
   createProdInFirestore({
     String   blogmediaUrl,
+// ignore: non_constant_identifier_names
 String ImagesUrl,
     String content,
   String title,
@@ -198,7 +185,7 @@ String ImagesUrl,
         .setData({
       "blogId": blogId,
       "ownerId": widget.currentUser.id,
-      "username": widget.currentUser.username,
+      "username": widget.currentUser.displayName,
       "photoUrl": widget.currentUser.photoUrl,
       "blogmediaUrl": blogmediaUrl,
       "title": title,
@@ -218,30 +205,6 @@ String ImagesUrl,
     });
   }
 
-//   Future<String> _onImagePickCallback(File file) async {
-//
-//     if (file == null) return null;
-//     image.add(file);
-//     print(image);
-//     // Copies the picked file fr`om temporary cache to applications directory
-//     // Directory appDocDir = await getApplicationDocumentsDirectory();
-//     // File copiedFile =
-//     // await file.copy('${appDocDir.path}/${basename(file.path)}');
-//     if( isUploading = true){
-//       String fileName = DateTime.now().millisecondsSinceEpoch.toString();
-//       StorageUploadTask uploadTask =
-//       storageRef.child("blog$blogId$fileName.jpg").putFile(file);
-//       StorageTaskSnapshot storageSnap = await uploadTask.onComplete;
-//       String downloadUrl = await storageSnap.ref.getDownloadURL();
-//       return downloadUrl;
-// //       StorageReference reference = FirebaseStorage.instance.ref().child("blog_$fileName.jpg");
-// //       StorageUploadTask uploadTask = reference.putData((await file.getByteData(quality: 70)).buffer.asUint8List());
-// //       StorageTaskSnapshot storageTaskSnapshot = await uploadTask.onComplete;
-// // //    print(storageTaskSnapshot.ref.getDownloadURL());
-// //       return storageTaskSnapshot.ref.getDownloadURL();
-//    }
-//
-//   }
   handleSubmit() async {
 
     setState(() {
@@ -251,19 +214,7 @@ String ImagesUrl,
    String blogmediaUrl = await uploadImage(file);
     // jsonEncode(_controller.document.toDelta().toJson());
     final contents = jsonEncode(_controller.document);
-//    final titleedit = jsonEncode(titleController);
-//    final sourceedit = jsonEncode(sourceController);
-     String url;
-//    for ( var imageFile in images) {
-//      postImage(imageFile).then((downloadUrl) {
-//        imageUrls.add(downloadUrl.toString());
-//        if(imageUrls.length==images.length){
-//           url = DateTime.now().millisecondsSinceEpoch.toString();
-//
-//print(imageUrls);
-//        }
-//      });
-//    }
+
     createProdInFirestore(
       blogmediaUrl: blogmediaUrl,
       content: contents,
@@ -310,8 +261,6 @@ String ImagesUrl,
       decoration: InputDecoration(labelText: 'Description'),
       controller: _controller,
       focusNode: _focusNode,
-//       imageDelegate: CustomImageDelegate(),
-//
       autofocus: false,
       physics: ClampingScrollPhysics(),
     );
@@ -324,35 +273,85 @@ shrinkWrap: true,
         TextFormField(controller: titleController,
             keyboardType: TextInputType.multiline,
             maxLines: null,
-            decoration: InputDecoration(labelText: 'Title of the blog')),
+            decoration: InputDecoration(labelText: 'Title of the blog',
+                fillColor: transwhite,
+                border:OutlineInputBorder(borderRadius: BorderRadius.circular(25.0),))),
 
         editor,
 
         TextField(controller: sourceController,
             keyboardType: TextInputType.multiline,
             maxLines: null,
-            decoration: InputDecoration(labelText: 'source')),
+            decoration: InputDecoration(labelText: 'source',        fillColor: transwhite,
+                border:OutlineInputBorder(borderRadius: BorderRadius.circular(25.0),))),
       ],
     );
     return
         Stack(
           children: [
             WillPopScope(
-              onWillPop: _onBackPressed,
+              onWillPop:   showDialog(
+                context: context,
+                builder: (context) => new AlertDialog(
+                  title: new Text('Are you sure?'),
+                  content: new Text('Do you want to exit without uploading?'),
+                  actions: <Widget>[
+                    new FlatButton(
+
+                      onPressed: () => Navigator.of(context).pop(false),
+                      child: Text("NO"),
+                    ),
+                    SizedBox(height: 16),
+                    new FlatButton(
+
+                      onPressed: () async {Navigator.of(context).pop(true);
+
+//            clearImage();
+                      },
+                      child: Text("YES"),
+                    ),
+                  ],
+                ),
+              ) ??
+                  false,
               child: Scaffold(
+
                 // resizeToAvoidBottomPadding: true,
-                appBar: AppBar(title: Text('Blog Form'),
+                appBar: AppBar(
                   backgroundColor: kPrimaryColor,
                   leading: IconButton(
-                      icon: Icon(Icons.arrow_back, color: kSecondaryColor),
-                      onPressed:_onBackPressed),
+                      icon: Icon(Icons.arrow_back, color: Colors.white),
+                      onPressed:()=>  showDialog(
+                        context: context,
+                        builder: (context) => new AlertDialog(
+                          title: new Text('Are you sure?'),
+                          content: new Text('Do you want to exit without uploading?'),
+                          actions: <Widget>[
+                            new FlatButton(
+
+                              onPressed: () => Navigator.of(context).pop(false),
+                              child: Text("NO"),
+                            ),
+                            SizedBox(height: 16),
+                            new FlatButton(
+
+                              onPressed: () async {Navigator.of(context).pop(true);
+
+//            clearImage();
+                              },
+                              child: Text("YES"),
+                            ),
+                          ],
+                        ),
+                      ) ??
+                          false),
                   actions: [
-                    FlatButton(
+                    RaisedButton(color:kblue,
                       onPressed: isUploading ? null : () => handleSubmit(),
                       child: Text(
                         "Post",
                         style: TextStyle(
-                            color: kGrey,
+                            color: kblue,
                             fontWeight: FontWeight.bold,
                             fontSize: 20.0),
                       ),
@@ -360,40 +359,22 @@ shrinkWrap: true,
                   ],
                 ),
                 body:
-                // Column(
-                //   children: [
-                //     QuillToolbar.basic(onImagePickCallback: _onImagePickCallback,
-                //         controller: controller),
-                //     Expanded(
-                //       child: Container(
-                //         child: QuillEditor(
-                //           // onImagePickCallback: _onImagePickCallback,
-                //           scrollable: true,
-                //           focusNode: focusNode,
-                //           expands: false,
-                //           scrollController: ScrollController(),
-                //           autoFocus: false,
-                //           padding: EdgeInsets.zero,
-                //           controller: controller,
-                //           readOnly: false, // true for view only mode
-                //         ),
-                //       ),
-                //     ),
-                //   ],
-                // ),
 
-                ZefyrScaffold(
-                  child:
-                  Padding(
+                Container(
+
+                  decoration: BoxDecoration(
+                      gradient: fabGradient
+                  ) ,
+                  alignment: Alignment.center,
+                  child: Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: form,
                   ),
                 ),
+
               ),
-//        ),
-//        isUploading ? Center(child: CircularProgressIndicator()) : Text(""),
-//      ],
-    ),
+
+            ),
             isUploading ? Center(child: CircularProgressIndicator()) : Text(""),
           ],
         );
@@ -403,7 +384,11 @@ shrinkWrap: true,
 
   Container buildSplashScreen() {
     return Container(
-      color:kSecondaryColor,
+
+      decoration: BoxDecoration(
+          gradient: fabGradient
+      ) ,
+      alignment: Alignment.center,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
@@ -434,7 +419,6 @@ shrinkWrap: true,
 
   @override
   Widget build(BuildContext context) {
-    super.build(context);
     return file == null ? buildSplashScreen() : builduploadForm();
   }
   /// Loads the document to be edited in Zefyr.
@@ -444,31 +428,3 @@ shrinkWrap: true,
   }
 }
 
-class CustomImageDelegate implements ZefyrImageDelegate<ImageSource> {
-  String Url;
-  @override
-  Future<String> pickImage(ImageSource source) async {
-    final file = await ImagePicker.pickImage(source: source);
-    if (file == null) return null;
-
-    StorageUploadTask uploadTask =
-    storageRef.child("post_$file.jpg").putFile(file);
-    StorageTaskSnapshot storageSnap = await uploadTask.onComplete;
-    String downloadUrl = await storageSnap.ref.getDownloadURL();
-    return Url =  downloadUrl ;
-  }
-
-  @override
-  ImageSource get cameraSource => ImageSource.camera;
-
-  @override
-  ImageSource get gallerySource => ImageSource.gallery;
-
-  @override
-  Widget buildImage(BuildContext context, String key) {
-//    final file = File.fromUri(Uri.parse(key));
-//    final image = FileImage(file);
-
-    return Container(child: Image.network(Url));
-  }
-}

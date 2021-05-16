@@ -5,8 +5,6 @@ import 'package:fashow/Categories/Kids/kids/girl/girl.dart';
 import 'package:fashow/Categories/Kids/teen/boy/boy.dart';
 import 'package:fashow/Categories/Kids/teen/girl/girl.dart';
 import 'package:fashow/Categories/Men/Men.dart';
-import 'package:cached_network_image/cached_network_image.dart';
-import 'package:fashow/Cart.dart';
 import 'package:fashow/Categories/Women/Women.dart';
 import 'package:fashow/fav.dart';
 import 'package:flutter/cupertino.dart';
@@ -15,13 +13,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 //import 'package:flutter_svg/svg.dart';
 import 'package:fashow/user.dart';
-import 'package:fashow/ActivityFeed.dart';
 import 'package:fashow/Products.dart';
-import 'package:fashow/Product_screen.dart';
-import 'package:fashow/product_custom.dart';
-import 'package:getflutter/getflutter.dart';
 import 'package:fashow/upload_Ecommerce.dart';
-import 'package:fashow/progress.dart';
 import 'package:fashow/HomePage.dart';
 import 'package:fashow/Constants.dart';
 
@@ -89,7 +82,7 @@ new Tabs(title: "Teen-Girls",color: kPrimaryColor),
       Scaffold(appBar: PreferredSize(
         preferredSize: Size.fromHeight(100.0),
         child: AppBar(title:  Text('Shop',style: TextStyle(fontSize: 30,fontFamily: 'MajorMonoDisplay'),),
-          backgroundColor: _myHandler.color,
+          backgroundColor: kPrimaryColor,
 
           bottom: new TabBar(
                isScrollable: true,
@@ -161,6 +154,16 @@ new Tabs(title: "Teen-Girls",color: kPrimaryColor),
           iconTheme: new IconThemeData(color: kIcon),
           actions:<Widget> [
             IconButton(
+              color: Colors.white,
+              icon: Icon(
+               Icons.search,
+              ),
+              onPressed: () {
+
+                // do something
+              },
+            ),          IconButton(
+              color: Colors.white,
               icon: Icon(
                Icons.favorite,
               ),
@@ -178,7 +181,13 @@ new Tabs(title: "Teen-Girls",color: kPrimaryColor),
             TabBarView(
               controller: _controller,
                children: [
-                 Container(child: Men()),
+                 Container(
+
+                     decoration: BoxDecoration(
+                         gradient: fabGradient
+                     ) ,
+                     alignment: Alignment.center,
+                     child: Men()),
 Women(),
                  BabyBoy(),
                  BabyGirl(),

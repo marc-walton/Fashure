@@ -32,23 +32,6 @@ class _JewelleryMState extends State<JewelleryM> {
             Text( "₹$inr",style: TextStyle(color: kText,
                 fontSize: 20.0,
                 fontWeight: FontWeight.bold)),
-            GFButton(
-              onPressed: () =>
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) =>
-                          ProductScreen(
-                            prodId: prodId,
-                            userId: ownerId,
-                          ),
-                    ),
-                  ),
-              text: "More",
-              icon: Icon(Icons.card_travel),
-              shape: GFButtonShape.pills,
-
-            ),
           ],
         );
 
@@ -65,56 +48,6 @@ class _JewelleryMState extends State<JewelleryM> {
             Text( "\u0024 $usd",style: TextStyle(color: kText,
                 fontSize: 20.0,
                 fontWeight: FontWeight.bold)),
-            GFButton(
-              onPressed: () =>
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) =>
-                          ProductScreen(
-                            prodId: prodId,
-                            userId: ownerId,
-                          ),
-                    ),
-                  ),
-              text: "More",
-              icon: Icon(Icons.card_travel),
-              shape: GFButtonShape.pills,
-
-            ),
-          ],
-        );
-
-    }
-    else if (currentUser.country == 'China') {
-      return
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: <Widget>[
-            Text(productname, style: TextStyle(
-                color: kText,
-                fontSize: 20.0,
-                fontWeight: FontWeight.bold),),
-            Text( "¥ $cny",style: TextStyle(color: kText,
-                fontSize: 20.0,
-                fontWeight: FontWeight.bold)),
-            GFButton(
-              onPressed: () =>
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) =>
-                          ProductScreen(
-                            prodId: prodId,
-                            userId: ownerId,
-                          ),
-                    ),
-                  ),
-              text: "More",
-              icon: Icon(Icons.card_travel),
-              shape: GFButtonShape.pills,
-
-            ),
           ],
         );
 
@@ -131,23 +64,6 @@ class _JewelleryMState extends State<JewelleryM> {
             Text( "€ $eur",style: TextStyle(color: kText,
                 fontSize: 20.0,
                 fontWeight: FontWeight.bold)),
-            GFButton(
-              onPressed: () =>
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) =>
-                          ProductScreen(
-                            prodId: prodId,
-                            userId: ownerId,
-                          ),
-                    ),
-                  ),
-              text: "More",
-              icon: Icon(Icons.card_travel),
-              shape: GFButtonShape.pills,
-
-            ),
           ],
         );
 
@@ -164,23 +80,6 @@ class _JewelleryMState extends State<JewelleryM> {
             Text( "£  $gbp ",style: TextStyle(color: kText,
                 fontSize: 20.0,
                 fontWeight: FontWeight.bold)),
-            GFButton(
-              onPressed: () =>
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) =>
-                          ProductScreen(
-                            prodId: prodId,
-                            userId: ownerId,
-                          ),
-                    ),
-                  ),
-              text: "More",
-              icon: Icon(Icons.card_travel),
-              shape: GFButtonShape.pills,
-
-            ),
           ],
         );
 
@@ -197,23 +96,6 @@ class _JewelleryMState extends State<JewelleryM> {
             Text( "\u0024 $usd",style: TextStyle(color: kText,
                 fontSize: 20.0,
                 fontWeight: FontWeight.bold)),
-            GFButton(
-              onPressed: () =>
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) =>
-                          ProductScreen(
-                            prodId: prodId,
-                            userId: ownerId,
-                          ),
-                    ),
-                  ),
-              text: "More",
-              icon: Icon(Icons.card_travel),
-              shape: GFButtonShape.pills,
-
-            ),
           ],
         );
 
@@ -231,7 +113,6 @@ class _JewelleryMState extends State<JewelleryM> {
         String shopmediaUrl = documentSnapshot.data['shopmediaUrl'];
         String productname = documentSnapshot.data['productname'];
         String inr = documentSnapshot.data['inr'];
-        String cny = documentSnapshot.data['cny'];
         String usd = documentSnapshot.data['usd'];
         String eur = documentSnapshot.data['eur'];
         String gbp = documentSnapshot.data['gbp'];
@@ -260,8 +141,7 @@ class _JewelleryMState extends State<JewelleryM> {
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-                      subtitle: Text(user.username,
-                        style: TextStyle(color: kIcon),),),
+                     ),
                   ),
 
                   GestureDetector(
@@ -280,7 +160,7 @@ class _JewelleryMState extends State<JewelleryM> {
                         ClipRRect(
                             borderRadius: BorderRadius.circular(20.0),child: cachedNetworkImage(shopmediaUrl)),
                       ],),),
-                  df(productname:productname, usd:usd,inr:inr,cny:cny,eur:eur,gbp:gbp, prodId:prodId, ownerId:ownerId,),
+                  df(productname:productname, usd:usd,inr:inr,eur:eur,gbp:gbp, prodId:prodId, ownerId:ownerId,),
 
                   Divider(color: kGrey,),
                 ],
@@ -309,7 +189,6 @@ class _JewelleryMState extends State<JewelleryM> {
         String shopmediaUrl = documentSnapshot.data['shopmediaUrl'];
         String productname = documentSnapshot.data['productname'];
         String inr = documentSnapshot.data['inr'];
-        String cny = documentSnapshot.data['cny'];
         String usd = documentSnapshot.data['usd'];
         String eur = documentSnapshot.data['eur'];
         String gbp = documentSnapshot.data['gbp'];
@@ -338,8 +217,7 @@ class _JewelleryMState extends State<JewelleryM> {
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-                      subtitle: Text(user.username,
-                        style: TextStyle(color: kIcon),),),
+                     ),
                   ),
 
                   GestureDetector(
@@ -358,7 +236,7 @@ class _JewelleryMState extends State<JewelleryM> {
                         ClipRRect(
                             borderRadius: BorderRadius.circular(20.0),child: cachedNetworkImage(shopmediaUrl)),
                       ],),),
-                  df(productname:productname, usd:usd,inr:inr,cny:cny,eur:eur,gbp:gbp, prodId:prodId, ownerId:ownerId,),
+                  df(productname:productname, usd:usd,inr:inr,eur:eur,gbp:gbp, prodId:prodId, ownerId:ownerId,),
 
                   Divider(color: kGrey,),
                 ],
@@ -387,7 +265,6 @@ class _JewelleryMState extends State<JewelleryM> {
         String shopmediaUrl = documentSnapshot.data['shopmediaUrl'];
         String productname = documentSnapshot.data['productname'];
         String inr = documentSnapshot.data['inr'];
-        String cny = documentSnapshot.data['cny'];
         String usd = documentSnapshot.data['usd'];
         String eur = documentSnapshot.data['eur'];
         String gbp = documentSnapshot.data['gbp'];
@@ -416,8 +293,7 @@ class _JewelleryMState extends State<JewelleryM> {
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-                      subtitle: Text(user.username,
-                        style: TextStyle(color: kIcon),),),
+                     ),
                   ),
 
                   GestureDetector(
@@ -436,7 +312,7 @@ class _JewelleryMState extends State<JewelleryM> {
                         ClipRRect(
                             borderRadius: BorderRadius.circular(20.0),child: cachedNetworkImage(shopmediaUrl)),
                       ],),),
-                  df(productname:productname, usd:usd,inr:inr,cny:cny,eur:eur,gbp:gbp, prodId:prodId, ownerId:ownerId,),
+                  df(productname:productname, usd:usd,inr:inr,eur:eur,gbp:gbp, prodId:prodId, ownerId:ownerId,),
 
                   Divider(color: kGrey,),
                 ],
@@ -465,7 +341,6 @@ class _JewelleryMState extends State<JewelleryM> {
         String shopmediaUrl = documentSnapshot.data['shopmediaUrl'];
         String productname = documentSnapshot.data['productname'];
         String inr = documentSnapshot.data['inr'];
-        String cny = documentSnapshot.data['cny'];
         String usd = documentSnapshot.data['usd'];
         String eur = documentSnapshot.data['eur'];
         String gbp = documentSnapshot.data['gbp'];
@@ -494,8 +369,7 @@ class _JewelleryMState extends State<JewelleryM> {
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-                      subtitle: Text(user.username,
-                        style: TextStyle(color: kIcon),),),
+                     ),
                   ),
 
                   GestureDetector(
@@ -514,7 +388,7 @@ class _JewelleryMState extends State<JewelleryM> {
                         ClipRRect(
                             borderRadius: BorderRadius.circular(20.0),child: cachedNetworkImage(shopmediaUrl)),
                       ],),),
-                  df(productname:productname, usd:usd,inr:inr,cny:cny,eur:eur,gbp:gbp, prodId:prodId, ownerId:ownerId,),
+                  df(productname:productname, usd:usd,inr:inr,eur:eur,gbp:gbp, prodId:prodId, ownerId:ownerId,),
 
                   Divider(color: kGrey,),
                 ],
@@ -543,7 +417,6 @@ class _JewelleryMState extends State<JewelleryM> {
         String shopmediaUrl = documentSnapshot.data['shopmediaUrl'];
         String productname = documentSnapshot.data['productname'];
         String inr = documentSnapshot.data['inr'];
-        String cny = documentSnapshot.data['cny'];
         String usd = documentSnapshot.data['usd'];
         String eur = documentSnapshot.data['eur'];
         String gbp = documentSnapshot.data['gbp'];
@@ -572,8 +445,7 @@ class _JewelleryMState extends State<JewelleryM> {
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-                      subtitle: Text(user.username,
-                        style: TextStyle(color: kIcon),),),
+                    ),
                   ),
 
                   GestureDetector(
@@ -592,7 +464,7 @@ class _JewelleryMState extends State<JewelleryM> {
                         ClipRRect(
                             borderRadius: BorderRadius.circular(20.0),child: cachedNetworkImage(shopmediaUrl)),
                       ],),),
-                  df(productname:productname, usd:usd,inr:inr,cny:cny,eur:eur,gbp:gbp, prodId:prodId, ownerId:ownerId,),
+                  df(productname:productname, usd:usd,inr:inr,eur:eur,gbp:gbp, prodId:prodId, ownerId:ownerId,),
 
                   Divider(color: kGrey,),
                 ],
@@ -621,7 +493,6 @@ class _JewelleryMState extends State<JewelleryM> {
         String shopmediaUrl = documentSnapshot.data['shopmediaUrl'];
         String productname = documentSnapshot.data['productname'];
         String inr = documentSnapshot.data['inr'];
-        String cny = documentSnapshot.data['cny'];
         String usd = documentSnapshot.data['usd'];
         String eur = documentSnapshot.data['eur'];
         String gbp = documentSnapshot.data['gbp'];
@@ -650,8 +521,7 @@ class _JewelleryMState extends State<JewelleryM> {
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-                      subtitle: Text(user.username,
-                        style: TextStyle(color: kIcon),),),
+                     ),
                   ),
 
                   GestureDetector(
@@ -670,7 +540,7 @@ class _JewelleryMState extends State<JewelleryM> {
                         ClipRRect(
                             borderRadius: BorderRadius.circular(20.0),child: cachedNetworkImage(shopmediaUrl)),
                       ],),),
-                  df(productname:productname, usd:usd,inr:inr,cny:cny,eur:eur,gbp:gbp, prodId:prodId, ownerId:ownerId,),
+                  df(productname:productname, usd:usd,inr:inr,eur:eur,gbp:gbp, prodId:prodId, ownerId:ownerId,),
 
                   Divider(color: kGrey,),
                 ],
@@ -682,90 +552,6 @@ class _JewelleryMState extends State<JewelleryM> {
       },
       query: Firestore.instance.collectionGroup('userProducts').orderBy('timestamp',descending: true)
           .where('Gender',isEqualTo: 'Men')
-          .where('Category',isEqualTo: 'Rings'),
-
-
-    );
-  }
-  Jewl(){
-    return  PaginateFirestore(
-//    itemsPerPage: 2,
-      itemBuilderType:
-      PaginateBuilderType.listView,
-      itemBuilder: (index, context, documentSnapshot)   {
-//        DocumentSnapshot ds = snapshot.data.documents[index];
-        String ownerId = documentSnapshot.data['ownerId'];
-        String prodId = documentSnapshot.data['prodId'];
-        String shopmediaUrl = documentSnapshot.data['shopmediaUrl'];
-        String productname = documentSnapshot.data['productname'];
-        String inr = documentSnapshot.data['inr'];
-        String cny = documentSnapshot.data['cny'];
-        String usd = documentSnapshot.data['usd'];
-        String eur = documentSnapshot.data['eur'];
-        String gbp = documentSnapshot.data['gbp'];
-        return
-          FutureBuilder(
-            future: usersRef.document(ownerId).get(),
-            builder: (context, snapshot) {
-              if (!snapshot.hasData) {
-                return circularProgress();
-              }
-              User user = User.fromDocument(snapshot.data);
-//          bool isPostOwner = currentUserId == ownerId;
-              return Column(
-                children: <Widget>[
-                  GestureDetector(
-                    onTap: () => showProfile(context, profileId: user.id),
-                    child: ListTile(
-                      leading: CircleAvatar(
-                        backgroundImage: CachedNetworkImageProvider(user.photoUrl),
-                        backgroundColor: Colors.grey,
-                      ),
-                      title: Text(
-                        user.displayName,
-                        style: TextStyle(
-                          color: kText,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      subtitle: Text(user.username,
-                        style: TextStyle(color: kIcon),),),
-                  ),
-
-                  GestureDetector(
-                    onTap: () => Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => ProductScreen(
-                          prodId: prodId,
-                          userId: ownerId,
-                        ),
-                      ),
-                    ),
-                    child: Stack(
-                      alignment: Alignment.center,
-                      children: <Widget>[
-                        ClipRRect(
-                            borderRadius: BorderRadius.circular(20.0),child: cachedNetworkImage(shopmediaUrl)),
-                      ],),),
-                  df(productname:productname, usd:usd,inr:inr,cny:cny,eur:eur,gbp:gbp, prodId:prodId, ownerId:ownerId,),
-
-                  Divider(color: kGrey,),
-                ],
-
-              );
-
-            },
-          );
-      },
-      query: Firestore.instance.collectionGroup('userProducts').orderBy('timestamp',descending: true)
-          .where('Gender',isEqualTo: 'Men')
-          .where('Category',isEqualTo: 'Bracelets')
-      .where('Category',isEqualTo: 'Cuff-links & Tie Bar')
-      .where('Category',isEqualTo: 'Brooches & Pins')
-      .where('Category',isEqualTo: 'Necklace')
-      .where('Category',isEqualTo: 'Studs and Earrings')
-
           .where('Category',isEqualTo: 'Rings'),
 
 
@@ -780,9 +566,8 @@ class _JewelleryMState extends State<JewelleryM> {
       quarterTurns: 3,
       child: Expanded(
         child: DefaultTabController(
-            length:7,
+            length:6,
             child: Scaffold(
-              backgroundColor: kPrimaryColor,
               appBar:AppBar(
                 toolbarHeight: SizeConfig.safeBlockHorizontal * 8,
                 backgroundColor: kPrimaryColor,
@@ -791,16 +576,8 @@ class _JewelleryMState extends State<JewelleryM> {
                   isScrollable: true,
                   labelColor: Colors.white,
                   unselectedLabelColor: kIcon,
-//                indicatorSize: TabBarIndicatorSize.label,
-//                       indicator: BoxDecoration(
-//                           borderRadius: BorderRadius.only(
-//                               topLeft: Radius.circular(10),
-//                               topRight: Radius.circular(10)
-//                           ),
-//                           color: Colors.white),
 
                   tabs:[
-                    Text("New Arrivals",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5,),),
                     Text("Bracelets",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5,),),
                     Text("Cuff-links & Tie Bar",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5),),
                     Text("Brooches & Pins",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5),),
@@ -815,7 +592,6 @@ class _JewelleryMState extends State<JewelleryM> {
                 quarterTurns: 1,
                 child: TabBarView(
                     children:<Widget> [
-                      Jewl(),
                       Bracelets(),
                       Cuff(),
                       Brooches(),

@@ -1,17 +1,11 @@
 import 'dart:io';
 import 'dart:async';
-import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:multi_image_picker/multi_image_picker.dart';
-import 'package:smart_select/smart_select.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_currencies_tracker/flutter_currencies_tracker.dart';
-//import 'package:flutter_svg/svg.dart';
-// import 'package:frankfurter/frankfurter.dart';
-import 'package:contained_tab_bar_view/contained_tab_bar_view.dart';
+
 import 'package:fashow/user.dart';
-import 'package:fashow/methods/country.dart';
-import 'package:flutter_icons/flutter_icons.dart';
+
 import 'package:image_cropper/image_cropper.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:flutter/cupertino.dart';
@@ -23,7 +17,6 @@ import 'package:fashow/Constants.dart';
 import 'package:image/image.dart' as Im;
 import 'package:uuid/uuid.dart';
 
-//import 'package:flutter_form_builder/flutter_form_builder.dart';
 
 class UploadColl extends StatefulWidget {
   final GlobalKey<ScaffoldState> globalKey;
@@ -38,60 +31,19 @@ class UploadColl extends StatefulWidget {
 class _UploadCollState extends State<UploadColl>
     with AutomaticKeepAliveClientMixin<UploadColl> {
   List<Asset> images = List<Asset>();
-  List<String> imageUrls = <String>[];
-  String ImagesUrl;
   String _error = 'No Error Dectected';
+
+  List<String> imageUrls = <String>[];
   TextEditingController titleController = TextEditingController();
   TextEditingController sourceController = TextEditingController();
 
   File file;
   bool isUploading = false;
   String CollId = Uuid().v4();
-  SharedPreferences tag1Prefs;
-  SharedPreferences tag2Prefs;
-  SharedPreferences tag3prefs;
-  SharedPreferences tag4Prefs;
-  SharedPreferences tag5Prefs;
-  String prodId1;
-  String prodId2;
-  String prodId3;
-  String prodId4;
-  String prodId5;
-  String ownerId1;
-  String ownerId2;
-  String ownerId3;
-  String ownerId4;
-  String ownerId5;
-  String productname1;
-  String productname2;
-  String productname3;
-  String productname4;
-  String productname5;
-  String price1;
-  String price2;
-  String price3;
-  String price4;
-  String price5;
-  String shopmediaUrl1;
-  String shopmediaUrl2;
-  String shopmediaUrl3;
-  String shopmediaUrl4;
-  String shopmediaUrl5;
-  String displayName1;
-  String displayName2;
-  String displayName3;
-  String displayName4;
-  String displayName5;
-  String photoUrl1;
-  String photoUrl2;
-  String photoUrl3;
-  String photoUrl4;
-  String photoUrl5;
 
 
   final scaffoldKey = new GlobalKey<ScaffoldState>();
   final _formKey = GlobalKey<FormState>();
-//  bool _inProcess = false;
   bool _inProcess = false;
   @override
   void initState() {
@@ -109,12 +61,9 @@ class _UploadCollState extends State<UploadColl>
         return Padding(
           padding: EdgeInsets.all(8.0),
           child: Container(
-//            backgroundColor: MultiPickerApp.darker,
-//            backgroundDarkerColor: MultiPickerApp.darker,
             height: 50,
             width: 50,
-//            borderDarkerColor: MultiPickerApp.pauseButton,
-//            borderColor: MultiPickerApp.pauseButtonDarker,
+
             child: ClipRRect(
               borderRadius: BorderRadius.all(Radius.circular(15)),
               child: AssetThumb(
@@ -280,42 +229,6 @@ class _UploadCollState extends State<UploadColl>
   }
 
 
-//
-//
-//   createProdInFirestore({
-//     List<String> collmediaUrl,
-//     String ImagesUrl,
-//     String title,
-//     String source,
-//      String headerImage
-//   }) {
-//
-//     collRef
-//         .document(widget.currentUser.id)
-//         .collection("userCollections")
-//         .document(CollId)
-//         .setData({
-//       "collId": CollId,
-//       "ownerId": widget.currentUser.id,
-//       "username": widget.currentUser.username,
-//       "photoUrl": widget.currentUser.photoUrl,
-//       "collmediaUrl": collmediaUrl,
-//       "headerImage":headerImage,
-//       "title": title,
-//       "source":source,
-//       "timestamp": timestamp,
-//       "claps": {},
-//     });
-//     titleController.clear();
-//     sourceController.clear();
-//     setState(() {
-//       file = null;
-// //      isUploading = false;
-// //      imageUrls = [];
-// //      images = [];
-//     });
-//   }
-
   Future<void> handleSubmit() async {
     setState(() {
       isUploading = true;
@@ -332,7 +245,7 @@ class _UploadCollState extends State<UploadColl>
            'collmediaUrl':imageUrls,
           "collId": CollId,
           "ownerId": widget.currentUser.id,
-          "username": widget.currentUser.username,
+          "username": widget.currentUser.displayName,
           "photoUrl": widget.currentUser.photoUrl,
           "headerImage":headerImage,
           "title": titleController.text,
@@ -355,29 +268,7 @@ class _UploadCollState extends State<UploadColl>
     Navigator.pop(context);
 
  }
-//   handleSubmityy() async {
-// for (var imageFile in images)
-//     setState(() {
-//       isUploading = true;
-//     });
-//     await compressImage();
-//     String headerImage = await uploadImage(file);
-//     // List<String> imageUrls = await postImage(images);
-//
-//     createProdInFirestore(
-//       collmediaUrl: imageUrls,
-//       // content: contents,
-//       title: titleController.text,
-//       source: sourceController.text,
-//     headerImage: headerImage,
-//     );
-//
-//     setState(() async {
-//
-//       isUploading = false;
-//     });
-//     Navigator.pop(context);
-//   }
+
   Future<bool> _onBackPressed() {
     return showDialog(
       context: context,
@@ -425,7 +316,10 @@ class _UploadCollState extends State<UploadColl>
 
             decoration: InputDecoration(labelText: 'Name of the Collection',
             labelStyle: TextStyle(
-              color: kText, ),)),
+              color: kText, ),
+            fillColor: transwhite,
+            border:OutlineInputBorder(borderRadius: BorderRadius.circular(25.0),) )
+        ),
 
 
         TextField(
@@ -436,11 +330,14 @@ class _UploadCollState extends State<UploadColl>
             maxLines: null,
 
             decoration: InputDecoration(labelText: 'Description of Collection',labelStyle:TextStyle(
-              color: kText, ),)),
+              color: kText, ),
+
+                fillColor: transwhite,
+                border:OutlineInputBorder(borderRadius: BorderRadius.circular(25.0),))),
 SizedBox(height:12.0),
         FloatingActionButton.extended(onPressed: loadAssets, label: Text(
             'Pick Collection Images'),
-
+backgroundColor: kText,
         ),
         Container(height: 400,
             child: buildGridView()),
@@ -450,17 +347,63 @@ SizedBox(height:12.0),
       Stack(
         children: [
           WillPopScope(
-            onWillPop: _onBackPressed,
+            onWillPop:   showDialog(
+      context: context,
+        builder: (context) => new AlertDialog(
+          title: new Text('Are you sure?'),
+          content: new Text('Do you want to exit without uploading?'),
+          actions: <Widget>[
+            new FlatButton(
+
+              onPressed: () => Navigator.of(context).pop(false),
+              child: Text("NO"),
+            ),
+            SizedBox(height: 16),
+            new FlatButton(
+
+              onPressed: () async {Navigator.of(context).pop(true);
+
+//            clearImage();
+              },
+              child: Text("YES"),
+            ),
+          ],
+        ),
+      ) ??
+          false,
             child: Scaffold(
-              backgroundColor: kSecondaryColor,
+
               // resizeToAvoidBottomPadding: true,
-              appBar: AppBar(title: Text('Upload Collection'),
-                backgroundColor: kSecondaryColor,
+              appBar: AppBar(
+                backgroundColor: kPrimaryColor,
                 leading: IconButton(
-                    icon: Icon(Icons.arrow_back, color: kText),
-                    onPressed:()=>_onBackPressed()),
+                    icon: Icon(Icons.arrow_back, color: Colors.white),
+                    onPressed:()=>  showDialog(
+                  context: context,
+                  builder: (context) => new AlertDialog(
+                    title: new Text('Are you sure?'),
+                    content: new Text('Do you want to exit without uploading?'),
+                    actions: <Widget>[
+                      new FlatButton(
+
+                        onPressed: () => Navigator.of(context).pop(false),
+                        child: Text("NO"),
+                      ),
+                      SizedBox(height: 16),
+                      new FlatButton(
+
+                        onPressed: () async {Navigator.of(context).pop(true);
+
+//            clearImage();
+                        },
+                        child: Text("YES"),
+                      ),
+                    ],
+                  ),
+                ) ??
+                    false),
                 actions: [
-                  FlatButton(
+                  RaisedButton(color:kblue,
                     onPressed: isUploading ? null : () => handleSubmit(),
                     child: Text(
                       "Post",
@@ -474,15 +417,20 @@ SizedBox(height:12.0),
               ),
               body:
 
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: form,
+                Container(
+
+                  decoration: BoxDecoration(
+                      gradient: fabGradient
+                  ) ,
+                  alignment: Alignment.center,
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: form,
+                  ),
                 ),
 
             ),
-//        ),
-//        isUploading ? Center(child: CircularProgressIndicator()) : Text(""),
-//      ],
+
           ),
           isUploading ? Center(child: CircularProgressIndicator(backgroundColor: kText,)) : Text(""),
         ],
@@ -492,10 +440,11 @@ SizedBox(height:12.0),
   }
   Container buildSplashScreen() {
     return Container(
-      color: Theme
-          .of(context)
-          .accentColor
-          .withOpacity(0.6),
+
+      decoration: BoxDecoration(
+          gradient: fabGradient
+      ) ,
+      alignment: Alignment.center,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[

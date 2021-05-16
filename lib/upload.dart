@@ -276,18 +276,7 @@ class _UploadState extends State<Upload>
           children:[ ListView(
             children: <Widget>[
               isUploading ? linearProgress() : Text(""),
-//          Container(
-////            height: 220.0,
-////            width: MediaQuery.of(context).size.width * 0.8,
-//            child: Center(
-//              child: AspectRatio(
-//                aspectRatio: 16 / 9,
-//                child: Container(
-//                  child:
-//                ),
-//              ),
-//            ),
-//          ),
+
               Container(
                   height:500,
                   width:300,child: getImageWidget()),
@@ -349,46 +338,6 @@ class _UploadState extends State<Upload>
                       color: Colors.white,
                     )),
               ),
-            // FloatingActionButton.extended(onPressed: Tags, label:  Text('Add product tags(Max 5 )',style: TextStyle(color: kText),),),
-            //   Container
-            //     (
-            //     child: GridView(
-            //       shrinkWrap: true,
-            //       primary: false,
-            //       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-            //           crossAxisCount: (MediaQuery.of(context).orientation == Orientation.portrait) ? 3 : 3),
-            //       children: [
-            //         Image.network( shopmediaUrl1??""),
-            //         Image.network( shopmediaUrl2??""),
-            //         Image.network( shopmediaUrl3??""),
-            //         Image.network( shopmediaUrl4??""),
-            //         Image.network( shopmediaUrl5??""),
-            //
-            //       ],
-            //     ),
-            //   ),
-
-
-
-//          Container(
-//            width: 200.0,
-//            height: 100.0,
-//            alignment: Alignment.center,
-//            child: RaisedButton.icon(
-//                label: Text(
-//                  "Add product tags",
-//                  style: TextStyle(color: Colors.white),
-//                ),
-//                shape: RoundedRectangleBorder(
-//                  borderRadius: BorderRadius.circular(30.0),
-//                ),
-//                color: Colors.blue,
-//                onPressed: GetTags,
-//                icon: Icon(
-//                  Icons.my_location,
-//                  color: Colors.white,
-//                )),
-//          ),
 
 
             ],

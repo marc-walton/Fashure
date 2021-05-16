@@ -9,7 +9,6 @@ import 'package:fashow/model/user_model.dart';
 import 'package:fashow/servicedash/requestpayment.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:fashow/search_service.dart';
 import 'package:provider/provider.dart';
 import 'package:fashow/utils/universal_variables.dart';
 import 'package:flutter/material.dart';
@@ -53,7 +52,6 @@ class _ChatScreenState extends State<ChatScreen> {
 
   final StorageMethods _storageMethods = StorageMethods();
   final ChatMethods _chatMethods = ChatMethods();
-  final SearchMethod _authMethods = SearchMethod();
 
   ScrollController _listScrollController = ScrollController();
 
@@ -174,26 +172,7 @@ bool Designer;
               ),
             ),
             actions: <Widget>[
-//        IconButton(
-//          icon: Icon(
-//            Icons.video_call,
-//          ),
-//          onPressed: () async =>
-//          await Permissions.cameraAndMicrophonePermissionsGranted()
-//              ? CallUtils.dial(
-//            from: sender,
-//            to: widget.receiver,
-//            context: context,
-//          )
-//              : {},
-//        ),
-//        IconButton(
-//          icon: Icon(
-//            Icons.phone,
-//          ),
-//          onPressed: () {},
-//
-//        )
+
               model == true|| Photographer == true|| Stylist == true|| Designer == true|| Hair == true || Makeup == true || Illustrator == true || Choreographer == true ?
               RaisedButton(color:kblue,
                   child:  Text("Create order",style: TextStyle(color: kText),),onPressed: (){ Navigator.push(
@@ -679,7 +658,9 @@ model = doc.data['model'] ?? false;
   CustomAppBar customAppBar(context) {
     return CustomAppBar(
       leading: IconButton(
+        color: kText,
         icon: Icon(
+
           Icons.arrow_back,
         ),
         onPressed: () {
@@ -711,26 +692,6 @@ model = doc.data['model'] ?? false;
         ),
       ),
       actions: <Widget>[
-//        IconButton(
-//          icon: Icon(
-//            Icons.video_call,
-//          ),
-//          onPressed: () async =>
-//          await Permissions.cameraAndMicrophonePermissionsGranted()
-//              ? CallUtils.dial(
-//            from: sender,
-//            to: widget.receiver,
-//            context: context,
-//          )
-//              : {},
-//        ),
-//        IconButton(
-//          icon: Icon(
-//            Icons.phone,
-//          ),
-//          onPressed: () {},
-//
-//        )
     model == true|| Photographer == true|| Stylist == true|| Designer == true|| Hair == true || Makeup == true || Illustrator == true || Choreographer == true ?
     RaisedButton(
         color:kblue,
@@ -796,7 +757,7 @@ class ModalTile extends StatelessWidget {
           title,
           style: TextStyle(
             fontWeight: FontWeight.bold,
-            color: Colors.white,
+            color: kText,
             fontSize: 18,
           ),
         ),

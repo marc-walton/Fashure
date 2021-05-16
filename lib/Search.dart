@@ -57,6 +57,10 @@ class _SearchState extends State<Search>
   Container buildNoContent() {
     final Orientation orientation = MediaQuery.of(context).orientation;
     return Container(
+      decoration: BoxDecoration(
+          gradient: fabGradient
+      ) ,
+      alignment: Alignment.center,
       child: Center(
         child: ListView(
           shrinkWrap: true,
@@ -94,8 +98,14 @@ class _SearchState extends State<Search>
             UserResult searchResult = UserResult(user);
             searchResults.add(searchResult);
           });
-          return ListView(
-            children: searchResults,
+          return Container(
+            decoration: BoxDecoration(
+                gradient: fabGradient
+            ) ,
+            alignment: Alignment.center,
+            child: ListView(
+              children: searchResults,
+            ),
           );
         });
   }

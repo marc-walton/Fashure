@@ -59,23 +59,6 @@ class _MenState extends State<Men> {
             Text( "₹$inr",style: TextStyle(color: kText,
                 fontSize: 20.0,
                 fontWeight: FontWeight.bold)),
-            GFButton(
-              onPressed: () =>
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) =>
-                          ProductScreen(
-                            prodId: prodId,
-                            userId: ownerId,
-                          ),
-                    ),
-                  ),
-              text: "More",
-              icon: Icon(Icons.card_travel),
-              shape: GFButtonShape.pills,
-
-            ),
           ],
         );
 
@@ -92,56 +75,6 @@ class _MenState extends State<Men> {
             Text( "\u0024 $usd",style: TextStyle(color: kText,
                 fontSize: 20.0,
                 fontWeight: FontWeight.bold)),
-            GFButton(
-              onPressed: () =>
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) =>
-                          ProductScreen(
-                            prodId: prodId,
-                            userId: ownerId,
-                          ),
-                    ),
-                  ),
-              text: "More",
-              icon: Icon(Icons.card_travel),
-              shape: GFButtonShape.pills,
-
-            ),
-          ],
-        );
-
-    }
-    else if (currentUser.country == 'China') {
-      return
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: <Widget>[
-            Text(productname, style: TextStyle(
-                color: kText,
-                fontSize: 20.0,
-                fontWeight: FontWeight.bold),),
-            Text( "¥ $cny",style: TextStyle(color: kText,
-                fontSize: 20.0,
-                fontWeight: FontWeight.bold)),
-            GFButton(
-              onPressed: () =>
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) =>
-                          ProductScreen(
-                            prodId: prodId,
-                            userId: ownerId,
-                          ),
-                    ),
-                  ),
-              text: "More",
-              icon: Icon(Icons.card_travel),
-              shape: GFButtonShape.pills,
-
-            ),
           ],
         );
 
@@ -158,23 +91,6 @@ class _MenState extends State<Men> {
             Text( "€ $eur",style: TextStyle(color: kText,
                 fontSize: 20.0,
                 fontWeight: FontWeight.bold)),
-            GFButton(
-              onPressed: () =>
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) =>
-                          ProductScreen(
-                            prodId: prodId,
-                            userId: ownerId,
-                          ),
-                    ),
-                  ),
-              text: "More",
-              icon: Icon(Icons.card_travel),
-              shape: GFButtonShape.pills,
-
-            ),
           ],
         );
 
@@ -191,27 +107,6 @@ class _MenState extends State<Men> {
             Text( "£  $gbp ",style: TextStyle(color: kText,
                 fontSize: 20.0,
                 fontWeight: FontWeight.bold)),
-            GFButton(
-              onPressed: () =>
-    Get.to( ProductScreen(
-      prodId: prodId,
-      userId: ownerId,
-    ),),
-                  // Navigator.push(
-                  //   context,
-                  //   MaterialPageRoute(
-                  //     builder: (context) =>
-                  //         ProductScreen(
-                  //           prodId: prodId,
-                  //           userId: ownerId,
-                  //         ),
-                  //   ),
-                  // ),
-              text: "More",
-              icon: Icon(Icons.card_travel),
-              shape: GFButtonShape.pills,
-
-            ),
           ],
         );
 
@@ -228,23 +123,6 @@ class _MenState extends State<Men> {
             Text( "\u0024 $usd",style: TextStyle(color: kText,
                 fontSize: 20.0,
                 fontWeight: FontWeight.bold)),
-            GFButton(
-              onPressed: () =>
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) =>
-                          ProductScreen(
-                            prodId: prodId,
-                            userId: ownerId,
-                          ),
-                    ),
-                  ),
-              text: "More",
-              icon: Icon(Icons.card_travel),
-              shape: GFButtonShape.pills,
-
-            ),
           ],
         );
 
@@ -262,7 +140,6 @@ String prodId = documentSnapshot.data['prodId'];
 String shopmediaUrl = documentSnapshot.data['shopmediaUrl'];
 String productname = documentSnapshot.data['productname'];
    String inr = documentSnapshot.data['inr'];
-   String cny = documentSnapshot.data['cny'];
    String usd = documentSnapshot.data['usd'];
    String eur = documentSnapshot.data['eur'];
    String gbp = documentSnapshot.data['gbp'];
@@ -291,8 +168,7 @@ String productname = documentSnapshot.data['productname'];
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                subtitle: Text(user.username,
-                  style: TextStyle(color: kIcon),),),
+                ),
             ),
 
             GestureDetector(
@@ -311,7 +187,7 @@ String productname = documentSnapshot.data['productname'];
                   ClipRRect(
                       borderRadius: BorderRadius.circular(20.0),child: cachedNetworkImage(shopmediaUrl)),
                 ],),),
-              df(productname:productname, usd:usd,inr:inr,cny:cny,eur:eur,gbp:gbp, prodId:prodId, ownerId:ownerId,),
+              df(productname:productname, usd:usd,inr:inr,eur:eur,gbp:gbp, prodId:prodId, ownerId:ownerId,),
 
             Divider(color: kGrey,),
           ],
@@ -338,7 +214,6 @@ String prodId = documentSnapshot.data['prodId'];
 String shopmediaUrl = documentSnapshot.data['shopmediaUrl'];
 String productname = documentSnapshot.data['productname'];
    String inr = documentSnapshot.data['inr'];
-   String cny = documentSnapshot.data['cny'];
    String usd = documentSnapshot.data['usd'];
    String eur = documentSnapshot.data['eur'];
    String gbp = documentSnapshot.data['gbp'];
@@ -367,8 +242,7 @@ String productname = documentSnapshot.data['productname'];
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                subtitle: Text(user.username,
-                  style: TextStyle(color: kIcon),),),
+               ),
             ),
 
             GestureDetector(
@@ -387,7 +261,7 @@ String productname = documentSnapshot.data['productname'];
                   ClipRRect(
                       borderRadius: BorderRadius.circular(20.0),child: cachedNetworkImage(shopmediaUrl)),
                 ],),),
-              df(productname:productname, usd:usd,inr:inr,cny:cny,eur:eur,gbp:gbp, prodId:prodId, ownerId:ownerId,),
+              df(productname:productname, usd:usd,inr:inr,eur:eur,gbp:gbp, prodId:prodId, ownerId:ownerId,),
             Divider(color: kGrey,),
           ],
 
@@ -534,88 +408,7 @@ String productname = documentSnapshot.data['productname'];
   @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);
-    if(currentUser.country=='India'){
-      return
-      RotatedBox(
-        quarterTurns: 3,
-        child: Expanded(
-          child: DefaultTabController(
-              length:20,
-              child: Scaffold(
-                backgroundColor:  kPrimaryColor,
-                appBar:AppBar(
-                  toolbarHeight: SizeConfig.safeBlockHorizontal * 15,
-                  backgroundColor: kPrimaryColor,
-                  elevation: 0,
-                  bottom: TabBar(
-                    isScrollable: true,
-                    labelColor: Colors.white,
-                    unselectedLabelColor: kIcon,
-//                indicatorSize: TabBarIndicatorSize.label,
-//                       indicator: BoxDecoration(
-//                           borderRadius: BorderRadius.only(
-//                               topLeft: Radius.circular(10),
-//                               topRight: Radius.circular(10)
-//                           ),
-//                           color: Colors.white),
 
-                    tabs:[
-                      Text("New Arrivals",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 8,),),
-                      Text("Indian Ethnic",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 8,),),
-                      Text("Shirts",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 8,),),
-                      Text("Casual Tops",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 8),),
-                      Text("Coats",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 8),),
-                      Text("Jackets",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 8),),
-                      Text("Sweatshirts & Sweaters",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 8),),
-                      Text("Denim",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 8),),
-                      Text("Suits",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 8),),
-                      Text("Trousers",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 8),),
-                      Text("Shorts",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 8),),
-                      Text("Activewear",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 8),),
-                      Text("Beach & Swimwear",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 8),),
-                      Text("Bags",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 8),),
-                      Text("Shoes",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 8),),
-                      Text("Sneakers",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 8),),
-                      Text("Accessories",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 8),),
-                      Text("Grooming",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 8),),
-                      Text("Jewellery",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 8),),
-                      Text("Watches",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 8),),
-                    ],
-                  ),
-                ),
-
-                body: RotatedBox(
-                  quarterTurns: 1,
-                  child: TabBarView(
-                      children:<Widget> [
-                        Allin(),
-                        IndianM(),
-                        ShirtM(),
-                        TshirtM(),
-                        CoatsM(),
-                        JacketM(),
-                        SweaterM(),
-                        DenimM(),
-                        SuitsM(),
-                        TrouserM(),
-                        ShortsM(),
-                        ActiveWear(),
-                        BeachwearM(),
-                        Bags(),
-                        ShoesM(),
-                        SneakersM(),
-                        Accessories(),
-                        GroomingM(),
-                        JewelleryM(),
-                        WatchesM(),
-
-                      ]),
-                ),
-              )
-          ),
-        ),
-      );
-    }else{
     return
     RotatedBox(
       quarterTurns: 3,
@@ -623,7 +416,6 @@ String productname = documentSnapshot.data['productname'];
         child: DefaultTabController(
             length:19,
             child: Scaffold(
-              backgroundColor:  kPrimaryColor,
 
               appBar:AppBar(
                   toolbarHeight: SizeConfig.safeBlockHorizontal * 15,
@@ -696,6 +488,6 @@ quarterTurns: 1,
         ),
       ),
     );
-  }
+
   }
 }

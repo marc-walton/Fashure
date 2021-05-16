@@ -1,7 +1,6 @@
 import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
-import 'package:fashow/search_service.dart';
 import 'package:fashow/methods/register.dart';
 import 'package:fashow/methods/login.dart';
 
@@ -93,7 +92,6 @@ class _HomepageState extends State<Homepage> with WidgetsBindingObserver  {
 String idd;
 String username;
 //  UserProvider userProvider;
-  final SearchMethod _authMethods = SearchMethod();
   @override
   void initState() {
     super.initState();
@@ -118,47 +116,11 @@ String username;
     }).catchError((err) {
       print('Error signing in: $err');
     });
-    SchedulerBinding.instance.addPostFrameCallback((_) async {
-      _authMethods.setUserState(
-        userId: currentUser.id,
-        userState: UserState.Online,
-
-      );
-    });
 
     WidgetsBinding.instance.addObserver(this);
   }
 
   @override
-  void didChangeAppLifecycleState(AppLifecycleState state) {
-
-
-    super.didChangeAppLifecycleState(state);
-
-    switch (state) {
-      case AppLifecycleState.resumed:
-
-            _authMethods.setUserState(
-            userId: currentUser.id, userState: UserState.Online);
-             print("resume state");
-        break;
-      case AppLifecycleState.inactive:
-         _authMethods.setUserState(
-            userId: currentUser.id, userState: UserState.Offline);
-             print("inactive state");
-        break;
-      case AppLifecycleState.paused:
-      _authMethods.setUserState(
-            userId: currentUser.id, userState: UserState.Waiting);
-             print("paused state");
-        break;
-      case AppLifecycleState.detached:
-       _authMethods.setUserState(
-            userId: currentUser.id, userState: UserState.Offline);
-             print("detached state");
-        break;
-    }
-  }
 auth() async {
     FirebaseAuth.instance
         .currentUser()
@@ -317,100 +279,6 @@ print(loggedInUser.displayName);
           context, MaterialPageRoute(builder: (context) => CreateAccount()));
 
 
-//   showModalBottomSheet(
-//       isScrollControlled: true,
-//       isDismissible: false,
-//       enableDrag: false,
-//       context:context,
-//       builder: (BuildContext context){
-//         return
-//           WillPopScope(
-//             onWillPop: () async => false,
-//             child:StatefulBuilder(
-//                 builder: (BuildContext context,StateSetter setState) {
-//                  return
-//                   SafeArea(
-//                     child: Container(
-//                       height: MediaQuery
-//                           .of(context)
-//                           .size
-//                           .height,
-//                       color: kPrimaryColor,
-//                       child: Center(
-//                         child: Form(
-//                           key: _formKey,
-//                           child:                   Center(
-//                             child: Column(
-//                               // mainAxisAlignment: MainAxisAlignment.start,
-//                               children: <Widget>[
-//                                 Text('Select your region',style: TextStyle(color:kText)),
-//
-//                                 Container(
-//                                   padding: EdgeInsets.all(16),
-//                                   child: DropDownFormField(
-//
-//                                     titleText: '',
-//                                     hintText: 'Select your region',
-//                                     value: dropdownValue,
-//                                     onSaved: (value) {
-//                                       setState(() {
-//                                         dropdownValue = value;
-//                                       });
-//                                     },
-//                                     onChanged: (value) {
-//                                       setState(() {
-//                                         dropdownValue = value;
-//                                       });
-//                                     },
-//                                     dataSource: [
-//                                       {
-//                                         "display": "🇮🇳,India",
-//                                         "value": "India",
-//                                       },
-//                                       {
-//                                         "display": "🇺🇸,USA",
-//                                         "value": "USA",
-//                                       },
-//                                       {
-//                                         "display": "🇪🇺,Europe",
-//                                         "value": "Europe",
-//                                       },
-//                                       {
-//                                         "display": "󠁧󠁢󠁥🇬🇧,United Kingdom",
-//                                         "value": "UK",
-//                                       },
-//                                     ],
-//                                     textField: 'display',
-//                                     valueField: 'value',
-//                                   ),
-//                                 ),
-//                                 FloatingActionButton.extended(
-//                                   heroTag:'save',
-//                                   backgroundColor: kblue,
-//                                   onPressed: (){_saveForm();
-//                                    Get.back();
-//                                   },
-//
-//                                   label: Text('Sign up',style:TextStyle(color: kText) ,),
-//                                 ),
-//                               ],
-//                             ),
-//                           ),
-//
-//                         ),
-//                       ),
-//                     ),
-//                   );
-//                 }
-//             ),
-//           );
-//
-// }
-//   );
-
-
-
-      // 3) get username from create account, use it to make new user document in users collection
       usersRef.document(user.id).setData({
         "id": user.id,
         "coverPhoto":"assets/img/cover.jpg",
@@ -423,17 +291,7 @@ print(loggedInUser.displayName);
        "country":dropdownValue,
         "timestamp": timestamp
       });
-  // await    Firestore.instance.collection("messages").document(user.id)
-  //         .collection("101431659551396433801").document("101431659551396433801").setData({
-  //       'senderId': "101431659551396433801",
-  //       'receiverId': user.id,
-  //       'message': "Hi. Welcome.This is app is still in beta.
-      //       The final version with more features and better user-interface will be released soon.
-      //       Meanwhile feel free to contact us at fashure.business@gmail.com",
-  //       'timestamp': Timestamp.now(),
-  //       'type': 'text',
-  //       'read': 'false',
-  //     });
+
 
 
     await  bankRef

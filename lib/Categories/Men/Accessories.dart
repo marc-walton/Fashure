@@ -36,23 +36,7 @@ class _AccessoriesState extends State<Accessories> {
             Text( "₹$inr",style: TextStyle(color: kText,
                 fontSize: 20.0,
                 fontWeight: FontWeight.bold)),
-            GFButton(
-              onPressed: () =>
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) =>
-                          ProductScreen(
-                            prodId: prodId,
-                            userId: ownerId,
-                          ),
-                    ),
-                  ),
-              text: "More",
-              icon: Icon(Icons.card_travel),
-              shape: GFButtonShape.pills,
 
-            ),
           ],
         );
 
@@ -69,56 +53,6 @@ class _AccessoriesState extends State<Accessories> {
             Text( "\u0024 $usd",style: TextStyle(color: kText,
                 fontSize: 20.0,
                 fontWeight: FontWeight.bold)),
-            GFButton(
-              onPressed: () =>
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) =>
-                          ProductScreen(
-                            prodId: prodId,
-                            userId: ownerId,
-                          ),
-                    ),
-                  ),
-              text: "More",
-              icon: Icon(Icons.card_travel),
-              shape: GFButtonShape.pills,
-
-            ),
-          ],
-        );
-
-  }
-    else if (currentUser.country == 'China') {
-      return
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: <Widget>[
-            Text(productname, style: TextStyle(
-                color: kText,
-                fontSize: 20.0,
-                fontWeight: FontWeight.bold),),
-            Text( "¥ $cny",style: TextStyle(color: kText,
-                fontSize: 20.0,
-                fontWeight: FontWeight.bold)),
-            GFButton(
-              onPressed: () =>
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) =>
-                          ProductScreen(
-                            prodId: prodId,
-                            userId: ownerId,
-                          ),
-                    ),
-                  ),
-              text: "More",
-              icon: Icon(Icons.card_travel),
-              shape: GFButtonShape.pills,
-
-            ),
           ],
         );
 
@@ -135,23 +69,6 @@ class _AccessoriesState extends State<Accessories> {
             Text( "€ $eur",style: TextStyle(color: kText,
                 fontSize: 20.0,
                 fontWeight: FontWeight.bold)),
-            GFButton(
-              onPressed: () =>
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) =>
-                          ProductScreen(
-                            prodId: prodId,
-                            userId: ownerId,
-                          ),
-                    ),
-                  ),
-              text: "More",
-              icon: Icon(Icons.card_travel),
-              shape: GFButtonShape.pills,
-
-            ),
           ],
         );
 
@@ -168,24 +85,6 @@ class _AccessoriesState extends State<Accessories> {
             Text( "£  $gbp ",style: TextStyle(color: kText,
                 fontSize: 20.0,
                 fontWeight: FontWeight.bold)),
-            GFButton(
-              onPressed: () =>
-
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) =>
-                          ProductScreen(
-                            prodId: prodId,
-                            userId: ownerId,
-                          ),
-                    ),
-                  ),
-              text: "More",
-              icon: Icon(Icons.card_travel),
-              shape: GFButtonShape.pills,
-
-            ),
           ],
         );
 
@@ -202,23 +101,6 @@ class _AccessoriesState extends State<Accessories> {
             Text( "\u0024 $usd",style: TextStyle(color: kText,
                 fontSize: 20.0,
                 fontWeight: FontWeight.bold)),
-            GFButton(
-              onPressed: () =>
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) =>
-                          ProductScreen(
-                            prodId: prodId,
-                            userId: ownerId,
-                          ),
-                    ),
-                  ),
-              text: "More",
-              icon: Icon(Icons.card_travel),
-              shape: GFButtonShape.pills,
-
-            ),
           ],
         );
 
@@ -229,9 +111,8 @@ class _AccessoriesState extends State<Accessories> {
       quarterTurns: 3,
       child: Expanded(
         child: DefaultTabController(
-            length:8,
+            length:7,
             child: Scaffold(
-              backgroundColor: kPrimaryColor,
               appBar:AppBar(
                 toolbarHeight: SizeConfig.safeBlockHorizontal * 8 ,
                 backgroundColor: kPrimaryColor,
@@ -240,16 +121,8 @@ class _AccessoriesState extends State<Accessories> {
                   isScrollable: true,
                   labelColor: Colors.white,
                   unselectedLabelColor: kIcon,
-//                indicatorSize: TabBarIndicatorSize.label,
-//                       indicator: BoxDecoration(
-//                           borderRadius: BorderRadius.only(
-//                               topLeft: Radius.circular(10),
-//                               topRight: Radius.circular(10)
-//                           ),
-//                           color: Colors.white),
 
                   tabs:[
-                    Text("New Arrivals",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5,),),
                     Text("Caps",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5,),),
                     Text("Balaclavas",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5,),),
                     Text("Beanies",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5,),),
@@ -266,7 +139,6 @@ class _AccessoriesState extends State<Accessories> {
                 quarterTurns: 1,
                 child: TabBarView(
                     children:<Widget> [
-                     Hatall(),
                       Caps(),
                       Balaclavas(),
                       Beanies(),
@@ -290,7 +162,6 @@ class _AccessoriesState extends State<Accessories> {
           child: DefaultTabController(
               length:2,
               child: Scaffold(
-                backgroundColor: kPrimaryColor,
                 appBar:AppBar(
                   toolbarHeight: SizeConfig.safeBlockHorizontal * 8,
                   backgroundColor: kPrimaryColor,
@@ -299,16 +170,8 @@ class _AccessoriesState extends State<Accessories> {
                     isScrollable: true,
                     labelColor: Colors.white,
                     unselectedLabelColor: kIcon,
-//                indicatorSize: TabBarIndicatorSize.label,
-//                       indicator: BoxDecoration(
-//                           borderRadius: BorderRadius.only(
-//                               topLeft: Radius.circular(10),
-//                               topRight: Radius.circular(10)
-//                           ),
-//                           color: Colors.white),
 
                     tabs:[
-                      Text("New Arrivals",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5,),),
                       Text("Braces",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5,),),
                       Text("Suspenders",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5,),),
 
@@ -320,7 +183,6 @@ class _AccessoriesState extends State<Accessories> {
                   quarterTurns: 1,
                   child: TabBarView(
                       children:<Widget> [
-                        braces(),
                         Bracesdt(),
                         Suspenders(),
                       ]),
@@ -337,9 +199,8 @@ class _AccessoriesState extends State<Accessories> {
         quarterTurns: 3,
         child: Expanded(
           child: DefaultTabController(
-              length:3,
+              length:2,
               child: Scaffold(
-                backgroundColor: kPrimaryColor,
                 appBar:AppBar(
                   toolbarHeight: SizeConfig.safeBlockHorizontal * 8,
                   backgroundColor: kPrimaryColor,
@@ -348,16 +209,9 @@ class _AccessoriesState extends State<Accessories> {
                     isScrollable: true,
                     labelColor: Colors.white,
                     unselectedLabelColor: kIcon,
-//                indicatorSize: TabBarIndicatorSize.label,
-//                       indicator: BoxDecoration(
-//                           borderRadius: BorderRadius.only(
-//                               topLeft: Radius.circular(10),
-//                               topRight: Radius.circular(10)
-//                           ),
-//                           color: Colors.white),
+
 
                     tabs:[
-                      Text("New Arrivals",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5,),),
                       Text("Ties",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5,),),
                       Text("Bow Ties",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5,),),
 
@@ -369,7 +223,6 @@ class _AccessoriesState extends State<Accessories> {
                   quarterTurns: 1,
                   child: TabBarView(
                       children:<Widget> [
-                        ties(),
                         Tiesdt(),
                         Bow(),
                       ]),
@@ -378,90 +231,6 @@ class _AccessoriesState extends State<Accessories> {
           ),
         ),
       );
-  }
-  Hatall(){
-    return  PaginateFirestore(
-//    itemsPerPage: 2,
-      itemBuilderType:
-      PaginateBuilderType.listView,
-      itemBuilder: (index, context, documentSnapshot)   {
-//        DocumentSnapshot ds = snapshot.data.documents[index];
-        String ownerId = documentSnapshot.data['ownerId'];
-        String prodId = documentSnapshot.data['prodId'];
-        String shopmediaUrl = documentSnapshot.data['shopmediaUrl'];
-        String productname = documentSnapshot.data['productname'];
-        String inr = documentSnapshot.data['inr'];
-        String cny = documentSnapshot.data['cny'];
-        String usd = documentSnapshot.data['usd'];
-        String eur = documentSnapshot.data['eur'];
-        String gbp = documentSnapshot.data['gbp'];
-        return
-          FutureBuilder(
-            future: usersRef.document(ownerId).get(),
-            builder: (context, snapshot) {
-              if (!snapshot.hasData) {
-                return circularProgress();
-              }
-              User user = User.fromDocument(snapshot.data);
-//          bool isPostOwner = currentUserId == ownerId;
-              return Column(
-                children: <Widget>[
-                  GestureDetector(
-                    onTap: () => showProfile(context, profileId: user.id),
-                    child: ListTile(
-                      leading: CircleAvatar(
-                        backgroundImage: CachedNetworkImageProvider(user.photoUrl),
-                        backgroundColor: Colors.grey,
-                      ),
-                      title: Text(
-                        user.displayName,
-                        style: TextStyle(
-                          color: kText,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      subtitle: Text(user.username,
-                        style: TextStyle(color: kIcon),),),
-                  ),
-
-                  GestureDetector(
-                    onTap: () => Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => ProductScreen(
-                          prodId: prodId,
-                          userId: ownerId,
-                        ),
-                      ),
-                    ),
-                    child: Stack(
-                      alignment: Alignment.center,
-                      children: <Widget>[
-                        ClipRRect(
-                            borderRadius: BorderRadius.circular(20.0),child: cachedNetworkImage(shopmediaUrl)),
-                      ],),),
-                  df(productname:productname, usd:usd,inr:inr,cny:cny,eur:eur,gbp:gbp, prodId:prodId, ownerId:ownerId,),
-
-                  Divider(color: kGrey,),
-                ],
-
-              );
-
-            },
-          );
-      },
-      query: Firestore.instance.collectionGroup('userProducts').orderBy('timestamp',descending: true)
-          .where('Gender',isEqualTo: 'Men')
-          .where('Category',isEqualTo: 'Caps')
-.where('Category',isEqualTo: 'Balaclavas')
-.where('Category',isEqualTo: 'Beanies')
-.where('Category',isEqualTo: 'Berets')
-.where('Category',isEqualTo: 'Fedora & Trilbies')
-.where('Category',isEqualTo: 'Bucket Hats')
-.where('Category',isEqualTo: 'Sun Hats')
-
-
-    );
   }
   Caps(){
     return  PaginateFirestore(
@@ -475,7 +244,6 @@ class _AccessoriesState extends State<Accessories> {
         String shopmediaUrl = documentSnapshot.data['shopmediaUrl'];
         String productname = documentSnapshot.data['productname'];
         String inr = documentSnapshot.data['inr'];
-        String cny = documentSnapshot.data['cny'];
         String usd = documentSnapshot.data['usd'];
         String eur = documentSnapshot.data['eur'];
         String gbp = documentSnapshot.data['gbp'];
@@ -504,8 +272,7 @@ class _AccessoriesState extends State<Accessories> {
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-                      subtitle: Text(user.username,
-                        style: TextStyle(color: kIcon),),),
+              ),
                   ),
 
                   GestureDetector(
@@ -524,7 +291,7 @@ class _AccessoriesState extends State<Accessories> {
                         ClipRRect(
                             borderRadius: BorderRadius.circular(20.0),child: cachedNetworkImage(shopmediaUrl)),
                       ],),),
-                  df(productname:productname, usd:usd,inr:inr,cny:cny,eur:eur,gbp:gbp, prodId:prodId, ownerId:ownerId,),
+                  df(productname:productname, usd:usd,inr:inr,eur:eur,gbp:gbp, prodId:prodId, ownerId:ownerId,),
 
                   Divider(color: kGrey,),
                 ],
@@ -553,7 +320,6 @@ class _AccessoriesState extends State<Accessories> {
         String shopmediaUrl = documentSnapshot.data['shopmediaUrl'];
         String productname = documentSnapshot.data['productname'];
         String inr = documentSnapshot.data['inr'];
-        String cny = documentSnapshot.data['cny'];
         String usd = documentSnapshot.data['usd'];
         String eur = documentSnapshot.data['eur'];
         String gbp = documentSnapshot.data['gbp'];
@@ -582,8 +348,7 @@ class _AccessoriesState extends State<Accessories> {
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-                      subtitle: Text(user.username,
-                        style: TextStyle(color: kIcon),),),
+                    ),
                   ),
 
                   GestureDetector(
@@ -602,7 +367,7 @@ class _AccessoriesState extends State<Accessories> {
                         ClipRRect(
                             borderRadius: BorderRadius.circular(20.0),child: cachedNetworkImage(shopmediaUrl)),
                       ],),),
-                  df(productname:productname, usd:usd,inr:inr,cny:cny,eur:eur,gbp:gbp, prodId:prodId, ownerId:ownerId,),
+                  df(productname:productname, usd:usd,inr:inr,eur:eur,gbp:gbp, prodId:prodId, ownerId:ownerId,),
 
                   Divider(color: kGrey,),
                 ],
@@ -631,7 +396,6 @@ class _AccessoriesState extends State<Accessories> {
         String shopmediaUrl = documentSnapshot.data['shopmediaUrl'];
         String productname = documentSnapshot.data['productname'];
         String inr = documentSnapshot.data['inr'];
-        String cny = documentSnapshot.data['cny'];
         String usd = documentSnapshot.data['usd'];
         String eur = documentSnapshot.data['eur'];
         String gbp = documentSnapshot.data['gbp'];
@@ -660,8 +424,7 @@ class _AccessoriesState extends State<Accessories> {
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-                      subtitle: Text(user.username,
-                        style: TextStyle(color: kIcon),),),
+                     ),
                   ),
 
                   GestureDetector(
@@ -680,7 +443,7 @@ class _AccessoriesState extends State<Accessories> {
                         ClipRRect(
                             borderRadius: BorderRadius.circular(20.0),child: cachedNetworkImage(shopmediaUrl)),
                       ],),),
-                  df(productname:productname, usd:usd,inr:inr,cny:cny,eur:eur,gbp:gbp, prodId:prodId, ownerId:ownerId,),
+                  df(productname:productname, usd:usd,inr:inr,eur:eur,gbp:gbp, prodId:prodId, ownerId:ownerId,),
 
                   Divider(color: kGrey,),
                 ],
@@ -709,7 +472,6 @@ class _AccessoriesState extends State<Accessories> {
         String shopmediaUrl = documentSnapshot.data['shopmediaUrl'];
         String productname = documentSnapshot.data['productname'];
         String inr = documentSnapshot.data['inr'];
-        String cny = documentSnapshot.data['cny'];
         String usd = documentSnapshot.data['usd'];
         String eur = documentSnapshot.data['eur'];
         String gbp = documentSnapshot.data['gbp'];
@@ -738,8 +500,7 @@ class _AccessoriesState extends State<Accessories> {
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-                      subtitle: Text(user.username,
-                        style: TextStyle(color: kIcon),),),
+                    ),
                   ),
 
                   GestureDetector(
@@ -758,7 +519,7 @@ class _AccessoriesState extends State<Accessories> {
                         ClipRRect(
                             borderRadius: BorderRadius.circular(20.0),child: cachedNetworkImage(shopmediaUrl)),
                       ],),),
-                  df(productname:productname, usd:usd,inr:inr,cny:cny,eur:eur,gbp:gbp, prodId:prodId, ownerId:ownerId,),
+                  df(productname:productname, usd:usd,inr:inr,eur:eur,gbp:gbp, prodId:prodId, ownerId:ownerId,),
 
                   Divider(color: kGrey,),
                 ],
@@ -787,7 +548,6 @@ class _AccessoriesState extends State<Accessories> {
         String shopmediaUrl = documentSnapshot.data['shopmediaUrl'];
         String productname = documentSnapshot.data['productname'];
         String inr = documentSnapshot.data['inr'];
-        String cny = documentSnapshot.data['cny'];
         String usd = documentSnapshot.data['usd'];
         String eur = documentSnapshot.data['eur'];
         String gbp = documentSnapshot.data['gbp'];
@@ -816,8 +576,7 @@ class _AccessoriesState extends State<Accessories> {
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-                      subtitle: Text(user.username,
-                        style: TextStyle(color: kIcon),),),
+                     ),
                   ),
 
                   GestureDetector(
@@ -836,7 +595,7 @@ class _AccessoriesState extends State<Accessories> {
                         ClipRRect(
                             borderRadius: BorderRadius.circular(20.0),child: cachedNetworkImage(shopmediaUrl)),
                       ],),),
-                  df(productname:productname, usd:usd,inr:inr,cny:cny,eur:eur,gbp:gbp, prodId:prodId, ownerId:ownerId,),
+                  df(productname:productname, usd:usd,inr:inr,eur:eur,gbp:gbp, prodId:prodId, ownerId:ownerId,),
 
                   Divider(color: kGrey,),
                 ],
@@ -865,7 +624,6 @@ class _AccessoriesState extends State<Accessories> {
         String shopmediaUrl = documentSnapshot.data['shopmediaUrl'];
         String productname = documentSnapshot.data['productname'];
         String inr = documentSnapshot.data['inr'];
-        String cny = documentSnapshot.data['cny'];
         String usd = documentSnapshot.data['usd'];
         String eur = documentSnapshot.data['eur'];
         String gbp = documentSnapshot.data['gbp'];
@@ -894,8 +652,7 @@ class _AccessoriesState extends State<Accessories> {
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-                      subtitle: Text(user.username,
-                        style: TextStyle(color: kIcon),),),
+                      ),
                   ),
 
                   GestureDetector(
@@ -914,7 +671,7 @@ class _AccessoriesState extends State<Accessories> {
                         ClipRRect(
                             borderRadius: BorderRadius.circular(20.0),child: cachedNetworkImage(shopmediaUrl)),
                       ],),),
-                  df(productname:productname, usd:usd,inr:inr,cny:cny,eur:eur,gbp:gbp, prodId:prodId, ownerId:ownerId,),
+                  df(productname:productname, usd:usd,inr:inr,eur:eur,gbp:gbp, prodId:prodId, ownerId:ownerId,),
 
                   Divider(color: kGrey,),
                 ],
@@ -943,7 +700,6 @@ class _AccessoriesState extends State<Accessories> {
         String shopmediaUrl = documentSnapshot.data['shopmediaUrl'];
         String productname = documentSnapshot.data['productname'];
         String inr = documentSnapshot.data['inr'];
-        String cny = documentSnapshot.data['cny'];
         String usd = documentSnapshot.data['usd'];
         String eur = documentSnapshot.data['eur'];
         String gbp = documentSnapshot.data['gbp'];
@@ -972,8 +728,7 @@ class _AccessoriesState extends State<Accessories> {
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-                      subtitle: Text(user.username,
-                        style: TextStyle(color: kIcon),),),
+                     ),
                   ),
 
                   GestureDetector(
@@ -992,7 +747,7 @@ class _AccessoriesState extends State<Accessories> {
                         ClipRRect(
                             borderRadius: BorderRadius.circular(20.0),child: cachedNetworkImage(shopmediaUrl)),
                       ],),),
-                  df(productname:productname, usd:usd,inr:inr,cny:cny,eur:eur,gbp:gbp, prodId:prodId, ownerId:ownerId,),
+                  df(productname:productname, usd:usd,inr:inr,eur:eur,gbp:gbp, prodId:prodId, ownerId:ownerId,),
 
                   Divider(color: kGrey,),
                 ],
@@ -1021,7 +776,6 @@ class _AccessoriesState extends State<Accessories> {
         String shopmediaUrl = documentSnapshot.data['shopmediaUrl'];
         String productname = documentSnapshot.data['productname'];
         String inr = documentSnapshot.data['inr'];
-        String cny = documentSnapshot.data['cny'];
         String usd = documentSnapshot.data['usd'];
         String eur = documentSnapshot.data['eur'];
         String gbp = documentSnapshot.data['gbp'];
@@ -1050,8 +804,7 @@ class _AccessoriesState extends State<Accessories> {
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-                      subtitle: Text(user.username,
-                        style: TextStyle(color: kIcon),),),
+                      ),
                   ),
 
                   GestureDetector(
@@ -1070,7 +823,7 @@ class _AccessoriesState extends State<Accessories> {
                         ClipRRect(
                             borderRadius: BorderRadius.circular(20.0),child: cachedNetworkImage(shopmediaUrl)),
                       ],),),
-                  df(productname:productname, usd:usd,inr:inr,cny:cny,eur:eur,gbp:gbp, prodId:prodId, ownerId:ownerId,),
+                  df(productname:productname, usd:usd,inr:inr,eur:eur,gbp:gbp, prodId:prodId, ownerId:ownerId,),
 
                   Divider(color: kGrey,),
                 ],
@@ -1099,7 +852,6 @@ class _AccessoriesState extends State<Accessories> {
         String shopmediaUrl = documentSnapshot.data['shopmediaUrl'];
         String productname = documentSnapshot.data['productname'];
         String inr = documentSnapshot.data['inr'];
-        String cny = documentSnapshot.data['cny'];
         String usd = documentSnapshot.data['usd'];
         String eur = documentSnapshot.data['eur'];
         String gbp = documentSnapshot.data['gbp'];
@@ -1128,8 +880,7 @@ class _AccessoriesState extends State<Accessories> {
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-                      subtitle: Text(user.username,
-                        style: TextStyle(color: kIcon),),),
+                      ),
                   ),
 
                   GestureDetector(
@@ -1148,7 +899,7 @@ class _AccessoriesState extends State<Accessories> {
                         ClipRRect(
                             borderRadius: BorderRadius.circular(20.0),child: cachedNetworkImage(shopmediaUrl)),
                       ],),),
-                  df(productname:productname, usd:usd,inr:inr,cny:cny,eur:eur,gbp:gbp, prodId:prodId, ownerId:ownerId,),
+                  df(productname:productname, usd:usd,inr:inr,eur:eur,gbp:gbp, prodId:prodId, ownerId:ownerId,),
                   Divider(color: kGrey,),
                 ],
 
@@ -1160,85 +911,6 @@ class _AccessoriesState extends State<Accessories> {
       query: Firestore.instance.collectionGroup('userProducts').orderBy('timestamp',descending: true)
           .where('Gender',isEqualTo: 'Men')
           .where('Category',isEqualTo: 'Belts'),
-
-
-    );
-  }
-  braces(){
-    return  PaginateFirestore(
-//    itemsPerPage: 2,
-      itemBuilderType:
-      PaginateBuilderType.listView,
-      itemBuilder: (index, context, documentSnapshot)   {
-//        DocumentSnapshot ds = snapshot.data.documents[index];
-        String ownerId = documentSnapshot.data['ownerId'];
-        String prodId = documentSnapshot.data['prodId'];
-        String shopmediaUrl = documentSnapshot.data['shopmediaUrl'];
-        String productname = documentSnapshot.data['productname'];
-        String inr = documentSnapshot.data['inr'];
-        String cny = documentSnapshot.data['cny'];
-        String usd = documentSnapshot.data['usd'];
-        String eur = documentSnapshot.data['eur'];
-        String gbp = documentSnapshot.data['gbp'];
-        return
-          FutureBuilder(
-            future: usersRef.document(ownerId).get(),
-            builder: (context, snapshot) {
-              if (!snapshot.hasData) {
-                return circularProgress();
-              }
-              User user = User.fromDocument(snapshot.data);
-//          bool isPostOwner = currentUserId == ownerId;
-              return Column(
-                children: <Widget>[
-                  GestureDetector(
-                    onTap: () => showProfile(context, profileId: user.id),
-                    child: ListTile(
-                      leading: CircleAvatar(
-                        backgroundImage: CachedNetworkImageProvider(user.photoUrl),
-                        backgroundColor: Colors.grey,
-                      ),
-                      title: Text(
-                        user.displayName,
-                        style: TextStyle(
-                          color: kText,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      subtitle: Text(user.username,
-                        style: TextStyle(color: kIcon),),),
-                  ),
-
-                  GestureDetector(
-                    onTap: () => Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => ProductScreen(
-                          prodId: prodId,
-                          userId: ownerId,
-                        ),
-                      ),
-                    ),
-                    child: Stack(
-                      alignment: Alignment.center,
-                      children: <Widget>[
-                        ClipRRect(
-                            borderRadius: BorderRadius.circular(20.0),child: cachedNetworkImage(shopmediaUrl)),
-                      ],),),
-                  df(productname:productname, usd:usd,inr:inr,cny:cny,eur:eur,gbp:gbp, prodId:prodId, ownerId:ownerId,),
-
-                  Divider(color: kGrey,),
-                ],
-
-              );
-
-            },
-          );
-      },
-      query: Firestore.instance.collectionGroup('userProducts').orderBy('timestamp',descending: true)
-          .where('Gender',isEqualTo: 'Men')
-          .where('Category',isEqualTo: 'Braces')
-.where('Category',isEqualTo: 'Suspenders'),
 
 
     );
@@ -1255,7 +927,6 @@ class _AccessoriesState extends State<Accessories> {
         String shopmediaUrl = documentSnapshot.data['shopmediaUrl'];
         String productname = documentSnapshot.data['productname'];
         String inr = documentSnapshot.data['inr'];
-        String cny = documentSnapshot.data['cny'];
         String usd = documentSnapshot.data['usd'];
         String eur = documentSnapshot.data['eur'];
         String gbp = documentSnapshot.data['gbp'];
@@ -1284,8 +955,7 @@ class _AccessoriesState extends State<Accessories> {
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-                      subtitle: Text(user.username,
-                        style: TextStyle(color: kIcon),),),
+                    ),
                   ),
 
                   GestureDetector(
@@ -1304,7 +974,7 @@ class _AccessoriesState extends State<Accessories> {
                         ClipRRect(
                             borderRadius: BorderRadius.circular(20.0),child: cachedNetworkImage(shopmediaUrl)),
                       ],),),
-                  df(productname:productname, usd:usd,inr:inr,cny:cny,eur:eur,gbp:gbp, prodId:prodId, ownerId:ownerId,),
+                  df(productname:productname, usd:usd,inr:inr,eur:eur,gbp:gbp, prodId:prodId, ownerId:ownerId,),
                   Divider(color: kGrey,),
                 ],
 
@@ -1333,7 +1003,6 @@ class _AccessoriesState extends State<Accessories> {
           String shopmediaUrl = documentSnapshot.data['shopmediaUrl'];
           String productname = documentSnapshot.data['productname'];
           String inr = documentSnapshot.data['inr'];
-          String cny = documentSnapshot.data['cny'];
           String usd = documentSnapshot.data['usd'];
           String eur = documentSnapshot.data['eur'];
           String gbp = documentSnapshot.data['gbp'];
@@ -1365,8 +1034,7 @@ class _AccessoriesState extends State<Accessories> {
                             fontWeight: FontWeight.bold,
                           ),
                         ),
-                        subtitle: Text(user.username,
-                          style: TextStyle(color: kIcon),),),
+                       ),
                     ),
 
                     GestureDetector(
@@ -1388,7 +1056,7 @@ class _AccessoriesState extends State<Accessories> {
                               borderRadius: BorderRadius.circular(20.0),
                               child: cachedNetworkImage(shopmediaUrl)),
                         ],),),
-                    df(productname:productname, usd:usd,inr:inr,cny:cny,eur:eur,gbp:gbp, prodId:prodId, ownerId:ownerId,),
+                    df(productname:productname, usd:usd,inr:inr,eur:eur,gbp:gbp, prodId:prodId, ownerId:ownerId,),
 
                     Divider(color: kGrey,),
                   ],
@@ -1406,85 +1074,6 @@ class _AccessoriesState extends State<Accessories> {
       );
     }
 
-  ties(){
-    return  PaginateFirestore(
-//    itemsPerPage: 2,
-      itemBuilderType:
-      PaginateBuilderType.listView,
-      itemBuilder: (index, context, documentSnapshot)   {
-//        DocumentSnapshot ds = snapshot.data.documents[index];
-        String ownerId = documentSnapshot.data['ownerId'];
-        String prodId = documentSnapshot.data['prodId'];
-        String shopmediaUrl = documentSnapshot.data['shopmediaUrl'];
-        String productname = documentSnapshot.data['productname'];
-        String inr = documentSnapshot.data['inr'];
-        String cny = documentSnapshot.data['cny'];
-        String usd = documentSnapshot.data['usd'];
-        String eur = documentSnapshot.data['eur'];
-        String gbp = documentSnapshot.data['gbp'];
-        return
-          FutureBuilder(
-            future: usersRef.document(ownerId).get(),
-            builder: (context, snapshot) {
-              if (!snapshot.hasData) {
-                return circularProgress();
-              }
-              User user = User.fromDocument(snapshot.data);
-//          bool isPostOwner = currentUserId == ownerId;
-              return Column(
-                children: <Widget>[
-                  GestureDetector(
-                    onTap: () => showProfile(context, profileId: user.id),
-                    child: ListTile(
-                      leading: CircleAvatar(
-                        backgroundImage: CachedNetworkImageProvider(user.photoUrl),
-                        backgroundColor: Colors.grey,
-                      ),
-                      title: Text(
-                        user.displayName,
-                        style: TextStyle(
-                          color: kText,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      subtitle: Text(user.username,
-                        style: TextStyle(color: kIcon),),),
-                  ),
-
-                  GestureDetector(
-                    onTap: () => Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => ProductScreen(
-                          prodId: prodId,
-                          userId: ownerId,
-                        ),
-                      ),
-                    ),
-                    child: Stack(
-                      alignment: Alignment.center,
-                      children: <Widget>[
-                        ClipRRect(
-                            borderRadius: BorderRadius.circular(20.0),child: cachedNetworkImage(shopmediaUrl)),
-                      ],),),
-                  df(productname:productname, usd:usd,inr:inr,cny:cny,eur:eur,gbp:gbp, prodId:prodId, ownerId:ownerId,),
-
-                  Divider(color: kGrey,),
-                ],
-
-              );
-
-            },
-          );
-      },
-      query: Firestore.instance.collectionGroup('userProducts').orderBy('timestamp',descending: true)
-          .where('Gender',isEqualTo: 'Men')
-          .where('Category',isEqualTo: 'Ties')
- .where('Category',isEqualTo: 'Bow Ties'),
-
-
-    );
-  }
   Tiesdt(){
     return  PaginateFirestore(
 //    itemsPerPage: 2,
@@ -1497,7 +1086,6 @@ class _AccessoriesState extends State<Accessories> {
         String shopmediaUrl = documentSnapshot.data['shopmediaUrl'];
         String productname = documentSnapshot.data['productname'];
         String inr = documentSnapshot.data['inr'];
-        String cny = documentSnapshot.data['cny'];
         String usd = documentSnapshot.data['usd'];
         String eur = documentSnapshot.data['eur'];
         String gbp = documentSnapshot.data['gbp'];
@@ -1526,8 +1114,7 @@ class _AccessoriesState extends State<Accessories> {
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-                      subtitle: Text(user.username,
-                        style: TextStyle(color: kIcon),),),
+                      ),
                   ),
 
                   GestureDetector(
@@ -1546,7 +1133,7 @@ class _AccessoriesState extends State<Accessories> {
                         ClipRRect(
                             borderRadius: BorderRadius.circular(20.0),child: cachedNetworkImage(shopmediaUrl)),
                       ],),),
-                  df(productname:productname, usd:usd,inr:inr,cny:cny,eur:eur,gbp:gbp, prodId:prodId, ownerId:ownerId,),
+                  df(productname:productname, usd:usd,inr:inr,eur:eur,gbp:gbp, prodId:prodId, ownerId:ownerId,),
 
                   Divider(color: kGrey,),
                 ],
@@ -1575,7 +1162,6 @@ class _AccessoriesState extends State<Accessories> {
         String shopmediaUrl = documentSnapshot.data['shopmediaUrl'];
         String productname = documentSnapshot.data['productname'];
         String inr = documentSnapshot.data['inr'];
-        String cny = documentSnapshot.data['cny'];
         String usd = documentSnapshot.data['usd'];
         String eur = documentSnapshot.data['eur'];
         String gbp = documentSnapshot.data['gbp'];
@@ -1604,8 +1190,7 @@ class _AccessoriesState extends State<Accessories> {
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-                      subtitle: Text(user.username,
-                        style: TextStyle(color: kIcon),),),
+                     ),
                   ),
 
                   GestureDetector(
@@ -1624,7 +1209,7 @@ class _AccessoriesState extends State<Accessories> {
                         ClipRRect(
                             borderRadius: BorderRadius.circular(20.0),child: cachedNetworkImage(shopmediaUrl)),
                       ],),),
-                  df(productname:productname, usd:usd,inr:inr,cny:cny,eur:eur,gbp:gbp, prodId:prodId, ownerId:ownerId,),
+                  df(productname:productname, usd:usd,inr:inr,eur:eur,gbp:gbp, prodId:prodId, ownerId:ownerId,),
 
                   Divider(color: kGrey,),
                 ],
@@ -1653,7 +1238,6 @@ class _AccessoriesState extends State<Accessories> {
         String shopmediaUrl = documentSnapshot.data['shopmediaUrl'];
         String productname = documentSnapshot.data['productname'];
         String inr = documentSnapshot.data['inr'];
-        String cny = documentSnapshot.data['cny'];
         String usd = documentSnapshot.data['usd'];
         String eur = documentSnapshot.data['eur'];
         String gbp = documentSnapshot.data['gbp'];
@@ -1682,8 +1266,7 @@ class _AccessoriesState extends State<Accessories> {
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-                      subtitle: Text(user.username,
-                        style: TextStyle(color: kIcon),),),
+                     ),
                   ),
 
                   GestureDetector(
@@ -1702,7 +1285,7 @@ class _AccessoriesState extends State<Accessories> {
                         ClipRRect(
                             borderRadius: BorderRadius.circular(20.0),child: cachedNetworkImage(shopmediaUrl)),
                       ],),),
-                  df(productname:productname, usd:usd,inr:inr,cny:cny,eur:eur,gbp:gbp, prodId:prodId, ownerId:ownerId,),
+                  df(productname:productname, usd:usd,inr:inr,eur:eur,gbp:gbp, prodId:prodId, ownerId:ownerId,),
 
                   Divider(color: kGrey,),
                 ],
@@ -1731,7 +1314,6 @@ class _AccessoriesState extends State<Accessories> {
         String shopmediaUrl = documentSnapshot.data['shopmediaUrl'];
         String productname = documentSnapshot.data['productname'];
         String inr = documentSnapshot.data['inr'];
-        String cny = documentSnapshot.data['cny'];
         String usd = documentSnapshot.data['usd'];
         String eur = documentSnapshot.data['eur'];
         String gbp = documentSnapshot.data['gbp'];
@@ -1760,8 +1342,7 @@ class _AccessoriesState extends State<Accessories> {
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-                      subtitle: Text(user.username,
-                        style: TextStyle(color: kIcon),),),
+                     ),
                   ),
 
                   GestureDetector(
@@ -1780,7 +1361,7 @@ class _AccessoriesState extends State<Accessories> {
                         ClipRRect(
                             borderRadius: BorderRadius.circular(20.0),child: cachedNetworkImage(shopmediaUrl)),
                       ],),),
-                  df(productname:productname, usd:usd,inr:inr,cny:cny,eur:eur,gbp:gbp, prodId:prodId, ownerId:ownerId,),
+                  df(productname:productname, usd:usd,inr:inr,eur:eur,gbp:gbp, prodId:prodId, ownerId:ownerId,),
 
                   Divider(color: kGrey,),
                 ],
@@ -1809,7 +1390,6 @@ class _AccessoriesState extends State<Accessories> {
         String shopmediaUrl = documentSnapshot.data['shopmediaUrl'];
         String productname = documentSnapshot.data['productname'];
         String inr = documentSnapshot.data['inr'];
-        String cny = documentSnapshot.data['cny'];
         String usd = documentSnapshot.data['usd'];
         String eur = documentSnapshot.data['eur'];
         String gbp = documentSnapshot.data['gbp'];
@@ -1838,8 +1418,7 @@ class _AccessoriesState extends State<Accessories> {
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-                      subtitle: Text(user.username,
-                        style: TextStyle(color: kIcon),),),
+                     ),
                   ),
 
                   GestureDetector(
@@ -1858,7 +1437,7 @@ class _AccessoriesState extends State<Accessories> {
                         ClipRRect(
                             borderRadius: BorderRadius.circular(20.0),child: cachedNetworkImage(shopmediaUrl)),
                       ],),),
-                  df(productname:productname, usd:usd,inr:inr,cny:cny,eur:eur,gbp:gbp, prodId:prodId, ownerId:ownerId,),
+                  df(productname:productname, usd:usd,inr:inr,eur:eur,gbp:gbp, prodId:prodId, ownerId:ownerId,),
 
                   Divider(color: kGrey,),
                 ],
@@ -1887,7 +1466,6 @@ class _AccessoriesState extends State<Accessories> {
         String shopmediaUrl = documentSnapshot.data['shopmediaUrl'];
         String productname = documentSnapshot.data['productname'];
         String inr = documentSnapshot.data['inr'];
-        String cny = documentSnapshot.data['cny'];
         String usd = documentSnapshot.data['usd'];
         String eur = documentSnapshot.data['eur'];
         String gbp = documentSnapshot.data['gbp'];
@@ -1916,8 +1494,7 @@ class _AccessoriesState extends State<Accessories> {
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-                      subtitle: Text(user.username,
-                        style: TextStyle(color: kIcon),),),
+                    ),
                   ),
 
                   GestureDetector(
@@ -1936,7 +1513,7 @@ class _AccessoriesState extends State<Accessories> {
                         ClipRRect(
                             borderRadius: BorderRadius.circular(20.0),child: cachedNetworkImage(shopmediaUrl)),
                       ],),),
-                  df(productname:productname, usd:usd,inr:inr,cny:cny,eur:eur,gbp:gbp, prodId:prodId, ownerId:ownerId,),
+                  df(productname:productname, usd:usd,inr:inr,eur:eur,gbp:gbp, prodId:prodId, ownerId:ownerId,),
                   Divider(color: kGrey,),
                 ],
 
@@ -1964,7 +1541,6 @@ class _AccessoriesState extends State<Accessories> {
         String shopmediaUrl = documentSnapshot.data['shopmediaUrl'];
         String productname = documentSnapshot.data['productname'];
         String inr = documentSnapshot.data['inr'];
-        String cny = documentSnapshot.data['cny'];
         String usd = documentSnapshot.data['usd'];
         String eur = documentSnapshot.data['eur'];
         String gbp = documentSnapshot.data['gbp'];
@@ -1993,8 +1569,7 @@ class _AccessoriesState extends State<Accessories> {
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-                      subtitle: Text(user.username,
-                        style: TextStyle(color: kIcon),),),
+                     ),
                   ),
 
                   GestureDetector(
@@ -2013,7 +1588,7 @@ class _AccessoriesState extends State<Accessories> {
                         ClipRRect(
                             borderRadius: BorderRadius.circular(20.0),child: cachedNetworkImage(shopmediaUrl)),
                       ],),),
-                  df(productname:productname, usd:usd,inr:inr,cny:cny,eur:eur,gbp:gbp, prodId:prodId, ownerId:ownerId,),
+                  df(productname:productname, usd:usd,inr:inr,eur:eur,gbp:gbp, prodId:prodId, ownerId:ownerId,),
 
                   Divider(color: kGrey,),
                 ],
@@ -2042,7 +1617,6 @@ class _AccessoriesState extends State<Accessories> {
         String shopmediaUrl = documentSnapshot.data['shopmediaUrl'];
         String productname = documentSnapshot.data['productname'];
         String inr = documentSnapshot.data['inr'];
-        String cny = documentSnapshot.data['cny'];
         String usd = documentSnapshot.data['usd'];
         String eur = documentSnapshot.data['eur'];
         String gbp = documentSnapshot.data['gbp'];
@@ -2071,8 +1645,7 @@ class _AccessoriesState extends State<Accessories> {
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-                      subtitle: Text(user.username,
-                        style: TextStyle(color: kIcon),),),
+                    ),
                   ),
 
                   GestureDetector(
@@ -2091,7 +1664,7 @@ class _AccessoriesState extends State<Accessories> {
                         ClipRRect(
                             borderRadius: BorderRadius.circular(20.0),child: cachedNetworkImage(shopmediaUrl)),
                       ],),),
-                  df(productname:productname, usd:usd,inr:inr,cny:cny,eur:eur,gbp:gbp, prodId:prodId, ownerId:ownerId,),
+                  df(productname:productname, usd:usd,inr:inr,eur:eur,gbp:gbp, prodId:prodId, ownerId:ownerId,),
 
                   Divider(color: kGrey,),
                 ],
@@ -2120,7 +1693,6 @@ class _AccessoriesState extends State<Accessories> {
         String shopmediaUrl = documentSnapshot.data['shopmediaUrl'];
         String productname = documentSnapshot.data['productname'];
         String inr = documentSnapshot.data['inr'];
-        String cny = documentSnapshot.data['cny'];
         String usd = documentSnapshot.data['usd'];
         String eur = documentSnapshot.data['eur'];
         String gbp = documentSnapshot.data['gbp'];
@@ -2149,8 +1721,7 @@ class _AccessoriesState extends State<Accessories> {
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-                      subtitle: Text(user.username,
-                        style: TextStyle(color: kIcon),),),
+                     ),
                   ),
 
                   GestureDetector(
@@ -2169,7 +1740,7 @@ class _AccessoriesState extends State<Accessories> {
                         ClipRRect(
                             borderRadius: BorderRadius.circular(20.0),child: cachedNetworkImage(shopmediaUrl)),
                       ],),),
-                  df(productname:productname, usd:usd,inr:inr,cny:cny,eur:eur,gbp:gbp, prodId:prodId, ownerId:ownerId,),
+                  df(productname:productname, usd:usd,inr:inr,eur:eur,gbp:gbp, prodId:prodId, ownerId:ownerId,),
 
                   Divider(color: kGrey,),
                 ],
@@ -2198,7 +1769,6 @@ class _AccessoriesState extends State<Accessories> {
         String shopmediaUrl = documentSnapshot.data['shopmediaUrl'];
         String productname = documentSnapshot.data['productname'];
         String inr = documentSnapshot.data['inr'];
-        String cny = documentSnapshot.data['cny'];
         String usd = documentSnapshot.data['usd'];
         String eur = documentSnapshot.data['eur'];
         String gbp = documentSnapshot.data['gbp'];
@@ -2227,8 +1797,7 @@ class _AccessoriesState extends State<Accessories> {
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-                      subtitle: Text(user.username,
-                        style: TextStyle(color: kIcon),),),
+                     ),
                   ),
 
                   GestureDetector(
@@ -2247,7 +1816,7 @@ class _AccessoriesState extends State<Accessories> {
                         ClipRRect(
                             borderRadius: BorderRadius.circular(20.0),child: cachedNetworkImage(shopmediaUrl)),
                       ],),),
-                  df(productname:productname, usd:usd,inr:inr,cny:cny,eur:eur,gbp:gbp, prodId:prodId, ownerId:ownerId,),
+                  df(productname:productname, usd:usd,inr:inr,eur:eur,gbp:gbp, prodId:prodId, ownerId:ownerId,),
 
                   Divider(color: kGrey,),
                 ],
@@ -2259,106 +1828,6 @@ class _AccessoriesState extends State<Accessories> {
       },
       query: Firestore.instance.collectionGroup('userProducts').orderBy('timestamp',descending: true)
           .where('Gender',isEqualTo: 'Men')
-          .where('Category',isEqualTo: 'Phone'),
-
-
-    );
-  }
- Access(){
-    return  PaginateFirestore(
-//    itemsPerPage: 2,
-      itemBuilderType:
-      PaginateBuilderType.listView,
-      itemBuilder: (index, context, documentSnapshot)   {
-//        DocumentSnapshot ds = snapshot.data.documents[index];
-        String ownerId = documentSnapshot.data['ownerId'];
-        String prodId = documentSnapshot.data['prodId'];
-        String shopmediaUrl = documentSnapshot.data['shopmediaUrl'];
-        String productname = documentSnapshot.data['productname'];
-        String inr = documentSnapshot.data['inr'];
-        String cny = documentSnapshot.data['cny'];
-        String usd = documentSnapshot.data['usd'];
-        String eur = documentSnapshot.data['eur'];
-        String gbp = documentSnapshot.data['gbp'];
-        return
-          FutureBuilder(
-            future: usersRef.document(ownerId).get(),
-            builder: (context, snapshot) {
-              if (!snapshot.hasData) {
-                return circularProgress();
-              }
-              User user = User.fromDocument(snapshot.data);
-//          bool isPostOwner = currentUserId == ownerId;
-              return Column(
-                children: <Widget>[
-                  GestureDetector(
-                    onTap: () => showProfile(context, profileId: user.id),
-                    child: ListTile(
-                      leading: CircleAvatar(
-                        backgroundImage: CachedNetworkImageProvider(user.photoUrl),
-                        backgroundColor: Colors.grey,
-                      ),
-                      title: Text(
-                        user.displayName,
-                        style: TextStyle(
-                          color: kText,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      subtitle: Text(user.username,
-                        style: TextStyle(color: kIcon),),),
-                  ),
-
-                  GestureDetector(
-                    onTap: () => Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => ProductScreen(
-                          prodId: prodId,
-                          userId: ownerId,
-                        ),
-                      ),
-                    ),
-                    child: Stack(
-                      alignment: Alignment.center,
-                      children: <Widget>[
-                        ClipRRect(
-                            borderRadius: BorderRadius.circular(20.0),child: cachedNetworkImage(shopmediaUrl)),
-                      ],),),
-                  df(productname:productname, usd:usd,inr:inr,cny:cny,eur:eur,gbp:gbp, prodId:prodId, ownerId:ownerId,),
-
-                  Divider(color: kGrey,),
-                ],
-
-              );
-
-            },
-          );
-      },
-      query: Firestore.instance.collectionGroup('userProducts').orderBy('timestamp',descending: true)
-          .where('Gender',isEqualTo: 'Men')
-          .where('Category',isEqualTo: 'Caps')
-      .where('Category',isEqualTo: 'Balaclavas')
-      .where('Category',isEqualTo: 'Beanies')
-      .where('Category',isEqualTo: 'Berets')
-      .where('Category',isEqualTo: 'Fedora & Trilbies')
-       .where('Category',isEqualTo: 'Bucket Hats')
-      .where('Category',isEqualTo: 'Sun Hats')
-      .where('Category',isEqualTo: 'Belts')
-
-      .where('Category',isEqualTo: 'Scarves')
-      .where('Category',isEqualTo: 'Braces')
-      .where('Category',isEqualTo: 'Suspenders')
-          .where('Category',isEqualTo: 'Ties')
-          .where('Category',isEqualTo: 'Bow Ties')
-          .where('Category',isEqualTo: 'Glasses & Frames')
-      .where('Category',isEqualTo: 'Sunglasses')
-      .where('Category',isEqualTo: 'Gloves')
-      .where('Category',isEqualTo: 'Socks')
-       .where('Category',isEqualTo: 'Pocket Square')
-       .where('Category',isEqualTo: 'Wallets')
-      .where('Category',isEqualTo: 'Umbrellas & Travel')
-
           .where('Category',isEqualTo: 'Phone'),
 
 
@@ -2372,7 +1841,7 @@ class _AccessoriesState extends State<Accessories> {
       quarterTurns: 3,
       child: Expanded(
         child: DefaultTabController(
-            length:14,
+            length:13,
             child: Scaffold(
               backgroundColor: kPrimaryColor,
               appBar:AppBar(
@@ -2383,16 +1852,8 @@ class _AccessoriesState extends State<Accessories> {
                   isScrollable: true,
                   labelColor: Colors.white,
                   unselectedLabelColor: kIcon,
-//                indicatorSize: TabBarIndicatorSize.label,
-//                       indicator: BoxDecoration(
-//                           borderRadius: BorderRadius.only(
-//                               topLeft: Radius.circular(10),
-//                               topRight: Radius.circular(10)
-//                           ),
-//                           color: Colors.white),
 
                   tabs:[
-                    Text("New Arrivals",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5,),),
                     Text("Hats",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5,),),
                     Text("Scarves",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5),),
                     Text("Belts",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5),),
@@ -2410,27 +1871,33 @@ class _AccessoriesState extends State<Accessories> {
                 ),
               ),
 
-              body: RotatedBox(
-                quarterTurns: 1,
-                child: TabBarView(
-                    children:<Widget> [
-                      Access(),
-                      Hats(),
-                      Scarves(),
-                      Belts(),
-                      Braces(),
-                      Ties(),
-                      Glasses(),
-                      Sunglasses(),
-                      Gloves(),
-                      Socks(),
-                      PocketSquare(),
-                      Wallets(),
-                      Umbrellas(),
-                      Phone(),
+              body: Container(
+
+              decoration: BoxDecoration(
+    gradient: fabGradient
+    ) ,
+    alignment: Alignment.center,
+                child: RotatedBox(
+                  quarterTurns: 1,
+                  child: TabBarView(
+                      children:<Widget> [
+                        Hats(),
+                        Scarves(),
+                        Belts(),
+                        Braces(),
+                        Ties(),
+                        Glasses(),
+                        Sunglasses(),
+                        Gloves(),
+                        Socks(),
+                        PocketSquare(),
+                        Wallets(),
+                        Umbrellas(),
+                        Phone(),
 
 
-                    ]),
+                      ]),
+                ),
               ),
             )
         ),

@@ -313,21 +313,22 @@ class _BlogState extends State<Blog> {
                     title: Text(
                       user.displayName,
                       style: TextStyle(
-                        color:  Colors.white,
+                        color:  kText,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    subtitle: Text(user.username,
-                      style: TextStyle(color: kIcon),),),
+                 ),
                 ),
               ),
               SizedBox(height:10.0),
-              Text(title,
-                style: TextStyle(
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 25.0,
-                ),),
+              ListTile(
+                title: Text(title,
+                  style: TextStyle(
+                    color:kText,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 25.0,
+                  ),),
+              ),
             SizedBox(height:10.0),
 
             ClipRRect(
@@ -353,7 +354,7 @@ class _BlogState extends State<Blog> {
 //            Divider(color: kGrey,),
               Text(source,
                 style: TextStyle(
-                  color:  Colors.white,
+                  color:  kText,
                   fontWeight: FontWeight.bold,
                 ),),
               Row(
@@ -387,30 +388,23 @@ class _BlogState extends State<Blog> {
                     ),
                   ),
                   Padding(padding: EdgeInsets.only(right: 20.0)),
-                  GestureDetector(
-                    onTap: () => showComments(
+                  FloatingActionButton(
+                    mini: true,
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(16.0))),
+                    onPressed:() => showComments(
                       context,
                       blogId: blogId,
                       ownerId: ownerId,
-                   mediaUrl: blogmediaUrl,
+                      mediaUrl: blogmediaUrl,
                     ),
                     child: Icon(
-                      Icons.chat,
-                      size: 28.0,
-                      color: kText,
-                    ),
-                  ),
+          Icons.chat,
+          size: 28.0,
+          color: kText,
+          ),
+                  ),//
                 ],
               ),
-//             Container(
-//               height: 400,
-//               child: Column(
-// //                 shrinkWrap: true,
-//                 children: <Widget>[
-//                   BlogComments(blogId: blogId,blogMediaUrl: blogmediaUrl,blogOwnerId: ownerId,)
-//                 ],
-//               ),
-//             ),
             ],
 
             );

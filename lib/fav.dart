@@ -47,7 +47,7 @@ class _FavState extends State<Fav> {
   Widget build(BuildContext context) {
     return
       Scaffold(
-        appBar:  AppBar(backgroundColor: kSecondaryColor,
+        appBar:  AppBar(backgroundColor: kPrimaryColor,
           title: FittedBox(
             child: Text(   'Favorites',
               style: TextStyle(
@@ -56,41 +56,46 @@ class _FavState extends State<Fav> {
           ),
           iconTheme: new IconThemeData(color: kIcon),
         ),
-        backgroundColor: kPrimaryColor,
 
-        body:StreamBuilder(
-            stream: favRef.document(currentUser.id)
-                .collection('userFav')
-                .orderBy('timestamp', descending:true)
-                .snapshots(),
-            builder: (context, snapshot) {
-              if (!snapshot.hasData) {
-                return circularProgress();
-              } else {
-                return new ListView.builder(
-                    itemCount: snapshot.data.documents.length,
-                    itemBuilder: (context, index) {
-                      DocumentSnapshot ds = snapshot.data.documents[index];
-                      return new CartItem(
-                        count: snapshot.data.documents.length,
-                        shopmediaUrl: ds['shopmediaUrl'],
-                        productname: ds['productname'],
-                        eur: ds['eur'],
-                        usd : ds['usd'],
-                        inr: ds['inr'],
-                        cny: ds['cny'],
-                        gbp: ds['gbp'],
-                        photoUrl: ds['photoUrl'],
-                        username: ds['username'],
-                        prodId: ds['prodId'],
-                        userId: ds['userId'],
-                        ownerId: ds['ownerId'],
-                        quantity: ds['quantity'],
-                      );
-                    }
-                );
+        body:Container(
+          decoration: BoxDecoration(
+              gradient: fabGradient
+          ) ,
+          alignment: Alignment.center,
+          child: StreamBuilder(
+              stream: favRef.document(currentUser.id)
+                  .collection('userFav')
+                  .orderBy('timestamp', descending:true)
+                  .snapshots(),
+              builder: (context, snapshot) {
+                if (!snapshot.hasData) {
+                  return circularProgress();
+                } else {
+                  return new ListView.builder(
+                      itemCount: snapshot.data.documents.length,
+                      itemBuilder: (context, index) {
+                        DocumentSnapshot ds = snapshot.data.documents[index];
+                        return new CartItem(
+                          count: snapshot.data.documents.length,
+                          shopmediaUrl: ds['shopmediaUrl'],
+                          productname: ds['productname'],
+                          eur: ds['eur'],
+                          usd : ds['usd'],
+                          inr: ds['inr'],
+                          cny: ds['cny'],
+                          gbp: ds['gbp'],
+                          photoUrl: ds['photoUrl'],
+                          username: ds['username'],
+                          prodId: ds['prodId'],
+                          userId: ds['userId'],
+                          ownerId: ds['ownerId'],
+                          quantity: ds['quantity'],
+                        );
+                      }
+                  );
+                }
               }
-            }
+          ),
         ),
 
 

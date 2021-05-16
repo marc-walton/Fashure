@@ -1,7 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fashow/CollectionsUplaod.dart';
-import 'package:fashow/Search_screen.dart';
 import 'package:fashow/custom_image.dart';
 import 'package:fashow/upload_editorial.dart';
 import 'package:flutter/material.dart';
@@ -1045,7 +1044,10 @@ collectionGroup(){
 
           backgroundColor: Colors.black38,
           onPressed: (){
-            Get.to(UploadColl(currentUser: currentUser));
+            WidgetsBinding.instance.addPostFrameCallback((_){
+              Navigator.push(context, MaterialPageRoute(builder: (context) =>UploadEdit(currentUser: currentUser, )));
+            },) ;
+            // Get.to(UploadEdit(currentUser: currentUser));
           },
           // async{ Navigator.push(context, MaterialPageRoute(builder: (context) =>UploadEdit(currentUser: currentUser)));
           // },
@@ -1083,84 +1085,69 @@ class Collection extends StatelessWidget {
             }
             User user = User.fromDocument(snapshot.data);
 //          bool isPostOwner = currentUserId == ownerId;
-            return Column(children: <Widget>[
-              ListTile(
-                leading: GestureDetector(
-                  onTap: () => showProfile(context, profileId: user.id),
-                  child: CircleAvatar(
-                    backgroundImage: CachedNetworkImageProvider(user.photoUrl),
-                    backgroundColor: Colors.grey,
-                  ),
-                ),
-                title: GestureDetector(
-                  onTap: () => showProfile(context, profileId: user.id),
-                  child: Text(
-                    user.displayName,
-                    style: TextStyle(
-                      color: kText,
-                      fontWeight: FontWeight.bold,
+            return Card(
+              color: trans,
+              child: Column(children: <Widget>[
+                ListTile(
+                  leading: GestureDetector(
+                    onTap: () => showProfile(context, profileId: user.id),
+                    child: CircleAvatar(
+                      backgroundImage: CachedNetworkImageProvider(user.photoUrl),
+                      backgroundColor: Colors.grey,
                     ),
                   ),
-                ),
-                subtitle: GestureDetector(
-                  onTap: () => showProfile(context, profileId: user.id),
-                  child: Text(user.username,
-                    style: TextStyle(color: kIcon),),
-                ),),
-              Text(documentSnapshot.data['title'],
-                  maxLines: 3,
-                  style: new TextStyle(
-                      fontWeight: FontWeight.w500,
-                      color: Colors.white,
-                      fontSize: 18.0)),
-              Column(
-                children: <Widget>[
-                  GestureDetector(
-                    onTap:() {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => CollScreen(
-                            collId: documentSnapshot.data['collId'],
-                            userId:  documentSnapshot.data['ownerId'],
-                          ),
-                        ),
-                      );
-                    },
-                    child: Container(
-                        margin: EdgeInsets.all(10.0),
-                        height: MediaQuery.of(context).size.height/2,
-                        // decoration: BoxDecoration(
-                        //   color: Colors.white,
-                        // ),
-                        width: MediaQuery.of(context).size.width,
-                        child:
-                        CachedNetworkImage(
-                          imageUrl:  documentSnapshot.data['headerImage'],
-                        )
-                    ),
-                  ),
-                ],
-              ),
-              GFButton(
-                onPressed: ()  {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => CollScreen(
-                        collId: documentSnapshot.data['collId'],
-                        userId:  documentSnapshot.data['ownerId'],
+                  title: GestureDetector(
+                    onTap: () => showProfile(context, profileId: user.id),
+                    child: Text(
+                      user.displayName,
+                      style: TextStyle(
+                        color: kText,
+                        fontWeight: FontWeight.bold,
                       ),
                     ),
-                  );
-                },
-                text: "View Colloction",
-                shape: GFButtonShape.pills,
+                  ),
+                 ),
+                ListTile(
+                  title: Text(documentSnapshot.data['title'],
+                      maxLines: 3,
+                      style: new TextStyle(
+                          fontWeight: FontWeight.w500,
+                          color:kText,
+                          fontSize: 18.0)),
+                ),
+                Column(
+                  children: <Widget>[
+                    GestureDetector(
+                      onTap:() {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => CollScreen(
+                              collId: documentSnapshot.data['collId'],
+                              userId:  documentSnapshot.data['ownerId'],
+                            ),
+                          ),
+                        );
+                      },
+                      child: Container(
+                          margin: EdgeInsets.all(10.0),
+                          height: MediaQuery.of(context).size.height/2,
+                          // decoration: BoxDecoration(
+                          //   color: Colors.white,
+                          // ),
+                          width: MediaQuery.of(context).size.width,
+                          child:
+                          CachedNetworkImage(
+                            imageUrl:  documentSnapshot.data['headerImage'],
+                          )
+                      ),
+                    ),
+                  ],
+                ),
+
+              ],
 
               ),
-              Divider(color: kGrey,),
-            ],
-
             );
           },
         );
@@ -1179,14 +1166,7 @@ class Blog extends StatelessWidget {
         itemBuilderType:
         PaginateBuilderType.listView, //Change types accordingly
         itemBuilder: (index, context, documentSnapshot) {
-          // _listOfImages = [];
-          // for (int i = 0;
-          // i <
-          //     documentSnapshot.data['blogmediaUrl']
-          //         .length;
-          // i++) {
-          //   _listOfImages.add(NetworkImage( documentSnapshot.data['blogmediaUrl'][i]));
-          // }
+
           return new  FutureBuilder(
             future: usersRef.document( documentSnapshot.data['ownerId']).get(),
             builder: (context, snapshot) {

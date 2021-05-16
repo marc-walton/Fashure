@@ -485,19 +485,23 @@ scrollDirection:Axis.vertical,
     ),
     ),
     Padding(padding: EdgeInsets.only(right: 20.0)),
-    GestureDetector(
-    onTap: () => showComments(
-    context,
-    collId: collId,
-    ownerId: ownerId,
-   mediaUrl: headerImage,
-    ),
-    child: Icon(
-    Icons.chat,
-    size: 28.0,
-    color: kText,
-    ),
-    ),
+      FloatingActionButton(
+        mini: true,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(16.0))),
+        onPressed: () => showComments(
+          context,
+          collId: collId,
+          ownerId: ownerId,
+          mediaUrl: headerImage,
+        ),
+        child:
+        Icon(
+          Icons.chat,
+          size: 28.0,
+          color: kGrey,
+        ),
+      ),//
+
     ],
     ),
     ],

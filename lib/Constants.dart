@@ -2,11 +2,12 @@ import 'package:flutter/material.dart';
 //import 'package:flutter_svg/svg.dart';
 import 'package:flutter/cupertino.dart';
 
-const Color kPrimaryColor = Color(0xff440a67);
-// const Color kPrimaryColor = (0xffbae1ff);
+const Color kPrimaryColor = Color(0xff240638);
+const Color Bappbar = Color(0xff240638);
 // const Color kPrimaryColor = Color(0xffffd194);
 const Color appbar = Colors.black26;
-const Color Bappbar = Colors.transparent;
+const Color trans = Colors.transparent;
+const Color transwhite = Colors.white38;
 
  final Gradient fabGradient = LinearGradient(
     colors: [ Color(0xff70e1f5),Color(0xffffd194)],
