@@ -57,17 +57,7 @@ class _DesignerState extends State<Designer>  with  TickerProviderStateMixin{
   bool isLiked;
   bool showHeart = false;
   int followerCount = 0;
-//  getFollowers() async {
-//    QuerySnapshot snapshot = await followersRef
-//        .document()
-//        .collection('userFollowers')
-//        .getDocuments();
-//    setState(() {
-//      followerCount = snapshot.documents.length;
-//
-//    });
-//
-//  }
+
   editProfile() {
     Navigator.push(
         context,
@@ -238,7 +228,7 @@ class _DesignerState extends State<Designer>  with  TickerProviderStateMixin{
   Widget build(BuildContext context) {
 
     return SafeArea(
-      child: Scaffold(            backgroundColor: kPrimaryColor,
+      child: Scaffold(
         appBar: PreferredSize(
         preferredSize: Size.fromHeight(100.0),
         child: AppBar(title:  FittedBox(fit:BoxFit.contain,child: Text("Freelancers",style: TextStyle(fontSize: 30,fontFamily: 'MajorMonoDisplay'),)),
@@ -252,7 +242,7 @@ isScrollable: true,
                 FaIcon(FontAwesomeIcons.pencilRuler),
                 SvgPicture.asset(
                   'assets/img/F-PRIVATE-MODE.svg',
-                  color: kText,
+                  color: Colors.white,
                   height: 30,
                 ),
                 Icon(Entypo.man,),
@@ -670,21 +660,16 @@ followerstile(){
             mainAxisSize: MainAxisSize.min,
             children:  <Widget> [
               Divider(color: Colors.grey,),
-              ListTile(
-                leading: CircleAvatar(
-                  backgroundImage: CachedNetworkImageProvider(user.photoUrl),
-                  backgroundColor: Colors.grey,
-                ),
-                title: Text(user.displayName,style: TextStyle(color: Colors.white),),
-                subtitle: GestureDetector(
-                  onTap: () => showProfile(context, profileId: user.id),
-                  child: Text(
-                    user.username,
-                    style: TextStyle(
-                      color: kText,
-                      fontWeight: FontWeight.bold,
-                    ),
+          GestureDetector(
+            onTap: () => showProfile(context, profileId: user.id),
+
+                child: ListTile(
+                  leading: CircleAvatar(
+                    backgroundImage: CachedNetworkImageProvider(user.photoUrl),
+                    backgroundColor: Colors.grey,
                   ),
+                  title: Text(user.displayName,style: TextStyle(color: kText),),
+
                 ),
               ),
               Align(
@@ -746,10 +731,7 @@ followerstile(){
               ),
               SizedBox(height: 10.0,),
               hireme(),
-//
-//                  getPost(),
 
-//              Divider(),
             ],
           ),
 
@@ -766,254 +748,4 @@ followerstile(){
 
 
 
-//class DItem extends StatelessWidget {
-////   final Profile  followerCount;
-//  final User user;
-//  UserModel receiver;
-//  String products;
-//  DItem(this.user
-//      );
-//
-//  getPost(){
-//    return StreamBuilder(
-//        stream:  Firestore.instance.collection('posts').document(user.id
-//        ).collection('userPosts').snapshots(),
-//
-//        // ignore: missing_return
-//        builder: (context,snapshot) {
-//          if(!snapshot.hasData){
-//            return Text('text');
-//          }
-//          return
-//            Container(
-//              height: 200,
-//              child: ListView.builder(
-//                  shrinkWrap: true,
-//                  scrollDirection: Axis.horizontal,
-//                  itemCount: snapshot.data.documents.length,
-//                  itemBuilder: (context, index) {
-//
-//                    DocumentSnapshot docSnapshot = snapshot.data.documents[index];
-//                    return
-//
-//
-//
-//                      Padding(
-//                          padding: EdgeInsets.all(5.0),
-//                          child: ClipRRect(
-//                            borderRadius: BorderRadius.circular(20.0),
-//                            child: GestureDetector(
-//                                onTap: (){
-//                                  Navigator.push(
-//                                    context,
-//                                    MaterialPageRoute(
-//                                      builder: (context) => PostScreen(
-//                                        postId: docSnapshot["postId"],
-//                                        userId: docSnapshot["ownerId"],
-//                                      ),
-//                                    ),
-//                                  );
-//                                },
-//                                child: CachedNetworkImage( imageUrl: docSnapshot["mediaUrl"],)
-//                            ),
-//                          )
-//                      );
-//                  }
-//              ),
-//            );
-//
-//
-//
-//
-//        }
-//    );
-//  }
-//        @override
-//
-//  Widget build(BuildContext context) {
-//    return Column(
-//      mainAxisSize: MainAxisSize.min,
-//      children: [
-//        Container(
-//              decoration: BoxDecoration(
-//
-//                  borderRadius: BorderRadius.all(Radius.circular(20.0))
-//              ),
-//              margin: EdgeInsets.only(top:10.0,left: 10.0,right: 10.0, bottom: 10.0 ),
-//
-//              child: Column(
-//                mainAxisSize: MainAxisSize.min,
-//                children:  <Widget> [
-//                  Divider(color: Colors.grey,),
-//                  ListTile(
-//                    leading: CircleAvatar(
-//                      backgroundImage: CachedNetworkImageProvider(user.photoUrl),
-//                      backgroundColor: Colors.grey,
-//                    ),
-//                    title: Text(user.displayName,style: TextStyle(color: Colors.white),),
-//                    subtitle: GestureDetector(
-//                      onTap: () => showProfile(context, profileId: user.id),
-//                      child: Text(
-//                        user.username,
-//                        style: TextStyle(
-//                          color: kText,
-//                          fontWeight: FontWeight.bold,
-//                        ),
-//                      ),
-//                    ),
-//                  ),
-//                  Align(
-//                    alignment: Alignment.center,
-//                    child: Row(
-//                      mainAxisAlignment:MainAxisAlignment.spaceEvenly,
-//                      children: <Widget>[
-//                        Container(
-//                          decoration: BoxDecoration(
-//                       color: kPrimaryColor,
-//                              boxShadow: [BoxShadow(
-//            color: Colors.grey,
-//            blurRadius: 5.0,
-//            ),]
-//                              ,borderRadius: BorderRadius.all(Radius.circular(10.0))
-//                          ),
-//                          height: 60,
-//                          width: 60,
-//                          child: Column(
-//                            mainAxisAlignment: MainAxisAlignment.center,
-//                            children: [
-//                              Text('3',style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
-//                              Text('Followers',style: TextStyle(color: Colors.white),),
-//                            ],
-//                          ),
-//                        ) ,Container(
-//                          decoration: BoxDecoration(
-//                              color: kPrimaryColor,
-//                              boxShadow: [BoxShadow(
-//                                color: Colors.grey,
-//                                blurRadius: 5.0,
-//                              ),]
-//                              ,borderRadius: BorderRadius.all(Radius.circular(10.0))
-//                          ),
-//                          height: 60,
-//                          width: 60,
-//                          child: Column(
-//                            mainAxisAlignment: MainAxisAlignment.center,
-//                            children: [
-//                               Text('780',style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
-//                               Text('Clients',style: TextStyle(color: Colors.white),),
-//                            ],
-//                          ),
-//                        ) ,Container(
-//
-//                          decoration: BoxDecoration(
-//                              color: kPrimaryColor,
-//                              boxShadow: [BoxShadow(
-//                                color: Colors.grey,
-//                                blurRadius: 5.0,
-//                              ),]
-//                              ,borderRadius: BorderRadius.all(Radius.circular(10.0))
-//                          ),
-//                          height: 60,
-//                          width: 60,
-//                          child: Column(
-//                            mainAxisAlignment: MainAxisAlignment.center,
-//                            children: [
-//                              Row(
-//                                 children: [
-//                                   SizedBox(width: 6.0,),
-//                                   Icon(Icons.favorite,color: Colors.pink,),
-//                                     SizedBox(width: 3.0,),
-//                                   Text('4.5',style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
-//                                 ],
-//                               ),
-//
-//                               Text('Rating',style: TextStyle(color: Colors.white),),
-//                            ],
-//                          ),
-//                        )
-//
-//                      ],
-//                    ),
-//                  ),
-//                  SizedBox(height: 10.0,),
-//                  Row(
-//                    mainAxisAlignment:MainAxisAlignment.spaceEvenly,
-//            children: <Widget>[ GestureDetector(
-//
-//                      onTap: () => showProfile(context, profileId: user.id),
-//                      child: Container(
-//
-//                        height: 40.0,
-//                        width: 100.0,
-////
-//                        decoration: BoxDecoration(
-//                            color: kblue,
-//            borderRadius: BorderRadius.all(Radius.circular(20))
-//                        ),
-//                        child: Align(
-//                          alignment: Alignment.center,
-//                          child: Row(
-//                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-//                            children: [
-//                              Icon(EvaIcons.personOutline),
-//                              Text(
-//                                'Profile',
-//                                style: TextStyle(
-//                                  color: kText,
-//                                  fontWeight: FontWeight.bold,
-//                                ),
-//                              ),
-//                            ],
-//                          ),
-//                        ),
-//                      ),
-//                    ),
-//              GestureDetector(
-//                      onTap: () => showProfile(context, profileId: user.id),
-//                      child: Container(
-//
-//                        height: 40.0,
-//                        width: 100.0,
-////
-//                        decoration: BoxDecoration(
-//                            color: kblue,
-//            borderRadius: BorderRadius.all(Radius.circular(20))
-//                        ),
-//                        child: Align(
-//                          alignment: Alignment.center,
-//                          child: Row(
-//                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-//                            children: [
-//                              Icon(EvaIcons.emailOutline),
-//                              Text(
-//                                'Hire me !',
-//                                style: TextStyle(
-//                                  color: kText,
-//                                  fontWeight: FontWeight.bold,
-//                                ),
-//                              ),
-//                            ],
-//                          ),
-//                        ),
-//                      ),
-//                    ),
-//                  ]
-//                  ),
-////
-////                  getPost(),
-//
-////              Divider(),
-//                ],
-//              ),
-//
-//            ),
-//        Container(
-//          child:  getPost(),
-//        )
-//
-//      ],
-//    );
-//
-//  }
-//}
 

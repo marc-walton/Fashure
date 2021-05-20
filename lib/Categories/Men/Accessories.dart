@@ -26,83 +26,84 @@ class _AccessoriesState extends State<Accessories> {
   df({String productname,String usd,String inr,String cny,String eur,String gbp,String prodId,String ownerId,}){
     if(currentUser.country=='India'){
       return
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: <Widget>[
-            Text(productname, style: TextStyle(
-                color: kText,
-                fontSize: 20.0,
-                fontWeight: FontWeight.bold),),
-            Text( "₹$inr",style: TextStyle(color: kText,
-                fontSize: 20.0,
-                fontWeight: FontWeight.bold)),
 
-          ],
-        );
+      ListTile(
+        title:            Text(productname, style: TextStyle(
+            color: kText,
+            fontSize: 15.0,
+            fontWeight: FontWeight.bold),),
+subtitle:            Text( "₹$inr",style: TextStyle(color: kText,
+    fontSize: 20.0,
+    fontWeight: FontWeight.bold)),
+
+      );
 
   }
     else if(currentUser.country=='US'){
       return
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: <Widget>[
-            Text(productname, style: TextStyle(
-                color: kText,
-                fontSize: 20.0,
-                fontWeight: FontWeight.bold),),
-            Text( "\u0024 $usd",style: TextStyle(color: kText,
-                fontSize: 20.0,
-                fontWeight: FontWeight.bold)),
-          ],
-        );
 
-  }
+      ListTile(
+        title:                      Text(productname, style: TextStyle(
+            color: kText,
+            fontSize: 15.0,
+            fontWeight: FontWeight.bold),),
+
+        subtitle:          Text( "\u0024 $usd",style: TextStyle(color: kText,
+            fontSize: 20.0,
+            fontWeight: FontWeight.bold)),
+
+      );
+
+
+    }
     else if (currentUser.country == 'Europe'){
       return
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: <Widget>[
-            Text(productname, style: TextStyle(
-                color: kText,
-                fontSize: 20.0,
-                fontWeight: FontWeight.bold),),
-            Text( "€ $eur",style: TextStyle(color: kText,
-                fontSize: 20.0,
-                fontWeight: FontWeight.bold)),
-          ],
-        );
+
+      ListTile(
+        title:                      Text(productname, style: TextStyle(
+            color: kText,
+            fontSize: 15.0,
+            fontWeight: FontWeight.bold),),
+
+        subtitle:           Text( "€ $eur",style: TextStyle(color: kText,
+            fontSize: 20.0,
+            fontWeight: FontWeight.bold)),
+
+      );
 
   }
     else if (currentUser.country == 'UK'){
       return
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: <Widget>[
-            Text(productname, style: TextStyle(
-                color: kText,
-                fontSize: 20.0,
-                fontWeight: FontWeight.bold),),
-            Text( "£  $gbp ",style: TextStyle(color: kText,
-                fontSize: 20.0,
-                fontWeight: FontWeight.bold)),
-          ],
-        );
+
+      ListTile(
+        title:                    Text(productname, style: TextStyle(
+            color: kText,
+            fontSize: 15.0,
+            fontWeight: FontWeight.bold),),
+
+        subtitle:                     Text( "£  $gbp ",style: TextStyle(color: kText,
+            fontSize: 20.0,
+            fontWeight: FontWeight.bold)),
+
+
+      );
 
   }
     else{
       return
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: <Widget>[
-            Text(productname, style: TextStyle(
-                color: kText,
-                fontSize: 20.0,
-                fontWeight: FontWeight.bold),),
-            Text( "\u0024 $usd",style: TextStyle(color: kText,
-                fontSize: 20.0,
-                fontWeight: FontWeight.bold)),
-          ],
+
+        ListTile(
+          title:                      Text(productname, style: TextStyle(
+              color: kText,
+              fontSize: 15.0,
+              fontWeight: FontWeight.bold),),
+
+          subtitle:          Text( "\u0024 $usd",style: TextStyle(color: kText,
+              fontSize: 20.0,
+              fontWeight: FontWeight.bold)),
+
         );
+
 
     }
   }
@@ -135,18 +136,24 @@ class _AccessoriesState extends State<Accessories> {
                 ),
               ),
 
-              body: RotatedBox(
-                quarterTurns: 1,
-                child: TabBarView(
-                    children:<Widget> [
-                      Caps(),
-                      Balaclavas(),
-                      Beanies(),
-                      Berets(),
-                      Fedora(),
-                      Bucket(),
-                      Sun(),
-                    ]),
+              body: Container(
+                decoration: BoxDecoration(
+                    gradient: fabGradient
+                ) ,
+                alignment: Alignment.center,
+                child: RotatedBox(
+                  quarterTurns: 1,
+                  child: TabBarView(
+                      children:<Widget> [
+                        Caps(),
+                        Balaclavas(),
+                        Beanies(),
+                        Berets(),
+                        Fedora(),
+                        Bucket(),
+                        Sun(),
+                      ]),
+                ),
               ),
             )
         ),
@@ -154,7 +161,6 @@ class _AccessoriesState extends State<Accessories> {
     );
   }
   Braces(){
-    // SizeConfig().init(context);
     return
       RotatedBox(
         quarterTurns: 3,
@@ -179,13 +185,19 @@ class _AccessoriesState extends State<Accessories> {
                   ),
                 ),
 
-                body: RotatedBox(
-                  quarterTurns: 1,
-                  child: TabBarView(
-                      children:<Widget> [
-                        Bracesdt(),
-                        Suspenders(),
-                      ]),
+                body: Container(
+                  decoration: BoxDecoration(
+                      gradient: fabGradient
+                  ) ,
+                  alignment: Alignment.center,
+                  child: RotatedBox(
+                    quarterTurns: 1,
+                    child: TabBarView(
+                        children:<Widget> [
+                          Bracesdt(),
+                          Suspenders(),
+                        ]),
+                  ),
                 ),
               )
           ),
@@ -219,13 +231,19 @@ class _AccessoriesState extends State<Accessories> {
                   ),
                 ),
 
-                body: RotatedBox(
-                  quarterTurns: 1,
-                  child: TabBarView(
-                      children:<Widget> [
-                        Tiesdt(),
-                        Bow(),
-                      ]),
+                body: Container(
+                  decoration: BoxDecoration(
+                      gradient: fabGradient
+                  ) ,
+                  alignment: Alignment.center,
+                  child: RotatedBox(
+                    quarterTurns: 1,
+                    child: TabBarView(
+                        children:<Widget> [
+                          Tiesdt(),
+                          Bow(),
+                        ]),
+                  ),
                 ),
               )
           ),
@@ -1843,7 +1861,6 @@ class _AccessoriesState extends State<Accessories> {
         child: DefaultTabController(
             length:13,
             child: Scaffold(
-              backgroundColor: kPrimaryColor,
               appBar:AppBar(
                 toolbarHeight: SizeConfig.safeBlockHorizontal * 8,
                 backgroundColor: kPrimaryColor,

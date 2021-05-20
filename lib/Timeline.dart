@@ -1075,8 +1075,6 @@ class Collection extends StatelessWidget {
       itemBuilderType:
       PaginateBuilderType.listView,
       itemBuilder: (index, context, documentSnapshot)  {
-//        DocumentSnapshot ds = snapshot.data.documents[index];
-//    Post posts = Post.fromDocument(documentSnapshot.data);
         return new  FutureBuilder(
           future: usersRef.document( documentSnapshot.data['ownerId']).get(),
           builder: (context, snapshot) {
@@ -1086,7 +1084,7 @@ class Collection extends StatelessWidget {
             User user = User.fromDocument(snapshot.data);
 //          bool isPostOwner = currentUserId == ownerId;
             return Card(
-              color: trans,
+              color: Color(0XFFb3b3ff).withOpacity(0.3),
               child: Column(children: <Widget>[
                 ListTile(
                   leading: GestureDetector(

@@ -22,200 +22,84 @@ class _BabytrBState extends State<BabytrB> {
   df({String productname,String usd,String inr,String cny,String eur,String gbp,String prodId,String ownerId,}){
     if(currentUser.country=='India'){
       return
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: <Widget>[
-            Text(productname, style: TextStyle(
-                color: kText,
-                fontSize: 20.0,
-                fontWeight: FontWeight.bold),),
-            Text( "₹$inr",style: TextStyle(color: kText,
-                fontSize: 20.0,
-                fontWeight: FontWeight.bold)),
-            GFButton(
-              onPressed: () =>
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) =>
-                          ProductScreen(
-                            prodId: prodId,
-                            userId: ownerId,
-                          ),
-                    ),
-                  ),
-              text: "More",
-              icon: Icon(Icons.card_travel),
-              shape: GFButtonShape.pills,
 
-            ),
-          ],
+        ListTile(
+          title:            Text(productname, style: TextStyle(
+              color: kText,
+              fontSize: 15.0,
+              fontWeight: FontWeight.bold),),
+          subtitle:            Text( "₹$inr",style: TextStyle(color: kText,
+              fontSize: 20.0,
+              fontWeight: FontWeight.bold)),
+
         );
 
     }
     else if(currentUser.country=='US'){
       return
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: <Widget>[
-            Text(productname, style: TextStyle(
-                color: kText,
-                fontSize: 20.0,
-                fontWeight: FontWeight.bold),),
-            Text( "\u0024 $usd",style: TextStyle(color: kText,
-                fontSize: 20.0,
-                fontWeight: FontWeight.bold)),
-            GFButton(
-              onPressed: () =>
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) =>
-                          ProductScreen(
-                            prodId: prodId,
-                            userId: ownerId,
-                          ),
-                    ),
-                  ),
-              text: "More",
-              icon: Icon(Icons.card_travel),
-              shape: GFButtonShape.pills,
 
-            ),
-          ],
+        ListTile(
+          title:                      Text(productname, style: TextStyle(
+              color: kText,
+              fontSize: 15.0,
+              fontWeight: FontWeight.bold),),
+
+          subtitle:          Text( "\u0024 $usd",style: TextStyle(color: kText,
+              fontSize: 20.0,
+              fontWeight: FontWeight.bold)),
+
         );
 
-    }
-    else if (currentUser.country == 'China') {
-      return
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: <Widget>[
-            Text(productname, style: TextStyle(
-                color: kText,
-                fontSize: 20.0,
-                fontWeight: FontWeight.bold),),
-            Text( "¥ $cny",style: TextStyle(color: kText,
-                fontSize: 20.0,
-                fontWeight: FontWeight.bold)),
-            GFButton(
-              onPressed: () =>
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) =>
-                          ProductScreen(
-                            prodId: prodId,
-                            userId: ownerId,
-                          ),
-                    ),
-                  ),
-              text: "More",
-              icon: Icon(Icons.card_travel),
-              shape: GFButtonShape.pills,
-
-            ),
-          ],
-        );
 
     }
     else if (currentUser.country == 'Europe'){
       return
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: <Widget>[
-            Text(productname, style: TextStyle(
-                color: kText,
-                fontSize: 20.0,
-                fontWeight: FontWeight.bold),),
-            Text( "€ $eur",style: TextStyle(color: kText,
-                fontSize: 20.0,
-                fontWeight: FontWeight.bold)),
-            GFButton(
-              onPressed: () =>
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) =>
-                          ProductScreen(
-                            prodId: prodId,
-                            userId: ownerId,
-                          ),
-                    ),
-                  ),
-              text: "More",
-              icon: Icon(Icons.card_travel),
-              shape: GFButtonShape.pills,
 
-            ),
-          ],
+        ListTile(
+          title:                      Text(productname, style: TextStyle(
+              color: kText,
+              fontSize: 15.0,
+              fontWeight: FontWeight.bold),),
+
+          subtitle:           Text( "€ $eur",style: TextStyle(color: kText,
+              fontSize: 20.0,
+              fontWeight: FontWeight.bold)),
+
         );
 
     }
     else if (currentUser.country == 'UK'){
       return
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: <Widget>[
-            Text(productname, style: TextStyle(
-                color: kText,
-                fontSize: 20.0,
-                fontWeight: FontWeight.bold),),
-            Text( "£  $gbp ",style: TextStyle(color: kText,
-                fontSize: 20.0,
-                fontWeight: FontWeight.bold)),
-            GFButton(
-              onPressed: () =>
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) =>
-                          ProductScreen(
-                            prodId: prodId,
-                            userId: ownerId,
-                          ),
-                    ),
-                  ),
-              text: "More",
-              icon: Icon(Icons.card_travel),
-              shape: GFButtonShape.pills,
 
-            ),
-          ],
+        ListTile(
+          title:                    Text(productname, style: TextStyle(
+              color: kText,
+              fontSize: 15.0,
+              fontWeight: FontWeight.bold),),
+
+          subtitle:                     Text( "£  $gbp ",style: TextStyle(color: kText,
+              fontSize: 20.0,
+              fontWeight: FontWeight.bold)),
+
+
         );
 
     }
     else{
       return
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: <Widget>[
-            Text(productname, style: TextStyle(
-                color: kText,
-                fontSize: 20.0,
-                fontWeight: FontWeight.bold),),
-            Text( "\u0024 $usd",style: TextStyle(color: kText,
-                fontSize: 20.0,
-                fontWeight: FontWeight.bold)),
-            GFButton(
-              onPressed: () =>
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) =>
-                          ProductScreen(
-                            prodId: prodId,
-                            userId: ownerId,
-                          ),
-                    ),
-                  ),
-              text: "More",
-              icon: Icon(Icons.card_travel),
-              shape: GFButtonShape.pills,
 
-            ),
-          ],
+        ListTile(
+          title:                      Text(productname, style: TextStyle(
+              color: kText,
+              fontSize: 15.0,
+              fontWeight: FontWeight.bold),),
+
+          subtitle:          Text( "\u0024 $usd",style: TextStyle(color: kText,
+              fontSize: 20.0,
+              fontWeight: FontWeight.bold)),
+
         );
+
 
     }
   }
@@ -231,7 +115,6 @@ class _BabytrBState extends State<BabytrB> {
           String shopmediaUrl = documentSnapshot.data['shopmediaUrl'];
           String productname = documentSnapshot.data['productname'];
           String inr = documentSnapshot.data['inr'];
-          String cny = documentSnapshot.data['cny'];
           String usd = documentSnapshot.data['usd'];
           String eur = documentSnapshot.data['eur'];
           String gbp = documentSnapshot.data['gbp'];
@@ -260,8 +143,7 @@ class _BabytrBState extends State<BabytrB> {
                             fontWeight: FontWeight.bold,
                           ),
                         ),
-                        subtitle: Text(user.username,
-                          style: TextStyle(color: kIcon),),),
+                      ),
                     ),
 
                     GestureDetector(
@@ -280,7 +162,8 @@ class _BabytrBState extends State<BabytrB> {
                           ClipRRect(
                               borderRadius: BorderRadius.circular(20.0),child: cachedNetworkImage(shopmediaUrl)),
                         ],),),
-                    df(productname:productname, usd:usd,inr:inr,cny:cny,eur:eur,gbp:gbp, prodId:prodId, ownerId:ownerId,),
+                    df(productname:productname, usd:usd,inr:inr,eur:eur,gbp:gbp, prodId:prodId, ownerId:ownerId,),
+
                     Divider(color: kGrey,),
                   ],
 
@@ -303,7 +186,6 @@ class _BabytrBState extends State<BabytrB> {
         child: DefaultTabController(
             length:1,
             child: Scaffold(
-              backgroundColor: kPrimaryColor,
               appBar:AppBar(
                 toolbarHeight: SizeConfig.safeBlockHorizontal * 8,
                 backgroundColor: kPrimaryColor,
@@ -327,12 +209,17 @@ class _BabytrBState extends State<BabytrB> {
                 ),
               ),
 
-              body: RotatedBox(
-                quarterTurns: 1,
-                child: TabBarView(
-                    children:<Widget> [
-                      BBT(),
-                                          ]),
+              body: Container( decoration: BoxDecoration(
+                  gradient: fabGradient
+              ) ,
+                alignment: Alignment.center,
+                child: RotatedBox(
+                  quarterTurns: 1,
+                  child: TabBarView(
+                      children:<Widget> [
+                        BBT(),
+                                            ]),
+                ),
               ),
             )
         ),

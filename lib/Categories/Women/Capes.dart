@@ -5,7 +5,7 @@ import 'package:fashow/ActivityFeed.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:getflutter/components/button/gf_button.dart';
 import 'package:getflutter/shape/gf_button_shape.dart';
-import 'package:image/image.dart';
+
 import 'package:paginate_firestore/paginate_firestore.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fashow/HomePage.dart';
@@ -22,200 +22,84 @@ class _CapesWState extends State<CapesW> {
   df({String productname,String usd,String inr,String cny,String eur,String gbp,String prodId,String ownerId,}){
     if(currentUser.country=='India'){
       return
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: <Widget>[
-            Text(productname, style: TextStyle(
-                color: kText,
-                fontSize: 20.0,
-                fontWeight: FontWeight.bold),),
-            Text( "₹$inr",style: TextStyle(color: kText,
-                fontSize: 20.0,
-                fontWeight: FontWeight.bold)),
-            GFButton(
-              onPressed: () =>
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) =>
-                          ProductScreen(
-                            prodId: prodId,
-                            userId: ownerId,
-                          ),
-                    ),
-                  ),
-              text: "More",
-              icon: Icon(Icons.card_travel),
-              shape: GFButtonShape.pills,
 
-            ),
-          ],
+        ListTile(
+          title:            Text(productname, style: TextStyle(
+              color: kText,
+              fontSize: 15.0,
+              fontWeight: FontWeight.bold),),
+          subtitle:            Text( "₹$inr",style: TextStyle(color: kText,
+              fontSize: 20.0,
+              fontWeight: FontWeight.bold)),
+
         );
 
     }
     else if(currentUser.country=='US'){
       return
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: <Widget>[
-            Text(productname, style: TextStyle(
-                color: kText,
-                fontSize: 20.0,
-                fontWeight: FontWeight.bold),),
-            Text( "\u0024 $usd",style: TextStyle(color: kText,
-                fontSize: 20.0,
-                fontWeight: FontWeight.bold)),
-            GFButton(
-              onPressed: () =>
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) =>
-                          ProductScreen(
-                            prodId: prodId,
-                            userId: ownerId,
-                          ),
-                    ),
-                  ),
-              text: "More",
-              icon: Icon(Icons.card_travel),
-              shape: GFButtonShape.pills,
 
-            ),
-          ],
+        ListTile(
+          title:                      Text(productname, style: TextStyle(
+              color: kText,
+              fontSize: 15.0,
+              fontWeight: FontWeight.bold),),
+
+          subtitle:          Text( "\u0024 $usd",style: TextStyle(color: kText,
+              fontSize: 20.0,
+              fontWeight: FontWeight.bold)),
+
         );
 
-    }
-    else if (currentUser.country == 'China') {
-      return
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: <Widget>[
-            Text(productname, style: TextStyle(
-                color: kText,
-                fontSize: 20.0,
-                fontWeight: FontWeight.bold),),
-            Text( "¥ $cny",style: TextStyle(color: kText,
-                fontSize: 20.0,
-                fontWeight: FontWeight.bold)),
-            GFButton(
-              onPressed: () =>
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) =>
-                          ProductScreen(
-                            prodId: prodId,
-                            userId: ownerId,
-                          ),
-                    ),
-                  ),
-              text: "More",
-              icon: Icon(Icons.card_travel),
-              shape: GFButtonShape.pills,
-
-            ),
-          ],
-        );
 
     }
     else if (currentUser.country == 'Europe'){
       return
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: <Widget>[
-            Text(productname, style: TextStyle(
-                color: kText,
-                fontSize: 20.0,
-                fontWeight: FontWeight.bold),),
-            Text( "€ $eur",style: TextStyle(color: kText,
-                fontSize: 20.0,
-                fontWeight: FontWeight.bold)),
-            GFButton(
-              onPressed: () =>
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) =>
-                          ProductScreen(
-                            prodId: prodId,
-                            userId: ownerId,
-                          ),
-                    ),
-                  ),
-              text: "More",
-              icon: Icon(Icons.card_travel),
-              shape: GFButtonShape.pills,
 
-            ),
-          ],
+        ListTile(
+          title:                      Text(productname, style: TextStyle(
+              color: kText,
+              fontSize: 15.0,
+              fontWeight: FontWeight.bold),),
+
+          subtitle:           Text( "€ $eur",style: TextStyle(color: kText,
+              fontSize: 20.0,
+              fontWeight: FontWeight.bold)),
+
         );
 
     }
     else if (currentUser.country == 'UK'){
       return
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: <Widget>[
-            Text(productname, style: TextStyle(
-                color: kText,
-                fontSize: 20.0,
-                fontWeight: FontWeight.bold),),
-            Text( "£  $gbp ",style: TextStyle(color: kText,
-                fontSize: 20.0,
-                fontWeight: FontWeight.bold)),
-            GFButton(
-              onPressed: () =>
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) =>
-                          ProductScreen(
-                            prodId: prodId,
-                            userId: ownerId,
-                          ),
-                    ),
-                  ),
-              text: "More",
-              icon: Icon(Icons.card_travel),
-              shape: GFButtonShape.pills,
 
-            ),
-          ],
+        ListTile(
+          title:                    Text(productname, style: TextStyle(
+              color: kText,
+              fontSize: 15.0,
+              fontWeight: FontWeight.bold),),
+
+          subtitle:                     Text( "£  $gbp ",style: TextStyle(color: kText,
+              fontSize: 20.0,
+              fontWeight: FontWeight.bold)),
+
+
         );
 
     }
     else{
       return
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: <Widget>[
-            Text(productname, style: TextStyle(
-                color: kText,
-                fontSize: 20.0,
-                fontWeight: FontWeight.bold),),
-            Text( "\u0024 $usd",style: TextStyle(color: kText,
-                fontSize: 20.0,
-                fontWeight: FontWeight.bold)),
-            GFButton(
-              onPressed: () =>
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) =>
-                          ProductScreen(
-                            prodId: prodId,
-                            userId: ownerId,
-                          ),
-                    ),
-                  ),
-              text: "More",
-              icon: Icon(Icons.card_travel),
-              shape: GFButtonShape.pills,
 
-            ),
-          ],
+        ListTile(
+          title:                      Text(productname, style: TextStyle(
+              color: kText,
+              fontSize: 15.0,
+              fontWeight: FontWeight.bold),),
+
+          subtitle:          Text( "\u0024 $usd",style: TextStyle(color: kText,
+              fontSize: 20.0,
+              fontWeight: FontWeight.bold)),
+
         );
+
 
     }
   }
@@ -231,7 +115,6 @@ class _CapesWState extends State<CapesW> {
         String shopmediaUrl = documentSnapshot.data['shopmediaUrl'];
         String productname = documentSnapshot.data['productname'];
         String inr = documentSnapshot.data['inr'];
-        String cny = documentSnapshot.data['cny'];
         String usd = documentSnapshot.data['usd'];
         String eur = documentSnapshot.data['eur'];
         String gbp = documentSnapshot.data['gbp'];
@@ -260,8 +143,7 @@ class _CapesWState extends State<CapesW> {
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-                      subtitle: Text(user.username,
-                        style: TextStyle(color: kIcon),),),
+                    ),
                   ),
 
                   GestureDetector(
@@ -280,7 +162,7 @@ class _CapesWState extends State<CapesW> {
                         ClipRRect(
                             borderRadius: BorderRadius.circular(20.0),child: cachedNetworkImage(shopmediaUrl)),
                       ],),),
-                  df(productname:productname, usd:usd,inr:inr,cny:cny,eur:eur,gbp:gbp, prodId:prodId, ownerId:ownerId,),
+                  df(productname:productname, usd:usd,inr:inr,eur:eur,gbp:gbp, prodId:prodId, ownerId:ownerId,),
 
                   Divider(color: kGrey,),
                 ],
@@ -309,7 +191,6 @@ class _CapesWState extends State<CapesW> {
         String shopmediaUrl = documentSnapshot.data['shopmediaUrl'];
         String productname = documentSnapshot.data['productname'];
         String inr = documentSnapshot.data['inr'];
-        String cny = documentSnapshot.data['cny'];
         String usd = documentSnapshot.data['usd'];
         String eur = documentSnapshot.data['eur'];
         String gbp = documentSnapshot.data['gbp'];
@@ -338,8 +219,7 @@ class _CapesWState extends State<CapesW> {
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-                      subtitle: Text(user.username,
-                        style: TextStyle(color: kIcon),),),
+                    ),
                   ),
 
                   GestureDetector(
@@ -358,7 +238,7 @@ class _CapesWState extends State<CapesW> {
                         ClipRRect(
                             borderRadius: BorderRadius.circular(20.0),child: cachedNetworkImage(shopmediaUrl)),
                       ],),),
-                  df(productname:productname, usd:usd,inr:inr,cny:cny,eur:eur,gbp:gbp, prodId:prodId, ownerId:ownerId,),
+                  df(productname:productname, usd:usd,inr:inr,eur:eur,gbp:gbp, prodId:prodId, ownerId:ownerId,),
 
                   Divider(color: kGrey,),
                 ],
@@ -387,7 +267,6 @@ class _CapesWState extends State<CapesW> {
         String shopmediaUrl = documentSnapshot.data['shopmediaUrl'];
         String productname = documentSnapshot.data['productname'];
         String inr = documentSnapshot.data['inr'];
-        String cny = documentSnapshot.data['cny'];
         String usd = documentSnapshot.data['usd'];
         String eur = documentSnapshot.data['eur'];
         String gbp = documentSnapshot.data['gbp'];
@@ -416,8 +295,7 @@ class _CapesWState extends State<CapesW> {
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-                      subtitle: Text(user.username,
-                        style: TextStyle(color: kIcon),),),
+                    ),
                   ),
 
                   GestureDetector(
@@ -436,7 +314,7 @@ class _CapesWState extends State<CapesW> {
                         ClipRRect(
                             borderRadius: BorderRadius.circular(20.0),child: cachedNetworkImage(shopmediaUrl)),
                       ],),),
-                  df(productname:productname, usd:usd,inr:inr,cny:cny,eur:eur,gbp:gbp, prodId:prodId, ownerId:ownerId,),
+                  df(productname:productname, usd:usd,inr:inr,eur:eur,gbp:gbp, prodId:prodId, ownerId:ownerId,),
 
                   Divider(color: kGrey,),
                 ],
@@ -465,7 +343,6 @@ class _CapesWState extends State<CapesW> {
         String shopmediaUrl = documentSnapshot.data['shopmediaUrl'];
         String productname = documentSnapshot.data['productname'];
         String inr = documentSnapshot.data['inr'];
-        String cny = documentSnapshot.data['cny'];
         String usd = documentSnapshot.data['usd'];
         String eur = documentSnapshot.data['eur'];
         String gbp = documentSnapshot.data['gbp'];
@@ -494,8 +371,7 @@ class _CapesWState extends State<CapesW> {
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-                      subtitle: Text(user.username,
-                        style: TextStyle(color: kIcon),),),
+                    ),
                   ),
 
                   GestureDetector(
@@ -514,7 +390,7 @@ class _CapesWState extends State<CapesW> {
                         ClipRRect(
                             borderRadius: BorderRadius.circular(20.0),child: cachedNetworkImage(shopmediaUrl)),
                       ],),),
-                  df(productname:productname, usd:usd,inr:inr,cny:cny,eur:eur,gbp:gbp, prodId:prodId, ownerId:ownerId,),
+                  df(productname:productname, usd:usd,inr:inr,eur:eur,gbp:gbp, prodId:prodId, ownerId:ownerId,),
 
                   Divider(color: kGrey,),
                 ],
@@ -543,7 +419,6 @@ class _CapesWState extends State<CapesW> {
         String shopmediaUrl = documentSnapshot.data['shopmediaUrl'];
         String productname = documentSnapshot.data['productname'];
         String inr = documentSnapshot.data['inr'];
-        String cny = documentSnapshot.data['cny'];
         String usd = documentSnapshot.data['usd'];
         String eur = documentSnapshot.data['eur'];
         String gbp = documentSnapshot.data['gbp'];
@@ -572,8 +447,7 @@ class _CapesWState extends State<CapesW> {
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-                      subtitle: Text(user.username,
-                        style: TextStyle(color: kIcon),),),
+                    ),
                   ),
 
                   GestureDetector(
@@ -592,7 +466,7 @@ class _CapesWState extends State<CapesW> {
                         ClipRRect(
                             borderRadius: BorderRadius.circular(20.0),child: cachedNetworkImage(shopmediaUrl)),
                       ],),),
-                  df(productname:productname, usd:usd,inr:inr,cny:cny,eur:eur,gbp:gbp, prodId:prodId, ownerId:ownerId,),
+                  df(productname:productname, usd:usd,inr:inr,eur:eur,gbp:gbp, prodId:prodId, ownerId:ownerId,),
 
                   Divider(color: kGrey,),
                 ],
@@ -619,7 +493,6 @@ class _CapesWState extends State<CapesW> {
         String shopmediaUrl = documentSnapshot.data['shopmediaUrl'];
         String productname = documentSnapshot.data['productname'];
         String inr = documentSnapshot.data['inr'];
-        String cny = documentSnapshot.data['cny'];
         String usd = documentSnapshot.data['usd'];
         String eur = documentSnapshot.data['eur'];
         String gbp = documentSnapshot.data['gbp'];
@@ -648,8 +521,7 @@ class _CapesWState extends State<CapesW> {
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-                      subtitle: Text(user.username,
-                        style: TextStyle(color: kIcon),),),
+                    ),
                   ),
 
                   GestureDetector(
@@ -668,7 +540,7 @@ class _CapesWState extends State<CapesW> {
                         ClipRRect(
                             borderRadius: BorderRadius.circular(20.0),child: cachedNetworkImage(shopmediaUrl)),
                       ],),),
-                  df(productname:productname, usd:usd,inr:inr,cny:cny,eur:eur,gbp:gbp, prodId:prodId, ownerId:ownerId,),
+                  df(productname:productname, usd:usd,inr:inr,eur:eur,gbp:gbp, prodId:prodId, ownerId:ownerId,),
 
                   Divider(color: kGrey,),
                 ],
@@ -696,7 +568,6 @@ class _CapesWState extends State<CapesW> {
         String shopmediaUrl = documentSnapshot.data['shopmediaUrl'];
         String productname = documentSnapshot.data['productname'];
         String inr = documentSnapshot.data['inr'];
-        String cny = documentSnapshot.data['cny'];
         String usd = documentSnapshot.data['usd'];
         String eur = documentSnapshot.data['eur'];
         String gbp = documentSnapshot.data['gbp'];
@@ -725,8 +596,7 @@ class _CapesWState extends State<CapesW> {
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-                      subtitle: Text(user.username,
-                        style: TextStyle(color: kIcon),),),
+                    ),
                   ),
 
                   GestureDetector(
@@ -745,7 +615,7 @@ class _CapesWState extends State<CapesW> {
                         ClipRRect(
                             borderRadius: BorderRadius.circular(20.0),child: cachedNetworkImage(shopmediaUrl)),
                       ],),),
-                  df(productname:productname, usd:usd,inr:inr,cny:cny,eur:eur,gbp:gbp, prodId:prodId, ownerId:ownerId,),
+                  df(productname:productname, usd:usd,inr:inr,eur:eur,gbp:gbp, prodId:prodId, ownerId:ownerId,),
 
                   Divider(color: kGrey,),
                 ],
@@ -772,7 +642,6 @@ class _CapesWState extends State<CapesW> {
         String shopmediaUrl = documentSnapshot.data['shopmediaUrl'];
         String productname = documentSnapshot.data['productname'];
         String inr = documentSnapshot.data['inr'];
-        String cny = documentSnapshot.data['cny'];
         String usd = documentSnapshot.data['usd'];
         String eur = documentSnapshot.data['eur'];
         String gbp = documentSnapshot.data['gbp'];
@@ -801,8 +670,7 @@ class _CapesWState extends State<CapesW> {
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-                      subtitle: Text(user.username,
-                        style: TextStyle(color: kIcon),),),
+                    ),
                   ),
 
                   GestureDetector(
@@ -821,7 +689,7 @@ class _CapesWState extends State<CapesW> {
                         ClipRRect(
                             borderRadius: BorderRadius.circular(20.0),child: cachedNetworkImage(shopmediaUrl)),
                       ],),),
-                  df(productname:productname, usd:usd,inr:inr,cny:cny,eur:eur,gbp:gbp, prodId:prodId, ownerId:ownerId,),
+                  df(productname:productname, usd:usd,inr:inr,eur:eur,gbp:gbp, prodId:prodId, ownerId:ownerId,),
 
                   Divider(color: kGrey,),
                 ],
@@ -849,7 +717,6 @@ class _CapesWState extends State<CapesW> {
         String shopmediaUrl = documentSnapshot.data['shopmediaUrl'];
         String productname = documentSnapshot.data['productname'];
         String inr = documentSnapshot.data['inr'];
-        String cny = documentSnapshot.data['cny'];
         String usd = documentSnapshot.data['usd'];
         String eur = documentSnapshot.data['eur'];
         String gbp = documentSnapshot.data['gbp'];
@@ -878,8 +745,7 @@ class _CapesWState extends State<CapesW> {
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-                      subtitle: Text(user.username,
-                        style: TextStyle(color: kIcon),),),
+                    ),
                   ),
 
                   GestureDetector(
@@ -898,7 +764,7 @@ class _CapesWState extends State<CapesW> {
                         ClipRRect(
                             borderRadius: BorderRadius.circular(20.0),child: cachedNetworkImage(shopmediaUrl)),
                       ],),),
-                  df(productname:productname, usd:usd,inr:inr,cny:cny,eur:eur,gbp:gbp, prodId:prodId, ownerId:ownerId,),
+                  df(productname:productname, usd:usd,inr:inr,eur:eur,gbp:gbp, prodId:prodId, ownerId:ownerId,),
 
                   Divider(color: kGrey,),
                 ],
@@ -927,7 +793,6 @@ class _CapesWState extends State<CapesW> {
         String shopmediaUrl = documentSnapshot.data['shopmediaUrl'];
         String productname = documentSnapshot.data['productname'];
         String inr = documentSnapshot.data['inr'];
-        String cny = documentSnapshot.data['cny'];
         String usd = documentSnapshot.data['usd'];
         String eur = documentSnapshot.data['eur'];
         String gbp = documentSnapshot.data['gbp'];
@@ -956,8 +821,7 @@ class _CapesWState extends State<CapesW> {
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-                      subtitle: Text(user.username,
-                        style: TextStyle(color: kIcon),),),
+                    ),
                   ),
 
                   GestureDetector(
@@ -976,7 +840,7 @@ class _CapesWState extends State<CapesW> {
                         ClipRRect(
                             borderRadius: BorderRadius.circular(20.0),child: cachedNetworkImage(shopmediaUrl)),
                       ],),),
-                  df(productname:productname, usd:usd,inr:inr,cny:cny,eur:eur,gbp:gbp, prodId:prodId, ownerId:ownerId,),
+                  df(productname:productname, usd:usd,inr:inr,eur:eur,gbp:gbp, prodId:prodId, ownerId:ownerId,),
 
                   Divider(color: kGrey,),
                 ],
@@ -1005,7 +869,6 @@ class _CapesWState extends State<CapesW> {
         String shopmediaUrl = documentSnapshot.data['shopmediaUrl'];
         String productname = documentSnapshot.data['productname'];
         String inr = documentSnapshot.data['inr'];
-        String cny = documentSnapshot.data['cny'];
         String usd = documentSnapshot.data['usd'];
         String eur = documentSnapshot.data['eur'];
         String gbp = documentSnapshot.data['gbp'];
@@ -1034,8 +897,7 @@ class _CapesWState extends State<CapesW> {
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-                      subtitle: Text(user.username,
-                        style: TextStyle(color: kIcon),),),
+                    ),
                   ),
 
                   GestureDetector(
@@ -1054,7 +916,7 @@ class _CapesWState extends State<CapesW> {
                         ClipRRect(
                             borderRadius: BorderRadius.circular(20.0),child: cachedNetworkImage(shopmediaUrl)),
                       ],),),
-                  df(productname:productname, usd:usd,inr:inr,cny:cny,eur:eur,gbp:gbp, prodId:prodId, ownerId:ownerId,),
+                  df(productname:productname, usd:usd,inr:inr,eur:eur,gbp:gbp, prodId:prodId, ownerId:ownerId,),
 
                   Divider(color: kGrey,),
                 ],
@@ -1083,7 +945,6 @@ class _CapesWState extends State<CapesW> {
         String shopmediaUrl = documentSnapshot.data['shopmediaUrl'];
         String productname = documentSnapshot.data['productname'];
         String inr = documentSnapshot.data['inr'];
-        String cny = documentSnapshot.data['cny'];
         String usd = documentSnapshot.data['usd'];
         String eur = documentSnapshot.data['eur'];
         String gbp = documentSnapshot.data['gbp'];
@@ -1112,8 +973,7 @@ class _CapesWState extends State<CapesW> {
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-                      subtitle: Text(user.username,
-                        style: TextStyle(color: kIcon),),),
+                    ),
                   ),
 
                   GestureDetector(
@@ -1132,7 +992,7 @@ class _CapesWState extends State<CapesW> {
                         ClipRRect(
                             borderRadius: BorderRadius.circular(20.0),child: cachedNetworkImage(shopmediaUrl)),
                       ],),),
-                  df(productname:productname, usd:usd,inr:inr,cny:cny,eur:eur,gbp:gbp, prodId:prodId, ownerId:ownerId,),
+                  df(productname:productname, usd:usd,inr:inr,eur:eur,gbp:gbp, prodId:prodId, ownerId:ownerId,),
 
                   Divider(color: kGrey,),
                 ],
@@ -1149,94 +1009,6 @@ class _CapesWState extends State<CapesW> {
 
     );
   }
-  Coats(){
-    return  PaginateFirestore(
-//    itemsPerPage: 2,
-        itemBuilderType:
-        PaginateBuilderType.listView,
-        itemBuilder: (index, context, documentSnapshot)   {
-//        DocumentSnapshot ds = snapshot.data.documents[index];
-          String ownerId = documentSnapshot.data['ownerId'];
-          String prodId = documentSnapshot.data['prodId'];
-          String shopmediaUrl = documentSnapshot.data['shopmediaUrl'];
-          String productname = documentSnapshot.data['productname'];
-          String inr = documentSnapshot.data['inr'];
-          String cny = documentSnapshot.data['cny'];
-          String usd = documentSnapshot.data['usd'];
-          String eur = documentSnapshot.data['eur'];
-          String gbp = documentSnapshot.data['gbp'];
-          return
-            FutureBuilder(
-              future: usersRef.document(ownerId).get(),
-              builder: (context, snapshot) {
-                if (!snapshot.hasData) {
-                  return circularProgress();
-                }
-                User user = User.fromDocument(snapshot.data);
-//          bool isPostOwner = currentUserId == ownerId;
-                return Column(
-                  children: <Widget>[
-                    GestureDetector(
-                      onTap: () => showProfile(context, profileId: user.id),
-                      child: ListTile(
-                        leading: CircleAvatar(
-                          backgroundImage: CachedNetworkImageProvider(user.photoUrl),
-                          backgroundColor: Colors.grey,
-                        ),
-                        title: Text(
-                          user.displayName,
-                          style: TextStyle(
-                            color: kText,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        subtitle: Text(user.username,
-                          style: TextStyle(color: kIcon),),),
-                    ),
-
-                    GestureDetector(
-                      onTap: () => Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => ProductScreen(
-                            prodId: prodId,
-                            userId: ownerId,
-                          ),
-                        ),
-                      ),
-                      child: Stack(
-                        alignment: Alignment.center,
-                        children: <Widget>[
-                          ClipRRect(
-                              borderRadius: BorderRadius.circular(20.0),child: cachedNetworkImage(shopmediaUrl)),
-                        ],),),
-                    df(productname:productname, usd:usd,inr:inr,cny:cny,eur:eur,gbp:gbp, prodId:prodId, ownerId:ownerId,),
-
-                    Divider(color: kGrey,),
-                  ],
-
-                );
-
-              },
-            );
-        },
-        query: Firestore.instance.collectionGroup('userProducts').orderBy('timestamp',descending: true)
-            .where('Gender',isEqualTo: 'Women')
-            .where('Category',isEqualTo: 'WSingle Breasted Coats')
-            .where('Category',isEqualTo: 'WDouble Breasted Coats')
-            .where('Category',isEqualTo: 'WDuffle Coats')
-            .where('Category',isEqualTo: 'WPadded Coats')
-        .where('Category',isEqualTo: 'WCapes')
-            .where('Category',isEqualTo: 'WLeather Coats')
-         .where('Category',isEqualTo: 'WWool Coats')
-         .where('Category',isEqualTo: 'WCargo & Military Coats')
-        .where('Category',isEqualTo: 'WFaux  & Shearling Coats')
-
-            .where('Category',isEqualTo: 'WParka Coats')
-            .where('Category',isEqualTo: 'WRain Coats')
-            .where('Category',isEqualTo: 'WTrench Coats')
-    );
-  }
 
 
   @override
@@ -1247,9 +1019,8 @@ class _CapesWState extends State<CapesW> {
       quarterTurns: 3,
       child: Expanded(
         child: DefaultTabController(
-            length:13,
+            length:12,
             child: Scaffold(
-              backgroundColor: kPrimaryColor,
 
               appBar:AppBar(
                 toolbarHeight: SizeConfig.safeBlockHorizontal * 8,
@@ -1259,16 +1030,9 @@ class _CapesWState extends State<CapesW> {
                   isScrollable: true,
                   labelColor: Colors.white,
                   unselectedLabelColor: kIcon,
-//                indicatorSize: TabBarIndicatorSize.label,
-//                       indicator: BoxDecoration(
-//                           borderRadius: BorderRadius.only(
-//                               topLeft: Radius.circular(10),
-//                               topRight: Radius.circular(10)
-//                           ),
-//                           color: Colors.white),
+
 
                   tabs:[
-                    Text("New Arrivals",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5,),),
                     Text("Single Breasted Coats",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5,),),
                     Text("Double Breasted Coats",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5,),),
                     Text("Duffle Coats",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5),),
@@ -1287,26 +1051,31 @@ class _CapesWState extends State<CapesW> {
                 ),
               ),
 
-              body: RotatedBox(
-                quarterTurns: 1,
-                child: TabBarView(
-                    children:<Widget> [
-                     Coats(),
-                      Single(),
-                      Double(),
-                      Duffle(),
-                      Padded(),
-                       WCapes(),
-                       WLeather(),
+              body: Container(
+                decoration: BoxDecoration(
+                    gradient: fabGradient
+                ) ,
+                alignment: Alignment.center,
+                child: RotatedBox(
+                  quarterTurns: 1,
+                  child: TabBarView(
+                      children:<Widget> [
+                        Single(),
+                        Double(),
+                        Duffle(),
+                        Padded(),
+                         WCapes(),
+                         WLeather(),
 
-                      WWool(),
-                      WCargo(),
-                     WFaux(),
-                      Parka(),
-                      Rain(),
-                      Trench(),
+                        WWool(),
+                        WCargo(),
+                       WFaux(),
+                        Parka(),
+                        Rain(),
+                        Trench(),
 
-                    ]),
+                      ]),
+                ),
               ),
             )
         ),

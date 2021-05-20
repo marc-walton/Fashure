@@ -65,24 +65,29 @@ class _LiveTvState extends State<LiveTv> with  TickerProviderStateMixin {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-          backgroundColor:kSecondaryColor,
 
           appBar:  AppBar(title:  FittedBox(fit:BoxFit.contain,child: Text('FashureTV',style: TextStyle(fontSize: 20,color: kText,fontFamily: 'MajorMonoDisplay'),),),
             backgroundColor:kPrimaryColor,
 
           ),
         body:
-        Column(children:[
-          SizedBox(height: 8),
-
-          FittedBox(fit:BoxFit.contain,child: Text('Go Live',style: TextStyle(fontSize: 20,color: kText,),)),
         Container(
-        height: 250,
-        child: getStories(),
+          decoration: BoxDecoration(
+              gradient: fabGradient
+          ) ,
+          alignment: Alignment.center,
+          child: Column(children:[
+            SizedBox(height: 8),
+
+            FittedBox(fit:BoxFit.contain,child: Text('Go Live',style: TextStyle(fontSize: 20,color: kText,),)),
+          Container(
+          height: 250,
+          child: getStories(),
     ),
-         Center(child: getvid(),)
+           Center(child: getvid(),)
 
     ]),
+        ),
 
       ),
     );
@@ -358,7 +363,7 @@ class _LiveTvState extends State<LiveTv> with  TickerProviderStateMixin {
      child: Padding(
        padding: EdgeInsets.symmetric(horizontal: 25),
        child: Container(
-         color: UniversalVariables.separatorColor,
+         color: kText,
          padding: EdgeInsets.symmetric(vertical: 35, horizontal: 25),
          child: Column(
            mainAxisSize: MainAxisSize.min,
@@ -368,7 +373,7 @@ class _LiveTvState extends State<LiveTv> with  TickerProviderStateMixin {
                "Video feed coming soon!",
                textAlign: TextAlign.center,
                style: TextStyle(
-                 color: kText,
+                 color: Colors.white,
                  fontWeight: FontWeight.bold,
                  fontSize: 30,
                ),

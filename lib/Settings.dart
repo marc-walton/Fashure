@@ -31,7 +31,7 @@ class _SettingsState extends State<Settings> {
               leading :  Text('Edit Profile', style: TextStyle(
                 // fontFamily :"MajorMonoDisplay",
                   fontSize:  15.0 ,
-                  color: Colors.white),),
+                  color: kText),),
             ),
           ),
           Divider(color: Colors.black),
@@ -44,7 +44,7 @@ class _SettingsState extends State<Settings> {
               leading :  Text('My Orders', style: TextStyle(
                 // fontFamily :"MajorMonoDisplay",
                   fontSize:  15.0 ,
-                  color: Colors.white),),
+                  color: kText),),
             ),
           ),
           Divider(color: Colors.black),
@@ -65,7 +65,7 @@ class _SettingsState extends State<Settings> {
               leading :  Text('Credits', style: TextStyle(
                 // fontFamily :"MajorMonoDisplay",
                   fontSize:  15.0 ,
-                  color: Colors.white),),
+                  color: kText),),
             ),
           ),
           Divider(color: Colors.black),
@@ -86,7 +86,7 @@ class _SettingsState extends State<Settings> {
               leading :  Text('Gift Cards', style: TextStyle(
                 // fontFamily :"MajorMonoDisplay",
                   fontSize:  15.0 ,
-                  color: Colors.white),),
+                  color: kText),),
             ),
           ),
           Divider(color: Colors.black),
@@ -94,7 +94,7 @@ class _SettingsState extends State<Settings> {
             leading :  Text('More', style: TextStyle(
               // fontFamily :"MajorMonoDisplay",
                 fontSize:  10.0 ,
-                color: Colors.white),),
+                color: kText),),
           ),
           GestureDetector(
             onTap: ()=>logout(),
@@ -102,7 +102,7 @@ class _SettingsState extends State<Settings> {
               leading :  Text('Log Out', style: TextStyle(
                 // fontFamily :"MajorMonoDisplay",
                   fontSize:  15.0 ,
-                  color: Colors.white),),
+                  color: kText),),
             ),
           ),
           Divider(color: Colors.black),
@@ -111,21 +111,21 @@ class _SettingsState extends State<Settings> {
             leading :  Text('Terms of Service', style: TextStyle(
               // fontFamily :"MajorMonoDisplay",
                 fontSize:  15.0 ,
-                color: Colors.white),),
+                color: kText),),
           ),
           Divider(color: Colors.black),
           ListTile(
             leading :  Text('Privacy Policy', style: TextStyle(
               // fontFamily :"MajorMonoDisplay",
                 fontSize:  15.0 ,
-                color: Colors.white),),
+                color: kText),),
           ),
           Divider(color: Colors.black),
           ListTile(
             leading :  Text('Help', style: TextStyle(
               // fontFamily :"MajorMonoDisplay",
                 fontSize:  15.0 ,
-                color: Colors.white),),
+                color: kText),),
           ),
 
           Divider(color: Colors.black),
@@ -135,11 +135,11 @@ class _SettingsState extends State<Settings> {
               leading :  Text('App Version', style: TextStyle(
                 // fontFamily :"MajorMonoDisplay",
                   fontSize:  15.0 ,
-                  color: Colors.white),),
+                  color: kText),),
               trailing :  Text('0.0.1', style: TextStyle(
                 // fontFamily :"MajorMonoDisplay",
                   fontSize:  15.0 ,
-                  color: Colors.white),),
+                  color: kText),),
 
             ),
           ),
