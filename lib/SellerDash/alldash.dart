@@ -151,56 +151,22 @@ getop() async {
           ),
           body:
 
-          TabBarView(
-              children:<Widget> [
-                SellerDash(),
-                ServiceDash(),
+          Container( decoration: BoxDecoration(
+              gradient: fabGradient
+          ) ,
+            alignment: Alignment.center,
+            child: TabBarView(
+                children:<Widget> [
+                  SellerDash(),
+                  ServiceDash(),
 
 
-              ]),
+                ]),
+          ),
 
         ),
       ),
     );
 
-    // return Scaffold(
-    //   appBar:  AppBar(backgroundColor: kSecondaryColor,
-    //     title: Text('Dash Board',
-    //       style: TextStyle(
-    //           fontFamily :"MajorMonoDisplay",
-    //           fontSize:  35.0 ,
-    //           color: Colors.white),),
-    //     iconTheme: new IconThemeData(color: kIcon),
-    //   ),
-    //   backgroundColor: kPrimaryColor,
-    //
-    //   body: ContainedTabBarView(
-    //     tabs: [
-    //       Text('Shop'),
-    //       Text('Hire Me')
-    //     ],
-    //     views: [
-    //       FittedBox(
-    //         fit: BoxFit.contain,
-    //         child: Row(
-    //           children: [
-    //             SellerDash(),
-    //           ],
-    //         ),
-    //       ),
-    //       FittedBox(
-    //         fit: BoxFit.contain,
-    //         child: Row(
-    //           children: [
-    //             ServiceDash(),
-    //           ],
-    //         ),
-    //       ),
-    //     ],
-    //     onChange: (index) => print(index),
-    //
-    //   ),
-    //
-    // );
   }
 }

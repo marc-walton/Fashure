@@ -12,7 +12,6 @@ import 'package:fashow/Product_screen.dart';
 import 'package:fashow/ActivityFeed.dart';
 import 'package:fashow/custom_image.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:fashow/Cart.dart';
 import 'package:fashow/comments.dart';
 class Post extends StatefulWidget {
   final String postId;

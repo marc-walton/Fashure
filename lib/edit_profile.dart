@@ -819,7 +819,6 @@ void toggleStylist(bool value) {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: kSecondaryColor,
       key: _scaffoldKey,
       appBar: AppBar(
         backgroundColor: kPrimaryColor,
@@ -849,167 +848,172 @@ void toggleStylist(bool value) {
       ),
       body: isLoading
           ? circularProgress()
-          : ListView(
+          : Container( decoration: BoxDecoration(
+          gradient: fabGradient
+      ) ,
+        alignment: Alignment.center,
+            child: ListView(
         children: <Widget>[
-          Container(
-              color: kPrimaryColor,
+            Container(
+                color: kPrimaryColor,
 
-            child: Column(
-              children: <Widget>[
+              child: Column(
+                children: <Widget>[
 
-                Padding(
+                  Padding(
         padding: EdgeInsets.only(
         top: 16.0,
         bottom: 8.0,
     ),
       child: Stack(
         children:[ CircleAvatar(
-          radius: 50.0,
-          backgroundImage:
-          CachedNetworkImageProvider(user.photoUrl),
+            radius: 50.0,
+            backgroundImage:
+            CachedNetworkImageProvider(user.photoUrl),
         ),
-          Positioned(
-            right: 0.1,
-            bottom: 0.1,
-            child: GestureDetector(
-              onTap: (){
-                selectImage();
-              },
-              child: Container(
-                decoration: BoxDecoration(
-                    color: kblue,
-                    borderRadius: BorderRadius.circular(30)),
-                child: Icon(Icons.add,color: kText,),
+            Positioned(
+              right: 0.1,
+              bottom: 0.1,
+              child: GestureDetector(
+                onTap: (){
+                  selectImage();
+                },
+                child: Container(
+                  decoration: BoxDecoration(
+                      color: kblue,
+                      borderRadius: BorderRadius.circular(30)),
+                  child: Icon(Icons.add,color: kText,),
+                ),
               ),
             ),
-          ),
         ],
       ),
     ),
 
-                Padding(
-                  padding: EdgeInsets.all(16.0),
-                  child: Column(
-                    children: <Widget>[
-                      buildDisplayNameField(),
-                      buildBioField(),
-                     SizedBox(height: 10.0,),
-                     Container(
-                       decoration: BoxDecoration( borderRadius: BorderRadius.circular(20.0),
-                           color: kPrimaryColor) ,
-                       child: Column(
-                         children: [
-                           // Text('I\'m a ',style: TextStyle(color: kText,fontSize: 30.0), ),
-                           // SizedBox(height: 10.0,),
-                           ListTileTheme(
-                       tileColor:kblue,
+                  Padding(
+                    padding: EdgeInsets.all(16.0),
+                    child: Column(
+                      children: <Widget>[
+                        buildDisplayNameField(),
+                        buildBioField(),
+                       SizedBox(height: 10.0,),
+                       Container(
+                         decoration: BoxDecoration( borderRadius: BorderRadius.circular(20.0),
+                             color: kPrimaryColor) ,
+                         child: Column(
+                           children: [
+                             // Text('I\'m a ',style: TextStyle(color: kText,fontSize: 30.0), ),
+                             // SizedBox(height: 10.0,),
+                             ListTileTheme(
+                         tileColor:kblue,
 
-                       child: ExpansionTile (
-                               title: Text('I Freelance in',style:TextStyle(color:kText)),
-                               maintainState:true,
-                               trailing:Icon(Icons.arrow_drop_down,color: kText,),
-                               children: [
-                                 CheckboxListTile(
-                                   title: Text('Designer',style: TextStyle(color: kText), ),
-                                   value: isCheckedDesigner,
-                                   onChanged: (value){toggleDesigner(value);},
-                                   activeColor: Colors.pink,
-                                   checkColor: Colors.white,
-                                   tristate: false,
-                                 ),
-                                 CheckboxListTile(
-                                   title: Text('Stylist',style: TextStyle(color: kText), ),
-                                   value: isCheckedStylist,
-                                   onChanged: (value){toggleStylist(value);},
-                                   activeColor: Colors.pink,
-                                   checkColor: Colors.white,
-                                   tristate: false,
-                                 ),
-                                 CheckboxListTile(
-                                   title: Text('Illustrator',style: TextStyle(color: kText), ),
-                                   value: isCheckedIllustrator,
-                                   onChanged: (value){toggleIllustrator(value);},
-                                   activeColor: Colors.pink,
-                                   checkColor: Colors.white,
-                                   tristate: false,
-                                 ),
-                                 CheckboxListTile(
-                                   title: Text('Photographer',style: TextStyle(color: kText), ),
-                                   value: isCheckedPhotographer,
-                                   onChanged: (value){togglePhotographer(value);},
-                                   activeColor: Colors.pink,
-                                   checkColor: Colors.white,
-                                   tristate: false,
-                                 ),
-                                 CheckboxListTile(
-                                   title: Text('Model',style: TextStyle(color: kText), ),
-                                   value: isCheckedModel,
-                                   onChanged: (value){toggleModel(value);},
-                                   activeColor: Colors.pink,
-                                   checkColor: Colors.white,
-                                   tristate: false,
-                                 ),
-                                 CheckboxListTile(
-                                   title: Text('Makeup Artist',style: TextStyle(color: kText), ),
-                                   value: isCheckedMakeup,
-                                   onChanged: (value){toggleMakeup(value);},
-                                   activeColor: Colors.pink,
-                                   checkColor: Colors.white,
-                                   tristate: false,
-                                 ),
-                                 CheckboxListTile(
-                                   title: Text('Hairdresser',style: TextStyle(color: kText), ),
-                                   value: isCheckedHair,
-                                   onChanged: (value){toggleHair(value);},
-                                   activeColor: Colors.pink,
-                                   checkColor: Colors.white,
-                                   tristate: false,
-                                 ),
-                                 CheckboxListTile(
-                                   title: Text('Choreographer',style: TextStyle(color: kText), ),
-                                   value: isCheckedChoreographer,
-                                   onChanged: (value){toggleChoreographer(value);},
-                                   activeColor: Colors.pink,
-                                   checkColor: Colors.white,
-                                   tristate: false,
-                                 ),
-                               ],
-                             ),
-                           )
-                         ],
-                       ),
-                     )
-                    ],
-                  ),
-                ),
-                FloatingActionButton.extended(
-                  onPressed: updateProfileData,
-                  backgroundColor: kblue,
-                  label: Text(
-                    "Save",
-                    style: TextStyle(
-                      color: kText,
-                      fontSize: 20.0,
-                      fontWeight: FontWeight.bold,
+                         child: ExpansionTile (
+                                 title: Text('I Freelance in',style:TextStyle(color:kText)),
+                                 maintainState:true,
+                                 trailing:Icon(Icons.arrow_drop_down,color: kText,),
+                                 children: [
+                                   CheckboxListTile(
+                                     title: Text('Designer',style: TextStyle(color: kText), ),
+                                     value: isCheckedDesigner,
+                                     onChanged: (value){toggleDesigner(value);},
+                                     activeColor: Colors.pink,
+                                     checkColor: Colors.white,
+                                     tristate: false,
+                                   ),
+                                   CheckboxListTile(
+                                     title: Text('Stylist',style: TextStyle(color: kText), ),
+                                     value: isCheckedStylist,
+                                     onChanged: (value){toggleStylist(value);},
+                                     activeColor: Colors.pink,
+                                     checkColor: Colors.white,
+                                     tristate: false,
+                                   ),
+                                   CheckboxListTile(
+                                     title: Text('Illustrator',style: TextStyle(color: kText), ),
+                                     value: isCheckedIllustrator,
+                                     onChanged: (value){toggleIllustrator(value);},
+                                     activeColor: Colors.pink,
+                                     checkColor: Colors.white,
+                                     tristate: false,
+                                   ),
+                                   CheckboxListTile(
+                                     title: Text('Photographer',style: TextStyle(color: kText), ),
+                                     value: isCheckedPhotographer,
+                                     onChanged: (value){togglePhotographer(value);},
+                                     activeColor: Colors.pink,
+                                     checkColor: Colors.white,
+                                     tristate: false,
+                                   ),
+                                   CheckboxListTile(
+                                     title: Text('Model',style: TextStyle(color: kText), ),
+                                     value: isCheckedModel,
+                                     onChanged: (value){toggleModel(value);},
+                                     activeColor: Colors.pink,
+                                     checkColor: Colors.white,
+                                     tristate: false,
+                                   ),
+                                   CheckboxListTile(
+                                     title: Text('Makeup Artist',style: TextStyle(color: kText), ),
+                                     value: isCheckedMakeup,
+                                     onChanged: (value){toggleMakeup(value);},
+                                     activeColor: Colors.pink,
+                                     checkColor: Colors.white,
+                                     tristate: false,
+                                   ),
+                                   CheckboxListTile(
+                                     title: Text('Hairdresser',style: TextStyle(color: kText), ),
+                                     value: isCheckedHair,
+                                     onChanged: (value){toggleHair(value);},
+                                     activeColor: Colors.pink,
+                                     checkColor: Colors.white,
+                                     tristate: false,
+                                   ),
+                                   CheckboxListTile(
+                                     title: Text('Choreographer',style: TextStyle(color: kText), ),
+                                     value: isCheckedChoreographer,
+                                     onChanged: (value){toggleChoreographer(value);},
+                                     activeColor: Colors.pink,
+                                     checkColor: Colors.white,
+                                     tristate: false,
+                                   ),
+                                 ],
+                               ),
+                             )
+                           ],
+                         ),
+                       )
+                      ],
                     ),
                   ),
-                ),
-                Padding(
-                  padding: EdgeInsets.all(16.0),
-                  child: FlatButton.icon(
-                    onPressed: logout,
-                    icon: Icon(Icons.cancel, color: Colors.red),
+                  FloatingActionButton.extended(
+                    onPressed: updateProfileData,
+                    backgroundColor: kblue,
                     label: Text(
-                      "Logout",
-                      style: TextStyle(color: Colors.red, fontSize: 20.0),
+                      "Save",
+                      style: TextStyle(
+                        color: kText,
+                        fontSize: 20.0,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                   ),
-                ),
-              ],
+                  Padding(
+                    padding: EdgeInsets.all(16.0),
+                    child: FlatButton.icon(
+                      onPressed: logout,
+                      icon: Icon(Icons.cancel, color: Colors.red),
+                      label: Text(
+                        "Logout",
+                        style: TextStyle(color: Colors.red, fontSize: 20.0),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
             ),
-          ),
         ],
       ),
+          ),
     );
   }
 }

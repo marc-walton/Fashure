@@ -24,23 +24,6 @@ class _SellerPaymentsState extends State<SellerPayments> {
             Text( "₹$inr",style: TextStyle(color: kText,
                 fontSize: 20.0,
                 fontWeight: FontWeight.bold)),
-            // GFButton(
-            //   onPressed: () =>
-            //       Navigator.push(
-            //         context,
-            //         MaterialPageRoute(
-            //           builder: (context) =>
-            //               ProductScreen(
-            //                 prodId: prodId,
-            //                 userId: ownerId,
-            //               ),
-            //         ),
-            //       ),
-            //   text: "More",
-            //   icon: Icon(Icons.card_travel),
-            //   shape: GFButtonShape.pills,
-            //
-            // ),
           ],
         );
 
@@ -57,23 +40,6 @@ class _SellerPaymentsState extends State<SellerPayments> {
             Text( "\u0024 $usd",style: TextStyle(color: kText,
                 fontSize: 20.0,
                 fontWeight: FontWeight.bold)),
-            // GFButton(
-            //   onPressed: () =>
-            //       Navigator.push(
-            //         context,
-            //         MaterialPageRoute(
-            //           builder: (context) =>
-            //               ProductScreen(
-            //                 prodId: prodId,
-            //                 userId: ownerId,
-            //               ),
-            //         ),
-            //       ),
-            //   text: "More",
-            //   icon: Icon(Icons.card_travel),
-            //   shape: GFButtonShape.pills,
-            //
-            // ),
           ],
         );
 
@@ -90,23 +56,6 @@ class _SellerPaymentsState extends State<SellerPayments> {
             Text( "¥ $cny",style: TextStyle(color: kText,
                 fontSize: 20.0,
                 fontWeight: FontWeight.bold)),
-            // GFButton(
-            //   onPressed: () =>
-            //       Navigator.push(
-            //         context,
-            //         MaterialPageRoute(
-            //           builder: (context) =>
-            //               ProductScreen(
-            //                 prodId: prodId,
-            //                 userId: ownerId,
-            //               ),
-            //         ),
-            //       ),
-            //   text: "More",
-            //   icon: Icon(Icons.card_travel),
-            //   shape: GFButtonShape.pills,
-            //
-            // ),
           ],
         );
 
@@ -123,23 +72,6 @@ class _SellerPaymentsState extends State<SellerPayments> {
             Text( "€ $eur",style: TextStyle(color: kText,
                 fontSize: 20.0,
                 fontWeight: FontWeight.bold)),
-            // GFButton(
-            //   onPressed: () =>
-            //       Navigator.push(
-            //         context,
-            //         MaterialPageRoute(
-            //           builder: (context) =>
-            //               ProductScreen(
-            //                 prodId: prodId,
-            //                 userId: ownerId,
-            //               ),
-            //         ),
-            //       ),
-            //   text: "More",
-            //   icon: Icon(Icons.card_travel),
-            //   shape: GFButtonShape.pills,
-            //
-            // ),
           ],
         );
 
@@ -156,23 +88,7 @@ class _SellerPaymentsState extends State<SellerPayments> {
             Text( "£  $gbp ",style: TextStyle(color: kText,
                 fontSize: 20.0,
                 fontWeight: FontWeight.bold)),
-            // GFButton(
-            //   onPressed: () =>
-            //       Navigator.push(
-            //         context,
-            //         MaterialPageRoute(
-            //           builder: (context) =>
-            //               ProductScreen(
-            //                 prodId: prodId,
-            //                 userId: ownerId,
-            //               ),
-            //         ),
-            //       ),
-            //   text: "More",
-            //   icon: Icon(Icons.card_travel),
-            //   shape: GFButtonShape.pills,
-            //
-            // ),
+
           ],
         );
 
@@ -189,23 +105,6 @@ class _SellerPaymentsState extends State<SellerPayments> {
             Text( "\u0024 $usd",style: TextStyle(color: kText,
                 fontSize: 20.0,
                 fontWeight: FontWeight.bold)),
-            // GFButton(
-            //   onPressed: () =>
-            //       Navigator.push(
-            //         context,
-            //         MaterialPageRoute(
-            //           builder: (context) =>
-            //               ProductScreen(
-            //                 prodId: prodId,
-            //                 userId: ownerId,
-            //               ),
-            //         ),
-            //       ),
-            //   text: "More",
-            //   icon: Icon(Icons.card_travel),
-            //   shape: GFButtonShape.pills,
-            //
-            // ),
           ],
         );
 
@@ -325,15 +224,20 @@ class _SellerPaymentsState extends State<SellerPayments> {
                   ),
                 ),
 
-                body: RotatedBox(
-                  quarterTurns: 1,
-                  child: TabBarView(
-                      children: <Widget>[
-                        upcoming(),
-                       fulfilled(),
+                body: Container( decoration: BoxDecoration(
+                    gradient: fabGradient
+                ) ,
+                  alignment: Alignment.center,
+                  child: RotatedBox(
+                    quarterTurns: 1,
+                    child: TabBarView(
+                        children: <Widget>[
+                          upcoming(),
+                         fulfilled(),
 
 
-                      ]),
+                        ]),
+                  ),
                 ),
               )
           ),

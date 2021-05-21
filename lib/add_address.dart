@@ -337,7 +337,6 @@ Widget form(){
   Widget build(BuildContext context) {
     return
       Scaffold(
-          backgroundColor: kSecondaryColor,
           key:  scaffoldKey,
           appBar: AppBar(
             backgroundColor: kPrimaryColor,
@@ -353,7 +352,10 @@ Widget form(){
             ),
           ),
           body:
-          form(),
+          Container( decoration: BoxDecoration(
+              gradient: fabGradient
+          ) ,
+              alignment: Alignment.center,child: form()),
 
 
 

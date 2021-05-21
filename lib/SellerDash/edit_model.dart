@@ -1,30 +1,17 @@
-import 'package:fashow/model/addressbuynow.dart';
-import 'package:fashow/payments/Buynow.dart';
 import 'package:contained_tab_bar_view/contained_tab_bar_view.dart';
-import 'package:paginate_firestore/paginate_firestore.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:fashow/Cart.dart';
-import 'package:paginate_firestore/paginate_firestore.dart';
-import 'package:smooth_star_rating/smooth_star_rating.dart';
 import 'package:fashow/HomePage.dart';
-import 'package:fashow/ActivityFeed.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 //import 'package:flutter_svg/svg.dart';
-import 'package:fashow/model/address.dart';
 import 'package:fashow/user.dart';
-import 'package:fashow/main.dart';
 
 import 'package:fashow/progress.dart';
 import 'package:flutter/cupertino.dart';
 import 'dart:async';
-import 'package:fashow/HomePage.dart';
 import 'package:fashow/Constants.dart';
-import 'package:fashow/ActivityFeed.dart';
 import 'package:fashow/product_custom.dart';
 import 'package:fashow/Profile.dart';
-import 'package:get/get.dart';
 class ProdEdit extends StatefulWidget {
   final String prodId;
   final String ownerId;
@@ -4003,12 +3990,17 @@ class _ProdEditState extends State<ProdEdit>
 
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return Container( decoration: BoxDecoration(
+        gradient: fabGradient
+    ) ,
+      alignment: Alignment.center,
+      child: Column(
 
-      mainAxisSize: MainAxisSize.min,
-      children: <Widget>[
-        buildPostHeader(),
-      ],
+        mainAxisSize: MainAxisSize.min,
+        children: <Widget>[
+          buildPostHeader(),
+        ],
+      ),
     );
   }
 }

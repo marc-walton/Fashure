@@ -2,7 +2,6 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fashow/ActivityFeed.dart';
 import 'package:fashow/HomePage.dart';
-import 'package:fashow/model/address.dart';
 import 'package:fashow/model/adressservice.dart';
 import 'package:fashow/payments/Servicepayment.dart';
 import 'package:fashow/user.dart';
@@ -457,77 +456,7 @@ Get.to( PaymentSer(Amount:amount,OrderId: orderId,
   }
 
 
-//   reviews() {
-//     showModalBottomSheet(
-//         backgroundColor: kSecondaryColor,
-//         context: context,
-//         builder: (BuildContext context) {
-//
-//           return  PaginateFirestore(
-// //    itemsPerPage: 2,
-//               itemBuilderType:
-//               PaginateBuilderType.listView,
-//               itemBuilder: (index, context, documentSnapshot)   {
-// //        DocumentSnapshot ds = snapshot.data.documents[index];
-//                 String ownerId = documentSnapshot.data['userId'];
-//                 var rating =   documentSnapshot.data['rating'];
-//                 String review  = documentSnapshot.data['review'];
-//
-//                 return
-//                   FutureBuilder(
-//                     future: usersRef.document(ownerId).get(),
-//                     builder: (context, snapshot) {
-//                       if (!snapshot.hasData) {
-//                         return circularProgress();
-//                       }
-//                       User user = User.fromDocument(snapshot.data);
-// //          bool isPostOwner = currentUserId == ownerId;
-//                       return Column(
-//                         children: <Widget>[
-//                           GestureDetector(
-//                             onTap: () => showProfile(context, profileId: user.id),
-//                             child: ListTile(
-//                               leading: CircleAvatar(
-//                                 backgroundImage: CachedNetworkImageProvider(user.photoUrl),
-//                                 backgroundColor: Colors.grey,
-//                               ),
-//                               title: Text(
-//                                 user.displayName,
-//                                 style: TextStyle(
-//                                   color: kText,
-//                                   fontWeight: FontWeight.bold,
-//                                 ),
-//                               ),
-//                               subtitle: Text(user.username,
-//                                 style: TextStyle(color: kIcon),),),
-//                           ),
-//                           SmoothStarRating(
-//                             isReadOnly: true,
-//                             filledIconData: Icons.blur_off,
-//                             halfFilledIconData: Icons.blur_on,
-//                             rating: rating,
-//                             size: 35,
-//                             starCount: 5,
-//
-//                           ),
-//                           SizedBox(height: 8.0,),
-//                           Text(review,style: TextStyle(color: Colors.white),),
-//                           Divider(color: kGrey,),
-//                         ],
-//
-//                       );
-//
-//                     },
-//                   );
-//               },
-//               query: Firestore.instance.collection('Reviews').document(prodId)
-//                   .collection('prodReviews').orderBy('timestamp',descending: true)
-//
-//
-//           );
-//
-//         });
-//   }
+
   postindia(){
     return
       Column(
@@ -822,14 +751,18 @@ Get.to( PaymentSer(Amount:amount,OrderId: orderId,
 
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return Container( decoration: BoxDecoration(
+        gradient: fabGradient
+    ) ,
+      alignment: Alignment.center,
+      child: Column(
 
-      mainAxisSize: MainAxisSize.min,
-      children: <Widget>[
-        buildPostHeader(),
-//        buildPostImage(),
-//        buildPostFooter(),
-      ],
+        mainAxisSize: MainAxisSize.min,
+        children: <Widget>[
+          buildPostHeader(),
+
+        ],
+      ),
     );
   }
 }

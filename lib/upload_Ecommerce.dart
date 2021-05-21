@@ -248,10 +248,10 @@ TextEditingController namecontroller = TextEditingController();
 
   Container buildSplashScreen() {
     return Container(
-      color: Theme
-          .of(context)
-          .accentColor
-          .withOpacity(0.6),
+      decoration: BoxDecoration(
+          gradient: fabGradient
+      ) ,
+      alignment: Alignment.center,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
@@ -8954,7 +8954,6 @@ else  if(dropdownValue=='Baby-Boys'||dropdownValue=='Baby-Girls') {
       (
       onWillPop: _onBackPressed,
       child: Scaffold(
-        backgroundColor: kSecondaryColor,
         key:  scaffoldKey,
         appBar: AppBar(
           backgroundColor: kPrimaryColor,
@@ -8990,73 +8989,77 @@ else  if(dropdownValue=='Baby-Boys'||dropdownValue=='Baby-Girls') {
             )
           ],
         ),
-        body: Stack(
-          children:[
-            Form(
-            key: _formKey,
-            child:
-            Column(
-                children: <Widget>[
-                isUploading ? linearProgress() : Text(""),
+        body: Container( decoration: BoxDecoration(
+            gradient: fabGradient
+        ) ,
+          alignment: Alignment.center,
+          child: Stack(
+            children:[
+              Form(
+              key: _formKey,
+              child:
+              Column(
+                  children: <Widget>[
+                  isUploading ? linearProgress() : Text(""),
    getImageWidget(),
-                     Expanded(
-                       child: SingleChildScrollView(
-                         child: Column(
-                    children: [
+                       Expanded(
+                         child: SingleChildScrollView(
+                           child: Column(
+                      children: [
 
-                SizedBox(height: 8.0,),
-                Text('Select Gender',style:TextStyle(color: kText) ,),
-                SizedBox(height: 8.0,),
-                Container(
-                  margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0,8.0),
-                  decoration:     BoxDecoration(
-                    border: Border.all(color: Colors.black)
+                  SizedBox(height: 8.0,),
+                  Text('Select Gender',style:TextStyle(color: kText) ,),
+                  SizedBox(height: 8.0,),
+                  Container(
+                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0,8.0),
+                    decoration:     BoxDecoration(
+                      border: Border.all(color: Colors.black)
+                    ),
+                    child: DropdownButton<String>(
+                        value: dropdownValue,
+                        icon: Icon(Icons.keyboard_arrow_down_sharp),
+                        dropdownColor: kPrimaryColor,
+                        iconSize: 24,
+                        elevation: 16,
+                        style: TextStyle(color: kText),
+                        // underline: Container(
+                        //     height: 2,
+                        //     color: Colors.deepPurpleAccent,
+                        // ),
+                        onChanged: (String newValue) {
+                              setState(() {
+                                dropdownValue = newValue;
+                              });
+                        },
+                        items: <String>['Women', 'Men', 'Baby-Boys', 'Baby-Girls', 'Kids-Boys', 'Kids-Girls', 'Teen-Boys', 'Teen-Girls']
+                                .map<DropdownMenuItem<String>>((String value) {
+                              return DropdownMenuItem<String>(
+                                value: value,
+                                child: Text(value),
+
+                              );
+                        }).toList(),
+                    ),
                   ),
-                  child: DropdownButton<String>(
-                      value: dropdownValue,
-                      icon: Icon(Icons.keyboard_arrow_down_sharp),
-                      dropdownColor: kPrimaryColor,
-                      iconSize: 24,
-                      elevation: 16,
-                      style: TextStyle(color: kText),
-                      // underline: Container(
-                      //     height: 2,
-                      //     color: Colors.deepPurpleAccent,
-                      // ),
-                      onChanged: (String newValue) {
-                            setState(() {
-                              dropdownValue = newValue;
-                            });
-                      },
-                      items: <String>['Women', 'Men', 'Baby-Boys', 'Baby-Girls', 'Kids-Boys', 'Kids-Girls', 'Teen-Boys', 'Teen-Girls']
-                              .map<DropdownMenuItem<String>>((String value) {
-                            return DropdownMenuItem<String>(
-                              value: value,
-                              child: Text(value),
-
-                            );
-                      }).toList(),
-                  ),
-                ),
-                Container(
-                  margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0,8.0),
-                  child: RaisedButton(
-                    color:kblue,
-                  child: Text('Select Category',style:TextStyle(color: kText) ,),
-                  onPressed: (){
-                      showModalBottomSheet(context: context, builder:(BuildContext context){
+                  Container(
+                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0,8.0),
+                    child: RaisedButton(
+                      color:kblue,
+                    child: Text('Select Category',style:TextStyle(color: kText) ,),
+                    onPressed: (){
+                        showModalBottomSheet(context: context, builder:(BuildContext context){
 
 
-                            if(dropdownValue=='Women')
-                            {
-                              return
-                                WomenCategory();
-                            }
-                            else if(dropdownValue=='Men')
-                            {
-                              return
-                                MenCategory();
-                            }
+                              if(dropdownValue=='Women')
+                              {
+                                return
+                                  WomenCategory();
+                              }
+                              else if(dropdownValue=='Men')
+                              {
+                                return
+                                  MenCategory();
+                              }
     else if(dropdownValue=='Baby-Boys')
     {
       return
@@ -9082,41 +9085,41 @@ else  if(dropdownValue=='Baby-Boys'||dropdownValue=='Baby-Girls') {
       return
       TeenGCategory();
     }
-                            else{
-                              return
-                              Text('text');
-                            }
-                      },
-                      );
-                  }
-                  ,
-                      ),
-                ),
-                value == 'None' ?   Text('Select Category',style:TextStyle(color: kText) ,):
-                Text(' ',),
+                              else{
+                                return
+                                Text('text');
+                              }
+                        },
+                        );
+                    }
+                    ,
+                        ),
+                  ),
+                  value == 'None' ?   Text('Select Category',style:TextStyle(color: kText) ,):
+                  Text(' ',),
 
 
-                SizedBox(height: 8.0,),
+                  SizedBox(height: 8.0,),
 // AddSize(),
-             Row(
-               mainAxisAlignment:MainAxisAlignment.center,
-                  children:[
-                 Container(
-             // alignment:Alignment.centerLeft,
-                   child:   FloatingActionButton.extended(
+               Row(
+                 mainAxisAlignment:MainAxisAlignment.center,
+                    children:[
+                   Container(
+               // alignment:Alignment.centerLeft,
+                     child:   FloatingActionButton.extended(
 backgroundColor: kblue,
-                     onPressed: ()=>AddSize(),
-                     label: Text('Select Size',style:TextStyle(color: kText) ,),
+                       onPressed: ()=>AddSize(),
+                       label: Text('Select Size',style:TextStyle(color: kText) ,),
+                     ),
                    ),
-                 ),
       SizedBox(width: 8.0,),Container(
-             // alignment:Alignment.centerRight,
-                   child:   FloatingActionButton.extended(
+               // alignment:Alignment.centerRight,
+                     child:   FloatingActionButton.extended(
 backgroundColor: kblue,
-                     onPressed: ()=>sizeGuide(),
-                     label: Text('Size Guide',style:TextStyle(color: kText) ,),
+                       onPressed: ()=>sizeGuide(),
+                       label: Text('Size Guide',style:TextStyle(color: kText) ,),
+                     ),
                    ),
-                 ),
    //                GestureDetector(
    //                  onTap: () {
    //                    sizeGuide();
@@ -9134,232 +9137,233 @@ backgroundColor: kblue,
    //                    ],),
    //                  ),),
    //                ),
-                  ],
-                ),
-                SizedBox(height: 8.0,),
+                    ],
+                  ),
+                  SizedBox(height: 8.0,),
 
-                Container(
-                  margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
-                      child: ListTile(
-                            leading: Icon(
-                              EvilIcons.eye,
-                              color: Colors.orange,
-                              size: 35.0,
-                            ),
-                            title:  TextFormField(
-                              style:TextStyle(color: kText),
-                              controller: productnameController,
+                  Container(
+                    margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+                        child: ListTile(
+                              leading: Icon(
+                                EvilIcons.eye,
+                                color: Colors.orange,
+                                size: 35.0,
+                              ),
+                              title:  TextFormField(
+                                style:TextStyle(color: kText),
+                                controller: productnameController,
+                                decoration: InputDecoration(
+                                  border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+                                  enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+                                  focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+
+                                  labelText: 'Product Name',labelStyle: TextStyle(color: kText),
+                                  hintText: 'Product Name',
+                                ),
+                                textAlign: TextAlign.center,
+                                validator: (text) {
+                                  if ( text.isEmpty) {
+                                    return 'Product Name is empty';
+                                  }
+                                  return null;
+                                },
+                              ),
+                        ),
+                      ),
+                      SizedBox(height: 8.0,),
+                  Container(
+                    margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+                        child: ListTile(
+                              leading: Icon(
+                                EvilIcons.tag,
+                                color: Colors.orange,
+                                size: 35.0,
+                              ),
+                              title:TextFormField(
+                                style:TextStyle(color: kText),
+keyboardType:TextInputType.number,
+                                controller: priceController,
+                                decoration: InputDecoration(
+                                  border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+                                  enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+                                  focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+
+                                  labelText: 'Price',labelStyle: TextStyle(color: kText),
+                                  hintText: Country(),
+                                ),
+                                textAlign: TextAlign.center,
+                                validator: (text) {
+                                  if (text.isEmpty) {
+                                    return 'Price is empty';
+                                  }
+                                  return null;
+                                },
+                              ),
+                        ),
+                      ),
+                      SizedBox( height: 8.0,),
+                  Container(
+                    margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+                        child: TextFormField(
+                          style:TextStyle(color: kText),
+
+                          controller: colorController,
                               decoration: InputDecoration(
-                                border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
                                 enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
                                 focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
 
-                                labelText: 'Product Name',labelStyle: TextStyle(color: kText),
-                                hintText: 'Product Name',
+                                labelText: 'Color',labelStyle: TextStyle(color: kText),
+                                hintText: 'ex.Peach',
                               ),
                               textAlign: TextAlign.center,
                               validator: (text) {
                                 if ( text.isEmpty) {
-                                  return 'Product Name is empty';
+                                  return 'Color is empty';
                                 }
                                 return null;
                               },
-                            ),
+                        ),
                       ),
-                    ),
-                    SizedBox(height: 8.0,),
-                Container(
-                  margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
-                      child: ListTile(
-                            leading: Icon(
-                              EvilIcons.tag,
-                              color: Colors.orange,
-                              size: 35.0,
-                            ),
-                            title:TextFormField(
-                              style:TextStyle(color: kText),
-keyboardType:TextInputType.number,
-                              controller: priceController,
+                      SizedBox( height: 8.0,),
+                  Container(
+                    margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+                        child: TextFormField(
+                          style:TextStyle(color: kText),
+
+                          keyboardType: TextInputType.multiline,
+                              maxLines: null,
+                              controller: detailsController,
                               decoration: InputDecoration(
                                 border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
                                 enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
                                 focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
 
-                                labelText: 'Price',labelStyle: TextStyle(color: kText),
-                                hintText: Country(),
+                                labelText: 'Product description',labelStyle: TextStyle(color: kText),
+                                hintText: 'Product description',
                               ),
                               textAlign: TextAlign.center,
                               validator: (text) {
-                                if (text.isEmpty) {
-                                  return 'Price is empty';
+                                if ( text.isEmpty) {
+                                  return 'Description is empty';
                                 }
                                 return null;
                               },
-                            ),
+                        ),
                       ),
-                    ),
-                    SizedBox( height: 8.0,),
-                Container(
-                  margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
-                      child: TextFormField(
-                        style:TextStyle(color: kText),
+                      SizedBox( height: 8.0,),
+                  Container(
+                    margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+                        child: TextFormField(
+                          style:TextStyle(color: kText),
 
-                        controller: colorController,
-                            decoration: InputDecoration(
-                              enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
-                              focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+                          keyboardType: TextInputType.multiline,
+                              maxLines: null,
+                              controller: compositionController,
+                              decoration: InputDecoration(
+                                border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+                                enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+                                focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
 
-                              labelText: 'Color',labelStyle: TextStyle(color: kText),
-                              hintText: 'ex.Peach',
-                            ),
-                            textAlign: TextAlign.center,
-                            validator: (text) {
-                              if ( text.isEmpty) {
-                                return 'Color is empty';
-                              }
-                              return null;
-                            },
+                                labelText: 'Fabric description',labelStyle: TextStyle(color: kText),
+                                hintText: 'ex.Cotton: 100%' ,
+                              ),
+                              textAlign: TextAlign.center,
+                              validator: (text) {
+                                if ( text.isEmpty) {
+                                  return 'Fabric description is empty';
+                                }
+                                return null;
+                              },
+                        ),
                       ),
-                    ),
-                    SizedBox( height: 8.0,),
-                Container(
-                  margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
-                      child: TextFormField(
-                        style:TextStyle(color: kText),
+                      SizedBox( height: 8.0,),
+                  Container(
+                    margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+                        child: TextFormField(
+                          style:TextStyle(color: kText),
 
-                        keyboardType: TextInputType.multiline,
-                            maxLines: null,
-                            controller: detailsController,
-                            decoration: InputDecoration(
-                              border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
-                              enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
-                              focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+                          keyboardType: TextInputType.multiline,
+                              maxLines: null,
+                              controller: washandcareController,
+                              decoration: InputDecoration(
+                                border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+                                enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+                                focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
 
-                              labelText: 'Product description',labelStyle: TextStyle(color: kText),
-                              hintText: 'Product description',
-                            ),
-                            textAlign: TextAlign.center,
-                            validator: (text) {
-                              if ( text.isEmpty) {
-                                return 'Description is empty';
-                              }
-                              return null;
-                            },
+                                labelText: 'Wash & Care',labelStyle: TextStyle(color: kText),
+                                hintText: 'Wash & Care instructions',
+                              ),
+                              textAlign: TextAlign.center,
+                              validator: (text) {
+                                if ( text.isEmpty) {
+                                  return 'Wash & Care instructions is empty';
+                                }
+                                return null;
+                              },
+                        ),
                       ),
-                    ),
-                    SizedBox( height: 8.0,),
-                Container(
-                  margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
-                      child: TextFormField(
-                        style:TextStyle(color: kText),
+                      SizedBox( height: 8.0,),
+                  Container(
+                    margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+                        child: TextFormField(
+                          style:TextStyle(color: kText),
 
-                        keyboardType: TextInputType.multiline,
-                            maxLines: null,
-                            controller: compositionController,
-                            decoration: InputDecoration(
-                              border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
-                              enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
-                              focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+                          keyboardType: TextInputType.multiline,
+                              maxLines: null,
+                              controller: sizeandfitController,
+                              decoration: InputDecoration(
+                                border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+                                enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+                                focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
 
-                              labelText: 'Fabric description',labelStyle: TextStyle(color: kText),
-                              hintText: 'ex.Cotton: 100%' ,
-                            ),
-                            textAlign: TextAlign.center,
-                            validator: (text) {
-                              if ( text.isEmpty) {
-                                return 'Fabric description is empty';
-                              }
-                              return null;
-                            },
+                                labelText: 'Size & Fit recommendations',labelStyle: TextStyle(color: kText),
+                                hintText: 'ex.Cut for slim fit,take your normal size',
+                              ),
+                              textAlign: TextAlign.center,
+                              validator: (text) {
+                                if ( text.isEmpty) {
+                                  return ' Size & Fit recommendations is empty';
+                                }
+                                return null;
+                              },
+                        ),
                       ),
-                    ),
-                    SizedBox( height: 8.0,),
-                Container(
-                  margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
-                      child: TextFormField(
-                        style:TextStyle(color: kText),
-
-                        keyboardType: TextInputType.multiline,
-                            maxLines: null,
-                            controller: washandcareController,
-                            decoration: InputDecoration(
-                              border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
-                              enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
-                              focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
-
-                              labelText: 'Wash & Care',labelStyle: TextStyle(color: kText),
-                              hintText: 'Wash & Care instructions',
-                            ),
-                            textAlign: TextAlign.center,
-                            validator: (text) {
-                              if ( text.isEmpty) {
-                                return 'Wash & Care instructions is empty';
-                              }
-                              return null;
-                            },
-                      ),
-                    ),
-                    SizedBox( height: 8.0,),
-                Container(
-                  margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
-                      child: TextFormField(
-                        style:TextStyle(color: kText),
-
-                        keyboardType: TextInputType.multiline,
-                            maxLines: null,
-                            controller: sizeandfitController,
-                            decoration: InputDecoration(
-                              border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
-                              enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
-                              focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
-
-                              labelText: 'Size & Fit recommendations',labelStyle: TextStyle(color: kText),
-                              hintText: 'ex.Cut for slim fit,take your normal size',
-                            ),
-                            textAlign: TextAlign.center,
-                            validator: (text) {
-                              if ( text.isEmpty) {
-                                return ' Size & Fit recommendations is empty';
-                              }
-                              return null;
-                            },
-                      ),
-                    ),
 
 
 
   SizedBox( height: 8.0,),
 
 
-                     ],
-                  ),
-                       ),
-                     ),
-
-                  (_inProcess)?Container(
-                    color: Colors.white,
-                    height: MediaQuery.of(context).size.height * 0.95,
-                    child: Center(
-                      child: CircularProgressIndicator(),
+                       ],
                     ),
-                  ):Center()
-            ],
-            ),
+                         ),
+                       ),
 
-
-
-
-          ),
-            (_inProcess)?Container(
-
-              color: Colors.white,
-              height: MediaQuery.of(context).size.height * 0.95,
-              child: Center(
-                child: CircularProgressIndicator(),
+                    (_inProcess)?Container(
+                      color: Colors.white,
+                      height: MediaQuery.of(context).size.height * 0.95,
+                      child: Center(
+                        child: CircularProgressIndicator(),
+                      ),
+                    ):Center()
+              ],
               ),
-            ):Center(),
-            isUploading ? Center(child:  CircularProgressIndicator()) : Text(""),
-          ],
+
+
+
+
+            ),
+              (_inProcess)?Container(
+
+                color: Colors.white,
+                height: MediaQuery.of(context).size.height * 0.95,
+                child: Center(
+                  child: CircularProgressIndicator(),
+                ),
+              ):Center(),
+              isUploading ? Center(child:  CircularProgressIndicator()) : Text(""),
+            ],
+          ),
         ),
       ),
     );

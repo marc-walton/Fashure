@@ -109,75 +109,80 @@ if(save == true){
               "Select region" ,
               style: TextStyle(color: Colors.white),
             ),),),
-        body: ListView(
-          children: <Widget>[
-        Center(
-          child: Form(
-            key: _formKey,
-            child:                   Center(
-              child: Column(
-                // mainAxisAlignment: MainAxisAlignment.start,
-                children: <Widget>[
-                  Text('Select your region',style: TextStyle(color:kText)),
+        body: Container( decoration: BoxDecoration(
+            gradient: fabGradient
+        ) ,
+          alignment: Alignment.center,
+          child: ListView(
+            children: <Widget>[
+          Center(
+            child: Form(
+              key: _formKey,
+              child:                   Center(
+                child: Column(
+                  // mainAxisAlignment: MainAxisAlignment.start,
+                  children: <Widget>[
+                    Text('Select your region',style: TextStyle(color:kText)),
 
-                  Container(
-                    padding: EdgeInsets.all(16),
-                    child: DropDownFormField(
+                    Container(
+                      padding: EdgeInsets.all(16),
+                      child: DropDownFormField(
 
-                      titleText: '',
-                      hintText: 'Select your region',
-                      value: dropdownValue,
-                      onSaved: (value) {
-                        setState(() {
-                          dropdownValue = value;
-                        });
-                      },
-                      onChanged: (value) {
-                        setState(() {
-                          dropdownValue = value;
-                        });
-                      },
-                      dataSource: [
-                        {
-                          "display": "🇮🇳,India",
-                          "value": "India",
+                        titleText: '',
+                        hintText: 'Select your region',
+                        value: dropdownValue,
+                        onSaved: (value) {
+                          setState(() {
+                            dropdownValue = value;
+                          });
                         },
-                        {
-                          "display": "🇺🇸,USA",
-                          "value": "USA",
+                        onChanged: (value) {
+                          setState(() {
+                            dropdownValue = value;
+                          });
                         },
-                        {
-                          "display": "🇪🇺,Europe",
-                          "value": "Europe",
-                        },
-                        {
-                          "display": "󠁧󠁢󠁥🇬🇧,United Kingdom",
-                          "value": "UK",
-                        },
-                        {
-                          "display": "󠁧󠁢󠁥Rest of the World",
-                          "value": "Rest",
-                        },
-                      ],
-                      textField: 'display',
-                      valueField: 'value',
+                        dataSource: [
+                          {
+                            "display": "🇮🇳,India",
+                            "value": "India",
+                          },
+                          {
+                            "display": "🇺🇸,USA",
+                            "value": "USA",
+                          },
+                          {
+                            "display": "🇪🇺,Europe",
+                            "value": "Europe",
+                          },
+                          {
+                            "display": "󠁧󠁢󠁥🇬🇧,United Kingdom",
+                            "value": "UK",
+                          },
+                          {
+                            "display": "󠁧󠁢󠁥Rest of the World",
+                            "value": "Rest",
+                          },
+                        ],
+                        textField: 'display',
+                        valueField: 'value',
+                      ),
                     ),
-                  ),
-                  FloatingActionButton.extended(
-                    heroTag:'save',
-                    backgroundColor: kblue,
-                    onPressed: (){_saveForm();
-                    },
+                    FloatingActionButton.extended(
+                      heroTag:'save',
+                      backgroundColor: kblue,
+                      onPressed: (){_saveForm();
+                      },
 
-                    label: Text('Sign up',style:TextStyle(color: kText) ,),
-                  ),
-                ],
+                      label: Text('Sign up',style:TextStyle(color: kText) ,),
+                    ),
+                  ],
+                ),
               ),
-            ),
 
+            ),
           ),
-        ),
-          ],
+            ],
+          ),
         ),
       ),
     );

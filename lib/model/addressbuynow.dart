@@ -1,29 +1,17 @@
 import 'dart:io';
-import 'dart:async';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:country_list_pick/country_list_pick.dart';
 import 'package:fashow/payments/Buyview.dart';
 import 'package:get/get.dart';
 import 'package:getflutter/components/button/gf_button.dart';
 import 'package:getflutter/shape/gf_button_shape.dart';
-import 'package:smart_select/smart_select.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_currencies_tracker/flutter_currencies_tracker.dart';
 //import 'package:flutter_svg/svg.dart';
 // import 'package:frankfurter/frankfurter.dart';
 import 'package:fashow/user.dart';
 import 'package:fashow/add_address.dart';
-import 'package:fashow/methods/country.dart';
-import 'package:flutter_icons/flutter_icons.dart';
-import 'package:image_cropper/image_cropper.dart';
-import 'package:path_provider/path_provider.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:firebase_storage/firebase_storage.dart';
-import 'package:image_picker/image_picker.dart';
-import 'package:fashow/progress.dart';
 import 'package:fashow/HomePage.dart';
 import 'package:fashow/Constants.dart';
-import 'package:image/image.dart' as Im;
 import 'package:uuid/uuid.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 class AddressBuy extends StatefulWidget {
@@ -145,13 +133,9 @@ class _AddressBuyState extends State<AddressBuy>  with AutomaticKeepAliveClientM
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: kSecondaryColor,
-      // key:  scaffoldKey,
+
       appBar: AppBar(
-        backgroundColor: kPrimaryColor,
-        // leading: IconButton(
-        //     icon: Icon(Icons.arrow_back, color: kSecondaryColor),
-        //     onPressed:()=>Navigator.pop(context)),
+
         title: FittedBox(
           fit: BoxFit.contain,
           child: Text(
@@ -172,57 +156,63 @@ class _AddressBuyState extends State<AddressBuy>  with AutomaticKeepAliveClientM
   ]
       ),
       body:
-      StreamBuilder(
-          stream: Firestore.instance
-              .collection('Address').document(currentUser.id)
-              .collection('useraddress')
+      Container(
+        decoration: BoxDecoration(
+            gradient: fabGradient
+        ) ,
+        alignment: Alignment.center,
+        child: StreamBuilder(
+            stream: Firestore.instance
+                .collection('Address').document(currentUser.id)
+                .collection('useraddress')
 
-              .snapshots(),
-          builder: (context, snapshot) {
-            if (!snapshot.hasData) {
-              return Text('You haven\'t saved an address' );
+                .snapshots(),
+            builder: (context, snapshot) {
+              if (!snapshot.hasData) {
+                return Text('You haven\'t saved an address' );
 
-            } else {
-              return new ListView.builder (
-                // key: PageStorageKey(''),
-                //   scrollDirection: Axis.vertical,
-                  shrinkWrap: true,
-                  itemCount: snapshot.data.documents.length,
-                  itemBuilder: (context, index) {
-                    DocumentSnapshot ds = snapshot.data.documents[index];
+              } else {
+                return new ListView.builder (
+                  // key: PageStorageKey(''),
+                  //   scrollDirection: Axis.vertical,
+                    shrinkWrap: true,
+                    itemCount: snapshot.data.documents.length,
+                    itemBuilder: (context, index) {
+                      DocumentSnapshot ds = snapshot.data.documents[index];
 
-                    return new
+                      return new
 
   addressview(
-                    Type: ds['type'],
-                      Fullname: ds['fullname'],
-                      Addresss: ds['address'],
-                      City:  ds['city'],
-                      State: ds['state'],
-                      Country:  ds['country'],
-                      Zip : ds['zip'],
-                      Dialcode: ds['code'],
-                      Phone:  ds['phone'],
-                      eur:widget.eur,
-                      usd:widget.usd,
-                      inr:widget.inr,
-                      gbp:widget.gbp,
-                      userSize:widget.Size,
-                      prodId: widget.prodId,
-                      total:widget.Amount,
-                      ownerId: widget.OwnerId,
-                      profileimg: widget.profileimg,
-                      username: widget.username,
-                      mediaUrl: widget.mediaUrl,
-                      productname:widget.productname,
-                    );
+                      Type: ds['type'],
+                        Fullname: ds['fullname'],
+                        Addresss: ds['address'],
+                        City:  ds['city'],
+                        State: ds['state'],
+                        Country:  ds['country'],
+                        Zip : ds['zip'],
+                        Dialcode: ds['code'],
+                        Phone:  ds['phone'],
+                        eur:widget.eur,
+                        usd:widget.usd,
+                        inr:widget.inr,
+                        gbp:widget.gbp,
+                        userSize:widget.Size,
+                        prodId: widget.prodId,
+                        total:widget.Amount,
+                        ownerId: widget.OwnerId,
+                        profileimg: widget.profileimg,
+                        username: widget.username,
+                        mediaUrl: widget.mediaUrl,
+                        productname:widget.productname,
+                      );
 
 
-                  }
-              );
+                    }
+                );
+              }
             }
-          }
 
+        ),
       ),
 
     );

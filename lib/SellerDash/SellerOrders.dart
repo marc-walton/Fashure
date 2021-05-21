@@ -33,23 +33,7 @@ class _SellerOrdersState extends State<SellerOrders> {
             Text( "₹$inr",style: TextStyle(color: kText,
                 fontSize: 20.0,
                 fontWeight: FontWeight.bold)),
-            // GFButton(
-            //   onPressed: () =>
-            //       Navigator.push(
-            //         context,
-            //         MaterialPageRoute(
-            //           builder: (context) =>
-            //               ProductScreen(
-            //                 prodId: prodId,
-            //                 userId: ownerId,
-            //               ),
-            //         ),
-            //       ),
-            //   text: "More",
-            //   icon: Icon(Icons.card_travel),
-            //   shape: GFButtonShape.pills,
-            //
-            // ),
+
           ],
         );
 
@@ -66,23 +50,7 @@ class _SellerOrdersState extends State<SellerOrders> {
             Text( "\u0024 $usd",style: TextStyle(color: kText,
                 fontSize: 20.0,
                 fontWeight: FontWeight.bold)),
-            // GFButton(
-            //   onPressed: () =>
-            //       Navigator.push(
-            //         context,
-            //         MaterialPageRoute(
-            //           builder: (context) =>
-            //               ProductScreen(
-            //                 prodId: prodId,
-            //                 userId: ownerId,
-            //               ),
-            //         ),
-            //       ),
-            //   text: "More",
-            //   icon: Icon(Icons.card_travel),
-            //   shape: GFButtonShape.pills,
-            //
-            // ),
+
           ],
         );
 
@@ -99,23 +67,6 @@ class _SellerOrdersState extends State<SellerOrders> {
             Text( "¥ $cny",style: TextStyle(color: kText,
                 fontSize: 20.0,
                 fontWeight: FontWeight.bold)),
-            // GFButton(
-            //   onPressed: () =>
-            //       Navigator.push(
-            //         context,
-            //         MaterialPageRoute(
-            //           builder: (context) =>
-            //               ProductScreen(
-            //                 prodId: prodId,
-            //                 userId: ownerId,
-            //               ),
-            //         ),
-            //       ),
-            //   text: "More",
-            //   icon: Icon(Icons.card_travel),
-            //   shape: GFButtonShape.pills,
-            //
-            // ),
           ],
         );
 
@@ -132,23 +83,7 @@ class _SellerOrdersState extends State<SellerOrders> {
             Text( "€ $eur",style: TextStyle(color: kText,
                 fontSize: 20.0,
                 fontWeight: FontWeight.bold)),
-            // GFButton(
-            //   onPressed: () =>
-            //       Navigator.push(
-            //         context,
-            //         MaterialPageRoute(
-            //           builder: (context) =>
-            //               ProductScreen(
-            //                 prodId: prodId,
-            //                 userId: ownerId,
-            //               ),
-            //         ),
-            //       ),
-            //   text: "More",
-            //   icon: Icon(Icons.card_travel),
-            //   shape: GFButtonShape.pills,
-            //
-            // ),
+
           ],
         );
 
@@ -165,23 +100,6 @@ class _SellerOrdersState extends State<SellerOrders> {
             Text( "£  $gbp ",style: TextStyle(color: kText,
                 fontSize: 20.0,
                 fontWeight: FontWeight.bold)),
-            // GFButton(
-            //   onPressed: () =>
-            //       Navigator.push(
-            //         context,
-            //         MaterialPageRoute(
-            //           builder: (context) =>
-            //               ProductScreen(
-            //                 prodId: prodId,
-            //                 userId: ownerId,
-            //               ),
-            //         ),
-            //       ),
-            //   text: "More",
-            //   icon: Icon(Icons.card_travel),
-            //   shape: GFButtonShape.pills,
-            //
-            // ),
           ],
         );
 
@@ -198,23 +116,7 @@ class _SellerOrdersState extends State<SellerOrders> {
             Text( "\u0024 $usd",style: TextStyle(color: kText,
                 fontSize: 20.0,
                 fontWeight: FontWeight.bold)),
-            // GFButton(
-            //   onPressed: () =>
-            //       Navigator.push(
-            //         context,
-            //         MaterialPageRoute(
-            //           builder: (context) =>
-            //               ProductScreen(
-            //                 prodId: prodId,
-            //                 userId: ownerId,
-            //               ),
-            //         ),
-            //       ),
-            //   text: "More",
-            //   icon: Icon(Icons.card_travel),
-            //   shape: GFButtonShape.pills,
-            //
-            // ),
+
           ],
         );
 
@@ -447,7 +349,6 @@ ListView(
         child: DefaultTabController(
             length: 2,
             child: Scaffold(
-              backgroundColor: kPrimaryColor,
               appBar: AppBar(
                 toolbarHeight: SizeConfig.safeBlockHorizontal * 8,
                 backgroundColor: kPrimaryColor,
@@ -467,15 +368,20 @@ ListView(
                 ),
               ),
 
-              body: RotatedBox(
-                quarterTurns: 1,
-                child: TabBarView(
-                    children: <Widget>[
-                      UpcomingOrders(),
-                      OrdersFulfilled(),
+              body: Container( decoration: BoxDecoration(
+                  gradient: fabGradient
+              ) ,
+                alignment: Alignment.center,
+                child: RotatedBox(
+                  quarterTurns: 1,
+                  child: TabBarView(
+                      children: <Widget>[
+                        UpcomingOrders(),
+                        OrdersFulfilled(),
 
 
-                    ]),
+                      ]),
+                ),
               ),
             )
         ),

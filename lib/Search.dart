@@ -133,8 +133,10 @@ class UserResult extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: kSecondaryColor,
-      child: Column(
+      decoration: BoxDecoration(
+          gradient: fabGradient
+      ) ,
+      alignment: Alignment.center,      child: Column(
         children: <Widget>[
           GestureDetector(
             onTap: () => showProfile(context, profileId: user.id),

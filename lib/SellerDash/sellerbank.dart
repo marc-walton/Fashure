@@ -104,19 +104,6 @@ AddBank(){
                       ),
                       Center(
                         child: CountryListPick(
-                          // if you need custome picker use this
-                          // pickerBuilder: (context, CountryCode countryCode) {
-                          //   return Row(
-                          //     children: [
-                          //       Image.asset(
-                          //         countryCode.flagUri,
-                          //         package: 'country_list_pick',
-                          //       ),
-                          //       Text(countryCode.code),
-                          //       Text(countryCode.dialCode),
-                          //     ],
-                          //   );
-                          // },
                           theme: CountryTheme(
                             isShowFlag: true,
                             isShowTitle: true,
@@ -301,21 +288,26 @@ Bankdetails(){
   Widget build(BuildContext context) {
     return
 
-      Stack(
-      children: <Widget>[
+      Container( decoration: BoxDecoration(
+          gradient: fabGradient
+      ) ,
+        alignment: Alignment.center,
+        child: Stack(
+        children: <Widget>[
 
-          AddBank(),
+            AddBank(),
 
 
 
     (_inProcess)?Container(
-          color: Colors.white,
-          height: MediaQuery.of(context).size.height * 0.95,
-          child: Center(
-            child: CircularProgressIndicator(),
-          ),
-        ):Center()
-      ],
-    );
+            color: Colors.white,
+            height: MediaQuery.of(context).size.height * 0.95,
+            child: Center(
+              child: CircularProgressIndicator(),
+            ),
+          ):Center()
+        ],
+    ),
+      );
   }
 }

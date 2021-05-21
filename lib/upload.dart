@@ -125,8 +125,10 @@ class _UploadState extends State<Upload>
 
   Container buildSplashScreen() {
     return Container(
-      color:kSecondaryColor,
-      child: Column(
+      decoration: BoxDecoration(
+          gradient: fabGradient
+      ) ,
+      alignment: Alignment.center,      child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
 //          SvgPicture.asset('assets/images/upload.svg', height: 260.0),
@@ -245,7 +247,6 @@ class _UploadState extends State<Upload>
     return WillPopScope(
       onWillPop: _onBackPressed,
       child: Scaffold(
-        backgroundColor: kSecondaryColor,
         appBar: AppBar(
           backgroundColor: kPrimaryColor,
           leading: IconButton(
@@ -271,87 +272,92 @@ class _UploadState extends State<Upload>
             )
           ],
         ),
-        body: Stack(
+        body: Container( decoration: BoxDecoration(
+            gradient: fabGradient
+        ) ,
+          alignment: Alignment.center,
+          child: Stack(
 
-          children:[ ListView(
-            children: <Widget>[
-              isUploading ? linearProgress() : Text(""),
+            children:[ ListView(
+              children: <Widget>[
+                isUploading ? linearProgress() : Text(""),
 
-              Container(
-                  height:500,
-                  width:300,child: getImageWidget()),
-              Padding(
-                padding: EdgeInsets.only(top: 10.0),
-              ),
-              ListTile(
-                leading: CircleAvatar(
-                  backgroundImage:
-                  CachedNetworkImageProvider(widget.currentUser.photoUrl),
+                Container(
+                    height:500,
+                    width:300,child: getImageWidget()),
+                Padding(
+                  padding: EdgeInsets.only(top: 10.0),
                 ),
-                title: Container(
-                  width: 250.0,
-                  child: TextField(
-                    style:TextStyle(color: kText),
-
-                    controller: captionController,
-                    decoration: InputDecoration(
-                        hintText: "Write a caption...", border: InputBorder.none),
+                ListTile(
+                  leading: CircleAvatar(
+                    backgroundImage:
+                    CachedNetworkImageProvider(widget.currentUser.photoUrl),
                   ),
-                ),
-              ),
-              Divider(),
-              ListTile(
-                leading: Icon(
-                  Icons.pin_drop,
-                  color: Colors.orange,
-                  size: 35.0,
-                ),
-                title: Container(
-                  width: 250.0,
-                  child: TextField(
-                    style:TextStyle(color: kText),
+                  title: Container(
+                    width: 250.0,
+                    child: TextField(
+                      style:TextStyle(color: kText),
 
-                    controller: locationController,
-                    decoration: InputDecoration(
-                      hintText: "Where was this photo taken?",
-                      border: InputBorder.none,
+                      controller: captionController,
+                      decoration: InputDecoration(
+                          hintText: "Write a caption...", border: InputBorder.none),
                     ),
                   ),
                 ),
-              ),
-              Container(
-                width: 200.0,
-                height: 100.0,
-                alignment: Alignment.center,
-                child: RaisedButton.icon(
-                    label: Text(
-                      "Use Current Location",
-                      style: TextStyle(color: Colors.white),
+                Divider(),
+                ListTile(
+                  leading: Icon(
+                    Icons.pin_drop,
+                    color: Colors.orange,
+                    size: 35.0,
+                  ),
+                  title: Container(
+                    width: 250.0,
+                    child: TextField(
+                      style:TextStyle(color: kText),
+
+                      controller: locationController,
+                      decoration: InputDecoration(
+                        hintText: "Where was this photo taken?",
+                        border: InputBorder.none,
+                      ),
                     ),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(30.0),
-                    ),
-                    color: Colors.blue,
-                    onPressed: getUserLocation,
-                    icon: Icon(
-                      Icons.my_location,
-                      color: Colors.white,
-                    )),
-              ),
+                  ),
+                ),
+                Container(
+                  width: 200.0,
+                  height: 100.0,
+                  alignment: Alignment.center,
+                  child: RaisedButton.icon(
+                      label: Text(
+                        "Use Current Location",
+                        style: TextStyle(color: Colors.white),
+                      ),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(30.0),
+                      ),
+                      color: Colors.blue,
+                      onPressed: getUserLocation,
+                      icon: Icon(
+                        Icons.my_location,
+                        color: Colors.white,
+                      )),
+                ),
 
 
-            ],
-          ),
-            (_inProcess)?Container(
+              ],
+            ),
+              (_inProcess)?Container(
 
-              color: Colors.white,
-              height: MediaQuery.of(context).size.height * 0.95,
-              child: Center(
-                child: CircularProgressIndicator(),
-              ),
-            ):Center(),
-            isUploading ? Center(child:  CircularProgressIndicator()) : Text(""),
+                color: Colors.white,
+                height: MediaQuery.of(context).size.height * 0.95,
+                child: Center(
+                  child: CircularProgressIndicator(),
+                ),
+              ):Center(),
+              isUploading ? Center(child:  CircularProgressIndicator()) : Text(""),
       ],
+          ),
         ),
       ),
     );
@@ -379,132 +385,3 @@ class _UploadState extends State<Upload>
     return file == null ? buildSplashScreen() : builduploadForm();
   }
 }
-// Tags(){
-//   showModalBottomSheet(
-// //      isScrollControlled: true,
-//       context: context,
-//       backgroundColor: kSecondaryColor,
-//       builder: (BuildContext context){
-//         return Column(
-//           children: [
-//             ListTile(leading: IconButton( icon:Icon(Icons.arrow_back_ios,color:kText,),
-//               onPressed: ()=>Navigator.pop(context),),
-//               title: Text("Add Tags",style: TextStyle(color: kText),),),
-//             FloatingActionButton.extended(onPressed: GetTags, label: Text("Tag - 1")),
-//             Container(
-//               child: Image.network(shopmediaUrl1??""),
-//             ),
-//             FloatingActionButton.extended(onPressed: GetTags2, label: Text("Tag - 2")),
-//             Container(
-//               child: Image.network(shopmediaUrl2??""),
-//             ),
-//             FloatingActionButton.extended(onPressed: GetTags3, label: Text("Tag - 3")),
-//             Container(
-//               child: Image.network(shopmediaUrl3??""),
-//             ),
-//             FloatingActionButton.extended(onPressed: GetTags4, label: Text("Tag - 4")),
-//             Container(
-//               child: Image.network(shopmediaUrl4??""),
-//             ),
-//             FloatingActionButton.extended(onPressed: GetTags5, label: Text("Tag - 5")),
-//             Container(
-//               child: Image.network(shopmediaUrl5??""),
-//             ),
-//           ],
-//         );
-//       }
-//
-//   );
-// }
-// GetTags(){
-//   showModalBottomSheet(
-//       isScrollControlled:true,
-//       context:context,
-//       builder: (BuildContext context){
-//         return
-//           Container(
-// //              height: MediaQuery.of(context).size.height,
-//             color: kPrimaryColor,
-//             child: ListView(
-//                 children: [
-//                   SizedBox(height: 52.0,),
-//                   Expanded(child: TagSearch())
-//                 ]
-//             ),
-//           );
-//       }
-//   );
-// }
-// GetTags2(){
-//   showModalBottomSheet(
-//       isScrollControlled:true,
-//       context:context,
-//       builder: (BuildContext context){
-//         return
-//           Container(
-// //              height: MediaQuery.of(context).size.height,
-//             color: kPrimaryColor,
-//             child: ListView(
-//                 children: [
-//                   SizedBox(height: 52.0,),
-//                   Expanded(child: TagSearch2())
-//                 ]
-//             ),
-//           );
-//       }
-//   );
-// }
-// GetTags3(){
-//   showModalBottomSheet(
-//       context:context,
-//       builder: (BuildContext context){
-//         return
-//           Container(
-// //              height: MediaQuery.of(context).size.height,
-//             color: kPrimaryColor,
-//             child: ListView(
-//                 children: [
-//                   SizedBox(height: 52.0,),
-//                   Expanded(child: TagSearch3())
-//                 ]
-//             ),
-//           );
-//       }
-//   );
-// }
-// GetTags4(){
-//   showModalBottomSheet(
-//       context:context,
-//       builder: (BuildContext context){
-//         return
-//           Container(
-// //              height: MediaQuery.of(context).size.height,
-//             color: kPrimaryColor,
-//             child: ListView(
-//                 children: [
-//                   SizedBox(height: 52.0,),
-//                   Expanded(child: TagSearch4())
-//                 ]
-//             ),
-//           );
-//       }
-//   );
-// }
-// GetTags5(){
-//   showModalBottomSheet(
-//       context:context,
-//       builder: (BuildContext context){
-//         return
-//           Container(
-// //              height: MediaQuery.of(context).size.height,
-//             color: kPrimaryColor,
-//             child: ListView(
-//                 children: [
-//                   SizedBox(height: 52.0,),
-//                   Expanded(child: TagSearch5())
-//                 ]
-//             ),
-//           );
-//       }
-//   );
-// }

@@ -1,6 +1,4 @@
 import 'package:fashow/model/addressbuynow.dart';
-import 'package:fashow/payments/Buynow.dart';
-import 'package:fashow/payments/payment.dart';
 import 'package:paginate_firestore/paginate_firestore.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -12,9 +10,7 @@ import 'package:fashow/HomePage.dart';
 import 'package:fashow/ActivityFeed.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 //import 'package:flutter_svg/svg.dart';
-import 'package:fashow/model/address.dart';
 import 'package:fashow/user.dart';
-import 'package:fashow/main.dart';
 
 import 'package:fashow/progress.dart';
 import 'package:flutter/cupertino.dart';
@@ -24,7 +20,6 @@ import 'package:fashow/Constants.dart';
 import 'package:fashow/ActivityFeed.dart';
 import 'package:fashow/product_custom.dart';
 import 'package:fashow/Profile.dart';
-import 'package:get/get.dart';
 class Prod extends StatefulWidget {
   final String prodId;
   final String ownerId;
@@ -14218,8 +14213,7 @@ postusa() {
       mainAxisSize: MainAxisSize.min,
       children: <Widget>[
         buildPostHeader(),
-//        buildPostImage(),
-//        buildPostFooter(),
+
       ],
     );
   }

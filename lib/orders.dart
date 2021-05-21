@@ -250,20 +250,25 @@ return  Column(
       backgroundColor: kPrimaryColor,
 
       body:
-      ContainedTabBarView(
-        tabs: [
-          Text('Shop',style:TextStyle(color:kText)),
-          Text('Services',style:TextStyle(color:kText)),
-        ],
-        views: [
-          shopOrders(),
-          jobOrders(),
-        ],
+      Container( decoration: BoxDecoration(
+          gradient: fabGradient
+      ) ,
+        alignment: Alignment.center,
+        child: ContainedTabBarView(
+          tabs: [
+            Text('Shop',style:TextStyle(color:kText)),
+            Text('Services',style:TextStyle(color:kText)),
+          ],
+          views: [
+            shopOrders(),
+            jobOrders(),
+          ],
 
-        // child: Column(
-        //   children: <Widget>[shopOrders(),
-        //   ],
-        // ),
+          // child: Column(
+          //   children: <Widget>[shopOrders(),
+          //   ],
+          // ),
+        ),
       ),
 );
   }

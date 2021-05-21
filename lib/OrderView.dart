@@ -426,11 +426,16 @@ StreamBuilder(
       backgroundColor: kPrimaryColor,
 
       body:
-      Expanded(
-        child: ListView(
-          children: [
-            invoicefire()
-          ],
+      Container( decoration: BoxDecoration(
+          gradient: fabGradient
+      ) ,
+        alignment: Alignment.center,
+        child: Expanded(
+          child: ListView(
+            children: [
+              invoicefire()
+            ],
+          ),
         ),
       ),
 

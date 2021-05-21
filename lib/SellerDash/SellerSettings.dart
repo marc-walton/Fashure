@@ -44,27 +44,32 @@ class _SellerSettingState extends State<SellerSetting> {
   Widget build(BuildContext context) {
     return
 
-      ListView(
-        shrinkWrap:true,
-        children: <Widget>[
+      Container( decoration: BoxDecoration(
+          gradient: fabGradient
+      ) ,
+        alignment: Alignment.center,
+        child: ListView(
+          shrinkWrap:true,
+          children: <Widget>[
 
-          Text('Add Bank information to receive payments on your sales' ,style: TextStyle(color: Colors.white,fontSize: 15),),
-
-
-          SizedBox(height: 25),
-          Bankdetails(),
-
-          RaisedButton(
-              color:kblue,
-              child: Text('Add Account',            style: TextStyle(color: Colors.white),
-              ),
-              onPressed: () {
-                Get.to(SellerBank() );
-              }
-          ),
+            Text('Add Bank information to receive payments on your sales' ,style: TextStyle(color: Colors.white,fontSize: 15),),
 
 
-        ],
+            SizedBox(height: 25),
+            Bankdetails(),
+
+            RaisedButton(
+                color:kblue,
+                child: Text('Add Account',            style: TextStyle(color: Colors.white),
+                ),
+                onPressed: () {
+                  Get.to(SellerBank() );
+                }
+            ),
+
+
+          ],
+        ),
       );
   }
 }

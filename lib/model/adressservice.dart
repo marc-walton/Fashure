@@ -1,28 +1,14 @@
 import 'dart:io';
-import 'dart:async';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:country_list_pick/country_list_pick.dart';
-import 'package:fashow/payments/Buyview.dart';
 import 'package:fashow/payments/Servicepayment.dart';
-import 'package:fashow/payments/cartview.dart';
-import 'package:fashow/payments/payment.dart';
-import 'package:smart_select/smart_select.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_currencies_tracker/flutter_currencies_tracker.dart';
 //import 'package:flutter_svg/svg.dart';
 // import 'package:frankfurter/frankfurter.dart';
 import 'package:fashow/user.dart';
-import 'package:fashow/methods/country.dart';
-import 'package:flutter_icons/flutter_icons.dart';
-import 'package:image_cropper/image_cropper.dart';
-import 'package:path_provider/path_provider.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:firebase_storage/firebase_storage.dart';
-import 'package:image_picker/image_picker.dart';
-import 'package:fashow/progress.dart';
 import 'package:fashow/HomePage.dart';
 import 'package:fashow/Constants.dart';
-import 'package:image/image.dart' as Im;
 import 'package:uuid/uuid.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 class AddressSer extends StatefulWidget {
@@ -175,19 +161,7 @@ class _AddressSerState extends State<AddressSer>  with AutomaticKeepAliveClientM
                       ),
                       Center(
                         child: CountryListPick(
-                          // if you need custome picker use this
-                          // pickerBuilder: (context, CountryCode countryCode) {
-                          //   return Row(
-                          //     children: [
-                          //       Image.asset(
-                          //         countryCode.flagUri,
-                          //         package: 'country_list_pick',
-                          //       ),
-                          //       Text(countryCode.code),
-                          //       Text(countryCode.dialCode),
-                          //     ],
-                          //   );
-                          // },
+
                           theme: CountryTheme(
                             isShowFlag: true,
                             isShowTitle: true,
@@ -406,19 +380,7 @@ class _AddressSerState extends State<AddressSer>  with AutomaticKeepAliveClientM
                         String Zip =  ds['zip'];
                         String  Dialcode = ds['dialcode'];
                         String Phone =  ds['phone'];
-                        // "userId": widget.currentUser.id,
-                        // "username": widget.currentUser.username,
-                        // "photoUrl": widget.currentUser.photoUrl,
-                        // "displayName": widget.currentUser.displayName,
-                        // String fullname: ds["fullname"];
-                        //   "type":nicknamecontroller.text,
-                        //   "address":addresscontroller.text,
-                        //   "city":citycontroller.text,
-                        //   "state":statecontroller.text,
-                        //   "zip":zipcontroller.text,
-                        //   "phone":telephonecontroller.text,
-                        //   "country":country,
-                        //   "code":dialcode,
+
                         return
                           GestureDetector(
                             onTap: () async {
@@ -500,30 +462,35 @@ class _AddressSerState extends State<AddressSer>  with AutomaticKeepAliveClientM
       ),
       body:
 
-      Column(
-        children: <Widget>[
+      Container( decoration: BoxDecoration(
+          gradient: fabGradient
+      ) ,
+        alignment: Alignment.center,
+        child: Column(
+          children: <Widget>[
 
-          RaisedButton(
-            child: Text('Select address'),
-            onPressed: ()=>Showaddress,
-          ),
-
-
-          SizedBox( height: 8.0,),
-          RaisedButton(
-            child: Text('Add address'),
-            onPressed: ()=>AddAdress,
-          ),
-
-
-          (_inProcess)?Container(
-            color: Colors.white,
-            height: MediaQuery.of(context).size.height * 0.95,
-            child: Center(
-              child: CircularProgressIndicator(),
+            RaisedButton(
+              child: Text('Select address'),
+              onPressed: ()=>Showaddress,
             ),
-          ):Center()
-        ],
+
+
+            SizedBox( height: 8.0,),
+            RaisedButton(
+              child: Text('Add address'),
+              onPressed: ()=>AddAdress,
+            ),
+
+
+            (_inProcess)?Container(
+              color: Colors.white,
+              height: MediaQuery.of(context).size.height * 0.95,
+              child: Center(
+                child: CircularProgressIndicator(),
+              ),
+            ):Center()
+          ],
+        ),
       ),
     );
   }

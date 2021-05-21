@@ -1,4 +1,3 @@
-import 'package:fashow/methods/paginate.dart';
 import 'package:flutter/material.dart';
 import 'package:fashow/Constants.dart';
 import 'package:fashow/size_config.dart';

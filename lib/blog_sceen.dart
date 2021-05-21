@@ -38,15 +38,20 @@ class BlogScreen extends StatelessWidget {
                     style: TextStyle(color: Colors.white),
                   ),
                 ),),
-            body: ListView(
-              children: <Widget>[
+            body: Container( decoration: BoxDecoration(
+                gradient: fabGradient
+            ) ,
+              alignment: Alignment.center,
+              child: ListView(
+                children: <Widget>[
 
-                Container(
-                  color: kPrimaryColor,
-                  child: blog,
-                ),
+                  Container(
+                    color: kPrimaryColor,
+                    child: blog,
+                  ),
 
-              ],
+                ],
+              ),
             ),
           ),
         );

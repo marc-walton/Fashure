@@ -24,7 +24,7 @@ class CollScreen extends StatelessWidget {
         }
         Coll coll = Coll.fromDocument(snapshot.data);
         return Center(
-          child: Scaffold(              backgroundColor: kPrimaryColor,
+          child: Scaffold(
 
             appBar: AppBar(
 

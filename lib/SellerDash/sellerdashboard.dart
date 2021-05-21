@@ -84,7 +84,6 @@ class _SellerDashState extends State<SellerDash> {
       return DefaultTabController(
         length:4,
         child: Scaffold(
-          backgroundColor: kSecondaryColor,
           key:  scaffoldKey,
           appBar: AppBar(
             backgroundColor: kPrimaryColor,
@@ -134,14 +133,19 @@ class _SellerDashState extends State<SellerDash> {
           ),
           body:
 
-          TabBarView(
-              children:<Widget> [
-                SellerOrders(),
-                SellerPayments(),
-                SellerShop(),
-                SellerSetting(),
+          Container( decoration: BoxDecoration(
+              gradient: fabGradient
+          ) ,
+            alignment: Alignment.center,
+            child: TabBarView(
+                children:<Widget> [
+                  SellerOrders(),
+                  SellerPayments(),
+                  SellerShop(),
+                  SellerSetting(),
 
-              ]),
+                ]),
+          ),
 
         ),
       );

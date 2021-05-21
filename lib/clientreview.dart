@@ -83,35 +83,6 @@ class _ClientReviewState extends State<ClientReview> {
 
     );
 
-//     StreamBuilder(
-//         stream:        Firestore.instance.collection('Reviews').document(widget.profileId)
-//             .collection('userReviews')
-//             .snapshots(),
-//     builder: (context,snapshot){
-//       var rating =   snapshot.data['rating']??"";
-//         String review  = snapshot.data['review']??"";
-//           return
-//               ListView(
-//                 shrinkWrap:true,
-//                 scrollDirection:Axis.vertical,
-//                 children: [
-//                 SmoothStarRating(
-//                 isReadOnly: true,
-//                 filledIconData: Icons.blur_off,
-//                 halfFilledIconData: Icons.blur_on,
-//                 rating: rating,
-//                 size: 35,
-//                 starCount: 5,
-//
-// ),
-//                   SizedBox(height: 8.0,),
-//                   Text(review,style: TextStyle(color: Colors.white),),
-//           ],
-//               );
-//     },
-//     // 'rating': rating,
-//     // 'review':reviewController.text,
-//     );
   }
   @override
   Widget build(BuildContext context) {
@@ -130,7 +101,13 @@ class _ClientReviewState extends State<ClientReview> {
       backgroundColor: kPrimaryColor,
 
       body:
-      reviews(),
+           Container( decoration: BoxDecoration(
+               gradient: fabGradient
+           ) ,
+             alignment: Alignment.center,
+             child:  reviews(),
+           ),
+
 
     );
   }

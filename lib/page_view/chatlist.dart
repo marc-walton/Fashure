@@ -1,33 +1,14 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:fashow/Search_screen.dart';
 import 'package:fashow/methods/chat_method.dart';
 import 'package:fashow/model/contact_model.dart';
 import 'package:fashow/model/user_model.dart';
 import 'package:fashow/page_view/quiet_box.dart';
-import 'package:fashow/page_view/user_circle.dart';
-import 'package:fashow/provider/user_provider.dart';
 import 'package:fashow/utils/app_bar.dart';
-import 'package:fashow/user.dart';
-import 'package:fashow/utils/universal_variables.dart';
+import 'package:fashow/Constants.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:fashow/page_view/contact_view.dart';
-import 'package:fashow/page_view/new_chat_button.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:badges/badges.dart';
-//import 'package:skype_clone/models/contact.dart';
-//import 'package:skype_clone/provider/user_provider.dart';
-//import 'package:skype_clone/resources/auth_methods.dart';
-//import 'package:skype_clone/resources/chat_methods.dart';
-//import 'package:skype_clone/screens/callscreens/pickup/pickup_layout.dart';
-//import 'package:skype_clone/screens/pageviews/widgets/contact_view.dart';
-//import 'package:skype_clone/screens/pageviews/widgets/new_chat_button.dart';
-//import 'package:skype_clone/screens/pageviews/widgets/quiet_box.dart';
-//import 'package:skype_clone/screens/pageviews/widgets/user_circle.dart';
-//import 'package:skype_clone/utils/universal_variables.dart';
-//import 'package:skype_clone/utils/utilities.dart';
-//import 'package:skype_clone/widgets/appbar.dart';
-//import 'package:skype_clone/widgets/custom_tile.dart';
+
 
 class ChatListScreen extends StatelessWidget {
   CustomAppBar customAppBar(BuildContext context) {
@@ -40,12 +21,7 @@ class ChatListScreen extends StatelessWidget {
             color: Colors.white,
           ),
           onPressed: () {
-//            Navigator.push(context, "/search_screen");
-//            Navigator.push(
-//                context,
-//                MaterialPageRoute(
-//                    builder: (context) => SearchScreen(
-//                    )));
+
           },
         ),
       ],
@@ -56,13 +32,6 @@ class ChatListScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return
       ChatListContainer();
-//       Scaffold(
-////        backgroundColor: UniversalVariables.blackColor,
-////        appBar: customAppBar(context),
-//        floatingActionButton: NewChatButton(),
-//        body:
-//
-//    );
   }
 }
 
@@ -118,6 +87,10 @@ class _ChatListContainerState extends State<ChatListContainer> {
               }
               return
                 Container(
+                  decoration: BoxDecoration(
+                      gradient: fabGradient
+                  ) ,
+                  alignment: Alignment.center,
                   height: 200,
 
                   child: ListView.builder(

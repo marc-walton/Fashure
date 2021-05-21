@@ -51,8 +51,10 @@ class ProductScreen extends StatelessWidget {
 //            ),
             body: ListView(
               children: <Widget>[Container(
-                  color: kPrimaryColor,
-                  child: prod,
+                decoration: BoxDecoration(
+                    gradient: fabGradient
+                ) ,
+                alignment: Alignment.center,                  child: prod,
                 ),
 
               ],

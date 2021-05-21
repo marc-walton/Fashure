@@ -542,47 +542,51 @@ else {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: kPrimaryColor,
       appBar: AppBar(backgroundColor: kSecondaryColor,
         title: FittedBox(fit: BoxFit.contain,
           child: Text('Order Summary',style: TextStyle(
             // fontFamily :"MajorMonoDisplay",
               color: Colors.white),),
         ),),
-      body: Column(
-        children: [
-          st(),
-          ProdTile(),
-          BottomAppBar(
-            color: Colors.transparent,
-            child: Column(
-              children: [
-                RaisedButton(
-                  onPressed: () {
-                    Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) =>BuyNow(buynowamount:widget.total,
-                    prodId: widget.prodId,
-                        ownerId: widget.ownerId,
-                        profileimg: widget.profileimg ,
-                    username: widget.username,
-                    mediaUrl: widget.mediaUrl,
-                        eur:widget.eur,
-                        usd:widget.usd,
-                        inr:widget.inr,
-                        gbp:widget.gbp,
-                        productname:widget.productname,
-                        size:widget.userSize)));
+      body: Container( decoration: BoxDecoration(
+          gradient: fabGradient
+      ) ,
+        alignment: Alignment.center,
+        child: Column(
+          children: [
+            st(),
+            ProdTile(),
+            BottomAppBar(
+              color: Colors.transparent,
+              child: Column(
+                children: [
+                  RaisedButton(
+                    onPressed: () {
+                      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) =>BuyNow(buynowamount:widget.total,
+                      prodId: widget.prodId,
+                          ownerId: widget.ownerId,
+                          profileimg: widget.profileimg ,
+                      username: widget.username,
+                      mediaUrl: widget.mediaUrl,
+                          eur:widget.eur,
+                          usd:widget.usd,
+                          inr:widget.inr,
+                          gbp:widget.gbp,
+                          productname:widget.productname,
+                          size:widget.userSize)));
 
-                  },
-                  color: kblue,
-                  // shape: RoundedRectangleBorder(
-                  //     borderRadius: BorderRadius.circular(18.0)
-                  // ),
-                  child: Text('PROCEED TO PAY', style: TextStyle(color: kText),),
-                ),
-              ],
+                    },
+                    color: kblue,
+                    // shape: RoundedRectangleBorder(
+                    //     borderRadius: BorderRadius.circular(18.0)
+                    // ),
+                    child: Text('PROCEED TO PAY', style: TextStyle(color: kText),),
+                  ),
+                ],
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

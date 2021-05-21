@@ -287,96 +287,101 @@ shrinkWrap: true,
       ],
     );
     return
-        Stack(
-          children: [
-            WillPopScope(
-              onWillPop:   showDialog(
-                context: context,
-                builder: (context) => new AlertDialog(
-                  title: new Text('Are you sure?'),
-                  content: new Text('Do you want to exit without uploading?'),
-                  actions: <Widget>[
-                    new FlatButton(
+        Container( decoration: BoxDecoration(
+            gradient: fabGradient
+        ) ,
+          alignment: Alignment.center,
+          child: Stack(
+            children: [
+              WillPopScope(
+                onWillPop:   showDialog(
+                  context: context,
+                  builder: (context) => new AlertDialog(
+                    title: new Text('Are you sure?'),
+                    content: new Text('Do you want to exit without uploading?'),
+                    actions: <Widget>[
+                      new FlatButton(
 
-                      onPressed: () => Navigator.of(context).pop(false),
-                      child: Text("NO"),
-                    ),
-                    SizedBox(height: 16),
-                    new FlatButton(
-
-                      onPressed: () async {Navigator.of(context).pop(true);
-
-//            clearImage();
-                      },
-                      child: Text("YES"),
-                    ),
-                  ],
-                ),
-              ) ??
-                  false,
-              child: Scaffold(
-
-                // resizeToAvoidBottomPadding: true,
-                appBar: AppBar(
-                  backgroundColor: kPrimaryColor,
-                  leading: IconButton(
-                      icon: Icon(Icons.arrow_back, color: Colors.white),
-                      onPressed:()=>  showDialog(
-                        context: context,
-                        builder: (context) => new AlertDialog(
-                          title: new Text('Are you sure?'),
-                          content: new Text('Do you want to exit without uploading?'),
-                          actions: <Widget>[
-                            new FlatButton(
-
-                              onPressed: () => Navigator.of(context).pop(false),
-                              child: Text("NO"),
-                            ),
-                            SizedBox(height: 16),
-                            new FlatButton(
-
-                              onPressed: () async {Navigator.of(context).pop(true);
-
-//            clearImage();
-                              },
-                              child: Text("YES"),
-                            ),
-                          ],
-                        ),
-                      ) ??
-                          false),
-                  actions: [
-                    RaisedButton(color:kblue,
-                      onPressed: isUploading ? null : () => handleSubmit(),
-                      child: Text(
-                        "Post",
-                        style: TextStyle(
-                            color: kblue,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 20.0),
+                        onPressed: () => Navigator.of(context).pop(false),
+                        child: Text("NO"),
                       ),
-                    )
-                  ],
-                ),
-                body:
+                      SizedBox(height: 16),
+                      new FlatButton(
 
-                Container(
+                        onPressed: () async {Navigator.of(context).pop(true);
 
-                  decoration: BoxDecoration(
-                      gradient: fabGradient
-                  ) ,
-                  alignment: Alignment.center,
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: form,
+//            clearImage();
+                        },
+                        child: Text("YES"),
+                      ),
+                    ],
                   ),
+                ) ??
+                    false,
+                child: Scaffold(
+
+                  // resizeToAvoidBottomPadding: true,
+                  appBar: AppBar(
+                    backgroundColor: kPrimaryColor,
+                    leading: IconButton(
+                        icon: Icon(Icons.arrow_back, color: Colors.white),
+                        onPressed:()=>  showDialog(
+                          context: context,
+                          builder: (context) => new AlertDialog(
+                            title: new Text('Are you sure?'),
+                            content: new Text('Do you want to exit without uploading?'),
+                            actions: <Widget>[
+                              new FlatButton(
+
+                                onPressed: () => Navigator.of(context).pop(false),
+                                child: Text("NO"),
+                              ),
+                              SizedBox(height: 16),
+                              new FlatButton(
+
+                                onPressed: () async {Navigator.of(context).pop(true);
+
+//            clearImage();
+                                },
+                                child: Text("YES"),
+                              ),
+                            ],
+                          ),
+                        ) ??
+                            false),
+                    actions: [
+                      RaisedButton(color:kblue,
+                        onPressed: isUploading ? null : () => handleSubmit(),
+                        child: Text(
+                          "Post",
+                          style: TextStyle(
+                              color: kblue,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 20.0),
+                        ),
+                      )
+                    ],
+                  ),
+                  body:
+
+                  Container(
+
+                    decoration: BoxDecoration(
+                        gradient: fabGradient
+                    ) ,
+                    alignment: Alignment.center,
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: form,
+                    ),
+                  ),
+
                 ),
 
               ),
-
-            ),
-            isUploading ? Center(child: CircularProgressIndicator()) : Text(""),
-          ],
+              isUploading ? Center(child: CircularProgressIndicator()) : Text(""),
+            ],
+          ),
         );
 
 

@@ -55,48 +55,52 @@ submit(){
   @override
   Widget build(BuildContext context) {
     return    Scaffold(
-backgroundColor: kPrimaryColor,
-      body: Form(
-        key: _formKey,
-        child: ListView(
-          // scrollDirection: Axis.vertical,
-          children: [
-            Container(child: Column(children:[
-              Center(child: Text('Enter Shipment tracking ID',style: TextStyle(color: kText)),),
-              TextFormField(
-                style: TextStyle(color: kText),
-                controller: courierIdController,
-                decoration: InputDecoration(
-                  enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
-                  focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+      body: Container( decoration: BoxDecoration(
+          gradient: fabGradient
+      ) ,
+        alignment: Alignment.center,
+        child: Form(
+          key: _formKey,
+          child: ListView(
+            // scrollDirection: Axis.vertical,
+            children: [
+              Container(child: Column(children:[
+                Center(child: Text('Enter Shipment tracking ID',style: TextStyle(color: kText)),),
+                TextFormField(
+                  style: TextStyle(color: kText),
+                  controller: courierIdController,
+                  decoration: InputDecoration(
+                    enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+                    focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
 
-                  labelText: 'Tracking ID',labelStyle: TextStyle(color: kText),
-                  hintText: 'Tracking ID',
-                ),
-                textAlign: TextAlign.center,
-                validator: (text) {
-                  if ( text.isEmpty) {
-                    return 'Tracking ID is empty';
-                  }
-                  return null;
-                },
-              ),
-              Center(
-                child: RaisedButton(
-                  onPressed: () {
-                    if(_formKey.currentState.validate()) {
-                      // ignore: unnecessary_statements
-                      submit();
-                      Navigator.pop(context);
+                    labelText: 'Tracking ID',labelStyle: TextStyle(color: kText),
+                    hintText: 'Tracking ID',
+                  ),
+                  textAlign: TextAlign.center,
+                  validator: (text) {
+                    if ( text.isEmpty) {
+                      return 'Tracking ID is empty';
                     }
+                    return null;
                   },
-                  color: kblue,
-                  child: Text('Submit',style: TextStyle(color: kText)),
                 ),
-              )
-            ]),),
+                Center(
+                  child: RaisedButton(
+                    onPressed: () {
+                      if(_formKey.currentState.validate()) {
+                        // ignore: unnecessary_statements
+                        submit();
+                        Navigator.pop(context);
+                      }
+                    },
+                    color: kblue,
+                    child: Text('Submit',style: TextStyle(color: kText)),
+                  ),
+                )
+              ]),),
 
-          ],
+            ],
+          ),
         ),
       ),
     );
