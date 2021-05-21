@@ -1877,7 +1877,7 @@ class _AccessGTState extends State<AccessGT> {
       quarterTurns: 3,
       child: Expanded(
         child: DefaultTabController(
-            length:11,
+            length:10,
             child: Scaffold(
               appBar:AppBar(
                 toolbarHeight: SizeConfig.safeBlockHorizontal * 8,
