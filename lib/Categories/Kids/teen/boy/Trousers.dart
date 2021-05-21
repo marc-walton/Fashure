@@ -219,89 +219,6 @@ class _TrouserTMState extends State<TrouserTM> {
 
     }
   }
-  ALL(){
-    return  PaginateFirestore(
-//    itemsPerPage: 2,
-        itemBuilderType:
-        PaginateBuilderType.listView,
-        itemBuilder: (index, context, documentSnapshot)   {
-//        DocumentSnapshot ds = snapshot.data.documents[index];
-          String ownerId = documentSnapshot.data['ownerId'];
-          String prodId = documentSnapshot.data['prodId'];
-          String shopmediaUrl = documentSnapshot.data['shopmediaUrl'];
-          String productname = documentSnapshot.data['productname'];
-          String inr = documentSnapshot.data['inr'];
-          String cny = documentSnapshot.data['cny'];
-          String usd = documentSnapshot.data['usd'];
-          String eur = documentSnapshot.data['eur'];
-          String gbp = documentSnapshot.data['gbp'];
-          return
-            FutureBuilder(
-              future: usersRef.document(ownerId).get(),
-              builder: (context, snapshot) {
-                if (!snapshot.hasData) {
-                  return circularProgress();
-                }
-                User user = User.fromDocument(snapshot.data);
-//          bool isPostOwner = currentUserId == ownerId;
-                return Column(
-                  children: <Widget>[
-                    GestureDetector(
-                      onTap: () => showProfile(context, profileId: user.id),
-                      child: ListTile(
-                        leading: CircleAvatar(
-                          backgroundImage: CachedNetworkImageProvider(user.photoUrl),
-                          backgroundColor: Colors.grey,
-                        ),
-                        title: Text(
-                          user.displayName,
-                          style: TextStyle(
-                            color: kText,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        subtitle: Text(user.username,
-                          style: TextStyle(color: kIcon),),),
-                    ),
-
-                    GestureDetector(
-                      onTap: () => Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => ProductScreen(
-                            prodId: prodId,
-                            userId: ownerId,
-                          ),
-                        ),
-                      ),
-                      child: Stack(
-                        alignment: Alignment.center,
-                        children: <Widget>[
-                          ClipRRect(
-                              borderRadius: BorderRadius.circular(20.0),child: cachedNetworkImage(shopmediaUrl)),
-                        ],),),
-                    df(productname:productname, usd:usd,inr:inr,cny:cny,eur:eur,gbp:gbp, prodId:prodId, ownerId:ownerId,),
-
-                    Divider(color: kGrey,),
-                  ],
-
-                );
-
-              },
-            );
-        },
-        query: Firestore.instance.collectionGroup('userProducts').orderBy('timestamp',descending: true)
-            .where('Gender',isEqualTo: 'Teen-Boys')
-            .where('Category',isEqualTo: 'TBChinos')
-            .where('Category',isEqualTo: 'TBSkinny-fit Trousers')
- .where('Category',isEqualTo: 'TBSlim-fit Trousers')
- .where('Category',isEqualTo: 'TBRegular-fit Trousers')
-.where('Category',isEqualTo: 'TBSweatpants')
-.where('Category',isEqualTo: 'TBTailored Trousers')
-
-
-    );
-  }
   TBChinos(){
     return  PaginateFirestore(
 //    itemsPerPage: 2,
@@ -314,7 +231,6 @@ class _TrouserTMState extends State<TrouserTM> {
           String shopmediaUrl = documentSnapshot.data['shopmediaUrl'];
           String productname = documentSnapshot.data['productname'];
           String inr = documentSnapshot.data['inr'];
-          String cny = documentSnapshot.data['cny'];
           String usd = documentSnapshot.data['usd'];
           String eur = documentSnapshot.data['eur'];
           String gbp = documentSnapshot.data['gbp'];
@@ -343,8 +259,7 @@ class _TrouserTMState extends State<TrouserTM> {
                             fontWeight: FontWeight.bold,
                           ),
                         ),
-                        subtitle: Text(user.username,
-                          style: TextStyle(color: kIcon),),),
+                      ),
                     ),
 
                     GestureDetector(
@@ -363,7 +278,7 @@ class _TrouserTMState extends State<TrouserTM> {
                           ClipRRect(
                               borderRadius: BorderRadius.circular(20.0),child: cachedNetworkImage(shopmediaUrl)),
                         ],),),
-                    df(productname:productname, usd:usd,inr:inr,cny:cny,eur:eur,gbp:gbp, prodId:prodId, ownerId:ownerId,),
+                    df(productname:productname, usd:usd,inr:inr,eur:eur,gbp:gbp, prodId:prodId, ownerId:ownerId,),
 
                     Divider(color: kGrey,),
                   ],
@@ -391,7 +306,6 @@ class _TrouserTMState extends State<TrouserTM> {
           String shopmediaUrl = documentSnapshot.data['shopmediaUrl'];
           String productname = documentSnapshot.data['productname'];
           String inr = documentSnapshot.data['inr'];
-          String cny = documentSnapshot.data['cny'];
           String usd = documentSnapshot.data['usd'];
           String eur = documentSnapshot.data['eur'];
           String gbp = documentSnapshot.data['gbp'];
@@ -420,8 +334,7 @@ class _TrouserTMState extends State<TrouserTM> {
                             fontWeight: FontWeight.bold,
                           ),
                         ),
-                        subtitle: Text(user.username,
-                          style: TextStyle(color: kIcon),),),
+                      ),
                     ),
 
                     GestureDetector(
@@ -440,7 +353,7 @@ class _TrouserTMState extends State<TrouserTM> {
                           ClipRRect(
                               borderRadius: BorderRadius.circular(20.0),child: cachedNetworkImage(shopmediaUrl)),
                         ],),),
-                    df(productname:productname, usd:usd,inr:inr,cny:cny,eur:eur,gbp:gbp, prodId:prodId, ownerId:ownerId,),
+                    df(productname:productname, usd:usd,inr:inr,eur:eur,gbp:gbp, prodId:prodId, ownerId:ownerId,),
 
                     Divider(color: kGrey,),
                   ],
@@ -470,7 +383,6 @@ class _TrouserTMState extends State<TrouserTM> {
           String shopmediaUrl = documentSnapshot.data['shopmediaUrl'];
           String productname = documentSnapshot.data['productname'];
           String inr = documentSnapshot.data['inr'];
-          String cny = documentSnapshot.data['cny'];
           String usd = documentSnapshot.data['usd'];
           String eur = documentSnapshot.data['eur'];
           String gbp = documentSnapshot.data['gbp'];
@@ -499,8 +411,7 @@ class _TrouserTMState extends State<TrouserTM> {
                             fontWeight: FontWeight.bold,
                           ),
                         ),
-                        subtitle: Text(user.username,
-                          style: TextStyle(color: kIcon),),),
+                      ),
                     ),
 
                     GestureDetector(
@@ -519,7 +430,8 @@ class _TrouserTMState extends State<TrouserTM> {
                           ClipRRect(
                               borderRadius: BorderRadius.circular(20.0),child: cachedNetworkImage(shopmediaUrl)),
                         ],),),
-                    df(productname:productname, usd:usd,inr:inr,cny:cny,eur:eur,gbp:gbp, prodId:prodId, ownerId:ownerId,),
+                    df(productname:productname, usd:usd,inr:inr,eur:eur,gbp:gbp, prodId:prodId, ownerId:ownerId,),
+
                     Divider(color: kGrey,),
                   ],
 
@@ -546,7 +458,6 @@ class _TrouserTMState extends State<TrouserTM> {
           String shopmediaUrl = documentSnapshot.data['shopmediaUrl'];
           String productname = documentSnapshot.data['productname'];
           String inr = documentSnapshot.data['inr'];
-          String cny = documentSnapshot.data['cny'];
           String usd = documentSnapshot.data['usd'];
           String eur = documentSnapshot.data['eur'];
           String gbp = documentSnapshot.data['gbp'];
@@ -575,8 +486,7 @@ class _TrouserTMState extends State<TrouserTM> {
                             fontWeight: FontWeight.bold,
                           ),
                         ),
-                        subtitle: Text(user.username,
-                          style: TextStyle(color: kIcon),),),
+                      ),
                     ),
 
                     GestureDetector(
@@ -595,7 +505,7 @@ class _TrouserTMState extends State<TrouserTM> {
                           ClipRRect(
                               borderRadius: BorderRadius.circular(20.0),child: cachedNetworkImage(shopmediaUrl)),
                         ],),),
-                    df(productname:productname, usd:usd,inr:inr,cny:cny,eur:eur,gbp:gbp, prodId:prodId, ownerId:ownerId,),
+                    df(productname:productname, usd:usd,inr:inr,eur:eur,gbp:gbp, prodId:prodId, ownerId:ownerId,),
 
                     Divider(color: kGrey,),
                   ],
@@ -623,7 +533,6 @@ class _TrouserTMState extends State<TrouserTM> {
           String shopmediaUrl = documentSnapshot.data['shopmediaUrl'];
           String productname = documentSnapshot.data['productname'];
           String inr = documentSnapshot.data['inr'];
-          String cny = documentSnapshot.data['cny'];
           String usd = documentSnapshot.data['usd'];
           String eur = documentSnapshot.data['eur'];
           String gbp = documentSnapshot.data['gbp'];
@@ -652,8 +561,7 @@ class _TrouserTMState extends State<TrouserTM> {
                             fontWeight: FontWeight.bold,
                           ),
                         ),
-                        subtitle: Text(user.username,
-                          style: TextStyle(color: kIcon),),),
+                      ),
                     ),
 
                     GestureDetector(
@@ -672,7 +580,7 @@ class _TrouserTMState extends State<TrouserTM> {
                           ClipRRect(
                               borderRadius: BorderRadius.circular(20.0),child: cachedNetworkImage(shopmediaUrl)),
                         ],),),
-                    df(productname:productname, usd:usd,inr:inr,cny:cny,eur:eur,gbp:gbp, prodId:prodId, ownerId:ownerId,),
+                    df(productname:productname, usd:usd,inr:inr,eur:eur,gbp:gbp, prodId:prodId, ownerId:ownerId,),
 
                     Divider(color: kGrey,),
                   ],
@@ -700,7 +608,6 @@ class _TrouserTMState extends State<TrouserTM> {
           String shopmediaUrl = documentSnapshot.data['shopmediaUrl'];
           String productname = documentSnapshot.data['productname'];
           String inr = documentSnapshot.data['inr'];
-          String cny = documentSnapshot.data['cny'];
           String usd = documentSnapshot.data['usd'];
           String eur = documentSnapshot.data['eur'];
           String gbp = documentSnapshot.data['gbp'];
@@ -729,8 +636,7 @@ class _TrouserTMState extends State<TrouserTM> {
                             fontWeight: FontWeight.bold,
                           ),
                         ),
-                        subtitle: Text(user.username,
-                          style: TextStyle(color: kIcon),),),
+                      ),
                     ),
 
                     GestureDetector(
@@ -749,7 +655,7 @@ class _TrouserTMState extends State<TrouserTM> {
                           ClipRRect(
                               borderRadius: BorderRadius.circular(20.0),child: cachedNetworkImage(shopmediaUrl)),
                         ],),),
-                    df(productname:productname, usd:usd,inr:inr,cny:cny,eur:eur,gbp:gbp, prodId:prodId, ownerId:ownerId,),
+                    df(productname:productname, usd:usd,inr:inr,eur:eur,gbp:gbp, prodId:prodId, ownerId:ownerId,),
 
                     Divider(color: kGrey,),
                   ],
@@ -772,9 +678,8 @@ class _TrouserTMState extends State<TrouserTM> {
       quarterTurns: 3,
       child: Expanded(
         child: DefaultTabController(
-            length:7,
+            length:6,
             child: Scaffold(
-              backgroundColor: kPrimaryColor,
               appBar:AppBar(
                 toolbarHeight: SizeConfig.safeBlockHorizontal * 8,
                 backgroundColor: kPrimaryColor,
@@ -783,16 +688,8 @@ class _TrouserTMState extends State<TrouserTM> {
                   isScrollable: true,
                   labelColor: Colors.white,
                   unselectedLabelColor: kIcon,
-//                indicatorSize: TabBarIndicatorSize.label,
-//                       indicator: BoxDecoration(
-//                           borderRadius: BorderRadius.only(
-//                               topLeft: Radius.circular(10),
-//                               topRight: Radius.circular(10)
-//                           ),
-//                           color: Colors.white),
 
                   tabs:[
-                    Text("New Arrivals",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5,),),
                     Text("Skinny-fit Trousers",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5,),),
                     Text("Slim-fit Trousers",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5,),),
                     Text("Regular-fit Trousers",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5,),),
@@ -803,18 +700,22 @@ class _TrouserTMState extends State<TrouserTM> {
                 ),
               ),
 
-              body: RotatedBox(
-                quarterTurns: 1,
-                child: TabBarView(
-                    children:<Widget> [
-                      ALL(),
-                      TBSkinny(),
-                      TBSlim(),
-                      TBRegular(),
-                      TBChinos(),
-                      TBTailored(),
-                      TBSweatpants(),
-                    ]),
+              body: Container(     decoration: BoxDecoration(
+                  gradient: fabGradient
+              ) ,
+                alignment: Alignment.center,
+                child: RotatedBox(
+                  quarterTurns: 1,
+                  child: TabBarView(
+                      children:<Widget> [
+                        TBSkinny(),
+                        TBSlim(),
+                        TBRegular(),
+                        TBChinos(),
+                        TBTailored(),
+                        TBSweatpants(),
+                      ]),
+                ),
               ),
             )
         ),
