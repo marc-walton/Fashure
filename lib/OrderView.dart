@@ -276,7 +276,7 @@ Rating({String fulfill,String ProdId,String OwnerId}){
           .document(reviewId)
           .setData({
         "type": "ReviewO",
-        "username": currentUser.username,
+        "username": currentUser.displayName,
         "userId": OwnerId,
         "userProfileImg": currentUser.photoUrl,
         "postId": ProdId,

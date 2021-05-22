@@ -225,7 +225,6 @@ class  _ActivityFeedState extends State<ActivityFeed>  with  TickerProviderState
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: kSecondaryColor,
         appBar: PreferredSize(
           preferredSize: Size.fromHeight(100.0),
           child: AppBar(title:  FittedBox(
@@ -267,16 +266,14 @@ class  _ActivityFeedState extends State<ActivityFeed>  with  TickerProviderState
                 ],
               ),
               iconTheme: new IconThemeData(color: kSecondaryColor),
-//            leading:IconButton(  icon: Icon(
-//              Icons.menu,
-//              color: Colors.blue,),
               actions: <Widget>[
 
                 Stack(
                   children: [
                     OutlineButton(
+                      color: Colors.white,
                       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-                     child: Text('DashBoard',style: TextStyle(color: kText),),
+                     child: Text('DashBoard',style: TextStyle(color: Colors.white),),
                       onPressed: () {
            Navigator.push(context, MaterialPageRoute(builder: (context) =>AllDash()));
                         // do something
@@ -301,39 +298,44 @@ class  _ActivityFeedState extends State<ActivityFeed>  with  TickerProviderState
 
 
 
-        body: TabBarView(
-            controller: _controller,
-            children: <Widget>[
-              ClipRRect(borderRadius: BorderRadius.circular(15.0),
-                child: Container(
-                  child: FutureBuilder(
-                    future: getActivityFeed(),
-                    builder: (context, snapshot) {
-                      if (!snapshot.hasData) {
-                        return circularProgress();
-                      }
-                      return new Expanded(
-                        child: ListView(
-                          scrollDirection: Axis.vertical,
-                          shrinkWrap: true,
-                          children: snapshot.data,
-                        ),
-                      );
-                    },
+        body: Container(decoration: BoxDecoration(
+            gradient: fabGradient
+        ) ,
+          alignment: Alignment.center,
+          child: TabBarView(
+              controller: _controller,
+              children: <Widget>[
+                ClipRRect(borderRadius: BorderRadius.circular(15.0),
+                  child: Container(
+                    child: FutureBuilder(
+                      future: getActivityFeed(),
+                      builder: (context, snapshot) {
+                        if (!snapshot.hasData) {
+                          return circularProgress();
+                        }
+                        return new Expanded(
+                          child: ListView(
+                            scrollDirection: Axis.vertical,
+                            shrinkWrap: true,
+                            children: snapshot.data,
+                          ),
+                        );
+                      },
+                    ),
                   ),
                 ),
-              ),
-              Column(
+                Column(
+                    children: [
+                      Expanded(child: Container(child: ChatListScreen()))
+                    ]),
+                Column(
                   children: [
-                    Expanded(child: Container(child: ChatListScreen()))
-                  ]),
-              Column(
-                children: [
-                  Settings()
-                ],
-              ),
+                    Settings()
+                  ],
+                ),
 
-            ])
+              ]),
+        )
 
 
 
@@ -680,23 +682,23 @@ payent(ParentContext){
           color: Color(0XFFb3b3ff).withOpacity(0.3),
           child: ListTile(
             title: GestureDetector(
-              onTap: () => showOrderView(ParentContext),
+              onTap: () => showBlog(ParentContext),
               child: RichText(
                 maxLines: 1,softWrap:false,overflow:TextOverflow.fade,                    text: TextSpan(
-                    style: TextStyle(
-                      fontSize: 14.0,
-                      color: kText,
+                  style: TextStyle(
+                    fontSize: 14.0,
+                    color: kText,
+                  ),
+                  children: [
+                    TextSpan(
+                      text: username,
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold, color: Colors.black),
                     ),
-                    children: [
-                      TextSpan(
-                        text: username,
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold, color: kUser),
-                      ),
-                      TextSpan(
-                        text: ' $activityItemText',
-                      )
-                    ]),
+                    TextSpan(
+                      text: ' $activityItemText',
+                    )
+                  ]),
               ),
             ),
             leading: CircleAvatar(
@@ -733,7 +735,7 @@ blog(ParentContext){
                       TextSpan(
                         text: username,
                         style: TextStyle(
-                            fontWeight: FontWeight.bold, color: kUser),
+                            fontWeight: FontWeight.bold, color: Colors.black),
                       ),
                       TextSpan(
                         text: ' $activityItemText',
@@ -766,23 +768,23 @@ collection(ParentContext){
           color: Color(0XFFb3b3ff).withOpacity(0.3),
           child: ListTile(
             title: GestureDetector(
-              onTap: () => showColl(ParentContext),
+              onTap: () => showBlog(ParentContext),
               child: RichText(
                 maxLines: 1,softWrap:false,overflow:TextOverflow.fade,                    text: TextSpan(
-                    style: TextStyle(
-                      fontSize: 14.0,
-                      color: kText,
+                  style: TextStyle(
+                    fontSize: 14.0,
+                    color: kText,
+                  ),
+                  children: [
+                    TextSpan(
+                      text: username,
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold, color: Colors.black),
                     ),
-                    children: [
-                      TextSpan(
-                        text: username,
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold, color: kUser),
-                      ),
-                      TextSpan(
-                        text: ' $activityItemText',
-                      )
-                    ]),
+                    TextSpan(
+                      text: ' $activityItemText',
+                    )
+                  ]),
               ),
             ),
             leading: CircleAvatar(
@@ -810,23 +812,23 @@ payo(ParentContext){
           color: Color(0XFFb3b3ff).withOpacity(0.3),
           child: ListTile(
             title: GestureDetector(
-              onTap: () => showSellerDash(ParentContext),
+              onTap: () => showBlog(ParentContext),
               child: RichText(
                 maxLines: 1,softWrap:false,overflow:TextOverflow.fade,                    text: TextSpan(
-                    style: TextStyle(
-                      fontSize: 14.0,
-                      color: kText,
+                  style: TextStyle(
+                    fontSize: 14.0,
+                    color: kText,
+                  ),
+                  children: [
+                    TextSpan(
+                      text: username,
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold, color: Colors.black),
                     ),
-                    children: [
-                      TextSpan(
-                        text: username,
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold, color: kUser),
-                      ),
-                      TextSpan(
-                        text: ' $activityItemText',
-                      )
-                    ]),
+                    TextSpan(
+                      text: ' $activityItemText',
+                    )
+                  ]),
               ),
             ),
             leading: CircleAvatar(
@@ -854,23 +856,23 @@ prod(ParentContext){
           color: Color(0XFFb3b3ff).withOpacity(0.3),
           child: ListTile(
             title: GestureDetector(
-              onTap: () => showProduct(ParentContext),
+              onTap: () => showBlog(ParentContext),
               child: RichText(
                 maxLines: 1,softWrap:false,overflow:TextOverflow.fade,                    text: TextSpan(
-                    style: TextStyle(
-                      fontSize: 14.0,
-                      color: kText,
+                  style: TextStyle(
+                    fontSize: 14.0,
+                    color: kText,
+                  ),
+                  children: [
+                    TextSpan(
+                      text: username,
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold, color: Colors.black),
                     ),
-                    children: [
-                      TextSpan(
-                        text: username,
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold, color: kUser),
-                      ),
-                      TextSpan(
-                        text: ' $activityItemText',
-                      )
-                    ]),
+                    TextSpan(
+                      text: ' $activityItemText',
+                    )
+                  ]),
               ),
             ),
             leading: CircleAvatar(
@@ -900,23 +902,23 @@ prod(ParentContext){
             color: Color(0XFFb3b3ff).withOpacity(0.3),
             child: ListTile(
               title: GestureDetector(
-                onTap: () => showInvoiceView(ParentContext),
+                onTap: () => showBlog(ParentContext),
                 child: RichText(
-                  maxLines: 1,softWrap:false,overflow:TextOverflow.fade,                  text: TextSpan(
-                      style: TextStyle(
-                        fontSize: 14.0,
-                        color: kText,
+                  maxLines: 1,softWrap:false,overflow:TextOverflow.fade,                    text: TextSpan(
+                    style: TextStyle(
+                      fontSize: 14.0,
+                      color: kText,
+                    ),
+                    children: [
+                      TextSpan(
+                        text: username,
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold, color: Colors.black),
                       ),
-                      children: [
-                        TextSpan(
-                          text: username,
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold, color: kUser),
-                        ),
-                        TextSpan(
-                          text: ' $activityItemText',
-                        )
-                      ]),
+                      TextSpan(
+                        text: ' $activityItemText',
+                      )
+                    ]),
                 ),
               ),
               leading: CircleAvatar(
@@ -944,23 +946,23 @@ ReqPaymentI(ParentContext){
           color: Color(0XFFb3b3ff).withOpacity(0.3),
           child: ListTile(
             title: GestureDetector(
-              onTap: () => showServiceDash(ParentContext),
+              onTap: () => showBlog(ParentContext),
               child: RichText(
                 maxLines: 1,softWrap:false,overflow:TextOverflow.fade,                    text: TextSpan(
-                    style: TextStyle(
-                      fontSize: 14.0,
-                      color: kText,
+                  style: TextStyle(
+                    fontSize: 14.0,
+                    color: kText,
+                  ),
+                  children: [
+                    TextSpan(
+                      text: username,
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold, color: Colors.black),
                     ),
-                    children: [
-                      TextSpan(
-                        text: username,
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold, color: kUser),
-                      ),
-                      TextSpan(
-                        text: ' $activityItemText',
-                      )
-                    ]),
+                    TextSpan(
+                      text: ' $activityItemText',
+                    )
+                  ]),
               ),
             ),
             leading: CircleAvatar(
@@ -988,23 +990,23 @@ ReqPaymentI(ParentContext){
             color: Color(0XFFb3b3ff).withOpacity(0.3),
             child: ListTile(
               title: GestureDetector(
-                onTap: () => showClient(ParentContext),
+                onTap: () => showBlog(ParentContext),
                 child: RichText(
-                  maxLines: 1,softWrap:false,overflow:TextOverflow.fade,                      text: TextSpan(
-                      style: TextStyle(
-                        fontSize: 14.0,
-                        color: kText,
+                  maxLines: 1,softWrap:false,overflow:TextOverflow.fade,                    text: TextSpan(
+                    style: TextStyle(
+                      fontSize: 14.0,
+                      color: kText,
+                    ),
+                    children: [
+                      TextSpan(
+                        text: username,
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold, color: Colors.black),
                       ),
-                      children: [
-                        TextSpan(
-                          text: username,
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold, color: kUser),
-                        ),
-                        TextSpan(
-                          text: ' $activityItemText',
-                        )
-                      ]),
+                      TextSpan(
+                        text: ' $activityItemText',
+                      )
+                    ]),
                 ),
               ),
               leading: CircleAvatar(
@@ -1032,23 +1034,23 @@ ReviewO(ParentContext){
           color: Color(0XFFb3b3ff).withOpacity(0.3),
           child: ListTile(
             title: GestureDetector(
-              onTap: () => showProduct(ParentContext),
+              onTap: () => showBlog(ParentContext),
               child: RichText(
                 maxLines: 1,softWrap:false,overflow:TextOverflow.fade,                    text: TextSpan(
-                    style: TextStyle(
-                      fontSize: 14.0,
-                      color: kText,
+                  style: TextStyle(
+                    fontSize: 14.0,
+                    color: kText,
+                  ),
+                  children: [
+                    TextSpan(
+                      text: username,
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold, color: Colors.black),
                     ),
-                    children: [
-                      TextSpan(
-                        text: username,
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold, color: kUser),
-                      ),
-                      TextSpan(
-                        text: ' $activityItemText',
-                      )
-                    ]),
+                    TextSpan(
+                      text: ' $activityItemText',
+                    )
+                  ]),
               ),
             ),
             leading: CircleAvatar(
@@ -1076,23 +1078,23 @@ ReviewO(ParentContext){
             color: Color(0XFFb3b3ff).withOpacity(0.3),
             child: ListTile(
               title: GestureDetector(
-                onTap: () => showServiceDash(ParentContext),
+                onTap: () => showBlog(ParentContext),
                 child: RichText(
-                  maxLines: 1,softWrap:false,overflow:TextOverflow.fade,                      text: TextSpan(
-                      style: TextStyle(
-                        fontSize: 14.0,
-                        color: kText,
+                  maxLines: 1,softWrap:false,overflow:TextOverflow.fade,                    text: TextSpan(
+                    style: TextStyle(
+                      fontSize: 14.0,
+                      color: kText,
+                    ),
+                    children: [
+                      TextSpan(
+                        text: username,
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold, color: Colors.black),
                       ),
-                      children: [
-                        TextSpan(
-                          text: username,
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold, color: kUser),
-                        ),
-                        TextSpan(
-                          text: ' $activityItemText',
-                        )
-                      ]),
+                      TextSpan(
+                        text: ' $activityItemText',
+                      )
+                    ]),
                 ),
               ),
               leading: CircleAvatar(
@@ -1120,23 +1122,23 @@ ServicePayment(ParentContext){
           color: Color(0XFFb3b3ff).withOpacity(0.3),
           child: ListTile(
             title: GestureDetector(
-              onTap: () => showInvoiceView(ParentContext),
+              onTap: () => showBlog(ParentContext),
               child: RichText(
                 maxLines: 1,softWrap:false,overflow:TextOverflow.fade,                    text: TextSpan(
-                    style: TextStyle(
-                      fontSize: 14.0,
-                      color: kText,
+                  style: TextStyle(
+                    fontSize: 14.0,
+                    color: kText,
+                  ),
+                  children: [
+                    TextSpan(
+                      text: username,
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold, color: Colors.black),
                     ),
-                    children: [
-                      TextSpan(
-                        text: username,
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold, color: kUser),
-                      ),
-                      TextSpan(
-                        text: ' $activityItemText',
-                      )
-                    ]),
+                    TextSpan(
+                      text: ' $activityItemText',
+                    )
+                  ]),
               ),
             ),
             leading: CircleAvatar(
@@ -1165,23 +1167,23 @@ ServicePayment(ParentContext){
              color: Color(0XFFb3b3ff).withOpacity(0.3),
              child: ListTile(
                title: GestureDetector(
-                 onTap: () => showProfile(ParentContext, profileId: userId),
+                 onTap: () => showBlog(ParentContext),
                  child: RichText(
-                   maxLines: 1,softWrap:false,overflow:TextOverflow.fade,                       text: TextSpan(
-                       style: TextStyle(
-                         fontSize: 14.0,
-                         color: kText,
+                   maxLines: 1,softWrap:false,overflow:TextOverflow.fade,                    text: TextSpan(
+                     style: TextStyle(
+                       fontSize: 14.0,
+                       color: kText,
+                     ),
+                     children: [
+                       TextSpan(
+                         text: username,
+                         style: TextStyle(
+                             fontWeight: FontWeight.bold, color: Colors.black),
                        ),
-                       children: [
-                         TextSpan(
-                           text: username,
-                           style: TextStyle(
-                               fontWeight: FontWeight.bold, color: kUser),
-                         ),
-                         TextSpan(
-                           text: ' $activityItemText',
-                         )
-                       ]),
+                       TextSpan(
+                         text: ' $activityItemText',
+                       )
+                     ]),
                  ),
                ),
                leading: CircleAvatar(

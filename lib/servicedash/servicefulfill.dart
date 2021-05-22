@@ -76,44 +76,52 @@ class _ServiceFulfillState extends State<ServiceFulfill> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: kPrimaryColor,
-      body: Form(
-        key: _formKey,
-        child: ListView(
-          // scrollDirection: Axis.vertical,
-          children: [
-            Container(child: Column(children:[
-              // Center(child: Text('Remarks',style: TextStyle(color: kText)),),
-              Text('Remarks',style: TextStyle(color: kText)),
-              TextFormField(
-                style: TextStyle(color: kText),
-                controller: courierIdController,
-                decoration: InputDecoration(
-                  enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
-                  focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+      appBar: AppBar(
+        backgroundColor: kPrimaryColor,
 
-                  labelText: 'Remarks',labelStyle: TextStyle(color: kText),
-                  hintText: 'Remarks',
+       ),
+
+      body: Container(   decoration: BoxDecoration(
+          gradient: fabGradient
+      ) ,
+        alignment: Alignment.center,
+        child: Form(
+          key: _formKey,
+          child: ListView(
+            // scrollDirection: Axis.vertical,
+            children: [
+              Container(child: Column(children:[
+                // Center(child: Text('Remarks',style: TextStyle(color: kText)),),
+                TextFormField(
+                  style: TextStyle(color: kText),
+                  controller: courierIdController,
+                  decoration: InputDecoration(
+                    enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+                    focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+
+                    labelText: 'Remarks',labelStyle: TextStyle(color: kText),
+                    hintText: 'Remarks',
+                  ),
+                  textAlign: TextAlign.center,
+
                 ),
-                textAlign: TextAlign.center,
+                Center(
+                  child: RaisedButton(
+                    onPressed: () {
 
-              ),
-              Center(
-                child: RaisedButton(
-                  onPressed: () {
+                        // ignore: unnecessary_statements
+                        submit();
+                        Navigator.pop(context);
 
-                      // ignore: unnecessary_statements
-                      submit();
-                      Navigator.pop(context);
+                    },
+                    color: kblue,
+                    child: Text('Submit',style: TextStyle(color: Colors.white)),
+                  ),
+                )
+              ]),),
 
-                  },
-                  color: kblue,
-                  child: Text('Submit',style: TextStyle(color: kText)),
-                ),
-              )
-            ]),),
-
-          ],
+            ],
+          ),
         ),
       ),
     );

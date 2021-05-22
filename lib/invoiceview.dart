@@ -1,10 +1,7 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:fashow/ActivityFeed.dart';
 import 'package:fashow/HomePage.dart';
 import 'package:fashow/model/adressservice.dart';
 import 'package:fashow/payments/Servicepayment.dart';
-import 'package:fashow/user.dart';
 import 'package:flutter/material.dart';
 import 'package:fashow/Constants.dart';
 import 'package:fashow/progress.dart';
@@ -182,7 +179,7 @@ class _InvoiceViewState extends State<InvoiceView> {
           .document(reviewId)
           .setData({
         "type": "ReviewC",
-        "username": currentUser.username,
+        "username": currentUser.displayName,
         "userId": OwnerId,
         "userProfileImg": currentUser.photoUrl,
         "postId": reviewId,

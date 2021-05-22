@@ -125,7 +125,7 @@ p()  {
                 ),
               ),
 
-FittedBox(fit: BoxFit.contain,child: Text("Settings",style:  TextStyle(color:kText),)),
+FittedBox(fit: BoxFit.contain,child: Text("Settings")),
 
 
             ],

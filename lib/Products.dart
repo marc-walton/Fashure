@@ -11696,11 +11696,7 @@ TeenSizes(){
     )));
 
 
-    // Get.to(AddressBuy(Amount:total,Size: userSize,OwnerId: ownerId,prodId:prodId ,
-    //   profileimg: profileimg ,
-    //   username: username,
-    //   mediaUrl: mediaUrl,
-    //     productname:productname));
+
 
 
   }
@@ -11785,31 +11781,7 @@ TeenSizes(){
 
 
   }
-// BottomBar(){
-//     return
-//         BottomAppBar(
-//           color: Colors.transparent,
-//           child: Row(
-//             children: [
-//               RaisedButton(
-//                 onPressed: ()=>addToCart(),
-//                 color: kblue,
-//                 shape: RoundedRectangleBorder(
-//                   borderRadius: BorderRadius.circular(18.0)
-//                 ),
-//                 child: Text('ADD TO CART', style: TextStyle(color: kText),),
-//               ), RaisedButton(
-//                 onPressed:()=>Buynow(),
-//                 color: kblue,
-//                 shape: RoundedRectangleBorder(
-//                   borderRadius: BorderRadius.circular(18.0)
-//                 ),
-//                 child: Text('BUY NOW', style: TextStyle(color: kText),),
-//               ),
-//             ],
-//           ),
-//         );
-// }
+
   Widget sizeGuide(){
 
     if(gender=='Men'){
@@ -11922,492 +11894,7 @@ TeenSizes(){
 
   }
 
-  cartfirestore(){
-  cartRef.document(currentUser.id).collection("userCart").document(prodId).setData({
-    "username": username,
-    "prodId": prodId,
-    "timestamp": timestamp,
-    "avatarUrl": photoUrl,
-//      "userId":userId,
-    "ownerId": ownerId,
-    "eur":eur,
-    "usd":usd,
-    "inr":inr,
-    "cny":cny,
-    "gbp":gbp,
-    "productname":productname,
-    "shopmediaUrl":shopmediaUrl,
-    "userSize":usersize,
-  });
-}
-  // addToCart() {
-  //
-  //  if(gender=='Men'){
-  //     showModalBottomSheet(
-  //         backgroundColor:kSecondaryColor,
-  //         context:context,
-  //         builder: (BuildContext context)
-  //     {
-  //       return
-  //         Row(
-  //           children: [
-  //             RaisedButton(
-  //               // ignore: unnecessary_statements
-  //               onPressed: (){
-  //                 SizeSelect;
-  //                 cartfirestore();
-  //                 final snackBar = SnackBar(
-  //                   content: Text('Added to Cart!'),
-  //                   action: SnackBarAction(
-  //                     // label: 'Undo',
-  //                     // onPressed: () {
-  //                     //   // Some code to undo the change.
-  //                     // },
-  //                   ),
-  //                 );
-  //
-  //                 // Find the Scaffold in the widget tree and use
-  //                 // it to show a SnackBar.
-  //                 Scaffold.of(context).showSnackBar(snackBar);
-  //               },
-  //               color: kblue,
-  //               shape: RoundedRectangleBorder(
-  //                   borderRadius: BorderRadius.circular(18.0)
-  //               ),
-  //               child: Text('Select Size', style: TextStyle(color: kText),),
-  //             ),
-  //             GestureDetector(
-  //               onTap: () {
-  //                 InteractiveViewer(
-  //                   child: Container(
-  //                     height:  MediaQuery.of(context).size.height * 0.20,
-  //                      width:  MediaQuery.of(context).size.width ,
-  //
-  //                     child: Image.asset('assets/img/MenClothingsize.jpg') ,
-  //                   ),
-  //                 );
-  //               },
-  //               child: ListTile(
-  //
-  //                 trailing: Column(children: [
-  //                   FaIcon(FontAwesomeIcons.rulerCombined),
-  //                   Text('Size Guide', style: TextStyle(color: kText),),
-  //                 ],),
-  //               ),
-  //             ),
-  //           ],
-  //         );
-  //
-  //   }
-  //     );
-  //  }
-  //  else if(gender=='Women'){
-  //     showModalBottomSheet(
-  //         backgroundColor:kSecondaryColor,
-  //         context:context,
-  //         builder: (BuildContext context)
-  //     {
-  //       return
-  //         Row(
-  //           children: [
-  //             RaisedButton(
-  //               // ignore: unnecessary_statements
-  //               onPressed: (){
-  //                 SizeSelect;
-  //                 cartfirestore();
-  //                 final snackBar = SnackBar(
-  //                   content: Text('Added to Cart!'),
-  //                   action: SnackBarAction(
-  //                     // label: 'Undo',
-  //                     // onPressed: () {
-  //                     //   // Some code to undo the change.
-  //                     // },
-  //                   ),
-  //                 );
-  //
-  //                 // Find the Scaffold in the widget tree and use
-  //                 // it to show a SnackBar.
-  //                 Scaffold.of(context).showSnackBar(snackBar);
-  //               },
-  //               color: kblue,
-  //               shape: RoundedRectangleBorder(
-  //                   borderRadius: BorderRadius.circular(18.0)
-  //               ),
-  //               child: Text('Select Size', style: TextStyle(color: kText),),
-  //             ),
-  //             GestureDetector(
-  //               onTap: () {
-  //                 InteractiveViewer(
-  //                   child: Container(
-  //                     height:  MediaQuery.of(context).size.height * 0.20,
-  //                     width:  MediaQuery.of(context).size.width ,
-  //
-  //                     child: Image.asset('assets/img/WomanClothingsize.jpg') ,
-  //                   ),
-  //                 );
-  //               },
-  //               child: ListTile(
-  //
-  //                 trailing: Column(children: [
-  //                   FaIcon(FontAwesomeIcons.rulerCombined),
-  //                   Text('Size Guide', style: TextStyle(color: kText),),
-  //                 ],),
-  //               ),
-  //             ),
-  //           ],
-  //         );
-  //
-  //   }
-  //     );
-  //  }
-  //  else if(gender=='Baby-Boys'){
-  //     showModalBottomSheet(
-  //         backgroundColor:kSecondaryColor,
-  //         context:context,
-  //         builder: (BuildContext context)
-  //     {
-  //       return
-  //         Row(
-  //           children: [
-  //             RaisedButton(
-  //               // ignore: unnecessary_statements
-  //               onPressed: (){
-  //                 SizeSelect;
-  //                 cartfirestore();
-  //                 final snackBar = SnackBar(
-  //                   content: Text('Added to Cart!'),
-  //                   action: SnackBarAction(
-  //                     // label: 'Undo',
-  //                     // onPressed: () {
-  //                     //   // Some code to undo the change.
-  //                     // },
-  //                   ),
-  //                 );
-  //
-  //                 // Find the Scaffold in the widget tree and use
-  //                 // it to show a SnackBar.
-  //                 Scaffold.of(context).showSnackBar(snackBar);
-  //               },
-  //               color: kblue,
-  //               shape: RoundedRectangleBorder(
-  //                   borderRadius: BorderRadius.circular(18.0)
-  //               ),
-  //               child: Text('Select Size', style: TextStyle(color: kText),),
-  //             ),
-  //             GestureDetector(
-  //               onTap: () {
-  //                 InteractiveViewer(
-  //                   child: Container(
-  //                     height:  MediaQuery.of(context).size.height * 0.20,
-  //                     width:  MediaQuery.of(context).size.width ,
-  //
-  //                     child: Image.asset('assets/img/babysizecloth.jpg') ,
-  //                   ),
-  //                 );
-  //               },
-  //               child: ListTile(
-  //
-  //                 trailing: Column(children: [
-  //                   FaIcon(FontAwesomeIcons.rulerCombined),
-  //                   Text('Size Guide', style: TextStyle(color: kText),),
-  //                 ],),
-  //               ),
-  //             ),
-  //           ],
-  //         );
-  //
-  //   }
-  //     );
-  //  }
-  //  else if(gender=='Baby-Girls'){
-  //     showModalBottomSheet(
-  //         backgroundColor:kSecondaryColor,
-  //         context:context,
-  //         builder: (BuildContext context)
-  //     {
-  //       return
-  //         Row(
-  //           children: [
-  //             RaisedButton(
-  //               // ignore: unnecessary_statements
-  //               onPressed: (){
-  //                 SizeSelect;
-  //                 cartfirestore();
-  //                 final snackBar = SnackBar(
-  //                   content: Text('Added to Cart!'),
-  //                   action: SnackBarAction(
-  //                     // label: 'Undo',
-  //                     // onPressed: () {
-  //                     //   // Some code to undo the change.
-  //                     // },
-  //                   ),
-  //                 );
-  //
-  //                 // Find the Scaffold in the widget tree and use
-  //                 // it to show a SnackBar.
-  //                 Scaffold.of(context).showSnackBar(snackBar);
-  //               },
-  //               color: kblue,
-  //               shape: RoundedRectangleBorder(
-  //                   borderRadius: BorderRadius.circular(18.0)
-  //               ),
-  //               child: Text('Select Size', style: TextStyle(color: kText),),
-  //             ),
-  //             GestureDetector(
-  //               onTap: () {  InteractiveViewer(
-  //                 child: Container(
-  //                   height:  MediaQuery.of(context).size.height * 0.20,
-  //                   width:  MediaQuery.of(context).size.width ,
-  //
-  //                   child: Image.asset('assets/img/babysizecloth.jpg') ,
-  //                 ),
-  //               ); },
-  //               child: ListTile(
-  //
-  //                 trailing: Column(children: [
-  //                   FaIcon(FontAwesomeIcons.rulerCombined),
-  //                   Text('Size Guide', style: TextStyle(color: kText),),
-  //                 ],),
-  //               ),
-  //             ),
-  //           ],
-  //         );
-  //
-  //   }
-  //     );
-  //  }
-  //  else if(gender=='Kids-Boys'){
-  //     showModalBottomSheet(
-  //         backgroundColor:kSecondaryColor,
-  //         context:context,
-  //         builder: (BuildContext context)
-  //     {
-  //       return
-  //         Row(
-  //           children: [
-  //             RaisedButton(
-  //               // ignore: unnecessary_statements
-  //               onPressed: (){
-  //                 SizeSelect;
-  //                 cartfirestore();
-  //                 final snackBar = SnackBar(
-  //                   content: Text('Added to Cart!'),
-  //                   action: SnackBarAction(
-  //                     // label: 'Undo',
-  //                     // onPressed: () {
-  //                     //   // Some code to undo the change.
-  //                     // },
-  //                   ),
-  //                 );
-  //
-  //                 // Find the Scaffold in the widget tree and use
-  //                 // it to show a SnackBar.
-  //                 Scaffold.of(context).showSnackBar(snackBar);
-  //               },
-  //               color: kblue,
-  //               shape: RoundedRectangleBorder(
-  //                   borderRadius: BorderRadius.circular(18.0)
-  //               ),
-  //               child: Text('Select Size', style: TextStyle(color: kText),),
-  //             ),
-  //             GestureDetector(
-  //               onTap: () {
-  //                 InteractiveViewer(
-  //                 child: Container(
-  //                   height:  MediaQuery.of(context).size.height * 0.20,
-  //                   width:  MediaQuery.of(context).size.width ,
-  //
-  //                   child: Image.asset('assets/img/kisclothsize.jpg') ,
-  //                 ),
-  //               ); },
-  //               child: ListTile(
-  //
-  //                 trailing: Column(children: [
-  //                   FaIcon(FontAwesomeIcons.rulerCombined),
-  //                   Text('Size Guide', style: TextStyle(color: kText),),
-  //                 ],),
-  //               ),
-  //             ),
-  //           ],
-  //         );
-  //
-  //   }
-  //     );
-  //  }
-  //  else if(gender=='Kids-Girls'){
-  //     showModalBottomSheet(
-  //         backgroundColor:kSecondaryColor,
-  //         context:context,
-  //         builder: (BuildContext context)
-  //     {
-  //       return
-  //         Row(
-  //           children: [
-  //             RaisedButton(
-  //               // ignore: unnecessary_statements
-  //               onPressed: (){
-  //                 SizeSelect;
-  //                 cartfirestore();
-  //                 final snackBar = SnackBar(
-  //                   content: Text('Added to Cart!'),
-  //                   action: SnackBarAction(
-  //                     // label: 'Undo',
-  //                     // onPressed: () {
-  //                     //   // Some code to undo the change.
-  //                     // },
-  //                   ),
-  //                 );
-  //
-  //                 // Find the Scaffold in the widget tree and use
-  //                 // it to show a SnackBar.
-  //                 Scaffold.of(context).showSnackBar(snackBar);
-  //               },
-  //               color: kblue,
-  //               shape: RoundedRectangleBorder(
-  //                   borderRadius: BorderRadius.circular(18.0)
-  //               ),
-  //               child: Text('Select Size', style: TextStyle(color: kText),),
-  //             ),
-  //             GestureDetector(
-  //               onTap: () { InteractiveViewer(
-  //                 child: Container(
-  //                   height:  MediaQuery.of(context).size.height * 0.20,
-  //                   width:  MediaQuery.of(context).size.width ,
-  //
-  //                   child: Image.asset('assets/img/kisclothsize.jpg') ,
-  //                 ),
-  //               ); },
-  //               child: ListTile(
-  //
-  //                 trailing: Column(children: [
-  //                   FaIcon(FontAwesomeIcons.rulerCombined),
-  //                   Text('Size Guide', style: TextStyle(color: kText),),
-  //                 ],),
-  //               ),
-  //             ),
-  //           ],
-  //         );
-  //
-  //   }
-  //     );
-  //  }
-  //  else if(gender=='Teen-Boys'){
-  //     showModalBottomSheet(
-  //         backgroundColor:kSecondaryColor,
-  //         context:context,
-  //         builder: (BuildContext context)
-  //     {
-  //       return
-  //         Row(
-  //           children: [
-  //             RaisedButton(
-  //               // ignore: unnecessary_statements
-  //               onPressed: (){
-  //                 SizeSelect;
-  //                 cartfirestore();
-  //                 final snackBar = SnackBar(
-  //                   content: Text('Added to Cart!'),
-  //                   action: SnackBarAction(
-  //                     // label: 'Undo',
-  //                     // onPressed: () {
-  //                     //   // Some code to undo the change.
-  //                     // },
-  //                   ),
-  //                 );
-  //
-  //                 // Find the Scaffold in the widget tree and use
-  //                 // it to show a SnackBar.
-  //                 Scaffold.of(context).showSnackBar(snackBar);
-  //               },
-  //               color: kblue,
-  //               shape: RoundedRectangleBorder(
-  //                   borderRadius: BorderRadius.circular(18.0)
-  //               ),
-  //               child: Text('Select Size', style: TextStyle(color: kText),),
-  //             ),
-  //             GestureDetector(
-  //               onTap: () { InteractiveViewer(
-  //                 child: Container(
-  //                   height:  MediaQuery.of(context).size.height * 0.20,
-  //                   width:  MediaQuery.of(context).size.width ,
-  //
-  //                   child: Image.asset('assets/img/teenclothing.jpg') ,
-  //                 ),
-  //               ); },
-  //               child: ListTile(
-  //
-  //                 trailing: Column(children: [
-  //                   FaIcon(FontAwesomeIcons.rulerCombined),
-  //                   Text('Size Guide', style: TextStyle(color: kText),),
-  //                 ],),
-  //               ),
-  //             ),
-  //           ],
-  //         );
-  //
-  //   }
-  //     );
-  //  }
-  //  else if(gender=='Teen-Girls'){
-  //     showModalBottomSheet(
-  //         backgroundColor:kSecondaryColor,
-  //         context:context,
-  //         builder: (BuildContext context)
-  //     {
-  //       return
-  //         Row(
-  //           children: [
-  //             RaisedButton(
-  //               // ignore: unnecessary_statements
-  //               onPressed: (){
-  //                 SizeSelect;
-  //                 cartfirestore();
-  //                 final snackBar = SnackBar(
-  //                   content: Text('Added to Cart!'),
-  //                   action: SnackBarAction(
-  //                     // label: 'Undo',
-  //                     // onPressed: () {
-  //                     //   // Some code to undo the change.
-  //                     // },
-  //                   ),
-  //                 );
-  //
-  //                 // Find the Scaffold in the widget tree and use
-  //                 // it to show a SnackBar.
-  //                 Scaffold.of(context).showSnackBar(snackBar);
-  //               },
-  //               color: kblue,
-  //               shape: RoundedRectangleBorder(
-  //                   borderRadius: BorderRadius.circular(18.0)
-  //               ),
-  //               child: Text('Select Size', style: TextStyle(color: kText),),
-  //             ),
-  //             GestureDetector(
-  //               onTap: () {InteractiveViewer(
-  //                 child: Container(
-  //                   height:  MediaQuery.of(context).size.height * 0.20,
-  //                   width:  MediaQuery.of(context).size.width ,
-  //
-  //                   child: Image.asset('assets/img/teenclothing.jpg') ,
-  //                 ),
-  //               ); },
-  //               child: ListTile(
-  //
-  //                 trailing: Column(children: [
-  //                   FaIcon(FontAwesomeIcons.rulerCombined),
-  //                   Text('Size Guide', style: TextStyle(color: kText),),
-  //                 ],),
-  //               ),
-  //             ),
-  //           ],
-  //         );
-  //
-  //   }
-  //     );
-  //  }
-  //
-  //
-  // }
+
   handleLikePost() {
     bool _isFav = true;
     if(_isFav) {
@@ -12570,8 +12057,8 @@ TeenSizes(){
                   child:   ListTile(
                     leading:FloatingActionButton(
                       mini: true,
-                      backgroundColor:kText.withOpacity(0.5),
-                      child:Icon(Icons.arrow_back_ios,color: kText,),
+                      backgroundColor:Colors.white.withOpacity(0.5),
+                      child:Icon(Icons.arrow_back_ios,color: Colors.white,),
                       onPressed:() { Navigator.pop(context);},
                     ),
                   ),
@@ -12679,14 +12166,14 @@ TeenSizes(){
                     child: Icon(
                       isfav ?   Icons.favorite:Icons.favorite_border ,
                       size: 28.0,
-                      color: kText,
+                      color:  Colors.white,
                     ),
                   ),
                   Container(
                     child: Text(
                       "$likeCount ",
                       style: TextStyle(
-                        color: Colors.white,
+                        color: kText,
                         fontSize: 15.0,
                         //                      fontWeight: FontWeight.bold,
                       ),
@@ -12704,7 +12191,7 @@ TeenSizes(){
                         Icon(
                           Icons.star,
                           size: 28.0,
-                          color: kText,
+                          color:  Colors.white,
                         ),
                         SizedBox(width: 3.0,),
                       ],
@@ -12712,7 +12199,7 @@ TeenSizes(){
 
 
                   ),
-                  Text('Rating' ,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
+                  Text('Rating' ,style: TextStyle(color: kText,fontWeight: FontWeight.bold,),),
 
                 ],
               ),
@@ -12721,7 +12208,7 @@ TeenSizes(){
                 children:[   FloatingActionButton.extended(
                   backgroundColor: kblue,
                   onPressed: ()=>sizeGuide(),
-                  label: Text('Size Guide',style:TextStyle(color: kText) ,),
+                  label: Text('Size Guide',style:TextStyle(color:  Colors.white) ,),
                 ),
                 ],
               ),
@@ -12757,9 +12244,9 @@ TeenSizes(){
                 ],
               ),
               ListTileTheme(
-                tileColor:kPrimaryColor,
+                tileColor:trans,
                 child: ExpansionTile(
-                  backgroundColor:kSecondaryColor,
+                  backgroundColor:kblue,
                   title:  Text(
                     " Description",
                     style: TextStyle(
@@ -12812,9 +12299,9 @@ TeenSizes(){
                 ),
               ),
               ListTileTheme(
-                tileColor:kPrimaryColor,
+                tileColor:trans,
                 child: ExpansionTile(
-                  backgroundColor:kSecondaryColor,
+                  backgroundColor:trans,
                   title:  Text(
                     " Size and Fit:",
                     style: TextStyle(
@@ -12847,9 +12334,9 @@ TeenSizes(){
                 ),
               ),
               ListTileTheme(
-                tileColor:kPrimaryColor,
+                tileColor:trans,
                 child: ExpansionTile(
-                  backgroundColor:kSecondaryColor,
+                  backgroundColor:trans,
                   leading: Icon(Icons.local_shipping,color: kText,),
                   title:  Text(
                     " Shipping  and Returns:",
@@ -12879,10 +12366,6 @@ TeenSizes(){
                     ),                ],
                 ),
               ),
-
-
-
-
 
             ],
           ),
@@ -12946,8 +12429,8 @@ posteurope(){
                             child:   ListTile(
                               leading:FloatingActionButton(
                                 mini: true,
-                                backgroundColor:kText.withOpacity(0.5),
-                                child:Icon(Icons.arrow_back_ios,color: kText,),
+                                backgroundColor:Colors.white.withOpacity(0.5),
+                                child:Icon(Icons.arrow_back_ios,color: Colors.white,),
                                 onPressed:() { Navigator.pop(context);},
                               ),
                             ),
@@ -13042,10 +12525,7 @@ posteurope(){
                       final snackBar = SnackBar(
                         content: Text('Added to Favorites!'),
                         action: SnackBarAction(
-                          // label: 'Undo',
-                          // onPressed: () {
-                          //   // Some code to undo the change.
-                          // },
+
                         ),
                       );
 
@@ -13055,14 +12535,14 @@ posteurope(){
                     child: Icon(
                       isfav ?   Icons.favorite:Icons.favorite_border ,
                       size: 28.0,
-                      color: kText,
+                      color:  Colors.white,
                     ),
                   ),
                   Container(
                     child: Text(
                       "$likeCount ",
                       style: TextStyle(
-                        color: Colors.white,
+                        color:kText,
                         fontSize: 15.0,
                         //                      fontWeight: FontWeight.bold,
                       ),
@@ -13080,7 +12560,7 @@ posteurope(){
                         Icon(
                           Icons.star,
                           size: 28.0,
-                          color: kText,
+                          color:  Colors.white,
                         ),
                         SizedBox(width: 3.0,),
                       ],
@@ -13088,7 +12568,7 @@ posteurope(){
 
 
                   ),
-                  Text('Rating' ,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
+                  Text('Rating' ,style: TextStyle(color: kText,fontWeight: FontWeight.bold,),),
 
                 ],
               ),
@@ -13097,7 +12577,7 @@ posteurope(){
                 children:[   FloatingActionButton.extended(
                   backgroundColor: kblue,
                   onPressed: ()=>sizeGuide(),
-                  label: Text('Size Guide',style:TextStyle(color: kText) ,),
+                  label: Text('Size Guide',style:TextStyle(color:  Colors.white) ,),
                 ),
                 ],
               ),
@@ -13133,9 +12613,9 @@ posteurope(){
                 ],
               ),
               ListTileTheme(
-                tileColor:kPrimaryColor,
+                tileColor:trans,
                 child: ExpansionTile(
-                  backgroundColor:kSecondaryColor,
+                  backgroundColor:kblue,
                   title:  Text(
                     " Description",
                     style: TextStyle(
@@ -13188,9 +12668,9 @@ posteurope(){
                 ),
               ),
               ListTileTheme(
-                tileColor:kPrimaryColor,
+                tileColor:trans,
                 child: ExpansionTile(
-                  backgroundColor:kSecondaryColor,
+                  backgroundColor:trans,
                   title:  Text(
                     " Size and Fit:",
                     style: TextStyle(
@@ -13223,9 +12703,9 @@ posteurope(){
                 ),
               ),
               ListTileTheme(
-                tileColor:kPrimaryColor,
+                tileColor:trans,
                 child: ExpansionTile(
-                  backgroundColor:kSecondaryColor,
+                  backgroundColor:trans,
                   leading: Icon(Icons.local_shipping,color: kText,),
                   title:  Text(
                     " Shipping  and Returns:",
@@ -13255,10 +12735,6 @@ posteurope(){
                     ),                ],
                 ),
               ),
-
-
-
-
 
 
             ],
@@ -13323,8 +12799,8 @@ postuk(){
                             child:   ListTile(
                               leading:FloatingActionButton(
                                 mini: true,
-                                backgroundColor:kText.withOpacity(0.5),
-                                child:Icon(Icons.arrow_back_ios,color: kText,),
+                                backgroundColor:Colors.white.withOpacity(0.5),
+                                child:Icon(Icons.arrow_back_ios,color: Colors.white,),
                                 onPressed:() { Navigator.pop(context);},
                               ),
                             ),
@@ -13432,14 +12908,14 @@ postuk(){
                     child: Icon(
                       isfav ?   Icons.favorite:Icons.favorite_border ,
                       size: 28.0,
-                      color: kText,
+                      color:  Colors.white,
                     ),
                   ),
                   Container(
                     child: Text(
                       "$likeCount ",
                       style: TextStyle(
-                        color: Colors.white,
+                        color: kText,
                         fontSize: 15.0,
                         //                      fontWeight: FontWeight.bold,
                       ),
@@ -13457,7 +12933,7 @@ postuk(){
                         Icon(
                           Icons.star,
                           size: 28.0,
-                          color: kText,
+                          color:  Colors.white,
                         ),
                         SizedBox(width: 3.0,),
                       ],
@@ -13465,7 +12941,7 @@ postuk(){
 
 
                   ),
-                  Text('Rating' ,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
+                  Text('Rating' ,style: TextStyle(color: kText,fontWeight: FontWeight.bold,),),
 
                 ],
               ),
@@ -13474,7 +12950,7 @@ postuk(){
                 children:[   FloatingActionButton.extended(
                   backgroundColor: kblue,
                   onPressed: ()=>sizeGuide(),
-                  label: Text('Size Guide',style:TextStyle(color: kText) ,),
+                  label: Text('Size Guide',style:TextStyle(color:  Colors.white) ,),
                 ),
                 ],
               ),
@@ -13510,9 +12986,9 @@ postuk(){
                 ],
               ),
               ListTileTheme(
-                tileColor:kPrimaryColor,
+                tileColor:trans,
                 child: ExpansionTile(
-                  backgroundColor:kSecondaryColor,
+                  backgroundColor:kblue,
                   title:  Text(
                     " Description",
                     style: TextStyle(
@@ -13565,9 +13041,9 @@ postuk(){
                 ),
               ),
               ListTileTheme(
-                tileColor:kPrimaryColor,
+                tileColor:trans,
                 child: ExpansionTile(
-                  backgroundColor:kSecondaryColor,
+                  backgroundColor:trans,
                   title:  Text(
                     " Size and Fit:",
                     style: TextStyle(
@@ -13600,9 +13076,9 @@ postuk(){
                 ),
               ),
               ListTileTheme(
-                tileColor:kPrimaryColor,
+                tileColor:trans,
                 child: ExpansionTile(
-                  backgroundColor:kSecondaryColor,
+                  backgroundColor:trans,
                   leading: Icon(Icons.local_shipping,color: kText,),
                   title:  Text(
                     " Shipping  and Returns:",
@@ -13632,7 +13108,6 @@ postuk(){
                     ),                ],
                 ),
               ),
-
             ],
           ),
         ),
@@ -13695,8 +13170,8 @@ postusa() {
                             child:   ListTile(
                               leading:FloatingActionButton(
                                 mini: true,
-                                backgroundColor:kText.withOpacity(0.5),
-                                child:Icon(Icons.arrow_back_ios,color: kText,),
+                                backgroundColor:Colors.white.withOpacity(0.5),
+                                child:Icon(Icons.arrow_back_ios,color: Colors.white,),
                                 onPressed:() { Navigator.pop(context);},
                               ),
                             ),
@@ -13804,14 +13279,14 @@ postusa() {
                     child: Icon(
                       isfav ?   Icons.favorite:Icons.favorite_border ,
                       size: 28.0,
-                      color: kText,
+                      color:  Colors.white,
                     ),
                   ),
                   Container(
                     child: Text(
                       "$likeCount ",
                       style: TextStyle(
-                        color: Colors.white,
+                        color:kText,
                         fontSize: 15.0,
                         //                      fontWeight: FontWeight.bold,
                       ),
@@ -13829,7 +13304,7 @@ postusa() {
                         Icon(
                           Icons.star,
                           size: 28.0,
-                          color: kText,
+                          color:  Colors.white,
                         ),
                         SizedBox(width: 3.0,),
                       ],
@@ -13837,7 +13312,7 @@ postusa() {
 
 
                   ),
-                  Text('Rating' ,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
+                  Text('Rating' ,style: TextStyle(color: kText,fontWeight: FontWeight.bold,),),
 
                 ],
               ),
@@ -13846,7 +13321,7 @@ postusa() {
                 children:[   FloatingActionButton.extended(
                   backgroundColor: kblue,
                   onPressed: ()=>sizeGuide(),
-                  label: Text('Size Guide',style:TextStyle(color: kText) ,),
+                  label: Text('Size Guide',style:TextStyle(color: Colors.white) ,),
                 ),
                 ],
               ),
@@ -13882,9 +13357,9 @@ postusa() {
                 ],
               ),
               ListTileTheme(
-                tileColor:kPrimaryColor,
+                tileColor:trans,
                 child: ExpansionTile(
-                  backgroundColor:kSecondaryColor,
+                  backgroundColor:kblue,
                   title:  Text(
                     " Description",
                     style: TextStyle(
@@ -13937,9 +13412,9 @@ postusa() {
                 ),
               ),
               ListTileTheme(
-                tileColor:kPrimaryColor,
+                tileColor:trans,
                 child: ExpansionTile(
-                  backgroundColor:kSecondaryColor,
+                  backgroundColor:trans,
                   title:  Text(
                     " Size and Fit:",
                     style: TextStyle(
@@ -13972,9 +13447,9 @@ postusa() {
                 ),
               ),
               ListTileTheme(
-                tileColor:kPrimaryColor,
+                tileColor:trans,
                 child: ExpansionTile(
-                  backgroundColor:kSecondaryColor,
+                  backgroundColor:trans,
                   leading: Icon(Icons.local_shipping,color: kText,),
                   title:  Text(
                     " Shipping  and Returns:",
@@ -14176,7 +13651,7 @@ postusa() {
           .document(prodId)
           .setData({
         "type": "fav",
-        "username": currentUser.username,
+        "username": currentUser.displayName,
         "userId": currentUser.id,
         "userProfileImg": currentUser.photoUrl,
         "postId": prodId,

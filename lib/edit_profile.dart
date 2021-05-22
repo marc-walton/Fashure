@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:fashow/Constants.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -214,51 +215,6 @@ print(CheckedIllustrator);
 
 
 }
-// setcheckbox(){
-//
-//   if(CheckedDesigner==true){
-//     setState(() {
-//       isCheckedDesigner = true;
-//     });
-//   }
-//   else if(CheckedIllustrator==true){
-//     setState(() {
-//       isCheckedIllustrator = true;
-//     });
-//   }
-//   else if(CheckedPhotographer==true){
-//     setState(() {
-//       isCheckedPhotographer = true;
-//     });
-//   }
-//    else if(CheckedModel==true){
-//     setState(() {
-//       isCheckedModel = true;
-//     });
-//   }
-//   else if(CheckedMakeup==true){
-//     setState(() {
-//       isCheckedMakeup = true;
-//     });
-//   }
-//    else if(CheckedHair==true){
-//     setState(() {
-//       isCheckedHair = true;
-//     });
-//   }
-//    else if(CheckedChoreographer==true){
-//     setState(() {
-//       isCheckedChoreographer = true;
-//     });
-//   }
-//   else if(CheckedStylist==true){
-//     setState(() {
-//       isCheckedStylist = true;
-//     });
-//   }
-//
-//
-// }
 
 
 
@@ -300,206 +256,10 @@ print(CheckedIllustrator);
 //      isUploading = false;1111
     });
   }
-  getCoverImage(ImageSource source) async {
-    this.setState((){
-      _inProcess = true;
-    });
-    File image = await ImagePicker.pickImage(source: source);
-    if(image != null){
-      File cropped = await ImageCropper.cropImage(
-          sourcePath: image.path,
-          aspectRatio: CropAspectRatio(
-              ratioX: 1, ratioY: 1),
-          compressQuality: 100,
-          maxWidth: 900,
-          maxHeight: 500,
-          compressFormat: ImageCompressFormat.jpg,
-          androidUiSettings: AndroidUiSettings(
-            toolbarColor: Colors.deepOrange,
-            toolbarTitle: "Crop Image",
-            statusBarColor: Colors.deepOrange.shade900,
-            backgroundColor: Colors.white,
-          )
-      );
-
-      this.setState((){
-        file = cropped;
-        _inProcess = false;
-      });
-      handleCoverSubmit();
-    } else {
-      this.setState((){
-        _inProcess = false;
-      });
-    }
-  }
-
-  handleCoverSubmit() async {
-    setState(() {
-      isUploading = true;
-    });
-    await compressCoverImage();
-    String mediaUrl = await uploadCoverImage(file);
-
-    createcoverInFirestore(
-      mediaUrl: mediaUrl,
-
-    );
-
-    Navigator.pop(context);
-
-  }
-
-  selectCoverImage() {
-    return showDialog(
-        context: context,
-        builder: (context) {
-          return SimpleDialog(
-//            shape: ,
-            title: Text("Select Image"),
-            children: <Widget>[
-              SimpleDialogOption(
-                child: Text("Image from Gallery"),
-                onPressed:  () {
-                  getCoverImage(ImageSource.gallery);
-                  Navigator.pop(context);
-                },
-              ),
-              SimpleDialogOption(
-                child: Text("Cancel"),
-                onPressed: () => Navigator.pop(context),
-              )
-            ],
-          );
-        });
-  }
 
 
-  clearCoverImage() {
-    setState(() {
-      file = null;
-    });
-  }
 
-  compressCoverImage() async {
-    final tempDir = await getTemporaryDirectory();
-    final path = tempDir.path;
-    Im.Image imageFile = Im.decodeImage(file.readAsBytesSync());
-    final compressedImageFile = File('$path/img_$photoId.jpg')
-      ..writeAsBytesSync(Im.encodeJpg(imageFile, quality: 85));
-    setState(() {
-      file = compressedImageFile;
-    });
-  }
 
-  Future<String> uploadCoverImage(imageFile) async {
-    StorageUploadTask uploadTask =
-    storageRef.child("cover_$photoId.jpg").putFile(imageFile);
-    StorageTaskSnapshot storageSnap = await uploadTask.onComplete;
-    String downloadUrl = await storageSnap.ref.getDownloadURL();
-    return downloadUrl;
-  }
-
-  createcoverInFirestore({String mediaUrl, }) {
-    usersRef
-        .document(currentUser.id)
-        .setData({
-      "coverPhoto": mediaUrl,
-
-    });
-
-    setState(() {
-      file = null;
-//      isUploading = false;1111
-    });
-  }
-  CoverPhoto(){
-    try{
-      StreamBuilder(
-        stream: usersRef.document(currentUser.id).snapshots(),
-        builder: (context,snapshot){
-          return
-            Stack(
-              children: [
-                Container(
-                  width: MediaQuery.of(context).size.width,
-                  height: MediaQuery.of(context).size.height / 1,
-                  child: CachedNetworkImage(
-                    imageUrl: snapshot.data['coverPhoto'],
-                    fit: BoxFit.cover,
-                  ),
-                ),
-                Positioned(
-                  right: 10.0,
-                  bottom: 10.0,
-                  child: FlatButton(
-                    color: kblue,
-                    onPressed: () {selectCoverImage();},
-                    child: Text('Change cover'),
-                  ),
-                )
-              ],
-            );
-        },
-      );
-
-    }
-    catch(e){
-      Container(
-        width: MediaQuery.of(context).size.width,
-        height: MediaQuery.of(context).size.height / 1,
-        child: Text('Cover Photo',style: TextStyle(fontSize: 20.0,color: kText),),
-      );
-    }
-  }
-  ProfilePhoto(){
-    try{
-      StreamBuilder(
-        stream: usersRef.document(currentUser.id).snapshots(),
-        builder: (context,snapshot){
-          return
-            Positioned(
-              top: 90.0,
-              left: 50.0,
-              right: 50.0,
-
-              child: Container(
-                alignment: Alignment.center,
-                constraints: BoxConstraints(maxHeight: 80, maxWidth: 80),
-                child: Stack(
-                    children: [
-
-                      Positioned(
-                        right: 0.1,
-                        bottom: 0.1,
-                        child: GestureDetector(
-                          onTap: (){
-                            selectImage();
-                          },
-                          child: Container(
-                            decoration: BoxDecoration(borderRadius: BorderRadius.circular(30)),
-                            child: Icon(Icons.add),
-                          ),
-                        ),
-                      )
-
-                    ]
-                ),
-              ),
-            );
-
-        },
-      );
-
-    }
-    catch(e){
-      Container(
-        width: MediaQuery.of(context).size.width,
-        height: MediaQuery.of(context).size.height / 1,
-        child: Text('Cover Photo',style: TextStyle(fontSize: 20.0,color: kText),),
-      );
-    }
-  }
 
   void toggleDesigner(bool value) {
 
@@ -727,7 +487,7 @@ void toggleStylist(bool value) {
   Container buildDisplayNameField() {
     return Container(
       decoration: BoxDecoration( borderRadius: BorderRadius.circular(15.0),
-      color: kPrimaryColor) ,
+    ) ,
 
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -744,10 +504,10 @@ void toggleStylist(bool value) {
             controller: displayNameController,
             decoration: InputDecoration(
               hintText: "Update Display Name",
-              hintStyle: TextStyle(color: kSubtitle),
+              hintStyle: TextStyle(color: kGrey),
               errorText: _displayNameValid ? null : "Display Name too short",
-              fillColor: Colors.red,
-            ),
+                fillColor: transwhite,
+                border:OutlineInputBorder(borderRadius: BorderRadius.circular(25.0),)            ),
           )
         ],
       ),
@@ -756,7 +516,7 @@ void toggleStylist(bool value) {
 
   Container buildBioField() {
     return Container( decoration: BoxDecoration( borderRadius: BorderRadius.circular(15.0),
-        color: kPrimaryColor) ,
+         ) ,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
@@ -773,8 +533,8 @@ void toggleStylist(bool value) {
               hintText: "Bio",
               hintStyle: TextStyle(color: kGrey),
               errorText: _bioValid ? null : "Bio too long",
-              fillColor:Colors.red,
-            ),
+                fillColor: transwhite,
+                border:OutlineInputBorder(borderRadius: BorderRadius.circular(25.0),)            ),
           )
         ],
       ),
@@ -834,7 +594,7 @@ void toggleStylist(bool value) {
                   color: Colors.white),),
           ),
           ),
-        iconTheme: new IconThemeData(color: kText),
+        iconTheme: new IconThemeData(color: Colors.white),
 //        ),
         actions: <Widget>[
           IconButton(
@@ -855,7 +615,6 @@ void toggleStylist(bool value) {
             child: ListView(
         children: <Widget>[
             Container(
-                color: kPrimaryColor,
 
               child: Column(
                 children: <Widget>[
@@ -899,7 +658,7 @@ void toggleStylist(bool value) {
                        SizedBox(height: 10.0,),
                        Container(
                          decoration: BoxDecoration( borderRadius: BorderRadius.circular(20.0),
-                             color: kPrimaryColor) ,
+                             ) ,
                          child: Column(
                            children: [
                              // Text('I\'m a ',style: TextStyle(color: kText,fontSize: 30.0), ),
@@ -908,12 +667,12 @@ void toggleStylist(bool value) {
                          tileColor:kblue,
 
                          child: ExpansionTile (
-                                 title: Text('I Freelance in',style:TextStyle(color:kText)),
+                                 title: Text('I Freelance in',style:TextStyle(color:Colors.white)),
                                  maintainState:true,
                                  trailing:Icon(Icons.arrow_drop_down,color: kText,),
                                  children: [
                                    CheckboxListTile(
-                                     title: Text('Designer',style: TextStyle(color: kText), ),
+                                     title: Text('Designer',style: TextStyle(color: Colors.white), ),
                                      value: isCheckedDesigner,
                                      onChanged: (value){toggleDesigner(value);},
                                      activeColor: Colors.pink,
@@ -921,7 +680,7 @@ void toggleStylist(bool value) {
                                      tristate: false,
                                    ),
                                    CheckboxListTile(
-                                     title: Text('Stylist',style: TextStyle(color: kText), ),
+                                     title: Text('Stylist',style: TextStyle(color: Colors.white), ),
                                      value: isCheckedStylist,
                                      onChanged: (value){toggleStylist(value);},
                                      activeColor: Colors.pink,
@@ -929,7 +688,7 @@ void toggleStylist(bool value) {
                                      tristate: false,
                                    ),
                                    CheckboxListTile(
-                                     title: Text('Illustrator',style: TextStyle(color: kText), ),
+                                     title: Text('Illustrator',style: TextStyle(color: Colors.white), ),
                                      value: isCheckedIllustrator,
                                      onChanged: (value){toggleIllustrator(value);},
                                      activeColor: Colors.pink,
@@ -937,7 +696,7 @@ void toggleStylist(bool value) {
                                      tristate: false,
                                    ),
                                    CheckboxListTile(
-                                     title: Text('Photographer',style: TextStyle(color: kText), ),
+                                     title: Text('Photographer',style: TextStyle(color: Colors.white), ),
                                      value: isCheckedPhotographer,
                                      onChanged: (value){togglePhotographer(value);},
                                      activeColor: Colors.pink,
@@ -945,7 +704,7 @@ void toggleStylist(bool value) {
                                      tristate: false,
                                    ),
                                    CheckboxListTile(
-                                     title: Text('Model',style: TextStyle(color: kText), ),
+                                     title: Text('Model',style: TextStyle(color: Colors.white), ),
                                      value: isCheckedModel,
                                      onChanged: (value){toggleModel(value);},
                                      activeColor: Colors.pink,
@@ -953,7 +712,7 @@ void toggleStylist(bool value) {
                                      tristate: false,
                                    ),
                                    CheckboxListTile(
-                                     title: Text('Makeup Artist',style: TextStyle(color: kText), ),
+                                     title: Text('Makeup Artist',style: TextStyle(color: Colors.white), ),
                                      value: isCheckedMakeup,
                                      onChanged: (value){toggleMakeup(value);},
                                      activeColor: Colors.pink,
@@ -961,7 +720,7 @@ void toggleStylist(bool value) {
                                      tristate: false,
                                    ),
                                    CheckboxListTile(
-                                     title: Text('Hairdresser',style: TextStyle(color: kText), ),
+                                     title: Text('Hairdresser',style: TextStyle(color: Colors.white), ),
                                      value: isCheckedHair,
                                      onChanged: (value){toggleHair(value);},
                                      activeColor: Colors.pink,
@@ -969,7 +728,7 @@ void toggleStylist(bool value) {
                                      tristate: false,
                                    ),
                                    CheckboxListTile(
-                                     title: Text('Choreographer',style: TextStyle(color: kText), ),
+                                     title: Text('Choreographer',style: TextStyle(color: Colors.white), ),
                                      value: isCheckedChoreographer,
                                      onChanged: (value){toggleChoreographer(value);},
                                      activeColor: Colors.pink,
@@ -991,7 +750,7 @@ void toggleStylist(bool value) {
                     label: Text(
                       "Save",
                       style: TextStyle(
-                        color: kText,
+                        color: Colors.white,
                         fontSize: 20.0,
                         fontWeight: FontWeight.bold,
                       ),

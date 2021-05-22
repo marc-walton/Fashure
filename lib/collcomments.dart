@@ -66,7 +66,7 @@ class CollCommentsState extends State<CollComments> {
 
   addComment() {
     collcommentsRef.document(collId).collection("collComments").add({
-      "username": currentUser.username,
+      "username": currentUser.displayName,
       "comment": collcommentController.text,
       "timestamp": timestamp,
       "avatarUrl": currentUser.photoUrl,
@@ -77,7 +77,7 @@ class CollCommentsState extends State<CollComments> {
      activityFeedRef.document(collOwnerId).collection('feedItems').add({
        "type": "Collectioncomment",
        "commentData": collcommentController.text,
-       "username": currentUser.username,
+       "username": currentUser.displayName,
        "userId": currentUser.id,
        "userProfileImg": currentUser.photoUrl,
        "postId": collId,

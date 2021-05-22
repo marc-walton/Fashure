@@ -66,7 +66,6 @@ class _AddressSerState extends State<AddressSer>  with AutomaticKeepAliveClientM
         .document(addId)
         .setData({
       "userId": widget.currentUser.id,
-      "username": widget.currentUser.username,
       "photoUrl": widget.currentUser.photoUrl,
       "displayName": widget.currentUser.displayName,
       "fullname":namecontroller.text,

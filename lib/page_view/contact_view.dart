@@ -74,7 +74,7 @@ String count;
       title: Text(
         (contact != null ? contact.displayName : null) != null ? contact.displayName : "..",
         style:
-        TextStyle(color: Colors.white, fontFamily: "Arial", fontSize: 19),
+        TextStyle(color:kText, fontFamily: "Arial", fontSize: 19),
       ),
       subtitle:LastMessageContainer(
         stream: _chatMethods.fetchLastMessageBetween(
@@ -91,9 +91,7 @@ String count;
               radius: 80,
               isRound: true,
             ),
-            OnlineDotIndicator(
-              uid: contact.id,
-            ),
+
           ],
         ),
       ),

@@ -34,7 +34,7 @@ class _SearchState extends State<Search>
 
   AppBar buildSearchField() {
     return AppBar(
-      backgroundColor: Colors.white,
+      backgroundColor:kPrimaryColor,
       title: TextFormField(
         controller: searchController,
         decoration: InputDecoration(

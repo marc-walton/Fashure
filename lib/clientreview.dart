@@ -87,7 +87,7 @@ class _ClientReviewState extends State<ClientReview> {
   @override
   Widget build(BuildContext context) {
     return       Scaffold(
-      appBar:  AppBar(backgroundColor: kSecondaryColor,
+      appBar:  AppBar(backgroundColor: kPrimaryColor,
         title:  FittedBox(fit:BoxFit.contain,
           child: Text('Client Reviews',
             style: TextStyle(
@@ -98,7 +98,6 @@ class _ClientReviewState extends State<ClientReview> {
         ),
         iconTheme: new IconThemeData(color: kIcon),
       ),
-      backgroundColor: kPrimaryColor,
 
       body:
            Container( decoration: BoxDecoration(

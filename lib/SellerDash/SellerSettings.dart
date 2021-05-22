@@ -51,8 +51,8 @@ class _SellerSettingState extends State<SellerSetting> {
         child: ListView(
           shrinkWrap:true,
           children: <Widget>[
-
-            Text('Add Bank information to receive payments on your sales' ,style: TextStyle(color: Colors.white,fontSize: 15),),
+SizedBox(height:12),
+            Text('Add Bank information to receive payments on your sales' ,style: TextStyle(color: kText,fontSize: 15),),
 
 
             SizedBox(height: 25),

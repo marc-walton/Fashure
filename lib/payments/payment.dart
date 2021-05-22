@@ -1595,7 +1595,7 @@ onSuccess()async{
         .document(orderId)
         .setData({
       "type": "PaymentO",
-      "username": currentUser.username,
+      "username": currentUser.displayName,
       "userId": doc.data['ownerId'],
       "userProfileImg": currentUser.photoUrl,
       "mediaUrl":doc.data['shopmediaUrl'],

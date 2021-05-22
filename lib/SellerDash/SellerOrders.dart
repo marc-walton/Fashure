@@ -20,19 +20,27 @@ class SellerOrders extends StatefulWidget {
 }
 
 class _SellerOrdersState extends State<SellerOrders> {
+
   df({String productname,String usd,String inr,String cny,String eur,String gbp,String prodId,String ownerId,}){
+
     if(currentUser.country=='India'){
       return
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        Column(
           children: <Widget>[
-            Text(productname, style: TextStyle(
-                color: kText,
-                fontSize: 20.0,
-                fontWeight: FontWeight.bold),),
-            Text( "₹$inr",style: TextStyle(color: kText,
-                fontSize: 20.0,
-                fontWeight: FontWeight.bold)),
+            ListTile(
+              title: Text(productname, style: TextStyle(
+                  color: kText,
+                  fontSize: 20.0,
+                  fontWeight: FontWeight.bold),),
+            ),
+
+            ListTile(
+              title:            Text( "₹$inr",style: TextStyle(color: kText,
+                  fontSize: 20.0,
+                  fontWeight: FontWeight.bold)),
+
+            ),
+
 
           ],
         );
@@ -40,49 +48,50 @@ class _SellerOrdersState extends State<SellerOrders> {
     }
     else if(currentUser.country=='US'){
       return
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        Column(
+          mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
-            Text(productname, style: TextStyle(
-                color: kText,
-                fontSize: 20.0,
-                fontWeight: FontWeight.bold),),
-            Text( "\u0024 $usd",style: TextStyle(color: kText,
-                fontSize: 20.0,
-                fontWeight: FontWeight.bold)),
+            ListTile(
+              title: Text(productname, style: TextStyle(
+                  color: kText,
+                  fontSize: 20.0,
+                  fontWeight: FontWeight.bold),),
+            ),
+
+            ListTile(
+              title:            Text( " \u0024 $usd",style: TextStyle(color:  kText,
+                  fontSize: 20.0,
+                  fontWeight: FontWeight.bold)),
+
+            ),
+
+
 
           ],
         );
 
     }
-    else if (currentUser.country == 'China') {
-      return
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: <Widget>[
-            Text(productname, style: TextStyle(
-                color: kText,
-                fontSize: 20.0,
-                fontWeight: FontWeight.bold),),
-            Text( "¥ $cny",style: TextStyle(color: kText,
-                fontSize: 20.0,
-                fontWeight: FontWeight.bold)),
-          ],
-        );
 
-    }
     else if (currentUser.country == 'Europe'){
       return
-        Row(
+        Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: <Widget>[
-            Text(productname, style: TextStyle(
-                color: kText,
-                fontSize: 20.0,
-                fontWeight: FontWeight.bold),),
-            Text( "€ $eur",style: TextStyle(color: kText,
-                fontSize: 20.0,
-                fontWeight: FontWeight.bold)),
+            ListTile(
+              title: Text(productname, style: TextStyle(
+                  color:kText,
+                  fontSize: 20.0,
+                  fontWeight: FontWeight.bold),),
+            ),
+
+            ListTile(
+              title:            Text( " € $eur",style: TextStyle(color: kText,
+                  fontSize: 20.0,
+                  fontWeight: FontWeight.bold)),
+
+            ),
+
+
 
           ],
         );
@@ -90,32 +99,49 @@ class _SellerOrdersState extends State<SellerOrders> {
     }
     else if (currentUser.country == 'UK'){
       return
-        Row(
+        Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: <Widget>[
-            Text(productname, style: TextStyle(
-                color: kText,
-                fontSize: 20.0,
-                fontWeight: FontWeight.bold),),
-            Text( "£  $gbp ",style: TextStyle(color: kText,
-                fontSize: 20.0,
-                fontWeight: FontWeight.bold)),
+            ListTile(
+              title: Text(productname, style: TextStyle(
+                  color: kText,
+                  fontSize: 20.0,
+                  fontWeight: FontWeight.bold),),
+            ),
+
+            ListTile(
+              title:            Text( " £ $gbp",style: TextStyle(color: kText,
+                  fontSize: 20.0,
+                  fontWeight: FontWeight.bold)),
+
+            ),
+
+
+
           ],
         );
 
     }
     else{
       return
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        Column(
+          mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
-            Text(productname, style: TextStyle(
-                color: kText,
-                fontSize: 20.0,
-                fontWeight: FontWeight.bold),),
-            Text( "\u0024 $usd",style: TextStyle(color: kText,
-                fontSize: 20.0,
-                fontWeight: FontWeight.bold)),
+            ListTile(
+              title: Text(productname, style: TextStyle(
+                  color: kText,
+                  fontSize: 20.0,
+                  fontWeight: FontWeight.bold),),
+            ),
+
+            ListTile(
+              title:            Text( " \u0024 $usd",style: TextStyle(color:  kText,
+                  fontSize: 20.0,
+                  fontWeight: FontWeight.bold)),
+
+            ),
+
+
 
           ],
         );
@@ -174,7 +200,6 @@ StreamBuilder(  stream: productsRef.document(ownerId).collection('userProducts')
       String usd= ds['usd'];
       String inr= ds['inr'];
       String eur= ds['eur'];
-      String cny= ds['cny'];
       String gbp= ds['gbp'];
 
 
@@ -198,7 +223,7 @@ ListView(
       ClipRRect(
       borderRadius: BorderRadius.circular(20.0),child: cachedNetworkImage(shopmediaUrl)),
       ],),),
-      df(productname:productname, usd:usd,inr:inr,cny:cny,eur:eur,gbp:gbp, prodId:prodId, ownerId:ownerId,),
+      df(productname:productname, usd:usd,inr:inr,eur:eur,gbp:gbp, prodId:prodId, ownerId:ownerId,),
 
       ],
 );
@@ -281,7 +306,6 @@ ListView(
                           String usd= ds['usd'];
                           String inr= ds['inr'];
                           String eur= ds['eur'];
-                          String cny= ds['cny'];
                           String gbp= ds['gbp'];
 
 
@@ -305,7 +329,7 @@ ListView(
                                       ClipRRect(
                                           borderRadius: BorderRadius.circular(20.0),child: cachedNetworkImage(shopmediaUrl)),
                                     ],),),
-                                df(productname:productname, usd:usd,inr:inr,cny:cny,eur:eur,gbp:gbp, prodId:prodId, ownerId:ownerId,),
+                                df(productname:productname, usd:usd,inr:inr,eur:eur,gbp:gbp, prodId:prodId, ownerId:ownerId,),
 
                               ],
                             );

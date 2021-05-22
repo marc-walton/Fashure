@@ -347,7 +347,7 @@ Get.to( PaymentSer(Amount:amount,OrderId: orderId,
         .document(reviewId)
         .setData({
       "type": "ReviewC",
-      "username": currentUser.username,
+      "username": currentUser.displayName,
       "userId": ownerId,
       "userProfileImg": currentUser.photoUrl,
       "postId": reviewId,
@@ -423,7 +423,7 @@ Get.to( PaymentSer(Amount:amount,OrderId: orderId,
                   .document(reviewId)
                   .setData({
                 "type": "ReviewC",
-                "username": currentUser.username,
+                "username": currentUser.displayName,
                 "userId": ownerId,
                 "userProfileImg": currentUser.photoUrl,
                 "postId": reviewId,

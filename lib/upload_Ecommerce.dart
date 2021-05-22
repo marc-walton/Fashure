@@ -656,7 +656,7 @@ setState(() {
             .setData({
           "prodId": prodId,
           "ownerId": widget.currentUser.id,
-          "username": widget.currentUser.username,
+          "username": widget.currentUser.displayName,
           "photoUrl": widget.currentUser.photoUrl,
           "displayName": widget.currentUser.displayName,
           "shopmediaUrl": shopmediaUrl,
@@ -731,7 +731,7 @@ setState(() {
             .setData({
           "prodId": prodId,
           "ownerId": widget.currentUser.id,
-          "username": widget.currentUser.username,
+          "username": widget.currentUser.displayName,
           "photoUrl": widget.currentUser.photoUrl,
           "displayName": widget.currentUser.displayName,
           "shopmediaUrl": shopmediaUrl,
@@ -806,7 +806,7 @@ setState(() {
             .setData({
           "prodId": prodId,
           "ownerId": widget.currentUser.id,
-          "username": widget.currentUser.username,
+          "username": widget.currentUser.displayName,
           "photoUrl": widget.currentUser.photoUrl,
           "displayName": widget.currentUser.displayName,
           "shopmediaUrl": shopmediaUrl,
@@ -880,7 +880,7 @@ setState(() {
             .setData({
           "prodId": prodId,
           "ownerId": widget.currentUser.id,
-          "username": widget.currentUser.username,
+          "username": widget.currentUser.displayName,
           "photoUrl": widget.currentUser.photoUrl,
           "displayName": widget.currentUser.displayName,
           "shopmediaUrl": shopmediaUrl,
@@ -952,7 +952,7 @@ setState(() {
             .setData({
           "prodId": prodId,
           "ownerId": widget.currentUser.id,
-          "username": widget.currentUser.username,
+          "username": widget.currentUser.displayName,
           "photoUrl": widget.currentUser.photoUrl,
           "displayName": widget.currentUser.displayName,
           "shopmediaUrl": shopmediaUrl,
@@ -1025,7 +1025,7 @@ setState(() {
             .setData({
           "prodId": prodId,
           "ownerId": widget.currentUser.id,
-          "username": widget.currentUser.username,
+          "username": widget.currentUser.displayName,
           "photoUrl": widget.currentUser.photoUrl,
           "displayName": widget.currentUser.displayName,
           "shopmediaUrl": shopmediaUrl,
@@ -1100,7 +1100,7 @@ setState(() {
             .setData({
           "prodId": prodId,
           "ownerId": widget.currentUser.id,
-          "username": widget.currentUser.username,
+          "username": widget.currentUser.displayName,
           "photoUrl": widget.currentUser.photoUrl,
           "displayName": widget.currentUser.displayName,
           "shopmediaUrl": shopmediaUrl,
@@ -1169,7 +1169,7 @@ setState(() {
             .setData({
           "prodId": prodId,
           "ownerId": widget.currentUser.id,
-          "username": widget.currentUser.username,
+          "username": widget.currentUser.displayName,
           "photoUrl": widget.currentUser.photoUrl,
           "displayName": widget.currentUser.displayName,
           "shopmediaUrl": shopmediaUrl,
@@ -1238,7 +1238,7 @@ setState(() {
             .setData({
           "prodId": prodId,
           "ownerId": widget.currentUser.id,
-          "username": widget.currentUser.username,
+          "username": widget.currentUser.displayName,
           "photoUrl": widget.currentUser.photoUrl,
           "displayName": widget.currentUser.displayName,
           "shopmediaUrl": shopmediaUrl,
@@ -1307,7 +1307,7 @@ setState(() {
             .setData({
           "prodId": prodId,
           "ownerId": widget.currentUser.id,
-          "username": widget.currentUser.username,
+          "username": widget.currentUser.displayName,
           "photoUrl": widget.currentUser.photoUrl,
           "displayName": widget.currentUser.displayName,
           "shopmediaUrl": shopmediaUrl,
@@ -1375,7 +1375,7 @@ setState(() {
             .setData({
           "prodId": prodId,
           "ownerId": widget.currentUser.id,
-          "username": widget.currentUser.username,
+          "username": widget.currentUser.displayName,
           "photoUrl": widget.currentUser.photoUrl,
           "displayName": widget.currentUser.displayName,
           "shopmediaUrl": shopmediaUrl,
@@ -1444,7 +1444,7 @@ setState(() {
             .setData({
           "prodId": prodId,
           "ownerId": widget.currentUser.id,
-          "username": widget.currentUser.username,
+          "username": widget.currentUser.displayName,
           "photoUrl": widget.currentUser.photoUrl,
           "displayName": widget.currentUser.displayName,
           "shopmediaUrl": shopmediaUrl,
@@ -1515,7 +1515,7 @@ setState(() {
             .setData({
           "prodId": prodId,
           "ownerId": widget.currentUser.id,
-          "username": widget.currentUser.username,
+          "username": widget.currentUser.displayName,
           "photoUrl": widget.currentUser.photoUrl,
           "displayName": widget.currentUser.displayName,
           "shopmediaUrl": shopmediaUrl,
@@ -1570,7 +1570,7 @@ setState(() {
             .setData({
           "prodId": prodId,
           "ownerId": widget.currentUser.id,
-          "username": widget.currentUser.username,
+          "username": widget.currentUser.displayName,
           "photoUrl": widget.currentUser.photoUrl,
           "displayName": widget.currentUser.displayName,
           "shopmediaUrl": shopmediaUrl,
@@ -1625,7 +1625,7 @@ setState(() {
             .setData({
           "prodId": prodId,
           "ownerId": widget.currentUser.id,
-          "username": widget.currentUser.username,
+          "username": widget.currentUser.displayName,
           "photoUrl": widget.currentUser.photoUrl,
           "displayName": widget.currentUser.displayName,
           "shopmediaUrl": shopmediaUrl,
@@ -1678,7 +1678,7 @@ setState(() {
             .setData({
           "prodId": prodId,
           "ownerId": widget.currentUser.id,
-          "username": widget.currentUser.username,
+          "username": widget.currentUser.displayName,
           "photoUrl": widget.currentUser.photoUrl,
           "displayName": widget.currentUser.displayName,
           "shopmediaUrl": shopmediaUrl,
@@ -1732,7 +1732,7 @@ setState(() {
             .setData({
           "prodId": prodId,
           "ownerId": widget.currentUser.id,
-          "username": widget.currentUser.username,
+          "username": widget.currentUser.displayName,
           "photoUrl": widget.currentUser.photoUrl,
           "displayName": widget.currentUser.displayName,
           "shopmediaUrl": shopmediaUrl,
@@ -1787,7 +1787,7 @@ setState(() {
             .setData({
           "prodId": prodId,
           "ownerId": widget.currentUser.id,
-          "username": widget.currentUser.username,
+          "username": widget.currentUser.displayName,
           "photoUrl": widget.currentUser.photoUrl,
           "displayName": widget.currentUser.displayName,
           "shopmediaUrl": shopmediaUrl,
@@ -1844,7 +1844,7 @@ setState(() {
             .setData({
           "prodId": prodId,
           "ownerId": widget.currentUser.id,
-          "username": widget.currentUser.username,
+          "username": widget.currentUser.displayName,
           "photoUrl": widget.currentUser.photoUrl,
           "displayName": widget.currentUser.displayName,
           "shopmediaUrl": shopmediaUrl,
@@ -1908,7 +1908,7 @@ setState(() {
             .setData({
           "prodId": prodId,
           "ownerId": widget.currentUser.id,
-          "username": widget.currentUser.username,
+          "username": widget.currentUser.displayName,
           "photoUrl": widget.currentUser.photoUrl,
           "displayName": widget.currentUser.displayName,
           "shopmediaUrl": shopmediaUrl,
@@ -1972,7 +1972,7 @@ setState(() {
             .setData({
           "prodId": prodId,
           "ownerId": widget.currentUser.id,
-          "username": widget.currentUser.username,
+          "username": widget.currentUser.displayName,
           "photoUrl": widget.currentUser.photoUrl,
           "displayName": widget.currentUser.displayName,
           "shopmediaUrl": shopmediaUrl,
@@ -2036,7 +2036,7 @@ setState(() {
             .setData({
           "prodId": prodId,
           "ownerId": widget.currentUser.id,
-          "username": widget.currentUser.username,
+          "username": widget.currentUser.displayName,
           "photoUrl": widget.currentUser.photoUrl,
           "displayName": widget.currentUser.displayName,
           "shopmediaUrl": shopmediaUrl,
@@ -2102,7 +2102,7 @@ setState(() {
             .setData({
           "prodId": prodId,
           "ownerId": widget.currentUser.id,
-          "username": widget.currentUser.username,
+          "username": widget.currentUser.displayName,
           "photoUrl": widget.currentUser.photoUrl,
           "displayName": widget.currentUser.displayName,
           "shopmediaUrl": shopmediaUrl,
@@ -2166,7 +2166,7 @@ setState(() {
             .setData({
           "prodId": prodId,
           "ownerId": widget.currentUser.id,
-          "username": widget.currentUser.username,
+          "username": widget.currentUser.displayName,
           "photoUrl": widget.currentUser.photoUrl,
           "displayName": widget.currentUser.displayName,
           "shopmediaUrl": shopmediaUrl,
@@ -2232,7 +2232,7 @@ setState(() {
             .setData({
           "prodId": prodId,
           "ownerId": widget.currentUser.id,
-          "username": widget.currentUser.username,
+          "username": widget.currentUser.displayName,
           "photoUrl": widget.currentUser.photoUrl,
           "displayName": widget.currentUser.displayName,
           "shopmediaUrl": shopmediaUrl,
@@ -2280,7 +2280,7 @@ setState(() {
             .setData({
           "prodId": prodId,
           "ownerId": widget.currentUser.id,
-          "username": widget.currentUser.username,
+          "username": widget.currentUser.displayName,
           "photoUrl": widget.currentUser.photoUrl,
           "displayName": widget.currentUser.displayName,
           "shopmediaUrl": shopmediaUrl,
@@ -2331,7 +2331,7 @@ setState(() {
             .setData({
           "prodId": prodId,
           "ownerId": widget.currentUser.id,
-          "username": widget.currentUser.username,
+          "username": widget.currentUser.displayName,
           "photoUrl": widget.currentUser.photoUrl,
           "displayName": widget.currentUser.displayName,
           "shopmediaUrl": shopmediaUrl,
@@ -2381,7 +2381,7 @@ setState(() {
             .setData({
           "prodId": prodId,
           "ownerId": widget.currentUser.id,
-          "username": widget.currentUser.username,
+          "username": widget.currentUser.displayName,
           "photoUrl": widget.currentUser.photoUrl,
           "displayName": widget.currentUser.displayName,
           "shopmediaUrl": shopmediaUrl,
@@ -2431,7 +2431,7 @@ setState(() {
             .setData({
           "prodId": prodId,
           "ownerId": widget.currentUser.id,
-          "username": widget.currentUser.username,
+          "username": widget.currentUser.displayName,
           "photoUrl": widget.currentUser.photoUrl,
           "displayName": widget.currentUser.displayName,
           "shopmediaUrl": shopmediaUrl,
@@ -2482,7 +2482,7 @@ setState(() {
             .setData({
           "prodId": prodId,
           "ownerId": widget.currentUser.id,
-          "username": widget.currentUser.username,
+          "username": widget.currentUser.displayName,
           "photoUrl": widget.currentUser.photoUrl,
           "displayName": widget.currentUser.displayName,
           "shopmediaUrl": shopmediaUrl,

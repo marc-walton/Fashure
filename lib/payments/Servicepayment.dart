@@ -211,183 +211,7 @@ class _PaymentSerState extends State<PaymentSer> {
     });
   }
   onSuccess(){
-    //
-    // DocumentSnapshot doc = await Firestore.instance.collection('serviceCustomer')
-    //     .document(widget.OwnerId)
-    //     .collection('customerService')
-    //     .document(widget.OrderId).get();
-    //
-    //   if(doc.data.['advancepay'] == 'false'||doc.data['finalepay'] == 'false')
-    //   {
-    //     setState(() {
-    //       Firestore.instance.collection('serviceCustomer')
-    //           .document(widget.OwnerId)
-    //           .collection('customerService')
-    //           .document(widget.OrderId)
-    //           .updateData({
-    //         'advancepay': 'true',
-    //         'finalpay': 'false',
-    //
-    //       });
-    //       Firestore.instance.collection('serviceSeller')
-    //           .document(widget.OwnerId)
-    //           .collection('sellerService')
-    //           .document(widget.OrderId)
-    //           .updateData({
-    //         'advancepay': 'true',
-    //         'finalpay': 'false',
-    //         'read': 'false',
-    //
-    //       });
-    //       Firestore.instance.collection('feed')
-    //           .document(currentUser.id)
-    //           .collection('feedItems')
-    //           .document(widget.OrderId)
-    //           .setData({
-    //         "type": "ServicePayment",
-    //         "username": widget.username,
-    //         "userId": widget.OwnerId,
-    //         "userProfileImg": widget.profileimg,
-    //         "postId": widget.OrderId,
-    //         // "mediaUrl": mediaUrl,
-    //         "timestamp": timestamp,
-    //         "read": 'false',
-    //         'message': 'Payment Successful on an Invoice!',
-    //       });
-    //       Firestore.instance.collection('feed')
-    //           .document(widget.OwnerId)
-    //           .collection('feedItems')
-    //           .document(widget.OrderId)
-    //           .setData({
-    //         "type": "ServicePaymentI",
-    //         "username": currentUser.username,
-    //         "userId": widget.OwnerId,
-    //         "userProfileImg": currentUser.photoUrl,
-    //         "postId": widget.OrderId,
-    //         // "mediaUrl": mediaUrl,
-    //         "timestamp": timestamp,
-    //         "read": 'false',
-    //         'message': 'Payment Successful on an Invoice !',
-    //       });
-    //
-    //       print("onsuf");
-    //     });
-    //   }
-    //   else if( doc.data['Finr'] == "")
-    //   {
-    //     setState(() {
-    //       Firestore.instance.collection('serviceCustomer')
-    //           .document(widget.OwnerId)
-    //           .collection('customerService')
-    //           .document(widget.OrderId)
-    //           .updateData({
-    //         'advancepay': 'true',
-    //         'finalpay': 'true',
-    //         "timestamp": timestamp,
-    //
-    //       });
-    //       Firestore.instance.collection('serviceSeller')
-    //           .document(widget.OwnerId)
-    //           .collection('sellerService')
-    //           .document(widget.OrderId)
-    //           .updateData({
-    //         'advancepay': 'true',
-    //         'finalpay': 'true',
-    //         'read': 'false',
-    //         "timestamp": timestamp,
-    //
-    //
-    //       });
-    //       Firestore.instance.collection('feed')
-    //           .document(currentUser.id)
-    //           .collection('feedItems')
-    //           .document(widget.OrderId)
-    //           .setData({
-    //         "type": "ServicePayment",
-    //         "username": widget.username,
-    //         "userId": widget.OwnerId,
-    //         "userProfileImg": widget.profileimg,
-    //         "postId": widget.OrderId,
-    //         // "mediaUrl": mediaUrl,
-    //         "timestamp": timestamp,
-    //         "read": 'false',
-    //         'message': 'Payment Successful on an Invoice!',
-    //       });
-    //       Firestore.instance.collection('feed')
-    //           .document(widget.OwnerId)
-    //           .collection('feedItems')
-    //           .document(widget.OrderId)
-    //           .setData({
-    //         "type": "ServicePaymentI",
-    //         "username": currentUser.username,
-    //         "userId": widget.OwnerId,
-    //         "userProfileImg": currentUser.photoUrl,
-    //         "postId": widget.OrderId,
-    //         // "mediaUrl": mediaUrl,
-    //         "timestamp": timestamp,
-    //         "read": 'false',
-    //         'message': 'Payment Successful on an Invoice !',
-    //       });
-    //     });
-    //   }
-    //   else if(doc.data['advancepay'] == 'true'||doc.data['finalepay'] == 'false') {
-    //     setState(() {
-    //     Firestore.instance.collection('serviceCustomer')
-    //         .document(widget.OwnerId)
-    //         .collection('customerService')
-    //         .document(widget.OrderId)
-    //         .updateData({
-    //       'advancepay': 'true',
-    //       'finalpay': 'true',
-    //       "timestamp": timestamp,
-    //
-    //
-    //     });
-    //     Firestore.instance.collection('serviceSeller')
-    //         .document(widget.OwnerId)
-    //         .collection('sellerService')
-    //         .document(widget.OrderId)
-    //         .updateData({
-    //       'advancepay': 'true',
-    //       'finalpay': 'true',
-    //       'read': 'false',
-    //       "timestamp": timestamp,
-    //
-    //
-    //     });
-    //     Firestore.instance.collection('feed')
-    //         .document(currentUser.id)
-    //         .collection('feedItems')
-    //         .document(widget.OrderId)
-    //         .setData({
-    //       "type": "ServicePayment",
-    //       "username": widget.username,
-    //       "userId": widget.OwnerId,
-    //       "userProfileImg": widget.profileimg,
-    //       "postId": widget.OrderId,
-    //       // "mediaUrl": mediaUrl,
-    //       "timestamp": timestamp,
-    //       "read": 'false',
-    //       'message': 'Payment Successful on an Invoice!',
-    //     });
-    //     Firestore.instance.collection('feed')
-    //         .document(widget.OwnerId)
-    //         .collection('feedItems')
-    //         .document(widget.OrderId)
-    //         .setData({
-    //       "type": "ServicePaymentI",
-    //       "username": currentUser.username,
-    //       "userId": widget.OwnerId,
-    //       "userProfileImg": currentUser.photoUrl,
-    //       "postId": widget.OrderId,
-    //       // "mediaUrl": mediaUrl,
-    //       "timestamp": timestamp,
-    //       "read": 'false',
-    //       'message': 'Payment Successful on an Invoice !',
-    //     });
-    //   });
-    //
-    //   }
+
     if(widget.advancepay == 'false'||widget.finalpay == 'false')
     {
 
@@ -431,7 +255,7 @@ class _PaymentSerState extends State<PaymentSer> {
             .document(widget.OrderId)
             .setData({
           "type": "ServicePaymentI",
-          "username": currentUser.username,
+          "username": currentUser.displayName,
           "userId": widget.OwnerId,
           "userProfileImg": currentUser.photoUrl,
           "postId": widget.OrderId,
@@ -487,7 +311,7 @@ class _PaymentSerState extends State<PaymentSer> {
             .document(widget.OrderId)
             .setData({
           "type": "ServicePaymentI",
-          "username": currentUser.username,
+          "username": currentUser.displayName,
           "userId": widget.OwnerId,
           "userProfileImg": currentUser.photoUrl,
           "postId": widget.OrderId,
@@ -541,7 +365,7 @@ class _PaymentSerState extends State<PaymentSer> {
             .document(widget.OrderId)
             .setData({
           "type": "ServicePaymentI",
-          "username": currentUser.username,
+          "username": currentUser.displayName,
           "userId": widget.OwnerId,
           "userProfileImg": currentUser.photoUrl,
           "postId": widget.OrderId,

@@ -12,82 +12,101 @@ class SellerPayments extends StatefulWidget {
 
 class _SellerPaymentsState extends State<SellerPayments> {
   df({String productname,String usd,String inr,String cny,String eur,String gbp,String prodId,String ownerId,}){
+
     if(currentUser.country=='India'){
       return
         Column(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: <Widget>[
-            Text(productname, style: TextStyle(
-                color: kText,
-                fontSize: 20.0,
-                fontWeight: FontWeight.bold),),
-            Text( "₹$inr",style: TextStyle(color: kText,
-                fontSize: 20.0,
-                fontWeight: FontWeight.bold)),
+            ListTile(
+              title: Text(productname, style: TextStyle(
+                  color: kText,
+                  fontSize: 20.0,
+                  fontWeight: FontWeight.bold),),
+            ),
+
+            ListTile(
+              title:            Text( "₹$inr",style: TextStyle(color: kText,
+                  fontSize: 20.0,
+                  fontWeight: FontWeight.bold)),
+
+            ),
+
+
           ],
         );
 
     }
     else if(currentUser.country=='US'){
       return
-          Column(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: <Widget>[
-            Text(productname, style: TextStyle(
-                color: kText,
-                fontSize: 20.0,
-                fontWeight: FontWeight.bold),),
-            Text( "\u0024 $usd",style: TextStyle(color: kText,
-                fontSize: 20.0,
-                fontWeight: FontWeight.bold)),
-          ],
-        );
-
-    }
-    else if (currentUser.country == 'China') {
-      return
         Column(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
-            Text(productname, style: TextStyle(
-                color: kText,
-                fontSize: 20.0,
-                fontWeight: FontWeight.bold),),
-            Text( "¥ $cny",style: TextStyle(color: kText,
-                fontSize: 20.0,
-                fontWeight: FontWeight.bold)),
+            ListTile(
+              title: Text(productname, style: TextStyle(
+                  color: kText,
+                  fontSize: 20.0,
+                  fontWeight: FontWeight.bold),),
+            ),
+
+            ListTile(
+              title:            Text( " \u0024 $usd",style: TextStyle(color:  kText,
+                  fontSize: 20.0,
+                  fontWeight: FontWeight.bold)),
+
+            ),
+
+
+
           ],
         );
 
     }
+
     else if (currentUser.country == 'Europe'){
       return
         Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: <Widget>[
-            Text(productname, style: TextStyle(
-                color: kText,
-                fontSize: 20.0,
-                fontWeight: FontWeight.bold),),
-            Text( "€ $eur",style: TextStyle(color: kText,
-                fontSize: 20.0,
-                fontWeight: FontWeight.bold)),
+            ListTile(
+              title: Text(productname, style: TextStyle(
+                  color:kText,
+                  fontSize: 20.0,
+                  fontWeight: FontWeight.bold),),
+            ),
+
+            ListTile(
+              title:            Text( " € $eur",style: TextStyle(color: kText,
+                  fontSize: 20.0,
+                  fontWeight: FontWeight.bold)),
+
+            ),
+
+
+
           ],
         );
 
     }
     else if (currentUser.country == 'UK'){
       return
-        Row(
+        Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: <Widget>[
-            Text(productname, style: TextStyle(
-                color: kText,
-                fontSize: 20.0,
-                fontWeight: FontWeight.bold),),
-            Text( "£  $gbp ",style: TextStyle(color: kText,
-                fontSize: 20.0,
-                fontWeight: FontWeight.bold)),
+            ListTile(
+              title: Text(productname, style: TextStyle(
+                  color: kText,
+                  fontSize: 20.0,
+                  fontWeight: FontWeight.bold),),
+            ),
+
+            ListTile(
+              title:            Text( " £ $gbp",style: TextStyle(color: kText,
+                  fontSize: 20.0,
+                  fontWeight: FontWeight.bold)),
+
+            ),
+
+
 
           ],
         );
@@ -96,15 +115,24 @@ class _SellerPaymentsState extends State<SellerPayments> {
     else{
       return
         Column(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
-            Text(productname, style: TextStyle(
-                color: kText,
-                fontSize: 20.0,
-                fontWeight: FontWeight.bold),),
-            Text( "\u0024 $usd",style: TextStyle(color: kText,
-                fontSize: 20.0,
-                fontWeight: FontWeight.bold)),
+            ListTile(
+              title: Text(productname, style: TextStyle(
+                  color: kText,
+                  fontSize: 20.0,
+                  fontWeight: FontWeight.bold),),
+            ),
+
+            ListTile(
+              title:            Text( " \u0024 $usd",style: TextStyle(color:  kText,
+                  fontSize: 20.0,
+                  fontWeight: FontWeight.bold)),
+
+            ),
+
+
+
           ],
         );
 

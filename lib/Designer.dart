@@ -232,7 +232,7 @@ class _DesignerState extends State<Designer>  with  TickerProviderStateMixin{
         appBar: PreferredSize(
         preferredSize: Size.fromHeight(100.0),
         child: AppBar(title:  FittedBox(fit:BoxFit.contain,child: Text("Freelancers",style: TextStyle(fontSize: 30,fontFamily: 'MajorMonoDisplay'),)),
-            backgroundColor: appbar,
+            backgroundColor: kPrimaryColor,
 
             bottom: new TabBar(
 isScrollable: true,
@@ -551,11 +551,12 @@ class _DItemState extends State<DItem> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      Icon(EvaIcons.personOutline),
+                      Icon(EvaIcons.personOutline                ,          color: Colors.white,
+                      ),
                       Text(
                         'Profile',
                         style: TextStyle(
-                          color: kText,
+                          color: Colors.white,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
@@ -587,11 +588,12 @@ class _DItemState extends State<DItem> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    Icon(EvaIcons.emailOutline),
+                    Icon(EvaIcons.emailOutline,                          color: Colors.white,
+                    ),
                     Text(
-                      'Hire me !',
+                      'Hire me!',
                       style: TextStyle(
-                        color: kText,
+                        color: Colors.white,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
@@ -707,24 +709,6 @@ followerstile(){
                           ],
                         ),
                       ),
-                      // Container(
-                      //   alignment: Alignment.center,
-                      //
-                      //   decoration: BoxDecoration(borderRadius: BorderRadius.circular(10.0),
-                      //     color: kblue,
-                      //     boxShadow: [BoxShadow(color: kblue)],
-                      //   ),
-                      //   height: 55,
-                      //   width: 55,
-                      //   child: Column(
-                      //     mainAxisAlignment: MainAxisAlignment.center,
-                      //     children: [
-                      //       Icon(Icons.favorite,color: Colors.pink,),
-                      //
-                      //       Text('Rating',style: TextStyle(color: Colors.white),),
-                      //     ],
-                      //   ),
-                      // ),
                     ),
                   ],
                 ),

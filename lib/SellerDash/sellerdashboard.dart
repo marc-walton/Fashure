@@ -126,8 +126,8 @@ class _SellerDashState extends State<SellerDash> {
                   ),
                 ),
 
-                FittedBox(fit: BoxFit.contain,child: Text("My Shop",style:  TextStyle(color:kText),)),
-                FittedBox(fit: BoxFit.contain,child: Text("Settings",style:  TextStyle(color:kText),)),
+                FittedBox(fit: BoxFit.contain,child: Text("My Shop",)),
+                FittedBox(fit: BoxFit.contain,child: Text("Settings")),
                               ],
             ),
           ),

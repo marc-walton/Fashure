@@ -74,15 +74,7 @@ var Feurtogbp;
 var userprice;
 var totalprice;
 void INRUSD() async {
-  // final frankfurter = Frankfurter();
-  //
-  // final latest = await frankfurter.latest(from: Currency('EUR'));
-  // latest.forEach(print);
-  //
-  // final rate = await frankfurter.getRate(
-  //   from: Currency('EUR'),
-  //   to: Currency('GBP'),
-  // );
+
   if (currentUser.country == 'India') {
     var resultUSD = await Currency.getConversion(
         from: 'INR', to: 'USD', amount: advanceController.text ?? 0);
@@ -1034,7 +1026,7 @@ print(currentUser.country);
       .document(orderId)
       .setData({
     "type": "ReqPayment",
-    "username": currentUser.username,
+    "username": currentUser.displayName,
     "userId": currentUser.id,
     "userProfileImg": currentUser.photoUrl,
     "postId": orderId,
@@ -1136,7 +1128,7 @@ print(currentUser.country);
      .document(orderId)
      .setData({
    "type": "ReqPayment",
-   "username": currentUser.username,
+   "username": currentUser.displayName,
    "userId": currentUser.id,
    "userProfileImg": currentUser.photoUrl,
    "postId": orderId,
@@ -1239,7 +1231,7 @@ Firestore.instance.collection('feed')
     .document(orderId)
     .setData({
   "type": "ReqPayment",
-  "username": currentUser.username,
+  "username": currentUser.displayName,
   "userId": currentUser.id,
   "userProfileImg": currentUser.photoUrl,
   "postId": orderId,
@@ -1338,7 +1330,7 @@ Firestore.instance.collection('feed')
     .document(orderId)
     .setData({
   "type": "ReqPayment",
-  "username": currentUser.username,
+  "username": currentUser.displayName,
   "userId": currentUser.id,
   "userProfileImg": currentUser.photoUrl,
   "postId": orderId,
@@ -1443,7 +1435,7 @@ Firestore.instance.collection('feed')
     .document(orderId)
     .setData({
   "type": "ReqPayment",
-  "username": currentUser.username,
+  "username": currentUser.displayName,
   "userId": currentUser.id,
   "userProfileImg": currentUser.photoUrl,
   "postId": orderId,
@@ -1542,7 +1534,7 @@ else {
         .document(orderId)
         .setData({
       "type": "ReqPayment",
-      "username": currentUser.username,
+      "username": currentUser.displayName,
       "userId": currentUser.id,
       "userProfileImg": currentUser.photoUrl,
       "postId": orderId,
@@ -1556,7 +1548,8 @@ else {
   @override
   Widget build(BuildContext context) {
     return       Scaffold(
-      appBar:  AppBar(backgroundColor: kSecondaryColor,
+      appBar:  AppBar(      backgroundColor: kPrimaryColor,
+
         title: FittedBox(
           fit:BoxFit.contain,
           child: Text('Create new  invoice',
@@ -1565,123 +1558,127 @@ else {
                 // fontSize:  35.0 ,
                 color: Colors.white),),
         ),
-        iconTheme: new IconThemeData(color: kIcon),
+        iconTheme: new IconThemeData(color: Colors.white),
       ),
-      backgroundColor: kPrimaryColor,
 
       body:
-      Stack(
-        children:[
-          Container(
-            child: Form(
-            key: _formKey,
-            child: ListView(
-              children: [
-                isUploading ? linearProgress() : Text(""),
-                Container(
-                  margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
-                  child: TextFormField(
-                    style:TextStyle(color:kText),
-                    controller: titleController,
-                    decoration: InputDecoration(
-                      enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
-                      focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+      Container(decoration: BoxDecoration(
+          gradient: fabGradient
+      ) ,
+        alignment: Alignment.center,
+        child: Stack(
+          children:[
+            Container(
+              child: Form(
+              key: _formKey,
+              child: ListView(
+                children: [
+                  isUploading ? linearProgress() : Text(""),
+                  Container(
+                    margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+                    child: TextFormField(
+                      style:TextStyle(color:kText),
+                      controller: titleController,
+                      decoration: InputDecoration(
+                        enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+                        focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
 
-                      labelText: 'Title',labelStyle: TextStyle(color: kText),
-                      hintText: 'Title',
+                        labelText: 'Title',labelStyle: TextStyle(color: kText),
+                        hintText: 'Title',
+                      ),
+                      textAlign: TextAlign.center,
+                      validator: (text) {
+                        if ( text.isEmpty) {
+                          return 'Title is empty';
+                        }
+                        return null;
+                      },
                     ),
-                    textAlign: TextAlign.center,
-                    validator: (text) {
-                      if ( text.isEmpty) {
-                        return 'Title is empty';
-                      }
-                      return null;
-                    },
                   ),
-                ),
-                SizedBox( height: 8.0,),
-                Container(
-                  margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
-                  child: TextFormField(
-                    style:TextStyle(color:kText),
+                  SizedBox( height: 8.0,),
+                  Container(
+                    margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+                    child: TextFormField(
+                      style:TextStyle(color:kText),
 
-                    keyboardType: TextInputType.multiline,
-                    maxLines: null,
-                    controller: detailsController,
-                    decoration: InputDecoration(
-                      border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
-                      enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
-                      focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+                      keyboardType: TextInputType.multiline,
+                      maxLines: null,
+                      controller: detailsController,
+                      decoration: InputDecoration(
+                        border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+                        enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+                        focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
 
-                      labelText: 'Description',labelStyle: TextStyle(color: kText),
-                      hintText: 'Description',
+                        labelText: 'Description',labelStyle: TextStyle(color: kText),
+                        hintText: 'Description',
+                      ),
+                      textAlign: TextAlign.center,
+                      validator: (text) {
+                        if (text.isEmpty) {
+                          return 'Description is empty';
+                        }
+                        return null;
+                      },
                     ),
-                    textAlign: TextAlign.center,
-                    validator: (text) {
-                      if (text.isEmpty) {
-                        return 'Description is empty';
-                      }
-                      return null;
-                    },
                   ),
-                ),
-                SizedBox( height: 8.0,),
-                Divider(color: kGrey,),
-                Text('Payment', style: TextStyle(
+                  SizedBox( height: 8.0,),
+                  Divider(color: kGrey,),
+                  Text('Payment', style: TextStyle(
     // fontFamily :"MajorMonoDisplay",
     fontSize:  15.0 ,
     color: Colors.white),),
-                Text('Note: Advance payment is recommended to confirm order. / If one-time payment.leave payment on delivery empty', style: TextStyle(
+                  Text('Note: Advance payment is recommended to confirm order. / If one-time payment.leave payment on delivery empty', style: TextStyle(
     // fontFamily :"MajorMonoDisplay",
     // fontSize:  35.0 ,
     color: Colors.red),),
-            currency(),
+              currency(),
 
  Container(
-                  margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
-                  child: RaisedButton(
-                    onPressed:() async{
-                      Fluttertoast.showToast(
-                          msg: "Please wait:Uploading", timeInSecForIos: 4);
+                    margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+                    child: RaisedButton(
+                      onPressed:() async{
+                        Fluttertoast.showToast(
+                            msg: "Please wait:Uploading", timeInSecForIos: 4);
 
-                      await INRUSD();
-                      await FINRUSD();
+                        await INRUSD();
+                        await FINRUSD();
 
-                      if(_formKey.currentState.validate()) {
-                        // ignore: unnecessary_statements
-                        isUploading ? null : Servicecatalog();
-                        Navigator.pop(context);
-                      }
+                        if(_formKey.currentState.validate()) {
+                          // ignore: unnecessary_statements
+                          isUploading ? null : Servicecatalog();
+                          Navigator.pop(context);
+                        }
 
-                    },
-                    color: kblue,
-                    child: Row(
-                      children: [
-                        Icon(Icons.add),
-                        Text('Send Invoice', style: TextStyle(
-                        // fontFamily :"MajorMonoDisplay",
-                        //   fontSize:  ,
-                          color: Colors.white),),
+                      },
+                      color: kblue,
+                      child: Row(
+                        children: [
+                          Icon(Icons.add),
+                          Text('Send Invoice', style: TextStyle(
+                          // fontFamily :"MajorMonoDisplay",
+                          //   fontSize:  ,
+                            color: Colors.white),),
     ],
-                    ),
-                  )
-                ),
+                      ),
+                    )
+                  ),
 
-              ],
-            ),
+                ],
+              ),
 
-        ),
           ),
-          (_inProcess)?Container(
-
-            color: Colors.white,
-            height: MediaQuery.of(context).size.height * 0.95,
-            child: Center(
-              child: CircularProgressIndicator(),
             ),
-          ):Center(),
-          isUploading ? Center(child:  CircularProgressIndicator()) : Text(""),
-      ],
+            (_inProcess)?Container(
+
+              color: Colors.white,
+              height: MediaQuery.of(context).size.height * 0.95,
+              child: Center(
+                child: CircularProgressIndicator(),
+              ),
+            ):Center(),
+            isUploading ? Center(child:  CircularProgressIndicator()) : Text(""),
+        ],
+        ),
       ),
 
     );

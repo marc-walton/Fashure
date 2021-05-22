@@ -240,7 +240,7 @@ SaveBank(){
       .document(widget.currentUser.id)
       .updateData({
     "userId": widget.currentUser.id,
-    "username": widget.currentUser.username,
+    "username": widget.currentUser.displayName,
     "photoUrl": widget.currentUser.photoUrl,
     "displayName": widget.currentUser.displayName,
     "businessname":namecontroller.text,

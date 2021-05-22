@@ -26,7 +26,6 @@ class BlogScreen extends StatelessWidget {
         Blog blog = Blog.fromDocument(snapshot.data);
         return Center(
           child: Scaffold(
-            backgroundColor: kText,
 
             appBar: AppBar(
                 backgroundColor: kPrimaryColor,
@@ -46,7 +45,6 @@ class BlogScreen extends StatelessWidget {
                 children: <Widget>[
 
                   Container(
-                    color: kPrimaryColor,
                     child: blog,
                   ),
 

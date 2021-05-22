@@ -66,7 +66,7 @@ class BlogCommentsState extends State<BlogComments> {
 
   addComment() {
     blogcommentsRef.document(blogId).collection("blogComments").add({
-      "username": currentUser.username,
+      "username": currentUser.displayName,
       "comment": blogcommentController.text,
       "timestamp": timestamp,
       "avatarUrl": currentUser.photoUrl,
@@ -77,7 +77,7 @@ class BlogCommentsState extends State<BlogComments> {
      activityFeedRef.document(blogOwnerId).collection('feedItems').add({
        "type": "blogcomment",
        "commentData": blogcommentController.text,
-       "username": currentUser.username,
+       "username": currentUser.displayName,
        "userId": currentUser.id,
        "userProfileImg": currentUser.photoUrl,
        "postId": blogId,

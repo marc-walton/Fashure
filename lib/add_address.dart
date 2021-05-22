@@ -61,7 +61,7 @@ class _AddAdressState extends State<AddAdress> {
         .document(addId)
         .setData({
       "userId": currentUser.id,
-      "username": currentUser.username,
+      "username": currentUser.displayName,
       "photoUrl": currentUser.photoUrl,
       "displayName": currentUser.displayName,
       "fullname":namecontroller.text,

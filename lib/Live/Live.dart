@@ -66,7 +66,7 @@ class _LiveTvState extends State<LiveTv> with  TickerProviderStateMixin {
     return SafeArea(
       child: Scaffold(
 
-          appBar:  AppBar(title:  FittedBox(fit:BoxFit.contain,child: Text('FashureTV',style: TextStyle(fontSize: 20,color: kText,fontFamily: 'MajorMonoDisplay'),),),
+          appBar:  AppBar(title:  FittedBox(fit:BoxFit.contain,child: Text('FashureTV',style: TextStyle(fontSize: 20,color: Colors.white,fontFamily: 'MajorMonoDisplay'),),),
             backgroundColor:kPrimaryColor,
 
           ),
@@ -197,78 +197,19 @@ class _LiveTvState extends State<LiveTv> with  TickerProviderStateMixin {
                        ),
                      ),
                    ) : SizedBox(height: 0,),
-         // FutureBuilder(
-         //     future: usersRef.document(users.ownerId).get(),
-         //     builder: (context, snapshot) {
-         //       if (!snapshot.hasData) {
-         //         return circularProgress();
-         //       }
-         //       // User user = User.fromDocument(snapshot.data);
-         //       // bool isPostOwner = currentUserId == ownerId;
-         //       return
-         //         Column(
-         //           children: <Widget>[
-         //             GestureDetector(
-         //               onTap: () =>
-         //                   showProfile(context, profileId: users.ownerId),
-         //               child: ListTile(
-         //                 leading: CircleAvatar(
-         //                   backgroundImage: CachedNetworkImageProvider(
-         //                       users.image),
-         //                   backgroundColor: Colors.grey,
-         //                 ),
-         //                 title: Text(
-         //                   users.username,
-         //                   style: TextStyle(
-         //                     color: kText,
-         //                     fontWeight: FontWeight.bold,
-         //                   ),
-         //                 ),
-         //                 subtitle: Text(users.username,
-         //                   style: TextStyle(color: kIcon),),),
-         //             ),
-         //             ClipRRect(
-         //                 borderRadius: BorderRadius.circular(20.0),
-         //                 child: cachedNetworkImage(users.image)),
-         //             // GestureDetector(
-         //             //   onTap: () => Navigator.push(
-         //             //     context,
-         //             //     MaterialPageRoute(
-         //             //       builder: (context) => ProductScreen(
-         //             //         prodId: prodId,
-         //             //         userId: ownerId,
-         //             //       ),
-         //             //     ),
-         //             //   ),
-         //             //   child: Stack(
-         //             //     alignment: Alignment.center,
-         //             //     children: <Widget>[
-         //             //
-         //             //     ],),),
-         //             // df(productname:productname, usd:usd,inr:inr,cny:cny,eur:eur,gbp:gbp, prodId:prodId, ownerId:ownerId,),
-         //
-         //             Divider(color: kGrey,),
-         //           ],
-         //
-         //         );
-         //     }
-         // ),
-               Container(
-                     height: 95.5,
-                     width: 95.5,
-                     child: CircleAvatar(
-                       backgroundColor: Colors.black,
-                     ),
-                   ),
+
                    CachedNetworkImage(
                      imageUrl: users.image,
-                     imageBuilder: (context, imageProvider) => Container(
-                       width: 92.0,
-                       height: 92.0,
-                       decoration: BoxDecoration(
-                         shape: BoxShape.rectangle,
-                         image: DecorationImage(
-                             image: imageProvider, fit: BoxFit.cover),
+                     imageBuilder: (context, imageProvider) => ClipRRect(
+                       borderRadius:BorderRadius.all(Radius.circular(10.0)),
+                       child: Container(
+                         width: 92.0,
+                         height: 92.0,
+                         decoration: BoxDecoration(
+                           shape: BoxShape.rectangle,
+                           image: DecorationImage(
+                               image: imageProvider, fit: BoxFit.cover),
+                         ),
                        ),
                      ),
                    ),

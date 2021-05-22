@@ -307,6 +307,8 @@ class _UploadCollState extends State<UploadColl>
             fontWeight: FontWeight.bold,
             fontSize: 20.0),),
         getImageWidget(),
+        SizedBox(height:12.0),
+
         TextFormField(
             style:TextStyle(color: kText),
 
@@ -321,6 +323,7 @@ class _UploadCollState extends State<UploadColl>
             border:OutlineInputBorder(borderRadius: BorderRadius.circular(25.0),) )
         ),
 
+        SizedBox(height:12.0),
 
         TextField(
             style:TextStyle(color: kText),
@@ -351,30 +354,7 @@ backgroundColor: kText,
         child: Stack(
           children: [
             WillPopScope(
-              onWillPop:   showDialog(
-        context: context,
-          builder: (context) => new AlertDialog(
-            title: new Text('Are you sure?'),
-            content: new Text('Do you want to exit without uploading?'),
-            actions: <Widget>[
-              new FlatButton(
-
-                onPressed: () => Navigator.of(context).pop(false),
-                child: Text("NO"),
-              ),
-              SizedBox(height: 16),
-              new FlatButton(
-
-                onPressed: () async {Navigator.of(context).pop(true);
-
-//            clearImage();
-                },
-                child: Text("YES"),
-              ),
-            ],
-          ),
-        ) ??
-            false,
+              onWillPop:()=>   _onBackPressed(),
               child: Scaffold(
 
                 // resizeToAvoidBottomPadding: true,
@@ -412,7 +392,7 @@ backgroundColor: kText,
                       child: Text(
                         "Post",
                         style: TextStyle(
-                            color: kblue,
+                            color: Colors.white,
                             fontWeight: FontWeight.bold,
                             fontSize: 20.0),
                       ),
@@ -480,7 +460,6 @@ backgroundColor: kText,
 
   @override
   Widget build(BuildContext context) {
-    super.build(context);
     return file == null ? buildSplashScreen() : builduploadForm();
 
   }

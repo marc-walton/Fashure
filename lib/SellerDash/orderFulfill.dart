@@ -54,7 +54,10 @@ submit(){
 }
   @override
   Widget build(BuildContext context) {
-    return    Scaffold(
+    return    Scaffold(appBar: AppBar(
+      backgroundColor: kPrimaryColor,
+
+    ),
       body: Container( decoration: BoxDecoration(
           gradient: fabGradient
       ) ,
@@ -65,6 +68,7 @@ submit(){
             // scrollDirection: Axis.vertical,
             children: [
               Container(child: Column(children:[
+                SizedBox(height: 20.0,),
                 Center(child: Text('Enter Shipment tracking ID',style: TextStyle(color: kText)),),
                 TextFormField(
                   style: TextStyle(color: kText),
@@ -94,7 +98,7 @@ submit(){
                       }
                     },
                     color: kblue,
-                    child: Text('Submit',style: TextStyle(color: kText)),
+                    child: Text('Submit',style: TextStyle(color: Colors.white)),
                   ),
                 )
               ]),),

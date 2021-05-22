@@ -135,7 +135,7 @@ bool Designer;
           appBar: AppBar(
               backgroundColor: kPrimaryColor,
 
-              iconTheme: new IconThemeData(color: kText),
+              iconTheme: new IconThemeData(color: Colors.white),
 //            leading:IconButton(  icon: Icon(
 //              Icons.menu,
 //              color: Colors.blue,),
@@ -175,7 +175,7 @@ bool Designer;
 
               model == true|| Photographer == true|| Stylist == true|| Designer == true|| Hair == true || Makeup == true || Illustrator == true || Choreographer == true ?
               RaisedButton(color:kblue,
-                  child:  Text("Create order",style: TextStyle(color: kText),),onPressed: (){ Navigator.push(
+                  child:  Text("Create order",style: TextStyle(color: Colors.white),),onPressed: (){ Navigator.push(
                 context,
                 MaterialPageRoute(
                   builder: (context) =>
@@ -528,7 +528,7 @@ model = doc.data['model'] ?? false;
               .document(currentUser.id)
               .setData({
             "type": "Chat",
-            "username": currentUser.username,
+            "username": currentUser.displayName,
             "userId": currentUser.id,
             "userProfileImg": currentUser.photoUrl,
             // "postId": widget.OrderId,

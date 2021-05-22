@@ -66,7 +66,7 @@ class CommentsState extends State<Comments> {
 
   addComment() {
     commentsRef.document(postId).collection("comments").add({
-      "username": currentUser.username,
+      "username": currentUser.displayName,
       "comment": commentController.text,
       "timestamp": timestamp,
       "avatarUrl": currentUser.photoUrl,
@@ -77,7 +77,7 @@ class CommentsState extends State<Comments> {
       activityFeedRef.document(postOwnerId).collection('feedItems').add({
         "type": "comment",
         "commentData": commentController.text,
-        "username": currentUser.username,
+        "username": currentUser.displayName,
         "userId": currentUser.id,
         "userProfileImg": currentUser.photoUrl,
         "postId": postId,

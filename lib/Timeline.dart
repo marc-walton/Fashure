@@ -3,6 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fashow/CollectionsUplaod.dart';
 import 'package:fashow/custom_image.dart';
 import 'package:fashow/upload_editorial.dart';
+import 'package:fashow/Constants.dart';
 import 'package:flutter/material.dart';
 //import 'package:flutter_svg/svg.dart';
 import 'package:fashow/post.dart';
@@ -10,7 +11,6 @@ import 'package:fashow/blog_sceen.dart';
 import 'package:fashow/collscreen.dart';
 import 'package:fashow/comments.dart';
 import 'package:fashow/user.dart';
-
 import 'package:fashow/Search.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:fashow/Profile.dart';
@@ -18,7 +18,6 @@ import 'package:fashow/upload.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:fashow/progress.dart';
 import 'package:fashow/HomePage.dart';
-import 'package:fashow/Constants.dart';
 import 'package:fashow/ActivityFeed.dart';
 import 'package:getflutter/components/button/gf_button.dart';
 import 'package:getflutter/shape/gf_button_shape.dart';
@@ -104,18 +103,7 @@ TabController _tabController;
    List timelinePosts = [];
    var _isVisible;
     ScrollController _hideButtonController;
-//  _TimelineState();
-//
-//   _TimelineState({
-//     this.postId,
-//     this.ownerId,
-//     this.username,
-//     this.location,
-//     this.description,
-//     this.mediaUrl,
-//     this.likes,
-//     this.likeCount,
-//   } ); // listener for listview scrolling
+
     @override
     void initState() {
       super.initState();
@@ -129,32 +117,7 @@ TabController _tabController;
         if (maxScroll - currentScroll <= delta) {
         }
       });
-//      _isVisible = true;
-//      _hideButtonController = new ScrollController();
-//      _hideButtonController.addListener((){
-//        if(_hideButtonController.position.userScrollDirection == ScrollDirection.reverse){
-//          if(_isVisible == true) {
-//            /* only set when the previous state is false
-//             * Less widget rebuilds
-//             */
-//            print("**** ${_isVisible} up"); //Move IO away from setState
-//            setState((){
-//              _isVisible = false;
-//            });
-//          }
-//        } else {
-//          if(_hideButtonController.position.userScrollDirection == ScrollDirection.forward){
-//            if(_isVisible == false) {
-//              /* only set when the previous state is false
-//               * Less widget rebuilds
-//               */
-//              print("**** ${_isVisible} down"); //Move IO away from setState
-//              setState((){
-//                _isVisible = true;
-//              });
-//            }
-//          }
-//        }});
+
       _tabController = TabController(length: 3, vsync: this, initialIndex: 0);
       _tabController.addListener(_handleTabIndex);
     }
@@ -343,7 +306,7 @@ TabController _tabController;
             .document(postId)
             .setData({
           "type": "like",
-          "username": currentUser.username,
+          "username": currentUser.displayName,
           "userId": currentUser.id,
           "userProfileImg": currentUser.photoUrl,
           "postId": postId,
@@ -1040,13 +1003,13 @@ collectionGroup(){
         );}
        else if(_tabController.index == 2){return
         FloatingActionButton(
-          heroTag:'uploadEdit',
+          heroTag:'uploadblog',
 
           backgroundColor: Colors.black38,
-          onPressed: (){
-            WidgetsBinding.instance.addPostFrameCallback((_){
-              Navigator.push(context, MaterialPageRoute(builder: (context) =>UploadEdit(currentUser: currentUser, )));
-            },) ;
+          onPressed: ()async{
+            { Navigator.push(context, MaterialPageRoute(builder: (context) =>UploadEdit(currentUser: currentUser)));
+            };
+
             // Get.to(UploadEdit(currentUser: currentUser));
           },
           // async{ Navigator.push(context, MaterialPageRoute(builder: (context) =>UploadEdit(currentUser: currentUser)));
@@ -1083,69 +1046,67 @@ class Collection extends StatelessWidget {
             }
             User user = User.fromDocument(snapshot.data);
 //          bool isPostOwner = currentUserId == ownerId;
-            return Card(
-              color: Color(0XFFb3b3ff).withOpacity(0.3),
-              child: Column(children: <Widget>[
-                ListTile(
-                  leading: GestureDetector(
-                    onTap: () => showProfile(context, profileId: user.id),
-                    child: CircleAvatar(
-                      backgroundImage: CachedNetworkImageProvider(user.photoUrl),
-                      backgroundColor: Colors.grey,
+            return Column(children: <Widget>[
+              ListTile(
+                leading: GestureDetector(
+                  onTap: () => showProfile(context, profileId: user.id),
+                  child: CircleAvatar(
+                    backgroundImage: CachedNetworkImageProvider(user.photoUrl),
+                    backgroundColor: Colors.grey,
+                  ),
+                ),
+                title: GestureDetector(
+                  onTap: () => showProfile(context, profileId: user.id),
+                  child: Text(
+                    user.displayName,
+                    style: TextStyle(
+                      color: kText,
+                      fontWeight: FontWeight.bold,
                     ),
                   ),
-                  title: GestureDetector(
-                    onTap: () => showProfile(context, profileId: user.id),
-                    child: Text(
-                      user.displayName,
-                      style: TextStyle(
-                        color: kText,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ),
-                 ),
-                ListTile(
-                  title: Text(documentSnapshot.data['title'],
-                      maxLines: 3,
-                      style: new TextStyle(
-                          fontWeight: FontWeight.w500,
-                          color:kText,
-                          fontSize: 18.0)),
                 ),
-                Column(
-                  children: <Widget>[
-                    GestureDetector(
-                      onTap:() {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => CollScreen(
-                              collId: documentSnapshot.data['collId'],
-                              userId:  documentSnapshot.data['ownerId'],
-                            ),
-                          ),
-                        );
-                      },
-                      child: Container(
-                          margin: EdgeInsets.all(10.0),
-                          height: MediaQuery.of(context).size.height/2,
-                          // decoration: BoxDecoration(
-                          //   color: Colors.white,
-                          // ),
-                          width: MediaQuery.of(context).size.width,
-                          child:
-                          CachedNetworkImage(
-                            imageUrl:  documentSnapshot.data['headerImage'],
-                          )
-                      ),
-                    ),
-                  ],
-                ),
-
-              ],
-
+               ),
+              ListTile(
+                title: Text(documentSnapshot.data['title'],
+                    maxLines: 3,
+                    style: new TextStyle(
+                        fontWeight: FontWeight.w500,
+                        color:kText,
+                        fontSize: 18.0)),
               ),
+              Column(
+                children: <Widget>[
+                  GestureDetector(
+                    onTap:() {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => CollScreen(
+                            collId: documentSnapshot.data['collId'],
+                            userId:  documentSnapshot.data['ownerId'],
+                          ),
+                        ),
+                      );
+                    },
+                    child: Container(
+                        margin: EdgeInsets.all(10.0),
+                        height: MediaQuery.of(context).size.height/2,
+                        // decoration: BoxDecoration(
+                        //   color: Colors.white,
+                        // ),
+                        width: MediaQuery.of(context).size.width,
+                        child:
+                        CachedNetworkImage(
+                          imageUrl:  documentSnapshot.data['headerImage'],
+                        )
+                    ),
+                  ),
+                  Divider(color:kGrey),
+                ],
+              ),
+
+            ],
+
             );
           },
         );
@@ -1174,35 +1135,37 @@ class Blog extends StatelessWidget {
               User user = User.fromDocument(snapshot.data);
 //          bool isPostOwner = currentUserId == ownerId;
               return Column(children: <Widget>[
-                ListTile(
-                  leading: GestureDetector(
-                    onTap: () => showProfile(context, profileId: user.id),
-                    child: CircleAvatar(
-                      backgroundImage: CachedNetworkImageProvider(user.photoUrl),
-                      backgroundColor: Colors.grey,
-                    ),
-                  ),
-                  title: GestureDetector(
-                    onTap: () => showProfile(context, profileId: user.id),
-                    child: Text(
-                      user.displayName,
-                      style: TextStyle(
-                        color: kText,
-                        fontWeight: FontWeight.bold,
+                GestureDetector(                      onTap: () => showProfile(context, profileId: user.id),
+
+                  child: ListTile(
+                    leading: GestureDetector(
+                      onTap: () => showProfile(context, profileId: user.id),
+                      child: CircleAvatar(
+                        backgroundImage: CachedNetworkImageProvider(user.photoUrl),
+                        backgroundColor: Colors.grey,
                       ),
                     ),
-                  ),
-                  subtitle: GestureDetector(
-                    onTap: () => showProfile(context, profileId: user.id),
-                    child: Text(user.username,
-                      style: TextStyle(color: kIcon),),
-                  ),),
-                Text(documentSnapshot.data['title'],
-                    maxLines: 3,
-                    style: new TextStyle(
-                        fontWeight: FontWeight.w500,
-                        color: Colors.white,
-                        fontSize: 18.0)),
+                    title: GestureDetector(
+                      onTap: () => showProfile(context, profileId: user.id),
+                      child: Text(
+                        user.displayName,
+                        style: TextStyle(
+                          color: kText,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+         ),
+                ),
+                ListTile(
+
+                  title: Text(documentSnapshot.data['title'],
+                      maxLines: 3,
+                      style: new TextStyle(
+                          fontWeight: FontWeight.w500,
+                          color: kText,
+                          fontSize: 18.0)),
+                ),
                 Column(
                   children: <Widget>[
                     GestureDetector(
@@ -1222,7 +1185,6 @@ class Blog extends StatelessWidget {
                         height: MediaQuery.of(context).size.height/2,
 
                         decoration: BoxDecoration(
-                          color: Colors.white,
                         ),
                         width: MediaQuery.of(context).size.width,
 
@@ -1231,22 +1193,6 @@ class Blog extends StatelessWidget {
                       ),
                     ),
                   ],
-                ),
-                GFButton(
-                  onPressed: ()  {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => BlogScreen(
-                          blogId: documentSnapshot.data['blogId'],
-                          userId:  documentSnapshot.data['ownerId'],
-                        ),
-                      ),
-                    );
-                  },
-                  text: "View Blog-",
-                  shape: GFButtonShape.pills,
-
                 ),
                 Divider(color: kGrey,),
 

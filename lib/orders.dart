@@ -239,7 +239,7 @@ return  Column(
   @override
   Widget build(BuildContext context) {
     return       Scaffold(
-      appBar:  AppBar(backgroundColor: kSecondaryColor,
+      appBar:  AppBar(backgroundColor: kPrimaryColor,
         title: Text('My Orders',
           style: TextStyle(
               fontFamily :"MajorMonoDisplay",

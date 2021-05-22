@@ -57,12 +57,15 @@ ZefyrImageDelegate _imageDelegate;
   void initState() {
     super.initState();
     // Here we must load the document and pass it to Zefyr controller.
-    final document = _loadDocument();
-    _controller = ZefyrController(document);
+    final documentt = _loadDocument();
+    _controller = ZefyrController(documentt);
     _focusNode = FocusNode();
   }
 
-
+       NotusDocument _loadDocument() {
+         final Delta delta = Delta()..insert("Blog content\n");
+         return NotusDocument.fromDelta(delta);
+       }
 
   selectImage(parentContext) {
     return showDialog(
@@ -199,9 +202,7 @@ String ImagesUrl,
     sourceController.clear();
      setState(() {
       file = null;
-//      isUploading = false;
-//      imageUrls = [];
-//      images = [];
+
     });
   }
 
@@ -294,30 +295,7 @@ shrinkWrap: true,
           child: Stack(
             children: [
               WillPopScope(
-                onWillPop:   showDialog(
-                  context: context,
-                  builder: (context) => new AlertDialog(
-                    title: new Text('Are you sure?'),
-                    content: new Text('Do you want to exit without uploading?'),
-                    actions: <Widget>[
-                      new FlatButton(
-
-                        onPressed: () => Navigator.of(context).pop(false),
-                        child: Text("NO"),
-                      ),
-                      SizedBox(height: 16),
-                      new FlatButton(
-
-                        onPressed: () async {Navigator.of(context).pop(true);
-
-//            clearImage();
-                        },
-                        child: Text("YES"),
-                      ),
-                    ],
-                  ),
-                ) ??
-                    false,
+                onWillPop:()=> _onBackPressed(),
                 child: Scaffold(
 
                   // resizeToAvoidBottomPadding: true,
@@ -355,7 +333,7 @@ shrinkWrap: true,
                         child: Text(
                           "Post",
                           style: TextStyle(
-                              color: kblue,
+                              color: Colors.white,
                               fontWeight: FontWeight.bold,
                               fontSize: 20.0),
                         ),
@@ -372,7 +350,7 @@ shrinkWrap: true,
                     alignment: Alignment.center,
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
-                      child: form,
+                      child: ZefyrScaffold(child: form),
                     ),
                   ),
 
@@ -424,12 +402,10 @@ shrinkWrap: true,
 
   @override
   Widget build(BuildContext context) {
+
     return file == null ? buildSplashScreen() : builduploadForm();
   }
   /// Loads the document to be edited in Zefyr.
-  NotusDocument _loadDocument() {
-    final Delta delta = Delta()..insert("");
-    return NotusDocument.fromDelta(delta);
-  }
+
 }
 

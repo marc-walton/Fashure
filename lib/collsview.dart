@@ -97,11 +97,7 @@ class _CollState extends State<Coll> {
   final String ownerId;
   final String username;
    final String headerImage;
- List  _listOfImages  = [
-  "https://images.unsplash.com/photo-1593642532009-6ba71e22f468?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=750&q=80"
-   "https://images.unsplash.com/photo-1615027611690-5a901b98e070?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=334&q=80"
-   "https://images.unsplash.com/photo-1615011950139-d02f8f4d832c?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=401&q=80"
- ];
+
   final List collmediaUrl;
   final String title;
   final String source;
@@ -247,7 +243,7 @@ print(collmediaUrl);
           .document(collId)
           .setData({
         "type": "CollectionLikes",
-        "username": currentUser.username,
+        "username": currentUser.displayName,
         "userId": currentUser.id,
         "userProfileImg": currentUser.photoUrl,
         "postId": collId,
@@ -273,11 +269,7 @@ print(collmediaUrl);
       });
     }
   }
-// images(){
-//   for (int i = 0; i < collmediaUrl.length; i++) {
-//     _listOfImages.add(Image.network(collmediaUrl[i]));
-//
-//   }
+
 
 pics(){
 return
@@ -363,14 +355,7 @@ buildPostHeader() {
           return  ListView(
             shrinkWrap: true,
 scrollDirection:Axis.vertical,
-              // var idx = 1;
-              //
-              // List<NetworkImage> list = new List<NetworkImage>();
-              // for(int i = 0; i < collmediaUrl[0].length; i++ ) {
-              //   debugPrint("Index is " + idx.toString());
-              //   list.add(NetworkImage(collmediaUrl[0]+idx.toString()));
-              //   idx++;
-              // }
+
     children: [Column(
       children: <Widget>[
     ListTile(
@@ -417,15 +402,6 @@ scrollDirection:Axis.vertical,
                                       color: Colors.blueAccent,
                                       fontWeight: FontWeight.bold,
                                       fontSize: 20.0),)),),
-//        ),FlatButton(
-//        onPressed: () {Navigator.pop(context);  Navigator.push(context, MaterialPageRoute(builder: (context) =>Profile( profileId: currentUser?.id)));
-//        },
-//
-//        child: Text('Delete this post?',style: TextStyle(
-//            color: Colors.blueAccent,
-//            fontWeight: FontWeight.bold,
-//            fontSize: 20.0),),
-//        ),
 
                           ],
                         ),
@@ -467,11 +443,7 @@ scrollDirection:Axis.vertical,
     isLiked ? AssetImage("assets/img/clap-hands.png"):AssetImage("assets/img/clap.png"),
     color: kGrey,
     ),
-//                    ),Icon(
-//                      isLiked ?   Icons.favorite_border:Icons.favorite ,
-//                      size: 28.0,
-//                      color: kText,
-//                    ),
+
     ),//                Padding(padding: EdgeInsets.only(right: 1.0)),
     Container(
 //                  margin: EdgeInsets.only(left: 20.0),
@@ -520,7 +492,6 @@ scrollDirection:Axis.vertical,
     isLiked = (likes[currentUserId] == true);
     return
       buildPostHeader();
-    print("$collmediaUrl");
   }
 }
 

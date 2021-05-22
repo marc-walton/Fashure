@@ -238,7 +238,7 @@ class _BlogState extends State<Blog> {
           .document(blogId)
           .setData({
         "type": "bloglike",
-        "username": currentUser.username,
+        "username": currentUser.displayName,
         "userId": currentUser.id,
         "userProfileImg": currentUser.photoUrl,
         "postId": blogId,
@@ -303,7 +303,6 @@ class _BlogState extends State<Blog> {
               GestureDetector(
                 onTap: () => showProfile(context, profileId: user.id),
                 child:    ListTileTheme(
-                  tileColor:kSecondaryColor,
 
                   child: ListTile(
                     leading: CircleAvatar(
@@ -345,18 +344,19 @@ class _BlogState extends State<Blog> {
 
 
             Container(
-              color: kText,
                   child: ZefyrView(
 
                     document: _loadDocument(),
                       // imageDelegate:_loadDocument(),
                   )),
 //            Divider(color: kGrey,),
-              Text(source,
-                style: TextStyle(
-                  color:  kText,
-                  fontWeight: FontWeight.bold,
-                ),),
+              ListTile(
+                title: Text(source,
+                  style: TextStyle(
+                    color:  kText,
+                    fontWeight: FontWeight.bold,
+                  ),),
+              ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: <Widget>[

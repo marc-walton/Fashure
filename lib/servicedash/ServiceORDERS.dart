@@ -38,40 +38,34 @@ class _ServiceOrdersState extends State<ServiceOrders> {
     if(currentUser.country=='India'){
       return
         Column(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: <Widget>[
-            Text(productname, style: TextStyle(
-                color: kText,
-                fontSize: 20.0,
-                fontWeight: FontWeight.bold),),
-            Text(des, style: TextStyle(
+            ListTile(
+              title: Text(productname, style: TextStyle(
+                  color: kText,
+                  fontSize: 20.0,
+                  fontWeight: FontWeight.bold),),
+            ),
+            ListTile(
+              title:            Text(des, style: TextStyle(
                 color: kText,
                 fontSize: 15.0,
-            ),),
-            Text( "Advance payment:₹$inr",style: TextStyle(color: kText,
-                fontSize: 20.0,
-                fontWeight: FontWeight.bold)),
-            Text( "Due payment:₹$Finr",style: TextStyle(color: kText,
-                fontSize: 20.0,
-                fontWeight: FontWeight.bold)),
+              ),),
 
-            // GFButton(
-            //   onPressed: () =>
-            //       Navigator.push(
-            //         context,
-            //         MaterialPageRoute(
-            //           builder: (context) =>
-            //               ProductScreen(
-            //                 prodId: prodId,
-            //                 userId: ownerId,
-            //               ),
-            //         ),
-            //       ),
-            //   text: "More",
-            //   icon: Icon(Icons.card_travel),
-            //   shape: GFButtonShape.pills,
-            //
-            // ),
+            ),
+            ListTile(
+              title:            Text( "Advance payment:₹$inr",style: TextStyle(color: kText,
+                  fontSize: 20.0,
+                  fontWeight: FontWeight.bold)),
+
+            ),
+            ListTile(
+              title:             Text( "Due payment:₹$Finr",style: TextStyle(color: kText,
+                  fontSize: 20.0,
+                  fontWeight: FontWeight.bold)),
+
+            ),
+
+
           ],
         );
 
@@ -79,118 +73,72 @@ class _ServiceOrdersState extends State<ServiceOrders> {
     else if(currentUser.country=='US'){
       return
         Column(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
-            Text(productname, style: TextStyle(
-                color: kText,
-                fontSize: 20.0,
-                fontWeight: FontWeight.bold),),
-            Text(des, style: TextStyle(
-              color: kText,
-              fontSize: 15.0,
-            ),),
-            Text( "Advance payment: \u0024 $usd",style: TextStyle(color: kText,
-                fontSize: 20.0,
-                fontWeight: FontWeight.bold)),
-            Text( "Due payment: \u0024 $Fusd",style: TextStyle(color: kText,
-                fontSize: 20.0,
-                fontWeight: FontWeight.bold)),
+            ListTile(
+              title: Text(productname, style: TextStyle(
+                  color: kText,
+                  fontSize: 20.0,
+                  fontWeight: FontWeight.bold),),
+            ),
+            ListTile(
+              title:            Text(des, style: TextStyle(
+                color:  kText,
+                fontSize: 15.0,
+              ),),
 
-            // GFButton(
-            //   onPressed: () =>
-            //       Navigator.push(
-            //         context,
-            //         MaterialPageRoute(
-            //           builder: (context) =>
-            //               ProductScreen(
-            //                 prodId: prodId,
-            //                 userId: ownerId,
-            //               ),
-            //         ),
-            //       ),
-            //   text: "More",
-            //   icon: Icon(Icons.card_travel),
-            //   shape: GFButtonShape.pills,
-            //
-            // ),
+            ),
+            ListTile(
+              title:            Text( "Advance payment: \u0024 $usd",style: TextStyle(color:  kText,
+                  fontSize: 20.0,
+                  fontWeight: FontWeight.bold)),
+
+            ),
+            ListTile(
+              title:             Text( "Due payment: \u0024 $Fusd",style: TextStyle(color:  kText,
+                  fontSize: 20.0,
+                  fontWeight: FontWeight.bold)),
+
+            ),
+
+
           ],
         );
 
     }
-    else if (currentUser.country == 'China') {
-      return
-        Column(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: <Widget>[
-            Text(productname, style: TextStyle(
-                color: kText,
-                fontSize: 20.0,
-                fontWeight: FontWeight.bold),),
-            Text( "Advance payment: ¥ $cny",style: TextStyle(color: kText,
-                fontSize: 20.0,
-                fontWeight: FontWeight.bold)),
-            Text( "Due payment: ¥ $Fcny",style: TextStyle(color: kText,
-                fontSize: 20.0,
-                fontWeight: FontWeight.bold)),
 
-            // GFButton(
-            //   onPressed: () =>
-            //       Navigator.push(
-            //         context,
-            //         MaterialPageRoute(
-            //           builder: (context) =>
-            //               ProductScreen(
-            //                 prodId: prodId,
-            //                 userId: ownerId,
-            //               ),
-            //         ),
-            //       ),
-            //   text: "More",
-            //   icon: Icon(Icons.card_travel),
-            //   shape: GFButtonShape.pills,
-            //
-            // ),
-          ],
-        );
-
-    }
     else if (currentUser.country == 'Europe'){
       return
         Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: <Widget>[
-            Text(productname, style: TextStyle(
+            ListTile(
+              title: Text(productname, style: TextStyle(
+                  color:kText,
+                  fontSize: 20.0,
+                  fontWeight: FontWeight.bold),),
+            ),
+            ListTile(
+              title:            Text(des, style: TextStyle(
                 color: kText,
-                fontSize: 20.0,
-                fontWeight: FontWeight.bold),),
-            Text(des, style: TextStyle(
-              color: kText,
-              fontSize: 15.0,
-            ),),
-            Text( "Advance payment: € $eur",style: TextStyle(color: kText,
-                fontSize: 20.0,
-                fontWeight: FontWeight.bold)),
-            Text( "Due payment: € $Feur",style: TextStyle(color: kText,
-                fontSize: 20.0,
-                fontWeight: FontWeight.bold)),
+                fontSize: 15.0,
+              ),),
 
-            // GFButton(
-            //   onPressed: () =>
-            //       Navigator.push(
-            //         context,
-            //         MaterialPageRoute(
-            //           builder: (context) =>
-            //               ProductScreen(
-            //                 prodId: prodId,
-            //                 userId: ownerId,
-            //               ),
-            //         ),
-            //       ),
-            //   text: "More",
-            //   icon: Icon(Icons.card_travel),
-            //   shape: GFButtonShape.pills,
-            //
-            // ),
+            ),
+            ListTile(
+              title:            Text( "Advance payment:  € $eur",style: TextStyle(color: kText,
+                  fontSize: 20.0,
+                  fontWeight: FontWeight.bold)),
+
+            ),
+            ListTile(
+              title:             Text( "Due payment: € $Feur",style: TextStyle(color: kText,
+                  fontSize: 20.0,
+                  fontWeight: FontWeight.bold)),
+
+            ),
+
+
           ],
         );
 
@@ -200,38 +148,34 @@ class _ServiceOrdersState extends State<ServiceOrders> {
         Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: <Widget>[
-            Text(productname, style: TextStyle(
+            ListTile(
+              title: Text(productname, style: TextStyle(
+                  color: kText,
+                  fontSize: 20.0,
+                  fontWeight: FontWeight.bold),),
+            ),
+            ListTile(
+              title:            Text(des, style: TextStyle(
                 color: kText,
-                fontSize: 20.0,
-                fontWeight: FontWeight.bold),),
-            Text(des, style: TextStyle(
-              color: kText,
-              fontSize: 15.0,
-            ),),
-            Text( "Advance payment: £ $gbp ",style: TextStyle(color: kText,
-                fontSize: 20.0,
-                fontWeight: FontWeight.bold)),
-            Text( "Due payment: £ $Fgbp ",style: TextStyle(color: kText,
-                fontSize: 20.0,
-                fontWeight: FontWeight.bold)),
+                fontSize: 15.0,
+              ),),
 
-            // GFButton(
-            //   onPressed: () =>
-            //       Navigator.push(
-            //         context,
-            //         MaterialPageRoute(
-            //           builder: (context) =>
-            //               ProductScreen(
-            //                 prodId: prodId,
-            //                 userId: ownerId,
-            //               ),
-            //         ),
-            //       ),
-            //   text: "More",
-            //   icon: Icon(Icons.card_travel),
-            //   shape: GFButtonShape.pills,
-            //
-            // ),
+            ),
+            ListTile(
+              title:            Text( "Advance payment: £ $gbp",style: TextStyle(color: kText,
+                  fontSize: 20.0,
+                  fontWeight: FontWeight.bold)),
+
+            ),
+            ListTile(
+              title:             Text( "Due payment: £ $Fgbp",style: TextStyle(color: kText,
+                  fontSize: 20.0,
+                  fontWeight: FontWeight.bold)),
+
+            ),
+
+
+
           ],
         );
 
@@ -239,85 +183,183 @@ class _ServiceOrdersState extends State<ServiceOrders> {
     else{
       return
         Column(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
-            Text(productname, style: TextStyle(
-                color: kText,
-                fontSize: 20.0,
-                fontWeight: FontWeight.bold),),
-            Text(des, style: TextStyle(
-              color: kText,
-              fontSize: 15.0,
-            ),),
-            Text( "Advance payment: \u0024 $usd",style: TextStyle(color: kText,
-                fontSize: 20.0,
-                fontWeight: FontWeight.bold)),
-            Text( "Due payment: \u0024 $Fusd",style: TextStyle(color: kText,
-                fontSize: 20.0,
-                fontWeight: FontWeight.bold)),
+            ListTile(
+              title: Text(productname, style: TextStyle(
+                  color: kText,
+                  fontSize: 20.0,
+                  fontWeight: FontWeight.bold),),
+            ),
+            ListTile(
+              title:            Text(des, style: TextStyle(
+                color:  kText,
+                fontSize: 15.0,
+              ),),
 
-            // GFButton(
-            //   onPressed: () =>
-            //       Navigator.push(
-            //         context,
-            //         MaterialPageRoute(
-            //           builder: (context) =>
-            //               ProductScreen(
-            //                 prodId: prodId,
-            //                 userId: ownerId,
-            //               ),
-            //         ),
-            //       ),
-            //   text: "More",
-            //   icon: Icon(Icons.card_travel),
-            //   shape: GFButtonShape.pills,
-            //
-            // ),
+            ),
+            ListTile(
+              title:            Text( "Advance payment: \u0024 $usd",style: TextStyle(color:  kText,
+                  fontSize: 20.0,
+                  fontWeight: FontWeight.bold)),
+
+            ),
+            ListTile(
+              title:             Text( "Due payment: \u0024 $Fusd",style: TextStyle(color:  kText,
+                  fontSize: 20.0,
+                  fontWeight: FontWeight.bold)),
+
+            ),
+
+
           ],
         );
 
     }
   }
   UpcomingOrders(){
-    return  PaginateFirestore(
+    return  Container( decoration: BoxDecoration(
+        gradient: fabGradient
+    ) ,
+      alignment: Alignment.center,
+      child: PaginateFirestore(
 //    itemsPerPage: 2,
-        itemBuilderType:
-        PaginateBuilderType.listView,
-        itemBuilder: (index, context, documentSnapshot)   {
+          itemBuilderType:
+          PaginateBuilderType.listView,
+          itemBuilder: (index, context, documentSnapshot)   {
 //        DocumentSnapshot ds = snapshot.data.documents[index];
 
-          String usd = documentSnapshot.data['usd'];
-          String inr = documentSnapshot.data['inr'];
-          String cny = documentSnapshot.data['cny'];
-          String gbp = documentSnapshot.data['gbp'];
-          String eur = documentSnapshot.data['eur'];
-          String Fusd = documentSnapshot.data['Fusd'];
-          String Finr = documentSnapshot.data['Finr'];
-          String Fcny = documentSnapshot.data['Fcny'];
-          String Fgbp = documentSnapshot.data['Fgbp'];
-          String Feur = documentSnapshot.data['Feur'];
+            String usd = documentSnapshot.data['usd'];
+            String inr = documentSnapshot.data['inr'];
+            String gbp = documentSnapshot.data['gbp'];
+            String eur = documentSnapshot.data['eur'];
+            String Fusd = documentSnapshot.data['Fusd'];
+            String Finr = documentSnapshot.data['Finr'];
+            String Fgbp = documentSnapshot.data['Fgbp'];
+            String Feur = documentSnapshot.data['Feur'];
 
-          String ownerId = documentSnapshot.data['ownerId'];
-          String cusId = documentSnapshot.data['cusId'];
-          String title = documentSnapshot.data['title'];
-          String desciption = documentSnapshot.data['description'];
-          String orderId = documentSnapshot.data['orderId'];
-          String fulfilled = documentSnapshot.data['fulfilled'];
-          String courierId = documentSnapshot.data['courierId'];
-          String orderStatus = documentSnapshot.data['orderStatus'];
-          String Address = documentSnapshot.data['Address'];
+            String ownerId = documentSnapshot.data['ownerId'];
+            String cusId = documentSnapshot.data['cusId'];
+            String title = documentSnapshot.data['title'];
+            String desciption = documentSnapshot.data['description'];
+            String orderId = documentSnapshot.data['orderId'];
+            String fulfilled = documentSnapshot.data['fulfilled'];
+            String courierId = documentSnapshot.data['courierId'];
+            String orderStatus = documentSnapshot.data['orderStatus'];
+            String Address = documentSnapshot.data['Address'];
 
-          return
-            StreamBuilder(
-              stream: usersRef.document(cusId).snapshots(),
-              builder: (context, snapshot) {
-                if (!snapshot.hasData) {
-                  return circularProgress();
-                }
-                User user = User.fromDocument(snapshot.data);
+            return
+              StreamBuilder(
+                stream: usersRef.document(cusId).snapshots(),
+                builder: (context, snapshot) {
+                  if (!snapshot.hasData) {
+                    return circularProgress();
+                  }
+                  User user = User.fromDocument(snapshot.data);
 //          bool isPostOwner = currentUserId == ownerId;
-                return Expanded(
-                  child: Column(
+                  return Expanded(
+                    child: Column(
+                      children: <Widget>[
+                        GestureDetector(
+                          onTap: () => showProfile(context, profileId: user.id),
+                          child: ListTile(
+                            leading: CircleAvatar(
+                              backgroundImage: CachedNetworkImageProvider(user.photoUrl),
+                              backgroundColor: Colors.grey,
+                            ),
+                            title: Text(
+                              user.displayName,
+                              style: TextStyle(
+                                color:kText,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            ),
+                        ),
+                        Divider(color: kGrey,),
+                        ListTile(
+                          leading: Text('Order Details',
+                            style: TextStyle(color: kText),),
+                        ),
+
+                        df(productname:title,
+                          des:desciption,
+                          usd:usd,inr:inr,eur:eur,gbp:gbp,
+                          Fusd:Fusd,Finr:Finr,Feur:Feur,Fgbp:Fgbp,
+
+                          orderId:orderId, ownerId:ownerId,),
+                        ListTile(
+                         title:                       Text('orderStatus:$orderStatus',
+                           style: TextStyle(color: kText),),
+
+                        ),
+
+                        Center(child: RaisedButton(
+                          color: kblue,
+                          onPressed:(){
+                            Navigator.push(context, MaterialPageRoute(builder: (context) =>ServiceFulfill(ownerId: ownerId,orderId: orderId,)));},
+                          child:  Text('Fulfill order',
+                            style: TextStyle(color: Colors.white),),)),
+                        Divider(color: kGrey,),
+                      ],
+
+                    ),
+                  );
+
+                },
+              );
+          },
+          query:  Firestore.instance.collection('serviceSeller')
+              .document(currentUser.id)
+              .collection('sellerService').orderBy('timestamp',descending: true)
+              .where('fulfilled',isEqualTo: 'false')
+
+      ),
+    );
+  }
+  OrdersFulfilled(){
+    return  Container( decoration: BoxDecoration(
+        gradient: fabGradient
+    ) ,
+      alignment: Alignment.center,
+      child: PaginateFirestore(
+//    itemsPerPage: 2,
+          itemBuilderType:
+          PaginateBuilderType.listView,
+          itemBuilder: (index, context, documentSnapshot)   {
+
+
+            String usd = documentSnapshot.data['usd'];
+            String inr = documentSnapshot.data['inr'];
+            String gbp = documentSnapshot.data['gbp'];
+            String eur = documentSnapshot.data['eur'];
+           String Fusd = documentSnapshot.data['Fusd'];
+            String Finr = documentSnapshot.data['Finr'];
+            String Fgbp = documentSnapshot.data['Fgbp'];
+            String Feur = documentSnapshot.data['Feur'];
+
+            String orderId = documentSnapshot.data['orderId'];
+             String ownerId = documentSnapshot.data['ownerId'];
+
+             String cusId = documentSnapshot.data['cusId'];
+
+            String fulfilled = documentSnapshot.data['fulfilled'];
+            String courierId = documentSnapshot.data['courierId'];
+            String orderStatus = documentSnapshot.data['orderStatus'];
+            String title = documentSnapshot.data['size'];
+            String Address = documentSnapshot.data['title'];
+String description = documentSnapshot.data['description'];
+
+            return
+              StreamBuilder(
+                stream: usersRef.document(cusId).snapshots(),
+                builder: (context, snapshot) {
+                  if (!snapshot.hasData) {
+                    return circularProgress();
+                  }
+                  User user = User.fromDocument(snapshot.data);
+//          bool isPostOwner = currentUserId == ownerId;
+                  return Column(
                     children: <Widget>[
                       GestureDetector(
                         onTap: () => showProfile(context, profileId: user.id),
@@ -329,12 +371,11 @@ class _ServiceOrdersState extends State<ServiceOrders> {
                           title: Text(
                             user.displayName,
                             style: TextStyle(
-                              color: kText,
+                              color:kText,
                               fontWeight: FontWeight.bold,
                             ),
                           ),
-                          subtitle: Text(user.username,
-                            style: TextStyle(color: kIcon),),),
+                        ),
                       ),
                       Divider(color: kGrey,),
                       ListTile(
@@ -343,153 +384,41 @@ class _ServiceOrdersState extends State<ServiceOrders> {
                       ),
 
                       df(productname:title,
-                        des:desciption,
-                        usd:usd,inr:inr,cny:cny,eur:eur,gbp:gbp,
-                        Fusd:Fusd,Finr:Finr,Fcny:Fcny,Feur:Feur,Fgbp:Fgbp,
+                        des:description,
+                        usd:usd,inr:inr,eur:eur,gbp:gbp,
+                        Fusd:Fusd,Finr:Finr,Feur:Feur,Fgbp:Fgbp,
 
                         orderId:orderId, ownerId:ownerId,),
+                      ListTile(
+                        title:                       Text('orderStatus:$orderStatus',
+                          style: TextStyle(color: kText),),
 
-                      Text('Address:$Address',
-                        style: TextStyle(color: kText),),
-                      Text('orderStatus:$orderStatus',
-                        style: TextStyle(color: kText),),
-                      Center(child: RaisedButton(
-                        color: kblue,
-                        onPressed:(){
-                          Navigator.push(context, MaterialPageRoute(builder: (context) =>ServiceFulfill(ownerId: ownerId,orderId: orderId,)));},
-                        child:  Text('Fulfill order',
-                          style: TextStyle(color: kText),),)),
-                      Divider(color: kGrey,),
+                      ),
+
+
+                      ListTile(
+                        title:                       Text('orderStatus:$orderStatus',
+                          style: TextStyle(color: kText),),
+
+                      ),    ListTile(
+                        title:                           Text('Shipment Id:$courierId',
+                          style: TextStyle(color: kText),),
+                      ),
+
+
                     ],
 
-                  ),
-                );
+                  );
 
-              },
-            );
-        },
-        query:  Firestore.instance.collection('serviceSeller')
-            .document(currentUser.id)
-            .collection('sellerService').orderBy('timestamp',descending: true)
-            .where('fulfilled',isEqualTo: 'false')
+                },
+              );
+          },
+          query:  Firestore.instance.collection('serviceSeller')
+              .document(currentUser.id)
+              .collection('sellerService').orderBy('timestamp',descending: true)
+              .where('fulfilled',isEqualTo: 'true')
 
-    );
-  }
-  OrdersFulfilled(){
-    return  PaginateFirestore(
-//    itemsPerPage: 2,
-        itemBuilderType:
-        PaginateBuilderType.listView,
-        itemBuilder: (index, context, documentSnapshot)   {
-//        DocumentSnapshot ds = snapshot.data.documents[index];
-
-          // "usd": cnytousd,
-          // "cny": advanceController.text,
-          // "gbp": cnytogbp,
-          // "eur": cnytoeur,
-          // "inr": cnytoinr,
-          // "Fusd": Fcnytousd,
-          // "Fcny": totalController.text ?? "0",
-          // "Fgbp": Fcnytogbp,
-          // "Feur": Fcnytoeur,
-          // "Finr": Fcnytoinr,
-          // // 'advance':advanceController.text,
-          // // 'final':totalController.text ?? "0",
-          // 'title':titleController.text,
-          // 'title':titleController.text,
-          // 'description':detailsController.text,
-          // 'advancepay':'false',
-          // 'finalpay':'false',
-          // 'Address':"",
-
-          String usd = documentSnapshot.data['usd'];
-          String inr = documentSnapshot.data['inr'];
-          String cny = documentSnapshot.data['cny'];
-          String gbp = documentSnapshot.data['gbp'];
-          String eur = documentSnapshot.data['eur'];
-         String Fusd = documentSnapshot.data['Fusd'];
-          String Finr = documentSnapshot.data['Finr'];
-          String Fcny = documentSnapshot.data['Fcny'];
-          String Fgbp = documentSnapshot.data['Fgbp'];
-          String Feur = documentSnapshot.data['Feur'];
-
-          String orderId = documentSnapshot.data['orderId'];
-           String ownerId = documentSnapshot.data['ownerId'];
-
-           String cusId = documentSnapshot.data['cusId'];
-
-          String fulfilled = documentSnapshot.data['fulfilled'];
-          String courierId = documentSnapshot.data['courierId'];
-          String orderStatus = documentSnapshot.data['orderStatus'];
-          String title = documentSnapshot.data['size'];
-          String Address = documentSnapshot.data['title'];
-String description = documentSnapshot.data['description'];
-
-          return
-            StreamBuilder(
-              stream: usersRef.document(cusId).snapshots(),
-              builder: (context, snapshot) {
-                if (!snapshot.hasData) {
-                  return circularProgress();
-                }
-                User user = User.fromDocument(snapshot.data);
-//          bool isPostOwner = currentUserId == ownerId;
-                return Column(
-                  children: <Widget>[
-                    GestureDetector(
-                      onTap: () => showProfile(context, profileId: user.id),
-                      child: ListTile(
-                        leading: CircleAvatar(
-                          backgroundImage: CachedNetworkImageProvider(user.photoUrl),
-                          backgroundColor: Colors.grey,
-                        ),
-                        title: Text(
-                          user.displayName,
-                          style: TextStyle(
-                            color: kText,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        subtitle: Text(user.username,
-                          style: TextStyle(color: kIcon),),),
-                    ),
-                    Divider(color: kGrey,),
-                    ListTile(
-                      leading: Text('Order Details',
-                        style: TextStyle(color: kText),),
-                    ),
-                    Text('$title',
-                      style: TextStyle(color: kText),),
-                    Text('$description',
-                      style: TextStyle(color: kText),),
-                    df(productname:title,
-                      usd:usd,inr:inr,cny:cny,eur:eur,gbp:gbp,
-                      Fusd:Fusd,Finr:Finr,Fcny:Fcny,Feur:Feur,Fgbp:Fgbp,
-
-                      orderId:orderId, ownerId:ownerId,),
-                    Text('Address:$Address',
-                      style: TextStyle(color: kText),),
-                    Text('orderStatus:$orderStatus',
-                      style: TextStyle(color: kText),),
-                    Text('Address:$Address',
-                      style: TextStyle(color: kText),),
-                    Text('orderStatus:$orderStatus',
-                      style: TextStyle(color: kText),),
-                    Text('Shipment Id:$courierId',
-                      style: TextStyle(color: kText),),
-
-                  ],
-
-                );
-
-              },
-            );
-        },
-        query:  Firestore.instance.collection('serviceSeller')
-            .document(currentUser.id)
-            .collection('sellerService').orderBy('timestamp',descending: true)
-            .where('fulfilled',isEqualTo: 'true')
-
+      ),
     );
   }
   @override
@@ -503,43 +432,48 @@ String description = documentSnapshot.data['description'];
     SizeConfig().init(context);
 
     return
-      RotatedBox(
-        quarterTurns: 3,
-        child: Expanded(
-          child: DefaultTabController(
-              length: 2,
-              child: Scaffold(
-                backgroundColor: kPrimaryColor,
-                appBar: AppBar(
-                  toolbarHeight: SizeConfig.safeBlockHorizontal * 8,
+      Container(   decoration: BoxDecoration(
+          gradient: fabGradient
+      ) ,
+        alignment: Alignment.center,
+        child: RotatedBox(
+          quarterTurns: 3,
+          child: Expanded(
+            child: DefaultTabController(
+                length: 2,
+                child: Scaffold(
                   backgroundColor: kPrimaryColor,
-                  elevation: 0,
-                  bottom: TabBar(
-                    isScrollable: true,
-                    labelColor: Colors.white,
-                    unselectedLabelColor: kIcon,
+                  appBar: AppBar(
+                    toolbarHeight: SizeConfig.safeBlockHorizontal * 8,
+                    backgroundColor: kPrimaryColor,
+                    elevation: 0,
+                    bottom: TabBar(
+                      isScrollable: true,
+                      labelColor: Colors.white,
+                      unselectedLabelColor: kIcon,
 
-                    tabs: [
-                      Text("Upcoming orders", style: TextStyle(
-                        fontSize: SizeConfig.safeBlockHorizontal * 5,),),
-                      Text("Fulfilled orders", style: TextStyle(
-                          fontSize: SizeConfig.safeBlockHorizontal * 5),),
+                      tabs: [
+                        Text("Upcoming orders", style: TextStyle(
+                          fontSize: SizeConfig.safeBlockHorizontal * 5,),),
+                        Text("Fulfilled orders", style: TextStyle(
+                            fontSize: SizeConfig.safeBlockHorizontal * 5),),
 
-                    ],
+                      ],
+                    ),
                   ),
-                ),
 
-                body: RotatedBox(
-                  quarterTurns: 1,
-                  child: TabBarView(
-                      children: <Widget>[
-                        UpcomingOrders(),
-                        OrdersFulfilled(),
+                  body: RotatedBox(
+                    quarterTurns: 1,
+                    child: TabBarView(
+                        children: <Widget>[
+                          UpcomingOrders(),
+                          OrdersFulfilled(),
 
 
-                      ]),
-                ),
-              )
+                        ]),
+                  ),
+                )
+            ),
           ),
         ),
       );

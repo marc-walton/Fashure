@@ -1673,7 +1673,7 @@ return Container();
         .document(orderId)
         .setData({
       "type": "PaymentO",
-      "username": currentUser.username,
+      "username": currentUser.displayName,
       "userId": widget.ownerId,
       "userProfileImg": currentUser.photoUrl,
       "mediaUrl":widget.mediaUrl,
