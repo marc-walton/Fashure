@@ -1689,14 +1689,13 @@ payment();
   }
   void _handlePaymentSuccess(PaymentSuccessResponse response) {
     onSuccess();
-    Navigator.pushReplacement(
-        context, MaterialPageRoute(builder: (context) => ActivityFeed()));
+    Get.offAll( ActivityFeed());
   Fluttertoast.showToast(
   msg: "Payment SUCCESS: " + response.paymentId, timeInSecForIos: 4);
   }
 
   void _handlePaymentError(PaymentFailureResponse response) {
-    Get.to( ProductScreen(
+    Get.offAll( ProductScreen(
       prodId: widget.prodId,
       userId: widget.ownerId,
     ),) ;
@@ -1713,7 +1712,12 @@ payment();
 
   @override
   Widget build(BuildContext context) {
-  return openCheckout();
+  return  WillPopScope(
+      onWillPop:()=>  Get.offAll( ProductScreen(
+        prodId: widget.prodId,
+        userId: widget.ownerId,
+      ),) ,
+    child: openCheckout());
   }
 
 }

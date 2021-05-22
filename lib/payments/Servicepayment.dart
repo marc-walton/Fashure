@@ -6,6 +6,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:uuid/uuid.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:fashow/orders.dart';
+import 'package:get/get.dart';
 
 class PaymentSer extends StatefulWidget {
   final String Amount;
@@ -385,8 +386,8 @@ payment();
     Fluttertoast.showToast(
         msg: "SUCCESS: " + response.paymentId, timeInSecForIos: 4);
     onSuccess();
-    Navigator.pushReplacement(
-        context, MaterialPageRoute(builder: (context) => Orders()));
+    Get.offAll( Orders()) ;
+
     Fluttertoast.showToast(
         msg: "Payment SUCCESS: " + response.paymentId, timeInSecForIos: 4);
   }
@@ -395,6 +396,7 @@ payment();
     Fluttertoast.showToast(
         msg: "ERROR: " + response.code.toString() + " - " + response.message,
         timeInSecForIos: 4);
+    Get.offAll( Orders()) ;
   }
 
   void _handleExternalWallet(ExternalWalletResponse response) {
@@ -404,6 +406,9 @@ payment();
 
   @override
   Widget build(BuildContext context) {
-    return openCheckout();
+    return  WillPopScope(
+        onWillPop:()=>     Get.offAll( Orders()) ,
+
+    child:openCheckout());
   }
 }
