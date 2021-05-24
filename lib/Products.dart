@@ -10185,7 +10185,7 @@ TeenSizes(){
                               userId: ownerId,
                             ),
                           ),
-                        ),icon: Icon(Icons.edit), label: Text('Edit',style: TextStyle(color:Colors.white),)),,
+                        ),icon: Icon(Icons.edit), label: Text('Edit',style: TextStyle(color:Colors.white),)),
                     ),
                   ),
 
@@ -10571,35 +10571,35 @@ posteurope(){
                 children: <Widget>[
                   Expanded(
                     child: ListTile(
-                        title: Text(
-                          "$productname ",
-                          style: TextStyle(
-                            color: kText,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 24.0,
+                      title: Text(
+                        "$productname ",
+                        style: TextStyle(
+                          color: kText,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 24.0,
+                        ),
+                      ),
+                      subtitle: Text(
+                        "£  $inr ",
+                        style: TextStyle(
+                          color: Colors.green,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 20.0,
+                        ),
+                      ),
+                      trailing: !isPostOwner? FloatingActionButton(
+                        onPressed: () => Buynow(context),
+                        child: Icon(Icons.add_shopping_cart,),
+                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(16.0))),
+                      ): FloatingActionButton.extended(heroTag:'editshop',onPressed: () => Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => EditShop(
+                            prodId: prodId,
+                            userId: ownerId,
                           ),
                         ),
-                        subtitle: Text(
-                          "£  $inr ",
-                          style: TextStyle(
-                            color: Colors.green,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 20.0,
-                          ),
-                        ),
-                        trailing: !isPostOwner? FloatingActionButton(
-                          onPressed: () => Buynow(context),
-                          child: Icon(Icons.add_shopping_cart,),
-                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(16.0))),
-                        ): FloatingActionButton.extended(heroTag:'editshop',onPressed: () => Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => EditShop(
-                              prodId: prodId,
-                              userId: ownerId,
-                            ),
-                          ),
-                        ),icon: Icon(Icons.edit), label: Text('Edit',style: TextStyle(color:Colors.white),)),,
+                      ),icon: Icon(Icons.edit), label: Text('Edit',style: TextStyle(color:Colors.white),)),
                     ),
                   ),
 
@@ -11015,7 +11015,7 @@ postuk(){
                             userId: ownerId,
                           ),
                         ),
-                      ),icon: Icon(Icons.edit), label: Text('Edit',style: TextStyle(color:Colors.white),)),,
+                      ),icon: Icon(Icons.edit), label: Text('Edit',style: TextStyle(color:Colors.white),)),
                     ),
                   ),
 
