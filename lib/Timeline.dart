@@ -415,7 +415,6 @@ return
             }
           });
           return Container(
-            color: kSecondaryColor,
             child: Column(
               children: <Widget>[
                 Container(

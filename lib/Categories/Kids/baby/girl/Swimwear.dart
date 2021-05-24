@@ -3,9 +3,7 @@ import 'package:fashow/Constants.dart';
 import 'package:fashow/size_config.dart';
 import 'package:fashow/ActivityFeed.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:getflutter/components/button/gf_button.dart';
-import 'package:getflutter/shape/gf_button_shape.dart';
-import 'package:image/image.dart';
+
 import 'package:paginate_firestore/paginate_firestore.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fashow/HomePage.dart';
@@ -187,36 +185,13 @@ class _BabyswGState extends State<BabyswG> {
         child: DefaultTabController(
             length:1,
             child: Scaffold(
-              appBar:AppBar(
-                toolbarHeight: SizeConfig.safeBlockHorizontal * 8,
-                backgroundColor: kPrimaryColor,
-                elevation: 0,
-                bottom: TabBar(
-                  isScrollable: true,
-                  labelColor: Colors.white,
-                  unselectedLabelColor: kIcon,
-
-
-                  tabs:[
-                    Text("New Arrivals",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5,),),
-
-                  ],
-                ),
-              ),
 
               body: Container( decoration: BoxDecoration(
                   gradient: fabGradient
               ) ,
                 alignment: Alignment.center,
-                child: RotatedBox(
-                  quarterTurns: 1,
-                  child: TabBarView(
-                      children:<Widget> [
-                       GGSwimwear(),
+                child:                       GGSwimwear(),
 
-
-                      ]),
-                ),
               ),
             )
         ),

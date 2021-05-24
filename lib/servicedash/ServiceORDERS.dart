@@ -32,6 +32,8 @@ class _ServiceOrdersState extends State<ServiceOrders> {
     String Fcny,
     String Feur,
     String Fgbp,
+    String adavance,
+    String finalp,
     String orderId,
     String ownerId,}){
 
@@ -56,12 +58,18 @@ class _ServiceOrdersState extends State<ServiceOrders> {
               title:            Text( "Advance payment:₹$inr",style: TextStyle(color: kText,
                   fontSize: 20.0,
                   fontWeight: FontWeight.bold)),
+    subtitle:  adavance == "true"? Text( "(Paid)",style: TextStyle(color:  kText,
+    fontSize: 20.0,
+    fontWeight: FontWeight.bold)): Text('Payment pending'),
 
             ),
             ListTile(
               title:             Text( "Due payment:₹$Finr",style: TextStyle(color: kText,
                   fontSize: 20.0,
                   fontWeight: FontWeight.bold)),
+              subtitle:  finalp == "true"? Text( "(Paid)",style: TextStyle(color:  kText,
+                  fontSize: 20.0,
+                  fontWeight: FontWeight.bold)): Text('Payment pending'),
 
             ),
 
@@ -92,12 +100,17 @@ class _ServiceOrdersState extends State<ServiceOrders> {
               title:            Text( "Advance payment: \u0024 $usd",style: TextStyle(color:  kText,
                   fontSize: 20.0,
                   fontWeight: FontWeight.bold)),
-
-            ),
+subtitle:  adavance == "true"? Text( "(Paid)",style: TextStyle(color:  kText,
+    fontSize: 20.0,
+    fontWeight: FontWeight.bold)): Text('Payment pending'),
+          ),
             ListTile(
               title:             Text( "Due payment: \u0024 $Fusd",style: TextStyle(color:  kText,
                   fontSize: 20.0,
                   fontWeight: FontWeight.bold)),
+              subtitle:  finalp == "true"? Text( "(Paid)",style: TextStyle(color:  kText,
+                  fontSize: 20.0,
+                  fontWeight: FontWeight.bold)): Text('Payment pending'),
 
             ),
 
@@ -129,12 +142,18 @@ class _ServiceOrdersState extends State<ServiceOrders> {
               title:            Text( "Advance payment:  € $eur",style: TextStyle(color: kText,
                   fontSize: 20.0,
                   fontWeight: FontWeight.bold)),
+              subtitle:  finalp == "true"? Text( "(Paid)",style: TextStyle(color:  kText,
+                  fontSize: 20.0,
+                  fontWeight: FontWeight.bold)): Text('Payment pending'),
 
             ),
             ListTile(
               title:             Text( "Due payment: € $Feur",style: TextStyle(color: kText,
                   fontSize: 20.0,
                   fontWeight: FontWeight.bold)),
+              subtitle:  finalp == "true"? Text( "(Paid)",style: TextStyle(color:  kText,
+                  fontSize: 20.0,
+                  fontWeight: FontWeight.bold)): Text('Payment pending'),
 
             ),
 
@@ -165,12 +184,18 @@ class _ServiceOrdersState extends State<ServiceOrders> {
               title:            Text( "Advance payment: £ $gbp",style: TextStyle(color: kText,
                   fontSize: 20.0,
                   fontWeight: FontWeight.bold)),
+              subtitle:  finalp == "true"? Text( "(Paid)",style: TextStyle(color:  kText,
+                  fontSize: 20.0,
+                  fontWeight: FontWeight.bold)): Text('Payment pending'),
 
             ),
             ListTile(
               title:             Text( "Due payment: £ $Fgbp",style: TextStyle(color: kText,
                   fontSize: 20.0,
                   fontWeight: FontWeight.bold)),
+              subtitle:  finalp == "true"? Text( "(Paid)",style: TextStyle(color:  kText,
+                  fontSize: 20.0,
+                  fontWeight: FontWeight.bold)): Text('Payment pending'),
 
             ),
 
@@ -202,12 +227,18 @@ class _ServiceOrdersState extends State<ServiceOrders> {
               title:            Text( "Advance payment: \u0024 $usd",style: TextStyle(color:  kText,
                   fontSize: 20.0,
                   fontWeight: FontWeight.bold)),
+              subtitle:  finalp == "true"? Text( "(Paid)",style: TextStyle(color:  kText,
+                  fontSize: 20.0,
+                  fontWeight: FontWeight.bold)): Text('Payment pending'),
 
             ),
             ListTile(
               title:             Text( "Due payment: \u0024 $Fusd",style: TextStyle(color:  kText,
                   fontSize: 20.0,
                   fontWeight: FontWeight.bold)),
+              subtitle:  finalp == "true"? Text( "(Paid)",style: TextStyle(color:  kText,
+                  fontSize: 20.0,
+                  fontWeight: FontWeight.bold)): Text('Payment pending'),
 
             ),
 
@@ -243,8 +274,8 @@ class _ServiceOrdersState extends State<ServiceOrders> {
             String title = documentSnapshot.data['title'];
             String desciption = documentSnapshot.data['description'];
             String orderId = documentSnapshot.data['orderId'];
-            String fulfilled = documentSnapshot.data['fulfilled'];
-            String courierId = documentSnapshot.data['courierId'];
+            String advancepay = documentSnapshot.data['advancepay'];
+            String finalpay = documentSnapshot.data['finalpay'];
             String orderStatus = documentSnapshot.data['orderStatus'];
             String Address = documentSnapshot.data['Address'];
 
@@ -286,7 +317,7 @@ class _ServiceOrdersState extends State<ServiceOrders> {
                           des:desciption,
                           usd:usd,inr:inr,eur:eur,gbp:gbp,
                           Fusd:Fusd,Finr:Finr,Feur:Feur,Fgbp:Fgbp,
-
+adavance: advancepay,finalp: finalpay,
                           orderId:orderId, ownerId:ownerId,),
                         ListTile(
                          title:                       Text('orderStatus:$orderStatus',
@@ -343,7 +374,8 @@ class _ServiceOrdersState extends State<ServiceOrders> {
 
              String cusId = documentSnapshot.data['cusId'];
 
-            String fulfilled = documentSnapshot.data['fulfilled'];
+            String advancepay = documentSnapshot.data['advancepay'];
+            String finalpay = documentSnapshot.data['finalpay'];
             String courierId = documentSnapshot.data['courierId'];
             String orderStatus = documentSnapshot.data['orderStatus'];
             String title = documentSnapshot.data['size'];
@@ -387,7 +419,7 @@ String description = documentSnapshot.data['description'];
                         des:description,
                         usd:usd,inr:inr,eur:eur,gbp:gbp,
                         Fusd:Fusd,Finr:Finr,Feur:Feur,Fgbp:Fgbp,
-
+adavance: advancepay, finalp: finalpay,
                         orderId:orderId, ownerId:ownerId,),
                       ListTile(
                         title:                       Text('orderStatus:$orderStatus',

@@ -186,40 +186,14 @@ class _BabytrBState extends State<BabytrB> {
         child: DefaultTabController(
             length:1,
             child: Scaffold(
-              appBar:AppBar(
-                toolbarHeight: SizeConfig.safeBlockHorizontal * 8,
-                backgroundColor: kPrimaryColor,
-                elevation: 0,
-                bottom: TabBar(
-                  isScrollable: true,
-                  labelColor: Colors.white,
-                  unselectedLabelColor: kIcon,
-//                indicatorSize: TabBarIndicatorSize.label,
-//                       indicator: BoxDecoration(
-//                           borderRadius: BorderRadius.only(
-//                               topLeft: Radius.circular(10),
-//                               topRight: Radius.circular(10)
-//                           ),
-//                           color: Colors.white),
 
-                  tabs:[
-                    Text("New Arrivals",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5,),),
-
-                  ],
-                ),
-              ),
 
               body: Container( decoration: BoxDecoration(
                   gradient: fabGradient
               ) ,
                 alignment: Alignment.center,
-                child: RotatedBox(
-                  quarterTurns: 1,
-                  child: TabBarView(
-                      children:<Widget> [
-                        BBT(),
-                                            ]),
-                ),
+                child:                         BBT(),
+
               ),
             )
         ),

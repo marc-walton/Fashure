@@ -15,9 +15,7 @@ import 'package:fashow/Categories/Kids/teen/boy/ETHNICT.dart';
 
 import 'package:fashow/ActivityFeed.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:getflutter/components/button/gf_button.dart';
-import 'package:getflutter/shape/gf_button_shape.dart';
-import 'package:image/image.dart';
+
 import 'package:paginate_firestore/paginate_firestore.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fashow/HomePage.dart';
@@ -115,7 +113,7 @@ class _TeenBoyState extends State<TeenBoy> {
 
     }
   }
-  All(){
+  Allin(){
     return  PaginateFirestore(
 //    itemsPerPage: 2,
         itemBuilderType:
@@ -188,6 +186,80 @@ class _TeenBoyState extends State<TeenBoy> {
             .where('Gender',isEqualTo: 'Teen-Boys')
 
     );
+  }All(){
+    return  PaginateFirestore(
+//    itemsPerPage: 2,
+        itemBuilderType:
+        PaginateBuilderType.listView,
+        itemBuilder: (index, context, documentSnapshot)   {
+//        DocumentSnapshot ds = snapshot.data.documents[index];
+          String ownerId = documentSnapshot.data['ownerId'];
+          String prodId = documentSnapshot.data['prodId'];
+          String shopmediaUrl = documentSnapshot.data['shopmediaUrl'];
+          String productname = documentSnapshot.data['productname'];
+          String inr = documentSnapshot.data['inr'];
+          String usd = documentSnapshot.data['usd'];
+          String eur = documentSnapshot.data['eur'];
+          String gbp = documentSnapshot.data['gbp'];
+          return
+            FutureBuilder(
+              future: usersRef.document(ownerId).get(),
+              builder: (context, snapshot) {
+                if (!snapshot.hasData) {
+                  return circularProgress();
+                }
+                User user = User.fromDocument(snapshot.data);
+//          bool isPostOwner = currentUserId == ownerId;
+                return Column(
+                  children: <Widget>[
+                    GestureDetector(
+                      onTap: () => showProfile(context, profileId: user.id),
+                      child: ListTile(
+                        leading: CircleAvatar(
+                          backgroundImage: CachedNetworkImageProvider(user.photoUrl),
+                          backgroundColor: Colors.grey,
+                        ),
+                        title: Text(
+                          user.displayName,
+                          style: TextStyle(
+                            color: kText,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                    ),
+
+                    GestureDetector(
+                      onTap: () => Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => ProductScreen(
+                            prodId: prodId,
+                            userId: ownerId,
+                          ),
+                        ),
+                      ),
+                      child: Stack(
+                        alignment: Alignment.center,
+                        children: <Widget>[
+                          ClipRRect(
+                              borderRadius: BorderRadius.circular(20.0),child: cachedNetworkImage(shopmediaUrl)),
+                        ],),),
+                    df(productname:productname, usd:usd,inr:inr,eur:eur,gbp:gbp, prodId:prodId, ownerId:ownerId,),
+
+                    Divider(color: kGrey,),
+                  ],
+
+                );
+
+              },
+            );
+        },
+        query: Firestore.instance.collectionGroup('userProducts').orderBy('timestamp',descending: true)
+            .where('Gender',isEqualTo: 'Teen-Boys')
+            .where('indian', isEqualTo:false)
+
+    );
   }
   @override
   Widget build(BuildContext context) {
@@ -236,7 +308,7 @@ class _TeenBoyState extends State<TeenBoy> {
                   quarterTurns: 1,
                   child: TabBarView(
                       children:<Widget> [
-                        All(),
+                        Allin(),
                         TBEthnic(),
                         TopsGT(),
                         TCB(),

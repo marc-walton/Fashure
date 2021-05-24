@@ -32,6 +32,15 @@ class _SellerShopState extends State<SellerShop> {
           subtitle:            Text( "₹$inr",style: TextStyle(color: kText,
               fontSize: 20.0,
               fontWeight: FontWeight.bold)),
+trailing:                     FloatingActionButton.extended(heroTag:'editshop',onPressed: () => Navigator.push(
+  context,
+  MaterialPageRoute(
+    builder: (context) => EditShop(
+      prodId: prodId,
+      userId: ownerId,
+    ),
+  ),
+),icon: Icon(Icons.edit), label: Text('Edit',style: TextStyle(color:Colors.white),)),
 
         );
 
@@ -48,6 +57,15 @@ class _SellerShopState extends State<SellerShop> {
           subtitle:          Text( "\u0024 $usd",style: TextStyle(color: kText,
               fontSize: 20.0,
               fontWeight: FontWeight.bold)),
+          trailing:                     FloatingActionButton.extended(heroTag:'editshop',onPressed: () => Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => EditShop(
+                prodId: prodId,
+                userId: ownerId,
+              ),
+            ),
+          ),icon: Icon(Icons.edit), label: Text('Edit',style: TextStyle(color:Colors.white),)),
 
         );
 
@@ -65,6 +83,15 @@ class _SellerShopState extends State<SellerShop> {
           subtitle:           Text( "€ $eur",style: TextStyle(color: kText,
               fontSize: 20.0,
               fontWeight: FontWeight.bold)),
+          trailing:                     FloatingActionButton.extended(heroTag:'editshop',onPressed: () => Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => EditShop(
+                prodId: prodId,
+                userId: ownerId,
+              ),
+            ),
+          ),icon: Icon(Icons.edit), label: Text('Edit',style: TextStyle(color:Colors.white),)),
 
         );
 
@@ -81,6 +108,15 @@ class _SellerShopState extends State<SellerShop> {
           subtitle:                     Text( "£  $gbp ",style: TextStyle(color: kText,
               fontSize: 20.0,
               fontWeight: FontWeight.bold)),
+          trailing:                     FloatingActionButton.extended(heroTag:'editshop',onPressed: () => Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => EditShop(
+                prodId: prodId,
+                userId: ownerId,
+              ),
+            ),
+          ),icon: Icon(Icons.edit), label: Text('Edit',style: TextStyle(color:Colors.white),)),
 
 
         );
@@ -98,6 +134,15 @@ class _SellerShopState extends State<SellerShop> {
           subtitle:          Text( "\u0024 $usd",style: TextStyle(color: kText,
               fontSize: 20.0,
               fontWeight: FontWeight.bold)),
+          trailing:                     FloatingActionButton.extended(heroTag:'editshop',onPressed: () => Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => EditShop(
+                prodId: prodId,
+                userId: ownerId,
+              ),
+            ),
+          ),icon: Icon(Icons.edit), label: Text('Edit',style: TextStyle(color:Colors.white),)),
 
         );
 
@@ -167,7 +212,6 @@ class _SellerShopState extends State<SellerShop> {
                                 borderRadius: BorderRadius.circular(20.0),child: cachedNetworkImage(shopmediaUrl)),
                           ],),),
                       df(productname:productname, usd:usd,inr:inr,eur:eur,gbp:gbp, prodId:prodId, ownerId:ownerId,),
-
                       Divider(color: kGrey,),
                     ],
 

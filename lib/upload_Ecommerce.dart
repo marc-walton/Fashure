@@ -42,7 +42,7 @@ class Uploadecom extends StatefulWidget {
 class _UploadecomState extends State<Uploadecom>
     with AutomaticKeepAliveClientMixin<Uploadecom> {
   String value = 'None';
-
+bool worldship = true;
  TabController _tabController;
   ScrollController _controller;
   TextEditingController detailsController = TextEditingController();
@@ -90,6 +90,7 @@ TextEditingController Shoe19controller = TextEditingController();
 TextEditingController Shoe20controller = TextEditingController();
 TextEditingController Shoe21controller = TextEditingController();
 TextEditingController namecontroller = TextEditingController();
+TextEditingController shipcontroller = TextEditingController();
 
   File file;
   bool isUploading = false;
@@ -97,8 +98,8 @@ TextEditingController namecontroller = TextEditingController();
   List<String> selectedSizes = <String>[];
 
   String dropdownValue = 'Women';
+bool indian = false;
 
-//  var colorOptions = ['Blue ', 'yellow', 'red','brown','pink','green','black','grey','white','Neutral',];
   final scaffoldKey = new GlobalKey<ScaffoldState>();
   final _formKey = GlobalKey<FormState>();
   bool _inProcess = false;
@@ -196,27 +197,6 @@ TextEditingController namecontroller = TextEditingController();
     }
   }
 
-  // handleTakePhoto() async {
-  //   Navigator.pop(context);
-  //   File file = await ImagePicker.pickImage(
-  //     source: ImageSource.camera,
-  //     maxHeight: 400,
-  //     maxWidth: 600,
-  //   );
-  //   setState(() {
-  //     this.file = file;
-  //   });
-  // }
-
-  // handleChooseFromGallery() async {
-  //   Navigator.pop(context);
-  //   File file = await ImagePicker.pickImage(source: ImageSource.gallery,
-  //     maxHeight: 400,
-  //     maxWidth: 600,);
-  //   setState(() {
-  //     this.file = file;
-  //   });
-  // }
 
   selectImage() {
     return showDialog(
@@ -645,7 +625,8 @@ setState(() {
     var eurtousd,
     var eurtocny,
     var eurtogbp,
-
+bool world,
+   String     ship,
   }) {
     if(dropdownValue=='Men'){
       if (currentUser.country == 'India') {
@@ -654,6 +635,9 @@ setState(() {
             .collection("userProducts")
             .document(prodId)
             .setData({
+          "indian":indian,
+          "worldship":world,
+          "shipment": ship,
           "prodId": prodId,
           "ownerId": widget.currentUser.id,
           "username": widget.currentUser.displayName,
@@ -723,87 +707,14 @@ setState(() {
           // isUploading = false;
         });
       }
-      else if (currentUser.country == 'China') {
-        productsRef
-            .document(widget.currentUser.id)
-            .collection("userProducts")
-            .document(prodId)
-            .setData({
-          "prodId": prodId,
-          "ownerId": widget.currentUser.id,
-          "username": widget.currentUser.displayName,
-          "photoUrl": widget.currentUser.photoUrl,
-          "displayName": widget.currentUser.displayName,
-          "shopmediaUrl": shopmediaUrl,
-          "Category": Category,
-          // "type":type,
-          "Gender": gender,
-          "details": details,
-          "productname": productname,
-          "usd": cnytousd.toString(),
-          "cny": price.toString(),
-          "gbp": cnytogbp.toString(),
-          "eur": cnytoeur.toString(),
-          "inr": cnytoinr.toString(),
-          "color": color,
-          "composition": composition,
-          "washandcare": washandcare,
-          "sizeandfit": sizeandfit,
-          "timestamp": timestamp,
-          "freesizeQuantity": freesizeQuantity,
-          "xxxsQuantity": xxxsQuantity,
-          "xxsQuantity": xxsQuantity,
-          "xsQuantity": xsQuantity,
-          "sQuantity": sQuantity,
-          "mQuantity": mQuantity,
-          "lQuantity": lQuantity,
-          "xlQuantity": xlQuantity,
-          "xxlQuantity": xxlQuantity,
-          "xxxlQuantity": xxxlQuantity,
-          "4xlQuantity": fourxlQuantity,
-          "5xlQuantity": fivexlQuantity,
-          "6xlQuantity": sixxlQuantity,
-          "7xlQuantity": sevenxlQuantity,
-          "8xlQuantity": eightxlQuantity,
-          "Shoe1":Shoe1,
-          "Shoe2":Shoe2,
-          "Shoe3":Shoe3,
-          "Shoe4":Shoe4,
-          "Shoe5":Shoe5,
-          "Shoe6":Shoe6,
-          "Shoe7":Shoe7,
-          "Shoe8":Shoe8,
-          "Shoe9":Shoe9,
-          "Shoe10":Shoe10,
-          "Shoe11":Shoe11,
-          "Shoe12":Shoe12,
-          "Shoe13":Shoe13,
-          "Shoe14":Shoe14,
-          "Shoe15":Shoe15,
-          "Shoe16":Shoe16,
-          "Shoe17":Shoe17,
-          "Shoe18":Shoe18,
-          "Shoe19":Shoe19,
-          "Shoe20":Shoe20,
-          "Shoe21":Shoe21,
-          "mtoQuantity": mtoQuantity,
-          "likes": {},
-        });
-
-
-
-
-        setState(() {
-          file = null;
-          isUploading = false;
-        });
-      }
       else if (currentUser.country == 'Europe'){
         productsRef
             .document(widget.currentUser.id)
             .collection("userProducts")
             .document(prodId)
-            .setData({
+            .setData({          "indian":indian,
+          "worldship":world,
+          "shipment": ship,
           "prodId": prodId,
           "ownerId": widget.currentUser.id,
           "username": widget.currentUser.displayName,
@@ -877,7 +788,9 @@ setState(() {
             .document(widget.currentUser.id)
             .collection("userProducts")
             .document(prodId)
-            .setData({
+            .setData({          "indian":indian,
+          "worldship":world,
+          "shipment": ship,
           "prodId": prodId,
           "ownerId": widget.currentUser.id,
           "username": widget.currentUser.displayName,
@@ -949,7 +862,9 @@ setState(() {
             .document(widget.currentUser.id)
             .collection("userProducts")
             .document(prodId)
-            .setData({
+            .setData({          "indian":indian,
+          "worldship":world,
+          "shipment": ship,
           "prodId": prodId,
           "ownerId": widget.currentUser.id,
           "username": widget.currentUser.displayName,
@@ -1022,7 +937,9 @@ setState(() {
             .document(widget.currentUser.id)
             .collection("userProducts")
             .document(prodId)
-            .setData({
+            .setData({          "indian":indian,
+          "worldship":world,
+          "shipment": ship,
           "prodId": prodId,
           "ownerId": widget.currentUser.id,
           "username": widget.currentUser.displayName,
@@ -1097,7 +1014,9 @@ setState(() {
             .document(widget.currentUser.id)
             .collection("userProducts")
             .document(prodId)
-            .setData({
+            .setData({          "indian":indian,
+          "worldship":world,
+          "shipment": ship,
           "prodId": prodId,
           "ownerId": widget.currentUser.id,
           "username": widget.currentUser.displayName,
@@ -1161,81 +1080,14 @@ setState(() {
           isUploading = false;
         });
       }
-      else if (currentUser.country == 'China') {
-        productsRef
-            .document(widget.currentUser.id)
-            .collection("userProducts")
-            .document(prodId)
-            .setData({
-          "prodId": prodId,
-          "ownerId": widget.currentUser.id,
-          "username": widget.currentUser.displayName,
-          "photoUrl": widget.currentUser.photoUrl,
-          "displayName": widget.currentUser.displayName,
-          "shopmediaUrl": shopmediaUrl,
-          "Category": Category,
-          // "type":type,
-          "Gender": gender,
-          "details": details,
-          "productname": productname,
-          "usd": cnytousd.toString(),
-          "cny": price.toString(),
-          "gbp": cnytogbp.toString(),
-          "eur": cnytoeur.toString(),
-          "inr": cnytoinr.toString(),
-          "color": color,
-          "composition": composition,
-          "washandcare": washandcare,
-          "sizeandfit": sizeandfit,
-          "timestamp": timestamp,
-          "freesizeQuantity": freesizeQuantity,
-          "xxxsQuantity": xxxsQuantity,
-          "xxsQuantity": xxsQuantity,
-          "xsQuantity": xsQuantity,
-          "sQuantity": sQuantity,
-          "mQuantity": mQuantity,
-          "lQuantity": lQuantity,
-          "xlQuantity": xlQuantity,
-          "xxlQuantity": xxlQuantity,
-          "xxxlQuantity": xxxlQuantity,
-          "4xlQuantity": fourxlQuantity,
-          "5xlQuantity": fivexlQuantity,
-          "6xlQuantity": sixxlQuantity,
-          "7xlQuantity": sevenxlQuantity,
-          "8xlQuantity": eightxlQuantity,
-          "Shoe1":Shoe1,
-          "Shoe2":Shoe2,
-          "Shoe3":Shoe3,
-          "Shoe4":Shoe4,
-          "Shoe5":Shoe5,
-          "Shoe6":Shoe6,
-          "Shoe7":Shoe7,
-          "Shoe8":Shoe8,
-          "Shoe9":Shoe9,
-          "Shoe10":Shoe10,
-          "Shoe11":Shoe11,
-          "Shoe12":Shoe12,
-          "Shoe13":Shoe13,
-          "Shoe14":Shoe14,
-          "Shoe15":Shoe15,
-          "Shoe16":Shoe16,
-
-          "mtoQuantity": mtoQuantity,
-          "likes": {},
-        });
-
-
-        setState(() {
-          file = null;
-          isUploading = false;
-        });
-      }
       else if (currentUser.country == 'Europe'){
         productsRef
             .document(widget.currentUser.id)
             .collection("userProducts")
             .document(prodId)
-            .setData({
+            .setData({          "indian":indian,
+          "worldship":world,
+          "shipment": ship,
           "prodId": prodId,
           "ownerId": widget.currentUser.id,
           "username": widget.currentUser.displayName,
@@ -1304,7 +1156,9 @@ setState(() {
             .document(widget.currentUser.id)
             .collection("userProducts")
             .document(prodId)
-            .setData({
+            .setData({          "indian":indian,
+          "worldship":world,
+          "shipment": ship,
           "prodId": prodId,
           "ownerId": widget.currentUser.id,
           "username": widget.currentUser.displayName,
@@ -1372,7 +1226,9 @@ setState(() {
             .document(widget.currentUser.id)
             .collection("userProducts")
             .document(prodId)
-            .setData({
+            .setData({          "indian":indian,
+          "worldship":world,
+          "shipment": ship,
           "prodId": prodId,
           "ownerId": widget.currentUser.id,
           "username": widget.currentUser.displayName,
@@ -1441,7 +1297,9 @@ setState(() {
             .document(widget.currentUser.id)
             .collection("userProducts")
             .document(prodId)
-            .setData({
+            .setData({          "indian":indian,
+          "worldship":world,
+          "shipment": ship,
           "prodId": prodId,
           "ownerId": widget.currentUser.id,
           "username": widget.currentUser.displayName,
@@ -1512,7 +1370,9 @@ setState(() {
             .document(widget.currentUser.id)
             .collection("userProducts")
             .document(prodId)
-            .setData({
+            .setData({          "indian":indian,
+          "worldship":world,
+          "shipment": ship,
           "prodId": prodId,
           "ownerId": widget.currentUser.id,
           "username": widget.currentUser.displayName,
@@ -1562,67 +1422,14 @@ setState(() {
           isUploading = false;
         });
       }
-      else if (currentUser.country == 'China'){
-        productsRef
-            .document(widget.currentUser.id)
-            .collection("userProducts")
-            .document(prodId)
-            .setData({
-          "prodId": prodId,
-          "ownerId": widget.currentUser.id,
-          "username": widget.currentUser.displayName,
-          "photoUrl": widget.currentUser.photoUrl,
-          "displayName": widget.currentUser.displayName,
-          "shopmediaUrl": shopmediaUrl,
-          "Category": Category,
-          // "type":type,
-          "Gender": gender,
-          "details": details,
-          "productname": productname,
-          "usd": cnytousd.toString(),
-          "cny": price.toString(),
-          "gbp": cnytogbp.toString(),
-          "eur": cnytoeur.toString(),
-          "inr": cnytoinr.toString(),
-          "color": color,
-          "composition": composition,
-          "washandcare": washandcare,
-          "sizeandfit": sizeandfit,
-          "timestamp": timestamp,
-          "freesizeQuantity": freesizeQuantity,
-          "xxxsQuantity": xxxsQuantity,
-          "xxsQuantity": xxsQuantity,
-          "xsQuantity": xsQuantity,
-          "sQuantity": sQuantity,
-          "mQuantity": mQuantity,
-          "lQuantity": lQuantity,
-
-
-          "Shoe1":Shoe1,
-          "Shoe2":Shoe2,
-          "Shoe3":Shoe3,
-          "Shoe4":Shoe4,
-          "Shoe5":Shoe5,
-          "Shoe6":Shoe6,
-          "Shoe7":Shoe7,
-
-          "mtoQuantity": mtoQuantity,
-          "likes": {},
-        });
-
-
-
-        setState(() {
-          file = null;
-          isUploading = false;
-        });
-      }
       else if (currentUser.country == 'Europe') {
         productsRef
             .document(widget.currentUser.id)
             .collection("userProducts")
             .document(prodId)
-            .setData({
+            .setData({          "indian":indian,
+          "worldship":world,
+          "shipment": ship,
           "prodId": prodId,
           "ownerId": widget.currentUser.id,
           "username": widget.currentUser.displayName,
@@ -1675,7 +1482,9 @@ setState(() {
             .document(widget.currentUser.id)
             .collection("userProducts")
             .document(prodId)
-            .setData({
+            .setData({          "indian":indian,
+          "worldship":world,
+          "shipment": ship,
           "prodId": prodId,
           "ownerId": widget.currentUser.id,
           "username": widget.currentUser.displayName,
@@ -1729,7 +1538,9 @@ setState(() {
             .document(widget.currentUser.id)
             .collection("userProducts")
             .document(prodId)
-            .setData({
+            .setData({          "indian":indian,
+          "worldship":world,
+          "shipment": ship,
           "prodId": prodId,
           "ownerId": widget.currentUser.id,
           "username": widget.currentUser.displayName,
@@ -1784,7 +1595,9 @@ setState(() {
             .document(widget.currentUser.id)
             .collection("userProducts")
             .document(prodId)
-            .setData({
+            .setData({          "indian":indian,
+          "worldship":world,
+          "shipment": ship,
           "prodId": prodId,
           "ownerId": widget.currentUser.id,
           "username": widget.currentUser.displayName,
@@ -1842,6 +1655,9 @@ setState(() {
             .collection("userProducts")
             .document(prodId)
             .setData({
+          "indian":indian,
+          "worldship":world,
+          "shipment": ship,
           "prodId": prodId,
           "ownerId": widget.currentUser.id,
           "username": widget.currentUser.displayName,
@@ -1900,76 +1716,14 @@ setState(() {
           isUploading = false;
         });
       }
-      else if (currentUser.country == 'China') {
-        productsRef
-            .document(widget.currentUser.id)
-            .collection("userProducts")
-            .document(prodId)
-            .setData({
-          "prodId": prodId,
-          "ownerId": widget.currentUser.id,
-          "username": widget.currentUser.displayName,
-          "photoUrl": widget.currentUser.photoUrl,
-          "displayName": widget.currentUser.displayName,
-          "shopmediaUrl": shopmediaUrl,
-          "Category": Category,
-          // "type":type,
-          "Gender": gender,
-          "details": details,
-          "productname": productname,
-          "usd": cnytousd.toString(),
-          "cny": price.toString(),
-          "gbp": cnytogbp.toString(),
-          "eur": cnytoeur.toString(),
-          "inr": cnytoinr.toString(),
-          "color": color,
-          "composition": composition,
-          "washandcare": washandcare,
-          "sizeandfit": sizeandfit,
-          "timestamp": timestamp,
-          "freesizeQuantity": freesizeQuantity,
-          "xxxsQuantity": xxxsQuantity,
-          "xxsQuantity": xxsQuantity,
-          "xsQuantity": xsQuantity,
-          "sQuantity": sQuantity,
-          "mQuantity": mQuantity,
-          "lQuantity": lQuantity,
-          "xlQuantity": xlQuantity,
-          "xxlQuantity": xxlQuantity,
-          "xxxlQuantity": xxxlQuantity,
-          "4xlQuantity": fourxlQuantity,
-
-          "Shoe1":Shoe1,
-          "Shoe2":Shoe2,
-          "Shoe3":Shoe3,
-          "Shoe4":Shoe4,
-          "Shoe5":Shoe5,
-          "Shoe6":Shoe6,
-          "Shoe7":Shoe7,
-          "Shoe8":Shoe8,
-          "Shoe9":Shoe9,
-          "Shoe10":Shoe10,
-          "Shoe11":Shoe11,
-          "Shoe12":Shoe12,
-          "Shoe13":Shoe13,
-          "Shoe14":Shoe14,
-
-          "mtoQuantity": mtoQuantity,
-          "likes": {},
-        });
-
-
-        setState(() {
-          file = null;
-          isUploading = false;
-        });
-      }
       else if (currentUser.country == 'Europe') {
         productsRef
             .document(widget.currentUser.id)
             .collection("userProducts")
             .document(prodId)
-            .setData({
+            .setData({          "indian":indian,
+          "worldship":world,
+          "shipment": ship,
           "prodId": prodId,
           "ownerId": widget.currentUser.id,
           "username": widget.currentUser.displayName,
@@ -2034,6 +1788,10 @@ setState(() {
             .collection("userProducts")
             .document(prodId)
             .setData({
+          "worldship":world,
+          "shipment": ship,
+          "indian":indian,
+
           "prodId": prodId,
           "ownerId": widget.currentUser.id,
           "username": widget.currentUser.displayName,
@@ -2099,7 +1857,9 @@ setState(() {
             .document(widget.currentUser.id)
             .collection("userProducts")
             .document(prodId)
-            .setData({
+            .setData({          "indian":indian,
+          "worldship":world,
+          "shipment": ship,
           "prodId": prodId,
           "ownerId": widget.currentUser.id,
           "username": widget.currentUser.displayName,
@@ -2163,7 +1923,9 @@ setState(() {
             .document(widget.currentUser.id)
             .collection("userProducts")
             .document(prodId)
-            .setData({
+            .setData({          "indian":indian,
+          "worldship":world,
+          "shipment": ship,
           "prodId": prodId,
           "ownerId": widget.currentUser.id,
           "username": widget.currentUser.displayName,
@@ -2230,6 +1992,9 @@ setState(() {
             .collection("userProducts")
             .document(prodId)
             .setData({
+          "indian":indian,
+          "worldship":world,
+          "shipment": ship,
           "prodId": prodId,
           "ownerId": widget.currentUser.id,
           "username": widget.currentUser.displayName,
@@ -2272,63 +2037,14 @@ setState(() {
           isUploading = false;
         });
       }
-      else if (currentUser.country == 'China') {
-        productsRef
-            .document(widget.currentUser.id)
-            .collection("userProducts")
-            .document(prodId)
-            .setData({
-          "prodId": prodId,
-          "ownerId": widget.currentUser.id,
-          "username": widget.currentUser.displayName,
-          "photoUrl": widget.currentUser.photoUrl,
-          "displayName": widget.currentUser.displayName,
-          "shopmediaUrl": shopmediaUrl,
-          "Category": Category,
-          // "type":type,
-          "Gender": gender,
-          "details": details,
-          "productname": productname,
-          "usd": cnytousd.toString(),
-          "cny": price.toString(),
-          "gbp": cnytogbp.toString(),
-          "eur": cnytoeur.toString(),
-          "inr": cnytoinr.toString(),
-          "color": color,
-          "composition": composition,
-          "washandcare": washandcare,
-          "sizeandfit": sizeandfit,
-          "timestamp": timestamp,
-          "freesizeQuantity": freesizeQuantity,
-          "xxxsQuantity": xxxsQuantity,
-          "xxsQuantity": xxsQuantity,
-          "xsQuantity": xsQuantity,
-          "sQuantity": sQuantity,
-
-          "Shoe1":Shoe1,
-          "Shoe2":Shoe2,
-          "Shoe3":Shoe3,
-          "Shoe4":Shoe4,
-
-
-          "mtoQuantity": mtoQuantity,
-          "likes": {},
-        });
-
-
-
-
-        setState(() {
-          file = null;
-          isUploading = false;
-        });
-      }
       else if (currentUser.country == 'Europe'){
         productsRef
             .document(widget.currentUser.id)
             .collection("userProducts")
             .document(prodId)
-            .setData({
+            .setData({          "indian":indian,
+          "worldship":world,
+          "shipment": ship,
           "prodId": prodId,
           "ownerId": widget.currentUser.id,
           "username": widget.currentUser.displayName,
@@ -2378,7 +2094,9 @@ setState(() {
             .document(widget.currentUser.id)
             .collection("userProducts")
             .document(prodId)
-            .setData({
+            .setData({          "indian":indian,
+          "worldship":world,
+          "shipment": ship,
           "prodId": prodId,
           "ownerId": widget.currentUser.id,
           "username": widget.currentUser.displayName,
@@ -2428,7 +2146,9 @@ setState(() {
             .document(widget.currentUser.id)
             .collection("userProducts")
             .document(prodId)
-            .setData({
+            .setData({          "indian":indian,
+          "worldship":world,
+          "shipment": ship,
           "prodId": prodId,
           "ownerId": widget.currentUser.id,
           "username": widget.currentUser.displayName,
@@ -2479,7 +2199,9 @@ setState(() {
             .document(widget.currentUser.id)
             .collection("userProducts")
             .document(prodId)
-            .setData({
+            .setData({          "indian":indian,
+          "worldship":world,
+          "shipment": ship,
           "prodId": prodId,
           "ownerId": widget.currentUser.id,
           "username": widget.currentUser.displayName,
@@ -2579,8 +2301,8 @@ setState(() {
         await createProdInFirestore(
           shopmediaUrl: shopmediaUrl,
           Category: value,
-          // type: value1 ,
-          gender: dropdownValue,
+          world:worldship,
+          ship: shipcontroller.text,          gender: dropdownValue,
           // selectedSizes: selectedSizes,
           details: detailsController.text,
           productname: productnameController.text,
@@ -2639,73 +2361,12 @@ setState(() {
 
         );
       }
-      else if (currentUser.country == 'China') {
-        createProdInFirestore(
-          shopmediaUrl: shopmediaUrl,
-          Category: value,
-          // type: value1 ,
-          gender: dropdownValue,
-          // selectedSizes: selectedSizes,
-          details: detailsController.text,
-          productname: productnameController.text,
-          price: userprice,
-          cnytoinr:cnytoinr,
-          cnytousd:cnytousd,
-          cnytogbp:cnytogbp,
-          cnytoeur:cnytoeur,
-          color: colorController.text,
-          composition: compositionController.text,
-          washandcare: washandcareController.text,
-          sizeandfit: sizeandfitController.text,
-          xxxsQuantity: int.tryParse(xxxscontroller.text) ?? 0,
-          xxsQuantity: int.tryParse(xxscontroller.text) ?? 0,
-          xsQuantity:  int.tryParse(xscontroller.text )?? 0,
-          sQuantity: int.tryParse(scontroller.text) ?? 0,
-
-          mtoQuantity:  int.tryParse(mtocontroller.text) ?? 0,
-          freesizeQuantity:   int.tryParse(freesizecontroller.text) ?? 0,
-
-
-          mQuantity:  int.tryParse(mcontroller.text) ?? 0,
-          lQuantity:  int.tryParse(lcontroller.text) ?? 0,
-          xlQuantity:  int.tryParse(xlcontroller.text) ?? 0,
-          xxlQuantity:  int.tryParse(xxlcontroller.text) ?? 0,
-          xxxlQuantity:  int.tryParse(xxlcontroller.text) ?? 0,
-          fourxlQuantity:  int.tryParse(fourxlcontroller.text) ?? 0,
-          fivexlQuantity:  int.tryParse(fivexlcontroller.text) ?? 0,
-          sixxlQuantity:  int.tryParse(sixxlcontroller.text) ?? 0,
-          sevenxlQuantity:  int.tryParse(sevenxlcontroller.text) ?? 0,
-          eightxlQuantity:  int.tryParse(eightxlcontroller.text) ?? 0,
-          Shoe1:   int.tryParse(Shoe1controller.text) ?? 0,
-          Shoe2:   int.tryParse(Shoe2controller.text) ?? 0,
-          Shoe3:   int.tryParse(Shoe3controller.text) ?? 0,
-          Shoe4:   int.tryParse(Shoe4controller.text) ?? 0,
-          Shoe5:   int.tryParse(Shoe5controller.text) ?? 0,
-          Shoe6:   int.tryParse(Shoe6controller.text) ?? 0,
-          Shoe7:   int.tryParse(Shoe7controller.text) ?? 0,
-          Shoe8:   int.tryParse(Shoe8controller.text) ?? 0,
-          Shoe9:   int.tryParse(Shoe9controller.text) ?? 0,
-          Shoe10:   int.tryParse(Shoe10controller.text) ?? 0,
-          Shoe11:   int.tryParse(Shoe11controller.text) ?? 0,
-          Shoe12:   int.tryParse(Shoe12controller.text) ?? 0,
-          Shoe13:   int.tryParse(Shoe13controller.text) ?? 0,
-          Shoe14:   int.tryParse(Shoe14controller.text) ?? 0,
-          Shoe15:  int.tryParse(Shoe15controller.text) ?? 0,
-          Shoe16:  int.tryParse(Shoe16controller.text) ?? 0,
-          Shoe17:  int.tryParse(Shoe17controller.text) ?? 0,
-          Shoe18:  int.tryParse(Shoe18controller.text) ?? 0,
-          Shoe19:  int.tryParse(Shoe19controller.text) ?? 0,
-          Shoe20:  int.tryParse(Shoe20controller.text) ?? 0,
-          Shoe21:  int.tryParse(Shoe21controller.text) ?? 0,
-
-        );
-      }
       else if (currentUser.country == 'Europe'){
         createProdInFirestore(
           shopmediaUrl: shopmediaUrl,
           Category: value,
-          // type: value1 ,
-          gender: dropdownValue,
+          world:worldship,
+          ship: shipcontroller.text,          gender: dropdownValue,
           // selectedSizes: selectedSizes,
           details: detailsController.text,
           productname: productnameController.text,
@@ -2765,8 +2426,8 @@ setState(() {
         createProdInFirestore(
           shopmediaUrl: shopmediaUrl,
           Category: value,
-          // type: value1 ,
-          gender: dropdownValue,
+          world:worldship,
+          ship: shipcontroller.text,          gender: dropdownValue,
           // selectedSizes: selectedSizes,
           details: detailsController.text,
           productname: productnameController.text,
@@ -2827,8 +2488,8 @@ setState(() {
         createProdInFirestore(
           shopmediaUrl: shopmediaUrl,
           Category: value,
-          // type: value1 ,
-          gender: dropdownValue,
+          world:worldship,
+          ship: shipcontroller.text,          gender: dropdownValue,
           // selectedSizes: selectedSizes,
           details: detailsController.text,
           productname: productnameController.text,
@@ -2888,8 +2549,8 @@ setState(() {
         createProdInFirestore(
           shopmediaUrl: shopmediaUrl,
           Category: value,
-          // type: value1 ,
-          gender: dropdownValue,
+          world:worldship,
+          ship: shipcontroller.text,          gender: dropdownValue,
           // selectedSizes: selectedSizes,
           details: detailsController.text,
           productname: productnameController.text,
@@ -2953,8 +2614,8 @@ setState(() {
         createProdInFirestore(
           shopmediaUrl: shopmediaUrl,
           Category: value,
-          // type: value1 ,
-          gender: dropdownValue,
+          world:worldship,
+          ship: shipcontroller.text,          gender: dropdownValue,
           details: detailsController.text,
           productname: productnameController.text,
           price: userprice,
@@ -3005,68 +2666,12 @@ setState(() {
 
         );
             }
-      else if (currentUser.country == 'China')  {
-        createProdInFirestore(
-          shopmediaUrl: shopmediaUrl,
-          Category: value,
-          // type: value1 ,
-          gender: dropdownValue,
-          details: detailsController.text,
-          productname: productnameController.text,
-          price: userprice,
-          cnytoinr:cnytoinr,
-          cnytousd:cnytousd,
-          cnytogbp:cnytogbp,
-          cnytoeur:cnytoeur,
-          color: colorController.text,
-          composition: compositionController.text,
-          washandcare: washandcareController.text,
-          sizeandfit: sizeandfitController.text,
-          xxxsQuantity: int.tryParse(xxxscontroller.text) ?? 0,
-          xxsQuantity: int.tryParse(xxscontroller.text) ?? 0,
-          xsQuantity:  int.tryParse(xscontroller.text )?? 0,
-          sQuantity: int.tryParse(scontroller.text) ?? 0,
-
-          mtoQuantity:  int.tryParse(mtocontroller.text) ?? 0,
-          freesizeQuantity:   int.tryParse(freesizecontroller.text) ?? 0,
-
-
-          mQuantity:  int.tryParse(mcontroller.text) ?? 0,
-          lQuantity:  int.tryParse(lcontroller.text) ?? 0,
-          xlQuantity:  int.tryParse(xlcontroller.text) ?? 0,
-          xxlQuantity:  int.tryParse(xxlcontroller.text) ?? 0,
-          xxxlQuantity:  int.tryParse(xxlcontroller.text) ?? 0,
-          fourxlQuantity:  int.tryParse(fourxlcontroller.text) ?? 0,
-          fivexlQuantity:  int.tryParse(fivexlcontroller.text) ?? 0,
-          sixxlQuantity:  int.tryParse(sixxlcontroller.text) ?? 0,
-          sevenxlQuantity:  int.tryParse(sevenxlcontroller.text) ?? 0,
-          eightxlQuantity:  int.tryParse(eightxlcontroller.text) ?? 0,
-          Shoe1:   int.tryParse(Shoe1controller.text) ?? 0,
-          Shoe2:   int.tryParse(Shoe2controller.text) ?? 0,
-          Shoe3:   int.tryParse(Shoe3controller.text) ?? 0,
-          Shoe4:   int.tryParse(Shoe4controller.text) ?? 0,
-          Shoe5:   int.tryParse(Shoe5controller.text) ?? 0,
-          Shoe6:   int.tryParse(Shoe6controller.text) ?? 0,
-          Shoe7:   int.tryParse(Shoe7controller.text) ?? 0,
-          Shoe8:   int.tryParse(Shoe8controller.text) ?? 0,
-          Shoe9:   int.tryParse(Shoe9controller.text) ?? 0,
-          Shoe10:   int.tryParse(Shoe10controller.text) ?? 0,
-          Shoe11:   int.tryParse(Shoe11controller.text) ?? 0,
-          Shoe12:   int.tryParse(Shoe12controller.text) ?? 0,
-          Shoe13:   int.tryParse(Shoe13controller.text) ?? 0,
-          Shoe14:   int.tryParse(Shoe14controller.text) ?? 0,
-          Shoe15:  int.tryParse(Shoe15controller.text) ?? 0,
-          Shoe16:  int.tryParse(Shoe16controller.text) ?? 0,
-
-
-        );
-    }
       else if (currentUser.country == 'Europe')  {
         createProdInFirestore(
           shopmediaUrl: shopmediaUrl,
           Category: value,
-          // type: value1 ,
-          gender: dropdownValue,
+          world:worldship,
+          ship: shipcontroller.text,          gender: dropdownValue,
           details: detailsController.text,
           productname: productnameController.text,
           price: userprice,
@@ -3121,8 +2726,8 @@ setState(() {
         createProdInFirestore(
           shopmediaUrl: shopmediaUrl,
           Category: value,
-          // type: value1 ,
-          gender: dropdownValue,
+          world:worldship,
+          ship: shipcontroller.text,          gender: dropdownValue,
           details: detailsController.text,
           productname: productnameController.text,
           price: userprice,
@@ -3177,8 +2782,8 @@ setState(() {
         createProdInFirestore(
           shopmediaUrl: shopmediaUrl,
           Category: value,
-          // type: value1 ,
-          gender: dropdownValue,
+          world:worldship,
+          ship: shipcontroller.text,          gender: dropdownValue,
           details: detailsController.text,
           productname: productnameController.text,
           price: userprice,
@@ -3233,8 +2838,8 @@ setState(() {
         createProdInFirestore(
           shopmediaUrl: shopmediaUrl,
           Category: value,
-          // type: value1 ,
-          gender: dropdownValue,
+          world:worldship,
+          ship: shipcontroller.text,          gender: dropdownValue,
           details: detailsController.text,
           productname: productnameController.text,
           price: userprice,
@@ -3292,8 +2897,8 @@ setState(() {
         createProdInFirestore(
           shopmediaUrl: shopmediaUrl,
           Category: value,
-          // type: value1 ,
-          gender: dropdownValue,
+          world:worldship,
+          ship: shipcontroller.text,          gender: dropdownValue,
           details: detailsController.text,
           productname: productnameController.text,
           price: userprice,
@@ -3327,50 +2932,12 @@ setState(() {
 
         );
             }
-      else if (currentUser.country == 'China') {
-        createProdInFirestore(
-          shopmediaUrl: shopmediaUrl,
-          Category: value,
-          // type: value1 ,
-          gender: dropdownValue,
-          details: detailsController.text,
-          productname: productnameController.text,
-          price: userprice,
-          cnytoinr:cnytoinr,
-          cnytousd:cnytousd,
-          cnytogbp:cnytogbp,
-          cnytoeur:cnytoeur,
-          color: colorController.text,
-          composition: compositionController.text ?? "",
-          washandcare: washandcareController.text ?? "",
-          sizeandfit: sizeandfitController.text ?? "",
-          xxxsQuantity: int.tryParse(xxxscontroller.text) ?? 0,
-          xxsQuantity: int.tryParse(xxscontroller.text) ?? 0,
-          xsQuantity:  int.tryParse(xscontroller.text )?? 0,
-          sQuantity: int.tryParse(scontroller.text) ?? 0,
-          mQuantity:  int.tryParse(mcontroller.text) ?? 0,
-          lQuantity:  int.tryParse(lcontroller.text) ?? 0,
-
-          mtoQuantity:  int.tryParse(mtocontroller.text) ?? 0,
-          freesizeQuantity:   int.tryParse(freesizecontroller.text) ?? 0,
-          Shoe1:   int.tryParse(Shoe1controller.text) ?? 0,
-          Shoe2:   int.tryParse(Shoe2controller.text) ?? 0,
-          Shoe3:   int.tryParse(Shoe3controller.text) ?? 0,
-          Shoe4:   int.tryParse(Shoe4controller.text) ?? 0,
-          Shoe5:   int.tryParse(Shoe5controller.text) ?? 0,
-          Shoe6:   int.tryParse(Shoe6controller.text) ?? 0,
-          Shoe7:   int.tryParse(Shoe7controller.text) ?? 0,
-
-
-
-        );
-            }
       else if (currentUser.country == 'Europe') {
         createProdInFirestore(
           shopmediaUrl: shopmediaUrl,
           Category: value,
-          // type: value1 ,
-          gender: dropdownValue,
+          world:worldship,
+          ship: shipcontroller.text,          gender: dropdownValue,
           details: detailsController.text,
           productname: productnameController.text,
           price: userprice,
@@ -3406,8 +2973,8 @@ setState(() {
         createProdInFirestore(
           shopmediaUrl: shopmediaUrl,
           Category: value,
-          // type: value1 ,
-          gender: dropdownValue,
+          world:worldship,
+          ship: shipcontroller.text,          gender: dropdownValue,
           details: detailsController.text,
           productname: productnameController.text,
           price: userprice,
@@ -3442,8 +3009,8 @@ setState(() {
         createProdInFirestore(
           shopmediaUrl: shopmediaUrl,
           Category: value,
-          // type: value1 ,
-          gender: dropdownValue,
+          world:worldship,
+          ship: shipcontroller.text,          gender: dropdownValue,
           details: detailsController.text,
           productname: productnameController.text,
           price: userprice,
@@ -3479,8 +3046,8 @@ setState(() {
         createProdInFirestore(
           shopmediaUrl: shopmediaUrl,
           Category: value,
-          // type: value1 ,
-          gender: dropdownValue,
+          world:worldship,
+          ship: shipcontroller.text,          gender: dropdownValue,
           details: detailsController.text,
           productname: productnameController.text,
           price: userprice,
@@ -3519,8 +3086,8 @@ setState(() {
         createProdInFirestore(
           shopmediaUrl: shopmediaUrl,
           Category: value,
-          // type: value1 ,
-          gender: dropdownValue,
+          world:worldship,
+          ship: shipcontroller.text,          gender: dropdownValue,
           details: detailsController.text,
           productname: productnameController.text,
           price: userprice,
@@ -3528,58 +3095,6 @@ setState(() {
           inrtocny: inrtocny,
           inrtogbp: inrtogbp,
           inrtoeur: inrtoeur,
-          color: colorController.text,
-          composition: compositionController.text,
-          washandcare: washandcareController.text,
-          sizeandfit: sizeandfitController.text,
-          xxxsQuantity: int.tryParse(xxxscontroller.text) ?? 0,
-          xxsQuantity: int.tryParse(xxscontroller.text) ?? 0,
-          xsQuantity:  int.tryParse(xscontroller.text )?? 0,
-          sQuantity: int.tryParse(scontroller.text) ?? 0,
-
-          mtoQuantity:  int.tryParse(mtocontroller.text) ?? 0,
-          freesizeQuantity:   int.tryParse(freesizecontroller.text) ?? 0,
-
-
-          mQuantity:  int.tryParse(mcontroller.text) ?? 0,
-          lQuantity:  int.tryParse(lcontroller.text) ?? 0,
-          xlQuantity:  int.tryParse(xlcontroller.text) ?? 0,
-          xxlQuantity:  int.tryParse(xxlcontroller.text) ?? 0,
-          xxxlQuantity:  int.tryParse(xxlcontroller.text) ?? 0,
-          fourxlQuantity:  int.tryParse(fourxlcontroller.text) ?? 0,
-
-          Shoe1:   int.tryParse(Shoe1controller.text) ?? 0,
-          Shoe2:   int.tryParse(Shoe2controller.text) ?? 0,
-          Shoe3:   int.tryParse(Shoe3controller.text) ?? 0,
-          Shoe4:   int.tryParse(Shoe4controller.text) ?? 0,
-          Shoe5:   int.tryParse(Shoe5controller.text) ?? 0,
-          Shoe6:   int.tryParse(Shoe6controller.text) ?? 0,
-          Shoe7:   int.tryParse(Shoe7controller.text) ?? 0,
-          Shoe8:   int.tryParse(Shoe8controller.text) ?? 0,
-          Shoe9:   int.tryParse(Shoe9controller.text) ?? 0,
-          Shoe10:   int.tryParse(Shoe10controller.text) ?? 0,
-          Shoe11:   int.tryParse(Shoe11controller.text) ?? 0,
-          Shoe12:   int.tryParse(Shoe12controller.text) ?? 0,
-          Shoe13:   int.tryParse(Shoe13controller.text) ?? 0,
-          Shoe14:   int.tryParse(Shoe14controller.text) ?? 0,
-
-
-
-        );
-      }
-      else if (currentUser.country == 'China') {
-        createProdInFirestore(
-          shopmediaUrl: shopmediaUrl,
-          Category: value,
-          // type: value1 ,
-          gender: dropdownValue,
-          details: detailsController.text,
-          productname: productnameController.text,
-          price: userprice,
-          cnytoinr:cnytoinr,
-          cnytousd:cnytousd,
-          cnytogbp:cnytogbp,
-          cnytoeur:cnytoeur,
           color: colorController.text,
           composition: compositionController.text,
           washandcare: washandcareController.text,
@@ -3623,8 +3138,8 @@ setState(() {
         createProdInFirestore(
           shopmediaUrl: shopmediaUrl,
           Category: value,
-          // type: value1 ,
-          gender: dropdownValue,
+          world:worldship,
+          ship: shipcontroller.text,          gender: dropdownValue,
           details: detailsController.text,
           productname: productnameController.text,
           price: userprice,
@@ -3675,8 +3190,8 @@ setState(() {
         createProdInFirestore(
           shopmediaUrl: shopmediaUrl,
           Category: value,
-          // type: value1 ,
-          gender: dropdownValue,
+          world:worldship,
+          ship: shipcontroller.text,          gender: dropdownValue,
           details: detailsController.text,
           productname: productnameController.text,
           price: userprice,
@@ -3727,8 +3242,8 @@ setState(() {
         createProdInFirestore(
           shopmediaUrl: shopmediaUrl,
           Category: value,
-          // type: value1 ,
-          gender: dropdownValue,
+          world:worldship,
+          ship: shipcontroller.text,          gender: dropdownValue,
           details: detailsController.text,
           productname: productnameController.text,
           price: userprice,
@@ -3779,8 +3294,8 @@ setState(() {
         createProdInFirestore(
           shopmediaUrl: shopmediaUrl,
           Category: value,
-          // type: value1 ,
-          gender: dropdownValue,
+          world:worldship,
+          ship: shipcontroller.text,          gender: dropdownValue,
           details: detailsController.text,
           productname: productnameController.text,
           price: userprice,
@@ -3834,8 +3349,8 @@ setState(() {
         createProdInFirestore(
           shopmediaUrl: shopmediaUrl,
           Category: value,
-          // type: value1 ,
-          gender: dropdownValue,
+          world:worldship,
+          ship: shipcontroller.text,          gender: dropdownValue,
           details: detailsController.text,
           productname: productnameController.text,
           price: userprice,
@@ -3863,46 +3378,12 @@ setState(() {
 
         );
       }
-      else if (currentUser.country == 'China')  {
-        createProdInFirestore(
-          shopmediaUrl: shopmediaUrl,
-          Category: value,
-          // type: value1 ,
-          gender: dropdownValue,
-          details: detailsController.text,
-          productname: productnameController.text,
-          price: userprice,
-          cnytoinr:cnytoinr,
-          cnytousd:cnytousd,
-          cnytogbp:cnytogbp,
-          cnytoeur:cnytoeur,
-          color: colorController.text,
-          composition: compositionController.text,
-          washandcare: washandcareController.text,
-          sizeandfit: sizeandfitController.text,
-          xxxsQuantity: int.tryParse(xxxscontroller.text) ?? 0,
-          xxsQuantity: int.tryParse(xxscontroller.text) ?? 0,
-          xsQuantity:  int.tryParse(xscontroller.text )?? 0,
-          sQuantity: int.tryParse(scontroller.text) ?? 0,
-
-          mtoQuantity:  int.tryParse(mtocontroller.text) ?? 0,
-          freesizeQuantity:   int.tryParse(freesizecontroller.text) ?? 0,
-          Shoe1:   int.tryParse(Shoe1controller.text) ?? 0,
-          Shoe2:   int.tryParse(Shoe2controller.text) ?? 0,
-          Shoe3:   int.tryParse(Shoe3controller.text) ?? 0,
-          Shoe4:   int.tryParse(Shoe4controller.text) ?? 0,
-
-
-
-
-        );
-      }
       else if (currentUser.country == 'Europe')  {
         createProdInFirestore(
           shopmediaUrl: shopmediaUrl,
           Category: value,
-          // type: value1 ,
-          gender: dropdownValue,
+          world:worldship,
+          ship: shipcontroller.text,          gender: dropdownValue,
           details: detailsController.text,
           productname: productnameController.text,
           price: userprice,
@@ -3934,8 +3415,8 @@ setState(() {
         createProdInFirestore(
           shopmediaUrl: shopmediaUrl,
           Category: value,
-          // type: value1 ,
-          gender: dropdownValue,
+          world:worldship,
+          ship: shipcontroller.text,          gender: dropdownValue,
           details: detailsController.text,
           productname: productnameController.text,
           price: userprice,
@@ -3967,8 +3448,8 @@ setState(() {
         createProdInFirestore(
           shopmediaUrl: shopmediaUrl,
           Category: value,
-          // type: value1 ,
-          gender: dropdownValue,
+          world:worldship,
+          ship: shipcontroller.text,          gender: dropdownValue,
           details: detailsController.text,
           productname: productnameController.text,
           price: userprice,
@@ -4000,8 +3481,8 @@ setState(() {
         createProdInFirestore(
           shopmediaUrl: shopmediaUrl,
           Category: value,
-          // type: value1 ,
-          gender: dropdownValue,
+          world:worldship,
+          ship: shipcontroller.text,          gender: dropdownValue,
           details: detailsController.text,
           productname: productnameController.text,
           price: userprice,
@@ -4193,7 +3674,7 @@ setState(() {
                   title: 'Indian Ethnic',
                   value: value,
                   choiceItems: Indian,
-                  onChange: (state) => setState(() => value = state.value)
+                  onChange: (state) => setState(() { value = state.value; indian = true;})
               ),
 
             ],
@@ -4453,7 +3934,7 @@ SmartSelect<String>.single(
                  title: 'Indian Ethnic',
                  value: value,
                  choiceItems: WEthnic,
-                 onChange: (state) => setState(() => value = state.value)
+                 onChange: (state) => setState(() { value = state.value; indian = true;})
              ),
 
            ],
@@ -4740,7 +4221,7 @@ Widget BabyBCategory(){
                       title: 'Indian Ethnic',
                       value: value,
                       choiceItems: BBEthnic,
-                      onChange: (state) => setState(() => value = state.value)
+                      onChange: (state) => setState((){ value = state.value; indian = true;})
                   ),
 
                 ],
@@ -4901,7 +4382,7 @@ Widget BabyGCategory() {
                 title: 'Indian Ethnic',
                 value: value,
                 choiceItems: GGEthnic,
-                onChange: (state) => setState(() => value = state.value)
+                onChange: (state) => setState(() { value = state.value; indian = true;})
             ),
 
           ],
@@ -5102,7 +4583,7 @@ Widget KidBCategory(){
                       title: 'Indian Ethnic',
                       value: value,
                       choiceItems: KBEthnic,
-                      onChange: (state) => setState(() => value = state.value)
+                      onChange: (state) => setState(() { value = state.value; indian = true;})
                   ),
 
                 ],
@@ -5296,7 +4777,7 @@ return
                   title: 'Indian Ethnic',
                   value: value,
                   choiceItems: KGEthnic,
-                  onChange: (state) => setState(() => value = state.value)
+                  onChange: (state) => setState(() { value = state.value; indian = true;})
               ),
 
             ],
@@ -5542,7 +5023,7 @@ Widget TeenBCategory(){
                 title: 'Indian Ethnic',
                 value: value,
                 choiceItems: TBEthnic,
-                onChange: (state) => setState(() => value = state.value)
+                onChange: (state) => setState((){ value = state.value; indian = true;})
             ),
 
           ],
@@ -5729,7 +5210,7 @@ Widget TeenGCategory(){
                   title: 'Indian Ethnic',
                   value: value,
                   choiceItems: TGEthnic,
-                  onChange: (state) => setState(() => value = state.value)
+                  onChange: (state) => setState((){ value = state.value; indian = true;})
               ),
 
             ],
@@ -9022,10 +8503,7 @@ else  if(dropdownValue=='Baby-Boys'||dropdownValue=='Baby-Girls') {
                         iconSize: 24,
                         elevation: 16,
                         style: TextStyle(color: kText),
-                        // underline: Container(
-                        //     height: 2,
-                        //     color: Colors.deepPurpleAccent,
-                        // ),
+
                         onChanged: (String newValue) {
                               setState(() {
                                 dropdownValue = newValue;
@@ -9045,7 +8523,7 @@ else  if(dropdownValue=='Baby-Boys'||dropdownValue=='Baby-Girls') {
                     margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0,8.0),
                     child: RaisedButton(
                       color:kblue,
-                    child: Text('Select Category',style:TextStyle(color: kText) ,),
+                    child: Text('Select Category',style:TextStyle(color: Colors.white) ,),
                     onPressed: (){
                         showModalBottomSheet(context: context, builder:(BuildContext context){
 
@@ -9100,7 +8578,7 @@ else  if(dropdownValue=='Baby-Boys'||dropdownValue=='Baby-Girls') {
 
 
                   SizedBox(height: 8.0,),
-// AddSize(),
+
                Row(
                  mainAxisAlignment:MainAxisAlignment.center,
                     children:[
@@ -9109,7 +8587,7 @@ else  if(dropdownValue=='Baby-Boys'||dropdownValue=='Baby-Girls') {
                      child:   FloatingActionButton.extended(
 backgroundColor: kblue,
                        onPressed: ()=>AddSize(),
-                       label: Text('Select Size',style:TextStyle(color: kText) ,),
+                       label: Text('Select Size',style:TextStyle(color:  Colors.white) ,),
                      ),
                    ),
       SizedBox(width: 8.0,),Container(
@@ -9117,26 +8595,10 @@ backgroundColor: kblue,
                      child:   FloatingActionButton.extended(
 backgroundColor: kblue,
                        onPressed: ()=>sizeGuide(),
-                       label: Text('Size Guide',style:TextStyle(color: kText) ,),
+                       label: Text('Size Guide',style:TextStyle(color:  Colors.white) ,),
                      ),
                    ),
-   //                GestureDetector(
-   //                  onTap: () {
-   //                    sizeGuide();
-   //
-   //                  },
-   //                  child:
-   // Container(
-   //  alignment:Alignment.centerRight,
-   //
-   //  child: ListTile(
-   //
-   //                    trailing: Column(children: [
-   //                      FaIcon(FontAwesomeIcons.rulerCombined),
-   //                      Text('Size Guide', style: TextStyle(color: kText),),
-   //                    ],),
-   //                  ),),
-   //                ),
+
                     ],
                   ),
                   SizedBox(height: 8.0,),
@@ -9323,6 +8785,39 @@ keyboardType:TextInputType.number,
                               validator: (text) {
                                 if ( text.isEmpty) {
                                   return ' Size & Fit recommendations is empty';
+                                }
+                                return null;
+                              },
+                        ),
+                      ),
+  SizedBox( height: 8.0,), Switch(
+                          value: worldship,
+                          onChanged: (value){setState(() {
+                            worldship = value;
+                          });},
+                          activeColor: Colors.pink,
+                          activeTrackColor: Colors.white,
+                        ), SizedBox( height: 8.0,),
+                  Container(
+                    margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+                        child: TextFormField(
+                          style:TextStyle(color: kText),
+
+                          keyboardType: TextInputType.multiline,
+                              maxLines: null,
+                              controller: shipcontroller,
+                              decoration: InputDecoration(
+                                border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+                                enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+                                focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+
+                                labelText: 'Shipping & returns',labelStyle: TextStyle(color: kText),
+                                hintText: 'countries served & return policy',
+                              ),
+                              textAlign: TextAlign.center,
+                              validator: (text) {
+                                if ( text.isEmpty) {
+                                  return 'Shipping & returns';
                                 }
                                 return null;
                               },

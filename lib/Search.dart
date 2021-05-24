@@ -136,7 +136,8 @@ class UserResult extends StatelessWidget {
       decoration: BoxDecoration(
           gradient: fabGradient
       ) ,
-      alignment: Alignment.center,      child: Column(
+      alignment: Alignment.center,
+      child: Column(
         children: <Widget>[
           GestureDetector(
             onTap: () => showProfile(context, profileId: user.id),
@@ -148,12 +149,9 @@ class UserResult extends StatelessWidget {
               title: Text(
                 user.displayName,
                 style:
-                TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+                TextStyle(color:kText, fontWeight: FontWeight.bold),
               ),
-              subtitle: Text(
-                user.username,
-                style: TextStyle(color: Colors.white),
-              ),
+
             ),
           ),
           Divider(

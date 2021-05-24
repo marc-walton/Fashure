@@ -197,25 +197,44 @@ class _InvoiceState extends State<Invoice> {
       return
       Column(
         crossAxisAlignment:CrossAxisAlignment.start,
-        children: <Widget>[     Text('Advance payment: ₹$advance'),
+        children: <Widget>[     Text('Advance payment: ₹$advance',style: TextStyle(
+          color: kText.withOpacity(0.5),
+        )),
       SizedBox( height: 8.0,),
-      Text('Payment on delivery: ₹$finalpay'),],
+      Row(
+        children: [
+          Row(
+            children: [
+              Text('Payment on delivery: ₹$finalpay',style: TextStyle(
+                color: kText.withOpacity(0.5),
+
+              )),
+            ],
+          ),
+        ],
+      ),],
       );
 
-    }
-    else if (currentUser.country == 'China'){
-      Text('Advance payment: ¥$advance');
-
-      SizedBox( height: 8.0,);
-      Text('Payment on delivery: ¥$finalpay');
     }
     else if(currentUser.country=='US'){
       return
         Column(
           crossAxisAlignment:CrossAxisAlignment.start,
-          children: <Widget>[  Text('Advance payment: \u0024$advance'),
+          children: <Widget>[  Row(
+            children: [
+              Text('Advance payment: \u0024$advance',style: TextStyle(
+        color: kText.withOpacity(0.5),
+    )),
+            ],
+          ),
       SizedBox( height: 8.0,),
-      Text('Payment on delivery: \u0024$advance'),],
+      Row(
+        children: [
+          Text('Payment on delivery: \u0024$advance',style: TextStyle(
+            color: kText.withOpacity(0.5),
+          )),
+        ],
+      ),],
         );
 
     }
@@ -223,9 +242,21 @@ class _InvoiceState extends State<Invoice> {
       return
         Column(
           crossAxisAlignment:CrossAxisAlignment.start,
-          children: <Widget>[ Text('Advance payment: €$advance'),
+          children: <Widget>[ Row(
+            children: [
+              Text('Advance payment: €$advance',style: TextStyle(
+                color: kText.withOpacity(0.5),
+              )),
+            ],
+          ),
       SizedBox( height: 8.0,),
-      Text('Payment on delivery: €$finalpay'),
+      Row(
+        children: [
+          Text('Payment on delivery: €$finalpay',style: TextStyle(
+            color: kText.withOpacity(0.5),
+          )),
+        ],
+      ),
     ],
         );
 
@@ -234,9 +265,21 @@ class _InvoiceState extends State<Invoice> {
       return
         Column(
           crossAxisAlignment:CrossAxisAlignment.start,
-          children: <Widget>[ Text('Advance payment: £$advance'),
+          children: <Widget>[ Row(
+            children: [
+              Text('Advance payment: £$advance',style: TextStyle(
+                color: kText.withOpacity(0.5),
+              )),
+            ],
+          ),
       SizedBox( height: 8.0,),
-      Text('Payment on delivery: £$finalpay'),],
+      Row(
+        children: [
+          Text('Payment on delivery: £$finalpay',style: TextStyle(
+            color: kText.withOpacity(0.5),
+          )),
+        ],
+      ),],
         );
 
     }
@@ -244,9 +287,21 @@ class _InvoiceState extends State<Invoice> {
       return
         Column(
           crossAxisAlignment:CrossAxisAlignment.start,
-          children: <Widget>[  Text('Advance payment: \u0024$advance'),
+          children: <Widget>[  Row(
+            children: [
+              Text('Advance payment: \u0024$advance',style: TextStyle(
+                color: kText.withOpacity(0.5),
+              )),
+            ],
+          ),
             SizedBox( height: 8.0,),
-            Text('Payment on delivery: \u0024$advance'),],
+            Row(
+              children: [
+                Text('Payment on delivery: \u0024$advance',style: TextStyle(
+                  color: kText.withOpacity(0.5),
+                )),
+              ],
+            ),],
         );
 
     }
@@ -363,9 +418,9 @@ Get.to( PaymentSer(Amount:amount,OrderId: orderId,
         child: Column(
           children:[
             ListTileTheme(
-              tileColor:kPrimaryColor,
+              tileColor:trans,
               child: ExpansionTile(
-                backgroundColor:kSecondaryColor,
+                backgroundColor:trans,
                 title:  Text(
                   "Please rate the order",
                   style: TextStyle(
@@ -413,8 +468,8 @@ Get.to( PaymentSer(Amount:amount,OrderId: orderId,
                   .document(ownerId).collection('userReviews').document(reviewId)
                   .setData({
                 'userId': ownerId,
-                'rating': rating,
-                'review':reviewController.text,
+                'rating': rating?? 0.0,
+                'review':reviewController.text?? "",
                 'reviewId' : reviewId
               });
               Firestore.instance.collection('feed')
@@ -459,270 +514,327 @@ Get.to( PaymentSer(Amount:amount,OrderId: orderId,
 
   postindia(){
     return
-      Column(
-        children: <Widget>[
-          Rating(OwnerId: widget.ownerId,fulfill: widget.fulfilled),
-          FutureBuilder(
-            future: usersRef.document(widget.ownerId).get(),
-            builder: (context, snapshot) {
-              if (!snapshot.hasData) {
-                return circularProgress();
-              }
-              User user = User.fromDocument(snapshot.data);
+      Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Column(
+          children: <Widget>[
+            Rating(OwnerId: widget.ownerId,fulfill: widget.fulfilled),
+            FutureBuilder(
+              future: usersRef.document(widget.ownerId).get(),
+              builder: (context, snapshot) {
+                if (!snapshot.hasData) {
+                  return circularProgress();
+                }
+                User user = User.fromDocument(snapshot.data);
 //          bool isPostOwner = currentUserId == ownerId;
-              return Column(
-                children: <Widget>[
-                  GestureDetector(
-                    onTap: () => showProfile(context, profileId: user.id),
-                    child: ListTile(
-                      leading: CircleAvatar(
-                        backgroundImage: CachedNetworkImageProvider(user.photoUrl),
-                        backgroundColor: Colors.grey,
-                      ),
-                      title: Text(
-                        user.displayName,
-                        style: TextStyle(
-                          color: kText,
-                          fontWeight: FontWeight.bold,
+                return Column(
+                  children: <Widget>[
+                    GestureDetector(
+                      onTap: () => showProfile(context, profileId: user.id),
+                      child: ListTile(
+                        leading: CircleAvatar(
+                          backgroundImage: CachedNetworkImageProvider(user.photoUrl),
+                          backgroundColor: Colors.grey,
+                        ),
+                        title: Text(
+                          user.displayName,
+                          style: TextStyle(
+                            color: kText,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                       ),
-                      subtitle: Text(user.username,
-                        style: TextStyle(color: kIcon),),),
-                  ),
+                    ),
 
-                  Divider(color: kGrey,),
-                ],
+                  ],
 
-              );
+                );
 
-            },
-          ),
-          Text( widget.title   ,style: TextStyle(
-              color: Colors.white),),
-          Text( 'Description: ${widget.description}'   ,style: TextStyle(
-              color: Colors.white),),
-          Text('order Status: ${widget.ordersstatus}'   ,style: TextStyle(
-              color: Colors.white),),
-          Text('Address: ${widget.Address}',style: TextStyle(
-              color: Colors.white),),
+              },
+            ),
+            Row(
+              children: [
+                Text( widget.title   ,style: TextStyle(
+                    color: kText),),
+              ],
+            ),
+            Row(
+              children: [
+                Text( 'Description: ${widget.description}'   ,style: TextStyle(
+                    color: kText),),
+              ],
+            ),
+            Row(
+              children: [
+                Text('order Status: ${widget.ordersstatus}'   ,style: TextStyle(
+                    color: kText),),
+              ],
+            ),
+            Row(
+              children: [
+                Text('Address: ${widget.Address}',style: TextStyle(
+                    color: kText),),
+              ],
+            ),
 
-          currency(advance: widget.inr,finalpay: widget.Finr),
-          Text('Total: ₹ ${ int.tryParse(widget.inr) + int.tryParse(widget.Finr,)}'  ,style: TextStyle(
-              color: Colors.white),),
-          paymentbutton(amount: widget.inr,due: widget.Finr,
-            ownerId:widget.ownerId,
-            cusName:widget.cusName,
-            cusImg:widget.cusImg, ),
+            currency(advance: widget.inr,finalpay: widget.Finr),
+            Row(
+              children: [
+                Text('Total: ₹ ${ int.tryParse(widget.inr) + int.tryParse(widget.Finr,)}'  ,style: TextStyle(
+                    color:kText),),
+              ],
+            ),
+            paymentbutton(amount: widget.inr,due: widget.Finr,
+              ownerId:widget.ownerId,
+              cusName:widget.cusName,
+              cusImg:widget.cusImg, ),
 
 
-        ],
+          ],
+        ),
       );
   }
   posteurope(){
     return
-      Column(
-        children: <Widget>[
-          Rating(OwnerId: widget.ownerId,fulfill: widget.fulfilled),
-          FutureBuilder(
-            future: usersRef.document(widget.ownerId).get(),
-            builder: (context, snapshot) {
-              if (!snapshot.hasData) {
-                return circularProgress();
-              }
-              User user = User.fromDocument(snapshot.data);
+      Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Column(
+          children: <Widget>[
+            Rating(OwnerId: widget.ownerId,fulfill: widget.fulfilled),
+            FutureBuilder(
+              future: usersRef.document(widget.ownerId).get(),
+              builder: (context, snapshot) {
+                if (!snapshot.hasData) {
+                  return circularProgress();
+                }
+                User user = User.fromDocument(snapshot.data);
 //          bool isPostOwner = currentUserId == ownerId;
-              return Column(
-                children: <Widget>[
-                  GestureDetector(
-                    onTap: () => showProfile(context, profileId: user.id),
-                    child: ListTile(
-                      leading: CircleAvatar(
-                        backgroundImage: CachedNetworkImageProvider(user.photoUrl),
-                        backgroundColor: Colors.grey,
-                      ),
-                      title: Text(
-                        user.displayName,
-                        style: TextStyle(
-                          color: kText,
-                          fontWeight: FontWeight.bold,
+                return Column(
+                  children: <Widget>[
+                    GestureDetector(
+                      onTap: () => showProfile(context, profileId: user.id),
+                      child: ListTile(
+                        leading: CircleAvatar(
+                          backgroundImage: CachedNetworkImageProvider(user.photoUrl),
+                          backgroundColor: Colors.grey,
+                        ),
+                        title: Text(
+                          user.displayName,
+                          style: TextStyle(
+                            color: kText,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                       ),
-                      subtitle: Text(user.username,
-                        style: TextStyle(color: kIcon),),),
-                  ),
+                    ),
 
-                  Divider(color: kGrey,),
-                ],
+                  ],
 
-              );
+                );
 
-            },
-          ),
-          Text( widget.title   ,style: TextStyle(
-              color: Colors.white),),
-          Text( 'Description: ${widget.description}'   ,style: TextStyle(
-              color: Colors.white),),
-          Text('order Status: ${widget.ordersstatus}'   ,style: TextStyle(
-              color: Colors.white),),
-          Text('Address: ${widget.Address}',style: TextStyle(
-              color: Colors.white),),
+              },
+            ),
+            Row(
+              children: [
+                Text( widget.title   ,style: TextStyle(
+                    color: kText),),
+              ],
+            ),
+            Row(
+              children: [
+                Text( 'Description: ${widget.description}'   ,style: TextStyle(
+                    color: kText),),
+              ],
+            ),
+            Row(
+              children: [
+                Text('order Status: ${widget.ordersstatus}'   ,style: TextStyle(
+                    color: kText),),
+              ],
+            ),
+            Row(
+              children: [
+                Text('Address: ${widget.Address}',style: TextStyle(
+                    color: kText),),
+              ],
+            ),
 
-          currency(advance: widget.eur,finalpay: widget.Feur),
-          Text('Total: € ${ int.parse(widget.eur) + int.parse(widget.Feur,)}'  ,style: TextStyle(
-              color: Colors.white),),
-          paymentbutton(amount: widget.eur,due: widget.Feur,
-            ownerId:widget.ownerId,
-            cusName:widget.cusName,
-            cusImg:widget.cusImg, ),
-          // 'ownerId':widget.reciever,
-          // 'orderId':orderId,
-          // 'fulfilled':'false',
-          // 'orderStatus':'Processing',
-          // 'advance':advanceController.text,
-          // 'final':totalController.text ?? "",
-          // 'description':detailsController.text,
-          // 'advancepay':'false',
-          // 'finalpay':'false',
+            currency(advance: widget.eur,finalpay: widget.Feur),
+            Row(
+              children: [
+                Text('Total: € ${ int.tryParse(widget.eur) + int.tryParse(widget.Feur,)}'  ,style: TextStyle(
+                    color:kText),),
+              ],
+            ),
+            paymentbutton(amount: widget.eur,due: widget.Feur,
+              ownerId:widget.ownerId,
+              cusName:widget.cusName,
+              cusImg:widget.cusImg, ),
 
-        ],
+          ],
+        ),
       );
   }
   postuk(){
     return
-      Column(
-        children: <Widget>[
-          Rating(OwnerId: widget.ownerId,fulfill: widget.fulfilled),
-          FutureBuilder(
-            future: usersRef.document(widget.ownerId).get(),
-            builder: (context, snapshot) {
-              if (!snapshot.hasData) {
-                return circularProgress();
-              }
-              User user = User.fromDocument(snapshot.data);
+      Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Column(
+          children: <Widget>[
+            Rating(OwnerId: widget.ownerId,fulfill: widget.fulfilled),
+            FutureBuilder(
+              future: usersRef.document(widget.ownerId).get(),
+              builder: (context, snapshot) {
+                if (!snapshot.hasData) {
+                  return circularProgress();
+                }
+                User user = User.fromDocument(snapshot.data);
 //          bool isPostOwner = currentUserId == ownerId;
-              return Column(
-                children: <Widget>[
-                  GestureDetector(
-                    onTap: () => showProfile(context, profileId: user.id),
-                    child: ListTile(
-                      leading: CircleAvatar(
-                        backgroundImage: CachedNetworkImageProvider(user.photoUrl),
-                        backgroundColor: Colors.grey,
-                      ),
-                      title: Text(
-                        user.displayName,
-                        style: TextStyle(
-                          color: kText,
-                          fontWeight: FontWeight.bold,
+                return Column(
+                  children: <Widget>[
+                    GestureDetector(
+                      onTap: () => showProfile(context, profileId: user.id),
+                      child: ListTile(
+                        leading: CircleAvatar(
+                          backgroundImage: CachedNetworkImageProvider(user.photoUrl),
+                          backgroundColor: Colors.grey,
                         ),
-                      ),
-                      subtitle: Text(user.username,
-                        style: TextStyle(color: kIcon),),),
-                  ),
+                        title: Text(
+                          user.displayName,
+                          style: TextStyle(
+                            color: kText,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                       ),
+                    ),
 
-                  Divider(color: kGrey,),
-                ],
+                  ],
 
-              );
+                );
 
-            },
-          ),
-          Text( widget.title   ,style: TextStyle(
-              color: Colors.white),),
-          Text( 'Description: ${widget.description}'   ,style: TextStyle(
-              color: Colors.white),),
-          Text('order Status: ${widget.ordersstatus}'   ,style: TextStyle(
-              color: Colors.white),),
-          Text('Address: ${widget.Address}',style: TextStyle(
-              color: Colors.white),),
+              },
+            ),
+            Row(
+              children: [
+                Text( widget.title   ,style: TextStyle(
+                    color: kText),),
+              ],
+            ),
+            Row(
+              children: [
+                Text( 'Description: ${widget.description}'   ,style: TextStyle(
+                    color: kText),),
+              ],
+            ),
+            Row(
+              children: [
+                Text('order Status: ${widget.ordersstatus}'   ,style: TextStyle(
+                    color: kText),),
+              ],
+            ),
+            Row(
+              children: [
+                Text('Address: ${widget.Address}',style: TextStyle(
+                    color: kText),),
+              ],
+            ),
 
-          currency(advance: widget.gbp,finalpay: widget.Fgbp),
-          Text('Total: £ ${ int.parse(widget.gbp) + int.parse(widget.Fgbp,)}'  ,style: TextStyle(
-              color: Colors.white),),
-          paymentbutton(amount: widget.gbp,due: widget.Fgbp,
-            ownerId:widget.ownerId,
-            cusName:widget.cusName,
-            cusImg:widget.cusImg, ),
-          // 'ownerId':widget.reciever,
-          // 'orderId':orderId,
-          // 'fulfilled':'false',
-          // 'orderStatus':'Processing',
-          // 'advance':advanceController.text,
-          // 'final':totalController.text ?? "",
-          // 'description':detailsController.text,
-          // 'advancepay':'false',
-          // 'finalpay':'false',
+            currency(advance: widget.gbp,finalpay: widget.Fgbp),
+            Row(
+              children: [
+                Text('Total: £ ${ int.tryParse(widget.gbp) + int.tryParse(widget.Fgbp,)}'  ,style: TextStyle(
+                    color:kText),),
+              ],
+            ),
+            paymentbutton(amount: widget.gbp,due: widget.Fgbp,
+              ownerId:widget.ownerId,
+              cusName:widget.cusName,
+              cusImg:widget.cusImg, ),
 
-        ],
+          ],
+        ),
       );
   }
   postusa() {
     return
-      Column(
-        children: <Widget>[
-          Rating(OwnerId: widget.ownerId,fulfill: widget.fulfilled),
-          FutureBuilder(
-            future: usersRef.document(widget.ownerId).get(),
-            builder: (context, snapshot) {
-              if (!snapshot.hasData) {
-                return circularProgress();
-              }
-              User user = User.fromDocument(snapshot.data);
+      Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Column(
+          children: <Widget>[
+            Rating(OwnerId: widget.ownerId,fulfill: widget.fulfilled),
+            FutureBuilder(
+              future: usersRef.document(widget.ownerId).get(),
+              builder: (context, snapshot) {
+                if (!snapshot.hasData) {
+                  return circularProgress();
+                }
+                User user = User.fromDocument(snapshot.data);
 //          bool isPostOwner = currentUserId == ownerId;
-              return Column(
-                children: <Widget>[
-                  GestureDetector(
-                    onTap: () => showProfile(context, profileId: user.id),
-                    child: ListTile(
-                      leading: CircleAvatar(
-                        backgroundImage: CachedNetworkImageProvider(user.photoUrl),
-                        backgroundColor: Colors.grey,
-                      ),
-                      title: Text(
-                        user.displayName,
-                        style: TextStyle(
-                          color: kText,
-                          fontWeight: FontWeight.bold,
+                return Column(
+                  children: <Widget>[
+                    GestureDetector(
+                      onTap: () => showProfile(context, profileId: user.id),
+                      child: ListTile(
+                        leading: CircleAvatar(
+                          backgroundImage: CachedNetworkImageProvider(user.photoUrl),
+                          backgroundColor: Colors.grey,
                         ),
-                      ),
-                      subtitle: Text(user.username,
-                        style: TextStyle(color: kIcon),),),
-                  ),
+                        title: Text(
+                          user.displayName,
+                          style: TextStyle(
+                            color: kText,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                       ),
+                    ),
 
-                  Divider(color: kGrey,),
-                ],
+                  ],
 
-              );
+                );
 
-            },
-          ),
-          Text( widget.title   ,style: TextStyle(
-              color: Colors.white),),
-          Text( 'Description: ${widget.description}'   ,style: TextStyle(
-              color: Colors.white),),
-          Text('order Status: ${widget.ordersstatus}'   ,style: TextStyle(
-              color: Colors.white),),
-          Text('Address: ${widget.Address}',style: TextStyle(
-              color: Colors.white),),
+              },
+            ),
+            Row(
+              children: [
+                Text( widget.title   ,style: TextStyle(
+                    color: kText),),
+              ],
+            ),
+            Row(
+              children: [
+                Text( 'Description: ${widget.description}'   ,style: TextStyle(
+                    color: kText),),
+              ],
+            ),
+            Row(
+              children: [
+                Text('order Status: ${widget.ordersstatus}'   ,style: TextStyle(
+                    color: kText),),
+              ],
+            ),
+            Row(
+              children: [
+                Text('Address: ${widget.Address}',style: TextStyle(
+                    color: kText),),
+              ],
+            ),
 
-          currency(advance: widget.usd,finalpay: widget.Fusd),
-          Text('Total: \u0024 ${ int.parse(widget.usd) + int.parse(widget.Fusd,)}'  ,style: TextStyle(
-              color: Colors.white),),
-          paymentbutton(amount: widget.usd,due: widget.Fusd,
-            ownerId:widget.ownerId,
-            cusName:widget.cusName,
-            cusImg:widget.cusImg, ),
-          // 'ownerId':widget.reciever,
-          // 'orderId':orderId,
-          // 'fulfilled':'false',
-          // 'orderStatus':'Processing',
-          // 'advance':advanceController.text,
-          // 'final':totalController.text ?? "",
-          // 'description':detailsController.text,
-          // 'advancepay':'false',
-          // 'finalpay':'false',
+            currency(advance: widget.usd,finalpay: widget.Fusd),
+            Row(
+              children: [
+                Text('Total: \u0024 ${ int.tryParse(widget.usd) + int.tryParse(widget.Fusd,)}'  ,style: TextStyle(
+                    color:kText),),
+              ],
+            ),
+            paymentbutton(amount: widget.usd,due: widget.Fusd,
+              ownerId:widget.ownerId,
+              cusName:widget.cusName,
+              cusImg:widget.cusImg, ),
 
-        ],
+          ],
+        ),
       );
   }
   buildPostHeader() {
@@ -751,17 +863,20 @@ Get.to( PaymentSer(Amount:amount,OrderId: orderId,
 
   @override
   Widget build(BuildContext context) {
-    return Container( decoration: BoxDecoration(
-        gradient: fabGradient
-    ) ,
-      alignment: Alignment.center,
-      child: Column(
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Container( decoration: BoxDecoration(
+          gradient: fabGradient
+      ) ,
+        alignment: Alignment.center,
+        child: Column(
 
-        mainAxisSize: MainAxisSize.min,
-        children: <Widget>[
-          buildPostHeader(),
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+            buildPostHeader(),
 
-        ],
+          ],
+        ),
       ),
     );
   }

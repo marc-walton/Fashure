@@ -183,7 +183,7 @@ return Container();
 
   });
   }
-  openCheckout()  {
+  openCheckout() async {
   if (currentUser.country == 'India') {
   var options = {
   'key': key,
@@ -250,26 +250,6 @@ return Container();
   'name': currentUser.id,
   'description': 'Payment',
   'currency': 'GBP',
-
-  'prefill': { 'email': currentUser.email},
-  'external': {
-  'wallets': ['paytm']
-  }
-  };
-
-  try {
-  _razorpay.open(options);
-  } catch (e) {
-  debugPrint(e);
-  }
-  }
-  else if (currentUser.country == 'China') {
-  var options = {
-  'key': key,
-  'amount': "${widget.buynowamount}00",
-  'name': currentUser.id,
-  'description': 'Payment',
-  'currency': 'CNY',
 
   'prefill': { 'email': currentUser.email},
   'external': {
@@ -1713,11 +1693,11 @@ payment();
   @override
   Widget build(BuildContext context) {
   return  WillPopScope(
-      onWillPop:()=>  Get.offAll( ProductScreen(
+      onWillPop:()=>  Get.off( ProductScreen(
         prodId: widget.prodId,
         userId: widget.ownerId,
       ),) ,
-    child: openCheckout());
+    child:  openCheckout());
   }
 
 }

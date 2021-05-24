@@ -451,6 +451,7 @@ showOrderView(context) {
       context,
       MaterialPageRoute(
         builder: (context) => OrderView(
+          ownerId:userId,
           orderId:postId,
         ),
       ),
@@ -462,6 +463,7 @@ showInvoiceView(context) {
       context,
       MaterialPageRoute(
         builder: (context) => InvoiceView(
+          ownerId: userId,
             orderId:postId,
         ),
       ),
@@ -682,9 +684,9 @@ payent(ParentContext){
           color: Color(0XFFb3b3ff).withOpacity(0.3),
           child: ListTile(
             title: GestureDetector(
-              onTap: () => showBlog(ParentContext),
+              onTap: () => showOrderView(ParentContext),
               child: RichText(
-                maxLines: 1,softWrap:false,overflow:TextOverflow.fade,                    text: TextSpan(
+                maxLines: 1,softWrap:false,overflow:TextOverflow.visible,                    text: TextSpan(
                   style: TextStyle(
                     fontSize: 14.0,
                     color: kText,
@@ -726,7 +728,7 @@ blog(ParentContext){
             title: GestureDetector(
               onTap: () => showBlog(ParentContext),
               child: RichText(
-                maxLines: 1,softWrap:false,overflow:TextOverflow.fade,                    text: TextSpan(
+                maxLines: 1,softWrap:false,overflow:TextOverflow.visible,                    text: TextSpan(
                     style: TextStyle(
                       fontSize: 14.0,
                       color: kText,
@@ -768,9 +770,9 @@ collection(ParentContext){
           color: Color(0XFFb3b3ff).withOpacity(0.3),
           child: ListTile(
             title: GestureDetector(
-              onTap: () => showBlog(ParentContext),
+              onTap: () => showColl(ParentContext),
               child: RichText(
-                maxLines: 1,softWrap:false,overflow:TextOverflow.fade,                    text: TextSpan(
+                maxLines: 1,softWrap:false,overflow:TextOverflow.visible,                    text: TextSpan(
                   style: TextStyle(
                     fontSize: 14.0,
                     color: kText,
@@ -812,9 +814,9 @@ payo(ParentContext){
           color: Color(0XFFb3b3ff).withOpacity(0.3),
           child: ListTile(
             title: GestureDetector(
-              onTap: () => showBlog(ParentContext),
+              onTap: () => showOrderView(ParentContext),
               child: RichText(
-                maxLines: 1,softWrap:false,overflow:TextOverflow.fade,                    text: TextSpan(
+                maxLines: 1,softWrap:false,overflow:TextOverflow.visible,                    text: TextSpan(
                   style: TextStyle(
                     fontSize: 14.0,
                     color: kText,
@@ -856,9 +858,9 @@ prod(ParentContext){
           color: Color(0XFFb3b3ff).withOpacity(0.3),
           child: ListTile(
             title: GestureDetector(
-              onTap: () => showBlog(ParentContext),
+              onTap: () => showProduct(ParentContext),
               child: RichText(
-                maxLines: 1,softWrap:false,overflow:TextOverflow.fade,                    text: TextSpan(
+                maxLines: 1,softWrap:false,overflow:TextOverflow.visible,                    text: TextSpan(
                   style: TextStyle(
                     fontSize: 14.0,
                     color: kText,
@@ -902,9 +904,9 @@ prod(ParentContext){
             color: Color(0XFFb3b3ff).withOpacity(0.3),
             child: ListTile(
               title: GestureDetector(
-                onTap: () => showBlog(ParentContext),
+                onTap: () => showInvoiceView(ParentContext),
                 child: RichText(
-                  maxLines: 1,softWrap:false,overflow:TextOverflow.fade,                    text: TextSpan(
+                  maxLines: 1,softWrap:false,overflow:TextOverflow.visible,                    text: TextSpan(
                     style: TextStyle(
                       fontSize: 14.0,
                       color: kText,
@@ -946,9 +948,9 @@ ReqPaymentI(ParentContext){
           color: Color(0XFFb3b3ff).withOpacity(0.3),
           child: ListTile(
             title: GestureDetector(
-              onTap: () => showBlog(ParentContext),
+              onTap: () => showInvoiceView(ParentContext),
               child: RichText(
-                maxLines: 1,softWrap:false,overflow:TextOverflow.fade,                    text: TextSpan(
+                maxLines: 1,softWrap:false,overflow:TextOverflow.visible,                    text: TextSpan(
                   style: TextStyle(
                     fontSize: 14.0,
                     color: kText,
@@ -990,7 +992,7 @@ ReqPaymentI(ParentContext){
             color: Color(0XFFb3b3ff).withOpacity(0.3),
             child: ListTile(
               title: GestureDetector(
-                onTap: () => showBlog(ParentContext),
+                onTap: () => showClient(ParentContext),
                 child: RichText(
                   maxLines: 1,softWrap:false,overflow:TextOverflow.fade,                    text: TextSpan(
                     style: TextStyle(
@@ -1034,7 +1036,7 @@ ReviewO(ParentContext){
           color: Color(0XFFb3b3ff).withOpacity(0.3),
           child: ListTile(
             title: GestureDetector(
-              onTap: () => showBlog(ParentContext),
+              onTap: () => showProduct(ParentContext),
               child: RichText(
                 maxLines: 1,softWrap:false,overflow:TextOverflow.fade,                    text: TextSpan(
                   style: TextStyle(
@@ -1078,7 +1080,7 @@ ReviewO(ParentContext){
             color: Color(0XFFb3b3ff).withOpacity(0.3),
             child: ListTile(
               title: GestureDetector(
-                onTap: () => showBlog(ParentContext),
+                onTap: () => showInvoiceView(ParentContext),
                 child: RichText(
                   maxLines: 1,softWrap:false,overflow:TextOverflow.fade,                    text: TextSpan(
                     style: TextStyle(
@@ -1122,7 +1124,7 @@ ServicePayment(ParentContext){
           color: Color(0XFFb3b3ff).withOpacity(0.3),
           child: ListTile(
             title: GestureDetector(
-              onTap: () => showBlog(ParentContext),
+              onTap: () => showInvoiceView(ParentContext),
               child: RichText(
                 maxLines: 1,softWrap:false,overflow:TextOverflow.fade,                    text: TextSpan(
                   style: TextStyle(
@@ -1167,7 +1169,7 @@ ServicePayment(ParentContext){
              color: Color(0XFFb3b3ff).withOpacity(0.3),
              child: ListTile(
                title: GestureDetector(
-                 onTap: () => showBlog(ParentContext),
+                 onTap: () => showPost(ParentContext),
                  child: RichText(
                    maxLines: 1,softWrap:false,overflow:TextOverflow.fade,                    text: TextSpan(
                      style: TextStyle(
@@ -1205,8 +1207,8 @@ ServicePayment(ParentContext){
   Widget build(BuildContext context) {
     configureMediaPreview(context);
     configureactivityItemText(context);
-
-    return type == 'like'|| type == 'follow'|| type == 'comment' || type == 'Videocomment'|| type == 'Videolike'? main(context):
+    // || type == 'Videocomment'|| type == 'Videolike'
+    return type == 'like'|| type == 'follow'|| type == 'comment' ? main(context):
     type == 'bloglike'||type == 'blogcomment' ? blog(context) :
     type == 'CollectionLikes'|| type == 'collectioncomment'?collection(context) :
         type == 'fav' ? prod(context):

@@ -1143,6 +1143,7 @@ buildEditorial(){
                   child: Column(
                     children: <Widget>[
                       ButtonsTabBar(
+                        backgroundColor: kPrimaryColor,
                         radius: 12,
                         contentPadding: EdgeInsets.symmetric(horizontal: 12),
                         borderWidth: 2,

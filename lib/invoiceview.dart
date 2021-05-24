@@ -135,8 +135,12 @@ class _InvoiceViewState extends State<InvoiceView> {
       Center(
         child: Column(
           children:[
-            Text('Please rate the order',style: TextStyle(
-                color: Colors.white),),
+            Row(
+              children: [
+                Text('Please rate the order',style: TextStyle(
+                    color: kText),),
+              ],
+            ),
             SmoothStarRating(
               allowHalfRating: true,
               filledIconData: Icons.blur_off,

@@ -13,6 +13,9 @@ import 'package:fashow/user.dart';
 import 'package:fashow/product_custom.dart';
 import 'package:fashow/Product_screen.dart';
 class CoatsM extends StatefulWidget {
+ final  int selectedPage;
+
+  const CoatsM({Key key, this.selectedPage}) : super(key: key);
   @override
   _CoatsMState createState() => _CoatsMState();
 }
@@ -644,6 +647,8 @@ class _CoatsMState extends State<CoatsM> {
       quarterTurns: 3,
       child: Expanded(
         child: DefaultTabController(
+            initialIndex:widget.selectedPage ?? 0,
+
             length:7,
             child: Scaffold(
               appBar:AppBar(

@@ -273,7 +273,7 @@ String productname = documentSnapshot.data['productname'];
     query: Firestore.instance.collectionGroup('userProducts').orderBy('timestamp',descending: true)
 
         .where('Gender',isEqualTo: 'Men')
-
+.where('indian', isEqualTo:false)
   );
 }
 

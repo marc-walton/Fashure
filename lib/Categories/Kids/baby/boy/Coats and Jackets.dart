@@ -647,16 +647,9 @@ class _BabyCBState extends State<BabyCB> {
                    isScrollable: true,
                    labelColor: Colors.white,
                    unselectedLabelColor: kIcon,
-//                indicatorSize: TabBarIndicatorSize.label,
-//                       indicator: BoxDecoration(
-//                           borderRadius: BorderRadius.only(
-//                               topLeft: Radius.circular(10),
-//                               topRight: Radius.circular(10)
-//                           ),
-//                           color: Colors.white),
+
 
                    tabs:[
-                     Text("New Arrivals",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5,),),
                      Text("Blazer",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5,),),
                      Text("Duffle coats",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5),),
                      Text("Padded coats",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5),),

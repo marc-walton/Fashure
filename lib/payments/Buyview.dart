@@ -104,21 +104,29 @@ Widget st()
     shape: RoundedRectangleBorder(
       borderRadius:BorderRadius.circular(10),
     ),
-    color:Colors.transparent,
+    color: Color(0XFFb3b3ff).withOpacity(0.3),
     child: Expanded(
       child:  new  Column(children: <Widget>[
 
-        Text("Delivery Address",style:TextStyle(color:kText,              fontSize: 20.0,
-        )),
-Text("$Type",style:TextStyle(color:kText)),
+        Row(
+          children: [
+            Text("Delivery Address",style:TextStyle(color:kText,              fontSize: 20.0,
+            )),
+          ],
+        ),
+Row(
+  children: [
+        Text("$Type",style:TextStyle(color:kText)),
+  ],
+),
 
-        // Text(Fullname,style:TextStyle(color:kText)),
-        Text('$Addresss,$City,$State,$Country',style:TextStyle(color:kText)),
-        // Text(Zip,style:TextStyle(color:kText)),
-        // Text('$Code,$Phone',style:TextStyle(color:kText)),
-        //
+        Row(
+          children: [
+            Text('$Addresss,$City,$State,$Country',style:TextStyle(color:kText)),
+          ],
+        ),
 
-        Divider(color: kGrey,),
+
       ],
 
       ),
@@ -132,38 +140,41 @@ uk(){
       child: Column(children: [
         ListTile(
 
-         leading:   CircleAvatar(backgroundImage: NetworkImage(widget.profileimg),),
+          leading:   CircleAvatar(backgroundImage: NetworkImage(widget.profileimg),),
 
           title:  Text(widget.username,style: TextStyle(color: kText)),
 
         ),
-        Text(widget.productname,style: TextStyle(color: kText,
-          fontSize: 25.0,
-        )),
+        Row(
+          children: [
+            Text(widget.productname,style: TextStyle(color: kText,
+              fontSize: 25.0,
+            )),
+          ],
+        ),
         Expanded(
           child: Container(
             height:  MediaQuery.of(context).size.height * 0.20,
             child: ClipRRect(
-                  borderRadius: BorderRadius.circular(20.0),child:CachedNetworkImage(imageUrl: widget.mediaUrl,)),
+                borderRadius: BorderRadius.circular(20.0),child:CachedNetworkImage(imageUrl: widget.mediaUrl,)),
 
-            ),
           ),
+        ),
         Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            Text('Size:', style: TextStyle(color: kText,
+            Text('Size:  ${widget.userSize}', style: TextStyle(color: kText,
                 fontWeight: FontWeight.bold)),
-            Text(widget.userSize, style: TextStyle(color: kText,
-                fontWeight: FontWeight.bold)),
-            Text('£ ${widget.total}',style: TextStyle(color: kText,
+            Text('£  ${widget.total}',style: TextStyle(color: kText,
               fontSize: 20.0,
             )),
-
           ],
         ),
+        st(),
+
       ],),
     ),
   );
-
 }
 ind(){
   return Expanded(
@@ -176,9 +187,13 @@ ind(){
           title:  Text(widget.username,style: TextStyle(color: kText)),
 
         ),
-        Text(widget.productname,style: TextStyle(color: kText,
-          fontSize: 25.0,
-        )),
+        Row(
+          children: [
+            Text(widget.productname,style: TextStyle(color: kText,
+              fontSize: 25.0,
+            )),
+          ],
+        ),
         Expanded(
           child: Container(
             height:  MediaQuery.of(context).size.height * 0.20,
@@ -188,17 +203,103 @@ ind(){
             ),
           ),
         Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            Text('Size:', style: TextStyle(color: kText,
-                fontWeight: FontWeight.bold)),
-            Text(widget.userSize, style: TextStyle(color: kText,
+            Text('Size:  ${widget.userSize}', style: TextStyle(color: kText,
                 fontWeight: FontWeight.bold)),
             Text('₹  ${widget.total}',style: TextStyle(color: kText,
               fontSize: 20.0,
             )),
-
           ],
         ),
+        st(),
+
+      ],),
+    ),
+  );
+
+}
+eur(){
+  return Expanded(
+    child: Container(
+      child: Column(children: [
+        ListTile(
+
+         leading:   CircleAvatar(backgroundImage: NetworkImage(widget.profileimg),),
+
+          title:  Text(widget.username,style: TextStyle(color: kText)),
+
+        ),
+        Row(
+          children: [
+            Text(widget.productname,style: TextStyle(color: kText,
+              fontSize: 25.0,
+            )),
+          ],
+        ),
+        Expanded(
+          child: Container(
+            height:  MediaQuery.of(context).size.height * 0.20,
+            child: ClipRRect(
+                  borderRadius: BorderRadius.circular(20.0),child:CachedNetworkImage(imageUrl: widget.mediaUrl,)),
+
+            ),
+          ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            Text('Size:  ${widget.userSize}', style: TextStyle(color: kText,
+                fontWeight: FontWeight.bold)),
+            Text('€  ${widget.total}',style: TextStyle(color: kText,
+              fontSize: 20.0,
+            )),
+          ],
+        ),
+        st(),
+
+      ],),
+    ),
+  );
+
+}
+us(){
+  return Expanded(
+    child: Container(
+      child: Column(children: [
+        ListTile(
+
+         leading:   CircleAvatar(backgroundImage: NetworkImage(widget.profileimg),),
+
+          title:  Text(widget.username,style: TextStyle(color: kText)),
+
+        ),
+        Row(
+          children: [
+            Text(widget.productname,style: TextStyle(color: kText,
+              fontSize: 25.0,
+            )),
+          ],
+        ),
+        Expanded(
+          child: Container(
+            height:  MediaQuery.of(context).size.height * 0.20,
+            child: ClipRRect(
+                  borderRadius: BorderRadius.circular(20.0),child:CachedNetworkImage(imageUrl: widget.mediaUrl,)),
+
+            ),
+          ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            Text('Size:  ${widget.userSize}', style: TextStyle(color: kText,
+                fontWeight: FontWeight.bold)),
+            Text('\u0024  ${widget.total}',style: TextStyle(color: kText,
+              fontSize: 20.0,
+            )),
+          ],
+        ),
+        st(),
+
       ],),
     ),
   );
@@ -207,342 +308,25 @@ ind(){
 
   Widget ProdTile(){
     if(currentUser.country=='Europe'){
-      StreamBuilder(
-          stream: productsRef.document(widget.ownerId)
-              .collection('userProducts')
-          .document(widget.prodId)
-              .snapshots(),
-          // ignore: missing_return
-          builder: (context, snapshot) {
-
-            if (!snapshot.hasData) {
-              return  Center(child: Text('',style: TextStyle(
-                  fontFamily :"MajorMonoDisplay",
-                  fontSize:  35.0 ,
-                  color: Colors.white),));
-            } else  {
-              return new ListView.builder(
-                  itemCount: snapshot.data.documents.length,
-                  itemBuilder: (context, index) {
-                    DocumentSnapshot ds = snapshot.data.documents[index];
-                    // setState(() {
-                    //   total =
-                    // });
-                    return new  Card(
-                      child: Expanded(
-                        child: Column(children: [
-                          Text(ds['productname'],style: TextStyle(color: kText)),
-                          Row(
-                            children: [
-                              CircleAvatar(backgroundImage: ds['photoUrl'],),
-                              Text(ds['username'],style: TextStyle(color: kText)),
-                            ],
-                          ),
-                          Expanded(
-                            child: Container(
-                              height:  MediaQuery.of(context).size.height * 0.20,
-                              child: ListTile(
-                                leading:ClipRRect(
-                                    borderRadius: BorderRadius.circular(20.0),child:CachedNetworkImage(imageUrl: ds['shopmediaUrl'],)),
-
-                                trailing: Column(
-                                  children: [
-
-                                    Row(
-                                      children: [
-                                        Text('Size:', style: TextStyle(color: kText,
-                                            fontSize: 20.0,
-                                            fontWeight: FontWeight.bold)),
-                                        Text(widget.userSize, style: TextStyle(color: kText,
-                                            fontSize: 20.0,
-                                            fontWeight: FontWeight.bold)),
-                                      ],
-                                    ),
-                                    Text('€ ${widget.total}'),
-
-                                  ],
-                                ),
-                              ),
-                            ),
-                          ),
-
-                        ],),
-                      ),
-
-
-                    );
-                  }
-              );
-              // ignore: unnecessary_statements
-            }
-          }
-      );}
+     return
+       eur();}
     else if (currentUser.country == 'India'){
       return
     ind();}
     else if (currentUser.country == 'UK'){
 return uk();
     }
-    else if (currentUser.country == 'China'){
-      return
-      StreamBuilder(
-          stream: productsRef.document(widget.ownerId)
-              .collection('userProducts')
-              .document(widget.prodId)
-              .snapshots(),
-          // ignore: missing_return
-          builder: (context, snapshot) {
-
-            if (!snapshot.hasData) {
-              return  Center(child: Text('',style: TextStyle(
-                  fontFamily :"MajorMonoDisplay",
-                  fontSize:  35.0 ,
-                  color: Colors.white),));
-            } else  {
-              return new ListView.builder(
-                  itemCount: snapshot.data.documents.length,
-                  itemBuilder: (context, index) {
-                    DocumentSnapshot ds = snapshot.data.documents[index];
-                    // setState(() {
-                    //   total =
-                    // });
-                    return new  Card(
-                      child: Expanded(
-                        child: Column(children: [
-                          Text(ds['productname'],style: TextStyle(color: kText)),
-                          Row(
-                            children: [
-                              CircleAvatar(backgroundImage: ds['photoUrl'],),
-                              Text(ds['username'],style: TextStyle(color: kText)),
-                            ],
-                          ),
-                          Expanded(
-                            child: Container(
-                              height:  MediaQuery.of(context).size.height * 0.20,
-                              child: ListTile(
-                                leading:ClipRRect(
-                                    borderRadius: BorderRadius.circular(20.0),child:CachedNetworkImage(imageUrl: ds['shopmediaUrl'],)),
-
-                                trailing: Column(
-                                  children: [
-
-                                    Row(
-                                      children: [
-                                        Text('Size:', style: TextStyle(color: kText,
-                                            fontSize: 20.0,
-                                            fontWeight: FontWeight.bold)),
-                                        Text(widget.userSize, style: TextStyle(color: kText,
-                                            fontSize: 20.0,
-                                            fontWeight: FontWeight.bold)),
-                                      ],
-                                    ),
-                                    Text('¥ ${widget.total}'),
-
-                                  ],
-                                ),
-                              ),
-                            ),
-                          ),
-
-                        ],),
-                      ),
-                      // count: snapshot.data.documents.length,
-                      // shopmediaUrl: ds['shopmediaUrl'],
-                      // productname: ds['productname'],
-                      // eur: ds['eur'],
-                      // usd : ds['usd'],
-                      // inr: ds['inr'],
-                      // cny: ds['cny'],
-                      // gbp: ds['gbp'],
-                      // photoUrl: ds['photoUrl'],
-                      // username: ds['username'],
-                      // prodId: ds['prodId'],
-                      // userId: ds['userId'],
-                      // ownerId: ds['ownerId'],
-                      // userSize: ds['userSize'],
-
-                    );
-                  }
-              );
-              // ignore: unnecessary_statements
-            }
-          }
-      );}
     else if (currentUser.country == 'USA'){
       return
-      StreamBuilder(
-          stream: productsRef.document(widget.ownerId)
-              .collection('userProducts')
-              .document(widget.prodId)
-              .snapshots(),
-          // ignore: missing_return
-          builder: (context, snapshot) {
-
-            if (!snapshot.hasData) {
-              return  Center(child: Text('',style: TextStyle(
-                  fontFamily :"MajorMonoDisplay",
-                  fontSize:  35.0 ,
-                  color: Colors.white),));
-            } else  {
-              return new ListView.builder(
-                  itemCount: snapshot.data.documents.length,
-                  itemBuilder: (context, index) {
-                    DocumentSnapshot ds = snapshot.data.documents[index];
-                    // setState(() {
-                    //   total =
-                    // });
-                    return new  Card(
-                      child: Expanded(
-                        child: Column(children: [
-                          Text(ds['productname'],style: TextStyle(color: kText)),
-                          Row(
-                            children: [
-                              CircleAvatar(backgroundImage: ds['photoUrl'],),
-                              Text(ds['username'],style: TextStyle(color: kText)),
-                            ],
-                          ),
-                          Expanded(
-                            child: Container(
-                              height:  MediaQuery.of(context).size.height * 0.20,
-                              child: ListTile(
-                                leading:ClipRRect(
-                                    borderRadius: BorderRadius.circular(20.0),child:CachedNetworkImage(imageUrl: ds['shopmediaUrl'],)),
-
-                                trailing: Column(
-                                  children: [
-
-                                    Row(
-                                      children: [
-                                        Text('Size:', style: TextStyle(color: kText,
-                                            fontSize: 20.0,
-                                            fontWeight: FontWeight.bold)),
-                                        Text(widget.userSize, style: TextStyle(color: kText,
-                                            fontSize: 20.0,
-                                            fontWeight: FontWeight.bold)),
-                                      ],
-                                    ),
-                                    Text('\u0024 ${widget.total}'),
-
-                                  ],
-                                ),
-                              ),
-                            ),
-                          ),
-
-                        ],),
-                      ),
-                      // count: snapshot.data.documents.length,
-                      // shopmediaUrl: ds['shopmediaUrl'],
-                      // productname: ds['productname'],
-                      // eur: ds['eur'],
-                      // usd : ds['usd'],
-                      // inr: ds['inr'],
-                      // cny: ds['cny'],
-                      // gbp: ds['gbp'],
-                      // photoUrl: ds['photoUrl'],
-                      // username: ds['username'],
-                      // prodId: ds['prodId'],
-                      // userId: ds['userId'],
-                      // ownerId: ds['ownerId'],
-                      // userSize: ds['userSize'],
-
-                    );
-                  }
-              );
-              // ignore: unnecessary_statements
-            }
-          }
-      );}
+        us();}
 else {
-  return
-      StreamBuilder(
-          stream: productsRef.document(widget.ownerId)
-              .collection('userProducts')
-              .document(widget.prodId)
-              .snapshots(),
-          // ignore: missing_return
-          builder: (context, snapshot) {
-
-            if (!snapshot.hasData) {
-              return  Center(child: Text('',style: TextStyle(
-                  fontFamily :"MajorMonoDisplay",
-                  fontSize:  35.0 ,
-                  color: Colors.white),));
-            } else  {
-              return new ListView.builder(
-                  itemCount: snapshot.data.documents.length,
-                  itemBuilder: (context, index) {
-                    DocumentSnapshot ds = snapshot.data.documents[index];
-                    // setState(() {
-                    //   total =
-                    // });
-                    return new  Card(
-                      child: Expanded(
-                        child: Column(children: [
-                          Text(ds['productname'],style: TextStyle(color: kText)),
-                          Row(
-                            children: [
-                              CircleAvatar(backgroundImage: ds['photoUrl'],),
-                              Text(ds['username'],style: TextStyle(color: kText)),
-                            ],
-                          ),
-                          Expanded(
-                            child: Container(
-                              height:  MediaQuery.of(context).size.height * 0.20,
-                              child: ListTile(
-                                leading:ClipRRect(
-                                    borderRadius: BorderRadius.circular(20.0),child:CachedNetworkImage(imageUrl: ds['shopmediaUrl'],)),
-
-                                trailing: Column(
-                                  children: [
-
-                                    Row(
-                                      children: [
-                                        Text('Size:', style: TextStyle(color: kText,
-                                            fontSize: 20.0,
-                                            fontWeight: FontWeight.bold)),
-                                        Text(widget.userSize, style: TextStyle(color: kText,
-                                            fontSize: 20.0,
-                                            fontWeight: FontWeight.bold)),
-                                      ],
-                                    ),
-                                    Text('\u0024 ${widget.total}'),
-
-                                  ],
-                                ),
-                              ),
-                            ),
-                          ),
-
-                        ],),
-                      ),
-                      // count: snapshot.data.documents.length,
-                      // shopmediaUrl: ds['shopmediaUrl'],
-                      // productname: ds['productname'],
-                      // eur: ds['eur'],
-                      // usd : ds['usd'],
-                      // inr: ds['inr'],
-                      // cny: ds['cny'],
-                      // gbp: ds['gbp'],
-                      // photoUrl: ds['photoUrl'],
-                      // username: ds['username'],
-                      // prodId: ds['prodId'],
-                      // userId: ds['userId'],
-                      // ownerId: ds['ownerId'],
-                      // userSize: ds['userSize'],
-
-                    );
-                  }
-              );
-              // ignore: unnecessary_statements
-            }
-          }
-      );}
+      return
+        us();}
   }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(backgroundColor: kSecondaryColor,
+      appBar: AppBar(backgroundColor: kPrimaryColor,
         title: FittedBox(fit: BoxFit.contain,
           child: Text('Order Summary',style: TextStyle(
             // fontFamily :"MajorMonoDisplay",
@@ -554,7 +338,6 @@ else {
         alignment: Alignment.center,
         child: Column(
           children: [
-            st(),
             ProdTile(),
             BottomAppBar(
               color: Colors.transparent,
@@ -577,10 +360,8 @@ else {
 
                     },
                     color: kblue,
-                    // shape: RoundedRectangleBorder(
-                    //     borderRadius: BorderRadius.circular(18.0)
-                    // ),
-                    child: Text('PROCEED TO PAY', style: TextStyle(color: kText),),
+
+                    child: Text('PROCEED TO PAY', style: TextStyle(color: Colors.white),),
                   ),
                 ],
               ),

@@ -1118,24 +1118,29 @@ class _WEthnicState extends State<WEthnic> {
                 ),
               ),
 
-              body: RotatedBox(
-                quarterTurns: 1,
-                child: TabBarView(
-                    children:<Widget> [
-                      Bridal(),
-                      Kurtis(),
-                      Tunics(),
-                      Suits(),
-                      Sarees(),
-                      Dupattas(),
-                      Bottoms(),
-                      Skirts(),
-                      Jackets(),
-                      Blouse(),
-                      Lehengas(),
-                      Palazzos(),
-                      Footwear(),
-                    ]),
+              body: Container(decoration: BoxDecoration(
+                  gradient: fabGradient
+              ) ,
+                alignment: Alignment.center,
+                child: RotatedBox(
+                  quarterTurns: 1,
+                  child: TabBarView(
+                      children:<Widget> [
+                        Bridal(),
+                        Kurtis(),
+                        Tunics(),
+                        Suits(),
+                        Sarees(),
+                        Dupattas(),
+                        Bottoms(),
+                        Skirts(),
+                        Jackets(),
+                        Blouse(),
+                        Lehengas(),
+                        Palazzos(),
+                        Footwear(),
+                      ]),
+                ),
               ),
             )
         ),

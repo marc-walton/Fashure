@@ -15,8 +15,9 @@ import 'package:uuid/uuid.dart';
 
 class OrderView extends StatefulWidget {
   final String orderId;
+final String ownerId;
 
-  const OrderView({Key key, this.orderId}) : super(key: key);
+  const OrderView({Key key, this.orderId, this.ownerId}) : super(key: key);
 
   @override
   _OrderViewState createState() => _OrderViewState();

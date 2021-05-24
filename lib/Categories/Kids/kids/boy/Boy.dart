@@ -115,7 +115,7 @@ class _KidBoyState extends State<KidBoy> {
 
     }
   }
-  All(){
+  Allin(){
     return  PaginateFirestore(
 //    itemsPerPage: 2,
         itemBuilderType:
@@ -188,6 +188,80 @@ class _KidBoyState extends State<KidBoy> {
             .where('Gender',isEqualTo: 'Kids-Boys')
 
     );
+  }  All(){
+    return  PaginateFirestore(
+//    itemsPerPage: 2,
+        itemBuilderType:
+        PaginateBuilderType.listView,
+        itemBuilder: (index, context, documentSnapshot)   {
+//        DocumentSnapshot ds = snapshot.data.documents[index];
+          String ownerId = documentSnapshot.data['ownerId'];
+          String prodId = documentSnapshot.data['prodId'];
+          String shopmediaUrl = documentSnapshot.data['shopmediaUrl'];
+          String productname = documentSnapshot.data['productname'];
+          String inr = documentSnapshot.data['inr'];
+          String usd = documentSnapshot.data['usd'];
+          String eur = documentSnapshot.data['eur'];
+          String gbp = documentSnapshot.data['gbp'];
+          return
+            FutureBuilder(
+              future: usersRef.document(ownerId).get(),
+              builder: (context, snapshot) {
+                if (!snapshot.hasData) {
+                  return circularProgress();
+                }
+                User user = User.fromDocument(snapshot.data);
+//          bool isPostOwner = currentUserId == ownerId;
+                return Column(
+                  children: <Widget>[
+                    GestureDetector(
+                      onTap: () => showProfile(context, profileId: user.id),
+                      child: ListTile(
+                        leading: CircleAvatar(
+                          backgroundImage: CachedNetworkImageProvider(user.photoUrl),
+                          backgroundColor: Colors.grey,
+                        ),
+                        title: Text(
+                          user.displayName,
+                          style: TextStyle(
+                            color: kText,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                    ),
+
+                    GestureDetector(
+                      onTap: () => Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => ProductScreen(
+                            prodId: prodId,
+                            userId: ownerId,
+                          ),
+                        ),
+                      ),
+                      child: Stack(
+                        alignment: Alignment.center,
+                        children: <Widget>[
+                          ClipRRect(
+                              borderRadius: BorderRadius.circular(20.0),child: cachedNetworkImage(shopmediaUrl)),
+                        ],),),
+                    df(productname:productname, usd:usd,inr:inr,eur:eur,gbp:gbp, prodId:prodId, ownerId:ownerId,),
+
+                    Divider(color: kGrey,),
+                  ],
+
+                );
+
+              },
+            );
+        },
+        query: Firestore.instance.collectionGroup('userProducts').orderBy('timestamp',descending: true)
+            .where('Gender',isEqualTo: 'Kids-Boys')
+            .where('indian', isEqualTo:false)
+
+    );
   }
   @override
   Widget build(BuildContext context) {
@@ -249,7 +323,7 @@ class _KidBoyState extends State<KidBoy> {
                     quarterTurns: 1,
                     child: TabBarView(
                         children: <Widget>[
-                          All(),
+                          Allin(),
                           KBEthnic(),
                           TopsB(),
                           KidCB(),

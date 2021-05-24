@@ -160,41 +160,6 @@ Widget form(){
           },
         ),
       ),
-      Center(
-        child: CountryListPick(
-          // if you need custome picker use this
-          // pickerBuilder: (context, CountryCode countryCode) {
-          //   return Row(
-          //     children: [
-          //       Image.asset(
-          //         countryCode.flagUri,
-          //         package: 'country_list_pick',
-          //       ),
-          //       Text(countryCode.code),
-          //       Text(countryCode.dialCode),
-          //     ],
-          //   );
-          // },
-          theme: CountryTheme(
-            isShowFlag: true,
-            isShowTitle: true,
-            isShowCode: true,
-            isDownIcon: true,
-            showEnglishName: true,
-          ),
-          initialSelection: '+91',
-          onChanged: (CountryCode code) {
-            print(code.name);
-            print(code.code);
-            print(code.dialCode);
-            print(code.flagUri);
-            setState(() {
-              country = code.name;
-              dialcode = code.dialCode;
-            });
-          },
-        ),
-      ),
 
 
       Container(
@@ -277,6 +242,30 @@ Widget form(){
           },
         ),
       ),
+      Center(
+        child: CountryListPick(
+
+          theme: CountryTheme(
+            isShowFlag: true,
+            isShowTitle: true,
+            isShowCode: true,
+            isDownIcon: true,
+            showEnglishName: true,
+          ),
+          initialSelection: '+91',
+          onChanged: (CountryCode code) {
+            print(code.name);
+            print(code.code);
+            print(code.dialCode);
+            print(code.flagUri);
+            setState(() {
+              country = code.name;
+              dialcode = code.dialCode;
+            });
+          },
+        ),
+      ),
+
       Container(
         margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
         child: TextFormField(

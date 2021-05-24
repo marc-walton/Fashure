@@ -359,14 +359,19 @@ class _ShortsWState extends State<ShortsW> {
                 ),
               ),
 
-              body: RotatedBox(
-                quarterTurns: 1,
-                child: TabBarView(
-                    children:<Widget> [
-                      WShort(),
-                      WKnee(),
-                      WSports(),
-                      ]),
+              body: Container(decoration: BoxDecoration(
+                  gradient: fabGradient
+              ) ,
+                alignment: Alignment.center,
+                child: RotatedBox(
+                  quarterTurns: 1,
+                  child: TabBarView(
+                      children:<Widget> [
+                        WShort(),
+                        WKnee(),
+                        WSports(),
+                        ]),
+                ),
               ),
             )
         ),

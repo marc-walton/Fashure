@@ -434,15 +434,20 @@ class _BabysGState extends State<BabysG> {
                 ),
               ),
 
-              body: RotatedBox(
-                quarterTurns: 1,
-                child: TabBarView(
-                    children:<Widget> [
-                     BBRompers(),
-                     BBShorties(),
-                      BBPyjamas(),
-                     BBSnowsuits(),
-                    ]),
+              body: Container(decoration: BoxDecoration(
+                  gradient: fabGradient
+              ) ,
+                alignment: Alignment.center,
+                child: RotatedBox(
+                  quarterTurns: 1,
+                  child: TabBarView(
+                      children:<Widget> [
+                       BBRompers(),
+                       BBShorties(),
+                        BBPyjamas(),
+                       BBSnowsuits(),
+                      ]),
+                ),
               ),
             )
         ),
