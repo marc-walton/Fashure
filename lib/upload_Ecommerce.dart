@@ -2267,11 +2267,6 @@ bool world,
           new FlatButton(
 
             onPressed: () async {Navigator.of(context).pop(true);
-//            await tag1Prefs.clear();
-//            await tag2Prefs.clear();
-//            await tag3prefs.clear();
-//            await tag4Prefs.clear();
-//            await tag5Prefs.clear();
             clearImage();
             },
             child: Text("YES"),

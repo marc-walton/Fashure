@@ -27,28 +27,7 @@ class ProductScreen extends StatelessWidget {
         Prod prod = Prod.fromDocument(snapshot.data);
         return Center(
           child: Scaffold(
-            backgroundColor:kPrimaryColor,
 
-//            appBar: AppBar(backgroundColor: kSecondaryColor,
-//              title: Text(   prod.username,
-//                style: TextStyle(
-//                    fontFamily :"MajorMonoDisplay",
-//                    fontSize:  25.0 ,
-//                    color: Colors.white),),
-//              iconTheme: new IconThemeData(color: kIcon),
-//            actions:<Widget> [
-//              IconButton(
-//                icon: Icon(
-//                  Icons.shopping_cart,
-//                ),
-//                onPressed: () {
-//                  Navigator.push(context, MaterialPageRoute(builder: (context) =>Cart( currentUser: currentUser?.id)));
-//
-//                  // do something
-//                },
-//              ),
-//            ],
-//            ),
             body: ListView(
               children: <Widget>[Container(
                 decoration: BoxDecoration(

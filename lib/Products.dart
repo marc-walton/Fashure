@@ -20,6 +20,8 @@ import 'package:fashow/Constants.dart';
 import 'package:fashow/ActivityFeed.dart';
 import 'package:fashow/product_custom.dart';
 import 'package:fashow/Profile.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+
 class Prod extends StatefulWidget {
   final String prodId;
   final String ownerId;
@@ -9431,6 +9433,20 @@ else{
         ),
       );
   }
+  report(){
+    Fluttertoast.showToast(
+        msg: "Your report has been submitted", timeInSecForIos: 4);
+    Firestore.instance.collection('reports')
+        .document(ownerId)
+        .collection("userReports")
+        .document(prodId)
+        .setData({
+      "type": "shop",
+      "userId": ownerId,
+      "postId": prodId,
+      "timestamp": timestamp,
+    });
+  }
 MenSizes(){
  return
      Expanded(child:Container(
@@ -9943,6 +9959,7 @@ TeenSizes(){
 
         });
   }
+
  postindia(){
   return FutureBuilder(
     future: usersRef.document(ownerId).get(),
@@ -10033,33 +10050,29 @@ TeenSizes(){
                                   shape: RoundedRectangleBorder(
                                       borderRadius:
                                       BorderRadius.circular(20.0)), //this right here
-                                  child: Container(
-                                    height: 100,
-                                    child: Padding(
-                                      padding: const EdgeInsets.all(12.0),
-                                      child: Column(
-                                        mainAxisAlignment: MainAxisAlignment.center,
-                                        crossAxisAlignment: CrossAxisAlignment.start,
-                                        children: [
-                                          Container(
+                                  child: GestureDetector(
+                                    onTap: (){report();
+                                    Navigator.pop(context);},
+                                    child: Container(
+                                      height: 100,
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(12.0),
+                                        child: Column(
+                                          mainAxisAlignment: MainAxisAlignment.center,
+                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                          children: [
+                                            Container(
 
-                                            child: Align(
-                                                alignment: Alignment.center,
-                                                child: Text('Report this post?',style: TextStyle(
-                                                    color: Colors.blueAccent,
-                                                    fontWeight: FontWeight.bold,
-                                                    fontSize: 20.0),)),),
-//        ),FlatButton(
-//        onPressed: () {Navigator.pop(context);  Navigator.push(context, MaterialPageRoute(builder: (context) =>Profile( profileId: currentUser?.id)));
-//        },
-//
-//        child: Text('Delete this post?',style: TextStyle(
-//            color: Colors.blueAccent,
-//            fontWeight: FontWeight.bold,
-//            fontSize: 20.0),),
-//        ),
+                                              child: Align(
+                                                  alignment: Alignment.center,
+                                                  child: Text('Report this post?',style: TextStyle(
+                                                      color: Colors.blueAccent,
+                                                      fontWeight: FontWeight.bold,
+                                                      fontSize: 20.0),)),),
 
-                                        ],
+
+                                          ],
+                                        ),
                                       ),
                                     ),
                                   ),
@@ -10166,7 +10179,7 @@ TeenSizes(){
                           ),
                         ),
                         subtitle: Text(
-                          "£  $inr ",
+                          "₹  $inr ",
                           style: TextStyle(
                             color: Colors.green,
                             fontWeight: FontWeight.bold,
@@ -10209,24 +10222,7 @@ TeenSizes(){
                   ),
 
                 ],
-              ):Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Expanded(
-                    child: ListTile(
-                      title: Text(
-                        "Check shipping & returns info below ",
-                        style: TextStyle(
-                          color: Colors.red,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 14.0,
-                        ),
-                      ),
-                    ),
-                  ),
-
-                ],
-              ),
+              ):null,
 
               ListTileTheme(
                 tileColor:trans,
@@ -10450,22 +10446,25 @@ posteurope(){
                                             shape: RoundedRectangleBorder(
                                                 borderRadius:
                                                 BorderRadius.circular(20.0)), //this right here
-                                            child: Container(
-                                              height: 100,
-                                              child: Padding(
-                                                padding: const EdgeInsets.all(12.0),
-                                                child: Column(
-                                                  mainAxisAlignment: MainAxisAlignment.center,
-                                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                                  children: [
-                                                    Container(
+                                            child: GestureDetector(
+                                              onTap: (){report();
+                                              Navigator.pop(context);},
+                                              child: Container(
+                                                height: 100,
+                                                child: Padding(
+                                                  padding: const EdgeInsets.all(12.0),
+                                                  child: Column(
+                                                    mainAxisAlignment: MainAxisAlignment.center,
+                                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                                    children: [
+                                                      Container(
 
-                                                      child: Align(
-                                                          alignment: Alignment.center,
-                                                          child: Text('Report this post?',style: TextStyle(
-                                                              color: Colors.blueAccent,
-                                                              fontWeight: FontWeight.bold,
-                                                              fontSize: 20.0),)),),
+                                                        child: Align(
+                                                            alignment: Alignment.center,
+                                                            child: Text('Report this post?',style: TextStyle(
+                                                                color: Colors.blueAccent,
+                                                                fontWeight: FontWeight.bold,
+                                                                fontSize: 20.0),)),),
 //        ),FlatButton(
 //        onPressed: () {Navigator.pop(context);  Navigator.push(context, MaterialPageRoute(builder: (context) =>Profile( profileId: currentUser?.id)));
 //        },
@@ -10476,7 +10475,8 @@ posteurope(){
 //            fontSize: 20.0),),
 //        ),
 
-                                                  ],
+                                                    ],
+                                                  ),
                                                 ),
                                               ),
                                             ),
@@ -10623,24 +10623,7 @@ posteurope(){
                   ),
 
                 ],
-              ):Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Expanded(
-                    child: ListTile(
-                      title: Text(
-                        "Check shipping & returns info below ",
-                        style: TextStyle(
-                          color: Colors.red,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 14.0,
-                        ),
-                      ),
-                    ),
-                  ),
-
-                ],
-              ),
+              ):null,
 
               ListTileTheme(
                 tileColor:trans,
@@ -10863,22 +10846,25 @@ postuk(){
                                             shape: RoundedRectangleBorder(
                                                 borderRadius:
                                                 BorderRadius.circular(20.0)), //this right here
-                                            child: Container(
-                                              height: 100,
-                                              child: Padding(
-                                                padding: const EdgeInsets.all(12.0),
-                                                child: Column(
-                                                  mainAxisAlignment: MainAxisAlignment.center,
-                                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                                  children: [
-                                                    Container(
+                                            child: GestureDetector(
+                                              onTap: (){report();
+                                              Navigator.pop(context);},
+                                              child: Container(
+                                                height: 100,
+                                                child: Padding(
+                                                  padding: const EdgeInsets.all(12.0),
+                                                  child: Column(
+                                                    mainAxisAlignment: MainAxisAlignment.center,
+                                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                                    children: [
+                                                      Container(
 
-                                                      child: Align(
-                                                          alignment: Alignment.center,
-                                                          child: Text('Report this post?',style: TextStyle(
-                                                              color: Colors.blueAccent,
-                                                              fontWeight: FontWeight.bold,
-                                                              fontSize: 20.0),)),),
+                                                        child: Align(
+                                                            alignment: Alignment.center,
+                                                            child: Text('Report this post?',style: TextStyle(
+                                                                color: Colors.blueAccent,
+                                                                fontWeight: FontWeight.bold,
+                                                                fontSize: 20.0),)),),
 //        ),FlatButton(
 //        onPressed: () {Navigator.pop(context);  Navigator.push(context, MaterialPageRoute(builder: (context) =>Profile( profileId: currentUser?.id)));
 //        },
@@ -10889,7 +10875,8 @@ postuk(){
 //            fontSize: 20.0),),
 //        ),
 
-                                                  ],
+                                                    ],
+                                                  ),
                                                 ),
                                               ),
                                             ),
@@ -11039,24 +11026,7 @@ postuk(){
                   ),
 
                 ],
-              ):Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Expanded(
-                    child: ListTile(
-                      title: Text(
-                        "Check shipping & returns info below ",
-                        style: TextStyle(
-                          color: Colors.red,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 14.0,
-                        ),
-                      ),
-                    ),
-                  ),
-
-                ],
-              ),
+              ):null,
 
               ListTileTheme(
                 tileColor:trans,
@@ -11279,33 +11249,29 @@ postusa() {
                                             shape: RoundedRectangleBorder(
                                                 borderRadius:
                                                 BorderRadius.circular(20.0)), //this right here
-                                            child: Container(
-                                              height: 100,
-                                              child: Padding(
-                                                padding: const EdgeInsets.all(12.0),
-                                                child: Column(
-                                                  mainAxisAlignment: MainAxisAlignment.center,
-                                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                                  children: [
-                                                    Container(
+                                            child: GestureDetector(
+                                              onTap: (){report();
+                                              Navigator.pop(context);},
+                                              child: Container(
+                                                height: 100,
+                                                child: Padding(
+                                                  padding: const EdgeInsets.all(12.0),
+                                                  child: Column(
+                                                    mainAxisAlignment: MainAxisAlignment.center,
+                                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                                    children: [
+                                                      Container(
 
-                                                      child: Align(
-                                                          alignment: Alignment.center,
-                                                          child: Text('Report this post?',style: TextStyle(
-                                                              color: Colors.blueAccent,
-                                                              fontWeight: FontWeight.bold,
-                                                              fontSize: 20.0),)),),
-//        ),FlatButton(
-//        onPressed: () {Navigator.pop(context);  Navigator.push(context, MaterialPageRoute(builder: (context) =>Profile( profileId: currentUser?.id)));
-//        },
-//
-//        child: Text('Delete this post?',style: TextStyle(
-//            color: Colors.blueAccent,
-//            fontWeight: FontWeight.bold,
-//            fontSize: 20.0),),
-//        ),
+                                                        child: Align(
+                                                            alignment: Alignment.center,
+                                                            child: Text('Report this post?',style: TextStyle(
+                                                                color: Colors.blueAccent,
+                                                                fontWeight: FontWeight.bold,
+                                                                fontSize: 20.0),)),),
 
-                                                  ],
+
+                                                    ],
+                                                  ),
                                                 ),
                                               ),
                                             ),
@@ -11359,7 +11325,7 @@ postusa() {
                     child: Text(
                       "$likeCount ",
                       style: TextStyle(
-                        color:kText,
+                        color: kText,
                         fontSize: 15.0,
                         //                      fontWeight: FontWeight.bold,
                       ),
@@ -11394,7 +11360,7 @@ postusa() {
                 children:[   FloatingActionButton.extended(
                   backgroundColor: kblue,
                   onPressed: ()=>sizeGuide(),
-                  label: Text('Size Guide',style:TextStyle(color: Colors.white) ,),
+                  label: Text('Size Guide',style:TextStyle(color:  Colors.white) ,),
                 ),
                 ],
               ),
@@ -11455,24 +11421,7 @@ postusa() {
                   ),
 
                 ],
-              ):Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Expanded(
-                    child: ListTile(
-                      title: Text(
-                        "Check shipping & returns info below ",
-                        style: TextStyle(
-                          color: Colors.red,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 14.0,
-                        ),
-                      ),
-                    ),
-                  ),
-
-                ],
-              ),
+              ):null,
 
               ListTileTheme(
                 tileColor:trans,
@@ -11597,6 +11546,7 @@ postusa() {
                     ),                ],
                 ),
               ),
+
             ],
           ),
         ),

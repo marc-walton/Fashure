@@ -14,6 +14,9 @@ import 'package:fashow/user.dart';
 import 'package:fashow/product_custom.dart';
 import 'package:fashow/Product_screen.dart';
 class CapesW extends StatefulWidget {
+  final  int selectedPage;
+
+  const CapesW({Key key, this.selectedPage}) : super(key: key);
   @override
   _CapesWState createState() => _CapesWState();
 }
@@ -1019,6 +1022,8 @@ class _CapesWState extends State<CapesW> {
       quarterTurns: 3,
       child: Expanded(
         child: DefaultTabController(
+            initialIndex:widget.selectedPage ?? 0,
+
             length:12,
             child: Scaffold(
 

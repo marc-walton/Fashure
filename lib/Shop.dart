@@ -11,8 +11,10 @@ import 'package:flutter/cupertino.dart';
 //import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:fashow/Categories/Men/Coats.dart';
 import 'package:fashow/user.dart';
+import 'package:get/get.dart';
+
+import 'package:fashow/shop_search.dart';
 import 'package:fashow/Products.dart';
 import 'package:fashow/upload_Ecommerce.dart';
 import 'package:fashow/HomePage.dart';
@@ -159,7 +161,7 @@ new Tabs(title: "Teen-Girls",color: kPrimaryColor),
                Icons.search,
               ),
               onPressed: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context) =>CoatsM(selectedPage: 3,)));
+                Get.to (ShopSearch());
 
                 // do something
               },

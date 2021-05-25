@@ -797,17 +797,6 @@ Widget rev(){
       "timestamp": timestamp,
     });
   }
- CoverPhoto(String image){
-      Container(
-          width: MediaQuery.of(context).size.width,
-          height: MediaQuery.of(context).size.height / 1,
-          child: CachedNetworkImage(
-            imageUrl: image,
-              fit: BoxFit.cover,
-          ),
-      );
-
- }
   buildProfileHeader() {
     return StreamBuilder(
       stream: usersRef.document(widget.profileId).snapshots(),

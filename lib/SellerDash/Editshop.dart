@@ -26,22 +26,18 @@ class EditShop extends StatelessWidget {
           return circularProgress();
         }
         ProdEdit prod = ProdEdit.fromDocument(snapshot.data);
-        return Center(
-          child: Scaffold(
+        return Scaffold(
 
-            body: Container( decoration: BoxDecoration(
+          body: ListView(
+            children: <Widget>[Container(
+              decoration: BoxDecoration(
                 gradient: fabGradient
-            ) ,
-              alignment: Alignment.center,
-              child: ListView(
-                children: <Widget>[Container(
-                  color: kPrimaryColor,
-                  child: prod,
-                ),
-
-                ],
-              ),
             ),
+              alignment: Alignment.center,
+              child: prod,
+            ),
+
+            ],
           ),
         );
       },

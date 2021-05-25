@@ -1,3 +1,4 @@
+import 'package:fluttertoast/fluttertoast.dart';
 
 import 'package:fashow/collcomments.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -269,6 +270,20 @@ print(collmediaUrl);
       });
     }
   }
+  report(){
+    Fluttertoast.showToast(
+        msg: "Your report has been submitted", timeInSecForIos: 4);
+    Firestore.instance.collection('reports')
+        .document(ownerId)
+        .collection("userReports")
+        .document(collId)
+        .setData({
+      "type": "shop",
+      "userId": ownerId,
+      "postId": collId,
+      "timestamp": timestamp,
+    });
+  }
 
 
 pics(){
@@ -386,24 +401,28 @@ scrollDirection:Axis.vertical,
                     shape: RoundedRectangleBorder(
                         borderRadius:
                         BorderRadius.circular(20.0)), //this right here
-                    child: Container(
-                      height: 100,
-                      child: Padding(
-                        padding: const EdgeInsets.all(12.0),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Container(
+                    child: GestureDetector(
+                      onTap: (){report();
+                      Navigator.pop(context);},
+                      child: Container(
+                        height: 100,
+                        child: Padding(
+                          padding: const EdgeInsets.all(12.0),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Container(
 
-                              child: Align(
-                                  alignment: Alignment.center,
-                                  child: Text('Report this post?',style: TextStyle(
-                                      color: Colors.blueAccent,
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 20.0),)),),
+                                child: Align(
+                                    alignment: Alignment.center,
+                                    child: Text('Report this post?',style: TextStyle(
+                                        color: Colors.blueAccent,
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 20.0),)),),
 
-                          ],
+                            ],
+                          ),
                         ),
                       ),
                     ),

@@ -1,7 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-//import 'package:flutter_svg/svg.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:fashow/user.dart';
 import 'package:fashow/progress.dart';
 import 'package:fashow/HomePage.dart';
@@ -194,11 +194,6 @@ class _PostState extends State<Post> {
         likes[currentUserId] = true;
 //        showHeart = true;
       });
-//      Timer(Duration(milliseconds: 500), () {
-//        setState(() {
-//          showHeart = false;
-//        });
-//      });
     }
   }
 
@@ -238,6 +233,21 @@ class _PostState extends State<Post> {
       });
     }
   }
+  report(){
+    Fluttertoast.showToast(
+        msg: "Your report has been submitted", timeInSecForIos: 4);
+    Firestore.instance.collection('reports')
+        .document(ownerId)
+        .collection("userReports")
+        .document(postId)
+        .setData({
+      "type": "shop",
+      "userId": ownerId,
+      "postId": postId,
+      "timestamp": timestamp,
+    });
+  }
+
   buildPostHeader() {
     return FutureBuilder(
       future: usersRef.document(ownerId).get(),
@@ -282,27 +292,31 @@ class _PostState extends State<Post> {
         shape: RoundedRectangleBorder(
         borderRadius:
         BorderRadius.circular(20.0)), //this right here
-        child: Container(
-        height: 100,
-        child: Padding(
-        padding: const EdgeInsets.all(12.0),
-        child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-        Container(
+        child: GestureDetector(
+          onTap: (){report();
+          Navigator.pop(context);},
+          child: Container(
+          height: 100,
+          child: Padding(
+          padding: const EdgeInsets.all(12.0),
+          child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+          Container(
 
-        child: Align(
-        alignment: Alignment.center,
-        child: Text('Report this post?',style: TextStyle(
-            color: Colors.blueAccent,
-            fontWeight: FontWeight.bold,
-            fontSize: 20.0),)),),
+          child: Align(
+          alignment: Alignment.center,
+          child: Text('Report this post?',style: TextStyle(
+              color: Colors.blueAccent,
+              fontWeight: FontWeight.bold,
+              fontSize: 20.0),)),),
 
 
-        ],
-        ),
-        ),
+          ],
+          ),
+          ),
+          ),
         ),
         );
         // ignore: unnecessary_statements
@@ -355,11 +369,6 @@ class _PostState extends State<Post> {
                      isLiked ?  AssetImage("assets/img/clap-hands.png"):AssetImage("assets/img/clap.png"),
                      color: kText,
                    ),
-//                    ),Icon(
-//                      isLiked ?   Icons.favorite_border:Icons.favorite ,
-//                      size: 28.0,
-//                      color: kText,
-//                    ),
                  ),
 //                Padding(padding: EdgeInsets.only(right: 1.0)),
                  Container(

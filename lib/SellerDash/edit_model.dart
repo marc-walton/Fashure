@@ -416,7 +416,6 @@ class _ProdEditState extends State<ProdEdit>
     this.washandcare,
     this.sizeandfit,
     this.shopmediaUrl,
-
     this.photoUrl,
   });
 
@@ -3814,7 +3813,6 @@ class _ProdEditState extends State<ProdEdit>
       (
       onWillPop: _onBackPressed,
       child: Scaffold(
-        backgroundColor: kSecondaryColor,
         key:  scaffoldKey,
         appBar: AppBar(
           backgroundColor: kPrimaryColor,
@@ -3851,37 +3849,25 @@ class _ProdEditState extends State<ProdEdit>
             Column(
               children: <Widget>[
                 isUploading ? linearProgress() : Text(""),
-                Expanded(
-                  child: SingleChildScrollView(
-                    child: Column(
-                      children: [
-
-                        SizedBox(height: 8.0,),
-                        postindia(),
-                        SizedBox(height: 8.0,),
-
-                        Row(
-                          mainAxisAlignment:MainAxisAlignment.center,
-                          children:[
-                            Container(
-                              // alignment:Alignment.centerLeft,
-                              child:   FloatingActionButton.extended(
-                                backgroundColor: kblue,
-                                onPressed: ()=>AddSize(),
-                                label: Text('Update Size',style:TextStyle(color: kText) ,),
-                              ),
-                            ),
-
-                          ],
-                        ),
-
-                        SizedBox( height: 8.0,),
+                SizedBox(height: 8.0,),
 
 
-                      ],
+                Row(
+                  mainAxisAlignment:MainAxisAlignment.center,
+                  children:[
+                    Container(
+                      // alignment:Alignment.centerLeft,
+                      child:   FloatingActionButton.extended(
+                        backgroundColor: kblue,
+                        onPressed: ()=>AddSize(),
+                        label: Text('Update Size',style:TextStyle(color: kText) ,),
+                      ),
                     ),
-                  ),
+
+                  ],
                 ),
+
+                SizedBox( height: 8.0,),
 
                 (_inProcess)?Container(
                   color: Colors.white,
@@ -3990,17 +3976,12 @@ class _ProdEditState extends State<ProdEdit>
 
   @override
   Widget build(BuildContext context) {
-    return Container( decoration: BoxDecoration(
-        gradient: fabGradient
-    ) ,
-      alignment: Alignment.center,
-      child: Column(
+    return Column(
 
-        mainAxisSize: MainAxisSize.min,
-        children: <Widget>[
-          buildPostHeader(),
-        ],
-      ),
+      mainAxisSize: MainAxisSize.min,
+      children: <Widget>[
+        buildPostHeader(),
+      ],
     );
   }
 }

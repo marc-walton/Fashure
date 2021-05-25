@@ -104,6 +104,7 @@ dependencies:
   buttons_tabbar: ^1.1.2
   sizer: ^1.1.8
   url_launcher: ^5.7.10
+  auto_search: ^1.0.6
 
 
 

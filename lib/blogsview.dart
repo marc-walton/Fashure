@@ -1,10 +1,8 @@
 import 'dart:convert';
 import 'package:fashow/Blogcomments.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-// import 'package:carousel_pro/carousel_pro.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-//import 'package:flutter_svg/svg.dart';
 import 'package:fashow/user.dart';
 import 'package:fashow/progress.dart';
 import 'package:fashow/HomePage.dart';
@@ -13,8 +11,7 @@ import 'package:fashow/Profile.dart';
 import 'package:fashow/ActivityFeed.dart';
 import 'package:fashow/custom_image.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:fashow/Product_screen.dart';
-import 'package:transparent_image/transparent_image.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:zefyr/zefyr.dart';
 List<NetworkImage> _listOfImages = <NetworkImage>[];
 class Blog extends StatefulWidget {
@@ -287,6 +284,20 @@ class _BlogState extends State<Blog> {
     // toolbarTheme: ToolbarTheme.fallback(context),
   );
 
+  report(){
+    Fluttertoast.showToast(
+        msg: "Your report has been submitted", timeInSecForIos: 4);
+    Firestore.instance.collection('reports')
+        .document(ownerId)
+        .collection("userReports")
+        .document(blogId)
+        .setData({
+      "type": "shop",
+      "userId": ownerId,
+      "postId": blogId,
+      "timestamp": timestamp,
+    });
+  }
 
   buildPostHeader() {
 
@@ -298,7 +309,7 @@ class _BlogState extends State<Blog> {
             return circularProgress();
           }
           User user = User.fromDocument(snapshot.data);
-//          bool isPostOwner = currentUserId == ownerId;
+         bool isPostOwner = currentUserId == ownerId;
           return  Column(children: <Widget>[
               GestureDetector(
                 onTap: () => showProfile(context, profileId: user.id),
@@ -316,7 +327,48 @@ class _BlogState extends State<Blog> {
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                 ),
+                    trailing: IconButton(icon: Icon(Icons.more_horiz,color: kText,),
+                        onPressed: () {
+                          !isPostOwner?showDialog(
+                              context: context,
+                              builder: (BuildContext context) {
+                                return Dialog(
+                                  backgroundColor: kSecondaryColor,
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius:
+                                      BorderRadius.circular(20.0)), //this right here
+                                  child: GestureDetector(
+                                    onTap: (){report();
+                                    Navigator.pop(context);},
+                                    child: Container(
+                                      height: 100,
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(12.0),
+                                        child: Column(
+                                          mainAxisAlignment: MainAxisAlignment.center,
+                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                          children: [
+                                            Container(
+
+                                              child: Align(
+                                                  alignment: Alignment.center,
+                                                  child: Text('Report this post?',style: TextStyle(
+                                                      color: Colors.blueAccent,
+                                                      fontWeight: FontWeight.bold,
+                                                      fontSize: 20.0),)),),
+
+
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                );
+                                // ignore: unnecessary_statements
+                              }):handleDeletePost(context);
+                        }),
+
+                  ),
                 ),
               ),
               SizedBox(height:10.0),
