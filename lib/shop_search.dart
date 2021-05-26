@@ -598,6 +598,164 @@ class _ShopSearchState extends State<ShopSearch> {
 "Hybrid Watches in Men",
     "Men's Hybrid Watches",
     "Mens Hybrid Watches",
+"Caps in Women",
+    "Women's Caps",
+    "Womens Caps",
+"Hats in Women",
+    "Women's Hats",
+    "Womens Hats",
+"Baker Boy Hats in Women",
+    ///500
+"Women's Baker Boy Hats",
+    "Womens Baker Boy Hats",
+"Beanies in Women",
+    "Women's Beanies",
+    "Womens Beanies",
+"Berets in Women",
+    "Women's Berets",
+    "Womens Berets",
+"Fedora in Women",
+    "Women's Fedora",
+    ///510
+    "Womens Fedora",
+"Bucket Hats in Women",
+    "Women's Bucket Hats",
+    "Womens Bucket Hats",
+"Sun Hats in Women",
+    "Women's Sun Hats",
+    "Womens Sun Hats",
+"Ties in Women",
+    "Women's Ties",
+    "Womens Ties",
+    ///520
+"Collars in Women",
+    "Women's Collars",
+    "Womens Collars",
+"Hair Accessories in Women",
+    "Women's Hair Accessories",
+    "Womens Hair Accessories",
+"Accessories in Women",
+    "Women's Accessories",
+    "Womens Accessories",
+"Bridal Accessories in Women",
+    ///530
+    "Women's Bridal Accessories",
+    "Womens Bridal Accessories",
+"Wedding Accessories in Women",
+    "Women's Wedding Accessories",
+    "Womens Wedding Accessories",
+"Scarves in Women",
+    "Women's Scarves",
+    "Womens Scarves",
+"Belts in Women",
+    "Women's Belts",
+    ///540
+    "Womens Belts",
+"Braces in Women",
+    "Women's Braces",
+    "Womens Braces",
+"Ties in Women",
+    "Women's Ties",
+    "Womens Ties",
+"Collars in Women",
+    "Women's Collars",
+    "Womens Collars",
+    ///550
+"Glasses in Women",
+    "Women's Glasses",
+    "Womens Glasses",
+"Frames in Women",
+    "Women's Frames",
+    "Womens Frames",
+"Sunglasses in Women",
+    "Women's Sunglasses",
+    "Womens Sunglasses",
+"Gloves in Women",
+    ///560
+    "Women's Gloves",
+    "Womens Gloves",
+"Socks in Women",
+    "Women's Socks",
+    "Womens Socks",
+"Umbrellas in Women",
+    "Women's Umbrellas",
+    "Womens Umbrellas",
+"Travel in Women",
+    "Women's Travel",
+    ///570
+    "Womens Travel",
+"Phone cases in Women",
+    "Women's Phone cases",
+    "Womens Phone cases",
+"Active Wear in Women",
+    "Women's Active Wear",
+    "Womens Active Wear",
+"Jackets in Active Wear\n in Women",
+    "Women's Jackets in Active Wear",
+    "Womens Jackets in Active Wear",
+    ///580
+"Trouser in Active Wear\n in Women",
+    "Women's Trouser in Active Wear",
+    "Womens Trouser in Active Wear",
+"Shorts in Active Wear\n in Women",
+    "Women's Shorts in Active Wear",
+    "Womens Shorts in Active Wear",
+"Skirts in Active Wear\n in Women",
+    "Women's Skirts in Active Wear",
+    "Womens Skirts in Active Wear",
+"Footwear in Active Wear\n in Women",
+    ///590
+"Women's Footwear in Active Wear",
+    "Womens Footwear in Active Wear",
+ "Accessories in Active Wear\n in Women",
+    "Women's Accessories in Active Wear",
+    "Womens Accessories in Active Wear",
+"Backpacks in Women",
+    "Women's Backpacks",
+    "Womens Backpacks",
+"Mini Bag in Women",
+"Women's Mini Bag",
+    ///600
+    "Womens Mini Bag",
+"Laptop Bags in Women",
+    "Women's Laptop Bags",
+    "Womens Laptop Bags",
+"Shoulder Bags in Women",
+"Women's Shoulder Bags",
+    "Womens Shoulder Bags",
+"Cross body Bags in Women",
+    "Women's Cross body Bags",
+    "Womens Cross body Bags",
+    ///610
+"Duffle Bags in Women",
+"Women's Duffle Bags",
+    "Womens Duffle Bags",
+"Holdall Bags in Women",
+    "Women's Holdall Bags",
+"Womens Holdall Bags",
+"Cosmetic Bags in Women",
+"Women's Cosmetic Bags",
+"Womens Cosmetic Bags",
+"Belt Bags in Women",
+    ///620
+    "Women's Belt Bags",
+    "Womens Belt Bags",
+"Clutch Bags in Women",
+    "Women's Clutch Bags",
+    "Womens Clutch Bags",
+"Bucket Bags in Women",
+    "Women's Bucket Bags",
+    "Womens Bucket Bags",
+"Beach Bags in Women",
+    "Women's Beach Bags",
+    ///630
+    "Womens Beach Bags",
+"Tote Bags in Women",
+    "Women's Tote Bags",
+    "Womens Tote Bags",
+"Trolley & Luggage in Women",
+    "Women's Trolley & Luggage",
+    "Womens Trolley & Luggage",
 
   ];
   search({int i}){
@@ -875,8 +1033,86 @@ else if(i==484||i==485||i==486||i==487||i==488||i==489){      Get.off(WatchesM(s
      }
 else if(i==490||i==491||i==492){      Get.off(WatchesM(selectedPage: 3,));
      }
-
-
+else if(i==493||i==494||i==495||i==496||i==497||i==498){      Get.off(Hats(selectedPage: 0,));
+     }
+else if(i==499||i==500||i==501){      Get.off(Hats(selectedPage: 1,));
+     }
+else if(i==502||i==503||i==504){      Get.off(Hats(selectedPage: 2,));
+     }
+else if(i==505||i==506||i==507){      Get.off(Hats(selectedPage: 3,));
+     }
+else if(i==508||i==509||i==510){      Get.off(Hats(selectedPage: 4,));
+     }
+else if(i==511||i==512||i==513){      Get.off(Hats(selectedPage: 5,));
+     }
+else if(i==514||i==515||i==516){      Get.off(Hats(selectedPage: 6,));
+     }
+else if(i==517||i==518||i==519){      Get.off(Ties(selectedPage: 0,));
+     }
+else if(i==520||i==521||i==522){      Get.off(Ties(selectedPage: 1,));
+     }
+else if(i==523||i==524||i==525||i==526||i==527||i==528){      Get.off(AccessW(selectedPage: 1,));
+     }
+else if(i==529||i==530||i==531||i==532||i==533||i==534){      Get.off(AccessW(selectedPage: 2,));
+     }
+else if(i==535||i==536||i==537){      Get.off(AccessW(selectedPage: 3,));
+     }
+else if(i==538||i==539||i==540){      Get.off(AccessW(selectedPage: 4,));
+     }
+else if(i==541||i==542||i==543){      Get.off(AccessW(selectedPage: 5,));
+     }
+else if(i==544||i==545||i==546||i==547||i==548||i==549){      Get.off(AccessW(selectedPage: 6,));
+     }
+else if(i==550||i==551||i==552||i==553||i==554||i==555){      Get.off(AccessW(selectedPage: 7,));
+     }
+else if(i==556||i==557||i==558){      Get.off(AccessW(selectedPage: 8,));
+     }
+else if(i==559||i==560||i==561){      Get.off(AccessW(selectedPage: 9,));
+     }
+else if(i==562||i==563||i==564){      Get.off(AccessW(selectedPage: 10,));
+     }
+else if(i==565||i==566||i==567||i==568||i==569||i==570){      Get.off(AccessW(selectedPage: 11,));
+     }
+else if(i==571||i==572||i==573){      Get.off(AccessW(selectedPage: 12,));
+     }
+else if(i==574||i==575||i==576){      Get.off(ActiveWearW(selectedPage: 0,));
+     }
+else if(i==577||i==578||i==579){      Get.off(ActiveWearW(selectedPage: 1,));
+     }
+else if(i==580||i==581||i==582){      Get.off(ActiveWearW(selectedPage: 2,));
+     }
+else if(i==583||i==584||i==585){      Get.off(ActiveWearW(selectedPage: 3,));
+     }
+else if(i==586||i==587||i==588){      Get.off(ActiveWearW(selectedPage: 4,));
+     }
+else if(i==589||i==590||i==591){      Get.off(ActiveWearW(selectedPage: 5,));
+     }
+else if(i==592||i==593||i==594){      Get.off(ActiveWearW(selectedPage: 6,));
+     }
+else if(i==595||i==596||i==597){      Get.off(BagsW(selectedPage: 0,));
+     }
+else if(i==598||i==599||i==600){      Get.off(BagsW(selectedPage: 1,));
+     }
+else if(i==601||i==602||i==603){      Get.off(BagsW(selectedPage: 2,));
+     }
+else if(i==604||i==605||i==606||i==607||i==608||i==609){      Get.off(BagsW(selectedPage: 3,));
+     }
+else if(i==610||i==611||i==612||i==613||i==614||i==615){      Get.off(BagsW(selectedPage: 4,));
+     }
+else if(i==616||i==617||i==618){      Get.off(BagsW(selectedPage: 5,));
+     }
+else if(i==619||i==620||i==621){      Get.off(BagsW(selectedPage: 6,));
+     }
+else if(i==622||i==623||i==624){      Get.off(BagsW(selectedPage: 7,));
+     }
+else if(i==625||i==626||i==627){      Get.off(BagsW(selectedPage: 8,));
+     }
+else if(i==628||i==629||i==630){      Get.off(BagsW(selectedPage: 9,));
+     }
+else if(i==631||i==632||i==633){      Get.off(BagsW(selectedPage: 10,));
+     }
+else if(i==634||i==635||i==636){      Get.off(BagsW(selectedPage: 11,));
+     }
 
 
 
