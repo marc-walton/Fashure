@@ -3,9 +3,6 @@ import 'package:fashow/Constants.dart';
 import 'package:fashow/size_config.dart';
 import 'package:fashow/ActivityFeed.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:getflutter/components/button/gf_button.dart';
-import 'package:getflutter/shape/gf_button_shape.dart';
-import 'package:image/image.dart';
 import 'package:paginate_firestore/paginate_firestore.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fashow/HomePage.dart';
@@ -14,6 +11,10 @@ import 'package:fashow/user.dart';
 import 'package:fashow/product_custom.dart';
 import 'package:fashow/Product_screen.dart';
 class TrouserM extends StatefulWidget {
+  final  int selectedPage;
+
+  const TrouserM({Key key, this.selectedPage}) : super(key: key);
+
   @override
   _TrouserMState createState() => _TrouserMState();
 }
@@ -717,6 +718,8 @@ class _TrouserMState extends State<TrouserM> {
       quarterTurns: 3,
       child: Expanded(
         child: DefaultTabController(
+            initialIndex:widget.selectedPage ?? 0,
+
             length:8,
             child: Scaffold(
 
@@ -730,10 +733,10 @@ class _TrouserMState extends State<TrouserM> {
                   unselectedLabelColor: kIcon,
 
                   tabs:[
-                   Text("Skinny fit",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5,),),
-                    Text("Slim fit",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5,),),
-                    Text("Tapered fit",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5),),
-                    Text("Regular fit",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5),),
+                   Text("Skinny fit Trousers",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5,),),
+                    Text("Slim fit Trousers",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5,),),
+                    Text("Tapered fit Trousers",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5),),
+                    Text("Regular fit Trousers",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5),),
                     Text("Tailored Trousers",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5),),
                     Text("Cargo pants",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5),),
                     Text("Chinos",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5),),

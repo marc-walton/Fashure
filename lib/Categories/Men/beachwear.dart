@@ -13,8 +13,11 @@ import 'package:fashow/progress.dart';
 import 'package:fashow/user.dart';
 import 'package:fashow/product_custom.dart';
 import 'package:fashow/Product_screen.dart';
-class BeachwearM extends StatefulWidget {
-  @override
+class BeachwearM extends StatefulWidget { final  int selectedPage;
+
+const BeachwearM({Key key, this.selectedPage}) : super(key: key);
+
+@override
   _BeachwearMState createState() => _BeachwearMState();
 }
 
@@ -492,6 +495,8 @@ class _BeachwearMState extends State<BeachwearM> {
         quarterTurns: 3,
         child: Expanded(
           child: DefaultTabController(
+              initialIndex:widget.selectedPage ?? 0,
+
               length:5,
               child: Scaffold(
                 appBar:AppBar(

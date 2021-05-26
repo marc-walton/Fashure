@@ -3,9 +3,6 @@ import 'package:fashow/Constants.dart';
 import 'package:fashow/size_config.dart';
 import 'package:fashow/ActivityFeed.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:getflutter/components/button/gf_button.dart';
-import 'package:getflutter/shape/gf_button_shape.dart';
-import 'package:image/image.dart';
 import 'package:paginate_firestore/paginate_firestore.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fashow/HomePage.dart';
@@ -14,11 +11,16 @@ import 'package:fashow/user.dart';
 import 'package:fashow/product_custom.dart';
 import 'package:fashow/Product_screen.dart';
 class ActiveWear extends StatefulWidget {
+  final  int selectedPage;
+
+  const ActiveWear({Key key, this.selectedPage}) : super(key: key);
+
   @override
   _ActiveWearState createState() => _ActiveWearState();
 }
 
 class _ActiveWearState extends State<ActiveWear> {
+
   df({String productname,String usd,String inr,String cny,String eur,String gbp,String prodId,String ownerId,}){
     if(currentUser.country=='India'){
       return
@@ -568,6 +570,8 @@ class _ActiveWearState extends State<ActiveWear> {
       quarterTurns: 3,
       child: Expanded(
         child: DefaultTabController(
+            initialIndex:widget.selectedPage ?? 0,
+
             length:6,
             child: Scaffold(
               appBar:AppBar(

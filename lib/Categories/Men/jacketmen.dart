@@ -14,6 +14,9 @@ import 'package:fashow/user.dart';
 import 'package:fashow/product_custom.dart';
 import 'package:fashow/Product_screen.dart';
 class JacketM extends StatefulWidget {
+  final  int selectedPage;
+  const JacketM({Key key, this.selectedPage}) : super(key: key);
+
   @override
   _JacketMState createState() => _JacketMState();
 }
@@ -947,6 +950,8 @@ class _JacketMState extends State<JacketM> {
       quarterTurns: 3,
       child: Expanded(
         child: DefaultTabController(
+            initialIndex:widget.selectedPage ?? 0,
+
             length:11,
             child: Scaffold(
               appBar:AppBar(

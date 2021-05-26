@@ -12,6 +12,10 @@ import 'package:fashow/user.dart';
 import 'package:fashow/product_custom.dart';
 import 'package:fashow/Product_screen.dart';
 class DenimM extends StatefulWidget {
+  final  int selectedPage;
+
+  const DenimM({Key key, this.selectedPage}) : super(key: key);
+
   @override
   _DenimMState createState() => _DenimMState();
 }
@@ -716,6 +720,8 @@ class _DenimMState extends State<DenimM> {
       quarterTurns: 3,
       child: Expanded(
         child: DefaultTabController(
+            initialIndex:widget.selectedPage ?? 0,
+
             length:8,
             child: Scaffold(
               appBar:AppBar(

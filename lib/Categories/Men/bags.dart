@@ -3,8 +3,7 @@ import 'package:fashow/Constants.dart';
 import 'package:fashow/size_config.dart';
 import 'package:fashow/ActivityFeed.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:getflutter/components/button/gf_button.dart';
-import 'package:getflutter/shape/gf_button_shape.dart';
+
 import 'package:paginate_firestore/paginate_firestore.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fashow/HomePage.dart';
@@ -13,6 +12,10 @@ import 'package:fashow/user.dart';
 import 'package:fashow/product_custom.dart';
 import 'package:fashow/Product_screen.dart';
 class Bags extends StatefulWidget {
+  final  int selectedPage;
+
+  const Bags({Key key, this.selectedPage}) : super(key: key);
+
   @override
   _BagsState createState() => _BagsState();
 }
@@ -868,6 +871,8 @@ class _BagsState extends State<Bags> {
       quarterTurns: 3,
       child: Expanded(
         child: DefaultTabController(
+            initialIndex:widget.selectedPage ?? 0,
+
             length:10,
             child: Scaffold(
               appBar:AppBar(
@@ -885,7 +890,7 @@ class _BagsState extends State<Bags> {
                     Text("Laptop Bags",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5),),
                     Text("Shoulder Bags",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5),),
                     Text("Duffle bags & holdall",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5),),
-    Text("Belt Bags",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5),),
+               Text("Belt Bags",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5),),
     Text("Clutch bags",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5),),
     Text("Messenger bags",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5),),
     Text("Tote bags",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5),),

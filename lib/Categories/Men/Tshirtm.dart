@@ -3,8 +3,6 @@ import 'package:fashow/Constants.dart';
 import 'package:fashow/size_config.dart';
 import 'package:fashow/ActivityFeed.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:getflutter/components/button/gf_button.dart';
-import 'package:getflutter/shape/gf_button_shape.dart';
 import 'package:paginate_firestore/paginate_firestore.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fashow/HomePage.dart';
@@ -13,6 +11,10 @@ import 'package:fashow/user.dart';
 import 'package:fashow/product_custom.dart';
 import 'package:fashow/Product_screen.dart';
 class TshirtM extends StatefulWidget {
+  final  int selectedPage;
+
+  const TshirtM({Key key, this.selectedPage}) : super(key: key);
+
   @override
   _TshirtMState createState() => _TshirtMState();
 }
@@ -339,6 +341,7 @@ vests(){
         quarterTurns: 3,
         child: Expanded(
           child: DefaultTabController(
+              initialIndex:widget.selectedPage ?? 0,
               length:3,
               child: Scaffold(
                 appBar:AppBar(
@@ -353,7 +356,7 @@ vests(){
                     tabs:[
                       Text("T-shirts",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5,),),
                       Text("Polo Shirts",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5,),),
-                      Text("Tank tops and vests",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5),),
+                      Text("Tank tops & vests",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5),),
 
                     ],
                   ),

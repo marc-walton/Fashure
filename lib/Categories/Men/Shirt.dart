@@ -12,6 +12,10 @@ import 'package:fashow/user.dart';
 import 'package:fashow/product_custom.dart';
 import 'package:fashow/Product_screen.dart';
 class ShirtM extends StatefulWidget {
+  final  int selectedPage;
+
+  const ShirtM({Key key, this.selectedPage}) : super(key: key);
+
   @override
   _ShirtMState createState() => _ShirtMState();
 }
@@ -262,6 +266,8 @@ class _ShirtMState extends State<ShirtM> {
         quarterTurns: 3,
         child: Expanded(
           child: DefaultTabController(
+              initialIndex:widget.selectedPage ?? 0,
+
               length:2,
               child: Scaffold(
                 appBar:AppBar(
@@ -274,7 +280,7 @@ class _ShirtMState extends State<ShirtM> {
                     unselectedLabelColor: kIcon,
 
                     tabs:[
-                      Text("Casual Wear",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5,),),
+                      Text("Casual Shirts",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5,),),
                       Text("Formal Shirts",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5,),),
 
                     ],
