@@ -15,13 +15,11 @@ import 'package:fashow/Categories/Kids/baby/girl/Tops.dart';
 import 'package:fashow/Categories/Kids/baby/girl/Tracks.dart';
 import 'package:fashow/Categories/Kids/baby/girl/Trousers.dart';
 import 'package:fashow/Categories/Kids/baby/girl/ethnic.dart';
+
 import 'package:fashow/ActivityFeed.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:getflutter/components/button/gf_button.dart';
-import 'package:getflutter/shape/gf_button_shape.dart';
-import 'package:image/image.dart';
+
 import 'package:paginate_firestore/paginate_firestore.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fashow/HomePage.dart';
 import 'package:fashow/progress.dart';
 import 'package:fashow/user.dart';

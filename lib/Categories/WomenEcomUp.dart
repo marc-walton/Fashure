@@ -136,6 +136,7 @@ List<S2Choice<String>> WDenim = [
   S2Choice<String>(value: 'WWide-Leg jeans', title: 'Wide-Leg jeans'),
   S2Choice<String>(value: 'WCropped jeans', title: 'Cropped jeans'),
   S2Choice<String>(value: 'WBootcut jeans', title: 'Bootcut jeans'),
+  S2Choice<String>(value: 'JHigh Waisted', title: 'High Waisted jeans'),
   S2Choice<String>(value: 'WBoyfriend-fit jeans', title: 'Boyfriend-fit jeans'),
   S2Choice<String>(value: 'WFlare & Bell Bottom Jeans', title: 'Flare & Bell Bottom Jeans'),
   S2Choice<String>(value: 'WJeggings', title: 'Jeggings'),

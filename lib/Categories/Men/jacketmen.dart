@@ -975,7 +975,7 @@ class _JacketMState extends State<JacketM> {
                     Text("Leather Jackets",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5),),
                     Text("Military jackets",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5),),
                     Text("Sport jackets",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5),),
-                    Text("Waistcoats & Gillets",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5),),
+                    Text("Waistcoats & Gilets",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5),),
 
                   ],
                 ),

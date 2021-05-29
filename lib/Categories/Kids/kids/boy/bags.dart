@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:fashow/size_config.dart';
 import 'package:fashow/Constants.dart';
+import 'package:fashow/size_config.dart';
 import 'package:fashow/ActivityFeed.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-
 import 'package:paginate_firestore/paginate_firestore.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fashow/HomePage.dart';
@@ -11,101 +10,93 @@ import 'package:fashow/progress.dart';
 import 'package:fashow/user.dart';
 import 'package:fashow/product_custom.dart';
 import 'package:fashow/Product_screen.dart';
-class ShortsW extends StatefulWidget {
-  final  int selectedPage;
+df({String productname,String usd,String inr,String cny,String eur,String gbp,String prodId,String ownerId,}){
+  if(currentUser.country=='India'){
+    return
 
-  const ShortsW({Key key, this.selectedPage}) : super(key: key);
-  @override
-  _ShortsWState createState() => _ShortsWState();
+      ListTile(
+        title:            Text(productname, style: TextStyle(
+            color: kText,
+            fontSize: 15.0,
+            fontWeight: FontWeight.bold),),
+        subtitle:            Text( "₹$inr",style: TextStyle(color: kText,
+            fontSize: 20.0,
+            fontWeight: FontWeight.bold)),
+
+      );
+
+  }
+  else if(currentUser.country=='US'){
+    return
+
+      ListTile(
+        title:                      Text(productname, style: TextStyle(
+            color: kText,
+            fontSize: 15.0,
+            fontWeight: FontWeight.bold),),
+
+        subtitle:          Text( "\u0024 $usd",style: TextStyle(color: kText,
+            fontSize: 20.0,
+            fontWeight: FontWeight.bold)),
+
+      );
+
+
+  }
+  else if (currentUser.country == 'Europe'){
+    return
+
+      ListTile(
+        title:                      Text(productname, style: TextStyle(
+            color: kText,
+            fontSize: 15.0,
+            fontWeight: FontWeight.bold),),
+
+        subtitle:           Text( "€ $eur",style: TextStyle(color: kText,
+            fontSize: 20.0,
+            fontWeight: FontWeight.bold)),
+
+      );
+
+  }
+  else if (currentUser.country == 'UK'){
+    return
+
+      ListTile(
+        title:                    Text(productname, style: TextStyle(
+            color: kText,
+            fontSize: 15.0,
+            fontWeight: FontWeight.bold),),
+
+        subtitle:                     Text( "£  $gbp ",style: TextStyle(color: kText,
+            fontSize: 20.0,
+            fontWeight: FontWeight.bold)),
+
+
+      );
+
+  }
+  else{
+    return
+
+      ListTile(
+        title:                      Text(productname, style: TextStyle(
+            color: kText,
+            fontSize: 15.0,
+            fontWeight: FontWeight.bold),),
+
+        subtitle:          Text( "\u0024 $usd",style: TextStyle(color: kText,
+            fontSize: 20.0,
+            fontWeight: FontWeight.bold)),
+
+      );
+
+
+  }
 }
 
-class _ShortsWState extends State<ShortsW> {
-  df({String productname,String usd,String inr,String cny,String eur,String gbp,String prodId,String ownerId,}){
-    if(currentUser.country=='India'){
-      return
-
-        ListTile(
-          title:            Text(productname, style: TextStyle(
-              color: kText,
-              fontSize: 15.0,
-              fontWeight: FontWeight.bold),),
-          subtitle:            Text( "₹$inr",style: TextStyle(color: kText,
-              fontSize: 20.0,
-              fontWeight: FontWeight.bold)),
-
-        );
-
-    }
-    else if(currentUser.country=='US'){
-      return
-
-        ListTile(
-          title:                      Text(productname, style: TextStyle(
-              color: kText,
-              fontSize: 15.0,
-              fontWeight: FontWeight.bold),),
-
-          subtitle:          Text( "\u0024 $usd",style: TextStyle(color: kText,
-              fontSize: 20.0,
-              fontWeight: FontWeight.bold)),
-
-        );
-
-
-    }
-    else if (currentUser.country == 'Europe'){
-      return
-
-        ListTile(
-          title:                      Text(productname, style: TextStyle(
-              color: kText,
-              fontSize: 15.0,
-              fontWeight: FontWeight.bold),),
-
-          subtitle:           Text( "€ $eur",style: TextStyle(color: kText,
-              fontSize: 20.0,
-              fontWeight: FontWeight.bold)),
-
-        );
-
-    }
-    else if (currentUser.country == 'UK'){
-      return
-
-        ListTile(
-          title:                    Text(productname, style: TextStyle(
-              color: kText,
-              fontSize: 15.0,
-              fontWeight: FontWeight.bold),),
-
-          subtitle:                     Text( "£  $gbp ",style: TextStyle(color: kText,
-              fontSize: 20.0,
-              fontWeight: FontWeight.bold)),
-
-
-        );
-
-    }
-    else{
-      return
-
-        ListTile(
-          title:                      Text(productname, style: TextStyle(
-              color: kText,
-              fontSize: 15.0,
-              fontWeight: FontWeight.bold),),
-
-          subtitle:          Text( "\u0024 $usd",style: TextStyle(color: kText,
-              fontSize: 20.0,
-              fontWeight: FontWeight.bold)),
-
-        );
-
-
-    }
-  }
-  WShort(){
-    return  PaginateFirestore(
+back(){
+  return  PaginateFirestore(
 //    itemsPerPage: 2,
       itemBuilderType:
       PaginateBuilderType.listView,
@@ -174,12 +165,14 @@ class _ShortsWState extends State<ShortsW> {
           );
       },
       query: Firestore.instance.collectionGroup('userProducts').orderBy('timestamp',descending: true)
-          .where('Gender',isEqualTo: 'Women')
-          .where('Category',isEqualTo: 'WShort-length')
-     );
-  }
-  WKnee(){
-    return  PaginateFirestore(
+          .where('Gender',isEqualTo: 'Kids-Boys')
+          .where('Category',isEqualTo: 'KBBackpacks')
+
+
+  );
+}
+KBShoulder(){
+  return  PaginateFirestore(
 //    itemsPerPage: 2,
       itemBuilderType:
       PaginateBuilderType.listView,
@@ -248,12 +241,13 @@ class _ShortsWState extends State<ShortsW> {
           );
       },
       query: Firestore.instance.collectionGroup('userProducts').orderBy('timestamp',descending: true)
-          .where('Gender',isEqualTo: 'Women')
-          .where('Category',isEqualTo: 'WKnee-length')
-     );
-  }
-  WSports(){
-    return  PaginateFirestore(
+          .where('Gender',isEqualTo: 'Kids-Boys')
+          .where('Category',isEqualTo: 'KBShoulder Bags')
+
+  );
+}
+KBBeach(){
+  return  PaginateFirestore(
 //    itemsPerPage: 2,
       itemBuilderType:
       PaginateBuilderType.listView,
@@ -322,63 +316,61 @@ class _ShortsWState extends State<ShortsW> {
           );
       },
       query: Firestore.instance.collectionGroup('userProducts').orderBy('timestamp',descending: true)
-          .where('Gender',isEqualTo: 'Women')
+          .where('Gender',isEqualTo: 'Kids-Boys')
+          .where('Category',isEqualTo: 'KBBeach Bags')
+  );
+}
+class BagsKB extends StatelessWidget {
+  final  int selectedPage;
 
-          .where('Category',isEqualTo: 'WSports Shorts')
-     );
-  }
-
-
-
+  const BagsKB({Key key, this.selectedPage}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-      SizeConfig().init(context);
-    return  RotatedBox(
-      quarterTurns: 3,
-      child: Expanded(
-        child: DefaultTabController(
-            initialIndex:widget.selectedPage ?? 0,
+    return
+      RotatedBox(
+        quarterTurns: 3,
+        child: Expanded(
+          child: DefaultTabController(
+              initialIndex:selectedPage ?? 0,
 
-            length:3,
-            child: Scaffold(
-
-              appBar:AppBar(
-                toolbarHeight: SizeConfig.safeBlockHorizontal * 8,
-                backgroundColor: kPrimaryColor,
-                elevation: 0,
-                bottom: TabBar(
-                  isScrollable: true,
-                  labelColor: Colors.white,
-                  unselectedLabelColor: kIcon,
-
-                  tabs:[
-                    Text("Short-length",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5,),),
-                    Text("Knee-length",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5,),),
-                    Text("Sports Shorts",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5),),
+              length:3,
+              child: Scaffold(
+                appBar:AppBar(
+                  toolbarHeight: SizeConfig.safeBlockHorizontal * 8,
+                  backgroundColor: kPrimaryColor,
+                  elevation: 0,
+                  bottom: TabBar(
+                    isScrollable: true,
+                    labelColor: Colors.white,
+                    unselectedLabelColor: kIcon,
 
 
+                    tabs:[
+                      Text("Backpacks",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5,),),
+                      Text("Shoulder Bags",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5,),),
+                      Text("Beach Bags",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5,),),
 
-                  ],
+                    ],
+                  ),
                 ),
-              ),
 
-              body: Container(decoration: BoxDecoration(
-                  gradient: fabGradient
-              ) ,
-                alignment: Alignment.center,
-                child: RotatedBox(
-                  quarterTurns: 1,
-                  child: TabBarView(
-                      children:<Widget> [
-                        WShort(),
-                        WKnee(),
-                        WSports(),
+                body: Container( decoration: BoxDecoration(
+                    gradient: fabGradient
+                ) ,
+                  alignment: Alignment.center,
+                  child: RotatedBox(
+                    quarterTurns: 1,
+                    child: TabBarView(
+                        children:<Widget> [
+                          back(),
+                          KBShoulder(),
+                          KBBeach(),
                         ]),
+                  ),
                 ),
-              ),
-            )
+              )
+          ),
         ),
-      ),
-    );
+      );
   }
 }

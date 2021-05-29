@@ -3,9 +3,6 @@ import 'package:fashow/Constants.dart';
 import 'package:fashow/size_config.dart';
 import 'package:fashow/ActivityFeed.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:getflutter/components/button/gf_button.dart';
-import 'package:getflutter/shape/gf_button_shape.dart';
-import 'package:image/image.dart';
 import 'package:paginate_firestore/paginate_firestore.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fashow/HomePage.dart';
@@ -14,6 +11,9 @@ import 'package:fashow/user.dart';
 import 'package:fashow/product_custom.dart';
 import 'package:fashow/Product_screen.dart';
 class KidSB extends StatefulWidget {
+  final  int selectedPage;
+
+  const KidSB({Key key, this.selectedPage}) : super(key: key);
   @override
   _KidSBState createState() => _KidSBState();
 }
@@ -635,7 +635,9 @@ class _KidSBState extends State<KidSB> {
       quarterTurns: 3,
       child: Expanded(
         child: DefaultTabController(
-            length:7,
+          initialIndex:widget.selectedPage ?? 0,
+
+          length:7,
             child: Scaffold(
               appBar:AppBar(
                 toolbarHeight: SizeConfig.safeBlockHorizontal * 8,

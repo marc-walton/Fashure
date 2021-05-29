@@ -3,9 +3,6 @@ import 'package:fashow/Constants.dart';
 import 'package:fashow/size_config.dart';
 import 'package:fashow/ActivityFeed.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:getflutter/components/button/gf_button.dart';
-import 'package:getflutter/shape/gf_button_shape.dart';
-import 'package:image/image.dart';
 import 'package:paginate_firestore/paginate_firestore.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fashow/HomePage.dart';
@@ -14,6 +11,9 @@ import 'package:fashow/user.dart';
 import 'package:fashow/product_custom.dart';
 import 'package:fashow/Product_screen.dart';
 class JacketW extends StatefulWidget {
+  final  int selectedPage;
+
+  const JacketW({Key key, this.selectedPage}) : super(key: key);
   @override
   _JacketWState createState() => _JacketWState();
 }
@@ -1328,6 +1328,8 @@ class _JacketWState extends State<JacketW> {
       quarterTurns: 3,
       child: Expanded(
         child: DefaultTabController(
+            initialIndex:widget.selectedPage ?? 0,
+
             length:14,
             child: Scaffold(
 
@@ -1352,12 +1354,11 @@ class _JacketWState extends State<JacketW> {
                     Text("Tweed Jackets",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5),),
                     Text("Cropped Jackets",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5),),
                     Text("Padded & Puffer Jackets",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5),),
-
                     Text("Hooded Jackets",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5),),
                     Text("Leather Jackets",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5),),
                     Text("Military jackets",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5),),
                     Text("Sport jackets",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5),),
-                    Text("Waistcots & Gillets",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5),),
+                    Text("Waistcoats & Gilets",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5),),
 
                   ],
                 ),

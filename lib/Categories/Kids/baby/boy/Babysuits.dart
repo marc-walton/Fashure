@@ -14,6 +14,9 @@ import 'package:fashow/user.dart';
 import 'package:fashow/product_custom.dart';
 import 'package:fashow/Product_screen.dart';
 class BabysB extends StatefulWidget {
+  final  int selectedPage;
+
+  const BabysB({Key key, this.selectedPage}) : super(key: key);
   @override
   _BabysBState createState() => _BabysBState();
 }
@@ -413,6 +416,8 @@ class _BabysBState extends State<BabysB> {
       quarterTurns: 3,
       child: Expanded(
         child: DefaultTabController(
+            initialIndex:widget.selectedPage ?? 0,
+
             length:4,
             child: Scaffold(
 

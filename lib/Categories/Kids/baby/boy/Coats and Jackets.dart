@@ -14,6 +14,9 @@ import 'package:fashow/user.dart';
 import 'package:fashow/product_custom.dart';
 import 'package:fashow/Product_screen.dart';
 class BabyCB extends StatefulWidget {
+  final  int selectedPage;
+
+  const BabyCB({Key key, this.selectedPage}) : super(key: key);
   @override
   _BabyCBState createState() => _BabyCBState();
 }
@@ -103,6 +106,7 @@ class _BabyCBState extends State<BabyCB> {
 
     }
   }
+
   BBBlazer(){
     return  PaginateFirestore(
 //    itemsPerPage: 2,
@@ -627,8 +631,6 @@ class _BabyCBState extends State<BabyCB> {
             .where('Category',isEqualTo: 'BBWaist Coats & Gilets')
     );
   }
-
-
    @override
   Widget build(BuildContext context) {
      SizeConfig().init(context);
@@ -636,6 +638,8 @@ class _BabyCBState extends State<BabyCB> {
        quarterTurns: 3,
        child: Expanded(
          child: DefaultTabController(
+             initialIndex:widget.selectedPage ?? 0,
+
              length:7,
              child: Scaffold(
 
@@ -656,7 +660,7 @@ class _BabyCBState extends State<BabyCB> {
                      Text("Bomber Jackets",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5),),
                      Text("Wool coats",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5),),
                      Text("Rain Coats",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5),),
-                     Text("Waist Coats & Gilets",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5),),
+                     Text("Waistcoats & Gilets",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5),),
                    ],
                  ),
                ),

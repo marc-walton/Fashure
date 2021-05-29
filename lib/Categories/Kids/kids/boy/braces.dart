@@ -10,7 +10,7 @@ import 'package:fashow/progress.dart';
 import 'package:fashow/user.dart';
 import 'package:fashow/product_custom.dart';
 import 'package:fashow/Product_screen.dart';
-WTies(){
+KBBraces(){
   return  PaginateFirestore(
 //    itemsPerPage: 2,
       itemBuilderType:
@@ -80,12 +80,12 @@ WTies(){
           );
       },
       query: Firestore.instance.collectionGroup('userProducts').orderBy('timestamp',descending: true)
-          .where('Gender',isEqualTo: 'Women')
-          .where('Category',isEqualTo: 'WTies')
+          .where('Gender',isEqualTo: 'Kids-Boys')
+          .where('Category',isEqualTo: 'KBBraces')
 
   );
 }
-WCollars(){
+KBBelts(){
   return  PaginateFirestore(
 //    itemsPerPage: 2,
       itemBuilderType:
@@ -155,8 +155,8 @@ WCollars(){
           );
       },
       query: Firestore.instance.collectionGroup('userProducts').orderBy('timestamp',descending: true)
-          .where('Gender',isEqualTo: 'Women')
-          .where('Category',isEqualTo: 'WCollars')
+          .where('Gender',isEqualTo: 'Kids-Boys')
+          .where('Category',isEqualTo: 'KBBelts')
 
   );
 }
@@ -245,53 +245,56 @@ df({String productname,String usd,String inr,String cny,String eur,String gbp,St
   }
 }
 
-class Ties extends StatelessWidget {
+class BracesKB extends StatelessWidget {
   final  int selectedPage;
 
-  const Ties({Key key, this.selectedPage}) : super(key: key);
-
+  const BracesKB({Key key, this.selectedPage}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return     RotatedBox(
-      quarterTurns: 3,
-      child: Expanded(
-        child: DefaultTabController(
-            initialIndex:selectedPage ?? 0,
-            length:2,
-            child: Scaffold(
-              appBar:AppBar(
-                toolbarHeight: SizeConfig.safeBlockHorizontal * 8,
-                backgroundColor: kPrimaryColor,
-                elevation: 0,
-                bottom: TabBar(
-                  isScrollable: true,
-                  labelColor: Colors.white,
-                  unselectedLabelColor: kIcon,
-                  tabs:[
-                    Text("Ties",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5,),),
-                    Text("Collars",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5,),),
-                  ],
-                ),
-              ),
+    // SizeConfig().init(context);
+    return
+      RotatedBox(
+        quarterTurns: 3,
+        child: Expanded(
+          child: DefaultTabController(
+              initialIndex:selectedPage ?? 0,
 
-              body: Container(
-                decoration: BoxDecoration(
+              length:2,
+              child: Scaffold(
+                appBar:AppBar(
+                  toolbarHeight: SizeConfig.safeBlockHorizontal * 8,
+                  backgroundColor: kPrimaryColor,
+                  elevation: 0,
+                  bottom: TabBar(
+                    isScrollable: true,
+                    labelColor: Colors.white,
+                    unselectedLabelColor: kIcon,
+
+
+                    tabs:[
+                      Text("Belts",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5,),),
+                      Text("Braces",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5,),),
+
+
+                    ],
+                  ),
+                ),
+
+                body: Container( decoration: BoxDecoration(
                     gradient: fabGradient
                 ) ,
-                alignment: Alignment.center,
-                child: RotatedBox(
-                  quarterTurns: 1,
-                  child: TabBarView(
-                      children:<Widget> [
-                        WTies(),
-                        WCollars(),
-                      ]),
+                  alignment: Alignment.center,child:RotatedBox(
+                    quarterTurns: 1,
+                    child: TabBarView(
+                        children:<Widget> [
+                          KBBelts(),
+                          KBBraces(),
+                        ]),
+                  ),
                 ),
-              ),
-            )
+              )
+          ),
         ),
-      ),
-    );
-
+      );
   }
 }

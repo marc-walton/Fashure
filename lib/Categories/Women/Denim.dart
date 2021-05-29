@@ -3,9 +3,6 @@ import 'package:fashow/size_config.dart';
 import 'package:fashow/Constants.dart';
 import 'package:fashow/ActivityFeed.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:getflutter/components/button/gf_button.dart';
-import 'package:getflutter/shape/gf_button_shape.dart';
-import 'package:image/image.dart';
 import 'package:paginate_firestore/paginate_firestore.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fashow/HomePage.dart';
@@ -14,6 +11,9 @@ import 'package:fashow/user.dart';
 import 'package:fashow/product_custom.dart';
 import 'package:fashow/Product_screen.dart';
 class DenimW extends StatefulWidget {
+  final  int selectedPage;
+
+  const DenimW({Key key, this.selectedPage}) : super(key: key);
   @override
   _DenimWState createState() => _DenimWState();
 }
@@ -1015,6 +1015,82 @@ class _DenimWState extends State<DenimW> {
 
     );
   }
+  Whigh(){
+    return  PaginateFirestore(
+//    itemsPerPage: 2,
+      itemBuilderType:
+      PaginateBuilderType.listView,
+      itemBuilder: (index, context, documentSnapshot)   {
+//        DocumentSnapshot ds = snapshot.data.documents[index];
+        String ownerId = documentSnapshot.data['ownerId'];
+        String prodId = documentSnapshot.data['prodId'];
+        String shopmediaUrl = documentSnapshot.data['shopmediaUrl'];
+        String productname = documentSnapshot.data['productname'];
+        String inr = documentSnapshot.data['inr'];
+        String usd = documentSnapshot.data['usd'];
+        String eur = documentSnapshot.data['eur'];
+        String gbp = documentSnapshot.data['gbp'];
+        return
+          FutureBuilder(
+            future: usersRef.document(ownerId).get(),
+            builder: (context, snapshot) {
+              if (!snapshot.hasData) {
+                return circularProgress();
+              }
+              User user = User.fromDocument(snapshot.data);
+//          bool isPostOwner = currentUserId == ownerId;
+              return Column(
+                children: <Widget>[
+                  GestureDetector(
+                    onTap: () => showProfile(context, profileId: user.id),
+                    child: ListTile(
+                      leading: CircleAvatar(
+                        backgroundImage: CachedNetworkImageProvider(user.photoUrl),
+                        backgroundColor: Colors.grey,
+                      ),
+                      title: Text(
+                        user.displayName,
+                        style: TextStyle(
+                          color: kText,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                  ),
+
+                  GestureDetector(
+                    onTap: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => ProductScreen(
+                          prodId: prodId,
+                          userId: ownerId,
+                        ),
+                      ),
+                    ),
+                    child: Stack(
+                      alignment: Alignment.center,
+                      children: <Widget>[
+                        ClipRRect(
+                            borderRadius: BorderRadius.circular(20.0),child: cachedNetworkImage(shopmediaUrl)),
+                      ],),),
+                  df(productname:productname, usd:usd,inr:inr,eur:eur,gbp:gbp, prodId:prodId, ownerId:ownerId,),
+
+                  Divider(color: kGrey,),
+                ],
+
+              );
+
+            },
+          );
+      },
+      query: Firestore.instance.collectionGroup('userProducts').orderBy('timestamp',descending: true)
+          .where('Gender',isEqualTo: 'Women')
+          .where('Category',isEqualTo: 'JHigh Waisted'),
+
+
+    );
+  }
   WJeggings(){
     return  PaginateFirestore(
 //    itemsPerPage: 2,
@@ -1098,7 +1174,9 @@ class _DenimWState extends State<DenimW> {
       quarterTurns: 3,
       child: Expanded(
         child: DefaultTabController(
-            length:13,
+            initialIndex:widget.selectedPage ?? 0,
+
+            length:14,
             child: Scaffold(
 
               appBar:AppBar(
@@ -1121,6 +1199,7 @@ class _DenimWState extends State<DenimW> {
 
                    Text("Straight fit jeans",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5),),
                     Text("Wide-Leg jeans",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5),),
+Text("High Waist jeans",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5),),
 
                     Text("Cropped jeans",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5),),
                     Text("Bootcut jeans",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5),),
@@ -1149,6 +1228,7 @@ class _DenimWState extends State<DenimW> {
                         Tapered(),
                         WStraight(),
                         Wide(),
+                        Whigh(),
                         Cropped(),
                         Bootcut(),
                         WBoyfriend(),

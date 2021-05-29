@@ -12,6 +12,9 @@ import 'package:fashow/user.dart';
 import 'package:fashow/product_custom.dart';
 import 'package:fashow/Product_screen.dart';
 class KidkB extends StatefulWidget {
+  final  int selectedPage;
+
+  const KidkB({Key key, this.selectedPage}) : super(key: key);
   @override
   _KidkBState createState() => _KidkBState();
 }
@@ -261,6 +264,8 @@ class _KidkBState extends State<KidkB> {
       quarterTurns: 3,
       child: Expanded(
         child: DefaultTabController(
+            initialIndex:widget.selectedPage ?? 0,
+
             length:2,
             child: Scaffold(
               appBar:AppBar(

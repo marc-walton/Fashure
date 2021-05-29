@@ -1042,13 +1042,11 @@ class _CapesWState extends State<CapesW> {
                     Text("Double Breasted Coats",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5,),),
                     Text("Duffle Coats",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5),),
                     Text("Padded coats",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5),),
-
                     Text("Capes",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5),),
                     Text("Leather Coats",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5),),
                     Text("Wool Coats",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5),),
                     Text("Cargo & Military Coats",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5),),
                     Text("Faux  & Shearling Coats",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5),),
-
                     Text("Parka coats",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5),),
                     Text("Rain Coats",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5),),
                     Text("Trench Coats",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5),),

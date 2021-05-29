@@ -12,6 +12,9 @@ import 'package:fashow/user.dart';
 import 'package:fashow/product_custom.dart';
 import 'package:fashow/Product_screen.dart';
 class KnitwearW extends StatefulWidget {
+  final  int selectedPage;
+
+  const KnitwearW({Key key, this.selectedPage}) : super(key: key);
   @override
   _KnitwearWState createState() => _KnitwearWState();
 }
@@ -585,10 +588,8 @@ class _KnitwearWState extends State<KnitwearW> {
                     Text("Knitted Skirts",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5,),),
                     Text("Knitted Tops",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5),),
                     Text("Knitted  Bottoms",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5),),
-
                     Text("Dresses",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5),),
                     Text("Sweaters",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5),),
-
                   ],
                 ),
               ),

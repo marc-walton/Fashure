@@ -14,6 +14,9 @@ import 'package:fashow/user.dart';
 import 'package:fashow/product_custom.dart';
 import 'package:fashow/Product_screen.dart';
 class SkirtW extends StatefulWidget {
+  final  int selectedPage;
+
+  const SkirtW({Key key, this.selectedPage}) : super(key: key);
   @override
   _SkirtWState createState() => _SkirtWState();
 }
@@ -636,6 +639,83 @@ class _SkirtWState extends State<SkirtW> {
 
     );
   }
+  Skirts(){
+    return  PaginateFirestore(
+//    itemsPerPage: 2,
+        itemBuilderType:
+        PaginateBuilderType.listView,
+        itemBuilder: (index, context, documentSnapshot)   {
+//        DocumentSnapshot ds = snapshot.data.documents[index];
+          String ownerId = documentSnapshot.data['ownerId'];
+          String prodId = documentSnapshot.data['prodId'];
+          String shopmediaUrl = documentSnapshot.data['shopmediaUrl'];
+          String productname = documentSnapshot.data['productname'];
+          String inr = documentSnapshot.data['inr'];
+          String usd = documentSnapshot.data['usd'];
+          String eur = documentSnapshot.data['eur'];
+          String gbp = documentSnapshot.data['gbp'];
+          return
+            FutureBuilder(
+              future: usersRef.document(ownerId).get(),
+              builder: (context, snapshot) {
+                if (!snapshot.hasData) {
+                  return circularProgress();
+                }
+                User user = User.fromDocument(snapshot.data);
+//          bool isPostOwner = currentUserId == ownerId;
+                return Column(
+                  children: <Widget>[
+                    GestureDetector(
+                      onTap: () => showProfile(context, profileId: user.id),
+                      child: ListTile(
+                        leading: CircleAvatar(
+                          backgroundImage: CachedNetworkImageProvider(user.photoUrl),
+                          backgroundColor: Colors.grey,
+                        ),
+                        title: Text(
+                          user.displayName,
+                          style: TextStyle(
+                            color: kText,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                    ),
+
+                    GestureDetector(
+                      onTap: () => Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => ProductScreen(
+                            prodId: prodId,
+                            userId: ownerId,
+                          ),
+                        ),
+                      ),
+                      child: Stack(
+                        alignment: Alignment.center,
+                        children: <Widget>[
+                          ClipRRect(
+                              borderRadius: BorderRadius.circular(20.0),child: cachedNetworkImage(shopmediaUrl)),
+                        ],),),
+                    df(productname:productname, usd:usd,inr:inr,eur:eur,gbp:gbp, prodId:prodId, ownerId:ownerId,),
+
+                    Divider(color: kGrey,),
+                  ],
+
+                );
+
+              },
+            );
+        },
+        query: Firestore.instance.collectionGroup('userProducts').orderBy('timestamp',descending: true)
+            .where('Gender',isEqualTo: 'Women')
+            .where('Category',isEqualTo: 'WKnitted Skirts')
+
+
+
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -644,7 +724,9 @@ class _SkirtWState extends State<SkirtW> {
       quarterTurns: 3,
       child: Expanded(
         child: DefaultTabController(
-            length:7,
+            initialIndex:widget.selectedPage ?? 0,
+
+            length:8,
             child: Scaffold(
 
               appBar:AppBar(
@@ -665,6 +747,8 @@ class _SkirtWState extends State<SkirtW> {
                     Text("A-Line Skirts",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5),),
                     Text("Pencil Skirts",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5),),
                     Text("Asymmetric Skirts",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5),),
+                    Text("Knitted Skirts",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5),),
+
                                      ],
                 ),
               ),
@@ -685,7 +769,7 @@ class _SkirtWState extends State<SkirtW> {
                        WA(),
                         WPencil(),
 WAsymmetric(),
-
+Skirts(),
 
                       ]),
                 ),

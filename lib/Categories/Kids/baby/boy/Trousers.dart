@@ -3,9 +3,6 @@ import 'package:fashow/Constants.dart';
 import 'package:fashow/size_config.dart';
 import 'package:fashow/ActivityFeed.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:getflutter/components/button/gf_button.dart';
-import 'package:getflutter/shape/gf_button_shape.dart';
-import 'package:image/image.dart';
 import 'package:paginate_firestore/paginate_firestore.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fashow/HomePage.dart';
@@ -14,6 +11,9 @@ import 'package:fashow/user.dart';
 import 'package:fashow/product_custom.dart';
 import 'package:fashow/Product_screen.dart';
 class BabytuB extends StatefulWidget {
+  final  int selectedPage;
+
+  const BabytuB({Key key, this.selectedPage}) : super(key: key);
   @override
   _BabytuBState createState() => _BabytuBState();
 }
@@ -415,6 +415,8 @@ class _BabytuBState extends State<BabytuB> {
       quarterTurns: 3,
       child: Expanded(
         child: DefaultTabController(
+            initialIndex:widget.selectedPage ?? 0,
+
             length:4,
             child: Scaffold(
               appBar:AppBar(
@@ -425,8 +427,6 @@ class _BabytuBState extends State<BabytuB> {
                   isScrollable: true,
                   labelColor: Colors.white,
                   unselectedLabelColor: kIcon,
-
-
                   tabs:[
                     Text("Dungarees",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5,),),
                     Text("Chinos",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5,),),

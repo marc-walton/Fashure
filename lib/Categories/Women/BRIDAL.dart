@@ -13,6 +13,9 @@ import 'package:fashow/user.dart';
 import 'package:fashow/product_custom.dart';
 import 'package:fashow/Product_screen.dart';
 class Bridal extends StatefulWidget {
+  final  int selectedPage;
+
+  const Bridal({Key key, this.selectedPage}) : super(key: key);
   @override
   _BridalState createState() => _BridalState();
 }
@@ -185,6 +188,8 @@ class _BridalState extends State<Bridal> {
       quarterTurns: 3,
       child: Expanded(
         child: DefaultTabController(
+            initialIndex:widget.selectedPage ?? 0,
+
             length:1,
             child: Scaffold(
 

@@ -3,9 +3,7 @@ import 'package:fashow/Constants.dart';
 import 'package:fashow/size_config.dart';
 import 'package:fashow/ActivityFeed.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:getflutter/components/button/gf_button.dart';
-import 'package:getflutter/shape/gf_button_shape.dart';
-import 'package:image/image.dart';
+
 import 'package:paginate_firestore/paginate_firestore.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fashow/HomePage.dart';
@@ -14,6 +12,9 @@ import 'package:fashow/user.dart';
 import 'package:fashow/product_custom.dart';
 import 'package:fashow/Product_screen.dart';
 class ShoesW extends StatefulWidget {
+  final  int selectedPage;
+
+  const ShoesW({Key key, this.selectedPage}) : super(key: key);
   @override
   _ShoesWState createState() => _ShoesWState();
 }
@@ -1016,6 +1017,7 @@ class _ShoesWState extends State<ShoesW> {
       quarterTurns: 3,
       child: Expanded(
         child: DefaultTabController(
+            initialIndex:widget.selectedPage ?? 0,
             length:12,
             child: Scaffold(
 

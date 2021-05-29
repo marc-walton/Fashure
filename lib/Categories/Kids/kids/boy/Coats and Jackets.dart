@@ -3,9 +3,6 @@ import 'package:fashow/Constants.dart';
 import 'package:fashow/size_config.dart';
 import 'package:fashow/ActivityFeed.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:getflutter/components/button/gf_button.dart';
-import 'package:getflutter/shape/gf_button_shape.dart';
-import 'package:image/image.dart';
 import 'package:paginate_firestore/paginate_firestore.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fashow/HomePage.dart';
@@ -14,6 +11,9 @@ import 'package:fashow/user.dart';
 import 'package:fashow/product_custom.dart';
 import 'package:fashow/Product_screen.dart';
 class KidCB extends StatefulWidget {
+  final  int selectedPage;
+
+  const KidCB({Key key, this.selectedPage}) : super(key: key);
   @override
   _KidCBState createState() => _KidCBState();
 }
@@ -938,6 +938,8 @@ class _KidCBState extends State<KidCB> {
       quarterTurns: 3,
       child: Expanded(
         child: DefaultTabController(
+            initialIndex:widget.selectedPage ?? 0,
+
             length:11,
             child: Scaffold(
               appBar:AppBar(
@@ -953,14 +955,12 @@ class _KidCBState extends State<KidCB> {
                   tabs:[
                     Text("Single Breasted Coats",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5,),),
                     Text("Double Breasted Coats",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5,),),
-
                     Text("Blazer",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5,),),
                     Text("Duffle coats",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5),),
                     Text("Padded coats",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5),),
                     Text("Bomber Jackets",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5),),
                     Text("Denim Jackets",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5),),
                     Text("Snowsuits",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5),),
-
                     Text("Wool coats",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5),),
                     Text("Rain Coats",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5),),
                     Text("Waist Coats & Gilets",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5),),
