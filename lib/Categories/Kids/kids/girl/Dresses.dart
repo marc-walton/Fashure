@@ -4,9 +4,6 @@ import 'package:fashow/Constants.dart';
 import 'package:fashow/size_config.dart';
 import 'package:fashow/ActivityFeed.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:getflutter/components/button/gf_button.dart';
-import 'package:getflutter/shape/gf_button_shape.dart';
-import 'package:image/image.dart';
 import 'package:paginate_firestore/paginate_firestore.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fashow/HomePage.dart';
@@ -15,7 +12,9 @@ import 'package:fashow/user.dart';
 import 'package:fashow/product_custom.dart';
 import 'package:fashow/Product_screen.dart';
 class KiddrG extends StatefulWidget {
-  @override
+  final  int selectedPage;
+
+  const KiddrG({Key key, this.selectedPage}) : super(key: key);  @override
   _KiddrGState createState() => _KiddrGState();
 }
 
@@ -720,6 +719,8 @@ class _KiddrGState extends State<KiddrG> {
       quarterTurns: 3,
       child: Expanded(
         child: DefaultTabController(
+            initialIndex:widget.selectedPage ?? 0,
+
             length:8,
             child: Scaffold(
               appBar:AppBar(
@@ -737,8 +738,8 @@ class _KiddrGState extends State<KiddrG> {
                     Text("Gowns",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5),),
                     Text("Party Dresses",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5),),
                     Text("Kaftan Dresses",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5),),
-                    Text("Off- Shoulder",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5),),
-                    Text("One-Shoulder",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5),),
+                    Text("Off Shoulder",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5),),
+                    Text("One Shoulder",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5),),
 
                     Text("Shirt Dresses",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5),),
                     Text("T-Shirt and Jersey Dresses",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5),),

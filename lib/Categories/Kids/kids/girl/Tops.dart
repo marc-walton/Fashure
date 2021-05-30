@@ -3,9 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:fashow/Constants.dart';
 import 'package:fashow/ActivityFeed.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:getflutter/components/button/gf_button.dart';
-import 'package:getflutter/shape/gf_button_shape.dart';
-import 'package:image/image.dart';
 import 'package:paginate_firestore/paginate_firestore.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fashow/HomePage.dart';
@@ -14,7 +11,9 @@ import 'package:fashow/user.dart';
 import 'package:fashow/product_custom.dart';
 import 'package:fashow/Product_screen.dart';
 class TopsG extends StatefulWidget {
-  @override
+  final  int selectedPage;
+
+  const TopsG({Key key, this.selectedPage}) : super(key: key);  @override
   _TopsGState createState() => _TopsGState();
 }
 
@@ -788,6 +787,8 @@ class _TopsGState extends State<TopsG> {
       quarterTurns: 3,
       child: Expanded(
         child: DefaultTabController(
+            initialIndex:widget.selectedPage ?? 0,
+
             length:9,
             child: Scaffold(
               appBar:AppBar(

@@ -75,6 +75,42 @@ import 'package:fashow/Categories/Kids/kids/boy/ties.dart';
 import 'package:fashow/Categories/Kids/kids/boy/bags.dart';
 import 'package:fashow/Categories/Kids/kids/boy/glasses.dart';
 import 'package:fashow/Categories/Kids/kids/boy/braces.dart';
+import 'package:fashow/Categories/Kids/kids/girl/Accessories.dart';
+import 'package:fashow/Categories/Kids/kids/girl/Capes.dart';
+import 'package:fashow/Categories/Kids/kids/girl/Denim.dart';
+import 'package:fashow/Categories/Kids/kids/girl/Dresses.dart';
+import 'package:fashow/Categories/Kids/kids/girl/Jackets.dart';
+import 'package:fashow/Categories/Kids/kids/girl/Jumpsuits.dart';
+import 'package:fashow/Categories/Kids/kids/girl/knitwear.dart';
+import 'package:fashow/Categories/Kids/kids/girl/Shoes.dart';
+import 'package:fashow/Categories/Kids/kids/girl/skirts.dart';
+import 'package:fashow/Categories/Kids/kids/girl/Shorts.dart';
+import 'package:fashow/Categories/Kids/kids/girl/Swimwear.dart';
+import 'package:fashow/Categories/Kids/kids/girl/Tops.dart';
+import 'package:fashow/Categories/Kids/kids/girl/TRACKS.dart';
+import 'package:fashow/Categories/Kids/kids/girl/Trousers.dart';
+import 'package:fashow/Categories/Kids/kids/girl/ethnic.dart';
+import 'package:fashow/Categories/Kids/kids/girl/hats.dart';
+import 'package:fashow/Categories/Kids/kids/girl/hair.dart';
+import 'package:fashow/Categories/Kids/kids/girl/bags.dart';
+import 'package:fashow/Categories/Kids/kids/girl/braces.dart';
+import 'package:fashow/Categories/Kids/kids/girl/eye.dart';
+import 'package:fashow/Categories/Kids/teen/boy/Accessories.dart';
+import 'package:fashow/Categories/Kids/teen/boy/Denim.dart';
+import 'package:fashow/Categories/Kids/teen/boy/Coats and Jackets.dart';
+import 'package:fashow/Categories/Kids/teen/boy/knitwear.dart';
+import 'package:fashow/Categories/Kids/teen/boy/Shoes.dart';
+import 'package:fashow/Categories/Kids/teen/boy/Shorts.dart';
+import 'package:fashow/Categories/Kids/teen/boy/Swimwear.dart';
+import 'package:fashow/Categories/Kids/teen/boy/Top.dart';
+import 'package:fashow/Categories/Kids/teen/boy/Tracks.dart';
+import 'package:fashow/Categories/Kids/teen/boy/Trousers.dart';
+import 'package:fashow/Categories/Kids/teen/boy/ETHNICT.dart';
+import 'package:fashow/Categories/Kids/teen/boy/hats.dart';
+import 'package:fashow/Categories/Kids/teen/boy/bags.dart';
+import 'package:fashow/Categories/Kids/teen/boy/tbties.dart';
+import 'package:fashow/Categories/Kids/teen/boy/braces.dart';
+import 'package:fashow/Categories/Kids/teen/boy/eye.dart';
 
 import 'package:fashow/Categories/Kids/kids/boy/Accessories.dart';
 import 'package:fashow/Categories/Kids/kids/boy/Denim.dart';
@@ -1830,243 +1866,912 @@ class _ShopSearchState extends State<ShopSearch> {
     "Boys Shoulder Bags",
  "Beach Bags in Kid's Boy",
     "Boy's Beach Bags",
-    "Boy's Beach Bags",
+    "Boys Beach Bags",
  "Belts in Kid's Boy",
     "Boy's Belts",
-    "Boy's Belts",
+    "Boys Belts",
  "Braces in Kid's Boy",
     ///1580
     "Boy's Braces",
     "Boy's Braces",
  "Glasses & Frames in Kid's Boy",
     "Boy's Glasses & Frames",
-    "Boy's Glasses & Frames",
+    "Boys Glasses & Frames",
  "Frames in Kid's Boy",
     "Boy's Frames",
-    "Boy's Frames",
+    "Boys Frames",
     "Sunglasses in Kid's Boy",
     "Boy's Sunglasses",
     ///1590
-    "Boy's Sunglasses",
+    "Boys Sunglasses",
    "Accessories in Kid's Boy",
     "Boy's Accessories",
-    "Boy's Accessories",
+    "Boys Accessories",
    "Scarves in Kid's Boy",
     "Boy's Scarves",
-    "Boy's Scarves",
+    "Boys Scarves",
    "Gloves in Kid's Boy",
     "Boy's Gloves",
-    "Boy's Gloves",
+    "Boys Gloves",
     ///1600
     "Socks in Kid's Boy",
     "Boy's Socks",
-    "Boy's Socks",
+    "Boys Socks",
      "Travel Accessories in Kid's Boy",
     "Boy's Travel Accessories",
-    "Boy's Travel Accessories",
+    "Boys Travel Accessories",
       "Single Breasted Coats in Kid's Boy",
     "Boy's Single Breasted Coats",
-    "Boy's Single Breasted Coats",
+    "Boys Single Breasted Coats",
        "Coats in Kid's Boy",
     ///1610
     "Boy's Coats",
-    "Boy's Coats",
+    "Boys Coats",
      "Jackets in Kid's Boy",
     "Boy's Jackets",
-    "Boy's Jackets",
+    "Boys Jackets",
 "Double Breasted Coats in Kid's Boy",
     "Boy's Double Breasted Coats",
-    "Boy's Double Breasted Coats",
+    "Boys Double Breasted Coats",
  "Blazer in Kid's Boy",
     "Boy's Blazer",
     ///1620
-    "Boy's Blazer",
+    "Boys Blazer",
    "Duffle coats in Kid's Boy",
     "Boy's Duffle coats",
-    "Boy's Duffle coats",
+    "Boys Duffle coats",
 "Padded coats in Kid's Boy",
     "Boy's Padded coats",
-    "Boy's Padded coats",
+    "Boys Padded coats",
 
     "Bomber Jackets in Kid's Boy",
     "Boy's Bomber Jackets",
-    "Boy's Bomber Jackets",
+    "Boys Bomber Jackets",
     ///1630
      "Denim Jackets in Kid's Boy",
     "Boy's Denim Jackets",
-    "Boy's Denim Jackets",
+    "Boys Denim Jackets",
        "Snowsuits in Kid's Boy",
     "Boy's Snowsuits",
-    "Boy's Snowsuits",
+    "Boys Snowsuits",
           "Wool coats in Kid's Boy",
     "Boy's Wool coats",
-    "Boy's Wool coats",
+    "Boys Wool coats",
            "Rain coats in Kid's Boy",
     ///1640
     "Boy's Rain coats",
-    "Boy's Rain coats",
+    "Boys Rain coats",
            "Waist coats in Kid's Boy",
     "Boy's Waist coats",
-    "Boy's Waist coats",
+    "Boys Waist coats",
            "Gilets in Kid's Boy",
     "Boy's Gilets",
-    "Boy's Gilets",
+    "Boys Gilets",
            "Denim wear in Kid's Boy",
     "Boy's Denim wear",
     ///1650
-    "Boy's Denim wear",
+    "Boys Denim wear",
            "Denim Shorts in Kid's Boy",
     "Boy's Denim Shorts",
-    "Boy's Denim Shorts",
+    "Boys Denim Shorts",
              "Skinny fit jeans in Kid's Boy",
     "Boy's Skinny fit jeans",
-    "Boy's Skinny fit jeans",
+    "Boys Skinny fit jeans",
               "Slim fit jeans in Kid's Boy",
     "Boy's Slim fit jeans",
-    "Boy's Slim fit jeans",
+    "Boys Slim fit jeans",
     ///1660
          "Regular fit jeans in Kid's Boy",
     "Boy's Regular fit jeans",
-    "Boy's Regular fit jeans",
+    "Boys Regular fit jeans",
              "Kurta Set in Kid's Boy",
     "Boy's Kurta Set",
-    "Boy's Kurta Set",
+    "Boys Kurta Set",
         "Suit Sets in Kid's Boy",
     "Boy's Suit Sets",
-    "Boy's Suit Sets",
+    "Boys Suit Sets",
         "Kurta in Kid's Boy",
     ///1670
     "Boy's Kurta",
-    "Boy's Kurta",
+    "Boys Kurta",
           "Ethnic Bottoms in Kid's Boy",
     "Boy's Ethnic Bottoms",
-    "Boy's Ethnic Bottoms",
+    "Boys Ethnic Bottoms",
          "Indo Western in Kid's Boy",
     "Boy's Indo Western",
-    "Boy's Indo Western",
+    "Boys Indo Western",
          "Fusion Wear in Kid's Boy",
     "Boy's Fusion Wear",
     ///1680
-    "Boy's Fusion Wear",
+    "Boys Fusion Wear",
          "Sherwanis in Kid's Boy",
     "Boy's Sherwanis",
-    "Boy's Sherwanis",
+    "Boys Sherwanis",
         "Ethnic Jackets in Kid's Boy",
     "Boy's Ethnic Jackets",
-    "Boy's Ethnic Jackets",
+    "Boys Ethnic Jackets",
          "Ethnic wear(Indian) in Kid's Boy",
     "Boy's Ethnic wear(Indian)",
-    "Boy's Ethnic wear(Indian)",
+    "Boys Ethnic wear(Indian)",
     ///1690
          "Indian Ethnic wear in Kid's Boy",
     "Boy's Indian Ethnic wear",
-    "Boy's Indian Ethnic wear",
+    "Boys Indian Ethnic wear",
            "Knit wear in Kid's Boy",
     "Boy's Knit wear",
-    "Boy's Knit wear",
+    "Boys Knit wear",
            "Cardigans in Kid's Boy",
     "Boy's Cardigans",
-    "Boy's Cardigans",
+    "Boys Cardigans",
            "Sweaters in Kid's Boy",
     ///1700
     "Boy's Sweaters",
-    "Boy's Sweaters",
+    "Boys Sweaters",
            "Sneakers in Kid's Boy",
     "Boy's Sneakers",
-    "Boy's Sneakers",
+    "Boys Sneakers",
              "Shoes in Kid's Boy",
     "Boy's Shoes",
-    "Boy's Shoes",
+    "Boys Shoes",
               "Loafers in Kid's Boy",
     "Boy's Loafers",
     ///1710
-    "Boy's Loafers",
+    "Boys Loafers",
                  "Brogues in Kid's Boy",
     "Boy's Brogues",
-    "Boy's Brogues",
+    "Boys Brogues",
                   "Sandals in Kid's Boy",
     "Boy's Sandals",
-    "Boy's Sandals",
+    "Boys Sandals",
                      "Boots in Kid's Boy",
     "Boy's Boots",
-    "Boy's Boots",
+    "Boys Boots",
     ///1720
                        "Slippers in Kid's Boy",
     "Boy's Slippers",
-    "Boy's Slippers",
+    "Boys Slippers",
                           "Flip flops in Kid's Boy",
     "Boy's Flip flops",
-    "Boy's Flip flops",
+    "Boys Flip flops",
 
                             "Slides in Kid's Boy",
     "Boy's Slides",
-    "Boy's Slides",
+    "Boys Slides",
        "Casual Shorts in Kid's Boy",
     ///1730
     "Boy's Casual Shorts",
-    "Boy's Casual Shorts",
+    "Boys Casual Shorts",
         "Shorts in Kid's Boy",
     "Boy's Shorts",
-    "Boy's Shorts",
+    "Boys Shorts",
          "Shorts sets in Kid's Boy",
     "Boy's Shorts sets",
-    "Boy's Shorts sets",
+    "Boys Shorts sets",
          "Swimwear in Kid's Boy",
     "Boy's Swimwear",
     ///1740
-    "Boy's Swimwear",
+    "Boys Swimwear",
          "Shorts in Swimwear\n in Kid's Boy",
     "Boy's Shorts in Swimwear",
-    "Boy's Shorts in Swimwear",
+    "Boys Shorts in Swimwear",
            "Trunks in Swimwear\n in Kid's Boy",
     "Boy's Trunks in Swimwear",
-    "Boy's Trunks in Swimwear",
+    "Boys Trunks in Swimwear",
            "Polo Shirts in Kid's Boy",
     "Boy's Polo Shirts",
-    "Boy's Polo Shirts",
+    "Boys Polo Shirts",
     ///1750
           "Shirts in Kid's Boy",
     "Boy's Shirts",
-    "Boy's Shirts",
+    "Boys Shirts",
          "T-shirts in Kid's Boy",
     "Boy's T-shirts",
-    "Boy's T-shirts",
+    "Boys T-shirts",
         "Vests in Kid's Boy",
     "Boy's Vests",
-    "Boy's Vests",
+    "Boys Vests",
      "Tank-Tops in Kid's Boy",
     ///1760
     "Boy's Tank-Tops",
-    "Boy's Tank-Tops",
+    "Boys Tank-Tops",
      "Hoodies in Kid's Boy",
     "Boy's Hoodies",
-    "Boy's Hoodies",
+    "Boys Hoodies",
      "Sweatshirt in Kid's Boy",
     "Boy's Sweatshirt",
-    "Boy's Sweatshirt",
+    "Boys Sweatshirt",
    "Casual Trousers in Kid's Boy",
     "Boy's Casual Trousers",
     ///1770
-    "Boy's Casual Trousers",
+    "Boys Casual Trousers",
 "Trousers in Kid's Boy",
     "Boy's Trousers",
-    "Boy's Trousers",
+    "Boys Trousers",
 "Dungarees in Kid's Boy",
     "Boy's Dungarees",
-    "Boy's Dungarees",
+    "Boys Dungarees",
 "Chinos in Kid's Boy",
     "Boy's Chinos",
-    "Boy's Chinos",
+    "Boys Chinos",
     ///1780
 "Tailored Trousers in Kid's Boy",
     "Boy's Tailored Trousers",
-    "Boy's Tailored Trousers",
+    "Boys Tailored Trousers",
 "Sweatpants in Kid's Boy",
     "Boy's Sweatpants",
-    "Boy's Sweatpants",
+    "Boys Sweatpants",
 "Tracks in Kid's Boy",
     "Boy's Tracks",
-    "Boy's Tracks",
+    "Boys Tracks",
+"Caps in Kid's Girl",
+    ///1790
+    "Girl's Caps",
+    "Girls Caps",
+"Hats in Kid's Girl",
+    "Girl's Hats",
+    "Girls Hats",
+"Knitted Hats in Kid's Girl",
+    "Girl's Knitted Hats",
+    "Girls Knitted Hats",
+"Sun Hats in Kid's Girl",
+    "Girl's Sun Hats",
+    ///1800
+    "Girls Sun Hats",
+"Hat Sets in Kid's Girl",
+    "Girl's Hat Sets",
+    "Girls Hat Sets",
+"Hair Bands in Kid's Girl",
+    "Girl's Hair Bands",
+    "Girls Hair Bands",
+"Hair Clips in Kid's Girl",
+    "Girl's Hair Clips",
+    "Girls Hair Clips",
+    ///1810
+"Bags in Kid's Girl",
+    "Girl's Bags",
+    "Girls Bags",
+"Backpacks in Kid's Girl",
+    "Girl's Backpacks",
+    "Girls Backpacks",
+"Shoulder Bags in Kid's Girl",
+    "Girl's Shoulder Bags",
+    "Girls Shoulder Bags",
+"Beach Bags in Kid's Girl",
+    ///1820
+    "Girl's Beach Bags",
+    "Girls Beach Bags",
+"Belts in Kid's Girl",
+    "Girl's Belts",
+    "Girls Belts",
+"Braces in Kid's Girl",
+    "Girl's Braces",
+    "Girls Braces",
+"Glasses in Kid's Girl",
+    "Girl's Glasses",
+    ///1830
+    "Girls Glasses",
+"Frames in Kid's Girl",
+    "Girl's Frames",
+    "Girls Frames",
+"Sunglasses in Kid's Girl",
+    "Girl's Sunglasses",
+    "Girls Sunglasses",
+"Accessories in Kid's Girl",
+    "Girl's Accessories",
+    "Girls Accessories",
+"Scarves in Kid's Girl",
+    "Girl's Scarves",
+    "Girls Scarves",
+"Gloves in Kid's Girl",
+    "Girl's Gloves",
+    "Girls Gloves",
+"Jewellery in Kid's Girl",
+    "Girl's Jewellery",
+    "Girls Jewellery",
+"Socks in Kid's Girl",
+    ///1850
+    "Girl's Socks",
+    "Girls Socks",
+"Travel Accessories in Kid's Girl",
+    "Girl's Travel Accessories",
+    "Girls Travel Accessories",
+"Single Breasted Coats in Kid's Girl",
+    "Girl's Single Breasted Coats",
+    "Girls Single Breasted Coats",
+"Coats in Kid's Girl",
+    "Girl's Coats",
+    ///1860
+    "Girls Coats",
+"Double Breasted Coats in Kid's Girl",
+    "Girl's Double Breasted Coats",
+    "Girls Double Breasted Coats",
+"Capes in Kid's Girl",
+    "Girl's Capes",
+    "Girls Capes",
+"Duffle Coats in Kid's Girl",
+    "Girl's Duffle Coats",
+    "Girls Duffle Coats",
+"Cargo Coats in Kid's Girl",
+    "Girl's Cargo Coats",
+    "Girls Cargo Coats",
+"Military Coats in Kid's Girl",
+    "Girl's Military Coats",
+    "Girls Military Coats",
+"Faux Coats in Kid's Girl",
+    "Girl's Faux Coats",
+    "Girls Faux Coats",
+"Shearling Coats in Kid's Girl",
+    "Girl's Shearling Coats",
+    "Girls Shearling Coats",
+"Wool Coats in Kid's Girl",
+    "Girl's Wool Coats",
+    "Girls Wool Coats",
+"Rain Coats in Kid's Girl",
+    "Girl's Rain Coats",
+    "Girls Rain Coats",
+"Denim Jackets in Kid's Girl",
+    "Girl's Denim Jackets",
+    ///1890
+    "Girls Denim Jackets",
+"Denim wear in Kid's Girl",
+    "Girl's Denim wear",
+    "Girls Denim wear",
+"Denim Shorts in Kid's Girl",
+    "Girl's Denim Shorts",
+    "Girls Denim Shorts",
+"Denim Skirts in Kid's Girl",
+    "Girl's Denim Skirts",
+    "Girls Denim Skirts",
+    ///1900
+"Skinny fit jeans in Kid's Girl",
+    "Girl's Skinny fit jeans",
+    "Girls Skinny fit jeans",
+"Slim fit jeans in Kid's Girl",
+    "Girl's Slim fit jeans",
+    "Girls Slim fit jeans",
+"Straight fit jeans in Kid's Girl",
+    "Girl's Straight fit jeans",
+    "Girls Straight fit jeans",
+"Gowns in Kid's Girl",
+    ///1910
+    "Girl's Gowns",
+    "Girls Gowns",
+"Dresses in Kid's Girl",
+    "Girl's Dresses",
+    "Girls Dresses",
+"Party Dresses in Kid's Girl",
+    "Girl's Party Dresses",
+    "Girls Party Dresses",
+"Kaftan Dresses in Kid's Girl",
+    "Girl's Kaftan Dresses",
+    ///1920
+    "Girls Kaftan Dresses",
+"Off Shoulder Dresses in Kid's Girl",
+    "Girl's Off Shoulder Dresses",
+    "Girls Off Shoulder Dresses",
+"One Shoulder Dresses in Kid's Girl",
+    "Girl's One Shoulder Dresses",
+    "Girls One Shoulder Dresses",
+"Shirt Dresses in Kid's Girl",
+    "Girl's Shirt Dresses",
+    "Girls Shirt Dresses",
+    ///1930
+"T-Shirt Dresses in Kid's Girl",
+    "Girl's T-Shirt Dresses",
+    "Girls T-Shirt Dresses",
+"Jersey Dresses in Kid's Girl",
+    "Girl's Jersey Dresses",
+    "Girls Jersey Dresses",
+"Short Dresses in Kid's Girl",
+    "Girl's Short Dresses",
+    "Girls Short Dresses",
+"Lehenga in Ethnic wear in Kid's Girl",
+    "Girl's Lehenga in Ethnic wear",
+    "Girls Lehenga in Ethnic wear",
+"Ghagra in Ethnic wear in Kid's Girl",
+    "Girl's Ghagra in Ethnic wear",
+    "Girls Ghagra in Ethnic wear",
+"Ethnic wear(Indian) in Kid's Girl",
+    "Girl's Ethnic wear(Indian)",
+    "Girls Ethnic wear(Indian)",
+    "Indian Ethnic wear in Kid's Girl",
+    "Girl's Indian Ethnic wear",
+    ///1950
+    "Girls Indian Ethnic wear",
+"Kurta Sets in Kid's Girl",
+    "Girl's Kurta Sets",
+    "Girls Kurta Sets",
+"Ethnic Dresses in Kid's Girl",
+    "Girl's Ethnic Dresses",
+    "Girls Ethnic Dresses",
+"Ethnic Jumpsuits in Kid's Girl",
+    "Girl's Ethnic Jumpsuits",
+    "Girls Ethnic Jumpsuits",
+    ///1960
+  "Kurta in Kid's Girl",
+    "Girl's Kurta",
+    "Girls Kurta",
+  "Tops in Ethnic wear \nin Kid's Girl",
+    "Girl's Tops in Ethnic wear",
+    "Girls Tops in Ethnic wear",
+  "Ethnic Bottoms in Kid's Girl",
+    "Girl's Ethnic Bottoms",
+    "Girls Ethnic Bottoms",
+  "Ethnic Skirts in Kid's Girl",
+    "Girl's Ethnic Skirts",
+    "Girls Ethnic Skirts",
+  "Indo Western wear in Kid's Girl",
+    "Girl's Indo Western wear",
+    "Girls Indo Western wear",
+  "Fusion wear in Kid's Girl",
+    "Girl's Fusion wear",
+    "Girls Fusion wear",
+  "Sherwanis in Kid's Girl",
+    "Girl's Sherwanis",
+    ///1980
+    "Girls Sherwanis",
+  "Bomber Jackets in Kid's Girl",
+    "Girl's Bomber Jackets",
+    "Girls Bomber Jackets",
+  "Jackets in Kid's Girl",
+    "Girl's Jackets",
+    "Girls Jackets",
+  "Blazers in Kid's Girl",
+    "Girl's Blazers",
+    "Girls Blazers",
+  "Denim Jackets in Kid's Girl",
+    "Girl's Denim Jackets",
+    "Girls Denim Jackets",
+  "Hooded Jackets in Kid's Girl",
+    "Girl's Hooded Jackets",
+    "Girls Hooded Jackets",
+  "Padded Jackets in Kid's Girl",
+    "Girl's Padded Jackets",
+    "Girls Padded Jackets",
+  "Puffer Jackets in Kid's Girl",
+    ///2000
+    "Girl's Puffer Jackets",
+    "Girls Puffer Jackets",
+  "Faux Jackets in Kid's Girl",
+    "Girl's Faux Jackets",
+    "Girls Faux Jackets",
+  "Sport Jackets in Kid's Girl",
+    "Girl's Sport Jackets",
+    "Girls Sport Jackets",
+  "Waistcoats in Kid's Girl",
+    "Girl's Waistcoats",
+    ///2010
+    "Girls Waistcoats",
+  "Gilets in Kid's Girl",
+    "Girl's Gilets",
+    "Girls Gilets",
+  "Jumpsuits in Kid's Girl",
+    "Girl's Jumpsuits",
+    "Girls Jumpsuits",
+  "Playsuits in Kid's Girl",
+    "Girl's Playsuits",
+    "Girls Playsuits",
+    ///2020
+  "Cardigans in Kid's Girl",
+    "Girl's Cardigans",
+    "Girls Cardigans",
+  "Knitwear in Kid's Girl",
+    "Girl's Knitwear",
+    "Girls Knitwear",
+  "Knitted Tops in Kid's Girl",
+    "Girl's Knitted Tops",
+    "Girls Knitted Tops",
+  "Sneakers in Kid's Girl",
+    ///2030
+    "Girl's Sneakers",
+    "Girls Sneakers",
+  "Shoes in Kid's Girl",
+    "Girl's Shoes",
+    "Girls Shoes",
+  "Loafers in Kid's Girl",
+    "Girl's Loafers",
+    "Girls Loafers",
+  "Ballerinas in Kid's Girl",
+    "Girl's Ballerinas",
+    "Girls Ballerinas",
+  "Sandals in Kid's Girl",
+    "Girl's Sandals",
+    "Girls Sandals",
+  "Boots in Kid's Girl",
+    "Girl's Boots",
+    "Girls Boots",
+  "Slippers in Kid's Girl",
+    "Girl's Slippers",
+    "Girls Slippers",
+    ///2050
+  "Slides in Kid's Girl",
+    "Girl's Slides",
+    "Girls Slides",
+  "Flip flops in Kid's Girl",
+    "Girl's Flip flops",
+    "Girls Flip flops",
+  "Casual Shorts in Kid's Girl",
+    "Girl's Casual Shorts",
+    "Girls Casual Shorts",
+  "Shorts in Kid's Girl",
+    ///2060
+    "Girl's Shorts",
+    "Girls Shorts",
+  "Denim Shorts in Kid's Girl",
+    "Girl's Denim Shorts",
+    "Girls Denim Shorts",
+  "Short sets in Kid's Girl",
+    "Girl's Short sets",
+    "Girls Short sets",
+  "Casual Skirts in Kid's Girl",
+    "Girl's Casual Skirts",
+    "Girls Casual Skirts",
+  "Skirts in Kid's Girl",
+    "Girl's Skirts",
+    "Girls Skirts",
+  "Tutu Skirts in Kid's Girl",
+    "Girl's Tutu Skirts",
+    "Girls Tutu Skirts",
+ "Party wear Skirts in Kid's Girl",
+    "Girl's Party wear Skirts",
+    "Girls Party wear Skirts",
+    ///2080
+ "Denim Skirts in Kid's Girl",
+    "Girl's Denim Skirts",
+    "Girls Denim Skirts",
+ "Skirt sets in Kid's Girl",
+    "Girl's Skirt sets",
+    "Girls Skirt sets",
+ "Swimsuits in Kid's Girl",
+    "Girl's Swimsuits",
+    "Girls Swimsuits",
+ "Beach Dresses in Kid's Girl",
+    "Girl's Beach Dresses",
+    "Girls Beach Dresses",
+ "Bikinis in Kid's Girl",
+    "Girl's Bikinis",
+    "Girls Bikinis",
+ "Beach Footwear in Kid's Girl",
+    "Girl's Beach Footwear",
+    "Girls Beach Footwear",
+ "Accessories in swimwear/n in Kid's Girl",
+    "Girl's Accessories in swimwear",
+    ///2100
+    "Girls Accessories in swimwear",
+ "Blouses in Kid's Girl",
+    "Girl's Blouses",
+    "Girls Blouses",
+ "Crop Tops in Kid's Girl",
+    "Girl's Crop Tops",
+    "Girls Crop Tops",
+ "Kaftans in Kid's Girl",
+    "Girl's Kaftans",
+    "Girls Kaftans",
+ "ponchos in Kid's Girl",
+    "Girl's ponchos",
+    "Girls ponchos",
+ "Sleeveless Tops in Kid's Girl",
+    "Girl's Sleeveless Tops",
+    "Girls Sleeveless Tops",
+ "vests in Kid's Girl",
+    "Girl's vests",
+    "Girls vests",
+ "Tank Tops in Kid's Girl",
+    ///2120
+    "Girl's Tank Tops",
+    "Girls Tank Tops",
+ "Tunics in Kid's Girl",
+    "Girl's Tunics",
+    "Girls Tunics",
+ "Polo Shirts in Kid's Girl",
+    "Girl's Polo Shirts",
+    "Girls Polo Shirts",
+ "Shirts in Kid's Girl",
+    "Girl's Shirts",
+    ///2130
+    "Girls Shirts",
+ "T-shirts in Kid's Girl",
+    "Girl's T-shirts",
+    "Girls T-shirts",
+ "Hoodies in Kid's Girl",
+    "Girl's Hoodies",
+    "Girls Hoodies",
+ "Sweatshirt in Kid's Girl",
+    "Girl's Sweatshirt",
+    "Girls Sweatshirt",
+    ///2140
+    "Tracks in Kid's Girl",
+    "Girl's Tracks",
+    "Girls Tracks",
+ "Casual Trousers in Kid's Girl",
+    "Girl's Casual Trousers",
+    "Girls Casual Trousers",
+ "Trousers in Kid's Girl",
+    "Girl's Trousers",
+    "Girls Trousers",
+ "Dungarees in Kid's Girl",
+    ///2150
+    "Girl's Dungarees",
+    "Girls Dungarees",
+ "Chinos in Kid's Girl",
+    "Girl's Chinos",
+    "Girls Chinos",
+ "Sweatpants in Kid's Girl",
+    "Girl's Sweatpants",
+    "Girls Sweatpants",
+ "Caps in Teen Boys",
+    "Teen Boy's Caps",
+    "Teen Boys Caps",
+ "Hats in Teen Boys",
+    "Teen Boy's Hats",
+    "Teen Boys Hats",
+ "Knitted Hats in Teen Boys",
+    "Teen Boy's Knitted Hats",
+    "Teen Boys Knitted Hats",
+ "Beanie in Teen Boys",
+    "Teen Boy's Beanie",
+    "Teen Boys Beanie",
+    ///2170
+    "Ties in Teen Boys",
+    "Teen Boy's Ties",
+    "Teen Boys Ties",
+     "Bow Ties in Teen Boys",
+    "Teen Boy's Bow Ties",
+    "Teen Boys Bow Ties",
+      "Backpacks in Teen Boys",
+    "Teen Boy's Backpacks",
+    "Teen Boys Backpacks",
+       "Bags in Teen Boys",
+    ///2180
+    "Teen Boy's Bags",
+    "Teen Boys Bags",
+       "Shoulder Bags in Teen Boys",
+    "Teen Boy's Shoulder Bags",
+    "Teen Boys Shoulder Bags",
+       "Belt Bags in Teen Boys",
+    "Teen Boy's Belt Bags",
+    "Teen Boys Belt Bags",
+       "Beach Bags in Teen Boys",
+    "Teen Boy's Beach Bags",
+    ///2190
+    "Teen Boys Beach Bags",
+        "Belts in Teen Boys",
+    "Teen Boy's Belts",
+    "Teen Boys Belts",
+        "Braces in Teen Boys",
+    "Teen Boy's Braces",
+    "Teen Boys Braces",
+         "Glasses in Teen Boys",
+    "Teen Boy's Glasses",
+    "Teen Boys Glasses",
+    ///2200
+           "Frames in Teen Boys",
+    "Teen Boy's Frames",
+    "Teen Boys Frames",
+           "Sunglasses in Teen Boys",
+    "Teen Boy's Sunglasses",
+    "Teen Boys Sunglasses",
+          "Accessories in Teen Boys",
+    "Teen Boy's Accessories",
+    "Teen Boys Accessories",
+        "Scarves in Teen Boys",
+    ///2210
+    "Teen Boy's Scarves",
+    "Teen Boys Scarves",
+         "Gloves in Teen Boys",
+    "Teen Boy's Gloves",
+    "Teen Boys Gloves",
+       "Socks in Teen Boys",
+    "Teen Boy's Socks",
+    "Teen Boys Socks",
+  "Travel Accessories in Teen Boys",
+    "Teen Boy's Travel Accessories",
+    ///2220
+    "Teen Boys Travel Accessories",
+ "Single Breasted Coats in Teen Boy",
+    "Teen Boy's Single Breasted Coats",
+    "Teen Boys Single Breasted Coats",
+"Coats in Teen Boys",
+    "Teen Boy's Coats",
+    "Teen Boys Coats",
+"Jackets in Teen Boys",
+    "Teen Boy's Jackets",
+    "Teen Boys Jackets",
+    ///2230
+ "Double Breasted Coats in Teen Boys",
+    "Teen Boy's Double Breasted Coats",
+    "Teen Boys Double Breasted Coats",
+  "Blazer in Teen Boys",
+    "Teen Boy's Blazer",
+    "Teen Boys Blazer",
+   "Duffle coats in Teen Boys",
+    "Teen Boy's Duffle coats",
+    "Teen Boys Duffle coats",
+    "Padded coats in Teen Boys",
+    ///2240
+    "Teen Boy's Padded coats",
+    "Teen Boys Padded coats",
+     "Bomber Jackets in Teen Boys",
+    "Teen Boy's Bomber Jackets",
+    "Teen Boys Bomber Jackets",
+      "Denim Jackets in Teen Boys",
+    "Teen Boy's Denim Jackets",
+    "Teen Boys Denim Jackets",
+       "Wool coats in Teen Boys",
+    "Teen Boy's Wool coats",
+    ///2250
+    "Teen Boys Wool coats",
+       "Rain coats in Teen Boys",
+    "Teen Boy's Rain coats",
+    "Teen Boys Rain coats",
+        "Waist Coats in Teen Boys",
+    "Teen Boy's Rain coats",
+    "Teen Boys Rain coats",
+         "Gilets in Teen Boys",
+    "Teen Boy's Gilets",
+    "Teen Boys Gilets",
+    ///2260
+        "Denim Jackets in Teen Boys",
+    "Teen Boy's Denim Jackets",
+    "Teen Boys Denim Jackets",
+        "Denim wear in Teen Boys",
+    "Teen Boy's Denim wear",
+    "Teen Boys Denim wear",
+       "Denim Shorts in Teen Boys",
+    "Teen Boy's Denim Shorts",
+    "Teen Boys Denim Shorts",
+        "Skinny fit jeans in Teen Boys",
+    ///2270
+    "Teen Boy's Skinny fit jeans",
+    "Teen Boys Skinny fit jeans",
+        "Slim fit jeans in Teen Boys",
+    "Teen Boy's Slim fit jeans",
+    "Teen Boys Slim fit jeans",
+        "Regular fit jeans in Teen Boys",
+    "Teen Boy's Regular fit jeans",
+    "Teen Boys Regular fit jeans",
+        "Kurta Set in Teen Boys",
+    "Teen Boy's Kurta Set",
+    ///2280
+    "Teen Boys Kurta Set",
+        "Ethnic wear(Indain) in Teen Boys",
+    "Teen Boy's Ethnic wear(Indain)",
+    "Teen Boys Ethnic wear(Indain)",
+        "Indain Ethnic wear in Teen Boys",
+    "Teen Boy's Indain  Ethnic wear",
+    "Teen Boys Indain Ethnic wear",
+        "Ethnic Suit in Teen Boys",
+    "Teen Boy's Ethnic Suit",
+    "Teen Boys Ethnic Suit",
+    ///2290
+        "Kurta in Teen Boys",
+    "Teen Boy's Kurta",
+    "Teen Boys Kurta",
+        "Ethnic Bottoms in Teen Boys",
+    "Teen Boy's Ethnic Bottoms",
+    "Teen Boys Ethnic Bottoms",
+        "Indo Western in Teen Boys",
+    "Teen Boy's Indo Western",
+    "Teen Boys Indo Western",
+        "Fusion Wear in Teen Boys",
+    ///2300
+    "Teen Boy's Fusion Wear",
+    "Teen Boys Fusion Wear",
+        "Sherwanis in Teen Boys",
+    "Teen Boy's Sherwanis",
+    "Teen Boys Sherwanis",
+        "Jackets(Ethnic) in Teen Boys",
+    "Teen Boy's Jackets(Ethnic)",
+    "Teen Boys Jackets(Ethnic)",
+        "Cardigans in Teen Boys",
+    "Teen Boy's Cardigans",
+    ///2310
+    "Teen Boys Cardigans",
+        "Knit wear in Teen Boys",
+    "Teen Boy's Knit wear",
+    "Teen Boys Knit wear",
+        "Sweaters in Teen Boys",
+    "Teen Boy's Sweaters",
+    "Teen Boys Sweaters",
+        "Sneakers in Teen Boys",
+    "Teen Boy's Sneakers",
+    "Teen Boys Sneakers",
+    ///2320
+        "Shoes in Teen Boys",
+    "Teen Boy's Shoes",
+    "Teen Boys Shoes",
+        "Loafers in Teen Boys",
+    "Teen Boy's Loafers",
+    "Teen Boys Loafers",
+        "Brogues in Teen Boys",
+    "Teen Boy's Brogues",
+    "Teen Boys Brogues",
+        "Sandals in Teen Boys",
+    ///2330
+    "Teen Boy's Sandals",
+    "Teen Boys Sandals",
+        "Boots in Teen Boys",
+    "Teen Boy's Boots",
+    "Teen Boys Boots",
+        "Slippers in Teen Boys",
+    "Teen Boy's Slippers",
+    "Teen Boys Slippers",
+        "Flip flops in Teen Boys",
+    "Teen Boy's Flip flops",
+    ///2340
+    "Teen Boys Flip flops",
+        "Slides in Teen Boys",
+    "Teen Boy's Slides",
+    "Teen Boys Slides",
+        "Casual Shorts in Teen Boys",
+    "Teen Boy's Casual Shorts",
+    "Teen Boys Casual Shorts",
+        "Shorts in Teen Boys",
+    "Teen Boy's Shorts",
+    "Teen Boys Shorts",
+    ///2350
+       "Denim Shorts in Teen Boys",
+    "Teen Boy's Denim Shorts",
+    "Teen Boys Denim Shorts",
+    "Swimwear in Teen Boys",
+    "Teen Boy's Swimwear",
+    "Teen Boys Swimwear",
+   "Shorts in Teen Boys",
+    "Teen Boy's Shorts",
+    "Teen Boys Shorts",
+   "Trunks in Teen Boys",
+    ///2360
+    "Teen Boy's Trunks",
+    "Teen Boys Trunks",
+   "Polo Shirts in Teen Boys",
+    "Teen Boy's Polo Shirts",
+    "Teen Boys Polo Shirts",
+   "Shirts in Teen Boys",
+    "Teen Boy's Shirts",
+    "Teen Boys Shirts",
+   "T-shirts in Teen Boys",
+    "Teen Boy's T-shirts",
+    ///2370
+    "Teen Boys T-shirts",
+   "Vests in Teen Boys",
+    "Teen Boy's Vests",
+    "Teen Boys Vests",
+   "Tank Tops in Teen Boys",
+    "Teen Boy's Tank Tops",
+    "Teen Boys Tank Tops",
+   "Hoodies in Teen Boys",
+    "Teen Boy's Hoodies",
+    "Teen Boys Hoodies",
+    ///2380
+   "Sweatshirt in Teen Boys",
+    "Teen Boy's Sweatshirt",
+    "Teen Boys Sweatshirt",
+   "Tracks in Teen Boys",
+    "Teen Boy's Tracks",
+    "Teen Boys Tracks",
+       "Trousers in Teen Boys",
+    "Teen Boy's Trousers",
+    "Teen Boys Trousers",
+   "Skinny fit Trousers in Teen Boys",
+    ///2390
+    "Teen Boy's Skinny fit Trousers",
+    "Teen Boys Skinny fit Trousers",
+   "Slim fit Trousers in Teen Boys",
+    "Teen Boy's Slim fit Trousers",
+    "Teen Boys Slim fit Trousers",
+   "Regular fit Trousers in Teen Boys",
+    "Teen Boy's Regular fit Trousers",
+    "Teen Boys Regular fit Trousers",
+   "Chinos in Teen Boys",
+    "Teen Boy's Chinos",
+    ///2400
+    "Teen Boys Chinos",
+   "Tailored Trousers in Teen Boys",
+    "Teen Boy's Tailored Trousers",
+    "Teen Boys Tailored Trousers",
+   "Sweatpants in Teen Boys",
+    "Teen Boy's Sweatpants",
+    "Teen Boys Sweatpants",
 
 
   ];
@@ -2792,260 +3497,588 @@ else if(i==1300||i==1301||i==1302){ Get.off(BabytuB(selectedPage: 2,));
      }
 else if(i==1303||i==1304||i==1305){ Get.off(BabytuB(selectedPage: 3,));
      }
-else if(i==1306||i==1307||i==1308||i==1309||i==1310||i==1311){ Get.off(HatsBG(selectedPage: 0,));
-     }
-else if(i==1312||i==1313||i==1314){ Get.off(HatsBG(selectedPage: 1,));
-     }
-else if(i==1315||i==1316||i==1317){ Get.off(HatsBG(selectedPage: 2,));
-     }
-else if(i==1318||i==1319||i==1320){ Get.off(HatsBG(selectedPage: 3,));
-     }
-else if(i==1321||i==1322||i==1323){ Get.off(HatsBG(selectedPage: 4,));
-     }
-else if(i==1324||i==1325||i==1326){ Get.off(BabyAcG(selectedPage: 0,));
-     }
-else if(i==1327||i==1328||i==1329){ Get.off(BabyAcG(selectedPage: 1,));
-     }
-else if(i==1330||i==1331||i==1332){ Get.off(BabyAcG(selectedPage: 2,));
-     }
-else if(i==1333||i==1334||i==1335){ Get.off(BabyAcG(selectedPage: 3,));
-     }
-else if(i==1336||i==1337||i==1338){ Get.off(BabyAcG(selectedPage: 4,));
-     }
-else if(i==1339||i==1340||i==1341){ Get.off(BabysG(selectedPage: 0,));
-     }
-else if(i==1342||i==1343||i==1344||i==1345||i==1346||i==1347){ Get.off(BabysG(selectedPage: 1,));
-     }
-else if(i==1348||i==1349||i==1350){ Get.off(BabysG(selectedPage: 2,));
-     }
-else if(i==1351||i==1352||i==1353){ Get.off(BabysG(selectedPage: 3,));
-     }
-else if(i==1354||i==1355||i==1356||i==1357||i==1358||i==1359||i==1360||i==1361||i==1362){ Get.off(BabyCG(selectedPage: 0,));
-     }
-else if(i==1363||i==1364||i==1365){ Get.off(BabyCG(selectedPage: 1,));
-     }
-else if(i==1366||i==1367||i==1368){ Get.off(BabyCG(selectedPage: 2,));
-     }
-else if(i==1369||i==1370||i==1371){ Get.off(BabyCG(selectedPage: 3,));
-     }
-else if(i==1372||i==1373||i==1374){ Get.off(BabyCG(selectedPage: 4,));
-     }
-else if(i==1375||i==1376||i==1377){ Get.off(BabyCG(selectedPage: 5,));
-     }
-else if(i==1378||i==1379||i==1380){ Get.off(BabyCG(selectedPage: 6,));
-     }
-else if(i==1381||i==1382||i==1383||i==1384||i==1385||i==1386){ Get.off(BabyCG(selectedPage: 7,));
-     }
-else if(i==1387||i==1388||i==1389||i==1390||i==1391||i==1392){ Get.off(BabydrG(selectedPage: 0,));
-     }
-else if(i==1393||i==1394||i==1395){ Get.off(BabydrG(selectedPage: 1,));
-     }
-else if(i==1396||i==1397||i==1398){ Get.off(BabydrG(selectedPage: 2,));
-     }
-else if(i==1399||i==1400||i==1401||i==1402||i==1403||i==1404||i==1405||i==1406||i==1407||i==1408||i==1409||i==1410){ Get.off(GGEthnic(selectedPage: 0,));
-     }
-else if(i==1411||i==1412||i==1413||i==1414||i==1415||i==1416){ Get.off(GGEthnic(selectedPage: 1,));
-     }
-else if(i==1417||i==1418||i==1419){ Get.off(GGEthnic(selectedPage: 2,));
-     }
-else if(i==1420||i==1421||i==1422){ Get.off(GGEthnic(selectedPage: 3,));
-     }
-else if(i==1423||i==1424||i==1425){ Get.off(GGEthnic(selectedPage: 4,));
-     }
-else if(i==1426||i==1427||i==1428||i==1429||i==1430||i==1431){ Get.off(GGEthnic(selectedPage: 5,));
-     }
-else if(i==1432||i==1433||i==1434||i==1435||i==1436||i==1437){ Get.off(BabykG(selectedPage: 0,));
-     }
-else if(i==1438||i==1439||i==1440){ Get.off(BabykG(selectedPage: 1,));
-     }
-else if(i==1441||i==1442||i==1443||i==1444||i==1445||i==1446){ Get.off(BabySG(selectedPage: 0,));
-     }
-else if(i==1447||i==1448||i==1449){ Get.off(BabySG(selectedPage: 1,));
-     }
-else if(i==1450||i==1451||i==1452){ Get.off(BabySG(selectedPage: 2,));
-     }
-else if(i==1453||i==1454||i==1455){ Get.off(BabySG(selectedPage: 3,));
-     }
-else if(i==1456||i==1457||i==1458){ Get.off(BabySG(selectedPage: 4,));
-     }
-else if(i==1459||i==1460||i==1461){ Get.off(BabySG(selectedPage: 5,));
-     }
-else if(i==1462||i==1463||i==1464||i==1465||i==1466||i==1467){ Get.off(BabyshG(selectedPage: 0,));
-     }
-else if(i==1468||i==1469||i==1470){ Get.off(BabyshG(selectedPage: 1,));
-     }
-else if(i==1471||i==1472||i==1473){ Get.off(BabyshG(selectedPage: 2,));
-     }
-else if(i==1474||i==1475||i==1476||i==1477||i==1478||i==1479){ Get.off(BabyskG(selectedPage: 0,));
-     }
-else if(i==1480||i==1481||i==1482){ Get.off(BabyskG(selectedPage: 1,));
-     }
-else if(i==1483||i==1484||i==1485){ Get.off(BabyskG(selectedPage: 2,));
-     }
-else if(i==1486||i==1487||i==1488){ Get.off(BabyskG(selectedPage: 3,));
-     }
-else if(i==1489||i==1490||i==1491){ Get.off(BabyskG(selectedPage: 4,));
-     }
-else if(i==1492||i==1493||i==1494){ Get.off(BabyswG(selectedPage: 0,));
-     }
-else if(i==1495||i==1496||i==1497||i==1498||i==1499||i==1500){ Get.off(TopsBG(selectedPage: 0,));
-     }
-else if(i==1501||i==1502||i==1503){ Get.off(TopsBG(selectedPage: 1,));
-     }
-else if(i==1504||i==1505||i==1506){ Get.off(TopsBG(selectedPage: 2,));
-     }
-else if(i==1507||i==1508||i==1509){ Get.off(TopsBG(selectedPage: 3,));
-     }
-else if(i==1510||i==1511||i==1512){ Get.off(TopsBG(selectedPage: 4,));
-     }
-else if(i==1513||i==1514||i==1515||i==1516||i==1517||i==1518){ Get.off(TopsBG(selectedPage: 5,));
-     }
-else if(i==1519||i==1520||i==1521){ Get.off(BabytrG());
-     }
-else if(i==1522||i==1523||i==1524||i==1525||i==1526||i==1527){ Get.off(BabytuG(selectedPage: 0,));
-     }
-else if(i==1528||i==1529||i==1530){ Get.off(BabytuG(selectedPage: 1,));
-     }
-else if(i==1531||i==1532||i==1533){ Get.off(BabytuG(selectedPage: 2,));
-     }
-else if(i==1534||i==1535||i==1536||i==1537||i==1538||i==1539){ Get.off(BabytuG(selectedPage: 3,));
-     }
-else if(i==1540||i==1541||i==1542||i==1543||i==1544||i==1545){ Get.off(HatsKB(selectedPage: 0,));
-     }
-else if(i==1546||i==1547||i==1548){ Get.off(HatsKB(selectedPage: 1,));
-     }
-else if(i==1549||i==1550||i==1551){ Get.off(HatsKB(selectedPage: 2,));
-     }
-else if(i==1552||i==1553||i==1554){ Get.off(HatsKB(selectedPage: 3,));
-     }
-else if(i==1555||i==1556||i==1557){ Get.off(HatsKB(selectedPage: 4,));
-     }
-else if(i==1558||i==1559||i==1560){ Get.off(TiesKB(selectedPage: 0,));
-     }
-else if(i==1561||i==1562||i==1563){ Get.off(TiesKB(selectedPage: 1,));
-     }
-else if(i==1564||i==1565||i==1566||i==1567||i==1568||i==1569){ Get.off(BagsKB(selectedPage: 0,));
-     }
-else if(i==1570||i==1571||i==1572){ Get.off(BagsKB(selectedPage: 1,));
-     }
-else if(i==1573||i==1574||i==1575){ Get.off(BagsKB(selectedPage: 2,));
-     }
-else if(i==1576||i==1577||i==1578){ Get.off(BracesKB(selectedPage: 0,));
-     }
-else if(i==1579||i==1580||i==1581){ Get.off(BracesKB(selectedPage: 1,));
-     }
-else if(i==1582||i==1583||i==1584||i==1585||i==1586||i==1587){ Get.off(EyeKB(selectedPage: 0,));
-     }
-else if(i==1588||i==1589||i==1590){ Get.off(EyeKB(selectedPage: 1,));
-     }
-else if(i==1591||i==1592||i==1593){ Get.off(AccessKB(selectedPage: 0,));
-     }
-else if(i==1594||i==1595||i==1596){ Get.off(AccessKB(selectedPage: 1,));
-     }
-else if(i==1597||i==1598||i==1599){ Get.off(AccessKB(selectedPage: 4,));
-     }
-else if(i==1600||i==1601||i==1602){ Get.off(AccessKB(selectedPage: 7,));
-     }
-else if(i==1603||i==1604||i==1605){ Get.off(AccessKB(selectedPage: 8,));
-     }
-else if(i==1606||i==1607||i==1608||i==1609||i==1610||i==1611||i==1612||i==1613||i==1614){ Get.off(KidCB(selectedPage: 0,));
-     }
-else if(i==1615||i==1616||i==1617){ Get.off(KidCB(selectedPage: 1,));
-     }
-else if(i==1618||i==1619||i==1620){ Get.off(KidCB(selectedPage: 2,));
-     }
-else if(i==1621||i==1622||i==1623){ Get.off(KidCB(selectedPage: 3,));
-     }
-else if(i==1624||i==1625||i==1626){ Get.off(KidCB(selectedPage: 4,));
-     }
-else if(i==1627||i==1628||i==1629){ Get.off(KidCB(selectedPage: 5,));
-     }
-else if(i==1630||i==1631||i==1632){ Get.off(KidCB(selectedPage: 6,));
-     }
-else if(i==1633||i==1634||i==1635){ Get.off(KidCB(selectedPage: 7,));
-     }
-else if(i==1636||i==1637||i==1638){ Get.off(KidCB(selectedPage: 8,));
-     }
-else if(i==1639||i==1640||i==1641){ Get.off(KidCB(selectedPage: 9,));
-     }
-else if(i==1642||i==1643||i==1644||i==1645||i==1646||i==1647){ Get.off(KidCB(selectedPage: 10,));
-     }
-else if(i==1648||i==1649||i==1650){ Get.off(DenimB(selectedPage: 0,));
-     }
-else if(i==1651||i==1652||i==1653){ Get.off(DenimB(selectedPage: 1,));
-     }
-else if(i==1654||i==1655||i==1656){ Get.off(DenimB(selectedPage: 2,));
-     }
-else if(i==1657||i==1658||i==1659){ Get.off(DenimB(selectedPage: 3,));
-     }
-else if(i==1660||i==1661||i==1662){ Get.off(DenimB(selectedPage: 4,));
-     }
-else if(i==1663||i==1664||i==1665||i==1687||i==1688||i==1689||i==1690||i==1691||i==1692){ Get.off(KBEthnic(selectedPage: 0,));
-     }
-else if(i==1666||i==1667||i==1668){ Get.off(KBEthnic(selectedPage: 1,));
-     }
-else if(i==1669||i==1670||i==1671){ Get.off(KBEthnic(selectedPage: 2,));
-     }
-else if(i==1672||i==1673||i==1674){ Get.off(KBEthnic(selectedPage: 3,));
-     }
-else if(i==1675||i==1676||i==1677||i==1678||i==1679||i==1680){ Get.off(KBEthnic(selectedPage: 4,));
-     }
-else if(i==1681||i==1682||i==1683){ Get.off(KBEthnic(selectedPage: 5,));
-     }
-else if(i==1684||i==1685||i==1686){ Get.off(KBEthnic(selectedPage: 6,));
-     }
-else if(i==1693||i==1694||i==1695||i==1696||i==1697||i==1698||i==1699||i==1700||i==1701){ Get.off(KidkB());
-     }
-else if(i==1702||i==1703||i==1704||i==1705||i==1706||i==1707){ Get.off(KidSB(selectedPage: 0,));
-     }
-else if(i==1708||i==1709||i==1710){ Get.off(KidSB(selectedPage: 1,));
-     }
-else if(i==1711||i==1712||i==1713){ Get.off(KidSB(selectedPage: 2,));
-     }
-else if(i==1714||i==1715||i==1716){ Get.off(KidSB(selectedPage: 3,));
-     }
-else if(i==1717||i==1718||i==1719){ Get.off(KidSB(selectedPage: 4,));
-     }
-else if(i==1720||i==1721||i==1722){ Get.off(KidSB(selectedPage: 5,));
-     }
-else if(i==1723||i==1724||i==1725||i==1726||i==1727||i==1728){ Get.off(KidSB(selectedPage: 6,));
-     }
-else if(i==1729||i==1730||i==1731||i==1732||i==1733||i==1734){ Get.off(KidshB(selectedPage: 0,));
-     }
-else if(i==1735||i==1736||i==1737){ Get.off(KidshB(selectedPage: 2,));
-     }
-else if(i==1738||i==1739||i==1740){ Get.off(KidswB(selectedPage: 0,));
-     }
-else if(i==1741||i==1742||i==1743||i==1744||i==1745||i==1746){ Get.off(KidswB(selectedPage: 1,));
-     }
-else if(i==1747||i==1748||i==1749){ Get.off(TopsB(selectedPage: 0,));
-     }
-else if(i==1750||i==1751||i==1752){ Get.off(TopsB(selectedPage: 1,));
-     }
-else if(i==1753||i==1754||i==1755){ Get.off(TopsB(selectedPage: 2,));
-     }
-else if(i==1756||i==1757||i==1758||i==1759||i==1760||i==1761){ Get.off(TopsB(selectedPage: 3,));
-     }
-else if(i==1762||i==1763||i==1764||i==1765||i==1766||i==1767){ Get.off(TopsB(selectedPage: 4,));
-     }
-else if(i==1768||i==1769||i==1770||i==1771||i==1772||i==1773){ Get.off(TrouserkM(selectedPage: 0,));
-     }
-else if(i==1774||i==1775||i==1776){ Get.off(TrouserkM(selectedPage: 1,));
-     }
-else if(i==1777||i==1778||i==1779){ Get.off(TrouserkM(selectedPage: 2,));
-     }
-else if(i==1780||i==1781||i==1782){ Get.off(TrouserkM(selectedPage: 3,));
-     }
-else if(i==1783||i==1784||i==1785){ Get.off(TrouserkM(selectedPage: 4,));
-     }
-else if(i==1786||i==1787||i==1788){ Get.off(TrackKB());
-     }
-
 
 
     else{
       return null;
     }
+  }
+  search2({int i}){
+    if(i==1306||i==1307||i==1308||i==1309||i==1310||i==1311){ Get.off(HatsBG(selectedPage: 0,));
+  }
+  else if(i==1312||i==1313||i==1314){ Get.off(HatsBG(selectedPage: 1,));
+  }
+  else if(i==1315||i==1316||i==1317){ Get.off(HatsBG(selectedPage: 2,));
+  }
+    else if(i==1318||i==1319||i==1320){ Get.off(HatsBG(selectedPage: 3,));
+    }
+    else if(i==1321||i==1322||i==1323){ Get.off(HatsBG(selectedPage: 4,));
+    }
+    else if(i==1324||i==1325||i==1326){ Get.off(BabyAcG(selectedPage: 0,));
+    }
+    else if(i==1327||i==1328||i==1329){ Get.off(BabyAcG(selectedPage: 1,));
+    }
+    else if(i==1330||i==1331||i==1332){ Get.off(BabyAcG(selectedPage: 2,));
+    }
+    else if(i==1333||i==1334||i==1335){ Get.off(BabyAcG(selectedPage: 3,));
+    }
+    else if(i==1336||i==1337||i==1338){ Get.off(BabyAcG(selectedPage: 4,));
+    }
+    else if(i==1339||i==1340||i==1341){ Get.off(BabysG(selectedPage: 0,));
+    }
+    else if(i==1342||i==1343||i==1344||i==1345||i==1346||i==1347){ Get.off(BabysG(selectedPage: 1,));
+    }
+    else if(i==1348||i==1349||i==1350){ Get.off(BabysG(selectedPage: 2,));
+    }
+    else if(i==1351||i==1352||i==1353){ Get.off(BabysG(selectedPage: 3,));
+    }
+    else if(i==1354||i==1355||i==1356||i==1357||i==1358||i==1359||i==1360||i==1361||i==1362){ Get.off(BabyCG(selectedPage: 0,));
+    }
+    else if(i==1363||i==1364||i==1365){ Get.off(BabyCG(selectedPage: 1,));
+    }
+    else if(i==1366||i==1367||i==1368){ Get.off(BabyCG(selectedPage: 2,));
+    }
+    else if(i==1369||i==1370||i==1371){ Get.off(BabyCG(selectedPage: 3,));
+    }
+    else if(i==1372||i==1373||i==1374){ Get.off(BabyCG(selectedPage: 4,));
+    }
+    else if(i==1375||i==1376||i==1377){ Get.off(BabyCG(selectedPage: 5,));
+    }
+    else if(i==1378||i==1379||i==1380){ Get.off(BabyCG(selectedPage: 6,));
+    }
+    else if(i==1381||i==1382||i==1383||i==1384||i==1385||i==1386){ Get.off(BabyCG(selectedPage: 7,));
+    }
+    else if(i==1387||i==1388||i==1389||i==1390||i==1391||i==1392){ Get.off(BabydrG(selectedPage: 0,));
+    }
+    else if(i==1393||i==1394||i==1395){ Get.off(BabydrG(selectedPage: 1,));
+    }
+    else if(i==1396||i==1397||i==1398){ Get.off(BabydrG(selectedPage: 2,));
+    }
+    else if(i==1399||i==1400||i==1401||i==1402||i==1403||i==1404||i==1405||i==1406||i==1407||i==1408||i==1409||i==1410){ Get.off(GGEthnic(selectedPage: 0,));
+    }
+    else if(i==1411||i==1412||i==1413||i==1414||i==1415||i==1416){ Get.off(GGEthnic(selectedPage: 1,));
+    }
+    else if(i==1417||i==1418||i==1419){ Get.off(GGEthnic(selectedPage: 2,));
+    }
+    else if(i==1420||i==1421||i==1422){ Get.off(GGEthnic(selectedPage: 3,));
+    }
+    else if(i==1423||i==1424||i==1425){ Get.off(GGEthnic(selectedPage: 4,));
+    }
+    else if(i==1426||i==1427||i==1428||i==1429||i==1430||i==1431){ Get.off(GGEthnic(selectedPage: 5,));
+    }
+    else if(i==1432||i==1433||i==1434||i==1435||i==1436||i==1437){ Get.off(BabykG(selectedPage: 0,));
+    }
+    else if(i==1438||i==1439||i==1440){ Get.off(BabykG(selectedPage: 1,));
+    }
+    else if(i==1441||i==1442||i==1443||i==1444||i==1445||i==1446){ Get.off(BabySG(selectedPage: 0,));
+    }
+    else if(i==1447||i==1448||i==1449){ Get.off(BabySG(selectedPage: 1,));
+    }
+    else if(i==1450||i==1451||i==1452){ Get.off(BabySG(selectedPage: 2,));
+    }
+    else if(i==1453||i==1454||i==1455){ Get.off(BabySG(selectedPage: 3,));
+    }
+    else if(i==1456||i==1457||i==1458){ Get.off(BabySG(selectedPage: 4,));
+    }
+    else if(i==1459||i==1460||i==1461){ Get.off(BabySG(selectedPage: 5,));
+    }
+    else if(i==1462||i==1463||i==1464||i==1465||i==1466||i==1467){ Get.off(BabyshG(selectedPage: 0,));
+    }
+    else if(i==1468||i==1469||i==1470){ Get.off(BabyshG(selectedPage: 1,));
+    }
+    else if(i==1471||i==1472||i==1473){ Get.off(BabyshG(selectedPage: 2,));
+    }
+    else if(i==1474||i==1475||i==1476||i==1477||i==1478||i==1479){ Get.off(BabyskG(selectedPage: 0,));
+    }
+    else if(i==1480||i==1481||i==1482){ Get.off(BabyskG(selectedPage: 1,));
+    }
+    else if(i==1483||i==1484||i==1485){ Get.off(BabyskG(selectedPage: 2,));
+    }
+    else if(i==1486||i==1487||i==1488){ Get.off(BabyskG(selectedPage: 3,));
+    }
+    else if(i==1489||i==1490||i==1491){ Get.off(BabyskG(selectedPage: 4,));
+    }
+    else if(i==1492||i==1493||i==1494){ Get.off(BabyswG(selectedPage: 0,));
+    }
+    else if(i==1495||i==1496||i==1497||i==1498||i==1499||i==1500){ Get.off(TopsBG(selectedPage: 0,));
+    }
+    else if(i==1501||i==1502||i==1503){ Get.off(TopsBG(selectedPage: 1,));
+    }
+    else if(i==1504||i==1505||i==1506){ Get.off(TopsBG(selectedPage: 2,));
+    }
+    else if(i==1507||i==1508||i==1509){ Get.off(TopsBG(selectedPage: 3,));
+    }
+    else if(i==1510||i==1511||i==1512){ Get.off(TopsBG(selectedPage: 4,));
+    }
+    else if(i==1513||i==1514||i==1515||i==1516||i==1517||i==1518){ Get.off(TopsBG(selectedPage: 5,));
+    }
+    else if(i==1519||i==1520||i==1521){ Get.off(BabytrG());
+    }
+    else if(i==1522||i==1523||i==1524||i==1525||i==1526||i==1527){ Get.off(BabytuG(selectedPage: 0,));
+    }
+    else if(i==1528||i==1529||i==1530){ Get.off(BabytuG(selectedPage: 1,));
+    }
+    else if(i==1531||i==1532||i==1533){ Get.off(BabytuG(selectedPage: 2,));
+    }
+    else if(i==1534||i==1535||i==1536||i==1537||i==1538||i==1539){ Get.off(BabytuG(selectedPage: 3,));
+    }
+    else if(i==1540||i==1541||i==1542||i==1543||i==1544||i==1545){ Get.off(HatsKB(selectedPage: 0,));
+    }
+    else if(i==1546||i==1547||i==1548){ Get.off(HatsKB(selectedPage: 1,));
+    }
+    else if(i==1549||i==1550||i==1551){ Get.off(HatsKB(selectedPage: 2,));
+    }
+    else if(i==1552||i==1553||i==1554){ Get.off(HatsKB(selectedPage: 3,));
+    }
+    else if(i==1555||i==1556||i==1557){ Get.off(HatsKB(selectedPage: 4,));
+    }
+    else if(i==1558||i==1559||i==1560){ Get.off(TiesKB(selectedPage: 0,));
+    }
+    else if(i==1561||i==1562||i==1563){ Get.off(TiesKB(selectedPage: 1,));
+    }
+    else if(i==1564||i==1565||i==1566||i==1567||i==1568||i==1569){ Get.off(BagsKB(selectedPage: 0,));
+    }
+    else if(i==1570||i==1571||i==1572){ Get.off(BagsKB(selectedPage: 1,));
+    }
+    else if(i==1573||i==1574||i==1575){ Get.off(BagsKB(selectedPage: 2,));
+    }
+    else if(i==1576||i==1577||i==1578){ Get.off(BracesKB(selectedPage: 0,));
+    }
+    else if(i==1579||i==1580||i==1581){ Get.off(BracesKB(selectedPage: 1,));
+    }
+    else if(i==1582||i==1583||i==1584||i==1585||i==1586||i==1587){ Get.off(EyeKB(selectedPage: 0,));
+    }
+    else if(i==1588||i==1589||i==1590){ Get.off(EyeKB(selectedPage: 1,));
+    }
+    else if(i==1591||i==1592||i==1593){ Get.off(AccessKB(selectedPage: 0,));
+    }
+    else if(i==1594||i==1595||i==1596){ Get.off(AccessKB(selectedPage: 1,));
+    }
+    else if(i==1597||i==1598||i==1599){ Get.off(AccessKB(selectedPage: 4,));
+    }
+    else if(i==1600||i==1601||i==1602){ Get.off(AccessKB(selectedPage: 7,));
+    }
+    else if(i==1603||i==1604||i==1605){ Get.off(AccessKB(selectedPage: 8,));
+    }
+    else if(i==1606||i==1607||i==1608||i==1609||i==1610||i==1611||i==1612||i==1613||i==1614){ Get.off(KidCB(selectedPage: 0,));
+    }
+    else if(i==1615||i==1616||i==1617){ Get.off(KidCB(selectedPage: 1,));
+    }
+    else if(i==1618||i==1619||i==1620){ Get.off(KidCB(selectedPage: 2,));
+    }
+    else if(i==1621||i==1622||i==1623){ Get.off(KidCB(selectedPage: 3,));
+    }
+    else if(i==1624||i==1625||i==1626){ Get.off(KidCB(selectedPage: 4,));
+    }
+    else if(i==1627||i==1628||i==1629){ Get.off(KidCB(selectedPage: 5,));
+    }
+    else if(i==1630||i==1631||i==1632){ Get.off(KidCB(selectedPage: 6,));
+    }
+    else if(i==1633||i==1634||i==1635){ Get.off(KidCB(selectedPage: 7,));
+    }
+    else if(i==1636||i==1637||i==1638){ Get.off(KidCB(selectedPage: 8,));
+    }
+    else if(i==1639||i==1640||i==1641){ Get.off(KidCB(selectedPage: 9,));
+    }
+    else if(i==1642||i==1643||i==1644||i==1645||i==1646||i==1647){ Get.off(KidCB(selectedPage: 10,));
+    }
+    else if(i==1648||i==1649||i==1650){ Get.off(DenimB(selectedPage: 0,));
+    }
+    else if(i==1651||i==1652||i==1653){ Get.off(DenimB(selectedPage: 1,));
+    }
+    else if(i==1654||i==1655||i==1656){ Get.off(DenimB(selectedPage: 2,));
+    }
+    else if(i==1657||i==1658||i==1659){ Get.off(DenimB(selectedPage: 3,));
+    }
+    else if(i==1660||i==1661||i==1662){ Get.off(DenimB(selectedPage: 4,));
+    }
+    else if(i==1663||i==1664||i==1665||i==1687||i==1688||i==1689||i==1690||i==1691||i==1692){ Get.off(KBEthnic(selectedPage: 0,));
+    }
+    else if(i==1666||i==1667||i==1668){ Get.off(KBEthnic(selectedPage: 1,));
+    }
+    else if(i==1669||i==1670||i==1671){ Get.off(KBEthnic(selectedPage: 2,));
+    }
+    else if(i==1672||i==1673||i==1674){ Get.off(KBEthnic(selectedPage: 3,));
+    }
+    else if(i==1675||i==1676||i==1677||i==1678||i==1679||i==1680){ Get.off(KBEthnic(selectedPage: 4,));
+    }
+    else if(i==1681||i==1682||i==1683){ Get.off(KBEthnic(selectedPage: 5,));
+    }
+    else if(i==1684||i==1685||i==1686){ Get.off(KBEthnic(selectedPage: 6,));
+    }
+    else if(i==1693||i==1694||i==1695||i==1696||i==1697||i==1698||i==1699||i==1700||i==1701){ Get.off(KidkB());
+    }
+    else if(i==1702||i==1703||i==1704||i==1705||i==1706||i==1707){ Get.off(KidSB(selectedPage: 0,));
+    }
+    else if(i==1708||i==1709||i==1710){ Get.off(KidSB(selectedPage: 1,));
+    }
+    else if(i==1711||i==1712||i==1713){ Get.off(KidSB(selectedPage: 2,));
+    }
+    else if(i==1714||i==1715||i==1716){ Get.off(KidSB(selectedPage: 3,));
+    }
+    else if(i==1717||i==1718||i==1719){ Get.off(KidSB(selectedPage: 4,));
+    }
+    else if(i==1720||i==1721||i==1722){ Get.off(KidSB(selectedPage: 5,));
+    }
+    else if(i==1723||i==1724||i==1725||i==1726||i==1727||i==1728){ Get.off(KidSB(selectedPage: 6,));
+    }
+    else if(i==1729||i==1730||i==1731||i==1732||i==1733||i==1734){ Get.off(KidshB(selectedPage: 0,));
+    }
+    else if(i==1735||i==1736||i==1737){ Get.off(KidshB(selectedPage: 2,));
+    }
+    else if(i==1738||i==1739||i==1740){ Get.off(KidswB(selectedPage: 0,));
+    }
+    else if(i==1741||i==1742||i==1743||i==1744||i==1745||i==1746){ Get.off(KidswB(selectedPage: 1,));
+    }
+    else if(i==1747||i==1748||i==1749){ Get.off(TopsB(selectedPage: 0,));
+    }
+    else if(i==1750||i==1751||i==1752){ Get.off(TopsB(selectedPage: 1,));
+    }
+    else if(i==1753||i==1754||i==1755){ Get.off(TopsB(selectedPage: 2,));
+    }
+    else if(i==1756||i==1757||i==1758||i==1759||i==1760||i==1761){ Get.off(TopsB(selectedPage: 3,));
+    }
+    else if(i==1762||i==1763||i==1764||i==1765||i==1766||i==1767){ Get.off(TopsB(selectedPage: 4,));
+    }
+    else if(i==1768||i==1769||i==1770||i==1771||i==1772||i==1773){ Get.off(TrouserkM(selectedPage: 0,));
+    }
+    else if(i==1774||i==1775||i==1776){ Get.off(TrouserkM(selectedPage: 1,));
+    }
+    else if(i==1777||i==1778||i==1779){ Get.off(TrouserkM(selectedPage: 2,));
+    }
+    else if(i==1780||i==1781||i==1782){ Get.off(TrouserkM(selectedPage: 3,));
+    }
+    else if(i==1783||i==1784||i==1785){ Get.off(TrouserkM(selectedPage: 4,));
+    }
+    else if(i==1786||i==1787||i==1788){ Get.off(TrackKB());
+    }
+    else if(i==1789||i==1790||i==1791||i==1792||i==1793||i==1794){ Get.off(HatsKG(selectedPage: 0,));
+    }
+    else if(i==1795||i==1796||i==1797){ Get.off(HatsKG(selectedPage: 1,));
+    }
+    else if(i==1798||i==1799||i==1800){ Get.off(HatsKG(selectedPage: 2,));
+    }
+    else if(i==1801||i==1802||i==1803){ Get.off(HatsKG(selectedPage: 3,));
+    }
+    else if(i==1804||i==1805||i==1806){ Get.off(HairKG(selectedPage: 0,));
+    }
+    else if(i==1807||i==1808||i==1809){ Get.off(HairKG(selectedPage: 1,));
+    }
+    else if(i==1810||i==1811||i==1812||i==1813||i==1814||i==1815){ Get.off(BagsKG(selectedPage: 0,));
+    }
+    else if(i==1816||i==1817||i==1818){ Get.off(BagsKG(selectedPage: 1,));
+    }
+    else if(i==1819||i==1820||i==1821){ Get.off(BagsKG(selectedPage: 2,));
+    }
+    else if(i==1822||i==1823||i==1824){ Get.off(BracesKG(selectedPage: 0,));
+    }
+    else if(i==1825||i==1826||i==1827){ Get.off(BracesKG(selectedPage: 1,));
+    }
+    else if(i==1828||i==1829||i==1830||i==1831||i==1832||i==1833){ Get.off(EyeKG(selectedPage: 0,));
+    }
+    else if(i==1834||i==1835||i==1836){ Get.off(EyeKG(selectedPage: 1,));
+    }
+    else if(i==1837||i==1838||i==1839){ Get.off(AccessG(selectedPage: 0,));
+    }
+    else if(i==1840||i==1841||i==1842){ Get.off(AccessG(selectedPage: 1,));
+    }
+    else if(i==1843||i==1844||i==1845){ Get.off(AccessG(selectedPage: 4,));
+    }
+    else if(i==1846||i==1847||i==1848){ Get.off(AccessG(selectedPage: 6,));
+    }
+    else if(i==1849||i==1850||i==1851){ Get.off(AccessG(selectedPage: 8,));
+    }
+  else if(i==1852||i==1853||i==1854){ Get.off(AccessG(selectedPage: 9,));
+    }
+  else if(i==1855||i==1856||i==1857||i==1858||i==1859||i==1860){ Get.off(CapesG(selectedPage: 0,));
+    }
+  else if(i==1861||i==1862||i==1863){ Get.off(CapesG(selectedPage: 1,));
+    }
+  else if(i==1864||i==1865||i==1866){ Get.off(CapesG(selectedPage: 2,));
+    }
+  else if(i==1867||i==1868||i==1869){ Get.off(CapesG(selectedPage: 3,));
+    }
+  else if(i==1870||i==1871||i==1872||i==1873||i==1874||i==1875){ Get.off(CapesG(selectedPage: 4,));
+    }
+ else if(i==1876||i==1877||i==1878||i==1879||i==1880||i==1881){ Get.off(CapesG(selectedPage: 5,));
+    }
+
+ else if(i==1882||i==1883||i==1884){ Get.off(CapesG(selectedPage: 6,));
+    }
+ else if(i==1885||i==1886||i==1887){ Get.off(CapesG(selectedPage: 7,));
+    }
+ else if(i==1888||i==1889||i==1890||i==1891||i==1892||i==1893){ Get.off(DenimG(selectedPage: 0,));
+    }
+  else if(i==1894||i==1895||i==1896){ Get.off(DenimG(selectedPage: 1,));
+    }
+  else if(i==1897||i==1898||i==1899){ Get.off(DenimG(selectedPage: 2,));
+    }
+   else if(i==1900||i==1901||i==1902){ Get.off(DenimG(selectedPage: 3,));
+    }
+   else if(i==1903||i==1904||i==1905){ Get.off(DenimG(selectedPage: 4,));
+    }
+    else if(i==1906||i==1907||i==1908){ Get.off(DenimG(selectedPage: 5,));
+    }
+  else if(i==1909||i==1910||i==1911||i==1912||i==1913||i==1914){ Get.off(KiddrG(selectedPage: 0,));
+    }
+  else if(i==1915||i==1916||i==1917){ Get.off(KiddrG(selectedPage: 1,));
+    }
+  else if(i==1918||i==1919||i==1920){ Get.off(KiddrG(selectedPage: 2,));
+    }
+ else if(i==1921||i==1922||i==1923){ Get.off(KiddrG(selectedPage: 3,));
+    }
+ else if(i==1924||i==1925||i==1926){ Get.off(KiddrG(selectedPage: 4,));
+    }
+ else if(i==1927||i==1928||i==1929){ Get.off(KiddrG(selectedPage: 5,));
+    }
+ else if(i==1930||i==1931||i==1932||i==1933||i==1934||i==1935){ Get.off(KiddrG(selectedPage: 6,));
+    }
+ else if(i==1936||i==1937||i==1938){ Get.off(KiddrG(selectedPage: 7,));
+    }
+else if(i==1939||i==1940||i==1941||i==1942||i==1943||i==1944||i==1945||i==1946||i==1947||i==1948||i==1949||i==1950){ Get.off(KiddrG(selectedPage: 0,));
+    }
+else if(i==1951||i==1952||i==1953){ Get.off(KiddrG(selectedPage: 1,));
+    }
+else if(i==1954||i==1955||i==1956||i==1957||i==1958||i==1959){ Get.off(KiddrG(selectedPage: 2,));
+    }
+else if(i==1960||i==1961||i==1962||i==1963||i==1964||i==1965){ Get.off(KiddrG(selectedPage: 3,));
+    }
+else if(i==1966||i==1967||i==1968){ Get.off(KiddrG(selectedPage: 4,));
+    }
+else if(i==1969||i==1970||i==1971){ Get.off(KiddrG(selectedPage: 5,));
+    }
+else if(i==1972||i==1973||i==1974||i==1975||i==1976||i==1977){ Get.off(KiddrG(selectedPage: 6,));
+    }
+else if(i==1978||i==1979||i==1980){ Get.off(KiddrG(selectedPage: 7,));
+    }
+else if(i==1981||i==1982||i==1983||i==1984||i==1985||i==1986){ Get.off(JackG(selectedPage: 0,));
+    }
+else if(i==1987||i==1988||i==1989){ Get.off(JackG(selectedPage: 1,));
+    }
+else if(i==1990||i==1991||i==1992){ Get.off(JackG(selectedPage: 2,));
+    }
+else if(i==1993||i==1994||i==1995){ Get.off(JackG(selectedPage: 3,));
+    }
+else if(i==1996||i==1997||i==1998||i==1999||i==2000||i==2001){ Get.off(JackG(selectedPage: 4,));
+    }
+else if(i==2002||i==2003||i==2004){ Get.off(JackG(selectedPage: 5,));
+    }
+else if(i==2005||i==2006||i==2007){ Get.off(JackG(selectedPage: 6,));
+    }
+else if(i==2008||i==2009||i==2010||i==2011||i==2012||i==2013){ Get.off(JackG(selectedPage: 7,));
+    }
+else if(i==2014||i==2015||i==2016){ Get.off(JumpsuitG(selectedPage: 0,));
+    }
+else if(i==2017||i==2018||i==2019){ Get.off(JumpsuitG(selectedPage: 1,));
+    }
+else if(i==2020||i==2021||i==2022||i==2023||i==2024||i==2025){ Get.off(KidkG(selectedPage: 0,));
+    }
+else if(i==2026||i==2027||i==2028){ Get.off(KidkG(selectedPage: 1,));
+    }
+else if(i==2029||i==2030||i==2031||i==2032||i==2033||i==2034){ Get.off(KidSG(selectedPage: 0,));
+    }
+else if(i==2035||i==2036||i==2037){ Get.off(KidSG(selectedPage: 1,));
+    }
+else if(i==2038||i==2039||i==2040){ Get.off(KidSG(selectedPage: 2,));
+    }
+else if(i==2041||i==2042||i==2043){ Get.off(KidSG(selectedPage: 3,));
+    }
+else if(i==2044||i==2045||i==2046){ Get.off(KidSG(selectedPage: 4,));
+    }
+else if(i==2047||i==2048||i==2049){ Get.off(KidSG(selectedPage: 5,));
+    }
+else if(i==2050||i==2051||i==2052||i==2053||i==2054||i==2055){ Get.off(KidSG(selectedPage: 6,));
+    }
+else if(i==2056||i==2057||i==2058||i==2059||i==2060||i==2061){ Get.off(KidshG(selectedPage: 0,));
+    }
+else if(i==2062||i==2063||i==2064){ Get.off(KidshG(selectedPage: 1,));
+    }
+else if(i==2065||i==2066||i==2067){ Get.off(KidshG(selectedPage: 2,));
+    }
+else if(i==2068||i==2069||i==2070||i==2071||i==2072||i==2073){ Get.off(KidskG(selectedPage: 0,));
+    }
+else if(i==2074||i==2075||i==2076){ Get.off(KidskG(selectedPage: 1,));
+    }
+else if(i==2077||i==2078||i==2079){ Get.off(KidskG(selectedPage: 2,));
+    }
+else if(i==2080||i==2081||i==2082){ Get.off(KidskG(selectedPage: 3,));
+    }
+else if(i==2083||i==2084||i==2085){ Get.off(KidskG(selectedPage: 4,));
+    }
+else if(i==2086||i==2087||i==2088){ Get.off(KidswG(selectedPage: 0,));
+    }
+else if(i==2089||i==2090||i==2091){ Get.off(KidswG(selectedPage: 1,));
+    }
+else if(i==2092||i==2093||i==2094){ Get.off(KidswG(selectedPage: 2,));
+    }
+else if(i==2095||i==2096||i==2097){ Get.off(KidswG(selectedPage: 3,));
+    }
+else if(i==2098||i==2099||i==2100){ Get.off(KidswG(selectedPage: 4,));
+    }
+else if(i==2101||i==2102||i==2103){ Get.off(TopsG(selectedPage: 0,));
+    }
+else if(i==2104||i==2105||i==2106){ Get.off(TopsG(selectedPage: 1,));
+    }
+else if(i==2107||i==2108||i==2109||i==2110||i==2111||i==2112){ Get.off(TopsG(selectedPage: 2,));
+    }
+else if(i==2113||i==2114||i==2115||i==2116||i==2117||i==2118||i==2119||i==2120||i==2121){ Get.off(TopsG(selectedPage: 3,));
+    }
+else if(i==2122||i==2123||i==2124){ Get.off(TopsG(selectedPage: 4,));
+    }
+else if(i==2125||i==2126||i==2127){ Get.off(TopsG(selectedPage: 5,));
+    }
+else if(i==2128||i==2129||i==2130){ Get.off(TopsG(selectedPage: 6,));
+    }
+else if(i==2131||i==2132||i==2133){ Get.off(TopsG(selectedPage: 7,));
+    }
+else if(i==2134||i==2135||i==2136||i==2137||i==2138||i==2139){ Get.off(TopsG(selectedPage: 8,));
+    }
+else if(i==2140||i==2141||i==2142){ Get.off(TrackB());
+    }
+
+else if(i==2143||i==2144||i==2145||i==2146||i==2147||i==2148){ Get.off(KidtuG(selectedPage: 0,));
+    }
+else if(i==2149||i==2150||i==2151){ Get.off(KidtuG(selectedPage: 1,));
+    }
+else if(i==2152||i==2153||i==2154){ Get.off(KidtuG(selectedPage: 2,));
+    }
+else if(i==2155||i==2156||i==2157){ Get.off(KidtuG(selectedPage: 3,));
+    }
+else if(i==2158||i==2159||i==2160||i==2161||i==2162||i==2163){ Get.off(HatsTB(selectedPage: 0,));
+    }
+else if(i==2164||i==2165||i==2166||i==2167||i==2168||i==2169){ Get.off(HatsTB(selectedPage: 1,));
+    }
+else if(i==2170||i==2171||i==2172){ Get.off(TiesTB(selectedPage: 0,));
+    }
+else if(i==2173||i==2174||i==2175){ Get.off(TiesTB(selectedPage: 1,));
+    }
+else if(i==2176||i==2177||i==2178||i==2179||i==2180||i==2181){ Get.off(BagsTB(selectedPage: 0,));
+    }
+else if(i==2182||i==2183||i==2184){ Get.off(BagsTB(selectedPage: 1,));
+    }
+else if(i==2185||i==2186||i==2187){ Get.off(BagsTB(selectedPage: 2,));
+    }
+else if(i==2188||i==2189||i==2190){ Get.off(BagsTB(selectedPage: 3,));
+    }
+else if(i==2188||i==2189||i==2190){ Get.off(BagsTB(selectedPage: 3,));
+    }
+else if(i==2188||i==2189||i==2190){ Get.off(BagsTB(selectedPage: 3,));
+    }
+else if(i==2191||i==2192||i==2193){ Get.off(BracesTB(selectedPage: 0,));
+    }
+else if(i==2194||i==2195||i==2196){ Get.off(BracesTB(selectedPage: 1,));
+    }
+else if(i==2197||i==2198||i==2199||i==2200||i==2201||i==2202){ Get.off(EyeTB(selectedPage: 0,));
+    }
+else if(i==2203||i==2204||i==2205){ Get.off(EyeTB(selectedPage: 1,));
+    }
+else if(i==2206||i==2207||i==2208){ Get.off(AccessBT(selectedPage: 0,));
+    }
+else if(i==2209||i==2210||i==2211){ Get.off(AccessBT(selectedPage: 1,));
+    }
+else if(i==2212||i==2213||i==2214){ Get.off(AccessBT(selectedPage: 4,));
+    }
+else if(i==2215||i==2216||i==2217){ Get.off(AccessBT(selectedPage: 7,));
+    }
+else if(i==2218||i==2219||i==2220){ Get.off(AccessBT(selectedPage: 8,));
+    }
+else if(i==2221||i==2222||i==2223||i==2224||i==2225||i==2226||i==2227||i==2228||i==2229){ Get.off(TCB(selectedPage: 0,));
+    }
+else if(i==2230||i==2231||i==2232){ Get.off(TCB(selectedPage: 1,));
+    }
+else if(i==2233||i==2234||i==2235){ Get.off(TCB(selectedPage: 2,));
+    }
+else if(i==2236||i==2237||i==2238){ Get.off(TCB(selectedPage: 3,));
+    }
+else if(i==2239||i==2240||i==2241){ Get.off(TCB(selectedPage: 4,));
+    }
+else if(i==2242||i==2243||i==2244){ Get.off(TCB(selectedPage: 5,));
+    }
+else if(i==2245||i==2246||i==2247){ Get.off(TCB(selectedPage: 6,));
+    }
+else if(i==2248||i==2249||i==2250){ Get.off(TCB(selectedPage: 7,));
+    }
+else if(i==2251||i==2252||i==2253){ Get.off(TCB(selectedPage: 8,));
+    }
+else if(i==2254||i==2255||i==2256||i==2257||i==2258||i==2259){ Get.off(TCB(selectedPage: 9,));
+    }
+else if(i==2260||i==2261||i==2262||i==2263||i==2264||i==2265){ Get.off(DenimBT(selectedPage: 0,));
+    }
+else if(i==2266||i==2267||i==2268){ Get.off(DenimBT(selectedPage: 1,));
+    }
+else if(i==2269||i==2270||i==2271){ Get.off(DenimBT(selectedPage: 2,));
+    }
+else if(i==2272||i==2273||i==2274){ Get.off(DenimBT(selectedPage: 3,));
+    }
+else if(i==2275||i==2276||i==2277){ Get.off(DenimBT(selectedPage: 4,));
+    }
+else if(i==2278||i==2279||i==2280||i==2281||i==2282||i==2283||i==2284||i==2285||i==2286){ Get.off(TBEthnic(selectedPage: 0,));
+    }
+else if(i==2287||i==2288||i==2289){ Get.off(TBEthnic(selectedPage: 1,));
+    }
+else if(i==2290||i==2291||i==2292){ Get.off(TBEthnic(selectedPage: 2,));
+    }
+else if(i==2293||i==2294||i==2295){ Get.off(TBEthnic(selectedPage: 3,));
+    }
+else if(i==2296||i==2297||i==2298||i==2299||i==2300||i==2301){ Get.off(TBEthnic(selectedPage: 4,));
+    }
+else if(i==2302||i==2303||i==2304){ Get.off(TBEthnic(selectedPage: 5,));
+    }
+else if(i==2305||i==2306||i==2307){ Get.off(TBEthnic(selectedPage: 6,));
+    }
+else if(i==2308||i==2309||i==2310||i==2311||i==2312||i==2313){ Get.off(KidTB(selectedPage: 0,));
+    }
+else if(i==2314||i==2315||i==2316){ Get.off(KidTB(selectedPage: 1,));
+    }
+else if(i==2317||i==2318||i==2319||i==2320||i==2321||i==2322){ Get.off(KidSBT(selectedPage: 0,));
+    }
+else if(i==2323||i==2324||i==2325){ Get.off(KidSBT(selectedPage: 1,));
+    }
+else if(i==2326||i==2327||i==2328){ Get.off(KidSBT(selectedPage: 2,));
+    }
+else if(i==2329||i==2330||i==2331){ Get.off(KidSBT(selectedPage: 3,));
+    }
+else if(i==2332||i==2333||i==2334){ Get.off(KidSBT(selectedPage: 4,));
+    }
+else if(i==2335||i==2336||i==2337){ Get.off(KidSBT(selectedPage: 5,));
+    }
+else if(i==2338||i==2339||i==2340||i==2341||i==2342||i==2343){ Get.off(KidSBT(selectedPage: 6,));
+    }
+else if(i==2344||i==2345||i==2346||i==2347||i==2348||i==2349){ Get.off(KidshBT(selectedPage: 0,));
+    }
+else if(i==2350||i==2351||i==2352){ Get.off(KidshBT(selectedPage: 1,));
+    }
+else if(i==2353||i==2354||i==2355){ Get.off(KidswBT(selectedPage: 0,));
+    }
+else if(i==2356||i==2357||i==2358||i==2359||i==2360||i==2361){ Get.off(KidswBT(selectedPage: 2,));
+    }
+else if(i==2362||i==2363||i==2364){ Get.off(TopsGT(selectedPage: 0,));
+    }
+else if(i==2365||i==2366||i==2367){ Get.off(TopsGT(selectedPage: 1,));
+    }
+else if(i==2368||i==2369||i==2370){ Get.off(TopsGT(selectedPage: 2,));
+    }
+else if(i==2371||i==2372||i==2373||i==2374||i==2375||i==2376){ Get.off(TopsGT(selectedPage: 3,));
+    }
+else if(i==2377||i==2378||i==2379||i==2380||i==2381||i==2382){ Get.off(TopsGT(selectedPage: 4,));
+    }
+else if(i==2383||i==2384||i==2385){ Get.off(TopsGT(selectedPage: 0,));
+    }
+else if(i==2386||i==2387||i==2388||i==2389||i==2390||i==2391){ Get.off(TrouserTM(selectedPage: 0,));
+    }
+else if(i==2392||i==2393||i==2394){ Get.off(TrouserTM(selectedPage: 1,));
+    }
+else if(i==2395||i==2396||i==2397){ Get.off(TrouserTM(selectedPage: 2,));
+    }
+else if(i==2398||i==2399||i==2400){ Get.off(TrouserTM(selectedPage: 3,));
+    }
+else if(i==2401||i==2402||i==2403){ Get.off(TrouserTM(selectedPage: 4,));
+    }
+else if(i==2404||i==2405||i==2406){ Get.off(TrouserTM(selectedPage: 5,));
+    }
+
+else{return null;}
+
   }
   @override
   Widget build(BuildContext context) {
@@ -3071,7 +4104,9 @@ resizeToAvoidBottomPadding: true,
                 onItemTap: (int index) {
                   //Do something cool
                   print(index);
-                  search(i:index);
+                  if(index>=0||index<=1305){  search(i:index);}
+                  else{search2(i:index);}
+
                 }
             ),
           ),

@@ -9,6 +9,9 @@ import 'package:fashow/Constants.dart';
 import 'package:flutter/cupertino.dart';
 import 'dart:async';
 import 'package:fashow/ActivityFeed.dart';
+import 'package:fashow/methods/data_model.dart';
+import 'package:fashow/methods/firestore_search.dart';
+
 class Search extends StatefulWidget {
   @override
   _SearchState createState() => _SearchState();
@@ -160,6 +163,50 @@ class UserResult extends StatelessWidget {
           ),
         ],
       ),
+    );
+  }
+}
+class SearchFeed extends StatefulWidget {
+  @override
+  _SearchFeedState createState() => _SearchFeedState();
+}
+
+class _SearchFeedState extends State<SearchFeed> {
+  @override
+  Widget build(BuildContext context) {
+    return FirestoreSearchScaffold(
+      firestoreCollectionName: 'data',
+      searchBy: 'name',
+      dataListFromSnapshot: DataModel().dataListFromSnapshot,
+      builder: (context, snapshot) {
+        if (snapshot.hasData) {
+          final List<DataModel> dataList = snapshot.data;
+
+          return ListView.builder(
+              itemCount: dataList?.length ?? 0,
+              itemBuilder: (context, index) {
+                final DataModel data = dataList[index];
+
+                return GestureDetector(
+                  onTap: () => showProfile(context, profileId: data?.id),
+                  child: Container(
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text('${data?.name ?? ''}'),
+                        Text('${data?.id ?? ''}')
+                      ],
+                    ),
+                  ),
+                );
+              });
+        }
+        return Center(
+          child: CircularProgressIndicator(),
+        );
+      },
     );
   }
 }

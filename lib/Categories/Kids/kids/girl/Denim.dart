@@ -4,9 +4,7 @@ import 'package:fashow/Constants.dart';
 import 'package:fashow/size_config.dart';
 import 'package:fashow/ActivityFeed.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:getflutter/components/button/gf_button.dart';
-import 'package:getflutter/shape/gf_button_shape.dart';
-import 'package:image/image.dart';
+
 import 'package:paginate_firestore/paginate_firestore.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fashow/HomePage.dart';
@@ -15,6 +13,9 @@ import 'package:fashow/user.dart';
 import 'package:fashow/product_custom.dart';
 import 'package:fashow/Product_screen.dart';
 class DenimG extends StatefulWidget {
+  final  int selectedPage;
+
+  const DenimG({Key key, this.selectedPage}) : super(key: key);
   @override
   _DenimGState createState() => _DenimGState();
 }
@@ -561,6 +562,8 @@ class _DenimGState extends State<DenimG> {
       quarterTurns: 3,
       child: Expanded(
         child: DefaultTabController(
+            initialIndex:widget.selectedPage ?? 0,
+
             length:6,
             child: Scaffold(
               appBar:AppBar(
@@ -579,7 +582,7 @@ class _DenimGState extends State<DenimG> {
                     Text("Skirts",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5),),
                     Text("Skinny-fit jeans",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5),),
                     Text("Slim-fit jeans",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5),),
-                    Text("KGStraight-fit jeans",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5),),
+                    Text("Straight-fit jeans",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5),),
 
                   ],
                 ),

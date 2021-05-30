@@ -12,6 +12,9 @@ import 'package:fashow/user.dart';
 import 'package:fashow/product_custom.dart';
 import 'package:fashow/Product_screen.dart';
 class TrackBT extends StatefulWidget {
+  final  int selectedPage;
+
+  const TrackBT({Key key, this.selectedPage}) : super(key: key);
   @override
   _TrackBTState createState() => _TrackBTState();
 }
@@ -260,6 +263,8 @@ class _TrackBTState extends State<TrackBT> {
       quarterTurns: 3,
       child: Expanded(
         child: DefaultTabController(
+            initialIndex:widget.selectedPage ?? 0,
+
             length:2,
             child: Scaffold(
               appBar:AppBar(
