@@ -3,9 +3,6 @@ import 'package:fashow/Constants.dart';
 import 'package:fashow/size_config.dart';
 import 'package:fashow/ActivityFeed.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:getflutter/components/button/gf_button.dart';
-import 'package:getflutter/shape/gf_button_shape.dart';
-import 'package:image/image.dart';
 import 'package:paginate_firestore/paginate_firestore.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fashow/HomePage.dart';
@@ -14,6 +11,9 @@ import 'package:fashow/user.dart';
 import 'package:fashow/product_custom.dart';
 import 'package:fashow/Product_screen.dart';
 class KidtuGT extends StatefulWidget {
+  final  int selectedPage;
+
+  const KidtuGT({Key key, this.selectedPage}) : super(key: key);
   @override
   _KidtuGTState createState() => _KidtuGTState();
 }
@@ -936,7 +936,9 @@ class _KidtuGTState extends State<KidtuGT> {
        quarterTurns: 3,
        child: Expanded(
          child: DefaultTabController(
-             length:11,
+           initialIndex:widget.selectedPage ?? 0,
+
+           length:11,
              child: Scaffold(
                appBar:AppBar(
                  toolbarHeight: SizeConfig.safeBlockHorizontal * 8,
@@ -954,9 +956,9 @@ class _KidtuGTState extends State<KidtuGT> {
                      Text("Tapered fit",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5),),
                      Text("Straight fit",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5),),
                      Text("Wide-Leg",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5),),
-                     Text("Cropped jeans",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5),),
+                     Text("Cropped Trousers",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5),),
                      Text("High Waisted",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5),),
-                     Text("Flare & Bell Bottom Jeans",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5),),
+                     Text("Flare & Bell Bottom Trousers",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5),),
                      Text("Leggings",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5),),
                      Text("Tailored Trousers",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5),),
                      Text("Sweatpants",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5),),

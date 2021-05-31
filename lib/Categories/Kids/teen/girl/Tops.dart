@@ -14,12 +14,15 @@ import 'package:fashow/progress.dart';
 import 'package:fashow/user.dart';
 import 'package:fashow/product_custom.dart';
 import 'package:fashow/Product_screen.dart';
-class TopsGT extends StatefulWidget {
+class TopsTG extends StatefulWidget {
+  final  int selectedPage;
+
+  const TopsTG({Key key, this.selectedPage}) : super(key: key);
   @override
-  _TopsGTState createState() => _TopsGTState();
+  _TopsTGState createState() => _TopsTGState();
 }
 
-class _TopsGTState extends State<TopsGT> {
+class _TopsTGState extends State<TopsTG> {
   df({String productname,String usd,String inr,String cny,String eur,String gbp,String prodId,String ownerId,}){
     if(currentUser.country=='India'){
       return
@@ -788,6 +791,8 @@ class _TopsGTState extends State<TopsGT> {
       quarterTurns: 3,
       child: Expanded(
         child: DefaultTabController(
+            initialIndex:widget.selectedPage ?? 0,
+
             length:9,
             child: Scaffold(
               appBar:AppBar(

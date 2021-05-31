@@ -1,12 +1,8 @@
-import 'package:fashow/Categories/TgirlEcomUp.dart';
 import 'package:flutter/material.dart';
 import 'package:fashow/Constants.dart';
 import 'package:fashow/size_config.dart';
 import 'package:fashow/ActivityFeed.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:getflutter/components/button/gf_button.dart';
-import 'package:getflutter/shape/gf_button_shape.dart';
-import 'package:image/image.dart';
 import 'package:paginate_firestore/paginate_firestore.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fashow/HomePage.dart';
@@ -15,6 +11,9 @@ import 'package:fashow/user.dart';
 import 'package:fashow/product_custom.dart';
 import 'package:fashow/Product_screen.dart';
 class KidSGT extends StatefulWidget {
+  final  int selectedPage;
+
+  const KidSGT({Key key, this.selectedPage}) : super(key: key);
   @override
   _KidSGTState createState() => _KidSGTState();
 }
@@ -649,17 +648,14 @@ class _KidSGTState extends State<KidSGT> {
                    isScrollable: true,
                    labelColor: Colors.white,
                    unselectedLabelColor: kIcon,
-
-
                    tabs:[
+
                      Text("Sneakers",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5),),
                      Text("Loafers",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5),),
                      Text("Ballerinas",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5),),
                      Text("Sandals",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5),),
-
                      Text("Boots",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5,),),
                      Text("Slippers",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5),),
-
                      Text("Flip flops & Slides",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5),),
                    ],
                  ),

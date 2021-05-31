@@ -1,8 +1,11 @@
+import 'package:fashow/Categories/TgirlEcomUp.dart';
 import 'package:flutter/material.dart';
 import 'package:fashow/Constants.dart';
 import 'package:fashow/size_config.dart';
 import 'package:fashow/ActivityFeed.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+
+import 'package:image/image.dart';
 import 'package:paginate_firestore/paginate_firestore.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fashow/HomePage.dart';
@@ -10,101 +13,93 @@ import 'package:fashow/progress.dart';
 import 'package:fashow/user.dart';
 import 'package:fashow/product_custom.dart';
 import 'package:fashow/Product_screen.dart';
-class TGEthnic extends StatefulWidget {
-  final  int selectedPage;
+df({String productname,String usd,String inr,String cny,String eur,String gbp,String prodId,String ownerId,}){
+  if(currentUser.country=='India'){
+    return
 
-  const TGEthnic({Key key, this.selectedPage}) : super(key: key);
-  @override
-  _TGEthnicState createState() => _TGEthnicState();
+      ListTile(
+        title:            Text(productname, style: TextStyle(
+            color: kText,
+            fontSize: 15.0,
+            fontWeight: FontWeight.bold),),
+        subtitle:            Text( "₹$inr",style: TextStyle(color: kText,
+            fontSize: 20.0,
+            fontWeight: FontWeight.bold)),
+
+      );
+
+  }
+  else if(currentUser.country=='US'){
+    return
+
+      ListTile(
+        title:                      Text(productname, style: TextStyle(
+            color: kText,
+            fontSize: 15.0,
+            fontWeight: FontWeight.bold),),
+
+        subtitle:          Text( "\u0024 $usd",style: TextStyle(color: kText,
+            fontSize: 20.0,
+            fontWeight: FontWeight.bold)),
+
+      );
+
+
+  }
+  else if (currentUser.country == 'Europe'){
+    return
+
+      ListTile(
+        title:                      Text(productname, style: TextStyle(
+            color: kText,
+            fontSize: 15.0,
+            fontWeight: FontWeight.bold),),
+
+        subtitle:           Text( "€ $eur",style: TextStyle(color: kText,
+            fontSize: 20.0,
+            fontWeight: FontWeight.bold)),
+
+      );
+
+  }
+  else if (currentUser.country == 'UK'){
+    return
+
+      ListTile(
+        title:                    Text(productname, style: TextStyle(
+            color: kText,
+            fontSize: 15.0,
+            fontWeight: FontWeight.bold),),
+
+        subtitle:                     Text( "£  $gbp ",style: TextStyle(color: kText,
+            fontSize: 20.0,
+            fontWeight: FontWeight.bold)),
+
+
+      );
+
+  }
+  else{
+    return
+
+      ListTile(
+        title:                      Text(productname, style: TextStyle(
+            color: kText,
+            fontSize: 15.0,
+            fontWeight: FontWeight.bold),),
+
+        subtitle:          Text( "\u0024 $usd",style: TextStyle(color: kText,
+            fontSize: 20.0,
+            fontWeight: FontWeight.bold)),
+
+      );
+
+
+  }
 }
 
-class _TGEthnicState extends State<TGEthnic> {
-  df({String productname,String usd,String inr,String cny,String eur,String gbp,String prodId,String ownerId,}){
-    if(currentUser.country=='India'){
-      return
-
-        ListTile(
-          title:            Text(productname, style: TextStyle(
-              color: kText,
-              fontSize: 15.0,
-              fontWeight: FontWeight.bold),),
-          subtitle:            Text( "₹$inr",style: TextStyle(color: kText,
-              fontSize: 20.0,
-              fontWeight: FontWeight.bold)),
-
-        );
-
-    }
-    else if(currentUser.country=='US'){
-      return
-
-        ListTile(
-          title:                      Text(productname, style: TextStyle(
-              color: kText,
-              fontSize: 15.0,
-              fontWeight: FontWeight.bold),),
-
-          subtitle:          Text( "\u0024 $usd",style: TextStyle(color: kText,
-              fontSize: 20.0,
-              fontWeight: FontWeight.bold)),
-
-        );
-
-
-    }
-    else if (currentUser.country == 'Europe'){
-      return
-
-        ListTile(
-          title:                      Text(productname, style: TextStyle(
-              color: kText,
-              fontSize: 15.0,
-              fontWeight: FontWeight.bold),),
-
-          subtitle:           Text( "€ $eur",style: TextStyle(color: kText,
-              fontSize: 20.0,
-              fontWeight: FontWeight.bold)),
-
-        );
-
-    }
-    else if (currentUser.country == 'UK'){
-      return
-
-        ListTile(
-          title:                    Text(productname, style: TextStyle(
-              color: kText,
-              fontSize: 15.0,
-              fontWeight: FontWeight.bold),),
-
-          subtitle:                     Text( "£  $gbp ",style: TextStyle(color: kText,
-              fontSize: 20.0,
-              fontWeight: FontWeight.bold)),
-
-
-        );
-
-    }
-    else{
-      return
-
-        ListTile(
-          title:                      Text(productname, style: TextStyle(
-              color: kText,
-              fontSize: 15.0,
-              fontWeight: FontWeight.bold),),
-
-          subtitle:          Text( "\u0024 $usd",style: TextStyle(color: kText,
-              fontSize: 20.0,
-              fontWeight: FontWeight.bold)),
-
-        );
-
-
-    }
-  }
-  TGLehenga(){
-    return  PaginateFirestore(
+TGBackpacks(){
+  return  PaginateFirestore(
 //    itemsPerPage: 2,
       itemBuilderType:
       PaginateBuilderType.listView,
@@ -174,13 +169,12 @@ class _TGEthnicState extends State<TGEthnic> {
       },
       query: Firestore.instance.collectionGroup('userProducts').orderBy('timestamp',descending: true)
           .where('Gender',isEqualTo: 'Teen-Girls')
-          .where('Category',isEqualTo: 'TGLehenga/Ghagra')
+          .where('Category',isEqualTo: 'TGBackpacks')
 
-
-    );
-  }
-  TGKurta(){
-    return  PaginateFirestore(
+  );
+}
+TGShoulder(){
+  return  PaginateFirestore(
 //    itemsPerPage: 2,
       itemBuilderType:
       PaginateBuilderType.listView,
@@ -250,13 +244,12 @@ class _TGEthnicState extends State<TGEthnic> {
       },
       query: Firestore.instance.collectionGroup('userProducts').orderBy('timestamp',descending: true)
           .where('Gender',isEqualTo: 'Teen-Girls')
-          .where('Category',isEqualTo: 'TGKurta Sets')
+          .where('Category',isEqualTo: 'TGShoulder & Cross body Bags')
 
-
-    );
-  }
-  TGEthnic(){
-    return  PaginateFirestore(
+  );
+}
+TGBelt(){
+  return  PaginateFirestore(
 //    itemsPerPage: 2,
       itemBuilderType:
       PaginateBuilderType.listView,
@@ -326,13 +319,12 @@ class _TGEthnicState extends State<TGEthnic> {
       },
       query: Firestore.instance.collectionGroup('userProducts').orderBy('timestamp',descending: true)
           .where('Gender',isEqualTo: 'Teen-Girls')
-          .where('Category',isEqualTo: 'TGEthnic Dresses/Ethnic Jumpsuits')
+          .where('Category',isEqualTo: 'TGBelt Bags')
 
-
-    );
-  }
-  TGTops(){
-    return  PaginateFirestore(
+  );
+}
+TGBeach(){
+  return  PaginateFirestore(
 //    itemsPerPage: 2,
       itemBuilderType:
       PaginateBuilderType.listView,
@@ -402,13 +394,12 @@ class _TGEthnicState extends State<TGEthnic> {
       },
       query: Firestore.instance.collectionGroup('userProducts').orderBy('timestamp',descending: true)
           .where('Gender',isEqualTo: 'Teen-Girls')
-          .where('Category',isEqualTo: 'TGKurta & Tops')
+          .where('Category',isEqualTo: 'TGBeach Bags')
 
-
-    );
-  }
-  Bottoms(){
-    return  PaginateFirestore(
+  );
+}
+TGTote(){
+  return  PaginateFirestore(
 //    itemsPerPage: 2,
       itemBuilderType:
       PaginateBuilderType.listView,
@@ -478,292 +469,64 @@ class _TGEthnicState extends State<TGEthnic> {
       },
       query: Firestore.instance.collectionGroup('userProducts').orderBy('timestamp',descending: true)
           .where('Gender',isEqualTo: 'Teen-Girls')
-          .where('Category',isEqualTo: 'TGEthnic Bottoms')
+          .where('Category',isEqualTo: 'TGTote Bags')
 
-    );
-  }
-  Skirts(){
-    return  PaginateFirestore(
-//    itemsPerPage: 2,
-      itemBuilderType:
-      PaginateBuilderType.listView,
-      itemBuilder: (index, context, documentSnapshot)   {
-//        DocumentSnapshot ds = snapshot.data.documents[index];
-        String ownerId = documentSnapshot.data['ownerId'];
-        String prodId = documentSnapshot.data['prodId'];
-        String shopmediaUrl = documentSnapshot.data['shopmediaUrl'];
-        String productname = documentSnapshot.data['productname'];
-        String inr = documentSnapshot.data['inr'];
-        String usd = documentSnapshot.data['usd'];
-        String eur = documentSnapshot.data['eur'];
-        String gbp = documentSnapshot.data['gbp'];
-        return
-          FutureBuilder(
-            future: usersRef.document(ownerId).get(),
-            builder: (context, snapshot) {
-              if (!snapshot.hasData) {
-                return circularProgress();
-              }
-              User user = User.fromDocument(snapshot.data);
-//          bool isPostOwner = currentUserId == ownerId;
-              return Column(
-                children: <Widget>[
-                  GestureDetector(
-                    onTap: () => showProfile(context, profileId: user.id),
-                    child: ListTile(
-                      leading: CircleAvatar(
-                        backgroundImage: CachedNetworkImageProvider(user.photoUrl),
-                        backgroundColor: Colors.grey,
-                      ),
-                      title: Text(
-                        user.displayName,
-                        style: TextStyle(
-                          color: kText,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ),
-                  ),
+  );
+}
+class BagsTG extends StatelessWidget {
+  final  int selectedPage;
 
-                  GestureDetector(
-                    onTap: () => Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => ProductScreen(
-                          prodId: prodId,
-                          userId: ownerId,
-                        ),
-                      ),
-                    ),
-                    child: Stack(
-                      alignment: Alignment.center,
-                      children: <Widget>[
-                        ClipRRect(
-                            borderRadius: BorderRadius.circular(20.0),child: cachedNetworkImage(shopmediaUrl)),
-                      ],),),
-                  df(productname:productname, usd:usd,inr:inr,eur:eur,gbp:gbp, prodId:prodId, ownerId:ownerId,),
-
-                  Divider(color: kGrey,),
-                ],
-
-              );
-
-            },
-          );
-      },
-      query: Firestore.instance.collectionGroup('userProducts').orderBy('timestamp',descending: true)
-          .where('Gender',isEqualTo: 'Teen-Girls')
-          .where('Category',isEqualTo: 'TGEthnic Skirts')
-
-    );
-  }
-  TGIndo(){
-    return  PaginateFirestore(
-//    itemsPerPage: 2,
-      itemBuilderType:
-      PaginateBuilderType.listView,
-      itemBuilder: (index, context, documentSnapshot)   {
-//        DocumentSnapshot ds = snapshot.data.documents[index];
-        String ownerId = documentSnapshot.data['ownerId'];
-        String prodId = documentSnapshot.data['prodId'];
-        String shopmediaUrl = documentSnapshot.data['shopmediaUrl'];
-        String productname = documentSnapshot.data['productname'];
-        String inr = documentSnapshot.data['inr'];
-        String usd = documentSnapshot.data['usd'];
-        String eur = documentSnapshot.data['eur'];
-        String gbp = documentSnapshot.data['gbp'];
-        return
-          FutureBuilder(
-            future: usersRef.document(ownerId).get(),
-            builder: (context, snapshot) {
-              if (!snapshot.hasData) {
-                return circularProgress();
-              }
-              User user = User.fromDocument(snapshot.data);
-//          bool isPostOwner = currentUserId == ownerId;
-              return Column(
-                children: <Widget>[
-                  GestureDetector(
-                    onTap: () => showProfile(context, profileId: user.id),
-                    child: ListTile(
-                      leading: CircleAvatar(
-                        backgroundImage: CachedNetworkImageProvider(user.photoUrl),
-                        backgroundColor: Colors.grey,
-                      ),
-                      title: Text(
-                        user.displayName,
-                        style: TextStyle(
-                          color: kText,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ),
-                  ),
-
-                  GestureDetector(
-                    onTap: () => Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => ProductScreen(
-                          prodId: prodId,
-                          userId: ownerId,
-                        ),
-                      ),
-                    ),
-                    child: Stack(
-                      alignment: Alignment.center,
-                      children: <Widget>[
-                        ClipRRect(
-                            borderRadius: BorderRadius.circular(20.0),child: cachedNetworkImage(shopmediaUrl)),
-                      ],),),
-                  df(productname:productname, usd:usd,inr:inr,eur:eur,gbp:gbp, prodId:prodId, ownerId:ownerId,),
-
-                  Divider(color: kGrey,),
-                ],
-
-              );
-
-            },
-          );
-      },
-      query: Firestore.instance.collectionGroup('userProducts').orderBy('timestamp',descending: true)
-          .where('Gender',isEqualTo: 'Teen-Girls')
-          .where('Category',isEqualTo: 'TGIndo Western & Fusion Wear')
-
-    );
-  }
-  TGSherwanis(){
-    return  PaginateFirestore(
-//    itemsPerPage: 2,
-      itemBuilderType:
-      PaginateBuilderType.listView,
-      itemBuilder: (index, context, documentSnapshot)   {
-//        DocumentSnapshot ds = snapshot.data.documents[index];
-        String ownerId = documentSnapshot.data['ownerId'];
-        String prodId = documentSnapshot.data['prodId'];
-        String shopmediaUrl = documentSnapshot.data['shopmediaUrl'];
-        String productname = documentSnapshot.data['productname'];
-        String inr = documentSnapshot.data['inr'];
-        String usd = documentSnapshot.data['usd'];
-        String eur = documentSnapshot.data['eur'];
-        String gbp = documentSnapshot.data['gbp'];
-        return
-          FutureBuilder(
-            future: usersRef.document(ownerId).get(),
-            builder: (context, snapshot) {
-              if (!snapshot.hasData) {
-                return circularProgress();
-              }
-              User user = User.fromDocument(snapshot.data);
-//          bool isPostOwner = currentUserId == ownerId;
-              return Column(
-                children: <Widget>[
-                  GestureDetector(
-                    onTap: () => showProfile(context, profileId: user.id),
-                    child: ListTile(
-                      leading: CircleAvatar(
-                        backgroundImage: CachedNetworkImageProvider(user.photoUrl),
-                        backgroundColor: Colors.grey,
-                      ),
-                      title: Text(
-                        user.displayName,
-                        style: TextStyle(
-                          color: kText,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ),
-                  ),
-
-                  GestureDetector(
-                    onTap: () => Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => ProductScreen(
-                          prodId: prodId,
-                          userId: ownerId,
-                        ),
-                      ),
-                    ),
-                    child: Stack(
-                      alignment: Alignment.center,
-                      children: <Widget>[
-                        ClipRRect(
-                            borderRadius: BorderRadius.circular(20.0),child: cachedNetworkImage(shopmediaUrl)),
-                      ],),),
-                  df(productname:productname, usd:usd,inr:inr,eur:eur,gbp:gbp, prodId:prodId, ownerId:ownerId,),
-
-                  Divider(color: kGrey,),
-                ],
-
-              );
-
-            },
-          );
-      },
-      query: Firestore.instance.collectionGroup('userProducts').orderBy('timestamp',descending: true)
-          .where('Gender',isEqualTo: 'Teen-Girls')
-          .where('Category',isEqualTo: 'TGSherwanis')
-
-    );
-  }
-
+  const BagsTG({Key key, this.selectedPage}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    SizeConfig().init(context);
-    return  RotatedBox(
-      quarterTurns: 3,
-      child: Expanded(
-        child: DefaultTabController(
-            initialIndex:widget.selectedPage ?? 0,
+    return
+      RotatedBox(
+        quarterTurns: 3,
+        child: Expanded(
+          child: DefaultTabController(
+              initialIndex:selectedPage ?? 0,
 
-            length:8,
-            child: Scaffold(
-              appBar:AppBar(
-                toolbarHeight: SizeConfig.safeBlockHorizontal * 8,
-                backgroundColor: kPrimaryColor,
-                elevation: 0,
-                bottom: TabBar(
-                  isScrollable: true,
-                  labelColor: Colors.white,
-                  unselectedLabelColor: kIcon,
+              length:5,
+              child: Scaffold(
+                appBar:AppBar(
+                  toolbarHeight: SizeConfig.safeBlockHorizontal * 8,
+                  backgroundColor: kPrimaryColor,
+                  elevation: 0,
+                  bottom: TabBar(
+                    isScrollable: true,
+                    labelColor: Colors.white,
+                    unselectedLabelColor: kIcon,
 
+                    tabs:[
+                      Text("Backpacks",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5,),),
+                      Text("Shoulder Bags & Cross body Bags",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5,),),
+                      Text("Belt Bags",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5,),),
+                      Text("Tote Bags",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5,),),
+                      Text("Beach Bags",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5,),),
 
-                  tabs:[
-                    Text("Lehenga/Ghagra",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5,),),
-                    Text("Kurta Sets",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5),),
-                    Text("Ethnic Dresses/Ethnic Jumpsuits",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5),),
-                    Text("Kurta & Tops",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5),),
-                    Text("Ethnic Bottoms",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5),),
-                    Text("Ethnic Skirts",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5),),
-                    Text("Indo Western & Fusion Wear",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5),),
-                    Text("Sherwanis",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5),),
-                     ],
+                    ],
+                  ),
                 ),
-              ),
 
-              body: Container(     decoration: BoxDecoration(
-                  gradient: fabGradient
-              ) ,
-                alignment: Alignment.center,
-                child: RotatedBox(
-                  quarterTurns: 1,
-                  child: TabBarView(
-                      children:<Widget> [
-        TGLehenga(),
-                        TGKurta(),
-                        TGEthnic(),
-                        TGTops(),
-                        Bottoms(),
-                        Skirts(),
-                        TGIndo(),
-                        TGSherwanis(),
-                      ]),
+                body: Container(     decoration: BoxDecoration(
+                    gradient: fabGradient
+                ) ,
+                  alignment: Alignment.center,
+                  child: RotatedBox(
+                    quarterTurns: 1,
+                    child: TabBarView(
+                        children:<Widget> [
+                          TGBackpacks(),
+                          TGShoulder(),
+                          TGBelt(),
+                          TGTote(),
+                          TGBeach(),
+                        ]),
+                  ),
                 ),
-              ),
-            )
+              )
+          ),
         ),
-      ),
-    );
+      );
   }
 }

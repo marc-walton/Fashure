@@ -1,4 +1,7 @@
 import 'package:auto_search/auto_search.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:fashow/size_config.dart';
+import 'package:fashow/user.dart';
 import 'package:flutter/material.dart';
 import 'package:fashow/Categories/Men/Accessories.dart';
 import 'package:fashow/Categories/Men/Indianethnuc.dart';
@@ -16,6 +19,7 @@ import 'package:fashow/Categories/Kids/baby/boy/Trousers.dart';
 import 'package:fashow/Categories/Kids/baby/boy/ETHNIC.dart';
 import 'package:fashow/Categories/Kids/baby/boy/hats.dart';
 import 'package:fashow/Categories/Kids/baby/boy/ties.dart';
+import 'package:fashow/ActivityFeed.dart';
 
 import 'package:fashow/Categories/Men/Coats.dart';
 import 'package:fashow/Categories/Men/jacketmen.dart';
@@ -111,6 +115,26 @@ import 'package:fashow/Categories/Kids/teen/boy/bags.dart';
 import 'package:fashow/Categories/Kids/teen/boy/tbties.dart';
 import 'package:fashow/Categories/Kids/teen/boy/braces.dart';
 import 'package:fashow/Categories/Kids/teen/boy/eye.dart';
+import 'package:fashow/Categories/Kids/teen//girl/Accessories.dart';
+import 'package:fashow/Categories/Kids/teen/girl/Capes.dart';
+import 'package:fashow/Categories/Kids/teen/girl/Denim.dart';
+import 'package:fashow/Categories/Kids/teen/girl/Dresses.dart';
+import 'package:fashow/Categories/Kids/teen/girl/jacket.dart';
+import 'package:fashow/Categories/Kids/teen/girl/jumpsuit.dart';
+import 'package:fashow/Categories/Kids/teen/girl/KNITWEAR.dart';
+import 'package:fashow/Categories/Kids/teen/girl/Shoes.dart';
+import 'package:fashow/Categories/Kids/teen/girl/skirts.dart';
+import 'package:fashow/Categories/Kids/teen/girl/shorts.dart';
+import 'package:fashow/Categories/Kids/teen/girl/Swimwear.dart';
+import 'package:fashow/Categories/Kids/teen/girl/Tops.dart';
+import 'package:fashow/Categories/Kids/teen/girl/TRACKS.dart';
+import 'package:fashow/Categories/Kids/teen/girl/Trousers.dart';
+import 'package:fashow/Categories/Kids/teen/girl/ETHNIC.dart';
+import 'package:fashow/Categories/Kids/teen/girl/hair.dart';
+import 'package:fashow/Categories/Kids/teen/girl/hats.dart';
+import 'package:fashow/Categories/Kids/teen/girl/bags.dart';
+import 'package:fashow/Categories/Kids/teen/girl/braces.dart';
+import 'package:fashow/Categories/Kids/teen/girl/eye.dart';
 
 import 'package:fashow/Categories/Kids/kids/boy/Accessories.dart';
 import 'package:fashow/Categories/Kids/kids/boy/Denim.dart';
@@ -125,6 +149,9 @@ import 'package:fashow/Categories/Kids/kids/boy/Trousers.dart';
 import 'package:fashow/Categories/Kids/kids/boy/ETHNIC.dart';
 import 'package:fashow/Constants.dart';
 import 'package:get/get.dart';
+import 'package:fashow/methods/data_model.dart';
+import 'package:fashow/methods/firestore_search.dart';
+import 'package:fashow/methods/card_user.dart';
 
 class ShopSearch extends StatefulWidget {
   @override
@@ -2772,7 +2799,424 @@ class _ShopSearchState extends State<ShopSearch> {
    "Sweatpants in Teen Boys",
     "Teen Boy's Sweatpants",
     "Teen Boys Sweatpants",
-
+   "Hair Bands in Teen Boys",
+    "Teen Boy's Hair Bands",
+    "Teen Boys Hair Bands",
+    ///2410
+   "Hair Clips in Teen Girls",
+    "Teen Girl's Hair Clips",
+    "Teen Girls Hair Clips",
+   "Hats in Teen Girls",
+    "Teen Girl's Hats",
+    "Teen Girls Hats",
+   "Caps in Teen Girls",
+    "Teen Girl's Caps",
+    "Teen Girls Caps",
+       "Knitted Hats in Teen Girls",
+    ///2420
+    "Teen Girl's Knitted Hats",
+    "Teen Girls Knitted Hats",
+         "Sun Hats in Teen Girls",
+    "Teen Girl's Sun Hats",
+    "Teen Girls Sun Hats",
+         "Backpacks in Teen Girls",
+    "Teen Girl's Backpacks",
+    "Teen Girls Backpacks",
+    "Bags in Teen Girls",
+    "Teen Girl's Bags",
+    "Teen Girls Bags"
+    "Shoulder Bags in Teen Girls",
+    "Teen Girl's Shoulder Bags",
+    "Teen Girls Shoulder Bags"
+    "Cross body Bags in Teen Girls",
+    "Teen Girl's Cross body Bags",
+    "Teen Girls Cross body Bags"
+    "Belt Bags in Teen Girls",
+    "Teen Girl's Belt Bags",
+    "Teen Girls Belt Bags"
+    ///2440
+    "Tote Bags in Teen Girls",
+    "Teen Girl's Tote Bags",
+    "Teen Girls Tote Bags"
+    "Beach Bags in Teen Girls",
+    "Teen Girl's Beach Bags",
+    "Teen Girls Beach Bags"
+        "Belts in Teen Girls",
+        "Teen Girl's Belts",
+    "Teen Girls Belts",
+    "Braces in Teen Girls",
+    ///2450
+    "Teen Girl's Braces",
+    "Teen Girls Braces",
+    "Glasses in Teen Girls",
+    "Teen Girl's Glasses",
+    "Teen Girls Glasses",
+     "Frames in Teen Girls",
+    "Teen Girl's Frames",
+    "Teen Girls Frames",
+      "Sunglasses in Teen Girls",
+    "Teen Girl's Sunglasses",
+    "Teen Girls Sunglasses",
+   "Scarves in Teen Girls",
+    "Teen Girl's Scarves",
+    "Teen Girls Scarves",
+   "Hair Accessories in Teen Girls",
+    "Teen Girl's Hair Accessories",
+    "Teen Girls Hair Accessories",
+   "Gloves in Teen Girls",
+    "Teen Girl's Gloves",
+    "Teen Girls Gloves",
+///2470
+   "Jewellery in Teen Girls",
+    "Teen Girl's Jewellery",
+    "Teen Girls Jewellery",
+   "Socks in Teen Girls",
+    "Teen Girl's Socks",
+    "Teen Girls Socks",
+   "Travel Accessories in Teen Girls",
+    "Teen Girl's Travel Accessories",
+    "Teen Girls Travel Accessories",
+   "Single Breasted Coats in Teen Girls",
+    "Teen Girl's Single Breasted Coats",
+    "Teen Girls Single Breasted Coats",
+   "Coats in Teen Girls",
+    "Teen Girl's Coats",
+    "Teen Girls Coats",
+   "Double Breasted Coats in Teen Girls",
+    "Teen Girl's Double Breasted Coats",
+    "Teen Girls Double Breasted Coats",
+   "Capes in Teen Girls",
+    "Teen Girl's Capes",
+    "Teen Girls Capes",
+   "Duffle coats in Teen Girls",
+    "Teen Girl's Duffle coats",
+    "Teen Girls Duffle coats",
+   "Cargo coats in Teen Girls",
+    "Teen Girl's Cargo coats",
+    "Teen Girls Cargo coats",
+   "Military coats in Teen Girls",
+    "Teen Girl's Military coats",
+    "Teen Girls Military coats",
+    ///2500
+   "Faux coats in Teen Girls",
+    "Teen Girl's Faux coats",
+    "Teen Girls Faux coats",
+   "Shearling coats in Teen Girls",
+    "Teen Girl's Shearling coats",
+    "Teen Girls Shearling coats",
+   "Wool coats in Teen Girls",
+    "Teen Girl's Wool coats",
+    "Teen Girls Wool coats",
+   "Rain coats in Teen Girls",
+    "Teen Girl's Rain coats",
+    "Teen Girls Rain coats",
+   "Trench coats in Teen Girls",
+    "Teen Girl's Trench coats",
+    "Teen Girls Trench coats",
+   "Denim Jackets in Teen Girls",
+    "Teen Girl's Denim Jackets",
+    "Teen Girls Denim Jackets",
+     "Denim Shorts in Teen Girls",
+    "Teen Girl's Denim Shorts",
+    "Teen Girls Denim Shorts",
+       "Denim Skirts in Teen Girls",
+    "Teen Girl's Denim Skirts",
+    "Teen Girls Denim Skirts",
+         "Skinny fit jeans in Teen Girls",
+    "Teen Girl's Skinny fit jeans",
+    "Teen Girls Skinny fit jeans",
+           "Slim fit jeans in Teen Girls",
+    "Teen Girl's Slim fit jeans",
+    "Teen Girls Slim fit jeans",
+             "Straight fit jeans in Teen Girls",
+    "Teen Girl's Straight fit jeans",
+    "Teen Girls Straight fit jeans",
+           "Gowns in Teen Girls",
+    "Teen Girl's Gowns",
+    "Teen Girls Gowns",
+           "Dresses in Teen Girls",
+    "Teen Girl's Dresses",
+    "Teen Girls Dresses",
+           "Party Dresses in Teen Girls",
+    "Teen Girl's Party Dresses",
+    "Teen Girls Party Dresses",
+           "Kaftan Dresses in Teen Girls",
+    "Teen Girl's Kaftan Dresses",
+    "Teen Girls Kaftan Dresses",
+          "Off Shoulder Dresses in Teen Girls",
+    "Teen Girl's Off Shoulder Dresses",
+    "Teen Girls Off Shoulder Dresses",
+          "One Shoulder Dresses in Teen Girls",
+    "Teen Girl's One Shoulder Dresses",
+    "Teen Girls One Shoulder Dresses",
+          "Shirt Dresses in Teen Girls",
+    "Teen Girl's Shirt Dresses",
+    "Teen Girls Shirt Dresses",
+          "T-Shirt Dresses in Teen Girls",
+    "Teen Girl's T-Shirt Dresses",
+    "Teen Girls T-Shirt Dresses",
+          "Jersey Dresses in Teen Girls",
+    "Teen Girl's Jersey Dresses",
+    "Teen Girls Jersey Dresses",
+    ///2560
+          "Short Dresses in Teen Girls",
+    "Teen Girl's Short Dresses",
+    "Teen Girls Short Dresses",
+          "Lehenga in Teen Girls",
+    "Teen Girl's Lehenga",
+    "Teen Girls Lehenga",
+          "Ghagra in Teen Girls",
+    "Teen Girl's Ghagra",
+    "Teen Girls Ghagra",
+          "Indian Ethnic wear in Teen Girls",
+    "Teen Girl's Indian Ethnic wear",
+    "Teen Girls Indian Ethnic wear",
+          "Ethnic wear(Indian) in Teen Girls",
+    "Teen Girl's Ethnic wear(Indian)",
+    "Teen Girls Ethnic wear(Indian)",
+          "Kurta Sets in Teen Girls",
+    "Teen Girl's Kurta Sets",
+    "Teen Girls Kurta Sets",
+          "Ethnic Dresses in Teen Girls",
+    "Teen Girl's Ethnic Dresses",
+    "Teen Girls Ethnic Dresses",
+          "Ethnic Jumpsuits in Teen Girls",
+    "Teen Girl's Ethnic Jumpsuits",
+    "Teen Girls Ethnic Jumpsuits",
+          "Kurta in Teen Girls",
+    "Teen Girl's Kurta",
+    "Teen Girls Kurta",
+          "Ethnic Tops in Teen Girls",
+    "Teen Girl's Ethnic Tops",
+    "Teen Girls Ethnic Tops",
+          "Ethnic Bottoms in Teen Girls",
+    "Teen Girl's Ethnic Bottoms",
+    "Teen Girls Ethnic Bottoms",
+          "Ethnic Skirts in Teen Girls",
+    "Teen Girl's Ethnic Skirts",
+    "Teen Girls Ethnic Skirts",
+          "Indo Western in Teen Girls",
+    "Teen Girl's Indo Western",
+    "Teen Girls Indo Western",
+          "Fusion Wear in Teen Girls",
+    ///2600
+    "Teen Girl's Fusion Wear",
+    "Teen Girls Fusion Wear",
+          "Sherwanis in Teen Girls",
+    "Teen Girl's Sherwanis",
+    "Teen Girls Sherwanis",
+          "Bomber Jackets in Teen Girls",
+    "Teen Girl's Bomber Jackets",
+    "Teen Girls Bomber Jackets",
+          "Jackets in Teen Girls",
+    "Teen Girl's Jackets",
+    "Teen Girls Jackets",
+          "Blazers in Teen Girls",
+    "Teen Girl's Blazers",
+    "Teen Girls Blazers",
+          "Denim Jackets in Teen Girls",
+    "Teen Girl's Denim Jackets",
+    "Teen Girls Denim Jackets",
+          "Hooded Jackets in Teen Girls",
+    "Teen Girl's Hooded Jackets",
+    "Teen Girls Hooded Jackets",
+      "Leather Jackets in Teen Girls",
+    "Teen Girl's Leather Jackets",
+    "Teen Girls Leather Jackets",
+   "Military Jackets in Teen Girls",
+    "Teen Girl's Military Jackets",
+    "Teen Girls Military Jackets",
+   "Padded Jackets in Teen Girls",
+    "Teen Girl's Padded Jackets",
+    "Teen Girls Padded Jackets",
+   "Puffer Jackets in Teen Girls",
+    "Teen Girl's Puffer Jackets",
+    "Teen Girls Puffer Jackets",
+   "Faux Jackets in Teen Girls",
+    "Teen Girl's Faux Jackets",
+    "Teen Girls Faux Jackets",
+   "Sport Jackets in Teen Girls",
+    "Teen Girl's Sport Jackets",
+    "Teen Girls Sport Jackets",
+   "Waistcoats Jackets in Teen Girls",
+    "Teen Girl's Waistcoats Jackets",
+    ///2640
+    "Teen Girls Waistcoats Jackets",
+   "Gilets Jackets in Teen Girls",
+    "Teen Girl's Gilets Jackets",
+    "Teen Girls Gilets Jackets",
+   "Jumpsuits Jackets in Teen Girls",
+    "Teen Girl's Jumpsuits Jackets",
+    "Teen Girls Jumpsuits Jackets",
+   "Playsuits Jackets in Teen Girls",
+    "Teen Girl's Playsuits Jackets",
+    "Teen Girls Playsuits Jackets",
+"Cardigans in Teen Girls",
+    "Teen Girl's Cardigans",
+    "Teen Girls Cardigans",
+"Knitwear in Teen Girls",
+    "Teen Girl's Knitwear",
+    "Teen Girls Knitwear",
+"Knitted Tops in Teen Girls",
+    "Teen Girl's Knitted Tops",
+    "Teen Girls Knitted Tops",
+"Shoes in Teen Girls",
+    "Teen Girl's Shoes",
+    "Teen Girls Shoes",
+"Sneakers in Teen Girls",
+    "Teen Girl's Sneakers",
+    "Teen Girls Sneakers",
+"Loafers in Teen Girls",
+    "Teen Girl's Loafers",
+    "Teen Girls Loafers",
+"Ballerinas in Teen Girls",
+    "Teen Girl's Ballerinas",
+    ///2670
+    "Teen Girls Ballerinas",
+"Sandals in Teen Girls",
+    "Teen Girl's Sandals",
+    "Teen Girls Sandals",
+"Boots in Teen Girls",
+    "Teen Girl's Boots",
+    "Teen Girls Boots",
+"Slippers in Teen Girls",
+    "Teen Girl's Slippers",
+    "Teen Girls Slippers",
+    ///2680
+"Flip flops in Teen Girls",
+    "Teen Girl's Flip flops",
+    "Teen Girls Flip flops",
+"Slides in Teen Girls",
+    "Teen Girl's Slides",
+    "Teen Girls Slides",
+"Casual Shorts in Teen Girls",
+    "Teen Girl's Casual Shorts",
+    "Teen Girls Casual Shorts",
+"Shorts in Teen Girls",
+    ///2690
+    "Teen Girl's Shorts",
+    "Teen Girls Shorts",
+"Casual Skirts in Teen Girls",
+    "Teen Girl's Casual Skirts",
+    "Teen Girls Casual Skirts",
+"Skirts in Teen Girls",
+    "Teen Girl's Skirts",
+    "Teen Girls Skirts",
+"Tutu Skirts in Teen Girls",
+    "Teen Girl's Tutu Skirts",
+    ///2700
+    "Teen Girls Tutu Skirts",
+"Party wear Skirts in Teen Girls",
+    "Teen Girl's Party wear Skirts",
+    "Teen Girls Party wear Skirts",
+"Denim Skirts in Teen Girls",
+    "Teen Girl's Denim Skirts",
+    "Teen Girls Denim Skirts",
+"Skirt sets in Teen Girls",
+    "Teen Girl's Skirt sets",
+    "Teen Girls Skirt sets",
+"Swimsuits in Teen Girls",
+    "Teen Girl's Swimsuits",
+    "Teen Girls Swimsuits",
+"Beach Dresses in Teen Girls",
+    "Teen Girl's Beach Dresses",
+    "Teen Girls Beach Dresses",
+"Bikinis in Teen Girls",
+    "Teen Girl's Bikinis",
+    "Teen Girls Bikinis",
+"Footwear in Swimwear \nin Teen Girls",
+    ///2720
+    "Teen Girl's Footwear in Swimwear",
+    "Teen Girls Footwear in Swimwear",
+"Accessories in Swimwear \nin Teen Girls",
+    "Teen Girl's Accessories in Swimwear",
+    "Teen Girls Accessories in Swimwear",
+"Blouses in Teen Girls",
+    "Teen Girl's Blouses",
+    "Teen Girls Blouses",
+"Tops in Teen Girls",
+    "Teen Girl's Tops",
+    "Teen Girls Tops",
+"Crop Tops in Teen Girls",
+    "Teen Girl's Crop Tops",
+    "Teen Girls Crop Tops",
+"Kaftans in Teen Girls",
+    "Teen Girl's Kaftans",
+    "Teen Girls Kaftans",
+"ponchos in Teen Girls",
+    "Teen Girl's ponchos",
+    "Teen Girls ponchos",
+"Sleeveless Tops in Teen Girls",
+    "Teen Girl's Sleeveless Tops",
+    "Teen Girls Sleeveless Tops",
+"vests in Teen Girls",
+    "Teen Girl's vests",
+    "Teen Girls vests",
+"Tank Tops in Teen Girls",
+    "Teen Girl's Tank Tops",
+    "Teen Girls Tank Tops",
+"Tunics in Teen Girls",
+    "Teen Girl's Tunics",
+    "Teen Girls Tunics",
+"Polo Shirts in Teen Girls",
+    "Teen Girl's Polo Shirts",
+    "Teen Girls Polo Shirts",
+"Shirts in Teen Girls",
+    "Teen Girl's Shirts",
+    "Teen Girls Shirts",
+"T-shirts in Teen Girls",
+    "Teen Girl's T-shirts",
+    ///2760
+    "Teen Girls T-shirts",
+"Hoodies in Teen Girls",
+    "Teen Girl's Hoodies",
+    "Teen Girls Hoodies",
+"Sweatshirt in Teen Girls",
+    "Teen Girl's Sweatshirt",
+    "Teen Girls Sweatshirt",
+"Skinny fit Trousers in Teen Girls",
+    "Teen Girl's Skinny fit Trousers",
+    "Teen Girls Skinny fit Trousers",
+"Trousers in Teen Girls",
+    "Teen Girl's Trousers",
+    "Teen Girls Trousers",
+    "Slim fit Trousers in Teen Girls",
+    "Teen Girl's Slim fit Trousers",
+    "Teen Girls Slim fit Trousers",
+    "Tapered fit Trousers in Teen Girls",
+    "Teen Girl's Tapered fit Trousers",
+    "Teen Girls Tapered fit Trousers",
+    "Straight fit Trousers in Teen Girls",
+    "Teen Girl's Straight fit Trousers",
+    "Teen Girls Straight fit Trousers",
+    "Wide Leg Trousers in Teen Girls",
+    "Teen Girl's Wide Leg Trousers",
+    "Teen Girls Wide Leg Trousers",
+    "Cropped Trousers in Teen Girls",
+    "Teen Girl's Cropped Trousers",
+    "Teen Girls Cropped Trousers",
+    "High Waisted Trousers in Teen Girls",
+    "Teen Girl's High Waisted Trousers",
+    "Teen Girls High Waisted Trousers",
+    "Flare Trousers in Teen Girls",
+    "Teen Girl's Flare Trousers",
+    "Teen Girls Flare Trousers",
+    "Bell Bottom Trousers in Teen Girls",
+    "Teen Girl's Bell Bottom Trousers",
+    "Teen Girls Bell Bottom Trousers",
+    "Leggings Trousers in Teen Girls",
+    "Teen Girl's Leggings Trousers",
+    "Teen Girls Leggings Trousers",
+    ///2800
+    "Tailored Trousers in Teen Girls",
+    "Teen Girl's Tailored Trousers",
+    "Teen Girls Tailored Trousers",
+    "Sweatpants in Teen Girls",
+    "Teen Girl's Sweatpants",
+    "Teen Girls Sweatpants",
+    "Tracks in Teen Girls",
+    "Teen Girl's Tracks",
+    "Teen Girls Tracks",
 
   ];
 
@@ -4050,19 +4494,19 @@ else if(i==2350||i==2351||i==2352){ Get.off(KidshBT(selectedPage: 1,));
     }
 else if(i==2353||i==2354||i==2355){ Get.off(KidswBT(selectedPage: 0,));
     }
-else if(i==2356||i==2357||i==2358||i==2359||i==2360||i==2361){ Get.off(KidswBT(selectedPage: 2,));
+else if(i==2356||i==2357||i==2358||i==2359||i==2360||i==2361){ Get.off(KidswBT(selectedPage: 1,));
     }
-else if(i==2362||i==2363||i==2364){ Get.off(TopsGT(selectedPage: 0,));
+else if(i==2362||i==2363||i==2364){ Get.off(TopsB(selectedPage: 0,));
     }
-else if(i==2365||i==2366||i==2367){ Get.off(TopsGT(selectedPage: 1,));
+else if(i==2365||i==2366||i==2367){ Get.off(TopsB(selectedPage: 1,));
     }
-else if(i==2368||i==2369||i==2370){ Get.off(TopsGT(selectedPage: 2,));
+else if(i==2368||i==2369||i==2370){ Get.off(TopsB(selectedPage: 2,));
     }
-else if(i==2371||i==2372||i==2373||i==2374||i==2375||i==2376){ Get.off(TopsGT(selectedPage: 3,));
+else if(i==2371||i==2372||i==2373||i==2374||i==2375||i==2376){ Get.off(TopsB(selectedPage: 3,));
     }
-else if(i==2377||i==2378||i==2379||i==2380||i==2381||i==2382){ Get.off(TopsGT(selectedPage: 4,));
+else if(i==2377||i==2378||i==2379||i==2380||i==2381||i==2382){ Get.off(TopsB(selectedPage: 4,));
     }
-else if(i==2383||i==2384||i==2385){ Get.off(TopsGT(selectedPage: 0,));
+else if(i==2383||i==2384||i==2385){ Get.off(TrackKB());
     }
 else if(i==2386||i==2387||i==2388||i==2389||i==2390||i==2391){ Get.off(TrouserTM(selectedPage: 0,));
     }
@@ -4076,43 +4520,383 @@ else if(i==2401||i==2402||i==2403){ Get.off(TrouserTM(selectedPage: 4,));
     }
 else if(i==2404||i==2405||i==2406){ Get.off(TrouserTM(selectedPage: 5,));
     }
+else if(i==2407||i==2408||i==2409){ Get.off(HairTG(selectedPage: 0,));
+    }
+else if(i==2410||i==2411||i==2412){ Get.off(HairTG(selectedPage: 1,));
+    }
+else if(i==2413||i==2414||i==2415||i==2416||i==2417||i==2418){ Get.off(HatsTG(selectedPage: 0,));
+    }
+else if(i==2419||i==2420||i==2421){ Get.off(HatsTG(selectedPage: 1,));
+    }
+else if(i==2422||i==2423||i==2424){ Get.off(HatsTG(selectedPage: 2,));
+    }
+else if(i==2425||i==2426||i==2427||i==2428||i==2429||i==2430){ Get.off(BagsTG(selectedPage: 0,));
+    }
+else if(i==2431||i==2432||i==2433||i==2434||i==2435||i==2436){ Get.off(BagsTG(selectedPage: 1,));
+    }
+else if(i==2437||i==2438||i==2439){ Get.off(BagsTG(selectedPage: 2,));
+    }
+else if(i==2440||i==2441||i==2442){ Get.off(BagsTG(selectedPage: 3,));
+    }
+else if(i==2443||i==2444||i==2445){ Get.off(BagsTG(selectedPage: 3,));
+    }
+else if(i==2446||i==2447||i==2448){ Get.off(BracesTG(selectedPage: 0,));
+    }
+else if(i==2449||i==2450||i==2451){ Get.off(BracesTG(selectedPage: 1,));
+    }
+else if(i==2452||i==2453||i==2454||i==2455||i==2456||i==2457){ Get.off(EyeTG(selectedPage: 0,));
+    }
+else if(i==2458||i==2459||i==2460){ Get.off(EyeTG(selectedPage: 1,));
+    }
+else if(i==2461||i==2462||i==2463){ Get.off(AccessGT(selectedPage: 1,));
+    }
+else if(i==2464||i==2465||i==2466){ Get.off(AccessGT(selectedPage: 3,));
+    }
+else if(i==2467||i==2468||i==2469){ Get.off(AccessGT(selectedPage: 4,));
+    }
+else if(i==2470||i==2471||i==2472){ Get.off(AccessGT(selectedPage: 6,));
+    }
+else if(i==2473||i==2474||i==2475){ Get.off(AccessGT(selectedPage: 8,));
+    }
+else if(i==2476||i==2477||i==2478){ Get.off(AccessGT(selectedPage: 9,));
+    }
+else if(i==2479||i==2480||i==2481||i==2482||i==2483||i==2484){ Get.off(CapesGT(selectedPage: 0,));
+    }
+else if(i==2485||i==2486||i==2487){ Get.off(CapesGT(selectedPage: 1,));
+    }
+else if(i==2488||i==2489||i==2490){ Get.off(CapesGT(selectedPage: 2,));
+    }
+else if(i==2491||i==2492||i==2493){ Get.off(CapesGT(selectedPage: 3,));
+    }
+else if(i==2494||i==2495||i==2496||i==2497||i==2498||i==2499){ Get.off(CapesGT(selectedPage: 4,));
+    }
+else if(i==2500||i==2501||i==2502||i==2503||i==2504||i==2505){ Get.off(CapesGT(selectedPage: 5,));
+    }
+else if(i==2506||i==2507||i==2508){ Get.off(CapesGT(selectedPage: 6,));
+    }
+else if(i==2509||i==2510||i==2511){ Get.off(CapesGT(selectedPage: 7,));
+    }
+else if(i==2512||i==2513||i==2514){ Get.off(CapesGT(selectedPage: 8,));
+    }
+else if(i==2515||i==2516||i==2517){ Get.off(DenimGT(selectedPage: 0,));
+    }
+else if(i==2518||i==2519||i==2520){ Get.off(DenimGT(selectedPage: 1,));
+    }
+else if(i==2521||i==2522||i==2523){ Get.off(DenimGT(selectedPage: 2,));
+    }
+else if(i==2524||i==2525||i==2526){ Get.off(DenimGT(selectedPage: 4,));
+    }
+else if(i==2527||i==2528||i==2529){ Get.off(DenimGT(selectedPage: 5,));
+    }
+else if(i==2530||i==2531||i==2532){ Get.off(DenimGT(selectedPage: 6,));
+    }
+else if(i==2533||i==2534||i==2535||i==2536||i==2537||i==2538){ Get.off(KiddrGT(selectedPage: 0,));
+    }
+else if(i==2539||i==2540||i==2541){ Get.off(KiddrGT(selectedPage: 1,));
+    }
+else if(i==2542||i==2543||i==2544){ Get.off(KiddrGT(selectedPage: 2,));
+    }
+else if(i==2545||i==2546||i==2547){ Get.off(KiddrGT(selectedPage: 3,));
+    }
+else if(i==2548||i==2549||i==2550){ Get.off(KiddrGT(selectedPage: 4,));
+    }
+else if(i==2551||i==2552||i==2553){ Get.off(KiddrGT(selectedPage: 5,));
+    }
+else if(i==2554||i==2555||i==2556||i==2557||i==2558||i==2559){ Get.off(KiddrGT(selectedPage: 6,));
+    }
+else if(i==2560||i==2561||i==2562){ Get.off(KiddrGT(selectedPage: 7,));
+    }
+else if(i==2563||i==2564||i==2565||i==2566||i==2567||i==2568||i==2569||i==2570||i==2571||i==2572||i==2573||i==2574){ Get.off(TGEthnic(selectedPage: 0,));
+    }
+else if(i==2575||i==2576||i==2577){ Get.off(TGEthnic(selectedPage: 1,));
+    }
+else if(i==2578||i==2579||i==2580||i==2581||i==2582||i==2583){ Get.off(TGEthnic(selectedPage: 2,));
+    }
+else if(i==2584||i==2585||i==2586||i==2587||i==2588||i==2589){ Get.off(TGEthnic(selectedPage: 3,));
+    }
+else if(i==2590||i==2591||i==2592){ Get.off(TGEthnic(selectedPage: 4,));
+    }
+else if(i==2593||i==2594||i==2595){ Get.off(TGEthnic(selectedPage: 5,));
+    }
+else if(i==2596||i==2597||i==2598||i==2599||i==2600||i==2601){ Get.off(TGEthnic(selectedPage: 6,));
+    }
+else if(i==2602||i==2603||i==2604){ Get.off(TGEthnic(selectedPage: 7,));
+    }
+else if(i==2605||i==2606||i==2607||i==2608||i==2609||i==2610){ Get.off(JackGT(selectedPage: 0,));
+    }
+else if(i==2611||i==2612||i==2613){ Get.off(JackGT(selectedPage: 1,));
+    }
+else if(i==2614||i==2615||i==2616){ Get.off(JackGT(selectedPage: 2,));
+    }
+else if(i==2617||i==2618||i==2619){ Get.off(JackGT(selectedPage: 3,));
+    }
+else if(i==2620||i==2621||i==2622){ Get.off(JackGT(selectedPage: 4,));
+    }
+else if(i==2623||i==2624||i==2625){ Get.off(JackGT(selectedPage: 5,));
+    }
+else if(i==2626||i==2627||i==2628||i==2629||i==2630||i==2631){ Get.off(JackGT(selectedPage: 6,));
+    }
+else if(i==2632||i==2633||i==2634){ Get.off(JackGT(selectedPage: 7,));
+    }
+else if(i==2635||i==2636||i==2637){ Get.off(JackGT(selectedPage: 8,));
+    }
+else if(i==2638||i==2639||i==2640||i==2641||i==2642||i==2643){ Get.off(JackGT(selectedPage: 9,));
+    }
+else if(i==2644||i==2645||i==2646){ Get.off(JumpsuitGT(selectedPage: 0,));
+    }
+else if(i==2647||i==2648||i==2649){ Get.off(JumpsuitGT(selectedPage: 1,));
+    }
+else if(i==2650||i==2651||i==2652||i==2653||i==2654||i==2655){ Get.off(KidkGT(selectedPage: 0,));
+    }
+else if(i==2656||i==2657||i==2658){ Get.off(KidkGT(selectedPage: 1,));
+    }
+else if(i==2659||i==2660||i==2661||i==2662||i==2663||i==2664){ Get.off(KidSGT(selectedPage: 0,));
+    }
+else if(i==2665||i==2666||i==2667){ Get.off(KidSGT(selectedPage: 1,));
+    }
+else if(i==2668||i==2669||i==2670){ Get.off(KidSGT(selectedPage: 2,));
+    }
+else if(i==2671||i==2672||i==2673){ Get.off(KidSGT(selectedPage: 3,));
+    }
+else if(i==2674||i==2675||i==2676){ Get.off(KidSGT(selectedPage: 4,));
+    }
+else if(i==2677||i==2678||i==2679){ Get.off(KidSGT(selectedPage: 5,));
+    }
+else if(i==2680||i==2681||i==2682||i==2683||i==2684||i==2685){ Get.off(KidSGT(selectedPage: 6,));
+    }
+else if(i==2686||i==2687||i==2688||i==2689||i==2690||i==2691){ Get.off(KidshGT(selectedPage: 0,));
+    }
+else if(i==2692||i==2693||i==2694||i==2695||i==2696||i==2697){ Get.off(KidskGT(selectedPage: 0,));
+    }
+else if(i==2698||i==2699||i==2700){ Get.off(KidskGT(selectedPage: 1,));
+    }
+else if(i==2701||i==2702||i==2703){ Get.off(KidskGT(selectedPage: 2,));
+    }
+else if(i==2704||i==2705||i==2706){ Get.off(KidskGT(selectedPage: 3,));
+    }
+else if(i==2707||i==2708||i==2709){ Get.off(KidskGT(selectedPage: 4,));
+    }
+else if(i==2710||i==2711||i==2712){ Get.off(KidswGT(selectedPage: 0,));
+    }
+else if(i==2713||i==2714||i==2715){ Get.off(KidswGT(selectedPage: 1,));
+    }
+else if(i==2716||i==2717||i==2718){ Get.off(KidswGT(selectedPage: 2,));
+    }
+else if(i==2719||i==2720||i==2721){ Get.off(KidswGT(selectedPage: 3,));
+    }
+else if(i==2722||i==2723||i==2724){ Get.off(KidswGT(selectedPage: 4,));
+    }
+else if(i==2725||i==2726||i==2727||i==2728||i==2729||i==2730){ Get.off(TopsTG(selectedPage: 0,));
+    }
+else if(i==2731||i==2732||i==2733){ Get.off(TopsTG(selectedPage: 1,));
+    }
+else if(i==2734||i==2735||i==2736||i==2737||i==2738||i==2739){ Get.off(TopsTG(selectedPage: 2,));
+    }
+else if(i==2740||i==2741||i==2742||i==2743||i==2744||i==2745||i==2746||i==2747||i==2748){ Get.off(TopsTG(selectedPage: 3,));
+    }
+else if(i==2749||i==2750||i==2751){ Get.off(TopsTG(selectedPage: 4,));
+    }
+else if(i==2752||i==2753||i==2754){ Get.off(TopsTG(selectedPage: 5,));
+    }
+else if(i==2755||i==2756||i==2757){ Get.off(TopsTG(selectedPage: 6,));
+    }
+else if(i==2758||i==2759||i==2760){ Get.off(TopsTG(selectedPage: 7,));
+    }
+else if(i==2761||i==2762||i==2763||i==2764||i==2765||i==2766){ Get.off(TopsTG(selectedPage: 8,));
+    }
+else if(i==2767||i==2768||i==2769||i==2770||i==2771||i==2772){ Get.off(KidtuGT(selectedPage: 0,));
+    }
+else if(i==2773||i==2774||i==2775){ Get.off(KidtuGT(selectedPage: 1,));
+    }
+else if(i==2776||i==2777||i==2778){ Get.off(KidtuGT(selectedPage: 2,));
+    }
+else if(i==2779||i==2780||i==2781){ Get.off(KidtuGT(selectedPage: 3,));
+    }
+else if(i==2782||i==2783||i==2784){ Get.off(KidtuGT(selectedPage: 4,));
+    }
+else if(i==2785||i==2786||i==2787){ Get.off(KidtuGT(selectedPage: 5,));
+    }
+else if(i==2788||i==2789||i==2790){ Get.off(KidtuGT(selectedPage: 6,));
+    }
+else if(i==2791||i==2792||i==2793||i==2794||i==2795||i==2796){ Get.off(KidtuGT(selectedPage: 7,));
+    }
+else if(i==2797||i==2798||i==2799){ Get.off(KidtuGT(selectedPage: 8,));
+    }
+else if(i==2800||i==2801||i==2802){ Get.off(KidtuGT(selectedPage: 9,));
+    }
+else if(i==2803||i==2804||i==2805){ Get.off(KidtuGT(selectedPage: 10,));
+    }
+else if(i==2806||i==2807||i==2808){ Get.off(TrackBG());
+    }
 
 else{return null;}
 
   }
   @override
   Widget build(BuildContext context) {
+    SizeConfig().init(context);
     return SafeArea(
-      child: Scaffold(
-resizeToAvoidBottomPadding: true,
-        body: SingleChildScrollView(
-          child: Container(
-            padding: const EdgeInsets.all(20.0),
+      child: DefaultTabController(
 
-            decoration: BoxDecoration(
-                gradient: fabGradient
-            ),
-            alignment: Alignment.center,
-            child: AutoSearchInput(
-              unSelectedTextColor: kText,
-              selectedTextColor: kText,
-              hintText: 'Search',
-              itemsShownAtStart: 10,
-              singleItemHeight: 60.0,
-                data: names,
-                maxElementsToDisplay: 8,
-                onItemTap: (int index) {
-                  //Do something cool
-                  print(index);
-                  if(index>=0||index<=1305){  search(i:index);}
-                  else{search2(i:index);}
+        length:2,
+        child: Scaffold(
+          appBar:AppBar(
+            title: Text('Search by',style: TextStyle(color: kText),),
+            toolbarHeight: SizeConfig.safeBlockHorizontal * 8,
+            backgroundColor: kPrimaryColor,
+            elevation: 0,
+            bottom: TabBar(
+              isScrollable: true,
+              labelColor: Colors.white,
+              unselectedLabelColor: kIcon,
 
-                }
+              tabs:[
+                Text("Category",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5,),),
+                Text("Designer",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5),),
+
+              ],
             ),
           ),
+
+          resizeToAvoidBottomPadding: true,
+          body:
+            Container(
+              padding: const EdgeInsets.all(20.0),
+
+              decoration: BoxDecoration(
+                  gradient: fabGradient
+              ),
+              alignment: Alignment.center,
+              child:
+              TabBarView(
+                  children:<Widget> [
+                    SingleChildScrollView(
+                      child: Container(
+                        child: AutoSearchInput(
+                            unSelectedTextColor: kText,
+                            selectedTextColor: kText,
+                            hintText: 'Search',
+                            itemsShownAtStart: 10,
+                            singleItemHeight: 60.0,
+                            data: names,
+                            maxElementsToDisplay: 8,
+                            onItemTap: (int index) {
+                              //Do something cool
+                              print(index);
+                              if(index>=0||index<=1305){  search(i:index);}
+                              else{search2(i:index);}
+
+                            }
+                        ),
+                      ),
+                    ),
+             SearchDesigner(),
+                  ]),
+
+
+            ),
+
         ),
       ),
     );
   }
   }
 
+class SearchDesigner extends StatefulWidget {
+  @override
+  _SearchDesignerState createState() => _SearchDesignerState();
+}
+
+class _SearchDesignerState extends State<SearchDesigner> {
+  TextEditingController _searchController = TextEditingController();
+
+  Future resultsLoaded;
+  List _allResults = [];
+  List _resultsList = [];
+
+  @override
+  void initState() {
+    super.initState();
+    _searchController.addListener(_onSearchChanged);
+  }
+
+  @override
+  void dispose() {
+    _searchController.removeListener(_onSearchChanged);
+    _searchController.dispose();
+    super.dispose();
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    resultsLoaded = getUsersPastTripsStreamSnapshots();
+  }
+
+
+  _onSearchChanged() {
+    searchResultsList();
+  }
+
+  searchResultsList() {
+    var showResults = [];
+
+    if(_searchController.text != "") {
+      for(var tripSnapshot in _allResults){
+        var title = User.fromDocument(tripSnapshot).displayName.toLowerCase();
+
+        if(title.contains(_searchController.text.toLowerCase())) {
+          showResults.add(tripSnapshot);
+        }
+      }
+
+    } else {
+      showResults = List.from(_allResults);
+    }
+    setState(() {
+      _resultsList = showResults;
+    });
+  }
+
+  getUsersPastTripsStreamSnapshots() async {
+    var data = await Firestore.instance
+        .collection('users')
+    // .document(uid)
+    // .collection('trips')
+    .where("designer", isEqualTo: true)
+    // .orderBy('endDate')
+        .getDocuments();
+    setState(() {
+      _allResults = data.documents;
+    });
+    searchResultsList();
+    return "complete";
+  }
+
+  Widget build(BuildContext context) {
+    return Container(
+      child: Column(
+        children: <Widget>[
+          Text("Search Users", style: TextStyle(fontSize: 20)),
+          Padding(
+            padding: const EdgeInsets.only(left: 30.0, right: 30.0, bottom: 30.0),
+            child: TextField(
+              controller: _searchController,
+              decoration: InputDecoration(
+                  prefixIcon: Icon(Icons.search)
+              ),
+            ),
+          ),
+          Expanded(
+              child: ListView.builder(
+                itemCount: _resultsList.length,
+                itemBuilder: (BuildContext context, int index) =>
+                    buildCard(context, _resultsList[index]),
+              )
+
+          ),
+        ],
+      ),
+    );
+  }
+}
