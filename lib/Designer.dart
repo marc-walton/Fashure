@@ -31,6 +31,8 @@ class _DesignerState extends State<Designer>  with  TickerProviderStateMixin{
   final List<MyTabs> _tabs = [new MyTabs(title: "Hire Designer",color: kPrimaryColor),
     new MyTabs(title: "Hire Illustrator",color: kPrimaryColor),
     new MyTabs(title: "Hire Stylist",color:kPrimaryColor),
+    new MyTabs(title: "Hire Content writer",color:kPrimaryColor),
+
     new MyTabs(title: "Hire Model",color: kPrimaryColor),
     new MyTabs(title: "Hire Makeup Artist",color: kPrimaryColor),
     new MyTabs(title: "Hire Hair Dresser",color: kPrimaryColor),
@@ -41,7 +43,7 @@ class _DesignerState extends State<Designer>  with  TickerProviderStateMixin{
   TabController _controller ;
   void initState() {
     super.initState();
-    _controller = new TabController(length: 8, vsync: this);
+    _controller = new TabController(length: 9, vsync: this);
     _myHandler = _tabs[0];
     _controller.addListener(_handleSelected);
   }
@@ -106,6 +108,26 @@ class _DesignerState extends State<Designer>  with  TickerProviderStateMixin{
         buildPostStylist() {
     return FutureBuilder(
         future: Firestore.instance.collection('users').where('stylist',isEqualTo:true).getDocuments(),
+        // ignore: missing_return
+        builder: (context, snapshot) {
+          if (!snapshot.hasData) {
+            return circularProgress();
+          }
+
+          List<DItem> searchResults = [];
+          snapshot.data.documents.forEach((doc) {
+            User user = User.fromDocument(doc);
+            DItem searchResult = DItem(user);
+            searchResults.add(searchResult);
+          });
+          return ListView(
+            children: searchResults,
+          );
+        });
+        }
+ buildPostBlogger() {
+    return FutureBuilder(
+        future: Firestore.instance.collection('users').where('blogger',isEqualTo:true).getDocuments(),
         // ignore: missing_return
         builder: (context, snapshot) {
           if (!snapshot.hasData) {
@@ -231,7 +253,8 @@ class _DesignerState extends State<Designer>  with  TickerProviderStateMixin{
       child: Scaffold(
         appBar: PreferredSize(
         preferredSize: Size.fromHeight(100.0),
-        child: AppBar(title:  FittedBox(fit:BoxFit.contain,child: Text("Freelancers",style: TextStyle(fontSize: 30,fontFamily: 'MajorMonoDisplay'),)),
+        child: AppBar(title:  FittedBox(fit:BoxFit.contain,
+            child: Text("Freelancers",style: TextStyle(fontSize: 30,fontFamily: 'MajorMonoDisplay'),)),
             backgroundColor: kPrimaryColor,
 
             bottom: new TabBar(
@@ -240,6 +263,8 @@ isScrollable: true,
               tabs: <Widget>[
                 FaIcon(FontAwesomeIcons.rulerCombined),
                 FaIcon(FontAwesomeIcons.pencilRuler),
+                 FaIcon(FontAwesomeIcons.edit),
+
                 SvgPicture.asset(
                   'assets/img/F-PRIVATE-MODE.svg',
                   color: Colors.white,
@@ -270,7 +295,7 @@ isScrollable: true,
                   controller: _controller,
                   children: <Widget>[
                     ListTile(
-                      title: Text(' Hire Designer ',style: TextStyle(
+                      title: Text(' Designer ',style: TextStyle(
                           color: kText,
                           fontWeight: FontWeight.bold,
                           fontFamily: "MajorMonoDisplay",
@@ -278,23 +303,33 @@ isScrollable: true,
                       ),),
                         subtitle:buildPostDesigner(),
                     ),ListTile(
-                      title: Text(' Hire Illustrator ',style: TextStyle(
+                      title: Text(' Illustrator ',style: TextStyle(
                           color: kText,
                           fontWeight: FontWeight.bold,
                           fontFamily: "MajorMonoDisplay",
                           fontSize: 30
                       ),),
                         subtitle:buildPostIllustrator(),
+                    ),
+                    ListTile(
+                      title: Text(' Content writer ',style: TextStyle(
+                          color: kText,
+                          fontWeight: FontWeight.bold,
+                          fontFamily: "MajorMonoDisplay",
+                          fontSize: 30
+                      ),),
+                        subtitle:buildPostBlogger(),
                     ), ListTile(
-                      title: Text('Hire Stylist',style: TextStyle(
+                      title: Text(' Stylist',style: TextStyle(
                           color: kText,
                           fontWeight: FontWeight.bold,
                           fontFamily: "MajorMonoDisplay",
                           fontSize: 30
                       ),),
                       subtitle:buildPostStylist(),
-                    ), ListTile(
-                      title: Text('Hire Model',style: TextStyle(
+                    ),
+                    ListTile(
+                      title: Text(' Model',style: TextStyle(
                           color: kText,
                           fontWeight: FontWeight.bold,
                           fontFamily: "MajorMonoDisplay",
@@ -302,15 +337,16 @@ isScrollable: true,
                       ),),
                       subtitle:buildPostModel(),
                     ), ListTile(
-                      title: Text('Hire Makeup Artist',style: TextStyle(
+                      title: Text(' Makeup Artist',style: TextStyle(
                           color: kText,
                           fontWeight: FontWeight.bold,
                           fontFamily: "MajorMonoDisplay",
                           fontSize: 30
                       ),),
                         subtitle:buildPostMakeup(),
-                    ), ListTile(
-            title: Text('Hire HairDresser',style: TextStyle(
+                    ),
+                    ListTile(
+            title: Text(' HairDresser',style: TextStyle(
                 color: kText,
                 fontWeight: FontWeight.bold,
                 fontFamily: "MajorMonoDisplay",
@@ -318,7 +354,7 @@ isScrollable: true,
             ),),
             subtitle:buildPostHair(),
           ), ListTile(
-                      title: Text('Hire Photographer',style: TextStyle(
+                      title: Text(' Photographer',style: TextStyle(
                           color: kText,
                           fontWeight: FontWeight.bold,
                           fontFamily: "MajorMonoDisplay",
@@ -326,7 +362,7 @@ isScrollable: true,
                       ),),
                       subtitle:buildPostPhotographer(),
                     ), ListTile(
-                      title: Text('Hire Choreographer',style: TextStyle(
+                      title: Text(' Choreographer',style: TextStyle(
                           color: kText,
                           fontWeight: FontWeight.bold,
                           fontFamily: "MajorMonoDisplay",

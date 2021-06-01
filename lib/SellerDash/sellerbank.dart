@@ -19,7 +19,7 @@ class _SellerBankState extends State<SellerBank> {
   bool _inProcess = false;
   bool isUploading = false;
   String country;
-  String dialcode;
+  String dialcode='+91';
   String bankId;
   TextEditingController namecontroller = TextEditingController();
   TextEditingController taxidcontroller = TextEditingController();
@@ -30,207 +30,204 @@ class _SellerBankState extends State<SellerBank> {
 AddBank(){
 
           return
-            Container(
-              child:          SingleChildScrollView(
-                child: Form(
-                  key: _formKey,
-                  child: ListView(
-                    children: [
-                      Container(
-                        margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
-                        child: TextFormField(
-                          keyboardType: TextInputType.name,
-                          maxLines: null,
-                          controller: namecontroller,
-                          decoration: InputDecoration(
-                            border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
-                            enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
-                            focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
-                            // labelText: 'Full name',labelStyle: TextStyle(color: kText),
-                            hintText: 'Business name',
-                          ),
-                          textAlign: TextAlign.start,
-                          validator: (text) {
-                            if (text == null || text.isEmpty) {
-                              return 'Business name is empty';
-                            }
-                            return null;
-                          },
+            SingleChildScrollView(
+              child: Form(
+                key: _formKey,
+                child: ListView(
+                  children: [
+                    Container(
+                      margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+                      child: TextFormField(
+                        keyboardType: TextInputType.name,
+                        maxLines: null,
+                        controller: namecontroller,
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+                          enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+                          focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+                          // labelText: 'Full name',labelStyle: TextStyle(color: kText),
+                          hintText: 'Business name',
                         ),
+                        textAlign: TextAlign.start,
+                        validator: (text) {
+                          if (text == null || text.isEmpty) {
+                            return 'Business name is empty';
+                          }
+                          return null;
+                        },
                       ),
-                      Container(
-                        margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
-                        child: TextFormField(
-                          keyboardType: TextInputType.streetAddress,
-                          maxLines: null,
-                          controller: addresscontroller,
-                          decoration: InputDecoration(
-                            border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
-                            enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
-                            focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
-                            // labelText: 'Full name',labelStyle: TextStyle(color: kText),
-                            hintText: 'Business address',
-                          ),
-                          textAlign: TextAlign.start,
-                          validator: (text) {
-                            if (text == null || text.isEmpty) {
-                              return 'Business address';
-                            }
-                            return null;
-                          },
+                    ),
+                    Container(
+                      margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+                      child: TextFormField(
+                        keyboardType: TextInputType.streetAddress,
+                        maxLines: null,
+                        controller: addresscontroller,
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+                          enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+                          focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+                          // labelText: 'Full name',labelStyle: TextStyle(color: kText),
+                          hintText: 'Business address',
                         ),
+                        textAlign: TextAlign.start,
+                        validator: (text) {
+                          if (text == null || text.isEmpty) {
+                            return 'Business address';
+                          }
+                          return null;
+                        },
                       ),
-                      Container(
-                        margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
-                        child: TextFormField(
-                          keyboardType: TextInputType.text,
-                          maxLines: null,
-                          controller: taxidcontroller,
-                          decoration: InputDecoration(
-                            border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
-                            enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
-                            focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
-                            // labelText: 'Full name',labelStyle: TextStyle(color: kText),
-                            hintText: 'GST/Tax ID',
-                          ),
-                          textAlign: TextAlign.start,
-                          // validator: (text) {
-                          //   if (text == null || text.isEmpty) {
-                          //     return 'GST/Tax ID is empty';
-                          //   }
-                          //   return null;
-                          // },
+                    ),
+                    Container(
+                      margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+                      child: TextFormField(
+                        keyboardType: TextInputType.text,
+                        maxLines: null,
+                        controller: taxidcontroller,
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+                          enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+                          focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+                          // labelText: 'Full name',labelStyle: TextStyle(color: kText),
+                          hintText: 'GST/Tax ID',
                         ),
+                        textAlign: TextAlign.start,
+                        // validator: (text) {
+                        //   if (text == null || text.isEmpty) {
+                        //     return 'GST/Tax ID is empty';
+                        //   }
+                        //   return null;
+                        // },
                       ),
-                      Center(
-                        child: CountryListPick(
-                          theme: CountryTheme(
-                            isShowFlag: true,
-                            isShowTitle: true,
-                            isShowCode: true,
-                            isDownIcon: true,
-                            showEnglishName: true,
-                          ),
-                          initialSelection: '+91',
-                          onChanged: (CountryCode code) {
-                            print(code.name);
-                            print(code.code);
-                            print(code.dialCode);
-                            print(code.flagUri);
-                            setState(() {
-                              country = code.name;
-                              dialcode = code.dialCode;
-                            });
-                          },
+                    ),
+                    Center(
+                      child: CountryListPick(
+                        theme: CountryTheme(
+                          isShowFlag: true,
+                          isShowTitle: true,
+                          isShowCode: true,
+                          isDownIcon: true,
+                          showEnglishName: true,
                         ),
+                        initialSelection: '+91',
+                        onChanged: (CountryCode code) {
+                          print(code.name);
+                          print(code.code);
+                          print(code.dialCode);
+                          print(code.flagUri);
+                          setState(() {
+                            country = code.name;
+                            dialcode = code.dialCode;
+                          });
+                        },
                       ),
-                      Row(
-                        children: [
-                          Container(
-                            child: Text('$dialcode'),
-                          ),
-                          SizedBox(width: 5.0,),
-                          Container(
-                            margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
-                            child: TextFormField(
-                              keyboardType: TextInputType.phone,
-                              maxLines: null,
-                              controller: telephonecontroller,
-                              decoration: InputDecoration(
-                                border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
-                                enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
-                                focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
-                                // labelText: 'Full name',labelStyle: TextStyle(color: kText),
-                                hintText: 'Mobile number',
-                              ),
-                              textAlign: TextAlign.start,
-                              validator: (text) {
-                                if (text == null || text.isEmpty) {
-                                  return 'Mobile number is empty';
-                                }
-                                return null;
-                              },
+                    ),
+                    Row(
+                      children: [
+                        Container(
+                          child: Text('$dialcode'),
+                        ),
+                        SizedBox(width: 5.0,),
+                        Container(
+                          margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+                          child: TextFormField(
+                            keyboardType: TextInputType.phone,
+                            maxLines: null,
+                            controller: telephonecontroller,
+                            decoration: InputDecoration(
+                              border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+                              enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+                              focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+                              // labelText: 'Full name',labelStyle: TextStyle(color: kText),
+                              hintText: 'Mobile number',
                             ),
-                          ),
-
-                        ],
-                      ),
-
-                      Container(
-                        margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
-                        child: TextFormField(
-                          keyboardType: TextInputType.text,
-                          maxLines: null,
-                          controller: accnocontroller,
-                          decoration: InputDecoration(
-                            border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
-                            enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
-                            focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
-                            // labelText: 'Full name',labelStyle: TextStyle(color: kText),
-                            hintText: 'Account Number',
-                          ),
-                          textAlign: TextAlign.start,
-                          validator: (text) {
-                            if (text == null || text.isEmpty) {
-                              return 'Account Number is empty';
-                            }
-                            return null;
-                          },
-                        ),
-                      ),
-                      Container(
-                        margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
-                        child: TextFormField(
-                          keyboardType: TextInputType.text,
-                          maxLines: null,
-                          controller: ifsccontroller,
-                          decoration: InputDecoration(
-                            border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
-                            enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
-                            focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
-                            // labelText: 'Full name',labelStyle: TextStyle(color: kText),
-                            hintText: 'IFSC code',
-                          ),
-                          textAlign: TextAlign.start,
-                          validator: (text) {
-                            if (text == null || text.isEmpty) {
-                              return 'IFSC code is empty';
-                            }
-                            return null;
-                          },
-                        ),
-                      ),
-
-                      Row(
-                        children: [
-                          RaisedButton(
-                            color: kblue,
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(18.0)
-                            ),
-                            child: Text('Cancel'),
-                            onPressed: ()=>Navigator.pop(context),
-                          ),
-                          SizedBox(width: 5.0,),
-                          RaisedButton(
-                            color: kblue,
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(18.0)
-                            ),
-                            child: Text('Save'),
-                            onPressed: (){SaveBank();
+                            textAlign: TextAlign.start,
+                            validator: (text) {
+                              if (text == null || text.isEmpty) {
+                                return 'Mobile number is empty';
+                              }
+                              return null;
                             },
-                          )
+                          ),
+                        ),
 
-                        ],
+                      ],
+                    ),
+
+                    Container(
+                      margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+                      child: TextFormField(
+                        keyboardType: TextInputType.text,
+                        maxLines: null,
+                        controller: accnocontroller,
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+                          enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+                          focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+                          // labelText: 'Full name',labelStyle: TextStyle(color: kText),
+                          hintText: 'Account Number',
+                        ),
+                        textAlign: TextAlign.start,
+                        validator: (text) {
+                          if (text == null || text.isEmpty) {
+                            return 'Account Number is empty';
+                          }
+                          return null;
+                        },
                       ),
+                    ),
+                    Container(
+                      margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+                      child: TextFormField(
+                        keyboardType: TextInputType.text,
+                        maxLines: null,
+                        controller: ifsccontroller,
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+                          enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+                          focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+                          // labelText: 'Full name',labelStyle: TextStyle(color: kText),
+                          hintText: 'IFSC code',
+                        ),
+                        textAlign: TextAlign.start,
+                        validator: (text) {
+                          if (text == null || text.isEmpty) {
+                            return 'IFSC code is empty';
+                          }
+                          return null;
+                        },
+                      ),
+                    ),
+
+                    Row(
+                      children: [
+                        RaisedButton(
+                          color: kblue,
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(18.0)
+                          ),
+                          child: Text('Cancel'),
+                          onPressed: ()=>Navigator.pop(context),
+                        ),
+                        SizedBox(width: 5.0,),
+                        RaisedButton(
+                          color: kblue,
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(18.0)
+                          ),
+                          child: Text('Save'),
+                          onPressed: (){SaveBank();
+                          },
+                        )
+
+                      ],
+                    ),
 
 
-                    ],
-                  ),
+                  ],
                 ),
               ),
-
             );
 
 
@@ -288,26 +285,191 @@ Bankdetails(){
   Widget build(BuildContext context) {
     return
 
-      Container( decoration: BoxDecoration(
-          gradient: fabGradient
-      ) ,
-        alignment: Alignment.center,
-        child: Stack(
-        children: <Widget>[
+      Scaffold(
+        // resizeToAvoidBottomPadding: false,
+        appBar: AppBar(backgroundColor: kPrimaryColor,
+          title: Text('Add account',style: TextStyle(color: Colors.white),),),
+        body: Container( decoration: BoxDecoration(
+            gradient: fabGradient
+        ) ,
+          alignment: Alignment.center,
+          child:     SingleChildScrollView(
+            child: Form(
+              key: _formKey,
+              child: Column(
+                children: [
+                  Container(
+                    margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+                    child: TextFormField(
+                      keyboardType: TextInputType.name,
+                      maxLines: null,
+                      controller: namecontroller,
+                      decoration: InputDecoration(
+                        border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+                        enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+                        focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+                        // labelText: 'Full name',labelStyle: TextStyle(color: kText),
+                        hintText: 'Business name',
+                      ),
+                      textAlign: TextAlign.start,
+                      validator: (text) {
+                        if (text == null || text.isEmpty) {
+                          return 'Business name is empty';
+                        }
+                        return null;
+                      },
+                    ),
+                  ),
+                  Container(
+                    margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+                    child: TextFormField(
+                      keyboardType: TextInputType.streetAddress,
+                      maxLines: null,
+                      controller: addresscontroller,
+                      decoration: InputDecoration(
+                        border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+                        enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+                        focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+                        // labelText: 'Full name',labelStyle: TextStyle(color: kText),
+                        hintText: 'Business address',
+                      ),
+                      textAlign: TextAlign.start,
+                      validator: (text) {
+                        if (text == null || text.isEmpty) {
+                          return 'Business address';
+                        }
+                        return null;
+                      },
+                    ),
+                  ),
+                  Container(
+                    margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+                    child: TextFormField(
+                      keyboardType: TextInputType.text,
+                      maxLines: null,
+                      controller: taxidcontroller,
+                      decoration: InputDecoration(
+                        border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+                        enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+                        focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+                        // labelText: 'Full name',labelStyle: TextStyle(color: kText),
+                        hintText: 'GST/Tax ID',
+                      ),
+                      textAlign: TextAlign.start,
+                      // validator: (text) {
+                      //   if (text == null || text.isEmpty) {
+                      //     return 'GST/Tax ID is empty';
+                      //   }
+                      //   return null;
+                      // },
+                    ),
+                  ),
+                  Center(
+                    child: CountryListPick(
+                      theme: CountryTheme(
+                        isShowFlag: true,
+                        isShowTitle: true,
+                        isShowCode: true,
+                        isDownIcon: true,
+                        showEnglishName: true,
+                      ),
+                      initialSelection: '+91',
+                      onChanged: (CountryCode code) {
+                        print(code.name);
+                        print(code.code);
+                        print(code.dialCode);
+                        print(code.flagUri);
+                        setState(() {
+                          country = code.name;
+                          dialcode = code.dialCode;
+                        });
+                      },
+                    ),
+                  ),
+                  Container(
+                    margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+                    child: TextFormField(
+                      keyboardType: TextInputType.phone,
+                      maxLines: null,
+                      controller: telephonecontroller,
+                      decoration: InputDecoration(
+                        border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+                        enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+                        focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+                        // labelText: 'Full name',labelStyle: TextStyle(color: kText),
+                        hintText: '$dialcode',
+                      ),
+                      textAlign: TextAlign.start,
+                      validator: (text) {
+                        if (text == null || text.isEmpty) {
+                          return 'Mobile number is empty';
+                        }
+                        return null;
+                      },
+                    ),
+                  ),
 
-            AddBank(),
+                  Container(
+                    margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+                    child: TextFormField(
+                      keyboardType: TextInputType.text,
+                      maxLines: null,
+                      controller: accnocontroller,
+                      decoration: InputDecoration(
+                        border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+                        enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+                        focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+                        // labelText: 'Full name',labelStyle: TextStyle(color: kText),
+                        hintText: 'Account Number',
+                      ),
+                      textAlign: TextAlign.start,
+                      validator: (text) {
+                        if (text == null || text.isEmpty) {
+                          return 'Account Number is empty';
+                        }
+                        return null;
+                      },
+                    ),
+                  ),
+                  Container(
+                    margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+                    child: TextFormField(
+                      keyboardType: TextInputType.text,
+                      maxLines: null,
+                      controller: ifsccontroller,
+                      decoration: InputDecoration(
+                        border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+                        enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+                        focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+                        // labelText: 'Full name',labelStyle: TextStyle(color: kText),
+                        hintText: 'IFSC code',
+                      ),
+                      textAlign: TextAlign.start,
+                      validator: (text) {
+                        if (text == null || text.isEmpty) {
+                          return 'IFSC code is empty';
+                        }
+                        return null;
+                      },
+                    ),
+                  ),
+
+                  RaisedButton(
+                    color: kblue,
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(18.0)
+                    ),
+                    child: Text('Save'),
+                    onPressed: (){SaveBank();
+                    },
+                  ),
 
 
-
-    (_inProcess)?Container(
-            color: Colors.white,
-            height: MediaQuery.of(context).size.height * 0.95,
-            child: Center(
-              child: CircularProgressIndicator(),
+                ],
+              ),
             ),
-          ):Center()
-        ],
-    ),
+          ),
+        ),
       );
   }
 }

@@ -187,7 +187,8 @@ class _InvoiceState extends State<Invoice> {
   void initState() {
     // initialize controller
     // parse();
-
+print(finalpay);
+print(advancepay);
     super.initState();
   }
 
@@ -310,16 +311,12 @@ class _InvoiceState extends State<Invoice> {
     String amount,String due,String custId,String cusName,String cusImg,String ownerId,
   }){
     //installment
-    if(advancepay == 'false'||finalpay == 'false') {
+    if(widget.advancepay == 'false') {
       return
       Center(
         child: RaisedButton(
           onPressed: (){
-            // Navigator.push(context, MaterialPageRoute(builder: (context) => AddressSer(Amount:amount,OwnerId:orderId,
-            //   OrderId: orderId,
-            //   cusId: custId,
-            //   username: cusName,
-            //   profileimg: cusImg,)));
+
 Get.to( PaymentSer(Amount:amount,OrderId: orderId,
   OwnerId: ownerId,profileimg: cusImg,username: cusName,advancepay: advancepay,finalpay: finalpay,Finr: Finr,
   eur:eur,
@@ -336,8 +333,31 @@ Get.to( PaymentSer(Amount:amount,OrderId: orderId,
         ),
       );
     }
+    else if(widget.finalpay=='false')
+    {
+      return
+        Center(
+          child: RaisedButton(
+            onPressed: (){
+              Get.to( PaymentSer(Amount:due,OrderId: orderId,
+                OwnerId: ownerId,profileimg: cusImg,username: cusName,advancepay: advancepay,finalpay: finalpay,Finr: Finr,
+                eur:eur,
+                usd:usd,
+                inr:inr,
+                gbp:gbp,
+                Feur:Feur,
+                Fusd:Fusd,
+                Fgbp:Fgbp,));
+
+            },
+            color: kblue,
+            child: Text('Pay Due',style: TextStyle(
+                color: Colors.white),),
+          ),
+        );
+    }
     //one-time payment
-    if( due == "") {
+   else if( due == "") {
     return
       Center(
         child: RaisedButton(
@@ -361,30 +381,8 @@ Get.to( PaymentSer(Amount:amount,OrderId: orderId,
         ),
       );
     }
-    if(widget.advancepay == 'true'||widget.finalpay == 'false')
-    {
-      return
-      Center(
-        child: RaisedButton(
-          onPressed: (){
-            Get.to( PaymentSer(Amount:amount,OrderId: orderId,
-              OwnerId: ownerId,profileimg: cusImg,username: cusName,advancepay: advancepay,finalpay: finalpay,Finr: Finr,
-              eur:eur,
-              usd:usd,
-              inr:inr,
-              gbp:gbp,
-              Feur:Feur,
-              Fusd:Fusd,
-              Fgbp:Fgbp,));
 
-          },
-          color: kblue,
-          child: Text('Pay Due',style: TextStyle(
-              color: Colors.white),),
-        ),
-      );
-    }
-
+else{return Container();}
 
   }
   review(){
@@ -392,6 +390,8 @@ Get.to( PaymentSer(Amount:amount,OrderId: orderId,
         .document(ownerId).collection('userReviews').document(reviewId)
         .setData({
       'userId': ownerId,
+       'orderId': orderId,
+
       'rating': rating,
       'review':reviewController.text,
       'reviewId' : reviewId
@@ -409,33 +409,23 @@ Get.to( PaymentSer(Amount:amount,OrderId: orderId,
       // "mediaUrl": mediaUrl,
       "timestamp": timestamp,
       "read": 'false',
-      'message':'You received an order!',
+      'message':'You received a review!',
     });
   }
-  Rating({String fulfill,String OwnerId}){
-    if(fulfilled =='true') {
-      Center(
-        child: Column(
-          children:[
-            ListTileTheme(
-              tileColor:trans,
-              child: ExpansionTile(
-                backgroundColor:trans,
-                title:  Text(
-                  "Please rate the order",
-                  style: TextStyle(
-                    color: kText.withOpacity(0.5),
-                    fontWeight: FontWeight.bold,fontSize: 20,
-                  ),),
-                trailing:Icon(Icons.expand_more,color: kText,),
-                maintainState: true,
-                children: [
+  Rating({String fulfill,String OwnerId,parentContext}){
+    if(fulfill=='true') {
+      return
+        showModalBottomSheet(
+            context: parentContext,
+            builder: (BuildContext context) {
+              return
+                Container(
 
-                  Container(
+                  child:           Center(
                     child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
-                      children: <Widget>[
-
+                      children:[
+                        Text('Please rate the order',style: TextStyle(
+                            color: Colors.white),),
                         SmoothStarRating(
                           allowHalfRating: true,
                           filledIconData: Icons.blur_off,
@@ -449,7 +439,6 @@ Get.to( PaymentSer(Amount:amount,OrderId: orderId,
                             });
                           },
                         ),
-
                         TextField(
                           controller: reviewController,
                           decoration: InputDecoration(
@@ -461,49 +450,19 @@ Get.to( PaymentSer(Amount:amount,OrderId: orderId,
                           ),
                           textAlign: TextAlign.start,
                         ),
-            Center(
-            child: RaisedButton(
-            onPressed: (){
-              Firestore.instance.collection('Reviews')
-                  .document(ownerId).collection('userReviews').document(reviewId)
-                  .setData({
-                'userId': ownerId,
-                'rating': rating?? 0.0,
-                'review':reviewController.text?? "",
-                'reviewId' : reviewId
-              });
-              Firestore.instance.collection('feed')
-                  .document(ownerId)
-                  .collection('feedItems')
-                  .document(reviewId)
-                  .setData({
-                "type": "ReviewC",
-                "username": currentUser.displayName,
-                "userId": ownerId,
-                "userProfileImg": currentUser.photoUrl,
-                "postId": reviewId,
-                // "mediaUrl": mediaUrl,
-                "timestamp": timestamp,
-                "read": 'false',
-                'message':'You received an order!',
-              });
-            },
-    color: kblue,
-    child: Text('Pay Advance',style: TextStyle(
-    color: Colors.white),),
-    ),
-    ),
-
-    ],
+                        RaisedButton(
+                          onPressed: ()=>review(),
+                          color: kblue,
+                          child: Text('Save',style: TextStyle(color: Colors.white),),)
+                      ],
                     ),
-                  ),                ],
-              ),
-            ),
+                  ),
 
+                );
 
-          ],
-        ),
-      );
+            }
+        );
+
 
     }
     else{return
@@ -512,13 +471,12 @@ Get.to( PaymentSer(Amount:amount,OrderId: orderId,
 
 
 
-  postindia(){
+  postindia(parentContext){
     return
       Padding(
         padding: const EdgeInsets.all(8.0),
         child: Column(
           children: <Widget>[
-            Rating(OwnerId: widget.ownerId,fulfill: widget.fulfilled),
             FutureBuilder(
               future: usersRef.document(widget.ownerId).get(),
               builder: (context, snapshot) {
@@ -552,55 +510,73 @@ Get.to( PaymentSer(Amount:amount,OrderId: orderId,
 
               },
             ),
+            SizedBox(height:10.0),
+
             Row(
               children: [
                 Text( widget.title   ,style: TextStyle(
                     color: kText),),
               ],
             ),
+            SizedBox(height:10.0),
+
             Row(
               children: [
                 Text( 'Description: ${widget.description}'   ,style: TextStyle(
                     color: kText),),
               ],
             ),
+            SizedBox(height:10.0),
+
             Row(
               children: [
                 Text('order Status: ${widget.ordersstatus}'   ,style: TextStyle(
                     color: kText),),
               ],
             ),
+            SizedBox(height:10.0),
+
             Row(
               children: [
                 Text('Address: ${widget.Address}',style: TextStyle(
                     color: kText),),
               ],
             ),
+            SizedBox(height:10.0),
+
 
             currency(advance: widget.inr,finalpay: widget.Finr),
+            SizedBox(height:10.0),
+
             Row(
               children: [
                 Text('Total: ₹ ${ int.tryParse(widget.inr) + int.tryParse(widget.Finr,)}'  ,style: TextStyle(
                     color:kText),),
               ],
             ),
+            SizedBox(height:10.0),
+
             paymentbutton(amount: widget.inr,due: widget.Finr,
               ownerId:widget.ownerId,
               cusName:widget.cusName,
               cusImg:widget.cusImg, ),
+            SizedBox(height:10.0),
 
+            fulfilled=='true'?
+            RaisedButton(onPressed:()=>Rating(fulfill:fulfilled,parentContext: parentContext,OwnerId: ownerId),color:kblue,child: Text('Rate Order',style:TextStyle(color: Colors.white)),):
+            Container(),
 
           ],
         ),
       );
   }
-  posteurope(){
+  posteurope(parentContext){
     return
       Padding(
         padding: const EdgeInsets.all(8.0),
         child: Column(
           children: <Widget>[
-            Rating(OwnerId: widget.ownerId,fulfill: widget.fulfilled),
+
             FutureBuilder(
               future: usersRef.document(widget.ownerId).get(),
               builder: (context, snapshot) {
@@ -634,24 +610,31 @@ Get.to( PaymentSer(Amount:amount,OrderId: orderId,
 
               },
             ),
+            SizedBox(height:10.0),
             Row(
               children: [
                 Text( widget.title   ,style: TextStyle(
                     color: kText),),
               ],
             ),
+            SizedBox(height:10.0),
+
             Row(
               children: [
                 Text( 'Description: ${widget.description}'   ,style: TextStyle(
                     color: kText),),
               ],
             ),
+            SizedBox(height:10.0),
+
             Row(
               children: [
                 Text('order Status: ${widget.ordersstatus}'   ,style: TextStyle(
                     color: kText),),
               ],
             ),
+            SizedBox(height:10.0),
+
             Row(
               children: [
                 Text('Address: ${widget.Address}',style: TextStyle(
@@ -660,28 +643,36 @@ Get.to( PaymentSer(Amount:amount,OrderId: orderId,
             ),
 
             currency(advance: widget.eur,finalpay: widget.Feur),
+            SizedBox(height:10.0),
+
             Row(
               children: [
                 Text('Total: € ${ int.tryParse(widget.eur) + int.tryParse(widget.Feur,)}'  ,style: TextStyle(
                     color:kText),),
               ],
             ),
+            SizedBox(height:10.0),
+
             paymentbutton(amount: widget.eur,due: widget.Feur,
               ownerId:widget.ownerId,
               cusName:widget.cusName,
               cusImg:widget.cusImg, ),
+            SizedBox(height:10.0),
+
+            fulfilled=='true'?
+            RaisedButton(onPressed:()=>Rating(fulfill:fulfilled,parentContext: parentContext,OwnerId: ownerId),color:kblue,child: Text('Rate Order',style:TextStyle(color: Colors.white)),):
+            Container(),
 
           ],
         ),
       );
   }
-  postuk(){
+  postuk(parentContext){
     return
       Padding(
         padding: const EdgeInsets.all(8.0),
         child: Column(
           children: <Widget>[
-            Rating(OwnerId: widget.ownerId,fulfill: widget.fulfilled),
             FutureBuilder(
               future: usersRef.document(widget.ownerId).get(),
               builder: (context, snapshot) {
@@ -715,54 +706,71 @@ Get.to( PaymentSer(Amount:amount,OrderId: orderId,
 
               },
             ),
+            SizedBox(height:10.0),
+
             Row(
               children: [
                 Text( widget.title   ,style: TextStyle(
                     color: kText),),
               ],
             ),
+            SizedBox(height:10.0),
+
             Row(
               children: [
                 Text( 'Description: ${widget.description}'   ,style: TextStyle(
                     color: kText),),
               ],
             ),
+            SizedBox(height:10.0),
+
             Row(
               children: [
                 Text('order Status: ${widget.ordersstatus}'   ,style: TextStyle(
                     color: kText),),
               ],
             ),
+            SizedBox(height:10.0),
+
             Row(
               children: [
                 Text('Address: ${widget.Address}',style: TextStyle(
                     color: kText),),
               ],
             ),
+            SizedBox(height:10.0),
 
             currency(advance: widget.gbp,finalpay: widget.Fgbp),
+            SizedBox(height:10.0),
+
             Row(
               children: [
                 Text('Total: £ ${ int.tryParse(widget.gbp) + int.tryParse(widget.Fgbp,)}'  ,style: TextStyle(
                     color:kText),),
               ],
             ),
+            SizedBox(height:10.0),
+
             paymentbutton(amount: widget.gbp,due: widget.Fgbp,
               ownerId:widget.ownerId,
               cusName:widget.cusName,
               cusImg:widget.cusImg, ),
+            SizedBox(height:10.0),
+
+            fulfilled=='true'?
+            RaisedButton(onPressed:()=>Rating(fulfill:fulfilled,parentContext: parentContext,OwnerId: ownerId),color:kblue,child: Text('Rate Order',style:TextStyle(color: Colors.white)),):
+            Container(),
 
           ],
         ),
       );
   }
-  postusa() {
+  postusa(parentContext) {
     return
       Padding(
         padding: const EdgeInsets.all(8.0),
         child: Column(
           children: <Widget>[
-            Rating(OwnerId: widget.ownerId,fulfill: widget.fulfilled),
             FutureBuilder(
               future: usersRef.document(widget.ownerId).get(),
               builder: (context, snapshot) {
@@ -796,65 +804,83 @@ Get.to( PaymentSer(Amount:amount,OrderId: orderId,
 
               },
             ),
+            SizedBox(height:10.0),
+
             Row(
               children: [
                 Text( widget.title   ,style: TextStyle(
                     color: kText),),
               ],
             ),
+            SizedBox(height:10.0),
+
             Row(
               children: [
                 Text( 'Description: ${widget.description}'   ,style: TextStyle(
                     color: kText),),
               ],
             ),
+            SizedBox(height:10.0),
+
             Row(
               children: [
                 Text('order Status: ${widget.ordersstatus}'   ,style: TextStyle(
                     color: kText),),
               ],
             ),
+            SizedBox(height:10.0),
+
             Row(
               children: [
                 Text('Address: ${widget.Address}',style: TextStyle(
                     color: kText),),
               ],
             ),
+            SizedBox(height:10.0),
 
             currency(advance: widget.usd,finalpay: widget.Fusd),
+            SizedBox(height:10.0),
+
             Row(
               children: [
                 Text('Total: \u0024 ${ int.tryParse(widget.usd) + int.tryParse(widget.Fusd,)}'  ,style: TextStyle(
                     color:kText),),
               ],
             ),
+            SizedBox(height:10.0),
+
             paymentbutton(amount: widget.usd,due: widget.Fusd,
               ownerId:widget.ownerId,
               cusName:widget.cusName,
               cusImg:widget.cusImg, ),
+            SizedBox(height:10.0),
+
+            fulfilled=='true'?
+            RaisedButton(onPressed:()=>Rating(fulfill:fulfilled,parentContext: parentContext,OwnerId: ownerId),color:kblue,child: Text('Rate Order',style:TextStyle(color: Colors.white)),):
+            Container(),
 
           ],
         ),
       );
   }
-  buildPostHeader() {
+  buildPostHeader(parentContext) {
     if(currentUser.country=='India'){
       return
-        postindia();
+        postindia(parentContext);
     }
     else if (currentUser.country == 'Europe') {
 
-      return posteurope();
+      return posteurope(parentContext);
 
     }
     else if (currentUser.country == 'UK')  {
-      return postuk();
+      return postuk(parentContext);
     }
     else if (currentUser.country == 'USA') {
-      return postusa();
+      return postusa(parentContext);
     }
     else{
-      return postusa();
+      return postusa(parentContext);
     }
 
   }
@@ -873,7 +899,7 @@ Get.to( PaymentSer(Amount:amount,OrderId: orderId,
 
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
-            buildPostHeader(),
+            buildPostHeader(context),
 
           ],
         ),

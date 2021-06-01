@@ -3724,70 +3724,6 @@ class _ProdEditState extends State<ProdEdit>
                                 child: AspectRatio(
                                     aspectRatio: 16 / 9,
                                     child: cachedNetworkImage(shopmediaUrl)))),
-                        Positioned.fill(
-                          child: Align(
-                            alignment: Alignment.topCenter,
-                            child:   ListTile(
-                              leading:FloatingActionButton(
-                                mini: true,
-                                backgroundColor:kText.withOpacity(0.5),
-                                child:Icon(Icons.arrow_back_ios,color: kText,),
-                                onPressed:() { Navigator.pop(context);},
-                              ),
-                              trailing: FloatingActionButton(
-                                mini: true,
-                                backgroundColor:kText.withOpacity(0.5),
-                                child:Icon(Icons.delete,color:Colors.red,),
-                                onPressed: () {
-                                  {
-                                    !isPostOwner?showDialog(
-                                        context: context,
-                                        builder: (BuildContext context) {
-                                          return Dialog(
-                                            backgroundColor: kSecondaryColor,
-                                            shape: RoundedRectangleBorder(
-                                                borderRadius:
-                                                BorderRadius.circular(20.0)), //this right here
-                                            child: Container(
-                                              height: 100,
-                                              child: Padding(
-                                                padding: const EdgeInsets.all(12.0),
-                                                child: Column(
-                                                  mainAxisAlignment: MainAxisAlignment.center,
-                                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                                  children: [
-                                                    Container(
-
-                                                      child: Align(
-                                                          alignment: Alignment.center,
-                                                          child: Text('Report this post?',style: TextStyle(
-                                                              color: Colors.blueAccent,
-                                                              fontWeight: FontWeight.bold,
-                                                              fontSize: 20.0),)),),
-//        ),FlatButton(
-//        onPressed: () {Navigator.pop(context);  Navigator.push(context, MaterialPageRoute(builder: (context) =>Profile( profileId: currentUser?.id)));
-//        },
-//
-//        child: Text('Delete this post?',style: TextStyle(
-//            color: Colors.blueAccent,
-//            fontWeight: FontWeight.bold,
-//            fontSize: 20.0),),
-//        ),
-
-                                                  ],
-                                                ),
-                                              ),
-                                            ),
-                                          );
-                                          // ignore: unnecessary_statements
-                                        }):handleDeletePost(context);
-                                  }
-                                  // do something
-                                },
-                              ),
-                            ),
-                          ),
-                        ),
                       ],
                     ),
 
@@ -3809,6 +3745,8 @@ class _ProdEditState extends State<ProdEdit>
   }
 
   buildPostHeader() {
+    bool isPostOwner = currentUserId == ownerId;
+
     return WillPopScope
       (
       onWillPop: _onBackPressed,
@@ -3820,75 +3758,128 @@ class _ProdEditState extends State<ProdEdit>
               icon: Icon(Icons.arrow_back, color: kSecondaryColor),
               onPressed:_onBackPressed),
           title: Text(
-            'Edit Shop',
+            'Update Inventory',
             style: TextStyle(color: Colors.white),
           ),
-          actions: [
-            FlatButton(
-              onPressed: () async{
-                isUploading ? null : handleSubmit();
 
-
-
-              },
-
-              child: Text(
-                "Post",
-                style: TextStyle(
-                    color: Colors.blueAccent,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 20.0),
-              ),
-            )
-          ],
         ),
         body:isLoading
             ? circularProgress()
-            : Stack(
+            : Container(
+          decoration: BoxDecoration(
+              gradient: fabGradient
+          ),
+          alignment: Alignment.center,
+              child: Stack(
           children:[
-            Column(
-              children: <Widget>[
-                isUploading ? linearProgress() : Text(""),
-                SizedBox(height: 8.0,),
+              Column(
+                children: <Widget>[
+                  isUploading ? linearProgress() : Text(""),
 
+                  postindia(),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
 
-                Row(
-                  mainAxisAlignment:MainAxisAlignment.center,
-                  children:[
-                    Container(
-                      // alignment:Alignment.centerLeft,
-                      child:   FloatingActionButton.extended(
+                    children: [
+                      FloatingActionButton.extended(
                         backgroundColor: kblue,
                         onPressed: ()=>AddSize(),
-                        label: Text('Update Size',style:TextStyle(color: kText) ,),
+                        label: Text('Update Inventory',style:TextStyle(color: Colors.white) ,),
                       ),
-                    ),
+                      FloatingActionButton(
+                        mini: true,
+                        backgroundColor:Colors.white.withOpacity(0.5),
+                        child:Icon(Icons.delete,color:Colors.red,),
+                        onPressed: () {
+                          {
+                            !isPostOwner?showDialog(
+                                context: context,
+                                builder: (BuildContext context) {
+                                  return Dialog(
+                                    backgroundColor: kSecondaryColor,
+                                    shape: RoundedRectangleBorder(
+                                        borderRadius:
+                                        BorderRadius.circular(20.0)), //this right here
+                                    child: Container(
+                                      height: 100,
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(12.0),
+                                        child: Column(
+                                          mainAxisAlignment: MainAxisAlignment.center,
+                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                          children: [
+                                            Container(
 
-                  ],
-                ),
+                                              child: Align(
+                                                  alignment: Alignment.center,
+                                                  child: Text('Report this post?',style: TextStyle(
+                                                      color: Colors.blueAccent,
+                                                      fontWeight: FontWeight.bold,
+                                                      fontSize: 20.0),)),),
+//        ),FlatButton(
+//        onPressed: () {Navigator.pop(context);  Navigator.push(context, MaterialPageRoute(builder: (context) =>Profile( profileId: currentUser?.id)));
+//        },
+//
+//        child: Text('Delete this post?',style: TextStyle(
+//            color: Colors.blueAccent,
+//            fontWeight: FontWeight.bold,
+//            fontSize: 20.0),),
+//        ),
 
-                SizedBox( height: 8.0,),
-
-                (_inProcess)?Container(
-                  color: Colors.white,
-                  height: MediaQuery.of(context).size.height * 0.95,
-                  child: Center(
-                    child: CircularProgressIndicator(),
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                  );
+                                  // ignore: unnecessary_statements
+                                }):handleDeletePost(context);
+                          }
+                          // do something
+                        },
+                      ),
+                    ],
                   ),
-                ):Center()
-              ],
-            ),
-            (_inProcess)?Container(
+                  SizedBox(height: 8.0,),
 
-              color: Colors.white,
-              height: MediaQuery.of(context).size.height * 0.95,
-              child: Center(
-                child: CircularProgressIndicator(),
+                  RaisedButton(
+                    color: kblue,
+
+                    onPressed: () async{
+                      isUploading ? null : handleSubmit();
+
+                    },
+                    child: Text(
+                      "Save",
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 20.0),
+                    ),
+                  ),
+
+                  SizedBox( height: 8.0,),
+
+                  (_inProcess)?Container(
+                    color: Colors.white,
+                    height: MediaQuery.of(context).size.height * 0.95,
+                    child: Center(
+                      child: CircularProgressIndicator(),
+                    ),
+                  ):Center()
+                ],
               ),
-            ):Center(),
-            isUploading ? Center(child:  CircularProgressIndicator()) : Text(""),
+              (_inProcess)?Container(
+
+                color: Colors.white,
+                height: MediaQuery.of(context).size.height * 0.95,
+                child: Center(
+                  child: CircularProgressIndicator(),
+                ),
+              ):Center(),
+              isUploading ? Center(child:  CircularProgressIndicator()) : Text(""),
           ],
         ),
+            ),
       ),
     );
 
@@ -3976,13 +3967,8 @@ class _ProdEditState extends State<ProdEdit>
 
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return            buildPostHeader();
 
-      mainAxisSize: MainAxisSize.min,
-      children: <Widget>[
-        buildPostHeader(),
-      ],
-    );
   }
 }
 

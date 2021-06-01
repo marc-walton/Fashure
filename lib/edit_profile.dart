@@ -49,6 +49,7 @@ class _EditProfileState extends State<EditProfile> {
   bool isCheckedHair = false;
   bool isCheckedChoreographer = false;
   bool isCheckedStylist = false;
+  bool isCheckedBlogger = false;
   bool CheckedDesigner ;
   bool CheckedIllustrator ;
   bool CheckedPhotographer ;
@@ -57,6 +58,8 @@ class _EditProfileState extends State<EditProfile> {
   bool CheckedHair ;
   bool CheckedChoreographer ;
   bool CheckedStylist ;
+    bool CheckedBlogger ;
+
   File file;
   bool isUploading = false;
   bool _inProcess = false;
@@ -167,8 +170,8 @@ async {
       CheckedPhotographer = doc.data['photographer'] ?? false;
       CheckedStylist = doc.data['stylist'] ?? false;
       CheckedDesigner = doc.data['designer'] ?? false;
+ CheckedBlogger = doc.data['blogger'] ?? false;
 
-print(CheckedIllustrator);
       if(CheckedDesigner==true){
     setState(() {
       isCheckedDesigner = true;
@@ -209,6 +212,12 @@ print(CheckedIllustrator);
       isCheckedStylist = true;
     });
   }
+   else if(CheckedBlogger==true){
+    setState(() {
+      isCheckedBlogger = true;
+    });
+  }
+
     });
   }); });
 
@@ -470,6 +479,32 @@ void toggleStylist(bool value) {
       });
     }
   }
+void toggleBlogger(bool value) {
+
+    if(isCheckedBlogger == false)
+    {
+      // Put your code here which you want to execute on CheckBox Checked event.
+      setState(() {
+        isCheckedBlogger = true;
+
+      });
+      usersRef.document(widget.currentUserId).updateData({
+   'blogger':true
+      });
+
+    }
+    else
+    {
+      // Put your code here which you want to execute on CheckBox Un-Checked event.
+      setState(() {
+        isCheckedBlogger = false;
+
+      });
+      usersRef.document(widget.currentUserId).updateData({
+        'blogger':false
+      });
+    }
+  }
 
   getUser() async {
     setState(() {
@@ -596,15 +631,7 @@ void toggleStylist(bool value) {
           ),
         iconTheme: new IconThemeData(color: Colors.white),
 //        ),
-        actions: <Widget>[
-          IconButton(
-              onPressed: () => Navigator.pop(context),
-              icon: Icon(
-                Icons.done,
-                size: 30.0,
-//                color: Colors.green,
-              ))
-        ],
+
       ),
       body: isLoading
           ? circularProgress()
@@ -661,8 +688,7 @@ void toggleStylist(bool value) {
                              ) ,
                          child: Column(
                            children: [
-                             // Text('I\'m a ',style: TextStyle(color: kText,fontSize: 30.0), ),
-                             // SizedBox(height: 10.0,),
+
                              ListTileTheme(
                          tileColor:kblue,
 
@@ -687,6 +713,15 @@ void toggleStylist(bool value) {
                                      checkColor: Colors.white,
                                      tristate: false,
                                    ),
+                                     CheckboxListTile(
+                                     title: Text('Blogger',style: TextStyle(color: Colors.white), ),
+                                     value: isCheckedBlogger,
+                                     onChanged: (value){toggleStylist(value);},
+                                     activeColor: Colors.pink,
+                                     checkColor: Colors.white,
+                                     tristate: false,
+                                   ),
+
                                    CheckboxListTile(
                                      title: Text('Illustrator',style: TextStyle(color: Colors.white), ),
                                      value: isCheckedIllustrator,

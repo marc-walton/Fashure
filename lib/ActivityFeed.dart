@@ -1,5 +1,4 @@
 import 'package:badges/badges.dart';
-import 'package:fashow/OrderView.dart';
 import 'package:fashow/Product_screen.dart';
 import 'package:fashow/SellerDash/alldash.dart';
 import 'package:fashow/SellerDash/sellerdashboard.dart';
@@ -22,6 +21,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:fashow/progress.dart';
 import 'package:fashow/HomePage.dart';
 import 'package:fashow/Constants.dart';
+import 'package:fashow/orders.dart';
 
 class  ActivityFeed extends StatefulWidget {
   @override
@@ -446,17 +446,6 @@ showClient(context) {
       ),
     );
   }
-showOrderView(context) {
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => OrderView(
-          ownerId:userId,
-          orderId:postId,
-        ),
-      ),
-    );
-  }
 showInvoiceView(context) {
   print(postId);
     Navigator.push(
@@ -484,6 +473,14 @@ showServiceDash(context) {
       MaterialPageRoute(
         builder: (context) => ServiceDash(
         ),
+      ),
+    );
+  }
+showOrders(context) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) =>  Orders( ),
       ),
     );
   }
@@ -684,7 +681,7 @@ payent(ParentContext){
           color: Color(0XFFb3b3ff).withOpacity(0.3),
           child: ListTile(
             title: GestureDetector(
-              onTap: () => showOrderView(ParentContext),
+              onTap: () => showOrders(ParentContext),
               child: RichText(
                 maxLines: 1,softWrap:false,overflow:TextOverflow.visible,                    text: TextSpan(
                   style: TextStyle(
@@ -814,7 +811,7 @@ payo(ParentContext){
           color: Color(0XFFb3b3ff).withOpacity(0.3),
           child: ListTile(
             title: GestureDetector(
-              onTap: () => showOrderView(ParentContext),
+              onTap: () => showSellerDash(ParentContext),
               child: RichText(
                 maxLines: 1,softWrap:false,overflow:TextOverflow.visible,                    text: TextSpan(
                   style: TextStyle(

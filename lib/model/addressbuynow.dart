@@ -135,7 +135,7 @@ class _AddressBuyState extends State<AddressBuy>  with AutomaticKeepAliveClientM
     return Scaffold(
 
       appBar: AppBar(
-
+backgroundColor: kPrimaryColor,
         title: FittedBox(
           fit: BoxFit.contain,
           child: Text(
@@ -257,7 +257,7 @@ addressview({  this.usd,
             shape: RoundedRectangleBorder(
               borderRadius:BorderRadius.circular(10),
             ),
-            color:Colors.transparent,
+            color:Colors.white,
             child: Padding(
               padding:EdgeInsets.only(left: 5.0),
               child: Row(

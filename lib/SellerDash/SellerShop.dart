@@ -32,15 +32,19 @@ class _SellerShopState extends State<SellerShop> {
           subtitle:            Text( "₹$inr",style: TextStyle(color: kText,
               fontSize: 20.0,
               fontWeight: FontWeight.bold)),
-trailing:                     FloatingActionButton.extended(heroTag:'editshop',onPressed: () => Navigator.push(
-  context,
-  MaterialPageRoute(
-    builder: (context) => EditShop(
-      prodId: prodId,
-      userId: ownerId,
-    ),
-  ),
-),icon: Icon(Icons.edit), label: Text('Edit',style: TextStyle(color:Colors.white),)),
+            trailing:                   RaisedButton(
+              color: kblue,
+              child: Text('Edit Inventory',style: TextStyle(color: Colors.white),),
+              onPressed: ()=> Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => EditShop(
+                    prodId: prodId,
+                    userId: ownerId,
+                  ),
+                ),
+              ),
+            )
 
         );
 
@@ -57,15 +61,19 @@ trailing:                     FloatingActionButton.extended(heroTag:'editshop',o
           subtitle:          Text( "\u0024 $usd",style: TextStyle(color: kText,
               fontSize: 20.0,
               fontWeight: FontWeight.bold)),
-          trailing:                     FloatingActionButton.extended(heroTag:'editshop',onPressed: () => Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => EditShop(
-                prodId: prodId,
-                userId: ownerId,
+            trailing:                   RaisedButton(
+              color: kblue,
+              child: Text('Edit Inventory',style: TextStyle(color: Colors.white),),
+              onPressed: ()=> Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => EditShop(
+                    prodId: prodId,
+                    userId: ownerId,
+                  ),
+                ),
               ),
-            ),
-          ),icon: Icon(Icons.edit), label: Text('Edit',style: TextStyle(color:Colors.white),)),
+            )
 
         );
 
@@ -83,15 +91,20 @@ trailing:                     FloatingActionButton.extended(heroTag:'editshop',o
           subtitle:           Text( "€ $eur",style: TextStyle(color: kText,
               fontSize: 20.0,
               fontWeight: FontWeight.bold)),
-          trailing:                     FloatingActionButton.extended(heroTag:'editshop',onPressed: () => Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => EditShop(
-                prodId: prodId,
-                userId: ownerId,
+          trailing:                   RaisedButton(
+            color: kblue,
+            child: Text('Edit Inventory',style: TextStyle(color: Colors.white),),
+            onPressed: ()=> Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => EditShop(
+                  prodId: prodId,
+                  userId: ownerId,
+                ),
               ),
             ),
-          ),icon: Icon(Icons.edit), label: Text('Edit',style: TextStyle(color:Colors.white),)),
+          )
+,
 
         );
 
@@ -108,15 +121,19 @@ trailing:                     FloatingActionButton.extended(heroTag:'editshop',o
           subtitle:                     Text( "£  $gbp ",style: TextStyle(color: kText,
               fontSize: 20.0,
               fontWeight: FontWeight.bold)),
-          trailing:                     FloatingActionButton.extended(heroTag:'editshop',onPressed: () => Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => EditShop(
-                prodId: prodId,
-                userId: ownerId,
+            trailing:                   RaisedButton(
+              color: kblue,
+              child: Text('Edit Inventory',style: TextStyle(color: Colors.white),),
+              onPressed: ()=> Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => EditShop(
+                    prodId: prodId,
+                    userId: ownerId,
+                  ),
+                ),
               ),
-            ),
-          ),icon: Icon(Icons.edit), label: Text('Edit',style: TextStyle(color:Colors.white),)),
+            )
 
 
         );
@@ -134,15 +151,19 @@ trailing:                     FloatingActionButton.extended(heroTag:'editshop',o
           subtitle:          Text( "\u0024 $usd",style: TextStyle(color: kText,
               fontSize: 20.0,
               fontWeight: FontWeight.bold)),
-          trailing:                     FloatingActionButton.extended(heroTag:'editshop',onPressed: () => Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => EditShop(
-                prodId: prodId,
-                userId: ownerId,
+            trailing:                   RaisedButton(
+              color: kblue,
+              child: Text('Edit Inventory',style: TextStyle(color: Colors.white),),
+              onPressed: ()=> Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => EditShop(
+                    prodId: prodId,
+                    userId: ownerId,
+                  ),
+                ),
               ),
-            ),
-          ),icon: Icon(Icons.edit), label: Text('Edit',style: TextStyle(color:Colors.white),)),
+            )
 
         );
 

@@ -1,9 +1,11 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:fashow/OrderView.dart';
 import 'package:fashow/invoiceview.dart';
 import 'package:flutter/material.dart';
 import 'package:fashow/HomePage.dart';
+import 'package:fashow/product_screen.dart';
+import 'package:smooth_star_rating/smooth_star_rating.dart';
+import 'package:uuid/uuid.dart';
 import 'package:paginate_firestore/paginate_firestore.dart';
 import 'package:fashow/Constants.dart';
 import 'package:contained_tab_bar_view/contained_tab_bar_view.dart';
@@ -14,96 +16,182 @@ class Orders extends StatefulWidget {
 }
 
 class _OrdersState extends State<Orders> {
-  shopOrders(){
-return
+  String reviewId = Uuid().v4();
+  TextEditingController reviewController = TextEditingController();
+  Rating({String fulfill,String ProdId,String OwnerId,parentContext}){
+    if(fulfill=='true') {
+      return
+      showModalBottomSheet(
+          context: parentContext,
+          builder: (BuildContext context) {
+            return
+              Container(
 
-    StreamBuilder(
-        stream: Firestore.instance.collection('ordersCustomer')
-            .document(currentUser.id)
-            .collection('userOrder')
-            .snapshots(),
-        // ignore: missing_return
-        builder: (context, snapshot) {
+                child:           Center(
+                  child: Column(
+                    children:[
+                      Text('Please rate the order',style: TextStyle(
+                          color: Colors.white),),
+                      SmoothStarRating(
+                        allowHalfRating: true,
+                        filledIconData: Icons.blur_off,
+                        halfFilledIconData: Icons.blur_on,
+                        rating: rating,
+                        size: 35,
+                        starCount: 5,
+                        onRated: (value) {
+                          setState(() {
+                            rating = value;
+                          });
+                        },
+                      ),
+                      TextField(
+                        controller: reviewController,
+                        decoration: InputDecoration(
+                          enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+                          focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
 
-          if (!snapshot.hasData||snapshot.data == null) {
-            return  Center(child: Text('No Orders',
-              // style: TextStyle(
-              //   fontFamily :"MajorMonoDisplay",
-              //   fontSize:  35.0 ,
-              //   color: Colors.white),
-            )
-            );
-          } else  {
-            return PaginateFirestore(
-//    itemsPerPage: 2,
-                itemBuilderType:
-                PaginateBuilderType.listView,
-                itemBuilder: (index, context, documentSnapshot)   {
-//        DocumentSnapshot ds = snapshot.data.documents[index];
-                  String ownerId = documentSnapshot.data['ownerId'];
-                  String prodId = documentSnapshot.data['prodId'];
-                  String orderStatus = documentSnapshot.data['orderStatus'];
-                  String size = documentSnapshot.data['size'];
-                  String Address = documentSnapshot.data['Address'];
-                  String orderId = documentSnapshot.data['orderId'];
-                  String fulfilled = documentSnapshot.data['fulfilled'];
+                          labelText: 'Review',labelStyle: TextStyle(color: kText),
+                          hintText: 'Review',
+                        ),
+                        textAlign: TextAlign.start,
+                      ),
+                      RaisedButton(
+                        onPressed: (){ Firestore.instance.collection('Reviews')
+                            .document(ProdId).collection('prodReviews').document(reviewId)
+                            .setData({
+                          'userId': OwnerId,
+                          'reviewId' : reviewId,
+                          'prodId':ProdId,
+                          'rating': rating,
+                          'review':reviewController.text,
+                        });
+                        Firestore.instance.collection('feed')
+                            .document(ProdId)
+                            .collection('feedItems')
+                            .document(reviewId)
+                            .setData({
+                          "type": "ReviewO",
+                          "username": currentUser.displayName,
+                          "userId": OwnerId,
+                          "userProfileImg": currentUser.photoUrl,
+                          "postId": ProdId,
+                          // "mediaUrl": mediaUrl,
+                          "timestamp": timestamp,
+                          "read": 'false',
+                          'message':'Your order received a review!',
+                        });},
+                        color: kblue,
+                      child: Text('Save',style: TextStyle(color: Colors.white),),)
+                    ],
+                  ),
+                ),
 
-                  return
-                    StreamBuilder(
-                        stream: productsRef.document(ownerId).collection('userProducts').document(prodId).snapshots(),
-                        // ignore: missing_return
-                        builder: (context, snapshot) {
+              );
 
-                          if (!snapshot.hasData|| snapshot.data == null) {
-                            return  Center(child: Text('No Orders',
-                              style: TextStyle(
-                                  fontFamily :"MajorMonoDisplay",
-                                  fontSize:  35.0 ,
-                                  color: Colors.white),
-                            )
-                            );
-                          } else  {
-                            return new Expanded(child:ListView.builder(
-                                shrinkWrap: true,
-                                itemCount: snapshot.data.documents.length,
-                                itemBuilder: (context, index) {
-                                  DocumentSnapshot ds = snapshot.data.documents[index];
-                                  return
-                                    Column(
-                                      children: [
-                                        GestureDetector(
-                                          onTap:(){
-                                            Navigator.push(
-                                                context,
-                                                MaterialPageRoute(
-                                                    builder: (context) =>  OrderView(orderId:orderId)));
-                                          },
-                                          child: ListTile(
-                                            leading:CachedNetworkImage(imageUrl: ds['shopmediUrl'],),
-                                            title: Text(ds['productname']),
-                                            subtitle: Text(orderStatus),
-                                          ),
-                                        )
-                                      ],
-                                    );
-                                }
-                            ));
-                            // ignore: unnecessary_statements
-                          }
-                        }
-                    );
-
-                },
-                query:  Firestore.instance.collection('ordersCustomer')
-                    .document(currentUser.id)
-                    .collection('userOrder')
-                    .orderBy('timestamp',descending: true)
-
-
-            );
           }
-        }
-    );
+      );
+
+
+    }
+    else{return
+      Text('');}
+  }
+
+  var rating = 0.0;
+  shopOrders(){
+return PaginateFirestore(
+//    itemsPerPage: 2,
+    itemBuilderType:
+    PaginateBuilderType.listView,
+    itemBuilder: (index, context, documentSnapshot)   {
+//        DocumentSnapshot ds = snapshot.data.documents[index];
+      String ownerId = documentSnapshot.data['ownerId'];
+      String prodId = documentSnapshot.data['prodId'];
+      String orderStatus = documentSnapshot.data['orderStatus'];
+      String size = documentSnapshot.data['size'];
+      String shopmediaUrl = documentSnapshot.data['shopmediaUrl'];
+      String orderId = documentSnapshot.data['orderId'];
+       String fulfilled = documentSnapshot.data['fulfilled'];
+
+      String productname = documentSnapshot.data['productname'];
+ String Address = documentSnapshot.data['Address'];
+String courierId = documentSnapshot.data['courierId'];
+String courier = documentSnapshot.data['courier'];
+
+      if (!documentSnapshot.exists) {
+        return  Center(child: Text('No Orders',
+          style: TextStyle(
+              fontFamily :"MajorMonoDisplay",
+              fontSize:  35.0 ,
+              color: Colors.white),
+        )
+        );
+      }
+      else{    return
+
+        Column(
+          children: [
+            ListTile(
+              leading:GestureDetector(onTap:   ()=>  Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => ProductScreen(
+                      prodId: prodId,
+                      userId: ownerId,
+                    ),)),
+                child: ClipRRect(
+                    borderRadius: BorderRadius.circular(15.0),
+                    child: Container(child: Image.network(shopmediaUrl),)),
+              ),
+              title: GestureDetector(onTap:   ()=>  Navigator.push(
+              context,
+              MaterialPageRoute(
+              builder: (context) => ProductScreen(
+              prodId: prodId,
+              userId: ownerId,
+              ),)),
+              child: Text(productname)),
+              subtitle: Text(orderStatus),
+              trailing: Text(size),
+            ),
+            SizedBox(height:10.0),
+
+            ListTile(
+              title: Text('Address:  $Address'),
+              subtitle: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text('Shipment company: $courierId'),
+                  SizedBox(height:10.0),
+
+                  Text('Tracking Id: $courier'),
+                  SizedBox(height:10.0),
+
+                  Text('Order Id: $orderId'),
+                  SizedBox(height:10.0),
+
+                  fulfilled=='true'?
+RaisedButton(onPressed:()=>Rating(fulfill:fulfilled,parentContext: context,OwnerId: ownerId,ProdId: prodId),color:kblue,child: Text('Rate Order',style:TextStyle(color: Colors.white)),):
+                      Container(),
+                ],
+              ),
+            ),
+
+          ],
+        );}
+
+
+
+    },
+    query:  Firestore.instance.collection('ordersCustomer')
+        .document(currentUser.id)
+        .collection('userOrder')
+        .orderBy('timestamp',descending: true)
+
+
+);
+
 
   }
   jobOrders(){
@@ -112,14 +200,7 @@ return
         itemBuilderType:
         PaginateBuilderType.listView,
         itemBuilder: (index, context, documentSnapshot)   {
-//        DocumentSnapshot ds = snapshot.data.documents[index];
-//
-//           'advancepay':'false',
-//           'finalpay':'false',
-//           if(documentSnapshot.data['final']=="") {
-//             return
-//
-//           }
+
           String ownerId = documentSnapshot.data['ownerId'];
           String prodId = documentSnapshot.data['prodId'];
           String orderStatus = documentSnapshot.data['orderStatus'];
@@ -144,7 +225,7 @@ String title = documentSnapshot.data['title'];
 return  Column(
   children: [
     GestureDetector(
-      onTap: () {print(orderId);
+      onTap: () {
 
         Navigator.push(
           context,
@@ -159,43 +240,7 @@ return  Column(
     )
   ],
 );}
-            // StreamBuilder(
-            //     stream: productsRef.document(ownerId).collection('userProducts').document(prodId).snapshots(),
-            //     // ignore: missing_return
-            //     builder: (context, snapshot) {
-            //
-            //       if (!snapshot.hasData) {
-            //         return  Center(child: Text('',
-            //           // style: TextStyle(
-            //           //   fontFamily :"MajorMonoDisplay",
-            //           //   fontSize:  35.0 ,
-            //           //   color: Colors.white),
-            //         )
-            //         );
-            //       } else  {
-            //         return new ListView.builder(
-            //             itemCount: snapshot.data.documents.length,
-            //             itemBuilder: (context, index) {
-            //               DocumentSnapshot ds = snapshot.data.documents[index];
-            //               return
-            //                 Column(
-            //                   children: [
-            //                     GestureDetector(
-            //                       onTap:(){},
-            //                       child: ListTile(
-            //                         leading:CachedNetworkImage(imageUrl: ds['shopmediUrl'],),
-            //                         title: Text(ds['productname']),
-            //                         subtitle: Text(orderStatus),
-            //                       ),
-            //                     )
-            //                   ],
-            //                 );
-            //             }
-            //         );
-            //         // ignore: unnecessary_statements
-            //       }
-            //     }
-            // );
+
 
         },
         query:   Firestore.instance.collection('serviceCustomer')
@@ -205,35 +250,7 @@ return  Column(
 
 
     );
-    // StreamBuilder(
-    //     stream: Firestore.instance.collection('ordersCustomer')
-    //         .document(currentUser.id)
-    //         .collection('userOrder')
-    //         .snapshots(),
-    //     // ignore: missing_return
-    //     builder: (context, snapshot) {
-    //
-    //       if (!snapshot.hasData) {
-    //         return  Center(child: Text('',
-    //           // style: TextStyle(
-    //           //   fontFamily :"MajorMonoDisplay",
-    //           //   fontSize:  35.0 ,
-    //           //   color: Colors.white),
-    //         )
-    //         );
-    //       } else  {
-    //         return new ListView.builder(
-    //             itemCount: snapshot.data.documents.length,
-    //             itemBuilder: (context, index) {
-    //               DocumentSnapshot ds = snapshot.data.documents[index];
-    //               return
-    //
-    //             }
-    //         );
-    //         // ignore: unnecessary_statements
-    //       }
-    //     }
-    // ),
+
 
   }
   @override

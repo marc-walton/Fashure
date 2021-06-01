@@ -1592,18 +1592,7 @@ return Container();
     String Phone = adPrefs.getString('phone') ?? '';
     String Country = adPrefs.getString('country') ?? '';
     String Code = adPrefs.getString('code') ?? '';
-    // StreamBuilder(
-    //     stream: cartRef.document(currentUser.id)
-    //         .collection('userCart')
-    //         .orderBy('timestamp', descending:true)
-    //         .snapshots(),
-    //     // ignore: missing_return
-    //     builder: (context, snapshot) {
-    //
-    //       prodId = snapshot.data['prodId'];
-    //       ownerId = snapshot.data['ownerId'];
-    //       widget.size = snapshot.data['userSize'];
-    //     });
+
     Firestore.instance.collection('ordersSeller')
         .document(widget.ownerId)
         .collection('sellerOrder')
@@ -1614,7 +1603,10 @@ return Container();
       'orderId':orderId,
       'fulfilled':'false',
       "timestamp": timestamp,
-
+ "productname": widget.productname,
+ "shopmediaUrl": widget.mediaUrl,
+      'courierId': "awaiting seller fulfilment",
+      'courier': "awaiting seller fulfilment",
       'orderStatus':'Processing',
       'read':'false',
       'Address':'$Fullname\n,$Addresss\n,$City,$State,$Country\n,$Zip\n,$Code $Phone',
@@ -1628,6 +1620,10 @@ return Container();
       'size':widget.size,
       'orderId':orderId,
       "timestamp": timestamp,
+      "productname": widget.productname,
+      "shopmediaUrl": widget.mediaUrl,
+      'courierId': "awaiting seller fulfillment",
+      'courier': "awaiting seller fulfillment",
 
       'fulfilled':'false',
       'orderStatus':'Processing',
@@ -1692,12 +1688,7 @@ payment();
 
   @override
   Widget build(BuildContext context) {
-  return  WillPopScope(
-      onWillPop:()=>  Get.off( ProductScreen(
-        prodId: widget.prodId,
-        userId: widget.ownerId,
-      ),) ,
-    child:  openCheckout());
+  return  openCheckout();
   }
 
 }

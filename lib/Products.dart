@@ -10187,18 +10187,23 @@ TeenSizes(){
                           ),
                         ),
                         trailing: !isPostOwner? FloatingActionButton(
+                          heroTag:null,
                           onPressed: () => Buynow(context),
                           child: Icon(Icons.add_shopping_cart,),
                           shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(16.0))),
-                        ): FloatingActionButton.extended(heroTag:'editshop',onPressed: () => Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => EditShop(
-                              prodId: prodId,
-                              userId: ownerId,
+                        ): RaisedButton(
+                          color: kblue,
+                          child: Text('Edit Inventory',style: TextStyle(color: Colors.white),),
+                          onPressed: ()=> Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => EditShop(
+                                prodId: prodId,
+                                userId: ownerId,
+                              ),
                             ),
                           ),
-                        ),icon: Icon(Icons.edit), label: Text('Edit',style: TextStyle(color:Colors.white),)),
+                        ),
                     ),
                   ),
 
@@ -10588,18 +10593,24 @@ posteurope(){
                         ),
                       ),
                       trailing: !isPostOwner? FloatingActionButton(
+                        heroTag:null,
+
                         onPressed: () => Buynow(context),
                         child: Icon(Icons.add_shopping_cart,),
                         shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(16.0))),
-                      ): FloatingActionButton.extended(heroTag:'editshop',onPressed: () => Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => EditShop(
-                            prodId: prodId,
-                            userId: ownerId,
+                      ): RaisedButton(
+                        color: kblue,
+                        child: Text('Edit Inventory',style: TextStyle(color: Colors.white),),
+                        onPressed: ()=> Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => EditShop(
+                              prodId: prodId,
+                              userId: ownerId,
+                            ),
                           ),
                         ),
-                      ),icon: Icon(Icons.edit), label: Text('Edit',style: TextStyle(color:Colors.white),)),
+                      ),
                     ),
                   ),
 
@@ -10991,18 +11002,24 @@ postuk(){
                         ),
                       ),
                       trailing: !isPostOwner? FloatingActionButton(
+                        heroTag:null,
+
                         onPressed: () => Buynow(context),
                         child: Icon(Icons.add_shopping_cart,),
                         shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(16.0))),
-                      ): FloatingActionButton.extended(heroTag:'editshop',onPressed: () => Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => EditShop(
-                            prodId: prodId,
-                            userId: ownerId,
+                      ): RaisedButton(
+                        color: kblue,
+                        child: Text('Edit Inventory',style: TextStyle(color: Colors.white),),
+                        onPressed: ()=> Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => EditShop(
+                              prodId: prodId,
+                              userId: ownerId,
+                            ),
                           ),
                         ),
-                      ),icon: Icon(Icons.edit), label: Text('Edit',style: TextStyle(color:Colors.white),)),
+                      ),
                     ),
                   ),
 
@@ -11386,18 +11403,24 @@ postusa() {
                         ),
                       ),
                       trailing: !isPostOwner? FloatingActionButton(
+                        heroTag:null,
+
                         onPressed: () => Buynow(context),
                         child: Icon(Icons.add_shopping_cart,),
                         shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(16.0))),
-                      ): FloatingActionButton.extended(heroTag:'editshop',onPressed: () => Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => EditShop(
-                            prodId: prodId,
-                            userId: ownerId,
+                      ): RaisedButton(
+                        color: kblue,
+                        child: Text('Edit Inventory',style: TextStyle(color: Colors.white),),
+                        onPressed: ()=> Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => EditShop(
+                              prodId: prodId,
+                              userId: ownerId,
+                            ),
                           ),
                         ),
-                      ),icon: Icon(Icons.edit), label: Text('Edit',style: TextStyle(color:Colors.white),)),
+                      )
                     ),
                   ),
 

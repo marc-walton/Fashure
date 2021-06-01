@@ -20,6 +20,7 @@ import 'package:fashow/Categories/Kids/baby/boy/ETHNIC.dart';
 import 'package:fashow/Categories/Kids/baby/boy/hats.dart';
 import 'package:fashow/Categories/Kids/baby/boy/ties.dart';
 import 'package:fashow/ActivityFeed.dart';
+import 'package:fashow/products.dart';
 
 import 'package:fashow/Categories/Men/Coats.dart';
 import 'package:fashow/Categories/Men/jacketmen.dart';
@@ -149,9 +150,9 @@ import 'package:fashow/Categories/Kids/kids/boy/Trousers.dart';
 import 'package:fashow/Categories/Kids/kids/boy/ETHNIC.dart';
 import 'package:fashow/Constants.dart';
 import 'package:get/get.dart';
-import 'package:fashow/methods/data_model.dart';
-import 'package:fashow/methods/firestore_search.dart';
+
 import 'package:fashow/methods/card_user.dart';
+import 'package:fashow/methods/card_prod.dart';
 
 class ShopSearch extends StatefulWidget {
   @override
@@ -4738,11 +4739,10 @@ else{return null;}
     return SafeArea(
       child: DefaultTabController(
 
-        length:2,
+        length:3,
         child: Scaffold(
           appBar:AppBar(
-            title: Text('Search by',style: TextStyle(color: kText),),
-            toolbarHeight: SizeConfig.safeBlockHorizontal * 8,
+            title: Text('Search by',style: TextStyle(color: Colors.white),),
             backgroundColor: kPrimaryColor,
             elevation: 0,
             bottom: TabBar(
@@ -4753,6 +4753,7 @@ else{return null;}
               tabs:[
                 Text("Category",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5,),),
                 Text("Designer",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5),),
+ Text("Product",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5),),
 
               ],
             ),
@@ -4776,10 +4777,10 @@ else{return null;}
                             unSelectedTextColor: kText,
                             selectedTextColor: kText,
                             hintText: 'Search',
-                            itemsShownAtStart: 10,
+                            itemsShownAtStart: 20,
                             singleItemHeight: 60.0,
                             data: names,
-                            maxElementsToDisplay: 8,
+                            maxElementsToDisplay: 20,
                             onItemTap: (int index) {
                               //Do something cool
                               print(index);
@@ -4791,6 +4792,7 @@ else{return null;}
                       ),
                     ),
              SearchDesigner(),
+                    SearchProduct(),
                   ]),
 
 
@@ -4872,30 +4874,175 @@ class _SearchDesignerState extends State<SearchDesigner> {
     searchResultsList();
     return "complete";
   }
+  clearSearch() {
+    _searchController.clear();
+  }
+  AppBar buildSearchField() {
+    return AppBar(
+      automaticallyImplyLeading: false,
+      backgroundColor:kPrimaryColor,
+      title: TextFormField(
+        style:  TextStyle(color: Colors.white),
+        controller: _searchController,
+        decoration: InputDecoration(
+          hintText: "Search for a user...",
+          hintStyle: TextStyle(color: Colors.white),
+
+          filled: true,
+          prefixIcon: Icon(
+            Icons.account_box,
+            size: 28.0,
+              color: Colors.white
+          ),
+          suffixIcon: IconButton(
+            icon: Icon(Icons.clear,
+                color: Colors.white),
+            onPressed: clearSearch,
+          ),
+        ),
+      ),
+    );
+  }
 
   Widget build(BuildContext context) {
-    return Container(
-      child: Column(
-        children: <Widget>[
-          Text("Search Users", style: TextStyle(fontSize: 20)),
-          Padding(
-            padding: const EdgeInsets.only(left: 30.0, right: 30.0, bottom: 30.0),
-            child: TextField(
-              controller: _searchController,
-              decoration: InputDecoration(
-                  prefixIcon: Icon(Icons.search)
-              ),
-            ),
-          ),
-          Expanded(
-              child: ListView.builder(
-                itemCount: _resultsList.length,
-                itemBuilder: (BuildContext context, int index) =>
-                    buildCard(context, _resultsList[index]),
-              )
+    return Scaffold(
+      appBar: buildSearchField(),
+      body: Container(
+        decoration: BoxDecoration(
+            gradient: fabGradient
+        ),
+        alignment: Alignment.center,
+        child: Column(
+          children: <Widget>[
+            Expanded(
+                child: ListView.builder(
+                  itemCount: _resultsList.length,
+                  itemBuilder: (BuildContext context, int index) =>
+                      buildCard(context, _resultsList[index]),
+                )
 
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class SearchProduct extends StatefulWidget {
+  @override
+  _SearchProductState createState() => _SearchProductState();
+}
+
+class _SearchProductState extends State<SearchProduct> {
+  TextEditingController _searchController = TextEditingController();
+
+  Future resultsLoaded;
+  List _allResults = [];
+  List _resultsList = [];
+
+  @override
+  void initState() {
+    super.initState();
+    _searchController.addListener(_onSearchChanged);
+  }
+
+  @override
+  void dispose() {
+    _searchController.removeListener(_onSearchChanged);
+    _searchController.dispose();
+    super.dispose();
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    resultsLoaded = getUsersPastTripsStreamSnapshots();
+  }
+
+
+  _onSearchChanged() {
+    searchResultsList();
+  }
+
+  searchResultsList() {
+    var showResults = [];
+
+    if(_searchController.text != "") {
+      for(var tripSnapshot in _allResults){
+        var title = Prod.fromDocument(tripSnapshot).productname.toLowerCase();
+
+        if(title.contains(_searchController.text.toLowerCase())) {
+          showResults.add(tripSnapshot);
+        }
+      }
+
+    } else {
+      showResults = List.from(_allResults);
+    }
+    setState(() {
+      _resultsList = showResults;
+    });
+  }
+
+  getUsersPastTripsStreamSnapshots() async {
+    var data = await Firestore.instance
+        .collectionGroup('userProducts')
+    // .document(uid)
+    // .collection('trips')
+    // .orderBy('endDate')
+        .getDocuments();
+    setState(() {
+      _allResults = data.documents;
+    });
+    searchResultsList();
+    return "complete";
+  }
+  clearSearch() {
+    _searchController.clear();
+  }
+  AppBar buildSearchField() {
+    return AppBar(
+      automaticallyImplyLeading: false,
+      backgroundColor:kPrimaryColor,
+      title: TextFormField(
+        style:  TextStyle(color: Colors.white),
+        controller: _searchController,
+        decoration: InputDecoration(
+          hintText: "Search for a product...",
+          hintStyle: TextStyle(color: Colors.white),
+
+          filled: true,
+
+          suffixIcon: IconButton(
+            icon: Icon(Icons.clear,
+                color: Colors.white),
+            onPressed: clearSearch,
           ),
-        ],
+        ),
+      ),
+    );
+  }
+
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: buildSearchField(),
+      body: Container(
+        decoration: BoxDecoration(
+            gradient: fabGradient
+        ),
+        alignment: Alignment.center,        child: Column(
+          children: <Widget>[
+            Expanded(
+                child: ListView.builder(
+                  itemCount: _resultsList.length,
+                  itemBuilder: (BuildContext context, int index) =>
+                      buildprod(context, _resultsList[index]),
+                )
+
+            ),
+          ],
+        ),
       ),
     );
   }

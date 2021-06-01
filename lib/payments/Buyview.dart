@@ -104,7 +104,7 @@ Widget st()
     shape: RoundedRectangleBorder(
       borderRadius:BorderRadius.circular(10),
     ),
-    color: Color(0XFFb3b3ff).withOpacity(0.3),
+    color: Colors.white,
     child: Expanded(
       child:  new  Column(children: <Widget>[
 

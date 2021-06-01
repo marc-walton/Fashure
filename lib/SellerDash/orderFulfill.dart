@@ -14,6 +14,8 @@ class OrderFulfill extends StatefulWidget {
 class _OrderFulfillState extends State<OrderFulfill> {
   final _formKey = GlobalKey<FormState>();
   TextEditingController courierIdController = TextEditingController();
+  TextEditingController courierController = TextEditingController();
+
 submit(){
   Firestore.instance.collection('ordersSeller')
       .document(widget.ownerId)
@@ -22,6 +24,8 @@ submit(){
       .updateData({
     'fulfilled':'true',
     'courierId': courierIdController.text,
+    'courier': courierController.text,
+
     'orderStatus':'Order Shipped',
     "timestamp": timestamp,
 
@@ -33,6 +37,8 @@ submit(){
       .updateData({
     'fulfilled':'true',
     'courierId': courierIdController.text,
+      'courier': courierController.text,
+
     'orderStatus':'Order Shipped',
     "timestamp": timestamp,
 
@@ -72,6 +78,24 @@ submit(){
                 Center(child: Text('Enter Shipment tracking ID',style: TextStyle(color: kText)),),
                 TextFormField(
                   style: TextStyle(color: kText),
+                  controller: courierController,
+                  decoration: InputDecoration(
+                    enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+                    focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+
+                    labelText: 'Delivery provider name',labelStyle: TextStyle(color: kText),
+                    hintText: 'Delivery provider mame',
+                  ),
+                  textAlign: TextAlign.center,
+                  validator: (text) {
+                    if ( text.isEmpty) {
+                      return 'Delivery provider name is empty';
+                    }
+                    return null;
+                  },
+                ),
+                 TextFormField(
+                  style: TextStyle(color: kText),
                   controller: courierIdController,
                   decoration: InputDecoration(
                     enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
@@ -88,6 +112,7 @@ submit(){
                     return null;
                   },
                 ),
+
                 Center(
                   child: RaisedButton(
                     onPressed: () {
