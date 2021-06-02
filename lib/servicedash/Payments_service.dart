@@ -13,12 +13,10 @@ class _ServicePaymentsState extends State<ServicePayments> {
   df({String productname,
     String usd,
     String inr,
-    String cny,
     String eur,
     String gbp,
      String Fusd,
     String Finr,
-    String Fcny,
     String Feur,
     String Fgbp,
     String orderId,
@@ -248,12 +246,10 @@ class _ServicePaymentsState extends State<ServicePayments> {
               String fulfilled = documentSnapshot.data['fulfilled'];
               String title = documentSnapshot.data['title'];
               String inr = documentSnapshot.data['inr'];
-              String cny = documentSnapshot.data['cny'];
               String usd = documentSnapshot.data['usd'];
               String eur = documentSnapshot.data['eur'];
               String gbp = documentSnapshot.data['gbp'];
               String Finr = documentSnapshot.data['Finr'];
-              String Fcny = documentSnapshot.data['Fcny'];
               String Fusd = documentSnapshot.data['Fusd'];
               String Feur = documentSnapshot.data['Feur'];
               String Fgbp = documentSnapshot.data['Fgbp'];

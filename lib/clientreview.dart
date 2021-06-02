@@ -39,39 +39,45 @@ class _ClientReviewState extends State<ClientReview> {
                 }
                 User user = User.fromDocument(snapshot.data);
 //          bool isPostOwner = currentUserId == ownerId;
-                return Column(
-                  children: <Widget>[
-                    GestureDetector(
-                      onTap: () => showProfile(context, profileId: user.id),
-                      child: ListTile(
-                        leading: CircleAvatar(
-                          backgroundImage: CachedNetworkImageProvider(user.photoUrl),
-                          backgroundColor: Colors.grey,
-                        ),
-                        title: Text(
-                          user.displayName,
-                          style: TextStyle(
-                            color: kText,
-                            fontWeight: FontWeight.bold,
+                return Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Column(
+                    children: <Widget>[
+                      GestureDetector(
+                        onTap: () => showProfile(context, profileId: user.id),
+                        child: ListTile(
+                          leading: CircleAvatar(
+                            backgroundImage: CachedNetworkImageProvider(user.photoUrl),
+                            backgroundColor: Colors.grey,
                           ),
-                        ),
-                        subtitle: Text(user.username,
-                          style: TextStyle(color: kIcon),),),
-                    ),
-                    SmoothStarRating(
-                      isReadOnly: true,
-                      filledIconData: Icons.blur_off,
-                      halfFilledIconData: Icons.blur_on,
-                      rating: rating,
-                      size: 35,
-                      starCount: 5,
+                          title: Text(
+                            user.displayName,
+                            style: TextStyle(
+                              color: kText,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                     ),
+                      ),
+                      SmoothStarRating(
+                        isReadOnly: true,
+                        filledIconData: Icons.star,
+                        halfFilledIconData: Icons.star_half,
+                        rating: rating,
+                        size: 35,
+                        starCount: 5,
 
-                    ),
-                    SizedBox(height: 8.0,),
-                    Text(review,style: TextStyle(color: Colors.white),),
-                    Divider(color: kGrey,),
-                  ],
+                      ),
+                      SizedBox(height: 8.0,),
+                      Row(
+                        children: [
+                          Text(review,style: TextStyle(color:kText),),
+                        ],
+                      ),
+                      Divider(color: kGrey,),
+                    ],
 
+                  ),
                 );
 
               },

@@ -356,7 +356,7 @@ final bool worldship;
   bool isfav;
   bool showHeart = false;
   bool details1 = true;
-
+int xx;
 
   _ProdState({
     this.prodId,
@@ -9648,6 +9648,42 @@ TeenSizes(){
       usd:usd,
       inr:inr,
       gbp:gbp,
+        xxxs: xxxs,
+        xxs: xxs,
+        xs: xs,
+        s: s,
+        m: m,
+        l: l,
+        xl: xl,
+        xxl: xxl,
+        xxxl: xxxl,
+        fourxl: fourxl,
+        fivexl: fivexl,
+        sixxl: sevenxl,
+        eightxl: eightxl,
+        Shoe1: Shoe1,
+        Shoe2: Shoe2,
+        Shoe3: Shoe3,
+        Shoe4: Shoe4,
+        Shoe5: Shoe5,
+        Shoe6: Shoe6,
+        Shoe7: Shoe7,
+        Shoe8: Shoe8,
+        Shoe9: Shoe9,
+        Shoe10: Shoe10,
+        Shoe11: Shoe11,
+        Shoe12: Shoe12,
+        Shoe13: Shoe13,
+        Shoe14: Shoe14,
+        Shoe15: Shoe15,
+        Shoe16: Shoe16,
+        Shoe17: Shoe17,
+        Shoe18: Shoe18,
+        Shoe19: Shoe19,
+        Shoe20: Shoe20,
+        Shoe21: Shoe21,
+        mto: mto,
+        freeSize: freesize,
 
     )));
 
@@ -9889,6 +9925,7 @@ TeenSizes(){
     handleLikePost();
   }
   reviews() {
+    return
     showModalBottomSheet(
         backgroundColor: kSecondaryColor,
         context: context,
@@ -9913,39 +9950,45 @@ TeenSizes(){
                       }
                       User user = User.fromDocument(snapshot.data);
 //          bool isPostOwner = currentUserId == ownerId;
-                      return Column(
-                        children: <Widget>[
-                          GestureDetector(
-                            onTap: () => showProfile(context, profileId: user.id),
-                            child: ListTile(
-                              leading: CircleAvatar(
-                                backgroundImage: CachedNetworkImageProvider(user.photoUrl),
-                                backgroundColor: Colors.grey,
-                              ),
-                              title: Text(
-                                user.displayName,
-                                style: TextStyle(
-                                  color: kText,
-                                  fontWeight: FontWeight.bold,
+                      return Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Column(
+                          children: <Widget>[
+                            GestureDetector(
+                              onTap: () => showProfile(context, profileId: user.id),
+                              child: ListTile(
+                                leading: CircleAvatar(
+                                  backgroundImage: CachedNetworkImageProvider(user.photoUrl),
+                                  backgroundColor: Colors.grey,
                                 ),
-                              ),
-                              subtitle: Text(user.username,
-                                style: TextStyle(color: kIcon),),),
-                          ),
-                          SmoothStarRating(
-                            isReadOnly: true,
-                            filledIconData: Icons.blur_off,
-                            halfFilledIconData: Icons.blur_on,
-                            rating: rating,
-                            size: 35,
-                            starCount: 5,
+                                title: Text(
+                                  user.displayName,
+                                  style: TextStyle(
+                                    color: kText,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                    ),
+                            ),
+                            SmoothStarRating(
+                              isReadOnly: true,
+                              filledIconData: Icons.star,
+                              halfFilledIconData: Icons.star_half,
+                              rating: rating,
+                              size: 35,
+                              starCount: 5,
 
-                          ),
-                          SizedBox(height: 8.0,),
-                          Text(review,style: TextStyle(color: Colors.white),),
-                          Divider(color: kGrey,),
-                        ],
+                            ),
+                            SizedBox(height: 8.0,),
+                            Row(
+                              children: [
+                                Text(review,style: TextStyle(color: kText),),
+                              ],
+                            ),
+                            Divider(color: kGrey,),
+                          ],
 
+                        ),
                       );
 
                     },

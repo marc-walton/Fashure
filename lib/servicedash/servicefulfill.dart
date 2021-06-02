@@ -5,8 +5,9 @@ import 'package:fashow/HomePage.dart';
 class ServiceFulfill extends StatefulWidget {
   final String ownerId;
   final String orderId;
+final String cusId;
 
-  const ServiceFulfill({Key key, this.ownerId, this.orderId}) : super(key: key);
+  const ServiceFulfill({Key key, this.ownerId, this.orderId, this.cusId}) : super(key: key);
   @override
   _ServiceFulfillState createState() => _ServiceFulfillState();
 }
@@ -17,26 +18,27 @@ class _ServiceFulfillState extends State<ServiceFulfill> {
 
   TextEditingController courierIdController = TextEditingController();
   Client(){
-    StreamBuilder(
-      stream:Firestore.instance.collection('users')
-          .document(widget.ownerId).snapshots(),
-      builder:(context,snapshot){
-         client = snapshot.data['client'];
-        setState(() {
-          Firestore.instance.collection('users')
-              .document(widget.ownerId)
-              .updateData({'client': client++,
-          });
-        });
-        return
-          Container();
-      },
-    );
+    Firestore.instance.collection('users')
+        .where("id",isEqualTo:"${widget.ownerId}")
+        .snapshots().listen((snapshot){snapshot.documents.forEach((doc){
+
+      setState(() {
+        client = doc.data['client'];
+
+      });});
+
+    });
+    client++;
+
+    Firestore.instance.collection('users')
+        .document(widget.ownerId)
+        .updateData({'client': client,
+    });
   }
   submit(){
-    Firestore.instance.collection('ordersSeller')
+    Firestore.instance.collection('serviceSeller')
         .document(widget.ownerId)
-        .collection('sellerOrder')
+        .collection('sellerService')
         .document(widget.orderId)
         .updateData({
       'fulfilled':'true',
@@ -45,9 +47,9 @@ class _ServiceFulfillState extends State<ServiceFulfill> {
       'remarks': courierIdController.text??"",
       'orderStatus':'Order Shipped',
     });
-    Firestore.instance.collection('ordersCustomer')
-        .document(currentUser.id)
-        .collection('userOrder')
+    Firestore.instance.collection('serviceCustomer')
+        .document(widget.cusId)
+        .collection('customerService')
         .document(widget.orderId)
         .updateData({
       'fulfilled':'true',
@@ -56,71 +58,89 @@ class _ServiceFulfillState extends State<ServiceFulfill> {
       'remarks': courierIdController.text ?? "",
       'orderStatus':'Order Shipped',
     }); Firestore.instance.collection('feed')
-        .document(currentUser.id)
+        .document(widget.cusId)
         .collection('feedItems')
         .document(widget.orderId)
         .updateData({'message':'Your order is being shipped!',
       "timestamp": timestamp,
-
+      "type": "ServicePayment",
+      "username": currentUser.displayName,
+      "userId": widget.ownerId,
+      "userProfileImg": currentUser.photoUrl,
+      "postId": widget.orderId,
+      // "mediaUrl": mediaUrl,
+      "read": 'false',
     });Firestore.instance.collection('feed')
         .document(widget.ownerId)
         .collection('feedItems')
         .document(widget.orderId)
         .updateData({'message':'You fulfilled an order!',
       "timestamp": timestamp,
-
+      "type": "ServicePaymentI",
+      "username": currentUser.displayName,
+      "userId": widget.ownerId,
+      "userProfileImg": currentUser.photoUrl,
+      "postId": widget.orderId,
+      // "mediaUrl": mediaUrl,
+      "read": 'false',
     });
 
   Client();
   }
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: kPrimaryColor,
+    return SafeArea(
+      child: Scaffold(
+        appBar: AppBar(
+          backgroundColor: kPrimaryColor,
 
-       ),
+         ),
 
-      body: Container(   decoration: BoxDecoration(
-          gradient: fabGradient
-      ) ,
-        alignment: Alignment.center,
-        child: Form(
-          key: _formKey,
-          child: ListView(
-            // scrollDirection: Axis.vertical,
-            children: [
-              Container(child: Column(children:[
-                // Center(child: Text('Remarks',style: TextStyle(color: kText)),),
-                TextFormField(
-                  style: TextStyle(color: kText),
-                  controller: courierIdController,
-                  decoration: InputDecoration(
-                    enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
-                    focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+        body: Container(   decoration: BoxDecoration(
+            gradient: fabGradient
+        ) ,
+          alignment: Alignment.center,
+          child: Form(
+            key: _formKey,
+            child: ListView(
+              // scrollDirection: Axis.vertical,
+              children: [
+                Container(child: Column(children:[
+                  // Center(child: Text('Remarks',style: TextStyle(color: kText)),),
+                  SizedBox(height: 20.0,),
 
-                    labelText: 'Remarks',labelStyle: TextStyle(color: kText),
-                    hintText: 'Remarks',
+                  TextFormField(
+                    style: TextStyle(color: kText),
+                    controller: courierIdController,
+                    decoration: InputDecoration(
+                      enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+                      focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+
+                      labelText: 'Remarks',labelStyle: TextStyle(color: kText),
+                      hintText: 'Remarks',
+                    ),
+                    textAlign: TextAlign.center,
+
                   ),
-                  textAlign: TextAlign.center,
+                  SizedBox(height: 20.0,),
 
-                ),
-                Center(
-                  child: RaisedButton(
-                    onPressed: () {
+                  Center(
+                    child: RaisedButton(
+                      onPressed: () {
 
-                        // ignore: unnecessary_statements
-                        submit();
-                        Navigator.pop(context);
+                          // ignore: unnecessary_statements
+                          submit();
+                          Navigator.pop(context);
 
-                    },
-                    color: kblue,
-                    child: Text('Submit',style: TextStyle(color: Colors.white)),
-                  ),
-                )
-              ]),),
+                      },
+                      color: kblue,
+                      child: Text('Submit',style: TextStyle(color: Colors.white)),
+                    ),
+                  )
+                ]),),
 
-            ],
+              ],
+            ),
           ),
         ),
       ),

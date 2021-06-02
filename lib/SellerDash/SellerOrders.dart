@@ -21,133 +21,6 @@ class SellerOrders extends StatefulWidget {
 
 class _SellerOrdersState extends State<SellerOrders> {
 
-  df({String productname,String usd,String inr,String cny,String eur,String gbp,String prodId,String ownerId,}){
-
-    if(currentUser.country=='India'){
-      return
-        Column(
-          children: <Widget>[
-            ListTile(
-              title: Text(productname, style: TextStyle(
-                  color: kText,
-                  fontSize: 20.0,
-                  fontWeight: FontWeight.bold),),
-            ),
-
-            ListTile(
-              title:            Text( "₹$inr",style: TextStyle(color: kText,
-                  fontSize: 20.0,
-                  fontWeight: FontWeight.bold)),
-
-            ),
-
-
-          ],
-        );
-
-    }
-    else if(currentUser.country=='US'){
-      return
-        Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: <Widget>[
-            ListTile(
-              title: Text(productname, style: TextStyle(
-                  color: kText,
-                  fontSize: 20.0,
-                  fontWeight: FontWeight.bold),),
-            ),
-
-            ListTile(
-              title:            Text( " \u0024 $usd",style: TextStyle(color:  kText,
-                  fontSize: 20.0,
-                  fontWeight: FontWeight.bold)),
-
-            ),
-
-
-
-          ],
-        );
-
-    }
-
-    else if (currentUser.country == 'Europe'){
-      return
-        Column(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: <Widget>[
-            ListTile(
-              title: Text(productname, style: TextStyle(
-                  color:kText,
-                  fontSize: 20.0,
-                  fontWeight: FontWeight.bold),),
-            ),
-
-            ListTile(
-              title:            Text( " € $eur",style: TextStyle(color: kText,
-                  fontSize: 20.0,
-                  fontWeight: FontWeight.bold)),
-
-            ),
-
-
-
-          ],
-        );
-
-    }
-    else if (currentUser.country == 'UK'){
-      return
-        Column(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: <Widget>[
-            ListTile(
-              title: Text(productname, style: TextStyle(
-                  color: kText,
-                  fontSize: 20.0,
-                  fontWeight: FontWeight.bold),),
-            ),
-
-            ListTile(
-              title:            Text( " £ $gbp",style: TextStyle(color: kText,
-                  fontSize: 20.0,
-                  fontWeight: FontWeight.bold)),
-
-            ),
-
-
-
-          ],
-        );
-
-    }
-    else{
-      return
-        Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: <Widget>[
-            ListTile(
-              title: Text(productname, style: TextStyle(
-                  color: kText,
-                  fontSize: 20.0,
-                  fontWeight: FontWeight.bold),),
-            ),
-
-            ListTile(
-              title:            Text( " \u0024 $usd",style: TextStyle(color:  kText,
-                  fontSize: 20.0,
-                  fontWeight: FontWeight.bold)),
-
-            ),
-
-
-
-          ],
-        );
-
-    }
-  }
   UpcomingOrders(){
     return  PaginateFirestore(
 //    itemsPerPage: 2,
@@ -163,6 +36,8 @@ class _SellerOrdersState extends State<SellerOrders> {
             String size = documentSnapshot.data['size'];
            String Address = documentSnapshot.data['Address'];
 String orderId = documentSnapshot.data['orderId'];
+String shopmediaUrl = documentSnapshot.data['shopmediaUrl'];
+String cusId = documentSnapshot.data['cusId'];
 
           return
             StreamBuilder(
@@ -173,25 +48,27 @@ String orderId = documentSnapshot.data['orderId'];
                 }
                 User user = User.fromDocument(snapshot.data);
 //          bool isPostOwner = currentUserId == ownerId;
-                return Column(
-                  children: <Widget>[
-                    GestureDetector(
-                      onTap: () => showProfile(context, profileId: user.id),
-                      child: ListTile(
-                        leading: CircleAvatar(
-                          backgroundImage: CachedNetworkImageProvider(user.photoUrl),
-                          backgroundColor: Colors.grey,
-                        ),
-                        title: Text(
-                          user.displayName,
-                          style: TextStyle(
-                            color: kText,
-                            fontWeight: FontWeight.bold,
+                return Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Column(
+                    mainAxisAlignment:MainAxisAlignment.start,
+                    children: <Widget>[
+                      GestureDetector(
+                        onTap: () => showProfile(context, profileId: user.id),
+                        child: ListTile(
+                          leading: CircleAvatar(
+                            backgroundImage: CachedNetworkImageProvider(user.photoUrl),
+                            backgroundColor: Colors.grey,
                           ),
-                        ),
-                        subtitle: Text(user.username,
-                          style: TextStyle(color: kIcon),),),
-                    ),
+                          title: Text(
+                            user.displayName,
+                            style: TextStyle(
+                              color: kText,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                         ),
+                      ),
 StreamBuilder(  stream: productsRef.document(ownerId).collection('userProducts').document(prodId).snapshots(),
     builder: (context, snapshot){
       DocumentSnapshot ds = snapshot.data;
@@ -204,10 +81,10 @@ StreamBuilder(  stream: productsRef.document(ownerId).collection('userProducts')
 
 
   return
-ListView(
-  shrinkWrap: true,
-  children: [
-    GestureDetector(
+ListTile(
+
+
+   leading: GestureDetector(
     onTap: () => Navigator.push(
         context,
         MaterialPageRoute(
@@ -217,31 +94,54 @@ ListView(
           ),
         ),
       ),
-      child: Stack(
-      alignment: Alignment.center,
-      children: <Widget>[
-      ClipRRect(
-      borderRadius: BorderRadius.circular(20.0),child: cachedNetworkImage(shopmediaUrl)),
-      ],),),
-      df(productname:productname, usd:usd,inr:inr,eur:eur,gbp:gbp, prodId:prodId, ownerId:ownerId,),
+      child: ClipRRect(
+      borderRadius: BorderRadius.circular(20.0),child: Container(child: cachedNetworkImage(shopmediaUrl))),),
+subtitle: currentUser.country=='India'? Text( "₹$inr",style: TextStyle(color: kText,
+    fontSize: 20.0,
+    fontWeight: FontWeight.bold)):
+currentUser.country=='US'? Text( " \u0024 $usd",style: TextStyle(color:  kText,
+    fontSize: 20.0,
+    fontWeight: FontWeight.bold)):
+currentUser.country == 'Europe'?    Text( " € $eur",style: TextStyle(color: kText,
+    fontSize: 20.0,
+    fontWeight: FontWeight.bold)):
+currentUser.country == 'UK'? Text( " £ $gbp",style: TextStyle(color: kText,
+    fontSize: 20.0,
+    fontWeight: FontWeight.bold)): Text( " \u0024 $usd",style: TextStyle(color:  kText,
+    fontSize: 20.0,
+    fontWeight: FontWeight.bold)),
+   title:Text(productname, style: TextStyle(
+       color:kText,
+       fontSize: 20.0,
+       fontWeight: FontWeight.bold),),
 
-      ],
+
 );
     }),
-                    Text('size:$size',
-                      style: TextStyle(color: kText),),
-                     Text('Address:$Address',
-                      style: TextStyle(color: kText),),
-                     Text('orderStatus:$orderStatus',
-                      style: TextStyle(color: kText),),
-                    Center(child: RaisedButton(
-                        onPressed:(){
-                          Navigator.push(context, MaterialPageRoute(builder: (context) =>OrderFulfill(orderId:orderId ,ownerId: ownerId,)));},
-                        child:  Text('Fulfill order',
-                      style: TextStyle(color: kText),),)),
-                    Divider(color: kGrey,),
-                  ],
 
+                      Row(
+                        children: [
+                          Text('Size:  $size',
+                            style: TextStyle(color: kText),),
+                        ],
+                      ),
+                       SizedBox(height:10.0),
+                       Row(
+                         children: [
+                           Text('Address: $Address',
+                            style: TextStyle(color: kText),),
+                         ],
+                       ),
+                      fulfilled=='true'?   Center(child: RaisedButton(
+                        color: kblue,
+                          onPressed:(){
+                            Navigator.push(context, MaterialPageRoute(builder: (context) =>OrderFulfill(orderId:orderId ,ownerId: ownerId,shopmediaUrl:shopmediaUrl,prodId:prodId,cusId:cusId)));},
+                          child:  Text('Fulfill order',
+                        style: TextStyle(color: Colors.white),),)):Container(),
+                      Divider(color: kGrey,),
+                    ],
+
+                  ),
                 );
 
               },
@@ -265,6 +165,8 @@ ListView(
           String prodId = documentSnapshot.data['prodId'];
           String fulfilled = documentSnapshot.data['fulfilled'];
           String courierId = documentSnapshot.data['courierId'];
+            String courier = documentSnapshot.data['courier'];
+
           String orderStatus = documentSnapshot.data['orderStatus'];
           String size = documentSnapshot.data['size'];
           String Address = documentSnapshot.data['Address'];
@@ -278,42 +180,44 @@ ListView(
                   return circularProgress();
                 }
                 User user = User.fromDocument(snapshot.data);
-//          bool isPostOwner = currentUserId == ownerId;
-                return Column(
-                  children: <Widget>[
-                    GestureDetector(
-                      onTap: () => showProfile(context, profileId: user.id),
-                      child: ListTile(
-                        leading: CircleAvatar(
-                          backgroundImage: CachedNetworkImageProvider(user.photoUrl),
-                          backgroundColor: Colors.grey,
-                        ),
-                        title: Text(
-                          user.displayName,
-                          style: TextStyle(
-                            color: kText,
-                            fontWeight: FontWeight.bold,
+                return Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Column(
+                    mainAxisAlignment:MainAxisAlignment.start,
+
+                    children: <Widget>[
+                      GestureDetector(
+                        onTap: () => showProfile(context, profileId: user.id),
+                        child: ListTile(
+                          leading: CircleAvatar(
+                            backgroundImage: CachedNetworkImageProvider(user.photoUrl),
+                            backgroundColor: Colors.grey,
                           ),
-                        ),
-                        subtitle: Text(user.username,
-                          style: TextStyle(color: kIcon),),),
-                    ),
-                    StreamBuilder(  stream: productsRef.document(ownerId).collection('userProducts').document(prodId).snapshots(),
-                        builder: (context, snapshot){
-                          DocumentSnapshot ds = snapshot.data;
-                          String shopmediaUrl= ds['shopmediaUrl'];
-                          String productname= ds['productname'];
-                          String usd= ds['usd'];
-                          String inr= ds['inr'];
-                          String eur= ds['eur'];
-                          String gbp= ds['gbp'];
+                          title: Text(
+                            user.displayName,
+                            style: TextStyle(
+                              color: kText,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                         ),
+                      ),
+                      StreamBuilder(  stream: productsRef.document(ownerId).collection('userProducts').document(prodId).snapshots(),
+                          builder: (context, snapshot){
+                            DocumentSnapshot ds = snapshot.data;
+                            String shopmediaUrl= ds['shopmediaUrl'];
+                            String productname= ds['productname'];
+                            String usd= ds['usd'];
+                            String inr= ds['inr'];
+                            String eur= ds['eur'];
+                            String gbp= ds['gbp'];
 
 
-                          return
-                            ListView(
-                              shrinkWrap: true,
-                              children: [
-                                GestureDetector(
+                            return
+                              ListTile(
+
+
+                                leading: GestureDetector(
                                   onTap: () => Navigator.push(
                                     context,
                                     MaterialPageRoute(
@@ -323,28 +227,69 @@ ListView(
                                       ),
                                     ),
                                   ),
-                                  child: Stack(
-                                    alignment: Alignment.center,
-                                    children: <Widget>[
-                                      ClipRRect(
-                                          borderRadius: BorderRadius.circular(20.0),child: cachedNetworkImage(shopmediaUrl)),
-                                    ],),),
-                                df(productname:productname, usd:usd,inr:inr,eur:eur,gbp:gbp, prodId:prodId, ownerId:ownerId,),
+                                  child: ClipRRect(
+                                      borderRadius: BorderRadius.circular(20.0),child: Container(child: cachedNetworkImage(shopmediaUrl))),),
+                                subtitle: currentUser.country=='India'? Text( "₹$inr",style: TextStyle(color: kText,
+                                    fontSize: 20.0,
+                                    fontWeight: FontWeight.bold)):
+                                currentUser.country=='US'? Text( " \u0024 $usd",style: TextStyle(color:  kText,
+                                    fontSize: 20.0,
+                                    fontWeight: FontWeight.bold)):
+                                currentUser.country == 'Europe'?    Text( " € $eur",style: TextStyle(color: kText,
+                                    fontSize: 20.0,
+                                    fontWeight: FontWeight.bold)):
+                                currentUser.country == 'UK'? Text( " £ $gbp",style: TextStyle(color: kText,
+                                    fontSize: 20.0,
+                                    fontWeight: FontWeight.bold)): Text( " \u0024 $usd",style: TextStyle(color:  kText,
+                                    fontSize: 20.0,
+                                    fontWeight: FontWeight.bold)),
+                                title:Text(productname, style: TextStyle(
+                                    color:kText,
+                                    fontSize: 20.0,
+                                    fontWeight: FontWeight.bold),),
 
-                              ],
-                            );
-                        }),
-                    Text('size:$size',
-                      style: TextStyle(color: kText),),
-                    Text('Address:$Address',
-                      style: TextStyle(color: kText),),
-                    Text('orderStatus:$orderStatus',
-                      style: TextStyle(color: kText),),
-            Text('Shipment Id:$courierId',
-                      style: TextStyle(color: kText),),
 
-                  ],
+                              );
+                          }),
 
+                      Row(
+                        children: [
+                          Text('Size:  $size',
+                            style: TextStyle(color: kText),),
+                        ],
+                      ),
+                      SizedBox(height:10.0),
+                      Row(
+                        children: [
+                          Text('Address: $Address',
+                            style: TextStyle(color: kText),),
+                        ],
+                      ),
+                      SizedBox(height:10.0),
+
+                      Row(
+                        children: [
+                          Text('orderStatus:  $orderStatus',
+                            style: TextStyle(color: kText),),
+                        ],
+                      ),
+                      SizedBox(height:10.0),
+
+                      Row(
+                        children: [
+                          Text('Shipment Service:  $courierId',
+                            style: TextStyle(color: kText),),
+                        ],
+                      ),Row(
+                        children: [
+                          Text('Shipment Id:  $courierId',
+                            style: TextStyle(color: kText),),
+                        ],
+                      ),
+
+                    ],
+
+                  ),
                 );
 
               },

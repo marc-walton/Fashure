@@ -19,6 +19,43 @@ final String userSize;
   final String usd;
   final String inr;
   final String gbp;
+  final int xxxs;
+  final int xxs;
+  final int xs;
+  final int s;
+  final int m;
+  final int l;
+  final int xl;
+  final int xxl;
+  final int xxxl;
+  final int fourxl;
+  final int fivexl;
+  final int sixxl;
+  final int sevenxl;
+  final int eightxl;
+  final int Shoe1;
+  final int Shoe2;
+  final int Shoe3;
+  final int Shoe4;
+  final int Shoe5;
+  final int Shoe6;
+  final int Shoe7;
+  final int Shoe8;
+  final int Shoe9;
+  final int Shoe10;
+  final int Shoe11;
+  final int Shoe12;
+  final int Shoe13;
+  final int Shoe14;
+  final int Shoe15;
+  final int Shoe16;
+  final int Shoe17;
+  final int Shoe18;
+  final int Shoe19;
+  final int Shoe20;
+  final int Shoe21;
+  final int mto;
+  final int freeSize;
     // BuyView({Key key, this.prodId, this.ownerId, this.total, this.userSize,}) : super(key: key);
 
  BuyView({this.prodId,this.productname,
@@ -26,6 +63,43 @@ final String userSize;
    this.eur,
    this.inr,
    this.gbp,
+   this.freeSize,
+   this.mto,
+   this.xxxs,
+   this.xxs,
+   this.xs,
+   this.s,
+   this.m,
+   this.l,
+   this.xl,
+   this.xxl,
+   this.xxxl,
+   this.fourxl,
+   this.fivexl,
+   this.sixxl,
+   this.sevenxl,
+   this.eightxl,
+   this.Shoe1,
+   this.Shoe2,
+   this.Shoe3,
+   this.Shoe4,
+   this.Shoe5,
+   this.Shoe6,
+   this.Shoe7,
+   this.Shoe8,
+   this.Shoe9,
+   this.Shoe10,
+   this.Shoe11,
+   this.Shoe12,
+   this.Shoe13,
+   this.Shoe14,
+   this.Shoe15,
+   this.Shoe16,
+   this.Shoe17,
+   this.Shoe18,
+   this.Shoe19,
+   this.Shoe20,
+   this. Shoe21,
    this.ownerId, this.total, this.userSize,this.profileimg,this.username,this.mediaUrl});
 @override
   _BuyViewState createState() => _BuyViewState(prodId: this.prodId,
@@ -56,7 +130,7 @@ class _BuyViewState extends State<BuyView> {
   void initState() {
     super.initState();
     GetAddress();
-    print(widget.prodId);
+    print(widget.fourxl);
      print(widget.ownerId);
      print(widget.total);
      print(widget.userSize);
@@ -356,7 +430,44 @@ else {
                           inr:widget.inr,
                           gbp:widget.gbp,
                           productname:widget.productname,
-                          size:widget.userSize)));
+                          size:widget.userSize,
+                        xxxs: widget.xxxs,
+                        xxs: widget.xxs,
+                        xs: widget.xs,
+                        s: widget.s,
+                        m: widget.m,
+                        l: widget.l,
+                        xl: widget.xl,
+                        xxl: widget.xxl,
+                        xxxl: widget.xxxl,
+                        fourxl: widget.fourxl,
+                        fivexl: widget.fivexl,
+                        sixxl: widget.sevenxl,
+                        eightxl:widget. eightxl,
+                        Shoe1: widget.Shoe1,
+                        Shoe2: widget.Shoe2,
+                        Shoe3: widget.Shoe3,
+                        Shoe4: widget.Shoe4,
+                        Shoe5: widget.Shoe5,
+                        Shoe6: widget.Shoe6,
+                        Shoe7: widget.Shoe7,
+                        Shoe8: widget.Shoe8,
+                        Shoe9: widget.Shoe9,
+                        Shoe10: widget.Shoe10,
+                        Shoe11: widget.Shoe11,
+                        Shoe12: widget.Shoe12,
+                        Shoe13: widget.Shoe13,
+                        Shoe14: widget.Shoe14,
+                        Shoe15: widget.Shoe15,
+                        Shoe16: widget.Shoe16,
+                        Shoe17: widget.Shoe17,
+                        Shoe18: widget.Shoe18,
+                        Shoe19: widget.Shoe19,
+                        Shoe20: widget.Shoe20,
+                        Shoe21: widget.Shoe21,
+                        mto: widget.mto,
+                        freeSize: widget.freeSize,
+                      )));
 
                     },
                     color: kblue,

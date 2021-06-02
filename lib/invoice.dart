@@ -391,7 +391,7 @@ else{return Container();}
         .setData({
       'userId': ownerId,
        'orderId': orderId,
-
+'timestamp':timestamp,
       'rating': rating,
       'review':reviewController.text,
       'reviewId' : reviewId
@@ -428,8 +428,8 @@ else{return Container();}
                             color: Colors.white),),
                         SmoothStarRating(
                           allowHalfRating: true,
-                          filledIconData: Icons.blur_off,
-                          halfFilledIconData: Icons.blur_on,
+                          filledIconData: Icons.star,
+                          halfFilledIconData: Icons.star_half,
                           rating: rating,
                           size: 35,
                           starCount: 5,
@@ -451,7 +451,7 @@ else{return Container();}
                           textAlign: TextAlign.start,
                         ),
                         RaisedButton(
-                          onPressed: ()=>review(),
+                          onPressed: () {review();Get.back();},
                           color: kblue,
                           child: Text('Save',style: TextStyle(color: Colors.white),),)
                       ],
@@ -472,6 +472,7 @@ else{return Container();}
 
 
   postindia(parentContext){
+    bool isPostOwner = currentUser.id == ownerId;
     return
       Padding(
         padding: const EdgeInsets.all(8.0),
@@ -562,15 +563,17 @@ else{return Container();}
               cusImg:widget.cusImg, ),
             SizedBox(height:10.0),
 
-            fulfilled=='true'?
+            !isPostOwner?   fulfilled=='true'?
             RaisedButton(onPressed:()=>Rating(fulfill:fulfilled,parentContext: parentContext,OwnerId: ownerId),color:kblue,child: Text('Rate Order',style:TextStyle(color: Colors.white)),):
-            Container(),
+            Container(): Container()
 
           ],
         ),
       );
   }
   posteurope(parentContext){
+    bool isPostOwner = currentUser.id == ownerId;
+
     return
       Padding(
         padding: const EdgeInsets.all(8.0),
@@ -659,15 +662,17 @@ else{return Container();}
               cusImg:widget.cusImg, ),
             SizedBox(height:10.0),
 
-            fulfilled=='true'?
+            !isPostOwner?   fulfilled=='true'?
             RaisedButton(onPressed:()=>Rating(fulfill:fulfilled,parentContext: parentContext,OwnerId: ownerId),color:kblue,child: Text('Rate Order',style:TextStyle(color: Colors.white)),):
-            Container(),
+            Container(): Container()
 
           ],
         ),
       );
   }
   postuk(parentContext){
+    bool isPostOwner = currentUser.id == ownerId;
+
     return
       Padding(
         padding: const EdgeInsets.all(8.0),
@@ -757,15 +762,17 @@ else{return Container();}
               cusImg:widget.cusImg, ),
             SizedBox(height:10.0),
 
-            fulfilled=='true'?
+            !isPostOwner?   fulfilled=='true'?
             RaisedButton(onPressed:()=>Rating(fulfill:fulfilled,parentContext: parentContext,OwnerId: ownerId),color:kblue,child: Text('Rate Order',style:TextStyle(color: Colors.white)),):
-            Container(),
+            Container(): Container()
 
           ],
         ),
       );
   }
   postusa(parentContext) {
+    bool isPostOwner = currentUser.id == ownerId;
+
     return
       Padding(
         padding: const EdgeInsets.all(8.0),
@@ -855,9 +862,9 @@ else{return Container();}
               cusImg:widget.cusImg, ),
             SizedBox(height:10.0),
 
-            fulfilled=='true'?
+            !isPostOwner?   fulfilled=='true'?
             RaisedButton(onPressed:()=>Rating(fulfill:fulfilled,parentContext: parentContext,OwnerId: ownerId),color:kblue,child: Text('Rate Order',style:TextStyle(color: Colors.white)),):
-            Container(),
+            Container(): Container()
 
           ],
         ),

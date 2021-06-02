@@ -1,3 +1,4 @@
+import 'package:bubble_tab_indicator/bubble_tab_indicator.dart';
 import 'package:fashow/SellerDash/SellerOrders.dart';
 import 'package:fashow/SellerDash/SellerPayments.dart';
 import 'package:fashow/SellerDash/SellerSettings.dart';
@@ -85,50 +86,55 @@ class _SellerDashState extends State<SellerDash> {
         length:4,
         child: Scaffold(
           key:  scaffoldKey,
-          appBar: AppBar(
-            backgroundColor: kPrimaryColor,
-            automaticallyImplyLeading: false,
-            title: FittedBox(
-              fit: BoxFit.contain,
-              child: Text(
-                "Shop Orders",
-                style: TextStyle(color: Colors.white),
+          appBar:PreferredSize(
+            preferredSize: Size.fromHeight(100.0),
+            child: AppBar(
+              backgroundColor: kPrimaryColor,
+              automaticallyImplyLeading: false,
+              title: FittedBox(
+                fit: BoxFit.contain,
+                child: Text(
+                  "Shop Orders",
+                  style: TextStyle(color: Colors.white),
+                ),
               ),
-            ),
-            bottom: TabBar(
-              isScrollable: true,
-              labelColor: Colors.white,
-              unselectedLabelColor: kIcon,
-//                indicatorSize: TabBarIndicatorSize.label,
-//                       indicator: BoxDecoration(
-//                           borderRadius: BorderRadius.only(
-//                               topLeft: Radius.circular(10),
-//                               topRight: Radius.circular(10)
-//                           ),
-//                           color: Colors.white),
+              bottom: PreferredSize(
+                preferredSize: Size.fromHeight(130.0),
+                child: Container(
+                  height: 60.0,
+                  child: TabBar(
+                    isScrollable: true,
+                    labelColor: Colors.white,
+                    unselectedLabelColor: kIcon,
+                    indicatorSize:TabBarIndicatorSize.tab,
+                    indicator:BubbleTabIndicator(indicatorHeight:40.0,
+                      indicatorColor: kblue,
+                    ),
+                    tabs:[
+                      FittedBox(
+                        fit: BoxFit.contain,
+                        child: Row(
+                          children: [
+                            Text('Orders'),
+                            ord(),
+                          ],
+                        ),
+                      ),FittedBox(
+                        fit: BoxFit.contain,
+                        child: Row(
+                          children: [
+                            Text('My payments'),
+                            pay(),
+                          ],
+                        ),
+                      ),
 
-              tabs:[
-                FittedBox(
-                  fit: BoxFit.contain,
-                  child: Row(
-                    children: [
-                      Text('Orders'),
-                      ord(),
-                    ],
-                  ),
-                ),FittedBox(
-                  fit: BoxFit.contain,
-                  child: Row(
-                    children: [
-                      Text('My payments'),
-                      pay(),
-                    ],
+                      FittedBox(fit: BoxFit.contain,child: Text("My Shop",)),
+                      FittedBox(fit: BoxFit.contain,child: Text("Settings")),
+                                    ],
                   ),
                 ),
-
-                FittedBox(fit: BoxFit.contain,child: Text("My Shop",)),
-                FittedBox(fit: BoxFit.contain,child: Text("Settings")),
-                              ],
+              ),
             ),
           ),
           body:

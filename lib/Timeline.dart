@@ -1,3 +1,4 @@
+import 'package:bubble_tab_indicator/bubble_tab_indicator.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fashow/CollectionsUplaod.dart';
@@ -113,7 +114,7 @@ TabController _tabController;
       _scrollController.addListener(() {
         double maxScroll = _scrollController.position.maxScrollExtent;
         double currentScroll = _scrollController.position.pixels;
-        double delta = MediaQuery.of(context).size.height * 0.20;
+        double delta = MediaQuery.of(context).size.height * 0.30;
         if (maxScroll - currentScroll <= delta) {
         }
       });
@@ -359,7 +360,6 @@ TabController _tabController;
       setState(() {
         foollowingList = snapshot.documents.map((doc) => doc.documentID).toList();
       });
-      // print(foollowingList);
     }
 
 
@@ -383,10 +383,6 @@ quer(){
 }
 }
 getTimeLine(){
-//   for( int i=0; i< foollowingList.length; i++) {
-
-// }
-//   getFfollowing();
 return
     post();
 }
@@ -886,80 +882,91 @@ collectionGroup(){
     @override
     Widget build(BuildContext context) {
           return Scaffold( backgroundColor: kPrimaryColor,
-            appBar: AppBar(backgroundColor: appbar,
-                automaticallyImplyLeading: false,
-                // shape: RoundedRectangleBorder(
-                //   borderRadius: BorderRadius.vertical(bottom: Radius.circular(30))
-                // ),
-                title: FittedBox(
-                  fit:BoxFit.cover,
-                  child: Text(   'FASHURE',
-                    style: TextStyle(
-                        fontFamily :"MajorMonoDisplay",
+            appBar: PreferredSize(
+              preferredSize: Size.fromHeight(130.0),
+              child: AppBar(backgroundColor: appbar,
+                  automaticallyImplyLeading: false,
 
-                        color: Colors.white),),
-                ),
-                iconTheme: new IconThemeData(color: kIcon),
-//            leading:IconButton(  icon: Icon(
-//              Icons.menu,
-//              color: Colors.blue,),
-            bottom: TabBar(
-              controller: _tabController,
-              tabs: <Widget>[
-//                  Icon(Icons.weekend,color: Colors.white,),
-//                  Icon(Icons.store,color: Colors.white, Text('text'),),
+                  title: FittedBox(
+                    fit:BoxFit.cover,
+                    child: Text(   'FASHURE',
+                      style: TextStyle(
+                          fontFamily :"MajorMonoDisplay",
 
-                FittedBox(
-                  fit:BoxFit.fitWidth,
-                  child: Text(   'Posts',
-                    style: TextStyle(
-                        fontFamily :"MajorMonoDisplay",
+                          color: Colors.white),),
+                  ),
+                  iconTheme: new IconThemeData(color: kIcon),
 
-                        color: Colors.white),),
-                ),  FittedBox(
-                  fit:BoxFit.fitWidth,
-                  child: Text(   'Collections',
-                    style: TextStyle(
-                        fontFamily :"MajorMonoDisplay",
-
-                        color: Colors.white),),
-                ), FittedBox(
-                  fit:BoxFit.fitWidth,
-                  child: Text(   'Editorial',
-                    style: TextStyle(
-                        fontFamily :"MajorMonoDisplay",
-
-                        color: Colors.white),),
-                ),
-              ],
-            ),
-                actions: <Widget>[
-
-
-
-                  IconButton(
-                    icon: Icon(
-                      Icons.search,
-
+              bottom:  PreferredSize(
+                preferredSize: Size.fromHeight(100.0),
+                child: Container(
+                  height: 80.0,
+                  child: TabBar(
+                    indicatorSize:TabBarIndicatorSize.tab,
+                    indicator:BubbleTabIndicator(indicatorHeight:40.0,
+                      indicatorColor: kblue,
                     ),
-                    onPressed: () {
-                      Navigator.push(context, MaterialPageRoute(builder: (context) =>Search()));
+                    controller: _tabController,
+                    tabs: <Widget>[
 
-                      // do something
-                    },
+
+                      FittedBox(
+                        fit:BoxFit.fitWidth,
+                        child: Text(   'Posts',
+                          style: TextStyle(
+                              fontFamily :"MajorMonoDisplay",
+
+                              color: Colors.white),),
+                      ),  FittedBox(
+                        fit:BoxFit.fitWidth,
+                        child: Text(   'Collections',
+                          style: TextStyle(
+                              fontFamily :"MajorMonoDisplay",
+
+                              color: Colors.white),),
+                      ), FittedBox(
+                        fit:BoxFit.fitWidth,
+                        child: Text(   'Editorial',
+                          style: TextStyle(
+                              fontFamily :"MajorMonoDisplay",
+
+                              color: Colors.white),),
+                      ),
+                    ],
                   ),
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.push(context, MaterialPageRoute(builder: (context) =>Profile( profileId: currentUser?.id)));
+                ),
+              ),
+                  actions: <Widget>[
 
-                      // do something
-                    },
-                    child: ClipRRect(
-                        borderRadius: BorderRadius.circular(15.0),
-                        child: Container(child: Image.network(currentUser.photoUrl),)),
-                  ),
 
-                ]
+
+                    IconButton(
+                      icon: Icon(
+                        Icons.search,
+
+                      ),
+                      onPressed: () {
+                        Navigator.push(context, MaterialPageRoute(builder: (context) =>Search()));
+
+                        // do something
+                      },
+                    ),
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.push(context, MaterialPageRoute(builder: (context) =>Profile( profileId: currentUser?.id)));
+
+                        // do something
+                      },
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: ClipRRect(
+                            borderRadius: BorderRadius.circular(15.0),
+                            child: Container(child: Image.network(currentUser.photoUrl),)),
+                      ),
+                    ),
+
+                  ]
+              ),
             ),
 
       body:

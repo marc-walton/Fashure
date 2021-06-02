@@ -454,7 +454,9 @@ scrollDirection:Axis.vertical,
     children: <Widget>[
     Padding(padding: EdgeInsets.only(top: 40.0, left: 20.0)),
     FloatingActionButton(
-    mini: true,
+      heroTag: 'cfg',
+
+      mini: true,
     shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(16.0))),
     onPressed: handleLikePost,
     child:
@@ -477,6 +479,8 @@ scrollDirection:Axis.vertical,
     ),
     Padding(padding: EdgeInsets.only(right: 20.0)),
       FloatingActionButton(
+        heroTag: null,
+
         mini: true,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(16.0))),
         onPressed: () => showComments(

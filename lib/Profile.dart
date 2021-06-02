@@ -718,12 +718,25 @@ Widget rev(){
         GestureDetector(
           onTap:()=>handleFollowUser(),
 
-          child: Container(child: Column(
+          child:Column(
             children: <Widget>[
-              Icon(EvaIcons.personAddOutline,color: Colors.white,size: 30.0,),
-              Text('Follow',style: TextStyle(color: kGrey),),
+              Container(
+                height: 45,
+                width: 45,
+
+                margin: EdgeInsets.only(top:10.0,left: 10.0,right: 10.0, bottom: 10.0 ),
+                decoration: BoxDecoration(borderRadius: BorderRadius.circular(10.0),
+                  color: kblue,
+                  boxShadow: [BoxShadow(color: kblue)],
+                ),
+                child:     Icon(EvaIcons.personAddOutline,color: Colors.white,size: 30.0,),
+
+              ),
+              Container(
+                child: Text('Follow',style: TextStyle(color: kGrey),),
+              )
             ],
-          )),
+          ),
         );
     }
   }

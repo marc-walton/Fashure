@@ -381,7 +381,7 @@ print(loggedInUser.displayName);
 
               shape: BadgeShape.circle,
               padding: EdgeInsets.all(2),
-              badgeContent: Text('$data',style: TextStyle(color: kText),),
+              badgeContent: Text('$data',style: TextStyle(color: Colors.white),),
             );
 
         },
@@ -408,7 +408,7 @@ print(loggedInUser.displayName);
               Badge(
                 shape: BadgeShape.circle,
                 padding: EdgeInsets.all(7),
-                badgeContent: Text('$data',style: TextStyle(color: kText),),
+                badgeContent: Text('$data',style: TextStyle(color: Colors.white),),
               );
           }
 
@@ -429,7 +429,7 @@ print(loggedInUser.displayName);
         Badge(
           shape: BadgeShape.circle,
           padding: EdgeInsets.all(7),
-          badgeContent: Text('$sum', style: TextStyle(color: kText),),
+          badgeContent: Text('$sum', style: TextStyle(color: Colors.white),),
         );
     }
   }
@@ -461,7 +461,7 @@ print(loggedInUser.displayName);
                   Badge(
                     shape: BadgeShape.circle,
                     padding: EdgeInsets.all(7),
-                    badgeContent: Text('$data ',style: TextStyle(color: kText),),
+                    badgeContent: Text('$data ',style: TextStyle(color: Colors.white),),
                   );
 
               },
@@ -498,7 +498,7 @@ print(loggedInUser.displayName);
                   Badge(
                     shape: BadgeShape.circle,
                     padding: EdgeInsets.all(7),
-                    badgeContent: Text('$serdata ',style: TextStyle(color: kText),),
+                    badgeContent: Text('$serdata ',style: TextStyle(color: Colors.white),),
                   );
 
               },
@@ -516,28 +516,17 @@ print(loggedInUser.displayName);
       body: Container(
         decoration: BoxDecoration(
           gradient: fabGradient
-          // LinearGradient(
-          //   begin: Alignment.topRight,
-          //   end: Alignment.bottomLeft,
-          //   colors:[ kPrimaryColor,
-          //     kSecondaryColor
-          //
-          //   ],
-          // ),
         ) ,
         alignment: Alignment.center,
         child: PageView(
           children: <Widget>[
-//          RaisedButton(
-//      child: Text('Log out'),
-//      onPressed: logout,
-//   ),
+
             Timeline(),
           Shop(currentUser: currentUser),
             Designer(),
             LiveTv(),
           ActivityFeed(),
-//          Upload(currentUser,: currentUser),
+//          Upload(currentUser: currentUser),
           ],
           controller: pageController,
           onPageChanged: onPageChanged,
@@ -550,17 +539,17 @@ print(loggedInUser.displayName);
     onTap: onTap,
       color: kPrimaryColor,
     buttonBackgroundColor: Colors.transparent,
-    backgroundColor:Colors.black38,
+    backgroundColor:kblue,
     animationCurve: Curves.elasticInOut,
     animationDuration: Duration(milliseconds: 001),
       height: 50.0,
     items: <Widget>[
 
-      Icon(Icons.weekend, size: 30, color: kIcon,),
-      Icon(Icons.store, size: 30,color: kIcon,),
-      Icon(FontAwesomeIcons.swatchbook, size: 30,color: kIcon,),
-      Icon(Icons.play_arrow, size: 30,color: kIcon,),
-      Stack(children:[ Icon(Icons.inbox, size: 30,color: kIcon,),
+      Icon(Icons.weekend, size: 30, color: Colors.white,),
+      Icon(Icons.store, size: 30,color: Colors.white,),
+      Icon(FontAwesomeIcons.swatchbook, size: 30,color: Colors.white,),
+      Icon(Icons.play_arrow, size: 30,color: Colors.white,),
+      Stack(children:[ Icon(Icons.inbox, size: 30,color: Colors.white,),
         Positioned(
           top: 1.0,
           right:1.0,
@@ -613,25 +602,6 @@ repeatForever: true,
               darkMode: true, // default: false
             ),
 
-//            InkWell(
-//              onTap: login,
-//             highlightColor: Colors.deepPurple,
-//             splashColor: Colors.deepPurple,
-//
-//             child: Container(
-//               width: 260.0,
-//                 height: 60.0,
-// decoration: BoxDecoration(
-//   image: DecorationImage(
-//     image: AssetImage(
-//       'assets/img/google.png'),
-//     fit: BoxFit.cover,
-//   )
-// ),
-//
-//),
-//
-//            ),
             Padding(
               padding: EdgeInsets.all(16.0),
               child: FlatButton.icon(

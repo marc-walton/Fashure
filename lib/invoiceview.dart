@@ -143,8 +143,8 @@ class _InvoiceViewState extends State<InvoiceView> {
             ),
             SmoothStarRating(
               allowHalfRating: true,
-              filledIconData: Icons.blur_off,
-              halfFilledIconData: Icons.blur_on,
+              filledIconData: Icons.star,
+              halfFilledIconData: Icons.star_half,
               rating: rating,
               size: 35,
               starCount: 5,
@@ -175,7 +175,8 @@ class _InvoiceViewState extends State<InvoiceView> {
         'userId': OwnerId,
         'rating': rating,
         'review':reviewController.text,
-        'reviewId' : reviewId
+        'reviewId' : reviewId,
+        'timestamp':timestamp,
       });
       Firestore.instance.collection('feed')
           .document(OwnerId)
@@ -198,10 +199,13 @@ class _InvoiceViewState extends State<InvoiceView> {
   }
   @override
   Widget build(BuildContext context) {
+    print(widget.orderId);
+ print(widget.ownerId);
+
     return StreamBuilder(
-        stream: Firestore.instance.collection('serviceCustomer')
-            .document(currentUser.id)
-            .collection('customerService')
+        stream: Firestore.instance.collection('serviceSeller')
+            .document(widget.ownerId)
+            .collection('sellerService')
         .document(widget.orderId)
             .snapshots(),
       builder: (context, snapshot) {

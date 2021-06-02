@@ -106,11 +106,11 @@ String count;
       builder: (context,snapshot){
      int data =  snapshot.data.documents.length;
      return
-       Badge(
+            Badge(
          shape: BadgeShape.circle,
          padding: EdgeInsets.all(7),
-         badgeContent: Text('$data',style: TextStyle(color: kText),),
-       );
+         badgeContent: Text('$data',style: TextStyle(color: Colors.white),),
+        );
 
       },
     );

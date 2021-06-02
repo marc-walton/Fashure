@@ -414,6 +414,7 @@ class _BlogState extends State<Blog> {
                 children: <Widget>[
                   Padding(padding: EdgeInsets.only(top: 40.0, left: 20.0)),
                   FloatingActionButton(
+                    heroTag: 'sga',
                     mini: true,
                     shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(16.0))),
                     onPressed: handleLikePost,
@@ -422,11 +423,7 @@ class _BlogState extends State<Blog> {
                       isLiked ?  AssetImage("assets/img/clap-hands.png"):AssetImage("assets/img/clap.png"),
                       color: kGrey,
                     ),
-//                    ),Icon(
-//                      isLiked ?   Icons.favorite_border:Icons.favorite ,
-//                      size: 28.0,
-//                      color: kText,
-//                    ),
+
                   ),//                Padding(padding: EdgeInsets.only(right: 1.0)),
                   Container(
 //                  margin: EdgeInsets.only(left: 20.0),
@@ -441,6 +438,7 @@ class _BlogState extends State<Blog> {
                   ),
                   Padding(padding: EdgeInsets.only(right: 20.0)),
                   FloatingActionButton(
+                    heroTag: null,
                     mini: true,
                     shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(16.0))),
                     onPressed:() => showComments(

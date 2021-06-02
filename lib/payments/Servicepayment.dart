@@ -198,7 +198,7 @@ class _PaymentSerState extends State<PaymentSer> {
       'ownerId':widget.OwnerId,
       'orderId':widget.OrderId,
       "timestamp": timestamp,
-      "userCountry": currentUser.id,
+      "userCountry": currentUser.country,
       'eur':widget.eur,
       'usd':widget.usd,
       'inr':widget.inr,

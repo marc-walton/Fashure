@@ -114,12 +114,14 @@ class BlogCommentsState extends State<BlogComments> {
             ListTile(
               title: ClipRRect(borderRadius: BorderRadius.circular(30.0),
                 child: TextFormField(
+                  style: TextStyle(color: Colors.white),
+
                   controller: blogcommentController,
                   decoration: InputDecoration(
                       filled: true,
                       fillColor: kPrimaryColor,
                       hintText:  "Write a comment...",
-                      hintStyle: TextStyle(color: kText)
+                      hintStyle: TextStyle(color:  Colors.white)
                   ),
 
                 ),

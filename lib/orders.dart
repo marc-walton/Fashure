@@ -1,4 +1,4 @@
-import 'package:cached_network_image/cached_network_image.dart';
+import 'package:get/get.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fashow/invoiceview.dart';
 import 'package:flutter/material.dart';
@@ -9,6 +9,7 @@ import 'package:uuid/uuid.dart';
 import 'package:paginate_firestore/paginate_firestore.dart';
 import 'package:fashow/Constants.dart';
 import 'package:contained_tab_bar_view/contained_tab_bar_view.dart';
+import 'package:fashow/HomePage.dart';
 
 class Orders extends StatefulWidget {
   @override
@@ -20,6 +21,7 @@ class _OrdersState extends State<Orders> {
   TextEditingController reviewController = TextEditingController();
   Rating({String fulfill,String ProdId,String OwnerId,parentContext}){
     if(fulfill=='true') {
+
       return
       showModalBottomSheet(
           context: parentContext,
@@ -34,8 +36,8 @@ class _OrdersState extends State<Orders> {
                           color: Colors.white),),
                       SmoothStarRating(
                         allowHalfRating: true,
-                        filledIconData: Icons.blur_off,
-                        halfFilledIconData: Icons.blur_on,
+                        filledIconData: Icons.star,
+                        halfFilledIconData: Icons.star_half,
                         rating: rating,
                         size: 35,
                         starCount: 5,
@@ -65,6 +67,7 @@ class _OrdersState extends State<Orders> {
                           'prodId':ProdId,
                           'rating': rating,
                           'review':reviewController.text,
+                          "timestamp":timestamp,
                         });
                         Firestore.instance.collection('feed')
                             .document(ProdId)
@@ -80,7 +83,8 @@ class _OrdersState extends State<Orders> {
                           "timestamp": timestamp,
                           "read": 'false',
                           'message':'Your order received a review!',
-                        });},
+                        });
+                        Get.back();},
                         color: kblue,
                       child: Text('Save',style: TextStyle(color: Colors.white),),)
                     ],
@@ -172,7 +176,10 @@ String courier = documentSnapshot.data['courier'];
                   SizedBox(height:10.0),
 
                   fulfilled=='true'?
-RaisedButton(onPressed:()=>Rating(fulfill:fulfilled,parentContext: context,OwnerId: ownerId,ProdId: prodId),color:kblue,child: Text('Rate Order',style:TextStyle(color: Colors.white)),):
+RaisedButton(
+  onPressed:()
+
+   {Rating(fulfill:fulfilled,parentContext: context,OwnerId: ownerId,ProdId: prodId);},color:kblue,child: Text('Rate Order',style:TextStyle(color: Colors.white)),):
                       Container(),
                 ],
               ),
@@ -230,7 +237,7 @@ return  Column(
         Navigator.push(
           context,
           MaterialPageRoute(
-              builder: (context) => InvoiceView(orderId:orderId)));
+              builder: (context) => InvoiceView(orderId:orderId,ownerId: ownerId,)));
         },
       child: ListTile(
         // leading:CachedNetworkImage(imageUrl: ds['shopmediUrl'],),

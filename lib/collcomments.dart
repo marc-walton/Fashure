@@ -114,13 +114,13 @@ class CollCommentsState extends State<CollComments> {
             ListTile(
               title: ClipRRect(borderRadius: BorderRadius.circular(30.0),
                 child: TextFormField(
-                  style: TextStyle(color: kText),
+                  style: TextStyle(color: Colors.white),
                   controller: collcommentController,
                   decoration: InputDecoration(
                       filled: true,
                       fillColor: kPrimaryColor,
                       hintText:  "Write a comment...",
-                      hintStyle: TextStyle(color: kText)
+                      hintStyle: TextStyle(color: Colors.white)
                   ),
 
                 ),

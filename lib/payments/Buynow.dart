@@ -21,12 +21,85 @@ class BuyNow extends StatefulWidget {
   final String usd;
   final String inr;
   final String gbp;
-
+  final int xxxs;
+  final int xxs;
+  final int xs;
+  final int s;
+  final int m;
+  final int l;
+  final int xl;
+  final int xxl;
+  final int xxxl;
+  final int fourxl;
+  final int fivexl;
+  final int sixxl;
+  final int sevenxl;
+  final int eightxl;
+  final int Shoe1;
+  final int Shoe2;
+  final int Shoe3;
+  final int Shoe4;
+  final int Shoe5;
+  final int Shoe6;
+  final int Shoe7;
+  final int Shoe8;
+  final int Shoe9;
+  final int Shoe10;
+  final int Shoe11;
+  final int Shoe12;
+  final int Shoe13;
+  final int Shoe14;
+  final int Shoe15;
+  final int Shoe16;
+  final int Shoe17;
+  final int Shoe18;
+  final int Shoe19;
+  final int Shoe20;
+  final int Shoe21;
+  final int mto;
+  final int freeSize;
   BuyNow({this.buynowamount,
     this.eur,
     this.usd,
     this.inr,
     this.gbp,
+    this.freeSize,
+    this.mto,
+    this.xxxs,
+    this.xxs,
+    this.xs,
+    this.s,
+    this.m,
+    this.l,
+    this.xl,
+    this.xxl,
+    this.xxxl,
+    this.fourxl,
+    this.fivexl,
+    this.sixxl,
+    this.sevenxl,
+    this.eightxl,
+    this.Shoe1,
+    this.Shoe2,
+    this.Shoe3,
+    this.Shoe4,
+    this.Shoe5,
+    this.Shoe6,
+    this.Shoe7,
+    this.Shoe8,
+    this.Shoe9,
+    this.Shoe10,
+    this.Shoe11,
+    this.Shoe12,
+    this.Shoe13,
+    this.Shoe14,
+    this.Shoe15,
+    this.Shoe16,
+    this.Shoe17,
+    this.Shoe18,
+    this.Shoe19,
+    this.Shoe20,
+    this. Shoe21,
   this.prodId,
   this.ownerId,
     this.productname,
@@ -34,7 +107,42 @@ class BuyNow extends StatefulWidget {
   this.profileimg,this.username,this.mediaUrl});
 
   @override
-  _BuyNowState createState() => _BuyNowState();
+  _BuyNowState createState() => _BuyNowState(   xxxs: xxxs,
+    xxs: xxs,
+    xs: xs,
+    s: s,
+    m: m,
+    l: l,
+    xl: xl,
+    xxl: xxl,
+    xxxl: xxxl,
+    fourxl: fourxl,
+    fivexl: fivexl,
+    sixxl: sevenxl,
+    eightxl: eightxl,
+    Shoe1: Shoe1,
+    Shoe2: Shoe2,
+    Shoe3: Shoe3,
+    Shoe4: Shoe4,
+    Shoe5: Shoe5,
+    Shoe6: Shoe6,
+    Shoe7: Shoe7,
+    Shoe8: Shoe8,
+    Shoe9: Shoe9,
+    Shoe10: Shoe10,
+    Shoe11: Shoe11,
+    Shoe12: Shoe12,
+    Shoe13: Shoe13,
+    Shoe14: Shoe14,
+    Shoe15: Shoe15,
+    Shoe16: Shoe16,
+    Shoe17: Shoe17,
+    Shoe18: Shoe18,
+    Shoe19: Shoe19,
+    Shoe20: Shoe20,
+    Shoe21: Shoe21,
+    mto: mto,
+    freeSize: freeSize,);
 }
 
 class _BuyNowState extends State<BuyNow> {
@@ -78,6 +186,48 @@ class _BuyNowState extends State<BuyNow> {
   int Shoe21;
   int mto;
   int freeSize;
+  _BuyNowState({
+
+    this.freeSize,
+    this.mto,
+    this.xxxs,
+    this.xxs,
+    this.xs,
+    this.s,
+    this.m,
+    this.l,
+    this.xl,
+    this.xxl,
+    this.xxxl,
+    this.fourxl,
+    this.fivexl,
+    this.sixxl,
+    this.sevenxl,
+    this.eightxl,
+    this.Shoe1,
+    this.Shoe2,
+    this.Shoe3,
+    this.Shoe4,
+    this.Shoe5,
+    this.Shoe6,
+    this.Shoe7,
+    this.Shoe8,
+    this.Shoe9,
+    this.Shoe10,
+    this.Shoe11,
+    this.Shoe12,
+    this.Shoe13,
+    this.Shoe14,
+    this.Shoe15,
+    this.Shoe16,
+    this.Shoe17,
+    this.Shoe18,
+    this.Shoe19,
+    this.Shoe20,
+    this.Shoe21,
+
+  });
+
   SharedPreferences adPrefs;
   String key = 'rzp_test_Ut90sdJd5tSty5';
 
@@ -91,99 +241,38 @@ class _BuyNowState extends State<BuyNow> {
   _razorpay.on(Razorpay.EVENT_PAYMENT_SUCCESS, _handlePaymentSuccess);
   _razorpay.on(Razorpay.EVENT_PAYMENT_ERROR, _handlePaymentError);
   _razorpay.on(Razorpay.EVENT_EXTERNAL_WALLET, _handleExternalWallet);
-  size();
+  print('j fjbkbg  $fourxl');
+  print(widget.fourxl);
+
   }
 
   @override
   void dispose() {
   super.dispose();
   _razorpay.clear();
-  size();
   }
   payment(){
-    StreamBuilder(
-      stream: productsRef
-          .document(widget.ownerId)
-          .collection('userProducts')
-          .document(widget.prodId)
-      // .orderBy('timestamp', descending: true)
-          .snapshots(),
-      builder:  (context, snapshot){
-        Firestore.instance.collection('Payments')
-            .document(widget.ownerId)
-            .collection('SellerPayments')
-            .document(orderId)
-            .setData({
-          'ownerId':widget.ownerId,
-          'orderId':orderId,
-          'eur':widget.eur,
-          'usd':widget.usd,
-          'inr':widget.inr,
-          'gbp':widget.gbp,
+    Firestore.instance.collection('Payments')
+        .document(widget.ownerId)
+        .collection('SellerPayments')
+        .document(orderId)
+        .setData({
+      'ownerId':widget.ownerId,
+      'orderId':orderId,
+      'eur':widget.eur,
+      'usd':widget.usd,
+      'inr':widget.inr,
+      'gbp':widget.gbp,
 
 
-          'fulfilled':'false',
-          "timestamp": timestamp,
-          "userCountry": currentUser.id,
-          'prodId':widget.prodId,
-          'productname':snapshot.data.documents['productname'],
-        });
-return Container();
-      },
-
-    );
-
+      'fulfilled':'false',
+      "timestamp": timestamp,
+      "userCountry": currentUser.country,
+      'prodId':widget.prodId,
+      'productname':widget.productname,
+    });
   }
-  size(){  Firestore.instance.collectionGroup('userProducts')
-    .where("prodId",isEqualTo:"${widget.prodId}")
-    .snapshots().listen((snapshot){snapshot.documents.forEach((doc){
-
-  setState(() {
-    xxxs = doc.data['xxxsQuantity'];
-    xxs = doc.data['xxsQuantity'];
-    xs = doc.data['xsQuantity'];
-    s = doc.data['sQuantity'];
-    m = doc.data['mQuantity'];
-    l = doc.data['lQuantity'];
-    xl = doc.data['xlQuantity'];
-    xxl = doc.data['xxlQuantity'];
-    xxxl = doc.data['xxxlQuantity'];
-    fourxl = doc.data['fourxlQuantity'];
-    fivexl = doc.data['fivexlQuantity'];
-    sixxl = doc.data['sixxlQuantity'];
-    sevenxl = doc.data['sevenxlQuantity'];
-    eightxl = doc.data['eightxlQuantity'];
-    Shoe1 = doc.data['Shoe1'];
-    Shoe2 = doc.data['Shoe2'];
-    Shoe3 = doc.data['Shoe3'];
-    Shoe4 = doc.data['Shoe4'];
-    Shoe5 = doc.data['Shoe5'];
-    Shoe6 = doc.data['Shoe6'];
-    Shoe7 = doc.data['Shoe7'];
-    Shoe8 = doc.data['Shoe8'];
-    Shoe9 = doc.data['Shoe9'];
-    Shoe10 = doc.data['Shoe10'];
-    Shoe11 = doc.data['Shoe11'];
-    Shoe12 = doc.data['Shoe12'];
-    Shoe13 = doc.data['Shoe13'];
-    Shoe14 = doc.data['Shoe14'];
-    Shoe15 = doc.data['Shoe15'];
-    Shoe16 = doc.data['Shoe16'];
-    Shoe17 = doc.data['Shoe17'];
-    Shoe18 = doc.data['Shoe18'];
-    Shoe19 = doc.data['Shoe19'];
-    Shoe20 = doc.data['Shoe20'];
-    Shoe21 = doc.data['Shoe21'];
-    mto = doc.data['mtoQuantity'];
-    freeSize = doc.data['freesizeQuantity'];
-    print(freeSize);
-    print(xxxs);
-
-  });});
-
-  });
-  }
-  openCheckout() async {
+  openCheckout()  {
   if (currentUser.country == 'India') {
   var options = {
   'key': key,
@@ -283,9 +372,10 @@ return Container();
   }
   }
   }
-  subtractQuantity()async{
+  subtractQuantity(){
 
     if(widget.size=='XXXS'){
+      xxxs--;
       Firestore.instance.collection('products')
           .document(widget.ownerId)
           .collection('userProducts')
@@ -374,14 +464,17 @@ return Container();
       });
     }
     else if(widget.size=='4XL'){
+
       fourxl--;
-      Firestore.instance.collection('products')
+      print('bh hkjghhhhhhhjnkghgmliknmhnk,nkikiytgyi $fourxl');
+    await  Firestore.instance.collection('products')
           .document(widget.ownerId)
           .collection('userProducts')
           .document(widget.prodId)
           .updateData({'fourxlQuantity':fourxl,
 
       });
+
     }
     else if(widget.size=='5XL'){
       fivexl--;
@@ -1601,6 +1694,7 @@ return Container();
       'ownerId':widget.ownerId,
       'size':widget.size,
       'orderId':orderId,
+      'cusId':currentUser.id,
       'fulfilled':'false',
       "timestamp": timestamp,
  "productname": widget.productname,
@@ -1619,6 +1713,8 @@ return Container();
       'ownerId':widget.ownerId,
       'size':widget.size,
       'orderId':orderId,
+      'cusId':currentUser.id,
+
       "timestamp": timestamp,
       "productname": widget.productname,
       "shopmediaUrl": widget.mediaUrl,
@@ -1661,11 +1757,12 @@ return Container();
     });
 payment();
     subtractQuantity();
-
+    Get.offAll( ActivityFeed());
   }
   void _handlePaymentSuccess(PaymentSuccessResponse response) {
-    onSuccess();
-    Get.offAll( ActivityFeed());
+    print('kjfd');
+
+    subtractQuantity();
   Fluttertoast.showToast(
   msg: "Payment SUCCESS: " + response.paymentId, timeInSecForIos: 4);
   }

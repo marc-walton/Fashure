@@ -76,17 +76,25 @@ class _LiveTvState extends State<LiveTv> with  TickerProviderStateMixin {
               gradient: fabGradient
           ) ,
           alignment: Alignment.center,
-          child: Column(children:[
-            SizedBox(height: 8),
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(children:[
+              SizedBox(height: 8),
 
-            FittedBox(fit:BoxFit.contain,child: Text('Go Live',style: TextStyle(fontSize: 20,color: kText,),)),
-          Container(
-          height: 250,
-          child: getStories(),
+              Row(
+                children: [
+                  Icon(Icons.live_tv_sharp,color: Colors.black,),
+                  FittedBox(fit:BoxFit.contain,child: Text('Go Live',style: TextStyle(fontSize: 30,color: kText,fontWeight: FontWeight.bold),)),
+                ],
+              ),
+            Container(
+            height: 250,
+            child: getStories(),
     ),
-           Center(child: getvid(),)
+             Center(child: getvid(),)
 
     ]),
+          ),
         ),
 
       ),

@@ -8,7 +8,7 @@ import 'package:fashow/Categories/Men/Men.dart';
 import 'package:fashow/Categories/Women/Women.dart';
 import 'package:fashow/fav.dart';
 import 'package:flutter/cupertino.dart';
-//import 'package:cached_network_image/cached_network_image.dart';
+import 'package:bubble_tab_indicator/bubble_tab_indicator.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:fashow/user.dart';
@@ -82,76 +82,87 @@ new Tabs(title: "Teen-Girls",color: kPrimaryColor),
   Widget build(BuildContext context) {
     return
       Scaffold(appBar: PreferredSize(
-        preferredSize: Size.fromHeight(100.0),
+        preferredSize: Size.fromHeight(130.0),
         child: AppBar(title:  Text('Shop',style: TextStyle(fontSize: 30,fontFamily: 'MajorMonoDisplay'),),
           backgroundColor: kPrimaryColor,
 
-          bottom: new TabBar(
-               isScrollable: true,
-            controller: _controller,
-            tabs: <Widget>[
+          bottom:  PreferredSize(
+            preferredSize: Size.fromHeight(100.0),
+            child: Container(
+              height: 80.0,
+              child: new TabBar(
+                indicatorSize:TabBarIndicatorSize.tab,
+                   indicator:BubbleTabIndicator(indicatorHeight:40.0,
+                     indicatorColor: kblue,
+
+                   ),
+                   isScrollable: true,
+                controller: _controller,
+                tabs: <Widget>[
+                  FittedBox(
+                    fit:BoxFit.fitWidth,
+                    child: Text('Men',
+                      style: TextStyle(
+                          fontFamily :"MajorMonoDisplay",
+                          // fontSize:  MediaQuery.of(context).size.width,
+                          color: Colors.white),),
+                  ),
+                  FittedBox(
+                    fit:BoxFit.fitWidth,
+                    child: Text(   'Women',
+                      style: TextStyle(
+                          fontFamily :"MajorMonoDisplay",
+
+                          color: Colors.white),),
+                  ),
               FittedBox(
                 fit:BoxFit.fitWidth,
-                child: Text('Men',
-                  style: TextStyle(
-                      fontFamily :"MajorMonoDisplay",
-                      // fontSize:  MediaQuery.of(context).size.width,
-                      color: Colors.white),),
+                    child: Text(   'Baby-Boys',
+                      style: TextStyle(
+                          fontFamily :"MajorMonoDisplay",
+
+                          color: Colors.white),),
+                  ),
+                  FittedBox(
+                    fit:BoxFit.fitWidth,
+                    child: Text(   'Baby-Girls',
+                      style: TextStyle(
+                          fontFamily :"MajorMonoDisplay",
+
+                          color: Colors.white),),
+                  ),  FittedBox(
+                    fit:BoxFit.fitWidth,
+                    child: Text(   'Kids-Boys',
+                      style: TextStyle(
+                          fontFamily :"MajorMonoDisplay",
+
+                          color: Colors.white),),
+                  ),
+                  FittedBox(
+                    fit:BoxFit.fitWidth,
+                    child: Text(   'Kids-Girls',
+                      style: TextStyle(
+                          fontFamily :"MajorMonoDisplay",
+
+                          color: Colors.white),),
+                  ),FittedBox(
+                    fit:BoxFit.fitWidth,
+                    child: Text(   'Teen-Boys',
+                      style: TextStyle(
+                          fontFamily :"MajorMonoDisplay",
+
+                          color: Colors.white),),
+                  ),FittedBox(
+                    fit:BoxFit.fitWidth,
+                    child: Text(   'Teen-Girls',
+                      style: TextStyle(
+                          fontFamily :"MajorMonoDisplay",
+
+                          color: Colors.white),),
+                  ),
+                ],
               ),
-              FittedBox(
-                fit:BoxFit.fitWidth,
-                child: Text(   'Women',
-                  style: TextStyle(
-                      fontFamily :"MajorMonoDisplay",
-
-                      color: Colors.white),),
-              ),
-          FittedBox(
-            fit:BoxFit.fitWidth,
-                child: Text(   'Baby-Boys',
-                  style: TextStyle(
-                      fontFamily :"MajorMonoDisplay",
-
-                      color: Colors.white),),
-              ),
-              FittedBox(
-                fit:BoxFit.fitWidth,
-                child: Text(   'Baby-Girls',
-                  style: TextStyle(
-                      fontFamily :"MajorMonoDisplay",
-
-                      color: Colors.white),),
-              ),  FittedBox(
-                fit:BoxFit.fitWidth,
-                child: Text(   'Kids-Boys',
-                  style: TextStyle(
-                      fontFamily :"MajorMonoDisplay",
-
-                      color: Colors.white),),
-              ),
-              FittedBox(
-                fit:BoxFit.fitWidth,
-                child: Text(   'Kids-Girls',
-                  style: TextStyle(
-                      fontFamily :"MajorMonoDisplay",
-
-                      color: Colors.white),),
-              ),FittedBox(
-                fit:BoxFit.fitWidth,
-                child: Text(   'Teen-Boys',
-                  style: TextStyle(
-                      fontFamily :"MajorMonoDisplay",
-
-                      color: Colors.white),),
-              ),FittedBox(
-                fit:BoxFit.fitWidth,
-                child: Text(   'Teen-Girls',
-                  style: TextStyle(
-                      fontFamily :"MajorMonoDisplay",
-
-                      color: Colors.white),),
-              ),
-            ],
+            ),
           ),
           iconTheme: new IconThemeData(color: kIcon),
           actions:<Widget> [

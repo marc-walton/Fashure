@@ -601,7 +601,12 @@ currency(){
   ),
   ),
   SizedBox( height: 8.0,),
-  Container(
+        Text('If one-time payment.Leave payment on delivery empty', style: TextStyle(
+          // fontFamily :"MajorMonoDisplay",
+          // fontSize:  35.0 ,
+            color: Colors.red),),
+
+        Container(
   margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
   child: TextFormField(
     style:TextStyle(color:kText),
@@ -628,65 +633,6 @@ currency(){
   ),
       ]
     );
-
-    }
-    else if (currentUser.country == 'China'){
-      return
-      Column(
-        children:[
-          Container(
-            margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
-            child: TextFormField(
-              style:TextStyle(color:kText),
-
-              keyboardType: TextInputType.number,
-              maxLines: null,
-              controller: advanceController,
-              decoration: InputDecoration(
-                border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
-                enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
-                focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
-
-                labelText: 'Advance Payment',labelStyle: TextStyle(color: kText),
-                hintText: '¥',
-              ),
-              textAlign: TextAlign.center,
-              validator: (text) {
-                if (text.isEmpty) {
-                  return 'Advance Payment is empty';
-                }
-                return null;
-              },
-            ),
-          ),
-          SizedBox( height: 8.0,),
-          Container(
-            margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
-            child: TextFormField(
-              style:TextStyle(color:kText),
-
-              keyboardType: TextInputType.number,
-              maxLines: null,
-              controller: totalController,
-              decoration: InputDecoration(
-                border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
-                enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
-                focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
-
-                labelText: 'Payment on delivery',labelStyle: TextStyle(color: kText),
-                hintText: '¥' ,
-              ),
-              textAlign: TextAlign.center,
-              // validator: (text) {
-              //   if (text.isEmpty) {
-              //     return 'Final Payment is empty';
-              //   }
-              //   return null;
-              // },
-            ),
-          ),
-        ]
-      );
 
     }
     else if(currentUser.country=='US'){
@@ -719,7 +665,12 @@ currency(){
   ),
   ),
   SizedBox( height: 8.0,),
-  Container(
+              Text('If one-time payment.Leave payment on delivery empty', style: TextStyle(
+                // fontFamily :"MajorMonoDisplay",
+                // fontSize:  35.0 ,
+                  color: Colors.red),),
+
+              Container(
   margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
   child: TextFormField(
     style:TextStyle(color:kText),
@@ -779,6 +730,11 @@ currency(){
                 ),
               ),
               SizedBox( height: 8.0,),
+              Text('If one-time payment.Leave payment on delivery empty', style: TextStyle(
+                // fontFamily :"MajorMonoDisplay",
+                // fontSize:  35.0 ,
+                  color: Colors.red),),
+
               Container(
                 margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
                 child: TextFormField(
@@ -839,6 +795,11 @@ currency(){
                 ),
               ),
               SizedBox( height: 8.0,),
+              Text('If one-time payment.Leave payment on delivery empty', style: TextStyle(
+                // fontFamily :"MajorMonoDisplay",
+                // fontSize:  35.0 ,
+                  color: Colors.red),),
+
               Container(
                 margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
                 child: TextFormField(
@@ -898,6 +859,11 @@ currency(){
                 ),
               ),
               SizedBox( height: 8.0,),
+              Text('If one-time payment.Leave payment on delivery empty', style: TextStyle(
+                // fontFamily :"MajorMonoDisplay",
+                // fontSize:  35.0 ,
+                  color: Colors.red),),
+
               Container(
                 margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
                 child: TextFormField(
@@ -1527,10 +1493,6 @@ else {
     // fontFamily :"MajorMonoDisplay",
     fontSize:  15.0 ,
     color: Colors.white),),
-                  Text('Note: Advance payment is recommended to confirm order. / If one-time payment.leave payment on delivery empty', style: TextStyle(
-    // fontFamily :"MajorMonoDisplay",
-    // fontSize:  35.0 ,
-    color: Colors.red),),
               currency(),
 
  Container(

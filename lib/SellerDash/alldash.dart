@@ -1,4 +1,5 @@
 import 'package:badges/badges.dart';
+import 'package:bubble_tab_indicator/bubble_tab_indicator.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:contained_tab_bar_view/contained_tab_bar_view.dart';
 import 'package:fashow/HomePage.dart';
@@ -38,7 +39,7 @@ int serpay;
       Badge(
         shape: BadgeShape.circle,
         padding: EdgeInsets.all(7),
-        badgeContent: Text('$shop ',style: TextStyle(color: kText),),
+        badgeContent: Text('$shop ',style: TextStyle(color: Colors.white),),
       );
 
   }
@@ -93,7 +94,7 @@ getop() async {
       Badge(
         shape: BadgeShape.circle,
         padding: EdgeInsets.all(7),
-        badgeContent: Text('$service ',style: TextStyle(color: kText),),
+        badgeContent: Text('$service ',style: TextStyle(color: Colors.white),),
       );
   }
 
@@ -105,48 +106,53 @@ getop() async {
         child: Scaffold(
           backgroundColor: kSecondaryColor,
           // key:  scaffoldKey,
-          appBar: AppBar(
-            backgroundColor: kPrimaryColor,
+          appBar:PreferredSize(
+            preferredSize: Size.fromHeight(100.0),
+            child: AppBar(
+              backgroundColor: kPrimaryColor,
 
-            title: FittedBox(
-              fit: BoxFit.contain,
-              child: Text(
-                "Dashboard",
-                style: TextStyle(color: Colors.white),
+              title: FittedBox(
+                fit: BoxFit.contain,
+                child: Text(
+                  "Dashboard",
+                  style: TextStyle(color: Colors.white),
+                ),
               ),
-            ),
-            bottom: TabBar(
-              isScrollable: true,
-              labelColor: Colors.white,
-              unselectedLabelColor: kIcon,
-//                indicatorSize: TabBarIndicatorSize.label,
-//                       indicator: BoxDecoration(
-//                           borderRadius: BorderRadius.only(
-//                               topLeft: Radius.circular(10),
-//                               topRight: Radius.circular(10)
-//                           ),
-//                           color: Colors.white),
+              bottom:  PreferredSize(
+                preferredSize: Size.fromHeight(100.0),
+                child: Container(
+                  height: 60.0,
+                  child: TabBar(
+                    isScrollable: true,
+                    labelColor: Colors.white,
+                    unselectedLabelColor: kIcon,
+                    indicatorSize:TabBarIndicatorSize.tab,
+                    indicator:BubbleTabIndicator(indicatorHeight:40.0,
+                      indicatorColor: kblue,
+                    ),
+                    tabs:[
+                      FittedBox(
+                        fit: BoxFit.contain,
+                        child: Row(
+                          children: [
+                            Text('Shop'),
+                            orderbadge(),
+                          ],
+                        ),
+                      ),  FittedBox(
+                        fit: BoxFit.contain,
+                        child: Row(
+                          children: [
+                            Text('Freelance'),
+                            servicebadge(),
+                          ],
+                        ),
+                      ),
 
-              tabs:[
-                FittedBox(
-                  fit: BoxFit.contain,
-                  child: Row(
-                    children: [
-                      Text('Shop'),
-                      orderbadge(),
-                    ],
-                  ),
-                ),  FittedBox(
-                  fit: BoxFit.contain,
-                  child: Row(
-                    children: [
-                      Text('Freelance'),
-                      servicebadge(),
                     ],
                   ),
                 ),
-
-              ],
+              ),
             ),
           ),
           body:

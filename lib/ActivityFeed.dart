@@ -92,7 +92,7 @@ class  _ActivityFeedState extends State<ActivityFeed>  with  TickerProviderState
           Badge(
             shape: BadgeShape.circle,
             padding: EdgeInsets.all(7),
-            badgeContent: Text('$data',style: TextStyle(color: kText),),
+            badgeContent: Text('$data',style: TextStyle(color: Colors.white),),
           );
 
       },
@@ -122,7 +122,7 @@ class  _ActivityFeedState extends State<ActivityFeed>  with  TickerProviderState
             Badge(
               shape: BadgeShape.circle,
               padding: EdgeInsets.all(7),
-              badgeContent: Text('$data',style: TextStyle(color: kText),),
+              badgeContent: Text('$data',style: TextStyle(color: Colors.white),),
             );
         }
 
@@ -143,7 +143,7 @@ class  _ActivityFeedState extends State<ActivityFeed>  with  TickerProviderState
         Badge(
           shape: BadgeShape.circle,
           padding: EdgeInsets.all(7),
-          badgeContent: Text('$sum', style: TextStyle(color: kText),),
+          badgeContent: Text('$sum', style: TextStyle(color: Colors.white),),
         );
     }
   }
@@ -175,7 +175,7 @@ class  _ActivityFeedState extends State<ActivityFeed>  with  TickerProviderState
                 Badge(
                   shape: BadgeShape.circle,
                   padding: EdgeInsets.all(7),
-                  badgeContent: Text('$data ',style: TextStyle(color: kText),),
+                  badgeContent: Text('$data ',style: TextStyle(color: Colors.white),),
                 );
 
             },
@@ -212,7 +212,7 @@ class  _ActivityFeedState extends State<ActivityFeed>  with  TickerProviderState
                 Badge(
                   shape: BadgeShape.circle,
                   padding: EdgeInsets.all(7),
-                  badgeContent: Text('$serdata ',style: TextStyle(color: kText),),
+                  badgeContent: Text('$serdata ',style: TextStyle(color: Colors.white),),
                 );
 
             },
@@ -292,10 +292,6 @@ class  _ActivityFeedState extends State<ActivityFeed>  with  TickerProviderState
               ]
           ),
         ),
-
-
-
-
 
 
         body: Container(decoration: BoxDecoration(
@@ -447,7 +443,8 @@ showClient(context) {
     );
   }
 showInvoiceView(context) {
-  print(postId);
+
+
     Navigator.push(
       context,
       MaterialPageRoute(
@@ -1112,6 +1109,8 @@ ReviewO(ParentContext){
 
   }
 ServicePayment(ParentContext){
+    print(postId);
+    print(userId);
   return
 
     Padding(

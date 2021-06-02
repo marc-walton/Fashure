@@ -28,7 +28,82 @@ final String OwnerId;
   final    String username;
   final  String mediaUrl;
   final  String productname;
-  AddressBuy({  this.usd,
+  final int xxxs;
+  final int xxs;
+  final int xs;
+  final int s;
+  final int m;
+  final int l;
+  final int xl;
+  final int xxl;
+  final int xxxl;
+  final int fourxl;
+  final int fivexl;
+  final int sixxl;
+  final int sevenxl;
+  final int eightxl;
+  final int Shoe1;
+  final int Shoe2;
+  final int Shoe3;
+  final int Shoe4;
+  final int Shoe5;
+  final int Shoe6;
+  final int Shoe7;
+  final int Shoe8;
+  final int Shoe9;
+  final int Shoe10;
+  final int Shoe11;
+  final int Shoe12;
+  final int Shoe13;
+  final int Shoe14;
+  final int Shoe15;
+  final int Shoe16;
+  final int Shoe17;
+  final int Shoe18;
+  final int Shoe19;
+  final int Shoe20;
+  final int Shoe21;
+  final int mto;
+  final int freeSize;
+  AddressBuy({
+    this.freeSize,
+    this.mto,
+    this.xxxs,
+    this.xxs,
+    this.xs,
+    this.s,
+    this.m,
+    this.l,
+    this.xl,
+    this.xxl,
+    this.xxxl,
+    this.fourxl,
+    this.fivexl,
+    this.sixxl,
+    this.sevenxl,
+    this.eightxl,
+    this.Shoe1,
+    this.Shoe2,
+    this.Shoe3,
+    this.Shoe4,
+    this.Shoe5,
+    this.Shoe6,
+    this.Shoe7,
+    this.Shoe8,
+    this.Shoe9,
+    this.Shoe10,
+    this.Shoe11,
+    this.Shoe12,
+    this.Shoe13,
+    this.Shoe14,
+    this.Shoe15,
+    this.Shoe16,
+    this.Shoe17,
+    this.Shoe18,
+    this.Shoe19,
+    this.Shoe20,
+    this. Shoe21,
+    this.usd,
     this.eur,
     this.inr,
     this.gbp,
@@ -117,6 +192,42 @@ class _AddressBuyState extends State<AddressBuy>  with AutomaticKeepAliveClientM
                         username: widget.username,
                         mediaUrl: widget.mediaUrl,
                           productname:widget.productname,
+                        xxxs: widget.xxxs,
+                        xxs: widget.xxs,
+                        xs: widget.xs,
+                        s: widget.s,
+                        m: widget.m,
+                        l: widget.l,
+                        xl: widget.xl,
+                        xxl: widget.xxl,
+                        xxxl: widget.xxxl,
+                        fourxl: widget.fourxl,
+                        fivexl: widget.fivexl,
+                        sixxl: widget.sevenxl,
+                        eightxl:widget. eightxl,
+                        Shoe1: widget.Shoe1,
+                        Shoe2: widget.Shoe2,
+                        Shoe3: widget.Shoe3,
+                        Shoe4: widget.Shoe4,
+                        Shoe5: widget.Shoe5,
+                        Shoe6: widget.Shoe6,
+                        Shoe7: widget.Shoe7,
+                        Shoe8: widget.Shoe8,
+                        Shoe9: widget.Shoe9,
+                        Shoe10: widget.Shoe10,
+                        Shoe11: widget.Shoe11,
+                        Shoe12: widget.Shoe12,
+                        Shoe13: widget.Shoe13,
+                        Shoe14: widget.Shoe14,
+                        Shoe15: widget.Shoe15,
+                        Shoe16: widget.Shoe16,
+                        Shoe17: widget.Shoe17,
+                        Shoe18: widget.Shoe18,
+                        Shoe19: widget.Shoe19,
+                        Shoe20: widget.Shoe20,
+                        Shoe21: widget.Shoe21,
+                        mto: widget.mto,
+                        freeSize: widget.freeSize,
                       );
                   }
               );
@@ -125,6 +236,11 @@ class _AddressBuyState extends State<AddressBuy>  with AutomaticKeepAliveClientM
 
       ),
     );
+  }
+  void initState() {
+    super.initState();
+    print(widget.fourxl);
+
   }
 
 
@@ -204,6 +320,42 @@ backgroundColor: kPrimaryColor,
                         username: widget.username,
                         mediaUrl: widget.mediaUrl,
                         productname:widget.productname,
+                        xxxs: widget.xxxs,
+                        xxs: widget.xxs,
+                        xs: widget.xs,
+                        s: widget.s,
+                        m: widget.m,
+                        l: widget.l,
+                        xl: widget.xl,
+                        xxl: widget.xxl,
+                        xxxl: widget.xxxl,
+                        fourxl: widget.fourxl,
+                        fivexl: widget.fivexl,
+                        sixxl: widget.sevenxl,
+                        eightxl:widget. eightxl,
+                        Shoe1: widget.Shoe1,
+                        Shoe2: widget.Shoe2,
+                        Shoe3: widget.Shoe3,
+                        Shoe4: widget.Shoe4,
+                        Shoe5: widget.Shoe5,
+                        Shoe6: widget.Shoe6,
+                        Shoe7: widget.Shoe7,
+                        Shoe8: widget.Shoe8,
+                        Shoe9: widget.Shoe9,
+                        Shoe10: widget.Shoe10,
+                        Shoe11: widget.Shoe11,
+                        Shoe12: widget.Shoe12,
+                        Shoe13: widget.Shoe13,
+                        Shoe14: widget.Shoe14,
+                        Shoe15: widget.Shoe15,
+                        Shoe16: widget.Shoe16,
+                        Shoe17: widget.Shoe17,
+                        Shoe18: widget.Shoe18,
+                        Shoe19: widget.Shoe19,
+                        Shoe20: widget.Shoe20,
+                        Shoe21: widget.Shoe21,
+                        mto: widget.mto,
+                        freeSize: widget.freeSize,
                       );
 
 
@@ -240,11 +392,86 @@ class addressview extends StatelessWidget {
  final String usd;
  final String inr;
  final String gbp;
+ final int xxxs;
+ final int xxs;
+ final int xs;
+ final int s;
+ final int m;
+ final int l;
+ final int xl;
+ final int xxl;
+ final int xxxl;
+ final int fourxl;
+ final int fivexl;
+ final int sixxl;
+ final int sevenxl;
+ final int eightxl;
+ final int Shoe1;
+ final int Shoe2;
+ final int Shoe3;
+ final int Shoe4;
+ final int Shoe5;
+ final int Shoe6;
+ final int Shoe7;
+ final int Shoe8;
+ final int Shoe9;
+ final int Shoe10;
+ final int Shoe11;
+ final int Shoe12;
+ final int Shoe13;
+ final int Shoe14;
+ final int Shoe15;
+ final int Shoe16;
+ final int Shoe17;
+ final int Shoe18;
+ final int Shoe19;
+ final int Shoe20;
+ final int Shoe21;
+ final int mto;
+ final int freeSize;
  SharedPreferences adPrefs;
 addressview({  this.usd,
   this.eur,
   this.inr,
-  this.gbp, this.Type,this.productname, this.Fullname, this.Addresss, this.City, this.State, this.Country, this.Zip, this.Dialcode, this.Phone, this.userSize, this.prodId, this.total, this.ownerId, this.profileimg, this.username, this.mediaUrl});
+  this.gbp,
+  this.freeSize,
+  this.mto,
+  this.xxxs,
+  this.xxs,
+  this.xs,
+  this.s,
+  this.m,
+  this.l,
+  this.xl,
+  this.xxl,
+  this.xxxl,
+  this.fourxl,
+  this.fivexl,
+  this.sixxl,
+  this.sevenxl,
+  this.eightxl,
+  this.Shoe1,
+  this.Shoe2,
+  this.Shoe3,
+  this.Shoe4,
+  this.Shoe5,
+  this.Shoe6,
+  this.Shoe7,
+  this.Shoe8,
+  this.Shoe9,
+  this.Shoe10,
+  this.Shoe11,
+  this.Shoe12,
+  this.Shoe13,
+  this.Shoe14,
+  this.Shoe15,
+  this.Shoe16,
+  this.Shoe17,
+  this.Shoe18,
+  this.Shoe19,
+  this.Shoe20,
+  this. Shoe21,
+  this.Type,this.productname, this.Fullname, this.Addresss, this.City, this.State, this.Country, this.Zip, this.Dialcode, this.Phone, this.userSize, this.prodId, this.total, this.ownerId, this.profileimg, this.username, this.mediaUrl});
   @override
   Widget build(BuildContext context) {
     return
@@ -298,7 +525,43 @@ addressview({  this.usd,
                               profileimg: profileimg,
                               username: username,
                               mediaUrl: mediaUrl,
-                              productname:productname,)
+                              productname:productname,
+                              xxxs: xxxs,
+                              xxs: xxs,
+                              xs: xs,
+                              s: s,
+                              m: m,
+                              l: l,
+                              xl: xl,
+                              xxl: xxl,
+                              xxxl: xxxl,
+                              fourxl: fourxl,
+                              fivexl: fivexl,
+                              sixxl: sevenxl,
+                              eightxl: eightxl,
+                              Shoe1: Shoe1,
+                              Shoe2: Shoe2,
+                              Shoe3: Shoe3,
+                              Shoe4: Shoe4,
+                              Shoe5: Shoe5,
+                              Shoe6: Shoe6,
+                              Shoe7: Shoe7,
+                              Shoe8: Shoe8,
+                              Shoe9: Shoe9,
+                              Shoe10: Shoe10,
+                              Shoe11: Shoe11,
+                              Shoe12: Shoe12,
+                              Shoe13: Shoe13,
+                              Shoe14: Shoe14,
+                              Shoe15: Shoe15,
+                              Shoe16: Shoe16,
+                              Shoe17: Shoe17,
+                              Shoe18: Shoe18,
+                              Shoe19: Shoe19,
+                              Shoe20: Shoe20,
+                              Shoe21: Shoe21,
+                              mto: mto,
+                              freeSize: freeSize,)
                         );
                         // Navigator.push(context, MaterialPageRoute(builder: (context) =>));
                         // Navigator.pop(context);

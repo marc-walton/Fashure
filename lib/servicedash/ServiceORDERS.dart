@@ -278,6 +278,7 @@ subtitle:  adavance == "true"? Text( "(Paid)",style: TextStyle(color:  kText,
             String finalpay = documentSnapshot.data['finalpay'];
             String orderStatus = documentSnapshot.data['orderStatus'];
             String Address = documentSnapshot.data['Address'];
+ String fulfilled = documentSnapshot.data['fulfilled'];
 
             return
               StreamBuilder(
@@ -325,12 +326,12 @@ adavance: advancepay,finalp: finalpay,
 
                         ),
 
-                        Center(child: RaisedButton(
+                        fulfilled=='true'  ?Center(child: RaisedButton(
                           color: kblue,
                           onPressed:(){
-                            Navigator.push(context, MaterialPageRoute(builder: (context) =>ServiceFulfill(ownerId: ownerId,orderId: orderId,)));},
+                            Navigator.push(context, MaterialPageRoute(builder: (context) =>ServiceFulfill(ownerId: ownerId,orderId: orderId,cusId:cusId)));},
                           child:  Text('Fulfill order',
-                            style: TextStyle(color: Colors.white),),)),
+                            style: TextStyle(color: Colors.white),),)):Container(),
                         Divider(color: kGrey,),
                       ],
 
