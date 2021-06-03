@@ -209,7 +209,7 @@ class _BlogState extends State<Blog> {
           .document(ownerId)
           .collection('userBlog')
           .document(blogId)
-          .updateData({'claps.$currentUserId': false});
+          .updateData({'claps.$currentUserId': true});
      addLikeToActivityFeed();
       setState(() {
         likeCount += 1;
@@ -236,7 +236,7 @@ class _BlogState extends State<Blog> {
           .setData({
         "type": "bloglike",
         "username": currentUser.displayName,
-        "userId": currentUser.id,
+        "userId": ownerId,
         "userProfileImg": currentUser.photoUrl,
         "postId": blogId,
        "mediaUrl": blogmediaUrl,

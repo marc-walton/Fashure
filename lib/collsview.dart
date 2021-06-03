@@ -43,15 +43,7 @@ int index;
   });
 
   factory Coll.fromDocument(DocumentSnapshot doc) {
-// //    var ret = new List();
-//     listOfImages = [];
-//     for (int i = 0;
-//     i <
-//         doc['collmediaUrl']
-//             .length;
-//     i++) {
-//       listOfImages.add(NetworkImage(  doc['collmediaUrl'][index][i]));
-//     }
+
     return Coll(
       headerImage:doc['headerImage'],
       collId: doc['collId'],
@@ -218,7 +210,7 @@ print(collmediaUrl);
       collRef
 
           .document(collId)
-          .updateData({'claps.$currentUserId': false});
+          .updateData({'claps.$currentUserId': true});
      addLikeToActivityFeed();
       setState(() {
         likeCount += 1;
@@ -245,7 +237,7 @@ print(collmediaUrl);
           .setData({
         "type": "CollectionLikes",
         "username": currentUser.displayName,
-        "userId": currentUser.id,
+        "userId": ownerId,
         "userProfileImg": currentUser.photoUrl,
         "postId": collId,
        "mediaUrl": headerImage,

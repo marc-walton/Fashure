@@ -78,7 +78,7 @@ class CollCommentsState extends State<CollComments> {
        "type": "Collectioncomment",
        "commentData": collcommentController.text,
        "username": currentUser.displayName,
-       "userId": currentUser.id,
+       "userId": collOwnerId,
        "userProfileImg": currentUser.photoUrl,
        "postId": collId,
        "mediaUrl": blogMediaUrl,

@@ -78,7 +78,7 @@ class BlogCommentsState extends State<BlogComments> {
        "type": "blogcomment",
        "commentData": blogcommentController.text,
        "username": currentUser.displayName,
-       "userId": currentUser.id,
+       "userId": blogOwnerId,
        "userProfileImg": currentUser.photoUrl,
        "postId": blogId,
        "mediaUrl": blogMediaUrl,

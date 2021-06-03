@@ -13,6 +13,9 @@ import 'package:country_list_pick/country_list_pick.dart';
 import 'package:fashow/Constants.dart';
 import 'package:fashow/size_config.dart';
 class ServiceDash extends StatefulWidget {
+  final  int selectedPage;
+
+  const ServiceDash({Key key, this.selectedPage}) : super(key: key);
   @override
   _ServiceDashState createState() => _ServiceDashState();
 }
@@ -80,6 +83,8 @@ p()  {
 
   Widget build(BuildContext context) {
     return DefaultTabController(
+      initialIndex:widget.selectedPage ?? 0,
+
       length:3,
       child: Scaffold(
         backgroundColor: kSecondaryColor,

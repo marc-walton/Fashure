@@ -616,7 +616,7 @@ repeatForever: true,
             mainAxisAlignment: MainAxisAlignment.spaceAround,
 
             children: [Container(
-              width:100.0,
+              width:150.0,
               child: FloatingActionButton.extended(
               elevation: 10.0,
 
@@ -635,7 +635,7 @@ repeatForever: true,
               ),
             ),
               Container(
-                width:10.0,
+                width:150.0,
 
                 child: FloatingActionButton.extended(
                   elevation: 200.0,

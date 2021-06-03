@@ -13,6 +13,9 @@ import 'package:country_list_pick/country_list_pick.dart';
 import 'package:fashow/Constants.dart';
 import 'package:fashow/size_config.dart';
 class SellerDash extends StatefulWidget {
+  final  int selectedPage;
+
+  const SellerDash({Key key, this.selectedPage}) : super(key: key);
   @override
   _SellerDashState createState() => _SellerDashState();
 }
@@ -83,6 +86,8 @@ class _SellerDashState extends State<SellerDash> {
 
     Widget build(BuildContext context) {
       return DefaultTabController(
+        initialIndex:widget.selectedPage ?? 0,
+
         length:4,
         child: Scaffold(
           key:  scaffoldKey,

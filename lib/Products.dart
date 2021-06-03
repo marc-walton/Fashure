@@ -11786,7 +11786,7 @@ postusa() {
           .setData({
         "type": "fav",
         "username": currentUser.displayName,
-        "userId": currentUser.id,
+        "userId": ownerId,
         "userProfileImg": currentUser.photoUrl,
         "postId": prodId,
         "mediaUrl": shopmediaUrl,

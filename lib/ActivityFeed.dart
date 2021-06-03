@@ -486,6 +486,27 @@ showServiceDash(context) {
       ),
     );
   }
+  showOrderpay(context) {
+
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => SellerDash(          selectedPage: 1,
+
+        ),
+      ),
+    );
+  }
+  showServicepay(context) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => ServiceDash(          selectedPage: 1,
+
+        ),
+      ),
+    );
+  }
 showOrders(context) {
     Navigator.push(
       context,
@@ -673,7 +694,11 @@ showOrders(context) {
       activityItemText = 'Commented on your Collection: $commentData';
     }
 else if (type == 'fav') {
-      activityItemText = 'Wishlisted an item in your shop';
+      activityItemText = 'Someone wish listed an item from your shop';
+    }else if (type == 'O') {
+      activityItemText = 'Payments sent to your bank account';
+    }else if (type == 'S') {
+      activityItemText = 'Payments sent to your bank account';
     }
 
     else {
@@ -1122,8 +1147,7 @@ ReviewO(ParentContext){
 
   }
 ServicePayment(ParentContext){
-    print(postId);
-    print(userId);
+
   return
 
     Padding(

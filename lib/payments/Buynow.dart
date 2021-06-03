@@ -1753,11 +1753,10 @@ class _BuyNowState extends State<BuyNow> {
       'message':'You received an order!',
     });
 payment();
-    subtractQuantity();
-    Get.offAll( ActivityFeed());
   }
   void _handlePaymentSuccess(PaymentSuccessResponse response) {
-
+    onSuccess();
+    subtractQuantity();
     Get.offAll( ActivityFeed());
   Fluttertoast.showToast(
   msg: "Payment SUCCESS: " + response.paymentId, timeInSecForIos: 4);

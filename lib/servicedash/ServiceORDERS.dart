@@ -24,12 +24,10 @@ class _ServiceOrdersState extends State<ServiceOrders> {
 
     String usd,
     String inr,
-    String cny,
     String eur,
     String gbp,
     String Fusd,
     String Finr,
-    String Fcny,
     String Feur,
     String Fgbp,
     String adavance,
@@ -326,7 +324,7 @@ adavance: advancepay,finalp: finalpay,
 
                         ),
 
-                        fulfilled=='true'  ?Center(child: RaisedButton(
+                        fulfilled=='false'  ?Center(child: RaisedButton(
                           color: kblue,
                           onPressed:(){
                             Navigator.push(context, MaterialPageRoute(builder: (context) =>ServiceFulfill(ownerId: ownerId,orderId: orderId,cusId:cusId)));},
@@ -377,10 +375,8 @@ adavance: advancepay,finalp: finalpay,
 
             String advancepay = documentSnapshot.data['advancepay'];
             String finalpay = documentSnapshot.data['finalpay'];
-            String courierId = documentSnapshot.data['courierId'];
             String orderStatus = documentSnapshot.data['orderStatus'];
-            String title = documentSnapshot.data['size'];
-            String Address = documentSnapshot.data['title'];
+            String title = documentSnapshot.data['title'];
 String description = documentSnapshot.data['description'];
 
             return
@@ -429,14 +425,6 @@ adavance: advancepay, finalp: finalpay,
                       ),
 
 
-                      ListTile(
-                        title:                       Text('orderStatus:$orderStatus',
-                          style: TextStyle(color: kText),),
-
-                      ),    ListTile(
-                        title:                           Text('Shipment Id:$courierId',
-                          style: TextStyle(color: kText),),
-                      ),
 
 
                     ],
