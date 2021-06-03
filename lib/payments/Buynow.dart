@@ -241,8 +241,6 @@ class _BuyNowState extends State<BuyNow> {
   _razorpay.on(Razorpay.EVENT_PAYMENT_SUCCESS, _handlePaymentSuccess);
   _razorpay.on(Razorpay.EVENT_PAYMENT_ERROR, _handlePaymentError);
   _razorpay.on(Razorpay.EVENT_EXTERNAL_WALLET, _handleExternalWallet);
-  print('j fjbkbg  $fourxl');
-  print(widget.fourxl);
 
   }
 
@@ -466,12 +464,11 @@ class _BuyNowState extends State<BuyNow> {
     else if(widget.size=='4XL'){
 
       fourxl--;
-      print('bh hkjghhhhhhhjnkghgmliknmhnk,nkikiytgyi $fourxl');
-    await  Firestore.instance.collection('products')
+      Firestore.instance.collection('products')
           .document(widget.ownerId)
           .collection('userProducts')
           .document(widget.prodId)
-          .updateData({'fourxlQuantity':fourxl,
+          .updateData({'4xlQuantity':fourxl,
 
       });
 
@@ -482,7 +479,7 @@ class _BuyNowState extends State<BuyNow> {
           .document(widget.ownerId)
           .collection('userProducts')
           .document(widget.prodId)
-          .updateData({'fivexlQuantity':fivexl,
+          .updateData({'5xlQuantity':fivexl,
 
       });
     }
@@ -492,7 +489,7 @@ class _BuyNowState extends State<BuyNow> {
           .document(widget.ownerId)
           .collection('userProducts')
           .document(widget.prodId)
-          .updateData({'sixxlQuantity':sixxl,
+          .updateData({'6xlQuantity':sixxl,
 
       });
     }
@@ -502,7 +499,7 @@ class _BuyNowState extends State<BuyNow> {
           .document(widget.ownerId)
           .collection('userProducts')
           .document(widget.prodId)
-          .updateData({'sevenxlQuantity':sevenxl,
+          .updateData({'7xlQuantity':sevenxl,
 
       });
     }
@@ -512,7 +509,7 @@ class _BuyNowState extends State<BuyNow> {
           .document(widget.ownerId)
           .collection('userProducts')
           .document(widget.prodId)
-          .updateData({'eightxlQuantity':eightxl,
+          .updateData({'8xlQuantity':eightxl,
 
       });
     }
@@ -1321,7 +1318,7 @@ class _BuyNowState extends State<BuyNow> {
           .document(widget.ownerId)
           .collection('userProducts')
           .document(widget.prodId)
-          .updateData({'fourxlQuantity':fourxl,
+          .updateData({'4xlQuantity':fourxl,
 
       });
     }
@@ -1760,9 +1757,8 @@ payment();
     Get.offAll( ActivityFeed());
   }
   void _handlePaymentSuccess(PaymentSuccessResponse response) {
-    print('kjfd');
 
-    subtractQuantity();
+    Get.offAll( ActivityFeed());
   Fluttertoast.showToast(
   msg: "Payment SUCCESS: " + response.paymentId, timeInSecForIos: 4);
   }

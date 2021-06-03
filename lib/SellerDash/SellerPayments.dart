@@ -158,9 +158,8 @@ class _SellerPaymentsState extends State<SellerPayments> {
             String eur = documentSnapshot.data['eur'];
             String gbp = documentSnapshot.data['gbp'];
             return
-                ListView(
-                  shrinkWrap:true,
-                  scrollDirection: Axis.vertical,
+                Column(
+
                   children: [
                     df(productname:productname, usd:usd,inr:inr,cny:cny,eur:eur,gbp:gbp, prodId:prodId, ownerId:ownerId,),
 
@@ -197,9 +196,8 @@ class _SellerPaymentsState extends State<SellerPayments> {
             String eur = documentSnapshot.data['eur'];
             String gbp = documentSnapshot.data['gbp'];
             return
-              ListView(
-                shrinkWrap:true,
-                scrollDirection: Axis.vertical,
+              Column(
+
                 children: [
                   df(productname:productname, usd:usd,inr:inr,cny:cny,eur:eur,gbp:gbp, prodId:prodId, ownerId:ownerId,),
 

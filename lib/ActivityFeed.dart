@@ -1,4 +1,5 @@
 import 'package:badges/badges.dart';
+import 'package:bubble_tab_indicator/bubble_tab_indicator.dart';
 import 'package:fashow/Product_screen.dart';
 import 'package:fashow/SellerDash/alldash.dart';
 import 'package:fashow/SellerDash/sellerdashboard.dart';
@@ -226,44 +227,53 @@ class  _ActivityFeedState extends State<ActivityFeed>  with  TickerProviderState
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: PreferredSize(
-          preferredSize: Size.fromHeight(100.0),
+          preferredSize: Size.fromHeight(130.0),
           child: AppBar(title:  FittedBox(
               fit: BoxFit.contain,child: Text(_myHandler.title,style: TextStyle(fontFamily: 'MajorMonoDisplay'),)),
               backgroundColor: _myHandler.color,
 
-              bottom: new TabBar(
-
-                controller: _controller,
-                tabs: <Widget>[
-                  FittedBox(
-                    fit: BoxFit.contain,
-                    child: Row(
-                      children: [
-                        Text('Notifications'),
-                        badgescount(),
-                      ],
+              bottom: PreferredSize(
+                preferredSize: Size.fromHeight(100.0),
+                child:Container(
+                  height: 80.0,
+                  child: TabBar(
+                    indicatorSize:TabBarIndicatorSize.tab,
+                    indicator:BubbleTabIndicator(indicatorHeight:40.0,
+                      indicatorColor: kblue,
                     ),
-                  ),
-                  FittedBox(
-                    fit: BoxFit.contain,
-                    child: Row(
-                      children: [
-                        Text('Chats'),
-                        // badgescountmessage(),
-                      ],
-                    ),
-                  ),
-                  FittedBox(
-                    fit: BoxFit.contain,
-                    child: Row(
-                      children: [
-                        Text('Settings'),
+                    controller: _controller,
+                    tabs: <Widget>[
+                      FittedBox(
+                        fit: BoxFit.contain,
+                        child: Row(
+                          children: [
+                            Text('Notifications'),
+                            badgescount(),
+                          ],
+                        ),
+                      ),
+                      FittedBox(
+                        fit: BoxFit.contain,
+                        child: Row(
+                          children: [
+                            Text('Chats'),
+                            // badgescountmessage(),
+                          ],
+                        ),
+                      ),
+                      FittedBox(
+                        fit: BoxFit.contain,
+                        child: Row(
+                          children: [
+                            Text('Settings'),
 
-                      ],
-                    ),
-                  ),
+                          ],
+                        ),
+                      ),
 
-                ],
+                    ],
+                  ),
+                ),
               ),
               iconTheme: new IconThemeData(color: kSecondaryColor),
               actions: <Widget>[
@@ -271,9 +281,10 @@ class  _ActivityFeedState extends State<ActivityFeed>  with  TickerProviderState
                 Stack(
                   children: [
                     OutlineButton(
+                      borderSide: BorderSide(color: kblue),
                       color: Colors.white,
                       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-                     child: Text('DashBoard',style: TextStyle(color: Colors.white),),
+                     child: Text('Dashboard',style: TextStyle(color: Colors.white,fontSize: 20.0),),
                       onPressed: () {
            Navigator.push(context, MaterialPageRoute(builder: (context) =>AllDash()));
                         // do something
@@ -459,7 +470,8 @@ showSellerDash(context) {
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => SellerDash(
+        builder: (context) => AllDash(
+          selectedPage: 0,
         ),
       ),
     );
@@ -468,7 +480,8 @@ showServiceDash(context) {
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => ServiceDash(
+        builder: (context) => AllDash(          selectedPage: 0,
+
         ),
       ),
     );
@@ -477,7 +490,7 @@ showOrders(context) {
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) =>  Orders( ),
+        builder: (context) =>  Orders(),
       ),
     );
   }

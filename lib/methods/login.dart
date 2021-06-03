@@ -1,9 +1,12 @@
+import 'package:alert_dialog/alert_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fashow/HomePage.dart';
 import 'package:fashow/Constants.dart';
 import 'package:fashow/methods/register.dart';
+import 'package:get/get.dart';
+
 class LoginPage extends StatefulWidget {
   LoginPage({Key key}) : super(key: key);
 
@@ -41,25 +44,72 @@ class _LoginPageState extends State<LoginPage> {
       return null;
     }
   }
+  Future<void> resetPassword({String email,parentContext}) async {
+    return
+    showModalBottomSheet(
+        context: parentContext,
+        builder: (BuildContext context) {
+          return
+            Padding(
+              padding: const EdgeInsets.all(10.0),
+              child: Container(
 
+                child:        Form(
+                  key: _loginFormKey,
+                  child: Column(
+                    children: <Widget>[
+                      TextFormField(
+                        style: TextStyle(color:kText),
+                        decoration: InputDecoration(
+                            labelStyle:  TextStyle(color:kText),
+                            hintStyle:  TextStyle(color:kText),
+                            labelText: 'Email*,', hintText: "john.doe@gmail.com"),
+                        controller: emailInputController,
+                        keyboardType: TextInputType.emailAddress,
+                        validator: emailValidator,
+                      ),
+                      RaisedButton(
+
+                        child: Text("Send mail"),
+                        color: kblue,
+                        textColor: Colors.white,
+                        onPressed: () async {
+                          if (_loginFormKey.currentState.validate()) {
+                            await  FirebaseAuth.instance.sendPasswordResetEmail(email: emailInputController.text);
+
+                          }
+                          Get.back();
+                          alert(
+                            parentContext,
+                            content: Text('Password reset has been sent to your Email'),
+                            textOK: Text('Ok'),
+                          );
+                        },
+                      ),
+
+                    ],
+                  ),
+                )
+
+              ),
+            );
+
+        }
+    );
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
           backgroundColor: kPrimaryColor,
-          title: Text("Login", style: TextStyle(color:kText),),
+          title: Text("Login", style: TextStyle(color:Colors.white),),
         ),
         body: Container(
-            decoration: BoxDecoration(
-              gradient: LinearGradient(
-                begin: Alignment.topRight,
-                end: Alignment.bottomLeft,
-                colors:[ kPrimaryColor,
-                  kSecondaryColor
 
-                ],
-              ),
+            decoration: BoxDecoration(
+                gradient: fabGradient
             ) ,
+            alignment: Alignment.center,
             padding: const EdgeInsets.all(20.0),
             child: SingleChildScrollView(
                 child: Form(
@@ -85,6 +135,14 @@ class _LoginPageState extends State<LoginPage> {
                         controller: pwdInputController,
                         obscureText: true,
                         validator: pwdValidator,
+                      ),
+                      FlatButton(
+                        child: Text("Forgot Password?",  style: TextStyle(color:kText),),
+                        onPressed: () {
+                          Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => RegisterPage()))    ;                    },
                       ),
                       RaisedButton(
 

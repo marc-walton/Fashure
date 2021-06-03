@@ -231,7 +231,7 @@ print(advancepay);
       SizedBox( height: 8.0,),
       Row(
         children: [
-          Text('Payment on delivery: \u0024$advance',style: TextStyle(
+          Text('Payment on delivery: \u0024$finalpay',style: TextStyle(
             color: kText.withOpacity(0.5),
           )),
         ],
@@ -308,16 +308,52 @@ print(advancepay);
     }
   }
   paymentbutton({
-    String amount,String due,String custId,String cusName,String cusImg,String ownerId,
+    String amount, String title,String due,String custId,String cusName,String cusImg,String ownerId,
   }){
+    //one-time payment
+     if( due == "") {
+       if (widget.advancepay == 'false') {
+         return
+         Center(
+           child: RaisedButton(
+             onPressed: () {
+               Get.to(PaymentSer(title: widget.title,
+                 Amount: amount,
+                 OrderId: orderId,
+                 OwnerId: ownerId,
+                 profileimg: cusImg,
+                 username: cusName,
+                 advancepay: advancepay,
+                 finalpay: finalpay,
+                 Finr: Finr,
+                 eur: eur,
+                 usd: usd,
+                 inr: inr,
+                 gbp: gbp,
+                 Feur: Feur,
+                 Fusd: Fusd,
+                 Fgbp: Fgbp,
+               ));
+             },
+             color: kblue,
+             child: Text('Pay Now', style: TextStyle(
+                 color: Colors.white),),
+           ),
+         );
+       }
+       else{
+         return Container();
+       }
+     }
     //installment
-    if(widget.advancepay == 'false') {
+     else if(widget.advancepay == 'false') {
       return
       Center(
         child: RaisedButton(
           onPressed: (){
 
-Get.to( PaymentSer(Amount:amount,OrderId: orderId,
+Get.to( PaymentSer(              title: widget.title,
+  Amount:amount,OrderId: orderId,
   OwnerId: ownerId,profileimg: cusImg,username: cusName,advancepay: advancepay,finalpay: finalpay,Finr: Finr,
   eur:eur,
   usd:usd,
@@ -339,7 +375,7 @@ Get.to( PaymentSer(Amount:amount,OrderId: orderId,
         Center(
           child: RaisedButton(
             onPressed: (){
-              Get.to( PaymentSer(Amount:due,OrderId: orderId,
+              Get.to( PaymentSer(  title: widget.title,Amount:due,OrderId: orderId,
                 OwnerId: ownerId,profileimg: cusImg,username: cusName,advancepay: advancepay,finalpay: finalpay,Finr: Finr,
                 eur:eur,
                 usd:usd,
@@ -356,31 +392,7 @@ Get.to( PaymentSer(Amount:amount,OrderId: orderId,
           ),
         );
     }
-    //one-time payment
-   else if( due == "") {
-    return
-      Center(
-        child: RaisedButton(
-          onPressed: (){
-            Get.to( PaymentSer(Amount:amount,OrderId: orderId,
-              OwnerId: ownerId,profileimg: cusImg,username: cusName,advancepay: advancepay,finalpay: finalpay,
-              Finr: Finr,
-              eur:eur,
-              usd:usd,
-              inr:inr,
-              gbp:gbp,
-              Feur:Feur,
-              Fusd:Fusd,
-              Fgbp:Fgbp,
-            ));
 
-          },
-          color: kblue,
-          child: Text('Pay Now',style: TextStyle(
-              color: Colors.white),),
-        ),
-      );
-    }
 
 else{return Container();}
 
@@ -537,27 +549,17 @@ else{return Container();}
             ),
             SizedBox(height:10.0),
 
-            Row(
-              children: [
-                Text('Address: ${widget.Address}',style: TextStyle(
-                    color: kText),),
-              ],
-            ),
+
+
+            widget.Finr ==""?  Text('Payment: ₹${widget.inr}',style: TextStyle(
+              color: kText.withOpacity(0.5),
+            )):currency(advance: widget.inr,finalpay: widget.Finr),
             SizedBox(height:10.0),
 
 
-            currency(advance: widget.inr,finalpay: widget.Finr),
-            SizedBox(height:10.0),
-
-            Row(
-              children: [
-                Text('Total: ₹ ${ int.tryParse(widget.inr) + int.tryParse(widget.Finr,)}'  ,style: TextStyle(
-                    color:kText),),
-              ],
-            ),
-            SizedBox(height:10.0),
-
-            paymentbutton(amount: widget.inr,due: widget.Finr,
+            paymentbutton(
+              title: widget.title,
+              amount: widget.inr,due: widget.Finr,
               ownerId:widget.ownerId,
               cusName:widget.cusName,
               cusImg:widget.cusImg, ),
@@ -638,25 +640,17 @@ else{return Container();}
             ),
             SizedBox(height:10.0),
 
-            Row(
-              children: [
-                Text('Address: ${widget.Address}',style: TextStyle(
-                    color: kText),),
-              ],
-            ),
+            widget.Finr ==""?  Text('Payment: €${widget.eur}',style: TextStyle(
+              color: kText.withOpacity(0.5),
+            )):
 
             currency(advance: widget.eur,finalpay: widget.Feur),
             SizedBox(height:10.0),
 
-            Row(
-              children: [
-                Text('Total: € ${ int.tryParse(widget.eur) + int.tryParse(widget.Feur,)}'  ,style: TextStyle(
-                    color:kText),),
-              ],
-            ),
-            SizedBox(height:10.0),
 
             paymentbutton(amount: widget.eur,due: widget.Feur,
+              title: widget.title,
+
               ownerId:widget.ownerId,
               cusName:widget.cusName,
               cusImg:widget.cusImg, ),
@@ -737,27 +731,18 @@ else{return Container();}
             ),
             SizedBox(height:10.0),
 
-            Row(
-              children: [
-                Text('Address: ${widget.Address}',style: TextStyle(
-                    color: kText),),
-              ],
-            ),
-            SizedBox(height:10.0),
 
+    widget.Finr ==""?  Text('Payment: £${widget.gbp}',style: TextStyle(
+    color: kText.withOpacity(0.5),
+    )):
             currency(advance: widget.gbp,finalpay: widget.Fgbp),
             SizedBox(height:10.0),
 
-            Row(
-              children: [
-                Text('Total: £ ${ int.tryParse(widget.gbp) + int.tryParse(widget.Fgbp,)}'  ,style: TextStyle(
-                    color:kText),),
-              ],
-            ),
-            SizedBox(height:10.0),
 
             paymentbutton(amount: widget.gbp,due: widget.Fgbp,
               ownerId:widget.ownerId,
+              title: widget.title,
+
               cusName:widget.cusName,
               cusImg:widget.cusImg, ),
             SizedBox(height:10.0),
@@ -837,26 +822,16 @@ else{return Container();}
             ),
             SizedBox(height:10.0),
 
-            Row(
-              children: [
-                Text('Address: ${widget.Address}',style: TextStyle(
-                    color: kText),),
-              ],
-            ),
-            SizedBox(height:10.0),
+
+            widget.Finr ==""?  Text('Payment: \u0024${widget.usd}',style: TextStyle(
+              color: kText.withOpacity(0.5),
+            )):
 
             currency(advance: widget.usd,finalpay: widget.Fusd),
             SizedBox(height:10.0),
 
-            Row(
-              children: [
-                Text('Total: \u0024 ${ int.tryParse(widget.usd) + int.tryParse(widget.Fusd,)}'  ,style: TextStyle(
-                    color:kText),),
-              ],
-            ),
-            SizedBox(height:10.0),
-
-            paymentbutton(amount: widget.usd,due: widget.Fusd,
+            paymentbutton(              title: widget.title,
+              amount: widget.usd,due: widget.Fusd,
               ownerId:widget.ownerId,
               cusName:widget.cusName,
               cusImg:widget.cusImg, ),

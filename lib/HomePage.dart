@@ -526,7 +526,6 @@ print(loggedInUser.displayName);
             Designer(),
             LiveTv(),
           ActivityFeed(),
-//          Upload(currentUser: currentUser),
           ],
           controller: pageController,
           onPageChanged: onPageChanged,
@@ -570,18 +569,13 @@ print(loggedInUser.displayName);
 
   Scaffold  buildUnAuthScreen(parentContext) {
     return Scaffold(
+      backgroundColor: Color(0xffffd194),
       body: Container(
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topRight,
-            end: Alignment.bottomLeft,
-            colors:[ kPrimaryColor,
-              kSecondaryColor
 
-            ],
-          ),
+        decoration: BoxDecoration(
+            gradient: fabGradient
         ) ,
-          alignment: Alignment.center,
+        alignment: Alignment.center,
           child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -619,32 +613,44 @@ repeatForever: true,
         bottomNavigationBar: Container(
           color: Colors.transparent,
           child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
 
-            children: [FloatingActionButton.extended(
+            children: [Container(
+              width:100.0,
+              child: FloatingActionButton.extended(
+              elevation: 10.0,
+
               heroTag:'in',
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(15.0))),
 
-              backgroundColor: kblue,
-              onPressed: ()=>  Navigator.push(
-                parentContext,
-                  MaterialPageRoute(
-                      builder: (context) => LoginPage(
-
-                      )),
-              ),
-              label: Text('Sign in',style:TextStyle(color: kText) ,),
-            ),
-              FloatingActionButton.extended(
-                heroTag:'up',
                 backgroundColor: kblue,
-                onPressed: ()=>Navigator.push(
+                onPressed: ()=>  Navigator.push(
                   parentContext,
-                  MaterialPageRoute(
-                      builder: (context) => RegisterPage(
+                    MaterialPageRoute(
+                        builder: (context) => LoginPage(
 
-                      )),
+                        )),
                 ),
-                label: Text('Sign up',style:TextStyle(color: kText) ,),
+                label: Text('Sign in',style:TextStyle(color: Colors.white) ,),
+              ),
+            ),
+              Container(
+                width:10.0,
+
+                child: FloatingActionButton.extended(
+                  elevation: 200.0,
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(15.0))),
+                  heroTag:'up',
+                  backgroundColor: kblue,
+                  onPressed: ()=>Navigator.push(
+                    parentContext,
+                    MaterialPageRoute(
+                        builder: (context) => RegisterPage(
+
+                        )),
+                  ),
+                  label: Text('Sign up',style:TextStyle(color: Colors.white) ,),
+                ),
               ),],
           ),
         ),

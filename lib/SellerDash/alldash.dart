@@ -10,6 +10,9 @@ import 'package:fashow/Constants.dart';
 import 'package:fashow/size_config.dart';
 
 class AllDash extends StatefulWidget {
+  final  int selectedPage;
+
+  const AllDash({Key key, this.selectedPage}) : super(key: key);
   @override
   _AllDashState createState() => _AllDashState();
 }
@@ -102,6 +105,7 @@ getop() async {
   Widget build(BuildContext context) {
     return Expanded(
       child: DefaultTabController(
+        initialIndex:widget.selectedPage ?? 0,
         length:2,
         child: Scaffold(
           backgroundColor: kSecondaryColor,

@@ -52,48 +52,19 @@ bool save = false;
       return null;
     }
   }
-usernamecheck()async{
-    final QuerySnapshot result = await Firestore.instance
-    .collection('users')
-    .where('username',isEqualTo: lastNameInputController.text)
-    .getDocuments();
-    final List<DocumentSnapshot> documents = result.documents;
-    if(documents.length > 0){
-      alert(
-        context,
-        title: Text('User name is already taken'),
-        content: Text('Please chose another username'),
-        textOK: Text('Ok'),
-      );
-    }
-    else{
-      setState(() {
-        save = true;
-      });
-    }
-
-}
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor:                   kSecondaryColor,
 
         appBar: AppBar(
           backgroundColor: kPrimaryColor,
-          title: Text("Register", style: TextStyle(color:kText),),
+          title: Text("Register", style: TextStyle(color:Colors.white),),
         ),
         body: Container(
             decoration: BoxDecoration(
-              gradient: LinearGradient(
-                begin: Alignment.topRight,
-                end: Alignment.bottomLeft,
-                colors:[ kPrimaryColor,
-                  kSecondaryColor
-
-                ],
-              ),
+                gradient: fabGradient
             ) ,
-            padding: const EdgeInsets.all(20.0),
+            alignment: Alignment.center,            padding: const EdgeInsets.all(20.0),
             child: SingleChildScrollView(
                 child: Form(
                   key: _registerFormKey,
@@ -188,11 +159,11 @@ usernamecheck()async{
                                 {
                                   "display": "󠁧󠁢󠁥🇬🇧,United Kingdom",
                                   "value": "UK",
-                                }, {
-                                  "display": "🇨🇳,China",
-                                  "value": "China",
                                 },
-
+                                {
+                                  "display": "󠁧󠁢󠁥Rest of the World",
+                                  "value": "Rest",
+                                },
                               ],
                               textField: 'display',
                               valueField: 'value',
@@ -204,10 +175,9 @@ usernamecheck()async{
                       RaisedButton(
                         color: kblue,
 
-                        child: Text("Register",        style: TextStyle(color:kText),),
+                        child: Text("Register",        style: TextStyle(color:Colors.white),),
                         textColor: Colors.white,
                         onPressed: () {
-                          usernamecheck();
                           if (_registerFormKey.currentState.validate()||save == true) {
                             if (pwdInputController.text ==
                                 confirmPwdInputController.text) {

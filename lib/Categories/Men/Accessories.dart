@@ -6,7 +6,6 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:fashow/Categories/Men/hats.dart';
 import 'package:fashow/Categories/Men/braces.dart';
 import 'package:fashow/Categories/Men/ties.dart';
-
 import 'package:paginate_firestore/paginate_firestore.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fashow/HomePage.dart';
@@ -877,7 +876,6 @@ subtitle:            Text( "₹$inr",style: TextStyle(color: kText,
       child: Expanded(
         child: DefaultTabController(
             initialIndex:widget.selectedPage ?? 0,
-
             length:13,
             child: Scaffold(
               appBar:AppBar(
@@ -911,7 +909,7 @@ subtitle:            Text( "₹$inr",style: TextStyle(color: kText,
 
               decoration: BoxDecoration(
     gradient: fabGradient
-    ) ,
+    ),
     alignment: Alignment.center,
                 child: RotatedBox(
                   quarterTurns: 1,

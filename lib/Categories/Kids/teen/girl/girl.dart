@@ -275,7 +275,7 @@ class _TeenGirlState extends State<TeenGirl> {
             length:16,
             child: Scaffold(
               appBar:AppBar(
-                toolbarHeight: SizeConfig.safeBlockHorizontal * 8,
+                toolbarHeight: SizeConfig.safeBlockHorizontal * 15,
                 backgroundColor: kPrimaryColor,
                 elevation: 0,
                 bottom: TabBar(
@@ -351,7 +351,7 @@ class _TeenGirlState extends State<TeenGirl> {
             length:15,
             child: Scaffold(
               appBar:AppBar(
-                toolbarHeight: SizeConfig.safeBlockHorizontal * 8,
+                toolbarHeight: SizeConfig.safeBlockHorizontal * 15,
                 backgroundColor: kPrimaryColor,
                 elevation: 0,
                 bottom: TabBar(

@@ -38,6 +38,7 @@ class _SellerOrdersState extends State<SellerOrders> {
 String orderId = documentSnapshot.data['orderId'];
 String shopmediaUrl = documentSnapshot.data['shopmediaUrl'];
 String cusId = documentSnapshot.data['cusId'];
+String productname = documentSnapshot.data['productname'];
 
           return
             StreamBuilder(
@@ -69,54 +70,53 @@ String cusId = documentSnapshot.data['cusId'];
                           ),
                          ),
                       ),
-StreamBuilder(  stream: productsRef.document(ownerId).collection('userProducts').document(prodId).snapshots(),
+FutureBuilder(  future: productsRef.document(ownerId).collection('userProducts').document(prodId).get(),
     builder: (context, snapshot){
       DocumentSnapshot ds = snapshot.data;
-      String shopmediaUrl= ds['shopmediaUrl'];
-      String productname= ds['productname'];
       String usd= ds['usd'];
       String inr= ds['inr'];
       String eur= ds['eur'];
       String gbp= ds['gbp'];
-
-
+if(snapshot.data != null||snapshot.hasData){
   return
-ListTile(
+    ListTile(
 
 
-   leading: GestureDetector(
-    onTap: () => Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => ProductScreen(
-            prodId: prodId,
-            userId: ownerId,
+      leading: GestureDetector(
+        onTap: () => Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => ProductScreen(
+              prodId: prodId,
+              userId: ownerId,
+            ),
           ),
         ),
-      ),
-      child: ClipRRect(
-      borderRadius: BorderRadius.circular(20.0),child: Container(child: cachedNetworkImage(shopmediaUrl))),),
-subtitle: currentUser.country=='India'? Text( "₹$inr",style: TextStyle(color: kText,
-    fontSize: 20.0,
-    fontWeight: FontWeight.bold)):
-currentUser.country=='US'? Text( " \u0024 $usd",style: TextStyle(color:  kText,
-    fontSize: 20.0,
-    fontWeight: FontWeight.bold)):
-currentUser.country == 'Europe'?    Text( " € $eur",style: TextStyle(color: kText,
-    fontSize: 20.0,
-    fontWeight: FontWeight.bold)):
-currentUser.country == 'UK'? Text( " £ $gbp",style: TextStyle(color: kText,
-    fontSize: 20.0,
-    fontWeight: FontWeight.bold)): Text( " \u0024 $usd",style: TextStyle(color:  kText,
-    fontSize: 20.0,
-    fontWeight: FontWeight.bold)),
-   title:Text(productname, style: TextStyle(
-       color:kText,
-       fontSize: 20.0,
-       fontWeight: FontWeight.bold),),
+        child: ClipRRect(
+            borderRadius: BorderRadius.circular(20.0),child: Container(child: cachedNetworkImage(shopmediaUrl))),),
+      subtitle: currentUser.country=='India'? Text( "₹$inr",style: TextStyle(color: kText,
+          fontSize: 20.0,
+          fontWeight: FontWeight.bold)):
+      currentUser.country=='USA'? Text( " \u0024 $usd",style: TextStyle(color:  kText,
+          fontSize: 20.0,
+          fontWeight: FontWeight.bold)):
+      currentUser.country == 'Europe'?    Text( " € $eur",style: TextStyle(color: kText,
+          fontSize: 20.0,
+          fontWeight: FontWeight.bold)):
+      currentUser.country == 'UK'? Text( " £ $gbp",style: TextStyle(color: kText,
+          fontSize: 20.0,
+          fontWeight: FontWeight.bold)): Text( " \u0024 $usd",style: TextStyle(color:  kText,
+          fontSize: 20.0,
+          fontWeight: FontWeight.bold)),
+      title:Text(productname, style: TextStyle(
+          color:kText,
+          fontSize: 20.0,
+          fontWeight: FontWeight.bold),),
 
 
-);
+    );}
+else {return Center(child: CircularProgressIndicator(),);}
+
     }),
 
                       Row(
@@ -132,7 +132,7 @@ currentUser.country == 'UK'? Text( " £ $gbp",style: TextStyle(color: kText,
                             style: TextStyle(color: kText),),
                          ],
                        ),
-                      fulfilled=='true'?   Center(child: RaisedButton(
+                      fulfilled=='false'?   Center(child: RaisedButton(
                         color: kblue,
                           onPressed:(){
                             Navigator.push(context, MaterialPageRoute(builder: (context) =>OrderFulfill(orderId:orderId ,ownerId: ownerId,shopmediaUrl:shopmediaUrl,prodId:prodId,cusId:cusId)));},
@@ -171,7 +171,9 @@ currentUser.country == 'UK'? Text( " £ $gbp",style: TextStyle(color: kText,
           String size = documentSnapshot.data['size'];
           String Address = documentSnapshot.data['Address'];
           String orderId = documentSnapshot.data['orderId'];
-
+          String shopmediaUrl = documentSnapshot.data['shopmediaUrl'];
+          String cusId = documentSnapshot.data['cusId'];
+          String productname = documentSnapshot.data['productname'];
           return
             StreamBuilder(
               stream: usersRef.document(ownerId).snapshots(),
@@ -205,8 +207,7 @@ currentUser.country == 'UK'? Text( " £ $gbp",style: TextStyle(color: kText,
                       StreamBuilder(  stream: productsRef.document(ownerId).collection('userProducts').document(prodId).snapshots(),
                           builder: (context, snapshot){
                             DocumentSnapshot ds = snapshot.data;
-                            String shopmediaUrl= ds['shopmediaUrl'];
-                            String productname= ds['productname'];
+
                             String usd= ds['usd'];
                             String inr= ds['inr'];
                             String eur= ds['eur'];
@@ -232,7 +233,7 @@ currentUser.country == 'UK'? Text( " £ $gbp",style: TextStyle(color: kText,
                                 subtitle: currentUser.country=='India'? Text( "₹$inr",style: TextStyle(color: kText,
                                     fontSize: 20.0,
                                     fontWeight: FontWeight.bold)):
-                                currentUser.country=='US'? Text( " \u0024 $usd",style: TextStyle(color:  kText,
+                                currentUser.country=='USA'? Text( " \u0024 $usd",style: TextStyle(color:  kText,
                                     fontSize: 20.0,
                                     fontWeight: FontWeight.bold)):
                                 currentUser.country == 'Europe'?    Text( " € $eur",style: TextStyle(color: kText,

@@ -14,6 +14,7 @@ final String finalAmount;
   final String OwnerId;
   final String advancepay;
   final String finalpay;
+final String title;
 
   final String username;
   final String profileimg;
@@ -38,6 +39,7 @@ final String finalAmount;
     this.eur,
     this.inr,
     this.gbp,
+this.title,
 
       this.Fusd,
     this.Feur,
@@ -194,7 +196,7 @@ class _PaymentSerState extends State<PaymentSer> {
         .document(widget.OwnerId)
         .collection('ServicePayments')
         .document(widget.OrderId)
-        .setData({
+        .updateData({
       'ownerId':widget.OwnerId,
       'orderId':widget.OrderId,
       "timestamp": timestamp,
@@ -207,7 +209,7 @@ class _PaymentSerState extends State<PaymentSer> {
       'Fusd':widget.Fusd,
       'Finr':widget.Finr,
       'Fgbp':widget.Fgbp,
-
+'title':widget.title,
       'fulfilled':'false',
     });
   }

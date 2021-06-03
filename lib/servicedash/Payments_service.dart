@@ -196,15 +196,14 @@ class _ServicePaymentsState extends State<ServicePayments> {
               String usd = documentSnapshot.data['usd'];
               String eur = documentSnapshot.data['eur'];
               String gbp = documentSnapshot.data['gbp'];
-                String Finr = documentSnapshot.data['Finr'];
+              String Finr = documentSnapshot.data['Finr'];
               String Fusd = documentSnapshot.data['Fusd'];
               String Feur = documentSnapshot.data['Feur'];
               String Fgbp = documentSnapshot.data['Fgbp'];
 
               return
-                ListView(
-                  shrinkWrap:true,
-                  scrollDirection: Axis.vertical,
+                Column(
+
                   children: [
                     df(productname:title,
                       usd:usd,inr:inr,eur:eur,gbp:gbp,
@@ -218,8 +217,7 @@ class _ServicePaymentsState extends State<ServicePayments> {
             },
             query:  Firestore.instance.collection('Payments')
                 .document(currentUser.id)
-                .collection('ServicePayments')
-                .orderBy('timestamp',descending: true)
+                .collection('ServicePayments').orderBy('timestamp',descending: true)
                 .where('fulfilled',isEqualTo: 'false')
 
         ),
@@ -255,9 +253,8 @@ class _ServicePaymentsState extends State<ServicePayments> {
               String Fgbp = documentSnapshot.data['Fgbp'];
 
               return
-                ListView(
-                  shrinkWrap:true,
-                  scrollDirection: Axis.vertical,
+                Column(
+
                   children: [
                     df(productname:title,
                       usd:usd,inr:inr,eur:eur,gbp:gbp,
