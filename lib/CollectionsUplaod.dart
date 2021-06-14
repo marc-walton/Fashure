@@ -5,7 +5,6 @@ import 'package:multi_image_picker/multi_image_picker.dart';
 import 'package:flutter/material.dart';
 
 import 'package:fashow/user.dart';
-import 'package:modal_progress_hud/modal_progress_hud.dart';
 
 import 'package:image_cropper/image_cropper.dart';
 import 'package:path_provider/path_provider.dart';
@@ -16,13 +15,12 @@ import 'package:fashow/progress.dart';
 import 'package:fashow/HomePage.dart';
 import 'package:fashow/Constants.dart';
 import 'package:image/image.dart' as Im;
-import 'package:translated_text/translated_text.dart';
 import 'package:uuid/uuid.dart';
 
 
 class UploadColl extends StatefulWidget {
   final GlobalKey<ScaffoldState> globalKey;
-  final Users currentUser;
+  final User currentUser;
 
   UploadColl({this.currentUser,
     this.globalKey});
@@ -85,23 +83,22 @@ class _UploadCollState extends State<UploadColl>
         context: parentContext,
         builder: (context) {
           return SimpleDialog(
-            title: TranslatedText('Create post',to:'${currentUser.language}',textStyle:TextStyle(
-              fontFamily :"MajorMonoDisplay",),),
+            title: Text("Create Post"),
             children: <Widget>[
               SimpleDialogOption(
-                  child: TranslatedText('Photo with camera',to:'${currentUser.language}',), onPressed: () {
+                  child: Text("Photo with Camera"), onPressed: () {
                 getImage(ImageSource.camera);
                 Navigator.pop(context);
               }),
               SimpleDialogOption(
-                  child:TranslatedText('Image from Gallery',to:'${currentUser.language}'),
+                  child: Text("Image from Gallery"),
                   onPressed: () {
                     getImage(ImageSource.gallery);
                     Navigator.pop(context);
                   }
               ),
               SimpleDialogOption(
-                child: TranslatedText('Create post',to:'${currentUser.language}'),
+                child: Text("Cancel"),
                 onPressed: () => Navigator.pop(context),
               )
             ],
@@ -143,9 +140,9 @@ class _UploadCollState extends State<UploadColl>
     });
   }
   Future<String> uploadImage(imageFile) async {
-    UploadTask uploadTask =
+    StorageUploadTask uploadTask =
     storageRef.child("collhead_$CollId.jpg").putFile(imageFile);
-    TaskSnapshot storageSnap = await uploadTask;
+    StorageTaskSnapshot storageSnap = await uploadTask.onComplete;
     String downloadUrl = await storageSnap.ref.getDownloadURL();
     return downloadUrl;
   }
@@ -224,9 +221,9 @@ class _UploadCollState extends State<UploadColl>
   Future<dynamic> postImage(Asset imageFile) async {
 //    ByteData byteData = await imageFile.requestOriginal(quality: 75);
     String fileName = DateTime.now().millisecondsSinceEpoch.toString();
-    Reference reference = FirebaseStorage.instance.ref().child("colle_$fileName.jpg");
-    UploadTask uploadTask = reference.putData((await imageFile.getByteData(quality: 70)).buffer.asUint8List());
-    TaskSnapshot storageTaskSnapshot = await uploadTask;
+    StorageReference reference = FirebaseStorage.instance.ref().child("colle_$fileName.jpg");
+    StorageUploadTask uploadTask = reference.putData((await imageFile.getByteData(quality: 70)).buffer.asUint8List());
+    StorageTaskSnapshot storageTaskSnapshot = await uploadTask.onComplete;
 //    print(storageTaskSnapshot.ref.getDownloadURL());
     return storageTaskSnapshot.ref.getDownloadURL();
   }
@@ -244,20 +241,19 @@ class _UploadCollState extends State<UploadColl>
        if(imageUrls.length==images.length){
          String documnetID = DateTime.now().millisecondsSinceEpoch.toString();
          collRef
-            .doc(CollId).set({
+            .document(CollId).setData({
            'collmediaUrl':imageUrls,
           "collId": CollId,
           "ownerId": widget.currentUser.id,
           "username": widget.currentUser.displayName,
           "photoUrl": widget.currentUser.photoUrl,
           "headerImage":headerImage,
-          "title": titleController.text?? "",
-          "source": sourceController.text?? "",
+          "title": titleController.text,
+          "source": sourceController.text,
           "timestamp": timestamp,
           "claps": {},
          }).then((_){
-           SnackBar snackbar = SnackBar(content:
-           TranslatedText( "Uploaded Successfully",to:'${currentUser.language}',),);
+           SnackBar snackbar = SnackBar(content: Text('Uploaded Successfully'));
            widget.globalKey.currentState.showSnackBar(snackbar);
            setState(() {
              images = [];
@@ -277,13 +273,14 @@ class _UploadCollState extends State<UploadColl>
     return showDialog(
       context: context,
       builder: (context) => new AlertDialog(
-        title: new TranslatedText('Are you sure?',to:'${currentUser.language}'),
-        content: new TranslatedText('Do you want to exit without uploading',to:'${currentUser.language}'),
+        title: new Text('Are you sure?'),
+        content: new Text('Do you want to exit without uploading?'),
         actions: <Widget>[
           new FlatButton(
 
             onPressed: () => Navigator.of(context).pop(false),
-            child:TranslatedText('No',to:'${currentUser.language}'),),
+            child: Text("NO"),
+          ),
           SizedBox(height: 16),
           new FlatButton(
 
@@ -291,7 +288,7 @@ class _UploadCollState extends State<UploadColl>
 
 //            clearImage();
             },
-            child: TranslatedText('Yes',to:'${currentUser.language}'),
+            child: Text("YES"),
           ),
         ],
       ),
@@ -305,8 +302,7 @@ class _UploadCollState extends State<UploadColl>
       shrinkWrap: true,
       children: <Widget>[
         isUploading ? linearProgress() : Text(""),
-        TranslatedText( "Header Image",to:'${currentUser.language}',
-            textStyle: TextStyle(
+        Text('Header Image', style: TextStyle(
             color: kText,
             fontWeight: FontWeight.bold,
             fontSize: 20.0),),
@@ -342,7 +338,8 @@ class _UploadCollState extends State<UploadColl>
                 fillColor: transwhite,
                 border:OutlineInputBorder(borderRadius: BorderRadius.circular(25.0),))),
 SizedBox(height:12.0),
-        FloatingActionButton.extended(onPressed: loadAssets, label: TranslatedText('Pick collection image',to:'${currentUser.language}'),
+        FloatingActionButton.extended(onPressed: loadAssets, label: Text(
+            'Pick Collection Images'),
 backgroundColor: kText,
         ),
         Container(height: 400,
@@ -350,14 +347,14 @@ backgroundColor: kText,
       ],
     );
     return
-
-          WillPopScope(
-            onWillPop:()=>   _onBackPressed(),
-            child:  ModalProgressHUD(
-              color: Colors.black,
-              opacity: 1.0,
-              progressIndicator: Image.asset('assets/img/loading-76.gif'),
-              inAsyncCall: isUploading,
+      Container( decoration: BoxDecoration(
+          gradient: fabGradient
+      ) ,
+        alignment: Alignment.center,
+        child: Stack(
+          children: [
+            WillPopScope(
+              onWillPop:()=>   _onBackPressed(),
               child: Scaffold(
 
                 // resizeToAvoidBottomPadding: true,
@@ -368,13 +365,14 @@ backgroundColor: kText,
                       onPressed:()=>  showDialog(
                     context: context,
                     builder: (context) => new AlertDialog(
-                      title: new TranslatedText('Yes',to:'${currentUser.language}'),
-                      content: new TranslatedText('Do you ant to exit without uploading?',to:'${currentUser.language}'),
+                      title: new Text('Are you sure?'),
+                      content: new Text('Do you want to exit without uploading?'),
                       actions: <Widget>[
                         new FlatButton(
 
                           onPressed: () => Navigator.of(context).pop(false),
-                          child: TranslatedText('No',to:'${currentUser.language}'),),
+                          child: Text("NO"),
+                        ),
                         SizedBox(height: 16),
                         new FlatButton(
 
@@ -382,7 +380,7 @@ backgroundColor: kText,
 
 //            clearImage();
                           },
-                          child: TranslatedText('Yes',to:'${currentUser.language}'),
+                          child: Text("YES"),
                         ),
                       ],
                     ),
@@ -391,10 +389,12 @@ backgroundColor: kText,
                   actions: [
                     RaisedButton(color:kblue,
                       onPressed: isUploading ? null : () => handleSubmit(),
-                       child:TranslatedText('Post',to:'${currentUser.language}',textStyle:TextStyle(
-                             color: Colors.white,
-                             fontWeight: FontWeight.bold ,
-                              fontSize :20.0,)
+                      child: Text(
+                        "Post",
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 20.0),
                       ),
                     )
                   ],
@@ -409,15 +409,17 @@ backgroundColor: kText,
                     alignment: Alignment.center,
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
-                      child:   form,
+                      child: form,
                     ),
                   ),
 
               ),
+
             ),
-
-          );
-
+            isUploading ? Center(child: CircularProgressIndicator(backgroundColor: kText,)) : Text(""),
+          ],
+        ),
+      );
 
 
   }
@@ -438,14 +440,11 @@ backgroundColor: kText,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(8.0),
               ),
-              child: TranslatedText('Header Image',to:'${currentUser.language}',textStyle:TextStyle(
-                fontSize: 22.0,
-                color: Colors.white
-
-              //   "Select Header Image",
-              //   style: TextStyle(
-              //     color: Colors.white,
-              //     fontSize: 22.0,
+              child: Text(
+                "Select Header Image",
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 22.0,
                 ),
               ),
               color: Colors.deepOrange,

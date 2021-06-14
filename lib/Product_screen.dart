@@ -16,9 +16,9 @@ class ProductScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return StreamBuilder(
       stream: productsRef
-          .doc(userId)
+          .document(userId)
           .collection('userProducts')
-          .doc(prodId)
+          .document(prodId)
           .snapshots(),
       builder: (context, snapshot) {
         if (!snapshot.hasData) {

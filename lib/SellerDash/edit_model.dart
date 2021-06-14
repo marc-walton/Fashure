@@ -11,8 +11,7 @@ import 'package:flutter/cupertino.dart';
 import 'dart:async';
 import 'package:fashow/Constants.dart';
 import 'package:fashow/product_custom.dart';
-import 'package:fashow/Profile.dart';import 'package:modal_progress_hud/modal_progress_hud.dart';
-
+import 'package:fashow/Profile.dart';
 class ProdEdit extends StatefulWidget {
   final String prodId;
   final String ownerId;
@@ -70,7 +69,7 @@ class ProdEdit extends StatefulWidget {
   final int Shoe20;
   final int  Shoe21;
   final int mto;
-  final Users currentUser;
+  final User currentUser;
 
   ProdEdit({
     this.prodId,
@@ -135,62 +134,62 @@ class ProdEdit extends StatefulWidget {
   factory ProdEdit.fromDocument(DocumentSnapshot doc) {
 
     return ProdEdit(
-      prodId: doc.data()['prodId'],
-      ownerId: doc.data()['ownerId'],
-      username: doc.data()['displayName'],
+      prodId: doc['prodId'],
+      ownerId: doc['ownerId'],
+      username: doc['displayName'],
 
-      eur: doc.data()['eur'],
-      usd: doc.data()['usd'],
-      inr: doc.data()['inr'],
-      cny: doc.data()['cny'],
-      gbp: doc.data()['gbp'],
-      gender: doc.data()['Gender'],
-      // selectedSizes: doc.data()['selectedSizes'],
-      mto: doc.data()['mtoQuantity'],
-      xxxs: doc.data()['xxxsQuantity'],
-      xxs: doc.data()['xxsQuantity'],
-      xs: doc.data()['xsQuantity'],
-      s: doc.data()['sQuantity'],
-      m: doc.data()['mQuantity'],
-      l: doc.data()['lQuantity'],
-      xl: doc.data()['xlQuantity'],
-      xxl: doc.data()['xxlQuantity'],
-      xxxl: doc.data()['xxxlQuantity'],
-      fourxl: doc.data()['4xlQuantity'],
-      fivexl: doc.data()['5xlQuantity'],
-      sixxl: doc.data()['6xlQuantity'],
-      sevenxl: doc.data()['7xlQuantity'],
-      eightxl: doc.data()['8xlQuantity'],
-      Shoe1: doc.data()['Shoe1'],
-      Shoe2: doc.data()['Shoe2'],
-      Shoe3: doc.data()['Shoe3'],
-      Shoe4: doc.data()['Shoe4'],
-      Shoe5: doc.data()['Shoe5'],
-      Shoe6: doc.data()['Shoe6'],
-      Shoe7: doc.data()['Shoe7'],
-      Shoe8: doc.data()['Shoe8'],
-      Shoe9: doc.data()['Shoe9'],
-      Shoe10: doc.data()['Shoe10'],
-      Shoe11: doc.data()['Shoe11'],
-      Shoe12: doc.data()['Shoe12'],
-      Shoe13: doc.data()['Shoe13'],
-      Shoe14: doc.data()['Shoe14'],
-      Shoe15: doc.data()['Shoe15'],
-      Shoe16: doc.data()['Shoe16'],
-      Shoe17: doc.data()['Shoe17'],
-      Shoe18: doc.data()['Shoe18'],
-      Shoe19: doc.data()['Shoe19'],
-      Shoe20: doc.data()['Shoe20'],
-      Shoe21: doc.data()['Shoe21'],
-      productname: doc.data()['productname'],
-      details: doc.data()['details'],
-      shopmediaUrl: doc.data()['shopmediaUrl'],
-      color:doc.data()['color'],
-      composition:doc.data()['composition'],
-      washandcare:doc.data()['washandcare'],
-      sizeandfit:doc.data()['sizeandfit'],
-      photoUrl:doc.data()['photoUrl'],
-      freesize:doc.data()['freesizeQuantity'],
+      eur: doc['eur'],
+      usd: doc['usd'],
+      inr: doc['inr'],
+      cny: doc['cny'],
+      gbp: doc['gbp'],
+      gender: doc['Gender'],
+      // selectedSizes: doc['selectedSizes'],
+      mto: doc['mtoQuantity'],
+      xxxs: doc['xxxsQuantity'],
+      xxs: doc['xxsQuantity'],
+      xs: doc['xsQuantity'],
+      s: doc['sQuantity'],
+      m: doc['mQuantity'],
+      l: doc['lQuantity'],
+      xl: doc['xlQuantity'],
+      xxl: doc['xxlQuantity'],
+      xxxl: doc['xxxlQuantity'],
+      fourxl: doc['4xlQuantity'],
+      fivexl: doc['5xlQuantity'],
+      sixxl: doc['6xlQuantity'],
+      sevenxl: doc['7xlQuantity'],
+      eightxl: doc['8xlQuantity'],
+      Shoe1: doc['Shoe1'],
+      Shoe2: doc['Shoe2'],
+      Shoe3: doc['Shoe3'],
+      Shoe4: doc['Shoe4'],
+      Shoe5: doc['Shoe5'],
+      Shoe6: doc['Shoe6'],
+      Shoe7: doc['Shoe7'],
+      Shoe8: doc['Shoe8'],
+      Shoe9: doc['Shoe9'],
+      Shoe10: doc['Shoe10'],
+      Shoe11: doc['Shoe11'],
+      Shoe12: doc['Shoe12'],
+      Shoe13: doc['Shoe13'],
+      Shoe14: doc['Shoe14'],
+      Shoe15: doc['Shoe15'],
+      Shoe16: doc['Shoe16'],
+      Shoe17: doc['Shoe17'],
+      Shoe18: doc['Shoe18'],
+      Shoe19: doc['Shoe19'],
+      Shoe20: doc['Shoe20'],
+      Shoe21: doc['Shoe21'],
+      productname: doc['productname'],
+      details: doc['details'],
+      shopmediaUrl: doc['shopmediaUrl'],
+      color:doc['color'],
+      composition:doc['composition'],
+      washandcare:doc['washandcare'],
+      sizeandfit:doc['sizeandfit'],
+      photoUrl:doc['photoUrl'],
+      freesize:doc['freesizeQuantity'],
     );
   }
 
@@ -3437,10 +3436,10 @@ class _ProdEditState extends State<ProdEdit>
 
       }) {
     productsRef
-        .doc(widget.currentUser.id)
+        .document(widget.currentUser.id)
         .collection("userProducts")
-        .doc(prodId)
-        .update({
+        .document(prodId)
+        .updateData({
 
       "freesizeQuantity": freesizeQuantity,
       "xxxsQuantity": xxxsQuantity,
@@ -3696,12 +3695,12 @@ class _ProdEditState extends State<ProdEdit>
   }
   postindia(){
     return FutureBuilder(
-      future: usersRef.doc(ownerId).get(),
+      future: usersRef.document(ownerId).get(),
       builder: (context, snapshot) {
         if (!snapshot.hasData) {
           return circularProgress();
         }
-        Users user = Users.fromDocument(snapshot.data);
+        User user = User.fromDocument(snapshot.data);
         bool isPostOwner = currentUserId == ownerId;
         return Container(
           margin: EdgeInsets.only(top:10.0,left: 10.0,right: 10.0, bottom: 10.0 ),
@@ -3751,77 +3750,72 @@ class _ProdEditState extends State<ProdEdit>
     return WillPopScope
       (
       onWillPop: _onBackPressed,
-      child: ModalProgressHUD(
-        color: Colors.black,
-        opacity: 1.0,
-        progressIndicator: Image.asset('assets/img/loading-76.gif'),
-        inAsyncCall: isUploading,
-        child: Scaffold(
-          key:  scaffoldKey,
-          appBar: AppBar(
-            backgroundColor: kPrimaryColor,
-            leading: IconButton(
-                icon: Icon(Icons.arrow_back, color: kSecondaryColor),
-                onPressed:_onBackPressed),
-            title: Text(
-              'Update Inventory',
-              style: TextStyle(color: Colors.white),
-            ),
-
+      child: Scaffold(
+        key:  scaffoldKey,
+        appBar: AppBar(
+          backgroundColor: kPrimaryColor,
+          leading: IconButton(
+              icon: Icon(Icons.arrow_back, color: kSecondaryColor),
+              onPressed:_onBackPressed),
+          title: Text(
+            'Update Inventory',
+            style: TextStyle(color: Colors.white),
           ),
-          body:isLoading
-              ? circularProgress()
-              : Container(
-            decoration: BoxDecoration(
-                gradient: fabGradient
-            ),
-            alignment: Alignment.center,
-                child: Stack(
-            children:[
-                Column(
-                  children: <Widget>[
-                    isUploading ? linearProgress() : Text(""),
 
-                    postindia(),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        ),
+        body:isLoading
+            ? circularProgress()
+            : Container(
+          decoration: BoxDecoration(
+              gradient: fabGradient
+          ),
+          alignment: Alignment.center,
+              child: Stack(
+          children:[
+              Column(
+                children: <Widget>[
+                  isUploading ? linearProgress() : Text(""),
 
-                      children: [
-                        FloatingActionButton.extended(
-                          backgroundColor: kblue,
-                          onPressed: ()=>AddSize(),
-                          label: Text('Update Inventory',style:TextStyle(color: Colors.white) ,),
-                        ),
-                        FloatingActionButton(
-                          mini: true,
-                          backgroundColor:Colors.white.withOpacity(0.5),
-                          child:Icon(Icons.delete,color:Colors.red,),
-                          onPressed: () {
-                            {
-                              !isPostOwner?showDialog(
-                                  context: context,
-                                  builder: (BuildContext context) {
-                                    return Dialog(
-                                      backgroundColor: kSecondaryColor,
-                                      shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                          BorderRadius.circular(20.0)), //this right here
-                                      child: Container(
-                                        height: 100,
-                                        child: Padding(
-                                          padding: const EdgeInsets.all(12.0),
-                                          child: Column(
-                                            mainAxisAlignment: MainAxisAlignment.center,
-                                            crossAxisAlignment: CrossAxisAlignment.start,
-                                            children: [
-                                              Container(
+                  postindia(),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
 
-                                                child: Align(
-                                                    alignment: Alignment.center,
-                                                    child: Text('Report this post?',style: TextStyle(
-                                                        color: Colors.blueAccent,
-                                                        fontWeight: FontWeight.bold,
-                                                        fontSize: 20.0),)),),
+                    children: [
+                      FloatingActionButton.extended(
+                        backgroundColor: kblue,
+                        onPressed: ()=>AddSize(),
+                        label: Text('Update Inventory',style:TextStyle(color: Colors.white) ,),
+                      ),
+                      FloatingActionButton(
+                        mini: true,
+                        backgroundColor:Colors.white.withOpacity(0.5),
+                        child:Icon(Icons.delete,color:Colors.red,),
+                        onPressed: () {
+                          {
+                            !isPostOwner?showDialog(
+                                context: context,
+                                builder: (BuildContext context) {
+                                  return Dialog(
+                                    backgroundColor: kSecondaryColor,
+                                    shape: RoundedRectangleBorder(
+                                        borderRadius:
+                                        BorderRadius.circular(20.0)), //this right here
+                                    child: Container(
+                                      height: 100,
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(12.0),
+                                        child: Column(
+                                          mainAxisAlignment: MainAxisAlignment.center,
+                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                          children: [
+                                            Container(
+
+                                              child: Align(
+                                                  alignment: Alignment.center,
+                                                  child: Text('Report this post?',style: TextStyle(
+                                                      color: Colors.blueAccent,
+                                                      fontWeight: FontWeight.bold,
+                                                      fontSize: 20.0),)),),
 //        ),FlatButton(
 //        onPressed: () {Navigator.pop(context);  Navigator.push(context, MaterialPageRoute(builder: (context) =>Profile( profileId: currentUser?.id)));
 //        },
@@ -3832,47 +3826,60 @@ class _ProdEditState extends State<ProdEdit>
 //            fontSize: 20.0),),
 //        ),
 
-                                            ],
-                                          ),
+                                          ],
                                         ),
                                       ),
-                                    );
-                                    // ignore: unnecessary_statements
-                                  }):handleDeletePost(context);
-                            }
-                            // do something
-                          },
-                        ),
-                      ],
-                    ),
-                    SizedBox(height: 8.0,),
-
-                    RaisedButton(
-                      color: kblue,
-
-                      onPressed: () async{
-                        isUploading ? null : handleSubmit();
-
-                      },
-                      child: Text(
-                        "Save",
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 20.0),
+                                    ),
+                                  );
+                                  // ignore: unnecessary_statements
+                                }):handleDeletePost(context);
+                          }
+                          // do something
+                        },
                       ),
+                    ],
+                  ),
+                  SizedBox(height: 8.0,),
+
+                  RaisedButton(
+                    color: kblue,
+
+                    onPressed: () async{
+                      isUploading ? null : handleSubmit();
+
+                    },
+                    child: Text(
+                      "Save",
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 20.0),
                     ),
+                  ),
 
-                    SizedBox( height: 8.0,),
+                  SizedBox( height: 8.0,),
 
-
-                  ],
-                ),
-
-            ],
-          ),
+                  (_inProcess)?Container(
+                    color: Colors.white,
+                    height: MediaQuery.of(context).size.height * 0.95,
+                    child: Center(
+                      child: CircularProgressIndicator(),
+                    ),
+                  ):Center()
+                ],
               ),
+              (_inProcess)?Container(
+
+                color: Colors.white,
+                height: MediaQuery.of(context).size.height * 0.95,
+                child: Center(
+                  child: CircularProgressIndicator(),
+                ),
+              ):Center(),
+              isUploading ? Center(child:  CircularProgressIndicator()) : Text(""),
+          ],
         ),
+            ),
       ),
     );
 
@@ -3916,9 +3923,9 @@ class _ProdEditState extends State<ProdEdit>
   deletePost() async {
     // delete post itself
     productsRef
-        .doc(ownerId)
+        .document(ownerId)
         .collection('userProducts')
-        .doc(prodId)
+        .document(prodId)
         .get()
         .then((doc) {
       if (doc.exists) {
@@ -3929,27 +3936,27 @@ class _ProdEditState extends State<ProdEdit>
     storageRef.child("prod_$prodId.jpg").delete();
     // then delete all activity feed notifications
     QuerySnapshot activityFeedSnapshot = await activityFeedRef
-        .doc(ownerId)
+        .document(ownerId)
         .collection("feedItems")
         .where('prodId', isEqualTo: prodId)
-        .get();
-    activityFeedSnapshot.docs.forEach((doc) {
+        .getDocuments();
+    activityFeedSnapshot.documents.forEach((doc) {
       if (doc.exists) {
         doc.reference.delete();
       }
     });
     // then delete all comments
     QuerySnapshot commentsSnapshot = await productcommentsRef
-        .doc(prodId)
+        .document(prodId)
         .collection('comments')
-        .get();
-    commentsSnapshot.docs.forEach((doc) {
+        .getDocuments();
+    commentsSnapshot.documents.forEach((doc) {
       if (doc.exists) {
         doc.reference.delete();
       }
     });
 
-//      Firestore.instance.collectionGroup("userCart").doc(prodId).delete();
+//      Firestore.instance.collectionGroup("userCart").document(prodId).delete();
 
   }
 

@@ -21,7 +21,7 @@ import 'package:fashow/ActivityFeed.dart';
 import 'package:fashow/product_custom.dart';
 import 'package:fashow/Profile.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:translated_text/translated_text.dart';
+
 class Prod extends StatefulWidget {
   final String prodId;
   final String ownerId;
@@ -80,7 +80,7 @@ final int Shoe19;
  final int Shoe20;
 final int  Shoe21;
  final int mto;
-  final Users currentUser;
+  final User currentUser;
   final dynamic likes;
 
   Prod({
@@ -149,65 +149,65 @@ this.worldship,
 //    Map data = doc.data ;
 
     return Prod(
-      prodId: doc.data()['prodId'],
-      ownerId: doc.data()['ownerId'],
-      username: doc.data()['displayName'],
-shipment: doc.data()['shipment'],
-worldship: doc.data()['worldship'],
+      prodId: doc['prodId'],
+      ownerId: doc['ownerId'],
+      username: doc['displayName'],
+shipment: doc['shipment'],
+worldship: doc['worldship'],
 
-     eur: doc.data()['eur'],
-      usd: doc.data()['usd'],
-      inr: doc.data()['inr'],
-      cny: doc.data()['cny'],
-      gbp: doc.data()['gbp'],
- gender: doc.data()['Gender'],
-      // selectedSizes: doc.data()['selectedSizes'],
-      mto: doc.data()['mtoQuantity'],
-      xxxs: doc.data()['xxxsQuantity'],
-      xxs: doc.data()['xxsQuantity'],
-      xs: doc.data()['xsQuantity'],
-      s: doc.data()['sQuantity'],
-      m: doc.data()['mQuantity'],
-      l: doc.data()['lQuantity'],
-      xl: doc.data()['xlQuantity'],
-      xxl: doc.data()['xxlQuantity'],
-      xxxl: doc.data()['xxxlQuantity'],
-      fourxl: doc.data()['4xlQuantity'],
-      fivexl: doc.data()['5xlQuantity'],
-      sixxl: doc.data()['6xlQuantity'],
-      sevenxl: doc.data()['7xlQuantity'],
-      eightxl: doc.data()['8xlQuantity'],
-      Shoe1: doc.data()['Shoe1'],
-      Shoe2: doc.data()['Shoe2'],
-      Shoe3: doc.data()['Shoe3'],
-      Shoe4: doc.data()['Shoe4'],
-      Shoe5: doc.data()['Shoe5'],
-      Shoe6: doc.data()['Shoe6'],
-      Shoe7: doc.data()['Shoe7'],
-       Shoe8: doc.data()['Shoe8'],
-      Shoe9: doc.data()['Shoe9'],
-      Shoe10: doc.data()['Shoe10'],
-      Shoe11: doc.data()['Shoe11'],
-      Shoe12: doc.data()['Shoe12'],
-      Shoe13: doc.data()['Shoe13'],
-      Shoe14: doc.data()['Shoe14'],
-      Shoe15: doc.data()['Shoe15'],
-     Shoe16: doc.data()['Shoe16'],
-      Shoe17: doc.data()['Shoe17'],
-      Shoe18: doc.data()['Shoe18'],
-      Shoe19: doc.data()['Shoe19'],
-      Shoe20: doc.data()['Shoe20'],
-       Shoe21: doc.data()['Shoe21'],
-      productname: doc.data()['productname'],
-      details: doc.data()['details'],
-      shopmediaUrl: doc.data()['shopmediaUrl'],
-      color:doc.data()['color'],
-   composition:doc.data()['composition'],
-   washandcare:doc.data()['washandcare'],
-    sizeandfit:doc.data()['sizeandfit'],
-      likes: doc.data()['likes'],
-        photoUrl:doc.data()['photoUrl'],
-        freesize:doc.data()['freesizeQuantity'],
+     eur: doc['eur'],
+      usd: doc['usd'],
+      inr: doc['inr'],
+      cny: doc['cny'],
+      gbp: doc['gbp'],
+ gender: doc['Gender'],
+      // selectedSizes: doc['selectedSizes'],
+      mto: doc['mtoQuantity'],
+      xxxs: doc['xxxsQuantity'],
+      xxs: doc['xxsQuantity'],
+      xs: doc['xsQuantity'],
+      s: doc['sQuantity'],
+      m: doc['mQuantity'],
+      l: doc['lQuantity'],
+      xl: doc['xlQuantity'],
+      xxl: doc['xxlQuantity'],
+      xxxl: doc['xxxlQuantity'],
+      fourxl: doc['4xlQuantity'],
+      fivexl: doc['5xlQuantity'],
+      sixxl: doc['6xlQuantity'],
+      sevenxl: doc['7xlQuantity'],
+      eightxl: doc['8xlQuantity'],
+      Shoe1: doc['Shoe1'],
+      Shoe2: doc['Shoe2'],
+      Shoe3: doc['Shoe3'],
+      Shoe4: doc['Shoe4'],
+      Shoe5: doc['Shoe5'],
+      Shoe6: doc['Shoe6'],
+      Shoe7: doc['Shoe7'],
+       Shoe8: doc['Shoe8'],
+      Shoe9: doc['Shoe9'],
+      Shoe10: doc['Shoe10'],
+      Shoe11: doc['Shoe11'],
+      Shoe12: doc['Shoe12'],
+      Shoe13: doc['Shoe13'],
+      Shoe14: doc['Shoe14'],
+      Shoe15: doc['Shoe15'],
+     Shoe16: doc['Shoe16'],
+      Shoe17: doc['Shoe17'],
+      Shoe18: doc['Shoe18'],
+      Shoe19: doc['Shoe19'],
+      Shoe20: doc['Shoe20'],
+       Shoe21: doc['Shoe21'],
+      productname: doc['productname'],
+      details: doc['details'],
+      shopmediaUrl: doc['shopmediaUrl'],
+      color:doc['color'],
+   composition:doc['composition'],
+   washandcare:doc['washandcare'],
+    sizeandfit:doc['sizeandfit'],
+      likes: doc['likes'],
+        photoUrl:doc['photoUrl'],
+        freesize:doc['freesizeQuantity'],
     );
   }
 
@@ -9436,11 +9436,11 @@ else{
   report(){
     Fluttertoast.showToast(
         msg: "Your report has been submitted", timeInSecForIos: 4);
-    FirebaseFirestore.instance.collection('reports')
-        .doc(ownerId)
+    Firestore.instance.collection('reports')
+        .document(ownerId)
         .collection("userReports")
-        .doc(prodId)
-        .set({
+        .document(prodId)
+        .setData({
       "type": "shop",
       "userId": ownerId,
       "postId": prodId,
@@ -9890,9 +9890,9 @@ TeenSizes(){
   handleLikePost() {
     bool _isFav = true;
     if(_isFav) {
-      favRef.doc(currentUser.id).collection("userFav")
-          .doc(prodId)
-          .set({
+      favRef.document(currentUser.id).collection("userFav")
+          .document(prodId)
+          .setData({
         "username": username,
         "prodId": prodId,
         "timestamp": timestamp,
@@ -9913,12 +9913,12 @@ TeenSizes(){
 //        likes[currentUserId] = false;
       });
     } else if (!_isFav) {
-      var docReference = favRef.doc(currentUser.id).collection("userFav").doc(prodId);
+      var docReference = favRef.document(currentUser.id).collection("userFav").document(prodId);
       docReference.delete();
 
     }
       else{
-      var docReference = favRef.doc(currentUser.id).collection("userFav").doc(prodId);
+      var docReference = favRef.document(currentUser.id).collection("userFav").document(prodId);
       docReference.delete();
 
     }
@@ -9932,24 +9932,23 @@ TeenSizes(){
         builder: (BuildContext context) {
 
           return  PaginateFirestore(
-
 //    itemsPerPage: 2,
               itemBuilderType:
               PaginateBuilderType.listView,
               itemBuilder: (index, context, documentSnapshot)   {
-//        DocumentSnapshot ds = snapshot.data.docs[index];
-                String ownerId = documentSnapshot.data()['userId'];
-                var rating =   documentSnapshot.data()['rating'];
-                String review  = documentSnapshot.data()['review'];
+//        DocumentSnapshot ds = snapshot.data.documents[index];
+                String ownerId = documentSnapshot.data['userId'];
+                var rating =   documentSnapshot.data['rating'];
+                String review  = documentSnapshot.data['review'];
 
                 return
                   FutureBuilder(
-                    future: usersRef.doc(ownerId).get(),
+                    future: usersRef.document(ownerId).get(),
                     builder: (context, snapshot) {
                       if (!snapshot.hasData) {
                         return circularProgress();
                       }
-                      Users user = Users.fromDocument(snapshot.data);
+                      User user = User.fromDocument(snapshot.data);
 //          bool isPostOwner = currentUserId == ownerId;
                       return Padding(
                         padding: const EdgeInsets.all(8.0),
@@ -9995,7 +9994,7 @@ TeenSizes(){
                     },
                   );
               },
-              query: FirebaseFirestore.instance.collection('Reviews').doc(prodId)
+              query: Firestore.instance.collection('Reviews').document(prodId)
                   .collection('prodReviews').orderBy('timestamp',descending: true)
 
 
@@ -10006,12 +10005,12 @@ TeenSizes(){
 
  postindia(){
   return FutureBuilder(
-    future: usersRef.doc(ownerId).get(),
+    future: usersRef.document(ownerId).get(),
     builder: (context, snapshot) {
       if (!snapshot.hasData) {
         return circularProgress();
       }
-      Users user = Users.fromDocument(snapshot.data);
+      User user = User.fromDocument(snapshot.data);
       bool isPostOwner = currentUserId == ownerId;
       return Container(
         margin: EdgeInsets.only(top:10.0,left: 10.0,right: 10.0, bottom: 10.0 ),
@@ -10259,19 +10258,17 @@ TeenSizes(){
                   Expanded(
                     child: ListTile(
                       leading:  Icon(Icons.cancel, color: Colors.red),
-                      title:
-      TranslatedText("This product doesn't ship worldwide,check shipping & returns info below ",
-        to:'${currentUser.language}',
-        textStyle:TextStyle(
-          color: Colors.red,
-               fontWeight: FontWeight.bold,
-             fontSize: 14.0,
-             ),
-
-      ),
+                      title: Text(
+                        "This product doesn't ship worldwide,check shipping & returns info below ",
+                        style: TextStyle(
+                          color: Colors.red,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 14.0,
+                        ),
                       ),
-
+                    ),
                   ),
+
                 ],
               ):null,
 
@@ -10279,14 +10276,12 @@ TeenSizes(){
                 tileColor:trans,
                 child: ExpansionTile(
                   backgroundColor:trans,
-                  title:
-      TranslatedText(" Description",
-      to:'${currentUser.language}',
-      textStyle:TextStyle(
-      color: kText.withOpacity(0.5),
-      fontWeight: FontWeight.bold,fontSize: 20,
-      ),),
-
+                  title:  Text(
+                    " Description",
+                    style: TextStyle(
+                      color: kText.withOpacity(0.5),
+                      fontWeight: FontWeight.bold,fontSize: 20,
+                    ),),
                   trailing:Icon(Icons.expand_more,color: kText,),
 
                   maintainState: true,
@@ -10300,33 +10295,28 @@ TeenSizes(){
                             color: kText.withOpacity(0.5),
 //                          fontWeight: FontWeight.bold,
                           ),),SizedBox(height: 8,),
-                          TranslatedText("Color:",
-                            to:'${currentUser.language}',
-                            textStyle:TextStyle(
-                              color: kText.withOpacity(0.5),
-                              fontWeight: FontWeight.bold,fontSize: 20,
-                            ),),
+                          Text("Color:",style: TextStyle(
+                            color: kText.withOpacity(0.5),
+                            fontWeight: FontWeight.bold,
+                            fontSize: 20,
+                          ),),
                           Text('$color',style: TextStyle(
                             color: kText.withOpacity(0.5),
 //                          fontWeight: FontWeight.bold,
                           ),),
                           SizedBox(height: 8,),
-                          TranslatedText("Composition :",
-                            to:'${currentUser.language}',
-                            textStyle:TextStyle(
-                              color: kText.withOpacity(0.5),
-                              fontWeight: FontWeight.bold,fontSize: 20,
-                            ),),
+                          Text('Composition:',style: TextStyle(
+                            color: kText.withOpacity(0.5),
+                            fontWeight: FontWeight.bold,fontSize: 20,
+                          ),),
                           Text('$composition', maxLines: 1,softWrap:false,overflow:TextOverflow.fade,style: TextStyle(
                             color: kText.withOpacity(0.5),
 //                          fontWeight: FontWeight.bold,
                           ),),SizedBox(height: 8,),
-                          TranslatedText("Wash and Care:",
-                            to:'${currentUser.language}',
-                            textStyle:TextStyle(
-                              color: kText.withOpacity(0.5),
-                              fontWeight: FontWeight.bold,fontSize: 20,
-                            ),),
+                          Text('Wash and Care:',style: TextStyle(
+                            color: kText.withOpacity(0.5),
+                            fontWeight: FontWeight.bold,fontSize: 20,
+                          ),),
                           Text('$washandcare', maxLines: 1,softWrap:false,overflow:TextOverflow.fade,style: TextStyle(
                             color: kText.withOpacity(0.5),
 //                          fontWeight: FontWeight.bold,
@@ -10341,10 +10331,9 @@ TeenSizes(){
                 tileColor:trans,
                 child: ExpansionTile(
                   backgroundColor:trans,
-                  title:
-                  TranslatedText("Size and Fit:",
-                    to:'${currentUser.language}',
-                    textStyle:TextStyle(
+                  title:  Text(
+                    " Size and Fit:",
+                    style: TextStyle(
                       color: kText.withOpacity(0.5),
                       fontWeight: FontWeight.bold,fontSize: 20,
                     ),),
@@ -10358,12 +10347,11 @@ TeenSizes(){
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.stretch,
                         children: <Widget>[
-                          TranslatedText("Size and Fit:",
-                            to:'${currentUser.language}',
-                            textStyle:TextStyle(
-                              color: kText.withOpacity(0.5),
-                              fontWeight: FontWeight.bold,fontSize: 20,
-                            ),),
+
+                          Text('Size and Fit:',style: TextStyle(
+                            color: kText.withOpacity(0.5),
+                            fontWeight: FontWeight.bold,fontSize: 20,
+                          ),),
                           Text('$sizeandfit', maxLines: 1,softWrap:false,overflow:TextOverflow.fade,style: TextStyle(
                             color: kText.withOpacity(0.5),
 //                          fontWeight: FontWeight.bold,
@@ -10379,9 +10367,9 @@ TeenSizes(){
                 child: ExpansionTile(
                   backgroundColor:trans,
                   leading: Icon(Icons.local_shipping,color: kText,),
-                  title:  TranslatedText("Shipping and returns",
-                    to:'${currentUser.language}',
-                    textStyle:TextStyle(
+                  title:  Text(
+                    " Shipping  and Returns:",
+                    style: TextStyle(
                       color: kText.withOpacity(0.5),
                       fontWeight: FontWeight.bold,fontSize: 20,
                     ),),
@@ -10393,12 +10381,11 @@ TeenSizes(){
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.stretch,
                         children: <Widget>[
-                          TranslatedText("Shippings and Returns",
-                            to:'${currentUser.language}',
-                            textStyle:TextStyle(
-                              color: kText.withOpacity(0.5),
-                              fontWeight: FontWeight.bold,fontSize: 20,
-                            ),),
+
+                          Text('Shipping  and Returns:',style: TextStyle(
+                            color: kText.withOpacity(0.5),
+                            fontWeight: FontWeight.bold,fontSize: 20,
+                          ),),
                           Text('$shipment', maxLines: 1,softWrap:false,overflow:TextOverflow.fade,style: TextStyle(
                             color: kText.withOpacity(0.5),
 //                          fontWeight: FontWeight.bold,
@@ -10419,12 +10406,12 @@ TeenSizes(){
 }
 posteurope(){
   return FutureBuilder(
-    future: usersRef.doc(ownerId).get(),
+    future: usersRef.document(ownerId).get(),
     builder: (context, snapshot) {
       if (!snapshot.hasData) {
         return circularProgress();
       }
-      Users user = Users.fromDocument(snapshot.data);
+      User user = User.fromDocument(snapshot.data);
       bool isPostOwner = currentUserId == ownerId;
       return Container(
         margin: EdgeInsets.only(top:10.0,left: 10.0,right: 10.0, bottom: 10.0 ),
@@ -10440,9 +10427,7 @@ posteurope(){
                     onDoubleTap: () {
                       addToFav();
                       final snackBar = SnackBar(
-                        content: TranslatedText("Add to Favorites",
-                          to:'${currentUser.language}',
-                         ),
+                        content: Text('Added to Favorites!'),
                         action: SnackBarAction(
                           // label: 'Undo',
                           // onPressed: () {
@@ -10524,16 +10509,10 @@ posteurope(){
 
                                                         child: Align(
                                                             alignment: Alignment.center,
-                                                            child:  TranslatedText("Report this post?",
-                                                              to:'${currentUser.language}',textStyle:TextStyle(
-                                          color: Colors.blueAccent,
-                                           fontWeight: FontWeight.bold,
-                                            fontSize: 20.0),)),),
-
-                                                    // Text('Report this post?',style: TextStyle(
-                                                            //     color: Colors.blueAccent,
-                                                            //     fontWeight: FontWeight.bold,
-                                                            //     fontSize: 20.0),)),),
+                                                            child: Text('Report this post?',style: TextStyle(
+                                                                color: Colors.blueAccent,
+                                                                fontWeight: FontWeight.bold,
+                                                                fontSize: 20.0),)),),
 //        ),FlatButton(
 //        onPressed: () {Navigator.pop(context);  Navigator.push(context, MaterialPageRoute(builder: (context) =>Profile( profileId: currentUser?.id)));
 //        },
@@ -10577,8 +10556,7 @@ posteurope(){
                     onPressed: (){
                       addToFav();
                       final snackBar = SnackBar(
-                        content: TranslatedText("Add to Favorites",
-                          to:'${currentUser.language}'),
+                        content: Text('Added to Favorites!'),
                         action: SnackBarAction(
 
                         ),
@@ -10623,10 +10601,7 @@ posteurope(){
 
 
                   ),
-      TranslatedText("Rating",
-      to:'${currentUser.language}',textStyle:TextStyle(
-      color: kText,fontWeight: FontWeight.bold,
-      ),),
+                  Text('Rating' ,style: TextStyle(color: kText,fontWeight: FontWeight.bold,),),
 
                 ],
               ),
@@ -10635,445 +10610,7 @@ posteurope(){
                 children:[   FloatingActionButton.extended(
                   backgroundColor: kblue,
                   onPressed: ()=>sizeGuide(),
-                   label: TranslatedText("Size Guide",
-      to:'${currentUser.language}',textStyle:TextStyle(
-      color: kText,fontWeight: FontWeight.bold,
-      ),),),
-
-      //   Text('Size Guide',style:TextStyle(color:  Colors.white) ,),
-                // ),
-                ],
-              ),
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Expanded(
-                    child: ListTile(
-                      title: Text(
-                        "$productname ",
-                        style: TextStyle(
-                          color: kText,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 24.0,
-                        ),
-                      ),
-                      subtitle: Text(
-                        "£  $inr ",
-                        style: TextStyle(
-                          color: Colors.green,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 20.0,
-                        ),
-                      ),
-                      trailing: !isPostOwner? FloatingActionButton(
-                        heroTag:null,
-
-                        onPressed: () => Buynow(context),
-                        child: Icon(Icons.add_shopping_cart,),
-                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(16.0))),
-                      ): RaisedButton(
-                        color: kblue,
-                        child: TranslatedText("Edit Inventory",
-      to:'${currentUser.language}',textStyle:TextStyle(
-      color: Colors.white,
-      fontWeight: FontWeight.bold),),
-                         onPressed: ()=> Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => EditShop(
-                              prodId: prodId,
-                              userId: ownerId,
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-
-                ],
-              ),
-              worldship == false?Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Expanded(
-                    child: ListTile(
-                      leading:  Icon(Icons.cancel, color: Colors.red),
-                      title:
-      TranslatedText("This product doesn't ship worldwide,check shipping & returns info below",to:'${currentUser.language}',
-      textStyle:TextStyle(
-      color: Colors.red,
-           fontWeight: FontWeight.bold,
-           fontSize: 14.0,
-      ),),
-                      // Text(
-                      //   "This product doesn't ship worldwide,check shipping & returns info below ",
-                      //   style: TextStyle(
-                      //     color: Colors.red,
-                      //     fontWeight: FontWeight.bold,
-                      //     fontSize: 14.0,
-                      //   ),
-                      ),
-                    ),
-
-
-                ],
-              ):null,
-
-              ListTileTheme(
-                tileColor:trans,
-                child: ExpansionTile(
-                  backgroundColor:trans,
-                  title:
-                  TranslatedText("Description",to:'${currentUser.language}',
-                    textStyle:TextStyle(
-                          color: kText.withOpacity(0.5),
-                          fontWeight: FontWeight.bold,fontSize: 20,
-
-
-                    ),),
-                  trailing:Icon(Icons.expand_more,color: kText,),
-                  maintainState: true,
-                  children: [
-
-                    Container(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.stretch,
-                        children: <Widget>[
-                          Text("$details", maxLines: 1,softWrap:false,overflow:TextOverflow.fade,style: TextStyle(
-                            color: kText.withOpacity(0.5),
-//                          fontWeight: FontWeight.bold,
-                          ),),SizedBox(height: 8,),
-                              TranslatedText("Color:",to:'${currentUser.language}',
-                             textStyle:TextStyle(color: kText.withOpacity(0.5),
-                                 fontWeight: FontWeight.bold,
-                                fontSize: 20
-
-      ),
-      ),//
-
-                          Text('$color',style: TextStyle(
-                            color: kText.withOpacity(0.5),
-//                          fontWeight: FontWeight.bold,
-                          ),),
-                          SizedBox(height: 8,),
-                      TranslatedText("Composition:",to:'${currentUser.language}',
-                        textStyle:TextStyle(color: kText.withOpacity(0.5),
-                          fontWeight: FontWeight.bold,
-                          fontSize: 20),),
-                          Text('$composition', maxLines: 1,softWrap:false,overflow:TextOverflow.fade,style: TextStyle(
-                            color: kText.withOpacity(0.5),
-//                          fontWeight: FontWeight.bold,
-                          ),),SizedBox(height: 8,),
-                          TranslatedText("Wash and Care:",to:'${currentUser.language}',
-                            textStyle:TextStyle(color: kText.withOpacity(0.5),
-                                fontWeight: FontWeight.bold,
-                                fontSize: 20),),
-                          Text('$washandcare', maxLines: 1,softWrap:false,overflow:TextOverflow.fade,style: TextStyle(
-                            color: kText.withOpacity(0.5),
-//                          fontWeight: FontWeight.bold,
-      ),), ],
-                      ),
-                    ),
-                  ]
-                ),
-              ),
-              ListTileTheme(
-                tileColor:trans,
-                child: ExpansionTile(
-                  backgroundColor:trans,
-                  title:
-                  TranslatedText("Size and Fit:",to:'${currentUser.language}',
-                    textStyle:TextStyle(color: kText.withOpacity(0.5),
-                        fontWeight: FontWeight.bold,
-                        fontSize: 20),),
-
-                  leading: FaIcon(FontAwesomeIcons.rulerCombined,color: kText,),
-                  trailing:Icon(Icons.expand_more,color: kText,),
-
-                  maintainState: true,
-                  children: [
-
-                    Container(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.stretch,
-                        children: <Widget>[
-
-                          TranslatedText("Size and Fit:",to:'${currentUser.language}',
-                            textStyle:TextStyle(color: kText.withOpacity(0.5),
-                                fontWeight: FontWeight.bold,
-                                fontSize: 20),),
-
-                          Text('$sizeandfit', maxLines: 1,softWrap:false,overflow:TextOverflow.fade,style: TextStyle(
-                            color: kText.withOpacity(0.5),
-//                          fontWeight: FontWeight.bold,
-                          ),),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              ListTileTheme(
-                tileColor:trans,
-                child: ExpansionTile(
-                  backgroundColor:trans,
-                  leading: Icon(Icons.local_shipping,color: kText,),
-                  title:
-                  TranslatedText("Shipping  and Returns:",to:'${currentUser.language}',
-                    textStyle:TextStyle(color: kText.withOpacity(0.5),
-                        fontWeight: FontWeight.bold,
-                        fontSize: 20),),
-
-                  trailing:Icon(Icons.expand_more,color: kText,),
-                  maintainState: true,
-                  children: [
-
-                    Container(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.stretch,
-                        children: <Widget>[
-                          TranslatedText("Shipping  and Returns:",to:'${currentUser.language}',
-                            textStyle:TextStyle(color: kText.withOpacity(0.5),
-                                fontWeight: FontWeight.bold,
-                                fontSize: 20),),
-
-                          Text('$shipment', maxLines: 1,softWrap:false,overflow:TextOverflow.fade,style: TextStyle(
-                            color: kText.withOpacity(0.5),
-//                          fontWeight: FontWeight.bold,
-                          ),),
-                        ],
-                      ),
-                    ),                ],
-                ),
-              ),
-            ],
-          ),
-        ),
-
-      );
-    },
-  );
-}
-postuk(){
-  return FutureBuilder(
-    future: usersRef.doc(ownerId).get(),
-    builder: (context, snapshot) {
-      if (!snapshot.hasData) {
-        return circularProgress();
-      }
-      Users user = Users.fromDocument(snapshot.data);
-      bool isPostOwner = currentUserId == ownerId;
-      return Container(
-        margin: EdgeInsets.only(top:10.0,left: 10.0,right: 10.0, bottom: 10.0 ),
-
-        child: Expanded(
-          child: Column(
-            children:  [
-              Stack(
-                children:     <Widget> [
-
-
-                  GestureDetector(
-                    onDoubleTap: () {
-                      addToFav();
-                      final snackBar = SnackBar(
-                        content: TranslatedText("Added to Favorites!",to:'${currentUser.language}',
-                        ),
-
-                        action: SnackBarAction(
-                          // label: 'Undo',
-                          // onPressed: () {
-                          //   // Some code to undo the change.
-                          // },
-                        ),
-                      );
-
-
-                      Scaffold.of(context).showSnackBar(snackBar);
-                    },
-                    child: Stack(
-                      alignment: Alignment.center,
-                      children: <Widget>[
-                        ClipRRect(
-                            borderRadius: BorderRadius.only
-                              (bottomLeft: Radius.circular(20.0),bottomRight: Radius.circular(20.0)),
-                            child: Container(
-                                height: MediaQuery.of(context).size.height * 0.65,
-
-                                width:     MediaQuery.of(context).size.width,
-                                child: AspectRatio(
-                                    aspectRatio: 16 / 9,
-                                    child: cachedNetworkImage(shopmediaUrl)))),
-                        Positioned.fill(
-                          child: Align(
-                            alignment: Alignment.topCenter,
-                            child:   ListTile(
-                              leading:FloatingActionButton(
-                                mini: true,
-                                backgroundColor:Colors.white.withOpacity(0.5),
-                                child:Icon(Icons.arrow_back_ios,color: Colors.white,),
-                                onPressed:() { Navigator.pop(context);},
-                              ),
-                            ),
-                          ),
-                        ),
-                        Positioned.fill(
-                          child: Align(
-                            alignment: Alignment.bottomCenter,
-                            child: ListTile(
-                              leading: CircleAvatar(
-                                backgroundImage: CachedNetworkImageProvider(user.photoUrl),
-                                backgroundColor: Colors.grey,
-                              ),
-                              title: GestureDetector(
-                                onTap: () => showProfile(context, profileId: user.id),
-                                child: Text(
-                                  user.username,
-                                  style: TextStyle(
-                                    color: kText,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                              ),
-
-                              trailing: IconButton(icon: Icon(Icons.more_horiz,color: Colors.white,),
-                                  onPressed: () {
-                                    !isPostOwner?showDialog(
-                                        context: context,
-                                        builder: (BuildContext context) {
-                                          return Dialog(
-                                            backgroundColor: kSecondaryColor,
-                                            shape: RoundedRectangleBorder(
-                                                borderRadius:
-                                                BorderRadius.circular(20.0)), //this right here
-                                            child: GestureDetector(
-                                              onTap: (){report();
-                                              Navigator.pop(context);},
-                                              child: Container(
-                                                height: 100,
-                                                child: Padding(
-                                                  padding: const EdgeInsets.all(12.0),
-                                                  child: Column(
-                                                    mainAxisAlignment: MainAxisAlignment.center,
-                                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                                    children: [
-                                                      Container(
-
-                                                        child: Align(
-                                                            alignment: Alignment.center,
-                                                            child: TranslatedText("Report this post?",to:'${currentUser.language}',
-                                                              textStyle:TextStyle(color: Colors.blueAccent,
-                                                                  fontWeight: FontWeight.bold,
-                                                                  fontSize: 20),),
-                                                            // Text('',style: TextStyle(
-                                                            //     color:
-                                                            //     fontWeight: FontWeight.bold,
-                                                            //     fontSize: 20.0),)),),
-//        ),FlatButton(
-//        onPressed: () {Navigator.pop(context);  Navigator.push(context, MaterialPageRoute(builder: (context) =>Profile( profileId: currentUser?.id)));
-//        },
-//
-//        child: Text('Delete this post?',style: TextStyle(
-//            color: Colors.blueAccent,
-//            fontWeight: FontWeight.bold,
-//            fontSize: 20.0),),
-//        ),
-                                                  ),),
-                                                    ],
-                                                  ),
-                                                ),
-                                              ),
-                                            ),
-                                          );
-                                          // ignore: unnecessary_statements
-                                        }):handleDeletePost(context);
-                                  }),
-
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-
-
-
-
-                ],
-              ),
-
-              Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: <Widget>[
-                  Padding(padding: EdgeInsets.only(top: 40.0, left: 20.0)),
-                  FloatingActionButton(
-                    mini: true,
-                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(16.0))),
-                    onPressed: (){
-                      addToFav();
-                      final snackBar = SnackBar(
-                        content:TranslatedText("Add to favorites",to:'${currentUser.language}',),
-                        action: SnackBarAction(
-                          // label: 'Undo',
-                          // onPressed: () {
-                          //   // Some code to undo the change.
-                          // },
-                        ),
-                      );
-
-
-                      Scaffold.of(context).showSnackBar(snackBar);
-                    },
-                    child: Icon(
-                      isfav ?   Icons.favorite:Icons.favorite_border ,
-                      size: 28.0,
-                      color:  Colors.white,
-                    ),
-                  ),
-                  Container(
-                    child: Text(
-                      "$likeCount ",
-                      style: TextStyle(
-                        color: kText,
-                        fontSize: 15.0,
-                        //                      fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ),
-                  Padding(padding: EdgeInsets.only(right: 20.0)),
-                  FloatingActionButton(
-                    mini: true,
-                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(16.0))),
-                    onPressed: () => reviews(),
-                    child:  Column(
-                      mainAxisAlignment:MainAxisAlignment.center,
-                      children: [
-                        SizedBox(width: 6.0,),
-                        Icon(
-                          Icons.star,
-                          size: 28.0,
-                          color:  Colors.white,
-                        ),
-                        SizedBox(width: 3.0,),
-                      ],
-                    ),
-
-
-                  ),
-                   TranslatedText("Rating ",to:'${currentUser.language}',textStyle: TextStyle(color: kText,
-                     fontWeight: FontWeight.bold,),),
-                  // Text('' ,style: TextStyle(,),),
-
-                ],
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children:[   FloatingActionButton.extended(
-                  backgroundColor: kblue,
-                  onPressed: ()=>sizeGuide(),
-                  label:  TranslatedText(" Size Guide",to:'${currentUser.language}',textStyle: TextStyle(color: kText,
-                 ),),
-                  // Text('',style:TextStyle(color:  Colors.white) ,),
+                  label: Text('Size Guide',style:TextStyle(color:  Colors.white) ,),
                 ),
                 ],
               ),
@@ -11106,9 +10643,7 @@ postuk(){
                         shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(16.0))),
                       ): RaisedButton(
                         color: kblue,
-                        child:TranslatedText("Edit Inventory' ",to:'${currentUser.language}',textStyle: TextStyle(color:Colors.white ,
-                        ),),
-
+                        child: Text('Edit Inventory',style: TextStyle(color: Colors.white),),
                         onPressed: ()=> Navigator.push(
                           context,
                           MaterialPageRoute(
@@ -11130,21 +10665,16 @@ postuk(){
                   Expanded(
                     child: ListTile(
                       leading:  Icon(Icons.cancel, color: Colors.red),
-                      title:
-      TranslatedText("This product doesn't ship worldwide,check shipping & returns info below ",to:'${currentUser.language}',
-      textStyle: TextStyle(
-      color: Colors.red,
-         fontWeight: FontWeight.bold,
-          fontSize: 14.0,
-      ),),
-                      // Text(
-                      //   ,
-                      //   style: TextStyle(
-                      //
-                      //   ),
+                      title: Text(
+                        "This product doesn't ship worldwide,check shipping & returns info below ",
+                        style: TextStyle(
+                          color: Colors.red,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 14.0,
+                        ),
                       ),
                     ),
-
+                  ),
 
                 ],
               ):null,
@@ -11153,12 +10683,12 @@ postuk(){
                 tileColor:trans,
                 child: ExpansionTile(
                   backgroundColor:trans,
-                  title: TranslatedText("Description",to:'${currentUser.language}',
-                    textStyle: TextStyle(
+                  title:  Text(
+                    " Description",
+                    style: TextStyle(
                       color: kText.withOpacity(0.5),
                       fontWeight: FontWeight.bold,fontSize: 20,
                     ),),
-
                   trailing:Icon(Icons.expand_more,color: kText,),
 
                   maintainState: true,
@@ -11172,33 +10702,28 @@ postuk(){
                             color: kText.withOpacity(0.5),
 //                          fontWeight: FontWeight.bold,
                           ),),SizedBox(height: 8,),
-                          TranslatedText("Color:",to:'${currentUser.language}',
-                            textStyle: TextStyle(
-                              color: kText.withOpacity(0.5),
-                              fontWeight: FontWeight.bold,fontSize: 20,
-                            ),),
-
+                          Text("Color:",style: TextStyle(
+                            color: kText.withOpacity(0.5),
+                            fontWeight: FontWeight.bold,
+                            fontSize: 20,
+                          ),),
                           Text('$color',style: TextStyle(
                             color: kText.withOpacity(0.5),
 //                          fontWeight: FontWeight.bold,
                           ),),
                           SizedBox(height: 8,),
-                          TranslatedText("Composition:",to:'${currentUser.language}',
-                            textStyle: TextStyle(
-                              color: kText.withOpacity(0.5),
-                              fontWeight: FontWeight.bold,fontSize: 20,
-                            ),),
-
+                          Text('Composition:',style: TextStyle(
+                            color: kText.withOpacity(0.5),
+                            fontWeight: FontWeight.bold,fontSize: 20,
+                          ),),
                           Text('$composition', maxLines: 1,softWrap:false,overflow:TextOverflow.fade,style: TextStyle(
                             color: kText.withOpacity(0.5),
 //                          fontWeight: FontWeight.bold,
                           ),),SizedBox(height: 8,),
-                          TranslatedText("Wash and Care:",to:'${currentUser.language}',
-                            textStyle: TextStyle(
-                              color: kText.withOpacity(0.5),
-                              fontWeight: FontWeight.bold,fontSize: 20,
-                            ),),
-
+                          Text('Wash and Care:',style: TextStyle(
+                            color: kText.withOpacity(0.5),
+                            fontWeight: FontWeight.bold,fontSize: 20,
+                          ),),
                           Text('$washandcare', maxLines: 1,softWrap:false,overflow:TextOverflow.fade,style: TextStyle(
                             color: kText.withOpacity(0.5),
 //                          fontWeight: FontWeight.bold,
@@ -11213,13 +10738,12 @@ postuk(){
                 tileColor:trans,
                 child: ExpansionTile(
                   backgroundColor:trans,
-                  title:
-                  TranslatedText("Size and Fit:",to:'${currentUser.language}',
-                    textStyle: TextStyle(
+                  title:  Text(
+                    " Size and Fit:",
+                    style: TextStyle(
                       color: kText.withOpacity(0.5),
                       fontWeight: FontWeight.bold,fontSize: 20,
                     ),),
-
                   leading: FaIcon(FontAwesomeIcons.rulerCombined,color: kText,),
                   trailing:Icon(Icons.expand_more,color: kText,),
 
@@ -11230,12 +10754,11 @@ postuk(){
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.stretch,
                         children: <Widget>[
-                          TranslatedText("Size and Fit:",to:'${currentUser.language}',
-                            textStyle: TextStyle(
-                              color: kText.withOpacity(0.5),
-                              fontWeight: FontWeight.bold,fontSize: 20,
-                            ),),
 
+                          Text('Size and Fit:',style: TextStyle(
+                            color: kText.withOpacity(0.5),
+                            fontWeight: FontWeight.bold,fontSize: 20,
+                          ),),
                           Text('$sizeandfit', maxLines: 1,softWrap:false,overflow:TextOverflow.fade,style: TextStyle(
                             color: kText.withOpacity(0.5),
 //                          fontWeight: FontWeight.bold,
@@ -11251,12 +10774,12 @@ postuk(){
                 child: ExpansionTile(
                   backgroundColor:trans,
                   leading: Icon(Icons.local_shipping,color: kText,),
-                  title: TranslatedText("Shipping  and Returns:",to:'${currentUser.language}',
-                    textStyle: TextStyle(
+                  title:  Text(
+                    " Shipping  and Returns:",
+                    style: TextStyle(
                       color: kText.withOpacity(0.5),
                       fontWeight: FontWeight.bold,fontSize: 20,
                     ),),
-
                   trailing:Icon(Icons.expand_more,color: kText,),
                   maintainState: true,
                   children: [
@@ -11266,11 +10789,10 @@ postuk(){
                         crossAxisAlignment: CrossAxisAlignment.stretch,
                         children: <Widget>[
 
-                          TranslatedText("Shipping  and Returns:",to:'${currentUser.language}',
-                            textStyle: TextStyle(
-                              color: kText.withOpacity(0.5),
-                              fontWeight: FontWeight.bold,fontSize: 20,
-                            ),),
+                          Text('Shipping  and Returns:',style: TextStyle(
+                            color: kText.withOpacity(0.5),
+                            fontWeight: FontWeight.bold,fontSize: 20,
+                          ),),
                           Text('$shipment', maxLines: 1,softWrap:false,overflow:TextOverflow.fade,style: TextStyle(
                             color: kText.withOpacity(0.5),
 //                          fontWeight: FontWeight.bold,
@@ -11288,14 +10810,14 @@ postuk(){
     },
   );
 }
-postusa() {
+postuk(){
   return FutureBuilder(
-    future: usersRef.doc(ownerId).get(),
+    future: usersRef.document(ownerId).get(),
     builder: (context, snapshot) {
       if (!snapshot.hasData) {
         return circularProgress();
       }
-      Users user = Users.fromDocument(snapshot.data);
+      User user = User.fromDocument(snapshot.data);
       bool isPostOwner = currentUserId == ownerId;
       return Container(
         margin: EdgeInsets.only(top:10.0,left: 10.0,right: 10.0, bottom: 10.0 ),
@@ -11311,9 +10833,7 @@ postusa() {
                     onDoubleTap: () {
                       addToFav();
                       final snackBar = SnackBar(
-                        content:  TranslatedText("Added to Favorites!",to:'${currentUser.language}',
-                          ),
-
+                        content: Text('Added to Favorites!'),
                         action: SnackBarAction(
                           // label: 'Undo',
                           // onPressed: () {
@@ -11395,14 +10915,20 @@ postusa() {
 
                                                         child: Align(
                                                             alignment: Alignment.center,
-                                                            child: TranslatedText("Report this post?",to:'${currentUser.language}',
-                                                              textStyle: TextStyle(
+                                                            child: Text('Report this post?',style: TextStyle(
                                                                 color: Colors.blueAccent,
-                                                                    fontWeight: FontWeight.bold,
-                                                                  fontSize: 20.0,
-                                                              ),),
+                                                                fontWeight: FontWeight.bold,
+                                                                fontSize: 20.0),)),),
+//        ),FlatButton(
+//        onPressed: () {Navigator.pop(context);  Navigator.push(context, MaterialPageRoute(builder: (context) =>Profile( profileId: currentUser?.id)));
+//        },
+//
+//        child: Text('Delete this post?',style: TextStyle(
+//            color: Colors.blueAccent,
+//            fontWeight: FontWeight.bold,
+//            fontSize: 20.0),),
+//        ),
 
-                                                  ),),
                                                     ],
                                                   ),
                                                 ),
@@ -11436,9 +10962,7 @@ postusa() {
                     onPressed: (){
                       addToFav();
                       final snackBar = SnackBar(
-                        content:TranslatedText("Added to Favorites!",to:'${currentUser.language}',
-                          ),
-
+                        content: Text('Added to Favorites!'),
                         action: SnackBarAction(
                           // label: 'Undo',
                           // onPressed: () {
@@ -11486,12 +11010,7 @@ postusa() {
 
 
                   ),
-                  TranslatedText("Rating",to:'${currentUser.language}',
-                    textStyle: TextStyle(
-                      color: kText,
-                      fontWeight: FontWeight.bold,
-                    ),),
-                  // Text('' ,style: TextStyle(),),
+                  Text('Rating' ,style: TextStyle(color: kText,fontWeight: FontWeight.bold,),),
 
                 ],
               ),
@@ -11500,12 +11019,408 @@ postusa() {
                 children:[   FloatingActionButton.extended(
                   backgroundColor: kblue,
                   onPressed: ()=>sizeGuide(),
-                  label:
-                  TranslatedText("Size Guide",to:'${currentUser.language}',
-                    textStyle: TextStyle(
-                        color:  Colors.white,
+                  label: Text('Size Guide',style:TextStyle(color:  Colors.white) ,),
+                ),
+                ],
+              ),
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Expanded(
+                    child: ListTile(
+                      title: Text(
+                        "$productname ",
+                        style: TextStyle(
+                          color: kText,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 24.0,
+                        ),
+                      ),
+                      subtitle: Text(
+                        "£  $inr ",
+                        style: TextStyle(
+                          color: Colors.green,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 20.0,
+                        ),
+                      ),
+                      trailing: !isPostOwner? FloatingActionButton(
+                        heroTag:null,
+
+                        onPressed: () => Buynow(context),
+                        child: Icon(Icons.add_shopping_cart,),
+                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(16.0))),
+                      ): RaisedButton(
+                        color: kblue,
+                        child: Text('Edit Inventory',style: TextStyle(color: Colors.white),),
+                        onPressed: ()=> Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => EditShop(
+                              prodId: prodId,
+                              userId: ownerId,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+
+                ],
+              ),
+              worldship == false?Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Expanded(
+                    child: ListTile(
+                      leading:  Icon(Icons.cancel, color: Colors.red),
+                      title: Text(
+                        "This product doesn't ship worldwide,check shipping & returns info below ",
+                        style: TextStyle(
+                          color: Colors.red,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 14.0,
+                        ),
+                      ),
+                    ),
+                  ),
+
+                ],
+              ):null,
+
+              ListTileTheme(
+                tileColor:trans,
+                child: ExpansionTile(
+                  backgroundColor:trans,
+                  title:  Text(
+                    " Description",
+                    style: TextStyle(
+                      color: kText.withOpacity(0.5),
+                      fontWeight: FontWeight.bold,fontSize: 20,
                     ),),
-                  // Text('',style:TextStyle() ,),
+                  trailing:Icon(Icons.expand_more,color: kText,),
+
+                  maintainState: true,
+                  children: [
+
+                    Container(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        children: <Widget>[
+                          Text("$details", maxLines: 1,softWrap:false,overflow:TextOverflow.fade,style: TextStyle(
+                            color: kText.withOpacity(0.5),
+//                          fontWeight: FontWeight.bold,
+                          ),),SizedBox(height: 8,),
+                          Text("Color:",style: TextStyle(
+                            color: kText.withOpacity(0.5),
+                            fontWeight: FontWeight.bold,
+                            fontSize: 20,
+                          ),),
+                          Text('$color',style: TextStyle(
+                            color: kText.withOpacity(0.5),
+//                          fontWeight: FontWeight.bold,
+                          ),),
+                          SizedBox(height: 8,),
+                          Text('Composition:',style: TextStyle(
+                            color: kText.withOpacity(0.5),
+                            fontWeight: FontWeight.bold,fontSize: 20,
+                          ),),
+                          Text('$composition', maxLines: 1,softWrap:false,overflow:TextOverflow.fade,style: TextStyle(
+                            color: kText.withOpacity(0.5),
+//                          fontWeight: FontWeight.bold,
+                          ),),SizedBox(height: 8,),
+                          Text('Wash and Care:',style: TextStyle(
+                            color: kText.withOpacity(0.5),
+                            fontWeight: FontWeight.bold,fontSize: 20,
+                          ),),
+                          Text('$washandcare', maxLines: 1,softWrap:false,overflow:TextOverflow.fade,style: TextStyle(
+                            color: kText.withOpacity(0.5),
+//                          fontWeight: FontWeight.bold,
+                          ),),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              ListTileTheme(
+                tileColor:trans,
+                child: ExpansionTile(
+                  backgroundColor:trans,
+                  title:  Text(
+                    " Size and Fit:",
+                    style: TextStyle(
+                      color: kText.withOpacity(0.5),
+                      fontWeight: FontWeight.bold,fontSize: 20,
+                    ),),
+                  leading: FaIcon(FontAwesomeIcons.rulerCombined,color: kText,),
+                  trailing:Icon(Icons.expand_more,color: kText,),
+
+                  maintainState: true,
+                  children: [
+
+                    Container(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        children: <Widget>[
+
+                          Text('Size and Fit:',style: TextStyle(
+                            color: kText.withOpacity(0.5),
+                            fontWeight: FontWeight.bold,fontSize: 20,
+                          ),),
+                          Text('$sizeandfit', maxLines: 1,softWrap:false,overflow:TextOverflow.fade,style: TextStyle(
+                            color: kText.withOpacity(0.5),
+//                          fontWeight: FontWeight.bold,
+                          ),),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              ListTileTheme(
+                tileColor:trans,
+                child: ExpansionTile(
+                  backgroundColor:trans,
+                  leading: Icon(Icons.local_shipping,color: kText,),
+                  title:  Text(
+                    " Shipping  and Returns:",
+                    style: TextStyle(
+                      color: kText.withOpacity(0.5),
+                      fontWeight: FontWeight.bold,fontSize: 20,
+                    ),),
+                  trailing:Icon(Icons.expand_more,color: kText,),
+                  maintainState: true,
+                  children: [
+
+                    Container(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        children: <Widget>[
+
+                          Text('Shipping  and Returns:',style: TextStyle(
+                            color: kText.withOpacity(0.5),
+                            fontWeight: FontWeight.bold,fontSize: 20,
+                          ),),
+                          Text('$shipment', maxLines: 1,softWrap:false,overflow:TextOverflow.fade,style: TextStyle(
+                            color: kText.withOpacity(0.5),
+//                          fontWeight: FontWeight.bold,
+                          ),),
+                        ],
+                      ),
+                    ),                ],
+                ),
+              ),
+            ],
+          ),
+        ),
+
+      );
+    },
+  );
+}
+postusa() {
+  return FutureBuilder(
+    future: usersRef.document(ownerId).get(),
+    builder: (context, snapshot) {
+      if (!snapshot.hasData) {
+        return circularProgress();
+      }
+      User user = User.fromDocument(snapshot.data);
+      bool isPostOwner = currentUserId == ownerId;
+      return Container(
+        margin: EdgeInsets.only(top:10.0,left: 10.0,right: 10.0, bottom: 10.0 ),
+
+        child: Expanded(
+          child: Column(
+            children:  [
+              Stack(
+                children:     <Widget> [
+
+
+                  GestureDetector(
+                    onDoubleTap: () {
+                      addToFav();
+                      final snackBar = SnackBar(
+                        content: Text('Added to Favorites!'),
+                        action: SnackBarAction(
+                          // label: 'Undo',
+                          // onPressed: () {
+                          //   // Some code to undo the change.
+                          // },
+                        ),
+                      );
+
+
+                      Scaffold.of(context).showSnackBar(snackBar);
+                    },
+                    child: Stack(
+                      alignment: Alignment.center,
+                      children: <Widget>[
+                        ClipRRect(
+                            borderRadius: BorderRadius.only
+                              (bottomLeft: Radius.circular(20.0),bottomRight: Radius.circular(20.0)),
+                            child: Container(
+                                height: MediaQuery.of(context).size.height * 0.65,
+
+                                width:     MediaQuery.of(context).size.width,
+                                child: AspectRatio(
+                                    aspectRatio: 16 / 9,
+                                    child: cachedNetworkImage(shopmediaUrl)))),
+                        Positioned.fill(
+                          child: Align(
+                            alignment: Alignment.topCenter,
+                            child:   ListTile(
+                              leading:FloatingActionButton(
+                                mini: true,
+                                backgroundColor:Colors.white.withOpacity(0.5),
+                                child:Icon(Icons.arrow_back_ios,color: Colors.white,),
+                                onPressed:() { Navigator.pop(context);},
+                              ),
+                            ),
+                          ),
+                        ),
+                        Positioned.fill(
+                          child: Align(
+                            alignment: Alignment.bottomCenter,
+                            child: ListTile(
+                              leading: CircleAvatar(
+                                backgroundImage: CachedNetworkImageProvider(user.photoUrl),
+                                backgroundColor: Colors.grey,
+                              ),
+                              title: GestureDetector(
+                                onTap: () => showProfile(context, profileId: user.id),
+                                child: Text(
+                                  user.username,
+                                  style: TextStyle(
+                                    color: kText,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              ),
+
+                              trailing: IconButton(icon: Icon(Icons.more_horiz,color: Colors.white,),
+                                  onPressed: () {
+                                    !isPostOwner?showDialog(
+                                        context: context,
+                                        builder: (BuildContext context) {
+                                          return Dialog(
+                                            backgroundColor: kSecondaryColor,
+                                            shape: RoundedRectangleBorder(
+                                                borderRadius:
+                                                BorderRadius.circular(20.0)), //this right here
+                                            child: GestureDetector(
+                                              onTap: (){report();
+                                              Navigator.pop(context);},
+                                              child: Container(
+                                                height: 100,
+                                                child: Padding(
+                                                  padding: const EdgeInsets.all(12.0),
+                                                  child: Column(
+                                                    mainAxisAlignment: MainAxisAlignment.center,
+                                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                                    children: [
+                                                      Container(
+
+                                                        child: Align(
+                                                            alignment: Alignment.center,
+                                                            child: Text('Report this post?',style: TextStyle(
+                                                                color: Colors.blueAccent,
+                                                                fontWeight: FontWeight.bold,
+                                                                fontSize: 20.0),)),),
+
+
+                                                    ],
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                          );
+                                          // ignore: unnecessary_statements
+                                        }):handleDeletePost(context);
+                                  }),
+
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+
+
+
+
+                ],
+              ),
+
+              Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: <Widget>[
+                  Padding(padding: EdgeInsets.only(top: 40.0, left: 20.0)),
+                  FloatingActionButton(
+                    mini: true,
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(16.0))),
+                    onPressed: (){
+                      addToFav();
+                      final snackBar = SnackBar(
+                        content: Text('Added to Favorites!'),
+                        action: SnackBarAction(
+                          // label: 'Undo',
+                          // onPressed: () {
+                          //   // Some code to undo the change.
+                          // },
+                        ),
+                      );
+
+
+                      Scaffold.of(context).showSnackBar(snackBar);
+                    },
+                    child: Icon(
+                      isfav ?   Icons.favorite:Icons.favorite_border ,
+                      size: 28.0,
+                      color:  Colors.white,
+                    ),
+                  ),
+                  Container(
+                    child: Text(
+                      "$likeCount ",
+                      style: TextStyle(
+                        color: kText,
+                        fontSize: 15.0,
+                        //                      fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                  Padding(padding: EdgeInsets.only(right: 20.0)),
+                  FloatingActionButton(
+                    mini: true,
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(16.0))),
+                    onPressed: () => reviews(),
+                    child:  Column(
+                      mainAxisAlignment:MainAxisAlignment.center,
+                      children: [
+                        SizedBox(width: 6.0,),
+                        Icon(
+                          Icons.star,
+                          size: 28.0,
+                          color:  Colors.white,
+                        ),
+                        SizedBox(width: 3.0,),
+                      ],
+                    ),
+
+
+                  ),
+                  Text('Rating' ,style: TextStyle(color: kText,fontWeight: FontWeight.bold,),),
+
+                ],
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children:[   FloatingActionButton.extended(
+                  backgroundColor: kblue,
+                  onPressed: ()=>sizeGuide(),
+                  label: Text('Size Guide',style:TextStyle(color:  Colors.white) ,),
                 ),
                 ],
               ),
@@ -11538,11 +11453,7 @@ postusa() {
                         shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(16.0))),
                       ): RaisedButton(
                         color: kblue,
-                        child: TranslatedText("Edit Inventory",to:'${currentUser.language}',
-                          textStyle: TextStyle(
-                              color: Colors.white,
-                          ),),
-                        // Text('',style: TextStyle(),),
+                        child: Text('Edit Inventory',style: TextStyle(color: Colors.white),),
                         onPressed: ()=> Navigator.push(
                           context,
                           MaterialPageRoute(
@@ -11564,21 +11475,16 @@ postusa() {
                   Expanded(
                     child: ListTile(
                       leading:  Icon(Icons.cancel, color: Colors.red),
-                      title:
-      TranslatedText("This product doesn't ship worldwide,check shipping & returns info below ",to:'${currentUser.language}',
-      textStyle: TextStyle(
-      color: Colors.red,
-          fontWeight: FontWeight.bold,
-          fontSize: 14.0,
-      ),),
-                      // Text(
-                      //   ",
-                      //   style: TextStyle(
-                      //
-                      //   ),
+                      title: Text(
+                        "This product doesn't ship worldwide,check shipping & returns info below ",
+                        style: TextStyle(
+                          color: Colors.red,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 14.0,
+                        ),
                       ),
                     ),
-
+                  ),
 
                 ],
               ):null,
@@ -11587,12 +11493,12 @@ postusa() {
                 tileColor:trans,
                 child: ExpansionTile(
                   backgroundColor:trans,
-                  title:  TranslatedText("Description",to:'${currentUser.language}',
-                    textStyle: TextStyle(
+                  title:  Text(
+                    " Description",
+                    style: TextStyle(
                       color: kText.withOpacity(0.5),
-                          fontWeight: FontWeight.bold,fontSize: 20,
+                      fontWeight: FontWeight.bold,fontSize: 20,
                     ),),
-
                   trailing:Icon(Icons.expand_more,color: kText,),
 
                   maintainState: true,
@@ -11606,39 +11512,28 @@ postusa() {
                             color: kText.withOpacity(0.5),
 //                          fontWeight: FontWeight.bold,
                           ),),SizedBox(height: 8,),
-                          TranslatedText("Color:",to:'${currentUser.language}',
-                            textStyle: TextStyle(
-                              color: kText.withOpacity(0.5),
-                               fontSize: 20,
-                            ),),
-                          // Text("",style: TextStyle(
-                          //
-                          // ),),
+                          Text("Color:",style: TextStyle(
+                            color: kText.withOpacity(0.5),
+                            fontWeight: FontWeight.bold,
+                            fontSize: 20,
+                          ),),
                           Text('$color',style: TextStyle(
                             color: kText.withOpacity(0.5),
 //                          fontWeight: FontWeight.bold,
                           ),),
                           SizedBox(height: 8,),
-                          TranslatedText("Composition:",to:'${currentUser.language}',
-                            textStyle: TextStyle(
-                              color: kText.withOpacity(0.5),
-                                 fontWeight: FontWeight.bold,fontSize: 20,
-                               ),),
-
-                          // Text('',style: TextStyle(
-                          //
+                          Text('Composition:',style: TextStyle(
+                            color: kText.withOpacity(0.5),
+                            fontWeight: FontWeight.bold,fontSize: 20,
+                          ),),
                           Text('$composition', maxLines: 1,softWrap:false,overflow:TextOverflow.fade,style: TextStyle(
                             color: kText.withOpacity(0.5),
 //                          fontWeight: FontWeight.bold,
                           ),),SizedBox(height: 8,),
-                          TranslatedText("Wash and Care:",to:'${currentUser.language}',
-                            textStyle: TextStyle(
-                              color: kText.withOpacity(0.5),
-                                fontWeight: FontWeight.bold,fontSize: 20,
-                            ),),
-                          // Text('',style: TextStyle(
-                          //
-                          // ),),
+                          Text('Wash and Care:',style: TextStyle(
+                            color: kText.withOpacity(0.5),
+                            fontWeight: FontWeight.bold,fontSize: 20,
+                          ),),
                           Text('$washandcare', maxLines: 1,softWrap:false,overflow:TextOverflow.fade,style: TextStyle(
                             color: kText.withOpacity(0.5),
 //                          fontWeight: FontWeight.bold,
@@ -11653,17 +11548,12 @@ postusa() {
                 tileColor:trans,
                 child: ExpansionTile(
                   backgroundColor:trans,
-                  title:
-                  TranslatedText("Size and Fit:",to:'${currentUser.language}',
-                    textStyle: TextStyle(
+                  title:  Text(
+                    " Size and Fit:",
+                    style: TextStyle(
                       color: kText.withOpacity(0.5),
-                         fontWeight: FontWeight.bold,fontSize: 20,
+                      fontWeight: FontWeight.bold,fontSize: 20,
                     ),),
-                  // Text(
-                  //   " ",
-                  //   style: TextStyle(
-                  //
-                  //   ),),
                   leading: FaIcon(FontAwesomeIcons.rulerCombined,color: kText,),
                   trailing:Icon(Icons.expand_more,color: kText,),
 
@@ -11674,12 +11564,11 @@ postusa() {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.stretch,
                         children: <Widget>[
-                          TranslatedText("Size and Fit:",to:'${currentUser.language}',
-                            textStyle: TextStyle(
-                              color: kText.withOpacity(0.5),
-                              fontWeight: FontWeight.bold,fontSize: 20,
-                            ),),
 
+                          Text('Size and Fit:',style: TextStyle(
+                            color: kText.withOpacity(0.5),
+                            fontWeight: FontWeight.bold,fontSize: 20,
+                          ),),
                           Text('$sizeandfit', maxLines: 1,softWrap:false,overflow:TextOverflow.fade,style: TextStyle(
                             color: kText.withOpacity(0.5),
 //                          fontWeight: FontWeight.bold,
@@ -11695,12 +11584,12 @@ postusa() {
                 child: ExpansionTile(
                   backgroundColor:trans,
                   leading: Icon(Icons.local_shipping,color: kText,),
-                  title: TranslatedText("Shipping  and Returns:",to:'${currentUser.language}',
-                    textStyle: TextStyle(
+                  title:  Text(
+                    " Shipping  and Returns:",
+                    style: TextStyle(
                       color: kText.withOpacity(0.5),
                       fontWeight: FontWeight.bold,fontSize: 20,
                     ),),
-
                   trailing:Icon(Icons.expand_more,color: kText,),
                   maintainState: true,
                   children: [
@@ -11709,12 +11598,11 @@ postusa() {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.stretch,
                         children: <Widget>[
-                          TranslatedText("Shipping  and Returns:",to:'${currentUser.language}',
-                            textStyle: TextStyle(
-                              color: kText.withOpacity(0.5),
-                              fontWeight: FontWeight.bold,fontSize: 20,
-                            ),),
 
+                          Text('Shipping  and Returns:',style: TextStyle(
+                            color: kText.withOpacity(0.5),
+                            fontWeight: FontWeight.bold,fontSize: 20,
+                          ),),
                           Text('$shipment', maxLines: 1,softWrap:false,overflow:TextOverflow.fade,style: TextStyle(
                             color: kText.withOpacity(0.5),
 //                          fontWeight: FontWeight.bold,
@@ -11765,11 +11653,7 @@ postusa() {
             child: SimpleDialog(
 
               backgroundColor: kSecondaryColor,
-              title:TranslatedText("Remove this post?",to:'${currentUser.language}',
-                textStyle: TextStyle(
-                    color: kText,
-                ),),
-              // Text("",style: TextStyle(),),
+              title: Text("Remove this post?",style: TextStyle(color: kText),),
               children: <Widget>[
                 SimpleDialogOption(
                   onPressed: () {
@@ -11777,22 +11661,15 @@ postusa() {
                     deletePost();
                     Navigator.push(context, MaterialPageRoute(builder: (context) =>Profile( profileId: currentUser?.id)));
                   },
-                  child: TranslatedText("Delete",to:'${currentUser.language}',
-                    textStyle: TextStyle(
-                        color: Colors.red,
-                    ),),
-                  // Text(
-                  //   '',
-                  //   style: TextStyle(),
-                  // ),
+                  child: Text(
+                    'Delete',
+                    style: TextStyle(color: Colors.red),
+                  ),
                 ),
                 SimpleDialogOption(
                   onPressed: () => Navigator.pop(context),
-                  child: TranslatedText("Cancel",to:'${currentUser.language}',
-                    textStyle: TextStyle(
-                        color: Colors.white,
-                    ),),
-
+                  child: Text('Cancel',
+                    style: TextStyle(color: Colors.white),),
                 )
               ],
             ),
@@ -11804,9 +11681,9 @@ postusa() {
   deletePost() async {
     // delete post itself
     productsRef
-        .doc(ownerId)
+        .document(ownerId)
         .collection('userProducts')
-        .doc(prodId)
+        .document(prodId)
         .get()
         .then((doc) {
       if (doc.exists) {
@@ -11817,27 +11694,27 @@ postusa() {
     storageRef.child("prod_$prodId.jpg").delete();
     // then delete all activity feed notifications
     QuerySnapshot activityFeedSnapshot = await activityFeedRef
-        .doc(ownerId)
+        .document(ownerId)
         .collection("feedItems")
         .where('prodId', isEqualTo: prodId)
-        .get();
-    activityFeedSnapshot.docs.forEach((doc) {
+        .getDocuments();
+    activityFeedSnapshot.documents.forEach((doc) {
       if (doc.exists) {
         doc.reference.delete();
       }
     });
     // then delete all comments
     QuerySnapshot commentsSnapshot = await productcommentsRef
-        .doc(prodId)
+        .document(prodId)
         .collection('comments')
-        .get();
-    commentsSnapshot.docs.forEach((doc) {
+        .getDocuments();
+    commentsSnapshot.documents.forEach((doc) {
       if (doc.exists) {
         doc.reference.delete();
       }
     });
 
-//      FirebaseFirestore.instance.collectionGroup("userCart").doc(prodId).delete();
+//      Firestore.instance.collectionGroup("userCart").document(prodId).delete();
 
   }
 
@@ -11846,14 +11723,14 @@ postusa() {
 
     if (_isLiked) {
 
-      var docReference = favRef.doc(currentUser.id).collection("userFav").doc(prodId);
+      var docReference = favRef.document(currentUser.id).collection("userFav").document(prodId);
       docReference.delete();
 
       productsRef
-          .doc(ownerId)
+          .document(ownerId)
           .collection('userProducts')
-          .doc(prodId)
-          .update({'likes.${currentUser.id}': false});
+          .document(prodId)
+          .updateData({'likes.${currentUser.id}': false});
       removeLikeFromActivityFeed();
        setState(() {
          likeCount -= 1;
@@ -11861,9 +11738,9 @@ postusa() {
          likes[currentUser.id] = false;
        });
     } else if (!_isLiked) {
-      favRef.doc(currentUser.id).collection("userFav")
-          .doc(prodId)
-          .set({
+      favRef.document(currentUser.id).collection("userFav")
+          .document(prodId)
+          .setData({
         "username": username,
         "prodId": prodId,
         "timestamp": timestamp,
@@ -11879,10 +11756,10 @@ postusa() {
         "shopmediaUrl": shopmediaUrl,
       });
       productsRef
-          .doc(ownerId)
+          .document(ownerId)
           .collection('userProducts')
-          .doc(prodId)
-          .update({'likes.${currentUser.id}': true});
+          .document(prodId)
+          .updateData({'likes.${currentUser.id}': true});
       addLikeToActivityFeed();
        setState(() {
          likeCount += 1;
@@ -11903,10 +11780,10 @@ postusa() {
     bool isNotPostOwner = currentUserId != ownerId;
     if (isNotPostOwner) {
       activityFeedRef
-          .doc(ownerId)
+          .document(ownerId)
           .collection("feedItems")
-          .doc(prodId)
-          .set({
+          .document(prodId)
+          .setData({
         "type": "fav",
         "username": currentUser.displayName,
         "userId": ownerId,
@@ -11922,9 +11799,9 @@ postusa() {
     bool isNotPostOwner = currentUserId != ownerId;
     if (isNotPostOwner) {
       activityFeedRef
-          .doc(ownerId)
+          .document(ownerId)
           .collection("feedItems")
-          .doc(prodId)
+          .document(prodId)
             .get()
           .then((doc) {
         if (doc.exists) {

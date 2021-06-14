@@ -252,42 +252,40 @@ subtitle:  adavance == "true"? Text( "(Paid)",style: TextStyle(color:  kText,
     ) ,
       alignment: Alignment.center,
       child: PaginateFirestore(
-          isLive: true,
-
 //    itemsPerPage: 2,
           itemBuilderType:
           PaginateBuilderType.listView,
           itemBuilder: (index, context, documentSnapshot)   {
-//        DocumentSnapshot ds = snapshot.data.docs[index];
+//        DocumentSnapshot ds = snapshot.data.documents[index];
 
-            String usd = documentSnapshot.data()['usd'];
-            String inr = documentSnapshot.data()['inr'];
-            String gbp = documentSnapshot.data()['gbp'];
-            String eur = documentSnapshot.data()['eur'];
-            String Fusd = documentSnapshot.data()['Fusd'];
-            String Finr = documentSnapshot.data()['Finr'];
-            String Fgbp = documentSnapshot.data()['Fgbp'];
-            String Feur = documentSnapshot.data()['Feur'];
+            String usd = documentSnapshot.data['usd'];
+            String inr = documentSnapshot.data['inr'];
+            String gbp = documentSnapshot.data['gbp'];
+            String eur = documentSnapshot.data['eur'];
+            String Fusd = documentSnapshot.data['Fusd'];
+            String Finr = documentSnapshot.data['Finr'];
+            String Fgbp = documentSnapshot.data['Fgbp'];
+            String Feur = documentSnapshot.data['Feur'];
 
-            String ownerId = documentSnapshot.data()['ownerId'];
-            String cusId = documentSnapshot.data()['cusId'];
-            String title = documentSnapshot.data()['title'];
-            String desciption = documentSnapshot.data()['description'];
-            String orderId = documentSnapshot.data()['orderId'];
-            String advancepay = documentSnapshot.data()['advancepay'];
-            String finalpay = documentSnapshot.data()['finalpay'];
-            String orderStatus = documentSnapshot.data()['orderStatus'];
-            String Address = documentSnapshot.data()['Address'];
- String fulfilled = documentSnapshot.data()['fulfilled'];
+            String ownerId = documentSnapshot.data['ownerId'];
+            String cusId = documentSnapshot.data['cusId'];
+            String title = documentSnapshot.data['title'];
+            String desciption = documentSnapshot.data['description'];
+            String orderId = documentSnapshot.data['orderId'];
+            String advancepay = documentSnapshot.data['advancepay'];
+            String finalpay = documentSnapshot.data['finalpay'];
+            String orderStatus = documentSnapshot.data['orderStatus'];
+            String Address = documentSnapshot.data['Address'];
+ String fulfilled = documentSnapshot.data['fulfilled'];
 
             return
               StreamBuilder(
-                stream: usersRef.doc(cusId).snapshots(),
+                stream: usersRef.document(cusId).snapshots(),
                 builder: (context, snapshot) {
                   if (!snapshot.hasData) {
                     return circularProgress();
                   }
-                  Users user = Users.fromDocument(snapshot.data);
+                  User user = User.fromDocument(snapshot.data);
 //          bool isPostOwner = currentUserId == ownerId;
                   return Expanded(
                     child: Column(
@@ -341,8 +339,8 @@ adavance: advancepay,finalp: finalpay,
                 },
               );
           },
-          query:  FirebaseFirestore.instance.collection('serviceSeller')
-              .doc(currentUser.id)
+          query:  Firestore.instance.collection('serviceSeller')
+              .document(currentUser.id)
               .collection('sellerService').orderBy('timestamp',descending: true)
               .where('fulfilled',isEqualTo: 'false')
 
@@ -355,42 +353,40 @@ adavance: advancepay,finalp: finalpay,
     ) ,
       alignment: Alignment.center,
       child: PaginateFirestore(
-          isLive: true,
-
 //    itemsPerPage: 2,
           itemBuilderType:
           PaginateBuilderType.listView,
           itemBuilder: (index, context, documentSnapshot)   {
 
 
-            String usd = documentSnapshot.data()['usd'];
-            String inr = documentSnapshot.data()['inr'];
-            String gbp = documentSnapshot.data()['gbp'];
-            String eur = documentSnapshot.data()['eur'];
-           String Fusd = documentSnapshot.data()['Fusd'];
-            String Finr = documentSnapshot.data()['Finr'];
-            String Fgbp = documentSnapshot.data()['Fgbp'];
-            String Feur = documentSnapshot.data()['Feur'];
+            String usd = documentSnapshot.data['usd'];
+            String inr = documentSnapshot.data['inr'];
+            String gbp = documentSnapshot.data['gbp'];
+            String eur = documentSnapshot.data['eur'];
+           String Fusd = documentSnapshot.data['Fusd'];
+            String Finr = documentSnapshot.data['Finr'];
+            String Fgbp = documentSnapshot.data['Fgbp'];
+            String Feur = documentSnapshot.data['Feur'];
 
-            String orderId = documentSnapshot.data()['orderId'];
-             String ownerId = documentSnapshot.data()['ownerId'];
+            String orderId = documentSnapshot.data['orderId'];
+             String ownerId = documentSnapshot.data['ownerId'];
 
-             String cusId = documentSnapshot.data()['cusId'];
+             String cusId = documentSnapshot.data['cusId'];
 
-            String advancepay = documentSnapshot.data()['advancepay'];
-            String finalpay = documentSnapshot.data()['finalpay'];
-            String orderStatus = documentSnapshot.data()['orderStatus'];
-            String title = documentSnapshot.data()['title'];
-String description = documentSnapshot.data()['description'];
+            String advancepay = documentSnapshot.data['advancepay'];
+            String finalpay = documentSnapshot.data['finalpay'];
+            String orderStatus = documentSnapshot.data['orderStatus'];
+            String title = documentSnapshot.data['title'];
+String description = documentSnapshot.data['description'];
 
             return
               StreamBuilder(
-                stream: usersRef.doc(cusId).snapshots(),
+                stream: usersRef.document(cusId).snapshots(),
                 builder: (context, snapshot) {
                   if (!snapshot.hasData) {
                     return circularProgress();
                   }
-                  Users user = Users.fromDocument(snapshot.data);
+                  User user = User.fromDocument(snapshot.data);
 //          bool isPostOwner = currentUserId == ownerId;
                   return Column(
                     children: <Widget>[
@@ -412,8 +408,7 @@ String description = documentSnapshot.data()['description'];
                       ),
                       Divider(color: kGrey,),
                       ListTile(
-                        leading:
-                        Text('Order Details',
+                        leading: Text('Order Details',
                           style: TextStyle(color: kText),),
                       ),
 
@@ -439,8 +434,8 @@ adavance: advancepay, finalp: finalpay,
                 },
               );
           },
-          query:  FirebaseFirestore.instance.collection('serviceSeller')
-              .doc(currentUser.id)
+          query:  Firestore.instance.collection('serviceSeller')
+              .document(currentUser.id)
               .collection('sellerService').orderBy('timestamp',descending: true)
               .where('fulfilled',isEqualTo: 'true')
 
@@ -528,11 +523,11 @@ adavance: advancepay, finalp: finalpay,
   }
   update() async {
 
-    QuerySnapshot snapshot = await  FirebaseFirestore.instance.collection('serviceSeller')
-        .doc(currentUser.id)
-        .collection('sellerService').get();
-    snapshot.docs.forEach((doc) {
-      doc.reference.update({'read':'true'});
+    QuerySnapshot snapshot = await  Firestore.instance.collection('serviceSeller')
+        .document(currentUser.id)
+        .collection('sellerService').getDocuments();
+    snapshot.documents.forEach((doc) {
+      doc.reference.updateData({'read':'true'});
     });
   }
 }

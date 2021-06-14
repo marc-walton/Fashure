@@ -7,7 +7,7 @@ import 'package:fashow/Constants.dart';
 import 'package:fashow/progress.dart';
 import 'package:uuid/uuid.dart';
 import 'package:smooth_star_rating/smooth_star_rating.dart';
-import 'package:translated_text/translated_text.dart';
+
 import 'package:flutter/cupertino.dart';
 import 'package:fashow/invoice.dart';
 
@@ -169,20 +169,20 @@ class _InvoiceViewState extends State<InvoiceView> {
           ],
         ),
       );
-      FirebaseFirestore.instance.collection('Reviews')
-          .doc(OwnerId).collection('userReviews').doc(reviewId)
-          .set({
+      Firestore.instance.collection('Reviews')
+          .document(OwnerId).collection('userReviews').document(reviewId)
+          .setData({
         'userId': OwnerId,
         'rating': rating,
         'review':reviewController.text,
         'reviewId' : reviewId,
         'timestamp':timestamp,
       });
-      FirebaseFirestore.instance.collection('feed')
-          .doc(OwnerId)
+      Firestore.instance.collection('feed')
+          .document(OwnerId)
           .collection('feedItems')
-          .doc(reviewId)
-          .set({
+          .document(reviewId)
+          .setData({
         "type": "ReviewC",
         "username": currentUser.displayName,
         "userId": OwnerId,
@@ -203,10 +203,10 @@ class _InvoiceViewState extends State<InvoiceView> {
  print(widget.ownerId);
 
     return StreamBuilder(
-        stream: FirebaseFirestore.instance.collection('serviceSeller')
-            .doc(widget.ownerId)
+        stream: Firestore.instance.collection('serviceSeller')
+            .document(widget.ownerId)
             .collection('sellerService')
-        .doc(widget.orderId)
+        .document(widget.orderId)
             .snapshots(),
       builder: (context, snapshot) {
         if (!snapshot.hasData) {

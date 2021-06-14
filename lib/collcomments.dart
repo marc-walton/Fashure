@@ -9,7 +9,6 @@ import 'package:fashow/progress.dart';
 import 'package:fashow/HomePage.dart';
 import 'package:fashow/Constants.dart';
 import 'package:fashow/HomePage.dart';
-import 'package:translated_text/translated_text.dart';
 
 
 class CollComments extends StatefulWidget {
@@ -46,7 +45,7 @@ class CollCommentsState extends State<CollComments> {
   buildComments() {
     return StreamBuilder(
       stream: collcommentsRef
-          .doc(collId)
+          .document(collId)
           .collection('collComments')
           .orderBy("timestamp", descending: false)
           .snapshots(),
@@ -55,7 +54,7 @@ class CollCommentsState extends State<CollComments> {
           return circularProgress();
         }
         List<CollComment> Collcomments = [];
-        snapshot.data.docs.forEach((doc) {
+        snapshot.data.documents.forEach((doc) {
           Collcomments.add(CollComment.fromDocument(doc));
         });
         return ListView(
@@ -66,7 +65,7 @@ class CollCommentsState extends State<CollComments> {
   }
 
   addComment() {
-    collcommentsRef.doc(collId).collection("collComments").add({
+    collcommentsRef.document(collId).collection("collComments").add({
       "username": currentUser.displayName,
       "comment": collcommentController.text,
       "timestamp": timestamp,
@@ -75,7 +74,7 @@ class CollCommentsState extends State<CollComments> {
     });
     bool isNotPostOwner = collOwnerId != currentUser.id;
    if (isNotPostOwner) {
-     activityFeedRef.doc(collOwnerId).collection('feedItems').add({
+     activityFeedRef.document(collOwnerId).collection('feedItems').add({
        "type": "Collectioncomment",
        "commentData": collcommentController.text,
        "username": currentUser.displayName,
@@ -99,10 +98,11 @@ class CollCommentsState extends State<CollComments> {
 
         title: FittedBox(
           fit: BoxFit.contain,
-          child:TranslatedText('Comments',to:'${currentUser.language}',textStyle:TextStyle(
-        fontFamily :"MajorMonoDisplay",
+          child: Text(
+            "Comments" ,
+            style: TextStyle(color: Colors.white),
           ),
-        ),),),
+        ),),
       body: Container( decoration: BoxDecoration(
           gradient: fabGradient
       ) ,
@@ -129,11 +129,9 @@ class CollCommentsState extends State<CollComments> {
               trailing: OutlineButton( color: kPrimaryColor,
                 onPressed: addComment,
                 borderSide: BorderSide.none,
-                child: TranslatedText('Posts',to:'${currentUser.language}',textStyle:TextStyle(
-                  fontFamily :"MajorMonoDisplay",
+                child: Text("Post",style: TextStyle(color: kText),),
               ),
             ),
-              ),)
           ],
         ),
       ),
@@ -158,11 +156,11 @@ class   CollComment extends StatelessWidget {
 
   factory CollComment.fromDocument(DocumentSnapshot doc) {
     return CollComment(
-      username: doc.data()['username'],
-      userId: doc.data()['userId'],
-      comment: doc.data()['comment'],
-      timestamp: doc.data()['timestamp'],
-      avatarUrl: doc.data()['avatarUrl'],
+      username: doc['username'],
+      userId: doc['userId'],
+      comment: doc['comment'],
+      timestamp: doc['timestamp'],
+      avatarUrl: doc['avatarUrl'],
     );
   }
 

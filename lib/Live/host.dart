@@ -32,7 +32,7 @@ class CallPage extends StatefulWidget {
 class _CallPageState extends State<CallPage>{
   static final _users = <int>[];
   String channelName;
-  List<Users> userList = [];
+  List<User> userList = [];
 
   bool _isLogin = true;
   bool _isInChannel = true;
@@ -639,13 +639,13 @@ class _CallPageState extends State<CallPage>{
 
   List<Widget> getUserStories() {
     List<Widget> stories = [];
-    for (Users users in userList) {
+    for (User users in userList) {
       stories.add(getStory(users));
     }
     return stories;
   }
 
-  Widget getStory(Users users) {
+  Widget getStory(User users) {
     return Container(
       margin: EdgeInsets.symmetric(vertical: 7.5),
       child: Column(
@@ -950,7 +950,7 @@ class _CallPageState extends State<CallPage>{
       var img = await FireStoreClass.getImage(username: member.userId);
       var nm = await FireStoreClass.getdisName(username: member.userId);
       setState(() {
-        userList.add(new Users(username: member.userId, displayName: nm, photoUrl: img));
+        userList.add(new User(username: member.userId, displayName: nm, photoUrl: img));
         if(userList.length>0)
           anyPerson =true;
       });

@@ -13,7 +13,7 @@ class _SellerSettingState extends State<SellerSetting> {
     return
       StreamBuilder(
           stream:bankRef
-              .doc(currentUser.id).snapshots(),
+              .document(currentUser.id).snapshots(),
           builder: (context,snapshot){
             String accno =  snapshot.data['accno']  ?? "";
             String ifsc = snapshot.data['ifsc'] ?? "";

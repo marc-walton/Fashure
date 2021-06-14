@@ -17,7 +17,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:fashow/Product_screen.dart';
 import 'package:transparent_image/transparent_image.dart';
 import 'package:zefyr/zefyr.dart';
-import 'package:translated_text/translated_text.dart';
 List <Widget>listOfImages = <Widget>[];
 class Coll extends StatefulWidget {
   final String collId;
@@ -46,14 +45,14 @@ int index;
   factory Coll.fromDocument(DocumentSnapshot doc) {
 
     return Coll(
-      headerImage:doc.data()['headerImage'],
-      collId: doc.data()['collId'],
-      ownerId: doc.data()['ownerId'],
-      username: doc.data()['username'],
-      collmediaUrl: doc.data()['collmediaUrl'],
-      title: doc.data()['title'],
-      source:doc.data()['source'],
-      likes: doc.data()['claps'],
+      headerImage:doc['headerImage'],
+      collId: doc['collId'],
+      ownerId: doc['ownerId'],
+      username: doc['username'],
+      collmediaUrl: doc['collmediaUrl'],
+      title: doc['title'],
+      source:doc['source'],
+      likes: doc['claps'],
     );
   }
 
@@ -131,8 +130,7 @@ print(collmediaUrl);
             child: SimpleDialog(
 
               backgroundColor: kSecondaryColor,
-               title:TranslatedText('Remove this post?',to:'${currentUser.language}',textStyle:TextStyle( color: kText),),
-
+              title: Text("Remove this post?",style: TextStyle(color: kText),),
               children: <Widget>[
                 SimpleDialogOption(
                   onPressed: () {
@@ -141,17 +139,15 @@ print(collmediaUrl);
                     Navigator.pop(context);
 
                   },
-                   child: TranslatedText('Delete',to:'${currentUser.language}',textStyle:TextStyle(
-                     color: Colors.red,),
-            // Text(
-                  //   'Delete',
-                  //   style: TextStyle(color: Colors.red),
+                  child: Text(
+                    'Delete',
+                    style: TextStyle(color: Colors.red),
                   ),
                 ),
                 SimpleDialogOption(
                   onPressed: () => Navigator.pop(context),
-                  child: TranslatedText('Cancel',to:'${currentUser.language}',textStyle:TextStyle(
-                    color: Colors.white),),
+                  child: Text('Cancel',
+                    style: TextStyle(color: Colors.white),),
                 )
               ],
             ),
@@ -163,7 +159,7 @@ print(collmediaUrl);
   deletePost() async {
     // delete post itself
     collRef
-        .doc(collId)
+        .document(collId)
         .get()
         .then((doc) {
       if (doc.exists) {
@@ -175,21 +171,21 @@ print(collmediaUrl);
     storageRef.child("colle_$collId.jpg").delete();
     // then delete all activity feed notifications
     QuerySnapshot activityFeedSnapshot = await activityFeedRef
-        .doc(ownerId)
+        .document(ownerId)
         .collection("feedItems")
         .where('collId', isEqualTo: collId)
-        .get();
-    activityFeedSnapshot.docs.forEach((doc) {
+        .getDocuments();
+    activityFeedSnapshot.documents.forEach((doc) {
       if (doc.exists) {
         doc.reference.delete();
       }
     });
     // then delete all comments
     QuerySnapshot commentsSnapshot = await collcommentsRef
-        .doc(collId)
+        .document(collId)
         .collection('comments')
-        .get();
-    commentsSnapshot.docs.forEach((doc) {
+        .getDocuments();
+    commentsSnapshot.documents.forEach((doc) {
       if (doc.exists) {
         doc.reference.delete();
       }
@@ -202,8 +198,8 @@ print(collmediaUrl);
     if (_isLiked) {
       collRef
 
-          .doc(collId)
-          .update({'claps.$currentUserId': false});
+          .document(collId)
+          .updateData({'claps.$currentUserId': false});
      removeLikeFromActivityFeed();
       setState(() {
         likeCount -= 1;
@@ -213,8 +209,8 @@ print(collmediaUrl);
     } else if (!_isLiked) {
       collRef
 
-          .doc(collId)
-          .update({'claps.$currentUserId': true});
+          .document(collId)
+          .updateData({'claps.$currentUserId': true});
      addLikeToActivityFeed();
       setState(() {
         likeCount += 1;
@@ -235,10 +231,10 @@ print(collmediaUrl);
     bool isNotPostOwner = currentUserId != ownerId;
     if (isNotPostOwner) {
       activityFeedRef
-          .doc(ownerId)
+          .document(ownerId)
           .collection("feedItems")
-          .doc(collId)
-          .set({
+          .document(collId)
+          .setData({
         "type": "CollectionLikes",
         "username": currentUser.displayName,
         "userId": ownerId,
@@ -255,9 +251,9 @@ print(collmediaUrl);
     bool isNotPostOwner = currentUserId != ownerId;
     if (isNotPostOwner) {
       activityFeedRef
-          .doc(ownerId)
+          .document(ownerId)
           .collection("feedItems")
-          .doc(collId)
+          .document(collId)
           .get()
           .then((doc) {
         if (doc.exists) {
@@ -269,11 +265,11 @@ print(collmediaUrl);
   report(){
     Fluttertoast.showToast(
         msg: "Your report has been submitted", timeInSecForIos: 4);
-    FirebaseFirestore.instance.collection('reports')
-        .doc(ownerId)
+    Firestore.instance.collection('reports')
+        .document(ownerId)
         .collection("userReports")
-        .doc(collId)
-        .set({
+        .document(collId)
+        .setData({
       "type": "shop",
       "userId": ownerId,
       "postId": collId,
@@ -294,17 +290,17 @@ return
               return new ListView.builder(
                 shrinkWrap: true,
                   scrollDirection:Axis.vertical,
-                  itemCount: snapshot.data.docs.length,
+                  itemCount: snapshot.data.documents.length,
                   itemBuilder: (BuildContext context, int index) {
-                // List<String> images = List.from(snapshot.data.docs[index].data['collmediaUrl']);
+                // List<String> images = List.from(snapshot.data.documents[index].data['collmediaUrl']);
                     listOfImages = [];
                     for (int i = 0;
                     i <
-                        snapshot.data.docs[index].data()['collmediaUrl']
+                        snapshot.data.documents[index].data['collmediaUrl']
                             .length;
                     i++) {
                       listOfImages.add(CachedNetworkImage(imageUrl:snapshot
-                          .data.docs[index].data()['collmediaUrl'][i]));
+                          .data.documents[index].data['collmediaUrl'][i]));
                     }
                     return Column(
                       children: <Widget>[
@@ -355,13 +351,13 @@ buildPostHeader() {
 
     return
       FutureBuilder(
-        future: usersRef.doc(ownerId).get(),
+        future: usersRef.document(ownerId).get(),
         builder: (context, snapshot) {
           // int count = snapshot.data.lenght;
           if (!snapshot.hasData) {
             return circularProgress();
           }
-          Users user = Users.fromDocument(snapshot.data);
+          User user = User.fromDocument(snapshot.data);
          bool isPostOwner = currentUserId == ownerId;
           return  ListView(
             shrinkWrap: true,
@@ -412,11 +408,10 @@ scrollDirection:Axis.vertical,
 
                                 child: Align(
                                     alignment: Alignment.center,
-                                     child: TranslatedText('Report This post',to:'${currentUser.language}',textStyle:TextStyle(
-                                       fontWeight: FontWeight.bold,
-                                       color: Colors.blueAccent,
-                                       fontSize: 20.0
-                                       ),),),),
+                                    child: Text('Report this post?',style: TextStyle(
+                                        color: Colors.blueAccent,
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 20.0),)),),
 
                             ],
                           ),

@@ -4,7 +4,7 @@ import 'package:fashow/Constants.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:alert_dialog/alert_dialog.dart';
 import 'package:dropdown_formfield/dropdown_formfield.dart';
-import 'package:translated_text/translated_text.dart';
+
 class CreateAccount extends StatefulWidget {
   @override
   _CreateAccountState createState() => _CreateAccountState();
@@ -21,33 +21,33 @@ class _CreateAccountState extends State<CreateAccount> {
     super.initState();
     alert(
       context,
-      title: TranslatedText('This is still in beta',to:'${currentUser.language}'),
-      content: TranslatedText('The final version of the app with more features and better user-interface will be released soon.Meanwhile feel free to contact us at fashure.business@gmail.com',to:'${currentUser.language}'),
-      textOK: TranslatedText('OK',to:'${currentUser.language}'),
+      title: Text('This is app is still in beta'),
+      content: Text("The final version of the app with more features and better user-interface will be released soon.Meanwhile feel free to contact us at fashure.business@gmail.com"),
+      textOK: Text('Ok'),
     );
   }
 
   usernamecheck({String name})async{
-    final QuerySnapshot result = await FirebaseFirestore.instance
+    final QuerySnapshot result = await Firestore.instance
         .collection('users')
         .where('namelow',isEqualTo:name.toLowerCase())
-        .get();
-    final List<DocumentSnapshot> documents = result.docs;
+        .getDocuments();
+    final List<DocumentSnapshot> documents = result.documents;
     print(documents.length);
     if(documents.length > 0){
       alert(
         context,
-        title: TranslatedText('Username already taken',to:'${currentUser.language}'),
-        content: TranslatedText('Please choose another user name',to:'${currentUser.language}'),
-        textOK: TranslatedText('OK',to:'${currentUser.language}'),
+        title: Text('User name is already taken'),
+        content: Text('Please chose another username'),
+        textOK: Text('Ok'),
       );
     }
     else{
       alert(
         context,
-        title: TranslatedText('Username is not taken',to:'${currentUser.language}'),
-        content: TranslatedText('Please choose another user name',to:'${currentUser.language}'),
-        textOK: TranslatedText('OK',to:'${currentUser.language}'),
+        title: Text('User name is not taken'),
+        content: Text('Please chose another username'),
+        textOK: Text('Ok'),
       );
     }
 
@@ -75,8 +75,7 @@ class _CreateAccountState extends State<CreateAccount> {
       usernamecheck(name:username);
 if(save == true){
   SnackBar snackbar = SnackBar(
-    content: TranslatedText("Welcome $username!",to:'${currentUser.language}'),
-    // Text("Welcome $username!"),
+    content: Text("Welcome $username!"),
 
   );
   _scaffoldKey.currentState.showSnackBar(snackbar);
@@ -106,8 +105,10 @@ if(save == true){
 
           title: FittedBox(
             fit: BoxFit.contain,
-            child:TranslatedText('Select region',to:'${currentUser.language}',textStyle:TextStyle(
-                color: Colors.white),),),),
+            child: Text(
+              "Select region" ,
+              style: TextStyle(color: Colors.white),
+            ),),),
         body: Container( decoration: BoxDecoration(
             gradient: fabGradient
         ) ,
@@ -121,11 +122,7 @@ if(save == true){
                 child: Column(
                   // mainAxisAlignment: MainAxisAlignment.start,
                   children: <Widget>[
-                  TranslatedText('Select region',to:'${currentUser.language}',textStyle:TextStyle(
-                    color: kText),
-                  ),
-
-
+                    Text('Select your region',style: TextStyle(color:kText)),
 
                     Container(
                       padding: EdgeInsets.all(16),
@@ -176,8 +173,7 @@ if(save == true){
                       onPressed: (){_saveForm();
                       },
 
-                      label: TranslatedText('Sign up',to:'${currentUser.language}',textStyle:TextStyle(
-                          color: Colors.white),),
+                      label: Text('Sign up',style:TextStyle(color: kText) ,),
                     ),
                   ],
                 ),

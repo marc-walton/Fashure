@@ -2,7 +2,6 @@ import 'dart:io';
 import 'dart:async';
 import 'dart:ui';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:modal_progress_hud/modal_progress_hud.dart';
 
 import 'package:flutter/material.dart';
 //import 'package:flutter_svg/svg.dart';
@@ -18,9 +17,10 @@ import 'package:image/image.dart' as Im;
 import 'package:uuid/uuid.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:image_cropper/image_cropper.dart';
-import 'package:translated_text/translated_text.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
 class Upload extends StatefulWidget {
-  final Users currentUser;
+  final User currentUser;
 
 
   Upload({this.currentUser});
@@ -75,7 +75,7 @@ class _UploadState extends State<Upload>
           compressFormat: ImageCompressFormat.jpg,
           androidUiSettings: AndroidUiSettings(
             toolbarColor: Colors.deepOrange,
-            toolbarTitle: "",
+            toolbarTitle: "Crop Image",
             statusBarColor: Colors.deepOrange.shade900,
             backgroundColor: Colors.white,
           )
@@ -100,31 +100,22 @@ class _UploadState extends State<Upload>
         builder: (context) {
           return SimpleDialog(
 //            shape: ,
-            title: TranslatedText('Create Posts',to:'${currentUser.language}',
-              ),
-            // Text(" Post"),
+            title: Text("Create Post"),
             children: <Widget>[
               SimpleDialogOption(
-                  child:  TranslatedText('Photo with Camera',to:'${currentUser.language}',
-                  ),
-
-                  onPressed:() {
+                  child: Text("Photo with Camera"), onPressed:() {
           getImage(ImageSource.camera);
           Navigator.pop(context);
           }),
               SimpleDialogOption(
-                child: TranslatedText('Image from Gallery',to:'${currentUser.language}',
-                ),
-
+                child: Text("Image from Gallery"),
                 onPressed:  () {
                   getImage(ImageSource.gallery);
                   Navigator.pop(context);
                 },
               ),
               SimpleDialogOption(
-                child: TranslatedText('Cancel',to:'${currentUser.language}',
-                ),
-
+                child: Text("Cancel"),
                 onPressed: () => Navigator.pop(context),
               )
             ],
@@ -147,14 +138,13 @@ class _UploadState extends State<Upload>
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(8.0),
               ),
-              child: TranslatedText('Upload Image',to:'${currentUser.language}',
-                textStyle:TextStyle(
-                 color: Colors.white,
-                 fontSize: 22.0,
-       ),  ),
-              // Text(
-              //   "",
-              //
+              child: Text(
+                "Upload Image",
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 22.0,
+                ),
+              ),
               color: Colors.deepOrange,
               onPressed: () => selectImage(context),
             ),
@@ -182,19 +172,19 @@ class _UploadState extends State<Upload>
   }
 
   Future<String> uploadImage(imageFile) async {
-   UploadTask uploadTask =
+    StorageUploadTask uploadTask =
     storageRef.child("post_$postId.jpg").putFile(imageFile);
-   TaskSnapshot storageSnap = await uploadTask;
+    StorageTaskSnapshot storageSnap = await uploadTask.onComplete;
     String downloadUrl = await storageSnap.ref.getDownloadURL();
     return downloadUrl;
   }
 
   createPostInFirestore({String mediaUrl, String location, String description}) {
     postsRef
-        .doc(widget.currentUser.id)
+        .document(widget.currentUser.id)
         .collection("userPosts")
-        .doc(postId)
-        .set({
+        .document(postId)
+        .setData({
       "postId": postId,
       "ownerId": widget.currentUser.id,
       "username": widget.currentUser.displayName,
@@ -214,21 +204,13 @@ class _UploadState extends State<Upload>
     return showDialog(
       context: context,
       builder: (context) => new AlertDialog(
-        title: new
-        TranslatedText('Are you sure?',to:'${currentUser.language}',
-          ),
-
-        content: new
-        TranslatedText('Do you want to exit without uploading?',to:'${currentUser.language}',
-        ),
-
+        title: new Text('Are you sure?'),
+        content: new Text('Do you want to exit without uploading?'),
         actions: <Widget>[
           new FlatButton(
 
             onPressed: () => Navigator.of(context).pop(false),
-            child: TranslatedText('NO',to:'${currentUser.language}',
-            ),
-
+            child: Text("NO"),
           ),
           SizedBox(height: 16),
           new FlatButton(
@@ -236,8 +218,7 @@ class _UploadState extends State<Upload>
 
             clearImage();
             },
-            child: TranslatedText('YES',to:'${currentUser.language}',
-            ),
+            child: Text("YES"),
           ),
         ],
       ),
@@ -254,8 +235,8 @@ class _UploadState extends State<Upload>
 
     createPostInFirestore(
       mediaUrl: mediaUrl,
-      location: locationController.text??"",
-      description: captionController.text??"",
+      location: locationController.text,
+      description: captionController.text,
     );
 
     Navigator.pop(context);
@@ -265,121 +246,117 @@ class _UploadState extends State<Upload>
   builduploadForm() {
     return WillPopScope(
       onWillPop: _onBackPressed,
-      child: ModalProgressHUD(
-        color: Colors.black,
-        opacity: 1.0,
-        progressIndicator: Image.asset('assets/img/loading-76.gif'),
-        inAsyncCall: isUploading,
-        child: Scaffold(
-          appBar: AppBar(
-            backgroundColor: kPrimaryColor,
-            leading: IconButton(
-                icon: Icon(Icons.arrow_back, color: kSecondaryColor),
-                onPressed:_onBackPressed),
-            title:TranslatedText('Caption Post',to:'${currentUser.language}',
-              textStyle: TextStyle(
-                color: Colors.white),
-              ),
-            actions: [
-              FlatButton(
-                onPressed: (){   isUploading ? null : handleSubmit();
-        Navigator.pop(context);
-
-        },
-                child:
-                TranslatedText('Post',to:'${currentUser.language}',
-                  textStyle: TextStyle(
-                    color: Colors.blueAccent,
-                         fontWeight: FontWeight.bold,
-                           fontSize: 20.0),
-                ),
-                // Text(
-                //   "Post",
-                //   style: TextStyle(
-                //       ),
-                // ),
-              )
-            ],
+      child: Scaffold(
+        appBar: AppBar(
+          backgroundColor: kPrimaryColor,
+          leading: IconButton(
+              icon: Icon(Icons.arrow_back, color: kSecondaryColor),
+              onPressed:_onBackPressed),
+          title: Text(
+            "Caption Post",
+            style: TextStyle(color: Colors.white),
           ),
-          body: Container( decoration: BoxDecoration(
-              gradient: fabGradient
-          ) ,
-            alignment: Alignment.center,
-            child: Stack(
+          actions: [
+            FlatButton(
+              onPressed: (){   isUploading ? null : handleSubmit();
+      Navigator.pop(context);
 
-              children:[ ListView(
-                children: <Widget>[
-                  isUploading ? linearProgress() : Text(""),
-
-                  Container(
-                      height:500,
-                      width:300,child: getImageWidget()),
-                  Padding(
-                    padding: EdgeInsets.only(top: 10.0),
-                  ),
-                  ListTile(
-                    leading: CircleAvatar(
-                      backgroundImage:
-                      CachedNetworkImageProvider(widget.currentUser.photoUrl),
-                    ),
-                    title: Container(
-                      width: 250.0,
-                      child: TextField(
-                        style:TextStyle(color: kText),
-
-                        controller: captionController,
-                        decoration: InputDecoration(
-                            hintText: "Write a caption...", border: InputBorder.none),
-                      ),
-                    ),
-                  ),
-                  Divider(),
-                  ListTile(
-                    leading: Icon(
-                      Icons.pin_drop,
-                      color: Colors.orange,
-                      size: 35.0,
-                    ),
-                    title: Container(
-                      width: 250.0,
-                      child: TextField(
-                        style:TextStyle(color: kText),
-
-                        controller: locationController,
-                        decoration: InputDecoration(
-                          hintText: "Where was this photo taken?",
-                          border: InputBorder.none,
-                        ),
-                      ),
-                    ),
-                  ),
-                  Container(
-                    width: 200.0,
-                    height: 100.0,
-                    alignment: Alignment.center,
-                    child: RaisedButton.icon(
-                        label: TranslatedText('Use Current Location',to:'${currentUser.language}',
-                          textStyle: TextStyle(
-                              color: Colors.white),
-                        ),
-
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(30.0),
-                        ),
-                        color: Colors.blue,
-                        onPressed: getUserLocation,
-                        icon: Icon(
-                          Icons.my_location,
-                          color: Colors.white,
-                        )),
-                  ),
-
-
-                ],
+      },
+              child: Text(
+                "Post",
+                style: TextStyle(
+                    color: Colors.blueAccent,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 20.0),
               ),
+            )
+          ],
+        ),
+        body: Container( decoration: BoxDecoration(
+            gradient: fabGradient
+        ) ,
+          alignment: Alignment.center,
+          child: Stack(
 
-        ],
+            children:[ ListView(
+              children: <Widget>[
+                isUploading ? linearProgress() : Text(""),
+
+                Container(
+                    height:500,
+                    width:300,child: getImageWidget()),
+                Padding(
+                  padding: EdgeInsets.only(top: 10.0),
+                ),
+                ListTile(
+                  leading: CircleAvatar(
+                    backgroundImage:
+                    CachedNetworkImageProvider(widget.currentUser.photoUrl),
+                  ),
+                  title: Container(
+                    width: 250.0,
+                    child: TextField(
+                      style:TextStyle(color: kText),
+
+                      controller: captionController,
+                      decoration: InputDecoration(
+                          hintText: "Write a caption...", border: InputBorder.none),
+                    ),
+                  ),
+                ),
+                Divider(),
+                ListTile(
+                  leading: Icon(
+                    Icons.pin_drop,
+                    color: Colors.orange,
+                    size: 35.0,
+                  ),
+                  title: Container(
+                    width: 250.0,
+                    child: TextField(
+                      style:TextStyle(color: kText),
+
+                      controller: locationController,
+                      decoration: InputDecoration(
+                        hintText: "Where was this photo taken?",
+                        border: InputBorder.none,
+                      ),
+                    ),
+                  ),
+                ),
+                Container(
+                  width: 200.0,
+                  height: 100.0,
+                  alignment: Alignment.center,
+                  child: RaisedButton.icon(
+                      label: Text(
+                        "Use Current Location",
+                        style: TextStyle(color: Colors.white),
+                      ),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(30.0),
+                      ),
+                      color: Colors.blue,
+                      onPressed: getUserLocation,
+                      icon: Icon(
+                        Icons.my_location,
+                        color: Colors.white,
+                      )),
+                ),
+
+
+              ],
             ),
+              (_inProcess)?Container(
+
+                color: Colors.white,
+                height: MediaQuery.of(context).size.height * 0.95,
+                child: Center(
+                  child: CircularProgressIndicator(),
+                ),
+              ):Center(),
+              isUploading ? Center(child:  CircularProgressIndicator()) : Text(""),
+      ],
           ),
         ),
       ),

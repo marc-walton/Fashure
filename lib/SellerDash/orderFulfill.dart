@@ -20,11 +20,11 @@ class _OrderFulfillState extends State<OrderFulfill> {
   TextEditingController courierController = TextEditingController();
 
 submit(){
-  FirebaseFirestore.instance.collection('ordersSeller')
-      .doc(widget.ownerId)
+  Firestore.instance.collection('ordersSeller')
+      .document(widget.ownerId)
       .collection('sellerOrder')
-      .doc(widget.orderId)
-      .update({
+      .document(widget.orderId)
+      .updateData({
     'fulfilled':'true',
     'courierId': courierIdController.text??"",
     'courier': courierController.text??"",
@@ -33,11 +33,11 @@ submit(){
     "timestamp": timestamp,
 
   });
-  FirebaseFirestore.instance.collection('ordersCustomer')
-      .doc(widget.cusId)
+  Firestore.instance.collection('ordersCustomer')
+      .document(widget.cusId)
       .collection('userOrder')
-      .doc(widget.orderId)
-      .update({
+      .document(widget.orderId)
+      .updateData({
     'fulfilled':'true',
     'courierId': courierIdController.text??"",
       'courier': courierController.text??"",
@@ -45,11 +45,11 @@ submit(){
     'orderStatus':'Order Shipped',
     "timestamp": timestamp,
 
-  }); FirebaseFirestore.instance.collection('feed')
-      .doc(widget.cusId)
+  }); Firestore.instance.collection('feed')
+      .document(widget.cusId)
       .collection('feedItems')
-      .doc(widget.orderId)
-      .update({'message':'Your order is being shipped!',
+      .document(widget.orderId)
+      .updateData({'message':'Your order is being shipped!',
     "timestamp": timestamp,
     "type": "Payment",
     "userId": widget.ownerId,
@@ -58,11 +58,11 @@ submit(){
     "username": currentUser.displayName,
     "userProfileImg": currentUser.photoUrl,
     "read": 'false',
-  });FirebaseFirestore.instance.collection('feed')
-      .doc(widget.ownerId)
+  });Firestore.instance.collection('feed')
+      .document(widget.ownerId)
       .collection('feedItems')
-      .doc(widget.orderId)
-      .update({'message':'You fulfilled an order!',
+      .document(widget.orderId)
+      .updateData({'message':'You fulfilled an order!',
     "timestamp": timestamp,
     "type": "PaymentO",
     "userId": widget.ownerId,

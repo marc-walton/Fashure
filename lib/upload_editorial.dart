@@ -1,7 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
 import 'dart:async';
-import 'package:modal_progress_hud/modal_progress_hud.dart';
 
 import 'package:quill_delta/quill_delta.dart';
 
@@ -20,10 +19,10 @@ import 'package:fashow/Constants.dart';
 import 'package:image/image.dart' as Im;
 import 'package:uuid/uuid.dart';
 import 'package:zefyr/zefyr.dart';
-import 'package:translated_text/translated_text.dart';
+
 class UploadEdit extends StatefulWidget {
   final GlobalKey<ScaffoldState> globalKey;
-  final Users currentUser;
+  final User currentUser;
 
   UploadEdit({this.currentUser,
   this.globalKey});
@@ -73,25 +72,22 @@ ZefyrImageDelegate _imageDelegate;
         context: parentContext,
         builder: (context) {
           return SimpleDialog(
-            title: TranslatedText('Create Post',to:'${currentUser.language}',
-            textStyle: TextStyle(color:
-            Colors.white),),
-                 children: <Widget>[
+            title: Text("Create Post"),
+            children: <Widget>[
               SimpleDialogOption(
-                  child:  TranslatedText('Photo with Camera',to:'${currentUser.language}',),
-                  onPressed: () {
+                  child: Text("Photo with Camera"), onPressed: () {
                 getImage(ImageSource.camera);
                 Navigator.pop(context);
               }),
               SimpleDialogOption(
-                  child:  TranslatedText('Image from Gallery',to:'${currentUser.language}',),
-                    onPressed: () {
+                  child: Text("Image from Gallery"),
+                  onPressed: () {
                     getImage(ImageSource.gallery);
                     Navigator.pop(context);
                   }
               ),
               SimpleDialogOption(
-                child:  TranslatedText('Cancel',to:'${currentUser.language}',),
+                child: Text("Cancel"),
                 onPressed: () => Navigator.pop(context),
               )
             ],
@@ -133,9 +129,9 @@ ZefyrImageDelegate _imageDelegate;
     });
   }
   Future<String> uploadImage(imageFile) async {
-    UploadTask uploadTask =
+    StorageUploadTask uploadTask =
     storageRef.child("blog_$blogId.jpg").putFile(imageFile);
-    TaskSnapshot storageSnap = await uploadTask;
+    StorageTaskSnapshot storageSnap = await uploadTask.onComplete;
     String downloadUrl = await storageSnap.ref.getDownloadURL();
     return downloadUrl;
   }
@@ -186,10 +182,10 @@ String ImagesUrl,
   }) {
 
     blogRef
-        .doc(widget.currentUser.id)
+        .document(widget.currentUser.id)
         .collection("userBlog")
-        .doc(blogId)
-        .set({
+        .document(blogId)
+        .setData({
       "blogId": blogId,
       "ownerId": widget.currentUser.id,
       "username": widget.currentUser.displayName,
@@ -208,8 +204,6 @@ String ImagesUrl,
       file = null;
 
     });
-    Navigator.pop(context);
-
   }
 
   handleSubmit() async {
@@ -219,7 +213,7 @@ String ImagesUrl,
     });
     await compressImage();
    String blogmediaUrl = await uploadImage(file);
-    // jsonEncode(_controller.doc.toDelta().toJson());
+    // jsonEncode(_controller.document.toDelta().toJson());
     final contents = jsonEncode(_controller.document);
 
     createProdInFirestore(
@@ -240,13 +234,14 @@ String ImagesUrl,
     return showDialog(
       context: context,
       builder: (context) => new AlertDialog(
-        title: new  TranslatedText('Are you sure?',to:'${currentUser.language}',),
-        content: new  TranslatedText('Do you want to exit without uploading?',to:'${currentUser.language}',),
-          actions: <Widget>[
+        title: new Text('Are you sure?'),
+        content: new Text('Do you want to exit without uploading?'),
+        actions: <Widget>[
           new FlatButton(
+
             onPressed: () => Navigator.of(context).pop(false),
-            child:  TranslatedText('NO',to:'${currentUser.language}',),
-            ),
+            child: Text("NO"),
+          ),
           SizedBox(height: 16),
           new FlatButton(
 
@@ -254,8 +249,8 @@ String ImagesUrl,
 
 //            clearImage();
             },
-            child:  TranslatedText('YES',to:'${currentUser.language}',),
-            ),
+            child: Text("YES"),
+          ),
         ],
       ),
     ) ??
@@ -293,14 +288,14 @@ shrinkWrap: true,
       ],
     );
     return
-
-            WillPopScope(
-              onWillPop:()=> _onBackPressed(),
-              child: ModalProgressHUD(
-                color: Colors.black,
-                opacity: 1.0,
-                progressIndicator: Image.asset('assets/img/loading-76.gif'),
-                inAsyncCall: isUploading,
+        Container( decoration: BoxDecoration(
+            gradient: fabGradient
+        ) ,
+          alignment: Alignment.center,
+          child: Stack(
+            children: [
+              WillPopScope(
+                onWillPop:()=> _onBackPressed(),
                 child: Scaffold(
 
                   // resizeToAvoidBottomPadding: true,
@@ -308,12 +303,36 @@ shrinkWrap: true,
                     backgroundColor: kPrimaryColor,
                     leading: IconButton(
                         icon: Icon(Icons.arrow_back, color: Colors.white),
-                        onPressed:()=> _onBackPressed()),
+                        onPressed:()=>  showDialog(
+                          context: context,
+                          builder: (context) => new AlertDialog(
+                            title: new Text('Are you sure?'),
+                            content: new Text('Do you want to exit without uploading?'),
+                            actions: <Widget>[
+                              new FlatButton(
+
+                                onPressed: () => Navigator.of(context).pop(false),
+                                child: Text("NO"),
+                              ),
+                              SizedBox(height: 16),
+                              new FlatButton(
+
+                                onPressed: () async {Navigator.of(context).pop(true);
+
+//            clearImage();
+                                },
+                                child: Text("YES"),
+                              ),
+                            ],
+                          ),
+                        ) ??
+                            false),
                     actions: [
                       RaisedButton(color:kblue,
                         onPressed: isUploading ? null : () => handleSubmit(),
-                        child:  TranslatedText('Post',to:'${currentUser.language}',
-                          textStyle: TextStyle(
+                        child: Text(
+                          "Post",
+                          style: TextStyle(
                               color: Colors.white,
                               fontWeight: FontWeight.bold,
                               fontSize: 20.0),
@@ -331,14 +350,18 @@ shrinkWrap: true,
                     alignment: Alignment.center,
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
-                      child:   ZefyrScaffold(child: form),
+                      child: ZefyrScaffold(child: form),
                     ),
                   ),
 
                 ),
-              ),
 
-            );
+              ),
+              isUploading ? Center(child: CircularProgressIndicator()) : Text(""),
+            ],
+          ),
+        );
+
 
   }
 
@@ -359,12 +382,13 @@ shrinkWrap: true,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(8.0),
               ),
-              child:  TranslatedText('Upload Header Image',to:'${currentUser.language}',
-                textStyle: TextStyle(
+              child: Text(
+                "Upload Header Image",
+                style: TextStyle(
                   color: Colors.white,
                   fontSize: 22.0,
-                    ),),
-
+                ),
+              ),
               color: Colors.deepOrange,
               onPressed: () => selectImage(context),
             ),

@@ -7,7 +7,7 @@ import 'package:fashow/ActivityFeed.dart';
 import 'package:fashow/Constants.dart';
 
 Widget buildCard(BuildContext context, DocumentSnapshot document) {
-  final user = Users.fromDocument(document);
+  final user = User.fromDocument(document);
   // final tripType = trip.types();
 
   return new Container(

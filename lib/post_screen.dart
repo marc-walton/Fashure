@@ -14,9 +14,9 @@ class PostScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return StreamBuilder(
       stream: postsRef
-          .doc(userId)
+          .document(userId)
           .collection('userPosts')
-          .doc(postId)
+          .document(postId)
           .snapshots(),
       builder: (context, snapshot) {
         if (!snapshot.hasData) {

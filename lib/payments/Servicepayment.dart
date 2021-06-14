@@ -192,11 +192,11 @@ class _PaymentSerState extends State<PaymentSer> {
   }
 
   payment(){
-    FirebaseFirestore.instance.collection('Payments')
-        .doc(widget.OwnerId)
+    Firestore.instance.collection('Payments')
+        .document(widget.OwnerId)
         .collection('ServicePayments')
-        .doc(widget.OrderId)
-        .update({
+        .document(widget.OrderId)
+        .updateData({
       'ownerId':widget.OwnerId,
       'orderId':widget.OrderId,
       "timestamp": timestamp,
@@ -217,32 +217,32 @@ class _PaymentSerState extends State<PaymentSer> {
     if(widget.Finr == "")
     {
 
-      FirebaseFirestore.instance.collection('serviceCustomer')
-          .doc(currentUser.id)
+      Firestore.instance.collection('serviceCustomer')
+          .document(currentUser.id)
           .collection('customerService')
-          .doc(widget.OrderId)
-          .update({
+          .document(widget.OrderId)
+          .updateData({
         'advancepay':'true',
         'finalpay':'true',
         "timestamp": timestamp,
 
       });
-      FirebaseFirestore.instance.collection('serviceSeller')
-          .doc(widget.OwnerId)
+      Firestore.instance.collection('serviceSeller')
+          .document(widget.OwnerId)
           .collection('sellerService')
-          .doc(widget.OrderId)
-          .update({
+          .document(widget.OrderId)
+          .updateData({
         'advancepay':'true',
         'finalpay':'true',
         'read':'false',
         "timestamp": timestamp,
 
 
-      }); FirebaseFirestore.instance.collection('feed')
-          .doc(currentUser.id)
+      }); Firestore.instance.collection('feed')
+          .document(currentUser.id)
           .collection('feedItems')
-          .doc(widget.OrderId)
-          .set({
+          .document(widget.OrderId)
+          .setData({
         "type": "ServicePayment",
         "username": widget.username,
         "userId": widget.OwnerId,
@@ -252,11 +252,11 @@ class _PaymentSerState extends State<PaymentSer> {
         "timestamp": timestamp,
         "read": 'false',
         'message':'Payment Successful on an Invoice!',
-      });FirebaseFirestore.instance.collection('feed')
-          .doc(widget.OwnerId)
+      });Firestore.instance.collection('feed')
+          .document(widget.OwnerId)
           .collection('feedItems')
-          .doc(widget.OrderId)
-          .set({
+          .document(widget.OrderId)
+          .setData({
         "type": "ServicePaymentI",
         "username": currentUser.displayName,
         "userId": widget.OwnerId,
@@ -270,30 +270,30 @@ class _PaymentSerState extends State<PaymentSer> {
   else  if(widget.advancepay == 'false')
     {
 
-        FirebaseFirestore.instance.collection('serviceCustomer')
-            .doc(currentUser.id)
+        Firestore.instance.collection('serviceCustomer')
+            .document(currentUser.id)
             .collection('customerService')
-            .doc(widget.OrderId)
-            .update({
+            .document(widget.OrderId)
+            .updateData({
           'advancepay': 'true',
           'finalpay': 'false',
 
         });
-        FirebaseFirestore.instance.collection('serviceSeller')
-            .doc(widget.OwnerId)
+        Firestore.instance.collection('serviceSeller')
+            .document(widget.OwnerId)
             .collection('sellerService')
-            .doc(widget.OrderId)
-            .update({
+            .document(widget.OrderId)
+            .updateData({
           'advancepay': 'true',
           'finalpay': 'false',
           'read': 'false',
 
         });
-        FirebaseFirestore.instance.collection('feed')
-            .doc(currentUser.id)
+        Firestore.instance.collection('feed')
+            .document(currentUser.id)
             .collection('feedItems')
-            .doc(widget.OrderId)
-            .set({
+            .document(widget.OrderId)
+            .setData({
           "type": "ServicePayment",
           "username": widget.username,
           "userId": widget.OwnerId,
@@ -304,11 +304,11 @@ class _PaymentSerState extends State<PaymentSer> {
           "read": 'false',
           'message': 'Payment Successful on an Invoice!',
         });
-        FirebaseFirestore.instance.collection('feed')
-            .doc(widget.OwnerId)
+        Firestore.instance.collection('feed')
+            .document(widget.OwnerId)
             .collection('feedItems')
-            .doc(widget.OrderId)
-            .set({
+            .document(widget.OrderId)
+            .setData({
           "type": "ServicePaymentI",
           "username": currentUser.displayName,
           "userId": widget.OwnerId,
@@ -325,33 +325,33 @@ class _PaymentSerState extends State<PaymentSer> {
     else  if(widget.finalpay == 'false')
     {
 
-      FirebaseFirestore.instance.collection('serviceCustomer')
-          .doc(currentUser.id)
+      Firestore.instance.collection('serviceCustomer')
+          .document(currentUser.id)
           .collection('customerService')
-          .doc(widget.OrderId)
-          .update({
+          .document(widget.OrderId)
+          .updateData({
         'advancepay':'true',
         'finalpay':'true',
         "timestamp": timestamp,
 
 
       });
-      FirebaseFirestore.instance.collection('serviceSeller')
-          .doc(widget.OwnerId)
+      Firestore.instance.collection('serviceSeller')
+          .document(widget.OwnerId)
           .collection('sellerService')
-          .doc(widget.OrderId)
-          .update({
+          .document(widget.OrderId)
+          .updateData({
         'advancepay':'true',
         'finalpay':'true',
         'read':'false',
         "timestamp": timestamp,
 
 
-      }); FirebaseFirestore.instance.collection('feed')
-          .doc(currentUser.id)
+      }); Firestore.instance.collection('feed')
+          .document(currentUser.id)
           .collection('feedItems')
-          .doc(widget.OrderId)
-          .set({
+          .document(widget.OrderId)
+          .setData({
         "type": "ServicePayment",
         "username": widget.username,
         "userId": widget.OwnerId,
@@ -361,11 +361,11 @@ class _PaymentSerState extends State<PaymentSer> {
         "timestamp": timestamp,
         "read": 'false',
         'message':'Payment Successful on an Invoice!',
-      });FirebaseFirestore.instance.collection('feed')
-          .doc(widget.OwnerId)
+      });Firestore.instance.collection('feed')
+          .document(widget.OwnerId)
           .collection('feedItems')
-          .doc(widget.OrderId)
-          .set({
+          .document(widget.OrderId)
+          .setData({
         "type": "ServicePaymentI",
         "username": currentUser.displayName,
         "userId": widget.OwnerId,

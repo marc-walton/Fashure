@@ -10,7 +10,6 @@ import 'package:fashow/ActivityFeed.dart';
 import 'package:fashow/custom_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:fashow/comments.dart';
-import 'package:translated_text/translated_text.dart';
 class Post extends StatefulWidget {
   final String postId;
   final String ownerId;
@@ -32,13 +31,13 @@ class Post extends StatefulWidget {
 
   factory Post.fromDocument(DocumentSnapshot doc) {
     return Post(
-      postId: doc.data()['postId'],
-      ownerId: doc.data()['ownerId'],
-      username: doc.data()['username'],
-      location: doc.data()['location'],
-      description: doc.data()['description'],
-      mediaUrl: doc.data()['mediaUrl'],
-      likes: doc.data()['likes'],
+      postId: doc['postId'],
+      ownerId: doc['ownerId'],
+      username: doc['username'],
+      location: doc['location'],
+      description: doc['description'],
+      mediaUrl: doc['mediaUrl'],
+      likes: doc['likes'],
     );
   }
 
@@ -105,10 +104,7 @@ class _PostState extends State<Post> {
             child: SimpleDialog(
               
               backgroundColor: kSecondaryColor,
-              title: TranslatedText('Remove this post?',to:'${currentUser.language}',textStyle:TextStyle(
-                color: kText,
-              ),),
-              // Text("Remove this post?",style: TextStyle(color: kText),),
+              title: Text("Remove this post?",style: TextStyle(color: kText),),
               children: <Widget>[
                 SimpleDialogOption(
                   onPressed: () {
@@ -116,20 +112,15 @@ class _PostState extends State<Post> {
                     deletePost();
                     Navigator.pop(context);
                   },
-                  child: TranslatedText('Delete',to:'${currentUser.language}',textStyle:TextStyle(
-                    color: Colors.red,
-                    ),),
-                  // Text(
-                  //   'Delete',
-                  //   style: TextStyle(color: Colors.red),
-                  // ),
+                  child: Text(
+                    'Delete',
+                    style: TextStyle(color: Colors.red),
+                  ),
                 ),
                 SimpleDialogOption(
                   onPressed: () => Navigator.pop(context),
-                  child:TranslatedText('Cancel',to:'${currentUser.language}',textStyle:TextStyle(
-                    color: Colors.white,
-                  ),),
-
+                  child: Text('Cancel',
+                    style: TextStyle(color: Colors.white),),
                 )
               ],
             ),
@@ -141,9 +132,9 @@ class _PostState extends State<Post> {
   deletePost() async {
     // delete post itself
     postsRef
-        .doc(ownerId)
+        .document(ownerId)
         .collection('userPosts')
-        .doc(postId)
+        .document(postId)
         .get()
         .then((doc) {
       if (doc.exists) {
@@ -154,21 +145,21 @@ class _PostState extends State<Post> {
     storageRef.child("post_$postId.jpg").delete();
     // then delete all activity feed notifications
     QuerySnapshot activityFeedSnapshot = await activityFeedRef
-        .doc(ownerId)
+        .document(ownerId)
         .collection("feedItems")
         .where('postId', isEqualTo: postId)
-        .get();
-    activityFeedSnapshot.docs.forEach((doc) {
+        .getDocuments();
+    activityFeedSnapshot.documents.forEach((doc) {
       if (doc.exists) {
         doc.reference.delete();
       }
     });
     // then delete all comments
     QuerySnapshot commentsSnapshot = await commentsRef
-        .doc(postId)
+        .document(postId)
         .collection('comments')
-        .get();
-    commentsSnapshot.docs.forEach((doc) {
+        .getDocuments();
+    commentsSnapshot.documents.forEach((doc) {
       if (doc.exists) {
         doc.reference.delete();
       }
@@ -180,10 +171,10 @@ class _PostState extends State<Post> {
 
     if (_isLiked) {
       postsRef
-          .doc(ownerId)
+          .document(ownerId)
           .collection('userPosts')
-          .doc(postId)
-          .update({'likes.$currentUserId': false});
+          .document(postId)
+          .updateData({'likes.$currentUserId': false});
       removeLikeFromActivityFeed();
       setState(() {
         likeCount -= 1;
@@ -192,10 +183,10 @@ class _PostState extends State<Post> {
       });
     } else if (!_isLiked) {
       postsRef
-          .doc(ownerId)
+          .document(ownerId)
           .collection('userPosts')
-          .doc(postId)
-          .update({'likes.$currentUserId': true});
+          .document(postId)
+          .updateData({'likes.$currentUserId': true});
       addLikeToActivityFeed();
       setState(() {
         likeCount += 1;
@@ -211,10 +202,10 @@ class _PostState extends State<Post> {
     bool isNotPostOwner = currentUserId != ownerId;
     if (isNotPostOwner) {
       activityFeedRef
-          .doc(ownerId)
+          .document(ownerId)
           .collection("feedItems")
-          .doc(postId)
-          .set({
+          .document(postId)
+          .setData({
         "type": "like",
         "username": currentUser.displayName,
         "userId": currentUser.id,
@@ -231,9 +222,9 @@ class _PostState extends State<Post> {
     bool isNotPostOwner = currentUserId != ownerId;
     if (isNotPostOwner) {
       activityFeedRef
-          .doc(ownerId)
+          .document(ownerId)
           .collection("feedItems")
-          .doc(postId)
+          .document(postId)
           .get()
           .then((doc) {
         if (doc.exists) {
@@ -245,11 +236,11 @@ class _PostState extends State<Post> {
   report(){
     Fluttertoast.showToast(
         msg: "Your report has been submitted", timeInSecForIos: 4);
-    FirebaseFirestore.instance.collection('reports')
-        .doc(ownerId)
+    Firestore.instance.collection('reports')
+        .document(ownerId)
         .collection("userReports")
-        .doc(postId)
-        .set({
+        .document(postId)
+        .setData({
       "type": "shop",
       "userId": ownerId,
       "postId": postId,
@@ -259,12 +250,12 @@ class _PostState extends State<Post> {
 
   buildPostHeader() {
     return FutureBuilder(
-      future: usersRef.doc(ownerId).get(),
+      future: usersRef.document(ownerId).get(),
       builder: (context, snapshot) {
         if (!snapshot.hasData) {
           return circularProgress();
         }
-        Users user = Users.fromDocument(snapshot.data);
+        User user = User.fromDocument(snapshot.data);
         bool isPostOwner = currentUserId == ownerId;
         return  Container(
           margin: EdgeInsets.only(top:1.0,left: 10.0,right: 10.0, bottom: 1.0 ),
@@ -316,17 +307,12 @@ class _PostState extends State<Post> {
 
           child: Align(
           alignment: Alignment.center,
-          child:  TranslatedText('Report this post?',to:'${currentUser.language}',textStyle:TextStyle(
-            color:Colors.blueAccent,
-            fontWeight: FontWeight.bold,
-            fontSize: 20.0,
-            ),),),
-          // Text('Report this post?',style: TextStyle(
-          //     color: Colors.blueAccent,
-          //     fontWeight: FontWeight.bold,
-          //     fontSize: 20.0),)),),
+          child: Text('Report this post?',style: TextStyle(
+              color: Colors.blueAccent,
+              fontWeight: FontWeight.bold,
+              fontSize: 20.0),)),),
 
-          ),
+
           ],
           ),
           ),
@@ -359,11 +345,13 @@ class _PostState extends State<Post> {
                  Container(
                    padding: EdgeInsets.only(bottom: 10.0),
                    margin: EdgeInsets.only(left: 20.0),
-                   child:
-        TranslatedText("$description ",to:'${currentUser.language}',textStyle:TextStyle(
-        color: kText,
-        fontWeight: FontWeight.bold,
-        ),),
+                   child: Text(
+                     "$description ",
+                     style: TextStyle(
+                       color: kText,
+                       fontWeight: FontWeight.bold,
+                     ),
+                   ),
                  ),
 //                 Expanded(child: Text(description, style: TextStyle(color: kGrey),))
                ],

@@ -26,7 +26,6 @@ import 'package:fashow/product_tile.dart';
 import 'package:fashow/Products.dart';
 import 'package:fashow/Product_screen.dart';
 import 'package:fashow/Collscreen.dart';
-import 'package:translated_text/translated_text.dart';
 
 class Profile extends StatefulWidget {
   final String profileId;
@@ -62,7 +61,7 @@ List<Blog> blogs = [];
   Map likes;
   bool isLiked;
   bool showHeart = false;
-Users peerUser;
+User peerUser;
 String avatar;
 SharedPreferences myPrefs;
 String peerId;
@@ -75,8 +74,8 @@ UserModel receiverId;
   @override
   void initState() {
     super.initState();
-    // getProducts();
-    // getProfilePosts();
+    getProducts();
+    getProfilePosts();
 //    getPosts();
     getFollowers();
     getFollowing();
@@ -86,8 +85,8 @@ readPeer();
   }
 
   writePeer() async {
-    DocumentSnapshot doc = await usersRef.doc(widget.profileId).get();
-    peerUser = Users.fromDocument(doc);
+    DocumentSnapshot doc = await usersRef.document(widget.profileId).get();
+    peerUser = User.fromDocument(doc);
     print(peerUser.id);
     myPrefs = await SharedPreferences.getInstance();
     await myPrefs.setString('peerId', peerUser.id);
@@ -119,9 +118,9 @@ photoUrl: peerAvatar,
 
   checkIfFollowing() async {
     DocumentSnapshot doc = await followersRef
-        .doc(widget.profileId)
+        .document(widget.profileId)
         .collection('userFollowers')
-        .doc(currentUserId)
+        .document(currentUserId)
         .get();
     setState(() {
       isFollowing = doc.exists;
@@ -130,13 +129,13 @@ photoUrl: peerAvatar,
 
   getFollowers() async {
     QuerySnapshot snapshot = await followersRef
-        .doc(widget.profileId)
+        .document(widget.profileId)
         .collection('userFollowers')
-        .get();
+        .getDocuments();
     setState(() {
-      followerCount = snapshot.docs.length;
+      followerCount = snapshot.documents.length;
     });
-//    usersRef.doc(widget.currentUserId).updateData({
+//    usersRef.document(widget.currentUserId).updateData({
 //      'followers':followerCount
 //    });
 
@@ -144,173 +143,182 @@ photoUrl: peerAvatar,
 
   getFollowing() async {
     QuerySnapshot snapshot = await followingRef
-        .doc(widget.profileId)
+        .document(widget.profileId)
         .collection('userFollowing')
-        .get();
+        .getDocuments();
     setState(() {
-      followingCount = snapshot.docs.length;
+      followingCount = snapshot.documents.length;
+    });
+  }
+  getProducts()async {
+    setState(() {
+      isLoading = true;
+    });
+    QuerySnapshot snapshot = await productsRef
+        .document(widget.profileId)
+        .collection('userProducts')
+        .orderBy('timestamp', descending: true)
+        .getDocuments();
+    setState(() {
+      isLoading = false;
+      shopCount = snapshot.documents.length;
+      products = snapshot.documents.map((doc) => Prod.fromDocument(doc)).toList();
+    });
+  }
+  getColls()async {
+    setState(() {
+      isLoading = true;
+    });
+    QuerySnapshot snapshot = await collRef
+        .document(widget.profileId)
+        .collection('userCollections')
+        .orderBy('timestamp', descending: true)
+        .getDocuments();
+    setState(() {
+      isLoading = false;
+      collCount = snapshot.documents.length;
+      collection = snapshot.documents.map((doc) => Coll.fromDocument(doc)).toList();
+    });
+  }
+   getEditorial()async {
+    setState(() {
+      isLoading = true;
+    });
+    QuerySnapshot snapshot = await blogRef
+        .document(widget.profileId)
+        .collection('userBlog')
+        .orderBy('timestamp', descending: true)
+        .getDocuments();
+    setState(() {
+      isLoading = false;
+      blogCount = snapshot.documents.length;
+      blogs = snapshot.documents.map((doc) => Blog.fromDocument(doc)).toList();
     });
   }
 
 getPosts(){
-  setState(() {
-    isLoading = true;
-  });
+
 return
   StreamBuilder(
     stream: postsRef
-        .doc(widget.profileId)
+        .document(widget.profileId)
         .collection('userPosts')
         .orderBy('timestamp', descending: true)
         .snapshots(),
 //       ignore: missing_return
       builder:(context,snapshot) {
-        if (!snapshot.hasData || snapshot.data == null) {
-          TranslatedText("No Posts",to:'${currentUser.language}',
-            textStyle: TextStyle(
-              color: Colors.redAccent,
-                   fontSize: 40.0,
-                   fontWeight: FontWeight.bold,
-            ),);
 
+      return
+        GridView.builder(
+
+        primary: false,
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: (MediaQuery.of(context).orientation == Orientation.portrait) ? 3 : 3),
+            itemCount: snapshot.data.documents.length,
+            itemBuilder: (context, index) {
+              DocumentSnapshot docSnapshot = snapshot.data.documents[index];
+              return
+
+                Padding(
+                    padding: EdgeInsets.all(5.0),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(20.0),
+                      child: GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                    PostScreen(
+                                      postId: docSnapshot["postId"],
+                                      userId: docSnapshot["ownerId"],
+                                    ),
+                              ),
+                            );
+                          },
+                          child: CachedNetworkImage(
+                            imageUrl: docSnapshot["mediaUrl"],)
+                      ),
+                    )
+                );
+            });
         }
 
-        else {
-          return
-            GridView.builder(
-
-                primary: false,
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: (MediaQuery
-                        .of(context)
-                        .orientation == Orientation.portrait) ? 3 : 3),
-                itemCount: snapshot.data.docs.length,
-                itemBuilder: (context, index) {
-                  DocumentSnapshot docSnapshot = snapshot.data.docs[index];
-                  return
-
-                    Padding(
-                        padding: EdgeInsets.all(5.0),
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(20.0),
-                          child: GestureDetector(
-                              onTap: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) =>
-                                        PostScreen(
-                                          postId: docSnapshot["postId"],
-                                          userId: docSnapshot["ownerId"],
-                                        ),
-                                  ),
-                                );
-                              },
-                              child: CachedNetworkImage(
-                                imageUrl: docSnapshot["mediaUrl"],)
-                          ),
-                        )
-                    );
-                });
-        }
-      }
   );
 }
 getcollections(){
-  setState(() {
-    isLoading = true;
-  });
-  return
+
+return
   StreamBuilder(
     stream: collRef
-        .doc(widget.profileId)
+        .document(widget.profileId)
         .collection('userCollections')
         .orderBy('timestamp', descending: true)
         .snapshots(),
 //       ignore: missing_return
       builder:(context,snapshot) {
-        if (!snapshot.hasData || snapshot.data == null) {
-          TranslatedText("No Collections",to:'${currentUser.language}',
-            textStyle: TextStyle(
-              color: Colors.redAccent,
-              fontSize: 40.0,
-              fontWeight: FontWeight.bold,
-            ),);
 
-        }
+      return
+        ListView.builder(
 
-        else {
-          return
-            ListView.builder(
+        primary: false,
+            itemCount: snapshot.data.documents.length,
+            itemBuilder: (context, index) {
+              DocumentSnapshot docSnapshot = snapshot.data.documents[index];
+              return
 
-                primary: false,
-                itemCount: snapshot.data.docs.length,
-                itemBuilder: (context, index) {
-                  DocumentSnapshot docSnapshot = snapshot.data.docs[index];
-                  return
-
-                    Padding(
-                        padding: EdgeInsets.all(5.0),
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(20.0),
-                          child: GestureDetector(
-                            onTap: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) =>
-                                      CollScreen(
-                                        collId: docSnapshot["collId"],
-                                        userId: docSnapshot["ownerId"],
-                                      ),
-                                ),
-                              );
-                            },
-                            child: Column(
-                              children: <Widget>[
-                                Container(
-                                    margin: EdgeInsets.all(10.0),
-                                    height: MediaQuery
-                                        .of(context)
-                                        .size
-                                        .width / 2,
-                                    decoration: BoxDecoration(
-                                      color: Colors.white,
+                Padding(
+                    padding: EdgeInsets.all(5.0),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(20.0),
+                      child: GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                    CollScreen(
+                                      collId: docSnapshot["collId"],
+                                      userId: docSnapshot["ownerId"],
                                     ),
-                                    width: MediaQuery
-                                        .of(context)
-                                        .size
-                                        .width,
-                                    child:
-                                    CachedNetworkImage(
-                                      imageUrl: docSnapshot["headerImage"],)
-                                  // Carousel(
-                                  //
-                                  //     boxFit: BoxFit.cover,
-                                  //     images: docSnapshot["collmediaUrl"][index],
-                                  //     autoplay: false,
-                                  //     indicatorBgPadding: 5.0,
-                                  //     dotPosition: DotPosition.bottomCenter,
-                                  //     animationCurve: Curves.fastOutSlowIn,
-                                  //     animationDuration:
-                                  //     Duration(milliseconds: 2000)),
+                              ),
+                            );
+                          },
+                          child:   Column(
+                            children: <Widget>[
+                              Container(
+                                margin: EdgeInsets.all(10.0),
+                                height: MediaQuery.of(context).size.width/2,
+                                decoration: BoxDecoration(
+                                  color: Colors.white,
                                 ),
-                                Container(
-                                  height: 1,
-                                  width: MediaQuery
-                                      .of(context)
-                                      .size
-                                      .width,
-                                  color: Colors.red,
-                                )
-                              ],
-                            ),
+                                width: MediaQuery.of(context).size.width,
+                                child:
+                                  CachedNetworkImage(imageUrl: docSnapshot["headerImage"],)
+                                // Carousel(
+                                //
+                                //     boxFit: BoxFit.cover,
+                                //     images: docSnapshot["collmediaUrl"][index],
+                                //     autoplay: false,
+                                //     indicatorBgPadding: 5.0,
+                                //     dotPosition: DotPosition.bottomCenter,
+                                //     animationCurve: Curves.fastOutSlowIn,
+                                //     animationDuration:
+                                //     Duration(milliseconds: 2000)),
+                              ),
+                              Container(
+                                height: 1,
+                                width: MediaQuery.of(context).size.width,
+                                color: Colors.red,
+                              )
+                            ],
                           ),
-                        )
-                    );
-                });
+                      ),
+                    )
+                );
+            });
         }
-      }
+
   );
 }
 geteditorial(){
@@ -320,7 +328,7 @@ geteditorial(){
 return
   StreamBuilder(
     stream: collRef
-        .doc(widget.profileId)
+        .document(widget.profileId)
         .collection('userBlogs')
         .orderBy('timestamp', descending: true)
         .snapshots(),
@@ -328,163 +336,142 @@ return
       builder:(context,snapshot) {
         setState(() {
           isLoading = false;
-          // collCount = snapshot.data.length;
-          collection = snapshot.data.map((doc) => Blog.fromDocument(doc)).toList();
+          collCount = snapshot.data.length;
+          collection = snapshot.data.map((doc) => Post.fromDocument(doc)).toList();
         });
-        if (!snapshot.hasData || snapshot.data == null) {
-          TranslatedText("No Blogs",to:'${currentUser.language}',
-            textStyle: TextStyle(
-              color: Colors.redAccent,
-              fontSize: 40.0,
-              fontWeight: FontWeight.bold,
-            ),);
+      return
+        ListView.builder(
 
-        }
+        primary: false,
+            itemCount: snapshot.data.documents.length,
+            itemBuilder: (context, index) {
+              DocumentSnapshot docSnapshot = snapshot.data.documents[index];
+              return
 
-        else {
-          return
-            ListView.builder(
-
-                primary: false,
-                itemCount: snapshot.data.docs.length,
-                itemBuilder: (context, index) {
-                  DocumentSnapshot docSnapshot = snapshot.data.docs[index];
-                  return
-
-                    Padding(
-                        padding: EdgeInsets.all(5.0),
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(20.0),
-                          child: GestureDetector(
-                            onTap: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) =>
-                                      BlogScreen(
-                                        blogId: docSnapshot["blogId"],
-                                        userId: docSnapshot["ownerId"],
-                                      ),
-                                ),
-                              );
-                            },
-                            child: Column(
-                              children: <Widget>[
-                                Container(
-                                    margin: EdgeInsets.all(10.0),
-                                    height: MediaQuery
-                                        .of(context)
-                                        .size
-                                        .width / 2,
-                                    decoration: BoxDecoration(
-                                      color: Colors.white,
+                Padding(
+                    padding: EdgeInsets.all(5.0),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(20.0),
+                      child: GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                    BlogScreen(
+                                      blogId: docSnapshot["blogId"],
+                                      userId: docSnapshot["ownerId"],
                                     ),
-                                    width: MediaQuery
-                                        .of(context)
-                                        .size
-                                        .width,
-                                    child:
-                                    CachedNetworkImage(
-                                      imageUrl: docSnapshot["blogmediaUrl"],)
-                                  // Carousel(
-                                  //
-                                  //     boxFit: BoxFit.cover,
-                                  //     images: docSnapshot["collmediaUrl"][index],
-                                  //     autoplay: false,
-                                  //     indicatorBgPadding: 5.0,
-                                  //     dotPosition: DotPosition.bottomCenter,
-                                  //     animationCurve: Curves.fastOutSlowIn,
-                                  //     animationDuration:
-                                  //     Duration(milliseconds: 2000)),
+                              ),
+                            );
+                          },
+                          child:   Column(
+                            children: <Widget>[
+                              Container(
+                                margin: EdgeInsets.all(10.0),
+                                height: MediaQuery.of(context).size.width/2,
+                                decoration: BoxDecoration(
+                                  color: Colors.white,
                                 ),
-                                Container(
-                                  height: 1,
-                                  width: MediaQuery
-                                      .of(context)
-                                      .size
-                                      .width,
-                                  color: Colors.red,
-                                )
-                              ],
-                            ),
+                                width: MediaQuery.of(context).size.width,
+                                child:
+                                  CachedNetworkImage(imageUrl: docSnapshot["blogmediaUrl"],)
+                                // Carousel(
+                                //
+                                //     boxFit: BoxFit.cover,
+                                //     images: docSnapshot["collmediaUrl"][index],
+                                //     autoplay: false,
+                                //     indicatorBgPadding: 5.0,
+                                //     dotPosition: DotPosition.bottomCenter,
+                                //     animationCurve: Curves.fastOutSlowIn,
+                                //     animationDuration:
+                                //     Duration(milliseconds: 2000)),
+                              ),
+                              Container(
+                                height: 1,
+                                width: MediaQuery.of(context).size.width,
+                                color: Colors.red,
+                              )
+                            ],
                           ),
-                        )
-                    );
-                });
+                      ),
+                    )
+                );
+            });
         }
-      }
 
   );
 }
 
 getProds(){
-  setState(() {
-    isLoading = true;
-  });
+
 return
   StreamBuilder(
     stream: productsRef
-        .doc(widget.profileId)
+        .document(widget.profileId)
         .collection('userProducts')
         .orderBy('timestamp', descending: true)
         .snapshots(),
 //       ignore: missing_return
       builder:(context,snapshot) {
-        if (!snapshot.hasData || snapshot.data == null) {
-          TranslatedText("No Products",to:'${currentUser.language}',
-            textStyle: TextStyle(
-              color: Colors.redAccent,
-              fontSize: 40.0,
-              fontWeight: FontWeight.bold,
-            ),);
 
+      return
+        GridView.builder(
+
+        primary: false,
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: (MediaQuery.of(context).orientation == Orientation.portrait) ? 3 : 3),
+            itemCount: snapshot.data.documents.length,
+            itemBuilder: (context, index) {
+              DocumentSnapshot docSnapshot = snapshot.data.documents[index];
+              return
+
+                Padding(
+                    padding: EdgeInsets.all(5.0),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(20.0),
+                      child: GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                    ProductScreen(
+                                      prodId: docSnapshot["prodId"],
+                                      userId: docSnapshot["ownerId"],
+                                    ),
+                              ),
+                            );
+                          },
+                          child: CachedNetworkImage(
+                            imageUrl: docSnapshot["shopmediaUrl"],)
+                      ),
+                    )
+                );
+            });
         }
-        else {
-          return
-            GridView.builder(
-
-                primary: false,
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: (MediaQuery
-                        .of(context)
-                        .orientation == Orientation.portrait) ? 3 : 3),
-                itemCount: snapshot.data.docs.length,
-                itemBuilder: (context, index) {
-                  DocumentSnapshot docSnapshot = snapshot.data.docs[index];
-                  return
-
-                    Padding(
-                        padding: EdgeInsets.all(5.0),
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(20.0),
-                          child: GestureDetector(
-                              onTap: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) =>
-                                        ProductScreen(
-                                          prodId: docSnapshot["prodId"],
-                                          userId: docSnapshot["ownerId"],
-                                        ),
-                                  ),
-                                );
-                              },
-                              child: CachedNetworkImage(
-                                imageUrl: docSnapshot["shopmediaUrl"],)
-                          ),
-                        )
-                    );
-                });
-        }
-      }
 
   );
 }
+  getProfilePosts() async {
+    setState(() {
+      isLoading = true;
+    });
+    QuerySnapshot snapshot = await postsRef
+        .document(widget.profileId)
+        .collection('userPosts')
+        .orderBy('timestamp', descending: true)
+        .getDocuments();
+    setState(() {
+      isLoading = false;
+      postCount = snapshot.documents.length;
+      posts = snapshot.documents.map((doc) => Post.fromDocument(doc)).toList();
+    });
+  }
   Client(){
     StreamBuilder(
-        stream:FirebaseFirestore.instance.collection('users')
-            .doc(widget.profileId).snapshots(),
+        stream:Firestore.instance.collection('users')
+            .document(widget.profileId).snapshots(),
         builder:(context,snapshot){
           setState(() {
             client = snapshot.data['client'];
@@ -506,11 +493,7 @@ return
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text('$client',style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
-              TranslatedText("No Posts",to:'${currentUser.language}',
-                textStyle: TextStyle(
-                    color: Colors.white
-                ,),),
-                  // Text('Clients',style: TextStyle(),),
+                  Text('Clients',style: TextStyle(color: Colors.white),),
                 ],
               ),
             );
@@ -562,7 +545,7 @@ return
     );
   }
   reviews()    {
-  // QuerySnapshot query = await  FirebaseFirestore.instance.collection('Reviews').doc(widget.profileId)
+  // QuerySnapshot query = await  Firestore.instance.collection('Reviews').document(widget.profileId)
   //       .collection('userReviews').get().then((query) {
   //         if(query.hasData)
   //   }
@@ -600,19 +583,17 @@ return
     SizedBox(width: 3.0,),
     ],
     ),
-      TranslatedText("Rating",to:'${currentUser.language}',
-        textStyle: TextStyle(
-            color: Colors.white,
-        ),),
+
+    Text('Rating',style: TextStyle(color: Colors.white),),
     ],
     ),
     ),
     );
     // Container(
     //   child: FutureBuilder(
-    //     future:      FirebaseFirestore.instance.collection('users').doc(widget.profileId)
+    //     future:      Firestore.instance.collection('users').document(widget.profileId)
     //         .collection('userReviews')
-    //         .get(),
+    //         .getDocuments(),
     //     builder: (context,snapshot){
     //   var rating = snapshot.data['rating'];
     //   var avg = rating.reduce((a,b)=>a+b)/rating;
@@ -691,12 +672,7 @@ Widget rev(){
                      child:Icon(EvaIcons.personDeleteOutline,color: Colors.white,),
                     ),
                     Container(
-                      child:
-                      TranslatedText("UnFollow",to:'${currentUser.language}',
-                        textStyle: TextStyle(
-                            color: kGrey
-                        ),),
-                      // Text('',style: TextStyle(),),
+                      child: Text('UnFollow',style: TextStyle(color: kGrey),),
                     )
                   ],
                 ),
@@ -726,11 +702,7 @@ Widget rev(){
                       child:Icon(EvaIcons.emailOutline,color: Colors.white,),
                     ),
                     Container(
-                      child:TranslatedText("Message",to:'${currentUser.language}',
-                        textStyle: TextStyle(
-                            color: kGrey
-                        ),),
-
+                      child: Text('Message',style: TextStyle(color: kGrey),),
                     )
                   ],
                 ),
@@ -761,11 +733,7 @@ Widget rev(){
 
               ),
               Container(
-                child: TranslatedText("Follow",to:'${currentUser.language}',
-                  textStyle: TextStyle(
-                      color: kGrey
-                  ),),
-                // Text('',style: TextStyle(color: kGrey),),
+                child: Text('Follow',style: TextStyle(color: kGrey),),
               )
             ],
           ),
@@ -779,9 +747,9 @@ Widget rev(){
     });
     // remove follower
     followersRef
-        .doc(widget.profileId)
+        .document(widget.profileId)
         .collection('userFollowers')
-        .doc(currentUserId)
+        .document(currentUserId)
         .get()
         .then((doc) {
       if (doc.exists) {
@@ -790,9 +758,9 @@ Widget rev(){
     });
     // remove following
     followingRef
-        .doc(currentUserId)
+        .document(currentUserId)
         .collection('userFollowing')
-        .doc(widget.profileId)
+        .document(widget.profileId)
         .get()
         .then((doc) {
       if (doc.exists) {
@@ -801,9 +769,9 @@ Widget rev(){
     });
     // delete activity feed item for them
     activityFeedRef
-        .doc(widget.profileId)
+        .document(widget.profileId)
         .collection('feedItems')
-        .doc(currentUserId)
+        .document(currentUserId)
         .get()
         .then((doc) {
       if (doc.exists) {
@@ -818,22 +786,22 @@ Widget rev(){
     });
     // Make auth user follower of ANOTHER user (update THEIR followers collection)
     followersRef
-        .doc(widget.profileId)
+        .document(widget.profileId)
         .collection('userFollowers')
-        .doc(currentUserId)
-        .set({});
+        .document(currentUserId)
+        .setData({});
     // Put THAT user on YOUR following collection (update your following collection)
     followingRef
-        .doc(currentUserId)
+        .document(currentUserId)
         .collection('userFollowing')
-        .doc(widget.profileId)
-        .set({});
+        .document(widget.profileId)
+        .setData({});
     // add activity feed item for that user to notify about new follower (us)
     activityFeedRef
-        .doc(widget.profileId)
+        .document(widget.profileId)
         .collection('feedItems')
-        .doc(currentUserId)
-        .set({
+        .document(currentUserId)
+        .setData({
       "type": "follow",
       "ownerId": widget.profileId,
       "username": currentUser.displayName,
@@ -844,12 +812,12 @@ Widget rev(){
   }
   buildProfileHeader() {
     return StreamBuilder(
-      stream: usersRef.doc(widget.profileId).snapshots(),
+      stream: usersRef.document(widget.profileId).snapshots(),
       builder: (context, snapshot) {
         if (!snapshot.hasData) {
           return circularProgress();
         }
-        Users user = Users.fromDocument(snapshot.data);
+        User user = User.fromDocument(snapshot.data);
         // ignore: unnecessary_statements
         bool isProfileOwner = currentUserId == widget.profileId;
 
@@ -897,7 +865,7 @@ Widget rev(){
                 color:kText,
               ),
             ),
-            subtitle:  Container(
+            subtitle:                   Container(
 
               padding: EdgeInsets.only(top: 2.0),
               child: Text(
@@ -926,11 +894,8 @@ Widget rev(){
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Icon(Icons.favorite,color: Colors.pink,),
-                    TranslatedText("Rating",to:'${currentUser.language}',
-                      textStyle: TextStyle(
-                          color: kGrey
-                      ),),
 
+                    Text('Rating',style: TextStyle(color: Colors.white),),
                   ],
                 ),
               ),
@@ -954,24 +919,22 @@ SizedBox(height: 10.0,),
   buildProducts(){
     if (isLoading) {
       return circularProgress();
-    }
-//     else if (products.isEmpty) {
-//       return Container(
-// //        color: kSecondaryColor,
-//         child: Padding(
-//           padding: EdgeInsets.only(top: 150.0,left:110),
-//           child: Text(
-//             "No Products",
-//             style: TextStyle(
-//               color: Colors.redAccent,
-//               fontSize: 40.0,
-//               fontWeight: FontWeight.bold,
-//             ),
-//           ),
-//         ),
-//       );
-//     }
-    else if (shopOrientation == "grid") {
+    } else if (products.isEmpty) {
+      return Container(
+//        color: kSecondaryColor,
+        child: Padding(
+          padding: EdgeInsets.only(top: 150.0,left:110),
+          child: Text(
+            "No Products",
+            style: TextStyle(
+              color: Colors.redAccent,
+              fontSize: 40.0,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        ),
+      );
+    } else if (shopOrientation == "grid") {
       List<GridTile> gridTiles = [];
       products.forEach((product) {
         gridTiles.add(GridTile(child: ProductTile(product)));
@@ -994,7 +957,22 @@ SizedBox(height: 10.0,),
 buildColls(){
     if (isLoading) {
       return circularProgress();
-    }  else{
+    } else if (collection.isEmpty) {
+      return Container(
+//        color: kSecondaryColor,
+        child: Padding(
+          padding: EdgeInsets.only(top: 150.0,left:110),
+          child: Text(
+            "No Collections",
+            style: TextStyle(
+              color: Colors.redAccent,
+              fontSize: 40.0,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        ),
+      );
+    } else{
       return
       getcollections();
     }
@@ -1002,29 +980,22 @@ buildColls(){
 buildEditorial(){
     if (isLoading) {
       return circularProgress();
-    }
-        else if (blogs.isEmpty) {
+    } else if (blogs.isEmpty) {
       return Container(
 //        color: kSecondaryColor,
         child: Padding(
           padding: EdgeInsets.only(top: 150.0,left:110),
-          child:
-          TranslatedText("No Content",to:'${currentUser.language}',
-            textStyle: TextStyle( color: Colors.redAccent,
-                   fontSize: 40.0,
-                    fontWeight: FontWeight.bold,
-
-            ),),
-          // Text(
-          //   "",
-          //   style: TextStyle(
-          //
-          //   ),
-          // ),
+          child: Text(
+            "No Blogs",
+            style: TextStyle(
+              color: Colors.redAccent,
+              fontSize: 40.0,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
         ),
       );
-    }
-    else{
+    } else{
       return
       geteditorial();
     }
@@ -1068,19 +1039,14 @@ buildEditorial(){
 
           child: Padding(
             padding: EdgeInsets.only(top: 150.0,left:130),
-            child:
-            TranslatedText("No Posts",to:'${currentUser.language}',
-              textStyle: TextStyle(
+            child: Text(
+              "No Posts",
+              style: TextStyle(
                 color: Colors.redAccent,
-                    fontSize: 40.0,
-                     fontWeight: FontWeight.bold,
-              ),),
-            // Text(
-            //   "",
-            //   style: TextStyle(
-            //
-            //   ),
-            // ),
+                fontSize: 40.0,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
           ),
 
       );
@@ -1153,19 +1119,13 @@ buildEditorial(){
         :Container(),        ],
         title: FittedBox(
           fit: BoxFit.contain,
-          child:
-          TranslatedText("Profile",to:'${currentUser.language}',
-            textStyle: TextStyle(
-              color: Colors.white,
-              fontFamily :"MajorMonoDisplay",
-            ),),
-          // Text(
-          //   "" ,
-          //     style: TextStyle(
-          //
+          child: Text(
+            "Profile" ,
+              style: TextStyle(
+                  fontFamily :"MajorMonoDisplay",
                   // fontSizfit: e:  35.0 ,
-                  )          ),
-
+                  color: Colors.white)          ),
+        ),),
       body:
 
       Container(            decoration: BoxDecoration(
@@ -1206,11 +1166,11 @@ buildEditorial(){
                         child: TabBarView(
                           children: <Widget>[
                             Container(
-                              child:buildProfilePosts(),
+                              child:getPosts(),
                             ),  Container(
-                              child: buildProducts(),
+                              child: getProds(),
                             ),Container(
-                              child: buildColls(),
+                              child: getcollections(),
                             ),Container(
                               child: buildEditorial(),
                             ),

@@ -43,25 +43,25 @@ class _SellerDashState extends State<SellerDash> {
   }
 
   geto() async {
-    QuerySnapshot snapshot = await FirebaseFirestore.instance.collection('ordersSeller')
-        .doc(currentUser.id)
+    QuerySnapshot snapshot = await Firestore.instance.collection('ordersSeller')
+        .document(currentUser.id)
         .collection('sellerOrder')
         .where('read',isEqualTo: 'false')
-        .get();
+        .getDocuments();
     setState(() {
-      shop = snapshot.docs.length ?? 0;
+      shop = snapshot.documents.length ?? 0;
     });
 
   }
   getop() async {
-    QuerySnapshot snapshot = await  FirebaseFirestore.instance.collection('Payments')
-        .doc(currentUser.id)
+    QuerySnapshot snapshot = await  Firestore.instance.collection('Payments')
+        .document(currentUser.id)
         .collection('ServicePayments')
         .where('fulfilled',isEqualTo: 'true')
         .where('read',isEqualTo: 'false')
-        .get();
+        .getDocuments();
     setState(() {
-      shoppay = snapshot.docs.length ?? 0;
+      shoppay = snapshot.documents.length ?? 0;
     });
 
   }

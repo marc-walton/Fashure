@@ -9,7 +9,7 @@ import 'package:fashow/progress.dart';
 import 'package:fashow/HomePage.dart';
 import 'package:fashow/Constants.dart';
 import 'package:fashow/HomePage.dart';
-import 'package:translated_text/translated_text.dart';
+
 
 class BlogComments extends StatefulWidget {
   final String blogId;
@@ -45,7 +45,7 @@ class BlogCommentsState extends State<BlogComments> {
   buildComments() {
     return StreamBuilder(
       stream: blogcommentsRef
-          .doc(blogId)
+          .document(blogId)
           .collection('blogComments')
           .orderBy("timestamp", descending: false)
           .snapshots(),
@@ -54,7 +54,7 @@ class BlogCommentsState extends State<BlogComments> {
           return circularProgress();
         }
         List<BlogComment> Blogcomments = [];
-        snapshot.data.docs.forEach((doc) {
+        snapshot.data.documents.forEach((doc) {
           Blogcomments.add(BlogComment.fromDocument(doc));
         });
         return ListView(
@@ -65,7 +65,7 @@ class BlogCommentsState extends State<BlogComments> {
   }
 
   addComment() {
-    blogcommentsRef.doc(blogId).collection("blogComments").add({
+    blogcommentsRef.document(blogId).collection("blogComments").add({
       "username": currentUser.displayName,
       "comment": blogcommentController.text,
       "timestamp": timestamp,
@@ -74,7 +74,7 @@ class BlogCommentsState extends State<BlogComments> {
     });
     bool isNotPostOwner = blogOwnerId != currentUser.id;
    if (isNotPostOwner) {
-     activityFeedRef.doc(blogOwnerId).collection('feedItems').add({
+     activityFeedRef.document(blogOwnerId).collection('feedItems').add({
        "type": "blogcomment",
        "commentData": blogcommentController.text,
        "username": currentUser.displayName,
@@ -98,10 +98,11 @@ class BlogCommentsState extends State<BlogComments> {
 
         title: FittedBox(
           fit: BoxFit.contain,
-          child: TranslatedText('Comments',to:'${currentUser.language}',textStyle:TextStyle(
-        fontFamily :"MajorMonoDisplay",
+          child: Text(
+            "Comments" ,
+            style: TextStyle(color: Colors.white),
           ),
-        ),),),
+        ),),
       body: Container( decoration: BoxDecoration(
           gradient: fabGradient
       ) ,
@@ -129,10 +130,8 @@ class BlogCommentsState extends State<BlogComments> {
               trailing: OutlineButton( color: kPrimaryColor,
                 onPressed: addComment,
                 borderSide: BorderSide.none,
-                child: TranslatedText('Posts',to:'${currentUser.language}',textStyle:TextStyle(
-                  fontFamily :"MajorMonoDisplay"),
+                child: Text("Post",style: TextStyle(color: kText),),
               ),
-            ),
             ),
           ],
         ),
@@ -158,11 +157,11 @@ class   BlogComment extends StatelessWidget {
 
   factory BlogComment.fromDocument(DocumentSnapshot doc) {
     return BlogComment(
-      username: doc.data()['username'],
-      userId: doc.data()['userId'],
-      comment: doc.data()['comment'],
-      timestamp: doc.data()['timestamp'],
-      avatarUrl: doc.data()['avatarUrl'],
+      username: doc['username'],
+      userId: doc['userId'],
+      comment: doc['comment'],
+      timestamp: doc['timestamp'],
+      avatarUrl: doc['avatarUrl'],
     );
   }
 

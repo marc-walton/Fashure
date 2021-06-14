@@ -10,9 +10,9 @@ import 'package:fashow/Constants.dart';
 import 'package:image/image.dart' as Im;
 import 'package:uuid/uuid.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:translated_text/translated_text.dart';
+
 class AddAdress extends StatefulWidget {
-  final Users currentUser;
+  final User currentUser;
 
   const AddAdress({Key key, this.currentUser}) : super(key: key);
 
@@ -56,10 +56,10 @@ class _AddAdressState extends State<AddAdress> {
         msg: "Please wait:Uploading", timeInSecForIos: 4);
 
     addressRef
-        .doc(currentUser.id)
+        .document(currentUser.id)
         .collection("useraddress")
-        .doc(addId)
-        .set({
+        .document(addId)
+        .setData({
       "userId": currentUser.id,
       "username": currentUser.displayName,
       "photoUrl": currentUser.photoUrl,
@@ -297,15 +297,12 @@ Widget form(){
       Row(
         children: [
           RaisedButton(
-            child:  TranslatedText('Cancel',to:'${currentUser.language}'
-            ),
+            child: Text('Cancel'),
             onPressed: ()=>Get.back(),
           ),
           SizedBox(width: 5.0,),
           RaisedButton(
-              child:  TranslatedText('Save',to:'${currentUser.language}'
-              ),
-
+              child: Text('Save'),
               onPressed: () async {
                await Saveaddress();
                // Get.snackbar(title:"Address added!"{
@@ -337,8 +334,9 @@ Widget form(){
                 onPressed:()=>Navigator.pop(context)),
             title: FittedBox(
               fit: BoxFit.contain,
-              child:  TranslatedText('Add address',to:'${currentUser.language}',
-                  textStyle: TextStyle(color: Colors.white),
+              child: Text(
+                "Add address",
+                style: TextStyle(color: Colors.white),
               ),
             ),
           ),
