@@ -31,7 +31,7 @@ class _LiveTvState extends State<LiveTv> with  TickerProviderStateMixin {
   final String currentUserId = currentUser?.id;
 
   final FlareControls flareControls = FlareControls();
-  final databaseReference = FirebaseFirestore.instance;
+  final databaseReference = Firestore.instance;
   String videoId;
   String mediaUrl;
   String OwnerId;
@@ -137,9 +137,9 @@ class _LiveTvState extends State<LiveTv> with  TickerProviderStateMixin {
        liveUser = new Live(username: name,me: true,image:image,ownerId: ownerId );
        list.add(liveUser);
      });
-     result..docs.forEach((result) {
+     result.documents.forEach((result) {
        setState(() {
-         list.add(new Live(username: result.data()['name'],image: result.data()['image'],channelId:result.data()['channel'],me: false));
+         list.add(new Live(username: result.data['name'],image: result.data['image'],channelId:result.data['channel'],me: false));
 
        });
      });

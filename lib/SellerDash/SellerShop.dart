@@ -14,7 +14,6 @@ import 'package:fashow/user.dart';
 import 'package:fashow/SellerDash/Editshop.dart';
 import 'package:fashow/product_custom.dart';
 import 'package:fashow/Product_screen.dart';
-import 'package:translated_text/translated_text.dart';
 class SellerShop extends StatefulWidget {
   @override
   _SellerShopState createState() => _SellerShopState();
@@ -35,10 +34,7 @@ class _SellerShopState extends State<SellerShop> {
               fontWeight: FontWeight.bold)),
             trailing:                   RaisedButton(
               color: kblue,
-              child:  TranslatedText('Edit Inventory',to:'${currentUser.language}',
-                textStyle: TextStyle(color: Colors.white),
-              ),
-
+              child: Text('Edit Inventory',style: TextStyle(color: Colors.white),),
               onPressed: ()=> Navigator.push(
                 context,
                 MaterialPageRoute(
@@ -179,28 +175,27 @@ class _SellerShopState extends State<SellerShop> {
   Widget build(BuildContext context) {
     return   Container(
       child: PaginateFirestore(
-        isLive: true,
-
 //    itemsPerPage: 2,
-          itemBuilderType: PaginateBuilderType.listView,
+          itemBuilderType:
+          PaginateBuilderType.listView,
           itemBuilder: (index, context, documentSnapshot)   {
 //        DocumentSnapshot ds = snapshot.data.documents[index];
-            String ownerId = documentSnapshot.data()['ownerId'];
-            String prodId = documentSnapshot.data()['prodId'];
-            String shopmediaUrl = documentSnapshot.data()['shopmediaUrl'];
-            String productname = documentSnapshot.data()['productname'];
-            String inr = documentSnapshot.data()['inr'];
-            String usd = documentSnapshot.data()['usd'];
-            String eur = documentSnapshot.data()['eur'];
-            String gbp = documentSnapshot.data()['gbp'];
+            String ownerId = documentSnapshot.data['ownerId'];
+            String prodId = documentSnapshot.data['prodId'];
+            String shopmediaUrl = documentSnapshot.data['shopmediaUrl'];
+            String productname = documentSnapshot.data['productname'];
+            String inr = documentSnapshot.data['inr'];
+            String usd = documentSnapshot.data['usd'];
+            String eur = documentSnapshot.data['eur'];
+            String gbp = documentSnapshot.data['gbp'];
             return
               FutureBuilder(
-                future: usersRef.doc(ownerId).get(),
+                future: usersRef.document(ownerId).get(),
                 builder: (context, snapshot) {
                   if (!snapshot.hasData) {
                     return circularProgress();
                   }
-                  Users user = Users.fromDocument(snapshot.data);
+                  User user = User.fromDocument(snapshot.data);
 //          bool isPostOwner = currentUserId == ownerId;
                   return Column(
                     children: <Widget>[
@@ -246,9 +241,9 @@ class _SellerShopState extends State<SellerShop> {
                 },
               );
           },
-          query: FirebaseFirestore.instance.collection('products')
-              .doc(currentUser.id)
-              .collection('userProducts').orderBy('timestamp',descending: true),
+          query: Firestore.instance.collection('products')
+              .document(currentUser.id)
+              .collection('userProducts').orderBy('timestamp',descending: true)
 
 
       ),

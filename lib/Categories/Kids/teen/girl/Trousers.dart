@@ -110,22 +110,22 @@ class _KidtuGTState extends State<KidtuGT> {
         PaginateBuilderType.listView,
         itemBuilder: (index, context, documentSnapshot)   {
 //        DocumentSnapshot ds = snapshot.data.documents[index];
-          String ownerId = documentSnapshot.data()['ownerId'];
-          String prodId = documentSnapshot.data()['prodId'];
-          String shopmediaUrl = documentSnapshot.data()['shopmediaUrl'];
-          String productname = documentSnapshot.data()['productname'];
-          String inr = documentSnapshot.data()['inr'];
-          String usd = documentSnapshot.data()['usd'];
-          String eur = documentSnapshot.data()['eur'];
-          String gbp = documentSnapshot.data()['gbp'];
+          String ownerId = documentSnapshot.data['ownerId'];
+          String prodId = documentSnapshot.data['prodId'];
+          String shopmediaUrl = documentSnapshot.data['shopmediaUrl'];
+          String productname = documentSnapshot.data['productname'];
+          String inr = documentSnapshot.data['inr'];
+          String usd = documentSnapshot.data['usd'];
+          String eur = documentSnapshot.data['eur'];
+          String gbp = documentSnapshot.data['gbp'];
           return
             FutureBuilder(
-              future: usersRef.doc(ownerId).get(),
+              future: usersRef.document(ownerId).get(),
               builder: (context, snapshot) {
                 if (!snapshot.hasData) {
                   return circularProgress();
                 }
-                Users user = Users.fromDocument(snapshot.data);
+                User user = User.fromDocument(snapshot.data);
 //          bool isPostOwner = currentUserId == ownerId;
                 return Column(
                   children: <Widget>[
@@ -172,10 +172,10 @@ class _KidtuGTState extends State<KidtuGT> {
               },
             );
         },
-        query:  FirebaseFirestore.instance.collectionGroup('userProducts').orderBy('timestamp',descending: true)
+        query: Firestore.instance.collectionGroup('userProducts').orderBy('timestamp',descending: true)
             .where('Gender',isEqualTo: 'Teen-Girls')
             .where('Category',isEqualTo: 'TGSkinny-fit')
-      ,isLive:true,
+
 
     );
   }
@@ -186,22 +186,22 @@ class _KidtuGTState extends State<KidtuGT> {
         PaginateBuilderType.listView,
         itemBuilder: (index, context, documentSnapshot)   {
 //        DocumentSnapshot ds = snapshot.data.documents[index];
-          String ownerId = documentSnapshot.data()['ownerId'];
-          String prodId = documentSnapshot.data()['prodId'];
-          String shopmediaUrl = documentSnapshot.data()['shopmediaUrl'];
-          String productname = documentSnapshot.data()['productname'];
-          String inr = documentSnapshot.data()['inr'];
-          String usd = documentSnapshot.data()['usd'];
-          String eur = documentSnapshot.data()['eur'];
-          String gbp = documentSnapshot.data()['gbp'];
+          String ownerId = documentSnapshot.data['ownerId'];
+          String prodId = documentSnapshot.data['prodId'];
+          String shopmediaUrl = documentSnapshot.data['shopmediaUrl'];
+          String productname = documentSnapshot.data['productname'];
+          String inr = documentSnapshot.data['inr'];
+          String usd = documentSnapshot.data['usd'];
+          String eur = documentSnapshot.data['eur'];
+          String gbp = documentSnapshot.data['gbp'];
           return
             FutureBuilder(
-              future: usersRef.doc(ownerId).get(),
+              future: usersRef.document(ownerId).get(),
               builder: (context, snapshot) {
                 if (!snapshot.hasData) {
                   return circularProgress();
                 }
-                Users user = Users.fromDocument(snapshot.data);
+                User user = User.fromDocument(snapshot.data);
 //          bool isPostOwner = currentUserId == ownerId;
                 return Column(
                   children: <Widget>[
@@ -248,10 +248,10 @@ class _KidtuGTState extends State<KidtuGT> {
               },
             );
         },
-        query:  FirebaseFirestore.instance.collectionGroup('userProducts').orderBy('timestamp',descending: true)
+        query: Firestore.instance.collectionGroup('userProducts').orderBy('timestamp',descending: true)
             .where('Gender',isEqualTo: 'Teen-Girls')
             .where('Category',isEqualTo: 'TGSlim-fit')
-      ,isLive:true,
+
     );
   }
   TGTapered(){
@@ -261,22 +261,22 @@ class _KidtuGTState extends State<KidtuGT> {
         PaginateBuilderType.listView,
         itemBuilder: (index, context, documentSnapshot)   {
 //        DocumentSnapshot ds = snapshot.data.documents[index];
-          String ownerId = documentSnapshot.data()['ownerId'];
-          String prodId = documentSnapshot.data()['prodId'];
-          String shopmediaUrl = documentSnapshot.data()['shopmediaUrl'];
-          String productname = documentSnapshot.data()['productname'];
-          String inr = documentSnapshot.data()['inr'];
-          String usd = documentSnapshot.data()['usd'];
-          String eur = documentSnapshot.data()['eur'];
-          String gbp = documentSnapshot.data()['gbp'];
+          String ownerId = documentSnapshot.data['ownerId'];
+          String prodId = documentSnapshot.data['prodId'];
+          String shopmediaUrl = documentSnapshot.data['shopmediaUrl'];
+          String productname = documentSnapshot.data['productname'];
+          String inr = documentSnapshot.data['inr'];
+          String usd = documentSnapshot.data['usd'];
+          String eur = documentSnapshot.data['eur'];
+          String gbp = documentSnapshot.data['gbp'];
           return
             FutureBuilder(
-              future: usersRef.doc(ownerId).get(),
+              future: usersRef.document(ownerId).get(),
               builder: (context, snapshot) {
                 if (!snapshot.hasData) {
                   return circularProgress();
                 }
-                Users user = Users.fromDocument(snapshot.data);
+                User user = User.fromDocument(snapshot.data);
 //          bool isPostOwner = currentUserId == ownerId;
                 return Column(
                   children: <Widget>[
@@ -323,10 +323,10 @@ class _KidtuGTState extends State<KidtuGT> {
               },
             );
         },
-        query:  FirebaseFirestore.instance.collectionGroup('userProducts').orderBy('timestamp',descending: true)
+        query: Firestore.instance.collectionGroup('userProducts').orderBy('timestamp',descending: true)
             .where('Gender',isEqualTo: 'Teen-Girls')
             .where('Category',isEqualTo: 'TGTapered-fit')
-      ,isLive:true,
+
     );
   }
   TGStraight(){
@@ -336,22 +336,22 @@ class _KidtuGTState extends State<KidtuGT> {
         PaginateBuilderType.listView,
         itemBuilder: (index, context, documentSnapshot)   {
 //        DocumentSnapshot ds = snapshot.data.documents[index];
-          String ownerId = documentSnapshot.data()['ownerId'];
-          String prodId = documentSnapshot.data()['prodId'];
-          String shopmediaUrl = documentSnapshot.data()['shopmediaUrl'];
-          String productname = documentSnapshot.data()['productname'];
-          String inr = documentSnapshot.data()['inr'];
-          String usd = documentSnapshot.data()['usd'];
-          String eur = documentSnapshot.data()['eur'];
-          String gbp = documentSnapshot.data()['gbp'];
+          String ownerId = documentSnapshot.data['ownerId'];
+          String prodId = documentSnapshot.data['prodId'];
+          String shopmediaUrl = documentSnapshot.data['shopmediaUrl'];
+          String productname = documentSnapshot.data['productname'];
+          String inr = documentSnapshot.data['inr'];
+          String usd = documentSnapshot.data['usd'];
+          String eur = documentSnapshot.data['eur'];
+          String gbp = documentSnapshot.data['gbp'];
           return
             FutureBuilder(
-              future: usersRef.doc(ownerId).get(),
+              future: usersRef.document(ownerId).get(),
               builder: (context, snapshot) {
                 if (!snapshot.hasData) {
                   return circularProgress();
                 }
-                Users user = Users.fromDocument(snapshot.data);
+                User user = User.fromDocument(snapshot.data);
 //          bool isPostOwner = currentUserId == ownerId;
                 return Column(
                   children: <Widget>[
@@ -398,10 +398,10 @@ class _KidtuGTState extends State<KidtuGT> {
               },
             );
         },
-        query:  FirebaseFirestore.instance.collectionGroup('userProducts').orderBy('timestamp',descending: true)
+        query: Firestore.instance.collectionGroup('userProducts').orderBy('timestamp',descending: true)
             .where('Gender',isEqualTo: 'Teen-Girls')
             .where('Category',isEqualTo: 'TGStraight fit')
-      ,isLive:true,
+
     );
   }
   TGWide(){
@@ -411,22 +411,22 @@ class _KidtuGTState extends State<KidtuGT> {
         PaginateBuilderType.listView,
         itemBuilder: (index, context, documentSnapshot)   {
 //        DocumentSnapshot ds = snapshot.data.documents[index];
-          String ownerId = documentSnapshot.data()['ownerId'];
-          String prodId = documentSnapshot.data()['prodId'];
-          String shopmediaUrl = documentSnapshot.data()['shopmediaUrl'];
-          String productname = documentSnapshot.data()['productname'];
-          String inr = documentSnapshot.data()['inr'];
-          String usd = documentSnapshot.data()['usd'];
-          String eur = documentSnapshot.data()['eur'];
-          String gbp = documentSnapshot.data()['gbp'];
+          String ownerId = documentSnapshot.data['ownerId'];
+          String prodId = documentSnapshot.data['prodId'];
+          String shopmediaUrl = documentSnapshot.data['shopmediaUrl'];
+          String productname = documentSnapshot.data['productname'];
+          String inr = documentSnapshot.data['inr'];
+          String usd = documentSnapshot.data['usd'];
+          String eur = documentSnapshot.data['eur'];
+          String gbp = documentSnapshot.data['gbp'];
           return
             FutureBuilder(
-              future: usersRef.doc(ownerId).get(),
+              future: usersRef.document(ownerId).get(),
               builder: (context, snapshot) {
                 if (!snapshot.hasData) {
                   return circularProgress();
                 }
-                Users user = Users.fromDocument(snapshot.data);
+                User user = User.fromDocument(snapshot.data);
 //          bool isPostOwner = currentUserId == ownerId;
                 return Column(
                   children: <Widget>[
@@ -473,10 +473,10 @@ class _KidtuGTState extends State<KidtuGT> {
               },
             );
         },
-        query:  FirebaseFirestore.instance.collectionGroup('userProducts').orderBy('timestamp',descending: true)
+        query: Firestore.instance.collectionGroup('userProducts').orderBy('timestamp',descending: true)
             .where('Gender',isEqualTo: 'Teen-Girls')
             .where('Category',isEqualTo: 'TGWide-Leg')
-      ,isLive:true,
+
     );
   }
   TGCropped(){
@@ -486,22 +486,22 @@ class _KidtuGTState extends State<KidtuGT> {
         PaginateBuilderType.listView,
         itemBuilder: (index, context, documentSnapshot)   {
 //        DocumentSnapshot ds = snapshot.data.documents[index];
-          String ownerId = documentSnapshot.data()['ownerId'];
-          String prodId = documentSnapshot.data()['prodId'];
-          String shopmediaUrl = documentSnapshot.data()['shopmediaUrl'];
-          String productname = documentSnapshot.data()['productname'];
-          String inr = documentSnapshot.data()['inr'];
-          String usd = documentSnapshot.data()['usd'];
-          String eur = documentSnapshot.data()['eur'];
-          String gbp = documentSnapshot.data()['gbp'];
+          String ownerId = documentSnapshot.data['ownerId'];
+          String prodId = documentSnapshot.data['prodId'];
+          String shopmediaUrl = documentSnapshot.data['shopmediaUrl'];
+          String productname = documentSnapshot.data['productname'];
+          String inr = documentSnapshot.data['inr'];
+          String usd = documentSnapshot.data['usd'];
+          String eur = documentSnapshot.data['eur'];
+          String gbp = documentSnapshot.data['gbp'];
           return
             FutureBuilder(
-              future: usersRef.doc(ownerId).get(),
+              future: usersRef.document(ownerId).get(),
               builder: (context, snapshot) {
                 if (!snapshot.hasData) {
                   return circularProgress();
                 }
-                Users user = Users.fromDocument(snapshot.data);
+                User user = User.fromDocument(snapshot.data);
 //          bool isPostOwner = currentUserId == ownerId;
                 return Column(
                   children: <Widget>[
@@ -548,10 +548,10 @@ class _KidtuGTState extends State<KidtuGT> {
               },
             );
         },
-        query:  FirebaseFirestore.instance.collectionGroup('userProducts').orderBy('timestamp',descending: true)
+        query: Firestore.instance.collectionGroup('userProducts').orderBy('timestamp',descending: true)
             .where('Gender',isEqualTo: 'Teen-Girls')
             .where('Category',isEqualTo: 'TGCropped')
-      ,isLive:true,
+
     );
   }
   TGHigh(){
@@ -561,22 +561,22 @@ class _KidtuGTState extends State<KidtuGT> {
   PaginateBuilderType.listView,
   itemBuilder: (index, context, documentSnapshot)   {
 //        DocumentSnapshot ds = snapshot.data.documents[index];
-  String ownerId = documentSnapshot.data()['ownerId'];
-  String prodId = documentSnapshot.data()['prodId'];
-  String shopmediaUrl = documentSnapshot.data()['shopmediaUrl'];
-  String productname = documentSnapshot.data()['productname'];
-  String inr = documentSnapshot.data()['inr'];
-  String usd = documentSnapshot.data()['usd'];
-  String eur = documentSnapshot.data()['eur'];
-  String gbp = documentSnapshot.data()['gbp'];
+  String ownerId = documentSnapshot.data['ownerId'];
+  String prodId = documentSnapshot.data['prodId'];
+  String shopmediaUrl = documentSnapshot.data['shopmediaUrl'];
+  String productname = documentSnapshot.data['productname'];
+  String inr = documentSnapshot.data['inr'];
+  String usd = documentSnapshot.data['usd'];
+  String eur = documentSnapshot.data['eur'];
+  String gbp = documentSnapshot.data['gbp'];
   return
     FutureBuilder(
-      future: usersRef.doc(ownerId).get(),
+      future: usersRef.document(ownerId).get(),
       builder: (context, snapshot) {
         if (!snapshot.hasData) {
           return circularProgress();
         }
-        Users user = Users.fromDocument(snapshot.data);
+        User user = User.fromDocument(snapshot.data);
 //          bool isPostOwner = currentUserId == ownerId;
         return Column(
           children: <Widget>[
@@ -623,10 +623,10 @@ class _KidtuGTState extends State<KidtuGT> {
       },
     );
   },
-  query:  FirebaseFirestore.instance.collectionGroup('userProducts').orderBy('timestamp',descending: true)
+  query: Firestore.instance.collectionGroup('userProducts').orderBy('timestamp',descending: true)
       .where('Gender',isEqualTo: 'Teen-Girls')
       .where('Category',isEqualTo: 'TGHigh Waisted')
-    ,isLive:true,
+
   );
   }
   TGTailored(){
@@ -636,22 +636,22 @@ class _KidtuGTState extends State<KidtuGT> {
         PaginateBuilderType.listView,
         itemBuilder: (index, context, documentSnapshot)   {
 //        DocumentSnapshot ds = snapshot.data.documents[index];
-          String ownerId = documentSnapshot.data()['ownerId'];
-          String prodId = documentSnapshot.data()['prodId'];
-          String shopmediaUrl = documentSnapshot.data()['shopmediaUrl'];
-          String productname = documentSnapshot.data()['productname'];
-          String inr = documentSnapshot.data()['inr'];
-          String usd = documentSnapshot.data()['usd'];
-          String eur = documentSnapshot.data()['eur'];
-          String gbp = documentSnapshot.data()['gbp'];
+          String ownerId = documentSnapshot.data['ownerId'];
+          String prodId = documentSnapshot.data['prodId'];
+          String shopmediaUrl = documentSnapshot.data['shopmediaUrl'];
+          String productname = documentSnapshot.data['productname'];
+          String inr = documentSnapshot.data['inr'];
+          String usd = documentSnapshot.data['usd'];
+          String eur = documentSnapshot.data['eur'];
+          String gbp = documentSnapshot.data['gbp'];
           return
             FutureBuilder(
-              future: usersRef.doc(ownerId).get(),
+              future: usersRef.document(ownerId).get(),
               builder: (context, snapshot) {
                 if (!snapshot.hasData) {
                   return circularProgress();
                 }
-                Users user = Users.fromDocument(snapshot.data);
+                User user = User.fromDocument(snapshot.data);
 //          bool isPostOwner = currentUserId == ownerId;
                 return Column(
                   children: <Widget>[
@@ -698,10 +698,10 @@ class _KidtuGTState extends State<KidtuGT> {
               },
             );
         },
-        query:  FirebaseFirestore.instance.collectionGroup('userProducts').orderBy('timestamp',descending: true)
+        query: Firestore.instance.collectionGroup('userProducts').orderBy('timestamp',descending: true)
             .where('Gender',isEqualTo: 'Teen-Girls')
             .where('Category',isEqualTo: 'TGTailored Trousers')
-      ,isLive:true,
+
     );
   }
   TGSweatpants(){
@@ -711,22 +711,22 @@ class _KidtuGTState extends State<KidtuGT> {
         PaginateBuilderType.listView,
         itemBuilder: (index, context, documentSnapshot)   {
 //        DocumentSnapshot ds = snapshot.data.documents[index];
-          String ownerId = documentSnapshot.data()['ownerId'];
-          String prodId = documentSnapshot.data()['prodId'];
-          String shopmediaUrl = documentSnapshot.data()['shopmediaUrl'];
-          String productname = documentSnapshot.data()['productname'];
-          String inr = documentSnapshot.data()['inr'];
-          String usd = documentSnapshot.data()['usd'];
-          String eur = documentSnapshot.data()['eur'];
-          String gbp = documentSnapshot.data()['gbp'];
+          String ownerId = documentSnapshot.data['ownerId'];
+          String prodId = documentSnapshot.data['prodId'];
+          String shopmediaUrl = documentSnapshot.data['shopmediaUrl'];
+          String productname = documentSnapshot.data['productname'];
+          String inr = documentSnapshot.data['inr'];
+          String usd = documentSnapshot.data['usd'];
+          String eur = documentSnapshot.data['eur'];
+          String gbp = documentSnapshot.data['gbp'];
           return
             FutureBuilder(
-              future: usersRef.doc(ownerId).get(),
+              future: usersRef.document(ownerId).get(),
               builder: (context, snapshot) {
                 if (!snapshot.hasData) {
                   return circularProgress();
                 }
-                Users user = Users.fromDocument(snapshot.data);
+                User user = User.fromDocument(snapshot.data);
 //          bool isPostOwner = currentUserId == ownerId;
                 return Column(
                   children: <Widget>[
@@ -773,10 +773,10 @@ class _KidtuGTState extends State<KidtuGT> {
               },
             );
         },
-        query:  FirebaseFirestore.instance.collectionGroup('userProducts').orderBy('timestamp',descending: true)
+        query: Firestore.instance.collectionGroup('userProducts').orderBy('timestamp',descending: true)
             .where('Gender',isEqualTo: 'Teen-Girls')
             .where('Category',isEqualTo: 'TGSweatpants')
-      ,isLive:true,
+
     );
   }
   TGFlare(){
@@ -786,22 +786,22 @@ class _KidtuGTState extends State<KidtuGT> {
         PaginateBuilderType.listView,
         itemBuilder: (index, context, documentSnapshot)   {
 //        DocumentSnapshot ds = snapshot.data.documents[index];
-          String ownerId = documentSnapshot.data()['ownerId'];
-          String prodId = documentSnapshot.data()['prodId'];
-          String shopmediaUrl = documentSnapshot.data()['shopmediaUrl'];
-          String productname = documentSnapshot.data()['productname'];
-          String inr = documentSnapshot.data()['inr'];
-          String usd = documentSnapshot.data()['usd'];
-          String eur = documentSnapshot.data()['eur'];
-          String gbp = documentSnapshot.data()['gbp'];
+          String ownerId = documentSnapshot.data['ownerId'];
+          String prodId = documentSnapshot.data['prodId'];
+          String shopmediaUrl = documentSnapshot.data['shopmediaUrl'];
+          String productname = documentSnapshot.data['productname'];
+          String inr = documentSnapshot.data['inr'];
+          String usd = documentSnapshot.data['usd'];
+          String eur = documentSnapshot.data['eur'];
+          String gbp = documentSnapshot.data['gbp'];
           return
             FutureBuilder(
-              future: usersRef.doc(ownerId).get(),
+              future: usersRef.document(ownerId).get(),
               builder: (context, snapshot) {
                 if (!snapshot.hasData) {
                   return circularProgress();
                 }
-                Users user = Users.fromDocument(snapshot.data);
+                User user = User.fromDocument(snapshot.data);
 //          bool isPostOwner = currentUserId == ownerId;
                 return Column(
                   children: <Widget>[
@@ -848,10 +848,10 @@ class _KidtuGTState extends State<KidtuGT> {
               },
             );
         },
-        query:  FirebaseFirestore.instance.collectionGroup('userProducts').orderBy('timestamp',descending: true)
+        query: Firestore.instance.collectionGroup('userProducts').orderBy('timestamp',descending: true)
             .where('Gender',isEqualTo: 'Teen-Girls')
             .where('Category',isEqualTo: 'TGFlare & Bell Bottom')
-      ,isLive:true,
+
     );
   }
   TGLeggings(){
@@ -861,22 +861,22 @@ class _KidtuGTState extends State<KidtuGT> {
         PaginateBuilderType.listView,
         itemBuilder: (index, context, documentSnapshot)   {
 //        DocumentSnapshot ds = snapshot.data.documents[index];
-          String ownerId = documentSnapshot.data()['ownerId'];
-          String prodId = documentSnapshot.data()['prodId'];
-          String shopmediaUrl = documentSnapshot.data()['shopmediaUrl'];
-          String productname = documentSnapshot.data()['productname'];
-          String inr = documentSnapshot.data()['inr'];
-          String usd = documentSnapshot.data()['usd'];
-          String eur = documentSnapshot.data()['eur'];
-          String gbp = documentSnapshot.data()['gbp'];
+          String ownerId = documentSnapshot.data['ownerId'];
+          String prodId = documentSnapshot.data['prodId'];
+          String shopmediaUrl = documentSnapshot.data['shopmediaUrl'];
+          String productname = documentSnapshot.data['productname'];
+          String inr = documentSnapshot.data['inr'];
+          String usd = documentSnapshot.data['usd'];
+          String eur = documentSnapshot.data['eur'];
+          String gbp = documentSnapshot.data['gbp'];
           return
             FutureBuilder(
-              future: usersRef.doc(ownerId).get(),
+              future: usersRef.document(ownerId).get(),
               builder: (context, snapshot) {
                 if (!snapshot.hasData) {
                   return circularProgress();
                 }
-                Users user = Users.fromDocument(snapshot.data);
+                User user = User.fromDocument(snapshot.data);
 //          bool isPostOwner = currentUserId == ownerId;
                 return Column(
                   children: <Widget>[
@@ -923,10 +923,9 @@ class _KidtuGTState extends State<KidtuGT> {
               },
             );
         },
-        query:  FirebaseFirestore.instance.collectionGroup('userProducts').orderBy('timestamp',descending: true)
+        query: Firestore.instance.collectionGroup('userProducts').orderBy('timestamp',descending: true)
             .where('Gender',isEqualTo: 'Teen-Girls')
             .where('Category',isEqualTo: 'TGLeggings')
-      ,isLive:true,
     );
   }
 

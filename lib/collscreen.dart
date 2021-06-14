@@ -16,7 +16,7 @@ class CollScreen extends StatelessWidget {
     return StreamBuilder(
       stream: collRef
 
-          .doc(collId)
+          .document(collId)
           .snapshots(),
       builder: (context, snapshot) {
         if (!snapshot.hasData) {

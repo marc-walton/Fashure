@@ -10,7 +10,6 @@ import 'package:fashow/progress.dart';
 import 'package:fashow/user.dart';
 import 'package:fashow/product_custom.dart';
 import 'package:fashow/Product_screen.dart';
-import 'package:translated_text/translated_text.dart';
 
 df({String productname,String usd,String inr,String cny,String eur,String gbp,String prodId,String ownerId,}){
   if(currentUser.country=='India'){
@@ -103,22 +102,22 @@ BBCaps(){
       PaginateBuilderType.listView,
       itemBuilder: (index, context, documentSnapshot)   {
 //        DocumentSnapshot ds = snapshot.data.documents[index];
-        String ownerId = documentSnapshot.data()['ownerId'];
-        String prodId = documentSnapshot.data()['prodId'];
-        String shopmediaUrl = documentSnapshot.data()['shopmediaUrl'];
-        String productname = documentSnapshot.data()['productname'];
-        String inr = documentSnapshot.data()['inr'];
-        String usd = documentSnapshot.data()['usd'];
-        String eur = documentSnapshot.data()['eur'];
-        String gbp = documentSnapshot.data()['gbp'];
+        String ownerId = documentSnapshot.data['ownerId'];
+        String prodId = documentSnapshot.data['prodId'];
+        String shopmediaUrl = documentSnapshot.data['shopmediaUrl'];
+        String productname = documentSnapshot.data['productname'];
+        String inr = documentSnapshot.data['inr'];
+        String usd = documentSnapshot.data['usd'];
+        String eur = documentSnapshot.data['eur'];
+        String gbp = documentSnapshot.data['gbp'];
         return
           FutureBuilder(
-            future: usersRef.doc(ownerId).get(),
+            future: usersRef.document(ownerId).get(),
             builder: (context, snapshot) {
               if (!snapshot.hasData) {
                 return circularProgress();
               }
-              Users user = Users.fromDocument(snapshot.data);
+              User user = User.fromDocument(snapshot.data);
 //          bool isPostOwner = currentUserId == ownerId;
               return Column(
                 children: <Widget>[
@@ -165,9 +164,9 @@ BBCaps(){
             },
           );
       },
-      query: FirebaseFirestore.instance.collectionGroup('userProducts').orderBy('timestamp',descending: true)
+      query: Firestore.instance.collectionGroup('userProducts').orderBy('timestamp',descending: true)
           .where('Gender',isEqualTo: 'Baby-Boys')
-          .where('Category',isEqualTo: 'BBCaps'),isLive: true,
+          .where('Category',isEqualTo: 'BBCaps')
 
   );
 }
@@ -178,22 +177,22 @@ BBKnitted(){
       PaginateBuilderType.listView,
       itemBuilder: (index, context, documentSnapshot)   {
 //        DocumentSnapshot ds = snapshot.data.documents[index];
-        String ownerId = documentSnapshot.data()['ownerId'];
-        String prodId = documentSnapshot.data()['prodId'];
-        String shopmediaUrl = documentSnapshot.data()['shopmediaUrl'];
-        String productname = documentSnapshot.data()['productname'];
-        String inr = documentSnapshot.data()['inr'];
-        String usd = documentSnapshot.data()['usd'];
-        String eur = documentSnapshot.data()['eur'];
-        String gbp = documentSnapshot.data()['gbp'];
+        String ownerId = documentSnapshot.data['ownerId'];
+        String prodId = documentSnapshot.data['prodId'];
+        String shopmediaUrl = documentSnapshot.data['shopmediaUrl'];
+        String productname = documentSnapshot.data['productname'];
+        String inr = documentSnapshot.data['inr'];
+        String usd = documentSnapshot.data['usd'];
+        String eur = documentSnapshot.data['eur'];
+        String gbp = documentSnapshot.data['gbp'];
         return
           FutureBuilder(
-            future: usersRef.doc(ownerId).get(),
+            future: usersRef.document(ownerId).get(),
             builder: (context, snapshot) {
               if (!snapshot.hasData) {
                 return circularProgress();
               }
-              Users user = Users.fromDocument(snapshot.data);
+              User user = User.fromDocument(snapshot.data);
 //          bool isPostOwner = currentUserId == ownerId;
               return Column(
                 children: <Widget>[
@@ -240,9 +239,9 @@ BBKnitted(){
             },
           );
       },
-      query: FirebaseFirestore.instance.collectionGroup('userProducts').orderBy('timestamp',descending: true)
+      query: Firestore.instance.collectionGroup('userProducts').orderBy('timestamp',descending: true)
           .where('Gender',isEqualTo: 'Baby-Boys')
-          .where('Category',isEqualTo: 'BBKnitted Hats'),isLive: true,
+          .where('Category',isEqualTo: 'BBKnitted Hats')
 
 
   );
@@ -254,22 +253,22 @@ BBSun(){
       PaginateBuilderType.listView,
       itemBuilder: (index, context, documentSnapshot)   {
 //        DocumentSnapshot ds = snapshot.data.documents[index];
-        String ownerId = documentSnapshot.data()['ownerId'];
-        String prodId = documentSnapshot.data()['prodId'];
-        String shopmediaUrl = documentSnapshot.data()['shopmediaUrl'];
-        String productname = documentSnapshot.data()['productname'];
-        String inr = documentSnapshot.data()['inr'];
-        String usd = documentSnapshot.data()['usd'];
-        String eur = documentSnapshot.data()['eur'];
-        String gbp = documentSnapshot.data()['gbp'];
+        String ownerId = documentSnapshot.data['ownerId'];
+        String prodId = documentSnapshot.data['prodId'];
+        String shopmediaUrl = documentSnapshot.data['shopmediaUrl'];
+        String productname = documentSnapshot.data['productname'];
+        String inr = documentSnapshot.data['inr'];
+        String usd = documentSnapshot.data['usd'];
+        String eur = documentSnapshot.data['eur'];
+        String gbp = documentSnapshot.data['gbp'];
         return
           FutureBuilder(
-            future: usersRef.doc(ownerId).get(),
+            future: usersRef.document(ownerId).get(),
             builder: (context, snapshot) {
               if (!snapshot.hasData) {
                 return circularProgress();
               }
-              Users user = Users.fromDocument(snapshot.data);
+              User user = User.fromDocument(snapshot.data);
 //          bool isPostOwner = currentUserId == ownerId;
               return Column(
                 children: <Widget>[
@@ -316,9 +315,9 @@ BBSun(){
             },
           );
       },
-      query: FirebaseFirestore.instance.collectionGroup('userProducts').orderBy('timestamp',descending: true)
+      query: Firestore.instance.collectionGroup('userProducts').orderBy('timestamp',descending: true)
           .where('Gender',isEqualTo: 'Baby-Boys')
-          .where('Category',isEqualTo: 'BBSun Hats'),isLive: true,
+          .where('Category',isEqualTo: 'BBSun Hats')
 
 
   );
@@ -330,22 +329,22 @@ BBSETS(){
       PaginateBuilderType.listView,
       itemBuilder: (index, context, documentSnapshot)   {
 //        DocumentSnapshot ds = snapshot.data.documents[index];
-        String ownerId = documentSnapshot.data()['ownerId'];
-        String prodId = documentSnapshot.data()['prodId'];
-        String shopmediaUrl = documentSnapshot.data()['shopmediaUrl'];
-        String productname = documentSnapshot.data()['productname'];
-        String inr = documentSnapshot.data()['inr'];
-        String usd = documentSnapshot.data()['usd'];
-        String eur = documentSnapshot.data()['eur'];
-        String gbp = documentSnapshot.data()['gbp'];
+        String ownerId = documentSnapshot.data['ownerId'];
+        String prodId = documentSnapshot.data['prodId'];
+        String shopmediaUrl = documentSnapshot.data['shopmediaUrl'];
+        String productname = documentSnapshot.data['productname'];
+        String inr = documentSnapshot.data['inr'];
+        String usd = documentSnapshot.data['usd'];
+        String eur = documentSnapshot.data['eur'];
+        String gbp = documentSnapshot.data['gbp'];
         return
           FutureBuilder(
-            future: usersRef.doc(ownerId).get(),
+            future: usersRef.document(ownerId).get(),
             builder: (context, snapshot) {
               if (!snapshot.hasData) {
                 return circularProgress();
               }
-              Users user = Users.fromDocument(snapshot.data);
+              User user = User.fromDocument(snapshot.data);
 //          bool isPostOwner = currentUserId == ownerId;
               return Column(
                 children: <Widget>[
@@ -392,9 +391,9 @@ BBSETS(){
             },
           );
       },
-      query: FirebaseFirestore.instance.collectionGroup('userProducts').orderBy('timestamp',descending: true)
+      query: Firestore.instance.collectionGroup('userProducts').orderBy('timestamp',descending: true)
           .where('Gender',isEqualTo: 'Baby-Boys')
-          .where('Category',isEqualTo: 'BBHat Sets'),isLive: true,
+          .where('Category',isEqualTo: 'BBHat Sets')
 
 
 
@@ -424,22 +423,10 @@ class HatsBB  extends StatelessWidget {
                   unselectedLabelColor: kIcon,
 
                   tabs:[
-                    TranslatedText("Caps",to:'${currentUser.language}',
-                      textStyle: TextStyle(
-                        fontSize: SizeConfig.safeBlockHorizontal * 5,
-                      ),), TranslatedText("Knitted Hats",to:'${currentUser.language}',
-                      textStyle: TextStyle(
-                        fontSize: SizeConfig.safeBlockHorizontal * 5,
-                      ),),
-                    TranslatedText("Sun Hats",to:'${currentUser.language}',
-                      textStyle: TextStyle(
-                        fontSize: SizeConfig.safeBlockHorizontal * 5,
-                      ),),
-                    TranslatedText("Hat Sets",to:'${currentUser.language}',
-                      textStyle: TextStyle(
-                        fontSize: SizeConfig.safeBlockHorizontal * 5,
-                      ),),
-
+                    Text("Caps",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5,),),
+                    Text("Knitted Hats",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5,),),
+                    Text("Sun Hats",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5,),),
+                    Text("Hat Sets",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5,),),
 
                   ],
                 ),

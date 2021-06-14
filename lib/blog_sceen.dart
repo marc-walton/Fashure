@@ -15,9 +15,9 @@ class BlogScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return StreamBuilder(
       stream: blogRef
-          .doc(userId)
+          .document(userId)
           .collection('userBlog')
-          .doc(blogId)
+          .document(blogId)
           .snapshots(),
       builder: (context, snapshot) {
         if (!snapshot.hasData) {

@@ -22,7 +22,7 @@ import 'package:fashow/methods/chat_method.dart';
 import 'package:fashow/model/storage_model.dart';
 import 'package:fashow/chatcached_image.dart';
 
-import 'package:translated_text/translated_text.dart';
+
 import 'package:fashow/utils/utilities.dart';
 import 'package:fashow/utils/app_bar.dart';
 import 'package:fashow/page_view/custom_tile.dart';
@@ -175,11 +175,7 @@ bool Designer;
 
               model == true|| Photographer == true|| Stylist == true|| Designer == true|| Hair == true || Makeup == true || Illustrator == true || Choreographer == true ?
               RaisedButton(color:kblue,
-                  child:  TranslatedText('Create order',to:'${currentUser.language}',textStyle:TextStyle(
-                      color: Colors.white ),
-                  ),
-
-            onPressed: (){ Navigator.push(
+                  child:  Text("Create order",style: TextStyle(color: Colors.white),),onPressed: (){ Navigator.push(
                 context,
                 MaterialPageRoute(
                   builder: (context) =>
@@ -215,19 +211,19 @@ bool Designer;
       );
   }
 
-   Updateread() async { QuerySnapshot snapshot = await FirebaseFirestore.instance
+   Updateread() async { QuerySnapshot snapshot = await Firestore.instance
        .collection(MESSAGES_COLLECTION)
-       .doc(currentUser.id)
-       .collection(widget.receiver.id).get();
-   snapshot.docs.forEach((doc) {
-     doc.reference.update({'read':'true'});
+       .document(currentUser.id)
+       .collection(widget.receiver.id).getDocuments();
+   snapshot.documents.forEach((doc) {
+     doc.reference.updateData({'read':'true'});
    });}
-   Updatereadreciever() async { QuerySnapshot snapshot = await FirebaseFirestore.instance
+   Updatereadreciever() async { QuerySnapshot snapshot = await Firestore.instance
        .collection(MESSAGES_COLLECTION)
-       .doc(widget.receiver.id)
-       .collection(currentUser.id).get();
-   snapshot.docs.forEach((doc) {
-     doc.reference.update({'read':'true'});
+       .document(widget.receiver.id)
+       .collection(currentUser.id).getDocuments();
+   snapshot.documents.forEach((doc) {
+     doc.reference.updateData({'read':'true'});
    });}
   emojiContainer() {
     return EmojiPicker(
@@ -249,9 +245,9 @@ bool Designer;
 
   Widget messageList() {
     return StreamBuilder(
-      stream: FirebaseFirestore.instance
+      stream: Firestore.instance
           .collection(MESSAGES_COLLECTION)
-          .doc(currentUser.id)
+          .document(currentUser.id)
           .collection(widget.receiver.id)
           .orderBy(TIMESTAMP_FIELD, descending: true)
           .snapshots(),
@@ -272,10 +268,10 @@ bool Designer;
           padding: EdgeInsets.all(10),
           controller: _listScrollController,
           reverse: true,
-          itemCount: snapshot.data.docs.length,
+          itemCount: snapshot.data.documents.length,
           itemBuilder: (context, index) {
             // mention the arrow syntax if you get the time
-            return chatMessageItem(snapshot.data.docs[index]);
+            return chatMessageItem(snapshot.data.documents[index]);
           },
         );
       },
@@ -283,7 +279,7 @@ bool Designer;
   }
 
   Widget chatMessageItem(DocumentSnapshot snapshot) {
-    Message _message = Message.fromMap(snapshot.data());
+    Message _message = Message.fromMap(snapshot.data);
 
     return Container(
       margin: EdgeInsets.symmetric(vertical: 15),
@@ -322,28 +318,21 @@ bool Designer;
 
   getMessage(Message message) {
     return message.type != MESSAGE_TYPE_IMAGE
-        ? TranslatedText(message.message,to:'${currentUser.language}',
-      textStyle:TextStyle(
-          fontSize: 16.0,
-        color: Colors.white ),
-    ):
-    // Text(
-    //   ,
-    //   style: TextStyle(
-    //     color: Colors.white,
-    //
-    //   ),
-    // )
-         message.imgUrl != null
+        ? Text(
+      message.message,
+      style: TextStyle(
+        color: Colors.white,
+        fontSize: 16.0,
+      ),
+    )
+        : message.imgUrl != null
         ? CachedImage(
       message.imgUrl,
       height: 250,
       width: 250,
       radius: 10,
     )
-        : TranslatedText('"Url was null',to:'${currentUser.language}',
-         );
-
+        : Text("Url was null");
   }
 
   Widget receiverLayout(Message message) {
@@ -371,12 +360,7 @@ bool Designer;
     if(model == 'true' || Photographer == 'true' || Stylist == 'true' || Designer == 'true' || Hair == "true" || Makeup == 'true' || Illustrator == 'true' || Choreographer == 'true' )
       {
         return
-        RaisedButton(child:
-        TranslatedText('Create order',to:'${currentUser.language}',textStyle:TextStyle(
-            color: kText),
-        ),    
-
-            onPressed: (){ Navigator.push(
+        RaisedButton(child:  Text("Create order",style: TextStyle(color: kText),),onPressed: (){ Navigator.push(
           context,
           MaterialPageRoute(
             builder: (context) =>
@@ -401,20 +385,20 @@ bool Designer;
     // }
   }
 reqorderFire() async {
-  FirebaseFirestore.instance.collection('users')
+  Firestore.instance.collection('users')
       .where('id', isEqualTo: currentUser.id)
 
       .snapshots()
-      .listen((snapshot){  snapshot.docs.forEach((doc) {
+      .listen((snapshot){  snapshot.documents.forEach((doc) {
     setState(() {
-      Illustrator = doc.data()['illustrator'] ?? false;
-model = doc.data()['model'] ?? false;
-          Makeup = doc.data()['makeup'] ?? false;
-          Hair = doc.data()['hair'] ?? false;
-          Choreographer = doc.data()['choreographer'] ?? false;
-          Photographer = doc.data()['photographer'] ?? false;
-          Stylist = doc.data()['stylist'] ?? false;
-          Designer = doc.data()['designer'] ?? false;
+      Illustrator = doc.data['illustrator'] ?? false;
+model = doc.data['model'] ?? false;
+          Makeup = doc.data['makeup'] ?? false;
+          Hair = doc.data['hair'] ?? false;
+          Choreographer = doc.data['choreographer'] ?? false;
+          Photographer = doc.data['photographer'] ?? false;
+          Stylist = doc.data['stylist'] ?? false;
+          Designer = doc.data['designer'] ?? false;
 
       print('Activity Feed Item: $Illustrator');
 
@@ -425,14 +409,14 @@ model = doc.data()['model'] ?? false;
 
 
   // StreamBuilder(
-  //     stream: FirebaseFirestore.instance.collection('users').doc(widget.receiver.id).snapshots(),
+  //     stream: Firestore.instance.collection('users').document(widget.receiver.id).snapshots(),
   //     // ignore: missing_return
   //     builder: (context, snapshot) {
   //
   //       if (!snapshot.hasData) {
   //         return circularProgress();
   //       }
-  //       // DocumentSnapshot ds = snapshot.data.docs[index];
+  //       // DocumentSnapshot ds = snapshot.data.documents[index];
   //
   //     });
 }
@@ -448,24 +432,23 @@ model = doc.data()['model'] ?? false;
           builder: (context) {
             return SimpleDialog(
 //            shape: ,
-              title: TranslatedText( "Send Image",to:'${currentUser.language}',),
+              title: Text("Send Image"),
               children: <Widget>[
                 SimpleDialogOption(
-                    child:TranslatedText( "Photo with Camera",to:'${currentUser.language}',),
-                    onPressed:() {
+                    child: Text("Photo with Camera"), onPressed:() {
                   pickImage(source: ImageSource.camera);
                   Navigator.pop(context);
                 }),
                 SimpleDialogOption(
-                  child: TranslatedText( "Image from Gallery",to:'${currentUser.language}',),
-                    onPressed:  () {
+                  child: Text("Image from Gallery"),
+                  onPressed:  () {
                     pickImage(source: ImageSource.gallery);
                     Navigator.pop(context);
                   },
                 ),
                 SimpleDialogOption(
-                  child: TranslatedText( "Cancel",to:'${currentUser.language}',),
-                   onPressed: () => Navigator.pop(context),
+                  child: Text("Cancel"),
+                  onPressed: () => Navigator.pop(context),
                 )
               ],
             );
@@ -492,8 +475,9 @@ model = doc.data()['model'] ?? false;
                       Expanded(
                         child: Align(
                           alignment: Alignment.centerLeft,
-                          child: TranslatedText( "Content and tools",to:'${currentUser.language}',
-                                textStyle: TextStyle(
+                          child: Text(
+                            "Content and tools",
+                            style: TextStyle(
                                 color: Colors.white,
                                 fontSize: 20,
                                 fontWeight: FontWeight.bold),
@@ -538,11 +522,11 @@ model = doc.data()['model'] ?? false;
         type: 'text',
         read: 'false',
       );
-      FirebaseFirestore.instance.collection('feed')
-              .doc(widget.receiver.id)
+      Firestore.instance.collection('feed')
+              .document(widget.receiver.id)
               .collection('feedItems')
-              .doc(currentUser.id)
-              .set({
+              .document(currentUser.id)
+              .setData({
             "type": "Chat",
             "username": currentUser.displayName,
             "userId": currentUser.id,
@@ -711,9 +695,7 @@ model = doc.data()['model'] ?? false;
     model == true|| Photographer == true|| Stylist == true|| Designer == true|| Hair == true || Makeup == true || Illustrator == true || Choreographer == true ?
     RaisedButton(
         color:kblue,
-        child: TranslatedText( "Create order",to:'${currentUser.language}',
-        textStyle: TextStyle(color: kText),),
-        onPressed: (){ Navigator.push(
+        child:  Text("Create order",style: TextStyle(color: kText),),onPressed: (){ Navigator.push(
     context,
     MaterialPageRoute(
     builder: (context) =>
@@ -771,8 +753,7 @@ class ModalTile extends StatelessWidget {
             fontSize: 14,
           ),
         ),
-        title:
-        Text(
+        title: Text(
           title,
           style: TextStyle(
             fontWeight: FontWeight.bold,

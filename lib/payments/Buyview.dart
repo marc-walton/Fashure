@@ -6,7 +6,6 @@ import 'package:fashow/Constants.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:fashow/HomePage.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:translated_text/translated_text.dart';
 class BuyView extends StatefulWidget {
   final String prodId;
     final  String ownerId;
@@ -185,11 +184,8 @@ Widget st()
 
         Row(
           children: [
-            TranslatedText('Delivery Address',to:'${currentUser.language}',
-              textStyle: TextStyle(
-                  color:kText,              fontSize: 20.0
-              ),
-            ),
+            Text("Delivery Address",style:TextStyle(color:kText,              fontSize: 20.0,
+            )),
           ],
         ),
 Row(

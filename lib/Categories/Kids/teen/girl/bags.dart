@@ -105,22 +105,22 @@ TGBackpacks(){
       PaginateBuilderType.listView,
       itemBuilder: (index, context, documentSnapshot)   {
 //        DocumentSnapshot ds = snapshot.data.documents[index];
-        String ownerId = documentSnapshot.data()['ownerId'];
-        String prodId = documentSnapshot.data()['prodId'];
-        String shopmediaUrl = documentSnapshot.data()['shopmediaUrl'];
-        String productname = documentSnapshot.data()['productname'];
-        String inr = documentSnapshot.data()['inr'];
-        String usd = documentSnapshot.data()['usd'];
-        String eur = documentSnapshot.data()['eur'];
-        String gbp = documentSnapshot.data()['gbp'];
+        String ownerId = documentSnapshot.data['ownerId'];
+        String prodId = documentSnapshot.data['prodId'];
+        String shopmediaUrl = documentSnapshot.data['shopmediaUrl'];
+        String productname = documentSnapshot.data['productname'];
+        String inr = documentSnapshot.data['inr'];
+        String usd = documentSnapshot.data['usd'];
+        String eur = documentSnapshot.data['eur'];
+        String gbp = documentSnapshot.data['gbp'];
         return
           FutureBuilder(
-            future: usersRef.doc(ownerId).get(),
+            future: usersRef.document(ownerId).get(),
             builder: (context, snapshot) {
               if (!snapshot.hasData) {
                 return circularProgress();
               }
-              Users user = Users.fromDocument(snapshot.data);
+              User user = User.fromDocument(snapshot.data);
 //          bool isPostOwner = currentUserId == ownerId;
               return Column(
                 children: <Widget>[
@@ -167,10 +167,10 @@ TGBackpacks(){
             },
           );
       },
-      query:  FirebaseFirestore.instance.collectionGroup('userProducts').orderBy('timestamp',descending: true)
+      query: Firestore.instance.collectionGroup('userProducts').orderBy('timestamp',descending: true)
           .where('Gender',isEqualTo: 'Teen-Girls')
           .where('Category',isEqualTo: 'TGBackpacks')
-    ,isLive:true,
+
   );
 }
 TGShoulder(){
@@ -180,22 +180,22 @@ TGShoulder(){
       PaginateBuilderType.listView,
       itemBuilder: (index, context, documentSnapshot)   {
 //        DocumentSnapshot ds = snapshot.data.documents[index];
-        String ownerId = documentSnapshot.data()['ownerId'];
-        String prodId = documentSnapshot.data()['prodId'];
-        String shopmediaUrl = documentSnapshot.data()['shopmediaUrl'];
-        String productname = documentSnapshot.data()['productname'];
-        String inr = documentSnapshot.data()['inr'];
-        String usd = documentSnapshot.data()['usd'];
-        String eur = documentSnapshot.data()['eur'];
-        String gbp = documentSnapshot.data()['gbp'];
+        String ownerId = documentSnapshot.data['ownerId'];
+        String prodId = documentSnapshot.data['prodId'];
+        String shopmediaUrl = documentSnapshot.data['shopmediaUrl'];
+        String productname = documentSnapshot.data['productname'];
+        String inr = documentSnapshot.data['inr'];
+        String usd = documentSnapshot.data['usd'];
+        String eur = documentSnapshot.data['eur'];
+        String gbp = documentSnapshot.data['gbp'];
         return
           FutureBuilder(
-            future: usersRef.doc(ownerId).get(),
+            future: usersRef.document(ownerId).get(),
             builder: (context, snapshot) {
               if (!snapshot.hasData) {
                 return circularProgress();
               }
-              Users user = Users.fromDocument(snapshot.data);
+              User user = User.fromDocument(snapshot.data);
 //          bool isPostOwner = currentUserId == ownerId;
               return Column(
                 children: <Widget>[
@@ -242,10 +242,10 @@ TGShoulder(){
             },
           );
       },
-      query:  FirebaseFirestore.instance.collectionGroup('userProducts').orderBy('timestamp',descending: true)
+      query: Firestore.instance.collectionGroup('userProducts').orderBy('timestamp',descending: true)
           .where('Gender',isEqualTo: 'Teen-Girls')
           .where('Category',isEqualTo: 'TGShoulder & Cross body Bags')
-    ,isLive:true,
+
   );
 }
 TGBelt(){
@@ -255,22 +255,22 @@ TGBelt(){
       PaginateBuilderType.listView,
       itemBuilder: (index, context, documentSnapshot)   {
 //        DocumentSnapshot ds = snapshot.data.documents[index];
-        String ownerId = documentSnapshot.data()['ownerId'];
-        String prodId = documentSnapshot.data()['prodId'];
-        String shopmediaUrl = documentSnapshot.data()['shopmediaUrl'];
-        String productname = documentSnapshot.data()['productname'];
-        String inr = documentSnapshot.data()['inr'];
-        String usd = documentSnapshot.data()['usd'];
-        String eur = documentSnapshot.data()['eur'];
-        String gbp = documentSnapshot.data()['gbp'];
+        String ownerId = documentSnapshot.data['ownerId'];
+        String prodId = documentSnapshot.data['prodId'];
+        String shopmediaUrl = documentSnapshot.data['shopmediaUrl'];
+        String productname = documentSnapshot.data['productname'];
+        String inr = documentSnapshot.data['inr'];
+        String usd = documentSnapshot.data['usd'];
+        String eur = documentSnapshot.data['eur'];
+        String gbp = documentSnapshot.data['gbp'];
         return
           FutureBuilder(
-            future: usersRef.doc(ownerId).get(),
+            future: usersRef.document(ownerId).get(),
             builder: (context, snapshot) {
               if (!snapshot.hasData) {
                 return circularProgress();
               }
-              Users user = Users.fromDocument(snapshot.data);
+              User user = User.fromDocument(snapshot.data);
 //          bool isPostOwner = currentUserId == ownerId;
               return Column(
                 children: <Widget>[
@@ -317,10 +317,10 @@ TGBelt(){
             },
           );
       },
-      query:  FirebaseFirestore.instance.collectionGroup('userProducts').orderBy('timestamp',descending: true)
+      query: Firestore.instance.collectionGroup('userProducts').orderBy('timestamp',descending: true)
           .where('Gender',isEqualTo: 'Teen-Girls')
           .where('Category',isEqualTo: 'TGBelt Bags')
-    ,isLive:true,
+
   );
 }
 TGBeach(){
@@ -330,22 +330,22 @@ TGBeach(){
       PaginateBuilderType.listView,
       itemBuilder: (index, context, documentSnapshot)   {
 //        DocumentSnapshot ds = snapshot.data.documents[index];
-        String ownerId = documentSnapshot.data()['ownerId'];
-        String prodId = documentSnapshot.data()['prodId'];
-        String shopmediaUrl = documentSnapshot.data()['shopmediaUrl'];
-        String productname = documentSnapshot.data()['productname'];
-        String inr = documentSnapshot.data()['inr'];
-        String usd = documentSnapshot.data()['usd'];
-        String eur = documentSnapshot.data()['eur'];
-        String gbp = documentSnapshot.data()['gbp'];
+        String ownerId = documentSnapshot.data['ownerId'];
+        String prodId = documentSnapshot.data['prodId'];
+        String shopmediaUrl = documentSnapshot.data['shopmediaUrl'];
+        String productname = documentSnapshot.data['productname'];
+        String inr = documentSnapshot.data['inr'];
+        String usd = documentSnapshot.data['usd'];
+        String eur = documentSnapshot.data['eur'];
+        String gbp = documentSnapshot.data['gbp'];
         return
           FutureBuilder(
-            future: usersRef.doc(ownerId).get(),
+            future: usersRef.document(ownerId).get(),
             builder: (context, snapshot) {
               if (!snapshot.hasData) {
                 return circularProgress();
               }
-              Users user = Users.fromDocument(snapshot.data);
+              User user = User.fromDocument(snapshot.data);
 //          bool isPostOwner = currentUserId == ownerId;
               return Column(
                 children: <Widget>[
@@ -392,10 +392,10 @@ TGBeach(){
             },
           );
       },
-      query:  FirebaseFirestore.instance.collectionGroup('userProducts').orderBy('timestamp',descending: true)
+      query: Firestore.instance.collectionGroup('userProducts').orderBy('timestamp',descending: true)
           .where('Gender',isEqualTo: 'Teen-Girls')
           .where('Category',isEqualTo: 'TGBeach Bags')
-    ,isLive:true,
+
   );
 }
 TGTote(){
@@ -405,22 +405,22 @@ TGTote(){
       PaginateBuilderType.listView,
       itemBuilder: (index, context, documentSnapshot)   {
 //        DocumentSnapshot ds = snapshot.data.documents[index];
-        String ownerId = documentSnapshot.data()['ownerId'];
-        String prodId = documentSnapshot.data()['prodId'];
-        String shopmediaUrl = documentSnapshot.data()['shopmediaUrl'];
-        String productname = documentSnapshot.data()['productname'];
-        String inr = documentSnapshot.data()['inr'];
-        String usd = documentSnapshot.data()['usd'];
-        String eur = documentSnapshot.data()['eur'];
-        String gbp = documentSnapshot.data()['gbp'];
+        String ownerId = documentSnapshot.data['ownerId'];
+        String prodId = documentSnapshot.data['prodId'];
+        String shopmediaUrl = documentSnapshot.data['shopmediaUrl'];
+        String productname = documentSnapshot.data['productname'];
+        String inr = documentSnapshot.data['inr'];
+        String usd = documentSnapshot.data['usd'];
+        String eur = documentSnapshot.data['eur'];
+        String gbp = documentSnapshot.data['gbp'];
         return
           FutureBuilder(
-            future: usersRef.doc(ownerId).get(),
+            future: usersRef.document(ownerId).get(),
             builder: (context, snapshot) {
               if (!snapshot.hasData) {
                 return circularProgress();
               }
-              Users user = Users.fromDocument(snapshot.data);
+              User user = User.fromDocument(snapshot.data);
 //          bool isPostOwner = currentUserId == ownerId;
               return Column(
                 children: <Widget>[
@@ -467,10 +467,10 @@ TGTote(){
             },
           );
       },
-      query:  FirebaseFirestore.instance.collectionGroup('userProducts').orderBy('timestamp',descending: true)
+      query: Firestore.instance.collectionGroup('userProducts').orderBy('timestamp',descending: true)
           .where('Gender',isEqualTo: 'Teen-Girls')
           .where('Category',isEqualTo: 'TGTote Bags')
-    ,isLive:true,
+
   );
 }
 class BagsTG extends StatelessWidget {

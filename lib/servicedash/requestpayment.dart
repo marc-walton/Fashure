@@ -2,13 +2,13 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fashow/HomePage.dart';
 import 'package:flutter/material.dart';
 import 'package:fashow/Constants.dart';
+import 'package:flutter_icons/flutter_icons.dart';
 import 'package:flutter_currencies_tracker/flutter_currencies_tracker.dart';
 import 'package:fashow/progress.dart';
+import 'package:get/get.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 import 'package:uuid/uuid.dart';
-
-import 'package:modal_progress_hud/modal_progress_hud.dart';
 class ReqPay extends StatefulWidget {
   final String reciever;
 final String recievername;
@@ -904,11 +904,11 @@ print(currentUser.country);
 
     });
   if(currentUser.country == 'India') {
-    FirebaseFirestore.instance.collection('serviceCustomer')
-      .doc(widget.reciever)
+    Firestore.instance.collection('serviceCustomer')
+      .document(widget.reciever)
       .collection('customerService')
-      .doc(orderId)
-      .set({
+      .document(orderId)
+      .setData({
     'cusId':widget.reciever,
     'cusname':widget.recievername,
     "cusProfileImg": widget.recieverUrl,
@@ -937,11 +937,11 @@ print(currentUser.country);
   'advancepay':'false',
   'finalpay':'false',
   });
-  FirebaseFirestore.instance.collection('serviceSeller')
-      .doc(currentUser.id)
+  Firestore.instance.collection('serviceSeller')
+      .document(currentUser.id)
       .collection('sellerService')
-      .doc(orderId)
-      .set({
+      .document(orderId)
+      .setData({
     'cusId':widget.reciever,
     'cusname':widget.recievername,
     "cusProfileImg": widget.recieverUrl,
@@ -970,11 +970,11 @@ print(currentUser.country);
     'finalpay':'false',
 
   });
-  FirebaseFirestore.instance.collection('feed')
-      .doc(currentUser.id)
+  Firestore.instance.collection('feed')
+      .document(currentUser.id)
       .collection('feedItems')
-      .doc(orderId)
-      .set({
+      .document(orderId)
+      .setData({
     "type": "ReqPaymentI",
     "username": widget.recievername,
     "userId": widget.reciever,
@@ -986,11 +986,11 @@ print(currentUser.country);
     "read": 'false',
     'message':'Your invoice has been sent!',
   });
-  FirebaseFirestore.instance.collection('feed')
-      .doc(widget.reciever)
+  Firestore.instance.collection('feed')
+      .document(widget.reciever)
       .collection('feedItems')
-      .doc(orderId)
-      .set({
+      .document(orderId)
+      .setData({
     "type": "ReqPayment",
     "username": currentUser.displayName,
     "userId": currentUser.id,
@@ -1005,11 +1005,11 @@ print(currentUser.country);
 
   }
     else if(currentUser.country=='Europe') {
-  FirebaseFirestore.instance.collection('serviceCustomer')
-      .doc(widget.reciever)
+  Firestore.instance.collection('serviceCustomer')
+      .document(widget.reciever)
       .collection('customerService')
-      .doc(orderId)
-      .set({
+      .document(orderId)
+      .setData({
   'cusId':widget.reciever,
   'cusname':widget.recievername,
   "cusProfileImg": widget.recieverUrl,
@@ -1039,11 +1039,11 @@ print(currentUser.country);
   'advancepay':'false',
   'finalpay':'false',
   });
-  FirebaseFirestore.instance.collection('serviceSeller')
-      .doc(currentUser.id)
+  Firestore.instance.collection('serviceSeller')
+      .document(currentUser.id)
       .collection('sellerService')
-      .doc(orderId)
-      .set({
+      .document(orderId)
+      .setData({
     'cusId':widget.reciever,
     'cusname':widget.recievername,
     "cusProfileImg": widget.recieverUrl,
@@ -1075,11 +1075,11 @@ print(currentUser.country);
     'finalpay':'false',
 
   });
-FirebaseFirestore.instance.collection('feed')
-    .doc(currentUser.id)
+Firestore.instance.collection('feed')
+    .document(currentUser.id)
     .collection('feedItems')
-    .doc(orderId)
-    .set({
+    .document(orderId)
+    .setData({
   "type": "ReqPaymentI",
   "username": widget.recievername,
   "userId": widget.reciever,
@@ -1091,11 +1091,11 @@ FirebaseFirestore.instance.collection('feed')
   "read": 'false',
   'message':'Your invoice has been sent!',
 });
-FirebaseFirestore.instance.collection('feed')
-    .doc(widget.reciever)
+Firestore.instance.collection('feed')
+    .document(widget.reciever)
     .collection('feedItems')
-    .doc(orderId)
-    .set({
+    .document(orderId)
+    .setData({
   "type": "ReqPayment",
   "username": currentUser.displayName,
   "userId": currentUser.id,
@@ -1108,11 +1108,11 @@ FirebaseFirestore.instance.collection('feed')
 });
   }
   else if(currentUser.country=='USA') {
-  FirebaseFirestore.instance.collection('serviceCustomer')
-    .doc(widget.reciever)
+  Firestore.instance.collection('serviceCustomer')
+    .document(widget.reciever)
     .collection('customerService')
-    .doc(orderId)
-    .set({
+    .document(orderId)
+    .setData({
   'cusId':widget.reciever,
   'cusname':widget.recievername,
   "cusProfileImg": widget.recieverUrl,
@@ -1141,11 +1141,11 @@ FirebaseFirestore.instance.collection('feed')
   'advancepay':'false',
   'finalpay':'false',
 });
-FirebaseFirestore.instance.collection('serviceSeller')
-    .doc(currentUser.id)
+Firestore.instance.collection('serviceSeller')
+    .document(currentUser.id)
     .collection('sellerService')
-    .doc(orderId)
-    .set({
+    .document(orderId)
+    .setData({
   'cusId':widget.reciever,
   'cusname':widget.recievername,
   "cusProfileImg": widget.recieverUrl,
@@ -1175,11 +1175,11 @@ FirebaseFirestore.instance.collection('serviceSeller')
   'finalpay':'false',
 
 });
-FirebaseFirestore.instance.collection('feed')
-    .doc(currentUser.id)
+Firestore.instance.collection('feed')
+    .document(currentUser.id)
     .collection('feedItems')
-    .doc(orderId)
-    .set({
+    .document(orderId)
+    .setData({
   "type": "ReqPaymentI",
   "username": widget.recievername,
   "userId": widget.reciever,
@@ -1190,11 +1190,11 @@ FirebaseFirestore.instance.collection('feed')
   "read": 'false',
   'message':'Your invoice has been sent!',
 });
-FirebaseFirestore.instance.collection('feed')
-    .doc(widget.reciever)
+Firestore.instance.collection('feed')
+    .document(widget.reciever)
     .collection('feedItems')
-    .doc(orderId)
-    .set({
+    .document(orderId)
+    .setData({
   "type": "ReqPayment",
   "username": currentUser.displayName,
   "userId": currentUser.id,
@@ -1207,11 +1207,11 @@ FirebaseFirestore.instance.collection('feed')
 });
 }
   else if(currentUser.country=='UK') {
-  FirebaseFirestore.instance.collection('serviceCustomer')
-      .doc(widget.reciever)
+  Firestore.instance.collection('serviceCustomer')
+      .document(widget.reciever)
       .collection('customerService')
-      .doc(orderId)
-      .set({
+      .document(orderId)
+      .setData({
   'cusId':widget.reciever,
   'cusname':widget.recievername,
   "cusProfileImg": widget.recieverUrl,
@@ -1242,11 +1242,11 @@ FirebaseFirestore.instance.collection('feed')
   'advancepay':'false',
   'finalpay':'false',
   });
-  FirebaseFirestore.instance.collection('serviceSeller')
-      .doc(currentUser.id)
+  Firestore.instance.collection('serviceSeller')
+      .document(currentUser.id)
       .collection('sellerService')
-      .doc(orderId)
-      .set({
+      .document(orderId)
+      .setData({
     'cusId':widget.reciever,
     'cusname':widget.recievername,
     "cusProfileImg": widget.recieverUrl,
@@ -1279,11 +1279,11 @@ FirebaseFirestore.instance.collection('feed')
     'finalpay':'false',
 
   });
-FirebaseFirestore.instance.collection('feed')
-    .doc(currentUser.id)
+Firestore.instance.collection('feed')
+    .document(currentUser.id)
     .collection('feedItems')
-    .doc(orderId)
-    .set({
+    .document(orderId)
+    .setData({
   "type": "ReqPaymentI",
   "username": widget.recievername,
   "userId": widget.reciever,
@@ -1295,11 +1295,11 @@ FirebaseFirestore.instance.collection('feed')
   "read": 'false',
   'message':'Your invoice has been sent!',
 });
-FirebaseFirestore.instance.collection('feed')
-    .doc(widget.reciever)
+Firestore.instance.collection('feed')
+    .document(widget.reciever)
     .collection('feedItems')
-    .doc(orderId)
-    .set({
+    .document(orderId)
+    .setData({
   "type": "ReqPayment",
   "username": currentUser.displayName,
   "userId": currentUser.id,
@@ -1312,11 +1312,11 @@ FirebaseFirestore.instance.collection('feed')
 });
   }
 else {
-    FirebaseFirestore.instance.collection('serviceCustomer')
-        .doc(widget.reciever)
+    Firestore.instance.collection('serviceCustomer')
+        .document(widget.reciever)
         .collection('customerService')
-        .doc(orderId)
-        .set({
+        .document(orderId)
+        .setData({
       'cusId':widget.reciever,
       'cusname':widget.recievername,
       "cusProfileImg": widget.recieverUrl,
@@ -1345,11 +1345,11 @@ else {
       'advancepay':'false',
       'finalpay':'false',
     });
-    FirebaseFirestore.instance.collection('serviceSeller')
-        .doc(currentUser.id)
+    Firestore.instance.collection('serviceSeller')
+        .document(currentUser.id)
         .collection('sellerService')
-        .doc(orderId)
-        .set({
+        .document(orderId)
+        .setData({
       'cusId':widget.reciever,
       'cusname':widget.recievername,
       "cusProfileImg": widget.recieverUrl,
@@ -1379,11 +1379,11 @@ else {
       'finalpay':'false',
 
     });
-    FirebaseFirestore.instance.collection('feed')
-        .doc(currentUser.id)
+    Firestore.instance.collection('feed')
+        .document(currentUser.id)
         .collection('feedItems')
-        .doc(orderId)
-        .set({
+        .document(orderId)
+        .setData({
       "type": "ReqPaymentI",
       "username": widget.recievername,
       "userId": widget.reciever,
@@ -1394,11 +1394,11 @@ else {
       "read": 'false',
       'message':'Your invoice has been sent!',
     });
-    FirebaseFirestore.instance.collection('feed')
-        .doc(widget.reciever)
+    Firestore.instance.collection('feed')
+        .document(widget.reciever)
         .collection('feedItems')
-        .doc(orderId)
-        .set({
+        .document(orderId)
+        .setData({
       "type": "ReqPayment",
       "username": currentUser.displayName,
       "userId": currentUser.id,
@@ -1413,142 +1413,136 @@ else {
   }
   @override
   Widget build(BuildContext context) {
-    return       ModalProgressHUD(
-      color: Colors.black,
-      opacity: 1.0,
-      progressIndicator: Image.asset('assets/img/loading-76.gif'),
-      inAsyncCall: isUploading,
-      child: Scaffold(
-        appBar:  AppBar(      backgroundColor: kPrimaryColor,
+    return       Scaffold(
+      appBar:  AppBar(      backgroundColor: kPrimaryColor,
 
-          title: FittedBox(
-            fit:BoxFit.contain,
-            child: Text('Create new  invoice',
-              style: TextStyle(
-                  fontFamily :"MajorMonoDisplay",
-                  // fontSize:  35.0 ,
-                  color: Colors.white),),
-          ),
-          iconTheme: new IconThemeData(color: Colors.white),
+        title: FittedBox(
+          fit:BoxFit.contain,
+          child: Text('Create new  invoice',
+            style: TextStyle(
+                fontFamily :"MajorMonoDisplay",
+                // fontSize:  35.0 ,
+                color: Colors.white),),
         ),
+        iconTheme: new IconThemeData(color: Colors.white),
+      ),
 
-        body:
-        Container(decoration: BoxDecoration(
-            gradient: fabGradient
-        ) ,
-          alignment: Alignment.center,
-          child: Stack(
-            children:[
-              Container(
-                child: Form(
-                key: _formKey,
-                child: ListView(
-                  children: [
-                    isUploading ? linearProgress() : Text(""),
-                    Container(
-                      margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
-                      child: TextFormField(
-                        style:TextStyle(color:kText),
-                        controller: titleController,
-                        decoration: InputDecoration(
-                          enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
-                          focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+      body:
+      Container(decoration: BoxDecoration(
+          gradient: fabGradient
+      ) ,
+        alignment: Alignment.center,
+        child: Stack(
+          children:[
+            Container(
+              child: Form(
+              key: _formKey,
+              child: ListView(
+                children: [
+                  isUploading ? linearProgress() : Text(""),
+                  Container(
+                    margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+                    child: TextFormField(
+                      style:TextStyle(color:kText),
+                      controller: titleController,
+                      decoration: InputDecoration(
+                        enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+                        focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
 
-                          labelText: 'Title',labelStyle: TextStyle(color: kText),
-                          hintText: 'Title',
-                        ),
-                        textAlign: TextAlign.center,
-                        validator: (text) {
-                          if ( text.isEmpty) {
-                            return 'Title is empty';
-                          }
-                          return null;
-                        },
+                        labelText: 'Title',labelStyle: TextStyle(color: kText),
+                        hintText: 'Title',
                       ),
+                      textAlign: TextAlign.center,
+                      validator: (text) {
+                        if ( text.isEmpty) {
+                          return 'Title is empty';
+                        }
+                        return null;
+                      },
                     ),
-                    SizedBox( height: 8.0,),
-                    Container(
-                      margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
-                      child: TextFormField(
-                        style:TextStyle(color:kText),
+                  ),
+                  SizedBox( height: 8.0,),
+                  Container(
+                    margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+                    child: TextFormField(
+                      style:TextStyle(color:kText),
 
-                        keyboardType: TextInputType.multiline,
-                        maxLines: null,
-                        controller: detailsController,
-                        decoration: InputDecoration(
-                          border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
-                          enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
-                          focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+                      keyboardType: TextInputType.multiline,
+                      maxLines: null,
+                      controller: detailsController,
+                      decoration: InputDecoration(
+                        border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+                        enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+                        focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
 
-                          labelText: 'Description',labelStyle: TextStyle(color: kText),
-                          hintText: 'Description',
-                        ),
-                        textAlign: TextAlign.center,
-                        validator: (text) {
-                          if (text.isEmpty) {
-                            return 'Description is empty';
-                          }
-                          return null;
-                        },
+                        labelText: 'Description',labelStyle: TextStyle(color: kText),
+                        hintText: 'Description',
                       ),
+                      textAlign: TextAlign.center,
+                      validator: (text) {
+                        if (text.isEmpty) {
+                          return 'Description is empty';
+                        }
+                        return null;
+                      },
                     ),
-                    SizedBox( height: 8.0,),
-                    Divider(color: kGrey,),
-                    Text('Payment', style: TextStyle(
-      // fontFamily :"MajorMonoDisplay",
-      fontSize:  15.0 ,
-      color: Colors.white),),
-                currency(),
+                  ),
+                  SizedBox( height: 8.0,),
+                  Divider(color: kGrey,),
+                  Text('Payment', style: TextStyle(
+    // fontFamily :"MajorMonoDisplay",
+    fontSize:  15.0 ,
+    color: Colors.white),),
+              currency(),
 
  Container(
-                      margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
-                      child: RaisedButton(
-                        onPressed:() async{
-                          Fluttertoast.showToast(
-                              msg: "Please wait:Uploading", timeInSecForIos: 4);
+                    margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+                    child: RaisedButton(
+                      onPressed:() async{
+                        Fluttertoast.showToast(
+                            msg: "Please wait:Uploading", timeInSecForIos: 4);
 
-                          await INRUSD();
-                          await FINRUSD();
+                        await INRUSD();
+                        await FINRUSD();
 
-                          if(_formKey.currentState.validate()) {
-                            // ignore: unnecessary_statements
-                            isUploading ? null : Servicecatalog();
-                            Navigator.pop(context);
-                          }
+                        if(_formKey.currentState.validate()) {
+                          // ignore: unnecessary_statements
+                          isUploading ? null : Servicecatalog();
+                          Navigator.pop(context);
+                        }
 
-                        },
-                        color: kblue,
-                        child: Row(
-                          children: [
-                            Icon(Icons.add),
-                            Text('Send Invoice', style: TextStyle(
-                            // fontFamily :"MajorMonoDisplay",
-                            //   fontSize:  ,
-                              color: Colors.white),),
-      ],
-                        ),
-                      )
-                    ),
+                      },
+                      color: kblue,
+                      child: Row(
+                        children: [
+                          Icon(Icons.add),
+                          Text('Send Invoice', style: TextStyle(
+                          // fontFamily :"MajorMonoDisplay",
+                          //   fontSize:  ,
+                            color: Colors.white),),
+    ],
+                      ),
+                    )
+                  ),
 
-                  ],
-                ),
-
-            ),
+                ],
               ),
-              (_inProcess)?Container(
 
-                color: Colors.white,
-                height: MediaQuery.of(context).size.height * 0.95,
-                child: Center(
-                  child: CircularProgressIndicator(),
-                ),
-              ):Center(),
-              isUploading ? Center(child:  CircularProgressIndicator()) : Text(""),
-          ],
           ),
-        ),
+            ),
+            (_inProcess)?Container(
 
+              color: Colors.white,
+              height: MediaQuery.of(context).size.height * 0.95,
+              child: Center(
+                child: CircularProgressIndicator(),
+              ),
+            ):Center(),
+            isUploading ? Center(child:  CircularProgressIndicator()) : Text(""),
+        ],
+        ),
       ),
+
     );
   }
 }

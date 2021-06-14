@@ -6,28 +6,16 @@ import 'package:fashow/edit_profile.dart';
 import 'package:fashow/HomePage.dart';
 import 'package:alert_dialog/alert_dialog.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:translated_text/translated_text.dart';
-class Setting extends StatefulWidget {
+class Settings extends StatefulWidget {
   @override
-  _SettingState createState() => _SettingState();
+  _SettingsState createState() => _SettingsState();
 }
 
-class _SettingState extends State<Setting> {
+class _SettingsState extends State<Settings> {
   logout() async {
-    // await googleSignIn.signOut();
-    await FirebaseAuth.instance.signOut();
-    // Get.offAll(Homepage());
-    Navigator.pushAndRemoveUntil(
-        context,
-        MaterialPageRoute(
-            builder: (context) => Homepage(
-authis: false,
-            )),
-            (_) => false );
-    // Navigator.push(context, MaterialPageRoute(builder: (context) => Homepage()));
+    await googleSignIn.signOut();
+    Navigator.push(context, MaterialPageRoute(builder: (context) => Homepage()));
   }
-
   _launchPP() async {
     const url = 'https://fashure.xyz/privacy-policy';
     if (await canLaunch(url)) {
@@ -73,16 +61,12 @@ _launchH() async {
                 MaterialPageRoute(
                     builder: (context) => EditProfile(currentUserId: currentUser.id)));} ,
             child: ListTile(
-              leading :  TranslatedText("Edit Profile",to:'${currentUser.language}',
-                textStyle: TextStyle(
-                    fontFamily :"MajorMonoDisplay",
-                    fontSize:  15.0 ,
-                    color: kText),),
-                ),
-              // Text('', style: TextStyle(
-                //
+              leading :  Text('Edit Profile', style: TextStyle(
+                // fontFamily :"MajorMonoDisplay",
+                  fontSize:  15.0 ,
+                  color: kText),),
             ),
-
+          ),
           Divider(color: Colors.black),
           GestureDetector(
             onTap:()async{  Navigator.push(
@@ -90,37 +74,10 @@ _launchH() async {
                 MaterialPageRoute(
                     builder: (context) => Orders()));} ,
             child: ListTile(
-              leading :  TranslatedText("My Orders",to:'${currentUser.language}',
-    textStyle: TextStyle(
-    fontFamily :"MajorMonoDisplay",
-    fontSize:  15.0 ,
-    color: kText
-    ),),
-                         ),
-          ),
-          Divider(color: Colors.black),
-          GestureDetector(
-            onTap: (){
-              alert(
-                context,
-                // title: Text('Coming Soon'),
-                content: TranslatedText("Coming Soon",to:'${currentUser.language}',
-                  ),
-
-                textOK: TranslatedText("OK",to:'${currentUser.language}',
-                  ),
-              );
-              // Navigator.push(
-              //     context,
-              //     MaterialPageRoute(
-              //         builder: (context) => WalletPage()));
-            },
-            child: ListTile(
-              leading :
-              TranslatedText("Credits",to:'${currentUser.language}',
-                textStyle: TextStyle(
+              leading :  Text('My Orders', style: TextStyle(
+                // fontFamily :"MajorMonoDisplay",
                   fontSize:  15.0 ,
-                  color: kText),)
+                  color: kText),),
             ),
           ),
           Divider(color: Colors.black),
@@ -129,12 +86,8 @@ _launchH() async {
               alert(
                 context,
                 // title: Text('Coming Soon'),
-                content:TranslatedText("Coming Soon",to:'${currentUser.language}',
-                 ),
-
-                textOK: TranslatedText("Ok",to:'${currentUser.language}',
-                ),
-
+                content: Text('Coming Soon'),
+                textOK: Text('Ok'),
               );
               // Navigator.push(
               //     context,
@@ -142,45 +95,59 @@ _launchH() async {
               //         builder: (context) => WalletPage()));
             },
             child: ListTile(
-              leading : TranslatedText("Gift Cards",to:'${currentUser.language}',
-                textStyle: TextStyle(
-                fontSize:  15.0 ,
-                color: kText),),
-
+              leading :  Text('Credits', style: TextStyle(
+                // fontFamily :"MajorMonoDisplay",
+                  fontSize:  15.0 ,
+                  color: kText),),
+            ),
+          ),
+          Divider(color: Colors.black),
+          GestureDetector(
+            onTap: (){
+              alert(
+                context,
+                // title: Text('Coming Soon'),
+                content: Text('Coming Soon'),
+                textOK: Text('Ok'),
+              );
+              // Navigator.push(
+              //     context,
+              //     MaterialPageRoute(
+              //         builder: (context) => WalletPage()));
+            },
+            child: ListTile(
+              leading :  Text('Gift Cards', style: TextStyle(
+                // fontFamily :"MajorMonoDisplay",
+                  fontSize:  15.0 ,
+                  color: kText),),
             ),
           ),
           Divider(color: Colors.black),
           ListTile(
-            leading :  TranslatedText("More",to:'${currentUser.language}',
-    textStyle: TextStyle(
-    fontSize:  10.0 ,
-    color: kText),
-    ),),
-
+            leading :  Text('More', style: TextStyle(
+              // fontFamily :"MajorMonoDisplay",
+                fontSize:  10.0 ,
+                color: kText),),
+          ),
           GestureDetector(
             onTap: ()=>logout(),
             child: ListTile(
-              leading : TranslatedText("Log Out",to:'${currentUser.language}',
-                        textStyle: TextStyle(
-                        fontSize:  15.0 ,
-                        color: kText),),
-    ),),
-
-
+              leading :  Text('Log Out', style: TextStyle(
+                // fontFamily :"MajorMonoDisplay",
+                  fontSize:  15.0 ,
+                  color: kText),),
+            ),
+          ),
           Divider(color: Colors.black),
 
          GestureDetector(
             onTap:  ()=>_launchTS(),
 
             child: ListTile(
-              leading : TranslatedText("Terms of Service",to:'${currentUser.language}',
-                         textStyle: TextStyle(
-                         fontSize:  15.0 ,
-                         color: kText),),
-    ),),
-              Text('', style: TextStyle(
+              leading :  Text('Terms of Service', style: TextStyle(
                 // fontFamily :"MajorMonoDisplay",
-
+                  fontSize:  15.0 ,
+                  color: kText),),
             ),
           ),
           Divider(color: Colors.black),
@@ -189,12 +156,10 @@ _launchH() async {
 
             child: ListTile(
 
-              leading :
-              TranslatedText("Privacy Policy",to:'${currentUser.language}',
-                textStyle: TextStyle(
+              leading :  Text('Privacy Policy', style: TextStyle(
+                // fontFamily :"MajorMonoDisplay",
                   fontSize:  15.0 ,
-                      color: kText),),
-
+                  color: kText),),
             ),
           ),  Divider(color: Colors.black),
           GestureDetector(
@@ -202,14 +167,10 @@ _launchH() async {
 
             child: ListTile(
 
-              leading :  TranslatedText("Refund Policy",to:'${currentUser.language}',
-                textStyle: TextStyle(
+              leading :  Text('Refund Policy', style: TextStyle(
+                // fontFamily :"MajorMonoDisplay",
                   fontSize:  15.0 ,
-                  color: kText),)
-
-              // Text('', style: TextStyle(
-              //   // fontFamily :"MajorMonoDisplay",
-              //     ,
+                  color: kText),),
             ),
           ),
           Divider(color: Colors.black),
@@ -218,27 +179,24 @@ _launchH() async {
 
             child: ListTile(
 
-              leading : TranslatedText("Help",to:'${currentUser.language}',
-                textStyle: TextStyle(
-                    fontSize:  15.0 ,
-                    color: kText),)
-
+              leading :  Text('Help', style: TextStyle(
+                // fontFamily :"MajorMonoDisplay",
+                  fontSize:  15.0 ,
+                  color: kText),),
             ),
           ),
 
           Divider(color: Colors.black),
           Container(
             child: ListTile(
-              leading : TranslatedText("App Version",to:'${currentUser.language}',
-                        textStyle: TextStyle(
-                        fontSize:  15.0 ,
-                        color: kText),),
-
-              trailing :TranslatedText("0.0.1",to:'${currentUser.language}',
-                textStyle: TextStyle(
-                    fontSize:  15.0 ,
-                    color: kText),)
-
+              leading :  Text('App Version', style: TextStyle(
+                // fontFamily :"MajorMonoDisplay",
+                  fontSize:  15.0 ,
+                  color: kText),),
+              trailing :  Text('0.0.1', style: TextStyle(
+                // fontFamily :"MajorMonoDisplay",
+                  fontSize:  15.0 ,
+                  color: kText),),
 
             ),
           ),

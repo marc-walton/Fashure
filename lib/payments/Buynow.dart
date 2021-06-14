@@ -250,11 +250,11 @@ class _BuyNowState extends State<BuyNow> {
   _razorpay.clear();
   }
   payment(){
-    FirebaseFirestore.instance.collection('Payments')
-        .doc(widget.ownerId)
+    Firestore.instance.collection('Payments')
+        .document(widget.ownerId)
         .collection('SellerPayments')
-        .doc(orderId)
-        .set({
+        .document(orderId)
+        .setData({
       'ownerId':widget.ownerId,
       'orderId':orderId,
       'eur':widget.eur,
@@ -374,849 +374,849 @@ class _BuyNowState extends State<BuyNow> {
 
     if(widget.size=='XXXS'){
       xxxs--;
-      FirebaseFirestore.instance.collection('products')
-          .doc(widget.ownerId)
+      Firestore.instance.collection('products')
+          .document(widget.ownerId)
           .collection('userProducts')
-          .doc(widget.prodId)
-          .update({'xxxsQuantity':xxxs,
+          .document(widget.prodId)
+          .updateData({'xxxsQuantity':xxxs,
       });
     }
     else if(widget.size=='XXS'){
        xxs--;
-      FirebaseFirestore.instance.collection('products')
-          .doc(widget.ownerId)
+      Firestore.instance.collection('products')
+          .document(widget.ownerId)
           .collection('userProducts')
-          .doc(widget.prodId)
-          .update({'xxsQuantity':xxs,
+          .document(widget.prodId)
+          .updateData({'xxsQuantity':xxs,
 
       });
     }
     else if(widget.size=='XS'){
        xs--;
-      FirebaseFirestore.instance.collection('products')
-          .doc(widget.ownerId)
+      Firestore.instance.collection('products')
+          .document(widget.ownerId)
           .collection('userProducts')
-          .doc(widget.prodId)
-          .update({'xsQuantity':xs,
+          .document(widget.prodId)
+          .updateData({'xsQuantity':xs,
 
       });
     }
     else if(widget.size=='S'){
        s--;
-      FirebaseFirestore.instance.collection('products')
-          .doc(widget.ownerId)
+      Firestore.instance.collection('products')
+          .document(widget.ownerId)
           .collection('userProducts')
-          .doc(widget.prodId)
-          .update({'sQuantity':s,
+          .document(widget.prodId)
+          .updateData({'sQuantity':s,
 
       });
     }
     else if(widget.size=='M'){
        m--;
-      FirebaseFirestore.instance.collection('products')
-          .doc(widget.ownerId)
+      Firestore.instance.collection('products')
+          .document(widget.ownerId)
           .collection('userProducts')
-          .doc(widget.prodId)
-          .update({'mQuantity':m,
+          .document(widget.prodId)
+          .updateData({'mQuantity':m,
 
       });
     }
     else if(widget.size=='L'){
        l--;
-      FirebaseFirestore.instance.collection('products')
-          .doc(widget.ownerId)
+      Firestore.instance.collection('products')
+          .document(widget.ownerId)
           .collection('userProducts')
-          .doc(widget.prodId)
-          .update({'lQuantity':l,
+          .document(widget.prodId)
+          .updateData({'lQuantity':l,
 
       });
     }
     else if(widget.size=='XL'){
       xl--;
-      FirebaseFirestore.instance.collection('products')
-          .doc(widget.ownerId)
+      Firestore.instance.collection('products')
+          .document(widget.ownerId)
           .collection('userProducts')
-          .doc(widget.prodId)
-          .update({'xlQuantity':xl,
+          .document(widget.prodId)
+          .updateData({'xlQuantity':xl,
 
       });
     }
     else if(widget.size=='XXL'){
       xxl--;
-      FirebaseFirestore.instance.collection('products')
-          .doc(widget.ownerId)
+      Firestore.instance.collection('products')
+          .document(widget.ownerId)
           .collection('userProducts')
-          .doc(widget.prodId)
-          .update({'xxlQuantity':xxl,
+          .document(widget.prodId)
+          .updateData({'xxlQuantity':xxl,
 
       });
     }
     else if(widget.size=='XXXL'){
       xxxl--;
-      FirebaseFirestore.instance.collection('products')
-          .doc(widget.ownerId)
+      Firestore.instance.collection('products')
+          .document(widget.ownerId)
           .collection('userProducts')
-          .doc(widget.prodId)
-          .update({'xxxlQuantity':xxxl,
+          .document(widget.prodId)
+          .updateData({'xxxlQuantity':xxxl,
 
       });
     }
     else if(widget.size=='4XL'){
 
       fourxl--;
-      FirebaseFirestore.instance.collection('products')
-          .doc(widget.ownerId)
+      Firestore.instance.collection('products')
+          .document(widget.ownerId)
           .collection('userProducts')
-          .doc(widget.prodId)
-          .update({'4xlQuantity':fourxl,
+          .document(widget.prodId)
+          .updateData({'4xlQuantity':fourxl,
 
       });
 
     }
     else if(widget.size=='5XL'){
       fivexl--;
-      FirebaseFirestore.instance.collection('products')
-          .doc(widget.ownerId)
+      Firestore.instance.collection('products')
+          .document(widget.ownerId)
           .collection('userProducts')
-          .doc(widget.prodId)
-          .update({'5xlQuantity':fivexl,
+          .document(widget.prodId)
+          .updateData({'5xlQuantity':fivexl,
 
       });
     }
     else if(widget.size=='6XL'){
       sixxl--;
-      FirebaseFirestore.instance.collection('products')
-          .doc(widget.ownerId)
+      Firestore.instance.collection('products')
+          .document(widget.ownerId)
           .collection('userProducts')
-          .doc(widget.prodId)
-          .update({'6xlQuantity':sixxl,
+          .document(widget.prodId)
+          .updateData({'6xlQuantity':sixxl,
 
       });
     }
     else if(widget.size=='7XL'){
       sevenxl--;
-      FirebaseFirestore.instance.collection('products')
-          .doc(widget.ownerId)
+      Firestore.instance.collection('products')
+          .document(widget.ownerId)
           .collection('userProducts')
-          .doc(widget.prodId)
-          .update({'7xlQuantity':sevenxl,
+          .document(widget.prodId)
+          .updateData({'7xlQuantity':sevenxl,
 
       });
     }
     else if(widget.size=='8XL'){
       eightxl--;
-      FirebaseFirestore.instance.collection('products')
-          .doc(widget.ownerId)
+      Firestore.instance.collection('products')
+          .document(widget.ownerId)
           .collection('userProducts')
-          .doc(widget.prodId)
-          .update({'8xlQuantity':eightxl,
+          .document(widget.prodId)
+          .updateData({'8xlQuantity':eightxl,
 
       });
     }
     else  if(widget.size=='MTO XXXS'){
       mto--;
-      FirebaseFirestore.instance.collection('products')
-          .doc(widget.ownerId)
+      Firestore.instance.collection('products')
+          .document(widget.ownerId)
           .collection('userProducts')
-          .doc(widget.prodId)
-          .update({'mtoQuantity':mto,
+          .document(widget.prodId)
+          .updateData({'mtoQuantity':mto,
 
       });
     }
     else if(widget.size=='MTO XXS'){
       mto--;
-      FirebaseFirestore.instance.collection('products')
-          .doc(widget.ownerId)
+      Firestore.instance.collection('products')
+          .document(widget.ownerId)
           .collection('userProducts')
-          .doc(widget.prodId)
-          .update({'mtoQuantity':mto,
+          .document(widget.prodId)
+          .updateData({'mtoQuantity':mto,
 
       });
     }
     else if(widget.size=='MTO XS'){
       mto--;
-      FirebaseFirestore.instance.collection('products')
-          .doc(widget.ownerId)
+      Firestore.instance.collection('products')
+          .document(widget.ownerId)
           .collection('userProducts')
-          .doc(widget.prodId)
-          .update({'mtoQuantity':mto,
+          .document(widget.prodId)
+          .updateData({'mtoQuantity':mto,
 
       });
     }
     else if(widget.size=='MTO S'){
       mto--;
-      FirebaseFirestore.instance.collection('products')
-          .doc(widget.ownerId)
+      Firestore.instance.collection('products')
+          .document(widget.ownerId)
           .collection('userProducts')
-          .doc(widget.prodId)
-          .update({'mtoQuantity':mto,
+          .document(widget.prodId)
+          .updateData({'mtoQuantity':mto,
 
       });
     }
     else if(widget.size=='MTO M'){
       mto--;
-      FirebaseFirestore.instance.collection('products')
-          .doc(widget.ownerId)
+      Firestore.instance.collection('products')
+          .document(widget.ownerId)
           .collection('userProducts')
-          .doc(widget.prodId)
-          .update({'mtoQuantity':mto,
+          .document(widget.prodId)
+          .updateData({'mtoQuantity':mto,
 
       });
     }
     else if(widget.size=='MTO L'){
       mto--;
-      FirebaseFirestore.instance.collection('products')
-          .doc(widget.ownerId)
+      Firestore.instance.collection('products')
+          .document(widget.ownerId)
           .collection('userProducts')
-          .doc(widget.prodId)
-          .update({'mtoQuantity':mto,
+          .document(widget.prodId)
+          .updateData({'mtoQuantity':mto,
 
       });
     }
     else if(widget.size=='MTO XL'){
       mto--;
-      FirebaseFirestore.instance.collection('products')
-          .doc(widget.ownerId)
+      Firestore.instance.collection('products')
+          .document(widget.ownerId)
           .collection('userProducts')
-          .doc(widget.prodId)
-          .update({'mtoQuantity':mto,
+          .document(widget.prodId)
+          .updateData({'mtoQuantity':mto,
 
       });
     }
     else if(widget.size=='MTO XXL'){
       mto--;
-      FirebaseFirestore.instance.collection('products')
-          .doc(widget.ownerId)
+      Firestore.instance.collection('products')
+          .document(widget.ownerId)
           .collection('userProducts')
-          .doc(widget.prodId)
-          .update({'mtoQuantity':mto,
+          .document(widget.prodId)
+          .updateData({'mtoQuantity':mto,
 
       });
     }
     else if(widget.size=='MTO XXXL'){
       mto--;
-      FirebaseFirestore.instance.collection('products')
-          .doc(widget.ownerId)
+      Firestore.instance.collection('products')
+          .document(widget.ownerId)
           .collection('userProducts')
-          .doc(widget.prodId)
-          .update({'mtoQuantity':mto,
+          .document(widget.prodId)
+          .updateData({'mtoQuantity':mto,
 
       });
     }
     else if(widget.size=='MTO 4XL'){
       mto--;
-      FirebaseFirestore.instance.collection('products')
-          .doc(widget.ownerId)
+      Firestore.instance.collection('products')
+          .document(widget.ownerId)
           .collection('userProducts')
-          .doc(widget.prodId)
-          .update({'mtoQuantity':mto,
+          .document(widget.prodId)
+          .updateData({'mtoQuantity':mto,
 
       });
     }
     else if(widget.size=='MTO 5XL'){
       mto--;
-      FirebaseFirestore.instance.collection('products')
-          .doc(widget.ownerId)
+      Firestore.instance.collection('products')
+          .document(widget.ownerId)
           .collection('userProducts')
-          .doc(widget.prodId)
-          .update({'mtoQuantity':mto,
+          .document(widget.prodId)
+          .updateData({'mtoQuantity':mto,
 
       });
     }
     else if(widget.size=='MTO 6XL'){
       mto--;
-      FirebaseFirestore.instance.collection('products')
-          .doc(widget.ownerId)
+      Firestore.instance.collection('products')
+          .document(widget.ownerId)
           .collection('userProducts')
-          .doc(widget.prodId)
-          .update({'mtoQuantity':mto,
+          .document(widget.prodId)
+          .updateData({'mtoQuantity':mto,
 
       });
     }
     else if(widget.size=='MTO 7XL'){
       mto--;
-      FirebaseFirestore.instance.collection('products')
-          .doc(widget.ownerId)
+      Firestore.instance.collection('products')
+          .document(widget.ownerId)
           .collection('userProducts')
-          .doc(widget.prodId)
-          .update({'mtoQuantity':mto,
+          .document(widget.prodId)
+          .updateData({'mtoQuantity':mto,
 
       });
     }
     else if(widget.size=='MTO 8XL'){
       mto--;
-      FirebaseFirestore.instance.collection('products')
-          .doc(widget.ownerId)
+      Firestore.instance.collection('products')
+          .document(widget.ownerId)
           .collection('userProducts')
-          .doc(widget.prodId)
-          .update({'mtoQuantity':mto,
+          .document(widget.prodId)
+          .updateData({'mtoQuantity':mto,
 
       });
     }
     else if(widget.size=='Free Size'){
       freeSize--;
-      FirebaseFirestore.instance.collection('products')
-          .doc(widget.ownerId)
+      Firestore.instance.collection('products')
+          .document(widget.ownerId)
           .collection('userProducts')
-          .doc(widget.prodId)
-          .update({'freesizeQuantity':freeSize,
+          .document(widget.prodId)
+          .updateData({'freesizeQuantity':freeSize,
 
       });
     }
     else if(widget.size=='(US)3-1/2'){
       Shoe1--;
-      FirebaseFirestore.instance.collection('products')
-          .doc(widget.ownerId)
+      Firestore.instance.collection('products')
+          .document(widget.ownerId)
           .collection('userProducts')
-          .doc(widget.prodId)
-          .update({'Shoe1':Shoe1,
+          .document(widget.prodId)
+          .updateData({'Shoe1':Shoe1,
 
       });
     }
     else if(widget.size=='(US)4'){
       Shoe2--;
-      FirebaseFirestore.instance.collection('products')
-          .doc(widget.ownerId)
+      Firestore.instance.collection('products')
+          .document(widget.ownerId)
           .collection('userProducts')
-          .doc(widget.prodId)
-          .update({'Shoe2':Shoe2,
+          .document(widget.prodId)
+          .updateData({'Shoe2':Shoe2,
 
       });
     }
     else if(widget.size=='(US)4-1/2'){
       Shoe3--;
-      FirebaseFirestore.instance.collection('products')
-          .doc(widget.ownerId)
+      Firestore.instance.collection('products')
+          .document(widget.ownerId)
           .collection('userProducts')
-          .doc(widget.prodId)
-          .update({'Shoe3':Shoe3,
+          .document(widget.prodId)
+          .updateData({'Shoe3':Shoe3,
 
       });
     }
     else if(widget.size=='(US)5'){
       Shoe4--;
-      FirebaseFirestore.instance.collection('products')
-          .doc(widget.ownerId)
+      Firestore.instance.collection('products')
+          .document(widget.ownerId)
           .collection('userProducts')
-          .doc(widget.prodId)
-          .update({'Shoe4':Shoe4,
+          .document(widget.prodId)
+          .updateData({'Shoe4':Shoe4,
 
       });
     }
     else if(widget.size=='(US)5-1/2'){
       Shoe5--;
-      FirebaseFirestore.instance.collection('products')
-          .doc(widget.ownerId)
+      Firestore.instance.collection('products')
+          .document(widget.ownerId)
           .collection('userProducts')
-          .doc(widget.prodId)
-          .update({'Shoe5':Shoe5,
+          .document(widget.prodId)
+          .updateData({'Shoe5':Shoe5,
 
       });
     }
     else if(widget.size=='(US)6'){
       Shoe6--;
-      FirebaseFirestore.instance.collection('products')
-          .doc(widget.ownerId)
+      Firestore.instance.collection('products')
+          .document(widget.ownerId)
           .collection('userProducts')
-          .doc(widget.prodId)
-          .update({'Shoe6':Shoe6,
+          .document(widget.prodId)
+          .updateData({'Shoe6':Shoe6,
 
       });
     }
     else if(widget.size=='(US)6-1/2'){
       Shoe7--;
-      FirebaseFirestore.instance.collection('products')
-          .doc(widget.ownerId)
+      Firestore.instance.collection('products')
+          .document(widget.ownerId)
           .collection('userProducts')
-          .doc(widget.prodId)
-          .update({'Shoe7':Shoe7,
+          .document(widget.prodId)
+          .updateData({'Shoe7':Shoe7,
 
       });
     }
     else if(widget.size=='(US)7'){
       Shoe8--;
-      FirebaseFirestore.instance.collection('products')
-          .doc(widget.ownerId)
+      Firestore.instance.collection('products')
+          .document(widget.ownerId)
           .collection('userProducts')
-          .doc(widget.prodId)
-          .update({'Shoe8':Shoe8,
+          .document(widget.prodId)
+          .updateData({'Shoe8':Shoe8,
 
       });
     }
     else if(widget.size=='(US)7-1/2'){
       Shoe9--;
-      FirebaseFirestore.instance.collection('products')
-          .doc(widget.ownerId)
+      Firestore.instance.collection('products')
+          .document(widget.ownerId)
           .collection('userProducts')
-          .doc(widget.prodId)
-          .update({'Shoe9':Shoe9,
+          .document(widget.prodId)
+          .updateData({'Shoe9':Shoe9,
 
       });
     }
     else if(widget.size=='(US)8'){
       Shoe10--;
-      FirebaseFirestore.instance.collection('products')
-          .doc(widget.ownerId)
+      Firestore.instance.collection('products')
+          .document(widget.ownerId)
           .collection('userProducts')
-          .doc(widget.prodId)
-          .update({'Shoe10':Shoe10,
+          .document(widget.prodId)
+          .updateData({'Shoe10':Shoe10,
 
       });
     }
     else if(widget.size=='(US)8-1/2'){
       Shoe11--;
-      FirebaseFirestore.instance.collection('products')
-          .doc(widget.ownerId)
+      Firestore.instance.collection('products')
+          .document(widget.ownerId)
           .collection('userProducts')
-          .doc(widget.prodId)
-          .update({'Shoe11':Shoe11,
+          .document(widget.prodId)
+          .updateData({'Shoe11':Shoe11,
 
       });
     }
     else if(widget.size=='(US)9'){
       Shoe12--;
-      FirebaseFirestore.instance.collection('products')
-          .doc(widget.ownerId)
+      Firestore.instance.collection('products')
+          .document(widget.ownerId)
           .collection('userProducts')
-          .doc(widget.prodId)
-          .update({'Shoe12':Shoe12,
+          .document(widget.prodId)
+          .updateData({'Shoe12':Shoe12,
 
       });
     }
     else if(widget.size=='(US)9-1/2'){
       Shoe13--;
-      FirebaseFirestore.instance.collection('products')
-          .doc(widget.ownerId)
+      Firestore.instance.collection('products')
+          .document(widget.ownerId)
           .collection('userProducts')
-          .doc(widget.prodId)
-          .update({'Shoe13':Shoe13,
+          .document(widget.prodId)
+          .updateData({'Shoe13':Shoe13,
 
       });
     }
     else if(widget.size=='(US)10'){
       Shoe14--;
-      FirebaseFirestore.instance.collection('products')
-          .doc(widget.ownerId)
+      Firestore.instance.collection('products')
+          .document(widget.ownerId)
           .collection('userProducts')
-          .doc(widget.prodId)
-          .update({'Shoe14':Shoe14,
+          .document(widget.prodId)
+          .updateData({'Shoe14':Shoe14,
 
       });
     }
     else if(widget.size=='(US)10-1/2'){
       Shoe15--;
-      FirebaseFirestore.instance.collection('products')
-          .doc(widget.ownerId)
+      Firestore.instance.collection('products')
+          .document(widget.ownerId)
           .collection('userProducts')
-          .doc(widget.prodId)
-          .update({'Shoe15':Shoe15,
+          .document(widget.prodId)
+          .updateData({'Shoe15':Shoe15,
 
       });
     }
     else if(widget.size=='(US)11'){
       Shoe16--;
-      FirebaseFirestore.instance.collection('products')
-          .doc(widget.ownerId)
+      Firestore.instance.collection('products')
+          .document(widget.ownerId)
           .collection('userProducts')
-          .doc(widget.prodId)
-          .update({'Shoe16':Shoe16--,
+          .document(widget.prodId)
+          .updateData({'Shoe16':Shoe16--,
 
       });
     }
     else if(widget.size=='(US)11-1/2'){
       Shoe17--;
-      FirebaseFirestore.instance.collection('products')
-          .doc(widget.ownerId)
+      Firestore.instance.collection('products')
+          .document(widget.ownerId)
           .collection('userProducts')
-          .doc(widget.prodId)
-          .update({'Shoe17':Shoe17,
+          .document(widget.prodId)
+          .updateData({'Shoe17':Shoe17,
 
       });
     }
     else if(widget.size=='(US)12'){
       Shoe18--;
-      FirebaseFirestore.instance.collection('products')
-          .doc(widget.ownerId)
+      Firestore.instance.collection('products')
+          .document(widget.ownerId)
           .collection('userProducts')
-          .doc(widget.prodId)
-          .update({'Shoe18':Shoe18,
+          .document(widget.prodId)
+          .updateData({'Shoe18':Shoe18,
 
       });
     }
     else if(widget.size=='(US)12-1/2'){
       Shoe19--;
-      FirebaseFirestore.instance.collection('products')
-          .doc(widget.ownerId)
+      Firestore.instance.collection('products')
+          .document(widget.ownerId)
           .collection('userProducts')
-          .doc(widget.prodId)
-          .update({'Shoe19':Shoe19,
+          .document(widget.prodId)
+          .updateData({'Shoe19':Shoe19,
 
       });
     }
     else if(widget.size=='(US)13'){
       Shoe20--;
-      FirebaseFirestore.instance.collection('products')
-          .doc(widget.ownerId)
+      Firestore.instance.collection('products')
+          .document(widget.ownerId)
           .collection('userProducts')
-          .doc(widget.prodId)
-          .update({'Shoe20':Shoe20,
+          .document(widget.prodId)
+          .updateData({'Shoe20':Shoe20,
 
       });
     }
     else if(widget.size=='(US)13-1/2'){
       Shoe21--;
-      FirebaseFirestore.instance.collection('products')
-          .doc(widget.ownerId)
+      Firestore.instance.collection('products')
+          .document(widget.ownerId)
           .collection('userProducts')
-          .doc(widget.prodId)
-          .update({'Shoe21':Shoe21,
+          .document(widget.prodId)
+          .updateData({'Shoe21':Shoe21,
 
       });
     }
 //W
     else if(widget.size=='5'){
       Shoe1--;
-      FirebaseFirestore.instance.collection('products')
-          .doc(widget.ownerId)
+      Firestore.instance.collection('products')
+          .document(widget.ownerId)
           .collection('userProducts')
-          .doc(widget.prodId)
-          .update({'Shoe1':Shoe1,
+          .document(widget.prodId)
+          .updateData({'Shoe1':Shoe1,
 
       });
     }
     else if(widget.size=='5-1/2'){
       Shoe2--;
-      FirebaseFirestore.instance.collection('products')
-          .doc(widget.ownerId)
+      Firestore.instance.collection('products')
+          .document(widget.ownerId)
           .collection('userProducts')
-          .doc(widget.prodId)
-          .update({'Shoe2':Shoe2,
+          .document(widget.prodId)
+          .updateData({'Shoe2':Shoe2,
 
       });
     }
     else if(widget.size=='6'){
       Shoe3--;
-      FirebaseFirestore.instance.collection('products')
-          .doc(widget.ownerId)
+      Firestore.instance.collection('products')
+          .document(widget.ownerId)
           .collection('userProducts')
-          .doc(widget.prodId)
-          .update({'Shoe3':Shoe3,
+          .document(widget.prodId)
+          .updateData({'Shoe3':Shoe3,
 
       });
     }
     else if(widget.size=='6-1/2'){
       Shoe4--;
-      FirebaseFirestore.instance.collection('products')
-          .doc(widget.ownerId)
+      Firestore.instance.collection('products')
+          .document(widget.ownerId)
           .collection('userProducts')
-          .doc(widget.prodId)
-          .update({'Shoe4':Shoe4,
+          .document(widget.prodId)
+          .updateData({'Shoe4':Shoe4,
 
       });
     }
     else if(widget.size=='7'){
       Shoe5--;
-      FirebaseFirestore.instance.collection('products')
-          .doc(widget.ownerId)
+      Firestore.instance.collection('products')
+          .document(widget.ownerId)
           .collection('userProducts')
-          .doc(widget.prodId)
-          .update({'Shoe5':Shoe5,
+          .document(widget.prodId)
+          .updateData({'Shoe5':Shoe5,
 
       });
     }
     else if(widget.size=='7-1/2'){
       Shoe6--;
-      FirebaseFirestore.instance.collection('products')
-          .doc(widget.ownerId)
+      Firestore.instance.collection('products')
+          .document(widget.ownerId)
           .collection('userProducts')
-          .doc(widget.prodId)
-          .update({'Shoe6':Shoe6,
+          .document(widget.prodId)
+          .updateData({'Shoe6':Shoe6,
 
       });
     }
     else if(widget.size=='8'){
       Shoe7--;
-      FirebaseFirestore.instance.collection('products')
-          .doc(widget.ownerId)
+      Firestore.instance.collection('products')
+          .document(widget.ownerId)
           .collection('userProducts')
-          .doc(widget.prodId)
-          .update({'Shoe7':Shoe7,
+          .document(widget.prodId)
+          .updateData({'Shoe7':Shoe7,
 
       });
     }
     else if(widget.size=='8-1/2'){
       Shoe8--;
-      FirebaseFirestore.instance.collection('products')
-          .doc(widget.ownerId)
+      Firestore.instance.collection('products')
+          .document(widget.ownerId)
           .collection('userProducts')
-          .doc(widget.prodId)
-          .update({'Shoe8':Shoe8,
+          .document(widget.prodId)
+          .updateData({'Shoe8':Shoe8,
 
       });
     }
     else if(widget.size=='9'){
       Shoe9--;
-      FirebaseFirestore.instance.collection('products')
-          .doc(widget.ownerId)
+      Firestore.instance.collection('products')
+          .document(widget.ownerId)
           .collection('userProducts')
-          .doc(widget.prodId)
-          .update({'Shoe9':Shoe9,
+          .document(widget.prodId)
+          .updateData({'Shoe9':Shoe9,
 
       });
     }
     else if(widget.size=='9-1/2'){
       Shoe10--;
-      FirebaseFirestore.instance.collection('products')
-          .doc(widget.ownerId)
+      Firestore.instance.collection('products')
+          .document(widget.ownerId)
           .collection('userProducts')
-          .doc(widget.prodId)
-          .update({'Shoe10':Shoe10,
+          .document(widget.prodId)
+          .updateData({'Shoe10':Shoe10,
 
       });
     }
     else if(widget.size=='10'){
       Shoe11--;
-      FirebaseFirestore.instance.collection('products')
-          .doc(widget.ownerId)
+      Firestore.instance.collection('products')
+          .document(widget.ownerId)
           .collection('userProducts')
-          .doc(widget.prodId)
-          .update({'Shoe11':Shoe11,
+          .document(widget.prodId)
+          .updateData({'Shoe11':Shoe11,
 
       });
     }
     else if(widget.size=='10-1/2'){
       Shoe12--;
-      FirebaseFirestore.instance.collection('products')
-          .doc(widget.ownerId)
+      Firestore.instance.collection('products')
+          .document(widget.ownerId)
           .collection('userProducts')
-          .doc(widget.prodId)
-          .update({'Shoe12':Shoe12,
+          .document(widget.prodId)
+          .updateData({'Shoe12':Shoe12,
 
       });
     }
     else if(widget.size=='12'){
       Shoe13--;
-      FirebaseFirestore.instance.collection('products')
-          .doc(widget.ownerId)
+      Firestore.instance.collection('products')
+          .document(widget.ownerId)
           .collection('userProducts')
-          .doc(widget.prodId)
-          .update({'Shoe13':Shoe13,
+          .document(widget.prodId)
+          .updateData({'Shoe13':Shoe13,
 
       });
     }
     else if(widget.size=='13'){
       Shoe14--;
-      FirebaseFirestore.instance.collection('products')
-          .doc(widget.ownerId)
+      Firestore.instance.collection('products')
+          .document(widget.ownerId)
           .collection('userProducts')
-          .doc(widget.prodId)
-          .update({'Shoe14':Shoe14,
+          .document(widget.prodId)
+          .updateData({'Shoe14':Shoe14,
 
       });
     }
     else if(widget.size=='14'){
       Shoe15--;
-      FirebaseFirestore.instance.collection('products')
-          .doc(widget.ownerId)
+      Firestore.instance.collection('products')
+          .document(widget.ownerId)
           .collection('userProducts')
-          .doc(widget.prodId)
-          .update({'Shoe15':Shoe15,
+          .document(widget.prodId)
+          .updateData({'Shoe15':Shoe15,
 
       });
     }
     else if(widget.size=='15-1/2'){
       Shoe16--;
-      FirebaseFirestore.instance.collection('products')
-          .doc(widget.ownerId)
+      Firestore.instance.collection('products')
+          .document(widget.ownerId)
           .collection('userProducts')
-          .doc(widget.prodId)
-          .update({'Shoe16':Shoe16,
+          .document(widget.prodId)
+          .updateData({'Shoe16':Shoe16,
 
       });
     }
 //B
     if(widget.size=='0-3 M'){
       xxxs--;
-      FirebaseFirestore.instance.collection('products')
-          .doc(widget.ownerId)
+      Firestore.instance.collection('products')
+          .document(widget.ownerId)
           .collection('userProducts')
-          .doc(widget.prodId)
-          .update({'xxxsQuantity':xxxs,
+          .document(widget.prodId)
+          .updateData({'xxxsQuantity':xxxs,
 
       });
     }
     else if(widget.size=='3-6 M'){
       xxs--;
-      FirebaseFirestore.instance.collection('products')
-          .doc(widget.ownerId)
+      Firestore.instance.collection('products')
+          .document(widget.ownerId)
           .collection('userProducts')
-          .doc(widget.prodId)
-          .update({'xxsQuantity':xxs,
+          .document(widget.prodId)
+          .updateData({'xxsQuantity':xxs,
 
       });
     }
     else if(widget.size=='6-9 M'){
       xs--;
-      FirebaseFirestore.instance.collection('products')
-          .doc(widget.ownerId)
+      Firestore.instance.collection('products')
+          .document(widget.ownerId)
           .collection('userProducts')
-          .doc(widget.prodId)
-          .update({'xsQuantity':xs,
+          .document(widget.prodId)
+          .updateData({'xsQuantity':xs,
 
       });
     }
     else if(widget.size=='9-12 M'){
       s--;
-      FirebaseFirestore.instance.collection('products')
-          .doc(widget.ownerId)
+      Firestore.instance.collection('products')
+          .document(widget.ownerId)
           .collection('userProducts')
-          .doc(widget.prodId)
-          .update({'sQuantity':s,
+          .document(widget.prodId)
+          .updateData({'sQuantity':s,
 
       });
     }
     else if(widget.size=='12-18 M'){
       m--;
-      FirebaseFirestore.instance.collection('products')
-          .doc(widget.ownerId)
+      Firestore.instance.collection('products')
+          .document(widget.ownerId)
           .collection('userProducts')
-          .doc(widget.prodId)
-          .update({'mQuantity':m,
+          .document(widget.prodId)
+          .updateData({'mQuantity':m,
 
       });
     }
     else if(widget.size=='18-24 M'){
       l--;
-      FirebaseFirestore.instance.collection('products')
-          .doc(widget.ownerId)
+      Firestore.instance.collection('products')
+          .document(widget.ownerId)
           .collection('userProducts')
-          .doc(widget.prodId)
-          .update({'lQuantity':l,
+          .document(widget.prodId)
+          .updateData({'lQuantity':l,
 
       });
     }
     else if(widget.size=='MTO 0-3 M'){
       mto--;
-      FirebaseFirestore.instance.collection('products')
-          .doc(widget.ownerId)
+      Firestore.instance.collection('products')
+          .document(widget.ownerId)
           .collection('userProducts')
-          .doc(widget.prodId)
-          .update({'mtoQuantity':mto,
+          .document(widget.prodId)
+          .updateData({'mtoQuantity':mto,
       });
     }
     else if(widget.size=='MTO 3-6 M'){
       mto--;
-      FirebaseFirestore.instance.collection('products')
-          .doc(widget.ownerId)
+      Firestore.instance.collection('products')
+          .document(widget.ownerId)
           .collection('userProducts')
-          .doc(widget.prodId)
-          .update({'mtoQuantity':mto,
+          .document(widget.prodId)
+          .updateData({'mtoQuantity':mto,
       });
     }
     else if(widget.size=='MTO 6-9 M'){
       mto--;
-      FirebaseFirestore.instance.collection('products')
-          .doc(widget.ownerId)
+      Firestore.instance.collection('products')
+          .document(widget.ownerId)
           .collection('userProducts')
-          .doc(widget.prodId)
-          .update({'mtoQuantity':mto,
+          .document(widget.prodId)
+          .updateData({'mtoQuantity':mto,
       });
     }
     else if(widget.size=='MTO 9-12 M'){
       mto--;
-      FirebaseFirestore.instance.collection('products')
-          .doc(widget.ownerId)
+      Firestore.instance.collection('products')
+          .document(widget.ownerId)
           .collection('userProducts')
-          .doc(widget.prodId)
-          .update({'mtoQuantity':mto,
+          .document(widget.prodId)
+          .updateData({'mtoQuantity':mto,
       });
     }
     else if(widget.size=='MTO 12-18 M'){
       mto--;
-      FirebaseFirestore.instance.collection('products')
-          .doc(widget.ownerId)
+      Firestore.instance.collection('products')
+          .document(widget.ownerId)
           .collection('userProducts')
-          .doc(widget.prodId)
-          .update({'mtoQuantity':mto,
+          .document(widget.prodId)
+          .updateData({'mtoQuantity':mto,
       });
     }
     else if(widget.size=='MTO 18-24 M'){
       mto--;
-      FirebaseFirestore.instance.collection('products')
-          .doc(widget.ownerId)
+      Firestore.instance.collection('products')
+          .document(widget.ownerId)
           .collection('userProducts')
-          .doc(widget.prodId)
-          .update({'mtoQuantity':mto,
+          .document(widget.prodId)
+          .updateData({'mtoQuantity':mto,
 
       });
     }
     else if(widget.size=='S 0-3 M'){
       Shoe1--;
-      FirebaseFirestore.instance.collection('products')
-          .doc(widget.ownerId)
+      Firestore.instance.collection('products')
+          .document(widget.ownerId)
           .collection('userProducts')
-          .doc(widget.prodId)
-          .update({'Shoe1':Shoe1,
+          .document(widget.prodId)
+          .updateData({'Shoe1':Shoe1,
 
       });
     }
     else if(widget.size=='S 3-6 M'){
       Shoe2--;
-      FirebaseFirestore.instance.collection('products')
-          .doc(widget.ownerId)
+      Firestore.instance.collection('products')
+          .document(widget.ownerId)
           .collection('userProducts')
-          .doc(widget.prodId)
-          .update({'Shoe2':Shoe2,
+          .document(widget.prodId)
+          .updateData({'Shoe2':Shoe2,
 
       });
     }
     else if(widget.size=='6 M'){
       Shoe3--;
-      FirebaseFirestore.instance.collection('products')
-          .doc(widget.ownerId)
+      Firestore.instance.collection('products')
+          .document(widget.ownerId)
           .collection('userProducts')
-          .doc(widget.prodId)
-          .update({'Shoe3':Shoe3,
+          .document(widget.prodId)
+          .updateData({'Shoe3':Shoe3,
 
       });
     }
     else if(widget.size=='9 M'){
       Shoe4--;
-      FirebaseFirestore.instance.collection('products')
-          .doc(widget.ownerId)
+      Firestore.instance.collection('products')
+          .document(widget.ownerId)
           .collection('userProducts')
-          .doc(widget.prodId)
-          .update({'Shoe4':Shoe4,
+          .document(widget.prodId)
+          .updateData({'Shoe4':Shoe4,
 
       });
     }
     else if(widget.size=='S 9-12 M'){
       Shoe5--;
-      FirebaseFirestore.instance.collection('products')
-          .doc(widget.ownerId)
+      Firestore.instance.collection('products')
+          .document(widget.ownerId)
           .collection('userProducts')
-          .doc(widget.prodId)
-          .update({'Shoe5':Shoe5,
+          .document(widget.prodId)
+          .updateData({'Shoe5':Shoe5,
 
       });
     }
     else if(widget.size=='S 12-18 M'){
       Shoe6--;
-      FirebaseFirestore.instance.collection('products')
-          .doc(widget.ownerId)
+      Firestore.instance.collection('products')
+          .document(widget.ownerId)
           .collection('userProducts')
-          .doc(widget.prodId)
-          .update({'Shoe6':Shoe6,
+          .document(widget.prodId)
+          .updateData({'Shoe6':Shoe6,
 
       });
     }
     else if(widget.size=='S 18-24 M'){
       Shoe7--;
-      FirebaseFirestore.instance.collection('products')
-          .doc(widget.ownerId)
+      Firestore.instance.collection('products')
+          .document(widget.ownerId)
           .collection('userProducts')
-          .doc(widget.prodId)
-          .update({'Shoe7':Shoe7,
+          .document(widget.prodId)
+          .updateData({'Shoe7':Shoe7,
 
       });
     }
@@ -1224,448 +1224,448 @@ class _BuyNowState extends State<BuyNow> {
     //K
     if(widget.size=='2 Y'){
       xxxs--;
-      FirebaseFirestore.instance.collection('products')
-          .doc(widget.ownerId)
+      Firestore.instance.collection('products')
+          .document(widget.ownerId)
           .collection('userProducts')
-          .doc(widget.prodId)
-          .update({'xxxsQuantity':xxxs,
+          .document(widget.prodId)
+          .updateData({'xxxsQuantity':xxxs,
 
       });
     }
     else if(widget.size=='3-4 Y'){
       xxs--;
-      FirebaseFirestore.instance.collection('products')
-          .doc(widget.ownerId)
+      Firestore.instance.collection('products')
+          .document(widget.ownerId)
           .collection('userProducts')
-          .doc(widget.prodId)
-          .update({'xxsQuantity':xxs,
+          .document(widget.prodId)
+          .updateData({'xxsQuantity':xxs,
 
       });
     }
     else if(widget.size=='4-5 Y'){
       xs--;
-      FirebaseFirestore.instance.collection('products')
-          .doc(widget.ownerId)
+      Firestore.instance.collection('products')
+          .document(widget.ownerId)
           .collection('userProducts')
-          .doc(widget.prodId)
-          .update({'xsQuantity':xs,
+          .document(widget.prodId)
+          .updateData({'xsQuantity':xs,
 
       });
     }
     else if(widget.size=='5-6 Y'){
       s--;
-      FirebaseFirestore.instance.collection('products')
-          .doc(widget.ownerId)
+      Firestore.instance.collection('products')
+          .document(widget.ownerId)
           .collection('userProducts')
-          .doc(widget.prodId)
-          .update({'sQuantity':s,
+          .document(widget.prodId)
+          .updateData({'sQuantity':s,
 
       });
     }
     else if(widget.size=='6-7 Y'){
       m--;
-      FirebaseFirestore.instance.collection('products')
-          .doc(widget.ownerId)
+      Firestore.instance.collection('products')
+          .document(widget.ownerId)
           .collection('userProducts')
-          .doc(widget.prodId)
-          .update({'mQuantity':m,
+          .document(widget.prodId)
+          .updateData({'mQuantity':m,
 
       });
     }
     else if(widget.size=='7-8 Y'){
       l--;
-      FirebaseFirestore.instance.collection('products')
-          .doc(widget.ownerId)
+      Firestore.instance.collection('products')
+          .document(widget.ownerId)
           .collection('userProducts')
-          .doc(widget.prodId)
-          .update({'lQuantity':l,
+          .document(widget.prodId)
+          .updateData({'lQuantity':l,
 
       });
     }
     else if(widget.size=='8-9 Y'){
       xl--;
-      FirebaseFirestore.instance.collection('products')
-          .doc(widget.ownerId)
+      Firestore.instance.collection('products')
+          .document(widget.ownerId)
           .collection('userProducts')
-          .doc(widget.prodId)
-          .update({'xlQuantity':xl,
+          .document(widget.prodId)
+          .updateData({'xlQuantity':xl,
 
       });
     }
     else if(widget.size=='9-10 Y'){
       xxl--;
-      FirebaseFirestore.instance.collection('products')
-          .doc(widget.ownerId)
+      Firestore.instance.collection('products')
+          .document(widget.ownerId)
           .collection('userProducts')
-          .doc(widget.prodId)
-          .update({'xxlQuantity':xxl,
+          .document(widget.prodId)
+          .updateData({'xxlQuantity':xxl,
 
       });
     }
     else if(widget.size=='10-11 Y'){
       xxxl--;
-      FirebaseFirestore.instance.collection('products')
-          .doc(widget.ownerId)
+      Firestore.instance.collection('products')
+          .document(widget.ownerId)
           .collection('userProducts')
-          .doc(widget.prodId)
-          .update({'xxxlQuantity':xxxl,
+          .document(widget.prodId)
+          .updateData({'xxxlQuantity':xxxl,
 
       });
     }
     else if(widget.size=='11-12 Y'){
       fourxl--;
-      FirebaseFirestore.instance.collection('products')
-          .doc(widget.ownerId)
+      Firestore.instance.collection('products')
+          .document(widget.ownerId)
           .collection('userProducts')
-          .doc(widget.prodId)
-          .update({'4xlQuantity':fourxl,
+          .document(widget.prodId)
+          .updateData({'4xlQuantity':fourxl,
 
       });
     }
     else if(widget.size=='MTO 2 Y'){
       mto--;
-      FirebaseFirestore.instance.collection('products')
-          .doc(widget.ownerId)
+      Firestore.instance.collection('products')
+          .document(widget.ownerId)
           .collection('userProducts')
-          .doc(widget.prodId)
-          .update({'mtoQuantity':mto,
+          .document(widget.prodId)
+          .updateData({'mtoQuantity':mto,
       });
     }
     else if(widget.size=='MTO 3-4 Y'){
       mto--;
-      FirebaseFirestore.instance.collection('products')
-          .doc(widget.ownerId)
+      Firestore.instance.collection('products')
+          .document(widget.ownerId)
           .collection('userProducts')
-          .doc(widget.prodId)
-          .update({'mtoQuantity':mto,
+          .document(widget.prodId)
+          .updateData({'mtoQuantity':mto,
       });
     }
     else if(widget.size=='MTO 4-5 Y'){
       mto--;
-      FirebaseFirestore.instance.collection('products')
-          .doc(widget.ownerId)
+      Firestore.instance.collection('products')
+          .document(widget.ownerId)
           .collection('userProducts')
-          .doc(widget.prodId)
-          .update({'mtoQuantity':mto,
+          .document(widget.prodId)
+          .updateData({'mtoQuantity':mto,
       });
     }
     else if(widget.size=='MTO 5-6 Y'){
       mto--;
-      FirebaseFirestore.instance.collection('products')
-          .doc(widget.ownerId)
+      Firestore.instance.collection('products')
+          .document(widget.ownerId)
           .collection('userProducts')
-          .doc(widget.prodId)
-          .update({'mtoQuantity':mto,
+          .document(widget.prodId)
+          .updateData({'mtoQuantity':mto,
       });
     }
     else if(widget.size=='MTO 6-7 Y'){
       mto--;
-      FirebaseFirestore.instance.collection('products')
-          .doc(widget.ownerId)
+      Firestore.instance.collection('products')
+          .document(widget.ownerId)
           .collection('userProducts')
-          .doc(widget.prodId)
-          .update({'mtoQuantity':mto,
+          .document(widget.prodId)
+          .updateData({'mtoQuantity':mto,
       });
     }
     else if(widget.size=='MTO 7-8 Y'){
       mto--;
-      FirebaseFirestore.instance.collection('products')
-          .doc(widget.ownerId)
+      Firestore.instance.collection('products')
+          .document(widget.ownerId)
           .collection('userProducts')
-          .doc(widget.prodId)
-          .update({'mtoQuantity':mto,
+          .document(widget.prodId)
+          .updateData({'mtoQuantity':mto,
       });
     }
     else if(widget.size=='MTO 8-9 Y'){
       mto--;
-      FirebaseFirestore.instance.collection('products')
-          .doc(widget.ownerId)
+      Firestore.instance.collection('products')
+          .document(widget.ownerId)
           .collection('userProducts')
-          .doc(widget.prodId)
-          .update({'mtoQuantity':mto,
+          .document(widget.prodId)
+          .updateData({'mtoQuantity':mto,
       });
     }
     else if(widget.size=='MTO 9-10 Y'){
       mto--;
-      FirebaseFirestore.instance.collection('products')
-          .doc(widget.ownerId)
+      Firestore.instance.collection('products')
+          .document(widget.ownerId)
           .collection('userProducts')
-          .doc(widget.prodId)
-          .update({'mtoQuantity':mto,
+          .document(widget.prodId)
+          .updateData({'mtoQuantity':mto,
       });
     }
     else if(widget.size=='MTO 10-11 Y'){
       mto--;
-      FirebaseFirestore.instance.collection('products')
-          .doc(widget.ownerId)
+      Firestore.instance.collection('products')
+          .document(widget.ownerId)
           .collection('userProducts')
-          .doc(widget.prodId)
-          .update({'mtoQuantity':mto,
+          .document(widget.prodId)
+          .updateData({'mtoQuantity':mto,
       });
     }
     else if(widget.size=='MTO 11-12 Y'){
       mto--;
-      FirebaseFirestore.instance.collection('products')
-          .doc(widget.ownerId)
+      Firestore.instance.collection('products')
+          .document(widget.ownerId)
           .collection('userProducts')
-          .doc(widget.prodId)
-          .update({'mtoQuantity':mto,
+          .document(widget.prodId)
+          .updateData({'mtoQuantity':mto,
       });
     }
     else if(widget.size=='2 Y'){
       Shoe1--;
-      FirebaseFirestore.instance.collection('products')
-          .doc(widget.ownerId)
+      Firestore.instance.collection('products')
+          .document(widget.ownerId)
           .collection('userProducts')
-          .doc(widget.prodId)
-          .update({'Shoe1':Shoe1,
+          .document(widget.prodId)
+          .updateData({'Shoe1':Shoe1,
 
       });
     }
     else if(widget.size=='2-1/2 Y'){
       Shoe2--;
-      FirebaseFirestore.instance.collection('products')
-          .doc(widget.ownerId)
+      Firestore.instance.collection('products')
+          .document(widget.ownerId)
           .collection('userProducts')
-          .doc(widget.prodId)
-          .update({'Shoe2':Shoe2,
+          .document(widget.prodId)
+          .updateData({'Shoe2':Shoe2,
 
       });
     }
     else if(widget.size=='3 Y'){
       Shoe3--;
-      FirebaseFirestore.instance.collection('products')
-          .doc(widget.ownerId)
+      Firestore.instance.collection('products')
+          .document(widget.ownerId)
           .collection('userProducts')
-          .doc(widget.prodId)
-          .update({'Shoe3':Shoe3,
+          .document(widget.prodId)
+          .updateData({'Shoe3':Shoe3,
 
       });
     }
     else if(widget.size=='3-1/2 Y'){
       Shoe4--;
-      FirebaseFirestore.instance.collection('products')
-          .doc(widget.ownerId)
+      Firestore.instance.collection('products')
+          .document(widget.ownerId)
           .collection('userProducts')
-          .doc(widget.prodId)
-          .update({'Shoe4':Shoe4,
+          .document(widget.prodId)
+          .updateData({'Shoe4':Shoe4,
 
       });
     }
     else if(widget.size=='4 Y'){
       Shoe5--;
-      FirebaseFirestore.instance.collection('products')
-          .doc(widget.ownerId)
+      Firestore.instance.collection('products')
+          .document(widget.ownerId)
           .collection('userProducts')
-          .doc(widget.prodId)
-          .update({'Shoe5':Shoe5,
+          .document(widget.prodId)
+          .updateData({'Shoe5':Shoe5,
 
       });
     }
     else if(widget.size=='5 Y'){
       Shoe6--;
-      FirebaseFirestore.instance.collection('products')
-          .doc(widget.ownerId)
+      Firestore.instance.collection('products')
+          .document(widget.ownerId)
           .collection('userProducts')
-          .doc(widget.prodId)
-          .update({'Shoe6':Shoe6,
+          .document(widget.prodId)
+          .updateData({'Shoe6':Shoe6,
 
       });
     }
     else if(widget.size=='6 Y'){
       Shoe7--;
-      FirebaseFirestore.instance.collection('products')
-          .doc(widget.ownerId)
+      Firestore.instance.collection('products')
+          .document(widget.ownerId)
           .collection('userProducts')
-          .doc(widget.prodId)
-          .update({'Shoe7':Shoe7,
+          .document(widget.prodId)
+          .updateData({'Shoe7':Shoe7,
 
       });
     }
     else if(widget.size=='7 Y'){
       Shoe8--;
-      FirebaseFirestore.instance.collection('products')
-          .doc(widget.ownerId)
+      Firestore.instance.collection('products')
+          .document(widget.ownerId)
           .collection('userProducts')
-          .doc(widget.prodId)
-          .update({'Shoe8':Shoe8,
+          .document(widget.prodId)
+          .updateData({'Shoe8':Shoe8,
 
       });
     }
     else if(widget.size=='8 Y'){
       Shoe9--;
-      FirebaseFirestore.instance.collection('products')
-          .doc(widget.ownerId)
+      Firestore.instance.collection('products')
+          .document(widget.ownerId)
           .collection('userProducts')
-          .doc(widget.prodId)
-          .update({'Shoe9':Shoe9,
+          .document(widget.prodId)
+          .updateData({'Shoe9':Shoe9,
 
       });
     }
     else if(widget.size=='8-1/2 Y'){
       Shoe10--;
-      FirebaseFirestore.instance.collection('products')
-          .doc(widget.ownerId)
+      Firestore.instance.collection('products')
+          .document(widget.ownerId)
           .collection('userProducts')
-          .doc(widget.prodId)
-          .update({'Shoe10':Shoe10,
+          .document(widget.prodId)
+          .updateData({'Shoe10':Shoe10,
 
       });
     }
     else if(widget.size=='9 Y'){
       Shoe11--;
-      FirebaseFirestore.instance.collection('products')
-          .doc(widget.ownerId)
+      Firestore.instance.collection('products')
+          .document(widget.ownerId)
           .collection('userProducts')
-          .doc(widget.prodId)
-          .update({'Shoe11':Shoe11,
+          .document(widget.prodId)
+          .updateData({'Shoe11':Shoe11,
 
       });
     }
     else if(widget.size=='10 Y'){
       Shoe12--;
-      FirebaseFirestore.instance.collection('products')
-          .doc(widget.ownerId)
+      Firestore.instance.collection('products')
+          .document(widget.ownerId)
           .collection('userProducts')
-          .doc(widget.prodId)
-          .update({'Shoe12':Shoe12,
+          .document(widget.prodId)
+          .updateData({'Shoe12':Shoe12,
 
       });
     }
     else if(widget.size=='11 Y'){
       Shoe13--;
-      FirebaseFirestore.instance.collection('products')
-          .doc(widget.ownerId)
+      Firestore.instance.collection('products')
+          .document(widget.ownerId)
           .collection('userProducts')
-          .doc(widget.prodId)
-          .update({'Shoe13':Shoe13,
+          .document(widget.prodId)
+          .updateData({'Shoe13':Shoe13,
 
       });
     }
     else if(widget.size=='12 Y'){
       Shoe14--;
-      FirebaseFirestore.instance.collection('products')
-          .doc(widget.ownerId)
+      Firestore.instance.collection('products')
+          .document(widget.ownerId)
           .collection('userProducts')
-          .doc(widget.prodId)
-          .update({'Shoe14':Shoe14,
+          .document(widget.prodId)
+          .updateData({'Shoe14':Shoe14,
 
       });
     }
     //T
     if(widget.size=='13 Y'){
       xxxs--;
-      FirebaseFirestore.instance.collection('products')
-          .doc(widget.ownerId)
+      Firestore.instance.collection('products')
+          .document(widget.ownerId)
           .collection('userProducts')
-          .doc(widget.prodId)
-          .update({'xxxsQuantity':xxxs,
+          .document(widget.prodId)
+          .updateData({'xxxsQuantity':xxxs,
 
       });
     }
     else if(widget.size=='14 Y'){
       xxs--;
-      FirebaseFirestore.instance.collection('products')
-          .doc(widget.ownerId)
+      Firestore.instance.collection('products')
+          .document(widget.ownerId)
           .collection('userProducts')
-          .doc(widget.prodId)
-          .update({'xxsQuantity':xxs,
+          .document(widget.prodId)
+          .updateData({'xxsQuantity':xxs,
 
       });
     }
     else if(widget.size=='15 Y'){
       xs--;
-      FirebaseFirestore.instance.collection('products')
-          .doc(widget.ownerId)
+      Firestore.instance.collection('products')
+          .document(widget.ownerId)
           .collection('userProducts')
-          .doc(widget.prodId)
-          .update({'xsQuantity':xs,
+          .document(widget.prodId)
+          .updateData({'xsQuantity':xs,
 
       });
     }
     else if(widget.size=='16 Y'){
       s--;
-      FirebaseFirestore.instance.collection('products')
-          .doc(widget.ownerId)
+      Firestore.instance.collection('products')
+          .document(widget.ownerId)
           .collection('userProducts')
-          .doc(widget.prodId)
-          .update({'sQuantity':s,
+          .document(widget.prodId)
+          .updateData({'sQuantity':s,
 
       });
     }
     else if(widget.size=='MTO 13 Y'){
        mto--;
-      FirebaseFirestore.instance.collection('products')
-          .doc(widget.ownerId)
+      Firestore.instance.collection('products')
+          .document(widget.ownerId)
           .collection('userProducts')
-          .doc(widget.prodId)
-          .update({'mtoQuantity':mto,
+          .document(widget.prodId)
+          .updateData({'mtoQuantity':mto,
       });
     }
     else if(widget.size=='MTO 14 Y'){
       mto--;
-      FirebaseFirestore.instance.collection('products')
-          .doc(widget.ownerId)
+      Firestore.instance.collection('products')
+          .document(widget.ownerId)
           .collection('userProducts')
-          .doc(widget.prodId)
-          .update({'mtoQuantity':mto,
+          .document(widget.prodId)
+          .updateData({'mtoQuantity':mto,
       });
     }
     else if(widget.size=='MTO 15 Y'){
       mto--;
-      FirebaseFirestore.instance.collection('products')
-          .doc(widget.ownerId)
+      Firestore.instance.collection('products')
+          .document(widget.ownerId)
           .collection('userProducts')
-          .doc(widget.prodId)
-          .update({'mtoQuantity':mto,
+          .document(widget.prodId)
+          .updateData({'mtoQuantity':mto,
       });
     }
     else if(widget.size=='MTO 16 Y'){
       mto--;
-      FirebaseFirestore.instance.collection('products')
-          .doc(widget.ownerId)
+      Firestore.instance.collection('products')
+          .document(widget.ownerId)
           .collection('userProducts')
-          .doc(widget.prodId)
-          .update({'mtoQuantity':mto,
+          .document(widget.prodId)
+          .updateData({'mtoQuantity':mto,
       });
     }
     else if(widget.size=='S 13 Y'){
       Shoe1--;
-      FirebaseFirestore.instance.collection('products')
-          .doc(widget.ownerId)
+      Firestore.instance.collection('products')
+          .document(widget.ownerId)
           .collection('userProducts')
-          .doc(widget.prodId)
-          .update({'Shoe1':Shoe1,
+          .document(widget.prodId)
+          .updateData({'Shoe1':Shoe1,
 
       });
     }
     else if(widget.size=='S 14 Y'){
       Shoe2--;
-      FirebaseFirestore.instance.collection('products')
-          .doc(widget.ownerId)
+      Firestore.instance.collection('products')
+          .document(widget.ownerId)
           .collection('userProducts')
-          .doc(widget.prodId)
-          .update({'Shoe2':Shoe2,
+          .document(widget.prodId)
+          .updateData({'Shoe2':Shoe2,
 
       });
     }
     else if(widget.size=='S 15 Y'){
       Shoe3--;
-      FirebaseFirestore.instance.collection('products')
-          .doc(widget.ownerId)
+      Firestore.instance.collection('products')
+          .document(widget.ownerId)
           .collection('userProducts')
-          .doc(widget.prodId)
-          .update({'Shoe3':Shoe3,
+          .document(widget.prodId)
+          .updateData({'Shoe3':Shoe3,
 
       });
     }
     else if(widget.size=='S 16 Y'){
       Shoe4--;
-      FirebaseFirestore.instance.collection('products')
-          .doc(widget.ownerId)
+      Firestore.instance.collection('products')
+          .document(widget.ownerId)
           .collection('userProducts')
-          .doc(widget.prodId)
-          .update({'Shoe4':Shoe4,
+          .document(widget.prodId)
+          .updateData({'Shoe4':Shoe4,
 
       });
     }
@@ -1683,11 +1683,11 @@ class _BuyNowState extends State<BuyNow> {
     String Country = adPrefs.getString('country') ?? '';
     String Code = adPrefs.getString('code') ?? '';
 
-    FirebaseFirestore.instance.collection('ordersSeller')
-        .doc(widget.ownerId)
+    Firestore.instance.collection('ordersSeller')
+        .document(widget.ownerId)
         .collection('sellerOrder')
-        .doc(orderId)
-        .set({'prodId':widget.prodId,
+        .document(orderId)
+        .setData({'prodId':widget.prodId,
       'ownerId':widget.ownerId,
       'size':widget.size,
       'orderId':orderId,
@@ -1702,11 +1702,11 @@ class _BuyNowState extends State<BuyNow> {
       'read':'false',
       'Address':'$Fullname\n,$Addresss\n,$City,$State,$Country\n,$Zip\n,$Code $Phone',
     });
-    FirebaseFirestore.instance.collection('ordersCustomer')
-        .doc(currentUser.id)
+    Firestore.instance.collection('ordersCustomer')
+        .document(currentUser.id)
         .collection('userOrder')
-        .doc(orderId)
-        .set({'prodId':widget.prodId,
+        .document(orderId)
+        .setData({'prodId':widget.prodId,
       'ownerId':widget.ownerId,
       'size':widget.size,
       'orderId':orderId,
@@ -1721,11 +1721,11 @@ class _BuyNowState extends State<BuyNow> {
       'fulfilled':'false',
       'orderStatus':'Processing',
       'Address':'$Fullname\n,$Addresss\n,$City,$State,$Country\n,$Zip\n,$Code $Phone',
-    }); FirebaseFirestore.instance.collection('feed')
-        .doc(currentUser.id)
+    }); Firestore.instance.collection('feed')
+        .document(currentUser.id)
         .collection('feedItems')
-        .doc(orderId)
-        .set({
+        .document(orderId)
+        .setData({
       "type": "Payment",
       "username": widget.username,
       "userId": widget.ownerId,
@@ -1736,11 +1736,11 @@ class _BuyNowState extends State<BuyNow> {
       "timestamp": timestamp,
       "read": 'false',
       'message':'Your order has been placed!',
-    });FirebaseFirestore.instance.collection('feed')
-        .doc(widget.ownerId)
+    });Firestore.instance.collection('feed')
+        .document(widget.ownerId)
         .collection('feedItems')
-        .doc(orderId)
-        .set({
+        .document(orderId)
+        .setData({
       "type": "PaymentO",
       "username": currentUser.displayName,
       "userId": widget.ownerId,

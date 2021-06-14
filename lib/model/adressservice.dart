@@ -11,10 +11,8 @@ import 'package:fashow/HomePage.dart';
 import 'package:fashow/Constants.dart';
 import 'package:uuid/uuid.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:translated_text/translated_text.dart';
-import 'package:fashow/HomePage.dart';
 class AddressSer extends StatefulWidget {
-  final Users currentUser;
+  final User currentUser;
   final String Amount;
 final String username;
 final String profileimg;
@@ -63,10 +61,10 @@ class _AddressSerState extends State<AddressSer>  with AutomaticKeepAliveClientM
   @override
   Saveaddress()async*{
     addressRef
-        .doc(widget.currentUser.id)
+        .document(widget.currentUser.id)
         .collection("useraddress")
-        .doc(addId)
-        .set({
+        .document(addId)
+        .setData({
       "userId": widget.currentUser.id,
       "photoUrl": widget.currentUser.photoUrl,
       "displayName": widget.currentUser.displayName,
@@ -88,8 +86,7 @@ class _AddressSerState extends State<AddressSer>  with AutomaticKeepAliveClientM
           builder: (context) {
             return SimpleDialog(
               backgroundColor: kSecondaryColor,
-              title:
-              Text("Add Address"),
+              title: Text("Add Address"),
               children: <Widget>[
                 Form(
                   key: _formKey,
@@ -342,11 +339,11 @@ class _AddressSerState extends State<AddressSer>  with AutomaticKeepAliveClientM
   getAdress()async{
     return
       FutureBuilder(
-          future: FirebaseFirestore.instance
-              .collection('Address').doc(widget.currentUser.id)
+          future: Firestore.instance
+              .collection('Address').document(widget.currentUser.id)
               .collection('useraddress')
               .orderBy('timestamp', descending: true)
-              .get(),
+              .getDocuments(),
           builder: (context, snapshot) {
             if (!snapshot.hasData) {
               return Column(
@@ -370,9 +367,9 @@ class _AddressSerState extends State<AddressSer>  with AutomaticKeepAliveClientM
                       key: PageStorageKey(''),
                       scrollDirection: Axis.vertical,
                       shrinkWrap: true,
-                      itemCount: snapshot.data.docs.length,
+                      itemCount: snapshot.data.documents.length,
                       itemBuilder: (context, index) {
-                        DocumentSnapshot ds = snapshot.data.docs[index];
+                        DocumentSnapshot ds = snapshot.data.documents[index];
                         String Type = ds['type'];
                         String Fullname = ds['fullname'];
                         String Addresss = ds['address'];

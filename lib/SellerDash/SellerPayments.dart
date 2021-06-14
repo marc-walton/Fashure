@@ -141,24 +141,22 @@ class _SellerPaymentsState extends State<SellerPayments> {
   upcoming(){
     return
       PaginateFirestore(
-          isLive: true,
-
 //    itemsPerPage: 2,
           itemBuilderType:
           PaginateBuilderType.listView,
           itemBuilder: (index, context, documentSnapshot)   {
-//        DocumentSnapshot ds = snapshot.data.docs[index];
-            String ownerId = documentSnapshot.data()['ownerId'];
-            String orderId = documentSnapshot.data()['orderId'];
-            String prodId = documentSnapshot.data()['prodId'];
+//        DocumentSnapshot ds = snapshot.data.documents[index];
+            String ownerId = documentSnapshot.data['ownerId'];
+            String orderId = documentSnapshot.data['orderId'];
+            String prodId = documentSnapshot.data['prodId'];
 
-            String fulfilled = documentSnapshot.data()['fulfilled'];
-            String productname = documentSnapshot.data()['productname'];
-            String inr = documentSnapshot.data()['inr'];
-            String cny = documentSnapshot.data()['cny'];
-            String usd = documentSnapshot.data()['usd'];
-            String eur = documentSnapshot.data()['eur'];
-            String gbp = documentSnapshot.data()['gbp'];
+            String fulfilled = documentSnapshot.data['fulfilled'];
+            String productname = documentSnapshot.data['productname'];
+            String inr = documentSnapshot.data['inr'];
+            String cny = documentSnapshot.data['cny'];
+            String usd = documentSnapshot.data['usd'];
+            String eur = documentSnapshot.data['eur'];
+            String gbp = documentSnapshot.data['gbp'];
             return
                 Column(
 
@@ -169,8 +167,8 @@ class _SellerPaymentsState extends State<SellerPayments> {
                 );
 
           },
-          query: FirebaseFirestore.instance.collection('Payments')
-              .doc(currentUser.id,)
+          query: Firestore.instance.collection('Payments')
+              .document(currentUser.id,)
               .collection('SellerPayments')
               .orderBy('timestamp',descending: true)
               .where('fulfilled',isEqualTo: 'false')
@@ -181,23 +179,22 @@ class _SellerPaymentsState extends State<SellerPayments> {
   fulfilled(){
     return
       PaginateFirestore(
-        isLive: true,
 //    itemsPerPage: 2,
           itemBuilderType:
           PaginateBuilderType.listView,
           itemBuilder: (index, context, documentSnapshot)   {
-//        DocumentSnapshot ds = snapshot.data.docs[index];
-            String ownerId = documentSnapshot.data()['ownerId'];
-            String orderId = documentSnapshot.data()['orderId'];
-            String prodId = documentSnapshot.data()['prodId'];
+//        DocumentSnapshot ds = snapshot.data.documents[index];
+            String ownerId = documentSnapshot.data['ownerId'];
+            String orderId = documentSnapshot.data['orderId'];
+            String prodId = documentSnapshot.data['prodId'];
 
-            String fulfilled = documentSnapshot.data()['fulfilled'];
-            String productname = documentSnapshot.data()['productname'];
-            String inr = documentSnapshot.data()['inr'];
-            String cny = documentSnapshot.data()['cny'];
-            String usd = documentSnapshot.data()['usd'];
-            String eur = documentSnapshot.data()['eur'];
-            String gbp = documentSnapshot.data()['gbp'];
+            String fulfilled = documentSnapshot.data['fulfilled'];
+            String productname = documentSnapshot.data['productname'];
+            String inr = documentSnapshot.data['inr'];
+            String cny = documentSnapshot.data['cny'];
+            String usd = documentSnapshot.data['usd'];
+            String eur = documentSnapshot.data['eur'];
+            String gbp = documentSnapshot.data['gbp'];
             return
               Column(
 
@@ -208,8 +205,8 @@ class _SellerPaymentsState extends State<SellerPayments> {
               );
 
           },
-          query: FirebaseFirestore.instance.collection('Payments')
-              .doc(currentUser.id,)
+          query: Firestore.instance.collection('Payments')
+              .document(currentUser.id,)
               .collection('SellerPayments')
               .orderBy('timestamp',descending: true)
               .where('fulfilled',isEqualTo: 'true')
@@ -277,11 +274,11 @@ class _SellerPaymentsState extends State<SellerPayments> {
   }
   update() async {
 
-    QuerySnapshot snapshot = await  FirebaseFirestore.instance.collection('Payments')
-        .doc(currentUser.id,)
-        .collection('SellerPayments').get();
-    snapshot.docs.forEach((doc) {
-      doc.reference.update({'read':'true'});
+    QuerySnapshot snapshot = await  Firestore.instance.collection('Payments')
+        .document(currentUser.id,)
+        .collection('SellerPayments').getDocuments();
+    snapshot.documents.forEach((doc) {
+      doc.reference.updateData({'read':'true'});
     });
   }
 

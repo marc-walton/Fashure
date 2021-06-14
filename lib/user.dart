@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'dart:async';
 import 'package:firebase_auth/firebase_auth.dart';
-class Users{
+class User{
    String id;
    String username;
    String email;
@@ -15,8 +15,8 @@ class Users{
    int client;
 
   int state;
- int seller;
-  Users({
+//  String followers;
+  User({
     this.id,
     this.username,
     this.email,
@@ -25,25 +25,25 @@ class Users{
     this.bio,
     this.state,
     this.coverPhoto,
-   this.seller,
+//    this.followers,
 this.country,
     this.language,
     this.client
   });
-  factory Users.fromDocument(DocumentSnapshot doc){
-    return Users(
-      id: doc.data()['id'],
-      username :doc.data()['username'],
-      email :doc.data()['email'],
-      photoUrl: doc.data()['photoUrl'],
-      displayName :doc.data()['displayName'],
-      bio :doc.data()['bio'],
-      coverPhoto: doc.data()['coverPhoto'],
-      language: doc.data()['language'],
-      country: doc.data()['country'],
-      state: doc.data()['state'],
-client:doc.data()['client'],
-     seller: doc.data()['seller']
+  factory User.fromDocument(DocumentSnapshot doc){
+    return User(
+      id: doc['id'],
+      username :doc['username'],
+      email :doc['email'],
+      photoUrl: doc['photoUrl'],
+      displayName :doc['displayName'],
+      bio :doc['bio'],
+      coverPhoto: doc['coverPhoto'],
+      language: doc['language'],
+      country: doc['country'],
+      state: doc['state'],
+client:doc['client'],
+//      followers: doc['followers']
     );
   }
 }

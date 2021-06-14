@@ -10,7 +10,15 @@ import 'package:flutter/material.dart';
 import 'package:fashow/model/user_model.dart';
 import 'package:fashow/Constants.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:gradient_app_bar/gradient_app_bar.dart';
 import 'package:fashow/chat_screen.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+//import 'package:skype_clone/models/user.dart';
+//import 'package:skype_clone/resources/auth_methods.dart';
+//import 'package:skype_clone/screens/callscreens/pickup/pickup_layout.dart';
+//import 'package:skype_clone/screens/chatscreens/chat_screen.dart';
+//import 'package:skype_clone/utils/universal_variables.dart';
+//import 'package:skype_clone/widgets/custom_tile.dart';
 
 class SearchScreen extends StatefulWidget {
   @override
@@ -37,10 +45,10 @@ class _SearchScreenState extends State<SearchScreen> {
     List<UserModel> userList = List<UserModel>();
 
     QuerySnapshot querySnapshot =
-    await usersRef.get();
-    for (var i = 0; i < querySnapshot.docs.length; i++) {
-      if (querySnapshot.docs[i].id != currentUser.id) {
-        userList.add(UserModel.fromMap(querySnapshot.docs[i].data()));
+    await usersRef.getDocuments();
+    for (var i = 0; i < querySnapshot.documents.length; i++) {
+      if (querySnapshot.documents[i].documentID != currentUser.id) {
+        userList.add(UserModel.fromMap(querySnapshot.documents[i].data));
       }
     }
     setState(() {
@@ -50,7 +58,58 @@ class _SearchScreenState extends State<SearchScreen> {
 
   }
 
-
+  searchAppBar(BuildContext context) {
+    return GradientAppBar(
+      gradient: LinearGradient(
+        colors: [
+          UniversalVariables.gradientColorStart,
+          UniversalVariables.gradientColorEnd,
+        ],
+      ),
+      leading: IconButton(
+        icon: Icon(Icons.arrow_back, color: Colors.white),
+        onPressed: () => Navigator.pop(context),
+      ),
+      elevation: 0,
+      bottom: PreferredSize(
+        preferredSize: const Size.fromHeight(kToolbarHeight + 20),
+        child: Padding(
+          padding: EdgeInsets.only(left: 20),
+          child: TextField(
+            controller: searchController,
+            onChanged: (val) {
+              setState(() {
+                query = val;
+              });
+            },
+            cursorColor: UniversalVariables.blackColor,
+            autofocus: true,
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+              color: Colors.white,
+              fontSize: 35,
+            ),
+            decoration: InputDecoration(
+              suffixIcon: IconButton(
+                icon: Icon(Icons.close, color: Colors.white),
+                onPressed: () {
+                  WidgetsBinding.instance
+                      .addPostFrameCallback((_) => searchController.clear());
+                },
+              ),
+              border: InputBorder.none,
+              hintText: "Search",
+              hintStyle: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 35,
+                color: Color(0x88ffffff),
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
 
   buildSuggestions(String query) {
     final List<UserModel> suggestionList = query.isEmpty
@@ -117,6 +176,7 @@ class _SearchScreenState extends State<SearchScreen> {
 return
      Scaffold(
         backgroundColor: UniversalVariables.blackColor,
+        appBar: searchAppBar(context),
         body:  Container(
           padding: EdgeInsets.symmetric(horizontal: 20),
           child: buildSuggestions(query),

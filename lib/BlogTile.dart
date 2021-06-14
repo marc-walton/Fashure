@@ -5,7 +5,6 @@ import 'package:fashow/post.dart';
 import 'package:fashow/blogsview.dart';
 import 'package:fashow/blog_sceen.dart';
 import 'package:fashow/custom_image.dart';
-import 'package:translated_text/translated_text.dart';
 class BlogTile extends StatelessWidget {
   final Blog blog;
 

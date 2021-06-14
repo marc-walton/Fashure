@@ -8,7 +8,6 @@ import 'package:paginate_firestore/paginate_firestore.dart';
 import 'package:smooth_star_rating/smooth_star_rating.dart';
 import 'package:fashow/HomePage.dart';
 import 'package:fashow/ActivityFeed.dart';
-import 'package:translated_text/translated_text.dart';
 
 class ClientReview extends StatefulWidget {
   final String profileId;
@@ -22,24 +21,23 @@ class ClientReview extends StatefulWidget {
 class _ClientReviewState extends State<ClientReview> {
   reviews() {
     return  PaginateFirestore(
-      isLive: true,
 //    itemsPerPage: 2,
         itemBuilderType:
         PaginateBuilderType.listView,
         itemBuilder: (index, context, documentSnapshot)   {
 //        DocumentSnapshot ds = snapshot.data.documents[index];
-          String ownerId = documentSnapshot.data()['userId'];
-          var rating =   documentSnapshot.data()['rating'];
-          String review  = documentSnapshot.data()['review'];
+          String ownerId = documentSnapshot.data['userId'];
+          var rating =   documentSnapshot.data['rating'];
+          String review  = documentSnapshot.data['review'];
 
           return
             FutureBuilder(
-              future: usersRef.doc(ownerId).get(),
+              future: usersRef.document(ownerId).get(),
               builder: (context, snapshot) {
                 if (!snapshot.hasData) {
                   return circularProgress();
                 }
-                Users user = Users.fromDocument(snapshot.data);
+                User user = User.fromDocument(snapshot.data);
 //          bool isPostOwner = currentUserId == ownerId;
                 return Padding(
                   padding: const EdgeInsets.all(8.0),
@@ -85,7 +83,7 @@ class _ClientReviewState extends State<ClientReview> {
               },
             );
         },
-        query: FirebaseFirestore.instance.collection('Reviews').doc(widget.profileId)
+        query: Firestore.instance.collection('Reviews').document(widget.profileId)
             .collection('userReviews').orderBy('timestamp',descending: true)
 
 
@@ -97,10 +95,13 @@ class _ClientReviewState extends State<ClientReview> {
     return       Scaffold(
       appBar:  AppBar(backgroundColor: kPrimaryColor,
         title:  FittedBox(fit:BoxFit.contain,
-          child:TranslatedText('Client review',to:'${currentUser.language}',textStyle:TextStyle( fontSize: 35.0,
-        fontFamily :"MajorMonoDisplay",
+          child: Text('Client Reviews',
+            style: TextStyle(
+                fontFamily :"MajorMonoDisplay",
+                fontSize:  35.0 ,
+                color: Colors.white),
           ),
-        ),),
+        ),
         iconTheme: new IconThemeData(color: kIcon),
       ),
 

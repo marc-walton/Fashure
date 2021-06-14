@@ -2,7 +2,6 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fashow/Constants.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:fashow/user.dart';
@@ -15,9 +14,11 @@ import 'dart:io';
 import 'dart:async';
 import 'dart:ui';
 import 'package:uuid/uuid.dart';
-import 'package:translated_text/translated_text.dart';
+
 //import 'package:flutter_svg/svg.dart';
+import 'package:fashow/user.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 
 import 'package:image/image.dart' as Im;
 
@@ -37,7 +38,7 @@ class _EditProfileState extends State<EditProfile> {
   TextEditingController displayNameController = TextEditingController();
   TextEditingController bioController = TextEditingController();
   bool isLoading = false;
-  Users user;
+  User user;
   bool _displayNameValid = true;
   bool _bioValid = true;
   bool isCheckedDesigner = false;
@@ -56,7 +57,8 @@ class _EditProfileState extends State<EditProfile> {
   bool CheckedMakeup ;
   bool CheckedHair ;
   bool CheckedChoreographer ;
-  bool CheckedStylist ;bool CheckedBlogger ;
+  bool CheckedStylist ;
+    bool CheckedBlogger ;
 
   File file;
   bool isUploading = false;
@@ -134,18 +136,17 @@ class _EditProfileState extends State<EditProfile> {
         builder: (context) {
           return SimpleDialog(
 //            shape: ,
-            title: TranslatedText('Select Image',to:'${currentUser.language}'),
-
+            title: Text("Select Image"),
             children: <Widget>[
               SimpleDialogOption(
-                child: TranslatedText('Image from Gallery',to:'${currentUser.language}'),
+                child: Text("Image from Gallery"),
                 onPressed:  () {
                   getImage(ImageSource.gallery);
                   Navigator.pop(context);
                 },
               ),
               SimpleDialogOption(
-                child: TranslatedText('Cancel',to:'${currentUser.language}'),
+                child: Text("Cancel"),
                 onPressed: () => Navigator.pop(context),
               )
             ],
@@ -154,22 +155,22 @@ class _EditProfileState extends State<EditProfile> {
   }
 checkbox()
 async {
-  FirebaseFirestore.instance.collection('users')
+  Firestore.instance.collection('users')
       .where('id', isEqualTo: currentUser.id)
 
       .snapshots()
-      .listen((snapshot){  snapshot.docs.forEach((doc) {
+      .listen((snapshot){  snapshot.documents.forEach((doc) {
     setState(() {
 
-      CheckedIllustrator = doc.data()['illustrator'] ?? false;
-      CheckedModel = doc.data()['model'] ?? false;
-      CheckedMakeup = doc.data()['makeup'] ?? false;
-      CheckedHair = doc.data()['hair'] ?? false;
-      CheckedChoreographer = doc.data()['choreographer'] ?? false;
-      CheckedPhotographer = doc.data()['photographer'] ?? false;
-      CheckedStylist = doc.data()['stylist'] ?? false;
-      CheckedDesigner = doc.data()['designer'] ?? false;
- CheckedBlogger = doc.data()['blogger'] ?? false;
+      CheckedIllustrator = doc.data['illustrator'] ?? false;
+      CheckedModel = doc.data['model'] ?? false;
+      CheckedMakeup = doc.data['makeup'] ?? false;
+      CheckedHair = doc.data['hair'] ?? false;
+      CheckedChoreographer = doc.data['choreographer'] ?? false;
+      CheckedPhotographer = doc.data['photographer'] ?? false;
+      CheckedStylist = doc.data['stylist'] ?? false;
+      CheckedDesigner = doc.data['designer'] ?? false;
+ CheckedBlogger = doc.data['blogger'] ?? false;
 
       if(CheckedDesigner==true){
     setState(() {
@@ -244,17 +245,17 @@ async {
   }
 
   Future<String> uploadImage(imageFile) async {
-    UploadTask  uploadTask =
+    StorageUploadTask uploadTask =
     storageRef.child("profile_$photoId.jpg").putFile(imageFile);
-    TaskSnapshot storageSnap = await uploadTask;
+    StorageTaskSnapshot storageSnap = await uploadTask.onComplete;
     String downloadUrl = await storageSnap.ref.getDownloadURL();
     return downloadUrl;
   }
 
   createPostInFirestore({String mediaUrl, }) {
     usersRef
-        .doc(currentUser.id)
-        .update({
+        .document(currentUser.id)
+        .updateData({
       "photoUrl": mediaUrl,
 
     });
@@ -278,7 +279,7 @@ async {
         isCheckedDesigner = true;
 
       });
-      usersRef.doc(widget.currentUserId).update({
+      usersRef.document(widget.currentUserId).updateData({
    'designer':true
       });
 
@@ -290,7 +291,7 @@ async {
         isCheckedDesigner = false;
 
       });
-      usersRef.doc(widget.currentUserId).update({
+      usersRef.document(widget.currentUserId).updateData({
         'designer':false
       });
     }
@@ -304,7 +305,7 @@ async {
         isCheckedIllustrator = true;
 
       });
-      usersRef.doc(widget.currentUserId).update({
+      usersRef.document(widget.currentUserId).updateData({
    'illustrator':true
       });
 
@@ -316,7 +317,7 @@ async {
         isCheckedIllustrator = false;
 
       });
-      usersRef.doc(widget.currentUserId).update({
+      usersRef.document(widget.currentUserId).updateData({
         'illustrator':false
       });
     }
@@ -330,7 +331,7 @@ async {
         isCheckedPhotographer = true;
 
       });
-      usersRef.doc(widget.currentUserId).update({
+      usersRef.document(widget.currentUserId).updateData({
    'photographer':true
       });
 
@@ -342,7 +343,7 @@ async {
         isCheckedPhotographer = false;
 
       });
-      usersRef.doc(widget.currentUserId).update({
+      usersRef.document(widget.currentUserId).updateData({
         'photographer':false
       });
     }
@@ -356,7 +357,7 @@ async {
         isCheckedModel = true;
 
       });
-      usersRef.doc(widget.currentUserId).update({
+      usersRef.document(widget.currentUserId).updateData({
    'model':true
 
       });
@@ -369,7 +370,7 @@ async {
         isCheckedModel = false;
 
       });
-      usersRef.doc(widget.currentUserId).update({
+      usersRef.document(widget.currentUserId).updateData({
         'model':false
       });
     }
@@ -383,7 +384,7 @@ async {
         isCheckedMakeup = true;
 
       });
-      usersRef.doc(widget.currentUserId).update({
+      usersRef.document(widget.currentUserId).updateData({
    'makeup':true
       });
 
@@ -395,7 +396,7 @@ async {
         isCheckedMakeup = false;
 
       });
-      usersRef.doc(widget.currentUserId).update({
+      usersRef.document(widget.currentUserId).updateData({
         'makeup':false
       });
     }
@@ -409,7 +410,7 @@ void toggleHair(bool value) {
         isCheckedHair = true;
 
       });
-      usersRef.doc(widget.currentUserId).update({
+      usersRef.document(widget.currentUserId).updateData({
    'hair':true
       });
 
@@ -421,7 +422,7 @@ void toggleHair(bool value) {
         isCheckedHair = false;
 
       });
-      usersRef.doc(widget.currentUserId).update({
+      usersRef.document(widget.currentUserId).updateData({
         'hair':false
       });
     }
@@ -435,7 +436,7 @@ void toggleChoreographer(bool value) {
         isCheckedChoreographer = true;
 
       });
-      usersRef.doc(widget.currentUserId).update({
+      usersRef.document(widget.currentUserId).updateData({
    'choreographer':true
       });
 
@@ -447,7 +448,7 @@ void toggleChoreographer(bool value) {
         isCheckedChoreographer = false;
 
       });
-      usersRef.doc(widget.currentUserId).update({
+      usersRef.document(widget.currentUserId).updateData({
         'choreographer':false
       });
     }
@@ -461,7 +462,7 @@ void toggleStylist(bool value) {
         isCheckedStylist = true;
 
       });
-      usersRef.doc(widget.currentUserId).update({
+      usersRef.document(widget.currentUserId).updateData({
    'stylist':true
       });
 
@@ -473,7 +474,7 @@ void toggleStylist(bool value) {
         isCheckedStylist = false;
 
       });
-      usersRef.doc(widget.currentUserId).update({
+      usersRef.document(widget.currentUserId).updateData({
         'stylist':false
       });
     }
@@ -487,7 +488,7 @@ void toggleBlogger(bool value) {
         isCheckedBlogger = true;
 
       });
-      usersRef.doc(widget.currentUserId).update({
+      usersRef.document(widget.currentUserId).updateData({
    'blogger':true
       });
 
@@ -499,7 +500,7 @@ void toggleBlogger(bool value) {
         isCheckedBlogger = false;
 
       });
-      usersRef.doc(widget.currentUserId).update({
+      usersRef.document(widget.currentUserId).updateData({
         'blogger':false
       });
     }
@@ -509,8 +510,8 @@ void toggleBlogger(bool value) {
     setState(() {
       isLoading = true;
     });
-    DocumentSnapshot doc = await usersRef.doc(widget.currentUserId).get();
-    user = Users.fromDocument(doc);
+    DocumentSnapshot doc = await usersRef.document(widget.currentUserId).get();
+    user = User.fromDocument(doc);
     displayNameController.text = user.displayName;
     bioController.text = user.bio;
     setState(() {
@@ -587,7 +588,7 @@ void toggleBlogger(bool value) {
     });
 
     if (_displayNameValid && _bioValid) {
-      usersRef.doc(widget.currentUserId).update({
+      usersRef.document(widget.currentUserId).updateData({
         "displayName": displayNameController.text,
         "bio": bioController.text,
       });
@@ -597,14 +598,14 @@ void toggleBlogger(bool value) {
   }
 
   logout() async {
-    // await googleSignIn.signOut();
-    await FirebaseAuth.instance.signOut();
+    await googleSignIn.signOut();
+    // await FirebaseAuth.instance.signOut();
   // Get.offAll(Homepage());
     Navigator.pushAndRemoveUntil(
         context,
         MaterialPageRoute(
             builder: (context) => Homepage(
-authis: false,
+
             )),
             (_) => false );
     // Navigator.push(context, MaterialPageRoute(builder: (context) => Homepage()));
@@ -621,9 +622,11 @@ authis: false,
         title: Center(
           child:   FittedBox(
             fit:BoxFit.contain,
-            child: TranslatedText('Edit Profile',to:'${currentUser.language}',textStyle:TextStyle(
-                fontFamily :"MajorMonoDisplay",
-                color: Colors.white),),
+            child: Text(   'Edit Profile',
+              style: TextStyle(
+                  fontFamily :"MajorMonoDisplay",
+                  // fontSizfit: e:  35.0 ,
+                  color: Colors.white),),
           ),
           ),
         iconTheme: new IconThemeData(color: Colors.white),
@@ -690,14 +693,12 @@ authis: false,
                          tileColor:kblue,
 
                          child: ExpansionTile (
-                                 title: TranslatedText('I Freelance in',to:'${currentUser.language}',textStyle:TextStyle(
-                                     color: Colors.white),),
+                                 title: Text('I Freelance in',style:TextStyle(color:Colors.white)),
                                  maintainState:true,
                                  trailing:Icon(Icons.arrow_drop_down,color: kText,),
                                  children: [
                                    CheckboxListTile(
-                                     title: TranslatedText('Designer',to:'${currentUser.language}',textStyle:TextStyle(
-                                         color: Colors.white),),
+                                     title: Text('Designer',style: TextStyle(color: Colors.white), ),
                                      value: isCheckedDesigner,
                                      onChanged: (value){toggleDesigner(value);},
                                      activeColor: Colors.pink,
@@ -806,7 +807,7 @@ authis: false,
             ),
         ],
       ),
-          )
+          ),
     );
   }
 }
