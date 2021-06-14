@@ -13,6 +13,7 @@ import 'package:fashow/Constants.dart';
 import 'package:fashow/Product_screen.dart';
 import 'package:fashow/custom_image.dart';
 import 'package:fashow/size_config.dart';
+import 'package:translated_text/translated_text.dart';
 
 class SellerOrders extends StatefulWidget {
   @override
@@ -23,31 +24,33 @@ class _SellerOrdersState extends State<SellerOrders> {
 
   UpcomingOrders(){
     return  PaginateFirestore(
+        isLive: true,
+
 //    itemsPerPage: 2,
         itemBuilderType:
         PaginateBuilderType.listView,
         itemBuilder: (index, context, documentSnapshot)   {
-//        DocumentSnapshot ds = snapshot.data.documents[index];
-          String ownerId = documentSnapshot.data['ownerId'];
-          String prodId = documentSnapshot.data['prodId'];
-          String fulfilled = documentSnapshot.data['fulfilled'];
-          String courierId = documentSnapshot.data['courierId'];
-           String orderStatus = documentSnapshot.data['orderStatus'];
-            String size = documentSnapshot.data['size'];
-           String Address = documentSnapshot.data['Address'];
-String orderId = documentSnapshot.data['orderId'];
-String shopmediaUrl = documentSnapshot.data['shopmediaUrl'];
-String cusId = documentSnapshot.data['cusId'];
-String productname = documentSnapshot.data['productname'];
+//        DocumentSnapshot ds = snapshot.data.docs[index];
+          String ownerId = documentSnapshot.data()['ownerId'];
+          String prodId = documentSnapshot.data()['prodId'];
+          String fulfilled = documentSnapshot.data()['fulfilled'];
+          String courierId = documentSnapshot.data()['courierId'];
+           String orderStatus = documentSnapshot.data()['orderStatus'];
+            String size = documentSnapshot.data()['size'];
+           String Address = documentSnapshot.data()['Address'];
+String orderId = documentSnapshot.data()['orderId'];
+String shopmediaUrl = documentSnapshot.data()['shopmediaUrl'];
+String cusId = documentSnapshot.data()['cusId'];
+String productname = documentSnapshot.data()['productname'];
 
           return
             StreamBuilder(
-              stream: usersRef.document(ownerId).snapshots(),
+              stream: usersRef.doc(ownerId).snapshots(),
               builder: (context, snapshot) {
                 if (!snapshot.hasData) {
                   return circularProgress();
                 }
-                User user = User.fromDocument(snapshot.data);
+                Users user = Users.fromDocument(snapshot.data);
 //          bool isPostOwner = currentUserId == ownerId;
                 return Padding(
                   padding: const EdgeInsets.all(8.0),
@@ -70,7 +73,7 @@ String productname = documentSnapshot.data['productname'];
                           ),
                          ),
                       ),
-FutureBuilder(  future: productsRef.document(ownerId).collection('userProducts').document(prodId).get(),
+FutureBuilder(  future: productsRef.doc(ownerId).collection('userProducts').doc(prodId).get(),
     builder: (context, snapshot){
       DocumentSnapshot ds = snapshot.data;
       String usd= ds['usd'];
@@ -121,23 +124,26 @@ else {return Center(child: CircularProgressIndicator(),);}
 
                       Row(
                         children: [
-                          Text('Size:  $size',
-                            style: TextStyle(color: kText),),
+                          TranslatedText('Size:  $size',to:'${currentUser.language}',textStyle:
+                        TextStyle(color: kText),),
+
                         ],
                       ),
                        SizedBox(height:10.0),
                        Row(
                          children: [
-                           Text('Address: $Address',
-                            style: TextStyle(color: kText),),
+                           TranslatedText('Address: $Address',to:'${currentUser.language}',textStyle:
+                           TextStyle(color: kText),),
                          ],
                        ),
                       fulfilled=='false'?   Center(child: RaisedButton(
                         color: kblue,
                           onPressed:(){
                             Navigator.push(context, MaterialPageRoute(builder: (context) =>OrderFulfill(orderId:orderId ,ownerId: ownerId,shopmediaUrl:shopmediaUrl,prodId:prodId,cusId:cusId)));},
-                          child:  Text('Fulfill order',
-                        style: TextStyle(color: Colors.white),),)):Container(),
+                          child:
+                          TranslatedText('Fulfill order',to:'${currentUser.language}',textStyle:
+                          TextStyle(color:Colors.white),),
+                      ),):Container(),
                       Divider(color: kGrey,),
                     ],
 
@@ -147,8 +153,8 @@ else {return Center(child: CircularProgressIndicator(),);}
               },
             );
         },
-        query:  Firestore.instance.collection('ordersSeller')
-      .document(currentUser.id)
+        query:  FirebaseFirestore.instance.collection('ordersSeller')
+      .doc(currentUser.id)
       .collection('sellerOrder').orderBy('timestamp',descending: true)
             .where('fulfilled',isEqualTo: 'false')
 
@@ -156,32 +162,34 @@ else {return Center(child: CircularProgressIndicator(),);}
   }
   OrdersFulfilled(){
     return  PaginateFirestore(
+        isLive: true,
+
 //    itemsPerPage: 2,
         itemBuilderType:
         PaginateBuilderType.listView,
         itemBuilder: (index, context, documentSnapshot)   {
-//        DocumentSnapshot ds = snapshot.data.documents[index];
-          String ownerId = documentSnapshot.data['ownerId'];
-          String prodId = documentSnapshot.data['prodId'];
-          String fulfilled = documentSnapshot.data['fulfilled'];
-          String courierId = documentSnapshot.data['courierId'];
-            String courier = documentSnapshot.data['courier'];
+//        DocumentSnapshot ds = snapshot.data.docs[index];
+          String ownerId = documentSnapshot.data()['ownerId'];
+          String prodId = documentSnapshot.data()['prodId'];
+          String fulfilled = documentSnapshot.data()['fulfilled'];
+          String courierId = documentSnapshot.data()['courierId'];
+            String courier = documentSnapshot.data()['courier'];
 
-          String orderStatus = documentSnapshot.data['orderStatus'];
-          String size = documentSnapshot.data['size'];
-          String Address = documentSnapshot.data['Address'];
-          String orderId = documentSnapshot.data['orderId'];
-          String shopmediaUrl = documentSnapshot.data['shopmediaUrl'];
-          String cusId = documentSnapshot.data['cusId'];
-          String productname = documentSnapshot.data['productname'];
+          String orderStatus = documentSnapshot.data()['orderStatus'];
+          String size = documentSnapshot.data()['size'];
+          String Address = documentSnapshot.data()['Address'];
+          String orderId = documentSnapshot.data()['orderId'];
+          String shopmediaUrl = documentSnapshot.data()['shopmediaUrl'];
+          String cusId = documentSnapshot.data()['cusId'];
+          String productname = documentSnapshot.data()['productname'];
           return
             StreamBuilder(
-              stream: usersRef.document(ownerId).snapshots(),
+              stream: usersRef.doc(ownerId).snapshots(),
               builder: (context, snapshot) {
                 if (!snapshot.hasData) {
                   return circularProgress();
                 }
-                User user = User.fromDocument(snapshot.data);
+                Users user = Users.fromDocument(snapshot.data);
                 return Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Column(
@@ -204,7 +212,7 @@ else {return Center(child: CircularProgressIndicator(),);}
                           ),
                          ),
                       ),
-                      StreamBuilder(  stream: productsRef.document(ownerId).collection('userProducts').document(prodId).snapshots(),
+                      StreamBuilder(  stream: productsRef.doc(ownerId).collection('userProducts').doc(prodId).snapshots(),
                           builder: (context, snapshot){
                             DocumentSnapshot ds = snapshot.data;
 
@@ -255,36 +263,37 @@ else {return Center(child: CircularProgressIndicator(),);}
 
                       Row(
                         children: [
-                          Text('Size:  $size',
-                            style: TextStyle(color: kText),),
+                          TranslatedText('Size:  $size',to:'${currentUser.language}',textStyle:
+                          TextStyle(color: kText),),
+
                         ],
                       ),
                       SizedBox(height:10.0),
                       Row(
                         children: [
-                          Text('Address: $Address',
-                            style: TextStyle(color: kText),),
-                        ],
+                          TranslatedText('Address: $Address',to:'${currentUser.language}',textStyle:
+                          TextStyle(color: kText),),
+                          ],
                       ),
                       SizedBox(height:10.0),
 
                       Row(
                         children: [
-                          Text('orderStatus:  $orderStatus',
-                            style: TextStyle(color: kText),),
-                        ],
+                          TranslatedText('orderStatus:  $orderStatus',to:'${currentUser.language}',textStyle:
+                          TextStyle(color: kText),),
+                           ],
                       ),
                       SizedBox(height:10.0),
 
                       Row(
                         children: [
-                          Text('Shipment Service:  $courierId',
-                            style: TextStyle(color: kText),),
-                        ],
+                          TranslatedText('Shipment Service:  $courierId',to:'${currentUser.language}',textStyle:
+                          TextStyle(color: kText),),
+                             ],
                       ),Row(
                         children: [
-                          Text('Shipment Id:  $courierId',
-                            style: TextStyle(color: kText),),
+                          TranslatedText('Shipment Id:  $courierId',to:'${currentUser.language}',textStyle:
+                          TextStyle(color: kText),),
                         ],
                       ),
 
@@ -296,8 +305,8 @@ else {return Center(child: CircularProgressIndicator(),);}
               },
             );
         },
-        query:  Firestore.instance.collection('ordersSeller')
-            .document(currentUser.id)
+        query:  FirebaseFirestore.instance.collection('ordersSeller')
+            .doc(currentUser.id)
             .collection('sellerOrder').orderBy('timestamp',descending: true)
             .where('fulfilled',isEqualTo: 'true')
 
@@ -329,10 +338,14 @@ else {return Center(child: CircularProgressIndicator(),);}
                   unselectedLabelColor: kIcon,
 
                   tabs: [
-                    Text("Upcoming orders", style: TextStyle(
-                      fontSize: SizeConfig.safeBlockHorizontal * 5,),),
-                    Text("Fulfilled orders", style: TextStyle(
-                        fontSize: SizeConfig.safeBlockHorizontal * 5),),
+                    TranslatedText('Upcoming orders',to:'${currentUser.language}',textStyle:
+                    TextStyle(
+                      fontSize: SizeConfig.safeBlockHorizontal * 5,
+                        ),),
+                    TranslatedText('Fulfilled orders',to:'${currentUser.language}',textStyle:
+                    TextStyle(
+                      fontSize: SizeConfig.safeBlockHorizontal * 5,
+                    ),),
 
                   ],
                 ),
@@ -363,14 +376,16 @@ else {return Center(child: CircularProgressIndicator(),);}
     Column(
       children: [
         ExpansionTile (
-          title: Text('Upcoming Orders'),
+          title:  TranslatedText('Upcoming orders',to:'${currentUser.language}'
+         ),
           maintainState:true,
           children: [
             UpcomingOrders()
           ],
         ),
         ExpansionTile (
-          title: Text('Orders Fulfilled'),
+          title:  TranslatedText('Orders Fulfilled',to:'${currentUser.language}'
+          ),
           maintainState:true,
           children: [
             OrdersFulfilled()
@@ -383,11 +398,11 @@ else {return Center(child: CircularProgressIndicator(),);}
   }
   update() async {
 
-    QuerySnapshot snapshot = await Firestore.instance.collection('ordersSeller')
-        .document(currentUser.id)
-        .collection('sellerOrder').getDocuments();
-    snapshot.documents.forEach((doc) {
-    doc.reference.updateData({'read':'true'});
+    QuerySnapshot snapshot = await FirebaseFirestore.instance.collection('ordersSeller')
+        .doc(currentUser.id)
+        .collection('sellerOrder').get();
+    snapshot.docs.forEach((doc) {
+    doc.reference.update({'read':'true'});
   });
         }
 

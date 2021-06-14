@@ -21,6 +21,8 @@ class _RegisterPageState extends State<RegisterPage> {
   TextEditingController pwdInputController;
   TextEditingController confirmPwdInputController;
   String dropdownValue = "";
+  String lang = "en";
+
   final DateTime timestamp = DateTime.now();
 bool save = false;
   @override
@@ -75,30 +77,30 @@ bool save = false;
                         decoration: InputDecoration(
                             labelStyle:  TextStyle(color:kText),
                             hintStyle:  TextStyle(color:kText),
-                            labelText: 'Full Name*', hintText: "Full Name*"),
+                            labelText: 'Full Name*', hintText: "Full Name"),
                         controller: firstNameInputController,
                         validator: (value) {
                           if (value.length < 3) {
-                            return "Please enter a valid first name.";
+                            return "Please enter a valid name.";
                           }
                         },
                       ),
-                      TextFormField(
-                          style: TextStyle(color:kText),
-                          decoration: InputDecoration(
-                              labelStyle:  TextStyle(color:kText),
-                              hintStyle:  TextStyle(color:kText),                              labelText: 'User Name*', hintText: "unique to you on Fashure "),
-                          controller: lastNameInputController,
-                          validator: (value) {
-                            if (value.length < 3) {
-                              return "Please enter a valid user name.";
-                            }
-                          }),
+                      // TextFormField(
+                      //     style: TextStyle(color:kText),
+                      //     decoration: InputDecoration(
+                      //         labelStyle:  TextStyle(color:kText),
+                      //         hintStyle:  TextStyle(color:kText),                              labelText: 'User Name*', hintText: "unique to you on Fashure "),
+                      //     controller: lastNameInputController,
+                      //     validator: (value) {
+                      //       if (value.length < 3) {
+                      //         return "Please enter a valid user name.";
+                      //       }
+                      //     }),
                       TextFormField(
                         style: TextStyle(color:kText),
                         decoration: InputDecoration(
                             labelStyle:  TextStyle(color:kText),
-                            hintStyle:  TextStyle(color:kText),                            labelText: 'Email*', hintText: "john.doe@gmail.com"),
+                            hintStyle:  TextStyle(color:kText),                            labelText: 'Email', hintText: "john.doe@gmail.com"),
                         controller: emailInputController,
                         keyboardType: TextInputType.emailAddress,
                         validator: emailValidator,
@@ -107,7 +109,7 @@ bool save = false;
                         style: TextStyle(color:kText),
                         decoration: InputDecoration(
                             labelStyle:  TextStyle(color:kText),
-                            hintStyle:  TextStyle(color:kText),                            labelText: 'Password*', hintText: "********"),
+                            hintStyle:  TextStyle(color:kText),                            labelText: 'Password', hintText: "********"),
                         controller: pwdInputController,
                         obscureText: true,
                         validator: pwdValidator,
@@ -117,7 +119,7 @@ bool save = false;
                         decoration: InputDecoration(
                             labelStyle:  TextStyle(color:kText),
                             hintStyle:  TextStyle(color:kText),
-                            labelText: 'Confirm Password*', hintText: "********"),
+                            labelText: 'Confirm Password', hintText: "Confirm Password"),
                         controller: confirmPwdInputController,
                         obscureText: true,
                         validator: pwdValidator,
@@ -172,6 +174,105 @@ bool save = false;
 
                         ],
                       ),
+                    Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: <Widget>[
+                          Container(
+                            padding: EdgeInsets.all(16),
+                            child: DropDownFormField(
+
+                              titleText: '',
+                              hintText: 'Language',
+                              value: lang,
+                              onSaved: (value) {
+                                setState(() {
+                                  lang = value;
+                                });
+                              },
+                              onChanged: (value) {
+                                setState(() {
+                                  lang = value;
+                                });
+                              },
+                              dataSource: [
+                                {
+                                  "display": "English",
+                                  "value": "en",
+                                },
+                                {
+                                  "display": "русский",
+                                  "value": "ru",
+                                },
+                                {
+                                  "display": "日本語", //nihango
+                                  "value": "jp",
+                                },
+                                {
+                                  "display": "española",
+                                  "value": "es",
+                                },
+                                {
+                                  "display": "한국어", //hangu-guio
+                                  "value": "ko",
+                                },
+                                {
+                                  "display": "فارسی", //persian
+                                  "value": "fa",
+                                },
+                                {
+                                  "display": "français",//French
+                                  "value": "fr",
+                                },
+                                {
+                                  "display": "Deutsche",  //German
+                                  "value": "de",
+                                },
+                                {
+                                  "display": "Nederlands",    //Dutch
+                                  "value": "nl",
+                                },
+                                {
+                                  "display": "português", //Portuguese
+                                  "value": "pt",
+                                },
+                                {
+                                  "display": "Polskie",  //Polish
+                                  "value": "pl",
+                                },
+                                {
+                                  "display": "svenska",   //Swedish
+                                  "value": "sv",
+                                },
+                                {
+                                  "display": "中国人",  //Chinese  Zhōngguó rén
+                                  "value": "zh",
+                                },
+                                {
+                                  "display": "український",   //Ukrainian
+                                  "value": "uk",
+                                },
+                                {
+                                  "display": "ไทย",   //Thai  Thịy
+                                  "value": "th",
+                                },
+                                {
+                                  "display": "Gaeilge",   //Irish
+                                  "value": "ga",
+                                },
+                                {
+                                  "display": "Suomalainen",   //Finnish
+                                  "value": "fi",
+                                },
+
+                              ],
+                              textField: 'display',
+                              valueField: 'value',
+                            ),
+                          ),
+
+                        ],
+                      ),
+
                       RaisedButton(
                         color: kblue,
 
@@ -185,23 +286,25 @@ bool save = false;
                                   .createUserWithEmailAndPassword(
                                   email: emailInputController.text,
                                   password: pwdInputController.text)
-                                  .then((ser) async  { Firestore.instance
+                                  .then((ser) async  { FirebaseFirestore.instance
                                   .collection("users")
-                                  .document(ser.user.uid)
-                                  .setData({
+                                  .doc(ser.user.uid)
+                                  .set({
                                   "id": ser.user.uid,
-                                  "username" : lastNameInputController.text,
+                                  "username" : firstNameInputController.text,
                                   "photoUrl": "https://firebasestorage.googleapis.com/v0/b/fashure-app.appspot.com/o/appstore.png?alt=media&token=43d3aa9d-bf8a-4272-b0c5-debb92b291b0",
                                   "email": emailInputController.text,
                                   "displayName": firstNameInputController.text,
                                   "bio": "",
                                   "client": 0 ,
                                   "country":dropdownValue,
-                                  "timestamp": timestamp
+                                  "timestamp": timestamp,
+              "language": lang,
+
                                   });
                               bankRef
-                                  .document(ser.user.uid)
-                                  .setData({
+                                  .doc(ser.user.uid)
+                                  .set({
 
                                 "accno":"",
                                 "ifsc":"",
@@ -209,19 +312,19 @@ bool save = false;
                               });
                               // make new user their own follower (to include their posts in their timeline)
                               await followersRef
-                                  .document(ser.user.uid)
+                                  .doc(ser.user.uid)
                                   .collection('userFollowers')
-                                  .document(ser.user.uid)
-                                  .setData({});
+                                  .doc(ser.user.uid)
+                                  .set({});
 
                               Navigator.pushAndRemoveUntil(
                                   context,
                                   MaterialPageRoute(
                                       builder: (context) => Homepage(
-
+userid: ser.user.uid,
+                                        authis: true,
                                       )),
                                       (_) => false );
-
 
                               });
                               //     .then((result) => {

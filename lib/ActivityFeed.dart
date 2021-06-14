@@ -15,7 +15,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:fashow/post_screen.dart';
-
+import 'package:translated_text/translated_text.dart';
 import 'package:fashow/Profile.dart';
 import 'package:flutter/cupertino.dart';
 
@@ -33,7 +33,7 @@ class  _ActivityFeedState extends State<ActivityFeed>  with  TickerProviderState
   int data;
   int serdata;
   final CollectionReference _messageCollection =
-  Firestore.instance.collection(MESSAGES_COLLECTION);
+  FirebaseFirestore.instance.collection(MESSAGES_COLLECTION);
 
   final List<Tab> _tabs = [new Tab(title: "Notifications",color: kPrimaryColor),
     new Tab(title: "Chat",color: kPrimaryColor),
@@ -59,22 +59,22 @@ class  _ActivityFeedState extends State<ActivityFeed>  with  TickerProviderState
   }
 
   Updateread() async { QuerySnapshot snapshot = await activityFeedRef
-      .document(currentUser.id)
+      .doc(currentUser.id)
       .collection('feedItems')
-      .getDocuments();
-  snapshot.documents.forEach((doc) {
-    doc.reference.updateData({'read':'true'});
+      .get();
+  snapshot.docs.forEach((doc) {
+    doc.reference.update({'read':'true'});
   });}
 
   getActivityFeed() async {
     QuerySnapshot snapshot = await activityFeedRef
-        .document(currentUser.id)
+        .doc(currentUser.id)
         .collection('feedItems')
         .orderBy('timestamp', descending: true)
         .limit(50)
-        .getDocuments();
+        .get();
     List<ActivityFeedItem> feedItems = [];
-    snapshot.documents.forEach((doc) {
+    snapshot.docs.forEach((doc) {
       feedItems.add(ActivityFeedItem.fromDocument(doc));
       //   print('Activity Feed Item: ${doc.data}');
     });
@@ -84,11 +84,11 @@ class  _ActivityFeedState extends State<ActivityFeed>  with  TickerProviderState
     return
     StreamBuilder(
       stream:  activityFeedRef
-          .document(currentUser.id)
+          .doc(currentUser.id)
           .collection('feedItems')
           .where('read',isEqualTo: 'false').snapshots(),
       builder: (context,snapshot){
-        int data =  snapshot.data.documents.length;
+        int data =  snapshot.data.docs.length;
         return
           Badge(
             shape: BadgeShape.circle,
@@ -105,7 +105,7 @@ class  _ActivityFeedState extends State<ActivityFeed>  with  TickerProviderState
     return
     StreamBuilder(
       stream: _messageCollection
-          .document(currentUser.id)
+          .doc(currentUser.id)
         .snapshots(),
 
       builder: (context,snapshot){
@@ -151,26 +151,26 @@ class  _ActivityFeedState extends State<ActivityFeed>  with  TickerProviderState
   orderbadge(){
     return
     StreamBuilder(
-      stream:  Firestore.instance.collection('ordersSeller')
-          .document(currentUser.id)
+      stream:  FirebaseFirestore.instance.collection('ordersSeller')
+          .doc(currentUser.id)
           .collection('sellerOrder')
           .where('read',isEqualTo: 'false').snapshots(),
       builder: (context,snapshot){
 
-          data =  snapshot.data.documents.length ?? 0;
+          data =  snapshot.data.docs.length ?? 0;
 
 
         return
           StreamBuilder(
-            stream:   Firestore.instance.collection('Payments')
-                .document(currentUser.id,)
+            stream:   FirebaseFirestore.instance.collection('Payments')
+                .doc(currentUser.id,)
                 .collection('SellerPayments')
                 .where('fulfilled',isEqualTo: 'true')
                 .where('read',isEqualTo: 'false').snapshots(),
             builder: (context,snapshot){
 
               setState(() {
-                data =  data + snapshot.data.documents.length ?? 0;
+                data =  data + snapshot.data.docs.length ?? 0;
               });
               return
                 Badge(
@@ -189,25 +189,25 @@ class  _ActivityFeedState extends State<ActivityFeed>  with  TickerProviderState
   servicebadge(){
     return
     StreamBuilder(
-      stream:     Firestore.instance.collection('serviceSeller')
-          .document(currentUser.id)
+      stream:     FirebaseFirestore.instance.collection('serviceSeller')
+          .doc(currentUser.id)
           .collection('sellerService')
           .where('read',isEqualTo: 'false').snapshots(),
       builder: (context,snapshot){
         setState(() {
-          serdata =  snapshot.data.documents.length ?? 0;
+          serdata =  snapshot.data.docs.length ?? 0;
         });
 
         return
           StreamBuilder(
-            stream:   Firestore.instance.collection('Payments')
-                .document(currentUser.id)
+            stream:   FirebaseFirestore.instance.collection('Payments')
+                .doc(currentUser.id)
                 .collection('ServicePayments')
                 .where('fulfilled',isEqualTo: 'true')
                 .where('read',isEqualTo: 'false').snapshots(),
             builder: (context,snapshot){
               setState(() {
-                serdata =   serdata + snapshot.data.documents.length;
+                serdata =   serdata + snapshot.data.docs.length;
               });
               return
                 Badge(
@@ -231,7 +231,6 @@ class  _ActivityFeedState extends State<ActivityFeed>  with  TickerProviderState
           child: AppBar(title:  FittedBox(
               fit: BoxFit.contain,child: Text(_myHandler.title,style: TextStyle(fontFamily: 'MajorMonoDisplay'),)),
               backgroundColor: _myHandler.color,
-
               bottom: PreferredSize(
                 preferredSize: Size.fromHeight(100.0),
                 child:Container(
@@ -247,16 +246,16 @@ class  _ActivityFeedState extends State<ActivityFeed>  with  TickerProviderState
                         fit: BoxFit.contain,
                         child: Row(
                           children: [
-                            Text('Notifications'),
-                            badgescount(),
+                            TranslatedText('Notifications',to:'${currentUser.language}'),
+                                 badgescount(),
                           ],
                         ),
                       ),
                       FittedBox(
                         fit: BoxFit.contain,
                         child: Row(
-                          children: [
-                            Text('Chats'),
+                          children:[
+                          TranslatedText('Chats',to:'${currentUser.language}'),
                             // badgescountmessage(),
                           ],
                         ),
@@ -265,7 +264,7 @@ class  _ActivityFeedState extends State<ActivityFeed>  with  TickerProviderState
                         fit: BoxFit.contain,
                         child: Row(
                           children: [
-                            Text('Settings'),
+                            TranslatedText('Settings',to:'${currentUser.language}'),
 
                           ],
                         ),
@@ -284,7 +283,9 @@ class  _ActivityFeedState extends State<ActivityFeed>  with  TickerProviderState
                       borderSide: BorderSide(color: kblue),
                       color: Colors.white,
                       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-                     child: Text('Dashboard',style: TextStyle(color: Colors.white,fontSize: 20.0),),
+                     child: TranslatedText('Dashboard',to:'${currentUser.language}',
+                         textStyle: TextStyle(color: Colors.white,fontSize: 20.0)),
+
                       onPressed: () {
            Navigator.push(context, MaterialPageRoute(builder: (context) =>AllDash()));
                         // do something
@@ -337,7 +338,7 @@ class  _ActivityFeedState extends State<ActivityFeed>  with  TickerProviderState
                     ]),
                 Column(
                   children: [
-                    Settings()
+                    Setting()
                   ],
                 ),
 
@@ -386,15 +387,15 @@ final String message;
 
   factory ActivityFeedItem.fromDocument(DocumentSnapshot doc) {
     return ActivityFeedItem(
-      username: doc['username'],
-      userId: doc['userId'],
-      type: doc['type'],
-      mediaUrl: doc['mediaUrl'],
-      postId: doc['postId'],
-      userProfileImg: doc['userProfileImg'],
-      commentData: doc['commentData'],
-      timestamp: doc['timestamp'],
-      message: doc['message'],
+      username: doc.data()['username'],
+      userId: doc.data()['userId'],
+      type: doc.data()['type'],
+      mediaUrl: doc.data()['mediaUrl'],
+      postId: doc.data()['postId'],
+      userProfileImg: doc.data()['userProfileImg'],
+      commentData: doc.data()['commentData'],
+      timestamp: doc.data()['timestamp'],
+      message: doc.data()['message'],
 
     );
   }

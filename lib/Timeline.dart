@@ -24,7 +24,10 @@ import 'package:getflutter/components/button/gf_button.dart';
 import 'package:getflutter/shape/gf_button_shape.dart';
 import 'package:paginate_firestore/paginate_firestore.dart';
 import 'package:get/get.dart';
-final CollectionReference usersRef = Firestore.instance.collection('users');
+import 'package:translated_text/translated_text.dart';
+
+
+final CollectionReference usersRef = FirebaseFirestore.instance.collection('users');
 
   class Timeline extends StatefulWidget {
     // final String postId;
@@ -36,7 +39,7 @@ final CollectionReference usersRef = Firestore.instance.collection('users');
     // final dynamic likes;
 
 
-    final User currentUser;
+    final Users currentUser;
 
     Timeline({this.currentUser,
     // this.postId,
@@ -81,7 +84,7 @@ final CollectionReference usersRef = Firestore.instance.collection('users');
 TabController _tabController;
     List<Post> posts;
     List<String> foollowingList = [];
-
+String post ;
    List timelinePosts = [];
 
     @override
@@ -89,7 +92,7 @@ TabController _tabController;
       super.initState();
       getFfollowing();
 
-
+      uhsbdc();
       _tabController = TabController(length: 3, vsync: this, initialIndex: 0);
       _tabController.addListener(_handleTabIndex);
     }
@@ -106,17 +109,29 @@ TabController _tabController;
     }
 
     List <Post>Posts = [];
-
+ getUser() {
+  try{
+    return
+    Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: ClipRRect(
+          borderRadius: BorderRadius.circular(15.0),
+          child: Container(height:70,width:70,child:currentUser.photoUrl==null? Image.network("https://firebasestorage.googleapis.com/v0/b/fashure-app.appspot.com/o/appstore.png?alt=media&token=43d3aa9d-bf8a-4272-b0c5-debb92b291b0"):Image.network(currentUser.photoUrl),)),
+    );
+  }catch(e) {
+    print(e);
+  }
+}
 
     ///1
     getTimeline() async {
       QuerySnapshot snapshot = await timelineRef
-          .document(widget.currentUser.id)
+          .doc(widget.currentUser.id)
           .collection('timelinePosts')
           .orderBy('timestamp', descending: true)
-          .getDocuments();
+          .get();
       List<Post> posts =
-      snapshot.documents.map((doc) => Post.fromDocument(doc)).toList();
+      snapshot.docs.map((doc) => Post.fromDocument(doc)).toList();
       setState(() {
         this.posts = posts;
       });
@@ -134,11 +149,11 @@ TabController _tabController;
 
     getFfollowing() async {
       QuerySnapshot snapshot = await followingRef
-          .document(currentUser.id)
+          .doc(currentUser.id)
           .collection('userFollowing')
-          .getDocuments();
+          .get();
       setState(() {
-        foollowingList = snapshot.documents.map((doc) => doc.documentID).toList();
+        foollowingList = snapshot.docs.map((doc) => doc.id).toList();
       });
     }
 
@@ -155,8 +170,8 @@ TabController _tabController;
             return circularProgress();
           }
           List<UserResult> userResults = [];
-          snapshot.data.documents.forEach((doc) {
-            User user = User.fromDocument(doc);
+          snapshot.data.docs.forEach((doc) {
+            Users user = Users.fromDocument(doc);
             final bool isAuthUser = currentUser.id == user.id;
             final bool isFollowingUser = foollowingList.contains(user.id);
             // remove auth user from recommended list
@@ -202,9 +217,94 @@ TabController _tabController;
         },
       );
     }
-
-
-
+// void create() async {
+//   var token =
+//       "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjE1MDQ2MTYsImlzcyI6Imh0dHBzOi8vYXBpdjIuc2hpcHJvY2tldC5pbi92MS9leHRlcm5hbC9hdXRoL2xvZ2luIiwiaWF0IjoxNjIyODc2NjQwLCJleHAiOjE2MjM3NDA2NDAsIm5iZiI6MTYyMjg3NjY0MCwianRpIjoibXp1WWdsMDRCU1dNbDV1OSJ9.-uLAI9p1IrNHQPSM7Zo7q6Gehrk8XMMxk10__NxZXw0";
+//   var headers = {
+//     'Content-Type': 'application/json',
+//     'Authorization': 'Bearer {{$token}}'
+//   };
+//   Map<String, String> toJson() => {
+//     'Content-Type': 'application/json',
+//     'Authorization': 'Bearer {{$token}}'
+//   };
+//
+//   var request = http.Request(
+//       'GET',
+//       Uri.parse(
+//           'https://apiv2.shiprocket.in/v1/external/courier/international/serviceability'));
+//
+//   request.headers.addAll(toJson());
+//
+//   http.StreamedResponse response = await request.send();
+//
+//   if (response.statusCode == 200) {
+//     print(await response.stream.bytesToString());
+//   } else {
+//     print(response.reasonPhrase);
+//   }
+// }
+//
+// postRequest() async {
+//   // todo - fix baseUrl
+//   var url = Uri.parse('https://api.goshippo.com/shipments/');
+//
+//   Map<String, String> toJson() => {
+//     'Authorization':
+//     'ShippoToken shippo_test_5ba5cdb661ad08575805e69f40e4e6fc05a5a5e3',
+//     'Content-Type': 'application/json',
+//   };
+//   print(toJson());
+//   final http.Response response = await http.post(url,
+//       headers: toJson(),
+//       body: jsonEncode({
+//         "address_to": {
+//           "name": "Mr Hippo",
+//           "street1": "965 Mission St #572",
+//           "city": "San Francisco",
+//           "state": "CA",
+//           "zip": "94103",
+//           "country": "US",
+//           "phone": "4151234567",
+//           "email": "mrhippo@goshippo.com"
+//         },
+//         "address_from": {
+//           "name": "Mrs Hippo",
+//           "street1": "1092 Indian Summer Ct",
+//           "city": "San Jose",
+//           "state": "CA",
+//           "zip": "95122",
+//           "country": "US",
+//           "phone": "4159876543",
+//           "email": "mrshippo@goshippo.com"
+//         },
+//         "parcels": [
+//           {
+//             "length": "10",
+//             "width": "15",
+//             "height": "10",
+//             "distance_unit": "in",
+//             "weight": "1",
+//             "mass_unit": "lb"
+//           }
+//         ],
+//         "async": false
+//       }));
+//
+//   // todo - handle non-200 status code, etc
+//   if (response.statusCode == 200) {
+//     print(await response.body);
+//   } else {
+//     print(response.reasonPhrase);
+//     print(response.statusCode);
+//   }
+// }[
+    uhsbdc()async{var translation = await translator
+        .translate("fuck", from: '${currentUser.language}', to: 'it');
+    setState(() {
+      post = translation.text;
+    });
+    }
     @override
     Widget build(BuildContext context) {
           return Scaffold( backgroundColor: kPrimaryColor,
@@ -236,27 +336,37 @@ TabController _tabController;
                     tabs: <Widget>[
 
 
+
+
                       FittedBox(
                         fit:BoxFit.fitWidth,
-                        child: Text(   'Posts',
-                          style: TextStyle(
-                              fontFamily :"MajorMonoDisplay",
+                        child: TranslatedText('Posts',to:'${currentUser.language}',textStyle:TextStyle(
+                            fontFamily :"MajorMonoDisplay",
 
                               color: Colors.white),),
-                      ),  FittedBox(
+                      ),
+                      FittedBox(
                         fit:BoxFit.fitWidth,
-                        child: Text(   'Collections',
-                          style: TextStyle(
-                              fontFamily :"MajorMonoDisplay",
+                        child: Text(post),
+                      ),
 
-                              color: Colors.white),),
-                      ), FittedBox(
+                      FittedBox(
                         fit:BoxFit.fitWidth,
-                        child: Text(   'Editorial',
-                          style: TextStyle(
-                              fontFamily :"MajorMonoDisplay",
+                        child: TranslatedText('Collection',to:'${currentUser.language}',textStyle:TextStyle(
+                            fontFamily :"MajorMonoDisplay",
 
                               color: Colors.white),),
+                      ),
+
+
+                      FittedBox(
+                        fit:BoxFit.fitWidth,
+                        child:
+                        TranslatedText('Posts',to:'${currentUser.language}',
+                          textStyle:TextStyle(
+                              fontFamily :"MajorMonoDisplay",
+                              color: Colors.white),),
+
                       ),
                     ],
                   ),
@@ -283,12 +393,7 @@ TabController _tabController;
 
                         // do something
                       },
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: ClipRRect(
-                            borderRadius: BorderRadius.circular(15.0),
-                            child: Container(child: Image.network(currentUser.photoUrl),)),
-                      ),
+                      child:Expanded(child: Container(child:getUser())),
                     ),
 
                   ]
@@ -358,16 +463,22 @@ class Collection extends StatelessWidget {
   Widget build(BuildContext context) {
 
     return  PaginateFirestore(
+
+      itemsPerPage: 10,
       itemBuilderType:
       PaginateBuilderType.listView,
       itemBuilder: (index, context, documentSnapshot)  {
-        return new  FutureBuilder(
-          future: usersRef.document( documentSnapshot.data['ownerId']).get(),
+        final data = documentSnapshot.data() ;
+
+
+        String ownerid=documentSnapshot.data()['ownerId'];
+        return new  StreamBuilder(
+          stream: usersRef.doc(data['ownerId'] ).snapshots(),
           builder: (context, snapshot) {
             if (!snapshot.hasData) {
               return circularProgress();
             }
-            User user = User.fromDocument(snapshot.data);
+            Users user = Users.fromDocument(snapshot.data);
 //          bool isPostOwner = currentUserId == ownerId;
             return Column(children: <Widget>[
               ListTile(
@@ -390,7 +501,7 @@ class Collection extends StatelessWidget {
                 ),
                ),
               ListTile(
-                title: Text(documentSnapshot.data['title'],
+                title: Text(documentSnapshot.data()['title'],
                     maxLines: 3,
                     style: new TextStyle(
                         fontWeight: FontWeight.w500,
@@ -405,8 +516,8 @@ class Collection extends StatelessWidget {
                         context,
                         MaterialPageRoute(
                           builder: (context) => CollScreen(
-                            collId: documentSnapshot.data['collId'],
-                            userId:  documentSnapshot.data['ownerId'],
+                            collId: documentSnapshot.data()['collId'],
+                            userId:  documentSnapshot.data()['ownerId'],
                           ),
                         ),
                       );
@@ -420,7 +531,7 @@ class Collection extends StatelessWidget {
                         width: MediaQuery.of(context).size.width,
                         child:
                         CachedNetworkImage(
-                          imageUrl:  documentSnapshot.data['headerImage'],
+                          imageUrl:  documentSnapshot.data()['headerImage'],
                         )
                     ),
                   ),
@@ -445,17 +556,18 @@ class Blog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
         return  PaginateFirestore(
+          itemsPerPage: 10,
         itemBuilderType:
         PaginateBuilderType.listView, //Change types accordingly
         itemBuilder: (index, context, documentSnapshot) {
 
           return new  FutureBuilder(
-            future: usersRef.document( documentSnapshot.data['ownerId']).get(),
+            future: usersRef.doc( documentSnapshot.data()['ownerId']).get(),
             builder: (context, snapshot) {
               if (!snapshot.hasData) {
                 return circularProgress();
               }
-              User user = User.fromDocument(snapshot.data);
+              Users user = Users.fromDocument(snapshot.data);
 //          bool isPostOwner = currentUserId == ownerId;
               return Column(children: <Widget>[
                 GestureDetector(                      onTap: () => showProfile(context, profileId: user.id),
@@ -482,7 +594,7 @@ class Blog extends StatelessWidget {
                 ),
                 ListTile(
 
-                  title: Text(documentSnapshot.data['title'],
+                  title: Text(documentSnapshot.data()['title'],
                       maxLines: 3,
                       style: new TextStyle(
                           fontWeight: FontWeight.w500,
@@ -497,8 +609,8 @@ class Blog extends StatelessWidget {
                           context,
                           MaterialPageRoute(
                             builder: (context) => BlogScreen(
-                              blogId: documentSnapshot.data['blogId'],
-                              userId:  documentSnapshot.data['ownerId'],
+                              blogId: documentSnapshot.data()['blogId'],
+                              userId:  documentSnapshot.data()['ownerId'],
                             ),
                           ),
                         );
@@ -511,7 +623,7 @@ class Blog extends StatelessWidget {
                         ),
                         width: MediaQuery.of(context).size.width,
 
-                        child:  CachedNetworkImage( imageUrl: documentSnapshot.data['blogmediaUrl']),
+                        child:  CachedNetworkImage( imageUrl: documentSnapshot.data()['blogmediaUrl']),
 
                       ),
                     ),
@@ -528,7 +640,7 @@ class Blog extends StatelessWidget {
         },
 
 
-        query: Firestore.instance.collectionGroup('userBlog').orderBy('timestamp',descending: true),
+        query: FirebaseFirestore.instance.collectionGroup('userBlog').orderBy('timestamp',descending: true),
 
       );
 

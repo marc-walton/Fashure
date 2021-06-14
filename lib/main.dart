@@ -1,213 +1,160 @@
 import 'package:fashow/provider/image_upload_provider.dart';
+import 'package:translated_text/translated_text.dart';
 import 'package:flutter/material.dart';
 //import 'package:flutter_svg/svg.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:fashow/HomePage.dart';
 import 'package:provider/provider.dart';
-import 'package:fashow/HomePage.dart';
 import 'package:get/get.dart';
-
-//void main() => runApp(MaterialApp(
-//
-//
-//    home: BottomNavBar(
-//
-//    )
-//
-//),);
-//
-//class BottomNavBar extends StatefulWidget {
-//  @override
-//  _BottomNavBarState createState() => _BottomNavBarState();
-//}
-//class _BottomNavBarState extends State<BottomNavBar> {
-//  int _pageIndex = 0;
-//  GlobalKey _bottomNavigationKey = GlobalKey();
-//
-//
-//  List pages = [
-//
-//    MyRoute(
-//      iconData: Icons.weekend,
-//      page: HomePage(),
-//    ),
-//    MyRoute(
-//      iconData: Icons.store,
-//      page: Shop(),
-//    ),
-//    MyRoute(
-//      iconData: FontAwesomeIcons.swatchbook,
-//      page: Designer(),
-//    ),
-//    MyRoute(
-//      iconData: Icons.play_arrow,
-//      page: Live(),
-//    ),
-//  MyRoute(
-//      iconData: Icons.shopping_cart,
-//      page: Cart(),
-//  ),
-//
-//  ];
-//
-//  @override
-//  Widget build(BuildContext context) {
-//    return Scaffold(
-//
-//      appBar: AppBar(backgroundColor: kPrimaryColor,
-//          title: Image.asset('assets/img/login_logo.png',
-//            fit: BoxFit.cover,
-//            width: 182.0,
-//          ),
-//          iconTheme: new IconThemeData(color: kSecondaryColor),
-////            leading:IconButton(  icon: Icon(
-////              Icons.menu,
-////              color: Colors.blue,),
-//          actions: <Widget>[
-//
-//            IconButton(
-//              icon: Icon(
-//                Icons.search,
-////          color: Colors.blue,
-//              ),
-//              onPressed: () {
-//                // do something
-//              },
-//            ),
-//            IconButton(
-//              icon: Icon(
-//                Icons.inbox,
-////                  color: Colors.blue,
-//              ),
-//              onPressed: () {
-//                // do something
-//              },
-//            ),
-//
-//          ]
-//      ),
-//      drawer: Theme(
-//
-//        data: Theme.of(context).copyWith(
-//          canvasColor: Color(0XFFFFFFFF).withOpacity(0.3),
-//
-//        ),
-//
-//        child:Drawer(
-//          child: ListView(
-//              padding: EdgeInsets.all(0),
-//              children: [
-//                UserAccountsDrawerHeader(
-////    accountEmail: Text("marcwalton8@gmail.com"),
-//                  accountName: Text("marc walton" ),
-//                  decoration: BoxDecoration(
-//                    color:  Colors.transparent,
-//                  ),
-//                  currentAccountPicture: CircleAvatar(
-//                    backgroundColor: kPrimaryColor,
-//                    child: Text("mw"),
-//                  ),
-//                ),
-//
-//
-//                ListTile(
-//                  leading:
-//                  Icon(Foundation.shopping_bag,color: Colors.lightBlueAccent,),
-//                  title: Text('Orders'),
-//
-//                  onTap: (){},
-//                ),
-//                ListTile(
-//                  leading: Icon(Icons.favorite,color: Colors.lightBlueAccent,),
-//                  title: Text('wishlist'),
-//                  onTap: (){},
-//                ),
-//                ListTile(
-//                  leading: Icon(Icons.translate, color: Colors.lightBlueAccent,),
-//                  title: Text('Language'),
-//                  onTap: (){},
-//                ),
-//                ListTile(
-//                  leading: Icon(Icons.phonelink ,color: Colors.lightBlueAccent,),
-//                  title: Text('Help'),
-//                  onTap: (){},
-//                ),
-//                ListTile(
-//                  leading: Icon(Icons.settings, color: Colors.lightBlueAccent,),
-//                  title: Text('Settings'),
-//                  onTap: (){},
-//                ),
-//
-//              ]
-//          ),
-//        ),
-//      ),
-//      bottomNavigationBar: CurvedNavigationBar(
-//
-//
-//        key: _bottomNavigationKey,
-//        index: 0,
-//        height: 50.0,
-//        items: pages
-//            .map((p) => Icon(
-//          p.iconData,
-//          color: Colors.white,
-//          size: 30,
-//        ))
-//
-//            .toList(),
-//        color: kSecondaryColor,
-//
-//        buttonBackgroundColor: kPrimaryColor,
-//        backgroundColor:kPrimaryColor,
-//        animationCurve: Curves.elasticInOut,
-//        animationDuration: Duration(milliseconds: 400),
-//        onTap: (index) {
-//          setState(() {
-//            _pageIndex = index;
-//          });
-//        },
-//      ),
-//    backgroundColor: kPrimaryColor,
-//      body: pages[_pageIndex].page,
-//    );
-//  }
-//}
-//
-//class MyRoute {
-//  final IconData iconData;
-//  final Widget page;
-//
-//  MyRoute({this.iconData, this.page});
-//}
-// final GlobalKey<NavigatorState> navigatorKey= GlobalKey<NavigatorState>();
-
-void main() =>
-// Firestore.instance.settings().then((_) {
-//   print("Timestamps enabled in snapshots\n");
-// }, onError: (_) {
-//   print("Error enabling timestamps in snapshots\n");
-// });
-runApp(FaShow());
-
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:splashscreen/splashscreen.dart';
+import 'package:custom_splash/custom_splash.dart';
+import 'package:firebase_core/firebase_core.dart';
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+  runApp(FaShow());
+}
 class FaShow extends StatefulWidget {
   @override
   _FaShowState createState() => _FaShowState();
 }
 
 class _FaShowState extends State<FaShow> {
+  bool isAuth = false;
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+  final Future<FirebaseApp> _initialization = Firebase.initializeApp();
+    User loggedInUser;
+  dynamic user;
+
+  @override
+  void initState() {
+    super.initState();
+
+    auth();
+
+
+
+    // Detects when user signed in
+    // googleSignIn.onCurrentUserChanged.listen((account) {
+    //   handleSignIn(account);
+    // }, onError: (err) {
+    //   print('Error signing in: $err');
+    // });
+    // // Reauthenticate user when app is opened
+    // googleSignIn.signInSilently(suppressErrors: false).then((account) {
+    //   handleSignIn(account);
+    // }).catchError((err) {
+    //   print('Error signing in: $err');
+    // });
+    //
+    // WidgetsBinding.instance.addObserver(this);
+  }
+  auth() async {
+
+    FirebaseAuth.instance
+        .authStateChanges()
+        .listen((Users) async => {
+      if (Users == null)
+        {
+          setState(() {
+            isAuth = false;
+          }),
+          // Navigator.pushReplacementNamed(context, "/login")
+        }
+      else
+        {
+          user= Users.uid,
+          setState(() {
+            isAuth = true;
+
+          }),
+          // Navigator.pushReplacement(
+          //     context,
+          //     MaterialPageRoute(
+          //         builder: (context) => Homepage(
+          //           userid: User.uid,
+          //           authis: isAuth,
+          //         )))
+          // Firestore.instance
+          //     .collection("users")
+          //     .document(currentUser.uid)
+          //     .get()
+          //     .then((DocumentSnapshot result) =>
+          //     Navigator.pushReplacement(
+          //         context,
+          //         MaterialPageRoute(
+          //             builder: (context) => HomePage(
+          //               title: result["fname"] + "'s Tasks",
+          //               uid: currentUser.uid,
+          //             ))))
+          //     .catchError((err) => print(err))
+        }
+    });
+  }
+
+  // Map<bool, Widget> op = {isAuth: Homepage(), 2: unAuth()};
   @override
   Widget build(BuildContext context) {
-    return MultiProvider(
-      providers: [
-        ChangeNotifierProvider(create: (_) => ImageUploadProvider()),
-       // ChangeNotifierProvider(create: (_) => UserProvider()),
-      ],
-      child: GetMaterialApp(
 
-        home:   Homepage(),
+    return  FutureBuilder(
+        // Initialize FlutterFire:
+        future: _initialization,
+        builder: (context, snapshot) {
+          if (snapshot.hasError) {
+            return Text('jvbvbvbjnm');
+          }
 
-      ),
+          // Once complete, show your application
+          if (snapshot.connectionState == ConnectionState.done) {
+            return MultiProvider(
+              providers: [
+                ChangeNotifierProvider(create: (_) => ImageUploadProvider()),
+                // ChangeNotifierProvider(create: (_) => UserProvider()),
+              ],
+              child: GetMaterialApp(
+                home:
+                // CustomSplash(
+                //   imagePath: 'assets/img/loading-76.gif',
+                //   backGroundColor: Colors.deepOrange,
+                //   // backGroundColor: Color(0xfffc6042),
+                //   animationEffect: 'zoom-in',
+                //   logoSize: 200,
+                //   home: Homepage(),
+                //   customFunction: auth(),
+                //   duration: 2500,
+                //   type: CustomSplashType.StaticDuration,
+                //   outputAndHome: op,
+                // ),
+
+                Homepage(
+                  userid:user,
+                  authis: isAuth,
+                ),
+
+              ),
+            );
+          }
+
+          // Otherwise, show something whilst waiting for initialization to complete
+          return  SplashScreen(
+            title: Text(   'FASHURE',
+              style: TextStyle(
+                  fontFamily :"MajorMonoDisplay",
+                  fontSize: 40,
+                  color: Colors.white),),
+
+            seconds: 3,
+            backgroundColor: Colors.black,
+            image: Image.asset('assets/img/loading-76.gif'),
+            useLoader: false,
+            photoSize: 50.0,
+            navigateAfterSeconds:    Homepage(
+              userid:user,
+              authis: isAuth,
+            ),
+          );
+        }
     );
   }
 

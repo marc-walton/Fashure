@@ -8,7 +8,7 @@ import 'package:fashow/Categories/MenEcomUp.dart';
 import 'package:fashow/Categories/WomenEcomUp.dart';
 import 'package:fashow/Categories/TboyEcomUp.dart';
 import 'package:fashow/Categories/TgirlEcomUp.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:modal_progress_hud/modal_progress_hud.dart';
 import 'package:smart_select/smart_select.dart';
 import 'package:flutter/material.dart';
 import 'package:photo_view/photo_view.dart';
@@ -29,9 +29,10 @@ import 'package:fashow/HomePage.dart';
 import 'package:fashow/Constants.dart';
 import 'package:image/image.dart' as Im;
 import 'package:uuid/uuid.dart';
+import 'package:translated_text/translated_text.dart';
 
 class Uploadecom extends StatefulWidget {
-  final User currentUser;
+  final Users currentUser;
 
 
   Uploadecom({this.currentUser});
@@ -203,22 +204,31 @@ bool indian = false;
         context: context,
         builder: (context) {
           return SimpleDialog(
-            title: Text("Create Post"),
+            title: TranslatedText('Create Posts',to:'${currentUser.language}',
+            ),
+
             children: <Widget>[
               SimpleDialogOption(
-                  child: Text("Photo with Camera"), onPressed: () {
+                  child:  TranslatedText('Photo with Camera',to:'${currentUser.language}',
+                  ),
+
+                  onPressed: () {
                 getImage(ImageSource.camera);
                 Navigator.pop(context);
               }),
               SimpleDialogOption(
-                  child: Text("Image from Gallery"),
+                  child: TranslatedText('Image from Gallery',to:'${currentUser.language}',
+                  ),
+
                   onPressed: () {
                     getImage(ImageSource.gallery);
                     Navigator.pop(context);
                   }
               ),
               SimpleDialogOption(
-                child: Text("Cancel"),
+                child:  TranslatedText('Cancel',to:'${currentUser.language}',
+                ),
+
                 onPressed: () => Navigator.pop(context),
               )
             ],
@@ -242,13 +252,11 @@ bool indian = false;
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(8.0),
                 ),
-                child: Text(
-                  "Upload Product",
-                  style: TextStyle(
+                child:
+                TranslatedText('Upload Product',to:'${currentUser.language}',
+                  textStyle:TextStyle(
                     color: Colors.white,
-                    fontSize: 22.0,
-                  ),
-                ),
+                  ),),
                 color: Colors.deepOrange,
                 onPressed: ()  =>selectImage(),
               // selectImage(context),
@@ -289,9 +297,9 @@ bool indian = false;
   }
 
   Future<String> uploadImage(imageFile) async {
-    StorageUploadTask uploadTask =
+    UploadTask uploadTask =
     storageRef.child("prod_$prodId.jpg").putFile(imageFile);
-    StorageTaskSnapshot storageSnap = await uploadTask.onComplete;
+    TaskSnapshot storageSnap = await uploadTask;
     String downloadUrl = await storageSnap.ref.getDownloadURL();
     return downloadUrl;
   }
@@ -631,10 +639,10 @@ bool world,
     if(dropdownValue=='Men'){
       if (currentUser.country == 'India') {
         productsRef
-            .document(widget.currentUser.id)
+            .doc(widget.currentUser.id)
             .collection("userProducts")
-            .document(prodId)
-            .setData({
+            .doc(prodId)
+            .set({
           "indian":indian,
           "worldship":world,
           "shipment": ship,
@@ -709,10 +717,10 @@ bool world,
       }
       else if (currentUser.country == 'Europe'){
         productsRef
-            .document(widget.currentUser.id)
+            .doc(widget.currentUser.id)
             .collection("userProducts")
-            .document(prodId)
-            .setData({          "indian":indian,
+            .doc(prodId)
+            .set({          "indian":indian,
           "worldship":world,
           "shipment": ship,
           "prodId": prodId,
@@ -785,10 +793,10 @@ bool world,
       }
       else if (currentUser.country == 'UK') {
         productsRef
-            .document(widget.currentUser.id)
+            .doc(widget.currentUser.id)
             .collection("userProducts")
-            .document(prodId)
-            .setData({          "indian":indian,
+            .doc(prodId)
+            .set({          "indian":indian,
           "worldship":world,
           "shipment": ship,
           "prodId": prodId,
@@ -859,10 +867,10 @@ bool world,
       }
       else if (currentUser.country == 'USA') {
         productsRef
-            .document(widget.currentUser.id)
+            .doc(widget.currentUser.id)
             .collection("userProducts")
-            .document(prodId)
-            .setData({          "indian":indian,
+            .doc(prodId)
+            .set({          "indian":indian,
           "worldship":world,
           "shipment": ship,
           "prodId": prodId,
@@ -934,10 +942,10 @@ bool world,
       }
       else {
         productsRef
-            .document(widget.currentUser.id)
+            .doc(widget.currentUser.id)
             .collection("userProducts")
-            .document(prodId)
-            .setData({          "indian":indian,
+            .doc(prodId)
+            .set({          "indian":indian,
           "worldship":world,
           "shipment": ship,
           "prodId": prodId,
@@ -1011,10 +1019,10 @@ bool world,
     else if(dropdownValue=='Women') {
       if (currentUser.country == 'India') {
         productsRef
-            .document(widget.currentUser.id)
+            .doc(widget.currentUser.id)
             .collection("userProducts")
-            .document(prodId)
-            .setData({          "indian":indian,
+            .doc(prodId)
+            .set({          "indian":indian,
           "worldship":world,
           "shipment": ship,
           "prodId": prodId,
@@ -1082,10 +1090,10 @@ bool world,
       }
       else if (currentUser.country == 'Europe'){
         productsRef
-            .document(widget.currentUser.id)
+            .doc(widget.currentUser.id)
             .collection("userProducts")
-            .document(prodId)
-            .setData({          "indian":indian,
+            .doc(prodId)
+            .set({          "indian":indian,
           "worldship":world,
           "shipment": ship,
           "prodId": prodId,
@@ -1153,10 +1161,10 @@ bool world,
       }
       else if (currentUser.country == 'UK') {
         productsRef
-            .document(widget.currentUser.id)
+            .doc(widget.currentUser.id)
             .collection("userProducts")
-            .document(prodId)
-            .setData({          "indian":indian,
+            .doc(prodId)
+            .set({          "indian":indian,
           "worldship":world,
           "shipment": ship,
           "prodId": prodId,
@@ -1223,10 +1231,10 @@ bool world,
       }
       else if (currentUser.country == 'USA') {
         productsRef
-            .document(widget.currentUser.id)
+            .doc(widget.currentUser.id)
             .collection("userProducts")
-            .document(prodId)
-            .setData({          "indian":indian,
+            .doc(prodId)
+            .set({          "indian":indian,
           "worldship":world,
           "shipment": ship,
           "prodId": prodId,
@@ -1294,10 +1302,10 @@ bool world,
       }
       else {
         productsRef
-            .document(widget.currentUser.id)
+            .doc(widget.currentUser.id)
             .collection("userProducts")
-            .document(prodId)
-            .setData({          "indian":indian,
+            .doc(prodId)
+            .set({          "indian":indian,
           "worldship":world,
           "shipment": ship,
           "prodId": prodId,
@@ -1367,10 +1375,10 @@ bool world,
     else if(dropdownValue=='Baby-Boys'||dropdownValue=='Baby-Girls') {
       if (currentUser.country == 'India') {
         productsRef
-            .document(widget.currentUser.id)
+            .doc(widget.currentUser.id)
             .collection("userProducts")
-            .document(prodId)
-            .setData({          "indian":indian,
+            .doc(prodId)
+            .set({          "indian":indian,
           "worldship":world,
           "shipment": ship,
           "prodId": prodId,
@@ -1424,10 +1432,10 @@ bool world,
       }
       else if (currentUser.country == 'Europe') {
         productsRef
-            .document(widget.currentUser.id)
+            .doc(widget.currentUser.id)
             .collection("userProducts")
-            .document(prodId)
-            .setData({          "indian":indian,
+            .doc(prodId)
+            .set({          "indian":indian,
           "worldship":world,
           "shipment": ship,
           "prodId": prodId,
@@ -1479,10 +1487,10 @@ bool world,
       }
       else if (currentUser.country == 'UK') {
         productsRef
-            .document(widget.currentUser.id)
+            .doc(widget.currentUser.id)
             .collection("userProducts")
-            .document(prodId)
-            .setData({          "indian":indian,
+            .doc(prodId)
+            .set({          "indian":indian,
           "worldship":world,
           "shipment": ship,
           "prodId": prodId,
@@ -1535,10 +1543,10 @@ bool world,
       }
       else if (currentUser.country == 'USA') {
         productsRef
-            .document(widget.currentUser.id)
+            .doc(widget.currentUser.id)
             .collection("userProducts")
-            .document(prodId)
-            .setData({          "indian":indian,
+            .doc(prodId)
+            .set({          "indian":indian,
           "worldship":world,
           "shipment": ship,
           "prodId": prodId,
@@ -1592,10 +1600,10 @@ bool world,
       }
       else {
         productsRef
-            .document(widget.currentUser.id)
+            .doc(widget.currentUser.id)
             .collection("userProducts")
-            .document(prodId)
-            .setData({          "indian":indian,
+            .doc(prodId)
+            .set({          "indian":indian,
           "worldship":world,
           "shipment": ship,
           "prodId": prodId,
@@ -1651,10 +1659,10 @@ bool world,
     else if(dropdownValue=='Kids-Boys'|| dropdownValue=='Kids-Girls') {
       if (currentUser.country == 'India') {
         productsRef
-            .document(widget.currentUser.id)
+            .doc(widget.currentUser.id)
             .collection("userProducts")
-            .document(prodId)
-            .setData({
+            .doc(prodId)
+            .set({
           "indian":indian,
           "worldship":world,
           "shipment": ship,
@@ -1718,10 +1726,10 @@ bool world,
       }
       else if (currentUser.country == 'Europe') {
         productsRef
-            .document(widget.currentUser.id)
+            .doc(widget.currentUser.id)
             .collection("userProducts")
-            .document(prodId)
-            .setData({          "indian":indian,
+            .doc(prodId)
+            .set({          "indian":indian,
           "worldship":world,
           "shipment": ship,
           "prodId": prodId,
@@ -1784,10 +1792,10 @@ bool world,
       }
       else if (currentUser.country == 'UK') {
         productsRef
-            .document(widget.currentUser.id)
+            .doc(widget.currentUser.id)
             .collection("userProducts")
-            .document(prodId)
-            .setData({
+            .doc(prodId)
+            .set({
           "worldship":world,
           "shipment": ship,
           "indian":indian,
@@ -1854,10 +1862,10 @@ bool world,
       }
       else if (currentUser.country == 'USA') {
         productsRef
-            .document(widget.currentUser.id)
+            .doc(widget.currentUser.id)
             .collection("userProducts")
-            .document(prodId)
-            .setData({          "indian":indian,
+            .doc(prodId)
+            .set({          "indian":indian,
           "worldship":world,
           "shipment": ship,
           "prodId": prodId,
@@ -1920,10 +1928,10 @@ bool world,
       }
       else {
         productsRef
-            .document(widget.currentUser.id)
+            .doc(widget.currentUser.id)
             .collection("userProducts")
-            .document(prodId)
-            .setData({          "indian":indian,
+            .doc(prodId)
+            .set({          "indian":indian,
           "worldship":world,
           "shipment": ship,
           "prodId": prodId,
@@ -1988,10 +1996,10 @@ bool world,
     else if(dropdownValue=='Teen-Boys'||dropdownValue=='Teen-Girls') {
       if (currentUser.country == 'India') {
         productsRef
-            .document(widget.currentUser.id)
+            .doc(widget.currentUser.id)
             .collection("userProducts")
-            .document(prodId)
-            .setData({
+            .doc(prodId)
+            .set({
           "indian":indian,
           "worldship":world,
           "shipment": ship,
@@ -2039,10 +2047,10 @@ bool world,
       }
       else if (currentUser.country == 'Europe'){
         productsRef
-            .document(widget.currentUser.id)
+            .doc(widget.currentUser.id)
             .collection("userProducts")
-            .document(prodId)
-            .setData({          "indian":indian,
+            .doc(prodId)
+            .set({          "indian":indian,
           "worldship":world,
           "shipment": ship,
           "prodId": prodId,
@@ -2091,10 +2099,10 @@ bool world,
       }
       else if (currentUser.country == 'UK') {
         productsRef
-            .document(widget.currentUser.id)
+            .doc(widget.currentUser.id)
             .collection("userProducts")
-            .document(prodId)
-            .setData({          "indian":indian,
+            .doc(prodId)
+            .set({          "indian":indian,
           "worldship":world,
           "shipment": ship,
           "prodId": prodId,
@@ -2143,10 +2151,10 @@ bool world,
       }
       else if (currentUser.country == 'USA') {
         productsRef
-            .document(widget.currentUser.id)
+            .doc(widget.currentUser.id)
             .collection("userProducts")
-            .document(prodId)
-            .setData({          "indian":indian,
+            .doc(prodId)
+            .set({          "indian":indian,
           "worldship":world,
           "shipment": ship,
           "prodId": prodId,
@@ -2196,10 +2204,10 @@ bool world,
       }
       else {
         productsRef
-            .document(widget.currentUser.id)
+            .doc(widget.currentUser.id)
             .collection("userProducts")
-            .document(prodId)
-            .setData({          "indian":indian,
+            .doc(prodId)
+            .set({          "indian":indian,
           "worldship":world,
           "shipment": ship,
           "prodId": prodId,
@@ -2255,13 +2263,20 @@ bool world,
     return showDialog(
       context: context,
       builder: (context) => new AlertDialog(
-        title: new Text('Are you sure?'),
-        content: new Text('Do you want to exit without uploading?'),
+        title: new
+        TranslatedText('Do you want to exit without uploading?',to:'${currentUser.language}',
+         ),
+
+        content: new
+        TranslatedText('',to:'${currentUser.language}',
+        ),
         actions: <Widget>[
           new FlatButton(
 
             onPressed: () => Navigator.of(context).pop(false),
-            child: Text("NO"),
+            child: TranslatedText('NO',to:'${currentUser.language}',
+            ),
+
           ),
           SizedBox(height: 16),
           new FlatButton(
@@ -2269,7 +2284,8 @@ bool world,
             onPressed: () async {Navigator.of(context).pop(true);
             clearImage();
             },
-            child: Text("YES"),
+            child:TranslatedText('YES',to:'${currentUser.language}',
+            ),
           ),
         ],
       ),
@@ -2629,7 +2645,6 @@ bool world,
 
           mtoQuantity:  int.tryParse(mtocontroller.text) ?? 0,
           freesizeQuantity:   int.tryParse(freesizecontroller.text) ?? 0,
-
 
           mQuantity:  int.tryParse(mcontroller.text) ?? 0,
           lQuantity:  int.tryParse(lcontroller.text) ?? 0,
@@ -3333,8 +3348,6 @@ bool world,
           Shoe13:   int.tryParse(Shoe13controller.text) ?? 0,
           Shoe14:   int.tryParse(Shoe14controller.text) ?? 0,
 
-
-
         );
       }
       Navigator.pop(context);
@@ -3517,7 +3530,9 @@ bool world,
       child: ListView(
         children: <Widget>[
           ExpansionTile(
-            title: Text('Accessories'),
+            title: TranslatedText('Accessories',to:'${currentUser.language}',textStyle:TextStyle(
+            ),),
+
             maintainState:true,
             children: [
               SmartSelect<String>.single(
@@ -3601,7 +3616,8 @@ bool world,
             ],
           ),
           ExpansionTile(
-            title: Text('Bags'),
+            title: TranslatedText('Bags',to:'${currentUser.language}',textStyle:TextStyle(
+    ),),
             maintainState:true,
             children: [
               SmartSelect<String>.single(
@@ -3614,7 +3630,8 @@ bool world,
             ],
           ),
           ExpansionTile(
-            title: Text('Activewear'),
+            title: TranslatedText('Activewear',to:'${currentUser.language}',),
+
             maintainState:true,
             children: [
               SmartSelect<String>.single(
@@ -3626,7 +3643,7 @@ bool world,
             ],
           ),
           ExpansionTile(
-            title: Text('Beach & Swimwear'),
+            title: TranslatedText('Beach & Swimwear',to:'${currentUser.language}',),
             maintainState:true,
             children: [
               SmartSelect<String>.single(
@@ -3638,7 +3655,8 @@ bool world,
             ],
           ),
           ExpansionTile(
-            title: Text('Denim'),
+            title: TranslatedText('Denim',to:'${currentUser.language}',),
+
             maintainState:true,
             children: [
               SmartSelect<String>.single(
@@ -3650,7 +3668,8 @@ bool world,
             ],
           ),
           ExpansionTile(
-            title: Text('Grooming'),
+            title: TranslatedText('Grooming',to:'${currentUser.language}',),
+
             maintainState:true,
             children: [
               SmartSelect<String>.single(
@@ -3662,7 +3681,8 @@ bool world,
             ],
           ),
           ExpansionTile(
-            title: Text('Indian Ethnic'),
+            title: TranslatedText('Indian Ethnic',to:'${currentUser.language}',),
+
             maintainState:true,
             children: [
               SmartSelect<String>.single(
@@ -3675,7 +3695,8 @@ bool world,
             ],
           ),
           ExpansionTile(
-            title: Text('Jackets'),
+            title: TranslatedText('Jackets',to:'${currentUser.language}',),
+
             maintainState:true,
             children: [
               SmartSelect<String>.single(
@@ -3688,7 +3709,8 @@ bool world,
             ],
           ),
           ExpansionTile(
-            title: Text('Coats'),
+            title: TranslatedText('Coats',to:'${currentUser.language}',),
+
             maintainState:true,
             children: [SmartSelect<String>.single(
                 title: 'Coats',
@@ -3699,7 +3721,8 @@ bool world,
             ],
           ),
           ExpansionTile(
-            title: Text('Jewellery'),
+            title: TranslatedText('Jewellery',to:'${currentUser.language}',),
+
             maintainState:true,
             children: [
               SmartSelect<String>.single(
@@ -3712,7 +3735,8 @@ bool world,
             ],
           ),
           ExpansionTile(
-            title: Text('Shirts'),
+            title: TranslatedText('Shirts',to:'${currentUser.language}',),
+
             maintainState:true,
             children: [
               SmartSelect<String>.single(
@@ -3725,7 +3749,8 @@ bool world,
             ],
           ),
           ExpansionTile(
-            title: Text('Shorts'),
+            title: TranslatedText('Shorts',to:'${currentUser.language}',),
+
             maintainState:true,
             children: [
               SmartSelect<String>.single(
@@ -3737,7 +3762,8 @@ bool world,
             ],
           ),
           ExpansionTile(
-            title: Text('Suits'),
+            title: TranslatedText('Suits',to:'${currentUser.language}',),
+
             maintainState:true,
             children: [
               SmartSelect<String>.single(
@@ -3749,7 +3775,8 @@ bool world,
             ],
           ),
           ExpansionTile(
-            title: Text('Sweatshirts & Sweaters'),
+            title: TranslatedText('Sweatshirts & Sweaters',to:'${currentUser.language}',),
+
             maintainState:true,
             children: [
               SmartSelect<String>.single(
@@ -3761,7 +3788,8 @@ bool world,
             ],
           ),
           ExpansionTile(
-            title: Text('Trousers'),
+            title: TranslatedText('Trousers',to:'${currentUser.language}',),
+
             maintainState:true,
             children: [
               SmartSelect<String>.single(
@@ -3773,7 +3801,8 @@ bool world,
             ],
           ),
           ExpansionTile(
-            title: Text('Casual Tops'),
+            title: TranslatedText('Casual Tops',to:'${currentUser.language}',),
+
             maintainState:true,
             children: [
               SmartSelect<String>.single(
@@ -3786,7 +3815,8 @@ bool world,
             ],
           ),
           ExpansionTile(
-            title: Text('Watches'),
+            title:  TranslatedText('Watches',to:'${currentUser.language}',),
+
             maintainState:true,
             children: [
               SmartSelect<String>.single(
@@ -3798,7 +3828,8 @@ bool world,
             ],
           ),
           ExpansionTile(
-            title: Text('Shoes'),
+            title: TranslatedText('Shoes',to:'${currentUser.language}',),
+
             maintainState:true,
             children: [
               SmartSelect<String>.single(
@@ -3810,7 +3841,8 @@ bool world,
             ],
           ),
           ExpansionTile(
-            title: Text('Sneakers'),
+            title: TranslatedText('Sneakers',to:'${currentUser.language}',),
+
             maintainState:true,
             children: [
               SmartSelect<String>.single(
@@ -3836,7 +3868,8 @@ bool world,
           children: [
 
          ExpansionTile(
-           title: Text('Accessories'),
+           title: TranslatedText('Accessories',to:'${currentUser.language}',),
+
            maintainState:true,
            children: [
              SmartSelect<String>.single(
@@ -3922,7 +3955,8 @@ SmartSelect<String>.single(
            ],
          ),
          ExpansionTile(
-           title: Text('Indian Ethnic'),
+           title: TranslatedText('Indian Ethnic',to:'${currentUser.language}',),
+
            maintainState:true,
            children: [
 SmartSelect<String>.single(
@@ -3935,7 +3969,8 @@ SmartSelect<String>.single(
            ],
          ),
          ExpansionTile(
-           title: Text('Bags'),
+           title: TranslatedText('Bags',to:'${currentUser.language}',),
+
            maintainState:true,
            children: [
              SmartSelect<String>.single(
@@ -3948,8 +3983,8 @@ SmartSelect<String>.single(
            ],
          ),
          ExpansionTile(
-           title: Text('Bridal Wear'),
-           maintainState:true,
+           title: TranslatedText('Bridal Wear',to:'${currentUser.language}',),
+            maintainState:true,
            children: [
              SmartSelect<String>.single(
                  title: 'Bridal Wear',
@@ -3962,7 +3997,8 @@ SmartSelect<String>.single(
          ),
 
          ExpansionTile(
-           title: Text('Activewear'),
+           title: TranslatedText('Accessories',to:'${currentUser.language}',),
+
            maintainState:true,
            children: [
              SmartSelect<String>.single(
@@ -3974,7 +4010,8 @@ SmartSelect<String>.single(
            ],
          ),
          ExpansionTile(
-           title: Text('Beach & Swimwear'),
+           title: TranslatedText('Beach & Swimwear',to:'${currentUser.language}',),
+
            maintainState:true,
            children: [
              SmartSelect<String>.single(
@@ -3986,7 +4023,8 @@ SmartSelect<String>.single(
            ],
          ),
          ExpansionTile(
-           title: Text('Coats'),
+           title: TranslatedText('Coats',to:'${currentUser.language}',),
+
            maintainState:true,
            children: [
              SmartSelect<String>.single(
@@ -3998,7 +4036,8 @@ SmartSelect<String>.single(
            ],
          ),
          ExpansionTile(
-           title: Text('Jackets'),
+           title:  TranslatedText('Jackets',to:'${currentUser.language}',),
+
            maintainState:true,
            children: [
              SmartSelect<String>.single(
@@ -4011,7 +4050,8 @@ SmartSelect<String>.single(
            ],
          ),
          ExpansionTile(
-           title: Text('Denim'),
+           title: TranslatedText('Denim',to:'${currentUser.language}',),
+
            maintainState:true,
            children: [
              SmartSelect<String>.single(
@@ -4023,7 +4063,7 @@ SmartSelect<String>.single(
            ],
          ),
          ExpansionTile(
-           title: Text('Dresses'),
+           title: TranslatedText('Dresses',to:'${currentUser.language}',),
            maintainState:true,
            children: [
              SmartSelect<String>.single(
@@ -4035,7 +4075,8 @@ SmartSelect<String>.single(
            ],
          ),
          ExpansionTile(
-           title: Text('Jumpsuits & Playsuits'),
+           title: TranslatedText('Jumpsuits & Playsuits',to:'${currentUser.language}',),
+
            maintainState:true,
            children: [
              SmartSelect<String>.single(
@@ -4047,7 +4088,8 @@ SmartSelect<String>.single(
            ],
          ),
           ExpansionTile(
-           title: Text('Jewellery'),
+           title: TranslatedText('Jewellery',to:'${currentUser.language}',),
+
            maintainState:true,
            children: [
              SmartSelect<String>.single(
@@ -4059,7 +4101,8 @@ SmartSelect<String>.single(
            ],
          ),
           ExpansionTile(
-           title: Text('Knitwear'),
+           title: TranslatedText('Knitwear',to:'${currentUser.language}',),
+
            maintainState:true,
            children: [
              SmartSelect<String>.single(
@@ -4071,7 +4114,8 @@ SmartSelect<String>.single(
            ],
          ),
           ExpansionTile(
-           title: Text('Tops'),
+           title: TranslatedText('Tops',to:'${currentUser.language}',),
+
            maintainState:true,
            children: [
              SmartSelect<String>.single(
@@ -4083,7 +4127,8 @@ SmartSelect<String>.single(
            ],
          ),
           ExpansionTile(
-           title: Text('WTrouser'),
+           title: TranslatedText('WTrouser',to:'${currentUser.language}',),
+
            maintainState:true,
            children: [
              SmartSelect<String>.single(
@@ -4095,7 +4140,8 @@ SmartSelect<String>.single(
            ],
          ),
           ExpansionTile(
-           title: Text('Skirts'),
+           title:  TranslatedText('Skirts',to:'${currentUser.language}',),
+
            maintainState:true,
            children: [
              SmartSelect<String>.single(
@@ -4107,7 +4153,8 @@ SmartSelect<String>.single(
            ],
          ),
           ExpansionTile(
-           title: Text('Shorts'),
+           title: TranslatedText('Shorts',to:'${currentUser.language}',),
+
            maintainState:true,
            children: [
              SmartSelect<String>.single(
@@ -4119,7 +4166,8 @@ SmartSelect<String>.single(
            ],
          ),
           ExpansionTile(
-           title: Text('Shoes'),
+           title: TranslatedText('Shoes',to:'${currentUser.language}',),
+
            maintainState:true,
            children: [
              SmartSelect<String>.single(
@@ -4131,7 +4179,8 @@ SmartSelect<String>.single(
            ],
          ),
          ExpansionTile(
-           title: Text('Sneakers'),
+           title: TranslatedText('Sneakers',to:'${currentUser.language}',),
+
            maintainState:true,
            children: [
              SmartSelect<String>.single(
@@ -4143,7 +4192,8 @@ SmartSelect<String>.single(
            ],
          ),
          ExpansionTile(
-           title: Text('Watches'),
+           title: TranslatedText('Watches',to:'${currentUser.language}',),
+
            maintainState:true,
            children: [
              SmartSelect<String>.single(
@@ -4166,7 +4216,8 @@ Widget BabyBCategory(){
           child: ListView(
             children: [
               ExpansionTile(
-                title: Text('Accessories'),
+                title: TranslatedText('Accessories',to:'${currentUser.language}',),
+
                 maintainState:true,
                 children: [
                   SmartSelect<String>.single(
@@ -4209,7 +4260,9 @@ Widget BabyBCategory(){
                 ],
               ),
               ExpansionTile(
-                title: Text('Indian Ethnic'),
+                title: TranslatedText('Indian Ethnic',to:'${currentUser.language}',
+              ),
+
                 maintainState:true,
                 children: [
                   SmartSelect<String>.single(
@@ -4222,7 +4275,9 @@ Widget BabyBCategory(){
                 ],
               ),
               ExpansionTile(
-                title: Text('Coats & Jackets'),
+                title: TranslatedText('Coats & Jackets',to:'${currentUser.language}',
+                ),
+
                 maintainState:true,
                 children: [SmartSelect<String>.single(
                     title: 'Coats & Jackets',
@@ -4233,7 +4288,9 @@ Widget BabyBCategory(){
                 ],
               ),
                ExpansionTile(
-                title: Text('Babysuits'),
+                title: TranslatedText('Babysuits',to:'${currentUser.language}',
+                ),
+
                 maintainState:true,
                 children: [SmartSelect<String>.single(
                     title: 'Babysuits',
@@ -4244,7 +4301,9 @@ Widget BabyBCategory(){
                 ],
               ),
               ExpansionTile(
-                title: Text('Knitwear'),
+                title: TranslatedText('Knitwear',to:'${currentUser.language}',
+                ),
+
                 maintainState:true,
                 children: [SmartSelect<String>.single(
                     title: 'Knitwear',
@@ -4255,7 +4314,9 @@ Widget BabyBCategory(){
                 ],
               ),
  ExpansionTile(
-                title: Text('Shoes'),
+                title: TranslatedText('Shoes',to:'${currentUser.language}',
+                ),
+
                 maintainState:true,
                 children: [SmartSelect<String>.single(
                     title: 'Shoes',
@@ -4266,7 +4327,9 @@ Widget BabyBCategory(){
                 ],
               ),
  ExpansionTile(
-                title: Text('Shorts'),
+                title: TranslatedText('Shorts',to:'${currentUser.language}',
+                ),
+
                 maintainState:true,
                 children: [SmartSelect<String>.single(
                     title: 'Shorts',
@@ -4277,7 +4340,9 @@ Widget BabyBCategory(){
                 ],
               ),
 ExpansionTile(
-                title: Text('Swimwear'),
+                title: TranslatedText('Swimwear',to:'${currentUser.language}',
+                ),
+
                 maintainState:true,
                 children: [SmartSelect<String>.single(
                     title: 'Swimwear',
@@ -4288,7 +4353,9 @@ ExpansionTile(
                 ],
               ),
 ExpansionTile(
-                title: Text('Tops'),
+                title:   TranslatedText('',to:'${currentUser.language}',
+  ),
+
                 maintainState:true,
                 children: [SmartSelect<String>.single(
                     title: 'Tops',
@@ -4299,7 +4366,9 @@ ExpansionTile(
                 ],
               ),
 ExpansionTile(
-                title: Text('Tracks'),
+                title: TranslatedText('Tracks',to:'${currentUser.language}',
+                ),
+
                 maintainState:true,
                 children: [SmartSelect<String>.single(
                     title: 'Tracks',
@@ -4310,7 +4379,9 @@ ExpansionTile(
                 ],
               ),
 ExpansionTile(
-                title: Text('Trousers'),
+                title: TranslatedText('Trousers',to:'${currentUser.language}',
+                ),
+
                 maintainState:true,
                 children: [SmartSelect<String>.single(
                     title: 'Trousers',
@@ -4332,7 +4403,8 @@ Widget BabyGCategory() {
     child: ListView(
       children: [
         ExpansionTile(
-          title: Text('Accessories'),
+          title: TranslatedText('Accessories',to:'${currentUser.language}',
+          ),
           maintainState:true,
           children: [
             SmartSelect<String>.single(
@@ -4370,7 +4442,10 @@ Widget BabyGCategory() {
           ],
         ),
         ExpansionTile(
-          title: Text('Indian Ethnic'),
+          title:
+          TranslatedText('Indian Ethnic',to:'${currentUser.language}',
+          ),
+
           maintainState:true,
           children: [
             SmartSelect<String>.single(
@@ -4383,7 +4458,8 @@ Widget BabyGCategory() {
           ],
         ),
         ExpansionTile(
-          title: Text('Coats & Jackets'),
+          title: TranslatedText('Coats & Jackets',to:'${currentUser.language}',
+          ),
           maintainState:true,
           children: [SmartSelect<String>.single(
               title: 'Coats & Jackets',
@@ -4394,7 +4470,9 @@ Widget BabyGCategory() {
           ],
         ),
         ExpansionTile(
-          title: Text('Dresses'),
+          title: TranslatedText('Dresses',to:'${currentUser.language}',
+          ),
+
           maintainState:true,
           children: [SmartSelect<String>.single(
               title: 'Dresses',
@@ -4405,7 +4483,9 @@ Widget BabyGCategory() {
           ],
         ),
         ExpansionTile(
-          title: Text('Babysuits'),
+          title: TranslatedText('Babysuits',to:'${currentUser.language}',
+          ),
+
           maintainState:true,
           children: [SmartSelect<String>.single(
               title: 'Babysuits',
@@ -4416,7 +4496,8 @@ Widget BabyGCategory() {
           ],
         ),
         ExpansionTile(
-          title: Text('Knitwear'),
+          title: TranslatedText('Knitwear',to:'${currentUser.language}',
+          ),
           maintainState:true,
           children: [SmartSelect<String>.single(
               title: 'Knitwear',
@@ -4427,7 +4508,9 @@ Widget BabyGCategory() {
           ],
         ),
         ExpansionTile(
-          title: Text('Shoes'),
+          title: TranslatedText('Shoes',to:'${currentUser.language}',
+          ),
+
           maintainState:true,
           children: [SmartSelect<String>.single(
               title: 'Shoes',
@@ -4438,7 +4521,8 @@ Widget BabyGCategory() {
           ],
         ),
         ExpansionTile(
-          title: Text('Shorts'),
+          title: TranslatedText('Shorts',to:'${currentUser.language}',
+          ),
           maintainState:true,
           children: [SmartSelect<String>.single(
               title: 'Shorts',
@@ -4449,7 +4533,9 @@ Widget BabyGCategory() {
           ],
         ),
         ExpansionTile(
-          title: Text('Skirts'),
+          title: TranslatedText('Skirts',to:'${currentUser.language}',
+          ),
+
           maintainState:true,
           children: [SmartSelect<String>.single(
               title: 'Skirts',
@@ -4461,7 +4547,9 @@ Widget BabyGCategory() {
         ),
 
         ExpansionTile(
-          title: Text('Swimwear'),
+          title: TranslatedText('Swimwear',to:'${currentUser.language}',
+          ),
+
           maintainState:true,
           children: [SmartSelect<String>.single(
               title: 'Swimwear',
@@ -4472,7 +4560,9 @@ Widget BabyGCategory() {
           ],
         ),
         ExpansionTile(
-          title: Text('Tops'),
+          title: TranslatedText('Tops',to:'${currentUser.language}',
+          ),
+
           maintainState:true,
           children: [SmartSelect<String>.single(
               title: 'Tops',
@@ -4483,7 +4573,9 @@ Widget BabyGCategory() {
           ],
         ),
         ExpansionTile(
-          title: Text('Tracks'),
+          title: TranslatedText('Tracks',to:'${currentUser.language}',
+          ),
+
           maintainState:true,
           children: [SmartSelect<String>.single(
               title: 'Tracks',
@@ -4494,7 +4586,9 @@ Widget BabyGCategory() {
           ],
         ),
         ExpansionTile(
-          title: Text('Trousers'),
+          title: TranslatedText('Trousers',to:'${currentUser.language}',
+          ),
+
           maintainState:true,
           children: [SmartSelect<String>.single(
               title: 'Trousers',
@@ -4515,7 +4609,9 @@ Widget KidBCategory(){
           child: ListView(
             children: [
               ExpansionTile(
-                title: Text('Accessories'),
+                title:TranslatedText('Accessories',to:'${currentUser.language}',
+                ),
+
                 maintainState:true,
                 children: [
                   SmartSelect<String>.single(
@@ -4571,7 +4667,9 @@ Widget KidBCategory(){
                 ],
               ),
               ExpansionTile(
-                title: Text('Indian Ethnic'),
+                title: TranslatedText('Indian Ethnic',to:'${currentUser.language}',
+                ),
+
                 maintainState:true,
                 children: [
                   SmartSelect<String>.single(
@@ -4584,7 +4682,9 @@ Widget KidBCategory(){
                 ],
               ),
               ExpansionTile(
-                title: Text('Bags'),
+                title: TranslatedText('Bags',to:'${currentUser.language}',
+                ),
+
                 maintainState:true,
                 children: [
                   SmartSelect<String>.single(
@@ -4597,7 +4697,9 @@ Widget KidBCategory(){
                 ],
               ),
                ExpansionTile(
-                title: Text('Denim'),
+                title: TranslatedText('Denim',to:'${currentUser.language}',
+                ),
+
                 maintainState:true,
                 children: [
                   SmartSelect<String>.single(
@@ -4610,7 +4712,9 @@ Widget KidBCategory(){
                 ],
               ),
               ExpansionTile(
-                title: Text('Coats & Jackets'),
+                title:TranslatedText('Coats & Jackets',to:'${currentUser.language}',
+                ),
+
                 maintainState:true,
                 children: [
                   SmartSelect<String>.single(
@@ -4624,7 +4728,9 @@ Widget KidBCategory(){
               ),
 
               ExpansionTile(
-                title: Text('Shoes'),
+                title:  TranslatedText('Shoes',to:'${currentUser.language}',
+                ),
+
                 maintainState:true,
                 children: [SmartSelect<String>.single(
                     title: 'Shoes',
@@ -4635,7 +4741,9 @@ Widget KidBCategory(){
                 ],
               ),
               ExpansionTile(
-                title: Text('Shorts'),
+                title: TranslatedText('Shorts',to:'${currentUser.language}',
+                ),
+
                 maintainState:true,
                 children: [SmartSelect<String>.single(
                     title: 'Shorts',
@@ -4646,7 +4754,9 @@ Widget KidBCategory(){
                 ],
               ),
               ExpansionTile(
-                title: Text('Swimwear'),
+                title: TranslatedText('Swimwear',to:'${currentUser.language}',
+                ),
+
                 maintainState:true,
                 children: [SmartSelect<String>.single(
                     title: 'Swimwear',
@@ -4657,7 +4767,8 @@ Widget KidBCategory(){
                 ],
               ),
 ExpansionTile(
-                title: Text('Knitwear'),
+                title: TranslatedText('Knitwear',to:'${currentUser.language}',
+                ),
                 maintainState:true,
                 children: [SmartSelect<String>.single(
                     title: 'Knitwear',
@@ -4668,7 +4779,9 @@ ExpansionTile(
                 ],
               ),
               ExpansionTile(
-                title: Text('Tops'),
+                title: TranslatedText('Tops',to:'${currentUser.language}',
+                ),
+
                 maintainState:true,
                 children: [SmartSelect<String>.single(
                     title: 'Tops',
@@ -4679,7 +4792,9 @@ ExpansionTile(
                 ],
               ),
               ExpansionTile(
-                title: Text('Tracks'),
+                title: TranslatedText('Tracks',to:'${currentUser.language}',
+                ),
+
                 maintainState:true,
                 children: [SmartSelect<String>.single(
                     title: 'Tracks',
@@ -4690,7 +4805,9 @@ ExpansionTile(
                 ],
               ),
               ExpansionTile(
-                title: Text('Trousers'),
+                title: TranslatedText('Trousers',to:'${currentUser.language}',
+                ),
+
                 maintainState:true,
                 children: [SmartSelect<String>.single(
                     title: 'Trousers',
@@ -4711,7 +4828,9 @@ return
       child: ListView(
         children: [
           ExpansionTile(
-            title: Text('Accessories'),
+            title: TranslatedText('Accessories',to:'${currentUser.language}',
+            ),
+
             maintainState:true,
             children: [
               SmartSelect<String>.single(
@@ -4955,7 +5074,9 @@ Widget TeenBCategory(){
     child: ListView(
       children: [
         ExpansionTile(
-          title: Text('Accessories'),
+          title: TranslatedText('Accessories',to:'${currentUser.language}',
+          ),
+
           maintainState:true,
           children: [
             SmartSelect<String>.single(
@@ -5024,7 +5145,9 @@ Widget TeenBCategory(){
           ],
         ),
         ExpansionTile(
-          title: Text('Bags'),
+          title:  TranslatedText('Bags',to:'${currentUser.language}',
+          ),
+
           maintainState:true,
           children: [
             SmartSelect<String>.single(
@@ -5037,7 +5160,9 @@ Widget TeenBCategory(){
           ],
         ),
         ExpansionTile(
-          title: Text('Denim'),
+          title: TranslatedText('Denim',to:'${currentUser.language}',
+          ),
+
           maintainState:true,
           children: [
             SmartSelect<String>.single(
@@ -5050,7 +5175,9 @@ Widget TeenBCategory(){
           ],
         ),
         ExpansionTile(
-          title: Text('Shoes'),
+          title: TranslatedText('Shoes',to:'${currentUser.language}',
+          ),
+
           maintainState:true,
           children: [SmartSelect<String>.single(
               title: 'Shoes',
@@ -5061,7 +5188,9 @@ Widget TeenBCategory(){
           ],
         ),
         ExpansionTile(
-          title: Text('Shorts'),
+          title: TranslatedText('Shorts',to:'${currentUser.language}',
+          ),
+
           maintainState:true,
           children: [SmartSelect<String>.single(
               title: 'Shorts',
@@ -5072,7 +5201,9 @@ Widget TeenBCategory(){
           ],
         ),
         ExpansionTile(
-          title: Text('Swimwear'),
+          title: TranslatedText('Swimwear',to:'${currentUser.language}',
+          ),
+
           maintainState:true,
           children: [SmartSelect<String>.single(
               title: 'Swimwear',
@@ -5083,7 +5214,9 @@ Widget TeenBCategory(){
           ],
         ),
         ExpansionTile(
-          title: Text('Knitwear'),
+          title: TranslatedText('Knitwear',to:'${currentUser.language}',
+          ),
+
           maintainState:true,
           children: [SmartSelect<String>.single(
               title: 'Knitwear',
@@ -5094,7 +5227,9 @@ Widget TeenBCategory(){
           ],
         ),
         ExpansionTile(
-          title: Text('Tops'),
+          title: TranslatedText('Tops',to:'${currentUser.language}',
+          ),
+
           maintainState:true,
           children: [SmartSelect<String>.single(
               title: 'Tops',
@@ -5105,7 +5240,9 @@ Widget TeenBCategory(){
           ],
         ),
         ExpansionTile(
-          title: Text('Tracks'),
+          title:
+          TranslatedText('Tracks',to:'${currentUser.language}',
+          ),
           maintainState:true,
           children: [SmartSelect<String>.single(
               title: 'Tracks',
@@ -5116,7 +5253,8 @@ Widget TeenBCategory(){
           ],
         ),
         ExpansionTile(
-          title: Text('Trousers'),
+          title: TranslatedText('Trousers',to:'${currentUser.language}',
+          ),
           maintainState:true,
           children: [SmartSelect<String>.single(
               title: 'Trousers',
@@ -5137,7 +5275,8 @@ Widget TeenGCategory(){
       child: ListView(
         children: [
           ExpansionTile(
-            title: Text('Accessories'),
+            title: TranslatedText('Accessories',to:'${currentUser.language}',
+            ),
             maintainState:true,
             children: [
               SmartSelect<String>.single(
@@ -5198,7 +5337,8 @@ Widget TeenGCategory(){
             ],
           ),
           ExpansionTile(
-            title: Text('Indian Ethnic'),
+            title: TranslatedText('Indian Ethnic',to:'${currentUser.language}',
+            ),
             maintainState:true,
             children: [
               SmartSelect<String>.single(
@@ -5212,7 +5352,7 @@ Widget TeenGCategory(){
           ),
 
           ExpansionTile(
-            title: Text('Bags'),
+            title:TranslatedText('Bags',to:'${currentUser.language}',),
             maintainState:true,
             children: [
               SmartSelect<String>.single(
@@ -5225,7 +5365,7 @@ Widget TeenGCategory(){
             ],
           ),
           ExpansionTile(
-            title: Text('Denim'),
+            title: TranslatedText('Denim',to:'${currentUser.language}',),
             maintainState:true,
             children: [
               SmartSelect<String>.single(
@@ -5238,7 +5378,7 @@ Widget TeenGCategory(){
             ],
           ),
           ExpansionTile(
-            title: Text('Dresses'),
+            title: TranslatedText('Dresses',to:'${currentUser.language}',),
             maintainState:true,
             children: [
               SmartSelect<String>.single(
@@ -5251,7 +5391,8 @@ Widget TeenGCategory(){
             ],
           ),
           ExpansionTile(
-            title: Text('Jumpsuit'),
+            title: TranslatedText('Jumpsuit',to:'${currentUser.language}',),
+
             maintainState:true,
             children: [
               SmartSelect<String>.single(
@@ -5265,7 +5406,8 @@ Widget TeenGCategory(){
           ),
 
           ExpansionTile(
-            title: Text('Shoes'),
+            title: TranslatedText('Shoes',to:'${currentUser.language}',),
+
             maintainState:true,
             children: [SmartSelect<String>.single(
                 title: 'Shoes',
@@ -5276,7 +5418,8 @@ Widget TeenGCategory(){
             ],
           ),
           ExpansionTile(
-            title: Text('Shorts'),
+            title: TranslatedText('Shorts',to:'${currentUser.language}',),
+
             maintainState:true,
             children: [SmartSelect<String>.single(
                 title: 'Shorts',
@@ -5287,7 +5430,7 @@ Widget TeenGCategory(){
             ],
           ),
           ExpansionTile(
-            title: Text('Skirts'),
+            title: TranslatedText('Skirts',to:'${currentUser.language}',),
             maintainState:true,
             children: [SmartSelect<String>.single(
                 title: 'Skirts',
@@ -5298,7 +5441,7 @@ Widget TeenGCategory(){
             ],
           ),
           ExpansionTile(
-            title: Text('Swimwear'),
+            title: TranslatedText('Swimwear',to:'${currentUser.language}',),
             maintainState:true,
             children: [SmartSelect<String>.single(
                 title: 'Swimwear',
@@ -5309,7 +5452,7 @@ Widget TeenGCategory(){
             ],
           ),
           ExpansionTile(
-            title: Text('Knitwear'),
+            title:TranslatedText('Knitwear',to:'${currentUser.language}',),
             maintainState:true,
             children: [SmartSelect<String>.single(
                 title: 'Knitwear',
@@ -5320,7 +5463,7 @@ Widget TeenGCategory(){
             ],
           ),
           ExpansionTile(
-            title: Text('Tops'),
+            title: TranslatedText('Tops',to:'${currentUser.language}',),
             maintainState:true,
             children: [SmartSelect<String>.single(
                 title: 'Tops',
@@ -5331,7 +5474,7 @@ Widget TeenGCategory(){
             ],
           ),
           ExpansionTile(
-            title: Text('Tracks'),
+            title: TranslatedText('Tracks',to:'${currentUser.language}',),
             maintainState:true,
             children: [SmartSelect<String>.single(
                 title: 'Tracks',
@@ -5342,7 +5485,7 @@ Widget TeenGCategory(){
             ],
           ),
           ExpansionTile(
-            title: Text('Trousers'),
+            title: TranslatedText('Trousers',to:'${currentUser.language}',),
             maintainState:true,
             children: [SmartSelect<String>.single(
                 title: 'Trousers',
@@ -8386,8 +8529,8 @@ else  if(dropdownValue=='Baby-Boys'||dropdownValue=='Baby-Girls') {
           context: parentContext,
           builder: (context) {
             return SimpleDialog(
-              title: Text("Add Size Chart"),
-              children: <Widget>[
+              title:  TranslatedText('Add Size Chart',to:'${currentUser.language}',),
+                  children: <Widget>[
                 Form(
                   key: _formKey,
                   child: ListView(
@@ -8429,430 +8572,441 @@ else  if(dropdownValue=='Baby-Boys'||dropdownValue=='Baby-Girls') {
     return WillPopScope
       (
       onWillPop: _onBackPressed,
-      child: Scaffold(
-        key:  scaffoldKey,
-        appBar: AppBar(
-          backgroundColor: kPrimaryColor,
-          leading: IconButton(
-              icon: Icon(Icons.arrow_back, color: kSecondaryColor),
-              onPressed:_onBackPressed),
-          title: Text(
-            "Product Details",
-            style: TextStyle(color: Colors.white),
+      child:ModalProgressHUD(
+        color: Colors.black,
+        opacity: 1.0,
+        progressIndicator: Image.asset('assets/img/loading-76.gif'),
+        inAsyncCall: isUploading,
+        child: Scaffold(
+          key:  scaffoldKey,
+          appBar: AppBar(
+            backgroundColor: kPrimaryColor,
+            leading: IconButton(
+                icon: Icon(Icons.arrow_back, color: kSecondaryColor),
+                onPressed:_onBackPressed),
+            title:TranslatedText('Product Details',to:'${currentUser.language}',
+              textStyle:
+              TextStyle(
+                  color: Colors.white),
+            ),
+            actions: [
+              FlatButton(
+                onPressed: () async{
+                  Fluttertoast.showToast(
+                      msg: "Please wait:Uploading", timeInSecForIos: 4);
+
+                  await INRUSD();
+                  if(_formKey.currentState.validate()) {
+                    // ignore: unnecessary_statements
+                    isUploading ? null : handleSubmit();
+                    Navigator.pop(context);
+                  }
+
+                },
+
+                child: TranslatedText('Post',to:'${currentUser.language}',
+                  textStyle:
+                  TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 20.0,
+                      color: Colors.white),
+                ),
+                ),
+            ],
           ),
-          actions: [
-            FlatButton(
-              onPressed: () async{
-                Fluttertoast.showToast(
-                    msg: "Please wait:Uploading", timeInSecForIos: 4);
-
-                await INRUSD();
-                if(_formKey.currentState.validate()) {
-                  // ignore: unnecessary_statements
-                  isUploading ? null : handleSubmit();
-                  Navigator.pop(context);
-                }
-
-              },
-
-              child: Text(
-                "Post",
-                style: TextStyle(
-                    color: Colors.blueAccent,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 20.0),
-              ),
-            )
-          ],
-        ),
-        body: Container( decoration: BoxDecoration(
-            gradient: fabGradient
-        ) ,
-          alignment: Alignment.center,
-          child: Stack(
-            children:[
-              Form(
-              key: _formKey,
-              child:
-              Column(
-                  children: <Widget>[
-                  isUploading ? linearProgress() : Text(""),
+          body: Container( decoration: BoxDecoration(
+              gradient: fabGradient
+          ) ,
+            alignment: Alignment.center,
+            child: Stack(
+              children:[
+                Form(
+                key: _formKey,
+                child:
+                Column(
+                    children: <Widget>[
+                    isUploading ? linearProgress() : Text(""),
    getImageWidget(),
-                       Expanded(
-                         child: SingleChildScrollView(
-                           child: Column(
-                      children: [
+                         Expanded(
+                           child: SingleChildScrollView(
+                             child: Column(
+                        children: [
 
-                  SizedBox(height: 8.0,),
-                  Text('Select Gender',style:TextStyle(color: kText) ,),
-                  SizedBox(height: 8.0,),
-                  Container(
-                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0,8.0),
-                    decoration:     BoxDecoration(
-                      border: Border.all(color: Colors.black)
+                    SizedBox(height: 8.0,),
+                          TranslatedText('Select Gender',to:'${currentUser.language}',
+                                textStyle:TextStyle(
+                                color: kText ),),
+
+                    SizedBox(height: 8.0,),
+                    Container(
+                      margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0,8.0),
+                      decoration:     BoxDecoration(
+                        border: Border.all(color: Colors.black)
+                      ),
+                      child: DropdownButton<String>(
+                          value: dropdownValue,
+                          icon: Icon(Icons.keyboard_arrow_down_sharp),
+                          dropdownColor: kPrimaryColor,
+                          iconSize: 24,
+                          elevation: 16,
+                          style: TextStyle(color: kText),
+
+                          onChanged: (String newValue) {
+                                setState(() {
+                                  dropdownValue = newValue;
+                                });
+                          },
+                          items: <String>['Women', 'Men', 'Baby-Boys', 'Baby-Girls', 'Kids-Boys', 'Kids-Girls', 'Teen-Boys', 'Teen-Girls']
+                                  .map<DropdownMenuItem<String>>((String value) {
+                                return DropdownMenuItem<String>(
+                                  value: value,
+                                  child: Text(value),
+
+                                );
+                          }).toList(),
+                      ),
                     ),
-                    child: DropdownButton<String>(
-                        value: dropdownValue,
-                        icon: Icon(Icons.keyboard_arrow_down_sharp),
-                        dropdownColor: kPrimaryColor,
-                        iconSize: 24,
-                        elevation: 16,
-                        style: TextStyle(color: kText),
+                    Container(
+                      margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0,8.0),
+                      child: RaisedButton(
+                        color:kblue,
+                      child: TranslatedText('Select Category',to:'${currentUser.language}',
+                        textStyle:
+                        TextStyle(
+                            color: Colors.white),
+                      ),
 
-                        onChanged: (String newValue) {
-                              setState(() {
-                                dropdownValue = newValue;
-                              });
-                        },
-                        items: <String>['Women', 'Men', 'Baby-Boys', 'Baby-Girls', 'Kids-Boys', 'Kids-Girls', 'Teen-Boys', 'Teen-Girls']
-                                .map<DropdownMenuItem<String>>((String value) {
-                              return DropdownMenuItem<String>(
-                                value: value,
-                                child: Text(value),
-
-                              );
-                        }).toList(),
-                    ),
-                  ),
-                  Container(
-                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0,8.0),
-                    child: RaisedButton(
-                      color:kblue,
-                    child: Text('Select Category',style:TextStyle(color: Colors.white) ,),
-                    onPressed: (){
-                        showModalBottomSheet(context: context, builder:(BuildContext context){
+                      onPressed: (){
+                          showModalBottomSheet(context: context, builder:(BuildContext context){
 
 
-                              if(dropdownValue=='Women')
-                              {
-                                return
-                                  WomenCategory();
-                              }
-                              else if(dropdownValue=='Men')
-                              {
-                                return
-                                  MenCategory();
-                              }
+                                if(dropdownValue=='Women')
+                                {
+                                  return
+                                    WomenCategory();
+                                }
+                                else if(dropdownValue=='Men')
+                                {
+                                  return
+                                    MenCategory();
+                                }
     else if(dropdownValue=='Baby-Boys')
     {
-      return
-      BabyBCategory();
+        return
+        BabyBCategory();
     }
     else if(dropdownValue== 'Baby-Girls'){
-      return
-      BabyGCategory();
+        return
+        BabyGCategory();
     }
     else if(dropdownValue=='Kids-Boys'){
-      return
-      KidBCategory();
+        return
+        KidBCategory();
     }
     else if(dropdownValue=='Kids-Girls'){
-      return
-      KidGCategory();
+        return
+        KidGCategory();
     }
     else if(dropdownValue== 'Teen-Boys'){
-      return
-      TeenBCategory();
+        return
+        TeenBCategory();
     }
     else if(dropdownValue=='Teen-Girls'){
-      return
-      TeenGCategory();
+        return
+        TeenGCategory();
     }
-                              else{
-                                return
-                                Text('text');
-                              }
-                        },
-                        );
-                    }
-                    ,
+                                else{
+                                  return
+                                    TranslatedText('text',to:'${currentUser.language}',
+                                    );
+                                }
+                          },
+                          );
+                      }
+                      ,
+                          ),
+                    ),
+                    value == 'None' ?   TranslatedText('Select Category',to:'${currentUser.language}',
+                      textStyle:
+                      TextStyle(color: kText
+                          ),
+                    ):
+                    Text(' ',),
+
+
+                    SizedBox(height: 8.0,),
+
+                 Row(
+                   mainAxisAlignment:MainAxisAlignment.center,
+                      children:[
+                     Container(
+                 // alignment:Alignment.centerLeft,
+                       child:   FloatingActionButton.extended(
+backgroundColor: kblue,
+                         onPressed: ()=>AddSize(),
+                         label:TranslatedText('Select Size',to:'${currentUser.language}',
+                            textStyle: TextStyle(color:
+                            Colors.white),
+                         ),
+                       ),
+                     ),
+        SizedBox(width: 8.0,),Container(
+                 // alignment:Alignment.centerRight,
+                       child:   FloatingActionButton.extended(
+backgroundColor: kblue,
+                         onPressed: ()=>sizeGuide(),
+                         label: TranslatedText('Size Guide',to:'${currentUser.language}',
+                         textStyle: TextStyle(color:
+                         Colors.white),),
+                       ),
+                     ),
+
+                      ],
+                    ),
+                    SizedBox(height: 8.0,),
+
+                    Container(
+                      margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+                          child: ListTile(
+                                leading: Icon(
+                                  EvilIcons.eye,
+                                  color: Colors.orange,
+                                  size: 35.0,
+                                ),
+                                title:  TextFormField(
+                                  style:TextStyle(color: kText),
+                                  controller: productnameController,
+                                  decoration: InputDecoration(
+                                    border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+                                    enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+                                    focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+
+                                    labelText: 'Product Name',labelStyle: TextStyle(color: kText),
+                                    hintText: 'Product Name',
+                                  ),
+                                  textAlign: TextAlign.center,
+                                  validator: (text) {
+                                    if ( text.isEmpty) {
+                                      return 'Product Name is empty';
+                                    }
+                                    return null;
+                                  },
+                                ),
+                          ),
                         ),
-                  ),
-                  value == 'None' ?   Text('Select Category',style:TextStyle(color: kText) ,):
-                  Text(' ',),
+                        SizedBox(height: 8.0,),
+                    Container(
+                      margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+                          child: ListTile(
+                                leading: Icon(
+                                  EvilIcons.tag,
+                                  color: Colors.orange,
+                                  size: 35.0,
+                                ),
+                                title:TextFormField(
+                                  style:TextStyle(color: kText),
+keyboardType:TextInputType.number,
+                                  controller: priceController,
+                                  decoration: InputDecoration(
+                                    border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+                                    enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+                                    focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
 
+                                    labelText: 'Price',labelStyle: TextStyle(color: kText),
+                                    hintText: Country(),
+                                  ),
+                                  textAlign: TextAlign.center,
+                                  validator: (text) {
+                                    if (text.isEmpty) {
+                                      return 'Price is empty';
+                                    }
+                                    return null;
+                                  },
+                                ),
+                          ),
+                        ),
+                        SizedBox( height: 8.0,),
+                    Container(
+                      margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+                          child: TextFormField(
+                            style:TextStyle(color: kText),
 
-                  SizedBox(height: 8.0,),
-
-               Row(
-                 mainAxisAlignment:MainAxisAlignment.center,
-                    children:[
-                   Container(
-               // alignment:Alignment.centerLeft,
-                     child:   FloatingActionButton.extended(
-backgroundColor: kblue,
-                       onPressed: ()=>AddSize(),
-                       label: Text('Select Size',style:TextStyle(color:  Colors.white) ,),
-                     ),
-                   ),
-      SizedBox(width: 8.0,),Container(
-               // alignment:Alignment.centerRight,
-                     child:   FloatingActionButton.extended(
-backgroundColor: kblue,
-                       onPressed: ()=>sizeGuide(),
-                       label: Text('Size Guide',style:TextStyle(color:  Colors.white) ,),
-                     ),
-                   ),
-
-                    ],
-                  ),
-                  SizedBox(height: 8.0,),
-
-                  Container(
-                    margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
-                        child: ListTile(
-                              leading: Icon(
-                                EvilIcons.eye,
-                                color: Colors.orange,
-                                size: 35.0,
-                              ),
-                              title:  TextFormField(
-                                style:TextStyle(color: kText),
-                                controller: productnameController,
+                            controller: colorController,
                                 decoration: InputDecoration(
-                                  border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
                                   enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
                                   focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
 
-                                  labelText: 'Product Name',labelStyle: TextStyle(color: kText),
-                                  hintText: 'Product Name',
+                                  labelText: 'Color',labelStyle: TextStyle(color: kText),
+                                  hintText: 'ex.Peach',
                                 ),
                                 textAlign: TextAlign.center,
                                 validator: (text) {
                                   if ( text.isEmpty) {
-                                    return 'Product Name is empty';
+                                    return 'Color is empty';
                                   }
                                   return null;
                                 },
-                              ),
+                          ),
                         ),
-                      ),
-                      SizedBox(height: 8.0,),
-                  Container(
-                    margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
-                        child: ListTile(
-                              leading: Icon(
-                                EvilIcons.tag,
-                                color: Colors.orange,
-                                size: 35.0,
-                              ),
-                              title:TextFormField(
-                                style:TextStyle(color: kText),
-keyboardType:TextInputType.number,
-                                controller: priceController,
+                        SizedBox( height: 8.0,),
+                    Container(
+                      margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+                          child: TextFormField(
+                            style:TextStyle(color: kText),
+
+                            keyboardType: TextInputType.multiline,
+                                maxLines: null,
+                                controller: detailsController,
                                 decoration: InputDecoration(
                                   border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
                                   enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
                                   focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
 
-                                  labelText: 'Price',labelStyle: TextStyle(color: kText),
-                                  hintText: Country(),
+                                  labelText: 'Product description',labelStyle: TextStyle(color: kText),
+                                  hintText: 'Product description',
                                 ),
                                 textAlign: TextAlign.center,
                                 validator: (text) {
-                                  if (text.isEmpty) {
-                                    return 'Price is empty';
+                                  if ( text.isEmpty) {
+                                    return 'Description is empty';
                                   }
                                   return null;
                                 },
-                              ),
+                          ),
                         ),
-                      ),
-                      SizedBox( height: 8.0,),
-                  Container(
-                    margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
-                        child: TextFormField(
-                          style:TextStyle(color: kText),
+                        SizedBox( height: 8.0,),
+                    Container(
+                      margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+                          child: TextFormField(
+                            style:TextStyle(color: kText),
 
-                          controller: colorController,
-                              decoration: InputDecoration(
-                                enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
-                                focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+                            keyboardType: TextInputType.multiline,
+                                maxLines: null,
+                                controller: compositionController,
+                                decoration: InputDecoration(
+                                  border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+                                  enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+                                  focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
 
-                                labelText: 'Color',labelStyle: TextStyle(color: kText),
-                                hintText: 'ex.Peach',
-                              ),
-                              textAlign: TextAlign.center,
-                              validator: (text) {
-                                if ( text.isEmpty) {
-                                  return 'Color is empty';
-                                }
-                                return null;
-                              },
+                                  labelText: 'Fabric description',labelStyle: TextStyle(color: kText),
+                                  hintText: 'ex.Cotton: 100%' ,
+                                ),
+                                textAlign: TextAlign.center,
+                                validator: (text) {
+                                  if ( text.isEmpty) {
+                                    return 'Fabric description is empty';
+                                  }
+                                  return null;
+                                },
+                          ),
                         ),
-                      ),
-                      SizedBox( height: 8.0,),
-                  Container(
-                    margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
-                        child: TextFormField(
-                          style:TextStyle(color: kText),
+                        SizedBox( height: 8.0,),
+                    Container(
+                      margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+                          child: TextFormField(
+                            style:TextStyle(color: kText),
 
-                          keyboardType: TextInputType.multiline,
-                              maxLines: null,
-                              controller: detailsController,
-                              decoration: InputDecoration(
-                                border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
-                                enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
-                                focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+                            keyboardType: TextInputType.multiline,
+                                maxLines: null,
+                                controller: washandcareController,
+                                decoration: InputDecoration(
+                                  border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+                                  enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+                                  focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
 
-                                labelText: 'Product description',labelStyle: TextStyle(color: kText),
-                                hintText: 'Product description',
-                              ),
-                              textAlign: TextAlign.center,
-                              validator: (text) {
-                                if ( text.isEmpty) {
-                                  return 'Description is empty';
-                                }
-                                return null;
-                              },
+                                  labelText: 'Wash & Care',labelStyle: TextStyle(color: kText),
+                                  hintText: 'Wash & Care instructions',
+                                ),
+                                textAlign: TextAlign.center,
+                                validator: (text) {
+                                  if ( text.isEmpty) {
+                                    return 'Wash & Care instructions is empty';
+                                  }
+                                  return null;
+                                },
+                          ),
                         ),
-                      ),
-                      SizedBox( height: 8.0,),
-                  Container(
-                    margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
-                        child: TextFormField(
-                          style:TextStyle(color: kText),
+                        SizedBox( height: 8.0,),
+                    Container(
+                      margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+                          child: TextFormField(
+                            style:TextStyle(color: kText),
 
-                          keyboardType: TextInputType.multiline,
-                              maxLines: null,
-                              controller: compositionController,
-                              decoration: InputDecoration(
-                                border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
-                                enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
-                                focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+                            keyboardType: TextInputType.multiline,
+                                maxLines: null,
+                                controller: sizeandfitController,
+                                decoration: InputDecoration(
+                                  border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+                                  enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+                                  focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
 
-                                labelText: 'Fabric description',labelStyle: TextStyle(color: kText),
-                                hintText: 'ex.Cotton: 100%' ,
-                              ),
-                              textAlign: TextAlign.center,
-                              validator: (text) {
-                                if ( text.isEmpty) {
-                                  return 'Fabric description is empty';
-                                }
-                                return null;
-                              },
+                                  labelText: 'Size & Fit recommendations',labelStyle: TextStyle(color: kText),
+                                  hintText: 'ex.Cut for slim fit,take your normal size',
+                                ),
+                                textAlign: TextAlign.center,
+                                validator: (text) {
+                                  if ( text.isEmpty) {
+                                    return ' Size & Fit recommendations is empty';
+                                  }
+                                  return null;
+                                },
+                          ),
                         ),
-                      ),
-                      SizedBox( height: 8.0,),
-                  Container(
-                    margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
-                        child: TextFormField(
-                          style:TextStyle(color: kText),
-
-                          keyboardType: TextInputType.multiline,
-                              maxLines: null,
-                              controller: washandcareController,
-                              decoration: InputDecoration(
-                                border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
-                                enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
-                                focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
-
-                                labelText: 'Wash & Care',labelStyle: TextStyle(color: kText),
-                                hintText: 'Wash & Care instructions',
-                              ),
-                              textAlign: TextAlign.center,
-                              validator: (text) {
-                                if ( text.isEmpty) {
-                                  return 'Wash & Care instructions is empty';
-                                }
-                                return null;
-                              },
-                        ),
-                      ),
-                      SizedBox( height: 8.0,),
-                  Container(
-                    margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
-                        child: TextFormField(
-                          style:TextStyle(color: kText),
-
-                          keyboardType: TextInputType.multiline,
-                              maxLines: null,
-                              controller: sizeandfitController,
-                              decoration: InputDecoration(
-                                border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
-                                enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
-                                focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
-
-                                labelText: 'Size & Fit recommendations',labelStyle: TextStyle(color: kText),
-                                hintText: 'ex.Cut for slim fit,take your normal size',
-                              ),
-                              textAlign: TextAlign.center,
-                              validator: (text) {
-                                if ( text.isEmpty) {
-                                  return ' Size & Fit recommendations is empty';
-                                }
-                                return null;
-                              },
-                        ),
-                      ),
   SizedBox( height: 8.0,), Switch(
-                          value: worldship,
-                          onChanged: (value){setState(() {
-                            worldship = value;
-                          });},
-                          activeColor: Colors.pink,
-                          activeTrackColor: Colors.white,
-                        ), SizedBox( height: 8.0,),
-                  Container(
-                    margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
-                        child: TextFormField(
-                          style:TextStyle(color: kText),
+                            value: worldship,
+                            onChanged: (value){setState(() {
+                              worldship = value;
+                            });},
+                            activeColor: Colors.pink,
+                            activeTrackColor: Colors.white,
+                          ), SizedBox( height: 8.0,),
+                    Container(
+                      margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+                          child: TextFormField(
+                            style:TextStyle(color: kText),
 
-                          keyboardType: TextInputType.multiline,
-                              maxLines: null,
-                              controller: shipcontroller,
-                              decoration: InputDecoration(
-                                border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
-                                enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
-                                focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+                            keyboardType: TextInputType.multiline,
+                                maxLines: null,
+                                controller: shipcontroller,
+                                decoration: InputDecoration(
+                                  border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+                                  enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+                                  focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
 
-                                labelText: 'Shipping & returns',labelStyle: TextStyle(color: kText),
-                                hintText: 'countries served & return policy',
-                              ),
-                              textAlign: TextAlign.center,
-                              validator: (text) {
-                                if ( text.isEmpty) {
-                                  return 'Shipping & returns';
-                                }
-                                return null;
-                              },
+                                  labelText: 'Shipping & returns',labelStyle: TextStyle(color: kText),
+                                  hintText: 'countries served & return policy',
+                                ),
+                                textAlign: TextAlign.center,
+                                validator: (text) {
+                                  if ( text.isEmpty) {
+                                    return 'Shipping & returns';
+                                  }
+                                  return null;
+                                },
+                          ),
                         ),
-                      ),
 
 
 
   SizedBox( height: 8.0,),
 
 
-                       ],
-                    ),
-                         ),
-                       ),
-
-                    (_inProcess)?Container(
-                      color: Colors.white,
-                      height: MediaQuery.of(context).size.height * 0.95,
-                      child: Center(
-                        child: CircularProgressIndicator(),
+                         ],
                       ),
-                    ):Center()
-              ],
+                           ),
+                         ),
+
+
+                ],
+                ),
+
+
+
+
               ),
 
-
-
-
+              ],
             ),
-              (_inProcess)?Container(
-
-                color: Colors.white,
-                height: MediaQuery.of(context).size.height * 0.95,
-                child: Center(
-                  child: CircularProgressIndicator(),
-                ),
-              ):Center(),
-              isUploading ? Center(child:  CircularProgressIndicator()) : Text(""),
-            ],
           ),
         ),
       ),
