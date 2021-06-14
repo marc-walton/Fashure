@@ -3,11 +3,11 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
 import 'package:fashow/methods/register.dart';
 import 'package:fashow/methods/login.dart';
-
+import 'package:splashscreen/splashscreen.dart';
 import 'package:dropdown_formfield/dropdown_formfield.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/scheduler.dart';
+import 'package:curved_splash_screen/curved_splash_screen.dart';
 import 'package:flutter_auth_buttons/flutter_auth_buttons.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:fashow/user.dart';
@@ -19,6 +19,7 @@ import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:fashow/Shop.dart';
 import 'package:fashow/Timeline.dart';
+import 'package:modal_progress_hud/modal_progress_hud.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 // import 'file:///C:/Users/marcw/StudioProjects/Fashow/lib/Live/Live.dart';
@@ -30,42 +31,50 @@ import 'package:fashow/Constants.dart';
 import 'package:fashow/enum/user_state.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
+import 'package:translator/translator.dart';
 import 'package:uuid/uuid.dart';
-
+import 'package:flutter_svg/svg.dart';
+import 'package:translated_text/translated_text.dart';
 final GoogleSignIn googleSignIn = GoogleSignIn();
+final translator = GoogleTranslator();
 
-final StorageReference storageRef = FirebaseStorage.instance.ref();
-final usersRef = Firestore.instance.collection('users');
-final shopRef = Firestore.instance.collectionGroup('userProducts');
-final postsRef = Firestore.instance.collection('posts');
-final videoRef = Firestore.instance.collection('videos');
+final Reference storageRef = FirebaseStorage.instance.ref();
+final usersRef = FirebaseFirestore.instance.collection('users');
+final shopRef = FirebaseFirestore.instance.collectionGroup('userProducts');
+final postsRef = FirebaseFirestore.instance.collection('posts');
+final videoRef = FirebaseFirestore.instance.collection('videos');
 
-final commentsRef = Firestore.instance.collection('comments');
-final videocommentsRef = Firestore.instance.collection('comments');
+final commentsRef = FirebaseFirestore.instance.collection('comments');
+final videocommentsRef = FirebaseFirestore.instance.collection('comments');
 
-final cartRef = Firestore.instance.collection('cart');
-final favRef = Firestore.instance.collection('favorites');
-final productcommentsRef = Firestore.instance.collection('productcomments');
-final blogcommentsRef = Firestore.instance.collection('blogcomments');
-final collcommentsRef = Firestore.instance.collection('collcomments');
-final addressRef = Firestore.instance.collection('Address');
-final bankRef = Firestore.instance.collection('Bank');
+final cartRef = FirebaseFirestore.instance.collection('cart');
+final favRef = FirebaseFirestore.instance.collection('favorites');
+final productcommentsRef = FirebaseFirestore.instance.collection('productcomments');
+final blogcommentsRef = FirebaseFirestore.instance.collection('blogcomments');
+final collcommentsRef = FirebaseFirestore.instance.collection('collcomments');
+final addressRef = FirebaseFirestore.instance.collection('Address');
 final CollectionReference _messageCollection =
-Firestore.instance.collection(MESSAGES_COLLECTION);
+FirebaseFirestore.instance.collection(MESSAGES_COLLECTION);
 
-final activityFeedRef = Firestore.instance.collection('feed');
-final followersRef = Firestore.instance.collection('followers');
-final followingRef = Firestore.instance.collection('following');
-final timelineRef = Firestore.instance.collection('timeline');
-final productsRef = Firestore.instance.collection('products');
-final blogRef = Firestore.instance.collection("blogs");
-final collRef = Firestore.instance.collection("collections");
-final tagsRef = Firestore.instance.collection("tags");
+final activityFeedRef = FirebaseFirestore.instance.collection('feed');
+final bankRef = FirebaseFirestore.instance.collection('Bank');
+
+final followersRef = FirebaseFirestore.instance.collection('followers');
+final followingRef = FirebaseFirestore.instance.collection('following');
+final timelineRef = FirebaseFirestore.instance.collection('timeline');
+final productsRef = FirebaseFirestore.instance.collection('products');
+final blogRef = FirebaseFirestore.instance.collection("blogs");
+final collRef = FirebaseFirestore.instance.collection("collections");
+final tagsRef = FirebaseFirestore.instance.collection("tags");
 
 final DateTime timestamp = DateTime.now();
-User currentUser;
+Users currentUser;
 
 class Homepage extends StatefulWidget {
+  final userid;
+  final bool authis;
+
+  const Homepage({Key key, this.userid,this.authis}) : super(key: key);
   @override
   _HomepageState createState() => _HomepageState();
 
@@ -74,89 +83,91 @@ class Homepage extends StatefulWidget {
 
 class _HomepageState extends State<Homepage> with WidgetsBindingObserver  {
   final _scaffoldKey = GlobalKey<ScaffoldState>();
-  final _formKey = GlobalKey<FormState>();
-  // String dropdownValue ;
-  String _country;
+
   int data;
   int serdata;
-  String reviewId = Uuid().v4();
+  // String reviewId = Uuid().v4();
 
   FirebaseMessaging _firebaseMessaging = FirebaseMessaging();
-  bool isAuth = false;
+  bool isAuth ;
+  bool h = true;
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+  User loggedInUser;
+
   PageController pageController;
   int pageIndex = 0;
-  final FirebaseAuth _auth = FirebaseAuth.instance;
-  FirebaseUser loggedInUser;
   int followers ;
   SharedPreferences myPrefs;
-String idd;
-String username;
-//  UserProvider userProvider;
+  String idd;
+  String username;
+
   @override
   void initState() {
     super.initState();
+    print("khb,vhkjhb,");
+
+    print("$isAuth");
     pageController = PageController(
       // initialPage: 2
     );
-    String dropdownValue = '';
-    String _country = '';
     // auth();
     getFollowers();
-
+    loginuser();
 
     // Detects when user signed in
-    googleSignIn.onCurrentUserChanged.listen((account) {
-      handleSignIn(account);
-    }, onError: (err) {
-      print('Error signing in: $err');
-    });
-    // Reauthenticate user when app is opened
-    googleSignIn.signInSilently(suppressErrors: false).then((account) {
-      handleSignIn(account);
-    }).catchError((err) {
-      print('Error signing in: $err');
-    });
-
-    WidgetsBinding.instance.addObserver(this);
+    // googleSignIn.onCurrentUserChanged.listen((account) {
+    //   handleSignIn(account);
+    // }, onError: (err) {
+    //   print('Error signing in: $err');
+    // });
+    // // Reauthenticate user when app is opened
+    // googleSignIn.signInSilently(suppressErrors: false).then((account) {
+    //   handleSignIn(account);
+    // }).catchError((err) {
+    //   print('Error signing in: $err');
+    // });
+    //
+    // WidgetsBinding.instance.addObserver(this);
   }
 
   @override
-auth() async {
-    FirebaseAuth.instance
-        .currentUser()
-        .then((User) async => {
-    if (User == null)
-    {
-        setState(() {
-      isAuth = false;
-    }),
-      // Navigator.pushReplacementNamed(context, "/login")
-    }
-    else
-    {
-      loginuser(userid: User.uid),
-    setState(() {
-      isAuth = true;
-    }),
-    // Firestore.instance
-    //     .collection("users")
-    //     .document(currentUser.uid)
-    //     .get()
-    //     .then((DocumentSnapshot result) =>
-    //     Navigator.pushReplacement(
-    //         context,
-    //         MaterialPageRoute(
-    //             builder: (context) => HomePage(
-    //               title: result["fname"] + "'s Tasks",
-    //               uid: currentUser.uid,
-    //             ))))
-    //     .catchError((err) => print(err))
-  }
-    });
-  }
-  loginuser({userid})async{
-    DocumentSnapshot doc = await usersRef.document(userid).get();
-    currentUser = User.fromDocument(doc);
+// auth() async {
+//     FirebaseAuth.instance
+//         .currentUser()
+//         .then((User) async => {
+//     if (User == null)
+//     {
+//         setState(() {
+//       isAuth = false;
+//     }),
+//       // Navigator.pushReplacementNamed(context, "/login")
+//     }
+//     else
+//     {
+//       loginuser(userid: User.uid),
+//     setState(() {
+//       isAuth = true;
+//       h = false;
+//     }),
+//     // FirebaseFirestore.instance
+//     //     .collection("users")
+//     //     .doc(currentUser.uid)
+//     //     .get()
+//     //     .then((DocumentSnapshot result) =>
+//     //     Navigator.pushReplacement(
+//     //         context,
+//     //         MaterialPageRoute(
+//     //             builder: (context) => HomePage(
+//     //               title: result["fname"] + "'s Tasks",
+//     //               uid: currentUser.uid,
+//     //             ))))
+//     //     .catchError((err) => print(err))
+//   }
+//     });
+//   }
+  loginuser()async{
+    DocumentSnapshot doc = await usersRef.doc(widget.userid).get();
+    currentUser = Users.fromDocument(doc);
     myPrefs = await SharedPreferences.getInstance();
     await myPrefs.setString('id', currentUser.id);
     await myPrefs.setString('displayName', currentUser.displayName);
@@ -169,8 +180,8 @@ auth() async {
     _firebaseMessaging.getToken().then((token) {
       // print("Firebase Messaging Token: $token\n");
       usersRef
-          .document(userid)
-          .updateData({"androidNotificationToken": token});
+          .doc(widget.userid)
+          .update({"androidNotificationToken": token});
     });
 
     _firebaseMessaging.configure(
@@ -180,7 +191,7 @@ auth() async {
         // print("on message: $message\n");
         final String recipientId = message['data']['recipient'];
         final String body = message['notification']['body'];
-        if (recipientId == userid) {
+        if (recipientId == widget.userid) {
           // print("Notification shown!");
           SnackBar snackBar = SnackBar(
               content: Text(
@@ -196,24 +207,16 @@ auth() async {
   }
   void getUser()async {
     try{
-      final user = await _auth.currentUser();
+      final user = await _auth.currentUser;
       if(user!=null){
         loggedInUser = user;
-print(loggedInUser.displayName);
+        print(loggedInUser.displayName);
       }
     }catch(e) {
       print(e);
     }
   }
-  //     _saveForm() {
-  //
-  //
-  //       usersRef.document(currentUser.id).updateData({
-  //         'country':dropdownValue,
-  //       });
-  //
-  //
-  // }
+
   handleSignIn(GoogleSignInAccount account) async {
     if (account != null) {
       await createUserInFirestore();
@@ -236,8 +239,8 @@ print(loggedInUser.displayName);
     _firebaseMessaging.getToken().then((token) {
       // print("Firebase Messaging Token: $token\n");
       usersRef
-          .document(user.id)
-          .updateData({"androidNotificationToken": token});
+          .doc(user.id)
+          .update({"androidNotificationToken": token});
     });
 
     _firebaseMessaging.configure(
@@ -272,31 +275,31 @@ print(loggedInUser.displayName);
   createUserInFirestore() async {
     // 1) check if user exists in users collection in database (according to their id)
     final GoogleSignInAccount user = googleSignIn.currentUser;
-    DocumentSnapshot doc = await usersRef.document(user.id).get();
+    DocumentSnapshot doc = await usersRef.doc(user.id).get();
     // 2) if the user doesn't exist, then we want to take them to the create account page
     if (!doc.exists) {
       final dropdownValue = await Navigator.push(
           context, MaterialPageRoute(builder: (context) => CreateAccount()));
 
 
-      usersRef.document(user.id).setData({
+      usersRef.doc(user.id).set({
         "id": user.id,
-        "coverPhoto":"assets/img/cover.jpg",
         "username" : dropdownValue,
         "photoUrl": user.photoUrl,
         "email": user.email,
         "displayName": user.displayName,
         "bio": "",
         "client": 0 ,
-       "country":dropdownValue,
-        "timestamp": timestamp
+        "country":dropdownValue,
+        "timestamp": timestamp,
+        "ban":true
       });
 
 
 
-    await  bankRef
-          .document(user.id)
-          .setData({
+      await  bankRef
+          .doc(user.id)
+          .set({
 
         "accno":"",
         "ifsc":"",
@@ -304,16 +307,16 @@ print(loggedInUser.displayName);
       });
       // make new user their own follower (to include their posts in their timeline)
       await followersRef
-          .document(user.id)
+          .doc(user.id)
           .collection('userFollowers')
-          .document(user.id)
-          .setData({});
+          .doc(user.id)
+          .set({});
 
 
 
-      doc = await usersRef.document(user.id).get();
+      doc = await usersRef.doc(user.id).get();
     }
-    currentUser = User.fromDocument(doc);
+    currentUser = Users.fromDocument(doc);
 
     myPrefs = await SharedPreferences.getInstance();
     await myPrefs.setString('id', currentUser.id);
@@ -334,6 +337,7 @@ print(loggedInUser.displayName);
   }
 
   login() {
+
     googleSignIn.signIn();
   }
 
@@ -356,14 +360,12 @@ print(loggedInUser.displayName);
   }
   getFollowers() async {
     QuerySnapshot snapshot = await followersRef
-        .document(currentUser.id)
+        .doc(currentUser.id)
         .collection('userFollowers')
-        .getDocuments();
+        .get();
     setState(() {
-      followers = snapshot.documents.length;
-//      usersRef.document(currentUser.id).updateData({
-//        "followers":snapshot.documents.length,
-      });
+      followers = snapshot.docs.length;
+    });
 
 
   }
@@ -371,11 +373,11 @@ print(loggedInUser.displayName);
     return
       StreamBuilder(
         stream:  activityFeedRef
-            .document(currentUser.id)
+            .doc(currentUser.id)
             .collection('feedItems')
             .where('read',isEqualTo: 'false').snapshots(),
         builder: (context,snapshot){
-          int data =  snapshot.data.documents.length;
+          int data =  snapshot.data.docs.length;
           return
             Badge(
 
@@ -392,7 +394,7 @@ print(loggedInUser.displayName);
     return
       StreamBuilder(
         stream: _messageCollection
-            .document(currentUser.id)
+            .doc(currentUser.id)
 
             .snapshots(),
         builder: (context,snapshot){
@@ -436,26 +438,26 @@ print(loggedInUser.displayName);
   orderbadge(){
     return
       StreamBuilder(
-        stream:  Firestore.instance.collection('ordersSeller')
-            .document(currentUser.id)
+        stream:  FirebaseFirestore.instance.collection('ordersSeller')
+            .doc(currentUser.id)
             .collection('sellerOrder')
             .where('read',isEqualTo: 'false').snapshots(),
         builder: (context,snapshot){
           setState(() {
-            data =  snapshot.data.documents.length;
+            data =  snapshot.data.docs.length;
           });
 
           return
             StreamBuilder(
-              stream:   Firestore.instance.collection('Payments')
-                  .document(currentUser.id,)
+              stream:   FirebaseFirestore.instance.collection('Payments')
+                  .doc(currentUser.id,)
                   .collection('SellerPayments')
                   .where('fulfilled',isEqualTo: 'true')
                   .where('read',isEqualTo: 'false').snapshots(),
               builder: (context,snapshot){
 
                 setState(() {
-                  data +=  snapshot.data.documents.length;
+                  data +=  snapshot.data.docs.length;
                 });
                 return
                   Badge(
@@ -474,25 +476,25 @@ print(loggedInUser.displayName);
   servicebadge(){
     return
       StreamBuilder(
-        stream:     Firestore.instance.collection('serviceSeller')
-            .document(currentUser.id)
+        stream:     FirebaseFirestore.instance.collection('serviceSeller')
+            .doc(currentUser.id)
             .collection('sellerService')
             .where('read',isEqualTo: 'false').snapshots(),
         builder: (context,snapshot){
           setState(() {
-            serdata =  snapshot.data.documents.length;
+            serdata =  snapshot.data.docs.length;
           });
 
           return
             StreamBuilder(
-              stream:   Firestore.instance.collection('Payments')
-                  .document(currentUser.id)
+              stream:   FirebaseFirestore.instance.collection('Payments')
+                  .doc(currentUser.id)
                   .collection('ServicePayments')
                   .where('fulfilled',isEqualTo: 'true')
                   .where('read',isEqualTo: 'false').snapshots(),
               builder: (context,snapshot){
                 setState(() {
-                  serdata +=  snapshot.data.documents.length;
+                  serdata +=  snapshot.data.docs.length;
                 });
                 return
                   Badge(
@@ -508,57 +510,57 @@ print(loggedInUser.displayName);
         },
       );
   }
+
   Scaffold buildAuthScreen() {
+
+
 
 
     return Scaffold(
       key: _scaffoldKey,
+
       body: Container(
         decoration: BoxDecoration(
-          gradient: fabGradient
+            gradient: fabGradient
         ) ,
         alignment: Alignment.center,
         child: PageView(
           children: <Widget>[
 
             Timeline(),
-          Shop(currentUser: currentUser),
+            Shop(currentUser: currentUser),
             Designer(),
             LiveTv(),
-          ActivityFeed(),
+            ActivityFeed(),
           ],
           controller: pageController,
           onPageChanged: onPageChanged,
-            physics: NeverScrollableScrollPhysics(),
+          physics: NeverScrollableScrollPhysics(),
         ),
       ),
-    bottomNavigationBar: CurvedNavigationBar(
+      bottomNavigationBar: CurvedNavigationBar(
 
 //    currentIndex : pageIndex,
-    onTap: onTap,
-      color: kPrimaryColor,
-    buttonBackgroundColor: Colors.transparent,
-    backgroundColor:kblue,
-    animationCurve: Curves.elasticInOut,
-    animationDuration: Duration(milliseconds: 001),
-      height: 50.0,
-    items: <Widget>[
+        onTap: onTap,
+        color: kPrimaryColor,
+        buttonBackgroundColor: Colors.transparent,
+        backgroundColor:kblue,
+        animationCurve: Curves.elasticInOut,
+        animationDuration: Duration(milliseconds: 001),
+        height: 50.0,
+        items: <Widget>[
 
-      Icon(Icons.weekend, size: 30, color: Colors.white,),
-      Icon(Icons.store, size: 30,color: Colors.white,),
-      Icon(FontAwesomeIcons.swatchbook, size: 30,color: Colors.white,),
-      Icon(Icons.play_arrow, size: 30,color: Colors.white,),
-      Stack(children:[ Icon(Icons.inbox, size: 30,color: Colors.white,),
-        Positioned(
-          top: 1.0,
-          right:1.0,
-          child:  badgescount(),),
+          Icon(Icons.weekend, size: 30, color: Colors.white,),
+          Icon(Icons.store, size: 30,color: Colors.white,),
+          Icon(FontAwesomeIcons.swatchbook, size: 30,color: Colors.white,),
+          Icon(Icons.play_arrow, size: 30,color: Colors.white,),
+          Stack(children:[ Icon(Icons.inbox, size: 30,color: Colors.white,),
 
-      ]),
+          ]),
 
-    ],
+        ],
 
-    ),
+      ),
 
     );
 //    return RaisedButton(
@@ -568,100 +570,207 @@ print(loggedInUser.displayName);
   }
 
   Scaffold  buildUnAuthScreen(parentContext) {
+    final Orientation orientation = MediaQuery.of(context).orientation;
+
+
     return Scaffold(
-      backgroundColor: Color(0xffffd194),
+      backgroundColor: Colors.white,
+      ///,sdgkb
       body: Container(
 
-        decoration: BoxDecoration(
-            gradient: fabGradient
-        ) ,
-        alignment: Alignment.center,
-          child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: <Widget>[
-            Container(
-              child: RotateAnimatedTextKit(text: ["Design","Showcase","influence","Buy","Sell","Blog","Freelance","Live Shows","Community","FASHURE"],
-              textStyle:  TextStyle(
-                fontFamily: "MajorMonoDisplay",
-                fontSize:  MediaQuery.of(context).size.width*0.1,
-                color: Colors.white,),
-                textAlign: TextAlign.center,
-                // totalRepeatCount:
-repeatForever: true,
-              ),
-            ),
-            GoogleSignInButton(
-              onPressed: login,
-              darkMode: true, // default: false
-            ),
+        // decoration: BoxDecoration(
+        //
+        //     gradient: fabGradient
+        // ) ,
+        // alignment: Alignment.center,
+        child:
+        CurvedSplashScreen(
+          bottomSheetColor: kPrimaryColor,
+          backText:"",
+          skipText: "",
+          screensLength: splashContent.length,
+          screenBuilder: (index) {
+            return SplashContent(
+              title: splashContent[index]["title"],
+              image: splashContent[index]["image"],
+              text: splashContent[index]["text"],
+            );
+          },
+          // onSkipButton: () {
+          //   Navigator.push(
+          //     parentContext,
+          //     MaterialPageRoute(
+          //         builder: (context) => LoginPage(
+          //
+          //         )),
+          //   );
+          // }),
 
-            Padding(
-              padding: EdgeInsets.all(16.0),
-              child: FlatButton.icon(
-                onPressed: logout,
-                icon: Icon(Icons.cancel, color: Colors.red),
-                label: Text(
-                  "Logout",
-                  style: TextStyle(color: Colors.red, fontSize: 20.0),
-                ),
-              ),
-            ),
-          ],
-        ),
-      ),
-        bottomNavigationBar: Container(
-          color: Colors.transparent,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
+          //       PageView(
+          //         children:[
+          //           Column (
+          //             mainAxisAlignment: MainAxisAlignment.center,
+          //             children: [
+          //               SvgPicture.network(
+          //                 'http://www.w3.org/2000/svg',
+          //                 height:orientation == Orientation.portrait ? 300.0 : 150.0,
+          //               ),
+          //               const Text(
+          //                 "DESIGN",
+          //                 style: TextStyle(fontFamily:'MajorMonoDisplay',fontSize: 24 ),
+          //               )
+          //
+          //             ],
+          //           ),
+          //
+          //
+          //           Column(
+          //             mainAxisAlignment: MainAxisAlignment.center,
+          //             children: [
+          //               SvgPicture.asset(
+          //                 'assets/img/undraw_shopping_eii3.svg',
+          //                 height:orientation == Orientation.portrait ? 300.0 : 150.0,
+          //               ),
+          //               const Text(
+          //                 "SHOP",
+          //                 style: TextStyle(fontFamily:'MajorMonoDisplay',fontSize: 24 ),
+          //               )
+          // ],
+          //           ),
+          //
+          //           Column(mainAxisAlignment: MainAxisAlignment.center,
+          //             children: [
+          //               SvgPicture.asset(
+          //                 'assets/img/undraw_adventure_map_hnin.svg',
+          //                 height:orientation == Orientation.portrait ? 300.0 : 150.0,
+          //               ),
+          //               const Text(
+          //                 "EXPLORE",
+          //                 style: TextStyle(fontFamily:'MajorMonoDisplay',fontSize: 24 ),
+          //               ),
+          //            ]
+          //           ),
+          //           Column(mainAxisAlignment: MainAxisAlignment.center,
+          //               children: [
+          //                 Image.asset(
+          //                   'assets/img/DrawKit-Fashion-Illustration-01.png',
+          //                   height:orientation == Orientation.portrait ? 300.0 : 150.0,
+          //                 ),
+          //                 const Text(
+          //                    "BLOG",
+          //                   style: TextStyle(fontFamily:'MajorMonoDisplay',fontSize: 24 ),
+          //                 ),
+          //               ]
+          //           ),
+          //         ]
+          //
+          //       )
+        ),),
 
-            children: [Container(
-              width:150.0,
-              child: FloatingActionButton.extended(
-              elevation: 10.0,
+//           Column(
+//           mainAxisAlignment: MainAxisAlignment.center,
+//           crossAxisAlignment: CrossAxisAlignment.center,
+//           children: <Widget>[
+//             Container(
+//               child: RotateAnimatedTextKit(text: ["Design","Showcase","influence","Buy","Sell","Blog","Freelance","Live Shows","Community","FASHURE"],
+//               textStyle:  TextStyle(
+//                 fontFamily: "MajorMonoDisplay",
+//                 fontSize:  MediaQuery.of(context).size.width*0.1,
+//                 color: Colors.white,),
+//                 textAlign: TextAlign.center,
+//                 // totalRepeatCount:
+// repeatForever: true,
+//               ),
+//             ),
+//             GoogleSignInButton(
+//               onPressed: login,
+//               darkMode: true, // default: false
+//             ),
+//
+//             Padding(
+//               padding: EdgeInsets.all(16.0),
+//               child: FlatButton.icon(
+//                 onPressed: logout,
+//                 icon: Icon(Icons.cancel, color: Colors.red),
+//                 label: Text(
+//                   "Logout",
+//                   style: TextStyle(color: Colors.red, fontSize: 20.0),
+//                 ),
+//               ),
+//             ),
+//           ],
+//         ),
 
-              heroTag:'in',
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(15.0))),
+      bottomNavigationBar: Container(
+        color: kPrimaryColor,
 
-                backgroundColor: kblue,
-                onPressed: ()=>  Navigator.push(
-                  parentContext,
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Container(
+            color: kPrimaryColor,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+
+              children: [Container(
+                width:150.0,
+                child: FloatingActionButton.extended(
+                  elevation: 10.0,
+
+                  heroTag:'in',
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(15.0))),
+
+                  backgroundColor: kPrimaryColor,
+                  onPressed: ()=>  Navigator.push(
+                    parentContext,
                     MaterialPageRoute(
                         builder: (context) => LoginPage(
 
                         )),
-                ),
-                label: Text('Sign in',style:TextStyle(color: Colors.white) ,),
-              ),
-            ),
-              Container(
-                width:150.0,
-
-                child: FloatingActionButton.extended(
-                  elevation: 200.0,
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(15.0))),
-                  heroTag:'up',
-                  backgroundColor: kblue,
-                  onPressed: ()=>Navigator.push(
-                    parentContext,
-                    MaterialPageRoute(
-                        builder: (context) => RegisterPage(
-
-                        )),
                   ),
-                  label: Text('Sign up',style:TextStyle(color: Colors.white) ,),
+                  label: Text('Sign in',style:TextStyle(color: Colors.white) ,),
                 ),
-              ),],
+              ),
+
+                Container(
+                  width:150.0,
+
+                  child: FloatingActionButton.extended(
+                    elevation: 10.0,
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(15.0))),
+                    heroTag:'up',
+                    backgroundColor: kPrimaryColor,
+                    onPressed: ()=>Navigator.push(
+                      parentContext,
+                      MaterialPageRoute(
+                          builder: (context) => RegisterPage(
+
+                          )),
+                    ),
+                    label: Text('Sign up',style:TextStyle(color: Colors.white) ,),
+                  ),
+                ),],
+            ),
           ),
         ),
-      );
+      ),
+    );
 
 
   }
+  reauth(){
+    return SplashScreen(
+      seconds: 10,
+      backgroundColor: Colors.black,
+      image: Image.asset('assets/img/loading-38.gif'),
+      loaderColor: Colors.white,
+      photoSize: 150.0,
+      navigateAfterSeconds: buildUnAuthScreen(context),
+    );
 
+  }
   @override
   Widget build(BuildContext context) {
-       return isAuth? buildAuthScreen() : buildUnAuthScreen(context);
+    return widget.authis? buildAuthScreen() : buildUnAuthScreen(context);
 
 
 
@@ -679,83 +788,85 @@ class button extends StatelessWidget {
   }
 }
 
-//this
-//
-//class Cart extends StatefulWidget {
-//  @override
-//  _CartState createState() => _CartState();
-//}
-//
-//class _CartState extends State<Cart> {
-//  Icon cusIcon = Icon(Icons.search);
-//  Widget cusSearch = Text(   'Notification',
-//    style: TextStyle(
-//        fontFamily :"MajorMonoDisplay",
-//        fontSize:  35.0 ,
-//        color: Colors.white),);
-//  @override
-//  Widget build(BuildContext context) {
-//    return Scaffold(
-//      appBar: AppBar(backgroundColor: kPrimaryColor,
-//          title: cusSearch,
-//          iconTheme: new IconThemeData(color: kSecondaryColor),
-////            leading:IconButton(  icon: Icon(
-////              Icons.menu,
-////              color: Colors.blue,),
-//          actions: <Widget>[
-//
-//            IconButton(              onPressed: () {
-//              setState(() {
-//                if (this.cusIcon.icon == Icons.search){
-//                  this.cusIcon = Icon(Icons.clear);
-//                  this.cusSearch = TextField(
-//                    textInputAction: TextInputAction.go,
-//                    decoration: InputDecoration(
-//                      border:InputBorder.none,
-//                      hintText: "Search",
-//                    ),
-//                    style: TextStyle(
-//                      color: Colors.white,
-//                      fontSize: 16.0,
-//                    ),
-//                  );
-//                }
-//                else{
-//                  this.cusIcon = Icon(Icons.search);
-//                  this.cusSearch = Text(   'Notification',
-//                    style: TextStyle(
-//                        fontFamily :"MajorMonoDisplay",
-//                        fontSize:  35.0 ,
-//                        color: Colors.white),);
-//                }
-//              });
-//              // do something
-//            },
-//              icon: cusIcon,
-//            ),
-//IconButton(
-//  icon: Icon(Icons.account_box),
-//  onPressed: (){  Navigator.push(context, MaterialPageRoute(builder: (context) =>Profile( profileId: currentUser?.id)));
-//
-//  },
-//
-//)
-//          ]
-//      ),
-//      backgroundColor: kSecondaryColor,
-//      body:Center(
-//        child: Text('cart'),
-//      ),
-//      floatingActionButton: FloatingActionButton(
-//        backgroundColor: Colors.transparent,
-//        onPressed: () {
-//          Navigator.push(context, MaterialPageRoute(builder: (context) =>Upload( currentUser : currentUser)));
-//
-//          // Add your onPressed code here!
-//        },
-//        child: Icon(Icons.mail),
-//      ),
-//    );
-//
-//  }
-//}
+class SplashContent extends StatelessWidget {
+  final String title;
+  final String text;
+  final String image;
+
+  const SplashContent({
+    Key key,
+    @required this.title,
+    @required this.text,
+    @required this.image,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: 15.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          SizedBox(height: 100),
+          Container(
+            height: 200,
+            child: Image.asset(image),
+          ),
+          SizedBox(height: 60),
+          Text(
+            title,
+            style: TextStyle(fontFamily: 'MajorMonoDisplay',
+              color: Colors.black,
+              fontSize: 27,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          SizedBox(height: 20),
+          Text(
+            text,
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              fontSize: 19,
+            ),
+          )
+        ],
+      ),
+    );
+  }
+}
+
+
+final splashContent = [
+  {
+    "title": "DESIGN",
+    "text": "We let you to post your design on our app",
+    "image": "assets/img/design.png",
+  },
+  {
+    "title": "CREATE CONTENT",
+    "text": "Our app lets you to create a content and display it to the world",
+    "image": "assets/img/create content.png",
+  },
+  {
+    "title": "SELL",
+    "text": "Sell your products and get full satisfaction from your customer",
+    "image": "assets/img/sell.png"
+  },
+  {
+    "title": "FASHION SHOW",
+    "text": "Catch up with our live fashion show on LIVE TV",
+    "image": "assets/img/fashion show.png"
+  },
+
+  {
+    "title": "INFLUENCE",
+    "text": "A fashion that does not reach the streets is not a fashion",
+    "image": "assets/img/influence.png"
+  },
+  {
+    "title": "SHOP",
+    "text": "Our app connects worldwide designers just for you",
+    "image": "assets/img/shop.png"
+  },
+
+];
