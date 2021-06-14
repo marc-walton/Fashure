@@ -6,7 +6,8 @@ import 'package:fashow/HomePage.dart';
 import 'package:fashow/Constants.dart';
 import 'package:fashow/methods/register.dart';
 import 'package:get/get.dart';
-
+import 'package:translated_text/translated_text.dart';
+import 'package:fashow/HomePage.dart';
 class LoginPage extends StatefulWidget {
   LoginPage({Key key}) : super(key: key);
 
@@ -70,9 +71,10 @@ class _LoginPageState extends State<LoginPage> {
                       ),
                       RaisedButton(
 
-                        child: Text("Send mail"),
-                        color: kblue,
-                        textColor: Colors.white,
+                        child:
+                        TranslatedText('Send mail',to:'${currentUser.language}',textStyle: TextStyle(color: kblue,
+                        ),),
+
                         onPressed: () async {
                           if (_loginFormKey.currentState.validate()) {
                             await  FirebaseAuth.instance.sendPasswordResetEmail(email: emailInputController.text);
@@ -81,7 +83,12 @@ class _LoginPageState extends State<LoginPage> {
                           Get.back();
                           alert(
                             parentContext,
-                            content: Text('Password reset has been sent to your Email'),
+                            content:
+                            TranslatedText('Password reset has been sent to your Email',
+                              to:'${currentUser.language}',
+                              textStyle: TextStyle(color: kblue,
+                            ),),
+
                             textOK: Text('Ok'),
                           );
                         },
@@ -155,19 +162,48 @@ class _LoginPageState extends State<LoginPage> {
                                 .signInWithEmailAndPassword(
                                 email: emailInputController.text,
                                 password: pwdInputController.text)
-                                .then((User) => Firestore.instance
+                                .then((User) => FirebaseFirestore.instance
                                 .collection("users")
-                                .document(User.user.uid)
+                                .doc(User.user.uid)
                                 .get()
                                 .then((DocumentSnapshot result) =>
+                            { if (User == null)
+                              {
 
-                                Navigator.pushAndRemoveUntil(
+                                // Navigator.pushReplacementNamed(context, "/login")
+                              }
+                            else
+                              {
+                                                                Navigator.pushAndRemoveUntil(
                                     context,
                                     MaterialPageRoute(
                                         builder: (context) => Homepage(
-
+userid:User.user.uid,
+                                          authis: true,
                                         )),
                                         (_) => false ),
+                                // Navigator.pushReplacement(
+                                //     context,
+                                //     MaterialPageRoute(
+                                //         builder: (context) => Homepage(
+                                //           userid: User.uid,
+                                //           authis: isAuth,
+                                //         )))
+                                // Firestore.instance
+                                //     .collection("users")
+                                //     .document(currentUser.uid)
+                                //     .get()
+                                //     .then((DocumentSnapshot result) =>
+                                //     Navigator.pushReplacement(
+                                //         context,
+                                //         MaterialPageRoute(
+                                //             builder: (context) => HomePage(
+                                //               title: result["fname"] + "'s Tasks",
+                                //               uid: currentUser.uid,
+                                //             ))))
+                                //     .catchError((err) => print(err))
+                              }}
+
                             )
                                 .catchError((err) => print(err)))
                                 .catchError((err) => print(err));

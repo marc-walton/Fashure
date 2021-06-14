@@ -180,26 +180,28 @@ class _ServicePaymentsState extends State<ServicePayments> {
       ) ,
         alignment: Alignment.center,
         child: PaginateFirestore(
+            isLive: true,
+
 //    itemsPerPage: 2,
             itemBuilderType:
             PaginateBuilderType.listView,
             itemBuilder: (index, context, documentSnapshot)   {
-//        DocumentSnapshot ds = snapshot.data.documents[index];
+//        DocumentSnapshot ds = snapshot.data.docs[index];
 
-              String ownerId = documentSnapshot.data['ownerId'];
-              String orderId = documentSnapshot.data['orderId'];
-              // String prodId = documentSnapshot.data['prodId'];
+              String ownerId = documentSnapshot.data()['ownerId'];
+              String orderId = documentSnapshot.data()['orderId'];
+              // String prodId = documentSnapshot.data()['prodId'];
 
-              String fulfilled = documentSnapshot.data['fulfilled'];
-              String title = documentSnapshot.data['title'];
-              String inr = documentSnapshot.data['inr'];
-              String usd = documentSnapshot.data['usd'];
-              String eur = documentSnapshot.data['eur'];
-              String gbp = documentSnapshot.data['gbp'];
-              String Finr = documentSnapshot.data['Finr'];
-              String Fusd = documentSnapshot.data['Fusd'];
-              String Feur = documentSnapshot.data['Feur'];
-              String Fgbp = documentSnapshot.data['Fgbp'];
+              String fulfilled = documentSnapshot.data()['fulfilled'];
+              String title = documentSnapshot.data()['title'];
+              String inr = documentSnapshot.data()['inr'];
+              String usd = documentSnapshot.data()['usd'];
+              String eur = documentSnapshot.data()['eur'];
+              String gbp = documentSnapshot.data()['gbp'];
+              String Finr = documentSnapshot.data()['Finr'];
+              String Fusd = documentSnapshot.data()['Fusd'];
+              String Feur = documentSnapshot.data()['Feur'];
+              String Fgbp = documentSnapshot.data()['Fgbp'];
 
               return
                 Column(
@@ -215,8 +217,8 @@ class _ServicePaymentsState extends State<ServicePayments> {
                 );
 
             },
-            query:  Firestore.instance.collection('Payments')
-                .document(currentUser.id)
+            query:  FirebaseFirestore.instance.collection('Payments')
+                .doc(currentUser.id)
                 .collection('ServicePayments').orderBy('timestamp',descending: true)
                 .where('fulfilled',isEqualTo: 'false')
 
@@ -231,26 +233,28 @@ class _ServicePaymentsState extends State<ServicePayments> {
       ) ,
         alignment: Alignment.center,
         child: PaginateFirestore(
+            isLive: true,
+
 //    itemsPerPage: 2,
             itemBuilderType:
             PaginateBuilderType.listView,
             itemBuilder: (index, context, documentSnapshot)   {
-//        DocumentSnapshot ds = snapshot.data.documents[index];
+//        DocumentSnapshot ds = snapshot.data.docs[index];
 
-              String ownerId = documentSnapshot.data['ownerId'];
-              String orderId = documentSnapshot.data['orderId'];
-              // String prodId = documentSnapshot.data['prodId'];
+              String ownerId = documentSnapshot.data()['ownerId'];
+              String orderId = documentSnapshot.data()['orderId'];
+              // String prodId = documentSnapshot.data()['prodId'];
 
-              String fulfilled = documentSnapshot.data['fulfilled'];
-              String title = documentSnapshot.data['title'];
-              String inr = documentSnapshot.data['inr'];
-              String usd = documentSnapshot.data['usd'];
-              String eur = documentSnapshot.data['eur'];
-              String gbp = documentSnapshot.data['gbp'];
-              String Finr = documentSnapshot.data['Finr'];
-              String Fusd = documentSnapshot.data['Fusd'];
-              String Feur = documentSnapshot.data['Feur'];
-              String Fgbp = documentSnapshot.data['Fgbp'];
+              String fulfilled = documentSnapshot.data()['fulfilled'];
+              String title = documentSnapshot.data()['title'];
+              String inr = documentSnapshot.data()['inr'];
+              String usd = documentSnapshot.data()['usd'];
+              String eur = documentSnapshot.data()['eur'];
+              String gbp = documentSnapshot.data()['gbp'];
+              String Finr = documentSnapshot.data()['Finr'];
+              String Fusd = documentSnapshot.data()['Fusd'];
+              String Feur = documentSnapshot.data()['Feur'];
+              String Fgbp = documentSnapshot.data()['Fgbp'];
 
               return
                 Column(
@@ -266,8 +270,8 @@ class _ServicePaymentsState extends State<ServicePayments> {
                 );
 
             },
-            query:  Firestore.instance.collection('Payments')
-                .document(currentUser.id)
+            query:  FirebaseFirestore.instance.collection('Payments')
+                .doc(currentUser.id)
                 .collection('ServicePayments').orderBy('timestamp',descending: true)
                 .where('fulfilled',isEqualTo: 'true')
 
@@ -366,11 +370,11 @@ class _ServicePaymentsState extends State<ServicePayments> {
   }
   update() async {
 
-    QuerySnapshot snapshot = await  Firestore.instance.collection('Payments')
-        .document(currentUser.id)
-        .collection('ServicePayments').getDocuments();
-    snapshot.documents.forEach((doc) {
-      doc.reference.updateData({'read':'true'});
+    QuerySnapshot snapshot = await  FirebaseFirestore.instance.collection('Payments')
+        .doc(currentUser.id)
+        .collection('ServicePayments').get();
+    snapshot.docs.forEach((doc) {
+      doc.reference.update({'read':'true'});
     });
   }
 

@@ -11,6 +11,8 @@ import 'package:fashow/Constants.dart';
 import 'package:fashow/progress.dart';
 import 'package:uuid/uuid.dart';
 import 'package:smooth_star_rating/smooth_star_rating.dart';
+import 'package:translated_text/translated_text.dart';
+
 class Invoice extends StatefulWidget {
   final String ownerId;
   final String title;
@@ -35,7 +37,7 @@ class Invoice extends StatefulWidget {
   final String Fcny;
   final String Fgbp;
 // final String selectedSizes;
-  final User currentUser;
+  final Users currentUser;
 
   Invoice({
     this.orderId,
@@ -69,28 +71,28 @@ class Invoice extends StatefulWidget {
 //    Map data = doc.data ;
 
     return Invoice(
-      orderId: doc['orderId'],
-      ownerId: doc['ownerId'],
-      cusName: doc['cusname'],
-      cusid: doc['cusId'],
-      cusImg: doc['cusProfileImg'],
-      Address:doc['Address'],
-      finalpay:doc['finalpay'],
-      advancepay:doc['advancepay'],
-      fulfilled:doc['fulfilled'],
-      title:doc['title'],
-      description:doc['description'],
-      ordersstatus:doc['orderStatus'],
-      eur: doc['eur'],
-      usd: doc['usd'],
-      inr: doc['inr'],
-      cny: doc['cny'],
-      gbp: doc['gbp'],
-      Feur: doc['Feur'],
-      Fusd: doc['Fusd'],
-      Finr: doc['Finr'],
-      Fcny: doc['Fcny'],
-      Fgbp: doc['Fgbp'],
+      orderId: doc.data()['orderId'],
+      ownerId: doc.data()['ownerId'],
+      cusName: doc.data()['cusname'],
+      cusid: doc.data()['cusId'],
+      cusImg: doc.data()['cusProfileImg'],
+      Address:doc.data()['Address'],
+      finalpay:doc.data()['finalpay'],
+      advancepay:doc.data()['advancepay'],
+      fulfilled:doc.data()['fulfilled'],
+      title:doc.data()['title'],
+      description:doc.data()['description'],
+      ordersstatus:doc.data()['orderStatus'],
+      eur: doc.data()['eur'],
+      usd: doc.data()['usd'],
+      inr: doc.data()['inr'],
+      cny: doc.data()['cny'],
+      gbp: doc.data()['gbp'],
+      Feur: doc.data()['Feur'],
+      Fusd: doc.data()['Fusd'],
+      Finr: doc.data()['Finr'],
+      Fcny: doc.data()['Fcny'],
+      Fgbp: doc.data()['Fgbp'],
 
     );
   }
@@ -336,8 +338,8 @@ print(advancepay);
                ));
              },
              color: kblue,
-             child: Text('Pay Now', style: TextStyle(
-                 color: Colors.white),),
+             child:TranslatedText('Pay Now',to:'${currentUser.language}',textStyle:TextStyle(
+               color:Colors.white, ),),
            ),
          );
        }
@@ -364,8 +366,8 @@ Get.to( PaymentSer(              title: widget.title,
   Fgbp:Fgbp,));
           },
           color: kblue,
-          child: Text('Pay Advance',style: TextStyle(
-              color: Colors.white),),
+          child: TranslatedText('Pay Advance',to:'${currentUser.language}',textStyle:TextStyle(
+            color:Colors.white, ),),
         ),
       );
     }
@@ -387,8 +389,8 @@ Get.to( PaymentSer(              title: widget.title,
 
             },
             color: kblue,
-            child: Text('Pay Due',style: TextStyle(
-                color: Colors.white),),
+            child: TranslatedText('Pay Due',to:'${currentUser.language}',textStyle:TextStyle(
+              color:Colors.white, ),),
           ),
         );
     }
@@ -398,9 +400,9 @@ else{return Container();}
 
   }
   review(){
-    Firestore.instance.collection('Reviews')
-        .document(ownerId).collection('userReviews').document(reviewId)
-        .setData({
+    FirebaseFirestore.instance.collection('Reviews')
+        .doc(ownerId).collection('userReviews').doc(reviewId)
+        .set({
       'userId': ownerId,
        'orderId': orderId,
 'timestamp':timestamp,
@@ -408,11 +410,11 @@ else{return Container();}
       'review':reviewController.text,
       'reviewId' : reviewId
     });
-    Firestore.instance.collection('feed')
-        .document(ownerId)
+    FirebaseFirestore.instance.collection('feed')
+        .doc(ownerId)
         .collection('feedItems')
-        .document(reviewId)
-        .setData({
+        .doc(reviewId)
+        .set({
       "type": "ReviewC",
       "username": currentUser.displayName,
       "userId": ownerId,
@@ -436,8 +438,8 @@ else{return Container();}
                   child:           Center(
                     child: Column(
                       children:[
-                        Text('Please rate the order',style: TextStyle(
-                            color: Colors.white),),
+                      TranslatedText('Please rate the order',to:'${currentUser.language}',textStyle:TextStyle(
+                      color:Colors.white, ),),
                         SmoothStarRating(
                           allowHalfRating: true,
                           filledIconData: Icons.star,
@@ -465,7 +467,8 @@ else{return Container();}
                         RaisedButton(
                           onPressed: () {review();Get.back();},
                           color: kblue,
-                          child: Text('Save',style: TextStyle(color: Colors.white),),)
+                          child: TranslatedText('Save',to:'${currentUser.language}',textStyle:TextStyle(
+              color:Colors.white, ),),),
                       ],
                     ),
                   ),
@@ -491,12 +494,12 @@ else{return Container();}
         child: Column(
           children: <Widget>[
             FutureBuilder(
-              future: usersRef.document(widget.ownerId).get(),
+              future: usersRef.doc(widget.ownerId).get(),
               builder: (context, snapshot) {
                 if (!snapshot.hasData) {
                   return circularProgress();
                 }
-                User user = User.fromDocument(snapshot.data);
+                Users user = Users.fromDocument(snapshot.data);
 //          bool isPostOwner = currentUserId == ownerId;
                 return Column(
                   children: <Widget>[
@@ -535,25 +538,29 @@ else{return Container();}
 
             Row(
               children: [
-                Text( 'Description: ${widget.description}'   ,style: TextStyle(
-                    color: kText),),
-              ],
+                TranslatedText('Description: ${widget.description}' ,to:'${currentUser.language}',
+                  textStyle:TextStyle(
+                   color:kText, ),),
+                  ],
             ),
             SizedBox(height:10.0),
 
             Row(
               children: [
-                Text('order Status: ${widget.ordersstatus}'   ,style: TextStyle(
-                    color: kText),),
+                TranslatedText('order Status: ${widget.ordersstatus}' ,to:'${currentUser.language}',
+                  textStyle:TextStyle(
+                    color:kText, ),),
               ],
             ),
             SizedBox(height:10.0),
 
 
 
-            widget.Finr ==""?  Text('Payment: ₹${widget.inr}',style: TextStyle(
-              color: kText.withOpacity(0.5),
-            )):currency(advance: widget.inr,finalpay: widget.Finr),
+            widget.Finr ==""?
+            TranslatedText('Payment: ₹${widget.inr}' ,to:'${currentUser.language}',
+             textStyle:TextStyle(
+              color:kText.withOpacity(0.5),
+                )):currency(advance: widget.inr,finalpay: widget.Finr),
             SizedBox(height:10.0),
 
 
@@ -583,12 +590,12 @@ else{return Container();}
           children: <Widget>[
 
             FutureBuilder(
-              future: usersRef.document(widget.ownerId).get(),
+              future: usersRef.doc(widget.ownerId).get(),
               builder: (context, snapshot) {
                 if (!snapshot.hasData) {
                   return circularProgress();
                 }
-                User user = User.fromDocument(snapshot.data);
+                Users user = Users.fromDocument(snapshot.data);
 //          bool isPostOwner = currentUserId == ownerId;
                 return Column(
                   children: <Widget>[
@@ -618,24 +625,27 @@ else{return Container();}
             SizedBox(height:10.0),
             Row(
               children: [
-                Text( widget.title   ,style: TextStyle(
-                    color: kText),),
+                TranslatedText(widget.title ,to:'${currentUser.language}',
+                  textStyle:TextStyle(
+                    color:kText, ),),
+                  ],
+            ),
+            SizedBox(height:10.0),
+
+            Row(
+              children: [
+                TranslatedText('Description: ${widget.description}' ,to:'${currentUser.language}',
+                  textStyle:TextStyle(
+                    color:kText, ),),
               ],
             ),
             SizedBox(height:10.0),
 
             Row(
               children: [
-                Text( 'Description: ${widget.description}'   ,style: TextStyle(
-                    color: kText),),
-              ],
-            ),
-            SizedBox(height:10.0),
-
-            Row(
-              children: [
-                Text('order Status: ${widget.ordersstatus}'   ,style: TextStyle(
-                    color: kText),),
+                TranslatedText('Order Status ${widget.description}' ,to:'${currentUser.language}',
+                  textStyle:TextStyle(
+                    color:kText, ),),
               ],
             ),
             SizedBox(height:10.0),
@@ -673,12 +683,12 @@ else{return Container();}
         child: Column(
           children: <Widget>[
             FutureBuilder(
-              future: usersRef.document(widget.ownerId).get(),
+              future: usersRef.doc(widget.ownerId).get(),
               builder: (context, snapshot) {
                 if (!snapshot.hasData) {
                   return circularProgress();
                 }
-                User user = User.fromDocument(snapshot.data);
+                Users user = Users.fromDocument(snapshot.data);
 //          bool isPostOwner = currentUserId == ownerId;
                 return Column(
                   children: <Widget>[
@@ -717,16 +727,18 @@ else{return Container();}
 
             Row(
               children: [
-                Text( 'Description: ${widget.description}'   ,style: TextStyle(
-                    color: kText),),
+                TranslatedText('Description: ${widget.description}' ,to:'${currentUser.language}',
+                  textStyle:TextStyle(
+                    color:kText, ),),
               ],
             ),
             SizedBox(height:10.0),
 
             Row(
               children: [
-                Text('order Status: ${widget.ordersstatus}'   ,style: TextStyle(
-                    color: kText),),
+                TranslatedText('Order Status ${widget.description}' ,to:'${currentUser.language}',
+                  textStyle:TextStyle(
+                    color:kText, ),),
               ],
             ),
             SizedBox(height:10.0),
@@ -764,12 +776,12 @@ else{return Container();}
         child: Column(
           children: <Widget>[
             FutureBuilder(
-              future: usersRef.document(widget.ownerId).get(),
+              future: usersRef.doc(widget.ownerId).get(),
               builder: (context, snapshot) {
                 if (!snapshot.hasData) {
                   return circularProgress();
                 }
-                User user = User.fromDocument(snapshot.data);
+                Users user = Users.fromDocument(snapshot.data);
 //          bool isPostOwner = currentUserId == ownerId;
                 return Column(
                   children: <Widget>[
@@ -808,22 +820,25 @@ else{return Container();}
 
             Row(
               children: [
-                Text( 'Description: ${widget.description}'   ,style: TextStyle(
-                    color: kText),),
+                TranslatedText('Description: ${widget.description}' ,to:'${currentUser.language}',
+                  textStyle:TextStyle(
+                    color:kText, ),)
               ],
             ),
             SizedBox(height:10.0),
 
             Row(
               children: [
-                Text('order Status: ${widget.ordersstatus}'   ,style: TextStyle(
-                    color: kText),),
+                TranslatedText('Order Status ${widget.description}' ,to:'${currentUser.language}',
+                  textStyle:TextStyle(
+                    color:kText, ),),
               ],
             ),
             SizedBox(height:10.0),
 
 
-            widget.Finr ==""?  Text('Payment: \u0024${widget.usd}',style: TextStyle(
+            widget.Finr ==""?
+            Text('Payment: \u0024${widget.usd}',style: TextStyle(
               color: kText.withOpacity(0.5),
             )):
 

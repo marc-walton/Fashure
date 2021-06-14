@@ -9,6 +9,7 @@ import 'package:uuid/uuid.dart';
 import 'package:paginate_firestore/paginate_firestore.dart';
 import 'package:fashow/Constants.dart';
 import 'package:contained_tab_bar_view/contained_tab_bar_view.dart';
+import 'package:translated_text/translated_text.dart';
 import 'package:fashow/HomePage.dart';
 
 class Orders extends StatefulWidget {
@@ -31,9 +32,10 @@ class _OrdersState extends State<Orders> {
 
                 child:           Center(
                   child: Column(
-                    children:[
-                      Text('Please rate the order',style: TextStyle(
-                          color: Colors.white),),
+                    children:[TranslatedText('Please rate the order',to:'${currentUser.language}',
+                    textStyle:TextStyle(
+                    color:Colors.white,
+                    ),),
                       SmoothStarRating(
                         allowHalfRating: true,
                         filledIconData: Icons.star,
@@ -59,9 +61,9 @@ class _OrdersState extends State<Orders> {
                         textAlign: TextAlign.start,
                       ),
                       RaisedButton(
-                        onPressed: (){ Firestore.instance.collection('Reviews')
-                            .document(ProdId).collection('prodReviews').document(reviewId)
-                            .setData({
+                        onPressed: (){ FirebaseFirestore.instance.collection('Reviews')
+                            .doc(ProdId).collection('prodReviews').doc(reviewId)
+                            .set({
                           'userId': OwnerId,
                           'reviewId' : reviewId,
                           'prodId':ProdId,
@@ -69,11 +71,11 @@ class _OrdersState extends State<Orders> {
                           'review':reviewController.text,
                           "timestamp":timestamp,
                         });
-                        Firestore.instance.collection('feed')
-                            .document(ProdId)
+                        FirebaseFirestore.instance.collection('feed')
+                            .doc(ProdId)
                             .collection('feedItems')
-                            .document(reviewId)
-                            .setData({
+                            .doc(reviewId)
+                            .set({
                           "type": "ReviewO",
                           "username": currentUser.displayName,
                           "userId": OwnerId,
@@ -86,7 +88,10 @@ class _OrdersState extends State<Orders> {
                         });
                         Get.back();},
                         color: kblue,
-                      child: Text('Save',style: TextStyle(color: Colors.white),),)
+                      child: TranslatedText('Save',to:'${currentUser.language}',
+                        textStyle:TextStyle(
+                          color:Colors.white,
+                        ),),),
                     ],
                   ),
                 ),
@@ -109,27 +114,29 @@ return PaginateFirestore(
     itemBuilderType:
     PaginateBuilderType.listView,
     itemBuilder: (index, context, documentSnapshot)   {
-//        DocumentSnapshot ds = snapshot.data.documents[index];
-      String ownerId = documentSnapshot.data['ownerId'];
-      String prodId = documentSnapshot.data['prodId'];
-      String orderStatus = documentSnapshot.data['orderStatus'];
-      String size = documentSnapshot.data['size'];
-      String shopmediaUrl = documentSnapshot.data['shopmediaUrl'];
-      String orderId = documentSnapshot.data['orderId'];
-       String fulfilled = documentSnapshot.data['fulfilled'];
+//        DocumentSnapshot ds = snapshot.data.docs[index];
+      String ownerId = documentSnapshot.data()['ownerId'];
+      String prodId = documentSnapshot.data()['prodId'];
+      String orderStatus = documentSnapshot.data()['orderStatus'];
+      String size = documentSnapshot.data()['size'];
+      String shopmediaUrl = documentSnapshot.data()['shopmediaUrl'];
+      String orderId = documentSnapshot.data()['orderId'];
+       String fulfilled = documentSnapshot.data()['fulfilled'];
 
-      String productname = documentSnapshot.data['productname'];
- String Address = documentSnapshot.data['Address'];
-String courierId = documentSnapshot.data['courierId'];
-String courier = documentSnapshot.data['courier'];
+      String productname = documentSnapshot.data()['productname'];
+ String Address = documentSnapshot.data()['Address'];
+String courierId = documentSnapshot.data()['courierId'];
+String courier = documentSnapshot.data()['courier'];
 
       if (!documentSnapshot.exists) {
-        return  Center(child: Text('No Orders',
-          style: TextStyle(
+        return  Center(child:
+        TranslatedText('No Orders',to:'${currentUser.language}',
+            textStyle:TextStyle(
               fontFamily :"MajorMonoDisplay",
               fontSize:  35.0 ,
-              color: Colors.white),
-        )
+            color:Colors.white,
+          ),),
+
         );
       }
       else{    return
@@ -162,7 +169,9 @@ String courier = documentSnapshot.data['courier'];
             SizedBox(height:10.0),
 
             ListTile(
-              title: Text('Address:  $Address'),
+              title:  TranslatedText('Address:  $Address',to:'${currentUser.language}',
+                ),
+
               subtitle: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -179,7 +188,8 @@ String courier = documentSnapshot.data['courier'];
 RaisedButton(
   onPressed:()
 
-   {Rating(fulfill:fulfilled,parentContext: context,OwnerId: ownerId,ProdId: prodId);},color:kblue,child: Text('Rate Order',style:TextStyle(color: Colors.white)),):
+   {Rating(fulfill:fulfilled,parentContext: context,OwnerId: ownerId,ProdId: prodId);},color:kblue,child:
+Text('Rate Order',style:TextStyle(color: Colors.white)),):
                       Container(),
                 ],
               ),
@@ -191,8 +201,8 @@ RaisedButton(
 
 
     },
-    query:  Firestore.instance.collection('ordersCustomer')
-        .document(currentUser.id)
+    query:  FirebaseFirestore.instance.collection('ordersCustomer')
+        .doc(currentUser.id)
         .collection('userOrder')
         .orderBy('timestamp',descending: true)
 
@@ -208,25 +218,33 @@ RaisedButton(
         PaginateBuilderType.listView,
         itemBuilder: (index, context, documentSnapshot)   {
 
-          String ownerId = documentSnapshot.data['ownerId'];
-          String prodId = documentSnapshot.data['prodId'];
-          String orderStatus = documentSnapshot.data['orderStatus'];
-          String size = documentSnapshot.data['size'];
-          String Address = documentSnapshot.data['Address'];
-          String orderId = documentSnapshot.data['orderId'];
-           // String wnerId = documentSnapshot.data['ownerId'];
+          String ownerId = documentSnapshot.data()['ownerId'];
+          String prodId = documentSnapshot.data()['prodId'];
+          String orderStatus = documentSnapshot.data()['orderStatus'];
+          String size = documentSnapshot.data()['size'];
+          String Address = documentSnapshot.data()['Address'];
+          String orderId = documentSnapshot.data()['orderId'];
+           // String wnerId = documentSnapshot.data()['ownerId'];
 
-          String fulfilled = documentSnapshot.data['fulfilled'];
-String advance = documentSnapshot.data['advance'];
-String finall = documentSnapshot.data['final'];
-String title = documentSnapshot.data['title'];
+          String fulfilled = documentSnapshot.data()['fulfilled'];
+String advance = documentSnapshot.data()['advance'];
+String finall = documentSnapshot.data()['final'];
+String title = documentSnapshot.data()['title'];
           if (!documentSnapshot.exists) {
-            return  Center(child: Text('No Orders',
-              style: TextStyle(
-                  fontFamily :"MajorMonoDisplay",
-                  fontSize:  35.0 ,
-                  color: Colors.white),
-            )
+            return  Center(child:
+
+            TranslatedText('No orders',to:'${currentUser.language}',textStyle: TextStyle(
+              fontFamily :"MajorMonoDisplay",
+                   fontSize:  35.0 ,
+                     color: Colors.white
+            ),
+            ),
+            // Text('No Orders',
+            //   style: TextStyle(
+            //       fontFamily :"MajorMonoDisplay",
+            //       fontSize:  35.0 ,
+            //       color: Colors.white),
+            // )
             );
           }else{
 return  Column(
@@ -250,8 +268,8 @@ return  Column(
 
 
         },
-        query:   Firestore.instance.collection('serviceCustomer')
-        .document(currentUser.id)
+        query:   FirebaseFirestore.instance.collection('serviceCustomer')
+        .doc(currentUser.id)
         .collection('customerService')
             .orderBy('timestamp',descending: true)
 
@@ -264,12 +282,12 @@ return  Column(
   Widget build(BuildContext context) {
     return       Scaffold(
       appBar:  AppBar(backgroundColor: kPrimaryColor,
-        title: Text('My Orders',
-          style: TextStyle(
-              fontFamily :"MajorMonoDisplay",
-              fontSize:  35.0 ,
-              color: Colors.white),),
-        iconTheme: new IconThemeData(color: kIcon),
+        title:
+        TranslatedText('My Orders',to:'${currentUser.language}',textStyle: TextStyle(
+        fontFamily :"MajorMonoDisplay",
+        fontSize:  35.0 ,
+        color: Colors.white),),
+         iconTheme: new IconThemeData(color: kIcon),
       ),
       backgroundColor: kPrimaryColor,
 
@@ -280,8 +298,14 @@ return  Column(
         alignment: Alignment.center,
         child: ContainedTabBarView(
           tabs: [
-            Text('Shop',style:TextStyle(color:kText)),
-            Text('Services',style:TextStyle(color:kText)),
+    TranslatedText('Shop',to:'${currentUser.language}',textStyle: TextStyle(
+      color: kText,),),
+          TranslatedText('Services',to:'${currentUser.language}',textStyle: TextStyle(
+            color: kText,),),
+
+
+              // Text('Shop',style:TextStyle(color:kText)),
+            // Text('Services',style:TextStyle(color:kText)),
           ],
           views: [
             shopOrders(),

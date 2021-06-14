@@ -161,22 +161,22 @@ Caps(){
     PaginateBuilderType.listView,
     itemBuilder: (index, context, documentSnapshot)   {
 //        DocumentSnapshot ds = snapshot.data.documents[index];
-      String ownerId = documentSnapshot.data['ownerId'];
-      String prodId = documentSnapshot.data['prodId'];
-      String shopmediaUrl = documentSnapshot.data['shopmediaUrl'];
-      String productname = documentSnapshot.data['productname'];
-      String inr = documentSnapshot.data['inr'];
-      String usd = documentSnapshot.data['usd'];
-      String eur = documentSnapshot.data['eur'];
-      String gbp = documentSnapshot.data['gbp'];
+      String ownerId = documentSnapshot.data()['ownerId'];
+      String prodId = documentSnapshot.data()['prodId'];
+      String shopmediaUrl = documentSnapshot.data()['shopmediaUrl'];
+      String productname = documentSnapshot.data()['productname'];
+      String inr = documentSnapshot.data()['inr'];
+      String usd = documentSnapshot.data()['usd'];
+      String eur = documentSnapshot.data()['eur'];
+      String gbp = documentSnapshot.data()['gbp'];
       return
         FutureBuilder(
-          future: usersRef.document(ownerId).get(),
+          future: usersRef.doc(ownerId).get(),
           builder: (context, snapshot) {
             if (!snapshot.hasData) {
               return circularProgress();
             }
-            User user = User.fromDocument(snapshot.data);
+            Users user = Users.fromDocument(snapshot.data);
 //          bool isPostOwner = currentUserId == ownerId;
             return Column(
               children: <Widget>[
@@ -223,9 +223,9 @@ Caps(){
           },
         );
     },
-    query: Firestore.instance.collectionGroup('userProducts').orderBy('timestamp',descending: true)
+    query:  FirebaseFirestore.instance.collectionGroup('userProducts').orderBy('timestamp',descending: true)
         .where('Gender',isEqualTo: 'Men')
-        .where('Category',isEqualTo: 'Caps'),
+        .where('Category',isEqualTo: 'Caps'),isLive:true,
 
 
   );
@@ -237,22 +237,22 @@ Balaclavas(){
     PaginateBuilderType.listView,
     itemBuilder: (index, context, documentSnapshot)   {
 //        DocumentSnapshot ds = snapshot.data.documents[index];
-      String ownerId = documentSnapshot.data['ownerId'];
-      String prodId = documentSnapshot.data['prodId'];
-      String shopmediaUrl = documentSnapshot.data['shopmediaUrl'];
-      String productname = documentSnapshot.data['productname'];
-      String inr = documentSnapshot.data['inr'];
-      String usd = documentSnapshot.data['usd'];
-      String eur = documentSnapshot.data['eur'];
-      String gbp = documentSnapshot.data['gbp'];
+      String ownerId = documentSnapshot.data()['ownerId'];
+      String prodId = documentSnapshot.data()['prodId'];
+      String shopmediaUrl = documentSnapshot.data()['shopmediaUrl'];
+      String productname = documentSnapshot.data()['productname'];
+      String inr = documentSnapshot.data()['inr'];
+      String usd = documentSnapshot.data()['usd'];
+      String eur = documentSnapshot.data()['eur'];
+      String gbp = documentSnapshot.data()['gbp'];
       return
         FutureBuilder(
-          future: usersRef.document(ownerId).get(),
+          future: usersRef.doc(ownerId).get(),
           builder: (context, snapshot) {
             if (!snapshot.hasData) {
               return circularProgress();
             }
-            User user = User.fromDocument(snapshot.data);
+            Users user = Users.fromDocument(snapshot.data);
 //          bool isPostOwner = currentUserId == ownerId;
             return Column(
               children: <Widget>[
@@ -299,9 +299,9 @@ Balaclavas(){
           },
         );
     },
-    query: Firestore.instance.collectionGroup('userProducts').orderBy('timestamp',descending: true)
+    query:  FirebaseFirestore.instance.collectionGroup('userProducts').orderBy('timestamp',descending: true)
         .where('Gender',isEqualTo: 'Men')
-        .where('Category',isEqualTo: 'Balaclavas'),
+        .where('Category',isEqualTo: 'Balaclavas'),isLive:true,
 
 
   );
@@ -313,22 +313,22 @@ Beanies(){
     PaginateBuilderType.listView,
     itemBuilder: (index, context, documentSnapshot)   {
 //        DocumentSnapshot ds = snapshot.data.documents[index];
-      String ownerId = documentSnapshot.data['ownerId'];
-      String prodId = documentSnapshot.data['prodId'];
-      String shopmediaUrl = documentSnapshot.data['shopmediaUrl'];
-      String productname = documentSnapshot.data['productname'];
-      String inr = documentSnapshot.data['inr'];
-      String usd = documentSnapshot.data['usd'];
-      String eur = documentSnapshot.data['eur'];
-      String gbp = documentSnapshot.data['gbp'];
+      String ownerId = documentSnapshot.data()['ownerId'];
+      String prodId = documentSnapshot.data()['prodId'];
+      String shopmediaUrl = documentSnapshot.data()['shopmediaUrl'];
+      String productname = documentSnapshot.data()['productname'];
+      String inr = documentSnapshot.data()['inr'];
+      String usd = documentSnapshot.data()['usd'];
+      String eur = documentSnapshot.data()['eur'];
+      String gbp = documentSnapshot.data()['gbp'];
       return
         FutureBuilder(
-          future: usersRef.document(ownerId).get(),
+          future: usersRef.doc(ownerId).get(),
           builder: (context, snapshot) {
             if (!snapshot.hasData) {
               return circularProgress();
             }
-            User user = User.fromDocument(snapshot.data);
+            Users user = Users.fromDocument(snapshot.data);
 //          bool isPostOwner = currentUserId == ownerId;
             return Column(
               children: <Widget>[
@@ -375,9 +375,9 @@ Beanies(){
           },
         );
     },
-    query: Firestore.instance.collectionGroup('userProducts').orderBy('timestamp',descending: true)
+    query:  FirebaseFirestore.instance.collectionGroup('userProducts').orderBy('timestamp',descending: true)
         .where('Gender',isEqualTo: 'Men')
-        .where('Category',isEqualTo: 'Beanies'),
+        .where('Category',isEqualTo: 'Beanies'),isLive:true,
 
 
   );
@@ -389,22 +389,22 @@ Berets(){
     PaginateBuilderType.listView,
     itemBuilder: (index, context, documentSnapshot)   {
 //        DocumentSnapshot ds = snapshot.data.documents[index];
-      String ownerId = documentSnapshot.data['ownerId'];
-      String prodId = documentSnapshot.data['prodId'];
-      String shopmediaUrl = documentSnapshot.data['shopmediaUrl'];
-      String productname = documentSnapshot.data['productname'];
-      String inr = documentSnapshot.data['inr'];
-      String usd = documentSnapshot.data['usd'];
-      String eur = documentSnapshot.data['eur'];
-      String gbp = documentSnapshot.data['gbp'];
+      String ownerId = documentSnapshot.data()['ownerId'];
+      String prodId = documentSnapshot.data()['prodId'];
+      String shopmediaUrl = documentSnapshot.data()['shopmediaUrl'];
+      String productname = documentSnapshot.data()['productname'];
+      String inr = documentSnapshot.data()['inr'];
+      String usd = documentSnapshot.data()['usd'];
+      String eur = documentSnapshot.data()['eur'];
+      String gbp = documentSnapshot.data()['gbp'];
       return
         FutureBuilder(
-          future: usersRef.document(ownerId).get(),
+          future: usersRef.doc(ownerId).get(),
           builder: (context, snapshot) {
             if (!snapshot.hasData) {
               return circularProgress();
             }
-            User user = User.fromDocument(snapshot.data);
+            Users user = Users.fromDocument(snapshot.data);
 //          bool isPostOwner = currentUserId == ownerId;
             return Column(
               children: <Widget>[
@@ -451,9 +451,9 @@ Berets(){
           },
         );
     },
-    query: Firestore.instance.collectionGroup('userProducts').orderBy('timestamp',descending: true)
+    query:  FirebaseFirestore.instance.collectionGroup('userProducts').orderBy('timestamp',descending: true)
         .where('Gender',isEqualTo: 'Men')
-        .where('Category',isEqualTo: 'Berets'),
+        .where('Category',isEqualTo: 'Berets'),isLive:true,
 
 
   );
@@ -465,22 +465,22 @@ Fedora(){
     PaginateBuilderType.listView,
     itemBuilder: (index, context, documentSnapshot)   {
 //        DocumentSnapshot ds = snapshot.data.documents[index];
-      String ownerId = documentSnapshot.data['ownerId'];
-      String prodId = documentSnapshot.data['prodId'];
-      String shopmediaUrl = documentSnapshot.data['shopmediaUrl'];
-      String productname = documentSnapshot.data['productname'];
-      String inr = documentSnapshot.data['inr'];
-      String usd = documentSnapshot.data['usd'];
-      String eur = documentSnapshot.data['eur'];
-      String gbp = documentSnapshot.data['gbp'];
+      String ownerId = documentSnapshot.data()['ownerId'];
+      String prodId = documentSnapshot.data()['prodId'];
+      String shopmediaUrl = documentSnapshot.data()['shopmediaUrl'];
+      String productname = documentSnapshot.data()['productname'];
+      String inr = documentSnapshot.data()['inr'];
+      String usd = documentSnapshot.data()['usd'];
+      String eur = documentSnapshot.data()['eur'];
+      String gbp = documentSnapshot.data()['gbp'];
       return
         FutureBuilder(
-          future: usersRef.document(ownerId).get(),
+          future: usersRef.doc(ownerId).get(),
           builder: (context, snapshot) {
             if (!snapshot.hasData) {
               return circularProgress();
             }
-            User user = User.fromDocument(snapshot.data);
+            Users user = Users.fromDocument(snapshot.data);
 //          bool isPostOwner = currentUserId == ownerId;
             return Column(
               children: <Widget>[
@@ -527,9 +527,9 @@ Fedora(){
           },
         );
     },
-    query: Firestore.instance.collectionGroup('userProducts').orderBy('timestamp',descending: true)
+    query:  FirebaseFirestore.instance.collectionGroup('userProducts').orderBy('timestamp',descending: true)
         .where('Gender',isEqualTo: 'Men')
-        .where('Category',isEqualTo: 'Fedora & Trilbies'),
+        .where('Category',isEqualTo: 'Fedora & Trilbies'),isLive:true,
 
 
   );
@@ -541,22 +541,22 @@ Bucket(){
     PaginateBuilderType.listView,
     itemBuilder: (index, context, documentSnapshot)   {
 //        DocumentSnapshot ds = snapshot.data.documents[index];
-      String ownerId = documentSnapshot.data['ownerId'];
-      String prodId = documentSnapshot.data['prodId'];
-      String shopmediaUrl = documentSnapshot.data['shopmediaUrl'];
-      String productname = documentSnapshot.data['productname'];
-      String inr = documentSnapshot.data['inr'];
-      String usd = documentSnapshot.data['usd'];
-      String eur = documentSnapshot.data['eur'];
-      String gbp = documentSnapshot.data['gbp'];
+      String ownerId = documentSnapshot.data()['ownerId'];
+      String prodId = documentSnapshot.data()['prodId'];
+      String shopmediaUrl = documentSnapshot.data()['shopmediaUrl'];
+      String productname = documentSnapshot.data()['productname'];
+      String inr = documentSnapshot.data()['inr'];
+      String usd = documentSnapshot.data()['usd'];
+      String eur = documentSnapshot.data()['eur'];
+      String gbp = documentSnapshot.data()['gbp'];
       return
         FutureBuilder(
-          future: usersRef.document(ownerId).get(),
+          future: usersRef.doc(ownerId).get(),
           builder: (context, snapshot) {
             if (!snapshot.hasData) {
               return circularProgress();
             }
-            User user = User.fromDocument(snapshot.data);
+            Users user = Users.fromDocument(snapshot.data);
 //          bool isPostOwner = currentUserId == ownerId;
             return Column(
               children: <Widget>[
@@ -603,9 +603,9 @@ Bucket(){
           },
         );
     },
-    query: Firestore.instance.collectionGroup('userProducts').orderBy('timestamp',descending: true)
+    query:  FirebaseFirestore.instance.collectionGroup('userProducts').orderBy('timestamp',descending: true)
         .where('Gender',isEqualTo: 'Men')
-        .where('Category',isEqualTo: 'Bucket Hats'),
+        .where('Category',isEqualTo: 'Bucket Hats'),isLive:true,
 
 
   );
@@ -617,22 +617,22 @@ Sun(){
     PaginateBuilderType.listView,
     itemBuilder: (index, context, documentSnapshot)   {
 //        DocumentSnapshot ds = snapshot.data.documents[index];
-      String ownerId = documentSnapshot.data['ownerId'];
-      String prodId = documentSnapshot.data['prodId'];
-      String shopmediaUrl = documentSnapshot.data['shopmediaUrl'];
-      String productname = documentSnapshot.data['productname'];
-      String inr = documentSnapshot.data['inr'];
-      String usd = documentSnapshot.data['usd'];
-      String eur = documentSnapshot.data['eur'];
-      String gbp = documentSnapshot.data['gbp'];
+      String ownerId = documentSnapshot.data()['ownerId'];
+      String prodId = documentSnapshot.data()['prodId'];
+      String shopmediaUrl = documentSnapshot.data()['shopmediaUrl'];
+      String productname = documentSnapshot.data()['productname'];
+      String inr = documentSnapshot.data()['inr'];
+      String usd = documentSnapshot.data()['usd'];
+      String eur = documentSnapshot.data()['eur'];
+      String gbp = documentSnapshot.data()['gbp'];
       return
         FutureBuilder(
-          future: usersRef.document(ownerId).get(),
+          future: usersRef.doc(ownerId).get(),
           builder: (context, snapshot) {
             if (!snapshot.hasData) {
               return circularProgress();
             }
-            User user = User.fromDocument(snapshot.data);
+            Users user = Users.fromDocument(snapshot.data);
 //          bool isPostOwner = currentUserId == ownerId;
             return Column(
               children: <Widget>[
@@ -679,9 +679,9 @@ Sun(){
           },
         );
     },
-    query: Firestore.instance.collectionGroup('userProducts').orderBy('timestamp',descending: true)
+    query:  FirebaseFirestore.instance.collectionGroup('userProducts').orderBy('timestamp',descending: true)
         .where('Gender',isEqualTo: 'Men')
-        .where('Category',isEqualTo: 'Sun Hats'),
+        .where('Category',isEqualTo: 'Sun Hats'),isLive:true,
 
 
   );

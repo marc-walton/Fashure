@@ -14,8 +14,11 @@ import 'package:fashow/HomePage.dart';
 import 'package:fashow/Constants.dart';
 import 'package:uuid/uuid.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:translated_text/translated_text.dart';
+import 'package:fashow/HomePage.dart';
+
 class AddressBuy extends StatefulWidget {
-  final User currentUser;
+  final Users currentUser;
   final String Amount;
 final String Size;
 final String prodId;
@@ -150,8 +153,8 @@ class _AddressBuyState extends State<AddressBuy>  with AutomaticKeepAliveClientM
     return
     Container(
       child: StreamBuilder(
-          stream: Firestore.instance
-              .collection('Address').document(currentUser.id)
+          stream: FirebaseFirestore.instance
+              .collection('Address').doc(currentUser.id)
               .collection('useraddress')
               .orderBy('timestamp', descending: true)
               .snapshots(),
@@ -159,8 +162,9 @@ class _AddressBuyState extends State<AddressBuy>  with AutomaticKeepAliveClientM
             if (!snapshot.hasData) {
               return Column(
                 children: [
-                  Text('You haven\'t saved an address' ),
-                  // AddAdress(parentContext:context),
+                  TranslatedText('You have nt saved an address',to:'${currentUser.language}'
+                 ),
+                                   // AddAdress(parentContext:context),
                 ],
               );
             } else {
@@ -254,16 +258,16 @@ class _AddressBuyState extends State<AddressBuy>  with AutomaticKeepAliveClientM
 backgroundColor: kPrimaryColor,
         title: FittedBox(
           fit: BoxFit.contain,
-          child: Text(
-            "Delivery address",
-            style: TextStyle(color: Colors.white),
-          ),
-        ),
+          child:  TranslatedText('Delivery address',to:'${currentUser.language}',
+              textStyle: TextStyle(color: Colors.white),),
+            ),
+
           actions: <Widget>[
             RaisedButton(
               color:kblue,
-                child: Text('Add address',            style: TextStyle(color: Colors.white),
-                ),
+                child:  TranslatedText('Add address',to:'${currentUser.language}',
+                    textStyle: TextStyle(color: Colors.white),),
+
                 onPressed: () {
                   return
                     Get.to(AddAdress()) ;
@@ -278,8 +282,8 @@ backgroundColor: kPrimaryColor,
         ) ,
         alignment: Alignment.center,
         child: StreamBuilder(
-            stream: Firestore.instance
-                .collection('Address').document(currentUser.id)
+            stream: FirebaseFirestore.instance
+                .collection('Address').doc(currentUser.id)
                 .collection('useraddress')
 
                 .snapshots(),

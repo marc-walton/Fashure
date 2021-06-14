@@ -14,7 +14,8 @@ import 'package:fashow/Constants.dart';
 //import 'package:flutter/cupertino.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
+import 'package:translated_text/translated_text.dart';
+import 'package:fashow/HomePage.dart';
 class WalletPage extends StatefulWidget {
   @override
   _WalletPageState createState() => _WalletPageState();
@@ -74,14 +75,13 @@ class _WalletPageState extends State<WalletPage> with TickerProviderStateMixin {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: <Widget>[
-                        Text(
-                          'Wallet',
-                          style: TextStyle(
-                            color: kGrey,
-                            fontSize: 22,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
+                      TranslatedText('Wallet',to:'${currentUser.language}',
+                      textStyle: TextStyle( color: kGrey,
+                        fontSize: 22,
+                        fontWeight: FontWeight.bold,
+                          ),),
+
+
                         CloseButton()
                       ],
                     ),

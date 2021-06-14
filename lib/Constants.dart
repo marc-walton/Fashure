@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 //import 'package:flutter_svg/svg.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:translated_text/translated_text.dart';
+import 'package:fashow/HomePage.dart';
 
 const Color kPrimaryColor = Color(0xff240638);
 const Color Bappbar = Color(0xff240638);
@@ -32,7 +34,11 @@ const String TIMESTAMP_FIELD = "timestamp";
 const String EMAIL_FIELD = "email";
 
 const String MESSAGE_TYPE_IMAGE = "image";
+ var crop =    TranslatedText('Crop Image',to:'${currentUser.language}',
+ textStyle: TextStyle(
+     color: Colors.white
+ ),);
 
-
+String cropper = crop.toString();
 //const Color Ktransparentblue = Color(0XFF9B9BB4).withOpacity(0.3)
 //const Color kBottomContainerColor = Color(0xFFEB1555);

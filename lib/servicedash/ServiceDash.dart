@@ -43,24 +43,24 @@ class _ServiceDashState extends State<ServiceDash> {
   }
 
   gets() async {
-    QuerySnapshot snapshot = await Firestore.instance.collection('serviceSeller')
-        .document(currentUser.id)
+    QuerySnapshot snapshot = await FirebaseFirestore.instance.collection('serviceSeller')
+        .doc(currentUser.id)
         .collection('sellerService')
         .where('read',isEqualTo: 'false')
-        .getDocuments();
+        .get();
     setState(() {
-      ser = snapshot.documents.length ?? 0;
+      ser = snapshot.docs.length ?? 0;
     });
      }
   getsp() async {
-    QuerySnapshot snapshot = await  Firestore.instance.collection('Payments')
-        .document(currentUser.id)
+    QuerySnapshot snapshot = await  FirebaseFirestore.instance.collection('Payments')
+        .doc(currentUser.id)
         .collection('ServicePayments')
         .where('fulfilled',isEqualTo: 'true')
         .where('read',isEqualTo: 'false')
-        .getDocuments();
+        .get();
     setState(() {
-      serpay = snapshot.documents.length ?? 0;
+      serpay = snapshot.docs.length ?? 0;
     });
 
   }

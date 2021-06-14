@@ -4,9 +4,10 @@ import 'package:fashow/user.dart';
 import 'package:country_list_pick/country_list_pick.dart';
 import 'package:fashow/Constants.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:translated_text/translated_text.dart';
 
 class SellerBank extends StatefulWidget {
-  final User currentUser;
+  final Users currentUser;
 
   const SellerBank({Key key, this.currentUser}) : super(key: key);
   @override
@@ -207,7 +208,9 @@ AddBank(){
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(18.0)
                           ),
-                          child: Text('Cancel'),
+                          child: TranslatedText('Cancel',to:'${currentUser.language}',
+                         ),
+
                           onPressed: ()=>Navigator.pop(context),
                         ),
                         SizedBox(width: 5.0,),
@@ -216,7 +219,9 @@ AddBank(){
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(18.0)
                           ),
-                          child: Text('Save'),
+                          child: TranslatedText('Save',to:'${currentUser.language}',
+                          ),
+
                           onPressed: (){SaveBank();
                           },
                         )
@@ -234,8 +239,8 @@ AddBank(){
 }
 SaveBank(){
   bankRef
-      .document(widget.currentUser.id)
-      .updateData({
+      .doc(widget.currentUser.id)
+      .update({
     "userId": widget.currentUser.id,
     "username": widget.currentUser.displayName,
     "photoUrl": widget.currentUser.photoUrl,
@@ -254,7 +259,7 @@ Bankdetails(){
  return
         StreamBuilder(
           stream:bankRef
-              .document(currentUser.id).snapshots(),
+              .doc(currentUser.id).snapshots(),
           builder: (context,snapshot){
   String accno =  snapshot.data['accno']  ?? "";
   String ifsc = snapshot.data['ifsc'] ?? "";
@@ -267,11 +272,13 @@ Bankdetails(){
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
       Row(children: [
-        Text('Account Number:',style: TextStyle(color: kText),),
-        Text("${accno }",style: TextStyle(color: kText),),
+        TranslatedText('Account Number:',to:'${currentUser.language}', textStyle:
+      TextStyle(color: kText),),
+          Text("${accno }",style: TextStyle(color: kText),),
       ],),
       Row(children: [
-        Text('IFSC:' ,style: TextStyle(color: kText),),
+        TranslatedText('IFSC:',to:'${currentUser.language}', textStyle:
+        TextStyle(color: kText),),
         Text("${ifsc }",style: TextStyle(color: kText),),
       ],)
 
@@ -288,7 +295,9 @@ Bankdetails(){
       Scaffold(
         // resizeToAvoidBottomPadding: false,
         appBar: AppBar(backgroundColor: kPrimaryColor,
-          title: Text('Add account',style: TextStyle(color: Colors.white),),),
+          title: TranslatedText('Add account',to:'${currentUser.language}', textStyle:
+          TextStyle(color:Colors.white ),),
+        ),
         body: Container( decoration: BoxDecoration(
             gradient: fabGradient
         ) ,
@@ -459,8 +468,8 @@ Bankdetails(){
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(18.0)
                     ),
-                    child: Text('Save'),
-                    onPressed: (){SaveBank();
+                    child: TranslatedText('Save',to:'${currentUser.language}', ),
+                      onPressed: (){SaveBank();
                     },
                   ),
 

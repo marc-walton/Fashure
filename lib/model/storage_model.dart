@@ -3,16 +3,16 @@ import 'package:fashow/methods/chat_method.dart';
 import 'package:fashow/model/user_model.dart';
 import 'package:fashow/provider/image_upload_provider.dart';
 import 'package:fashow/user.dart';
-import 'package:firebase_storage/firebase_storage.dart';
+import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 import 'package:flutter/cupertino.dart';
 import 'dart:io';
 import 'package:path_provider/path_provider.dart';
 import 'package:image/image.dart' as Im;
 
 class StorageMethods {
-  static final Firestore firestore = Firestore.instance;
+  static final FirebaseFirestore firestore = FirebaseFirestore.instance;
 
-  StorageReference _storageReference;
+  firebase_storage.Reference _storageReference;
 
   //user class
   UserModel user = UserModel();
@@ -29,12 +29,12 @@ class StorageMethods {
 
       imageFile = compressedImageFile;
 
-      _storageReference = FirebaseStorage.instance
+      _storageReference = firebase_storage.FirebaseStorage.instance
           .ref()
           .child('${DateTime.now().millisecondsSinceEpoch}');
-      StorageUploadTask storageUploadTask =
+      firebase_storage.UploadTask storageUploadTask =
       _storageReference.putFile(imageFile);
-      var url = await (await storageUploadTask.onComplete).ref.getDownloadURL();
+      var url = await (await storageUploadTask).ref.getDownloadURL();
       // print(url);
       return url;
     } catch (e) {

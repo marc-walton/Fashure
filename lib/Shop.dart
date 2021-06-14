@@ -19,10 +19,10 @@ import 'package:fashow/Products.dart';
 import 'package:fashow/upload_Ecommerce.dart';
 import 'package:fashow/HomePage.dart';
 import 'package:fashow/Constants.dart';
-
+import 'package:translated_text/translated_text.dart';
 class Shop extends StatefulWidget {
 
-  final User currentUser;
+  final Users currentUser;
   final String prodId;
   final String onwerId;
   Shop({ this.currentUser,
@@ -60,7 +60,7 @@ new Tabs(title: "Teen-Girls",color: kPrimaryColor),
       _myHandler= _tabs[_controller.index];
     });
   }
- final _firestore = Firestore.instance;
+ final _firestore = FirebaseFirestore.instance;
   String postOrientation = "grid";
  double listViewOffset=0.0;
   String shopOrientation = "grid";
@@ -83,7 +83,12 @@ new Tabs(title: "Teen-Girls",color: kPrimaryColor),
     return
       Scaffold(appBar: PreferredSize(
         preferredSize: Size.fromHeight(130.0),
-        child: AppBar(title:  Text('Shop',style: TextStyle(fontSize: 30,fontFamily: 'MajorMonoDisplay'),),
+        child: AppBar(title:
+        TranslatedText("Shop",to:'${currentUser.language}',
+          textStyle: TextStyle(
+              fontSize: 30,
+          fontFamily: 'MajorMonoDisplay'),),
+
           backgroundColor: kPrimaryColor,
 
           bottom:  PreferredSize(
@@ -101,64 +106,69 @@ new Tabs(title: "Teen-Girls",color: kPrimaryColor),
                 tabs: <Widget>[
                   FittedBox(
                     fit:BoxFit.fitWidth,
-                    child: Text('Men',
-                      style: TextStyle(
-                          fontFamily :"MajorMonoDisplay",
-                          // fontSize:  MediaQuery.of(context).size.width,
-                          color: Colors.white),),
+                    child:
+                    TranslatedText("Men",to:'${currentUser.language}',
+                      textStyle: TextStyle(
+                          color: Colors.white,
+                          fontFamily: 'MajorMonoDisplay'),),
                   ),
                   FittedBox(
                     fit:BoxFit.fitWidth,
-                    child: Text(   'Women',
-                      style: TextStyle(
-                          fontFamily :"MajorMonoDisplay",
+                    child:
+                    TranslatedText("Women",to:'${currentUser.language}',
+                      textStyle: TextStyle(
+                          color: Colors.white,
+                          fontFamily: 'MajorMonoDisplay'),),
 
-                          color: Colors.white),),
                   ),
               FittedBox(
                 fit:BoxFit.fitWidth,
-                    child: Text(   'Baby-Boys',
-                      style: TextStyle(
-                          fontFamily :"MajorMonoDisplay",
+                    child: TranslatedText("Baby-Boys",to:'${currentUser.language}',
+                      textStyle: TextStyle(
+                          color: Colors.white,
+                          fontFamily: 'MajorMonoDisplay'),),
 
-                          color: Colors.white),),
-                  ),
+              ),
                   FittedBox(
                     fit:BoxFit.fitWidth,
-                    child: Text(   'Baby-Girls',
-                      style: TextStyle(
-                          fontFamily :"MajorMonoDisplay",
+                    child:  TranslatedText("Baby-Girls",to:'${currentUser.language}',
+                      textStyle: TextStyle(
+                          color: Colors.white,
+                          fontFamily: 'MajorMonoDisplay'),),
 
-                          color: Colors.white),),
+
                   ),  FittedBox(
                     fit:BoxFit.fitWidth,
-                    child: Text(   'Kids-Boys',
-                      style: TextStyle(
-                          fontFamily :"MajorMonoDisplay",
+                    child: TranslatedText("Kids-Boys",to:'${currentUser.language}',
+                      textStyle: TextStyle(
+                          color: Colors.white,
+                          fontFamily: 'MajorMonoDisplay'),),
 
-                          color: Colors.white),),
+
                   ),
                   FittedBox(
                     fit:BoxFit.fitWidth,
-                    child: Text(   'Kids-Girls',
-                      style: TextStyle(
-                          fontFamily :"MajorMonoDisplay",
+                    child: TranslatedText("Kids-Girls",to:'${currentUser.language}',
+                      textStyle: TextStyle(
+                          color: Colors.white,
+                          fontFamily: 'MajorMonoDisplay'),),
 
-                          color: Colors.white),),
+
                   ),FittedBox(
                     fit:BoxFit.fitWidth,
-                    child: Text(   'Teen-Boys',
-                      style: TextStyle(
-                          fontFamily :"MajorMonoDisplay",
+                    child:  TranslatedText("Teen-Boys",to:'${currentUser.language}',
+                      textStyle: TextStyle(
+                          color: Colors.white,
+                          fontFamily: 'MajorMonoDisplay'),),
 
-                          color: Colors.white),),
+
                   ),FittedBox(
                     fit:BoxFit.fitWidth,
-                    child: Text(   'Teen-Girls',
-                      style: TextStyle(
-                          fontFamily :"MajorMonoDisplay",
+                    child: TranslatedText("Teen-Kids",to:'${currentUser.language}',
+                      textStyle: TextStyle(
+                          color: Colors.white,
+                          fontFamily: 'MajorMonoDisplay'),),
 
-                          color: Colors.white),),
                   ),
                 ],
               ),

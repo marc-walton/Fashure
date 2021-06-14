@@ -15,6 +15,7 @@ import 'package:fashow/upload_Ecommerce.dart';
 import 'package:fashow/progress.dart';
 import 'package:fashow/HomePage.dart';
 import 'package:fashow/Constants.dart';
+import 'package:translated_text/translated_text.dart';
 class Fav extends StatefulWidget {
 
   final String currentUser;
@@ -30,7 +31,7 @@ class Fav extends StatefulWidget {
 }
 
 class _FavState extends State<Fav> {
-  final _firestore = Firestore.instance;
+  final _firestore = FirebaseFirestore.instance;
   String postOrientation = "grid";
   String shopOrientation = "grid";
   bool isFollowing = false;
@@ -49,11 +50,10 @@ class _FavState extends State<Fav> {
       Scaffold(
         appBar:  AppBar(backgroundColor: kPrimaryColor,
           title: FittedBox(
-            child: Text(   'Favorites',
-              style: TextStyle(
-                  fontFamily :"MajorMonoDisplay",
-                  color: Colors.white),),
-          ),
+            child: TranslatedText('Favorites',to:'${currentUser.language}',textStyle:TextStyle(
+             color:Colors.white,
+              fontFamily :"MajorMonoDisplay",),),),
+
           iconTheme: new IconThemeData(color: kIcon),
         ),
 
@@ -63,7 +63,7 @@ class _FavState extends State<Fav> {
           ) ,
           alignment: Alignment.center,
           child: StreamBuilder(
-              stream: favRef.document(currentUser.id)
+              stream: favRef.doc(currentUser.id)
                   .collection('userFav')
                   .orderBy('timestamp', descending:true)
                   .snapshots(),
@@ -72,11 +72,11 @@ class _FavState extends State<Fav> {
                   return circularProgress();
                 } else {
                   return new ListView.builder(
-                      itemCount: snapshot.data.documents.length,
+                      itemCount: snapshot.data.docs.length,
                       itemBuilder: (context, index) {
-                        DocumentSnapshot ds = snapshot.data.documents[index];
+                        DocumentSnapshot ds = snapshot.data.docs[index];
                         return new CartItem(
-                          count: snapshot.data.documents.length,
+                          count: snapshot.data.docs.length,
                           shopmediaUrl: ds['shopmediaUrl'],
                           productname: ds['productname'],
                           eur: ds['eur'],
@@ -150,7 +150,7 @@ class CartItem extends StatelessWidget {
     );
   }
 //  addToCart() {
-//    cartRef.document(currentUser.id).collection("userCart").document(prodId).setData({
+//    cartRef.doc(currentUser.id).collection("userCart").doc(prodId).setData({
 //      "username": username,
 //       "prodId": prodId,
 //      "timestamp": timestamp,
@@ -163,7 +163,7 @@ class CartItem extends StatelessWidget {
 //    });
 //  }
   deleteFav(){
-    var docReference = favRef.document(currentUser.id).collection("userFav").document(prodId);
+    var docReference = favRef.doc(currentUser.id).collection("userFav").doc(prodId);
     docReference.delete();
   }
   @override
@@ -172,12 +172,12 @@ class CartItem extends StatelessWidget {
     if(currentUser.country=='India') {
       return
         StreamBuilder(
-          stream: usersRef.document(ownerId).snapshots(),
+          stream: usersRef.doc(ownerId).snapshots(),
           builder: (context, snapshot) {
             if (!snapshot.hasData) {
               return circularProgress();
             }
-            User user = User.fromDocument(snapshot.data);
+            Users user = Users.fromDocument(snapshot.data);
             bool isPostOwner = currentUserId == ownerId;
 
             return Column(children: <Widget>[
@@ -257,12 +257,12 @@ class CartItem extends StatelessWidget {
     else if (currentUser.country == 'China'){
       return
         FutureBuilder(
-          future: usersRef.document(ownerId).get(),
+          future: usersRef.doc(ownerId).get(),
           builder: (context, snapshot) {
             if (!snapshot.hasData) {
               return circularProgress();
             }
-            User user = User.fromDocument(snapshot.data);
+            Users user = Users.fromDocument(snapshot.data);
             bool isPostOwner = currentUserId == ownerId;
 
             return Column(children: <Widget>[
@@ -341,12 +341,12 @@ class CartItem extends StatelessWidget {
     else if (currentUser.country == 'Europe'){
       return
         FutureBuilder(
-          future: usersRef.document(ownerId).get(),
+          future: usersRef.doc(ownerId).get(),
           builder: (context, snapshot) {
             if (!snapshot.hasData) {
               return circularProgress();
             }
-            User user = User.fromDocument(snapshot.data);
+            Users user = Users.fromDocument(snapshot.data);
             bool isPostOwner = currentUserId == ownerId;
 
             return Column(children: <Widget>[
@@ -425,12 +425,12 @@ class CartItem extends StatelessWidget {
     else if (currentUser.country == 'UK') {
       return
         FutureBuilder(
-          future: usersRef.document(ownerId).get(),
+          future: usersRef.doc(ownerId).get(),
           builder: (context, snapshot) {
             if (!snapshot.hasData) {
               return circularProgress();
             }
-            User user = User.fromDocument(snapshot.data);
+            Users user = Users.fromDocument(snapshot.data);
             bool isPostOwner = currentUserId == ownerId;
 
             return Column(children: <Widget>[
@@ -509,12 +509,12 @@ class CartItem extends StatelessWidget {
     else if (currentUser.country == 'USA')  {
       return
         FutureBuilder(
-          future: usersRef.document(ownerId).get(),
+          future: usersRef.doc(ownerId).get(),
           builder: (context, snapshot) {
             if (!snapshot.hasData) {
               return circularProgress();
             }
-            User user = User.fromDocument(snapshot.data);
+            Users user = Users.fromDocument(snapshot.data);
             bool isPostOwner = currentUserId == ownerId;
 
             return Column(children: <Widget>[
@@ -593,12 +593,12 @@ class CartItem extends StatelessWidget {
     else {
       return
         FutureBuilder(
-          future: usersRef.document(ownerId).get(),
+          future: usersRef.doc(ownerId).get(),
           builder: (context, snapshot) {
             if (!snapshot.hasData) {
               return circularProgress();
             }
-            User user = User.fromDocument(snapshot.data);
+            Users user = Users.fromDocument(snapshot.data);
             bool isPostOwner = currentUserId == ownerId;
 
             return Column(children: <Widget>[

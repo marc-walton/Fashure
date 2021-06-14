@@ -18,50 +18,50 @@ class _ServiceFulfillState extends State<ServiceFulfill> {
 
   TextEditingController courierIdController = TextEditingController();
   Client(){
-    Firestore.instance.collection('users')
+    FirebaseFirestore.instance.collection('users')
         .where("id",isEqualTo:"${widget.ownerId}")
-        .snapshots().listen((snapshot){snapshot.documents.forEach((doc){
+        .snapshots().listen((snapshot){snapshot.docs.forEach((doc){
 
       setState(() {
-        client = doc.data['client'];
+        client = doc.data()['client'];
 
       });});
 
     });
     client++;
 
-    Firestore.instance.collection('users')
-        .document(widget.ownerId)
-        .updateData({'client': client,
+    FirebaseFirestore.instance.collection('users')
+        .doc(widget.ownerId)
+        .update({'client': client,
     });
   }
   submit(){
-    Firestore.instance.collection('serviceSeller')
-        .document(widget.ownerId)
+    FirebaseFirestore.instance.collection('serviceSeller')
+        .doc(widget.ownerId)
         .collection('sellerService')
-        .document(widget.orderId)
-        .updateData({
+        .doc(widget.orderId)
+        .update({
       'fulfilled':'true',
       "timestamp": timestamp,
 
       'remarks': courierIdController.text??"",
       'orderStatus':'Order Shipped',
     });
-    Firestore.instance.collection('serviceCustomer')
-        .document(widget.cusId)
+    FirebaseFirestore.instance.collection('serviceCustomer')
+        .doc(widget.cusId)
         .collection('customerService')
-        .document(widget.orderId)
-        .updateData({
+        .doc(widget.orderId)
+        .update({
       'fulfilled':'true',
       "timestamp": timestamp,
 
       'remarks': courierIdController.text ?? "",
       'orderStatus':'Order Shipped',
-    }); Firestore.instance.collection('feed')
-        .document(widget.cusId)
+    }); FirebaseFirestore.instance.collection('feed')
+        .doc(widget.cusId)
         .collection('feedItems')
-        .document(widget.orderId)
-        .updateData({'message':'Your order is being shipped!',
+        .doc(widget.orderId)
+        .update({'message':'Your order is being shipped!',
       "timestamp": timestamp,
       "type": "ServicePayment",
       "username": currentUser.displayName,
@@ -70,11 +70,11 @@ class _ServiceFulfillState extends State<ServiceFulfill> {
       "postId": widget.orderId,
       // "mediaUrl": mediaUrl,
       "read": 'false',
-    });Firestore.instance.collection('feed')
-        .document(widget.ownerId)
+    });FirebaseFirestore.instance.collection('feed')
+        .doc(widget.ownerId)
         .collection('feedItems')
-        .document(widget.orderId)
-        .updateData({'message':'You fulfilled an order!',
+        .doc(widget.orderId)
+        .update({'message':'You fulfilled an order!',
       "timestamp": timestamp,
       "type": "ServicePaymentI",
       "username": currentUser.displayName,

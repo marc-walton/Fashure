@@ -153,6 +153,9 @@ import 'package:get/get.dart';
 
 import 'package:fashow/methods/card_user.dart';
 import 'package:fashow/methods/card_prod.dart';
+import 'package:translated_text/translated_text.dart';
+
+import 'HomePage.dart';
 
 class ShopSearch extends StatefulWidget {
   @override
@@ -4741,8 +4744,12 @@ else{return null;}
 
         length:3,
         child: Scaffold(
+          resizeToAvoidBottomInset: true,
           appBar:AppBar(
-            title: Text('Search by',style: TextStyle(color: Colors.white),),
+            title: TranslatedText("Search by",to:'${currentUser.language}',
+              textStyle: TextStyle(
+                color: Colors.white,),),
+
             backgroundColor: kPrimaryColor,
             elevation: 0,
             bottom: TabBar(
@@ -4751,15 +4758,25 @@ else{return null;}
               unselectedLabelColor: kIcon,
 
               tabs:[
-                Text("Category",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5,),),
-                Text("Designer",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5),),
- Text("Product",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5),),
+                TranslatedText("Category",to:'${currentUser.language}',
+                textStyle: TextStyle(
+                  fontSize: SizeConfig.safeBlockHorizontal * 5,
+                 ),),
+                TranslatedText("Designer",to:'${currentUser.language}',
+                  textStyle: TextStyle(
+                    fontSize: SizeConfig.safeBlockHorizontal * 5,
+                  ),),
+                TranslatedText("Product",to:'${currentUser.language}',
+                  textStyle: TextStyle(
+                    fontSize: SizeConfig.safeBlockHorizontal * 5,
+                  ),),
+
 
               ],
             ),
           ),
 
-          resizeToAvoidBottomPadding: true,
+
           body:
             Container(
               padding: const EdgeInsets.all(20.0),
@@ -4845,7 +4862,7 @@ class _SearchDesignerState extends State<SearchDesigner> {
 
     if(_searchController.text != "") {
       for(var tripSnapshot in _allResults){
-        var title = User.fromDocument(tripSnapshot).displayName.toLowerCase();
+        var title = Users.fromDocument(tripSnapshot).displayName.toLowerCase();
 
         if(title.contains(_searchController.text.toLowerCase())) {
           showResults.add(tripSnapshot);
@@ -4861,15 +4878,15 @@ class _SearchDesignerState extends State<SearchDesigner> {
   }
 
   getUsersPastTripsStreamSnapshots() async {
-    var data = await Firestore.instance
+    var data = await FirebaseFirestore.instance
         .collection('users')
     // .document(uid)
     // .collection('trips')
     .where("designer", isEqualTo: true)
     // .orderBy('endDate')
-        .getDocuments();
+        .get();
     setState(() {
-      _allResults = data.documents;
+      _allResults = data.docs;
     });
     searchResultsList();
     return "complete";
@@ -4986,14 +5003,14 @@ class _SearchProductState extends State<SearchProduct> {
   }
 
   getUsersPastTripsStreamSnapshots() async {
-    var data = await Firestore.instance
+    var data = await FirebaseFirestore.instance
         .collectionGroup('userProducts')
     // .document(uid)
     // .collection('trips')
     // .orderBy('endDate')
-        .getDocuments();
+        .get();
     setState(() {
-      _allResults = data.documents;
+      _allResults = data.docs;
     });
     searchResultsList();
     return "complete";

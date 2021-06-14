@@ -80,7 +80,7 @@ class _ChatListContainerState extends State<ChatListContainer> {
           ),
           builder: (context, snapshot) {
             if (snapshot.hasData) {
-              var docList = snapshot.data.documents;
+              var docList = snapshot.data.docs;
 
               if (docList.isEmpty) {
                 return QuietBox();
@@ -97,7 +97,7 @@ class _ChatListContainerState extends State<ChatListContainer> {
                   padding: EdgeInsets.all(10),
                   itemCount: docList.length,
                   itemBuilder: (context, index) {
-                    Contact contact = Contact.fromMap(docList[index].data);
+                    Contact contact = Contact.fromMap(docList[index].data());
 
                     return ContactView(contact);
                   },
