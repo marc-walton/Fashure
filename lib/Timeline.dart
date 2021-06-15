@@ -24,7 +24,7 @@ import 'package:getflutter/components/button/gf_button.dart';
 import 'package:getflutter/shape/gf_button_shape.dart';
 import 'package:paginate_firestore/paginate_firestore.dart';
 import 'package:get/get.dart';
-final CollectionReference usersRef = Firestore.instance.collection('users');
+final CollectionReference usersRef = FirebaseFirestore.instance.collection('users');
 
   class Timeline extends StatefulWidget {
     // final String postId;
@@ -36,7 +36,7 @@ final CollectionReference usersRef = Firestore.instance.collection('users');
     // final dynamic likes;
 
 
-    final User currentUser;
+    final Users currentUser;
 
     Timeline({this.currentUser,
     // this.postId,
@@ -111,12 +111,12 @@ TabController _tabController;
     ///1
     getTimeline() async {
       QuerySnapshot snapshot = await timelineRef
-          .document(widget.currentUser.id)
+          .doc(widget.currentUser.id)
           .collection('timelinePosts')
           .orderBy('timestamp', descending: true)
-          .getDocuments();
+          .get();
       List<Post> posts =
-      snapshot.documents.map((doc) => Post.fromDocument(doc)).toList();
+      snapshot.docs.map((doc) => Post.fromDocument(doc)).toList();
       setState(() {
         this.posts = posts;
       });
@@ -134,11 +134,11 @@ TabController _tabController;
 
     getFfollowing() async {
       QuerySnapshot snapshot = await followingRef
-          .document(currentUser.id)
+          .doc(currentUser.id)
           .collection('userFollowing')
-          .getDocuments();
+          .get();
       setState(() {
-        foollowingList = snapshot.documents.map((doc) => doc.documentID).toList();
+        foollowingList = snapshot.docs.map((doc) => doc.id).toList();
       });
     }
 
@@ -155,8 +155,8 @@ TabController _tabController;
             return circularProgress();
           }
           List<UserResult> userResults = [];
-          snapshot.data.documents.forEach((doc) {
-            User user = User.fromDocument(doc);
+          snapshot.data.docs.forEach((doc) {
+             Users user = Users.fromDocument(doc);
             final bool isAuthUser = currentUser.id == user.id;
             final bool isFollowingUser = foollowingList.contains(user.id);
             // remove auth user from recommended list
@@ -362,12 +362,12 @@ class Collection extends StatelessWidget {
       PaginateBuilderType.listView,
       itemBuilder: (index, context, documentSnapshot)  {
         return new  FutureBuilder(
-          future: usersRef.document( documentSnapshot.data['ownerId']).get(),
+          future: usersRef.doc( documentSnapshot.data()['ownerId']).get(),
           builder: (context, snapshot) {
             if (!snapshot.hasData) {
               return circularProgress();
             }
-            User user = User.fromDocument(snapshot.data);
+             Users user = Users.fromDocument(snapshot.data);
 //          bool isPostOwner = currentUserId == ownerId;
             return Column(children: <Widget>[
               ListTile(
@@ -390,7 +390,7 @@ class Collection extends StatelessWidget {
                 ),
                ),
               ListTile(
-                title: Text(documentSnapshot.data['title'],
+                title: Text(documentSnapshot.data()['title'],
                     maxLines: 3,
                     style: new TextStyle(
                         fontWeight: FontWeight.w500,
@@ -405,8 +405,8 @@ class Collection extends StatelessWidget {
                         context,
                         MaterialPageRoute(
                           builder: (context) => CollScreen(
-                            collId: documentSnapshot.data['collId'],
-                            userId:  documentSnapshot.data['ownerId'],
+                            collId: documentSnapshot.data()['collId'],
+                            userId:  documentSnapshot.data()['ownerId'],
                           ),
                         ),
                       );
@@ -420,7 +420,7 @@ class Collection extends StatelessWidget {
                         width: MediaQuery.of(context).size.width,
                         child:
                         CachedNetworkImage(
-                          imageUrl:  documentSnapshot.data['headerImage'],
+                          imageUrl:  documentSnapshot.data()['headerImage'],
                         )
                     ),
                   ),
@@ -450,12 +450,12 @@ class Blog extends StatelessWidget {
         itemBuilder: (index, context, documentSnapshot) {
 
           return new  FutureBuilder(
-            future: usersRef.document( documentSnapshot.data['ownerId']).get(),
+            future: usersRef.doc( documentSnapshot.data()['ownerId']).get(),
             builder: (context, snapshot) {
               if (!snapshot.hasData) {
                 return circularProgress();
               }
-              User user = User.fromDocument(snapshot.data);
+               Users user = Users.fromDocument(snapshot.data);
 //          bool isPostOwner = currentUserId == ownerId;
               return Column(children: <Widget>[
                 GestureDetector(                      onTap: () => showProfile(context, profileId: user.id),
@@ -482,7 +482,7 @@ class Blog extends StatelessWidget {
                 ),
                 ListTile(
 
-                  title: Text(documentSnapshot.data['title'],
+                  title: Text(documentSnapshot.data()['title'],
                       maxLines: 3,
                       style: new TextStyle(
                           fontWeight: FontWeight.w500,
@@ -497,8 +497,8 @@ class Blog extends StatelessWidget {
                           context,
                           MaterialPageRoute(
                             builder: (context) => BlogScreen(
-                              blogId: documentSnapshot.data['blogId'],
-                              userId:  documentSnapshot.data['ownerId'],
+                              blogId: documentSnapshot.data()['blogId'],
+                              userId:  documentSnapshot.data()['ownerId'],
                             ),
                           ),
                         );
@@ -511,7 +511,7 @@ class Blog extends StatelessWidget {
                         ),
                         width: MediaQuery.of(context).size.width,
 
-                        child:  CachedNetworkImage( imageUrl: documentSnapshot.data['blogmediaUrl']),
+                        child:  CachedNetworkImage( imageUrl: documentSnapshot.data()['blogmediaUrl']),
 
                       ),
                     ),
@@ -528,7 +528,7 @@ class Blog extends StatelessWidget {
         },
 
 
-        query: Firestore.instance.collectionGroup('userBlog').orderBy('timestamp',descending: true),
+        query: FirebaseFirestore.instance.collectionGroup('userBlog').orderBy('timestamp',descending: true),
 
       );
 

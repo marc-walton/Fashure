@@ -20,7 +20,7 @@ import 'package:image_cropper/image_cropper.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class Upload extends StatefulWidget {
-  final User currentUser;
+  final Users currentUser;
 
 
   Upload({this.currentUser});
@@ -172,19 +172,19 @@ class _UploadState extends State<Upload>
   }
 
   Future<String> uploadImage(imageFile) async {
-    StorageUploadTask uploadTask =
+   UploadTask uploadTask =
     storageRef.child("post_$postId.jpg").putFile(imageFile);
-    StorageTaskSnapshot storageSnap = await uploadTask.onComplete;
+    TaskSnapshot storageSnap = await uploadTask;
     String downloadUrl = await storageSnap.ref.getDownloadURL();
     return downloadUrl;
   }
 
   createPostInFirestore({String mediaUrl, String location, String description}) {
     postsRef
-        .document(widget.currentUser.id)
+        .doc(widget.currentUser.id)
         .collection("userPosts")
-        .document(postId)
-        .setData({
+        .doc(postId)
+        .set({
       "postId": postId,
       "ownerId": widget.currentUser.id,
       "username": widget.currentUser.displayName,

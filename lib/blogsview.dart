@@ -13,6 +13,7 @@ import 'package:fashow/custom_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:zefyr/zefyr.dart';
+
 List<NetworkImage> _listOfImages = <NetworkImage>[];
 class Blog extends StatefulWidget {
   final String blogId;
@@ -40,21 +41,21 @@ class Blog extends StatefulWidget {
         _listOfImages = [];
         for (int i = 0;
         i <
-        doc['blogmediaUrl']
+        doc.data()['blogmediaUrl']
         .length;
         i++) {
-          _listOfImages.add(NetworkImage(doc['blogmediaUrl'][i]));
+          _listOfImages.add(NetworkImage(doc.data()['blogmediaUrl'][i]));
     }
     return Blog(
 
-      blogId: doc['blogId'],
-      ownerId: doc['ownerId'],
-      username: doc['username'],
-      blogmediaUrl:   doc['blogmediaUrl'],
-      title: doc['title'],
-      content: doc['content'],
-      source:doc['source'],
-      likes: doc['claps'],
+      blogId: doc.data()['blogId'],
+      ownerId: doc.data()['ownerId'],
+      username: doc.data()['username'],
+      blogmediaUrl:   doc.data()['blogmediaUrl'],
+      title: doc.data()['title'],
+      content: doc.data()['content'],
+      source:doc.data()['source'],
+      likes: doc.data()['claps'],
     );
   }
 
@@ -155,9 +156,9 @@ class _BlogState extends State<Blog> {
   deletePost() async {
     // delete post itself
     blogRef
-        .document(ownerId)
+        .doc(ownerId)
         .collection('userBlog')
-        .document(blogId)
+        .doc(blogId)
         .get()
         .then((doc) {
       if (doc.exists) {
@@ -168,21 +169,21 @@ class _BlogState extends State<Blog> {
     storageRef.child("blog_$blogId.jpg").delete();
     // then delete all activity feed notifications
     QuerySnapshot activityFeedSnapshot = await activityFeedRef
-        .document(ownerId)
+        .doc(ownerId)
         .collection("feedItems")
         .where('blogId', isEqualTo: blogId)
-        .getDocuments();
-    activityFeedSnapshot.documents.forEach((doc) {
+        .get();
+    activityFeedSnapshot.docs.forEach((doc) {
       if (doc.exists) {
         doc.reference.delete();
       }
     });
     // then delete all comments
     QuerySnapshot commentsSnapshot = await blogcommentsRef
-        .document(blogId)
+        .doc(blogId)
         .collection('comments')
-        .getDocuments();
-    commentsSnapshot.documents.forEach((doc) {
+        .get();
+    commentsSnapshot.docs.forEach((doc) {
       if (doc.exists) {
         doc.reference.delete();
       }
@@ -194,10 +195,10 @@ class _BlogState extends State<Blog> {
 
     if (_isLiked) {
       blogRef
-          .document(ownerId)
+          .doc(ownerId)
           .collection('userBlog')
-          .document(blogId)
-          .updateData({'claps.$currentUserId': false});
+          .doc(blogId)
+          .update({'claps.$currentUserId': false});
      removeLikeFromActivityFeed();
       setState(() {
         likeCount -= 1;
@@ -206,10 +207,10 @@ class _BlogState extends State<Blog> {
       });
     } else if (!_isLiked) {
       blogRef
-          .document(ownerId)
+          .doc(ownerId)
           .collection('userBlog')
-          .document(blogId)
-          .updateData({'claps.$currentUserId': true});
+          .doc(blogId)
+          .update({'claps.$currentUserId': true});
      addLikeToActivityFeed();
       setState(() {
         likeCount += 1;
@@ -230,10 +231,10 @@ class _BlogState extends State<Blog> {
     bool isNotPostOwner = currentUserId != ownerId;
     if (isNotPostOwner) {
       activityFeedRef
-          .document(ownerId)
+          .doc(ownerId)
           .collection("feedItems")
-          .document(blogId)
-          .setData({
+          .doc(blogId)
+          .set({
         "type": "bloglike",
         "username": currentUser.displayName,
         "userId": ownerId,
@@ -250,9 +251,9 @@ class _BlogState extends State<Blog> {
     bool isNotPostOwner = currentUserId != ownerId;
     if (isNotPostOwner) {
       activityFeedRef
-          .document(ownerId)
+          .doc(ownerId)
           .collection("feedItems")
-          .document(blogId)
+          .doc(blogId)
           .get()
           .then((doc) {
         if (doc.exists) {
@@ -287,11 +288,11 @@ class _BlogState extends State<Blog> {
   report(){
     Fluttertoast.showToast(
         msg: "Your report has been submitted", timeInSecForIos: 4);
-    Firestore.instance.collection('reports')
-        .document(ownerId)
+    FirebaseFirestore.instance.collection('reports')
+        .doc(ownerId)
         .collection("userReports")
-        .document(blogId)
-        .setData({
+        .doc(blogId)
+        .set({
       "type": "shop",
       "userId": ownerId,
       "postId": blogId,
@@ -303,12 +304,12 @@ class _BlogState extends State<Blog> {
 
     return
       FutureBuilder(
-        future: usersRef.document(ownerId).get(),
+        future: usersRef.doc(ownerId).get(),
         builder: (context, snapshot) {
           if (!snapshot.hasData) {
             return circularProgress();
           }
-          User user = User.fromDocument(snapshot.data);
+          Users user = Users.fromDocument(snapshot.data);
          bool isPostOwner = currentUserId == ownerId;
           return  Column(children: <Widget>[
               GestureDetector(

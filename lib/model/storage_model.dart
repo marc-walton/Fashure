@@ -10,9 +10,9 @@ import 'package:path_provider/path_provider.dart';
 import 'package:image/image.dart' as Im;
 
 class StorageMethods {
-  static final Firestore firestore = Firestore.instance;
+  static final FirebaseFirestore firestore = FirebaseFirestore.instance;
 
-  StorageReference _storageReference;
+  Reference _storageReference;
 
   //user class
   UserModel user = UserModel();
@@ -32,9 +32,9 @@ class StorageMethods {
       _storageReference = FirebaseStorage.instance
           .ref()
           .child('${DateTime.now().millisecondsSinceEpoch}');
-      StorageUploadTask storageUploadTask =
+     UploadTask storageUploadTask =
       _storageReference.putFile(imageFile);
-      var url = await (await storageUploadTask.onComplete).ref.getDownloadURL();
+      var url = await (await storageUploadTask).ref.getDownloadURL();
       // print(url);
       return url;
     } catch (e) {

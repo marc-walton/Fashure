@@ -211,19 +211,19 @@ bool Designer;
       );
   }
 
-   Updateread() async { QuerySnapshot snapshot = await Firestore.instance
+   Updateread() async { QuerySnapshot snapshot = await FirebaseFirestore.instance
        .collection(MESSAGES_COLLECTION)
-       .document(currentUser.id)
-       .collection(widget.receiver.id).getDocuments();
-   snapshot.documents.forEach((doc) {
-     doc.reference.updateData({'read':'true'});
+       .doc(currentUser.id)
+       .collection(widget.receiver.id).get();
+   snapshot.docs.forEach((doc) {
+     doc.reference.update({'read':'true'});
    });}
-   Updatereadreciever() async { QuerySnapshot snapshot = await Firestore.instance
+   Updatereadreciever() async { QuerySnapshot snapshot = await FirebaseFirestore.instance
        .collection(MESSAGES_COLLECTION)
-       .document(widget.receiver.id)
-       .collection(currentUser.id).getDocuments();
-   snapshot.documents.forEach((doc) {
-     doc.reference.updateData({'read':'true'});
+       .doc(widget.receiver.id)
+       .collection(currentUser.id).get();
+   snapshot.docs.forEach((doc) {
+     doc.reference.update({'read':'true'});
    });}
   emojiContainer() {
     return EmojiPicker(
@@ -245,9 +245,9 @@ bool Designer;
 
   Widget messageList() {
     return StreamBuilder(
-      stream: Firestore.instance
+      stream: FirebaseFirestore.instance
           .collection(MESSAGES_COLLECTION)
-          .document(currentUser.id)
+          .doc(currentUser.id)
           .collection(widget.receiver.id)
           .orderBy(TIMESTAMP_FIELD, descending: true)
           .snapshots(),
@@ -268,10 +268,10 @@ bool Designer;
           padding: EdgeInsets.all(10),
           controller: _listScrollController,
           reverse: true,
-          itemCount: snapshot.data.documents.length,
+          itemCount: snapshot.data.docs.length,
           itemBuilder: (context, index) {
             // mention the arrow syntax if you get the time
-            return chatMessageItem(snapshot.data.documents[index]);
+            return chatMessageItem(snapshot.data.docs[index]);
           },
         );
       },
@@ -279,7 +279,7 @@ bool Designer;
   }
 
   Widget chatMessageItem(DocumentSnapshot snapshot) {
-    Message _message = Message.fromMap(snapshot.data);
+    Message _message = Message.fromMap(snapshot.data());
 
     return Container(
       margin: EdgeInsets.symmetric(vertical: 15),
@@ -385,20 +385,20 @@ bool Designer;
     // }
   }
 reqorderFire() async {
-  Firestore.instance.collection('users')
+  FirebaseFirestore.instance.collection('users')
       .where('id', isEqualTo: currentUser.id)
 
       .snapshots()
-      .listen((snapshot){  snapshot.documents.forEach((doc) {
+      .listen((snapshot){  snapshot.docs.forEach((doc) {
     setState(() {
-      Illustrator = doc.data['illustrator'] ?? false;
-model = doc.data['model'] ?? false;
-          Makeup = doc.data['makeup'] ?? false;
-          Hair = doc.data['hair'] ?? false;
-          Choreographer = doc.data['choreographer'] ?? false;
-          Photographer = doc.data['photographer'] ?? false;
-          Stylist = doc.data['stylist'] ?? false;
-          Designer = doc.data['designer'] ?? false;
+      Illustrator = doc.data()['illustrator'] ?? false;
+model = doc.data()['model'] ?? false;
+          Makeup = doc.data()['makeup'] ?? false;
+          Hair = doc.data()['hair'] ?? false;
+          Choreographer = doc.data()['choreographer'] ?? false;
+          Photographer = doc.data()['photographer'] ?? false;
+          Stylist = doc.data()['stylist'] ?? false;
+          Designer = doc.data()['designer'] ?? false;
 
       print('Activity Feed Item: $Illustrator');
 
@@ -409,14 +409,14 @@ model = doc.data['model'] ?? false;
 
 
   // StreamBuilder(
-  //     stream: Firestore.instance.collection('users').document(widget.receiver.id).snapshots(),
+  //     stream: FirebaseFirestore.instance.collection('users').doc(widget.receiver.id).snapshots(),
   //     // ignore: missing_return
   //     builder: (context, snapshot) {
   //
   //       if (!snapshot.hasData) {
   //         return circularProgress();
   //       }
-  //       // DocumentSnapshot ds = snapshot.data.documents[index];
+  //       // DocumentSnapshot ds = snapshot.data.docs[index];
   //
   //     });
 }
@@ -522,11 +522,11 @@ model = doc.data['model'] ?? false;
         type: 'text',
         read: 'false',
       );
-      Firestore.instance.collection('feed')
-              .document(widget.receiver.id)
+      FirebaseFirestore.instance.collection('feed')
+              .doc(widget.receiver.id)
               .collection('feedItems')
-              .document(currentUser.id)
-              .setData({
+              .doc(currentUser.id)
+              .set({
             "type": "Chat",
             "username": currentUser.displayName,
             "userId": currentUser.id,

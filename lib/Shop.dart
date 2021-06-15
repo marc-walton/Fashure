@@ -22,7 +22,7 @@ import 'package:fashow/Constants.dart';
 
 class Shop extends StatefulWidget {
 
-  final User currentUser;
+  final Users currentUser;
   final String prodId;
   final String onwerId;
   Shop({ this.currentUser,
@@ -60,7 +60,7 @@ new Tabs(title: "Teen-Girls",color: kPrimaryColor),
       _myHandler= _tabs[_controller.index];
     });
   }
- final _firestore = Firestore.instance;
+ final _firestore = FirebaseFirestore.instance;
   String postOrientation = "grid";
  double listViewOffset=0.0;
   String shopOrientation = "grid";

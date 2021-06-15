@@ -61,7 +61,7 @@ List<Blog> blogs = [];
   Map likes;
   bool isLiked;
   bool showHeart = false;
-User peerUser;
+Users peerUser;
 String avatar;
 SharedPreferences myPrefs;
 String peerId;
@@ -85,8 +85,8 @@ readPeer();
   }
 
   writePeer() async {
-    DocumentSnapshot doc = await usersRef.document(widget.profileId).get();
-    peerUser = User.fromDocument(doc);
+    DocumentSnapshot doc = await usersRef.doc(widget.profileId).get();
+    peerUser = Users.fromDocument(doc);
     print(peerUser.id);
     myPrefs = await SharedPreferences.getInstance();
     await myPrefs.setString('peerId', peerUser.id);
@@ -118,9 +118,9 @@ photoUrl: peerAvatar,
 
   checkIfFollowing() async {
     DocumentSnapshot doc = await followersRef
-        .document(widget.profileId)
+        .doc(widget.profileId)
         .collection('userFollowers')
-        .document(currentUserId)
+        .doc(currentUserId)
         .get();
     setState(() {
       isFollowing = doc.exists;
@@ -129,13 +129,13 @@ photoUrl: peerAvatar,
 
   getFollowers() async {
     QuerySnapshot snapshot = await followersRef
-        .document(widget.profileId)
+        .doc(widget.profileId)
         .collection('userFollowers')
-        .getDocuments();
+        .get();
     setState(() {
-      followerCount = snapshot.documents.length;
+      followerCount = snapshot.docs.length;
     });
-//    usersRef.document(widget.currentUserId).updateData({
+//    usersRef.doc(widget.currentUserId).update({
 //      'followers':followerCount
 //    });
 
@@ -143,11 +143,11 @@ photoUrl: peerAvatar,
 
   getFollowing() async {
     QuerySnapshot snapshot = await followingRef
-        .document(widget.profileId)
+        .doc(widget.profileId)
         .collection('userFollowing')
-        .getDocuments();
+        .get();
     setState(() {
-      followingCount = snapshot.documents.length;
+      followingCount = snapshot.docs.length;
     });
   }
   getProducts()async {
@@ -155,14 +155,14 @@ photoUrl: peerAvatar,
       isLoading = true;
     });
     QuerySnapshot snapshot = await productsRef
-        .document(widget.profileId)
+        .doc(widget.profileId)
         .collection('userProducts')
         .orderBy('timestamp', descending: true)
-        .getDocuments();
+        .get();
     setState(() {
       isLoading = false;
-      shopCount = snapshot.documents.length;
-      products = snapshot.documents.map((doc) => Prod.fromDocument(doc)).toList();
+      shopCount = snapshot.docs.length;
+      products = snapshot.docs.map((doc) => Prod.fromDocument(doc)).toList();
     });
   }
   getColls()async {
@@ -170,14 +170,14 @@ photoUrl: peerAvatar,
       isLoading = true;
     });
     QuerySnapshot snapshot = await collRef
-        .document(widget.profileId)
+        .doc(widget.profileId)
         .collection('userCollections')
         .orderBy('timestamp', descending: true)
-        .getDocuments();
+        .get();
     setState(() {
       isLoading = false;
-      collCount = snapshot.documents.length;
-      collection = snapshot.documents.map((doc) => Coll.fromDocument(doc)).toList();
+      collCount = snapshot.docs.length;
+      collection = snapshot.docs.map((doc) => Coll.fromDocument(doc)).toList();
     });
   }
    getEditorial()async {
@@ -185,14 +185,14 @@ photoUrl: peerAvatar,
       isLoading = true;
     });
     QuerySnapshot snapshot = await blogRef
-        .document(widget.profileId)
+        .doc(widget.profileId)
         .collection('userBlog')
         .orderBy('timestamp', descending: true)
-        .getDocuments();
+        .get();
     setState(() {
       isLoading = false;
-      blogCount = snapshot.documents.length;
-      blogs = snapshot.documents.map((doc) => Blog.fromDocument(doc)).toList();
+      blogCount = snapshot.docs.length;
+      blogs = snapshot.docs.map((doc) => Blog.fromDocument(doc)).toList();
     });
   }
 
@@ -201,7 +201,7 @@ getPosts(){
 return
   StreamBuilder(
     stream: postsRef
-        .document(widget.profileId)
+        .doc(widget.profileId)
         .collection('userPosts')
         .orderBy('timestamp', descending: true)
         .snapshots(),
@@ -214,9 +214,9 @@ return
         primary: false,
             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: (MediaQuery.of(context).orientation == Orientation.portrait) ? 3 : 3),
-            itemCount: snapshot.data.documents.length,
+            itemCount: snapshot.data.docs.length,
             itemBuilder: (context, index) {
-              DocumentSnapshot docSnapshot = snapshot.data.documents[index];
+              DocumentSnapshot docSnapshot = snapshot.data.docs[index];
               return
 
                 Padding(
@@ -251,7 +251,7 @@ getcollections(){
 return
   StreamBuilder(
     stream: collRef
-        .document(widget.profileId)
+        .doc(widget.profileId)
         .collection('userCollections')
         .orderBy('timestamp', descending: true)
         .snapshots(),
@@ -262,9 +262,9 @@ return
         ListView.builder(
 
         primary: false,
-            itemCount: snapshot.data.documents.length,
+            itemCount: snapshot.data.docs.length,
             itemBuilder: (context, index) {
-              DocumentSnapshot docSnapshot = snapshot.data.documents[index];
+              DocumentSnapshot docSnapshot = snapshot.data.docs[index];
               return
 
                 Padding(
@@ -328,7 +328,7 @@ geteditorial(){
 return
   StreamBuilder(
     stream: collRef
-        .document(widget.profileId)
+        .doc(widget.profileId)
         .collection('userBlogs')
         .orderBy('timestamp', descending: true)
         .snapshots(),
@@ -343,9 +343,9 @@ return
         ListView.builder(
 
         primary: false,
-            itemCount: snapshot.data.documents.length,
+            itemCount: snapshot.data.docs.length,
             itemBuilder: (context, index) {
-              DocumentSnapshot docSnapshot = snapshot.data.documents[index];
+              DocumentSnapshot docSnapshot = snapshot.data.docs[index];
               return
 
                 Padding(
@@ -408,7 +408,7 @@ getProds(){
 return
   StreamBuilder(
     stream: productsRef
-        .document(widget.profileId)
+        .doc(widget.profileId)
         .collection('userProducts')
         .orderBy('timestamp', descending: true)
         .snapshots(),
@@ -421,9 +421,9 @@ return
         primary: false,
             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: (MediaQuery.of(context).orientation == Orientation.portrait) ? 3 : 3),
-            itemCount: snapshot.data.documents.length,
+            itemCount: snapshot.data.docs.length,
             itemBuilder: (context, index) {
-              DocumentSnapshot docSnapshot = snapshot.data.documents[index];
+              DocumentSnapshot docSnapshot = snapshot.data.docs[index];
               return
 
                 Padding(
@@ -458,20 +458,20 @@ return
       isLoading = true;
     });
     QuerySnapshot snapshot = await postsRef
-        .document(widget.profileId)
+        .doc(widget.profileId)
         .collection('userPosts')
         .orderBy('timestamp', descending: true)
-        .getDocuments();
+        .get();
     setState(() {
       isLoading = false;
-      postCount = snapshot.documents.length;
-      posts = snapshot.documents.map((doc) => Post.fromDocument(doc)).toList();
+      postCount = snapshot.docs.length;
+      posts = snapshot.docs.map((doc) => Post.fromDocument(doc)).toList();
     });
   }
   Client(){
     StreamBuilder(
-        stream:Firestore.instance.collection('users')
-            .document(widget.profileId).snapshots(),
+        stream:FirebaseFirestore.instance.collection('users')
+            .doc(widget.profileId).snapshots(),
         builder:(context,snapshot){
           setState(() {
             client = snapshot.data['client'];
@@ -545,7 +545,7 @@ return
     );
   }
   reviews()    {
-  // QuerySnapshot query = await  Firestore.instance.collection('Reviews').document(widget.profileId)
+  // QuerySnapshot query = await  FirebaseFirestore.instance.collection('Reviews').doc(widget.profileId)
   //       .collection('userReviews').get().then((query) {
   //         if(query.hasData)
   //   }
@@ -591,9 +591,9 @@ return
     );
     // Container(
     //   child: FutureBuilder(
-    //     future:      Firestore.instance.collection('users').document(widget.profileId)
+    //     future:      FirebaseFirestore.instance.collection('users').doc(widget.profileId)
     //         .collection('userReviews')
-    //         .getDocuments(),
+    //         .get(),
     //     builder: (context,snapshot){
     //   var rating = snapshot.data['rating'];
     //   var avg = rating.reduce((a,b)=>a+b)/rating;
@@ -747,9 +747,9 @@ Widget rev(){
     });
     // remove follower
     followersRef
-        .document(widget.profileId)
+        .doc(widget.profileId)
         .collection('userFollowers')
-        .document(currentUserId)
+        .doc(currentUserId)
         .get()
         .then((doc) {
       if (doc.exists) {
@@ -758,9 +758,9 @@ Widget rev(){
     });
     // remove following
     followingRef
-        .document(currentUserId)
+        .doc(currentUserId)
         .collection('userFollowing')
-        .document(widget.profileId)
+        .doc(widget.profileId)
         .get()
         .then((doc) {
       if (doc.exists) {
@@ -769,9 +769,9 @@ Widget rev(){
     });
     // delete activity feed item for them
     activityFeedRef
-        .document(widget.profileId)
+        .doc(widget.profileId)
         .collection('feedItems')
-        .document(currentUserId)
+        .doc(currentUserId)
         .get()
         .then((doc) {
       if (doc.exists) {
@@ -786,22 +786,22 @@ Widget rev(){
     });
     // Make auth user follower of ANOTHER user (update THEIR followers collection)
     followersRef
-        .document(widget.profileId)
+        .doc(widget.profileId)
         .collection('userFollowers')
-        .document(currentUserId)
-        .setData({});
+        .doc(currentUserId)
+        .set({});
     // Put THAT user on YOUR following collection (update your following collection)
     followingRef
-        .document(currentUserId)
+        .doc(currentUserId)
         .collection('userFollowing')
-        .document(widget.profileId)
-        .setData({});
+        .doc(widget.profileId)
+        .set({});
     // add activity feed item for that user to notify about new follower (us)
     activityFeedRef
-        .document(widget.profileId)
+        .doc(widget.profileId)
         .collection('feedItems')
-        .document(currentUserId)
-        .setData({
+        .doc(currentUserId)
+        .set({
       "type": "follow",
       "ownerId": widget.profileId,
       "username": currentUser.displayName,
@@ -812,12 +812,12 @@ Widget rev(){
   }
   buildProfileHeader() {
     return StreamBuilder(
-      stream: usersRef.document(widget.profileId).snapshots(),
+      stream: usersRef.doc(widget.profileId).snapshots(),
       builder: (context, snapshot) {
         if (!snapshot.hasData) {
           return circularProgress();
         }
-        User user = User.fromDocument(snapshot.data);
+         Users user = Users.fromDocument(snapshot.data);
         // ignore: unnecessary_statements
         bool isProfileOwner = currentUserId == widget.profileId;
 

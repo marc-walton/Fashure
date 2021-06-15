@@ -121,7 +121,7 @@ class ChatScreenState extends State<ChatScreen> {
       groupChatId = '$peerId-$id';
     }
 
-    Firestore.instance.collection('users').document(id).updateData({'chattingWith': peerId});
+    FirebaseFirestore.instance.collection('users').doc(id).update({'chattingWith': peerId});
 
     setState(() {});
   }
@@ -159,10 +159,10 @@ setState(() {
 
   Future<String> uploadFile() async {
     String fileName = DateTime.now().millisecondsSinceEpoch.toString();
-    StorageReference reference = FirebaseStorage.instance.ref().child(fileName);
-    StorageUploadTask uploadTask =
+    Reference reference = FirebaseStorage.instance.ref().child(fileName);
+   UploadTask uploadTask =
     reference.putFile(iFile);
-    StorageTaskSnapshot storageSnap = await uploadTask.onComplete;
+    TaskSnapshot storageSnap = await uploadTask;
     storageSnap.ref.getDownloadURL().then((downloadUrl) {
       imageUrl = downloadUrl;
       setState(() {
@@ -179,9 +179,9 @@ setState(() {
 
 //  Future uploadFile() async {
 //    String fileName = DateTime.now().millisecondsSinceEpoch.toString();
-//    StorageReference reference = FirebaseStorage.instance.ref().child(fileName);
-//    StorageUploadTask uploadTask = reference.putFile(imageFile);
-//    StorageTaskSnapshot storageTaskSnapshot = await uploadTask.onComplete;
+//    Reference reference = FirebaseStorage.instance.ref().child(fileName);
+//   UploadTask uploadTask = reference.putFile(imageFile);
+//    StorageTaskSnapshot storageTaskSnapshot = await uploadTask;
 //    storageTaskSnapshot.ref.getDownloadURL().then((downloadUrl) {
 //      imageUrl = downloadUrl;
 //      setState(() {
@@ -201,13 +201,13 @@ setState(() {
     if (content.trim() != '') {
       textEditingController.clear();
 
-      var documentReference = Firestore.instance
+      var documentReference = FirebaseFirestore.instance
           .collection('messages')
-          .document(groupChatId)
+          .doc(groupChatId)
           .collection(groupChatId)
-          .document(DateTime.now().millisecondsSinceEpoch.toString());
+          .doc(DateTime.now().millisecondsSinceEpoch.toString());
 
-      Firestore.instance.runTransaction((transaction) async {
+      FirebaseFirestore.instance.runTransaction((transaction) async {
         await transaction.set(
           documentReference,
           {
@@ -447,7 +447,7 @@ setState(() {
         isShowSticker = false;
       });
     } else {
-      Firestore.instance.collection('users').document(id).updateData({'chattingWith': null});
+      FirebaseFirestore.instance.collection('users').doc(id).update({'chattingWith': null});
       Navigator.pop(context);
     }
 
@@ -663,9 +663,9 @@ setState(() {
       child: groupChatId == ''
           ? Center(child: CircularProgressIndicator(valueColor: AlwaysStoppedAnimation<Color>(kblue)))
           : StreamBuilder(
-        stream: Firestore.instance
+        stream: FirebaseFirestore.instance
             .collection('messages')
-            .document(groupChatId)
+            .doc(groupChatId)
             .collection(groupChatId)
             .orderBy('timestamp', descending: true)
             .limit(20)
@@ -675,11 +675,11 @@ setState(() {
             return Center(
                 child: CircularProgressIndicator(valueColor: AlwaysStoppedAnimation<Color>(kblue)));
           } else {
-            listMessage = snapshot.data.documents;
+            listMessage = snapshot.data.docs;
             return ListView.builder(
               padding: EdgeInsets.all(10.0),
-              itemBuilder: (context, index) => buildItem(index, snapshot.data.documents[index]),
-              itemCount: snapshot.data.documents.length,
+              itemBuilder: (context, index) => buildItem(index, snapshot.data.docs[index]),
+              itemCount: snapshot.data.docs.length,
               reverse: true,
               controller: listScrollController,
             );

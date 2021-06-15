@@ -169,20 +169,20 @@ class _InvoiceViewState extends State<InvoiceView> {
           ],
         ),
       );
-      Firestore.instance.collection('Reviews')
-          .document(OwnerId).collection('userReviews').document(reviewId)
-          .setData({
+      FirebaseFirestore.instance.collection('Reviews')
+          .doc(OwnerId).collection('userReviews').doc(reviewId)
+          .set({
         'userId': OwnerId,
         'rating': rating,
         'review':reviewController.text,
         'reviewId' : reviewId,
         'timestamp':timestamp,
       });
-      Firestore.instance.collection('feed')
-          .document(OwnerId)
+      FirebaseFirestore.instance.collection('feed')
+          .doc(OwnerId)
           .collection('feedItems')
-          .document(reviewId)
-          .setData({
+          .doc(reviewId)
+          .set({
         "type": "ReviewC",
         "username": currentUser.displayName,
         "userId": OwnerId,
@@ -203,10 +203,10 @@ class _InvoiceViewState extends State<InvoiceView> {
  print(widget.ownerId);
 
     return StreamBuilder(
-        stream: Firestore.instance.collection('serviceSeller')
-            .document(widget.ownerId)
+        stream: FirebaseFirestore.instance.collection('serviceSeller')
+            .doc(widget.ownerId)
             .collection('sellerService')
-        .document(widget.orderId)
+        .doc(widget.orderId)
             .snapshots(),
       builder: (context, snapshot) {
         if (!snapshot.hasData) {

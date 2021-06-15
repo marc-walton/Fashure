@@ -17,9 +17,9 @@ class EditShop extends StatelessWidget {
   Widget build(BuildContext context) {
     return StreamBuilder(
       stream: productsRef
-          .document(userId)
+          .doc(userId)
           .collection('userProducts')
-          .document(prodId)
+          .doc(prodId)
           .snapshots(),
       builder: (context, snapshot) {
         if (!snapshot.hasData) {

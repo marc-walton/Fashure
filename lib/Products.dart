@@ -80,7 +80,7 @@ final int Shoe19;
  final int Shoe20;
 final int  Shoe21;
  final int mto;
-  final User currentUser;
+  final Users currentUser;
   final dynamic likes;
 
   Prod({
@@ -149,65 +149,65 @@ this.worldship,
 //    Map data = doc.data ;
 
     return Prod(
-      prodId: doc['prodId'],
-      ownerId: doc['ownerId'],
-      username: doc['displayName'],
-shipment: doc['shipment'],
-worldship: doc['worldship'],
+      prodId: doc.data()['prodId'],
+      ownerId: doc.data()['ownerId'],
+      username: doc.data()['displayName'],
+shipment: doc.data()['shipment'],
+worldship: doc.data()['worldship'],
 
-     eur: doc['eur'],
-      usd: doc['usd'],
-      inr: doc['inr'],
-      cny: doc['cny'],
-      gbp: doc['gbp'],
- gender: doc['Gender'],
-      // selectedSizes: doc['selectedSizes'],
-      mto: doc['mtoQuantity'],
-      xxxs: doc['xxxsQuantity'],
-      xxs: doc['xxsQuantity'],
-      xs: doc['xsQuantity'],
-      s: doc['sQuantity'],
-      m: doc['mQuantity'],
-      l: doc['lQuantity'],
-      xl: doc['xlQuantity'],
-      xxl: doc['xxlQuantity'],
-      xxxl: doc['xxxlQuantity'],
-      fourxl: doc['4xlQuantity'],
-      fivexl: doc['5xlQuantity'],
-      sixxl: doc['6xlQuantity'],
-      sevenxl: doc['7xlQuantity'],
-      eightxl: doc['8xlQuantity'],
-      Shoe1: doc['Shoe1'],
-      Shoe2: doc['Shoe2'],
-      Shoe3: doc['Shoe3'],
-      Shoe4: doc['Shoe4'],
-      Shoe5: doc['Shoe5'],
-      Shoe6: doc['Shoe6'],
-      Shoe7: doc['Shoe7'],
-       Shoe8: doc['Shoe8'],
-      Shoe9: doc['Shoe9'],
-      Shoe10: doc['Shoe10'],
-      Shoe11: doc['Shoe11'],
-      Shoe12: doc['Shoe12'],
-      Shoe13: doc['Shoe13'],
-      Shoe14: doc['Shoe14'],
-      Shoe15: doc['Shoe15'],
-     Shoe16: doc['Shoe16'],
-      Shoe17: doc['Shoe17'],
-      Shoe18: doc['Shoe18'],
-      Shoe19: doc['Shoe19'],
-      Shoe20: doc['Shoe20'],
-       Shoe21: doc['Shoe21'],
-      productname: doc['productname'],
-      details: doc['details'],
-      shopmediaUrl: doc['shopmediaUrl'],
-      color:doc['color'],
-   composition:doc['composition'],
-   washandcare:doc['washandcare'],
-    sizeandfit:doc['sizeandfit'],
-      likes: doc['likes'],
-        photoUrl:doc['photoUrl'],
-        freesize:doc['freesizeQuantity'],
+     eur: doc.data()['eur'],
+      usd: doc.data()['usd'],
+      inr: doc.data()['inr'],
+      cny: doc.data()['cny'],
+      gbp: doc.data()['gbp'],
+ gender: doc.data()['Gender'],
+      // selectedSizes: doc.data()['selectedSizes'],
+      mto: doc.data()['mtoQuantity'],
+      xxxs: doc.data()['xxxsQuantity'],
+      xxs: doc.data()['xxsQuantity'],
+      xs: doc.data()['xsQuantity'],
+      s: doc.data()['sQuantity'],
+      m: doc.data()['mQuantity'],
+      l: doc.data()['lQuantity'],
+      xl: doc.data()['xlQuantity'],
+      xxl: doc.data()['xxlQuantity'],
+      xxxl: doc.data()['xxxlQuantity'],
+      fourxl: doc.data()['4xlQuantity'],
+      fivexl: doc.data()['5xlQuantity'],
+      sixxl: doc.data()['6xlQuantity'],
+      sevenxl: doc.data()['7xlQuantity'],
+      eightxl: doc.data()['8xlQuantity'],
+      Shoe1: doc.data()['Shoe1'],
+      Shoe2: doc.data()['Shoe2'],
+      Shoe3: doc.data()['Shoe3'],
+      Shoe4: doc.data()['Shoe4'],
+      Shoe5: doc.data()['Shoe5'],
+      Shoe6: doc.data()['Shoe6'],
+      Shoe7: doc.data()['Shoe7'],
+       Shoe8: doc.data()['Shoe8'],
+      Shoe9: doc.data()['Shoe9'],
+      Shoe10: doc.data()['Shoe10'],
+      Shoe11: doc.data()['Shoe11'],
+      Shoe12: doc.data()['Shoe12'],
+      Shoe13: doc.data()['Shoe13'],
+      Shoe14: doc.data()['Shoe14'],
+      Shoe15: doc.data()['Shoe15'],
+     Shoe16: doc.data()['Shoe16'],
+      Shoe17: doc.data()['Shoe17'],
+      Shoe18: doc.data()['Shoe18'],
+      Shoe19: doc.data()['Shoe19'],
+      Shoe20: doc.data()['Shoe20'],
+       Shoe21: doc.data()['Shoe21'],
+      productname: doc.data()['productname'],
+      details: doc.data()['details'],
+      shopmediaUrl: doc.data()['shopmediaUrl'],
+      color:doc.data()['color'],
+   composition:doc.data()['composition'],
+   washandcare:doc.data()['washandcare'],
+    sizeandfit:doc.data()['sizeandfit'],
+      likes: doc.data()['likes'],
+        photoUrl:doc.data()['photoUrl'],
+        freesize:doc.data()['freesizeQuantity'],
     );
   }
 
@@ -9436,11 +9436,11 @@ else{
   report(){
     Fluttertoast.showToast(
         msg: "Your report has been submitted", timeInSecForIos: 4);
-    Firestore.instance.collection('reports')
-        .document(ownerId)
+    FirebaseFirestore.instance.collection('reports')
+        .doc(ownerId)
         .collection("userReports")
-        .document(prodId)
-        .setData({
+        .doc(prodId)
+        .set({
       "type": "shop",
       "userId": ownerId,
       "postId": prodId,
@@ -9890,9 +9890,9 @@ TeenSizes(){
   handleLikePost() {
     bool _isFav = true;
     if(_isFav) {
-      favRef.document(currentUser.id).collection("userFav")
-          .document(prodId)
-          .setData({
+      favRef.doc(currentUser.id).collection("userFav")
+          .doc(prodId)
+          .set({
         "username": username,
         "prodId": prodId,
         "timestamp": timestamp,
@@ -9913,12 +9913,12 @@ TeenSizes(){
 //        likes[currentUserId] = false;
       });
     } else if (!_isFav) {
-      var docReference = favRef.document(currentUser.id).collection("userFav").document(prodId);
+      var docReference = favRef.doc(currentUser.id).collection("userFav").doc(prodId);
       docReference.delete();
 
     }
       else{
-      var docReference = favRef.document(currentUser.id).collection("userFav").document(prodId);
+      var docReference = favRef.doc(currentUser.id).collection("userFav").doc(prodId);
       docReference.delete();
 
     }
@@ -9932,23 +9932,24 @@ TeenSizes(){
         builder: (BuildContext context) {
 
           return  PaginateFirestore(
+isLive: true,
 //    itemsPerPage: 2,
               itemBuilderType:
               PaginateBuilderType.listView,
               itemBuilder: (index, context, documentSnapshot)   {
-//        DocumentSnapshot ds = snapshot.data.documents[index];
-                String ownerId = documentSnapshot.data['userId'];
-                var rating =   documentSnapshot.data['rating'];
-                String review  = documentSnapshot.data['review'];
+//        DocumentSnapshot ds = snapshot.data.docs[index];
+                String ownerId = documentSnapshot.data()['userId'];
+                var rating =   documentSnapshot.data()['rating'];
+                String review  = documentSnapshot.data()['review'];
 
                 return
                   FutureBuilder(
-                    future: usersRef.document(ownerId).get(),
+                    future: usersRef.doc(ownerId).get(),
                     builder: (context, snapshot) {
                       if (!snapshot.hasData) {
                         return circularProgress();
                       }
-                      User user = User.fromDocument(snapshot.data);
+                       Users user = Users.fromDocument(snapshot.data);
 //          bool isPostOwner = currentUserId == ownerId;
                       return Padding(
                         padding: const EdgeInsets.all(8.0),
@@ -9994,7 +9995,7 @@ TeenSizes(){
                     },
                   );
               },
-              query: Firestore.instance.collection('Reviews').document(prodId)
+              query: FirebaseFirestore.instance.collection('Reviews').doc(prodId)
                   .collection('prodReviews').orderBy('timestamp',descending: true)
 
 
@@ -10005,12 +10006,12 @@ TeenSizes(){
 
  postindia(){
   return FutureBuilder(
-    future: usersRef.document(ownerId).get(),
+    future: usersRef.doc(ownerId).get(),
     builder: (context, snapshot) {
       if (!snapshot.hasData) {
         return circularProgress();
       }
-      User user = User.fromDocument(snapshot.data);
+       Users user = Users.fromDocument(snapshot.data);
       bool isPostOwner = currentUserId == ownerId;
       return Container(
         margin: EdgeInsets.only(top:10.0,left: 10.0,right: 10.0, bottom: 10.0 ),
@@ -10406,12 +10407,12 @@ TeenSizes(){
 }
 posteurope(){
   return FutureBuilder(
-    future: usersRef.document(ownerId).get(),
+    future: usersRef.doc(ownerId).get(),
     builder: (context, snapshot) {
       if (!snapshot.hasData) {
         return circularProgress();
       }
-      User user = User.fromDocument(snapshot.data);
+       Users user = Users.fromDocument(snapshot.data);
       bool isPostOwner = currentUserId == ownerId;
       return Container(
         margin: EdgeInsets.only(top:10.0,left: 10.0,right: 10.0, bottom: 10.0 ),
@@ -10812,12 +10813,12 @@ posteurope(){
 }
 postuk(){
   return FutureBuilder(
-    future: usersRef.document(ownerId).get(),
+    future: usersRef.doc(ownerId).get(),
     builder: (context, snapshot) {
       if (!snapshot.hasData) {
         return circularProgress();
       }
-      User user = User.fromDocument(snapshot.data);
+       Users user = Users.fromDocument(snapshot.data);
       bool isPostOwner = currentUserId == ownerId;
       return Container(
         margin: EdgeInsets.only(top:10.0,left: 10.0,right: 10.0, bottom: 10.0 ),
@@ -11221,12 +11222,12 @@ postuk(){
 }
 postusa() {
   return FutureBuilder(
-    future: usersRef.document(ownerId).get(),
+    future: usersRef.doc(ownerId).get(),
     builder: (context, snapshot) {
       if (!snapshot.hasData) {
         return circularProgress();
       }
-      User user = User.fromDocument(snapshot.data);
+       Users user = Users.fromDocument(snapshot.data);
       bool isPostOwner = currentUserId == ownerId;
       return Container(
         margin: EdgeInsets.only(top:10.0,left: 10.0,right: 10.0, bottom: 10.0 ),
@@ -11681,9 +11682,9 @@ postusa() {
   deletePost() async {
     // delete post itself
     productsRef
-        .document(ownerId)
+        .doc(ownerId)
         .collection('userProducts')
-        .document(prodId)
+        .doc(prodId)
         .get()
         .then((doc) {
       if (doc.exists) {
@@ -11694,27 +11695,27 @@ postusa() {
     storageRef.child("prod_$prodId.jpg").delete();
     // then delete all activity feed notifications
     QuerySnapshot activityFeedSnapshot = await activityFeedRef
-        .document(ownerId)
+        .doc(ownerId)
         .collection("feedItems")
         .where('prodId', isEqualTo: prodId)
-        .getDocuments();
-    activityFeedSnapshot.documents.forEach((doc) {
+        .get();
+    activityFeedSnapshot.docs.forEach((doc) {
       if (doc.exists) {
         doc.reference.delete();
       }
     });
     // then delete all comments
     QuerySnapshot commentsSnapshot = await productcommentsRef
-        .document(prodId)
+        .doc(prodId)
         .collection('comments')
-        .getDocuments();
-    commentsSnapshot.documents.forEach((doc) {
+        .get();
+    commentsSnapshot.docs.forEach((doc) {
       if (doc.exists) {
         doc.reference.delete();
       }
     });
 
-//      Firestore.instance.collectionGroup("userCart").document(prodId).delete();
+//      FirebaseFirestore.instance.collectionGroup("userCart").doc(prodId).delete();
 
   }
 
@@ -11723,14 +11724,14 @@ postusa() {
 
     if (_isLiked) {
 
-      var docReference = favRef.document(currentUser.id).collection("userFav").document(prodId);
+      var docReference = favRef.doc(currentUser.id).collection("userFav").doc(prodId);
       docReference.delete();
 
       productsRef
-          .document(ownerId)
+          .doc(ownerId)
           .collection('userProducts')
-          .document(prodId)
-          .updateData({'likes.${currentUser.id}': false});
+          .doc(prodId)
+          .update({'likes.${currentUser.id}': false});
       removeLikeFromActivityFeed();
        setState(() {
          likeCount -= 1;
@@ -11738,9 +11739,9 @@ postusa() {
          likes[currentUser.id] = false;
        });
     } else if (!_isLiked) {
-      favRef.document(currentUser.id).collection("userFav")
-          .document(prodId)
-          .setData({
+      favRef.doc(currentUser.id).collection("userFav")
+          .doc(prodId)
+          .set({
         "username": username,
         "prodId": prodId,
         "timestamp": timestamp,
@@ -11756,10 +11757,10 @@ postusa() {
         "shopmediaUrl": shopmediaUrl,
       });
       productsRef
-          .document(ownerId)
+          .doc(ownerId)
           .collection('userProducts')
-          .document(prodId)
-          .updateData({'likes.${currentUser.id}': true});
+          .doc(prodId)
+          .update({'likes.${currentUser.id}': true});
       addLikeToActivityFeed();
        setState(() {
          likeCount += 1;
@@ -11780,10 +11781,10 @@ postusa() {
     bool isNotPostOwner = currentUserId != ownerId;
     if (isNotPostOwner) {
       activityFeedRef
-          .document(ownerId)
+          .doc(ownerId)
           .collection("feedItems")
-          .document(prodId)
-          .setData({
+          .doc(prodId)
+          .set({
         "type": "fav",
         "username": currentUser.displayName,
         "userId": ownerId,
@@ -11799,9 +11800,9 @@ postusa() {
     bool isNotPostOwner = currentUserId != ownerId;
     if (isNotPostOwner) {
       activityFeedRef
-          .document(ownerId)
+          .doc(ownerId)
           .collection("feedItems")
-          .document(prodId)
+          .doc(prodId)
             .get()
           .then((doc) {
         if (doc.exists) {

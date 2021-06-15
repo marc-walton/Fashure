@@ -45,14 +45,14 @@ int index;
   factory Coll.fromDocument(DocumentSnapshot doc) {
 
     return Coll(
-      headerImage:doc['headerImage'],
-      collId: doc['collId'],
-      ownerId: doc['ownerId'],
-      username: doc['username'],
-      collmediaUrl: doc['collmediaUrl'],
-      title: doc['title'],
-      source:doc['source'],
-      likes: doc['claps'],
+      headerImage:doc.data()['headerImage'],
+      collId: doc.data()['collId'],
+      ownerId: doc.data()['ownerId'],
+      username: doc.data()['username'],
+      collmediaUrl: doc.data()['collmediaUrl'],
+      title: doc.data()['title'],
+      source:doc.data()['source'],
+      likes: doc.data()['claps'],
     );
   }
 
@@ -159,7 +159,7 @@ print(collmediaUrl);
   deletePost() async {
     // delete post itself
     collRef
-        .document(collId)
+        .doc(collId)
         .get()
         .then((doc) {
       if (doc.exists) {
@@ -171,21 +171,21 @@ print(collmediaUrl);
     storageRef.child("colle_$collId.jpg").delete();
     // then delete all activity feed notifications
     QuerySnapshot activityFeedSnapshot = await activityFeedRef
-        .document(ownerId)
+        .doc(ownerId)
         .collection("feedItems")
         .where('collId', isEqualTo: collId)
-        .getDocuments();
-    activityFeedSnapshot.documents.forEach((doc) {
+        .get();
+    activityFeedSnapshot.docs.forEach((doc) {
       if (doc.exists) {
         doc.reference.delete();
       }
     });
     // then delete all comments
     QuerySnapshot commentsSnapshot = await collcommentsRef
-        .document(collId)
+        .doc(collId)
         .collection('comments')
-        .getDocuments();
-    commentsSnapshot.documents.forEach((doc) {
+        .get();
+    commentsSnapshot.docs.forEach((doc) {
       if (doc.exists) {
         doc.reference.delete();
       }
@@ -198,8 +198,8 @@ print(collmediaUrl);
     if (_isLiked) {
       collRef
 
-          .document(collId)
-          .updateData({'claps.$currentUserId': false});
+          .doc(collId)
+          .update({'claps.$currentUserId': false});
      removeLikeFromActivityFeed();
       setState(() {
         likeCount -= 1;
@@ -209,8 +209,8 @@ print(collmediaUrl);
     } else if (!_isLiked) {
       collRef
 
-          .document(collId)
-          .updateData({'claps.$currentUserId': true});
+          .doc(collId)
+          .update({'claps.$currentUserId': true});
      addLikeToActivityFeed();
       setState(() {
         likeCount += 1;
@@ -231,10 +231,10 @@ print(collmediaUrl);
     bool isNotPostOwner = currentUserId != ownerId;
     if (isNotPostOwner) {
       activityFeedRef
-          .document(ownerId)
+          .doc(ownerId)
           .collection("feedItems")
-          .document(collId)
-          .setData({
+          .doc(collId)
+          .set({
         "type": "CollectionLikes",
         "username": currentUser.displayName,
         "userId": ownerId,
@@ -251,9 +251,9 @@ print(collmediaUrl);
     bool isNotPostOwner = currentUserId != ownerId;
     if (isNotPostOwner) {
       activityFeedRef
-          .document(ownerId)
+          .doc(ownerId)
           .collection("feedItems")
-          .document(collId)
+          .doc(collId)
           .get()
           .then((doc) {
         if (doc.exists) {
@@ -265,11 +265,11 @@ print(collmediaUrl);
   report(){
     Fluttertoast.showToast(
         msg: "Your report has been submitted", timeInSecForIos: 4);
-    Firestore.instance.collection('reports')
-        .document(ownerId)
+    FirebaseFirestore.instance.collection('reports')
+        .doc(ownerId)
         .collection("userReports")
-        .document(collId)
-        .setData({
+        .doc(collId)
+        .set({
       "type": "shop",
       "userId": ownerId,
       "postId": collId,
@@ -290,17 +290,17 @@ return
               return new ListView.builder(
                 shrinkWrap: true,
                   scrollDirection:Axis.vertical,
-                  itemCount: snapshot.data.documents.length,
+                  itemCount: snapshot.data.docs.length,
                   itemBuilder: (BuildContext context, int index) {
-                // List<String> images = List.from(snapshot.data.documents[index].data['collmediaUrl']);
+                // List<String> images = List.from(snapshot.data.docs[index].data()['collmediaUrl']);
                     listOfImages = [];
                     for (int i = 0;
                     i <
-                        snapshot.data.documents[index].data['collmediaUrl']
+                        snapshot.data.docs[index].data()['collmediaUrl']
                             .length;
                     i++) {
                       listOfImages.add(CachedNetworkImage(imageUrl:snapshot
-                          .data.documents[index].data['collmediaUrl'][i]));
+                          .data.docs[index].data()['collmediaUrl'][i]));
                     }
                     return Column(
                       children: <Widget>[
@@ -351,13 +351,13 @@ buildPostHeader() {
 
     return
       FutureBuilder(
-        future: usersRef.document(ownerId).get(),
+        future: usersRef.doc(ownerId).get(),
         builder: (context, snapshot) {
           // int count = snapshot.data.lenght;
           if (!snapshot.hasData) {
             return circularProgress();
           }
-          User user = User.fromDocument(snapshot.data);
+           Users user = Users.fromDocument(snapshot.data);
          bool isPostOwner = currentUserId == ownerId;
           return  ListView(
             shrinkWrap: true,

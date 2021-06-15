@@ -23,31 +23,32 @@ class _SellerOrdersState extends State<SellerOrders> {
 
   UpcomingOrders(){
     return  PaginateFirestore(
+isLive: true,
 //    itemsPerPage: 2,
         itemBuilderType:
         PaginateBuilderType.listView,
         itemBuilder: (index, context, documentSnapshot)   {
-//        DocumentSnapshot ds = snapshot.data.documents[index];
-          String ownerId = documentSnapshot.data['ownerId'];
-          String prodId = documentSnapshot.data['prodId'];
-          String fulfilled = documentSnapshot.data['fulfilled'];
-          String courierId = documentSnapshot.data['courierId'];
-           String orderStatus = documentSnapshot.data['orderStatus'];
-            String size = documentSnapshot.data['size'];
-           String Address = documentSnapshot.data['Address'];
-String orderId = documentSnapshot.data['orderId'];
-String shopmediaUrl = documentSnapshot.data['shopmediaUrl'];
-String cusId = documentSnapshot.data['cusId'];
-String productname = documentSnapshot.data['productname'];
+//        DocumentSnapshot ds = snapshot.data.docs[index];
+          String ownerId = documentSnapshot.data()['ownerId'];
+          String prodId = documentSnapshot.data()['prodId'];
+          String fulfilled = documentSnapshot.data()['fulfilled'];
+          String courierId = documentSnapshot.data()['courierId'];
+           String orderStatus = documentSnapshot.data()['orderStatus'];
+            String size = documentSnapshot.data()['size'];
+           String Address = documentSnapshot.data()['Address'];
+String orderId = documentSnapshot.data()['orderId'];
+String shopmediaUrl = documentSnapshot.data()['shopmediaUrl'];
+String cusId = documentSnapshot.data()['cusId'];
+String productname = documentSnapshot.data()['productname'];
 
           return
             StreamBuilder(
-              stream: usersRef.document(ownerId).snapshots(),
+              stream: usersRef.doc(ownerId).snapshots(),
               builder: (context, snapshot) {
                 if (!snapshot.hasData) {
                   return circularProgress();
                 }
-                User user = User.fromDocument(snapshot.data);
+                Users user = Users.fromDocument(snapshot.data);
 //          bool isPostOwner = currentUserId == ownerId;
                 return Padding(
                   padding: const EdgeInsets.all(8.0),
@@ -70,7 +71,7 @@ String productname = documentSnapshot.data['productname'];
                           ),
                          ),
                       ),
-FutureBuilder(  future: productsRef.document(ownerId).collection('userProducts').document(prodId).get(),
+FutureBuilder(  future: productsRef.doc(ownerId).collection('userProducts').doc(prodId).get(),
     builder: (context, snapshot){
       DocumentSnapshot ds = snapshot.data;
       String usd= ds['usd'];
@@ -147,8 +148,8 @@ else {return Center(child: CircularProgressIndicator(),);}
               },
             );
         },
-        query:  Firestore.instance.collection('ordersSeller')
-      .document(currentUser.id)
+        query:  FirebaseFirestore.instance.collection('ordersSeller')
+      .doc(currentUser.id)
       .collection('sellerOrder').orderBy('timestamp',descending: true)
             .where('fulfilled',isEqualTo: 'false')
 
@@ -156,32 +157,33 @@ else {return Center(child: CircularProgressIndicator(),);}
   }
   OrdersFulfilled(){
     return  PaginateFirestore(
+isLive: true,
 //    itemsPerPage: 2,
         itemBuilderType:
         PaginateBuilderType.listView,
         itemBuilder: (index, context, documentSnapshot)   {
-//        DocumentSnapshot ds = snapshot.data.documents[index];
-          String ownerId = documentSnapshot.data['ownerId'];
-          String prodId = documentSnapshot.data['prodId'];
-          String fulfilled = documentSnapshot.data['fulfilled'];
-          String courierId = documentSnapshot.data['courierId'];
-            String courier = documentSnapshot.data['courier'];
+//        DocumentSnapshot ds = snapshot.data.docs[index];
+          String ownerId = documentSnapshot.data()['ownerId'];
+          String prodId = documentSnapshot.data()['prodId'];
+          String fulfilled = documentSnapshot.data()['fulfilled'];
+          String courierId = documentSnapshot.data()['courierId'];
+            String courier = documentSnapshot.data()['courier'];
 
-          String orderStatus = documentSnapshot.data['orderStatus'];
-          String size = documentSnapshot.data['size'];
-          String Address = documentSnapshot.data['Address'];
-          String orderId = documentSnapshot.data['orderId'];
-          String shopmediaUrl = documentSnapshot.data['shopmediaUrl'];
-          String cusId = documentSnapshot.data['cusId'];
-          String productname = documentSnapshot.data['productname'];
+          String orderStatus = documentSnapshot.data()['orderStatus'];
+          String size = documentSnapshot.data()['size'];
+          String Address = documentSnapshot.data()['Address'];
+          String orderId = documentSnapshot.data()['orderId'];
+          String shopmediaUrl = documentSnapshot.data()['shopmediaUrl'];
+          String cusId = documentSnapshot.data()['cusId'];
+          String productname = documentSnapshot.data()['productname'];
           return
             StreamBuilder(
-              stream: usersRef.document(ownerId).snapshots(),
+              stream: usersRef.doc(ownerId).snapshots(),
               builder: (context, snapshot) {
                 if (!snapshot.hasData) {
                   return circularProgress();
                 }
-                User user = User.fromDocument(snapshot.data);
+                Users user = Users.fromDocument(snapshot.data);
                 return Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Column(
@@ -204,7 +206,7 @@ else {return Center(child: CircularProgressIndicator(),);}
                           ),
                          ),
                       ),
-                      StreamBuilder(  stream: productsRef.document(ownerId).collection('userProducts').document(prodId).snapshots(),
+                      StreamBuilder(  stream: productsRef.doc(ownerId).collection('userProducts').doc(prodId).snapshots(),
                           builder: (context, snapshot){
                             DocumentSnapshot ds = snapshot.data;
 
@@ -296,8 +298,8 @@ else {return Center(child: CircularProgressIndicator(),);}
               },
             );
         },
-        query:  Firestore.instance.collection('ordersSeller')
-            .document(currentUser.id)
+        query:  FirebaseFirestore.instance.collection('ordersSeller')
+            .doc(currentUser.id)
             .collection('sellerOrder').orderBy('timestamp',descending: true)
             .where('fulfilled',isEqualTo: 'true')
 
@@ -383,11 +385,11 @@ else {return Center(child: CircularProgressIndicator(),);}
   }
   update() async {
 
-    QuerySnapshot snapshot = await Firestore.instance.collection('ordersSeller')
-        .document(currentUser.id)
-        .collection('sellerOrder').getDocuments();
-    snapshot.documents.forEach((doc) {
-    doc.reference.updateData({'read':'true'});
+    QuerySnapshot snapshot = await FirebaseFirestore.instance.collection('ordersSeller')
+        .doc(currentUser.id)
+        .collection('sellerOrder').get();
+    snapshot.docs.forEach((doc) {
+    doc.reference.update({'read':'true'});
   });
         }
 

@@ -7,6 +7,7 @@ import 'package:fashow/Constants.dart';
 import 'package:fashow/methods/register.dart';
 import 'package:get/get.dart';
 
+import 'package:fashow/HomePage.dart';
 class LoginPage extends StatefulWidget {
   LoginPage({Key key}) : super(key: key);
 
@@ -46,56 +47,61 @@ class _LoginPageState extends State<LoginPage> {
   }
   Future<void> resetPassword({String email,parentContext}) async {
     return
-    showModalBottomSheet(
-        context: parentContext,
-        builder: (BuildContext context) {
-          return
-            Padding(
-              padding: const EdgeInsets.all(10.0),
-              child: Container(
+      showModalBottomSheet(
+          context: parentContext,
+          builder: (BuildContext context) {
+            return
+              Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: Container(
 
-                child:        Form(
-                  key: _loginFormKey,
-                  child: Column(
-                    children: <Widget>[
-                      TextFormField(
-                        style: TextStyle(color:kText),
-                        decoration: InputDecoration(
-                            labelStyle:  TextStyle(color:kText),
-                            hintStyle:  TextStyle(color:kText),
-                            labelText: 'Email*,', hintText: "john.doe@gmail.com"),
-                        controller: emailInputController,
-                        keyboardType: TextInputType.emailAddress,
-                        validator: emailValidator,
+                    child:        Form(
+                      key: _loginFormKey,
+                      child: Column(
+                        children: <Widget>[
+                          TextFormField(
+                            style: TextStyle(color:kText),
+                            decoration: InputDecoration(
+                                labelStyle:  TextStyle(color:kText),
+                                hintStyle:  TextStyle(color:kText),
+                                labelText: 'Email*,', hintText: "john.doe@gmail.com"),
+                            controller: emailInputController,
+                            keyboardType: TextInputType.emailAddress,
+                            validator: emailValidator,
+                          ),
+                          RaisedButton(
+
+                            child:
+                            Text('Send mail',style: TextStyle(color: kblue,
+                            ),),
+
+                            onPressed: () async {
+                              if (_loginFormKey.currentState.validate()) {
+                                await  FirebaseAuth.instance.sendPasswordResetEmail(email: emailInputController.text);
+
+                              }
+                              Get.back();
+                              alert(
+                                parentContext,
+                                content:
+                                Text('Password reset has been sent to your Email',
+                                  style: TextStyle(color: kblue,
+                                  ),),
+
+                                textOK: Text('Ok'),
+                              );
+                            },
+                          ),
+
+                        ],
                       ),
-                      RaisedButton(
+                    )
 
-                        child: Text("Send mail"),
-                        color: kblue,
-                        textColor: Colors.white,
-                        onPressed: () async {
-                          if (_loginFormKey.currentState.validate()) {
-                            await  FirebaseAuth.instance.sendPasswordResetEmail(email: emailInputController.text);
+                ),
+              );
 
-                          }
-                          Get.back();
-                          alert(
-                            parentContext,
-                            content: Text('Password reset has been sent to your Email'),
-                            textOK: Text('Ok'),
-                          );
-                        },
-                      ),
-
-                    ],
-                  ),
-                )
-
-              ),
-            );
-
-        }
-    );
+          }
+      );
   }
   @override
   Widget build(BuildContext context) {
@@ -121,7 +127,7 @@ class _LoginPageState extends State<LoginPage> {
                         decoration: InputDecoration(
                             labelStyle:  TextStyle(color:kText),
                             hintStyle:  TextStyle(color:kText),
-                            labelText: 'Email*,', hintText: "john.doe@gmail.com"),
+                            labelText: 'Email,', hintText: "john.doe@gmail.com"),
                         controller: emailInputController,
                         keyboardType: TextInputType.emailAddress,
                         validator: emailValidator,
@@ -129,9 +135,9 @@ class _LoginPageState extends State<LoginPage> {
                       TextFormField(
                         style: TextStyle(color:kText),
                         decoration: InputDecoration(
-                          labelStyle:  TextStyle(color:kText),
+                            labelStyle:  TextStyle(color:kText),
                             hintStyle:  TextStyle(color:kText),
-                            labelText: 'Password*', hintText: "********"),
+                            labelText: 'Password', hintText: "********"),
                         controller: pwdInputController,
                         obscureText: true,
                         validator: pwdValidator,
@@ -155,19 +161,48 @@ class _LoginPageState extends State<LoginPage> {
                                 .signInWithEmailAndPassword(
                                 email: emailInputController.text,
                                 password: pwdInputController.text)
-                                .then((User) => Firestore.instance
+                                .then((User) => FirebaseFirestore.instance
                                 .collection("users")
-                                .document(User.user.uid)
+                                .doc(User.user.uid)
                                 .get()
                                 .then((DocumentSnapshot result) =>
+                            { if (User == null)
+                              {
 
+                                // Navigator.pushReplacementNamed(context, "/login")
+                              }
+                            else
+                              {
                                 Navigator.pushAndRemoveUntil(
                                     context,
                                     MaterialPageRoute(
                                         builder: (context) => Homepage(
-
+                                          userid:User.user.uid,
+                                          authis: true,
                                         )),
                                         (_) => false ),
+                                // Navigator.pushReplacement(
+                                //     context,
+                                //     MaterialPageRoute(
+                                //         builder: (context) => Homepage(
+                                //           userid: User.uid,
+                                //           authis: isAuth,
+                                //         )))
+                                // Firestore.instance
+                                //     .collection("users")
+                                //     .document(currentUser.uid)
+                                //     .get()
+                                //     .then((DocumentSnapshot result) =>
+                                //     Navigator.pushReplacement(
+                                //         context,
+                                //         MaterialPageRoute(
+                                //             builder: (context) => HomePage(
+                                //               title: result["fname"] + "'s Tasks",
+                                //               uid: currentUser.uid,
+                                //             ))))
+                                //     .catchError((err) => print(err))
+                              }}
+
                             )
                                 .catchError((err) => print(err)))
                                 .catchError((err) => print(err));
@@ -179,9 +214,9 @@ class _LoginPageState extends State<LoginPage> {
                         child: Text("Register here!",  style: TextStyle(color:kText),),
                         onPressed: () {
                           Navigator.pushReplacement(
-                          context,
-                          MaterialPageRoute(
-                          builder: (context) => RegisterPage()))    ;                    },
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => RegisterPage()))    ;                    },
                       )
                     ],
                   ),

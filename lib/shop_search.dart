@@ -4759,7 +4759,7 @@ else{return null;}
             ),
           ),
 
-          resizeToAvoidBottomPadding: true,
+          // resizeToAvoidBottomPadding: true,
           body:
             Container(
               padding: const EdgeInsets.all(20.0),
@@ -4845,7 +4845,7 @@ class _SearchDesignerState extends State<SearchDesigner> {
 
     if(_searchController.text != "") {
       for(var tripSnapshot in _allResults){
-        var title = User.fromDocument(tripSnapshot).displayName.toLowerCase();
+        var title = Users.fromDocument(tripSnapshot).displayName.toLowerCase();
 
         if(title.contains(_searchController.text.toLowerCase())) {
           showResults.add(tripSnapshot);
@@ -4861,15 +4861,15 @@ class _SearchDesignerState extends State<SearchDesigner> {
   }
 
   getUsersPastTripsStreamSnapshots() async {
-    var data = await Firestore.instance
+    var data = await FirebaseFirestore.instance
         .collection('users')
-    // .document(uid)
+    // .doc(uid)
     // .collection('trips')
     .where("designer", isEqualTo: true)
     // .orderBy('endDate')
-        .getDocuments();
+        .get();
     setState(() {
-      _allResults = data.documents;
+      _allResults = data.docs;
     });
     searchResultsList();
     return "complete";
@@ -4986,14 +4986,14 @@ class _SearchProductState extends State<SearchProduct> {
   }
 
   getUsersPastTripsStreamSnapshots() async {
-    var data = await Firestore.instance
+    var data = await FirebaseFirestore.instance
         .collectionGroup('userProducts')
-    // .document(uid)
+    // .doc(uid)
     // .collection('trips')
     // .orderBy('endDate')
-        .getDocuments();
+        .get();
     setState(() {
-      _allResults = data.documents;
+      _allResults = data.docs;
     });
     searchResultsList();
     return "complete";

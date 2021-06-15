@@ -46,7 +46,7 @@ class ContactView extends StatelessWidget {
 class ViewLayout extends StatelessWidget {
 //  UserModel user;
   final CollectionReference _messageCollection =
-  Firestore.instance.collection(MESSAGES_COLLECTION);
+  FirebaseFirestore.instance.collection(MESSAGES_COLLECTION);
 
   final UserModel contact;
   final ChatMethods _chatMethods = ChatMethods();
@@ -101,10 +101,10 @@ String count;
   badgescount()  {
     StreamBuilder(
       stream: _messageCollection
-          .document(currentUser.id)
+          .doc(currentUser.id)
           .collection(contact.id).where('read',isEqualTo: 'false').snapshots(),
       builder: (context,snapshot){
-     int data =  snapshot.data.documents.length;
+     int data =  snapshot.data.docs.length;
      return
             Badge(
          shape: BadgeShape.circle,

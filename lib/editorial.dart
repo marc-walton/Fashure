@@ -3,7 +3,7 @@
 //import 'package:flutter/material.dart';
 //import 'package:html_editor/html_editor.dart';
 //class edit extends StatefulWidget {
-//  final User currentUser;
+//  final Users currentUser;
 //
 //  const edit({Key key, this.currentUser}) : super(key: key);
 //
@@ -17,7 +17,7 @@
 //  String result = "";
 //  String e;
 //upload(){
-//  Firestore.instance.collection("bl").document(e).setData({"cone": result});
+//  FirebaseFirestore.instance.collection("bl").doc(e).set({"cone": result});
 //}
 //  @override
 //  Widget build(BuildContext context) {

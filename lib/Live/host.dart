@@ -32,7 +32,7 @@ class CallPage extends StatefulWidget {
 class _CallPageState extends State<CallPage>{
   static final _users = <int>[];
   String channelName;
-  List<User> userList = [];
+  List<Users> userList = [];
 
   bool _isLogin = true;
   bool _isInChannel = true;
@@ -109,10 +109,10 @@ class _CallPageState extends State<CallPage>{
         int elapsed,
         ) async{
 
-      final documentId = widget.channelName;
-      channelName= documentId;
-      FireStoreClass.createLiveUser(name: documentId,id: uid,time: widget.time,image:widget.image);
-      // The above line create a document in the firestore with username as documentID
+      final id = widget.channelName;
+      channelName= id;
+      FireStoreClass.createLiveUser(name: id,id: uid,time: widget.time,image:widget.image);
+      // The above line create a document in the firestore with username as id
 
       await Wakelock.enable();
       // This is used for Keeping the device awake. Its now enabled
@@ -639,13 +639,13 @@ class _CallPageState extends State<CallPage>{
 
   List<Widget> getUserStories() {
     List<Widget> stories = [];
-    for (User users in userList) {
+    for (Users users in userList) {
       stories.add(getStory(users));
     }
     return stories;
   }
 
-  Widget getStory(User users) {
+  Widget getStory(Users users) {
     return Container(
       margin: EdgeInsets.symmetric(vertical: 7.5),
       child: Column(
@@ -950,7 +950,7 @@ class _CallPageState extends State<CallPage>{
       var img = await FireStoreClass.getImage(username: member.userId);
       var nm = await FireStoreClass.getdisName(username: member.userId);
       setState(() {
-        userList.add(new User(username: member.userId, displayName: nm, photoUrl: img));
+        userList.add(new Users(username: member.userId, displayName: nm, photoUrl: img));
         if(userList.length>0)
           anyPerson =true;
       });

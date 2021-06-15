@@ -6,7 +6,7 @@ import 'package:fashow/Constants.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class SellerBank extends StatefulWidget {
-  final User currentUser;
+  final Users currentUser;
 
   const SellerBank({Key key, this.currentUser}) : super(key: key);
   @override
@@ -234,8 +234,8 @@ AddBank(){
 }
 SaveBank(){
   bankRef
-      .document(widget.currentUser.id)
-      .updateData({
+      .doc(widget.currentUser.id)
+      .update({
     "userId": widget.currentUser.id,
     "username": widget.currentUser.displayName,
     "photoUrl": widget.currentUser.photoUrl,
@@ -254,11 +254,11 @@ Bankdetails(){
  return
         StreamBuilder(
           stream:bankRef
-              .document(currentUser.id).snapshots(),
+              .doc(currentUser.id).snapshots(),
           builder: (context,snapshot){
-  String accno =  snapshot.data['accno']  ?? "";
+  String accno =  snapshot.data()['accno']  ?? "";
   String ifsc = snapshot.data['ifsc'] ?? "";
-  // if(snapshot.data['accno'] == null || snapshot.data['ifsc'] == null){
+  // if(snapshot.data()['accno'] == null || snapshot.data()['ifsc'] == null){
   // return Container();
   // }
 

@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fashow/Constants.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:fashow/user.dart';
@@ -16,9 +17,7 @@ import 'dart:ui';
 import 'package:uuid/uuid.dart';
 
 //import 'package:flutter_svg/svg.dart';
-import 'package:fashow/user.dart';
 import 'package:path_provider/path_provider.dart';
-import 'package:firebase_storage/firebase_storage.dart';
 
 import 'package:image/image.dart' as Im;
 
@@ -38,7 +37,7 @@ class _EditProfileState extends State<EditProfile> {
   TextEditingController displayNameController = TextEditingController();
   TextEditingController bioController = TextEditingController();
   bool isLoading = false;
-  User user;
+  Users user;
   bool _displayNameValid = true;
   bool _bioValid = true;
   bool isCheckedDesigner = false;
@@ -57,8 +56,7 @@ class _EditProfileState extends State<EditProfile> {
   bool CheckedMakeup ;
   bool CheckedHair ;
   bool CheckedChoreographer ;
-  bool CheckedStylist ;
-    bool CheckedBlogger ;
+  bool CheckedStylist ;bool CheckedBlogger ;
 
   File file;
   bool isUploading = false;
@@ -136,94 +134,95 @@ class _EditProfileState extends State<EditProfile> {
         builder: (context) {
           return SimpleDialog(
 //            shape: ,
-            title: Text("Select Image"),
+            title: Text('Select Image'),
+
             children: <Widget>[
               SimpleDialogOption(
-                child: Text("Image from Gallery"),
+                child: Text('Image from Gallery'),
                 onPressed:  () {
                   getImage(ImageSource.gallery);
                   Navigator.pop(context);
                 },
               ),
               SimpleDialogOption(
-                child: Text("Cancel"),
+                child: Text('Cancel'),
                 onPressed: () => Navigator.pop(context),
               )
             ],
           );
         });
   }
-checkbox()
-async {
-  Firestore.instance.collection('users')
-      .where('id', isEqualTo: currentUser.id)
+  checkbox()
+  async {
+    FirebaseFirestore.instance.collection('users')
+        .where('id', isEqualTo: currentUser.id)
 
-      .snapshots()
-      .listen((snapshot){  snapshot.documents.forEach((doc) {
-    setState(() {
+        .snapshots()
+        .listen((snapshot){  snapshot.docs.forEach((doc) {
+      setState(() {
 
-      CheckedIllustrator = doc.data['illustrator'] ?? false;
-      CheckedModel = doc.data['model'] ?? false;
-      CheckedMakeup = doc.data['makeup'] ?? false;
-      CheckedHair = doc.data['hair'] ?? false;
-      CheckedChoreographer = doc.data['choreographer'] ?? false;
-      CheckedPhotographer = doc.data['photographer'] ?? false;
-      CheckedStylist = doc.data['stylist'] ?? false;
-      CheckedDesigner = doc.data['designer'] ?? false;
- CheckedBlogger = doc.data['blogger'] ?? false;
+        CheckedIllustrator = doc.data()['illustrator'] ?? false;
+        CheckedModel = doc.data()['model'] ?? false;
+        CheckedMakeup = doc.data()['makeup'] ?? false;
+        CheckedHair = doc.data()['hair'] ?? false;
+        CheckedChoreographer = doc.data()['choreographer'] ?? false;
+        CheckedPhotographer = doc.data()['photographer'] ?? false;
+        CheckedStylist = doc.data()['stylist'] ?? false;
+        CheckedDesigner = doc.data()['designer'] ?? false;
+        CheckedBlogger = doc.data()['blogger'] ?? false;
 
-      if(CheckedDesigner==true){
-    setState(() {
-      isCheckedDesigner = true;
-    });
-  }
-  else if(CheckedIllustrator==true){
-    setState(() {
-      isCheckedIllustrator = true;
-    });
-  }
-  else if(CheckedPhotographer==true){
-    setState(() {
-      isCheckedPhotographer = true;
-    });
-  }
-   else if(CheckedModel==true){
-    setState(() {
-      isCheckedModel = true;
-    });
-  }
-  else if(CheckedMakeup==true){
-    setState(() {
-      isCheckedMakeup = true;
-    });
-  }
-   else if(CheckedHair==true){
-    setState(() {
-      isCheckedHair = true;
-    });
-  }
-   else if(CheckedChoreographer==true){
-    setState(() {
-      isCheckedChoreographer = true;
-    });
-  }
-  else if(CheckedStylist==true){
-    setState(() {
-      isCheckedStylist = true;
-    });
-  }
-   else if(CheckedBlogger==true){
-    setState(() {
-      isCheckedBlogger = true;
-    });
-  }
+        if(CheckedDesigner==true){
+          setState(() {
+            isCheckedDesigner = true;
+          });
+        }
+        else if(CheckedIllustrator==true){
+          setState(() {
+            isCheckedIllustrator = true;
+          });
+        }
+        else if(CheckedPhotographer==true){
+          setState(() {
+            isCheckedPhotographer = true;
+          });
+        }
+        else if(CheckedModel==true){
+          setState(() {
+            isCheckedModel = true;
+          });
+        }
+        else if(CheckedMakeup==true){
+          setState(() {
+            isCheckedMakeup = true;
+          });
+        }
+        else if(CheckedHair==true){
+          setState(() {
+            isCheckedHair = true;
+          });
+        }
+        else if(CheckedChoreographer==true){
+          setState(() {
+            isCheckedChoreographer = true;
+          });
+        }
+        else if(CheckedStylist==true){
+          setState(() {
+            isCheckedStylist = true;
+          });
+        }
+        else if(CheckedBlogger==true){
+          setState(() {
+            isCheckedBlogger = true;
+          });
+        }
 
-    });
-  }); });
+      });
+    }); });
 
 
 
-}
+  }
 
 
 
@@ -245,17 +244,17 @@ async {
   }
 
   Future<String> uploadImage(imageFile) async {
-    StorageUploadTask uploadTask =
+    UploadTask  uploadTask =
     storageRef.child("profile_$photoId.jpg").putFile(imageFile);
-    StorageTaskSnapshot storageSnap = await uploadTask.onComplete;
+    TaskSnapshot storageSnap = await uploadTask;
     String downloadUrl = await storageSnap.ref.getDownloadURL();
     return downloadUrl;
   }
 
   createPostInFirestore({String mediaUrl, }) {
     usersRef
-        .document(currentUser.id)
-        .updateData({
+        .doc(currentUser.id)
+        .update({
       "photoUrl": mediaUrl,
 
     });
@@ -279,8 +278,8 @@ async {
         isCheckedDesigner = true;
 
       });
-      usersRef.document(widget.currentUserId).updateData({
-   'designer':true
+      usersRef.doc(widget.currentUserId).update({
+        'designer':true
       });
 
     }
@@ -291,7 +290,7 @@ async {
         isCheckedDesigner = false;
 
       });
-      usersRef.document(widget.currentUserId).updateData({
+      usersRef.doc(widget.currentUserId).update({
         'designer':false
       });
     }
@@ -305,8 +304,8 @@ async {
         isCheckedIllustrator = true;
 
       });
-      usersRef.document(widget.currentUserId).updateData({
-   'illustrator':true
+      usersRef.doc(widget.currentUserId).update({
+        'illustrator':true
       });
 
     }
@@ -317,7 +316,7 @@ async {
         isCheckedIllustrator = false;
 
       });
-      usersRef.document(widget.currentUserId).updateData({
+      usersRef.doc(widget.currentUserId).update({
         'illustrator':false
       });
     }
@@ -331,8 +330,8 @@ async {
         isCheckedPhotographer = true;
 
       });
-      usersRef.document(widget.currentUserId).updateData({
-   'photographer':true
+      usersRef.doc(widget.currentUserId).update({
+        'photographer':true
       });
 
     }
@@ -343,7 +342,7 @@ async {
         isCheckedPhotographer = false;
 
       });
-      usersRef.document(widget.currentUserId).updateData({
+      usersRef.doc(widget.currentUserId).update({
         'photographer':false
       });
     }
@@ -357,8 +356,8 @@ async {
         isCheckedModel = true;
 
       });
-      usersRef.document(widget.currentUserId).updateData({
-   'model':true
+      usersRef.doc(widget.currentUserId).update({
+        'model':true
 
       });
 
@@ -370,7 +369,7 @@ async {
         isCheckedModel = false;
 
       });
-      usersRef.document(widget.currentUserId).updateData({
+      usersRef.doc(widget.currentUserId).update({
         'model':false
       });
     }
@@ -384,8 +383,8 @@ async {
         isCheckedMakeup = true;
 
       });
-      usersRef.document(widget.currentUserId).updateData({
-   'makeup':true
+      usersRef.doc(widget.currentUserId).update({
+        'makeup':true
       });
 
     }
@@ -396,12 +395,12 @@ async {
         isCheckedMakeup = false;
 
       });
-      usersRef.document(widget.currentUserId).updateData({
+      usersRef.doc(widget.currentUserId).update({
         'makeup':false
       });
     }
   }
-void toggleHair(bool value) {
+  void toggleHair(bool value) {
 
     if(isCheckedHair == false)
     {
@@ -410,8 +409,8 @@ void toggleHair(bool value) {
         isCheckedHair = true;
 
       });
-      usersRef.document(widget.currentUserId).updateData({
-   'hair':true
+      usersRef.doc(widget.currentUserId).update({
+        'hair':true
       });
 
     }
@@ -422,12 +421,12 @@ void toggleHair(bool value) {
         isCheckedHair = false;
 
       });
-      usersRef.document(widget.currentUserId).updateData({
+      usersRef.doc(widget.currentUserId).update({
         'hair':false
       });
     }
   }
-void toggleChoreographer(bool value) {
+  void toggleChoreographer(bool value) {
 
     if(isCheckedChoreographer == false)
     {
@@ -436,8 +435,8 @@ void toggleChoreographer(bool value) {
         isCheckedChoreographer = true;
 
       });
-      usersRef.document(widget.currentUserId).updateData({
-   'choreographer':true
+      usersRef.doc(widget.currentUserId).update({
+        'choreographer':true
       });
 
     }
@@ -448,12 +447,12 @@ void toggleChoreographer(bool value) {
         isCheckedChoreographer = false;
 
       });
-      usersRef.document(widget.currentUserId).updateData({
+      usersRef.doc(widget.currentUserId).update({
         'choreographer':false
       });
     }
   }
-void toggleStylist(bool value) {
+  void toggleStylist(bool value) {
 
     if(isCheckedStylist == false)
     {
@@ -462,8 +461,8 @@ void toggleStylist(bool value) {
         isCheckedStylist = true;
 
       });
-      usersRef.document(widget.currentUserId).updateData({
-   'stylist':true
+      usersRef.doc(widget.currentUserId).update({
+        'stylist':true
       });
 
     }
@@ -474,12 +473,12 @@ void toggleStylist(bool value) {
         isCheckedStylist = false;
 
       });
-      usersRef.document(widget.currentUserId).updateData({
+      usersRef.doc(widget.currentUserId).update({
         'stylist':false
       });
     }
   }
-void toggleBlogger(bool value) {
+  void toggleBlogger(bool value) {
 
     if(isCheckedBlogger == false)
     {
@@ -488,8 +487,8 @@ void toggleBlogger(bool value) {
         isCheckedBlogger = true;
 
       });
-      usersRef.document(widget.currentUserId).updateData({
-   'blogger':true
+      usersRef.doc(widget.currentUserId).update({
+        'blogger':true
       });
 
     }
@@ -500,7 +499,7 @@ void toggleBlogger(bool value) {
         isCheckedBlogger = false;
 
       });
-      usersRef.document(widget.currentUserId).updateData({
+      usersRef.doc(widget.currentUserId).update({
         'blogger':false
       });
     }
@@ -510,8 +509,8 @@ void toggleBlogger(bool value) {
     setState(() {
       isLoading = true;
     });
-    DocumentSnapshot doc = await usersRef.document(widget.currentUserId).get();
-    user = User.fromDocument(doc);
+    DocumentSnapshot doc = await usersRef.doc(widget.currentUserId).get();
+    user = Users.fromDocument(doc);
     displayNameController.text = user.displayName;
     bioController.text = user.bio;
     setState(() {
@@ -522,7 +521,7 @@ void toggleBlogger(bool value) {
   Container buildDisplayNameField() {
     return Container(
       decoration: BoxDecoration( borderRadius: BorderRadius.circular(15.0),
-    ) ,
+      ) ,
 
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -538,9 +537,9 @@ void toggleBlogger(bool value) {
             style: TextStyle(color: kSubtitle),
             controller: displayNameController,
             decoration: InputDecoration(
-              hintText: "Update Display Name",
-              hintStyle: TextStyle(color: kGrey),
-              errorText: _displayNameValid ? null : "Display Name too short",
+                hintText: "Update Display Name",
+                hintStyle: TextStyle(color: kGrey),
+                errorText: _displayNameValid ? null : "Display Name too short",
                 fillColor: transwhite,
                 border:OutlineInputBorder(borderRadius: BorderRadius.circular(25.0),)            ),
           )
@@ -551,7 +550,7 @@ void toggleBlogger(bool value) {
 
   Container buildBioField() {
     return Container( decoration: BoxDecoration( borderRadius: BorderRadius.circular(15.0),
-         ) ,
+    ) ,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
@@ -565,9 +564,9 @@ void toggleBlogger(bool value) {
           TextField(style: TextStyle(color: kSubtitle),
             controller: bioController,
             decoration: InputDecoration(
-              hintText: "Bio",
-              hintStyle: TextStyle(color: kGrey),
-              errorText: _bioValid ? null : "Bio too long",
+                hintText: "Bio",
+                hintStyle: TextStyle(color: kGrey),
+                errorText: _bioValid ? null : "Bio too long",
                 fillColor: transwhite,
                 border:OutlineInputBorder(borderRadius: BorderRadius.circular(25.0),)            ),
           )
@@ -588,7 +587,7 @@ void toggleBlogger(bool value) {
     });
 
     if (_displayNameValid && _bioValid) {
-      usersRef.document(widget.currentUserId).updateData({
+      usersRef.doc(widget.currentUserId).update({
         "displayName": displayNameController.text,
         "bio": bioController.text,
       });
@@ -598,14 +597,14 @@ void toggleBlogger(bool value) {
   }
 
   logout() async {
-    await googleSignIn.signOut();
-    // await FirebaseAuth.instance.signOut();
-  // Get.offAll(Homepage());
+    // await googleSignIn.signOut();
+    await FirebaseAuth.instance.signOut();
+    // Get.offAll(Homepage());
     Navigator.pushAndRemoveUntil(
         context,
         MaterialPageRoute(
             builder: (context) => Homepage(
-
+              authis: false,
             )),
             (_) => false );
     // Navigator.push(context, MaterialPageRoute(builder: (context) => Homepage()));
@@ -614,200 +613,200 @@ void toggleBlogger(bool value) {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      key: _scaffoldKey,
-      appBar: AppBar(
-        backgroundColor: kPrimaryColor,
+        key: _scaffoldKey,
+        appBar: AppBar(
+          backgroundColor: kPrimaryColor,
 
 
-        title: Center(
-          child:   FittedBox(
-            fit:BoxFit.contain,
-            child: Text(   'Edit Profile',
-              style: TextStyle(
+          title: Center(
+            child:   FittedBox(
+              fit:BoxFit.contain,
+              child: Text('Edit Profile',style:TextStyle(
                   fontFamily :"MajorMonoDisplay",
-                  // fontSizfit: e:  35.0 ,
                   color: Colors.white),),
+            ),
           ),
-          ),
-        iconTheme: new IconThemeData(color: Colors.white),
+          iconTheme: new IconThemeData(color: Colors.white),
 //        ),
 
-      ),
-      body: isLoading
-          ? circularProgress()
-          : Container( decoration: BoxDecoration(
-          gradient: fabGradient
-      ) ,
-        alignment: Alignment.center,
-            child: ListView(
-        children: <Widget>[
-            Container(
-
-              child: Column(
-                children: <Widget>[
-
-                  Padding(
-        padding: EdgeInsets.only(
-        top: 16.0,
-        bottom: 8.0,
-    ),
-      child: Stack(
-        children:[ CircleAvatar(
-            radius: 50.0,
-            backgroundImage:
-            CachedNetworkImageProvider(user.photoUrl),
         ),
-            Positioned(
-              right: 0.1,
-              bottom: 0.1,
-              child: GestureDetector(
-                onTap: (){
-                  selectImage();
-                },
-                child: Container(
-                  decoration: BoxDecoration(
-                      color: kblue,
-                      borderRadius: BorderRadius.circular(30)),
-                  child: Icon(Icons.add,color: kText,),
+        body: isLoading
+            ? circularProgress()
+            : Container( decoration: BoxDecoration(
+            gradient: fabGradient
+        ) ,
+          alignment: Alignment.center,
+          child: ListView(
+            children: <Widget>[
+              Container(
+
+                child: Column(
+                  children: <Widget>[
+
+                    Padding(
+                      padding: EdgeInsets.only(
+                        top: 16.0,
+                        bottom: 8.0,
+                      ),
+                      child: Stack(
+                        children:[ CircleAvatar(
+                          radius: 50.0,
+                          backgroundImage:
+                          CachedNetworkImageProvider(user.photoUrl),
+                        ),
+                          Positioned(
+                            right: 0.1,
+                            bottom: 0.1,
+                            child: GestureDetector(
+                              onTap: (){
+                                selectImage();
+                              },
+                              child: Container(
+                                decoration: BoxDecoration(
+                                    color: kblue,
+                                    borderRadius: BorderRadius.circular(30)),
+                                child: Icon(Icons.add,color: kText,),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+
+                    Padding(
+                      padding: EdgeInsets.all(16.0),
+                      child: Column(
+                        children: <Widget>[
+                          buildDisplayNameField(),
+                          buildBioField(),
+                          SizedBox(height: 10.0,),
+                          Container(
+                            decoration: BoxDecoration( borderRadius: BorderRadius.circular(20.0),
+                            ) ,
+                            child: Column(
+                              children: [
+
+                                ListTileTheme(
+                                  tileColor:kblue,
+
+                                  child: ExpansionTile (
+                                    title: Text('I Freelance in',style:TextStyle(
+                                        color: Colors.white),),
+                                    maintainState:true,
+                                    trailing:Icon(Icons.arrow_drop_down,color: kText,),
+                                    children: [
+                                      CheckboxListTile(
+                                        title: Text('Designer',style:TextStyle(
+                                            color: Colors.white),),
+                                        value: isCheckedDesigner,
+                                        onChanged: (value){toggleDesigner(value);},
+                                        activeColor: Colors.pink,
+                                        checkColor: Colors.white,
+                                        tristate: false,
+                                      ),
+                                      CheckboxListTile(
+                                        title: Text('Stylist',style: TextStyle(color: Colors.white), ),
+                                        value: isCheckedStylist,
+                                        onChanged: (value){toggleStylist(value);},
+                                        activeColor: Colors.pink,
+                                        checkColor: Colors.white,
+                                        tristate: false,
+                                      ),
+                                      CheckboxListTile(
+                                        title: Text('Blogger',style: TextStyle(color: Colors.white), ),
+                                        value: isCheckedBlogger,
+                                        onChanged: (value){toggleStylist(value);},
+                                        activeColor: Colors.pink,
+                                        checkColor: Colors.white,
+                                        tristate: false,
+                                      ),
+
+                                      CheckboxListTile(
+                                        title: Text('Illustrator',style: TextStyle(color: Colors.white), ),
+                                        value: isCheckedIllustrator,
+                                        onChanged: (value){toggleIllustrator(value);},
+                                        activeColor: Colors.pink,
+                                        checkColor: Colors.white,
+                                        tristate: false,
+                                      ),
+                                      CheckboxListTile(
+                                        title: Text('Photographer',style: TextStyle(color: Colors.white), ),
+                                        value: isCheckedPhotographer,
+                                        onChanged: (value){togglePhotographer(value);},
+                                        activeColor: Colors.pink,
+                                        checkColor: Colors.white,
+                                        tristate: false,
+                                      ),
+                                      CheckboxListTile(
+                                        title: Text('Model',style: TextStyle(color: Colors.white), ),
+                                        value: isCheckedModel,
+                                        onChanged: (value){toggleModel(value);},
+                                        activeColor: Colors.pink,
+                                        checkColor: Colors.white,
+                                        tristate: false,
+                                      ),
+                                      CheckboxListTile(
+                                        title: Text('Makeup Artist',style: TextStyle(color: Colors.white), ),
+                                        value: isCheckedMakeup,
+                                        onChanged: (value){toggleMakeup(value);},
+                                        activeColor: Colors.pink,
+                                        checkColor: Colors.white,
+                                        tristate: false,
+                                      ),
+                                      CheckboxListTile(
+                                        title: Text('Hairdresser',style: TextStyle(color: Colors.white), ),
+                                        value: isCheckedHair,
+                                        onChanged: (value){toggleHair(value);},
+                                        activeColor: Colors.pink,
+                                        checkColor: Colors.white,
+                                        tristate: false,
+                                      ),
+                                      CheckboxListTile(
+                                        title: Text('Choreographer',style: TextStyle(color: Colors.white), ),
+                                        value: isCheckedChoreographer,
+                                        onChanged: (value){toggleChoreographer(value);},
+                                        activeColor: Colors.pink,
+                                        checkColor: Colors.white,
+                                        tristate: false,
+                                      ),
+                                    ],
+                                  ),
+                                )
+                              ],
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+                    FloatingActionButton.extended(
+                      onPressed: updateProfileData,
+                      backgroundColor: kblue,
+                      label: Text(
+                        "Save",
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 20.0,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.all(16.0),
+                      child: FlatButton.icon(
+                        onPressed: logout,
+                        icon: Icon(Icons.cancel, color: Colors.red),
+                        label: Text(
+                          "Logout",
+                          style: TextStyle(color: Colors.red, fontSize: 20.0),
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
               ),
-            ),
-        ],
-      ),
-    ),
-
-                  Padding(
-                    padding: EdgeInsets.all(16.0),
-                    child: Column(
-                      children: <Widget>[
-                        buildDisplayNameField(),
-                        buildBioField(),
-                       SizedBox(height: 10.0,),
-                       Container(
-                         decoration: BoxDecoration( borderRadius: BorderRadius.circular(20.0),
-                             ) ,
-                         child: Column(
-                           children: [
-
-                             ListTileTheme(
-                         tileColor:kblue,
-
-                         child: ExpansionTile (
-                                 title: Text('I Freelance in',style:TextStyle(color:Colors.white)),
-                                 maintainState:true,
-                                 trailing:Icon(Icons.arrow_drop_down,color: kText,),
-                                 children: [
-                                   CheckboxListTile(
-                                     title: Text('Designer',style: TextStyle(color: Colors.white), ),
-                                     value: isCheckedDesigner,
-                                     onChanged: (value){toggleDesigner(value);},
-                                     activeColor: Colors.pink,
-                                     checkColor: Colors.white,
-                                     tristate: false,
-                                   ),
-                                   CheckboxListTile(
-                                     title: Text('Stylist',style: TextStyle(color: Colors.white), ),
-                                     value: isCheckedStylist,
-                                     onChanged: (value){toggleStylist(value);},
-                                     activeColor: Colors.pink,
-                                     checkColor: Colors.white,
-                                     tristate: false,
-                                   ),
-                                     CheckboxListTile(
-                                     title: Text('Blogger',style: TextStyle(color: Colors.white), ),
-                                     value: isCheckedBlogger,
-                                     onChanged: (value){toggleStylist(value);},
-                                     activeColor: Colors.pink,
-                                     checkColor: Colors.white,
-                                     tristate: false,
-                                   ),
-
-                                   CheckboxListTile(
-                                     title: Text('Illustrator',style: TextStyle(color: Colors.white), ),
-                                     value: isCheckedIllustrator,
-                                     onChanged: (value){toggleIllustrator(value);},
-                                     activeColor: Colors.pink,
-                                     checkColor: Colors.white,
-                                     tristate: false,
-                                   ),
-                                   CheckboxListTile(
-                                     title: Text('Photographer',style: TextStyle(color: Colors.white), ),
-                                     value: isCheckedPhotographer,
-                                     onChanged: (value){togglePhotographer(value);},
-                                     activeColor: Colors.pink,
-                                     checkColor: Colors.white,
-                                     tristate: false,
-                                   ),
-                                   CheckboxListTile(
-                                     title: Text('Model',style: TextStyle(color: Colors.white), ),
-                                     value: isCheckedModel,
-                                     onChanged: (value){toggleModel(value);},
-                                     activeColor: Colors.pink,
-                                     checkColor: Colors.white,
-                                     tristate: false,
-                                   ),
-                                   CheckboxListTile(
-                                     title: Text('Makeup Artist',style: TextStyle(color: Colors.white), ),
-                                     value: isCheckedMakeup,
-                                     onChanged: (value){toggleMakeup(value);},
-                                     activeColor: Colors.pink,
-                                     checkColor: Colors.white,
-                                     tristate: false,
-                                   ),
-                                   CheckboxListTile(
-                                     title: Text('Hairdresser',style: TextStyle(color: Colors.white), ),
-                                     value: isCheckedHair,
-                                     onChanged: (value){toggleHair(value);},
-                                     activeColor: Colors.pink,
-                                     checkColor: Colors.white,
-                                     tristate: false,
-                                   ),
-                                   CheckboxListTile(
-                                     title: Text('Choreographer',style: TextStyle(color: Colors.white), ),
-                                     value: isCheckedChoreographer,
-                                     onChanged: (value){toggleChoreographer(value);},
-                                     activeColor: Colors.pink,
-                                     checkColor: Colors.white,
-                                     tristate: false,
-                                   ),
-                                 ],
-                               ),
-                             )
-                           ],
-                         ),
-                       )
-                      ],
-                    ),
-                  ),
-                  FloatingActionButton.extended(
-                    onPressed: updateProfileData,
-                    backgroundColor: kblue,
-                    label: Text(
-                      "Save",
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 20.0,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.all(16.0),
-                    child: FlatButton.icon(
-                      onPressed: logout,
-                      icon: Icon(Icons.cancel, color: Colors.red),
-                      label: Text(
-                        "Logout",
-                        style: TextStyle(color: Colors.red, fontSize: 20.0),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-        ],
-      ),
+            ],
           ),
+        )
     );
   }
 }

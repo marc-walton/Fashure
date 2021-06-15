@@ -31,12 +31,12 @@ import 'package:fashow/Constants.dart';
 import 'package:fashow/enum/user_state.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
-import 'package:translator/translator.dart';
+
 import 'package:uuid/uuid.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:translated_text/translated_text.dart';
+
 final GoogleSignIn googleSignIn = GoogleSignIn();
-final translator = GoogleTranslator();
+
 
 final Reference storageRef = FirebaseStorage.instance.ref();
 final usersRef = FirebaseFirestore.instance.collection('users');
@@ -106,7 +106,7 @@ class _HomepageState extends State<Homepage> with WidgetsBindingObserver  {
     super.initState();
     print("khb,vhkjhb,");
 
-    print("$isAuth");
+    print("${widget.authis}");
     pageController = PageController(
       // initialPage: 2
     );
@@ -673,7 +673,7 @@ class _HomepageState extends State<Homepage> with WidgetsBindingObserver  {
 //           children: <Widget>[
 //             Container(
 //               child: RotateAnimatedTextKit(text: ["Design","Showcase","influence","Buy","Sell","Blog","Freelance","Live Shows","Community","FASHURE"],
-//               textStyle:  TextStyle(
+//               style:  TextStyle(
 //                 fontFamily: "MajorMonoDisplay",
 //                 fontSize:  MediaQuery.of(context).size.width*0.1,
 //                 color: Colors.white,),

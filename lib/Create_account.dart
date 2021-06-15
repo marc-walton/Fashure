@@ -28,11 +28,11 @@ class _CreateAccountState extends State<CreateAccount> {
   }
 
   usernamecheck({String name})async{
-    final QuerySnapshot result = await Firestore.instance
+    final QuerySnapshot result = await FirebaseFirestore.instance
         .collection('users')
         .where('namelow',isEqualTo:name.toLowerCase())
-        .getDocuments();
-    final List<DocumentSnapshot> documents = result.documents;
+        .get();
+    final List<DocumentSnapshot> documents = result.docs;
     print(documents.length);
     if(documents.length > 0){
       alert(

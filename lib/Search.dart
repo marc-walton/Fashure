@@ -27,7 +27,7 @@ class _SearchUState extends State<SearchU>
   handleSearch(String query) {
     Future<QuerySnapshot> users = usersRef
         .where("displayName", isGreaterThanOrEqualTo: query)
-        .getDocuments();
+        .get();
     setState(() {
       searchResultsFuture = users;
     });
@@ -100,8 +100,8 @@ class _SearchUState extends State<SearchU>
           if (!snapshot.hasData) {
             return circularProgress();
           }
-          snapshot.data.documents.forEach((doc) {
-            User user = User.fromDocument(doc);
+          snapshot.data.docs.forEach((doc) {
+             Users user = Users.fromDocument(doc);
             UserResult searchResult = UserResult(user);
             searchResults.add(searchResult);
           });
@@ -133,7 +133,7 @@ class _SearchUState extends State<SearchU>
 }
 
 class UserResult extends StatelessWidget {
-  final User user;
+  final Users user;
 
   UserResult(this.user);
 
@@ -255,7 +255,7 @@ class _SearchState extends State<Search> {
 
     if(_searchController.text != "") {
       for(var tripSnapshot in _allResults){
-        var title = User.fromDocument(tripSnapshot).displayName.toLowerCase();
+        var title = Users.fromDocument(tripSnapshot).displayName.toLowerCase();
 
         if(title.contains(_searchController.text.toLowerCase())) {
           showResults.add(tripSnapshot);
@@ -272,15 +272,15 @@ class _SearchState extends State<Search> {
 
   getUsersPastTripsStreamSnapshots() async {
     final uid = currentUser.id;
-    var data = await Firestore.instance
+    var data = await FirebaseFirestore.instance
         .collection('users')
-        // .document(uid)
+        // .doc(uid)
         // .collection('trips')
         // .where("endDate", isLessThanOrEqualTo: DateTime.now())
         // .orderBy('endDate')
-        .getDocuments();
+        .get();
     setState(() {
-      _allResults = data.documents;
+      _allResults = data.docs;
     });
     searchResultsList();
     return "complete";

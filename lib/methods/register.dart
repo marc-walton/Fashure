@@ -21,8 +21,10 @@ class _RegisterPageState extends State<RegisterPage> {
   TextEditingController pwdInputController;
   TextEditingController confirmPwdInputController;
   String dropdownValue = "";
+  String lang = "en";
+
   final DateTime timestamp = DateTime.now();
-bool save = false;
+  bool save = false;
   @override
   initState() {
 
@@ -75,30 +77,30 @@ bool save = false;
                         decoration: InputDecoration(
                             labelStyle:  TextStyle(color:kText),
                             hintStyle:  TextStyle(color:kText),
-                            labelText: 'Full Name*', hintText: "Full Name*"),
+                            labelText: 'Full Name*', hintText: "Full Name"),
                         controller: firstNameInputController,
                         validator: (value) {
                           if (value.length < 3) {
-                            return "Please enter a valid first name.";
+                            return "Please enter a valid name.";
                           }
                         },
                       ),
-                      TextFormField(
-                          style: TextStyle(color:kText),
-                          decoration: InputDecoration(
-                              labelStyle:  TextStyle(color:kText),
-                              hintStyle:  TextStyle(color:kText),                              labelText: 'User Name*', hintText: "unique to you on Fashure "),
-                          controller: lastNameInputController,
-                          validator: (value) {
-                            if (value.length < 3) {
-                              return "Please enter a valid user name.";
-                            }
-                          }),
+                      // TextFormField(
+                      //     style: TextStyle(color:kText),
+                      //     decoration: InputDecoration(
+                      //         labelStyle:  TextStyle(color:kText),
+                      //         hintStyle:  TextStyle(color:kText),                              labelText: 'User Name*', hintText: "unique to you on Fashure "),
+                      //     controller: lastNameInputController,
+                      //     validator: (value) {
+                      //       if (value.length < 3) {
+                      //         return "Please enter a valid user name.";
+                      //       }
+                      //     }),
                       TextFormField(
                         style: TextStyle(color:kText),
                         decoration: InputDecoration(
                             labelStyle:  TextStyle(color:kText),
-                            hintStyle:  TextStyle(color:kText),                            labelText: 'Email*', hintText: "john.doe@gmail.com"),
+                            hintStyle:  TextStyle(color:kText),                            labelText: 'Email', hintText: "john.doe@gmail.com"),
                         controller: emailInputController,
                         keyboardType: TextInputType.emailAddress,
                         validator: emailValidator,
@@ -107,7 +109,7 @@ bool save = false;
                         style: TextStyle(color:kText),
                         decoration: InputDecoration(
                             labelStyle:  TextStyle(color:kText),
-                            hintStyle:  TextStyle(color:kText),                            labelText: 'Password*', hintText: "********"),
+                            hintStyle:  TextStyle(color:kText),                            labelText: 'Password', hintText: "********"),
                         controller: pwdInputController,
                         obscureText: true,
                         validator: pwdValidator,
@@ -117,13 +119,13 @@ bool save = false;
                         decoration: InputDecoration(
                             labelStyle:  TextStyle(color:kText),
                             hintStyle:  TextStyle(color:kText),
-                            labelText: 'Confirm Password*', hintText: "********"),
+                            labelText: 'Confirm Password', hintText: "Confirm Password"),
                         controller: confirmPwdInputController,
                         obscureText: true,
                         validator: pwdValidator,
                       ),
                       Text('Select your region',style: TextStyle(color:kText)),
-                  Column(
+                      Column(
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: <Widget>[
                           Container(
@@ -172,6 +174,7 @@ bool save = false;
 
                         ],
                       ),
+
                       RaisedButton(
                         color: kblue,
 
@@ -185,23 +188,27 @@ bool save = false;
                                   .createUserWithEmailAndPassword(
                                   email: emailInputController.text,
                                   password: pwdInputController.text)
-                                  .then((ser) async  { Firestore.instance
+                                  .then((ser) async  { FirebaseFirestore.instance
                                   .collection("users")
-                                  .document(ser.user.uid)
-                                  .setData({
-                                  "id": ser.user.uid,
-                                  "username" : lastNameInputController.text,
-                                  "photoUrl": "https://firebasestorage.googleapis.com/v0/b/fashure-app.appspot.com/o/appstore.png?alt=media&token=43d3aa9d-bf8a-4272-b0c5-debb92b291b0",
-                                  "email": emailInputController.text,
-                                  "displayName": firstNameInputController.text,
-                                  "bio": "",
-                                  "client": 0 ,
-                                  "country":dropdownValue,
-                                  "timestamp": timestamp
-                                  });
+                                  .doc(ser.user.uid)
+                                  .set({
+                                "id": ser.user.uid,
+                                "username" : firstNameInputController.text,
+                                "photoUrl": "https://firebasestorage.googleapis.com/v0/b/fashure-app.appspot.com/o/appstore.png?alt=media&token=43d3aa9d-bf8a-4272-b0c5-debb92b291b0",
+                                "email": emailInputController.text,
+                                "displayName": firstNameInputController.text,
+                                "bio": "",
+                                "client": 0 ,
+                                "country":dropdownValue,
+                                "timestamp": timestamp,
+                                "language": "en",
+                                "seller": false,
+
+
+                              });
                               bankRef
-                                  .document(ser.user.uid)
-                                  .setData({
+                                  .doc(ser.user.uid)
+                                  .set({
 
                                 "accno":"",
                                 "ifsc":"",
@@ -209,19 +216,19 @@ bool save = false;
                               });
                               // make new user their own follower (to include their posts in their timeline)
                               await followersRef
-                                  .document(ser.user.uid)
+                                  .doc(ser.user.uid)
                                   .collection('userFollowers')
-                                  .document(ser.user.uid)
-                                  .setData({});
+                                  .doc(ser.user.uid)
+                                  .set({});
 
                               Navigator.pushAndRemoveUntil(
                                   context,
                                   MaterialPageRoute(
                                       builder: (context) => Homepage(
-
+                                        userid: ser.user.uid,
+                                        authis: true,
                                       )),
                                       (_) => false );
-
 
                               });
                               //     .then((result) => {

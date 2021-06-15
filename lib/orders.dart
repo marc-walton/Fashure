@@ -59,9 +59,9 @@ class _OrdersState extends State<Orders> {
                         textAlign: TextAlign.start,
                       ),
                       RaisedButton(
-                        onPressed: (){ Firestore.instance.collection('Reviews')
-                            .document(ProdId).collection('prodReviews').document(reviewId)
-                            .setData({
+                        onPressed: (){ FirebaseFirestore.instance.collection('Reviews')
+                            .doc(ProdId).collection('prodReviews').doc(reviewId)
+                            .set({
                           'userId': OwnerId,
                           'reviewId' : reviewId,
                           'prodId':ProdId,
@@ -69,11 +69,11 @@ class _OrdersState extends State<Orders> {
                           'review':reviewController.text,
                           "timestamp":timestamp,
                         });
-                        Firestore.instance.collection('feed')
-                            .document(ProdId)
+                        FirebaseFirestore.instance.collection('feed')
+                            .doc(ProdId)
                             .collection('feedItems')
-                            .document(reviewId)
-                            .setData({
+                            .doc(reviewId)
+                            .set({
                           "type": "ReviewO",
                           "username": currentUser.displayName,
                           "userId": OwnerId,
@@ -105,23 +105,24 @@ class _OrdersState extends State<Orders> {
   var rating = 0.0;
   shopOrders(){
 return PaginateFirestore(
+isLive: true,
 //    itemsPerPage: 2,
     itemBuilderType:
     PaginateBuilderType.listView,
     itemBuilder: (index, context, documentSnapshot)   {
-//        DocumentSnapshot ds = snapshot.data.documents[index];
-      String ownerId = documentSnapshot.data['ownerId'];
-      String prodId = documentSnapshot.data['prodId'];
-      String orderStatus = documentSnapshot.data['orderStatus'];
-      String size = documentSnapshot.data['size'];
-      String shopmediaUrl = documentSnapshot.data['shopmediaUrl'];
-      String orderId = documentSnapshot.data['orderId'];
-       String fulfilled = documentSnapshot.data['fulfilled'];
+//        DocumentSnapshot ds = snapshot.data.docs[index];
+      String ownerId = documentSnapshot.data()['ownerId'];
+      String prodId = documentSnapshot.data()['prodId'];
+      String orderStatus = documentSnapshot.data()['orderStatus'];
+      String size = documentSnapshot.data()['size'];
+      String shopmediaUrl = documentSnapshot.data()['shopmediaUrl'];
+      String orderId = documentSnapshot.data()['orderId'];
+       String fulfilled = documentSnapshot.data()['fulfilled'];
 
-      String productname = documentSnapshot.data['productname'];
- String Address = documentSnapshot.data['Address'];
-String courierId = documentSnapshot.data['courierId'];
-String courier = documentSnapshot.data['courier'];
+      String productname = documentSnapshot.data()['productname'];
+ String Address = documentSnapshot.data()['Address'];
+String courierId = documentSnapshot.data()['courierId'];
+String courier = documentSnapshot.data()['courier'];
 
       if (!documentSnapshot.exists) {
         return  Center(child: Text('No Orders',
@@ -191,8 +192,8 @@ RaisedButton(
 
 
     },
-    query:  Firestore.instance.collection('ordersCustomer')
-        .document(currentUser.id)
+    query:  FirebaseFirestore.instance.collection('ordersCustomer')
+        .doc(currentUser.id)
         .collection('userOrder')
         .orderBy('timestamp',descending: true)
 
@@ -203,23 +204,24 @@ RaisedButton(
   }
   jobOrders(){
   return  PaginateFirestore(
+isLive: true,
 //    itemsPerPage: 2,
         itemBuilderType:
         PaginateBuilderType.listView,
         itemBuilder: (index, context, documentSnapshot)   {
 
-          String ownerId = documentSnapshot.data['ownerId'];
-          String prodId = documentSnapshot.data['prodId'];
-          String orderStatus = documentSnapshot.data['orderStatus'];
-          String size = documentSnapshot.data['size'];
-          String Address = documentSnapshot.data['Address'];
-          String orderId = documentSnapshot.data['orderId'];
-           // String wnerId = documentSnapshot.data['ownerId'];
+          String ownerId = documentSnapshot.data()['ownerId'];
+          String prodId = documentSnapshot.data()['prodId'];
+          String orderStatus = documentSnapshot.data()['orderStatus'];
+          String size = documentSnapshot.data()['size'];
+          String Address = documentSnapshot.data()['Address'];
+          String orderId = documentSnapshot.data()['orderId'];
+           // String wnerId = documentSnapshot.data()['ownerId'];
 
-          String fulfilled = documentSnapshot.data['fulfilled'];
-String advance = documentSnapshot.data['advance'];
-String finall = documentSnapshot.data['final'];
-String title = documentSnapshot.data['title'];
+          String fulfilled = documentSnapshot.data()['fulfilled'];
+String advance = documentSnapshot.data()['advance'];
+String finall = documentSnapshot.data()['final'];
+String title = documentSnapshot.data()['title'];
           if (!documentSnapshot.exists) {
             return  Center(child: Text('No Orders',
               style: TextStyle(
@@ -250,8 +252,8 @@ return  Column(
 
 
         },
-        query:   Firestore.instance.collection('serviceCustomer')
-        .document(currentUser.id)
+        query:   FirebaseFirestore.instance.collection('serviceCustomer')
+        .doc(currentUser.id)
         .collection('customerService')
             .orderBy('timestamp',descending: true)
 

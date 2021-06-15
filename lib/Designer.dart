@@ -68,7 +68,7 @@ class _DesignerState extends State<Designer>  with  TickerProviderStateMixin{
   }
   buildPostDesigner() {
     return FutureBuilder(
-        future: Firestore.instance.collection('users').where('designer',isEqualTo:true).getDocuments(),
+        future: FirebaseFirestore.instance.collection('users').where('designer',isEqualTo:true).get(),
         // ignore: missing_return
         builder: (context, snapshot) {
           if (!snapshot.hasData) {
@@ -76,8 +76,8 @@ class _DesignerState extends State<Designer>  with  TickerProviderStateMixin{
           }
 
           List<DItem> searchResults = [];
-          snapshot.data.documents.forEach((doc) {
-            User user = User.fromDocument(doc);
+          snapshot.data.docs.forEach((doc) {
+             Users user = Users.fromDocument(doc);
             DItem searchResult = DItem(user);
             searchResults.add(searchResult);
           });
@@ -87,7 +87,7 @@ class _DesignerState extends State<Designer>  with  TickerProviderStateMixin{
         });
         } buildPostIllustrator() {
     return FutureBuilder(
-        future: Firestore.instance.collection('users').where('illustrator',isEqualTo:true).getDocuments(),
+        future: FirebaseFirestore.instance.collection('users').where('illustrator',isEqualTo:true).get(),
         // ignore: missing_return
         builder: (context, snapshot) {
           if (!snapshot.hasData) {
@@ -95,8 +95,8 @@ class _DesignerState extends State<Designer>  with  TickerProviderStateMixin{
           }
 
           List<DItem> searchResults = [];
-          snapshot.data.documents.forEach((doc) {
-            User user = User.fromDocument(doc);
+          snapshot.data.docs.forEach((doc) {
+             Users user = Users.fromDocument(doc);
             DItem searchResult = DItem(user);
             searchResults.add(searchResult);
           });
@@ -107,7 +107,7 @@ class _DesignerState extends State<Designer>  with  TickerProviderStateMixin{
         }
         buildPostStylist() {
     return FutureBuilder(
-        future: Firestore.instance.collection('users').where('stylist',isEqualTo:true).getDocuments(),
+        future: FirebaseFirestore.instance.collection('users').where('stylist',isEqualTo:true).get(),
         // ignore: missing_return
         builder: (context, snapshot) {
           if (!snapshot.hasData) {
@@ -115,8 +115,8 @@ class _DesignerState extends State<Designer>  with  TickerProviderStateMixin{
           }
 
           List<DItem> searchResults = [];
-          snapshot.data.documents.forEach((doc) {
-            User user = User.fromDocument(doc);
+          snapshot.data.docs.forEach((doc) {
+             Users user = Users.fromDocument(doc);
             DItem searchResult = DItem(user);
             searchResults.add(searchResult);
           });
@@ -127,7 +127,7 @@ class _DesignerState extends State<Designer>  with  TickerProviderStateMixin{
         }
  buildPostBlogger() {
     return FutureBuilder(
-        future: Firestore.instance.collection('users').where('blogger',isEqualTo:true).getDocuments(),
+        future: FirebaseFirestore.instance.collection('users').where('blogger',isEqualTo:true).get(),
         // ignore: missing_return
         builder: (context, snapshot) {
           if (!snapshot.hasData) {
@@ -135,8 +135,8 @@ class _DesignerState extends State<Designer>  with  TickerProviderStateMixin{
           }
 
           List<DItem> searchResults = [];
-          snapshot.data.documents.forEach((doc) {
-            User user = User.fromDocument(doc);
+          snapshot.data.docs.forEach((doc) {
+             Users user = Users.fromDocument(doc);
             DItem searchResult = DItem(user);
             searchResults.add(searchResult);
           });
@@ -148,7 +148,7 @@ class _DesignerState extends State<Designer>  with  TickerProviderStateMixin{
 
   buildPostPhotographer() {
     return FutureBuilder(
-        future: Firestore.instance.collection('users').where('photographer',isEqualTo:true).getDocuments(),
+        future: FirebaseFirestore.instance.collection('users').where('photographer',isEqualTo:true).get(),
         // ignore: missing_return
         builder: (context, snapshot) {
           if (!snapshot.hasData) {
@@ -156,8 +156,8 @@ class _DesignerState extends State<Designer>  with  TickerProviderStateMixin{
           }
 
           List<DItem> searchResults = [];
-          snapshot.data.documents.forEach((doc) {
-            User user = User.fromDocument(doc);
+          snapshot.data.docs.forEach((doc) {
+             Users user = Users.fromDocument(doc);
             DItem searchResult = DItem(user);
             searchResults.add(searchResult);
           });
@@ -168,7 +168,7 @@ class _DesignerState extends State<Designer>  with  TickerProviderStateMixin{
   }
   buildPostModel() {
     return FutureBuilder(
-        future: Firestore.instance.collection('users').where('model',isEqualTo:true).getDocuments(),
+        future: FirebaseFirestore.instance.collection('users').where('model',isEqualTo:true).get(),
         // ignore: missing_return
         builder: (context, snapshot) {
           if (!snapshot.hasData) {
@@ -176,8 +176,8 @@ class _DesignerState extends State<Designer>  with  TickerProviderStateMixin{
           }
 
           List<DItem> searchResults = [];
-          snapshot.data.documents.forEach((doc) {
-            User user = User.fromDocument(doc);
+          snapshot.data.docs.forEach((doc) {
+             Users user = Users.fromDocument(doc);
             DItem searchResult = DItem(user);
             searchResults.add(searchResult);
           });
@@ -188,7 +188,7 @@ class _DesignerState extends State<Designer>  with  TickerProviderStateMixin{
   }
   buildPostMakeup() {
     return FutureBuilder(
-        future: Firestore.instance.collection('users').where('makeup',isEqualTo:true).getDocuments(),
+        future: FirebaseFirestore.instance.collection('users').where('makeup',isEqualTo:true).get(),
         // ignore: missing_return
         builder: (context, snapshot) {
           if (!snapshot.hasData) {
@@ -196,8 +196,8 @@ class _DesignerState extends State<Designer>  with  TickerProviderStateMixin{
           }
 
           List<DItem> searchResults = [];
-          snapshot.data.documents.forEach((doc) {
-            User user = User.fromDocument(doc);
+          snapshot.data.docs.forEach((doc) {
+             Users user = Users.fromDocument(doc);
             DItem searchResult = DItem(user);
             searchResults.add(searchResult);
           });
@@ -208,7 +208,7 @@ class _DesignerState extends State<Designer>  with  TickerProviderStateMixin{
   }
   buildPostHair() {
     return FutureBuilder(
-        future: Firestore.instance.collection('users').where('hair',isEqualTo:true).getDocuments(),
+        future: FirebaseFirestore.instance.collection('users').where('hair',isEqualTo:true).get(),
         // ignore: missing_return
         builder: (context, snapshot) {
           if (!snapshot.hasData) {
@@ -216,8 +216,8 @@ class _DesignerState extends State<Designer>  with  TickerProviderStateMixin{
           }
 
           List<DItem> searchResults = [];
-          snapshot.data.documents.forEach((doc) {
-            User user = User.fromDocument(doc);
+          snapshot.data.docs.forEach((doc) {
+             Users user = Users.fromDocument(doc);
             DItem searchResult = DItem(user);
             searchResults.add(searchResult);
           });
@@ -228,7 +228,7 @@ class _DesignerState extends State<Designer>  with  TickerProviderStateMixin{
   }
   buildPostChoreographer() {
     return FutureBuilder(
-        future: Firestore.instance.collection('users').where('choreographer',isEqualTo:true).getDocuments(),
+        future: FirebaseFirestore.instance.collection('users').where('choreographer',isEqualTo:true).get(),
         // ignore: missing_return
         builder: (context, snapshot) {
           if (!snapshot.hasData) {
@@ -236,8 +236,8 @@ class _DesignerState extends State<Designer>  with  TickerProviderStateMixin{
           }
 
           List<DItem> searchResults = [];
-          snapshot.data.documents.forEach((doc) {
-            User user = User.fromDocument(doc);
+          snapshot.data.docs.forEach((doc) {
+             Users user = Users.fromDocument(doc);
             DItem searchResult = DItem(user);
             searchResults.add(searchResult);
           });
@@ -396,7 +396,7 @@ class MyTabs {
 }
 
 class DItem extends StatefulWidget {
-  final User user;
+  final Users user;
   UserModel receiver;
   String products;
   DItem(this.user
@@ -409,7 +409,7 @@ this.user
 }
 
 class _DItemState extends State<DItem> {
-  final User user;
+  final Users user;
   UserModel receiver;
   String products;
   int followerCount = 0;
@@ -431,7 +431,7 @@ class _DItemState extends State<DItem> {
 
   getPost(){
     return StreamBuilder(
-        stream:  Firestore.instance.collection('posts').document(user.id
+        stream:  FirebaseFirestore.instance.collection('posts').doc(user.id
         ).collection('userPosts').snapshots(),
 
         // ignore: missing_return
@@ -445,10 +445,10 @@ class _DItemState extends State<DItem> {
               child: ListView.builder(
                   shrinkWrap: true,
                   scrollDirection: Axis.horizontal,
-                  itemCount: snapshot.data.documents.length,
+                  itemCount: snapshot.data.docs.length,
                   itemBuilder: (context, index) {
 
-                    DocumentSnapshot docSnapshot = snapshot.data.documents[index];
+                    DocumentSnapshot docSnapshot = snapshot.data.docs[index];
                     return
 
 
@@ -485,11 +485,11 @@ class _DItemState extends State<DItem> {
   }
   reviews() {
     StreamBuilder(
-      stream:      Firestore.instance.collection('Reviews').document(user.id)
+      stream:      FirebaseFirestore.instance.collection('Reviews').doc(user.id)
           .collection('userReviews')
           .snapshots(),
       builder: (context,snapshot){
-        var rating =   snapshot.data['rating'];
+        var rating =   snapshot.data()['rating'];
         var avg = rating.reduce((a,b)=>a+b)/rating.length;
         String review  = snapshot.data['review'];
         return
@@ -531,8 +531,8 @@ class _DItemState extends State<DItem> {
   Client(){
     return
     StreamBuilder(
-      stream:Firestore.instance.collection('users')
-          .document(user.id).snapshots(),
+      stream:FirebaseFirestore.instance.collection('users')
+          .doc(user.id).snapshots(),
       builder:(context,snapshot){
        int client = snapshot.data['client'];
         return
@@ -646,13 +646,13 @@ class _DItemState extends State<DItem> {
   }
   getFollowers() async {
     QuerySnapshot snapshot = await followersRef
-        .document(user.id)
+        .doc(user.id)
         .collection('userFollowers')
-        .getDocuments();
+        .get();
     setState(() {
-      followerCount = snapshot.documents.length;
+      followerCount = snapshot.docs.length;
     });
-//    usersRef.document(widget.currentUserId).updateData({
+//    usersRef.doc(widget.currentUserId).update({
 //      'followers':followerCount
 //    });
 

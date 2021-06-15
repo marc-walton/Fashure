@@ -904,11 +904,11 @@ print(currentUser.country);
 
     });
   if(currentUser.country == 'India') {
-    Firestore.instance.collection('serviceCustomer')
-      .document(widget.reciever)
+    FirebaseFirestore.instance.collection('serviceCustomer')
+      .doc(widget.reciever)
       .collection('customerService')
-      .document(orderId)
-      .setData({
+      .doc(orderId)
+      .set({
     'cusId':widget.reciever,
     'cusname':widget.recievername,
     "cusProfileImg": widget.recieverUrl,
@@ -937,11 +937,11 @@ print(currentUser.country);
   'advancepay':'false',
   'finalpay':'false',
   });
-  Firestore.instance.collection('serviceSeller')
-      .document(currentUser.id)
+  FirebaseFirestore.instance.collection('serviceSeller')
+      .doc(currentUser.id)
       .collection('sellerService')
-      .document(orderId)
-      .setData({
+      .doc(orderId)
+      .set({
     'cusId':widget.reciever,
     'cusname':widget.recievername,
     "cusProfileImg": widget.recieverUrl,
@@ -970,11 +970,11 @@ print(currentUser.country);
     'finalpay':'false',
 
   });
-  Firestore.instance.collection('feed')
-      .document(currentUser.id)
+  FirebaseFirestore.instance.collection('feed')
+      .doc(currentUser.id)
       .collection('feedItems')
-      .document(orderId)
-      .setData({
+      .doc(orderId)
+      .set({
     "type": "ReqPaymentI",
     "username": widget.recievername,
     "userId": widget.reciever,
@@ -986,11 +986,11 @@ print(currentUser.country);
     "read": 'false',
     'message':'Your invoice has been sent!',
   });
-  Firestore.instance.collection('feed')
-      .document(widget.reciever)
+  FirebaseFirestore.instance.collection('feed')
+      .doc(widget.reciever)
       .collection('feedItems')
-      .document(orderId)
-      .setData({
+      .doc(orderId)
+      .set({
     "type": "ReqPayment",
     "username": currentUser.displayName,
     "userId": currentUser.id,
@@ -1005,11 +1005,11 @@ print(currentUser.country);
 
   }
     else if(currentUser.country=='Europe') {
-  Firestore.instance.collection('serviceCustomer')
-      .document(widget.reciever)
+  FirebaseFirestore.instance.collection('serviceCustomer')
+      .doc(widget.reciever)
       .collection('customerService')
-      .document(orderId)
-      .setData({
+      .doc(orderId)
+      .set({
   'cusId':widget.reciever,
   'cusname':widget.recievername,
   "cusProfileImg": widget.recieverUrl,
@@ -1039,11 +1039,11 @@ print(currentUser.country);
   'advancepay':'false',
   'finalpay':'false',
   });
-  Firestore.instance.collection('serviceSeller')
-      .document(currentUser.id)
+  FirebaseFirestore.instance.collection('serviceSeller')
+      .doc(currentUser.id)
       .collection('sellerService')
-      .document(orderId)
-      .setData({
+      .doc(orderId)
+      .set({
     'cusId':widget.reciever,
     'cusname':widget.recievername,
     "cusProfileImg": widget.recieverUrl,
@@ -1075,11 +1075,11 @@ print(currentUser.country);
     'finalpay':'false',
 
   });
-Firestore.instance.collection('feed')
-    .document(currentUser.id)
+FirebaseFirestore.instance.collection('feed')
+    .doc(currentUser.id)
     .collection('feedItems')
-    .document(orderId)
-    .setData({
+    .doc(orderId)
+    .set({
   "type": "ReqPaymentI",
   "username": widget.recievername,
   "userId": widget.reciever,
@@ -1091,11 +1091,11 @@ Firestore.instance.collection('feed')
   "read": 'false',
   'message':'Your invoice has been sent!',
 });
-Firestore.instance.collection('feed')
-    .document(widget.reciever)
+FirebaseFirestore.instance.collection('feed')
+    .doc(widget.reciever)
     .collection('feedItems')
-    .document(orderId)
-    .setData({
+    .doc(orderId)
+    .set({
   "type": "ReqPayment",
   "username": currentUser.displayName,
   "userId": currentUser.id,
@@ -1108,11 +1108,11 @@ Firestore.instance.collection('feed')
 });
   }
   else if(currentUser.country=='USA') {
-  Firestore.instance.collection('serviceCustomer')
-    .document(widget.reciever)
+  FirebaseFirestore.instance.collection('serviceCustomer')
+    .doc(widget.reciever)
     .collection('customerService')
-    .document(orderId)
-    .setData({
+    .doc(orderId)
+    .set({
   'cusId':widget.reciever,
   'cusname':widget.recievername,
   "cusProfileImg": widget.recieverUrl,
@@ -1141,11 +1141,11 @@ Firestore.instance.collection('feed')
   'advancepay':'false',
   'finalpay':'false',
 });
-Firestore.instance.collection('serviceSeller')
-    .document(currentUser.id)
+FirebaseFirestore.instance.collection('serviceSeller')
+    .doc(currentUser.id)
     .collection('sellerService')
-    .document(orderId)
-    .setData({
+    .doc(orderId)
+    .set({
   'cusId':widget.reciever,
   'cusname':widget.recievername,
   "cusProfileImg": widget.recieverUrl,
@@ -1175,11 +1175,11 @@ Firestore.instance.collection('serviceSeller')
   'finalpay':'false',
 
 });
-Firestore.instance.collection('feed')
-    .document(currentUser.id)
+FirebaseFirestore.instance.collection('feed')
+    .doc(currentUser.id)
     .collection('feedItems')
-    .document(orderId)
-    .setData({
+    .doc(orderId)
+    .set({
   "type": "ReqPaymentI",
   "username": widget.recievername,
   "userId": widget.reciever,
@@ -1190,11 +1190,11 @@ Firestore.instance.collection('feed')
   "read": 'false',
   'message':'Your invoice has been sent!',
 });
-Firestore.instance.collection('feed')
-    .document(widget.reciever)
+FirebaseFirestore.instance.collection('feed')
+    .doc(widget.reciever)
     .collection('feedItems')
-    .document(orderId)
-    .setData({
+    .doc(orderId)
+    .set({
   "type": "ReqPayment",
   "username": currentUser.displayName,
   "userId": currentUser.id,
@@ -1207,11 +1207,11 @@ Firestore.instance.collection('feed')
 });
 }
   else if(currentUser.country=='UK') {
-  Firestore.instance.collection('serviceCustomer')
-      .document(widget.reciever)
+  FirebaseFirestore.instance.collection('serviceCustomer')
+      .doc(widget.reciever)
       .collection('customerService')
-      .document(orderId)
-      .setData({
+      .doc(orderId)
+      .set({
   'cusId':widget.reciever,
   'cusname':widget.recievername,
   "cusProfileImg": widget.recieverUrl,
@@ -1242,11 +1242,11 @@ Firestore.instance.collection('feed')
   'advancepay':'false',
   'finalpay':'false',
   });
-  Firestore.instance.collection('serviceSeller')
-      .document(currentUser.id)
+  FirebaseFirestore.instance.collection('serviceSeller')
+      .doc(currentUser.id)
       .collection('sellerService')
-      .document(orderId)
-      .setData({
+      .doc(orderId)
+      .set({
     'cusId':widget.reciever,
     'cusname':widget.recievername,
     "cusProfileImg": widget.recieverUrl,
@@ -1279,11 +1279,11 @@ Firestore.instance.collection('feed')
     'finalpay':'false',
 
   });
-Firestore.instance.collection('feed')
-    .document(currentUser.id)
+FirebaseFirestore.instance.collection('feed')
+    .doc(currentUser.id)
     .collection('feedItems')
-    .document(orderId)
-    .setData({
+    .doc(orderId)
+    .set({
   "type": "ReqPaymentI",
   "username": widget.recievername,
   "userId": widget.reciever,
@@ -1295,11 +1295,11 @@ Firestore.instance.collection('feed')
   "read": 'false',
   'message':'Your invoice has been sent!',
 });
-Firestore.instance.collection('feed')
-    .document(widget.reciever)
+FirebaseFirestore.instance.collection('feed')
+    .doc(widget.reciever)
     .collection('feedItems')
-    .document(orderId)
-    .setData({
+    .doc(orderId)
+    .set({
   "type": "ReqPayment",
   "username": currentUser.displayName,
   "userId": currentUser.id,
@@ -1312,11 +1312,11 @@ Firestore.instance.collection('feed')
 });
   }
 else {
-    Firestore.instance.collection('serviceCustomer')
-        .document(widget.reciever)
+    FirebaseFirestore.instance.collection('serviceCustomer')
+        .doc(widget.reciever)
         .collection('customerService')
-        .document(orderId)
-        .setData({
+        .doc(orderId)
+        .set({
       'cusId':widget.reciever,
       'cusname':widget.recievername,
       "cusProfileImg": widget.recieverUrl,
@@ -1345,11 +1345,11 @@ else {
       'advancepay':'false',
       'finalpay':'false',
     });
-    Firestore.instance.collection('serviceSeller')
-        .document(currentUser.id)
+    FirebaseFirestore.instance.collection('serviceSeller')
+        .doc(currentUser.id)
         .collection('sellerService')
-        .document(orderId)
-        .setData({
+        .doc(orderId)
+        .set({
       'cusId':widget.reciever,
       'cusname':widget.recievername,
       "cusProfileImg": widget.recieverUrl,
@@ -1379,11 +1379,11 @@ else {
       'finalpay':'false',
 
     });
-    Firestore.instance.collection('feed')
-        .document(currentUser.id)
+    FirebaseFirestore.instance.collection('feed')
+        .doc(currentUser.id)
         .collection('feedItems')
-        .document(orderId)
-        .setData({
+        .doc(orderId)
+        .set({
       "type": "ReqPaymentI",
       "username": widget.recievername,
       "userId": widget.reciever,
@@ -1394,11 +1394,11 @@ else {
       "read": 'false',
       'message':'Your invoice has been sent!',
     });
-    Firestore.instance.collection('feed')
-        .document(widget.reciever)
+    FirebaseFirestore.instance.collection('feed')
+        .doc(widget.reciever)
         .collection('feedItems')
-        .document(orderId)
-        .setData({
+        .doc(orderId)
+        .set({
       "type": "ReqPayment",
       "username": currentUser.displayName,
       "userId": currentUser.id,

@@ -20,7 +20,7 @@ import 'package:uuid/uuid.dart';
 
 class UploadColl extends StatefulWidget {
   final GlobalKey<ScaffoldState> globalKey;
-  final User currentUser;
+  final Users currentUser;
 
   UploadColl({this.currentUser,
     this.globalKey});
@@ -140,9 +140,9 @@ class _UploadCollState extends State<UploadColl>
     });
   }
   Future<String> uploadImage(imageFile) async {
-    StorageUploadTask uploadTask =
+   UploadTask uploadTask =
     storageRef.child("collhead_$CollId.jpg").putFile(imageFile);
-    StorageTaskSnapshot storageSnap = await uploadTask.onComplete;
+    TaskSnapshot storageSnap = await uploadTask;
     String downloadUrl = await storageSnap.ref.getDownloadURL();
     return downloadUrl;
   }
@@ -221,9 +221,9 @@ class _UploadCollState extends State<UploadColl>
   Future<dynamic> postImage(Asset imageFile) async {
 //    ByteData byteData = await imageFile.requestOriginal(quality: 75);
     String fileName = DateTime.now().millisecondsSinceEpoch.toString();
-    StorageReference reference = FirebaseStorage.instance.ref().child("colle_$fileName.jpg");
-    StorageUploadTask uploadTask = reference.putData((await imageFile.getByteData(quality: 70)).buffer.asUint8List());
-    StorageTaskSnapshot storageTaskSnapshot = await uploadTask.onComplete;
+    Reference reference = FirebaseStorage.instance.ref().child("colle_$fileName.jpg");
+   UploadTask uploadTask = reference.putData((await imageFile.getByteData(quality: 70)).buffer.asUint8List());
+    TaskSnapshot storageTaskSnapshot = await uploadTask;
 //    print(storageTaskSnapshot.ref.getDownloadURL());
     return storageTaskSnapshot.ref.getDownloadURL();
   }
@@ -241,7 +241,7 @@ class _UploadCollState extends State<UploadColl>
        if(imageUrls.length==images.length){
          String documnetID = DateTime.now().millisecondsSinceEpoch.toString();
          collRef
-            .document(CollId).setData({
+            .doc(CollId).set({
            'collmediaUrl':imageUrls,
           "collId": CollId,
           "ownerId": widget.currentUser.id,

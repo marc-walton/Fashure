@@ -31,7 +31,7 @@ import 'package:image/image.dart' as Im;
 import 'package:uuid/uuid.dart';
 
 class Uploadecom extends StatefulWidget {
-  final User currentUser;
+  final Users currentUser;
 
 
   Uploadecom({this.currentUser});
@@ -289,9 +289,9 @@ bool indian = false;
   }
 
   Future<String> uploadImage(imageFile) async {
-    StorageUploadTask uploadTask =
+   UploadTask uploadTask =
     storageRef.child("prod_$prodId.jpg").putFile(imageFile);
-    StorageTaskSnapshot storageSnap = await uploadTask.onComplete;
+    TaskSnapshot storageSnap = await uploadTask;
     String downloadUrl = await storageSnap.ref.getDownloadURL();
     return downloadUrl;
   }
@@ -631,10 +631,10 @@ bool world,
     if(dropdownValue=='Men'){
       if (currentUser.country == 'India') {
         productsRef
-            .document(widget.currentUser.id)
+            .doc(widget.currentUser.id)
             .collection("userProducts")
-            .document(prodId)
-            .setData({
+            .doc(prodId)
+            .set({
           "indian":indian,
           "worldship":world,
           "shipment": ship,
@@ -709,10 +709,10 @@ bool world,
       }
       else if (currentUser.country == 'Europe'){
         productsRef
-            .document(widget.currentUser.id)
+            .doc(widget.currentUser.id)
             .collection("userProducts")
-            .document(prodId)
-            .setData({          "indian":indian,
+            .doc(prodId)
+            .set({          "indian":indian,
           "worldship":world,
           "shipment": ship,
           "prodId": prodId,
@@ -785,10 +785,10 @@ bool world,
       }
       else if (currentUser.country == 'UK') {
         productsRef
-            .document(widget.currentUser.id)
+            .doc(widget.currentUser.id)
             .collection("userProducts")
-            .document(prodId)
-            .setData({          "indian":indian,
+            .doc(prodId)
+            .set({          "indian":indian,
           "worldship":world,
           "shipment": ship,
           "prodId": prodId,
@@ -859,10 +859,10 @@ bool world,
       }
       else if (currentUser.country == 'USA') {
         productsRef
-            .document(widget.currentUser.id)
+            .doc(widget.currentUser.id)
             .collection("userProducts")
-            .document(prodId)
-            .setData({          "indian":indian,
+            .doc(prodId)
+            .set({          "indian":indian,
           "worldship":world,
           "shipment": ship,
           "prodId": prodId,
@@ -934,10 +934,10 @@ bool world,
       }
       else {
         productsRef
-            .document(widget.currentUser.id)
+            .doc(widget.currentUser.id)
             .collection("userProducts")
-            .document(prodId)
-            .setData({          "indian":indian,
+            .doc(prodId)
+            .set({          "indian":indian,
           "worldship":world,
           "shipment": ship,
           "prodId": prodId,
@@ -1011,10 +1011,10 @@ bool world,
     else if(dropdownValue=='Women') {
       if (currentUser.country == 'India') {
         productsRef
-            .document(widget.currentUser.id)
+            .doc(widget.currentUser.id)
             .collection("userProducts")
-            .document(prodId)
-            .setData({          "indian":indian,
+            .doc(prodId)
+            .set({          "indian":indian,
           "worldship":world,
           "shipment": ship,
           "prodId": prodId,
@@ -1082,10 +1082,10 @@ bool world,
       }
       else if (currentUser.country == 'Europe'){
         productsRef
-            .document(widget.currentUser.id)
+            .doc(widget.currentUser.id)
             .collection("userProducts")
-            .document(prodId)
-            .setData({          "indian":indian,
+            .doc(prodId)
+            .set({          "indian":indian,
           "worldship":world,
           "shipment": ship,
           "prodId": prodId,
@@ -1153,10 +1153,10 @@ bool world,
       }
       else if (currentUser.country == 'UK') {
         productsRef
-            .document(widget.currentUser.id)
+            .doc(widget.currentUser.id)
             .collection("userProducts")
-            .document(prodId)
-            .setData({          "indian":indian,
+            .doc(prodId)
+            .set({          "indian":indian,
           "worldship":world,
           "shipment": ship,
           "prodId": prodId,
@@ -1223,10 +1223,10 @@ bool world,
       }
       else if (currentUser.country == 'USA') {
         productsRef
-            .document(widget.currentUser.id)
+            .doc(widget.currentUser.id)
             .collection("userProducts")
-            .document(prodId)
-            .setData({          "indian":indian,
+            .doc(prodId)
+            .set({          "indian":indian,
           "worldship":world,
           "shipment": ship,
           "prodId": prodId,
@@ -1294,10 +1294,10 @@ bool world,
       }
       else {
         productsRef
-            .document(widget.currentUser.id)
+            .doc(widget.currentUser.id)
             .collection("userProducts")
-            .document(prodId)
-            .setData({          "indian":indian,
+            .doc(prodId)
+            .set({          "indian":indian,
           "worldship":world,
           "shipment": ship,
           "prodId": prodId,
@@ -1367,10 +1367,10 @@ bool world,
     else if(dropdownValue=='Baby-Boys'||dropdownValue=='Baby-Girls') {
       if (currentUser.country == 'India') {
         productsRef
-            .document(widget.currentUser.id)
+            .doc(widget.currentUser.id)
             .collection("userProducts")
-            .document(prodId)
-            .setData({          "indian":indian,
+            .doc(prodId)
+            .set({          "indian":indian,
           "worldship":world,
           "shipment": ship,
           "prodId": prodId,
@@ -1424,10 +1424,10 @@ bool world,
       }
       else if (currentUser.country == 'Europe') {
         productsRef
-            .document(widget.currentUser.id)
+            .doc(widget.currentUser.id)
             .collection("userProducts")
-            .document(prodId)
-            .setData({          "indian":indian,
+            .doc(prodId)
+            .set({          "indian":indian,
           "worldship":world,
           "shipment": ship,
           "prodId": prodId,
@@ -1479,10 +1479,10 @@ bool world,
       }
       else if (currentUser.country == 'UK') {
         productsRef
-            .document(widget.currentUser.id)
+            .doc(widget.currentUser.id)
             .collection("userProducts")
-            .document(prodId)
-            .setData({          "indian":indian,
+            .doc(prodId)
+            .set({          "indian":indian,
           "worldship":world,
           "shipment": ship,
           "prodId": prodId,
@@ -1535,10 +1535,10 @@ bool world,
       }
       else if (currentUser.country == 'USA') {
         productsRef
-            .document(widget.currentUser.id)
+            .doc(widget.currentUser.id)
             .collection("userProducts")
-            .document(prodId)
-            .setData({          "indian":indian,
+            .doc(prodId)
+            .set({          "indian":indian,
           "worldship":world,
           "shipment": ship,
           "prodId": prodId,
@@ -1592,10 +1592,10 @@ bool world,
       }
       else {
         productsRef
-            .document(widget.currentUser.id)
+            .doc(widget.currentUser.id)
             .collection("userProducts")
-            .document(prodId)
-            .setData({          "indian":indian,
+            .doc(prodId)
+            .set({          "indian":indian,
           "worldship":world,
           "shipment": ship,
           "prodId": prodId,
@@ -1651,10 +1651,10 @@ bool world,
     else if(dropdownValue=='Kids-Boys'|| dropdownValue=='Kids-Girls') {
       if (currentUser.country == 'India') {
         productsRef
-            .document(widget.currentUser.id)
+            .doc(widget.currentUser.id)
             .collection("userProducts")
-            .document(prodId)
-            .setData({
+            .doc(prodId)
+            .set({
           "indian":indian,
           "worldship":world,
           "shipment": ship,
@@ -1718,10 +1718,10 @@ bool world,
       }
       else if (currentUser.country == 'Europe') {
         productsRef
-            .document(widget.currentUser.id)
+            .doc(widget.currentUser.id)
             .collection("userProducts")
-            .document(prodId)
-            .setData({          "indian":indian,
+            .doc(prodId)
+            .set({          "indian":indian,
           "worldship":world,
           "shipment": ship,
           "prodId": prodId,
@@ -1784,10 +1784,10 @@ bool world,
       }
       else if (currentUser.country == 'UK') {
         productsRef
-            .document(widget.currentUser.id)
+            .doc(widget.currentUser.id)
             .collection("userProducts")
-            .document(prodId)
-            .setData({
+            .doc(prodId)
+            .set({
           "worldship":world,
           "shipment": ship,
           "indian":indian,
@@ -1854,10 +1854,10 @@ bool world,
       }
       else if (currentUser.country == 'USA') {
         productsRef
-            .document(widget.currentUser.id)
+            .doc(widget.currentUser.id)
             .collection("userProducts")
-            .document(prodId)
-            .setData({          "indian":indian,
+            .doc(prodId)
+            .set({          "indian":indian,
           "worldship":world,
           "shipment": ship,
           "prodId": prodId,
@@ -1920,10 +1920,10 @@ bool world,
       }
       else {
         productsRef
-            .document(widget.currentUser.id)
+            .doc(widget.currentUser.id)
             .collection("userProducts")
-            .document(prodId)
-            .setData({          "indian":indian,
+            .doc(prodId)
+            .set({          "indian":indian,
           "worldship":world,
           "shipment": ship,
           "prodId": prodId,
@@ -1988,10 +1988,10 @@ bool world,
     else if(dropdownValue=='Teen-Boys'||dropdownValue=='Teen-Girls') {
       if (currentUser.country == 'India') {
         productsRef
-            .document(widget.currentUser.id)
+            .doc(widget.currentUser.id)
             .collection("userProducts")
-            .document(prodId)
-            .setData({
+            .doc(prodId)
+            .set({
           "indian":indian,
           "worldship":world,
           "shipment": ship,
@@ -2039,10 +2039,10 @@ bool world,
       }
       else if (currentUser.country == 'Europe'){
         productsRef
-            .document(widget.currentUser.id)
+            .doc(widget.currentUser.id)
             .collection("userProducts")
-            .document(prodId)
-            .setData({          "indian":indian,
+            .doc(prodId)
+            .set({          "indian":indian,
           "worldship":world,
           "shipment": ship,
           "prodId": prodId,
@@ -2091,10 +2091,10 @@ bool world,
       }
       else if (currentUser.country == 'UK') {
         productsRef
-            .document(widget.currentUser.id)
+            .doc(widget.currentUser.id)
             .collection("userProducts")
-            .document(prodId)
-            .setData({          "indian":indian,
+            .doc(prodId)
+            .set({          "indian":indian,
           "worldship":world,
           "shipment": ship,
           "prodId": prodId,
@@ -2143,10 +2143,10 @@ bool world,
       }
       else if (currentUser.country == 'USA') {
         productsRef
-            .document(widget.currentUser.id)
+            .doc(widget.currentUser.id)
             .collection("userProducts")
-            .document(prodId)
-            .setData({          "indian":indian,
+            .doc(prodId)
+            .set({          "indian":indian,
           "worldship":world,
           "shipment": ship,
           "prodId": prodId,
@@ -2196,10 +2196,10 @@ bool world,
       }
       else {
         productsRef
-            .document(widget.currentUser.id)
+            .doc(widget.currentUser.id)
             .collection("userProducts")
-            .document(prodId)
-            .setData({          "indian":indian,
+            .doc(prodId)
+            .set({          "indian":indian,
           "worldship":world,
           "shipment": ship,
           "prodId": prodId,

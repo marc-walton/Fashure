@@ -47,47 +47,47 @@ int serpay;
 
   }
   gets() async {
-    QuerySnapshot snapshot = await Firestore.instance.collection('serviceSeller')
-        .document(currentUser.id)
+    QuerySnapshot snapshot = await FirebaseFirestore.instance.collection('serviceSeller')
+        .doc(currentUser.id)
         .collection('sellerService')
         .where('read',isEqualTo: 'false')
-        .getDocuments();
+        .get();
     setState(() {
-      serdata = snapshot.documents.length ?? 0;
+      serdata = snapshot.docs.length ?? 0;
     });
 }
 getsp() async {
-    QuerySnapshot snapshot = await  Firestore.instance.collection('Payments')
-        .document(currentUser.id)
+    QuerySnapshot snapshot = await  FirebaseFirestore.instance.collection('Payments')
+        .doc(currentUser.id)
         .collection('ServicePayments')
         .where('fulfilled',isEqualTo: 'true')
         .where('read',isEqualTo: 'false')
-        .getDocuments();
+        .get();
     setState(() {
-      service = serdata + snapshot.documents.length ?? 0;
+      service = serdata + snapshot.docs.length ?? 0;
     });
 
   }
  geto() async {
-    QuerySnapshot snapshot = await Firestore.instance.collection('ordersSeller')
-        .document(currentUser.id)
+    QuerySnapshot snapshot = await FirebaseFirestore.instance.collection('ordersSeller')
+        .doc(currentUser.id)
         .collection('sellerOrder')
         .where('read',isEqualTo: 'false')
-        .getDocuments();
+        .get();
     setState(() {
-      data = snapshot.documents.length ?? 0;
+      data = snapshot.docs.length ?? 0;
     });
 
   }
 getop() async {
-    QuerySnapshot snapshot = await  Firestore.instance.collection('Payments')
-        .document(currentUser.id)
+    QuerySnapshot snapshot = await  FirebaseFirestore.instance.collection('Payments')
+        .doc(currentUser.id)
         .collection('ServicePayments')
         .where('fulfilled',isEqualTo: 'true')
         .where('read',isEqualTo: 'false')
-        .getDocuments();
+        .get();
     setState(() {
-      shop = data + snapshot.documents.length ?? 0;
+      shop = data + snapshot.docs.length ?? 0;
     });
 
   }

@@ -21,23 +21,24 @@ class ClientReview extends StatefulWidget {
 class _ClientReviewState extends State<ClientReview> {
   reviews() {
     return  PaginateFirestore(
+isLive: true,
 //    itemsPerPage: 2,
         itemBuilderType:
         PaginateBuilderType.listView,
         itemBuilder: (index, context, documentSnapshot)   {
-//        DocumentSnapshot ds = snapshot.data.documents[index];
-          String ownerId = documentSnapshot.data['userId'];
-          var rating =   documentSnapshot.data['rating'];
-          String review  = documentSnapshot.data['review'];
+//        DocumentSnapshot ds = snapshot.data.docs[index];
+          String ownerId = documentSnapshot.data()['userId'];
+          var rating =   documentSnapshot.data()['rating'];
+          String review  = documentSnapshot.data()['review'];
 
           return
             FutureBuilder(
-              future: usersRef.document(ownerId).get(),
+              future: usersRef.doc(ownerId).get(),
               builder: (context, snapshot) {
                 if (!snapshot.hasData) {
                   return circularProgress();
                 }
-                User user = User.fromDocument(snapshot.data);
+                 Users user = Users.fromDocument(snapshot.data);
 //          bool isPostOwner = currentUserId == ownerId;
                 return Padding(
                   padding: const EdgeInsets.all(8.0),
@@ -83,7 +84,7 @@ class _ClientReviewState extends State<ClientReview> {
               },
             );
         },
-        query: Firestore.instance.collection('Reviews').document(widget.profileId)
+        query: FirebaseFirestore.instance.collection('Reviews').doc(widget.profileId)
             .collection('userReviews').orderBy('timestamp',descending: true)
 
 

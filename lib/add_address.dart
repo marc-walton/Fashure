@@ -12,7 +12,7 @@ import 'package:uuid/uuid.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class AddAdress extends StatefulWidget {
-  final User currentUser;
+  final Users currentUser;
 
   const AddAdress({Key key, this.currentUser}) : super(key: key);
 
@@ -56,10 +56,10 @@ class _AddAdressState extends State<AddAdress> {
         msg: "Please wait:Uploading", timeInSecForIos: 4);
 
     addressRef
-        .document(currentUser.id)
+        .doc(currentUser.id)
         .collection("useraddress")
-        .document(addId)
-        .setData({
+        .doc(addId)
+        .set({
       "userId": currentUser.id,
       "username": currentUser.displayName,
       "photoUrl": currentUser.photoUrl,

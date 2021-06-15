@@ -15,7 +15,7 @@ import 'package:fashow/Constants.dart';
 import 'package:uuid/uuid.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 class AddressBuy extends StatefulWidget {
-  final User currentUser;
+  final Users currentUser;
   final String Amount;
 final String Size;
 final String prodId;
@@ -150,8 +150,8 @@ class _AddressBuyState extends State<AddressBuy>  with AutomaticKeepAliveClientM
     return
     Container(
       child: StreamBuilder(
-          stream: Firestore.instance
-              .collection('Address').document(currentUser.id)
+          stream: FirebaseFirestore.instance
+              .collection('Address').doc(currentUser.id)
               .collection('useraddress')
               .orderBy('timestamp', descending: true)
               .snapshots(),
@@ -168,9 +168,9 @@ class _AddressBuyState extends State<AddressBuy>  with AutomaticKeepAliveClientM
                 // key: PageStorageKey(''),
                 //   scrollDirection: Axis.vertical,
                   shrinkWrap: true,
-                  itemCount: snapshot.data.documents.length,
+                  itemCount: snapshot.data.docs.length,
                   itemBuilder: (context, index) {
-                    DocumentSnapshot ds = snapshot.data.documents[index];
+                    DocumentSnapshot ds = snapshot.data.docs[index];
 
                     return
 
@@ -278,8 +278,8 @@ backgroundColor: kPrimaryColor,
         ) ,
         alignment: Alignment.center,
         child: StreamBuilder(
-            stream: Firestore.instance
-                .collection('Address').document(currentUser.id)
+            stream: FirebaseFirestore.instance
+                .collection('Address').doc(currentUser.id)
                 .collection('useraddress')
 
                 .snapshots(),
@@ -292,9 +292,9 @@ backgroundColor: kPrimaryColor,
                   // key: PageStorageKey(''),
                   //   scrollDirection: Axis.vertical,
                     shrinkWrap: true,
-                    itemCount: snapshot.data.documents.length,
+                    itemCount: snapshot.data.docs.length,
                     itemBuilder: (context, index) {
-                      DocumentSnapshot ds = snapshot.data.documents[index];
+                      DocumentSnapshot ds = snapshot.data.docs[index];
 
                       return new
 

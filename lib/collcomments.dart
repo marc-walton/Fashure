@@ -45,7 +45,7 @@ class CollCommentsState extends State<CollComments> {
   buildComments() {
     return StreamBuilder(
       stream: collcommentsRef
-          .document(collId)
+          .doc(collId)
           .collection('collComments')
           .orderBy("timestamp", descending: false)
           .snapshots(),
@@ -54,7 +54,7 @@ class CollCommentsState extends State<CollComments> {
           return circularProgress();
         }
         List<CollComment> Collcomments = [];
-        snapshot.data.documents.forEach((doc) {
+        snapshot.data.docs.forEach((doc) {
           Collcomments.add(CollComment.fromDocument(doc));
         });
         return ListView(
@@ -65,7 +65,7 @@ class CollCommentsState extends State<CollComments> {
   }
 
   addComment() {
-    collcommentsRef.document(collId).collection("collComments").add({
+    collcommentsRef.doc(collId).collection("collComments").add({
       "username": currentUser.displayName,
       "comment": collcommentController.text,
       "timestamp": timestamp,
@@ -74,7 +74,7 @@ class CollCommentsState extends State<CollComments> {
     });
     bool isNotPostOwner = collOwnerId != currentUser.id;
    if (isNotPostOwner) {
-     activityFeedRef.document(collOwnerId).collection('feedItems').add({
+     activityFeedRef.doc(collOwnerId).collection('feedItems').add({
        "type": "Collectioncomment",
        "commentData": collcommentController.text,
        "username": currentUser.displayName,
@@ -156,11 +156,11 @@ class   CollComment extends StatelessWidget {
 
   factory CollComment.fromDocument(DocumentSnapshot doc) {
     return CollComment(
-      username: doc['username'],
-      userId: doc['userId'],
-      comment: doc['comment'],
-      timestamp: doc['timestamp'],
-      avatarUrl: doc['avatarUrl'],
+      username: doc.data()['username'],
+      userId: doc.data()['userId'],
+      comment: doc.data()['comment'],
+      timestamp: doc.data()['timestamp'],
+      avatarUrl: doc.data()['avatarUrl'],
     );
   }
 

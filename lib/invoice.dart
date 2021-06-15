@@ -35,7 +35,7 @@ class Invoice extends StatefulWidget {
   final String Fcny;
   final String Fgbp;
 // final String selectedSizes;
-  final User currentUser;
+  final Users currentUser;
 
   Invoice({
     this.orderId,
@@ -69,28 +69,28 @@ class Invoice extends StatefulWidget {
 //    Map data = doc.data ;
 
     return Invoice(
-      orderId: doc['orderId'],
-      ownerId: doc['ownerId'],
-      cusName: doc['cusname'],
-      cusid: doc['cusId'],
-      cusImg: doc['cusProfileImg'],
-      Address:doc['Address'],
-      finalpay:doc['finalpay'],
-      advancepay:doc['advancepay'],
-      fulfilled:doc['fulfilled'],
-      title:doc['title'],
-      description:doc['description'],
-      ordersstatus:doc['orderStatus'],
-      eur: doc['eur'],
-      usd: doc['usd'],
-      inr: doc['inr'],
-      cny: doc['cny'],
-      gbp: doc['gbp'],
-      Feur: doc['Feur'],
-      Fusd: doc['Fusd'],
-      Finr: doc['Finr'],
-      Fcny: doc['Fcny'],
-      Fgbp: doc['Fgbp'],
+      orderId: doc.data()['orderId'],
+      ownerId: doc.data()['ownerId'],
+      cusName: doc.data()['cusname'],
+      cusid: doc.data()['cusId'],
+      cusImg: doc.data()['cusProfileImg'],
+      Address:doc.data()['Address'],
+      finalpay:doc.data()['finalpay'],
+      advancepay:doc.data()['advancepay'],
+      fulfilled:doc.data()['fulfilled'],
+      title:doc.data()['title'],
+      description:doc.data()['description'],
+      ordersstatus:doc.data()['orderStatus'],
+      eur: doc.data()['eur'],
+      usd: doc.data()['usd'],
+      inr: doc.data()['inr'],
+      cny: doc.data()['cny'],
+      gbp: doc.data()['gbp'],
+      Feur: doc.data()['Feur'],
+      Fusd: doc.data()['Fusd'],
+      Finr: doc.data()['Finr'],
+      Fcny: doc.data()['Fcny'],
+      Fgbp: doc.data()['Fgbp'],
 
     );
   }
@@ -398,9 +398,9 @@ else{return Container();}
 
   }
   review(){
-    Firestore.instance.collection('Reviews')
-        .document(ownerId).collection('userReviews').document(reviewId)
-        .setData({
+    FirebaseFirestore.instance.collection('Reviews')
+        .doc(ownerId).collection('userReviews').doc(reviewId)
+        .set({
       'userId': ownerId,
        'orderId': orderId,
 'timestamp':timestamp,
@@ -408,11 +408,11 @@ else{return Container();}
       'review':reviewController.text,
       'reviewId' : reviewId
     });
-    Firestore.instance.collection('feed')
-        .document(ownerId)
+    FirebaseFirestore.instance.collection('feed')
+        .doc(ownerId)
         .collection('feedItems')
-        .document(reviewId)
-        .setData({
+        .doc(reviewId)
+        .set({
       "type": "ReviewC",
       "username": currentUser.displayName,
       "userId": ownerId,
@@ -491,12 +491,12 @@ else{return Container();}
         child: Column(
           children: <Widget>[
             FutureBuilder(
-              future: usersRef.document(widget.ownerId).get(),
+              future: usersRef.doc(widget.ownerId).get(),
               builder: (context, snapshot) {
                 if (!snapshot.hasData) {
                   return circularProgress();
                 }
-                User user = User.fromDocument(snapshot.data);
+                 Users user = Users.fromDocument(snapshot.data);
 //          bool isPostOwner = currentUserId == ownerId;
                 return Column(
                   children: <Widget>[
@@ -583,12 +583,12 @@ else{return Container();}
           children: <Widget>[
 
             FutureBuilder(
-              future: usersRef.document(widget.ownerId).get(),
+              future: usersRef.doc(widget.ownerId).get(),
               builder: (context, snapshot) {
                 if (!snapshot.hasData) {
                   return circularProgress();
                 }
-                User user = User.fromDocument(snapshot.data);
+                 Users user = Users.fromDocument(snapshot.data);
 //          bool isPostOwner = currentUserId == ownerId;
                 return Column(
                   children: <Widget>[
@@ -673,12 +673,12 @@ else{return Container();}
         child: Column(
           children: <Widget>[
             FutureBuilder(
-              future: usersRef.document(widget.ownerId).get(),
+              future: usersRef.doc(widget.ownerId).get(),
               builder: (context, snapshot) {
                 if (!snapshot.hasData) {
                   return circularProgress();
                 }
-                User user = User.fromDocument(snapshot.data);
+                 Users user = Users.fromDocument(snapshot.data);
 //          bool isPostOwner = currentUserId == ownerId;
                 return Column(
                   children: <Widget>[
@@ -764,12 +764,12 @@ else{return Container();}
         child: Column(
           children: <Widget>[
             FutureBuilder(
-              future: usersRef.document(widget.ownerId).get(),
+              future: usersRef.doc(widget.ownerId).get(),
               builder: (context, snapshot) {
                 if (!snapshot.hasData) {
                   return circularProgress();
                 }
-                User user = User.fromDocument(snapshot.data);
+                 Users user = Users.fromDocument(snapshot.data);
 //          bool isPostOwner = currentUserId == ownerId;
                 return Column(
                   children: <Widget>[

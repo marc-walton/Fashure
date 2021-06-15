@@ -10,7 +10,7 @@ admin.initializeApp();
 // });
 
 exports.onCreateFollower = functions.firestore
-  .document("/followers/{userId}/userFollowers/{followerId}")
+  .doc("/followers/{userId}/userFollowers/{followerId}")
   .onCreate(async (snapshot, context) => {
     console.log("Follower Created", snapshot.id);
     const userId = context.params.userId;
@@ -44,7 +44,7 @@ exports.onCreateFollower = functions.firestore
   });
 
 exports.onDeleteFollower = functions.firestore
-  .document("/followers/{userId}/userFollowers/{followerId}")
+  .doc("/followers/{userId}/userFollowers/{followerId}")
   .onDelete(async (snapshot, context) => {
     console.log("Follower Deleted", snapshot.id);
 
@@ -68,9 +68,9 @@ exports.onDeleteFollower = functions.firestore
 
 // when a post is created, add post to timeline of each follower (of post owner)
 exports.onCreatePost = functions.firestore
-  .document("/posts/{userId}/userPosts/{postId}")
+  .doc("/posts/{userId}/userPosts/{postId}")
   .onCreate(async (snapshot, context) => {
-    const postCreated = snapshot.data();
+    const postCreated = snapshot.data;
     const userId = context.params.userId;
     const postId = context.params.postId;
 
@@ -97,7 +97,7 @@ exports.onCreatePost = functions.firestore
   });
 
 exports.onUpdatePost = functions.firestore
-  .document("/posts/{userId}/userPosts/{postId}")
+  .doc("/posts/{userId}/userPosts/{postId}")
   .onUpdate(async (change, context) => {
     const postUpdated = change.after.data();
     const userId = context.params.userId;
@@ -131,7 +131,7 @@ exports.onUpdatePost = functions.firestore
   });
 
 exports.onDeletePost = functions.firestore
-  .document("/posts/{userId}/userPosts/{postId}")
+  .doc("/posts/{userId}/userPosts/{postId}")
   .onDelete(async (snapshot, context) => {
     const userId = context.params.userId;
     const postId = context.params.postId;
@@ -164,9 +164,9 @@ exports.onDeletePost = functions.firestore
   });
 
 exports.onCreateActivityFeedItem = functions.firestore
-  .document('/feed/{userId}/feedItems/{activityFeedItem}')
+  .doc('/feed/{userId}/feedItems/{activityFeedItem}')
   .onCreate(async (snapshot, context) => {
-    console.log('Activity Feed Item Created', snapshot.data());
+    console.log('Activity Feed Item Created', snapshot.data);
 
     // 1) Get user connected to the feed
     const userId = context.params.userId;
@@ -176,7 +176,7 @@ exports.onCreateActivityFeedItem = functions.firestore
 
     // 2) Once we have user, check if they have a notification token; send notification, if they have a token
     const androidNotificationToken = doc.data().androidNotificationToken;
-    const createdActivityFeedItem = snapshot.data();
+    const createdActivityFeedItem = snapshot.data;
     if (androidNotificationToken) {
       // send notification
       sendNotification(androidNotificationToken, createdActivityFeedItem);

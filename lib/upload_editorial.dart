@@ -19,10 +19,9 @@ import 'package:fashow/Constants.dart';
 import 'package:image/image.dart' as Im;
 import 'package:uuid/uuid.dart';
 import 'package:zefyr/zefyr.dart';
-
 class UploadEdit extends StatefulWidget {
   final GlobalKey<ScaffoldState> globalKey;
-  final User currentUser;
+  final Users currentUser;
 
   UploadEdit({this.currentUser,
   this.globalKey});
@@ -129,9 +128,9 @@ ZefyrImageDelegate _imageDelegate;
     });
   }
   Future<String> uploadImage(imageFile) async {
-    StorageUploadTask uploadTask =
+   UploadTask uploadTask =
     storageRef.child("blog_$blogId.jpg").putFile(imageFile);
-    StorageTaskSnapshot storageSnap = await uploadTask.onComplete;
+    TaskSnapshot storageSnap = await uploadTask;
     String downloadUrl = await storageSnap.ref.getDownloadURL();
     return downloadUrl;
   }
@@ -182,10 +181,10 @@ String ImagesUrl,
   }) {
 
     blogRef
-        .document(widget.currentUser.id)
+        .doc(widget.currentUser.id)
         .collection("userBlog")
-        .document(blogId)
-        .setData({
+        .doc(blogId)
+        .set({
       "blogId": blogId,
       "ownerId": widget.currentUser.id,
       "username": widget.currentUser.displayName,
@@ -258,6 +257,7 @@ String ImagesUrl,
   }
   builduploadForm() {
     final editor = ZefyrField(
+
       height: 400.0, // set the editor's height
       decoration: InputDecoration(labelText: 'Description'),
       controller: _controller,
@@ -288,78 +288,73 @@ shrinkWrap: true,
       ],
     );
     return
-        Container( decoration: BoxDecoration(
-            gradient: fabGradient
-        ) ,
-          alignment: Alignment.center,
-          child: Stack(
-            children: [
-              WillPopScope(
-                onWillPop:()=> _onBackPressed(),
-                child: Scaffold(
+        Stack(
+          children: [
+            WillPopScope(
+              onWillPop:()=> _onBackPressed(),
+              child: Scaffold(
 
-                  // resizeToAvoidBottomPadding: true,
-                  appBar: AppBar(
-                    backgroundColor: kPrimaryColor,
-                    leading: IconButton(
-                        icon: Icon(Icons.arrow_back, color: Colors.white),
-                        onPressed:()=>  showDialog(
-                          context: context,
-                          builder: (context) => new AlertDialog(
-                            title: new Text('Are you sure?'),
-                            content: new Text('Do you want to exit without uploading?'),
-                            actions: <Widget>[
-                              new FlatButton(
+                // resizeToAvoidBottomPadding: true,
+                appBar: AppBar(
+                  backgroundColor: kPrimaryColor,
+                  leading: IconButton(
+                      icon: Icon(Icons.arrow_back, color: Colors.white),
+                      onPressed:()=>  showDialog(
+                        context: context,
+                        builder: (context) => new AlertDialog(
+                          title: new Text('Are you sure?'),
+                          content: new Text('Do you want to exit without uploading?'),
+                          actions: <Widget>[
+                            new FlatButton(
 
-                                onPressed: () => Navigator.of(context).pop(false),
-                                child: Text("NO"),
-                              ),
-                              SizedBox(height: 16),
-                              new FlatButton(
+                              onPressed: () => Navigator.of(context).pop(false),
+                              child: Text("NO"),
+                            ),
+                            SizedBox(height: 16),
+                            new FlatButton(
 
-                                onPressed: () async {Navigator.of(context).pop(true);
+                              onPressed: () async {Navigator.of(context).pop(true);
 
 //            clearImage();
-                                },
-                                child: Text("YES"),
-                              ),
-                            ],
-                          ),
-                        ) ??
-                            false),
-                    actions: [
-                      RaisedButton(color:kblue,
-                        onPressed: isUploading ? null : () => handleSubmit(),
-                        child: Text(
-                          "Post",
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 20.0),
+                              },
+                              child: Text("YES"),
+                            ),
+                          ],
                         ),
-                      )
-                    ],
+                      ) ??
+                          false),
+                  actions: [
+                    RaisedButton(color:kblue,
+                      onPressed: isUploading ? null : () => handleSubmit(),
+                      child: Text(
+                        "Post",
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 20.0),
+                      ),
+                    )
+                  ],
+                ),
+                body:
+
+                Container(
+
+                  decoration: BoxDecoration(
+                      gradient: fabGradient
+                  ) ,
+                  alignment: Alignment.center,
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: ZefyrScaffold(child: form),
                   ),
-                  body:
-
-                  Container(
-
-                    decoration: BoxDecoration(
-                        gradient: fabGradient
-                    ) ,
-                    alignment: Alignment.center,
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: ZefyrScaffold(child: form),
-                    ),
-                  ),
-
                 ),
 
               ),
-              isUploading ? Center(child: CircularProgressIndicator()) : Text(""),
-            ],
-          ),
+
+            ),
+            isUploading ? Center(child: CircularProgressIndicator()) : Text(""),
+          ],
         );
 
 
