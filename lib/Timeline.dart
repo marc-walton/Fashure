@@ -1,6 +1,7 @@
 import 'package:bubble_tab_indicator/bubble_tab_indicator.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:fashow/CollectionsUplaod.dart';
 import 'package:fashow/custom_image.dart';
 import 'package:fashow/upload_editorial.dart';
@@ -20,8 +21,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:fashow/progress.dart';
 import 'package:fashow/HomePage.dart';
 import 'package:fashow/ActivityFeed.dart';
-import 'package:getflutter/components/button/gf_button.dart';
-import 'package:getflutter/shape/gf_button_shape.dart';
+
 import 'package:paginate_firestore/paginate_firestore.dart';
 import 'package:get/get.dart';
 final CollectionReference usersRef = FirebaseFirestore.instance.collection('users');
@@ -287,7 +287,7 @@ TabController _tabController;
                         padding: const EdgeInsets.all(8.0),
                         child: ClipRRect(
                             borderRadius: BorderRadius.circular(15.0),
-                            child: Container(child: Image.network(currentUser.photoUrl),)),
+                            child: Container(child: Icon(EvaIcons.personOutline),)),
                       ),
                     ),
 

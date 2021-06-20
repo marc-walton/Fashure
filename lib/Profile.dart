@@ -76,7 +76,10 @@ UserModel receiverId;
     super.initState();
     getProducts();
     getProfilePosts();
-//    getPosts();
+    getProfileColl();
+    getProfileBlog();
+    getProfileProds();
+
     getFollowers();
     getFollowing();
     checkIfFollowing();
@@ -424,6 +427,7 @@ return
             itemCount: snapshot.data.docs.length,
             itemBuilder: (context, index) {
               DocumentSnapshot docSnapshot = snapshot.data.docs[index];
+              List shop = docSnapshot["shopmediaUrl"];
               return
 
                 Padding(
@@ -444,7 +448,7 @@ return
                             );
                           },
                           child: CachedNetworkImage(
-                            imageUrl: docSnapshot["shopmediaUrl"],)
+                            imageUrl:shop.first,)
                       ),
                     )
                 );
@@ -453,21 +457,6 @@ return
 
   );
 }
-  getProfilePosts() async {
-    setState(() {
-      isLoading = true;
-    });
-    QuerySnapshot snapshot = await postsRef
-        .doc(widget.profileId)
-        .collection('userPosts')
-        .orderBy('timestamp', descending: true)
-        .get();
-    setState(() {
-      isLoading = false;
-      postCount = snapshot.docs.length;
-      posts = snapshot.docs.map((doc) => Post.fromDocument(doc)).toList();
-    });
-  }
   Client(){
     StreamBuilder(
         stream:FirebaseFirestore.instance.collection('users')
@@ -500,7 +489,185 @@ return
         }
     );
   }
+  getProfilePosts() async {
+    setState(() {
+      isLoading = true;
+    });
+    QuerySnapshot snapshot = await postsRef
+        .doc(widget.profileId)
+        .collection('userPosts')
+        .orderBy('timestamp', descending: true)
+        .get();
+    setState(() {
+      postCount = snapshot.docs.length;
+      posts = snapshot.docs.map((doc) => Post.fromDocument(doc)).toList();
+      isLoading = false;
 
+    });
+  }
+  getProfileProds() async {
+    setState(() {
+      isLoading = true;
+    });
+    QuerySnapshot snapshot = await productsRef
+        .doc(widget.profileId)
+        .collection('userProducts')
+        .orderBy('timestamp', descending: true)
+        .get();
+    setState(() {
+      //  proCount = snapshot.documents.length;
+      products = snapshot.docs.map((doc) => Prod.fromDocument(doc)).toList();
+      isLoading = false;
+
+    });
+  }
+  getProfileColl() async {
+    setState(() {
+      isLoading = true;
+    });
+    QuerySnapshot snapshot = await collRef
+        .doc(widget.profileId)
+        .collection('userCollections')
+        .orderBy('timestamp', descending: true)
+        .get();
+    setState(() {
+      //  proCount = snapshot.documents.length;
+      collection = snapshot.docs.map((doc) => Coll.fromDocument(doc)).toList();
+      isLoading = false;
+
+    });
+  }
+  getProfileBlog() async {
+    setState(() {
+      isLoading = true;
+    });
+    QuerySnapshot snapshot = await blogRef
+        .doc(widget.profileId)
+        .collection('userBlog')
+        .orderBy('timestamp', descending: true)
+        .get();
+    setState(() {
+      //  proCount = snapshot.documents.length;
+      blogs= snapshot.docs.map((doc) => Blog.fromDocument(doc)).toList();
+      isLoading = false;
+
+    });
+  }
+  buildProducts(){
+    if (isLoading) {
+      return circularProgress();
+    } else if (products.isEmpty) {
+      return Container(
+//        color: kSecondaryColor,
+        child: Padding(
+          padding: EdgeInsets.only(top: 150.0,left:110),
+          child: Text(
+            "No Products",
+            style: TextStyle(
+              color: Colors.redAccent,
+              fontSize: 40.0,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        ),
+      );
+    } else  {
+      List<GridTile> gridTiles = [];
+      products.forEach((product) {
+        gridTiles.add(GridTile(child: ProductTile(product)));
+      });
+      return GridView.count(
+        crossAxisCount: 3,
+        childAspectRatio: 1.0,
+        mainAxisSpacing: 1.5,
+        crossAxisSpacing: 1.5,
+        shrinkWrap: true,
+        physics: NeverScrollableScrollPhysics(),
+        children: gridTiles,
+      );
+    }
+  }
+  buildPosts(){
+    if (isLoading) {
+      return circularProgress();
+    } else if (posts.isEmpty) {
+      return Container(
+//        color: kSecondaryColor,
+        child: Padding(
+          padding: EdgeInsets.only(top: 150.0,left:110),
+          child: Text(
+            "No Posts",
+            style: TextStyle(
+              color: Colors.redAccent,
+              fontSize: 40.0,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        ),
+      );
+    } else  {
+      List<GridTile> gridTiles = [];
+      posts.forEach((post) {
+        gridTiles.add(GridTile(child: PostTile(post)));
+      });
+      return GridView.count(
+        crossAxisCount: 3,
+        childAspectRatio: 1.0,
+        mainAxisSpacing: 1.5,
+        crossAxisSpacing: 1.5,
+        shrinkWrap: true,
+        physics: NeverScrollableScrollPhysics(),
+        children: gridTiles,
+      );
+    }
+  }
+
+  buildColls(){
+    if (isLoading) {
+      return circularProgress();
+    } else if (collection.isEmpty) {
+      return Container(
+//        color: kSecondaryColor,
+        child: Padding(
+          padding: EdgeInsets.only(top: 150.0,left:110),
+          child: Text(
+            "No Collections",
+            style: TextStyle(
+              color: Colors.redAccent,
+              fontSize: 40.0,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        ),
+      );
+    } else{
+      return
+        collection.toList();
+    }
+  }
+  buildEditorial(){
+    if (isLoading) {
+      return circularProgress();
+    } else if (blogs.isEmpty) {
+      return Container(
+//        color: kSecondaryColor,
+        child: Padding(
+          padding: EdgeInsets.only(top: 150.0,left:110),
+          child: Text(
+            "No Blogs",
+            style: TextStyle(
+              color: Colors.redAccent,
+              fontSize: 40.0,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        ),
+      );
+    } else{
+      return
+        geteditorial();
+    }
+  }
   Column buildCountColumn(String label, int count) {
     return Column(
       mainAxisSize: MainAxisSize.min,
@@ -916,90 +1083,7 @@ SizedBox(height: 10.0,),
       },
     );
   }
-  buildProducts(){
-    if (isLoading) {
-      return circularProgress();
-    } else if (products.isEmpty) {
-      return Container(
-//        color: kSecondaryColor,
-        child: Padding(
-          padding: EdgeInsets.only(top: 150.0,left:110),
-          child: Text(
-            "No Products",
-            style: TextStyle(
-              color: Colors.redAccent,
-              fontSize: 40.0,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-        ),
-      );
-    } else if (shopOrientation == "grid") {
-      List<GridTile> gridTiles = [];
-      products.forEach((product) {
-        gridTiles.add(GridTile(child: ProductTile(product)));
-      });
-      return GridView.count(
-        crossAxisCount: 3,
-        childAspectRatio: 1.0,
-        mainAxisSpacing: 1.5,
-        crossAxisSpacing: 1.5,
-        shrinkWrap: true,
-        physics: NeverScrollableScrollPhysics(),
-        children: gridTiles,
-      );
-    } else if (shopOrientation == "list") {
-      return Column(
-        children: products,
-      );
-    }
-  }
-buildColls(){
-    if (isLoading) {
-      return circularProgress();
-    } else if (collection.isEmpty) {
-      return Container(
-//        color: kSecondaryColor,
-        child: Padding(
-          padding: EdgeInsets.only(top: 150.0,left:110),
-          child: Text(
-            "No Collections",
-            style: TextStyle(
-              color: Colors.redAccent,
-              fontSize: 40.0,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-        ),
-      );
-    } else{
-      return
-      getcollections();
-    }
-  }
-buildEditorial(){
-    if (isLoading) {
-      return circularProgress();
-    } else if (blogs.isEmpty) {
-      return Container(
-//        color: kSecondaryColor,
-        child: Padding(
-          padding: EdgeInsets.only(top: 150.0,left:110),
-          child: Text(
-            "No Blogs",
-            style: TextStyle(
-              color: Colors.redAccent,
-              fontSize: 40.0,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-        ),
-      );
-    } else{
-      return
-      geteditorial();
-    }
-  }
+
 
   setShopOrientation(String shopOrientation) {
     setState(() {
@@ -1154,10 +1238,10 @@ buildEditorial(){
                         labelStyle: TextStyle(color: Colors.white),
                         height: 56,
                         tabs: [
-                         Tab( icon: Icon(Icons.weekend,color: Colors.white,)),
-                         Tab(  icon:Icon(Icons.store,color: Colors.white,)),
-                         Tab( icon: Icon(Icons.self_improvement,color: Colors.white,)),
-                         Tab( icon: Icon(Icons.create,color: Colors.white,)),
+                          Tab( icon: Icon(Icons.weekend,color: Colors.white,)),
+                          Tab(  icon:Icon(Icons.store,color: Colors.white,)),
+                          Tab( icon: Icon(Icons.self_improvement,color: Colors.white,)),
+                          Tab( icon: Icon(Icons.create,color: Colors.white,)),
 
                         ],
                       ),
@@ -1166,11 +1250,11 @@ buildEditorial(){
                         child: TabBarView(
                           children: <Widget>[
                             Container(
-                              child:getPosts(),
+                              child:buildPosts(),
                             ),  Container(
-                              child: getProds(),
+                              child: buildProducts(),
                             ),Container(
-                              child: getcollections(),
+                              child: buildColls(),
                             ),Container(
                               child: buildEditorial(),
                             ),
@@ -1180,8 +1264,7 @@ buildEditorial(){
                     ],
                   ),
                 ),
-              ),
-            ),
+              ),            ),
 
           ],
         ),

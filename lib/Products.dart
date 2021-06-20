@@ -21,6 +21,81 @@ import 'package:fashow/ActivityFeed.dart';
 import 'package:fashow/product_custom.dart';
 import 'package:fashow/Profile.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:carousel_slider/carousel_slider.dart';
+List <Widget>listOfImages = <Widget>[];
+
+pics({String userid,String prodid}){
+  return
+    FutureBuilder<QuerySnapshot> (
+        future:     productsRef
+            .doc(userid)
+            .collection('userProducts')
+            .where('prodId' ,isEqualTo: '$prodid')
+        // .where('ownerId' ,isEqualTo: '$ownerId')
+            .get(),
+        builder: (context, snapshot) {
+
+          if (snapshot.hasData) {
+            return new ListView.builder(
+                shrinkWrap: true,
+                scrollDirection:Axis.vertical,
+                itemCount: snapshot.data.docs.length,
+                itemBuilder: (BuildContext context, int index) {
+                  // List<String> images = List.from(snapshot.data.docs[index].data()['collmediaUrl']);
+                  listOfImages = [];
+                  for (int i = 0;
+                  i <
+                      snapshot.data.docs[index].data()['shopmediaUrl']
+                          .length;
+                  i++) {
+                    listOfImages.add(CachedNetworkImage(imageUrl:snapshot
+                        .data.docs[index].data()['shopmediaUrl'][i]));
+                  }
+                  return Column(
+                    children: <Widget>[
+                      Container(
+                          margin: EdgeInsets.all(10.0),
+
+                          decoration: BoxDecoration(
+                            color: Colors.transparent,
+                          ),
+                          width: MediaQuery
+                              .of(context)
+                              .size
+                              .width,
+                          child:
+                          CarouselSlider(
+                              items: listOfImages,
+                              options: CarouselOptions(
+                                height: 500,
+                                aspectRatio: 16/9,
+                                viewportFraction: 0.8,
+                                initialPage: 0,
+                                enableInfiniteScroll: true,
+                                reverse: false,
+                                autoPlay: true,
+                                autoPlayInterval: Duration(seconds: 3),
+                                autoPlayAnimationDuration: Duration(milliseconds: 800),
+                                autoPlayCurve: Curves.fastOutSlowIn,
+                                enlargeCenterPage: true,
+                                // onPageChanged: callbackFunction,
+                                scrollDirection: Axis.horizontal,
+                              )
+                          )
+                      ),
+
+                    ],
+                  );
+                }
+            );
+          }
+          return Center(
+            child: CircularProgressIndicator(),
+          );
+
+        });
+
+}
 
 class Prod extends StatefulWidget {
   final String prodId;
@@ -41,7 +116,7 @@ final bool worldship;
   final String composition;
   final String washandcare;
   final String sizeandfit;
-  final String shopmediaUrl;
+  final List shopmediaUrl;
   final String photoUrl;
  final int freesize;
   final int xxxs;
@@ -311,7 +386,7 @@ final bool worldship;
   final String composition;
   final String washandcare;
   final String sizeandfit;
-  final String shopmediaUrl;
+  final List shopmediaUrl;
   final String photoUrl;
   final int freesize;
   final int xxxs;
@@ -447,31 +522,31 @@ FREE(){
   if (currentUser.country == 'India'){
   Proceedtobuy(total:inr,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
   username: username,
-  mediaUrl: shopmediaUrl,
+  mediaUrl: shopmediaUrl.first,
   productname:productname);
   }
   else if (currentUser.country == 'UK'){
   Proceedtobuy(total:gbp,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
   username: username,
-  mediaUrl: shopmediaUrl,
+  mediaUrl: shopmediaUrl.first,
   productname:productname);
   }
   else  if (currentUser.country == 'Europe'){
   Proceedtobuy(total:eur,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
   username: username,
-  mediaUrl: shopmediaUrl,
+  mediaUrl: shopmediaUrl.first,
   productname:productname);
   }
   else  if (currentUser.country == 'USA'){
   Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
   username: username,
-  mediaUrl: shopmediaUrl,
+  mediaUrl: shopmediaUrl.first,
   productname:productname);
   }
   else  {
   Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
   username: username,
-  mediaUrl: shopmediaUrl,
+  mediaUrl: shopmediaUrl.first,
   productname:productname);
   }
 
@@ -515,31 +590,31 @@ XXXS(){
             if (currentUser.country == 'India'){
               Proceedtobuy(total:inr,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                   username: username,
-                  mediaUrl: shopmediaUrl,
+                  mediaUrl: shopmediaUrl.first,
                   productname:productname);
             }
             else if (currentUser.country == 'UK'){
               Proceedtobuy(total:gbp,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                   username: username,
-                  mediaUrl: shopmediaUrl,
+                  mediaUrl: shopmediaUrl.first,
                   productname:productname);
             }
             else  if (currentUser.country == 'Europe'){
               Proceedtobuy(total:eur,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                   username: username,
-                  mediaUrl: shopmediaUrl,
+                  mediaUrl: shopmediaUrl.first,
                   productname:productname);
             }
             else  if (currentUser.country == 'USA'){
               Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                   username: username,
-                  mediaUrl: shopmediaUrl,
+                  mediaUrl: shopmediaUrl.first,
                   productname:productname);
             }
             else  {
               Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                   username: username,
-                  mediaUrl: shopmediaUrl,
+                  mediaUrl: shopmediaUrl.first,
                   productname:productname);
             }
 
@@ -582,37 +657,37 @@ XXS(){
 
            usersize = 'XXS';
          });
-
          if (currentUser.country == 'India'){
            Proceedtobuy(total:inr,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                username: username,
-               mediaUrl: shopmediaUrl,
+               mediaUrl: shopmediaUrl.first,
                productname:productname);
          }
          else if (currentUser.country == 'UK'){
            Proceedtobuy(total:gbp,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                username: username,
-               mediaUrl: shopmediaUrl,
+               mediaUrl: shopmediaUrl.first,
                productname:productname);
          }
          else  if (currentUser.country == 'Europe'){
            Proceedtobuy(total:eur,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                username: username,
-               mediaUrl: shopmediaUrl,
+               mediaUrl: shopmediaUrl.first,
                productname:productname);
          }
          else  if (currentUser.country == 'USA'){
            Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                username: username,
-               mediaUrl: shopmediaUrl,
+               mediaUrl: shopmediaUrl.first,
                productname:productname);
          }
          else  {
            Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                username: username,
-               mediaUrl: shopmediaUrl,
+               mediaUrl: shopmediaUrl.first,
                productname:productname);
          }
+
 
        },
        child: Container(
@@ -655,33 +730,34 @@ XS(){
           if (currentUser.country == 'India'){
             Proceedtobuy(total:inr,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else if (currentUser.country == 'UK'){
             Proceedtobuy(total:gbp,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else  if (currentUser.country == 'Europe'){
             Proceedtobuy(total:eur,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else  if (currentUser.country == 'USA'){
             Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else  {
             Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
+
 
         },
         child: Container(
@@ -723,33 +799,34 @@ S(){
          if (currentUser.country == 'India'){
            Proceedtobuy(total:inr,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                username: username,
-               mediaUrl: shopmediaUrl,
+               mediaUrl: shopmediaUrl.first,
                productname:productname);
          }
          else if (currentUser.country == 'UK'){
            Proceedtobuy(total:gbp,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                username: username,
-               mediaUrl: shopmediaUrl,
+               mediaUrl: shopmediaUrl.first,
                productname:productname);
          }
          else  if (currentUser.country == 'Europe'){
            Proceedtobuy(total:eur,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                username: username,
-               mediaUrl: shopmediaUrl,
+               mediaUrl: shopmediaUrl.first,
                productname:productname);
          }
          else  if (currentUser.country == 'USA'){
            Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                username: username,
-               mediaUrl: shopmediaUrl,
+               mediaUrl: shopmediaUrl.first,
                productname:productname);
          }
          else  {
            Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                username: username,
-               mediaUrl: shopmediaUrl,
+               mediaUrl: shopmediaUrl.first,
                productname:productname);
          }
+
 
        },
        child: Container(
@@ -791,33 +868,34 @@ M(){
          if (currentUser.country == 'India'){
            Proceedtobuy(total:inr,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                username: username,
-               mediaUrl: shopmediaUrl,
+               mediaUrl: shopmediaUrl.first,
                productname:productname);
          }
          else if (currentUser.country == 'UK'){
            Proceedtobuy(total:gbp,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                username: username,
-               mediaUrl: shopmediaUrl,
+               mediaUrl: shopmediaUrl.first,
                productname:productname);
          }
          else  if (currentUser.country == 'Europe'){
            Proceedtobuy(total:eur,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                username: username,
-               mediaUrl: shopmediaUrl,
+               mediaUrl: shopmediaUrl.first,
                productname:productname);
          }
          else  if (currentUser.country == 'USA'){
            Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                username: username,
-               mediaUrl: shopmediaUrl,
+               mediaUrl: shopmediaUrl.first,
                productname:productname);
          }
          else  {
            Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                username: username,
-               mediaUrl: shopmediaUrl,
+               mediaUrl: shopmediaUrl.first,
                productname:productname);
          }
+
 
        },
        child: Container(
@@ -859,33 +937,34 @@ L(){
           if (currentUser.country == 'India'){
             Proceedtobuy(total:inr,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else if (currentUser.country == 'UK'){
             Proceedtobuy(total:gbp,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else  if (currentUser.country == 'Europe'){
             Proceedtobuy(total:eur,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else  if (currentUser.country == 'USA'){
             Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else  {
             Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
+
 
         },
         child: Container(
@@ -927,33 +1006,34 @@ XL(){
           if (currentUser.country == 'India'){
             Proceedtobuy(total:inr,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else if (currentUser.country == 'UK'){
             Proceedtobuy(total:gbp,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else  if (currentUser.country == 'Europe'){
             Proceedtobuy(total:eur,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else  if (currentUser.country == 'USA'){
             Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else  {
             Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
+
 
         },
         child: Container(
@@ -995,33 +1075,34 @@ XXL(){
           if (currentUser.country == 'India'){
             Proceedtobuy(total:inr,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else if (currentUser.country == 'UK'){
             Proceedtobuy(total:gbp,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else  if (currentUser.country == 'Europe'){
             Proceedtobuy(total:eur,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else  if (currentUser.country == 'USA'){
             Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else  {
             Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
+
 
         },
         child: Container(
@@ -1063,31 +1144,31 @@ XXXL(){
           if (currentUser.country == 'India'){
             Proceedtobuy(total:inr,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else if (currentUser.country == 'UK'){
             Proceedtobuy(total:gbp,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else  if (currentUser.country == 'Europe'){
             Proceedtobuy(total:eur,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else  if (currentUser.country == 'USA'){
             Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else  {
             Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
 
@@ -1132,33 +1213,34 @@ FXL(){
           if (currentUser.country == 'India'){
             Proceedtobuy(total:inr,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else if (currentUser.country == 'UK'){
             Proceedtobuy(total:gbp,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else  if (currentUser.country == 'Europe'){
             Proceedtobuy(total:eur,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else  if (currentUser.country == 'USA'){
             Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else  {
             Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
+
 
         },
         child: Container(
@@ -1199,33 +1281,34 @@ FIVXL(){
           if (currentUser.country == 'India'){
             Proceedtobuy(total:inr,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else if (currentUser.country == 'UK'){
             Proceedtobuy(total:gbp,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else  if (currentUser.country == 'Europe'){
             Proceedtobuy(total:eur,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else  if (currentUser.country == 'USA'){
             Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else  {
             Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
+
 
         },
         child: Container(
@@ -1267,33 +1350,34 @@ SIXXL(){
           if (currentUser.country == 'India'){
             Proceedtobuy(total:inr,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else if (currentUser.country == 'UK'){
             Proceedtobuy(total:gbp,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else  if (currentUser.country == 'Europe'){
             Proceedtobuy(total:eur,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else  if (currentUser.country == 'USA'){
             Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else  {
             Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
+
 
         },
         child: Container(
@@ -1335,33 +1419,34 @@ SEVXL(){
           if (currentUser.country == 'India'){
             Proceedtobuy(total:inr,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else if (currentUser.country == 'UK'){
             Proceedtobuy(total:gbp,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else  if (currentUser.country == 'Europe'){
             Proceedtobuy(total:eur,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else  if (currentUser.country == 'USA'){
             Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else  {
             Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
+
 
         },
         child: Container(
@@ -1403,31 +1488,31 @@ EIGXL(){
           if (currentUser.country == 'India'){
             Proceedtobuy(total:inr,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else if (currentUser.country == 'UK'){
             Proceedtobuy(total:gbp,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else  if (currentUser.country == 'Europe'){
             Proceedtobuy(total:eur,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else  if (currentUser.country == 'USA'){
             Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else  {
             Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
 
@@ -1469,34 +1554,34 @@ MS1(){
   usersize = '(US)3-1/2';
   });
   if (currentUser.country == 'India'){
-  Proceedtobuy(total:inr,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-  username: username,
-  mediaUrl: shopmediaUrl,
-  productname:productname);
+    Proceedtobuy(total:inr,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
+        username: username,
+        mediaUrl: shopmediaUrl.first,
+        productname:productname);
   }
   else if (currentUser.country == 'UK'){
-  Proceedtobuy(total:gbp,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-  username: username,
-  mediaUrl: shopmediaUrl,
-  productname:productname);
+    Proceedtobuy(total:gbp,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
+        username: username,
+        mediaUrl: shopmediaUrl.first,
+        productname:productname);
   }
   else  if (currentUser.country == 'Europe'){
-  Proceedtobuy(total:eur,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-  username: username,
-  mediaUrl: shopmediaUrl,
-  productname:productname);
+    Proceedtobuy(total:eur,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
+        username: username,
+        mediaUrl: shopmediaUrl.first,
+        productname:productname);
   }
   else  if (currentUser.country == 'USA'){
-  Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-  username: username,
-  mediaUrl: shopmediaUrl,
-  productname:productname);
+    Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
+        username: username,
+        mediaUrl: shopmediaUrl.first,
+        productname:productname);
   }
   else  {
-  Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-  username: username,
-  mediaUrl: shopmediaUrl,
-  productname:productname);
+    Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
+        username: username,
+        mediaUrl: shopmediaUrl.first,
+        productname:productname);
   }
 
   },
@@ -1540,33 +1625,34 @@ else{
        if (currentUser.country == 'India'){
          Proceedtobuy(total:inr,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
              username: username,
-             mediaUrl: shopmediaUrl,
+             mediaUrl: shopmediaUrl.first,
              productname:productname);
        }
        else if (currentUser.country == 'UK'){
          Proceedtobuy(total:gbp,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
              username: username,
-             mediaUrl: shopmediaUrl,
+             mediaUrl: shopmediaUrl.first,
              productname:productname);
        }
        else  if (currentUser.country == 'Europe'){
          Proceedtobuy(total:eur,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
              username: username,
-             mediaUrl: shopmediaUrl,
+             mediaUrl: shopmediaUrl.first,
              productname:productname);
        }
        else  if (currentUser.country == 'USA'){
          Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
              username: username,
-             mediaUrl: shopmediaUrl,
+             mediaUrl: shopmediaUrl.first,
              productname:productname);
        }
        else  {
          Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
              username: username,
-             mediaUrl: shopmediaUrl,
+             mediaUrl: shopmediaUrl.first,
              productname:productname);
        }
+
 
      },
      child: Container(
@@ -1607,34 +1693,34 @@ MS3(){
   usersize = '(US)4-1/2';
   });
   if (currentUser.country == 'India'){
-  Proceedtobuy(total:inr,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-  username: username,
-  mediaUrl: shopmediaUrl,
-  productname:productname);
+    Proceedtobuy(total:inr,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
+        username: username,
+        mediaUrl: shopmediaUrl.first,
+        productname:productname);
   }
   else if (currentUser.country == 'UK'){
-  Proceedtobuy(total:gbp,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-  username: username,
-  mediaUrl: shopmediaUrl,
-  productname:productname);
+    Proceedtobuy(total:gbp,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
+        username: username,
+        mediaUrl: shopmediaUrl.first,
+        productname:productname);
   }
   else  if (currentUser.country == 'Europe'){
-  Proceedtobuy(total:eur,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-  username: username,
-  mediaUrl: shopmediaUrl,
-  productname:productname);
+    Proceedtobuy(total:eur,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
+        username: username,
+        mediaUrl: shopmediaUrl.first,
+        productname:productname);
   }
   else  if (currentUser.country == 'USA'){
-  Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-  username: username,
-  mediaUrl: shopmediaUrl,
-  productname:productname);
+    Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
+        username: username,
+        mediaUrl: shopmediaUrl.first,
+        productname:productname);
   }
   else  {
-  Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-  username: username,
-  mediaUrl: shopmediaUrl,
-  productname:productname);
+    Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
+        username: username,
+        mediaUrl: shopmediaUrl.first,
+        productname:productname);
   }
 
   },
@@ -1679,33 +1765,34 @@ return
          if (currentUser.country == 'India'){
            Proceedtobuy(total:inr,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                username: username,
-               mediaUrl: shopmediaUrl,
+               mediaUrl: shopmediaUrl.first,
                productname:productname);
          }
          else if (currentUser.country == 'UK'){
            Proceedtobuy(total:gbp,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                username: username,
-               mediaUrl: shopmediaUrl,
+               mediaUrl: shopmediaUrl.first,
                productname:productname);
          }
          else  if (currentUser.country == 'Europe'){
            Proceedtobuy(total:eur,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                username: username,
-               mediaUrl: shopmediaUrl,
+               mediaUrl: shopmediaUrl.first,
                productname:productname);
          }
          else  if (currentUser.country == 'USA'){
            Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                username: username,
-               mediaUrl: shopmediaUrl,
+               mediaUrl: shopmediaUrl.first,
                productname:productname);
          }
          else  {
            Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                username: username,
-               mediaUrl: shopmediaUrl,
+               mediaUrl: shopmediaUrl.first,
                productname:productname);
          }
+
 
        },
        child: Container(
@@ -1748,33 +1835,34 @@ MS5(){
         if (currentUser.country == 'India'){
           Proceedtobuy(total:inr,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
               username: username,
-              mediaUrl: shopmediaUrl,
+              mediaUrl: shopmediaUrl.first,
               productname:productname);
         }
         else if (currentUser.country == 'UK'){
           Proceedtobuy(total:gbp,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
               username: username,
-              mediaUrl: shopmediaUrl,
+              mediaUrl: shopmediaUrl.first,
               productname:productname);
         }
         else  if (currentUser.country == 'Europe'){
           Proceedtobuy(total:eur,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
               username: username,
-              mediaUrl: shopmediaUrl,
+              mediaUrl: shopmediaUrl.first,
               productname:productname);
         }
         else  if (currentUser.country == 'USA'){
           Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
               username: username,
-              mediaUrl: shopmediaUrl,
+              mediaUrl: shopmediaUrl.first,
               productname:productname);
         }
         else  {
           Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
               username: username,
-              mediaUrl: shopmediaUrl,
+              mediaUrl: shopmediaUrl.first,
               productname:productname);
         }
+
 
       },
       child: Container(
@@ -1818,33 +1906,34 @@ MS6(){
           if (currentUser.country == 'India'){
             Proceedtobuy(total:inr,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else if (currentUser.country == 'UK'){
             Proceedtobuy(total:gbp,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else  if (currentUser.country == 'Europe'){
             Proceedtobuy(total:eur,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else  if (currentUser.country == 'USA'){
             Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else  {
             Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
+
 
         },
         child: Container(
@@ -1887,31 +1976,31 @@ MS7(){
           if (currentUser.country == 'India'){
             Proceedtobuy(total:inr,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else if (currentUser.country == 'UK'){
             Proceedtobuy(total:gbp,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else  if (currentUser.country == 'Europe'){
             Proceedtobuy(total:eur,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else  if (currentUser.country == 'USA'){
             Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else  {
             Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
 
@@ -1956,33 +2045,34 @@ MS8(){
         if (currentUser.country == 'India'){
           Proceedtobuy(total:inr,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
               username: username,
-              mediaUrl: shopmediaUrl,
+              mediaUrl: shopmediaUrl.first,
               productname:productname);
         }
         else if (currentUser.country == 'UK'){
           Proceedtobuy(total:gbp,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
               username: username,
-              mediaUrl: shopmediaUrl,
+              mediaUrl: shopmediaUrl.first,
               productname:productname);
         }
         else  if (currentUser.country == 'Europe'){
           Proceedtobuy(total:eur,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
               username: username,
-              mediaUrl: shopmediaUrl,
+              mediaUrl: shopmediaUrl.first,
               productname:productname);
         }
         else  if (currentUser.country == 'USA'){
           Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
               username: username,
-              mediaUrl: shopmediaUrl,
+              mediaUrl: shopmediaUrl.first,
               productname:productname);
         }
         else  {
           Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
               username: username,
-              mediaUrl: shopmediaUrl,
+              mediaUrl: shopmediaUrl.first,
               productname:productname);
         }
+
       },
       child: Container(
         decoration: BoxDecoration(
@@ -2024,33 +2114,34 @@ MS9(){
           if (currentUser.country == 'India'){
             Proceedtobuy(total:inr,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else if (currentUser.country == 'UK'){
             Proceedtobuy(total:gbp,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else  if (currentUser.country == 'Europe'){
             Proceedtobuy(total:eur,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else  if (currentUser.country == 'USA'){
             Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else  {
             Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
+
 
         },
         child: Container(
@@ -2094,33 +2185,34 @@ MS10(){
         if (currentUser.country == 'India'){
           Proceedtobuy(total:inr,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
               username: username,
-              mediaUrl: shopmediaUrl,
+              mediaUrl: shopmediaUrl.first,
               productname:productname);
         }
         else if (currentUser.country == 'UK'){
           Proceedtobuy(total:gbp,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
               username: username,
-              mediaUrl: shopmediaUrl,
+              mediaUrl: shopmediaUrl.first,
               productname:productname);
         }
         else  if (currentUser.country == 'Europe'){
           Proceedtobuy(total:eur,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
               username: username,
-              mediaUrl: shopmediaUrl,
+              mediaUrl: shopmediaUrl.first,
               productname:productname);
         }
         else  if (currentUser.country == 'USA'){
           Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
               username: username,
-              mediaUrl: shopmediaUrl,
+              mediaUrl: shopmediaUrl.first,
               productname:productname);
         }
         else  {
           Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
               username: username,
-              mediaUrl: shopmediaUrl,
+              mediaUrl: shopmediaUrl.first,
               productname:productname);
         }
+
 
       },
       child: Container(
@@ -2164,31 +2256,31 @@ MS11(){
           if (currentUser.country == 'India'){
             Proceedtobuy(total:inr,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else if (currentUser.country == 'UK'){
             Proceedtobuy(total:gbp,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else  if (currentUser.country == 'Europe'){
             Proceedtobuy(total:eur,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else  if (currentUser.country == 'USA'){
             Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else  {
             Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
 
@@ -2233,33 +2325,34 @@ MS12(){
           if (currentUser.country == 'India'){
             Proceedtobuy(total:inr,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else if (currentUser.country == 'UK'){
             Proceedtobuy(total:gbp,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else  if (currentUser.country == 'Europe'){
             Proceedtobuy(total:eur,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else  if (currentUser.country == 'USA'){
             Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else  {
             Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
+
 
         },
         child: Container(
@@ -2301,31 +2394,31 @@ return
         if (currentUser.country == 'India'){
           Proceedtobuy(total:inr,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
               username: username,
-              mediaUrl: shopmediaUrl,
+              mediaUrl: shopmediaUrl.first,
               productname:productname);
         }
         else if (currentUser.country == 'UK'){
           Proceedtobuy(total:gbp,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
               username: username,
-              mediaUrl: shopmediaUrl,
+              mediaUrl: shopmediaUrl.first,
               productname:productname);
         }
         else  if (currentUser.country == 'Europe'){
           Proceedtobuy(total:eur,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
               username: username,
-              mediaUrl: shopmediaUrl,
+              mediaUrl: shopmediaUrl.first,
               productname:productname);
         }
         else  if (currentUser.country == 'USA'){
           Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
               username: username,
-              mediaUrl: shopmediaUrl,
+              mediaUrl: shopmediaUrl.first,
               productname:productname);
         }
         else  {
           Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
               username: username,
-              mediaUrl: shopmediaUrl,
+              mediaUrl: shopmediaUrl.first,
               productname:productname);
         }
 
@@ -2369,33 +2462,34 @@ MS14(){
           if (currentUser.country == 'India'){
             Proceedtobuy(total:inr,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else if (currentUser.country == 'UK'){
             Proceedtobuy(total:gbp,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else  if (currentUser.country == 'Europe'){
             Proceedtobuy(total:eur,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else  if (currentUser.country == 'USA'){
             Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else  {
             Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
+
 
         },
         child: Container(
@@ -2438,31 +2532,31 @@ MS15(){
           if (currentUser.country == 'India'){
             Proceedtobuy(total:inr,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else if (currentUser.country == 'UK'){
             Proceedtobuy(total:gbp,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else  if (currentUser.country == 'Europe'){
             Proceedtobuy(total:eur,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else  if (currentUser.country == 'USA'){
             Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else  {
             Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
 
@@ -2506,31 +2600,31 @@ MS16(){
           if (currentUser.country == 'India'){
             Proceedtobuy(total:inr,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else if (currentUser.country == 'UK'){
             Proceedtobuy(total:gbp,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else  if (currentUser.country == 'Europe'){
             Proceedtobuy(total:eur,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else  if (currentUser.country == 'USA'){
             Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else  {
             Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
 
@@ -2575,31 +2669,31 @@ MS17(){
           if (currentUser.country == 'India'){
             Proceedtobuy(total:inr,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else if (currentUser.country == 'UK'){
             Proceedtobuy(total:gbp,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else  if (currentUser.country == 'Europe'){
             Proceedtobuy(total:eur,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else  if (currentUser.country == 'USA'){
             Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else  {
             Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
 
@@ -2645,33 +2739,34 @@ MS18(){
           if (currentUser.country == 'India'){
             Proceedtobuy(total:inr,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else if (currentUser.country == 'UK'){
             Proceedtobuy(total:gbp,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else  if (currentUser.country == 'Europe'){
             Proceedtobuy(total:eur,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else  if (currentUser.country == 'USA'){
             Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else  {
             Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
+
 
         },
         child: Container(
@@ -2714,31 +2809,31 @@ MS19(){
           if (currentUser.country == 'India'){
             Proceedtobuy(total:inr,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else if (currentUser.country == 'UK'){
             Proceedtobuy(total:gbp,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else  if (currentUser.country == 'Europe'){
             Proceedtobuy(total:eur,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else  if (currentUser.country == 'USA'){
             Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else  {
             Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
 
@@ -2780,35 +2875,36 @@ MS20(){
   usersize = '(US)13';
   });
   if (currentUser.country == 'India'){
-  Proceedtobuy(total:inr,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-  username: username,
-  mediaUrl: shopmediaUrl,
-  productname:productname);
+    Proceedtobuy(total:inr,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
+        username: username,
+        mediaUrl: shopmediaUrl.first,
+        productname:productname);
   }
   else if (currentUser.country == 'UK'){
-  Proceedtobuy(total:gbp,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-  username: username,
-  mediaUrl: shopmediaUrl,
-  productname:productname);
+    Proceedtobuy(total:gbp,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
+        username: username,
+        mediaUrl: shopmediaUrl.first,
+        productname:productname);
   }
   else  if (currentUser.country == 'Europe'){
-  Proceedtobuy(total:eur,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-  username: username,
-  mediaUrl: shopmediaUrl,
-  productname:productname);
+    Proceedtobuy(total:eur,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
+        username: username,
+        mediaUrl: shopmediaUrl.first,
+        productname:productname);
   }
   else  if (currentUser.country == 'USA'){
-  Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-  username: username,
-  mediaUrl: shopmediaUrl,
-  productname:productname);
+    Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
+        username: username,
+        mediaUrl: shopmediaUrl.first,
+        productname:productname);
   }
   else  {
-  Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-  username: username,
-  mediaUrl: shopmediaUrl,
-  productname:productname);
+    Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
+        username: username,
+        mediaUrl: shopmediaUrl.first,
+        productname:productname);
   }
+
 
   },
   child: Container(
@@ -2851,31 +2947,31 @@ MS21(){
           if (currentUser.country == 'India'){
             Proceedtobuy(total:inr,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else if (currentUser.country == 'UK'){
             Proceedtobuy(total:gbp,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else  if (currentUser.country == 'Europe'){
             Proceedtobuy(total:eur,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else  if (currentUser.country == 'USA'){
             Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else  {
             Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
 
@@ -2920,31 +3016,31 @@ MS21(){
           if (currentUser.country == 'India'){
             Proceedtobuy(total:inr,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else if (currentUser.country == 'UK'){
             Proceedtobuy(total:gbp,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else  if (currentUser.country == 'Europe'){
             Proceedtobuy(total:eur,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else  if (currentUser.country == 'USA'){
             Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else  {
             Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
 
@@ -2988,31 +3084,31 @@ MS21(){
           if (currentUser.country == 'India'){
             Proceedtobuy(total:inr,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else if (currentUser.country == 'UK'){
             Proceedtobuy(total:gbp,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else  if (currentUser.country == 'Europe'){
             Proceedtobuy(total:eur,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else  if (currentUser.country == 'USA'){
             Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else  {
             Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
 
@@ -3056,33 +3152,34 @@ MS21(){
           if (currentUser.country == 'India'){
             Proceedtobuy(total:inr,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else if (currentUser.country == 'UK'){
             Proceedtobuy(total:gbp,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else  if (currentUser.country == 'Europe'){
             Proceedtobuy(total:eur,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else  if (currentUser.country == 'USA'){
             Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else  {
             Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
+
 
         },
         child: Container(
@@ -3123,31 +3220,31 @@ MS21(){
           if (currentUser.country == 'India'){
             Proceedtobuy(total:inr,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else if (currentUser.country == 'UK'){
             Proceedtobuy(total:gbp,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else  if (currentUser.country == 'Europe'){
             Proceedtobuy(total:eur,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else  if (currentUser.country == 'USA'){
             Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else  {
             Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
 
@@ -3191,33 +3288,34 @@ MS21(){
           if (currentUser.country == 'India'){
             Proceedtobuy(total:inr,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else if (currentUser.country == 'UK'){
             Proceedtobuy(total:gbp,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else  if (currentUser.country == 'Europe'){
             Proceedtobuy(total:eur,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else  if (currentUser.country == 'USA'){
             Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else  {
             Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
+
 
         },
         child: Container(
@@ -3259,31 +3357,31 @@ MS21(){
           if (currentUser.country == 'India'){
             Proceedtobuy(total:inr,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else if (currentUser.country == 'UK'){
             Proceedtobuy(total:gbp,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else  if (currentUser.country == 'Europe'){
             Proceedtobuy(total:eur,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else  if (currentUser.country == 'USA'){
             Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else  {
             Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
 
@@ -3328,33 +3426,34 @@ MS21(){
           if (currentUser.country == 'India'){
             Proceedtobuy(total:inr,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else if (currentUser.country == 'UK'){
             Proceedtobuy(total:gbp,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else  if (currentUser.country == 'Europe'){
             Proceedtobuy(total:eur,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else  if (currentUser.country == 'USA'){
             Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else  {
             Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
+
 
         },
         child: Container(
@@ -3398,33 +3497,34 @@ MS21(){
           if (currentUser.country == 'India'){
             Proceedtobuy(total:inr,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else if (currentUser.country == 'UK'){
             Proceedtobuy(total:gbp,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else  if (currentUser.country == 'Europe'){
             Proceedtobuy(total:eur,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else  if (currentUser.country == 'USA'){
             Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else  {
             Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
+
 
         },
         child: Container(
@@ -3467,33 +3567,34 @@ MS21(){
           if (currentUser.country == 'India'){
             Proceedtobuy(total:inr,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else if (currentUser.country == 'UK'){
             Proceedtobuy(total:gbp,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else  if (currentUser.country == 'Europe'){
             Proceedtobuy(total:eur,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else  if (currentUser.country == 'USA'){
             Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else  {
             Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
+
 
         },
         child: Container(
@@ -3535,33 +3636,34 @@ MS21(){
           if (currentUser.country == 'India'){
             Proceedtobuy(total:inr,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else if (currentUser.country == 'UK'){
             Proceedtobuy(total:gbp,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else  if (currentUser.country == 'Europe'){
             Proceedtobuy(total:eur,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else  if (currentUser.country == 'USA'){
             Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else  {
             Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
+
 
         },
         child: Container(
@@ -3603,31 +3705,31 @@ MS21(){
           if (currentUser.country == 'India'){
             Proceedtobuy(total:inr,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else if (currentUser.country == 'UK'){
             Proceedtobuy(total:gbp,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else  if (currentUser.country == 'Europe'){
             Proceedtobuy(total:eur,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else  if (currentUser.country == 'USA'){
             Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else  {
             Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
 
@@ -3671,33 +3773,34 @@ MS21(){
           if (currentUser.country == 'India'){
             Proceedtobuy(total:inr,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else if (currentUser.country == 'UK'){
             Proceedtobuy(total:gbp,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else  if (currentUser.country == 'Europe'){
             Proceedtobuy(total:eur,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else  if (currentUser.country == 'USA'){
             Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else  {
             Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
+
         },
         child: Container(
           decoration: BoxDecoration(
@@ -3738,33 +3841,34 @@ else{
           if (currentUser.country == 'India'){
             Proceedtobuy(total:inr,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else if (currentUser.country == 'UK'){
             Proceedtobuy(total:gbp,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else  if (currentUser.country == 'Europe'){
             Proceedtobuy(total:eur,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else  if (currentUser.country == 'USA'){
             Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else  {
             Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
+
         },
         child: Container(
           decoration: BoxDecoration(
@@ -3806,33 +3910,34 @@ else{
           if (currentUser.country == 'India'){
             Proceedtobuy(total:inr,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else if (currentUser.country == 'UK'){
             Proceedtobuy(total:gbp,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else  if (currentUser.country == 'Europe'){
             Proceedtobuy(total:eur,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else  if (currentUser.country == 'USA'){
             Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else  {
             Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
+
         },
         child: Container(
           decoration: BoxDecoration(
@@ -3874,33 +3979,34 @@ else{
           if (currentUser.country == 'India'){
             Proceedtobuy(total:inr,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else if (currentUser.country == 'UK'){
             Proceedtobuy(total:gbp,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else  if (currentUser.country == 'Europe'){
             Proceedtobuy(total:eur,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else  if (currentUser.country == 'USA'){
             Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else  {
             Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
+
         },
         child: Container(
           decoration: BoxDecoration(
@@ -3942,33 +4048,34 @@ else{
           if (currentUser.country == 'India'){
             Proceedtobuy(total:inr,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else if (currentUser.country == 'UK'){
             Proceedtobuy(total:gbp,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else  if (currentUser.country == 'Europe'){
             Proceedtobuy(total:eur,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else  if (currentUser.country == 'USA'){
             Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else  {
             Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
+
         },
         child: Container(
           decoration: BoxDecoration(
@@ -4009,33 +4116,34 @@ else{
           if (currentUser.country == 'India'){
             Proceedtobuy(total:inr,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else if (currentUser.country == 'UK'){
             Proceedtobuy(total:gbp,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else  if (currentUser.country == 'Europe'){
             Proceedtobuy(total:eur,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else  if (currentUser.country == 'USA'){
             Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else  {
             Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
+
         },
         child: Container(
           decoration: BoxDecoration(
@@ -4075,33 +4183,34 @@ else{
           if (currentUser.country == 'India'){
             Proceedtobuy(total:inr,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else if (currentUser.country == 'UK'){
             Proceedtobuy(total:gbp,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else  if (currentUser.country == 'Europe'){
             Proceedtobuy(total:eur,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else  if (currentUser.country == 'USA'){
             Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else  {
             Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
+
         },
         child: Container(
           decoration: BoxDecoration(
@@ -4141,33 +4250,34 @@ else{
        if (currentUser.country == 'India'){
          Proceedtobuy(total:inr,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
              username: username,
-             mediaUrl: shopmediaUrl,
+             mediaUrl: shopmediaUrl.first,
              productname:productname);
        }
        else if (currentUser.country == 'UK'){
          Proceedtobuy(total:gbp,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
              username: username,
-             mediaUrl: shopmediaUrl,
+             mediaUrl: shopmediaUrl.first,
              productname:productname);
        }
        else  if (currentUser.country == 'Europe'){
          Proceedtobuy(total:eur,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
              username: username,
-             mediaUrl: shopmediaUrl,
+             mediaUrl: shopmediaUrl.first,
              productname:productname);
        }
        else  if (currentUser.country == 'USA'){
          Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
              username: username,
-             mediaUrl: shopmediaUrl,
+             mediaUrl: shopmediaUrl.first,
              productname:productname);
        }
        else  {
          Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
              username: username,
-             mediaUrl: shopmediaUrl,
+             mediaUrl: shopmediaUrl.first,
              productname:productname);
        }
+
      },
      child: Container(
        decoration: BoxDecoration(
@@ -4208,33 +4318,34 @@ else{
           if (currentUser.country == 'India'){
             Proceedtobuy(total:inr,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else if (currentUser.country == 'UK'){
             Proceedtobuy(total:gbp,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else  if (currentUser.country == 'Europe'){
             Proceedtobuy(total:eur,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else  if (currentUser.country == 'USA'){
             Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else  {
             Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
+
         },
         child: Container(
           decoration: BoxDecoration(
@@ -4275,33 +4386,34 @@ else{
           if (currentUser.country == 'India'){
             Proceedtobuy(total:inr,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else if (currentUser.country == 'UK'){
             Proceedtobuy(total:gbp,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else  if (currentUser.country == 'Europe'){
             Proceedtobuy(total:eur,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else  if (currentUser.country == 'USA'){
             Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else  {
             Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
+
         },
         child: Container(
           decoration: BoxDecoration(
@@ -4342,33 +4454,34 @@ else{
           if (currentUser.country == 'India'){
             Proceedtobuy(total:inr,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else if (currentUser.country == 'UK'){
             Proceedtobuy(total:gbp,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else  if (currentUser.country == 'Europe'){
             Proceedtobuy(total:eur,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else  if (currentUser.country == 'USA'){
             Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else  {
             Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
+
         },
         child: Container(
           decoration: BoxDecoration(
@@ -4409,33 +4522,34 @@ else{
           if (currentUser.country == 'India'){
             Proceedtobuy(total:inr,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else if (currentUser.country == 'UK'){
             Proceedtobuy(total:gbp,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else  if (currentUser.country == 'Europe'){
             Proceedtobuy(total:eur,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else  if (currentUser.country == 'USA'){
             Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else  {
             Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
+
         },
         child: Container(
           decoration: BoxDecoration(
@@ -4477,33 +4591,34 @@ else{
           if (currentUser.country == 'India'){
             Proceedtobuy(total:inr,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else if (currentUser.country == 'UK'){
             Proceedtobuy(total:gbp,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else  if (currentUser.country == 'Europe'){
             Proceedtobuy(total:eur,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else  if (currentUser.country == 'USA'){
             Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else  {
             Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
+
         },
         child: Container(
           decoration: BoxDecoration(
@@ -4546,33 +4661,34 @@ else{
           if (currentUser.country == 'India'){
             Proceedtobuy(total:inr,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else if (currentUser.country == 'UK'){
             Proceedtobuy(total:gbp,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else  if (currentUser.country == 'Europe'){
             Proceedtobuy(total:eur,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else  if (currentUser.country == 'USA'){
             Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else  {
             Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
+
         },
         child: Container(
           decoration: BoxDecoration(
@@ -4615,33 +4731,34 @@ else{
           if (currentUser.country == 'India'){
             Proceedtobuy(total:inr,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else if (currentUser.country == 'UK'){
             Proceedtobuy(total:gbp,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else  if (currentUser.country == 'Europe'){
             Proceedtobuy(total:eur,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else  if (currentUser.country == 'USA'){
             Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else  {
             Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
+
         },
         child: Container(
           decoration: BoxDecoration(
@@ -4683,33 +4800,34 @@ else{
           if (currentUser.country == 'India'){
             Proceedtobuy(total:inr,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else if (currentUser.country == 'UK'){
             Proceedtobuy(total:gbp,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else  if (currentUser.country == 'Europe'){
             Proceedtobuy(total:eur,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else  if (currentUser.country == 'USA'){
             Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else  {
             Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
+
         },
         child: Container(
           decoration: BoxDecoration(
@@ -4752,33 +4870,34 @@ else{
           if (currentUser.country == 'India'){
             Proceedtobuy(total:inr,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else if (currentUser.country == 'UK'){
             Proceedtobuy(total:gbp,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else  if (currentUser.country == 'Europe'){
             Proceedtobuy(total:eur,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else  if (currentUser.country == 'USA'){
             Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else  {
             Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
+
         },
         child: Container(
           decoration: BoxDecoration(
@@ -4820,33 +4939,34 @@ else{
           if (currentUser.country == 'India'){
             Proceedtobuy(total:inr,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else if (currentUser.country == 'UK'){
             Proceedtobuy(total:gbp,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else  if (currentUser.country == 'Europe'){
             Proceedtobuy(total:eur,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else  if (currentUser.country == 'USA'){
             Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else  {
             Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
+
         },
         child: Container(
           decoration: BoxDecoration(
@@ -4889,33 +5009,34 @@ else{
           if (currentUser.country == 'India'){
             Proceedtobuy(total:inr,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else if (currentUser.country == 'UK'){
             Proceedtobuy(total:gbp,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else  if (currentUser.country == 'Europe'){
             Proceedtobuy(total:eur,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else  if (currentUser.country == 'USA'){
             Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else  {
             Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
+
         },
         child: Container(
           decoration: BoxDecoration(
@@ -4955,33 +5076,34 @@ else{
           if (currentUser.country == 'India'){
             Proceedtobuy(total:inr,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else if (currentUser.country == 'UK'){
             Proceedtobuy(total:gbp,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else  if (currentUser.country == 'Europe'){
             Proceedtobuy(total:eur,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else  if (currentUser.country == 'USA'){
             Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else  {
             Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
+
         },
         child: Container(
           decoration: BoxDecoration(
@@ -5022,33 +5144,34 @@ else{
           if (currentUser.country == 'India'){
             Proceedtobuy(total:inr,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else if (currentUser.country == 'UK'){
             Proceedtobuy(total:gbp,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else  if (currentUser.country == 'Europe'){
             Proceedtobuy(total:eur,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else  if (currentUser.country == 'USA'){
             Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else  {
             Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
+
         },
         child: Container(
           decoration: BoxDecoration(
@@ -5088,33 +5211,34 @@ else{
           if (currentUser.country == 'India'){
             Proceedtobuy(total:inr,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else if (currentUser.country == 'UK'){
             Proceedtobuy(total:gbp,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else  if (currentUser.country == 'Europe'){
             Proceedtobuy(total:eur,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else  if (currentUser.country == 'USA'){
             Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else  {
             Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
+
         },
         child: Container(
           decoration: BoxDecoration(
@@ -5154,33 +5278,34 @@ else{
           if (currentUser.country == 'India'){
             Proceedtobuy(total:inr,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else if (currentUser.country == 'UK'){
             Proceedtobuy(total:gbp,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else  if (currentUser.country == 'Europe'){
             Proceedtobuy(total:eur,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else  if (currentUser.country == 'USA'){
             Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else  {
             Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
+
         },
         child: Container(
           decoration: BoxDecoration(
@@ -5220,33 +5345,34 @@ else{
           if (currentUser.country == 'India'){
             Proceedtobuy(total:inr,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else if (currentUser.country == 'UK'){
             Proceedtobuy(total:gbp,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else  if (currentUser.country == 'Europe'){
             Proceedtobuy(total:eur,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else  if (currentUser.country == 'USA'){
             Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else  {
             Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
+
         },
         child: Container(
           decoration: BoxDecoration(
@@ -5286,33 +5412,34 @@ else{
           if (currentUser.country == 'India'){
             Proceedtobuy(total:inr,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else if (currentUser.country == 'UK'){
             Proceedtobuy(total:gbp,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else  if (currentUser.country == 'Europe'){
             Proceedtobuy(total:eur,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else  if (currentUser.country == 'USA'){
             Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else  {
             Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
+
         },
         child: Container(
           decoration: BoxDecoration(
@@ -5352,33 +5479,34 @@ else{
           if (currentUser.country == 'India'){
             Proceedtobuy(total:inr,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else if (currentUser.country == 'UK'){
             Proceedtobuy(total:gbp,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else  if (currentUser.country == 'Europe'){
             Proceedtobuy(total:eur,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else  if (currentUser.country == 'USA'){
             Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else  {
             Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
+
         },
         child: Container(
           decoration: BoxDecoration(
@@ -5418,33 +5546,34 @@ else{
           if (currentUser.country == 'India'){
             Proceedtobuy(total:inr,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else if (currentUser.country == 'UK'){
             Proceedtobuy(total:gbp,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else  if (currentUser.country == 'Europe'){
             Proceedtobuy(total:eur,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else  if (currentUser.country == 'USA'){
             Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else  {
             Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
+
         },
         child: Container(
           decoration: BoxDecoration(
@@ -5484,33 +5613,34 @@ else{
           if (currentUser.country == 'India'){
             Proceedtobuy(total:inr,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else if (currentUser.country == 'UK'){
             Proceedtobuy(total:gbp,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else  if (currentUser.country == 'Europe'){
             Proceedtobuy(total:eur,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else  if (currentUser.country == 'USA'){
             Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else  {
             Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
+
         },
         child: Container(
           decoration: BoxDecoration(
@@ -5550,33 +5680,34 @@ else{
           if (currentUser.country == 'India'){
             Proceedtobuy(total:inr,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else if (currentUser.country == 'UK'){
             Proceedtobuy(total:gbp,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else  if (currentUser.country == 'Europe'){
             Proceedtobuy(total:eur,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else  if (currentUser.country == 'USA'){
             Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else  {
             Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
+
         },
         child: Container(
           decoration: BoxDecoration(
@@ -5618,33 +5749,34 @@ else{
             if (currentUser.country == 'India'){
               Proceedtobuy(total:inr,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                   username: username,
-                  mediaUrl: shopmediaUrl,
+                  mediaUrl: shopmediaUrl.first,
                   productname:productname);
             }
             else if (currentUser.country == 'UK'){
               Proceedtobuy(total:gbp,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                   username: username,
-                  mediaUrl: shopmediaUrl,
+                  mediaUrl: shopmediaUrl.first,
                   productname:productname);
             }
             else  if (currentUser.country == 'Europe'){
               Proceedtobuy(total:eur,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                   username: username,
-                  mediaUrl: shopmediaUrl,
+                  mediaUrl: shopmediaUrl.first,
                   productname:productname);
             }
             else  if (currentUser.country == 'USA'){
               Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                   username: username,
-                  mediaUrl: shopmediaUrl,
+                  mediaUrl: shopmediaUrl.first,
                   productname:productname);
             }
             else  {
               Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                   username: username,
-                  mediaUrl: shopmediaUrl,
+                  mediaUrl: shopmediaUrl.first,
                   productname:productname);
             }
+
           },
           child: Container(
             decoration: BoxDecoration(
@@ -5687,33 +5819,34 @@ else{
           if (currentUser.country == 'India'){
             Proceedtobuy(total:inr,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else if (currentUser.country == 'UK'){
             Proceedtobuy(total:gbp,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else  if (currentUser.country == 'Europe'){
             Proceedtobuy(total:eur,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else  if (currentUser.country == 'USA'){
             Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else  {
             Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
+
         },
         child: Container(
           decoration: BoxDecoration(
@@ -5755,33 +5888,34 @@ else{
           if (currentUser.country == 'India'){
             Proceedtobuy(total:inr,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else if (currentUser.country == 'UK'){
             Proceedtobuy(total:gbp,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else  if (currentUser.country == 'Europe'){
             Proceedtobuy(total:eur,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else  if (currentUser.country == 'USA'){
             Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else  {
             Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
+
         },
         child: Container(
           decoration: BoxDecoration(
@@ -5822,33 +5956,34 @@ else{
           if (currentUser.country == 'India'){
             Proceedtobuy(total:inr,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else if (currentUser.country == 'UK'){
             Proceedtobuy(total:gbp,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else  if (currentUser.country == 'Europe'){
             Proceedtobuy(total:eur,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else  if (currentUser.country == 'USA'){
             Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else  {
             Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
+
         },
         child: Container(
           decoration: BoxDecoration(
@@ -5890,33 +6025,34 @@ else{
           if (currentUser.country == 'India'){
             Proceedtobuy(total:inr,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else if (currentUser.country == 'UK'){
             Proceedtobuy(total:gbp,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else  if (currentUser.country == 'Europe'){
             Proceedtobuy(total:eur,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else  if (currentUser.country == 'USA'){
             Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else  {
             Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
+
         },
         child: Container(
           decoration: BoxDecoration(
@@ -5957,33 +6093,34 @@ else{
           if (currentUser.country == 'India'){
             Proceedtobuy(total:inr,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else if (currentUser.country == 'UK'){
             Proceedtobuy(total:gbp,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else  if (currentUser.country == 'Europe'){
             Proceedtobuy(total:eur,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else  if (currentUser.country == 'USA'){
             Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else  {
             Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
+
         },
         child: Container(
           decoration: BoxDecoration(
@@ -6025,33 +6162,34 @@ else{
           if (currentUser.country == 'India'){
             Proceedtobuy(total:inr,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else if (currentUser.country == 'UK'){
             Proceedtobuy(total:gbp,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else  if (currentUser.country == 'Europe'){
             Proceedtobuy(total:eur,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else  if (currentUser.country == 'USA'){
             Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else  {
             Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
+
         },
         child: Container(
           decoration: BoxDecoration(
@@ -6092,33 +6230,34 @@ else{
           if (currentUser.country == 'India'){
             Proceedtobuy(total:inr,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else if (currentUser.country == 'UK'){
             Proceedtobuy(total:gbp,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else  if (currentUser.country == 'Europe'){
             Proceedtobuy(total:eur,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else  if (currentUser.country == 'USA'){
             Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else  {
             Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
+
         },
         child: Container(
           decoration: BoxDecoration(
@@ -6159,33 +6298,34 @@ else{
           if (currentUser.country == 'India'){
             Proceedtobuy(total:inr,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else if (currentUser.country == 'UK'){
             Proceedtobuy(total:gbp,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else  if (currentUser.country == 'Europe'){
             Proceedtobuy(total:eur,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else  if (currentUser.country == 'USA'){
             Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else  {
             Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
+
         },
         child: Container(
           decoration: BoxDecoration(
@@ -6227,33 +6367,34 @@ else{
           if (currentUser.country == 'India'){
             Proceedtobuy(total:inr,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else if (currentUser.country == 'UK'){
             Proceedtobuy(total:gbp,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else  if (currentUser.country == 'Europe'){
             Proceedtobuy(total:eur,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else  if (currentUser.country == 'USA'){
             Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else  {
             Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
+
         },
         child: Container(
           decoration: BoxDecoration(
@@ -6295,33 +6436,34 @@ else{
           if (currentUser.country == 'India'){
             Proceedtobuy(total:inr,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else if (currentUser.country == 'UK'){
             Proceedtobuy(total:gbp,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else  if (currentUser.country == 'Europe'){
             Proceedtobuy(total:eur,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else  if (currentUser.country == 'USA'){
             Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else  {
             Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
+
         },
         child: Container(
           decoration: BoxDecoration(
@@ -6364,33 +6506,34 @@ else{
           if (currentUser.country == 'India'){
             Proceedtobuy(total:inr,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else if (currentUser.country == 'UK'){
             Proceedtobuy(total:gbp,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else  if (currentUser.country == 'Europe'){
             Proceedtobuy(total:eur,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else  if (currentUser.country == 'USA'){
             Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else  {
             Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
+
         },
         child: Container(
           decoration: BoxDecoration(
@@ -6432,33 +6575,34 @@ else{
           if (currentUser.country == 'India'){
             Proceedtobuy(total:inr,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else if (currentUser.country == 'UK'){
             Proceedtobuy(total:gbp,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else  if (currentUser.country == 'Europe'){
             Proceedtobuy(total:eur,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else  if (currentUser.country == 'USA'){
             Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else  {
             Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
+
         },
         child: Container(
           decoration: BoxDecoration(
@@ -6500,33 +6644,34 @@ else{
             if (currentUser.country == 'India'){
               Proceedtobuy(total:inr,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                   username: username,
-                  mediaUrl: shopmediaUrl,
+                  mediaUrl: shopmediaUrl.first,
                   productname:productname);
             }
             else if (currentUser.country == 'UK'){
               Proceedtobuy(total:gbp,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                   username: username,
-                  mediaUrl: shopmediaUrl,
+                  mediaUrl: shopmediaUrl.first,
                   productname:productname);
             }
             else  if (currentUser.country == 'Europe'){
               Proceedtobuy(total:eur,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                   username: username,
-                  mediaUrl: shopmediaUrl,
+                  mediaUrl: shopmediaUrl.first,
                   productname:productname);
             }
             else  if (currentUser.country == 'USA'){
               Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                   username: username,
-                  mediaUrl: shopmediaUrl,
+                  mediaUrl: shopmediaUrl.first,
                   productname:productname);
             }
             else  {
               Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                   username: username,
-                  mediaUrl: shopmediaUrl,
+                  mediaUrl: shopmediaUrl.first,
                   productname:productname);
             }
+
           },
           child: Container(
             decoration: BoxDecoration(
@@ -6570,33 +6715,34 @@ else{
           if (currentUser.country == 'India'){
             Proceedtobuy(total:inr,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else if (currentUser.country == 'UK'){
             Proceedtobuy(total:gbp,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else  if (currentUser.country == 'Europe'){
             Proceedtobuy(total:eur,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else  if (currentUser.country == 'USA'){
             Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else  {
             Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
+
         },
         child:
 
@@ -6642,33 +6788,34 @@ else{
           if (currentUser.country == 'India'){
             Proceedtobuy(total:inr,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else if (currentUser.country == 'UK'){
             Proceedtobuy(total:gbp,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else  if (currentUser.country == 'Europe'){
             Proceedtobuy(total:eur,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else  if (currentUser.country == 'USA'){
             Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else  {
             Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
+
         },
         child: Container(
           decoration: BoxDecoration(
@@ -6709,33 +6856,34 @@ else{
           if (currentUser.country == 'India'){
             Proceedtobuy(total:inr,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else if (currentUser.country == 'UK'){
             Proceedtobuy(total:gbp,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else  if (currentUser.country == 'Europe'){
             Proceedtobuy(total:eur,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else  if (currentUser.country == 'USA'){
             Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else  {
             Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
+
         },
         child: Container(
           decoration: BoxDecoration(
@@ -6775,33 +6923,34 @@ else{
           if (currentUser.country == 'India'){
             Proceedtobuy(total:inr,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else if (currentUser.country == 'UK'){
             Proceedtobuy(total:gbp,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else  if (currentUser.country == 'Europe'){
             Proceedtobuy(total:eur,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else  if (currentUser.country == 'USA'){
             Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else  {
             Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
+
         },
         child: Container(
           decoration: BoxDecoration(
@@ -6842,33 +6991,34 @@ else{
           if (currentUser.country == 'India'){
             Proceedtobuy(total:inr,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else if (currentUser.country == 'UK'){
             Proceedtobuy(total:gbp,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else  if (currentUser.country == 'Europe'){
             Proceedtobuy(total:eur,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else  if (currentUser.country == 'USA'){
             Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else  {
             Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
+
         },
         child: Container(
           decoration: BoxDecoration(
@@ -6911,33 +7061,34 @@ else{
           if (currentUser.country == 'India'){
             Proceedtobuy(total:inr,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else if (currentUser.country == 'UK'){
             Proceedtobuy(total:gbp,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else  if (currentUser.country == 'Europe'){
             Proceedtobuy(total:eur,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else  if (currentUser.country == 'USA'){
             Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else  {
             Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
+
         },
         child: Container(
           decoration: BoxDecoration(
@@ -6979,33 +7130,34 @@ else{
           if (currentUser.country == 'India'){
             Proceedtobuy(total:inr,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else if (currentUser.country == 'UK'){
             Proceedtobuy(total:gbp,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else  if (currentUser.country == 'Europe'){
             Proceedtobuy(total:eur,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else  if (currentUser.country == 'USA'){
             Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
           else  {
             Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                 username: username,
-                mediaUrl: shopmediaUrl,
+                mediaUrl: shopmediaUrl.first,
                 productname:productname);
           }
+
         },
         child: Container(
           decoration: BoxDecoration(
@@ -7052,33 +7204,34 @@ else{
             if (currentUser.country == 'India'){
               Proceedtobuy(total:inr,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                   username: username,
-                  mediaUrl: shopmediaUrl,
+                  mediaUrl: shopmediaUrl.first,
                   productname:productname);
             }
             else if (currentUser.country == 'UK'){
               Proceedtobuy(total:gbp,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                   username: username,
-                  mediaUrl: shopmediaUrl,
+                  mediaUrl: shopmediaUrl.first,
                   productname:productname);
             }
             else  if (currentUser.country == 'Europe'){
               Proceedtobuy(total:eur,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                   username: username,
-                  mediaUrl: shopmediaUrl,
+                  mediaUrl: shopmediaUrl.first,
                   productname:productname);
             }
             else  if (currentUser.country == 'USA'){
               Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                   username: username,
-                  mediaUrl: shopmediaUrl,
+                  mediaUrl: shopmediaUrl.first,
                   productname:productname);
             }
             else  {
               Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                   username: username,
-                  mediaUrl: shopmediaUrl,
+                  mediaUrl: shopmediaUrl.first,
                   productname:productname);
             }
+
           },
             child: Container(
               alignment:Alignment.center,
@@ -7107,33 +7260,34 @@ else{
             if (currentUser.country == 'India'){
               Proceedtobuy(total:inr,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                   username: username,
-                  mediaUrl: shopmediaUrl,
+                  mediaUrl: shopmediaUrl.first,
                   productname:productname);
             }
             else if (currentUser.country == 'UK'){
               Proceedtobuy(total:gbp,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                   username: username,
-                  mediaUrl: shopmediaUrl,
+                  mediaUrl: shopmediaUrl.first,
                   productname:productname);
             }
             else  if (currentUser.country == 'Europe'){
               Proceedtobuy(total:eur,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                   username: username,
-                  mediaUrl: shopmediaUrl,
+                  mediaUrl: shopmediaUrl.first,
                   productname:productname);
             }
             else  if (currentUser.country == 'USA'){
               Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                   username: username,
-                  mediaUrl: shopmediaUrl,
+                  mediaUrl: shopmediaUrl.first,
                   productname:productname);
             }
             else  {
               Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                   username: username,
-                  mediaUrl: shopmediaUrl,
+                  mediaUrl: shopmediaUrl.first,
                   productname:productname);
             }
+
           },
             child: Container(
               alignment:Alignment.center,
@@ -7160,33 +7314,34 @@ else{
               if (currentUser.country == 'India'){
                 Proceedtobuy(total:inr,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                     username: username,
-                    mediaUrl: shopmediaUrl,
+                    mediaUrl: shopmediaUrl.first,
                     productname:productname);
               }
               else if (currentUser.country == 'UK'){
                 Proceedtobuy(total:gbp,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                     username: username,
-                    mediaUrl: shopmediaUrl,
+                    mediaUrl: shopmediaUrl.first,
                     productname:productname);
               }
               else  if (currentUser.country == 'Europe'){
                 Proceedtobuy(total:eur,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                     username: username,
-                    mediaUrl: shopmediaUrl,
+                    mediaUrl: shopmediaUrl.first,
                     productname:productname);
               }
               else  if (currentUser.country == 'USA'){
                 Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                     username: username,
-                    mediaUrl: shopmediaUrl,
+                    mediaUrl: shopmediaUrl.first,
                     productname:productname);
               }
               else  {
                 Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                     username: username,
-                    mediaUrl: shopmediaUrl,
+                    mediaUrl: shopmediaUrl.first,
                     productname:productname);
-              }                });
+              }
+            });
           },
             child: Container(
               alignment:Alignment.center,
@@ -7213,33 +7368,34 @@ else{
               if (currentUser.country == 'India'){
                 Proceedtobuy(total:inr,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                     username: username,
-                    mediaUrl: shopmediaUrl,
+                    mediaUrl: shopmediaUrl.first,
                     productname:productname);
               }
               else if (currentUser.country == 'UK'){
                 Proceedtobuy(total:gbp,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                     username: username,
-                    mediaUrl: shopmediaUrl,
+                    mediaUrl: shopmediaUrl.first,
                     productname:productname);
               }
               else  if (currentUser.country == 'Europe'){
                 Proceedtobuy(total:eur,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                     username: username,
-                    mediaUrl: shopmediaUrl,
+                    mediaUrl: shopmediaUrl.first,
                     productname:productname);
               }
               else  if (currentUser.country == 'USA'){
                 Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                     username: username,
-                    mediaUrl: shopmediaUrl,
+                    mediaUrl: shopmediaUrl.first,
                     productname:productname);
               }
               else  {
                 Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                     username: username,
-                    mediaUrl: shopmediaUrl,
+                    mediaUrl: shopmediaUrl.first,
                     productname:productname);
-              }                });
+              }
+            });
           },
             child: Container(
               alignment:Alignment.center,
@@ -7266,33 +7422,34 @@ else{
               if (currentUser.country == 'India'){
                 Proceedtobuy(total:inr,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                     username: username,
-                    mediaUrl: shopmediaUrl,
+                    mediaUrl: shopmediaUrl.first,
                     productname:productname);
               }
               else if (currentUser.country == 'UK'){
                 Proceedtobuy(total:gbp,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                     username: username,
-                    mediaUrl: shopmediaUrl,
+                    mediaUrl: shopmediaUrl.first,
                     productname:productname);
               }
               else  if (currentUser.country == 'Europe'){
                 Proceedtobuy(total:eur,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                     username: username,
-                    mediaUrl: shopmediaUrl,
+                    mediaUrl: shopmediaUrl.first,
                     productname:productname);
               }
               else  if (currentUser.country == 'USA'){
                 Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                     username: username,
-                    mediaUrl: shopmediaUrl,
+                    mediaUrl: shopmediaUrl.first,
                     productname:productname);
               }
               else  {
                 Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                     username: username,
-                    mediaUrl: shopmediaUrl,
+                    mediaUrl: shopmediaUrl.first,
                     productname:productname);
-              }                });
+              }
+            });
           },
             child: Container(
               alignment:Alignment.center,
@@ -7319,33 +7476,34 @@ else{
               if (currentUser.country == 'India'){
                 Proceedtobuy(total:inr,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                     username: username,
-                    mediaUrl: shopmediaUrl,
+                    mediaUrl: shopmediaUrl.first,
                     productname:productname);
               }
               else if (currentUser.country == 'UK'){
                 Proceedtobuy(total:gbp,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                     username: username,
-                    mediaUrl: shopmediaUrl,
+                    mediaUrl: shopmediaUrl.first,
                     productname:productname);
               }
               else  if (currentUser.country == 'Europe'){
                 Proceedtobuy(total:eur,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                     username: username,
-                    mediaUrl: shopmediaUrl,
+                    mediaUrl: shopmediaUrl.first,
                     productname:productname);
               }
               else  if (currentUser.country == 'USA'){
                 Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                     username: username,
-                    mediaUrl: shopmediaUrl,
+                    mediaUrl: shopmediaUrl.first,
                     productname:productname);
               }
               else  {
                 Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                     username: username,
-                    mediaUrl: shopmediaUrl,
+                    mediaUrl: shopmediaUrl.first,
                     productname:productname);
-              }                });
+              }
+            });
           },
             child: Container(
               alignment:Alignment.center,
@@ -7372,33 +7530,34 @@ else{
               if (currentUser.country == 'India'){
                 Proceedtobuy(total:inr,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                     username: username,
-                    mediaUrl: shopmediaUrl,
+                    mediaUrl: shopmediaUrl.first,
                     productname:productname);
               }
               else if (currentUser.country == 'UK'){
                 Proceedtobuy(total:gbp,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                     username: username,
-                    mediaUrl: shopmediaUrl,
+                    mediaUrl: shopmediaUrl.first,
                     productname:productname);
               }
               else  if (currentUser.country == 'Europe'){
                 Proceedtobuy(total:eur,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                     username: username,
-                    mediaUrl: shopmediaUrl,
+                    mediaUrl: shopmediaUrl.first,
                     productname:productname);
               }
               else  if (currentUser.country == 'USA'){
                 Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                     username: username,
-                    mediaUrl: shopmediaUrl,
+                    mediaUrl: shopmediaUrl.first,
                     productname:productname);
               }
               else  {
                 Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                     username: username,
-                    mediaUrl: shopmediaUrl,
+                    mediaUrl: shopmediaUrl.first,
                     productname:productname);
               }
+
             });
           },
             child: Container(
@@ -7426,33 +7585,34 @@ else{
               if (currentUser.country == 'India'){
                 Proceedtobuy(total:inr,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                     username: username,
-                    mediaUrl: shopmediaUrl,
+                    mediaUrl: shopmediaUrl.first,
                     productname:productname);
               }
               else if (currentUser.country == 'UK'){
                 Proceedtobuy(total:gbp,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                     username: username,
-                    mediaUrl: shopmediaUrl,
+                    mediaUrl: shopmediaUrl.first,
                     productname:productname);
               }
               else  if (currentUser.country == 'Europe'){
                 Proceedtobuy(total:eur,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                     username: username,
-                    mediaUrl: shopmediaUrl,
+                    mediaUrl: shopmediaUrl.first,
                     productname:productname);
               }
               else  if (currentUser.country == 'USA'){
                 Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                     username: username,
-                    mediaUrl: shopmediaUrl,
+                    mediaUrl: shopmediaUrl.first,
                     productname:productname);
               }
               else  {
                 Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                     username: username,
-                    mediaUrl: shopmediaUrl,
+                    mediaUrl: shopmediaUrl.first,
                     productname:productname);
               }
+
             });
           },
             child: Container(
@@ -7480,33 +7640,34 @@ else{
               if (currentUser.country == 'India'){
                 Proceedtobuy(total:inr,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                     username: username,
-                    mediaUrl: shopmediaUrl,
+                    mediaUrl: shopmediaUrl.first,
                     productname:productname);
               }
               else if (currentUser.country == 'UK'){
                 Proceedtobuy(total:gbp,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                     username: username,
-                    mediaUrl: shopmediaUrl,
+                    mediaUrl: shopmediaUrl.first,
                     productname:productname);
               }
               else  if (currentUser.country == 'Europe'){
                 Proceedtobuy(total:eur,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                     username: username,
-                    mediaUrl: shopmediaUrl,
+                    mediaUrl: shopmediaUrl.first,
                     productname:productname);
               }
               else  if (currentUser.country == 'USA'){
                 Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                     username: username,
-                    mediaUrl: shopmediaUrl,
+                    mediaUrl: shopmediaUrl.first,
                     productname:productname);
               }
               else  {
                 Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                     username: username,
-                    mediaUrl: shopmediaUrl,
+                    mediaUrl: shopmediaUrl.first,
                     productname:productname);
               }
+
             });
           },
             child: Container(
@@ -7534,33 +7695,34 @@ else{
               if (currentUser.country == 'India'){
                 Proceedtobuy(total:inr,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                     username: username,
-                    mediaUrl: shopmediaUrl,
+                    mediaUrl: shopmediaUrl.first,
                     productname:productname);
               }
               else if (currentUser.country == 'UK'){
                 Proceedtobuy(total:gbp,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                     username: username,
-                    mediaUrl: shopmediaUrl,
+                    mediaUrl: shopmediaUrl.first,
                     productname:productname);
               }
               else  if (currentUser.country == 'Europe'){
                 Proceedtobuy(total:eur,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                     username: username,
-                    mediaUrl: shopmediaUrl,
+                    mediaUrl: shopmediaUrl.first,
                     productname:productname);
               }
               else  if (currentUser.country == 'USA'){
                 Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                     username: username,
-                    mediaUrl: shopmediaUrl,
+                    mediaUrl: shopmediaUrl.first,
                     productname:productname);
               }
               else  {
                 Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                     username: username,
-                    mediaUrl: shopmediaUrl,
+                    mediaUrl: shopmediaUrl.first,
                     productname:productname);
               }
+
             });
           },
             child: Container(
@@ -7588,33 +7750,34 @@ else{
               if (currentUser.country == 'India'){
                 Proceedtobuy(total:inr,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                     username: username,
-                    mediaUrl: shopmediaUrl,
+                    mediaUrl: shopmediaUrl.first,
                     productname:productname);
               }
               else if (currentUser.country == 'UK'){
                 Proceedtobuy(total:gbp,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                     username: username,
-                    mediaUrl: shopmediaUrl,
+                    mediaUrl: shopmediaUrl.first,
                     productname:productname);
               }
               else  if (currentUser.country == 'Europe'){
                 Proceedtobuy(total:eur,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                     username: username,
-                    mediaUrl: shopmediaUrl,
+                    mediaUrl: shopmediaUrl.first,
                     productname:productname);
               }
               else  if (currentUser.country == 'USA'){
                 Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                     username: username,
-                    mediaUrl: shopmediaUrl,
+                    mediaUrl: shopmediaUrl.first,
                     productname:productname);
               }
               else  {
                 Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                     username: username,
-                    mediaUrl: shopmediaUrl,
+                    mediaUrl: shopmediaUrl.first,
                     productname:productname);
               }
+
             });
           },
             child: Container(
@@ -7642,33 +7805,34 @@ else{
               if (currentUser.country == 'India'){
                 Proceedtobuy(total:inr,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                     username: username,
-                    mediaUrl: shopmediaUrl,
+                    mediaUrl: shopmediaUrl.first,
                     productname:productname);
               }
               else if (currentUser.country == 'UK'){
                 Proceedtobuy(total:gbp,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                     username: username,
-                    mediaUrl: shopmediaUrl,
+                    mediaUrl: shopmediaUrl.first,
                     productname:productname);
               }
               else  if (currentUser.country == 'Europe'){
                 Proceedtobuy(total:eur,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                     username: username,
-                    mediaUrl: shopmediaUrl,
+                    mediaUrl: shopmediaUrl.first,
                     productname:productname);
               }
               else  if (currentUser.country == 'USA'){
                 Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                     username: username,
-                    mediaUrl: shopmediaUrl,
+                    mediaUrl: shopmediaUrl.first,
                     productname:productname);
               }
               else  {
                 Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                     username: username,
-                    mediaUrl: shopmediaUrl,
+                    mediaUrl: shopmediaUrl.first,
                     productname:productname);
-              }                });
+              }
+            });
           },
             child: Container(
               alignment:Alignment.center,
@@ -7695,33 +7859,34 @@ else{
               if (currentUser.country == 'India'){
                 Proceedtobuy(total:inr,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                     username: username,
-                    mediaUrl: shopmediaUrl,
+                    mediaUrl: shopmediaUrl.first,
                     productname:productname);
               }
               else if (currentUser.country == 'UK'){
                 Proceedtobuy(total:gbp,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                     username: username,
-                    mediaUrl: shopmediaUrl,
+                    mediaUrl: shopmediaUrl.first,
                     productname:productname);
               }
               else  if (currentUser.country == 'Europe'){
                 Proceedtobuy(total:eur,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                     username: username,
-                    mediaUrl: shopmediaUrl,
+                    mediaUrl: shopmediaUrl.first,
                     productname:productname);
               }
               else  if (currentUser.country == 'USA'){
                 Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                     username: username,
-                    mediaUrl: shopmediaUrl,
+                    mediaUrl: shopmediaUrl.first,
                     productname:productname);
               }
               else  {
                 Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                     username: username,
-                    mediaUrl: shopmediaUrl,
+                    mediaUrl: shopmediaUrl.first,
                     productname:productname);
-              }                });
+              }
+            });
           },
             child: Container(
               alignment:Alignment.center,
@@ -7748,33 +7913,34 @@ else{
               if (currentUser.country == 'India'){
                 Proceedtobuy(total:inr,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                     username: username,
-                    mediaUrl: shopmediaUrl,
+                    mediaUrl: shopmediaUrl.first,
                     productname:productname);
               }
               else if (currentUser.country == 'UK'){
                 Proceedtobuy(total:gbp,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                     username: username,
-                    mediaUrl: shopmediaUrl,
+                    mediaUrl: shopmediaUrl.first,
                     productname:productname);
               }
               else  if (currentUser.country == 'Europe'){
                 Proceedtobuy(total:eur,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                     username: username,
-                    mediaUrl: shopmediaUrl,
+                    mediaUrl: shopmediaUrl.first,
                     productname:productname);
               }
               else  if (currentUser.country == 'USA'){
                 Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                     username: username,
-                    mediaUrl: shopmediaUrl,
+                    mediaUrl: shopmediaUrl.first,
                     productname:productname);
               }
               else  {
                 Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                     username: username,
-                    mediaUrl: shopmediaUrl,
+                    mediaUrl: shopmediaUrl.first,
                     productname:productname);
-              }                });
+              }
+            });
           },
             child: Container(
               alignment:Alignment.center,
@@ -7814,56 +7980,37 @@ else{
                 onTap: () {
                   setState(() {
                     usersize = 'MTO 0-3 M';
-                    if (currentUser.country == 'India') {
-                      Proceedtobuy(total: inr,
-                          prodId: prodId,
-                          ownerId: ownerId,
-                          userSize: usersize,
-                          profileimg: photoUrl,
+                    if (currentUser.country == 'India'){
+                      Proceedtobuy(total:inr,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                           username: username,
-                          mediaUrl: shopmediaUrl,
-                          productname: productname);
+                          mediaUrl: shopmediaUrl.first,
+                          productname:productname);
                     }
-                    else if (currentUser.country == 'UK') {
-                      Proceedtobuy(total: gbp,
-                          prodId: prodId,
-                          ownerId: ownerId,
-                          userSize: usersize,
-                          profileimg: photoUrl,
+                    else if (currentUser.country == 'UK'){
+                      Proceedtobuy(total:gbp,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                           username: username,
-                          mediaUrl: shopmediaUrl,
-                          productname: productname);
+                          mediaUrl: shopmediaUrl.first,
+                          productname:productname);
                     }
-                    else if (currentUser.country == 'Europe') {
-                      Proceedtobuy(total: eur,
-                          prodId: prodId,
-                          ownerId: ownerId,
-                          userSize: usersize,
-                          profileimg: photoUrl,
+                    else  if (currentUser.country == 'Europe'){
+                      Proceedtobuy(total:eur,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                           username: username,
-                          mediaUrl: shopmediaUrl,
-                          productname: productname);
+                          mediaUrl: shopmediaUrl.first,
+                          productname:productname);
                     }
-                    else if (currentUser.country == 'USA') {
-                      Proceedtobuy(total: usd,
-                          prodId: prodId,
-                          ownerId: ownerId,
-                          userSize: usersize,
-                          profileimg: photoUrl,
+                    else  if (currentUser.country == 'USA'){
+                      Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                           username: username,
-                          mediaUrl: shopmediaUrl,
-                          productname: productname);
+                          mediaUrl: shopmediaUrl.first,
+                          productname:productname);
                     }
-                    else {
-                      Proceedtobuy(total: usd,
-                          prodId: prodId,
-                          ownerId: ownerId,
-                          userSize: usersize,
-                          profileimg: photoUrl,
+                    else  {
+                      Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                           username: username,
-                          mediaUrl: shopmediaUrl,
-                          productname: productname);
+                          mediaUrl: shopmediaUrl.first,
+                          productname:productname);
                     }
+
                   });
                 },
                 child: Container(
@@ -7887,66 +8034,37 @@ else{
                 onTap: () {
                   setState(() {
                     usersize = 'MTO 3-6 M';
-                    if (currentUser.country == 'India') {
-                      Proceedtobuy(total: inr,
-                          prodId: prodId,
-                          ownerId: ownerId,
-                          userSize: usersize,
-                          profileimg: photoUrl,
+                    if (currentUser.country == 'India'){
+                      Proceedtobuy(total:inr,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                           username: username,
-                          mediaUrl: shopmediaUrl,
-                          productname: productname);
+                          mediaUrl: shopmediaUrl.first,
+                          productname:productname);
                     }
-                    else if (currentUser.country == 'UK') {
-                      Proceedtobuy(total: gbp,
-                          prodId: prodId,
-                          ownerId: ownerId,
-                          userSize: usersize,
-                          profileimg: photoUrl,
+                    else if (currentUser.country == 'UK'){
+                      Proceedtobuy(total:gbp,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                           username: username,
-                          mediaUrl: shopmediaUrl,
-                          productname: productname);
+                          mediaUrl: shopmediaUrl.first,
+                          productname:productname);
                     }
-                    else if (currentUser.country == 'China') {
-                      Proceedtobuy(total: cny,
-                          prodId: prodId,
-                          ownerId: ownerId,
-                          userSize: usersize,
-                          profileimg: photoUrl,
+                    else  if (currentUser.country == 'Europe'){
+                      Proceedtobuy(total:eur,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                           username: username,
-                          mediaUrl: shopmediaUrl,
-                          productname: productname);
+                          mediaUrl: shopmediaUrl.first,
+                          productname:productname);
                     }
-                    else if (currentUser.country == 'Europe') {
-                      Proceedtobuy(total: eur,
-                          prodId: prodId,
-                          ownerId: ownerId,
-                          userSize: usersize,
-                          profileimg: photoUrl,
+                    else  if (currentUser.country == 'USA'){
+                      Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                           username: username,
-                          mediaUrl: shopmediaUrl,
-                          productname: productname);
+                          mediaUrl: shopmediaUrl.first,
+                          productname:productname);
                     }
-                    else if (currentUser.country == 'USA') {
-                      Proceedtobuy(total: usd,
-                          prodId: prodId,
-                          ownerId: ownerId,
-                          userSize: usersize,
-                          profileimg: photoUrl,
+                    else  {
+                      Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                           username: username,
-                          mediaUrl: shopmediaUrl,
-                          productname: productname);
+                          mediaUrl: shopmediaUrl.first,
+                          productname:productname);
                     }
-                    else {
-                      Proceedtobuy(total: usd,
-                          prodId: prodId,
-                          ownerId: ownerId,
-                          userSize: usersize,
-                          profileimg: photoUrl,
-                          username: username,
-                          mediaUrl: shopmediaUrl,
-                          productname: productname);
-                    }
+
                   });
                 },
                 child: Container(
@@ -7970,66 +8088,37 @@ else{
                 onTap: () {
                   setState(() {
                     usersize = 'MTO 6-9 M';
-                    if (currentUser.country == 'India') {
-                      Proceedtobuy(total: inr,
-                          prodId: prodId,
-                          ownerId: ownerId,
-                          userSize: usersize,
-                          profileimg: photoUrl,
+                    if (currentUser.country == 'India'){
+                      Proceedtobuy(total:inr,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                           username: username,
-                          mediaUrl: shopmediaUrl,
-                          productname: productname);
+                          mediaUrl: shopmediaUrl.first,
+                          productname:productname);
                     }
-                    else if (currentUser.country == 'UK') {
-                      Proceedtobuy(total: gbp,
-                          prodId: prodId,
-                          ownerId: ownerId,
-                          userSize: usersize,
-                          profileimg: photoUrl,
+                    else if (currentUser.country == 'UK'){
+                      Proceedtobuy(total:gbp,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                           username: username,
-                          mediaUrl: shopmediaUrl,
-                          productname: productname);
+                          mediaUrl: shopmediaUrl.first,
+                          productname:productname);
                     }
-                    else if (currentUser.country == 'China') {
-                      Proceedtobuy(total: cny,
-                          prodId: prodId,
-                          ownerId: ownerId,
-                          userSize: usersize,
-                          profileimg: photoUrl,
+                    else  if (currentUser.country == 'Europe'){
+                      Proceedtobuy(total:eur,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                           username: username,
-                          mediaUrl: shopmediaUrl,
-                          productname: productname);
+                          mediaUrl: shopmediaUrl.first,
+                          productname:productname);
                     }
-                    else if (currentUser.country == 'Europe') {
-                      Proceedtobuy(total: eur,
-                          prodId: prodId,
-                          ownerId: ownerId,
-                          userSize: usersize,
-                          profileimg: photoUrl,
+                    else  if (currentUser.country == 'USA'){
+                      Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                           username: username,
-                          mediaUrl: shopmediaUrl,
-                          productname: productname);
+                          mediaUrl: shopmediaUrl.first,
+                          productname:productname);
                     }
-                    else if (currentUser.country == 'USA') {
-                      Proceedtobuy(total: usd,
-                          prodId: prodId,
-                          ownerId: ownerId,
-                          userSize: usersize,
-                          profileimg: photoUrl,
+                    else  {
+                      Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                           username: username,
-                          mediaUrl: shopmediaUrl,
-                          productname: productname);
+                          mediaUrl: shopmediaUrl.first,
+                          productname:productname);
                     }
-                    else {
-                      Proceedtobuy(total: usd,
-                          prodId: prodId,
-                          ownerId: ownerId,
-                          userSize: usersize,
-                          profileimg: photoUrl,
-                          username: username,
-                          mediaUrl: shopmediaUrl,
-                          productname: productname);
-                    }
+
                   });
                 },
                 child: Container(
@@ -8053,66 +8142,37 @@ else{
                 onTap: () {
                   setState(() {
                     usersize = 'MTO 9-12 M';
-                    if (currentUser.country == 'India') {
-                      Proceedtobuy(total: inr,
-                          prodId: prodId,
-                          ownerId: ownerId,
-                          userSize: usersize,
-                          profileimg: photoUrl,
+                    if (currentUser.country == 'India'){
+                      Proceedtobuy(total:inr,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                           username: username,
-                          mediaUrl: shopmediaUrl,
-                          productname: productname);
+                          mediaUrl: shopmediaUrl.first,
+                          productname:productname);
                     }
-                    else if (currentUser.country == 'UK') {
-                      Proceedtobuy(total: gbp,
-                          prodId: prodId,
-                          ownerId: ownerId,
-                          userSize: usersize,
-                          profileimg: photoUrl,
+                    else if (currentUser.country == 'UK'){
+                      Proceedtobuy(total:gbp,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                           username: username,
-                          mediaUrl: shopmediaUrl,
-                          productname: productname);
+                          mediaUrl: shopmediaUrl.first,
+                          productname:productname);
                     }
-                    else if (currentUser.country == 'China') {
-                      Proceedtobuy(total: cny,
-                          prodId: prodId,
-                          ownerId: ownerId,
-                          userSize: usersize,
-                          profileimg: photoUrl,
+                    else  if (currentUser.country == 'Europe'){
+                      Proceedtobuy(total:eur,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                           username: username,
-                          mediaUrl: shopmediaUrl,
-                          productname: productname);
+                          mediaUrl: shopmediaUrl.first,
+                          productname:productname);
                     }
-                    else if (currentUser.country == 'Europe') {
-                      Proceedtobuy(total: eur,
-                          prodId: prodId,
-                          ownerId: ownerId,
-                          userSize: usersize,
-                          profileimg: photoUrl,
+                    else  if (currentUser.country == 'USA'){
+                      Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                           username: username,
-                          mediaUrl: shopmediaUrl,
-                          productname: productname);
+                          mediaUrl: shopmediaUrl.first,
+                          productname:productname);
                     }
-                    else if (currentUser.country == 'USA') {
-                      Proceedtobuy(total: usd,
-                          prodId: prodId,
-                          ownerId: ownerId,
-                          userSize: usersize,
-                          profileimg: photoUrl,
+                    else  {
+                      Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                           username: username,
-                          mediaUrl: shopmediaUrl,
-                          productname: productname);
+                          mediaUrl: shopmediaUrl.first,
+                          productname:productname);
                     }
-                    else {
-                      Proceedtobuy(total: usd,
-                          prodId: prodId,
-                          ownerId: ownerId,
-                          userSize: usersize,
-                          profileimg: photoUrl,
-                          username: username,
-                          mediaUrl: shopmediaUrl,
-                          productname: productname);
-                    }
+
                   });
                 },
                 child: Container(
@@ -8136,66 +8196,37 @@ else{
                 onTap: () {
                   setState(() {
                     usersize = 'MTO 12-18 M';
-                    if (currentUser.country == 'India') {
-                      Proceedtobuy(total: inr,
-                          prodId: prodId,
-                          ownerId: ownerId,
-                          userSize: usersize,
-                          profileimg: photoUrl,
+                    if (currentUser.country == 'India'){
+                      Proceedtobuy(total:inr,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                           username: username,
-                          mediaUrl: shopmediaUrl,
-                          productname: productname);
+                          mediaUrl: shopmediaUrl.first,
+                          productname:productname);
                     }
-                    else if (currentUser.country == 'UK') {
-                      Proceedtobuy(total: gbp,
-                          prodId: prodId,
-                          ownerId: ownerId,
-                          userSize: usersize,
-                          profileimg: photoUrl,
+                    else if (currentUser.country == 'UK'){
+                      Proceedtobuy(total:gbp,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                           username: username,
-                          mediaUrl: shopmediaUrl,
-                          productname: productname);
+                          mediaUrl: shopmediaUrl.first,
+                          productname:productname);
                     }
-                    else if (currentUser.country == 'China') {
-                      Proceedtobuy(total: cny,
-                          prodId: prodId,
-                          ownerId: ownerId,
-                          userSize: usersize,
-                          profileimg: photoUrl,
+                    else  if (currentUser.country == 'Europe'){
+                      Proceedtobuy(total:eur,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                           username: username,
-                          mediaUrl: shopmediaUrl,
-                          productname: productname);
+                          mediaUrl: shopmediaUrl.first,
+                          productname:productname);
                     }
-                    else if (currentUser.country == 'Europe') {
-                      Proceedtobuy(total: eur,
-                          prodId: prodId,
-                          ownerId: ownerId,
-                          userSize: usersize,
-                          profileimg: photoUrl,
+                    else  if (currentUser.country == 'USA'){
+                      Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                           username: username,
-                          mediaUrl: shopmediaUrl,
-                          productname: productname);
+                          mediaUrl: shopmediaUrl.first,
+                          productname:productname);
                     }
-                    else if (currentUser.country == 'USA') {
-                      Proceedtobuy(total: usd,
-                          prodId: prodId,
-                          ownerId: ownerId,
-                          userSize: usersize,
-                          profileimg: photoUrl,
+                    else  {
+                      Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                           username: username,
-                          mediaUrl: shopmediaUrl,
-                          productname: productname);
+                          mediaUrl: shopmediaUrl.first,
+                          productname:productname);
                     }
-                    else {
-                      Proceedtobuy(total: usd,
-                          prodId: prodId,
-                          ownerId: ownerId,
-                          userSize: usersize,
-                          profileimg: photoUrl,
-                          username: username,
-                          mediaUrl: shopmediaUrl,
-                          productname: productname);
-                    }
+
                   });
                 },
                 child: Container(
@@ -8219,66 +8250,37 @@ else{
                 onTap: () {
                   setState(() {
                     usersize = 'MTO 18-24 M';
-                    if (currentUser.country == 'India') {
-                      Proceedtobuy(total: inr,
-                          prodId: prodId,
-                          ownerId: ownerId,
-                          userSize: usersize,
-                          profileimg: photoUrl,
+                    if (currentUser.country == 'India'){
+                      Proceedtobuy(total:inr,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                           username: username,
-                          mediaUrl: shopmediaUrl,
-                          productname: productname);
+                          mediaUrl: shopmediaUrl.first,
+                          productname:productname);
                     }
-                    else if (currentUser.country == 'UK') {
-                      Proceedtobuy(total: gbp,
-                          prodId: prodId,
-                          ownerId: ownerId,
-                          userSize: usersize,
-                          profileimg: photoUrl,
+                    else if (currentUser.country == 'UK'){
+                      Proceedtobuy(total:gbp,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                           username: username,
-                          mediaUrl: shopmediaUrl,
-                          productname: productname);
+                          mediaUrl: shopmediaUrl.first,
+                          productname:productname);
                     }
-                    else if (currentUser.country == 'China') {
-                      Proceedtobuy(total: cny,
-                          prodId: prodId,
-                          ownerId: ownerId,
-                          userSize: usersize,
-                          profileimg: photoUrl,
+                    else  if (currentUser.country == 'Europe'){
+                      Proceedtobuy(total:eur,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                           username: username,
-                          mediaUrl: shopmediaUrl,
-                          productname: productname);
+                          mediaUrl: shopmediaUrl.first,
+                          productname:productname);
                     }
-                    else if (currentUser.country == 'Europe') {
-                      Proceedtobuy(total: eur,
-                          prodId: prodId,
-                          ownerId: ownerId,
-                          userSize: usersize,
-                          profileimg: photoUrl,
+                    else  if (currentUser.country == 'USA'){
+                      Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                           username: username,
-                          mediaUrl: shopmediaUrl,
-                          productname: productname);
+                          mediaUrl: shopmediaUrl.first,
+                          productname:productname);
                     }
-                    else if (currentUser.country == 'USA') {
-                      Proceedtobuy(total: usd,
-                          prodId: prodId,
-                          ownerId: ownerId,
-                          userSize: usersize,
-                          profileimg: photoUrl,
+                    else  {
+                      Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                           username: username,
-                          mediaUrl: shopmediaUrl,
-                          productname: productname);
+                          mediaUrl: shopmediaUrl.first,
+                          productname:productname);
                     }
-                    else {
-                      Proceedtobuy(total: usd,
-                          prodId: prodId,
-                          ownerId: ownerId,
-                          userSize: usersize,
-                          profileimg: photoUrl,
-                          username: username,
-                          mediaUrl: shopmediaUrl,
-                          productname: productname);
-                    }
+
                   });
                 },
                 child: Container(
@@ -8321,56 +8323,37 @@ else{
                 onTap: () {
                   setState(() {
                     usersize = 'MTO 2 Y';
-                    if (currentUser.country == 'India') {
-                      Proceedtobuy(total: inr,
-                          prodId: prodId,
-                          ownerId: ownerId,
-                          userSize: usersize,
-                          profileimg: photoUrl,
+                    if (currentUser.country == 'India'){
+                      Proceedtobuy(total:inr,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                           username: username,
-                          mediaUrl: shopmediaUrl,
-                          productname: productname);
+                          mediaUrl: shopmediaUrl.first,
+                          productname:productname);
                     }
-                    else if (currentUser.country == 'UK') {
-                      Proceedtobuy(total: gbp,
-                          prodId: prodId,
-                          ownerId: ownerId,
-                          userSize: usersize,
-                          profileimg: photoUrl,
+                    else if (currentUser.country == 'UK'){
+                      Proceedtobuy(total:gbp,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                           username: username,
-                          mediaUrl: shopmediaUrl,
-                          productname: productname);
+                          mediaUrl: shopmediaUrl.first,
+                          productname:productname);
                     }
-                    else if (currentUser.country == 'Europe') {
-                      Proceedtobuy(total: eur,
-                          prodId: prodId,
-                          ownerId: ownerId,
-                          userSize: usersize,
-                          profileimg: photoUrl,
+                    else  if (currentUser.country == 'Europe'){
+                      Proceedtobuy(total:eur,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                           username: username,
-                          mediaUrl: shopmediaUrl,
-                          productname: productname);
+                          mediaUrl: shopmediaUrl.first,
+                          productname:productname);
                     }
-                    else if (currentUser.country == 'USA') {
-                      Proceedtobuy(total: usd,
-                          prodId: prodId,
-                          ownerId: ownerId,
-                          userSize: usersize,
-                          profileimg: photoUrl,
+                    else  if (currentUser.country == 'USA'){
+                      Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                           username: username,
-                          mediaUrl: shopmediaUrl,
-                          productname: productname);
+                          mediaUrl: shopmediaUrl.first,
+                          productname:productname);
                     }
-                    else {
-                      Proceedtobuy(total: usd,
-                          prodId: prodId,
-                          ownerId: ownerId,
-                          userSize: usersize,
-                          profileimg: photoUrl,
+                    else  {
+                      Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                           username: username,
-                          mediaUrl: shopmediaUrl,
-                          productname: productname);
+                          mediaUrl: shopmediaUrl.first,
+                          productname:productname);
                     }
+
                   });
                 },
                 child: Container(
@@ -8394,56 +8377,37 @@ else{
                 onTap: () {
                   setState(() {
                     usersize = 'MTO 3-4 Y';
-                    if (currentUser.country == 'India') {
-                      Proceedtobuy(total: inr,
-                          prodId: prodId,
-                          ownerId: ownerId,
-                          userSize: usersize,
-                          profileimg: photoUrl,
+                    if (currentUser.country == 'India'){
+                      Proceedtobuy(total:inr,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                           username: username,
-                          mediaUrl: shopmediaUrl,
-                          productname: productname);
+                          mediaUrl: shopmediaUrl.first,
+                          productname:productname);
                     }
-                    else if (currentUser.country == 'UK') {
-                      Proceedtobuy(total: gbp,
-                          prodId: prodId,
-                          ownerId: ownerId,
-                          userSize: usersize,
-                          profileimg: photoUrl,
+                    else if (currentUser.country == 'UK'){
+                      Proceedtobuy(total:gbp,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                           username: username,
-                          mediaUrl: shopmediaUrl,
-                          productname: productname);
+                          mediaUrl: shopmediaUrl.first,
+                          productname:productname);
                     }
-                    else if (currentUser.country == 'Europe') {
-                      Proceedtobuy(total: eur,
-                          prodId: prodId,
-                          ownerId: ownerId,
-                          userSize: usersize,
-                          profileimg: photoUrl,
+                    else  if (currentUser.country == 'Europe'){
+                      Proceedtobuy(total:eur,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                           username: username,
-                          mediaUrl: shopmediaUrl,
-                          productname: productname);
+                          mediaUrl: shopmediaUrl.first,
+                          productname:productname);
                     }
-                    else if (currentUser.country == 'USA') {
-                      Proceedtobuy(total: usd,
-                          prodId: prodId,
-                          ownerId: ownerId,
-                          userSize: usersize,
-                          profileimg: photoUrl,
+                    else  if (currentUser.country == 'USA'){
+                      Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                           username: username,
-                          mediaUrl: shopmediaUrl,
-                          productname: productname);
+                          mediaUrl: shopmediaUrl.first,
+                          productname:productname);
                     }
-                    else {
-                      Proceedtobuy(total: usd,
-                          prodId: prodId,
-                          ownerId: ownerId,
-                          userSize: usersize,
-                          profileimg: photoUrl,
+                    else  {
+                      Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                           username: username,
-                          mediaUrl: shopmediaUrl,
-                          productname: productname);
+                          mediaUrl: shopmediaUrl.first,
+                          productname:productname);
                     }
+
                   });
                 },
                 child: Container(
@@ -8467,56 +8431,37 @@ else{
                 onTap: () {
                   setState(() {
                     usersize = 'MTO 4-5 Y';
-                    if (currentUser.country == 'India') {
-                      Proceedtobuy(total: inr,
-                          prodId: prodId,
-                          ownerId: ownerId,
-                          userSize: usersize,
-                          profileimg: photoUrl,
+                    if (currentUser.country == 'India'){
+                      Proceedtobuy(total:inr,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                           username: username,
-                          mediaUrl: shopmediaUrl,
-                          productname: productname);
+                          mediaUrl: shopmediaUrl.first,
+                          productname:productname);
                     }
-                    else if (currentUser.country == 'UK') {
-                      Proceedtobuy(total: gbp,
-                          prodId: prodId,
-                          ownerId: ownerId,
-                          userSize: usersize,
-                          profileimg: photoUrl,
+                    else if (currentUser.country == 'UK'){
+                      Proceedtobuy(total:gbp,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                           username: username,
-                          mediaUrl: shopmediaUrl,
-                          productname: productname);
+                          mediaUrl: shopmediaUrl.first,
+                          productname:productname);
                     }
-                    else if (currentUser.country == 'Europe') {
-                      Proceedtobuy(total: eur,
-                          prodId: prodId,
-                          ownerId: ownerId,
-                          userSize: usersize,
-                          profileimg: photoUrl,
+                    else  if (currentUser.country == 'Europe'){
+                      Proceedtobuy(total:eur,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                           username: username,
-                          mediaUrl: shopmediaUrl,
-                          productname: productname);
+                          mediaUrl: shopmediaUrl.first,
+                          productname:productname);
                     }
-                    else if (currentUser.country == 'USA') {
-                      Proceedtobuy(total: usd,
-                          prodId: prodId,
-                          ownerId: ownerId,
-                          userSize: usersize,
-                          profileimg: photoUrl,
+                    else  if (currentUser.country == 'USA'){
+                      Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                           username: username,
-                          mediaUrl: shopmediaUrl,
-                          productname: productname);
+                          mediaUrl: shopmediaUrl.first,
+                          productname:productname);
                     }
-                    else {
-                      Proceedtobuy(total: usd,
-                          prodId: prodId,
-                          ownerId: ownerId,
-                          userSize: usersize,
-                          profileimg: photoUrl,
+                    else  {
+                      Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                           username: username,
-                          mediaUrl: shopmediaUrl,
-                          productname: productname);
+                          mediaUrl: shopmediaUrl.first,
+                          productname:productname);
                     }
+
                   });
                 },
                 child: Container(
@@ -8540,56 +8485,37 @@ else{
                 onTap: () {
                   setState(() {
                     usersize = 'MTO 5-6 Y';
-                    if (currentUser.country == 'India') {
-                      Proceedtobuy(total: inr,
-                          prodId: prodId,
-                          ownerId: ownerId,
-                          userSize: usersize,
-                          profileimg: photoUrl,
+                    if (currentUser.country == 'India'){
+                      Proceedtobuy(total:inr,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                           username: username,
-                          mediaUrl: shopmediaUrl,
-                          productname: productname);
+                          mediaUrl: shopmediaUrl.first,
+                          productname:productname);
                     }
-                    else if (currentUser.country == 'UK') {
-                      Proceedtobuy(total: gbp,
-                          prodId: prodId,
-                          ownerId: ownerId,
-                          userSize: usersize,
-                          profileimg: photoUrl,
+                    else if (currentUser.country == 'UK'){
+                      Proceedtobuy(total:gbp,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                           username: username,
-                          mediaUrl: shopmediaUrl,
-                          productname: productname);
+                          mediaUrl: shopmediaUrl.first,
+                          productname:productname);
                     }
-                    else if (currentUser.country == 'Europe') {
-                      Proceedtobuy(total: eur,
-                          prodId: prodId,
-                          ownerId: ownerId,
-                          userSize: usersize,
-                          profileimg: photoUrl,
+                    else  if (currentUser.country == 'Europe'){
+                      Proceedtobuy(total:eur,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                           username: username,
-                          mediaUrl: shopmediaUrl,
-                          productname: productname);
+                          mediaUrl: shopmediaUrl.first,
+                          productname:productname);
                     }
-                    else if (currentUser.country == 'USA') {
-                      Proceedtobuy(total: usd,
-                          prodId: prodId,
-                          ownerId: ownerId,
-                          userSize: usersize,
-                          profileimg: photoUrl,
+                    else  if (currentUser.country == 'USA'){
+                      Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                           username: username,
-                          mediaUrl: shopmediaUrl,
-                          productname: productname);
+                          mediaUrl: shopmediaUrl.first,
+                          productname:productname);
                     }
-                    else {
-                      Proceedtobuy(total: usd,
-                          prodId: prodId,
-                          ownerId: ownerId,
-                          userSize: usersize,
-                          profileimg: photoUrl,
+                    else  {
+                      Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                           username: username,
-                          mediaUrl: shopmediaUrl,
-                          productname: productname);
+                          mediaUrl: shopmediaUrl.first,
+                          productname:productname);
                     }
+
                   });
                 },
                 child: Container(
@@ -8613,56 +8539,37 @@ else{
                 onTap: () {
                   setState(() {
                     usersize = 'MTO 6-7 Y';
-                    if (currentUser.country == 'India') {
-                      Proceedtobuy(total: inr,
-                          prodId: prodId,
-                          ownerId: ownerId,
-                          userSize: usersize,
-                          profileimg: photoUrl,
+                    if (currentUser.country == 'India'){
+                      Proceedtobuy(total:inr,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                           username: username,
-                          mediaUrl: shopmediaUrl,
-                          productname: productname);
+                          mediaUrl: shopmediaUrl.first,
+                          productname:productname);
                     }
-                    else if (currentUser.country == 'UK') {
-                      Proceedtobuy(total: gbp,
-                          prodId: prodId,
-                          ownerId: ownerId,
-                          userSize: usersize,
-                          profileimg: photoUrl,
+                    else if (currentUser.country == 'UK'){
+                      Proceedtobuy(total:gbp,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                           username: username,
-                          mediaUrl: shopmediaUrl,
-                          productname: productname);
+                          mediaUrl: shopmediaUrl.first,
+                          productname:productname);
                     }
-                    else if (currentUser.country == 'Europe') {
-                      Proceedtobuy(total: eur,
-                          prodId: prodId,
-                          ownerId: ownerId,
-                          userSize: usersize,
-                          profileimg: photoUrl,
+                    else  if (currentUser.country == 'Europe'){
+                      Proceedtobuy(total:eur,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                           username: username,
-                          mediaUrl: shopmediaUrl,
-                          productname: productname);
+                          mediaUrl: shopmediaUrl.first,
+                          productname:productname);
                     }
-                    else if (currentUser.country == 'USA') {
-                      Proceedtobuy(total: usd,
-                          prodId: prodId,
-                          ownerId: ownerId,
-                          userSize: usersize,
-                          profileimg: photoUrl,
+                    else  if (currentUser.country == 'USA'){
+                      Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                           username: username,
-                          mediaUrl: shopmediaUrl,
-                          productname: productname);
+                          mediaUrl: shopmediaUrl.first,
+                          productname:productname);
                     }
-                    else {
-                      Proceedtobuy(total: usd,
-                          prodId: prodId,
-                          ownerId: ownerId,
-                          userSize: usersize,
-                          profileimg: photoUrl,
+                    else  {
+                      Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                           username: username,
-                          mediaUrl: shopmediaUrl,
-                          productname: productname);
+                          mediaUrl: shopmediaUrl.first,
+                          productname:productname);
                     }
+
                   });
                 },
                 child: Container(
@@ -8686,56 +8593,37 @@ else{
                 onTap: () {
                   setState(() {
                     usersize = 'MTO 7-8 Y';
-                    if (currentUser.country == 'India') {
-                      Proceedtobuy(total: inr,
-                          prodId: prodId,
-                          ownerId: ownerId,
-                          userSize: usersize,
-                          profileimg: photoUrl,
+                    if (currentUser.country == 'India'){
+                      Proceedtobuy(total:inr,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                           username: username,
-                          mediaUrl: shopmediaUrl,
-                          productname: productname);
+                          mediaUrl: shopmediaUrl.first,
+                          productname:productname);
                     }
-                    else if (currentUser.country == 'UK') {
-                      Proceedtobuy(total: gbp,
-                          prodId: prodId,
-                          ownerId: ownerId,
-                          userSize: usersize,
-                          profileimg: photoUrl,
+                    else if (currentUser.country == 'UK'){
+                      Proceedtobuy(total:gbp,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                           username: username,
-                          mediaUrl: shopmediaUrl,
-                          productname: productname);
+                          mediaUrl: shopmediaUrl.first,
+                          productname:productname);
                     }
-                    else if (currentUser.country == 'Europe') {
-                      Proceedtobuy(total: eur,
-                          prodId: prodId,
-                          ownerId: ownerId,
-                          userSize: usersize,
-                          profileimg: photoUrl,
+                    else  if (currentUser.country == 'Europe'){
+                      Proceedtobuy(total:eur,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                           username: username,
-                          mediaUrl: shopmediaUrl,
-                          productname: productname);
+                          mediaUrl: shopmediaUrl.first,
+                          productname:productname);
                     }
-                    else if (currentUser.country == 'USA') {
-                      Proceedtobuy(total: usd,
-                          prodId: prodId,
-                          ownerId: ownerId,
-                          userSize: usersize,
-                          profileimg: photoUrl,
+                    else  if (currentUser.country == 'USA'){
+                      Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                           username: username,
-                          mediaUrl: shopmediaUrl,
-                          productname: productname);
+                          mediaUrl: shopmediaUrl.first,
+                          productname:productname);
                     }
-                    else {
-                      Proceedtobuy(total: usd,
-                          prodId: prodId,
-                          ownerId: ownerId,
-                          userSize: usersize,
-                          profileimg: photoUrl,
+                    else  {
+                      Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                           username: username,
-                          mediaUrl: shopmediaUrl,
-                          productname: productname);
+                          mediaUrl: shopmediaUrl.first,
+                          productname:productname);
                     }
+
                   });
                 },
                 child: Container(
@@ -8759,56 +8647,37 @@ else{
                 onTap: () {
                   setState(() {
                     usersize = 'MTO 8-9 Y';
-                    if (currentUser.country == 'India') {
-                      Proceedtobuy(total: inr,
-                          prodId: prodId,
-                          ownerId: ownerId,
-                          userSize: usersize,
-                          profileimg: photoUrl,
+                    if (currentUser.country == 'India'){
+                      Proceedtobuy(total:inr,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                           username: username,
-                          mediaUrl: shopmediaUrl,
-                          productname: productname);
+                          mediaUrl: shopmediaUrl.first,
+                          productname:productname);
                     }
-                    else if (currentUser.country == 'UK') {
-                      Proceedtobuy(total: gbp,
-                          prodId: prodId,
-                          ownerId: ownerId,
-                          userSize: usersize,
-                          profileimg: photoUrl,
+                    else if (currentUser.country == 'UK'){
+                      Proceedtobuy(total:gbp,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                           username: username,
-                          mediaUrl: shopmediaUrl,
-                          productname: productname);
+                          mediaUrl: shopmediaUrl.first,
+                          productname:productname);
                     }
-                    else if (currentUser.country == 'Europe') {
-                      Proceedtobuy(total: eur,
-                          prodId: prodId,
-                          ownerId: ownerId,
-                          userSize: usersize,
-                          profileimg: photoUrl,
+                    else  if (currentUser.country == 'Europe'){
+                      Proceedtobuy(total:eur,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                           username: username,
-                          mediaUrl: shopmediaUrl,
-                          productname: productname);
+                          mediaUrl: shopmediaUrl.first,
+                          productname:productname);
                     }
-                    else if (currentUser.country == 'USA') {
-                      Proceedtobuy(total: usd,
-                          prodId: prodId,
-                          ownerId: ownerId,
-                          userSize: usersize,
-                          profileimg: photoUrl,
+                    else  if (currentUser.country == 'USA'){
+                      Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                           username: username,
-                          mediaUrl: shopmediaUrl,
-                          productname: productname);
+                          mediaUrl: shopmediaUrl.first,
+                          productname:productname);
                     }
-                    else {
-                      Proceedtobuy(total: usd,
-                          prodId: prodId,
-                          ownerId: ownerId,
-                          userSize: usersize,
-                          profileimg: photoUrl,
+                    else  {
+                      Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                           username: username,
-                          mediaUrl: shopmediaUrl,
-                          productname: productname);
+                          mediaUrl: shopmediaUrl.first,
+                          productname:productname);
                     }
+
                   });
                 },
                 child: Container(
@@ -8832,56 +8701,37 @@ else{
                 onTap: () {
                   setState(() {
                     usersize = 'MTO 9-10 Y';
-                    if (currentUser.country == 'India') {
-                      Proceedtobuy(total: inr,
-                          prodId: prodId,
-                          ownerId: ownerId,
-                          userSize: usersize,
-                          profileimg: photoUrl,
+                    if (currentUser.country == 'India'){
+                      Proceedtobuy(total:inr,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                           username: username,
-                          mediaUrl: shopmediaUrl,
-                          productname: productname);
+                          mediaUrl: shopmediaUrl.first,
+                          productname:productname);
                     }
-                    else if (currentUser.country == 'UK') {
-                      Proceedtobuy(total: gbp,
-                          prodId: prodId,
-                          ownerId: ownerId,
-                          userSize: usersize,
-                          profileimg: photoUrl,
+                    else if (currentUser.country == 'UK'){
+                      Proceedtobuy(total:gbp,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                           username: username,
-                          mediaUrl: shopmediaUrl,
-                          productname: productname);
+                          mediaUrl: shopmediaUrl.first,
+                          productname:productname);
                     }
-                    else if (currentUser.country == 'Europe') {
-                      Proceedtobuy(total: eur,
-                          prodId: prodId,
-                          ownerId: ownerId,
-                          userSize: usersize,
-                          profileimg: photoUrl,
+                    else  if (currentUser.country == 'Europe'){
+                      Proceedtobuy(total:eur,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                           username: username,
-                          mediaUrl: shopmediaUrl,
-                          productname: productname);
+                          mediaUrl: shopmediaUrl.first,
+                          productname:productname);
                     }
-                    else if (currentUser.country == 'USA') {
-                      Proceedtobuy(total: usd,
-                          prodId: prodId,
-                          ownerId: ownerId,
-                          userSize: usersize,
-                          profileimg: photoUrl,
+                    else  if (currentUser.country == 'USA'){
+                      Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                           username: username,
-                          mediaUrl: shopmediaUrl,
-                          productname: productname);
+                          mediaUrl: shopmediaUrl.first,
+                          productname:productname);
                     }
-                    else {
-                      Proceedtobuy(total: usd,
-                          prodId: prodId,
-                          ownerId: ownerId,
-                          userSize: usersize,
-                          profileimg: photoUrl,
+                    else  {
+                      Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                           username: username,
-                          mediaUrl: shopmediaUrl,
-                          productname: productname);
+                          mediaUrl: shopmediaUrl.first,
+                          productname:productname);
                     }
+
                   });
                 },
                 child: Container(
@@ -8905,56 +8755,37 @@ else{
                 onTap: () {
                   setState(() {
                     usersize = 'MTO 10-11 Y';
-                    if (currentUser.country == 'India') {
-                      Proceedtobuy(total: inr,
-                          prodId: prodId,
-                          ownerId: ownerId,
-                          userSize: usersize,
-                          profileimg: photoUrl,
+                    if (currentUser.country == 'India'){
+                      Proceedtobuy(total:inr,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                           username: username,
-                          mediaUrl: shopmediaUrl,
-                          productname: productname);
+                          mediaUrl: shopmediaUrl.first,
+                          productname:productname);
                     }
-                    else if (currentUser.country == 'UK') {
-                      Proceedtobuy(total: gbp,
-                          prodId: prodId,
-                          ownerId: ownerId,
-                          userSize: usersize,
-                          profileimg: photoUrl,
+                    else if (currentUser.country == 'UK'){
+                      Proceedtobuy(total:gbp,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                           username: username,
-                          mediaUrl: shopmediaUrl,
-                          productname: productname);
+                          mediaUrl: shopmediaUrl.first,
+                          productname:productname);
                     }
-                    else if (currentUser.country == 'Europe') {
-                      Proceedtobuy(total: eur,
-                          prodId: prodId,
-                          ownerId: ownerId,
-                          userSize: usersize,
-                          profileimg: photoUrl,
+                    else  if (currentUser.country == 'Europe'){
+                      Proceedtobuy(total:eur,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                           username: username,
-                          mediaUrl: shopmediaUrl,
-                          productname: productname);
+                          mediaUrl: shopmediaUrl.first,
+                          productname:productname);
                     }
-                    else if (currentUser.country == 'USA') {
-                      Proceedtobuy(total: usd,
-                          prodId: prodId,
-                          ownerId: ownerId,
-                          userSize: usersize,
-                          profileimg: photoUrl,
+                    else  if (currentUser.country == 'USA'){
+                      Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                           username: username,
-                          mediaUrl: shopmediaUrl,
-                          productname: productname);
+                          mediaUrl: shopmediaUrl.first,
+                          productname:productname);
                     }
-                    else {
-                      Proceedtobuy(total: usd,
-                          prodId: prodId,
-                          ownerId: ownerId,
-                          userSize: usersize,
-                          profileimg: photoUrl,
+                    else  {
+                      Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                           username: username,
-                          mediaUrl: shopmediaUrl,
-                          productname: productname);
+                          mediaUrl: shopmediaUrl.first,
+                          productname:productname);
                     }
+
                   });
                 },
                 child: Container(
@@ -8978,56 +8809,37 @@ else{
                 onTap: () {
                   setState(() {
                     usersize = 'MTO 11-12 Y';
-                    if (currentUser.country == 'India') {
-                      Proceedtobuy(total: inr,
-                          prodId: prodId,
-                          ownerId: ownerId,
-                          userSize: usersize,
-                          profileimg: photoUrl,
+                    if (currentUser.country == 'India'){
+                      Proceedtobuy(total:inr,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                           username: username,
-                          mediaUrl: shopmediaUrl,
-                          productname: productname);
+                          mediaUrl: shopmediaUrl.first,
+                          productname:productname);
                     }
-                    else if (currentUser.country == 'UK') {
-                      Proceedtobuy(total: gbp,
-                          prodId: prodId,
-                          ownerId: ownerId,
-                          userSize: usersize,
-                          profileimg: photoUrl,
+                    else if (currentUser.country == 'UK'){
+                      Proceedtobuy(total:gbp,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                           username: username,
-                          mediaUrl: shopmediaUrl,
-                          productname: productname);
+                          mediaUrl: shopmediaUrl.first,
+                          productname:productname);
                     }
-                    else if (currentUser.country == 'Europe') {
-                      Proceedtobuy(total: eur,
-                          prodId: prodId,
-                          ownerId: ownerId,
-                          userSize: usersize,
-                          profileimg: photoUrl,
+                    else  if (currentUser.country == 'Europe'){
+                      Proceedtobuy(total:eur,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                           username: username,
-                          mediaUrl: shopmediaUrl,
-                          productname: productname);
+                          mediaUrl: shopmediaUrl.first,
+                          productname:productname);
                     }
-                    else if (currentUser.country == 'USA') {
-                      Proceedtobuy(total: usd,
-                          prodId: prodId,
-                          ownerId: ownerId,
-                          userSize: usersize,
-                          profileimg: photoUrl,
+                    else  if (currentUser.country == 'USA'){
+                      Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                           username: username,
-                          mediaUrl: shopmediaUrl,
-                          productname: productname);
+                          mediaUrl: shopmediaUrl.first,
+                          productname:productname);
                     }
-                    else {
-                      Proceedtobuy(total: usd,
-                          prodId: prodId,
-                          ownerId: ownerId,
-                          userSize: usersize,
-                          profileimg: photoUrl,
+                    else  {
+                      Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                           username: username,
-                          mediaUrl: shopmediaUrl,
-                          productname: productname);
+                          mediaUrl: shopmediaUrl.first,
+                          productname:productname);
                     }
+
                   });
                 },
                 child: Container(
@@ -9067,56 +8879,37 @@ else{
                 onTap: () {
                   setState(() {
                     usersize = 'MTO 13 Y';
-                    if (currentUser.country == 'India') {
-                      Proceedtobuy(total: inr,
-                          prodId: prodId,
-                          ownerId: ownerId,
-                          userSize: usersize,
-                          profileimg: photoUrl,
+                    if (currentUser.country == 'India'){
+                      Proceedtobuy(total:inr,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                           username: username,
-                          mediaUrl: shopmediaUrl,
-                          productname: productname);
+                          mediaUrl: shopmediaUrl.first,
+                          productname:productname);
                     }
-                    else if (currentUser.country == 'UK') {
-                      Proceedtobuy(total: gbp,
-                          prodId: prodId,
-                          ownerId: ownerId,
-                          userSize: usersize,
-                          profileimg: photoUrl,
+                    else if (currentUser.country == 'UK'){
+                      Proceedtobuy(total:gbp,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                           username: username,
-                          mediaUrl: shopmediaUrl,
-                          productname: productname);
+                          mediaUrl: shopmediaUrl.first,
+                          productname:productname);
                     }
-                    else if (currentUser.country == 'Europe') {
-                      Proceedtobuy(total: eur,
-                          prodId: prodId,
-                          ownerId: ownerId,
-                          userSize: usersize,
-                          profileimg: photoUrl,
+                    else  if (currentUser.country == 'Europe'){
+                      Proceedtobuy(total:eur,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                           username: username,
-                          mediaUrl: shopmediaUrl,
-                          productname: productname);
+                          mediaUrl: shopmediaUrl.first,
+                          productname:productname);
                     }
-                    else if (currentUser.country == 'USA') {
-                      Proceedtobuy(total: usd,
-                          prodId: prodId,
-                          ownerId: ownerId,
-                          userSize: usersize,
-                          profileimg: photoUrl,
+                    else  if (currentUser.country == 'USA'){
+                      Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                           username: username,
-                          mediaUrl: shopmediaUrl,
-                          productname: productname);
+                          mediaUrl: shopmediaUrl.first,
+                          productname:productname);
                     }
-                    else {
-                      Proceedtobuy(total: usd,
-                          prodId: prodId,
-                          ownerId: ownerId,
-                          userSize: usersize,
-                          profileimg: photoUrl,
+                    else  {
+                      Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                           username: username,
-                          mediaUrl: shopmediaUrl,
-                          productname: productname);
+                          mediaUrl: shopmediaUrl.first,
+                          productname:productname);
                     }
+
                   });
                 },
                 child: Container(
@@ -9140,56 +8933,37 @@ else{
                 onTap: () {
                   setState(() {
                     usersize = 'MTO 14 Y';
-                    if (currentUser.country == 'India') {
-                      Proceedtobuy(total: inr,
-                          prodId: prodId,
-                          ownerId: ownerId,
-                          userSize: usersize,
-                          profileimg: photoUrl,
+                    if (currentUser.country == 'India'){
+                      Proceedtobuy(total:inr,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                           username: username,
-                          mediaUrl: shopmediaUrl,
-                          productname: productname);
+                          mediaUrl: shopmediaUrl.first,
+                          productname:productname);
                     }
-                    else if (currentUser.country == 'UK') {
-                      Proceedtobuy(total: gbp,
-                          prodId: prodId,
-                          ownerId: ownerId,
-                          userSize: usersize,
-                          profileimg: photoUrl,
+                    else if (currentUser.country == 'UK'){
+                      Proceedtobuy(total:gbp,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                           username: username,
-                          mediaUrl: shopmediaUrl,
-                          productname: productname);
+                          mediaUrl: shopmediaUrl.first,
+                          productname:productname);
                     }
-                    else if (currentUser.country == 'Europe') {
-                      Proceedtobuy(total: eur,
-                          prodId: prodId,
-                          ownerId: ownerId,
-                          userSize: usersize,
-                          profileimg: photoUrl,
+                    else  if (currentUser.country == 'Europe'){
+                      Proceedtobuy(total:eur,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                           username: username,
-                          mediaUrl: shopmediaUrl,
-                          productname: productname);
+                          mediaUrl: shopmediaUrl.first,
+                          productname:productname);
                     }
-                    else if (currentUser.country == 'USA') {
-                      Proceedtobuy(total: usd,
-                          prodId: prodId,
-                          ownerId: ownerId,
-                          userSize: usersize,
-                          profileimg: photoUrl,
+                    else  if (currentUser.country == 'USA'){
+                      Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                           username: username,
-                          mediaUrl: shopmediaUrl,
-                          productname: productname);
+                          mediaUrl: shopmediaUrl.first,
+                          productname:productname);
                     }
-                    else {
-                      Proceedtobuy(total: usd,
-                          prodId: prodId,
-                          ownerId: ownerId,
-                          userSize: usersize,
-                          profileimg: photoUrl,
+                    else  {
+                      Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                           username: username,
-                          mediaUrl: shopmediaUrl,
-                          productname: productname);
+                          mediaUrl: shopmediaUrl.first,
+                          productname:productname);
                     }
+
                   });
                 },
                 child: Container(
@@ -9213,56 +8987,37 @@ else{
                 onTap: () {
                   setState(() {
                     usersize = 'MTO 15 Y';
-                    if (currentUser.country == 'India') {
-                      Proceedtobuy(total: inr,
-                          prodId: prodId,
-                          ownerId: ownerId,
-                          userSize: usersize,
-                          profileimg: photoUrl,
+                    if (currentUser.country == 'India'){
+                      Proceedtobuy(total:inr,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                           username: username,
-                          mediaUrl: shopmediaUrl,
-                          productname: productname);
+                          mediaUrl: shopmediaUrl.first,
+                          productname:productname);
                     }
-                    else if (currentUser.country == 'UK') {
-                      Proceedtobuy(total: gbp,
-                          prodId: prodId,
-                          ownerId: ownerId,
-                          userSize: usersize,
-                          profileimg: photoUrl,
+                    else if (currentUser.country == 'UK'){
+                      Proceedtobuy(total:gbp,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                           username: username,
-                          mediaUrl: shopmediaUrl,
-                          productname: productname);
+                          mediaUrl: shopmediaUrl.first,
+                          productname:productname);
                     }
-                    else if (currentUser.country == 'Europe') {
-                      Proceedtobuy(total: eur,
-                          prodId: prodId,
-                          ownerId: ownerId,
-                          userSize: usersize,
-                          profileimg: photoUrl,
+                    else  if (currentUser.country == 'Europe'){
+                      Proceedtobuy(total:eur,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                           username: username,
-                          mediaUrl: shopmediaUrl,
-                          productname: productname);
+                          mediaUrl: shopmediaUrl.first,
+                          productname:productname);
                     }
-                    else if (currentUser.country == 'USA') {
-                      Proceedtobuy(total: usd,
-                          prodId: prodId,
-                          ownerId: ownerId,
-                          userSize: usersize,
-                          profileimg: photoUrl,
+                    else  if (currentUser.country == 'USA'){
+                      Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                           username: username,
-                          mediaUrl: shopmediaUrl,
-                          productname: productname);
+                          mediaUrl: shopmediaUrl.first,
+                          productname:productname);
                     }
-                    else {
-                      Proceedtobuy(total: usd,
-                          prodId: prodId,
-                          ownerId: ownerId,
-                          userSize: usersize,
-                          profileimg: photoUrl,
+                    else  {
+                      Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                           username: username,
-                          mediaUrl: shopmediaUrl,
-                          productname: productname);
+                          mediaUrl: shopmediaUrl.first,
+                          productname:productname);
                     }
+
                   });
                 },
                 child: Container(
@@ -9286,56 +9041,37 @@ else{
                 onTap: () {
                   setState(() {
                     usersize = 'MTO 16 Y';
-                    if (currentUser.country == 'India') {
-                      Proceedtobuy(total: inr,
-                          prodId: prodId,
-                          ownerId: ownerId,
-                          userSize: usersize,
-                          profileimg: photoUrl,
+                    if (currentUser.country == 'India'){
+                      Proceedtobuy(total:inr,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                           username: username,
-                          mediaUrl: shopmediaUrl,
-                          productname: productname);
+                          mediaUrl: shopmediaUrl.first,
+                          productname:productname);
                     }
-                    else if (currentUser.country == 'UK') {
-                      Proceedtobuy(total: gbp,
-                          prodId: prodId,
-                          ownerId: ownerId,
-                          userSize: usersize,
-                          profileimg: photoUrl,
+                    else if (currentUser.country == 'UK'){
+                      Proceedtobuy(total:gbp,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                           username: username,
-                          mediaUrl: shopmediaUrl,
-                          productname: productname);
+                          mediaUrl: shopmediaUrl.first,
+                          productname:productname);
                     }
-                    else if (currentUser.country == 'Europe') {
-                      Proceedtobuy(total: eur,
-                          prodId: prodId,
-                          ownerId: ownerId,
-                          userSize: usersize,
-                          profileimg: photoUrl,
+                    else  if (currentUser.country == 'Europe'){
+                      Proceedtobuy(total:eur,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                           username: username,
-                          mediaUrl: shopmediaUrl,
-                          productname: productname);
+                          mediaUrl: shopmediaUrl.first,
+                          productname:productname);
                     }
-                    else if (currentUser.country == 'USA') {
-                      Proceedtobuy(total: usd,
-                          prodId: prodId,
-                          ownerId: ownerId,
-                          userSize: usersize,
-                          profileimg: photoUrl,
+                    else  if (currentUser.country == 'USA'){
+                      Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                           username: username,
-                          mediaUrl: shopmediaUrl,
-                          productname: productname);
+                          mediaUrl: shopmediaUrl.first,
+                          productname:productname);
                     }
-                    else {
-                      Proceedtobuy(total: usd,
-                          prodId: prodId,
-                          ownerId: ownerId,
-                          userSize: usersize,
-                          profileimg: photoUrl,
+                    else  {
+                      Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
                           username: username,
-                          mediaUrl: shopmediaUrl,
-                          productname: productname);
+                          mediaUrl: shopmediaUrl.first,
+                          productname:productname);
                     }
+
                   });
                 },
                 child: Container(
@@ -9364,75 +9100,7 @@ else{
       }
     }
   }
-  MEASUREMENTS(){
-    return
-      GestureDetector(
-        onTap: (){
-          setState(() async {
 
-            usersize = 'Send Measurements(Seller will contact you)';
-          });
-          if (currentUser.country == 'India'){
-            Proceedtobuy(total:inr,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl,
-                productname:productname);
-          }
-          else if (currentUser.country == 'UK'){
-            Proceedtobuy(total:gbp,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl,
-                productname:productname);
-          }
-          else if (currentUser.country == 'China'){
-            Proceedtobuy(total:cny,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl,
-                productname:productname);
-          }
-          else  if (currentUser.country == 'Europe'){
-            Proceedtobuy(total:eur,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl,
-                productname:productname);
-          }
-          else  if (currentUser.country == 'USA'){
-            Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl,
-                productname:productname);
-          }
-          else  {
-            Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl,
-                productname:productname);
-          }
-        },
-        child: Container(
-          decoration: BoxDecoration(
-              color: kPrimaryColor,
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.grey,
-                  blurRadius: 5.0,
-                ),]
-              ,borderRadius: BorderRadius.all(Radius.circular(10.0))
-          ),
-          height: 12,
-          width: 12,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-//    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
-              FittedBox(child: Text('Send Measurements(Contact client for Measurements)',style: TextStyle(color: Colors.white,fontSize: 8),)),
-
-
-            ],
-          ),
-        ),
-      );
-  }
   report(){
     Fluttertoast.showToast(
         msg: "Your report has been submitted", timeInSecForIos: 4);
@@ -10019,124 +9687,113 @@ isLive: true,
         child: Expanded(
           child: Column(
             children:  [
-          Stack(
-          children:     <Widget> [
-
-
-          GestureDetector(
-              onDoubleTap: () {
-      addToFav();
-      final snackBar = SnackBar(
-      content: Text('Added to Favorites!'),
-      action: SnackBarAction(
-      // label: 'Undo',
-      // onPressed: () {
-      //   // Some code to undo the change.
-      // },
-      ),
-      );
-
-
-      Scaffold.of(context).showSnackBar(snackBar);
-      },
-          child: Stack(
-            alignment: Alignment.center,
-            children: <Widget>[
-              ClipRRect(
-                  borderRadius: BorderRadius.only
-                    (bottomLeft: Radius.circular(20.0),bottomRight: Radius.circular(20.0)),
-                  child: Container(
-                      height: MediaQuery.of(context).size.height * 0.65,
-
-                      width:     MediaQuery.of(context).size.width,
-                      child: AspectRatio(
-                          aspectRatio: 16 / 9,
-                          child: cachedNetworkImage(shopmediaUrl)))),
-              Positioned.fill(
-                child: Align(
-                  alignment: Alignment.topCenter,
-                  child:   ListTile(
-                    leading:FloatingActionButton(
-                      mini: true,
-                      backgroundColor:Colors.white.withOpacity(0.5),
-                      child:Icon(Icons.arrow_back_ios,color: Colors.white,),
-                      onPressed:() { Navigator.pop(context);},
+              GestureDetector(
+                onTap:(){},
+                onDoubleTap: () {
+                  addToFav();
+                  final snackBar = SnackBar(
+                    content: Text('Added to Favorites!'),
+                    action: SnackBarAction(
+                      // label: 'Undo',
+                      // onPressed: () {
+                      //   // Some code to undo the change.
+                      // },
                     ),
-                  ),
-                ),
-              ),
-              Positioned.fill(
-                child: Align(
-                  alignment: Alignment.bottomCenter,
-                  child: ListTile(
-                    leading: CircleAvatar(
-                      backgroundImage: CachedNetworkImageProvider(user.photoUrl),
-                      backgroundColor: Colors.grey,
-                    ),
-                    title: GestureDetector(
-                      onTap: () => showProfile(context, profileId: user.id),
-                      child: Text(
-                        user.username,
-                        style: TextStyle(
-                          color: kText,
-                          fontWeight: FontWeight.bold,
+                  );
+
+
+                  Scaffold.of(context).showSnackBar(snackBar);
+                },
+                child: Stack(
+                  alignment: Alignment.center,
+                  children: <Widget>[
+                    ClipRRect(
+                        borderRadius: BorderRadius.only
+                          (bottomLeft: Radius.circular(20.0),bottomRight: Radius.circular(20.0)),
+                        child: Container(
+                            height: MediaQuery.of(context).size.height * 0.65,
+
+                            width:     MediaQuery.of(context).size.width,
+                            child: pics(userid:ownerId,prodid:prodId))),
+                    Positioned.fill(
+                      child: Align(
+                        alignment: Alignment.topCenter,
+                        child:   ListTile(
+                          leading:FloatingActionButton(
+                            mini: true,
+                            backgroundColor:Colors.white.withOpacity(0.5),
+                            child:Icon(Icons.arrow_back_ios,color: Colors.white,),
+                            onPressed:() { Navigator.pop(context);},
+                          ),
                         ),
                       ),
                     ),
+                    Positioned.fill(
+                      child: Align(
+                        alignment: Alignment.bottomCenter,
+                        child: ListTile(
+                          leading: CircleAvatar(
+                            backgroundImage: CachedNetworkImageProvider(user.photoUrl),
+                            backgroundColor: Colors.grey,
+                          ),
+                          title: GestureDetector(
+                            onTap: () => showProfile(context, profileId: user.id),
+                            child: Text(
+                              user.username,
+                              style: TextStyle(
+                                color: kText,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ),
 
-                    trailing: IconButton(icon: Icon(Icons.more_horiz,color: Colors.white,),
-                        onPressed: () {
-                          !isPostOwner?showDialog(
-                              context: context,
-                              builder: (BuildContext context) {
-                                return Dialog(
-                                  backgroundColor: kSecondaryColor,
-                                  shape: RoundedRectangleBorder(
-                                      borderRadius:
-                                      BorderRadius.circular(20.0)), //this right here
-                                  child: GestureDetector(
-                                    onTap: (){report();
-                                    Navigator.pop(context);},
-                                    child: Container(
-                                      height: 100,
-                                      child: Padding(
-                                        padding: const EdgeInsets.all(12.0),
-                                        child: Column(
-                                          mainAxisAlignment: MainAxisAlignment.center,
-                                          crossAxisAlignment: CrossAxisAlignment.start,
-                                          children: [
-                                            Container(
+                          trailing: IconButton(icon: Icon(Icons.more_horiz,color: Colors.white,),
+                              onPressed: () {
+                                !isPostOwner?showDialog(
+                                    context: context,
+                                    builder: (BuildContext context) {
+                                      return Dialog(
+                                        backgroundColor: kSecondaryColor,
+                                        shape: RoundedRectangleBorder(
+                                            borderRadius:
+                                            BorderRadius.circular(20.0)), //this right here
+                                        child: GestureDetector(
+                                          onTap: (){report();
+                                          Navigator.pop(context);},
+                                          child: Container(
+                                            height: 100,
+                                            child: Padding(
+                                              padding: const EdgeInsets.all(12.0),
+                                              child: Column(
+                                                mainAxisAlignment: MainAxisAlignment.center,
+                                                crossAxisAlignment: CrossAxisAlignment.start,
+                                                children: [
+                                                  Container(
 
-                                              child: Align(
-                                                  alignment: Alignment.center,
-                                                  child: Text('Report this post?',style: TextStyle(
-                                                      color: Colors.blueAccent,
-                                                      fontWeight: FontWeight.bold,
-                                                      fontSize: 20.0),)),),
+                                                    child: Align(
+                                                        alignment: Alignment.center,
+                                                        child: Text('Report this post?',style: TextStyle(
+                                                            color: Colors.blueAccent,
+                                                            fontWeight: FontWeight.bold,
+                                                            fontSize: 20.0),)),),
 
 
-                                          ],
+                                                ],
+                                              ),
+                                            ),
+                                          ),
                                         ),
-                                      ),
-                                    ),
-                                  ),
-                                );
-                                // ignore: unnecessary_statements
-                              }):handleDeletePost(context);
-                        }),
+                                      );
+                                      // ignore: unnecessary_statements
+                                    }):handleDeletePost(context);
+                              }),
 
-                  ),
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
               ),
-            ],
-          ),
-      ),
-
-
-
-
-      ],
-      ),
 
               Row(
                 mainAxisAlignment: MainAxisAlignment.start,
@@ -10420,131 +10077,112 @@ posteurope(){
         child: Expanded(
           child: Column(
             children:  [
-              Stack(
-                children:     <Widget> [
+              GestureDetector(
+                onTap:(){},
+                onDoubleTap: () {
+                  addToFav();
+                  final snackBar = SnackBar(
+                    content: Text('Added to Favorites!'),
+                    action: SnackBarAction(
+                      // label: 'Undo',
+                      // onPressed: () {
+                      //   // Some code to undo the change.
+                      // },
+                    ),
+                  );
 
 
-                  GestureDetector(
-                    onDoubleTap: () {
-                      addToFav();
-                      final snackBar = SnackBar(
-                        content: Text('Added to Favorites!'),
-                        action: SnackBarAction(
-                          // label: 'Undo',
-                          // onPressed: () {
-                          //   // Some code to undo the change.
-                          // },
+                  Scaffold.of(context).showSnackBar(snackBar);
+                },
+                child: Stack(
+                  alignment: Alignment.center,
+                  children: <Widget>[
+                    ClipRRect(
+                        borderRadius: BorderRadius.only
+                          (bottomLeft: Radius.circular(20.0),bottomRight: Radius.circular(20.0)),
+                        child: Container(
+                            height: MediaQuery.of(context).size.height * 0.65,
+
+                            width:     MediaQuery.of(context).size.width,
+                            child: pics(userid:ownerId,prodid:prodId))),
+                    Positioned.fill(
+                      child: Align(
+                        alignment: Alignment.topCenter,
+                        child:   ListTile(
+                          leading:FloatingActionButton(
+                            mini: true,
+                            backgroundColor:Colors.white.withOpacity(0.5),
+                            child:Icon(Icons.arrow_back_ios,color: Colors.white,),
+                            onPressed:() { Navigator.pop(context);},
+                          ),
                         ),
-                      );
-
-
-                      Scaffold.of(context).showSnackBar(snackBar);
-                    },
-                    child: Stack(
-                      alignment: Alignment.center,
-                      children: <Widget>[
-                        ClipRRect(
-                            borderRadius: BorderRadius.only
-                              (bottomLeft: Radius.circular(20.0),bottomRight: Radius.circular(20.0)),
-                            child: Container(
-                                height: MediaQuery.of(context).size.height * 0.65,
-
-                                width:     MediaQuery.of(context).size.width,
-                                child: AspectRatio(
-                                    aspectRatio: 16 / 9,
-                                    child: cachedNetworkImage(shopmediaUrl)))),
-                        Positioned.fill(
-                          child: Align(
-                            alignment: Alignment.topCenter,
-                            child:   ListTile(
-                              leading:FloatingActionButton(
-                                mini: true,
-                                backgroundColor:Colors.white.withOpacity(0.5),
-                                child:Icon(Icons.arrow_back_ios,color: Colors.white,),
-                                onPressed:() { Navigator.pop(context);},
+                      ),
+                    ),
+                    Positioned.fill(
+                      child: Align(
+                        alignment: Alignment.bottomCenter,
+                        child: ListTile(
+                          leading: CircleAvatar(
+                            backgroundImage: CachedNetworkImageProvider(user.photoUrl),
+                            backgroundColor: Colors.grey,
+                          ),
+                          title: GestureDetector(
+                            onTap: () => showProfile(context, profileId: user.id),
+                            child: Text(
+                              user.username,
+                              style: TextStyle(
+                                color: kText,
+                                fontWeight: FontWeight.bold,
                               ),
                             ),
                           ),
-                        ),
-                        Positioned.fill(
-                          child: Align(
-                            alignment: Alignment.bottomCenter,
-                            child: ListTile(
-                              leading: CircleAvatar(
-                                backgroundImage: CachedNetworkImageProvider(user.photoUrl),
-                                backgroundColor: Colors.grey,
-                              ),
-                              title: GestureDetector(
-                                onTap: () => showProfile(context, profileId: user.id),
-                                child: Text(
-                                  user.username,
-                                  style: TextStyle(
-                                    color: kText,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                              ),
 
-                              trailing: IconButton(icon: Icon(Icons.more_horiz,color: Colors.white,),
-                                  onPressed: () {
-                                    !isPostOwner?showDialog(
-                                        context: context,
-                                        builder: (BuildContext context) {
-                                          return Dialog(
-                                            backgroundColor: kSecondaryColor,
-                                            shape: RoundedRectangleBorder(
-                                                borderRadius:
-                                                BorderRadius.circular(20.0)), //this right here
-                                            child: GestureDetector(
-                                              onTap: (){report();
-                                              Navigator.pop(context);},
-                                              child: Container(
-                                                height: 100,
-                                                child: Padding(
-                                                  padding: const EdgeInsets.all(12.0),
-                                                  child: Column(
-                                                    mainAxisAlignment: MainAxisAlignment.center,
-                                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                                    children: [
-                                                      Container(
+                          trailing: IconButton(icon: Icon(Icons.more_horiz,color: Colors.white,),
+                              onPressed: () {
+                                !isPostOwner?showDialog(
+                                    context: context,
+                                    builder: (BuildContext context) {
+                                      return Dialog(
+                                        backgroundColor: kSecondaryColor,
+                                        shape: RoundedRectangleBorder(
+                                            borderRadius:
+                                            BorderRadius.circular(20.0)), //this right here
+                                        child: GestureDetector(
+                                          onTap: (){report();
+                                          Navigator.pop(context);},
+                                          child: Container(
+                                            height: 100,
+                                            child: Padding(
+                                              padding: const EdgeInsets.all(12.0),
+                                              child: Column(
+                                                mainAxisAlignment: MainAxisAlignment.center,
+                                                crossAxisAlignment: CrossAxisAlignment.start,
+                                                children: [
+                                                  Container(
 
-                                                        child: Align(
-                                                            alignment: Alignment.center,
-                                                            child: Text('Report this post?',style: TextStyle(
-                                                                color: Colors.blueAccent,
-                                                                fontWeight: FontWeight.bold,
-                                                                fontSize: 20.0),)),),
-//        ),FlatButton(
-//        onPressed: () {Navigator.pop(context);  Navigator.push(context, MaterialPageRoute(builder: (context) =>Profile( profileId: currentUser?.id)));
-//        },
-//
-//        child: Text('Delete this post?',style: TextStyle(
-//            color: Colors.blueAccent,
-//            fontWeight: FontWeight.bold,
-//            fontSize: 20.0),),
-//        ),
+                                                    child: Align(
+                                                        alignment: Alignment.center,
+                                                        child: Text('Report this post?',style: TextStyle(
+                                                            color: Colors.blueAccent,
+                                                            fontWeight: FontWeight.bold,
+                                                            fontSize: 20.0),)),),
 
-                                                    ],
-                                                  ),
-                                                ),
+
+                                                ],
                                               ),
                                             ),
-                                          );
-                                          // ignore: unnecessary_statements
-                                        }):handleDeletePost(context);
-                                  }),
+                                          ),
+                                        ),
+                                      );
+                                      // ignore: unnecessary_statements
+                                    }):handleDeletePost(context);
+                              }),
 
-                            ),
-                          ),
                         ),
-                      ],
+                      ),
                     ),
-                  ),
-
-
-
-
-                ],
+                  ],
+                ),
               ),
 
               Row(
@@ -10826,131 +10464,112 @@ postuk(){
         child: Expanded(
           child: Column(
             children:  [
-              Stack(
-                children:     <Widget> [
+              GestureDetector(
+                onTap:(){},
+                onDoubleTap: () {
+                  addToFav();
+                  final snackBar = SnackBar(
+                    content: Text('Added to Favorites!'),
+                    action: SnackBarAction(
+                      // label: 'Undo',
+                      // onPressed: () {
+                      //   // Some code to undo the change.
+                      // },
+                    ),
+                  );
 
 
-                  GestureDetector(
-                    onDoubleTap: () {
-                      addToFav();
-                      final snackBar = SnackBar(
-                        content: Text('Added to Favorites!'),
-                        action: SnackBarAction(
-                          // label: 'Undo',
-                          // onPressed: () {
-                          //   // Some code to undo the change.
-                          // },
+                  Scaffold.of(context).showSnackBar(snackBar);
+                },
+                child: Stack(
+                  alignment: Alignment.center,
+                  children: <Widget>[
+                    ClipRRect(
+                        borderRadius: BorderRadius.only
+                          (bottomLeft: Radius.circular(20.0),bottomRight: Radius.circular(20.0)),
+                        child: Container(
+                            height: MediaQuery.of(context).size.height * 0.65,
+
+                            width:     MediaQuery.of(context).size.width,
+                            child: pics(userid:ownerId,prodid:prodId))),
+                    Positioned.fill(
+                      child: Align(
+                        alignment: Alignment.topCenter,
+                        child:   ListTile(
+                          leading:FloatingActionButton(
+                            mini: true,
+                            backgroundColor:Colors.white.withOpacity(0.5),
+                            child:Icon(Icons.arrow_back_ios,color: Colors.white,),
+                            onPressed:() { Navigator.pop(context);},
+                          ),
                         ),
-                      );
-
-
-                      Scaffold.of(context).showSnackBar(snackBar);
-                    },
-                    child: Stack(
-                      alignment: Alignment.center,
-                      children: <Widget>[
-                        ClipRRect(
-                            borderRadius: BorderRadius.only
-                              (bottomLeft: Radius.circular(20.0),bottomRight: Radius.circular(20.0)),
-                            child: Container(
-                                height: MediaQuery.of(context).size.height * 0.65,
-
-                                width:     MediaQuery.of(context).size.width,
-                                child: AspectRatio(
-                                    aspectRatio: 16 / 9,
-                                    child: cachedNetworkImage(shopmediaUrl)))),
-                        Positioned.fill(
-                          child: Align(
-                            alignment: Alignment.topCenter,
-                            child:   ListTile(
-                              leading:FloatingActionButton(
-                                mini: true,
-                                backgroundColor:Colors.white.withOpacity(0.5),
-                                child:Icon(Icons.arrow_back_ios,color: Colors.white,),
-                                onPressed:() { Navigator.pop(context);},
+                      ),
+                    ),
+                    Positioned.fill(
+                      child: Align(
+                        alignment: Alignment.bottomCenter,
+                        child: ListTile(
+                          leading: CircleAvatar(
+                            backgroundImage: CachedNetworkImageProvider(user.photoUrl),
+                            backgroundColor: Colors.grey,
+                          ),
+                          title: GestureDetector(
+                            onTap: () => showProfile(context, profileId: user.id),
+                            child: Text(
+                              user.username,
+                              style: TextStyle(
+                                color: kText,
+                                fontWeight: FontWeight.bold,
                               ),
                             ),
                           ),
-                        ),
-                        Positioned.fill(
-                          child: Align(
-                            alignment: Alignment.bottomCenter,
-                            child: ListTile(
-                              leading: CircleAvatar(
-                                backgroundImage: CachedNetworkImageProvider(user.photoUrl),
-                                backgroundColor: Colors.grey,
-                              ),
-                              title: GestureDetector(
-                                onTap: () => showProfile(context, profileId: user.id),
-                                child: Text(
-                                  user.username,
-                                  style: TextStyle(
-                                    color: kText,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                              ),
 
-                              trailing: IconButton(icon: Icon(Icons.more_horiz,color: Colors.white,),
-                                  onPressed: () {
-                                    !isPostOwner?showDialog(
-                                        context: context,
-                                        builder: (BuildContext context) {
-                                          return Dialog(
-                                            backgroundColor: kSecondaryColor,
-                                            shape: RoundedRectangleBorder(
-                                                borderRadius:
-                                                BorderRadius.circular(20.0)), //this right here
-                                            child: GestureDetector(
-                                              onTap: (){report();
-                                              Navigator.pop(context);},
-                                              child: Container(
-                                                height: 100,
-                                                child: Padding(
-                                                  padding: const EdgeInsets.all(12.0),
-                                                  child: Column(
-                                                    mainAxisAlignment: MainAxisAlignment.center,
-                                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                                    children: [
-                                                      Container(
+                          trailing: IconButton(icon: Icon(Icons.more_horiz,color: Colors.white,),
+                              onPressed: () {
+                                !isPostOwner?showDialog(
+                                    context: context,
+                                    builder: (BuildContext context) {
+                                      return Dialog(
+                                        backgroundColor: kSecondaryColor,
+                                        shape: RoundedRectangleBorder(
+                                            borderRadius:
+                                            BorderRadius.circular(20.0)), //this right here
+                                        child: GestureDetector(
+                                          onTap: (){report();
+                                          Navigator.pop(context);},
+                                          child: Container(
+                                            height: 100,
+                                            child: Padding(
+                                              padding: const EdgeInsets.all(12.0),
+                                              child: Column(
+                                                mainAxisAlignment: MainAxisAlignment.center,
+                                                crossAxisAlignment: CrossAxisAlignment.start,
+                                                children: [
+                                                  Container(
 
-                                                        child: Align(
-                                                            alignment: Alignment.center,
-                                                            child: Text('Report this post?',style: TextStyle(
-                                                                color: Colors.blueAccent,
-                                                                fontWeight: FontWeight.bold,
-                                                                fontSize: 20.0),)),),
-//        ),FlatButton(
-//        onPressed: () {Navigator.pop(context);  Navigator.push(context, MaterialPageRoute(builder: (context) =>Profile( profileId: currentUser?.id)));
-//        },
-//
-//        child: Text('Delete this post?',style: TextStyle(
-//            color: Colors.blueAccent,
-//            fontWeight: FontWeight.bold,
-//            fontSize: 20.0),),
-//        ),
+                                                    child: Align(
+                                                        alignment: Alignment.center,
+                                                        child: Text('Report this post?',style: TextStyle(
+                                                            color: Colors.blueAccent,
+                                                            fontWeight: FontWeight.bold,
+                                                            fontSize: 20.0),)),),
 
-                                                    ],
-                                                  ),
-                                                ),
+
+                                                ],
                                               ),
                                             ),
-                                          );
-                                          // ignore: unnecessary_statements
-                                        }):handleDeletePost(context);
-                                  }),
+                                          ),
+                                        ),
+                                      );
+                                      // ignore: unnecessary_statements
+                                    }):handleDeletePost(context);
+                              }),
 
-                            ),
-                          ),
                         ),
-                      ],
+                      ),
                     ),
-                  ),
-
-
-
-
-                ],
+                  ],
+                ),
               ),
 
               Row(
@@ -11235,123 +10854,112 @@ postusa() {
         child: Expanded(
           child: Column(
             children:  [
-              Stack(
-                children:     <Widget> [
+              GestureDetector(
+                onTap:(){},
+                onDoubleTap: () {
+                  addToFav();
+                  final snackBar = SnackBar(
+                    content: Text('Added to Favorites!'),
+                    action: SnackBarAction(
+                      // label: 'Undo',
+                      // onPressed: () {
+                      //   // Some code to undo the change.
+                      // },
+                    ),
+                  );
 
 
-                  GestureDetector(
-                    onDoubleTap: () {
-                      addToFav();
-                      final snackBar = SnackBar(
-                        content: Text('Added to Favorites!'),
-                        action: SnackBarAction(
-                          // label: 'Undo',
-                          // onPressed: () {
-                          //   // Some code to undo the change.
-                          // },
+                  Scaffold.of(context).showSnackBar(snackBar);
+                },
+                child: Stack(
+                  alignment: Alignment.center,
+                  children: <Widget>[
+                    ClipRRect(
+                        borderRadius: BorderRadius.only
+                          (bottomLeft: Radius.circular(20.0),bottomRight: Radius.circular(20.0)),
+                        child: Container(
+                            height: MediaQuery.of(context).size.height * 0.65,
+
+                            width:     MediaQuery.of(context).size.width,
+                            child: pics(userid:ownerId,prodid:prodId))),
+                    Positioned.fill(
+                      child: Align(
+                        alignment: Alignment.topCenter,
+                        child:   ListTile(
+                          leading:FloatingActionButton(
+                            mini: true,
+                            backgroundColor:Colors.white.withOpacity(0.5),
+                            child:Icon(Icons.arrow_back_ios,color: Colors.white,),
+                            onPressed:() { Navigator.pop(context);},
+                          ),
                         ),
-                      );
-
-
-                      Scaffold.of(context).showSnackBar(snackBar);
-                    },
-                    child: Stack(
-                      alignment: Alignment.center,
-                      children: <Widget>[
-                        ClipRRect(
-                            borderRadius: BorderRadius.only
-                              (bottomLeft: Radius.circular(20.0),bottomRight: Radius.circular(20.0)),
-                            child: Container(
-                                height: MediaQuery.of(context).size.height * 0.65,
-
-                                width:     MediaQuery.of(context).size.width,
-                                child: AspectRatio(
-                                    aspectRatio: 16 / 9,
-                                    child: cachedNetworkImage(shopmediaUrl)))),
-                        Positioned.fill(
-                          child: Align(
-                            alignment: Alignment.topCenter,
-                            child:   ListTile(
-                              leading:FloatingActionButton(
-                                mini: true,
-                                backgroundColor:Colors.white.withOpacity(0.5),
-                                child:Icon(Icons.arrow_back_ios,color: Colors.white,),
-                                onPressed:() { Navigator.pop(context);},
+                      ),
+                    ),
+                    Positioned.fill(
+                      child: Align(
+                        alignment: Alignment.bottomCenter,
+                        child: ListTile(
+                          leading: CircleAvatar(
+                            backgroundImage: CachedNetworkImageProvider(user.photoUrl),
+                            backgroundColor: Colors.grey,
+                          ),
+                          title: GestureDetector(
+                            onTap: () => showProfile(context, profileId: user.id),
+                            child: Text(
+                              user.username,
+                              style: TextStyle(
+                                color: kText,
+                                fontWeight: FontWeight.bold,
                               ),
                             ),
                           ),
-                        ),
-                        Positioned.fill(
-                          child: Align(
-                            alignment: Alignment.bottomCenter,
-                            child: ListTile(
-                              leading: CircleAvatar(
-                                backgroundImage: CachedNetworkImageProvider(user.photoUrl),
-                                backgroundColor: Colors.grey,
-                              ),
-                              title: GestureDetector(
-                                onTap: () => showProfile(context, profileId: user.id),
-                                child: Text(
-                                  user.username,
-                                  style: TextStyle(
-                                    color: kText,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                              ),
 
-                              trailing: IconButton(icon: Icon(Icons.more_horiz,color: Colors.white,),
-                                  onPressed: () {
-                                    !isPostOwner?showDialog(
-                                        context: context,
-                                        builder: (BuildContext context) {
-                                          return Dialog(
-                                            backgroundColor: kSecondaryColor,
-                                            shape: RoundedRectangleBorder(
-                                                borderRadius:
-                                                BorderRadius.circular(20.0)), //this right here
-                                            child: GestureDetector(
-                                              onTap: (){report();
-                                              Navigator.pop(context);},
-                                              child: Container(
-                                                height: 100,
-                                                child: Padding(
-                                                  padding: const EdgeInsets.all(12.0),
-                                                  child: Column(
-                                                    mainAxisAlignment: MainAxisAlignment.center,
-                                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                                    children: [
-                                                      Container(
+                          trailing: IconButton(icon: Icon(Icons.more_horiz,color: Colors.white,),
+                              onPressed: () {
+                                !isPostOwner?showDialog(
+                                    context: context,
+                                    builder: (BuildContext context) {
+                                      return Dialog(
+                                        backgroundColor: kSecondaryColor,
+                                        shape: RoundedRectangleBorder(
+                                            borderRadius:
+                                            BorderRadius.circular(20.0)), //this right here
+                                        child: GestureDetector(
+                                          onTap: (){report();
+                                          Navigator.pop(context);},
+                                          child: Container(
+                                            height: 100,
+                                            child: Padding(
+                                              padding: const EdgeInsets.all(12.0),
+                                              child: Column(
+                                                mainAxisAlignment: MainAxisAlignment.center,
+                                                crossAxisAlignment: CrossAxisAlignment.start,
+                                                children: [
+                                                  Container(
 
-                                                        child: Align(
-                                                            alignment: Alignment.center,
-                                                            child: Text('Report this post?',style: TextStyle(
-                                                                color: Colors.blueAccent,
-                                                                fontWeight: FontWeight.bold,
-                                                                fontSize: 20.0),)),),
+                                                    child: Align(
+                                                        alignment: Alignment.center,
+                                                        child: Text('Report this post?',style: TextStyle(
+                                                            color: Colors.blueAccent,
+                                                            fontWeight: FontWeight.bold,
+                                                            fontSize: 20.0),)),),
 
 
-                                                    ],
-                                                  ),
-                                                ),
+                                                ],
                                               ),
                                             ),
-                                          );
-                                          // ignore: unnecessary_statements
-                                        }):handleDeletePost(context);
-                                  }),
+                                          ),
+                                        ),
+                                      );
+                                      // ignore: unnecessary_statements
+                                    }):handleDeletePost(context);
+                              }),
 
-                            ),
-                          ),
                         ),
-                      ],
+                      ),
                     ),
-                  ),
-
-
-
-
-                ],
+                  ],
+                ),
               ),
 
               Row(
@@ -11754,7 +11362,7 @@ postusa() {
         "cny":cny,
         "gbp":gbp,
         "productname": productname,
-        "shopmediaUrl": shopmediaUrl,
+        "shopmediaUrl": shopmediaUrl.first,
       });
       productsRef
           .doc(ownerId)

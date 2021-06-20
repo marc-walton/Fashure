@@ -1,7 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:getflutter/components/button/gf_button.dart';
-import 'package:getflutter/shape/gf_button_shape.dart';
+
 import 'package:paginate_firestore/paginate_firestore.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fashow/HomePage.dart';
@@ -32,8 +31,81 @@ import 'package:fashow/Categories/Men/Grooming.dart';
 import 'package:fashow/Categories/Men/Jewellery.dart';
 import 'package:fashow/Categories/Men/watches.dart';
 import 'package:get/get.dart';
+import 'package:carousel_slider/carousel_slider.dart';
+List <Widget>listOfImages = <Widget>[];
 
+pics({String userid,String prodid}){
+  return
+    FutureBuilder<QuerySnapshot> (
+        future:     productsRef
+        .doc(userid)
+        .collection('userProducts')
+     .where('prodId' ,isEqualTo: '$prodid')
+           // .where('ownerId' ,isEqualTo: '$ownerId')
+            .get(),
+        builder: (context, snapshot) {
 
+          if (snapshot.hasData) {
+            return new ListView.builder(
+                shrinkWrap: true,
+                scrollDirection:Axis.vertical,
+                itemCount: snapshot.data.docs.length,
+                itemBuilder: (BuildContext context, int index) {
+                  // List<String> images = List.from(snapshot.data.docs[index].data()['collmediaUrl']);
+                  listOfImages = [];
+                  for (int i = 0;
+                  i <
+                      snapshot.data.docs[index].data()['shopmediaUrl']
+                          .length;
+                  i++) {
+                    listOfImages.add(CachedNetworkImage(imageUrl:snapshot
+                        .data.docs[index].data()['shopmediaUrl'][i]));
+                  }
+                  return Column(
+                    children: <Widget>[
+                      Container(
+                          margin: EdgeInsets.all(10.0),
+
+                          decoration: BoxDecoration(
+                            color: Colors.transparent,
+                          ),
+                          width: MediaQuery
+                              .of(context)
+                              .size
+                              .width,
+                          child:
+                          CarouselSlider(
+                              items: listOfImages,
+                              options: CarouselOptions(
+                                height: 500,
+                                aspectRatio: 16/9,
+                                viewportFraction: 0.8,
+                                initialPage: 0,
+                                enableInfiniteScroll: true,
+                                reverse: false,
+                                autoPlay: true,
+                                autoPlayInterval: Duration(seconds: 3),
+                                autoPlayAnimationDuration: Duration(milliseconds: 800),
+                                autoPlayCurve: Curves.fastOutSlowIn,
+                                enlargeCenterPage: true,
+                                // onPageChanged: callbackFunction,
+                                scrollDirection: Axis.horizontal,
+                              )
+                          )
+                      ),
+
+                    ],
+                  );
+                }
+            );
+          }
+            return Center(
+              child: CircularProgressIndicator(),
+            );
+
+        });
+
+}
 
 class Men extends StatefulWidget {
   @override
@@ -140,7 +212,7 @@ isLive: true,
 //        DocumentSnapshot ds = snapshot.data.docs[index];
    String ownerId = documentSnapshot.data()['ownerId'];
 String prodId = documentSnapshot.data()['prodId'];
-String shopmediaUrl = documentSnapshot.data()['shopmediaUrl'];
+//String shopmediaUrl = documentSnapshot.data()['shopmediaUrl'];
 String productname = documentSnapshot.data()['productname'];
    String inr = documentSnapshot.data()['inr'];
    String usd = documentSnapshot.data()['usd'];
@@ -188,7 +260,7 @@ String productname = documentSnapshot.data()['productname'];
                 alignment: Alignment.center,
                 children: <Widget>[
                   ClipRRect(
-                      borderRadius: BorderRadius.circular(20.0),child: cachedNetworkImage(shopmediaUrl)),
+                      borderRadius: BorderRadius.circular(20.0),child:pics(userid:ownerId,prodid: prodId)),
                 ],),),
               df(productname:productname, usd:usd,inr:inr,eur:eur,gbp:gbp, prodId:prodId, ownerId:ownerId,),
 
@@ -212,7 +284,7 @@ All(){
     itemBuilder: (index, context, documentSnapshot)   {
    String ownerId = documentSnapshot.data()['ownerId'];
 String prodId = documentSnapshot.data()['prodId'];
-String shopmediaUrl = documentSnapshot.data()['shopmediaUrl'];
+//String shopmediaUrl = documentSnapshot.data()['shopmediaUrl'];
 String productname = documentSnapshot.data()['productname'];
    String inr = documentSnapshot.data()['inr'];
    String usd = documentSnapshot.data()['usd'];
@@ -260,7 +332,7 @@ String productname = documentSnapshot.data()['productname'];
                 alignment: Alignment.center,
                 children: <Widget>[
                   ClipRRect(
-                      borderRadius: BorderRadius.circular(20.0),child: cachedNetworkImage(shopmediaUrl)),
+                      borderRadius: BorderRadius.circular(20.0),child: pics(userid:ownerId,prodid: prodId)),
                 ],),),
               df(productname:productname, usd:usd,inr:inr,eur:eur,gbp:gbp, prodId:prodId, ownerId:ownerId,),
             Divider(color: kGrey,),

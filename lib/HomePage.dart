@@ -72,9 +72,9 @@ Users currentUser;
 
 class Homepage extends StatefulWidget {
   final userid;
-  final bool authis;
+  final bool auth;
 
-  const Homepage({Key key, this.userid,this.authis}) : super(key: key);
+  const Homepage({Key key, this.userid,this.auth}) : super(key: key);
   @override
   _HomepageState createState() => _HomepageState();
 
@@ -106,7 +106,6 @@ class _HomepageState extends State<Homepage> with WidgetsBindingObserver  {
     super.initState();
     print("khb,vhkjhb,");
 
-    print("${widget.authis}");
     pageController = PageController(
       // initialPage: 2
     );
@@ -178,7 +177,7 @@ class _HomepageState extends State<Homepage> with WidgetsBindingObserver  {
     if (Platform.isIOS) getiOSPermission();
 
     _firebaseMessaging.getToken().then((token) {
-      // print("Firebase Messaging Token: $token\n");
+       print("Firebase Messaging Token: $token\n");
       usersRef
           .doc(widget.userid)
           .update({"androidNotificationToken": token});
@@ -237,7 +236,7 @@ class _HomepageState extends State<Homepage> with WidgetsBindingObserver  {
     if (Platform.isIOS) getiOSPermission();
 
     _firebaseMessaging.getToken().then((token) {
-      // print("Firebase Messaging Token: $token\n");
+     print("Firebase Messaging Token: $token\n");
       usersRef
           .doc(user.id)
           .update({"androidNotificationToken": token});
@@ -770,7 +769,7 @@ class _HomepageState extends State<Homepage> with WidgetsBindingObserver  {
   }
   @override
   Widget build(BuildContext context) {
-    return widget.authis? buildAuthScreen() : buildUnAuthScreen(context);
+    return widget.auth? buildAuthScreen() : buildUnAuthScreen(context);
 
 
 

@@ -18,7 +18,7 @@ Widget buildprod(BuildContext context, DocumentSnapshot document) {
           child: ListTile(
             leading: ClipRRect(
                 borderRadius: BorderRadius.circular(15.0),
-                child: Container(child: Image.network(prod.shopmediaUrl),)),
+                child: Container(child: Image.network(prod.shopmediaUrl.first),)),
 
             title: Text(
               prod.productname,

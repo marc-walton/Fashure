@@ -12,7 +12,7 @@ import 'package:fashow/ActivityFeed.dart';
 import 'package:fashow/custom_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:zefyr/zefyr.dart';
+//import 'package:zefyr/zefyr.dart';
 
 List<NetworkImage> _listOfImages = <NetworkImage>[];
 class Blog extends StatefulWidget {
@@ -101,8 +101,8 @@ class _BlogState extends State<Blog> {
   Map likes;
   bool isLiked;
   bool showHeart = false;
-  ZefyrController _controller;
-  ZefyrImageDelegate _imageDelegate;
+  //ZefyrController _controller;
+  //ZefyrImageDelegate _imageDelegate;
   /// Zefyr editor like any other input field requires a focus node.
   FocusNode _focusNode;
   _BlogState({
@@ -263,27 +263,6 @@ class _BlogState extends State<Blog> {
     }
   }
   // final defaultStyle = DefaultTextStyle.of(context);
-  final defaultLineTheme = LineTheme(
-    textStyle: TextStyle(    color: Colors.white,),
-        // fontSize: 12.0,
-
-        // fontWeight: FontWeight.normal
-
-    padding: EdgeInsets.symmetric(vertical: 8.0),
-  );
-  final theme =  ZefyrThemeData(
-    defaultLineTheme: LineTheme(
-      textStyle: TextStyle(    color: Colors.white,),
-      // fontSize: 12.0,
-
-      // fontWeight: FontWeight.normal
-
-      padding: EdgeInsets.symmetric(vertical: 8.0),
-    ),
-    // attributeTheme: AttributeTheme.fallback(context, defaultLineTheme),
-    // indentWidth: 12.0,
-    // toolbarTheme: ToolbarTheme.fallback(context),
-  );
 
   report(){
     Fluttertoast.showToast(
@@ -396,12 +375,13 @@ class _BlogState extends State<Blog> {
 
 
 
-            Container(
-                  child: ZefyrView(
+            //Container(
+                  //child: ZefyrView(
 
-                    document: _loadDocument(),
+                  //  document: _loadDocument(),
                       // imageDelegate:_loadDocument(),
-                  )),
+                //  )
+            //),
 //            Divider(color: kGrey,),
               ListTile(
                 title: Text(source,
@@ -463,9 +443,9 @@ class _BlogState extends State<Blog> {
         },
       );
   }
-  NotusDocument _loadDocument() {
-    return NotusDocument.fromJson(jsonDecode(content));
-  }
+//  NotusDocument _loadDocument() {
+ //   return NotusDocument.fromJson(jsonDecode(content));
+//  }
   @override
   Widget build(BuildContext context) {
     isLiked = (likes[currentUserId] == true);

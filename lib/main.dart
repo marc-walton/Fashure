@@ -1,3 +1,4 @@
+import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:fashow/provider/image_upload_provider.dart';
 import 'package:fashow/user.dart';
 
@@ -53,139 +54,74 @@ class _FaShowState extends State<FaShow> {
 
   auth() async {
 
-    // FirebaseAuth.instance
-    //     .authStateChanges()
-    //     .listen((Users users) async => {
-    //   if (users == null)
-    //     {
-    //       setState(() {
-    //         isAuth = false;
-    //       }),
-    //       // Navigator.pushReplacementNamed(context, "/login")
-    //     }
-    //   else
-    //     {
-    //       user= users.id,
-    //       setState(() {
-    //         isAuth = true;
-    //
-    //       }),
-    //       // Navigator.pushReplacement(
-    //       //     context,
-    //       //     MaterialPageRoute(
-    //       //         builder: (context) => Homepage(
-    //       //           userid: User.uid,
-    //       //           authis: isAuth,
-    //       //         )))
-    //       // FirebaseFirestore.instance
-    //       //     .collection("users")
-    //       //     .doc(currentUser.uid)
-    //       //     .get()
-    //       //     .then((DocumentSnapshot result) =>
-    //       //     Navigator.pushReplacement(
-    //       //         context,
-    //       //         MaterialPageRoute(
-    //       //             builder: (context) => HomePage(
-    //       //               title: result["fname"] + "'s Tasks",
-    //       //               uid: currentUser.uid,
-    //       //             ))))
-    //       //     .catchError((err) => print(err))
-    //     }
-    // });
+    FirebaseAuth.instance
+        .userChanges()
+        .listen((users) async => {
+      if (users == null)
+        {
+          setState(() {
+            isAuth = false;
+          }),
+          // Navigator.pushReplacementNamed(context, "/login")
+        }
+      else
+        {
+          user= users.uid,
+          setState(() {
+            isAuth = true;
+
+          }),
+          // Navigator.pushReplacement(
+          //     context,
+          //     MaterialPageRoute(
+          //         builder: (context) => Homepage(
+          //           userid: User.uid,
+          //           authis: isAuth,
+          //         )))
+          // FirebaseFirestore.instance
+          //     .collection("users")
+          //     .doc(currentUser.uid)
+          //     .get()
+          //     .then((DocumentSnapshot result) =>
+          //     Navigator.pushReplacement(
+          //         context,
+          //         MaterialPageRoute(
+          //             builder: (context) => HomePage(
+          //               title: result["fname"] + "'s Tasks",
+          //               uid: currentUser.uid,
+          //             ))))
+          //     .catchError((err) => print(err))
+        }
+    });
   }
 
   // Map<bool, Widget> op = {isAuth: Homepage(), 2: unAuth()};
   @override
   Widget build(BuildContext context) {
 
-    return  FutureBuilder(
-      // Initialize FlutterFire:
-        future: _initialization,
-        builder: (context, snapshot) {
-          // ignore: missing_return
-          if (snapshot.hasError)
-            return Text('jvbvbvbjnm');
+    return  MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+            create: (_) => ImageUploadProvider()),
+        // ChangeNotifierProvider(create: (_) => UserProvider()),
+      ],
+      child: GetMaterialApp(
+        home:
+        AnimatedSplashScreen(
+            duration: 2000,
+            splash: Text('FASHURE',
+              style: TextStyle(
+                  fontFamily: "MajorMonoDisplay",
+                  fontSize: 40,
+                  color: Colors.white),),
 
-
-          // Once complete, show your application
-          if (snapshot.connectionState == ConnectionState.done) {
-            FirebaseAuth.instance.authStateChanges().listen((User user) {
-              if (user == null) {
-                // ignore: missing_return
-                setState(() {
-                  isAuth = false;
-                });
-
-                // Navigator.pushReplacementNamed(context, "/login")
-              }
-              else {
-
-                return MultiProvider(
-                  providers: [
-                    ChangeNotifierProvider(
-                        create: (_) => ImageUploadProvider()),
-                    // ChangeNotifierProvider(create: (_) => UserProvider()),
-                  ],
-                  child: GetMaterialApp(
-                    home:
-                    // CustomSplash(
-                    //   imagePath: 'assets/img/loading-76.gif',
-                    //   backGroundColor: Colors.deepOrange,
-                    //   // backGroundColor: Color(0xfffc6042),
-                    //   animationEffect: 'zoom-in',
-                    //   logoSize: 200,
-                    //   home: Homepage(),
-                    //   customFunction: auth(),
-                    //   duration: 2500,
-                    //   type: CustomSplashType.StaticDuration,
-                    //   outputAndHome: op,
-                    // ),
-
-                    SplashScreen(
-                      title: Text('FASHURE',
-                        style: TextStyle(
-                            fontFamily: "MajorMonoDisplay",
-                            fontSize: 40,
-                            color: Colors.white),),
-
-                      seconds: 3,
-                      backgroundColor: Colors.black,
-                      image: Image.asset('assets/img/loading-76.gif'),
-                      useLoader: false,
-                      photoSize: 50.0,
-                      navigateAfterSeconds: Homepage(
-                        userid: user.uid,
-                        authis: true,
-                      ),
-                    ),
-
-                  ),
-                );
-              }
-
-              // Otherwise, show something whilst waiting for initialization to complete
-              return GetMaterialApp(
-                home: SplashScreen(
-                  title: Text('FASHURE',
-                    style: TextStyle(
-                        fontFamily: "MajorMonoDisplay",
-                        fontSize: 40,
-                        color: Colors.white),),
-
-                  seconds: 3,
-                  backgroundColor: Colors.black,
-                  image: Image.asset('assets/img/loading-76.gif'),
-                  useLoader: false,
-                  photoSize: 50.0,
-                  navigateAfterSeconds: Homepage(
-                    userid: user,
-                    authis: isAuth,
-                  ),
-                ),
-              );
-            });
-          }
-        });
+            nextScreen: Homepage(userid: user,auth: isAuth,),
+            splashTransition: SplashTransition.fadeTransition,
+            backgroundColor: Colors.blue
+        ),
+      ),
+    );
+    ;
   }
 
 

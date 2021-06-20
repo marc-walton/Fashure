@@ -22,7 +22,7 @@ class _SettingState extends State<Setting> {
         context,
         MaterialPageRoute(
             builder: (context) => Homepage(
-              authis: false,
+              auth: false,
             )),
             (_) => false );
     // Navigator.push(context, MaterialPageRoute(builder: (context) => Homepage()));

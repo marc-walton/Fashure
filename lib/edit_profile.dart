@@ -604,7 +604,7 @@ class _EditProfileState extends State<EditProfile> {
         context,
         MaterialPageRoute(
             builder: (context) => Homepage(
-              authis: false,
+              auth: false,
             )),
             (_) => false );
     // Navigator.push(context, MaterialPageRoute(builder: (context) => Homepage()));

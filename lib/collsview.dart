@@ -7,7 +7,6 @@ import 'package:flutter/material.dart';
 //import 'package:flutter_svg/svg.dart';
 import 'package:fashow/user.dart';
 import 'package:fashow/progress.dart';
-import 'package:carousel_slider/carousel_slider.dart';
 import 'package:fashow/HomePage.dart';
 import 'package:fashow/Constants.dart';
 import 'package:fashow/Profile.dart';
@@ -15,8 +14,7 @@ import 'package:fashow/ActivityFeed.dart';
 import 'package:fashow/custom_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:fashow/Product_screen.dart';
-import 'package:transparent_image/transparent_image.dart';
-import 'package:zefyr/zefyr.dart';
+import 'package:carousel_slider/carousel_slider.dart';
 List <Widget>listOfImages = <Widget>[];
 class Coll extends StatefulWidget {
   final String collId;
@@ -280,11 +278,11 @@ print(collmediaUrl);
 
 pics(){
 return
- StreamBuilder <QuerySnapshot>(
-          stream:     collRef
+ FutureBuilder <QuerySnapshot>(
+          future:     collRef
+          .doc(ownerId).collection('userCollections')
           .where('collId' ,isEqualTo: '$collId')
-          .where('ownerId' ,isEqualTo: '$ownerId')
-              .snapshots(),
+              .get(),
           builder: (context, snapshot) {
             if (snapshot.hasData) {
               return new ListView.builder(
@@ -339,11 +337,11 @@ return
                     );
                   }
                   );
-            } else {
+            }
               return Center(
                 child: CircularProgressIndicator(),
               );
-            }
+
           });
 
 }

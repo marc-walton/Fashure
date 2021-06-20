@@ -2,8 +2,7 @@ import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fashow/payments/Buyview.dart';
 import 'package:get/get.dart';
-import 'package:getflutter/components/button/gf_button.dart';
-import 'package:getflutter/shape/gf_button_shape.dart';
+
 import 'package:flutter/material.dart';
 //import 'package:flutter_svg/svg.dart';
 // import 'package:frankfurter/frankfurter.dart';
@@ -12,6 +11,8 @@ import 'package:fashow/add_address.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:fashow/HomePage.dart';
 import 'package:fashow/Constants.dart';
+import 'package:getwidget/components/button/gf_button.dart';
+import 'package:getwidget/shape/gf_button_shape.dart';
 import 'package:uuid/uuid.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 class AddressBuy extends StatefulWidget {

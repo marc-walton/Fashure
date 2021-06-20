@@ -10,7 +10,7 @@ import 'package:fashow/ActivityFeed.dart';
 import 'package:fashow/Products.dart';
 import 'package:fashow/Product_screen.dart';
 import 'package:fashow/product_custom.dart';
-import 'package:getflutter/getflutter.dart';
+
 import 'package:fashow/upload_Ecommerce.dart';
 import 'package:fashow/progress.dart';
 import 'package:fashow/HomePage.dart';
@@ -237,13 +237,7 @@ class CartItem extends StatelessWidget {
                   Text('₹$inr', style: TextStyle(color: kText,
                       fontSize: 20.0,
                       fontWeight: FontWeight.bold)),
-                  GFButton(
-                    onPressed: () => showProduct(context),
-                    text: "More",
-                    icon: Icon(Icons.card_travel),
-                    shape: GFButtonShape.pills,
-
-                  ),
+                  
                 ],
               ),
 
@@ -321,13 +315,7 @@ class CartItem extends StatelessWidget {
                   Text('¥$cny', style: TextStyle(color: kText,
                       fontSize: 20.0,
                       fontWeight: FontWeight.bold)),
-                  GFButton(
-                    onPressed: () => showProduct(context),
-                    text: "More",
-                    icon: Icon(Icons.card_travel),
-                    shape: GFButtonShape.pills,
 
-                  ),
                 ],
               ),
 
@@ -405,13 +393,7 @@ class CartItem extends StatelessWidget {
                   Text('€$eur', style: TextStyle(color: kText,
                       fontSize: 20.0,
                       fontWeight: FontWeight.bold)),
-                  GFButton(
-                    onPressed: () => showProduct(context),
-                    text: "More",
-                    icon: Icon(Icons.card_travel),
-                    shape: GFButtonShape.pills,
 
-                  ),
                 ],
               ),
 
@@ -489,13 +471,7 @@ class CartItem extends StatelessWidget {
                   Text('£$gbp', style: TextStyle(color: kText,
                       fontSize: 20.0,
                       fontWeight: FontWeight.bold)),
-                  GFButton(
-                    onPressed: () => showProduct(context),
-                    text: "More",
-                    icon: Icon(Icons.card_travel),
-                    shape: GFButtonShape.pills,
 
-                  ),
                 ],
               ),
 
@@ -573,13 +549,7 @@ class CartItem extends StatelessWidget {
                   Text('\u0024 $usd', style: TextStyle(color: kText,
                       fontSize: 20.0,
                       fontWeight: FontWeight.bold)),
-                  GFButton(
-                    onPressed: () => showProduct(context),
-                    text: "More",
-                    icon: Icon(Icons.card_travel),
-                    shape: GFButtonShape.pills,
 
-                  ),
                 ],
               ),
 
@@ -659,13 +629,7 @@ class CartItem extends StatelessWidget {
                   Text('\u0024 $usd', style: TextStyle(color: kText,
                       fontSize: 20.0,
                       fontWeight: FontWeight.bold)),
-                  GFButton(
-                    onPressed: () => showProduct(context),
-                    text: "More",
-                    icon: Icon(Icons.card_travel),
-                    shape: GFButtonShape.pills,
-
-                  ),
+                
                 ],
               ),
 

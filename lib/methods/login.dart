@@ -178,7 +178,7 @@ class _LoginPageState extends State<LoginPage> {
                                     MaterialPageRoute(
                                         builder: (context) => Homepage(
                                           userid:User.user.uid,
-                                          authis: true,
+                                          auth: true,
                                         )),
                                         (_) => false ),
                                 // Navigator.pushReplacement(

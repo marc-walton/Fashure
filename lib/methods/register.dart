@@ -226,7 +226,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                   MaterialPageRoute(
                                       builder: (context) => Homepage(
                                         userid: ser.user.uid,
-                                        authis: true,
+                                        auth: true,
                                       )),
                                       (_) => false );
 

@@ -3,8 +3,7 @@ import 'package:fashow/Constants.dart';
 import 'package:fashow/size_config.dart';
 import 'package:fashow/ActivityFeed.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:getflutter/components/button/gf_button.dart';
-import 'package:getflutter/shape/gf_button_shape.dart';
+
 import 'package:paginate_firestore/paginate_firestore.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fashow/HomePage.dart';
@@ -24,200 +23,84 @@ class _TrouserTMState extends State<TrouserTM> {
   df({String productname,String usd,String inr,String cny,String eur,String gbp,String prodId,String ownerId,}){
     if(currentUser.country=='India'){
       return
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: <Widget>[
-            Text(productname, style: TextStyle(
-                color: kText,
-                fontSize: 20.0,
-                fontWeight: FontWeight.bold),),
-            Text( "₹$inr",style: TextStyle(color: kText,
-                fontSize: 20.0,
-                fontWeight: FontWeight.bold)),
-            GFButton(
-              onPressed: () =>
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) =>
-                          ProductScreen(
-                            prodId: prodId,
-                            userId: ownerId,
-                          ),
-                    ),
-                  ),
-              text: "More",
-              icon: Icon(Icons.card_travel),
-              shape: GFButtonShape.pills,
 
-            ),
-          ],
+        ListTile(
+          title:            Text(productname, style: TextStyle(
+              color: kText,
+              fontSize: 15.0,
+              fontWeight: FontWeight.bold),),
+          subtitle:            Text( "₹$inr",style: TextStyle(color: kText,
+              fontSize: 20.0,
+              fontWeight: FontWeight.bold)),
+
         );
 
     }
     else if(currentUser.country=='US'){
       return
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: <Widget>[
-            Text(productname, style: TextStyle(
-                color: kText,
-                fontSize: 20.0,
-                fontWeight: FontWeight.bold),),
-            Text( "\u0024 $usd",style: TextStyle(color: kText,
-                fontSize: 20.0,
-                fontWeight: FontWeight.bold)),
-            GFButton(
-              onPressed: () =>
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) =>
-                          ProductScreen(
-                            prodId: prodId,
-                            userId: ownerId,
-                          ),
-                    ),
-                  ),
-              text: "More",
-              icon: Icon(Icons.card_travel),
-              shape: GFButtonShape.pills,
 
-            ),
-          ],
+        ListTile(
+          title:                      Text(productname, style: TextStyle(
+              color: kText,
+              fontSize: 15.0,
+              fontWeight: FontWeight.bold),),
+
+          subtitle:          Text( "\u0024 $usd",style: TextStyle(color: kText,
+              fontSize: 20.0,
+              fontWeight: FontWeight.bold)),
+
         );
 
-    }
-    else if (currentUser.country == 'China') {
-      return
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: <Widget>[
-            Text(productname, style: TextStyle(
-                color: kText,
-                fontSize: 20.0,
-                fontWeight: FontWeight.bold),),
-            Text( "¥ $cny",style: TextStyle(color: kText,
-                fontSize: 20.0,
-                fontWeight: FontWeight.bold)),
-            GFButton(
-              onPressed: () =>
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) =>
-                          ProductScreen(
-                            prodId: prodId,
-                            userId: ownerId,
-                          ),
-                    ),
-                  ),
-              text: "More",
-              icon: Icon(Icons.card_travel),
-              shape: GFButtonShape.pills,
-
-            ),
-          ],
-        );
 
     }
     else if (currentUser.country == 'Europe'){
       return
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: <Widget>[
-            Text(productname, style: TextStyle(
-                color: kText,
-                fontSize: 20.0,
-                fontWeight: FontWeight.bold),),
-            Text( "€ $eur",style: TextStyle(color: kText,
-                fontSize: 20.0,
-                fontWeight: FontWeight.bold)),
-            GFButton(
-              onPressed: () =>
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) =>
-                          ProductScreen(
-                            prodId: prodId,
-                            userId: ownerId,
-                          ),
-                    ),
-                  ),
-              text: "More",
-              icon: Icon(Icons.card_travel),
-              shape: GFButtonShape.pills,
 
-            ),
-          ],
+        ListTile(
+          title:                      Text(productname, style: TextStyle(
+              color: kText,
+              fontSize: 15.0,
+              fontWeight: FontWeight.bold),),
+
+          subtitle:           Text( "€ $eur",style: TextStyle(color: kText,
+              fontSize: 20.0,
+              fontWeight: FontWeight.bold)),
+
         );
 
     }
     else if (currentUser.country == 'UK'){
       return
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: <Widget>[
-            Text(productname, style: TextStyle(
-                color: kText,
-                fontSize: 20.0,
-                fontWeight: FontWeight.bold),),
-            Text( "£  $gbp ",style: TextStyle(color: kText,
-                fontSize: 20.0,
-                fontWeight: FontWeight.bold)),
-            GFButton(
-              onPressed: () =>
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) =>
-                          ProductScreen(
-                            prodId: prodId,
-                            userId: ownerId,
-                          ),
-                    ),
-                  ),
-              text: "More",
-              icon: Icon(Icons.card_travel),
-              shape: GFButtonShape.pills,
 
-            ),
-          ],
+        ListTile(
+          title:                    Text(productname, style: TextStyle(
+              color: kText,
+              fontSize: 15.0,
+              fontWeight: FontWeight.bold),),
+
+          subtitle:                     Text( "£  $gbp ",style: TextStyle(color: kText,
+              fontSize: 20.0,
+              fontWeight: FontWeight.bold)),
+
+
         );
 
     }
     else{
       return
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: <Widget>[
-            Text(productname, style: TextStyle(
-                color: kText,
-                fontSize: 20.0,
-                fontWeight: FontWeight.bold),),
-            Text( "\u0024 $usd",style: TextStyle(color: kText,
-                fontSize: 20.0,
-                fontWeight: FontWeight.bold)),
-            GFButton(
-              onPressed: () =>
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) =>
-                          ProductScreen(
-                            prodId: prodId,
-                            userId: ownerId,
-                          ),
-                    ),
-                  ),
-              text: "More",
-              icon: Icon(Icons.card_travel),
-              shape: GFButtonShape.pills,
 
-            ),
-          ],
+        ListTile(
+          title:                      Text(productname, style: TextStyle(
+              color: kText,
+              fontSize: 15.0,
+              fontWeight: FontWeight.bold),),
+
+          subtitle:          Text( "\u0024 $usd",style: TextStyle(color: kText,
+              fontSize: 20.0,
+              fontWeight: FontWeight.bold)),
+
         );
+
 
     }
   }
