@@ -48,6 +48,8 @@ pics({String userid,String prodid}){
           if (snapshot.hasData) {
             return new ListView.builder(
                 shrinkWrap: true,
+                physics:NeverScrollableScrollPhysics(),
+
                 scrollDirection:Axis.vertical,
                 itemCount: snapshot.data.docs.length,
                 itemBuilder: (BuildContext context, int index) {
@@ -77,7 +79,7 @@ pics({String userid,String prodid}){
                           CarouselSlider(
                               items: listOfImages,
                               options: CarouselOptions(
-                                height: 500,
+                               // height: 500,
                                 aspectRatio: 16/9,
                                 viewportFraction: 0.8,
                                 initialPage: 0,
@@ -329,7 +331,7 @@ String productname = documentSnapshot.data()['productname'];
                 ),
               ),
               child: Stack(
-                alignment: Alignment.center,
+                //alignment: Alignment.center,
                 children: <Widget>[
                   ClipRRect(
                       borderRadius: BorderRadius.circular(20.0),child: pics(userid:ownerId,prodid: prodId)),
@@ -400,7 +402,7 @@ String productname = documentSnapshot.data()['productname'];
                   decoration: BoxDecoration(
                       gradient: fabGradient
                   ) ,
-                  alignment: Alignment.center,
+                //  alignment: Alignment.center,
                   child: RotatedBox(
                     quarterTurns: 1,
                     child: TabBarView(
@@ -480,7 +482,7 @@ String productname = documentSnapshot.data()['productname'];
                     decoration: BoxDecoration(
                         gradient: fabGradient
                     ) ,
-                    alignment: Alignment.center,
+                   // alignment: Alignment.center,
                     child: RotatedBox(
                       quarterTurns: 1,
                       child: TabBarView(

@@ -27,7 +27,7 @@ class PostTile extends StatelessWidget {
       onTap: () => showPost(context),
       child: ClipRRect(
           borderRadius: BorderRadius.circular(20.0),
-          child: cachedNetworkImage(post.mediaUrl)),
+          child: cachedNetworkImage(post.mediaUrl.first)),
     );
   }
 }

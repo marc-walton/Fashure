@@ -81,6 +81,8 @@ bool Designer;
   bool Photographer;
   bool Choreographer;
   bool Hair;
+   bool writer;
+
   List<Freelance> list =[];
 
   @override
@@ -173,7 +175,7 @@ bool Designer;
             ),
             actions: <Widget>[
 
-              model == true|| Photographer == true|| Stylist == true|| Designer == true|| Hair == true || Makeup == true || Illustrator == true || Choreographer == true ?
+              model == true||writer == true|| Photographer == true|| Stylist == true|| Designer == true|| Hair == true || Makeup == true || Illustrator == true || Choreographer == true ?
               RaisedButton(color:kblue,
                   child:  Text("Create order",style: TextStyle(color: Colors.white),),onPressed: (){ Navigator.push(
                 context,
@@ -399,6 +401,7 @@ model = doc.data()['model'] ?? false;
           Photographer = doc.data()['photographer'] ?? false;
           Stylist = doc.data()['stylist'] ?? false;
           Designer = doc.data()['designer'] ?? false;
+writer = doc.data()['blogger'] ?? false;
 
       print('Activity Feed Item: $Illustrator');
 
@@ -531,7 +534,7 @@ model = doc.data()['model'] ?? false;
             "username": currentUser.displayName,
             "userId": currentUser.id,
             "userProfileImg": currentUser.photoUrl,
-            // "postId": widget.OrderId,
+             //"postId": text,
             // "mediaUrl": mediaUrl,
             "timestamp": timestamp,
             "read": 'false',

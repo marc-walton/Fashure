@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'dart:async';
 
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:multi_image_picker/multi_image_picker.dart';
 import 'package:flutter/material.dart';
 
@@ -52,31 +53,6 @@ class _UploadCollState extends State<UploadColl>
 
   }
 
-  Widget buildGridView() {
-    return GridView.count(
-      crossAxisCount: 3,
-      children: List.generate(images.length, (index) {
-        Asset asset = images[index];
-        print(asset.getByteData(quality: 75));
-        return Padding(
-          padding: EdgeInsets.all(8.0),
-          child: Container(
-            height: 50,
-            width: 50,
-
-            child: ClipRRect(
-              borderRadius: BorderRadius.all(Radius.circular(15)),
-              child: AssetThumb(
-                asset: asset,
-                width: 300,
-                height: 300,
-              ),
-            ),
-          ),
-        );
-      }),
-    );
-  }
 
   selectImage(parentContext) {
     return showDialog(
@@ -213,6 +189,7 @@ class _UploadCollState extends State<UploadColl>
     // setState to update our non-existent appearance.
     if (!mounted) return;
     setState(() {
+      _inProcess = true;
       images = resultList;
       _error = error;
     });
@@ -221,33 +198,79 @@ class _UploadCollState extends State<UploadColl>
   Future<dynamic> postImage(Asset imageFile) async {
 //    ByteData byteData = await imageFile.requestOriginal(quality: 75);
     String fileName = DateTime.now().millisecondsSinceEpoch.toString();
-    Reference reference = FirebaseStorage.instance.ref().child("colle_$fileName.jpg");
+    Reference reference = FirebaseStorage.instance.ref().child("Coll$CollId").child("colle_$CollId$fileName.jpg");
    UploadTask uploadTask = reference.putData((await imageFile.getByteData(quality: 70)).buffer.asUint8List());
     TaskSnapshot storageTaskSnapshot = await uploadTask;
 //    print(storageTaskSnapshot.ref.getDownloadURL());
     return storageTaskSnapshot.ref.getDownloadURL();
   }
+  Widget buildGridView() {
+    return GridView.count(
+      crossAxisCount: 3,
+      children: List.generate(images.length, (index) {
+        Asset asset = images[index];
+        print(asset.getByteData(quality: 75));
+        return Padding(
+          padding: EdgeInsets.all(8.0),
+          child: Container(
+            height: 50,
+            width: 50,
 
+            child: ClipRRect(
+              borderRadius: BorderRadius.all(Radius.circular(15)),
+              child: AssetThumb(
+                asset: asset,
+                width: 300,
+                height: 300,
+              ),
+            ),
+          ),
+        );
+      }),
+    );
+  }
+Carousel(){
+
+    return
+        CarouselSlider(
+          options: CarouselOptions(),
+          items: images.map((e) => Container(
+            width: 400,
+            height: 400,
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: AssetThumb(
+                asset: e,
+                width: 500,
+                height: 500,
+              ),
+            ),
+          ), ).toList()
+
+        );
+
+}
 
   Future<void> handleSubmit() async {
     setState(() {
       isUploading = true;
     });
-    await compressImage();
-    String headerImage = await uploadImage(file);
+   // await compressImage();
+   // String headerImage = await uploadImage(file);
     for ( var imageFile in images) {
      postImage(imageFile).then((downloadUrl) {
        imageUrls.add(downloadUrl.toString());
        if(imageUrls.length==images.length){
          String documnetID = DateTime.now().millisecondsSinceEpoch.toString();
-         collRef
+         collRef .doc(widget.currentUser.id)
+             .collection("userCollections")
             .doc(CollId).set({
            'collmediaUrl':imageUrls,
           "collId": CollId,
           "ownerId": widget.currentUser.id,
           "username": widget.currentUser.displayName,
           "photoUrl": widget.currentUser.photoUrl,
-          "headerImage":headerImage,
+         // "headerImage":headerImage,
           "title": titleController.text,
           "source": sourceController.text,
           "timestamp": timestamp,
@@ -263,6 +286,9 @@ class _UploadCollState extends State<UploadColl>
        }
      }).catchError((err) {
        print(err);
+       print('rtherjhertjnherj${imageUrls.length}');
+       print('rjertertj${images.length}');
+
      });
    }
     Navigator.pop(context);
@@ -296,17 +322,17 @@ class _UploadCollState extends State<UploadColl>
         false;
   }
   builduploadForm() {
+    setState(() {
+      _inProcess = true;
 
+    });
     final form =
     ListView(
       shrinkWrap: true,
       children: <Widget>[
         isUploading ? linearProgress() : Text(""),
-        Text('Header Image', style: TextStyle(
-            color: kText,
-            fontWeight: FontWeight.bold,
-            fontSize: 20.0),),
-        getImageWidget(),
+        Carousel(),
+       // getImageWidget(),
         SizedBox(height:12.0),
 
         TextFormField(
@@ -338,87 +364,77 @@ class _UploadCollState extends State<UploadColl>
                 fillColor: transwhite,
                 border:OutlineInputBorder(borderRadius: BorderRadius.circular(25.0),))),
 SizedBox(height:12.0),
-        FloatingActionButton.extended(onPressed: loadAssets, label: Text(
-            'Pick Collection Images'),
-backgroundColor: kText,
-        ),
-        Container(height: 400,
-            child: buildGridView()),
+
       ],
     );
     return
-      Container( decoration: BoxDecoration(
-          gradient: fabGradient
-      ) ,
-        alignment: Alignment.center,
-        child: Stack(
-          children: [
-            WillPopScope(
-              onWillPop:()=>   _onBackPressed(),
-              child: Scaffold(
+      Stack(
+        children: [
+          WillPopScope(
+            onWillPop:()=>   _onBackPressed(),
+            child: Scaffold(
 
-                // resizeToAvoidBottomPadding: true,
-                appBar: AppBar(
-                  backgroundColor: kPrimaryColor,
-                  leading: IconButton(
-                      icon: Icon(Icons.arrow_back, color: Colors.white),
-                      onPressed:()=>  showDialog(
-                    context: context,
-                    builder: (context) => new AlertDialog(
-                      title: new Text('Are you sure?'),
-                      content: new Text('Do you want to exit without uploading?'),
-                      actions: <Widget>[
-                        new FlatButton(
+              // resizeToAvoidBottomPadding: true,
+              appBar: AppBar(
+                backgroundColor: kPrimaryColor,
+                leading: IconButton(
+                    icon: Icon(Icons.arrow_back, color: Colors.white),
+                    onPressed:()=>  showDialog(
+                  context: context,
+                  builder: (context) => new AlertDialog(
+                    title: new Text('Are you sure?'),
+                    content: new Text('Do you want to exit without uploading?'),
+                    actions: <Widget>[
+                      new FlatButton(
 
-                          onPressed: () => Navigator.of(context).pop(false),
-                          child: Text("NO"),
-                        ),
-                        SizedBox(height: 16),
-                        new FlatButton(
+                        onPressed: () => Navigator.of(context).pop(false),
+                        child: Text("NO"),
+                      ),
+                      SizedBox(height: 16),
+                      new FlatButton(
 
-                          onPressed: () async {Navigator.of(context).pop(true);
+                        onPressed: () async {Navigator.of(context).pop(true);
 
 //            clearImage();
-                          },
-                          child: Text("YES"),
-                        ),
-                      ],
-                    ),
-                  ) ??
-                      false),
-                  actions: [
-                    RaisedButton(color:kblue,
-                      onPressed: isUploading ? null : () => handleSubmit(),
-                      child: Text(
-                        "Post",
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 20.0),
+                        },
+                        child: Text("YES"),
                       ),
-                    )
-                  ],
-                ),
-                body:
-
-                  Container(
-
-                    decoration: BoxDecoration(
-                        gradient: fabGradient
-                    ) ,
-                    alignment: Alignment.center,
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: form,
-                    ),
+                    ],
                   ),
-
+                ) ??
+                    false),
+                actions: [
+                  RaisedButton(color:kblue,
+                    onPressed: isUploading ? null : () => handleSubmit(),
+                    child: Text(
+                      "Post",
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 20.0),
+                    ),
+                  )
+                ],
               ),
+              body:
+
+                Container(
+
+                  decoration: BoxDecoration(
+                      gradient: fabGradient
+                  ) ,
+                 // alignment: Alignment.center,
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: form,
+                  ),
+                ),
 
             ),
-            isUploading ? Center(child: CircularProgressIndicator(backgroundColor: kText,)) : Text(""),
-          ],
-        ),
+
+          ),
+          isUploading ? Center(child: CircularProgressIndicator(backgroundColor: kText,)) : Text(""),
+        ],
       );
 
 
@@ -448,7 +464,7 @@ backgroundColor: kText,
                 ),
               ),
               color: Colors.deepOrange,
-              onPressed: () =>  selectImage(context),
+              onPressed: () =>  loadAssets(),
               // selectImage(context),
             ),
           ),
@@ -460,7 +476,7 @@ backgroundColor: kText,
 
   @override
   Widget build(BuildContext context) {
-    return file == null ? buildSplashScreen() : builduploadForm();
+    return images.isEmpty ? buildSplashScreen() : builduploadForm();
 
   }
 

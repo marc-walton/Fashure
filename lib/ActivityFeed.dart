@@ -109,14 +109,14 @@ class  _ActivityFeedState extends State<ActivityFeed>  with  TickerProviderState
         .snapshots(),
 
       builder: (context,snapshot){
-        if(!snapshot.hasData){return Container();}
+        if(snapshot.data == null ){return Container();}
         else{ int data;
         String messages = snapshot.data['read'];
         print("mess:$messages");
         if(messages == 'false');
         {
           setState(() {
-            data  = messages.length;
+            data  =snapshot.data.docs.length;
           });
           return
 
@@ -257,7 +257,7 @@ class  _ActivityFeedState extends State<ActivityFeed>  with  TickerProviderState
                         child: Row(
                           children: [
                             Text('Chats'),
-                            // badgescountmessage(),
+                           // badgescountmessage(),
                           ],
                         ),
                       ),

@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'dart:async';
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:fashow/Categories/BboyEcomUp.dart';
 import 'package:fashow/Categories/BgirlEcomUp.dart';
 import 'package:fashow/Categories/KboyEcomUp.dart';
@@ -9,6 +10,7 @@ import 'package:fashow/Categories/WomenEcomUp.dart';
 import 'package:fashow/Categories/TboyEcomUp.dart';
 import 'package:fashow/Categories/TgirlEcomUp.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:multi_image_picker/multi_image_picker.dart';
 import 'package:smart_select/smart_select.dart';
 import 'package:flutter/material.dart';
 import 'package:photo_view/photo_view.dart';
@@ -29,6 +31,7 @@ import 'package:fashow/HomePage.dart';
 import 'package:fashow/Constants.dart';
 import 'package:image/image.dart' as Im;
 import 'package:uuid/uuid.dart';
+import 'package:get/get.dart';
 
 class Uploadecom extends StatefulWidget {
   final Users currentUser;
@@ -91,7 +94,10 @@ TextEditingController Shoe20controller = TextEditingController();
 TextEditingController Shoe21controller = TextEditingController();
 TextEditingController namecontroller = TextEditingController();
 TextEditingController shipcontroller = TextEditingController();
+  List<Asset> images = List<Asset>();
+  String _error = 'No Error Dectected';
 
+  List<String> imageUrls = <String>[];
   File file;
   bool isUploading = false;
   String prodId = Uuid().v4();
@@ -226,36 +232,41 @@ bool indian = false;
         });
   }
 
-  Container buildSplashScreen() {
-    return Container(
-      decoration: BoxDecoration(
-          gradient: fabGradient
-      ) ,
-      alignment: Alignment.center,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[
+   buildSplashScreen() {
+    return Stack(
+      children: [
+        Container(
+          decoration: BoxDecoration(
+              gradient: fabGradient
+          ) ,
+          alignment: Alignment.center,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
 //          SvgPicture.asset('assets/images/upload.svg', height: 260.0),
-          Padding(
-            padding: EdgeInsets.only(top: 20.0),
-            child: RaisedButton(
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(8.0),
+              Padding(
+                padding: EdgeInsets.only(top: 20.0),
+                child: RaisedButton(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8.0),
+                    ),
+                    child: Text(
+                      "Upload Product",
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 22.0,
+                      ),
+                    ),
+                    color: Colors.deepOrange,
+                    onPressed: ()  =>loadAssets(),
+                  // selectImage(context),
                 ),
-                child: Text(
-                  "Upload Product",
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 22.0,
-                  ),
-                ),
-                color: Colors.deepOrange,
-                onPressed: ()  =>selectImage(),
-              // selectImage(context),
-            ),
+              ),
+            ],
           ),
-        ],
-      ),
+        ),
+        (_inProcess)?Center(child:CircularProgressIndicator()):Text(''),
+      ],
     );
   }
 
@@ -556,7 +567,7 @@ setState(() {
   }
 
   createProdInFirestore(
-      {String shopmediaUrl,
+      {List shopmediaUrl,
     String Category,
     var price,
     List selectedSizes,
@@ -2277,1239 +2288,6 @@ bool world,
         false;
   }
 
-  handleSubmit() async {
-    Fluttertoast.showToast(
-        msg: "Please wait:Uploading", timeInSecForIos: 4);
-
-    setState(() {
-      isUploading = true;
-    });
-    Fluttertoast.showToast(
-        msg: "Please wait:Uploading", timeInSecForIos: 4);
-
-    await compressImage();
-    String shopmediaUrl = await uploadImage(file);
-    // await INRUSD();
-
-     if(dropdownValue=='Men'){
-      if (currentUser.country == 'India') {
-        await createProdInFirestore(
-          shopmediaUrl: shopmediaUrl,
-          Category: value,
-          world:worldship,
-          ship: shipcontroller.text,          gender: dropdownValue,
-          // selectedSizes: selectedSizes,
-          details: detailsController.text,
-          productname: productnameController.text,
-          price: userprice,
-          inrtousd: inrtousd,
-          inrtocny: inrtocny,
-          inrtogbp: inrtogbp,
-          inrtoeur: inrtoeur,
-          color: colorController.text,
-          composition: compositionController.text,
-          washandcare: washandcareController.text,
-          sizeandfit: sizeandfitController.text,
-          xxxsQuantity: int.tryParse(xxxscontroller.text) ?? 0,
-          xxsQuantity: int.tryParse(xxscontroller.text) ?? 0,
-          xsQuantity:  int.tryParse(xscontroller.text )?? 0,
-          sQuantity: int.tryParse(scontroller.text) ?? 0,
-
-          mtoQuantity:  int.tryParse(mtocontroller.text) ?? 0,
-          freesizeQuantity:   int.tryParse(freesizecontroller.text) ?? 0,
-
-
-          mQuantity:  int.tryParse(mcontroller.text) ?? 0,
-          lQuantity:  int.tryParse(lcontroller.text) ?? 0,
-          xlQuantity:  int.tryParse(xlcontroller.text) ?? 0,
-          xxlQuantity:  int.tryParse(xxlcontroller.text) ?? 0,
-          xxxlQuantity:  int.tryParse(xxlcontroller.text) ?? 0,
-          fourxlQuantity:  int.tryParse(fourxlcontroller.text) ?? 0,
-          fivexlQuantity:  int.tryParse(fivexlcontroller.text) ?? 0,
-          sixxlQuantity:  int.tryParse(sixxlcontroller.text) ?? 0,
-          sevenxlQuantity:  int.tryParse(sevenxlcontroller.text) ?? 0,
-          eightxlQuantity:  int.tryParse(eightxlcontroller.text) ?? 0,
-          Shoe1:   int.tryParse(Shoe1controller.text) ?? 0,
-          Shoe2:   int.tryParse(Shoe2controller.text) ?? 0,
-          Shoe3:   int.tryParse(Shoe3controller.text) ?? 0,
-          Shoe4:   int.tryParse(Shoe4controller.text) ?? 0,
-          Shoe5:   int.tryParse(Shoe5controller.text) ?? 0,
-          Shoe6:   int.tryParse(Shoe6controller.text) ?? 0,
-          Shoe7:   int.tryParse(Shoe7controller.text) ?? 0,
-          Shoe8:   int.tryParse(Shoe8controller.text) ?? 0,
-          Shoe9:   int.tryParse(Shoe9controller.text) ?? 0,
-          Shoe10:   int.tryParse(Shoe10controller.text) ?? 0,
-          Shoe11:   int.tryParse(Shoe11controller.text) ?? 0,
-          Shoe12:   int.tryParse(Shoe12controller.text) ?? 0,
-          Shoe13:   int.tryParse(Shoe13controller.text) ?? 0,
-          Shoe14:   int.tryParse(Shoe14controller.text) ?? 0,
-          Shoe15:  int.tryParse(Shoe15controller.text) ?? 0,
-          Shoe16:  int.tryParse(Shoe16controller.text) ?? 0,
-          Shoe17:  int.tryParse(Shoe17controller.text) ?? 0,
-          Shoe18:  int.tryParse(Shoe18controller.text) ?? 0,
-          Shoe19:  int.tryParse(Shoe19controller.text) ?? 0,
-          Shoe20:  int.tryParse(Shoe20controller.text) ?? 0,
-          Shoe21:  int.tryParse(Shoe21controller.text) ?? 0,
-
-
-
-
-        );
-      }
-      else if (currentUser.country == 'Europe'){
-        createProdInFirestore(
-          shopmediaUrl: shopmediaUrl,
-          Category: value,
-          world:worldship,
-          ship: shipcontroller.text,          gender: dropdownValue,
-          // selectedSizes: selectedSizes,
-          details: detailsController.text,
-          productname: productnameController.text,
-          price: userprice,
-          eurtoinr:eurtoinr,
-          eurtousd:eurtousd,
-          eurtocny:eurtocny,
-          eurtogbp:eurtogbp,
-          color: colorController.text,
-          composition: compositionController.text,
-          washandcare: washandcareController.text,
-          sizeandfit: sizeandfitController.text,
-          xxxsQuantity: int.tryParse(xxxscontroller.text) ?? 0,
-          xxsQuantity: int.tryParse(xxscontroller.text) ?? 0,
-          xsQuantity:  int.tryParse(xscontroller.text )?? 0,
-          sQuantity: int.tryParse(scontroller.text) ?? 0,
-
-          mtoQuantity:  int.tryParse(mtocontroller.text) ?? 0,
-          freesizeQuantity:   int.tryParse(freesizecontroller.text) ?? 0,
-
-
-          mQuantity:  int.tryParse(mcontroller.text) ?? 0,
-          lQuantity:  int.tryParse(lcontroller.text) ?? 0,
-          xlQuantity:  int.tryParse(xlcontroller.text) ?? 0,
-          xxlQuantity:  int.tryParse(xxlcontroller.text) ?? 0,
-          xxxlQuantity:  int.tryParse(xxlcontroller.text) ?? 0,
-          fourxlQuantity:  int.tryParse(fourxlcontroller.text) ?? 0,
-          fivexlQuantity:  int.tryParse(fivexlcontroller.text) ?? 0,
-          sixxlQuantity:  int.tryParse(sixxlcontroller.text) ?? 0,
-          sevenxlQuantity:  int.tryParse(sevenxlcontroller.text) ?? 0,
-          eightxlQuantity:  int.tryParse(eightxlcontroller.text) ?? 0,
-          Shoe1:   int.tryParse(Shoe1controller.text) ?? 0,
-          Shoe2:   int.tryParse(Shoe2controller.text) ?? 0,
-          Shoe3:   int.tryParse(Shoe3controller.text) ?? 0,
-          Shoe4:   int.tryParse(Shoe4controller.text) ?? 0,
-          Shoe5:   int.tryParse(Shoe5controller.text) ?? 0,
-          Shoe6:   int.tryParse(Shoe6controller.text) ?? 0,
-          Shoe7:   int.tryParse(Shoe7controller.text) ?? 0,
-          Shoe8:   int.tryParse(Shoe8controller.text) ?? 0,
-          Shoe9:   int.tryParse(Shoe9controller.text) ?? 0,
-          Shoe10:   int.tryParse(Shoe10controller.text) ?? 0,
-          Shoe11:   int.tryParse(Shoe11controller.text) ?? 0,
-          Shoe12:   int.tryParse(Shoe12controller.text) ?? 0,
-          Shoe13:   int.tryParse(Shoe13controller.text) ?? 0,
-          Shoe14:   int.tryParse(Shoe14controller.text) ?? 0,
-          Shoe15:  int.tryParse(Shoe15controller.text) ?? 0,
-          Shoe16:  int.tryParse(Shoe16controller.text) ?? 0,
-          Shoe17:  int.tryParse(Shoe17controller.text) ?? 0,
-          Shoe18:  int.tryParse(Shoe18controller.text) ?? 0,
-          Shoe19:  int.tryParse(Shoe19controller.text) ?? 0,
-          Shoe20:  int.tryParse(Shoe20controller.text) ?? 0,
-          Shoe21:  int.tryParse(Shoe21controller.text) ?? 0,
-
-        );
-      }
-      else if (currentUser.country == 'UK') {
-        createProdInFirestore(
-          shopmediaUrl: shopmediaUrl,
-          Category: value,
-          world:worldship,
-          ship: shipcontroller.text,          gender: dropdownValue,
-          // selectedSizes: selectedSizes,
-          details: detailsController.text,
-          productname: productnameController.text,
-          price: userprice,
-          gbptoinr:gbptoinr,
-           gbptocny:gbptocny,
-          gbptousd:gbptousd,
-          gbptoeur:gbptoeur,
-          color: colorController.text,
-          composition: compositionController.text,
-          washandcare: washandcareController.text,
-          sizeandfit: sizeandfitController.text,
-          xxxsQuantity: int.tryParse(xxxscontroller.text) ?? 0,
-          xxsQuantity: int.tryParse(xxscontroller.text) ?? 0,
-          xsQuantity:  int.tryParse(xscontroller.text )?? 0,
-          sQuantity: int.tryParse(scontroller.text) ?? 0,
-
-          mtoQuantity:  int.tryParse(mtocontroller.text) ?? 0,
-          freesizeQuantity:   int.tryParse(freesizecontroller.text) ?? 0,
-
-
-          mQuantity:  int.tryParse(mcontroller.text) ?? 0,
-          lQuantity:  int.tryParse(lcontroller.text) ?? 0,
-          xlQuantity:  int.tryParse(xlcontroller.text) ?? 0,
-          xxlQuantity:  int.tryParse(xxlcontroller.text) ?? 0,
-          xxxlQuantity:  int.tryParse(xxlcontroller.text) ?? 0,
-          fourxlQuantity:  int.tryParse(fourxlcontroller.text) ?? 0,
-          fivexlQuantity:  int.tryParse(fivexlcontroller.text) ?? 0,
-          sixxlQuantity:  int.tryParse(sixxlcontroller.text) ?? 0,
-          sevenxlQuantity:  int.tryParse(sevenxlcontroller.text) ?? 0,
-          eightxlQuantity:  int.tryParse(eightxlcontroller.text) ?? 0,
-          Shoe1:   int.tryParse(Shoe1controller.text) ?? 0,
-          Shoe2:   int.tryParse(Shoe2controller.text) ?? 0,
-          Shoe3:   int.tryParse(Shoe3controller.text) ?? 0,
-          Shoe4:   int.tryParse(Shoe4controller.text) ?? 0,
-          Shoe5:   int.tryParse(Shoe5controller.text) ?? 0,
-          Shoe6:   int.tryParse(Shoe6controller.text) ?? 0,
-          Shoe7:   int.tryParse(Shoe7controller.text) ?? 0,
-          Shoe8:   int.tryParse(Shoe8controller.text) ?? 0,
-          Shoe9:   int.tryParse(Shoe9controller.text) ?? 0,
-          Shoe10:   int.tryParse(Shoe10controller.text) ?? 0,
-          Shoe11:   int.tryParse(Shoe11controller.text) ?? 0,
-          Shoe12:   int.tryParse(Shoe12controller.text) ?? 0,
-          Shoe13:   int.tryParse(Shoe13controller.text) ?? 0,
-          Shoe14:   int.tryParse(Shoe14controller.text) ?? 0,
-          Shoe15:  int.tryParse(Shoe15controller.text) ?? 0,
-          Shoe16:  int.tryParse(Shoe16controller.text) ?? 0,
-          Shoe17:  int.tryParse(Shoe17controller.text) ?? 0,
-          Shoe18:  int.tryParse(Shoe18controller.text) ?? 0,
-          Shoe19:  int.tryParse(Shoe19controller.text) ?? 0,
-          Shoe20:  int.tryParse(Shoe20controller.text) ?? 0,
-          Shoe21:  int.tryParse(Shoe21controller.text) ?? 0,
-
-
-        );
-      }
-      else if (currentUser.country == 'USA') {
-        createProdInFirestore(
-          shopmediaUrl: shopmediaUrl,
-          Category: value,
-          world:worldship,
-          ship: shipcontroller.text,          gender: dropdownValue,
-          // selectedSizes: selectedSizes,
-          details: detailsController.text,
-          productname: productnameController.text,
-          price: userprice,
-          usdtoinr:usdtoinr,
-           usdtocny:usdtocny,
-           usdtogbp:usdtogbp,
-           usdtoeur:usdtoeur,
-          color: colorController.text,
-          composition: compositionController.text,
-          washandcare: washandcareController.text,
-          sizeandfit: sizeandfitController.text,
-          xxxsQuantity: int.tryParse(xxxscontroller.text) ?? 0,
-          xxsQuantity: int.tryParse(xxscontroller.text) ?? 0,
-          xsQuantity:  int.tryParse(xscontroller.text )?? 0,
-          sQuantity: int.tryParse(scontroller.text) ?? 0,
-
-          mtoQuantity:  int.tryParse(mtocontroller.text) ?? 0,
-          freesizeQuantity:   int.tryParse(freesizecontroller.text) ?? 0,
-
-
-          mQuantity:  int.tryParse(mcontroller.text) ?? 0,
-          lQuantity:  int.tryParse(lcontroller.text) ?? 0,
-          xlQuantity:  int.tryParse(xlcontroller.text) ?? 0,
-          xxlQuantity:  int.tryParse(xxlcontroller.text) ?? 0,
-          xxxlQuantity:  int.tryParse(xxlcontroller.text) ?? 0,
-          fourxlQuantity:  int.tryParse(fourxlcontroller.text) ?? 0,
-          fivexlQuantity:  int.tryParse(fivexlcontroller.text) ?? 0,
-          sixxlQuantity:  int.tryParse(sixxlcontroller.text) ?? 0,
-          sevenxlQuantity:  int.tryParse(sevenxlcontroller.text) ?? 0,
-          eightxlQuantity:  int.tryParse(eightxlcontroller.text) ?? 0,
-          Shoe1:   int.tryParse(Shoe1controller.text) ?? 0,
-          Shoe2:   int.tryParse(Shoe2controller.text) ?? 0,
-          Shoe3:   int.tryParse(Shoe3controller.text) ?? 0,
-          Shoe4:   int.tryParse(Shoe4controller.text) ?? 0,
-          Shoe5:   int.tryParse(Shoe5controller.text) ?? 0,
-          Shoe6:   int.tryParse(Shoe6controller.text) ?? 0,
-          Shoe7:   int.tryParse(Shoe7controller.text) ?? 0,
-          Shoe8:   int.tryParse(Shoe8controller.text) ?? 0,
-          Shoe9:   int.tryParse(Shoe9controller.text) ?? 0,
-          Shoe10:   int.tryParse(Shoe10controller.text) ?? 0,
-          Shoe11:   int.tryParse(Shoe11controller.text) ?? 0,
-          Shoe12:   int.tryParse(Shoe12controller.text) ?? 0,
-          Shoe13:   int.tryParse(Shoe13controller.text) ?? 0,
-          Shoe14:   int.tryParse(Shoe14controller.text) ?? 0,
-          Shoe15:  int.tryParse(Shoe15controller.text) ?? 0,
-          Shoe16:  int.tryParse(Shoe16controller.text) ?? 0,
-          Shoe17:  int.tryParse(Shoe17controller.text) ?? 0,
-          Shoe18:  int.tryParse(Shoe18controller.text) ?? 0,
-          Shoe19:  int.tryParse(Shoe19controller.text) ?? 0,
-          Shoe20:  int.tryParse(Shoe20controller.text) ?? 0,
-          Shoe21:  int.tryParse(Shoe21controller.text) ?? 0,
-
-        );
-      }
-      else {
-        createProdInFirestore(
-          shopmediaUrl: shopmediaUrl,
-          Category: value,
-          world:worldship,
-          ship: shipcontroller.text,          gender: dropdownValue,
-          // selectedSizes: selectedSizes,
-          details: detailsController.text,
-          productname: productnameController.text,
-          price: userprice,
-          usdtoinr:usdtoinr,
-          usdtocny:usdtocny,
-          usdtogbp:usdtogbp,
-          usdtoeur:usdtoeur,
-          color: colorController.text,
-          composition: compositionController.text,
-          washandcare: washandcareController.text,
-          sizeandfit: sizeandfitController.text,
-          xxxsQuantity: int.tryParse(xxxscontroller.text) ?? 0,
-          xxsQuantity: int.tryParse(xxscontroller.text) ?? 0,
-          xsQuantity:  int.tryParse(xscontroller.text )?? 0,
-          sQuantity: int.tryParse(scontroller.text) ?? 0,
-
-          mtoQuantity:  int.tryParse(mtocontroller.text) ?? 0,
-          freesizeQuantity:   int.tryParse(freesizecontroller.text) ?? 0,
-
-
-          mQuantity:  int.tryParse(mcontroller.text) ?? 0,
-          lQuantity:  int.tryParse(lcontroller.text) ?? 0,
-          xlQuantity:  int.tryParse(xlcontroller.text) ?? 0,
-          xxlQuantity:  int.tryParse(xxlcontroller.text) ?? 0,
-          xxxlQuantity:  int.tryParse(xxlcontroller.text) ?? 0,
-          fourxlQuantity:  int.tryParse(fourxlcontroller.text) ?? 0,
-          fivexlQuantity:  int.tryParse(fivexlcontroller.text) ?? 0,
-          sixxlQuantity:  int.tryParse(sixxlcontroller.text) ?? 0,
-          sevenxlQuantity:  int.tryParse(sevenxlcontroller.text) ?? 0,
-          eightxlQuantity:  int.tryParse(eightxlcontroller.text) ?? 0,
-          Shoe1:   int.tryParse(Shoe1controller.text) ?? 0,
-          Shoe2:   int.tryParse(Shoe2controller.text) ?? 0,
-          Shoe3:   int.tryParse(Shoe3controller.text) ?? 0,
-          Shoe4:   int.tryParse(Shoe4controller.text) ?? 0,
-          Shoe5:   int.tryParse(Shoe5controller.text) ?? 0,
-          Shoe6:   int.tryParse(Shoe6controller.text) ?? 0,
-          Shoe7:   int.tryParse(Shoe7controller.text) ?? 0,
-          Shoe8:   int.tryParse(Shoe8controller.text) ?? 0,
-          Shoe9:   int.tryParse(Shoe9controller.text) ?? 0,
-          Shoe10:   int.tryParse(Shoe10controller.text) ?? 0,
-          Shoe11:   int.tryParse(Shoe11controller.text) ?? 0,
-          Shoe12:   int.tryParse(Shoe12controller.text) ?? 0,
-          Shoe13:   int.tryParse(Shoe13controller.text) ?? 0,
-          Shoe14:   int.tryParse(Shoe14controller.text) ?? 0,
-          Shoe15:  int.tryParse(Shoe15controller.text) ?? 0,
-          Shoe16:  int.tryParse(Shoe16controller.text) ?? 0,
-          Shoe17:  int.tryParse(Shoe17controller.text) ?? 0,
-          Shoe18:  int.tryParse(Shoe18controller.text) ?? 0,
-          Shoe19:  int.tryParse(Shoe19controller.text) ?? 0,
-          Shoe20:  int.tryParse(Shoe20controller.text) ?? 0,
-          Shoe21:  int.tryParse(Shoe21controller.text) ?? 0,
-
-
-        );
-      }
-      Navigator.pop(context);
-    }
-     if(dropdownValue=='Women'){
-      if (currentUser.country == 'India') {
-        createProdInFirestore(
-          shopmediaUrl: shopmediaUrl,
-          Category: value,
-          world:worldship,
-          ship: shipcontroller.text,          gender: dropdownValue,
-          details: detailsController.text,
-          productname: productnameController.text,
-          price: userprice,
-          inrtousd: inrtousd,
-          inrtocny: inrtocny,
-          inrtogbp: inrtogbp,
-          inrtoeur: inrtoeur,
-          color: colorController.text,
-          composition: compositionController.text,
-          washandcare: washandcareController.text,
-          sizeandfit: sizeandfitController.text,
-          xxxsQuantity: int.tryParse(xxxscontroller.text) ?? 0,
-          xxsQuantity: int.tryParse(xxscontroller.text) ?? 0,
-          xsQuantity:  int.tryParse(xscontroller.text )?? 0,
-          sQuantity: int.tryParse(scontroller.text) ?? 0,
-
-          mtoQuantity:  int.tryParse(mtocontroller.text) ?? 0,
-          freesizeQuantity:   int.tryParse(freesizecontroller.text) ?? 0,
-
-
-          mQuantity:  int.tryParse(mcontroller.text) ?? 0,
-          lQuantity:  int.tryParse(lcontroller.text) ?? 0,
-          xlQuantity:  int.tryParse(xlcontroller.text) ?? 0,
-          xxlQuantity:  int.tryParse(xxlcontroller.text) ?? 0,
-          xxxlQuantity:  int.tryParse(xxlcontroller.text) ?? 0,
-          fourxlQuantity:  int.tryParse(fourxlcontroller.text) ?? 0,
-          fivexlQuantity:  int.tryParse(fivexlcontroller.text) ?? 0,
-          sixxlQuantity:  int.tryParse(sixxlcontroller.text) ?? 0,
-          sevenxlQuantity:  int.tryParse(sevenxlcontroller.text) ?? 0,
-          eightxlQuantity:  int.tryParse(eightxlcontroller.text) ?? 0,
-          Shoe1:   int.tryParse(Shoe1controller.text) ?? 0,
-          Shoe2:   int.tryParse(Shoe2controller.text) ?? 0,
-          Shoe3:   int.tryParse(Shoe3controller.text) ?? 0,
-          Shoe4:   int.tryParse(Shoe4controller.text) ?? 0,
-          Shoe5:   int.tryParse(Shoe5controller.text) ?? 0,
-          Shoe6:   int.tryParse(Shoe6controller.text) ?? 0,
-          Shoe7:   int.tryParse(Shoe7controller.text) ?? 0,
-          Shoe8:   int.tryParse(Shoe8controller.text) ?? 0,
-          Shoe9:   int.tryParse(Shoe9controller.text) ?? 0,
-          Shoe10:   int.tryParse(Shoe10controller.text) ?? 0,
-          Shoe11:   int.tryParse(Shoe11controller.text) ?? 0,
-          Shoe12:   int.tryParse(Shoe12controller.text) ?? 0,
-          Shoe13:   int.tryParse(Shoe13controller.text) ?? 0,
-          Shoe14:   int.tryParse(Shoe14controller.text) ?? 0,
-          Shoe15:  int.tryParse(Shoe15controller.text) ?? 0,
-          Shoe16:  int.tryParse(Shoe16controller.text) ?? 0,
-
-
-        );
-            }
-      else if (currentUser.country == 'Europe')  {
-        createProdInFirestore(
-          shopmediaUrl: shopmediaUrl,
-          Category: value,
-          world:worldship,
-          ship: shipcontroller.text,          gender: dropdownValue,
-          details: detailsController.text,
-          productname: productnameController.text,
-          price: userprice,
-          eurtoinr:eurtoinr,
-          eurtousd:eurtousd,
-          eurtocny:eurtocny,
-          eurtogbp:eurtogbp,
-          color: colorController.text,
-          composition: compositionController.text,
-          washandcare: washandcareController.text,
-          sizeandfit: sizeandfitController.text,
-          xxxsQuantity: int.tryParse(xxxscontroller.text) ?? 0,
-          xxsQuantity: int.tryParse(xxscontroller.text) ?? 0,
-          xsQuantity:  int.tryParse(xscontroller.text )?? 0,
-          sQuantity: int.tryParse(scontroller.text) ?? 0,
-
-          mtoQuantity:  int.tryParse(mtocontroller.text) ?? 0,
-          freesizeQuantity:   int.tryParse(freesizecontroller.text) ?? 0,
-
-
-          mQuantity:  int.tryParse(mcontroller.text) ?? 0,
-          lQuantity:  int.tryParse(lcontroller.text) ?? 0,
-          xlQuantity:  int.tryParse(xlcontroller.text) ?? 0,
-          xxlQuantity:  int.tryParse(xxlcontroller.text) ?? 0,
-          xxxlQuantity:  int.tryParse(xxlcontroller.text) ?? 0,
-          fourxlQuantity:  int.tryParse(fourxlcontroller.text) ?? 0,
-          fivexlQuantity:  int.tryParse(fivexlcontroller.text) ?? 0,
-          sixxlQuantity:  int.tryParse(sixxlcontroller.text) ?? 0,
-          sevenxlQuantity:  int.tryParse(sevenxlcontroller.text) ?? 0,
-          eightxlQuantity:  int.tryParse(eightxlcontroller.text) ?? 0,
-          Shoe1:   int.tryParse(Shoe1controller.text) ?? 0,
-          Shoe2:   int.tryParse(Shoe2controller.text) ?? 0,
-          Shoe3:   int.tryParse(Shoe3controller.text) ?? 0,
-          Shoe4:   int.tryParse(Shoe4controller.text) ?? 0,
-          Shoe5:   int.tryParse(Shoe5controller.text) ?? 0,
-          Shoe6:   int.tryParse(Shoe6controller.text) ?? 0,
-          Shoe7:   int.tryParse(Shoe7controller.text) ?? 0,
-          Shoe8:   int.tryParse(Shoe8controller.text) ?? 0,
-          Shoe9:   int.tryParse(Shoe9controller.text) ?? 0,
-          Shoe10:   int.tryParse(Shoe10controller.text) ?? 0,
-          Shoe11:   int.tryParse(Shoe11controller.text) ?? 0,
-          Shoe12:   int.tryParse(Shoe12controller.text) ?? 0,
-          Shoe13:   int.tryParse(Shoe13controller.text) ?? 0,
-          Shoe14:   int.tryParse(Shoe14controller.text) ?? 0,
-          Shoe15:  int.tryParse(Shoe15controller.text) ?? 0,
-          Shoe16:  int.tryParse(Shoe16controller.text) ?? 0,
-
-
-        );
-      }
-      else if (currentUser.country == 'UK')  {
-        createProdInFirestore(
-          shopmediaUrl: shopmediaUrl,
-          Category: value,
-          world:worldship,
-          ship: shipcontroller.text,          gender: dropdownValue,
-          details: detailsController.text,
-          productname: productnameController.text,
-          price: userprice,
-          gbptoinr:gbptoinr,
-          gbptocny:gbptocny,
-          gbptousd:gbptousd,
-          gbptoeur:gbptoeur,
-          color: colorController.text,
-          composition: compositionController.text,
-          washandcare: washandcareController.text,
-          sizeandfit: sizeandfitController.text,
-          xxxsQuantity: int.tryParse(xxxscontroller.text) ?? 0,
-          xxsQuantity: int.tryParse(xxscontroller.text) ?? 0,
-          xsQuantity:  int.tryParse(xscontroller.text )?? 0,
-          sQuantity: int.tryParse(scontroller.text) ?? 0,
-
-          mtoQuantity:  int.tryParse(mtocontroller.text) ?? 0,
-          freesizeQuantity:   int.tryParse(freesizecontroller.text) ?? 0,
-
-
-          mQuantity:  int.tryParse(mcontroller.text) ?? 0,
-          lQuantity:  int.tryParse(lcontroller.text) ?? 0,
-          xlQuantity:  int.tryParse(xlcontroller.text) ?? 0,
-          xxlQuantity:  int.tryParse(xxlcontroller.text) ?? 0,
-          xxxlQuantity:  int.tryParse(xxlcontroller.text) ?? 0,
-          fourxlQuantity:  int.tryParse(fourxlcontroller.text) ?? 0,
-          fivexlQuantity:  int.tryParse(fivexlcontroller.text) ?? 0,
-          sixxlQuantity:  int.tryParse(sixxlcontroller.text) ?? 0,
-          sevenxlQuantity:  int.tryParse(sevenxlcontroller.text) ?? 0,
-          eightxlQuantity:  int.tryParse(eightxlcontroller.text) ?? 0,
-          Shoe1:   int.tryParse(Shoe1controller.text) ?? 0,
-          Shoe2:   int.tryParse(Shoe2controller.text) ?? 0,
-          Shoe3:   int.tryParse(Shoe3controller.text) ?? 0,
-          Shoe4:   int.tryParse(Shoe4controller.text) ?? 0,
-          Shoe5:   int.tryParse(Shoe5controller.text) ?? 0,
-          Shoe6:   int.tryParse(Shoe6controller.text) ?? 0,
-          Shoe7:   int.tryParse(Shoe7controller.text) ?? 0,
-          Shoe8:   int.tryParse(Shoe8controller.text) ?? 0,
-          Shoe9:   int.tryParse(Shoe9controller.text) ?? 0,
-          Shoe10:   int.tryParse(Shoe10controller.text) ?? 0,
-          Shoe11:   int.tryParse(Shoe11controller.text) ?? 0,
-          Shoe12:   int.tryParse(Shoe12controller.text) ?? 0,
-          Shoe13:   int.tryParse(Shoe13controller.text) ?? 0,
-          Shoe14:   int.tryParse(Shoe14controller.text) ?? 0,
-          Shoe15:  int.tryParse(Shoe15controller.text) ?? 0,
-          Shoe16:  int.tryParse(Shoe16controller.text) ?? 0,
-
-
-        );
-      }
-      else if (currentUser.country == 'USA')  {
-        createProdInFirestore(
-          shopmediaUrl: shopmediaUrl,
-          Category: value,
-          world:worldship,
-          ship: shipcontroller.text,          gender: dropdownValue,
-          details: detailsController.text,
-          productname: productnameController.text,
-          price: userprice,
-          usdtoinr:usdtoinr,
-          usdtocny:usdtocny,
-          usdtogbp:usdtogbp,
-          usdtoeur:usdtoeur,
-          color: colorController.text,
-          composition: compositionController.text,
-          washandcare: washandcareController.text,
-          sizeandfit: sizeandfitController.text,
-          xxxsQuantity: int.tryParse(xxxscontroller.text) ?? 0,
-          xxsQuantity: int.tryParse(xxscontroller.text) ?? 0,
-          xsQuantity:  int.tryParse(xscontroller.text )?? 0,
-          sQuantity: int.tryParse(scontroller.text) ?? 0,
-
-          mtoQuantity:  int.tryParse(mtocontroller.text) ?? 0,
-          freesizeQuantity:   int.tryParse(freesizecontroller.text) ?? 0,
-
-
-          mQuantity:  int.tryParse(mcontroller.text) ?? 0,
-          lQuantity:  int.tryParse(lcontroller.text) ?? 0,
-          xlQuantity:  int.tryParse(xlcontroller.text) ?? 0,
-          xxlQuantity:  int.tryParse(xxlcontroller.text) ?? 0,
-          xxxlQuantity:  int.tryParse(xxlcontroller.text) ?? 0,
-          fourxlQuantity:  int.tryParse(fourxlcontroller.text) ?? 0,
-          fivexlQuantity:  int.tryParse(fivexlcontroller.text) ?? 0,
-          sixxlQuantity:  int.tryParse(sixxlcontroller.text) ?? 0,
-          sevenxlQuantity:  int.tryParse(sevenxlcontroller.text) ?? 0,
-          eightxlQuantity:  int.tryParse(eightxlcontroller.text) ?? 0,
-          Shoe1:   int.tryParse(Shoe1controller.text) ?? 0,
-          Shoe2:   int.tryParse(Shoe2controller.text) ?? 0,
-          Shoe3:   int.tryParse(Shoe3controller.text) ?? 0,
-          Shoe4:   int.tryParse(Shoe4controller.text) ?? 0,
-          Shoe5:   int.tryParse(Shoe5controller.text) ?? 0,
-          Shoe6:   int.tryParse(Shoe6controller.text) ?? 0,
-          Shoe7:   int.tryParse(Shoe7controller.text) ?? 0,
-          Shoe8:   int.tryParse(Shoe8controller.text) ?? 0,
-          Shoe9:   int.tryParse(Shoe9controller.text) ?? 0,
-          Shoe10:   int.tryParse(Shoe10controller.text) ?? 0,
-          Shoe11:   int.tryParse(Shoe11controller.text) ?? 0,
-          Shoe12:   int.tryParse(Shoe12controller.text) ?? 0,
-          Shoe13:   int.tryParse(Shoe13controller.text) ?? 0,
-          Shoe14:   int.tryParse(Shoe14controller.text) ?? 0,
-          Shoe15:  int.tryParse(Shoe15controller.text) ?? 0,
-          Shoe16:  int.tryParse(Shoe16controller.text) ?? 0,
-
-
-        );
-      }
-      else   {
-        createProdInFirestore(
-          shopmediaUrl: shopmediaUrl,
-          Category: value,
-          world:worldship,
-          ship: shipcontroller.text,          gender: dropdownValue,
-          details: detailsController.text,
-          productname: productnameController.text,
-          price: userprice,
-          usdtoinr:usdtoinr,
-          usdtocny:usdtocny,
-          usdtogbp:usdtogbp,
-          usdtoeur:usdtoeur,
-          color: colorController.text,
-          composition: compositionController.text,
-          washandcare: washandcareController.text,
-          sizeandfit: sizeandfitController.text,
-          xxxsQuantity: int.tryParse(xxxscontroller.text) ?? 0,
-          xxsQuantity: int.tryParse(xxscontroller.text) ?? 0,
-          xsQuantity:  int.tryParse(xscontroller.text )?? 0,
-          sQuantity: int.tryParse(scontroller.text) ?? 0,
-
-          mtoQuantity:  int.tryParse(mtocontroller.text) ?? 0,
-          freesizeQuantity:   int.tryParse(freesizecontroller.text) ?? 0,
-
-
-          mQuantity:  int.tryParse(mcontroller.text) ?? 0,
-          lQuantity:  int.tryParse(lcontroller.text) ?? 0,
-          xlQuantity:  int.tryParse(xlcontroller.text) ?? 0,
-          xxlQuantity:  int.tryParse(xxlcontroller.text) ?? 0,
-          xxxlQuantity:  int.tryParse(xxlcontroller.text) ?? 0,
-          fourxlQuantity:  int.tryParse(fourxlcontroller.text) ?? 0,
-          fivexlQuantity:  int.tryParse(fivexlcontroller.text) ?? 0,
-          sixxlQuantity:  int.tryParse(sixxlcontroller.text) ?? 0,
-          sevenxlQuantity:  int.tryParse(sevenxlcontroller.text) ?? 0,
-          eightxlQuantity:  int.tryParse(eightxlcontroller.text) ?? 0,
-          Shoe1:   int.tryParse(Shoe1controller.text) ?? 0,
-          Shoe2:   int.tryParse(Shoe2controller.text) ?? 0,
-          Shoe3:   int.tryParse(Shoe3controller.text) ?? 0,
-          Shoe4:   int.tryParse(Shoe4controller.text) ?? 0,
-          Shoe5:   int.tryParse(Shoe5controller.text) ?? 0,
-          Shoe6:   int.tryParse(Shoe6controller.text) ?? 0,
-          Shoe7:   int.tryParse(Shoe7controller.text) ?? 0,
-          Shoe8:   int.tryParse(Shoe8controller.text) ?? 0,
-          Shoe9:   int.tryParse(Shoe9controller.text) ?? 0,
-          Shoe10:   int.tryParse(Shoe10controller.text) ?? 0,
-          Shoe11:   int.tryParse(Shoe11controller.text) ?? 0,
-          Shoe12:   int.tryParse(Shoe12controller.text) ?? 0,
-          Shoe13:   int.tryParse(Shoe13controller.text) ?? 0,
-          Shoe14:   int.tryParse(Shoe14controller.text) ?? 0,
-          Shoe15:  int.tryParse(Shoe15controller.text) ?? 0,
-          Shoe16:  int.tryParse(Shoe16controller.text) ?? 0,
-
-
-        );
-      }
-      Navigator.pop(context);
-    }
-     if(dropdownValue=='Baby-Boys'||dropdownValue=='Baby-Girls'){
-      if (currentUser.country == 'India') {
-        createProdInFirestore(
-          shopmediaUrl: shopmediaUrl,
-          Category: value,
-          world:worldship,
-          ship: shipcontroller.text,          gender: dropdownValue,
-          details: detailsController.text,
-          productname: productnameController.text,
-          price: userprice,
-          inrtousd: inrtousd,
-          inrtocny: inrtocny,
-          inrtogbp: inrtogbp,
-          inrtoeur: inrtoeur,
-          color: colorController.text,
-          composition: compositionController.text ?? "",
-          washandcare: washandcareController.text ?? "",
-          sizeandfit: sizeandfitController.text ?? "",
-          xxxsQuantity: int.tryParse(xxxscontroller.text) ?? 0,
-          xxsQuantity: int.tryParse(xxscontroller.text) ?? 0,
-          xsQuantity:  int.tryParse(xscontroller.text )?? 0,
-          sQuantity: int.tryParse(scontroller.text) ?? 0,
-          mQuantity:  int.tryParse(mcontroller.text) ?? 0,
-          lQuantity:  int.tryParse(lcontroller.text) ?? 0,
-        
-          mtoQuantity:  int.tryParse(mtocontroller.text) ?? 0,
-          freesizeQuantity:   int.tryParse(freesizecontroller.text) ?? 0,
-          Shoe1:   int.tryParse(Shoe1controller.text) ?? 0,
-          Shoe2:   int.tryParse(Shoe2controller.text) ?? 0,
-          Shoe3:   int.tryParse(Shoe3controller.text) ?? 0,
-          Shoe4:   int.tryParse(Shoe4controller.text) ?? 0,
-          Shoe5:   int.tryParse(Shoe5controller.text) ?? 0,
-          Shoe6:   int.tryParse(Shoe6controller.text) ?? 0,
-          Shoe7:   int.tryParse(Shoe7controller.text) ?? 0,
-        
-
-
-
-        );
-            }
-      else if (currentUser.country == 'Europe') {
-        createProdInFirestore(
-          shopmediaUrl: shopmediaUrl,
-          Category: value,
-          world:worldship,
-          ship: shipcontroller.text,          gender: dropdownValue,
-          details: detailsController.text,
-          productname: productnameController.text,
-          price: userprice,
-          eurtoinr:eurtoinr,
-           eurtousd:eurtousd,
-          eurtocny:eurtocny,
-           eurtogbp:eurtogbp,
-          color: colorController.text,
-          composition: compositionController.text ?? "",
-          washandcare: washandcareController.text ?? "",
-          sizeandfit: sizeandfitController.text ?? "",
-          xxxsQuantity: int.tryParse(xxxscontroller.text) ?? 0,
-          xxsQuantity: int.tryParse(xxscontroller.text) ?? 0,
-          xsQuantity:  int.tryParse(xscontroller.text )?? 0,
-          sQuantity: int.tryParse(scontroller.text) ?? 0,
-          mQuantity:  int.tryParse(mcontroller.text) ?? 0,
-          lQuantity:  int.tryParse(lcontroller.text) ?? 0,
-
-          mtoQuantity:  int.tryParse(mtocontroller.text) ?? 0,
-          freesizeQuantity:   int.tryParse(freesizecontroller.text) ?? 0,
-          Shoe1:   int.tryParse(Shoe1controller.text) ?? 0,
-          Shoe2:   int.tryParse(Shoe2controller.text) ?? 0,
-          Shoe3:   int.tryParse(Shoe3controller.text) ?? 0,
-          Shoe4:   int.tryParse(Shoe4controller.text) ?? 0,
-          Shoe5:   int.tryParse(Shoe5controller.text) ?? 0,
-          Shoe6:   int.tryParse(Shoe6controller.text) ?? 0,
-          Shoe7:   int.tryParse(Shoe7controller.text) ?? 0,
-
-
-        );
-      }
-      else if (currentUser.country == 'UK')  {
-        createProdInFirestore(
-          shopmediaUrl: shopmediaUrl,
-          Category: value,
-          world:worldship,
-          ship: shipcontroller.text,          gender: dropdownValue,
-          details: detailsController.text,
-          productname: productnameController.text,
-          price: userprice,
-          gbptoinr:gbptoinr,
-          gbptocny:gbptocny,
-          gbptousd:gbptousd,
-          gbptoeur:gbptoeur,
-          color: colorController.text,
-          composition: compositionController.text ?? "",
-          washandcare: washandcareController.text ?? "",
-          sizeandfit: sizeandfitController.text ?? "",
-          xxxsQuantity: int.tryParse(xxxscontroller.text) ?? 0,
-          xxsQuantity: int.tryParse(xxscontroller.text) ?? 0,
-          xsQuantity:  int.tryParse(xscontroller.text )?? 0,
-          sQuantity: int.tryParse(scontroller.text) ?? 0,
-          mQuantity:  int.tryParse(mcontroller.text) ?? 0,
-          lQuantity:  int.tryParse(lcontroller.text) ?? 0,
-
-          mtoQuantity:  int.tryParse(mtocontroller.text) ?? 0,
-          freesizeQuantity:   int.tryParse(freesizecontroller.text) ?? 0,
-          Shoe1:   int.tryParse(Shoe1controller.text) ?? 0,
-          Shoe2:   int.tryParse(Shoe2controller.text) ?? 0,
-          Shoe3:   int.tryParse(Shoe3controller.text) ?? 0,
-          Shoe4:   int.tryParse(Shoe4controller.text) ?? 0,
-          Shoe5:   int.tryParse(Shoe5controller.text) ?? 0,
-          Shoe6:   int.tryParse(Shoe6controller.text) ?? 0,
-          Shoe7:   int.tryParse(Shoe7controller.text) ?? 0,
-
-        );
-      }
-      else if (currentUser.country == 'USA') {
-        createProdInFirestore(
-          shopmediaUrl: shopmediaUrl,
-          Category: value,
-          world:worldship,
-          ship: shipcontroller.text,          gender: dropdownValue,
-          details: detailsController.text,
-          productname: productnameController.text,
-          price: userprice,
-          usdtoinr:usdtoinr,
-          usdtocny:usdtocny,
-          usdtogbp:usdtogbp,
-          usdtoeur:usdtoeur,
-          color: colorController.text,
-          composition: compositionController.text ?? "",
-          washandcare: washandcareController.text ?? "",
-          sizeandfit: sizeandfitController.text ?? "",
-          xxxsQuantity: int.tryParse(xxxscontroller.text) ?? 0,
-          xxsQuantity: int.tryParse(xxscontroller.text) ?? 0,
-          xsQuantity:  int.tryParse(xscontroller.text )?? 0,
-          sQuantity: int.tryParse(scontroller.text) ?? 0,
-          mQuantity:  int.tryParse(mcontroller.text) ?? 0,
-          lQuantity:  int.tryParse(lcontroller.text) ?? 0,
-
-          mtoQuantity:  int.tryParse(mtocontroller.text) ?? 0,
-          freesizeQuantity:   int.tryParse(freesizecontroller.text) ?? 0,
-          Shoe1:   int.tryParse(Shoe1controller.text) ?? 0,
-          Shoe2:   int.tryParse(Shoe2controller.text) ?? 0,
-          Shoe3:   int.tryParse(Shoe3controller.text) ?? 0,
-          Shoe4:   int.tryParse(Shoe4controller.text) ?? 0,
-          Shoe5:   int.tryParse(Shoe5controller.text) ?? 0,
-          Shoe6:   int.tryParse(Shoe6controller.text) ?? 0,
-          Shoe7:   int.tryParse(Shoe7controller.text) ?? 0,
-
-
-        );
-      }
-      else {
-        createProdInFirestore(
-          shopmediaUrl: shopmediaUrl,
-          Category: value,
-          world:worldship,
-          ship: shipcontroller.text,          gender: dropdownValue,
-          details: detailsController.text,
-          productname: productnameController.text,
-          price: userprice,
-          usdtoinr:usdtoinr,
-          usdtocny:usdtocny,
-          usdtogbp:usdtogbp,
-          usdtoeur:usdtoeur,
-          color: colorController.text,
-          composition: compositionController.text ?? "",
-          washandcare: washandcareController.text ?? "",
-          sizeandfit: sizeandfitController.text ?? "",
-          xxxsQuantity: int.tryParse(xxxscontroller.text) ?? 0,
-          xxsQuantity: int.tryParse(xxscontroller.text) ?? 0,
-          xsQuantity:  int.tryParse(xscontroller.text )?? 0,
-          sQuantity: int.tryParse(scontroller.text) ?? 0,
-          mQuantity:  int.tryParse(mcontroller.text) ?? 0,
-          lQuantity:  int.tryParse(lcontroller.text) ?? 0,
-
-          mtoQuantity:  int.tryParse(mtocontroller.text) ?? 0,
-          freesizeQuantity:   int.tryParse(freesizecontroller.text) ?? 0,
-          Shoe1:   int.tryParse(Shoe1controller.text) ?? 0,
-          Shoe2:   int.tryParse(Shoe2controller.text) ?? 0,
-          Shoe3:   int.tryParse(Shoe3controller.text) ?? 0,
-          Shoe4:   int.tryParse(Shoe4controller.text) ?? 0,
-          Shoe5:   int.tryParse(Shoe5controller.text) ?? 0,
-          Shoe6:   int.tryParse(Shoe6controller.text) ?? 0,
-          Shoe7:   int.tryParse(Shoe7controller.text) ?? 0,
-
-
-        );
-      }
-      Navigator.pop(context);
-    }
-     if(dropdownValue=='Kids-Boys'||dropdownValue=='Kids-Girls'){
-      if (currentUser.country == 'India') {
-        createProdInFirestore(
-          shopmediaUrl: shopmediaUrl,
-          Category: value,
-          world:worldship,
-          ship: shipcontroller.text,          gender: dropdownValue,
-          details: detailsController.text,
-          productname: productnameController.text,
-          price: userprice,
-          inrtousd: inrtousd,
-          inrtocny: inrtocny,
-          inrtogbp: inrtogbp,
-          inrtoeur: inrtoeur,
-          color: colorController.text,
-          composition: compositionController.text,
-          washandcare: washandcareController.text,
-          sizeandfit: sizeandfitController.text,
-          xxxsQuantity: int.tryParse(xxxscontroller.text) ?? 0,
-          xxsQuantity: int.tryParse(xxscontroller.text) ?? 0,
-          xsQuantity:  int.tryParse(xscontroller.text )?? 0,
-          sQuantity: int.tryParse(scontroller.text) ?? 0,
-
-          mtoQuantity:  int.tryParse(mtocontroller.text) ?? 0,
-          freesizeQuantity:   int.tryParse(freesizecontroller.text) ?? 0,
-
-
-          mQuantity:  int.tryParse(mcontroller.text) ?? 0,
-          lQuantity:  int.tryParse(lcontroller.text) ?? 0,
-          xlQuantity:  int.tryParse(xlcontroller.text) ?? 0,
-          xxlQuantity:  int.tryParse(xxlcontroller.text) ?? 0,
-          xxxlQuantity:  int.tryParse(xxlcontroller.text) ?? 0,
-          fourxlQuantity:  int.tryParse(fourxlcontroller.text) ?? 0,
-
-          Shoe1:   int.tryParse(Shoe1controller.text) ?? 0,
-          Shoe2:   int.tryParse(Shoe2controller.text) ?? 0,
-          Shoe3:   int.tryParse(Shoe3controller.text) ?? 0,
-          Shoe4:   int.tryParse(Shoe4controller.text) ?? 0,
-          Shoe5:   int.tryParse(Shoe5controller.text) ?? 0,
-          Shoe6:   int.tryParse(Shoe6controller.text) ?? 0,
-          Shoe7:   int.tryParse(Shoe7controller.text) ?? 0,
-          Shoe8:   int.tryParse(Shoe8controller.text) ?? 0,
-          Shoe9:   int.tryParse(Shoe9controller.text) ?? 0,
-          Shoe10:   int.tryParse(Shoe10controller.text) ?? 0,
-          Shoe11:   int.tryParse(Shoe11controller.text) ?? 0,
-          Shoe12:   int.tryParse(Shoe12controller.text) ?? 0,
-          Shoe13:   int.tryParse(Shoe13controller.text) ?? 0,
-          Shoe14:   int.tryParse(Shoe14controller.text) ?? 0,
-
-
-
-        );
-      }
-      else if (currentUser.country == 'Europe'){
-        createProdInFirestore(
-          shopmediaUrl: shopmediaUrl,
-          Category: value,
-          world:worldship,
-          ship: shipcontroller.text,          gender: dropdownValue,
-          details: detailsController.text,
-          productname: productnameController.text,
-          price: userprice,
-          eurtoinr:eurtoinr,
-          eurtousd:eurtousd,
-          eurtocny:eurtocny,
-          eurtogbp:eurtogbp,
-          color: colorController.text,
-          composition: compositionController.text,
-          washandcare: washandcareController.text,
-          sizeandfit: sizeandfitController.text,
-          xxxsQuantity: int.tryParse(xxxscontroller.text) ?? 0,
-          xxsQuantity: int.tryParse(xxscontroller.text) ?? 0,
-          xsQuantity:  int.tryParse(xscontroller.text )?? 0,
-          sQuantity: int.tryParse(scontroller.text) ?? 0,
-
-          mtoQuantity:  int.tryParse(mtocontroller.text) ?? 0,
-          freesizeQuantity:   int.tryParse(freesizecontroller.text) ?? 0,
-
-
-          mQuantity:  int.tryParse(mcontroller.text) ?? 0,
-          lQuantity:  int.tryParse(lcontroller.text) ?? 0,
-          xlQuantity:  int.tryParse(xlcontroller.text) ?? 0,
-          xxlQuantity:  int.tryParse(xxlcontroller.text) ?? 0,
-          xxxlQuantity:  int.tryParse(xxlcontroller.text) ?? 0,
-          fourxlQuantity:  int.tryParse(fourxlcontroller.text) ?? 0,
-
-          Shoe1:   int.tryParse(Shoe1controller.text) ?? 0,
-          Shoe2:   int.tryParse(Shoe2controller.text) ?? 0,
-          Shoe3:   int.tryParse(Shoe3controller.text) ?? 0,
-          Shoe4:   int.tryParse(Shoe4controller.text) ?? 0,
-          Shoe5:   int.tryParse(Shoe5controller.text) ?? 0,
-          Shoe6:   int.tryParse(Shoe6controller.text) ?? 0,
-          Shoe7:   int.tryParse(Shoe7controller.text) ?? 0,
-          Shoe8:   int.tryParse(Shoe8controller.text) ?? 0,
-          Shoe9:   int.tryParse(Shoe9controller.text) ?? 0,
-          Shoe10:   int.tryParse(Shoe10controller.text) ?? 0,
-          Shoe11:   int.tryParse(Shoe11controller.text) ?? 0,
-          Shoe12:   int.tryParse(Shoe12controller.text) ?? 0,
-          Shoe13:   int.tryParse(Shoe13controller.text) ?? 0,
-          Shoe14:   int.tryParse(Shoe14controller.text) ?? 0,
-
-
-
-        );
-      }
-      else if (currentUser.country == 'UK') {
-        createProdInFirestore(
-          shopmediaUrl: shopmediaUrl,
-          Category: value,
-          world:worldship,
-          ship: shipcontroller.text,          gender: dropdownValue,
-          details: detailsController.text,
-          productname: productnameController.text,
-          price: userprice,
-          gbptoinr:gbptoinr,
-          gbptocny:gbptocny,
-          gbptousd:gbptousd,
-          gbptoeur:gbptoeur,
-          color: colorController.text,
-          composition: compositionController.text,
-          washandcare: washandcareController.text,
-          sizeandfit: sizeandfitController.text,
-          xxxsQuantity: int.tryParse(xxxscontroller.text) ?? 0,
-          xxsQuantity: int.tryParse(xxscontroller.text) ?? 0,
-          xsQuantity:  int.tryParse(xscontroller.text )?? 0,
-          sQuantity: int.tryParse(scontroller.text) ?? 0,
-
-          mtoQuantity:  int.tryParse(mtocontroller.text) ?? 0,
-          freesizeQuantity:   int.tryParse(freesizecontroller.text) ?? 0,
-
-
-          mQuantity:  int.tryParse(mcontroller.text) ?? 0,
-          lQuantity:  int.tryParse(lcontroller.text) ?? 0,
-          xlQuantity:  int.tryParse(xlcontroller.text) ?? 0,
-          xxlQuantity:  int.tryParse(xxlcontroller.text) ?? 0,
-          xxxlQuantity:  int.tryParse(xxlcontroller.text) ?? 0,
-          fourxlQuantity:  int.tryParse(fourxlcontroller.text) ?? 0,
-
-          Shoe1:   int.tryParse(Shoe1controller.text) ?? 0,
-          Shoe2:   int.tryParse(Shoe2controller.text) ?? 0,
-          Shoe3:   int.tryParse(Shoe3controller.text) ?? 0,
-          Shoe4:   int.tryParse(Shoe4controller.text) ?? 0,
-          Shoe5:   int.tryParse(Shoe5controller.text) ?? 0,
-          Shoe6:   int.tryParse(Shoe6controller.text) ?? 0,
-          Shoe7:   int.tryParse(Shoe7controller.text) ?? 0,
-          Shoe8:   int.tryParse(Shoe8controller.text) ?? 0,
-          Shoe9:   int.tryParse(Shoe9controller.text) ?? 0,
-          Shoe10:   int.tryParse(Shoe10controller.text) ?? 0,
-          Shoe11:   int.tryParse(Shoe11controller.text) ?? 0,
-          Shoe12:   int.tryParse(Shoe12controller.text) ?? 0,
-          Shoe13:   int.tryParse(Shoe13controller.text) ?? 0,
-          Shoe14:   int.tryParse(Shoe14controller.text) ?? 0,
-
-
-
-        );
-      }
-      else if (currentUser.country == 'USA') {
-        createProdInFirestore(
-          shopmediaUrl: shopmediaUrl,
-          Category: value,
-          world:worldship,
-          ship: shipcontroller.text,          gender: dropdownValue,
-          details: detailsController.text,
-          productname: productnameController.text,
-          price: userprice,
-          usdtoinr:usdtoinr,
-          usdtocny:usdtocny,
-          usdtogbp:usdtogbp,
-          usdtoeur:usdtoeur,
-          color: colorController.text,
-          composition: compositionController.text,
-          washandcare: washandcareController.text,
-          sizeandfit: sizeandfitController.text,
-          xxxsQuantity: int.tryParse(xxxscontroller.text) ?? 0,
-          xxsQuantity: int.tryParse(xxscontroller.text) ?? 0,
-          xsQuantity:  int.tryParse(xscontroller.text )?? 0,
-          sQuantity: int.tryParse(scontroller.text) ?? 0,
-
-          mtoQuantity:  int.tryParse(mtocontroller.text) ?? 0,
-          freesizeQuantity:   int.tryParse(freesizecontroller.text) ?? 0,
-
-
-          mQuantity:  int.tryParse(mcontroller.text) ?? 0,
-          lQuantity:  int.tryParse(lcontroller.text) ?? 0,
-          xlQuantity:  int.tryParse(xlcontroller.text) ?? 0,
-          xxlQuantity:  int.tryParse(xxlcontroller.text) ?? 0,
-          xxxlQuantity:  int.tryParse(xxlcontroller.text) ?? 0,
-          fourxlQuantity:  int.tryParse(fourxlcontroller.text) ?? 0,
-
-          Shoe1:   int.tryParse(Shoe1controller.text) ?? 0,
-          Shoe2:   int.tryParse(Shoe2controller.text) ?? 0,
-          Shoe3:   int.tryParse(Shoe3controller.text) ?? 0,
-          Shoe4:   int.tryParse(Shoe4controller.text) ?? 0,
-          Shoe5:   int.tryParse(Shoe5controller.text) ?? 0,
-          Shoe6:   int.tryParse(Shoe6controller.text) ?? 0,
-          Shoe7:   int.tryParse(Shoe7controller.text) ?? 0,
-          Shoe8:   int.tryParse(Shoe8controller.text) ?? 0,
-          Shoe9:   int.tryParse(Shoe9controller.text) ?? 0,
-          Shoe10:   int.tryParse(Shoe10controller.text) ?? 0,
-          Shoe11:   int.tryParse(Shoe11controller.text) ?? 0,
-          Shoe12:   int.tryParse(Shoe12controller.text) ?? 0,
-          Shoe13:   int.tryParse(Shoe13controller.text) ?? 0,
-          Shoe14:   int.tryParse(Shoe14controller.text) ?? 0,
-
-
-
-        );
-      }
-      else{
-        createProdInFirestore(
-          shopmediaUrl: shopmediaUrl,
-          Category: value,
-          world:worldship,
-          ship: shipcontroller.text,          gender: dropdownValue,
-          details: detailsController.text,
-          productname: productnameController.text,
-          price: userprice,
-          usdtoinr:usdtoinr,
-          usdtocny:usdtocny,
-          usdtogbp:usdtogbp,
-          usdtoeur:usdtoeur,
-          color: colorController.text,
-          composition: compositionController.text,
-          washandcare: washandcareController.text,
-          sizeandfit: sizeandfitController.text,
-          xxxsQuantity: int.tryParse(xxxscontroller.text) ?? 0,
-          xxsQuantity: int.tryParse(xxscontroller.text) ?? 0,
-          xsQuantity:  int.tryParse(xscontroller.text )?? 0,
-          sQuantity: int.tryParse(scontroller.text) ?? 0,
-
-          mtoQuantity:  int.tryParse(mtocontroller.text) ?? 0,
-          freesizeQuantity:   int.tryParse(freesizecontroller.text) ?? 0,
-
-
-          mQuantity:  int.tryParse(mcontroller.text) ?? 0,
-          lQuantity:  int.tryParse(lcontroller.text) ?? 0,
-          xlQuantity:  int.tryParse(xlcontroller.text) ?? 0,
-          xxlQuantity:  int.tryParse(xxlcontroller.text) ?? 0,
-          xxxlQuantity:  int.tryParse(xxlcontroller.text) ?? 0,
-          fourxlQuantity:  int.tryParse(fourxlcontroller.text) ?? 0,
-
-          Shoe1:   int.tryParse(Shoe1controller.text) ?? 0,
-          Shoe2:   int.tryParse(Shoe2controller.text) ?? 0,
-          Shoe3:   int.tryParse(Shoe3controller.text) ?? 0,
-          Shoe4:   int.tryParse(Shoe4controller.text) ?? 0,
-          Shoe5:   int.tryParse(Shoe5controller.text) ?? 0,
-          Shoe6:   int.tryParse(Shoe6controller.text) ?? 0,
-          Shoe7:   int.tryParse(Shoe7controller.text) ?? 0,
-          Shoe8:   int.tryParse(Shoe8controller.text) ?? 0,
-          Shoe9:   int.tryParse(Shoe9controller.text) ?? 0,
-          Shoe10:   int.tryParse(Shoe10controller.text) ?? 0,
-          Shoe11:   int.tryParse(Shoe11controller.text) ?? 0,
-          Shoe12:   int.tryParse(Shoe12controller.text) ?? 0,
-          Shoe13:   int.tryParse(Shoe13controller.text) ?? 0,
-          Shoe14:   int.tryParse(Shoe14controller.text) ?? 0,
-
-
-
-        );
-      }
-      Navigator.pop(context);
-    }
-     if(dropdownValue=='Teen-Boys'||dropdownValue=='Teen-Girls'){
-      if (currentUser.country == 'India') {
-        createProdInFirestore(
-          shopmediaUrl: shopmediaUrl,
-          Category: value,
-          world:worldship,
-          ship: shipcontroller.text,          gender: dropdownValue,
-          details: detailsController.text,
-          productname: productnameController.text,
-          price: userprice,
-          inrtousd: inrtousd,
-          inrtocny: inrtocny,
-          inrtogbp: inrtogbp,
-          inrtoeur: inrtoeur,
-          color: colorController.text,
-          composition: compositionController.text,
-          washandcare: washandcareController.text,
-          sizeandfit: sizeandfitController.text,
-          xxxsQuantity: int.tryParse(xxxscontroller.text) ?? 0,
-          xxsQuantity: int.tryParse(xxscontroller.text) ?? 0,
-          xsQuantity:  int.tryParse(xscontroller.text )?? 0,
-          sQuantity: int.tryParse(scontroller.text) ?? 0,
-
-          mtoQuantity:  int.tryParse(mtocontroller.text) ?? 0,
-          freesizeQuantity:   int.tryParse(freesizecontroller.text) ?? 0,
-          Shoe1:   int.tryParse(Shoe1controller.text) ?? 0,
-          Shoe2:   int.tryParse(Shoe2controller.text) ?? 0,
-          Shoe3:   int.tryParse(Shoe3controller.text) ?? 0,
-          Shoe4:   int.tryParse(Shoe4controller.text) ?? 0,
-
-
-
-        );
-      }
-      else if (currentUser.country == 'Europe')  {
-        createProdInFirestore(
-          shopmediaUrl: shopmediaUrl,
-          Category: value,
-          world:worldship,
-          ship: shipcontroller.text,          gender: dropdownValue,
-          details: detailsController.text,
-          productname: productnameController.text,
-          price: userprice,
-          eurtoinr:eurtoinr,
-          eurtousd:eurtousd,
-          eurtocny:eurtocny,
-          eurtogbp:eurtogbp,
-          color: colorController.text,
-          composition: compositionController.text,
-          washandcare: washandcareController.text,
-          sizeandfit: sizeandfitController.text,
-          xxxsQuantity: int.tryParse(xxxscontroller.text) ?? 0,
-          xxsQuantity: int.tryParse(xxscontroller.text) ?? 0,
-          xsQuantity:  int.tryParse(xscontroller.text )?? 0,
-          sQuantity: int.tryParse(scontroller.text) ?? 0,
-
-          mtoQuantity:  int.tryParse(mtocontroller.text) ?? 0,
-          freesizeQuantity:   int.tryParse(freesizecontroller.text) ?? 0,
-          Shoe1:   int.tryParse(Shoe1controller.text) ?? 0,
-          Shoe2:   int.tryParse(Shoe2controller.text) ?? 0,
-          Shoe3:   int.tryParse(Shoe3controller.text) ?? 0,
-          Shoe4:   int.tryParse(Shoe4controller.text) ?? 0,
-
-
-
-        );
-      }
-      else if (currentUser.country == 'UK')  {
-        createProdInFirestore(
-          shopmediaUrl: shopmediaUrl,
-          Category: value,
-          world:worldship,
-          ship: shipcontroller.text,          gender: dropdownValue,
-          details: detailsController.text,
-          productname: productnameController.text,
-          price: userprice,
-          gbptoinr:gbptoinr,
-          gbptocny:gbptocny,
-          gbptousd:gbptousd,
-          gbptoeur:gbptoeur,
-          color: colorController.text,
-          composition: compositionController.text,
-          washandcare: washandcareController.text,
-          sizeandfit: sizeandfitController.text,
-          xxxsQuantity: int.tryParse(xxxscontroller.text) ?? 0,
-          xxsQuantity: int.tryParse(xxscontroller.text) ?? 0,
-          xsQuantity:  int.tryParse(xscontroller.text )?? 0,
-          sQuantity: int.tryParse(scontroller.text) ?? 0,
-
-          mtoQuantity:  int.tryParse(mtocontroller.text) ?? 0,
-          freesizeQuantity:   int.tryParse(freesizecontroller.text) ?? 0,
-          Shoe1:   int.tryParse(Shoe1controller.text) ?? 0,
-          Shoe2:   int.tryParse(Shoe2controller.text) ?? 0,
-          Shoe3:   int.tryParse(Shoe3controller.text) ?? 0,
-          Shoe4:   int.tryParse(Shoe4controller.text) ?? 0,
-
-
-
-        );
-      }
-      else if (currentUser.country == 'USA')  {
-        createProdInFirestore(
-          shopmediaUrl: shopmediaUrl,
-          Category: value,
-          world:worldship,
-          ship: shipcontroller.text,          gender: dropdownValue,
-          details: detailsController.text,
-          productname: productnameController.text,
-          price: userprice,
-          usdtoinr:usdtoinr,
-          usdtocny:usdtocny,
-          usdtogbp:usdtogbp,
-          usdtoeur:usdtoeur,
-          color: colorController.text,
-          composition: compositionController.text,
-          washandcare: washandcareController.text,
-          sizeandfit: sizeandfitController.text,
-          xxxsQuantity: int.tryParse(xxxscontroller.text) ?? 0,
-          xxsQuantity: int.tryParse(xxscontroller.text) ?? 0,
-          xsQuantity:  int.tryParse(xscontroller.text )?? 0,
-          sQuantity: int.tryParse(scontroller.text) ?? 0,
-
-          mtoQuantity:  int.tryParse(mtocontroller.text) ?? 0,
-          freesizeQuantity: int.tryParse(freesizecontroller.text) ?? 0,
-          Shoe1:   int.tryParse(Shoe1controller.text) ?? 0,
-          Shoe2:   int.tryParse(Shoe2controller.text) ?? 0,
-          Shoe3:   int.tryParse(Shoe3controller.text) ?? 0,
-          Shoe4:   int.tryParse(Shoe4controller.text) ?? 0,
-
-
-
-        );
-      }
-      else  {
-        createProdInFirestore(
-          shopmediaUrl: shopmediaUrl,
-          Category: value,
-          world:worldship,
-          ship: shipcontroller.text,          gender: dropdownValue,
-          details: detailsController.text,
-          productname: productnameController.text,
-          price: userprice,
-          usdtoinr:usdtoinr,
-          usdtocny:usdtocny,
-          usdtogbp:usdtogbp,
-          usdtoeur:usdtoeur,
-          color: colorController.text,
-          composition: compositionController.text,
-          washandcare: washandcareController.text,
-          sizeandfit: sizeandfitController.text,
-          xxxsQuantity: int.tryParse(xxxscontroller.text) ?? 0,
-          xxsQuantity: int.tryParse(xxscontroller.text) ?? 0,
-          xsQuantity:  int.tryParse(xscontroller.text )?? 0,
-          sQuantity: int.tryParse(scontroller.text) ?? 0,
-
-          mtoQuantity:  int.tryParse(mtocontroller.text) ?? 0,
-          freesizeQuantity:   int.tryParse(freesizecontroller.text) ?? 0,
-          Shoe1:   int.tryParse(Shoe1controller.text) ?? 0,
-          Shoe2:   int.tryParse(Shoe2controller.text) ?? 0,
-          Shoe3:   int.tryParse(Shoe3controller.text) ?? 0,
-          Shoe4:   int.tryParse(Shoe4controller.text) ?? 0,
-
-
-
-
-        );
-      }
-      Navigator.pop(context);
-    }
-
-  }
 
   Widget MenCategory(){
     return
@@ -8450,7 +7228,7 @@ else  if(dropdownValue=='Baby-Boys'||dropdownValue=='Baby-Girls') {
                 if(_formKey.currentState.validate()) {
                   // ignore: unnecessary_statements
                   isUploading ? null : handleSubmit();
-                  Navigator.pop(context);
+                Get.back();
                 }
 
               },
@@ -8477,7 +7255,8 @@ else  if(dropdownValue=='Baby-Boys'||dropdownValue=='Baby-Girls') {
               Column(
                   children: <Widget>[
                   isUploading ? linearProgress() : Text(""),
-   getImageWidget(),
+  // getImageWidget(),
+                    carousel(),
                        Expanded(
                          child: SingleChildScrollView(
                            child: Column(
@@ -8582,7 +7361,7 @@ else  if(dropdownValue=='Baby-Boys'||dropdownValue=='Baby-Girls') {
                      child:   FloatingActionButton.extended(
 backgroundColor: kblue,
                        onPressed: ()=>AddSize(),
-                       label: Text('Select Size',style:TextStyle(color:  Colors.white) ,),
+                       label: Text('Specify Quantity',style:TextStyle(color:  Colors.white) ,),
                      ),
                    ),
       SizedBox(width: 8.0,),Container(
@@ -8785,14 +7564,28 @@ keyboardType:TextInputType.number,
                               },
                         ),
                       ),
-  SizedBox( height: 8.0,), Switch(
-                          value: worldship,
-                          onChanged: (value){setState(() {
-                            worldship = value;
-                          });},
-                          activeColor: Colors.pink,
-                          activeTrackColor: Colors.white,
-                        ), SizedBox( height: 8.0,),
+  SizedBox( height: 8.0,),
+                        Text('Worldwide shipping') ,
+                        SizedBox( height: 8.0,),
+                        Row(
+    children: [
+      Text('No'),
+      SizedBox( width: 8.0,),
+
+      Switch(
+                              value: worldship,
+                              onChanged: (value){setState(() {
+                                worldship = value;
+                              });},
+                              activeColor: Colors.pink,
+                              activeTrackColor: Colors.white,
+                            ),
+      SizedBox( width: 8.0,),
+
+      Text('Yes')
+    ],
+  ),
+                        SizedBox( height: 8.0,),
                   Container(
                     margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
                         child: TextFormField(
@@ -8829,13 +7622,7 @@ keyboardType:TextInputType.number,
                          ),
                        ),
 
-                    (_inProcess)?Container(
-                      color: Colors.white,
-                      height: MediaQuery.of(context).size.height * 0.95,
-                      child: Center(
-                        child: CircularProgressIndicator(),
-                      ),
-                    ):Center()
+
               ],
               ),
 
@@ -8843,14 +7630,7 @@ keyboardType:TextInputType.number,
 
 
             ),
-              (_inProcess)?Container(
 
-                color: Colors.white,
-                height: MediaQuery.of(context).size.height * 0.95,
-                child: Center(
-                  child: CircularProgressIndicator(),
-                ),
-              ):Center(),
               isUploading ? Center(child:  CircularProgressIndicator()) : Text(""),
             ],
           ),
@@ -8859,12 +7639,199 @@ keyboardType:TextInputType.number,
     );
   }
 
+  Future<void> loadAssets() async {
 
+    List<Asset> resultList = List<Asset>();
+    String error = 'No Error Dectected';
+//    ByteData byteData = await asset.getByteData(quality: 80);
+    try {
+
+      resultList = await MultiImagePicker.pickImages(
+
+        maxImages: 100,
+        enableCamera: true,
+        selectedAssets: images,
+        cupertinoOptions: CupertinoOptions(takePhotoIcon: "Images"),
+        materialOptions: MaterialOptions(
+          actionBarColor: "#abcdef",
+          actionBarTitle: "Upload Image",
+          allViewTitle: "All Photos",
+          useDetailsView: false,
+          selectCircleStrokeColor: "#000000",
+
+        ),
+      );
+      print(resultList.length);
+      print((await resultList[0].getThumbByteData(122, 100)));
+      print((await resultList[0].getByteData()));
+      print((await resultList[0].metadata));
+
+    } on Exception catch (e) {
+      error = e.toString();
+    }
+
+    // If the widget was removed from the tree while the asynchronous platform
+    // message was in flight, we want to discard the reply rather than calling
+    // setState to update our non-existent appearance.
+    if (!mounted) return;
+    setState(() {
+      _inProcess = true;
+      images = resultList;
+      _error = error;
+    });
+  }
+
+  Future<dynamic> postImage(Asset imageFile) async {
+//    ByteData byteData = await imageFile.requestOriginal(quality: 75);
+    String fileName = DateTime.now().millisecondsSinceEpoch.toString();
+    Reference reference = FirebaseStorage.instance.ref().child("Shop${prodId}").child("$fileName.jpg");
+    UploadTask uploadTask = reference.putData((await imageFile.getByteData(quality: 70)).buffer.asUint8List());
+    TaskSnapshot storageTaskSnapshot = await uploadTask;
+//    print(storageTaskSnapshot.ref.getDownloadURL());
+    return storageTaskSnapshot.ref.getDownloadURL();
+  }
+  gsd()async{
+    await INRUSD();
+
+  }
+  Future<void> handleSubmit() async {
+    setState(() {
+      isUploading = true;
+    });
+    gsd();
+
+    for ( var imageFile in images) {
+      postImage(imageFile).then((downloadUrl)  {
+        imageUrls.add(downloadUrl.toString());
+        if(imageUrls.length==images.length){
+          String documnetID = DateTime.now().millisecondsSinceEpoch.toString();
+          if(dropdownValue=='Men'){
+            if (currentUser.country == 'Europe'){
+              productsRef
+                  .doc(widget.currentUser.id)
+                  .collection("userProducts")
+                  .doc(prodId)
+                  .set({
+                "indian":indian,
+                "worldship":worldship,
+                "shipment": shipcontroller.text,
+                "prodId": prodId,
+                "ownerId": widget.currentUser.id,
+                "username": widget.currentUser.displayName,
+                "photoUrl": widget.currentUser.photoUrl,
+                "displayName": widget.currentUser.displayName,
+                "shopmediaUrl": imageUrls,
+                "Category": value,
+                // "type":type,
+                "Gender": dropdownValue,
+                "details": detailsController.text,
+                "productname": productnameController.text,
+                "usd": eurtousd.toString(),
+                "cny": eurtocny.toString(),
+                "gbp": eurtogbp.toString(),
+                "eur": userprice.toString(),
+                "inr": eurtoinr.toString(),
+
+                "timestamp": timestamp,
+                "color": colorController.text,
+                "composition": compositionController.text,
+                "washandcare": washandcareController.text,
+                "sizeandfit": sizeandfitController.text,
+                "xxxsQuantity": int.tryParse(xxxscontroller.text) ?? 0,
+                "xxsQuantity": int.tryParse(xxscontroller.text) ?? 0,
+                "xsQuantity":  int.tryParse(xscontroller.text )?? 0,
+                "sQuantity": int.tryParse(scontroller.text) ?? 0,
+
+                "mtoQuantity":  int.tryParse(mtocontroller.text) ?? 0,
+                "freesizeQuantity":   int.tryParse(freesizecontroller.text) ?? 0,
+
+
+                "mQuantity":  int.tryParse(mcontroller.text) ?? 0,
+                "lQuantity":  int.tryParse(lcontroller.text) ?? 0,
+                "xlQuantity":  int.tryParse(xlcontroller.text) ?? 0,
+                "xxlQuantity":  int.tryParse(xxlcontroller.text) ?? 0,
+                "xxxlQuantity":  int.tryParse(xxlcontroller.text) ?? 0,
+                "fourxlQuantity":  int.tryParse(fourxlcontroller.text) ?? 0,
+                "fivexlQuantity":  int.tryParse(fivexlcontroller.text) ?? 0,
+                "sixxlQuantity":  int.tryParse(sixxlcontroller.text) ?? 0,
+                "sevenxlQuantity":  int.tryParse(sevenxlcontroller.text) ?? 0,
+                "eightxlQuantity":  int.tryParse(eightxlcontroller.text) ?? 0,
+                "Shoe1":   int.tryParse(Shoe1controller.text) ?? 0,
+                "Shoe2":   int.tryParse(Shoe2controller.text) ?? 0,
+                "Shoe3":   int.tryParse(Shoe3controller.text) ?? 0,
+                "Shoe4":   int.tryParse(Shoe4controller.text) ?? 0,
+                "Shoe5":   int.tryParse(Shoe5controller.text) ?? 0,
+                "Shoe6":   int.tryParse(Shoe6controller.text) ?? 0,
+                "Shoe7":   int.tryParse(Shoe7controller.text) ?? 0,
+                "Shoe8":   int.tryParse(Shoe8controller.text) ?? 0,
+                "Shoe9":   int.tryParse(Shoe9controller.text) ?? 0,
+                "Shoe10":   int.tryParse(Shoe10controller.text) ?? 0,
+                "Shoe11":   int.tryParse(Shoe11controller.text) ?? 0,
+                "Shoe12":   int.tryParse(Shoe12controller.text) ?? 0,
+                "Shoe13":   int.tryParse(Shoe13controller.text) ?? 0,
+                "Shoe14":   int.tryParse(Shoe14controller.text) ?? 0,
+                "Shoe15":  int.tryParse(Shoe15controller.text) ?? 0,
+                "Shoe16":  int.tryParse(Shoe16controller.text) ?? 0,
+                "Shoe17":  int.tryParse(Shoe17controller.text) ?? 0,
+                "Shoe18":  int.tryParse(Shoe18controller.text) ?? 0,
+                "Shoe19":  int.tryParse(Shoe19controller.text) ?? 0,
+                "Shoe20":  int.tryParse(Shoe20controller.text) ?? 0,
+                "Shoe21":  int.tryParse(Shoe21controller.text) ?? 0,
+
+                "likes": {},
+              });
+
+
+
+              setState(() {
+                file = null;
+                isUploading = false;
+              });
+            }
+
+
+          }
+
+      }
+      }).catchError((err) {
+        print(err);
+        print('rtherjhertjnherj${imageUrls.length}');
+        print('rjertertj${images.length}');
+
+      });
+    }
+    Get.back();
+
+  }
+
+  carousel(){
+
+    return
+      CarouselSlider(
+          options: CarouselOptions(
+            enableInfiniteScroll: false,
+          ),
+          items: images.map((e) => Container(
+            width: 400,
+            height: 400,
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: AssetThumb(
+                asset: e,
+                width: 500,
+                height: 500,
+              ),
+            ),
+          ), ).toList()
+
+      );
+
+  }
   bool get wantKeepAlive => true;
 
   @override
   Widget build(BuildContext context) {
     super.build(context);
-    return file == null ? buildSplashScreen() : builduploadForm();
+    return images.isEmpty ? buildSplashScreen() : builduploadForm();
   }
 }

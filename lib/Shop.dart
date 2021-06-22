@@ -200,7 +200,7 @@ new Tabs(title: "Teen-Girls",color: kPrimaryColor),
                      decoration: BoxDecoration(
                          gradient: fabGradient
                      ) ,
-                     alignment: Alignment.center,
+                  //   alignment: Alignment.center,
                      child: Men()),
 Women(),
                  BabyBoy(),
@@ -219,7 +219,9 @@ Women(),
           backgroundColor: Colors.black38,
           onPressed: (){
             WidgetsBinding.instance.addPostFrameCallback((_){
-              Navigator.push(context, MaterialPageRoute(builder: (context) =>Uploadecom(currentUser: currentUser, )));
+              Navigator.push(context, MaterialPageRoute(builder: (context) =>Uploadecom(currentUser: currentUser, ))) .then((value) {
+                setState(() {});
+              });
             },) ;    } ,
           child: Icon(Icons.add_box),
         ),

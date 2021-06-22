@@ -28,7 +28,7 @@ class ProductTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () => showProduct(context),
-      child: cachedNetworkImage(products.shopmediaUrl),
+      child: cachedNetworkImage(products.shopmediaUrl.first),
     );
   }
 }

@@ -234,8 +234,6 @@ TabController _tabController;
                     ),
                     controller: _tabController,
                     tabs: <Widget>[
-
-
                       FittedBox(
                         fit:BoxFit.fitWidth,
                         child: Text(   'Posts',
@@ -313,43 +311,52 @@ TabController _tabController;
             floatingActionButton: _bottomButtons()
           );
     }
-    Widget _bottomButtons() {
-      if(_tabController.index == 0){return
-        FloatingActionButton(
-          heroTag:'upload',
-          backgroundColor: Colors.black38,
-          onPressed: () async{ Navigator.push(context, MaterialPageRoute(builder: (context) =>Upload(currentUser: currentUser, )));
-// Add your onPressed code here!
-          },
-          child: Icon(Icons.add_a_photo),
-        );}
-     else if(_tabController.index == 1){return
-        FloatingActionButton(
-          heroTag:'uploadcoll',
+_bottomButtons() {
+  if(_tabController.index == 0){return
+    FloatingActionButton(
+      heroTag:'upload',
+      backgroundColor: Colors.black38,
+      onPressed: () async{ Navigator.push(context, MaterialPageRoute(builder: (context) =>Upload(currentUser: currentUser, )))
+          .then((value) {
+        setState(() {});
+      });
+      },
+      child: Icon(Icons.add_a_photo),
+    );}
+  else if(_tabController.index == 1){return
+    FloatingActionButton(
+      heroTag:'uploadcoll',
 
-          backgroundColor: Colors.black38,
-          onPressed: ()
-          async{ Navigator.push(context, MaterialPageRoute(builder: (context) =>UploadColl(currentUser: currentUser)));
-          },
-          child: Icon(Icons.add_box),
-        );}
-       else if(_tabController.index == 2){return
-        FloatingActionButton(
-          heroTag:'uploadblog',
+      backgroundColor: Colors.black38,
+      onPressed: ()
+      async{ Navigator.push(context, MaterialPageRoute(builder: (context) =>UploadColl(currentUser: currentUser)))
+          .then((value) {
+        setState(() {});
+      });
+      },
+      child: Icon(Icons.add_box),
+    );}
+  else if(_tabController.index == 2){return
+    FloatingActionButton(
+      heroTag:'uploadblog',
 
-          backgroundColor: Colors.black38,
-          onPressed: ()async{
-            { Navigator.push(context, MaterialPageRoute(builder: (context) =>UploadEdit(currentUser: currentUser)));
-            };
+      backgroundColor: Colors.black38,
+      onPressed: ()async{
+        { Navigator.push(context, MaterialPageRoute(builder: (context) =>UploadEdit(currentUser: currentUser)))
+            .then((value) {
+          setState(() {});
+        });
 
-            // Get.to(UploadEdit(currentUser: currentUser));
-          },
-          // async{ Navigator.push(context, MaterialPageRoute(builder: (context) =>UploadEdit(currentUser: currentUser)));
-          // },
-          child: Icon(Icons.add_box),
-        );}
+        };
 
-    }
+        // Get.to(UploadEdit(currentUser: currentUser));
+      },
+      // async{ Navigator.push(context, MaterialPageRoute(builder: (context) =>UploadEdit(currentUser: currentUser)));
+      // },
+      child: Icon(Icons.add_box),
+    );}
+
+}
   }
 
 
@@ -361,6 +368,7 @@ class Collection extends StatelessWidget {
       itemBuilderType:
       PaginateBuilderType.listView,
       itemBuilder: (index, context, documentSnapshot)  {
+        List image = documentSnapshot.data()['collmediaUrl'];
         return new  FutureBuilder(
           future: usersRef.doc( documentSnapshot.data()['ownerId']).get(),
           builder: (context, snapshot) {
@@ -420,7 +428,7 @@ class Collection extends StatelessWidget {
                         width: MediaQuery.of(context).size.width,
                         child:
                         CachedNetworkImage(
-                          imageUrl:  documentSnapshot.data()['headerImage'],
+                          imageUrl:  image.first,
                         )
                     ),
                   ),

@@ -1,4 +1,5 @@
 import 'package:fashow/model/addressbuynow.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:paginate_firestore/paginate_firestore.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -30,6 +31,7 @@ pics({String userid,String prodid}){
         future:     productsRef
             .doc(userid)
             .collection('userProducts')
+
             .where('prodId' ,isEqualTo: '$prodid')
         // .where('ownerId' ,isEqualTo: '$ownerId')
             .get(),
@@ -37,6 +39,7 @@ pics({String userid,String prodid}){
 
           if (snapshot.hasData) {
             return new ListView.builder(
+              physics:NeverScrollableScrollPhysics(),
                 shrinkWrap: true,
                 scrollDirection:Axis.vertical,
                 itemCount: snapshot.data.docs.length,
@@ -48,8 +51,32 @@ pics({String userid,String prodid}){
                       snapshot.data.docs[index].data()['shopmediaUrl']
                           .length;
                   i++) {
-                    listOfImages.add(CachedNetworkImage(imageUrl:snapshot
-                        .data.docs[index].data()['shopmediaUrl'][i]));
+                    listOfImages.add(GestureDetector(
+                      onTap: (){
+                        showDialog<void>(
+                          context: context,
+                          // useRootNavigator:true,
+
+                          barrierDismissible: true,
+                          // false = user must tap button, true = tap outside dialog
+                          builder: (BuildContext dialogContext) {
+                            return
+                              Dialog(
+
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(20),),
+                                child: Container(
+                                  height: 400,
+                                  child:PhotoView(imageProvider: CachedNetworkImageProvider
+                                    (snapshot
+                                      .data.docs[index].data()['shopmediaUrl'][i])),),
+                              );
+                          },
+                        );
+},
+                      child: CachedNetworkImage(imageUrl:snapshot
+                          .data.docs[index].data()['shopmediaUrl'][i]),
+                    ));
                   }
                   return Column(
                     children: <Widget>[
@@ -65,9 +92,13 @@ pics({String userid,String prodid}){
                               .width,
                           child:
                           CarouselSlider(
-                              items: listOfImages,
+
+                            //  items: listOfImages.map((e) { return Builder(builder: (BuildContext context){ return Container();});}),
+                                items: listOfImages,
                               options: CarouselOptions(
-                                height: 500,
+
+                                pauseAutoPlayOnManualNavigate: true,
+                                pauseAutoPlayOnTouch: true,
                                 aspectRatio: 16/9,
                                 viewportFraction: 0.8,
                                 initialPage: 0,
@@ -9573,7 +9604,7 @@ TeenSizes(){
         "cny":cny,
         "gbp":gbp,
         "productname": productname,
-        "shopmediaUrl": shopmediaUrl,
+        "shopmediaUrl": shopmediaUrl.first,
       });
       setState(() {
 
@@ -9711,7 +9742,7 @@ isLive: true,
                         borderRadius: BorderRadius.only
                           (bottomLeft: Radius.circular(20.0),bottomRight: Radius.circular(20.0)),
                         child: Container(
-                            height: MediaQuery.of(context).size.height * 0.65,
+                           // height: MediaQuery.of(context).size.height * 0.65,
 
                             width:     MediaQuery.of(context).size.width,
                             child: pics(userid:ownerId,prodid:prodId))),
@@ -9928,7 +9959,7 @@ isLive: true,
                   ),
 
                 ],
-              ):null,
+              ):Text(''),
 
               ListTileTheme(
                 tileColor:trans,
@@ -10101,7 +10132,7 @@ posteurope(){
                         borderRadius: BorderRadius.only
                           (bottomLeft: Radius.circular(20.0),bottomRight: Radius.circular(20.0)),
                         child: Container(
-                            height: MediaQuery.of(context).size.height * 0.65,
+                          //  height: MediaQuery.of(context).size.height * 0.65,
 
                             width:     MediaQuery.of(context).size.width,
                             child: pics(userid:ownerId,prodid:prodId))),
@@ -10316,7 +10347,7 @@ posteurope(){
                   ),
 
                 ],
-              ):null,
+              ):Text(''),
 
               ListTileTheme(
                 tileColor:trans,
@@ -10488,7 +10519,7 @@ postuk(){
                         borderRadius: BorderRadius.only
                           (bottomLeft: Radius.circular(20.0),bottomRight: Radius.circular(20.0)),
                         child: Container(
-                            height: MediaQuery.of(context).size.height * 0.65,
+                    //        height: MediaQuery.of(context).size.height * 0.65,
 
                             width:     MediaQuery.of(context).size.width,
                             child: pics(userid:ownerId,prodid:prodId))),
@@ -10706,7 +10737,7 @@ postuk(){
                   ),
 
                 ],
-              ):null,
+              ):Text(''),
 
               ListTileTheme(
                 tileColor:trans,
@@ -10878,7 +10909,7 @@ postusa() {
                         borderRadius: BorderRadius.only
                           (bottomLeft: Radius.circular(20.0),bottomRight: Radius.circular(20.0)),
                         child: Container(
-                            height: MediaQuery.of(context).size.height * 0.65,
+                           // height: MediaQuery.of(context).size.height * 0.65,
 
                             width:     MediaQuery.of(context).size.width,
                             child: pics(userid:ownerId,prodid:prodId))),
@@ -11096,7 +11127,7 @@ postusa() {
                   ),
 
                 ],
-              ):null,
+              ):Text(''),
 
               ListTileTheme(
                 tileColor:trans,
@@ -11300,7 +11331,10 @@ postusa() {
       }
     });
     // delete uploaded image for the post
-    storageRef.child("prod_$prodId.jpg").delete();
+   // storageRef.child("prod_$prodId.jpg").delete();
+    for ( var imageFile in shopmediaUrl) {
+      var photo =  FirebaseStorage.instance.refFromURL(imageFile) ;
+      await photo.delete();}
     // then delete all activity feed notifications
     QuerySnapshot activityFeedSnapshot = await activityFeedRef
         .doc(ownerId)
@@ -11313,9 +11347,8 @@ postusa() {
       }
     });
     // then delete all comments
-    QuerySnapshot commentsSnapshot = await productcommentsRef
-        .doc(prodId)
-        .collection('comments')
+    QuerySnapshot commentsSnapshot = await FirebaseFirestore.instance.collection('Reviews').doc(prodId)
+        .collection('prodReviews')
         .get();
     commentsSnapshot.docs.forEach((doc) {
       if (doc.exists) {
@@ -11398,7 +11431,7 @@ postusa() {
         "userId": ownerId,
         "userProfileImg": currentUser.photoUrl,
         "postId": prodId,
-        "mediaUrl": shopmediaUrl,
+        "mediaUrl": shopmediaUrl.first,
         "timestamp": timestamp,
       });
     }

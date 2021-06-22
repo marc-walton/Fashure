@@ -713,7 +713,7 @@ class _EditProfileState extends State<EditProfile> {
                                         tristate: false,
                                       ),
                                       CheckboxListTile(
-                                        title: Text('Blogger',style: TextStyle(color: Colors.white), ),
+                                        title: Text('Content writer',style: TextStyle(color: Colors.white), ),
                                         value: isCheckedBlogger,
                                         onChanged: (value){toggleStylist(value);},
                                         activeColor: Colors.pink,

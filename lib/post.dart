@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:fashow/user.dart';
@@ -10,13 +11,122 @@ import 'package:fashow/ActivityFeed.dart';
 import 'package:fashow/custom_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:fashow/comments.dart';
+import 'package:carousel_slider/carousel_slider.dart';
+import 'package:photo_view/photo_view.dart';
+List <Widget>listOfImages = <Widget>[];
+String media;
+pics({String userid,String prodid}){
+  return
+    FutureBuilder<QuerySnapshot> (
+        future:     postsRef
+            .doc(userid)
+            .collection('userPosts')
+
+            .where('postId' ,isEqualTo: '$prodid')
+        // .where('ownerId' ,isEqualTo: '$ownerId')
+            .get(),
+        builder: (context, snapshot) {
+
+          if (snapshot.hasData) {
+            return new ListView.builder(
+                physics:NeverScrollableScrollPhysics(),
+
+                shrinkWrap: true,
+                scrollDirection:Axis.vertical,
+                itemCount: snapshot.data.docs.length,
+                itemBuilder: (BuildContext context, int index) {
+
+                  // List<String> images = List.from(snapshot.data.docs[index].data()['collmediaUrl']);
+                  listOfImages = [];
+                  for (int i = 0;
+                  i <
+                      snapshot.data.docs[index].data()['mediaUrl']
+                          .length;
+                  i++) {
+                    listOfImages.add(GestureDetector(
+                      onTap: (){
+                        showDialog<void>(
+                          context: context,
+                          // useRootNavigator:true,
+
+                          barrierDismissible: true,
+                          // false = user must tap button, true = tap outside dialog
+                          builder: (BuildContext dialogContext) {
+
+                            return
+                              Dialog(
+
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(20),),
+                                child: Container(
+                                  height: 400,
+                                  child:PhotoView(imageProvider: CachedNetworkImageProvider
+                                    (snapshot
+                                      .data.docs[index].data()['mediaUrl'][i])),),
+                              );
+                          },
+                        );
+
+                       },
+                      child: CachedNetworkImage(imageUrl:snapshot
+                          .data.docs[index].data()['mediaUrl'][i]),
+                    ));
+                  }
+                  return Column(
+                    children: <Widget>[
+                      Container(
+                          margin: EdgeInsets.all(10.0),
+
+                          decoration: BoxDecoration(
+                            color: Colors.transparent,
+                          ),
+                          width: MediaQuery
+                              .of(context)
+                              .size
+                              .width,
+                          child:
+                          CarouselSlider(
+                            //  items: listOfImages.map((e) { return Builder(builder: (BuildContext context){ return Container();});}),
+                              items: listOfImages,
+                              options: CarouselOptions(
+                                height: 400,
+                                aspectRatio: 16/9,
+                                viewportFraction: 0.8,
+                                initialPage: 0,
+                                enableInfiniteScroll: true,
+                                reverse: false,
+                                autoPlay: true,
+                                autoPlayInterval: Duration(seconds: 3),
+                                autoPlayAnimationDuration: Duration(milliseconds: 800),
+                                autoPlayCurve: Curves.fastOutSlowIn,
+                                enlargeCenterPage: true,
+                                pauseAutoPlayOnManualNavigate: true,
+                                pauseAutoPlayOnTouch: true,
+                                // onPageChanged: callbackFunction,
+                                scrollDirection: Axis.horizontal,
+                              )
+                          )
+                      ),
+
+                    ],
+                  );
+                }
+            );
+          }
+          return Center(
+            child: CircularProgressIndicator(),
+          );
+
+        });
+
+}
 class Post extends StatefulWidget {
   final String postId;
   final String ownerId;
   final String username;
   final String location;
   final String description;
-  final String mediaUrl;
+  final List mediaUrl;
   final dynamic likes;
 
   Post({
@@ -36,7 +146,7 @@ class Post extends StatefulWidget {
       username: doc.data()['username'],
       location: doc.data()['location'],
       description: doc.data()['description'],
-      mediaUrl: doc.data()['mediaUrl'],
+    mediaUrl: doc.data()['mediaUrl'],
       likes: doc.data()['likes'],
     );
   }
@@ -76,7 +186,7 @@ class _PostState extends State<Post> {
   final String username;
   final String location;
   final String description;
-  final String mediaUrl;
+  final List mediaUrl;
   int likeCount;
   Map likes;
   bool isLiked;
@@ -142,7 +252,11 @@ class _PostState extends State<Post> {
       }
     });
     // delete uploaded image for the post
-    storageRef.child("post_$postId.jpg").delete();
+//    storageRef.child("postnow${postId}").delete();
+
+    for ( var imageFile in mediaUrl) {
+    var photo =  FirebaseStorage.instance.refFromURL(imageFile) ;
+    await photo.delete();}
     // then delete all activity feed notifications
     QuerySnapshot activityFeedSnapshot = await activityFeedRef
         .doc(ownerId)
@@ -211,7 +325,7 @@ class _PostState extends State<Post> {
         "userId": currentUser.id,
         "userProfileImg": currentUser.photoUrl,
         "postId": postId,
-        "mediaUrl": mediaUrl,
+        "mediaUrl": mediaUrl.first,
         "timestamp": timestamp,
         "read": 'false',
       });
@@ -241,7 +355,7 @@ class _PostState extends State<Post> {
         .collection("userReports")
         .doc(postId)
         .set({
-      "type": "shop",
+      "type": "post",
       "userId": ownerId,
       "postId": postId,
       "timestamp": timestamp,
@@ -331,7 +445,7 @@ class _PostState extends State<Post> {
         children: <Widget>[
 //          Text('text',style: TextStyle(color: kText),),
         ClipRRect(borderRadius: BorderRadius.circular(20.0),
-            child: cachedNetworkImage(mediaUrl)),
+            child: pics(userid:ownerId,prodid: postId)),
 
 //           products(),
 
@@ -394,7 +508,7 @@ class _PostState extends State<Post> {
                      context,
                      postId: postId,
                      ownerId: ownerId,
-                     mediaUrl: mediaUrl,
+                     mediaUrl: mediaUrl.first,
                    ),
                    child: Icon(
                      Icons.chat,
@@ -405,15 +519,7 @@ class _PostState extends State<Post> {
 
                ],
              ),
-             Container(
-               height: 400,
-               child: Column(
-//                 shrinkWrap: true,
-                 children: <Widget>[
-Comments(postId: postId,postMediaUrl: mediaUrl,postOwnerId: ownerId,)
-                 ],
-               ),
-             ),
+
 //            SizedBox( height:10.0,),
 
            ],

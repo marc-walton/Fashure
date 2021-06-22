@@ -1,3 +1,4 @@
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 import 'package:fashow/collcomments.dart';
@@ -15,6 +16,7 @@ import 'package:fashow/custom_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:fashow/Product_screen.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:photo_view/photo_view.dart';
 List <Widget>listOfImages = <Widget>[];
 class Coll extends StatefulWidget {
   final String collId;
@@ -43,7 +45,7 @@ int index;
   factory Coll.fromDocument(DocumentSnapshot doc) {
 
     return Coll(
-      headerImage:doc.data()['headerImage'],
+     headerImage:doc.data()['headerImage'],
       collId: doc.data()['collId'],
       ownerId: doc.data()['ownerId'],
       username: doc.data()['username'],
@@ -165,8 +167,9 @@ print(collmediaUrl);
       }
     });
     // delete uploaded image for the post
-    storageRef.child("coll$collId.jpg").delete();
-    storageRef.child("colle_$collId.jpg").delete();
+    for ( var imageFile in collmediaUrl) {
+      var photo =  FirebaseStorage.instance.refFromURL(imageFile) ;
+      await photo.delete();}
     // then delete all activity feed notifications
     QuerySnapshot activityFeedSnapshot = await activityFeedRef
         .doc(ownerId)
@@ -238,7 +241,7 @@ print(collmediaUrl);
         "userId": ownerId,
         "userProfileImg": currentUser.photoUrl,
         "postId": collId,
-       "mediaUrl": headerImage,
+       "mediaUrl": collmediaUrl.first,
         "timestamp": timestamp,
         "read":'false'
       });
@@ -268,7 +271,7 @@ print(collmediaUrl);
         .collection("userReports")
         .doc(collId)
         .set({
-      "type": "shop",
+      "type": "COLL",
       "userId": ownerId,
       "postId": collId,
       "timestamp": timestamp,
@@ -286,7 +289,9 @@ return
           builder: (context, snapshot) {
             if (snapshot.hasData) {
               return new ListView.builder(
-                shrinkWrap: true,
+                  physics:NeverScrollableScrollPhysics(),
+
+                  shrinkWrap: true,
                   scrollDirection:Axis.vertical,
                   itemCount: snapshot.data.docs.length,
                   itemBuilder: (BuildContext context, int index) {
@@ -297,8 +302,31 @@ return
                         snapshot.data.docs[index].data()['collmediaUrl']
                             .length;
                     i++) {
-                      listOfImages.add(CachedNetworkImage(imageUrl:snapshot
-                          .data.docs[index].data()['collmediaUrl'][i]));
+                      listOfImages.add(GestureDetector(
+                        onTap: (){
+                          showDialog<void>(
+                            context: context,
+                            // useRootNavigator:true,
+
+                            barrierDismissible: true,
+                            // false = user must tap button, true = tap outside dialog
+                            builder: (BuildContext dialogContext) {
+                              return
+                                Dialog(
+
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(20),),
+                                  child: Container(
+                                    height: 400,
+                                    child:PhotoView(imageProvider: CachedNetworkImageProvider
+                                      (snapshot
+                                        .data.docs[index].data()['shopmediaUrl'][i])),),
+                                );
+                            },
+                          );
+                        },                        child: CachedNetworkImage(imageUrl:snapshot
+                            .data.docs[index].data()['collmediaUrl'][i]),
+                      ));
                     }
                     return Column(
                       children: <Widget>[
@@ -316,7 +344,7 @@ return
                           CarouselSlider(
                               items: listOfImages,
                               options: CarouselOptions(
-                                height: 500,
+                                height: 400,
                                 aspectRatio: 16/9,
                                 viewportFraction: 0.8,
                                 initialPage: 0,

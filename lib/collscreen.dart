@@ -16,6 +16,8 @@ class CollScreen extends StatelessWidget {
     return StreamBuilder(
       stream: collRef
 
+          .doc(userId)
+      .collection('userCollections')
           .doc(collId)
           .snapshots(),
       builder: (context, snapshot) {

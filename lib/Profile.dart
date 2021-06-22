@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fashow/chat_screen.dart';
 import 'package:fashow/clientreview.dart';
+import 'package:fashow/colltile.dart';
 import 'package:fashow/model/user_model.dart';
 import 'package:fashow/Constants.dart';
 import 'package:sizer/sizer.dart';
@@ -74,11 +75,6 @@ UserModel receiverId;
   @override
   void initState() {
     super.initState();
-    getProducts();
-    getProfilePosts();
-    getProfileColl();
-    getProfileBlog();
-    getProfileProds();
 
     getFollowers();
     getFollowing();
@@ -153,51 +149,7 @@ photoUrl: peerAvatar,
       followingCount = snapshot.docs.length;
     });
   }
-  getProducts()async {
-    setState(() {
-      isLoading = true;
-    });
-    QuerySnapshot snapshot = await productsRef
-        .doc(widget.profileId)
-        .collection('userProducts')
-        .orderBy('timestamp', descending: true)
-        .get();
-    setState(() {
-      isLoading = false;
-      shopCount = snapshot.docs.length;
-      products = snapshot.docs.map((doc) => Prod.fromDocument(doc)).toList();
-    });
-  }
-  getColls()async {
-    setState(() {
-      isLoading = true;
-    });
-    QuerySnapshot snapshot = await collRef
-        .doc(widget.profileId)
-        .collection('userCollections')
-        .orderBy('timestamp', descending: true)
-        .get();
-    setState(() {
-      isLoading = false;
-      collCount = snapshot.docs.length;
-      collection = snapshot.docs.map((doc) => Coll.fromDocument(doc)).toList();
-    });
-  }
-   getEditorial()async {
-    setState(() {
-      isLoading = true;
-    });
-    QuerySnapshot snapshot = await blogRef
-        .doc(widget.profileId)
-        .collection('userBlog')
-        .orderBy('timestamp', descending: true)
-        .get();
-    setState(() {
-      isLoading = false;
-      blogCount = snapshot.docs.length;
-      blogs = snapshot.docs.map((doc) => Blog.fromDocument(doc)).toList();
-    });
-  }
+
 
 getPosts(){
 
@@ -210,41 +162,62 @@ return
         .snapshots(),
 //       ignore: missing_return
       builder:(context,snapshot) {
+      if(!snapshot.hasData){ return Container(
+//        color: kSecondaryColor,
+        child: Padding(
+          padding: EdgeInsets.only(top: 150.0,left:110),
+          child: Text(
+            "No Posts",
+            style: TextStyle(
+              color: Colors.redAccent,
+              fontSize: 40.0,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        ),
+      );}
+      else {
+        return
+          Container(
+            height: 400,
+            child: GridView.builder(
 
-      return
-        GridView.builder(
+                primary: false,
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: (MediaQuery
+                        .of(context)
+                        .orientation == Orientation.portrait) ? 3 : 3),
+                itemCount: snapshot.data.docs.length,
+                itemBuilder: (context, index) {
+                  DocumentSnapshot docSnapshot = snapshot.data.docs[index];
+                  List image = snapshot.data.docs[index]["mediaUrl"];
+                  return
 
-        primary: false,
-            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: (MediaQuery.of(context).orientation == Orientation.portrait) ? 3 : 3),
-            itemCount: snapshot.data.docs.length,
-            itemBuilder: (context, index) {
-              DocumentSnapshot docSnapshot = snapshot.data.docs[index];
-              return
-
-                Padding(
-                    padding: EdgeInsets.all(5.0),
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(20.0),
-                      child: GestureDetector(
-                          onTap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) =>
-                                    PostScreen(
-                                      postId: docSnapshot["postId"],
-                                      userId: docSnapshot["ownerId"],
-                                    ),
-                              ),
-                            );
-                          },
-                          child: CachedNetworkImage(
-                            imageUrl: docSnapshot["mediaUrl"],)
-                      ),
-                    )
-                );
-            });
+                    Padding(
+                        padding: EdgeInsets.all(5.0),
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(20.0),
+                          child: GestureDetector(
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) =>
+                                        PostScreen(
+                                          postId: docSnapshot["postId"],
+                                          userId: docSnapshot["ownerId"],
+                                        ),
+                                  ),
+                                );
+                              },
+                              child: CachedNetworkImage(
+                                imageUrl: image.first,)
+                          ),
+                        )
+                    );
+                }),
+          );
+      }
         }
 
   );
@@ -260,149 +233,180 @@ return
         .snapshots(),
 //       ignore: missing_return
       builder:(context,snapshot) {
-
-      return
-        ListView.builder(
-
-        primary: false,
-            itemCount: snapshot.data.docs.length,
-            itemBuilder: (context, index) {
-              DocumentSnapshot docSnapshot = snapshot.data.docs[index];
-              return
-
-                Padding(
-                    padding: EdgeInsets.all(5.0),
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(20.0),
-                      child: GestureDetector(
-                          onTap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) =>
-                                    CollScreen(
-                                      collId: docSnapshot["collId"],
-                                      userId: docSnapshot["ownerId"],
-                                    ),
-                              ),
-                            );
-                          },
-                          child:   Column(
-                            children: <Widget>[
-                              Container(
-                                margin: EdgeInsets.all(10.0),
-                                height: MediaQuery.of(context).size.width/2,
-                                decoration: BoxDecoration(
-                                  color: Colors.white,
-                                ),
-                                width: MediaQuery.of(context).size.width,
-                                child:
-                                  CachedNetworkImage(imageUrl: docSnapshot["headerImage"],)
-                                // Carousel(
-                                //
-                                //     boxFit: BoxFit.cover,
-                                //     images: docSnapshot["collmediaUrl"][index],
-                                //     autoplay: false,
-                                //     indicatorBgPadding: 5.0,
-                                //     dotPosition: DotPosition.bottomCenter,
-                                //     animationCurve: Curves.fastOutSlowIn,
-                                //     animationDuration:
-                                //     Duration(milliseconds: 2000)),
-                              ),
-                              Container(
-                                height: 1,
-                                width: MediaQuery.of(context).size.width,
-                                color: Colors.red,
-                              )
-                            ],
-                          ),
-                      ),
-                    )
-                );
-            });
+        if (!snapshot.hasData) {
+          return Container(
+//        color: kSecondaryColor,
+            child: Padding(
+              padding: EdgeInsets.only(top: 150.0, left: 110),
+              child: Text(
+                "No Posts",
+                style: TextStyle(
+                  color: Colors.redAccent,
+                  fontSize: 40.0,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+          );
         }
+        else {
+          return
+            ListView.builder(
 
+                primary: false,
+                itemCount: snapshot.data.docs.length,
+                itemBuilder: (context, index) {
+                  DocumentSnapshot docSnapshot = snapshot.data.docs[index];
+                  List image = snapshot.data.docs[index]["collmediaUrl"];
+
+                  return
+
+                    Padding(
+                        padding: EdgeInsets.all(5.0),
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(20.0),
+                          child: GestureDetector(
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) =>
+                                      CollScreen(
+                                        collId: docSnapshot["collId"],
+                                        userId: docSnapshot["ownerId"],
+                                      ),
+                                ),
+                              );
+                            },
+                            child: Column(
+                              children: <Widget>[
+                                Text(docSnapshot["title"]),
+                                Container(
+                                    margin: EdgeInsets.all(10.0),
+                                    height: MediaQuery
+                                        .of(context)
+                                        .size
+                                        .width / 2,
+                                    decoration: BoxDecoration(
+                                      color: Colors.white,
+                                    ),
+                                    width: MediaQuery
+                                        .of(context)
+                                        .size
+                                        .width,
+                                    child:
+                                    CachedNetworkImage(
+                                      imageUrl: image.first,)
+
+                                ),
+                                Container(
+                                  height: 1,
+                                  width: MediaQuery
+                                      .of(context)
+                                      .size
+                                      .width,
+                                  color: Colors.red,
+                                )
+                              ],
+                            ),
+                          ),
+                        )
+                    );
+                });
+        }
+      }
   );
 }
 geteditorial(){
-  setState(() {
-    isLoading = true;
-  });
+
 return
   StreamBuilder(
-    stream: collRef
+    stream: blogRef
         .doc(widget.profileId)
-        .collection('userBlogs')
+        .collection('userBlog')
         .orderBy('timestamp', descending: true)
         .snapshots(),
 //       ignore: missing_return
       builder:(context,snapshot) {
-        setState(() {
-          isLoading = false;
-          collCount = snapshot.data.length;
-          collection = snapshot.data.map((doc) => Post.fromDocument(doc)).toList();
-        });
-      return
-        ListView.builder(
-
-        primary: false,
-            itemCount: snapshot.data.docs.length,
-            itemBuilder: (context, index) {
-              DocumentSnapshot docSnapshot = snapshot.data.docs[index];
-              return
-
-                Padding(
-                    padding: EdgeInsets.all(5.0),
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(20.0),
-                      child: GestureDetector(
-                          onTap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) =>
-                                    BlogScreen(
-                                      blogId: docSnapshot["blogId"],
-                                      userId: docSnapshot["ownerId"],
-                                    ),
-                              ),
-                            );
-                          },
-                          child:   Column(
-                            children: <Widget>[
-                              Container(
-                                margin: EdgeInsets.all(10.0),
-                                height: MediaQuery.of(context).size.width/2,
-                                decoration: BoxDecoration(
-                                  color: Colors.white,
-                                ),
-                                width: MediaQuery.of(context).size.width,
-                                child:
-                                  CachedNetworkImage(imageUrl: docSnapshot["blogmediaUrl"],)
-                                // Carousel(
-                                //
-                                //     boxFit: BoxFit.cover,
-                                //     images: docSnapshot["collmediaUrl"][index],
-                                //     autoplay: false,
-                                //     indicatorBgPadding: 5.0,
-                                //     dotPosition: DotPosition.bottomCenter,
-                                //     animationCurve: Curves.fastOutSlowIn,
-                                //     animationDuration:
-                                //     Duration(milliseconds: 2000)),
-                              ),
-                              Container(
-                                height: 1,
-                                width: MediaQuery.of(context).size.width,
-                                color: Colors.red,
-                              )
-                            ],
-                          ),
-                      ),
-                    )
-                );
-            });
+        if (!snapshot.hasData) {
+          return Container(
+//        color: kSecondaryColor,
+            child: Padding(
+              padding: EdgeInsets.only(top: 150.0, left: 110),
+              child: Text(
+                "No Posts",
+                style: TextStyle(
+                  color: Colors.redAccent,
+                  fontSize: 40.0,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+          );
         }
+        else {
+          return
+            ListView.builder(
 
+                primary: false,
+                itemCount: snapshot.data.docs.length,
+                itemBuilder: (context, index) {
+                  DocumentSnapshot docSnapshot = snapshot.data.docs[index];
+                  return
+
+                    Padding(
+                        padding: EdgeInsets.all(5.0),
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(20.0),
+                          child: GestureDetector(
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) =>
+                                      BlogScreen(
+                                        blogId: docSnapshot["blogId"],
+                                        userId: docSnapshot["ownerId"],
+                                      ),
+                                ),
+                              );
+                            },
+                            child: Column(
+                              children: <Widget>[
+                                Text(docSnapshot["title"]),
+                                Container(
+                                    margin: EdgeInsets.all(10.0),
+                                    height: MediaQuery
+                                        .of(context)
+                                        .size
+                                        .width / 2,
+                                    width: MediaQuery
+                                        .of(context)
+                                        .size
+                                        .width,
+                                    child:
+                                    CachedNetworkImage(
+                                      imageUrl: docSnapshot["blogmediaUrl"],)
+                                  // Carousel(
+                                  //
+                                  //     boxFit: BoxFit.cover,
+                                  //     images: docSnapshot["collmediaUrl"][index],
+                                  //     autoplay: false,
+                                  //     indicatorBgPadding: 5.0,
+                                  //     dotPosition: DotPosition.bottomCenter,
+                                  //     animationCurve: Curves.fastOutSlowIn,
+                                  //     animationDuration:
+                                  //     Duration(milliseconds: 2000)),
+                                ),
+                                Divider(),
+                              ],
+                            ),
+                          ),
+                        )
+                    );
+                });
+        }
+      }
   );
 }
 
@@ -417,7 +421,21 @@ return
         .snapshots(),
 //       ignore: missing_return
       builder:(context,snapshot) {
-
+        if(!snapshot.hasData){ return Container(
+//        color: kSecondaryColor,
+          child: Padding(
+            padding: EdgeInsets.only(top: 150.0,left:110),
+            child: Text(
+              "No Posts",
+              style: TextStyle(
+                color: Colors.redAccent,
+                fontSize: 40.0,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ),
+        );}
+else{
       return
         GridView.builder(
 
@@ -427,7 +445,7 @@ return
             itemCount: snapshot.data.docs.length,
             itemBuilder: (context, index) {
               DocumentSnapshot docSnapshot = snapshot.data.docs[index];
-              List shop = docSnapshot["shopmediaUrl"];
+              List shop = snapshot.data.docs[index]["collmediaUrl"];
               return
 
                 Padding(
@@ -452,7 +470,7 @@ return
                       ),
                     )
                 );
-            });
+            });}
         }
 
   );
@@ -605,21 +623,7 @@ return
           ),
         ),
       );
-    } else  {
-      List<GridTile> gridTiles = [];
-      posts.forEach((post) {
-        gridTiles.add(GridTile(child: PostTile(post)));
-      });
-      return GridView.count(
-        crossAxisCount: 3,
-        childAspectRatio: 1.0,
-        mainAxisSpacing: 1.5,
-        crossAxisSpacing: 1.5,
-        shrinkWrap: true,
-        physics: NeverScrollableScrollPhysics(),
-        children: gridTiles,
-      );
-    }
+    } else getPosts();
   }
 
   buildColls(){
@@ -641,8 +645,19 @@ return
         ),
       );
     } else{
-      return
-        collection.toList();
+      List<GridTile> gridTiles = [];
+      collection.forEach((collection) {
+        gridTiles.add(GridTile(child: CollTile(collection)));
+      });
+      return GridView.count(
+        crossAxisCount: 3,
+        childAspectRatio: 1.0,
+        mainAxisSpacing: 1.5,
+        crossAxisSpacing: 1.5,
+        shrinkWrap: true,
+        physics: NeverScrollableScrollPhysics(),
+        children: gridTiles,
+      );
     }
   }
   buildEditorial(){
@@ -1250,13 +1265,13 @@ SizedBox(height: 10.0,),
                         child: TabBarView(
                           children: <Widget>[
                             Container(
-                              child:buildPosts(),
+                              child:getPosts(),
                             ),  Container(
-                              child: buildProducts(),
+                              child: getProds(),
                             ),Container(
-                              child: buildColls(),
+                              child: getcollections(),
                             ),Container(
-                              child: buildEditorial(),
+                              child: geteditorial(),
                             ),
                           ],
                         ),

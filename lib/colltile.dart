@@ -28,7 +28,7 @@ class CollTile extends StatelessWidget {
       onTap: () => showBlog(context),
       child: ClipRRect(
           borderRadius: BorderRadius.circular(20.0),
-          child: cachedNetworkImage(coll.collmediaUrl)),
+          child: cachedNetworkImage(coll.collmediaUrl.first)),
     );
   }
 }
