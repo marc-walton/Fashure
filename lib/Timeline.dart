@@ -7,7 +7,7 @@ import 'package:fashow/custom_image.dart';
 import 'package:fashow/upload_editorial.dart';
 import 'package:fashow/Constants.dart';
 import 'package:flutter/material.dart';
-//import 'package:flutter_svg/svg.dart';
+import 'dart:convert';
 import 'package:fashow/post.dart';
 import 'package:fashow/blog_sceen.dart';
 import 'package:fashow/collscreen.dart';
@@ -21,6 +21,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:fashow/progress.dart';
 import 'package:fashow/HomePage.dart';
 import 'package:fashow/ActivityFeed.dart';
+import 'package:http/http.dart' as http;
 
 import 'package:paginate_firestore/paginate_firestore.dart';
 import 'package:get/get.dart';
@@ -83,6 +84,7 @@ TabController _tabController;
     List<String> foollowingList = [];
 
    List timelinePosts = [];
+   List body;
 
     @override
     void initState() {
@@ -202,8 +204,37 @@ TabController _tabController;
         },
       );
     }
+DF(){
+      print("gchh vcmhc$body");
+  return ListView.builder(
+    itemCount: body == null ? 0 : body.length,
+    itemBuilder: (BuildContext context, int index){
+      print(body[index]["rate_id"]);
+      if(body == null){
+        return Text('nulllll');
+      }
+      else{
+      return new Card(
+        child: new Text(body[index]["rate_id"]),
+      );}
+    },
+  );
+}
+ shopment() async {
+  var headers = {
+    'API-Key': 'TEST_f+y9/tHG+yVxEq3uS3H1ogfezHSCWSq5MsIXUOnIV+Q',
+    'Content-Type': 'application/json',
+  };
 
+  var data = '{ "rate_options": { "carrier_ids": [ "se-634124" ] }, "shipment": { "validate_address": "no_validation", "ship_to": { "name": "Amanda Miller", "phone": "555-555-5555", "address_line1": "525 S Winchester Blvd", "city_locality": "San Jose", "state_province": "CA", "postal_code": "95128", "country_code": "US", "address_residential_indicator": "yes" }, "ship_from": { "company_name": "Example Corp.", "name": "John Doe", "phone": "111-111-1111", "address_line1": "4009 Marathon Blvd", "address_line2": "Suite 300", "city_locality": "Austin", "state_province": "TX", "postal_code": "78756", "country_code": "US", "address_residential_indicator": "no" }, "packages": [ { "weight": { "value": 1.0, "unit": "ounce" } } ] } }';
 
+  var res = await http.post('https://api.shipengine.com/v1/rates', headers: headers, body: data);
+  if (res.statusCode != 200) throw Exception('http.post error: statusCode= ${res.statusCode}');
+  print(res.body);
+  setState(() {
+    body = json.decode(res.body);
+  });
+}
 
     @override
     Widget build(BuildContext context) {
@@ -301,7 +332,7 @@ TabController _tabController;
         alignment: Alignment.center,
         child: RefreshIndicator(
                 onRefresh: () => getTimeline(), child: TabBarView(controller: _tabController, children: [
-          buildTimeline(),
+          DF(),
           Collection(),
           Blog(),
 
@@ -316,11 +347,13 @@ _bottomButtons() {
     FloatingActionButton(
       heroTag:'upload',
       backgroundColor: Colors.black38,
-      onPressed: () async{ Navigator.push(context, MaterialPageRoute(builder: (context) =>Upload(currentUser: currentUser, )))
-          .then((value) {
-        setState(() {});
-      });
-      },
+      onPressed: ()=>shopment(),
+
+      //async{ Navigator.push(context, MaterialPageRoute(builder: (context) =>Upload(currentUser: currentUser, )))
+    //      .then((value) {
+     //   setState(() {});
+    //  });
+     // },
       child: Icon(Icons.add_a_photo),
     );}
   else if(_tabController.index == 1){return

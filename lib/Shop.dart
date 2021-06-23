@@ -7,6 +7,7 @@ import 'package:fashow/Categories/Kids/teen/girl/girl.dart';
 import 'package:fashow/Categories/Men/Men.dart';
 import 'package:fashow/Categories/Women/Women.dart';
 import 'package:fashow/fav.dart';
+import 'package:fashow/methods/seller_details.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:bubble_tab_indicator/bubble_tab_indicator.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -219,9 +220,9 @@ Women(),
           backgroundColor: Colors.black38,
           onPressed: (){
             WidgetsBinding.instance.addPostFrameCallback((_){
-              Navigator.push(context, MaterialPageRoute(builder: (context) =>Uploadecom(currentUser: currentUser, ))) .then((value) {
+    currentUser.seller?          Navigator.push(context, MaterialPageRoute(builder: (context) =>Uploadecom(currentUser: currentUser, ))) .then((value) {
                 setState(() {});
-              });
+              }):SellerSign();
             },) ;    } ,
           child: Icon(Icons.add_box),
         ),

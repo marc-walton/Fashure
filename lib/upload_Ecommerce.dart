@@ -265,7 +265,7 @@ bool indian = false;
             ],
           ),
         ),
-        (_inProcess)?Center(child:CircularProgressIndicator()):Text(''),
+        _inProcess?Center(child:CircularProgressIndicator()):Text(''),
       ],
     );
   }
@@ -2277,10 +2277,8 @@ bool world,
           SizedBox(height: 16),
           new FlatButton(
 
-            onPressed: () async {Navigator.of(context).pop(true);
-            clearImage();
-            },
-            child: Text("YES"),
+            onPressed: () => Navigator.of(context).pop(true),
+                       child: Text("YES"),
           ),
         ],
       ),
@@ -7208,7 +7206,7 @@ else  if(dropdownValue=='Baby-Boys'||dropdownValue=='Baby-Girls') {
       (
       onWillPop: _onBackPressed,
       child: Scaffold(
-        key:  scaffoldKey,
+       // key:  scaffoldKey,
         appBar: AppBar(
           backgroundColor: kPrimaryColor,
           leading: IconButton(
