@@ -32,6 +32,7 @@ import 'package:fashow/Constants.dart';
 import 'package:image/image.dart' as Im;
 import 'package:uuid/uuid.dart';
 import 'package:get/get.dart';
+import 'package:flutter_tags/flutter_tags.dart';
 
 class Uploadecom extends StatefulWidget {
   final Users currentUser;
@@ -45,6 +46,7 @@ class Uploadecom extends StatefulWidget {
 class _UploadecomState extends State<Uploadecom>
     with AutomaticKeepAliveClientMixin<Uploadecom> {
   String value = 'None';
+  List colors;
 bool worldship = true;
  TabController _tabController;
   ScrollController _controller;
@@ -107,6 +109,8 @@ TextEditingController shipcontroller = TextEditingController();
 bool indian = false;
 
   final scaffoldKey = new GlobalKey<ScaffoldState>();
+  final GlobalKey<TagsState> _tagStateKey = GlobalKey<TagsState>();
+
   final _formKey = GlobalKey<FormState>();
   bool _inProcess = false;
   var userprice;
@@ -7374,6 +7378,58 @@ backgroundColor: kblue,
                     ],
                   ),
                   SizedBox(height: 8.0,),
+ Container(child: Tags(
+   key:_tagStateKey,
+   textField: TagsTextField(
+     textStyle: TextStyle(fontSize: 10.0),
+     constraintSuggestion: true, suggestions: [],
+     //width: double.infinity, padding: EdgeInsets.symmetric(horizontal: 10),
+     onSubmitted: (String str) {
+       // Add item to the data source.
+       setState(() {
+         // required
+         colors.add(str);
+       });
+     },
+   ),
+   itemCount: colors.length, // required
+   itemBuilder: (int index){
+     final item = colors[index];
+
+     return ItemTags(
+       // Each ItemTags must contain a Key. Keys allow Flutter to
+       // uniquely identify widgets.
+       key: Key(index.toString()),
+       index: index, // required
+       title: item.title,
+       active: item.active,
+       customData: item.customData,
+       textStyle: TextStyle( fontSize: 10.0, ),
+       combine: ItemTagsCombine.withTextBefore,
+     //  image: ItemTagsImage(
+       ///    image: AssetImage("img.jpg") // OR NetworkImage("https://...image.png")
+       //), // OR null,
+       icon: ItemTagsIcon(
+         icon: Icons.add,
+       ), // OR null,
+       removeButton: ItemTagsRemoveButton(
+         onRemoved: (){
+           // Remove the item from the data source.
+           setState(() {
+             // required
+             colors.removeAt(index);
+           });
+           //required
+           return true;
+         },
+       ), // OR null,
+       onPressed: (item) => print(item),
+       onLongPressed: (item) => print(item),
+     );
+
+   },
+ ), ),
+ SizedBox(height: 8.0,),
 
                   Container(
                     margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),

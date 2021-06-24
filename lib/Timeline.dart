@@ -4,6 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:fashow/CollectionsUplaod.dart';
 import 'package:fashow/custom_image.dart';
+import 'package:fashow/methods/seller_details.dart';
 import 'package:fashow/upload_editorial.dart';
 import 'package:fashow/Constants.dart';
 import 'package:flutter/material.dart';
@@ -332,7 +333,7 @@ DF(){
         alignment: Alignment.center,
         child: RefreshIndicator(
                 onRefresh: () => getTimeline(), child: TabBarView(controller: _tabController, children: [
-          DF(),
+          buildTimeline(),
           Collection(),
           Blog(),
 
@@ -347,13 +348,18 @@ _bottomButtons() {
     FloatingActionButton(
       heroTag:'upload',
       backgroundColor: Colors.black38,
-      onPressed: ()=>shopment(),
+      onPressed: ()
 
-      //async{ Navigator.push(context, MaterialPageRoute(builder: (context) =>Upload(currentUser: currentUser, )))
+  // async{ Navigator.push(context, MaterialPageRoute(builder: (context) =>Upload(currentUser: currentUser, )))
     //      .then((value) {
-     //   setState(() {});
-    //  });
-     // },
+      /// setState(() {});
+     //});
+    //},
+      async{ Navigator.push(context, MaterialPageRoute(builder: (context) =>SellerSign()))
+          .then((value) {
+       setState(() {});
+     });
+    },
       child: Icon(Icons.add_a_photo),
     );}
   else if(_tabController.index == 1){return
