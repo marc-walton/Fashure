@@ -94,6 +94,54 @@ TextEditingController Shoe18controller = TextEditingController();
 TextEditingController Shoe19controller = TextEditingController();
 TextEditingController Shoe20controller = TextEditingController();
 TextEditingController Shoe21controller = TextEditingController();
+TextEditingController Ring1controller = TextEditingController();
+TextEditingController Ring2controller = TextEditingController();
+TextEditingController Ring3controller = TextEditingController();
+TextEditingController Ring4controller = TextEditingController();
+TextEditingController Ring5controller = TextEditingController();
+TextEditingController Ring6controller = TextEditingController();
+TextEditingController Ring7controller = TextEditingController();
+TextEditingController Ring8controller = TextEditingController();
+TextEditingController Ring9controller = TextEditingController();
+TextEditingController Ring10controller = TextEditingController();
+TextEditingController Ring11controller = TextEditingController();
+TextEditingController Ring12controller = TextEditingController();
+TextEditingController Ring13controller = TextEditingController();
+TextEditingController Ring14controller = TextEditingController();
+TextEditingController Ring15controller = TextEditingController();
+TextEditingController Ring16controller = TextEditingController();
+TextEditingController Ring17controller = TextEditingController();
+TextEditingController Ring18controller = TextEditingController();
+TextEditingController Ring19controller = TextEditingController();
+TextEditingController Ring20controller = TextEditingController();
+TextEditingController Ring21controller = TextEditingController();
+TextEditingController Ring22controller = TextEditingController();
+TextEditingController Ring23controller = TextEditingController();
+TextEditingController customController1 = TextEditingController();
+TextEditingController customController2 = TextEditingController();
+TextEditingController customController3 = TextEditingController();
+TextEditingController customController4 = TextEditingController();
+TextEditingController customController5 = TextEditingController();
+TextEditingController customController6 = TextEditingController();
+TextEditingController customController7 = TextEditingController();
+TextEditingController customController8 = TextEditingController();
+TextEditingController customController9 = TextEditingController();
+TextEditingController customController10 = TextEditingController();
+TextEditingController customController11 = TextEditingController();
+TextEditingController customController21 = TextEditingController();
+TextEditingController customController31 = TextEditingController();
+TextEditingController customController41 = TextEditingController();
+TextEditingController customController51 = TextEditingController();
+TextEditingController customController61 = TextEditingController();
+TextEditingController customController71 = TextEditingController();
+TextEditingController customController81 = TextEditingController();
+TextEditingController customController91 = TextEditingController();
+TextEditingController customController101 = TextEditingController();
+TextEditingController durationfrom = TextEditingController();
+TextEditingController durationto = TextEditingController();
+TextEditingController shipcost = TextEditingController();
+TextEditingController shipcostintern = TextEditingController();
+
 TextEditingController namecontroller = TextEditingController();
 TextEditingController shipcontroller = TextEditingController();
   List<Asset> images = List<Asset>();
@@ -134,7 +182,7 @@ bool indian = false;
   var eurtousd;
   var eurtocny;
   var eurtogbp;
-
+int count  = 1;
   @override
   void initState() {
     _controller = ScrollController();
@@ -2281,7 +2329,7 @@ bool world,
           SizedBox(height: 16),
           new FlatButton(
 
-            onPressed: () => Navigator.of(context).pop(true),
+            onPressed: () => Navigator.of(context).maybePop(true),
                        child: Text("YES"),
           ),
         ],
@@ -2289,8 +2337,6 @@ bool world,
     ) ??
         false;
   }
-
-
   Widget MenCategory(){
     return
     Expanded(
@@ -7882,10 +7928,84 @@ keyboardType:TextInputType.number,
 
   }
   bool get wantKeepAlive => true;
-
+sdf(){
+  floatingActionButton: new FloatingActionButton(
+    child: new Icon(Icons.add),
+    onPressed: () {
+      setState(() {
+        count = count + 1;
+      });
+    },
+  );
+}
   @override
   Widget build(BuildContext context) {
     super.build(context);
+    List<Widget> children = new List.generate(count, (int i) => new InputWidget(i));
+
     return images.isEmpty ? buildSplashScreen() : builduploadForm();
+  }
+
+  customSize({int index}){
+    return index == 0  ?   Container(
+      margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+      child: TextFormField(
+        style:TextStyle(color: kText),
+
+        keyboardType: TextInputType.multiline,
+        maxLines: null,
+        controller: customController1,
+        decoration: InputDecoration(
+          border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+          enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+          focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+
+          labelText: 'Custom size',labelStyle: TextStyle(color: kText),
+          hintText: 'ex.117 cm',
+        ),
+        textAlign: TextAlign.center,
+        validator: (text) {
+          if ( text.isEmpty) {
+            return 'Shoud not be empty';
+          }
+          return null;
+        },
+      ),
+    ):index == 1  ?   Container(
+      margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+      child: TextFormField(
+        style:TextStyle(color: kText),
+
+        keyboardType: TextInputType.multiline,
+        maxLines: null,
+        controller: customController1,
+        decoration: InputDecoration(
+          border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+          enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+          focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+
+          labelText: 'Custom size',labelStyle: TextStyle(color: kText),
+          hintText: 'ex.117 cm',
+        ),
+        textAlign: TextAlign.center,
+        validator: (text) {
+          if ( text.isEmpty) {
+            return 'Shoud not be empty';
+          }
+          return null;
+        },
+      ),
+    ):Text("Upto 10 allowed");
+  }
+}
+class InputWidget extends StatelessWidget {
+
+  final int index;
+
+  InputWidget(this.index);
+
+  @override
+  Widget build(BuildContext context) {
+    return Text("Upto 10 allowed");
   }
 }

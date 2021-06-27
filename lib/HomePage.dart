@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:fashow/methods/register.dart';
 import 'package:fashow/methods/login.dart';
@@ -164,45 +165,65 @@ class _HomepageState extends State<Homepage> with WidgetsBindingObserver  {
 //   }
 //     });
 //   }
+  logO() async {
+    // await googleSignIn.signOut();
+    await FirebaseAuth.instance.signOut();
+    // Get.offAll(Homepage());
+    Navigator.pushAndRemoveUntil(
+        context,
+        MaterialPageRoute(
+            builder: (context) => Homepage(
+              auth: false,
+            )),
+            (_) => false );
+    Fluttertoast.showToast(
+        msg: "You have been banned. Contact us at fashure.business@gmail.com ", timeInSecForIos: 4);
+    // Navigator.push(context, MaterialPageRoute(builder: (context) => Homepage()));
+  }
+
   loginuser()async{
     DocumentSnapshot doc = await usersRef.doc(widget.userid).get();
     currentUser = Users.fromDocument(doc);
-    myPrefs = await SharedPreferences.getInstance();
-    await myPrefs.setString('id', currentUser.id);
-    await myPrefs.setString('displayName', currentUser.displayName);
-    await myPrefs.setString('photoUrl', currentUser.photoUrl);
-    myPrefs = await SharedPreferences.getInstance();
-    idd = myPrefs.getString('id') ?? '';
-    print(',jbkbhn$idd');
-    if (Platform.isIOS) getiOSPermission();
+    if(currentUser.ban == true){
 
-    _firebaseMessaging.getToken().then((token) {
-       print("Firebase Messaging Token: $token\n");
-      usersRef
-          .doc(widget.userid)
-          .update({"androidNotificationToken": token});
-    });
+    }
+    else {
+      myPrefs = await SharedPreferences.getInstance();
+      await myPrefs.setString('id', currentUser.id);
+      await myPrefs.setString('displayName', currentUser.displayName);
+      await myPrefs.setString('photoUrl', currentUser.photoUrl);
+      myPrefs = await SharedPreferences.getInstance();
+      idd = myPrefs.getString('id') ?? '';
+      print(',jbkbhn$idd');
+      if (Platform.isIOS) getiOSPermission();
 
-    _firebaseMessaging.configure(
-      // onLaunch: (Map<String, dynamic> message) async {},
-      // onResume: (Map<String, dynamic> message) async {},
-      onMessage: (Map<String, dynamic> message) async {
-        // print("on message: $message\n");
-        final String recipientId = message['data']['recipient'];
-        final String body = message['notification']['body'];
-        if (recipientId == widget.userid) {
-          // print("Notification shown!");
-          SnackBar snackBar = SnackBar(
-              content: Text(
-                body,
-                overflow: TextOverflow.ellipsis,
-              ));
-          _scaffoldKey.currentState.showSnackBar(snackBar);
-        }
-        // print("Notification NOT shown");
-      },
-    );
+      _firebaseMessaging.getToken().then((token) {
+        print("Firebase Messaging Token: $token\n");
+        usersRef
+            .doc(widget.userid)
+            .update({"androidNotificationToken": token});
+      });
 
+      _firebaseMessaging.configure(
+        // onLaunch: (Map<String, dynamic> message) async {},
+        // onResume: (Map<String, dynamic> message) async {},
+        onMessage: (Map<String, dynamic> message) async {
+          // print("on message: $message\n");
+          final String recipientId = message['data']['recipient'];
+          final String body = message['notification']['body'];
+          if (recipientId == widget.userid) {
+            // print("Notification shown!");
+            SnackBar snackBar = SnackBar(
+                content: Text(
+                  body,
+                  overflow: TextOverflow.ellipsis,
+                ));
+            _scaffoldKey.currentState.showSnackBar(snackBar);
+          }
+          // print("Notification NOT shown");
+        },
+      );
+    }
   }
   void getUser()async {
     try{

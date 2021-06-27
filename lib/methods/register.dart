@@ -203,6 +203,9 @@ class _RegisterPageState extends State<RegisterPage> {
                                 "timestamp": timestamp,
                                 "language": "en",
                                 "seller": false,
+  "visits": 0,
+  "ban": false,
+ "sales": 0,
 
 
                               });

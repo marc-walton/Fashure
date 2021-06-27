@@ -13,9 +13,12 @@ class Users{
   String country;
   String language;
   int client;
+ int visits;
+ int sales;
 
   int state;
   bool seller;
+bool ban;
 
   Users({
     this.id,
@@ -29,7 +32,11 @@ class Users{
     this.seller,
     this.country,
     this.language,
-    this.client
+    this.client,
+    this.sales,
+    this.visits,
+    this.ban,
+
   });
   factory Users.fromDocument(DocumentSnapshot doc){
     return Users(
@@ -44,7 +51,11 @@ class Users{
         country: doc.data()['country'],
         state: doc.data()['state'],
         client:doc.data()['client'],
-        seller: doc.data()['seller']
+        seller: doc.data()['seller'],
+      sales: doc.data()['sales'],
+      visits: doc.data()['visits'],
+      ban: doc.data()['ban'],
+
     );
   }
 }
