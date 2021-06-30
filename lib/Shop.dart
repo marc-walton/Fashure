@@ -220,9 +220,9 @@ Women(),
           backgroundColor: Colors.black38,
           onPressed: (){
             WidgetsBinding.instance.addPostFrameCallback((_){
-    currentUser.seller?          Navigator.push(context, MaterialPageRoute(builder: (context) =>Uploadecom(currentUser: currentUser, ))) .then((value) {
+            Navigator.push(context, MaterialPageRoute(builder: (context) =>Uploadecom(currentUser: currentUser, ))) .then((value) {
                 setState(() {});
-              }):SellerSign();
+              });
             },) ;    } ,
           child: Icon(Icons.add_box),
         ),
