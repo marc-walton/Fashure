@@ -140,6 +140,8 @@ class Prod extends StatefulWidget {
 final String gender;
 final String shipment;
 final bool worldship;
+final bool freeworldship;
+final bool freeship;
 
   final String productname;
   final String details;
@@ -185,7 +187,97 @@ final int Shoe15;
 final int Shoe19;
  final int Shoe20;
 final int  Shoe21;
- final int mto;
+  final int Ring1;
+  final int Ring2;
+final int Ring3;
+ final int Ring4;
+ final int Ring5;
+ final int Ring6;
+ final int Ring7;
+  final int  Ring8;
+ final int Ring9;
+ final int Ring10;
+ final int Ring11;
+ final int Ring12;
+ final int Ring13;
+ final int Ring14;
+final int Ring15;
+ final int Ring16;
+ final int Ring17;
+ final int Ring18;
+final int Ring19;
+ final int Ring20;
+final int  Ring21;
+final int  Ring22;
+final int  Ring23;
+  final String custom1;
+  final String custom2;
+  final String custom3;
+  final String custom4;
+  final String custom5;
+  final String custom6;
+  final String custom7;
+  final String  custom8;
+  final String custom9;
+  final String custom10;
+  final int custom12;
+  final int custom22;
+  final int custom32;
+  final int custom42;
+  final int custom52;
+  final int custom62;
+  final int custom72;
+  final int  custom82;
+  final int custom92;
+  final int custom102;
+  final String custom11eur;
+  final String custom11usd;
+  final String custom11inr;
+  final String custom11gbp;
+  final String custom21eur;
+  final String custom21usd;
+  final String custom21inr;
+  final String custom21gbp;
+    final String custom31eur;
+  final String custom31usd;
+  final String custom31inr;
+  final String custom31gbp;
+    final String custom41eur;
+  final String custom41usd;
+  final String custom41inr;
+  final String custom41gbp;
+      final String custom51eur;
+  final String custom51usd;
+  final String custom51inr;
+  final String custom51gbp;
+      final String custom61eur;
+  final String custom61usd;
+  final String custom61inr;
+  final String custom61gbp;
+       final String custom71eur;
+  final String custom71usd;
+  final String custom71inr;
+  final String custom71gbp;
+       final String custom81eur;
+  final String custom81usd;
+  final String custom81inr;
+  final String custom81gbp;
+        final String custom91eur;
+  final String custom91usd;
+  final String custom91inr;
+  final String custom91gbp;
+        final String custom101eur;
+  final String custom101usd;
+  final String custom101inr;
+  final String custom101gbp;
+   final int processfrom;
+    final int processto;
+    final int shipfrom;
+    final int shipto;
+    final int shipinterfrom;
+    final int shipinterto;
+
+  final int mto;
   final Users currentUser;
   final dynamic likes;
 
@@ -200,6 +292,8 @@ final int  Shoe21;
     this.gbp,
     this.shipment,
 this.worldship,
+this.freeworldship,
+this.freeship,
 
     this.gender,
     this.details,
@@ -247,6 +341,97 @@ this.worldship,
     this.Shoe19,
     this.Shoe20,
     this. Shoe21,
+       this.Ring1,
+    this.Ring2,
+    this.Ring3,
+    this.Ring4,
+    this.Ring5,
+    this.Ring6,
+    this.Ring7,
+    this.Ring8,
+    this.Ring9,
+    this.Ring10,
+    this.Ring11,
+    this.Ring12,
+    this.Ring13,
+    this.Ring14,
+    this.Ring15,
+    this.Ring16,
+    this.Ring17,
+    this.Ring18,
+    this.Ring19,
+    this.Ring20,
+    this. Ring21,
+    this. Ring22,
+    this. Ring23,
+    this.custom1,
+    this.custom2,
+    this.custom3,
+    this.custom4,
+    this.custom5,
+    this.custom6,
+    this.custom7,
+    this.custom8,
+    this.custom9,
+    this.custom10,
+    this.custom12,
+    this.custom22,
+    this.custom32,
+    this.custom42,
+    this.custom52,
+    this.custom62,
+    this.custom72,
+    this.custom82,
+    this.custom92,
+    this.custom102,
+    this.custom11eur,
+    this.custom11usd,
+    this.custom11inr,
+    this.custom11gbp,
+    this.custom21eur,
+    this.custom21usd,
+    this.custom21inr,
+    this.custom21gbp,
+    this.custom31eur,
+    this.custom31usd,
+    this.custom31inr,
+    this.custom31gbp,
+    this.custom41eur,
+    this.custom41usd,
+    this.custom41inr,
+    this.custom41gbp,
+    this.custom51eur,
+    this.custom51usd,
+    this.custom51inr,
+    this.custom51gbp,
+    this.custom61eur,
+    this.custom61usd,
+    this.custom61inr,
+    this.custom61gbp,
+    this.custom71eur,
+    this.custom71usd,
+    this.custom71inr,
+    this.custom71gbp,
+    this.custom81eur,
+    this.custom81usd,
+    this.custom81inr,
+    this.custom81gbp,
+    this.custom91eur,
+    this.custom91usd,
+    this.custom91inr,
+    this.custom91gbp,
+    this.custom101eur,
+    this.custom101usd,
+    this.custom101inr,
+    this.custom101gbp,
+this.processfrom,
+this.processto,
+this.shipfrom,
+this.shipto,
+this.shipinterfrom,
+this.shipinterto,
+
+
     this.photoUrl,
     this.currentUser,
   });
@@ -260,6 +445,8 @@ this.worldship,
       username: doc.data()['displayName'],
 shipment: doc.data()['shipment'],
 worldship: doc.data()['worldship'],
+freeworldship: doc.data()['freeworldship'],
+freeship: doc.data()['freeship'],
 
      eur: doc.data()['eur'],
       usd: doc.data()['usd'],
@@ -304,7 +491,98 @@ worldship: doc.data()['worldship'],
       Shoe19: doc.data()['Shoe19'],
       Shoe20: doc.data()['Shoe20'],
        Shoe21: doc.data()['Shoe21'],
-      productname: doc.data()['productname'],
+          Ring1: doc.data()['Ring1'],
+      Ring2: doc.data()['Ring2'],
+      Ring3: doc.data()['Ring3'],
+      Ring4: doc.data()['Ring4'],
+      Ring5: doc.data()['Ring5'],
+      Ring6: doc.data()['Ring6'],
+      Ring7: doc.data()['Ring7'],
+       Ring8: doc.data()['Ring8'],
+      Ring9: doc.data()['Ring9'],
+      Ring10: doc.data()['Ring10'],
+      Ring11: doc.data()['Ring11'],
+      Ring12: doc.data()['Ring12'],
+      Ring13: doc.data()['Ring13'],
+      Ring14: doc.data()['Ring14'],
+      Ring15: doc.data()['Ring15'],
+     Ring16: doc.data()['Ring16'],
+      Ring17: doc.data()['Ring17'],
+      Ring18: doc.data()['Ring18'],
+      Ring19: doc.data()['Ring19'],
+      Ring20: doc.data()['Ring20'],
+       Ring21: doc.data()['Ring21'],
+       Ring22: doc.data()['Ring22'],
+       Ring23: doc.data()['Ring23'],
+      custom1: doc.data()['custom1'],
+      custom2: doc.data()['custom2'],
+      custom3: doc.data()['custom3'],
+      custom4: doc.data()['custom4'],
+      custom5: doc.data()['custom5'],
+      custom6: doc.data()['custom6'],
+      custom7: doc.data()['custom7'],
+      custom8: doc.data()['custom8'],
+      custom9: doc.data()['custom9'],
+      custom10: doc.data()['custom10'],
+      custom12: doc.data()['custom12'],
+      custom22: doc.data()['custom22'],
+      custom32: doc.data()['custom32'],
+      custom42: doc.data()['custom42'],
+      custom52: doc.data()['custom52'],
+      custom62: doc.data()['custom62'],
+      custom72: doc.data()['custom72'],
+      custom82: doc.data()['custom82'],
+      custom92: doc.data()['custom92'],
+      custom102: doc.data()['custom102'],
+      custom11eur: doc.data()['custom11eur'],
+      custom11usd: doc.data()['custom11usd'],
+      custom11inr: doc.data()['custom11inr'],
+      custom11gbp:  doc.data()['custom11gbp'],
+      custom21eur: doc.data()['custom21eur'],
+      custom21usd: doc.data()['custom21usd'],
+      custom21inr: doc.data()['custom21inr'],
+      custom21gbp:  doc.data()['custom21gbp'],
+      custom31eur: doc.data()['custom31eur'],
+      custom31usd: doc.data()['custom31usd'],
+      custom31inr: doc.data()['custom31inr'],
+      custom31gbp:  doc.data()['custom31gbp'],
+      custom41eur: doc.data()['custom41eur'],
+      custom41usd: doc.data()['custom41usd'],
+      custom41inr: doc.data()['custom41inr'],
+      custom41gbp:  doc.data()['custom41gbp'],
+      custom51eur: doc.data()['custom51eur'],
+      custom51usd: doc.data()['custom51usd'],
+      custom51inr: doc.data()['custom51inr'],
+      custom51gbp:  doc.data()['custom51gbp'],
+      custom61eur: doc.data()['custom61eur'],
+      custom61usd: doc.data()['custom61usd'],
+      custom61inr: doc.data()['custom61inr'],
+      custom61gbp:  doc.data()['custom61gbp'],
+      custom71eur: doc.data()['custom71eur'],
+      custom71usd: doc.data()['custom71usd'],
+      custom71inr: doc.data()['custom71inr'],
+      custom71gbp:  doc.data()['custom71gbp'],
+      custom81eur: doc.data()['custom81eur'],
+      custom81usd: doc.data()['custom81usd'],
+      custom81inr: doc.data()['custom81inr'],
+      custom81gbp:  doc.data()['custom81gbp'],
+      custom91eur: doc.data()['custom91eur'],
+      custom91usd: doc.data()['custom91usd'],
+      custom91inr: doc.data()['custom91inr'],
+      custom91gbp:  doc.data()['custom91gbp'],
+      custom101eur: doc.data()['custom101eur'],
+      custom101usd: doc.data()['custom101usd'],
+      custom101inr: doc.data()['custom101inr'],
+      custom101gbp:  doc.data()['custom101gbp'],
+        processfrom:  doc.data()['processfrom'],
+        processto:  doc.data()['processto'],
+        shipfrom:  doc.data()['shipfrom'],
+        shipto:  doc.data()['shipto'],
+        shipinterfrom:  doc.data()['shipinterfrom'],
+        shipinterto:  doc.data()['shipinterto'],
+
+
+        productname: doc.data()['productname'],
       details: doc.data()['details'],
       shopmediaUrl: doc.data()['shopmediaUrl'],
       color:doc.data()['color'],
@@ -345,6 +623,8 @@ worldship: doc.data()['worldship'],
     mto:this.mto,
     shipment:this.shipment,
     worldship:this.worldship,
+ freeworldship:this.freeworldship,
+ freeship:this.freeship,
 
     gender:this.gender,
     details:this.details,
@@ -392,6 +672,97 @@ Shoe18:this.Shoe18,
 Shoe19:this.Shoe19,
 Shoe20:this.Shoe20,
     Shoe21:this.Shoe21,
+
+        Ring1:this.Ring1,
+Ring2:this.Ring2,
+Ring3:this.Ring3,
+Ring4:this.Ring4,
+Ring5:this.Ring5,
+Ring6:this.Ring6,
+Ring7:this.Ring7,
+Ring8:this.Ring8,
+Ring9:this.Ring9,
+Ring10:this.Ring10,
+    Ring11:this.Ring11,
+Ring12:this.Ring12,
+Ring13:this.Ring13,
+Ring14:this.Ring14,
+Ring15:this.Ring15,
+Ring16:this.Ring16,
+Ring17:this.Ring17,
+Ring18:this.Ring18,
+Ring19:this.Ring19,
+Ring20:this.Ring20,
+    Ring21:this.Ring21,
+    Ring22:this.Ring22,
+    Ring23:this.Ring23,
+    custom1:this.custom1,
+    custom2:this.custom2,
+    custom3:this.custom3,
+    custom4:this.custom4,
+    custom5:this.custom5,
+    custom6:this.custom6,
+    custom7:this.custom7,
+    custom8:this.custom8,
+    custom9:this.custom9,
+    custom10:this.custom10,
+    custom12:this.custom12,
+    custom22:this.custom22,
+    custom32:this.custom32,
+    custom42:this.custom42,
+    custom52:this.custom52,
+    custom62:this.custom62,
+    custom72:this.custom72,
+    custom82:this.custom82,
+    custom92:this.custom92,
+    custom102:this.custom102,
+    custom11eur:this.custom11eur,
+    custom11usd:this.custom11usd,
+    custom11inr:this.custom11inr,
+    custom11gbp: this.custom11gbp,
+    custom21eur:this.custom21eur,
+    custom21usd:this.custom21usd,
+    custom21inr:this.custom21inr,
+    custom21gbp: this.custom21gbp,
+       custom31eur:this.custom31eur,
+    custom31usd:this.custom31usd,
+    custom31inr:this.custom31inr,
+    custom31gbp: this.custom31gbp,
+       custom41eur:this.custom41eur,
+    custom41usd:this.custom41usd,
+    custom41inr:this.custom41inr,
+    custom41gbp: this.custom41gbp,
+       custom51eur:this.custom51eur,
+    custom51usd:this.custom51usd,
+    custom51inr:this.custom51inr,
+    custom51gbp: this.custom51gbp,
+         custom61eur:this.custom61eur,
+    custom61usd:this.custom61usd,
+    custom61inr:this.custom61inr,
+    custom61gbp: this.custom61gbp,
+           custom71eur:this.custom71eur,
+    custom71usd:this.custom71usd,
+    custom71inr:this.custom71inr,
+    custom71gbp: this.custom71gbp,
+           custom81eur:this.custom81eur,
+    custom81usd:this.custom81usd,
+    custom81inr:this.custom81inr,
+    custom81gbp: this.custom81gbp,
+          custom91eur:this.custom91eur,
+    custom91usd:this.custom91usd,
+    custom91inr:this.custom91inr,
+    custom91gbp: this.custom91gbp,
+          custom101eur:this.custom101eur,
+    custom101usd:this.custom101usd,
+    custom101inr:this.custom101inr,
+    custom101gbp: this.custom101gbp,
+      processfrom: this.processfrom,
+      processto: this.processto,
+      shipfrom: this.shipfrom,
+      shipinterfrom: this.shipinterfrom,
+      shipinterto: this.shipinterto,
+      shipto: this.shipto,
+
     likeCount: getLikeCount(this.likes),
   );
 }
@@ -410,6 +781,8 @@ class _ProdState extends State<Prod> {
    final String gender;
  final String shipment;
 final bool worldship;
+final bool freeworldship;
+final bool freeship;
 
   final String productname;
   final String details;
@@ -455,6 +828,95 @@ final bool worldship;
   final int Shoe19;
   final int Shoe20;
   final int  Shoe21;
+   final int Ring1;
+  final int Ring2;
+  final int Ring3;
+  final int Ring4;
+  final int Ring5;
+  final int Ring6;
+  final int Ring7;
+  final int  Ring8;
+  final int Ring9;
+  final int Ring10;
+  final int Ring11;
+  final int Ring12;
+  final int Ring13;
+  final int Ring14;
+  final int Ring15;
+  final int Ring16;
+  final int Ring17;
+  final int Ring18;
+  final int Ring19;
+  final int Ring20;
+  final int  Ring21;
+   final int  Ring22;
+   final int  Ring23;
+  final String custom1;
+  final String custom2;
+  final String custom3;
+  final String custom4;
+  final String custom5;
+  final String custom6;
+  final String custom7;
+  final String  custom8;
+  final String custom9;
+   final String custom10;
+  final int custom12;
+  final int custom22;
+  final int custom32;
+  final int custom42;
+  final int custom52;
+  final int custom62;
+  final int custom72;
+  final int  custom82;
+  final int custom92;
+  final int custom102;
+  final String custom11eur;
+  final String custom11usd;
+  final String custom11inr;
+  final String custom11gbp;
+  final String custom21eur;
+  final String custom21usd;
+  final String custom21inr;
+  final String custom21gbp;
+  final String custom31eur;
+  final String custom31usd;
+  final String custom31inr;
+  final String custom31gbp;
+  final String custom41eur;
+  final String custom41usd;
+  final String custom41inr;
+  final String custom41gbp;
+  final String custom51eur;
+  final String custom51usd;
+  final String custom51inr;
+  final String custom51gbp;
+  final String custom61eur;
+  final String custom61usd;
+  final String custom61inr;
+  final String custom61gbp;
+  final String custom71eur;
+  final String custom71usd;
+  final String custom71inr;
+  final String custom71gbp;
+  final String custom81eur;
+  final String custom81usd;
+  final String custom81inr;
+  final String custom81gbp;
+  final String custom91eur;
+  final String custom91usd;
+  final String custom91inr;
+  final String custom91gbp;
+  final String custom101eur;
+  final String custom101usd;
+  final String custom101inr;
+  final String custom101gbp;
+  final int processfrom;
+  final int processto;
+  final int shipfrom;
+  final int shipto;
+  final int shipinterfrom;
+  final int shipinterto;
   final int mto;
   int likeCount;
   Map likes;
@@ -462,7 +924,7 @@ final bool worldship;
   bool isfav;
   bool showHeart = false;
   bool details1 = true;
-int xx;
+int views;
 
   _ProdState({
     this.prodId,
@@ -475,6 +937,8 @@ int xx;
     this.gbp,
      this.shipment,
 this.worldship,
+this.freeworldship,
+this.freeship,
 
     this.gender,
     this.details,
@@ -517,6 +981,96 @@ this.worldship,
     this.Shoe19,
     this.Shoe20,
     this. Shoe21,
+     this.Ring1,
+    this.Ring2,
+    this.Ring3,
+    this.Ring4,
+    this.Ring5,
+    this.Ring6,
+    this.Ring7,
+    this.Ring8,
+    this.Ring9,
+    this.Ring10,
+    this.Ring11,
+    this.Ring12,
+    this.Ring13,
+    this.Ring14,
+    this.Ring15,
+    this.Ring16,
+    this.Ring17,
+    this.Ring18,
+    this.Ring19,
+    this.Ring20,
+    this. Ring21,
+     this. Ring22,
+     this. Ring23,
+    this.custom1,
+    this.custom2,
+    this.custom3,
+    this.custom4,
+    this.custom5,
+    this.custom6,
+    this.custom7,
+    this.custom8,
+    this.custom9,
+    this.custom10,
+    this.custom12,
+    this.custom22,
+    this.custom32,
+    this.custom42,
+    this.custom52,
+    this.custom62,
+    this.custom72,
+    this.custom82,
+    this.custom92,
+    this.custom102,
+    this.custom11eur,
+    this.custom11usd,
+    this.custom11inr,
+    this.custom11gbp,
+    this.custom21eur,
+    this.custom21usd,
+    this.custom21inr,
+    this.custom21gbp,
+    this.custom31eur,
+    this.custom31usd,
+    this.custom31inr,
+    this.custom31gbp,
+    this.custom41eur,
+    this.custom41usd,
+    this.custom41inr,
+    this.custom41gbp,
+    this.custom51eur,
+    this.custom51usd,
+    this.custom51inr,
+    this.custom51gbp,
+    this.custom61eur,
+    this.custom61usd,
+    this.custom61inr,
+    this.custom61gbp,
+    this.custom71eur,
+    this.custom71usd,
+    this.custom71inr,
+    this.custom71gbp,
+    this.custom81eur,
+    this.custom81usd,
+    this.custom81inr,
+    this.custom81gbp,
+    this.custom91eur,
+    this.custom91usd,
+    this.custom91inr,
+    this.custom91gbp,
+    this.custom101eur,
+    this.custom101usd,
+    this.custom101inr,
+    this.custom101gbp,
+    this.processfrom,
+    this.processto,
+    this.shipfrom,
+    this.shipto,
+    this.shipinterfrom,
+    this.shipinterto,
+
     this.composition,
     this.washandcare,
     this.sizeandfit,
@@ -532,8 +1086,33 @@ this.worldship,
     // parse();
 
     super.initState();
+    Views();
   }
 
+  Views()async{
+    DocumentSnapshot doc = await usersRef.doc(ownerId).get();
+  Users vUser = Users.fromDocument(doc);
+    setState(() {
+      views = vUser.visits;
+
+    });
+   // FirebaseFirestore.instance.collection('users')
+     //   .where("id",isEqualTo:"${widget.ownerId}")
+       // .snapshots().listen((snapshot){snapshot.docs.forEach((doc){
+
+   //   setState(() {
+     //   client = doc.data()['client'];
+
+   //   });});
+
+  //  });
+    views++;
+
+    FirebaseFirestore.instance.collection('users')
+        .doc(ownerId)
+        .update({'visits': views,
+    });
+  }
 
 FREE(){
     if(freesize == 0){

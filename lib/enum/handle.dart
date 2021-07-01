@@ -2981,3 +2981,6426 @@ onLongPressed: (item) => print(item),
 },
 ), ),
 SizedBox(height: 8.0,),
+
+
+else if(dropdownValue=='Women') {
+return
+showModalBottomSheet(
+context: context,
+builder: (BuildContext context) {
+return
+Column(
+children: [
+Expanded(
+child: Container(
+// color: kPrimaryColor,
+child: ContainedTabBarView(
+tabs: [
+Text('Clothing',style:TextStyle(color:Colors.black)),
+Text('Made-to-order',style:TextStyle(color:Colors.black)),
+Text('Free size',style:TextStyle(color:Colors.black)),
+Text('Custom size(upto 10)',style:TextStyle(color:Colors.black)),
+Text('Ring(US/Canada)',style:TextStyle(color:Colors.black)),
+
+Text('Shoes(US/Canada)',style:TextStyle(color:Colors.black))
+],
+views: [
+ListView(
+
+
+children: [
+
+
+ExpansionTile(
+title: Text('XXXS'),
+maintainState: true,
+children: [
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+keyboardType: TextInputType.number,
+maxLines: 1,
+controller: xxxscontroller,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Quantity in inventory',
+hintText: '0'
+),
+textAlign: TextAlign.center,
+),
+),
+],
+),
+ExpansionTile(
+title: Text('XXS'),
+maintainState: true,
+children: [
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+keyboardType: TextInputType.number,
+maxLines: 1,
+controller: xxscontroller,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Quantity in inventory',
+hintText: '0'
+),
+textAlign: TextAlign.center,
+),
+),
+],
+),
+ExpansionTile(
+title: Text('XS'),
+maintainState: true,
+children: [
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+keyboardType: TextInputType.number,
+maxLines: 1,
+controller: xscontroller,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Quantity in inventory',
+hintText: '0'
+),
+textAlign: TextAlign.center,
+),
+),
+],
+),
+ExpansionTile(
+title: Text('S'),
+maintainState: true,
+children: [
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+keyboardType: TextInputType.number,
+maxLines: 1,
+controller: scontroller,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Quantity in inventory',
+hintText: '0'
+),
+textAlign: TextAlign.center,
+),
+),
+],
+),
+ExpansionTile(
+title: Text('M'),
+maintainState: true,
+children: [
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+keyboardType: TextInputType.number,
+maxLines: 1,
+controller: mcontroller,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Quantity in inventory',
+hintText: '0'
+),
+textAlign: TextAlign.center,
+),
+),
+],
+),
+ExpansionTile(
+title: Text('L'),
+maintainState: true,
+children: [
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+keyboardType: TextInputType.number,
+maxLines: 1,
+controller: lcontroller,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Quantity in inventory',
+hintText: '0'
+),
+textAlign: TextAlign.center,
+),
+),
+],
+),
+ExpansionTile(
+title: Text('XL'),
+maintainState: true,
+children: [
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+keyboardType: TextInputType.number,
+maxLines: 1,
+controller: xlcontroller,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Quantity in inventory',
+hintText: '0'
+),
+textAlign: TextAlign.center,
+),
+),
+],
+),
+ExpansionTile(
+title: Text('XXL'),
+maintainState: true,
+children: [
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+keyboardType: TextInputType.number,
+maxLines: 1,
+controller: xxlcontroller,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Quantity in inventory',
+hintText: '0'
+),
+textAlign: TextAlign.center,
+),
+),
+],
+),
+ExpansionTile(
+title: Text('XXXL'),
+maintainState: true,
+children: [
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+keyboardType: TextInputType.number,
+maxLines: 1,
+controller: xxxlcontroller,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kSubtitle)),
+labelText: 'Quantity in inventory',
+hintText: '0'
+),
+textAlign: TextAlign.center,
+),
+),
+],
+),
+ExpansionTile(
+title: Text('4XL'),
+maintainState: true,
+children: [
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+keyboardType: TextInputType.number,
+maxLines: 1,
+controller: fourxlcontroller,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kSubtitle)),
+labelText: 'Quantity in inventory',
+hintText: '0'
+),
+textAlign: TextAlign.center,
+),
+),
+],
+),
+ExpansionTile(
+title: Text('5XL'),
+maintainState: true,
+children: [
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+keyboardType: TextInputType.number,
+maxLines: 1,
+controller: fivexlcontroller,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kSubtitle)),
+labelText: 'Quantity in inventory',
+hintText: '0'
+),
+textAlign: TextAlign.center,
+),
+),
+],
+),
+ExpansionTile(
+title: Text('6XL'),
+maintainState: true,
+children: [
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+keyboardType: TextInputType.number,
+maxLines: 1,
+controller: sixxlcontroller,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kSubtitle)),
+labelText: 'Quantity in inventory',
+hintText: '0'
+),
+textAlign: TextAlign.center,
+),
+),
+],
+),
+ExpansionTile(
+title: Text('7XL'),
+maintainState: true,
+children: [
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+keyboardType: TextInputType.number,
+maxLines: 1,
+controller: sevenxlcontroller,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kSubtitle)),
+labelText: 'Quantity in inventory',
+hintText: '0'
+),
+textAlign: TextAlign.center,
+),
+),
+],
+),
+ExpansionTile(
+title: Text('8XL'),
+maintainState: true,
+children: [
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+keyboardType: TextInputType.number,
+maxLines: 1,
+controller: eightxlcontroller,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kSubtitle)),
+labelText: 'Quantity in inventory',
+hintText: '0'
+),
+textAlign: TextAlign.center,
+),
+),
+],
+),
+
+
+],
+),
+ListView(
+
+
+children: [
+
+
+ExpansionTile(
+title: Text('Made-to-order'),
+maintainState: true,
+children: [
+
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+keyboardType: TextInputType.number,
+maxLines: 1,
+controller: mtocontroller,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Quantity in inventory',
+hintText: '0'
+),
+textAlign: TextAlign.center,
+),
+),
+],
+),
+
+
+],
+),
+ListView(
+
+
+children: [
+
+
+ExpansionTile(
+title: Text('Free size'),
+maintainState: true,
+children: [
+
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+keyboardType: TextInputType.number,
+maxLines: 1,
+controller: freesizecontroller,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Quantity in inventory',
+hintText: '0'
+),
+textAlign: TextAlign.center,
+),
+),
+],
+),
+
+
+],
+),
+ListView(
+
+
+children: [
+
+
+ExpansionTile(
+title: Text('Custom size 1'),
+maintainState: true,
+children: [
+
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+maxLines: 1,
+controller: customController1,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Title',
+hintText: '117 cm'
+),
+textAlign: TextAlign.center,
+),
+),
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+keyboardType: TextInputType.number,
+maxLines: 1,
+controller: customController11,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Additional price(optional)',
+hintText: '0'
+),
+textAlign: TextAlign.center,
+),
+),
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+keyboardType: TextInputType.number,
+maxLines: 1,
+controller: customController12,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Quantity in inventory',
+hintText: '0'
+),
+textAlign: TextAlign.center,
+),
+),
+
+],
+),
+ExpansionTile(
+title: Text('Custom size 2'),
+maintainState: true,
+children: [
+
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+maxLines: 1,
+controller: customController2,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Title',
+hintText: '117 cm'
+),
+textAlign: TextAlign.center,
+),
+),
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+keyboardType: TextInputType.number,
+maxLines: 1,
+controller: customController21,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Additional price(optional)',
+hintText: '0'
+),
+textAlign: TextAlign.center,
+),
+),
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+keyboardType: TextInputType.number,
+maxLines: 1,
+controller: customController22,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Quantity in inventory',
+hintText: '0'
+),
+textAlign: TextAlign.center,
+),
+),
+
+],
+),
+ExpansionTile(
+title: Text('Custom size 3'),
+maintainState: true,
+children: [
+
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+maxLines: 1,
+controller: customController3,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Title',
+hintText: '117 cm'
+),
+textAlign: TextAlign.center,
+),
+),
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+keyboardType: TextInputType.number,
+maxLines: 1,
+controller: customController31,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Additional price(optional)',
+hintText: '0'
+),
+textAlign: TextAlign.center,
+),
+),
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+keyboardType: TextInputType.number,
+maxLines: 1,
+controller: customController32,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Quantity in inventory',
+hintText: '0'
+),
+textAlign: TextAlign.center,
+),
+),
+
+],
+),
+ExpansionTile(
+title: Text('Custom size 4'),
+maintainState: true,
+children: [
+
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+maxLines: 1,
+controller: customController4,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Title',
+hintText: '117 cm'
+),
+textAlign: TextAlign.center,
+),
+),
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+keyboardType: TextInputType.number,
+maxLines: 1,
+controller: customController41,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Additional price(optional)',
+hintText: '0'
+),
+textAlign: TextAlign.center,
+),
+),
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+keyboardType: TextInputType.number,
+maxLines: 1,
+controller: customController42,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Quantity in inventory',
+hintText: '0'
+),
+textAlign: TextAlign.center,
+),
+),
+
+],
+),
+ExpansionTile(
+title: Text('Custom size 5'),
+maintainState: true,
+children: [
+
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+maxLines: 1,
+controller: customController5,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Title',
+hintText: '117 cm'
+),
+textAlign: TextAlign.center,
+),
+),
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+keyboardType: TextInputType.number,
+maxLines: 1,
+controller: customController51,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Additional price(optional)',
+hintText: '0'
+),
+textAlign: TextAlign.center,
+),
+),
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+keyboardType: TextInputType.number,
+maxLines: 1,
+controller: customController52,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Quantity in inventory',
+hintText: '0'
+),
+textAlign: TextAlign.center,
+),
+),
+
+],
+),
+ExpansionTile(
+title: Text('Custom size 6'),
+maintainState: true,
+children: [
+
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+maxLines: 1,
+controller: customController6,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Title',
+hintText: '117 cm'
+),
+textAlign: TextAlign.center,
+),
+),
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+keyboardType: TextInputType.number,
+maxLines: 1,
+controller: customController61,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Additional price(optional)',
+hintText: '0'
+),
+textAlign: TextAlign.center,
+),
+),
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+keyboardType: TextInputType.number,
+maxLines: 1,
+controller: customController62,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Quantity in inventory',
+hintText: '0'
+),
+textAlign: TextAlign.center,
+),
+),
+
+],
+),
+ExpansionTile(
+title: Text('Custom size 7'),
+maintainState: true,
+children: [
+
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+maxLines: 1,
+controller: customController7,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Title',
+hintText: '117 cm'
+),
+textAlign: TextAlign.center,
+),
+),
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+keyboardType: TextInputType.number,
+maxLines: 1,
+controller: customController71,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Additional price(optional)',
+hintText: '0'
+),
+textAlign: TextAlign.center,
+),
+),
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+keyboardType: TextInputType.number,
+maxLines: 1,
+controller: customController72,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Quantity in inventory',
+hintText: '0'
+),
+textAlign: TextAlign.center,
+),
+),
+
+],
+),
+ExpansionTile(
+title: Text('Custom size 8'),
+maintainState: true,
+children: [
+
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+maxLines: 1,
+controller: customController8,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Title',
+hintText: '117 cm'
+),
+textAlign: TextAlign.center,
+),
+),
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+keyboardType: TextInputType.number,
+maxLines: 1,
+controller: customController81,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Additional price(optional)',
+hintText: '0'
+),
+textAlign: TextAlign.center,
+),
+),
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+keyboardType: TextInputType.number,
+maxLines: 1,
+controller: customController82,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Quantity in inventory',
+hintText: '0'
+),
+textAlign: TextAlign.center,
+),
+),
+
+],
+),
+ExpansionTile(
+title: Text('Custom size 9'),
+maintainState: true,
+children: [
+
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+maxLines: 1,
+controller: customController9,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Title',
+hintText: '117 cm'
+),
+textAlign: TextAlign.center,
+),
+),
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+keyboardType: TextInputType.number,
+maxLines: 1,
+controller: customController91,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Additional price(optional)',
+hintText: '0'
+),
+textAlign: TextAlign.center,
+),
+),
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+keyboardType: TextInputType.number,
+maxLines: 1,
+controller: customController92,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Quantity in inventory',
+hintText: '0'
+),
+textAlign: TextAlign.center,
+),
+),
+
+],
+),
+ExpansionTile(
+title: Text('Custom size 10'),
+maintainState: true,
+children: [
+
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+maxLines: 1,
+controller: customController10,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Title',
+hintText: '117 cm'
+),
+textAlign: TextAlign.center,
+),
+),
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+keyboardType: TextInputType.number,
+maxLines: 1,
+controller: customController101,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Additional price(optional)',
+hintText: '0'
+),
+textAlign: TextAlign.center,
+),
+),
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+keyboardType: TextInputType.number,
+maxLines: 1,
+controller: customController102,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Quantity in inventory',
+hintText: '0'
+),
+textAlign: TextAlign.center,
+),
+),
+
+],
+),
+
+
+
+],
+),
+ListView(
+children: [
+ExpansionTile(
+title: Text('4'),
+maintainState: true,
+children: [
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+keyboardType: TextInputType.number,
+maxLines: 1,
+controller: Ring1controller,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Quantity in inventory',
+hintText: '0'
+),
+textAlign: TextAlign.center,
+),
+),
+],
+),
+ExpansionTile(
+title: Text('4.5'),
+maintainState: true,
+children: [
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+keyboardType: TextInputType.number,
+maxLines: 1,
+controller: Ring2controller,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Quantity in inventory',
+hintText: '0'
+),
+textAlign: TextAlign.center,
+),
+),
+],
+),
+ExpansionTile(
+title: Text('5'),
+maintainState: true,
+children: [
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+keyboardType: TextInputType.number,
+maxLines: 1,
+controller: Ring3controller,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Quantity in inventory',
+hintText: '0'
+),
+textAlign: TextAlign.center,
+),
+),
+],
+),
+ExpansionTile(
+title: Text('5.5'),
+maintainState: true,
+children: [
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+keyboardType: TextInputType.number,
+maxLines: 1,
+controller: Ring4controller,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Quantity in inventory',
+hintText: '0'
+),
+textAlign: TextAlign.center,
+),
+),
+],
+),
+ExpansionTile(
+title: Text('6'),
+maintainState: true,
+children: [
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+keyboardType: TextInputType.number,
+maxLines: 1,
+controller: Ring5controller,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Quantity in inventory',
+hintText: '0'
+),
+textAlign: TextAlign.center,
+),
+),
+],
+),
+ExpansionTile(
+title: Text('6.5'),
+maintainState: true,
+children: [
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+keyboardType: TextInputType.number,
+maxLines: 1,
+controller: Ring6controller,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Quantity in inventory',
+hintText: '0'
+),
+textAlign: TextAlign.center,
+),
+),
+],
+),
+ExpansionTile(
+title: Text('7'),
+maintainState: true,
+children: [
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+keyboardType: TextInputType.number,
+maxLines: 1,
+controller: Ring7controller,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Quantity in inventory',
+hintText: '0'
+),
+textAlign: TextAlign.center,
+),
+),
+],
+),
+ExpansionTile(
+title: Text('7.5'),
+maintainState: true,
+children: [
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+keyboardType: TextInputType.number,
+maxLines: 1,
+controller: Ring8controller,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Quantity in inventory',
+hintText: '0'
+),
+textAlign: TextAlign.center,
+),
+),
+],
+),
+ExpansionTile(
+title: Text('8'),
+maintainState: true,
+children: [
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+keyboardType: TextInputType.number,
+maxLines: 1,
+controller: Ring9controller,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Quantity in inventory',
+hintText: '0'
+),
+textAlign: TextAlign.center,
+),
+),
+],
+),
+ExpansionTile(
+title: Text('8.5'),
+maintainState: true,
+children: [
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+keyboardType: TextInputType.number,
+maxLines: 1,
+controller: Ring10controller,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Quantity in inventory',
+hintText: '0'
+),
+textAlign: TextAlign.center,
+),
+),
+],
+),
+ExpansionTile(
+title: Text('9'),
+maintainState: true,
+children: [
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+keyboardType: TextInputType.number,
+maxLines: 1,
+controller: Ring11controller,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Quantity in inventory',
+hintText: '0'
+),
+textAlign: TextAlign.center,
+),
+),
+],
+),
+ExpansionTile(
+title: Text('9.5'),
+maintainState: true,
+children: [
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+keyboardType: TextInputType.number,
+maxLines: 1,
+controller: Ring12controller,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Quantity in inventory',
+hintText: '0'
+),
+textAlign: TextAlign.center,
+),
+),
+],
+),
+ExpansionTile(
+title: Text('10'),
+maintainState: true,
+children: [
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+keyboardType: TextInputType.number,
+maxLines: 1,
+controller: Ring13controller,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Quantity in inventory',
+hintText: '0'
+),
+textAlign: TextAlign.center,
+),
+),
+],
+),
+ExpansionTile(
+title: Text('10.5'),
+maintainState: true,
+children: [
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+keyboardType: TextInputType.number,
+maxLines: 1,
+controller: Ring14controller,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Quantity in inventory',
+hintText: '0'
+),
+textAlign: TextAlign.center,
+),
+),
+],
+),
+ExpansionTile(
+title: Text('11'),
+maintainState: true,
+children: [
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+keyboardType: TextInputType.number,
+maxLines: 1,
+controller: Ring15controller,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Quantity in inventory',
+hintText: '0'
+),
+textAlign: TextAlign.center,
+),
+),
+],
+),
+ExpansionTile(
+title: Text('11.5'),
+maintainState: true,
+children: [
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+keyboardType: TextInputType.number,
+maxLines: 1,
+controller: Ring16controller,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Quantity in inventory',
+hintText: '0'
+),
+textAlign: TextAlign.center,
+),
+),
+],
+),
+ExpansionTile(
+title: Text('12'),
+maintainState: true,
+children: [
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+keyboardType: TextInputType.number,
+maxLines: 1,
+controller: Ring17controller,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Quantity in inventory',
+hintText: '0'
+),
+textAlign: TextAlign.center,
+),
+),
+],
+),
+ExpansionTile(
+title: Text('12.5'),
+maintainState: true,
+children: [
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+keyboardType: TextInputType.number,
+maxLines: 1,
+controller: Ring18controller,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Quantity in inventory',
+hintText: '0'
+),
+textAlign: TextAlign.center,
+),
+),
+],
+),
+ExpansionTile(
+title: Text('13'),
+maintainState: true,
+children: [
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+keyboardType: TextInputType.number,
+maxLines: 1,
+controller: Ring19controller,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Quantity in inventory',
+hintText: '0'
+),
+textAlign: TextAlign.center,
+),
+),
+],
+),
+ExpansionTile(
+title: Text('13.5'),
+maintainState: true,
+children: [
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+keyboardType: TextInputType.number,
+maxLines: 1,
+controller: Ring20controller,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Quantity in inventory',
+hintText: '0'
+),
+textAlign: TextAlign.center,
+),
+),
+],
+),
+ExpansionTile(
+title: Text('14'),
+maintainState: true,
+children: [
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+keyboardType: TextInputType.number,
+maxLines: 1,
+controller: Ring21controller,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Quantity in inventory',
+hintText: '0'
+),
+textAlign: TextAlign.center,
+),
+),
+],
+),
+ExpansionTile(
+title: Text('14.5'),
+maintainState: true,
+children: [
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+keyboardType: TextInputType.number,
+maxLines: 1,
+controller: Ring22controller,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Quantity in inventory',
+hintText: '0'
+),
+textAlign: TextAlign.center,
+),
+),
+],
+),
+ExpansionTile(
+title: Text('15'),
+maintainState: true,
+children: [
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+keyboardType: TextInputType.number,
+maxLines: 1,
+controller: Ring23controller,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Quantity in inventory',
+hintText: '0'
+),
+textAlign: TextAlign.center,
+),
+),
+],
+),
+
+],
+),
+ListView(
+children: [
+ExpansionTile(
+title: Text('5'),
+maintainState: true,
+children: [
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+keyboardType: TextInputType.number,
+maxLines: 1,
+controller: Shoe1controller,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Quantity in inventory',
+hintText: '0'
+),
+textAlign: TextAlign.center,
+),
+),
+],
+),
+ExpansionTile(
+title: Text('5-1/2'),
+maintainState: true,
+children: [
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+keyboardType: TextInputType.number,
+maxLines: 1,
+controller: Shoe2controller,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Quantity in inventory',
+hintText: '0'
+),
+textAlign: TextAlign.center,
+),
+),
+],
+),
+ExpansionTile(
+title: Text('6'),
+maintainState: true,
+children: [
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+keyboardType: TextInputType.number,
+maxLines: 1,
+controller: Shoe3controller,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Quantity in inventory',
+hintText: '0'
+),
+textAlign: TextAlign.center,
+),
+),
+],
+),
+ExpansionTile(
+title: Text('6-1/2'),
+maintainState: true,
+children: [
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+keyboardType: TextInputType.number,
+maxLines: 1,
+controller: Shoe4controller,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Quantity in inventory',
+hintText: '0'
+),
+textAlign: TextAlign.center,
+),
+),
+],
+),
+ExpansionTile(
+title: Text('7'),
+maintainState: true,
+children: [
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+keyboardType: TextInputType.number,
+maxLines: 1,
+controller: Shoe5controller,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Quantity in inventory',
+hintText: '0'
+),
+textAlign: TextAlign.center,
+),
+),
+],
+),
+ExpansionTile(
+title: Text('7-1/2'),
+maintainState: true,
+children: [
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+keyboardType: TextInputType.number,
+maxLines: 1,
+controller: Shoe6controller,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Quantity in inventory',
+hintText: '0'
+),
+textAlign: TextAlign.center,
+),
+),
+],
+),
+ExpansionTile(
+title: Text('8'),
+maintainState: true,
+children: [
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+keyboardType: TextInputType.number,
+maxLines: 1,
+controller: Shoe7controller,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Quantity in inventory',
+hintText: '0'
+),
+textAlign: TextAlign.center,
+),
+),
+],
+),
+ExpansionTile(
+title: Text('8-1/2'),
+maintainState: true,
+children: [
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+keyboardType: TextInputType.number,
+maxLines: 1,
+controller: Shoe8controller,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Quantity in inventory',
+hintText: '0'
+),
+textAlign: TextAlign.center,
+),
+),
+],
+),
+ExpansionTile(
+title: Text('9'),
+maintainState: true,
+children: [
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+keyboardType: TextInputType.number,
+maxLines: 1,
+controller: Shoe9controller,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Quantity in inventory',
+hintText: '0'
+),
+textAlign: TextAlign.center,
+),
+),
+],
+),
+ExpansionTile(
+title: Text('9-1/2'),
+maintainState: true,
+children: [
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+keyboardType: TextInputType.number,
+maxLines: 1,
+controller: Shoe10controller,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Quantity in inventory',
+hintText: '0'
+),
+textAlign: TextAlign.center,
+),
+),
+],
+),
+ExpansionTile(
+title: Text('10'),
+maintainState: true,
+children: [
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+keyboardType: TextInputType.number,
+maxLines: 1,
+controller: Shoe11controller,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Quantity in inventory',
+hintText: '0'
+),
+textAlign: TextAlign.center,
+),
+),
+],
+),
+ExpansionTile(
+title: Text('10-1/2'),
+maintainState: true,
+children: [
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+keyboardType: TextInputType.number,
+maxLines: 1,
+controller: Shoe12controller,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Quantity in inventory',
+hintText: '0'
+),
+textAlign: TextAlign.center,
+),
+),
+],
+),
+ExpansionTile(
+title: Text('12'),
+maintainState: true,
+children: [
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+keyboardType: TextInputType.number,
+maxLines: 1,
+controller: Shoe13controller,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Quantity in inventory',
+hintText: '0'
+),
+textAlign: TextAlign.center,
+),
+),
+],
+),
+ExpansionTile(
+title: Text('13'),
+maintainState: true,
+children: [
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+keyboardType: TextInputType.number,
+maxLines: 1,
+controller: Shoe14controller,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Quantity in inventory',
+hintText: '0'
+),
+textAlign: TextAlign.center,
+),
+),
+],
+),
+ExpansionTile(
+title: Text('14'),
+maintainState: true,
+children: [
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+keyboardType: TextInputType.number,
+maxLines: 1,
+controller: Shoe15controller,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Quantity in inventory',
+hintText: '0'
+),
+textAlign: TextAlign.center,
+),
+),
+],
+),
+ExpansionTile(
+title: Text('15-1/2'),
+maintainState: true,
+children: [
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+keyboardType: TextInputType.number,
+maxLines: 1,
+controller: Shoe16controller,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Quantity in inventory',
+hintText: '0'
+),
+textAlign: TextAlign.center,
+),
+),
+],
+),
+
+
+
+],
+),
+
+],
+onChange: (index) => print(index),
+
+),
+),
+),
+],
+);
+},
+);
+}
+else  if(dropdownValue=='Baby-Boys'||dropdownValue=='Baby-Girls') {
+return
+showModalBottomSheet(
+context: context,
+builder: (BuildContext context) {
+return
+Column(
+children: [
+
+Expanded(
+child: Container(
+// color: kPrimaryColor,
+child: ContainedTabBarView(
+tabs: [
+Text('Clothing',style:TextStyle(color:Colors.black)),
+Text('Made-to-order',style:TextStyle(color:Colors.black)),
+Text('Free size',style:TextStyle(color:Colors.black)),
+Text('Custom size(upto 10)',style:TextStyle(color:Colors.black)),
+Text('Ring(US/Canada)',style:TextStyle(color:Colors.black)),
+
+Text('Shoes(US/Canada)',style:TextStyle(color:Colors.black))
+],
+views: [
+ListView(
+
+
+children: [
+
+
+ExpansionTile(
+title: Text('0-3 mth'),
+maintainState: true,
+children: [
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+keyboardType: TextInputType.number,
+maxLines: 1,
+controller: xxxscontroller,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Quantity in inventory',
+hintText: '0'
+),
+textAlign: TextAlign.center,
+),
+),
+],
+),
+ExpansionTile(
+title: Text('3-6 mth'),
+maintainState: true,
+children: [
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+keyboardType: TextInputType.number,
+maxLines: 1,
+controller: xxscontroller,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Quantity in inventory',
+hintText: '0'
+),
+textAlign: TextAlign.center,
+),
+),
+],
+),
+ExpansionTile(
+title: Text('6-9 mth'),
+maintainState: true,
+children: [
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+keyboardType: TextInputType.number,
+maxLines: 1,
+controller: xscontroller,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Quantity in inventory',
+hintText: '0'
+),
+textAlign: TextAlign.center,
+),
+),
+],
+),
+ExpansionTile(
+title: Text('9-12 mth'),
+maintainState: true,
+children: [
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+keyboardType: TextInputType.number,
+maxLines: 1,
+controller: scontroller,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Quantity in inventory',
+hintText: '0'
+),
+textAlign: TextAlign.center,
+),
+),
+],
+),
+ExpansionTile(
+title: Text('12-18 mth'),
+maintainState: true,
+children: [
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+keyboardType: TextInputType.number,
+maxLines: 1,
+controller: mcontroller,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Quantity in inventory',
+hintText: '0'
+),
+textAlign: TextAlign.center,
+),
+),
+],
+),
+ExpansionTile(
+title: Text('18-24 mth'),
+maintainState: true,
+children: [
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+keyboardType: TextInputType.number,
+maxLines: 1,
+controller: lcontroller,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Quantity in inventory',
+hintText: '0'
+),
+textAlign: TextAlign.center,
+),
+),
+],
+),
+
+
+],
+),
+ListView(
+
+
+children: [
+
+
+ExpansionTile(
+title: Text('Made-to-order'),
+maintainState: true,
+children: [
+
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+keyboardType: TextInputType.number,
+maxLines: 1,
+controller: mtocontroller,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Quantity in inventory',
+hintText: '0'
+),
+textAlign: TextAlign.center,
+),
+),
+],
+),
+
+
+],
+),
+ListView(
+
+
+children: [
+
+
+ExpansionTile(
+title: Text('Free size'),
+maintainState: true,
+children: [
+
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+keyboardType: TextInputType.number,
+maxLines: 1,
+controller: freesizecontroller,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Quantity in inventory',
+hintText: '0'
+),
+textAlign: TextAlign.center,
+),
+),
+],
+),
+
+
+],
+),
+ListView(
+
+
+children: [
+
+
+ExpansionTile(
+title: Text('Custom size 1'),
+maintainState: true,
+children: [
+
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+maxLines: 1,
+controller: customController1,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Title',
+hintText: '117 cm'
+),
+textAlign: TextAlign.center,
+),
+),
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+keyboardType: TextInputType.number,
+maxLines: 1,
+controller: customController11,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Additional price(optional)',
+hintText: '0'
+),
+textAlign: TextAlign.center,
+),
+),
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+keyboardType: TextInputType.number,
+maxLines: 1,
+controller: customController12,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Quantity in inventory',
+hintText: '0'
+),
+textAlign: TextAlign.center,
+),
+),
+
+],
+),
+ExpansionTile(
+title: Text('Custom size 2'),
+maintainState: true,
+children: [
+
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+maxLines: 1,
+controller: customController2,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Title',
+hintText: '117 cm'
+),
+textAlign: TextAlign.center,
+),
+),
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+keyboardType: TextInputType.number,
+maxLines: 1,
+controller: customController21,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Additional price(optional)',
+hintText: '0'
+),
+textAlign: TextAlign.center,
+),
+),
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+keyboardType: TextInputType.number,
+maxLines: 1,
+controller: customController22,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Quantity in inventory',
+hintText: '0'
+),
+textAlign: TextAlign.center,
+),
+),
+
+],
+),
+ExpansionTile(
+title: Text('Custom size 3'),
+maintainState: true,
+children: [
+
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+maxLines: 1,
+controller: customController3,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Title',
+hintText: '117 cm'
+),
+textAlign: TextAlign.center,
+),
+),
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+keyboardType: TextInputType.number,
+maxLines: 1,
+controller: customController31,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Additional price(optional)',
+hintText: '0'
+),
+textAlign: TextAlign.center,
+),
+),
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+keyboardType: TextInputType.number,
+maxLines: 1,
+controller: customController32,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Quantity in inventory',
+hintText: '0'
+),
+textAlign: TextAlign.center,
+),
+),
+
+],
+),
+ExpansionTile(
+title: Text('Custom size 4'),
+maintainState: true,
+children: [
+
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+maxLines: 1,
+controller: customController4,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Title',
+hintText: '117 cm'
+),
+textAlign: TextAlign.center,
+),
+),
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+keyboardType: TextInputType.number,
+maxLines: 1,
+controller: customController41,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Additional price(optional)',
+hintText: '0'
+),
+textAlign: TextAlign.center,
+),
+),
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+keyboardType: TextInputType.number,
+maxLines: 1,
+controller: customController42,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Quantity in inventory',
+hintText: '0'
+),
+textAlign: TextAlign.center,
+),
+),
+
+],
+),
+ExpansionTile(
+title: Text('Custom size 5'),
+maintainState: true,
+children: [
+
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+maxLines: 1,
+controller: customController5,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Title',
+hintText: '117 cm'
+),
+textAlign: TextAlign.center,
+),
+),
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+keyboardType: TextInputType.number,
+maxLines: 1,
+controller: customController51,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Additional price(optional)',
+hintText: '0'
+),
+textAlign: TextAlign.center,
+),
+),
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+keyboardType: TextInputType.number,
+maxLines: 1,
+controller: customController52,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Quantity in inventory',
+hintText: '0'
+),
+textAlign: TextAlign.center,
+),
+),
+
+],
+),
+ExpansionTile(
+title: Text('Custom size 6'),
+maintainState: true,
+children: [
+
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+maxLines: 1,
+controller: customController6,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Title',
+hintText: '117 cm'
+),
+textAlign: TextAlign.center,
+),
+),
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+keyboardType: TextInputType.number,
+maxLines: 1,
+controller: customController61,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Additional price(optional)',
+hintText: '0'
+),
+textAlign: TextAlign.center,
+),
+),
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+keyboardType: TextInputType.number,
+maxLines: 1,
+controller: customController62,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Quantity in inventory',
+hintText: '0'
+),
+textAlign: TextAlign.center,
+),
+),
+
+],
+),
+ExpansionTile(
+title: Text('Custom size 7'),
+maintainState: true,
+children: [
+
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+maxLines: 1,
+controller: customController7,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Title',
+hintText: '117 cm'
+),
+textAlign: TextAlign.center,
+),
+),
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+keyboardType: TextInputType.number,
+maxLines: 1,
+controller: customController71,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Additional price(optional)',
+hintText: '0'
+),
+textAlign: TextAlign.center,
+),
+),
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+keyboardType: TextInputType.number,
+maxLines: 1,
+controller: customController72,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Quantity in inventory',
+hintText: '0'
+),
+textAlign: TextAlign.center,
+),
+),
+
+],
+),
+ExpansionTile(
+title: Text('Custom size 8'),
+maintainState: true,
+children: [
+
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+maxLines: 1,
+controller: customController8,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Title',
+hintText: '117 cm'
+),
+textAlign: TextAlign.center,
+),
+),
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+keyboardType: TextInputType.number,
+maxLines: 1,
+controller: customController81,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Additional price(optional)',
+hintText: '0'
+),
+textAlign: TextAlign.center,
+),
+),
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+keyboardType: TextInputType.number,
+maxLines: 1,
+controller: customController82,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Quantity in inventory',
+hintText: '0'
+),
+textAlign: TextAlign.center,
+),
+),
+
+],
+),
+ExpansionTile(
+title: Text('Custom size 9'),
+maintainState: true,
+children: [
+
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+maxLines: 1,
+controller: customController9,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Title',
+hintText: '117 cm'
+),
+textAlign: TextAlign.center,
+),
+),
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+keyboardType: TextInputType.number,
+maxLines: 1,
+controller: customController91,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Additional price(optional)',
+hintText: '0'
+),
+textAlign: TextAlign.center,
+),
+),
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+keyboardType: TextInputType.number,
+maxLines: 1,
+controller: customController92,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Quantity in inventory',
+hintText: '0'
+),
+textAlign: TextAlign.center,
+),
+),
+
+],
+),
+ExpansionTile(
+title: Text('Custom size 10'),
+maintainState: true,
+children: [
+
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+maxLines: 1,
+controller: customController10,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Title',
+hintText: '117 cm'
+),
+textAlign: TextAlign.center,
+),
+),
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+keyboardType: TextInputType.number,
+maxLines: 1,
+controller: customController101,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Additional price(optional)',
+hintText: '0'
+),
+textAlign: TextAlign.center,
+),
+),
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+keyboardType: TextInputType.number,
+maxLines: 1,
+controller: customController102,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Quantity in inventory',
+hintText: '0'
+),
+textAlign: TextAlign.center,
+),
+),
+
+],
+),
+
+
+
+],
+),
+ListView(
+children: [
+ExpansionTile(
+title: Text('4'),
+maintainState: true,
+children: [
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+keyboardType: TextInputType.number,
+maxLines: 1,
+controller: Ring1controller,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Quantity in inventory',
+hintText: '0'
+),
+textAlign: TextAlign.center,
+),
+),
+],
+),
+ExpansionTile(
+title: Text('4.5'),
+maintainState: true,
+children: [
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+keyboardType: TextInputType.number,
+maxLines: 1,
+controller: Ring2controller,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Quantity in inventory',
+hintText: '0'
+),
+textAlign: TextAlign.center,
+),
+),
+],
+),
+ExpansionTile(
+title: Text('5'),
+maintainState: true,
+children: [
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+keyboardType: TextInputType.number,
+maxLines: 1,
+controller: Ring3controller,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Quantity in inventory',
+hintText: '0'
+),
+textAlign: TextAlign.center,
+),
+),
+],
+),
+ExpansionTile(
+title: Text('5.5'),
+maintainState: true,
+children: [
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+keyboardType: TextInputType.number,
+maxLines: 1,
+controller: Ring4controller,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Quantity in inventory',
+hintText: '0'
+),
+textAlign: TextAlign.center,
+),
+),
+],
+),
+ExpansionTile(
+title: Text('6'),
+maintainState: true,
+children: [
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+keyboardType: TextInputType.number,
+maxLines: 1,
+controller: Ring5controller,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Quantity in inventory',
+hintText: '0'
+),
+textAlign: TextAlign.center,
+),
+),
+],
+),
+ExpansionTile(
+title: Text('6.5'),
+maintainState: true,
+children: [
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+keyboardType: TextInputType.number,
+maxLines: 1,
+controller: Ring6controller,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Quantity in inventory',
+hintText: '0'
+),
+textAlign: TextAlign.center,
+),
+),
+],
+),
+ExpansionTile(
+title: Text('7'),
+maintainState: true,
+children: [
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+keyboardType: TextInputType.number,
+maxLines: 1,
+controller: Ring7controller,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Quantity in inventory',
+hintText: '0'
+),
+textAlign: TextAlign.center,
+),
+),
+],
+),
+ExpansionTile(
+title: Text('7.5'),
+maintainState: true,
+children: [
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+keyboardType: TextInputType.number,
+maxLines: 1,
+controller: Ring8controller,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Quantity in inventory',
+hintText: '0'
+),
+textAlign: TextAlign.center,
+),
+),
+],
+),
+ExpansionTile(
+title: Text('8'),
+maintainState: true,
+children: [
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+keyboardType: TextInputType.number,
+maxLines: 1,
+controller: Ring9controller,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Quantity in inventory',
+hintText: '0'
+),
+textAlign: TextAlign.center,
+),
+),
+],
+),
+ExpansionTile(
+title: Text('8.5'),
+maintainState: true,
+children: [
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+keyboardType: TextInputType.number,
+maxLines: 1,
+controller: Ring10controller,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Quantity in inventory',
+hintText: '0'
+),
+textAlign: TextAlign.center,
+),
+),
+],
+),
+ExpansionTile(
+title: Text('9'),
+maintainState: true,
+children: [
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+keyboardType: TextInputType.number,
+maxLines: 1,
+controller: Ring11controller,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Quantity in inventory',
+hintText: '0'
+),
+textAlign: TextAlign.center,
+),
+),
+],
+),
+ExpansionTile(
+title: Text('9.5'),
+maintainState: true,
+children: [
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+keyboardType: TextInputType.number,
+maxLines: 1,
+controller: Ring12controller,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Quantity in inventory',
+hintText: '0'
+),
+textAlign: TextAlign.center,
+),
+),
+],
+),
+ExpansionTile(
+title: Text('10'),
+maintainState: true,
+children: [
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+keyboardType: TextInputType.number,
+maxLines: 1,
+controller: Ring13controller,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Quantity in inventory',
+hintText: '0'
+),
+textAlign: TextAlign.center,
+),
+),
+],
+),
+ExpansionTile(
+title: Text('10.5'),
+maintainState: true,
+children: [
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+keyboardType: TextInputType.number,
+maxLines: 1,
+controller: Ring14controller,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Quantity in inventory',
+hintText: '0'
+),
+textAlign: TextAlign.center,
+),
+),
+],
+),
+ExpansionTile(
+title: Text('11'),
+maintainState: true,
+children: [
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+keyboardType: TextInputType.number,
+maxLines: 1,
+controller: Ring15controller,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Quantity in inventory',
+hintText: '0'
+),
+textAlign: TextAlign.center,
+),
+),
+],
+),
+ExpansionTile(
+title: Text('11.5'),
+maintainState: true,
+children: [
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+keyboardType: TextInputType.number,
+maxLines: 1,
+controller: Ring16controller,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Quantity in inventory',
+hintText: '0'
+),
+textAlign: TextAlign.center,
+),
+),
+],
+),
+ExpansionTile(
+title: Text('12'),
+maintainState: true,
+children: [
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+keyboardType: TextInputType.number,
+maxLines: 1,
+controller: Ring17controller,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Quantity in inventory',
+hintText: '0'
+),
+textAlign: TextAlign.center,
+),
+),
+],
+),
+ExpansionTile(
+title: Text('12.5'),
+maintainState: true,
+children: [
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+keyboardType: TextInputType.number,
+maxLines: 1,
+controller: Ring18controller,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Quantity in inventory',
+hintText: '0'
+),
+textAlign: TextAlign.center,
+),
+),
+],
+),
+ExpansionTile(
+title: Text('13'),
+maintainState: true,
+children: [
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+keyboardType: TextInputType.number,
+maxLines: 1,
+controller: Ring19controller,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Quantity in inventory',
+hintText: '0'
+),
+textAlign: TextAlign.center,
+),
+),
+],
+),
+ExpansionTile(
+title: Text('13.5'),
+maintainState: true,
+children: [
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+keyboardType: TextInputType.number,
+maxLines: 1,
+controller: Ring20controller,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Quantity in inventory',
+hintText: '0'
+),
+textAlign: TextAlign.center,
+),
+),
+],
+),
+ExpansionTile(
+title: Text('14'),
+maintainState: true,
+children: [
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+keyboardType: TextInputType.number,
+maxLines: 1,
+controller: Ring21controller,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Quantity in inventory',
+hintText: '0'
+),
+textAlign: TextAlign.center,
+),
+),
+],
+),
+ExpansionTile(
+title: Text('14.5'),
+maintainState: true,
+children: [
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+keyboardType: TextInputType.number,
+maxLines: 1,
+controller: Ring22controller,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Quantity in inventory',
+hintText: '0'
+),
+textAlign: TextAlign.center,
+),
+),
+],
+),
+ExpansionTile(
+title: Text('15'),
+maintainState: true,
+children: [
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+keyboardType: TextInputType.number,
+maxLines: 1,
+controller: Ring23controller,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Quantity in inventory',
+hintText: '0'
+),
+textAlign: TextAlign.center,
+),
+),
+],
+),
+
+],
+),
+ListView(
+children: [
+ExpansionTile(
+title: Text('0-3 mth'),
+maintainState: true,
+children: [
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+keyboardType: TextInputType.number,
+maxLines: 1,
+controller: Shoe1controller,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Quantity in inventory',
+hintText: '0'
+),
+textAlign: TextAlign.center,
+),
+),
+],
+),
+ExpansionTile(
+title: Text('3-6 mth'),
+maintainState: true,
+children: [
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+keyboardType: TextInputType.number,
+maxLines: 1,
+controller: Shoe2controller,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Quantity in inventory',
+hintText: '0'
+),
+textAlign: TextAlign.center,
+),
+),
+],
+),
+ExpansionTile(
+title: Text('6 mth'),
+maintainState: true,
+children: [
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+keyboardType: TextInputType.number,
+maxLines: 1,
+controller: Shoe3controller,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Quantity in inventory',
+hintText: '0'
+),
+textAlign: TextAlign.center,
+),
+),
+],
+),
+ExpansionTile(
+title: Text('9 mth'),
+maintainState: true,
+children: [
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+keyboardType: TextInputType.number,
+maxLines: 1,
+controller: Shoe4controller,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Quantity in inventory',
+hintText: '0'
+),
+textAlign: TextAlign.center,
+),
+),
+],
+),
+ExpansionTile(
+title: Text('9-12 mth'),
+maintainState: true,
+children: [
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+keyboardType: TextInputType.number,
+maxLines: 1,
+controller: Shoe5controller,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Quantity in inventory',
+hintText: '0'
+),
+textAlign: TextAlign.center,
+),
+),
+],
+),
+ExpansionTile(
+title: Text('12-18 mth'),
+maintainState: true,
+children: [
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+keyboardType: TextInputType.number,
+maxLines: 1,
+controller: Shoe6controller,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Quantity in inventory',
+hintText: '0'
+),
+textAlign: TextAlign.center,
+),
+),
+],
+),
+ExpansionTile(
+title: Text('18-24 mth'),
+maintainState: true,
+children: [
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+keyboardType: TextInputType.number,
+maxLines: 1,
+controller: Shoe7controller,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Quantity in inventory',
+hintText: '0'
+),
+textAlign: TextAlign.center,
+),
+),
+],
+),
+
+
+
+
+],
+),
+
+],
+onChange: (index) => print(index),
+
+),
+),
+),
+
+],
+);
+
+},
+);
+}
+
+else if(dropdownValue=='Kids-Boys'||dropdownValue=='Kids-Girls') {
+return
+showModalBottomSheet(
+context: context,
+builder: (BuildContext context) {
+return
+Column(
+children: [
+
+
+Expanded(
+child: Container(
+// color: kPrimaryColor,
+child: ContainedTabBarView(
+tabs: [
+Text('Clothing',style:TextStyle(color:Colors.black)),
+Text('Made-to-order',style:TextStyle(color:Colors.black)),
+Text('Free size',style:TextStyle(color:Colors.black)),
+Text('Custom size(upto 10)',style:TextStyle(color:Colors.black)),
+Text('Ring(US/Canada)',style:TextStyle(color:Colors.black)),
+
+Text('Shoes(US/Canada)',style:TextStyle(color:Colors.black))
+],
+views: [
+ListView(
+
+
+children: [
+
+ExpansionTile(
+title: Text('2'),
+maintainState: true,
+children: [
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+keyboardType: TextInputType.number,
+maxLines: 1,
+controller: xxxscontroller,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Quantity in inventory',
+hintText: '0'
+),
+textAlign: TextAlign.center,
+),
+),
+],
+),
+ExpansionTile(
+title: Text('3-4'),
+maintainState: true,
+children: [
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+keyboardType: TextInputType.number,
+maxLines: 1,
+controller: xxscontroller,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Quantity in inventory',
+hintText: '0'
+),
+textAlign: TextAlign.center,
+),
+),
+],
+),
+ExpansionTile(
+title: Text('4-5'),
+maintainState: true,
+children: [
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+keyboardType: TextInputType.number,
+maxLines: 1,
+controller: xscontroller,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Quantity in inventory',
+hintText: '0'
+),
+textAlign: TextAlign.center,
+),
+),
+],
+),
+ExpansionTile(
+title: Text('5-6'),
+maintainState: true,
+children: [
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+keyboardType: TextInputType.number,
+maxLines: 1,
+controller: scontroller,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Quantity in inventory',
+hintText: '0'
+),
+textAlign: TextAlign.center,
+),
+),
+],
+),
+ExpansionTile(
+title: Text('6-7'),
+maintainState: true,
+children: [
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+keyboardType: TextInputType.number,
+maxLines: 1,
+controller: mcontroller,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Quantity in inventory',
+hintText: '0'
+),
+textAlign: TextAlign.center,
+),
+),
+],
+),
+ExpansionTile(
+title: Text('7-8'),
+maintainState: true,
+children: [
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+keyboardType: TextInputType.number,
+maxLines: 1,
+controller: lcontroller,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Quantity in inventory',
+hintText: '0'
+),
+textAlign: TextAlign.center,
+),
+),
+],
+),
+ExpansionTile(
+title: Text('8-9'),
+maintainState: true,
+children: [
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+keyboardType: TextInputType.number,
+maxLines: 1,
+controller: xlcontroller,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Quantity in inventory',
+hintText: '0'
+),
+textAlign: TextAlign.center,
+),
+),
+],
+),
+ExpansionTile(
+title: Text('9-10'),
+maintainState: true,
+children: [
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+keyboardType: TextInputType.number,
+maxLines: 1,
+controller: xxlcontroller,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Quantity in inventory',
+hintText: '0'
+),
+textAlign: TextAlign.center,
+),
+),
+],
+),
+ExpansionTile(
+title: Text('10-11'),
+maintainState: true,
+children: [
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+keyboardType: TextInputType.number,
+maxLines: 1,
+controller: xxxlcontroller,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Quantity in inventory',
+hintText: '0'
+),
+textAlign: TextAlign.center,
+),
+),
+],
+),
+ExpansionTile(
+title: Text('11-12'),
+maintainState: true,
+children: [
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+keyboardType: TextInputType.number,
+maxLines: 1,
+controller: fourxlcontroller,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Quantity in inventory',
+hintText: '0'
+),
+textAlign: TextAlign.center,
+),
+),
+],
+),
+
+
+],
+),
+ListView(
+
+
+children: [
+
+
+ExpansionTile(
+title: Text('Made-to-order'),
+maintainState: true,
+children: [
+
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+keyboardType: TextInputType.number,
+maxLines: 1,
+controller: mtocontroller,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Quantity in inventory',
+hintText: '0'
+),
+textAlign: TextAlign.center,
+),
+),
+],
+),
+
+
+],
+),
+ListView(
+
+
+children: [
+
+
+ExpansionTile(
+title: Text('Free size'),
+maintainState: true,
+children: [
+
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+keyboardType: TextInputType.number,
+maxLines: 1,
+controller: freesizecontroller,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Quantity in inventory',
+hintText: '0'
+),
+textAlign: TextAlign.center,
+),
+),
+],
+),
+
+
+],
+),
+ListView(
+
+
+children: [
+
+
+ExpansionTile(
+title: Text('Custom size 1'),
+maintainState: true,
+children: [
+
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+maxLines: 1,
+controller: customController1,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Title',
+hintText: '117 cm'
+),
+textAlign: TextAlign.center,
+),
+),
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+keyboardType: TextInputType.number,
+maxLines: 1,
+controller: customController11,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Additional price(optional)',
+hintText: '0'
+),
+textAlign: TextAlign.center,
+),
+),
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+keyboardType: TextInputType.number,
+maxLines: 1,
+controller: customController12,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Quantity in inventory',
+hintText: '0'
+),
+textAlign: TextAlign.center,
+),
+),
+
+],
+),
+ExpansionTile(
+title: Text('Custom size 2'),
+maintainState: true,
+children: [
+
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+maxLines: 1,
+controller: customController2,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Title',
+hintText: '117 cm'
+),
+textAlign: TextAlign.center,
+),
+),
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+keyboardType: TextInputType.number,
+maxLines: 1,
+controller: customController21,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Additional price(optional)',
+hintText: '0'
+),
+textAlign: TextAlign.center,
+),
+),
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+keyboardType: TextInputType.number,
+maxLines: 1,
+controller: customController22,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Quantity in inventory',
+hintText: '0'
+),
+textAlign: TextAlign.center,
+),
+),
+
+],
+),
+ExpansionTile(
+title: Text('Custom size 3'),
+maintainState: true,
+children: [
+
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+maxLines: 1,
+controller: customController3,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Title',
+hintText: '117 cm'
+),
+textAlign: TextAlign.center,
+),
+),
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+keyboardType: TextInputType.number,
+maxLines: 1,
+controller: customController31,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Additional price(optional)',
+hintText: '0'
+),
+textAlign: TextAlign.center,
+),
+),
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+keyboardType: TextInputType.number,
+maxLines: 1,
+controller: customController32,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Quantity in inventory',
+hintText: '0'
+),
+textAlign: TextAlign.center,
+),
+),
+
+],
+),
+ExpansionTile(
+title: Text('Custom size 4'),
+maintainState: true,
+children: [
+
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+maxLines: 1,
+controller: customController4,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Title',
+hintText: '117 cm'
+),
+textAlign: TextAlign.center,
+),
+),
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+keyboardType: TextInputType.number,
+maxLines: 1,
+controller: customController41,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Additional price(optional)',
+hintText: '0'
+),
+textAlign: TextAlign.center,
+),
+),
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+keyboardType: TextInputType.number,
+maxLines: 1,
+controller: customController42,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Quantity in inventory',
+hintText: '0'
+),
+textAlign: TextAlign.center,
+),
+),
+
+],
+),
+ExpansionTile(
+title: Text('Custom size 5'),
+maintainState: true,
+children: [
+
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+maxLines: 1,
+controller: customController5,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Title',
+hintText: '117 cm'
+),
+textAlign: TextAlign.center,
+),
+),
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+keyboardType: TextInputType.number,
+maxLines: 1,
+controller: customController51,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Additional price(optional)',
+hintText: '0'
+),
+textAlign: TextAlign.center,
+),
+),
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+keyboardType: TextInputType.number,
+maxLines: 1,
+controller: customController52,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Quantity in inventory',
+hintText: '0'
+),
+textAlign: TextAlign.center,
+),
+),
+
+],
+),
+ExpansionTile(
+title: Text('Custom size 6'),
+maintainState: true,
+children: [
+
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+maxLines: 1,
+controller: customController6,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Title',
+hintText: '117 cm'
+),
+textAlign: TextAlign.center,
+),
+),
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+keyboardType: TextInputType.number,
+maxLines: 1,
+controller: customController61,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Additional price(optional)',
+hintText: '0'
+),
+textAlign: TextAlign.center,
+),
+),
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+keyboardType: TextInputType.number,
+maxLines: 1,
+controller: customController62,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Quantity in inventory',
+hintText: '0'
+),
+textAlign: TextAlign.center,
+),
+),
+
+],
+),
+ExpansionTile(
+title: Text('Custom size 7'),
+maintainState: true,
+children: [
+
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+maxLines: 1,
+controller: customController7,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Title',
+hintText: '117 cm'
+),
+textAlign: TextAlign.center,
+),
+),
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+keyboardType: TextInputType.number,
+maxLines: 1,
+controller: customController71,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Additional price(optional)',
+hintText: '0'
+),
+textAlign: TextAlign.center,
+),
+),
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+keyboardType: TextInputType.number,
+maxLines: 1,
+controller: customController72,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Quantity in inventory',
+hintText: '0'
+),
+textAlign: TextAlign.center,
+),
+),
+
+],
+),
+ExpansionTile(
+title: Text('Custom size 8'),
+maintainState: true,
+children: [
+
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+maxLines: 1,
+controller: customController8,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Title',
+hintText: '117 cm'
+),
+textAlign: TextAlign.center,
+),
+),
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+keyboardType: TextInputType.number,
+maxLines: 1,
+controller: customController81,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Additional price(optional)',
+hintText: '0'
+),
+textAlign: TextAlign.center,
+),
+),
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+keyboardType: TextInputType.number,
+maxLines: 1,
+controller: customController82,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Quantity in inventory',
+hintText: '0'
+),
+textAlign: TextAlign.center,
+),
+),
+
+],
+),
+ExpansionTile(
+title: Text('Custom size 9'),
+maintainState: true,
+children: [
+
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+maxLines: 1,
+controller: customController9,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Title',
+hintText: '117 cm'
+),
+textAlign: TextAlign.center,
+),
+),
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+keyboardType: TextInputType.number,
+maxLines: 1,
+controller: customController91,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Additional price(optional)',
+hintText: '0'
+),
+textAlign: TextAlign.center,
+),
+),
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+keyboardType: TextInputType.number,
+maxLines: 1,
+controller: customController92,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Quantity in inventory',
+hintText: '0'
+),
+textAlign: TextAlign.center,
+),
+),
+
+],
+),
+ExpansionTile(
+title: Text('Custom size 10'),
+maintainState: true,
+children: [
+
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+maxLines: 1,
+controller: customController10,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Title',
+hintText: '117 cm'
+),
+textAlign: TextAlign.center,
+),
+),
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+keyboardType: TextInputType.number,
+maxLines: 1,
+controller: customController101,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Additional price(optional)',
+hintText: '0'
+),
+textAlign: TextAlign.center,
+),
+),
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+keyboardType: TextInputType.number,
+maxLines: 1,
+controller: customController102,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Quantity in inventory',
+hintText: '0'
+),
+textAlign: TextAlign.center,
+),
+),
+
+],
+),
+
+
+
+],
+),
+ListView(
+children: [
+ExpansionTile(
+title: Text('4'),
+maintainState: true,
+children: [
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+keyboardType: TextInputType.number,
+maxLines: 1,
+controller: Ring1controller,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Quantity in inventory',
+hintText: '0'
+),
+textAlign: TextAlign.center,
+),
+),
+],
+),
+ExpansionTile(
+title: Text('4.5'),
+maintainState: true,
+children: [
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+keyboardType: TextInputType.number,
+maxLines: 1,
+controller: Ring2controller,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Quantity in inventory',
+hintText: '0'
+),
+textAlign: TextAlign.center,
+),
+),
+],
+),
+ExpansionTile(
+title: Text('5'),
+maintainState: true,
+children: [
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+keyboardType: TextInputType.number,
+maxLines: 1,
+controller: Ring3controller,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Quantity in inventory',
+hintText: '0'
+),
+textAlign: TextAlign.center,
+),
+),
+],
+),
+ExpansionTile(
+title: Text('5.5'),
+maintainState: true,
+children: [
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+keyboardType: TextInputType.number,
+maxLines: 1,
+controller: Ring4controller,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Quantity in inventory',
+hintText: '0'
+),
+textAlign: TextAlign.center,
+),
+),
+],
+),
+ExpansionTile(
+title: Text('6'),
+maintainState: true,
+children: [
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+keyboardType: TextInputType.number,
+maxLines: 1,
+controller: Ring5controller,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Quantity in inventory',
+hintText: '0'
+),
+textAlign: TextAlign.center,
+),
+),
+],
+),
+ExpansionTile(
+title: Text('6.5'),
+maintainState: true,
+children: [
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+keyboardType: TextInputType.number,
+maxLines: 1,
+controller: Ring6controller,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Quantity in inventory',
+hintText: '0'
+),
+textAlign: TextAlign.center,
+),
+),
+],
+),
+ExpansionTile(
+title: Text('7'),
+maintainState: true,
+children: [
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+keyboardType: TextInputType.number,
+maxLines: 1,
+controller: Ring7controller,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Quantity in inventory',
+hintText: '0'
+),
+textAlign: TextAlign.center,
+),
+),
+],
+),
+ExpansionTile(
+title: Text('7.5'),
+maintainState: true,
+children: [
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+keyboardType: TextInputType.number,
+maxLines: 1,
+controller: Ring8controller,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Quantity in inventory',
+hintText: '0'
+),
+textAlign: TextAlign.center,
+),
+),
+],
+),
+ExpansionTile(
+title: Text('8'),
+maintainState: true,
+children: [
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+keyboardType: TextInputType.number,
+maxLines: 1,
+controller: Ring9controller,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Quantity in inventory',
+hintText: '0'
+),
+textAlign: TextAlign.center,
+),
+),
+],
+),
+ExpansionTile(
+title: Text('8.5'),
+maintainState: true,
+children: [
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+keyboardType: TextInputType.number,
+maxLines: 1,
+controller: Ring10controller,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Quantity in inventory',
+hintText: '0'
+),
+textAlign: TextAlign.center,
+),
+),
+],
+),
+ExpansionTile(
+title: Text('9'),
+maintainState: true,
+children: [
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+keyboardType: TextInputType.number,
+maxLines: 1,
+controller: Ring11controller,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Quantity in inventory',
+hintText: '0'
+),
+textAlign: TextAlign.center,
+),
+),
+],
+),
+ExpansionTile(
+title: Text('9.5'),
+maintainState: true,
+children: [
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+keyboardType: TextInputType.number,
+maxLines: 1,
+controller: Ring12controller,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Quantity in inventory',
+hintText: '0'
+),
+textAlign: TextAlign.center,
+),
+),
+],
+),
+ExpansionTile(
+title: Text('10'),
+maintainState: true,
+children: [
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+keyboardType: TextInputType.number,
+maxLines: 1,
+controller: Ring13controller,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Quantity in inventory',
+hintText: '0'
+),
+textAlign: TextAlign.center,
+),
+),
+],
+),
+ExpansionTile(
+title: Text('10.5'),
+maintainState: true,
+children: [
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+keyboardType: TextInputType.number,
+maxLines: 1,
+controller: Ring14controller,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Quantity in inventory',
+hintText: '0'
+),
+textAlign: TextAlign.center,
+),
+),
+],
+),
+ExpansionTile(
+title: Text('11'),
+maintainState: true,
+children: [
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+keyboardType: TextInputType.number,
+maxLines: 1,
+controller: Ring15controller,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Quantity in inventory',
+hintText: '0'
+),
+textAlign: TextAlign.center,
+),
+),
+],
+),
+ExpansionTile(
+title: Text('11.5'),
+maintainState: true,
+children: [
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+keyboardType: TextInputType.number,
+maxLines: 1,
+controller: Ring16controller,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Quantity in inventory',
+hintText: '0'
+),
+textAlign: TextAlign.center,
+),
+),
+],
+),
+ExpansionTile(
+title: Text('12'),
+maintainState: true,
+children: [
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+keyboardType: TextInputType.number,
+maxLines: 1,
+controller: Ring17controller,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Quantity in inventory',
+hintText: '0'
+),
+textAlign: TextAlign.center,
+),
+),
+],
+),
+ExpansionTile(
+title: Text('12.5'),
+maintainState: true,
+children: [
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+keyboardType: TextInputType.number,
+maxLines: 1,
+controller: Ring18controller,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Quantity in inventory',
+hintText: '0'
+),
+textAlign: TextAlign.center,
+),
+),
+],
+),
+ExpansionTile(
+title: Text('13'),
+maintainState: true,
+children: [
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+keyboardType: TextInputType.number,
+maxLines: 1,
+controller: Ring19controller,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Quantity in inventory',
+hintText: '0'
+),
+textAlign: TextAlign.center,
+),
+),
+],
+),
+ExpansionTile(
+title: Text('13.5'),
+maintainState: true,
+children: [
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+keyboardType: TextInputType.number,
+maxLines: 1,
+controller: Ring20controller,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Quantity in inventory',
+hintText: '0'
+),
+textAlign: TextAlign.center,
+),
+),
+],
+),
+ExpansionTile(
+title: Text('14'),
+maintainState: true,
+children: [
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+keyboardType: TextInputType.number,
+maxLines: 1,
+controller: Ring21controller,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Quantity in inventory',
+hintText: '0'
+),
+textAlign: TextAlign.center,
+),
+),
+],
+),
+ExpansionTile(
+title: Text('14.5'),
+maintainState: true,
+children: [
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+keyboardType: TextInputType.number,
+maxLines: 1,
+controller: Ring22controller,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Quantity in inventory',
+hintText: '0'
+),
+textAlign: TextAlign.center,
+),
+),
+],
+),
+ExpansionTile(
+title: Text('15'),
+maintainState: true,
+children: [
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+keyboardType: TextInputType.number,
+maxLines: 1,
+controller: Ring23controller,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Quantity in inventory',
+hintText: '0'
+),
+textAlign: TextAlign.center,
+),
+),
+],
+),
+
+],
+),
+ListView(
+children: [
+ExpansionTile(
+title: Text('2 Y'),
+maintainState: true,
+children: [
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+keyboardType: TextInputType.number,
+maxLines: 1,
+controller: Shoe1controller,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Quantity in inventory',
+hintText: '0'
+),
+textAlign: TextAlign.center,
+),
+),
+],
+),
+ExpansionTile(
+title: Text('2 Y'),
+maintainState: true,
+children: [
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+keyboardType: TextInputType.number,
+maxLines: 1,
+controller: Shoe2controller,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Quantity in inventory',
+hintText: '0'
+),
+textAlign: TextAlign.center,
+),
+),
+],
+),
+ExpansionTile(
+title: Text('3 Y'),
+maintainState: true,
+children: [
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+keyboardType: TextInputType.number,
+maxLines: 1,
+controller: Shoe3controller,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Quantity in inventory',
+hintText: '0'
+),
+textAlign: TextAlign.center,
+),
+),
+],
+),
+ExpansionTile(
+title: Text('3 Y'),
+maintainState: true,
+children: [
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+keyboardType: TextInputType.number,
+maxLines: 1,
+controller: Shoe4controller,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Quantity in inventory',
+hintText: '0'
+),
+textAlign: TextAlign.center,
+),
+),
+],
+),
+ExpansionTile(
+title: Text('4 Y'),
+maintainState: true,
+children: [
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+keyboardType: TextInputType.number,
+maxLines: 1,
+controller: Shoe5controller,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Quantity in inventory',
+hintText: '0'
+),
+textAlign: TextAlign.center,
+),
+),
+],
+),
+ExpansionTile(
+title: Text('5 Y'),
+maintainState: true,
+children: [
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+keyboardType: TextInputType.number,
+maxLines: 1,
+controller: Shoe6controller,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Quantity in inventory',
+hintText: '0'
+),
+textAlign: TextAlign.center,
+),
+),
+],
+),
+ExpansionTile(
+title: Text('6 Y'),
+maintainState: true,
+children: [
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+keyboardType: TextInputType.number,
+maxLines: 1,
+controller: Shoe7controller,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Quantity in inventory',
+hintText: '0'
+),
+textAlign: TextAlign.center,
+),
+),
+],
+),
+ExpansionTile(
+title: Text('7 Y'),
+maintainState: true,
+children: [
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+keyboardType: TextInputType.number,
+maxLines: 1,
+controller: Shoe8controller,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Quantity in inventory',
+hintText: '0'
+),
+textAlign: TextAlign.center,
+),
+),
+],
+),
+ExpansionTile(
+title: Text('8 Y'),
+maintainState: true,
+children: [
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+keyboardType: TextInputType.number,
+maxLines: 1,
+controller: Shoe9controller,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Quantity in inventory',
+hintText: '0'
+),
+textAlign: TextAlign.center,
+),
+),
+],
+),
+ExpansionTile(
+title: Text('8 Y'),
+maintainState: true,
+children: [
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+keyboardType: TextInputType.number,
+maxLines: 1,
+controller: Shoe10controller,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Quantity in inventory',
+hintText: '0'
+),
+textAlign: TextAlign.center,
+),
+),
+],
+),
+ExpansionTile(
+title: Text('9 Y'),
+maintainState: true,
+children: [
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+keyboardType: TextInputType.number,
+maxLines: 1,
+controller: Shoe11controller,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Quantity in inventory',
+hintText: '0'
+),
+textAlign: TextAlign.center,
+),
+),
+],
+),
+ExpansionTile(
+title: Text('10 Y'),
+maintainState: true,
+children: [
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+keyboardType: TextInputType.number,
+maxLines: 1,
+controller: Shoe12controller,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Quantity in inventory',
+hintText: '0'
+),
+textAlign: TextAlign.center,
+),
+),
+],
+),
+ExpansionTile(
+title: Text('11 Y'),
+maintainState: true,
+children: [
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+keyboardType: TextInputType.number,
+maxLines: 1,
+controller: Shoe13controller,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Quantity in inventory',
+hintText: '0'
+),
+textAlign: TextAlign.center,
+),
+),
+],
+),
+ExpansionTile(
+title: Text('12 Y'),
+maintainState: true,
+children: [
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+keyboardType: TextInputType.number,
+maxLines: 1,
+controller: Shoe14controller,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Quantity in inventory',
+hintText: '0'
+),
+textAlign: TextAlign.center,
+),
+),
+],
+),
+
+
+
+
+],
+),
+
+],
+onChange: (index) => print(index),
+
+),
+),
+),
+
+],
+);
+
+},
+);
+}
+
+else if(dropdownValue=='Teen-Boys'||dropdownValue=='Teen-Girls') {
+return
+showModalBottomSheet(
+context: context,
+builder: (BuildContext context) {
+return
+Column(
+children: [
+
+Expanded(
+child: Container(
+// color: kPrimaryColor,
+child: ContainedTabBarView(
+tabs: [
+Text('Clothing',style:TextStyle(color:Colors.black)),
+Text('Made-to-order',style:TextStyle(color:Colors.black)),
+Text('Free size',style:TextStyle(color:Colors.black)),
+Text('Custom size(upto 10)',style:TextStyle(color:Colors.black)),
+Text('Ring(US/Canada)',style:TextStyle(color:Colors.black)),
+
+Text('Shoes(US/Canada)',style:TextStyle(color:Colors.black))
+],
+views: [
+ListView(
+
+
+children: [
+
+ExpansionTile(
+title: Text('13'),
+maintainState: true,
+children: [
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+keyboardType: TextInputType.number,
+maxLines: 1,
+controller: xxxscontroller,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Quantity in inventory',
+hintText: '0'
+),
+textAlign: TextAlign.center,
+),
+),
+],
+),
+ExpansionTile(
+title: Text('14'),
+maintainState: true,
+children: [
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+keyboardType: TextInputType.number,
+maxLines: 1,
+controller: xxscontroller,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Quantity in inventory',
+hintText: '0'
+),
+textAlign: TextAlign.center,
+),
+),
+],
+),
+ExpansionTile(
+title: Text('15'),
+maintainState: true,
+children: [
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+keyboardType: TextInputType.number,
+maxLines: 1,
+controller: xscontroller,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Quantity in inventory',
+hintText: '0'
+),
+textAlign: TextAlign.center,
+),
+),
+],
+),
+ExpansionTile(
+title: Text('16'),
+maintainState: true,
+children: [
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+keyboardType: TextInputType.number,
+maxLines: 1,
+controller: scontroller,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Quantity in inventory',
+hintText: '0'
+),
+textAlign: TextAlign.center,
+),
+),
+],
+),
+
+
+],
+),
+ListView(
+
+
+children: [
+
+
+ExpansionTile(
+title: Text('Made-to-order'),
+maintainState: true,
+children: [
+
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+keyboardType: TextInputType.number,
+maxLines: 1,
+controller: mtocontroller,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Quantity in inventory',
+hintText: '0'
+),
+textAlign: TextAlign.center,
+),
+),
+],
+),
+
+
+],
+),
+ListView(
+
+
+children: [
+
+
+ExpansionTile(
+title: Text('Free size'),
+maintainState: true,
+children: [
+
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+keyboardType: TextInputType.number,
+maxLines: 1,
+controller: freesizecontroller,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Quantity in inventory',
+hintText: '0'
+),
+textAlign: TextAlign.center,
+),
+),
+],
+),
+
+
+],
+),
+ListView(
+
+
+children: [
+
+
+ExpansionTile(
+title: Text('Custom size 1'),
+maintainState: true,
+children: [
+
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+maxLines: 1,
+controller: customController1,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Title',
+hintText: '117 cm'
+),
+textAlign: TextAlign.center,
+),
+),
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+keyboardType: TextInputType.number,
+maxLines: 1,
+controller: customController11,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Additional price(optional)',
+hintText: '0'
+),
+textAlign: TextAlign.center,
+),
+),
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+keyboardType: TextInputType.number,
+maxLines: 1,
+controller: customController12,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Quantity in inventory',
+hintText: '0'
+),
+textAlign: TextAlign.center,
+),
+),
+
+],
+),
+ExpansionTile(
+title: Text('Custom size 2'),
+maintainState: true,
+children: [
+
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+maxLines: 1,
+controller: customController2,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Title',
+hintText: '117 cm'
+),
+textAlign: TextAlign.center,
+),
+),
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+keyboardType: TextInputType.number,
+maxLines: 1,
+controller: customController21,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Additional price(optional)',
+hintText: '0'
+),
+textAlign: TextAlign.center,
+),
+),
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+keyboardType: TextInputType.number,
+maxLines: 1,
+controller: customController22,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Quantity in inventory',
+hintText: '0'
+),
+textAlign: TextAlign.center,
+),
+),
+
+],
+),
+ExpansionTile(
+title: Text('Custom size 3'),
+maintainState: true,
+children: [
+
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+maxLines: 1,
+controller: customController3,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Title',
+hintText: '117 cm'
+),
+textAlign: TextAlign.center,
+),
+),
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+keyboardType: TextInputType.number,
+maxLines: 1,
+controller: customController31,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Additional price(optional)',
+hintText: '0'
+),
+textAlign: TextAlign.center,
+),
+),
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+keyboardType: TextInputType.number,
+maxLines: 1,
+controller: customController32,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Quantity in inventory',
+hintText: '0'
+),
+textAlign: TextAlign.center,
+),
+),
+
+],
+),
+ExpansionTile(
+title: Text('Custom size 4'),
+maintainState: true,
+children: [
+
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+maxLines: 1,
+controller: customController4,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Title',
+hintText: '117 cm'
+),
+textAlign: TextAlign.center,
+),
+),
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+keyboardType: TextInputType.number,
+maxLines: 1,
+controller: customController41,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Additional price(optional)',
+hintText: '0'
+),
+textAlign: TextAlign.center,
+),
+),
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+keyboardType: TextInputType.number,
+maxLines: 1,
+controller: customController42,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Quantity in inventory',
+hintText: '0'
+),
+textAlign: TextAlign.center,
+),
+),
+
+],
+),
+ExpansionTile(
+title: Text('Custom size 5'),
+maintainState: true,
+children: [
+
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+maxLines: 1,
+controller: customController5,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Title',
+hintText: '117 cm'
+),
+textAlign: TextAlign.center,
+),
+),
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+keyboardType: TextInputType.number,
+maxLines: 1,
+controller: customController51,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Additional price(optional)',
+hintText: '0'
+),
+textAlign: TextAlign.center,
+),
+),
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+keyboardType: TextInputType.number,
+maxLines: 1,
+controller: customController52,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Quantity in inventory',
+hintText: '0'
+),
+textAlign: TextAlign.center,
+),
+),
+
+],
+),
+ExpansionTile(
+title: Text('Custom size 6'),
+maintainState: true,
+children: [
+
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+maxLines: 1,
+controller: customController6,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Title',
+hintText: '117 cm'
+),
+textAlign: TextAlign.center,
+),
+),
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+keyboardType: TextInputType.number,
+maxLines: 1,
+controller: customController61,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Additional price(optional)',
+hintText: '0'
+),
+textAlign: TextAlign.center,
+),
+),
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+keyboardType: TextInputType.number,
+maxLines: 1,
+controller: customController62,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Quantity in inventory',
+hintText: '0'
+),
+textAlign: TextAlign.center,
+),
+),
+
+],
+),
+ExpansionTile(
+title: Text('Custom size 7'),
+maintainState: true,
+children: [
+
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+maxLines: 1,
+controller: customController7,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Title',
+hintText: '117 cm'
+),
+textAlign: TextAlign.center,
+),
+),
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+keyboardType: TextInputType.number,
+maxLines: 1,
+controller: customController71,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Additional price(optional)',
+hintText: '0'
+),
+textAlign: TextAlign.center,
+),
+),
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+keyboardType: TextInputType.number,
+maxLines: 1,
+controller: customController72,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Quantity in inventory',
+hintText: '0'
+),
+textAlign: TextAlign.center,
+),
+),
+
+],
+),
+ExpansionTile(
+title: Text('Custom size 8'),
+maintainState: true,
+children: [
+
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+maxLines: 1,
+controller: customController8,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Title',
+hintText: '117 cm'
+),
+textAlign: TextAlign.center,
+),
+),
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+keyboardType: TextInputType.number,
+maxLines: 1,
+controller: customController81,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Additional price(optional)',
+hintText: '0'
+),
+textAlign: TextAlign.center,
+),
+),
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+keyboardType: TextInputType.number,
+maxLines: 1,
+controller: customController82,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Quantity in inventory',
+hintText: '0'
+),
+textAlign: TextAlign.center,
+),
+),
+
+],
+),
+ExpansionTile(
+title: Text('Custom size 9'),
+maintainState: true,
+children: [
+
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+maxLines: 1,
+controller: customController9,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Title',
+hintText: '117 cm'
+),
+textAlign: TextAlign.center,
+),
+),
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+keyboardType: TextInputType.number,
+maxLines: 1,
+controller: customController91,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Additional price(optional)',
+hintText: '0'
+),
+textAlign: TextAlign.center,
+),
+),
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+keyboardType: TextInputType.number,
+maxLines: 1,
+controller: customController92,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Quantity in inventory',
+hintText: '0'
+),
+textAlign: TextAlign.center,
+),
+),
+
+],
+),
+ExpansionTile(
+title: Text('Custom size 10'),
+maintainState: true,
+children: [
+
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+maxLines: 1,
+controller: customController10,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Title',
+hintText: '117 cm'
+),
+textAlign: TextAlign.center,
+),
+),
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+keyboardType: TextInputType.number,
+maxLines: 1,
+controller: customController101,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Additional price(optional)',
+hintText: '0'
+),
+textAlign: TextAlign.center,
+),
+),
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+keyboardType: TextInputType.number,
+maxLines: 1,
+controller: customController102,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Quantity in inventory',
+hintText: '0'
+),
+textAlign: TextAlign.center,
+),
+),
+
+],
+),
+
+
+
+],
+),
+ListView(
+children: [
+ExpansionTile(
+title: Text('4'),
+maintainState: true,
+children: [
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+keyboardType: TextInputType.number,
+maxLines: 1,
+controller: Ring1controller,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Quantity in inventory',
+hintText: '0'
+),
+textAlign: TextAlign.center,
+),
+),
+],
+),
+ExpansionTile(
+title: Text('4.5'),
+maintainState: true,
+children: [
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+keyboardType: TextInputType.number,
+maxLines: 1,
+controller: Ring2controller,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Quantity in inventory',
+hintText: '0'
+),
+textAlign: TextAlign.center,
+),
+),
+],
+),
+ExpansionTile(
+title: Text('5'),
+maintainState: true,
+children: [
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+keyboardType: TextInputType.number,
+maxLines: 1,
+controller: Ring3controller,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Quantity in inventory',
+hintText: '0'
+),
+textAlign: TextAlign.center,
+),
+),
+],
+),
+ExpansionTile(
+title: Text('5.5'),
+maintainState: true,
+children: [
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+keyboardType: TextInputType.number,
+maxLines: 1,
+controller: Ring4controller,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Quantity in inventory',
+hintText: '0'
+),
+textAlign: TextAlign.center,
+),
+),
+],
+),
+ExpansionTile(
+title: Text('6'),
+maintainState: true,
+children: [
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+keyboardType: TextInputType.number,
+maxLines: 1,
+controller: Ring5controller,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Quantity in inventory',
+hintText: '0'
+),
+textAlign: TextAlign.center,
+),
+),
+],
+),
+ExpansionTile(
+title: Text('6.5'),
+maintainState: true,
+children: [
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+keyboardType: TextInputType.number,
+maxLines: 1,
+controller: Ring6controller,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Quantity in inventory',
+hintText: '0'
+),
+textAlign: TextAlign.center,
+),
+),
+],
+),
+ExpansionTile(
+title: Text('7'),
+maintainState: true,
+children: [
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+keyboardType: TextInputType.number,
+maxLines: 1,
+controller: Ring7controller,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Quantity in inventory',
+hintText: '0'
+),
+textAlign: TextAlign.center,
+),
+),
+],
+),
+ExpansionTile(
+title: Text('7.5'),
+maintainState: true,
+children: [
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+keyboardType: TextInputType.number,
+maxLines: 1,
+controller: Ring8controller,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Quantity in inventory',
+hintText: '0'
+),
+textAlign: TextAlign.center,
+),
+),
+],
+),
+ExpansionTile(
+title: Text('8'),
+maintainState: true,
+children: [
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+keyboardType: TextInputType.number,
+maxLines: 1,
+controller: Ring9controller,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Quantity in inventory',
+hintText: '0'
+),
+textAlign: TextAlign.center,
+),
+),
+],
+),
+ExpansionTile(
+title: Text('8.5'),
+maintainState: true,
+children: [
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+keyboardType: TextInputType.number,
+maxLines: 1,
+controller: Ring10controller,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Quantity in inventory',
+hintText: '0'
+),
+textAlign: TextAlign.center,
+),
+),
+],
+),
+ExpansionTile(
+title: Text('9'),
+maintainState: true,
+children: [
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+keyboardType: TextInputType.number,
+maxLines: 1,
+controller: Ring11controller,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Quantity in inventory',
+hintText: '0'
+),
+textAlign: TextAlign.center,
+),
+),
+],
+),
+ExpansionTile(
+title: Text('9.5'),
+maintainState: true,
+children: [
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+keyboardType: TextInputType.number,
+maxLines: 1,
+controller: Ring12controller,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Quantity in inventory',
+hintText: '0'
+),
+textAlign: TextAlign.center,
+),
+),
+],
+),
+ExpansionTile(
+title: Text('10'),
+maintainState: true,
+children: [
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+keyboardType: TextInputType.number,
+maxLines: 1,
+controller: Ring13controller,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Quantity in inventory',
+hintText: '0'
+),
+textAlign: TextAlign.center,
+),
+),
+],
+),
+ExpansionTile(
+title: Text('10.5'),
+maintainState: true,
+children: [
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+keyboardType: TextInputType.number,
+maxLines: 1,
+controller: Ring14controller,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Quantity in inventory',
+hintText: '0'
+),
+textAlign: TextAlign.center,
+),
+),
+],
+),
+ExpansionTile(
+title: Text('11'),
+maintainState: true,
+children: [
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+keyboardType: TextInputType.number,
+maxLines: 1,
+controller: Ring15controller,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Quantity in inventory',
+hintText: '0'
+),
+textAlign: TextAlign.center,
+),
+),
+],
+),
+ExpansionTile(
+title: Text('11.5'),
+maintainState: true,
+children: [
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+keyboardType: TextInputType.number,
+maxLines: 1,
+controller: Ring16controller,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Quantity in inventory',
+hintText: '0'
+),
+textAlign: TextAlign.center,
+),
+),
+],
+),
+ExpansionTile(
+title: Text('12'),
+maintainState: true,
+children: [
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+keyboardType: TextInputType.number,
+maxLines: 1,
+controller: Ring17controller,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Quantity in inventory',
+hintText: '0'
+),
+textAlign: TextAlign.center,
+),
+),
+],
+),
+ExpansionTile(
+title: Text('12.5'),
+maintainState: true,
+children: [
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+keyboardType: TextInputType.number,
+maxLines: 1,
+controller: Ring18controller,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Quantity in inventory',
+hintText: '0'
+),
+textAlign: TextAlign.center,
+),
+),
+],
+),
+ExpansionTile(
+title: Text('13'),
+maintainState: true,
+children: [
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+keyboardType: TextInputType.number,
+maxLines: 1,
+controller: Ring19controller,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Quantity in inventory',
+hintText: '0'
+),
+textAlign: TextAlign.center,
+),
+),
+],
+),
+ExpansionTile(
+title: Text('13.5'),
+maintainState: true,
+children: [
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+keyboardType: TextInputType.number,
+maxLines: 1,
+controller: Ring20controller,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Quantity in inventory',
+hintText: '0'
+),
+textAlign: TextAlign.center,
+),
+),
+],
+),
+ExpansionTile(
+title: Text('14'),
+maintainState: true,
+children: [
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+keyboardType: TextInputType.number,
+maxLines: 1,
+controller: Ring21controller,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Quantity in inventory',
+hintText: '0'
+),
+textAlign: TextAlign.center,
+),
+),
+],
+),
+ExpansionTile(
+title: Text('14.5'),
+maintainState: true,
+children: [
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+keyboardType: TextInputType.number,
+maxLines: 1,
+controller: Ring22controller,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Quantity in inventory',
+hintText: '0'
+),
+textAlign: TextAlign.center,
+),
+),
+],
+),
+ExpansionTile(
+title: Text('15'),
+maintainState: true,
+children: [
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+keyboardType: TextInputType.number,
+maxLines: 1,
+controller: Ring23controller,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Quantity in inventory',
+hintText: '0'
+),
+textAlign: TextAlign.center,
+),
+),
+],
+),
+
+],
+),
+ListView(
+children: [
+ExpansionTile(
+title: Text('13'),
+maintainState: true,
+children: [
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+keyboardType: TextInputType.number,
+maxLines: 1,
+controller: Shoe1controller,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Quantity in inventory',
+hintText: '0'
+),
+textAlign: TextAlign.center,
+),
+),
+],
+),
+ExpansionTile(
+title: Text('14'),
+maintainState: true,
+children: [
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+keyboardType: TextInputType.number,
+maxLines: 1,
+controller: Shoe2controller,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Quantity in inventory',
+hintText: '0'
+),
+textAlign: TextAlign.center,
+),
+),
+],
+),
+ExpansionTile(
+title: Text('15'),
+maintainState: true,
+children: [
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+keyboardType: TextInputType.number,
+maxLines: 1,
+controller: Shoe3controller,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Quantity in inventory',
+hintText: '0'
+),
+textAlign: TextAlign.center,
+),
+),
+],
+),
+ExpansionTile(
+title: Text('16'),
+maintainState: true,
+children: [
+Container(
+margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+child: TextField(
+
+keyboardType: TextInputType.number,
+maxLines: 1,
+controller: Shoe4controller,
+decoration: InputDecoration(
+border: OutlineInputBorder(
+borderSide: BorderSide(color: kGrey)),
+labelText: 'Quantity in inventory',
+hintText: '0'
+),
+textAlign: TextAlign.center,
+),
+),
+],
+),
+
+
+
+
+
+
+],
+),
+
+],
+onChange: (index) => print(index),
+
+),
+),
+),
+
+],
+);
+
+},
+);
+}

@@ -185,7 +185,7 @@ class _HomepageState extends State<Homepage> with WidgetsBindingObserver  {
     DocumentSnapshot doc = await usersRef.doc(widget.userid).get();
     currentUser = Users.fromDocument(doc);
     if(currentUser.ban == true){
-
+      logO();
     }
     else {
       myPrefs = await SharedPreferences.getInstance();

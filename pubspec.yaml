@@ -111,6 +111,7 @@ dependencies:
   flutter_tags: ^0.4.9+1
   back_pressed: ^0.0.2
   flutter_tagging: ^2.2.0+3
+  modal_bottom_sheet: ^2.0.0
 
 
 
