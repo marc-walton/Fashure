@@ -274,7 +274,7 @@ class _BuyNowState extends State<BuyNow> {
   if (currentUser.country == 'India') {
   var options = {
   'key': key,
-  'amount': "${widget.buynowamount}00",
+  'amount': "${widget.buynowamount}",
   'name': currentUser.id,
   'description': 'Payment',
 
@@ -294,7 +294,7 @@ class _BuyNowState extends State<BuyNow> {
   else if (currentUser.country == 'USA') {
   var options = {
   'key': key,
-  'amount': "${widget.buynowamount}00",
+  'amount': "${widget.buynowamount}",
   'name': currentUser.id,
   'currency': 'USD',
   'description': 'Payment',
@@ -313,7 +313,7 @@ class _BuyNowState extends State<BuyNow> {
   else if (currentUser.country == 'Europe') {
   var options = {
   'key': key,
-  'amount': "${widget.buynowamount}00",
+  'amount': "${widget.buynowamount}",
   'name': currentUser.id,
   'description': 'Payment',
   'currency': 'EUR',
@@ -333,7 +333,7 @@ class _BuyNowState extends State<BuyNow> {
   else if (currentUser.country == 'UK') {
   var options = {
   'key': key,
-  'amount': "${widget.buynowamount}00",
+  'amount': "${widget.buynowamount}",
   'name': currentUser.id,
   'description': 'Payment',
   'currency': 'GBP',
@@ -353,7 +353,7 @@ class _BuyNowState extends State<BuyNow> {
   else{
   var options = {
   'key': key,
-  'amount':"${widget.buynowamount}00",
+  'amount':"${widget.buynowamount}",
   'name': currentUser.id,
   'currency': 'USD',
   'description': 'Payment',

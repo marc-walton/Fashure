@@ -10,6 +10,7 @@ import 'package:fashow/Categories/WomenEcomUp.dart';
 import 'package:fashow/Categories/TboyEcomUp.dart';
 import 'package:fashow/Categories/TgirlEcomUp.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:modal_progress_hud/modal_progress_hud.dart';
 import 'package:multi_image_picker/multi_image_picker.dart';
 import 'package:smart_select/smart_select.dart';
 import 'package:flutter/material.dart';
@@ -33,7 +34,7 @@ import 'package:image/image.dart' as Im;
 import 'package:uuid/uuid.dart';
 import 'package:get/get.dart';
 import 'package:flutter_tags/flutter_tags.dart';
-
+import 'package:back_pressed/back_pressed.dart';
 class Uploadecom extends StatefulWidget {
   final Users currentUser;
 
@@ -48,6 +49,9 @@ class _UploadecomState extends State<Uploadecom>
   String value = 'None';
   List colors;
 bool worldship = true;
+bool freeship = true;
+bool freeworldship = true;
+
  TabController _tabController;
   ScrollController _controller;
   TextEditingController detailsController = TextEditingController();
@@ -544,41 +548,40 @@ int count  = 1;
   }
 
    buildSplashScreen() {
-    return Stack(
-      children: [
-        Container(
-          decoration: BoxDecoration(
-              gradient: fabGradient
-          ) ,
-          alignment: Alignment.center,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
+    return
+      ModalProgressHUD(
+      inAsyncCall: _inProcess,
+          child: Container(
+            decoration: BoxDecoration(
+                gradient: fabGradient
+            ) ,
+            alignment: Alignment.center,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
 //          SvgPicture.asset('assets/images/upload.svg', height: 260.0),
-              Padding(
-                padding: EdgeInsets.only(top: 20.0),
-                child: RaisedButton(
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(8.0),
-                    ),
-                    child: Text(
-                      "Upload Product",
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 22.0,
+                Padding(
+                  padding: EdgeInsets.only(top: 20.0),
+                  child: RaisedButton(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(8.0),
                       ),
-                    ),
-                    color: Colors.deepOrange,
-                    onPressed: ()  =>loadAssets(),
-                  // selectImage(context),
+                      child: Text(
+                        "Upload Product",
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 22.0,
+                        ),
+                      ),
+                      color: Colors.deepOrange,
+                      onPressed: ()  =>loadAssets(),
+                    // selectImage(context),
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
-        ),
-        _inProcess?Center(child:CircularProgressIndicator()):Text(''),
-      ],
-    );
+        );
   }
 
   clearImage() {
@@ -647,23 +650,6 @@ int count  = 1;
       var resultUSD12 = await Currency.getConversion(
           from: 'INR', to: 'USD', amount: shipcostintern.text ??  0);
       // String date = result.date; // Returns the last updated date
-      setState(() {
-         inrtousd = resultUSD.rate;
-         inrtousd = inrtousd.round();
-         var usd = double.tryParse(priceController.text);
-         userprice = usd.round();
-
-            inrtousd1 = resultUSD1.rate;
-         inrtousd1 = inrtousd1.round();
-         var usd1 = double.tryParse(customController11.text ??  0);
-         userprice1 = usd1.round();
-             inrtousd2 = resultUSD2.rate;
-         inrtousd2 = inrtousd2.round();
-         var usd2 = double.tryParse(customController21.text ??  0);
-         userprice2 = usd2.round();
-
-
-      });
 
       print("$inrtousd");
       var resultGBP = await Currency.getConversion(
@@ -693,11 +679,7 @@ int count  = 1;
       var resultGBP12 = await Currency.getConversion(
           from: 'INR', to: 'GBP', amount: shipcostintern.text ??  0);
 // Returns the last updated date
-      setState(() {
-        inrtogbp = resultGBP.rate;
-        inrtogbp = inrtogbp.round();
 
-      });
 
       print("$inrtogbp");
       var resultEUR = await Currency.getConversion(
@@ -726,11 +708,65 @@ int count  = 1;
           from: 'INR', to: 'EUR', amount: shipcost.text ??  0);
       var resultEUR12 = await Currency.getConversion(
           from: 'INR', to: 'EUR', amount: shipcostintern.text ??  0);
-setState(() {
-  inrtoeur = resultEUR.rate;
-  inrtoeur = inrtoeur.round();
+      setState(() {
 
-});
+        inrtogbp = resultGBP.rate;
+        inrtogbp1 = resultGBP1.rate;
+        inrtogbp2 = resultGBP2.rate;
+        inrtogbp3 = resultGBP3.rate;
+        inrtogbp4 = resultGBP4.rate;
+        inrtogbp5 = resultGBP5.rate;
+        inrtogbp6 = resultGBP6.rate;
+        inrtogbp7 = resultGBP7.rate;
+        inrtogbp8 = resultGBP8.rate;
+        inrtogbp9 = resultGBP9.rate;
+        inrtogbp10 = resultGBP10.rate;
+        inrtogbp11 = resultGBP11.rate;
+        inrtogbp12 = resultGBP12.rate;
+
+        inrtoeur = resultEUR.rate;
+        inrtoeur1 = resultEUR1.rate;
+        inrtoeur2 = resultEUR2.rate;
+        inrtoeur3 = resultEUR3.rate;
+        inrtoeur4 = resultEUR4.rate;
+        inrtoeur5 = resultEUR5.rate;
+        inrtoeur6 = resultEUR6.rate;
+        inrtoeur7 = resultEUR7.rate;
+        inrtoeur8 = resultEUR8.rate;
+        inrtoeur9 = resultEUR9.rate;
+        inrtoeur10 = resultEUR10.rate;
+        inrtoeur11 = resultEUR11.rate;
+        inrtoeur12 = resultEUR12.rate;
+
+        inrtousd = resultUSD.rate;
+        inrtousd1 = resultUSD1.rate;
+        inrtousd2 = resultUSD2.rate;
+        inrtousd3 = resultUSD3.rate;
+        inrtousd4 = resultUSD4.rate;
+        inrtousd5 = resultUSD5.rate;
+        inrtousd6 = resultUSD6.rate;
+        inrtousd7 = resultUSD7.rate;
+        inrtousd8 = resultUSD8.rate;
+        inrtousd9 = resultUSD9.rate;
+        inrtousd10 = resultUSD10.rate;
+        inrtousd11 = resultUSD11.rate;
+        inrtousd12 = resultUSD12.rate;
+userprice = priceController.text;
+userprice1 = customController11.text;
+userprice2 = customController21.text;
+userprice3 = customController31.text;
+userprice4 = customController41.text;
+userprice5 = customController51.text;
+userprice6 = customController61.text;
+userprice7 = customController71.text;
+userprice8 = customController81.text;
+userprice9 = customController91.text;
+userprice10 = customController101.text;
+userprice11 = shipcost.text;
+userprice12 = shipcostintern.text;
+
+      });
+
 
 
     }
@@ -738,83 +774,57 @@ setState(() {
       var resultUSD = await Currency.getConversion(
           from: 'EUR', to: 'USD', amount: priceController.text);
       var resultUSD1 = await Currency.getConversion(
-          from: 'EUR', to: 'USD', amount: customController11.text ??  0);
+          from: 'EUR', to: 'USD', amount: customController11.text  ??  0);
       var resultUSD2 = await Currency.getConversion(
-          from: 'EUR', to: 'USD', amount: customController21.text ??  0);
+          from: 'EUR', to: 'USD', amount: customController21.text  ??  0);
       var resultUSD3 = await Currency.getConversion(
-          from: 'EUR', to: 'USD', amount: customController31.text ??  0);
+          from: 'EUR', to: 'USD', amount: customController31.text  ??  0);
       var resultUSD4 = await Currency.getConversion(
-          from: 'EUR', to: 'USD', amount: customController41.text ??  0);
+          from: 'EUR', to: 'USD', amount: customController41.text  ??  0);
       var resultUSD5 = await Currency.getConversion(
-          from: 'EUR', to: 'USD', amount: customController51.text ??  0);
+          from: 'EUR', to: 'USD', amount: customController51.text  ??  0);
       var resultUSD6 = await Currency.getConversion(
-          from: 'EUR', to: 'USD', amount: customController61.text ??  0);
+          from: 'EUR', to: 'USD', amount: customController61.text  ??  0);
       var resultUSD7 = await Currency.getConversion(
-          from: 'EUR', to: 'USD', amount: customController71.text ??  0);
+          from: 'EUR', to: 'USD', amount: customController71.text  ??  0);
       var resultUSD8 = await Currency.getConversion(
-          from: 'EUR', to: 'USD', amount: customController81.text ??  0);
+          from: 'EUR', to: 'USD', amount: customController81.text  ??  0);
       var resultUSD9 = await Currency.getConversion(
-          from: 'EUR', to: 'USD', amount: customController91.text ??  0);
+          from: 'EUR', to: 'USD', amount: customController91.text  ??  0);
       var resultUSD10 = await Currency.getConversion(
-          from: 'EUR', to: 'USD', amount: customController101.text ??  0);
+          from: 'EUR', to: 'USD', amount: customController101.text  ??  0);
       var resultUSD11 = await Currency.getConversion(
-          from: 'EUR', to: 'USD', amount: shipcost.text ??  0);
+          from: 'EUR', to: 'USD', amount: shipcost.text  ??  0);
       var resultUSD12 = await Currency.getConversion(
-          from: 'EUR', to: 'USD', amount: shipcostintern.text ??  0);
+          from: 'EUR', to: 'USD', amount: shipcostintern.text  ??  0);
       // String date = result.date; // Returns the last updated date
       setState(() {
         eurtousd = resultUSD.rate;
-        eurtousd = eurtousd.round();
-        var usd = double.tryParse(priceController.text);
-        userprice = usd.round();
           eurtousd1 = resultUSD1.rate;
-        eurtousd1 = eurtousd1?? 0.round();
-        var usd1 = double.tryParse(customController11.text ??  0);
-        userprice1 = usd1?? 0.round();
             eurtousd2 = resultUSD2.rate;
-        eurtousd2 = eurtousd2?? 0.round();
-        var usd2 = double.tryParse(customController21.text ??  0);
-        userprice2 = usd2?? 0.round();
                eurtousd3 = resultUSD3.rate;
-        eurtousd3 = eurtousd3?? 0.round();
-        var usd3 = double.tryParse(customController31.text ??  0);
-        userprice3 = usd3?? 0.round();
-                   eurtousd4 = resultUSD4.rate;
-        eurtousd4 = eurtousd4?? 0.round();
-        var usd4 = double.tryParse(customController41.text ??  0);
-        userprice4 = usd4?? 0.round();
-           eurtousd5 = resultUSD5.rate;
-        eurtousd5 = eurtousd5?? 0.round();
-        var usd5 = double.tryParse(customController51.text ??  0);
-        userprice5 = usd5?? 0.round();
-             eurtousd6 = resultUSD6.rate;
-        eurtousd6 = eurtousd6?? 0.round();
-        var usd6 = double.tryParse(customController61.text ??  0);
-        userprice6 = usd6?? 0.round();
-                eurtousd7 = resultUSD7.rate;
-        eurtousd7 = eurtousd7?? 0.round();
-        var usd7 = double.tryParse(customController71.text ??  0);
-        userprice7 = usd7?? 0.round();
-                eurtousd8 = resultUSD8.rate;
-        eurtousd8 = eurtousd8?? 0.round();
-        var usd8 = double.tryParse(customController81.text ??  0);
-        userprice8 = usd8?? 0.round();
-                eurtousd9 = resultUSD9.rate;
-        eurtousd9 = eurtousd9?? 0.round();
-        var usd9 = double.tryParse(customController91.text ??  0);
-        userprice9 = usd9?? 0.round();
-                eurtousd10 = resultUSD10.rate;
-        eurtousd10 = eurtousd10?? 0.round();
-        var usd10 = double.tryParse(customController101.text ??  0);
-        userprice10 = usd10?? 0.round();
-                     eurtousd11 = resultUSD11.rate;
-        eurtousd11 = eurtousd11?? 0.round();
-        var usd11 = double.tryParse(shipcost.text ??  0);
-        userprice11 = usd11 ?? 0.round();
-                     eurtousd12 = resultUSD12.rate;
-        eurtousd12 = eurtousd12?? 0.round();
-        var usd12 = double.tryParse(shipcostintern.text ??  0);
-        userprice12 = usd12?? 0.round();
+            eurtousd4 = resultUSD4.rate;
+          eurtousd5 = resultUSD5.rate;
+         eurtousd6 = resultUSD6.rate;
+       eurtousd7 = resultUSD7.rate;
+       eurtousd8 = resultUSD8.rate;
+      eurtousd9 = resultUSD9.rate;
+      eurtousd10 = resultUSD10.rate;
+      eurtousd11 = resultUSD11.rate;
+      eurtousd12 = resultUSD12.rate;
+        userprice = double.tryParse(priceController.text);
+        userprice1 = double.tryParse(customController11.text);
+        userprice2 = double.tryParse(customController21.text);
+        userprice3 = double.tryParse(customController31.text);
+        userprice4 = double.tryParse(customController41.text);
+        userprice5 = double.tryParse(customController51.text);
+        userprice6 = double.tryParse(customController61.text);
+        userprice7 = double.tryParse(customController71.text);
+        userprice8 = double.tryParse(customController81.text);
+        userprice9 = double.tryParse(customController91.text);
+        userprice10 = double.tryParse(customController101.text);
+        userprice11 = double.tryParse(shipcost.text);
+        userprice12 = double.tryParse(shipcostintern.text);
 
       });
 
@@ -822,67 +832,54 @@ setState(() {
       var resultGBP = await Currency.getConversion(
           from: 'EUR', to: 'GBP', amount: priceController.text);
       var resultGBP1 = await Currency.getConversion(
-          from: 'EUR', to: 'GBP', amount: customController11.text ??  0);
+          from: 'EUR', to: 'GBP', amount: customController11.text  ??  0);
       var resultGBP2 = await Currency.getConversion(
-          from: 'EUR', to: 'GBP', amount: customController21.text ??  0);
+          from: 'EUR', to: 'GBP', amount: customController21.text  ??  0);
       var resultGBP3 = await Currency.getConversion(
-          from: 'EUR', to: 'GBP', amount: customController31.text ??  0);
+          from: 'EUR', to: 'GBP', amount: customController31.text  ??  0);
       var resultGBP4 = await Currency.getConversion(
-          from: 'EUR', to: 'GBP', amount: customController41.text ??  0);
+          from: 'EUR', to: 'GBP', amount: customController41.text  ??  0);
       var resultGBP5 = await Currency.getConversion(
-          from: 'EUR', to: 'GBP', amount: customController51.text ??  0);
+          from: 'EUR', to: 'GBP', amount: customController51.text  ??  0);
       var resultGBP6 = await Currency.getConversion(
-          from: 'EUR', to: 'GBP', amount: customController61.text ??  0);
+          from: 'EUR', to: 'GBP', amount: customController61.text  ??  0);
       var resultGBP7 = await Currency.getConversion(
-          from: 'EUR', to: 'GBP', amount: customController71.text ??  0);
+          from: 'EUR', to: 'GBP', amount: customController71.text  ??  0);
       var resultGBP8 = await Currency.getConversion(
-          from: 'EUR', to: 'GBP', amount: customController81.text ??  0);
+          from: 'EUR', to: 'GBP', amount: customController81.text  ??  0);
       var resultGBP9 = await Currency.getConversion(
-          from: 'EUR', to: 'GBP', amount: customController91.text ??  0);
+          from: 'EUR', to: 'GBP', amount: customController91.text  ??  0);
       var resultGBP10 = await Currency.getConversion(
-          from: 'EUR', to: 'GBP', amount: customController101.text ??  0);
+          from: 'EUR', to: 'GBP', amount: customController101.text  ??  0);
       var resultGBP11 = await Currency.getConversion(
-          from: 'EUR', to: 'GBP', amount: shipcost.text ??  0);
+          from: 'EUR', to: 'GBP', amount: shipcost.text  ??  0);
       var resultGBP12 = await Currency.getConversion(
-          from: 'EUR', to: 'GBP', amount: shipcostintern.text ??  0);
+          from: 'EUR', to: 'GBP', amount: shipcostintern.text  ??  0);
 // Returns the last updated date
       setState(() {
         eurtogbp = resultGBP.rate;
-        eurtogbp = eurtogbp?? 0.round();
         eurtogbp1 = resultGBP1.rate;
-        eurtogbp1 = eurtogbp1?? 0.round();
 
         eurtogbp2 = resultGBP2.rate;
-        eurtogbp2 = eurtogbp2?? 0.round();
 
         eurtogbp3 = resultGBP3.rate;
-        eurtogbp3 = eurtogbp3?? 0.round();
 
         eurtogbp4 = resultGBP4.rate;
-        eurtogbp4 = eurtogbp4?? 0.round();
 
         eurtogbp5 = resultGBP5.rate;
-        eurtogbp5 = eurtogbp5?? 0.round();
 
         eurtogbp6 = resultGBP6.rate;
-        eurtogbp6 = eurtogbp6?? 0.round();
 
         eurtogbp7 = resultGBP7.rate;
-        eurtogbp7 = eurtogbp7?? 0.round();
 
         eurtogbp8 = resultGBP8.rate;
-        eurtogbp8 = eurtogbp8?? 0.round();
 
         eurtogbp9 = resultGBP9.rate;
-        eurtogbp9 = eurtogbp9?? 0.round();
 
         eurtogbp10 = resultGBP10.rate;
-        eurtogbp10 = eurtogbp10?? 0.round();
 
         eurtogbp11 = resultGBP11.rate;
-        eurtogbp11 = eurtogbp11?? 0.round();
         eurtogbp12 = resultGBP12.rate;
-        eurtogbp12 = eurtogbp12?? 0.round();
 
       });
 
@@ -891,66 +888,53 @@ setState(() {
       var resultINR = await Currency.getConversion(
           from: 'EUR', to: 'INR', amount: priceController.text );
       var resultINR1 = await Currency.getConversion(
-          from: 'EUR', to: 'INR', amount: customController11.text ?? 0);
+          from: 'EUR', to: 'INR', amount: customController11.text  ??  0);
       var resultINR2 = await Currency.getConversion(
-          from: 'EUR', to: 'INR', amount: customController21.text ??  0);
+          from: 'EUR', to: 'INR', amount: customController21.text  ??  0);
       var resultINR3 = await Currency.getConversion(
-          from: 'EUR', to: 'INR', amount: customController31.text ??  0);
+          from: 'EUR', to: 'INR', amount: customController31.text  ??  0);
       var resultINR4 = await Currency.getConversion(
-          from: 'EUR', to: 'INR', amount: customController41.text ??  0);
+          from: 'EUR', to: 'INR', amount: customController41.text  ??  0);
       var resultINR5 = await Currency.getConversion(
-          from: 'EUR', to: 'INR', amount: customController51.text ??  0);
+          from: 'EUR', to: 'INR', amount: customController51.text  ??  0);
       var resultINR6 = await Currency.getConversion(
-          from: 'EUR', to: 'INR', amount: customController61.text ??  0);
+          from: 'EUR', to: 'INR', amount: customController61.text  ??  0);
       var resultINR7 = await Currency.getConversion(
-          from: 'EUR', to: 'INR', amount: customController71.text ??  0);
+          from: 'EUR', to: 'INR', amount: customController71.text  ??  0);
       var resultINR8 = await Currency.getConversion(
-          from: 'EUR', to: 'INR', amount: customController81.text ??  0);
+          from: 'EUR', to: 'INR', amount: customController81.text  ??  0);
       var resultINR9 = await Currency.getConversion(
-          from: 'EUR', to: 'INR', amount: customController91.text ??  0);
+          from: 'EUR', to: 'INR', amount: customController91.text  ??  0);
       var resultINR10 = await Currency.getConversion(
-          from: 'EUR', to: 'INR', amount: customController101.text ??  0);
+          from: 'EUR', to: 'INR', amount: customController101.text  ??  0);
       var resultINR11 = await Currency.getConversion(
-          from: 'EUR', to: 'INR', amount: shipcost.text ??  0);
+          from: 'EUR', to: 'INR', amount: shipcost.text  ??  0);
       var resultINR12 = await Currency.getConversion(
-          from: 'EUR', to: 'INR', amount: shipcostintern.text ??  0);
+          from: 'EUR', to: 'INR', amount: shipcostintern.text  ??  0);
 setState(() {
   eurtoinr = resultINR.rate;
-  eurtoinr = eurtoinr?? 0.round();
   eurtoinr1 = resultINR1.rate;
-  eurtoinr1 = eurtoinr1?? 0.round();
 
   eurtoinr2 = resultINR2.rate;
-  eurtoinr2 = eurtoinr2?? 0.round();
 
   eurtoinr3 = resultINR3.rate;
-  eurtoinr3 = eurtoinr3?? 0.round();
 
   eurtoinr4 = resultINR4.rate;
-  eurtoinr4 = eurtoinr4?? 0.round();
 
   eurtoinr5 = resultINR5.rate;
-  eurtoinr5 = eurtoinr5?? 0.round();
 
   eurtoinr6 = resultINR6.rate;
-  eurtoinr6 = eurtoinr6?? 0.round();
 
   eurtoinr7 = resultINR7.rate;
-  eurtoinr7 = eurtoinr7?? 0.round();
 
   eurtoinr8 = resultINR8.rate;
-  eurtoinr8 = eurtoinr8?? 0.round();
 
   eurtoinr9 = resultINR9.rate;
-  eurtoinr9 = eurtoinr9?? 0.round();
 
   eurtoinr10 = resultINR10.rate;
-  eurtoinr10 = eurtoinr10?? 0.round();
 
   eurtoinr11 = resultINR11.rate;
-  eurtoinr11 = eurtoinr11?? 0.round();
   eurtoinr12 = resultINR12.rate;
-  eurtoinr12 = eurtoinr12?? 0.round();
 
 });
 
@@ -960,97 +944,141 @@ setState(() {
       var resultUSD = await Currency.getConversion(
           from: 'GBP', to: 'USD', amount: priceController.text);
       var resultUSD1 = await Currency.getConversion(
-          from: 'GBP', to: 'USD', amount: customController11.text ??  0);
+          from: 'GBP', to: 'USD', amount: customController11.text  ??  0);
       var resultUSD2 = await Currency.getConversion(
-          from: 'GBP', to: 'USD', amount: customController21.text ??  0);
+          from: 'GBP', to: 'USD', amount: customController21.text  ??  0);
       var resultUSD3 = await Currency.getConversion(
-          from: 'GBP', to: 'USD', amount: customController31.text ??  0);
+          from: 'GBP', to: 'USD', amount: customController31.text  ??  0);
       var resultUSD4 = await Currency.getConversion(
-          from: 'GBP', to: 'USD', amount: customController41.text ??  0);
+          from: 'GBP', to: 'USD', amount: customController41.text  ??  0);
       var resultUSD5 = await Currency.getConversion(
-          from: 'GBP', to: 'USD', amount: customController51.text ??  0);
+          from: 'GBP', to: 'USD', amount: customController51.text  ??  0);
       var resultUSD6 = await Currency.getConversion(
-          from: 'GBP', to: 'USD', amount: customController61.text ??  0);
+          from: 'GBP', to: 'USD', amount: customController61.text  ??  0);
       var resultUSD7 = await Currency.getConversion(
-          from: 'GBP', to: 'USD', amount: customController71.text ??  0);
+          from: 'GBP', to: 'USD', amount: customController71.text  ??  0);
       var resultUSD8 = await Currency.getConversion(
-          from: 'GBP', to: 'USD', amount: customController81.text ??  0);
+          from: 'GBP', to: 'USD', amount: customController81.text  ??  0);
       var resultUSD9 = await Currency.getConversion(
-          from: 'GBP', to: 'USD', amount: customController91.text ??  0);
+          from: 'GBP', to: 'USD', amount: customController91.text  ??  0);
       var resultUSD10 = await Currency.getConversion(
-          from: 'GBP', to: 'USD', amount: customController101.text ??  0);
+          from: 'GBP', to: 'USD', amount: customController101.text  ??  0);
       var resultUSD11 = await Currency.getConversion(
-          from: 'GBP', to: 'USD', amount: shipcost.text ??  0);
+          from: 'GBP', to: 'USD', amount: shipcost.text  ??  0);
       var resultUSD12 = await Currency.getConversion(
-          from: 'GBP', to: 'USD', amount: shipcostintern.text ??  0);
+          from: 'GBP', to: 'USD', amount: shipcostintern.text  ??  0);
       // String date = result.date; // Returns the last updated date
       var resultEUR = await Currency.getConversion(
           from: 'GBP', to: 'EUR', amount: priceController.text );
       var resultEUR1 = await Currency.getConversion(
-          from: 'GBP', to: 'EUR', amount: customController11.text ??  0);
+          from: 'GBP', to: 'EUR', amount: customController11.text  ??  0);
       var resultEUR2 = await Currency.getConversion(
-          from: 'GBP', to: 'EUR', amount: customController21.text ??  0);
+          from: 'GBP', to: 'EUR', amount: customController21.text  ??  0);
       var resultEUR3 = await Currency.getConversion(
-          from: 'GBP', to: 'EUR', amount: customController31.text ??  0);
+          from: 'GBP', to: 'EUR', amount: customController31.text  ??  0);
       var resultEUR4 = await Currency.getConversion(
-          from: 'GBP', to: 'EUR', amount: customController41.text ??  0);
+          from: 'GBP', to: 'EUR', amount: customController41.text  ??  0);
       var resultEUR5 = await Currency.getConversion(
-          from: 'GBP', to: 'EUR', amount: customController51.text ??  0);
+          from: 'GBP', to: 'EUR', amount: customController51.text  ??  0);
       var resultEUR6 = await Currency.getConversion(
-          from: 'GBP', to: 'EUR', amount: customController61.text ??  0);
+          from: 'GBP', to: 'EUR', amount: customController61.text  ??  0);
       var resultEUR7 = await Currency.getConversion(
-          from: 'GBP', to: 'EUR', amount: customController71.text ??  0);
+          from: 'GBP', to: 'EUR', amount: customController71.text  ??  0);
       var resultEUR8 = await Currency.getConversion(
-          from: 'GBP', to: 'EUR', amount: customController81.text ??  0);
+          from: 'GBP', to: 'EUR', amount: customController81.text  ??  0);
       var resultEUR9 = await Currency.getConversion(
-          from: 'GBP', to: 'EUR', amount: customController91.text ??  0);
+          from: 'GBP', to: 'EUR', amount: customController91.text  ??  0);
       var resultEUR10 = await Currency.getConversion(
-          from: 'GBP', to: 'EUR', amount: customController101.text ??  0);
+          from: 'GBP', to: 'EUR', amount: customController101.text  ??  0);
       var resultEUR11 = await Currency.getConversion(
-          from: 'GBP', to: 'EUR', amount: shipcost.text ??  0);
+          from: 'GBP', to: 'EUR', amount: shipcost.text  ??  0);
       var resultEUR12 = await Currency.getConversion(
-          from: 'GBP', to: 'EUR', amount: shipcostintern.text ??  0);
+          from: 'GBP', to: 'EUR', amount: shipcostintern.text  ??  0);
       var resultINR = await Currency.getConversion(
           from: 'GBP', to: 'INR', amount: priceController.text);
       var resultINR1 = await Currency.getConversion(
-          from: 'GBP', to: 'INR', amount: customController11.text ??  0);
+          from: 'GBP', to: 'INR', amount: customController11.text  ??  0);
       var resultINR2 = await Currency.getConversion(
-          from: 'GBP', to: 'INR', amount: customController21.text ??  0);
+          from: 'GBP', to: 'INR', amount: customController21.text  ??  0);
       var resultINR3 = await Currency.getConversion(
-          from: 'GBP', to: 'INR', amount: customController31.text ??  0);
+          from: 'GBP', to: 'INR', amount: customController31.text  ??  0);
       var resultINR4 = await Currency.getConversion(
-          from: 'GBP', to: 'INR', amount: customController41.text ??  0);
+          from: 'GBP', to: 'INR', amount: customController41.text  ??  0);
       var resultINR5 = await Currency.getConversion(
-          from: 'GBP', to: 'INR', amount: customController51.text ??  0);
+          from: 'GBP', to: 'INR', amount: customController51.text  ??  0);
       var resultINR6 = await Currency.getConversion(
-          from: 'GBP', to: 'INR', amount: customController61.text ??  0);
+          from: 'GBP', to: 'INR', amount: customController61.text  ??  0);
       var resultINR7 = await Currency.getConversion(
-          from: 'GBP', to: 'INR', amount: customController71.text ??  0);
+          from: 'GBP', to: 'INR', amount: customController71.text  ??  0);
       var resultINR8 = await Currency.getConversion(
-          from: 'GBP', to: 'INR', amount: customController81.text ??  0);
+          from: 'GBP', to: 'INR', amount: customController81.text  ??  0);
       var resultINR9 = await Currency.getConversion(
-          from: 'GBP', to: 'INR', amount: customController91.text ??  0);
+          from: 'GBP', to: 'INR', amount: customController91.text  ??  0);
       var resultINR10 = await Currency.getConversion(
-          from: 'GBP', to: 'INR', amount: customController101.text ??  0);
+          from: 'GBP', to: 'INR', amount: customController101.text  ??  0);
       var resultINR11 = await Currency.getConversion(
-          from: 'GBP', to: 'INR', amount: shipcost.text ??  0);
+          from: 'GBP', to: 'INR', amount: shipcost.text  ??  0);
       var resultINR12 = await Currency.getConversion(
-          from: 'GBP', to: 'INR', amount: shipcostintern.text ?? 0);
+          from: 'GBP', to: 'INR', amount: shipcostintern.text  ??  0);
           setState(() {
         gbptousd = resultUSD.rate;
-        // int usd = int.tryParse(gbptousd);
-         gbptousd = gbptousd.round();
-        var usd = double.tryParse(priceController.text);
-          userprice = usd.round();
+      gbptousd1 = resultUSD1.rate;
+     gbptousd2 = resultUSD2.rate;
+     gbptousd3 = resultUSD3.rate;
+     gbptousd4 = resultUSD4.rate;
+     gbptousd5 = resultUSD5.rate;
+     gbptousd6 = resultUSD6.rate;
+     gbptousd7 = resultUSD7.rate;
+     gbptousd8 = resultUSD8.rate;
+     gbptousd9 = resultUSD9.rate;
+     gbptousd10 = resultUSD10.rate;
+     gbptousd11 = resultUSD11.rate;
+     gbptousd12 = resultUSD12.rate;
+
         gbptoeur = resultEUR.rate;
-        gbptoeur = (gbptoeur).round();
+gbptoeur1 = resultEUR1.rate;
+gbptoeur2 = resultEUR2.rate;
+gbptoeur3 = resultEUR3.rate;
+gbptoeur4 = resultEUR4.rate;
+gbptoeur5 = resultEUR5.rate;
+gbptoeur6 = resultEUR6.rate;
+gbptoeur7 = resultEUR7.rate;
+gbptoeur8 = resultEUR8.rate;
+gbptoeur9 = resultEUR9.rate;
+gbptoeur10 = resultEUR10.rate;
+gbptoeur11 = resultEUR11.rate;
+gbptoeur12 = resultEUR12.rate;
 
         gbptoinr = resultINR.rate;
-        gbptoinr = gbptoinr.round();
+gbptoinr1 = resultINR1.rate;
+gbptoinr2 = resultINR2.rate;
+gbptoinr3 = resultINR3.rate;
+gbptoinr4 = resultINR4.rate;
+gbptoinr5 = resultINR5.rate;
+gbptoinr6 = resultINR6.rate;
+gbptoinr7 = resultINR7.rate;
+gbptoinr8 = resultINR8.rate;
+gbptoinr9 = resultINR9.rate;
+gbptoinr10 = resultINR10.rate;
+gbptoinr11 = resultINR11.rate;
+gbptoinr12 = resultINR12.rate;
+        userprice = priceController.text;
+        userprice1 = customController11.text;
+        userprice2 = customController21.text;
+        userprice3 = customController31.text;
+        userprice4 = customController41.text;
+        userprice5 = customController51.text;
+        userprice6 = customController61.text;
+        userprice7 = customController71.text;
+        userprice8 = customController81.text;
+        userprice9 = customController91.text;
+        userprice10 = customController101.text;
+        userprice11 = shipcost.text;
+        userprice12 = shipcostintern.text;
 
         print("$gbptousd");
         print("$userprice");
-        print("$gbptoeur");
+        print("$usdtoeur");
         print("$gbptocny");
         print("$gbptoinr");
 
@@ -1064,1855 +1092,312 @@ setState(() {
       var resultGBP = await Currency.getConversion(
           from: 'USD', to: 'GBP', amount: priceController.text);
       var resultGBP1 = await Currency.getConversion(
-          from: 'USD', to: 'GBP', amount: customController11.text);
+          from: 'USD', to: 'GBP', amount: customController11.text ??  0);
       var resultGBP2 = await Currency.getConversion(
-          from: 'USD', to: 'GBP', amount: customController21.text);
+          from: 'USD', to: 'GBP', amount: customController21.text ??  0);
       var resultGBP3 = await Currency.getConversion(
-          from: 'USD', to: 'GBP', amount: customController31.text);
+          from: 'USD', to: 'GBP', amount: customController31.text ??  0);
       var resultGBP4 = await Currency.getConversion(
-          from: 'USD', to: 'GBP', amount: customController41.text);
+          from: 'USD', to: 'GBP', amount: customController41.text ??  0);
       var resultGBP5 = await Currency.getConversion(
-          from: 'USD', to: 'GBP', amount: customController51.text);
+          from: 'USD', to: 'GBP', amount: customController51.text ??  0);
       var resultGBP6 = await Currency.getConversion(
-          from: 'USD', to: 'GBP', amount: customController61.text);
+          from: 'USD', to: 'GBP', amount: customController61.text ??  0);
       var resultGBP7 = await Currency.getConversion(
-          from: 'USD', to: 'GBP', amount: customController71.text);
+          from: 'USD', to: 'GBP', amount: customController71.text ??  0);
       var resultGBP8 = await Currency.getConversion(
-          from: 'USD', to: 'GBP', amount: customController81.text);
-      var resultUSD9 = await Currency.getConversion(
-          from: 'USD', to: 'GBP', amount: customController91.text);
+          from: 'USD', to: 'GBP', amount: customController81.text ??  0);
+      var resultGBP9 = await Currency.getConversion(
+          from: 'USD', to: 'GBP', amount: customController91.text ??  0);
       var resultGBP10 = await Currency.getConversion(
-          from: 'USD', to: 'GBP', amount: customController101.text);
+          from: 'USD', to: 'GBP', amount: customController101.text ??  0);
       var resultGBP11 = await Currency.getConversion(
-          from: 'USD', to: 'GBP', amount: shipcost.text);
+          from: 'USD', to: 'GBP', amount: shipcost.text ??  0);
       var resultGBP12 = await Currency.getConversion(
-          from: 'USD', to: 'GBP', amount: shipcostintern.text);
+          from: 'USD', to: 'GBP', amount: shipcostintern.text ??  0);
 
       // String date = result.date; // Returns the last updated date
-      setState(() {
-        usdtogbp = resultGBP.rate;
-         usdtogbp = usdtogbp.round();
-
-        var usd = double.tryParse(priceController.text);
-        userprice = usd.round();
-
-      });
 
       print("$usdtogbp");
       var resultEUR = await Currency.getConversion(
           from: 'USD', to: 'EUR', amount: priceController.text);
       var resultEUR1 = await Currency.getConversion(
-          from: 'USD', to: 'EUR', amount: customController11.text);
+          from: 'USD', to: 'EUR', amount: customController11.text ??  0);
       var resultEUR2 = await Currency.getConversion(
-          from: 'USD', to: 'EUR', amount: customController21.text);
+          from: 'USD', to: 'EUR', amount: customController21.text ??  0);
       var resultEUR3 = await Currency.getConversion(
-          from: 'USD', to: 'EUR', amount: customController31.text);
+          from: 'USD', to: 'EUR', amount: customController31.text ??  0);
       var resultEUR4 = await Currency.getConversion(
-          from: 'USD', to: 'EUR', amount: customController41.text);
+          from: 'USD', to: 'EUR', amount: customController41.text ??  0);
       var resultEUR5 = await Currency.getConversion(
-          from: 'USD', to: 'EUR', amount: customController51.text);
+          from: 'USD', to: 'EUR', amount: customController51.text ??  0);
       var resultEUR6 = await Currency.getConversion(
-          from: 'USD', to: 'EUR', amount: customController61.text);
+          from: 'USD', to: 'EUR', amount: customController61.text ??  0);
       var resultEUR7 = await Currency.getConversion(
-          from: 'USD', to: 'EUR', amount: customController71.text);
+          from: 'USD', to: 'EUR', amount: customController71.text ??  0);
       var resultEUR8 = await Currency.getConversion(
-          from: 'USD', to: 'EUR', amount: customController81.text);
+          from: 'USD', to: 'EUR', amount: customController81.text ??  0);
       var resultEUR9 = await Currency.getConversion(
-          from: 'USD', to: 'EUR', amount: customController91.text);
+          from: 'USD', to: 'EUR', amount: customController91.text ??  0);
       var resultEUR10 = await Currency.getConversion(
-          from: 'USD', to: 'EUR', amount: customController101.text);
+          from: 'USD', to: 'EUR', amount: customController101.text ??  0);
       var resultEUR11 = await Currency.getConversion(
-          from: 'USD', to: 'EUR', amount: shipcost.text);
+          from: 'USD', to: 'EUR', amount: shipcost.text ??  0);
       var resultEUR12 = await Currency.getConversion(
-          from: 'USD', to: 'EUR', amount: shipcostintern.text);
+          from: 'USD', to: 'EUR', amount: shipcostintern.text ??  0);
 
 // Returns the last updated date
-      setState(() {
-        usdtoeur = resultEUR.rate;
-        usdtoeur = usdtoeur.round();
 
-
-      });
       print("$usdtoeur");
 
       var resultINR = await Currency.getConversion(
           from: 'USD', to: 'INR', amount: priceController.text);
       var resultINR1 = await Currency.getConversion(
-          from: 'USD', to: 'INR', amount: customController11.text);
+          from: 'USD', to: 'INR', amount: customController11.text ??  0);
       var resultINR2 = await Currency.getConversion(
-          from: 'USD', to: 'INR', amount: customController21.text);
+          from: 'USD', to: 'INR', amount: customController21.text ??  0);
       var resultINR3 = await Currency.getConversion(
-          from: 'USD', to: 'INR', amount: customController31.text);
+          from: 'USD', to: 'INR', amount: customController31.text ??  0);
       var resultINR4 = await Currency.getConversion(
-          from: 'USD', to: 'INR', amount: customController41.text);
+          from: 'USD', to: 'INR', amount: customController41.text ??  0);
       var resultINR5 = await Currency.getConversion(
-          from: 'USD', to: 'INR', amount: customController51.text);
+          from: 'USD', to: 'INR', amount: customController51.text ??  0);
       var resultINR6 = await Currency.getConversion(
-          from: 'USD', to: 'INR', amount: customController61.text);
+          from: 'USD', to: 'INR', amount: customController61.text ??  0);
       var resultINR7 = await Currency.getConversion(
-          from: 'USD', to: 'INR', amount: customController71.text);
+          from: 'USD', to: 'INR', amount: customController71.text ??  0);
       var resultINR8 = await Currency.getConversion(
-          from: 'USD', to: 'INR', amount: customController81.text);
+          from: 'USD', to: 'INR', amount: customController81.text ??  0);
       var resultINR9 = await Currency.getConversion(
-          from: 'USD', to: 'INR', amount: customController91.text);
+          from: 'USD', to: 'INR', amount: customController91.text ??  0);
       var resultINR10 = await Currency.getConversion(
-          from: 'USD', to: 'INR', amount: customController101.text);
+          from: 'USD', to: 'INR', amount: customController101.text ??  0);
       var resultINR11 = await Currency.getConversion(
-          from: 'USD', to: 'INR', amount: shipcost.text);
+          from: 'USD', to: 'INR', amount: shipcost.text ??  0);
       var resultINR12 = await Currency.getConversion(
-          from: 'USD', to: 'INR', amount: shipcostintern.text);
+          from: 'USD', to: 'INR', amount: shipcostintern.text ??  0);
 
       setState(() {
-  usdtoinr = resultINR.rate;
-  usdtoinr = usdtoinr.round();
 
-});
+        usdtogbp = resultGBP.rate;
+        usdtogbp1 = resultGBP1.rate;
+        usdtogbp2 = resultGBP2.rate;
+        usdtogbp3 = resultGBP3.rate;
+        usdtogbp4 = resultGBP4.rate;
+        usdtogbp5 = resultGBP5.rate;
+        usdtogbp6 = resultGBP6.rate;
+        usdtogbp7 = resultGBP7.rate;
+        usdtogbp8 = resultGBP8.rate;
+        usdtogbp9 = resultGBP9.rate;
+        usdtogbp10 = resultGBP10.rate;
+        usdtogbp11 = resultGBP11.rate;
+        usdtogbp12 = resultGBP12.rate;
+
+        usdtoeur = resultEUR.rate;
+        usdtoeur1 = resultEUR1.rate;
+        usdtoeur2 = resultEUR2.rate;
+        usdtoeur3 = resultEUR3.rate;
+        usdtoeur4 = resultEUR4.rate;
+        usdtoeur5 = resultEUR5.rate;
+        usdtoeur6 = resultEUR6.rate;
+        usdtoeur7 = resultEUR7.rate;
+        usdtoeur8 = resultEUR8.rate;
+        usdtoeur9 = resultEUR9.rate;
+        usdtoeur10 = resultEUR10.rate;
+        usdtoeur11 = resultEUR11.rate;
+        usdtoeur12 = resultEUR12.rate;
+
+        usdtoinr = resultINR.rate;
+        usdtoinr1 = resultINR1.rate;
+        usdtoinr2 = resultINR2.rate;
+        usdtoinr3 = resultINR3.rate;
+        usdtoinr4 = resultINR4.rate;
+        usdtoinr5 = resultINR5.rate;
+        usdtoinr6 = resultINR6.rate;
+        usdtoinr7 = resultINR7.rate;
+        usdtoinr8 = resultINR8.rate;
+        usdtoinr9 = resultINR9.rate;
+        usdtoinr10 = resultINR10.rate;
+        usdtoinr11 = resultINR11.rate;
+        usdtoinr12 = resultINR12.rate;
+        userprice = priceController.text;
+        userprice1 = customController11.text;
+        userprice2 = customController21.text;
+        userprice3 = customController31.text;
+        userprice4 = customController41.text;
+        userprice5 = customController51.text;
+        userprice6 = customController61.text;
+        userprice7 = customController71.text;
+        userprice8 = customController81.text;
+        userprice9 = customController91.text;
+        userprice10 = customController101.text;
+        userprice11 = shipcost.text;
+        userprice12 = shipcostintern.text;
+
+
+      });
+
 
       print("$usdtoinr");
     }
     else  {
       var resultGBP = await Currency.getConversion(
           from: 'USD', to: 'GBP', amount: priceController.text);
+      var resultGBP1 = await Currency.getConversion(
+          from: 'USD', to: 'GBP', amount: customController11.text ??  0);
+      var resultGBP2 = await Currency.getConversion(
+          from: 'USD', to: 'GBP', amount: customController21.text ??  0);
+      var resultGBP3 = await Currency.getConversion(
+          from: 'USD', to: 'GBP', amount: customController31.text ??  0);
+      var resultGBP4 = await Currency.getConversion(
+          from: 'USD', to: 'GBP', amount: customController41.text ??  0);
+      var resultGBP5 = await Currency.getConversion(
+          from: 'USD', to: 'GBP', amount: customController51.text ??  0);
+      var resultGBP6 = await Currency.getConversion(
+          from: 'USD', to: 'GBP', amount: customController61.text ??  0);
+      var resultGBP7 = await Currency.getConversion(
+          from: 'USD', to: 'GBP', amount: customController71.text ??  0);
+      var resultGBP8 = await Currency.getConversion(
+          from: 'USD', to: 'GBP', amount: customController81.text ??  0);
+      var resultGBP9 = await Currency.getConversion(
+          from: 'USD', to: 'GBP', amount: customController91.text ??  0);
+      var resultGBP10 = await Currency.getConversion(
+          from: 'USD', to: 'GBP', amount: customController101.text ??  0);
+      var resultGBP11 = await Currency.getConversion(
+          from: 'USD', to: 'GBP', amount: shipcost.text ??  0);
+      var resultGBP12 = await Currency.getConversion(
+          from: 'USD', to: 'GBP', amount: shipcostintern.text ??  0);
+
       // String date = result.date; // Returns the last updated date
-      setState(() {
-        usdtogbp = resultGBP.rate;
-        usdtogbp = usdtogbp.round();
-
-        var usd = double.tryParse(priceController.text);
-        userprice = usd.round();
-
-      });
 
       print("$usdtogbp");
       var resultEUR = await Currency.getConversion(
           from: 'USD', to: 'EUR', amount: priceController.text);
+      var resultEUR1 = await Currency.getConversion(
+          from: 'USD', to: 'EUR', amount: customController11.text ??  0);
+      var resultEUR2 = await Currency.getConversion(
+          from: 'USD', to: 'EUR', amount: customController21.text ??  0);
+      var resultEUR3 = await Currency.getConversion(
+          from: 'USD', to: 'EUR', amount: customController31.text ??  0);
+      var resultEUR4 = await Currency.getConversion(
+          from: 'USD', to: 'EUR', amount: customController41.text ??  0);
+      var resultEUR5 = await Currency.getConversion(
+          from: 'USD', to: 'EUR', amount: customController51.text ??  0);
+      var resultEUR6 = await Currency.getConversion(
+          from: 'USD', to: 'EUR', amount: customController61.text ??  0);
+      var resultEUR7 = await Currency.getConversion(
+          from: 'USD', to: 'EUR', amount: customController71.text ??  0);
+      var resultEUR8 = await Currency.getConversion(
+          from: 'USD', to: 'EUR', amount: customController81.text ??  0);
+      var resultEUR9 = await Currency.getConversion(
+          from: 'USD', to: 'EUR', amount: customController91.text ??  0);
+      var resultEUR10 = await Currency.getConversion(
+          from: 'USD', to: 'EUR', amount: customController101.text ??  0);
+      var resultEUR11 = await Currency.getConversion(
+          from: 'USD', to: 'EUR', amount: shipcost.text ??  0);
+      var resultEUR12 = await Currency.getConversion(
+          from: 'USD', to: 'EUR', amount: shipcostintern.text ??  0);
+
 // Returns the last updated date
-      setState(() {
-        usdtoeur = resultEUR.rate;
-        usdtoeur = usdtoeur.round();
 
-
-      });
       print("$usdtoeur");
-      var resultCNY = await Currency.getConversion(
-          from: 'USD', to: 'CNY', amount: priceController.text);
-      setState(() {
-        usdtocny = resultCNY.rate;
-        usdtocny = usdtocny.round();
 
-      });
-      print("$usdtocny");
       var resultINR = await Currency.getConversion(
           from: 'USD', to: 'INR', amount: priceController.text);
+      var resultINR1 = await Currency.getConversion(
+          from: 'USD', to: 'INR', amount: customController11.text ??  0);
+      var resultINR2 = await Currency.getConversion(
+          from: 'USD', to: 'INR', amount: customController21.text ??  0);
+      var resultINR3 = await Currency.getConversion(
+          from: 'USD', to: 'INR', amount: customController31.text ??  0);
+      var resultINR4 = await Currency.getConversion(
+          from: 'USD', to: 'INR', amount: customController41.text ??  0);
+      var resultINR5 = await Currency.getConversion(
+          from: 'USD', to: 'INR', amount: customController51.text ??  0);
+      var resultINR6 = await Currency.getConversion(
+          from: 'USD', to: 'INR', amount: customController61.text ??  0);
+      var resultINR7 = await Currency.getConversion(
+          from: 'USD', to: 'INR', amount: customController71.text ??  0);
+      var resultINR8 = await Currency.getConversion(
+          from: 'USD', to: 'INR', amount: customController81.text ??  0);
+      var resultINR9 = await Currency.getConversion(
+          from: 'USD', to: 'INR', amount: customController91.text ??  0);
+      var resultINR10 = await Currency.getConversion(
+          from: 'USD', to: 'INR', amount: customController101.text ??  0);
+      var resultINR11 = await Currency.getConversion(
+          from: 'USD', to: 'INR', amount: shipcost.text ??  0);
+      var resultINR12 = await Currency.getConversion(
+          from: 'USD', to: 'INR', amount: shipcostintern.text ??  0);
+
       setState(() {
+
+        usdtogbp = resultGBP.rate;
+        usdtogbp1 = resultGBP1.rate;
+        usdtogbp2 = resultGBP2.rate;
+        usdtogbp3 = resultGBP3.rate;
+        usdtogbp4 = resultGBP4.rate;
+        usdtogbp5 = resultGBP5.rate;
+        usdtogbp6 = resultGBP6.rate;
+        usdtogbp7 = resultGBP7.rate;
+        usdtogbp8 = resultGBP8.rate;
+        usdtogbp9 = resultGBP9.rate;
+        usdtogbp10 = resultGBP10.rate;
+        usdtogbp11 = resultGBP11.rate;
+        usdtogbp12 = resultGBP12.rate;
+
+        usdtoeur = resultEUR.rate;
+        usdtoeur1 = resultEUR1.rate;
+        usdtoeur2 = resultEUR2.rate;
+        usdtoeur3 = resultEUR3.rate;
+        usdtoeur4 = resultEUR4.rate;
+        usdtoeur5 = resultEUR5.rate;
+        usdtoeur6 = resultEUR6.rate;
+        usdtoeur7 = resultEUR7.rate;
+        usdtoeur8 = resultEUR8.rate;
+        usdtoeur9 = resultEUR9.rate;
+        usdtoeur10 = resultEUR10.rate;
+        usdtoeur11 = resultEUR11.rate;
+        usdtoeur12 = resultEUR12.rate;
+
         usdtoinr = resultINR.rate;
-        usdtoinr = usdtoinr.round();
+        usdtoinr1 = resultINR1.rate;
+        usdtoinr2 = resultINR2.rate;
+        usdtoinr3 = resultINR3.rate;
+        usdtoinr4 = resultINR4.rate;
+        usdtoinr5 = resultINR5.rate;
+        usdtoinr6 = resultINR6.rate;
+        usdtoinr7 = resultINR7.rate;
+        usdtoinr8 = resultINR8.rate;
+        usdtoinr9 = resultINR9.rate;
+        usdtoinr10 = resultINR10.rate;
+        usdtoinr11 = resultINR11.rate;
+        usdtoinr12 = resultINR12.rate;
+        userprice = double.tryParse(priceController.text);
+        userprice1 = double.tryParse(customController11.text);
+        userprice2 = double.tryParse(customController21.text);
+        userprice3 = double.tryParse(customController31.text);
+        userprice4 = double.tryParse(customController41.text);
+        userprice5 = double.tryParse(customController51.text);
+        userprice6 = double.tryParse(customController61.text);
+        userprice7 = double.tryParse(customController71.text);
+        userprice8 = double.tryParse(customController81.text);
+        userprice9 = double.tryParse(customController91.text);
+        userprice10 = double.tryParse(customController101.text);
+        userprice11 = double.tryParse(shipcost.text);
+        userprice12 = double.tryParse(shipcostintern.text);
+
 
       });
+
 
       print("$usdtoinr");
     }
   }
 
-  createProdInFirestore(
-      {List shopmediaUrl,
-    String Category,
-    var price,
-    List selectedSizes,
-    String details,
-    String productname,
 
-    String color,
-    String composition,
-    String washandcare,
-    String sizeandfit,
-    int freesizeQuantity,
-    int xxxsQuantity,
-      int xxsQuantity,
-      int xsQuantity,
-    int sQuantity,
-    int mQuantity,
-    int lQuantity,
-    int xlQuantity,
-    int xxlQuantity,
-    int xxxlQuantity,
-      int fourxlQuantity,
-      int fivexlQuantity,
-      int sixxlQuantity,
-      int sevenxlQuantity,
-      int eightxlQuantity,
-  int Shoe1,
-  int Shoe2,
-  int Shoe3,
-  int Shoe4,
-  int Shoe5,
-  int Shoe6,
-  int Shoe7,
-  int Shoe8,
-  int Shoe9,
-  int Shoe10,
-  int Shoe11,
-  int Shoe12,
-  int Shoe13,
-  int Shoe14,
-  int Shoe15,
-  int Shoe16,
-  int Shoe17,
-  int Shoe18,
-  int Shoe19,
-  int Shoe20,
-  int Shoe21,
-    int mtoQuantity,
-    String gender,
-    var inrtousd,
-    var inrtocny,
-    var inrtogbp,
-    var inrtoeur,
-    var usdtoinr,
-    var usdtocny,
-    var usdtogbp,
-    var usdtoeur,
-    var cnytoinr,
-    var cnytousd,
-    var cnytogbp,
-    var cnytoeur,
-    var gbptoinr,
-    var gbptocny,
-    var gbptousd,
-    var gbptoeur,
-    var eurtoinr,
-    var eurtousd,
-    var eurtocny,
-    var eurtogbp,
-bool world,
-   String     ship,
-  }) {
-    if(dropdownValue=='Men'){
-      if (currentUser.country == 'India') {
-        productsRef
-            .doc(widget.currentUser.id)
-            .collection("userProducts")
-            .doc(prodId)
-            .set({
-          "indian":indian,
-          "worldship":world,
-          "shipment": ship,
-          "prodId": prodId,
-          "ownerId": widget.currentUser.id,
-          "username": widget.currentUser.displayName,
-          "photoUrl": widget.currentUser.photoUrl,
-          "displayName": widget.currentUser.displayName,
-          "shopmediaUrl": shopmediaUrl,
-          "Category": Category,
-          // "type":type,
-          "Gender": gender,
-          "details": details,
-          "productname": productname,
-          "usd": inrtousd.toString(),
-          "cny": inrtocny.toString(),
-          "gbp": inrtogbp.toString(),
-          "eur": inrtoeur.toString(),
-          "inr": price.toString(),
-          "color": color,
-          "composition": composition,
-          "washandcare": washandcare,
-          "sizeandfit": sizeandfit,
-          "timestamp": timestamp,
-          "freesizeQuantity": freesizeQuantity,
-          "xxxsQuantity": xxxsQuantity,
-          "xxsQuantity": xxsQuantity,
-          "xsQuantity": xsQuantity,
-          "sQuantity": sQuantity,
-          "mQuantity": mQuantity,
-          "lQuantity": lQuantity,
-          "xlQuantity": xlQuantity,
-          "xxlQuantity": xxlQuantity,
-          "xxxlQuantity": xxxlQuantity,
-          "4xlQuantity": fourxlQuantity,
-          "5xlQuantity": fivexlQuantity,
-          "6xlQuantity": sixxlQuantity,
-          "7xlQuantity": sevenxlQuantity,
-          "8xlQuantity": eightxlQuantity,
-          "Shoe1":Shoe1,
-          "Shoe2":Shoe2,
-          "Shoe3":Shoe3,
-          "Shoe4":Shoe4,
-          "Shoe5":Shoe5,
-          "Shoe6":Shoe6,
-          "Shoe7":Shoe7,
-          "Shoe8":Shoe8,
-          "Shoe9":Shoe9,
-          "Shoe10":Shoe10,
-          "Shoe11":Shoe11,
-          "Shoe12":Shoe12,
-          "Shoe13":Shoe13,
-          "Shoe14":Shoe14,
-          "Shoe15":Shoe15,
-          "Shoe16":Shoe16,
-          "Shoe17":Shoe17,
-          "Shoe18":Shoe18,
-          "Shoe19":Shoe19,
-          "Shoe20":Shoe20,
-          "Shoe21":Shoe21,
-          "mtoQuantity": mtoQuantity,
-          // "selectedSizes": selectedSizes,
-          "likes": {},
-        });
-
-
-
-        setState(() {
-          file = null;
-          // isUploading = false;
-        });
-      }
-      else if (currentUser.country == 'Europe'){
-        productsRef
-            .doc(widget.currentUser.id)
-            .collection("userProducts")
-            .doc(prodId)
-            .set({          "indian":indian,
-          "worldship":world,
-          "shipment": ship,
-          "prodId": prodId,
-          "ownerId": widget.currentUser.id,
-          "username": widget.currentUser.displayName,
-          "photoUrl": widget.currentUser.photoUrl,
-          "displayName": widget.currentUser.displayName,
-          "shopmediaUrl": shopmediaUrl,
-          "Category": Category,
-          // "type":type,
-          "Gender": gender,
-          "details": details,
-          "productname": productname,
-          "usd": eurtousd.toString(),
-          "cny": eurtocny.toString(),
-          "gbp": eurtogbp.toString(),
-          "eur": price.toString(),
-          "inr": eurtoinr.toString(),
-          "color": color,
-          "composition": composition,
-          "washandcare": washandcare,
-          "sizeandfit": sizeandfit,
-          "timestamp": timestamp,
-          "freesizeQuantity": freesizeQuantity,
-          "xxxsQuantity": xxxsQuantity,
-          "xxsQuantity": xxsQuantity,
-          "xsQuantity": xsQuantity,
-          "sQuantity": sQuantity,
-          "mQuantity": mQuantity,
-          "lQuantity": lQuantity,
-          "xlQuantity": xlQuantity,
-          "xxlQuantity": xxlQuantity,
-          "xxxlQuantity": xxxlQuantity,
-          "4xlQuantity": fourxlQuantity,
-          "5xlQuantity": fivexlQuantity,
-          "6xlQuantity": sixxlQuantity,
-          "7xlQuantity": sevenxlQuantity,
-          "8xlQuantity": eightxlQuantity,
-          "Shoe1":Shoe1,
-          "Shoe2":Shoe2,
-          "Shoe3":Shoe3,
-          "Shoe4":Shoe4,
-          "Shoe5":Shoe5,
-          "Shoe6":Shoe6,
-          "Shoe7":Shoe7,
-          "Shoe8":Shoe8,
-          "Shoe9":Shoe9,
-          "Shoe10":Shoe10,
-          "Shoe11":Shoe11,
-          "Shoe12":Shoe12,
-          "Shoe13":Shoe13,
-          "Shoe14":Shoe14,
-          "Shoe15":Shoe15,
-          "Shoe16":Shoe16,
-          "Shoe17":Shoe17,
-          "Shoe18":Shoe18,
-          "Shoe19":Shoe19,
-          "Shoe20":Shoe20,
-          "Shoe21":Shoe21,
-          "mtoQuantity": mtoQuantity,
-          "likes": {},
-        });
-
-
-
-        setState(() {
-          file = null;
-          isUploading = false;
-        });
-      }
-      else if (currentUser.country == 'UK') {
-        productsRef
-            .doc(widget.currentUser.id)
-            .collection("userProducts")
-            .doc(prodId)
-            .set({          "indian":indian,
-          "worldship":world,
-          "shipment": ship,
-          "prodId": prodId,
-          "ownerId": widget.currentUser.id,
-          "username": widget.currentUser.displayName,
-          "photoUrl": widget.currentUser.photoUrl,
-          "displayName": widget.currentUser.displayName,
-          "shopmediaUrl": shopmediaUrl,
-          "Category": Category,
-          // "type":type,
-          "Gender": gender,
-          "details": details,
-          "productname": productname,
-          "usd": gbptousd.toString(),
-          "cny": gbptocny.toString(),
-          "gbp": price.toString(),
-          "eur": gbptoeur.toString(),
-          "inr": gbptoinr.toString(),
-          "color": color,
-          "composition": composition,
-          "washandcare": washandcare,
-          "sizeandfit": sizeandfit,
-          "timestamp": timestamp,
-          "freesizeQuantity": freesizeQuantity,
-          "xxxsQuantity": xxxsQuantity,
-          "xxsQuantity": xxsQuantity,
-          "xsQuantity": xsQuantity,
-          "sQuantity": sQuantity,
-          "mQuantity": mQuantity,
-          "lQuantity": lQuantity,
-          "xlQuantity": xlQuantity,
-          "xxlQuantity": xxlQuantity,
-          "xxxlQuantity": xxxlQuantity,
-          "4xlQuantity": fourxlQuantity,
-          "5xlQuantity": fivexlQuantity,
-          "6xlQuantity": sixxlQuantity,
-          "7xlQuantity": sevenxlQuantity,
-          "8xlQuantity": eightxlQuantity,
-          "Shoe1":Shoe1,
-          "Shoe2":Shoe2,
-          "Shoe3":Shoe3,
-          "Shoe4":Shoe4,
-          "Shoe5":Shoe5,
-          "Shoe6":Shoe6,
-          "Shoe7":Shoe7,
-          "Shoe8":Shoe8,
-          "Shoe9":Shoe9,
-          "Shoe10":Shoe10,
-          "Shoe11":Shoe11,
-          "Shoe12":Shoe12,
-          "Shoe13":Shoe13,
-          "Shoe14":Shoe14,
-          "Shoe15":Shoe15,
-          "Shoe16":Shoe16,
-          "Shoe17":Shoe17,
-          "Shoe18":Shoe18,
-          "Shoe19":Shoe19,
-          "Shoe20":Shoe20,
-          "Shoe21":Shoe21,
-          "mtoQuantity": mtoQuantity,
-          "likes": {},
-        });
-
-        setState(() {
-          file = null;
-          isUploading = false;
-        });
-      }
-      else if (currentUser.country == 'USA') {
-        productsRef
-            .doc(widget.currentUser.id)
-            .collection("userProducts")
-            .doc(prodId)
-            .set({          "indian":indian,
-          "worldship":world,
-          "shipment": ship,
-          "prodId": prodId,
-          "ownerId": widget.currentUser.id,
-          "username": widget.currentUser.displayName,
-          "photoUrl": widget.currentUser.photoUrl,
-          "displayName": widget.currentUser.displayName,
-          "shopmediaUrl": shopmediaUrl,
-          "Category": Category,
-          // "type":type,
-          "Gender": gender,
-          "details": details,
-          "productname": productname,
-          "cny": usdtocny.toString(),
-          "gbp": usdtogbp.toString(),
-          "eur": usdtoeur.toString(),
-          "inr": usdtoinr.toString(),
-          "usd" :price.toString(),
-          "color": color,
-          "composition": composition,
-          "washandcare": washandcare,
-          "sizeandfit": sizeandfit,
-          "timestamp": timestamp,
-          "freesizeQuantity": freesizeQuantity,
-          "xxxsQuantity": xxxsQuantity,
-          "xxsQuantity": xxsQuantity,
-          "xsQuantity": xsQuantity,
-          "sQuantity": sQuantity,
-          "mQuantity": mQuantity,
-          "lQuantity": lQuantity,
-          "xlQuantity": xlQuantity,
-          "xxlQuantity": xxlQuantity,
-          "xxxlQuantity": xxxlQuantity,
-          "4xlQuantity": fourxlQuantity,
-          "5xlQuantity": fivexlQuantity,
-          "6xlQuantity": sixxlQuantity,
-          "7xlQuantity": sevenxlQuantity,
-          "8xlQuantity": eightxlQuantity,
-          "Shoe1":Shoe1,
-          "Shoe2":Shoe2,
-          "Shoe3":Shoe3,
-          "Shoe4":Shoe4,
-          "Shoe5":Shoe5,
-          "Shoe6":Shoe6,
-          "Shoe7":Shoe7,
-          "Shoe8":Shoe8,
-          "Shoe9":Shoe9,
-          "Shoe10":Shoe10,
-          "Shoe11":Shoe11,
-          "Shoe12":Shoe12,
-          "Shoe13":Shoe13,
-          "Shoe14":Shoe14,
-          "Shoe15":Shoe15,
-          "Shoe16":Shoe16,
-          "Shoe17":Shoe17,
-          "Shoe18":Shoe18,
-          "Shoe19":Shoe19,
-          "Shoe20":Shoe20,
-          "Shoe21":Shoe21,
-          "mtoQuantity": mtoQuantity,
-          "likes": {},
-        });
-
-
-        setState(() {
-          file = null;
-          isUploading = false;
-        });
-      }
-      else {
-        productsRef
-            .doc(widget.currentUser.id)
-            .collection("userProducts")
-            .doc(prodId)
-            .set({          "indian":indian,
-          "worldship":world,
-          "shipment": ship,
-          "prodId": prodId,
-          "ownerId": widget.currentUser.id,
-          "username": widget.currentUser.displayName,
-          "photoUrl": widget.currentUser.photoUrl,
-          "displayName": widget.currentUser.displayName,
-          "shopmediaUrl": shopmediaUrl,
-          "Category": Category,
-          // "type":type,
-          "Gender": gender,
-          "details": details,
-          "productname": productname,
-          "cny": usdtocny.toString(),
-          "gbp": usdtogbp.toString(),
-          "eur": usdtoeur.toString(),
-          "inr": usdtoinr.toString(),
-          "usd" :price.toString(),
-          "color": color,
-          "composition": composition,
-          "washandcare": washandcare,
-          "sizeandfit": sizeandfit,
-          "timestamp": timestamp,
-          "freesizeQuantity": freesizeQuantity,
-          "xxxsQuantity": xxxsQuantity,
-          "xxsQuantity": xxsQuantity,
-          "xsQuantity": xsQuantity,
-          "sQuantity": sQuantity,
-          "mQuantity": mQuantity,
-          "lQuantity": lQuantity,
-          "xlQuantity": xlQuantity,
-          "xxlQuantity": xxlQuantity,
-          "xxxlQuantity": xxxlQuantity,
-          "4xlQuantity": fourxlQuantity,
-          "5xlQuantity": fivexlQuantity,
-          "6xlQuantity": sixxlQuantity,
-          "7xlQuantity": sevenxlQuantity,
-          "8xlQuantity": eightxlQuantity,
-          "Shoe1":Shoe1,
-          "Shoe2":Shoe2,
-          "Shoe3":Shoe3,
-          "Shoe4":Shoe4,
-          "Shoe5":Shoe5,
-          "Shoe6":Shoe6,
-          "Shoe7":Shoe7,
-          "Shoe8":Shoe8,
-          "Shoe9":Shoe9,
-          "Shoe10":Shoe10,
-          "Shoe11":Shoe11,
-          "Shoe12":Shoe12,
-          "Shoe13":Shoe13,
-          "Shoe14":Shoe14,
-          "Shoe15":Shoe15,
-          "Shoe16":Shoe16,
-          "Shoe17":Shoe17,
-          "Shoe18":Shoe18,
-          "Shoe19":Shoe19,
-          "Shoe20":Shoe20,
-          "Shoe21":Shoe21,
-          "mtoQuantity": mtoQuantity,
-          "likes": {},
-        });
-
-
-        setState(() {
-          file = null;
-          isUploading = false;
-        });
-      }
-    }
-    else if(dropdownValue=='Women') {
-      if (currentUser.country == 'India') {
-        productsRef
-            .doc(widget.currentUser.id)
-            .collection("userProducts")
-            .doc(prodId)
-            .set({          "indian":indian,
-          "worldship":world,
-          "shipment": ship,
-          "prodId": prodId,
-          "ownerId": widget.currentUser.id,
-          "username": widget.currentUser.displayName,
-          "photoUrl": widget.currentUser.photoUrl,
-          "displayName": widget.currentUser.displayName,
-          "shopmediaUrl": shopmediaUrl,
-          "Category": Category,
-          // "type":type,
-          "Gender": gender,
-          "details": details,
-          "productname": productname,
-          "usd": inrtousd.toString(),
-          "cny": inrtocny.toString(),
-          "gbp": inrtogbp.toString(),
-          "eur": inrtoeur.toString(),
-          "inr": price.toString(),
-          "color": color,
-          "composition": composition,
-          "washandcare": washandcare,
-          "sizeandfit": sizeandfit,
-          "timestamp": timestamp,
-          "freesizeQuantity": freesizeQuantity,
-          "xxxsQuantity": xxxsQuantity,
-          "xxsQuantity": xxsQuantity,
-          "xsQuantity": xsQuantity,
-          "sQuantity": sQuantity,
-          "mQuantity": mQuantity,
-          "lQuantity": lQuantity,
-          "xlQuantity": xlQuantity,
-          "xxlQuantity": xxlQuantity,
-          "xxxlQuantity": xxxlQuantity,
-          "4xlQuantity": fourxlQuantity,
-          "5xlQuantity": fivexlQuantity,
-          "6xlQuantity": sixxlQuantity,
-          "7xlQuantity": sevenxlQuantity,
-          "8xlQuantity": eightxlQuantity,
-          "Shoe1":Shoe1,
-          "Shoe2":Shoe2,
-          "Shoe3":Shoe3,
-          "Shoe4":Shoe4,
-          "Shoe5":Shoe5,
-          "Shoe6":Shoe6,
-          "Shoe7":Shoe7,
-          "Shoe8":Shoe8,
-          "Shoe9":Shoe9,
-          "Shoe10":Shoe10,
-          "Shoe11":Shoe11,
-          "Shoe12":Shoe12,
-          "Shoe13":Shoe13,
-          "Shoe14":Shoe14,
-          "Shoe15":Shoe15,
-          "Shoe16":Shoe16,
-
-          "mtoQuantity": mtoQuantity,
-          "likes": {},
-        });
-
-
-        setState(() {
-          file = null;
-          isUploading = false;
-        });
-      }
-      else if (currentUser.country == 'Europe'){
-        productsRef
-            .doc(widget.currentUser.id)
-            .collection("userProducts")
-            .doc(prodId)
-            .set({          "indian":indian,
-          "worldship":world,
-          "shipment": ship,
-          "prodId": prodId,
-          "ownerId": widget.currentUser.id,
-          "username": widget.currentUser.displayName,
-          "photoUrl": widget.currentUser.photoUrl,
-          "displayName": widget.currentUser.displayName,
-          "shopmediaUrl": shopmediaUrl,
-          "Category": Category,
-          // "type":type,
-          "Gender": gender,
-          "details": details,
-          "productname": productname,
-          "usd": eurtousd.toString(),
-          "cny": eurtocny.toString(),
-          "gbp": eurtogbp.toString(),
-          "eur": price.toString(),
-          "inr": eurtoinr.toString(),
-          "color": color,
-          "composition": composition,
-          "washandcare": washandcare,
-          "sizeandfit": sizeandfit,
-          "timestamp": timestamp,
-          "freesizeQuantity": freesizeQuantity,
-          "xxxsQuantity": xxxsQuantity,
-          "xxsQuantity": xxsQuantity,
-          "xsQuantity": xsQuantity,
-          "sQuantity": sQuantity,
-          "mQuantity": mQuantity,
-          "lQuantity": lQuantity,
-          "xlQuantity": xlQuantity,
-          "xxlQuantity": xxlQuantity,
-          "xxxlQuantity": xxxlQuantity,
-          "4xlQuantity": fourxlQuantity,
-          "5xlQuantity": fivexlQuantity,
-          "6xlQuantity": sixxlQuantity,
-          "7xlQuantity": sevenxlQuantity,
-          "8xlQuantity": eightxlQuantity,
-          "Shoe1":Shoe1,
-          "Shoe2":Shoe2,
-          "Shoe3":Shoe3,
-          "Shoe4":Shoe4,
-          "Shoe5":Shoe5,
-          "Shoe6":Shoe6,
-          "Shoe7":Shoe7,
-          "Shoe8":Shoe8,
-          "Shoe9":Shoe9,
-          "Shoe10":Shoe10,
-          "Shoe11":Shoe11,
-          "Shoe12":Shoe12,
-          "Shoe13":Shoe13,
-          "Shoe14":Shoe14,
-          "Shoe15":Shoe15,
-          "Shoe16":Shoe16,
-
-          "mtoQuantity": mtoQuantity,
-          "likes": {},
-        });
-
-
-        setState(() {
-          file = null;
-          isUploading = false;
-        });
-      }
-      else if (currentUser.country == 'UK') {
-        productsRef
-            .doc(widget.currentUser.id)
-            .collection("userProducts")
-            .doc(prodId)
-            .set({          "indian":indian,
-          "worldship":world,
-          "shipment": ship,
-          "prodId": prodId,
-          "ownerId": widget.currentUser.id,
-          "username": widget.currentUser.displayName,
-          "photoUrl": widget.currentUser.photoUrl,
-          "displayName": widget.currentUser.displayName,
-          "shopmediaUrl": shopmediaUrl,
-          "Category": Category,
-          // "type":type,
-          "Gender": gender,
-          "details": details,
-          "productname": productname,
-          "usd": gbptousd.toString(),
-          "cny": gbptocny.toString(),
-          "gbp": price.toString(),
-          "eur": gbptoeur.toString(),
-          "inr": gbptoinr.toString(),
-          "color": color,
-          "composition": composition,
-          "washandcare": washandcare,
-          "sizeandfit": sizeandfit,
-          "timestamp": timestamp,
-          "freesizeQuantity": freesizeQuantity,
-          "xxxsQuantity": xxxsQuantity,
-          "xxsQuantity": xxsQuantity,
-          "xsQuantity": xsQuantity,
-          "sQuantity": sQuantity,
-          "mQuantity": mQuantity,
-          "lQuantity": lQuantity,
-          "xlQuantity": xlQuantity,
-          "xxlQuantity": xxlQuantity,
-          "xxxlQuantity": xxxlQuantity,
-          "4xlQuantity": fourxlQuantity,
-          "5xlQuantity": fivexlQuantity,
-          "6xlQuantity": sixxlQuantity,
-          "7xlQuantity": sevenxlQuantity,
-          "8xlQuantity": eightxlQuantity,
-          "Shoe1":Shoe1,
-          "Shoe2":Shoe2,
-          "Shoe3":Shoe3,
-          "Shoe4":Shoe4,
-          "Shoe5":Shoe5,
-          "Shoe6":Shoe6,
-          "Shoe7":Shoe7,
-          "Shoe8":Shoe8,
-          "Shoe9":Shoe9,
-          "Shoe10":Shoe10,
-          "Shoe11":Shoe11,
-          "Shoe12":Shoe12,
-          "Shoe13":Shoe13,
-          "Shoe14":Shoe14,
-          "Shoe15":Shoe15,
-          "Shoe16":Shoe16,
-
-          "mtoQuantity": mtoQuantity,
-          "likes": {},
-        });
-
-        setState(() {
-          file = null;
-          isUploading = false;
-        });
-      }
-      else if (currentUser.country == 'USA') {
-        productsRef
-            .doc(widget.currentUser.id)
-            .collection("userProducts")
-            .doc(prodId)
-            .set({          "indian":indian,
-          "worldship":world,
-          "shipment": ship,
-          "prodId": prodId,
-          "ownerId": widget.currentUser.id,
-          "username": widget.currentUser.displayName,
-          "photoUrl": widget.currentUser.photoUrl,
-          "displayName": widget.currentUser.displayName,
-          "shopmediaUrl": shopmediaUrl,
-          "Category": Category,
-          // "type":type,
-          "Gender": gender,
-          "details": details,
-          "productname": productname,
-          "usd": price.toString(),
-          "cny": usdtocny.toString(),
-          "gbp": usdtogbp.toString(),
-          "eur": usdtoeur.toString(),
-          "inr": usdtoinr.toString(),
-          "color": color,
-          "composition": composition,
-          "washandcare": washandcare,
-          "sizeandfit": sizeandfit,
-          "timestamp": timestamp,
-          "freesizeQuantity": freesizeQuantity,
-          "xxxsQuantity": xxxsQuantity,
-          "xxsQuantity": xxsQuantity,
-          "xsQuantity": xsQuantity,
-          "sQuantity": sQuantity,
-          "mQuantity": mQuantity,
-          "lQuantity": lQuantity,
-          "xlQuantity": xlQuantity,
-          "xxlQuantity": xxlQuantity,
-          "xxxlQuantity": xxxlQuantity,
-          "4xlQuantity": fourxlQuantity,
-          "5xlQuantity": fivexlQuantity,
-          "6xlQuantity": sixxlQuantity,
-          "7xlQuantity": sevenxlQuantity,
-          "8xlQuantity": eightxlQuantity,
-          "Shoe1":Shoe1,
-          "Shoe2":Shoe2,
-          "Shoe3":Shoe3,
-          "Shoe4":Shoe4,
-          "Shoe5":Shoe5,
-          "Shoe6":Shoe6,
-          "Shoe7":Shoe7,
-          "Shoe8":Shoe8,
-          "Shoe9":Shoe9,
-          "Shoe10":Shoe10,
-          "Shoe11":Shoe11,
-          "Shoe12":Shoe12,
-          "Shoe13":Shoe13,
-          "Shoe14":Shoe14,
-          "Shoe15":Shoe15,
-          "Shoe16":Shoe16,
-
-          "mtoQuantity": mtoQuantity,
-          "likes": {},
-        });
-
-
-        setState(() {
-          file = null;
-          isUploading = false;
-        });
-      }
-      else {
-        productsRef
-            .doc(widget.currentUser.id)
-            .collection("userProducts")
-            .doc(prodId)
-            .set({          "indian":indian,
-          "worldship":world,
-          "shipment": ship,
-          "prodId": prodId,
-          "ownerId": widget.currentUser.id,
-          "username": widget.currentUser.displayName,
-          "photoUrl": widget.currentUser.photoUrl,
-          "displayName": widget.currentUser.displayName,
-          "shopmediaUrl": shopmediaUrl,
-          "Category": Category,
-          // "type":type,
-          "Gender": gender,
-          "details": details,
-          "productname": productname,
-          "usd": price.toString(),
-          "cny": usdtocny.toString(),
-          "gbp": usdtogbp.toString(),
-          "eur": usdtoeur.toString(),
-          "inr": usdtoinr.toString(),
-          "color": color,
-          "composition": composition,
-          "washandcare": washandcare,
-          "sizeandfit": sizeandfit,
-          "timestamp": timestamp,
-          "freesizeQuantity": freesizeQuantity,
-          "xxxsQuantity": xxxsQuantity,
-          "xxsQuantity": xxsQuantity,
-          "xsQuantity": xsQuantity,
-          "sQuantity": sQuantity,
-          "mQuantity": mQuantity,
-          "lQuantity": lQuantity,
-          "xlQuantity": xlQuantity,
-          "xxlQuantity": xxlQuantity,
-          "xxxlQuantity": xxxlQuantity,
-          "4xlQuantity": fourxlQuantity,
-          "5xlQuantity": fivexlQuantity,
-          "6xlQuantity": sixxlQuantity,
-          "7xlQuantity": sevenxlQuantity,
-          "8xlQuantity": eightxlQuantity,
-          "Shoe1":Shoe1,
-          "Shoe2":Shoe2,
-          "Shoe3":Shoe3,
-          "Shoe4":Shoe4,
-          "Shoe5":Shoe5,
-          "Shoe6":Shoe6,
-          "Shoe7":Shoe7,
-          "Shoe8":Shoe8,
-          "Shoe9":Shoe9,
-          "Shoe10":Shoe10,
-          "Shoe11":Shoe11,
-          "Shoe12":Shoe12,
-          "Shoe13":Shoe13,
-          "Shoe14":Shoe14,
-          "Shoe15":Shoe15,
-          "Shoe16":Shoe16,
-
-          "mtoQuantity": mtoQuantity,
-          "likes": {},
-        });
-
-
-        setState(() {
-          file = null;
-          isUploading = false;
-        });
-      }
-    }
-    else if(dropdownValue=='Baby-Boys'||dropdownValue=='Baby-Girls') {
-      if (currentUser.country == 'India') {
-        productsRef
-            .doc(widget.currentUser.id)
-            .collection("userProducts")
-            .doc(prodId)
-            .set({          "indian":indian,
-          "worldship":world,
-          "shipment": ship,
-          "prodId": prodId,
-          "ownerId": widget.currentUser.id,
-          "username": widget.currentUser.displayName,
-          "photoUrl": widget.currentUser.photoUrl,
-          "displayName": widget.currentUser.displayName,
-          "shopmediaUrl": shopmediaUrl,
-          "Category": Category,
-          // "type":type,
-          "Gender": gender,
-          "details": details,
-          "productname": productname,
-          "usd": inrtousd.toString(),
-          "cny": inrtocny.toString(),
-          "gbp": inrtogbp.toString(),
-          "eur": inrtoeur.toString(),
-          "inr": price.toString(),
-          "color": color,
-          "composition": composition,
-          "washandcare": washandcare,
-          "sizeandfit": sizeandfit,
-          "timestamp": timestamp,
-          "freesizeQuantity": freesizeQuantity,
-          "xxxsQuantity": xxxsQuantity,
-          "xxsQuantity": xxsQuantity,
-          "xsQuantity": xsQuantity,
-          "sQuantity": sQuantity,
-          "mQuantity": mQuantity,
-          "lQuantity": lQuantity,
-
-
-        "Shoe1":Shoe1,
-           "Shoe2":Shoe2,
-           "Shoe3":Shoe3,
-           "Shoe4":Shoe4,
-           "Shoe5":Shoe5,
-           "Shoe6":Shoe6,
-           "Shoe7":Shoe7,
-
-          "mtoQuantity": mtoQuantity,
-          "likes": {},
-        });
-
-
-
-        setState(() {
-          file = null;
-          isUploading = false;
-        });
-      }
-      else if (currentUser.country == 'Europe') {
-        productsRef
-            .doc(widget.currentUser.id)
-            .collection("userProducts")
-            .doc(prodId)
-            .set({          "indian":indian,
-          "worldship":world,
-          "shipment": ship,
-          "prodId": prodId,
-          "ownerId": widget.currentUser.id,
-          "username": widget.currentUser.displayName,
-          "photoUrl": widget.currentUser.photoUrl,
-          "displayName": widget.currentUser.displayName,
-          "shopmediaUrl": shopmediaUrl,
-          "Category": Category,
-          // "type":type,
-          "Gender": gender,
-          "details": details,
-          "productname": productname,
-          "usd": eurtousd.toString(),
-          "cny": eurtocny.toString(),
-          "gbp": eurtogbp.toString(),
-          "eur": price.toString(),
-          "inr": eurtoinr.toString(),
-          "color": color,
-          "composition": composition,
-          "washandcare": washandcare,
-          "sizeandfit": sizeandfit,
-          "timestamp": timestamp,
-          "freesizeQuantity": freesizeQuantity,
-          "xxxsQuantity": xxxsQuantity,
-          "xxsQuantity": xxsQuantity,
-          "xsQuantity": xsQuantity,
-          "sQuantity": sQuantity,
-          "mQuantity": mQuantity,
-          "lQuantity": lQuantity,
-
-
-          "Shoe1":Shoe1,
-          "Shoe2":Shoe2,
-          "Shoe3":Shoe3,
-          "Shoe4":Shoe4,
-          "Shoe5":Shoe5,
-          "Shoe6":Shoe6,
-          "Shoe7":Shoe7,
-
-          "mtoQuantity": mtoQuantity,
-          "likes": {},
-        });
-
-        setState(() {
-          file = null;
-          isUploading = false;
-        });
-      }
-      else if (currentUser.country == 'UK') {
-        productsRef
-            .doc(widget.currentUser.id)
-            .collection("userProducts")
-            .doc(prodId)
-            .set({          "indian":indian,
-          "worldship":world,
-          "shipment": ship,
-          "prodId": prodId,
-          "ownerId": widget.currentUser.id,
-          "username": widget.currentUser.displayName,
-          "photoUrl": widget.currentUser.photoUrl,
-          "displayName": widget.currentUser.displayName,
-          "shopmediaUrl": shopmediaUrl,
-          "Category": Category,
-          // "type":type,
-          "Gender": gender,
-          "details": details,
-          "productname": productname,
-          "usd": gbptousd.toString(),
-          "cny": gbptocny.toString(),
-          "gbp": price.toString(),
-          "eur": gbptoeur.toString(),
-          "inr": gbptoinr.toString(),
-          "color": color,
-          "composition": composition,
-          "washandcare": washandcare,
-          "sizeandfit": sizeandfit,
-          "timestamp": timestamp,
-          "freesizeQuantity": freesizeQuantity,
-          "xxxsQuantity": xxxsQuantity,
-          "xxsQuantity": xxsQuantity,
-          "xsQuantity": xsQuantity,
-          "sQuantity": sQuantity,
-          "mQuantity": mQuantity,
-          "lQuantity": lQuantity,
-
-
-          "Shoe1":Shoe1,
-          "Shoe2":Shoe2,
-          "Shoe3":Shoe3,
-          "Shoe4":Shoe4,
-          "Shoe5":Shoe5,
-          "Shoe6":Shoe6,
-          "Shoe7":Shoe7,
-
-          "mtoQuantity": mtoQuantity,
-          "likes": {},
-        });
-
-
-        setState(() {
-          file = null;
-          isUploading = false;
-        });
-      }
-      else if (currentUser.country == 'USA') {
-        productsRef
-            .doc(widget.currentUser.id)
-            .collection("userProducts")
-            .doc(prodId)
-            .set({          "indian":indian,
-          "worldship":world,
-          "shipment": ship,
-          "prodId": prodId,
-          "ownerId": widget.currentUser.id,
-          "username": widget.currentUser.displayName,
-          "photoUrl": widget.currentUser.photoUrl,
-          "displayName": widget.currentUser.displayName,
-          "shopmediaUrl": shopmediaUrl,
-          "Category": Category,
-          // "type":type,
-          "Gender": gender,
-          "details": details,
-          "productname": productname,
-          "usd": price.toString(),
-          "cny": usdtocny.toString(),
-          "gbp": usdtogbp.toString(),
-          "eur": usdtoeur.toString(),
-          "inr": usdtoinr.toString(),
-          "color": color,
-          "composition": composition,
-          "washandcare": washandcare,
-          "sizeandfit": sizeandfit,
-          "timestamp": timestamp,
-          "freesizeQuantity": freesizeQuantity,
-          "xxxsQuantity": xxxsQuantity,
-          "xxsQuantity": xxsQuantity,
-          "xsQuantity": xsQuantity,
-          "sQuantity": sQuantity,
-          "mQuantity": mQuantity,
-          "lQuantity": lQuantity,
-
-
-          "Shoe1":Shoe1,
-          "Shoe2":Shoe2,
-          "Shoe3":Shoe3,
-          "Shoe4":Shoe4,
-          "Shoe5":Shoe5,
-          "Shoe6":Shoe6,
-          "Shoe7":Shoe7,
-
-          "mtoQuantity": mtoQuantity,
-          "likes": {},
-        });
-
-
-
-        setState(() {
-          file = null;
-          isUploading = false;
-        });
-      }
-      else {
-        productsRef
-            .doc(widget.currentUser.id)
-            .collection("userProducts")
-            .doc(prodId)
-            .set({          "indian":indian,
-          "worldship":world,
-          "shipment": ship,
-          "prodId": prodId,
-          "ownerId": widget.currentUser.id,
-          "username": widget.currentUser.displayName,
-          "photoUrl": widget.currentUser.photoUrl,
-          "displayName": widget.currentUser.displayName,
-          "shopmediaUrl": shopmediaUrl,
-          "Category": Category,
-          // "type":type,
-          "Gender": gender,
-          "details": details,
-          "productname": productname,
-          "usd": price.toString(),
-          "cny": usdtocny.toString(),
-          "gbp": usdtogbp.toString(),
-          "eur": usdtoeur.toString(),
-          "inr": usdtoinr.toString(),
-          "color": color,
-          "composition": composition,
-          "washandcare": washandcare,
-          "sizeandfit": sizeandfit,
-          "timestamp": timestamp,
-          "freesizeQuantity": freesizeQuantity,
-          "xxxsQuantity": xxxsQuantity,
-          "xxsQuantity": xxsQuantity,
-          "xsQuantity": xsQuantity,
-          "sQuantity": sQuantity,
-          "mQuantity": mQuantity,
-          "lQuantity": lQuantity,
-
-
-          "Shoe1":Shoe1,
-          "Shoe2":Shoe2,
-          "Shoe3":Shoe3,
-          "Shoe4":Shoe4,
-          "Shoe5":Shoe5,
-          "Shoe6":Shoe6,
-          "Shoe7":Shoe7,
-
-          "mtoQuantity": mtoQuantity,
-          "likes": {},
-        });
-
-
-
-        setState(() {
-          file = null;
-          isUploading = false;
-        });
-      }
-    }
-    else if(dropdownValue=='Kids-Boys'|| dropdownValue=='Kids-Girls') {
-      if (currentUser.country == 'India') {
-        productsRef
-            .doc(widget.currentUser.id)
-            .collection("userProducts")
-            .doc(prodId)
-            .set({
-          "indian":indian,
-          "worldship":world,
-          "shipment": ship,
-          "prodId": prodId,
-          "ownerId": widget.currentUser.id,
-          "username": widget.currentUser.displayName,
-          "photoUrl": widget.currentUser.photoUrl,
-          "displayName": widget.currentUser.displayName,
-          "shopmediaUrl": shopmediaUrl,
-          "Category": Category,
-          // "type":type,
-          "Gender": gender,
-          "details": details,
-          "productname": productname,
-          "usd": inrtousd.toString(),
-          "cny": inrtocny.toString(),
-          "gbp": inrtogbp.toString(),
-          "eur": inrtoeur.toString(),
-          "inr": price.toString(),
-          "color": color,
-          "composition": composition,
-          "washandcare": washandcare,
-          "sizeandfit": sizeandfit,
-          "timestamp": timestamp,
-          "freesizeQuantity": freesizeQuantity,
-          "xxxsQuantity": xxxsQuantity,
-          "xxsQuantity": xxsQuantity,
-          "xsQuantity": xsQuantity,
-          "sQuantity": sQuantity,
-          "mQuantity": mQuantity,
-          "lQuantity": lQuantity,
-          "xlQuantity": xlQuantity,
-          "xxlQuantity": xxlQuantity,
-          "xxxlQuantity": xxxlQuantity,
-          "4xlQuantity": fourxlQuantity,
-
-          "Shoe1":Shoe1,
-          "Shoe2":Shoe2,
-          "Shoe3":Shoe3,
-          "Shoe4":Shoe4,
-          "Shoe5":Shoe5,
-          "Shoe6":Shoe6,
-          "Shoe7":Shoe7,
-          "Shoe8":Shoe8,
-          "Shoe9":Shoe9,
-          "Shoe10":Shoe10,
-          "Shoe11":Shoe11,
-          "Shoe12":Shoe12,
-          "Shoe13":Shoe13,
-          "Shoe14":Shoe14,
-
-          "mtoQuantity": mtoQuantity,
-          "likes": {},
-        });
-
-
-        setState(() {
-          file = null;
-          isUploading = false;
-        });
-      }
-      else if (currentUser.country == 'Europe') {
-        productsRef
-            .doc(widget.currentUser.id)
-            .collection("userProducts")
-            .doc(prodId)
-            .set({          "indian":indian,
-          "worldship":world,
-          "shipment": ship,
-          "prodId": prodId,
-          "ownerId": widget.currentUser.id,
-          "username": widget.currentUser.displayName,
-          "photoUrl": widget.currentUser.photoUrl,
-          "displayName": widget.currentUser.displayName,
-          "shopmediaUrl": shopmediaUrl,
-          "Category": Category,
-          // "type":type,
-          "Gender": gender,
-          "details": details,
-          "productname": productname,
-          "usd": eurtousd.toString(),
-          "cny": eurtocny.toString(),
-          "gbp": eurtogbp.toString(),
-          "eur": price.toString(),
-          "inr": eurtoinr.toString(),
-          "color": color,
-          "composition": composition,
-          "washandcare": washandcare,
-          "sizeandfit": sizeandfit,
-          "timestamp": timestamp,
-          "freesizeQuantity": freesizeQuantity,
-          "xxxsQuantity": xxxsQuantity,
-          "xxsQuantity": xxsQuantity,
-          "xsQuantity": xsQuantity,
-          "sQuantity": sQuantity,
-          "mQuantity": mQuantity,
-          "lQuantity": lQuantity,
-          "xlQuantity": xlQuantity,
-          "xxlQuantity": xxlQuantity,
-          "xxxlQuantity": xxxlQuantity,
-          "4xlQuantity": fourxlQuantity,
-
-          "Shoe1":Shoe1,
-          "Shoe2":Shoe2,
-          "Shoe3":Shoe3,
-          "Shoe4":Shoe4,
-          "Shoe5":Shoe5,
-          "Shoe6":Shoe6,
-          "Shoe7":Shoe7,
-          "Shoe8":Shoe8,
-          "Shoe9":Shoe9,
-          "Shoe10":Shoe10,
-          "Shoe11":Shoe11,
-          "Shoe12":Shoe12,
-          "Shoe13":Shoe13,
-          "Shoe14":Shoe14,
-
-          "mtoQuantity": mtoQuantity,
-          "likes": {},
-        });
-
-
-        setState(() {
-          file = null;
-          isUploading = false;
-        });
-      }
-      else if (currentUser.country == 'UK') {
-        productsRef
-            .doc(widget.currentUser.id)
-            .collection("userProducts")
-            .doc(prodId)
-            .set({
-          "worldship":world,
-          "shipment": ship,
-          "indian":indian,
-
-          "prodId": prodId,
-          "ownerId": widget.currentUser.id,
-          "username": widget.currentUser.displayName,
-          "photoUrl": widget.currentUser.photoUrl,
-          "displayName": widget.currentUser.displayName,
-          "shopmediaUrl": shopmediaUrl,
-          "Category": Category,
-          // "type":type,
-          "Gender": gender,
-          "details": details,
-          "productname": productname,
-          "usd": gbptousd.toString(),
-          "cny": gbptocny.toString(),
-          "gbp": price.toString(),
-          "eur": gbptoeur.toString(),
-          "inr": gbptoinr.toString(),
-          "color": color,
-          "composition": composition,
-          "washandcare": washandcare,
-          "sizeandfit": sizeandfit,
-          "timestamp": timestamp,
-          "freesizeQuantity": freesizeQuantity,
-          "xxxsQuantity": xxxsQuantity,
-          "xxsQuantity": xxsQuantity,
-          "xsQuantity": xsQuantity,
-          "sQuantity": sQuantity,
-          "mQuantity": mQuantity,
-          "lQuantity": lQuantity,
-          "xlQuantity": xlQuantity,
-          "xxlQuantity": xxlQuantity,
-          "xxxlQuantity": xxxlQuantity,
-          "4xlQuantity": fourxlQuantity,
-
-          "Shoe1":Shoe1,
-          "Shoe2":Shoe2,
-          "Shoe3":Shoe3,
-          "Shoe4":Shoe4,
-          "Shoe5":Shoe5,
-          "Shoe6":Shoe6,
-          "Shoe7":Shoe7,
-          "Shoe8":Shoe8,
-          "Shoe9":Shoe9,
-          "Shoe10":Shoe10,
-          "Shoe11":Shoe11,
-          "Shoe12":Shoe12,
-          "Shoe13":Shoe13,
-          "Shoe14":Shoe14,
-
-          "mtoQuantity": mtoQuantity,
-          "likes": {},
-        });
-
-
-
-
-        setState(() {
-          file = null;
-          isUploading = false;
-        });
-      }
-      else if (currentUser.country == 'USA') {
-        productsRef
-            .doc(widget.currentUser.id)
-            .collection("userProducts")
-            .doc(prodId)
-            .set({          "indian":indian,
-          "worldship":world,
-          "shipment": ship,
-          "prodId": prodId,
-          "ownerId": widget.currentUser.id,
-          "username": widget.currentUser.displayName,
-          "photoUrl": widget.currentUser.photoUrl,
-          "displayName": widget.currentUser.displayName,
-          "shopmediaUrl": shopmediaUrl,
-          "Category": Category,
-          // "type":type,
-          "Gender": gender,
-          "details": details,
-          "productname": productname,
-          "usd": price.toString(),
-          "cny": usdtocny.toString(),
-          "gbp": usdtogbp.toString(),
-          "eur": usdtoeur.toString(),
-          "inr": usdtoinr.toString(),
-          "color": color,
-          "composition": composition,
-          "washandcare": washandcare,
-          "sizeandfit": sizeandfit,
-          "timestamp": timestamp,
-          "freesizeQuantity": freesizeQuantity,
-          "xxxsQuantity": xxxsQuantity,
-          "xxsQuantity": xxsQuantity,
-          "xsQuantity": xsQuantity,
-          "sQuantity": sQuantity,
-          "mQuantity": mQuantity,
-          "lQuantity": lQuantity,
-          "xlQuantity": xlQuantity,
-          "xxlQuantity": xxlQuantity,
-          "xxxlQuantity": xxxlQuantity,
-          "4xlQuantity": fourxlQuantity,
-
-          "Shoe1":Shoe1,
-          "Shoe2":Shoe2,
-          "Shoe3":Shoe3,
-          "Shoe4":Shoe4,
-          "Shoe5":Shoe5,
-          "Shoe6":Shoe6,
-          "Shoe7":Shoe7,
-          "Shoe8":Shoe8,
-          "Shoe9":Shoe9,
-          "Shoe10":Shoe10,
-          "Shoe11":Shoe11,
-          "Shoe12":Shoe12,
-          "Shoe13":Shoe13,
-          "Shoe14":Shoe14,
-
-          "mtoQuantity": mtoQuantity,
-          "likes": {},
-        });
-
-
-        setState(() {
-          file = null;
-          isUploading = false;
-        });
-      }
-      else {
-        productsRef
-            .doc(widget.currentUser.id)
-            .collection("userProducts")
-            .doc(prodId)
-            .set({          "indian":indian,
-          "worldship":world,
-          "shipment": ship,
-          "prodId": prodId,
-          "ownerId": widget.currentUser.id,
-          "username": widget.currentUser.displayName,
-          "photoUrl": widget.currentUser.photoUrl,
-          "displayName": widget.currentUser.displayName,
-          "shopmediaUrl": shopmediaUrl,
-          "Category": Category,
-          // "type":type,
-          "Gender": gender,
-          "details": details,
-          "productname": productname,
-          "usd": price.toString(),
-          "cny": usdtocny.toString(),
-          "gbp": usdtogbp.toString(),
-          "eur": usdtoeur.toString(),
-          "inr": usdtoinr.toString(),
-          "color": color,
-          "composition": composition,
-          "washandcare": washandcare,
-          "sizeandfit": sizeandfit,
-          "timestamp": timestamp,
-          "freesizeQuantity": freesizeQuantity,
-          "xxxsQuantity": xxxsQuantity,
-          "xxsQuantity": xxsQuantity,
-          "xsQuantity": xsQuantity,
-          "sQuantity": sQuantity,
-          "mQuantity": mQuantity,
-          "lQuantity": lQuantity,
-          "xlQuantity": xlQuantity,
-          "xxlQuantity": xxlQuantity,
-          "xxxlQuantity": xxxlQuantity,
-          "4xlQuantity": fourxlQuantity,
-
-          "Shoe1":Shoe1,
-          "Shoe2":Shoe2,
-          "Shoe3":Shoe3,
-          "Shoe4":Shoe4,
-          "Shoe5":Shoe5,
-          "Shoe6":Shoe6,
-          "Shoe7":Shoe7,
-          "Shoe8":Shoe8,
-          "Shoe9":Shoe9,
-          "Shoe10":Shoe10,
-          "Shoe11":Shoe11,
-          "Shoe12":Shoe12,
-          "Shoe13":Shoe13,
-          "Shoe14":Shoe14,
-
-          "mtoQuantity": mtoQuantity,
-          "likes": {},
-        });
-
-
-        setState(() {
-          file = null;
-          isUploading = false;
-        });
-      }
-    }
-    else if(dropdownValue=='Teen-Boys'||dropdownValue=='Teen-Girls') {
-      if (currentUser.country == 'India') {
-        productsRef
-            .doc(widget.currentUser.id)
-            .collection("userProducts")
-            .doc(prodId)
-            .set({
-          "indian":indian,
-          "worldship":world,
-          "shipment": ship,
-          "prodId": prodId,
-          "ownerId": widget.currentUser.id,
-          "username": widget.currentUser.displayName,
-          "photoUrl": widget.currentUser.photoUrl,
-          "displayName": widget.currentUser.displayName,
-          "shopmediaUrl": shopmediaUrl,
-          "Category": Category,
-          // "type":type,
-          "Gender": gender,
-          "details": details,
-          "productname": productname,
-          "usd": inrtousd.toString(),
-          "cny": inrtocny.toString(),
-          "gbp": inrtogbp.toString(),
-          "eur": inrtoeur.toString(),
-          "inr": price.toString(),
-          "color": color,
-          "composition": composition,
-          "washandcare": washandcare,
-          "sizeandfit": sizeandfit,
-          "timestamp": timestamp,
-          "freesizeQuantity": freesizeQuantity,
-          "xxxsQuantity": xxxsQuantity,
-          "xxsQuantity": xxsQuantity,
-          "xsQuantity": xsQuantity,
-          "sQuantity": sQuantity,
-
-          "Shoe1":Shoe1,
-          "Shoe2":Shoe2,
-          "Shoe3":Shoe3,
-          "Shoe4":Shoe4,
-
-
-          "mtoQuantity": mtoQuantity,
-          "likes": {},
-        });
-
-        setState(() {
-          file = null;
-          isUploading = false;
-        });
-      }
-      else if (currentUser.country == 'Europe'){
-        productsRef
-            .doc(widget.currentUser.id)
-            .collection("userProducts")
-            .doc(prodId)
-            .set({          "indian":indian,
-          "worldship":world,
-          "shipment": ship,
-          "prodId": prodId,
-          "ownerId": widget.currentUser.id,
-          "username": widget.currentUser.displayName,
-          "photoUrl": widget.currentUser.photoUrl,
-          "displayName": widget.currentUser.displayName,
-          "shopmediaUrl": shopmediaUrl,
-          "Category": Category,
-          // "type":type,
-          "Gender": gender,
-          "details": details,
-          "productname": productname,
-          "usd": eurtousd.toString(),
-          "cny": eurtocny.toString(),
-          "gbp": eurtogbp.toString(),
-          "eur": price.toString(),
-          "inr": eurtoinr.toString(),
-          "color": color,
-          "composition": composition,
-          "washandcare": washandcare,
-          "sizeandfit": sizeandfit,
-          "timestamp": timestamp,
-          "freesizeQuantity": freesizeQuantity,
-          "xxxsQuantity": xxxsQuantity,
-          "xxsQuantity": xxsQuantity,
-          "xsQuantity": xsQuantity,
-          "sQuantity": sQuantity,
-
-          "Shoe1":Shoe1,
-          "Shoe2":Shoe2,
-          "Shoe3":Shoe3,
-          "Shoe4":Shoe4,
-
-
-          "mtoQuantity": mtoQuantity,
-          "likes": {},
-        });
-
-
-
-        setState(() {
-          file = null;
-          isUploading = false;
-        });
-      }
-      else if (currentUser.country == 'UK') {
-        productsRef
-            .doc(widget.currentUser.id)
-            .collection("userProducts")
-            .doc(prodId)
-            .set({          "indian":indian,
-          "worldship":world,
-          "shipment": ship,
-          "prodId": prodId,
-          "ownerId": widget.currentUser.id,
-          "username": widget.currentUser.displayName,
-          "photoUrl": widget.currentUser.photoUrl,
-          "displayName": widget.currentUser.displayName,
-          "shopmediaUrl": shopmediaUrl,
-          "Category": Category,
-          // "type":type,
-          "Gender": gender,
-          "details": details,
-          "productname": productname,
-          "usd": gbptousd.toString(),
-          "cny": gbptocny.toString(),
-          "gbp": price.toString(),
-          "eur": gbptoeur.toString(),
-          "inr": gbptoinr.toString(),
-          "color": color,
-          "composition": composition,
-          "washandcare": washandcare,
-          "sizeandfit": sizeandfit,
-          "timestamp": timestamp,
-          "freesizeQuantity": freesizeQuantity,
-          "xxxsQuantity": xxxsQuantity,
-          "xxsQuantity": xxsQuantity,
-          "xsQuantity": xsQuantity,
-          "sQuantity": sQuantity,
-
-          "Shoe1":Shoe1,
-          "Shoe2":Shoe2,
-          "Shoe3":Shoe3,
-          "Shoe4":Shoe4,
-
-
-          "mtoQuantity": mtoQuantity,
-          "likes": {},
-        });
-
-
-
-        setState(() {
-          file = null;
-          isUploading = false;
-        });
-      }
-      else if (currentUser.country == 'USA') {
-        productsRef
-            .doc(widget.currentUser.id)
-            .collection("userProducts")
-            .doc(prodId)
-            .set({          "indian":indian,
-          "worldship":world,
-          "shipment": ship,
-          "prodId": prodId,
-          "ownerId": widget.currentUser.id,
-          "username": widget.currentUser.displayName,
-          "photoUrl": widget.currentUser.photoUrl,
-          "displayName": widget.currentUser.displayName,
-          "shopmediaUrl": shopmediaUrl,
-          "Category": Category,
-          // "type":type,
-          "Gender": gender,
-          "details": details,
-          "productname": productname,
-          "usd": price.toString(),
-          "cny": usdtocny.toString(),
-          "gbp": usdtogbp.toString(),
-          "eur": usdtoeur.toString(),
-          "inr": usdtoinr.toString(),
-          "color": color,
-          "composition": composition,
-          "washandcare": washandcare,
-          "sizeandfit": sizeandfit,
-          "timestamp": timestamp,
-          "freesizeQuantity": freesizeQuantity,
-          "xxxsQuantity": xxxsQuantity,
-          "xxsQuantity": xxsQuantity,
-          "xsQuantity": xsQuantity,
-          "sQuantity": sQuantity,
-
-          "Shoe1":Shoe1,
-          "Shoe2":Shoe2,
-          "Shoe3":Shoe3,
-          "Shoe4":Shoe4,
-
-
-          "mtoQuantity": mtoQuantity,
-          "likes": {},
-        });
-
-
-
-
-        setState(() {
-          file = null;
-          isUploading = false;
-        });
-      }
-      else {
-        productsRef
-            .doc(widget.currentUser.id)
-            .collection("userProducts")
-            .doc(prodId)
-            .set({          "indian":indian,
-          "worldship":world,
-          "shipment": ship,
-          "prodId": prodId,
-          "ownerId": widget.currentUser.id,
-          "username": widget.currentUser.displayName,
-          "photoUrl": widget.currentUser.photoUrl,
-          "displayName": widget.currentUser.displayName,
-          "shopmediaUrl": shopmediaUrl,
-          "Category": Category,
-          // "type":type,
-          "Gender": gender,
-          "details": details,
-          "productname": productname,
-          "usd": price.toString(),
-          "cny": usdtocny.toString(),
-          "gbp": usdtogbp.toString(),
-          "eur": usdtoeur.toString(),
-          "inr": usdtoinr.toString(),
-          "color": color,
-          "composition": composition,
-          "washandcare": washandcare,
-          "sizeandfit": sizeandfit,
-          "timestamp": timestamp,
-          "freesizeQuantity": freesizeQuantity,
-          "xxxsQuantity": xxxsQuantity,
-          "xxsQuantity": xxsQuantity,
-          "xsQuantity": xsQuantity,
-          "sQuantity": sQuantity,
-
-          "Shoe1":Shoe1,
-          "Shoe2":Shoe2,
-          "Shoe3":Shoe3,
-          "Shoe4":Shoe4,
-
-
-          "mtoQuantity": mtoQuantity,
-          "likes": {},
-        });
-
-
-
-
-        setState(() {
-          file = null;
-          isUploading = false;
-        });
-      }
-    }
-
-
-}
   Future<bool> _onBackPressed() {
     return showDialog(
-      context: context,
+      context : context,
       builder: (context) => new AlertDialog(
         title: new Text('Are you sure?'),
         content: new Text('Do you want to exit without uploading?'),
@@ -5380,7 +3865,6 @@ return
                                 margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
                                 child: TextField(
 
-                                  keyboardType: TextInputType.number,
                                   maxLines: 1,
                                   controller: customController1,
                                   decoration: InputDecoration(
@@ -5419,7 +3903,6 @@ return
                                 margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
                                 child: TextField(
 
-                                  keyboardType: TextInputType.number,
                                   maxLines: 1,
                                   controller: customController2,
                                   decoration: InputDecoration(
@@ -12588,238 +11071,243 @@ else  if(dropdownValue=='Baby-Boys'||dropdownValue=='Baby-Girls') {
   }
 
   builduploadForm() {
-    return WillPopScope
-      (
-      onWillPop: _onBackPressed,
-      child: Scaffold(
-       // key:  scaffoldKey,
-        appBar: AppBar(
-          backgroundColor: kPrimaryColor,
-          leading: IconButton(
-              icon: Icon(Icons.arrow_back, color: kSecondaryColor),
-              onPressed:_onBackPressed),
-          title: Text(
-            "Product Details",
-            style: TextStyle(color: Colors.white),
+    return  WillPopScope(
+      onWillPop:()=> _onBackPressed(),
+      child: ModalProgressHUD(
+        color: Colors.black,
+        opacity: 1.0,
+        progressIndicator: Image.asset('assets/img/loading-76.gif'),
+        inAsyncCall: isUploading,
+        child: Scaffold(
+         // key:  scaffoldKey,
+          appBar: AppBar(
+            backgroundColor: kPrimaryColor,
+            leading: IconButton(
+                icon: Icon(Icons.arrow_back, color: kSecondaryColor),
+                onPressed:_onBackPressed),
+            title: Text(
+              "Product Details",
+              style: TextStyle(color: Colors.white),
+            ),
+            actions: [
+              FlatButton(
+                onPressed: () async{
+
+                  await INRUSD();
+                  if(_formKey.currentState.validate()) {
+                    // ignore: unnecessary_statements
+
+                    isUploading ? null : handleSubmit();
+                  Get.back();
+                  }
+
+                },
+
+                child: Text(
+                  "Post",
+                  style: TextStyle(
+                      color: Colors.blueAccent,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 20.0),
+                ),
+              )
+            ],
           ),
-          actions: [
-            FlatButton(
-              onPressed: () async{
-                Fluttertoast.showToast(
-                    msg: "Please wait:Uploading", timeInSecForIos: 4);
+          body: Container( decoration: BoxDecoration(
+              gradient: fabGradient
+          ) ,
+            alignment: Alignment.center,
+            child: Stack(
+              children:[
+                Form(
+                key: _formKey,
+                child:
+                Column(
+                    children: <Widget>[
+                    isUploading ? linearProgress() : Text(""),
 
-                await INRUSD();
-                if(_formKey.currentState.validate()) {
-                  // ignore: unnecessary_statements
-                  isUploading ? null : handleSubmit();
-                Get.back();
-                }
+                      carousel(),
+                         Expanded(
+                           child: SingleChildScrollView(
+                             child: Column(
+                        children: [
 
-              },
+                    SizedBox(height: 8.0,),
+                    Text('Select Gender',style:TextStyle(color: kText,fontSize:20.0) ,),
+                    SizedBox(height: 8.0,),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: DropdownButton<String>(
+                          value: dropdownValue,
+                          icon: Icon(Icons.keyboard_arrow_down_sharp),
+                          dropdownColor: kPrimaryColor,
+                          iconSize: 24,
+                          elevation: 16,
+                          style: TextStyle(color: kText,fontSize:20.0),
 
-              child: Text(
-                "Post",
-                style: TextStyle(
-                    color: Colors.blueAccent,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 20.0),
-              ),
-            )
-          ],
-        ),
-        body: Container( decoration: BoxDecoration(
-            gradient: fabGradient
-        ) ,
-          alignment: Alignment.center,
-          child: Stack(
-            children:[
-              Form(
-              key: _formKey,
-              child:
-              Column(
-                  children: <Widget>[
-                  isUploading ? linearProgress() : Text(""),
-  // getImageWidget(),
-                    carousel(),
-                       Expanded(
-                         child: SingleChildScrollView(
-                           child: Column(
-                      children: [
+                          onChanged: (String newValue) {
+                                setState(() {
+                                  dropdownValue = newValue;
+                                });
+                          },
+                          items: <String>['Women', 'Men', 'Baby-Boys', 'Baby-Girls', 'Kids-Boys', 'Kids-Girls', 'Teen-Boys', 'Teen-Girls']
+                                  .map<DropdownMenuItem<String>>((String value) {
+                                return DropdownMenuItem<String>(
+                                  value: value,
+                                  child: Text(value),
 
-                  SizedBox(height: 8.0,),
-                  Text('Select Gender',style:TextStyle(color: kText,fontSize:20.0) ,),
-                  SizedBox(height: 8.0,),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: DropdownButton<String>(
-                        value: dropdownValue,
-                        icon: Icon(Icons.keyboard_arrow_down_sharp),
-                        dropdownColor: kPrimaryColor,
-                        iconSize: 24,
-                        elevation: 16,
-                        style: TextStyle(color: kText,fontSize:20.0),
-
-                        onChanged: (String newValue) {
-                              setState(() {
-                                dropdownValue = newValue;
-                              });
-                        },
-                        items: <String>['Women', 'Men', 'Baby-Boys', 'Baby-Girls', 'Kids-Boys', 'Kids-Girls', 'Teen-Boys', 'Teen-Girls']
-                                .map<DropdownMenuItem<String>>((String value) {
-                              return DropdownMenuItem<String>(
-                                value: value,
-                                child: Text(value),
-
-                              );
-                        }).toList(),
+                                );
+                          }).toList(),
+                      ),
                     ),
-                  ),
-                  Container(
-                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0,8.0),
-                    child: RaisedButton(
-                      color:kblue,
-                    child: Text('Select Category',style:TextStyle(color: Colors.white) ,),
-                    onPressed: (){
-                        showModalBottomSheet(context: context, builder:(BuildContext context){
+                    Container(
+                      margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0,8.0),
+                      child: RaisedButton(
+                        color:kblue,
+                      child: Text('Select Category',style:TextStyle(color: Colors.white) ,),
+                      onPressed: (){
+                          showModalBottomSheet(context: context, builder:(BuildContext context){
 
 
-                              if(dropdownValue=='Women')
-                              {
-                                return
-                                  WomenCategory();
-                              }
-                              else if(dropdownValue=='Men')
-                              {
-                                return
-                                  MenCategory();
-                              }
-    else if(dropdownValue=='Baby-Boys')
-    {
-      return
-      BabyBCategory();
-    }
-    else if(dropdownValue== 'Baby-Girls'){
-      return
-      BabyGCategory();
-    }
-    else if(dropdownValue=='Kids-Boys'){
-      return
-      KidBCategory();
-    }
-    else if(dropdownValue=='Kids-Girls'){
-      return
-      KidGCategory();
-    }
-    else if(dropdownValue== 'Teen-Boys'){
-      return
-      TeenBCategory();
-    }
-    else if(dropdownValue=='Teen-Girls'){
-      return
-      TeenGCategory();
-    }
-                              else{
-                                return
-                                Text('text');
-                              }
-                        },
-                        );
-                    }
-                    ,
-                        ),
-                  ),
-                  value == 'None' ?   Text('Select Category',style:TextStyle(color: kText,fontSize:20.0),):
-                  Text(' ',),
+                                if(dropdownValue=='Women')
+                                {
+                                  return
+                                    WomenCategory();
+                                }
+                                else if(dropdownValue=='Men')
+                                {
+                                  return
+                                    MenCategory();
+                                }
+      else if(dropdownValue=='Baby-Boys')
+      {
+        return
+        BabyBCategory();
+      }
+      else if(dropdownValue== 'Baby-Girls'){
+        return
+        BabyGCategory();
+      }
+      else if(dropdownValue=='Kids-Boys'){
+        return
+        KidBCategory();
+      }
+      else if(dropdownValue=='Kids-Girls'){
+        return
+        KidGCategory();
+      }
+      else if(dropdownValue== 'Teen-Boys'){
+        return
+        TeenBCategory();
+      }
+      else if(dropdownValue=='Teen-Girls'){
+        return
+        TeenGCategory();
+      }
+                                else{
+                                  return
+                                  Text('text');
+                                }
+                          },
+                          );
+                      }
+                      ,
+                          ),
+                    ),
+                    value == 'None' ?   Text('Select Category',style:TextStyle(color: kText,fontSize:20.0),):
+                    Text(' ',),
 
 
-                  SizedBox(height: 8.0,),
+                    SizedBox(height: 8.0,),
 
-               Row(
-                 mainAxisAlignment:MainAxisAlignment.center,
-                    children:[
-                   Container(
-               // alignment:Alignment.centerLeft,
-                     child:   FloatingActionButton.extended(
+                 Row(
+                   mainAxisAlignment:MainAxisAlignment.center,
+                      children:[
+                     Container(
+                 // alignment:Alignment.centerLeft,
+                       child:   FloatingActionButton.extended(
 backgroundColor: kblue,
-                       onPressed: ()=>AddSize(),
-                       label: Text('Specify Quantity',style:TextStyle(color:  Colors.white) ,),
+                         onPressed: ()=>AddSize(),
+                         label: Text('Specify Quantity',style:TextStyle(color:  Colors.white) ,),
+                       ),
                      ),
-                   ),
-      SizedBox(width: 8.0,),Container(
-               // alignment:Alignment.centerRight,
-                     child:   FloatingActionButton.extended(
+        SizedBox(width: 8.0,),Container(
+                 // alignment:Alignment.centerRight,
+                       child:   FloatingActionButton.extended(
 backgroundColor: kblue,
-                       onPressed: ()=>sizeGuide(),
-                       label: Text('Size Guide',style:TextStyle(color:  Colors.white) ,),
+                         onPressed: ()=>sizeGuide(),
+                         label: Text('Size Guide',style:TextStyle(color:  Colors.white) ,),
+                       ),
                      ),
-                   ),
 
-                    ],
-                  ),
-                  SizedBox(height: 8.0,),
+                      ],
+                    ),
+                    SizedBox(height: 8.0,),
 
-                       Text("Processing time",  style:TextStyle(color: kText,fontSize:20.0)),
-                        SizedBox(height: 8.0,),
+                         Text("Processing time",  style:TextStyle(color: kText,fontSize:20.0)),
+                          SizedBox(height: 8.0,),
 
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Expanded(
-                              child: Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: TextFormField(
-                                  style:TextStyle(color: kText),
-                                  controller: durationfromp,
-                                  decoration: InputDecoration(
-                                    border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
-                                    enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
-                                    focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Expanded(
+                                child: Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: TextFormField(
+                                    style:TextStyle(color: kText),
+                                    keyboardType: TextInputType.number,
 
-                                    labelText: 'Business days',labelStyle: TextStyle(color: kText),
+                                    controller: durationfromp,
+                                    decoration: InputDecoration(
+                                      border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+                                      enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+                                      focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+
+                                      labelText: 'Business days',labelStyle: TextStyle(color: kText),
+                                    ),
+                                    textAlign: TextAlign.center,
+                                    validator: (text) {
+                                      if ( text.isEmpty) {
+                                        return 'Processing time is empty';
+                                      }
+                                      return null;
+                                    },
                                   ),
-                                  textAlign: TextAlign.center,
-                                  validator: (text) {
-                                    if ( text.isEmpty) {
-                                      return 'Processing time is empty';
-                                    }
-                                    return null;
-                                  },
                                 ),
                               ),
-                            ),
-                            Text("-",  style:TextStyle(color: kText)),
+                              Text("-",  style:TextStyle(color: kText)),
 
-                            Expanded(
+                              Expanded(
 
-                              child: Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: TextFormField(
-                                  style:TextStyle(color: kText),
-                                  controller: durationtop,
-                                  decoration: InputDecoration(
-                                    border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
-                                    enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
-                                    focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+                                child: Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: TextFormField(
+                                    style:TextStyle(color: kText),
+                                    keyboardType: TextInputType.number,
 
+                                    controller: durationtop,
+                                    decoration: InputDecoration(
+                                      border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+                                      enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+                                      focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+
+                                    ),
+                                    textAlign: TextAlign.center,
+                                    validator: (text) {
+                                      if ( text.isEmpty) {
+                                        return 'Processing time is empty';
+                                      }
+                                      return null;
+                                    },
                                   ),
-                                  textAlign: TextAlign.center,
-                                  validator: (text) {
-                                    if ( text.isEmpty) {
-                                      return 'Processing time is empty';
-                                    }
-                                    return null;
-                                  },
                                 ),
                               ),
-                            ),
 
-                          ],
-                        ),
-                        SizedBox(height: 8.0,),
+                            ],
+                          ),
+                          SizedBox(height: 8.0,),
 
-                        Container(
-                          margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
-                          child: ListTile(
+                          ListTile(
                             leading: Icon(
                               Icons.local_shipping,
                               color: Colors.orange,
@@ -12828,437 +11316,498 @@ backgroundColor: kblue,
                             title:Text("Shipping duration to ${currentUser.country}",  style:TextStyle(color: kText)),
 
                           ),
+                          SizedBox(height: 8.0,),
+
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+
+                      children: [
+                        Expanded(
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: TextFormField(
+                              style:TextStyle(color: kText),
+                              keyboardType: TextInputType.number,
+
+                              controller: durationfrom,
+                              decoration: InputDecoration(
+                                border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+                                enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+                                focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+
+                               // labelText: 'Between',labelStyle: TextStyle(color: kText),
+                              ),
+                              textAlign: TextAlign.center,
+                              validator: (text) {
+                                if ( text.isEmpty) {
+                                  return 'Shipping duration is empty';
+                                }
+                                return null;
+                              },
+                            ),
+                          ),
                         ),
-                        SizedBox(height: 8.0,),
+                        Text("-",  style:TextStyle(color: kText)),
 
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        Expanded(
 
-                    children: [
-                      Expanded(
                         child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: TextFormField(
-                            style:TextStyle(color: kText),
-                            controller: durationfrom,
-                            decoration: InputDecoration(
-                              border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
-                              enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
-                              focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+                            padding: const EdgeInsets.all(8.0),
+                            child: TextFormField(
+                              style:TextStyle(color: kText),
+                              keyboardType: TextInputType.number,
 
-                              labelText: 'Between',labelStyle: TextStyle(color: kText),
+                              controller: durationto,
+                              decoration: InputDecoration(
+                                border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+                                enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+                                focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+
+                              ),
+                              textAlign: TextAlign.center,
+                              validator: (text) {
+                                if ( text.isEmpty) {
+                                  return 'Shipping duration is empty';
+                                }
+                                return null;
+                              },
                             ),
-                            textAlign: TextAlign.center,
-                            validator: (text) {
-                              if ( text.isEmpty) {
-                                return 'Shipping duration is empty';
-                              }
-                              return null;
-                            },
-                          ),
-                        ),
-                      ),
-                      Text("-",  style:TextStyle(color: kText)),
-
-                      Expanded(
-
-                      child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: TextFormField(
-                            style:TextStyle(color: kText),
-                            controller: durationto,
-                            decoration: InputDecoration(
-                              border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
-                              enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
-                              focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
-
-                            ),
-                            textAlign: TextAlign.center,
-                            validator: (text) {
-                              if ( text.isEmpty) {
-                                return 'Shipping duration is empty';
-                              }
-                              return null;
-                            },
-                          ),
-                        ),
-                      ),
-
-                    ],
-                  ),
-                        SizedBox( height: 8.0,),
-              Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: TextFormField(
-                            style:TextStyle(color: kText),
-                            controller: shipcost,
-                            decoration: InputDecoration(
-                              border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
-                              enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
-                              focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
-
-                              labelText: 'Shipping cost',labelStyle: TextStyle(color: kText),
-                            ),
-                            textAlign: TextAlign.center,
-                            validator: (text) {
-                              if (  text.isEmpty) {
-                                return 'Shipping cost is empty';
-                              }
-                              return null;
-                            },
                           ),
                         ),
 
-                        SizedBox( height: 8.0,),
-                        Text('Worldwide shipping',style:TextStyle(color: kText)) ,
-                        SizedBox( height: 8.0,),
-                        Row(
-                          children: [
-                            Text('No'),
-                            SizedBox( width: 8.0,),
+                      ],
+                    ),
+                          SizedBox( height: 8.0,),
+                          Text('Free shipping',style:TextStyle(color: kText)) ,
+                          SizedBox( height: 8.0,),
 
-                            Switch(
-                              value: worldship,
-                              onChanged: (value){setState(() {
-                                worldship = value;
-                              });},
-                              activeColor: Colors.pink,
-                              activeTrackColor: Colors.white,
-                            ),
-                            SizedBox( width: 8.0,),
+                              Row(
+                            mainAxisAlignment:MainAxisAlignment.center,
+                            children: [
+                              Text('No'),
+                              SizedBox( width: 8.0,),
 
-                            Text('Yes')
-                          ],
-                        ),
-                        SizedBox(height: 8.0,),
-                   worldship ?     Container(
-                          margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
-                          child: ListTile(
-                            leading: Icon(
-                              Icons.local_shipping,
-                              color: Colors.orange,
-                              size: 35.0,
-                            ),
-                            title:Text("Shipping duration to worldwide",  style:TextStyle(color: kText)),
+                              Switch(
+                                value: freeship,
+                                onChanged: (value){setState(() {
+                                  freeship = value;
+                                });},
+                                activeColor: Colors.blue,
+                                activeTrackColor: kPrimaryColor,
+                              ),
+                              SizedBox( width: 8.0,),
 
+                              Text('Yes')
+                            ],
                           ),
-                        ):Container(),
-                        SizedBox(height: 8.0,),
 
-                        worldship ?   Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          SizedBox( height: 8.0,),
 
-                          children: [
-                      Expanded(
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: TextFormField(
-                            style:TextStyle(color: kText),
-                            controller: durationfromw,
-                            decoration: InputDecoration(
-                              border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
-                              enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
-                              focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+                          !freeship?  Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: TextFormField(
+                              style:TextStyle(color: kText),
+                              keyboardType: TextInputType.number,
 
-                              labelText: 'Between',labelStyle: TextStyle(color: kText),
-                            ),
-                            textAlign: TextAlign.center,
-                            validator: (text) {
-                              if (worldship==true && text.isEmpty) {
-                                return 'Shipping duration is empty';
-                              }
-                              return null;
-                            },
-                          ),
-                        ),
-                      ),
-                            Text("-",  style:TextStyle(color: kText)),
+                              controller: shipcost,
+                              decoration: InputDecoration(
+                                border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+                                enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+                                focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
 
-                      Expanded(
+                                labelText: 'Shipping cost',labelStyle: TextStyle(color: kText),
 
-                      child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: TextFormField(
-                            style:TextStyle(color: kText),
-                            controller: durationtow,
-                            decoration: InputDecoration(
-                              border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
-                              enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
-                              focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+                              ),
+                              textAlign: TextAlign.center,
 
                             ),
-                            textAlign: TextAlign.center,
-                            validator: (text) {
-                              if (worldship==true && text.isEmpty) {
-                                return 'Shipping duration is empty';
-                              }
-                              return null;
-                            },
+                          ):Container(),
+
+                          SizedBox( height: 8.0,),
+                          Text('Worldwide shipping',style:TextStyle(color: kText)) ,
+                          SizedBox( height: 8.0,),
+                          Row(
+                            mainAxisAlignment:MainAxisAlignment.center,
+                            children: [
+                              Text('No'),
+                              SizedBox( width: 8.0,),
+
+                              Switch(
+                                value: worldship,
+                                onChanged: (value){setState(() {
+                                  worldship = value;
+                                });},
+                                activeColor: Colors.blue,
+                                activeTrackColor:kPrimaryColor,
+                              ),
+                              SizedBox( width: 8.0,),
+
+                              Text('Yes')
+                            ],
                           ),
-                        ),
-                      ),
-
-                    ],
-                  ):Container(),
-                        worldship ?   Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: TextFormField(
-                            style:TextStyle(color: kText),
-                            controller: shipcostintern,
-                            decoration: InputDecoration(
-                              border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
-                              enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
-                              focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
-
-                              labelText: 'Shipping cost',labelStyle: TextStyle(color: kText),
-                            ),
-                            textAlign: TextAlign.center,
-                            validator: (text) {
-                              if ( worldship==true && text.isEmpty) {
-                                return 'Shipping cost is empty';
-                              }
-                              return null;
-                            },
-                          ),
-                        ):Container(),
-                        SizedBox(height: 8.0,),
-
-                  Container(
-                    margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
-                        child: ListTile(
+                          SizedBox(height: 8.0,),
+                     worldship ?     Container(
+                            margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+                            child: ListTile(
                               leading: Icon(
-                                EvilIcons.eye,
+                                Icons.local_shipping,
                                 color: Colors.orange,
                                 size: 35.0,
                               ),
-                              title:  TextFormField(
-                                style:TextStyle(color: kText),
-                                controller: productnameController,
+                              title:Text("Shipping duration to worldwide",  style:TextStyle(color: kText)),
+
+                            ),
+                          ):Container(),
+                          SizedBox(height: 8.0,),
+
+                          worldship ?   Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+
+                            children: [
+                        Expanded(
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+
+                            child: TextFormField(
+                              style:TextStyle(color: kText),
+                              keyboardType: TextInputType.number,
+
+                              controller: durationfromw,
+                              decoration: InputDecoration(
+                                border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+                                enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+                                focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+
+                                labelText: 'Between',labelStyle: TextStyle(color: kText),
+                              ),
+                              textAlign: TextAlign.center,
+                              validator: (text) {
+                                if (worldship==false && text.isEmpty) {
+                                  return 'Shipping duration is empty';
+                                }
+                                return null;
+                              },
+                            ),
+                          ),
+                        ),
+                              Text("-",  style:TextStyle(color: kText)),
+
+                        Expanded(
+
+                        child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: TextFormField(
+                              style:TextStyle(color: kText),
+                              keyboardType: TextInputType.number,
+                              controller: durationtow,
+                              decoration: InputDecoration(
+                                border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+                                enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+                                focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+
+                              ),
+                              textAlign: TextAlign.center,
+                              validator: (text) {
+                                if (worldship==true && text.isEmpty) {
+                                  return 'Shipping duration is empty';
+                                }
+                                return null;
+                              },
+                            ),
+                          ),
+                        ),
+
+                      ],
+                    ):Container(),
+                          SizedBox( height: 8.0,),
+                          Text('Free shipping',style:TextStyle(color: kText)) ,
+
+SizedBox( height: 8.0,),
+
+                          worldship ? Row(
+                            mainAxisAlignment:MainAxisAlignment.center,
+                            children: [
+                              Text('No'),
+                              SizedBox( width: 8.0,),
+
+                              Switch(
+                                value: freeworldship,
+                                onChanged: (value){setState(() {
+                                  freeworldship = value;
+                                });},
+                                activeColor: Colors.blue,
+                                activeTrackColor:kPrimaryColor,
+                              ),
+                              SizedBox( width: 8.0,),
+
+                              Text('Yes')
+                            ],
+                          ):Container(),
+
+                          worldship && !freeworldship ?   Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: TextFormField(
+                              style:TextStyle(color: kText),
+                              keyboardType: TextInputType.number,
+
+                              controller: shipcostintern,
+                              decoration: InputDecoration(
+                                border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+                                enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+                                focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+
+                                labelText: 'Shipping cost',labelStyle: TextStyle(color: kText),
+                              ),
+                              textAlign: TextAlign.center,
+                              validator: (text) {
+                                if ( freeworldship==false && text.isEmpty ) {
+                                  return 'Shipping cost is empty';
+                                }
+                                return null;
+                              },
+                            ),
+                          ):Container(),
+                          SizedBox(height: 8.0,),
+
+                          SizedBox(height: 8.0,),
+
+                    Container(
+                      margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+                          child: ListTile(
+                                leading: Icon(
+                                  EvilIcons.eye,
+                                  color: Colors.orange,
+                                  size: 35.0,
+                                ),
+                                title:  TextFormField(
+                                  style:TextStyle(color: kText),
+                                  controller: productnameController,
+                                  decoration: InputDecoration(
+                                    border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+                                    enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+                                    focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+
+                                    labelText: 'Product Name',labelStyle: TextStyle(color: kText),
+                                    hintText: 'Product Name',
+                                  ),
+                                  textAlign: TextAlign.center,
+                                  validator: (text) {
+                                    if ( text.isEmpty) {
+                                      return 'Product Name is empty';
+                                    }
+                                    return null;
+                                  },
+                                ),
+                          ),
+                        ),
+                        SizedBox(height: 8.0,),
+                    Container(
+                      margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+                          child: ListTile(
+                                leading: Icon(
+                                  EvilIcons.tag,
+                                  color: Colors.orange,
+                                  size: 35.0,
+                                ),
+                                title:TextFormField(
+                                  style:TextStyle(color: kText),
+keyboardType:TextInputType.number,
+                                  controller: priceController,
+                                  decoration: InputDecoration(
+                                    border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+                                    enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+                                    focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+
+                                    labelText: 'Price',labelStyle: TextStyle(color: kText),
+                                    hintText: Country(),
+                                  ),
+                                  textAlign: TextAlign.center,
+                                  validator: (text) {
+                                    if (text.isEmpty) {
+                                      return 'Price is empty';
+                                    }
+                                    return null;
+                                  },
+                                ),
+                          ),
+                        ),
+                        SizedBox( height: 8.0,),
+                    Container(
+                      margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+                          child: TextFormField(
+                            style:TextStyle(color: kText),
+
+                            controller: colorController,
                                 decoration: InputDecoration(
-                                  border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
                                   enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
                                   focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
 
-                                  labelText: 'Product Name',labelStyle: TextStyle(color: kText),
-                                  hintText: 'Product Name',
+                                  labelText: 'Color',labelStyle: TextStyle(color: kText),
+                                  hintText: 'ex.Peach',
                                 ),
                                 textAlign: TextAlign.center,
                                 validator: (text) {
                                   if ( text.isEmpty) {
-                                    return 'Product Name is empty';
+                                    return 'Color is empty';
                                   }
                                   return null;
                                 },
-                              ),
+                          ),
                         ),
-                      ),
-                      SizedBox(height: 8.0,),
-                  Container(
-                    margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
-                        child: ListTile(
-                              leading: Icon(
-                                EvilIcons.tag,
-                                color: Colors.orange,
-                                size: 35.0,
-                              ),
-                              title:TextFormField(
-                                style:TextStyle(color: kText),
-keyboardType:TextInputType.number,
-                                controller: priceController,
+                        SizedBox( height: 8.0,),
+                    Container(
+                      margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+                          child: TextFormField(
+                            style:TextStyle(color: kText),
+
+                            keyboardType: TextInputType.multiline,
+                                maxLines: null,
+                                controller: detailsController,
                                 decoration: InputDecoration(
                                   border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
                                   enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
                                   focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
 
-                                  labelText: 'Price',labelStyle: TextStyle(color: kText),
-                                  hintText: Country(),
+                                  labelText: 'Product description',labelStyle: TextStyle(color: kText),
+                                  hintText: 'Product description',
                                 ),
                                 textAlign: TextAlign.center,
                                 validator: (text) {
-                                  if (text.isEmpty) {
-                                    return 'Price is empty';
+                                  if ( text.isEmpty) {
+                                    return 'Description is empty';
                                   }
                                   return null;
                                 },
-                              ),
+                          ),
                         ),
-                      ),
-                      SizedBox( height: 8.0,),
-                  Container(
-                    margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
-                        child: TextFormField(
-                          style:TextStyle(color: kText),
-
-                          controller: colorController,
-                              decoration: InputDecoration(
-                                enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
-                                focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
-
-                                labelText: 'Color',labelStyle: TextStyle(color: kText),
-                                hintText: 'ex.Peach',
-                              ),
-                              textAlign: TextAlign.center,
-                              validator: (text) {
-                                if ( text.isEmpty) {
-                                  return 'Color is empty';
-                                }
-                                return null;
-                              },
-                        ),
-                      ),
-                      SizedBox( height: 8.0,),
-                  Container(
-                    margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
-                        child: TextFormField(
-                          style:TextStyle(color: kText),
-
-                          keyboardType: TextInputType.multiline,
-                              maxLines: null,
-                              controller: detailsController,
-                              decoration: InputDecoration(
-                                border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
-                                enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
-                                focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
-
-                                labelText: 'Product description',labelStyle: TextStyle(color: kText),
-                                hintText: 'Product description',
-                              ),
-                              textAlign: TextAlign.center,
-                              validator: (text) {
-                                if ( text.isEmpty) {
-                                  return 'Description is empty';
-                                }
-                                return null;
-                              },
-                        ),
-                      ),
-                      SizedBox( height: 8.0,),
-                  Container(
-                    margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
-                        child: TextFormField(
-                          style:TextStyle(color: kText),
-
-                          keyboardType: TextInputType.multiline,
-                              maxLines: null,
-                              controller: compositionController,
-                              decoration: InputDecoration(
-                                border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
-                                enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
-                                focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
-
-                                labelText: 'Fabric description',labelStyle: TextStyle(color: kText),
-                                hintText: 'ex.Cotton: 100%' ,
-                              ),
-                              textAlign: TextAlign.center,
-                              validator: (text) {
-                                if ( text.isEmpty) {
-                                  return 'Fabric description is empty';
-                                }
-                                return null;
-                              },
-                        ),
-                      ),
-                      SizedBox( height: 8.0,),
-                  Container(
-                    margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
-                        child: TextFormField(
-                          style:TextStyle(color: kText),
-
-                          keyboardType: TextInputType.multiline,
-                              maxLines: null,
-                              controller: washandcareController,
-                              decoration: InputDecoration(
-                                border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
-                                enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
-                                focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
-
-                                labelText: 'Wash & Care',labelStyle: TextStyle(color: kText),
-                                hintText: 'Wash & Care instructions',
-                              ),
-                              textAlign: TextAlign.center,
-                              validator: (text) {
-                                if ( text.isEmpty) {
-                                  return 'Wash & Care instructions is empty';
-                                }
-                                return null;
-                              },
-                        ),
-                      ),
-                      SizedBox( height: 8.0,),
-                  Container(
-                    margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
-                        child: TextFormField(
-                          style:TextStyle(color: kText),
-
-                          keyboardType: TextInputType.multiline,
-                              maxLines: null,
-                              controller: sizeandfitController,
-                              decoration: InputDecoration(
-                                border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
-                                enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
-                                focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
-
-                                labelText: 'Size & Fit recommendations',labelStyle: TextStyle(color: kText),
-                                hintText: 'ex.Cut for slim fit,take your normal size',
-                              ),
-                              textAlign: TextAlign.center,
-                              validator: (text) {
-                                if ( text.isEmpty) {
-                                  return ' Size & Fit recommendations is empty';
-                                }
-                                return null;
-                              },
-                        ),
-                      ),
-
                         SizedBox( height: 8.0,),
-                  Container(
-                    margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
-                        child: TextFormField(
-                          style:TextStyle(color: kText),
+                    Container(
+                      margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+                          child: TextFormField(
+                            style:TextStyle(color: kText),
 
-                          keyboardType: TextInputType.multiline,
-                              maxLines: null,
-                              controller: shipcontroller,
-                              decoration: InputDecoration(
-                                border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
-                                enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
-                                focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+                            keyboardType: TextInputType.multiline,
+                                maxLines: null,
+                                controller: compositionController,
+                                decoration: InputDecoration(
+                                  border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+                                  enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+                                  focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
 
-                                labelText: 'Shipping & returns',labelStyle: TextStyle(color: kText),
-                                hintText: 'countries served & return policy',
-                              ),
-                              textAlign: TextAlign.center,
-                              validator: (text) {
-                                if ( text.isEmpty) {
-                                  return 'Shipping & returns';
-                                }
-                                return null;
-                              },
+                                  labelText: 'Fabric description',labelStyle: TextStyle(color: kText),
+                                  hintText: 'ex.Cotton: 100%' ,
+                                ),
+                                textAlign: TextAlign.center,
+                                validator: (text) {
+                                  if ( text.isEmpty) {
+                                    return 'Fabric description is empty';
+                                  }
+                                  return null;
+                                },
+                          ),
                         ),
-                      ),
+                        SizedBox( height: 8.0,),
+                    Container(
+                      margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+                          child: TextFormField(
+                            style:TextStyle(color: kText),
+
+                            keyboardType: TextInputType.multiline,
+                                maxLines: null,
+                                controller: washandcareController,
+                                decoration: InputDecoration(
+                                  border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+                                  enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+                                  focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+
+                                  labelText: 'Wash & Care',labelStyle: TextStyle(color: kText),
+                                  hintText: 'Wash & Care instructions',
+                                ),
+                                textAlign: TextAlign.center,
+                                validator: (text) {
+                                  if ( text.isEmpty) {
+                                    return 'Wash & Care instructions is empty';
+                                  }
+                                  return null;
+                                },
+                          ),
+                        ),
+                        SizedBox( height: 8.0,),
+                    Container(
+                      margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+                          child: TextFormField(
+                            style:TextStyle(color: kText),
+
+                            keyboardType: TextInputType.multiline,
+                                maxLines: null,
+                                controller: sizeandfitController,
+                                decoration: InputDecoration(
+                                  border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+                                  enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+                                  focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+
+                                  labelText: 'Size & Fit recommendations',labelStyle: TextStyle(color: kText),
+                                  hintText: 'ex.Cut for slim fit,take your normal size',
+                                ),
+                                textAlign: TextAlign.center,
+                                validator: (text) {
+                                  if ( text.isEmpty) {
+                                    return ' Size & Fit recommendations is empty';
+                                  }
+                                  return null;
+                                },
+                          ),
+                        ),
+
+                          SizedBox( height: 8.0,),
+                    Container(
+                      margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+                          child: TextFormField(
+                            style:TextStyle(color: kText),
+
+                            keyboardType: TextInputType.multiline,
+                                maxLines: null,
+                                controller: shipcontroller,
+                                decoration: InputDecoration(
+                                  border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+                                  enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+                                  focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+
+                                  labelText: 'Shipping & returns',labelStyle: TextStyle(color: kText),
+                                  hintText: 'countries served & return policy',
+                                ),
+                                textAlign: TextAlign.center,
+                                validator: (text) {
+                                  if ( text.isEmpty) {
+                                    return 'Shipping & returns';
+                                  }
+                                  return null;
+                                },
+                          ),
+                        ),
 
 
 
   SizedBox( height: 8.0,),
 
 
-                       ],
-                    ),
+                         ],
+                      ),
+                           ),
                          ),
-                       ),
 
 
-              ],
+                ],
+                ),
+
+
+
+
               ),
 
-
-
-
+                isUploading ? Center(child:  CircularProgressIndicator()) : Text(""),
+              ],
             ),
-
-              isUploading ? Center(child:  CircularProgressIndicator()) : Text(""),
-            ],
           ),
         ),
       ),
@@ -13331,7 +11880,6 @@ keyboardType:TextInputType.number,
         imageUrls.add(downloadUrl.toString());
         if(imageUrls.length==images.length){
           String documnetID = DateTime.now().millisecondsSinceEpoch.toString();
-          if(dropdownValue=='Men'){
             if (currentUser.country == 'Europe'){
               productsRef
                   .doc(widget.currentUser.id)
@@ -13353,11 +11901,10 @@ keyboardType:TextInputType.number,
                 "Gender": dropdownValue,
                 "details": detailsController.text,
                 "productname": productnameController.text,
-                "usd": eurtousd.toString(),
-                "cny": eurtocny.toString(),
-                "gbp": eurtogbp.toString(),
-                "eur": userprice.toString(),
-                "inr": eurtoinr.toString(),
+                "usd": eurtousd.toStringAsFixed(2),
+                "gbp": eurtogbp.toStringAsFixed(2),
+                "eur": userprice.toStringAsFixed(2),
+                "inr": eurtoinr.toStringAsFixed(2),
 
                 "timestamp": timestamp,
                 "color": colorController.text,
@@ -13437,66 +11984,566 @@ keyboardType:TextInputType.number,
 "custom8":  customController8.text ?? "",
 "custom9":  customController9.text ?? "",
 "custom10":  customController10.text ?? "",
-                "custom11usd": eurtousd1.toString() ?? "0",
-                "custom11cny": eurtocny1.toString() ?? "0",
-                "custom11gbp": eurtogbp1.toString() ?? "0",
-                "custom11eur": userprice1.toString() ?? "0",
-                "custom11inr": eurtoinr1.toString() ?? "0",
-   "custom21usd": eurtousd2.toString() ?? "0",
-                "custom21cny": eurtocny2.toString() ?? "0",
-                "custom21gbp": eurtogbp2.toString() ?? "0",
-                "custom21eur": userprice2.toString() ?? "0",
-                "custom21inr": eurtoinr2.toString() ?? "0",
-   "custom31usd": eurtousd3.toString() ?? "0",
-                "custom31cny": eurtocny3.toString() ?? "0",
-                "custom31gbp": eurtogbp3.toString() ?? "0",
-                "custom31eur": userprice3.toString() ?? "0",
-                "custom31inr": eurtoinr3.toString() ?? "0",
-   "custom41usd": eurtousd4.toString() ?? "0",
-                "custom41cny": eurtocny4.toString() ?? "0",
-                "custom41gbp": eurtogbp4.toString() ?? "0",
-                "custom41eur": userprice4.toString() ?? "0",
-                "custom41inr": eurtoinr4.toString() ?? "0",
-   "custom51usd": eurtousd5.toString() ?? "0",
-                "custom51cny": eurtocny5.toString() ?? "0",
-                "custom51gbp": eurtogbp5.toString() ?? "0",
-                "custom51eur": userprice5.toString() ?? "0",
-                "custom51inr": eurtoinr5.toString() ?? "0",
-  "custom61usd": eurtousd6.toString() ?? "0",
-                "custom61cny": eurtocny6.toString() ?? "0",
-                "custom61gbp": eurtogbp6.toString() ?? "0",
-                "custom61eur": userprice6.toString() ?? "0",
-                "custom61inr": eurtoinr6.toString() ?? "0",
-  "custom71usd": eurtousd7.toString() ?? "0",
-                "custom71cny": eurtocny7.toString() ?? "0",
-                "custom71gbp": eurtogbp7.toString() ?? "0",
-                "custom71eur": userprice7.toString() ?? "0",
-                "custom71inr": eurtoinr7.toString() ?? "0",
-  "custom81usd": eurtousd8.toString() ?? "0",
-                "custom81cny": eurtocny8.toString() ?? "0",
-                "custom81gbp": eurtogbp8.toString() ?? "0",
-                "custom81eur": userprice8.toString() ?? "0",
-                "custom81inr": eurtoinr8.toString() ?? "0",
-  "custom91usd": eurtousd9.toString() ?? "0",
-                "custom91cny": eurtocny9.toString() ?? "0",
-                "custom91gbp": eurtogbp9.toString() ?? "0",
-                "custom91eur": userprice9.toString() ?? "0",
-                "custom91inr": eurtoinr9.toString() ?? "0",
-  "custom101usd": eurtousd10.toString() ?? "0",
-                "custom101cny": eurtocny10.toString() ?? "0",
-                "custom101gbp": eurtogbp10.toString() ?? "0",
-                "custom101eur": userprice10.toString() ?? "0",
-                "custom101inr": eurtoinr10.toString() ?? "0",
-  "shipcostusd": eurtousd11.toString() ?? "0",
-                "shipcostcny": eurtocny11.toString() ?? "0",
-                "shipcostgbp": eurtogbp11.toString() ?? "0",
-                "shipcosteur": userprice11.toString() ?? "0",
-                "shipcostinr": eurtoinr11.toString() ?? "0",
-  "shipcostinternusd": eurtousd12.toString() ?? "0",
-                "shipcostinterncny": eurtocny12.toString() ?? "0",
-                "shipcostinterngbp": eurtogbp12.toString() ?? "0",
-                "shipcostinterneur": userprice12.toString() ?? "0",
-                "shipcostinterninr": eurtoinr12.toString() ?? "0",
+                "custom11usd": eurtousd1.toStringAsFixed(2) ?? "0.0",
+                "custom11gbp": eurtogbp1.toStringAsFixed(2) ?? "0.0",
+                "custom11eur": userprice1.toStringAsFixed(2) ?? "0.0",
+                "custom11inr": eurtoinr1.toStringAsFixed(2) ?? "0.0",
+   "custom21usd": eurtousd2.toStringAsFixed(2) ?? "0.0",
+                "custom21gbp": eurtogbp2.toStringAsFixed(2) ?? "0.0",
+                "custom21eur": userprice2.toStringAsFixed(2) ?? "0.0",
+                "custom21inr": eurtoinr2.toStringAsFixed(2) ?? "0.0",
+   "custom31usd": eurtousd3.toStringAsFixed(2) ?? "0.0",
+                "custom31gbp": eurtogbp3.toStringAsFixed(2) ?? "0.0",
+                "custom31eur": userprice3.toStringAsFixed(2) ?? "0.0",
+                "custom31inr": eurtoinr3.toStringAsFixed(2) ?? "0.0",
+   "custom41usd": eurtousd4.toStringAsFixed(2) ?? "0.0",
+                "custom41gbp": eurtogbp4.toStringAsFixed(2) ?? "0.0",
+                "custom41eur": userprice4.toStringAsFixed(2) ?? "0.0",
+                "custom41inr": eurtoinr4.toStringAsFixed(2) ?? "0.0",
+   "custom51usd": eurtousd5.toStringAsFixed(2) ?? "0.0",
+                "custom51gbp": eurtogbp5.toStringAsFixed(2) ?? "0.0",
+                "custom51eur": userprice5.toStringAsFixed(2) ?? "0.0",
+                "custom51inr": eurtoinr5.toStringAsFixed(2) ?? "0.0",
+  "custom61usd": eurtousd6.toStringAsFixed(2) ?? "0.0",
+                "custom61gbp": eurtogbp6.toStringAsFixed(2) ?? "0.0",
+                "custom61eur": userprice6.toStringAsFixed(2) ?? "0.0",
+                "custom61inr": eurtoinr6.toStringAsFixed(2) ?? "0.0",
+  "custom71usd": eurtousd7.toStringAsFixed(2) ?? "0.0",
+                "custom71gbp": eurtogbp7.toStringAsFixed(2) ?? "0.0",
+                "custom71eur": userprice7.toStringAsFixed(2) ?? "0.0",
+                "custom71inr": eurtoinr7.toStringAsFixed(2) ?? "0.0",
+  "custom81usd": eurtousd8.toStringAsFixed(2) ?? "0.0",
+                "custom81gbp": eurtogbp8.toStringAsFixed(2) ?? "0.0",
+                "custom81eur": userprice8.toStringAsFixed(2) ?? "0.0",
+                "custom81inr": eurtoinr8.toStringAsFixed(2) ?? "0.0",
+  "custom91usd": eurtousd9.toStringAsFixed(2) ?? "0.0",
+                "custom91gbp": eurtogbp9.toStringAsFixed(2) ?? "0.0",
+                "custom91eur": userprice9.toStringAsFixed(2) ?? "0.0",
+                "custom91inr": eurtoinr9.toStringAsFixed(2) ?? "0.0",
+  "custom101usd": eurtousd10.toStringAsFixed(2) ?? "0.0",
+                "custom101gbp": eurtogbp10.toStringAsFixed(2) ?? "0.0",
+                "custom101eur": userprice10.toStringAsFixed(2) ?? "0.0",
+                "custom101inr": eurtoinr10.toStringAsFixed(2) ?? "0.0",
+  "shipcostusd": eurtousd11.toStringAsFixed(2) ?? "0.0",
+                "shipcostgbp": eurtogbp11.toStringAsFixed(2) ?? "0.0",
+                "shipcosteur": userprice11.toStringAsFixed(2) ?? "0.0",
+                "shipcostinr": eurtoinr11.toStringAsFixed(2) ?? "0.0",
+  "shipcostinternusd": eurtousd12.toStringAsFixed(2) ?? "0.0",
+                "shipcostinterngbp": eurtogbp12.toStringAsFixed(2) ?? "0.0",
+                "shipcostinterneur": userprice12.toStringAsFixed(2) ?? "0.0",
+                "shipcostinterninr": eurtoinr12.toStringAsFixed(2) ?? "0.0",
+
+"processfrom":  int.tryParse(durationfromp.text) ?? 0,
+"processto":  int.tryParse(durationto.text) ?? 0,
+"shipfrom":  int.tryParse(durationfrom.text) ?? 0,
+"shipto":  int.tryParse(durationto.text) ?? 0,
+"shipinterfrom":  int.tryParse(durationfromw.text) ?? 0,
+"shipinterto":  int.tryParse(durationtow.text) ?? 0,
+
+                "likes": {},
+              });
+
+
+
+              setState(() {
+                file = null;
+                isUploading = false;
+              });
+            }
+           else  if (currentUser.country == 'UK'){
+              productsRef
+                  .doc(widget.currentUser.id)
+                  .collection("userProducts")
+                  .doc(prodId)
+                  .set({
+
+                "indian":indian,
+                "worldship":worldship,
+                "shipment": shipcontroller.text,
+                "prodId": prodId,
+                "ownerId": widget.currentUser.id,
+                "username": widget.currentUser.displayName,
+                "photoUrl": widget.currentUser.photoUrl,
+                "displayName": widget.currentUser.displayName,
+                "shopmediaUrl": imageUrls,
+                "Category": value,
+                // "type":type,
+                "Gender": dropdownValue,
+                "details": detailsController.text,
+                "productname": productnameController.text,
+                "usd": gbptousd.toStringAsFixed(2),
+                "gbp": userprice.toStringAsFixed(2),
+                "eur": gbptoeur.toStringAsFixed(2),
+                "inr": gbptoinr.toStringAsFixed(2),
+
+                "timestamp": timestamp,
+                "color": colorController.text,
+                "composition": compositionController.text,
+                "washandcare": washandcareController.text,
+                "sizeandfit": sizeandfitController.text,
+                "xxxsQuantity": int.tryParse(xxxscontroller.text) ?? 0,
+                "xxsQuantity": int.tryParse(xxscontroller.text) ?? 0,
+                "xsQuantity":  int.tryParse(xscontroller.text )?? 0,
+                "sQuantity": int.tryParse(scontroller.text) ?? 0,
+
+                "mtoQuantity":  int.tryParse(mtocontroller.text) ?? 0,
+                "freesizeQuantity":   int.tryParse(freesizecontroller.text) ?? 0,
+
+
+                "mQuantity":  int.tryParse(mcontroller.text) ?? 0,
+                "lQuantity":  int.tryParse(lcontroller.text) ?? 0,
+                "xlQuantity":  int.tryParse(xlcontroller.text) ?? 0,
+                "xxlQuantity":  int.tryParse(xxlcontroller.text) ?? 0,
+                "xxxlQuantity":  int.tryParse(xxlcontroller.text) ?? 0,
+                "fourxlQuantity":  int.tryParse(fourxlcontroller.text) ?? 0,
+                "fivexlQuantity":  int.tryParse(fivexlcontroller.text) ?? 0,
+                "sixxlQuantity":  int.tryParse(sixxlcontroller.text) ?? 0,
+                "sevenxlQuantity":  int.tryParse(sevenxlcontroller.text) ?? 0,
+                "eightxlQuantity":  int.tryParse(eightxlcontroller.text) ?? 0,
+                "Shoe1":   int.tryParse(Shoe1controller.text) ?? 0,
+                "Shoe2":   int.tryParse(Shoe2controller.text) ?? 0,
+                "Shoe3":   int.tryParse(Shoe3controller.text) ?? 0,
+                "Shoe4":   int.tryParse(Shoe4controller.text) ?? 0,
+                "Shoe5":   int.tryParse(Shoe5controller.text) ?? 0,
+                "Shoe6":   int.tryParse(Shoe6controller.text) ?? 0,
+                "Shoe7":   int.tryParse(Shoe7controller.text) ?? 0,
+                "Shoe8":   int.tryParse(Shoe8controller.text) ?? 0,
+                "Shoe9":   int.tryParse(Shoe9controller.text) ?? 0,
+                "Shoe10":   int.tryParse(Shoe10controller.text) ?? 0,
+                "Shoe11":   int.tryParse(Shoe11controller.text) ?? 0,
+                "Shoe12":   int.tryParse(Shoe12controller.text) ?? 0,
+                "Shoe13":   int.tryParse(Shoe13controller.text) ?? 0,
+                "Shoe14":   int.tryParse(Shoe14controller.text) ?? 0,
+                "Shoe15":  int.tryParse(Shoe15controller.text) ?? 0,
+                "Shoe16":  int.tryParse(Shoe16controller.text) ?? 0,
+                "Shoe17":  int.tryParse(Shoe17controller.text) ?? 0,
+                "Shoe18":  int.tryParse(Shoe18controller.text) ?? 0,
+                "Shoe19":  int.tryParse(Shoe19controller.text) ?? 0,
+                "Shoe20":  int.tryParse(Shoe20controller.text) ?? 0,
+                "Shoe21":  int.tryParse(Shoe21controller.text) ?? 0,
+                "Ring1":   int.tryParse(Ring1controller.text) ?? 0,
+                "Ring2":   int.tryParse(Ring2controller.text) ?? 0,
+                "Ring3":   int.tryParse(Ring3controller.text) ?? 0,
+                "Ring4":   int.tryParse(Ring4controller.text) ?? 0,
+                "Ring5":   int.tryParse(Ring5controller.text) ?? 0,
+                "Ring6":   int.tryParse(Ring6controller.text) ?? 0,
+                "Ring7":   int.tryParse(Ring7controller.text) ?? 0,
+                "Ring8":   int.tryParse(Ring8controller.text) ?? 0,
+                "Ring9":   int.tryParse(Ring9controller.text) ?? 0,
+                "Ring10":   int.tryParse(Ring10controller.text) ?? 0,
+                "Ring11":   int.tryParse(Ring11controller.text) ?? 0,
+                "Ring12":   int.tryParse(Ring12controller.text) ?? 0,
+                "Ring13":   int.tryParse(Ring13controller.text) ?? 0,
+                "Ring14":   int.tryParse(Ring14controller.text) ?? 0,
+                "Ring15":  int.tryParse(Ring15controller.text) ?? 0,
+                "Ring16":  int.tryParse(Ring16controller.text) ?? 0,
+                "Ring17":  int.tryParse(Ring17controller.text) ?? 0,
+                "Ring18":  int.tryParse(Ring18controller.text) ?? 0,
+                "Ring19":  int.tryParse(Ring19controller.text) ?? 0,
+                "Ring20":  int.tryParse(Ring20controller.text) ?? 0,
+                "Ring21":  int.tryParse(Ring21controller.text) ?? 0,
+"Ring22":  int.tryParse(Ring22controller.text) ?? 0,
+"Ring23":  int.tryParse(Ring23controller.text) ?? 0,
+"custom1":  customController1.text ?? "",
+"custom2":  customController2.text ?? "",
+"custom3":  customController3.text ?? "",
+"custom4":  customController4.text ?? "",
+"custom5":  customController5.text ?? "",
+"custom6":  customController6.text ?? "",
+"custom7":  customController7.text ?? "",
+"custom8":  customController8.text ?? "",
+"custom9":  customController9.text ?? "",
+"custom10":  customController10.text ?? "",
+                "custom11usd": gbptousd1.toStringAsFixed(2) ?? "0.0",
+                "custom11gbp":userprice1.toStringAsFixed(2) ?? "0.0",
+                "custom11eur": gbptoeur1.toStringAsFixed(2) ?? "0.0",
+                "custom11inr": gbptoinr1.toStringAsFixed(2) ?? "0.0",
+   "custom21usd": gbptousd2.toStringAsFixed(2) ?? "0.0",
+                "custom21gbp": userprice2.toStringAsFixed(2) ?? "0.0",
+                "custom21eur":gbptoeur2.toStringAsFixed(2) ?? "0.0",
+                "custom21inr": gbptoinr2.toStringAsFixed(2) ?? "0.0",
+   "custom31usd": gbptousd3.toStringAsFixed(2) ?? "0.0",
+                "custom31gbp": userprice3.toStringAsFixed(2) ?? "0.0",
+                "custom31eur": gbptoeur3.toStringAsFixed(2) ?? "0.0",
+                "custom31inr": gbptoinr3.toStringAsFixed(2) ?? "0.0",
+   "custom41usd": gbptousd4.toStringAsFixed(2) ?? "0.0",
+                "custom41gbp": userprice4.toStringAsFixed(2) ?? "0.0",
+                "custom41eur": gbptoeur4.toStringAsFixed(2) ?? "0.0",
+                "custom41inr": gbptoinr4.toStringAsFixed(2) ?? "0.0",
+   "custom51usd": gbptousd5.toStringAsFixed(2) ?? "0.0",
+                "custom51gbp": userprice5.toStringAsFixed(2) ?? "0.0",
+                "custom51eur": gbptoeur5.toStringAsFixed(2) ?? "0.0",
+                "custom51inr": gbptoinr5.toStringAsFixed(2) ?? "0.0",
+  "custom61usd": gbptousd6.toStringAsFixed(2) ?? "0.0",
+                "custom61gbp": userprice6.toStringAsFixed(2) ?? "0.0",
+                "custom61eur": gbptoeur6.toStringAsFixed(2) ?? "0.0",
+                "custom61inr": gbptoinr6.toStringAsFixed(2) ?? "0.0",
+  "custom71usd": gbptousd7.toStringAsFixed(2) ?? "0.0",
+                "custom71gbp": userprice7.toStringAsFixed(2) ?? "0.0",
+                "custom71eur": gbptoeur7.toStringAsFixed(2) ?? "0.0",
+                "custom71inr": gbptoinr7.toStringAsFixed(2) ?? "0.0",
+  "custom81usd": gbptousd8.toStringAsFixed(2) ?? "0.0",
+                "custom81gbp": userprice8.toStringAsFixed(2) ?? "0.0",
+                "custom81eur": gbptoeur8.toStringAsFixed(2) ?? "0.0",
+                "custom81inr": gbptoinr8.toStringAsFixed(2) ?? "0.0",
+  "custom91usd": gbptousd9.toStringAsFixed(2) ?? "0.0",
+                "custom91gbp": userprice9.toStringAsFixed(2) ?? "0.0",
+                "custom91eur": gbptoeur9.toStringAsFixed(2) ?? "0.0",
+                "custom91inr": gbptoinr9.toStringAsFixed(2) ?? "0.0",
+  "custom101usd": gbptousd10.toStringAsFixed(2) ?? "0.0",
+                "custom101gbp": userprice10.toStringAsFixed(2) ?? "0.0",
+                "custom101eur": gbptoeur10.toStringAsFixed(2) ?? "0.0",
+                "custom101inr": gbptoinr10.toStringAsFixed(2) ?? "0.0",
+  "shipcostusd": gbptousd11.toStringAsFixed(2) ?? "0.0",
+                "shipcostgbp": userprice11.toStringAsFixed(2) ?? "0.0",
+                "shipcosteur": gbptoeur11.toStringAsFixed(2) ?? "0.0",
+                "shipcostinr": gbptoinr11.toStringAsFixed(2) ?? "0.0",
+  "shipcostinternusd": gbptousd12.toStringAsFixed(2) ?? "0.0",
+                "shipcostinterngbp": userprice12.toStringAsFixed(2) ?? "0.0",
+                "shipcostinterneur": gbptoeur12.toStringAsFixed(2) ?? "0.0",
+                "shipcostinterninr": gbptoinr12.toStringAsFixed(2) ?? "0.0",
+
+"processfrom":  int.tryParse(durationfromp.text) ?? 0,
+"processto":  int.tryParse(durationto.text) ?? 0,
+"shipfrom":  int.tryParse(durationfrom.text) ?? 0,
+"shipto":  int.tryParse(durationto.text) ?? 0,
+"shipinterfrom":  int.tryParse(durationfromw.text) ?? 0,
+"shipinterto":  int.tryParse(durationtow.text) ?? 0,
+
+                "likes": {},
+              });
+
+
+
+              setState(() {
+                file = null;
+                isUploading = false;
+              });
+            }
+
+            else if (currentUser.country == 'USA'){
+              productsRef
+                  .doc(widget.currentUser.id)
+                  .collection("userProducts")
+                  .doc(prodId)
+                  .set({
+
+                "indian":indian,
+                "worldship":worldship,
+                "shipment": shipcontroller.text,
+                "prodId": prodId,
+                "ownerId": widget.currentUser.id,
+                "username": widget.currentUser.displayName,
+                "photoUrl": widget.currentUser.photoUrl,
+                "displayName": widget.currentUser.displayName,
+                "shopmediaUrl": imageUrls,
+                "Category": value,
+                // "type":type,
+                "Gender": dropdownValue,
+                "details": detailsController.text,
+                "productname": productnameController.text,
+                "usd":userprice.toStringAsFixed(2),
+                "gbp": usdtogbp.toStringAsFixed(2),
+                "eur": usdtoeur.toStringAsFixed(2),
+                "inr": usdtoinr.toStringAsFixed(2),
+
+                "timestamp": timestamp,
+                "color": colorController.text,
+                "composition": compositionController.text,
+                "washandcare": washandcareController.text,
+                "sizeandfit": sizeandfitController.text,
+                "xxxsQuantity": int.tryParse(xxxscontroller.text) ?? 0,
+                "xxsQuantity": int.tryParse(xxscontroller.text) ?? 0,
+                "xsQuantity":  int.tryParse(xscontroller.text )?? 0,
+                "sQuantity": int.tryParse(scontroller.text) ?? 0,
+
+                "mtoQuantity":  int.tryParse(mtocontroller.text) ?? 0,
+                "freesizeQuantity":   int.tryParse(freesizecontroller.text) ?? 0,
+
+
+                "mQuantity":  int.tryParse(mcontroller.text) ?? 0,
+                "lQuantity":  int.tryParse(lcontroller.text) ?? 0,
+                "xlQuantity":  int.tryParse(xlcontroller.text) ?? 0,
+                "xxlQuantity":  int.tryParse(xxlcontroller.text) ?? 0,
+                "xxxlQuantity":  int.tryParse(xxlcontroller.text) ?? 0,
+                "fourxlQuantity":  int.tryParse(fourxlcontroller.text) ?? 0,
+                "fivexlQuantity":  int.tryParse(fivexlcontroller.text) ?? 0,
+                "sixxlQuantity":  int.tryParse(sixxlcontroller.text) ?? 0,
+                "sevenxlQuantity":  int.tryParse(sevenxlcontroller.text) ?? 0,
+                "eightxlQuantity":  int.tryParse(eightxlcontroller.text) ?? 0,
+                "Shoe1":   int.tryParse(Shoe1controller.text) ?? 0,
+                "Shoe2":   int.tryParse(Shoe2controller.text) ?? 0,
+                "Shoe3":   int.tryParse(Shoe3controller.text) ?? 0,
+                "Shoe4":   int.tryParse(Shoe4controller.text) ?? 0,
+                "Shoe5":   int.tryParse(Shoe5controller.text) ?? 0,
+                "Shoe6":   int.tryParse(Shoe6controller.text) ?? 0,
+                "Shoe7":   int.tryParse(Shoe7controller.text) ?? 0,
+                "Shoe8":   int.tryParse(Shoe8controller.text) ?? 0,
+                "Shoe9":   int.tryParse(Shoe9controller.text) ?? 0,
+                "Shoe10":   int.tryParse(Shoe10controller.text) ?? 0,
+                "Shoe11":   int.tryParse(Shoe11controller.text) ?? 0,
+                "Shoe12":   int.tryParse(Shoe12controller.text) ?? 0,
+                "Shoe13":   int.tryParse(Shoe13controller.text) ?? 0,
+                "Shoe14":   int.tryParse(Shoe14controller.text) ?? 0,
+                "Shoe15":  int.tryParse(Shoe15controller.text) ?? 0,
+                "Shoe16":  int.tryParse(Shoe16controller.text) ?? 0,
+                "Shoe17":  int.tryParse(Shoe17controller.text) ?? 0,
+                "Shoe18":  int.tryParse(Shoe18controller.text) ?? 0,
+                "Shoe19":  int.tryParse(Shoe19controller.text) ?? 0,
+                "Shoe20":  int.tryParse(Shoe20controller.text) ?? 0,
+                "Shoe21":  int.tryParse(Shoe21controller.text) ?? 0,
+                "Ring1":   int.tryParse(Ring1controller.text) ?? 0,
+                "Ring2":   int.tryParse(Ring2controller.text) ?? 0,
+                "Ring3":   int.tryParse(Ring3controller.text) ?? 0,
+                "Ring4":   int.tryParse(Ring4controller.text) ?? 0,
+                "Ring5":   int.tryParse(Ring5controller.text) ?? 0,
+                "Ring6":   int.tryParse(Ring6controller.text) ?? 0,
+                "Ring7":   int.tryParse(Ring7controller.text) ?? 0,
+                "Ring8":   int.tryParse(Ring8controller.text) ?? 0,
+                "Ring9":   int.tryParse(Ring9controller.text) ?? 0,
+                "Ring10":   int.tryParse(Ring10controller.text) ?? 0,
+                "Ring11":   int.tryParse(Ring11controller.text) ?? 0,
+                "Ring12":   int.tryParse(Ring12controller.text) ?? 0,
+                "Ring13":   int.tryParse(Ring13controller.text) ?? 0,
+                "Ring14":   int.tryParse(Ring14controller.text) ?? 0,
+                "Ring15":  int.tryParse(Ring15controller.text) ?? 0,
+                "Ring16":  int.tryParse(Ring16controller.text) ?? 0,
+                "Ring17":  int.tryParse(Ring17controller.text) ?? 0,
+                "Ring18":  int.tryParse(Ring18controller.text) ?? 0,
+                "Ring19":  int.tryParse(Ring19controller.text) ?? 0,
+                "Ring20":  int.tryParse(Ring20controller.text) ?? 0,
+                "Ring21":  int.tryParse(Ring21controller.text) ?? 0,
+"Ring22":  int.tryParse(Ring22controller.text) ?? 0,
+"Ring23":  int.tryParse(Ring23controller.text) ?? 0,
+"custom1":  customController1.text ?? "",
+"custom2":  customController2.text ?? "",
+"custom3":  customController3.text ?? "",
+"custom4":  customController4.text ?? "",
+"custom5":  customController5.text ?? "",
+"custom6":  customController6.text ?? "",
+"custom7":  customController7.text ?? "",
+"custom8":  customController8.text ?? "",
+"custom9":  customController9.text ?? "",
+"custom10":  customController10.text ?? "",
+                "custom11usd":userprice1.toStringAsFixed(2) ?? "0.0",
+                "custom11gbp": usdtogbp1.toStringAsFixed(2) ?? "0.0",
+                "custom11eur": usdtoeur1.toStringAsFixed(2) ?? "0.0",
+                "custom11inr": usdtoinr1.toStringAsFixed(2) ?? "0.0",
+   "custom21usd":userprice2.toStringAsFixed(2) ?? "0.0",
+                "custom21gbp": usdtogbp2.toStringAsFixed(2) ?? "0.0",
+                "custom21eur": usdtoeur2.toStringAsFixed(2) ?? "0.0",
+                "custom21inr": usdtoinr2.toStringAsFixed(2) ?? "0.0",
+   "custom31usd":userprice3.toStringAsFixed(2) ?? "0.0",
+                "custom31gbp": usdtogbp3.toStringAsFixed(2) ?? "0.0",
+                "custom31eur": usdtoeur3.toStringAsFixed(2) ?? "0.0",
+                "custom31inr": usdtoinr3.toStringAsFixed(2) ?? "0.0",
+   "custom41usd":userprice4.toStringAsFixed(2) ?? "0.0",
+                "custom41gbp": usdtogbp4.toStringAsFixed(2) ?? "0.0",
+                "custom41eur": usdtoeur4.toStringAsFixed(2) ?? "0.0",
+                "custom41inr": usdtoinr4.toStringAsFixed(2) ?? "0.0",
+   "custom51usd":userprice5.toStringAsFixed(2) ?? "0.0",
+                "custom51gbp": usdtogbp5.toStringAsFixed(2) ?? "0.0",
+                "custom51eur": usdtoeur5.toStringAsFixed(2) ?? "0.0",
+                "custom51inr": usdtoinr5.toStringAsFixed(2) ?? "0.0",
+  "custom61usd":userprice6.toStringAsFixed(2) ?? "0.0",
+                "custom61gbp": usdtogbp6.toStringAsFixed(2) ?? "0.0",
+                "custom61eur": usdtoeur6.toStringAsFixed(2) ?? "0.0",
+                "custom61inr": usdtoinr6.toStringAsFixed(2) ?? "0.0",
+  "custom71usd":userprice7.toStringAsFixed(2) ?? "0.0",
+                "custom71gbp": usdtogbp7.toStringAsFixed(2) ?? "0.0",
+                "custom71eur": usdtoeur7.toStringAsFixed(2) ?? "0.0",
+                "custom71inr": usdtoinr7.toStringAsFixed(2) ?? "0.0",
+  "custom81usd":userprice8.toStringAsFixed(2) ?? "0.0",
+                "custom81gbp": usdtogbp8.toStringAsFixed(2) ?? "0.0",
+                "custom81eur": usdtoeur8.toStringAsFixed(2) ?? "0.0",
+                "custom81inr": usdtoinr8.toStringAsFixed(2) ?? "0.0",
+  "custom91usd":userprice9.toStringAsFixed(2) ?? "0.0",
+                "custom91gbp": usdtogbp9.toStringAsFixed(2) ?? "0.0",
+                "custom91eur": usdtoeur9.toStringAsFixed(2) ?? "0.0",
+                "custom91inr": usdtoinr9.toStringAsFixed(2) ?? "0.0",
+  "custom101usd":userprice10.toStringAsFixed(2) ?? "0.0",
+                "custom101gbp": usdtogbp10.toStringAsFixed(2) ?? "0.0",
+                "custom101eur": usdtoeur10.toStringAsFixed(2) ?? "0.0",
+                "custom101inr": usdtoinr10.toStringAsFixed(2) ?? "0.0",
+  "shipcostusd":userprice11.toStringAsFixed(2) ?? "0.0",
+                "shipcostgbp": usdtogbp11.toStringAsFixed(2) ?? "0.0",
+                "shipcosteur": usdtoeur11.toStringAsFixed(2) ?? "0.0",
+                "shipcostinr": usdtoinr11.toStringAsFixed(2) ?? "0.0",
+  "shipcostinternusd":userprice12.toStringAsFixed(2) ?? "0.0",
+                "shipcostinterngbp": usdtogbp12.toStringAsFixed(2) ?? "0.0",
+                "shipcostinterneur": usdtoeur12.toStringAsFixed(2) ?? "0.0",
+                "shipcostinterninr": usdtoinr12.toStringAsFixed(2) ?? "0.0",
+
+"processfrom":  int.tryParse(durationfromp.text) ?? 0,
+"processto":  int.tryParse(durationto.text) ?? 0,
+"shipfrom":  int.tryParse(durationfrom.text) ?? 0,
+"shipto":  int.tryParse(durationto.text) ?? 0,
+"shipinterfrom":  int.tryParse(durationfromw.text) ?? 0,
+"shipinterto":  int.tryParse(durationtow.text) ?? 0,
+
+                "likes": {},
+              });
+
+
+
+              setState(() {
+                file = null;
+                isUploading = false;
+              });
+            }
+
+ else if (currentUser.country == 'India'){
+              productsRef
+                  .doc(widget.currentUser.id)
+                  .collection("userProducts")
+                  .doc(prodId)
+                  .set({
+
+                "indian":indian,
+                "worldship":worldship,
+                "shipment": shipcontroller.text,
+                "prodId": prodId,
+                "ownerId": widget.currentUser.id,
+                "username": widget.currentUser.displayName,
+                "photoUrl": widget.currentUser.photoUrl,
+                "displayName": widget.currentUser.displayName,
+                "shopmediaUrl": imageUrls,
+                "Category": value,
+                // "type":type,
+                "Gender": dropdownValue,
+                "details": detailsController.text,
+                "productname": productnameController.text,
+                "usd": inrtousd.toStringAsFixed(2),
+                "gbp": inrtogbp.toStringAsFixed(2),
+                "eur": inrtoeur.toStringAsFixed(2),
+                "inr": userprice.toStringAsFixed(2),
+
+                "timestamp": timestamp,
+                "color": colorController.text,
+                "composition": compositionController.text,
+                "washandcare": washandcareController.text,
+                "sizeandfit": sizeandfitController.text,
+                "xxxsQuantity": int.tryParse(xxxscontroller.text) ?? 0,
+                "xxsQuantity": int.tryParse(xxscontroller.text) ?? 0,
+                "xsQuantity":  int.tryParse(xscontroller.text )?? 0,
+                "sQuantity": int.tryParse(scontroller.text) ?? 0,
+
+                "mtoQuantity":  int.tryParse(mtocontroller.text) ?? 0,
+                "freesizeQuantity":   int.tryParse(freesizecontroller.text) ?? 0,
+
+
+                "mQuantity":  int.tryParse(mcontroller.text) ?? 0,
+                "lQuantity":  int.tryParse(lcontroller.text) ?? 0,
+                "xlQuantity":  int.tryParse(xlcontroller.text) ?? 0,
+                "xxlQuantity":  int.tryParse(xxlcontroller.text) ?? 0,
+                "xxxlQuantity":  int.tryParse(xxlcontroller.text) ?? 0,
+                "fourxlQuantity":  int.tryParse(fourxlcontroller.text) ?? 0,
+                "fivexlQuantity":  int.tryParse(fivexlcontroller.text) ?? 0,
+                "sixxlQuantity":  int.tryParse(sixxlcontroller.text) ?? 0,
+                "sevenxlQuantity":  int.tryParse(sevenxlcontroller.text) ?? 0,
+                "eightxlQuantity":  int.tryParse(eightxlcontroller.text) ?? 0,
+                "Shoe1":   int.tryParse(Shoe1controller.text) ?? 0,
+                "Shoe2":   int.tryParse(Shoe2controller.text) ?? 0,
+                "Shoe3":   int.tryParse(Shoe3controller.text) ?? 0,
+                "Shoe4":   int.tryParse(Shoe4controller.text) ?? 0,
+                "Shoe5":   int.tryParse(Shoe5controller.text) ?? 0,
+                "Shoe6":   int.tryParse(Shoe6controller.text) ?? 0,
+                "Shoe7":   int.tryParse(Shoe7controller.text) ?? 0,
+                "Shoe8":   int.tryParse(Shoe8controller.text) ?? 0,
+                "Shoe9":   int.tryParse(Shoe9controller.text) ?? 0,
+                "Shoe10":   int.tryParse(Shoe10controller.text) ?? 0,
+                "Shoe11":   int.tryParse(Shoe11controller.text) ?? 0,
+                "Shoe12":   int.tryParse(Shoe12controller.text) ?? 0,
+                "Shoe13":   int.tryParse(Shoe13controller.text) ?? 0,
+                "Shoe14":   int.tryParse(Shoe14controller.text) ?? 0,
+                "Shoe15":  int.tryParse(Shoe15controller.text) ?? 0,
+                "Shoe16":  int.tryParse(Shoe16controller.text) ?? 0,
+                "Shoe17":  int.tryParse(Shoe17controller.text) ?? 0,
+                "Shoe18":  int.tryParse(Shoe18controller.text) ?? 0,
+                "Shoe19":  int.tryParse(Shoe19controller.text) ?? 0,
+                "Shoe20":  int.tryParse(Shoe20controller.text) ?? 0,
+                "Shoe21":  int.tryParse(Shoe21controller.text) ?? 0,
+                "Ring1":   int.tryParse(Ring1controller.text) ?? 0,
+                "Ring2":   int.tryParse(Ring2controller.text) ?? 0,
+                "Ring3":   int.tryParse(Ring3controller.text) ?? 0,
+                "Ring4":   int.tryParse(Ring4controller.text) ?? 0,
+                "Ring5":   int.tryParse(Ring5controller.text) ?? 0,
+                "Ring6":   int.tryParse(Ring6controller.text) ?? 0,
+                "Ring7":   int.tryParse(Ring7controller.text) ?? 0,
+                "Ring8":   int.tryParse(Ring8controller.text) ?? 0,
+                "Ring9":   int.tryParse(Ring9controller.text) ?? 0,
+                "Ring10":   int.tryParse(Ring10controller.text) ?? 0,
+                "Ring11":   int.tryParse(Ring11controller.text) ?? 0,
+                "Ring12":   int.tryParse(Ring12controller.text) ?? 0,
+                "Ring13":   int.tryParse(Ring13controller.text) ?? 0,
+                "Ring14":   int.tryParse(Ring14controller.text) ?? 0,
+                "Ring15":  int.tryParse(Ring15controller.text) ?? 0,
+                "Ring16":  int.tryParse(Ring16controller.text) ?? 0,
+                "Ring17":  int.tryParse(Ring17controller.text) ?? 0,
+                "Ring18":  int.tryParse(Ring18controller.text) ?? 0,
+                "Ring19":  int.tryParse(Ring19controller.text) ?? 0,
+                "Ring20":  int.tryParse(Ring20controller.text) ?? 0,
+                "Ring21":  int.tryParse(Ring21controller.text) ?? 0,
+"Ring22":  int.tryParse(Ring22controller.text) ?? 0,
+"Ring23":  int.tryParse(Ring23controller.text) ?? 0,
+"custom1":  customController1.text ?? "",
+"custom2":  customController2.text ?? "",
+"custom3":  customController3.text ?? "",
+"custom4":  customController4.text ?? "",
+"custom5":  customController5.text ?? "",
+"custom6":  customController6.text ?? "",
+"custom7":  customController7.text ?? "",
+"custom8":  customController8.text ?? "",
+"custom9":  customController9.text ?? "",
+"custom10":  customController10.text ?? "",
+                "custom11usd": inrtousd1.toStringAsFixed(2) ?? "0.0",
+                "custom11gbp": inrtogbp1.toStringAsFixed(2) ?? "0.0",
+                "custom11eur": inrtoeur1.toStringAsFixed(2) ?? "0.0",
+                "custom11inr": userprice1.toStringAsFixed(2) ?? "0.0",
+   "custom21usd": inrtousd2.toStringAsFixed(2) ?? "0.0",
+                "custom21gbp": inrtogbp2.toStringAsFixed(2) ?? "0.0",
+                "custom21eur": inrtoeur2.toStringAsFixed(2) ?? "0.0",
+                "custom21inr": userprice2.toStringAsFixed(2) ?? "0.0",
+   "custom31usd": inrtousd3.toStringAsFixed(2) ?? "0.0",
+                "custom31gbp": inrtogbp3.toStringAsFixed(2) ?? "0.0",
+                "custom31eur": inrtoeur3.toStringAsFixed(2) ?? "0.0",
+                "custom31inr": userprice3.toStringAsFixed(2) ?? "0.0",
+   "custom41usd": inrtousd4.toStringAsFixed(2) ?? "0.0",
+                "custom41gbp": inrtogbp4.toStringAsFixed(2) ?? "0.0",
+                "custom41eur": inrtoeur4.toStringAsFixed(2) ?? "0.0",
+                "custom41inr": userprice4.toStringAsFixed(2) ?? "0.0",
+   "custom51usd": inrtousd5.toStringAsFixed(2) ?? "0.0",
+                "custom51gbp": inrtogbp5.toStringAsFixed(2) ?? "0.0",
+                "custom51eur": inrtoeur5.toStringAsFixed(2) ?? "0.0",
+                "custom51inr": userprice5.toStringAsFixed(2) ?? "0.0",
+  "custom61usd": inrtousd6.toStringAsFixed(2) ?? "0.0",
+                "custom61gbp": inrtogbp6.toStringAsFixed(2) ?? "0.0",
+                "custom61eur": inrtoeur6.toStringAsFixed(2) ?? "0.0",
+                "custom61inr": userprice6.toStringAsFixed(2) ?? "0.0",
+  "custom71usd": inrtousd7.toStringAsFixed(2) ?? "0.0",
+                "custom71gbp": inrtogbp7.toStringAsFixed(2) ?? "0.0",
+                "custom71eur": inrtoeur7.toStringAsFixed(2) ?? "0.0",
+                "custom71inr": userprice7.toStringAsFixed(2) ?? "0.0",
+  "custom81usd": inrtousd8.toStringAsFixed(2) ?? "0.0",
+                "custom81gbp": inrtogbp8.toStringAsFixed(2) ?? "0.0",
+                "custom81eur": inrtoeur8.toStringAsFixed(2) ?? "0.0",
+                "custom81inr": userprice8.toStringAsFixed(2) ?? "0.0",
+  "custom91usd": inrtousd9.toStringAsFixed(2) ?? "0.0",
+                "custom91gbp": inrtogbp9.toStringAsFixed(2) ?? "0.0",
+                "custom91eur": inrtoeur9.toStringAsFixed(2) ?? "0.0",
+                "custom91inr": userprice9.toStringAsFixed(2) ?? "0.0",
+  "custom101usd": inrtousd10.toStringAsFixed(2) ?? "0.0",
+                "custom101gbp": inrtogbp10.toStringAsFixed(2) ?? "0.0",
+                "custom101eur": inrtoeur10.toStringAsFixed(2) ?? "0.0",
+                "custom101inr": userprice10.toStringAsFixed(2) ?? "0.0",
+  "shipcostusd": inrtousd11.toStringAsFixed(2) ?? "0.0",
+                "shipcostgbp": inrtogbp11.toStringAsFixed(2) ?? "0.0",
+                "shipcosteur": inrtoeur11.toStringAsFixed(2) ?? "0.0",
+                "shipcostinr": userprice11.toStringAsFixed(2) ?? "0.0",
+  "shipcostinternusd": inrtousd12.toStringAsFixed(2) ?? "0.0",
+                "shipcostinterngbp": inrtogbp12.toStringAsFixed(2) ?? "0.0",
+                "shipcostinterneur": inrtoeur12.toStringAsFixed(2) ?? "0.0",
+                "shipcostinterninr": userprice12.toStringAsFixed(2) ?? "0.0",
 
 "processfrom":  int.tryParse(durationfromp.text) ?? 0,
 "processto":  int.tryParse(durationto.text) ?? 0,
@@ -13517,7 +12564,7 @@ keyboardType:TextInputType.number,
             }
 
 
-          }
+
 
       }
       }).catchError((err) {

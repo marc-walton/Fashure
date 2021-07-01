@@ -80,7 +80,7 @@ class _InvoiceViewState extends State<InvoiceView> {
       Center(
         child: RaisedButton(
           onPressed: (){
-            Navigator.push(context, MaterialPageRoute(builder: (context) => AddressSer(Amount:amount,OwnerId:orderId,
+            Navigator.push(context, MaterialPageRoute(builder: (context) => PaymentSer(Amount:amount,OwnerId:orderId,
               OrderId: orderId,
               cusId: custId,
               username: cusName,
@@ -98,7 +98,7 @@ class _InvoiceViewState extends State<InvoiceView> {
       Center(
         child: RaisedButton(
           onPressed: (){
-            Navigator.push(context, MaterialPageRoute(builder: (context) => AddressSer(Amount:amount,OwnerId:orderId,
+            Navigator.push(context, MaterialPageRoute(builder: (context) => PaymentSer(Amount:amount,OwnerId:orderId,
               OrderId: orderId,
               cusId: custId,
               username: cusName,
@@ -117,7 +117,9 @@ class _InvoiceViewState extends State<InvoiceView> {
       Center(
         child: RaisedButton(
           onPressed: (){
-            Navigator.push(context, MaterialPageRoute(builder: (context) => PaymentSer(Amount:due,OrderId: orderId,
+            Navigator.push(context, MaterialPageRoute(builder: (context) => PaymentSer(
+              Amount:due,OrderId: orderId,              cusId: custId,
+
               OwnerId: ownerId,profileimg: cusImg,username: cusName,)));
 
           },

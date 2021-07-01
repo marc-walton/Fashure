@@ -76,7 +76,7 @@ class _PaymentSerState extends State<PaymentSer> {
     if (currentUser.country == 'India') {
       var options = {
         'key': key,
-        'amount': "${widget.Amount}00",
+        'amount': "${widget.Amount}",
         'name': currentUser.id,
         'description': 'Payment',
         'prefill': { 'email': currentUser.email},
@@ -94,7 +94,7 @@ class _PaymentSerState extends State<PaymentSer> {
     else if (currentUser.country == 'USA') {
       var options = {
         'key': key,
-        'amount': "${widget.Amount}00",
+        'amount': "${widget.Amount}",
         'name': currentUser.id,
         'currency': 'USD',
         'description': 'Payment',
@@ -113,7 +113,7 @@ class _PaymentSerState extends State<PaymentSer> {
     else if (currentUser.country == 'Europe') {
       var options = {
         'key': key,
-        'amount': "${widget.Amount}00",
+        'amount': "${widget.Amount}",
         'name': currentUser.id,
         'description': 'Payment',
         'currency': 'EUR',
@@ -133,7 +133,7 @@ class _PaymentSerState extends State<PaymentSer> {
     else if (currentUser.country == 'UK') {
       var options = {
         'key': key,
-        'amount':"${widget.Amount}00",
+        'amount':"${widget.Amount}",
         'name': currentUser.id,
         'description': 'Payment',
         'currency': 'GBP',
@@ -150,30 +150,10 @@ class _PaymentSerState extends State<PaymentSer> {
         debugPrint(e);
       }
     }
-    else if (currentUser.country == 'China') {
-      var options = {
-        'key': key,
-        'amount': "${widget.Amount}00",
-        'name': currentUser.id,
-        'description': 'Payment',
-        'currency': 'CNY',
-
-        'prefill': { 'email': currentUser.email},
-        'external': {
-          'wallets': ['paytm']
-        }
-      };
-
-      try {
-        _razorpay.open(options);
-      } catch (e) {
-        debugPrint(e);
-      }
-    }
     else{
       var options = {
         'key': key,
-        'amount': "${widget.Amount}00",
+        'amount': "${widget.Amount}",
         'name': currentUser.id,
         'currency': 'USD',
         'description': 'Payment',

@@ -10298,31 +10298,19 @@ posteurope(){
                         ),
                       ),
                       subtitle: Text(
-                        "£  $inr ",
+                        "€  $eur ",
                         style: TextStyle(
                           color: Colors.green,
                           fontWeight: FontWeight.bold,
                           fontSize: 20.0,
                         ),
                       ),
-                      trailing: !isPostOwner? FloatingActionButton(
+                      trailing: FloatingActionButton(
                         heroTag:null,
 
                         onPressed: () => Buynow(context),
                         child: Icon(Icons.add_shopping_cart,),
                         shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(16.0))),
-                      ): RaisedButton(
-                        color: kblue,
-                        child: Text('Edit Inventory',style: TextStyle(color: Colors.white),),
-                        onPressed: ()=> Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => EditShop(
-                              prodId: prodId,
-                              userId: ownerId,
-                            ),
-                          ),
-                        ),
                       ),
                     ),
                   ),
@@ -10688,7 +10676,7 @@ postuk(){
                         ),
                       ),
                       subtitle: Text(
-                        "£  $inr ",
+                        "£  $gbp ",
                         style: TextStyle(
                           color: Colors.green,
                           fontWeight: FontWeight.bold,

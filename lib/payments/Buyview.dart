@@ -399,6 +399,9 @@ else {
   }
   @override
   Widget build(BuildContext context) {
+    double vDouble = double.tryParse(widget.total) *100;
+    String vString = vDouble.toInt().toString();
+
     return Scaffold(
       appBar: AppBar(backgroundColor: kPrimaryColor,
         title: FittedBox(fit: BoxFit.contain,
@@ -419,7 +422,7 @@ else {
                 children: [
                   RaisedButton(
                     onPressed: () {
-                      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) =>BuyNow(buynowamount:widget.total,
+                      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) =>BuyNow(buynowamount:vString,
                       prodId: widget.prodId,
                           ownerId: widget.ownerId,
                           profileimg: widget.profileimg ,

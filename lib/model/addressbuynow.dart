@@ -240,7 +240,6 @@ class _AddressBuyState extends State<AddressBuy>  with AutomaticKeepAliveClientM
   }
   void initState() {
     super.initState();
-    print(widget.fourxl);
 
   }
 
@@ -285,6 +284,7 @@ backgroundColor: kPrimaryColor,
 
                 .snapshots(),
             builder: (context, snapshot) {
+
               if (!snapshot.hasData) {
                 return Text('You haven\'t saved an address' );
 

@@ -1231,6 +1231,1704 @@ HandleSubmit() async {
   }
 
 }
+
+
+createProdInFirestore(
+    {List shopmediaUrl,
+      String Category,
+      var price,
+      List selectedSizes,
+      String details,
+      String productname,
+
+      String color,
+      String composition,
+      String washandcare,
+      String sizeandfit,
+      int freesizeQuantity,
+      int xxxsQuantity,
+      int xxsQuantity,
+      int xsQuantity,
+      int sQuantity,
+      int mQuantity,
+      int lQuantity,
+      int xlQuantity,
+      int xxlQuantity,
+      int xxxlQuantity,
+      int fourxlQuantity,
+      int fivexlQuantity,
+      int sixxlQuantity,
+      int sevenxlQuantity,
+      int eightxlQuantity,
+      int Shoe1,
+      int Shoe2,
+      int Shoe3,
+      int Shoe4,
+      int Shoe5,
+      int Shoe6,
+      int Shoe7,
+      int Shoe8,
+      int Shoe9,
+      int Shoe10,
+      int Shoe11,
+      int Shoe12,
+      int Shoe13,
+      int Shoe14,
+      int Shoe15,
+      int Shoe16,
+      int Shoe17,
+      int Shoe18,
+      int Shoe19,
+      int Shoe20,
+      int Shoe21,
+      int mtoQuantity,
+      String gender,
+      var inrtousd,
+      var inrtocny,
+      var inrtogbp,
+      var inrtoeur,
+      var usdtoinr,
+      var usdtocny,
+      var usdtogbp,
+      var usdtoeur,
+      var cnytoinr,
+      var cnytousd,
+      var cnytogbp,
+      var cnytoeur,
+      var gbptoinr,
+      var gbptocny,
+      var gbptousd,
+      var gbptoeur,
+      var eurtoinr,
+      var eurtousd,
+      var eurtocny,
+      var eurtogbp,
+      bool world,
+      String     ship,
+    }) {
+  if(dropdownValue=='Men'){
+    if (currentUser.country == 'India') {
+      productsRef
+          .doc(widget.currentUser.id)
+          .collection("userProducts")
+          .doc(prodId)
+          .set({
+        "indian":indian,
+        "worldship":world,
+        "shipment": ship,
+        "prodId": prodId,
+        "ownerId": widget.currentUser.id,
+        "username": widget.currentUser.displayName,
+        "photoUrl": widget.currentUser.photoUrl,
+        "displayName": widget.currentUser.displayName,
+        "shopmediaUrl": shopmediaUrl,
+        "Category": Category,
+        // "type":type,
+        "Gender": gender,
+        "details": details,
+        "productname": productname,
+        "usd": inrtousd.toString(),
+        "cny": inrtocny.toString(),
+        "gbp": inrtogbp.toString(),
+        "eur": inrtoeur.toString(),
+        "inr": price.toString(),
+        "color": color,
+        "composition": composition,
+        "washandcare": washandcare,
+        "sizeandfit": sizeandfit,
+        "timestamp": timestamp,
+        "freesizeQuantity": freesizeQuantity,
+        "xxxsQuantity": xxxsQuantity,
+        "xxsQuantity": xxsQuantity,
+        "xsQuantity": xsQuantity,
+        "sQuantity": sQuantity,
+        "mQuantity": mQuantity,
+        "lQuantity": lQuantity,
+        "xlQuantity": xlQuantity,
+        "xxlQuantity": xxlQuantity,
+        "xxxlQuantity": xxxlQuantity,
+        "4xlQuantity": fourxlQuantity,
+        "5xlQuantity": fivexlQuantity,
+        "6xlQuantity": sixxlQuantity,
+        "7xlQuantity": sevenxlQuantity,
+        "8xlQuantity": eightxlQuantity,
+        "Shoe1":Shoe1,
+        "Shoe2":Shoe2,
+        "Shoe3":Shoe3,
+        "Shoe4":Shoe4,
+        "Shoe5":Shoe5,
+        "Shoe6":Shoe6,
+        "Shoe7":Shoe7,
+        "Shoe8":Shoe8,
+        "Shoe9":Shoe9,
+        "Shoe10":Shoe10,
+        "Shoe11":Shoe11,
+        "Shoe12":Shoe12,
+        "Shoe13":Shoe13,
+        "Shoe14":Shoe14,
+        "Shoe15":Shoe15,
+        "Shoe16":Shoe16,
+        "Shoe17":Shoe17,
+        "Shoe18":Shoe18,
+        "Shoe19":Shoe19,
+        "Shoe20":Shoe20,
+        "Shoe21":Shoe21,
+        "mtoQuantity": mtoQuantity,
+        // "selectedSizes": selectedSizes,
+        "likes": {},
+      });
+
+
+
+      setState(() {
+        file = null;
+        // isUploading = false;
+      });
+    }
+    else if (currentUser.country == 'Europe'){
+      productsRef
+          .doc(widget.currentUser.id)
+          .collection("userProducts")
+          .doc(prodId)
+          .set({          "indian":indian,
+        "worldship":world,
+        "shipment": ship,
+        "prodId": prodId,
+        "ownerId": widget.currentUser.id,
+        "username": widget.currentUser.displayName,
+        "photoUrl": widget.currentUser.photoUrl,
+        "displayName": widget.currentUser.displayName,
+        "shopmediaUrl": shopmediaUrl,
+        "Category": Category,
+        // "type":type,
+        "Gender": gender,
+        "details": details,
+        "productname": productname,
+        "usd": eurtousd.toString(),
+        "cny": eurtocny.toString(),
+        "gbp": eurtogbp.toString(),
+        "eur": price.toString(),
+        "inr": eurtoinr.toString(),
+        "color": color,
+        "composition": composition,
+        "washandcare": washandcare,
+        "sizeandfit": sizeandfit,
+        "timestamp": timestamp,
+        "freesizeQuantity": freesizeQuantity,
+        "xxxsQuantity": xxxsQuantity,
+        "xxsQuantity": xxsQuantity,
+        "xsQuantity": xsQuantity,
+        "sQuantity": sQuantity,
+        "mQuantity": mQuantity,
+        "lQuantity": lQuantity,
+        "xlQuantity": xlQuantity,
+        "xxlQuantity": xxlQuantity,
+        "xxxlQuantity": xxxlQuantity,
+        "4xlQuantity": fourxlQuantity,
+        "5xlQuantity": fivexlQuantity,
+        "6xlQuantity": sixxlQuantity,
+        "7xlQuantity": sevenxlQuantity,
+        "8xlQuantity": eightxlQuantity,
+        "Shoe1":Shoe1,
+        "Shoe2":Shoe2,
+        "Shoe3":Shoe3,
+        "Shoe4":Shoe4,
+        "Shoe5":Shoe5,
+        "Shoe6":Shoe6,
+        "Shoe7":Shoe7,
+        "Shoe8":Shoe8,
+        "Shoe9":Shoe9,
+        "Shoe10":Shoe10,
+        "Shoe11":Shoe11,
+        "Shoe12":Shoe12,
+        "Shoe13":Shoe13,
+        "Shoe14":Shoe14,
+        "Shoe15":Shoe15,
+        "Shoe16":Shoe16,
+        "Shoe17":Shoe17,
+        "Shoe18":Shoe18,
+        "Shoe19":Shoe19,
+        "Shoe20":Shoe20,
+        "Shoe21":Shoe21,
+        "mtoQuantity": mtoQuantity,
+        "likes": {},
+      });
+
+
+
+      setState(() {
+        file = null;
+        isUploading = false;
+      });
+    }
+    else if (currentUser.country == 'UK') {
+      productsRef
+          .doc(widget.currentUser.id)
+          .collection("userProducts")
+          .doc(prodId)
+          .set({          "indian":indian,
+        "worldship":world,
+        "shipment": ship,
+        "prodId": prodId,
+        "ownerId": widget.currentUser.id,
+        "username": widget.currentUser.displayName,
+        "photoUrl": widget.currentUser.photoUrl,
+        "displayName": widget.currentUser.displayName,
+        "shopmediaUrl": shopmediaUrl,
+        "Category": Category,
+        // "type":type,
+        "Gender": gender,
+        "details": details,
+        "productname": productname,
+        "usd": gbptousd.toString(),
+        "cny": gbptocny.toString(),
+        "gbp": price.toString(),
+        "eur": gbptoeur.toString(),
+        "inr": gbptoinr.toString(),
+        "color": color,
+        "composition": composition,
+        "washandcare": washandcare,
+        "sizeandfit": sizeandfit,
+        "timestamp": timestamp,
+        "freesizeQuantity": freesizeQuantity,
+        "xxxsQuantity": xxxsQuantity,
+        "xxsQuantity": xxsQuantity,
+        "xsQuantity": xsQuantity,
+        "sQuantity": sQuantity,
+        "mQuantity": mQuantity,
+        "lQuantity": lQuantity,
+        "xlQuantity": xlQuantity,
+        "xxlQuantity": xxlQuantity,
+        "xxxlQuantity": xxxlQuantity,
+        "4xlQuantity": fourxlQuantity,
+        "5xlQuantity": fivexlQuantity,
+        "6xlQuantity": sixxlQuantity,
+        "7xlQuantity": sevenxlQuantity,
+        "8xlQuantity": eightxlQuantity,
+        "Shoe1":Shoe1,
+        "Shoe2":Shoe2,
+        "Shoe3":Shoe3,
+        "Shoe4":Shoe4,
+        "Shoe5":Shoe5,
+        "Shoe6":Shoe6,
+        "Shoe7":Shoe7,
+        "Shoe8":Shoe8,
+        "Shoe9":Shoe9,
+        "Shoe10":Shoe10,
+        "Shoe11":Shoe11,
+        "Shoe12":Shoe12,
+        "Shoe13":Shoe13,
+        "Shoe14":Shoe14,
+        "Shoe15":Shoe15,
+        "Shoe16":Shoe16,
+        "Shoe17":Shoe17,
+        "Shoe18":Shoe18,
+        "Shoe19":Shoe19,
+        "Shoe20":Shoe20,
+        "Shoe21":Shoe21,
+        "mtoQuantity": mtoQuantity,
+        "likes": {},
+      });
+
+      setState(() {
+        file = null;
+        isUploading = false;
+      });
+    }
+    else if (currentUser.country == 'USA') {
+      productsRef
+          .doc(widget.currentUser.id)
+          .collection("userProducts")
+          .doc(prodId)
+          .set({          "indian":indian,
+        "worldship":world,
+        "shipment": ship,
+        "prodId": prodId,
+        "ownerId": widget.currentUser.id,
+        "username": widget.currentUser.displayName,
+        "photoUrl": widget.currentUser.photoUrl,
+        "displayName": widget.currentUser.displayName,
+        "shopmediaUrl": shopmediaUrl,
+        "Category": Category,
+        // "type":type,
+        "Gender": gender,
+        "details": details,
+        "productname": productname,
+        "cny": usdtocny.toString(),
+        "gbp": usdtogbp.toString(),
+        "eur": usdtoeur.toString(),
+        "inr": usdtoinr.toString(),
+        "usd" :price.toString(),
+        "color": color,
+        "composition": composition,
+        "washandcare": washandcare,
+        "sizeandfit": sizeandfit,
+        "timestamp": timestamp,
+        "freesizeQuantity": freesizeQuantity,
+        "xxxsQuantity": xxxsQuantity,
+        "xxsQuantity": xxsQuantity,
+        "xsQuantity": xsQuantity,
+        "sQuantity": sQuantity,
+        "mQuantity": mQuantity,
+        "lQuantity": lQuantity,
+        "xlQuantity": xlQuantity,
+        "xxlQuantity": xxlQuantity,
+        "xxxlQuantity": xxxlQuantity,
+        "4xlQuantity": fourxlQuantity,
+        "5xlQuantity": fivexlQuantity,
+        "6xlQuantity": sixxlQuantity,
+        "7xlQuantity": sevenxlQuantity,
+        "8xlQuantity": eightxlQuantity,
+        "Shoe1":Shoe1,
+        "Shoe2":Shoe2,
+        "Shoe3":Shoe3,
+        "Shoe4":Shoe4,
+        "Shoe5":Shoe5,
+        "Shoe6":Shoe6,
+        "Shoe7":Shoe7,
+        "Shoe8":Shoe8,
+        "Shoe9":Shoe9,
+        "Shoe10":Shoe10,
+        "Shoe11":Shoe11,
+        "Shoe12":Shoe12,
+        "Shoe13":Shoe13,
+        "Shoe14":Shoe14,
+        "Shoe15":Shoe15,
+        "Shoe16":Shoe16,
+        "Shoe17":Shoe17,
+        "Shoe18":Shoe18,
+        "Shoe19":Shoe19,
+        "Shoe20":Shoe20,
+        "Shoe21":Shoe21,
+        "mtoQuantity": mtoQuantity,
+        "likes": {},
+      });
+
+
+      setState(() {
+        file = null;
+        isUploading = false;
+      });
+    }
+    else {
+      productsRef
+          .doc(widget.currentUser.id)
+          .collection("userProducts")
+          .doc(prodId)
+          .set({          "indian":indian,
+        "worldship":world,
+        "shipment": ship,
+        "prodId": prodId,
+        "ownerId": widget.currentUser.id,
+        "username": widget.currentUser.displayName,
+        "photoUrl": widget.currentUser.photoUrl,
+        "displayName": widget.currentUser.displayName,
+        "shopmediaUrl": shopmediaUrl,
+        "Category": Category,
+        // "type":type,
+        "Gender": gender,
+        "details": details,
+        "productname": productname,
+        "cny": usdtocny.toString(),
+        "gbp": usdtogbp.toString(),
+        "eur": usdtoeur.toString(),
+        "inr": usdtoinr.toString(),
+        "usd" :price.toString(),
+        "color": color,
+        "composition": composition,
+        "washandcare": washandcare,
+        "sizeandfit": sizeandfit,
+        "timestamp": timestamp,
+        "freesizeQuantity": freesizeQuantity,
+        "xxxsQuantity": xxxsQuantity,
+        "xxsQuantity": xxsQuantity,
+        "xsQuantity": xsQuantity,
+        "sQuantity": sQuantity,
+        "mQuantity": mQuantity,
+        "lQuantity": lQuantity,
+        "xlQuantity": xlQuantity,
+        "xxlQuantity": xxlQuantity,
+        "xxxlQuantity": xxxlQuantity,
+        "4xlQuantity": fourxlQuantity,
+        "5xlQuantity": fivexlQuantity,
+        "6xlQuantity": sixxlQuantity,
+        "7xlQuantity": sevenxlQuantity,
+        "8xlQuantity": eightxlQuantity,
+        "Shoe1":Shoe1,
+        "Shoe2":Shoe2,
+        "Shoe3":Shoe3,
+        "Shoe4":Shoe4,
+        "Shoe5":Shoe5,
+        "Shoe6":Shoe6,
+        "Shoe7":Shoe7,
+        "Shoe8":Shoe8,
+        "Shoe9":Shoe9,
+        "Shoe10":Shoe10,
+        "Shoe11":Shoe11,
+        "Shoe12":Shoe12,
+        "Shoe13":Shoe13,
+        "Shoe14":Shoe14,
+        "Shoe15":Shoe15,
+        "Shoe16":Shoe16,
+        "Shoe17":Shoe17,
+        "Shoe18":Shoe18,
+        "Shoe19":Shoe19,
+        "Shoe20":Shoe20,
+        "Shoe21":Shoe21,
+        "mtoQuantity": mtoQuantity,
+        "likes": {},
+      });
+
+
+      setState(() {
+        file = null;
+        isUploading = false;
+      });
+    }
+  }
+  else if(dropdownValue=='Women') {
+    if (currentUser.country == 'India') {
+      productsRef
+          .doc(widget.currentUser.id)
+          .collection("userProducts")
+          .doc(prodId)
+          .set({          "indian":indian,
+        "worldship":world,
+        "shipment": ship,
+        "prodId": prodId,
+        "ownerId": widget.currentUser.id,
+        "username": widget.currentUser.displayName,
+        "photoUrl": widget.currentUser.photoUrl,
+        "displayName": widget.currentUser.displayName,
+        "shopmediaUrl": shopmediaUrl,
+        "Category": Category,
+        // "type":type,
+        "Gender": gender,
+        "details": details,
+        "productname": productname,
+        "usd": inrtousd.toString(),
+        "cny": inrtocny.toString(),
+        "gbp": inrtogbp.toString(),
+        "eur": inrtoeur.toString(),
+        "inr": price.toString(),
+        "color": color,
+        "composition": composition,
+        "washandcare": washandcare,
+        "sizeandfit": sizeandfit,
+        "timestamp": timestamp,
+        "freesizeQuantity": freesizeQuantity,
+        "xxxsQuantity": xxxsQuantity,
+        "xxsQuantity": xxsQuantity,
+        "xsQuantity": xsQuantity,
+        "sQuantity": sQuantity,
+        "mQuantity": mQuantity,
+        "lQuantity": lQuantity,
+        "xlQuantity": xlQuantity,
+        "xxlQuantity": xxlQuantity,
+        "xxxlQuantity": xxxlQuantity,
+        "4xlQuantity": fourxlQuantity,
+        "5xlQuantity": fivexlQuantity,
+        "6xlQuantity": sixxlQuantity,
+        "7xlQuantity": sevenxlQuantity,
+        "8xlQuantity": eightxlQuantity,
+        "Shoe1":Shoe1,
+        "Shoe2":Shoe2,
+        "Shoe3":Shoe3,
+        "Shoe4":Shoe4,
+        "Shoe5":Shoe5,
+        "Shoe6":Shoe6,
+        "Shoe7":Shoe7,
+        "Shoe8":Shoe8,
+        "Shoe9":Shoe9,
+        "Shoe10":Shoe10,
+        "Shoe11":Shoe11,
+        "Shoe12":Shoe12,
+        "Shoe13":Shoe13,
+        "Shoe14":Shoe14,
+        "Shoe15":Shoe15,
+        "Shoe16":Shoe16,
+
+        "mtoQuantity": mtoQuantity,
+        "likes": {},
+      });
+
+
+      setState(() {
+        file = null;
+        isUploading = false;
+      });
+    }
+    else if (currentUser.country == 'Europe'){
+      productsRef
+          .doc(widget.currentUser.id)
+          .collection("userProducts")
+          .doc(prodId)
+          .set({          "indian":indian,
+        "worldship":world,
+        "shipment": ship,
+        "prodId": prodId,
+        "ownerId": widget.currentUser.id,
+        "username": widget.currentUser.displayName,
+        "photoUrl": widget.currentUser.photoUrl,
+        "displayName": widget.currentUser.displayName,
+        "shopmediaUrl": shopmediaUrl,
+        "Category": Category,
+        // "type":type,
+        "Gender": gender,
+        "details": details,
+        "productname": productname,
+        "usd": eurtousd.toString(),
+        "cny": eurtocny.toString(),
+        "gbp": eurtogbp.toString(),
+        "eur": price.toString(),
+        "inr": eurtoinr.toString(),
+        "color": color,
+        "composition": composition,
+        "washandcare": washandcare,
+        "sizeandfit": sizeandfit,
+        "timestamp": timestamp,
+        "freesizeQuantity": freesizeQuantity,
+        "xxxsQuantity": xxxsQuantity,
+        "xxsQuantity": xxsQuantity,
+        "xsQuantity": xsQuantity,
+        "sQuantity": sQuantity,
+        "mQuantity": mQuantity,
+        "lQuantity": lQuantity,
+        "xlQuantity": xlQuantity,
+        "xxlQuantity": xxlQuantity,
+        "xxxlQuantity": xxxlQuantity,
+        "4xlQuantity": fourxlQuantity,
+        "5xlQuantity": fivexlQuantity,
+        "6xlQuantity": sixxlQuantity,
+        "7xlQuantity": sevenxlQuantity,
+        "8xlQuantity": eightxlQuantity,
+        "Shoe1":Shoe1,
+        "Shoe2":Shoe2,
+        "Shoe3":Shoe3,
+        "Shoe4":Shoe4,
+        "Shoe5":Shoe5,
+        "Shoe6":Shoe6,
+        "Shoe7":Shoe7,
+        "Shoe8":Shoe8,
+        "Shoe9":Shoe9,
+        "Shoe10":Shoe10,
+        "Shoe11":Shoe11,
+        "Shoe12":Shoe12,
+        "Shoe13":Shoe13,
+        "Shoe14":Shoe14,
+        "Shoe15":Shoe15,
+        "Shoe16":Shoe16,
+
+        "mtoQuantity": mtoQuantity,
+        "likes": {},
+      });
+
+
+      setState(() {
+        file = null;
+        isUploading = false;
+      });
+    }
+    else if (currentUser.country == 'UK') {
+      productsRef
+          .doc(widget.currentUser.id)
+          .collection("userProducts")
+          .doc(prodId)
+          .set({          "indian":indian,
+        "worldship":world,
+        "shipment": ship,
+        "prodId": prodId,
+        "ownerId": widget.currentUser.id,
+        "username": widget.currentUser.displayName,
+        "photoUrl": widget.currentUser.photoUrl,
+        "displayName": widget.currentUser.displayName,
+        "shopmediaUrl": shopmediaUrl,
+        "Category": Category,
+        // "type":type,
+        "Gender": gender,
+        "details": details,
+        "productname": productname,
+        "usd": gbptousd.toString(),
+        "cny": gbptocny.toString(),
+        "gbp": price.toString(),
+        "eur": gbptoeur.toString(),
+        "inr": gbptoinr.toString(),
+        "color": color,
+        "composition": composition,
+        "washandcare": washandcare,
+        "sizeandfit": sizeandfit,
+        "timestamp": timestamp,
+        "freesizeQuantity": freesizeQuantity,
+        "xxxsQuantity": xxxsQuantity,
+        "xxsQuantity": xxsQuantity,
+        "xsQuantity": xsQuantity,
+        "sQuantity": sQuantity,
+        "mQuantity": mQuantity,
+        "lQuantity": lQuantity,
+        "xlQuantity": xlQuantity,
+        "xxlQuantity": xxlQuantity,
+        "xxxlQuantity": xxxlQuantity,
+        "4xlQuantity": fourxlQuantity,
+        "5xlQuantity": fivexlQuantity,
+        "6xlQuantity": sixxlQuantity,
+        "7xlQuantity": sevenxlQuantity,
+        "8xlQuantity": eightxlQuantity,
+        "Shoe1":Shoe1,
+        "Shoe2":Shoe2,
+        "Shoe3":Shoe3,
+        "Shoe4":Shoe4,
+        "Shoe5":Shoe5,
+        "Shoe6":Shoe6,
+        "Shoe7":Shoe7,
+        "Shoe8":Shoe8,
+        "Shoe9":Shoe9,
+        "Shoe10":Shoe10,
+        "Shoe11":Shoe11,
+        "Shoe12":Shoe12,
+        "Shoe13":Shoe13,
+        "Shoe14":Shoe14,
+        "Shoe15":Shoe15,
+        "Shoe16":Shoe16,
+
+        "mtoQuantity": mtoQuantity,
+        "likes": {},
+      });
+
+      setState(() {
+        file = null;
+        isUploading = false;
+      });
+    }
+    else if (currentUser.country == 'USA') {
+      productsRef
+          .doc(widget.currentUser.id)
+          .collection("userProducts")
+          .doc(prodId)
+          .set({          "indian":indian,
+        "worldship":world,
+        "shipment": ship,
+        "prodId": prodId,
+        "ownerId": widget.currentUser.id,
+        "username": widget.currentUser.displayName,
+        "photoUrl": widget.currentUser.photoUrl,
+        "displayName": widget.currentUser.displayName,
+        "shopmediaUrl": shopmediaUrl,
+        "Category": Category,
+        // "type":type,
+        "Gender": gender,
+        "details": details,
+        "productname": productname,
+        "usd": price.toString(),
+        "cny": usdtocny.toString(),
+        "gbp": usdtogbp.toString(),
+        "eur": usdtoeur.toString(),
+        "inr": usdtoinr.toString(),
+        "color": color,
+        "composition": composition,
+        "washandcare": washandcare,
+        "sizeandfit": sizeandfit,
+        "timestamp": timestamp,
+        "freesizeQuantity": freesizeQuantity,
+        "xxxsQuantity": xxxsQuantity,
+        "xxsQuantity": xxsQuantity,
+        "xsQuantity": xsQuantity,
+        "sQuantity": sQuantity,
+        "mQuantity": mQuantity,
+        "lQuantity": lQuantity,
+        "xlQuantity": xlQuantity,
+        "xxlQuantity": xxlQuantity,
+        "xxxlQuantity": xxxlQuantity,
+        "4xlQuantity": fourxlQuantity,
+        "5xlQuantity": fivexlQuantity,
+        "6xlQuantity": sixxlQuantity,
+        "7xlQuantity": sevenxlQuantity,
+        "8xlQuantity": eightxlQuantity,
+        "Shoe1":Shoe1,
+        "Shoe2":Shoe2,
+        "Shoe3":Shoe3,
+        "Shoe4":Shoe4,
+        "Shoe5":Shoe5,
+        "Shoe6":Shoe6,
+        "Shoe7":Shoe7,
+        "Shoe8":Shoe8,
+        "Shoe9":Shoe9,
+        "Shoe10":Shoe10,
+        "Shoe11":Shoe11,
+        "Shoe12":Shoe12,
+        "Shoe13":Shoe13,
+        "Shoe14":Shoe14,
+        "Shoe15":Shoe15,
+        "Shoe16":Shoe16,
+
+        "mtoQuantity": mtoQuantity,
+        "likes": {},
+      });
+
+
+      setState(() {
+        file = null;
+        isUploading = false;
+      });
+    }
+    else {
+      productsRef
+          .doc(widget.currentUser.id)
+          .collection("userProducts")
+          .doc(prodId)
+          .set({          "indian":indian,
+        "worldship":world,
+        "shipment": ship,
+        "prodId": prodId,
+        "ownerId": widget.currentUser.id,
+        "username": widget.currentUser.displayName,
+        "photoUrl": widget.currentUser.photoUrl,
+        "displayName": widget.currentUser.displayName,
+        "shopmediaUrl": shopmediaUrl,
+        "Category": Category,
+        // "type":type,
+        "Gender": gender,
+        "details": details,
+        "productname": productname,
+        "usd": price.toString(),
+        "cny": usdtocny.toString(),
+        "gbp": usdtogbp.toString(),
+        "eur": usdtoeur.toString(),
+        "inr": usdtoinr.toString(),
+        "color": color,
+        "composition": composition,
+        "washandcare": washandcare,
+        "sizeandfit": sizeandfit,
+        "timestamp": timestamp,
+        "freesizeQuantity": freesizeQuantity,
+        "xxxsQuantity": xxxsQuantity,
+        "xxsQuantity": xxsQuantity,
+        "xsQuantity": xsQuantity,
+        "sQuantity": sQuantity,
+        "mQuantity": mQuantity,
+        "lQuantity": lQuantity,
+        "xlQuantity": xlQuantity,
+        "xxlQuantity": xxlQuantity,
+        "xxxlQuantity": xxxlQuantity,
+        "4xlQuantity": fourxlQuantity,
+        "5xlQuantity": fivexlQuantity,
+        "6xlQuantity": sixxlQuantity,
+        "7xlQuantity": sevenxlQuantity,
+        "8xlQuantity": eightxlQuantity,
+        "Shoe1":Shoe1,
+        "Shoe2":Shoe2,
+        "Shoe3":Shoe3,
+        "Shoe4":Shoe4,
+        "Shoe5":Shoe5,
+        "Shoe6":Shoe6,
+        "Shoe7":Shoe7,
+        "Shoe8":Shoe8,
+        "Shoe9":Shoe9,
+        "Shoe10":Shoe10,
+        "Shoe11":Shoe11,
+        "Shoe12":Shoe12,
+        "Shoe13":Shoe13,
+        "Shoe14":Shoe14,
+        "Shoe15":Shoe15,
+        "Shoe16":Shoe16,
+
+        "mtoQuantity": mtoQuantity,
+        "likes": {},
+      });
+
+
+      setState(() {
+        file = null;
+        isUploading = false;
+      });
+    }
+  }
+  else if(dropdownValue=='Baby-Boys'||dropdownValue=='Baby-Girls') {
+    if (currentUser.country == 'India') {
+      productsRef
+          .doc(widget.currentUser.id)
+          .collection("userProducts")
+          .doc(prodId)
+          .set({          "indian":indian,
+        "worldship":world,
+        "shipment": ship,
+        "prodId": prodId,
+        "ownerId": widget.currentUser.id,
+        "username": widget.currentUser.displayName,
+        "photoUrl": widget.currentUser.photoUrl,
+        "displayName": widget.currentUser.displayName,
+        "shopmediaUrl": shopmediaUrl,
+        "Category": Category,
+        // "type":type,
+        "Gender": gender,
+        "details": details,
+        "productname": productname,
+        "usd": inrtousd.toString(),
+        "cny": inrtocny.toString(),
+        "gbp": inrtogbp.toString(),
+        "eur": inrtoeur.toString(),
+        "inr": price.toString(),
+        "color": color,
+        "composition": composition,
+        "washandcare": washandcare,
+        "sizeandfit": sizeandfit,
+        "timestamp": timestamp,
+        "freesizeQuantity": freesizeQuantity,
+        "xxxsQuantity": xxxsQuantity,
+        "xxsQuantity": xxsQuantity,
+        "xsQuantity": xsQuantity,
+        "sQuantity": sQuantity,
+        "mQuantity": mQuantity,
+        "lQuantity": lQuantity,
+
+
+        "Shoe1":Shoe1,
+        "Shoe2":Shoe2,
+        "Shoe3":Shoe3,
+        "Shoe4":Shoe4,
+        "Shoe5":Shoe5,
+        "Shoe6":Shoe6,
+        "Shoe7":Shoe7,
+
+        "mtoQuantity": mtoQuantity,
+        "likes": {},
+      });
+
+
+
+      setState(() {
+        file = null;
+        isUploading = false;
+      });
+    }
+    else if (currentUser.country == 'Europe') {
+      productsRef
+          .doc(widget.currentUser.id)
+          .collection("userProducts")
+          .doc(prodId)
+          .set({          "indian":indian,
+        "worldship":world,
+        "shipment": ship,
+        "prodId": prodId,
+        "ownerId": widget.currentUser.id,
+        "username": widget.currentUser.displayName,
+        "photoUrl": widget.currentUser.photoUrl,
+        "displayName": widget.currentUser.displayName,
+        "shopmediaUrl": shopmediaUrl,
+        "Category": Category,
+        // "type":type,
+        "Gender": gender,
+        "details": details,
+        "productname": productname,
+        "usd": eurtousd.toString(),
+        "cny": eurtocny.toString(),
+        "gbp": eurtogbp.toString(),
+        "eur": price.toString(),
+        "inr": eurtoinr.toString(),
+        "color": color,
+        "composition": composition,
+        "washandcare": washandcare,
+        "sizeandfit": sizeandfit,
+        "timestamp": timestamp,
+        "freesizeQuantity": freesizeQuantity,
+        "xxxsQuantity": xxxsQuantity,
+        "xxsQuantity": xxsQuantity,
+        "xsQuantity": xsQuantity,
+        "sQuantity": sQuantity,
+        "mQuantity": mQuantity,
+        "lQuantity": lQuantity,
+
+
+        "Shoe1":Shoe1,
+        "Shoe2":Shoe2,
+        "Shoe3":Shoe3,
+        "Shoe4":Shoe4,
+        "Shoe5":Shoe5,
+        "Shoe6":Shoe6,
+        "Shoe7":Shoe7,
+
+        "mtoQuantity": mtoQuantity,
+        "likes": {},
+      });
+
+      setState(() {
+        file = null;
+        isUploading = false;
+      });
+    }
+    else if (currentUser.country == 'UK') {
+      productsRef
+          .doc(widget.currentUser.id)
+          .collection("userProducts")
+          .doc(prodId)
+          .set({          "indian":indian,
+        "worldship":world,
+        "shipment": ship,
+        "prodId": prodId,
+        "ownerId": widget.currentUser.id,
+        "username": widget.currentUser.displayName,
+        "photoUrl": widget.currentUser.photoUrl,
+        "displayName": widget.currentUser.displayName,
+        "shopmediaUrl": shopmediaUrl,
+        "Category": Category,
+        // "type":type,
+        "Gender": gender,
+        "details": details,
+        "productname": productname,
+        "usd": gbptousd.toString(),
+        "cny": gbptocny.toString(),
+        "gbp": price.toString(),
+        "eur": gbptoeur.toString(),
+        "inr": gbptoinr.toString(),
+        "color": color,
+        "composition": composition,
+        "washandcare": washandcare,
+        "sizeandfit": sizeandfit,
+        "timestamp": timestamp,
+        "freesizeQuantity": freesizeQuantity,
+        "xxxsQuantity": xxxsQuantity,
+        "xxsQuantity": xxsQuantity,
+        "xsQuantity": xsQuantity,
+        "sQuantity": sQuantity,
+        "mQuantity": mQuantity,
+        "lQuantity": lQuantity,
+
+
+        "Shoe1":Shoe1,
+        "Shoe2":Shoe2,
+        "Shoe3":Shoe3,
+        "Shoe4":Shoe4,
+        "Shoe5":Shoe5,
+        "Shoe6":Shoe6,
+        "Shoe7":Shoe7,
+
+        "mtoQuantity": mtoQuantity,
+        "likes": {},
+      });
+
+
+      setState(() {
+        file = null;
+        isUploading = false;
+      });
+    }
+    else if (currentUser.country == 'USA') {
+      productsRef
+          .doc(widget.currentUser.id)
+          .collection("userProducts")
+          .doc(prodId)
+          .set({          "indian":indian,
+        "worldship":world,
+        "shipment": ship,
+        "prodId": prodId,
+        "ownerId": widget.currentUser.id,
+        "username": widget.currentUser.displayName,
+        "photoUrl": widget.currentUser.photoUrl,
+        "displayName": widget.currentUser.displayName,
+        "shopmediaUrl": shopmediaUrl,
+        "Category": Category,
+        // "type":type,
+        "Gender": gender,
+        "details": details,
+        "productname": productname,
+        "usd": price.toString(),
+        "cny": usdtocny.toString(),
+        "gbp": usdtogbp.toString(),
+        "eur": usdtoeur.toString(),
+        "inr": usdtoinr.toString(),
+        "color": color,
+        "composition": composition,
+        "washandcare": washandcare,
+        "sizeandfit": sizeandfit,
+        "timestamp": timestamp,
+        "freesizeQuantity": freesizeQuantity,
+        "xxxsQuantity": xxxsQuantity,
+        "xxsQuantity": xxsQuantity,
+        "xsQuantity": xsQuantity,
+        "sQuantity": sQuantity,
+        "mQuantity": mQuantity,
+        "lQuantity": lQuantity,
+
+
+        "Shoe1":Shoe1,
+        "Shoe2":Shoe2,
+        "Shoe3":Shoe3,
+        "Shoe4":Shoe4,
+        "Shoe5":Shoe5,
+        "Shoe6":Shoe6,
+        "Shoe7":Shoe7,
+
+        "mtoQuantity": mtoQuantity,
+        "likes": {},
+      });
+
+
+
+      setState(() {
+        file = null;
+        isUploading = false;
+      });
+    }
+    else {
+      productsRef
+          .doc(widget.currentUser.id)
+          .collection("userProducts")
+          .doc(prodId)
+          .set({          "indian":indian,
+        "worldship":world,
+        "shipment": ship,
+        "prodId": prodId,
+        "ownerId": widget.currentUser.id,
+        "username": widget.currentUser.displayName,
+        "photoUrl": widget.currentUser.photoUrl,
+        "displayName": widget.currentUser.displayName,
+        "shopmediaUrl": shopmediaUrl,
+        "Category": Category,
+        // "type":type,
+        "Gender": gender,
+        "details": details,
+        "productname": productname,
+        "usd": price.toString(),
+        "cny": usdtocny.toString(),
+        "gbp": usdtogbp.toString(),
+        "eur": usdtoeur.toString(),
+        "inr": usdtoinr.toString(),
+        "color": color,
+        "composition": composition,
+        "washandcare": washandcare,
+        "sizeandfit": sizeandfit,
+        "timestamp": timestamp,
+        "freesizeQuantity": freesizeQuantity,
+        "xxxsQuantity": xxxsQuantity,
+        "xxsQuantity": xxsQuantity,
+        "xsQuantity": xsQuantity,
+        "sQuantity": sQuantity,
+        "mQuantity": mQuantity,
+        "lQuantity": lQuantity,
+
+
+        "Shoe1":Shoe1,
+        "Shoe2":Shoe2,
+        "Shoe3":Shoe3,
+        "Shoe4":Shoe4,
+        "Shoe5":Shoe5,
+        "Shoe6":Shoe6,
+        "Shoe7":Shoe7,
+
+        "mtoQuantity": mtoQuantity,
+        "likes": {},
+      });
+
+
+
+      setState(() {
+        file = null;
+        isUploading = false;
+      });
+    }
+  }
+  else if(dropdownValue=='Kids-Boys'|| dropdownValue=='Kids-Girls') {
+    if (currentUser.country == 'India') {
+      productsRef
+          .doc(widget.currentUser.id)
+          .collection("userProducts")
+          .doc(prodId)
+          .set({
+        "indian":indian,
+        "worldship":world,
+        "shipment": ship,
+        "prodId": prodId,
+        "ownerId": widget.currentUser.id,
+        "username": widget.currentUser.displayName,
+        "photoUrl": widget.currentUser.photoUrl,
+        "displayName": widget.currentUser.displayName,
+        "shopmediaUrl": shopmediaUrl,
+        "Category": Category,
+        // "type":type,
+        "Gender": gender,
+        "details": details,
+        "productname": productname,
+        "usd": inrtousd.toString(),
+        "cny": inrtocny.toString(),
+        "gbp": inrtogbp.toString(),
+        "eur": inrtoeur.toString(),
+        "inr": price.toString(),
+        "color": color,
+        "composition": composition,
+        "washandcare": washandcare,
+        "sizeandfit": sizeandfit,
+        "timestamp": timestamp,
+        "freesizeQuantity": freesizeQuantity,
+        "xxxsQuantity": xxxsQuantity,
+        "xxsQuantity": xxsQuantity,
+        "xsQuantity": xsQuantity,
+        "sQuantity": sQuantity,
+        "mQuantity": mQuantity,
+        "lQuantity": lQuantity,
+        "xlQuantity": xlQuantity,
+        "xxlQuantity": xxlQuantity,
+        "xxxlQuantity": xxxlQuantity,
+        "4xlQuantity": fourxlQuantity,
+
+        "Shoe1":Shoe1,
+        "Shoe2":Shoe2,
+        "Shoe3":Shoe3,
+        "Shoe4":Shoe4,
+        "Shoe5":Shoe5,
+        "Shoe6":Shoe6,
+        "Shoe7":Shoe7,
+        "Shoe8":Shoe8,
+        "Shoe9":Shoe9,
+        "Shoe10":Shoe10,
+        "Shoe11":Shoe11,
+        "Shoe12":Shoe12,
+        "Shoe13":Shoe13,
+        "Shoe14":Shoe14,
+
+        "mtoQuantity": mtoQuantity,
+        "likes": {},
+      });
+
+
+      setState(() {
+        file = null;
+        isUploading = false;
+      });
+    }
+    else if (currentUser.country == 'Europe') {
+      productsRef
+          .doc(widget.currentUser.id)
+          .collection("userProducts")
+          .doc(prodId)
+          .set({          "indian":indian,
+        "worldship":world,
+        "shipment": ship,
+        "prodId": prodId,
+        "ownerId": widget.currentUser.id,
+        "username": widget.currentUser.displayName,
+        "photoUrl": widget.currentUser.photoUrl,
+        "displayName": widget.currentUser.displayName,
+        "shopmediaUrl": shopmediaUrl,
+        "Category": Category,
+        // "type":type,
+        "Gender": gender,
+        "details": details,
+        "productname": productname,
+        "usd": eurtousd.toString(),
+        "cny": eurtocny.toString(),
+        "gbp": eurtogbp.toString(),
+        "eur": price.toString(),
+        "inr": eurtoinr.toString(),
+        "color": color,
+        "composition": composition,
+        "washandcare": washandcare,
+        "sizeandfit": sizeandfit,
+        "timestamp": timestamp,
+        "freesizeQuantity": freesizeQuantity,
+        "xxxsQuantity": xxxsQuantity,
+        "xxsQuantity": xxsQuantity,
+        "xsQuantity": xsQuantity,
+        "sQuantity": sQuantity,
+        "mQuantity": mQuantity,
+        "lQuantity": lQuantity,
+        "xlQuantity": xlQuantity,
+        "xxlQuantity": xxlQuantity,
+        "xxxlQuantity": xxxlQuantity,
+        "4xlQuantity": fourxlQuantity,
+
+        "Shoe1":Shoe1,
+        "Shoe2":Shoe2,
+        "Shoe3":Shoe3,
+        "Shoe4":Shoe4,
+        "Shoe5":Shoe5,
+        "Shoe6":Shoe6,
+        "Shoe7":Shoe7,
+        "Shoe8":Shoe8,
+        "Shoe9":Shoe9,
+        "Shoe10":Shoe10,
+        "Shoe11":Shoe11,
+        "Shoe12":Shoe12,
+        "Shoe13":Shoe13,
+        "Shoe14":Shoe14,
+
+        "mtoQuantity": mtoQuantity,
+        "likes": {},
+      });
+
+
+      setState(() {
+        file = null;
+        isUploading = false;
+      });
+    }
+    else if (currentUser.country == 'UK') {
+      productsRef
+          .doc(widget.currentUser.id)
+          .collection("userProducts")
+          .doc(prodId)
+          .set({
+        "worldship":world,
+        "shipment": ship,
+        "indian":indian,
+
+        "prodId": prodId,
+        "ownerId": widget.currentUser.id,
+        "username": widget.currentUser.displayName,
+        "photoUrl": widget.currentUser.photoUrl,
+        "displayName": widget.currentUser.displayName,
+        "shopmediaUrl": shopmediaUrl,
+        "Category": Category,
+        // "type":type,
+        "Gender": gender,
+        "details": details,
+        "productname": productname,
+        "usd": gbptousd.toString(),
+        "cny": gbptocny.toString(),
+        "gbp": price.toString(),
+        "eur": gbptoeur.toString(),
+        "inr": gbptoinr.toString(),
+        "color": color,
+        "composition": composition,
+        "washandcare": washandcare,
+        "sizeandfit": sizeandfit,
+        "timestamp": timestamp,
+        "freesizeQuantity": freesizeQuantity,
+        "xxxsQuantity": xxxsQuantity,
+        "xxsQuantity": xxsQuantity,
+        "xsQuantity": xsQuantity,
+        "sQuantity": sQuantity,
+        "mQuantity": mQuantity,
+        "lQuantity": lQuantity,
+        "xlQuantity": xlQuantity,
+        "xxlQuantity": xxlQuantity,
+        "xxxlQuantity": xxxlQuantity,
+        "4xlQuantity": fourxlQuantity,
+
+        "Shoe1":Shoe1,
+        "Shoe2":Shoe2,
+        "Shoe3":Shoe3,
+        "Shoe4":Shoe4,
+        "Shoe5":Shoe5,
+        "Shoe6":Shoe6,
+        "Shoe7":Shoe7,
+        "Shoe8":Shoe8,
+        "Shoe9":Shoe9,
+        "Shoe10":Shoe10,
+        "Shoe11":Shoe11,
+        "Shoe12":Shoe12,
+        "Shoe13":Shoe13,
+        "Shoe14":Shoe14,
+
+        "mtoQuantity": mtoQuantity,
+        "likes": {},
+      });
+
+
+
+
+      setState(() {
+        file = null;
+        isUploading = false;
+      });
+    }
+    else if (currentUser.country == 'USA') {
+      productsRef
+          .doc(widget.currentUser.id)
+          .collection("userProducts")
+          .doc(prodId)
+          .set({          "indian":indian,
+        "worldship":world,
+        "shipment": ship,
+        "prodId": prodId,
+        "ownerId": widget.currentUser.id,
+        "username": widget.currentUser.displayName,
+        "photoUrl": widget.currentUser.photoUrl,
+        "displayName": widget.currentUser.displayName,
+        "shopmediaUrl": shopmediaUrl,
+        "Category": Category,
+        // "type":type,
+        "Gender": gender,
+        "details": details,
+        "productname": productname,
+        "usd": price.toString(),
+        "cny": usdtocny.toString(),
+        "gbp": usdtogbp.toString(),
+        "eur": usdtoeur.toString(),
+        "inr": usdtoinr.toString(),
+        "color": color,
+        "composition": composition,
+        "washandcare": washandcare,
+        "sizeandfit": sizeandfit,
+        "timestamp": timestamp,
+        "freesizeQuantity": freesizeQuantity,
+        "xxxsQuantity": xxxsQuantity,
+        "xxsQuantity": xxsQuantity,
+        "xsQuantity": xsQuantity,
+        "sQuantity": sQuantity,
+        "mQuantity": mQuantity,
+        "lQuantity": lQuantity,
+        "xlQuantity": xlQuantity,
+        "xxlQuantity": xxlQuantity,
+        "xxxlQuantity": xxxlQuantity,
+        "4xlQuantity": fourxlQuantity,
+
+        "Shoe1":Shoe1,
+        "Shoe2":Shoe2,
+        "Shoe3":Shoe3,
+        "Shoe4":Shoe4,
+        "Shoe5":Shoe5,
+        "Shoe6":Shoe6,
+        "Shoe7":Shoe7,
+        "Shoe8":Shoe8,
+        "Shoe9":Shoe9,
+        "Shoe10":Shoe10,
+        "Shoe11":Shoe11,
+        "Shoe12":Shoe12,
+        "Shoe13":Shoe13,
+        "Shoe14":Shoe14,
+
+        "mtoQuantity": mtoQuantity,
+        "likes": {},
+      });
+
+
+      setState(() {
+        file = null;
+        isUploading = false;
+      });
+    }
+    else {
+      productsRef
+          .doc(widget.currentUser.id)
+          .collection("userProducts")
+          .doc(prodId)
+          .set({          "indian":indian,
+        "worldship":world,
+        "shipment": ship,
+        "prodId": prodId,
+        "ownerId": widget.currentUser.id,
+        "username": widget.currentUser.displayName,
+        "photoUrl": widget.currentUser.photoUrl,
+        "displayName": widget.currentUser.displayName,
+        "shopmediaUrl": shopmediaUrl,
+        "Category": Category,
+        // "type":type,
+        "Gender": gender,
+        "details": details,
+        "productname": productname,
+        "usd": price.toString(),
+        "cny": usdtocny.toString(),
+        "gbp": usdtogbp.toString(),
+        "eur": usdtoeur.toString(),
+        "inr": usdtoinr.toString(),
+        "color": color,
+        "composition": composition,
+        "washandcare": washandcare,
+        "sizeandfit": sizeandfit,
+        "timestamp": timestamp,
+        "freesizeQuantity": freesizeQuantity,
+        "xxxsQuantity": xxxsQuantity,
+        "xxsQuantity": xxsQuantity,
+        "xsQuantity": xsQuantity,
+        "sQuantity": sQuantity,
+        "mQuantity": mQuantity,
+        "lQuantity": lQuantity,
+        "xlQuantity": xlQuantity,
+        "xxlQuantity": xxlQuantity,
+        "xxxlQuantity": xxxlQuantity,
+        "4xlQuantity": fourxlQuantity,
+
+        "Shoe1":Shoe1,
+        "Shoe2":Shoe2,
+        "Shoe3":Shoe3,
+        "Shoe4":Shoe4,
+        "Shoe5":Shoe5,
+        "Shoe6":Shoe6,
+        "Shoe7":Shoe7,
+        "Shoe8":Shoe8,
+        "Shoe9":Shoe9,
+        "Shoe10":Shoe10,
+        "Shoe11":Shoe11,
+        "Shoe12":Shoe12,
+        "Shoe13":Shoe13,
+        "Shoe14":Shoe14,
+
+        "mtoQuantity": mtoQuantity,
+        "likes": {},
+      });
+
+
+      setState(() {
+        file = null;
+        isUploading = false;
+      });
+    }
+  }
+  else if(dropdownValue=='Teen-Boys'||dropdownValue=='Teen-Girls') {
+    if (currentUser.country == 'India') {
+      productsRef
+          .doc(widget.currentUser.id)
+          .collection("userProducts")
+          .doc(prodId)
+          .set({
+        "indian":indian,
+        "worldship":world,
+        "shipment": ship,
+        "prodId": prodId,
+        "ownerId": widget.currentUser.id,
+        "username": widget.currentUser.displayName,
+        "photoUrl": widget.currentUser.photoUrl,
+        "displayName": widget.currentUser.displayName,
+        "shopmediaUrl": shopmediaUrl,
+        "Category": Category,
+        // "type":type,
+        "Gender": gender,
+        "details": details,
+        "productname": productname,
+        "usd": inrtousd.toString(),
+        "cny": inrtocny.toString(),
+        "gbp": inrtogbp.toString(),
+        "eur": inrtoeur.toString(),
+        "inr": price.toString(),
+        "color": color,
+        "composition": composition,
+        "washandcare": washandcare,
+        "sizeandfit": sizeandfit,
+        "timestamp": timestamp,
+        "freesizeQuantity": freesizeQuantity,
+        "xxxsQuantity": xxxsQuantity,
+        "xxsQuantity": xxsQuantity,
+        "xsQuantity": xsQuantity,
+        "sQuantity": sQuantity,
+
+        "Shoe1":Shoe1,
+        "Shoe2":Shoe2,
+        "Shoe3":Shoe3,
+        "Shoe4":Shoe4,
+
+
+        "mtoQuantity": mtoQuantity,
+        "likes": {},
+      });
+
+      setState(() {
+        file = null;
+        isUploading = false;
+      });
+    }
+    else if (currentUser.country == 'Europe'){
+      productsRef
+          .doc(widget.currentUser.id)
+          .collection("userProducts")
+          .doc(prodId)
+          .set({          "indian":indian,
+        "worldship":world,
+        "shipment": ship,
+        "prodId": prodId,
+        "ownerId": widget.currentUser.id,
+        "username": widget.currentUser.displayName,
+        "photoUrl": widget.currentUser.photoUrl,
+        "displayName": widget.currentUser.displayName,
+        "shopmediaUrl": shopmediaUrl,
+        "Category": Category,
+        // "type":type,
+        "Gender": gender,
+        "details": details,
+        "productname": productname,
+        "usd": eurtousd.toString(),
+        "cny": eurtocny.toString(),
+        "gbp": eurtogbp.toString(),
+        "eur": price.toString(),
+        "inr": eurtoinr.toString(),
+        "color": color,
+        "composition": composition,
+        "washandcare": washandcare,
+        "sizeandfit": sizeandfit,
+        "timestamp": timestamp,
+        "freesizeQuantity": freesizeQuantity,
+        "xxxsQuantity": xxxsQuantity,
+        "xxsQuantity": xxsQuantity,
+        "xsQuantity": xsQuantity,
+        "sQuantity": sQuantity,
+
+        "Shoe1":Shoe1,
+        "Shoe2":Shoe2,
+        "Shoe3":Shoe3,
+        "Shoe4":Shoe4,
+
+
+        "mtoQuantity": mtoQuantity,
+        "likes": {},
+      });
+
+
+
+      setState(() {
+        file = null;
+        isUploading = false;
+      });
+    }
+    else if (currentUser.country == 'UK') {
+      productsRef
+          .doc(widget.currentUser.id)
+          .collection("userProducts")
+          .doc(prodId)
+          .set({          "indian":indian,
+        "worldship":world,
+        "shipment": ship,
+        "prodId": prodId,
+        "ownerId": widget.currentUser.id,
+        "username": widget.currentUser.displayName,
+        "photoUrl": widget.currentUser.photoUrl,
+        "displayName": widget.currentUser.displayName,
+        "shopmediaUrl": shopmediaUrl,
+        "Category": Category,
+        // "type":type,
+        "Gender": gender,
+        "details": details,
+        "productname": productname,
+        "usd": gbptousd.toString(),
+        "cny": gbptocny.toString(),
+        "gbp": price.toString(),
+        "eur": gbptoeur.toString(),
+        "inr": gbptoinr.toString(),
+        "color": color,
+        "composition": composition,
+        "washandcare": washandcare,
+        "sizeandfit": sizeandfit,
+        "timestamp": timestamp,
+        "freesizeQuantity": freesizeQuantity,
+        "xxxsQuantity": xxxsQuantity,
+        "xxsQuantity": xxsQuantity,
+        "xsQuantity": xsQuantity,
+        "sQuantity": sQuantity,
+
+        "Shoe1":Shoe1,
+        "Shoe2":Shoe2,
+        "Shoe3":Shoe3,
+        "Shoe4":Shoe4,
+
+
+        "mtoQuantity": mtoQuantity,
+        "likes": {},
+      });
+
+
+
+      setState(() {
+        file = null;
+        isUploading = false;
+      });
+    }
+    else if (currentUser.country == 'USA') {
+      productsRef
+          .doc(widget.currentUser.id)
+          .collection("userProducts")
+          .doc(prodId)
+          .set({          "indian":indian,
+        "worldship":world,
+        "shipment": ship,
+        "prodId": prodId,
+        "ownerId": widget.currentUser.id,
+        "username": widget.currentUser.displayName,
+        "photoUrl": widget.currentUser.photoUrl,
+        "displayName": widget.currentUser.displayName,
+        "shopmediaUrl": shopmediaUrl,
+        "Category": Category,
+        // "type":type,
+        "Gender": gender,
+        "details": details,
+        "productname": productname,
+        "usd": price.toString(),
+        "cny": usdtocny.toString(),
+        "gbp": usdtogbp.toString(),
+        "eur": usdtoeur.toString(),
+        "inr": usdtoinr.toString(),
+        "color": color,
+        "composition": composition,
+        "washandcare": washandcare,
+        "sizeandfit": sizeandfit,
+        "timestamp": timestamp,
+        "freesizeQuantity": freesizeQuantity,
+        "xxxsQuantity": xxxsQuantity,
+        "xxsQuantity": xxsQuantity,
+        "xsQuantity": xsQuantity,
+        "sQuantity": sQuantity,
+
+        "Shoe1":Shoe1,
+        "Shoe2":Shoe2,
+        "Shoe3":Shoe3,
+        "Shoe4":Shoe4,
+
+
+        "mtoQuantity": mtoQuantity,
+        "likes": {},
+      });
+
+
+
+
+      setState(() {
+        file = null;
+        isUploading = false;
+      });
+    }
+    else {
+      productsRef
+          .doc(widget.currentUser.id)
+          .collection("userProducts")
+          .doc(prodId)
+          .set({          "indian":indian,
+        "worldship":world,
+        "shipment": ship,
+        "prodId": prodId,
+        "ownerId": widget.currentUser.id,
+        "username": widget.currentUser.displayName,
+        "photoUrl": widget.currentUser.photoUrl,
+        "displayName": widget.currentUser.displayName,
+        "shopmediaUrl": shopmediaUrl,
+        "Category": Category,
+        // "type":type,
+        "Gender": gender,
+        "details": details,
+        "productname": productname,
+        "usd": price.toString(),
+        "cny": usdtocny.toString(),
+        "gbp": usdtogbp.toString(),
+        "eur": usdtoeur.toString(),
+        "inr": usdtoinr.toString(),
+        "color": color,
+        "composition": composition,
+        "washandcare": washandcare,
+        "sizeandfit": sizeandfit,
+        "timestamp": timestamp,
+        "freesizeQuantity": freesizeQuantity,
+        "xxxsQuantity": xxxsQuantity,
+        "xxsQuantity": xxsQuantity,
+        "xsQuantity": xsQuantity,
+        "sQuantity": sQuantity,
+
+        "Shoe1":Shoe1,
+        "Shoe2":Shoe2,
+        "Shoe3":Shoe3,
+        "Shoe4":Shoe4,
+
+
+        "mtoQuantity": mtoQuantity,
+        "likes": {},
+      });
+
+
+
+
+      setState(() {
+        file = null;
+        isUploading = false;
+      });
+    }
+  }
+
+
+}
 Container(child: Tags(
 key:_tagStateKey,
 textField: TagsTextField(

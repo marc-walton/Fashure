@@ -310,6 +310,11 @@ print(advancepay);
   paymentbutton({
     String amount, String title,String due,String custId,String cusName,String cusImg,String ownerId,
   }){
+    double vDouble = double.tryParse(amount) *100;
+    String vString = vDouble.toInt().toString();
+ double Double = double.tryParse(due) *100;
+    String duee = vDouble.toInt().toString();
+
     //one-time payment
      if( due == "") {
        if (widget.advancepay == 'false') {
@@ -318,7 +323,7 @@ print(advancepay);
            child: RaisedButton(
              onPressed: () {
                Get.to(PaymentSer(title: widget.title,
-                 Amount: amount,
+                 Amount: vString,
                  OrderId: orderId,
                  OwnerId: ownerId,
                  profileimg: cusImg,
@@ -353,7 +358,7 @@ print(advancepay);
           onPressed: (){
 
 Get.to( PaymentSer(              title: widget.title,
-  Amount:amount,OrderId: orderId,
+  Amount:vString,OrderId: orderId,
   OwnerId: ownerId,profileimg: cusImg,username: cusName,advancepay: advancepay,finalpay: finalpay,Finr: Finr,
   eur:eur,
   usd:usd,
@@ -375,7 +380,7 @@ Get.to( PaymentSer(              title: widget.title,
         Center(
           child: RaisedButton(
             onPressed: (){
-              Get.to( PaymentSer(  title: widget.title,Amount:due,OrderId: orderId,
+              Get.to( PaymentSer(  title: widget.title,Amount:duee,OrderId: orderId,
                 OwnerId: ownerId,profileimg: cusImg,username: cusName,advancepay: advancepay,finalpay: finalpay,Finr: Finr,
                 eur:eur,
                 usd:usd,
