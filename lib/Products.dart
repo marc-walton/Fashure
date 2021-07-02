@@ -145,7 +145,7 @@ final bool freeship;
 
   final String productname;
   final String details;
-  final String color;
+  final List color;
   final String composition;
   final String washandcare;
   final String sizeandfit;
@@ -786,7 +786,7 @@ final bool freeship;
 
   final String productname;
   final String details;
-  final String color;
+  final List color;
   final String composition;
   final String washandcare;
   final String sizeandfit;
@@ -1113,7 +1113,37 @@ this.freeship,
         .update({'visits': views,
     });
   }
-
+sdjgf(){  if (currentUser.country == 'India'){
+  Proceedtobuy(total:inr,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
+      username: username,
+      mediaUrl: shopmediaUrl.first,
+      productname:productname);
+}
+else if (currentUser.country == 'UK'){
+  Proceedtobuy(total:gbp,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
+      username: username,
+      mediaUrl: shopmediaUrl.first,
+      productname:productname);
+}
+else  if (currentUser.country == 'Europe'){
+  Proceedtobuy(total:eur,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
+      username: username,
+      mediaUrl: shopmediaUrl.first,
+      productname:productname);
+}
+else  if (currentUser.country == 'USA'){
+  Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
+      username: username,
+      mediaUrl: shopmediaUrl.first,
+      productname:productname);
+}
+else  {
+  Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
+      username: username,
+      mediaUrl: shopmediaUrl.first,
+      productname:productname);
+}
+}
 FREE(){
     if(freesize == 0){
     return
@@ -1121,7 +1151,7 @@ FREE(){
   }
     else{
   return
-  GestureDetector(
+  InkWell(
   onTap: (){
   setState(()  {
 
@@ -1129,58 +1159,19 @@ FREE(){
 
 
   });
-  if (currentUser.country == 'India'){
-  Proceedtobuy(total:inr,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-  username: username,
-  mediaUrl: shopmediaUrl.first,
-  productname:productname);
-  }
-  else if (currentUser.country == 'UK'){
-  Proceedtobuy(total:gbp,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-  username: username,
-  mediaUrl: shopmediaUrl.first,
-  productname:productname);
-  }
-  else  if (currentUser.country == 'Europe'){
-  Proceedtobuy(total:eur,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-  username: username,
-  mediaUrl: shopmediaUrl.first,
-  productname:productname);
-  }
-  else  if (currentUser.country == 'USA'){
-  Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-  username: username,
-  mediaUrl: shopmediaUrl.first,
-  productname:productname);
-  }
-  else  {
-  Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-  username: username,
-  mediaUrl: shopmediaUrl.first,
-  productname:productname);
-  }
 
-  },
-  child: Container(
-  decoration: BoxDecoration(
-  color: kPrimaryColor,
-  boxShadow: [
-  BoxShadow(
-  color: Colors.grey,
-  blurRadius: 5.0,
-  ),]
-  ,borderRadius: BorderRadius.all(Radius.circular(10.0))
-  ),
-  height: 40,
-  width: 40,
-  child: Column(
-  mainAxisAlignment: MainAxisAlignment.center,
-  children: [
+  },        child: Container(
+    height:50,
+    width:MediaQuery.of(context).size.width,
+    child: Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
 //    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
-  FittedBox(child: Text('Free Size',style: TextStyle(color: Colors.white),)),
-  ],
+        FittedBox(child: Text('Free Size',)),
+      ],
+    ),
   ),
-  ),
+
   );
   }
 }
@@ -1191,61 +1182,23 @@ XXXS(){
   }
     else{
       return
-        GestureDetector(
+        InkWell(
           onTap: (){
             setState(()  {
 
               usersize = 'XXXS';
             });
-            if (currentUser.country == 'India'){
-              Proceedtobuy(total:inr,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                  username: username,
-                  mediaUrl: shopmediaUrl.first,
-                  productname:productname);
-            }
-            else if (currentUser.country == 'UK'){
-              Proceedtobuy(total:gbp,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                  username: username,
-                  mediaUrl: shopmediaUrl.first,
-                  productname:productname);
-            }
-            else  if (currentUser.country == 'Europe'){
-              Proceedtobuy(total:eur,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                  username: username,
-                  mediaUrl: shopmediaUrl.first,
-                  productname:productname);
-            }
-            else  if (currentUser.country == 'USA'){
-              Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                  username: username,
-                  mediaUrl: shopmediaUrl.first,
-                  productname:productname);
-            }
-            else  {
-              Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                  username: username,
-                  mediaUrl: shopmediaUrl.first,
-                  productname:productname);
-            }
+
 
           },
           child: Container(
-            decoration: BoxDecoration(
-                color: kPrimaryColor,
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.grey,
-                    blurRadius: 5.0,
-                  ),]
-                ,borderRadius: BorderRadius.all(Radius.circular(10.0))
-            ),
-            height: 40,
-            width: 40,
+            height:50,
+            width:MediaQuery.of(context).size.width,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
 //    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
-                FittedBox(child: Text('XXXS',style: TextStyle(color: Colors.white),)),
+                FittedBox(child: Text('XXXS',)),
               ],
             ),
           ),
@@ -1261,66 +1214,27 @@ XXS(){
    }
    else{
      return
-     GestureDetector(
+     InkWell(
        onTap: (){
          setState(()  {
 
            usersize = 'XXS';
          });
-         if (currentUser.country == 'India'){
-           Proceedtobuy(total:inr,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-               username: username,
-               mediaUrl: shopmediaUrl.first,
-               productname:productname);
-         }
-         else if (currentUser.country == 'UK'){
-           Proceedtobuy(total:gbp,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-               username: username,
-               mediaUrl: shopmediaUrl.first,
-               productname:productname);
-         }
-         else  if (currentUser.country == 'Europe'){
-           Proceedtobuy(total:eur,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-               username: username,
-               mediaUrl: shopmediaUrl.first,
-               productname:productname);
-         }
-         else  if (currentUser.country == 'USA'){
-           Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-               username: username,
-               mediaUrl: shopmediaUrl.first,
-               productname:productname);
-         }
-         else  {
-           Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-               username: username,
-               mediaUrl: shopmediaUrl.first,
-               productname:productname);
-         }
+
 
 
        },
-       child: Container(
-         decoration: BoxDecoration(
-             color: kPrimaryColor,
-             boxShadow: [
-               BoxShadow(
-                 color: Colors.grey,
-                 blurRadius: 5.0,
-               ),]
-             ,borderRadius: BorderRadius.all(Radius.circular(10.0))
-         ),
-         height: 40,
-         width: 40,
+       child:      Container(
+         height:50,
+         width:MediaQuery.of(context).size.width,
          child: Column(
            mainAxisAlignment: MainAxisAlignment.center,
            children: [
 //    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
-             FittedBox(child: Text('XXS',style: TextStyle(color: Colors.white),)),
+             FittedBox(child: Text('XXS',)),
            ],
          ),
-       ),
-     );
+       ),      );
    }
 }
 XS(){
@@ -1330,67 +1244,28 @@ XS(){
     }
     else{
       return
-      GestureDetector(
+      InkWell(
         onTap: (){
           setState(()  {
 
             usersize = 'XS';
           });
 
-          if (currentUser.country == 'India'){
-            Proceedtobuy(total:inr,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else if (currentUser.country == 'UK'){
-            Proceedtobuy(total:gbp,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else  if (currentUser.country == 'Europe'){
-            Proceedtobuy(total:eur,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else  if (currentUser.country == 'USA'){
-            Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else  {
-            Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
+
 
 
         },
-        child: Container(
-          decoration: BoxDecoration(
-              color: kPrimaryColor,
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.grey,
-                  blurRadius: 5.0,
-                ),]
-              ,borderRadius: BorderRadius.all(Radius.circular(10.0))
-          ),
-          height: 40,
-          width: 40,
+   child:     Container(
+          height:50,
+          width:MediaQuery.of(context).size.width,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
 //    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
-              FittedBox(child: Text('XS',style: TextStyle(color: Colors.white),)),
+              FittedBox(child: Text('XS',)),
             ],
           ),
-        ),
-      );
+        ),       );
     }
 }
 S(){
@@ -1400,66 +1275,28 @@ S(){
    }
    else{
      return
-       GestureDetector(
+       InkWell(
        onTap: (){
          setState(()  {
 
            usersize = 'S';
          });
-         if (currentUser.country == 'India'){
-           Proceedtobuy(total:inr,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-               username: username,
-               mediaUrl: shopmediaUrl.first,
-               productname:productname);
-         }
-         else if (currentUser.country == 'UK'){
-           Proceedtobuy(total:gbp,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-               username: username,
-               mediaUrl: shopmediaUrl.first,
-               productname:productname);
-         }
-         else  if (currentUser.country == 'Europe'){
-           Proceedtobuy(total:eur,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-               username: username,
-               mediaUrl: shopmediaUrl.first,
-               productname:productname);
-         }
-         else  if (currentUser.country == 'USA'){
-           Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-               username: username,
-               mediaUrl: shopmediaUrl.first,
-               productname:productname);
-         }
-         else  {
-           Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-               username: username,
-               mediaUrl: shopmediaUrl.first,
-               productname:productname);
-         }
+
 
 
        },
-       child: Container(
-         decoration: BoxDecoration(
-             color: kPrimaryColor,
-             boxShadow: [
-               BoxShadow(
-                 color: Colors.grey,
-                 blurRadius: 5.0,
-               ),]
-             ,borderRadius: BorderRadius.all(Radius.circular(10.0))
-         ),
-         height: 40,
-         width: 40,
-         child: Column(
-           mainAxisAlignment: MainAxisAlignment.center,
-           children: [
+      child:   Container(
+           height:50,
+           width:MediaQuery.of(context).size.width,
+           child: Column(
+             mainAxisAlignment: MainAxisAlignment.center,
+             children: [
 //    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
-             FittedBox(child: Text('S',style: TextStyle(color: Colors.white),)),
-           ],
+               FittedBox(child: Text('S',)),
+             ],
+           ),
          ),
-       ),
-     );
+       );
    }
 }
 M(){
@@ -1469,62 +1306,24 @@ M(){
    }
    else {
      return
-     GestureDetector(
+     InkWell(
        onTap: (){
          setState(()  {
 
            usersize = 'M';
          });
-         if (currentUser.country == 'India'){
-           Proceedtobuy(total:inr,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-               username: username,
-               mediaUrl: shopmediaUrl.first,
-               productname:productname);
-         }
-         else if (currentUser.country == 'UK'){
-           Proceedtobuy(total:gbp,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-               username: username,
-               mediaUrl: shopmediaUrl.first,
-               productname:productname);
-         }
-         else  if (currentUser.country == 'Europe'){
-           Proceedtobuy(total:eur,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-               username: username,
-               mediaUrl: shopmediaUrl.first,
-               productname:productname);
-         }
-         else  if (currentUser.country == 'USA'){
-           Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-               username: username,
-               mediaUrl: shopmediaUrl.first,
-               productname:productname);
-         }
-         else  {
-           Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-               username: username,
-               mediaUrl: shopmediaUrl.first,
-               productname:productname);
-         }
+
 
 
        },
-       child: Container(
-         decoration: BoxDecoration(
-             color: kPrimaryColor,
-             boxShadow: [
-               BoxShadow(
-                 color: Colors.grey,
-                 blurRadius: 5.0,
-               ),]
-             ,borderRadius: BorderRadius.all(Radius.circular(10.0))
-         ),
-         height: 40,
-         width: 40,
+       child:   Container(
+         height:50,
+         width:MediaQuery.of(context).size.width,
          child: Column(
            mainAxisAlignment: MainAxisAlignment.center,
            children: [
 //    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
-             FittedBox(child: Text('M',style: TextStyle(color: Colors.white),)),
+             FittedBox(child: Text('M',)),
            ],
          ),
        ),
@@ -1538,62 +1337,24 @@ L(){
     }
    else{
      return
-      GestureDetector(
+      InkWell(
         onTap: (){
           setState(()  {
 
             usersize = 'L';
           });
-          if (currentUser.country == 'India'){
-            Proceedtobuy(total:inr,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else if (currentUser.country == 'UK'){
-            Proceedtobuy(total:gbp,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else  if (currentUser.country == 'Europe'){
-            Proceedtobuy(total:eur,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else  if (currentUser.country == 'USA'){
-            Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else  {
-            Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
+
 
 
         },
-        child: Container(
-          decoration: BoxDecoration(
-              color: kPrimaryColor,
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.grey,
-                  blurRadius: 5.0,
-                ),]
-              ,borderRadius: BorderRadius.all(Radius.circular(10.0))
-          ),
-          height: 40,
-          width: 40,
+        child:   Container(
+          height:50,
+          width:MediaQuery.of(context).size.width,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
 //    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
-              FittedBox(child: Text('L',style: TextStyle(color: Colors.white),)),
+              FittedBox(child: Text('L',)),
             ],
           ),
         ),
@@ -1607,62 +1368,24 @@ XL(){
   }
   else{
     return
-      GestureDetector(
+      InkWell(
         onTap: (){
           setState(()  {
 
             usersize = 'XL';
           });
-          if (currentUser.country == 'India'){
-            Proceedtobuy(total:inr,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else if (currentUser.country == 'UK'){
-            Proceedtobuy(total:gbp,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else  if (currentUser.country == 'Europe'){
-            Proceedtobuy(total:eur,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else  if (currentUser.country == 'USA'){
-            Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else  {
-            Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
+
 
 
         },
-        child: Container(
-          decoration: BoxDecoration(
-              color: kPrimaryColor,
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.grey,
-                  blurRadius: 5.0,
-                ),]
-              ,borderRadius: BorderRadius.all(Radius.circular(10.0))
-          ),
-          height: 40,
-          width: 40,
+        child:   Container(
+          height:50,
+          width:MediaQuery.of(context).size.width,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
 //    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
-              FittedBox(child: Text('XL',style: TextStyle(color: Colors.white),)),
+              FittedBox(child: Text('XL',)),
             ],
           ),
         ),
@@ -1676,62 +1399,24 @@ XXL(){
   }
   else{
     return
-      GestureDetector(
+      InkWell(
         onTap: (){
           setState(()  {
 
             usersize = 'XXL';
           });
-          if (currentUser.country == 'India'){
-            Proceedtobuy(total:inr,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else if (currentUser.country == 'UK'){
-            Proceedtobuy(total:gbp,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else  if (currentUser.country == 'Europe'){
-            Proceedtobuy(total:eur,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else  if (currentUser.country == 'USA'){
-            Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else  {
-            Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
+
 
 
         },
-        child: Container(
-          decoration: BoxDecoration(
-              color: kPrimaryColor,
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.grey,
-                  blurRadius: 5.0,
-                ),]
-              ,borderRadius: BorderRadius.all(Radius.circular(10.0))
-          ),
-          height: 40,
-          width: 40,
+        child:   Container(
+          height:50,
+          width:MediaQuery.of(context).size.width,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
 //    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
-              FittedBox(child: Text('XXL',style: TextStyle(color: Colors.white),)),
+              FittedBox(child: Text('XCL',)),
             ],
           ),
         ),
@@ -1745,61 +1430,23 @@ XXXL(){
   }
   else{
     return
-      GestureDetector(
+      InkWell(
         onTap: (){
           setState(()  {
 
             usersize = 'XXXL';
           });
-          if (currentUser.country == 'India'){
-            Proceedtobuy(total:inr,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else if (currentUser.country == 'UK'){
-            Proceedtobuy(total:gbp,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else  if (currentUser.country == 'Europe'){
-            Proceedtobuy(total:eur,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else  if (currentUser.country == 'USA'){
-            Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else  {
-            Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
+
 
         },
-        child: Container(
-          decoration: BoxDecoration(
-              color: kPrimaryColor,
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.grey,
-                  blurRadius: 5.0,
-                ),]
-              ,borderRadius: BorderRadius.all(Radius.circular(10.0))
-          ),
-          height: 40,
-          width: 40,
+        child:   Container(
+          height:50,
+          width:MediaQuery.of(context).size.width,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
 //    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
-              FittedBox(child: Text('XXXL',style: TextStyle(color: Colors.white),)),
+              FittedBox(child: Text('XXXL',)),
             ],
           ),
         ),
@@ -1814,61 +1461,23 @@ FXL(){
   else
   {
     return
-      GestureDetector(
+      InkWell(
         onTap: (){
           setState(()  {
 
             usersize = '4XL';
           });
-          if (currentUser.country == 'India'){
-            Proceedtobuy(total:inr,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else if (currentUser.country == 'UK'){
-            Proceedtobuy(total:gbp,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else  if (currentUser.country == 'Europe'){
-            Proceedtobuy(total:eur,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else  if (currentUser.country == 'USA'){
-            Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else  {
-            Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
 
 
         },
-        child: Container(
-          decoration: BoxDecoration(
-              color: kPrimaryColor,
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.grey,
-                  blurRadius: 5.0,
-                ),]
-              ,borderRadius: BorderRadius.all(Radius.circular(10.0))
-          ),
-          height: 40,
-          width: 40,
+        child:   Container(
+          height:50,
+          width:MediaQuery.of(context).size.width,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              FittedBox(child: Text('4XL',style: TextStyle(color: Colors.white),)),
+//    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
+              FittedBox(child: Text('4XL',)),
             ],
           ),
         ),
@@ -1882,62 +1491,24 @@ FIVXL(){
   }
   else{
     return
-      GestureDetector(
+      InkWell(
         onTap: (){
           setState(()  {
 
             usersize = '5XL';
           });
-          if (currentUser.country == 'India'){
-            Proceedtobuy(total:inr,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else if (currentUser.country == 'UK'){
-            Proceedtobuy(total:gbp,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else  if (currentUser.country == 'Europe'){
-            Proceedtobuy(total:eur,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else  if (currentUser.country == 'USA'){
-            Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else  {
-            Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
+
 
 
         },
         child: Container(
-          decoration: BoxDecoration(
-              color: kPrimaryColor,
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.grey,
-                  blurRadius: 5.0,
-                ),]
-              ,borderRadius: BorderRadius.all(Radius.circular(10.0))
-          ),
-          height: 40,
-          width: 40,
+          height:50,
+          width:MediaQuery.of(context).size.width,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
 //    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
-              FittedBox(child: Text('5XL',style: TextStyle(color: Colors.white),)),
+              FittedBox(child: Text('5XL',)),
             ],
           ),
         ),
@@ -1951,62 +1522,24 @@ SIXXL(){
   }
   else{
     return
-      GestureDetector(
+      InkWell(
         onTap: (){
           setState(()  {
 
             usersize = '6XL';
           });
-          if (currentUser.country == 'India'){
-            Proceedtobuy(total:inr,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else if (currentUser.country == 'UK'){
-            Proceedtobuy(total:gbp,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else  if (currentUser.country == 'Europe'){
-            Proceedtobuy(total:eur,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else  if (currentUser.country == 'USA'){
-            Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else  {
-            Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
+
 
 
         },
-        child: Container(
-          decoration: BoxDecoration(
-              color: kPrimaryColor,
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.grey,
-                  blurRadius: 5.0,
-                ),]
-              ,borderRadius: BorderRadius.all(Radius.circular(10.0))
-          ),
-          height: 40,
-          width: 40,
+        child:   Container(
+          height:50,
+          width:MediaQuery.of(context).size.width,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
 //    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
-              FittedBox(child: Text('6XL',style: TextStyle(color: Colors.white),)),
+              FittedBox(child: Text('6XL',)),
             ],
           ),
         ),
@@ -2020,62 +1553,24 @@ SEVXL(){
   }
   else{
     return
-      GestureDetector(
+      InkWell(
         onTap: (){
           setState(()  {
 
             usersize = '7XL';
           });
-          if (currentUser.country == 'India'){
-            Proceedtobuy(total:inr,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else if (currentUser.country == 'UK'){
-            Proceedtobuy(total:gbp,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else  if (currentUser.country == 'Europe'){
-            Proceedtobuy(total:eur,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else  if (currentUser.country == 'USA'){
-            Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else  {
-            Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
+
 
 
         },
-        child: Container(
-          decoration: BoxDecoration(
-              color: kPrimaryColor,
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.grey,
-                  blurRadius: 5.0,
-                ),]
-              ,borderRadius: BorderRadius.all(Radius.circular(10.0))
-          ),
-          height: 40,
-          width: 40,
+        child:   Container(
+          height:50,
+          width:MediaQuery.of(context).size.width,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
 //    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
-              FittedBox(child: Text('7XL',style: TextStyle(color: Colors.white),)),
+              FittedBox(child: Text('7XL',)),
             ],
           ),
         ),
@@ -2089,61 +1584,23 @@ EIGXL(){
   }
   else{
     return
-      GestureDetector(
+      InkWell(
         onTap: (){
           setState(()  {
 
             usersize = '8XL';
           });
-          if (currentUser.country == 'India'){
-            Proceedtobuy(total:inr,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else if (currentUser.country == 'UK'){
-            Proceedtobuy(total:gbp,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else  if (currentUser.country == 'Europe'){
-            Proceedtobuy(total:eur,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else  if (currentUser.country == 'USA'){
-            Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else  {
-            Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
+
 
         },
-        child: Container(
-          decoration: BoxDecoration(
-              color: kPrimaryColor,
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.grey,
-                  blurRadius: 5.0,
-                ),]
-              ,borderRadius: BorderRadius.all(Radius.circular(10.0))
-          ),
-          height: 40,
-          width: 40,
+        child:   Container(
+          height:50,
+          width:MediaQuery.of(context).size.width,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
 //    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
-              FittedBox(child: Text('8XL',style: TextStyle(color: Colors.white),)),
+              FittedBox(child: Text('8XL',)),
             ],
           ),
         ),
@@ -2157,64 +1614,25 @@ MS1(){
    }
    else{
      return
-  GestureDetector(
+  InkWell(
   onTap: (){
   setState(()  {
 
   usersize = '(US)3-1/2';
   });
-  if (currentUser.country == 'India'){
-    Proceedtobuy(total:inr,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-        username: username,
-        mediaUrl: shopmediaUrl.first,
-        productname:productname);
-  }
-  else if (currentUser.country == 'UK'){
-    Proceedtobuy(total:gbp,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-        username: username,
-        mediaUrl: shopmediaUrl.first,
-        productname:productname);
-  }
-  else  if (currentUser.country == 'Europe'){
-    Proceedtobuy(total:eur,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-        username: username,
-        mediaUrl: shopmediaUrl.first,
-        productname:productname);
-  }
-  else  if (currentUser.country == 'USA'){
-    Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-        username: username,
-        mediaUrl: shopmediaUrl.first,
-        productname:productname);
-  }
-  else  {
-    Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-        username: username,
-        mediaUrl: shopmediaUrl.first,
-        productname:productname);
-  }
 
   },
-  child: Container(
-  decoration: BoxDecoration(
-  color: kPrimaryColor,
-  boxShadow: [
-  BoxShadow(
-  color: Colors.grey,
-  blurRadius: 5.0,
-  ),]
-  ,borderRadius: BorderRadius.all(Radius.circular(10.0))
-  ),
-  height: 40,
-  width: 40,
-  child: Column(
-  mainAxisAlignment: MainAxisAlignment.center,
-  children: [
-  FittedBox(child: Text('(US)3-1/2',style: TextStyle(color: Colors.white,fontSize: 8),)),
-
-  ],
-  ),
-  ),
+    child:   Container(
+      height:50,
+      width:MediaQuery.of(context).size.width,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+//    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
+          FittedBox(child: Text('(US)3-1/2',)),
+        ],
+      ),
+    ),
   );
   }
 
@@ -2226,66 +1644,28 @@ MS2(){
  }
 else{
   return
-   GestureDetector(
+   InkWell(
      onTap: (){
        setState(()  {
 
          usersize = '(US)4';
        });
-       if (currentUser.country == 'India'){
-         Proceedtobuy(total:inr,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-             username: username,
-             mediaUrl: shopmediaUrl.first,
-             productname:productname);
-       }
-       else if (currentUser.country == 'UK'){
-         Proceedtobuy(total:gbp,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-             username: username,
-             mediaUrl: shopmediaUrl.first,
-             productname:productname);
-       }
-       else  if (currentUser.country == 'Europe'){
-         Proceedtobuy(total:eur,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-             username: username,
-             mediaUrl: shopmediaUrl.first,
-             productname:productname);
-       }
-       else  if (currentUser.country == 'USA'){
-         Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-             username: username,
-             mediaUrl: shopmediaUrl.first,
-             productname:productname);
-       }
-       else  {
-         Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-             username: username,
-             mediaUrl: shopmediaUrl.first,
-             productname:productname);
-       }
+
 
 
      },
-     child: Container(
-       decoration: BoxDecoration(
-           color: kPrimaryColor,
-           boxShadow: [
-             BoxShadow(
-               color: Colors.grey,
-               blurRadius: 5.0,
-             ),]
-           ,borderRadius: BorderRadius.all(Radius.circular(10.0))
-       ),
-       height: 40,
-       width: 40,
+     child:   Container(
+       height:50,
+       width:MediaQuery.of(context).size.width,
        child: Column(
          mainAxisAlignment: MainAxisAlignment.center,
          children: [
-           FittedBox(child: Text('(US)4',style: TextStyle(color: Colors.white,fontSize: 8),)),
-
-
+//    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
+           FittedBox(child: Text('(US)4',)),
          ],
        ),
      ),
+
    );
  }
 }
@@ -2296,64 +1676,27 @@ MS3(){
  }
  else{
    return
-  GestureDetector(
+  InkWell(
   onTap: (){
   setState(()  {
 
   usersize = '(US)4-1/2';
   });
-  if (currentUser.country == 'India'){
-    Proceedtobuy(total:inr,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-        username: username,
-        mediaUrl: shopmediaUrl.first,
-        productname:productname);
-  }
-  else if (currentUser.country == 'UK'){
-    Proceedtobuy(total:gbp,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-        username: username,
-        mediaUrl: shopmediaUrl.first,
-        productname:productname);
-  }
-  else  if (currentUser.country == 'Europe'){
-    Proceedtobuy(total:eur,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-        username: username,
-        mediaUrl: shopmediaUrl.first,
-        productname:productname);
-  }
-  else  if (currentUser.country == 'USA'){
-    Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-        username: username,
-        mediaUrl: shopmediaUrl.first,
-        productname:productname);
-  }
-  else  {
-    Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-        username: username,
-        mediaUrl: shopmediaUrl.first,
-        productname:productname);
-  }
+
 
   },
-  child: Container(
-  decoration: BoxDecoration(
-  color: kPrimaryColor,
-  boxShadow: [
-  BoxShadow(
-  color: Colors.grey,
-  blurRadius: 5.0,
-  ),]
-  ,borderRadius: BorderRadius.all(Radius.circular(10.0))
-  ),
-  height: 40,
-  width: 40,
-  child: Column(
-  mainAxisAlignment: MainAxisAlignment.center,
-  children: [
-  FittedBox(child: Text('(US)4-1/2',style: TextStyle(color: Colors.white,fontSize: 8),)),
+    child:   Container(
+      height:50,
+      width:MediaQuery.of(context).size.width,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+//    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
+          FittedBox(child: Text('(US)4-1/2',)),
+        ],
+      ),
+    ),
 
-  ],
-  ),
-  ),
   );
   }
 }
@@ -2366,65 +1709,28 @@ MS4(){
    else {
 
 return
-  GestureDetector(
+  InkWell(
        onTap: (){
          setState(()  {
 
            usersize = '(US)5';
          });
-         if (currentUser.country == 'India'){
-           Proceedtobuy(total:inr,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-               username: username,
-               mediaUrl: shopmediaUrl.first,
-               productname:productname);
-         }
-         else if (currentUser.country == 'UK'){
-           Proceedtobuy(total:gbp,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-               username: username,
-               mediaUrl: shopmediaUrl.first,
-               productname:productname);
-         }
-         else  if (currentUser.country == 'Europe'){
-           Proceedtobuy(total:eur,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-               username: username,
-               mediaUrl: shopmediaUrl.first,
-               productname:productname);
-         }
-         else  if (currentUser.country == 'USA'){
-           Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-               username: username,
-               mediaUrl: shopmediaUrl.first,
-               productname:productname);
-         }
-         else  {
-           Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-               username: username,
-               mediaUrl: shopmediaUrl.first,
-               productname:productname);
-         }
+
 
 
        },
-       child: Container(
-         decoration: BoxDecoration(
-             color: kPrimaryColor,
-             boxShadow: [
-               BoxShadow(
-                 color: Colors.grey,
-                 blurRadius: 5.0,
-               ),]
-             ,borderRadius: BorderRadius.all(Radius.circular(10.0))
-         ),
-         height: 40,
-         width: 40,
-         child: Column(
-           mainAxisAlignment: MainAxisAlignment.center,
-           children: [
-             FittedBox(child: Text('(US)5',style: TextStyle(color: Colors.white,fontSize: 8),)),
+    child:   Container(
+      height:50,
+      width:MediaQuery.of(context).size.width,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+//    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
+          FittedBox(child: Text('(US)5',)),
+        ],
+      ),
+    ),
 
-           ],
-         ),
-       ),
      );
    }
 }
@@ -2436,63 +1742,24 @@ MS5(){
   }
   else{
     return
-    GestureDetector(
+    InkWell(
       onTap: (){
         setState(()  {
 
           usersize = '(US)5-1/2';
         });
-        if (currentUser.country == 'India'){
-          Proceedtobuy(total:inr,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-              username: username,
-              mediaUrl: shopmediaUrl.first,
-              productname:productname);
-        }
-        else if (currentUser.country == 'UK'){
-          Proceedtobuy(total:gbp,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-              username: username,
-              mediaUrl: shopmediaUrl.first,
-              productname:productname);
-        }
-        else  if (currentUser.country == 'Europe'){
-          Proceedtobuy(total:eur,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-              username: username,
-              mediaUrl: shopmediaUrl.first,
-              productname:productname);
-        }
-        else  if (currentUser.country == 'USA'){
-          Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-              username: username,
-              mediaUrl: shopmediaUrl.first,
-              productname:productname);
-        }
-        else  {
-          Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-              username: username,
-              mediaUrl: shopmediaUrl.first,
-              productname:productname);
-        }
+
 
 
       },
-      child: Container(
-        decoration: BoxDecoration(
-            color: kPrimaryColor,
-            boxShadow: [
-              BoxShadow(
-                color: Colors.grey,
-                blurRadius: 5.0,
-              ),]
-            ,borderRadius: BorderRadius.all(Radius.circular(10.0))
-        ),
-        height: 40,
-        width: 40,
+      child:   Container(
+        height:50,
+        width:MediaQuery.of(context).size.width,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            FittedBox(child: Text('(US)5-1/2',style: TextStyle(color: Colors.white,fontSize: 8),)),
-
-
+//    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
+            FittedBox(child: Text('(US)5-1/2',)),
           ],
         ),
       ),
@@ -2507,62 +1774,24 @@ MS6(){
   }
  else {
     return
-      GestureDetector(
+      InkWell(
         onTap: (){
           setState(()  {
 
             usersize = '(US)6';
           });
-          if (currentUser.country == 'India'){
-            Proceedtobuy(total:inr,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else if (currentUser.country == 'UK'){
-            Proceedtobuy(total:gbp,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else  if (currentUser.country == 'Europe'){
-            Proceedtobuy(total:eur,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else  if (currentUser.country == 'USA'){
-            Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else  {
-            Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
+
 
 
         },
-        child: Container(
-          decoration: BoxDecoration(
-              color: kPrimaryColor,
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.grey,
-                  blurRadius: 5.0,
-                ),]
-              ,borderRadius: BorderRadius.all(Radius.circular(10.0))
-          ),
-          height: 40,
-          width:40,
+        child:   Container(
+          height:50,
+          width:MediaQuery.of(context).size.width,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              FittedBox(child: Text('(US)6',style: TextStyle(color: Colors.white,fontSize: 8),)),
-
+//    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
+              FittedBox(child: Text('(US)6',)),
             ],
           ),
         ),
@@ -2577,61 +1806,23 @@ MS7(){
   }
   else{
     return
-      GestureDetector(
+      InkWell(
         onTap: (){
           setState(()  {
 
             usersize = '(US)6-1/2';
           });
-          if (currentUser.country == 'India'){
-            Proceedtobuy(total:inr,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else if (currentUser.country == 'UK'){
-            Proceedtobuy(total:gbp,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else  if (currentUser.country == 'Europe'){
-            Proceedtobuy(total:eur,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else  if (currentUser.country == 'USA'){
-            Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else  {
-            Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
+
 
         },
-        child: Container(
-          decoration: BoxDecoration(
-              color: kPrimaryColor,
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.grey,
-                  blurRadius: 5.0,
-                ),]
-              ,borderRadius: BorderRadius.all(Radius.circular(10.0))
-          ),
-          height: 40,
-          width: 40,
+        child:   Container(
+          height:50,
+          width:MediaQuery.of(context).size.width,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              FittedBox(child: Text('(US)6-1/2',style: TextStyle(color: Colors.white,fontSize: 8),)),
-
+//    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
+              FittedBox(child: Text('(US)6-1/2',)),
             ],
           ),
         ),
@@ -2646,61 +1837,23 @@ MS8(){
   }
   else{
     return
-    GestureDetector(
+    InkWell(
       onTap: (){
         setState(()  {
 
           usersize = '(US)7';
         });
-        if (currentUser.country == 'India'){
-          Proceedtobuy(total:inr,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-              username: username,
-              mediaUrl: shopmediaUrl.first,
-              productname:productname);
-        }
-        else if (currentUser.country == 'UK'){
-          Proceedtobuy(total:gbp,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-              username: username,
-              mediaUrl: shopmediaUrl.first,
-              productname:productname);
-        }
-        else  if (currentUser.country == 'Europe'){
-          Proceedtobuy(total:eur,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-              username: username,
-              mediaUrl: shopmediaUrl.first,
-              productname:productname);
-        }
-        else  if (currentUser.country == 'USA'){
-          Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-              username: username,
-              mediaUrl: shopmediaUrl.first,
-              productname:productname);
-        }
-        else  {
-          Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-              username: username,
-              mediaUrl: shopmediaUrl.first,
-              productname:productname);
-        }
+
 
       },
-      child: Container(
-        decoration: BoxDecoration(
-            color: kPrimaryColor,
-            boxShadow: [
-              BoxShadow(
-                color: Colors.grey,
-                blurRadius: 5.0,
-              ),]
-            ,borderRadius: BorderRadius.all(Radius.circular(10.0))
-        ),
-        height: 40,
-        width: 40,
+      child:   Container(
+        height:50,
+        width:MediaQuery.of(context).size.width,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            FittedBox(child: Text('(US)7',style: TextStyle(color: Colors.white,fontSize: 8),)),
-
+//    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
+            FittedBox(child: Text('(US)7',)),
           ],
         ),
       ),
@@ -2715,63 +1868,24 @@ MS9(){
   }
  else {
     return
-      GestureDetector(
+      InkWell(
         onTap: (){
           setState(()  {
 
             usersize = '(US)7-1/2';
           });
-          if (currentUser.country == 'India'){
-            Proceedtobuy(total:inr,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else if (currentUser.country == 'UK'){
-            Proceedtobuy(total:gbp,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else  if (currentUser.country == 'Europe'){
-            Proceedtobuy(total:eur,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else  if (currentUser.country == 'USA'){
-            Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else  {
-            Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
+
 
 
         },
-        child: Container(
-          decoration: BoxDecoration(
-              color: kPrimaryColor,
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.grey,
-                  blurRadius: 5.0,
-                ),]
-              ,borderRadius: BorderRadius.all(Radius.circular(10.0))
-          ),
-          height: 40,
-          width: 40,
+        child:   Container(
+          height:50,
+          width:MediaQuery.of(context).size.width,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              FittedBox(child: Text('(US)7-1/2',style: TextStyle(color: Colors.white,fontSize: 8),)),
-
-
+//    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
+              FittedBox(child: Text('(US)7-1/2',)),
             ],
           ),
         ),
@@ -2786,42 +1900,13 @@ MS10(){
   }
   else{
     return
-    GestureDetector(
+    InkWell(
       onTap: (){
         setState(()  {
 
           usersize = '(US)8';
         });
-        if (currentUser.country == 'India'){
-          Proceedtobuy(total:inr,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-              username: username,
-              mediaUrl: shopmediaUrl.first,
-              productname:productname);
-        }
-        else if (currentUser.country == 'UK'){
-          Proceedtobuy(total:gbp,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-              username: username,
-              mediaUrl: shopmediaUrl.first,
-              productname:productname);
-        }
-        else  if (currentUser.country == 'Europe'){
-          Proceedtobuy(total:eur,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-              username: username,
-              mediaUrl: shopmediaUrl.first,
-              productname:productname);
-        }
-        else  if (currentUser.country == 'USA'){
-          Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-              username: username,
-              mediaUrl: shopmediaUrl.first,
-              productname:productname);
-        }
-        else  {
-          Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-              username: username,
-              mediaUrl: shopmediaUrl.first,
-              productname:productname);
-        }
+
 
 
       },
@@ -2857,61 +1942,23 @@ MS11(){
   }
   else{
     return
-      GestureDetector(
+      InkWell(
         onTap: (){
           setState(()  {
 
             usersize = '(US)8-1/2';
           });
-          if (currentUser.country == 'India'){
-            Proceedtobuy(total:inr,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else if (currentUser.country == 'UK'){
-            Proceedtobuy(total:gbp,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else  if (currentUser.country == 'Europe'){
-            Proceedtobuy(total:eur,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else  if (currentUser.country == 'USA'){
-            Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else  {
-            Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
+
 
         },
-        child: Container(
-          decoration: BoxDecoration(
-              color: kPrimaryColor,
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.grey,
-                  blurRadius: 5.0,
-                ),]
-              ,borderRadius: BorderRadius.all(Radius.circular(10.0))
-          ),
-          height: 40,
-          width: 40,
+        child:   Container(
+          height:50,
+          width:MediaQuery.of(context).size.width,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              FittedBox(child: Text('(US)8-1/2',style: TextStyle(color: Colors.white,fontSize: 8),)),
-
+//    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
+              FittedBox(child: Text('(US)8-1/2',)),
             ],
           ),
         ),
@@ -2926,62 +1973,24 @@ MS12(){
   }
   else{
     return
-      GestureDetector(
+      InkWell(
         onTap: (){
           setState(()  {
 
             usersize = '(US)9';
           });
-          if (currentUser.country == 'India'){
-            Proceedtobuy(total:inr,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else if (currentUser.country == 'UK'){
-            Proceedtobuy(total:gbp,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else  if (currentUser.country == 'Europe'){
-            Proceedtobuy(total:eur,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else  if (currentUser.country == 'USA'){
-            Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else  {
-            Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
+
 
 
         },
-        child: Container(
-          decoration: BoxDecoration(
-              color: kPrimaryColor,
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.grey,
-                  blurRadius: 5.0,
-                ),]
-              ,borderRadius: BorderRadius.all(Radius.circular(10.0))
-          ),
-          height: 40,
-          width: 40,
+        child:   Container(
+          height:50,
+          width:MediaQuery.of(context).size.width,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              FittedBox(child: Text('(US)9',style: TextStyle(color: Colors.white,fontSize: 8),)),
-
+//    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
+              FittedBox(child: Text('(US)9',)),
             ],
           ),
         ),
@@ -2995,61 +2004,23 @@ MS13(){
   }
   else{
 return
-    GestureDetector(
+    InkWell(
       onTap: (){
         setState(()  {
 
           usersize = '(US)9-1/2';
         });
-        if (currentUser.country == 'India'){
-          Proceedtobuy(total:inr,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-              username: username,
-              mediaUrl: shopmediaUrl.first,
-              productname:productname);
-        }
-        else if (currentUser.country == 'UK'){
-          Proceedtobuy(total:gbp,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-              username: username,
-              mediaUrl: shopmediaUrl.first,
-              productname:productname);
-        }
-        else  if (currentUser.country == 'Europe'){
-          Proceedtobuy(total:eur,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-              username: username,
-              mediaUrl: shopmediaUrl.first,
-              productname:productname);
-        }
-        else  if (currentUser.country == 'USA'){
-          Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-              username: username,
-              mediaUrl: shopmediaUrl.first,
-              productname:productname);
-        }
-        else  {
-          Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-              username: username,
-              mediaUrl: shopmediaUrl.first,
-              productname:productname);
-        }
+
 
       },
-      child: Container(
-        decoration: BoxDecoration(
-            color: kPrimaryColor,
-            boxShadow: [
-              BoxShadow(
-                color: Colors.grey,
-                blurRadius: 5.0,
-              ),]
-            ,borderRadius: BorderRadius.all(Radius.circular(10.0))
-        ),
-        height: 40,
-        width: 40,
+      child:   Container(
+        height:50,
+        width:MediaQuery.of(context).size.width,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            FittedBox(child: Text('(US)9-1/2',style: TextStyle(color: Colors.white,fontSize: 8),)),
-
+//    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
+            FittedBox(child: Text('(US)9-1/2',)),
           ],
         ),
       ),
@@ -3063,62 +2034,24 @@ MS14(){
   }
   else{
     return
-      GestureDetector(
+      InkWell(
         onTap: (){
           setState(()  {
 
             usersize = '(US)10';
           });
-          if (currentUser.country == 'India'){
-            Proceedtobuy(total:inr,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else if (currentUser.country == 'UK'){
-            Proceedtobuy(total:gbp,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else  if (currentUser.country == 'Europe'){
-            Proceedtobuy(total:eur,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else  if (currentUser.country == 'USA'){
-            Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else  {
-            Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
+
 
 
         },
-        child: Container(
-          decoration: BoxDecoration(
-              color: kPrimaryColor,
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.grey,
-                  blurRadius: 5.0,
-                ),]
-              ,borderRadius: BorderRadius.all(Radius.circular(10.0))
-          ),
-          height: 40,
-          width: 40,
+        child:   Container(
+          height:50,
+          width:MediaQuery.of(context).size.width,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              FittedBox(child: Text('(US)10',style: TextStyle(color: Colors.white,fontSize: 8),)),
-
+//    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
+              FittedBox(child: Text('(US)10',)),
             ],
           ),
         ),
@@ -3133,61 +2066,23 @@ MS15(){
   }
   else{
     return
-      GestureDetector(
+      InkWell(
         onTap: (){
           setState(()  {
 
             usersize = '(US)10-1/2';
           });
-          if (currentUser.country == 'India'){
-            Proceedtobuy(total:inr,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else if (currentUser.country == 'UK'){
-            Proceedtobuy(total:gbp,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else  if (currentUser.country == 'Europe'){
-            Proceedtobuy(total:eur,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else  if (currentUser.country == 'USA'){
-            Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else  {
-            Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
+
 
         },
-        child: Container(
-          decoration: BoxDecoration(
-              color: kPrimaryColor,
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.grey,
-                  blurRadius: 5.0,
-                ),]
-              ,borderRadius: BorderRadius.all(Radius.circular(10.0))
-          ),
-          height: 40,
-          width: 40,
+        child:   Container(
+          height:50,
+          width:MediaQuery.of(context).size.width,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              FittedBox(child: Text('(US)10-1/2',style: TextStyle(color: Colors.white,fontSize: 8),)),
-
+//    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
+              FittedBox(child: Text('(US)10-1/2',)),
             ],
           ),
         ),
@@ -3201,62 +2096,23 @@ MS16(){
   }
   else{
     return
-      GestureDetector(
+      InkWell(
         onTap: (){
           setState(()  {
 
             usersize = '(US)11';
           });
-          if (currentUser.country == 'India'){
-            Proceedtobuy(total:inr,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else if (currentUser.country == 'UK'){
-            Proceedtobuy(total:gbp,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else  if (currentUser.country == 'Europe'){
-            Proceedtobuy(total:eur,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else  if (currentUser.country == 'USA'){
-            Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else  {
-            Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
+
 
         },
-        child: Container(
-          decoration: BoxDecoration(
-              color: kPrimaryColor,
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.grey,
-                  blurRadius: 5.0,
-                ),]
-              ,borderRadius: BorderRadius.all(Radius.circular(10.0))
-          ),
-          height: 40,
-          width: 40,
+        child:   Container(
+          height:50,
+          width:MediaQuery.of(context).size.width,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              FittedBox(child: Text('(US)11',style: TextStyle(color: Colors.white,fontSize: 8),)),
-
-
+//    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
+              FittedBox(child: Text('(US)11',)),
             ],
           ),
         ),
@@ -3270,62 +2126,23 @@ MS17(){
   }
   else{
     return
-      GestureDetector(
+      InkWell(
         onTap: (){
           setState(()  {
 
             usersize = '(US)11-1/2';
           });
-          if (currentUser.country == 'India'){
-            Proceedtobuy(total:inr,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else if (currentUser.country == 'UK'){
-            Proceedtobuy(total:gbp,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else  if (currentUser.country == 'Europe'){
-            Proceedtobuy(total:eur,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else  if (currentUser.country == 'USA'){
-            Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else  {
-            Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
+
 
         },
-        child: Container(
-          decoration: BoxDecoration(
-              color: kPrimaryColor,
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.grey,
-                  blurRadius: 5.0,
-                ),]
-              ,borderRadius: BorderRadius.all(Radius.circular(10.0))
-          ),
-          height: 40,
-          width: 40,
-          child: Column
-            (
+        child:   Container(
+          height:50,
+          width:MediaQuery.of(context).size.width,
+          child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              FittedBox(child: Text('(US)11-1/2',style: TextStyle(color: Colors.white,fontSize: 8),)),
-
+//    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
+              FittedBox(child: Text('(US)11-1/2',)),
             ],
           ),
         ),
@@ -3340,62 +2157,24 @@ MS18(){
   }
   else{
     return
-      GestureDetector(
+      InkWell(
         onTap: (){
           setState(()  {
 
             usersize = '(US)12';
           });
-          if (currentUser.country == 'India'){
-            Proceedtobuy(total:inr,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else if (currentUser.country == 'UK'){
-            Proceedtobuy(total:gbp,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else  if (currentUser.country == 'Europe'){
-            Proceedtobuy(total:eur,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else  if (currentUser.country == 'USA'){
-            Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else  {
-            Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
+
 
 
         },
-        child: Container(
-          decoration: BoxDecoration(
-              color: kPrimaryColor,
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.grey,
-                  blurRadius: 5.0,
-                ),]
-              ,borderRadius: BorderRadius.all(Radius.circular(10.0))
-          ),
-          height: 40,
-          width: 40,
+        child:   Container(
+          height:50,
+          width:MediaQuery.of(context).size.width,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              FittedBox(child: Text('(US)12',style: TextStyle(color: Colors.white,fontSize: 8),)),
-
+//    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
+              FittedBox(child: Text('(US)12',)),
             ],
           ),
         ),
@@ -3410,60 +2189,23 @@ MS19(){
   }
   else{
     return
-      GestureDetector(
+      InkWell(
         onTap: (){
           setState(()  {
 
             usersize = '(US)12-1/2';
           });
-          if (currentUser.country == 'India'){
-            Proceedtobuy(total:inr,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else if (currentUser.country == 'UK'){
-            Proceedtobuy(total:gbp,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else  if (currentUser.country == 'Europe'){
-            Proceedtobuy(total:eur,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else  if (currentUser.country == 'USA'){
-            Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else  {
-            Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
+
 
         },
-        child: Container(
-          decoration: BoxDecoration(
-              color: kPrimaryColor,
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.grey,
-                  blurRadius: 5.0,
-                ),]
-              ,borderRadius: BorderRadius.all(Radius.circular(10.0))
-          ),
-          height: 40,
-          width: 40,
+        child:   Container(
+          height:50,
+          width:MediaQuery.of(context).size.width,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              FittedBox(child: Text('(US)12-1/2',style: TextStyle(color: Colors.white,fontSize: 8),)),
+//    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
+              FittedBox(child: Text('(US)12-1/2',)),
             ],
           ),
         ),
@@ -3478,65 +2220,26 @@ MS20(){
   }
   else{
   return
-  GestureDetector(
+  InkWell(
   onTap: (){
   setState(()  {
 
   usersize = '(US)13';
   });
-  if (currentUser.country == 'India'){
-    Proceedtobuy(total:inr,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-        username: username,
-        mediaUrl: shopmediaUrl.first,
-        productname:productname);
-  }
-  else if (currentUser.country == 'UK'){
-    Proceedtobuy(total:gbp,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-        username: username,
-        mediaUrl: shopmediaUrl.first,
-        productname:productname);
-  }
-  else  if (currentUser.country == 'Europe'){
-    Proceedtobuy(total:eur,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-        username: username,
-        mediaUrl: shopmediaUrl.first,
-        productname:productname);
-  }
-  else  if (currentUser.country == 'USA'){
-    Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-        username: username,
-        mediaUrl: shopmediaUrl.first,
-        productname:productname);
-  }
-  else  {
-    Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-        username: username,
-        mediaUrl: shopmediaUrl.first,
-        productname:productname);
-  }
 
 
   },
-  child: Container(
-  decoration: BoxDecoration(
-  color: kPrimaryColor,
-  boxShadow: [
-  BoxShadow(
-  color: Colors.grey,
-  blurRadius: 5.0,
-  ),]
-  ,borderRadius: BorderRadius.all(Radius.circular(10.0))
-  ),
-  height: 40,
-  width: 40,
-  child: Column(
-  mainAxisAlignment: MainAxisAlignment.center,
-  children: [
-  FittedBox(child: Text('(US)13',style: TextStyle(color: Colors.white,fontSize: 8),)),
-
-  ],
-  ),
-  ),
+    child:   Container(
+      height:50,
+      width:MediaQuery.of(context).size.width,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+//    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
+          FittedBox(child: Text('(US)13',)),
+        ],
+      ),
+    ),
   );
 }
 }
@@ -3548,60 +2251,23 @@ MS21(){
   }
   else{
     return
-      GestureDetector(
+      InkWell(
         onTap: (){
           setState(()  {
 
             usersize = '(US)13-1/2';
           });
-          if (currentUser.country == 'India'){
-            Proceedtobuy(total:inr,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else if (currentUser.country == 'UK'){
-            Proceedtobuy(total:gbp,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else  if (currentUser.country == 'Europe'){
-            Proceedtobuy(total:eur,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else  if (currentUser.country == 'USA'){
-            Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else  {
-            Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
+
 
         },
-        child: Container(
-          decoration: BoxDecoration(
-              color: kPrimaryColor,
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.grey,
-                  blurRadius: 5.0,
-                ),]
-              ,borderRadius: BorderRadius.all(Radius.circular(10.0))
-          ),
-          height: 40,
-          width: 40,
+        child:   Container(
+          height:50,
+          width:MediaQuery.of(context).size.width,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              FittedBox(child: Text('(US)13-1/2',style: TextStyle(color: Colors.white,fontSize: 8),)),
+//    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
+              FittedBox(child: Text('(US)13-1/2',)),
             ],
           ),
         ),
@@ -3617,61 +2283,23 @@ MS21(){
     }
     else{
       return
-      GestureDetector(
+      InkWell(
         onTap: (){
           setState(()  {
 
-            usersize = '5';
+            usersize = '(US)5';
           });
-          if (currentUser.country == 'India'){
-            Proceedtobuy(total:inr,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else if (currentUser.country == 'UK'){
-            Proceedtobuy(total:gbp,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else  if (currentUser.country == 'Europe'){
-            Proceedtobuy(total:eur,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else  if (currentUser.country == 'USA'){
-            Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else  {
-            Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
+
 
         },
-        child: Container(
-          decoration: BoxDecoration(
-              color: kPrimaryColor,
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.grey,
-                  blurRadius: 5.0,
-                ),]
-              ,borderRadius: BorderRadius.all(Radius.circular(10.0))
-          ),
-          height: 40,
-          width: 40,
+        child:   Container(
+          height:50,
+          width:MediaQuery.of(context).size.width,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              FittedBox(child: Text('(US)5',style: TextStyle(color: Colors.white,fontSize: 8),)),
-
+//    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
+              FittedBox(child: Text('(US)5',)),
             ],
           ),
         ),
@@ -3685,61 +2313,23 @@ MS21(){
     }
     else{
       return
-      GestureDetector(
+      InkWell(
         onTap: (){
           setState(()  {
 
-            usersize = '5-1/2';
+            usersize = '(US)5-1/2';
           });
-          if (currentUser.country == 'India'){
-            Proceedtobuy(total:inr,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else if (currentUser.country == 'UK'){
-            Proceedtobuy(total:gbp,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else  if (currentUser.country == 'Europe'){
-            Proceedtobuy(total:eur,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else  if (currentUser.country == 'USA'){
-            Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else  {
-            Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
+
 
         },
-        child: Container(
-          decoration: BoxDecoration(
-              color: kPrimaryColor,
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.grey,
-                  blurRadius: 5.0,
-                ),]
-              ,borderRadius: BorderRadius.all(Radius.circular(10.0))
-          ),
-          height: 40,
-          width: 40,
+        child:   Container(
+          height:50,
+          width:MediaQuery.of(context).size.width,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              FittedBox(child: Text('(US)5-1/2',style: TextStyle(color: Colors.white,fontSize: 8),)),
-
+//    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
+              FittedBox(child: Text('(US)5-1/2',)),
             ],
           ),
         ),
@@ -3753,62 +2343,24 @@ MS21(){
     }
     else{
       return
-      GestureDetector(
+      InkWell(
         onTap: (){
           setState(()  {
 
-            usersize = '6';
+            usersize = '(US)6';
           });
-          if (currentUser.country == 'India'){
-            Proceedtobuy(total:inr,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else if (currentUser.country == 'UK'){
-            Proceedtobuy(total:gbp,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else  if (currentUser.country == 'Europe'){
-            Proceedtobuy(total:eur,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else  if (currentUser.country == 'USA'){
-            Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else  {
-            Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
+
 
 
         },
-        child: Container(
-          decoration: BoxDecoration(
-              color: kPrimaryColor,
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.grey,
-                  blurRadius: 5.0,
-                ),]
-              ,borderRadius: BorderRadius.all(Radius.circular(10.0))
-          ),
-          height: 40,
-          width: 40,
+        child:   Container(
+          height:50,
+          width:MediaQuery.of(context).size.width,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              FittedBox(child: Text('(US)6',style: TextStyle(color: Colors.white,fontSize: 8),)),
-
+//    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
+              FittedBox(child: Text('(US)6',)),
             ],
           ),
         ),
@@ -3821,61 +2373,23 @@ MS21(){
         Container();
     }
     else{return
-      GestureDetector(
+      InkWell(
         onTap: (){
           setState(()  {
 
-            usersize = '6-1/2';
+            usersize = '(US)6-1/2';
           });
-          if (currentUser.country == 'India'){
-            Proceedtobuy(total:inr,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else if (currentUser.country == 'UK'){
-            Proceedtobuy(total:gbp,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else  if (currentUser.country == 'Europe'){
-            Proceedtobuy(total:eur,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else  if (currentUser.country == 'USA'){
-            Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else  {
-            Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
+
 
         },
-        child: Container(
-          decoration: BoxDecoration(
-              color: kPrimaryColor,
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.grey,
-                  blurRadius: 5.0,
-                ),]
-              ,borderRadius: BorderRadius.all(Radius.circular(10.0))
-          ),
-          height: 40,
-          width: 40,
+        child:   Container(
+          height:50,
+          width:MediaQuery.of(context).size.width,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              FittedBox(child: Text('(US)6-1/2',style: TextStyle(color: Colors.white,fontSize: 8),)),
-
+//    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
+              FittedBox(child: Text('(US)6-1/2',)),
             ],
           ),
         ),
@@ -3889,62 +2403,24 @@ MS21(){
     }
     else{
       return
-      GestureDetector(
+      InkWell(
         onTap: (){
           setState(()  {
 
-            usersize = '7';
+            usersize = '(US)7';
           });
-          if (currentUser.country == 'India'){
-            Proceedtobuy(total:inr,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else if (currentUser.country == 'UK'){
-            Proceedtobuy(total:gbp,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else  if (currentUser.country == 'Europe'){
-            Proceedtobuy(total:eur,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else  if (currentUser.country == 'USA'){
-            Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else  {
-            Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
+
 
 
         },
-        child: Container(
-          decoration: BoxDecoration(
-              color: kPrimaryColor,
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.grey,
-                  blurRadius: 5.0,
-                ),]
-              ,borderRadius: BorderRadius.all(Radius.circular(10.0))
-          ),
-          height: 40,
-          width: 40,
+        child:   Container(
+          height:50,
+          width:MediaQuery.of(context).size.width,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              FittedBox(child: Text('(US)7',style: TextStyle(color: Colors.white,fontSize: 8),)),
-
+//    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
+              FittedBox(child: Text('(US)7',)),
             ],
           ),
         ),
@@ -3958,61 +2434,23 @@ MS21(){
     }
     else{
       return
-      GestureDetector(
+      InkWell(
         onTap: (){
           setState(()  {
 
-            usersize = '7-1/2';
+            usersize = '(US)7-1/2';
           });
-          if (currentUser.country == 'India'){
-            Proceedtobuy(total:inr,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else if (currentUser.country == 'UK'){
-            Proceedtobuy(total:gbp,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else  if (currentUser.country == 'Europe'){
-            Proceedtobuy(total:eur,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else  if (currentUser.country == 'USA'){
-            Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else  {
-            Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
+
 
         },
-        child: Container(
-          decoration: BoxDecoration(
-              color: kPrimaryColor,
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.grey,
-                  blurRadius: 5.0,
-                ),]
-              ,borderRadius: BorderRadius.all(Radius.circular(10.0))
-          ),
-          height: 40,
-          width: 40,
+        child:   Container(
+          height:50,
+          width:MediaQuery.of(context).size.width,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              FittedBox(child: Text('(US)7-1/2',style: TextStyle(color: Colors.white,fontSize: 8),)),
-
+//    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
+              FittedBox(child: Text('(US)7-1/2',)),
             ],
           ),
         ),
@@ -4027,63 +2465,24 @@ MS21(){
     }
     else{
       return
-      GestureDetector(
+      InkWell(
         onTap: (){
           setState(()  {
 
-            usersize = '8';
+            usersize = '(US)8';
           });
-          if (currentUser.country == 'India'){
-            Proceedtobuy(total:inr,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else if (currentUser.country == 'UK'){
-            Proceedtobuy(total:gbp,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else  if (currentUser.country == 'Europe'){
-            Proceedtobuy(total:eur,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else  if (currentUser.country == 'USA'){
-            Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else  {
-            Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
+
 
 
         },
-        child: Container(
-          decoration: BoxDecoration(
-              color: kPrimaryColor,
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.grey,
-                  blurRadius: 5.0,
-                ),]
-              ,borderRadius: BorderRadius.all(Radius.circular(10.0))
-          ),
-          height: 40,
-          width: 40,
+        child:   Container(
+          height:50,
+          width:MediaQuery.of(context).size.width,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              FittedBox(child: Text('(US)8',style: TextStyle(color: Colors.white,fontSize: 8),)),
-
-
+//    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
+              FittedBox(child: Text('(US)8',)),
             ],
           ),
         ),
@@ -4098,62 +2497,24 @@ MS21(){
     }
     else{
       return
-      GestureDetector(
+      InkWell(
         onTap: (){
           setState(()  {
 
-            usersize = '8-1/2';
+            usersize = '(US)8-1/2';
           });
-          if (currentUser.country == 'India'){
-            Proceedtobuy(total:inr,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else if (currentUser.country == 'UK'){
-            Proceedtobuy(total:gbp,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else  if (currentUser.country == 'Europe'){
-            Proceedtobuy(total:eur,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else  if (currentUser.country == 'USA'){
-            Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else  {
-            Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
+
 
 
         },
-        child: Container(
-          decoration: BoxDecoration(
-              color: kPrimaryColor,
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.grey,
-                  blurRadius: 5.0,
-                ),]
-              ,borderRadius: BorderRadius.all(Radius.circular(10.0))
-          ),
-          height: 40,
-          width: 40,
+        child:   Container(
+          height:50,
+          width:MediaQuery.of(context).size.width,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              FittedBox(child: Text('(US)8-1/2',style: TextStyle(color: Colors.white,fontSize: 8),)),
-
+//    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
+              FittedBox(child: Text('(US)8-1/2',)),
             ],
           ),
         ),
@@ -4168,62 +2529,24 @@ MS21(){
     }
     else{
       return
-      GestureDetector(
+      InkWell(
         onTap: (){
           setState(()  {
 
-            usersize = '9';
+            usersize = '(US)9';
           });
-          if (currentUser.country == 'India'){
-            Proceedtobuy(total:inr,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else if (currentUser.country == 'UK'){
-            Proceedtobuy(total:gbp,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else  if (currentUser.country == 'Europe'){
-            Proceedtobuy(total:eur,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else  if (currentUser.country == 'USA'){
-            Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else  {
-            Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
+
 
 
         },
-        child: Container(
-          decoration: BoxDecoration(
-              color: kPrimaryColor,
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.grey,
-                  blurRadius: 5.0,
-                ),]
-              ,borderRadius: BorderRadius.all(Radius.circular(10.0))
-          ),
-          height: 40,
-          width: 40,
+        child:   Container(
+          height:50,
+          width:MediaQuery.of(context).size.width,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              FittedBox(child: Text('(US)9',style: TextStyle(color: Colors.white,fontSize: 8),)),
-
+//    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
+              FittedBox(child: Text('(US)9',)),
             ],
           ),
         ),
@@ -4237,62 +2560,24 @@ MS21(){
     }
     else{
       return
-      GestureDetector(
+      InkWell(
         onTap: (){
           setState(()  {
 
-            usersize = '9-1/2';
+            usersize = '(US)9-1/2';
           });
-          if (currentUser.country == 'India'){
-            Proceedtobuy(total:inr,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else if (currentUser.country == 'UK'){
-            Proceedtobuy(total:gbp,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else  if (currentUser.country == 'Europe'){
-            Proceedtobuy(total:eur,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else  if (currentUser.country == 'USA'){
-            Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else  {
-            Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
+
 
 
         },
-        child: Container(
-          decoration: BoxDecoration(
-              color: kPrimaryColor,
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.grey,
-                  blurRadius: 5.0,
-                ),]
-              ,borderRadius: BorderRadius.all(Radius.circular(10.0))
-          ),
-          height: 40,
-          width: 40,
+        child:   Container(
+          height:50,
+          width:MediaQuery.of(context).size.width,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              FittedBox(child: Text('(US)9-1/2',style: TextStyle(color: Colors.white,fontSize: 8),)),
-
+//    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
+              FittedBox(child: Text('(US)9-1/2',)),
             ],
           ),
         ),
@@ -4306,61 +2591,23 @@ MS21(){
     }
     else{
       return
-      GestureDetector(
+      InkWell(
         onTap: (){
           setState(()  {
 
-            usersize = '10';
+            usersize = '(US)10';
           });
-          if (currentUser.country == 'India'){
-            Proceedtobuy(total:inr,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else if (currentUser.country == 'UK'){
-            Proceedtobuy(total:gbp,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else  if (currentUser.country == 'Europe'){
-            Proceedtobuy(total:eur,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else  if (currentUser.country == 'USA'){
-            Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else  {
-            Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
+
 
         },
-        child: Container(
-          decoration: BoxDecoration(
-              color: kPrimaryColor,
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.grey,
-                  blurRadius: 5.0,
-                ),]
-              ,borderRadius: BorderRadius.all(Radius.circular(10.0))
-          ),
-          height: 40,
-          width: 40,
+        child:   Container(
+          height:50,
+          width:MediaQuery.of(context).size.width,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              FittedBox(child: Text('(US)10',style: TextStyle(color: Colors.white,fontSize: 8),)),
-
+//    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
+              FittedBox(child: Text('(US)10',)),
             ],
           ),
         ),
@@ -4374,61 +2621,23 @@ MS21(){
     }
     else{
       return
-      GestureDetector(
+      InkWell(
         onTap: (){
           setState(()  {
 
-            usersize = '10-1/2';
+            usersize = '(US)10-1/2';
           });
-          if (currentUser.country == 'India'){
-            Proceedtobuy(total:inr,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else if (currentUser.country == 'UK'){
-            Proceedtobuy(total:gbp,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else  if (currentUser.country == 'Europe'){
-            Proceedtobuy(total:eur,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else  if (currentUser.country == 'USA'){
-            Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else  {
-            Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
+
 
         },
-        child: Container(
-          decoration: BoxDecoration(
-              color: kPrimaryColor,
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.grey,
-                  blurRadius: 5.0,
-                ),]
-              ,borderRadius: BorderRadius.all(Radius.circular(10.0))
-          ),
-          height: 40,
-          width: 40,
+        child:   Container(
+          height:50,
+          width:MediaQuery.of(context).size.width,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              FittedBox(child: Text('(US)10-1/2',style: TextStyle(color: Colors.white,fontSize: 8),)),
-
+//    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
+              FittedBox(child: Text('(US)10-1/2',)),
             ],
           ),
         ),
@@ -4442,61 +2651,23 @@ MS21(){
     }
 else{
   return
-      GestureDetector(
+      InkWell(
         onTap: (){
           setState(()  {
 
-            usersize = '12';
+            usersize = '(US)12';
           });
-          if (currentUser.country == 'India'){
-            Proceedtobuy(total:inr,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else if (currentUser.country == 'UK'){
-            Proceedtobuy(total:gbp,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else  if (currentUser.country == 'Europe'){
-            Proceedtobuy(total:eur,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else  if (currentUser.country == 'USA'){
-            Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else  {
-            Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
+
 
         },
-        child: Container(
-          decoration: BoxDecoration(
-              color: kPrimaryColor,
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.grey,
-                  blurRadius: 5.0,
-                ),]
-              ,borderRadius: BorderRadius.all(Radius.circular(10.0))
-          ),
-          height: 40,
-          width: 40,
+        child:   Container(
+          height:50,
+          width:MediaQuery.of(context).size.width,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              FittedBox(child: Text('(US)12',style: TextStyle(color: Colors.white,fontSize: 8),)),
-
+//    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
+              FittedBox(child: Text('(US)12',)),
             ],
           ),
         ),
@@ -4511,61 +2682,23 @@ else{
     }
     else{
       return
-      GestureDetector(
+      InkWell(
         onTap: (){
           setState(()  {
 
-            usersize = '13';
+            usersize = '(US)13';
           });
-          if (currentUser.country == 'India'){
-            Proceedtobuy(total:inr,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else if (currentUser.country == 'UK'){
-            Proceedtobuy(total:gbp,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else  if (currentUser.country == 'Europe'){
-            Proceedtobuy(total:eur,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else  if (currentUser.country == 'USA'){
-            Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else  {
-            Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
+
 
         },
-        child: Container(
-          decoration: BoxDecoration(
-              color: kPrimaryColor,
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.grey,
-                  blurRadius: 5.0,
-                ),]
-              ,borderRadius: BorderRadius.all(Radius.circular(10.0))
-          ),
-          height: 40,
-          width: 40,
+        child:   Container(
+          height:50,
+          width:MediaQuery.of(context).size.width,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              FittedBox(child: Text('(US)13',style: TextStyle(color: Colors.white,fontSize: 8),)),
-
+//    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
+              FittedBox(child: Text('(US)13',)),
             ],
           ),
         ),
@@ -4580,61 +2713,23 @@ else{
     }
     else{
       return
-      GestureDetector(
+      InkWell(
         onTap: (){
           setState(()  {
 
             usersize = '14';
           });
-          if (currentUser.country == 'India'){
-            Proceedtobuy(total:inr,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else if (currentUser.country == 'UK'){
-            Proceedtobuy(total:gbp,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else  if (currentUser.country == 'Europe'){
-            Proceedtobuy(total:eur,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else  if (currentUser.country == 'USA'){
-            Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else  {
-            Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
+
 
         },
-        child: Container(
-          decoration: BoxDecoration(
-              color: kPrimaryColor,
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.grey,
-                  blurRadius: 5.0,
-                ),]
-              ,borderRadius: BorderRadius.all(Radius.circular(10.0))
-          ),
-          height: 40,
-          width: 40,
+        child:   Container(
+          height:50,
+          width:MediaQuery.of(context).size.width,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              FittedBox(child: Text('(US)14',style: TextStyle(color: Colors.white,fontSize: 8),)),
-
+//    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
+              FittedBox(child: Text('(US)14',)),
             ],
           ),
         ),
@@ -4649,61 +2744,23 @@ else{
     }
     else{
       return
-      GestureDetector(
+      InkWell(
         onTap: (){
           setState(()  {
 
-            usersize = '15-1/2';
+            usersize = '(US)15-1/2';
           });
-          if (currentUser.country == 'India'){
-            Proceedtobuy(total:inr,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else if (currentUser.country == 'UK'){
-            Proceedtobuy(total:gbp,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else  if (currentUser.country == 'Europe'){
-            Proceedtobuy(total:eur,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else  if (currentUser.country == 'USA'){
-            Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else  {
-            Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
+
 
         },
-        child: Container(
-          decoration: BoxDecoration(
-              color: kPrimaryColor,
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.grey,
-                  blurRadius: 5.0,
-                ),]
-              ,borderRadius: BorderRadius.all(Radius.circular(10.0))
-          ),
-          height: 40,
-          width: 40,
+        child:   Container(
+          height:50,
+          width:MediaQuery.of(context).size.width,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              FittedBox(child: Text('(US)15-1/2',style: TextStyle(color: Colors.white,fontSize: 8),)),
-
+//    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
+              FittedBox(child: Text('(US)15-1/2',)),
             ],
           ),
         ),
@@ -4717,60 +2774,23 @@ else{
     }
     else{
       return
-      GestureDetector(
+      InkWell(
         onTap: (){
           setState(()  {
 
             usersize = '0-3 M';
           });
-          if (currentUser.country == 'India'){
-            Proceedtobuy(total:inr,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else if (currentUser.country == 'UK'){
-            Proceedtobuy(total:gbp,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else  if (currentUser.country == 'Europe'){
-            Proceedtobuy(total:eur,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else  if (currentUser.country == 'USA'){
-            Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else  {
-            Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
+
 
         },
-        child: Container(
-          decoration: BoxDecoration(
-              color: kPrimaryColor,
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.grey,
-                  blurRadius: 5.0,
-                ),]
-              ,borderRadius: BorderRadius.all(Radius.circular(10.0))
-          ),
-          height: 40,
-          width: 40,
+        child:   Container(
+          height:50,
+          width:MediaQuery.of(context).size.width,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              FittedBox(child: Text('0-3 M',style: TextStyle(color: Colors.white),)),
+//    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
+              FittedBox(child: Text('0-3 M',)),
             ],
           ),
         ),
@@ -4784,60 +2804,23 @@ else{
     }
     else{
       return
-      GestureDetector(
+      InkWell(
         onTap: (){
           setState(()  {
 
             usersize = '3-6 M';
           });
-          if (currentUser.country == 'India'){
-            Proceedtobuy(total:inr,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else if (currentUser.country == 'UK'){
-            Proceedtobuy(total:gbp,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else  if (currentUser.country == 'Europe'){
-            Proceedtobuy(total:eur,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else  if (currentUser.country == 'USA'){
-            Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else  {
-            Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
+
 
         },
-        child: Container(
-          decoration: BoxDecoration(
-              color: kPrimaryColor,
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.grey,
-                  blurRadius: 5.0,
-                ),]
-              ,borderRadius: BorderRadius.all(Radius.circular(10.0))
-          ),
-          height: 40,
-          width: 40,
+        child:   Container(
+          height:50,
+          width:MediaQuery.of(context).size.width,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              FittedBox(child: Text('3-6 M',style: TextStyle(color: Colors.white),)),
+//    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
+              FittedBox(child: Text('3-6 M',)),
             ],
           ),
         ),
@@ -4851,60 +2834,23 @@ else{
  }
  else {
    return
-   GestureDetector(
+   InkWell(
      onTap: (){
        setState(()  {
 
          usersize = '6-9 M';
        });
-       if (currentUser.country == 'India'){
-         Proceedtobuy(total:inr,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-             username: username,
-             mediaUrl: shopmediaUrl.first,
-             productname:productname);
-       }
-       else if (currentUser.country == 'UK'){
-         Proceedtobuy(total:gbp,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-             username: username,
-             mediaUrl: shopmediaUrl.first,
-             productname:productname);
-       }
-       else  if (currentUser.country == 'Europe'){
-         Proceedtobuy(total:eur,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-             username: username,
-             mediaUrl: shopmediaUrl.first,
-             productname:productname);
-       }
-       else  if (currentUser.country == 'USA'){
-         Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-             username: username,
-             mediaUrl: shopmediaUrl.first,
-             productname:productname);
-       }
-       else  {
-         Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-             username: username,
-             mediaUrl: shopmediaUrl.first,
-             productname:productname);
-       }
+
 
      },
-     child: Container(
-       decoration: BoxDecoration(
-           color: kPrimaryColor,
-           boxShadow: [
-             BoxShadow(
-               color: Colors.grey,
-               blurRadius: 5.0,
-             ),]
-           ,borderRadius: BorderRadius.all(Radius.circular(10.0))
-       ),
-       height: 40,
-       width: 40,
+     child:   Container(
+       height:50,
+       width:MediaQuery.of(context).size.width,
        child: Column(
          mainAxisAlignment: MainAxisAlignment.center,
          children: [
-           FittedBox(child: Text('6-9 M',style: TextStyle(color: Colors.white),)),
+//    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
+           FittedBox(child: Text('6-9 M',)),
          ],
        ),
      ),
@@ -4919,60 +2865,23 @@ else{
     }
     else{
       return
-      GestureDetector(
+      InkWell(
         onTap: (){
           setState(()  {
 
             usersize = '9-12 M';
           });
-          if (currentUser.country == 'India'){
-            Proceedtobuy(total:inr,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else if (currentUser.country == 'UK'){
-            Proceedtobuy(total:gbp,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else  if (currentUser.country == 'Europe'){
-            Proceedtobuy(total:eur,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else  if (currentUser.country == 'USA'){
-            Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else  {
-            Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
+
 
         },
-        child: Container(
-          decoration: BoxDecoration(
-              color: kPrimaryColor,
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.grey,
-                  blurRadius: 5.0,
-                ),]
-              ,borderRadius: BorderRadius.all(Radius.circular(10.0))
-          ),
-          height: 40,
-          width: 40,
+        child:   Container(
+          height:50,
+          width:MediaQuery.of(context).size.width,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              FittedBox(child: Text('9-12 M',style: TextStyle(color: Colors.white),)),
+//    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
+              FittedBox(child: Text('9-12 M',)),
             ],
           ),
         ),
@@ -4987,60 +2896,23 @@ else{
     }
     else{
       return
-      GestureDetector(
+      InkWell(
         onTap: (){
           setState(()  {
 
             usersize = '12-18 M';
           });
-          if (currentUser.country == 'India'){
-            Proceedtobuy(total:inr,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else if (currentUser.country == 'UK'){
-            Proceedtobuy(total:gbp,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else  if (currentUser.country == 'Europe'){
-            Proceedtobuy(total:eur,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else  if (currentUser.country == 'USA'){
-            Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else  {
-            Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
+
 
         },
-        child: Container(
-          decoration: BoxDecoration(
-              color: kPrimaryColor,
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.grey,
-                  blurRadius: 5.0,
-                ),]
-              ,borderRadius: BorderRadius.all(Radius.circular(10.0))
-          ),
-          height: 40,
-          width: 40,
+        child:   Container(
+          height:50,
+          width:MediaQuery.of(context).size.width,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              FittedBox(child: Text('12-18 M',style: TextStyle(color: Colors.white),)),
+//    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
+              FittedBox(child: Text('12-18 M',)),
             ],
           ),
         ),
@@ -5055,60 +2927,23 @@ else{
     }
     else{
       return
-      GestureDetector(
+      InkWell(
         onTap: (){
           setState(()  {
 
             usersize = '18-24 M';
           });
-          if (currentUser.country == 'India'){
-            Proceedtobuy(total:inr,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else if (currentUser.country == 'UK'){
-            Proceedtobuy(total:gbp,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else  if (currentUser.country == 'Europe'){
-            Proceedtobuy(total:eur,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else  if (currentUser.country == 'USA'){
-            Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else  {
-            Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
+
 
         },
-        child: Container(
-          decoration: BoxDecoration(
-              color: kPrimaryColor,
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.grey,
-                  blurRadius: 5.0,
-                ),]
-              ,borderRadius: BorderRadius.all(Radius.circular(10.0))
-          ),
-          height: 40,
-          width: 40,
+        child:   Container(
+          height:50,
+          width:MediaQuery.of(context).size.width,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              FittedBox(child: Text('18-24 M',style: TextStyle(color: Colors.white),)),
+//    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
+              FittedBox(child: Text('18-24 M',)),
             ],
           ),
         ),
@@ -5123,61 +2958,23 @@ else{
     }
     else{
       return
-      GestureDetector(
+      InkWell(
         onTap: (){
           setState(()  {
 
             usersize = 'S 0-3 M';
           });
-          if (currentUser.country == 'India'){
-            Proceedtobuy(total:inr,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else if (currentUser.country == 'UK'){
-            Proceedtobuy(total:gbp,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else  if (currentUser.country == 'Europe'){
-            Proceedtobuy(total:eur,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else  if (currentUser.country == 'USA'){
-            Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else  {
-            Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
+
 
         },
-        child: Container(
-          decoration: BoxDecoration(
-              color: kPrimaryColor,
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.grey,
-                  blurRadius: 5.0,
-                ),]
-              ,borderRadius: BorderRadius.all(Radius.circular(10.0))
-          ),
-          height: 40,
-          width: 40,
+        child:   Container(
+          height:50,
+          width:MediaQuery.of(context).size.width,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              FittedBox(child: Text('0-3 M',style: TextStyle(color: Colors.white,fontSize: 8),)),
-
+//    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
+              FittedBox(child: Text('0-3 M',)),
             ],
           ),
         ),
@@ -5192,62 +2989,23 @@ else{
     }
     else{
       return
-      GestureDetector(
+      InkWell(
         onTap: (){
           setState(()  {
 
             usersize = 'S 3-6 M';
           });
-          if (currentUser.country == 'India'){
-            Proceedtobuy(total:inr,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else if (currentUser.country == 'UK'){
-            Proceedtobuy(total:gbp,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else  if (currentUser.country == 'Europe'){
-            Proceedtobuy(total:eur,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else  if (currentUser.country == 'USA'){
-            Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else  {
-            Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
+
 
         },
-        child: Container(
-          decoration: BoxDecoration(
-              color: kPrimaryColor,
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.grey,
-                  blurRadius: 5.0,
-                ),]
-              ,borderRadius: BorderRadius.all(Radius.circular(10.0))
-          ),
-          height: 40,
-          width: 40,
+        child:   Container(
+          height:50,
+          width:MediaQuery.of(context).size.width,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              FittedBox(child: Text('3-6 M',style: TextStyle(color: Colors.white,fontSize: 8),)),
-
-
+//    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
+              FittedBox(child: Text('3-6 M',)),
             ],
           ),
         ),
@@ -5262,62 +3020,23 @@ else{
     }
     else{
       return
-      GestureDetector(
+      InkWell(
         onTap: (){
           setState(()  {
 
-            usersize = '6 M';
+            usersize = 'S 6 M';
           });
-          if (currentUser.country == 'India'){
-            Proceedtobuy(total:inr,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else if (currentUser.country == 'UK'){
-            Proceedtobuy(total:gbp,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else  if (currentUser.country == 'Europe'){
-            Proceedtobuy(total:eur,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else  if (currentUser.country == 'USA'){
-            Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else  {
-            Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
+
 
         },
-        child: Container(
-          decoration: BoxDecoration(
-              color: kPrimaryColor,
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.grey,
-                  blurRadius: 5.0,
-                ),]
-              ,borderRadius: BorderRadius.all(Radius.circular(10.0))
-          ),
-          height: 40,
-          width: 40,
+        child:   Container(
+          height:50,
+          width:MediaQuery.of(context).size.width,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              FittedBox(child: Text('6 M',style: TextStyle(color: Colors.white,fontSize: 8),)),
-
-
+//    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
+              FittedBox(child: Text('6 M',)),
             ],
           ),
         ),
@@ -5332,61 +3051,23 @@ else{
     }
     else{
       return
-      GestureDetector(
+      InkWell(
         onTap: (){
           setState(()  {
 
-            usersize = '9 M';
+            usersize = 'S 9 M';
           });
-          if (currentUser.country == 'India'){
-            Proceedtobuy(total:inr,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else if (currentUser.country == 'UK'){
-            Proceedtobuy(total:gbp,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else  if (currentUser.country == 'Europe'){
-            Proceedtobuy(total:eur,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else  if (currentUser.country == 'USA'){
-            Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else  {
-            Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
+
 
         },
-        child: Container(
-          decoration: BoxDecoration(
-              color: kPrimaryColor,
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.grey,
-                  blurRadius: 5.0,
-                ),]
-              ,borderRadius: BorderRadius.all(Radius.circular(10.0))
-          ),
-          height: 40,
-          width: 40,
+        child:   Container(
+          height:50,
+          width:MediaQuery.of(context).size.width,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              FittedBox(child: Text('9-1/2 M',style: TextStyle(color: Colors.white,fontSize: 8),)),
-
+//    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
+              FittedBox(child: Text('9 M',)),
             ],
           ),
         ),
@@ -5401,62 +3082,23 @@ else{
     }
     else{
       return
-      GestureDetector(
+      InkWell(
         onTap: (){
           setState(()  {
 
             usersize = 'S 9-12 M';
           });
-          if (currentUser.country == 'India'){
-            Proceedtobuy(total:inr,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else if (currentUser.country == 'UK'){
-            Proceedtobuy(total:gbp,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else  if (currentUser.country == 'Europe'){
-            Proceedtobuy(total:eur,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else  if (currentUser.country == 'USA'){
-            Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else  {
-            Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
+
 
         },
-        child: Container(
-          decoration: BoxDecoration(
-              color: kPrimaryColor,
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.grey,
-                  blurRadius: 5.0,
-                ),]
-              ,borderRadius: BorderRadius.all(Radius.circular(10.0))
-          ),
-          height: 40,
-          width: 40,
+        child:   Container(
+          height:50,
+          width:MediaQuery.of(context).size.width,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              FittedBox(child: Text('9-12 M',style: TextStyle(color: Colors.white,fontSize: 8),)),
-
-
+//    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
+              FittedBox(child: Text('9-12 M',)),
             ],
           ),
         ),
@@ -5471,61 +3113,23 @@ else{
     }
     else{
       return
-      GestureDetector(
+      InkWell(
         onTap: (){
           setState(()  {
 
             usersize = 'S 12-18 M';
           });
-          if (currentUser.country == 'India'){
-            Proceedtobuy(total:inr,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else if (currentUser.country == 'UK'){
-            Proceedtobuy(total:gbp,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else  if (currentUser.country == 'Europe'){
-            Proceedtobuy(total:eur,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else  if (currentUser.country == 'USA'){
-            Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else  {
-            Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
+
 
         },
-        child: Container(
-          decoration: BoxDecoration(
-              color: kPrimaryColor,
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.grey,
-                  blurRadius: 5.0,
-                ),]
-              ,borderRadius: BorderRadius.all(Radius.circular(10.0))
-          ),
-          height: 40,
-          width: 40,
+        child:   Container(
+          height:50,
+          width:MediaQuery.of(context).size.width,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              FittedBox(child: Text('12-18 M',style: TextStyle(color: Colors.white,fontSize: 8),)),
-
+//    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
+              FittedBox(child: Text('12-18 M',)),
             ],
           ),
         ),
@@ -5540,61 +3144,23 @@ else{
     }
     else{
       return
-      GestureDetector(
+      InkWell(
         onTap: (){
           setState(()  {
 
             usersize = 'S 18-24 M';
           });
-          if (currentUser.country == 'India'){
-            Proceedtobuy(total:inr,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else if (currentUser.country == 'UK'){
-            Proceedtobuy(total:gbp,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else  if (currentUser.country == 'Europe'){
-            Proceedtobuy(total:eur,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else  if (currentUser.country == 'USA'){
-            Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else  {
-            Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
+
 
         },
-        child: Container(
-          decoration: BoxDecoration(
-              color: kPrimaryColor,
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.grey,
-                  blurRadius: 5.0,
-                ),]
-              ,borderRadius: BorderRadius.all(Radius.circular(10.0))
-          ),
-          height: 40,
-          width: 40,
+        child:   Container(
+          height:50,
+          width:MediaQuery.of(context).size.width,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              FittedBox(child: Text('18-24 M',style: TextStyle(color: Colors.white,fontSize: 8),)),
-
+//    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
+              FittedBox(child: Text('18-24 M',)),
             ],
           ),
         ),
@@ -5610,60 +3176,23 @@ else{
     else
     {
       return
-      GestureDetector(
+      InkWell(
         onTap: (){
           setState(()  {
 
             usersize = '2 Y';
           });
-          if (currentUser.country == 'India'){
-            Proceedtobuy(total:inr,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else if (currentUser.country == 'UK'){
-            Proceedtobuy(total:gbp,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else  if (currentUser.country == 'Europe'){
-            Proceedtobuy(total:eur,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else  if (currentUser.country == 'USA'){
-            Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else  {
-            Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
+
 
         },
-        child: Container(
-          decoration: BoxDecoration(
-              color: kPrimaryColor,
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.grey,
-                  blurRadius: 5.0,
-                ),]
-              ,borderRadius: BorderRadius.all(Radius.circular(10.0))
-          ),
-          height: 40,
-          width: 40,
+        child:   Container(
+          height:50,
+          width:MediaQuery.of(context).size.width,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              FittedBox(child: Text('2 Y',style: TextStyle(color: Colors.white),)),
+//    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
+              FittedBox(child: Text('2 Y',)),
             ],
           ),
         ),
@@ -5677,60 +3206,23 @@ else{
     }
     else{
       return
-      GestureDetector(
+      InkWell(
         onTap: (){
           setState(()  {
 
             usersize = '3-4 Y';
           });
-          if (currentUser.country == 'India'){
-            Proceedtobuy(total:inr,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else if (currentUser.country == 'UK'){
-            Proceedtobuy(total:gbp,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else  if (currentUser.country == 'Europe'){
-            Proceedtobuy(total:eur,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else  if (currentUser.country == 'USA'){
-            Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else  {
-            Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
+
 
         },
-        child: Container(
-          decoration: BoxDecoration(
-              color: kPrimaryColor,
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.grey,
-                  blurRadius: 5.0,
-                ),]
-              ,borderRadius: BorderRadius.all(Radius.circular(10.0))
-          ),
-          height: 40,
-          width: 40,
+        child:   Container(
+          height:50,
+          width:MediaQuery.of(context).size.width,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              FittedBox(child: Text('3-4 Y',style: TextStyle(color: Colors.white),)),
+//    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
+              FittedBox(child: Text('3-4 Y',)),
             ],
           ),
         ),
@@ -5745,60 +3237,23 @@ else{
     }
     else{
       return
-      GestureDetector(
+      InkWell(
         onTap: (){
           setState(()  {
 
             usersize = '4-5 Y';
           });
-          if (currentUser.country == 'India'){
-            Proceedtobuy(total:inr,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else if (currentUser.country == 'UK'){
-            Proceedtobuy(total:gbp,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else  if (currentUser.country == 'Europe'){
-            Proceedtobuy(total:eur,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else  if (currentUser.country == 'USA'){
-            Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else  {
-            Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
+
 
         },
-        child: Container(
-          decoration: BoxDecoration(
-              color: kPrimaryColor,
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.grey,
-                  blurRadius: 5.0,
-                ),]
-              ,borderRadius: BorderRadius.all(Radius.circular(10.0))
-          ),
-          height: 40,
-          width: 40,
+        child:   Container(
+          height:50,
+          width:MediaQuery.of(context).size.width,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              FittedBox(child: Text('4-5 Y',style: TextStyle(color: Colors.white),)),
+//    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
+              FittedBox(child: Text('4-5 Y',)),
             ],
           ),
         ),
@@ -5812,60 +3267,23 @@ else{
     }
     else{
       return
-      GestureDetector(
+      InkWell(
         onTap: (){
           setState(()  {
 
             usersize = '5-6 Y';
           });
-          if (currentUser.country == 'India'){
-            Proceedtobuy(total:inr,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else if (currentUser.country == 'UK'){
-            Proceedtobuy(total:gbp,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else  if (currentUser.country == 'Europe'){
-            Proceedtobuy(total:eur,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else  if (currentUser.country == 'USA'){
-            Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else  {
-            Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
+
 
         },
-        child: Container(
-          decoration: BoxDecoration(
-              color: kPrimaryColor,
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.grey,
-                  blurRadius: 5.0,
-                ),]
-              ,borderRadius: BorderRadius.all(Radius.circular(10.0))
-          ),
-          height: 40,
-          width: 40,
+        child:   Container(
+          height:50,
+          width:MediaQuery.of(context).size.width,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              FittedBox(child: Text('5-6 Y',style: TextStyle(color: Colors.white),)),
+//    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
+              FittedBox(child: Text('5-6 Y',)),
             ],
           ),
         ),
@@ -5879,60 +3297,23 @@ else{
     }
     else{
       return
-      GestureDetector(
+      InkWell(
         onTap: (){
           setState(()  {
 
             usersize = '6-7 Y';
           });
-          if (currentUser.country == 'India'){
-            Proceedtobuy(total:inr,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else if (currentUser.country == 'UK'){
-            Proceedtobuy(total:gbp,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else  if (currentUser.country == 'Europe'){
-            Proceedtobuy(total:eur,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else  if (currentUser.country == 'USA'){
-            Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else  {
-            Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
+
 
         },
-        child: Container(
-          decoration: BoxDecoration(
-              color: kPrimaryColor,
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.grey,
-                  blurRadius: 5.0,
-                ),]
-              ,borderRadius: BorderRadius.all(Radius.circular(10.0))
-          ),
-          height: 40,
-          width: 40,
+        child:   Container(
+          height:50,
+          width:MediaQuery.of(context).size.width,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              FittedBox(child: Text('6-7 Y',style: TextStyle(color: Colors.white),)),
+//    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
+              FittedBox(child: Text('6-7 Y',)),
             ],
           ),
         ),
@@ -5946,60 +3327,23 @@ else{
     }
     else{
       return
-      GestureDetector(
+      InkWell(
         onTap: (){
           setState(()  {
 
             usersize = '7-8 Y';
           });
-          if (currentUser.country == 'India'){
-            Proceedtobuy(total:inr,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else if (currentUser.country == 'UK'){
-            Proceedtobuy(total:gbp,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else  if (currentUser.country == 'Europe'){
-            Proceedtobuy(total:eur,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else  if (currentUser.country == 'USA'){
-            Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else  {
-            Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
+
 
         },
-        child: Container(
-          decoration: BoxDecoration(
-              color: kPrimaryColor,
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.grey,
-                  blurRadius: 5.0,
-                ),]
-              ,borderRadius: BorderRadius.all(Radius.circular(10.0))
-          ),
-          height: 40,
-          width: 40,
+        child:   Container(
+          height:50,
+          width:MediaQuery.of(context).size.width,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              FittedBox(child: Text('7-8 Y',style: TextStyle(color: Colors.white),)),
+//    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
+              FittedBox(child: Text('7-8 Y',)),
             ],
           ),
         ),
@@ -6013,60 +3357,23 @@ else{
     }
     else{
       return
-      GestureDetector(
+      InkWell(
         onTap: (){
           setState(()  {
 
             usersize = '8-9 Y';
           });
-          if (currentUser.country == 'India'){
-            Proceedtobuy(total:inr,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else if (currentUser.country == 'UK'){
-            Proceedtobuy(total:gbp,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else  if (currentUser.country == 'Europe'){
-            Proceedtobuy(total:eur,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else  if (currentUser.country == 'USA'){
-            Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else  {
-            Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
+
 
         },
-        child: Container(
-          decoration: BoxDecoration(
-              color: kPrimaryColor,
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.grey,
-                  blurRadius: 5.0,
-                ),]
-              ,borderRadius: BorderRadius.all(Radius.circular(10.0))
-          ),
-          height: 40,
-          width: 40,
+        child:   Container(
+          height:50,
+          width:MediaQuery.of(context).size.width,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              FittedBox(child: Text('8-9 Y',style: TextStyle(color: Colors.white),)),
+//    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
+              FittedBox(child: Text('8-9 Y',)),
             ],
           ),
         ),
@@ -6080,60 +3387,23 @@ else{
     }
     else{
       return
-      GestureDetector(
+      InkWell(
         onTap: (){
           setState(()  {
 
             usersize = '9-10 Y';
           });
-          if (currentUser.country == 'India'){
-            Proceedtobuy(total:inr,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else if (currentUser.country == 'UK'){
-            Proceedtobuy(total:gbp,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else  if (currentUser.country == 'Europe'){
-            Proceedtobuy(total:eur,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else  if (currentUser.country == 'USA'){
-            Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else  {
-            Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
+
 
         },
-        child: Container(
-          decoration: BoxDecoration(
-              color: kPrimaryColor,
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.grey,
-                  blurRadius: 5.0,
-                ),]
-              ,borderRadius: BorderRadius.all(Radius.circular(10.0))
-          ),
-          height: 40,
-          width: 40,
+        child:   Container(
+          height:50,
+          width:MediaQuery.of(context).size.width,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              FittedBox(child: Text('9-10 Y',style: TextStyle(color: Colors.white),)),
+//    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
+              FittedBox(child: Text('9-10 Y',)),
             ],
           ),
         ),
@@ -6147,60 +3417,23 @@ else{
     }
     else{
       return
-      GestureDetector(
+      InkWell(
         onTap: (){
           setState(()  {
 
             usersize = '10-11 Y';
           });
-          if (currentUser.country == 'India'){
-            Proceedtobuy(total:inr,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else if (currentUser.country == 'UK'){
-            Proceedtobuy(total:gbp,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else  if (currentUser.country == 'Europe'){
-            Proceedtobuy(total:eur,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else  if (currentUser.country == 'USA'){
-            Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else  {
-            Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
+
 
         },
-        child: Container(
-          decoration: BoxDecoration(
-              color: kPrimaryColor,
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.grey,
-                  blurRadius: 5.0,
-                ),]
-              ,borderRadius: BorderRadius.all(Radius.circular(10.0))
-          ),
-          height: 40,
-          width: 40,
+        child:   Container(
+          height:50,
+          width:MediaQuery.of(context).size.width,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              FittedBox(child: Text('10-11 Y',style: TextStyle(color: Colors.white),)),
+//    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
+              FittedBox(child: Text('10-11 Y',)),
             ],
           ),
         ),
@@ -6214,60 +3447,23 @@ else{
     }
     else{
       return
-      GestureDetector(
+      InkWell(
         onTap: (){
           setState(()  {
 
             usersize = '11-12 Y';
           });
-          if (currentUser.country == 'India'){
-            Proceedtobuy(total:inr,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else if (currentUser.country == 'UK'){
-            Proceedtobuy(total:gbp,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else  if (currentUser.country == 'Europe'){
-            Proceedtobuy(total:eur,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else  if (currentUser.country == 'USA'){
-            Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else  {
-            Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
+
 
         },
-        child: Container(
-          decoration: BoxDecoration(
-              color: kPrimaryColor,
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.grey,
-                  blurRadius: 5.0,
-                ),]
-              ,borderRadius: BorderRadius.all(Radius.circular(10.0))
-          ),
-          height: 40,
-          width: 40,
+        child:   Container(
+          height:50,
+          width:MediaQuery.of(context).size.width,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              FittedBox(child: Text('11-12 Y',style: TextStyle(color: Colors.white),)),
+//    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
+              FittedBox(child: Text('11-12 Y',)),
             ],
           ),
         ),
@@ -6281,61 +3477,23 @@ else{
     }
     else{
       return
-      GestureDetector(
+      InkWell(
         onTap: (){
           setState(()  {
 
-            usersize = '2 Y';
+            usersize = 'S 2 Y';
           });
-          if (currentUser.country == 'India'){
-            Proceedtobuy(total:inr,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else if (currentUser.country == 'UK'){
-            Proceedtobuy(total:gbp,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else  if (currentUser.country == 'Europe'){
-            Proceedtobuy(total:eur,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else  if (currentUser.country == 'USA'){
-            Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else  {
-            Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
+
 
         },
-        child: Container(
-          decoration: BoxDecoration(
-              color: kPrimaryColor,
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.grey,
-                  blurRadius: 5.0,
-                ),]
-              ,borderRadius: BorderRadius.all(Radius.circular(10.0))
-          ),
-          height: 40,
-          width: 40,
+        child:   Container(
+          height:50,
+          width:MediaQuery.of(context).size.width,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              FittedBox(child: Text('2 Y',style: TextStyle(color: Colors.white,fontSize: 8),)),
-
+//    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
+              FittedBox(child: Text('2 Y',)),
             ],
           ),
         ),
@@ -6350,62 +3508,23 @@ else{
     }
     else{
       return
-        GestureDetector(
+        InkWell(
           onTap: (){
             setState(()  {
 
-              usersize = '2-1/2 Y';
+              usersize = 'S 2-1/2 Y';
             });
-            if (currentUser.country == 'India'){
-              Proceedtobuy(total:inr,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                  username: username,
-                  mediaUrl: shopmediaUrl.first,
-                  productname:productname);
-            }
-            else if (currentUser.country == 'UK'){
-              Proceedtobuy(total:gbp,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                  username: username,
-                  mediaUrl: shopmediaUrl.first,
-                  productname:productname);
-            }
-            else  if (currentUser.country == 'Europe'){
-              Proceedtobuy(total:eur,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                  username: username,
-                  mediaUrl: shopmediaUrl.first,
-                  productname:productname);
-            }
-            else  if (currentUser.country == 'USA'){
-              Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                  username: username,
-                  mediaUrl: shopmediaUrl.first,
-                  productname:productname);
-            }
-            else  {
-              Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                  username: username,
-                  mediaUrl: shopmediaUrl.first,
-                  productname:productname);
-            }
+
 
           },
-          child: Container(
-            decoration: BoxDecoration(
-                color: kPrimaryColor,
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.grey,
-                    blurRadius: 5.0,
-                  ),]
-                ,borderRadius: BorderRadius.all(Radius.circular(10.0))
-            ),
-            height: 40,
-            width: 40,
+          child:   Container(
+            height:50,
+            width:MediaQuery.of(context).size.width,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                FittedBox(child: Text('2-1/2 Y',style: TextStyle(color: Colors.white,fontSize: 8),)),
-
-
+//    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
+                FittedBox(child: Text('2-1/2 Y',)),
               ],
             ),
           ),
@@ -6420,61 +3539,23 @@ else{
     }
     else{
       return
-      GestureDetector(
+      InkWell(
         onTap: (){
           setState(()  {
 
-            usersize = '3 Y';
+            usersize = 'S 3 Y';
           });
-          if (currentUser.country == 'India'){
-            Proceedtobuy(total:inr,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else if (currentUser.country == 'UK'){
-            Proceedtobuy(total:gbp,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else  if (currentUser.country == 'Europe'){
-            Proceedtobuy(total:eur,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else  if (currentUser.country == 'USA'){
-            Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else  {
-            Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
+
 
         },
-        child: Container(
-          decoration: BoxDecoration(
-              color: kPrimaryColor,
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.grey,
-                  blurRadius: 5.0,
-                ),]
-              ,borderRadius: BorderRadius.all(Radius.circular(10.0))
-          ),
-          height: 40,
-          width: 40,
+        child:   Container(
+          height:50,
+          width:MediaQuery.of(context).size.width,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              FittedBox(child: Text('3 Y',style: TextStyle(color: Colors.white,fontSize: 8),)),
-
+//    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
+              FittedBox(child: Text('3 Y',)),
             ],
           ),
         ),
@@ -6489,61 +3570,23 @@ else{
     }
     else{
       return
-      GestureDetector(
+      InkWell(
         onTap: (){
           setState(()  {
 
-            usersize = '3-1/2 Y';
+            usersize = 'S 3-1/2 Y';
           });
-          if (currentUser.country == 'India'){
-            Proceedtobuy(total:inr,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else if (currentUser.country == 'UK'){
-            Proceedtobuy(total:gbp,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else  if (currentUser.country == 'Europe'){
-            Proceedtobuy(total:eur,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else  if (currentUser.country == 'USA'){
-            Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else  {
-            Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
+
 
         },
-        child: Container(
-          decoration: BoxDecoration(
-              color: kPrimaryColor,
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.grey,
-                  blurRadius: 5.0,
-                ),]
-              ,borderRadius: BorderRadius.all(Radius.circular(10.0))
-          ),
-          height: 40,
-          width: 40,
+        child:   Container(
+          height:50,
+          width:MediaQuery.of(context).size.width,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              FittedBox(child: Text('3-1/2 Y',style: TextStyle(color: Colors.white,fontSize: 8),)),
-
+//    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
+              FittedBox(child: Text('3-1/2 Y',)),
             ],
           ),
         ),
@@ -6557,61 +3600,23 @@ else{
     }
     else{
       return
-      GestureDetector(
+      InkWell(
         onTap: (){
           setState(()  {
 
-            usersize = '4 Y';
+            usersize = 'S 4 Y';
           });
-          if (currentUser.country == 'India'){
-            Proceedtobuy(total:inr,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else if (currentUser.country == 'UK'){
-            Proceedtobuy(total:gbp,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else  if (currentUser.country == 'Europe'){
-            Proceedtobuy(total:eur,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else  if (currentUser.country == 'USA'){
-            Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else  {
-            Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
+
 
         },
-        child: Container(
-          decoration: BoxDecoration(
-              color: kPrimaryColor,
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.grey,
-                  blurRadius: 5.0,
-                ),]
-              ,borderRadius: BorderRadius.all(Radius.circular(10.0))
-          ),
-          height: 40,
-          width: 40,
+        child:   Container(
+          height:50,
+          width:MediaQuery.of(context).size.width,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              FittedBox(child: Text('4 Y',style: TextStyle(color: Colors.white,fontSize: 8),)),
-
+//    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
+              FittedBox(child: Text('4 Y',)),
             ],
           ),
         ),
@@ -6626,61 +3631,23 @@ else{
     }
     else{
       return
-      GestureDetector(
+      InkWell(
         onTap: (){
           setState(()  {
 
-            usersize = '5 Y';
+            usersize = 'S 5 Y';
           });
-          if (currentUser.country == 'India'){
-            Proceedtobuy(total:inr,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else if (currentUser.country == 'UK'){
-            Proceedtobuy(total:gbp,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else  if (currentUser.country == 'Europe'){
-            Proceedtobuy(total:eur,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else  if (currentUser.country == 'USA'){
-            Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else  {
-            Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
+
 
         },
-        child: Container(
-          decoration: BoxDecoration(
-              color: kPrimaryColor,
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.grey,
-                  blurRadius: 5.0,
-                ),]
-              ,borderRadius: BorderRadius.all(Radius.circular(10.0))
-          ),
-          height: 40,
-          width: 40,
+        child:   Container(
+          height:50,
+          width:MediaQuery.of(context).size.width,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              FittedBox(child: Text('5 Y',style: TextStyle(color: Colors.white,fontSize: 8),)),
-
+//    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
+              FittedBox(child: Text(' 5 Y',)),
             ],
           ),
         ),
@@ -6694,62 +3661,23 @@ else{
     }
     else{
       return
-      GestureDetector(
+      InkWell(
         onTap: (){
           setState(()  {
 
-            usersize = '6 Y';
+            usersize = 'S 6 Y';
           });
-          if (currentUser.country == 'India'){
-            Proceedtobuy(total:inr,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else if (currentUser.country == 'UK'){
-            Proceedtobuy(total:gbp,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else  if (currentUser.country == 'Europe'){
-            Proceedtobuy(total:eur,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else  if (currentUser.country == 'USA'){
-            Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else  {
-            Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
+
 
         },
-        child: Container(
-          decoration: BoxDecoration(
-              color: kPrimaryColor,
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.grey,
-                  blurRadius: 5.0,
-                ),]
-              ,borderRadius: BorderRadius.all(Radius.circular(10.0))
-          ),
-          height: 40,
-          width: 40,
+        child:   Container(
+          height:50,
+          width:MediaQuery.of(context).size.width,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              FittedBox(child: Text('6 Y',style: TextStyle(color: Colors.white,fontSize: 8),)),
-
-
+//    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
+              FittedBox(child: Text('6 Y',)),
             ],
           ),
         ),
@@ -6763,61 +3691,23 @@ else{
     }
     else{
       return
-      GestureDetector(
+      InkWell(
         onTap: (){
           setState(()  {
 
-            usersize = '7 Y';
+            usersize = 'S 7 Y';
           });
-          if (currentUser.country == 'India'){
-            Proceedtobuy(total:inr,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else if (currentUser.country == 'UK'){
-            Proceedtobuy(total:gbp,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else  if (currentUser.country == 'Europe'){
-            Proceedtobuy(total:eur,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else  if (currentUser.country == 'USA'){
-            Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else  {
-            Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
+
 
         },
-        child: Container(
-          decoration: BoxDecoration(
-              color: kPrimaryColor,
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.grey,
-                  blurRadius: 5.0,
-                ),]
-              ,borderRadius: BorderRadius.all(Radius.circular(10.0))
-          ),
-          height: 40,
-          width: 40,
+        child:   Container(
+          height:50,
+          width:MediaQuery.of(context).size.width,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              FittedBox(child: Text('7 Y',style: TextStyle(color: Colors.white,fontSize: 8),)),
-
+//    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
+              FittedBox(child: Text('7 Y',)),
             ],
           ),
         ),
@@ -6831,61 +3721,23 @@ else{
     }
     else{
       return
-      GestureDetector(
+      InkWell(
         onTap: (){
           setState(()  {
 
-            usersize = '8 Y';
+            usersize = 'S 8 Y';
           });
-          if (currentUser.country == 'India'){
-            Proceedtobuy(total:inr,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else if (currentUser.country == 'UK'){
-            Proceedtobuy(total:gbp,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else  if (currentUser.country == 'Europe'){
-            Proceedtobuy(total:eur,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else  if (currentUser.country == 'USA'){
-            Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else  {
-            Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
+
 
         },
-        child: Container(
-          decoration: BoxDecoration(
-              color: kPrimaryColor,
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.grey,
-                  blurRadius: 5.0,
-                ),]
-              ,borderRadius: BorderRadius.all(Radius.circular(10.0))
-          ),
-          height: 40,
-          width: 40,
+        child:   Container(
+          height:50,
+          width:MediaQuery.of(context).size.width,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              FittedBox(child: Text('8 Y',style: TextStyle(color: Colors.white,fontSize: 8),)),
-
+//    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
+              FittedBox(child: Text('8 Y',)),
             ],
           ),
         ),
@@ -6899,61 +3751,23 @@ else{
     }
     else{
       return
-      GestureDetector(
+      InkWell(
         onTap: (){
           setState(()  {
 
-            usersize = '8-1/2 Y';
+            usersize = 'S 8-1/2 Y';
           });
-          if (currentUser.country == 'India'){
-            Proceedtobuy(total:inr,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else if (currentUser.country == 'UK'){
-            Proceedtobuy(total:gbp,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else  if (currentUser.country == 'Europe'){
-            Proceedtobuy(total:eur,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else  if (currentUser.country == 'USA'){
-            Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else  {
-            Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
+
 
         },
-        child: Container(
-          decoration: BoxDecoration(
-              color: kPrimaryColor,
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.grey,
-                  blurRadius: 5.0,
-                ),]
-              ,borderRadius: BorderRadius.all(Radius.circular(10.0))
-          ),
-          height: 40,
-          width: 40,
+        child:   Container(
+          height:50,
+          width:MediaQuery.of(context).size.width,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              FittedBox(child: Text('8-1/2 Y',style: TextStyle(color: Colors.white,fontSize: 8),)),
-
+//    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
+              FittedBox(child: Text('8-1/2 Y',)),
             ],
           ),
         ),
@@ -6968,61 +3782,23 @@ else{
     }
     else{
       return
-      GestureDetector(
+      InkWell(
         onTap: (){
           setState(()  {
 
-            usersize = '9 Y';
+            usersize = 'S 9 Y';
           });
-          if (currentUser.country == 'India'){
-            Proceedtobuy(total:inr,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else if (currentUser.country == 'UK'){
-            Proceedtobuy(total:gbp,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else  if (currentUser.country == 'Europe'){
-            Proceedtobuy(total:eur,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else  if (currentUser.country == 'USA'){
-            Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else  {
-            Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
+
 
         },
-        child: Container(
-          decoration: BoxDecoration(
-              color: kPrimaryColor,
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.grey,
-                  blurRadius: 5.0,
-                ),]
-              ,borderRadius: BorderRadius.all(Radius.circular(10.0))
-          ),
-          height: 40,
-          width: 40,
+        child:   Container(
+          height:50,
+          width:MediaQuery.of(context).size.width,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              FittedBox(child: Text('9 Y',style: TextStyle(color: Colors.white,fontSize: 8),)),
-
+//    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
+              FittedBox(child: Text('9 Y',)),
             ],
           ),
         ),
@@ -7037,61 +3813,23 @@ else{
     }
     else{
       return
-      GestureDetector(
+      InkWell(
         onTap: (){
           setState(()  {
 
-            usersize = '10 Y';
+            usersize = 'S 10 Y';
           });
-          if (currentUser.country == 'India'){
-            Proceedtobuy(total:inr,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else if (currentUser.country == 'UK'){
-            Proceedtobuy(total:gbp,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else  if (currentUser.country == 'Europe'){
-            Proceedtobuy(total:eur,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else  if (currentUser.country == 'USA'){
-            Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else  {
-            Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
+
 
         },
-        child: Container(
-          decoration: BoxDecoration(
-              color: kPrimaryColor,
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.grey,
-                  blurRadius: 5.0,
-                ),]
-              ,borderRadius: BorderRadius.all(Radius.circular(10.0))
-          ),
-          height: 40,
-          width: 40,
+        child:   Container(
+          height:50,
+          width:MediaQuery.of(context).size.width,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              FittedBox(child: Text('10 Y',style: TextStyle(color: Colors.white,fontSize: 8),)),
-
+//    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
+              FittedBox(child: Text('10 Y',)),
             ],
           ),
         ),
@@ -7107,61 +3845,23 @@ else{
     else
     {
       return
-      GestureDetector(
+      InkWell(
         onTap: (){
           setState(()  {
 
-            usersize = '11 Y';
+            usersize = 'S 11 Y';
           });
-          if (currentUser.country == 'India'){
-            Proceedtobuy(total:inr,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else if (currentUser.country == 'UK'){
-            Proceedtobuy(total:gbp,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else  if (currentUser.country == 'Europe'){
-            Proceedtobuy(total:eur,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else  if (currentUser.country == 'USA'){
-            Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else  {
-            Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
+
 
         },
-        child: Container(
-          decoration: BoxDecoration(
-              color: kPrimaryColor,
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.grey,
-                  blurRadius: 5.0,
-                ),]
-              ,borderRadius: BorderRadius.all(Radius.circular(10.0))
-          ),
-          height: 40,
-          width: 40,
+        child:   Container(
+          height:50,
+          width:MediaQuery.of(context).size.width,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              FittedBox(child: Text('11 Y',style: TextStyle(color: Colors.white,fontSize: 8),)),
-
+//    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
+              FittedBox(child: Text('11 Y',)),
             ],
           ),
         ),
@@ -7176,61 +3876,23 @@ else{
     }
     else{
       return
-      GestureDetector(
+      InkWell(
         onTap: (){
           setState(()  {
 
-            usersize = '12 Y';
+            usersize = 'S 12 Y';
           });
-          if (currentUser.country == 'India'){
-            Proceedtobuy(total:inr,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else if (currentUser.country == 'UK'){
-            Proceedtobuy(total:gbp,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else  if (currentUser.country == 'Europe'){
-            Proceedtobuy(total:eur,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else  if (currentUser.country == 'USA'){
-            Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else  {
-            Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
+
 
         },
-        child: Container(
-          decoration: BoxDecoration(
-              color: kPrimaryColor,
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.grey,
-                  blurRadius: 5.0,
-                ),]
-              ,borderRadius: BorderRadius.all(Radius.circular(10.0))
-          ),
-          height: 40,
-          width: 40,
+        child:   Container(
+          height:50,
+          width:MediaQuery.of(context).size.width,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              FittedBox(child: Text('12 Y',style: TextStyle(color: Colors.white,fontSize: 8),)),
-
+//    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
+              FittedBox(child: Text('12 Y',)),
             ],
           ),
         ),
@@ -7245,60 +3907,23 @@ else{
     }
     else{
       return
-        GestureDetector(
+        InkWell(
           onTap: (){
             setState(()  {
 
               usersize = '13 Y';
             });
-            if (currentUser.country == 'India'){
-              Proceedtobuy(total:inr,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                  username: username,
-                  mediaUrl: shopmediaUrl.first,
-                  productname:productname);
-            }
-            else if (currentUser.country == 'UK'){
-              Proceedtobuy(total:gbp,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                  username: username,
-                  mediaUrl: shopmediaUrl.first,
-                  productname:productname);
-            }
-            else  if (currentUser.country == 'Europe'){
-              Proceedtobuy(total:eur,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                  username: username,
-                  mediaUrl: shopmediaUrl.first,
-                  productname:productname);
-            }
-            else  if (currentUser.country == 'USA'){
-              Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                  username: username,
-                  mediaUrl: shopmediaUrl.first,
-                  productname:productname);
-            }
-            else  {
-              Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                  username: username,
-                  mediaUrl: shopmediaUrl.first,
-                  productname:productname);
-            }
+
 
           },
-          child: Container(
-            decoration: BoxDecoration(
-                color: kPrimaryColor,
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.grey,
-                    blurRadius: 5.0,
-                  ),]
-                ,borderRadius: BorderRadius.all(Radius.circular(10.0))
-            ),
-            height: 40,
-            width: 40,
+          child:   Container(
+            height:50,
+            width:MediaQuery.of(context).size.width,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                FittedBox(child: Text('13 Y',style: TextStyle(color: Colors.white),)),
+//    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
+                FittedBox(child: Text('13 Y',)),
               ],
             ),
           ),
@@ -7316,65 +3941,28 @@ else{
     }
     else{
       return
-      GestureDetector(
+      InkWell(
         onTap: (){
           setState(()  {
 
             usersize = '14 Y';
           });
-          if (currentUser.country == 'India'){
-            Proceedtobuy(total:inr,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else if (currentUser.country == 'UK'){
-            Proceedtobuy(total:gbp,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else  if (currentUser.country == 'Europe'){
-            Proceedtobuy(total:eur,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else  if (currentUser.country == 'USA'){
-            Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else  {
-            Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
+
 
         },
         child:
 
-            Container(
-              decoration: BoxDecoration(
-                  color: kPrimaryColor,
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.grey,
-                      blurRadius: 5.0,
-                    ),]
-                  ,borderRadius: BorderRadius.all(Radius.circular(10.0))
-              ),
-              height: 40,
-              width: 40,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  FittedBox(child: Text('14 Y',style: TextStyle(color: Colors.white),)),
-                ],
-              ),
-            ),
+       Container(
+        height:50,
+        width:MediaQuery.of(context).size.width,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+//    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
+            FittedBox(child: Text('14 Y',)),
+          ],
+        ),
+      ),
 
 
 
@@ -7389,60 +3977,23 @@ else{
     }
     else{
       return
-      GestureDetector(
+      InkWell(
         onTap: (){
           setState(()  {
 
             usersize = '15 Y';
           });
-          if (currentUser.country == 'India'){
-            Proceedtobuy(total:inr,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else if (currentUser.country == 'UK'){
-            Proceedtobuy(total:gbp,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else  if (currentUser.country == 'Europe'){
-            Proceedtobuy(total:eur,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else  if (currentUser.country == 'USA'){
-            Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else  {
-            Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
+
 
         },
-        child: Container(
-          decoration: BoxDecoration(
-              color: kPrimaryColor,
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.grey,
-                  blurRadius: 5.0,
-                ),]
-              ,borderRadius: BorderRadius.all(Radius.circular(10.0))
-          ),
-          height: 10,
-          width: 10,
+        child:   Container(
+          height:50,
+          width:MediaQuery.of(context).size.width,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              FittedBox(child: Text('14 Y',style: TextStyle(color: Colors.white),)),
+//    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
+              FittedBox(child: Text('15 Y',)),
             ],
           ),
         ),
@@ -7457,60 +4008,23 @@ else{
     }
     else{
       return
-      GestureDetector(
+      InkWell(
         onTap: (){
           setState(()  {
 
             usersize = '16 Y';
           });
-          if (currentUser.country == 'India'){
-            Proceedtobuy(total:inr,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else if (currentUser.country == 'UK'){
-            Proceedtobuy(total:gbp,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else  if (currentUser.country == 'Europe'){
-            Proceedtobuy(total:eur,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else  if (currentUser.country == 'USA'){
-            Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else  {
-            Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
+
 
         },
-        child: Container(
-          decoration: BoxDecoration(
-              color: kPrimaryColor,
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.grey,
-                  blurRadius: 5.0,
-                ),]
-              ,borderRadius: BorderRadius.all(Radius.circular(10.0))
-          ),
-          height: 40,
-          width: 40,
+        child:   Container(
+          height:50,
+          width:MediaQuery.of(context).size.width,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              FittedBox(child: Text('15 Y',style: TextStyle(color: Colors.white),)),
+//    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
+              FittedBox(child: Text('16 Y',)),
             ],
           ),
         ),
@@ -7524,61 +4038,23 @@ else{
     }
     else{
       return
-      GestureDetector(
+      InkWell(
         onTap: (){
           setState(()  {
 
             usersize = 'S 13 Y';
           });
-          if (currentUser.country == 'India'){
-            Proceedtobuy(total:inr,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else if (currentUser.country == 'UK'){
-            Proceedtobuy(total:gbp,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else  if (currentUser.country == 'Europe'){
-            Proceedtobuy(total:eur,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else  if (currentUser.country == 'USA'){
-            Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else  {
-            Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
+
 
         },
-        child: Container(
-          decoration: BoxDecoration(
-              color: kPrimaryColor,
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.grey,
-                  blurRadius: 5.0,
-                ),]
-              ,borderRadius: BorderRadius.all(Radius.circular(10.0))
-          ),
-          height: 40,
-          width: 40,
+        child:   Container(
+          height:50,
+          width:MediaQuery.of(context).size.width,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              FittedBox(child: Text('13 Y',style: TextStyle(color: Colors.white,fontSize: 8),)),
-
+//    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
+              FittedBox(child: Text('13 Y',)),
             ],
           ),
         ),
@@ -7592,62 +4068,23 @@ else{
     }
     else{
       return
-      GestureDetector(
+      InkWell(
         onTap: (){
           setState(()  {
 
             usersize = 'S 14 Y';
           });
-          if (currentUser.country == 'India'){
-            Proceedtobuy(total:inr,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else if (currentUser.country == 'UK'){
-            Proceedtobuy(total:gbp,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else  if (currentUser.country == 'Europe'){
-            Proceedtobuy(total:eur,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else  if (currentUser.country == 'USA'){
-            Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else  {
-            Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
+
 
         },
-        child: Container(
-          decoration: BoxDecoration(
-              color: kPrimaryColor,
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.grey,
-                  blurRadius: 5.0,
-                ),]
-              ,borderRadius: BorderRadius.all(Radius.circular(10.0))
-          ),
-          height: 40,
-          width: 40,
+        child:   Container(
+          height:50,
+          width:MediaQuery.of(context).size.width,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              FittedBox(child: Text('14 Y',style: TextStyle(color: Colors.white,fontSize: 8),)),
-
-
+//    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
+              FittedBox(child: Text('14 Y',)),
             ],
           ),
         ),
@@ -7662,61 +4099,23 @@ else{
     else{
 
       return
-      GestureDetector(
+      InkWell(
         onTap: (){
           setState(()  {
 
             usersize = 'S 15 Y';
           });
-          if (currentUser.country == 'India'){
-            Proceedtobuy(total:inr,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else if (currentUser.country == 'UK'){
-            Proceedtobuy(total:gbp,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else  if (currentUser.country == 'Europe'){
-            Proceedtobuy(total:eur,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else  if (currentUser.country == 'USA'){
-            Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else  {
-            Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
+
 
         },
-        child: Container(
-          decoration: BoxDecoration(
-              color: kPrimaryColor,
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.grey,
-                  blurRadius: 5.0,
-                ),]
-              ,borderRadius: BorderRadius.all(Radius.circular(10.0))
-          ),
-          height: 40,
-          width: 40,
+        child:   Container(
+          height:50,
+          width:MediaQuery.of(context).size.width,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              FittedBox(child: Text('15 Y',style: TextStyle(color: Colors.white,fontSize: 8),)),
-
+//    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
+              FittedBox(child: Text('15 Y',)),
             ],
           ),
         ),
@@ -7731,68 +4130,30 @@ else{
     }
     else{
       return
-      GestureDetector(
+      InkWell(
         onTap: (){
           setState(()  {
 
             usersize = 'S 16 Y';
           });
-          if (currentUser.country == 'India'){
-            Proceedtobuy(total:inr,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else if (currentUser.country == 'UK'){
-            Proceedtobuy(total:gbp,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else  if (currentUser.country == 'Europe'){
-            Proceedtobuy(total:eur,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else  if (currentUser.country == 'USA'){
-            Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
-          else  {
-            Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                username: username,
-                mediaUrl: shopmediaUrl.first,
-                productname:productname);
-          }
+
 
         },
-        child: Container(
-          decoration: BoxDecoration(
-              color: kPrimaryColor,
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.grey,
-                  blurRadius: 5.0,
-                ),]
-              ,borderRadius: BorderRadius.all(Radius.circular(10.0))
-          ),
-          height: 40,
-          width: 40,
+        child:   Container(
+          height:50,
+          width:MediaQuery.of(context).size.width,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              FittedBox(child: Text('16 Y',style: TextStyle(color: Colors.white,fontSize: 8),)),
-
-
+//    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
+              FittedBox(child: Text('16 Y',)),
             ],
           ),
         ),
       );
     }
   }
+
   MTO(){
     if(gender=='Men'||gender=='Women'){
       if(mto==0){
@@ -7804,43 +4165,14 @@ else{
           title: Text('Made-to-order',style:TextStyle(color:kText)),
           maintainState:true,
           children: [
-            Column(children:[GestureDetector(
+            Column(children:[InkWell(
           onTap:(){
             setState(() {
 
               usersize = 'MTO XXXS';
 
             });
-            if (currentUser.country == 'India'){
-              Proceedtobuy(total:inr,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                  username: username,
-                  mediaUrl: shopmediaUrl.first,
-                  productname:productname);
-            }
-            else if (currentUser.country == 'UK'){
-              Proceedtobuy(total:gbp,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                  username: username,
-                  mediaUrl: shopmediaUrl.first,
-                  productname:productname);
-            }
-            else  if (currentUser.country == 'Europe'){
-              Proceedtobuy(total:eur,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                  username: username,
-                  mediaUrl: shopmediaUrl.first,
-                  productname:productname);
-            }
-            else  if (currentUser.country == 'USA'){
-              Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                  username: username,
-                  mediaUrl: shopmediaUrl.first,
-                  productname:productname);
-            }
-            else  {
-              Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                  username: username,
-                  mediaUrl: shopmediaUrl.first,
-                  productname:productname);
-            }
+
 
           },
             child: Container(
@@ -7861,42 +4193,13 @@ else{
             ),
 
           ),
-          GestureDetector(
+          InkWell(
           onTap:(){
             setState(() {
 
               usersize = 'MTO XXS';
             });
-            if (currentUser.country == 'India'){
-              Proceedtobuy(total:inr,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                  username: username,
-                  mediaUrl: shopmediaUrl.first,
-                  productname:productname);
-            }
-            else if (currentUser.country == 'UK'){
-              Proceedtobuy(total:gbp,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                  username: username,
-                  mediaUrl: shopmediaUrl.first,
-                  productname:productname);
-            }
-            else  if (currentUser.country == 'Europe'){
-              Proceedtobuy(total:eur,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                  username: username,
-                  mediaUrl: shopmediaUrl.first,
-                  productname:productname);
-            }
-            else  if (currentUser.country == 'USA'){
-              Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                  username: username,
-                  mediaUrl: shopmediaUrl.first,
-                  productname:productname);
-            }
-            else  {
-              Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                  username: username,
-                  mediaUrl: shopmediaUrl.first,
-                  productname:productname);
-            }
+
 
           },
             child: Container(
@@ -7921,36 +4224,7 @@ else{
             setState(() {
 
               usersize = 'MTO XS';
-              if (currentUser.country == 'India'){
-                Proceedtobuy(total:inr,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                    username: username,
-                    mediaUrl: shopmediaUrl.first,
-                    productname:productname);
-              }
-              else if (currentUser.country == 'UK'){
-                Proceedtobuy(total:gbp,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                    username: username,
-                    mediaUrl: shopmediaUrl.first,
-                    productname:productname);
-              }
-              else  if (currentUser.country == 'Europe'){
-                Proceedtobuy(total:eur,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                    username: username,
-                    mediaUrl: shopmediaUrl.first,
-                    productname:productname);
-              }
-              else  if (currentUser.country == 'USA'){
-                Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                    username: username,
-                    mediaUrl: shopmediaUrl.first,
-                    productname:productname);
-              }
-              else  {
-                Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                    username: username,
-                    mediaUrl: shopmediaUrl.first,
-                    productname:productname);
-              }
+
             });
           },
             child: Container(
@@ -7975,36 +4249,7 @@ else{
             setState(() {
 
               usersize = 'MTO S';
-              if (currentUser.country == 'India'){
-                Proceedtobuy(total:inr,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                    username: username,
-                    mediaUrl: shopmediaUrl.first,
-                    productname:productname);
-              }
-              else if (currentUser.country == 'UK'){
-                Proceedtobuy(total:gbp,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                    username: username,
-                    mediaUrl: shopmediaUrl.first,
-                    productname:productname);
-              }
-              else  if (currentUser.country == 'Europe'){
-                Proceedtobuy(total:eur,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                    username: username,
-                    mediaUrl: shopmediaUrl.first,
-                    productname:productname);
-              }
-              else  if (currentUser.country == 'USA'){
-                Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                    username: username,
-                    mediaUrl: shopmediaUrl.first,
-                    productname:productname);
-              }
-              else  {
-                Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                    username: username,
-                    mediaUrl: shopmediaUrl.first,
-                    productname:productname);
-              }
+
             });
           },
             child: Container(
@@ -8029,36 +4274,7 @@ else{
             setState(() {
 
               usersize = 'MTO M';
-              if (currentUser.country == 'India'){
-                Proceedtobuy(total:inr,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                    username: username,
-                    mediaUrl: shopmediaUrl.first,
-                    productname:productname);
-              }
-              else if (currentUser.country == 'UK'){
-                Proceedtobuy(total:gbp,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                    username: username,
-                    mediaUrl: shopmediaUrl.first,
-                    productname:productname);
-              }
-              else  if (currentUser.country == 'Europe'){
-                Proceedtobuy(total:eur,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                    username: username,
-                    mediaUrl: shopmediaUrl.first,
-                    productname:productname);
-              }
-              else  if (currentUser.country == 'USA'){
-                Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                    username: username,
-                    mediaUrl: shopmediaUrl.first,
-                    productname:productname);
-              }
-              else  {
-                Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                    username: username,
-                    mediaUrl: shopmediaUrl.first,
-                    productname:productname);
-              }
+
             });
           },
             child: Container(
@@ -8083,36 +4299,7 @@ else{
             setState(() {
 
               usersize = 'MTO L';
-              if (currentUser.country == 'India'){
-                Proceedtobuy(total:inr,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                    username: username,
-                    mediaUrl: shopmediaUrl.first,
-                    productname:productname);
-              }
-              else if (currentUser.country == 'UK'){
-                Proceedtobuy(total:gbp,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                    username: username,
-                    mediaUrl: shopmediaUrl.first,
-                    productname:productname);
-              }
-              else  if (currentUser.country == 'Europe'){
-                Proceedtobuy(total:eur,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                    username: username,
-                    mediaUrl: shopmediaUrl.first,
-                    productname:productname);
-              }
-              else  if (currentUser.country == 'USA'){
-                Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                    username: username,
-                    mediaUrl: shopmediaUrl.first,
-                    productname:productname);
-              }
-              else  {
-                Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                    username: username,
-                    mediaUrl: shopmediaUrl.first,
-                    productname:productname);
-              }
+
             });
           },
             child: Container(
@@ -8137,36 +4324,7 @@ else{
             setState(() {
 
               usersize = 'MTO XL';
-              if (currentUser.country == 'India'){
-                Proceedtobuy(total:inr,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                    username: username,
-                    mediaUrl: shopmediaUrl.first,
-                    productname:productname);
-              }
-              else if (currentUser.country == 'UK'){
-                Proceedtobuy(total:gbp,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                    username: username,
-                    mediaUrl: shopmediaUrl.first,
-                    productname:productname);
-              }
-              else  if (currentUser.country == 'Europe'){
-                Proceedtobuy(total:eur,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                    username: username,
-                    mediaUrl: shopmediaUrl.first,
-                    productname:productname);
-              }
-              else  if (currentUser.country == 'USA'){
-                Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                    username: username,
-                    mediaUrl: shopmediaUrl.first,
-                    productname:productname);
-              }
-              else  {
-                Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                    username: username,
-                    mediaUrl: shopmediaUrl.first,
-                    productname:productname);
-              }
+
 
             });
           },
@@ -8192,36 +4350,7 @@ else{
             setState(() {
 
               usersize = 'MTO XXL';
-              if (currentUser.country == 'India'){
-                Proceedtobuy(total:inr,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                    username: username,
-                    mediaUrl: shopmediaUrl.first,
-                    productname:productname);
-              }
-              else if (currentUser.country == 'UK'){
-                Proceedtobuy(total:gbp,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                    username: username,
-                    mediaUrl: shopmediaUrl.first,
-                    productname:productname);
-              }
-              else  if (currentUser.country == 'Europe'){
-                Proceedtobuy(total:eur,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                    username: username,
-                    mediaUrl: shopmediaUrl.first,
-                    productname:productname);
-              }
-              else  if (currentUser.country == 'USA'){
-                Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                    username: username,
-                    mediaUrl: shopmediaUrl.first,
-                    productname:productname);
-              }
-              else  {
-                Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                    username: username,
-                    mediaUrl: shopmediaUrl.first,
-                    productname:productname);
-              }
+
 
             });
           },
@@ -8247,36 +4376,7 @@ else{
             setState(() {
 
               usersize = 'MTO XXXL';
-              if (currentUser.country == 'India'){
-                Proceedtobuy(total:inr,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                    username: username,
-                    mediaUrl: shopmediaUrl.first,
-                    productname:productname);
-              }
-              else if (currentUser.country == 'UK'){
-                Proceedtobuy(total:gbp,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                    username: username,
-                    mediaUrl: shopmediaUrl.first,
-                    productname:productname);
-              }
-              else  if (currentUser.country == 'Europe'){
-                Proceedtobuy(total:eur,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                    username: username,
-                    mediaUrl: shopmediaUrl.first,
-                    productname:productname);
-              }
-              else  if (currentUser.country == 'USA'){
-                Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                    username: username,
-                    mediaUrl: shopmediaUrl.first,
-                    productname:productname);
-              }
-              else  {
-                Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                    username: username,
-                    mediaUrl: shopmediaUrl.first,
-                    productname:productname);
-              }
+
 
             });
           },
@@ -8302,36 +4402,7 @@ else{
             setState(() {
 
               usersize = 'MTO 4XL';
-              if (currentUser.country == 'India'){
-                Proceedtobuy(total:inr,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                    username: username,
-                    mediaUrl: shopmediaUrl.first,
-                    productname:productname);
-              }
-              else if (currentUser.country == 'UK'){
-                Proceedtobuy(total:gbp,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                    username: username,
-                    mediaUrl: shopmediaUrl.first,
-                    productname:productname);
-              }
-              else  if (currentUser.country == 'Europe'){
-                Proceedtobuy(total:eur,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                    username: username,
-                    mediaUrl: shopmediaUrl.first,
-                    productname:productname);
-              }
-              else  if (currentUser.country == 'USA'){
-                Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                    username: username,
-                    mediaUrl: shopmediaUrl.first,
-                    productname:productname);
-              }
-              else  {
-                Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                    username: username,
-                    mediaUrl: shopmediaUrl.first,
-                    productname:productname);
-              }
+
 
             });
           },
@@ -8357,36 +4428,7 @@ else{
             setState(() {
 
               usersize = 'MTO 5XL';
-              if (currentUser.country == 'India'){
-                Proceedtobuy(total:inr,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                    username: username,
-                    mediaUrl: shopmediaUrl.first,
-                    productname:productname);
-              }
-              else if (currentUser.country == 'UK'){
-                Proceedtobuy(total:gbp,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                    username: username,
-                    mediaUrl: shopmediaUrl.first,
-                    productname:productname);
-              }
-              else  if (currentUser.country == 'Europe'){
-                Proceedtobuy(total:eur,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                    username: username,
-                    mediaUrl: shopmediaUrl.first,
-                    productname:productname);
-              }
-              else  if (currentUser.country == 'USA'){
-                Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                    username: username,
-                    mediaUrl: shopmediaUrl.first,
-                    productname:productname);
-              }
-              else  {
-                Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                    username: username,
-                    mediaUrl: shopmediaUrl.first,
-                    productname:productname);
-              }
+
 
             });
           },
@@ -8412,36 +4454,7 @@ else{
             setState(() {
 
               usersize = 'MTO 6XL';
-              if (currentUser.country == 'India'){
-                Proceedtobuy(total:inr,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                    username: username,
-                    mediaUrl: shopmediaUrl.first,
-                    productname:productname);
-              }
-              else if (currentUser.country == 'UK'){
-                Proceedtobuy(total:gbp,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                    username: username,
-                    mediaUrl: shopmediaUrl.first,
-                    productname:productname);
-              }
-              else  if (currentUser.country == 'Europe'){
-                Proceedtobuy(total:eur,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                    username: username,
-                    mediaUrl: shopmediaUrl.first,
-                    productname:productname);
-              }
-              else  if (currentUser.country == 'USA'){
-                Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                    username: username,
-                    mediaUrl: shopmediaUrl.first,
-                    productname:productname);
-              }
-              else  {
-                Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                    username: username,
-                    mediaUrl: shopmediaUrl.first,
-                    productname:productname);
-              }
+
             });
           },
             child: Container(
@@ -8466,36 +4479,7 @@ else{
             setState(() {
 
               usersize = 'MTO 7XL';
-              if (currentUser.country == 'India'){
-                Proceedtobuy(total:inr,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                    username: username,
-                    mediaUrl: shopmediaUrl.first,
-                    productname:productname);
-              }
-              else if (currentUser.country == 'UK'){
-                Proceedtobuy(total:gbp,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                    username: username,
-                    mediaUrl: shopmediaUrl.first,
-                    productname:productname);
-              }
-              else  if (currentUser.country == 'Europe'){
-                Proceedtobuy(total:eur,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                    username: username,
-                    mediaUrl: shopmediaUrl.first,
-                    productname:productname);
-              }
-              else  if (currentUser.country == 'USA'){
-                Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                    username: username,
-                    mediaUrl: shopmediaUrl.first,
-                    productname:productname);
-              }
-              else  {
-                Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                    username: username,
-                    mediaUrl: shopmediaUrl.first,
-                    productname:productname);
-              }
+
             });
           },
             child: Container(
@@ -8520,36 +4504,7 @@ else{
             setState(() {
 
               usersize = 'MTO 8XL';
-              if (currentUser.country == 'India'){
-                Proceedtobuy(total:inr,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                    username: username,
-                    mediaUrl: shopmediaUrl.first,
-                    productname:productname);
-              }
-              else if (currentUser.country == 'UK'){
-                Proceedtobuy(total:gbp,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                    username: username,
-                    mediaUrl: shopmediaUrl.first,
-                    productname:productname);
-              }
-              else  if (currentUser.country == 'Europe'){
-                Proceedtobuy(total:eur,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                    username: username,
-                    mediaUrl: shopmediaUrl.first,
-                    productname:productname);
-              }
-              else  if (currentUser.country == 'USA'){
-                Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                    username: username,
-                    mediaUrl: shopmediaUrl.first,
-                    productname:productname);
-              }
-              else  {
-                Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                    username: username,
-                    mediaUrl: shopmediaUrl.first,
-                    productname:productname);
-              }
+
             });
           },
             child: Container(
@@ -8590,36 +4545,7 @@ else{
                 onTap: () {
                   setState(() {
                     usersize = 'MTO 0-3 M';
-                    if (currentUser.country == 'India'){
-                      Proceedtobuy(total:inr,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                          username: username,
-                          mediaUrl: shopmediaUrl.first,
-                          productname:productname);
-                    }
-                    else if (currentUser.country == 'UK'){
-                      Proceedtobuy(total:gbp,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                          username: username,
-                          mediaUrl: shopmediaUrl.first,
-                          productname:productname);
-                    }
-                    else  if (currentUser.country == 'Europe'){
-                      Proceedtobuy(total:eur,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                          username: username,
-                          mediaUrl: shopmediaUrl.first,
-                          productname:productname);
-                    }
-                    else  if (currentUser.country == 'USA'){
-                      Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                          username: username,
-                          mediaUrl: shopmediaUrl.first,
-                          productname:productname);
-                    }
-                    else  {
-                      Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                          username: username,
-                          mediaUrl: shopmediaUrl.first,
-                          productname:productname);
-                    }
+
 
                   });
                 },
@@ -8644,36 +4570,7 @@ else{
                 onTap: () {
                   setState(() {
                     usersize = 'MTO 3-6 M';
-                    if (currentUser.country == 'India'){
-                      Proceedtobuy(total:inr,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                          username: username,
-                          mediaUrl: shopmediaUrl.first,
-                          productname:productname);
-                    }
-                    else if (currentUser.country == 'UK'){
-                      Proceedtobuy(total:gbp,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                          username: username,
-                          mediaUrl: shopmediaUrl.first,
-                          productname:productname);
-                    }
-                    else  if (currentUser.country == 'Europe'){
-                      Proceedtobuy(total:eur,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                          username: username,
-                          mediaUrl: shopmediaUrl.first,
-                          productname:productname);
-                    }
-                    else  if (currentUser.country == 'USA'){
-                      Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                          username: username,
-                          mediaUrl: shopmediaUrl.first,
-                          productname:productname);
-                    }
-                    else  {
-                      Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                          username: username,
-                          mediaUrl: shopmediaUrl.first,
-                          productname:productname);
-                    }
+
 
                   });
                 },
@@ -8698,36 +4595,7 @@ else{
                 onTap: () {
                   setState(() {
                     usersize = 'MTO 6-9 M';
-                    if (currentUser.country == 'India'){
-                      Proceedtobuy(total:inr,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                          username: username,
-                          mediaUrl: shopmediaUrl.first,
-                          productname:productname);
-                    }
-                    else if (currentUser.country == 'UK'){
-                      Proceedtobuy(total:gbp,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                          username: username,
-                          mediaUrl: shopmediaUrl.first,
-                          productname:productname);
-                    }
-                    else  if (currentUser.country == 'Europe'){
-                      Proceedtobuy(total:eur,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                          username: username,
-                          mediaUrl: shopmediaUrl.first,
-                          productname:productname);
-                    }
-                    else  if (currentUser.country == 'USA'){
-                      Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                          username: username,
-                          mediaUrl: shopmediaUrl.first,
-                          productname:productname);
-                    }
-                    else  {
-                      Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                          username: username,
-                          mediaUrl: shopmediaUrl.first,
-                          productname:productname);
-                    }
+
 
                   });
                 },
@@ -8752,36 +4620,7 @@ else{
                 onTap: () {
                   setState(() {
                     usersize = 'MTO 9-12 M';
-                    if (currentUser.country == 'India'){
-                      Proceedtobuy(total:inr,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                          username: username,
-                          mediaUrl: shopmediaUrl.first,
-                          productname:productname);
-                    }
-                    else if (currentUser.country == 'UK'){
-                      Proceedtobuy(total:gbp,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                          username: username,
-                          mediaUrl: shopmediaUrl.first,
-                          productname:productname);
-                    }
-                    else  if (currentUser.country == 'Europe'){
-                      Proceedtobuy(total:eur,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                          username: username,
-                          mediaUrl: shopmediaUrl.first,
-                          productname:productname);
-                    }
-                    else  if (currentUser.country == 'USA'){
-                      Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                          username: username,
-                          mediaUrl: shopmediaUrl.first,
-                          productname:productname);
-                    }
-                    else  {
-                      Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                          username: username,
-                          mediaUrl: shopmediaUrl.first,
-                          productname:productname);
-                    }
+
 
                   });
                 },
@@ -8806,36 +4645,7 @@ else{
                 onTap: () {
                   setState(() {
                     usersize = 'MTO 12-18 M';
-                    if (currentUser.country == 'India'){
-                      Proceedtobuy(total:inr,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                          username: username,
-                          mediaUrl: shopmediaUrl.first,
-                          productname:productname);
-                    }
-                    else if (currentUser.country == 'UK'){
-                      Proceedtobuy(total:gbp,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                          username: username,
-                          mediaUrl: shopmediaUrl.first,
-                          productname:productname);
-                    }
-                    else  if (currentUser.country == 'Europe'){
-                      Proceedtobuy(total:eur,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                          username: username,
-                          mediaUrl: shopmediaUrl.first,
-                          productname:productname);
-                    }
-                    else  if (currentUser.country == 'USA'){
-                      Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                          username: username,
-                          mediaUrl: shopmediaUrl.first,
-                          productname:productname);
-                    }
-                    else  {
-                      Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                          username: username,
-                          mediaUrl: shopmediaUrl.first,
-                          productname:productname);
-                    }
+
 
                   });
                 },
@@ -8860,36 +4670,7 @@ else{
                 onTap: () {
                   setState(() {
                     usersize = 'MTO 18-24 M';
-                    if (currentUser.country == 'India'){
-                      Proceedtobuy(total:inr,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                          username: username,
-                          mediaUrl: shopmediaUrl.first,
-                          productname:productname);
-                    }
-                    else if (currentUser.country == 'UK'){
-                      Proceedtobuy(total:gbp,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                          username: username,
-                          mediaUrl: shopmediaUrl.first,
-                          productname:productname);
-                    }
-                    else  if (currentUser.country == 'Europe'){
-                      Proceedtobuy(total:eur,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                          username: username,
-                          mediaUrl: shopmediaUrl.first,
-                          productname:productname);
-                    }
-                    else  if (currentUser.country == 'USA'){
-                      Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                          username: username,
-                          mediaUrl: shopmediaUrl.first,
-                          productname:productname);
-                    }
-                    else  {
-                      Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                          username: username,
-                          mediaUrl: shopmediaUrl.first,
-                          productname:productname);
-                    }
+
 
                   });
                 },
@@ -8933,36 +4714,7 @@ else{
                 onTap: () {
                   setState(() {
                     usersize = 'MTO 2 Y';
-                    if (currentUser.country == 'India'){
-                      Proceedtobuy(total:inr,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                          username: username,
-                          mediaUrl: shopmediaUrl.first,
-                          productname:productname);
-                    }
-                    else if (currentUser.country == 'UK'){
-                      Proceedtobuy(total:gbp,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                          username: username,
-                          mediaUrl: shopmediaUrl.first,
-                          productname:productname);
-                    }
-                    else  if (currentUser.country == 'Europe'){
-                      Proceedtobuy(total:eur,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                          username: username,
-                          mediaUrl: shopmediaUrl.first,
-                          productname:productname);
-                    }
-                    else  if (currentUser.country == 'USA'){
-                      Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                          username: username,
-                          mediaUrl: shopmediaUrl.first,
-                          productname:productname);
-                    }
-                    else  {
-                      Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                          username: username,
-                          mediaUrl: shopmediaUrl.first,
-                          productname:productname);
-                    }
+
 
                   });
                 },
@@ -8987,36 +4739,7 @@ else{
                 onTap: () {
                   setState(() {
                     usersize = 'MTO 3-4 Y';
-                    if (currentUser.country == 'India'){
-                      Proceedtobuy(total:inr,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                          username: username,
-                          mediaUrl: shopmediaUrl.first,
-                          productname:productname);
-                    }
-                    else if (currentUser.country == 'UK'){
-                      Proceedtobuy(total:gbp,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                          username: username,
-                          mediaUrl: shopmediaUrl.first,
-                          productname:productname);
-                    }
-                    else  if (currentUser.country == 'Europe'){
-                      Proceedtobuy(total:eur,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                          username: username,
-                          mediaUrl: shopmediaUrl.first,
-                          productname:productname);
-                    }
-                    else  if (currentUser.country == 'USA'){
-                      Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                          username: username,
-                          mediaUrl: shopmediaUrl.first,
-                          productname:productname);
-                    }
-                    else  {
-                      Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                          username: username,
-                          mediaUrl: shopmediaUrl.first,
-                          productname:productname);
-                    }
+
 
                   });
                 },
@@ -9041,36 +4764,7 @@ else{
                 onTap: () {
                   setState(() {
                     usersize = 'MTO 4-5 Y';
-                    if (currentUser.country == 'India'){
-                      Proceedtobuy(total:inr,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                          username: username,
-                          mediaUrl: shopmediaUrl.first,
-                          productname:productname);
-                    }
-                    else if (currentUser.country == 'UK'){
-                      Proceedtobuy(total:gbp,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                          username: username,
-                          mediaUrl: shopmediaUrl.first,
-                          productname:productname);
-                    }
-                    else  if (currentUser.country == 'Europe'){
-                      Proceedtobuy(total:eur,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                          username: username,
-                          mediaUrl: shopmediaUrl.first,
-                          productname:productname);
-                    }
-                    else  if (currentUser.country == 'USA'){
-                      Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                          username: username,
-                          mediaUrl: shopmediaUrl.first,
-                          productname:productname);
-                    }
-                    else  {
-                      Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                          username: username,
-                          mediaUrl: shopmediaUrl.first,
-                          productname:productname);
-                    }
+
 
                   });
                 },
@@ -9095,36 +4789,7 @@ else{
                 onTap: () {
                   setState(() {
                     usersize = 'MTO 5-6 Y';
-                    if (currentUser.country == 'India'){
-                      Proceedtobuy(total:inr,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                          username: username,
-                          mediaUrl: shopmediaUrl.first,
-                          productname:productname);
-                    }
-                    else if (currentUser.country == 'UK'){
-                      Proceedtobuy(total:gbp,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                          username: username,
-                          mediaUrl: shopmediaUrl.first,
-                          productname:productname);
-                    }
-                    else  if (currentUser.country == 'Europe'){
-                      Proceedtobuy(total:eur,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                          username: username,
-                          mediaUrl: shopmediaUrl.first,
-                          productname:productname);
-                    }
-                    else  if (currentUser.country == 'USA'){
-                      Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                          username: username,
-                          mediaUrl: shopmediaUrl.first,
-                          productname:productname);
-                    }
-                    else  {
-                      Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                          username: username,
-                          mediaUrl: shopmediaUrl.first,
-                          productname:productname);
-                    }
+
 
                   });
                 },
@@ -9149,36 +4814,7 @@ else{
                 onTap: () {
                   setState(() {
                     usersize = 'MTO 6-7 Y';
-                    if (currentUser.country == 'India'){
-                      Proceedtobuy(total:inr,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                          username: username,
-                          mediaUrl: shopmediaUrl.first,
-                          productname:productname);
-                    }
-                    else if (currentUser.country == 'UK'){
-                      Proceedtobuy(total:gbp,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                          username: username,
-                          mediaUrl: shopmediaUrl.first,
-                          productname:productname);
-                    }
-                    else  if (currentUser.country == 'Europe'){
-                      Proceedtobuy(total:eur,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                          username: username,
-                          mediaUrl: shopmediaUrl.first,
-                          productname:productname);
-                    }
-                    else  if (currentUser.country == 'USA'){
-                      Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                          username: username,
-                          mediaUrl: shopmediaUrl.first,
-                          productname:productname);
-                    }
-                    else  {
-                      Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                          username: username,
-                          mediaUrl: shopmediaUrl.first,
-                          productname:productname);
-                    }
+
 
                   });
                 },
@@ -9203,36 +4839,7 @@ else{
                 onTap: () {
                   setState(() {
                     usersize = 'MTO 7-8 Y';
-                    if (currentUser.country == 'India'){
-                      Proceedtobuy(total:inr,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                          username: username,
-                          mediaUrl: shopmediaUrl.first,
-                          productname:productname);
-                    }
-                    else if (currentUser.country == 'UK'){
-                      Proceedtobuy(total:gbp,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                          username: username,
-                          mediaUrl: shopmediaUrl.first,
-                          productname:productname);
-                    }
-                    else  if (currentUser.country == 'Europe'){
-                      Proceedtobuy(total:eur,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                          username: username,
-                          mediaUrl: shopmediaUrl.first,
-                          productname:productname);
-                    }
-                    else  if (currentUser.country == 'USA'){
-                      Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                          username: username,
-                          mediaUrl: shopmediaUrl.first,
-                          productname:productname);
-                    }
-                    else  {
-                      Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                          username: username,
-                          mediaUrl: shopmediaUrl.first,
-                          productname:productname);
-                    }
+
 
                   });
                 },
@@ -9257,36 +4864,7 @@ else{
                 onTap: () {
                   setState(() {
                     usersize = 'MTO 8-9 Y';
-                    if (currentUser.country == 'India'){
-                      Proceedtobuy(total:inr,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                          username: username,
-                          mediaUrl: shopmediaUrl.first,
-                          productname:productname);
-                    }
-                    else if (currentUser.country == 'UK'){
-                      Proceedtobuy(total:gbp,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                          username: username,
-                          mediaUrl: shopmediaUrl.first,
-                          productname:productname);
-                    }
-                    else  if (currentUser.country == 'Europe'){
-                      Proceedtobuy(total:eur,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                          username: username,
-                          mediaUrl: shopmediaUrl.first,
-                          productname:productname);
-                    }
-                    else  if (currentUser.country == 'USA'){
-                      Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                          username: username,
-                          mediaUrl: shopmediaUrl.first,
-                          productname:productname);
-                    }
-                    else  {
-                      Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                          username: username,
-                          mediaUrl: shopmediaUrl.first,
-                          productname:productname);
-                    }
+
 
                   });
                 },
@@ -9311,36 +4889,7 @@ else{
                 onTap: () {
                   setState(() {
                     usersize = 'MTO 9-10 Y';
-                    if (currentUser.country == 'India'){
-                      Proceedtobuy(total:inr,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                          username: username,
-                          mediaUrl: shopmediaUrl.first,
-                          productname:productname);
-                    }
-                    else if (currentUser.country == 'UK'){
-                      Proceedtobuy(total:gbp,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                          username: username,
-                          mediaUrl: shopmediaUrl.first,
-                          productname:productname);
-                    }
-                    else  if (currentUser.country == 'Europe'){
-                      Proceedtobuy(total:eur,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                          username: username,
-                          mediaUrl: shopmediaUrl.first,
-                          productname:productname);
-                    }
-                    else  if (currentUser.country == 'USA'){
-                      Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                          username: username,
-                          mediaUrl: shopmediaUrl.first,
-                          productname:productname);
-                    }
-                    else  {
-                      Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                          username: username,
-                          mediaUrl: shopmediaUrl.first,
-                          productname:productname);
-                    }
+
 
                   });
                 },
@@ -9365,36 +4914,7 @@ else{
                 onTap: () {
                   setState(() {
                     usersize = 'MTO 10-11 Y';
-                    if (currentUser.country == 'India'){
-                      Proceedtobuy(total:inr,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                          username: username,
-                          mediaUrl: shopmediaUrl.first,
-                          productname:productname);
-                    }
-                    else if (currentUser.country == 'UK'){
-                      Proceedtobuy(total:gbp,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                          username: username,
-                          mediaUrl: shopmediaUrl.first,
-                          productname:productname);
-                    }
-                    else  if (currentUser.country == 'Europe'){
-                      Proceedtobuy(total:eur,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                          username: username,
-                          mediaUrl: shopmediaUrl.first,
-                          productname:productname);
-                    }
-                    else  if (currentUser.country == 'USA'){
-                      Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                          username: username,
-                          mediaUrl: shopmediaUrl.first,
-                          productname:productname);
-                    }
-                    else  {
-                      Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                          username: username,
-                          mediaUrl: shopmediaUrl.first,
-                          productname:productname);
-                    }
+
 
                   });
                 },
@@ -9419,36 +4939,7 @@ else{
                 onTap: () {
                   setState(() {
                     usersize = 'MTO 11-12 Y';
-                    if (currentUser.country == 'India'){
-                      Proceedtobuy(total:inr,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                          username: username,
-                          mediaUrl: shopmediaUrl.first,
-                          productname:productname);
-                    }
-                    else if (currentUser.country == 'UK'){
-                      Proceedtobuy(total:gbp,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                          username: username,
-                          mediaUrl: shopmediaUrl.first,
-                          productname:productname);
-                    }
-                    else  if (currentUser.country == 'Europe'){
-                      Proceedtobuy(total:eur,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                          username: username,
-                          mediaUrl: shopmediaUrl.first,
-                          productname:productname);
-                    }
-                    else  if (currentUser.country == 'USA'){
-                      Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                          username: username,
-                          mediaUrl: shopmediaUrl.first,
-                          productname:productname);
-                    }
-                    else  {
-                      Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                          username: username,
-                          mediaUrl: shopmediaUrl.first,
-                          productname:productname);
-                    }
+
 
                   });
                 },
@@ -9489,36 +4980,7 @@ else{
                 onTap: () {
                   setState(() {
                     usersize = 'MTO 13 Y';
-                    if (currentUser.country == 'India'){
-                      Proceedtobuy(total:inr,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                          username: username,
-                          mediaUrl: shopmediaUrl.first,
-                          productname:productname);
-                    }
-                    else if (currentUser.country == 'UK'){
-                      Proceedtobuy(total:gbp,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                          username: username,
-                          mediaUrl: shopmediaUrl.first,
-                          productname:productname);
-                    }
-                    else  if (currentUser.country == 'Europe'){
-                      Proceedtobuy(total:eur,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                          username: username,
-                          mediaUrl: shopmediaUrl.first,
-                          productname:productname);
-                    }
-                    else  if (currentUser.country == 'USA'){
-                      Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                          username: username,
-                          mediaUrl: shopmediaUrl.first,
-                          productname:productname);
-                    }
-                    else  {
-                      Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                          username: username,
-                          mediaUrl: shopmediaUrl.first,
-                          productname:productname);
-                    }
+
 
                   });
                 },
@@ -9543,36 +5005,7 @@ else{
                 onTap: () {
                   setState(() {
                     usersize = 'MTO 14 Y';
-                    if (currentUser.country == 'India'){
-                      Proceedtobuy(total:inr,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                          username: username,
-                          mediaUrl: shopmediaUrl.first,
-                          productname:productname);
-                    }
-                    else if (currentUser.country == 'UK'){
-                      Proceedtobuy(total:gbp,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                          username: username,
-                          mediaUrl: shopmediaUrl.first,
-                          productname:productname);
-                    }
-                    else  if (currentUser.country == 'Europe'){
-                      Proceedtobuy(total:eur,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                          username: username,
-                          mediaUrl: shopmediaUrl.first,
-                          productname:productname);
-                    }
-                    else  if (currentUser.country == 'USA'){
-                      Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                          username: username,
-                          mediaUrl: shopmediaUrl.first,
-                          productname:productname);
-                    }
-                    else  {
-                      Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                          username: username,
-                          mediaUrl: shopmediaUrl.first,
-                          productname:productname);
-                    }
+
 
                   });
                 },
@@ -9597,36 +5030,7 @@ else{
                 onTap: () {
                   setState(() {
                     usersize = 'MTO 15 Y';
-                    if (currentUser.country == 'India'){
-                      Proceedtobuy(total:inr,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                          username: username,
-                          mediaUrl: shopmediaUrl.first,
-                          productname:productname);
-                    }
-                    else if (currentUser.country == 'UK'){
-                      Proceedtobuy(total:gbp,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                          username: username,
-                          mediaUrl: shopmediaUrl.first,
-                          productname:productname);
-                    }
-                    else  if (currentUser.country == 'Europe'){
-                      Proceedtobuy(total:eur,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                          username: username,
-                          mediaUrl: shopmediaUrl.first,
-                          productname:productname);
-                    }
-                    else  if (currentUser.country == 'USA'){
-                      Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                          username: username,
-                          mediaUrl: shopmediaUrl.first,
-                          productname:productname);
-                    }
-                    else  {
-                      Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                          username: username,
-                          mediaUrl: shopmediaUrl.first,
-                          productname:productname);
-                    }
+
 
                   });
                 },
@@ -9651,36 +5055,7 @@ else{
                 onTap: () {
                   setState(() {
                     usersize = 'MTO 16 Y';
-                    if (currentUser.country == 'India'){
-                      Proceedtobuy(total:inr,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                          username: username,
-                          mediaUrl: shopmediaUrl.first,
-                          productname:productname);
-                    }
-                    else if (currentUser.country == 'UK'){
-                      Proceedtobuy(total:gbp,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                          username: username,
-                          mediaUrl: shopmediaUrl.first,
-                          productname:productname);
-                    }
-                    else  if (currentUser.country == 'Europe'){
-                      Proceedtobuy(total:eur,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                          username: username,
-                          mediaUrl: shopmediaUrl.first,
-                          productname:productname);
-                    }
-                    else  if (currentUser.country == 'USA'){
-                      Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                          username: username,
-                          mediaUrl: shopmediaUrl.first,
-                          productname:productname);
-                    }
-                    else  {
-                      Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-                          username: username,
-                          mediaUrl: shopmediaUrl.first,
-                          productname:productname);
-                    }
+
 
                   });
                 },
@@ -10051,7 +5426,34 @@ TeenSizes(){
 
 
   }
+SelectSize(){  return
+  showDialog<void>(
+  context: context,
+  // useRootNavigator:true,
 
+  barrierDismissible: true,
+  // false = user must tap button, true = tap outside dialog
+  builder: (BuildContext dialogContext) {
+    return
+      Dialog(
+
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(20),),
+        child: Container(
+            height: 400,
+            child:SingleChildScrollView(child:Column(
+              children: [
+                gender == 'Men'? MenSizes():
+                gender == 'Women'? WomenSizes():
+                gender == 'Baby-Boys'||gender == 'Baby-Girls'  ?BabySizes():
+                gender == 'Kids-Boys'||gender == 'Kids-Girls'?  KidSizes():
+                gender == 'Teen-Boys'||gender == 'Teen-Girls'? TeenSizes():Container(),
+              ],
+            ),)),
+      );
+  },
+);
+}
   Widget sizeGuide(){
 
     if(gender=='Men'){

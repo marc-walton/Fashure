@@ -475,6 +475,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.1.2"
+  flutter_chip_tags:
+    dependency: "direct main"
+    description:
+      name: flutter_chip_tags
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.0.4"
   flutter_currencies_tracker:
     dependency: "direct main"
     description:
@@ -524,32 +531,11 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.19.3"
-  flutter_tagging:
-    dependency: "direct main"
-    description:
-      name: flutter_tagging
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "2.2.0+3"
-  flutter_tags:
-    dependency: "direct main"
-    description:
-      name: flutter_tags
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.4.9+1"
   flutter_test:
     dependency: "direct dev"
     description: flutter
     source: sdk
     version: "0.0.0"
-  flutter_typeahead_web:
-    dependency: transitive
-    description:
-      name: flutter_typeahead_web
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "1.0.0+1"
   flutter_web_plugins:
     dependency: transitive
     description: flutter
