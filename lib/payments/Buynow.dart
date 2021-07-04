@@ -58,7 +58,60 @@ class BuyNow extends StatefulWidget {
   final int Shoe21;
   final int mto;
   final int freeSize;
+  final int Ring1;
+  final int Ring2;
+  final int Ring3;
+  final int Ring4;
+  final int Ring5;
+  final int Ring6;
+  final int Ring7;
+  final int Ring8;
+  final int Ring9;
+  final int Ring10;
+  final int Ring11;
+  final int Ring12;
+  final int Ring13;
+  final int Ring14;
+  final int Ring15;
+  final int Ring16;
+  final int Ring17;
+  final int Ring18;
+  final int Ring19;
+  final int Ring20;
+  final int  Ring21;
+  final int  Ring22;
+  final int  Ring23;
+  final int custom12;
+  final int custom22;
+  final int custom32;
+  final int custom42;
+  final int custom52;
+  final int custom62;
+  final int custom72;
+  final int  custom82;
+  final int custom92;
+  final int custom102;
+  final int color1;
+  final int color2;
+  final int color3;
+  final int color4;
+  final int color5;
+  final int color6;
+  final int color7;
+  final int color8;
+  final int color9;
+  final int color10;
+  final String colorText;
+  final String mtoText;
   BuyNow({this.buynowamount,
+    this.Ring1, this.Ring2, this.Ring3, this.Ring4, this.Ring5, this.Ring6,
+    this.Ring7, this.Ring8, this.Ring9, this.Ring10, this.Ring11, this.Ring12,
+    this.Ring13, this.Ring14, this.Ring15, this.Ring16, this.Ring17, this.Ring18,
+    this.Ring19, this.Ring20, this.Ring21, this.Ring22, this.Ring23,
+    this.custom12, this.custom22, this.custom32, this.custom42, this.custom52,
+    this.custom62, this.custom72, this.custom82, this.custom92, this.custom102,
+    this.color1, this.color2, this.color3, this.color4, this.color5, this.color6,
+    this.color7, this.color8, this.color9, this.color10, this.colorText, this.mtoText,
     this.eur,
     this.usd,
     this.inr,
@@ -147,7 +200,51 @@ class BuyNow extends StatefulWidget {
 
 class _BuyNowState extends State<BuyNow> {
 
-
+  final int Ring1;
+  final int Ring2;
+  final int Ring3;
+  final int Ring4;
+  final int Ring5;
+  final int Ring6;
+  final int Ring7;
+  final int Ring8;
+  final int Ring9;
+  final int Ring10;
+  final int Ring11;
+  final int Ring12;
+  final int Ring13;
+  final int Ring14;
+  final int Ring15;
+  final int Ring16;
+  final int Ring17;
+  final int Ring18;
+  final int Ring19;
+  final int Ring20;
+  final int  Ring21;
+  final int  Ring22;
+  final int  Ring23;
+  final int custom12;
+  final int custom22;
+  final int custom32;
+  final int custom42;
+  final int custom52;
+  final int custom62;
+  final int custom72;
+  final int  custom82;
+  final int custom92;
+  final int custom102;
+  final int color1;
+  final int color2;
+  final int color3;
+  final int color4;
+  final int color5;
+  final int color6;
+  final int color7;
+  final int color8;
+  final int color9;
+  final int color10;
+  final String colorText;
+  final String mtoText;
   String orderId = Uuid().v4();
   int xxxs;
   int xxs;
@@ -187,7 +284,14 @@ class _BuyNowState extends State<BuyNow> {
   int mto;
   int freeSize;
   _BuyNowState({
-
+    this.Ring1, this.Ring2, this.Ring3, this.Ring4, this.Ring5, this.Ring6,
+    this.Ring7, this.Ring8, this.Ring9, this.Ring10, this.Ring11, this.Ring12,
+    this.Ring13, this.Ring14, this.Ring15, this.Ring16, this.Ring17, this.Ring18,
+    this.Ring19, this.Ring20, this.Ring21, this.Ring22, this.Ring23,
+    this.custom12, this.custom22, this.custom32, this.custom42, this.custom52,
+    this.custom62, this.custom72, this.custom82, this.custom92, this.custom102,
+    this.color1, this.color2, this.color3, this.color4, this.color5, this.color6,
+    this.color7, this.color8, this.color9, this.color10, this.colorText, this.mtoText,
     this.freeSize,
     this.mto,
     this.xxxs,

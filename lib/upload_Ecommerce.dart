@@ -154,7 +154,28 @@ TextEditingController customController82 = TextEditingController();
 TextEditingController customController92 = TextEditingController();
 TextEditingController customController102 = TextEditingController();
 
-TextEditingController durationfrom = TextEditingController();
+  TextEditingController colorController1 = TextEditingController();
+  TextEditingController colorController2 = TextEditingController();
+  TextEditingController colorController3 = TextEditingController();
+  TextEditingController colorController4 = TextEditingController();
+  TextEditingController colorController5 = TextEditingController();
+  TextEditingController colorController6 = TextEditingController();
+  TextEditingController colorController7 = TextEditingController();
+  TextEditingController colorController8 = TextEditingController();
+  TextEditingController colorController9 = TextEditingController();
+  TextEditingController colorController10 = TextEditingController();
+  TextEditingController colorController11 = TextEditingController();
+  TextEditingController colorController21 = TextEditingController();
+  TextEditingController colorController31 = TextEditingController();
+  TextEditingController colorController41 = TextEditingController();
+  TextEditingController colorController51 = TextEditingController();
+  TextEditingController colorController61 = TextEditingController();
+  TextEditingController colorController71 = TextEditingController();
+  TextEditingController colorController81 = TextEditingController();
+  TextEditingController colorController91 = TextEditingController();
+  TextEditingController colorController101 = TextEditingController();
+
+  TextEditingController durationfrom = TextEditingController();
 TextEditingController durationto = TextEditingController();
 TextEditingController durationfromw = TextEditingController();
 TextEditingController durationtow = TextEditingController();
@@ -332,7 +353,7 @@ bool indian = false;
   var eurtousd6;
   var eurtocny6;
   var eurtogbp6;
-    var userprice7;
+  var userprice7;
   var inrtousd7;
   var inrtocny7;
   var inrtogbp7;
@@ -353,7 +374,7 @@ bool indian = false;
   var eurtousd7;
   var eurtocny7;
   var eurtogbp7;
-      var userprice8;
+  var userprice8;
   var inrtousd8;
   var inrtocny8;
   var inrtogbp8;
@@ -374,7 +395,7 @@ bool indian = false;
   var eurtousd8;
   var eurtocny8;
   var eurtogbp8;
-        var userprice9;
+  var userprice9;
   var inrtousd9;
   var inrtocny9;
   var inrtogbp9;
@@ -395,7 +416,7 @@ bool indian = false;
   var eurtousd9;
   var eurtocny9;
   var eurtogbp9;
-          var userprice10;
+  var userprice10;
   var inrtousd10;
   var inrtocny10;
   var inrtogbp10;
@@ -416,7 +437,7 @@ bool indian = false;
   var eurtousd10;
   var eurtocny10;
   var eurtogbp10;
-            var userprice11;
+  var userprice11;
   var inrtousd11;
   var inrtocny11;
   var inrtogbp11;
@@ -437,7 +458,7 @@ bool indian = false;
   var eurtousd11;
   var eurtocny11;
   var eurtogbp11;
-              var userprice12;
+  var userprice12;
   var inrtousd12;
   var inrtocny12;
   var inrtogbp12;
@@ -458,7 +479,7 @@ bool indian = false;
   var eurtousd12;
   var eurtocny12;
   var eurtogbp12;
-  List<String> Color = <String>[];
+
 int count  = 1;
   @override
   void initState() {
@@ -637,783 +658,6 @@ int count  = 1;
     return downloadUrl;
   }
 
-  void INRUSD() async {
-    setState(() {
-isUploading = true;
-    });
-
-    if (currentUser.country == 'India') {
-      var resultUSD = await Currency.getConversion(
-          from: 'INR', to: 'USD', amount: priceController.text);
-      var resultUSD1 = await Currency.getConversion(
-          from: 'INR', to: 'USD', amount: customController11.text ??  0);
-      var resultUSD2 = await Currency.getConversion(
-          from: 'INR', to: 'USD', amount: customController21.text ??  0);
-      var resultUSD3 = await Currency.getConversion(
-          from: 'INR', to: 'USD', amount: customController31.text ??  0);
-      var resultUSD4 = await Currency.getConversion(
-          from: 'INR', to: 'USD', amount: customController41.text ??  0);
-      var resultUSD5 = await Currency.getConversion(
-          from: 'INR', to: 'USD', amount: customController51.text ??  0);
-      var resultUSD6 = await Currency.getConversion(
-          from: 'INR', to: 'USD', amount: customController61.text ??  0);
-      var resultUSD7 = await Currency.getConversion(
-          from: 'INR', to: 'USD', amount: customController71.text ??  0);
-      var resultUSD8 = await Currency.getConversion(
-          from: 'INR', to: 'USD', amount: customController81.text ??  0);
-      var resultUSD9 = await Currency.getConversion(
-          from: 'INR', to: 'USD', amount: customController91.text ??  0);
-      var resultUSD10 = await Currency.getConversion(
-          from: 'INR', to: 'USD', amount: customController101.text ??  0);
-      var resultUSD11 = await Currency.getConversion(
-          from: 'INR', to: 'USD', amount: shipcost.text ??  0);
-      var resultUSD12 = await Currency.getConversion(
-          from: 'INR', to: 'USD', amount: shipcostintern.text ??  0);
-      // String date = result.date; // Returns the last updated date
-
-      print("$inrtousd");
-      var resultGBP = await Currency.getConversion(
-          from: 'INR', to: 'GBP', amount: priceController.text);
-      var resultGBP1 = await Currency.getConversion(
-          from: 'INR', to: 'GBP', amount: customController11.text ??  0);
-      var resultGBP2 = await Currency.getConversion(
-          from: 'INR', to: 'GBP', amount: customController21.text ??  0);
-      var resultGBP3 = await Currency.getConversion(
-          from: 'INR', to: 'GBP', amount: customController31.text ??  0);
-      var resultGBP4 = await Currency.getConversion(
-          from: 'INR', to: 'GBP', amount: customController41.text ??  0);
-      var resultGBP5 = await Currency.getConversion(
-          from: 'INR', to: 'GBP', amount: customController51.text ??  0);
-      var resultGBP6 = await Currency.getConversion(
-          from: 'INR', to: 'GBP', amount: customController61.text ??  0);
-      var resultGBP7 = await Currency.getConversion(
-          from: 'INR', to: 'GBP', amount: customController71.text ??  0);
-      var resultGBP8 = await Currency.getConversion(
-          from: 'INR', to: 'GBP', amount: customController81.text ??  0);
-      var resultGBP9 = await Currency.getConversion(
-          from: 'INR', to: 'GBP', amount: customController91.text ??  0);
-      var resultGBP10 = await Currency.getConversion(
-          from: 'INR', to: 'GBP', amount: customController101.text ??  0);
-      var resultGBP11 = await Currency.getConversion(
-          from: 'INR', to: 'GBP', amount: shipcost.text ??  0);
-      var resultGBP12 = await Currency.getConversion(
-          from: 'INR', to: 'GBP', amount: shipcostintern.text ??  0);
-// Returns the last updated date
-
-
-      print("$inrtogbp");
-      var resultEUR = await Currency.getConversion(
-          from: 'INR', to: 'EUR', amount:priceController.text);
-      var resultEUR1 = await Currency.getConversion(
-          from: 'INR', to: 'EUR', amount: customController11.text ??  0);
-      var resultEUR2 = await Currency.getConversion(
-          from: 'INR', to: 'EUR', amount: customController21.text ??  0);
-      var resultEUR3 = await Currency.getConversion(
-          from: 'INR', to: 'EUR', amount: customController31.text ??  0);
-      var resultEUR4 = await Currency.getConversion(
-          from: 'INR', to: 'EUR', amount: customController41.text ??  0);
-      var resultEUR5 = await Currency.getConversion(
-          from: 'INR', to: 'EUR', amount: customController51.text ??  0);
-      var resultEUR6 = await Currency.getConversion(
-          from: 'INR', to: 'EUR', amount: customController61.text ??  0);
-      var resultEUR7 = await Currency.getConversion(
-          from: 'INR', to: 'EUR', amount: customController71.text ??  0);
-      var resultEUR8 = await Currency.getConversion(
-          from: 'INR', to: 'EUR', amount: customController81.text ??  0);
-      var resultEUR9 = await Currency.getConversion(
-          from: 'INR', to: 'EUR', amount: customController91.text ??  0);
-      var resultEUR10 = await Currency.getConversion(
-          from: 'INR', to: 'EUR', amount: customController101.text ??  0);
-      var resultEUR11 = await Currency.getConversion(
-          from: 'INR', to: 'EUR', amount: shipcost.text ??  0);
-      var resultEUR12 = await Currency.getConversion(
-          from: 'INR', to: 'EUR', amount: shipcostintern.text ??  0);
-      setState(() {
-
-        inrtogbp = resultGBP.rate;
-        inrtogbp1 = resultGBP1.rate;
-        inrtogbp2 = resultGBP2.rate;
-        inrtogbp3 = resultGBP3.rate;
-        inrtogbp4 = resultGBP4.rate;
-        inrtogbp5 = resultGBP5.rate;
-        inrtogbp6 = resultGBP6.rate;
-        inrtogbp7 = resultGBP7.rate;
-        inrtogbp8 = resultGBP8.rate;
-        inrtogbp9 = resultGBP9.rate;
-        inrtogbp10 = resultGBP10.rate;
-        inrtogbp11 = resultGBP11.rate;
-        inrtogbp12 = resultGBP12.rate;
-
-        inrtoeur = resultEUR.rate;
-        inrtoeur1 = resultEUR1.rate;
-        inrtoeur2 = resultEUR2.rate;
-        inrtoeur3 = resultEUR3.rate;
-        inrtoeur4 = resultEUR4.rate;
-        inrtoeur5 = resultEUR5.rate;
-        inrtoeur6 = resultEUR6.rate;
-        inrtoeur7 = resultEUR7.rate;
-        inrtoeur8 = resultEUR8.rate;
-        inrtoeur9 = resultEUR9.rate;
-        inrtoeur10 = resultEUR10.rate;
-        inrtoeur11 = resultEUR11.rate;
-        inrtoeur12 = resultEUR12.rate;
-
-        inrtousd = resultUSD.rate;
-        inrtousd1 = resultUSD1.rate;
-        inrtousd2 = resultUSD2.rate;
-        inrtousd3 = resultUSD3.rate;
-        inrtousd4 = resultUSD4.rate;
-        inrtousd5 = resultUSD5.rate;
-        inrtousd6 = resultUSD6.rate;
-        inrtousd7 = resultUSD7.rate;
-        inrtousd8 = resultUSD8.rate;
-        inrtousd9 = resultUSD9.rate;
-        inrtousd10 = resultUSD10.rate;
-        inrtousd11 = resultUSD11.rate;
-        inrtousd12 = resultUSD12.rate;
-userprice = priceController.text;
-userprice1 = customController11.text;
-userprice2 = customController21.text;
-userprice3 = customController31.text;
-userprice4 = customController41.text;
-userprice5 = customController51.text;
-userprice6 = customController61.text;
-userprice7 = customController71.text;
-userprice8 = customController81.text;
-userprice9 = customController91.text;
-userprice10 = customController101.text;
-userprice11 = shipcost.text;
-userprice12 = shipcostintern.text;
-
-      });
-
-
-
-    }
-    else if (currentUser.country == 'Europe') {
-      var resultUSD = await Currency.getConversion(
-          from: 'EUR', to: 'USD', amount: priceController.text);
-      var resultUSD1 = await Currency.getConversion(
-          from: 'EUR', to: 'USD', amount: customController11.text  ??  0);
-      var resultUSD2 = await Currency.getConversion(
-          from: 'EUR', to: 'USD', amount: customController21.text  ??  0);
-      var resultUSD3 = await Currency.getConversion(
-          from: 'EUR', to: 'USD', amount: customController31.text  ??  0);
-      var resultUSD4 = await Currency.getConversion(
-          from: 'EUR', to: 'USD', amount: customController41.text  ??  0);
-      var resultUSD5 = await Currency.getConversion(
-          from: 'EUR', to: 'USD', amount: customController51.text  ??  0);
-      var resultUSD6 = await Currency.getConversion(
-          from: 'EUR', to: 'USD', amount: customController61.text  ??  0);
-      var resultUSD7 = await Currency.getConversion(
-          from: 'EUR', to: 'USD', amount: customController71.text  ??  0);
-      var resultUSD8 = await Currency.getConversion(
-          from: 'EUR', to: 'USD', amount: customController81.text  ??  0);
-      var resultUSD9 = await Currency.getConversion(
-          from: 'EUR', to: 'USD', amount: customController91.text  ??  0);
-      var resultUSD10 = await Currency.getConversion(
-          from: 'EUR', to: 'USD', amount: customController101.text  ??  0);
-      var resultUSD11 = await Currency.getConversion(
-          from: 'EUR', to: 'USD', amount: shipcost.text  ??  0);
-      var resultUSD12 = await Currency.getConversion(
-          from: 'EUR', to: 'USD', amount: shipcostintern.text  ??  0);
-      // String date = result.date; // Returns the last updated date
-      setState(() {
-        eurtousd = resultUSD.rate;
-          eurtousd1 = resultUSD1.rate;
-            eurtousd2 = resultUSD2.rate;
-               eurtousd3 = resultUSD3.rate;
-            eurtousd4 = resultUSD4.rate;
-          eurtousd5 = resultUSD5.rate;
-         eurtousd6 = resultUSD6.rate;
-       eurtousd7 = resultUSD7.rate;
-       eurtousd8 = resultUSD8.rate;
-      eurtousd9 = resultUSD9.rate;
-      eurtousd10 = resultUSD10.rate;
-      eurtousd11 = resultUSD11.rate;
-      eurtousd12 = resultUSD12.rate;
-        userprice = priceController.text;
-        userprice1 = customController11.text;
-        userprice2 = customController21.text;
-        userprice3 = customController31.text;
-        userprice4 = customController41.text;
-        userprice5 = customController51.text;
-        userprice6 = customController61.text;
-        userprice7 = customController71.text;
-        userprice8 = customController81.text;
-        userprice9 = customController91.text;
-        userprice10 = customController101.text;
-        userprice11 = shipcost.text;
-        userprice12 = shipcostintern.text;
-
-      });
-
-      print("$eurtousd");
-      var resultGBP = await Currency.getConversion(
-          from: 'EUR', to: 'GBP', amount: priceController.text);
-      var resultGBP1 = await Currency.getConversion(
-          from: 'EUR', to: 'GBP', amount: customController11.text  ??  0);
-      var resultGBP2 = await Currency.getConversion(
-          from: 'EUR', to: 'GBP', amount: customController21.text  ??  0);
-      var resultGBP3 = await Currency.getConversion(
-          from: 'EUR', to: 'GBP', amount: customController31.text  ??  0);
-      var resultGBP4 = await Currency.getConversion(
-          from: 'EUR', to: 'GBP', amount: customController41.text  ??  0);
-      var resultGBP5 = await Currency.getConversion(
-          from: 'EUR', to: 'GBP', amount: customController51.text  ??  0);
-      var resultGBP6 = await Currency.getConversion(
-          from: 'EUR', to: 'GBP', amount: customController61.text  ??  0);
-      var resultGBP7 = await Currency.getConversion(
-          from: 'EUR', to: 'GBP', amount: customController71.text  ??  0);
-      var resultGBP8 = await Currency.getConversion(
-          from: 'EUR', to: 'GBP', amount: customController81.text  ??  0);
-      var resultGBP9 = await Currency.getConversion(
-          from: 'EUR', to: 'GBP', amount: customController91.text  ??  0);
-      var resultGBP10 = await Currency.getConversion(
-          from: 'EUR', to: 'GBP', amount: customController101.text  ??  0);
-      var resultGBP11 = await Currency.getConversion(
-          from: 'EUR', to: 'GBP', amount: shipcost.text  ??  0);
-      var resultGBP12 = await Currency.getConversion(
-          from: 'EUR', to: 'GBP', amount: shipcostintern.text  ??  0);
-// Returns the last updated date
-      setState(() {
-        eurtogbp = resultGBP.rate;
-        eurtogbp1 = resultGBP1.rate;
-
-        eurtogbp2 = resultGBP2.rate;
-
-        eurtogbp3 = resultGBP3.rate;
-
-        eurtogbp4 = resultGBP4.rate;
-
-        eurtogbp5 = resultGBP5.rate;
-
-        eurtogbp6 = resultGBP6.rate;
-
-        eurtogbp7 = resultGBP7.rate;
-
-        eurtogbp8 = resultGBP8.rate;
-
-        eurtogbp9 = resultGBP9.rate;
-
-        eurtogbp10 = resultGBP10.rate;
-
-        eurtogbp11 = resultGBP11.rate;
-        eurtogbp12 = resultGBP12.rate;
-
-      });
-
-      print("$eurtogbp");
-
-      var resultINR = await Currency.getConversion(
-          from: 'EUR', to: 'INR', amount: priceController.text );
-      var resultINR1 = await Currency.getConversion(
-          from: 'EUR', to: 'INR', amount: customController11.text  ??  0);
-      var resultINR2 = await Currency.getConversion(
-          from: 'EUR', to: 'INR', amount: customController21.text  ??  0);
-      var resultINR3 = await Currency.getConversion(
-          from: 'EUR', to: 'INR', amount: customController31.text  ??  0);
-      var resultINR4 = await Currency.getConversion(
-          from: 'EUR', to: 'INR', amount: customController41.text  ??  0);
-      var resultINR5 = await Currency.getConversion(
-          from: 'EUR', to: 'INR', amount: customController51.text  ??  0);
-      var resultINR6 = await Currency.getConversion(
-          from: 'EUR', to: 'INR', amount: customController61.text  ??  0);
-      var resultINR7 = await Currency.getConversion(
-          from: 'EUR', to: 'INR', amount: customController71.text  ??  0);
-      var resultINR8 = await Currency.getConversion(
-          from: 'EUR', to: 'INR', amount: customController81.text  ??  0);
-      var resultINR9 = await Currency.getConversion(
-          from: 'EUR', to: 'INR', amount: customController91.text  ??  0);
-      var resultINR10 = await Currency.getConversion(
-          from: 'EUR', to: 'INR', amount: customController101.text  ??  0);
-      var resultINR11 = await Currency.getConversion(
-          from: 'EUR', to: 'INR', amount: shipcost.text  ??  0);
-      var resultINR12 = await Currency.getConversion(
-          from: 'EUR', to: 'INR', amount: shipcostintern.text  ??  0);
-setState(() {
-  eurtoinr = resultINR.rate;
-  eurtoinr1 = resultINR1.rate;
-
-  eurtoinr2 = resultINR2.rate;
-
-  eurtoinr3 = resultINR3.rate;
-
-  eurtoinr4 = resultINR4.rate;
-
-  eurtoinr5 = resultINR5.rate;
-
-  eurtoinr6 = resultINR6.rate;
-
-  eurtoinr7 = resultINR7.rate;
-
-  eurtoinr8 = resultINR8.rate;
-
-  eurtoinr9 = resultINR9.rate;
-
-  eurtoinr10 = resultINR10.rate;
-
-  eurtoinr11 = resultINR11.rate;
-  eurtoinr12 = resultINR12.rate;
-
-});
-
-      print("$eurtoinr");
-
-    }
-    else if (currentUser.country == 'UK') {
-      var resultUSD = await Currency.getConversion(
-          from: 'GBP', to: 'USD', amount: priceController.text);
-      var resultUSD1 = await Currency.getConversion(
-          from: 'GBP', to: 'USD', amount: customController11.text  ??  0);
-      var resultUSD2 = await Currency.getConversion(
-          from: 'GBP', to: 'USD', amount: customController21.text  ??  0);
-      var resultUSD3 = await Currency.getConversion(
-          from: 'GBP', to: 'USD', amount: customController31.text  ??  0);
-      var resultUSD4 = await Currency.getConversion(
-          from: 'GBP', to: 'USD', amount: customController41.text  ??  0);
-      var resultUSD5 = await Currency.getConversion(
-          from: 'GBP', to: 'USD', amount: customController51.text  ??  0);
-      var resultUSD6 = await Currency.getConversion(
-          from: 'GBP', to: 'USD', amount: customController61.text  ??  0);
-      var resultUSD7 = await Currency.getConversion(
-          from: 'GBP', to: 'USD', amount: customController71.text  ??  0);
-      var resultUSD8 = await Currency.getConversion(
-          from: 'GBP', to: 'USD', amount: customController81.text  ??  0);
-      var resultUSD9 = await Currency.getConversion(
-          from: 'GBP', to: 'USD', amount: customController91.text  ??  0);
-      var resultUSD10 = await Currency.getConversion(
-          from: 'GBP', to: 'USD', amount: customController101.text  ??  0);
-      var resultUSD11 = await Currency.getConversion(
-          from: 'GBP', to: 'USD', amount: shipcost.text  ??  0);
-      var resultUSD12 = await Currency.getConversion(
-          from: 'GBP', to: 'USD', amount: shipcostintern.text  ??  0);
-      // String date = result.date; // Returns the last updated date
-      var resultEUR = await Currency.getConversion(
-          from: 'GBP', to: 'EUR', amount: priceController.text );
-      var resultEUR1 = await Currency.getConversion(
-          from: 'GBP', to: 'EUR', amount: customController11.text  ??  0);
-      var resultEUR2 = await Currency.getConversion(
-          from: 'GBP', to: 'EUR', amount: customController21.text  ??  0);
-      var resultEUR3 = await Currency.getConversion(
-          from: 'GBP', to: 'EUR', amount: customController31.text  ??  0);
-      var resultEUR4 = await Currency.getConversion(
-          from: 'GBP', to: 'EUR', amount: customController41.text  ??  0);
-      var resultEUR5 = await Currency.getConversion(
-          from: 'GBP', to: 'EUR', amount: customController51.text  ??  0);
-      var resultEUR6 = await Currency.getConversion(
-          from: 'GBP', to: 'EUR', amount: customController61.text  ??  0);
-      var resultEUR7 = await Currency.getConversion(
-          from: 'GBP', to: 'EUR', amount: customController71.text  ??  0);
-      var resultEUR8 = await Currency.getConversion(
-          from: 'GBP', to: 'EUR', amount: customController81.text  ??  0);
-      var resultEUR9 = await Currency.getConversion(
-          from: 'GBP', to: 'EUR', amount: customController91.text  ??  0);
-      var resultEUR10 = await Currency.getConversion(
-          from: 'GBP', to: 'EUR', amount: customController101.text  ??  0);
-      var resultEUR11 = await Currency.getConversion(
-          from: 'GBP', to: 'EUR', amount: shipcost.text  ??  0);
-      var resultEUR12 = await Currency.getConversion(
-          from: 'GBP', to: 'EUR', amount: shipcostintern.text  ??  0);
-      var resultINR = await Currency.getConversion(
-          from: 'GBP', to: 'INR', amount: priceController.text);
-      var resultINR1 = await Currency.getConversion(
-          from: 'GBP', to: 'INR', amount: customController11.text  ??  0);
-      var resultINR2 = await Currency.getConversion(
-          from: 'GBP', to: 'INR', amount: customController21.text  ??  0);
-      var resultINR3 = await Currency.getConversion(
-          from: 'GBP', to: 'INR', amount: customController31.text  ??  0);
-      var resultINR4 = await Currency.getConversion(
-          from: 'GBP', to: 'INR', amount: customController41.text  ??  0);
-      var resultINR5 = await Currency.getConversion(
-          from: 'GBP', to: 'INR', amount: customController51.text  ??  0);
-      var resultINR6 = await Currency.getConversion(
-          from: 'GBP', to: 'INR', amount: customController61.text  ??  0);
-      var resultINR7 = await Currency.getConversion(
-          from: 'GBP', to: 'INR', amount: customController71.text  ??  0);
-      var resultINR8 = await Currency.getConversion(
-          from: 'GBP', to: 'INR', amount: customController81.text  ??  0);
-      var resultINR9 = await Currency.getConversion(
-          from: 'GBP', to: 'INR', amount: customController91.text  ??  0);
-      var resultINR10 = await Currency.getConversion(
-          from: 'GBP', to: 'INR', amount: customController101.text  ??  0);
-      var resultINR11 = await Currency.getConversion(
-          from: 'GBP', to: 'INR', amount: shipcost.text  ??  0);
-      var resultINR12 = await Currency.getConversion(
-          from: 'GBP', to: 'INR', amount: shipcostintern.text  ??  0);
-          setState(() {
-        gbptousd = resultUSD.rate;
-      gbptousd1 = resultUSD1.rate;
-     gbptousd2 = resultUSD2.rate;
-     gbptousd3 = resultUSD3.rate;
-     gbptousd4 = resultUSD4.rate;
-     gbptousd5 = resultUSD5.rate;
-     gbptousd6 = resultUSD6.rate;
-     gbptousd7 = resultUSD7.rate;
-     gbptousd8 = resultUSD8.rate;
-     gbptousd9 = resultUSD9.rate;
-     gbptousd10 = resultUSD10.rate;
-     gbptousd11 = resultUSD11.rate;
-     gbptousd12 = resultUSD12.rate;
-
-        gbptoeur = resultEUR.rate;
-gbptoeur1 = resultEUR1.rate;
-gbptoeur2 = resultEUR2.rate;
-gbptoeur3 = resultEUR3.rate;
-gbptoeur4 = resultEUR4.rate;
-gbptoeur5 = resultEUR5.rate;
-gbptoeur6 = resultEUR6.rate;
-gbptoeur7 = resultEUR7.rate;
-gbptoeur8 = resultEUR8.rate;
-gbptoeur9 = resultEUR9.rate;
-gbptoeur10 = resultEUR10.rate;
-gbptoeur11 = resultEUR11.rate;
-gbptoeur12 = resultEUR12.rate;
-
-        gbptoinr = resultINR.rate;
-gbptoinr1 = resultINR1.rate;
-gbptoinr2 = resultINR2.rate;
-gbptoinr3 = resultINR3.rate;
-gbptoinr4 = resultINR4.rate;
-gbptoinr5 = resultINR5.rate;
-gbptoinr6 = resultINR6.rate;
-gbptoinr7 = resultINR7.rate;
-gbptoinr8 = resultINR8.rate;
-gbptoinr9 = resultINR9.rate;
-gbptoinr10 = resultINR10.rate;
-gbptoinr11 = resultINR11.rate;
-gbptoinr12 = resultINR12.rate;
-        userprice = priceController.text;
-        userprice1 = customController11.text;
-        userprice2 = customController21.text;
-        userprice3 = customController31.text;
-        userprice4 = customController41.text;
-        userprice5 = customController51.text;
-        userprice6 = customController61.text;
-        userprice7 = customController71.text;
-        userprice8 = customController81.text;
-        userprice9 = customController91.text;
-        userprice10 = customController101.text;
-        userprice11 = shipcost.text;
-        userprice12 = shipcostintern.text;
-
-        print("$gbptousd");
-        print("$userprice");
-        print("$usdtoeur");
-        print("$gbptocny");
-        print("$gbptoinr");
-
-
-      });
-
-// Returns the last updated date
-
-    }
-    else if (currentUser.country == 'USA') {
-      var resultGBP = await Currency.getConversion(
-          from: 'USD', to: 'GBP', amount: priceController.text);
-      var resultGBP1 = await Currency.getConversion(
-          from: 'USD', to: 'GBP', amount: customController11.text ??  0);
-      var resultGBP2 = await Currency.getConversion(
-          from: 'USD', to: 'GBP', amount: customController21.text ??  0);
-      var resultGBP3 = await Currency.getConversion(
-          from: 'USD', to: 'GBP', amount: customController31.text ??  0);
-      var resultGBP4 = await Currency.getConversion(
-          from: 'USD', to: 'GBP', amount: customController41.text ??  0);
-      var resultGBP5 = await Currency.getConversion(
-          from: 'USD', to: 'GBP', amount: customController51.text ??  0);
-      var resultGBP6 = await Currency.getConversion(
-          from: 'USD', to: 'GBP', amount: customController61.text ??  0);
-      var resultGBP7 = await Currency.getConversion(
-          from: 'USD', to: 'GBP', amount: customController71.text ??  0);
-      var resultGBP8 = await Currency.getConversion(
-          from: 'USD', to: 'GBP', amount: customController81.text ??  0);
-      var resultGBP9 = await Currency.getConversion(
-          from: 'USD', to: 'GBP', amount: customController91.text ??  0);
-      var resultGBP10 = await Currency.getConversion(
-          from: 'USD', to: 'GBP', amount: customController101.text ??  0);
-      var resultGBP11 = await Currency.getConversion(
-          from: 'USD', to: 'GBP', amount: shipcost.text ??  0);
-      var resultGBP12 = await Currency.getConversion(
-          from: 'USD', to: 'GBP', amount: shipcostintern.text ??  0);
-
-      // String date = result.date; // Returns the last updated date
-
-      print("$usdtogbp");
-      var resultEUR = await Currency.getConversion(
-          from: 'USD', to: 'EUR', amount: priceController.text);
-      var resultEUR1 = await Currency.getConversion(
-          from: 'USD', to: 'EUR', amount: customController11.text ??  0);
-      var resultEUR2 = await Currency.getConversion(
-          from: 'USD', to: 'EUR', amount: customController21.text ??  0);
-      var resultEUR3 = await Currency.getConversion(
-          from: 'USD', to: 'EUR', amount: customController31.text ??  0);
-      var resultEUR4 = await Currency.getConversion(
-          from: 'USD', to: 'EUR', amount: customController41.text ??  0);
-      var resultEUR5 = await Currency.getConversion(
-          from: 'USD', to: 'EUR', amount: customController51.text ??  0);
-      var resultEUR6 = await Currency.getConversion(
-          from: 'USD', to: 'EUR', amount: customController61.text ??  0);
-      var resultEUR7 = await Currency.getConversion(
-          from: 'USD', to: 'EUR', amount: customController71.text ??  0);
-      var resultEUR8 = await Currency.getConversion(
-          from: 'USD', to: 'EUR', amount: customController81.text ??  0);
-      var resultEUR9 = await Currency.getConversion(
-          from: 'USD', to: 'EUR', amount: customController91.text ??  0);
-      var resultEUR10 = await Currency.getConversion(
-          from: 'USD', to: 'EUR', amount: customController101.text ??  0);
-      var resultEUR11 = await Currency.getConversion(
-          from: 'USD', to: 'EUR', amount: shipcost.text ??  0);
-      var resultEUR12 = await Currency.getConversion(
-          from: 'USD', to: 'EUR', amount: shipcostintern.text ??  0);
-
-// Returns the last updated date
-
-      print("$usdtoeur");
-
-      var resultINR = await Currency.getConversion(
-          from: 'USD', to: 'INR', amount: priceController.text);
-      var resultINR1 = await Currency.getConversion(
-          from: 'USD', to: 'INR', amount: customController11.text ??  0);
-      var resultINR2 = await Currency.getConversion(
-          from: 'USD', to: 'INR', amount: customController21.text ??  0);
-      var resultINR3 = await Currency.getConversion(
-          from: 'USD', to: 'INR', amount: customController31.text ??  0);
-      var resultINR4 = await Currency.getConversion(
-          from: 'USD', to: 'INR', amount: customController41.text ??  0);
-      var resultINR5 = await Currency.getConversion(
-          from: 'USD', to: 'INR', amount: customController51.text ??  0);
-      var resultINR6 = await Currency.getConversion(
-          from: 'USD', to: 'INR', amount: customController61.text ??  0);
-      var resultINR7 = await Currency.getConversion(
-          from: 'USD', to: 'INR', amount: customController71.text ??  0);
-      var resultINR8 = await Currency.getConversion(
-          from: 'USD', to: 'INR', amount: customController81.text ??  0);
-      var resultINR9 = await Currency.getConversion(
-          from: 'USD', to: 'INR', amount: customController91.text ??  0);
-      var resultINR10 = await Currency.getConversion(
-          from: 'USD', to: 'INR', amount: customController101.text ??  0);
-      var resultINR11 = await Currency.getConversion(
-          from: 'USD', to: 'INR', amount: shipcost.text ??  0);
-      var resultINR12 = await Currency.getConversion(
-          from: 'USD', to: 'INR', amount: shipcostintern.text ??  0);
-
-      setState(() {
-
-        usdtogbp = resultGBP.rate;
-        usdtogbp1 = resultGBP1.rate;
-        usdtogbp2 = resultGBP2.rate;
-        usdtogbp3 = resultGBP3.rate;
-        usdtogbp4 = resultGBP4.rate;
-        usdtogbp5 = resultGBP5.rate;
-        usdtogbp6 = resultGBP6.rate;
-        usdtogbp7 = resultGBP7.rate;
-        usdtogbp8 = resultGBP8.rate;
-        usdtogbp9 = resultGBP9.rate;
-        usdtogbp10 = resultGBP10.rate;
-        usdtogbp11 = resultGBP11.rate;
-        usdtogbp12 = resultGBP12.rate;
-
-        usdtoeur = resultEUR.rate;
-        usdtoeur1 = resultEUR1.rate;
-        usdtoeur2 = resultEUR2.rate;
-        usdtoeur3 = resultEUR3.rate;
-        usdtoeur4 = resultEUR4.rate;
-        usdtoeur5 = resultEUR5.rate;
-        usdtoeur6 = resultEUR6.rate;
-        usdtoeur7 = resultEUR7.rate;
-        usdtoeur8 = resultEUR8.rate;
-        usdtoeur9 = resultEUR9.rate;
-        usdtoeur10 = resultEUR10.rate;
-        usdtoeur11 = resultEUR11.rate;
-        usdtoeur12 = resultEUR12.rate;
-
-        usdtoinr = resultINR.rate;
-        usdtoinr1 = resultINR1.rate;
-        usdtoinr2 = resultINR2.rate;
-        usdtoinr3 = resultINR3.rate;
-        usdtoinr4 = resultINR4.rate;
-        usdtoinr5 = resultINR5.rate;
-        usdtoinr6 = resultINR6.rate;
-        usdtoinr7 = resultINR7.rate;
-        usdtoinr8 = resultINR8.rate;
-        usdtoinr9 = resultINR9.rate;
-        usdtoinr10 = resultINR10.rate;
-        usdtoinr11 = resultINR11.rate;
-        usdtoinr12 = resultINR12.rate;
-        userprice = priceController.text;
-        userprice1 = customController11.text;
-        userprice2 = customController21.text;
-        userprice3 = customController31.text;
-        userprice4 = customController41.text;
-        userprice5 = customController51.text;
-        userprice6 = customController61.text;
-        userprice7 = customController71.text;
-        userprice8 = customController81.text;
-        userprice9 = customController91.text;
-        userprice10 = customController101.text;
-        userprice11 = shipcost.text;
-        userprice12 = shipcostintern.text;
-
-
-      });
-
-
-      print("$usdtoinr");
-    }
-    else  {
-      var resultGBP = await Currency.getConversion(
-          from: 'USD', to: 'GBP', amount: priceController.text);
-      var resultGBP1 = await Currency.getConversion(
-          from: 'USD', to: 'GBP', amount: customController11.text ??  0);
-      var resultGBP2 = await Currency.getConversion(
-          from: 'USD', to: 'GBP', amount: customController21.text ??  0);
-      var resultGBP3 = await Currency.getConversion(
-          from: 'USD', to: 'GBP', amount: customController31.text ??  0);
-      var resultGBP4 = await Currency.getConversion(
-          from: 'USD', to: 'GBP', amount: customController41.text ??  0);
-      var resultGBP5 = await Currency.getConversion(
-          from: 'USD', to: 'GBP', amount: customController51.text ??  0);
-      var resultGBP6 = await Currency.getConversion(
-          from: 'USD', to: 'GBP', amount: customController61.text ??  0);
-      var resultGBP7 = await Currency.getConversion(
-          from: 'USD', to: 'GBP', amount: customController71.text ??  0);
-      var resultGBP8 = await Currency.getConversion(
-          from: 'USD', to: 'GBP', amount: customController81.text ??  0);
-      var resultGBP9 = await Currency.getConversion(
-          from: 'USD', to: 'GBP', amount: customController91.text ??  0);
-      var resultGBP10 = await Currency.getConversion(
-          from: 'USD', to: 'GBP', amount: customController101.text ??  0);
-      var resultGBP11 = await Currency.getConversion(
-          from: 'USD', to: 'GBP', amount: shipcost.text ??  0);
-      var resultGBP12 = await Currency.getConversion(
-          from: 'USD', to: 'GBP', amount: shipcostintern.text ??  0);
-
-      // String date = result.date; // Returns the last updated date
-
-      print("$usdtogbp");
-      var resultEUR = await Currency.getConversion(
-          from: 'USD', to: 'EUR', amount: priceController.text);
-      var resultEUR1 = await Currency.getConversion(
-          from: 'USD', to: 'EUR', amount: customController11.text ??  0);
-      var resultEUR2 = await Currency.getConversion(
-          from: 'USD', to: 'EUR', amount: customController21.text ??  0);
-      var resultEUR3 = await Currency.getConversion(
-          from: 'USD', to: 'EUR', amount: customController31.text ??  0);
-      var resultEUR4 = await Currency.getConversion(
-          from: 'USD', to: 'EUR', amount: customController41.text ??  0);
-      var resultEUR5 = await Currency.getConversion(
-          from: 'USD', to: 'EUR', amount: customController51.text ??  0);
-      var resultEUR6 = await Currency.getConversion(
-          from: 'USD', to: 'EUR', amount: customController61.text ??  0);
-      var resultEUR7 = await Currency.getConversion(
-          from: 'USD', to: 'EUR', amount: customController71.text ??  0);
-      var resultEUR8 = await Currency.getConversion(
-          from: 'USD', to: 'EUR', amount: customController81.text ??  0);
-      var resultEUR9 = await Currency.getConversion(
-          from: 'USD', to: 'EUR', amount: customController91.text ??  0);
-      var resultEUR10 = await Currency.getConversion(
-          from: 'USD', to: 'EUR', amount: customController101.text ??  0);
-      var resultEUR11 = await Currency.getConversion(
-          from: 'USD', to: 'EUR', amount: shipcost.text ??  0);
-      var resultEUR12 = await Currency.getConversion(
-          from: 'USD', to: 'EUR', amount: shipcostintern.text ??  0);
-
-// Returns the last updated date
-
-      print("$usdtoeur");
-
-      var resultINR = await Currency.getConversion(
-          from: 'USD', to: 'INR', amount: priceController.text);
-      var resultINR1 = await Currency.getConversion(
-          from: 'USD', to: 'INR', amount: customController11.text ??  0);
-      var resultINR2 = await Currency.getConversion(
-          from: 'USD', to: 'INR', amount: customController21.text ??  0);
-      var resultINR3 = await Currency.getConversion(
-          from: 'USD', to: 'INR', amount: customController31.text ??  0);
-      var resultINR4 = await Currency.getConversion(
-          from: 'USD', to: 'INR', amount: customController41.text ??  0);
-      var resultINR5 = await Currency.getConversion(
-          from: 'USD', to: 'INR', amount: customController51.text ??  0);
-      var resultINR6 = await Currency.getConversion(
-          from: 'USD', to: 'INR', amount: customController61.text ??  0);
-      var resultINR7 = await Currency.getConversion(
-          from: 'USD', to: 'INR', amount: customController71.text ??  0);
-      var resultINR8 = await Currency.getConversion(
-          from: 'USD', to: 'INR', amount: customController81.text ??  0);
-      var resultINR9 = await Currency.getConversion(
-          from: 'USD', to: 'INR', amount: customController91.text ??  0);
-      var resultINR10 = await Currency.getConversion(
-          from: 'USD', to: 'INR', amount: customController101.text ??  0);
-      var resultINR11 = await Currency.getConversion(
-          from: 'USD', to: 'INR', amount: shipcost.text ??  0);
-      var resultINR12 = await Currency.getConversion(
-          from: 'USD', to: 'INR', amount: shipcostintern.text ??  0);
-
-      setState(() {
-
-        usdtogbp = resultGBP.rate;
-        usdtogbp1 = resultGBP1.rate;
-        usdtogbp2 = resultGBP2.rate;
-        usdtogbp3 = resultGBP3.rate;
-        usdtogbp4 = resultGBP4.rate;
-        usdtogbp5 = resultGBP5.rate;
-        usdtogbp6 = resultGBP6.rate;
-        usdtogbp7 = resultGBP7.rate;
-        usdtogbp8 = resultGBP8.rate;
-        usdtogbp9 = resultGBP9.rate;
-        usdtogbp10 = resultGBP10.rate;
-        usdtogbp11 = resultGBP11.rate;
-        usdtogbp12 = resultGBP12.rate;
-
-        usdtoeur = resultEUR.rate;
-        usdtoeur1 = resultEUR1.rate;
-        usdtoeur2 = resultEUR2.rate;
-        usdtoeur3 = resultEUR3.rate;
-        usdtoeur4 = resultEUR4.rate;
-        usdtoeur5 = resultEUR5.rate;
-        usdtoeur6 = resultEUR6.rate;
-        usdtoeur7 = resultEUR7.rate;
-        usdtoeur8 = resultEUR8.rate;
-        usdtoeur9 = resultEUR9.rate;
-        usdtoeur10 = resultEUR10.rate;
-        usdtoeur11 = resultEUR11.rate;
-        usdtoeur12 = resultEUR12.rate;
-
-        usdtoinr = resultINR.rate;
-        usdtoinr1 = resultINR1.rate;
-        usdtoinr2 = resultINR2.rate;
-        usdtoinr3 = resultINR3.rate;
-        usdtoinr4 = resultINR4.rate;
-        usdtoinr5 = resultINR5.rate;
-        usdtoinr6 = resultINR6.rate;
-        usdtoinr7 = resultINR7.rate;
-        usdtoinr8 = resultINR8.rate;
-        usdtoinr9 = resultINR9.rate;
-        usdtoinr10 = resultINR10.rate;
-        usdtoinr11 = resultINR11.rate;
-        usdtoinr12 = resultINR12.rate;
-        userprice = priceController.text;
-        userprice1 = customController11.text;
-        userprice2 = customController21.text;
-        userprice3 = customController31.text;
-        userprice4 = customController41.text;
-        userprice5 = customController51.text;
-        userprice6 = customController61.text;
-        userprice7 = customController71.text;
-        userprice8 = customController81.text;
-        userprice9 = customController91.text;
-        userprice10 = customController101.text;
-        userprice11 = shipcost.text;
-        userprice12 = shipcostintern.text;
-
-
-      });
-
-
-      print("$usdtoinr");
-    }
-  }
 
 
   Future<bool> _onBackPressed() {
@@ -11900,7 +11144,436 @@ return
           });
 
   }
+color(){
+  return
+    showMaterialModalBottomSheet(
+      expand: true,
+      context: context,
+      builder: (BuildContext context) {
+        SizeConfig().init(context);
 
+        return
+          Container(
+            height: MediaQuery.of(context).size.height * 0.75,
+
+            child: DefaultTabController(
+
+                length:1,
+                child: Scaffold(
+                  resizeToAvoidBottomInset:true,
+                  appBar:AppBar(
+                    backgroundColor: kPrimaryColor,
+                    elevation: 0,
+                    bottom: TabBar(
+                      isScrollable: true,
+                      labelColor: Colors.white,
+                      unselectedLabelColor: kIcon,
+
+
+                      tabs:[
+                        Text("Add Colors",style: TextStyle(fontSize:  SizeConfig.safeBlockHorizontal *5,),),
+
+
+                      ],
+                    ),
+                  ),
+
+                  body: Container(
+                    height: MediaQuery.of(context).size.height * 0.75,
+
+                    child: TabBarView(
+                        children:<Widget> [
+
+                          ListView(
+
+
+                            children: [
+
+
+                              ExpansionTile(
+                                title: Text('Color 1'),
+                                maintainState: true,
+                                children: [
+
+                                  Container(
+                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+                                    child: TextField(
+
+                                      maxLines: 1,
+                                      controller: colorController1,
+                                      decoration: InputDecoration(
+                                          border: OutlineInputBorder(
+                                              borderSide: BorderSide(color: kGrey)),
+                                          labelText: 'color',
+                                      ),
+                                      textAlign: TextAlign.center,
+                                    ),
+                                  ),
+                                  Container(
+                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+                                    child: TextField(
+
+                                      keyboardType: TextInputType.number,
+                                      maxLines: 1,
+                                      controller: colorController11,
+                                      decoration: InputDecoration(
+                                          border: OutlineInputBorder(
+                                              borderSide: BorderSide(color: kGrey)),
+                                          labelText: 'Quantity in inventory',
+),
+                                      textAlign: TextAlign.center,
+                                    ),
+                                  ),
+
+                                ],
+                              ),
+                              ExpansionTile(
+                                title: Text('color 2'),
+                                maintainState: true,
+                                children: [
+
+                                  Container(
+                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+                                    child: TextField(
+
+                                      maxLines: 1,
+                                      controller: colorController2,
+                                      decoration: InputDecoration(
+                                          border: OutlineInputBorder(
+                                              borderSide: BorderSide(color: kGrey)),
+                                          labelText: 'color',
+                                      ),
+                                      textAlign: TextAlign.center,
+                                    ),
+                                  ),
+                                  Container(
+                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+                                    child: TextField(
+
+                                      keyboardType: TextInputType.number,
+                                      maxLines: 1,
+                                      controller: colorController21,
+                                      decoration: InputDecoration(
+                                          border: OutlineInputBorder(
+                                              borderSide: BorderSide(color: kGrey)),
+                                          labelText: 'Quantity in inventory',
+),
+                                      textAlign: TextAlign.center,
+                                    ),
+                                  ),
+
+                                ],
+                              ),
+                              ExpansionTile(
+                                title: Text('color 3'),
+                                maintainState: true,
+                                children: [
+
+                                  Container(
+                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+                                    child: TextField(
+
+                                      maxLines: 1,
+                                      controller: colorController3,
+                                      decoration: InputDecoration(
+                                          border: OutlineInputBorder(
+                                              borderSide: BorderSide(color: kGrey)),
+                                          labelText: 'color',
+                                      ),
+                                      textAlign: TextAlign.center,
+                                    ),
+                                  ),
+                                  Container(
+                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+                                    child: TextField(
+
+                                      keyboardType: TextInputType.number,
+                                      maxLines: 1,
+                                      controller: colorController31,
+                                      decoration: InputDecoration(
+                                          border: OutlineInputBorder(
+                                              borderSide: BorderSide(color: kGrey)),
+                                          labelText: 'Quantity in inventory',
+),
+                                      textAlign: TextAlign.center,
+                                    ),
+                                  ),
+
+                                ],
+                              ),
+                              ExpansionTile(
+                                title: Text('color 4'),
+                                maintainState: true,
+                                children: [
+
+                                  Container(
+                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+                                    child: TextField(
+
+                                      maxLines: 1,
+                                      controller: colorController4,
+                                      decoration: InputDecoration(
+                                          border: OutlineInputBorder(
+                                              borderSide: BorderSide(color: kGrey)),
+                                          labelText: 'color',
+                                      ),
+                                      textAlign: TextAlign.center,
+                                    ),
+                                  ),
+                                  Container(
+                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+                                    child: TextField(
+
+                                      keyboardType: TextInputType.number,
+                                      maxLines: 1,
+                                      controller: colorController41,
+                                      decoration: InputDecoration(
+                                          border: OutlineInputBorder(
+                                              borderSide: BorderSide(color: kGrey)),
+                                          labelText: 'Quantity in inventory',
+),
+                                      textAlign: TextAlign.center,
+                                    ),
+                                  ),
+
+                                ],
+                              ),
+                              ExpansionTile(
+                                title: Text('color 5'),
+                                maintainState: true,
+                                children: [
+
+                                  Container(
+                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+                                    child: TextField(
+
+                                      maxLines: 1,
+                                      controller: colorController5,
+                                      decoration: InputDecoration(
+                                          border: OutlineInputBorder(
+                                              borderSide: BorderSide(color: kGrey)),
+                                          labelText: 'color',
+                                      ),
+                                      textAlign: TextAlign.center,
+                                    ),
+                                  ),
+                                  Container(
+                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+                                    child: TextField(
+
+                                      keyboardType: TextInputType.number,
+                                      maxLines: 1,
+                                      controller: colorController51,
+                                      decoration: InputDecoration(
+                                          border: OutlineInputBorder(
+                                              borderSide: BorderSide(color: kGrey)),
+                                          labelText: 'Quantity in inventory',
+),
+                                      textAlign: TextAlign.center,
+                                    ),
+                                  ),
+
+                                ],
+                              ),
+                              ExpansionTile(
+                                title: Text('color 6'),
+                                maintainState: true,
+                                children: [
+
+                                  Container(
+                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+                                    child: TextField(
+
+                                      maxLines: 1,
+                                      controller: colorController6,
+                                      decoration: InputDecoration(
+                                          border: OutlineInputBorder(
+                                              borderSide: BorderSide(color: kGrey)),
+                                          labelText: 'color',
+                                          hintText: '117 cm'
+                                      ),
+                                      textAlign: TextAlign.center,
+                                    ),
+                                  ),
+                                  Container(
+                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+                                    child: TextField(
+
+                                      keyboardType: TextInputType.number,
+                                      maxLines: 1,
+                                      controller: colorController61,
+                                      decoration: InputDecoration(
+                                          border: OutlineInputBorder(
+                                              borderSide: BorderSide(color: kGrey)),
+                                          labelText: 'Quantity in inventory',
+),
+                                      textAlign: TextAlign.center,
+                                    ),
+                                  ),
+
+                                ],
+                              ),
+                              ExpansionTile(
+                                title: Text('color 7'),
+                                maintainState: true,
+                                children: [
+
+                                  Container(
+                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+                                    child: TextField(
+
+                                      maxLines: 1,
+                                      controller: colorController7,
+                                      decoration: InputDecoration(
+                                          border: OutlineInputBorder(
+                                              borderSide: BorderSide(color: kGrey)),
+                                          labelText: 'color',
+                                      ),
+                                      textAlign: TextAlign.center,
+                                    ),
+                                  ),
+                                  Container(
+                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+                                    child: TextField(
+
+                                      keyboardType: TextInputType.number,
+                                      maxLines: 1,
+                                      controller: colorController71,
+                                      decoration: InputDecoration(
+                                          border: OutlineInputBorder(
+                                              borderSide: BorderSide(color: kGrey)),
+                                          labelText: 'Quantity in inventory',
+),
+                                      textAlign: TextAlign.center,
+                                    ),
+                                  ),
+
+                                ],
+                              ),
+                              ExpansionTile(
+                                title: Text('color 8'),
+                                maintainState: true,
+                                children: [
+
+                                  Container(
+                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+                                    child: TextField(
+
+                                      maxLines: 1,
+                                      controller: colorController8,
+                                      decoration: InputDecoration(
+                                          border: OutlineInputBorder(
+                                              borderSide: BorderSide(color: kGrey)),
+                                          labelText: 'color',
+                                      ),
+                                      textAlign: TextAlign.center,
+                                    ),
+                                  ),
+                                  Container(
+                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+                                    child: TextField(
+
+                                      keyboardType: TextInputType.number,
+                                      maxLines: 1,
+                                      controller: colorController81,
+                                      decoration: InputDecoration(
+                                          border: OutlineInputBorder(
+                                              borderSide: BorderSide(color: kGrey)),
+                                          labelText: 'Quantity in inventory',
+),
+                                      textAlign: TextAlign.center,
+                                    ),
+                                  ),
+
+                                ],
+                              ),
+                              ExpansionTile(
+                                title: Text('color 9'),
+                                maintainState: true,
+                                children: [
+
+                                  Container(
+                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+                                    child: TextField(
+
+                                      maxLines: 1,
+                                      controller: colorController9,
+                                      decoration: InputDecoration(
+                                          border: OutlineInputBorder(
+                                              borderSide: BorderSide(color: kGrey)),
+                                          labelText: 'color',
+                                      ),
+                                      textAlign: TextAlign.center,
+                                    ),
+                                  ),
+                                  Container(
+                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+                                    child: TextField(
+
+                                      keyboardType: TextInputType.number,
+                                      maxLines: 1,
+                                      controller: colorController91,
+                                      decoration: InputDecoration(
+                                          border: OutlineInputBorder(
+                                              borderSide: BorderSide(color: kGrey)),
+                                          labelText: 'Quantity in inventory',
+),
+                                      textAlign: TextAlign.center,
+                                    ),
+                                  ),
+
+                                ],
+                              ),
+                              ExpansionTile(
+                                title: Text('color 10'),
+                                maintainState: true,
+                                children: [
+
+                                  Container(
+                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+                                    child: TextField(
+
+                                      maxLines: 1,
+                                      controller: colorController10,
+                                      decoration: InputDecoration(
+                                          border: OutlineInputBorder(
+                                              borderSide: BorderSide(color: kGrey)),
+                                          labelText: 'color',
+                                      ),
+                                      textAlign: TextAlign.center,
+                                    ),
+                                  ),
+                                  Container(
+                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+                                    child: TextField(
+
+                                      keyboardType: TextInputType.number,
+                                      maxLines: 1,
+                                      controller: colorController101,
+                                      decoration: InputDecoration(
+                                          border: OutlineInputBorder(
+                                              borderSide: BorderSide(color: kGrey)),
+                                          labelText: 'Quantity in inventory',
+),
+                                      textAlign: TextAlign.center,
+                                    ),
+                                  ),
+
+                                ],
+                              ),
+
+
+
+                            ],
+                          ),
+
+                        ]),
+                  ),
+                )
+            ),
+          );      },
+    );
+}
   builduploadForm() {
     return  WillPopScope(
       onWillPop:()=> _onBackPressed(),
@@ -12147,7 +11820,7 @@ backgroundColor: kblue,
                               color: Colors.orange,
                               size: 35.0,
                             ),
-                            title:Text("Shipping duration to ${currentUser.country}",  style:TextStyle(color: kText)),
+                            title:Text("Shipping duration",  style:TextStyle(color: kText)),
 
                           ),
                           SizedBox(height: 8.0,),
@@ -12253,7 +11926,12 @@ backgroundColor: kblue,
 
                               ),
                               textAlign: TextAlign.center,
-
+                              validator: (text) {
+                                if ( freeship==false && text.isEmpty ) {
+                                  return 'Shipping cost is empty';
+                                }
+                                return null;
+                              },
                             ),
                           ):Container(),
 
@@ -12280,130 +11958,7 @@ backgroundColor: kblue,
                             ],
                           ),
                           SizedBox(height: 8.0,),
-                     worldship ?     Container(
-                            margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
-                            child: ListTile(
-                              leading: Icon(
-                                Icons.local_shipping,
-                                color: Colors.orange,
-                                size: 35.0,
-                              ),
-                              title:Text("Shipping duration to worldwide",  style:TextStyle(color: kText)),
 
-                            ),
-                          ):Container(),
-                          SizedBox(height: 8.0,),
-
-                          worldship ?   Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-
-                            children: [
-                        Expanded(
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-
-                            child: TextFormField(
-                              style:TextStyle(color: kText),
-                              keyboardType: TextInputType.number,
-
-                              controller: durationfromw,
-                              decoration: InputDecoration(
-                                border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
-                                enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
-                                focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
-
-                               // labelText: 'Between',labelStyle: TextStyle(color: kText),
-                              ),
-                              textAlign: TextAlign.center,
-                              validator: (text) {
-                                if (worldship==true && text.isEmpty) {
-                                  return 'Shipping duration is empty';
-                                }
-                                return null;
-                              },
-                            ),
-                          ),
-                        ),
-                              Text("-",  style:TextStyle(color: kText)),
-
-                        Expanded(
-
-                        child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: TextFormField(
-                              style:TextStyle(color: kText),
-                              keyboardType: TextInputType.number,
-                              controller: durationtow,
-                              decoration: InputDecoration(
-                                border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
-                                enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
-                                focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
-
-                              ),
-                              textAlign: TextAlign.center,
-                              validator: (text) {
-                                if (worldship==true && text.isEmpty) {
-                                  return 'Shipping duration is empty';
-                                }
-                                return null;
-                              },
-                            ),
-                          ),
-                        ),
-
-                      ],
-                    ):Container(),
-                          SizedBox( height: 8.0,),
-                          Text('Free shipping',style:TextStyle(color: kText)) ,
-
-SizedBox( height: 8.0,),
-
-                          worldship ? Row(
-                            mainAxisAlignment:MainAxisAlignment.center,
-                            children: [
-                              Text('No'),
-                              SizedBox( width: 8.0,),
-
-                              Switch(
-                                value: freeworldship,
-                                onChanged: (value){setState(() {
-                                  freeworldship = value;
-                                });},
-                                activeColor: Colors.blue,
-                                activeTrackColor:kPrimaryColor,
-                              ),
-                              SizedBox( width: 8.0,),
-
-                              Text('Yes')
-                            ],
-                          ):Container(),
-
-                          worldship && !freeworldship ?   Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: TextFormField(
-                              style:TextStyle(color: kText),
-                              keyboardType: TextInputType.number,
-
-                              controller: shipcostintern,
-                              decoration: InputDecoration(
-                                border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
-                                enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
-                                focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
-
-                                labelText: 'Shipping cost',labelStyle: TextStyle(color: kText),
-                              ),
-                              textAlign: TextAlign.center,
-                              validator: (text) {
-                                if ( freeworldship==false && text.isEmpty ) {
-                                  return 'Shipping cost is empty';
-                                }
-                                return null;
-                              },
-                            ),
-                          ):Container(),
-                          SizedBox(height: 8.0,),
-
-                          SizedBox(height: 8.0,),
 
                     Container(
                       margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
@@ -12468,28 +12023,13 @@ keyboardType:TextInputType.number,
                         SizedBox( height: 8.0,),
 
                           //Customised
-                          Column(
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: ChipTags(
-                                  list: Color,
-                                  chipColor: Colors.black,
-                                  iconColor: Colors.white,
-                                  textColor: Colors.white,
-                                  separator: ",",
-                                  decoration: InputDecoration(
-                                    border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
-                                    enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
-                                    focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
-                                    hintText: "seperate by ,",
-                                    labelText: 'Colors',labelStyle: TextStyle(color: kText),
-                                  ),
-                                  keyboardType: TextInputType.text,
-
-                                ),
-                              ),
-                            ],
+                          Container(
+                            // alignment:Alignment.centerLeft,
+                            child:   FloatingActionButton.extended(
+                              backgroundColor: kblue,
+                              onPressed: ()=>color(),
+                              label: Text('Add Colors',style:TextStyle(color:  Colors.white) ,),
+                            ),
                           ),
 
                         SizedBox( height: 8.0,),
@@ -12701,6 +12241,783 @@ keyboardType:TextInputType.number,
     });
 
   }
+  void INRUSD() async {
+    setState(() {
+      isUploading = true;
+    });
+
+    if (currentUser.country == 'India') {
+      var resultUSD = await Currency.getConversion(
+          from: 'INR', to: 'USD', amount: priceController.text);
+      var resultUSD1 = await Currency.getConversion(
+          from: 'INR', to: 'USD', amount: customController11.text ??  0);
+      var resultUSD2 = await Currency.getConversion(
+          from: 'INR', to: 'USD', amount: customController21.text ??  0);
+      var resultUSD3 = await Currency.getConversion(
+          from: 'INR', to: 'USD', amount: customController31.text ??  0);
+      var resultUSD4 = await Currency.getConversion(
+          from: 'INR', to: 'USD', amount: customController41.text ??  0);
+      var resultUSD5 = await Currency.getConversion(
+          from: 'INR', to: 'USD', amount: customController51.text ??  0);
+      var resultUSD6 = await Currency.getConversion(
+          from: 'INR', to: 'USD', amount: customController61.text ??  0);
+      var resultUSD7 = await Currency.getConversion(
+          from: 'INR', to: 'USD', amount: customController71.text ??  0);
+      var resultUSD8 = await Currency.getConversion(
+          from: 'INR', to: 'USD', amount: customController81.text ??  0);
+      var resultUSD9 = await Currency.getConversion(
+          from: 'INR', to: 'USD', amount: customController91.text ??  0);
+      var resultUSD10 = await Currency.getConversion(
+          from: 'INR', to: 'USD', amount: customController101.text ??  0);
+      var resultUSD11 = await Currency.getConversion(
+          from: 'INR', to: 'USD', amount: shipcost.text ??  0);
+      var resultUSD12 = await Currency.getConversion(
+          from: 'INR', to: 'USD', amount: shipcostintern.text ??  0);
+      // String date = result.date; // Returns the last updated date
+
+      print("$inrtousd");
+      var resultGBP = await Currency.getConversion(
+          from: 'INR', to: 'GBP', amount: priceController.text);
+      var resultGBP1 = await Currency.getConversion(
+          from: 'INR', to: 'GBP', amount: customController11.text ??  0);
+      var resultGBP2 = await Currency.getConversion(
+          from: 'INR', to: 'GBP', amount: customController21.text ??  0);
+      var resultGBP3 = await Currency.getConversion(
+          from: 'INR', to: 'GBP', amount: customController31.text ??  0);
+      var resultGBP4 = await Currency.getConversion(
+          from: 'INR', to: 'GBP', amount: customController41.text ??  0);
+      var resultGBP5 = await Currency.getConversion(
+          from: 'INR', to: 'GBP', amount: customController51.text ??  0);
+      var resultGBP6 = await Currency.getConversion(
+          from: 'INR', to: 'GBP', amount: customController61.text ??  0);
+      var resultGBP7 = await Currency.getConversion(
+          from: 'INR', to: 'GBP', amount: customController71.text ??  0);
+      var resultGBP8 = await Currency.getConversion(
+          from: 'INR', to: 'GBP', amount: customController81.text ??  0);
+      var resultGBP9 = await Currency.getConversion(
+          from: 'INR', to: 'GBP', amount: customController91.text ??  0);
+      var resultGBP10 = await Currency.getConversion(
+          from: 'INR', to: 'GBP', amount: customController101.text ??  0);
+      var resultGBP11 = await Currency.getConversion(
+          from: 'INR', to: 'GBP', amount: shipcost.text ??  0);
+      var resultGBP12 = await Currency.getConversion(
+          from: 'INR', to: 'GBP', amount: shipcostintern.text ??  0);
+// Returns the last updated date
+
+
+      print("$inrtogbp");
+      var resultEUR = await Currency.getConversion(
+          from: 'INR', to: 'EUR', amount:priceController.text);
+      var resultEUR1 = await Currency.getConversion(
+          from: 'INR', to: 'EUR', amount: customController11.text ??  0);
+      var resultEUR2 = await Currency.getConversion(
+          from: 'INR', to: 'EUR', amount: customController21.text ??  0);
+      var resultEUR3 = await Currency.getConversion(
+          from: 'INR', to: 'EUR', amount: customController31.text ??  0);
+      var resultEUR4 = await Currency.getConversion(
+          from: 'INR', to: 'EUR', amount: customController41.text ??  0);
+      var resultEUR5 = await Currency.getConversion(
+          from: 'INR', to: 'EUR', amount: customController51.text ??  0);
+      var resultEUR6 = await Currency.getConversion(
+          from: 'INR', to: 'EUR', amount: customController61.text ??  0);
+      var resultEUR7 = await Currency.getConversion(
+          from: 'INR', to: 'EUR', amount: customController71.text ??  0);
+      var resultEUR8 = await Currency.getConversion(
+          from: 'INR', to: 'EUR', amount: customController81.text ??  0);
+      var resultEUR9 = await Currency.getConversion(
+          from: 'INR', to: 'EUR', amount: customController91.text ??  0);
+      var resultEUR10 = await Currency.getConversion(
+          from: 'INR', to: 'EUR', amount: customController101.text ??  0);
+      var resultEUR11 = await Currency.getConversion(
+          from: 'INR', to: 'EUR', amount: shipcost.text ??  0);
+      var resultEUR12 = await Currency.getConversion(
+          from: 'INR', to: 'EUR', amount: shipcostintern.text ??  0);
+      setState(() {
+
+        inrtogbp = resultGBP.rate;
+        inrtogbp1 = resultGBP1.rate;
+        inrtogbp2 = resultGBP2.rate;
+        inrtogbp3 = resultGBP3.rate;
+        inrtogbp4 = resultGBP4.rate;
+        inrtogbp5 = resultGBP5.rate;
+        inrtogbp6 = resultGBP6.rate;
+        inrtogbp7 = resultGBP7.rate;
+        inrtogbp8 = resultGBP8.rate;
+        inrtogbp9 = resultGBP9.rate;
+        inrtogbp10 = resultGBP10.rate;
+        inrtogbp11 = resultGBP11.rate;
+        inrtogbp12 = resultGBP12.rate;
+
+        inrtoeur = resultEUR.rate;
+        inrtoeur1 = resultEUR1.rate;
+        inrtoeur2 = resultEUR2.rate;
+        inrtoeur3 = resultEUR3.rate;
+        inrtoeur4 = resultEUR4.rate;
+        inrtoeur5 = resultEUR5.rate;
+        inrtoeur6 = resultEUR6.rate;
+        inrtoeur7 = resultEUR7.rate;
+        inrtoeur8 = resultEUR8.rate;
+        inrtoeur9 = resultEUR9.rate;
+        inrtoeur10 = resultEUR10.rate;
+        inrtoeur11 = resultEUR11.rate;
+        inrtoeur12 = resultEUR12.rate;
+
+        inrtousd = resultUSD.rate;
+        inrtousd1 = resultUSD1.rate;
+        inrtousd2 = resultUSD2.rate;
+        inrtousd3 = resultUSD3.rate;
+        inrtousd4 = resultUSD4.rate;
+        inrtousd5 = resultUSD5.rate;
+        inrtousd6 = resultUSD6.rate;
+        inrtousd7 = resultUSD7.rate;
+        inrtousd8 = resultUSD8.rate;
+        inrtousd9 = resultUSD9.rate;
+        inrtousd10 = resultUSD10.rate;
+        inrtousd11 = resultUSD11.rate;
+        inrtousd12 = resultUSD12.rate;
+        userprice = priceController.text;
+        userprice1 = customController11.text;
+        userprice2 = customController21.text;
+        userprice3 = customController31.text;
+        userprice4 = customController41.text;
+        userprice5 = customController51.text;
+        userprice6 = customController61.text;
+        userprice7 = customController71.text;
+        userprice8 = customController81.text;
+        userprice9 = customController91.text;
+        userprice10 = customController101.text;
+        userprice11 = shipcost.text;
+        userprice12 = shipcostintern.text;
+
+      });
+
+
+
+    }
+    else if (currentUser.country == 'Europe') {
+      var resultUSD = await Currency.getConversion(
+          from: 'EUR', to: 'USD', amount: priceController.text);
+      var resultUSD1 = await Currency.getConversion(
+          from: 'EUR', to: 'USD', amount: customController11.text  ??  0);
+      var resultUSD2 = await Currency.getConversion(
+          from: 'EUR', to: 'USD', amount: customController21.text  ??  0);
+      var resultUSD3 = await Currency.getConversion(
+          from: 'EUR', to: 'USD', amount: customController31.text  ??  0);
+      var resultUSD4 = await Currency.getConversion(
+          from: 'EUR', to: 'USD', amount: customController41.text  ??  0);
+      var resultUSD5 = await Currency.getConversion(
+          from: 'EUR', to: 'USD', amount: customController51.text  ??  0);
+      var resultUSD6 = await Currency.getConversion(
+          from: 'EUR', to: 'USD', amount: customController61.text  ??  0);
+      var resultUSD7 = await Currency.getConversion(
+          from: 'EUR', to: 'USD', amount: customController71.text  ??  0);
+      var resultUSD8 = await Currency.getConversion(
+          from: 'EUR', to: 'USD', amount: customController81.text  ??  0);
+      var resultUSD9 = await Currency.getConversion(
+          from: 'EUR', to: 'USD', amount: customController91.text  ??  0);
+      var resultUSD10 = await Currency.getConversion(
+          from: 'EUR', to: 'USD', amount: customController101.text  ??  0);
+      var resultUSD11 = await Currency.getConversion(
+          from: 'EUR', to: 'USD', amount: shipcost.text  ??  0);
+      var resultUSD12 = await Currency.getConversion(
+          from: 'EUR', to: 'USD', amount: shipcostintern.text  ??  0);
+      // String date = result.date; // Returns the last updated date
+      setState(() {
+        eurtousd = resultUSD.rate;
+        eurtousd1 = resultUSD1.rate;
+        eurtousd2 = resultUSD2.rate;
+        eurtousd3 = resultUSD3.rate;
+        eurtousd4 = resultUSD4.rate;
+        eurtousd5 = resultUSD5.rate;
+        eurtousd6 = resultUSD6.rate;
+        eurtousd7 = resultUSD7.rate;
+        eurtousd8 = resultUSD8.rate;
+        eurtousd9 = resultUSD9.rate;
+        eurtousd10 = resultUSD10.rate;
+        eurtousd11 = resultUSD11.rate;
+        eurtousd12 = resultUSD12.rate;
+        userprice = priceController.text;
+        userprice1 = customController11.text;
+        userprice2 = customController21.text;
+        userprice3 = customController31.text;
+        userprice4 = customController41.text;
+        userprice5 = customController51.text;
+        userprice6 = customController61.text;
+        userprice7 = customController71.text;
+        userprice8 = customController81.text;
+        userprice9 = customController91.text;
+        userprice10 = customController101.text;
+        userprice11 = shipcost.text;
+        userprice12 = shipcostintern.text;
+
+      });
+
+      print("$eurtousd");
+      var resultGBP = await Currency.getConversion(
+          from: 'EUR', to: 'GBP', amount: priceController.text);
+      var resultGBP1 = await Currency.getConversion(
+          from: 'EUR', to: 'GBP', amount: customController11.text  ??  0);
+      var resultGBP2 = await Currency.getConversion(
+          from: 'EUR', to: 'GBP', amount: customController21.text  ??  0);
+      var resultGBP3 = await Currency.getConversion(
+          from: 'EUR', to: 'GBP', amount: customController31.text  ??  0);
+      var resultGBP4 = await Currency.getConversion(
+          from: 'EUR', to: 'GBP', amount: customController41.text  ??  0);
+      var resultGBP5 = await Currency.getConversion(
+          from: 'EUR', to: 'GBP', amount: customController51.text  ??  0);
+      var resultGBP6 = await Currency.getConversion(
+          from: 'EUR', to: 'GBP', amount: customController61.text  ??  0);
+      var resultGBP7 = await Currency.getConversion(
+          from: 'EUR', to: 'GBP', amount: customController71.text  ??  0);
+      var resultGBP8 = await Currency.getConversion(
+          from: 'EUR', to: 'GBP', amount: customController81.text  ??  0);
+      var resultGBP9 = await Currency.getConversion(
+          from: 'EUR', to: 'GBP', amount: customController91.text  ??  0);
+      var resultGBP10 = await Currency.getConversion(
+          from: 'EUR', to: 'GBP', amount: customController101.text  ??  0);
+      var resultGBP11 = await Currency.getConversion(
+          from: 'EUR', to: 'GBP', amount: shipcost.text  ??  0);
+      var resultGBP12 = await Currency.getConversion(
+          from: 'EUR', to: 'GBP', amount: shipcostintern.text  ??  0);
+// Returns the last updated date
+      setState(() {
+        eurtogbp = resultGBP.rate;
+        eurtogbp1 = resultGBP1.rate;
+
+        eurtogbp2 = resultGBP2.rate;
+
+        eurtogbp3 = resultGBP3.rate;
+
+        eurtogbp4 = resultGBP4.rate;
+
+        eurtogbp5 = resultGBP5.rate;
+
+        eurtogbp6 = resultGBP6.rate;
+
+        eurtogbp7 = resultGBP7.rate;
+
+        eurtogbp8 = resultGBP8.rate;
+
+        eurtogbp9 = resultGBP9.rate;
+
+        eurtogbp10 = resultGBP10.rate;
+
+        eurtogbp11 = resultGBP11.rate;
+        eurtogbp12 = resultGBP12.rate;
+
+      });
+
+      print("$eurtogbp");
+
+      var resultINR = await Currency.getConversion(
+          from: 'EUR', to: 'INR', amount: priceController.text );
+      var resultINR1 = await Currency.getConversion(
+          from: 'EUR', to: 'INR', amount: customController11.text  ??  0);
+      var resultINR2 = await Currency.getConversion(
+          from: 'EUR', to: 'INR', amount: customController21.text  ??  0);
+      var resultINR3 = await Currency.getConversion(
+          from: 'EUR', to: 'INR', amount: customController31.text  ??  0);
+      var resultINR4 = await Currency.getConversion(
+          from: 'EUR', to: 'INR', amount: customController41.text  ??  0);
+      var resultINR5 = await Currency.getConversion(
+          from: 'EUR', to: 'INR', amount: customController51.text  ??  0);
+      var resultINR6 = await Currency.getConversion(
+          from: 'EUR', to: 'INR', amount: customController61.text  ??  0);
+      var resultINR7 = await Currency.getConversion(
+          from: 'EUR', to: 'INR', amount: customController71.text  ??  0);
+      var resultINR8 = await Currency.getConversion(
+          from: 'EUR', to: 'INR', amount: customController81.text  ??  0);
+      var resultINR9 = await Currency.getConversion(
+          from: 'EUR', to: 'INR', amount: customController91.text  ??  0);
+      var resultINR10 = await Currency.getConversion(
+          from: 'EUR', to: 'INR', amount: customController101.text  ??  0);
+      var resultINR11 = await Currency.getConversion(
+          from: 'EUR', to: 'INR', amount: shipcost.text  ??  0);
+      var resultINR12 = await Currency.getConversion(
+          from: 'EUR', to: 'INR', amount: shipcostintern.text  ??  0);
+      setState(() {
+        eurtoinr = resultINR.rate;
+        eurtoinr1 = resultINR1.rate;
+
+        eurtoinr2 = resultINR2.rate;
+
+        eurtoinr3 = resultINR3.rate;
+
+        eurtoinr4 = resultINR4.rate;
+
+        eurtoinr5 = resultINR5.rate;
+
+        eurtoinr6 = resultINR6.rate;
+
+        eurtoinr7 = resultINR7.rate;
+
+        eurtoinr8 = resultINR8.rate;
+
+        eurtoinr9 = resultINR9.rate;
+
+        eurtoinr10 = resultINR10.rate;
+
+        eurtoinr11 = resultINR11.rate;
+        eurtoinr12 = resultINR12.rate;
+
+      });
+
+      print("$eurtoinr");
+
+    }
+    else if (currentUser.country == 'UK') {
+      var resultUSD = await Currency.getConversion(
+          from: 'GBP', to: 'USD', amount: priceController.text);
+      var resultUSD1 = await Currency.getConversion(
+          from: 'GBP', to: 'USD', amount: customController11.text  ??  0);
+      var resultUSD2 = await Currency.getConversion(
+          from: 'GBP', to: 'USD', amount: customController21.text  ??  0);
+      var resultUSD3 = await Currency.getConversion(
+          from: 'GBP', to: 'USD', amount: customController31.text  ??  0);
+      var resultUSD4 = await Currency.getConversion(
+          from: 'GBP', to: 'USD', amount: customController41.text  ??  0);
+      var resultUSD5 = await Currency.getConversion(
+          from: 'GBP', to: 'USD', amount: customController51.text  ??  0);
+      var resultUSD6 = await Currency.getConversion(
+          from: 'GBP', to: 'USD', amount: customController61.text  ??  0);
+      var resultUSD7 = await Currency.getConversion(
+          from: 'GBP', to: 'USD', amount: customController71.text  ??  0);
+      var resultUSD8 = await Currency.getConversion(
+          from: 'GBP', to: 'USD', amount: customController81.text  ??  0);
+      var resultUSD9 = await Currency.getConversion(
+          from: 'GBP', to: 'USD', amount: customController91.text  ??  0);
+      var resultUSD10 = await Currency.getConversion(
+          from: 'GBP', to: 'USD', amount: customController101.text  ??  0);
+      var resultUSD11 = await Currency.getConversion(
+          from: 'GBP', to: 'USD', amount: shipcost.text  ??  0);
+      var resultUSD12 = await Currency.getConversion(
+          from: 'GBP', to: 'USD', amount: shipcostintern.text  ??  0);
+      // String date = result.date; // Returns the last updated date
+      var resultEUR = await Currency.getConversion(
+          from: 'GBP', to: 'EUR', amount: priceController.text );
+      var resultEUR1 = await Currency.getConversion(
+          from: 'GBP', to: 'EUR', amount: customController11.text  ??  0);
+      var resultEUR2 = await Currency.getConversion(
+          from: 'GBP', to: 'EUR', amount: customController21.text  ??  0);
+      var resultEUR3 = await Currency.getConversion(
+          from: 'GBP', to: 'EUR', amount: customController31.text  ??  0);
+      var resultEUR4 = await Currency.getConversion(
+          from: 'GBP', to: 'EUR', amount: customController41.text  ??  0);
+      var resultEUR5 = await Currency.getConversion(
+          from: 'GBP', to: 'EUR', amount: customController51.text  ??  0);
+      var resultEUR6 = await Currency.getConversion(
+          from: 'GBP', to: 'EUR', amount: customController61.text  ??  0);
+      var resultEUR7 = await Currency.getConversion(
+          from: 'GBP', to: 'EUR', amount: customController71.text  ??  0);
+      var resultEUR8 = await Currency.getConversion(
+          from: 'GBP', to: 'EUR', amount: customController81.text  ??  0);
+      var resultEUR9 = await Currency.getConversion(
+          from: 'GBP', to: 'EUR', amount: customController91.text  ??  0);
+      var resultEUR10 = await Currency.getConversion(
+          from: 'GBP', to: 'EUR', amount: customController101.text  ??  0);
+      var resultEUR11 = await Currency.getConversion(
+          from: 'GBP', to: 'EUR', amount: shipcost.text  ??  0);
+      var resultEUR12 = await Currency.getConversion(
+          from: 'GBP', to: 'EUR', amount: shipcostintern.text  ??  0);
+      var resultINR = await Currency.getConversion(
+          from: 'GBP', to: 'INR', amount: priceController.text);
+      var resultINR1 = await Currency.getConversion(
+          from: 'GBP', to: 'INR', amount: customController11.text  ??  0);
+      var resultINR2 = await Currency.getConversion(
+          from: 'GBP', to: 'INR', amount: customController21.text  ??  0);
+      var resultINR3 = await Currency.getConversion(
+          from: 'GBP', to: 'INR', amount: customController31.text  ??  0);
+      var resultINR4 = await Currency.getConversion(
+          from: 'GBP', to: 'INR', amount: customController41.text  ??  0);
+      var resultINR5 = await Currency.getConversion(
+          from: 'GBP', to: 'INR', amount: customController51.text  ??  0);
+      var resultINR6 = await Currency.getConversion(
+          from: 'GBP', to: 'INR', amount: customController61.text  ??  0);
+      var resultINR7 = await Currency.getConversion(
+          from: 'GBP', to: 'INR', amount: customController71.text  ??  0);
+      var resultINR8 = await Currency.getConversion(
+          from: 'GBP', to: 'INR', amount: customController81.text  ??  0);
+      var resultINR9 = await Currency.getConversion(
+          from: 'GBP', to: 'INR', amount: customController91.text  ??  0);
+      var resultINR10 = await Currency.getConversion(
+          from: 'GBP', to: 'INR', amount: customController101.text  ??  0);
+      var resultINR11 = await Currency.getConversion(
+          from: 'GBP', to: 'INR', amount: shipcost.text  ??  0);
+      var resultINR12 = await Currency.getConversion(
+          from: 'GBP', to: 'INR', amount: shipcostintern.text  ??  0);
+      setState(() {
+        gbptousd = resultUSD.rate;
+        gbptousd1 = resultUSD1.rate;
+        gbptousd2 = resultUSD2.rate;
+        gbptousd3 = resultUSD3.rate;
+        gbptousd4 = resultUSD4.rate;
+        gbptousd5 = resultUSD5.rate;
+        gbptousd6 = resultUSD6.rate;
+        gbptousd7 = resultUSD7.rate;
+        gbptousd8 = resultUSD8.rate;
+        gbptousd9 = resultUSD9.rate;
+        gbptousd10 = resultUSD10.rate;
+        gbptousd11 = resultUSD11.rate;
+        gbptousd12 = resultUSD12.rate;
+
+        gbptoeur = resultEUR.rate;
+        gbptoeur1 = resultEUR1.rate;
+        gbptoeur2 = resultEUR2.rate;
+        gbptoeur3 = resultEUR3.rate;
+        gbptoeur4 = resultEUR4.rate;
+        gbptoeur5 = resultEUR5.rate;
+        gbptoeur6 = resultEUR6.rate;
+        gbptoeur7 = resultEUR7.rate;
+        gbptoeur8 = resultEUR8.rate;
+        gbptoeur9 = resultEUR9.rate;
+        gbptoeur10 = resultEUR10.rate;
+        gbptoeur11 = resultEUR11.rate;
+        gbptoeur12 = resultEUR12.rate;
+
+        gbptoinr = resultINR.rate;
+        gbptoinr1 = resultINR1.rate;
+        gbptoinr2 = resultINR2.rate;
+        gbptoinr3 = resultINR3.rate;
+        gbptoinr4 = resultINR4.rate;
+        gbptoinr5 = resultINR5.rate;
+        gbptoinr6 = resultINR6.rate;
+        gbptoinr7 = resultINR7.rate;
+        gbptoinr8 = resultINR8.rate;
+        gbptoinr9 = resultINR9.rate;
+        gbptoinr10 = resultINR10.rate;
+        gbptoinr11 = resultINR11.rate;
+        gbptoinr12 = resultINR12.rate;
+        userprice = priceController.text;
+        userprice1 = customController11.text;
+        userprice2 = customController21.text;
+        userprice3 = customController31.text;
+        userprice4 = customController41.text;
+        userprice5 = customController51.text;
+        userprice6 = customController61.text;
+        userprice7 = customController71.text;
+        userprice8 = customController81.text;
+        userprice9 = customController91.text;
+        userprice10 = customController101.text;
+        userprice11 = shipcost.text;
+        userprice12 = shipcostintern.text;
+
+        print("$gbptousd");
+        print("$userprice");
+        print("$usdtoeur");
+        print("$gbptocny");
+        print("$gbptoinr");
+
+
+      });
+
+// Returns the last updated date
+
+    }
+    else if (currentUser.country == 'USA') {
+      var resultGBP = await Currency.getConversion(
+          from: 'USD', to: 'GBP', amount: priceController.text);
+      var resultGBP1 = await Currency.getConversion(
+          from: 'USD', to: 'GBP', amount: customController11.text ??  0);
+      var resultGBP2 = await Currency.getConversion(
+          from: 'USD', to: 'GBP', amount: customController21.text ??  0);
+      var resultGBP3 = await Currency.getConversion(
+          from: 'USD', to: 'GBP', amount: customController31.text ??  0);
+      var resultGBP4 = await Currency.getConversion(
+          from: 'USD', to: 'GBP', amount: customController41.text ??  0);
+      var resultGBP5 = await Currency.getConversion(
+          from: 'USD', to: 'GBP', amount: customController51.text ??  0);
+      var resultGBP6 = await Currency.getConversion(
+          from: 'USD', to: 'GBP', amount: customController61.text ??  0);
+      var resultGBP7 = await Currency.getConversion(
+          from: 'USD', to: 'GBP', amount: customController71.text ??  0);
+      var resultGBP8 = await Currency.getConversion(
+          from: 'USD', to: 'GBP', amount: customController81.text ??  0);
+      var resultGBP9 = await Currency.getConversion(
+          from: 'USD', to: 'GBP', amount: customController91.text ??  0);
+      var resultGBP10 = await Currency.getConversion(
+          from: 'USD', to: 'GBP', amount: customController101.text ??  0);
+      var resultGBP11 = await Currency.getConversion(
+          from: 'USD', to: 'GBP', amount: shipcost.text ??  0);
+      var resultGBP12 = await Currency.getConversion(
+          from: 'USD', to: 'GBP', amount: shipcostintern.text ??  0);
+
+      // String date = result.date; // Returns the last updated date
+
+      print("$usdtogbp");
+      var resultEUR = await Currency.getConversion(
+          from: 'USD', to: 'EUR', amount: priceController.text);
+      var resultEUR1 = await Currency.getConversion(
+          from: 'USD', to: 'EUR', amount: customController11.text ??  0);
+      var resultEUR2 = await Currency.getConversion(
+          from: 'USD', to: 'EUR', amount: customController21.text ??  0);
+      var resultEUR3 = await Currency.getConversion(
+          from: 'USD', to: 'EUR', amount: customController31.text ??  0);
+      var resultEUR4 = await Currency.getConversion(
+          from: 'USD', to: 'EUR', amount: customController41.text ??  0);
+      var resultEUR5 = await Currency.getConversion(
+          from: 'USD', to: 'EUR', amount: customController51.text ??  0);
+      var resultEUR6 = await Currency.getConversion(
+          from: 'USD', to: 'EUR', amount: customController61.text ??  0);
+      var resultEUR7 = await Currency.getConversion(
+          from: 'USD', to: 'EUR', amount: customController71.text ??  0);
+      var resultEUR8 = await Currency.getConversion(
+          from: 'USD', to: 'EUR', amount: customController81.text ??  0);
+      var resultEUR9 = await Currency.getConversion(
+          from: 'USD', to: 'EUR', amount: customController91.text ??  0);
+      var resultEUR10 = await Currency.getConversion(
+          from: 'USD', to: 'EUR', amount: customController101.text ??  0);
+      var resultEUR11 = await Currency.getConversion(
+          from: 'USD', to: 'EUR', amount: shipcost.text ??  0);
+      var resultEUR12 = await Currency.getConversion(
+          from: 'USD', to: 'EUR', amount: shipcostintern.text ??  0);
+
+// Returns the last updated date
+
+      print("$usdtoeur");
+
+      var resultINR = await Currency.getConversion(
+          from: 'USD', to: 'INR', amount: priceController.text);
+      var resultINR1 = await Currency.getConversion(
+          from: 'USD', to: 'INR', amount: customController11.text ??  0);
+      var resultINR2 = await Currency.getConversion(
+          from: 'USD', to: 'INR', amount: customController21.text ??  0);
+      var resultINR3 = await Currency.getConversion(
+          from: 'USD', to: 'INR', amount: customController31.text ??  0);
+      var resultINR4 = await Currency.getConversion(
+          from: 'USD', to: 'INR', amount: customController41.text ??  0);
+      var resultINR5 = await Currency.getConversion(
+          from: 'USD', to: 'INR', amount: customController51.text ??  0);
+      var resultINR6 = await Currency.getConversion(
+          from: 'USD', to: 'INR', amount: customController61.text ??  0);
+      var resultINR7 = await Currency.getConversion(
+          from: 'USD', to: 'INR', amount: customController71.text ??  0);
+      var resultINR8 = await Currency.getConversion(
+          from: 'USD', to: 'INR', amount: customController81.text ??  0);
+      var resultINR9 = await Currency.getConversion(
+          from: 'USD', to: 'INR', amount: customController91.text ??  0);
+      var resultINR10 = await Currency.getConversion(
+          from: 'USD', to: 'INR', amount: customController101.text ??  0);
+      var resultINR11 = await Currency.getConversion(
+          from: 'USD', to: 'INR', amount: shipcost.text ??  0);
+      var resultINR12 = await Currency.getConversion(
+          from: 'USD', to: 'INR', amount: shipcostintern.text ??  0);
+
+      setState(() {
+
+        usdtogbp = resultGBP.rate;
+        usdtogbp1 = resultGBP1.rate;
+        usdtogbp2 = resultGBP2.rate;
+        usdtogbp3 = resultGBP3.rate;
+        usdtogbp4 = resultGBP4.rate;
+        usdtogbp5 = resultGBP5.rate;
+        usdtogbp6 = resultGBP6.rate;
+        usdtogbp7 = resultGBP7.rate;
+        usdtogbp8 = resultGBP8.rate;
+        usdtogbp9 = resultGBP9.rate;
+        usdtogbp10 = resultGBP10.rate;
+        usdtogbp11 = resultGBP11.rate;
+        usdtogbp12 = resultGBP12.rate;
+
+        usdtoeur = resultEUR.rate;
+        usdtoeur1 = resultEUR1.rate;
+        usdtoeur2 = resultEUR2.rate;
+        usdtoeur3 = resultEUR3.rate;
+        usdtoeur4 = resultEUR4.rate;
+        usdtoeur5 = resultEUR5.rate;
+        usdtoeur6 = resultEUR6.rate;
+        usdtoeur7 = resultEUR7.rate;
+        usdtoeur8 = resultEUR8.rate;
+        usdtoeur9 = resultEUR9.rate;
+        usdtoeur10 = resultEUR10.rate;
+        usdtoeur11 = resultEUR11.rate;
+        usdtoeur12 = resultEUR12.rate;
+
+        usdtoinr = resultINR.rate;
+        usdtoinr1 = resultINR1.rate;
+        usdtoinr2 = resultINR2.rate;
+        usdtoinr3 = resultINR3.rate;
+        usdtoinr4 = resultINR4.rate;
+        usdtoinr5 = resultINR5.rate;
+        usdtoinr6 = resultINR6.rate;
+        usdtoinr7 = resultINR7.rate;
+        usdtoinr8 = resultINR8.rate;
+        usdtoinr9 = resultINR9.rate;
+        usdtoinr10 = resultINR10.rate;
+        usdtoinr11 = resultINR11.rate;
+        usdtoinr12 = resultINR12.rate;
+        userprice = priceController.text;
+        userprice1 = customController11.text;
+        userprice2 = customController21.text;
+        userprice3 = customController31.text;
+        userprice4 = customController41.text;
+        userprice5 = customController51.text;
+        userprice6 = customController61.text;
+        userprice7 = customController71.text;
+        userprice8 = customController81.text;
+        userprice9 = customController91.text;
+        userprice10 = customController101.text;
+        userprice11 = shipcost.text;
+        userprice12 = shipcostintern.text;
+
+
+      });
+
+
+      print("$usdtoinr");
+    }
+    else  {
+      var resultGBP = await Currency.getConversion(
+          from: 'USD', to: 'GBP', amount: priceController.text);
+      var resultGBP1 = await Currency.getConversion(
+          from: 'USD', to: 'GBP', amount: customController11.text ??  0);
+      var resultGBP2 = await Currency.getConversion(
+          from: 'USD', to: 'GBP', amount: customController21.text ??  0);
+      var resultGBP3 = await Currency.getConversion(
+          from: 'USD', to: 'GBP', amount: customController31.text ??  0);
+      var resultGBP4 = await Currency.getConversion(
+          from: 'USD', to: 'GBP', amount: customController41.text ??  0);
+      var resultGBP5 = await Currency.getConversion(
+          from: 'USD', to: 'GBP', amount: customController51.text ??  0);
+      var resultGBP6 = await Currency.getConversion(
+          from: 'USD', to: 'GBP', amount: customController61.text ??  0);
+      var resultGBP7 = await Currency.getConversion(
+          from: 'USD', to: 'GBP', amount: customController71.text ??  0);
+      var resultGBP8 = await Currency.getConversion(
+          from: 'USD', to: 'GBP', amount: customController81.text ??  0);
+      var resultGBP9 = await Currency.getConversion(
+          from: 'USD', to: 'GBP', amount: customController91.text ??  0);
+      var resultGBP10 = await Currency.getConversion(
+          from: 'USD', to: 'GBP', amount: customController101.text ??  0);
+      var resultGBP11 = await Currency.getConversion(
+          from: 'USD', to: 'GBP', amount: shipcost.text ??  0);
+      var resultGBP12 = await Currency.getConversion(
+          from: 'USD', to: 'GBP', amount: shipcostintern.text ??  0);
+
+      // String date = result.date; // Returns the last updated date
+
+      print("$usdtogbp");
+      var resultEUR = await Currency.getConversion(
+          from: 'USD', to: 'EUR', amount: priceController.text);
+      var resultEUR1 = await Currency.getConversion(
+          from: 'USD', to: 'EUR', amount: customController11.text ??  0);
+      var resultEUR2 = await Currency.getConversion(
+          from: 'USD', to: 'EUR', amount: customController21.text ??  0);
+      var resultEUR3 = await Currency.getConversion(
+          from: 'USD', to: 'EUR', amount: customController31.text ??  0);
+      var resultEUR4 = await Currency.getConversion(
+          from: 'USD', to: 'EUR', amount: customController41.text ??  0);
+      var resultEUR5 = await Currency.getConversion(
+          from: 'USD', to: 'EUR', amount: customController51.text ??  0);
+      var resultEUR6 = await Currency.getConversion(
+          from: 'USD', to: 'EUR', amount: customController61.text ??  0);
+      var resultEUR7 = await Currency.getConversion(
+          from: 'USD', to: 'EUR', amount: customController71.text ??  0);
+      var resultEUR8 = await Currency.getConversion(
+          from: 'USD', to: 'EUR', amount: customController81.text ??  0);
+      var resultEUR9 = await Currency.getConversion(
+          from: 'USD', to: 'EUR', amount: customController91.text ??  0);
+      var resultEUR10 = await Currency.getConversion(
+          from: 'USD', to: 'EUR', amount: customController101.text ??  0);
+      var resultEUR11 = await Currency.getConversion(
+          from: 'USD', to: 'EUR', amount: shipcost.text ??  0);
+      var resultEUR12 = await Currency.getConversion(
+          from: 'USD', to: 'EUR', amount: shipcostintern.text ??  0);
+
+// Returns the last updated date
+
+      print("$usdtoeur");
+
+      var resultINR = await Currency.getConversion(
+          from: 'USD', to: 'INR', amount: priceController.text);
+      var resultINR1 = await Currency.getConversion(
+          from: 'USD', to: 'INR', amount: customController11.text ??  0);
+      var resultINR2 = await Currency.getConversion(
+          from: 'USD', to: 'INR', amount: customController21.text ??  0);
+      var resultINR3 = await Currency.getConversion(
+          from: 'USD', to: 'INR', amount: customController31.text ??  0);
+      var resultINR4 = await Currency.getConversion(
+          from: 'USD', to: 'INR', amount: customController41.text ??  0);
+      var resultINR5 = await Currency.getConversion(
+          from: 'USD', to: 'INR', amount: customController51.text ??  0);
+      var resultINR6 = await Currency.getConversion(
+          from: 'USD', to: 'INR', amount: customController61.text ??  0);
+      var resultINR7 = await Currency.getConversion(
+          from: 'USD', to: 'INR', amount: customController71.text ??  0);
+      var resultINR8 = await Currency.getConversion(
+          from: 'USD', to: 'INR', amount: customController81.text ??  0);
+      var resultINR9 = await Currency.getConversion(
+          from: 'USD', to: 'INR', amount: customController91.text ??  0);
+      var resultINR10 = await Currency.getConversion(
+          from: 'USD', to: 'INR', amount: customController101.text ??  0);
+      var resultINR11 = await Currency.getConversion(
+          from: 'USD', to: 'INR', amount: shipcost.text ??  0);
+      var resultINR12 = await Currency.getConversion(
+          from: 'USD', to: 'INR', amount: shipcostintern.text ??  0);
+
+      setState(() {
+
+        usdtogbp = resultGBP.rate;
+        usdtogbp1 = resultGBP1.rate;
+        usdtogbp2 = resultGBP2.rate;
+        usdtogbp3 = resultGBP3.rate;
+        usdtogbp4 = resultGBP4.rate;
+        usdtogbp5 = resultGBP5.rate;
+        usdtogbp6 = resultGBP6.rate;
+        usdtogbp7 = resultGBP7.rate;
+        usdtogbp8 = resultGBP8.rate;
+        usdtogbp9 = resultGBP9.rate;
+        usdtogbp10 = resultGBP10.rate;
+        usdtogbp11 = resultGBP11.rate;
+        usdtogbp12 = resultGBP12.rate;
+
+        usdtoeur = resultEUR.rate;
+        usdtoeur1 = resultEUR1.rate;
+        usdtoeur2 = resultEUR2.rate;
+        usdtoeur3 = resultEUR3.rate;
+        usdtoeur4 = resultEUR4.rate;
+        usdtoeur5 = resultEUR5.rate;
+        usdtoeur6 = resultEUR6.rate;
+        usdtoeur7 = resultEUR7.rate;
+        usdtoeur8 = resultEUR8.rate;
+        usdtoeur9 = resultEUR9.rate;
+        usdtoeur10 = resultEUR10.rate;
+        usdtoeur11 = resultEUR11.rate;
+        usdtoeur12 = resultEUR12.rate;
+
+        usdtoinr = resultINR.rate;
+        usdtoinr1 = resultINR1.rate;
+        usdtoinr2 = resultINR2.rate;
+        usdtoinr3 = resultINR3.rate;
+        usdtoinr4 = resultINR4.rate;
+        usdtoinr5 = resultINR5.rate;
+        usdtoinr6 = resultINR6.rate;
+        usdtoinr7 = resultINR7.rate;
+        usdtoinr8 = resultINR8.rate;
+        usdtoinr9 = resultINR9.rate;
+        usdtoinr10 = resultINR10.rate;
+        usdtoinr11 = resultINR11.rate;
+        usdtoinr12 = resultINR12.rate;
+        userprice = priceController.text;
+        userprice1 = customController11.text;
+        userprice2 = customController21.text;
+        userprice3 = customController31.text;
+        userprice4 = customController41.text;
+        userprice5 = customController51.text;
+        userprice6 = customController61.text;
+        userprice7 = customController71.text;
+        userprice8 = customController81.text;
+        userprice9 = customController91.text;
+        userprice10 = customController101.text;
+        userprice11 = shipcost.text;
+        userprice12 = shipcostintern.text;
+
+
+      });
+
+
+      print("$usdtoinr");
+    }
+  }
 
   Future<dynamic> postImage(Asset imageFile) async {
 //    ByteData byteData = await imageFile.requestOriginal(quality: 75);
@@ -12754,7 +13071,6 @@ keyboardType:TextInputType.number,
               "inr": eurtoinr.toString(),
 
               "timestamp": timestamp,
-              "color": Color,
               "composition": compositionController.text,
               "washandcare": washandcareController.text,
               "sizeandfit": sizeandfitController.text,
@@ -12885,17 +13201,31 @@ keyboardType:TextInputType.number,
               "shipcostgbp": eurtogbp11.toString() ?? "0.0",
               "shipcosteur": userprice11.toString() ?? "0.0",
               "shipcostinr": eurtoinr11.toString() ?? "0.0",
-              "shipcostinternusd": eurtousd12.toString() ?? "0.0",
-              "shipcostinterngbp": eurtogbp12.toString() ?? "0.0",
-              "shipcostinterneur": userprice12.toString() ?? "0.0",
-              "shipcostinterninr": eurtoinr12.toString() ?? "0.0",
-
-              "processfrom":  int.tryParse(durationfromp.text) ?? 0,
+             "processfrom":  int.tryParse(durationfromp.text) ?? 0,
               "processto":  int.tryParse(durationto.text) ?? 0,
               "shipfrom":  int.tryParse(durationfrom.text) ?? 0,
               "shipto":  int.tryParse(durationto.text) ?? 0,
-              "shipinterfrom":  int.tryParse(durationfromw.text) ?? 0,
-              "shipinterto":  int.tryParse(durationtow.text) ?? 0,
+              "colorText1":colorController1.text ?? "",
+              "colorText2":colorController2.text ?? "",
+              "colorText3":colorController3.text ?? "",
+              "colorText4":colorController4.text ?? "",
+              "colorText5":colorController5.text ?? "",
+              "colorText6":colorController6.text ?? "",
+              "colorText7":colorController7.text ?? "",
+              "colorText8":colorController8.text ?? "",
+              "colorText9":colorController9.text ?? "",
+              "colorText10":colorController10.text ?? "",
+              "color1":int.tryParse(colorController11.text) ?? 0,
+              "color2":int.tryParse(colorController21.text) ?? 0,
+              "color3":int.tryParse(colorController31.text) ?? 0,
+              "color4":int.tryParse(colorController41.text) ?? 0,
+              "color5":int.tryParse(colorController51.text) ?? 0,
+              "color6":int.tryParse(colorController61.text) ?? 0,
+              "color7":int.tryParse(colorController71.text) ?? 0,
+              "color8":int.tryParse(colorController81.text) ?? 0,
+              "color9":int.tryParse(colorController91.text) ?? 0,
+              "color10":int.tryParse(colorController10.text) ?? 0,
+              "country":  currentUser.country,
 
               "likes": {},
             });
@@ -12936,7 +13266,6 @@ keyboardType:TextInputType.number,
               "inr": gbptoinr.toString(),
 
               "timestamp": timestamp,
-              "color": Color,
               "composition": compositionController.text,
               "washandcare": washandcareController.text,
               "sizeandfit": sizeandfitController.text,
@@ -13067,17 +13396,32 @@ keyboardType:TextInputType.number,
               "shipcostgbp": userprice11.toString() ?? "0.0",
               "shipcosteur": gbptoeur11.toString() ?? "0.0",
               "shipcostinr": gbptoinr11.toString() ?? "0.0",
-              "shipcostinternusd": gbptousd12.toString() ?? "0.0",
-              "shipcostinterngbp": userprice12.toString() ?? "0.0",
-              "shipcostinterneur": gbptoeur12.toString() ?? "0.0",
-              "shipcostinterninr": gbptoinr12.toString() ?? "0.0",
 
               "processfrom":  int.tryParse(durationfromp.text) ?? 0,
               "processto":  int.tryParse(durationto.text) ?? 0,
               "shipfrom":  int.tryParse(durationfrom.text) ?? 0,
               "shipto":  int.tryParse(durationto.text) ?? 0,
-              "shipinterfrom":  int.tryParse(durationfromw.text) ?? 0,
-              "shipinterto":  int.tryParse(durationtow.text) ?? 0,
+              "colorText1":colorController1.text ?? "",
+              "colorText2":colorController2.text ?? "",
+              "colorText3":colorController3.text ?? "",
+              "colorText4":colorController4.text ?? "",
+              "colorText5":colorController5.text ?? "",
+              "colorText6":colorController6.text ?? "",
+              "colorText7":colorController7.text ?? "",
+              "colorText8":colorController8.text ?? "",
+              "colorText9":colorController9.text ?? "",
+              "colorText10":colorController10.text ?? "",
+              "color1":int.tryParse(colorController11.text) ?? 0,
+              "color2":int.tryParse(colorController21.text) ?? 0,
+              "color3":int.tryParse(colorController31.text) ?? 0,
+              "color4":int.tryParse(colorController41.text) ?? 0,
+              "color5":int.tryParse(colorController51.text) ?? 0,
+              "color6":int.tryParse(colorController61.text) ?? 0,
+              "color7":int.tryParse(colorController71.text) ?? 0,
+              "color8":int.tryParse(colorController81.text) ?? 0,
+              "color9":int.tryParse(colorController91.text) ?? 0,
+              "color10":int.tryParse(colorController10.text) ?? 0,
+              "country":  currentUser.country,
 
               "likes": {},
             });
@@ -13119,7 +13463,6 @@ keyboardType:TextInputType.number,
               "inr": usdtoinr.toString(),
 
               "timestamp": timestamp,
-              "color": Color,
               "composition": compositionController.text,
               "washandcare": washandcareController.text,
               "sizeandfit": sizeandfitController.text,
@@ -13250,17 +13593,32 @@ keyboardType:TextInputType.number,
               "shipcostgbp": usdtogbp11.toString() ?? "0.0",
               "shipcosteur": usdtoeur11.toString() ?? "0.0",
               "shipcostinr": usdtoinr11.toString() ?? "0.0",
-              "shipcostinternusd":userprice12.toString() ?? "0.0",
-              "shipcostinterngbp": usdtogbp12.toString() ?? "0.0",
-              "shipcostinterneur": usdtoeur12.toString() ?? "0.0",
-              "shipcostinterninr": usdtoinr12.toString() ?? "0.0",
 
+"colorText1":colorController1.text ?? "",
+ "colorText2":colorController2.text ?? "",
+ "colorText3":colorController3.text ?? "",
+ "colorText4":colorController4.text ?? "",
+ "colorText5":colorController5.text ?? "",
+ "colorText6":colorController6.text ?? "",
+ "colorText7":colorController7.text ?? "",
+ "colorText8":colorController8.text ?? "",
+ "colorText9":colorController9.text ?? "",
+ "colorText10":colorController10.text ?? "",
+ "color1":int.tryParse(colorController11.text) ?? 0,
+ "color2":int.tryParse(colorController21.text) ?? 0,
+  "color3":int.tryParse(colorController31.text) ?? 0,
+ "color4":int.tryParse(colorController41.text) ?? 0,
+  "color5":int.tryParse(colorController51.text) ?? 0,
+ "color6":int.tryParse(colorController61.text) ?? 0,
+  "color7":int.tryParse(colorController71.text) ?? 0,
+ "color8":int.tryParse(colorController81.text) ?? 0,
+  "color9":int.tryParse(colorController91.text) ?? 0,
+ "color10":int.tryParse(colorController10.text) ?? 0,
+        "country":  currentUser.country,
               "processfrom":  int.tryParse(durationfromp.text) ?? 0,
               "processto":  int.tryParse(durationto.text) ?? 0,
               "shipfrom":  int.tryParse(durationfrom.text) ?? 0,
               "shipto":  int.tryParse(durationto.text) ?? 0,
-              "shipinterfrom":  int.tryParse(durationfromw.text) ?? 0,
-              "shipinterto":  int.tryParse(durationtow.text) ?? 0,
 
               "likes": {},
             });
@@ -13279,6 +13637,27 @@ keyboardType:TextInputType.number,
                 .collection("userProducts")
                 .doc(prodId)
                 .set({
+              "colorText1":colorController1.text ?? "",
+              "colorText2":colorController2.text ?? "",
+              "colorText3":colorController3.text ?? "",
+              "colorText4":colorController4.text ?? "",
+              "colorText5":colorController5.text ?? "",
+              "colorText6":colorController6.text ?? "",
+              "colorText7":colorController7.text ?? "",
+              "colorText8":colorController8.text ?? "",
+              "colorText9":colorController9.text ?? "",
+              "colorText10":colorController10.text ?? "",
+              "color1":int.tryParse(colorController11.text) ?? 0,
+              "color2":int.tryParse(colorController21.text) ?? 0,
+              "color3":int.tryParse(colorController31.text) ?? 0,
+              "color4":int.tryParse(colorController41.text) ?? 0,
+              "color5":int.tryParse(colorController51.text) ?? 0,
+              "color6":int.tryParse(colorController61.text) ?? 0,
+              "color7":int.tryParse(colorController71.text) ?? 0,
+              "color8":int.tryParse(colorController81.text) ?? 0,
+              "color9":int.tryParse(colorController91.text) ?? 0,
+              "color10":int.tryParse(colorController10.text) ?? 0,
+              "country":  currentUser.country,
 
               "indian":indian,
                "worldship":worldship,
@@ -13302,7 +13681,6 @@ keyboardType:TextInputType.number,
               "inr": userprice.toString(),
 
               "timestamp": timestamp,
-              "color": Color,
               "composition": compositionController.text,
               "washandcare": washandcareController.text,
               "sizeandfit": sizeandfitController.text,
@@ -13433,17 +13811,11 @@ keyboardType:TextInputType.number,
               "shipcostgbp": inrtogbp11.toString() ?? "0.0",
               "shipcosteur": inrtoeur11.toString() ?? "0.0",
               "shipcostinr": userprice11.toString() ?? "0.0",
-              "shipcostinternusd": inrtousd12.toString() ?? "0.0",
-              "shipcostinterngbp": inrtogbp12.toString() ?? "0.0",
-              "shipcostinterneur": inrtoeur12.toString() ?? "0.0",
-              "shipcostinterninr": userprice12.toString() ?? "0.0",
 
               "processfrom":  int.tryParse(durationfromp.text) ?? 0,
               "processto":  int.tryParse(durationto.text) ?? 0,
               "shipfrom":  int.tryParse(durationfrom.text) ?? 0,
               "shipto":  int.tryParse(durationto.text) ?? 0,
-              "shipinterfrom":  int.tryParse(durationfromw.text) ?? 0,
-              "shipinterto":  int.tryParse(durationtow.text) ?? 0,
 
               "likes": {},
             });
@@ -13463,8 +13835,8 @@ keyboardType:TextInputType.number,
                 .set({
 
               "indian":indian,
-               "worldship":worldship,
-               "freeworldship":freeworldship,
+              "worldship":worldship,
+              "freeworldship":freeworldship,
               "freeship":freeship,
               "shipment": shipcontroller.text,
               "prodId": prodId,
@@ -13484,7 +13856,6 @@ keyboardType:TextInputType.number,
               "inr": usdtoinr.toString(),
 
               "timestamp": timestamp,
-              "color": Color,
               "composition": compositionController.text,
               "washandcare": washandcareController.text,
               "sizeandfit": sizeandfitController.text,
@@ -13615,17 +13986,32 @@ keyboardType:TextInputType.number,
               "shipcostgbp": usdtogbp11.toString() ?? "0.0",
               "shipcosteur": usdtoeur11.toString() ?? "0.0",
               "shipcostinr": usdtoinr11.toString() ?? "0.0",
-              "shipcostinternusd":userprice12.toString() ?? "0.0",
-              "shipcostinterngbp": usdtogbp12.toString() ?? "0.0",
-              "shipcostinterneur": usdtoeur12.toString() ?? "0.0",
-              "shipcostinterninr": usdtoinr12.toString() ?? "0.0",
 
+              "colorText1":colorController1.text ?? "",
+              "colorText2":colorController2.text ?? "",
+              "colorText3":colorController3.text ?? "",
+              "colorText4":colorController4.text ?? "",
+              "colorText5":colorController5.text ?? "",
+              "colorText6":colorController6.text ?? "",
+              "colorText7":colorController7.text ?? "",
+              "colorText8":colorController8.text ?? "",
+              "colorText9":colorController9.text ?? "",
+              "colorText10":colorController10.text ?? "",
+              "color1":int.tryParse(colorController11.text) ?? 0,
+              "color2":int.tryParse(colorController21.text) ?? 0,
+              "color3":int.tryParse(colorController31.text) ?? 0,
+              "color4":int.tryParse(colorController41.text) ?? 0,
+              "color5":int.tryParse(colorController51.text) ?? 0,
+              "color6":int.tryParse(colorController61.text) ?? 0,
+              "color7":int.tryParse(colorController71.text) ?? 0,
+              "color8":int.tryParse(colorController81.text) ?? 0,
+              "color9":int.tryParse(colorController91.text) ?? 0,
+              "color10":int.tryParse(colorController10.text) ?? 0,
+              "country":  currentUser.country,
               "processfrom":  int.tryParse(durationfromp.text) ?? 0,
               "processto":  int.tryParse(durationto.text) ?? 0,
               "shipfrom":  int.tryParse(durationfrom.text) ?? 0,
               "shipto":  int.tryParse(durationto.text) ?? 0,
-              "shipinterfrom":  int.tryParse(durationfromw.text) ?? 0,
-              "shipinterto":  int.tryParse(durationtow.text) ?? 0,
 
               "likes": {},
             });

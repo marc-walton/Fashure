@@ -57,7 +57,51 @@ final String userSize;
   final int mto;
   final int freeSize;
     // BuyView({Key key, this.prodId, this.ownerId, this.total, this.userSize,}) : super(key: key);
-
+  final int Ring1;
+  final int Ring2;
+  final int Ring3;
+  final int Ring4;
+  final int Ring5;
+  final int Ring6;
+  final int Ring7;
+  final int Ring8;
+  final int Ring9;
+  final int Ring10;
+  final int Ring11;
+  final int Ring12;
+  final int Ring13;
+  final int Ring14;
+  final int Ring15;
+  final int Ring16;
+  final int Ring17;
+  final int Ring18;
+  final int Ring19;
+  final int Ring20;
+  final int  Ring21;
+  final int  Ring22;
+  final int  Ring23;
+  final int custom12;
+  final int custom22;
+  final int custom32;
+  final int custom42;
+  final int custom52;
+  final int custom62;
+  final int custom72;
+  final int  custom82;
+  final int custom92;
+  final int custom102;
+  final int color1;
+  final int color2;
+  final int color3;
+  final int color4;
+  final int color5;
+  final int color6;
+  final int color7;
+  final int color8;
+  final int color9;
+  final int color10;
+  final String colorText;
+  final String mtoText;
  BuyView({this.prodId,this.productname,
    this.usd,
    this.eur,
@@ -100,6 +144,14 @@ final String userSize;
    this.Shoe19,
    this.Shoe20,
    this. Shoe21,
+   this.Ring1, this.Ring2, this.Ring3, this.Ring4, this.Ring5, this.Ring6,
+   this.Ring7, this.Ring8, this.Ring9, this.Ring10, this.Ring11, this.Ring12,
+   this.Ring13, this.Ring14, this.Ring15, this.Ring16, this.Ring17, this.Ring18,
+   this.Ring19, this.Ring20, this.Ring21, this.Ring22, this.Ring23,
+   this.custom12, this.custom22, this.custom32, this.custom42, this.custom52,
+   this.custom62, this.custom72, this.custom82, this.custom92, this.custom102,
+   this.color1, this.color2, this.color3, this.color4, this.color5, this.color6,
+   this.color7, this.color8, this.color9, this.color10, this.colorText, this.mtoText,
    this.ownerId, this.total, this.userSize,this.profileimg,this.username,this.mediaUrl});
 @override
   _BuyViewState createState() => _BuyViewState(prodId: this.prodId,
@@ -468,8 +520,52 @@ else {
                         Shoe19: widget.Shoe19,
                         Shoe20: widget.Shoe20,
                         Shoe21: widget.Shoe21,
+                        Ring1: widget.Ring1,
+                        Ring2: widget.Ring2,
+                        Ring3: widget.Ring3,
+                        Ring4: widget.Ring4,
+                        Ring5: widget.Ring5,
+                        Ring6: widget.Ring6,
+                        Ring7: widget.Ring7,
+                        Ring8: widget.Ring8,
+                        Ring9: widget.Ring9,
+                        Ring10: widget.Ring10,
+                        Ring11: widget.Ring11,
+                        Ring12: widget.Ring12,
+                        Ring13: widget.Ring13,
+                        Ring14: widget.Ring14,
+                        Ring15: widget.Ring15,
+                        Ring16: widget.Ring16,
+                        Ring17: widget.Ring17,
+                        Ring18: widget.Ring18,
+                        Ring19: widget.Ring19,
+                        Ring20: widget.Ring20,
+                        Ring21: widget.Ring21,
+                        Ring22: widget.Ring22,
+                        Ring23: widget.Ring23,
+                        color1: widget.color1,
+                        color2: widget.color2,
+                        color3: widget.color3,
+                        color4: widget.color4,
+                        color5: widget.color5,
+                        color6: widget.color6,
+                        color7: widget.color7,
+                        color8: widget.color8,
+                        color9: widget.color9,
+                        color10: widget.color10,
+                        custom12: widget.custom12,
+                        custom22: widget.custom22,
+                        custom32: widget.custom32,
+                        custom42: widget.custom42,
+                        custom52: widget.custom52,
+                        custom62: widget.custom62,
+                        custom72: widget.custom72,
+                        custom82: widget.custom82,
+                        custom92: widget.custom92,
+                        custom102: widget.custom102,
                         mto: widget.mto,
-                        freeSize: widget.freeSize,
+                        mtoText: widget.mtoText,
+                        colorText: widget.colorText,                        freeSize: widget.freeSize,
                       )));
 
                     },
