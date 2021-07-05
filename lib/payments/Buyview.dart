@@ -102,7 +102,19 @@ final String userSize;
   final int color10;
   final String colorText;
   final String mtoText;
- BuyView({this.prodId,this.productname,
+  final String shipcost;
+  final String custompriceusd;
+  final String custompriceinr;
+  final String shipcostusd;
+  final String shipcostuser;
+  final String customusd;
+  final String custominr;
+  final String price;
+  final String customprice;
+  final String country;
+  final String color;
+
+  BuyView({this.prodId,this.productname,
    this.usd,
    this.eur,
    this.inr,
@@ -152,7 +164,7 @@ final String userSize;
    this.custom62, this.custom72, this.custom82, this.custom92, this.custom102,
    this.color1, this.color2, this.color3, this.color4, this.color5, this.color6,
    this.color7, this.color8, this.color9, this.color10, this.colorText, this.mtoText,
-   this.ownerId, this.total, this.userSize,this.profileimg,this.username,this.mediaUrl});
+   this.ownerId, this.total, this.userSize,this.profileimg,this.username,this.mediaUrl, this.shipcost, this.custompriceusd, this.custompriceinr, this.shipcostusd, this.shipcostuser, this.customusd, this.custominr, this.price, this.customprice, this.country, this.color});
 @override
   _BuyViewState createState() => _BuyViewState(prodId: this.prodId,
   ownerId: this.ownerId,
@@ -280,7 +292,7 @@ uk(){
         ),
         Expanded(
           child: Container(
-            height:  MediaQuery.of(context).size.height * 0.20,
+            height:  MediaQuery.of(context).size.height * 0.5,
             child: ClipRRect(
                 borderRadius: BorderRadius.circular(20.0),child:CachedNetworkImage(imageUrl: widget.mediaUrl,)),
 
@@ -291,6 +303,11 @@ uk(){
           children: [
             Text('Size:  ${widget.userSize}', style: TextStyle(color: kText,
                 fontWeight: FontWeight.bold)),
+             Text('Color:  ${widget.colorText}', style: TextStyle(color: kText,
+                fontWeight: FontWeight.bold)),
+               Text('Price:  ${widget.price}', style: TextStyle(color: kText,
+                fontWeight: FontWeight.bold)),
+
             Text('£  ${widget.total}',style: TextStyle(color: kText,
               fontSize: 20.0,
             )),
@@ -565,7 +582,8 @@ else {
                         custom102: widget.custom102,
                         mto: widget.mto,
                         mtoText: widget.mtoText,
-                        colorText: widget.colorText,                        freeSize: widget.freeSize,
+                        colorText: widget.colorText,
+                        freeSize: widget.freeSize,
                       )));
 
                     },

@@ -103,6 +103,18 @@ class BuyNow extends StatefulWidget {
   final int color10;
   final String colorText;
   final String mtoText;
+  final String shipcost;
+  final String custompriceusd;
+  final String custompriceinr;
+  final String shipcostusd;
+  final String shipcostuser;
+  final String customusd;
+  final String custominr;
+  final String price;
+  final String customprice;
+  final String country;
+  final String color;
+
   BuyNow({this.buynowamount,
     this.Ring1, this.Ring2, this.Ring3, this.Ring4, this.Ring5, this.Ring6,
     this.Ring7, this.Ring8, this.Ring9, this.Ring10, this.Ring11, this.Ring12,
@@ -157,7 +169,7 @@ class BuyNow extends StatefulWidget {
   this.ownerId,
     this.productname,
   this.size,
-  this.profileimg,this.username,this.mediaUrl});
+  this.profileimg,this.username,this.mediaUrl, this.shipcost, this.custompriceusd, this.custompriceinr, this.shipcostusd, this.shipcostuser, this.customusd, this.custominr, this.price, this.customprice, this.country, this.color});
 
   @override
   _BuyNowState createState() => _BuyNowState(   xxxs: xxxs,

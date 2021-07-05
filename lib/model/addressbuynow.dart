@@ -1,3 +1,5 @@
+// ingore_for_file: prefer_expression_function_bodies
+
 import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fashow/payments/Buyview.dart';
@@ -111,9 +113,27 @@ final String OwnerId;
   final int color10;
    final String colorText;
     final String mtoText;
+    final String shipcost;
+    final String shipcostuser;
+    final String custompriceusd;
+    final String custompriceinr;
+      final String price;
+    final String customprice;
+    final String country;
+    final String color;
+
 
   AddressBuy({
     this.freeSize,
+    this.shipcost,
+    this.shipcostuser,
+    this.custompriceusd,
+    this.custompriceinr,
+    this.price,
+    this.customprice,
+    this.country,
+    this.color,
+
     this.mto,
     this.xxxs,
     this.xxs,
@@ -240,7 +260,6 @@ backgroundColor: kPrimaryColor,
         decoration: BoxDecoration(
             gradient: fabGradient
         ) ,
-        alignment: Alignment.center,
         child: StreamBuilder(
             stream: FirebaseFirestore.instance
                 .collection('Address').doc(currentUser.id)
@@ -365,6 +384,14 @@ backgroundColor: kPrimaryColor,
                         mto: widget.mto,
                         mtoText: widget.mtoText,
                          colorText: widget.colorText,
+                        shipcost: widget.shipcost,
+                        shipcostuser: widget.shipcostuser,
+                        custompriceusd: widget.custompriceusd,
+                        custompriceinr: widget.custompriceinr,
+                        price: widget.price,
+                        customprice: widget.customprice,
+                        country: widget.country,
+                        color: widget.color,
 
                         freeSize: widget.freeSize,
                       );
@@ -404,14 +431,6 @@ class addressview extends StatelessWidget {
  final String inr;
  final String gbp;
  final String mtoText;
- final String price;
- final String customprice;
- final String country;
- final String color;
- final String shipcostusd;
- final String shipcostuser;
- final String customusd;
- final String custominr;
 
  final int xxxs;
  final int xxs;
@@ -495,15 +514,19 @@ class addressview extends StatelessWidget {
  final int color9;
  final int color10;
  final String colorText;
- final String mtoText;
-  final String price;
-  final String customprice;
-  final String country;
-  final String color;
-  final String shipcostusd;
+ final String shipcost;
+ final String custompriceusd;
+ final String custompriceinr;
+ final String shipcostusd;
  final String shipcostuser;
-  final String customusd;
-  final String custominr;
+ final String customusd;
+ final String custominr;
+ final String price;
+ final String customprice;
+ final String country;
+ final String color;
+
+
 
 
 
@@ -548,6 +571,15 @@ class addressview extends StatelessWidget {
   this.Shoe19,
   this.Shoe20,
   this. Shoe21,
+
+   this.shipcostuser,
+   this.custompriceusd,
+   this.custompriceinr,
+   this.price,
+   this.customprice,
+   this.country,
+   this.color,
+
    this.Ring1, this.Ring2, this.Ring3, this.Ring4, this.Ring5, this.Ring6,
    this.Ring7, this.Ring8, this.Ring9, this.Ring10, this.Ring11, this.Ring12,
    this.Ring13, this.Ring14, this.Ring15, this.Ring16, this.Ring17, this.Ring18,
@@ -556,7 +588,8 @@ class addressview extends StatelessWidget {
    this.custom62, this.custom72, this.custom82, this.custom92, this.custom102,
    this.color1, this.color2, this.color3, this.color4, this.color5, this.color6,
    this.color7, this.color8, this.color9, this.color10, this.colorText, this.mtoText,
-  this.Type,this.productname, this.Fullname, this.Addresss, this.City, this.State, this.Country, this.Zip, this.Dialcode, this.Phone, this.userSize, this.prodId, this.total, this.ownerId, this.profileimg, this.username, this.mediaUrl, this.price, this.customprice, this.country, this.color, this.shipcostusd, this.shipcostuser, this.customusd, this.custominr});
+  this.Type,this.productname, this.Fullname, this.Addresss, this.City, this.State, this.Country, this.Zip, this.Dialcode, this.Phone, this.userSize, this.prodId, this.total, this.ownerId, this.profileimg, this.username, this.mediaUrl,
+  this.shipcostusd,  this.customusd, this.custominr, this.shipcost});
   @override
   Widget build(BuildContext context) {
     return
@@ -691,7 +724,18 @@ class addressview extends StatelessWidget {
                               mto: mto,
                               mtoText: mtoText,
                               colorText: colorText,
-                              freeSize: freeSize,)
+                              freeSize: freeSize,
+
+                              shipcost:shipcost,
+                              shipcostuser:shipcostuser,
+                              custompriceusd:custompriceusd,
+                              custompriceinr:custompriceinr,
+                              price:price,
+                              customprice:customprice,
+                              country:country,
+                              color:color,
+
+                            )
                         );
                         // Navigator.push(context, MaterialPageRoute(builder: (context) =>));
                         // Navigator.pop(context);

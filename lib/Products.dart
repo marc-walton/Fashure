@@ -7152,18 +7152,19 @@ OwnerId: ownerId,prodId:prodId ,
         productname:productname,
       usd:usd,
       inr:inr,
-         price:price,
+
+      shipcost: ship,
+      shipcostuser: shipcostU,
+
+      custompriceusd:custompriceusd,
+      custompriceinr:custompriceinr,
+
+      price:price,
           customprice:customprice,
 country:country,
 color:color,
 colorText:usercolor,
 mtoText:mtoController.text ,
-
-shipcostusd: ship,
-shipcostuser: shipcostU,
-
-         customusd:custompriceusd,
-custominr:custompriceinr,
 
         xxxs: xxxs,
         xxs: xxs,
