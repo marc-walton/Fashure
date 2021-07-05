@@ -11,10 +11,15 @@ class Users{
   String bio;
   String coverPhoto;
   String country;
+   String currencyISO;
+   String currency;
+ String currencysym;
+
   String language;
   int client;
  int visits;
  int sales;
+ int revenue;
 
   int state;
   bool seller;
@@ -31,6 +36,11 @@ bool ban;
     this.coverPhoto,
     this.seller,
     this.country,
+     this.currencyISO,
+     this.currency,
+this.currencysym,
+this.revenue,
+
     this.language,
     this.client,
     this.sales,
@@ -49,6 +59,11 @@ bool ban;
         coverPhoto: doc.data()['coverPhoto'],
         language: doc.data()['language'],
         country: doc.data()['country'],
+      currencyISO: doc.data()['currencyISO'],
+      currency: doc.data()['currency'],
+ currencysym: doc.data()['currencysym'],
+ revenue: doc.data()['revenue'],
+
         state: doc.data()['state'],
         client:doc.data()['client'],
         seller: doc.data()['seller'],

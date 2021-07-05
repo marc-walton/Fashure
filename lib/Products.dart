@@ -5,7 +5,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:photo_view/photo_view.dart';
-import 'package:paginate_firestore/paginate_firestore.dart';
+import 'package:intl/intl.dart';
 import 'package:smooth_star_rating/smooth_star_rating.dart';
 import 'package:fashow/HomePage.dart';
 import 'package:fashow/ActivityFeed.dart';
@@ -141,6 +141,8 @@ class Prod extends StatefulWidget {
   final String cny;
   final String gbp;
 final String gender;
+final String country;
+
 final String shipment;
 final bool worldship;
 final bool freeworldship;
@@ -148,7 +150,6 @@ final bool freeship;
 
   final String productname;
   final String details;
-  final List color;
   final String composition;
   final String washandcare;
   final String sizeandfit;
@@ -273,6 +274,11 @@ final int  Ring23;
   final String custom101usd;
   final String custom101inr;
   final String custom101gbp;
+  final String shipcostusd;
+  final String shipcostinterusd;
+   final String shipcostinr;
+  final String shipcostinterinr;
+
    final int processfrom;
     final int processto;
     final int shipfrom;
@@ -318,11 +324,15 @@ final int  Ring23;
 this.worldship,
 this.freeworldship,
 this.freeship,
+this.shipcostinterusd,
+this.shipcostusd,
+this.shipcostinterinr,
+this.shipcostinr,
+this.country,
 
     this.gender,
     this.details,
     this.productname,
-    this.color,
     this.composition,
     this.washandcare,
      this.sizeandfit,
@@ -491,6 +501,7 @@ shipment: doc.data()['shipment'],
 worldship: doc.data()['worldship'],
 freeworldship: doc.data()['freeworldship'],
 freeship: doc.data()['freeship'],
+      country: doc.data()['country'],
 
      eur: doc.data()['eur'],
       usd: doc.data()['usd'],
@@ -625,11 +636,18 @@ freeship: doc.data()['freeship'],
         shipinterfrom:  doc.data()['shipinterfrom'],
         shipinterto:  doc.data()['shipinterto'],
 
+      shipcostinterinr:  doc.data()['shipcostinterinr'],
+
+      shipcostinr:  doc.data()['shipcostinr'],
+
+      shipcostinterusd:  doc.data()['shipcostinterusd'],
+
+      shipcostusd:  doc.data()['shipcostusd'],
+
 
         productname: doc.data()['productname'],
       details: doc.data()['details'],
       shopmediaUrl: doc.data()['shopmediaUrl'],
-      color:doc.data()['color'],
    composition:doc.data()['composition'],
    washandcare:doc.data()['washandcare'],
     sizeandfit:doc.data()['sizeandfit'],
@@ -689,12 +707,15 @@ freeship: doc.data()['freeship'],
     shipment:this.shipment,
     worldship:this.worldship,
  freeworldship:this.freeworldship,
- freeship:this.freeship,
+    freeship:this.freeship,
+    shipcostinterusd:this.shipcostinterusd,
+    shipcostusd:this.shipcostusd,
+    shipcostinterinr:this.shipcostinterinr,
+    shipcostinr:this.shipcostinr,
 
     gender:this.gender,
     details:this.details,
     productname: this.productname,
-    color: this.color,
    composition: this.composition,
     washandcare: this.washandcare,
     sizeandfit: this.sizeandfit,
@@ -855,7 +876,7 @@ Ring20:this.Ring20,
 class _ProdState extends State<Prod> {
   String usersize = "";
   String usercolor = "";
-
+String currencysymbol;
   final String currentUserId = currentUser?.id;
   final String prodId;
   final String ownerId;
@@ -867,13 +888,30 @@ class _ProdState extends State<Prod> {
   final String gbp;
    final String gender;
  final String shipment;
+  final String country;
+
 final bool worldship;
 final bool freeworldship;
 final bool freeship;
 String price;
+String custompriceinr;
+String custompriceusd;
+
+String customprice;
+String customprice1;
+String customprice2;
+String customprice3;
+String customprice4;
+String customprice5;
+String customprice6;
+String customprice7;
+String customprice8;
+String customprice9;
+String customprice10;
+
   final String productname;
   final String details;
-  final List color;
+   String color;
   final String composition;
   final String washandcare;
   final String sizeandfit;
@@ -998,6 +1036,11 @@ String price;
   final String custom101usd;
   final String custom101inr;
   final String custom101gbp;
+  final String shipcostusd;
+  final String shipcostinterusd;
+  final String shipcostinterinr;
+  final String shipcostinr;
+
   final int processfrom;
   final int processto;
   final int shipfrom;
@@ -1024,7 +1067,7 @@ String price;
    final String colorText8;
    final String colorText9;
    final String colorText10;
-
+String shipcostuser;
   final int mto;
   int likeCount;
   Map likes;
@@ -1050,11 +1093,15 @@ var e;
 this.worldship,
 this.freeworldship,
 this.freeship,
+this.shipcostinterusd,
+this.shipcostusd,
+this.shipcostinterinr,
+this.shipcostinr,
+this.country,
 
     this.gender,
     this.details,
     this.productname,
-    this.color,
     this.freesize,
     this.mto,
     this.xxxs,
@@ -1223,64 +1270,110 @@ this.freeship,
 
   }
 currency()async{
+  var resultUSD = await Currency.getConversion(
+      from: 'EUR', to: 'USD', amount: eur);
+  var resultUSD1 = await Currency.getConversion(
+      from: '${currentUser.currencyISO}', to: 'USD', amount: custom11usd ??  0);
+  var resultUSD2 = await Currency.getConversion(
+      from: '${currentUser.currencyISO}', to: 'USD', amount: custom21usd ??  0);
+  var resultUSD3 = await Currency.getConversion(
+      from: '${currentUser.currencyISO}', to: 'USD', amount: custom31usd ??  0);
+  var resultUSD4 = await Currency.getConversion(
+      from: '${currentUser.currencyISO}', to: 'USD', amount: custom41usd ??  0);
+  var resultUSD5 = await Currency.getConversion(
+      from: '${currentUser.currencyISO}', to: 'USD', amount: custom51usd ??  0);
+  var resultUSD6 = await Currency.getConversion(
+      from: '${currentUser.currencyISO}', to: 'USD', amount: custom61usd ??  0);
+  var resultUSD7 = await Currency.getConversion(
+      from: '${currentUser.currencyISO}', to: 'USD', amount: custom71usd ??  0);
+  var resultUSD8 = await Currency.getConversion(
+      from: '${currentUser.currencyISO}', to: 'USD', amount: custom81usd ??  0);
+  var resultUSD9 = await Currency.getConversion(
+      from: '${currentUser.currencyISO}', to: 'USD', amount: custom91usd ??  0);
+  var resultUSD10 = await Currency.getConversion(
+      from: '${currentUser.currencyISO}', to: 'USD', amount: custom101usd ??  0);
+  var resultUSD11 = await Currency.getConversion(
+      from: '${currentUser.currencyISO}', to: 'USD', amount: shipcostinterusd ??  0);
 
+  var c1;
+ var c2;
+ var c3;
+ var c4;
+ var c5;
+ var c6;
+ var c7;
+ var c8;
+ var c9;
+ var c10;
+var s;
   setState(() {
+    e = resultUSD.rate;
+e =e.toStringAsFixed(2);
+    e = price;
+   c1 = resultUSD1.rate;
+c1 =c1.toStringAsFixed(2);
+    c1 = customprice1;
+   c2 = resultUSD2.rate;
+c2 =c2.toStringAsFixed(2);
+    c2 = customprice2;
+   c3 = resultUSD3.rate;
+c3 =c3.toStringAsFixed(2);
+    c3 = customprice3;
+   c4 = resultUSD4.rate;
+c4 = c4.toStringAsFixed(2);
+    c4 = customprice4;
+   c5 = resultUSD5.rate;
+c5 =c5.toStringAsFixed(2);
+    c5 = customprice5;
+   c6 = resultUSD6.rate;
+c6 =c6.toStringAsFixed(2);
+    c6 = customprice6;
+   c7 = resultUSD7.rate;
+c7 =c7.toStringAsFixed(2);
+    c7 = customprice7;
+   c8 = resultUSD8.rate;
+c8 =c8.toStringAsFixed(2);
+    c8 = customprice8;
+   c9 = resultUSD9.rate;
+c9 =c9.toStringAsFixed(2);
+    c9 = customprice9;
+   c10 = resultUSD10.rate;
+c10 =c10.toStringAsFixed(2);
+    c10 = customprice10;
+   s = resultUSD11.rate;
+s =s.toStringAsFixed(2);
+    s = shipcostuser;
 
-    e = eur.toStringAsFixed(2);
-    print(eur);
     isUploading = false;
   });
 }
   Views()async{
+    bool isPostOwner = currentUserId == ownerId;
 
-    FirebaseFirestore.instance.collection('users')
-        .where("id",isEqualTo:"${widget.ownerId}")
-        .snapshots().listen((snapshot){snapshot.docs.forEach((doc){
+    DocumentSnapshot doc = await usersRef.doc(ownerId).get();
+   Users vUser = Users.fromDocument(doc);
+    setState(() {
+     views = vUser.visits;
 
-      setState(() {
-      client = doc.data()['client'];
+      });
 
-     });});
+   // FirebaseFirestore.instance.collection('users')
+      //  .where("id",isEqualTo:"${widget.ownerId}")
+     //   .snapshots().listen((snapshot){snapshot.docs.forEach((doc){
 
-    });
-    views++;
+   //   setState(() {
+    //  views = doc.data()['visits'];
+
+   //  });});
+
+  //  });
+    isPostOwner? null: views++;
 
     FirebaseFirestore.instance.collection('users')
         .doc(ownerId)
         .update({'visits': views,
     });
   }
-sdjgf(){  if (currentUser.country == 'India'){
-  Proceedtobuy(total:inr,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-      username: username,
-      mediaUrl: shopmediaUrl.first,
-      productname:productname);
-}
-else if (currentUser.country == 'UK'){
-  Proceedtobuy(total:gbp,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-      username: username,
-      mediaUrl: shopmediaUrl.first,
-      productname:productname);
-}
-else  if (currentUser.country == 'Europe'){
-  Proceedtobuy(total:eur,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-      username: username,
-      mediaUrl: shopmediaUrl.first,
-      productname:productname);
-}
-else  if (currentUser.country == 'USA'){
-  Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-      username: username,
-      mediaUrl: shopmediaUrl.first,
-      productname:productname);
-}
-else  {
-  Proceedtobuy(total:usd,prodId:prodId,ownerId:ownerId,userSize:usersize , profileimg: photoUrl ,
-      username: username,
-      mediaUrl: shopmediaUrl.first,
-      productname:productname);
-}
-}
 FREE(){
     if(freesize == 0){
     return
@@ -4995,7 +5088,9 @@ else{
         onTap: (){
           setState(()  {
 
-            usersize = 'col 1';
+            color = 'col 1';
+            usercolor = colorText1;
+
           });
 
 
@@ -5025,7 +5120,8 @@ else{
         onTap: (){
           setState(()  {
 
-            usersize = 'col 2';
+            color = 'col 2';
+            usercolor = colorText2;
           });
 
 
@@ -5055,7 +5151,8 @@ Col3(){
         onTap: (){
           setState(()  {
 
-            usersize = 'col 3';
+            color = 'col 3';
+            usercolor = colorText3;
           });
 
 
@@ -5085,7 +5182,8 @@ Col4(){
         onTap: (){
           setState(()  {
 
-            usersize = 'col 4';
+            color = 'col 4';
+            usercolor = colorText4;
           });
 
 
@@ -5115,7 +5213,8 @@ Col5(){
         onTap: (){
           setState(()  {
 
-            usersize = 'col 5';
+            color = 'col 5';
+            usercolor = colorText5;
           });
 
 
@@ -5145,7 +5244,8 @@ Col6(){
         onTap: (){
           setState(()  {
 
-            usersize = 'col 6';
+            color = 'col 6';
+            usercolor = colorText6;
           });
 
 
@@ -5175,7 +5275,8 @@ Col7(){
         onTap: (){
           setState(()  {
 
-            usersize = 'col 7';
+            color = 'col 7';
+            usercolor = colorText7;
           });
 
 
@@ -5205,7 +5306,8 @@ Col8(){
         onTap: (){
           setState(()  {
 
-            usersize = 'col 8';
+            color = 'col 8';
+            usercolor = colorText8;
           });
 
 
@@ -5235,7 +5337,8 @@ Col9(){
         onTap: (){
           setState(()  {
 
-            usersize = 'col 9';
+            color = 'col 9';
+            usercolor = colorText9;
           });
 
 
@@ -5265,7 +5368,8 @@ Col10(){
         onTap: (){
           setState(()  {
 
-            usersize = 'col 10';
+            color = 'col 10';
+            usercolor = colorText10;
           });
 
 
@@ -5296,24 +5400,31 @@ Col10(){
           setState(()  {
 
             usersize = '$custom1';
+            customprice = customprice1;
+            custompriceusd = custom11usd;
+            custompriceinr = custom11inr;
+
           });
 
 
         },
-        child:   Container(
-          height:50,
-          width:MediaQuery.of(context).size.width,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-            currentUser.country == "Europe"?  FittedBox(child: Text('$custom1 + $custom11eur',)):
-             currentUser.country == "India"?  FittedBox(child: Text('$custom1 + $custom11inr',)):
-             currentUser.country == "UK"?  FittedBox(child: Text('$custom1 + $custom11gbp',)):
-             currentUser.country == "USA"?  FittedBox(child: Text('$custom1 + $custom11usd',)):
-               FittedBox(child: Text('$custom1 + $custom11usd',)),
-            ],
-          ),
-        ),
+          child:   Container(
+            height:50,
+            width:MediaQuery.of(context).size.width,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+
+
+                currentUser.country == "India"?  FittedBox(child: Text('$custom1 + ${currentUser.currencysym} $custom11inr',)):
+                currentUser.country == "United States"?  FittedBox(child: Text('$custom1 + \u0024 $custom11usd',)):
+                currentUser.country == country?FittedBox(child: Text('$custom1 + ${currentUser.currencysym} $custom11inr(\u0024 $custom11usd)',)):
+
+                FittedBox(child: Text('$custom1 + ${currentUser.currencysym} $customprice1(\u0024 $custom11usd)',)),
+
+              ],
+            ),
+          )
       );
     }
   }
@@ -5330,23 +5441,31 @@ Col10(){
           setState(()  {
 
             usersize = '$custom2';
+            customprice = customprice2;
+            custompriceusd = custom21usd;
+            custompriceinr = custom21inr;
+
           });
 
 
         },
-        child:   Container(
-          height:50,
-          width:MediaQuery.of(context).size.width,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              currentUser.country == "Europe"?  FittedBox(child: Text('$custom2 + $custom21eur',)):
-              currentUser.country == "India"?  FittedBox(child: Text('$custom2 + $custom21inr',)):
-              currentUser.country == "UK"?  FittedBox(child: Text('$custom2 + $custom21gbp',)):
-              currentUser.country == "USA"?  FittedBox(child: Text('$custom2 + $custom21usd',)):
-              FittedBox(child: Text('$custom2 + $custom21usd',)),            ],
-          ),
-        ),
+          child:   Container(
+            height:50,
+            width:MediaQuery.of(context).size.width,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+
+
+                currentUser.country == "India"?  FittedBox(child: Text('$custom2 + ${currentUser.currencysym} $custom21inr',)):
+                currentUser.country == "United States"?  FittedBox(child: Text('$custom2 + \u0024 $custom21usd',)):
+                currentUser.country == country?FittedBox(child: Text('$custom2 + ${currentUser.currencysym} $custom21inr(\u0024 $custom21usd)',)):
+
+                FittedBox(child: Text('$custom2 + ${currentUser.currencysym} $customprice2(\u0024 $custom21usd)',)),
+
+              ],
+            ),
+          )
       );
     }
   }
@@ -5363,23 +5482,31 @@ Cus3(){
           setState(()  {
 
             usersize = '$custom3';
+            customprice = customprice3;
+            custompriceusd = custom31usd;
+            custompriceinr = custom31inr;
+
           });
 
 
         },
-        child:   Container(
-          height:50,
-          width:MediaQuery.of(context).size.width,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              currentUser.country == "Europe"?  FittedBox(child: Text('$custom3 + $custom31eur',)):
-              currentUser.country == "India"?  FittedBox(child: Text('$custom3 + $custom31inr',)):
-              currentUser.country == "UK"?  FittedBox(child: Text('$custom3 + $custom31gbp',)):
-              currentUser.country == "USA"?  FittedBox(child: Text('$custom3 + $custom31usd',)):
-              FittedBox(child: Text('$custom3 + $custom31usd',)),            ],
-          ),
-        ),
+          child:   Container(
+            height:50,
+            width:MediaQuery.of(context).size.width,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+
+
+                currentUser.country == "India"?  FittedBox(child: Text('$custom3 + ${currentUser.currencysym} $custom31inr',)):
+                currentUser.country == "United States"?  FittedBox(child: Text('$custom3 + \u0024 $custom31usd',)):
+                currentUser.country == country?FittedBox(child: Text('$custom3 + ${currentUser.currencysym} $custom31inr(\u0024 $custom31usd)',)):
+
+                FittedBox(child: Text('$custom3 + ${currentUser.currencysym} $customprice3(\u0024 $custom31usd)',)),
+
+              ],
+            ),
+          )
       );
     }
   }
@@ -5396,23 +5523,31 @@ Cus4(){
           setState(()  {
 
             usersize = '$custom4';
+            customprice = customprice4;
+            custompriceusd = custom41usd;
+            custompriceinr = custom41inr;
+
           });
 
 
         },
-        child:   Container(
-          height:50,
-          width:MediaQuery.of(context).size.width,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              currentUser.country == "Europe"?  FittedBox(child: Text('$custom4 + $custom41eur',)):
-              currentUser.country == "India"?  FittedBox(child: Text('$custom4 + $custom41inr',)):
-              currentUser.country == "UK"?  FittedBox(child: Text('$custom4 + $custom41gbp',)):
-              currentUser.country == "USA"?  FittedBox(child: Text('$custom4 + $custom41usd',)):
-              FittedBox(child: Text('$custom4 + $custom41usd',)),            ],
-          ),
-        ),
+          child:   Container(
+            height:50,
+            width:MediaQuery.of(context).size.width,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+
+
+                currentUser.country == "India"?  FittedBox(child: Text('$custom4 + ${currentUser.currencysym} $custom41inr',)):
+                currentUser.country == "United States"?  FittedBox(child: Text('$custom4 + \u0024 $custom41usd',)):
+                currentUser.country == country?FittedBox(child: Text('$custom4 + ${currentUser.currencysym} $custom41inr(\u0024 $custom41usd)',)):
+
+                FittedBox(child: Text('$custom4 + ${currentUser.currencysym} $customprice4(\u0024 $custom41usd)',)),
+
+              ],
+            ),
+          )
       );
     }
   }
@@ -5429,23 +5564,31 @@ Cus5(){
           setState(()  {
 
             usersize = '$custom5';
+            customprice = customprice5;
+            custompriceusd = custom51usd;
+            custompriceinr = custom51inr;
+
           });
 
 
         },
-        child:   Container(
-          height:50,
-          width:MediaQuery.of(context).size.width,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              currentUser.country == "Europe"?  FittedBox(child: Text('$custom5 + $custom51eur',)):
-              currentUser.country == "India"?  FittedBox(child: Text('$custom5 + $custom51inr',)):
-              currentUser.country == "UK"?  FittedBox(child: Text('$custom5 + $custom51gbp',)):
-              currentUser.country == "USA"?  FittedBox(child: Text('$custom5 + $custom51usd',)):
-              FittedBox(child: Text('$custom5 + $custom51usd',)),            ],
-          ),
-        ),
+          child:   Container(
+            height:50,
+            width:MediaQuery.of(context).size.width,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+
+
+                currentUser.country == "India"?  FittedBox(child: Text('$custom5 + ${currentUser.currencysym} $custom51inr',)):
+                currentUser.country == "United States"?  FittedBox(child: Text('$custom5 + \u0024 $custom51usd',)):
+                currentUser.country == country?FittedBox(child: Text('$custom5 + ${currentUser.currencysym} $custom51inr(\u0024 $custom51usd)',)):
+
+                FittedBox(child: Text('$custom5 + ${currentUser.currencysym} $customprice5(\u0024 $custom51usd)',)),
+
+              ],
+            ),
+          )
       );
     }
   }
@@ -5462,23 +5605,31 @@ Cus6(){
           setState(()  {
 
             usersize = '$custom6';
+            customprice = customprice6;
+            custompriceusd = custom61usd;
+            custompriceinr = custom61inr;
+
           });
 
 
         },
-        child:   Container(
-          height:50,
-          width:MediaQuery.of(context).size.width,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              currentUser.country == "Europe"?  FittedBox(child: Text('$custom6 + $custom61eur',)):
-              currentUser.country == "India"?  FittedBox(child: Text('$custom6 + $custom61inr',)):
-              currentUser.country == "UK"?  FittedBox(child: Text('$custom6 + $custom61gbp',)):
-              currentUser.country == "USA"?  FittedBox(child: Text('$custom6 + $custom61usd',)):
-              FittedBox(child: Text('$custom6 + $custom61usd',)),            ],
-          ),
-        ),
+          child:   Container(
+            height:50,
+            width:MediaQuery.of(context).size.width,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+
+
+                currentUser.country == "India"?  FittedBox(child: Text('$custom6 + ${currentUser.currencysym} $custom61inr',)):
+                currentUser.country == "United States"?  FittedBox(child: Text('$custom6 + \u0024 $custom61usd',)):
+                currentUser.country == country?FittedBox(child: Text('$custom6 + ${currentUser.currencysym} $custom61inr(\u0024 $custom61usd)',)):
+
+                FittedBox(child: Text('$custom6 + ${currentUser.currencysym} $customprice6(\u0024 $custom61usd)',)),
+
+              ],
+            ),
+          )
       );
     }
   }
@@ -5494,24 +5645,31 @@ Cus7(){
         onTap: (){
           setState(()  {
 
-            usersize = '$custom7';
+            customprice = customprice7;
+            custompriceusd = custom71usd;
+            custompriceinr = custom71inr;
+
           });
 
 
         },
-        child:   Container(
-          height:50,
-          width:MediaQuery.of(context).size.width,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              currentUser.country == "Europe"?  FittedBox(child: Text('$custom7 + $custom71eur',)):
-              currentUser.country == "India"?  FittedBox(child: Text('$custom7 + $custom71inr',)):
-              currentUser.country == "UK"?  FittedBox(child: Text('$custom7 + $custom71gbp',)):
-              currentUser.country == "USA"?  FittedBox(child: Text('$custom7 + $custom71usd',)):
-              FittedBox(child: Text('$custom7 + $custom71usd',)),            ],
-          ),
-        ),
+          child:   Container(
+            height:50,
+            width:MediaQuery.of(context).size.width,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+
+
+                currentUser.country == "India"?  FittedBox(child: Text('$custom7 + ${currentUser.currencysym} $custom71inr',)):
+                currentUser.country == "United States"?  FittedBox(child: Text('$custom7 + \u0024 $custom71usd',)):
+                currentUser.country == country?FittedBox(child: Text('$custom7 + ${currentUser.currencysym} $custom71inr(\u0024 $custom71usd)',)):
+
+                FittedBox(child: Text('$custom7 + ${currentUser.currencysym} $customprice7(\u0024 $custom71usd)',)),
+
+              ],
+            ),
+          )
       );
     }
   }
@@ -5528,23 +5686,31 @@ Cus8(){
           setState(()  {
 
             usersize = '$custom8';
+            customprice = customprice8;
+            custompriceusd = custom81usd;
+            custompriceinr = custom81inr;
+
           });
 
 
         },
-        child:   Container(
-          height:50,
-          width:MediaQuery.of(context).size.width,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              currentUser.country == "Europe"?  FittedBox(child: Text('$custom8 + $custom81eur',)):
-              currentUser.country == "India"?  FittedBox(child: Text('$custom8 + $custom81inr',)):
-              currentUser.country == "UK"?  FittedBox(child: Text('$custom8 + $custom81gbp',)):
-              currentUser.country == "USA"?  FittedBox(child: Text('$custom8 + $custom81usd',)):
-              FittedBox(child: Text('$custom8 + $custom81usd',)),            ],
-          ),
-        ),
+          child:   Container(
+            height:50,
+            width:MediaQuery.of(context).size.width,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+
+
+                currentUser.country == "India"?  FittedBox(child: Text('$custom8 + ${currentUser.currencysym} $custom81inr',)):
+                currentUser.country == "United States"?  FittedBox(child: Text('$custom8 + \u0024 $custom81usd',)):
+                currentUser.country == country?FittedBox(child: Text('$custom8 + ${currentUser.currencysym} $custom81inr(\u0024 $custom81usd)',)):
+
+                FittedBox(child: Text('$custom8 + ${currentUser.currencysym} $customprice8(\u0024 $custom81usd)',)),
+
+              ],
+            ),
+          )
       );
     }
   }
@@ -5561,23 +5727,31 @@ Cus9(){
           setState(()  {
 
             usersize = '$custom9';
+            customprice = customprice9;
+            custompriceusd = custom91usd;
+            custompriceinr = custom91inr;
+
           });
 
 
         },
-        child:   Container(
-          height:50,
-          width:MediaQuery.of(context).size.width,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              currentUser.country == "Europe"?  FittedBox(child: Text('$custom9 + $custom91eur',)):
-              currentUser.country == "India"?  FittedBox(child: Text('$custom9 + $custom91inr',)):
-              currentUser.country == "UK"?  FittedBox(child: Text('$custom9 + $custom91gbp',)):
-              currentUser.country == "USA"?  FittedBox(child: Text('$custom9 + $custom91usd',)):
-              FittedBox(child: Text('$custom9 + $custom91usd',)),            ],
-          ),
-        ),
+          child:   Container(
+            height:50,
+            width:MediaQuery.of(context).size.width,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+
+
+                currentUser.country == "India"?  FittedBox(child: Text('$custom9 + ${currentUser.currencysym} $custom91inr',)):
+                currentUser.country == "United States"?  FittedBox(child: Text('$custom9 + \u0024 $custom91usd',)):
+                currentUser.country == country?FittedBox(child: Text('$custom9 + ${currentUser.currencysym} $custom91inr(\u0024 $custom91usd)',)):
+
+                FittedBox(child: Text('$custom9 + ${currentUser.currencysym} $customprice9(\u0024 $custom91usd)',)),
+
+              ],
+            ),
+          )
       );
     }
   }
@@ -5594,6 +5768,10 @@ Cus10(){
           setState(()  {
 
             usersize = '$custom10';
+            customprice = customprice10;
+            custompriceusd = custom101usd;
+            custompriceinr = custom101inr;
+
           });
 
 
@@ -5604,11 +5782,15 @@ Cus10(){
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              currentUser.country == "Europe"?  FittedBox(child: Text('$custom10 + $custom101eur',)):
-              currentUser.country == "India"?  FittedBox(child: Text('$custom10 + $custom101inr',)):
-              currentUser.country == "UK"?  FittedBox(child: Text('$custom10 + $custom101gbp',)):
-              currentUser.country == "USA"?  FittedBox(child: Text('$custom10 + $custom101usd',)):
-              FittedBox(child: Text('$custom10 + $custom101usd',)),            ],
+
+
+              currentUser.country == "India"?  FittedBox(child: Text('$custom10 + ${currentUser.currencysym} $custom101inr',)):
+currentUser.country == "United States"?  FittedBox(child: Text('$custom10 + \u0024 $custom101usd',)):
+currentUser.country == country?FittedBox(child: Text('$custom10 + ${currentUser.currencysym} $custom101inr(\u0024 $custom101usd)',)):
+
+              FittedBox(child: Text('$custom10 + ${currentUser.currencysym} $customprice10(\u0024 $custom101usd)',)),
+
+            ],
           ),
         ),
       );
@@ -5655,7 +5837,7 @@ else {
              onPressed: ()=> setState(() {
 
                usersize = 'MTO ';
-             });,
+             }),
              label: Text('Done',style:TextStyle(color:  Colors.white) ,),
            ),
          ),
@@ -6956,25 +7138,33 @@ TeenSizes(){
 
 
 }
-  Proceedtobuy({String prodId,
-  String ownerId,
-  String total,
-    String userSize,
-     String profileimg,
-     String username,
-    String mediaUrl,
- String productname,
+  Proceedtobuy({
+String ship,
+String shipcostU,
 
     }){
-    Navigator.push(context, MaterialPageRoute(builder: (context) =>AddressBuy(Amount:total,Size: userSize,OwnerId: ownerId,prodId:prodId ,
-        profileimg: profileimg ,
+    Navigator.push(context, MaterialPageRoute(builder: (context) =>AddressBuy(
+Size: usersize,
+OwnerId: ownerId,prodId:prodId ,
+        profileimg: photoUrl ,
         username: username,
-        mediaUrl: mediaUrl,
+        mediaUrl: shopmediaUrl.first,
         productname:productname,
-      eur:eur,
       usd:usd,
       inr:inr,
-      gbp:gbp,
+         price:price,
+          customprice:customprice,
+country:country,
+color:color,
+colorText:usercolor,
+mtoText:mtoController.text ,
+
+shipcostusd: ship,
+shipcostuser: shipcostU,
+
+         customusd:custompriceusd,
+custominr:custompriceinr,
+
         xxxs: xxxs,
         xxs: xxs,
         xs: xs,
@@ -7111,7 +7301,15 @@ SelectCol(){
                         // alignment:Alignment.centerLeft,
                         child:   FloatingActionButton.extended(
                           backgroundColor: kblue,
-                          onPressed: ()=>color(),
+                          onPressed: () {
+                           if( currentUser.country == 'India' && currentUser.country == country){
+                             Proceedtobuy(ship:shipcostinr,shipcostU:shipcostinr);
+                           }  else if( currentUser.country == country){
+                             Proceedtobuy(ship:shipcostusd,shipcostU:shipcostinr);
+                           } else {
+                             Proceedtobuy(ship:shipcostinterusd,shipcostU:shipcostuser);
+                           }
+                          },
                           label: Text('Proceed',style:TextStyle(color:  Colors.white) ,),
                         ),
                       ),
@@ -7131,7 +7329,35 @@ SelectCol(){
             builder: (BuildContext context) {
               return
                 Container(
-                  child:       WomenSizes(),
+
+                    child: Column(children:[ Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        OutlinedButton(
+                          child:Text("$usersize"),
+                          onPressed: () {SelectSize();  },
+                        ), OutlinedButton(
+                          child:Text("$usercolor"),
+                          onPressed: () {SelectCol();  },
+                        ),
+                        Container(
+                          // alignment:Alignment.centerLeft,
+                          child:   FloatingActionButton.extended(
+                            backgroundColor: kblue,
+                            onPressed: () {
+                              if( currentUser.country == 'India' && currentUser.country == country){
+                                Proceedtobuy(ship:shipcostinr,shipcostU:shipcostinr);
+                              }  else if( currentUser.country == country){
+                                Proceedtobuy(ship:shipcostusd,shipcostU:shipcostinr);
+                              } else {
+                                Proceedtobuy(ship:shipcostinterusd,shipcostU:shipcostuser);
+                              }
+                            },
+                            label: Text('Proceed',style:TextStyle(color:  Colors.white) ,),
+                          ),
+                        ),
+                      ],
+                    ),])
 
                 );
 
@@ -7146,7 +7372,36 @@ SelectCol(){
             builder: (BuildContext context) {
               return
                 Container(
-                  child:        BabySizes(),
+
+                    child: Column(children:[ Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        OutlinedButton(
+                          child:Text("$usersize"),
+                          onPressed: () {SelectSize();  },
+                        ), OutlinedButton(
+                          child:Text("$usercolor"),
+                          onPressed: () {SelectCol();  },
+                        ),
+                        Container(
+                          // alignment:Alignment.centerLeft,
+                          child:   FloatingActionButton.extended(
+                            backgroundColor: kblue,
+                            onPressed: () {
+                              if( currentUser.country == 'India' && currentUser.country == country){
+                                Proceedtobuy(ship:shipcostinr,shipcostU:shipcostinr);
+                              }  else if( currentUser.country == country){
+                                Proceedtobuy(ship:shipcostusd,shipcostU:shipcostinr);
+                              } else {
+                                Proceedtobuy(ship:shipcostinterusd,shipcostU:shipcostuser);
+                              }
+                            },
+                            label: Text('Proceed',style:TextStyle(color:  Colors.white) ,),
+                          ),
+                        ),
+                      ],
+                    ),])
+
                 );
 
 
@@ -7162,7 +7417,35 @@ SelectCol(){
             builder: (BuildContext context) {
               return
                 Container(
-                  child:  KidSizes(),
+
+                    child: Column(children:[ Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        OutlinedButton(
+                          child:Text("$usersize"),
+                          onPressed: () {SelectSize();  },
+                        ), OutlinedButton(
+                          child:Text("$usercolor"),
+                          onPressed: () {SelectCol();  },
+                        ),
+                        Container(
+                          // alignment:Alignment.centerLeft,
+                          child:   FloatingActionButton.extended(
+                            backgroundColor: kblue,
+                            onPressed: () {
+                              if( currentUser.country == 'India' && currentUser.country == country){
+                                Proceedtobuy(ship:shipcostinr,shipcostU:shipcostinr);
+                              }  else if( currentUser.country == country){
+                                Proceedtobuy(ship:shipcostusd,shipcostU:shipcostinr);
+                              } else {
+                                Proceedtobuy(ship:shipcostinterusd,shipcostU:shipcostuser);
+                              }
+                            },
+                            label: Text('Proceed',style:TextStyle(color:  Colors.white) ,),
+                          ),
+                        ),
+                      ],
+                    ),])
 
                 );
 
@@ -7177,8 +7460,35 @@ SelectCol(){
             builder: (BuildContext context) {
               return
                 Container(
-                  child:         TeenSizes(),
 
+                    child: Column(children:[ Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        OutlinedButton(
+                          child:Text("$usersize"),
+                          onPressed: () {SelectSize();  },
+                        ), OutlinedButton(
+                          child:Text("$usercolor"),
+                          onPressed: () {SelectCol();  },
+                        ),
+                        Container(
+                          // alignment:Alignment.centerLeft,
+                          child:   FloatingActionButton.extended(
+                            backgroundColor: kblue,
+                            onPressed: () {
+                              if( currentUser.country == 'India' && currentUser.country == country){
+                                Proceedtobuy(ship:shipcostinr,shipcostU:shipcostinr);
+                              }  else if( currentUser.country == country){
+                                Proceedtobuy(ship:shipcostusd,shipcostU:shipcostinr);
+                              } else {
+                                Proceedtobuy(ship:shipcostinterusd,shipcostU:shipcostuser);
+                              }
+                            },
+                            label: Text('Proceed',style:TextStyle(color:  Colors.white) ,),
+                          ),
+                        ),
+                      ],
+                    ),])
 
                 );
 

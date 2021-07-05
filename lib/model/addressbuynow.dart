@@ -403,6 +403,16 @@ class addressview extends StatelessWidget {
  final String usd;
  final String inr;
  final String gbp;
+ final String mtoText;
+ final String price;
+ final String customprice;
+ final String country;
+ final String color;
+ final String shipcostusd;
+ final String shipcostuser;
+ final String customusd;
+ final String custominr;
+
  final int xxxs;
  final int xxs;
  final int xs;
@@ -486,6 +496,16 @@ class addressview extends StatelessWidget {
  final int color10;
  final String colorText;
  final String mtoText;
+  final String price;
+  final String customprice;
+  final String country;
+  final String color;
+  final String shipcostusd;
+ final String shipcostuser;
+  final String customusd;
+  final String custominr;
+
+
 
  addressview({  this.usd,
   this.eur,
@@ -536,7 +556,7 @@ class addressview extends StatelessWidget {
    this.custom62, this.custom72, this.custom82, this.custom92, this.custom102,
    this.color1, this.color2, this.color3, this.color4, this.color5, this.color6,
    this.color7, this.color8, this.color9, this.color10, this.colorText, this.mtoText,
-  this.Type,this.productname, this.Fullname, this.Addresss, this.City, this.State, this.Country, this.Zip, this.Dialcode, this.Phone, this.userSize, this.prodId, this.total, this.ownerId, this.profileimg, this.username, this.mediaUrl});
+  this.Type,this.productname, this.Fullname, this.Addresss, this.City, this.State, this.Country, this.Zip, this.Dialcode, this.Phone, this.userSize, this.prodId, this.total, this.ownerId, this.profileimg, this.username, this.mediaUrl, this.price, this.customprice, this.country, this.color, this.shipcostusd, this.shipcostuser, this.customusd, this.custominr});
   @override
   Widget build(BuildContext context) {
     return

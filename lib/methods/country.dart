@@ -1,6 +1,11 @@
 import 'package:fashow/HomePage.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
+var format = NumberFormat.simpleCurrency(
+  name: "GBP", //currencyCode
+);
+String hgcv = format.currencySymbol;
 Country(){
   if(currentUser.country=='India'){
     Text('₹');

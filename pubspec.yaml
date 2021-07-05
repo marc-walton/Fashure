@@ -111,6 +111,8 @@ dependencies:
   back_pressed: ^0.0.2
   modal_bottom_sheet: ^2.0.0
   flutter_chip_tags: ^1.0.4
+  flutter_country_picker: ^0.1.6
+
 
 
 

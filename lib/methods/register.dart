@@ -5,6 +5,9 @@ import 'package:fashow/HomePage.dart';
 import 'package:dropdown_formfield/dropdown_formfield.dart';
 import 'package:fashow/Constants.dart';
 import 'package:alert_dialog/alert_dialog.dart';
+import 'package:flutter_country_picker/flutter_country_picker.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:intl/intl.dart';
 
 class RegisterPage extends StatefulWidget {
   RegisterPage({Key key}) : super(key: key);
@@ -21,10 +24,17 @@ class _RegisterPageState extends State<RegisterPage> {
   TextEditingController pwdInputController;
   TextEditingController confirmPwdInputController;
   String dropdownValue = "";
+  Country _selected;
+
   String lang = "en";
+String  country = "";
+String currency = "";
+String currencyISO = "";
+String currencysym = "";
 
   final DateTime timestamp = DateTime.now();
   bool save = false;
+
   @override
   initState() {
 
@@ -77,11 +87,11 @@ class _RegisterPageState extends State<RegisterPage> {
                         decoration: InputDecoration(
                             labelStyle:  TextStyle(color:kText),
                             hintStyle:  TextStyle(color:kText),
-                            labelText: 'Full Name*', hintText: "Full Name"),
+                            labelText: 'Full Name', hintText: "Full Name"),
                         controller: firstNameInputController,
                         validator: (value) {
                           if (value.length < 3) {
-                            return "Please enter a valid name.";
+                            return "Please enter a valid name";
                           }
                         },
                       ),
@@ -174,6 +184,36 @@ class _RegisterPageState extends State<RegisterPage> {
 
                         ],
                       ),
+  Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: <Widget>[
+                          Container(
+                            padding: EdgeInsets.all(16),
+                            child: CountryPicker(
+                              dense: false,
+                              showFlag: true,  //displays flag, true by default
+                              showDialingCode: false, //displays dialing code, false by default
+                              showName: true, //displays country name, true by default
+                              showCurrency: true, //eg. 'British pound'
+                              showCurrencyISO: true, //eg. 'GBP'
+                              onChanged: (Country select) {
+                                setState(() {
+                                  _selected = select;
+                                  country = select.name;
+                                  currency = select.currency;
+                                  currencyISO = select.currencyISO;
+                                  var format = NumberFormat.simpleCurrency(
+                                    name: "${select.currencyISO}", //currencyCode
+                                  );
+                                  currencysym = format.currencySymbol;
+                                });
+                              },
+                              selectedCountry:_selected,
+                            ),
+            ),
+
+                        ],
+                      ),
 
                       RaisedButton(
                         color: kblue,
@@ -181,7 +221,11 @@ class _RegisterPageState extends State<RegisterPage> {
                         child: Text("Register",        style: TextStyle(color:Colors.white),),
                         textColor: Colors.white,
                         onPressed: () {
-                          if (_registerFormKey.currentState.validate()||save == true) {
+                          if(country == ""){Fluttertoast.showToast(
+    msg: "Select your region" , timeInSecForIos: 4);}
+
+
+                      else    if (_registerFormKey.currentState.validate()||save == true) {
                             if (pwdInputController.text ==
                                 confirmPwdInputController.text) {
                               FirebaseAuth.instance
@@ -199,13 +243,19 @@ class _RegisterPageState extends State<RegisterPage> {
                                 "displayName": firstNameInputController.text,
                                 "bio": "",
                                 "client": 0 ,
-                                "country":dropdownValue,
+
+                                "country":country,
+                              "currency":currency,
+                              "currencyISO":currencyISO,
+                                 "currencysym":currencysym,
+
                                 "timestamp": timestamp,
                                 "language": "en",
                                 "seller": false,
   "visits": 0,
   "ban": false,
  "sales": 0,
+ "revenue": 0,
 
 
                               });
@@ -273,6 +323,8 @@ class _RegisterPageState extends State<RegisterPage> {
                                   });
                             }
                           }
+                          else {          _registerFormKey.currentState.validate()? Container(): Fluttertoast.showToast(
+                              msg: "Fill the required fields " , timeInSecForIos: 4);}
                         },
                       ),
                       Text("Already have an account?",style: TextStyle(color:kText),),
