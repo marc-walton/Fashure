@@ -1,0 +1,56 @@
+{
+  "project_info": {
+    "project_number": "624424283399",
+    "firebase_url": "https://fashure-app-default-rtdb.firebaseio.com",
+    "project_id": "fashure-app",
+    "storage_bucket": "fashure-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:624424283399:android:03c169776dbccdd4a469a2",
+        "android_client_info": {
+          "package_name": "com.fashure.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "624424283399-ahg1i4qfo7jvp5qj1ne8mcjtv2vbn1mb.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.fashure.app",
+            "certificate_hash": "f44d18b0631ef586b11385e6cffb5b45a17d64a7"
+          }
+        },
+        {
+          "client_id": "624424283399-nlnarj4jqs3getbk8kqqusk44dtevb1b.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.fashure.app",
+            "certificate_hash": "5200d0a257f115432e9441893c6d3de6d2e4569f"
+          }
+        },
+        {
+          "client_id": "624424283399-f1l35nh40sgntcqmh7o4a1p2gn8gju7j.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCxZXnmBbKHZWyyZUmqlciynkCSzdSkOdk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "624424283399-f1l35nh40sgntcqmh7o4a1p2gn8gju7j.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
