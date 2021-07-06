@@ -308,9 +308,7 @@ uk(){
                Text('Price:  ${widget.price}', style: TextStyle(color: kText,
                 fontWeight: FontWeight.bold)),
 
-            Text('£  ${widget.total}',style: TextStyle(color: kText,
-              fontSize: 20.0,
-            )),
+
           ],
         ),
         st(),

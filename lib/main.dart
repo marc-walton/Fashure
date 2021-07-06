@@ -1,7 +1,7 @@
 import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:fashow/provider/image_upload_provider.dart';
 import 'package:fashow/user.dart';
-
+import 'package:neon/neon.dart';
 import 'package:flutter/material.dart';
 //import 'package:flutter_svg/svg.dart';
 import 'package:flutter/cupertino.dart';
@@ -106,22 +106,26 @@ class _FaShowState extends State<FaShow> {
         // ChangeNotifierProvider(create: (_) => UserProvider()),
       ],
       child: GetMaterialApp(
+        debugShowCheckedModeBanner: false,
         home:
         AnimatedSplashScreen(
+
             duration: 2000,
-            splash: Text('FASHURE',
+            splash:
+
+            Text('FASHURE',
               style: TextStyle(
-                  fontFamily: "MajorMonoDisplay",
-                  fontSize: 40,
+                  fontFamily: "Neoneon",
+                  fontSize: 50,
                   color: Colors.white),),
 
             nextScreen: Homepage(userid: user,auth: isAuth,),
             splashTransition: SplashTransition.fadeTransition,
-            backgroundColor: Colors.blue
+            backgroundColor: Colors.black
         ),
       ),
     );
-    ;
+
   }
 
 

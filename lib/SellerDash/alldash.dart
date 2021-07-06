@@ -118,8 +118,12 @@ getop() async {
               title: FittedBox(
                 fit: BoxFit.contain,
                 child: Text(
-                  "Dashboard",
-                  style: TextStyle(color: Colors.white),
+                  "DASHBOARD",
+                  style: TextStyle(
+                    fontSize: 40,
+                      color: Colors.white,
+                    fontFamily: "Halfomania"
+                  ),
                 ),
               ),
               bottom:  PreferredSize(
@@ -127,13 +131,14 @@ getop() async {
                 child: Container(
                   height: 60.0,
                   child: TabBar(
+                    ///filled
+                    labelStyle:TextStyle(fontFamily: "AlteroDCURegular" ),
+                    ///outline
+                    unselectedLabelStyle:TextStyle(fontFamily:"AlteroDCU" ),
                     isScrollable: true,
                     labelColor: Colors.white,
                     unselectedLabelColor: kIcon,
-                    indicatorSize:TabBarIndicatorSize.tab,
-                    indicator:BubbleTabIndicator(indicatorHeight:40.0,
-                      indicatorColor: kblue,
-                    ),
+
                     tabs:[
                       FittedBox(
                         fit: BoxFit.contain,

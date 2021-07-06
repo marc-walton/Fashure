@@ -1,3 +1,4 @@
+import 'package:dropdown_formfield/dropdown_formfield.dart';
 import 'package:fashow/model/addressbuynow.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:paginate_firestore/paginate_firestore.dart';
@@ -5,7 +6,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:photo_view/photo_view.dart';
-import 'package:intl/intl.dart';
+import 'package:get/get.dart';
 import 'package:smooth_star_rating/smooth_star_rating.dart';
 import 'package:fashow/HomePage.dart';
 import 'package:fashow/ActivityFeed.dart';
@@ -1270,9 +1271,18 @@ this.country,
 
   }
 currency()async{
+    print("cg");
   var resultUSD = await Currency.getConversion(
       from: 'EUR', to: 'USD', amount: eur);
-  var resultUSD1 = await Currency.getConversion(
+    print("csfgsdfbsdfdfg");
+setState(() {
+
+
+  e = resultUSD.rate;
+  price =e.toStringAsFixed(2);
+
+});
+    var resultUSD1 = await Currency.getConversion(
       from: '${currentUser.currencyISO}', to: 'USD', amount: custom11usd ??  0);
   var resultUSD2 = await Currency.getConversion(
       from: '${currentUser.currencyISO}', to: 'USD', amount: custom21usd ??  0);
@@ -1307,41 +1317,30 @@ currency()async{
  var c10;
 var s;
   setState(() {
-    e = resultUSD.rate;
-e =e.toStringAsFixed(2);
-    e = price;
-   c1 = resultUSD1.rate;
-c1 =c1.toStringAsFixed(2);
-    c1 = customprice1;
+
+
+    c1 = resultUSD1.rate;
+    customprice1 =c1.toStringAsFixed(2);
    c2 = resultUSD2.rate;
-c2 =c2.toStringAsFixed(2);
-    c2 = customprice2;
+    customprice2 =c2.toStringAsFixed(2);
    c3 = resultUSD3.rate;
-c3 =c3.toStringAsFixed(2);
-    c3 = customprice3;
+    customprice3 =c3.toStringAsFixed(2);
    c4 = resultUSD4.rate;
-c4 = c4.toStringAsFixed(2);
-    c4 = customprice4;
+    customprice4 = c4.toStringAsFixed(2);
    c5 = resultUSD5.rate;
-c5 =c5.toStringAsFixed(2);
-    c5 = customprice5;
+    customprice5 =c5.toStringAsFixed(2);
    c6 = resultUSD6.rate;
-c6 =c6.toStringAsFixed(2);
-    c6 = customprice6;
+    customprice6 =c6.toStringAsFixed(2);
    c7 = resultUSD7.rate;
-c7 =c7.toStringAsFixed(2);
-    c7 = customprice7;
+    customprice7 =c7.toStringAsFixed(2);
    c8 = resultUSD8.rate;
-c8 =c8.toStringAsFixed(2);
-    c8 = customprice8;
+    customprice8 =c8.toStringAsFixed(2);
    c9 = resultUSD9.rate;
-c9 =c9.toStringAsFixed(2);
-    c9 = customprice9;
+    customprice9 =c9.toStringAsFixed(2);
    c10 = resultUSD10.rate;
-c10 =c10.toStringAsFixed(2);
-    c10 = customprice10;
+    customprice10 =c10.toStringAsFixed(2);
    s = resultUSD11.rate;
-s =s.toStringAsFixed(2);
+    shipcostuser =s.toStringAsFixed(2);
     s = shipcostuser;
 
     isUploading = false;
@@ -1696,6 +1695,7 @@ FXL(){
           setState(()  {
 
             usersize = '4XL';
+            Get.back();
           });
 
 
@@ -1726,6 +1726,8 @@ FIVXL(){
           setState(()  {
 
             usersize = '5XL';
+            Get.back();
+
           });
 
 
@@ -7254,6 +7256,7 @@ mtoText:mtoController.text ,
 
 
   }
+
 SelectCol(){
   return
     Expanded(child:Container(
@@ -7279,51 +7282,102 @@ SelectCol(){
     ));
 
 }
-  Buynow(parentContext) {
+  void Buynow(parentContext) {
     if (gender == 'Men') {
-      return
+
         showModalBottomSheet(
             context: parentContext,
             builder: (BuildContext context) {
               return
-                Container(
+               StatefulBuilder(
+                   builder: (BuildContext ctx, StateSetter stateSetter){
+                     bool pressAttention = true;
+                      String size;
 
-                  child: Column(children:[ Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      OutlinedButton(
-                          child:Text("$usersize"),
-                        onPressed: () {SelectSize();  },
-                      ), OutlinedButton(
-                          child:Text("$usercolor"),
-                        onPressed: () {SelectCol();  },
+                 return
+                Container(
+                    height: 200,
+
+                    child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+
+                        children: [
+
+                          Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        RaisedButton(
+                          color: pressAttention ? Colors.black : Colors.blue,
+                        highlightColor:Colors.blue,
+                          onPressed: (){
+
+                            stateSetter(() {
+                    usersize = '4XL';
+                    pressAttention = !pressAttention;
+                  print(pressAttention);});
+
+
+                },
+                  child:   Container(
+                    height:50,
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          FittedBox(child: Text('4XL',)),
+                        ],
                       ),
+                    ),
+                  ),
+                ),
+                        OutlinedButton(
+                          child: Text("$usersize"),
+                          onPressed: () {
+                            SelectSize(parentContext);
+                            stateSetter(() {
+                              usersize = size;
+                              pressAttention  = !pressAttention;
+                              print(pressAttention);});
+                          },
+                        ), OutlinedButton(
+                          child: Text("$usercolor"),
+                          onPressed: () {
+                            SelectCol();
+                          },
+                        ),
+                      ],
+                    ),
                       Container(
                         // alignment:Alignment.centerLeft,
-                        child:   FloatingActionButton.extended(
+                        child: FloatingActionButton.extended(
                           backgroundColor: kblue,
                           onPressed: () {
-                           if( currentUser.country == 'India' && currentUser.country == country){
-                             Proceedtobuy(ship:shipcostinr,shipcostU:shipcostinr);
-                           }  else if( currentUser.country == country){
-                             Proceedtobuy(ship:shipcostusd,shipcostU:shipcostinr);
-                           } else {
-                             Proceedtobuy(ship:shipcostinterusd,shipcostU:shipcostuser);
-                           }
+                            if (currentUser.country == 'India' &&
+                                currentUser.country == country) {
+                              Proceedtobuy(
+                                  ship: shipcostinr, shipcostU: shipcostinr);
+                            } else if (currentUser.country == country) {
+                              Proceedtobuy(
+                                  ship: shipcostusd, shipcostU: shipcostinr);
+                            } else {
+                              Proceedtobuy(ship: shipcostinterusd,
+                                  shipcostU: shipcostuser);
+                            }
                           },
-                          label: Text('Proceed',style:TextStyle(color:  Colors.white) ,),
+                          label: Text(
+                            'Proceed', style: TextStyle(color: Colors.white),),
                         ),
                       ),
-                    ],
-                  ),])
+                    ])
 
                 );
-
+            });
             }
         );
     }
     else if (gender == 'Women') {
-      return
+
         showModalBottomSheet(
             backgroundColor: kSecondaryColor,
             context: parentContext,
@@ -7336,29 +7390,30 @@ SelectCol(){
                       children: [
                         OutlinedButton(
                           child:Text("$usersize"),
-                          onPressed: () {SelectSize();  },
+                          onPressed: () {SelectSize(parentContext);  },
                         ), OutlinedButton(
                           child:Text("$usercolor"),
                           onPressed: () {SelectCol();  },
                         ),
-                        Container(
-                          // alignment:Alignment.centerLeft,
-                          child:   FloatingActionButton.extended(
-                            backgroundColor: kblue,
-                            onPressed: () {
-                              if( currentUser.country == 'India' && currentUser.country == country){
-                                Proceedtobuy(ship:shipcostinr,shipcostU:shipcostinr);
-                              }  else if( currentUser.country == country){
-                                Proceedtobuy(ship:shipcostusd,shipcostU:shipcostinr);
-                              } else {
-                                Proceedtobuy(ship:shipcostinterusd,shipcostU:shipcostuser);
-                              }
-                            },
-                            label: Text('Proceed',style:TextStyle(color:  Colors.white) ,),
-                          ),
-                        ),
                       ],
-                    ),])
+                    ),
+                      Container(
+                        // alignment:Alignment.centerLeft,
+                        child:   FloatingActionButton.extended(
+                          backgroundColor: kblue,
+                          onPressed: () {
+                            if( currentUser.country == 'India' && currentUser.country == country){
+                              Proceedtobuy(ship:shipcostinr,shipcostU:shipcostinr);
+                            }  else if( currentUser.country == country){
+                              Proceedtobuy(ship:shipcostusd,shipcostU:shipcostinr);
+                            } else {
+                              Proceedtobuy(ship:shipcostinterusd,shipcostU:shipcostuser);
+                            }
+                          },
+                          label: Text('Proceed',style:TextStyle(color:  Colors.white) ,),
+                        ),
+                      ),
+                    ])
 
                 );
 
@@ -7366,7 +7421,6 @@ SelectCol(){
         );
     }
     else if (gender == 'Baby-Boys'||gender == 'Baby-Girls') {
-      return
         showModalBottomSheet(
             backgroundColor: kSecondaryColor,
             context: parentContext,
@@ -7379,39 +7433,37 @@ SelectCol(){
                       children: [
                         OutlinedButton(
                           child:Text("$usersize"),
-                          onPressed: () {SelectSize();  },
+                          onPressed: () {SelectSize(parentContext);  },
                         ), OutlinedButton(
                           child:Text("$usercolor"),
                           onPressed: () {SelectCol();  },
                         ),
-                        Container(
-                          // alignment:Alignment.centerLeft,
-                          child:   FloatingActionButton.extended(
-                            backgroundColor: kblue,
-                            onPressed: () {
-                              if( currentUser.country == 'India' && currentUser.country == country){
-                                Proceedtobuy(ship:shipcostinr,shipcostU:shipcostinr);
-                              }  else if( currentUser.country == country){
-                                Proceedtobuy(ship:shipcostusd,shipcostU:shipcostinr);
-                              } else {
-                                Proceedtobuy(ship:shipcostinterusd,shipcostU:shipcostuser);
-                              }
-                            },
-                            label: Text('Proceed',style:TextStyle(color:  Colors.white) ,),
-                          ),
-                        ),
                       ],
-                    ),])
+                    ),
+                      Container(
+                        // alignment:Alignment.centerLeft,
+                        child:   FloatingActionButton.extended(
+                          backgroundColor: kblue,
+                          onPressed: () {
+                            if( currentUser.country == 'India' && currentUser.country == country){
+                              Proceedtobuy(ship:shipcostinr,shipcostU:shipcostinr);
+                            }  else if( currentUser.country == country){
+                              Proceedtobuy(ship:shipcostusd,shipcostU:shipcostinr);
+                            } else {
+                              Proceedtobuy(ship:shipcostinterusd,shipcostU:shipcostuser);
+                            }
+                          },
+                          label: Text('Proceed',style:TextStyle(color:  Colors.white) ,),
+                        ),
+                      ),
+                    ])
 
                 );
-
-
-
             }
         );
     }
     else if (gender == 'Kids-Boys'||gender == 'Kids-Girls') {
-      return
+
         showModalBottomSheet(
             backgroundColor: kSecondaryColor,
             context: parentContext,
@@ -7424,29 +7476,30 @@ SelectCol(){
                       children: [
                         OutlinedButton(
                           child:Text("$usersize"),
-                          onPressed: () {SelectSize();  },
+                          onPressed: () {SelectSize(parentContext);  },
                         ), OutlinedButton(
                           child:Text("$usercolor"),
                           onPressed: () {SelectCol();  },
                         ),
-                        Container(
-                          // alignment:Alignment.centerLeft,
-                          child:   FloatingActionButton.extended(
-                            backgroundColor: kblue,
-                            onPressed: () {
-                              if( currentUser.country == 'India' && currentUser.country == country){
-                                Proceedtobuy(ship:shipcostinr,shipcostU:shipcostinr);
-                              }  else if( currentUser.country == country){
-                                Proceedtobuy(ship:shipcostusd,shipcostU:shipcostinr);
-                              } else {
-                                Proceedtobuy(ship:shipcostinterusd,shipcostU:shipcostuser);
-                              }
-                            },
-                            label: Text('Proceed',style:TextStyle(color:  Colors.white) ,),
-                          ),
-                        ),
                       ],
-                    ),])
+                    ),
+                      Container(
+                        // alignment:Alignment.centerLeft,
+                        child:   FloatingActionButton.extended(
+                          backgroundColor: kblue,
+                          onPressed: () {
+                            if( currentUser.country == 'India' && currentUser.country == country){
+                              Proceedtobuy(ship:shipcostinr,shipcostU:shipcostinr);
+                            }  else if( currentUser.country == country){
+                              Proceedtobuy(ship:shipcostusd,shipcostU:shipcostinr);
+                            } else {
+                              Proceedtobuy(ship:shipcostinterusd,shipcostU:shipcostuser);
+                            }
+                          },
+                          label: Text('Proceed',style:TextStyle(color:  Colors.white) ,),
+                        ),
+                      ),
+                    ])
 
                 );
 
@@ -7454,7 +7507,7 @@ SelectCol(){
         );
     }
     else if (gender == 'Teen-Boys'||gender == 'Teen-Girls') {
-      return
+
         showModalBottomSheet(
             backgroundColor: kSecondaryColor,
             context: parentContext,
@@ -7467,29 +7520,30 @@ SelectCol(){
                       children: [
                         OutlinedButton(
                           child:Text("$usersize"),
-                          onPressed: () {SelectSize();  },
+                          onPressed: () {SelectSize(parentContext);  },
                         ), OutlinedButton(
                           child:Text("$usercolor"),
                           onPressed: () {SelectCol();  },
                         ),
-                        Container(
-                          // alignment:Alignment.centerLeft,
-                          child:   FloatingActionButton.extended(
-                            backgroundColor: kblue,
-                            onPressed: () {
-                              if( currentUser.country == 'India' && currentUser.country == country){
-                                Proceedtobuy(ship:shipcostinr,shipcostU:shipcostinr);
-                              }  else if( currentUser.country == country){
-                                Proceedtobuy(ship:shipcostusd,shipcostU:shipcostinr);
-                              } else {
-                                Proceedtobuy(ship:shipcostinterusd,shipcostU:shipcostuser);
-                              }
-                            },
-                            label: Text('Proceed',style:TextStyle(color:  Colors.white) ,),
-                          ),
-                        ),
                       ],
-                    ),])
+                    ),
+                      Container(
+                        // alignment:Alignment.centerLeft,
+                        child:   FloatingActionButton.extended(
+                          backgroundColor: kblue,
+                          onPressed: () {
+                            if( currentUser.country == 'India' && currentUser.country == country){
+                              Proceedtobuy(ship:shipcostinr,shipcostU:shipcostinr);
+                            }  else if( currentUser.country == country){
+                              Proceedtobuy(ship:shipcostusd,shipcostU:shipcostinr);
+                            } else {
+                              Proceedtobuy(ship:shipcostinterusd,shipcostU:shipcostuser);
+                            }
+                          },
+                          label: Text('Proceed',style:TextStyle(color:  Colors.white) ,),
+                        ),
+                      ),
+                    ])
 
                 );
 
@@ -7499,31 +7553,35 @@ SelectCol(){
 
 
   }
-SelectSize(){  return
+SelectSize(parentContext){  return
   showDialog<void>(
-  context: context,
+  context: parentContext,
   // useRootNavigator:true,
 
   barrierDismissible: true,
   // false = user must tap button, true = tap outside dialog
   builder: (BuildContext dialogContext) {
     return
+    StatefulBuilder(builder: (context,state){
+
+      return
       Dialog(
 
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(20),),
         child: Container(
             height: 400,
-            child:SingleChildScrollView(child:Column(
+            child:Column(
               children: [
-                gender == 'Men'? MenSizes():
+
+          gender == 'Men'? MenSizes():
                 gender == 'Women'? WomenSizes():
                 gender == 'Baby-Boys'||gender == 'Baby-Girls'  ?BabySizes():
                 gender == 'Kids-Boys'||gender == 'Kids-Girls'?  KidSizes():
                 gender == 'Teen-Boys'||gender == 'Teen-Girls'? TeenSizes():Container(),
               ],
-            ),)),
-      );
+            )),
+      );});
   },
 );
 }

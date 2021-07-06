@@ -113,6 +113,7 @@ dependencies:
   flutter_chip_tags: ^1.0.4
   flutter_country_picker: ^0.1.6
 
+  neon: ^0.0.1
 
 
 
@@ -161,6 +162,20 @@ flutter:
     - assets/img/shop.png
 
   fonts:
+    - family: AlteroDCU
+      fonts:
+        - asset: assets\fonts\Altero DCU\Altero-Outline.otf
+
+    - family: AlteroDCURegular
+      fonts:
+        - asset: assets\fonts\Altero DCU\Altero-Regular.otf
+
+    - family: Halfomania
+      fonts:
+        - asset: assets\fonts\Halfomania\Halfomania-Regular.ttf
+    - family: Neoneon
+      fonts:
+        - asset: assets\fonts\Neoneon\Neoneon.otf
     - family: MajorMonoDisplay
       fonts:
         - asset: assets\fonts\MajorMonoDisplay\MajorMonoDisplay-Regular.ttf

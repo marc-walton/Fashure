@@ -12,6 +12,8 @@ import 'package:fashow/user.dart';
 import 'package:fashow/SellerDash/Editshop.dart';
 import 'package:fashow/product_custom.dart';
 import 'package:fashow/Product_screen.dart';
+
+import '../Products.dart';
 class SellerShop extends StatefulWidget {
   @override
   _SellerShopState createState() => _SellerShopState();
@@ -229,7 +231,7 @@ isLive: true,
                           alignment: Alignment.center,
                           children: <Widget>[
                             ClipRRect(
-                                borderRadius: BorderRadius.circular(20.0),child: cachedNetworkImage(shopmediaUrl)),
+                                borderRadius: BorderRadius.circular(20.0),child:pics(userid:ownerId,prodid: prodId)),
                           ],),),
                       df(productname:productname, usd:usd,inr:inr,eur:eur,gbp:gbp, prodId:prodId, ownerId:ownerId,),
                       Divider(color: kGrey,),

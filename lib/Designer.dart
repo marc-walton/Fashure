@@ -254,28 +254,45 @@ class _DesignerState extends State<Designer>  with  TickerProviderStateMixin{
         appBar: PreferredSize(
         preferredSize: Size.fromHeight(100.0),
         child: AppBar(title:  FittedBox(fit:BoxFit.contain,
-            child: Text("Freelancers",style: TextStyle(fontSize: 30,fontFamily: 'MajorMonoDisplay'),)),
+            child: Text("FREELANCERS",style: TextStyle(fontSize: 40,fontFamily: 'Halfomania'),)),
             backgroundColor: kPrimaryColor,
 
             bottom: new TabBar(
+              ///filled
+              labelStyle:TextStyle(fontFamily: "AlteroDCURegular" ),
+              ///outline
+              unselectedLabelStyle:TextStyle(fontFamily:"AlteroDCU" ),
 isScrollable: true,
               controller: _controller,
               tabs: <Widget>[
-                FaIcon(FontAwesomeIcons.rulerCombined),
-                FaIcon(FontAwesomeIcons.pencilRuler),
-                 FaIcon(FontAwesomeIcons.edit),
+           Text(' DESIGNER ',style: TextStyle(
+               fontWeight: FontWeight.bold,
+                fontSize: 30),),
+                Text(' ILLUSTRATOR ',style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 30),),
+                Text(' CONTENT WRITER ',style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 30),),
+          Text(' STYLIST ',style: TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: 30),),
 
-                SvgPicture.asset(
-                  'assets/img/F-PRIVATE-MODE.svg',
-                  color: Colors.white,
-                  height: 30,
-                ),
-                Icon(Entypo.man,),
-                ImageIcon(
-                  AssetImage("assets/img/makeup.png"),),
-                FaIcon(FontAwesomeIcons.cut),
-                Icon(Icons.camera_alt,),
-                FaIcon(FontAwesomeIcons.personBooth),
+                Text(' MODEL ',style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 30),),
+                Text(' MAKEUP ARTIST ',style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 30),),
+                Text(' HAIR DRESSER ',style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 30),),
+                Text(' PHOTOGRAPHER ',style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 30),),
+                Text(' CHOREOGRAPHER ',style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 30),),
 
               ],
             ),
@@ -294,82 +311,15 @@ isScrollable: true,
                 child: TabBarView(
                   controller: _controller,
                   children: <Widget>[
-                    ListTile(
-                      title: Text(' Designer ',style: TextStyle(
-                          color: kText,
-                          fontWeight: FontWeight.bold,
-                          fontFamily: "MajorMonoDisplay",
-                          fontSize: 30
-                      ),),
-                        subtitle:buildPostDesigner(),
-                    ),ListTile(
-                      title: Text(' Illustrator ',style: TextStyle(
-                          color: kText,
-                          fontWeight: FontWeight.bold,
-                          fontFamily: "MajorMonoDisplay",
-                          fontSize: 30
-                      ),),
-                        subtitle:buildPostIllustrator(),
-                    ),
-                    ListTile(
-                      title: Text(' Content writer ',style: TextStyle(
-                          color: kText,
-                          fontWeight: FontWeight.bold,
-                          fontFamily: "MajorMonoDisplay",
-                          fontSize: 30
-                      ),),
-                        subtitle:buildPostBlogger(),
-                    ), ListTile(
-                      title: Text(' Stylist',style: TextStyle(
-                          color: kText,
-                          fontWeight: FontWeight.bold,
-                          fontFamily: "MajorMonoDisplay",
-                          fontSize: 30
-                      ),),
-                      subtitle:buildPostStylist(),
-                    ),
-                    ListTile(
-                      title: Text(' Model',style: TextStyle(
-                          color: kText,
-                          fontWeight: FontWeight.bold,
-                          fontFamily: "MajorMonoDisplay",
-                          fontSize: 30
-                      ),),
-                      subtitle:buildPostModel(),
-                    ), ListTile(
-                      title: Text(' Makeup Artist',style: TextStyle(
-                          color: kText,
-                          fontWeight: FontWeight.bold,
-                          fontFamily: "MajorMonoDisplay",
-                          fontSize: 30
-                      ),),
-                        subtitle:buildPostMakeup(),
-                    ),
-                    ListTile(
-            title: Text(' HairDresser',style: TextStyle(
-                color: kText,
-                fontWeight: FontWeight.bold,
-                fontFamily: "MajorMonoDisplay",
-                fontSize: 30
-            ),),
-            subtitle:buildPostHair(),
-          ), ListTile(
-                      title: Text(' Photographer',style: TextStyle(
-                          color: kText,
-                          fontWeight: FontWeight.bold,
-                          fontFamily: "MajorMonoDisplay",
-                          fontSize: 30
-                      ),),
-                      subtitle:buildPostPhotographer(),
-                    ), ListTile(
-                      title: Text(' Choreographer',style: TextStyle(
-                          color: kText,
-                          fontWeight: FontWeight.bold,
-                          fontFamily: "MajorMonoDisplay",
-                          fontSize: 30
-                      ),),
-                      subtitle:buildPostChoreographer(),
-                    ),
+                    buildPostDesigner(),
+                    buildPostIllustrator(),
+                    buildPostBlogger(),
+                    buildPostStylist(),
+                    buildPostModel(),
+                    buildPostMakeup(),
+                    buildPostHair(),
+                    buildPostPhotographer(),
+                    buildPostChoreographer(),
                   ],
                 ),
               ),

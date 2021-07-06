@@ -11,6 +11,83 @@ import 'package:fashow/progress.dart';
 import 'package:fashow/user.dart';
 import 'package:fashow/product_custom.dart';
 import 'package:fashow/Product_screen.dart';
+import 'package:carousel_slider/carousel_slider.dart';
+List <Widget>listOfImages = <Widget>[];
+
+pics({String userid,String prodid}){
+  return
+    FutureBuilder<QuerySnapshot> (
+        future:     productsRef
+            .doc(userid)
+            .collection('userProducts')
+            .where('prodId' ,isEqualTo: '$prodid')
+        // .where('ownerId' ,isEqualTo: '$ownerId')
+            .get(),
+        builder: (context, snapshot) {
+
+          if (snapshot.hasData) {
+            return new ListView.builder(
+                shrinkWrap: true,
+                scrollDirection:Axis.vertical,
+                itemCount: snapshot.data.docs.length,
+                itemBuilder: (BuildContext context, int index) {
+                  // List<String> images = List.from(snapshot.data.docs[index].data()['collmediaUrl']);
+                  listOfImages = [];
+                  for (int i = 0;
+                  i <
+                      snapshot.data.docs[index].data()['shopmediaUrl']
+                          .length;
+                  i++) {
+                    listOfImages.add(CachedNetworkImage(imageUrl:snapshot
+                        .data.docs[index].data()['shopmediaUrl'][i]));
+                  }
+                  return Column(
+                    children: <Widget>[
+                      Container(
+                          margin: EdgeInsets.all(10.0),
+
+                          decoration: BoxDecoration(
+                            color: Colors.transparent,
+                          ),
+                          width: MediaQuery
+                              .of(context)
+                              .size
+                              .width,
+                          child:
+                          CarouselSlider(
+                              items: listOfImages,
+                              options: CarouselOptions(
+                                height: 500,
+                                aspectRatio: 16/9,
+                                viewportFraction: 0.8,
+                                initialPage: 0,
+                                enableInfiniteScroll: true,
+                                reverse: false,
+                                autoPlay: true,
+                                autoPlayInterval: Duration(seconds: 3),
+                                autoPlayAnimationDuration: Duration(milliseconds: 800),
+                                autoPlayCurve: Curves.fastOutSlowIn,
+                                enlargeCenterPage: true,
+                                pauseAutoPlayOnManualNavigate: true,
+                                pauseAutoPlayOnTouch: true,
+                                // onPageChanged: callbackFunction,
+                                scrollDirection: Axis.horizontal,
+                              )
+                          )
+                      ),
+
+                    ],
+                  );
+                }
+            );
+          }
+          return Center(
+            child: CircularProgressIndicator(),
+          );
+
+        });
+
+}
 class CapesGT extends StatefulWidget {
   final  int selectedPage;
 
@@ -162,7 +239,7 @@ isLive: true,
                         alignment: Alignment.center,
                         children: <Widget>[
                           ClipRRect(
-                              borderRadius: BorderRadius.circular(20.0),child: cachedNetworkImage(shopmediaUrl)),
+                              borderRadius: BorderRadius.circular(20.0),child:pics(userid:ownerId,prodid: prodId)),
                         ],),),
                     df(productname:productname, usd:usd,inr:inr,eur:eur,gbp:gbp, prodId:prodId, ownerId:ownerId,),
 
@@ -238,7 +315,7 @@ isLive: true,
                         alignment: Alignment.center,
                         children: <Widget>[
                           ClipRRect(
-                              borderRadius: BorderRadius.circular(20.0),child: cachedNetworkImage(shopmediaUrl)),
+                              borderRadius: BorderRadius.circular(20.0),child:pics(userid:ownerId,prodid: prodId)),
                         ],),),
                     df(productname:productname, usd:usd,inr:inr,eur:eur,gbp:gbp, prodId:prodId, ownerId:ownerId,),
 
@@ -314,7 +391,7 @@ isLive: true,
                         alignment: Alignment.center,
                         children: <Widget>[
                           ClipRRect(
-                              borderRadius: BorderRadius.circular(20.0),child: cachedNetworkImage(shopmediaUrl)),
+                              borderRadius: BorderRadius.circular(20.0),child:pics(userid:ownerId,prodid: prodId)),
                         ],),),
                     df(productname:productname, usd:usd,inr:inr,eur:eur,gbp:gbp, prodId:prodId, ownerId:ownerId,),
 
@@ -390,7 +467,7 @@ isLive: true,
                         alignment: Alignment.center,
                         children: <Widget>[
                           ClipRRect(
-                              borderRadius: BorderRadius.circular(20.0),child: cachedNetworkImage(shopmediaUrl)),
+                              borderRadius: BorderRadius.circular(20.0),child:pics(userid:ownerId,prodid: prodId)),
                         ],),),
                     df(productname:productname, usd:usd,inr:inr,eur:eur,gbp:gbp, prodId:prodId, ownerId:ownerId,),
 
@@ -467,7 +544,7 @@ isLive: true,
                         alignment: Alignment.center,
                         children: <Widget>[
                           ClipRRect(
-                              borderRadius: BorderRadius.circular(20.0),child: cachedNetworkImage(shopmediaUrl)),
+                              borderRadius: BorderRadius.circular(20.0),child:pics(userid:ownerId,prodid: prodId)),
                         ],),),
                     df(productname:productname, usd:usd,inr:inr,eur:eur,gbp:gbp, prodId:prodId, ownerId:ownerId,),
 
@@ -543,7 +620,7 @@ isLive: true,
                         alignment: Alignment.center,
                         children: <Widget>[
                           ClipRRect(
-                              borderRadius: BorderRadius.circular(20.0),child: cachedNetworkImage(shopmediaUrl)),
+                              borderRadius: BorderRadius.circular(20.0),child:pics(userid:ownerId,prodid: prodId)),
                         ],),),
                     df(productname:productname, usd:usd,inr:inr,eur:eur,gbp:gbp, prodId:prodId, ownerId:ownerId,),
 
@@ -619,7 +696,7 @@ isLive: true,
                         alignment: Alignment.center,
                         children: <Widget>[
                           ClipRRect(
-                              borderRadius: BorderRadius.circular(20.0),child: cachedNetworkImage(shopmediaUrl)),
+                              borderRadius: BorderRadius.circular(20.0),child:pics(userid:ownerId,prodid: prodId)),
                         ],),),
                     df(productname:productname, usd:usd,inr:inr,eur:eur,gbp:gbp, prodId:prodId, ownerId:ownerId,),
 
@@ -695,7 +772,7 @@ isLive: true,
                         alignment: Alignment.center,
                         children: <Widget>[
                           ClipRRect(
-                              borderRadius: BorderRadius.circular(20.0),child: cachedNetworkImage(shopmediaUrl)),
+                              borderRadius: BorderRadius.circular(20.0),child:pics(userid:ownerId,prodid: prodId)),
                         ],),),
                     df(productname:productname, usd:usd,inr:inr,eur:eur,gbp:gbp, prodId:prodId, ownerId:ownerId,),
 
@@ -771,7 +848,7 @@ isLive: true,
                         alignment: Alignment.center,
                         children: <Widget>[
                           ClipRRect(
-                              borderRadius: BorderRadius.circular(20.0),child: cachedNetworkImage(shopmediaUrl)),
+                              borderRadius: BorderRadius.circular(20.0),child:pics(userid:ownerId,prodid: prodId)),
                         ],),),
                     df(productname:productname, usd:usd,inr:inr,eur:eur,gbp:gbp, prodId:prodId, ownerId:ownerId,),
 

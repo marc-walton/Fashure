@@ -211,7 +211,7 @@ class CartItem extends StatelessWidget {
                   alignment: Alignment.center,
                   children: <Widget>[
                     ClipRRect(
-                        borderRadius: BorderRadius.circular(20.0),child: cachedNetworkImage(shopmediaUrl)),
+                        borderRadius: BorderRadius.circular(20.0),child:pics(userid:ownerId,prodid: prodId)),
                     Positioned(
                       top: 10.0,
                       right: 10.0,
@@ -290,7 +290,7 @@ class CartItem extends StatelessWidget {
                   alignment: Alignment.center,
                   children: <Widget>[
                     ClipRRect(
-                        borderRadius: BorderRadius.circular(20.0),child: cachedNetworkImage(shopmediaUrl)),
+                        borderRadius: BorderRadius.circular(20.0),child:pics(userid:ownerId,prodid: prodId)),
                     Positioned(
                       top: 10.0,
                       right: 10.0,
@@ -368,7 +368,7 @@ class CartItem extends StatelessWidget {
                   alignment: Alignment.center,
                   children: <Widget>[
                     ClipRRect(
-                        borderRadius: BorderRadius.circular(20.0),child: cachedNetworkImage(shopmediaUrl)),
+                        borderRadius: BorderRadius.circular(20.0),child:pics(userid:ownerId,prodid: prodId)),
                     Positioned(
                       top: 10.0,
                       right: 10.0,
@@ -446,7 +446,7 @@ class CartItem extends StatelessWidget {
                   alignment: Alignment.center,
                   children: <Widget>[
                     ClipRRect(
-                        borderRadius: BorderRadius.circular(20.0),child: cachedNetworkImage(shopmediaUrl)),
+                        borderRadius: BorderRadius.circular(20.0),child:pics(userid:ownerId,prodid: prodId)),
                     Positioned(
                       top: 10.0,
                       right: 10.0,
@@ -524,7 +524,7 @@ class CartItem extends StatelessWidget {
                   alignment: Alignment.center,
                   children: <Widget>[
                     ClipRRect(
-                        borderRadius: BorderRadius.circular(20.0),child: cachedNetworkImage(shopmediaUrl)),
+                        borderRadius: BorderRadius.circular(20.0),child:pics(userid:ownerId,prodid: prodId)),
                     Positioned(
                       top: 10.0,
                       right: 10.0,

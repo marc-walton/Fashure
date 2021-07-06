@@ -335,7 +335,7 @@ isLive: true,
       appBar:  AppBar(backgroundColor: kSecondaryColor,
         title: Text('Payments',
           style: TextStyle(
-              fontFamily :"MajorMonoDisplay",
+              fontFamily :"Halfomania",
               fontSize:  35.0 ,
               color: Colors.white),),
         iconTheme: new IconThemeData(color: kIcon),
