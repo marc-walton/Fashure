@@ -112,8 +112,9 @@ dependencies:
   modal_bottom_sheet: ^2.0.0
   flutter_chip_tags: ^1.0.4
   flutter_country_picker: ^0.1.6
-
+  flutter_animated_button: ^2.0.0
   neon: ^0.0.1
+
 
 
 

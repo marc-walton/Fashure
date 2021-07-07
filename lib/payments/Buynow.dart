@@ -212,51 +212,51 @@ class BuyNow extends StatefulWidget {
 
 class _BuyNowState extends State<BuyNow> {
 
-  final int Ring1;
-  final int Ring2;
-  final int Ring3;
-  final int Ring4;
-  final int Ring5;
-  final int Ring6;
-  final int Ring7;
-  final int Ring8;
-  final int Ring9;
-  final int Ring10;
-  final int Ring11;
-  final int Ring12;
-  final int Ring13;
-  final int Ring14;
-  final int Ring15;
-  final int Ring16;
-  final int Ring17;
-  final int Ring18;
-  final int Ring19;
-  final int Ring20;
-  final int  Ring21;
-  final int  Ring22;
-  final int  Ring23;
-  final int custom12;
-  final int custom22;
-  final int custom32;
-  final int custom42;
-  final int custom52;
-  final int custom62;
-  final int custom72;
-  final int  custom82;
-  final int custom92;
-  final int custom102;
-  final int color1;
-  final int color2;
-  final int color3;
-  final int color4;
-  final int color5;
-  final int color6;
-  final int color7;
-  final int color8;
-  final int color9;
-  final int color10;
-  final String colorText;
-  final String mtoText;
+   int Ring1;
+   int Ring2;
+   int Ring3;
+   int Ring4;
+   int Ring5;
+   int Ring6;
+   int Ring7;
+   int Ring8;
+   int Ring9;
+   int Ring10;
+   int Ring11;
+   int Ring12;
+   int Ring13;
+   int Ring14;
+   int Ring15;
+   int Ring16;
+   int Ring17;
+   int Ring18;
+   int Ring19;
+   int Ring20;
+   int  Ring21;
+   int  Ring22;
+   int  Ring23;
+   int custom12;
+   int custom22;
+   int custom32;
+   int custom42;
+   int custom52;
+   int custom62;
+   int custom72;
+   int  custom82;
+   int custom92;
+   int custom102;
+   int color1;
+   int color2;
+   int color3;
+   int color4;
+   int color5;
+   int color6;
+   int color7;
+   int color8;
+   int color9;
+   int color10;
+   String colorText;
+   String mtoText;
   String orderId = Uuid().v4();
   int xxxs;
   int xxs;
@@ -629,137 +629,8 @@ class _BuyNowState extends State<BuyNow> {
 
       });
     }
-    else  if(widget.size=='MTO XXXS'){
-      mto--;
-      FirebaseFirestore.instance.collection('products')
-          .doc(widget.ownerId)
-          .collection('userProducts')
-          .doc(widget.prodId)
-          .update({'mtoQuantity':mto,
 
-      });
-    }
-    else if(widget.size=='MTO XXS'){
-      mto--;
-      FirebaseFirestore.instance.collection('products')
-          .doc(widget.ownerId)
-          .collection('userProducts')
-          .doc(widget.prodId)
-          .update({'mtoQuantity':mto,
-
-      });
-    }
-    else if(widget.size=='MTO XS'){
-      mto--;
-      FirebaseFirestore.instance.collection('products')
-          .doc(widget.ownerId)
-          .collection('userProducts')
-          .doc(widget.prodId)
-          .update({'mtoQuantity':mto,
-
-      });
-    }
-    else if(widget.size=='MTO S'){
-      mto--;
-      FirebaseFirestore.instance.collection('products')
-          .doc(widget.ownerId)
-          .collection('userProducts')
-          .doc(widget.prodId)
-          .update({'mtoQuantity':mto,
-
-      });
-    }
-    else if(widget.size=='MTO M'){
-      mto--;
-      FirebaseFirestore.instance.collection('products')
-          .doc(widget.ownerId)
-          .collection('userProducts')
-          .doc(widget.prodId)
-          .update({'mtoQuantity':mto,
-
-      });
-    }
-    else if(widget.size=='MTO L'){
-      mto--;
-      FirebaseFirestore.instance.collection('products')
-          .doc(widget.ownerId)
-          .collection('userProducts')
-          .doc(widget.prodId)
-          .update({'mtoQuantity':mto,
-
-      });
-    }
-    else if(widget.size=='MTO XL'){
-      mto--;
-      FirebaseFirestore.instance.collection('products')
-          .doc(widget.ownerId)
-          .collection('userProducts')
-          .doc(widget.prodId)
-          .update({'mtoQuantity':mto,
-
-      });
-    }
-    else if(widget.size=='MTO XXL'){
-      mto--;
-      FirebaseFirestore.instance.collection('products')
-          .doc(widget.ownerId)
-          .collection('userProducts')
-          .doc(widget.prodId)
-          .update({'mtoQuantity':mto,
-
-      });
-    }
-    else if(widget.size=='MTO XXXL'){
-      mto--;
-      FirebaseFirestore.instance.collection('products')
-          .doc(widget.ownerId)
-          .collection('userProducts')
-          .doc(widget.prodId)
-          .update({'mtoQuantity':mto,
-
-      });
-    }
-    else if(widget.size=='MTO 4XL'){
-      mto--;
-      FirebaseFirestore.instance.collection('products')
-          .doc(widget.ownerId)
-          .collection('userProducts')
-          .doc(widget.prodId)
-          .update({'mtoQuantity':mto,
-
-      });
-    }
-    else if(widget.size=='MTO 5XL'){
-      mto--;
-      FirebaseFirestore.instance.collection('products')
-          .doc(widget.ownerId)
-          .collection('userProducts')
-          .doc(widget.prodId)
-          .update({'mtoQuantity':mto,
-
-      });
-    }
-    else if(widget.size=='MTO 6XL'){
-      mto--;
-      FirebaseFirestore.instance.collection('products')
-          .doc(widget.ownerId)
-          .collection('userProducts')
-          .doc(widget.prodId)
-          .update({'mtoQuantity':mto,
-
-      });
-    }
-    else if(widget.size=='MTO 7XL'){
-      mto--;
-      FirebaseFirestore.instance.collection('products')
-          .doc(widget.ownerId)
-          .collection('userProducts')
-          .doc(widget.prodId)
-          .update({'mtoQuantity':mto,
-
-      });
-    }
-    else if(widget.size=='MTO 8XL'){
+    else if(widget.size=='MTO'){
       mto--;
       FirebaseFirestore.instance.collection('products')
           .doc(widget.ownerId)
@@ -779,7 +650,7 @@ class _BuyNowState extends State<BuyNow> {
 
       });
     }
-    else if(widget.size=='(US)3-1/2'){
+    else if(widget.size=='(US) 3 ½'){
       Shoe1--;
       FirebaseFirestore.instance.collection('products')
           .doc(widget.ownerId)
@@ -789,7 +660,7 @@ class _BuyNowState extends State<BuyNow> {
 
       });
     }
-    else if(widget.size=='(US)4'){
+    else if(widget.size=='(US) 4'){
       Shoe2--;
       FirebaseFirestore.instance.collection('products')
           .doc(widget.ownerId)
@@ -799,7 +670,7 @@ class _BuyNowState extends State<BuyNow> {
 
       });
     }
-    else if(widget.size=='(US)4-1/2'){
+    else if(widget.size=='(US) 4 ½'){
       Shoe3--;
       FirebaseFirestore.instance.collection('products')
           .doc(widget.ownerId)
@@ -809,7 +680,7 @@ class _BuyNowState extends State<BuyNow> {
 
       });
     }
-    else if(widget.size=='(US)5'){
+    else if(widget.size=='(US) 5'){
       Shoe4--;
       FirebaseFirestore.instance.collection('products')
           .doc(widget.ownerId)
@@ -819,7 +690,7 @@ class _BuyNowState extends State<BuyNow> {
 
       });
     }
-    else if(widget.size=='(US)5-1/2'){
+    else if(widget.size=='(US) 5 ½'){
       Shoe5--;
       FirebaseFirestore.instance.collection('products')
           .doc(widget.ownerId)
@@ -829,7 +700,7 @@ class _BuyNowState extends State<BuyNow> {
 
       });
     }
-    else if(widget.size=='(US)6'){
+    else if(widget.size=='(US) 6'){
       Shoe6--;
       FirebaseFirestore.instance.collection('products')
           .doc(widget.ownerId)
@@ -839,7 +710,7 @@ class _BuyNowState extends State<BuyNow> {
 
       });
     }
-    else if(widget.size=='(US)6-1/2'){
+    else if(widget.size=='(US) 6 ½'){
       Shoe7--;
       FirebaseFirestore.instance.collection('products')
           .doc(widget.ownerId)
@@ -849,7 +720,7 @@ class _BuyNowState extends State<BuyNow> {
 
       });
     }
-    else if(widget.size=='(US)7'){
+    else if(widget.size=='(US) 7'){
       Shoe8--;
       FirebaseFirestore.instance.collection('products')
           .doc(widget.ownerId)
@@ -859,7 +730,7 @@ class _BuyNowState extends State<BuyNow> {
 
       });
     }
-    else if(widget.size=='(US)7-1/2'){
+    else if(widget.size=='(US) 7 ½'){
       Shoe9--;
       FirebaseFirestore.instance.collection('products')
           .doc(widget.ownerId)
@@ -869,7 +740,7 @@ class _BuyNowState extends State<BuyNow> {
 
       });
     }
-    else if(widget.size=='(US)8'){
+    else if(widget.size=='(US) 8'){
       Shoe10--;
       FirebaseFirestore.instance.collection('products')
           .doc(widget.ownerId)
@@ -879,7 +750,7 @@ class _BuyNowState extends State<BuyNow> {
 
       });
     }
-    else if(widget.size=='(US)8-1/2'){
+    else if(widget.size=='(US) 8 ½'){
       Shoe11--;
       FirebaseFirestore.instance.collection('products')
           .doc(widget.ownerId)
@@ -889,7 +760,7 @@ class _BuyNowState extends State<BuyNow> {
 
       });
     }
-    else if(widget.size=='(US)9'){
+    else if(widget.size=='(US) 9'){
       Shoe12--;
       FirebaseFirestore.instance.collection('products')
           .doc(widget.ownerId)
@@ -899,7 +770,7 @@ class _BuyNowState extends State<BuyNow> {
 
       });
     }
-    else if(widget.size=='(US)9-1/2'){
+    else if(widget.size=='(US) 9 ½'){
       Shoe13--;
       FirebaseFirestore.instance.collection('products')
           .doc(widget.ownerId)
@@ -909,7 +780,7 @@ class _BuyNowState extends State<BuyNow> {
 
       });
     }
-    else if(widget.size=='(US)10'){
+    else if(widget.size=='(US) 10'){
       Shoe14--;
       FirebaseFirestore.instance.collection('products')
           .doc(widget.ownerId)
@@ -919,7 +790,7 @@ class _BuyNowState extends State<BuyNow> {
 
       });
     }
-    else if(widget.size=='(US)10-1/2'){
+    else if(widget.size=='(US) 10 ½'){
       Shoe15--;
       FirebaseFirestore.instance.collection('products')
           .doc(widget.ownerId)
@@ -929,7 +800,7 @@ class _BuyNowState extends State<BuyNow> {
 
       });
     }
-    else if(widget.size=='(US)11'){
+    else if(widget.size=='(US) 11'){
       Shoe16--;
       FirebaseFirestore.instance.collection('products')
           .doc(widget.ownerId)
@@ -939,7 +810,7 @@ class _BuyNowState extends State<BuyNow> {
 
       });
     }
-    else if(widget.size=='(US)11-1/2'){
+    else if(widget.size=='(US) 11 ½'){
       Shoe17--;
       FirebaseFirestore.instance.collection('products')
           .doc(widget.ownerId)
@@ -949,7 +820,7 @@ class _BuyNowState extends State<BuyNow> {
 
       });
     }
-    else if(widget.size=='(US)12'){
+    else if(widget.size=='(US) 12'){
       Shoe18--;
       FirebaseFirestore.instance.collection('products')
           .doc(widget.ownerId)
@@ -959,7 +830,7 @@ class _BuyNowState extends State<BuyNow> {
 
       });
     }
-    else if(widget.size=='(US)12-1/2'){
+    else if(widget.size=='(US) 12 ½'){
       Shoe19--;
       FirebaseFirestore.instance.collection('products')
           .doc(widget.ownerId)
@@ -969,7 +840,7 @@ class _BuyNowState extends State<BuyNow> {
 
       });
     }
-    else if(widget.size=='(US)13'){
+    else if(widget.size=='(US) 13'){
       Shoe20--;
       FirebaseFirestore.instance.collection('products')
           .doc(widget.ownerId)
@@ -979,7 +850,7 @@ class _BuyNowState extends State<BuyNow> {
 
       });
     }
-    else if(widget.size=='(US)13-1/2'){
+    else if(widget.size=='(US) 13 ½'){
       Shoe21--;
       FirebaseFirestore.instance.collection('products')
           .doc(widget.ownerId)
@@ -989,6 +860,348 @@ class _BuyNowState extends State<BuyNow> {
 
       });
     }
+    else if(widget.size=='(R 4'){
+      Ring1--;
+      FirebaseFirestore.instance.collection('products')
+          .doc(widget.ownerId)
+          .collection('userProducts')
+          .doc(widget.prodId)
+          .update({'Ring1':Ring1,
+
+      });
+    }
+     else if(widget.size=='(R 4.5'){
+      Ring2--;
+      FirebaseFirestore.instance.collection('products')
+          .doc(widget.ownerId)
+          .collection('userProducts')
+          .doc(widget.prodId)
+          .update({'Ring2':Ring2,
+
+      });
+    }
+      else if(widget.size=='(R 5'){
+      Ring3--;
+      FirebaseFirestore.instance.collection('products')
+          .doc(widget.ownerId)
+          .collection('userProducts')
+          .doc(widget.prodId)
+          .update({'Ring3':Ring3,
+
+      });
+    }
+         else if(widget.size=='(R 5.5'){
+      Ring4--;
+      FirebaseFirestore.instance.collection('products')
+          .doc(widget.ownerId)
+          .collection('userProducts')
+          .doc(widget.prodId)
+          .update({'Ring4': Ring4,
+
+      });
+    }
+           else if(widget.size=='(R 6'){
+       Ring5--;
+      FirebaseFirestore.instance.collection('products')
+          .doc(widget.ownerId)
+          .collection('userProducts')
+          .doc(widget.prodId)
+          .update({'Ring5':  Ring5,
+
+      });
+    }
+           else if(widget.size=='(R 6.5'){
+       Ring6--;
+      FirebaseFirestore.instance.collection('products')
+          .doc(widget.ownerId)
+          .collection('userProducts')
+          .doc(widget.prodId)
+          .update({'Ring6':  Ring6,
+
+      });
+    }
+           else if(widget.size=='(R 7'){
+      Ring7--;
+      FirebaseFirestore.instance.collection('products')
+          .doc(widget.ownerId)
+          .collection('userProducts')
+          .doc(widget.prodId)
+          .update({'Ring7': Ring7,
+
+      });
+    }
+           else if(widget.size=='(R 7.5'){
+      Ring8--;
+      FirebaseFirestore.instance.collection('products')
+          .doc(widget.ownerId)
+          .collection('userProducts')
+          .doc(widget.prodId)
+          .update({'Ring8': Ring8,
+
+      });
+    }
+           else if(widget.size=='(R 8'){
+      Ring9--;
+      FirebaseFirestore.instance.collection('products')
+          .doc(widget.ownerId)
+          .collection('userProducts')
+          .doc(widget.prodId)
+          .update({'Ring9': Ring9,
+
+      });
+    }
+           else if(widget.size=='(R 8.5'){
+      Ring10--;
+      FirebaseFirestore.instance.collection('products')
+          .doc(widget.ownerId)
+          .collection('userProducts')
+          .doc(widget.prodId)
+          .update({'Ring10': Ring10,
+
+      });
+    }
+           else if(widget.size=='(R 9'){
+      Ring11--;
+      FirebaseFirestore.instance.collection('products')
+          .doc(widget.ownerId)
+          .collection('userProducts')
+          .doc(widget.prodId)
+          .update({'Ring11': Ring11,
+
+      });
+    }
+           else if(widget.size=='(R 9.5'){
+      Ring12--;
+      FirebaseFirestore.instance.collection('products')
+          .doc(widget.ownerId)
+          .collection('userProducts')
+          .doc(widget.prodId)
+          .update({'Ring12': Ring12,
+
+      });
+    }
+           else if(widget.size=='(R 10'){
+      Ring13--;
+      FirebaseFirestore.instance.collection('products')
+          .doc(widget.ownerId)
+          .collection('userProducts')
+          .doc(widget.prodId)
+          .update({'Ring13': Ring13,
+
+      });
+    }
+           else if(widget.size=='(R 10.5'){
+      Ring14--;
+      FirebaseFirestore.instance.collection('products')
+          .doc(widget.ownerId)
+          .collection('userProducts')
+          .doc(widget.prodId)
+          .update({'Ring14': Ring14,
+
+      });
+    }
+           else if(widget.size=='(R 11'){
+      Ring15--;
+      FirebaseFirestore.instance.collection('products')
+          .doc(widget.ownerId)
+          .collection('userProducts')
+          .doc(widget.prodId)
+          .update({'Ring15': Ring15,
+
+      });
+    }
+           else if(widget.size=='(R 11.5'){
+      Ring16--;
+      FirebaseFirestore.instance.collection('products')
+          .doc(widget.ownerId)
+          .collection('userProducts')
+          .doc(widget.prodId)
+          .update({'Ring16': Ring16,
+
+      });
+    }
+           else if(widget.size=='(R 12'){
+     Ring17--;
+      FirebaseFirestore.instance.collection('products')
+          .doc(widget.ownerId)
+          .collection('userProducts')
+          .doc(widget.prodId)
+          .update({'Ring17':Ring17,
+
+      });
+    }
+           else if(widget.size=='(R 12.5'){
+     Ring18--;
+      FirebaseFirestore.instance.collection('products')
+          .doc(widget.ownerId)
+          .collection('userProducts')
+          .doc(widget.prodId)
+          .update({'Ring18':Ring18,
+
+      });
+    }
+           else if(widget.size=='(R 13'){
+     Ring19--;
+      FirebaseFirestore.instance.collection('products')
+          .doc(widget.ownerId)
+          .collection('userProducts')
+          .doc(widget.prodId)
+          .update({'Ring19':Ring19,
+
+      });
+    }
+           else if(widget.size=='(R 13.5'){
+     Ring20--;
+      FirebaseFirestore.instance.collection('products')
+          .doc(widget.ownerId)
+          .collection('userProducts')
+          .doc(widget.prodId)
+          .update({'Ring20':Ring20,
+
+      });
+    }
+           else if(widget.size=='(R 14'){
+     Ring21--;
+      FirebaseFirestore.instance.collection('products')
+          .doc(widget.ownerId)
+          .collection('userProducts')
+          .doc(widget.prodId)
+          .update({'Ring21':Ring21,
+
+      });
+    }
+           else if(widget.size=='(R 14.5'){
+     Ring22--;
+      FirebaseFirestore.instance.collection('products')
+          .doc(widget.ownerId)
+          .collection('userProducts')
+          .doc(widget.prodId)
+          .update({'Ring22':Ring22,
+
+      });
+    }
+           else if(widget.size=='(R 15'){
+     Ring23--;
+      FirebaseFirestore.instance.collection('products')
+          .doc(widget.ownerId)
+          .collection('userProducts')
+          .doc(widget.prodId)
+          .update({'Ring23':Ring23,
+
+      });
+    }
+ else if(widget.size=='(C 1'){
+     custom12--;
+      FirebaseFirestore.instance.collection('products')
+          .doc(widget.ownerId)
+          .collection('userProducts')
+          .doc(widget.prodId)
+          .update({'custom12':custom12,
+
+      });
+    }
+ else if(widget.size=='(C 2'){
+     custom22--;
+      FirebaseFirestore.instance.collection('products')
+          .doc(widget.ownerId)
+          .collection('userProducts')
+          .doc(widget.prodId)
+          .update({'custom22':custom22,
+
+      });
+    }
+ else if(widget.size=='(C 3'){
+     custom32--;
+      FirebaseFirestore.instance.collection('products')
+          .doc(widget.ownerId)
+          .collection('userProducts')
+          .doc(widget.prodId)
+          .update({'custom32':custom32,
+
+      });
+    }
+    else if(widget.size=='(C 4'){
+      custom42--;
+      FirebaseFirestore.instance.collection('products')
+          .doc(widget.ownerId)
+          .collection('userProducts')
+          .doc(widget.prodId)
+          .update({'custom42':custom42,
+
+      });
+    }
+  else if(widget.size=='(C 4'){
+      custom42--;
+      FirebaseFirestore.instance.collection('products')
+          .doc(widget.ownerId)
+          .collection('userProducts')
+          .doc(widget.prodId)
+          .update({'custom42':custom42,
+
+      });
+    }
+  else if(widget.size=='(C 5'){
+      custom52--;
+      FirebaseFirestore.instance.collection('products')
+          .doc(widget.ownerId)
+          .collection('userProducts')
+          .doc(widget.prodId)
+          .update({'custom52':custom52,
+
+      });
+    }
+  else if(widget.size=='(C 6'){
+      custom62--;
+      FirebaseFirestore.instance.collection('products')
+          .doc(widget.ownerId)
+          .collection('userProducts')
+          .doc(widget.prodId)
+          .update({'custom62':custom62,
+
+      });
+    }
+  else if(widget.size=='(C 7'){
+      custom72--;
+      FirebaseFirestore.instance.collection('products')
+          .doc(widget.ownerId)
+          .collection('userProducts')
+          .doc(widget.prodId)
+          .update({'custom72':custom72,
+
+      });
+    }
+  else if(widget.size=='(C 8'){
+      custom82--;
+      FirebaseFirestore.instance.collection('products')
+          .doc(widget.ownerId)
+          .collection('userProducts')
+          .doc(widget.prodId)
+          .update({'custom82':custom82,
+
+      });
+    }
+  else if(widget.size=='(C 9'){
+      custom92--;
+      FirebaseFirestore.instance.collection('products')
+          .doc(widget.ownerId)
+          .collection('userProducts')
+          .doc(widget.prodId)
+          .update({'custom92':custom92,
+
+      });
+    }
+  else if(widget.size=='(C 10'){
+      custom102--;
+      FirebaseFirestore.instance.collection('products')
+          .doc(widget.ownerId)
+          .collection('userProducts')
+          .doc(widget.prodId)
+          .update({'custom102':custom102,
+
+      });
+    }
+
+
 //W
     else if(widget.size=='5'){
       Shoe1--;
@@ -1786,7 +1999,99 @@ class _BuyNowState extends State<BuyNow> {
       });
     }
   }
+subtractColor(){
+  if(widget.color=='col 1'){
+    color1--;
+    FirebaseFirestore.instance.collection('products')
+        .doc(widget.ownerId)
+        .collection('userProducts')
+        .doc(widget.prodId)
+        .update({'color1':color1,
+    });
+  }
+else if(widget.color=='col 2'){
+    color2--;
+    FirebaseFirestore.instance.collection('products')
+        .doc(widget.ownerId)
+        .collection('userProducts')
+        .doc(widget.prodId)
+        .update({'color2':color2,
+    });
+  }
+else if(widget.color=='col 3'){
+    color3--;
+    FirebaseFirestore.instance.collection('products')
+        .doc(widget.ownerId)
+        .collection('userProducts')
+        .doc(widget.prodId)
+        .update({'color3':color3,
+    });
+  }
+else if(widget.color=='col 4'){
+    color4--;
+    FirebaseFirestore.instance.collection('products')
+        .doc(widget.ownerId)
+        .collection('userProducts')
+        .doc(widget.prodId)
+        .update({'color4':color4,
+    });
+  }
+else if(widget.color=='col 5'){
+    color5--;
+    FirebaseFirestore.instance.collection('products')
+        .doc(widget.ownerId)
+        .collection('userProducts')
+        .doc(widget.prodId)
+        .update({'color5':color5,
+    });
+  }
+else if(widget.color=='col 6'){
+    color6--;
+    FirebaseFirestore.instance.collection('products')
+        .doc(widget.ownerId)
+        .collection('userProducts')
+        .doc(widget.prodId)
+        .update({'color6':color6,
+    });
+  }
+else if(widget.color=='col 7'){
+    color7--;
+    FirebaseFirestore.instance.collection('products')
+        .doc(widget.ownerId)
+        .collection('userProducts')
+        .doc(widget.prodId)
+        .update({'color7':color7,
+    });
+  }
+else if(widget.color=='col 8'){
+    color8--;
+    FirebaseFirestore.instance.collection('products')
+        .doc(widget.ownerId)
+        .collection('userProducts')
+        .doc(widget.prodId)
+        .update({'color8':color8,
+    });
+  }
+else if(widget.color=='col 9'){
+    color9--;
+    FirebaseFirestore.instance.collection('products')
+        .doc(widget.ownerId)
+        .collection('userProducts')
+        .doc(widget.prodId)
+        .update({'color9':color9,
+    });
+  }
+else if(widget.color=='col 10'){
+    color10--;
+    FirebaseFirestore.instance.collection('products')
+        .doc(widget.ownerId)
+        .collection('userProducts')
+        .doc(widget.prodId)
+        .update({'color10':color10,
+    });
+  }
 
+}
   onSuccess()async{
     adPrefs = await SharedPreferences.getInstance();
     String Fullname = adPrefs.getString('fullname') ?? '';

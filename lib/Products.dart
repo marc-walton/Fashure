@@ -26,6 +26,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter_currencies_tracker/flutter_currencies_tracker.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
+import 'package:flutter_animated_button/flutter_animated_button.dart';
 
 List <Widget>listOfImages = <Widget>[];
 
@@ -1069,6 +1070,9 @@ String customprice10;
    final String colorText9;
    final String colorText10;
 String shipcostuser;
+String size;
+bool custom;
+
   final int mto;
   int likeCount;
   Map likes;
@@ -1373,1140 +1377,7 @@ var s;
         .update({'visits': views,
     });
   }
-FREE(){
-    if(freesize == 0){
-    return
-      Container();
-  }
-    else{
-  return
-  InkWell(
-  onTap: (){
-  setState(()  {
 
-  usersize = 'Free Size';
-
-
-  });
-
-  },        child: Container(
-    height:50,
-    width:MediaQuery.of(context).size.width,
-    child: Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-//    Text(user.followers,style: TextStyle(colorText: Colors.white,fontWeight: FontWeight.bold,),),
-        FittedBox(child: Text('Free Size',)),
-      ],
-    ),
-  ),
-
-  );
-  }
-}
-XXXS(){
-  if(xxxs == 0){
-    return
-      Container();
-  }
-    else{
-      return
-        InkWell(
-          onTap: (){
-            setState(()  {
-
-              usersize = 'XXXS';
-            });
-
-
-          },
-          child: Container(
-            height:50,
-            width:MediaQuery.of(context).size.width,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-//    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
-                FittedBox(child: Text('XXXS',)),
-              ],
-            ),
-          ),
-        );
-    }
-
-
-}
-XXS(){
-   if(xxs == 0){
-     return
-       Container();
-   }
-   else{
-     return
-     InkWell(
-       onTap: (){
-         setState(()  {
-
-           usersize = 'XXS';
-         });
-
-
-
-       },
-       child:      Container(
-         height:50,
-         width:MediaQuery.of(context).size.width,
-         child: Column(
-           mainAxisAlignment: MainAxisAlignment.center,
-           children: [
-//    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
-             FittedBox(child: Text('XXS',)),
-           ],
-         ),
-       ),      );
-   }
-}
-XS(){
-    if(xs == 0){
-      return
-        Container();
-    }
-    else{
-      return
-      InkWell(
-        onTap: (){
-          setState(()  {
-
-            usersize = 'XS';
-          });
-
-
-
-
-        },
-   child:     Container(
-          height:50,
-          width:MediaQuery.of(context).size.width,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-//    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
-              FittedBox(child: Text('XS',)),
-            ],
-          ),
-        ),       );
-    }
-}
-S(){
-   if(s == 0){
-     return
-       Container();
-   }
-   else{
-     return
-       InkWell(
-       onTap: (){
-         setState(()  {
-
-           usersize = 'S';
-         });
-
-
-
-       },
-      child:   Container(
-           height:50,
-           width:MediaQuery.of(context).size.width,
-           child: Column(
-             mainAxisAlignment: MainAxisAlignment.center,
-             children: [
-//    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
-               FittedBox(child: Text('S',)),
-             ],
-           ),
-         ),
-       );
-   }
-}
-M(){
-   if(m == 0){
-     return
-       Container();
-   }
-   else {
-     return
-     InkWell(
-       onTap: (){
-         setState(()  {
-
-           usersize = 'M';
-         });
-
-
-
-       },
-       child:   Container(
-         height:50,
-         width:MediaQuery.of(context).size.width,
-         child: Column(
-           mainAxisAlignment: MainAxisAlignment.center,
-           children: [
-//    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
-             FittedBox(child: Text('M',)),
-           ],
-         ),
-       ),
-     );
-   }
-}
-L(){
-    if(l == 0){
-      return
-        Container();
-    }
-   else{
-     return
-      InkWell(
-        onTap: (){
-          setState(()  {
-
-            usersize = 'L';
-          });
-
-
-
-        },
-        child:   Container(
-          height:50,
-          width:MediaQuery.of(context).size.width,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-//    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
-              FittedBox(child: Text('L',)),
-            ],
-          ),
-        ),
-      );
-    }
-}
-XL(){
-  if(xl == 0){
-    return
-      Container();
-  }
-  else{
-    return
-      InkWell(
-        onTap: (){
-          setState(()  {
-
-            usersize = 'XL';
-          });
-
-
-
-        },
-        child:   Container(
-          height:50,
-          width:MediaQuery.of(context).size.width,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-//    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
-              FittedBox(child: Text('XL',)),
-            ],
-          ),
-        ),
-      );
-  }
-}
-XXL(){
-  if(xxl == 0){
-    return
-      Container();
-  }
-  else{
-    return
-      InkWell(
-        onTap: (){
-          setState(()  {
-
-            usersize = 'XXL';
-          });
-
-
-
-        },
-        child:   Container(
-          height:50,
-          width:MediaQuery.of(context).size.width,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-//    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
-              FittedBox(child: Text('XCL',)),
-            ],
-          ),
-        ),
-      );
-  }
-}
-XXXL(){
-  if(xxxl == 0){
-    return
-      Container();
-  }
-  else{
-    return
-      InkWell(
-        onTap: (){
-          setState(()  {
-
-            usersize = 'XXXL';
-          });
-
-
-        },
-        child:   Container(
-          height:50,
-          width:MediaQuery.of(context).size.width,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-//    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
-              FittedBox(child: Text('XXXL',)),
-            ],
-          ),
-        ),
-      );
-  }
-}
-FXL(){
-  if(fourxl == 0){
-    return
-      Container();
-  }
-  else
-  {
-    return
-      InkWell(
-        onTap: (){
-          setState(()  {
-
-            usersize = '4XL';
-            Get.back();
-          });
-
-
-        },
-        child:   Container(
-          height:50,
-          width:MediaQuery.of(context).size.width,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-//    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
-              FittedBox(child: Text('4XL',)),
-            ],
-          ),
-        ),
-      );
-  }
-}
-FIVXL(){
-  if(fivexl == 0){
-    return
-      Container();
-  }
-  else{
-    return
-      InkWell(
-        onTap: (){
-          setState(()  {
-
-            usersize = '5XL';
-            Get.back();
-
-          });
-
-
-
-        },
-        child: Container(
-          height:50,
-          width:MediaQuery.of(context).size.width,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-//    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
-              FittedBox(child: Text('5XL',)),
-            ],
-          ),
-        ),
-      );
-  }
-}
-SIXXL(){
-  if(sixxl == 0){
-    return
-      Container();
-  }
-  else{
-    return
-      InkWell(
-        onTap: (){
-          setState(()  {
-
-            usersize = '6XL';
-          });
-
-
-
-        },
-        child:   Container(
-          height:50,
-          width:MediaQuery.of(context).size.width,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-//    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
-              FittedBox(child: Text('6XL',)),
-            ],
-          ),
-        ),
-      );
-  }
-}
-SEVXL(){
-  if(sevenxl == 0){
-    return
-      Container();
-  }
-  else{
-    return
-      InkWell(
-        onTap: (){
-          setState(()  {
-
-            usersize = '7XL';
-          });
-
-
-
-        },
-        child:   Container(
-          height:50,
-          width:MediaQuery.of(context).size.width,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-//    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
-              FittedBox(child: Text('7XL',)),
-            ],
-          ),
-        ),
-      );
-  }
-}
-EIGXL(){
-  if(eightxl == 0){
-    return
-      Container();
-  }
-  else{
-    return
-      InkWell(
-        onTap: (){
-          setState(()  {
-
-            usersize = '8XL';
-          });
-
-
-        },
-        child:   Container(
-          height:50,
-          width:MediaQuery.of(context).size.width,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-//    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
-              FittedBox(child: Text('8XL',)),
-            ],
-          ),
-        ),
-      );
-  }
-}
-MS1(){
-   if(Shoe1 == 0){
-     return
-       Container();
-   }
-   else{
-     return
-  InkWell(
-  onTap: (){
-  setState(()  {
-
-  usersize = '(US)3-1/2';
-  });
-
-  },
-    child:   Container(
-      height:50,
-      width:MediaQuery.of(context).size.width,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-//    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
-          FittedBox(child: Text('(US)3-1/2',)),
-        ],
-      ),
-    ),
-  );
-  }
-
-}
-MS2(){
- if(Shoe2 == 0){
-   return
-     Container();
- }
-else{
-  return
-   InkWell(
-     onTap: (){
-       setState(()  {
-
-         usersize = '(US)4';
-       });
-
-
-
-     },
-     child:   Container(
-       height:50,
-       width:MediaQuery.of(context).size.width,
-       child: Column(
-         mainAxisAlignment: MainAxisAlignment.center,
-         children: [
-//    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
-           FittedBox(child: Text('(US)4',)),
-         ],
-       ),
-     ),
-
-   );
- }
-}
-MS3(){
- if(Shoe3 == 0){
-   return
-     Container();
- }
- else{
-   return
-  InkWell(
-  onTap: (){
-  setState(()  {
-
-  usersize = '(US)4-1/2';
-  });
-
-
-  },
-    child:   Container(
-      height:50,
-      width:MediaQuery.of(context).size.width,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-//    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
-          FittedBox(child: Text('(US)4-1/2',)),
-        ],
-      ),
-    ),
-
-  );
-  }
-}
-MS4(){
-
-   if(Shoe4 == 0){
-     return
-       Container();
-   }
-   else {
-
-return
-  InkWell(
-       onTap: (){
-         setState(()  {
-
-           usersize = '(US)5';
-         });
-
-
-
-       },
-    child:   Container(
-      height:50,
-      width:MediaQuery.of(context).size.width,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-//    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
-          FittedBox(child: Text('(US)5',)),
-        ],
-      ),
-    ),
-
-     );
-   }
-}
-MS5(){
-
-  if(Shoe5 == 0){
-    return
-      Container();
-  }
-  else{
-    return
-    InkWell(
-      onTap: (){
-        setState(()  {
-
-          usersize = '(US)5-1/2';
-        });
-
-
-
-      },
-      child:   Container(
-        height:50,
-        width:MediaQuery.of(context).size.width,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-//    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
-            FittedBox(child: Text('(US)5-1/2',)),
-          ],
-        ),
-      ),
-    );
-  }
-}
-MS6(){
-
-  if(Shoe6 == 0){
-    return
-      Container();
-  }
- else {
-    return
-      InkWell(
-        onTap: (){
-          setState(()  {
-
-            usersize = '(US)6';
-          });
-
-
-
-        },
-        child:   Container(
-          height:50,
-          width:MediaQuery.of(context).size.width,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-//    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
-              FittedBox(child: Text('(US)6',)),
-            ],
-          ),
-        ),
-      );
-  }
-}
-MS7(){
-
-  if(Shoe7 == 0){
-    return
-      Container();
-  }
-  else{
-    return
-      InkWell(
-        onTap: (){
-          setState(()  {
-
-            usersize = '(US)6-1/2';
-          });
-
-
-        },
-        child:   Container(
-          height:50,
-          width:MediaQuery.of(context).size.width,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-//    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
-              FittedBox(child: Text('(US)6-1/2',)),
-            ],
-          ),
-        ),
-      );
-  }
-}
-MS8(){
-
-  if(Shoe8 == 0){
-    return
-      Container();
-  }
-  else{
-    return
-    InkWell(
-      onTap: (){
-        setState(()  {
-
-          usersize = '(US)7';
-        });
-
-
-      },
-      child:   Container(
-        height:50,
-        width:MediaQuery.of(context).size.width,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-//    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
-            FittedBox(child: Text('(US)7',)),
-          ],
-        ),
-      ),
-    );
-  }
-}
-MS9(){
-
-  if(Shoe9 == 0){
-    return
-      Container();
-  }
- else {
-    return
-      InkWell(
-        onTap: (){
-          setState(()  {
-
-            usersize = '(US)7-1/2';
-          });
-
-
-
-        },
-        child:   Container(
-          height:50,
-          width:MediaQuery.of(context).size.width,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-//    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
-              FittedBox(child: Text('(US)7-1/2',)),
-            ],
-          ),
-        ),
-      );
-  }
-}
-MS10(){
-
-  if(Shoe10 == 0){
-    return
-      Container();
-  }
-  else{
-    return
-    InkWell(
-      onTap: (){
-        setState(()  {
-
-          usersize = '(US)8';
-        });
-
-
-
-      },
-      child: Container(
-        decoration: BoxDecoration(
-            color: kPrimaryColor,
-            boxShadow: [
-              BoxShadow(
-                color: Colors.grey,
-                blurRadius: 5.0,
-              ),]
-            ,borderRadius: BorderRadius.all(Radius.circular(10.0))
-        ),
-        height: 40,
-        width: 40,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            FittedBox(child: Text('(US)8',style: TextStyle(color: Colors.white,fontSize: 8),)),
-
-
-          ],
-        ),
-      ),
-    );
-  }
-}
-MS11(){
-
-  if(Shoe11 == 0){
-    return
-      Container();
-  }
-  else{
-    return
-      InkWell(
-        onTap: (){
-          setState(()  {
-
-            usersize = '(US)8-1/2';
-          });
-
-
-        },
-        child:   Container(
-          height:50,
-          width:MediaQuery.of(context).size.width,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-//    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
-              FittedBox(child: Text('(US)8-1/2',)),
-            ],
-          ),
-        ),
-      );
-  }
-}
-MS12(){
-
-  if(Shoe12 == 0){
-    return
-      Container();
-  }
-  else{
-    return
-      InkWell(
-        onTap: (){
-          setState(()  {
-
-            usersize = '(US)9';
-          });
-
-
-
-        },
-        child:   Container(
-          height:50,
-          width:MediaQuery.of(context).size.width,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-//    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
-              FittedBox(child: Text('(US)9',)),
-            ],
-          ),
-        ),
-      );
-  }
-}
-MS13(){
-  if(Shoe13 == 0){
-    return
-      Container();
-  }
-  else{
-return
-    InkWell(
-      onTap: (){
-        setState(()  {
-
-          usersize = '(US)9-1/2';
-        });
-
-
-      },
-      child:   Container(
-        height:50,
-        width:MediaQuery.of(context).size.width,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-//    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
-            FittedBox(child: Text('(US)9-1/2',)),
-          ],
-        ),
-      ),
-    );
-  }
-}
-MS14(){
-  if(Shoe14 == 0){
-    return
-      Container();
-  }
-  else{
-    return
-      InkWell(
-        onTap: (){
-          setState(()  {
-
-            usersize = '(US)10';
-          });
-
-
-
-        },
-        child:   Container(
-          height:50,
-          width:MediaQuery.of(context).size.width,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-//    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
-              FittedBox(child: Text('(US)10',)),
-            ],
-          ),
-        ),
-      );
-  }
-}
-MS15(){
-
-  if(Shoe1 == 0){
-    return
-      Container();
-  }
-  else{
-    return
-      InkWell(
-        onTap: (){
-          setState(()  {
-
-            usersize = '(US)10-1/2';
-          });
-
-
-        },
-        child:   Container(
-          height:50,
-          width:MediaQuery.of(context).size.width,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-//    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
-              FittedBox(child: Text('(US)10-1/2',)),
-            ],
-          ),
-        ),
-      );
-  }
-}
-MS16(){
-  if(Shoe16 == 0){
-    return
-      Container();
-  }
-  else{
-    return
-      InkWell(
-        onTap: (){
-          setState(()  {
-
-            usersize = '(US)11';
-          });
-
-
-        },
-        child:   Container(
-          height:50,
-          width:MediaQuery.of(context).size.width,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-//    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
-              FittedBox(child: Text('(US)11',)),
-            ],
-          ),
-        ),
-      );
-  }
-}
-MS17(){
-  if(Shoe17 == 0){
-    return
-      Container();
-  }
-  else{
-    return
-      InkWell(
-        onTap: (){
-          setState(()  {
-
-            usersize = '(US)11-1/2';
-          });
-
-
-        },
-        child:   Container(
-          height:50,
-          width:MediaQuery.of(context).size.width,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-//    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
-              FittedBox(child: Text('(US)11-1/2',)),
-            ],
-          ),
-        ),
-      );
-  }
-}
-MS18(){
-
-  if(Shoe18 == 0){
-    return
-      Container();
-  }
-  else{
-    return
-      InkWell(
-        onTap: (){
-          setState(()  {
-
-            usersize = '(US)12';
-          });
-
-
-
-        },
-        child:   Container(
-          height:50,
-          width:MediaQuery.of(context).size.width,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-//    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
-              FittedBox(child: Text('(US)12',)),
-            ],
-          ),
-        ),
-      );
-  }
-}
-MS19(){
-
-  if(Shoe19 == 0){
-    return
-      Container();
-  }
-  else{
-    return
-      InkWell(
-        onTap: (){
-          setState(()  {
-
-            usersize = '(US)12-1/2';
-          });
-
-
-        },
-        child:   Container(
-          height:50,
-          width:MediaQuery.of(context).size.width,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-//    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
-              FittedBox(child: Text('(US)12-1/2',)),
-            ],
-          ),
-        ),
-      );
-  }
-}
-MS20(){
-
-  if(Shoe20 == 0){
-    return
-      Container();
-  }
-  else{
-  return
-  InkWell(
-  onTap: (){
-  setState(()  {
-
-  usersize = '(US)13';
-  });
-
-
-  },
-    child:   Container(
-      height:50,
-      width:MediaQuery.of(context).size.width,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-//    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
-          FittedBox(child: Text('(US)13',)),
-        ],
-      ),
-    ),
-  );
-}
-}
-MS21(){
-
-  if(Shoe21 == 0){
-    return
-      Container();
-  }
-  else{
-    return
-      InkWell(
-        onTap: (){
-          setState(()  {
-
-            usersize = '(US)13-1/2';
-          });
-
-
-        },
-        child:   Container(
-          height:50,
-          width:MediaQuery.of(context).size.width,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-//    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
-              FittedBox(child: Text('(US)13-1/2',)),
-            ],
-          ),
-        ),
-      );
-  }
-
-}
   WS1(){
 
     if(Shoe1 == 0){
@@ -4385,699 +3256,7 @@ else{
       );
     }
   }
- R1(){
 
-    if(Ring1 == 0){
-      return
-        Container();
-    }
-    else{
-      return
-      InkWell(
-        onTap: (){
-          setState(()  {
-
-            usersize = 'R 4';
-          });
-
-
-        },
-        child:   Container(
-          height:50,
-          width:MediaQuery.of(context).size.width,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-//    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
-              FittedBox(child: Text('(US) 4',)),
-            ],
-          ),
-        ),
-      );
-    }
-  }
- R2(){
-
-    if(Ring2 == 0){
-      return
-        Container();
-    }
-    else{
-      return
-      InkWell(
-        onTap: (){
-          setState(()  {
-
-            usersize = 'R 4.5';
-          });
-
-
-        },
-        child:   Container(
-          height:50,
-          width:MediaQuery.of(context).size.width,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-//    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
-              FittedBox(child: Text('(US) 4.5',)),
-            ],
-          ),
-        ),
-      );
-    }
-  }
- R3(){
-
-    if(Ring3 == 0){
-      return
-        Container();
-    }
-    else{
-      return
-      InkWell(
-        onTap: (){
-          setState(()  {
-
-            usersize = 'R 5';
-          });
-
-
-        },
-        child:   Container(
-          height:50,
-          width:MediaQuery.of(context).size.width,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-//    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
-              FittedBox(child: Text('(US) 5',)),
-            ],
-          ),
-        ),
-      );
-    }
-  }
- R4(){
-
-    if(Ring4 == 0){
-      return
-        Container();
-    }
-    else{
-      return
-      InkWell(
-        onTap: (){
-          setState(()  {
-
-            usersize = 'R 5.5';
-          });
-
-
-        },
-        child:   Container(
-          height:50,
-          width:MediaQuery.of(context).size.width,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              FittedBox(child: Text('(US) 5.5',)),
-            ],
-          ),
-        ),
-      );
-    }
-  }
- R5(){
-
-    if(Ring5 == 0){
-      return
-        Container();
-    }
-    else{
-      return
-      InkWell(
-        onTap: (){
-          setState(()  {
-
-            usersize = 'R 6';
-          });
-
-
-        },
-        child:   Container(
-          height:50,
-          width:MediaQuery.of(context).size.width,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              FittedBox(child: Text('(US) 6',)),
-            ],
-          ),
-        ),
-      );
-    }
-  }
- R6(){
-
-    if(Ring6 == 0){
-      return
-        Container();
-    }
-    else{
-      return
-      InkWell(
-        onTap: (){
-          setState(()  {
-
-            usersize = 'R 6.5';
-          });
-
-
-        },
-        child:   Container(
-          height:50,
-          width:MediaQuery.of(context).size.width,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              FittedBox(child: Text('(US) 6.5',)),
-            ],
-          ),
-        ),
-      );
-    }
-  }
- R7(){
-
-    if(Ring7 == 0){
-      return
-        Container();
-    }
-    else{
-      return
-      InkWell(
-        onTap: (){
-          setState(()  {
-
-            usersize = 'R 7';
-          });
-
-
-        },
-        child:   Container(
-          height:50,
-          width:MediaQuery.of(context).size.width,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              FittedBox(child: Text('(US) 7',)),
-            ],
-          ),
-        ),
-      );
-    }
-  }
- R8(){
-
-    if(Ring8 == 0){
-      return
-        Container();
-    }
-    else{
-      return
-      InkWell(
-        onTap: (){
-          setState(()  {
-
-            usersize = 'R 7.5';
-          });
-
-
-        },
-        child:   Container(
-          height:50,
-          width:MediaQuery.of(context).size.width,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              FittedBox(child: Text('(US) 7.5',)),
-            ],
-          ),
-        ),
-      );
-    }
-  }
- R9(){
-
-    if(Ring9 == 0){
-      return
-        Container();
-    }
-    else{
-      return
-      InkWell(
-        onTap: (){
-          setState(()  {
-
-            usersize = 'R 8';
-          });
-
-
-        },
-        child:   Container(
-          height:50,
-          width:MediaQuery.of(context).size.width,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              FittedBox(child: Text('(US) 8',)),
-            ],
-          ),
-        ),
-      );
-    }
-  }
- R10(){
-
-    if(Ring10 == 0){
-      return
-        Container();
-    }
-    else{
-      return
-      InkWell(
-        onTap: (){
-          setState(()  {
-
-            usersize = 'R 8.5';
-          });
-
-
-        },
-        child:   Container(
-          height:50,
-          width:MediaQuery.of(context).size.width,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              FittedBox(child: Text('(US) 8.5',)),
-            ],
-          ),
-        ),
-      );
-    }
-  }
- R11(){
-
-    if(Ring11 == 0){
-      return
-        Container();
-    }
-    else{
-      return
-      InkWell(
-        onTap: (){
-          setState(()  {
-
-            usersize = 'R 9';
-          });
-
-
-        },
-        child:   Container(
-          height:50,
-          width:MediaQuery.of(context).size.width,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              FittedBox(child: Text('(US) 9',)),
-            ],
-          ),
-        ),
-      );
-    }
-  }
- R12(){
-
-    if(Ring12 == 0){
-      return
-        Container();
-    }
-    else{
-      return
-      InkWell(
-        onTap: (){
-          setState(()  {
-
-            usersize = 'R 9.5';
-          });
-
-
-        },
-        child:   Container(
-          height:50,
-          width:MediaQuery.of(context).size.width,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              FittedBox(child: Text('(US) 9.5',)),
-            ],
-          ),
-        ),
-      );
-    }
-  }
- R13(){
-
-    if(Ring13 == 0){
-      return
-        Container();
-    }
-    else{
-      return
-      InkWell(
-        onTap: (){
-          setState(()  {
-
-            usersize = 'R 10';
-          });
-
-
-        },
-        child:   Container(
-          height:50,
-          width:MediaQuery.of(context).size.width,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              FittedBox(child: Text(' (US) 10',)),
-            ],
-          ),
-        ),
-      );
-    }
-  }
- R14(){
-
-    if(Ring14 == 0){
-      return
-        Container();
-    }
-    else{
-      return
-      InkWell(
-        onTap: (){
-          setState(()  {
-
-            usersize = 'R 10.5';
-          });
-
-
-        },
-        child:   Container(
-          height:50,
-          width:MediaQuery.of(context).size.width,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              FittedBox(child: Text('(US) 10.5',)),
-            ],
-          ),
-        ),
-      );
-    }
-  }
- R15(){
-
-    if(Ring15 == 0){
-      return
-        Container();
-    }
-    else{
-      return
-      InkWell(
-        onTap: (){
-          setState(()  {
-
-            usersize = 'R 11';
-          });
-
-
-        },
-        child:   Container(
-          height:50,
-          width:MediaQuery.of(context).size.width,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              FittedBox(child: Text('(US) 11',)),
-            ],
-          ),
-        ),
-      );
-    }
-  }
- R16(){
-
-    if(Ring16 == 0){
-      return
-        Container();
-    }
-    else{
-      return
-      InkWell(
-        onTap: (){
-          setState(()  {
-
-            usersize = 'R 11.5';
-          });
-
-
-        },
-        child:   Container(
-          height:50,
-          width:MediaQuery.of(context).size.width,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              FittedBox(child: Text('(US) 11.5',)),
-            ],
-          ),
-        ),
-      );
-    }
-  }
- R17(){
-
-    if(Ring17 == 0){
-      return
-        Container();
-    }
-    else{
-      return
-      InkWell(
-        onTap: (){
-          setState(()  {
-
-            usersize = 'R 12';
-          });
-
-
-        },
-        child:   Container(
-          height:50,
-          width:MediaQuery.of(context).size.width,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              FittedBox(child: Text('(US) 12',)),
-            ],
-          ),
-        ),
-      );
-    }
-  }
- R18(){
-
-    if(Ring18 == 0){
-      return
-        Container();
-    }
-    else{
-      return
-      InkWell(
-        onTap: (){
-          setState(()  {
-
-            usersize = 'R 12.5';
-          });
-
-
-        },
-        child:   Container(
-          height:50,
-          width:MediaQuery.of(context).size.width,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              FittedBox(child: Text('(US) 12.5',)),
-            ],
-          ),
-        ),
-      );
-    }
-  }
- R19(){
-
-    if(Ring19 == 0){
-      return
-        Container();
-    }
-    else{
-      return
-      InkWell(
-        onTap: (){
-          setState(()  {
-
-            usersize = 'R 13';
-          });
-
-
-        },
-        child:   Container(
-          height:50,
-          width:MediaQuery.of(context).size.width,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              FittedBox(child: Text('(US) 13',)),
-            ],
-          ),
-        ),
-      );
-    }
-  }
- R20(){
-
-    if(Ring20 == 0){
-      return
-        Container();
-    }
-    else{
-      return
-      InkWell(
-        onTap: (){
-          setState(()  {
-
-            usersize = 'R 13.5';
-          });
-
-
-        },
-        child:   Container(
-          height:50,
-          width:MediaQuery.of(context).size.width,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              FittedBox(child: Text('(US) 13.5',)),
-            ],
-          ),
-        ),
-      );
-    }
-  }
- R21(){
-
-    if(Ring21 == 0){
-      return
-        Container();
-    }
-    else{
-      return
-      InkWell(
-        onTap: (){
-          setState(()  {
-
-            usersize = 'R 14';
-          });
-
-
-        },
-        child:   Container(
-          height:50,
-          width:MediaQuery.of(context).size.width,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              FittedBox(child: Text('(US) 14',)),
-            ],
-          ),
-        ),
-      );
-    }
-  }
- R22(){
-
-    if(Ring22 == 0){
-      return
-        Container();
-    }
-    else{
-      return
-      InkWell(
-        onTap: (){
-          setState(()  {
-
-            usersize = 'R 14.5';
-          });
-
-
-        },
-        child:   Container(
-          height:50,
-          width:MediaQuery.of(context).size.width,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              FittedBox(child: Text('(US) 14.5',)),
-            ],
-          ),
-        ),
-      );
-    }
-  }
- R23(){
-
-    if(Ring23 == 0){
-      return
-        Container();
-    }
-    else{
-      return
-      InkWell(
-        onTap: (){
-          setState(()  {
-
-            usersize = 'R 15';
-          });
-
-
-        },
-        child:   Container(
-          height:50,
-          width:MediaQuery.of(context).size.width,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              FittedBox(child: Text('(US) 15',)),
-            ],
-          ),
-        ),
-      );
-    }
-  }
  Col1(){
 
     if(color1 == 0){
@@ -6803,65 +4982,7 @@ MenSizes(){
            MTO(),
 
            SizedBox(height:40.0),
-           FREE(),
- XXXS(),
- XXS(),
- XS(),
- S(),
- M(),
- L(),
- XL(),
- XXL(),
- XXXL(),
- FXL(),
- FIVXL(),
- SIXXL(),
- SEVXL(),
- EIGXL(),
- MS1(),
- MS2(),
- MS3(),
- MS4(),
- MS5(),
- MS6(),
- MS7(),
- MS8(),
- MS9(),
- MS10(),
- MS11(),
- MS12(),
- MS13(),
- MS14(),
- MS15(),
- MS16(),
- MS17(),
- MS18(),
- MS19(),
- MS20(),
- MS21(),
-    R1(),
- R2(),
- R3(),
- R4(),
- R5(),
- R6(),
- R7(),
- R8(),
- R9(),
- R10(),
- R11(),
- R12(),
- R13(),
- R14(),
- R15(),
- R16(),
- R17(),
- R18(),
- R19(),
- R20(),
- R21(),
-   R22(),
-   R23(),
+
            Cus1(),
            Cus2(),
            Cus3(),
@@ -6882,21 +5003,8 @@ WomenSizes(){
     ListView(
       children: [
         MTO(),
-        FREE(),
-        XXXS(),
-        XXS(),
-        XS(),
-        S(),
-        M(),
-        L(),
-        XL(),
-        XXL(),
-        XXXL(),
-        FXL(),
-        FIVXL(),
-        SIXXL(),
-          SEVXL(),
-          EIGXL(),
+
+
 
   WS1(),
   WS2(),
@@ -6914,29 +5022,7 @@ WomenSizes(){
   WS14(),
   WS15(),
   WS16(),
-        R1(),
-        R2(),
-        R3(),
-        R4(),
-        R5(),
-        R6(),
-        R7(),
-        R8(),
-        R9(),
-        R10(),
-        R11(),
-        R12(),
-        R13(),
-        R14(),
-        R15(),
-        R16(),
-        R17(),
-        R18(),
-        R19(),
-        R20(),
-        R21(),
-        R22(),
-        R23(),
+
         Cus1(),
         Cus2(),
         Cus3(),
@@ -6960,7 +5046,7 @@ BabySizes(){
     child: ListView(
       children: [
           MTO(),
-          FREE(),
+
         B1(),
   B2(),
   B3(),
@@ -6976,29 +5062,7 @@ BabySizes(){
   BS5(),
   BS6(),
   BS7(),
-        R1(),
-        R2(),
-        R3(),
-        R4(),
-        R5(),
-        R6(),
-        R7(),
-        R8(),
-        R9(),
-        R10(),
-        R11(),
-        R12(),
-        R13(),
-        R14(),
-        R15(),
-        R16(),
-        R17(),
-        R18(),
-        R19(),
-        R20(),
-        R21(),
-        R22(),
-        R23(),
+
         Cus1(),
         Cus2(),
         Cus3(),
@@ -7021,30 +5085,7 @@ KidSizes(){
         child: ListView(
             children: [
               MTO(),
-            FREE(),
-              R1(),
-              R2(),
-              R3(),
-              R4(),
-              R5(),
-              R6(),
-              R7(),
-              R8(),
-              R9(),
-              R10(),
-              R11(),
-              R12(),
-              R13(),
-              R14(),
-              R15(),
-              R16(),
-              R17(),
-              R18(),
-              R19(),
-              R20(),
-              R21(),
-              R22(),
-              R23(),
+
               Cus1(),
               Cus2(),
               Cus3(),
@@ -7091,30 +5132,7 @@ TeenSizes(){
     ListView(
           children: [
             MTO(),
-            FREE(),
-            R1(),
-            R2(),
-            R3(),
-            R4(),
-            R5(),
-            R6(),
-            R7(),
-            R8(),
-            R9(),
-            R10(),
-            R11(),
-            R12(),
-            R13(),
-            R14(),
-            R15(),
-            R16(),
-            R17(),
-            R18(),
-            R19(),
-            R20(),
-            R21(),
-            R22(),
-            R23(),
+
             Cus1(),
             Cus2(),
             Cus3(),
@@ -7259,40 +5277,183 @@ mtoText:mtoController.text ,
 
 SelectCol(){
   return
-    Expanded(child:Container(
+    Container(
+      height:60.0,
 
-      child: ListView(
-        children: [
-          MTO(),
+      child:   Expanded(
 
-          SizedBox(height:40.0),
-          Col1(),
-        Col2(),
-        Col3(),
-        Col4(),
-        Col5(),
-        Col6(),
-        Col7(),
-        Col8(),
-        Col9(),
-        Col10(),
 
-        ],
+
+          child:   ListView(
+              scrollDirection:Axis.horizontal,
+              shrinkWrap:true,
+              children:[
+                color1==0?Container():   ElevatedButton(
+
+                  style: ElevatedButton.styleFrom(
+
+                    primary: selectedCategory.contains("col 1") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                    onPrimary:selectedCategory.contains("col 1") ? Colors.white:  Colors.black, // foreground
+                  ),
+                  onPressed: () {
+                    selectedCategory =  <String>[];
+                    selectedCategory.add("col 1");
+
+                    stateSetter(() { color = 'col 1';
+                    usercolor = colorText1;});
+                  },          child: Text(colorText1),
+                ),
+                color2==0?Container():   ElevatedButton(
+
+                  style: ElevatedButton.styleFrom(
+
+                    primary: selectedCategory.contains("col 2") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                    onPrimary:selectedCategory.contains("col 2") ? Colors.white:  Colors.black, // foreground
+                  ),
+                  onPressed: () {
+                    selectedCategory =  <String>[];
+                    selectedCategory.add("col 2");
+
+                    stateSetter(() { color = 'col 2';
+                    usercolor = colorText2;});
+                  },          child: Text(colorText2),
+                ),
+                color3==0?Container():   ElevatedButton(
+
+                  style: ElevatedButton.styleFrom(
+
+                    primary: selectedCategory.contains("col 3") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                    onPrimary:selectedCategory.contains("col 3") ? Colors.white:  Colors.black, // foreground
+                  ),
+                  onPressed: () {
+                    selectedCategory =  <String>[];
+                    selectedCategory.add("col 3");
+
+                    stateSetter(() { color = 'col 3';
+                    usercolor = colorText3;});
+                  },          child: Text(colorText3),
+                ),
+                color4==0?Container():   ElevatedButton(
+
+                  style: ElevatedButton.styleFrom(
+
+                    primary: selectedCategory.contains("col 4") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                    onPrimary:selectedCategory.contains("col 4") ? Colors.white:  Colors.black, // foreground
+                  ),
+                  onPressed: () {
+                    selectedCategory =  <String>[];
+                    selectedCategory.add("col 4");
+
+                    stateSetter(() { color = 'col 4';
+                    usercolor = colorText4;});
+                  },          child: Text(colorText4),
+                ),
+                color5==0?Container():   ElevatedButton(
+
+                  style: ElevatedButton.styleFrom(
+
+                    primary: selectedCategory.contains("col 5") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                    onPrimary:selectedCategory.contains("col 5") ? Colors.white:  Colors.black, // foreground
+                  ),
+                  onPressed: () {
+                    selectedCategory =  <String>[];
+                    selectedCategory.add("col 5");
+
+                    stateSetter(() { color = 'col 5';
+                    usercolor = colorText5;});
+                  },          child: Text(colorText5),
+                ),
+                color6==0?Container():   ElevatedButton(
+
+                  style: ElevatedButton.styleFrom(
+
+                    primary: selectedCategory.contains("col 6") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                    onPrimary:selectedCategory.contains("col 6") ? Colors.white:  Colors.black, // foreground
+                  ),
+                  onPressed: () {
+                    selectedCategory =  <String>[];
+                    selectedCategory.add("col 6");
+
+                    stateSetter(() { color = 'col 6';
+                    usercolor = colorText6;});
+                  },          child: Text(colorText6),
+                ),
+                color7==0?Container():   ElevatedButton(
+
+                  style: ElevatedButton.styleFrom(
+
+                    primary: selectedCategory.contains("col 7") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                    onPrimary:selectedCategory.contains("col 7") ? Colors.white:  Colors.black, // foreground
+                  ),
+                  onPressed: () {
+                    selectedCategory =  <String>[];
+                    selectedCategory.add("col 7");
+
+                    stateSetter(() { color = 'col 7';
+                    usercolor = colorText7;});
+                  },          child: Text(colorText7),
+                ),
+                color8==0?Container():   ElevatedButton(
+
+                  style: ElevatedButton.styleFrom(
+
+                    primary: selectedCategory.contains("col 8") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                    onPrimary:selectedCategory.contains("col 8") ? Colors.white:  Colors.black, // foreground
+                  ),
+                  onPressed: () {
+                    selectedCategory =  <String>[];
+                    selectedCategory.add("col 8");
+
+                    stateSetter(() { color = 'col 8';
+                    usercolor = colorText8;});
+                  },          child: Text(colorText8),
+                ),
+                color9==0?Container():   ElevatedButton(
+
+                  style: ElevatedButton.styleFrom(
+
+                    primary: selectedCategory.contains("col 9") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                    onPrimary:selectedCategory.contains("col 9") ? Colors.white:  Colors.black, // foreground
+                  ),
+                  onPressed: () {
+                    selectedCategory =  <String>[];
+                    selectedCategory.add("col 9");
+
+                    stateSetter(() { color = 'col 9';
+                    usercolor = colorText9;});
+                  },          child: Text(colorText9),
+                ),
+                color10==0?Container():   ElevatedButton(
+
+                  style: ElevatedButton.styleFrom(
+
+                    primary: selectedCategory.contains("col 10") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                    onPrimary:selectedCategory.contains("col 10") ? Colors.white:  Colors.black, // foreground
+                  ),
+                  onPressed: () {
+                    selectedCategory =  <String>[];
+                    selectedCategory.add("col 10");
+
+                    stateSetter(() { color = 'col 10';
+                    usercolor = colorText10;});
+                  },          child: Text(colorText10),
+                ),
+
+              ])
       ),
-    ));
+    ),
 
 }
-  void Buynow(parentContext) {
+   Buynow({dynamic parentContext,String size}) {
+     List<String> selectedCategory = <String>[];
     if (gender == 'Men') {
-
+return
         showModalBottomSheet(
             context: parentContext,
             builder: (BuildContext context) {
               return
                StatefulBuilder(
                    builder: (BuildContext ctx, StateSetter stateSetter){
-                     bool pressAttention = true;
-                      String size;
 
                  return
                 Container(
@@ -7302,43 +5463,1334 @@ SelectCol(){
                         mainAxisAlignment: MainAxisAlignment.center,
 
                         children: [
+Container(
+  height:60.0,
+
+  child:   Expanded(
+    child:   ListView(
+          scrollDirection:Axis.horizontal,
+          shrinkWrap:true,
+              children:[
+
+                freesize==0?Container():   Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: ElevatedButton(
+
+            style: ElevatedButton.styleFrom(
+
+              primary: selectedCategory.contains("Free Size") ? Colors.black: Colors.white.withOpacity(0.1), // background
+              onPrimary:selectedCategory.contains("Free Size") ? Colors.white:  Colors.black, // foreground
+            ),
+            onPressed: () {
+              selectedCategory =  <String>[];
+              selectedCategory.add("Free Size");
+
+              stateSetter(() {usersize = "Free Size";});
+            },          child: Text('Free Size'),
+          ),
+                ),
+ xxxs==0?Container():   Padding(
+   padding: const EdgeInsets.all(8.0),
+   child: ElevatedButton(
+
+              style: ElevatedButton.styleFrom(
+
+                primary: selectedCategory.contains("XXXS") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                onPrimary:selectedCategory.contains("XXXS") ? Colors.white:  Colors.black, // foreground
+              ),
+              onPressed: () {
+                selectedCategory =  <String>[];
+                selectedCategory.add("XXXS");
+
+                stateSetter(() {usersize = "XXXS";});
+              },          child: Text('XXXS'),
+            ),
+ ),
+  xxs==0?Container():   Padding(
+    padding: const EdgeInsets.all(8.0),
+    child: ElevatedButton(
+
+              style: ElevatedButton.styleFrom(
+
+                primary: selectedCategory.contains("XXS") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                onPrimary:selectedCategory.contains("XXS") ? Colors.white:  Colors.black, // foreground
+              ),
+              onPressed: () {
+                selectedCategory =  <String>[];
+                selectedCategory.add("XXS");
+
+                stateSetter(() {usersize = "XXS";});
+              },          child: Text('XXS'),
+            ),
+  ),
+  xs==0?Container():   Padding(
+    padding: const EdgeInsets.all(8.0),
+    child: ElevatedButton(
+
+              style: ElevatedButton.styleFrom(
+
+                primary: selectedCategory.contains("XS") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                onPrimary:selectedCategory.contains("XS") ? Colors.white:  Colors.black, // foreground
+              ),
+              onPressed: () {
+                selectedCategory =  <String>[];
+                selectedCategory.add("XS");
+
+                stateSetter(() {usersize = "XS";});
+              },          child: Text('XS'),
+            ),
+  ),
+ s==0?Container():   Padding(
+   padding: const EdgeInsets.all(8.0),
+   child: ElevatedButton(
+
+              style: ElevatedButton.styleFrom(
+
+                primary: selectedCategory.contains("S") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                onPrimary:selectedCategory.contains("S") ? Colors.white:  Colors.black, // foreground
+              ),
+              onPressed: () {
+                selectedCategory =  <String>[];
+                selectedCategory.add("S");
+
+                stateSetter(() {usersize = "S";});
+              },          child: Text('S'),
+            ),
+ ),
+  m==0?Container():   Padding(
+    padding: const EdgeInsets.all(8.0),
+    child: ElevatedButton(
+
+              style: ElevatedButton.styleFrom(
+
+                primary: selectedCategory.contains("M") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                onPrimary:selectedCategory.contains("M") ? Colors.white:  Colors.black, // foreground
+              ),
+              onPressed: () {
+                selectedCategory =  <String>[];
+                selectedCategory.add("M");
+
+                stateSetter(() {usersize = "M";});
+              },          child: Text('M'),
+            ),
+  ),
+
+  l==0?Container():   Padding(
+    padding: const EdgeInsets.all(8.0),
+    child: ElevatedButton(
+
+              style: ElevatedButton.styleFrom(
+
+                primary: selectedCategory.contains("L") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                onPrimary:selectedCategory.contains("L") ? Colors.white:  Colors.black, // foreground
+              ),
+              onPressed: () {
+                selectedCategory =  <String>[];
+                selectedCategory.add("L");
+
+                stateSetter(() {usersize = "L";});
+              },          child: Text('L'),
+            ),
+  ),
+   xl==0?Container():   Padding(
+     padding: const EdgeInsets.all(8.0),
+     child: ElevatedButton(
+
+              style: ElevatedButton.styleFrom(
+
+                primary: selectedCategory.contains("XL") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                onPrimary:selectedCategory.contains("XL") ? Colors.white:  Colors.black, // foreground
+              ),
+              onPressed: () {
+                selectedCategory =  <String>[];
+                selectedCategory.add("XL");
+
+                stateSetter(() {usersize = "XL";});
+              },          child: Text('XL'),
+            ),
+   ),
+   xxl==0?Container():   Padding(
+     padding: const EdgeInsets.all(8.0),
+     child: ElevatedButton(
+
+              style: ElevatedButton.styleFrom(
+
+                primary: selectedCategory.contains("XXL") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                onPrimary:selectedCategory.contains("XXL") ? Colors.white:  Colors.black, // foreground
+              ),
+              onPressed: () {
+                selectedCategory =  <String>[];
+                selectedCategory.add("XXL");
+
+                stateSetter(() {usersize = "XXL";});
+              },          child: Text('XXL'),
+            ),
+   ),
+   xxxl==0?Container():   Padding(
+     padding: const EdgeInsets.all(8.0),
+     child: ElevatedButton(
+
+              style: ElevatedButton.styleFrom(
+
+                primary: selectedCategory.contains("XXXL") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                onPrimary:selectedCategory.contains("XXXL") ? Colors.white:  Colors.black, // foreground
+              ),
+              onPressed: () {
+                selectedCategory =  <String>[];
+                selectedCategory.add("XXXL");
+
+                stateSetter(() {usersize = "XXXL";});
+              },          child: Text('XXXL'),
+            ),
+   ),
+ fourxl==0?Container():   Padding(
+   padding: const EdgeInsets.all(8.0),
+   child: ElevatedButton(
+
+              style: ElevatedButton.styleFrom(
+
+                primary: selectedCategory.contains("4XL") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                onPrimary:selectedCategory.contains("4XL") ? Colors.white:  Colors.black, // foreground
+              ),
+              onPressed: () {
+                selectedCategory =  <String>[];
+                selectedCategory.add("4XL");
+
+                stateSetter(() {usersize = "4XL";});
+              },          child: Text('4XL'),
+            ),
+ ),
+ fivexl==0?Container():   Padding(
+   padding: const EdgeInsets.all(8.0),
+   child: ElevatedButton(
+
+              style: ElevatedButton.styleFrom(
+
+                primary: selectedCategory.contains("5XL") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                onPrimary:selectedCategory.contains("5XL") ? Colors.white:  Colors.black, // foreground
+              ),
+              onPressed: () {
+                selectedCategory =  <String>[];
+                selectedCategory.add("5XL");
+
+                stateSetter(() {usersize = "5XL";});
+              },          child: Text('5XL'),
+            ),
+ ),
+ sixxl==0?Container():   Padding(
+   padding: const EdgeInsets.all(8.0),
+   child: ElevatedButton(
+
+              style: ElevatedButton.styleFrom(
+
+                primary: selectedCategory.contains("6XL") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                onPrimary:selectedCategory.contains("6XL") ? Colors.white:  Colors.black, // foreground
+              ),
+              onPressed: () {
+                selectedCategory =  <String>[];
+                selectedCategory.add("6XL");
+
+                stateSetter(() {usersize = "6XL";});
+              },          child: Text('6XL'),
+            ),
+ ),
+ sevenxl==0?Container():   Padding(
+   padding: const EdgeInsets.all(8.0),
+   child: ElevatedButton(
+
+              style: ElevatedButton.styleFrom(
+
+                primary: selectedCategory.contains("7XL") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                onPrimary:selectedCategory.contains("7XL") ? Colors.white:  Colors.black, // foreground
+              ),
+              onPressed: () {
+                selectedCategory =  <String>[];
+                selectedCategory.add("7XL");
+
+                stateSetter(() {usersize = "7XL";});
+              },          child: Text('7XL'),
+            ),
+ ),
+ eightxl==0?Container():   Padding(
+   padding: const EdgeInsets.all(8.0),
+   child: ElevatedButton(
+
+              style: ElevatedButton.styleFrom(
+
+                primary: selectedCategory.contains("8XL") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                onPrimary:selectedCategory.contains("8XL") ? Colors.white:  Colors.black, // foreground
+              ),
+              onPressed: () {
+                selectedCategory =  <String>[];
+                selectedCategory.add("8XL");
+
+                stateSetter(() {usersize = "8XL";});
+              },          child: Text('8XL'),
+            ),
+ ),
+Shoe1==0?Container():   Padding(
+  padding: const EdgeInsets.all(8.0),
+  child:   ElevatedButton(
+
+              style: ElevatedButton.styleFrom(
+
+                primary: selectedCategory.contains("(US) 3 ½") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                onPrimary:selectedCategory.contains("(US) 3 ½") ? Colors.white:  Colors.black, // foreground
+              ),
+              onPressed: () {
+                selectedCategory =  <String>[];
+                selectedCategory.add("(US) 3 ½");
+
+                stateSetter(() {usersize = "(US) 3 ½";});
+              },          child: Text('(US) 3 ½'),
+            ),
+),
+ Shoe2==0?Container():  Padding(
+     padding: const EdgeInsets.all(8.0),
+     child:   ElevatedButton(
+
+            style: ElevatedButton.styleFrom(
+
+              primary: selectedCategory.contains("(US) 4") ? Colors.black: Colors.white.withOpacity(0.1), // background
+              onPrimary:selectedCategory.contains("(US) 4") ? Colors.white:  Colors.black, // foreground
+            ),
+            onPressed: () {
+              selectedCategory =  <String>[];
+              selectedCategory.add("(US) 4");
+
+              stateSetter(() {usersize = "(US) 4";});
+            },          child: Text('(US) 4'),
+          )),
+Shoe3==0?Container():   Padding(
+    padding: const EdgeInsets.all(8.0),
+    child:  ElevatedButton(
+
+            style: ElevatedButton.styleFrom(
+
+              primary: selectedCategory.contains("(US) 4 ½") ? Colors.black: Colors.white.withOpacity(0.1), // background
+              onPrimary:selectedCategory.contains("(US) 4 ½") ? Colors.white:  Colors.black, // foreground
+            ),
+            onPressed: () {
+              selectedCategory =  <String>[];
+              selectedCategory.add("(US) 4 ½");
+
+              stateSetter(() {usersize = "(US) 4 ½";});
+            },          child: Text('(US) 4 ½'),
+          )),
+Shoe4==0?Container():  Padding(
+    padding: const EdgeInsets.all(8.0),
+    child:   ElevatedButton(
+
+            style: ElevatedButton.styleFrom(
+
+              primary: selectedCategory.contains("(US) 5") ? Colors.black: Colors.white.withOpacity(0.1), // background
+              onPrimary:selectedCategory.contains("(US) 5") ? Colors.white:  Colors.black, // foreground
+            ),
+            onPressed: () {
+              selectedCategory =  <String>[];
+              selectedCategory.add("(US) 5");
+
+              stateSetter(() {usersize = "(US) 5";});
+            },          child: Text('(US) 5'),
+          )),
+Shoe5==0?Container():   Padding(
+    padding: const EdgeInsets.all(8.0),
+    child:  ElevatedButton(
+
+            style: ElevatedButton.styleFrom(
+
+              primary: selectedCategory.contains("(US) 5 ½") ? Colors.black: Colors.white.withOpacity(0.1), // background
+              onPrimary:selectedCategory.contains("(US) 5 ½") ? Colors.white:  Colors.black, // foreground
+            ),
+            onPressed: () {
+              selectedCategory =  <String>[];
+              selectedCategory.add("(US) 5 ½");
+
+              stateSetter(() {usersize = "(US) 5 ½";});
+            },          child: Text('(US) 5 ½'),
+          )),
+Shoe6==0?Container():  Padding(
+    padding: const EdgeInsets.all(8.0),
+    child:   ElevatedButton(
+
+            style: ElevatedButton.styleFrom(
+
+              primary: selectedCategory.contains("(US) 6") ? Colors.black: Colors.white.withOpacity(0.1), // background
+              onPrimary:selectedCategory.contains("(US) 6") ? Colors.white:  Colors.black, // foreground
+            ),
+            onPressed: () {
+              selectedCategory =  <String>[];
+              selectedCategory.add("(US) 6");
+
+              stateSetter(() {usersize = "(US) 6";});
+            },          child: Text('(US) 6'),
+          )),
+Shoe7==0?Container():   Padding(
+  padding: const EdgeInsets.all(8.0),
+  child:   ElevatedButton(
+
+              style: ElevatedButton.styleFrom(
+
+                primary: selectedCategory.contains("(US) 6 ½") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                onPrimary:selectedCategory.contains("(US) 6 ½") ? Colors.white:  Colors.black, // foreground
+              ),
+              onPressed: () {
+                selectedCategory =  <String>[];
+                selectedCategory.add("(US) 6 ½");
+
+                stateSetter(() {usersize = "(US) 6 ½";});
+              },          child: Text('(US) 6 ½'),
+            ),
+),
+Shoe8==0?Container():   Padding(
+  padding: const EdgeInsets.all(8.0),
+  child:   ElevatedButton(
+
+              style: ElevatedButton.styleFrom(
+
+                primary: selectedCategory.contains("(US) 7") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                onPrimary:selectedCategory.contains("(US) 7") ? Colors.white:  Colors.black, // foreground
+              ),
+              onPressed: () {
+                selectedCategory =  <String>[];
+                selectedCategory.add("(US) 7");
+
+                stateSetter(() {usersize = "(US) 7";});
+              },          child: Text('(US) 7'),
+            ),
+),
+Shoe9==0?Container():   Padding(
+  padding: const EdgeInsets.all(8.0),
+  child:   ElevatedButton(
+
+              style: ElevatedButton.styleFrom(
+
+                primary: selectedCategory.contains("(US) 7 ½") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                onPrimary:selectedCategory.contains("(US) 7 ½") ? Colors.white:  Colors.black, // foreground
+              ),
+              onPressed: () {
+                selectedCategory =  <String>[];
+                selectedCategory.add("(US) 7 ½");
+
+                stateSetter(() {usersize = "(US) 7 ½";});
+              },          child: Text('(US) 7 ½'),
+            ),
+),
+Shoe10==0?Container():   Padding(
+  padding: const EdgeInsets.all(8.0),
+  child:   ElevatedButton(
+
+              style: ElevatedButton.styleFrom(
+
+                primary: selectedCategory.contains("(US) 8") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                onPrimary:selectedCategory.contains("(US) 8") ? Colors.white:  Colors.black, // foreground
+              ),
+              onPressed: () {
+                selectedCategory =  <String>[];
+                selectedCategory.add("(US) 8");
+
+                stateSetter(() {usersize = "(US) 8";});
+              },          child: Text('(US) 8'),
+            ),
+),
+Shoe11==0?Container():   Padding(
+  padding: const EdgeInsets.all(8.0),
+  child:   ElevatedButton(
+
+              style: ElevatedButton.styleFrom(
+
+                primary: selectedCategory.contains("(US) 8 ½") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                onPrimary:selectedCategory.contains("(US) 8 ½") ? Colors.white:  Colors.black, // foreground
+              ),
+              onPressed: () {
+                selectedCategory =  <String>[];
+                selectedCategory.add("(US) 8 ½");
+
+                stateSetter(() {usersize = "(US) 8 ½";});
+              },          child: Text('(US) 8 ½'),
+            ),
+),
+Shoe12==0?Container():   Padding(
+  padding: const EdgeInsets.all(8.0),
+  child:   ElevatedButton(
+
+              style: ElevatedButton.styleFrom(
+
+                primary: selectedCategory.contains("(US) 9") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                onPrimary:selectedCategory.contains("(US) 9") ? Colors.white:  Colors.black, // foreground
+              ),
+              onPressed: () {
+                selectedCategory =  <String>[];
+                selectedCategory.add("(US) 9");
+
+                stateSetter(() {usersize = "(US) 9";});
+              },          child: Text('(US) 9'),
+            ),
+),
+Shoe13==0?Container():   Padding(
+  padding: const EdgeInsets.all(8.0),
+  child:   ElevatedButton(
+
+              style: ElevatedButton.styleFrom(
+
+                primary: selectedCategory.contains("(US) 9 ½") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                onPrimary:selectedCategory.contains("(US) 9 ½") ? Colors.white:  Colors.black, // foreground
+              ),
+              onPressed: () {
+                selectedCategory =  <String>[];
+                selectedCategory.add("(US) 9 ½");
+
+                stateSetter(() {usersize = "(US) 9 ½";});
+              },          child: Text('(US) 9 ½'),
+            ),
+),
+Shoe14==0?Container():   Padding(
+  padding: const EdgeInsets.all(8.0),
+  child:   ElevatedButton(
+
+              style: ElevatedButton.styleFrom(
+
+                primary: selectedCategory.contains("(US) 10") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                onPrimary:selectedCategory.contains("(US) 10") ? Colors.white:  Colors.black, // foreground
+              ),
+              onPressed: () {
+                selectedCategory =  <String>[];
+                selectedCategory.add("(US) 10");
+
+                stateSetter(() {usersize = "(US) 10";});
+              },          child: Text('(US) 10'),
+            ),
+),
+Shoe15==0?Container():   Padding(
+  padding: const EdgeInsets.all(8.0),
+  child:   ElevatedButton(
+
+              style: ElevatedButton.styleFrom(
+
+                primary: selectedCategory.contains("(US) 10 ½") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                onPrimary:selectedCategory.contains("(US) 10 ½") ? Colors.white:  Colors.black, // foreground
+              ),
+              onPressed: () {
+                selectedCategory =  <String>[];
+                selectedCategory.add("(US) 10 ½");
+
+                stateSetter(() {usersize = "(US) 10 ½";});
+              },          child: Text('(US) 10 ½'),
+            ),
+),
+Shoe16==0?Container():   Padding(
+  padding: const EdgeInsets.all(8.0),
+  child:   ElevatedButton(
+
+
+
+              style: ElevatedButton.styleFrom(
+
+
+
+                primary: selectedCategory.contains("(US) 11") ? Colors.black: Colors.white.withOpacity(0.1), // background
+
+                onPrimary:selectedCategory.contains("(US) 11") ? Colors.white:  Colors.black, // foreground
+
+              ),
+
+              onPressed: () {
+
+                selectedCategory =  <String>[];
+
+                selectedCategory.add("(US) 11");
+
+
+
+                stateSetter(() {usersize = "(US) 11";});
+
+              },          child: Text('(US) 11'),
+
+            ),
+),
+Shoe17==0?Container():   Padding(
+  padding: const EdgeInsets.all(8.0),
+  child:   ElevatedButton(
+
+              style: ElevatedButton.styleFrom(
+
+                primary: selectedCategory.contains("(US) 11 ½") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                onPrimary:selectedCategory.contains("(US) 11 ½") ? Colors.white:  Colors.black, // foreground
+              ),
+              onPressed: () {
+                selectedCategory =  <String>[];
+                selectedCategory.add("(US) 11 ½");
+
+                stateSetter(() {usersize = "(US) 11 ½";});
+              },          child: Text('(US) 11 ½'),
+            ),
+),
+Shoe18==0?Container():   Padding(
+  padding: const EdgeInsets.all(8.0),
+  child:   ElevatedButton(
+
+              style: ElevatedButton.styleFrom(
+
+                primary: selectedCategory.contains("(US) 12") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                onPrimary:selectedCategory.contains("(US) 12") ? Colors.white:  Colors.black, // foreground
+              ),
+              onPressed: () {
+                selectedCategory =  <String>[];
+                selectedCategory.add("(US) 12");
+
+                stateSetter(() {usersize = "(US) 12";});
+              },          child: Text('(US) 12'),
+            ),
+),
+Shoe19==0?Container():   Padding(
+  padding: const EdgeInsets.all(8.0),
+  child:   ElevatedButton(
+
+              style: ElevatedButton.styleFrom(
+
+                primary: selectedCategory.contains("(US) 12 ½") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                onPrimary:selectedCategory.contains("(US) 12 ½") ? Colors.white:  Colors.black, // foreground
+              ),
+              onPressed: () {
+                selectedCategory =  <String>[];
+                selectedCategory.add("(US) 12 ½");
+
+                stateSetter(() {usersize = "(US) 12 ½";});
+              },          child: Text('(US) 12 ½'),
+            ),
+),
+Shoe20==0?Container():   Padding(
+  padding: const EdgeInsets.all(8.0),
+  child:   ElevatedButton(
+
+              style: ElevatedButton.styleFrom(
+
+                primary: selectedCategory.contains("(US) 13") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                onPrimary:selectedCategory.contains("(US) 13") ? Colors.white:  Colors.black, // foreground
+              ),
+              onPressed: () {
+                selectedCategory =  <String>[];
+                selectedCategory.add("(US) 13");
+
+                stateSetter(() {usersize = "(US) 13";});
+              },          child: Text('(US) 13'),
+            ),
+),
+Shoe21==0?Container():   Padding(
+  padding: const EdgeInsets.all(8.0),
+  child:   ElevatedButton(
+
+              style: ElevatedButton.styleFrom(
+
+                primary: selectedCategory.contains("(US) 13 ½") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                onPrimary:selectedCategory.contains("(US) 13 ½") ? Colors.white:  Colors.black, // foreground
+              ),
+              onPressed: () {
+                selectedCategory =  <String>[];
+                selectedCategory.add("(US) 13 ½");
+
+                stateSetter(() {usersize = "(US) 13 ½";});
+              },          child: Text('(US) 13 ½'),
+            ),
+),
+ Ring1==0?Container():   Padding(
+   padding: const EdgeInsets.all(8.0),
+   child: ElevatedButton(
+
+              style: ElevatedButton.styleFrom(
+
+                primary: selectedCategory.contains("R 4") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                onPrimary:selectedCategory.contains("R 4") ? Colors.white:  Colors.black, // foreground
+              ),
+              onPressed: () {
+                selectedCategory =  <String>[];
+                selectedCategory.add("R 4");
+
+                stateSetter(() {usersize = "R 4";});
+              },          child: Text('(US) 4'),
+            ),
+ ),
+    Ring2==0?Container():   Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: ElevatedButton(
+
+              style: ElevatedButton.styleFrom(
+
+                primary: selectedCategory.contains("R 4.5") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                onPrimary:selectedCategory.contains("R 4.5") ? Colors.white:  Colors.black, // foreground
+              ),
+              onPressed: () {
+                selectedCategory =  <String>[];
+                selectedCategory.add("R 4.5");
+
+                stateSetter(() {usersize = "R 4.5";});
+              },          child: Text('(US) 4.5'),
+            ),
+    ),
+
+    Ring3==0?Container():   Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: ElevatedButton(
+
+              style: ElevatedButton.styleFrom(
+
+                primary: selectedCategory.contains("R 5") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                onPrimary:selectedCategory.contains("R 5") ? Colors.white:  Colors.black, // foreground
+              ),
+              onPressed: () {
+                selectedCategory =  <String>[];
+                selectedCategory.add("R 5");
+
+                stateSetter(() {usersize = "R 5";});
+              },          child: Text('(US) 5'),
+            ),
+    ),
+    Ring4==0?Container():   Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: ElevatedButton(
+
+              style: ElevatedButton.styleFrom(
+
+                primary: selectedCategory.contains("R 5.5") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                onPrimary:selectedCategory.contains("R 5.5") ? Colors.white:  Colors.black, // foreground
+              ),
+              onPressed: () {
+                selectedCategory =  <String>[];
+                selectedCategory.add("R 5.5");
+
+                stateSetter(() {usersize = "R 5.5";});
+              },          child: Text('(US) 5.5'),
+            ),
+    ),
+    Ring5==0?Container():   Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: ElevatedButton(
+
+              style: ElevatedButton.styleFrom(
+
+                primary: selectedCategory.contains("R 6") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                onPrimary:selectedCategory.contains("R 6") ? Colors.white:  Colors.black, // foreground
+              ),
+              onPressed: () {
+                selectedCategory =  <String>[];
+                selectedCategory.add("R 6");
+
+                stateSetter(() {usersize = "R 6";});
+              },          child: Text('(US) 6'),
+            ),
+    ),
+    Ring6==0?Container():   Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: ElevatedButton(
+
+              style: ElevatedButton.styleFrom(
+
+                primary: selectedCategory.contains("R 6.5") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                onPrimary:selectedCategory.contains("R 6.5") ? Colors.white:  Colors.black, // foreground
+              ),
+              onPressed: () {
+                selectedCategory =  <String>[];
+                selectedCategory.add("R 6.5");
+
+                stateSetter(() {usersize = "R 6.5";});
+              },          child: Text('(US) 6.5'),
+            ),
+    ),
+    Ring7==0?Container():   Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: ElevatedButton(
+
+              style: ElevatedButton.styleFrom(
+
+                primary: selectedCategory.contains("R 7") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                onPrimary:selectedCategory.contains("R 7") ? Colors.white:  Colors.black, // foreground
+              ),
+              onPressed: () {
+                selectedCategory =  <String>[];
+                selectedCategory.add("R 7");
+
+                stateSetter(() {usersize = "R 7";});
+              },          child: Text('(US) 7'),
+            ),
+    ),
+    Ring8==0?Container():   Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: ElevatedButton(
+
+              style: ElevatedButton.styleFrom(
+
+                primary: selectedCategory.contains("R 7.5") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                onPrimary:selectedCategory.contains("R 7.5") ? Colors.white:  Colors.black, // foreground
+              ),
+              onPressed: () {
+                selectedCategory =  <String>[];
+                selectedCategory.add("R 7.5");
+
+                stateSetter(() {usersize = "R 7.5";});
+              },          child: Text('(US) 7.5'),
+            ),
+    ),
+    Ring9==0?Container():   Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: ElevatedButton(
+
+              style: ElevatedButton.styleFrom(
+
+                primary: selectedCategory.contains("R 8") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                onPrimary:selectedCategory.contains("R 8") ? Colors.white:  Colors.black, // foreground
+              ),
+              onPressed: () {
+                selectedCategory =  <String>[];
+                selectedCategory.add("R 8");
+
+                stateSetter(() {usersize = "R 8";});
+              },          child: Text('(US) 8'),
+            ),
+    ),
+    Ring10==0?Container():   Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: ElevatedButton(
+
+              style: ElevatedButton.styleFrom(
+
+                primary: selectedCategory.contains("R 8.5") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                onPrimary:selectedCategory.contains("R 8.5") ? Colors.white:  Colors.black, // foreground
+              ),
+              onPressed: () {
+                selectedCategory =  <String>[];
+                selectedCategory.add("R 8.5");
+
+                stateSetter(() {usersize = "R 8.5";});
+              },          child: Text('(US) 8.5'),
+            ),
+    ),
+    Ring11==0?Container():   Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: ElevatedButton(
+
+              style: ElevatedButton.styleFrom(
+
+                primary: selectedCategory.contains("R 9") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                onPrimary:selectedCategory.contains("R 9") ? Colors.white:  Colors.black, // foreground
+              ),
+              onPressed: () {
+                selectedCategory =  <String>[];
+                selectedCategory.add("R 9");
+
+                stateSetter(() {usersize = "R 9";});
+              },          child: Text('(US) 9'),
+            ),
+    ),
+    Ring12==0?Container():   Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: ElevatedButton(
+
+              style: ElevatedButton.styleFrom(
+
+                primary: selectedCategory.contains("R 9.5") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                onPrimary:selectedCategory.contains("R 9.5") ? Colors.white:  Colors.black, // foreground
+              ),
+              onPressed: () {
+                selectedCategory =  <String>[];
+                selectedCategory.add("R 9.5");
+
+                stateSetter(() {usersize = "R 9.5";});
+              },          child: Text('(US) 9.5'),
+            ),
+    ),
+    Ring13==0?Container():   Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: ElevatedButton(
+
+              style: ElevatedButton.styleFrom(
+
+                primary: selectedCategory.contains("R 10") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                onPrimary:selectedCategory.contains("R 10") ? Colors.white:  Colors.black, // foreground
+              ),
+              onPressed: () {
+                selectedCategory =  <String>[];
+                selectedCategory.add("R 10");
+
+                stateSetter(() {usersize = "R 10";});
+              },          child: Text('(US) 10'),
+            ),
+    ),
+ Ring14==0?Container():   Padding(
+   padding: const EdgeInsets.all(8.0),
+   child: ElevatedButton(
+
+              style: ElevatedButton.styleFrom(
+
+                primary: selectedCategory.contains("R 10.5") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                onPrimary:selectedCategory.contains("R 10.5") ? Colors.white:  Colors.black, // foreground
+              ),
+              onPressed: () {
+                selectedCategory =  <String>[];
+                selectedCategory.add("R 10.5");
+
+                stateSetter(() {usersize = "R 10.5";});
+              },          child: Text('(US) 10.5'),
+            ),
+ ),
+ Ring15==0?Container():   Padding(
+   padding: const EdgeInsets.all(8.0),
+   child: ElevatedButton(
+
+              style: ElevatedButton.styleFrom(
+
+                primary: selectedCategory.contains("R 11") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                onPrimary:selectedCategory.contains("R 11") ? Colors.white:  Colors.black, // foreground
+              ),
+              onPressed: () {
+                selectedCategory =  <String>[];
+                selectedCategory.add("R 11");
+
+                stateSetter(() {usersize = "R 11";});
+              },          child: Text('(US) 11'),
+            ),
+ ),
+ Ring16==0?Container():   Padding(
+   padding: const EdgeInsets.all(8.0),
+   child: ElevatedButton(
+
+              style: ElevatedButton.styleFrom(
+
+                primary: selectedCategory.contains("R 11.5") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                onPrimary:selectedCategory.contains("R 11.5") ? Colors.white:  Colors.black, // foreground
+              ),
+              onPressed: () {
+                selectedCategory =  <String>[];
+                selectedCategory.add("R 11.5");
+
+                stateSetter(() {usersize = "R 11.5";});
+              },          child: Text('(US) 11.5'),
+            ),
+ ),
+ Ring17==0?Container():   Padding(
+   padding: const EdgeInsets.all(8.0),
+   child: ElevatedButton(
+
+              style: ElevatedButton.styleFrom(
+
+                primary: selectedCategory.contains("R 12") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                onPrimary:selectedCategory.contains("R 12") ? Colors.white:  Colors.black, // foreground
+              ),
+              onPressed: () {
+                selectedCategory =  <String>[];
+                selectedCategory.add("R 12");
+
+                stateSetter(() {usersize = "R 12";});
+              },          child: Text('(US) 12'),
+            ),
+ ),
+ Ring18==0?Container():   Padding(
+   padding: const EdgeInsets.all(8.0),
+   child: ElevatedButton(
+
+              style: ElevatedButton.styleFrom(
+
+                primary: selectedCategory.contains("R 12.5") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                onPrimary:selectedCategory.contains("R 12.5") ? Colors.white:  Colors.black, // foreground
+              ),
+              onPressed: () {
+                selectedCategory =  <String>[];
+                selectedCategory.add("R 12.5");
+
+                stateSetter(() {usersize = "R 12.5";});
+              },          child: Text('(US) 12.5'),
+            ),
+ ),
+ Ring19==0?Container():   Padding(
+   padding: const EdgeInsets.all(8.0),
+   child: ElevatedButton(
+
+              style: ElevatedButton.styleFrom(
+
+                primary: selectedCategory.contains("R 13") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                onPrimary:selectedCategory.contains("R 13") ? Colors.white:  Colors.black, // foreground
+              ),
+              onPressed: () {
+                selectedCategory =  <String>[];
+                selectedCategory.add("R 13");
+
+                stateSetter(() {usersize = "R 13";});
+              },          child: Text('(US) 13'),
+            ),
+ ),
+ Ring20==0?Container():   Padding(
+   padding: const EdgeInsets.all(8.0),
+   child: ElevatedButton(
+
+              style: ElevatedButton.styleFrom(
+
+                primary: selectedCategory.contains("R 13.5") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                onPrimary:selectedCategory.contains("R 13.5") ? Colors.white:  Colors.black, // foreground
+              ),
+              onPressed: () {
+                selectedCategory =  <String>[];
+                selectedCategory.add("R 13.5");
+
+                stateSetter(() {usersize = "R 13.5";});
+              },          child: Text('(US) 13.5'),
+            ),
+ ),
+ Ring21==0?Container():   Padding(
+   padding: const EdgeInsets.all(8.0),
+   child: ElevatedButton(
+
+              style: ElevatedButton.styleFrom(
+
+                primary: selectedCategory.contains("R 14") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                onPrimary:selectedCategory.contains("R 14") ? Colors.white:  Colors.black, // foreground
+              ),
+              onPressed: () {
+                selectedCategory =  <String>[];
+                selectedCategory.add("R 14");
+
+                stateSetter(() {usersize = "R 14";});
+              },          child: Text('(US) 14'),
+            ),
+ ),
+ Ring22==0?Container():   Padding(
+   padding: const EdgeInsets.all(8.0),
+   child: ElevatedButton(
+
+              style: ElevatedButton.styleFrom(
+
+                primary: selectedCategory.contains("R 14.5") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                onPrimary:selectedCategory.contains("R 14.5") ? Colors.white:  Colors.black, // foreground
+              ),
+              onPressed: () {
+                selectedCategory =  <String>[];
+                selectedCategory.add("R 14.5");
+
+                stateSetter(() {usersize = "R 14.5";});
+              },          child: Text('(US) 14.5'),
+            ),
+ ),
+ Ring23==0?Container():   Padding(
+   padding: const EdgeInsets.all(8.0),
+   child: ElevatedButton(
+
+              style: ElevatedButton.styleFrom(
+
+                primary: selectedCategory.contains("R 15") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                onPrimary:selectedCategory.contains("R 15") ? Colors.white:  Colors.black, // foreground
+              ),
+              onPressed: () {
+                selectedCategory =  <String>[];
+                selectedCategory.add("R 15");
+
+                stateSetter(() {usersize = "R 15";});
+              },          child: Text('(US) 15'),
+            ),
+ ),
+ custom12==0?Container():   Padding(
+   padding: const EdgeInsets.all(8.0),
+   child: ElevatedButton(
+
+              style: ElevatedButton.styleFrom(
+
+                primary: selectedCategory.contains("C 1") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                onPrimary:selectedCategory.contains("C 1") ? Colors.white:  Colors.black, // foreground
+              ),
+              onPressed: () {
+                selectedCategory =  <String>[];
+                selectedCategory.add("C 1");
+
+                stateSetter(() { usersize = 'C 1';
+                custom = true;
+                size = custom1;
+                customprice = customprice1;
+                custompriceusd = custom11usd;
+                custompriceinr = custom11inr;});
+              },          child:
+   currentUser.country == "India"?  FittedBox(child: Text('$custom1 + ${currentUser.currencysym} $custom11inr',)):
+   currentUser.country == "United States"?  FittedBox(child: Text('$custom1 + \u0024 $custom11usd',)):
+   currentUser.country == country?FittedBox(child: Text('$custom1 + ${currentUser.currencysym} $custom11inr(\u0024 $custom11usd)',)):
+
+   FittedBox(child: Text('$custom1 + ${currentUser.currencysym} $customprice1(\u0024 $custom11usd)',)),
+
+   ),
+ ),
+custom22==0?Container():   Padding(
+  padding: const EdgeInsets.all(8.0),
+  child:   ElevatedButton(
+
+              style: ElevatedButton.styleFrom(
+
+                primary: selectedCategory.contains("C 2") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                onPrimary:selectedCategory.contains("C 2") ? Colors.white:  Colors.black, // foreground
+              ),
+              onPressed: () {
+                selectedCategory =  <String>[];
+                selectedCategory.add("C 2");
+
+                stateSetter(() { usersize = 'C 2';
+                custom = true;
+                size = custom2;
+                customprice = customprice2;
+                custompriceusd = custom21usd;
+                custompriceinr = custom21inr;});
+              },          child:
+
+  currentUser.country == "India"?  FittedBox(child: Text('$custom2 + ${currentUser.currencysym} $custom21inr',)):
+  currentUser.country == "United States"?  FittedBox(child: Text('$custom2 + \u0024 $custom21usd',)):
+  currentUser.country == country?FittedBox(child: Text('$custom2 + ${currentUser.currencysym} $custom21inr(\u0024 $custom21usd)',)):
+
+  FittedBox(child: Text('$custom2 + ${currentUser.currencysym} $customprice2(\u0024 $custom21usd)',)),
+
+   ),
+),
+custom32==0?Container():   Padding(
+  padding: const EdgeInsets.all(8.0),
+  child:   ElevatedButton(
+
+              style: ElevatedButton.styleFrom(
+
+                primary: selectedCategory.contains("C 3") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                onPrimary:selectedCategory.contains("C 3") ? Colors.white:  Colors.black, // foreground
+              ),
+              onPressed: () {
+                selectedCategory =  <String>[];
+                selectedCategory.add("C 3");
+
+                stateSetter(() { usersize = 'C 3';
+                custom = true;
+                size = custom3;
+                customprice = customprice3;
+                custompriceusd = custom31usd;
+                custompriceinr = custom31inr;});
+              },          child:
+
+  currentUser.country == "India"?  FittedBox(child: Text('$custom3 + ${currentUser.currencysym} $custom31inr',)):
+  currentUser.country == "United States"?  FittedBox(child: Text('$custom3 + \u0024 $custom31usd',)):
+  currentUser.country == country?FittedBox(child: Text('$custom3 + ${currentUser.currencysym} $custom31inr(\u0024 $custom31usd)',)):
+
+  FittedBox(child: Text('$custom3 + ${currentUser.currencysym} $customprice3(\u0024 $custom31usd)',)),
+
+   ),
+),
+custom42==0?Container():   Padding(
+  padding: const EdgeInsets.all(8.0),
+  child:   ElevatedButton(
+
+              style: ElevatedButton.styleFrom(
+
+                primary: selectedCategory.contains("C 4") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                onPrimary:selectedCategory.contains("C 4") ? Colors.white:  Colors.black, // foreground
+              ),
+              onPressed: () {
+                selectedCategory =  <String>[];
+                selectedCategory.add("C 4");
+
+                stateSetter(() { usersize = 'C 4';
+                custom = true;
+                size = custom4;
+                customprice = customprice4;
+                custompriceusd = custom41usd;
+                custompriceinr = custom41inr;});
+              },          child:
+
+  currentUser.country == "India"?  FittedBox(child: Text('$custom4 + ${currentUser.currencysym} $custom41inr',)):
+  currentUser.country == "United States"?  FittedBox(child: Text('$custom4 + \u0024 $custom41usd',)):
+  currentUser.country == country?FittedBox(child: Text('$custom4 + ${currentUser.currencysym} $custom41inr(\u0024 $custom41usd)',)):
+
+  FittedBox(child: Text('$custom4 + ${currentUser.currencysym} $customprice4(\u0024 $custom41usd)',)),
+
+   ),
+),
+custom52==0?Container():   Padding(
+  padding: const EdgeInsets.all(8.0),
+  child:   ElevatedButton(
+
+              style: ElevatedButton.styleFrom(
+
+                primary: selectedCategory.contains("C 5") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                onPrimary:selectedCategory.contains("C 5") ? Colors.white:  Colors.black, // foreground
+              ),
+              onPressed: () {
+                selectedCategory =  <String>[];
+                selectedCategory.add("C 5");
+
+                stateSetter(() { usersize = 'C 5';
+                custom = true;
+                size = custom5;
+                customprice = customprice5;
+                custompriceusd = custom51usd;
+                custompriceinr = custom51inr;});
+              },          child:
+
+  currentUser.country == "India"?  FittedBox(child: Text('$custom5 + ${currentUser.currencysym} $custom51inr',)):
+  currentUser.country == "United States"?  FittedBox(child: Text('$custom5 + \u0024 $custom51usd',)):
+  currentUser.country == country?FittedBox(child: Text('$custom5 + ${currentUser.currencysym} $custom51inr(\u0024 $custom51usd)',)):
+
+  FittedBox(child: Text('$custom5 + ${currentUser.currencysym} $customprice5(\u0024 $custom51usd)',)),
+
+   ),
+),
+custom62==0?Container():   Padding(
+  padding: const EdgeInsets.all(8.0),
+  child:   ElevatedButton(
+
+              style: ElevatedButton.styleFrom(
+
+                primary: selectedCategory.contains("C 6") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                onPrimary:selectedCategory.contains("C 6") ? Colors.white:  Colors.black, // foreground
+              ),
+              onPressed: () {
+                selectedCategory =  <String>[];
+                selectedCategory.add("C 6");
+
+                stateSetter(() { usersize = 'C 6';
+                custom = true;
+                size = custom6;
+                customprice = customprice6;
+                custompriceusd = custom61usd;
+                custompriceinr = custom61inr;});
+              },          child:
+
+  currentUser.country == "India"?  FittedBox(child: Text('$custom6 + ${currentUser.currencysym} $custom61inr',)):
+  currentUser.country == "United States"?  FittedBox(child: Text('$custom6 + \u0024 $custom61usd',)):
+  currentUser.country == country?FittedBox(child: Text('$custom6 + ${currentUser.currencysym} $custom61inr(\u0024 $custom61usd)',)):
+
+  FittedBox(child: Text('$custom6 + ${currentUser.currencysym} $customprice6(\u0024 $custom61usd)',)),
+
+   ),
+),
+custom72==0?Container():   Padding(
+  padding: const EdgeInsets.all(8.0),
+  child:   ElevatedButton(
+
+              style: ElevatedButton.styleFrom(
+
+                primary: selectedCategory.contains("C 7") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                onPrimary:selectedCategory.contains("C 7") ? Colors.white:  Colors.black, // foreground
+              ),
+              onPressed: () {
+                selectedCategory =  <String>[];
+                selectedCategory.add("C 7");
+
+                stateSetter(() { usersize = 'C 7';
+                custom = true;
+                size = custom7;
+                customprice = customprice7;
+                custompriceusd = custom71usd;
+                custompriceinr = custom71inr;});
+              },          child:
+
+  currentUser.country == "India"?  FittedBox(child: Text('$custom7 + ${currentUser.currencysym} $custom71inr',)):
+  currentUser.country == "United States"?  FittedBox(child: Text('$custom7 + \u0024 $custom71usd',)):
+  currentUser.country == country?FittedBox(child: Text('$custom7 + ${currentUser.currencysym} $custom71inr(\u0024 $custom71usd)',)):
+
+  FittedBox(child: Text('$custom7 + ${currentUser.currencysym} $customprice7(\u0024 $custom71usd)',)),
+
+   ),
+),
+custom82==0?Container():   Padding(
+  padding: const EdgeInsets.all(8.0),
+  child:   ElevatedButton(
+
+              style: ElevatedButton.styleFrom(
+
+                primary: selectedCategory.contains("C 8") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                onPrimary:selectedCategory.contains("C 8") ? Colors.white:  Colors.black, // foreground
+              ),
+              onPressed: () {
+                selectedCategory =  <String>[];
+                selectedCategory.add("C 8");
+
+                stateSetter(() { usersize = 'C 8';
+                custom = true;
+                size = custom8;
+                customprice = customprice8;
+                custompriceusd = custom81usd;
+                custompriceinr = custom81inr;});
+              },          child:
+
+  currentUser.country == "India"?  FittedBox(child: Text('$custom8 + ${currentUser.currencysym} $custom81inr',)):
+  currentUser.country == "United States"?  FittedBox(child: Text('$custom8 + \u0024 $custom81usd',)):
+  currentUser.country == country?FittedBox(child: Text('$custom8 + ${currentUser.currencysym} $custom81inr(\u0024 $custom81usd)',)):
+
+  FittedBox(child: Text('$custom8 + ${currentUser.currencysym} $customprice8(\u0024 $custom81usd)',)),
+
+   ),
+),
+custom92==0?Container():   Padding(
+  padding: const EdgeInsets.all(8.0),
+  child:   ElevatedButton(
+
+              style: ElevatedButton.styleFrom(
+
+                primary: selectedCategory.contains("C 9") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                onPrimary:selectedCategory.contains("C 9") ? Colors.white:  Colors.black, // foreground
+              ),
+              onPressed: () {
+                selectedCategory =  <String>[];
+                selectedCategory.add("C 9");
+
+                stateSetter(() { usersize = 'C 9';
+                custom = true;
+                size = custom9;
+                customprice = customprice9;
+                custompriceusd = custom91usd;
+                custompriceinr = custom91inr;});
+              },          child:
+
+  currentUser.country == "India"?  FittedBox(child: Text('$custom9 + ${currentUser.currencysym} $custom91inr',)):
+  currentUser.country == "United States"?  FittedBox(child: Text('$custom9 + \u0024 $custom91usd',)):
+  currentUser.country == country?FittedBox(child: Text('$custom9 + ${currentUser.currencysym} $custom91inr(\u0024 $custom91usd)',)):
+
+  FittedBox(child: Text('$custom9 + ${currentUser.currencysym} $customprice9(\u0024 $custom91usd)',)),
+
+   ),
+),
+custom102==0?Container():   Padding(
+  padding: const EdgeInsets.all(8.0),
+  child:   ElevatedButton(
+
+              style: ElevatedButton.styleFrom(
+
+                primary: selectedCategory.contains("C 10") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                onPrimary:selectedCategory.contains("C 10") ? Colors.white:  Colors.black, // foreground
+              ),
+              onPressed: () {
+                selectedCategory =  <String>[];
+                selectedCategory.add("C 10");
+
+                stateSetter(() { usersize = 'C 10';
+                custom = true;
+                size = custom10;
+                customprice = customprice10;
+                custompriceusd = custom101usd;
+                custompriceinr = custom101inr;});
+              },          child:
+
+  currentUser.country == "India"?  FittedBox(child: Text('$custom10 + ${currentUser.currencysym} $custom101inr',)):
+  currentUser.country == "United States"?  FittedBox(child: Text('$custom10 + \u0024 $custom101usd',)):
+  currentUser.country == country?FittedBox(child: Text('$custom10 + ${currentUser.currencysym} $custom101inr(\u0024 $custom101usd)',)):
+
+  FittedBox(child: Text('$custom10 + ${currentUser.currencysym} $customprice10(\u0024 $custom101usd)',)),
+
+   ),
+),
+
+
+        ]
+                       ),
+                       ),
+),
+
+
 
                           Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
-                        RaisedButton(
-                          color: pressAttention ? Colors.black : Colors.blue,
-                        highlightColor:Colors.blue,
-                          onPressed: (){
-
-                            stateSetter(() {
-                    usersize = '4XL';
-                    pressAttention = !pressAttention;
-                  print(pressAttention);});
-
-
-                },
-                  child:   Container(
-                    height:50,
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          FittedBox(child: Text('4XL',)),
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
                         OutlinedButton(
                           child: Text("$usersize"),
                           onPressed: () {
                             SelectSize(parentContext);
-                            stateSetter(() {
-                              usersize = size;
-                              pressAttention  = !pressAttention;
-                              print(pressAttention);});
+
                           },
                         ), OutlinedButton(
                           child: Text("$usercolor"),
@@ -8032,7 +7484,7 @@ isLive: true,
                         ),
                         trailing: !isPostOwner? FloatingActionButton(
                           heroTag:null,
-                          onPressed: () => Buynow(context),
+                          onPressed: () => Buynow(parentContext:context),
                           child: Icon(Icons.add_shopping_cart,),
                           shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(16.0))),
                         ): RaisedButton(
@@ -8420,7 +7872,7 @@ posteurope(){
                       trailing: FloatingActionButton(
                         heroTag:null,
 
-                        onPressed: () => Buynow(context),
+                        onPressed: () => Buynow(parentContext:context),
                         child: Icon(Icons.add_shopping_cart,),
                         shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(16.0))),
                       ),
@@ -8798,7 +8250,7 @@ postuk(){
                       trailing: !isPostOwner? FloatingActionButton(
                         heroTag:null,
 
-                        onPressed: () => Buynow(context),
+                        onPressed: () => Buynow(parentContext:context),
                         child: Icon(Icons.add_shopping_cart,),
                         shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(16.0))),
                       ): RaisedButton(
@@ -9188,7 +8640,7 @@ postusa() {
                       trailing: !isPostOwner? FloatingActionButton(
                         heroTag:null,
 
-                        onPressed: () => Buynow(context),
+                        onPressed: () => Buynow(parentContext:context),
                         child: Icon(Icons.add_shopping_cart,),
                         shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(16.0))),
                       ): RaisedButton(

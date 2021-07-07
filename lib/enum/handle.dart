@@ -12047,3 +12047,1831 @@ else  {
       productname:productname);
 }
 }
+FREE(){
+  if(freesize == 0){
+    return
+      Container();
+  }
+  else{
+    return
+      InkWell(
+        onTap: (){
+          setState(()  {
+
+            usersize = 'Free Size';
+
+
+          });
+
+        },        child: Container(
+        height:50,
+        width:MediaQuery.of(context).size.width,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+//    Text(user.followers,style: TextStyle(colorText: Colors.white,fontWeight: FontWeight.bold,),),
+            FittedBox(child: Text('Free Size',)),
+          ],
+        ),
+      ),
+
+      );
+  }
+}
+XXXS(){
+  if(xxxs == 0){
+    return
+      Container();
+  }
+  else{
+    return
+      InkWell(
+        onTap: (){
+          setState(()  {
+
+            usersize = 'XXXS';
+          });
+
+
+        },
+        child: Container(
+          height:50,
+          width:MediaQuery.of(context).size.width,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+//    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
+              FittedBox(child: Text('XXXS',)),
+            ],
+          ),
+        ),
+      );
+  }
+
+
+}
+XXS(){
+  if(xxs == 0){
+    return
+      Container();
+  }
+  else{
+    return
+      InkWell(
+        onTap: (){
+          setState(()  {
+
+            usersize = 'XXS';
+          });
+
+
+
+        },
+        child:      Container(
+          height:50,
+          width:MediaQuery.of(context).size.width,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+//    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
+              FittedBox(child: Text('XXS',)),
+            ],
+          ),
+        ),      );
+  }
+}
+XS(){
+  if(xs == 0){
+    return
+      Container();
+  }
+  else{
+    return
+      InkWell(
+        onTap: (){
+          setState(()  {
+
+            usersize = 'XS';
+          });
+
+
+
+
+        },
+        child:     Container(
+          height:50,
+          width:MediaQuery.of(context).size.width,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+//    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
+              FittedBox(child: Text('XS',)),
+            ],
+          ),
+        ),       );
+  }
+}
+S(){
+  if(s == 0){
+    return
+      Container();
+  }
+  else{
+    return
+      InkWell(
+        onTap: (){
+          setState(()  {
+
+            usersize = 'S';
+          });
+
+
+
+        },
+        child:   Container(
+          height:50,
+          width:MediaQuery.of(context).size.width,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+//    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
+              FittedBox(child: Text('S',)),
+            ],
+          ),
+        ),
+      );
+  }
+}
+M(){
+  if(m == 0){
+    return
+      Container();
+  }
+  else {
+    return
+      InkWell(
+        onTap: (){
+          setState(()  {
+
+            usersize = 'M';
+          });
+
+
+
+        },
+        child:   Container(
+          height:50,
+          width:MediaQuery.of(context).size.width,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+//    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
+              FittedBox(child: Text('M',)),
+            ],
+          ),
+        ),
+      );
+  }
+}
+L(){
+  if(l == 0){
+    return
+      Container();
+  }
+  else{
+    return
+      InkWell(
+        onTap: (){
+          setState(()  {
+
+            usersize = 'L';
+          });
+
+
+
+        },
+        child:   Container(
+          height:50,
+          width:MediaQuery.of(context).size.width,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+//    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
+              FittedBox(child: Text('L',)),
+            ],
+          ),
+        ),
+      );
+  }
+}
+XL(){
+  if(xl == 0){
+    return
+      Container();
+  }
+  else{
+    return
+      InkWell(
+        onTap: (){
+          setState(()  {
+
+            usersize = 'XL';
+          });
+
+
+
+        },
+        child:   Container(
+          height:50,
+          width:MediaQuery.of(context).size.width,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+//    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
+              FittedBox(child: Text('XL',)),
+            ],
+          ),
+        ),
+      );
+  }
+}
+XXL(){
+  if(xxl == 0){
+    return
+      Container();
+  }
+  else{
+    return
+      InkWell(
+        onTap: (){
+          setState(()  {
+
+            usersize = 'XXL';
+          });
+
+
+
+        },
+        child:   Container(
+          height:50,
+          width:MediaQuery.of(context).size.width,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+//    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
+              FittedBox(child: Text('XCL',)),
+            ],
+          ),
+        ),
+      );
+  }
+}
+XXXL(){
+  if(xxxl == 0){
+    return
+      Container();
+  }
+  else{
+    return
+      InkWell(
+        onTap: (){
+          setState(()  {
+
+            usersize = 'XXXL';
+          });
+
+
+        },
+        child:   Container(
+          height:50,
+          width:MediaQuery.of(context).size.width,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+//    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
+              FittedBox(child: Text('XXXL',)),
+            ],
+          ),
+        ),
+      );
+  }
+}
+FXL(){
+  if(fourxl == 0){
+    return
+      Container();
+  }
+  else
+  {
+    return
+      InkWell(
+        onTap: (){
+          setState(()  {
+
+            usersize = '4XL';
+            Navigator.pop(context,Buynow(size:usersize));
+          });
+
+
+        },
+        child:   Container(
+          height:50,
+          width:MediaQuery.of(context).size.width,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+//    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
+              FittedBox(child: Text('4XL',)),
+            ],
+          ),
+        ),
+      );
+  }
+}
+FIVXL(){
+  if(fivexl == 0){
+    return
+      Container();
+  }
+  else{
+    return
+      InkWell(
+        onTap: (){
+          setState(()  {
+
+            usersize = '5XL';
+            Get.back();
+
+          });
+
+
+
+        },
+        child: Container(
+          height:50,
+          width:MediaQuery.of(context).size.width,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+//    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
+              FittedBox(child: Text('5XL',)),
+            ],
+          ),
+        ),
+      );
+  }
+}
+SIXXL(){
+  if(sixxl == 0){
+    return
+      Container();
+  }
+  else{
+    return
+      InkWell(
+        onTap: (){
+          setState(()  {
+
+            usersize = '6XL';
+          });
+
+
+
+        },
+        child:   Container(
+          height:50,
+          width:MediaQuery.of(context).size.width,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+//    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
+              FittedBox(child: Text('6XL',)),
+            ],
+          ),
+        ),
+      );
+  }
+}
+SEVXL(){
+  if(sevenxl == 0){
+    return
+      Container();
+  }
+  else{
+    return
+      InkWell(
+        onTap: (){
+          setState(()  {
+
+            usersize = '7XL';
+          });
+
+
+
+        },
+        child:   Container(
+          height:50,
+          width:MediaQuery.of(context).size.width,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+//    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
+              FittedBox(child: Text('7XL',)),
+            ],
+          ),
+        ),
+      );
+  }
+}
+EIGXL(){
+  if(eightxl == 0){
+    return
+      Container();
+  }
+  else{
+    return
+      InkWell(
+        onTap: (){
+          setState(()  {
+
+            usersize = '8XL';
+          });
+
+
+        },
+        child:   Container(
+          height:50,
+          width:MediaQuery.of(context).size.width,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+//    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
+              FittedBox(child: Text('8XL',)),
+            ],
+          ),
+        ),
+      );
+  }
+}
+
+MS1(){
+  if(Shoe1 == 0){
+    return
+      Container();
+  }
+  else{
+    return
+      InkWell(
+        onTap: (){
+          setState(()  {
+
+            usersize = '(US)3-1/2';
+          });
+
+        },
+        child:   Container(
+          height:50,
+          width:MediaQuery.of(context).size.width,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+//    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
+              FittedBox(child: Text('(US)3-1/2',)),
+            ],
+          ),
+        ),
+      );
+  }
+
+}
+MS2(){
+  if(Shoe2 == 0){
+    return
+      Container();
+  }
+  else{
+    return
+      InkWell(
+        onTap: (){
+          setState(()  {
+
+            usersize = '(US)4';
+          });
+
+
+
+        },
+        child:   Container(
+          height:50,
+          width:MediaQuery.of(context).size.width,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+//    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
+              FittedBox(child: Text('(US)4',)),
+            ],
+          ),
+        ),
+
+      );
+  }
+}
+MS3(){
+  if(Shoe3 == 0){
+    return
+      Container();
+  }
+  else{
+    return
+      InkWell(
+        onTap: (){
+          setState(()  {
+
+            usersize = '(US)4-1/2';
+          });
+
+
+        },
+        child:   Container(
+          height:50,
+          width:MediaQuery.of(context).size.width,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+//    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
+              FittedBox(child: Text('(US)4-1/2',)),
+            ],
+          ),
+        ),
+
+      );
+  }
+}
+MS4(){
+
+  if(Shoe4 == 0){
+    return
+      Container();
+  }
+  else {
+
+    return
+      InkWell(
+        onTap: (){
+          setState(()  {
+
+            usersize = '(US)5';
+          });
+
+
+
+        },
+        child:   Container(
+          height:50,
+          width:MediaQuery.of(context).size.width,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+//    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
+              FittedBox(child: Text('(US)5',)),
+            ],
+          ),
+        ),
+
+      );
+  }
+}
+MS5(){
+
+  if(Shoe5 == 0){
+    return
+      Container();
+  }
+  else{
+    return
+      InkWell(
+        onTap: (){
+          setState(()  {
+
+            usersize = '(US)5-1/2';
+          });
+
+
+
+        },
+        child:   Container(
+          height:50,
+          width:MediaQuery.of(context).size.width,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+//    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
+              FittedBox(child: Text('(US)5-1/2',)),
+            ],
+          ),
+        ),
+      );
+  }
+}
+MS6(){
+
+  if(Shoe6 == 0){
+    return
+      Container();
+  }
+  else {
+    return
+      InkWell(
+        onTap: (){
+          setState(()  {
+
+            usersize = '(US)6';
+          });
+
+
+
+        },
+        child:   Container(
+          height:50,
+          width:MediaQuery.of(context).size.width,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+//    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
+              FittedBox(child: Text('(US)6',)),
+            ],
+          ),
+        ),
+      );
+  }
+}
+MS7(){
+
+  if(Shoe7 == 0){
+    return
+      Container();
+  }
+  else{
+    return
+      InkWell(
+        onTap: (){
+          setState(()  {
+
+            usersize = '(US)6-1/2';
+          });
+
+
+        },
+        child:   Container(
+          height:50,
+          width:MediaQuery.of(context).size.width,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+//    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
+              FittedBox(child: Text('(US)6-1/2',)),
+            ],
+          ),
+        ),
+      );
+  }
+}
+MS8(){
+
+  if(Shoe8 == 0){
+    return
+      Container();
+  }
+  else{
+    return
+      InkWell(
+        onTap: (){
+          setState(()  {
+
+            usersize = '(US)7';
+          });
+
+
+        },
+        child:   Container(
+          height:50,
+          width:MediaQuery.of(context).size.width,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+//    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
+              FittedBox(child: Text('(US)7',)),
+            ],
+          ),
+        ),
+      );
+  }
+}
+MS9(){
+
+  if(Shoe9 == 0){
+    return
+      Container();
+  }
+  else {
+    return
+      InkWell(
+        onTap: (){
+          setState(()  {
+
+            usersize = '(US)7-1/2';
+          });
+
+
+
+        },
+        child:   Container(
+          height:50,
+          width:MediaQuery.of(context).size.width,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+//    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
+              FittedBox(child: Text('(US)7-1/2',)),
+            ],
+          ),
+        ),
+      );
+  }
+}
+MS10(){
+
+  if(Shoe10 == 0){
+    return
+      Container();
+  }
+  else{
+    return
+      InkWell(
+        onTap: (){
+          setState(()  {
+
+            usersize = '(US)8';
+          });
+
+
+
+        },
+        child: Container(
+          decoration: BoxDecoration(
+              color: kPrimaryColor,
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.grey,
+                  blurRadius: 5.0,
+                ),]
+              ,borderRadius: BorderRadius.all(Radius.circular(10.0))
+          ),
+          height: 40,
+          width: 40,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              FittedBox(child: Text('(US)8',style: TextStyle(color: Colors.white,fontSize: 8),)),
+
+
+            ],
+          ),
+        ),
+      );
+  }
+}
+MS11(){
+
+  if(Shoe11 == 0){
+    return
+      Container();
+  }
+  else{
+    return
+      InkWell(
+        onTap: (){
+          setState(()  {
+
+            usersize = '(US)8-1/2';
+          });
+
+
+        },
+        child:   Container(
+          height:50,
+          width:MediaQuery.of(context).size.width,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+//    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
+              FittedBox(child: Text('(US)8-1/2',)),
+            ],
+          ),
+        ),
+      );
+  }
+}
+MS12(){
+
+  if(Shoe12 == 0){
+    return
+      Container();
+  }
+  else{
+    return
+      InkWell(
+        onTap: (){
+          setState(()  {
+
+            usersize = '(US)9';
+          });
+
+
+
+        },
+        child:   Container(
+          height:50,
+          width:MediaQuery.of(context).size.width,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+//    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
+              FittedBox(child: Text('(US)9',)),
+            ],
+          ),
+        ),
+      );
+  }
+}
+MS13(){
+  if(Shoe13 == 0){
+    return
+      Container();
+  }
+  else{
+    return
+      InkWell(
+        onTap: (){
+          setState(()  {
+
+            usersize = '(US)9-1/2';
+          });
+
+
+        },
+        child:   Container(
+          height:50,
+          width:MediaQuery.of(context).size.width,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+//    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
+              FittedBox(child: Text('(US)9-1/2',)),
+            ],
+          ),
+        ),
+      );
+  }
+}
+MS14(){
+  if(Shoe14 == 0){
+    return
+      Container();
+  }
+  else{
+    return
+      InkWell(
+        onTap: (){
+          setState(()  {
+
+            usersize = '(US)10';
+          });
+
+
+
+        },
+        child:   Container(
+          height:50,
+          width:MediaQuery.of(context).size.width,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+//    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
+              FittedBox(child: Text('(US)10',)),
+            ],
+          ),
+        ),
+      );
+  }
+}
+MS15(){
+
+  if(Shoe1 == 0){
+    return
+      Container();
+  }
+  else{
+    return
+      InkWell(
+        onTap: (){
+          setState(()  {
+
+            usersize = '(US)10-1/2';
+          });
+
+
+        },
+        child:   Container(
+          height:50,
+          width:MediaQuery.of(context).size.width,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+//    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
+              FittedBox(child: Text('(US)10-1/2',)),
+            ],
+          ),
+        ),
+      );
+  }
+}
+MS16(){
+  if(Shoe16 == 0){
+    return
+      Container();
+  }
+  else{
+    return
+      InkWell(
+        onTap: (){
+          setState(()  {
+
+            usersize = '(US)11';
+          });
+
+
+        },
+        child:   Container(
+          height:50,
+          width:MediaQuery.of(context).size.width,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+//    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
+              FittedBox(child: Text('(US)11',)),
+            ],
+          ),
+        ),
+      );
+  }
+}
+MS17(){
+  if(Shoe17 == 0){
+    return
+      Container();
+  }
+  else{
+    return
+      InkWell(
+        onTap: (){
+          setState(()  {
+
+            usersize = '(US)11-1/2';
+          });
+
+
+        },
+        child:   Container(
+          height:50,
+          width:MediaQuery.of(context).size.width,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+//    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
+              FittedBox(child: Text('(US)11-1/2',)),
+            ],
+          ),
+        ),
+      );
+  }
+}
+MS18(){
+
+  if(Shoe18 == 0){
+    return
+      Container();
+  }
+  else{
+    return
+      InkWell(
+        onTap: (){
+          setState(()  {
+
+            usersize = '(US)12';
+          });
+
+
+
+        },
+        child:   Container(
+          height:50,
+          width:MediaQuery.of(context).size.width,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+//    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
+              FittedBox(child: Text('(US)12',)),
+            ],
+          ),
+        ),
+      );
+  }
+}
+MS19(){
+
+  if(Shoe19 == 0){
+    return
+      Container();
+  }
+  else{
+    return
+      InkWell(
+        onTap: (){
+          setState(()  {
+
+            usersize = '(US)12-1/2';
+          });
+
+
+        },
+        child:   Container(
+          height:50,
+          width:MediaQuery.of(context).size.width,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+//    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
+              FittedBox(child: Text('(US)12-1/2',)),
+            ],
+          ),
+        ),
+      );
+  }
+}
+MS20(){
+
+  if(Shoe20 == 0){
+    return
+      Container();
+  }
+  else{
+    return
+      InkWell(
+        onTap: (){
+          setState(()  {
+
+            usersize = '(US)13';
+          });
+
+
+        },
+        child:   Container(
+          height:50,
+          width:MediaQuery.of(context).size.width,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+//    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
+              FittedBox(child: Text('(US)13',)),
+            ],
+          ),
+        ),
+      );
+  }
+}
+MS21(){
+
+  if(Shoe21 == 0){
+    return
+      Container();
+  }
+  else{
+    return
+      InkWell(
+        onTap: (){
+          setState(()  {
+
+            usersize = '(US)13-1/2';
+          });
+
+
+        },
+        child:   Container(
+          height:50,
+          width:MediaQuery.of(context).size.width,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+//    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
+              FittedBox(child: Text('(US)13-1/2',)),
+            ],
+          ),
+        ),
+      );
+  }
+
+}
+R1(){
+
+  if(Ring1 == 0){
+    return
+      Container();
+  }
+  else{
+    return
+      InkWell(
+        onTap: (){
+          setState(()  {
+
+            usersize = 'R 4';
+          });
+
+
+        },
+        child:   Container(
+          height:50,
+          width:MediaQuery.of(context).size.width,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+//    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
+              FittedBox(child: Text('(US) 4',)),
+            ],
+          ),
+        ),
+      );
+  }
+}
+R2(){
+
+  if(Ring2 == 0){
+    return
+      Container();
+  }
+  else{
+    return
+      InkWell(
+        onTap: (){
+          setState(()  {
+
+            usersize = 'R 4.5';
+          });
+
+
+        },
+        child:   Container(
+          height:50,
+          width:MediaQuery.of(context).size.width,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+//    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
+              FittedBox(child: Text('(US) 4.5',)),
+            ],
+          ),
+        ),
+      );
+  }
+}
+R3(){
+
+  if(Ring3 == 0){
+    return
+      Container();
+  }
+  else{
+    return
+      InkWell(
+        onTap: (){
+          setState(()  {
+
+            usersize = 'R 5';
+          });
+
+
+        },
+        child:   Container(
+          height:50,
+          width:MediaQuery.of(context).size.width,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+//    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
+              FittedBox(child: Text('(US) 5',)),
+            ],
+          ),
+        ),
+      );
+  }
+}
+R4(){
+
+  if(Ring4 == 0){
+    return
+      Container();
+  }
+  else{
+    return
+      InkWell(
+        onTap: (){
+          setState(()  {
+
+            usersize = 'R 5.5';
+          });
+
+
+        },
+        child:   Container(
+          height:50,
+          width:MediaQuery.of(context).size.width,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              FittedBox(child: Text('(US) 5.5',)),
+            ],
+          ),
+        ),
+      );
+  }
+}
+R5(){
+
+  if(Ring5 == 0){
+    return
+      Container();
+  }
+  else{
+    return
+      InkWell(
+        onTap: (){
+          setState(()  {
+
+            usersize = 'R 6';
+          });
+
+
+        },
+        child:   Container(
+          height:50,
+          width:MediaQuery.of(context).size.width,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              FittedBox(child: Text('(US) 6',)),
+            ],
+          ),
+        ),
+      );
+  }
+}
+R6(){
+
+  if(Ring6 == 0){
+    return
+      Container();
+  }
+  else{
+    return
+      InkWell(
+        onTap: (){
+          setState(()  {
+
+            usersize = 'R 6.5';
+          });
+
+
+        },
+        child:   Container(
+          height:50,
+          width:MediaQuery.of(context).size.width,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              FittedBox(child: Text('(US) 6.5',)),
+            ],
+          ),
+        ),
+      );
+  }
+}
+R7(){
+
+  if(Ring7 == 0){
+    return
+      Container();
+  }
+  else{
+    return
+      InkWell(
+        onTap: (){
+          setState(()  {
+
+            usersize = 'R 7';
+          });
+
+
+        },
+        child:   Container(
+          height:50,
+          width:MediaQuery.of(context).size.width,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              FittedBox(child: Text('(US) 7',)),
+            ],
+          ),
+        ),
+      );
+  }
+}
+R8(){
+
+  if(Ring8 == 0){
+    return
+      Container();
+  }
+  else{
+    return
+      InkWell(
+        onTap: (){
+          setState(()  {
+
+            usersize = 'R 7.5';
+          });
+
+
+        },
+        child:   Container(
+          height:50,
+          width:MediaQuery.of(context).size.width,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              FittedBox(child: Text('(US) 7.5',)),
+            ],
+          ),
+        ),
+      );
+  }
+}
+R9(){
+
+  if(Ring9 == 0){
+    return
+      Container();
+  }
+  else{
+    return
+      InkWell(
+        onTap: (){
+          setState(()  {
+
+            usersize = 'R 8';
+          });
+
+
+        },
+        child:   Container(
+          height:50,
+          width:MediaQuery.of(context).size.width,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              FittedBox(child: Text('(US) 8',)),
+            ],
+          ),
+        ),
+      );
+  }
+}
+R10(){
+
+  if(Ring10 == 0){
+    return
+      Container();
+  }
+  else{
+    return
+      InkWell(
+        onTap: (){
+          setState(()  {
+
+            usersize = 'R 8.5';
+          });
+
+
+        },
+        child:   Container(
+          height:50,
+          width:MediaQuery.of(context).size.width,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              FittedBox(child: Text('(US) 8.5',)),
+            ],
+          ),
+        ),
+      );
+  }
+}
+R11(){
+
+  if(Ring11 == 0){
+    return
+      Container();
+  }
+  else{
+    return
+      InkWell(
+        onTap: (){
+          setState(()  {
+
+            usersize = 'R 9';
+          });
+
+
+        },
+        child:   Container(
+          height:50,
+          width:MediaQuery.of(context).size.width,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              FittedBox(child: Text('(US) 9',)),
+            ],
+          ),
+        ),
+      );
+  }
+}
+R12(){
+
+  if(Ring12 == 0){
+    return
+      Container();
+  }
+  else{
+    return
+      InkWell(
+        onTap: (){
+          setState(()  {
+
+            usersize = 'R 9.5';
+          });
+
+
+        },
+        child:   Container(
+          height:50,
+          width:MediaQuery.of(context).size.width,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              FittedBox(child: Text('(US) 9.5',)),
+            ],
+          ),
+        ),
+      );
+  }
+}
+R13(){
+
+  if(Ring13 == 0){
+    return
+      Container();
+  }
+  else{
+    return
+      InkWell(
+        onTap: (){
+          setState(()  {
+
+            usersize = 'R 10';
+          });
+
+
+        },
+        child:   Container(
+          height:50,
+          width:MediaQuery.of(context).size.width,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              FittedBox(child: Text(' (US) 10',)),
+            ],
+          ),
+        ),
+      );
+  }
+}
+R14(){
+
+  if(Ring14 == 0){
+    return
+      Container();
+  }
+  else{
+    return
+      InkWell(
+        onTap: (){
+          setState(()  {
+
+            usersize = 'R 10.5';
+          });
+
+
+        },
+        child:   Container(
+          height:50,
+          width:MediaQuery.of(context).size.width,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              FittedBox(child: Text('(US) 10.5',)),
+            ],
+          ),
+        ),
+      );
+  }
+}
+R15(){
+
+  if(Ring15 == 0){
+    return
+      Container();
+  }
+  else{
+    return
+      InkWell(
+        onTap: (){
+          setState(()  {
+
+            usersize = 'R 11';
+          });
+
+
+        },
+        child:   Container(
+          height:50,
+          width:MediaQuery.of(context).size.width,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              FittedBox(child: Text('(US) 11',)),
+            ],
+          ),
+        ),
+      );
+  }
+}
+R16(){
+
+  if(Ring16 == 0){
+    return
+      Container();
+  }
+  else{
+    return
+      InkWell(
+        onTap: (){
+          setState(()  {
+
+            usersize = 'R 11.5';
+          });
+
+
+        },
+        child:   Container(
+          height:50,
+          width:MediaQuery.of(context).size.width,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              FittedBox(child: Text('(US) 11.5',)),
+            ],
+          ),
+        ),
+      );
+  }
+}
+R17(){
+
+  if(Ring17 == 0){
+    return
+      Container();
+  }
+  else{
+    return
+      InkWell(
+        onTap: (){
+          setState(()  {
+
+            usersize = 'R 12';
+          });
+
+
+        },
+        child:   Container(
+          height:50,
+          width:MediaQuery.of(context).size.width,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              FittedBox(child: Text('(US) 12',)),
+            ],
+          ),
+        ),
+      );
+  }
+}
+R18(){
+
+  if(Ring18 == 0){
+    return
+      Container();
+  }
+  else{
+    return
+      InkWell(
+        onTap: (){
+          setState(()  {
+
+            usersize = 'R 12.5';
+          });
+
+
+        },
+        child:   Container(
+          height:50,
+          width:MediaQuery.of(context).size.width,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              FittedBox(child: Text('(US) 12.5',)),
+            ],
+          ),
+        ),
+      );
+  }
+}
+R19(){
+
+  if(Ring19 == 0){
+    return
+      Container();
+  }
+  else{
+    return
+      InkWell(
+        onTap: (){
+          setState(()  {
+
+            usersize = 'R 13';
+          });
+
+
+        },
+        child:   Container(
+          height:50,
+          width:MediaQuery.of(context).size.width,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              FittedBox(child: Text('(US) 13',)),
+            ],
+          ),
+        ),
+      );
+  }
+}
+R20(){
+
+  if(Ring20 == 0){
+    return
+      Container();
+  }
+  else{
+    return
+      InkWell(
+        onTap: (){
+          setState(()  {
+
+            usersize = 'R 13.5';
+          });
+
+
+        },
+        child:   Container(
+          height:50,
+          width:MediaQuery.of(context).size.width,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              FittedBox(child: Text('(US) 13.5',)),
+            ],
+          ),
+        ),
+      );
+  }
+}
+R21(){
+
+  if(Ring21 == 0){
+    return
+      Container();
+  }
+  else{
+    return
+      InkWell(
+        onTap: (){
+          setState(()  {
+
+            usersize = 'R 14';
+          });
+
+
+        },
+        child:   Container(
+          height:50,
+          width:MediaQuery.of(context).size.width,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              FittedBox(child: Text('(US) 14',)),
+            ],
+          ),
+        ),
+      );
+  }
+}
+R22(){
+
+  if(Ring22 == 0){
+    return
+      Container();
+  }
+  else{
+    return
+      InkWell(
+        onTap: (){
+          setState(()  {
+
+            usersize = 'R 14.5';
+          });
+
+
+        },
+        child:   Container(
+          height:50,
+          width:MediaQuery.of(context).size.width,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              FittedBox(child: Text('(US) 14.5',)),
+            ],
+          ),
+        ),
+      );
+  }
+}
+R23(){
+
+  if(Ring23 == 0){
+    return
+      Container();
+  }
+  else{
+    return
+      InkWell(
+        onTap: (){
+          setState(()  {
+
+            usersize = 'R 15';
+          });
+
+
+        },
+        child:   Container(
+          height:50,
+          width:MediaQuery.of(context).size.width,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              FittedBox(child: Text('(US) 15',)),
+            ],
+          ),
+        ),
+      );
+  }
+}
