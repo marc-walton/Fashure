@@ -2543,10 +2543,52 @@ Widget sizeGuide(){
 
             shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(20),),
-        child: Container(
-          height: 400,
-          child:PhotoView(imageProvider: AssetImage
-        ('assets/img/MenClothingsize.jpg')),),
+        child:
+        Center(
+          child: Container(
+            child: ContainedTabBarView(
+              tabs: [
+                ...[1, 2]
+                    .map(
+                      (e) => Container(
+                    width: 16,
+                    height: 16,
+                    decoration: BoxDecoration(
+                      color: Colors.transparent,
+                      border: Border.all(color: Colors.grey[600]),
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(4.0),
+                      ),
+                    ),
+                  ),
+                )
+                    .toList(),
+              ],
+              tabBarProperties: TabBarProperties(
+                width: 64,
+                height: 32,
+                position: TabBarPosition.bottom,
+                indicator: ContainerTabIndicator(
+                  width: 16.0,
+                  height: 16.0,
+                  radius: BorderRadius.circular(4.0),
+                  color: Colors.blue,
+                ),
+              ),
+              views: [
+                Container(
+                  child:PhotoView(imageProvider: AssetImage
+                    ('assets/img/MenClothingsize.jpg')),),
+                Container(
+                  child:PhotoView(imageProvider: AssetImage
+                    ('assets/img/RING.jpg')),)  ,
+
+              ],
+              onChange: (index) => print(index),
+            ),
+          ),
+        ),
+
           );
       },
     );
@@ -2564,12 +2606,54 @@ Widget sizeGuide(){
 
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(20),),
-            child: Container(
-              height: 400,
-              child:PhotoView(imageProvider: AssetImage
-                ('assets/img/WomanClothingsize.jpg'),
+            child:
+            Center(
+              child: Container(
+                child: ContainedTabBarView(
+                  tabs: [
+                    ...[1, 2]
+                        .map(
+                          (e) => Container(
+                        width: 16,
+                        height: 16,
+                        decoration: BoxDecoration(
+                          color: Colors.transparent,
+                          border: Border.all(color: Colors.grey[600]),
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(4.0),
+                          ),
+                        ),
+                      ),
+                    )
+                        .toList(),
+                  ],
+                  tabBarProperties: TabBarProperties(
+                    width: 64,
+                    height: 32,
+                    position: TabBarPosition.bottom,
+                    indicator: ContainerTabIndicator(
+                      width: 16.0,
+                      height: 16.0,
+                      radius: BorderRadius.circular(4.0),
+                      color: Colors.blue,
+                    ),
+                  ),
+                  views: [
+                    Container(
+                      child:PhotoView(imageProvider: AssetImage
+                        ('assets/img/WomanClothingsize.jpg'),
+                      ),),
+                    Container(
+                      child:PhotoView(imageProvider: AssetImage
+                        ('assets/img/RING.jpg')),)  ,
 
-              ),),
+                  ],
+                  onChange: (index) => print(index),
+                ),
+              ),
+            ),
+
+
           );
       },
     );
@@ -2587,10 +2671,52 @@ Widget sizeGuide(){
 
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(20),),
-            child: Container(
-              height: 400,
-              child:PhotoView(imageProvider: AssetImage
-                ('assets/img/babysizecloth.jpg')),),
+            child:
+            Center(
+              child: Container(
+                child: ContainedTabBarView(
+                  tabs: [
+                    ...[1, 2]
+                        .map(
+                          (e) => Container(
+                        width: 16,
+                        height: 16,
+                        decoration: BoxDecoration(
+                          color: Colors.transparent,
+                          border: Border.all(color: Colors.grey[600]),
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(4.0),
+                          ),
+                        ),
+                      ),
+                    )
+                        .toList(),
+                  ],
+                  tabBarProperties: TabBarProperties(
+                    width: 64,
+                    height: 32,
+                    position: TabBarPosition.bottom,
+                    indicator: ContainerTabIndicator(
+                      width: 16.0,
+                      height: 16.0,
+                      radius: BorderRadius.circular(4.0),
+                      color: Colors.blue,
+                    ),
+                  ),
+                  views: [
+                    Container(
+                      child:PhotoView(imageProvider: AssetImage
+                        ('assets/img/babysizecloth.jpg')),),
+                    Container(
+                      child:PhotoView(imageProvider: AssetImage
+                        ('assets/img/RING.jpg')),)  ,
+
+                  ],
+                  onChange: (index) => print(index),
+                ),
+              ),
+            ),
+
           );
       },
     );
@@ -2608,10 +2734,54 @@ Widget sizeGuide(){
 
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(20),),
-            child: Container(
-              height: 400,
-              child:PhotoView(imageProvider: AssetImage
-                ('assets/img/kisclothsize.jpg')),),
+            child:
+            Center(
+              child: Container(
+                child: ContainedTabBarView(
+                  tabs: [
+                    ...[1, 2]
+                        .map(
+                          (e) => Container(
+                        width: 16,
+                        height: 16,
+                        decoration: BoxDecoration(
+                          color: Colors.transparent,
+                          border: Border.all(color: Colors.grey[600]),
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(4.0),
+                          ),
+                        ),
+                      ),
+                    )
+                        .toList(),
+                  ],
+                  tabBarProperties: TabBarProperties(
+                    width: 64,
+                    height: 32,
+                    position: TabBarPosition.bottom,
+                    indicator: ContainerTabIndicator(
+                      width: 16.0,
+                      height: 16.0,
+                      radius: BorderRadius.circular(4.0),
+                      color: Colors.blue,
+                    ),
+                  ),
+                  views: [
+                    Container(
+                      child:PhotoView(imageProvider: AssetImage
+                        ('assets/img/kisclothsize.jpg')),)  ,
+                     Container(
+                      child:PhotoView(imageProvider: AssetImage
+                        ('assets/img/RING.jpg')),)  ,
+
+                  ],
+                  onChange: (index) => print(index),
+                ),
+              ),
+            ),
+
+
+
           );
       },
     );
@@ -2629,10 +2799,52 @@ Widget sizeGuide(){
 
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(20),),
-            child: Container(
-              height: 400,
-              child:PhotoView(imageProvider: AssetImage
-                ('assets/img/teenclothing.jpg')),),
+            child:
+            Center(
+              child: Container(
+                child: ContainedTabBarView(
+                  tabs: [
+                    ...[1, 2]
+                        .map(
+                          (e) => Container(
+                        width: 16,
+                        height: 16,
+                        decoration: BoxDecoration(
+                          color: Colors.transparent,
+                          border: Border.all(color: Colors.grey[600]),
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(4.0),
+                          ),
+                        ),
+                      ),
+                    )
+                        .toList(),
+                  ],
+                  tabBarProperties: TabBarProperties(
+                    width: 64,
+                    height: 32,
+                    position: TabBarPosition.bottom,
+                    indicator: ContainerTabIndicator(
+                      width: 16.0,
+                      height: 16.0,
+                      radius: BorderRadius.circular(4.0),
+                      color: Colors.blue,
+                    ),
+                  ),
+                  views: [
+                    Container(
+                      child:PhotoView(imageProvider: AssetImage
+                        ('assets/img/teenclothing.jpg')),),
+                    Container(
+                      child:PhotoView(imageProvider: AssetImage
+                        ('assets/img/RING.jpg')),)  ,
+
+                  ],
+                  onChange: (index) => print(index),
+                ),
+              ),
+            ),
+
           );
       },
     );
@@ -2671,8 +2883,8 @@ return
                         Text("Made-to-order",style: TextStyle(fontSize:  SizeConfig.safeBlockHorizontal *5,),),
                         Text("Free size",style: TextStyle(fontSize:  SizeConfig.safeBlockHorizontal *5),),
                         Text("Custom size(upto 10)",style: TextStyle(fontSize:  SizeConfig.safeBlockHorizontal *5),),
-                       Text("Ring(US/Canada)",style: TextStyle(fontSize:  SizeConfig.safeBlockHorizontal *5),),
-                       Text("Shoes(US/Canada)",style: TextStyle(fontSize:  SizeConfig.safeBlockHorizontal *5),),
+                       Text("Ring(US)",style: TextStyle(fontSize:  SizeConfig.safeBlockHorizontal *5),),
+                       Text("Shoes(US)",style: TextStyle(fontSize:  SizeConfig.safeBlockHorizontal *5),),
 
                       ],
                     ),
@@ -3122,7 +3334,7 @@ return
                                           border: OutlineInputBorder(
                                               borderSide: BorderSide(color: kGrey)),
                                           labelText: 'Additional price(optional)',
-                                        hintText:" ${currentUser.currencyISO}0",
+                                        hintText:" ${currentUser.currencysym}0",
                                       ),
                                       textAlign: TextAlign.center,
                                     ),
@@ -3177,7 +3389,7 @@ return
                                           border: OutlineInputBorder(
                                               borderSide: BorderSide(color: kGrey)),
                                           labelText: 'Additional price(optional)',
-                                        hintText:" ${currentUser.currencyISO}0",
+                                        hintText:" ${currentUser.currencysym}0",
                                       ),
                                       textAlign: TextAlign.center,
                                     ),
@@ -3232,7 +3444,7 @@ return
                                           border: OutlineInputBorder(
                                               borderSide: BorderSide(color: kGrey)),
                                           labelText: 'Additional price(optional)',
-                                        hintText:" ${currentUser.currencyISO}0",
+                                        hintText:" ${currentUser.currencysym}0",
                                       ),
                                       textAlign: TextAlign.center,
                                     ),
@@ -3287,7 +3499,7 @@ return
                                           border: OutlineInputBorder(
                                               borderSide: BorderSide(color: kGrey)),
                                           labelText: 'Additional price(optional)',
-                                        hintText:" ${currentUser.currencyISO}0",
+                                        hintText:" ${currentUser.currencysym}0",
                                       ),
                                       textAlign: TextAlign.center,
                                     ),
@@ -3342,7 +3554,7 @@ return
                                           border: OutlineInputBorder(
                                               borderSide: BorderSide(color: kGrey)),
                                           labelText: 'Additional price(optional)',
-                                        hintText:" ${currentUser.currencyISO}0",
+                                        hintText:" ${currentUser.currencysym}0",
                                       ),
                                       textAlign: TextAlign.center,
                                     ),
@@ -3397,7 +3609,7 @@ return
                                           border: OutlineInputBorder(
                                               borderSide: BorderSide(color: kGrey)),
                                           labelText: 'Additional price(optional)',
-                                        hintText:" ${currentUser.currencyISO}0",
+                                        hintText:" ${currentUser.currencysym}0",
                                       ),
                                       textAlign: TextAlign.center,
                                     ),
@@ -3452,7 +3664,7 @@ return
                                           border: OutlineInputBorder(
                                               borderSide: BorderSide(color: kGrey)),
                                           labelText: 'Additional price(optional)',
-                                        hintText:" ${currentUser.currencyISO}0",
+                                        hintText:" ${currentUser.currencysym}0",
                                       ),
                                       textAlign: TextAlign.center,
                                     ),
@@ -3507,7 +3719,7 @@ return
                                           border: OutlineInputBorder(
                                               borderSide: BorderSide(color: kGrey)),
                                           labelText: 'Additional price(optional)',
-                                        hintText:" ${currentUser.currencyISO}0",
+                                        hintText:" ${currentUser.currencysym}0",
                                       ),
                                       textAlign: TextAlign.center,
                                     ),
@@ -3562,7 +3774,7 @@ return
                                           border: OutlineInputBorder(
                                               borderSide: BorderSide(color: kGrey)),
                                           labelText: 'Additional price(optional)',
-                                        hintText:" ${currentUser.currencyISO}0",
+                                        hintText:" ${currentUser.currencysym}0",
                                       ),
                                       textAlign: TextAlign.center,
                                     ),
@@ -3617,7 +3829,7 @@ return
                                           border: OutlineInputBorder(
                                               borderSide: BorderSide(color: kGrey)),
                                           labelText: 'Additional price(optional)',
-                                        hintText:" ${currentUser.currencyISO}0",
+                                        hintText:" ${currentUser.currencysym}0",
                                       ),
                                       textAlign: TextAlign.center,
                                     ),
@@ -4161,7 +4373,7 @@ return
                           ListView(
                             children: [
                               ExpansionTile(
-                                title: Text('3-1/2'),
+                                title: Text('3 ½'),
                                 maintainState: true,
                                 children: [
                                   Container(
@@ -4205,7 +4417,7 @@ return
                                 ],
                               ),
                               ExpansionTile(
-                                title: Text('4-1/2'),
+                                title: Text('4 ½'),
                                 maintainState: true,
                                 children: [
                                   Container(
@@ -4249,7 +4461,7 @@ return
                                 ],
                               ),
                               ExpansionTile(
-                                title: Text('5-1/2'),
+                                title: Text('5 ½'),
                                 maintainState: true,
                                 children: [
                                   Container(
@@ -4293,7 +4505,7 @@ return
                                 ],
                               ),
                               ExpansionTile(
-                                title: Text('6-1/2'),
+                                title: Text('6 ½'),
                                 maintainState: true,
                                 children: [
                                   Container(
@@ -4337,7 +4549,7 @@ return
                                 ],
                               ),
                               ExpansionTile(
-                                title: Text('7-1/2'),
+                                title: Text('7 ½'),
                                 maintainState: true,
                                 children: [
                                   Container(
@@ -4381,7 +4593,7 @@ return
                                 ],
                               ),
                               ExpansionTile(
-                                title: Text('8-1/2'),
+                                title: Text('8 ½'),
                                 maintainState: true,
                                 children: [
                                   Container(
@@ -4425,7 +4637,7 @@ return
                                 ],
                               ),
                               ExpansionTile(
-                                title: Text('9-1/2'),
+                                title: Text('9 ½'),
                                 maintainState: true,
                                 children: [
                                   Container(
@@ -4469,7 +4681,7 @@ return
                                 ],
                               ),
                               ExpansionTile(
-                                title: Text('10-1/2'),
+                                title: Text('10 ½'),
                                 maintainState: true,
                                 children: [
                                   Container(
@@ -4513,7 +4725,7 @@ return
                                 ],
                               ),
                               ExpansionTile(
-                                title: Text('11-1/2'),
+                                title: Text('11 ½'),
                                 maintainState: true,
                                 children: [
                                   Container(
@@ -4557,7 +4769,7 @@ return
                                 ],
                               ),
                               ExpansionTile(
-                                title: Text('12-1/2'),
+                                title: Text('12 ½'),
                                 maintainState: true,
                                 children: [
                                   Container(
@@ -4601,7 +4813,7 @@ return
                                 ],
                               ),
                               ExpansionTile(
-                                title: Text('13-1/2'),
+                                title: Text('13 ½'),
                                 maintainState: true,
                                 children: [
                                   Container(
@@ -4662,8 +4874,8 @@ return
                         Text("Made-to-order",style: TextStyle(fontSize:  SizeConfig.safeBlockHorizontal *5,),),
                         Text("Free size",style: TextStyle(fontSize:  SizeConfig.safeBlockHorizontal *5),),
                         Text("Custom size(upto 10)",style: TextStyle(fontSize:  SizeConfig.safeBlockHorizontal *5),),
-                       Text("Ring(US/Canada)",style: TextStyle(fontSize:  SizeConfig.safeBlockHorizontal *5),),
-                       Text("Shoes(US/Canada)",style: TextStyle(fontSize:  SizeConfig.safeBlockHorizontal *5),),
+                       Text("Ring(US)",style: TextStyle(fontSize:  SizeConfig.safeBlockHorizontal *5),),
+                       Text("Shoes(US)",style: TextStyle(fontSize:  SizeConfig.safeBlockHorizontal *5),),
 
                       ],
                     ),
@@ -6154,7 +6366,7 @@ return
                                 ],
                               ),
                               ExpansionTile(
-                                title: Text('5-1/2'),
+                                title: Text('5 ½'),
                                 maintainState: true,
                                 children: [
                                   Container(
@@ -6198,7 +6410,7 @@ return
                                 ],
                               ),
                               ExpansionTile(
-                                title: Text('6-1/2'),
+                                title: Text('6 ½'),
                                 maintainState: true,
                                 children: [
                                   Container(
@@ -6242,7 +6454,7 @@ return
                                 ],
                               ),
                               ExpansionTile(
-                                title: Text('7-1/2'),
+                                title: Text('7 ½'),
                                 maintainState: true,
                                 children: [
                                   Container(
@@ -6286,7 +6498,7 @@ return
                                 ],
                               ),
                               ExpansionTile(
-                                title: Text('8-1/2'),
+                                title: Text('8 ½'),
                                 maintainState: true,
                                 children: [
                                   Container(
@@ -6330,7 +6542,7 @@ return
                                 ],
                               ),
                               ExpansionTile(
-                                title: Text('9-1/2'),
+                                title: Text('9 ½'),
                                 maintainState: true,
                                 children: [
                                   Container(
@@ -6374,7 +6586,7 @@ return
                                 ],
                               ),
                               ExpansionTile(
-                                title: Text('10-1/2'),
+                                title: Text('10 ½'),
                                 maintainState: true,
                                 children: [
                                   Container(
@@ -6462,7 +6674,7 @@ return
                                 ],
                               ),
                               ExpansionTile(
-                                title: Text('15-1/2'),
+                                title: Text('15 ½'),
                                 maintainState: true,
                                 children: [
                                   Container(
@@ -6507,7 +6719,7 @@ return
           Expanded(
             child: DefaultTabController(
 
-                length:6,
+                length:5,
                 child: Scaffold(
 
                   appBar:AppBar(
@@ -6524,8 +6736,7 @@ return
                         Text("Made-to-order",style: TextStyle(fontSize:  SizeConfig.safeBlockHorizontal *5,),),
                         Text("Free size",style: TextStyle(fontSize:  SizeConfig.safeBlockHorizontal *5),),
                         Text("Custom size(upto 10)",style: TextStyle(fontSize:  SizeConfig.safeBlockHorizontal *5),),
-                       Text("Ring(US/Canada)",style: TextStyle(fontSize:  SizeConfig.safeBlockHorizontal *5),),
-                       Text("Shoes(US/Canada)",style: TextStyle(fontSize:  SizeConfig.safeBlockHorizontal *5),),
+                       Text("Shoes(US)",style: TextStyle(fontSize:  SizeConfig.safeBlockHorizontal *5),),
 
                       ],
                     ),
@@ -7307,517 +7518,6 @@ return
                           ListView(
                             children: [
                               ExpansionTile(
-                                title: Text('4'),
-                                maintainState: true,
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: Ring1controller,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              ExpansionTile(
-                                title: Text('4.5'),
-                                maintainState: true,
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: Ring2controller,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              ExpansionTile(
-                                title: Text('5'),
-                                maintainState: true,
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: Ring3controller,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              ExpansionTile(
-                                title: Text('5.5'),
-                                maintainState: true,
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: Ring4controller,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              ExpansionTile(
-                                title: Text('6'),
-                                maintainState: true,
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: Ring5controller,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              ExpansionTile(
-                                title: Text('6.5'),
-                                maintainState: true,
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: Ring6controller,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              ExpansionTile(
-                                title: Text('7'),
-                                maintainState: true,
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: Ring7controller,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              ExpansionTile(
-                                title: Text('7.5'),
-                                maintainState: true,
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: Ring8controller,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              ExpansionTile(
-                                title: Text('8'),
-                                maintainState: true,
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: Ring9controller,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              ExpansionTile(
-                                title: Text('8.5'),
-                                maintainState: true,
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: Ring10controller,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              ExpansionTile(
-                                title: Text('9'),
-                                maintainState: true,
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: Ring11controller,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              ExpansionTile(
-                                title: Text('9.5'),
-                                maintainState: true,
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: Ring12controller,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              ExpansionTile(
-                                title: Text('10'),
-                                maintainState: true,
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: Ring13controller,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              ExpansionTile(
-                                title: Text('10.5'),
-                                maintainState: true,
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: Ring14controller,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              ExpansionTile(
-                                title: Text('11'),
-                                maintainState: true,
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: Ring15controller,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              ExpansionTile(
-                                title: Text('11.5'),
-                                maintainState: true,
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: Ring16controller,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              ExpansionTile(
-                                title: Text('12'),
-                                maintainState: true,
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: Ring17controller,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              ExpansionTile(
-                                title: Text('12.5'),
-                                maintainState: true,
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: Ring18controller,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              ExpansionTile(
-                                title: Text('13'),
-                                maintainState: true,
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: Ring19controller,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              ExpansionTile(
-                                title: Text('13.5'),
-                                maintainState: true,
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: Ring20controller,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              ExpansionTile(
-                                title: Text('14'),
-                                maintainState: true,
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: Ring21controller,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              ExpansionTile(
-                                title: Text('14.5'),
-                                maintainState: true,
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: Ring22controller,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              ExpansionTile(
-                                title: Text('15'),
-                                maintainState: true,
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: Ring23controller,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                ],
-                              ),
-
-                            ],
-                          ),
-                          ListView(
-                            children: [
-                              ExpansionTile(
                                 title: Text('0-3 mth'),
                                 maintainState: true,
                                 children: [
@@ -8014,8 +7714,7 @@ return
                         Text("Made-to-order",style: TextStyle(fontSize:  SizeConfig.safeBlockHorizontal *5,),),
                         Text("Free size",style: TextStyle(fontSize:  SizeConfig.safeBlockHorizontal *5),),
                         Text("Custom size(upto 10)",style: TextStyle(fontSize:  SizeConfig.safeBlockHorizontal *5),),
-                       Text("Ring(US/Canada)",style: TextStyle(fontSize:  SizeConfig.safeBlockHorizontal *5),),
-                       Text("Shoes(US/Canada)",style: TextStyle(fontSize:  SizeConfig.safeBlockHorizontal *5),),
+                       Text("Shoes(US)",style: TextStyle(fontSize:  SizeConfig.safeBlockHorizontal *5),),
 
                       ],
                     ),
@@ -8031,7 +7730,7 @@ return
                             children: [
 
                               ExpansionTile(
-                                title: Text('2'),
+                                title: Text('2 Y'),
                                 maintainState: true,
                                 children: [
                                   Container(
@@ -8053,7 +7752,7 @@ return
                                 ],
                               ),
                               ExpansionTile(
-                                title: Text('3-4'),
+                                title: Text('3-4 Y'),
                                 maintainState: true,
                                 children: [
                                   Container(
@@ -8075,7 +7774,7 @@ return
                                 ],
                               ),
                               ExpansionTile(
-                                title: Text('4-5'),
+                                title: Text('4-5 Y'),
                                 maintainState: true,
                                 children: [
                                   Container(
@@ -8097,7 +7796,7 @@ return
                                 ],
                               ),
                               ExpansionTile(
-                                title: Text('5-6'),
+                                title: Text('5-6 Y'),
                                 maintainState: true,
                                 children: [
                                   Container(
@@ -8119,7 +7818,7 @@ return
                                 ],
                               ),
                               ExpansionTile(
-                                title: Text('6-7'),
+                                title: Text('6-7 Y'),
                                 maintainState: true,
                                 children: [
                                   Container(
@@ -8141,7 +7840,7 @@ return
                                 ],
                               ),
                               ExpansionTile(
-                                title: Text('7-8'),
+                                title: Text('7-8 Y'),
                                 maintainState: true,
                                 children: [
                                   Container(
@@ -8163,7 +7862,7 @@ return
                                 ],
                               ),
                               ExpansionTile(
-                                title: Text('8-9'),
+                                title: Text('8-9 Y'),
                                 maintainState: true,
                                 children: [
                                   Container(
@@ -8185,7 +7884,7 @@ return
                                 ],
                               ),
                               ExpansionTile(
-                                title: Text('9-10'),
+                                title: Text('9-10 Y'),
                                 maintainState: true,
                                 children: [
                                   Container(
@@ -8207,7 +7906,7 @@ return
                                 ],
                               ),
                               ExpansionTile(
-                                title: Text('10-11'),
+                                title: Text('10-11 Y'),
                                 maintainState: true,
                                 children: [
                                   Container(
@@ -8229,7 +7928,7 @@ return
                                 ],
                               ),
                               ExpansionTile(
-                                title: Text('11-12'),
+                                title: Text('11-12 Y'),
                                 maintainState: true,
                                 children: [
                                   Container(
@@ -8884,517 +8583,6 @@ return
                           ListView(
                             children: [
                               ExpansionTile(
-                                title: Text('4'),
-                                maintainState: true,
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: Ring1controller,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              ExpansionTile(
-                                title: Text('4.5'),
-                                maintainState: true,
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: Ring2controller,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              ExpansionTile(
-                                title: Text('5'),
-                                maintainState: true,
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: Ring3controller,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              ExpansionTile(
-                                title: Text('5.5'),
-                                maintainState: true,
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: Ring4controller,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              ExpansionTile(
-                                title: Text('6'),
-                                maintainState: true,
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: Ring5controller,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              ExpansionTile(
-                                title: Text('6.5'),
-                                maintainState: true,
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: Ring6controller,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              ExpansionTile(
-                                title: Text('7'),
-                                maintainState: true,
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: Ring7controller,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              ExpansionTile(
-                                title: Text('7.5'),
-                                maintainState: true,
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: Ring8controller,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              ExpansionTile(
-                                title: Text('8'),
-                                maintainState: true,
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: Ring9controller,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              ExpansionTile(
-                                title: Text('8.5'),
-                                maintainState: true,
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: Ring10controller,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              ExpansionTile(
-                                title: Text('9'),
-                                maintainState: true,
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: Ring11controller,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              ExpansionTile(
-                                title: Text('9.5'),
-                                maintainState: true,
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: Ring12controller,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              ExpansionTile(
-                                title: Text('10'),
-                                maintainState: true,
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: Ring13controller,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              ExpansionTile(
-                                title: Text('10.5'),
-                                maintainState: true,
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: Ring14controller,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              ExpansionTile(
-                                title: Text('11'),
-                                maintainState: true,
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: Ring15controller,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              ExpansionTile(
-                                title: Text('11.5'),
-                                maintainState: true,
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: Ring16controller,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              ExpansionTile(
-                                title: Text('12'),
-                                maintainState: true,
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: Ring17controller,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              ExpansionTile(
-                                title: Text('12.5'),
-                                maintainState: true,
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: Ring18controller,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              ExpansionTile(
-                                title: Text('13'),
-                                maintainState: true,
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: Ring19controller,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              ExpansionTile(
-                                title: Text('13.5'),
-                                maintainState: true,
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: Ring20controller,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              ExpansionTile(
-                                title: Text('14'),
-                                maintainState: true,
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: Ring21controller,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              ExpansionTile(
-                                title: Text('14.5'),
-                                maintainState: true,
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: Ring22controller,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              ExpansionTile(
-                                title: Text('15'),
-                                maintainState: true,
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: Ring23controller,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                ],
-                              ),
-
-                            ],
-                          ),
-                          ListView(
-                            children: [
-                              ExpansionTile(
                                 title: Text('2 Y'),
                                 maintainState: true,
                                 children: [
@@ -9417,7 +8605,7 @@ return
                                 ],
                               ),
                               ExpansionTile(
-                                title: Text('2 Y'),
+                                title: Text('2 ½ Y'),
                                 maintainState: true,
                                 children: [
                                   Container(
@@ -9461,7 +8649,7 @@ return
                                 ],
                               ),
                               ExpansionTile(
-                                title: Text('3 Y'),
+                                title: Text('3 ½ Y'),
                                 maintainState: true,
                                 children: [
                                   Container(
@@ -9745,8 +8933,8 @@ return
                         Text("Made-to-order",style: TextStyle(fontSize:  SizeConfig.safeBlockHorizontal *5,),),
                         Text("Free size",style: TextStyle(fontSize:  SizeConfig.safeBlockHorizontal *5),),
                         Text("Custom size(upto 10)",style: TextStyle(fontSize:  SizeConfig.safeBlockHorizontal *5),),
-                       Text("Ring(US/Canada)",style: TextStyle(fontSize:  SizeConfig.safeBlockHorizontal *5),),
-                       Text("Shoes(US/Canada)",style: TextStyle(fontSize:  SizeConfig.safeBlockHorizontal *5),),
+                       Text("Ring(US)",style: TextStyle(fontSize:  SizeConfig.safeBlockHorizontal *5),),
+                       Text("Shoes(US)",style: TextStyle(fontSize:  SizeConfig.safeBlockHorizontal *5),),
 
                       ],
                     ),
@@ -9762,7 +8950,7 @@ return
                             children: [
 
                               ExpansionTile(
-                                title: Text('13'),
+                                title: Text('13 Y'),
                                 maintainState: true,
                                 children: [
                                   Container(
@@ -9784,7 +8972,7 @@ return
                                 ],
                               ),
                               ExpansionTile(
-                                title: Text('14'),
+                                title: Text('14 Y'),
                                 maintainState: true,
                                 children: [
                                   Container(
@@ -9806,7 +8994,7 @@ return
                                 ],
                               ),
                               ExpansionTile(
-                                title: Text('15'),
+                                title: Text('15 Y'),
                                 maintainState: true,
                                 children: [
                                   Container(
@@ -9828,7 +9016,7 @@ return
                                 ],
                               ),
                               ExpansionTile(
-                                title: Text('16'),
+                                title: Text('16 Y'),
                                 maintainState: true,
                                 children: [
                                   Container(
@@ -10994,7 +10182,7 @@ return
                           ListView(
                             children: [
                               ExpansionTile(
-                                title: Text('13'),
+                                title: Text('13 Y'),
                                 maintainState: true,
                                 children: [
                                   Container(
@@ -11016,7 +10204,7 @@ return
                                 ],
                               ),
                               ExpansionTile(
-                                title: Text('14'),
+                                title: Text('14 Y'),
                                 maintainState: true,
                                 children: [
                                   Container(
@@ -11038,7 +10226,7 @@ return
                                 ],
                               ),
                               ExpansionTile(
-                                title: Text('15'),
+                                title: Text('15 Y'),
                                 maintainState: true,
                                 children: [
                                   Container(
@@ -11060,7 +10248,7 @@ return
                                 ],
                               ),
                               ExpansionTile(
-                                title: Text('16'),
+                                title: Text('16 Y'),
                                 maintainState: true,
                                 children: [
                                   Container(
@@ -11921,14 +11109,14 @@ backgroundColor: kblue,
                                 border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
                                 enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
                                 focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
-                                hintText:" ${currentUser.currencyISO}",
+                                hintText:" ${currentUser.currencysym}",
 
-                                labelText: '${currentUser.currencyISO}Shipping cost',labelStyle: TextStyle(color: kText),
+                                labelText: '${currentUser.currencysym}Shipping cost',labelStyle: TextStyle(color: kText),
 
                               ),
                               textAlign: TextAlign.center,
                               validator: (text) {
-                                if ( freeship==false && text.isEmpty ) {
+                                if ( freeship==false || text.isEmpty ) {
                                   return 'Shipping cost is empty';
                                 }
                                 return null;
@@ -11996,7 +11184,7 @@ backgroundColor: kblue,
                                     ),
                                     textAlign: TextAlign.center,
                                     validator: (text) {
-                                      if (worldship==true && text.isEmpty) {
+                                      if (worldship==true || text.isEmpty) {
                                         return 'Shipping duration is empty';
                                       }
                                       return null;
@@ -12022,7 +11210,7 @@ backgroundColor: kblue,
                                     ),
                                     textAlign: TextAlign.center,
                                     validator: (text) {
-                                      if (worldship==true && text.isEmpty) {
+                                      if (worldship==true || text.isEmpty) {
                                         return 'Shipping duration is empty';
                                       }
                                       return null;
@@ -12069,13 +11257,13 @@ backgroundColor: kblue,
                                 border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
                                 enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
                                 focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
-                                hintText:" ${currentUser.currencyISO}",
+                                hintText:" ${currentUser.currencysym}",
 
                                 labelText: 'Shipping cost',labelStyle: TextStyle(color: kText),
                               ),
                               textAlign: TextAlign.center,
                               validator: (text) {
-                                if ( freeworldship==false && text.isEmpty ) {
+                                if ( freeworldship==false || text.isEmpty ) {
                                   return 'Shipping cost is empty';
                                 }
                                 return null;
@@ -12133,7 +11321,7 @@ keyboardType:TextInputType.number,
                                     focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
 
                                     labelText: 'Price',labelStyle: TextStyle(color: kText),
-                                    hintText:" ${currentUser.currencyISO}",
+                                    hintText:" ${currentUser.currencysym}",
                                   ),
                                   textAlign: TextAlign.center,
                                   validator: (text) {
@@ -12399,8 +11587,8 @@ keyboardType:TextInputType.number,
         from: '${currentUser.currencyISO}', to: 'USD', amount: shipcostintern.text ??  0);
     // String date = result.date; // Returns the last updated date
     setState(() {
-
-      inrtousd = resultUSD.rate;
+      inrtousd = double.tryParse(resultUSD.rate);
+      inrtousd = inrtousd.toStringAsFixed(2);
       inrtousd1 = resultUSD1.rate;
       inrtousd2 = resultUSD2.rate;
       inrtousd3 = resultUSD3.rate;
@@ -12609,8 +11797,8 @@ keyboardType:TextInputType.number,
               "custom101inr": userprice10.toString() ?? "0.0",
               "shipcostusd": inrtousd11.toString() ?? "0.0",
               "shipcostinr": userprice11.toString() ?? "0.0",
- "shipcostinterusd": inrtousd12.toString() ?? "0.0",
-              "shipcostinterinr": userprice12.toString() ?? "0.0",
+ "shipcostinternusd": inrtousd12.toString() ?? "0.0",
+              "shipcostinterninr": userprice12.toString() ?? "0.0",
 
               "processfrom":  int.tryParse(durationfromp.text) ?? 0,
               "processto":  int.tryParse(durationto.text) ?? 0,

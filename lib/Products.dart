@@ -98,7 +98,6 @@ pics({String userid,String prodid}){
                           child:
                           CarouselSlider(
 
-                            //  items: listOfImages.map((e) { return Builder(builder: (BuildContext context){ return Container();});}),
                                 items: listOfImages,
                               options: CarouselOptions(
 
@@ -638,11 +637,11 @@ freeship: doc.data()['freeship'],
         shipinterfrom:  doc.data()['shipinterfrom'],
         shipinterto:  doc.data()['shipinterto'],
 
-      shipcostinterinr:  doc.data()['shipcostinterinr'],
+      shipcostinterinr:  doc.data()['shipcostinterninr'],
 
       shipcostinr:  doc.data()['shipcostinr'],
 
-      shipcostinterusd:  doc.data()['shipcostinterusd'],
+      shipcostinterusd:  doc.data()['shipcostinternusd'],
 
       shipcostusd:  doc.data()['shipcostusd'],
 
@@ -913,7 +912,7 @@ String customprice10;
 
   final String productname;
   final String details;
-   String color;
+   String color = "";
   final String composition;
   final String washandcare;
   final String sizeandfit;
@@ -999,43 +998,43 @@ String customprice10;
   final int custom92;
   final int custom102;
   final String custom11eur;
-  final String custom11usd;
+  String custom11usd;
   final String custom11inr;
   final String custom11gbp;
   final String custom21eur;
-  final String custom21usd;
+  String custom21usd;
   final String custom21inr;
   final String custom21gbp;
   final String custom31eur;
-  final String custom31usd;
+  String custom31usd;
   final String custom31inr;
   final String custom31gbp;
   final String custom41eur;
-  final String custom41usd;
+  String custom41usd;
   final String custom41inr;
   final String custom41gbp;
   final String custom51eur;
-  final String custom51usd;
+  String custom51usd;
   final String custom51inr;
   final String custom51gbp;
   final String custom61eur;
-  final String custom61usd;
+  String custom61usd;
   final String custom61inr;
   final String custom61gbp;
   final String custom71eur;
-  final String custom71usd;
+   String custom71usd;
   final String custom71inr;
   final String custom71gbp;
   final String custom81eur;
-  final String custom81usd;
+   String custom81usd;
   final String custom81inr;
   final String custom81gbp;
   final String custom91eur;
-  final String custom91usd;
+   String custom91usd;
   final String custom91inr;
   final String custom91gbp;
   final String custom101eur;
-  final String custom101usd;
+   String custom101usd;
   final String custom101inr;
   final String custom101gbp;
   final String shipcostusd;
@@ -1277,37 +1276,40 @@ this.country,
 currency()async{
     print("cg");
   var resultUSD = await Currency.getConversion(
-      from: 'EUR', to: 'USD', amount: eur);
+      from: '${currentUser.currencyISO}', to: 'USD', amount: eur);
+    var resultUSD11 = await Currency.getConversion(
+        from: '${currentUser.currencyISO}', to: 'USD', amount: shipcostinterusd );
+var s;
     print("csfgsdfbsdfdfg");
 setState(() {
 
 
   e = resultUSD.rate;
   price =e.toStringAsFixed(2);
+  s = resultUSD11.rate;
+  shipcostuser =s.toStringAsFixed(2);
 
 });
     var resultUSD1 = await Currency.getConversion(
-      from: '${currentUser.currencyISO}', to: 'USD', amount: custom11usd ??  0);
+      from: '${currentUser.currencyISO}', to: 'USD', amount: custom11usd  );
   var resultUSD2 = await Currency.getConversion(
-      from: '${currentUser.currencyISO}', to: 'USD', amount: custom21usd ??  0);
+      from: '${currentUser.currencyISO}', to: 'USD', amount: custom21usd  );
   var resultUSD3 = await Currency.getConversion(
-      from: '${currentUser.currencyISO}', to: 'USD', amount: custom31usd ??  0);
+      from: '${currentUser.currencyISO}', to: 'USD', amount: custom31usd  );
   var resultUSD4 = await Currency.getConversion(
-      from: '${currentUser.currencyISO}', to: 'USD', amount: custom41usd ??  0);
+      from: '${currentUser.currencyISO}', to: 'USD', amount: custom41usd  );
   var resultUSD5 = await Currency.getConversion(
-      from: '${currentUser.currencyISO}', to: 'USD', amount: custom51usd ??  0);
+      from: '${currentUser.currencyISO}', to: 'USD', amount: custom51usd  );
   var resultUSD6 = await Currency.getConversion(
-      from: '${currentUser.currencyISO}', to: 'USD', amount: custom61usd ??  0);
+      from: '${currentUser.currencyISO}', to: 'USD', amount: custom61usd  );
   var resultUSD7 = await Currency.getConversion(
-      from: '${currentUser.currencyISO}', to: 'USD', amount: custom71usd ??  0);
+      from: '${currentUser.currencyISO}', to: 'USD', amount: custom71usd  );
   var resultUSD8 = await Currency.getConversion(
-      from: '${currentUser.currencyISO}', to: 'USD', amount: custom81usd ??  0);
+      from: '${currentUser.currencyISO}', to: 'USD', amount: custom81usd  );
   var resultUSD9 = await Currency.getConversion(
-      from: '${currentUser.currencyISO}', to: 'USD', amount: custom91usd ??  0);
+      from: '${currentUser.currencyISO}', to: 'USD', amount: custom91usd  );
   var resultUSD10 = await Currency.getConversion(
-      from: '${currentUser.currencyISO}', to: 'USD', amount: custom101usd ??  0);
-  var resultUSD11 = await Currency.getConversion(
-      from: '${currentUser.currencyISO}', to: 'USD', amount: shipcostinterusd ??  0);
+      from: '${currentUser.currencyISO}', to: 'USD', amount: custom101usd  );
 
   var c1;
  var c2;
@@ -1319,12 +1321,56 @@ setState(() {
  var c8;
  var c9;
  var c10;
-var s;
+var custom1usd;
+var custom2usd;
+var custom3usd;
+var custom4usd;
+var custom5usd;
+var custom6usd;
+var custom7usd;
+var custom8usd;
+var custom9usd;
+var custom10usd;
+
   setState(() {
+
+    custom1usd = double.tryParse(custom11usd);
+    custom1usd = custom1usd.toStringAsFixed(2);
+     custom11usd = custom1usd.toString();
+       custom2usd = double.tryParse(custom21usd);
+    custom2usd = custom2usd.toStringAsFixed(2);
+     custom21usd = custom2usd.toString();
+       custom3usd = double.tryParse(custom31usd);
+    custom3usd = custom3usd.toStringAsFixed(2);
+     custom31usd = custom3usd.toString();
+       custom4usd = double.tryParse(custom41usd);
+    custom4usd = custom4usd.toStringAsFixed(2);
+     custom41usd = custom4usd.toString();
+       custom5usd = double.tryParse(custom51usd);
+    custom5usd = custom5usd.toStringAsFixed(2);
+     custom51usd = custom5usd.toString();
+       custom6usd = double.tryParse(custom61usd);
+    custom6usd = custom6usd.toStringAsFixed(2);
+     custom61usd = custom6usd.toString();
+       custom7usd = double.tryParse(custom71usd);
+    custom7usd = custom7usd.toStringAsFixed(2);
+     custom71usd = custom7usd.toString();
+       custom8usd = double.tryParse(custom81usd);
+    custom8usd = custom8usd.toStringAsFixed(2);
+     custom81usd = custom8usd.toString();
+       custom9usd = double.tryParse(custom91usd);
+    custom9usd = custom9usd.toStringAsFixed(2);
+     custom91usd = custom9usd.toString();
+       custom10usd = double.tryParse(custom101usd);
+    custom10usd = custom10usd.toStringAsFixed(2);
+     custom101usd = custom10usd.toString();
 
 
     c1 = resultUSD1.rate;
     customprice1 =c1.toStringAsFixed(2);
+    print(resultUSD1.rate);
+    print(customprice1);
+
    c2 = resultUSD2.rate;
     customprice2 =c2.toStringAsFixed(2);
    c3 = resultUSD3.rate;
@@ -1343,9 +1389,6 @@ var s;
     customprice9 =c9.toStringAsFixed(2);
    c10 = resultUSD10.rate;
     customprice10 =c10.toStringAsFixed(2);
-   s = resultUSD11.rate;
-    shipcostuser =s.toStringAsFixed(2);
-    s = shipcostuser;
 
     isUploading = false;
   });
@@ -1378,2605 +1421,6 @@ var s;
     });
   }
 
-  WS1(){
-
-    if(Shoe1 == 0){
-      return
-        Container();
-    }
-    else{
-      return
-      InkWell(
-        onTap: (){
-          setState(()  {
-
-            usersize = '(US)5';
-          });
-
-
-        },
-        child:   Container(
-          height:50,
-          width:MediaQuery.of(context).size.width,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-//    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
-              FittedBox(child: Text('(US)5',)),
-            ],
-          ),
-        ),
-      );
-    }
-  }
-  WS2(){
-    if(Shoe2 == 0){
-      return
-        Container();
-    }
-    else{
-      return
-      InkWell(
-        onTap: (){
-          setState(()  {
-
-            usersize = '(US)5-1/2';
-          });
-
-
-        },
-        child:   Container(
-          height:50,
-          width:MediaQuery.of(context).size.width,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-//    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
-              FittedBox(child: Text('(US)5-1/2',)),
-            ],
-          ),
-        ),
-      );
-    }
-  }
-  WS3(){
-    if(Shoe3 == 0){
-      return
-        Container();
-    }
-    else{
-      return
-      InkWell(
-        onTap: (){
-          setState(()  {
-
-            usersize = '(US)6';
-          });
-
-
-
-        },
-        child:   Container(
-          height:50,
-          width:MediaQuery.of(context).size.width,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-//    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
-              FittedBox(child: Text('(US)6',)),
-            ],
-          ),
-        ),
-      );
-    }
-  }
-  WS4(){
-    if(Shoe4 == 0){
-      return
-        Container();
-    }
-    else{return
-      InkWell(
-        onTap: (){
-          setState(()  {
-
-            usersize = '(US)6-1/2';
-          });
-
-
-        },
-        child:   Container(
-          height:50,
-          width:MediaQuery.of(context).size.width,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-//    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
-              FittedBox(child: Text('(US)6-1/2',)),
-            ],
-          ),
-        ),
-      );
-    }
-  }
-  WS5(){
-    if(Shoe5 == 0){
-      return
-        Container();
-    }
-    else{
-      return
-      InkWell(
-        onTap: (){
-          setState(()  {
-
-            usersize = '(US)7';
-          });
-
-
-
-        },
-        child:   Container(
-          height:50,
-          width:MediaQuery.of(context).size.width,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-//    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
-              FittedBox(child: Text('(US)7',)),
-            ],
-          ),
-        ),
-      );
-    }
-  }
-  WS6(){
-    if(Shoe6 == 0){
-      return
-        Container();
-    }
-    else{
-      return
-      InkWell(
-        onTap: (){
-          setState(()  {
-
-            usersize = '(US)7-1/2';
-          });
-
-
-        },
-        child:   Container(
-          height:50,
-          width:MediaQuery.of(context).size.width,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-//    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
-              FittedBox(child: Text('(US)7-1/2',)),
-            ],
-          ),
-        ),
-      );
-    }
-  }
-  WS7(){
-
-    if(Shoe7 == 0){
-      return
-        Container();
-    }
-    else{
-      return
-      InkWell(
-        onTap: (){
-          setState(()  {
-
-            usersize = '(US)8';
-          });
-
-
-
-        },
-        child:   Container(
-          height:50,
-          width:MediaQuery.of(context).size.width,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-//    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
-              FittedBox(child: Text('(US)8',)),
-            ],
-          ),
-        ),
-      );
-    }
-  }
-  WS8(){
-
-    if(Shoe8 == 0){
-      return
-        Container();
-    }
-    else{
-      return
-      InkWell(
-        onTap: (){
-          setState(()  {
-
-            usersize = '(US)8-1/2';
-          });
-
-
-
-        },
-        child:   Container(
-          height:50,
-          width:MediaQuery.of(context).size.width,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-//    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
-              FittedBox(child: Text('(US)8-1/2',)),
-            ],
-          ),
-        ),
-      );
-    }
-  }
-  WS9(){
-
-    if(Shoe9 == 0){
-      return
-        Container();
-    }
-    else{
-      return
-      InkWell(
-        onTap: (){
-          setState(()  {
-
-            usersize = '(US)9';
-          });
-
-
-
-        },
-        child:   Container(
-          height:50,
-          width:MediaQuery.of(context).size.width,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-//    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
-              FittedBox(child: Text('(US)9',)),
-            ],
-          ),
-        ),
-      );
-    }
-  }
-  WS10(){
-    if(Shoe10 == 0){
-      return
-        Container();
-    }
-    else{
-      return
-      InkWell(
-        onTap: (){
-          setState(()  {
-
-            usersize = '(US)9-1/2';
-          });
-
-
-
-        },
-        child:   Container(
-          height:50,
-          width:MediaQuery.of(context).size.width,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-//    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
-              FittedBox(child: Text('(US)9-1/2',)),
-            ],
-          ),
-        ),
-      );
-    }
-  }
-  WS11(){
-    if(Shoe11 == 0){
-      return
-        Container();
-    }
-    else{
-      return
-      InkWell(
-        onTap: (){
-          setState(()  {
-
-            usersize = '(US)10';
-          });
-
-
-        },
-        child:   Container(
-          height:50,
-          width:MediaQuery.of(context).size.width,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-//    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
-              FittedBox(child: Text('(US)10',)),
-            ],
-          ),
-        ),
-      );
-    }
-  }
-  WS12(){
-    if(Shoe12 == 0){
-      return
-        Container();
-    }
-    else{
-      return
-      InkWell(
-        onTap: (){
-          setState(()  {
-
-            usersize = '(US)10-1/2';
-          });
-
-
-        },
-        child:   Container(
-          height:50,
-          width:MediaQuery.of(context).size.width,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-//    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
-              FittedBox(child: Text('(US)10-1/2',)),
-            ],
-          ),
-        ),
-      );
-    }
-  }
-  WS13(){
-    if(Shoe13 == 0){
-      return
-        Container();
-    }
-else{
-  return
-      InkWell(
-        onTap: (){
-          setState(()  {
-
-            usersize = '(US)12';
-          });
-
-
-        },
-        child:   Container(
-          height:50,
-          width:MediaQuery.of(context).size.width,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-//    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
-              FittedBox(child: Text('(US)12',)),
-            ],
-          ),
-        ),
-      );
-    }
-  }
-  WS14(){
-
-    if(Shoe14 == 0){
-      return
-        Container();
-    }
-    else{
-      return
-      InkWell(
-        onTap: (){
-          setState(()  {
-
-            usersize = '(US)13';
-          });
-
-
-        },
-        child:   Container(
-          height:50,
-          width:MediaQuery.of(context).size.width,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-//    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
-              FittedBox(child: Text('(US)13',)),
-            ],
-          ),
-        ),
-      );
-    }
-  }
-   WS15(){
-
-    if(Shoe15 == 0){
-      return
-        Container();
-    }
-    else{
-      return
-      InkWell(
-        onTap: (){
-          setState(()  {
-
-            usersize = '14';
-          });
-
-
-        },
-        child:   Container(
-          height:50,
-          width:MediaQuery.of(context).size.width,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-//    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
-              FittedBox(child: Text('(US)14',)),
-            ],
-          ),
-        ),
-      );
-    }
-   }
-  WS16(){
-
-    if(Shoe16 == 0){
-      return
-        Container();
-    }
-    else{
-      return
-      InkWell(
-        onTap: (){
-          setState(()  {
-
-            usersize = '(US)15-1/2';
-          });
-
-
-        },
-        child:   Container(
-          height:50,
-          width:MediaQuery.of(context).size.width,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-//    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
-              FittedBox(child: Text('(US)15-1/2',)),
-            ],
-          ),
-        ),
-      );
-    }
-  }
-  B1(){
-    if(xxxs == 0){
-      return
-        Container();
-    }
-    else{
-      return
-      InkWell(
-        onTap: (){
-          setState(()  {
-
-            usersize = '0-3 M';
-          });
-
-
-        },
-        child:   Container(
-          height:50,
-          width:MediaQuery.of(context).size.width,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-//    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
-              FittedBox(child: Text('0-3 M',)),
-            ],
-          ),
-        ),
-      );
-    }
-  }
-  B2(){
-    if(xxs == 0){
-      return
-        Container();
-    }
-    else{
-      return
-      InkWell(
-        onTap: (){
-          setState(()  {
-
-            usersize = '3-6 M';
-          });
-
-
-        },
-        child:   Container(
-          height:50,
-          width:MediaQuery.of(context).size.width,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-//    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
-              FittedBox(child: Text('3-6 M',)),
-            ],
-          ),
-        ),
-      );
-    }
-  }
-  B3(){
- if(xs == 0){
-   return
-     Container();
- }
- else {
-   return
-   InkWell(
-     onTap: (){
-       setState(()  {
-
-         usersize = '6-9 M';
-       });
-
-
-     },
-     child:   Container(
-       height:50,
-       width:MediaQuery.of(context).size.width,
-       child: Column(
-         mainAxisAlignment: MainAxisAlignment.center,
-         children: [
-//    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
-           FittedBox(child: Text('6-9 M',)),
-         ],
-       ),
-     ),
-   );
- }
-  }
-  B4(){
-
-    if(s == 0){
-      return
-        Container();
-    }
-    else{
-      return
-      InkWell(
-        onTap: (){
-          setState(()  {
-
-            usersize = '9-12 M';
-          });
-
-
-        },
-        child:   Container(
-          height:50,
-          width:MediaQuery.of(context).size.width,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-//    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
-              FittedBox(child: Text('9-12 M',)),
-            ],
-          ),
-        ),
-      );
-    }
-  }
- B5(){
-
-    if(m == 0){
-      return
-        Container();
-    }
-    else{
-      return
-      InkWell(
-        onTap: (){
-          setState(()  {
-
-            usersize = '12-18 M';
-          });
-
-
-        },
-        child:   Container(
-          height:50,
-          width:MediaQuery.of(context).size.width,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-//    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
-              FittedBox(child: Text('12-18 M',)),
-            ],
-          ),
-        ),
-      );
-    }
- }
-  B6(){
-
-    if(l == 0){
-      return
-        Container();
-    }
-    else{
-      return
-      InkWell(
-        onTap: (){
-          setState(()  {
-
-            usersize = '18-24 M';
-          });
-
-
-        },
-        child:   Container(
-          height:50,
-          width:MediaQuery.of(context).size.width,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-//    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
-              FittedBox(child: Text('18-24 M',)),
-            ],
-          ),
-        ),
-      );
-    }
-  }
-  BS1(){
-
-    if(Shoe1 == 0){
-      return
-        Container();
-    }
-    else{
-      return
-      InkWell(
-        onTap: (){
-          setState(()  {
-
-            usersize = 'S 0-3 M';
-          });
-
-
-        },
-        child:   Container(
-          height:50,
-          width:MediaQuery.of(context).size.width,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-//    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
-              FittedBox(child: Text('0-3 M',)),
-            ],
-          ),
-        ),
-      );
-    }
-  }
-  BS2(){
-
-    if(Shoe2 == 0){
-      return
-        Container();
-    }
-    else{
-      return
-      InkWell(
-        onTap: (){
-          setState(()  {
-
-            usersize = 'S 3-6 M';
-          });
-
-
-        },
-        child:   Container(
-          height:50,
-          width:MediaQuery.of(context).size.width,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-//    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
-              FittedBox(child: Text('3-6 M',)),
-            ],
-          ),
-        ),
-      );
-    }
-  }
-  BS3(){
-
-    if(Shoe3 == 0){
-      return
-        Container();
-    }
-    else{
-      return
-      InkWell(
-        onTap: (){
-          setState(()  {
-
-            usersize = 'S 6 M';
-          });
-
-
-        },
-        child:   Container(
-          height:50,
-          width:MediaQuery.of(context).size.width,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-//    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
-              FittedBox(child: Text('6 M',)),
-            ],
-          ),
-        ),
-      );
-    }
-  }
-  BS4(){
-
-    if(Shoe4 == 0){
-      return
-        Container();
-    }
-    else{
-      return
-      InkWell(
-        onTap: (){
-          setState(()  {
-
-            usersize = 'S 9 M';
-          });
-
-
-        },
-        child:   Container(
-          height:50,
-          width:MediaQuery.of(context).size.width,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-//    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
-              FittedBox(child: Text('9 M',)),
-            ],
-          ),
-        ),
-      );
-    }
-  }
-  BS5(){
-
-    if(Shoe5 == 0){
-      return
-        Container();
-    }
-    else{
-      return
-      InkWell(
-        onTap: (){
-          setState(()  {
-
-            usersize = 'S 9-12 M';
-          });
-
-
-        },
-        child:   Container(
-          height:50,
-          width:MediaQuery.of(context).size.width,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-//    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
-              FittedBox(child: Text('9-12 M',)),
-            ],
-          ),
-        ),
-      );
-    }
-  }
-  BS6(){
-
-    if(Shoe6 == 0){
-      return
-        Container();
-    }
-    else{
-      return
-      InkWell(
-        onTap: (){
-          setState(()  {
-
-            usersize = 'S 12-18 M';
-          });
-
-
-        },
-        child:   Container(
-          height:50,
-          width:MediaQuery.of(context).size.width,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-//    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
-              FittedBox(child: Text('12-18 M',)),
-            ],
-          ),
-        ),
-      );
-    }
-  }
-  BS7(){
-
-    if(Shoe7 == 0){
-      return
-        Container();
-    }
-    else{
-      return
-      InkWell(
-        onTap: (){
-          setState(()  {
-
-            usersize = 'S 18-24 M';
-          });
-
-
-        },
-        child:   Container(
-          height:50,
-          width:MediaQuery.of(context).size.width,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-//    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
-              FittedBox(child: Text('18-24 M',)),
-            ],
-          ),
-        ),
-      );
-    }
-  }
-  K1(){
-
-    if(xxxs == 0){
-      return
-        Container();
-    }
-    else
-    {
-      return
-      InkWell(
-        onTap: (){
-          setState(()  {
-
-            usersize = '2 Y';
-          });
-
-
-        },
-        child:   Container(
-          height:50,
-          width:MediaQuery.of(context).size.width,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-//    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
-              FittedBox(child: Text('2 Y',)),
-            ],
-          ),
-        ),
-      );
-    }
-  }
- K2(){
-    if(xxs == 0){
-      return
-        Container();
-    }
-    else{
-      return
-      InkWell(
-        onTap: (){
-          setState(()  {
-
-            usersize = '3-4 Y';
-          });
-
-
-        },
-        child:   Container(
-          height:50,
-          width:MediaQuery.of(context).size.width,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-//    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
-              FittedBox(child: Text('3-4 Y',)),
-            ],
-          ),
-        ),
-      );
-    }
- }
-  K3(){
-
-    if(xs == 0){
-      return
-        Container();
-    }
-    else{
-      return
-      InkWell(
-        onTap: (){
-          setState(()  {
-
-            usersize = '4-5 Y';
-          });
-
-
-        },
-        child:   Container(
-          height:50,
-          width:MediaQuery.of(context).size.width,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-//    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
-              FittedBox(child: Text('4-5 Y',)),
-            ],
-          ),
-        ),
-      );
-    }
-  }
-  K4(){
-    if(s == 0){
-      return
-        Container();
-    }
-    else{
-      return
-      InkWell(
-        onTap: (){
-          setState(()  {
-
-            usersize = '5-6 Y';
-          });
-
-
-        },
-        child:   Container(
-          height:50,
-          width:MediaQuery.of(context).size.width,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-//    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
-              FittedBox(child: Text('5-6 Y',)),
-            ],
-          ),
-        ),
-      );
-    }
-  }
-  K5(){
-    if(m == 0){
-      return
-        Container();
-    }
-    else{
-      return
-      InkWell(
-        onTap: (){
-          setState(()  {
-
-            usersize = '6-7 Y';
-          });
-
-
-        },
-        child:   Container(
-          height:50,
-          width:MediaQuery.of(context).size.width,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-//    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
-              FittedBox(child: Text('6-7 Y',)),
-            ],
-          ),
-        ),
-      );
-    }
-  }
-  K6(){
-    if(l == 0){
-      return
-        Container();
-    }
-    else{
-      return
-      InkWell(
-        onTap: (){
-          setState(()  {
-
-            usersize = '7-8 Y';
-          });
-
-
-        },
-        child:   Container(
-          height:50,
-          width:MediaQuery.of(context).size.width,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-//    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
-              FittedBox(child: Text('7-8 Y',)),
-            ],
-          ),
-        ),
-      );
-    }
-  }
-  K7(){
-    if(xl == 0){
-      return
-        Container();
-    }
-    else{
-      return
-      InkWell(
-        onTap: (){
-          setState(()  {
-
-            usersize = '8-9 Y';
-          });
-
-
-        },
-        child:   Container(
-          height:50,
-          width:MediaQuery.of(context).size.width,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-//    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
-              FittedBox(child: Text('8-9 Y',)),
-            ],
-          ),
-        ),
-      );
-    }
-  }
-  K8(){
-    if(xxl == 0){
-      return
-        Container();
-    }
-    else{
-      return
-      InkWell(
-        onTap: (){
-          setState(()  {
-
-            usersize = '9-10 Y';
-          });
-
-
-        },
-        child:   Container(
-          height:50,
-          width:MediaQuery.of(context).size.width,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-//    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
-              FittedBox(child: Text('9-10 Y',)),
-            ],
-          ),
-        ),
-      );
-    }
-  }
-  K9(){
-    if(xxxl == 0){
-      return
-        Container();
-    }
-    else{
-      return
-      InkWell(
-        onTap: (){
-          setState(()  {
-
-            usersize = '10-11 Y';
-          });
-
-
-        },
-        child:   Container(
-          height:50,
-          width:MediaQuery.of(context).size.width,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-//    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
-              FittedBox(child: Text('10-11 Y',)),
-            ],
-          ),
-        ),
-      );
-    }
-  }
-  K10(){
-    if(fourxl == 0){
-      return
-        Container();
-    }
-    else{
-      return
-      InkWell(
-        onTap: (){
-          setState(()  {
-
-            usersize = '11-12 Y';
-          });
-
-
-        },
-        child:   Container(
-          height:50,
-          width:MediaQuery.of(context).size.width,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-//    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
-              FittedBox(child: Text('11-12 Y',)),
-            ],
-          ),
-        ),
-      );
-    }
-  }
-  KS1(){
-    if(Shoe1 == 0){
-      return
-        Container();
-    }
-    else{
-      return
-      InkWell(
-        onTap: (){
-          setState(()  {
-
-            usersize = 'S 2 Y';
-          });
-
-
-        },
-        child:   Container(
-          height:50,
-          width:MediaQuery.of(context).size.width,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-//    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
-              FittedBox(child: Text('2 Y',)),
-            ],
-          ),
-        ),
-      );
-    }
-  }
-  KS2(){
-
-    if(Shoe2 == 0){
-      return
-        Container();
-    }
-    else{
-      return
-        InkWell(
-          onTap: (){
-            setState(()  {
-
-              usersize = 'S 2-1/2 Y';
-            });
-
-
-          },
-          child:   Container(
-            height:50,
-            width:MediaQuery.of(context).size.width,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-//    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
-                FittedBox(child: Text('2-1/2 Y',)),
-              ],
-            ),
-          ),
-        );
-    }
-  }
-  KS3(){
-
-    if(Shoe3 == 0){
-      return
-        Container();
-    }
-    else{
-      return
-      InkWell(
-        onTap: (){
-          setState(()  {
-
-            usersize = 'S 3 Y';
-          });
-
-
-        },
-        child:   Container(
-          height:50,
-          width:MediaQuery.of(context).size.width,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-//    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
-              FittedBox(child: Text('3 Y',)),
-            ],
-          ),
-        ),
-      );
-    }
-  }
-  KS4(){
-
-    if(Shoe4 == 0){
-      return
-        Container();
-    }
-    else{
-      return
-      InkWell(
-        onTap: (){
-          setState(()  {
-
-            usersize = 'S 3-1/2 Y';
-          });
-
-
-        },
-        child:   Container(
-          height:50,
-          width:MediaQuery.of(context).size.width,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-//    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
-              FittedBox(child: Text('3-1/2 Y',)),
-            ],
-          ),
-        ),
-      );
-    }
-  }
-  KS5(){
-    if(Shoe5 == 0){
-      return
-        Container();
-    }
-    else{
-      return
-      InkWell(
-        onTap: (){
-          setState(()  {
-
-            usersize = 'S 4 Y';
-          });
-
-
-        },
-        child:   Container(
-          height:50,
-          width:MediaQuery.of(context).size.width,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-//    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
-              FittedBox(child: Text('4 Y',)),
-            ],
-          ),
-        ),
-      );
-    }
-  }
-  KS6(){
-
-    if(Shoe6 == 0){
-      return
-        Container();
-    }
-    else{
-      return
-      InkWell(
-        onTap: (){
-          setState(()  {
-
-            usersize = 'S 5 Y';
-          });
-
-
-        },
-        child:   Container(
-          height:50,
-          width:MediaQuery.of(context).size.width,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-//    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
-              FittedBox(child: Text(' 5 Y',)),
-            ],
-          ),
-        ),
-      );
-    }
-  }
-  KS7(){
-    if(Shoe7 == 0){
-      return
-        Container();
-    }
-    else{
-      return
-      InkWell(
-        onTap: (){
-          setState(()  {
-
-            usersize = 'S 6 Y';
-          });
-
-
-        },
-        child:   Container(
-          height:50,
-          width:MediaQuery.of(context).size.width,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-//    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
-              FittedBox(child: Text('6 Y',)),
-            ],
-          ),
-        ),
-      );
-    }
-  }
-  KS8(){
-    if(Shoe8 == 0){
-      return
-        Container();
-    }
-    else{
-      return
-      InkWell(
-        onTap: (){
-          setState(()  {
-
-            usersize = 'S 7 Y';
-          });
-
-
-        },
-        child:   Container(
-          height:50,
-          width:MediaQuery.of(context).size.width,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-//    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
-              FittedBox(child: Text('7 Y',)),
-            ],
-          ),
-        ),
-      );
-    }
-  }
-  KS9(){
-    if(Shoe9 == 0){
-      return
-        Container();
-    }
-    else{
-      return
-      InkWell(
-        onTap: (){
-          setState(()  {
-
-            usersize = 'S 8 Y';
-          });
-
-
-        },
-        child:   Container(
-          height:50,
-          width:MediaQuery.of(context).size.width,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-//    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
-              FittedBox(child: Text('8 Y',)),
-            ],
-          ),
-        ),
-      );
-    }
-  }
-  KS10(){
-    if(Shoe10 == 0){
-      return
-        Container();
-    }
-    else{
-      return
-      InkWell(
-        onTap: (){
-          setState(()  {
-
-            usersize = 'S 8-1/2 Y';
-          });
-
-
-        },
-        child:   Container(
-          height:50,
-          width:MediaQuery.of(context).size.width,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-//    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
-              FittedBox(child: Text('8-1/2 Y',)),
-            ],
-          ),
-        ),
-      );
-    }
-  }
-  KS11(){
-
-    if(Shoe11 == 0){
-      return
-        Container();
-    }
-    else{
-      return
-      InkWell(
-        onTap: (){
-          setState(()  {
-
-            usersize = 'S 9 Y';
-          });
-
-
-        },
-        child:   Container(
-          height:50,
-          width:MediaQuery.of(context).size.width,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-//    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
-              FittedBox(child: Text('9 Y',)),
-            ],
-          ),
-        ),
-      );
-    }
-  }
-  KS12(){
-
-    if(Shoe12 == 0){
-      return
-        Container();
-    }
-    else{
-      return
-      InkWell(
-        onTap: (){
-          setState(()  {
-
-            usersize = 'S 10 Y';
-          });
-
-
-        },
-        child:   Container(
-          height:50,
-          width:MediaQuery.of(context).size.width,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-//    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
-              FittedBox(child: Text('10 Y',)),
-            ],
-          ),
-        ),
-      );
-    }
-  }
-  KS13(){
-
-    if(Shoe13 == 0){
-      return
-        Container();
-    }
-    else
-    {
-      return
-      InkWell(
-        onTap: (){
-          setState(()  {
-
-            usersize = 'S 11 Y';
-          });
-
-
-        },
-        child:   Container(
-          height:50,
-          width:MediaQuery.of(context).size.width,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-//    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
-              FittedBox(child: Text('11 Y',)),
-            ],
-          ),
-        ),
-      );
-    }
-  }
-  KS14(){
-
-    if(Shoe14 == 0){
-      return
-        Container();
-    }
-    else{
-      return
-      InkWell(
-        onTap: (){
-          setState(()  {
-
-            usersize = 'S 12 Y';
-          });
-
-
-        },
-        child:   Container(
-          height:50,
-          width:MediaQuery.of(context).size.width,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-//    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
-              FittedBox(child: Text('12 Y',)),
-            ],
-          ),
-        ),
-      );
-    }
-  }
-  T1(){
-
-    if(xxxs == 0){
-      return
-        Container();
-    }
-    else{
-      return
-        InkWell(
-          onTap: (){
-            setState(()  {
-
-              usersize = '13 Y';
-            });
-
-
-          },
-          child:   Container(
-            height:50,
-            width:MediaQuery.of(context).size.width,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-//    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
-                FittedBox(child: Text('13 Y',)),
-              ],
-            ),
-          ),
-
-
-
-        );
-    }
-  }
-  T2(){
-
-    if(xxs == 0){
-      return
-       Container();
-    }
-    else{
-      return
-      InkWell(
-        onTap: (){
-          setState(()  {
-
-            usersize = '14 Y';
-          });
-
-
-        },
-        child:
-
-       Container(
-        height:50,
-        width:MediaQuery.of(context).size.width,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-//    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
-            FittedBox(child: Text('14 Y',)),
-          ],
-        ),
-      ),
-
-
-
-      );
-    }
-  }
-  T3(){
-
-    if(xs == 0){
-      return
-        Container();
-    }
-    else{
-      return
-      InkWell(
-        onTap: (){
-          setState(()  {
-
-            usersize = '15 Y';
-          });
-
-
-        },
-        child:   Container(
-          height:50,
-          width:MediaQuery.of(context).size.width,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-//    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
-              FittedBox(child: Text('15 Y',)),
-            ],
-          ),
-        ),
-      );
-    }
-  }
-  T4(){
-
-    if(s == 0){
-      return
-        Container();
-    }
-    else{
-      return
-      InkWell(
-        onTap: (){
-          setState(()  {
-
-            usersize = '16 Y';
-          });
-
-
-        },
-        child:   Container(
-          height:50,
-          width:MediaQuery.of(context).size.width,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-//    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
-              FittedBox(child: Text('16 Y',)),
-            ],
-          ),
-        ),
-      );
-    }
-  }
-  TS1(){
-    if(Shoe1 == 0){
-      return
-        Container();
-    }
-    else{
-      return
-      InkWell(
-        onTap: (){
-          setState(()  {
-
-            usersize = 'S 13 Y';
-          });
-
-
-        },
-        child:   Container(
-          height:50,
-          width:MediaQuery.of(context).size.width,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-//    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
-              FittedBox(child: Text('13 Y',)),
-            ],
-          ),
-        ),
-      );
-    }
-  }
-  TS2(){
-    if(Shoe2 == 0){
-      return
-        Container();
-    }
-    else{
-      return
-      InkWell(
-        onTap: (){
-          setState(()  {
-
-            usersize = 'S 14 Y';
-          });
-
-
-        },
-        child:   Container(
-          height:50,
-          width:MediaQuery.of(context).size.width,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-//    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
-              FittedBox(child: Text('14 Y',)),
-            ],
-          ),
-        ),
-      );
-    }
-  }
-  TS3(){
-    if(Shoe3 == 0){
-      return
-        Container();
-    }
-    else{
-
-      return
-      InkWell(
-        onTap: (){
-          setState(()  {
-
-            usersize = 'S 15 Y';
-          });
-
-
-        },
-        child:   Container(
-          height:50,
-          width:MediaQuery.of(context).size.width,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-//    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
-              FittedBox(child: Text('15 Y',)),
-            ],
-          ),
-        ),
-      );
-    }
-  }
-  TS4(){
-
-    if(Shoe4 == 0){
-      return
-        Container();
-    }
-    else{
-      return
-      InkWell(
-        onTap: (){
-          setState(()  {
-
-            usersize = 'S 16 Y';
-          });
-
-
-        },
-        child:   Container(
-          height:50,
-          width:MediaQuery.of(context).size.width,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-//    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
-              FittedBox(child: Text('16 Y',)),
-            ],
-          ),
-        ),
-      );
-    }
-  }
-
- Col1(){
-
-    if(color1 == 0){
-      return
-        Container();
-    }
-    else{
-      return
-      InkWell(
-        onTap: (){
-          setState(()  {
-
-            color = 'col 1';
-            usercolor = colorText1;
-
-          });
-
-
-        },
-        child:   Container(
-          height:50,
-          width:MediaQuery.of(context).size.width,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              FittedBox(child: Text('$colorText1',)),
-            ],
-          ),
-        ),
-      );
-    }
-  }
- Col2(){
-
-    if(color2 == 0){
-      return
-        Container();
-    }
-    else{
-      return
-      InkWell(
-        onTap: (){
-          setState(()  {
-
-            color = 'col 2';
-            usercolor = colorText2;
-          });
-
-
-        },
-        child:   Container(
-          height:50,
-          width:MediaQuery.of(context).size.width,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              FittedBox(child: Text('$colorText2',)),
-            ],
-          ),
-        ),
-      );
-    }
-  }
-Col3(){
-
-    if(color3 == 0){
-      return
-        Container();
-    }
-    else{
-      return
-      InkWell(
-        onTap: (){
-          setState(()  {
-
-            color = 'col 3';
-            usercolor = colorText3;
-          });
-
-
-        },
-        child:   Container(
-          height:50,
-          width:MediaQuery.of(context).size.width,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              FittedBox(child: Text('$colorText3',)),
-            ],
-          ),
-        ),
-      );
-    }
-  }
-Col4(){
-
-    if(color4 == 0){
-      return
-        Container();
-    }
-    else{
-      return
-      InkWell(
-        onTap: (){
-          setState(()  {
-
-            color = 'col 4';
-            usercolor = colorText4;
-          });
-
-
-        },
-        child:   Container(
-          height:50,
-          width:MediaQuery.of(context).size.width,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              FittedBox(child: Text('$colorText4',)),
-            ],
-          ),
-        ),
-      );
-    }
-  }
-Col5(){
-
-    if(color5 == 0){
-      return
-        Container();
-    }
-    else{
-      return
-      InkWell(
-        onTap: (){
-          setState(()  {
-
-            color = 'col 5';
-            usercolor = colorText5;
-          });
-
-
-        },
-        child:   Container(
-          height:50,
-          width:MediaQuery.of(context).size.width,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              FittedBox(child: Text('$colorText5',)),
-            ],
-          ),
-        ),
-      );
-    }
-  }
-Col6(){
-
-    if(color6 == 0){
-      return
-        Container();
-    }
-    else{
-      return
-      InkWell(
-        onTap: (){
-          setState(()  {
-
-            color = 'col 6';
-            usercolor = colorText6;
-          });
-
-
-        },
-        child:   Container(
-          height:50,
-          width:MediaQuery.of(context).size.width,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              FittedBox(child: Text('$colorText6',)),
-            ],
-          ),
-        ),
-      );
-    }
-  }
-Col7(){
-
-    if(color7 == 0){
-      return
-        Container();
-    }
-    else{
-      return
-      InkWell(
-        onTap: (){
-          setState(()  {
-
-            color = 'col 7';
-            usercolor = colorText7;
-          });
-
-
-        },
-        child:   Container(
-          height:50,
-          width:MediaQuery.of(context).size.width,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              FittedBox(child: Text('$colorText7',)),
-            ],
-          ),
-        ),
-      );
-    }
-  }
-Col8(){
-
-    if(color8 == 0){
-      return
-        Container();
-    }
-    else{
-      return
-      InkWell(
-        onTap: (){
-          setState(()  {
-
-            color = 'col 8';
-            usercolor = colorText8;
-          });
-
-
-        },
-        child:   Container(
-          height:50,
-          width:MediaQuery.of(context).size.width,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              FittedBox(child: Text('$colorText8',)),
-            ],
-          ),
-        ),
-      );
-    }
-  }
-Col9(){
-
-    if(color9 == 0){
-      return
-        Container();
-    }
-    else{
-      return
-      InkWell(
-        onTap: (){
-          setState(()  {
-
-            color = 'col 9';
-            usercolor = colorText9;
-          });
-
-
-        },
-        child:   Container(
-          height:50,
-          width:MediaQuery.of(context).size.width,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              FittedBox(child: Text('$colorText9',)),
-            ],
-          ),
-        ),
-      );
-    }
-  }
-Col10(){
-
-    if(color10 == 0){
-      return
-        Container();
-    }
-    else{
-      return
-      InkWell(
-        onTap: (){
-          setState(()  {
-
-            color = 'col 10';
-            usercolor = colorText10;
-          });
-
-
-        },
-        child:   Container(
-          height:50,
-          width:MediaQuery.of(context).size.width,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              FittedBox(child: Text('$colorText10',)),
-            ],
-          ),
-        ),
-      );
-    }
-  }
- Cus1(){
-
-    if(custom12 == 0){
-      return
-        Container();
-    }
-    else{
-      return
-      InkWell(
-        onTap: (){
-          setState(()  {
-
-            usersize = '$custom1';
-            customprice = customprice1;
-            custompriceusd = custom11usd;
-            custompriceinr = custom11inr;
-
-          });
-
-
-        },
-          child:   Container(
-            height:50,
-            width:MediaQuery.of(context).size.width,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-
-
-                currentUser.country == "India"?  FittedBox(child: Text('$custom1 + ${currentUser.currencysym} $custom11inr',)):
-                currentUser.country == "United States"?  FittedBox(child: Text('$custom1 + \u0024 $custom11usd',)):
-                currentUser.country == country?FittedBox(child: Text('$custom1 + ${currentUser.currencysym} $custom11inr(\u0024 $custom11usd)',)):
-
-                FittedBox(child: Text('$custom1 + ${currentUser.currencysym} $customprice1(\u0024 $custom11usd)',)),
-
-              ],
-            ),
-          )
-      );
-    }
-  }
- Cus2(){
-
-    if(custom22 == 0){
-      return
-        Container();
-    }
-    else{
-      return
-      InkWell(
-        onTap: (){
-          setState(()  {
-
-            usersize = '$custom2';
-            customprice = customprice2;
-            custompriceusd = custom21usd;
-            custompriceinr = custom21inr;
-
-          });
-
-
-        },
-          child:   Container(
-            height:50,
-            width:MediaQuery.of(context).size.width,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-
-
-                currentUser.country == "India"?  FittedBox(child: Text('$custom2 + ${currentUser.currencysym} $custom21inr',)):
-                currentUser.country == "United States"?  FittedBox(child: Text('$custom2 + \u0024 $custom21usd',)):
-                currentUser.country == country?FittedBox(child: Text('$custom2 + ${currentUser.currencysym} $custom21inr(\u0024 $custom21usd)',)):
-
-                FittedBox(child: Text('$custom2 + ${currentUser.currencysym} $customprice2(\u0024 $custom21usd)',)),
-
-              ],
-            ),
-          )
-      );
-    }
-  }
-Cus3(){
-
-    if(custom32 == 0){
-      return
-        Container();
-    }
-    else{
-      return
-      InkWell(
-        onTap: (){
-          setState(()  {
-
-            usersize = '$custom3';
-            customprice = customprice3;
-            custompriceusd = custom31usd;
-            custompriceinr = custom31inr;
-
-          });
-
-
-        },
-          child:   Container(
-            height:50,
-            width:MediaQuery.of(context).size.width,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-
-
-                currentUser.country == "India"?  FittedBox(child: Text('$custom3 + ${currentUser.currencysym} $custom31inr',)):
-                currentUser.country == "United States"?  FittedBox(child: Text('$custom3 + \u0024 $custom31usd',)):
-                currentUser.country == country?FittedBox(child: Text('$custom3 + ${currentUser.currencysym} $custom31inr(\u0024 $custom31usd)',)):
-
-                FittedBox(child: Text('$custom3 + ${currentUser.currencysym} $customprice3(\u0024 $custom31usd)',)),
-
-              ],
-            ),
-          )
-      );
-    }
-  }
-Cus4(){
-
-    if(custom42 == 0){
-      return
-        Container();
-    }
-    else{
-      return
-      InkWell(
-        onTap: (){
-          setState(()  {
-
-            usersize = '$custom4';
-            customprice = customprice4;
-            custompriceusd = custom41usd;
-            custompriceinr = custom41inr;
-
-          });
-
-
-        },
-          child:   Container(
-            height:50,
-            width:MediaQuery.of(context).size.width,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-
-
-                currentUser.country == "India"?  FittedBox(child: Text('$custom4 + ${currentUser.currencysym} $custom41inr',)):
-                currentUser.country == "United States"?  FittedBox(child: Text('$custom4 + \u0024 $custom41usd',)):
-                currentUser.country == country?FittedBox(child: Text('$custom4 + ${currentUser.currencysym} $custom41inr(\u0024 $custom41usd)',)):
-
-                FittedBox(child: Text('$custom4 + ${currentUser.currencysym} $customprice4(\u0024 $custom41usd)',)),
-
-              ],
-            ),
-          )
-      );
-    }
-  }
-Cus5(){
-
-    if(custom52 == 0){
-      return
-        Container();
-    }
-    else{
-      return
-      InkWell(
-        onTap: (){
-          setState(()  {
-
-            usersize = '$custom5';
-            customprice = customprice5;
-            custompriceusd = custom51usd;
-            custompriceinr = custom51inr;
-
-          });
-
-
-        },
-          child:   Container(
-            height:50,
-            width:MediaQuery.of(context).size.width,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-
-
-                currentUser.country == "India"?  FittedBox(child: Text('$custom5 + ${currentUser.currencysym} $custom51inr',)):
-                currentUser.country == "United States"?  FittedBox(child: Text('$custom5 + \u0024 $custom51usd',)):
-                currentUser.country == country?FittedBox(child: Text('$custom5 + ${currentUser.currencysym} $custom51inr(\u0024 $custom51usd)',)):
-
-                FittedBox(child: Text('$custom5 + ${currentUser.currencysym} $customprice5(\u0024 $custom51usd)',)),
-
-              ],
-            ),
-          )
-      );
-    }
-  }
-Cus6(){
-
-    if(custom62 == 0){
-      return
-        Container();
-    }
-    else{
-      return
-      InkWell(
-        onTap: (){
-          setState(()  {
-
-            usersize = '$custom6';
-            customprice = customprice6;
-            custompriceusd = custom61usd;
-            custompriceinr = custom61inr;
-
-          });
-
-
-        },
-          child:   Container(
-            height:50,
-            width:MediaQuery.of(context).size.width,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-
-
-                currentUser.country == "India"?  FittedBox(child: Text('$custom6 + ${currentUser.currencysym} $custom61inr',)):
-                currentUser.country == "United States"?  FittedBox(child: Text('$custom6 + \u0024 $custom61usd',)):
-                currentUser.country == country?FittedBox(child: Text('$custom6 + ${currentUser.currencysym} $custom61inr(\u0024 $custom61usd)',)):
-
-                FittedBox(child: Text('$custom6 + ${currentUser.currencysym} $customprice6(\u0024 $custom61usd)',)),
-
-              ],
-            ),
-          )
-      );
-    }
-  }
-Cus7(){
-
-    if(custom72 == 0){
-      return
-        Container();
-    }
-    else{
-      return
-      InkWell(
-        onTap: (){
-          setState(()  {
-
-            customprice = customprice7;
-            custompriceusd = custom71usd;
-            custompriceinr = custom71inr;
-
-          });
-
-
-        },
-          child:   Container(
-            height:50,
-            width:MediaQuery.of(context).size.width,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-
-
-                currentUser.country == "India"?  FittedBox(child: Text('$custom7 + ${currentUser.currencysym} $custom71inr',)):
-                currentUser.country == "United States"?  FittedBox(child: Text('$custom7 + \u0024 $custom71usd',)):
-                currentUser.country == country?FittedBox(child: Text('$custom7 + ${currentUser.currencysym} $custom71inr(\u0024 $custom71usd)',)):
-
-                FittedBox(child: Text('$custom7 + ${currentUser.currencysym} $customprice7(\u0024 $custom71usd)',)),
-
-              ],
-            ),
-          )
-      );
-    }
-  }
-Cus8(){
-
-    if(custom82 == 0){
-      return
-        Container();
-    }
-    else{
-      return
-      InkWell(
-        onTap: (){
-          setState(()  {
-
-            usersize = '$custom8';
-            customprice = customprice8;
-            custompriceusd = custom81usd;
-            custompriceinr = custom81inr;
-
-          });
-
-
-        },
-          child:   Container(
-            height:50,
-            width:MediaQuery.of(context).size.width,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-
-
-                currentUser.country == "India"?  FittedBox(child: Text('$custom8 + ${currentUser.currencysym} $custom81inr',)):
-                currentUser.country == "United States"?  FittedBox(child: Text('$custom8 + \u0024 $custom81usd',)):
-                currentUser.country == country?FittedBox(child: Text('$custom8 + ${currentUser.currencysym} $custom81inr(\u0024 $custom81usd)',)):
-
-                FittedBox(child: Text('$custom8 + ${currentUser.currencysym} $customprice8(\u0024 $custom81usd)',)),
-
-              ],
-            ),
-          )
-      );
-    }
-  }
-Cus9(){
-
-    if(custom92 == 0){
-      return
-        Container();
-    }
-    else{
-      return
-      InkWell(
-        onTap: (){
-          setState(()  {
-
-            usersize = '$custom9';
-            customprice = customprice9;
-            custompriceusd = custom91usd;
-            custompriceinr = custom91inr;
-
-          });
-
-
-        },
-          child:   Container(
-            height:50,
-            width:MediaQuery.of(context).size.width,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-
-
-                currentUser.country == "India"?  FittedBox(child: Text('$custom9 + ${currentUser.currencysym} $custom91inr',)):
-                currentUser.country == "United States"?  FittedBox(child: Text('$custom9 + \u0024 $custom91usd',)):
-                currentUser.country == country?FittedBox(child: Text('$custom9 + ${currentUser.currencysym} $custom91inr(\u0024 $custom91usd)',)):
-
-                FittedBox(child: Text('$custom9 + ${currentUser.currencysym} $customprice9(\u0024 $custom91usd)',)),
-
-              ],
-            ),
-          )
-      );
-    }
-  }
-Cus10(){
-
-    if(custom102 == 0){
-      return
-        Container();
-    }
-    else{
-      return
-      InkWell(
-        onTap: (){
-          setState(()  {
-
-            usersize = '$custom10';
-            customprice = customprice10;
-            custompriceusd = custom101usd;
-            custompriceinr = custom101inr;
-
-          });
-
-
-        },
-        child:   Container(
-          height:50,
-          width:MediaQuery.of(context).size.width,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-
-
-              currentUser.country == "India"?  FittedBox(child: Text('$custom10 + ${currentUser.currencysym} $custom101inr',)):
-currentUser.country == "United States"?  FittedBox(child: Text('$custom10 + \u0024 $custom101usd',)):
-currentUser.country == country?FittedBox(child: Text('$custom10 + ${currentUser.currencysym} $custom101inr(\u0024 $custom101usd)',)):
-
-              FittedBox(child: Text('$custom10 + ${currentUser.currencysym} $customprice10(\u0024 $custom101usd)',)),
-
-            ],
-          ),
-        ),
-      );
-    }
-  }
 
 MTO(){
   if(mto==0){
@@ -4027,937 +1471,6 @@ else {
     );
   }
 }
-  mTO(){
-    if(gender=='Men'||gender=='Women'){
-      if(mto==0){
-        return
-            Container();
-      }
-      else{  return
-        ExpansionTile(
-          title: Text('Made-to-order',style:TextStyle(color:kText)),
-          maintainState:true,
-          children: [
-            Column(children:[InkWell(
-          onTap:(){
-            setState(() {
-
-              usersize = 'MTO XXXS';
-
-            });
-
-
-          },
-            child: Container(
-              alignment:Alignment.center,
-              decoration: BoxDecoration(
-                  color: kPrimaryColor,
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.grey,
-                      blurRadius: 5.0,
-                    ),]
-                  ,borderRadius: BorderRadius.all(Radius.circular(10.0))
-              ),
-              height: 40,
-              child:
-                  FittedBox(child: Text('XXXS',style: TextStyle(color: Colors.white),)),
-
-            ),
-
-          ),
-          InkWell(
-          onTap:(){
-            setState(() {
-
-              usersize = 'MTO XXS';
-            });
-
-
-          },
-            child: Container(
-              alignment:Alignment.center,
-              decoration: BoxDecoration(
-                  color: kPrimaryColor,
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.grey,
-                      blurRadius: 5.0,
-                    ),]
-                  ,borderRadius: BorderRadius.all(Radius.circular(10.0))
-              ),
-              height: 40,
-              child:
-              FittedBox(child: Text('XXS',style: TextStyle(color: Colors.white),)),
-
-            ),
-          ),
-          GestureDetector(
-          onTap:(){
-            setState(() {
-
-              usersize = 'MTO XS';
-
-            });
-          },
-            child: Container(
-              alignment:Alignment.center,
-              decoration: BoxDecoration(
-                  color: kPrimaryColor,
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.grey,
-                      blurRadius: 5.0,
-                    ),]
-                  ,borderRadius: BorderRadius.all(Radius.circular(10.0))
-              ),
-              height: 40,
-              child:
-              FittedBox(child: Text('XS',style: TextStyle(color: Colors.white),)),
-
-            ),
-          ),
-          GestureDetector(
-          onTap:(){
-            setState(() {
-
-              usersize = 'MTO S';
-
-            });
-          },
-            child: Container(
-              alignment:Alignment.center,
-              decoration: BoxDecoration(
-                  color: kPrimaryColor,
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.grey,
-                      blurRadius: 5.0,
-                    ),]
-                  ,borderRadius: BorderRadius.all(Radius.circular(10.0))
-              ),
-              height: 40,
-              child:
-              FittedBox(child: Text('S',style: TextStyle(color: Colors.white),)),
-
-            ),
-          ),
-          GestureDetector(
-          onTap:(){
-            setState(() {
-
-              usersize = 'MTO M';
-
-            });
-          },
-            child: Container(
-              alignment:Alignment.center,
-              decoration: BoxDecoration(
-                  color: kPrimaryColor,
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.grey,
-                      blurRadius: 5.0,
-                    ),]
-                  ,borderRadius: BorderRadius.all(Radius.circular(10.0))
-              ),
-              height: 40,
-              child:
-              FittedBox(child: Text('M',style: TextStyle(color: Colors.white),)),
-
-            ),
-          ),
-          GestureDetector(
-          onTap:(){
-            setState(() {
-
-              usersize = 'MTO L';
-
-            });
-          },
-            child: Container(
-              alignment:Alignment.center,
-              decoration: BoxDecoration(
-                  color: kPrimaryColor,
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.grey,
-                      blurRadius: 5.0,
-                    ),]
-                  ,borderRadius: BorderRadius.all(Radius.circular(10.0))
-              ),
-              height: 40,
-              child:
-              FittedBox(child: Text('L',style: TextStyle(color: Colors.white),)),
-
-            ),
-          ),
-          GestureDetector(
-          onTap:(){
-            setState(() {
-
-              usersize = 'MTO XL';
-
-
-            });
-          },
-            child: Container(
-              alignment:Alignment.center,
-              decoration: BoxDecoration(
-                  color: kPrimaryColor,
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.grey,
-                      blurRadius: 5.0,
-                    ),]
-                  ,borderRadius: BorderRadius.all(Radius.circular(10.0))
-              ),
-              height: 40,
-              child:
-              FittedBox(child: Text('XL',style: TextStyle(color: Colors.white),)),
-
-            ),
-          ),
-          GestureDetector(
-          onTap:(){
-            setState(() {
-
-              usersize = 'MTO XXL';
-
-
-            });
-          },
-            child: Container(
-              alignment:Alignment.center,
-              decoration: BoxDecoration(
-                  color: kPrimaryColor,
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.grey,
-                      blurRadius: 5.0,
-                    ),]
-                  ,borderRadius: BorderRadius.all(Radius.circular(10.0))
-              ),
-              height: 40,
-              child:
-              FittedBox(child: Text('XXL',style: TextStyle(color: Colors.white),)),
-
-            ),
-          ),
-          GestureDetector(
-          onTap:(){
-            setState(() {
-
-              usersize = 'MTO XXXL';
-
-
-            });
-          },
-            child: Container(
-              alignment:Alignment.center,
-              decoration: BoxDecoration(
-                  color: kPrimaryColor,
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.grey,
-                      blurRadius: 5.0,
-                    ),]
-                  ,borderRadius: BorderRadius.all(Radius.circular(10.0))
-              ),
-              height: 40,
-              child:
-              FittedBox(child: Text('XXXL',style: TextStyle(color: Colors.white),)),
-
-            ),
-          ),
-          GestureDetector(
-          onTap:(){
-            setState(() {
-
-              usersize = 'MTO 4XL';
-
-
-            });
-          },
-            child: Container(
-              alignment:Alignment.center,
-              decoration: BoxDecoration(
-                  color: kPrimaryColor,
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.grey,
-                      blurRadius: 5.0,
-                    ),]
-                  ,borderRadius: BorderRadius.all(Radius.circular(10.0))
-              ),
-              height: 40,
-              child:
-              FittedBox(child: Text('4XL',style: TextStyle(color: Colors.white),)),
-
-            ),
-          ),
-          GestureDetector(
-          onTap:(){
-            setState(() {
-
-              usersize = 'MTO 5XL';
-
-
-            });
-          },
-            child: Container(
-              alignment:Alignment.center,
-              decoration: BoxDecoration(
-                  color: kPrimaryColor,
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.grey,
-                      blurRadius: 5.0,
-                    ),]
-                  ,borderRadius: BorderRadius.all(Radius.circular(10.0))
-              ),
-              height: 40,
-              child:
-              FittedBox(child: Text('5XL',style: TextStyle(color: Colors.white),)),
-
-            ),
-          ),
-          GestureDetector(
-          onTap:(){
-            setState(() {
-
-              usersize = 'MTO 6XL';
-
-            });
-          },
-            child: Container(
-              alignment:Alignment.center,
-              decoration: BoxDecoration(
-                  color: kPrimaryColor,
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.grey,
-                      blurRadius: 5.0,
-                    ),]
-                  ,borderRadius: BorderRadius.all(Radius.circular(10.0))
-              ),
-              height: 40,
-              child:
-              FittedBox(child: Text('6XL',style: TextStyle(color: Colors.white),)),
-
-            ),
-          ),
-          GestureDetector(
-          onTap:(){
-            setState(() {
-
-              usersize = 'MTO 7XL';
-
-            });
-          },
-            child: Container(
-              alignment:Alignment.center,
-              decoration: BoxDecoration(
-                  color: kPrimaryColor,
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.grey,
-                      blurRadius: 5.0,
-                    ),]
-                  ,borderRadius: BorderRadius.all(Radius.circular(10.0))
-              ),
-              height: 40,
-              child:
-              FittedBox(child: Text('7XL',style: TextStyle(color: Colors.white),)),
-
-            ),
-          ),
-          GestureDetector(
-          onTap:(){
-            setState(() {
-
-              usersize = 'MTO 8XL';
-
-            });
-          },
-            child: Container(
-              alignment:Alignment.center,
-              decoration: BoxDecoration(
-                  color: kPrimaryColor,
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.grey,
-                      blurRadius: 5.0,
-                    ),]
-                  ,borderRadius: BorderRadius.all(Radius.circular(10.0))
-              ),
-              height: 40,
-              child:
-              FittedBox(child: Text('8XL',style: TextStyle(color: Colors.white),)),
-
-            ),
-          ),
-            Text('________ENDS HERE________',style:TextStyle(color:Colors.red))
-           ]) ,
-          ],
-        );}
-
-    }
-    else if(gender=='Baby-Boys'||gender=='Baby-Girls'){
-      if(mto==0){
-        return
-          Container();
-      }
-      else {
-        return
-          ExpansionTile(
-            title: Text('Made-to-order', style: TextStyle(color: kText)),
-            maintainState: true,
-            children: [Column(children:[
-              GestureDetector(
-                onTap: () {
-                  setState(() {
-                    usersize = 'MTO 0-3 M';
-
-
-                  });
-                },
-                child: Container(
-                  alignment:Alignment.center,
-                  decoration: BoxDecoration(
-                      color: kPrimaryColor,
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.grey,
-                          blurRadius: 5.0,
-                        ),]
-                      ,borderRadius: BorderRadius.all(Radius.circular(10.0))
-                  ),
-                  height: 40,
-                  child:
-                  FittedBox(child: Text('0-3 M',style: TextStyle(color: Colors.white),)),
-
-                ),
-              ),
-              GestureDetector(
-                onTap: () {
-                  setState(() {
-                    usersize = 'MTO 3-6 M';
-
-
-                  });
-                },
-                child: Container(
-                  alignment:Alignment.center,
-                  decoration: BoxDecoration(
-                      color: kPrimaryColor,
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.grey,
-                          blurRadius: 5.0,
-                        ),]
-                      ,borderRadius: BorderRadius.all(Radius.circular(10.0))
-                  ),
-                  height: 40,
-                  child:
-                  FittedBox(child: Text('3-6 M',style: TextStyle(color: Colors.white),)),
-
-                ),
-              ),
-              GestureDetector(
-                onTap: () {
-                  setState(() {
-                    usersize = 'MTO 6-9 M';
-
-
-                  });
-                },
-                child: Container(
-                  alignment:Alignment.center,
-                  decoration: BoxDecoration(
-                      color: kPrimaryColor,
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.grey,
-                          blurRadius: 5.0,
-                        ),]
-                      ,borderRadius: BorderRadius.all(Radius.circular(10.0))
-                  ),
-                  height: 40,
-                  child:
-                  FittedBox(child: Text('6-9 M',style: TextStyle(color: Colors.white),)),
-
-                ),
-              ),
-              GestureDetector(
-                onTap: () {
-                  setState(() {
-                    usersize = 'MTO 9-12 M';
-
-
-                  });
-                },
-                child: Container(
-                  alignment:Alignment.center,
-                  decoration: BoxDecoration(
-                      color: kPrimaryColor,
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.grey,
-                          blurRadius: 5.0,
-                        ),]
-                      ,borderRadius: BorderRadius.all(Radius.circular(10.0))
-                  ),
-                  height: 40,
-                  child:
-                  FittedBox(child: Text('9-12 M',style: TextStyle(color: Colors.white),)),
-
-                ),
-              ),
-              GestureDetector(
-                onTap: () {
-                  setState(() {
-                    usersize = 'MTO 12-18 M';
-
-
-                  });
-                },
-                child: Container(
-                  alignment:Alignment.center,
-                  decoration: BoxDecoration(
-                      color: kPrimaryColor,
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.grey,
-                          blurRadius: 5.0,
-                        ),]
-                      ,borderRadius: BorderRadius.all(Radius.circular(10.0))
-                  ),
-                  height: 40,
-                  child:
-                  FittedBox(child: Text('12-18 M',style: TextStyle(color: Colors.white),)),
-
-                ),
-              ),
-              GestureDetector(
-                onTap: () {
-                  setState(() {
-                    usersize = 'MTO 18-24 M';
-
-
-                  });
-                },
-                child: Container(
-                  alignment:Alignment.center,
-                  decoration: BoxDecoration(
-                      color: kPrimaryColor,
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.grey,
-                          blurRadius: 5.0,
-                        ),]
-                      ,borderRadius: BorderRadius.all(Radius.circular(10.0))
-                  ),
-                  height: 40,
-                  child:
-                  FittedBox(child: Text('18-24 M',style: TextStyle(color: Colors.white),)),
-
-                ),
-              ),
-              Text('________ENDS HERE________',style:TextStyle(color:Colors.red))
-
-            ]),
-            ],
-          );
-      }
-    }
-    else if(gender=='Kids-Boys'||gender=='Kids-Girls'){
-      if(mto==0){
-        return
-          Container();
-      }
-      else {
-        return
-          ExpansionTile(
-            title: Text('Made-to-order', style: TextStyle(color: kText)),
-            maintainState: true,
-            children: [
-              Column(children:[
-              GestureDetector(
-                onTap: () {
-                  setState(() {
-                    usersize = 'MTO 2 Y';
-
-
-                  });
-                },
-                child: Container(
-                  alignment:Alignment.center,
-                  decoration: BoxDecoration(
-                      color: kPrimaryColor,
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.grey,
-                          blurRadius: 5.0,
-                        ),]
-                      ,borderRadius: BorderRadius.all(Radius.circular(10.0))
-                  ),
-                  height: 40,
-                  child:
-                  FittedBox(child: Text('MTO 2 Y',style: TextStyle(color: Colors.white),)),
-
-                ),
-              ),
-              GestureDetector(
-                onTap: () {
-                  setState(() {
-                    usersize = 'MTO 3-4 Y';
-
-
-                  });
-                },
-                child: Container(
-                  alignment:Alignment.center,
-                  decoration: BoxDecoration(
-                      color: kPrimaryColor,
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.grey,
-                          blurRadius: 5.0,
-                        ),]
-                      ,borderRadius: BorderRadius.all(Radius.circular(10.0))
-                  ),
-                  height: 40,
-                  child:
-                  FittedBox(child: Text('MTO 3-4 Y',style: TextStyle(color: Colors.white),)),
-
-                ),
-              ),
-              GestureDetector(
-                onTap: () {
-                  setState(() {
-                    usersize = 'MTO 4-5 Y';
-
-
-                  });
-                },
-                child: Container(
-                  alignment:Alignment.center,
-                  decoration: BoxDecoration(
-                      color: kPrimaryColor,
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.grey,
-                          blurRadius: 5.0,
-                        ),]
-                      ,borderRadius: BorderRadius.all(Radius.circular(10.0))
-                  ),
-                  height: 40,
-                  child:
-                  FittedBox(child: Text('MTO 4-5 Y',style: TextStyle(color: Colors.white),)),
-
-                ),
-              ),
-              GestureDetector(
-                onTap: () {
-                  setState(() {
-                    usersize = 'MTO 5-6 Y';
-
-
-                  });
-                },
-                child: Container(
-                  alignment:Alignment.center,
-                  decoration: BoxDecoration(
-                      color: kPrimaryColor,
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.grey,
-                          blurRadius: 5.0,
-                        ),]
-                      ,borderRadius: BorderRadius.all(Radius.circular(10.0))
-                  ),
-                  height: 40,
-                  child:
-                  FittedBox(child: Text('MTO 5-6 Y',style: TextStyle(color: Colors.white),)),
-
-                ),
-              ),
-              GestureDetector(
-                onTap: () {
-                  setState(() {
-                    usersize = 'MTO 6-7 Y';
-
-
-                  });
-                },
-                child: Container(
-                  alignment:Alignment.center,
-                  decoration: BoxDecoration(
-                      color: kPrimaryColor,
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.grey,
-                          blurRadius: 5.0,
-                        ),]
-                      ,borderRadius: BorderRadius.all(Radius.circular(10.0))
-                  ),
-                  height: 40,
-                  child:
-                  FittedBox(child: Text('MTO 6-7 Y',style: TextStyle(color: Colors.white),)),
-
-                ),
-              ),
-              GestureDetector(
-                onTap: () {
-                  setState(() {
-                    usersize = 'MTO 7-8 Y';
-
-
-                  });
-                },
-                child: Container(
-                  alignment:Alignment.center,
-                  decoration: BoxDecoration(
-                      color: kPrimaryColor,
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.grey,
-                          blurRadius: 5.0,
-                        ),]
-                      ,borderRadius: BorderRadius.all(Radius.circular(10.0))
-                  ),
-                  height: 40,
-                  child:
-                  FittedBox(child: Text('MTO 7-8 Y',style: TextStyle(color: Colors.white),)),
-
-                ),
-              ),
-              GestureDetector(
-                onTap: () {
-                  setState(() {
-                    usersize = 'MTO 8-9 Y';
-
-
-                  });
-                },
-                child: Container(
-                  alignment:Alignment.center,
-                  decoration: BoxDecoration(
-                      color: kPrimaryColor,
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.grey,
-                          blurRadius: 5.0,
-                        ),]
-                      ,borderRadius: BorderRadius.all(Radius.circular(10.0))
-                  ),
-                  height: 40,
-                  child:
-                  FittedBox(child: Text('MTO 8-9 Y',style: TextStyle(color: Colors.white),)),
-
-                ),
-              ),
-              GestureDetector(
-                onTap: () {
-                  setState(() {
-                    usersize = 'MTO 9-10 Y';
-
-
-                  });
-                },
-                child: Container(
-                  alignment:Alignment.center,
-                  decoration: BoxDecoration(
-                      color: kPrimaryColor,
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.grey,
-                          blurRadius: 5.0,
-                        ),]
-                      ,borderRadius: BorderRadius.all(Radius.circular(10.0))
-                  ),
-                  height: 40,
-                  child:
-                  FittedBox(child: Text('MTO 9-10 Y',style: TextStyle(color: Colors.white),)),
-
-                ),
-              ),
-              GestureDetector(
-                onTap: () {
-                  setState(() {
-                    usersize = 'MTO 10-11 Y';
-
-
-                  });
-                },
-                child: Container(
-                  alignment:Alignment.center,
-                  decoration: BoxDecoration(
-                      color: kPrimaryColor,
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.grey,
-                          blurRadius: 5.0,
-                        ),]
-                      ,borderRadius: BorderRadius.all(Radius.circular(10.0))
-                  ),
-                  height: 40,
-                  child:
-                  FittedBox(child: Text('MTO 10-11 Y',style: TextStyle(color: Colors.white),)),
-
-                ),
-              ),
-              GestureDetector(
-                onTap: () {
-                  setState(() {
-                    usersize = 'MTO 11-12 Y';
-
-
-                  });
-                },
-                child: Container(
-                  alignment:Alignment.center,
-                  decoration: BoxDecoration(
-                      color: kPrimaryColor,
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.grey,
-                          blurRadius: 5.0,
-                        ),]
-                      ,borderRadius: BorderRadius.all(Radius.circular(10.0))
-                  ),
-                  height: 40,
-                  child:
-                  FittedBox(child: Text('MTO 11-12 Y',style: TextStyle(color: Colors.white),)),
-
-                ),
-              ),
-              Text('________ENDS HERE________',style:TextStyle(color:Colors.red))
-]),
-            ],
-          );
-      }
-    }
-    else if(gender=='Teen-Boys'||gender=='Teen-Girls'){
-      if(mto == 0){
-        return Container();
-      }
-      else {
-        return
-          ExpansionTile(
-            title: Text('Made-to-order', style: TextStyle(color: kText)),
-            maintainState: true,
-            children: [Column(children:[
-              GestureDetector(
-                onTap: () {
-                  setState(() {
-                    usersize = 'MTO 13 Y';
-
-
-                  });
-                },
-                child: Container(
-                  alignment:Alignment.center,
-                  decoration: BoxDecoration(
-                      color: kPrimaryColor,
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.grey,
-                          blurRadius: 5.0,
-                        ),]
-                      ,borderRadius: BorderRadius.all(Radius.circular(10.0))
-                  ),
-                  height: 40,
-                  child:
-                  FittedBox(child: Text('MTO 13 Y',style: TextStyle(color: Colors.white),)),
-
-                ),
-              ),
-              GestureDetector(
-                onTap: () {
-                  setState(() {
-                    usersize = 'MTO 14 Y';
-
-
-                  });
-                },
-                child: Container(
-                  alignment:Alignment.center,
-                  decoration: BoxDecoration(
-                      color: kPrimaryColor,
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.grey,
-                          blurRadius: 5.0,
-                        ),]
-                      ,borderRadius: BorderRadius.all(Radius.circular(10.0))
-                  ),
-                  height: 40,
-                  child:
-                  FittedBox(child: Text('MTO 14 Y',style: TextStyle(color: Colors.white),)),
-
-                ),
-              ),
-              GestureDetector(
-                onTap: () {
-                  setState(() {
-                    usersize = 'MTO 15 Y';
-
-
-                  });
-                },
-                child: Container(
-                  alignment:Alignment.center,
-                  decoration: BoxDecoration(
-                      color: kPrimaryColor,
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.grey,
-                          blurRadius: 5.0,
-                        ),]
-                      ,borderRadius: BorderRadius.all(Radius.circular(10.0))
-                  ),
-                  height: 40,
-                  child:
-                  FittedBox(child: Text('MTO 15 Y',style: TextStyle(color: Colors.white),)),
-
-                ),
-              ),
-              GestureDetector(
-                onTap: () {
-                  setState(() {
-                    usersize = 'MTO 16 Y';
-
-
-                  });
-                },
-                child: Container(
-                  alignment:Alignment.center,
-                  decoration: BoxDecoration(
-                      color: kPrimaryColor,
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.grey,
-                          blurRadius: 5.0,
-                        ),]
-                      ,borderRadius: BorderRadius.all(Radius.circular(10.0))
-                  ),
-                  height: 40,
-                  child:
-                  FittedBox(child: Text('MTO 16 Y',style: TextStyle(color: Colors.white),)),
-
-                ),),
-                  Text('________ENDS HERE________',style:TextStyle(color:Colors.red))
-
-
-              ]),
-
-            ],
-          );
-      }
-    }
-  }
 
   report(){
     Fluttertoast.showToast(
@@ -4973,191 +1486,7 @@ else {
       "timestamp": timestamp,
     });
   }
-MenSizes(){
- return
-     Expanded(child:Container(
 
-       child: ListView(
-         children: [
-           MTO(),
-
-           SizedBox(height:40.0),
-
-           Cus1(),
-           Cus2(),
-           Cus3(),
-           Cus4(),
-           Cus5(),
-           Cus6(),
-           Cus7(),
-           Cus8(),
-           Cus9(),
-           Cus10(),
-         ],
-       ),
-     ));
-
-}
-WomenSizes(){
-  return
-    ListView(
-      children: [
-        MTO(),
-
-
-
-  WS1(),
-  WS2(),
-  WS3(),
-  WS4(),
-  WS5(),
-  WS6(),
-  WS7(),
-  WS8(),
-  WS9(),
-  WS10(),
-  WS11(),
-  WS12(),
-  WS13(),
-  WS14(),
-  WS15(),
-  WS16(),
-
-        Cus1(),
-        Cus2(),
-        Cus3(),
-        Cus4(),
-        Cus5(),
-        Cus6(),
-        Cus7(),
-        Cus8(),
-        Cus9(),
-        Cus10(),
-      ],
-    );
-
-
-
-
-}
-BabySizes(){
-  return
-    Container(
-    child: ListView(
-      children: [
-          MTO(),
-
-        B1(),
-  B2(),
-  B3(),
-  B4(),
-  B5(),
-  B6(),
-
-
-  BS1(),
-  BS2(),
-  BS3(),
-  BS4(),
-  BS5(),
-  BS6(),
-  BS7(),
-
-        Cus1(),
-        Cus2(),
-        Cus3(),
-        Cus4(),
-        Cus5(),
-        Cus6(),
-        Cus7(),
-        Cus8(),
-        Cus9(),
-        Cus10(),
-      ],
-    ),
-    );
-
-}
-KidSizes(){
-    return
-      Expanded(child:Container(
-
-        child: ListView(
-            children: [
-              MTO(),
-
-              Cus1(),
-              Cus2(),
-              Cus3(),
-              Cus4(),
-              Cus5(),
-              Cus6(),
-              Cus7(),
-              Cus8(),
-              Cus9(),
-              Cus10(),
-          K1(),
-          K2(),
-          K3(),
-    K4(),
-    K5(),
-    K6(),
-    K7(),
-    K8(),
-    K9(),
-    K10(),
-    KS1(),
-    KS2(),
-    KS3(),
-    KS4(),
-    KS5(),
-    KS6(),
-    KS7(),
-    KS8(),
-    KS9(),
-    KS10(),
-    KS11(),
-    KS12(),
-    KS13(),
-    KS14(),
-
-        ],
-      ),
-      ));
-
-}
-TeenSizes(){
-  return
-
-    ListView(
-          children: [
-            MTO(),
-
-            Cus1(),
-            Cus2(),
-            Cus3(),
-            Cus4(),
-            Cus5(),
-            Cus6(),
-            Cus7(),
-            Cus8(),
-            Cus9(),
-            Cus10(),
-          T1(),
-          T2(),
-          T3(),
-  T4(),
-  TS1(),
-  TS2(),
-  TS3(),
-  TS4(),
-
-          ],
-    );
-
-
-
-}
   Proceedtobuy({
 String ship,
 String shipcostU,
@@ -5275,177 +1604,10 @@ mtoText:mtoController.text ,
 
   }
 
-SelectCol(){
-  return
-    Container(
-      height:60.0,
-
-      child:   Expanded(
-
-
-
-          child:   ListView(
-              scrollDirection:Axis.horizontal,
-              shrinkWrap:true,
-              children:[
-                color1==0?Container():   ElevatedButton(
-
-                  style: ElevatedButton.styleFrom(
-
-                    primary: selectedCategory.contains("col 1") ? Colors.black: Colors.white.withOpacity(0.1), // background
-                    onPrimary:selectedCategory.contains("col 1") ? Colors.white:  Colors.black, // foreground
-                  ),
-                  onPressed: () {
-                    selectedCategory =  <String>[];
-                    selectedCategory.add("col 1");
-
-                    stateSetter(() { color = 'col 1';
-                    usercolor = colorText1;});
-                  },          child: Text(colorText1),
-                ),
-                color2==0?Container():   ElevatedButton(
-
-                  style: ElevatedButton.styleFrom(
-
-                    primary: selectedCategory.contains("col 2") ? Colors.black: Colors.white.withOpacity(0.1), // background
-                    onPrimary:selectedCategory.contains("col 2") ? Colors.white:  Colors.black, // foreground
-                  ),
-                  onPressed: () {
-                    selectedCategory =  <String>[];
-                    selectedCategory.add("col 2");
-
-                    stateSetter(() { color = 'col 2';
-                    usercolor = colorText2;});
-                  },          child: Text(colorText2),
-                ),
-                color3==0?Container():   ElevatedButton(
-
-                  style: ElevatedButton.styleFrom(
-
-                    primary: selectedCategory.contains("col 3") ? Colors.black: Colors.white.withOpacity(0.1), // background
-                    onPrimary:selectedCategory.contains("col 3") ? Colors.white:  Colors.black, // foreground
-                  ),
-                  onPressed: () {
-                    selectedCategory =  <String>[];
-                    selectedCategory.add("col 3");
-
-                    stateSetter(() { color = 'col 3';
-                    usercolor = colorText3;});
-                  },          child: Text(colorText3),
-                ),
-                color4==0?Container():   ElevatedButton(
-
-                  style: ElevatedButton.styleFrom(
-
-                    primary: selectedCategory.contains("col 4") ? Colors.black: Colors.white.withOpacity(0.1), // background
-                    onPrimary:selectedCategory.contains("col 4") ? Colors.white:  Colors.black, // foreground
-                  ),
-                  onPressed: () {
-                    selectedCategory =  <String>[];
-                    selectedCategory.add("col 4");
-
-                    stateSetter(() { color = 'col 4';
-                    usercolor = colorText4;});
-                  },          child: Text(colorText4),
-                ),
-                color5==0?Container():   ElevatedButton(
-
-                  style: ElevatedButton.styleFrom(
-
-                    primary: selectedCategory.contains("col 5") ? Colors.black: Colors.white.withOpacity(0.1), // background
-                    onPrimary:selectedCategory.contains("col 5") ? Colors.white:  Colors.black, // foreground
-                  ),
-                  onPressed: () {
-                    selectedCategory =  <String>[];
-                    selectedCategory.add("col 5");
-
-                    stateSetter(() { color = 'col 5';
-                    usercolor = colorText5;});
-                  },          child: Text(colorText5),
-                ),
-                color6==0?Container():   ElevatedButton(
-
-                  style: ElevatedButton.styleFrom(
-
-                    primary: selectedCategory.contains("col 6") ? Colors.black: Colors.white.withOpacity(0.1), // background
-                    onPrimary:selectedCategory.contains("col 6") ? Colors.white:  Colors.black, // foreground
-                  ),
-                  onPressed: () {
-                    selectedCategory =  <String>[];
-                    selectedCategory.add("col 6");
-
-                    stateSetter(() { color = 'col 6';
-                    usercolor = colorText6;});
-                  },          child: Text(colorText6),
-                ),
-                color7==0?Container():   ElevatedButton(
-
-                  style: ElevatedButton.styleFrom(
-
-                    primary: selectedCategory.contains("col 7") ? Colors.black: Colors.white.withOpacity(0.1), // background
-                    onPrimary:selectedCategory.contains("col 7") ? Colors.white:  Colors.black, // foreground
-                  ),
-                  onPressed: () {
-                    selectedCategory =  <String>[];
-                    selectedCategory.add("col 7");
-
-                    stateSetter(() { color = 'col 7';
-                    usercolor = colorText7;});
-                  },          child: Text(colorText7),
-                ),
-                color8==0?Container():   ElevatedButton(
-
-                  style: ElevatedButton.styleFrom(
-
-                    primary: selectedCategory.contains("col 8") ? Colors.black: Colors.white.withOpacity(0.1), // background
-                    onPrimary:selectedCategory.contains("col 8") ? Colors.white:  Colors.black, // foreground
-                  ),
-                  onPressed: () {
-                    selectedCategory =  <String>[];
-                    selectedCategory.add("col 8");
-
-                    stateSetter(() { color = 'col 8';
-                    usercolor = colorText8;});
-                  },          child: Text(colorText8),
-                ),
-                color9==0?Container():   ElevatedButton(
-
-                  style: ElevatedButton.styleFrom(
-
-                    primary: selectedCategory.contains("col 9") ? Colors.black: Colors.white.withOpacity(0.1), // background
-                    onPrimary:selectedCategory.contains("col 9") ? Colors.white:  Colors.black, // foreground
-                  ),
-                  onPressed: () {
-                    selectedCategory =  <String>[];
-                    selectedCategory.add("col 9");
-
-                    stateSetter(() { color = 'col 9';
-                    usercolor = colorText9;});
-                  },          child: Text(colorText9),
-                ),
-                color10==0?Container():   ElevatedButton(
-
-                  style: ElevatedButton.styleFrom(
-
-                    primary: selectedCategory.contains("col 10") ? Colors.black: Colors.white.withOpacity(0.1), // background
-                    onPrimary:selectedCategory.contains("col 10") ? Colors.white:  Colors.black, // foreground
-                  ),
-                  onPressed: () {
-                    selectedCategory =  <String>[];
-                    selectedCategory.add("col 10");
-
-                    stateSetter(() { color = 'col 10';
-                    usercolor = colorText10;});
-                  },          child: Text(colorText10),
-                ),
-
-              ])
-      ),
-    ),
-
-}
    Buynow({dynamic parentContext,String size}) {
      List<String> selectedCategory = <String>[];
+     List<String> selectedColor = <String>[];
+
     if (gender == 'Men') {
 return
         showModalBottomSheet(
@@ -6781,26 +2943,204 @@ custom102==0?Container():   Padding(
                        ),
 ),
 
+                          Container(
+                            height:60.0,
+
+                            child:   Expanded(
 
 
-                          Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        OutlinedButton(
-                          child: Text("$usersize"),
-                          onPressed: () {
-                            SelectSize(parentContext);
 
-                          },
-                        ), OutlinedButton(
-                          child: Text("$usercolor"),
-                          onPressed: () {
-                            SelectCol();
-                          },
-                        ),
-                      ],
-                    ),
-                      Container(
+                                child:   ListView(
+                                    scrollDirection:Axis.horizontal,
+                                    shrinkWrap:true,
+                                    children:[
+                                      color1==0?Container():   Padding(
+                                        padding: const EdgeInsets.all(8.0),
+                                        child: ElevatedButton(
+
+                                          style: ElevatedButton.styleFrom(
+
+                                            primary: selectedColor.contains("col 1") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                                            onPrimary:selectedColor.contains("col 1") ? Colors.white:  Colors.black, // foreground
+                                          ),
+                                          onPressed: () {
+                                            selectedColor =  <String>[];
+                                            selectedColor.add("col 1");
+
+                                            stateSetter(() { color = 'col 1';
+                                            usercolor = colorText1;});
+                                          },          child: Text(colorText1),
+                                        ),
+                                      ),
+                                      color2==0?Container():   Padding(
+                                        padding: const EdgeInsets.all(8.0),
+                                        child: ElevatedButton(
+
+                                          style: ElevatedButton.styleFrom(
+
+                                            primary: selectedColor.contains("col 2") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                                            onPrimary:selectedColor.contains("col 2") ? Colors.white:  Colors.black, // foreground
+                                          ),
+                                          onPressed: () {
+                                            selectedColor =  <String>[];
+                                            selectedColor.add("col 2");
+
+                                            stateSetter(() { color = 'col 2';
+                                            usercolor = colorText2;});
+                                          },          child: Text(colorText2),
+                                        ),
+                                      ),
+                                      color3==0?Container():   Padding(
+                                        padding: const EdgeInsets.all(8.0),
+                                        child: ElevatedButton(
+
+                                          style: ElevatedButton.styleFrom(
+
+                                            primary: selectedColor.contains("col 3") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                                            onPrimary:selectedColor.contains("col 3") ? Colors.white:  Colors.black, // foreground
+                                          ),
+                                          onPressed: () {
+                                            selectedColor =  <String>[];
+                                            selectedColor.add("col 3");
+
+                                            stateSetter(() { color = 'col 3';
+                                            usercolor = colorText3;});
+                                          },          child: Text(colorText3),
+                                        ),
+                                      ),
+                                      color4==0?Container():   Padding(
+                                        padding: const EdgeInsets.all(8.0),
+                                        child: ElevatedButton(
+
+                                          style: ElevatedButton.styleFrom(
+
+                                            primary: selectedColor.contains("col 4") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                                            onPrimary:selectedColor.contains("col 4") ? Colors.white:  Colors.black, // foreground
+                                          ),
+                                          onPressed: () {
+                                            selectedColor =  <String>[];
+                                            selectedColor.add("col 4");
+
+                                            stateSetter(() { color = 'col 4';
+                                            usercolor = colorText4;});
+                                          },          child: Text(colorText4),
+                                        ),
+                                      ),
+                                      color5==0?Container():   Padding(
+                                        padding: const EdgeInsets.all(8.0),
+                                        child: ElevatedButton(
+
+                                          style: ElevatedButton.styleFrom(
+
+                                            primary: selectedColor.contains("col 5") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                                            onPrimary:selectedColor.contains("col 5") ? Colors.white:  Colors.black, // foreground
+                                          ),
+                                          onPressed: () {
+                                            selectedColor =  <String>[];
+                                            selectedColor.add("col 5");
+
+                                            stateSetter(() { color = 'col 5';
+                                            usercolor = colorText5;});
+                                          },          child: Text(colorText5),
+                                        ),
+                                      ),
+                                      color6==0?Container():   Padding(
+                                        padding: const EdgeInsets.all(8.0),
+                                        child: ElevatedButton(
+
+                                          style: ElevatedButton.styleFrom(
+
+                                            primary: selectedColor.contains("col 6") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                                            onPrimary:selectedColor.contains("col 6") ? Colors.white:  Colors.black, // foreground
+                                          ),
+                                          onPressed: () {
+                                            selectedColor =  <String>[];
+                                            selectedColor.add("col 6");
+
+                                            stateSetter(() { color = 'col 6';
+                                            usercolor = colorText6;});
+                                          },          child: Text(colorText6),
+                                        ),
+                                      ),
+                                      color7==0?Container():   Padding(
+                                        padding: const EdgeInsets.all(8.0),
+                                        child: ElevatedButton(
+
+                                          style: ElevatedButton.styleFrom(
+
+                                            primary: selectedColor.contains("col 7") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                                            onPrimary:selectedColor.contains("col 7") ? Colors.white:  Colors.black, // foreground
+                                          ),
+                                          onPressed: () {
+                                            selectedColor =  <String>[];
+                                            selectedColor.add("col 7");
+
+                                            stateSetter(() { color = 'col 7';
+                                            usercolor = colorText7;});
+                                          },          child: Text(colorText7),
+                                        ),
+                                      ),
+                                      color8==0?Container():   Padding(
+                                        padding: const EdgeInsets.all(8.0),
+                                        child: ElevatedButton(
+
+                                          style: ElevatedButton.styleFrom(
+
+                                            primary: selectedColor.contains("col 8") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                                            onPrimary:selectedColor.contains("col 8") ? Colors.white:  Colors.black, // foreground
+                                          ),
+                                          onPressed: () {
+                                            selectedColor =  <String>[];
+                                            selectedColor.add("col 8");
+
+                                            stateSetter(() { color = 'col 8';
+                                            usercolor = colorText8;});
+                                          },          child: Text(colorText8),
+                                        ),
+                                      ),
+                                      color9==0?Container():   Padding(
+                                        padding: const EdgeInsets.all(8.0),
+                                        child: ElevatedButton(
+
+                                          style: ElevatedButton.styleFrom(
+
+                                            primary: selectedColor.contains("col 9") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                                            onPrimary:selectedColor.contains("col 9") ? Colors.white:  Colors.black, // foreground
+                                          ),
+                                          onPressed: () {
+                                            selectedColor =  <String>[];
+                                            selectedColor.add("col 9");
+
+                                            stateSetter(() { color = 'col 9';
+                                            usercolor = colorText9;});
+                                          },          child: Text(colorText9),
+                                        ),
+                                      ),
+                                      color10==0?Container():   Padding(
+                                        padding: const EdgeInsets.all(8.0),
+                                        child: ElevatedButton(
+
+                                          style: ElevatedButton.styleFrom(
+
+                                            primary: selectedColor.contains("col 10") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                                            onPrimary:selectedColor.contains("col 10") ? Colors.white:  Colors.black, // foreground
+                                          ),
+                                          onPressed: () {
+                                            selectedColor =  <String>[];
+                                            selectedColor.add("col 10");
+
+                                            stateSetter(() { color = 'col 10';
+                                            usercolor = colorText10;});
+                                          },          child: Text(colorText10),
+                                        ),
+                                      ),
+
+                                    ])
+                            ),
+                          ),
+
+
+                    usersize == "" || color == ""?Container():  Container(
                         // alignment:Alignment.centerLeft,
                         child: FloatingActionButton.extended(
                           backgroundColor: kblue,
@@ -6829,214 +3169,4509 @@ custom102==0?Container():   Padding(
         );
     }
     else if (gender == 'Women') {
+      showModalBottomSheet(
+          context: parentContext,
+          builder: (BuildContext context) {
+            return
+              StatefulBuilder(
+                  builder: (BuildContext ctx, StateSetter stateSetter){
 
-        showModalBottomSheet(
-            backgroundColor: kSecondaryColor,
-            context: parentContext,
-            builder: (BuildContext context) {
-              return
-                Container(
-
-                    child: Column(children:[ Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        OutlinedButton(
-                          child:Text("$usersize"),
-                          onPressed: () {SelectSize(parentContext);  },
-                        ), OutlinedButton(
-                          child:Text("$usercolor"),
-                          onPressed: () {SelectCol();  },
-                        ),
-                      ],
-                    ),
+                    return
                       Container(
-                        // alignment:Alignment.centerLeft,
-                        child:   FloatingActionButton.extended(
-                          backgroundColor: kblue,
-                          onPressed: () {
-                            if( currentUser.country == 'India' && currentUser.country == country){
-                              Proceedtobuy(ship:shipcostinr,shipcostU:shipcostinr);
-                            }  else if( currentUser.country == country){
-                              Proceedtobuy(ship:shipcostusd,shipcostU:shipcostinr);
-                            } else {
-                              Proceedtobuy(ship:shipcostinterusd,shipcostU:shipcostuser);
-                            }
-                          },
-                          label: Text('Proceed',style:TextStyle(color:  Colors.white) ,),
-                        ),
-                      ),
-                    ])
+                          height: 200,
 
-                );
+                          child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
 
-            }
-        );
+                              children: [
+                                Container(
+                                  height:60.0,
+
+                                  child:   Expanded(
+                                    child:   ListView(
+                                        scrollDirection:Axis.horizontal,
+                                        shrinkWrap:true,
+                                        children:[
+
+                                          freesize==0?Container():   Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child: ElevatedButton(
+
+                                              style: ElevatedButton.styleFrom(
+
+                                                primary: selectedCategory.contains("Free Size") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                                                onPrimary:selectedCategory.contains("Free Size") ? Colors.white:  Colors.black, // foreground
+                                              ),
+                                              onPressed: () {
+                                                selectedCategory =  <String>[];
+                                                selectedCategory.add("Free Size");
+
+                                                stateSetter(() {usersize = "Free Size";});
+                                              },          child: Text('Free Size'),
+                                            ),
+                                          ),
+                                          xxxs==0?Container():   Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child: ElevatedButton(
+
+                                              style: ElevatedButton.styleFrom(
+
+                                                primary: selectedCategory.contains("XXXS") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                                                onPrimary:selectedCategory.contains("XXXS") ? Colors.white:  Colors.black, // foreground
+                                              ),
+                                              onPressed: () {
+                                                selectedCategory =  <String>[];
+                                                selectedCategory.add("XXXS");
+
+                                                stateSetter(() {usersize = "XXXS";});
+                                              },          child: Text('XXXS'),
+                                            ),
+                                          ),
+                                          xxs==0?Container():   Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child: ElevatedButton(
+
+                                              style: ElevatedButton.styleFrom(
+
+                                                primary: selectedCategory.contains("XXS") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                                                onPrimary:selectedCategory.contains("XXS") ? Colors.white:  Colors.black, // foreground
+                                              ),
+                                              onPressed: () {
+                                                selectedCategory =  <String>[];
+                                                selectedCategory.add("XXS");
+
+                                                stateSetter(() {usersize = "XXS";});
+                                              },          child: Text('XXS'),
+                                            ),
+                                          ),
+                                          xs==0?Container():   Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child: ElevatedButton(
+
+                                              style: ElevatedButton.styleFrom(
+
+                                                primary: selectedCategory.contains("XS") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                                                onPrimary:selectedCategory.contains("XS") ? Colors.white:  Colors.black, // foreground
+                                              ),
+                                              onPressed: () {
+                                                selectedCategory =  <String>[];
+                                                selectedCategory.add("XS");
+
+                                                stateSetter(() {usersize = "XS";});
+                                              },          child: Text('XS'),
+                                            ),
+                                          ),
+                                          s==0?Container():   Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child: ElevatedButton(
+
+                                              style: ElevatedButton.styleFrom(
+
+                                                primary: selectedCategory.contains("S") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                                                onPrimary:selectedCategory.contains("S") ? Colors.white:  Colors.black, // foreground
+                                              ),
+                                              onPressed: () {
+                                                selectedCategory =  <String>[];
+                                                selectedCategory.add("S");
+
+                                                stateSetter(() {usersize = "S";});
+                                              },          child: Text('S'),
+                                            ),
+                                          ),
+                                          m==0?Container():   Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child: ElevatedButton(
+
+                                              style: ElevatedButton.styleFrom(
+
+                                                primary: selectedCategory.contains("M") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                                                onPrimary:selectedCategory.contains("M") ? Colors.white:  Colors.black, // foreground
+                                              ),
+                                              onPressed: () {
+                                                selectedCategory =  <String>[];
+                                                selectedCategory.add("M");
+
+                                                stateSetter(() {usersize = "M";});
+                                              },          child: Text('M'),
+                                            ),
+                                          ),
+
+                                          l==0?Container():   Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child: ElevatedButton(
+
+                                              style: ElevatedButton.styleFrom(
+
+                                                primary: selectedCategory.contains("L") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                                                onPrimary:selectedCategory.contains("L") ? Colors.white:  Colors.black, // foreground
+                                              ),
+                                              onPressed: () {
+                                                selectedCategory =  <String>[];
+                                                selectedCategory.add("L");
+
+                                                stateSetter(() {usersize = "L";});
+                                              },          child: Text('L'),
+                                            ),
+                                          ),
+                                          xl==0?Container():   Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child: ElevatedButton(
+
+                                              style: ElevatedButton.styleFrom(
+
+                                                primary: selectedCategory.contains("XL") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                                                onPrimary:selectedCategory.contains("XL") ? Colors.white:  Colors.black, // foreground
+                                              ),
+                                              onPressed: () {
+                                                selectedCategory =  <String>[];
+                                                selectedCategory.add("XL");
+
+                                                stateSetter(() {usersize = "XL";});
+                                              },          child: Text('XL'),
+                                            ),
+                                          ),
+                                          xxl==0?Container():   Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child: ElevatedButton(
+
+                                              style: ElevatedButton.styleFrom(
+
+                                                primary: selectedCategory.contains("XXL") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                                                onPrimary:selectedCategory.contains("XXL") ? Colors.white:  Colors.black, // foreground
+                                              ),
+                                              onPressed: () {
+                                                selectedCategory =  <String>[];
+                                                selectedCategory.add("XXL");
+
+                                                stateSetter(() {usersize = "XXL";});
+                                              },          child: Text('XXL'),
+                                            ),
+                                          ),
+                                          xxxl==0?Container():   Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child: ElevatedButton(
+
+                                              style: ElevatedButton.styleFrom(
+
+                                                primary: selectedCategory.contains("XXXL") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                                                onPrimary:selectedCategory.contains("XXXL") ? Colors.white:  Colors.black, // foreground
+                                              ),
+                                              onPressed: () {
+                                                selectedCategory =  <String>[];
+                                                selectedCategory.add("XXXL");
+
+                                                stateSetter(() {usersize = "XXXL";});
+                                              },          child: Text('XXXL'),
+                                            ),
+                                          ),
+                                          fourxl==0?Container():   Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child: ElevatedButton(
+
+                                              style: ElevatedButton.styleFrom(
+
+                                                primary: selectedCategory.contains("4XL") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                                                onPrimary:selectedCategory.contains("4XL") ? Colors.white:  Colors.black, // foreground
+                                              ),
+                                              onPressed: () {
+                                                selectedCategory =  <String>[];
+                                                selectedCategory.add("4XL");
+
+                                                stateSetter(() {usersize = "4XL";});
+                                              },          child: Text('4XL'),
+                                            ),
+                                          ),
+                                          fivexl==0?Container():   Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child: ElevatedButton(
+
+                                              style: ElevatedButton.styleFrom(
+
+                                                primary: selectedCategory.contains("5XL") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                                                onPrimary:selectedCategory.contains("5XL") ? Colors.white:  Colors.black, // foreground
+                                              ),
+                                              onPressed: () {
+                                                selectedCategory =  <String>[];
+                                                selectedCategory.add("5XL");
+
+                                                stateSetter(() {usersize = "5XL";});
+                                              },          child: Text('5XL'),
+                                            ),
+                                          ),
+                                          sixxl==0?Container():   Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child: ElevatedButton(
+
+                                              style: ElevatedButton.styleFrom(
+
+                                                primary: selectedCategory.contains("6XL") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                                                onPrimary:selectedCategory.contains("6XL") ? Colors.white:  Colors.black, // foreground
+                                              ),
+                                              onPressed: () {
+                                                selectedCategory =  <String>[];
+                                                selectedCategory.add("6XL");
+
+                                                stateSetter(() {usersize = "6XL";});
+                                              },          child: Text('6XL'),
+                                            ),
+                                          ),
+                                          sevenxl==0?Container():   Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child: ElevatedButton(
+
+                                              style: ElevatedButton.styleFrom(
+
+                                                primary: selectedCategory.contains("7XL") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                                                onPrimary:selectedCategory.contains("7XL") ? Colors.white:  Colors.black, // foreground
+                                              ),
+                                              onPressed: () {
+                                                selectedCategory =  <String>[];
+                                                selectedCategory.add("7XL");
+
+                                                stateSetter(() {usersize = "7XL";});
+                                              },          child: Text('7XL'),
+                                            ),
+                                          ),
+                                          eightxl==0?Container():   Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child: ElevatedButton(
+
+                                              style: ElevatedButton.styleFrom(
+
+                                                primary: selectedCategory.contains("8XL") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                                                onPrimary:selectedCategory.contains("8XL") ? Colors.white:  Colors.black, // foreground
+                                              ),
+                                              onPressed: () {
+                                                selectedCategory =  <String>[];
+                                                selectedCategory.add("8XL");
+
+                                                stateSetter(() {usersize = "8XL";});
+                                              },          child: Text('8XL'),
+                                            ),
+                                          ),
+                                          Shoe1==0?Container():   Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child:   ElevatedButton(
+
+                                              style: ElevatedButton.styleFrom(
+
+                                                primary: selectedCategory.contains("5") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                                                onPrimary:selectedCategory.contains("5") ? Colors.white:  Colors.black, // foreground
+                                              ),
+                                              onPressed: () {
+                                                selectedCategory =  <String>[];
+                                                selectedCategory.add("5");
+
+                                                stateSetter(() {usersize = "5";});
+                                              },          child: Text('5 (US)'),
+                                            ),
+                                          ),
+                                          Shoe2==0?Container():  Padding(
+                                              padding: const EdgeInsets.all(8.0),
+                                              child:   ElevatedButton(
+
+                                                style: ElevatedButton.styleFrom(
+
+                                                  primary: selectedCategory.contains("5 ½") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                                                  onPrimary:selectedCategory.contains("5 ½") ? Colors.white:  Colors.black, // foreground
+                                                ),
+                                                onPressed: () {
+                                                  selectedCategory =  <String>[];
+                                                  selectedCategory.add("5 ½");
+
+                                                  stateSetter(() {usersize = "5 ½";});
+                                                },          child: Text('5 ½ (US)'),
+                                              )),
+                                          Shoe3==0?Container():   Padding(
+                                              padding: const EdgeInsets.all(8.0),
+                                              child:  ElevatedButton(
+
+                                                style: ElevatedButton.styleFrom(
+
+                                                  primary: selectedCategory.contains("6") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                                                  onPrimary:selectedCategory.contains("6") ? Colors.white:  Colors.black, // foreground
+                                                ),
+                                                onPressed: () {
+                                                  selectedCategory =  <String>[];
+                                                  selectedCategory.add("6");
+
+                                                  stateSetter(() {usersize = "6";});
+                                                },          child: Text('6 (US)'),
+                                              )),
+                                          Shoe4==0?Container():  Padding(
+                                              padding: const EdgeInsets.all(8.0),
+                                              child:   ElevatedButton(
+
+                                                style: ElevatedButton.styleFrom(
+
+                                                  primary: selectedCategory.contains("6 ½") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                                                  onPrimary:selectedCategory.contains("6 ½") ? Colors.white:  Colors.black, // foreground
+                                                ),
+                                                onPressed: () {
+                                                  selectedCategory =  <String>[];
+                                                  selectedCategory.add("6 ½");
+
+                                                  stateSetter(() {usersize = "6 ½";});
+                                                },          child: Text('6 ½ (US)'),
+                                              )),
+                                          Shoe5==0?Container():   Padding(
+                                              padding: const EdgeInsets.all(8.0),
+                                              child:  ElevatedButton(
+
+                                                style: ElevatedButton.styleFrom(
+
+                                                  primary: selectedCategory.contains("7") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                                                  onPrimary:selectedCategory.contains("7") ? Colors.white:  Colors.black, // foreground
+                                                ),
+                                                onPressed: () {
+                                                  selectedCategory =  <String>[];
+                                                  selectedCategory.add("7");
+
+                                                  stateSetter(() {usersize = "7";});
+                                                },          child: Text('7 (US)'),
+                                              )),
+                                          Shoe6==0?Container():  Padding(
+                                              padding: const EdgeInsets.all(8.0),
+                                              child:   ElevatedButton(
+
+                                                style: ElevatedButton.styleFrom(
+
+                                                  primary: selectedCategory.contains("7 ½") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                                                  onPrimary:selectedCategory.contains("7 ½") ? Colors.white:  Colors.black, // foreground
+                                                ),
+                                                onPressed: () {
+                                                  selectedCategory =  <String>[];
+                                                  selectedCategory.add("7 ½");
+
+                                                  stateSetter(() {usersize = "7 ½";});
+                                                },          child: Text('7 ½ (US)'),
+                                              )),
+                                          Shoe7==0?Container():   Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child:   ElevatedButton(
+
+                                              style: ElevatedButton.styleFrom(
+
+                                                primary: selectedCategory.contains("8") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                                                onPrimary:selectedCategory.contains("8") ? Colors.white:  Colors.black, // foreground
+                                              ),
+                                              onPressed: () {
+                                                selectedCategory =  <String>[];
+                                                selectedCategory.add("8");
+
+                                                stateSetter(() {usersize = "8";});
+                                              },          child: Text('8 (US)'),
+                                            ),
+                                          ),
+                                          Shoe8==0?Container():   Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child:   ElevatedButton(
+
+                                              style: ElevatedButton.styleFrom(
+
+                                                primary: selectedCategory.contains("8 ½") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                                                onPrimary:selectedCategory.contains("8 ½") ? Colors.white:  Colors.black, // foreground
+                                              ),
+                                              onPressed: () {
+                                                selectedCategory =  <String>[];
+                                                selectedCategory.add("8 ½");
+
+                                                stateSetter(() {usersize = "8 ½";});
+                                              },          child: Text('8 ½ (US)'),
+                                            ),
+                                          ),
+                                          Shoe9==0?Container():   Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child:   ElevatedButton(
+
+                                              style: ElevatedButton.styleFrom(
+
+                                                primary: selectedCategory.contains("9") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                                                onPrimary:selectedCategory.contains("9") ? Colors.white:  Colors.black, // foreground
+                                              ),
+                                              onPressed: () {
+                                                selectedCategory =  <String>[];
+                                                selectedCategory.add("9");
+
+                                                stateSetter(() {usersize = "9";});
+                                              },          child: Text('9 (US)'),
+                                            ),
+                                          ),
+                                          Shoe10==0?Container():   Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child:   ElevatedButton(
+
+                                              style: ElevatedButton.styleFrom(
+
+                                                primary: selectedCategory.contains("9 ½") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                                                onPrimary:selectedCategory.contains("9 ½") ? Colors.white:  Colors.black, // foreground
+                                              ),
+                                              onPressed: () {
+                                                selectedCategory =  <String>[];
+                                                selectedCategory.add("9 ½");
+
+                                                stateSetter(() {usersize = "9 ½";});
+                                              },          child: Text('9 ½ (US)'),
+                                            ),
+                                          ),
+                                          Shoe11==0?Container():   Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child:   ElevatedButton(
+
+                                              style: ElevatedButton.styleFrom(
+
+                                                primary: selectedCategory.contains("10") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                                                onPrimary:selectedCategory.contains("10") ? Colors.white:  Colors.black, // foreground
+                                              ),
+                                              onPressed: () {
+                                                selectedCategory =  <String>[];
+                                                selectedCategory.add("10");
+
+                                                stateSetter(() {usersize = "10";});
+                                              },          child: Text('10 (US)'),
+                                            ),
+                                          ),
+                                          Shoe12==0?Container():   Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child:   ElevatedButton(
+
+                                              style: ElevatedButton.styleFrom(
+
+                                                primary: selectedCategory.contains("10 ½") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                                                onPrimary:selectedCategory.contains("10 ½") ? Colors.white:  Colors.black, // foreground
+                                              ),
+                                              onPressed: () {
+                                                selectedCategory =  <String>[];
+                                                selectedCategory.add("10 ½");
+
+                                                stateSetter(() {usersize = "10 ½";});
+                                              },          child: Text('10 ½ (US)'),
+                                            ),
+                                          ),
+                                          Shoe13==0?Container():   Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child:   ElevatedButton(
+
+                                              style: ElevatedButton.styleFrom(
+
+                                                primary: selectedCategory.contains("12") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                                                onPrimary:selectedCategory.contains("12") ? Colors.white:  Colors.black, // foreground
+                                              ),
+                                              onPressed: () {
+                                                selectedCategory =  <String>[];
+                                                selectedCategory.add("12");
+
+                                                stateSetter(() {usersize = "12";});
+                                              },          child: Text('12 (US)'),
+                                            ),
+                                          ),
+                                          Shoe14==0?Container():   Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child:   ElevatedButton(
+
+                                              style: ElevatedButton.styleFrom(
+
+                                                primary: selectedCategory.contains("13") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                                                onPrimary:selectedCategory.contains("13") ? Colors.white:  Colors.black, // foreground
+                                              ),
+                                              onPressed: () {
+                                                selectedCategory =  <String>[];
+                                                selectedCategory.add("13");
+
+                                                stateSetter(() {usersize = "13";});
+                                              },          child: Text('13 (US)'),
+                                            ),
+                                          ),
+                                          Shoe15==0?Container():   Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child:   ElevatedButton(
+
+                                              style: ElevatedButton.styleFrom(
+
+                                                primary: selectedCategory.contains("14") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                                                onPrimary:selectedCategory.contains("14") ? Colors.white:  Colors.black, // foreground
+                                              ),
+                                              onPressed: () {
+                                                selectedCategory =  <String>[];
+                                                selectedCategory.add("14");
+
+                                                stateSetter(() {usersize = "14";});
+                                              },          child: Text('14 (US)'),
+                                            ),
+                                          ),
+                                          Shoe16==0?Container():   Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child:   ElevatedButton(
+
+
+
+                                              style: ElevatedButton.styleFrom(
+
+
+
+                                                primary: selectedCategory.contains("15 ½") ? Colors.black: Colors.white.withOpacity(0.1), // background
+
+                                                onPrimary:selectedCategory.contains("15 ½") ? Colors.white:  Colors.black, // foreground
+
+                                              ),
+
+                                              onPressed: () {
+
+                                                selectedCategory =  <String>[];
+
+                                                selectedCategory.add("15 ½");
+
+
+
+                                                stateSetter(() {usersize = "15 ½";});
+
+                                              },          child: Text('15 ½ (US)'),
+
+                                            ),
+                                          ),
+
+                                          Ring1==0?Container():   Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child: ElevatedButton(
+
+                                              style: ElevatedButton.styleFrom(
+
+                                                primary: selectedCategory.contains("R 4") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                                                onPrimary:selectedCategory.contains("R 4") ? Colors.white:  Colors.black, // foreground
+                                              ),
+                                              onPressed: () {
+                                                selectedCategory =  <String>[];
+                                                selectedCategory.add("R 4");
+
+                                                stateSetter(() {usersize = "R 4";});
+                                              },          child: Text('(US) 4'),
+                                            ),
+                                          ),
+                                          Ring2==0?Container():   Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child: ElevatedButton(
+
+                                              style: ElevatedButton.styleFrom(
+
+                                                primary: selectedCategory.contains("R 4.5") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                                                onPrimary:selectedCategory.contains("R 4.5") ? Colors.white:  Colors.black, // foreground
+                                              ),
+                                              onPressed: () {
+                                                selectedCategory =  <String>[];
+                                                selectedCategory.add("R 4.5");
+
+                                                stateSetter(() {usersize = "R 4.5";});
+                                              },          child: Text('(US) 4.5'),
+                                            ),
+                                          ),
+
+                                          Ring3==0?Container():   Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child: ElevatedButton(
+
+                                              style: ElevatedButton.styleFrom(
+
+                                                primary: selectedCategory.contains("R 5") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                                                onPrimary:selectedCategory.contains("R 5") ? Colors.white:  Colors.black, // foreground
+                                              ),
+                                              onPressed: () {
+                                                selectedCategory =  <String>[];
+                                                selectedCategory.add("R 5");
+
+                                                stateSetter(() {usersize = "R 5";});
+                                              },          child: Text('(US) 5'),
+                                            ),
+                                          ),
+                                          Ring4==0?Container():   Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child: ElevatedButton(
+
+                                              style: ElevatedButton.styleFrom(
+
+                                                primary: selectedCategory.contains("R 5.5") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                                                onPrimary:selectedCategory.contains("R 5.5") ? Colors.white:  Colors.black, // foreground
+                                              ),
+                                              onPressed: () {
+                                                selectedCategory =  <String>[];
+                                                selectedCategory.add("R 5.5");
+
+                                                stateSetter(() {usersize = "R 5.5";});
+                                              },          child: Text('(US) 5.5'),
+                                            ),
+                                          ),
+                                          Ring5==0?Container():   Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child: ElevatedButton(
+
+                                              style: ElevatedButton.styleFrom(
+
+                                                primary: selectedCategory.contains("R 6") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                                                onPrimary:selectedCategory.contains("R 6") ? Colors.white:  Colors.black, // foreground
+                                              ),
+                                              onPressed: () {
+                                                selectedCategory =  <String>[];
+                                                selectedCategory.add("R 6");
+
+                                                stateSetter(() {usersize = "R 6";});
+                                              },          child: Text('(US) 6'),
+                                            ),
+                                          ),
+                                          Ring6==0?Container():   Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child: ElevatedButton(
+
+                                              style: ElevatedButton.styleFrom(
+
+                                                primary: selectedCategory.contains("R 6.5") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                                                onPrimary:selectedCategory.contains("R 6.5") ? Colors.white:  Colors.black, // foreground
+                                              ),
+                                              onPressed: () {
+                                                selectedCategory =  <String>[];
+                                                selectedCategory.add("R 6.5");
+
+                                                stateSetter(() {usersize = "R 6.5";});
+                                              },          child: Text('(US) 6.5'),
+                                            ),
+                                          ),
+                                          Ring7==0?Container():   Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child: ElevatedButton(
+
+                                              style: ElevatedButton.styleFrom(
+
+                                                primary: selectedCategory.contains("R 7") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                                                onPrimary:selectedCategory.contains("R 7") ? Colors.white:  Colors.black, // foreground
+                                              ),
+                                              onPressed: () {
+                                                selectedCategory =  <String>[];
+                                                selectedCategory.add("R 7");
+
+                                                stateSetter(() {usersize = "R 7";});
+                                              },          child: Text('(US) 7'),
+                                            ),
+                                          ),
+                                          Ring8==0?Container():   Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child: ElevatedButton(
+
+                                              style: ElevatedButton.styleFrom(
+
+                                                primary: selectedCategory.contains("R 7.5") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                                                onPrimary:selectedCategory.contains("R 7.5") ? Colors.white:  Colors.black, // foreground
+                                              ),
+                                              onPressed: () {
+                                                selectedCategory =  <String>[];
+                                                selectedCategory.add("R 7.5");
+
+                                                stateSetter(() {usersize = "R 7.5";});
+                                              },          child: Text('(US) 7.5'),
+                                            ),
+                                          ),
+                                          Ring9==0?Container():   Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child: ElevatedButton(
+
+                                              style: ElevatedButton.styleFrom(
+
+                                                primary: selectedCategory.contains("R 8") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                                                onPrimary:selectedCategory.contains("R 8") ? Colors.white:  Colors.black, // foreground
+                                              ),
+                                              onPressed: () {
+                                                selectedCategory =  <String>[];
+                                                selectedCategory.add("R 8");
+
+                                                stateSetter(() {usersize = "R 8";});
+                                              },          child: Text('(US) 8'),
+                                            ),
+                                          ),
+                                          Ring10==0?Container():   Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child: ElevatedButton(
+
+                                              style: ElevatedButton.styleFrom(
+
+                                                primary: selectedCategory.contains("R 8.5") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                                                onPrimary:selectedCategory.contains("R 8.5") ? Colors.white:  Colors.black, // foreground
+                                              ),
+                                              onPressed: () {
+                                                selectedCategory =  <String>[];
+                                                selectedCategory.add("R 8.5");
+
+                                                stateSetter(() {usersize = "R 8.5";});
+                                              },          child: Text('(US) 8.5'),
+                                            ),
+                                          ),
+                                          Ring11==0?Container():   Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child: ElevatedButton(
+
+                                              style: ElevatedButton.styleFrom(
+
+                                                primary: selectedCategory.contains("R 9") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                                                onPrimary:selectedCategory.contains("R 9") ? Colors.white:  Colors.black, // foreground
+                                              ),
+                                              onPressed: () {
+                                                selectedCategory =  <String>[];
+                                                selectedCategory.add("R 9");
+
+                                                stateSetter(() {usersize = "R 9";});
+                                              },          child: Text('(US) 9'),
+                                            ),
+                                          ),
+                                          Ring12==0?Container():   Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child: ElevatedButton(
+
+                                              style: ElevatedButton.styleFrom(
+
+                                                primary: selectedCategory.contains("R 9.5") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                                                onPrimary:selectedCategory.contains("R 9.5") ? Colors.white:  Colors.black, // foreground
+                                              ),
+                                              onPressed: () {
+                                                selectedCategory =  <String>[];
+                                                selectedCategory.add("R 9.5");
+
+                                                stateSetter(() {usersize = "R 9.5";});
+                                              },          child: Text('(US) 9.5'),
+                                            ),
+                                          ),
+                                          Ring13==0?Container():   Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child: ElevatedButton(
+
+                                              style: ElevatedButton.styleFrom(
+
+                                                primary: selectedCategory.contains("R 10") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                                                onPrimary:selectedCategory.contains("R 10") ? Colors.white:  Colors.black, // foreground
+                                              ),
+                                              onPressed: () {
+                                                selectedCategory =  <String>[];
+                                                selectedCategory.add("R 10");
+
+                                                stateSetter(() {usersize = "R 10";});
+                                              },          child: Text('(US) 10'),
+                                            ),
+                                          ),
+                                          Ring14==0?Container():   Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child: ElevatedButton(
+
+                                              style: ElevatedButton.styleFrom(
+
+                                                primary: selectedCategory.contains("R 10.5") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                                                onPrimary:selectedCategory.contains("R 10.5") ? Colors.white:  Colors.black, // foreground
+                                              ),
+                                              onPressed: () {
+                                                selectedCategory =  <String>[];
+                                                selectedCategory.add("R 10.5");
+
+                                                stateSetter(() {usersize = "R 10.5";});
+                                              },          child: Text('(US) 10.5'),
+                                            ),
+                                          ),
+                                          Ring15==0?Container():   Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child: ElevatedButton(
+
+                                              style: ElevatedButton.styleFrom(
+
+                                                primary: selectedCategory.contains("R 11") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                                                onPrimary:selectedCategory.contains("R 11") ? Colors.white:  Colors.black, // foreground
+                                              ),
+                                              onPressed: () {
+                                                selectedCategory =  <String>[];
+                                                selectedCategory.add("R 11");
+
+                                                stateSetter(() {usersize = "R 11";});
+                                              },          child: Text('(US) 11'),
+                                            ),
+                                          ),
+                                          Ring16==0?Container():   Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child: ElevatedButton(
+
+                                              style: ElevatedButton.styleFrom(
+
+                                                primary: selectedCategory.contains("R 11.5") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                                                onPrimary:selectedCategory.contains("R 11.5") ? Colors.white:  Colors.black, // foreground
+                                              ),
+                                              onPressed: () {
+                                                selectedCategory =  <String>[];
+                                                selectedCategory.add("R 11.5");
+
+                                                stateSetter(() {usersize = "R 11.5";});
+                                              },          child: Text('(US) 11.5'),
+                                            ),
+                                          ),
+                                          Ring17==0?Container():   Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child: ElevatedButton(
+
+                                              style: ElevatedButton.styleFrom(
+
+                                                primary: selectedCategory.contains("R 12") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                                                onPrimary:selectedCategory.contains("R 12") ? Colors.white:  Colors.black, // foreground
+                                              ),
+                                              onPressed: () {
+                                                selectedCategory =  <String>[];
+                                                selectedCategory.add("R 12");
+
+                                                stateSetter(() {usersize = "R 12";});
+                                              },          child: Text('(US) 12'),
+                                            ),
+                                          ),
+                                          Ring18==0?Container():   Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child: ElevatedButton(
+
+                                              style: ElevatedButton.styleFrom(
+
+                                                primary: selectedCategory.contains("R 12.5") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                                                onPrimary:selectedCategory.contains("R 12.5") ? Colors.white:  Colors.black, // foreground
+                                              ),
+                                              onPressed: () {
+                                                selectedCategory =  <String>[];
+                                                selectedCategory.add("R 12.5");
+
+                                                stateSetter(() {usersize = "R 12.5";});
+                                              },          child: Text('(US) 12.5'),
+                                            ),
+                                          ),
+                                          Ring19==0?Container():   Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child: ElevatedButton(
+
+                                              style: ElevatedButton.styleFrom(
+
+                                                primary: selectedCategory.contains("R 13") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                                                onPrimary:selectedCategory.contains("R 13") ? Colors.white:  Colors.black, // foreground
+                                              ),
+                                              onPressed: () {
+                                                selectedCategory =  <String>[];
+                                                selectedCategory.add("R 13");
+
+                                                stateSetter(() {usersize = "R 13";});
+                                              },          child: Text('(US) 13'),
+                                            ),
+                                          ),
+                                          Ring20==0?Container():   Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child: ElevatedButton(
+
+                                              style: ElevatedButton.styleFrom(
+
+                                                primary: selectedCategory.contains("R 13.5") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                                                onPrimary:selectedCategory.contains("R 13.5") ? Colors.white:  Colors.black, // foreground
+                                              ),
+                                              onPressed: () {
+                                                selectedCategory =  <String>[];
+                                                selectedCategory.add("R 13.5");
+
+                                                stateSetter(() {usersize = "R 13.5";});
+                                              },          child: Text('(US) 13.5'),
+                                            ),
+                                          ),
+                                          Ring21==0?Container():   Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child: ElevatedButton(
+
+                                              style: ElevatedButton.styleFrom(
+
+                                                primary: selectedCategory.contains("R 14") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                                                onPrimary:selectedCategory.contains("R 14") ? Colors.white:  Colors.black, // foreground
+                                              ),
+                                              onPressed: () {
+                                                selectedCategory =  <String>[];
+                                                selectedCategory.add("R 14");
+
+                                                stateSetter(() {usersize = "R 14";});
+                                              },          child: Text('(US) 14'),
+                                            ),
+                                          ),
+                                          Ring22==0?Container():   Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child: ElevatedButton(
+
+                                              style: ElevatedButton.styleFrom(
+
+                                                primary: selectedCategory.contains("R 14.5") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                                                onPrimary:selectedCategory.contains("R 14.5") ? Colors.white:  Colors.black, // foreground
+                                              ),
+                                              onPressed: () {
+                                                selectedCategory =  <String>[];
+                                                selectedCategory.add("R 14.5");
+
+                                                stateSetter(() {usersize = "R 14.5";});
+                                              },          child: Text('(US) 14.5'),
+                                            ),
+                                          ),
+                                          Ring23==0?Container():   Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child: ElevatedButton(
+
+                                              style: ElevatedButton.styleFrom(
+
+                                                primary: selectedCategory.contains("R 15") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                                                onPrimary:selectedCategory.contains("R 15") ? Colors.white:  Colors.black, // foreground
+                                              ),
+                                              onPressed: () {
+                                                selectedCategory =  <String>[];
+                                                selectedCategory.add("R 15");
+
+                                                stateSetter(() {usersize = "R 15";});
+                                              },          child: Text('(US) 15'),
+                                            ),
+                                          ),
+                                          custom12==0?Container():   Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child: ElevatedButton(
+
+                                              style: ElevatedButton.styleFrom(
+
+                                                primary: selectedCategory.contains("C 1") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                                                onPrimary:selectedCategory.contains("C 1") ? Colors.white:  Colors.black, // foreground
+                                              ),
+                                              onPressed: () {
+                                                selectedCategory =  <String>[];
+                                                selectedCategory.add("C 1");
+
+                                                stateSetter(() { usersize = 'C 1';
+                                                custom = true;
+                                                size = custom1;
+                                                customprice = customprice1;
+                                                custompriceusd = custom11usd;
+                                                custompriceinr = custom11inr;});
+                                              },          child:
+                                            currentUser.country == "India"?  FittedBox(child: Text('$custom1 + ${currentUser.currencysym} $custom11inr',)):
+                                            currentUser.country == "United States"?  FittedBox(child: Text('$custom1 + \u0024 $custom11usd',)):
+                                            currentUser.country == country?FittedBox(child: Text('$custom1 + ${currentUser.currencysym} $custom11inr(\u0024 $custom11usd)',)):
+
+                                            FittedBox(child: Text('$custom1 + ${currentUser.currencysym} $customprice1(\u0024 $custom11usd)',)),
+
+                                            ),
+                                          ),
+                                          custom22==0?Container():   Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child:   ElevatedButton(
+
+                                              style: ElevatedButton.styleFrom(
+
+                                                primary: selectedCategory.contains("C 2") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                                                onPrimary:selectedCategory.contains("C 2") ? Colors.white:  Colors.black, // foreground
+                                              ),
+                                              onPressed: () {
+                                                selectedCategory =  <String>[];
+                                                selectedCategory.add("C 2");
+
+                                                stateSetter(() { usersize = 'C 2';
+                                                custom = true;
+                                                size = custom2;
+                                                customprice = customprice2;
+                                                custompriceusd = custom21usd;
+                                                custompriceinr = custom21inr;});
+                                              },          child:
+
+                                            currentUser.country == "India"?  FittedBox(child: Text('$custom2 + ${currentUser.currencysym} $custom21inr',)):
+                                            currentUser.country == "United States"?  FittedBox(child: Text('$custom2 + \u0024 $custom21usd',)):
+                                            currentUser.country == country?FittedBox(child: Text('$custom2 + ${currentUser.currencysym} $custom21inr(\u0024 $custom21usd)',)):
+
+                                            FittedBox(child: Text('$custom2 + ${currentUser.currencysym} $customprice2(\u0024 $custom21usd)',)),
+
+                                            ),
+                                          ),
+                                          custom32==0?Container():   Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child:   ElevatedButton(
+
+                                              style: ElevatedButton.styleFrom(
+
+                                                primary: selectedCategory.contains("C 3") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                                                onPrimary:selectedCategory.contains("C 3") ? Colors.white:  Colors.black, // foreground
+                                              ),
+                                              onPressed: () {
+                                                selectedCategory =  <String>[];
+                                                selectedCategory.add("C 3");
+
+                                                stateSetter(() { usersize = 'C 3';
+                                                custom = true;
+                                                size = custom3;
+                                                customprice = customprice3;
+                                                custompriceusd = custom31usd;
+                                                custompriceinr = custom31inr;});
+                                              },          child:
+
+                                            currentUser.country == "India"?  FittedBox(child: Text('$custom3 + ${currentUser.currencysym} $custom31inr',)):
+                                            currentUser.country == "United States"?  FittedBox(child: Text('$custom3 + \u0024 $custom31usd',)):
+                                            currentUser.country == country?FittedBox(child: Text('$custom3 + ${currentUser.currencysym} $custom31inr(\u0024 $custom31usd)',)):
+
+                                            FittedBox(child: Text('$custom3 + ${currentUser.currencysym} $customprice3(\u0024 $custom31usd)',)),
+
+                                            ),
+                                          ),
+                                          custom42==0?Container():   Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child:   ElevatedButton(
+
+                                              style: ElevatedButton.styleFrom(
+
+                                                primary: selectedCategory.contains("C 4") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                                                onPrimary:selectedCategory.contains("C 4") ? Colors.white:  Colors.black, // foreground
+                                              ),
+                                              onPressed: () {
+                                                selectedCategory =  <String>[];
+                                                selectedCategory.add("C 4");
+
+                                                stateSetter(() { usersize = 'C 4';
+                                                custom = true;
+                                                size = custom4;
+                                                customprice = customprice4;
+                                                custompriceusd = custom41usd;
+                                                custompriceinr = custom41inr;});
+                                              },          child:
+
+                                            currentUser.country == "India"?  FittedBox(child: Text('$custom4 + ${currentUser.currencysym} $custom41inr',)):
+                                            currentUser.country == "United States"?  FittedBox(child: Text('$custom4 + \u0024 $custom41usd',)):
+                                            currentUser.country == country?FittedBox(child: Text('$custom4 + ${currentUser.currencysym} $custom41inr(\u0024 $custom41usd)',)):
+
+                                            FittedBox(child: Text('$custom4 + ${currentUser.currencysym} $customprice4(\u0024 $custom41usd)',)),
+
+                                            ),
+                                          ),
+                                          custom52==0?Container():   Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child:   ElevatedButton(
+
+                                              style: ElevatedButton.styleFrom(
+
+                                                primary: selectedCategory.contains("C 5") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                                                onPrimary:selectedCategory.contains("C 5") ? Colors.white:  Colors.black, // foreground
+                                              ),
+                                              onPressed: () {
+                                                selectedCategory =  <String>[];
+                                                selectedCategory.add("C 5");
+
+                                                stateSetter(() { usersize = 'C 5';
+                                                custom = true;
+                                                size = custom5;
+                                                customprice = customprice5;
+                                                custompriceusd = custom51usd;
+                                                custompriceinr = custom51inr;});
+                                              },          child:
+
+                                            currentUser.country == "India"?  FittedBox(child: Text('$custom5 + ${currentUser.currencysym} $custom51inr',)):
+                                            currentUser.country == "United States"?  FittedBox(child: Text('$custom5 + \u0024 $custom51usd',)):
+                                            currentUser.country == country?FittedBox(child: Text('$custom5 + ${currentUser.currencysym} $custom51inr(\u0024 $custom51usd)',)):
+
+                                            FittedBox(child: Text('$custom5 + ${currentUser.currencysym} $customprice5(\u0024 $custom51usd)',)),
+
+                                            ),
+                                          ),
+                                          custom62==0?Container():   Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child:   ElevatedButton(
+
+                                              style: ElevatedButton.styleFrom(
+
+                                                primary: selectedCategory.contains("C 6") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                                                onPrimary:selectedCategory.contains("C 6") ? Colors.white:  Colors.black, // foreground
+                                              ),
+                                              onPressed: () {
+                                                selectedCategory =  <String>[];
+                                                selectedCategory.add("C 6");
+
+                                                stateSetter(() { usersize = 'C 6';
+                                                custom = true;
+                                                size = custom6;
+                                                customprice = customprice6;
+                                                custompriceusd = custom61usd;
+                                                custompriceinr = custom61inr;});
+                                              },          child:
+
+                                            currentUser.country == "India"?  FittedBox(child: Text('$custom6 + ${currentUser.currencysym} $custom61inr',)):
+                                            currentUser.country == "United States"?  FittedBox(child: Text('$custom6 + \u0024 $custom61usd',)):
+                                            currentUser.country == country?FittedBox(child: Text('$custom6 + ${currentUser.currencysym} $custom61inr(\u0024 $custom61usd)',)):
+
+                                            FittedBox(child: Text('$custom6 + ${currentUser.currencysym} $customprice6(\u0024 $custom61usd)',)),
+
+                                            ),
+                                          ),
+                                          custom72==0?Container():   Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child:   ElevatedButton(
+
+                                              style: ElevatedButton.styleFrom(
+
+                                                primary: selectedCategory.contains("C 7") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                                                onPrimary:selectedCategory.contains("C 7") ? Colors.white:  Colors.black, // foreground
+                                              ),
+                                              onPressed: () {
+                                                selectedCategory =  <String>[];
+                                                selectedCategory.add("C 7");
+
+                                                stateSetter(() { usersize = 'C 7';
+                                                custom = true;
+                                                size = custom7;
+                                                customprice = customprice7;
+                                                custompriceusd = custom71usd;
+                                                custompriceinr = custom71inr;});
+                                              },          child:
+
+                                            currentUser.country == "India"?  FittedBox(child: Text('$custom7 + ${currentUser.currencysym} $custom71inr',)):
+                                            currentUser.country == "United States"?  FittedBox(child: Text('$custom7 + \u0024 $custom71usd',)):
+                                            currentUser.country == country?FittedBox(child: Text('$custom7 + ${currentUser.currencysym} $custom71inr(\u0024 $custom71usd)',)):
+
+                                            FittedBox(child: Text('$custom7 + ${currentUser.currencysym} $customprice7(\u0024 $custom71usd)',)),
+
+                                            ),
+                                          ),
+                                          custom82==0?Container():   Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child:   ElevatedButton(
+
+                                              style: ElevatedButton.styleFrom(
+
+                                                primary: selectedCategory.contains("C 8") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                                                onPrimary:selectedCategory.contains("C 8") ? Colors.white:  Colors.black, // foreground
+                                              ),
+                                              onPressed: () {
+                                                selectedCategory =  <String>[];
+                                                selectedCategory.add("C 8");
+
+                                                stateSetter(() { usersize = 'C 8';
+                                                custom = true;
+                                                size = custom8;
+                                                customprice = customprice8;
+                                                custompriceusd = custom81usd;
+                                                custompriceinr = custom81inr;});
+                                              },          child:
+
+                                            currentUser.country == "India"?  FittedBox(child: Text('$custom8 + ${currentUser.currencysym} $custom81inr',)):
+                                            currentUser.country == "United States"?  FittedBox(child: Text('$custom8 + \u0024 $custom81usd',)):
+                                            currentUser.country == country?FittedBox(child: Text('$custom8 + ${currentUser.currencysym} $custom81inr(\u0024 $custom81usd)',)):
+
+                                            FittedBox(child: Text('$custom8 + ${currentUser.currencysym} $customprice8(\u0024 $custom81usd)',)),
+
+                                            ),
+                                          ),
+                                          custom92==0?Container():   Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child:   ElevatedButton(
+
+                                              style: ElevatedButton.styleFrom(
+
+                                                primary: selectedCategory.contains("C 9") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                                                onPrimary:selectedCategory.contains("C 9") ? Colors.white:  Colors.black, // foreground
+                                              ),
+                                              onPressed: () {
+                                                selectedCategory =  <String>[];
+                                                selectedCategory.add("C 9");
+
+                                                stateSetter(() { usersize = 'C 9';
+                                                custom = true;
+                                                size = custom9;
+                                                customprice = customprice9;
+                                                custompriceusd = custom91usd;
+                                                custompriceinr = custom91inr;});
+                                              },          child:
+
+                                            currentUser.country == "India"?  FittedBox(child: Text('$custom9 + ${currentUser.currencysym} $custom91inr',)):
+                                            currentUser.country == "United States"?  FittedBox(child: Text('$custom9 + \u0024 $custom91usd',)):
+                                            currentUser.country == country?FittedBox(child: Text('$custom9 + ${currentUser.currencysym} $custom91inr(\u0024 $custom91usd)',)):
+
+                                            FittedBox(child: Text('$custom9 + ${currentUser.currencysym} $customprice9(\u0024 $custom91usd)',)),
+
+                                            ),
+                                          ),
+                                          custom102==0?Container():   Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child:   ElevatedButton(
+
+                                              style: ElevatedButton.styleFrom(
+
+                                                primary: selectedCategory.contains("C 10") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                                                onPrimary:selectedCategory.contains("C 10") ? Colors.white:  Colors.black, // foreground
+                                              ),
+                                              onPressed: () {
+                                                selectedCategory =  <String>[];
+                                                selectedCategory.add("C 10");
+
+                                                stateSetter(() { usersize = 'C 10';
+                                                custom = true;
+                                                size = custom10;
+                                                customprice = customprice10;
+                                                custompriceusd = custom101usd;
+                                                custompriceinr = custom101inr;});
+                                              },          child:
+
+                                            currentUser.country == "India"?  FittedBox(child: Text('$custom10 + ${currentUser.currencysym} $custom101inr',)):
+                                            currentUser.country == "United States"?  FittedBox(child: Text('$custom10 + \u0024 $custom101usd',)):
+                                            currentUser.country == country?FittedBox(child: Text('$custom10 + ${currentUser.currencysym} $custom101inr(\u0024 $custom101usd)',)):
+
+                                            FittedBox(child: Text('$custom10 + ${currentUser.currencysym} $customprice10(\u0024 $custom101usd)',)),
+
+                                            ),
+                                          ),
+
+
+                                        ]
+                                    ),
+                                  ),
+                                ),
+
+                                Container(
+                                  height:60.0,
+
+                                  child:   Expanded(
+
+
+
+                                      child:   ListView(
+                                          scrollDirection:Axis.horizontal,
+                                          shrinkWrap:true,
+                                          children:[
+                                            color1==0?Container():   Padding(
+                                              padding: const EdgeInsets.all(8.0),
+                                              child: ElevatedButton(
+
+                                                style: ElevatedButton.styleFrom(
+
+                                                  primary: selectedColor.contains("col 1") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                                                  onPrimary:selectedColor.contains("col 1") ? Colors.white:  Colors.black, // foreground
+                                                ),
+                                                onPressed: () {
+                                                  selectedColor =  <String>[];
+                                                  selectedColor.add("col 1");
+
+                                                  stateSetter(() { color = 'col 1';
+                                                  usercolor = colorText1;});
+                                                },          child: Text(colorText1),
+                                              ),
+                                            ),
+                                            color2==0?Container():   Padding(
+                                              padding: const EdgeInsets.all(8.0),
+                                              child: ElevatedButton(
+
+                                                style: ElevatedButton.styleFrom(
+
+                                                  primary: selectedColor.contains("col 2") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                                                  onPrimary:selectedColor.contains("col 2") ? Colors.white:  Colors.black, // foreground
+                                                ),
+                                                onPressed: () {
+                                                  selectedColor =  <String>[];
+                                                  selectedColor.add("col 2");
+
+                                                  stateSetter(() { color = 'col 2';
+                                                  usercolor = colorText2;});
+                                                },          child: Text(colorText2),
+                                              ),
+                                            ),
+                                            color3==0?Container():   Padding(
+                                              padding: const EdgeInsets.all(8.0),
+                                              child: ElevatedButton(
+
+                                                style: ElevatedButton.styleFrom(
+
+                                                  primary: selectedColor.contains("col 3") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                                                  onPrimary:selectedColor.contains("col 3") ? Colors.white:  Colors.black, // foreground
+                                                ),
+                                                onPressed: () {
+                                                  selectedColor =  <String>[];
+                                                  selectedColor.add("col 3");
+
+                                                  stateSetter(() { color = 'col 3';
+                                                  usercolor = colorText3;});
+                                                },          child: Text(colorText3),
+                                              ),
+                                            ),
+                                            color4==0?Container():   Padding(
+                                              padding: const EdgeInsets.all(8.0),
+                                              child: ElevatedButton(
+
+                                                style: ElevatedButton.styleFrom(
+
+                                                  primary: selectedColor.contains("col 4") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                                                  onPrimary:selectedColor.contains("col 4") ? Colors.white:  Colors.black, // foreground
+                                                ),
+                                                onPressed: () {
+                                                  selectedColor =  <String>[];
+                                                  selectedColor.add("col 4");
+
+                                                  stateSetter(() { color = 'col 4';
+                                                  usercolor = colorText4;});
+                                                },          child: Text(colorText4),
+                                              ),
+                                            ),
+                                            color5==0?Container():   Padding(
+                                              padding: const EdgeInsets.all(8.0),
+                                              child: ElevatedButton(
+
+                                                style: ElevatedButton.styleFrom(
+
+                                                  primary: selectedColor.contains("col 5") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                                                  onPrimary:selectedColor.contains("col 5") ? Colors.white:  Colors.black, // foreground
+                                                ),
+                                                onPressed: () {
+                                                  selectedColor =  <String>[];
+                                                  selectedColor.add("col 5");
+
+                                                  stateSetter(() { color = 'col 5';
+                                                  usercolor = colorText5;});
+                                                },          child: Text(colorText5),
+                                              ),
+                                            ),
+                                            color6==0?Container():   Padding(
+                                              padding: const EdgeInsets.all(8.0),
+                                              child: ElevatedButton(
+
+                                                style: ElevatedButton.styleFrom(
+
+                                                  primary: selectedColor.contains("col 6") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                                                  onPrimary:selectedColor.contains("col 6") ? Colors.white:  Colors.black, // foreground
+                                                ),
+                                                onPressed: () {
+                                                  selectedColor =  <String>[];
+                                                  selectedColor.add("col 6");
+
+                                                  stateSetter(() { color = 'col 6';
+                                                  usercolor = colorText6;});
+                                                },          child: Text(colorText6),
+                                              ),
+                                            ),
+                                            color7==0?Container():   Padding(
+                                              padding: const EdgeInsets.all(8.0),
+                                              child: ElevatedButton(
+
+                                                style: ElevatedButton.styleFrom(
+
+                                                  primary: selectedColor.contains("col 7") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                                                  onPrimary:selectedColor.contains("col 7") ? Colors.white:  Colors.black, // foreground
+                                                ),
+                                                onPressed: () {
+                                                  selectedColor =  <String>[];
+                                                  selectedColor.add("col 7");
+
+                                                  stateSetter(() { color = 'col 7';
+                                                  usercolor = colorText7;});
+                                                },          child: Text(colorText7),
+                                              ),
+                                            ),
+                                            color8==0?Container():   Padding(
+                                              padding: const EdgeInsets.all(8.0),
+                                              child: ElevatedButton(
+
+                                                style: ElevatedButton.styleFrom(
+
+                                                  primary: selectedColor.contains("col 8") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                                                  onPrimary:selectedColor.contains("col 8") ? Colors.white:  Colors.black, // foreground
+                                                ),
+                                                onPressed: () {
+                                                  selectedColor =  <String>[];
+                                                  selectedColor.add("col 8");
+
+                                                  stateSetter(() { color = 'col 8';
+                                                  usercolor = colorText8;});
+                                                },          child: Text(colorText8),
+                                              ),
+                                            ),
+                                            color9==0?Container():   Padding(
+                                              padding: const EdgeInsets.all(8.0),
+                                              child: ElevatedButton(
+
+                                                style: ElevatedButton.styleFrom(
+
+                                                  primary: selectedColor.contains("col 9") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                                                  onPrimary:selectedColor.contains("col 9") ? Colors.white:  Colors.black, // foreground
+                                                ),
+                                                onPressed: () {
+                                                  selectedColor =  <String>[];
+                                                  selectedColor.add("col 9");
+
+                                                  stateSetter(() { color = 'col 9';
+                                                  usercolor = colorText9;});
+                                                },          child: Text(colorText9),
+                                              ),
+                                            ),
+                                            color10==0?Container():   Padding(
+                                              padding: const EdgeInsets.all(8.0),
+                                              child: ElevatedButton(
+
+                                                style: ElevatedButton.styleFrom(
+
+                                                  primary: selectedColor.contains("col 10") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                                                  onPrimary:selectedColor.contains("col 10") ? Colors.white:  Colors.black, // foreground
+                                                ),
+                                                onPressed: () {
+                                                  selectedColor =  <String>[];
+                                                  selectedColor.add("col 10");
+
+                                                  stateSetter(() { color = 'col 10';
+                                                  usercolor = colorText10;});
+                                                },          child: Text(colorText10),
+                                              ),
+                                            ),
+
+                                          ])
+                                  ),
+                                ),
+
+
+                                usersize == "" || color == ""?Container():  Container(
+                                  // alignment:Alignment.centerLeft,
+                                  child: FloatingActionButton.extended(
+                                    backgroundColor: kblue,
+                                    onPressed: () {
+                                      if (currentUser.country == 'India' &&
+                                          currentUser.country == country) {
+                                        Proceedtobuy(
+                                            ship: shipcostinr, shipcostU: shipcostinr);
+                                      } else if (currentUser.country == country) {
+                                        Proceedtobuy(
+                                            ship: shipcostusd, shipcostU: shipcostinr);
+                                      } else {
+                                        Proceedtobuy(ship: shipcostinterusd,
+                                            shipcostU: shipcostuser);
+                                      }
+                                    },
+                                    label: Text(
+                                      'Proceed', style: TextStyle(color: Colors.white),),
+                                  ),
+                                ),
+                              ])
+
+                      );
+                  });
+          }
+      );
     }
     else if (gender == 'Baby-Boys'||gender == 'Baby-Girls') {
-        showModalBottomSheet(
-            backgroundColor: kSecondaryColor,
-            context: parentContext,
-            builder: (BuildContext context) {
-              return
-                Container(
+      showModalBottomSheet(
+          context: parentContext,
+          builder: (BuildContext context) {
+            return
+              StatefulBuilder(
+                  builder: (BuildContext ctx, StateSetter stateSetter){
 
-                    child: Column(children:[ Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        OutlinedButton(
-                          child:Text("$usersize"),
-                          onPressed: () {SelectSize(parentContext);  },
-                        ), OutlinedButton(
-                          child:Text("$usercolor"),
-                          onPressed: () {SelectCol();  },
-                        ),
-                      ],
-                    ),
+                    return
                       Container(
-                        // alignment:Alignment.centerLeft,
-                        child:   FloatingActionButton.extended(
-                          backgroundColor: kblue,
-                          onPressed: () {
-                            if( currentUser.country == 'India' && currentUser.country == country){
-                              Proceedtobuy(ship:shipcostinr,shipcostU:shipcostinr);
-                            }  else if( currentUser.country == country){
-                              Proceedtobuy(ship:shipcostusd,shipcostU:shipcostinr);
-                            } else {
-                              Proceedtobuy(ship:shipcostinterusd,shipcostU:shipcostuser);
-                            }
-                          },
-                          label: Text('Proceed',style:TextStyle(color:  Colors.white) ,),
-                        ),
-                      ),
-                    ])
+                          height: 200,
 
-                );
-            }
-        );
+                          child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+
+                              children: [
+                                Container(
+                                  height:60.0,
+
+                                  child:   Expanded(
+                                    child:   ListView(
+                                        scrollDirection:Axis.horizontal,
+                                        shrinkWrap:true,
+                                        children:[
+
+                                          freesize==0?Container():   Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child: ElevatedButton(
+
+                                              style: ElevatedButton.styleFrom(
+
+                                                primary: selectedCategory.contains("Free Size") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                                                onPrimary:selectedCategory.contains("Free Size") ? Colors.white:  Colors.black, // foreground
+                                              ),
+                                              onPressed: () {
+                                                selectedCategory =  <String>[];
+                                                selectedCategory.add("Free Size");
+
+                                                stateSetter(() {usersize = "Free Size";});
+                                              },          child: Text('Free Size'),
+                                            ),
+                                          ),
+                                          xxxs==0?Container():   Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child: ElevatedButton(
+
+                                              style: ElevatedButton.styleFrom(
+
+                                                primary: selectedCategory.contains("0-3 M") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                                                onPrimary:selectedCategory.contains("0-3 M") ? Colors.white:  Colors.black, // foreground
+                                              ),
+                                              onPressed: () {
+                                                selectedCategory =  <String>[];
+                                                selectedCategory.add("0-3 M");
+
+                                                stateSetter(() {usersize = "0-3 M";});
+                                              },          child: Text('0-3 M'),
+                                            ),
+                                          ),
+                                          xxs==0?Container():   Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child: ElevatedButton(
+
+                                              style: ElevatedButton.styleFrom(
+
+                                                primary: selectedCategory.contains("3-6 M") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                                                onPrimary:selectedCategory.contains("3-6 M") ? Colors.white:  Colors.black, // foreground
+                                              ),
+                                              onPressed: () {
+                                                selectedCategory =  <String>[];
+                                                selectedCategory.add("3-6 M");
+
+                                                stateSetter(() {usersize = "3-6 M";});
+                                              },          child: Text('3-6 M'),
+                                            ),
+                                          ),
+                                          xs==0?Container():   Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child: ElevatedButton(
+
+                                              style: ElevatedButton.styleFrom(
+
+                                                primary: selectedCategory.contains("6-9 M") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                                                onPrimary:selectedCategory.contains("6-9 M") ? Colors.white:  Colors.black, // foreground
+                                              ),
+                                              onPressed: () {
+                                                selectedCategory =  <String>[];
+                                                selectedCategory.add("6-9 M");
+
+                                                stateSetter(() {usersize = "6-9 M";});
+                                              },          child: Text('6-9 M'),
+                                            ),
+                                          ),
+                                          s==0?Container():   Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child: ElevatedButton(
+
+                                              style: ElevatedButton.styleFrom(
+
+                                                primary: selectedCategory.contains("9-12 M") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                                                onPrimary:selectedCategory.contains("9-12 M") ? Colors.white:  Colors.black, // foreground
+                                              ),
+                                              onPressed: () {
+                                                selectedCategory =  <String>[];
+                                                selectedCategory.add("9-12 M");
+
+                                                stateSetter(() {usersize = "9-12 M";});
+                                              },          child: Text('9-12 M'),
+                                            ),
+                                          ),
+                                          m==0?Container():   Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child: ElevatedButton(
+
+                                              style: ElevatedButton.styleFrom(
+
+                                                primary: selectedCategory.contains("12-18 M") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                                                onPrimary:selectedCategory.contains("12-18 M") ? Colors.white:  Colors.black, // foreground
+                                              ),
+                                              onPressed: () {
+                                                selectedCategory =  <String>[];
+                                                selectedCategory.add("12-18 M");
+
+                                                stateSetter(() {usersize = "12-18 M";});
+                                              },          child: Text('12-18 M'),
+                                            ),
+                                          ),
+
+                                          l==0?Container():   Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child: ElevatedButton(
+
+                                              style: ElevatedButton.styleFrom(
+
+                                                primary: selectedCategory.contains("18-24 M") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                                                onPrimary:selectedCategory.contains("18-24 M") ? Colors.white:  Colors.black, // foreground
+                                              ),
+                                              onPressed: () {
+                                                selectedCategory =  <String>[];
+                                                selectedCategory.add("18-24 M");
+
+                                                stateSetter(() {usersize = "18-24 M";});
+                                              },          child: Text('18-24 M'),
+                                            ),
+                                          ),
+
+                                          Shoe1==0?Container():   Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child:   ElevatedButton(
+
+                                              style: ElevatedButton.styleFrom(
+
+                                                primary: selectedCategory.contains("S 0-3 M") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                                                onPrimary:selectedCategory.contains("S 0-3 M") ? Colors.white:  Colors.black, // foreground
+                                              ),
+                                              onPressed: () {
+                                                selectedCategory =  <String>[];
+                                                selectedCategory.add("S 0-3 M");
+
+                                                stateSetter(() {usersize = "S 0-3 M";});
+                                              },          child: Text('S 0-3 M'),
+                                            ),
+                                          ),
+                                          Shoe2==0?Container():  Padding(
+                                              padding: const EdgeInsets.all(8.0),
+                                              child:   ElevatedButton(
+
+                                                style: ElevatedButton.styleFrom(
+
+                                                  primary: selectedCategory.contains("S 3-6 M") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                                                  onPrimary:selectedCategory.contains("S 3-6 M") ? Colors.white:  Colors.black, // foreground
+                                                ),
+                                                onPressed: () {
+                                                  selectedCategory =  <String>[];
+                                                  selectedCategory.add("S 3-6 M");
+
+                                                  stateSetter(() {usersize = "S 3-6 M";});
+                                                },          child: Text('S 3-6 M'),
+                                              )),
+                                          Shoe3==0?Container():   Padding(
+                                              padding: const EdgeInsets.all(8.0),
+                                              child:  ElevatedButton(
+
+                                                style: ElevatedButton.styleFrom(
+
+                                                  primary: selectedCategory.contains("6 M") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                                                  onPrimary:selectedCategory.contains("6 M") ? Colors.white:  Colors.black, // foreground
+                                                ),
+                                                onPressed: () {
+                                                  selectedCategory =  <String>[];
+                                                  selectedCategory.add("6 M");
+
+                                                  stateSetter(() {usersize = "6 M";});
+                                                },          child: Text('6 M'),
+                                              )),
+                                          Shoe4==0?Container():  Padding(
+                                              padding: const EdgeInsets.all(8.0),
+                                              child:   ElevatedButton(
+
+                                                style: ElevatedButton.styleFrom(
+
+                                                  primary: selectedCategory.contains("9 M") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                                                  onPrimary:selectedCategory.contains("9 M") ? Colors.white:  Colors.black, // foreground
+                                                ),
+                                                onPressed: () {
+                                                  selectedCategory =  <String>[];
+                                                  selectedCategory.add("9 M");
+
+                                                  stateSetter(() {usersize = "9 M";});
+                                                },          child: Text('9 M'),
+                                              )),
+                                          Shoe5==0?Container():   Padding(
+                                              padding: const EdgeInsets.all(8.0),
+                                              child:  ElevatedButton(
+
+                                                style: ElevatedButton.styleFrom(
+
+                                                  primary: selectedCategory.contains("S 9-12 M") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                                                  onPrimary:selectedCategory.contains("S 9-12 M") ? Colors.white:  Colors.black, // foreground
+                                                ),
+                                                onPressed: () {
+                                                  selectedCategory =  <String>[];
+                                                  selectedCategory.add("S 9-12 M");
+
+                                                  stateSetter(() {usersize = "S 9-12 M";});
+                                                },          child: Text('S 9-12 M'),
+                                              )),
+                                          Shoe6==0?Container():  Padding(
+                                              padding: const EdgeInsets.all(8.0),
+                                              child:   ElevatedButton(
+
+                                                style: ElevatedButton.styleFrom(
+
+                                                  primary: selectedCategory.contains("S 12-18 M") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                                                  onPrimary:selectedCategory.contains("S 12-18 M") ? Colors.white:  Colors.black, // foreground
+                                                ),
+                                                onPressed: () {
+                                                  selectedCategory =  <String>[];
+                                                  selectedCategory.add("S 12-18 M");
+
+                                                  stateSetter(() {usersize = "S 12-18 M";});
+                                                },          child: Text('S 12-18 M'),
+                                              )),
+                                          Shoe7==0?Container():   Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child:   ElevatedButton(
+
+                                              style: ElevatedButton.styleFrom(
+
+                                                primary: selectedCategory.contains("S 18-24 M") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                                                onPrimary:selectedCategory.contains("S 18-24 M") ? Colors.white:  Colors.black, // foreground
+                                              ),
+                                              onPressed: () {
+                                                selectedCategory =  <String>[];
+                                                selectedCategory.add("S 18-24 M");
+
+                                                stateSetter(() {usersize = "S 18-24 M";});
+                                              },          child: Text('S 18-24 M'),
+                                            ),
+                                          ),
+                                          Shoe8==0?Container():   Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child:   ElevatedButton(
+
+                                              style: ElevatedButton.styleFrom(
+
+                                                primary: selectedCategory.contains("8 ½") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                                                onPrimary:selectedCategory.contains("8 ½") ? Colors.white:  Colors.black, // foreground
+                                              ),
+                                              onPressed: () {
+                                                selectedCategory =  <String>[];
+                                                selectedCategory.add("8 ½");
+
+                                                stateSetter(() {usersize = "8 ½";});
+                                              },          child: Text('8 ½'),
+                                            ),
+                                          ),
+                                          Shoe9==0?Container():   Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child:   ElevatedButton(
+
+                                              style: ElevatedButton.styleFrom(
+
+                                                primary: selectedCategory.contains("9") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                                                onPrimary:selectedCategory.contains("9") ? Colors.white:  Colors.black, // foreground
+                                              ),
+                                              onPressed: () {
+                                                selectedCategory =  <String>[];
+                                                selectedCategory.add("9");
+
+                                                stateSetter(() {usersize = "9";});
+                                              },          child: Text('9'),
+                                            ),
+                                          ),
+                                          Shoe10==0?Container():   Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child:   ElevatedButton(
+
+                                              style: ElevatedButton.styleFrom(
+
+                                                primary: selectedCategory.contains("9 ½") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                                                onPrimary:selectedCategory.contains("9 ½") ? Colors.white:  Colors.black, // foreground
+                                              ),
+                                              onPressed: () {
+                                                selectedCategory =  <String>[];
+                                                selectedCategory.add("9 ½");
+
+                                                stateSetter(() {usersize = "9 ½";});
+                                              },          child: Text('9 ½'),
+                                            ),
+                                          ),
+                                          Shoe11==0?Container():   Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child:   ElevatedButton(
+
+                                              style: ElevatedButton.styleFrom(
+
+                                                primary: selectedCategory.contains("10") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                                                onPrimary:selectedCategory.contains("10") ? Colors.white:  Colors.black, // foreground
+                                              ),
+                                              onPressed: () {
+                                                selectedCategory =  <String>[];
+                                                selectedCategory.add("10");
+
+                                                stateSetter(() {usersize = "10";});
+                                              },          child: Text('10'),
+                                            ),
+                                          ),
+                                          Shoe12==0?Container():   Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child:   ElevatedButton(
+
+                                              style: ElevatedButton.styleFrom(
+
+                                                primary: selectedCategory.contains("10 ½") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                                                onPrimary:selectedCategory.contains("10 ½") ? Colors.white:  Colors.black, // foreground
+                                              ),
+                                              onPressed: () {
+                                                selectedCategory =  <String>[];
+                                                selectedCategory.add("10 ½");
+
+                                                stateSetter(() {usersize = "10 ½";});
+                                              },          child: Text('10 ½'),
+                                            ),
+                                          ),
+                                          Shoe13==0?Container():   Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child:   ElevatedButton(
+
+                                              style: ElevatedButton.styleFrom(
+
+                                                primary: selectedCategory.contains("12") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                                                onPrimary:selectedCategory.contains("12") ? Colors.white:  Colors.black, // foreground
+                                              ),
+                                              onPressed: () {
+                                                selectedCategory =  <String>[];
+                                                selectedCategory.add("12");
+
+                                                stateSetter(() {usersize = "12";});
+                                              },          child: Text('12'),
+                                            ),
+                                          ),
+                                          Shoe14==0?Container():   Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child:   ElevatedButton(
+
+                                              style: ElevatedButton.styleFrom(
+
+                                                primary: selectedCategory.contains("13") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                                                onPrimary:selectedCategory.contains("13") ? Colors.white:  Colors.black, // foreground
+                                              ),
+                                              onPressed: () {
+                                                selectedCategory =  <String>[];
+                                                selectedCategory.add("13");
+
+                                                stateSetter(() {usersize = "13";});
+                                              },          child: Text('13'),
+                                            ),
+                                          ),
+                                          Shoe15==0?Container():   Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child:   ElevatedButton(
+
+                                              style: ElevatedButton.styleFrom(
+
+                                                primary: selectedCategory.contains("14") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                                                onPrimary:selectedCategory.contains("14") ? Colors.white:  Colors.black, // foreground
+                                              ),
+                                              onPressed: () {
+                                                selectedCategory =  <String>[];
+                                                selectedCategory.add("14");
+
+                                                stateSetter(() {usersize = "14";});
+                                              },          child: Text('14'),
+                                            ),
+                                          ),
+                                          Shoe16==0?Container():   Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child:   ElevatedButton(
+
+
+
+                                              style: ElevatedButton.styleFrom(
+
+
+
+                                                primary: selectedCategory.contains("15 ½") ? Colors.black: Colors.white.withOpacity(0.1), // background
+
+                                                onPrimary:selectedCategory.contains("15 ½") ? Colors.white:  Colors.black, // foreground
+
+                                              ),
+
+                                              onPressed: () {
+
+                                                selectedCategory =  <String>[];
+
+                                                selectedCategory.add("15 ½");
+
+
+
+                                                stateSetter(() {usersize = "15 ½";});
+
+                                              },          child: Text('15 ½'),
+
+                                            ),
+                                          ),
+
+
+                                          custom12==0?Container():   Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child: ElevatedButton(
+
+                                              style: ElevatedButton.styleFrom(
+
+                                                primary: selectedCategory.contains("C 1") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                                                onPrimary:selectedCategory.contains("C 1") ? Colors.white:  Colors.black, // foreground
+                                              ),
+                                              onPressed: () {
+                                                selectedCategory =  <String>[];
+                                                selectedCategory.add("C 1");
+
+                                                stateSetter(() { usersize = 'C 1';
+                                                custom = true;
+                                                size = custom1;
+                                                customprice = customprice1;
+                                                custompriceusd = custom11usd;
+                                                custompriceinr = custom11inr;});
+                                              },          child:
+                                            currentUser.country == "India"?  FittedBox(child: Text('$custom1 + ${currentUser.currencysym} $custom11inr',)):
+                                            currentUser.country == "United States"?  FittedBox(child: Text('$custom1 + \u0024 $custom11usd',)):
+                                            currentUser.country == country?FittedBox(child: Text('$custom1 + ${currentUser.currencysym} $custom11inr(\u0024 $custom11usd)',)):
+
+                                            FittedBox(child: Text('$custom1 + ${currentUser.currencysym} $customprice1(\u0024 $custom11usd)',)),
+
+                                            ),
+                                          ),
+                                          custom22==0?Container():   Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child:   ElevatedButton(
+
+                                              style: ElevatedButton.styleFrom(
+
+                                                primary: selectedCategory.contains("C 2") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                                                onPrimary:selectedCategory.contains("C 2") ? Colors.white:  Colors.black, // foreground
+                                              ),
+                                              onPressed: () {
+                                                selectedCategory =  <String>[];
+                                                selectedCategory.add("C 2");
+
+                                                stateSetter(() { usersize = 'C 2';
+                                                custom = true;
+                                                size = custom2;
+                                                customprice = customprice2;
+                                                custompriceusd = custom21usd;
+                                                custompriceinr = custom21inr;});
+                                              },          child:
+
+                                            currentUser.country == "India"?  FittedBox(child: Text('$custom2 + ${currentUser.currencysym} $custom21inr',)):
+                                            currentUser.country == "United States"?  FittedBox(child: Text('$custom2 + \u0024 $custom21usd',)):
+                                            currentUser.country == country?FittedBox(child: Text('$custom2 + ${currentUser.currencysym} $custom21inr(\u0024 $custom21usd)',)):
+
+                                            FittedBox(child: Text('$custom2 + ${currentUser.currencysym} $customprice2(\u0024 $custom21usd)',)),
+
+                                            ),
+                                          ),
+                                          custom32==0?Container():   Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child:   ElevatedButton(
+
+                                              style: ElevatedButton.styleFrom(
+
+                                                primary: selectedCategory.contains("C 3") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                                                onPrimary:selectedCategory.contains("C 3") ? Colors.white:  Colors.black, // foreground
+                                              ),
+                                              onPressed: () {
+                                                selectedCategory =  <String>[];
+                                                selectedCategory.add("C 3");
+
+                                                stateSetter(() { usersize = 'C 3';
+                                                custom = true;
+                                                size = custom3;
+                                                customprice = customprice3;
+                                                custompriceusd = custom31usd;
+                                                custompriceinr = custom31inr;});
+                                              },          child:
+
+                                            currentUser.country == "India"?  FittedBox(child: Text('$custom3 + ${currentUser.currencysym} $custom31inr',)):
+                                            currentUser.country == "United States"?  FittedBox(child: Text('$custom3 + \u0024 $custom31usd',)):
+                                            currentUser.country == country?FittedBox(child: Text('$custom3 + ${currentUser.currencysym} $custom31inr(\u0024 $custom31usd)',)):
+
+                                            FittedBox(child: Text('$custom3 + ${currentUser.currencysym} $customprice3(\u0024 $custom31usd)',)),
+
+                                            ),
+                                          ),
+                                          custom42==0?Container():   Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child:   ElevatedButton(
+
+                                              style: ElevatedButton.styleFrom(
+
+                                                primary: selectedCategory.contains("C 4") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                                                onPrimary:selectedCategory.contains("C 4") ? Colors.white:  Colors.black, // foreground
+                                              ),
+                                              onPressed: () {
+                                                selectedCategory =  <String>[];
+                                                selectedCategory.add("C 4");
+
+                                                stateSetter(() { usersize = 'C 4';
+                                                custom = true;
+                                                size = custom4;
+                                                customprice = customprice4;
+                                                custompriceusd = custom41usd;
+                                                custompriceinr = custom41inr;});
+                                              },          child:
+
+                                            currentUser.country == "India"?  FittedBox(child: Text('$custom4 + ${currentUser.currencysym} $custom41inr',)):
+                                            currentUser.country == "United States"?  FittedBox(child: Text('$custom4 + \u0024 $custom41usd',)):
+                                            currentUser.country == country?FittedBox(child: Text('$custom4 + ${currentUser.currencysym} $custom41inr(\u0024 $custom41usd)',)):
+
+                                            FittedBox(child: Text('$custom4 + ${currentUser.currencysym} $customprice4(\u0024 $custom41usd)',)),
+
+                                            ),
+                                          ),
+                                          custom52==0?Container():   Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child:   ElevatedButton(
+
+                                              style: ElevatedButton.styleFrom(
+
+                                                primary: selectedCategory.contains("C 5") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                                                onPrimary:selectedCategory.contains("C 5") ? Colors.white:  Colors.black, // foreground
+                                              ),
+                                              onPressed: () {
+                                                selectedCategory =  <String>[];
+                                                selectedCategory.add("C 5");
+
+                                                stateSetter(() { usersize = 'C 5';
+                                                custom = true;
+                                                size = custom5;
+                                                customprice = customprice5;
+                                                custompriceusd = custom51usd;
+                                                custompriceinr = custom51inr;});
+                                              },          child:
+
+                                            currentUser.country == "India"?  FittedBox(child: Text('$custom5 + ${currentUser.currencysym} $custom51inr',)):
+                                            currentUser.country == "United States"?  FittedBox(child: Text('$custom5 + \u0024 $custom51usd',)):
+                                            currentUser.country == country?FittedBox(child: Text('$custom5 + ${currentUser.currencysym} $custom51inr(\u0024 $custom51usd)',)):
+
+                                            FittedBox(child: Text('$custom5 + ${currentUser.currencysym} $customprice5(\u0024 $custom51usd)',)),
+
+                                            ),
+                                          ),
+                                          custom62==0?Container():   Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child:   ElevatedButton(
+
+                                              style: ElevatedButton.styleFrom(
+
+                                                primary: selectedCategory.contains("C 6") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                                                onPrimary:selectedCategory.contains("C 6") ? Colors.white:  Colors.black, // foreground
+                                              ),
+                                              onPressed: () {
+                                                selectedCategory =  <String>[];
+                                                selectedCategory.add("C 6");
+
+                                                stateSetter(() { usersize = 'C 6';
+                                                custom = true;
+                                                size = custom6;
+                                                customprice = customprice6;
+                                                custompriceusd = custom61usd;
+                                                custompriceinr = custom61inr;});
+                                              },          child:
+
+                                            currentUser.country == "India"?  FittedBox(child: Text('$custom6 + ${currentUser.currencysym} $custom61inr',)):
+                                            currentUser.country == "United States"?  FittedBox(child: Text('$custom6 + \u0024 $custom61usd',)):
+                                            currentUser.country == country?FittedBox(child: Text('$custom6 + ${currentUser.currencysym} $custom61inr(\u0024 $custom61usd)',)):
+
+                                            FittedBox(child: Text('$custom6 + ${currentUser.currencysym} $customprice6(\u0024 $custom61usd)',)),
+
+                                            ),
+                                          ),
+                                          custom72==0?Container():   Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child:   ElevatedButton(
+
+                                              style: ElevatedButton.styleFrom(
+
+                                                primary: selectedCategory.contains("C 7") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                                                onPrimary:selectedCategory.contains("C 7") ? Colors.white:  Colors.black, // foreground
+                                              ),
+                                              onPressed: () {
+                                                selectedCategory =  <String>[];
+                                                selectedCategory.add("C 7");
+
+                                                stateSetter(() { usersize = 'C 7';
+                                                custom = true;
+                                                size = custom7;
+                                                customprice = customprice7;
+                                                custompriceusd = custom71usd;
+                                                custompriceinr = custom71inr;});
+                                              },          child:
+
+                                            currentUser.country == "India"?  FittedBox(child: Text('$custom7 + ${currentUser.currencysym} $custom71inr',)):
+                                            currentUser.country == "United States"?  FittedBox(child: Text('$custom7 + \u0024 $custom71usd',)):
+                                            currentUser.country == country?FittedBox(child: Text('$custom7 + ${currentUser.currencysym} $custom71inr(\u0024 $custom71usd)',)):
+
+                                            FittedBox(child: Text('$custom7 + ${currentUser.currencysym} $customprice7(\u0024 $custom71usd)',)),
+
+                                            ),
+                                          ),
+                                          custom82==0?Container():   Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child:   ElevatedButton(
+
+                                              style: ElevatedButton.styleFrom(
+
+                                                primary: selectedCategory.contains("C 8") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                                                onPrimary:selectedCategory.contains("C 8") ? Colors.white:  Colors.black, // foreground
+                                              ),
+                                              onPressed: () {
+                                                selectedCategory =  <String>[];
+                                                selectedCategory.add("C 8");
+
+                                                stateSetter(() { usersize = 'C 8';
+                                                custom = true;
+                                                size = custom8;
+                                                customprice = customprice8;
+                                                custompriceusd = custom81usd;
+                                                custompriceinr = custom81inr;});
+                                              },          child:
+
+                                            currentUser.country == "India"?  FittedBox(child: Text('$custom8 + ${currentUser.currencysym} $custom81inr',)):
+                                            currentUser.country == "United States"?  FittedBox(child: Text('$custom8 + \u0024 $custom81usd',)):
+                                            currentUser.country == country?FittedBox(child: Text('$custom8 + ${currentUser.currencysym} $custom81inr(\u0024 $custom81usd)',)):
+
+                                            FittedBox(child: Text('$custom8 + ${currentUser.currencysym} $customprice8(\u0024 $custom81usd)',)),
+
+                                            ),
+                                          ),
+                                          custom92==0?Container():   Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child:   ElevatedButton(
+
+                                              style: ElevatedButton.styleFrom(
+
+                                                primary: selectedCategory.contains("C 9") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                                                onPrimary:selectedCategory.contains("C 9") ? Colors.white:  Colors.black, // foreground
+                                              ),
+                                              onPressed: () {
+                                                selectedCategory =  <String>[];
+                                                selectedCategory.add("C 9");
+
+                                                stateSetter(() { usersize = 'C 9';
+                                                custom = true;
+                                                size = custom9;
+                                                customprice = customprice9;
+                                                custompriceusd = custom91usd;
+                                                custompriceinr = custom91inr;});
+                                              },          child:
+
+                                            currentUser.country == "India"?  FittedBox(child: Text('$custom9 + ${currentUser.currencysym} $custom91inr',)):
+                                            currentUser.country == "United States"?  FittedBox(child: Text('$custom9 + \u0024 $custom91usd',)):
+                                            currentUser.country == country?FittedBox(child: Text('$custom9 + ${currentUser.currencysym} $custom91inr(\u0024 $custom91usd)',)):
+
+                                            FittedBox(child: Text('$custom9 + ${currentUser.currencysym} $customprice9(\u0024 $custom91usd)',)),
+
+                                            ),
+                                          ),
+                                          custom102==0?Container():   Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child:   ElevatedButton(
+
+                                              style: ElevatedButton.styleFrom(
+
+                                                primary: selectedCategory.contains("C 10") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                                                onPrimary:selectedCategory.contains("C 10") ? Colors.white:  Colors.black, // foreground
+                                              ),
+                                              onPressed: () {
+                                                selectedCategory =  <String>[];
+                                                selectedCategory.add("C 10");
+
+                                                stateSetter(() { usersize = 'C 10';
+                                                custom = true;
+                                                size = custom10;
+                                                customprice = customprice10;
+                                                custompriceusd = custom101usd;
+                                                custompriceinr = custom101inr;});
+                                              },          child:
+
+                                            currentUser.country == "India"?  FittedBox(child: Text('$custom10 + ${currentUser.currencysym} $custom101inr',)):
+                                            currentUser.country == "United States"?  FittedBox(child: Text('$custom10 + \u0024 $custom101usd',)):
+                                            currentUser.country == country?FittedBox(child: Text('$custom10 + ${currentUser.currencysym} $custom101inr(\u0024 $custom101usd)',)):
+
+                                            FittedBox(child: Text('$custom10 + ${currentUser.currencysym} $customprice10(\u0024 $custom101usd)',)),
+
+                                            ),
+                                          ),
+
+
+                                        ]
+                                    ),
+                                  ),
+                                ),
+
+                                Container(
+                                  height:60.0,
+
+                                  child:   Expanded(
+
+
+
+                                      child:   ListView(
+                                          scrollDirection:Axis.horizontal,
+                                          shrinkWrap:true,
+                                          children:[
+                                            color1==0?Container():   Padding(
+                                              padding: const EdgeInsets.all(8.0),
+                                              child: ElevatedButton(
+
+                                                style: ElevatedButton.styleFrom(
+
+                                                  primary: selectedColor.contains("col 1") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                                                  onPrimary:selectedColor.contains("col 1") ? Colors.white:  Colors.black, // foreground
+                                                ),
+                                                onPressed: () {
+                                                  selectedColor =  <String>[];
+                                                  selectedColor.add("col 1");
+
+                                                  stateSetter(() { color = 'col 1';
+                                                  usercolor = colorText1;});
+                                                },          child: Text(colorText1),
+                                              ),
+                                            ),
+                                            color2==0?Container():   Padding(
+                                              padding: const EdgeInsets.all(8.0),
+                                              child: ElevatedButton(
+
+                                                style: ElevatedButton.styleFrom(
+
+                                                  primary: selectedColor.contains("col 2") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                                                  onPrimary:selectedColor.contains("col 2") ? Colors.white:  Colors.black, // foreground
+                                                ),
+                                                onPressed: () {
+                                                  selectedColor =  <String>[];
+                                                  selectedColor.add("col 2");
+
+                                                  stateSetter(() { color = 'col 2';
+                                                  usercolor = colorText2;});
+                                                },          child: Text(colorText2),
+                                              ),
+                                            ),
+                                            color3==0?Container():   Padding(
+                                              padding: const EdgeInsets.all(8.0),
+                                              child: ElevatedButton(
+
+                                                style: ElevatedButton.styleFrom(
+
+                                                  primary: selectedColor.contains("col 3") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                                                  onPrimary:selectedColor.contains("col 3") ? Colors.white:  Colors.black, // foreground
+                                                ),
+                                                onPressed: () {
+                                                  selectedColor =  <String>[];
+                                                  selectedColor.add("col 3");
+
+                                                  stateSetter(() { color = 'col 3';
+                                                  usercolor = colorText3;});
+                                                },          child: Text(colorText3),
+                                              ),
+                                            ),
+                                            color4==0?Container():   Padding(
+                                              padding: const EdgeInsets.all(8.0),
+                                              child: ElevatedButton(
+
+                                                style: ElevatedButton.styleFrom(
+
+                                                  primary: selectedColor.contains("col 4") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                                                  onPrimary:selectedColor.contains("col 4") ? Colors.white:  Colors.black, // foreground
+                                                ),
+                                                onPressed: () {
+                                                  selectedColor =  <String>[];
+                                                  selectedColor.add("col 4");
+
+                                                  stateSetter(() { color = 'col 4';
+                                                  usercolor = colorText4;});
+                                                },          child: Text(colorText4),
+                                              ),
+                                            ),
+                                            color5==0?Container():   Padding(
+                                              padding: const EdgeInsets.all(8.0),
+                                              child: ElevatedButton(
+
+                                                style: ElevatedButton.styleFrom(
+
+                                                  primary: selectedColor.contains("col 5") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                                                  onPrimary:selectedColor.contains("col 5") ? Colors.white:  Colors.black, // foreground
+                                                ),
+                                                onPressed: () {
+                                                  selectedColor =  <String>[];
+                                                  selectedColor.add("col 5");
+
+                                                  stateSetter(() { color = 'col 5';
+                                                  usercolor = colorText5;});
+                                                },          child: Text(colorText5),
+                                              ),
+                                            ),
+                                            color6==0?Container():   Padding(
+                                              padding: const EdgeInsets.all(8.0),
+                                              child: ElevatedButton(
+
+                                                style: ElevatedButton.styleFrom(
+
+                                                  primary: selectedColor.contains("col 6") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                                                  onPrimary:selectedColor.contains("col 6") ? Colors.white:  Colors.black, // foreground
+                                                ),
+                                                onPressed: () {
+                                                  selectedColor =  <String>[];
+                                                  selectedColor.add("col 6");
+
+                                                  stateSetter(() { color = 'col 6';
+                                                  usercolor = colorText6;});
+                                                },          child: Text(colorText6),
+                                              ),
+                                            ),
+                                            color7==0?Container():   Padding(
+                                              padding: const EdgeInsets.all(8.0),
+                                              child: ElevatedButton(
+
+                                                style: ElevatedButton.styleFrom(
+
+                                                  primary: selectedColor.contains("col 7") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                                                  onPrimary:selectedColor.contains("col 7") ? Colors.white:  Colors.black, // foreground
+                                                ),
+                                                onPressed: () {
+                                                  selectedColor =  <String>[];
+                                                  selectedColor.add("col 7");
+
+                                                  stateSetter(() { color = 'col 7';
+                                                  usercolor = colorText7;});
+                                                },          child: Text(colorText7),
+                                              ),
+                                            ),
+                                            color8==0?Container():   Padding(
+                                              padding: const EdgeInsets.all(8.0),
+                                              child: ElevatedButton(
+
+                                                style: ElevatedButton.styleFrom(
+
+                                                  primary: selectedColor.contains("col 8") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                                                  onPrimary:selectedColor.contains("col 8") ? Colors.white:  Colors.black, // foreground
+                                                ),
+                                                onPressed: () {
+                                                  selectedColor =  <String>[];
+                                                  selectedColor.add("col 8");
+
+                                                  stateSetter(() { color = 'col 8';
+                                                  usercolor = colorText8;});
+                                                },          child: Text(colorText8),
+                                              ),
+                                            ),
+                                            color9==0?Container():   Padding(
+                                              padding: const EdgeInsets.all(8.0),
+                                              child: ElevatedButton(
+
+                                                style: ElevatedButton.styleFrom(
+
+                                                  primary: selectedColor.contains("col 9") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                                                  onPrimary:selectedColor.contains("col 9") ? Colors.white:  Colors.black, // foreground
+                                                ),
+                                                onPressed: () {
+                                                  selectedColor =  <String>[];
+                                                  selectedColor.add("col 9");
+
+                                                  stateSetter(() { color = 'col 9';
+                                                  usercolor = colorText9;});
+                                                },          child: Text(colorText9),
+                                              ),
+                                            ),
+                                            color10==0?Container():   Padding(
+                                              padding: const EdgeInsets.all(8.0),
+                                              child: ElevatedButton(
+
+                                                style: ElevatedButton.styleFrom(
+
+                                                  primary: selectedColor.contains("col 10") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                                                  onPrimary:selectedColor.contains("col 10") ? Colors.white:  Colors.black, // foreground
+                                                ),
+                                                onPressed: () {
+                                                  selectedColor =  <String>[];
+                                                  selectedColor.add("col 10");
+
+                                                  stateSetter(() { color = 'col 10';
+                                                  usercolor = colorText10;});
+                                                },          child: Text(colorText10),
+                                              ),
+                                            ),
+
+                                          ])
+                                  ),
+                                ),
+
+
+                                usersize == "" || color == ""?Container():  Container(
+                                  // alignment:Alignment.centerLeft,
+                                  child: FloatingActionButton.extended(
+                                    backgroundColor: kblue,
+                                    onPressed: () {
+                                      if (currentUser.country == 'India' &&
+                                          currentUser.country == country) {
+                                        Proceedtobuy(
+                                            ship: shipcostinr, shipcostU: shipcostinr);
+                                      } else if (currentUser.country == country) {
+                                        Proceedtobuy(
+                                            ship: shipcostusd, shipcostU: shipcostinr);
+                                      } else {
+                                        Proceedtobuy(ship: shipcostinterusd,
+                                            shipcostU: shipcostuser);
+                                      }
+                                    },
+                                    label: Text(
+                                      'Proceed', style: TextStyle(color: Colors.white),),
+                                  ),
+                                ),
+                              ])
+
+                      );
+                  });
+          }
+      );
     }
     else if (gender == 'Kids-Boys'||gender == 'Kids-Girls') {
+      showModalBottomSheet(
+          context: parentContext,
+          builder: (BuildContext context) {
+            return
+              StatefulBuilder(
+                  builder: (BuildContext ctx, StateSetter stateSetter){
 
-        showModalBottomSheet(
-            backgroundColor: kSecondaryColor,
-            context: parentContext,
-            builder: (BuildContext context) {
-              return
-                Container(
-
-                    child: Column(children:[ Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        OutlinedButton(
-                          child:Text("$usersize"),
-                          onPressed: () {SelectSize(parentContext);  },
-                        ), OutlinedButton(
-                          child:Text("$usercolor"),
-                          onPressed: () {SelectCol();  },
-                        ),
-                      ],
-                    ),
+                    return
                       Container(
-                        // alignment:Alignment.centerLeft,
-                        child:   FloatingActionButton.extended(
-                          backgroundColor: kblue,
-                          onPressed: () {
-                            if( currentUser.country == 'India' && currentUser.country == country){
-                              Proceedtobuy(ship:shipcostinr,shipcostU:shipcostinr);
-                            }  else if( currentUser.country == country){
-                              Proceedtobuy(ship:shipcostusd,shipcostU:shipcostinr);
-                            } else {
-                              Proceedtobuy(ship:shipcostinterusd,shipcostU:shipcostuser);
-                            }
-                          },
-                          label: Text('Proceed',style:TextStyle(color:  Colors.white) ,),
-                        ),
-                      ),
-                    ])
+                          height: 200,
 
-                );
+                          child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
 
-            }
-        );
+                              children: [
+                                Container(
+                                  height:60.0,
+
+                                  child:   Expanded(
+                                    child:   ListView(
+                                        scrollDirection:Axis.horizontal,
+                                        shrinkWrap:true,
+                                        children:[
+
+                                          freesize==0?Container():   Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child: ElevatedButton(
+
+                                              style: ElevatedButton.styleFrom(
+
+                                                primary: selectedCategory.contains("Free Size") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                                                onPrimary:selectedCategory.contains("Free Size") ? Colors.white:  Colors.black, // foreground
+                                              ),
+                                              onPressed: () {
+                                                selectedCategory =  <String>[];
+                                                selectedCategory.add("Free Size");
+
+                                                stateSetter(() {usersize = "Free Size";});
+                                              },          child: Text('Free Size'),
+                                            ),
+                                          ),
+                                          xxxs==0?Container():   Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child: ElevatedButton(
+
+                                              style: ElevatedButton.styleFrom(
+
+                                                primary: selectedCategory.contains("2 Y") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                                                onPrimary:selectedCategory.contains("2 Y") ? Colors.white:  Colors.black, // foreground
+                                              ),
+                                              onPressed: () {
+                                                selectedCategory =  <String>[];
+                                                selectedCategory.add("2 Y");
+
+                                                stateSetter(() {usersize = "2 Y";});
+                                              },          child: Text('2 Y'),
+                                            ),
+                                          ),
+                                          xxs==0?Container():   Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child: ElevatedButton(
+
+                                              style: ElevatedButton.styleFrom(
+
+                                                primary: selectedCategory.contains("3-4 Y") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                                                onPrimary:selectedCategory.contains("3-4 Y") ? Colors.white:  Colors.black, // foreground
+                                              ),
+                                              onPressed: () {
+                                                selectedCategory =  <String>[];
+                                                selectedCategory.add("3-4 Y");
+
+                                                stateSetter(() {usersize = "3-4 Y";});
+                                              },          child: Text('3-4 Y'),
+                                            ),
+                                          ),
+                                          xs==0?Container():   Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child: ElevatedButton(
+
+                                              style: ElevatedButton.styleFrom(
+
+                                                primary: selectedCategory.contains("4-5 Y") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                                                onPrimary:selectedCategory.contains("4-5 Y") ? Colors.white:  Colors.black, // foreground
+                                              ),
+                                              onPressed: () {
+                                                selectedCategory =  <String>[];
+                                                selectedCategory.add("4-5 Y");
+
+                                                stateSetter(() {usersize = "4-5 Y";});
+                                              },          child: Text('4-5 Y'),
+                                            ),
+                                          ),
+                                          s==0?Container():   Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child: ElevatedButton(
+
+                                              style: ElevatedButton.styleFrom(
+
+                                                primary: selectedCategory.contains("5-6 Y") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                                                onPrimary:selectedCategory.contains("5-6 Y") ? Colors.white:  Colors.black, // foreground
+                                              ),
+                                              onPressed: () {
+                                                selectedCategory =  <String>[];
+                                                selectedCategory.add("5-6 Y");
+
+                                                stateSetter(() {usersize = "5-6 Y";});
+                                              },          child: Text('5-6 Y'),
+                                            ),
+                                          ),
+                                          m==0?Container():   Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child: ElevatedButton(
+
+                                              style: ElevatedButton.styleFrom(
+
+                                                primary: selectedCategory.contains("6-7 Y") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                                                onPrimary:selectedCategory.contains("6-7 Y") ? Colors.white:  Colors.black, // foreground
+                                              ),
+                                              onPressed: () {
+                                                selectedCategory =  <String>[];
+                                                selectedCategory.add("6-7 Y");
+
+                                                stateSetter(() {usersize = "6-7 Y";});
+                                              },          child: Text('6-7 Y'),
+                                            ),
+                                          ),
+
+                                          l==0?Container():   Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child: ElevatedButton(
+
+                                              style: ElevatedButton.styleFrom(
+
+                                                primary: selectedCategory.contains("7-8 Y") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                                                onPrimary:selectedCategory.contains("7-8 Y") ? Colors.white:  Colors.black, // foreground
+                                              ),
+                                              onPressed: () {
+                                                selectedCategory =  <String>[];
+                                                selectedCategory.add("7-8 Y");
+
+                                                stateSetter(() {usersize = "7-8 Y";});
+                                              },          child: Text('7-8 Y'),
+                                            ),
+                                          ),
+                                          xl==0?Container():   Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child: ElevatedButton(
+
+                                              style: ElevatedButton.styleFrom(
+
+                                                primary: selectedCategory.contains("8-9 Y") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                                                onPrimary:selectedCategory.contains("8-9 Y") ? Colors.white:  Colors.black, // foreground
+                                              ),
+                                              onPressed: () {
+                                                selectedCategory =  <String>[];
+                                                selectedCategory.add("8-9 Y");
+
+                                                stateSetter(() {usersize = "8-9 Y";});
+                                              },          child: Text('8-9 Y'),
+                                            ),
+                                          ),
+                                          xxl==0?Container():   Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child: ElevatedButton(
+
+                                              style: ElevatedButton.styleFrom(
+
+                                                primary: selectedCategory.contains("9-10 Y") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                                                onPrimary:selectedCategory.contains("9-10 Y") ? Colors.white:  Colors.black, // foreground
+                                              ),
+                                              onPressed: () {
+                                                selectedCategory =  <String>[];
+                                                selectedCategory.add("9-10 Y");
+
+                                                stateSetter(() {usersize = "9-10 Y";});
+                                              },          child: Text('9-10 Y'),
+                                            ),
+                                          ),
+                                          xxxl==0?Container():   Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child: ElevatedButton(
+
+                                              style: ElevatedButton.styleFrom(
+
+                                                primary: selectedCategory.contains("10-11 Y") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                                                onPrimary:selectedCategory.contains("10-11 Y") ? Colors.white:  Colors.black, // foreground
+                                              ),
+                                              onPressed: () {
+                                                selectedCategory =  <String>[];
+                                                selectedCategory.add("10-11 Y");
+
+                                                stateSetter(() {usersize = "10-11 Y";});
+                                              },          child: Text('10-11 Y'),
+                                            ),
+                                          ),
+                                          fourxl==0?Container():   Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child: ElevatedButton(
+
+                                              style: ElevatedButton.styleFrom(
+
+                                                primary: selectedCategory.contains("11-12 Y") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                                                onPrimary:selectedCategory.contains("11-12 Y") ? Colors.white:  Colors.black, // foreground
+                                              ),
+                                              onPressed: () {
+                                                selectedCategory =  <String>[];
+                                                selectedCategory.add("11-12 Y");
+
+                                                stateSetter(() {usersize = "11-12 Y";});
+                                              },          child: Text('11-12 Y'),
+                                            ),
+                                          ),
+
+                                          Shoe1==0?Container():   Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child:   ElevatedButton(
+
+                                              style: ElevatedButton.styleFrom(
+
+                                                primary: selectedCategory.contains("S 2 Y") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                                                onPrimary:selectedCategory.contains("S 2 Y") ? Colors.white:  Colors.black, // foreground
+                                              ),
+                                              onPressed: () {
+                                                selectedCategory =  <String>[];
+                                                selectedCategory.add("S 2 Y");
+
+                                                stateSetter(() {usersize = "S 2 Y";});
+                                              },          child: Text('S 2 Y'),
+                                            ),
+                                          ),
+                                          Shoe2==0?Container():  Padding(
+                                              padding: const EdgeInsets.all(8.0),
+                                              child:   ElevatedButton(
+
+                                                style: ElevatedButton.styleFrom(
+
+                                                  primary: selectedCategory.contains("S 2 ½ Y") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                                                  onPrimary:selectedCategory.contains("S 2 ½ Y") ? Colors.white:  Colors.black, // foreground
+                                                ),
+                                                onPressed: () {
+                                                  selectedCategory =  <String>[];
+                                                  selectedCategory.add("S 2 ½ Y");
+
+                                                  stateSetter(() {usersize = "S 2 ½ Y";});
+                                                },          child: Text('S 2 ½ Y'),
+                                              )),
+                                          Shoe3==0?Container():   Padding(
+                                              padding: const EdgeInsets.all(8.0),
+                                              child:  ElevatedButton(
+
+                                                style: ElevatedButton.styleFrom(
+
+                                                  primary: selectedCategory.contains("S 3 Y") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                                                  onPrimary:selectedCategory.contains("S 3 Y") ? Colors.white:  Colors.black, // foreground
+                                                ),
+                                                onPressed: () {
+                                                  selectedCategory =  <String>[];
+                                                  selectedCategory.add("S 3 Y");
+
+                                                  stateSetter(() {usersize = "S 3 Y";});
+                                                },          child: Text('S 3 Y'),
+                                              )),
+                                          Shoe4==0?Container():  Padding(
+                                              padding: const EdgeInsets.all(8.0),
+                                              child:   ElevatedButton(
+
+                                                style: ElevatedButton.styleFrom(
+
+                                                  primary: selectedCategory.contains("S 3 ½ Y") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                                                  onPrimary:selectedCategory.contains("S 3 ½ Y") ? Colors.white:  Colors.black, // foreground
+                                                ),
+                                                onPressed: () {
+                                                  selectedCategory =  <String>[];
+                                                  selectedCategory.add("S 3 ½ Y");
+
+                                                  stateSetter(() {usersize = "S 3 ½ Y";});
+                                                },          child: Text('S 3 ½ Y'),
+                                              )),
+                                          Shoe5==0?Container():   Padding(
+                                              padding: const EdgeInsets.all(8.0),
+                                              child:  ElevatedButton(
+
+                                                style: ElevatedButton.styleFrom(
+
+                                                  primary: selectedCategory.contains("S 4 Y") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                                                  onPrimary:selectedCategory.contains("S 4 Y") ? Colors.white:  Colors.black, // foreground
+                                                ),
+                                                onPressed: () {
+                                                  selectedCategory =  <String>[];
+                                                  selectedCategory.add("S 4 Y");
+
+                                                  stateSetter(() {usersize = "S 4 Y";});
+                                                },          child: Text('S 4 Y'),
+                                              )),
+
+                                          Shoe6==0?Container():   Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child:   ElevatedButton(
+
+                                              style: ElevatedButton.styleFrom(
+
+                                                primary: selectedCategory.contains("S 5 Y") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                                                onPrimary:selectedCategory.contains("S 5 Y") ? Colors.white:  Colors.black, // foreground
+                                              ),
+                                              onPressed: () {
+                                                selectedCategory =  <String>[];
+                                                selectedCategory.add("S 5 Y");
+
+                                                stateSetter(() {usersize = "S 5 Y";});
+                                              },          child: Text('S 5 Y'),
+                                            ),
+                                          ),
+                                          Shoe7==0?Container():   Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child:   ElevatedButton(
+
+                                              style: ElevatedButton.styleFrom(
+
+                                                primary: selectedCategory.contains("S 6 Y") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                                                onPrimary:selectedCategory.contains("S 6 Y") ? Colors.white:  Colors.black, // foreground
+                                              ),
+                                              onPressed: () {
+                                                selectedCategory =  <String>[];
+                                                selectedCategory.add("S 6 Y");
+
+                                                stateSetter(() {usersize = "S 6 Y";});
+                                              },          child: Text('S 6 Y'),
+                                            ),
+                                          ),
+                                          Shoe8==0?Container():   Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child:   ElevatedButton(
+
+                                              style: ElevatedButton.styleFrom(
+
+                                                primary: selectedCategory.contains("S 7 Y") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                                                onPrimary:selectedCategory.contains("S 7 Y") ? Colors.white:  Colors.black, // foreground
+                                              ),
+                                              onPressed: () {
+                                                selectedCategory =  <String>[];
+                                                selectedCategory.add("S 7 Y");
+
+                                                stateSetter(() {usersize = "S 7 Y";});
+                                              },          child: Text('S 7 Y'),
+                                            ),
+                                          ),
+                                          Shoe9==0?Container():   Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child:   ElevatedButton(
+
+                                              style: ElevatedButton.styleFrom(
+
+                                                primary: selectedCategory.contains("S 8 Y") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                                                onPrimary:selectedCategory.contains("S 8 Y") ? Colors.white:  Colors.black, // foreground
+                                              ),
+                                              onPressed: () {
+                                                selectedCategory =  <String>[];
+                                                selectedCategory.add("S 8 Y");
+
+                                                stateSetter(() {usersize = "S 8 Y";});
+                                              },          child: Text('S 8 Y'),
+                                            ),
+                                          ),
+
+                                          Shoe10==0?Container():   Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child:   ElevatedButton(
+
+                                              style: ElevatedButton.styleFrom(
+
+                                                primary: selectedCategory.contains("S 9 Y") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                                                onPrimary:selectedCategory.contains("S 9 Y") ? Colors.white:  Colors.black, // foreground
+                                              ),
+                                              onPressed: () {
+                                                selectedCategory =  <String>[];
+                                                selectedCategory.add("S 9 Y");
+
+                                                stateSetter(() {usersize = "S 9 Y";});
+                                              },          child: Text('S 9 Y'),
+                                            ),
+                                          ),
+                                          Shoe11==0?Container():   Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child:   ElevatedButton(
+
+                                              style: ElevatedButton.styleFrom(
+
+                                                primary: selectedCategory.contains("S 10 Y") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                                                onPrimary:selectedCategory.contains("S 10 Y") ? Colors.white:  Colors.black, // foreground
+                                              ),
+                                              onPressed: () {
+                                                selectedCategory =  <String>[];
+                                                selectedCategory.add("S 10 Y");
+
+                                                stateSetter(() {usersize = "S 10 Y";});
+                                              },          child: Text('S 10 Y'),
+                                            ),
+                                          ),
+                                          Shoe12==0?Container():   Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child:   ElevatedButton(
+
+                                              style: ElevatedButton.styleFrom(
+
+                                                primary: selectedCategory.contains("S 11 Y") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                                                onPrimary:selectedCategory.contains("S 11 Y") ? Colors.white:  Colors.black, // foreground
+                                              ),
+                                              onPressed: () {
+                                                selectedCategory =  <String>[];
+                                                selectedCategory.add("S 11 Y");
+
+                                                stateSetter(() {usersize = "S 11 Y";});
+                                              },          child: Text('S 11 Y'),
+                                            ),
+                                          ),
+                                          Shoe13==0?Container():   Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child:   ElevatedButton(
+
+                                              style: ElevatedButton.styleFrom(
+
+                                                primary: selectedCategory.contains("S 12 Y") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                                                onPrimary:selectedCategory.contains("S 12 Y") ? Colors.white:  Colors.black, // foreground
+                                              ),
+                                              onPressed: () {
+                                                selectedCategory =  <String>[];
+                                                selectedCategory.add("S 12 Y");
+
+                                                stateSetter(() {usersize = "S 12 Y";});
+                                              },          child: Text('S 12 Y'),
+                                            ),
+                                          ),
+                                          Shoe14==0?Container():   Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child:   ElevatedButton(
+
+
+
+                                              style: ElevatedButton.styleFrom(
+
+
+
+                                                primary: selectedCategory.contains("S 13 Y") ? Colors.black: Colors.white.withOpacity(0.1), // background
+
+                                                onPrimary:selectedCategory.contains("S 13 Y") ? Colors.white:  Colors.black, // foreground
+
+                                              ),
+
+                                              onPressed: () {
+
+                                                selectedCategory =  <String>[];
+
+                                                selectedCategory.add("S 13 Y");
+
+
+
+                                                stateSetter(() {usersize = "S 13 Y";});
+
+                                              },          child: Text('S 13 Y'),
+
+                                            ),
+                                          ),
+
+
+                                          custom12==0?Container():   Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child: ElevatedButton(
+
+                                              style: ElevatedButton.styleFrom(
+
+                                                primary: selectedCategory.contains("C 1") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                                                onPrimary:selectedCategory.contains("C 1") ? Colors.white:  Colors.black, // foreground
+                                              ),
+                                              onPressed: () {
+                                                selectedCategory =  <String>[];
+                                                selectedCategory.add("C 1");
+
+                                                stateSetter(() { usersize = 'C 1';
+                                                custom = true;
+                                                size = custom1;
+                                                customprice = customprice1;
+                                                custompriceusd = custom11usd;
+                                                custompriceinr = custom11inr;});
+                                              },          child:
+                                            currentUser.country == "India"?  FittedBox(child: Text('$custom1 + ${currentUser.currencysym} $custom11inr',)):
+                                            currentUser.country == "United States"?  FittedBox(child: Text('$custom1 + \u0024 $custom11usd',)):
+                                            currentUser.country == country?FittedBox(child: Text('$custom1 + ${currentUser.currencysym} $custom11inr(\u0024 $custom11usd)',)):
+
+                                            FittedBox(child: Text('$custom1 + ${currentUser.currencysym} $customprice1(\u0024 $custom11usd)',)),
+
+                                            ),
+                                          ),
+                                          custom22==0?Container():   Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child:   ElevatedButton(
+
+                                              style: ElevatedButton.styleFrom(
+
+                                                primary: selectedCategory.contains("C 2") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                                                onPrimary:selectedCategory.contains("C 2") ? Colors.white:  Colors.black, // foreground
+                                              ),
+                                              onPressed: () {
+                                                selectedCategory =  <String>[];
+                                                selectedCategory.add("C 2");
+
+                                                stateSetter(() { usersize = 'C 2';
+                                                custom = true;
+                                                size = custom2;
+                                                customprice = customprice2;
+                                                custompriceusd = custom21usd;
+                                                custompriceinr = custom21inr;});
+                                              },          child:
+
+                                            currentUser.country == "India"?  FittedBox(child: Text('$custom2 + ${currentUser.currencysym} $custom21inr',)):
+                                            currentUser.country == "United States"?  FittedBox(child: Text('$custom2 + \u0024 $custom21usd',)):
+                                            currentUser.country == country?FittedBox(child: Text('$custom2 + ${currentUser.currencysym} $custom21inr(\u0024 $custom21usd)',)):
+
+                                            FittedBox(child: Text('$custom2 + ${currentUser.currencysym} $customprice2(\u0024 $custom21usd)',)),
+
+                                            ),
+                                          ),
+                                          custom32==0?Container():   Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child:   ElevatedButton(
+
+                                              style: ElevatedButton.styleFrom(
+
+                                                primary: selectedCategory.contains("C 3") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                                                onPrimary:selectedCategory.contains("C 3") ? Colors.white:  Colors.black, // foreground
+                                              ),
+                                              onPressed: () {
+                                                selectedCategory =  <String>[];
+                                                selectedCategory.add("C 3");
+
+                                                stateSetter(() { usersize = 'C 3';
+                                                custom = true;
+                                                size = custom3;
+                                                customprice = customprice3;
+                                                custompriceusd = custom31usd;
+                                                custompriceinr = custom31inr;});
+                                              },          child:
+
+                                            currentUser.country == "India"?  FittedBox(child: Text('$custom3 + ${currentUser.currencysym} $custom31inr',)):
+                                            currentUser.country == "United States"?  FittedBox(child: Text('$custom3 + \u0024 $custom31usd',)):
+                                            currentUser.country == country?FittedBox(child: Text('$custom3 + ${currentUser.currencysym} $custom31inr(\u0024 $custom31usd)',)):
+
+                                            FittedBox(child: Text('$custom3 + ${currentUser.currencysym} $customprice3(\u0024 $custom31usd)',)),
+
+                                            ),
+                                          ),
+                                          custom42==0?Container():   Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child:   ElevatedButton(
+
+                                              style: ElevatedButton.styleFrom(
+
+                                                primary: selectedCategory.contains("C 4") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                                                onPrimary:selectedCategory.contains("C 4") ? Colors.white:  Colors.black, // foreground
+                                              ),
+                                              onPressed: () {
+                                                selectedCategory =  <String>[];
+                                                selectedCategory.add("C 4");
+
+                                                stateSetter(() { usersize = 'C 4';
+                                                custom = true;
+                                                size = custom4;
+                                                customprice = customprice4;
+                                                custompriceusd = custom41usd;
+                                                custompriceinr = custom41inr;});
+                                              },          child:
+
+                                            currentUser.country == "India"?  FittedBox(child: Text('$custom4 + ${currentUser.currencysym} $custom41inr',)):
+                                            currentUser.country == "United States"?  FittedBox(child: Text('$custom4 + \u0024 $custom41usd',)):
+                                            currentUser.country == country?FittedBox(child: Text('$custom4 + ${currentUser.currencysym} $custom41inr(\u0024 $custom41usd)',)):
+
+                                            FittedBox(child: Text('$custom4 + ${currentUser.currencysym} $customprice4(\u0024 $custom41usd)',)),
+
+                                            ),
+                                          ),
+                                          custom52==0?Container():   Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child:   ElevatedButton(
+
+                                              style: ElevatedButton.styleFrom(
+
+                                                primary: selectedCategory.contains("C 5") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                                                onPrimary:selectedCategory.contains("C 5") ? Colors.white:  Colors.black, // foreground
+                                              ),
+                                              onPressed: () {
+                                                selectedCategory =  <String>[];
+                                                selectedCategory.add("C 5");
+
+                                                stateSetter(() { usersize = 'C 5';
+                                                custom = true;
+                                                size = custom5;
+                                                customprice = customprice5;
+                                                custompriceusd = custom51usd;
+                                                custompriceinr = custom51inr;});
+                                              },          child:
+
+                                            currentUser.country == "India"?  FittedBox(child: Text('$custom5 + ${currentUser.currencysym} $custom51inr',)):
+                                            currentUser.country == "United States"?  FittedBox(child: Text('$custom5 + \u0024 $custom51usd',)):
+                                            currentUser.country == country?FittedBox(child: Text('$custom5 + ${currentUser.currencysym} $custom51inr(\u0024 $custom51usd)',)):
+
+                                            FittedBox(child: Text('$custom5 + ${currentUser.currencysym} $customprice5(\u0024 $custom51usd)',)),
+
+                                            ),
+                                          ),
+                                          custom62==0?Container():   Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child:   ElevatedButton(
+
+                                              style: ElevatedButton.styleFrom(
+
+                                                primary: selectedCategory.contains("C 6") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                                                onPrimary:selectedCategory.contains("C 6") ? Colors.white:  Colors.black, // foreground
+                                              ),
+                                              onPressed: () {
+                                                selectedCategory =  <String>[];
+                                                selectedCategory.add("C 6");
+
+                                                stateSetter(() { usersize = 'C 6';
+                                                custom = true;
+                                                size = custom6;
+                                                customprice = customprice6;
+                                                custompriceusd = custom61usd;
+                                                custompriceinr = custom61inr;});
+                                              },          child:
+
+                                            currentUser.country == "India"?  FittedBox(child: Text('$custom6 + ${currentUser.currencysym} $custom61inr',)):
+                                            currentUser.country == "United States"?  FittedBox(child: Text('$custom6 + \u0024 $custom61usd',)):
+                                            currentUser.country == country?FittedBox(child: Text('$custom6 + ${currentUser.currencysym} $custom61inr(\u0024 $custom61usd)',)):
+
+                                            FittedBox(child: Text('$custom6 + ${currentUser.currencysym} $customprice6(\u0024 $custom61usd)',)),
+
+                                            ),
+                                          ),
+                                          custom72==0?Container():   Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child:   ElevatedButton(
+
+                                              style: ElevatedButton.styleFrom(
+
+                                                primary: selectedCategory.contains("C 7") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                                                onPrimary:selectedCategory.contains("C 7") ? Colors.white:  Colors.black, // foreground
+                                              ),
+                                              onPressed: () {
+                                                selectedCategory =  <String>[];
+                                                selectedCategory.add("C 7");
+
+                                                stateSetter(() { usersize = 'C 7';
+                                                custom = true;
+                                                size = custom7;
+                                                customprice = customprice7;
+                                                custompriceusd = custom71usd;
+                                                custompriceinr = custom71inr;});
+                                              },          child:
+
+                                            currentUser.country == "India"?  FittedBox(child: Text('$custom7 + ${currentUser.currencysym} $custom71inr',)):
+                                            currentUser.country == "United States"?  FittedBox(child: Text('$custom7 + \u0024 $custom71usd',)):
+                                            currentUser.country == country?FittedBox(child: Text('$custom7 + ${currentUser.currencysym} $custom71inr(\u0024 $custom71usd)',)):
+
+                                            FittedBox(child: Text('$custom7 + ${currentUser.currencysym} $customprice7(\u0024 $custom71usd)',)),
+
+                                            ),
+                                          ),
+                                          custom82==0?Container():   Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child:   ElevatedButton(
+
+                                              style: ElevatedButton.styleFrom(
+
+                                                primary: selectedCategory.contains("C 8") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                                                onPrimary:selectedCategory.contains("C 8") ? Colors.white:  Colors.black, // foreground
+                                              ),
+                                              onPressed: () {
+                                                selectedCategory =  <String>[];
+                                                selectedCategory.add("C 8");
+
+                                                stateSetter(() { usersize = 'C 8';
+                                                custom = true;
+                                                size = custom8;
+                                                customprice = customprice8;
+                                                custompriceusd = custom81usd;
+                                                custompriceinr = custom81inr;});
+                                              },          child:
+
+                                            currentUser.country == "India"?  FittedBox(child: Text('$custom8 + ${currentUser.currencysym} $custom81inr',)):
+                                            currentUser.country == "United States"?  FittedBox(child: Text('$custom8 + \u0024 $custom81usd',)):
+                                            currentUser.country == country?FittedBox(child: Text('$custom8 + ${currentUser.currencysym} $custom81inr(\u0024 $custom81usd)',)):
+
+                                            FittedBox(child: Text('$custom8 + ${currentUser.currencysym} $customprice8(\u0024 $custom81usd)',)),
+
+                                            ),
+                                          ),
+                                          custom92==0?Container():   Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child:   ElevatedButton(
+
+                                              style: ElevatedButton.styleFrom(
+
+                                                primary: selectedCategory.contains("C 9") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                                                onPrimary:selectedCategory.contains("C 9") ? Colors.white:  Colors.black, // foreground
+                                              ),
+                                              onPressed: () {
+                                                selectedCategory =  <String>[];
+                                                selectedCategory.add("C 9");
+
+                                                stateSetter(() { usersize = 'C 9';
+                                                custom = true;
+                                                size = custom9;
+                                                customprice = customprice9;
+                                                custompriceusd = custom91usd;
+                                                custompriceinr = custom91inr;});
+                                              },          child:
+
+                                            currentUser.country == "India"?  FittedBox(child: Text('$custom9 + ${currentUser.currencysym} $custom91inr',)):
+                                            currentUser.country == "United States"?  FittedBox(child: Text('$custom9 + \u0024 $custom91usd',)):
+                                            currentUser.country == country?FittedBox(child: Text('$custom9 + ${currentUser.currencysym} $custom91inr(\u0024 $custom91usd)',)):
+
+                                            FittedBox(child: Text('$custom9 + ${currentUser.currencysym} $customprice9(\u0024 $custom91usd)',)),
+
+                                            ),
+                                          ),
+                                          custom102==0?Container():   Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child:   ElevatedButton(
+
+                                              style: ElevatedButton.styleFrom(
+
+                                                primary: selectedCategory.contains("C 10") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                                                onPrimary:selectedCategory.contains("C 10") ? Colors.white:  Colors.black, // foreground
+                                              ),
+                                              onPressed: () {
+                                                selectedCategory =  <String>[];
+                                                selectedCategory.add("C 10");
+
+                                                stateSetter(() { usersize = 'C 10';
+                                                custom = true;
+                                                size = custom10;
+                                                customprice = customprice10;
+                                                custompriceusd = custom101usd;
+                                                custompriceinr = custom101inr;});
+                                              },          child:
+
+                                            currentUser.country == "India"?  FittedBox(child: Text('$custom10 + ${currentUser.currencysym} $custom101inr',)):
+                                            currentUser.country == "United States"?  FittedBox(child: Text('$custom10 + \u0024 $custom101usd',)):
+                                            currentUser.country == country?FittedBox(child: Text('$custom10 + ${currentUser.currencysym} $custom101inr(\u0024 $custom101usd)',)):
+
+                                            FittedBox(child: Text('$custom10 + ${currentUser.currencysym} $customprice10(\u0024 $custom101usd)',)),
+
+                                            ),
+                                          ),
+
+
+                                        ]
+                                    ),
+                                  ),
+                                ),
+
+                                Container(
+                                  height:60.0,
+
+                                  child:   Expanded(
+
+
+
+                                      child:   ListView(
+                                          scrollDirection:Axis.horizontal,
+                                          shrinkWrap:true,
+                                          children:[
+                                            color1==0?Container():   Padding(
+                                              padding: const EdgeInsets.all(8.0),
+                                              child: ElevatedButton(
+
+                                                style: ElevatedButton.styleFrom(
+
+                                                  primary: selectedColor.contains("col 1") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                                                  onPrimary:selectedColor.contains("col 1") ? Colors.white:  Colors.black, // foreground
+                                                ),
+                                                onPressed: () {
+                                                  selectedColor =  <String>[];
+                                                  selectedColor.add("col 1");
+
+                                                  stateSetter(() { color = 'col 1';
+                                                  usercolor = colorText1;});
+                                                },          child: Text(colorText1),
+                                              ),
+                                            ),
+                                            color2==0?Container():   Padding(
+                                              padding: const EdgeInsets.all(8.0),
+                                              child: ElevatedButton(
+
+                                                style: ElevatedButton.styleFrom(
+
+                                                  primary: selectedColor.contains("col 2") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                                                  onPrimary:selectedColor.contains("col 2") ? Colors.white:  Colors.black, // foreground
+                                                ),
+                                                onPressed: () {
+                                                  selectedColor =  <String>[];
+                                                  selectedColor.add("col 2");
+
+                                                  stateSetter(() { color = 'col 2';
+                                                  usercolor = colorText2;});
+                                                },          child: Text(colorText2),
+                                              ),
+                                            ),
+                                            color3==0?Container():   Padding(
+                                              padding: const EdgeInsets.all(8.0),
+                                              child: ElevatedButton(
+
+                                                style: ElevatedButton.styleFrom(
+
+                                                  primary: selectedColor.contains("col 3") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                                                  onPrimary:selectedColor.contains("col 3") ? Colors.white:  Colors.black, // foreground
+                                                ),
+                                                onPressed: () {
+                                                  selectedColor =  <String>[];
+                                                  selectedColor.add("col 3");
+
+                                                  stateSetter(() { color = 'col 3';
+                                                  usercolor = colorText3;});
+                                                },          child: Text(colorText3),
+                                              ),
+                                            ),
+                                            color4==0?Container():   Padding(
+                                              padding: const EdgeInsets.all(8.0),
+                                              child: ElevatedButton(
+
+                                                style: ElevatedButton.styleFrom(
+
+                                                  primary: selectedColor.contains("col 4") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                                                  onPrimary:selectedColor.contains("col 4") ? Colors.white:  Colors.black, // foreground
+                                                ),
+                                                onPressed: () {
+                                                  selectedColor =  <String>[];
+                                                  selectedColor.add("col 4");
+
+                                                  stateSetter(() { color = 'col 4';
+                                                  usercolor = colorText4;});
+                                                },          child: Text(colorText4),
+                                              ),
+                                            ),
+                                            color5==0?Container():   Padding(
+                                              padding: const EdgeInsets.all(8.0),
+                                              child: ElevatedButton(
+
+                                                style: ElevatedButton.styleFrom(
+
+                                                  primary: selectedColor.contains("col 5") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                                                  onPrimary:selectedColor.contains("col 5") ? Colors.white:  Colors.black, // foreground
+                                                ),
+                                                onPressed: () {
+                                                  selectedColor =  <String>[];
+                                                  selectedColor.add("col 5");
+
+                                                  stateSetter(() { color = 'col 5';
+                                                  usercolor = colorText5;});
+                                                },          child: Text(colorText5),
+                                              ),
+                                            ),
+                                            color6==0?Container():   Padding(
+                                              padding: const EdgeInsets.all(8.0),
+                                              child: ElevatedButton(
+
+                                                style: ElevatedButton.styleFrom(
+
+                                                  primary: selectedColor.contains("col 6") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                                                  onPrimary:selectedColor.contains("col 6") ? Colors.white:  Colors.black, // foreground
+                                                ),
+                                                onPressed: () {
+                                                  selectedColor =  <String>[];
+                                                  selectedColor.add("col 6");
+
+                                                  stateSetter(() { color = 'col 6';
+                                                  usercolor = colorText6;});
+                                                },          child: Text(colorText6),
+                                              ),
+                                            ),
+                                            color7==0?Container():   Padding(
+                                              padding: const EdgeInsets.all(8.0),
+                                              child: ElevatedButton(
+
+                                                style: ElevatedButton.styleFrom(
+
+                                                  primary: selectedColor.contains("col 7") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                                                  onPrimary:selectedColor.contains("col 7") ? Colors.white:  Colors.black, // foreground
+                                                ),
+                                                onPressed: () {
+                                                  selectedColor =  <String>[];
+                                                  selectedColor.add("col 7");
+
+                                                  stateSetter(() { color = 'col 7';
+                                                  usercolor = colorText7;});
+                                                },          child: Text(colorText7),
+                                              ),
+                                            ),
+                                            color8==0?Container():   Padding(
+                                              padding: const EdgeInsets.all(8.0),
+                                              child: ElevatedButton(
+
+                                                style: ElevatedButton.styleFrom(
+
+                                                  primary: selectedColor.contains("col 8") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                                                  onPrimary:selectedColor.contains("col 8") ? Colors.white:  Colors.black, // foreground
+                                                ),
+                                                onPressed: () {
+                                                  selectedColor =  <String>[];
+                                                  selectedColor.add("col 8");
+
+                                                  stateSetter(() { color = 'col 8';
+                                                  usercolor = colorText8;});
+                                                },          child: Text(colorText8),
+                                              ),
+                                            ),
+                                            color9==0?Container():   Padding(
+                                              padding: const EdgeInsets.all(8.0),
+                                              child: ElevatedButton(
+
+                                                style: ElevatedButton.styleFrom(
+
+                                                  primary: selectedColor.contains("col 9") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                                                  onPrimary:selectedColor.contains("col 9") ? Colors.white:  Colors.black, // foreground
+                                                ),
+                                                onPressed: () {
+                                                  selectedColor =  <String>[];
+                                                  selectedColor.add("col 9");
+
+                                                  stateSetter(() { color = 'col 9';
+                                                  usercolor = colorText9;});
+                                                },          child: Text(colorText9),
+                                              ),
+                                            ),
+                                            color10==0?Container():   Padding(
+                                              padding: const EdgeInsets.all(8.0),
+                                              child: ElevatedButton(
+
+                                                style: ElevatedButton.styleFrom(
+
+                                                  primary: selectedColor.contains("col 10") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                                                  onPrimary:selectedColor.contains("col 10") ? Colors.white:  Colors.black, // foreground
+                                                ),
+                                                onPressed: () {
+                                                  selectedColor =  <String>[];
+                                                  selectedColor.add("col 10");
+
+                                                  stateSetter(() { color = 'col 10';
+                                                  usercolor = colorText10;});
+                                                },          child: Text(colorText10),
+                                              ),
+                                            ),
+
+                                          ])
+                                  ),
+                                ),
+
+
+                                usersize == "" || color == ""?Container():  Container(
+                                  // alignment:Alignment.centerLeft,
+                                  child: FloatingActionButton.extended(
+                                    backgroundColor: kblue,
+                                    onPressed: () {
+                                      if (currentUser.country == 'India' &&
+                                          currentUser.country == country) {
+                                        Proceedtobuy(
+                                            ship: shipcostinr, shipcostU: shipcostinr);
+                                      } else if (currentUser.country == country) {
+                                        Proceedtobuy(
+                                            ship: shipcostusd, shipcostU: shipcostinr);
+                                      } else {
+                                        Proceedtobuy(ship: shipcostinterusd,
+                                            shipcostU: shipcostuser);
+                                      }
+                                    },
+                                    label: Text(
+                                      'Proceed', style: TextStyle(color: Colors.white),),
+                                  ),
+                                ),
+                              ])
+
+                      );
+                  });
+          }
+      );
     }
     else if (gender == 'Teen-Boys'||gender == 'Teen-Girls') {
 
-        showModalBottomSheet(
-            backgroundColor: kSecondaryColor,
-            context: parentContext,
-            builder: (BuildContext context) {
-              return
-                Container(
+      showModalBottomSheet(
+          context: parentContext,
+          builder: (BuildContext context) {
+            return
+              StatefulBuilder(
+                  builder: (BuildContext ctx, StateSetter stateSetter){
 
-                    child: Column(children:[ Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        OutlinedButton(
-                          child:Text("$usersize"),
-                          onPressed: () {SelectSize(parentContext);  },
-                        ), OutlinedButton(
-                          child:Text("$usercolor"),
-                          onPressed: () {SelectCol();  },
-                        ),
-                      ],
-                    ),
+                    return
                       Container(
-                        // alignment:Alignment.centerLeft,
-                        child:   FloatingActionButton.extended(
-                          backgroundColor: kblue,
-                          onPressed: () {
-                            if( currentUser.country == 'India' && currentUser.country == country){
-                              Proceedtobuy(ship:shipcostinr,shipcostU:shipcostinr);
-                            }  else if( currentUser.country == country){
-                              Proceedtobuy(ship:shipcostusd,shipcostU:shipcostinr);
-                            } else {
-                              Proceedtobuy(ship:shipcostinterusd,shipcostU:shipcostuser);
-                            }
-                          },
-                          label: Text('Proceed',style:TextStyle(color:  Colors.white) ,),
-                        ),
-                      ),
-                    ])
+                          height: 200,
 
-                );
+                          child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
 
-            }
-        );
+                              children: [
+                                Container(
+                                  height:60.0,
+
+                                  child:   Expanded(
+                                    child:   ListView(
+                                        scrollDirection:Axis.horizontal,
+                                        shrinkWrap:true,
+                                        children:[
+
+                                          freesize==0?Container():   Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child: ElevatedButton(
+
+                                              style: ElevatedButton.styleFrom(
+
+                                                primary: selectedCategory.contains("Free Size") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                                                onPrimary:selectedCategory.contains("Free Size") ? Colors.white:  Colors.black, // foreground
+                                              ),
+                                              onPressed: () {
+                                                selectedCategory =  <String>[];
+                                                selectedCategory.add("Free Size");
+
+                                                stateSetter(() {usersize = "Free Size";});
+                                              },          child: Text('Free Size'),
+                                            ),
+                                          ),
+                                          xxxs==0?Container():   Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child: ElevatedButton(
+
+                                              style: ElevatedButton.styleFrom(
+
+                                                primary: selectedCategory.contains("13 Y") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                                                onPrimary:selectedCategory.contains("13 Y") ? Colors.white:  Colors.black, // foreground
+                                              ),
+                                              onPressed: () {
+                                                selectedCategory =  <String>[];
+                                                selectedCategory.add("13 Y");
+
+                                                stateSetter(() {usersize = "13 Y";});
+                                              },          child: Text('13 Y'),
+                                            ),
+                                          ),
+                                          xxs==0?Container():   Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child: ElevatedButton(
+
+                                              style: ElevatedButton.styleFrom(
+
+                                                primary: selectedCategory.contains("14 Y") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                                                onPrimary:selectedCategory.contains("14 Y") ? Colors.white:  Colors.black, // foreground
+                                              ),
+                                              onPressed: () {
+                                                selectedCategory =  <String>[];
+                                                selectedCategory.add("14 Y");
+
+                                                stateSetter(() {usersize = "14 Y";});
+                                              },          child: Text('14 Y'),
+                                            ),
+                                          ),
+                                          xs==0?Container():   Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child: ElevatedButton(
+
+                                              style: ElevatedButton.styleFrom(
+
+                                                primary: selectedCategory.contains("15 Y") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                                                onPrimary:selectedCategory.contains("15 Y") ? Colors.white:  Colors.black, // foreground
+                                              ),
+                                              onPressed: () {
+                                                selectedCategory =  <String>[];
+                                                selectedCategory.add("15 Y");
+
+                                                stateSetter(() {usersize = "15 Y";});
+                                              },          child: Text('15 Y'),
+                                            ),
+                                          ),
+                                          s==0?Container():   Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child: ElevatedButton(
+
+                                              style: ElevatedButton.styleFrom(
+
+                                                primary: selectedCategory.contains("16 Y") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                                                onPrimary:selectedCategory.contains("16 Y") ? Colors.white:  Colors.black, // foreground
+                                              ),
+                                              onPressed: () {
+                                                selectedCategory =  <String>[];
+                                                selectedCategory.add("16 Y");
+
+                                                stateSetter(() {usersize = "16 Y";});
+                                              },          child: Text('16 Y'),
+                                            ),
+                                          ),
+
+                                          Shoe1==0?Container():   Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child:   ElevatedButton(
+
+                                              style: ElevatedButton.styleFrom(
+
+                                                primary: selectedCategory.contains("S 13 Y") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                                                onPrimary:selectedCategory.contains("S 13 Y") ? Colors.white:  Colors.black, // foreground
+                                              ),
+                                              onPressed: () {
+                                                selectedCategory =  <String>[];
+                                                selectedCategory.add("S 13 Y");
+
+                                                stateSetter(() {usersize = "S 13 Y";});
+                                              },          child: Text('S 13 Y'),
+                                            ),
+                                          ),
+                                          Shoe2==0?Container():  Padding(
+                                              padding: const EdgeInsets.all(8.0),
+                                              child:   ElevatedButton(
+
+                                                style: ElevatedButton.styleFrom(
+
+                                                  primary: selectedCategory.contains("S 14 Y") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                                                  onPrimary:selectedCategory.contains("S 14 Y") ? Colors.white:  Colors.black, // foreground
+                                                ),
+                                                onPressed: () {
+                                                  selectedCategory =  <String>[];
+                                                  selectedCategory.add("S 14 Y");
+
+                                                  stateSetter(() {usersize = "S 14 Y";});
+                                                },          child: Text('S 14 Y'),
+                                              )),
+                                          Shoe3==0?Container():   Padding(
+                                              padding: const EdgeInsets.all(8.0),
+                                              child:  ElevatedButton(
+
+                                                style: ElevatedButton.styleFrom(
+
+                                                  primary: selectedCategory.contains("15 Y") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                                                  onPrimary:selectedCategory.contains("15 Y") ? Colors.white:  Colors.black, // foreground
+                                                ),
+                                                onPressed: () {
+                                                  selectedCategory =  <String>[];
+                                                  selectedCategory.add("15 Y");
+
+                                                  stateSetter(() {usersize = "15 Y";});
+                                                },          child: Text('15 Y'),
+                                              )),
+                                          Shoe4==0?Container():   Padding(
+                                              padding: const EdgeInsets.all(8.0),
+                                              child:  ElevatedButton(
+
+                                                style: ElevatedButton.styleFrom(
+
+                                                  primary: selectedCategory.contains("S 16 Y") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                                                  onPrimary:selectedCategory.contains("S 16 Y") ? Colors.white:  Colors.black, // foreground
+                                                ),
+                                                onPressed: () {
+                                                  selectedCategory =  <String>[];
+                                                  selectedCategory.add("S 16 Y");
+
+                                                  stateSetter(() {usersize = "S 16 Y";});
+                                                },          child: Text('S 16 Y'),
+                                              )),
+
+                                          Ring1==0?Container():   Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child: ElevatedButton(
+
+                                              style: ElevatedButton.styleFrom(
+
+                                                primary: selectedCategory.contains("R 4") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                                                onPrimary:selectedCategory.contains("R 4") ? Colors.white:  Colors.black, // foreground
+                                              ),
+                                              onPressed: () {
+                                                selectedCategory =  <String>[];
+                                                selectedCategory.add("R 4");
+
+                                                stateSetter(() {usersize = "R 4";});
+                                              },          child: Text('(US) 4'),
+                                            ),
+                                          ),
+                                          Ring2==0?Container():   Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child: ElevatedButton(
+
+                                              style: ElevatedButton.styleFrom(
+
+                                                primary: selectedCategory.contains("R 4.5") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                                                onPrimary:selectedCategory.contains("R 4.5") ? Colors.white:  Colors.black, // foreground
+                                              ),
+                                              onPressed: () {
+                                                selectedCategory =  <String>[];
+                                                selectedCategory.add("R 4.5");
+
+                                                stateSetter(() {usersize = "R 4.5";});
+                                              },          child: Text('(US) 4.5'),
+                                            ),
+                                          ),
+
+                                          Ring3==0?Container():   Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child: ElevatedButton(
+
+                                              style: ElevatedButton.styleFrom(
+
+                                                primary: selectedCategory.contains("R 5") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                                                onPrimary:selectedCategory.contains("R 5") ? Colors.white:  Colors.black, // foreground
+                                              ),
+                                              onPressed: () {
+                                                selectedCategory =  <String>[];
+                                                selectedCategory.add("R 5");
+
+                                                stateSetter(() {usersize = "R 5";});
+                                              },          child: Text('(US) 5'),
+                                            ),
+                                          ),
+                                          Ring4==0?Container():   Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child: ElevatedButton(
+
+                                              style: ElevatedButton.styleFrom(
+
+                                                primary: selectedCategory.contains("R 5.5") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                                                onPrimary:selectedCategory.contains("R 5.5") ? Colors.white:  Colors.black, // foreground
+                                              ),
+                                              onPressed: () {
+                                                selectedCategory =  <String>[];
+                                                selectedCategory.add("R 5.5");
+
+                                                stateSetter(() {usersize = "R 5.5";});
+                                              },          child: Text('(US) 5.5'),
+                                            ),
+                                          ),
+                                          Ring5==0?Container():   Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child: ElevatedButton(
+
+                                              style: ElevatedButton.styleFrom(
+
+                                                primary: selectedCategory.contains("R 6") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                                                onPrimary:selectedCategory.contains("R 6") ? Colors.white:  Colors.black, // foreground
+                                              ),
+                                              onPressed: () {
+                                                selectedCategory =  <String>[];
+                                                selectedCategory.add("R 6");
+
+                                                stateSetter(() {usersize = "R 6";});
+                                              },          child: Text('(US) 6'),
+                                            ),
+                                          ),
+                                          Ring6==0?Container():   Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child: ElevatedButton(
+
+                                              style: ElevatedButton.styleFrom(
+
+                                                primary: selectedCategory.contains("R 6.5") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                                                onPrimary:selectedCategory.contains("R 6.5") ? Colors.white:  Colors.black, // foreground
+                                              ),
+                                              onPressed: () {
+                                                selectedCategory =  <String>[];
+                                                selectedCategory.add("R 6.5");
+
+                                                stateSetter(() {usersize = "R 6.5";});
+                                              },          child: Text('(US) 6.5'),
+                                            ),
+                                          ),
+                                          Ring7==0?Container():   Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child: ElevatedButton(
+
+                                              style: ElevatedButton.styleFrom(
+
+                                                primary: selectedCategory.contains("R 7") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                                                onPrimary:selectedCategory.contains("R 7") ? Colors.white:  Colors.black, // foreground
+                                              ),
+                                              onPressed: () {
+                                                selectedCategory =  <String>[];
+                                                selectedCategory.add("R 7");
+
+                                                stateSetter(() {usersize = "R 7";});
+                                              },          child: Text('(US) 7'),
+                                            ),
+                                          ),
+                                          Ring8==0?Container():   Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child: ElevatedButton(
+
+                                              style: ElevatedButton.styleFrom(
+
+                                                primary: selectedCategory.contains("R 7.5") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                                                onPrimary:selectedCategory.contains("R 7.5") ? Colors.white:  Colors.black, // foreground
+                                              ),
+                                              onPressed: () {
+                                                selectedCategory =  <String>[];
+                                                selectedCategory.add("R 7.5");
+
+                                                stateSetter(() {usersize = "R 7.5";});
+                                              },          child: Text('(US) 7.5'),
+                                            ),
+                                          ),
+                                          Ring9==0?Container():   Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child: ElevatedButton(
+
+                                              style: ElevatedButton.styleFrom(
+
+                                                primary: selectedCategory.contains("R 8") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                                                onPrimary:selectedCategory.contains("R 8") ? Colors.white:  Colors.black, // foreground
+                                              ),
+                                              onPressed: () {
+                                                selectedCategory =  <String>[];
+                                                selectedCategory.add("R 8");
+
+                                                stateSetter(() {usersize = "R 8";});
+                                              },          child: Text('(US) 8'),
+                                            ),
+                                          ),
+                                          Ring10==0?Container():   Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child: ElevatedButton(
+
+                                              style: ElevatedButton.styleFrom(
+
+                                                primary: selectedCategory.contains("R 8.5") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                                                onPrimary:selectedCategory.contains("R 8.5") ? Colors.white:  Colors.black, // foreground
+                                              ),
+                                              onPressed: () {
+                                                selectedCategory =  <String>[];
+                                                selectedCategory.add("R 8.5");
+
+                                                stateSetter(() {usersize = "R 8.5";});
+                                              },          child: Text('(US) 8.5'),
+                                            ),
+                                          ),
+                                          Ring11==0?Container():   Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child: ElevatedButton(
+
+                                              style: ElevatedButton.styleFrom(
+
+                                                primary: selectedCategory.contains("R 9") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                                                onPrimary:selectedCategory.contains("R 9") ? Colors.white:  Colors.black, // foreground
+                                              ),
+                                              onPressed: () {
+                                                selectedCategory =  <String>[];
+                                                selectedCategory.add("R 9");
+
+                                                stateSetter(() {usersize = "R 9";});
+                                              },          child: Text('(US) 9'),
+                                            ),
+                                          ),
+                                          Ring12==0?Container():   Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child: ElevatedButton(
+
+                                              style: ElevatedButton.styleFrom(
+
+                                                primary: selectedCategory.contains("R 9.5") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                                                onPrimary:selectedCategory.contains("R 9.5") ? Colors.white:  Colors.black, // foreground
+                                              ),
+                                              onPressed: () {
+                                                selectedCategory =  <String>[];
+                                                selectedCategory.add("R 9.5");
+
+                                                stateSetter(() {usersize = "R 9.5";});
+                                              },          child: Text('(US) 9.5'),
+                                            ),
+                                          ),
+                                          Ring13==0?Container():   Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child: ElevatedButton(
+
+                                              style: ElevatedButton.styleFrom(
+
+                                                primary: selectedCategory.contains("R 10") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                                                onPrimary:selectedCategory.contains("R 10") ? Colors.white:  Colors.black, // foreground
+                                              ),
+                                              onPressed: () {
+                                                selectedCategory =  <String>[];
+                                                selectedCategory.add("R 10");
+
+                                                stateSetter(() {usersize = "R 10";});
+                                              },          child: Text('(US) 10'),
+                                            ),
+                                          ),
+                                          Ring14==0?Container():   Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child: ElevatedButton(
+
+                                              style: ElevatedButton.styleFrom(
+
+                                                primary: selectedCategory.contains("R 10.5") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                                                onPrimary:selectedCategory.contains("R 10.5") ? Colors.white:  Colors.black, // foreground
+                                              ),
+                                              onPressed: () {
+                                                selectedCategory =  <String>[];
+                                                selectedCategory.add("R 10.5");
+
+                                                stateSetter(() {usersize = "R 10.5";});
+                                              },          child: Text('(US) 10.5'),
+                                            ),
+                                          ),
+                                          Ring15==0?Container():   Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child: ElevatedButton(
+
+                                              style: ElevatedButton.styleFrom(
+
+                                                primary: selectedCategory.contains("R 11") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                                                onPrimary:selectedCategory.contains("R 11") ? Colors.white:  Colors.black, // foreground
+                                              ),
+                                              onPressed: () {
+                                                selectedCategory =  <String>[];
+                                                selectedCategory.add("R 11");
+
+                                                stateSetter(() {usersize = "R 11";});
+                                              },          child: Text('(US) 11'),
+                                            ),
+                                          ),
+                                          Ring16==0?Container():   Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child: ElevatedButton(
+
+                                              style: ElevatedButton.styleFrom(
+
+                                                primary: selectedCategory.contains("R 11.5") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                                                onPrimary:selectedCategory.contains("R 11.5") ? Colors.white:  Colors.black, // foreground
+                                              ),
+                                              onPressed: () {
+                                                selectedCategory =  <String>[];
+                                                selectedCategory.add("R 11.5");
+
+                                                stateSetter(() {usersize = "R 11.5";});
+                                              },          child: Text('(US) 11.5'),
+                                            ),
+                                          ),
+                                          Ring17==0?Container():   Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child: ElevatedButton(
+
+                                              style: ElevatedButton.styleFrom(
+
+                                                primary: selectedCategory.contains("R 12") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                                                onPrimary:selectedCategory.contains("R 12") ? Colors.white:  Colors.black, // foreground
+                                              ),
+                                              onPressed: () {
+                                                selectedCategory =  <String>[];
+                                                selectedCategory.add("R 12");
+
+                                                stateSetter(() {usersize = "R 12";});
+                                              },          child: Text('(US) 12'),
+                                            ),
+                                          ),
+                                          Ring18==0?Container():   Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child: ElevatedButton(
+
+                                              style: ElevatedButton.styleFrom(
+
+                                                primary: selectedCategory.contains("R 12.5") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                                                onPrimary:selectedCategory.contains("R 12.5") ? Colors.white:  Colors.black, // foreground
+                                              ),
+                                              onPressed: () {
+                                                selectedCategory =  <String>[];
+                                                selectedCategory.add("R 12.5");
+
+                                                stateSetter(() {usersize = "R 12.5";});
+                                              },          child: Text('(US) 12.5'),
+                                            ),
+                                          ),
+                                          Ring19==0?Container():   Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child: ElevatedButton(
+
+                                              style: ElevatedButton.styleFrom(
+
+                                                primary: selectedCategory.contains("R 13") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                                                onPrimary:selectedCategory.contains("R 13") ? Colors.white:  Colors.black, // foreground
+                                              ),
+                                              onPressed: () {
+                                                selectedCategory =  <String>[];
+                                                selectedCategory.add("R 13");
+
+                                                stateSetter(() {usersize = "R 13";});
+                                              },          child: Text('(US) 13'),
+                                            ),
+                                          ),
+                                          Ring20==0?Container():   Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child: ElevatedButton(
+
+                                              style: ElevatedButton.styleFrom(
+
+                                                primary: selectedCategory.contains("R 13.5") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                                                onPrimary:selectedCategory.contains("R 13.5") ? Colors.white:  Colors.black, // foreground
+                                              ),
+                                              onPressed: () {
+                                                selectedCategory =  <String>[];
+                                                selectedCategory.add("R 13.5");
+
+                                                stateSetter(() {usersize = "R 13.5";});
+                                              },          child: Text('(US) 13.5'),
+                                            ),
+                                          ),
+                                          Ring21==0?Container():   Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child: ElevatedButton(
+
+                                              style: ElevatedButton.styleFrom(
+
+                                                primary: selectedCategory.contains("R 14") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                                                onPrimary:selectedCategory.contains("R 14") ? Colors.white:  Colors.black, // foreground
+                                              ),
+                                              onPressed: () {
+                                                selectedCategory =  <String>[];
+                                                selectedCategory.add("R 14");
+
+                                                stateSetter(() {usersize = "R 14";});
+                                              },          child: Text('(US) 14'),
+                                            ),
+                                          ),
+                                          Ring22==0?Container():   Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child: ElevatedButton(
+
+                                              style: ElevatedButton.styleFrom(
+
+                                                primary: selectedCategory.contains("R 14.5") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                                                onPrimary:selectedCategory.contains("R 14.5") ? Colors.white:  Colors.black, // foreground
+                                              ),
+                                              onPressed: () {
+                                                selectedCategory =  <String>[];
+                                                selectedCategory.add("R 14.5");
+
+                                                stateSetter(() {usersize = "R 14.5";});
+                                              },          child: Text('(US) 14.5'),
+                                            ),
+                                          ),
+                                          Ring23==0?Container():   Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child: ElevatedButton(
+
+                                              style: ElevatedButton.styleFrom(
+
+                                                primary: selectedCategory.contains("R 15") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                                                onPrimary:selectedCategory.contains("R 15") ? Colors.white:  Colors.black, // foreground
+                                              ),
+                                              onPressed: () {
+                                                selectedCategory =  <String>[];
+                                                selectedCategory.add("R 15");
+
+                                                stateSetter(() {usersize = "R 15";});
+                                              },          child: Text('(US) 15'),
+                                            ),
+                                          ),
+                                          custom12==0?Container():   Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child: ElevatedButton(
+
+                                              style: ElevatedButton.styleFrom(
+
+                                                primary: selectedCategory.contains("C 1") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                                                onPrimary:selectedCategory.contains("C 1") ? Colors.white:  Colors.black, // foreground
+                                              ),
+                                              onPressed: () {
+                                                selectedCategory =  <String>[];
+                                                selectedCategory.add("C 1");
+
+                                                stateSetter(() { usersize = 'C 1';
+                                                custom = true;
+                                                size = custom1;
+                                                customprice = customprice1;
+                                                custompriceusd = custom11usd;
+                                                custompriceinr = custom11inr;});
+                                              },          child:
+                                            currentUser.country == "India"?  FittedBox(child: Text('$custom1 + ${currentUser.currencysym} $custom11inr',)):
+                                            currentUser.country == "United States"?  FittedBox(child: Text('$custom1 + \u0024 $custom11usd',)):
+                                            currentUser.country == country?FittedBox(child: Text('$custom1 + ${currentUser.currencysym} $custom11inr(\u0024 $custom11usd)',)):
+
+                                            FittedBox(child: Text('$custom1 + ${currentUser.currencysym} $customprice1(\u0024 $custom11usd)',)),
+
+                                            ),
+                                          ),
+                                          custom22==0?Container():   Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child:   ElevatedButton(
+
+                                              style: ElevatedButton.styleFrom(
+
+                                                primary: selectedCategory.contains("C 2") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                                                onPrimary:selectedCategory.contains("C 2") ? Colors.white:  Colors.black, // foreground
+                                              ),
+                                              onPressed: () {
+                                                selectedCategory =  <String>[];
+                                                selectedCategory.add("C 2");
+
+                                                stateSetter(() { usersize = 'C 2';
+                                                custom = true;
+                                                size = custom2;
+                                                customprice = customprice2;
+                                                custompriceusd = custom21usd;
+                                                custompriceinr = custom21inr;});
+                                              },          child:
+
+                                            currentUser.country == "India"?  FittedBox(child: Text('$custom2 + ${currentUser.currencysym} $custom21inr',)):
+                                            currentUser.country == "United States"?  FittedBox(child: Text('$custom2 + \u0024 $custom21usd',)):
+                                            currentUser.country == country?FittedBox(child: Text('$custom2 + ${currentUser.currencysym} $custom21inr(\u0024 $custom21usd)',)):
+
+                                            FittedBox(child: Text('$custom2 + ${currentUser.currencysym} $customprice2(\u0024 $custom21usd)',)),
+
+                                            ),
+                                          ),
+                                          custom32==0?Container():   Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child:   ElevatedButton(
+
+                                              style: ElevatedButton.styleFrom(
+
+                                                primary: selectedCategory.contains("C 3") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                                                onPrimary:selectedCategory.contains("C 3") ? Colors.white:  Colors.black, // foreground
+                                              ),
+                                              onPressed: () {
+                                                selectedCategory =  <String>[];
+                                                selectedCategory.add("C 3");
+
+                                                stateSetter(() { usersize = 'C 3';
+                                                custom = true;
+                                                size = custom3;
+                                                customprice = customprice3;
+                                                custompriceusd = custom31usd;
+                                                custompriceinr = custom31inr;});
+                                              },          child:
+
+                                            currentUser.country == "India"?  FittedBox(child: Text('$custom3 + ${currentUser.currencysym} $custom31inr',)):
+                                            currentUser.country == "United States"?  FittedBox(child: Text('$custom3 + \u0024 $custom31usd',)):
+                                            currentUser.country == country?FittedBox(child: Text('$custom3 + ${currentUser.currencysym} $custom31inr(\u0024 $custom31usd)',)):
+
+                                            FittedBox(child: Text('$custom3 + ${currentUser.currencysym} $customprice3(\u0024 $custom31usd)',)),
+
+                                            ),
+                                          ),
+                                          custom42==0?Container():   Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child:   ElevatedButton(
+
+                                              style: ElevatedButton.styleFrom(
+
+                                                primary: selectedCategory.contains("C 4") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                                                onPrimary:selectedCategory.contains("C 4") ? Colors.white:  Colors.black, // foreground
+                                              ),
+                                              onPressed: () {
+                                                selectedCategory =  <String>[];
+                                                selectedCategory.add("C 4");
+
+                                                stateSetter(() { usersize = 'C 4';
+                                                custom = true;
+                                                size = custom4;
+                                                customprice = customprice4;
+                                                custompriceusd = custom41usd;
+                                                custompriceinr = custom41inr;});
+                                              },          child:
+
+                                            currentUser.country == "India"?  FittedBox(child: Text('$custom4 + ${currentUser.currencysym} $custom41inr',)):
+                                            currentUser.country == "United States"?  FittedBox(child: Text('$custom4 + \u0024 $custom41usd',)):
+                                            currentUser.country == country?FittedBox(child: Text('$custom4 + ${currentUser.currencysym} $custom41inr(\u0024 $custom41usd)',)):
+
+                                            FittedBox(child: Text('$custom4 + ${currentUser.currencysym} $customprice4(\u0024 $custom41usd)',)),
+
+                                            ),
+                                          ),
+                                          custom52==0?Container():   Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child:   ElevatedButton(
+
+                                              style: ElevatedButton.styleFrom(
+
+                                                primary: selectedCategory.contains("C 5") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                                                onPrimary:selectedCategory.contains("C 5") ? Colors.white:  Colors.black, // foreground
+                                              ),
+                                              onPressed: () {
+                                                selectedCategory =  <String>[];
+                                                selectedCategory.add("C 5");
+
+                                                stateSetter(() { usersize = 'C 5';
+                                                custom = true;
+                                                size = custom5;
+                                                customprice = customprice5;
+                                                custompriceusd = custom51usd;
+                                                custompriceinr = custom51inr;});
+                                              },          child:
+
+                                            currentUser.country == "India"?  FittedBox(child: Text('$custom5 + ${currentUser.currencysym} $custom51inr',)):
+                                            currentUser.country == "United States"?  FittedBox(child: Text('$custom5 + \u0024 $custom51usd',)):
+                                            currentUser.country == country?FittedBox(child: Text('$custom5 + ${currentUser.currencysym} $custom51inr(\u0024 $custom51usd)',)):
+
+                                            FittedBox(child: Text('$custom5 + ${currentUser.currencysym} $customprice5(\u0024 $custom51usd)',)),
+
+                                            ),
+                                          ),
+                                          custom62==0?Container():   Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child:   ElevatedButton(
+
+                                              style: ElevatedButton.styleFrom(
+
+                                                primary: selectedCategory.contains("C 6") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                                                onPrimary:selectedCategory.contains("C 6") ? Colors.white:  Colors.black, // foreground
+                                              ),
+                                              onPressed: () {
+                                                selectedCategory =  <String>[];
+                                                selectedCategory.add("C 6");
+
+                                                stateSetter(() { usersize = 'C 6';
+                                                custom = true;
+                                                size = custom6;
+                                                customprice = customprice6;
+                                                custompriceusd = custom61usd;
+                                                custompriceinr = custom61inr;});
+                                              },          child:
+
+                                            currentUser.country == "India"?  FittedBox(child: Text('$custom6 + ${currentUser.currencysym} $custom61inr',)):
+                                            currentUser.country == "United States"?  FittedBox(child: Text('$custom6 + \u0024 $custom61usd',)):
+                                            currentUser.country == country?FittedBox(child: Text('$custom6 + ${currentUser.currencysym} $custom61inr(\u0024 $custom61usd)',)):
+
+                                            FittedBox(child: Text('$custom6 + ${currentUser.currencysym} $customprice6(\u0024 $custom61usd)',)),
+
+                                            ),
+                                          ),
+                                          custom72==0?Container():   Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child:   ElevatedButton(
+
+                                              style: ElevatedButton.styleFrom(
+
+                                                primary: selectedCategory.contains("C 7") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                                                onPrimary:selectedCategory.contains("C 7") ? Colors.white:  Colors.black, // foreground
+                                              ),
+                                              onPressed: () {
+                                                selectedCategory =  <String>[];
+                                                selectedCategory.add("C 7");
+
+                                                stateSetter(() { usersize = 'C 7';
+                                                custom = true;
+                                                size = custom7;
+                                                customprice = customprice7;
+                                                custompriceusd = custom71usd;
+                                                custompriceinr = custom71inr;});
+                                              },          child:
+
+                                            currentUser.country == "India"?  FittedBox(child: Text('$custom7 + ${currentUser.currencysym} $custom71inr',)):
+                                            currentUser.country == "United States"?  FittedBox(child: Text('$custom7 + \u0024 $custom71usd',)):
+                                            currentUser.country == country?FittedBox(child: Text('$custom7 + ${currentUser.currencysym} $custom71inr(\u0024 $custom71usd)',)):
+
+                                            FittedBox(child: Text('$custom7 + ${currentUser.currencysym} $customprice7(\u0024 $custom71usd)',)),
+
+                                            ),
+                                          ),
+                                          custom82==0?Container():   Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child:   ElevatedButton(
+
+                                              style: ElevatedButton.styleFrom(
+
+                                                primary: selectedCategory.contains("C 8") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                                                onPrimary:selectedCategory.contains("C 8") ? Colors.white:  Colors.black, // foreground
+                                              ),
+                                              onPressed: () {
+                                                selectedCategory =  <String>[];
+                                                selectedCategory.add("C 8");
+
+                                                stateSetter(() { usersize = 'C 8';
+                                                custom = true;
+                                                size = custom8;
+                                                customprice = customprice8;
+                                                custompriceusd = custom81usd;
+                                                custompriceinr = custom81inr;});
+                                              },          child:
+
+                                            currentUser.country == "India"?  FittedBox(child: Text('$custom8 + ${currentUser.currencysym} $custom81inr',)):
+                                            currentUser.country == "United States"?  FittedBox(child: Text('$custom8 + \u0024 $custom81usd',)):
+                                            currentUser.country == country?FittedBox(child: Text('$custom8 + ${currentUser.currencysym} $custom81inr(\u0024 $custom81usd)',)):
+
+                                            FittedBox(child: Text('$custom8 + ${currentUser.currencysym} $customprice8(\u0024 $custom81usd)',)),
+
+                                            ),
+                                          ),
+                                          custom92==0?Container():   Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child:   ElevatedButton(
+
+                                              style: ElevatedButton.styleFrom(
+
+                                                primary: selectedCategory.contains("C 9") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                                                onPrimary:selectedCategory.contains("C 9") ? Colors.white:  Colors.black, // foreground
+                                              ),
+                                              onPressed: () {
+                                                selectedCategory =  <String>[];
+                                                selectedCategory.add("C 9");
+
+                                                stateSetter(() { usersize = 'C 9';
+                                                custom = true;
+                                                size = custom9;
+                                                customprice = customprice9;
+                                                custompriceusd = custom91usd;
+                                                custompriceinr = custom91inr;});
+                                              },          child:
+
+                                            currentUser.country == "India"?  FittedBox(child: Text('$custom9 + ${currentUser.currencysym} $custom91inr',)):
+                                            currentUser.country == "United States"?  FittedBox(child: Text('$custom9 + \u0024 $custom91usd',)):
+                                            currentUser.country == country?FittedBox(child: Text('$custom9 + ${currentUser.currencysym} $custom91inr(\u0024 $custom91usd)',)):
+
+                                            FittedBox(child: Text('$custom9 + ${currentUser.currencysym} $customprice9(\u0024 $custom91usd)',)),
+
+                                            ),
+                                          ),
+                                          custom102==0?Container():   Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child:   ElevatedButton(
+
+                                              style: ElevatedButton.styleFrom(
+
+                                                primary: selectedCategory.contains("C 10") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                                                onPrimary:selectedCategory.contains("C 10") ? Colors.white:  Colors.black, // foreground
+                                              ),
+                                              onPressed: () {
+                                                selectedCategory =  <String>[];
+                                                selectedCategory.add("C 10");
+
+                                                stateSetter(() { usersize = 'C 10';
+                                                custom = true;
+                                                size = custom10;
+                                                customprice = customprice10;
+                                                custompriceusd = custom101usd;
+                                                custompriceinr = custom101inr;});
+                                              },          child:
+
+                                            currentUser.country == "India"?  FittedBox(child: Text('$custom10 + ${currentUser.currencysym} $custom101inr',)):
+                                            currentUser.country == "United States"?  FittedBox(child: Text('$custom10 + \u0024 $custom101usd',)):
+                                            currentUser.country == country?FittedBox(child: Text('$custom10 + ${currentUser.currencysym} $custom101inr(\u0024 $custom101usd)',)):
+
+                                            FittedBox(child: Text('$custom10 + ${currentUser.currencysym} $customprice10(\u0024 $custom101usd)',)),
+
+                                            ),
+                                          ),
+
+
+                                        ]
+                                    ),
+                                  ),
+                                ),
+
+                                Container(
+                                  height:60.0,
+
+                                  child:   Expanded(
+
+
+
+                                      child:   ListView(
+                                          scrollDirection:Axis.horizontal,
+                                          shrinkWrap:true,
+                                          children:[
+                                            color1==0?Container():   Padding(
+                                              padding: const EdgeInsets.all(8.0),
+                                              child: ElevatedButton(
+
+                                                style: ElevatedButton.styleFrom(
+
+                                                  primary: selectedColor.contains("col 1") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                                                  onPrimary:selectedColor.contains("col 1") ? Colors.white:  Colors.black, // foreground
+                                                ),
+                                                onPressed: () {
+                                                  selectedColor =  <String>[];
+                                                  selectedColor.add("col 1");
+
+                                                  stateSetter(() { color = 'col 1';
+                                                  usercolor = colorText1;});
+                                                },          child: Text(colorText1),
+                                              ),
+                                            ),
+                                            color2==0?Container():   Padding(
+                                              padding: const EdgeInsets.all(8.0),
+                                              child: ElevatedButton(
+
+                                                style: ElevatedButton.styleFrom(
+
+                                                  primary: selectedColor.contains("col 2") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                                                  onPrimary:selectedColor.contains("col 2") ? Colors.white:  Colors.black, // foreground
+                                                ),
+                                                onPressed: () {
+                                                  selectedColor =  <String>[];
+                                                  selectedColor.add("col 2");
+
+                                                  stateSetter(() { color = 'col 2';
+                                                  usercolor = colorText2;});
+                                                },          child: Text(colorText2),
+                                              ),
+                                            ),
+                                            color3==0?Container():   Padding(
+                                              padding: const EdgeInsets.all(8.0),
+                                              child: ElevatedButton(
+
+                                                style: ElevatedButton.styleFrom(
+
+                                                  primary: selectedColor.contains("col 3") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                                                  onPrimary:selectedColor.contains("col 3") ? Colors.white:  Colors.black, // foreground
+                                                ),
+                                                onPressed: () {
+                                                  selectedColor =  <String>[];
+                                                  selectedColor.add("col 3");
+
+                                                  stateSetter(() { color = 'col 3';
+                                                  usercolor = colorText3;});
+                                                },          child: Text(colorText3),
+                                              ),
+                                            ),
+                                            color4==0?Container():   Padding(
+                                              padding: const EdgeInsets.all(8.0),
+                                              child: ElevatedButton(
+
+                                                style: ElevatedButton.styleFrom(
+
+                                                  primary: selectedColor.contains("col 4") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                                                  onPrimary:selectedColor.contains("col 4") ? Colors.white:  Colors.black, // foreground
+                                                ),
+                                                onPressed: () {
+                                                  selectedColor =  <String>[];
+                                                  selectedColor.add("col 4");
+
+                                                  stateSetter(() { color = 'col 4';
+                                                  usercolor = colorText4;});
+                                                },          child: Text(colorText4),
+                                              ),
+                                            ),
+                                            color5==0?Container():   Padding(
+                                              padding: const EdgeInsets.all(8.0),
+                                              child: ElevatedButton(
+
+                                                style: ElevatedButton.styleFrom(
+
+                                                  primary: selectedColor.contains("col 5") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                                                  onPrimary:selectedColor.contains("col 5") ? Colors.white:  Colors.black, // foreground
+                                                ),
+                                                onPressed: () {
+                                                  selectedColor =  <String>[];
+                                                  selectedColor.add("col 5");
+
+                                                  stateSetter(() { color = 'col 5';
+                                                  usercolor = colorText5;});
+                                                },          child: Text(colorText5),
+                                              ),
+                                            ),
+                                            color6==0?Container():   Padding(
+                                              padding: const EdgeInsets.all(8.0),
+                                              child: ElevatedButton(
+
+                                                style: ElevatedButton.styleFrom(
+
+                                                  primary: selectedColor.contains("col 6") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                                                  onPrimary:selectedColor.contains("col 6") ? Colors.white:  Colors.black, // foreground
+                                                ),
+                                                onPressed: () {
+                                                  selectedColor =  <String>[];
+                                                  selectedColor.add("col 6");
+
+                                                  stateSetter(() { color = 'col 6';
+                                                  usercolor = colorText6;});
+                                                },          child: Text(colorText6),
+                                              ),
+                                            ),
+                                            color7==0?Container():   Padding(
+                                              padding: const EdgeInsets.all(8.0),
+                                              child: ElevatedButton(
+
+                                                style: ElevatedButton.styleFrom(
+
+                                                  primary: selectedColor.contains("col 7") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                                                  onPrimary:selectedColor.contains("col 7") ? Colors.white:  Colors.black, // foreground
+                                                ),
+                                                onPressed: () {
+                                                  selectedColor =  <String>[];
+                                                  selectedColor.add("col 7");
+
+                                                  stateSetter(() { color = 'col 7';
+                                                  usercolor = colorText7;});
+                                                },          child: Text(colorText7),
+                                              ),
+                                            ),
+                                            color8==0?Container():   Padding(
+                                              padding: const EdgeInsets.all(8.0),
+                                              child: ElevatedButton(
+
+                                                style: ElevatedButton.styleFrom(
+
+                                                  primary: selectedColor.contains("col 8") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                                                  onPrimary:selectedColor.contains("col 8") ? Colors.white:  Colors.black, // foreground
+                                                ),
+                                                onPressed: () {
+                                                  selectedColor =  <String>[];
+                                                  selectedColor.add("col 8");
+
+                                                  stateSetter(() { color = 'col 8';
+                                                  usercolor = colorText8;});
+                                                },          child: Text(colorText8),
+                                              ),
+                                            ),
+                                            color9==0?Container():   Padding(
+                                              padding: const EdgeInsets.all(8.0),
+                                              child: ElevatedButton(
+
+                                                style: ElevatedButton.styleFrom(
+
+                                                  primary: selectedColor.contains("col 9") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                                                  onPrimary:selectedColor.contains("col 9") ? Colors.white:  Colors.black, // foreground
+                                                ),
+                                                onPressed: () {
+                                                  selectedColor =  <String>[];
+                                                  selectedColor.add("col 9");
+
+                                                  stateSetter(() { color = 'col 9';
+                                                  usercolor = colorText9;});
+                                                },          child: Text(colorText9),
+                                              ),
+                                            ),
+                                            color10==0?Container():   Padding(
+                                              padding: const EdgeInsets.all(8.0),
+                                              child: ElevatedButton(
+
+                                                style: ElevatedButton.styleFrom(
+
+                                                  primary: selectedColor.contains("col 10") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                                                  onPrimary:selectedColor.contains("col 10") ? Colors.white:  Colors.black, // foreground
+                                                ),
+                                                onPressed: () {
+                                                  selectedColor =  <String>[];
+                                                  selectedColor.add("col 10");
+
+                                                  stateSetter(() { color = 'col 10';
+                                                  usercolor = colorText10;});
+                                                },          child: Text(colorText10),
+                                              ),
+                                            ),
+
+                                          ])
+                                  ),
+                                ),
+
+
+                                usersize == "" || color == ""?Container():  Container(
+                                  // alignment:Alignment.centerLeft,
+                                  child: FloatingActionButton.extended(
+                                    backgroundColor: kblue,
+                                    onPressed: () {
+                                      if (currentUser.country == 'India' &&
+                                          currentUser.country == country) {
+                                        Proceedtobuy(
+                                            ship: shipcostinr, shipcostU: shipcostinr);
+                                      } else if (currentUser.country == country) {
+                                        Proceedtobuy(
+                                            ship: shipcostusd, shipcostU: shipcostinr);
+                                      } else {
+                                        Proceedtobuy(ship: shipcostinterusd,
+                                            shipcostU: shipcostuser);
+                                      }
+                                    },
+                                    label: Text(
+                                      'Proceed', style: TextStyle(color: Colors.white),),
+                                  ),
+                                ),
+                              ])
+
+                      );
+                  });
+          }
+      );
     }
 
 
   }
-SelectSize(parentContext){  return
-  showDialog<void>(
-  context: parentContext,
-  // useRootNavigator:true,
-
-  barrierDismissible: true,
-  // false = user must tap button, true = tap outside dialog
-  builder: (BuildContext dialogContext) {
-    return
-    StatefulBuilder(builder: (context,state){
-
-      return
-      Dialog(
-
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(20),),
-        child: Container(
-            height: 400,
-            child:Column(
-              children: [
-
-          gender == 'Men'? MenSizes():
-                gender == 'Women'? WomenSizes():
-                gender == 'Baby-Boys'||gender == 'Baby-Girls'  ?BabySizes():
-                gender == 'Kids-Boys'||gender == 'Kids-Girls'?  KidSizes():
-                gender == 'Teen-Boys'||gender == 'Teen-Girls'? TeenSizes():Container(),
-              ],
-            )),
-      );});
-  },
-);
-}
   Widget sizeGuide(){
 
     if(gender=='Men'){
@@ -7861,15 +8496,107 @@ posteurope(){
                           fontSize: 24.0,
                         ),
                       ),
-                      subtitle: Text(
-                        "€ $price  ",
+                  subtitle:    currentUser.country == "$country" ?  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+
+                    children: [
+                      Row(
+                        children: [
+                          Text("${currentUser.currencysym} $inr  ",
+                              style: TextStyle(
+                                color: Colors.green,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 20.0,
+                              )),
+                          Text(
+                            "(\u0024 $usd)",
+                            style: TextStyle(
+                              color: Colors.green,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 14.0,
+                            ),
+                          )
+                        ],
+                      ),
+                      Row(
+                        children: [
+                          Text("${currentUser.currency} ",
+                              style: TextStyle(
+                                color: Colors.green,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 10.0,
+                              )
+                          ),
+                        ],
+                      ),
+                     freeship?Container(
+                       color:Colors.white.withOpacity(0.1),
+                      child:   Text(
+                           "FREE SHIPPING",
+                           style: TextStyle(
+                             color: Colors.green,
+                             fontWeight: FontWeight.bold,
+                             fontSize: 14.0,
+                           ),
+                         )
+                     ) :Text(
+                        "+ ${currentUser.currencysym} $shipcostinr",
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 14.0,
+                        ),
+                      )
+                    ],
+                  ):   Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+
+                    children: [
+                      Row(children:[Text(
+                        "${currentUser.currencysym} $price",
                         style: TextStyle(
                           color: Colors.green,
                           fontWeight: FontWeight.bold,
                           fontSize: 20.0,
                         ),
+                      ),Text(
+                        "(\u0024 $usd)",
+                        style: TextStyle(
+                          color: Colors.green,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 14.0,
+                        ),
+                      )]),
+                  Row(
+                    children: [
+                      Text("${currentUser.currency} ",
+                        style: TextStyle(
+                          color: Colors.green,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 10.0,
+                        )
                       ),
-                      trailing: FloatingActionButton(
+                    ],
+                  ),
+                      freeworldship?Container(
+                          color:Colors.white.withOpacity(0.1),
+                          child:   Text(
+                            "FREE SHIPPING",
+                            style: TextStyle(
+                              color: Colors.green,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 14.0,
+                            ),
+                          )
+                      ) :Text(
+                        "+ ${currentUser.currencysym} $shipcostuser(\u0024 $shipcostinterusd)",
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 14.0,
+                        ),
+                      )
+                    ],
+                  ) ,
+                     trailing: FloatingActionButton(
                         heroTag:null,
 
                         onPressed: () => Buynow(parentContext:context),

@@ -161,6 +161,7 @@ flutter:
     - assets/img/fashion show.png
     - assets/img/influence.png
     - assets/img/shop.png
+    - assets/img/RING.jpg
 
   fonts:
     - family: AlteroDCU

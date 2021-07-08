@@ -13875,3 +13875,2831 @@ R23(){
       );
   }
 }
+WS1(){
+
+  if(Shoe1 == 0){
+    return
+      Container();
+  }
+  else{
+    return
+      InkWell(
+        onTap: (){
+          setState(()  {
+
+            usersize = '(US)5';
+          });
+
+
+        },
+        child:   Container(
+          height:50,
+          width:MediaQuery.of(context).size.width,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+//    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
+              FittedBox(child: Text('(US)5',)),
+            ],
+          ),
+        ),
+      );
+  }
+}
+WS2(){
+  if(Shoe2 == 0){
+    return
+      Container();
+  }
+  else{
+    return
+      InkWell(
+        onTap: (){
+          setState(()  {
+
+            usersize = '(US)5-1/2';
+          });
+
+
+        },
+        child:   Container(
+          height:50,
+          width:MediaQuery.of(context).size.width,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+//    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
+              FittedBox(child: Text('(US)5-1/2',)),
+            ],
+          ),
+        ),
+      );
+  }
+}
+WS3(){
+  if(Shoe3 == 0){
+    return
+      Container();
+  }
+  else{
+    return
+      InkWell(
+        onTap: (){
+          setState(()  {
+
+            usersize = '(US)6';
+          });
+
+
+
+        },
+        child:   Container(
+          height:50,
+          width:MediaQuery.of(context).size.width,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+//    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
+              FittedBox(child: Text('(US)6',)),
+            ],
+          ),
+        ),
+      );
+  }
+}
+WS4(){
+  if(Shoe4 == 0){
+    return
+      Container();
+  }
+  else{return
+    InkWell(
+      onTap: (){
+        setState(()  {
+
+          usersize = '(US)6-1/2';
+        });
+
+
+      },
+      child:   Container(
+        height:50,
+        width:MediaQuery.of(context).size.width,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+//    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
+            FittedBox(child: Text('(US)6-1/2',)),
+          ],
+        ),
+      ),
+    );
+  }
+}
+WS5(){
+  if(Shoe5 == 0){
+    return
+      Container();
+  }
+  else{
+    return
+      InkWell(
+        onTap: (){
+          setState(()  {
+
+            usersize = '(US)7';
+          });
+
+
+
+        },
+        child:   Container(
+          height:50,
+          width:MediaQuery.of(context).size.width,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+//    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
+              FittedBox(child: Text('(US)7',)),
+            ],
+          ),
+        ),
+      );
+  }
+}
+WS6(){
+  if(Shoe6 == 0){
+    return
+      Container();
+  }
+  else{
+    return
+      InkWell(
+        onTap: (){
+          setState(()  {
+
+            usersize = '(US)7-1/2';
+          });
+
+
+        },
+        child:   Container(
+          height:50,
+          width:MediaQuery.of(context).size.width,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+//    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
+              FittedBox(child: Text('(US)7-1/2',)),
+            ],
+          ),
+        ),
+      );
+  }
+}
+WS7(){
+
+  if(Shoe7 == 0){
+    return
+      Container();
+  }
+  else{
+    return
+      InkWell(
+        onTap: (){
+          setState(()  {
+
+            usersize = '(US)8';
+          });
+
+
+
+        },
+        child:   Container(
+          height:50,
+          width:MediaQuery.of(context).size.width,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+//    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
+              FittedBox(child: Text('(US)8',)),
+            ],
+          ),
+        ),
+      );
+  }
+}
+WS8(){
+
+  if(Shoe8 == 0){
+    return
+      Container();
+  }
+  else{
+    return
+      InkWell(
+        onTap: (){
+          setState(()  {
+
+            usersize = '(US)8-1/2';
+          });
+
+
+
+        },
+        child:   Container(
+          height:50,
+          width:MediaQuery.of(context).size.width,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+//    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
+              FittedBox(child: Text('(US)8-1/2',)),
+            ],
+          ),
+        ),
+      );
+  }
+}
+WS9(){
+
+  if(Shoe9 == 0){
+    return
+      Container();
+  }
+  else{
+    return
+      InkWell(
+        onTap: (){
+          setState(()  {
+
+            usersize = '(US)9';
+          });
+
+
+
+        },
+        child:   Container(
+          height:50,
+          width:MediaQuery.of(context).size.width,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+//    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
+              FittedBox(child: Text('(US)9',)),
+            ],
+          ),
+        ),
+      );
+  }
+}
+WS10(){
+  if(Shoe10 == 0){
+    return
+      Container();
+  }
+  else{
+    return
+      InkWell(
+        onTap: (){
+          setState(()  {
+
+            usersize = '(US)9-1/2';
+          });
+
+
+
+        },
+        child:   Container(
+          height:50,
+          width:MediaQuery.of(context).size.width,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+//    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
+              FittedBox(child: Text('(US)9-1/2',)),
+            ],
+          ),
+        ),
+      );
+  }
+}
+WS11(){
+  if(Shoe11 == 0){
+    return
+      Container();
+  }
+  else{
+    return
+      InkWell(
+        onTap: (){
+          setState(()  {
+
+            usersize = '(US)10';
+          });
+
+
+        },
+        child:   Container(
+          height:50,
+          width:MediaQuery.of(context).size.width,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+//    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
+              FittedBox(child: Text('(US)10',)),
+            ],
+          ),
+        ),
+      );
+  }
+}
+WS12(){
+  if(Shoe12 == 0){
+    return
+      Container();
+  }
+  else{
+    return
+      InkWell(
+        onTap: (){
+          setState(()  {
+
+            usersize = '(US)10-1/2';
+          });
+
+
+        },
+        child:   Container(
+          height:50,
+          width:MediaQuery.of(context).size.width,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+//    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
+              FittedBox(child: Text('(US)10-1/2',)),
+            ],
+          ),
+        ),
+      );
+  }
+}
+WS13(){
+  if(Shoe13 == 0){
+    return
+      Container();
+  }
+  else{
+    return
+      InkWell(
+        onTap: (){
+          setState(()  {
+
+            usersize = '(US)12';
+          });
+
+
+        },
+        child:   Container(
+          height:50,
+          width:MediaQuery.of(context).size.width,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+//    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
+              FittedBox(child: Text('(US)12',)),
+            ],
+          ),
+        ),
+      );
+  }
+}
+WS14(){
+
+  if(Shoe14 == 0){
+    return
+      Container();
+  }
+  else{
+    return
+      InkWell(
+        onTap: (){
+          setState(()  {
+
+            usersize = '(US)13';
+          });
+
+
+        },
+        child:   Container(
+          height:50,
+          width:MediaQuery.of(context).size.width,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+//    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
+              FittedBox(child: Text('(US)13',)),
+            ],
+          ),
+        ),
+      );
+  }
+}
+WS15(){
+
+  if(Shoe15 == 0){
+    return
+      Container();
+  }
+  else{
+    return
+      InkWell(
+        onTap: (){
+          setState(()  {
+
+            usersize = '14';
+          });
+
+
+        },
+        child:   Container(
+          height:50,
+          width:MediaQuery.of(context).size.width,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+//    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
+              FittedBox(child: Text('(US)14',)),
+            ],
+          ),
+        ),
+      );
+  }
+}
+WS16(){
+
+  if(Shoe16 == 0){
+    return
+      Container();
+  }
+  else{
+    return
+      InkWell(
+        onTap: (){
+          setState(()  {
+
+            usersize = '(US)15-1/2';
+          });
+
+
+        },
+        child:   Container(
+          height:50,
+          width:MediaQuery.of(context).size.width,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+//    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
+              FittedBox(child: Text('(US)15-1/2',)),
+            ],
+          ),
+        ),
+      );
+  }
+}
+mTO(){
+  if(gender=='Men'||gender=='Women'){
+    if(mto==0){
+      return
+        Container();
+    }
+    else{  return
+      ExpansionTile(
+        title: Text('Made-to-order',style:TextStyle(color:kText)),
+        maintainState:true,
+        children: [
+          Column(children:[InkWell(
+            onTap:(){
+              setState(() {
+
+                usersize = 'MTO XXXS';
+
+              });
+
+
+            },
+            child: Container(
+              alignment:Alignment.center,
+              decoration: BoxDecoration(
+                  color: kPrimaryColor,
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey,
+                      blurRadius: 5.0,
+                    ),]
+                  ,borderRadius: BorderRadius.all(Radius.circular(10.0))
+              ),
+              height: 40,
+              child:
+              FittedBox(child: Text('XXXS',style: TextStyle(color: Colors.white),)),
+
+            ),
+
+          ),
+            InkWell(
+              onTap:(){
+                setState(() {
+
+                  usersize = 'MTO XXS';
+                });
+
+
+              },
+              child: Container(
+                alignment:Alignment.center,
+                decoration: BoxDecoration(
+                    color: kPrimaryColor,
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.grey,
+                        blurRadius: 5.0,
+                      ),]
+                    ,borderRadius: BorderRadius.all(Radius.circular(10.0))
+                ),
+                height: 40,
+                child:
+                FittedBox(child: Text('XXS',style: TextStyle(color: Colors.white),)),
+
+              ),
+            ),
+            GestureDetector(
+              onTap:(){
+                setState(() {
+
+                  usersize = 'MTO XS';
+
+                });
+              },
+              child: Container(
+                alignment:Alignment.center,
+                decoration: BoxDecoration(
+                    color: kPrimaryColor,
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.grey,
+                        blurRadius: 5.0,
+                      ),]
+                    ,borderRadius: BorderRadius.all(Radius.circular(10.0))
+                ),
+                height: 40,
+                child:
+                FittedBox(child: Text('XS',style: TextStyle(color: Colors.white),)),
+
+              ),
+            ),
+            GestureDetector(
+              onTap:(){
+                setState(() {
+
+                  usersize = 'MTO S';
+
+                });
+              },
+              child: Container(
+                alignment:Alignment.center,
+                decoration: BoxDecoration(
+                    color: kPrimaryColor,
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.grey,
+                        blurRadius: 5.0,
+                      ),]
+                    ,borderRadius: BorderRadius.all(Radius.circular(10.0))
+                ),
+                height: 40,
+                child:
+                FittedBox(child: Text('S',style: TextStyle(color: Colors.white),)),
+
+              ),
+            ),
+            GestureDetector(
+              onTap:(){
+                setState(() {
+
+                  usersize = 'MTO M';
+
+                });
+              },
+              child: Container(
+                alignment:Alignment.center,
+                decoration: BoxDecoration(
+                    color: kPrimaryColor,
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.grey,
+                        blurRadius: 5.0,
+                      ),]
+                    ,borderRadius: BorderRadius.all(Radius.circular(10.0))
+                ),
+                height: 40,
+                child:
+                FittedBox(child: Text('M',style: TextStyle(color: Colors.white),)),
+
+              ),
+            ),
+            GestureDetector(
+              onTap:(){
+                setState(() {
+
+                  usersize = 'MTO L';
+
+                });
+              },
+              child: Container(
+                alignment:Alignment.center,
+                decoration: BoxDecoration(
+                    color: kPrimaryColor,
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.grey,
+                        blurRadius: 5.0,
+                      ),]
+                    ,borderRadius: BorderRadius.all(Radius.circular(10.0))
+                ),
+                height: 40,
+                child:
+                FittedBox(child: Text('L',style: TextStyle(color: Colors.white),)),
+
+              ),
+            ),
+            GestureDetector(
+              onTap:(){
+                setState(() {
+
+                  usersize = 'MTO XL';
+
+
+                });
+              },
+              child: Container(
+                alignment:Alignment.center,
+                decoration: BoxDecoration(
+                    color: kPrimaryColor,
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.grey,
+                        blurRadius: 5.0,
+                      ),]
+                    ,borderRadius: BorderRadius.all(Radius.circular(10.0))
+                ),
+                height: 40,
+                child:
+                FittedBox(child: Text('XL',style: TextStyle(color: Colors.white),)),
+
+              ),
+            ),
+            GestureDetector(
+              onTap:(){
+                setState(() {
+
+                  usersize = 'MTO XXL';
+
+
+                });
+              },
+              child: Container(
+                alignment:Alignment.center,
+                decoration: BoxDecoration(
+                    color: kPrimaryColor,
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.grey,
+                        blurRadius: 5.0,
+                      ),]
+                    ,borderRadius: BorderRadius.all(Radius.circular(10.0))
+                ),
+                height: 40,
+                child:
+                FittedBox(child: Text('XXL',style: TextStyle(color: Colors.white),)),
+
+              ),
+            ),
+            GestureDetector(
+              onTap:(){
+                setState(() {
+
+                  usersize = 'MTO XXXL';
+
+
+                });
+              },
+              child: Container(
+                alignment:Alignment.center,
+                decoration: BoxDecoration(
+                    color: kPrimaryColor,
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.grey,
+                        blurRadius: 5.0,
+                      ),]
+                    ,borderRadius: BorderRadius.all(Radius.circular(10.0))
+                ),
+                height: 40,
+                child:
+                FittedBox(child: Text('XXXL',style: TextStyle(color: Colors.white),)),
+
+              ),
+            ),
+            GestureDetector(
+              onTap:(){
+                setState(() {
+
+                  usersize = 'MTO 4XL';
+
+
+                });
+              },
+              child: Container(
+                alignment:Alignment.center,
+                decoration: BoxDecoration(
+                    color: kPrimaryColor,
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.grey,
+                        blurRadius: 5.0,
+                      ),]
+                    ,borderRadius: BorderRadius.all(Radius.circular(10.0))
+                ),
+                height: 40,
+                child:
+                FittedBox(child: Text('4XL',style: TextStyle(color: Colors.white),)),
+
+              ),
+            ),
+            GestureDetector(
+              onTap:(){
+                setState(() {
+
+                  usersize = 'MTO 5XL';
+
+
+                });
+              },
+              child: Container(
+                alignment:Alignment.center,
+                decoration: BoxDecoration(
+                    color: kPrimaryColor,
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.grey,
+                        blurRadius: 5.0,
+                      ),]
+                    ,borderRadius: BorderRadius.all(Radius.circular(10.0))
+                ),
+                height: 40,
+                child:
+                FittedBox(child: Text('5XL',style: TextStyle(color: Colors.white),)),
+
+              ),
+            ),
+            GestureDetector(
+              onTap:(){
+                setState(() {
+
+                  usersize = 'MTO 6XL';
+
+                });
+              },
+              child: Container(
+                alignment:Alignment.center,
+                decoration: BoxDecoration(
+                    color: kPrimaryColor,
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.grey,
+                        blurRadius: 5.0,
+                      ),]
+                    ,borderRadius: BorderRadius.all(Radius.circular(10.0))
+                ),
+                height: 40,
+                child:
+                FittedBox(child: Text('6XL',style: TextStyle(color: Colors.white),)),
+
+              ),
+            ),
+            GestureDetector(
+              onTap:(){
+                setState(() {
+
+                  usersize = 'MTO 7XL';
+
+                });
+              },
+              child: Container(
+                alignment:Alignment.center,
+                decoration: BoxDecoration(
+                    color: kPrimaryColor,
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.grey,
+                        blurRadius: 5.0,
+                      ),]
+                    ,borderRadius: BorderRadius.all(Radius.circular(10.0))
+                ),
+                height: 40,
+                child:
+                FittedBox(child: Text('7XL',style: TextStyle(color: Colors.white),)),
+
+              ),
+            ),
+            GestureDetector(
+              onTap:(){
+                setState(() {
+
+                  usersize = 'MTO 8XL';
+
+                });
+              },
+              child: Container(
+                alignment:Alignment.center,
+                decoration: BoxDecoration(
+                    color: kPrimaryColor,
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.grey,
+                        blurRadius: 5.0,
+                      ),]
+                    ,borderRadius: BorderRadius.all(Radius.circular(10.0))
+                ),
+                height: 40,
+                child:
+                FittedBox(child: Text('8XL',style: TextStyle(color: Colors.white),)),
+
+              ),
+            ),
+            Text('________ENDS HERE________',style:TextStyle(color:Colors.red))
+          ]) ,
+        ],
+      );}
+
+  }
+  else if(gender=='Baby-Boys'||gender=='Baby-Girls'){
+    if(mto==0){
+      return
+        Container();
+    }
+    else {
+      return
+        ExpansionTile(
+          title: Text('Made-to-order', style: TextStyle(color: kText)),
+          maintainState: true,
+          children: [Column(children:[
+            GestureDetector(
+              onTap: () {
+                setState(() {
+                  usersize = 'MTO 0-3 M';
+
+
+                });
+              },
+              child: Container(
+                alignment:Alignment.center,
+                decoration: BoxDecoration(
+                    color: kPrimaryColor,
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.grey,
+                        blurRadius: 5.0,
+                      ),]
+                    ,borderRadius: BorderRadius.all(Radius.circular(10.0))
+                ),
+                height: 40,
+                child:
+                FittedBox(child: Text('0-3 M',style: TextStyle(color: Colors.white),)),
+
+              ),
+            ),
+            GestureDetector(
+              onTap: () {
+                setState(() {
+                  usersize = 'MTO 3-6 M';
+
+
+                });
+              },
+              child: Container(
+                alignment:Alignment.center,
+                decoration: BoxDecoration(
+                    color: kPrimaryColor,
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.grey,
+                        blurRadius: 5.0,
+                      ),]
+                    ,borderRadius: BorderRadius.all(Radius.circular(10.0))
+                ),
+                height: 40,
+                child:
+                FittedBox(child: Text('3-6 M',style: TextStyle(color: Colors.white),)),
+
+              ),
+            ),
+            GestureDetector(
+              onTap: () {
+                setState(() {
+                  usersize = 'MTO 6-9 M';
+
+
+                });
+              },
+              child: Container(
+                alignment:Alignment.center,
+                decoration: BoxDecoration(
+                    color: kPrimaryColor,
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.grey,
+                        blurRadius: 5.0,
+                      ),]
+                    ,borderRadius: BorderRadius.all(Radius.circular(10.0))
+                ),
+                height: 40,
+                child:
+                FittedBox(child: Text('6-9 M',style: TextStyle(color: Colors.white),)),
+
+              ),
+            ),
+            GestureDetector(
+              onTap: () {
+                setState(() {
+                  usersize = 'MTO 9-12 M';
+
+
+                });
+              },
+              child: Container(
+                alignment:Alignment.center,
+                decoration: BoxDecoration(
+                    color: kPrimaryColor,
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.grey,
+                        blurRadius: 5.0,
+                      ),]
+                    ,borderRadius: BorderRadius.all(Radius.circular(10.0))
+                ),
+                height: 40,
+                child:
+                FittedBox(child: Text('9-12 M',style: TextStyle(color: Colors.white),)),
+
+              ),
+            ),
+            GestureDetector(
+              onTap: () {
+                setState(() {
+                  usersize = 'MTO 12-18 M';
+
+
+                });
+              },
+              child: Container(
+                alignment:Alignment.center,
+                decoration: BoxDecoration(
+                    color: kPrimaryColor,
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.grey,
+                        blurRadius: 5.0,
+                      ),]
+                    ,borderRadius: BorderRadius.all(Radius.circular(10.0))
+                ),
+                height: 40,
+                child:
+                FittedBox(child: Text('12-18 M',style: TextStyle(color: Colors.white),)),
+
+              ),
+            ),
+            GestureDetector(
+              onTap: () {
+                setState(() {
+                  usersize = 'MTO 18-24 M';
+
+
+                });
+              },
+              child: Container(
+                alignment:Alignment.center,
+                decoration: BoxDecoration(
+                    color: kPrimaryColor,
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.grey,
+                        blurRadius: 5.0,
+                      ),]
+                    ,borderRadius: BorderRadius.all(Radius.circular(10.0))
+                ),
+                height: 40,
+                child:
+                FittedBox(child: Text('18-24 M',style: TextStyle(color: Colors.white),)),
+
+              ),
+            ),
+            Text('________ENDS HERE________',style:TextStyle(color:Colors.red))
+
+          ]),
+          ],
+        );
+    }
+  }
+  else if(gender=='Kids-Boys'||gender=='Kids-Girls'){
+    if(mto==0){
+      return
+        Container();
+    }
+    else {
+      return
+        ExpansionTile(
+          title: Text('Made-to-order', style: TextStyle(color: kText)),
+          maintainState: true,
+          children: [
+            Column(children:[
+              GestureDetector(
+                onTap: () {
+                  setState(() {
+                    usersize = 'MTO 2 Y';
+
+
+                  });
+                },
+                child: Container(
+                  alignment:Alignment.center,
+                  decoration: BoxDecoration(
+                      color: kPrimaryColor,
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey,
+                          blurRadius: 5.0,
+                        ),]
+                      ,borderRadius: BorderRadius.all(Radius.circular(10.0))
+                  ),
+                  height: 40,
+                  child:
+                  FittedBox(child: Text('MTO 2 Y',style: TextStyle(color: Colors.white),)),
+
+                ),
+              ),
+              GestureDetector(
+                onTap: () {
+                  setState(() {
+                    usersize = 'MTO 3-4 Y';
+
+
+                  });
+                },
+                child: Container(
+                  alignment:Alignment.center,
+                  decoration: BoxDecoration(
+                      color: kPrimaryColor,
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey,
+                          blurRadius: 5.0,
+                        ),]
+                      ,borderRadius: BorderRadius.all(Radius.circular(10.0))
+                  ),
+                  height: 40,
+                  child:
+                  FittedBox(child: Text('MTO 3-4 Y',style: TextStyle(color: Colors.white),)),
+
+                ),
+              ),
+              GestureDetector(
+                onTap: () {
+                  setState(() {
+                    usersize = 'MTO 4-5 Y';
+
+
+                  });
+                },
+                child: Container(
+                  alignment:Alignment.center,
+                  decoration: BoxDecoration(
+                      color: kPrimaryColor,
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey,
+                          blurRadius: 5.0,
+                        ),]
+                      ,borderRadius: BorderRadius.all(Radius.circular(10.0))
+                  ),
+                  height: 40,
+                  child:
+                  FittedBox(child: Text('MTO 4-5 Y',style: TextStyle(color: Colors.white),)),
+
+                ),
+              ),
+              GestureDetector(
+                onTap: () {
+                  setState(() {
+                    usersize = 'MTO 5-6 Y';
+
+
+                  });
+                },
+                child: Container(
+                  alignment:Alignment.center,
+                  decoration: BoxDecoration(
+                      color: kPrimaryColor,
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey,
+                          blurRadius: 5.0,
+                        ),]
+                      ,borderRadius: BorderRadius.all(Radius.circular(10.0))
+                  ),
+                  height: 40,
+                  child:
+                  FittedBox(child: Text('MTO 5-6 Y',style: TextStyle(color: Colors.white),)),
+
+                ),
+              ),
+              GestureDetector(
+                onTap: () {
+                  setState(() {
+                    usersize = 'MTO 6-7 Y';
+
+
+                  });
+                },
+                child: Container(
+                  alignment:Alignment.center,
+                  decoration: BoxDecoration(
+                      color: kPrimaryColor,
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey,
+                          blurRadius: 5.0,
+                        ),]
+                      ,borderRadius: BorderRadius.all(Radius.circular(10.0))
+                  ),
+                  height: 40,
+                  child:
+                  FittedBox(child: Text('MTO 6-7 Y',style: TextStyle(color: Colors.white),)),
+
+                ),
+              ),
+              GestureDetector(
+                onTap: () {
+                  setState(() {
+                    usersize = 'MTO 7-8 Y';
+
+
+                  });
+                },
+                child: Container(
+                  alignment:Alignment.center,
+                  decoration: BoxDecoration(
+                      color: kPrimaryColor,
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey,
+                          blurRadius: 5.0,
+                        ),]
+                      ,borderRadius: BorderRadius.all(Radius.circular(10.0))
+                  ),
+                  height: 40,
+                  child:
+                  FittedBox(child: Text('MTO 7-8 Y',style: TextStyle(color: Colors.white),)),
+
+                ),
+              ),
+              GestureDetector(
+                onTap: () {
+                  setState(() {
+                    usersize = 'MTO 8-9 Y';
+
+
+                  });
+                },
+                child: Container(
+                  alignment:Alignment.center,
+                  decoration: BoxDecoration(
+                      color: kPrimaryColor,
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey,
+                          blurRadius: 5.0,
+                        ),]
+                      ,borderRadius: BorderRadius.all(Radius.circular(10.0))
+                  ),
+                  height: 40,
+                  child:
+                  FittedBox(child: Text('MTO 8-9 Y',style: TextStyle(color: Colors.white),)),
+
+                ),
+              ),
+              GestureDetector(
+                onTap: () {
+                  setState(() {
+                    usersize = 'MTO 9-10 Y';
+
+
+                  });
+                },
+                child: Container(
+                  alignment:Alignment.center,
+                  decoration: BoxDecoration(
+                      color: kPrimaryColor,
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey,
+                          blurRadius: 5.0,
+                        ),]
+                      ,borderRadius: BorderRadius.all(Radius.circular(10.0))
+                  ),
+                  height: 40,
+                  child:
+                  FittedBox(child: Text('MTO 9-10 Y',style: TextStyle(color: Colors.white),)),
+
+                ),
+              ),
+              GestureDetector(
+                onTap: () {
+                  setState(() {
+                    usersize = 'MTO 10-11 Y';
+
+
+                  });
+                },
+                child: Container(
+                  alignment:Alignment.center,
+                  decoration: BoxDecoration(
+                      color: kPrimaryColor,
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey,
+                          blurRadius: 5.0,
+                        ),]
+                      ,borderRadius: BorderRadius.all(Radius.circular(10.0))
+                  ),
+                  height: 40,
+                  child:
+                  FittedBox(child: Text('MTO 10-11 Y',style: TextStyle(color: Colors.white),)),
+
+                ),
+              ),
+              GestureDetector(
+                onTap: () {
+                  setState(() {
+                    usersize = 'MTO 11-12 Y';
+
+
+                  });
+                },
+                child: Container(
+                  alignment:Alignment.center,
+                  decoration: BoxDecoration(
+                      color: kPrimaryColor,
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey,
+                          blurRadius: 5.0,
+                        ),]
+                      ,borderRadius: BorderRadius.all(Radius.circular(10.0))
+                  ),
+                  height: 40,
+                  child:
+                  FittedBox(child: Text('MTO 11-12 Y',style: TextStyle(color: Colors.white),)),
+
+                ),
+              ),
+              Text('________ENDS HERE________',style:TextStyle(color:Colors.red))
+            ]),
+          ],
+        );
+    }
+  }
+  else if(gender=='Teen-Boys'||gender=='Teen-Girls'){
+    if(mto == 0){
+      return Container();
+    }
+    else {
+      return
+        ExpansionTile(
+          title: Text('Made-to-order', style: TextStyle(color: kText)),
+          maintainState: true,
+          children: [Column(children:[
+            GestureDetector(
+              onTap: () {
+                setState(() {
+                  usersize = 'MTO 13 Y';
+
+
+                });
+              },
+              child: Container(
+                alignment:Alignment.center,
+                decoration: BoxDecoration(
+                    color: kPrimaryColor,
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.grey,
+                        blurRadius: 5.0,
+                      ),]
+                    ,borderRadius: BorderRadius.all(Radius.circular(10.0))
+                ),
+                height: 40,
+                child:
+                FittedBox(child: Text('MTO 13 Y',style: TextStyle(color: Colors.white),)),
+
+              ),
+            ),
+            GestureDetector(
+              onTap: () {
+                setState(() {
+                  usersize = 'MTO 14 Y';
+
+
+                });
+              },
+              child: Container(
+                alignment:Alignment.center,
+                decoration: BoxDecoration(
+                    color: kPrimaryColor,
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.grey,
+                        blurRadius: 5.0,
+                      ),]
+                    ,borderRadius: BorderRadius.all(Radius.circular(10.0))
+                ),
+                height: 40,
+                child:
+                FittedBox(child: Text('MTO 14 Y',style: TextStyle(color: Colors.white),)),
+
+              ),
+            ),
+            GestureDetector(
+              onTap: () {
+                setState(() {
+                  usersize = 'MTO 15 Y';
+
+
+                });
+              },
+              child: Container(
+                alignment:Alignment.center,
+                decoration: BoxDecoration(
+                    color: kPrimaryColor,
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.grey,
+                        blurRadius: 5.0,
+                      ),]
+                    ,borderRadius: BorderRadius.all(Radius.circular(10.0))
+                ),
+                height: 40,
+                child:
+                FittedBox(child: Text('MTO 15 Y',style: TextStyle(color: Colors.white),)),
+
+              ),
+            ),
+            GestureDetector(
+              onTap: () {
+                setState(() {
+                  usersize = 'MTO 16 Y';
+
+
+                });
+              },
+              child: Container(
+                alignment:Alignment.center,
+                decoration: BoxDecoration(
+                    color: kPrimaryColor,
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.grey,
+                        blurRadius: 5.0,
+                      ),]
+                    ,borderRadius: BorderRadius.all(Radius.circular(10.0))
+                ),
+                height: 40,
+                child:
+                FittedBox(child: Text('MTO 16 Y',style: TextStyle(color: Colors.white),)),
+
+              ),),
+            Text('________ENDS HERE________',style:TextStyle(color:Colors.red))
+
+
+          ]),
+
+          ],
+        );
+    }
+  }
+}
+
+KS1(){
+  if(Shoe1 == 0){
+    return
+      Container();
+  }
+  else{
+    return
+      InkWell(
+        onTap: (){
+          setState(()  {
+
+            usersize = 'S 2 Y';
+          });
+
+
+        },
+        child:   Container(
+          height:50,
+          width:MediaQuery.of(context).size.width,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+//    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
+              FittedBox(child: Text('2 Y',)),
+            ],
+          ),
+        ),
+      );
+  }
+}
+KS2(){
+
+  if(Shoe2 == 0){
+    return
+      Container();
+  }
+  else{
+    return
+      InkWell(
+        onTap: (){
+          setState(()  {
+
+            usersize = 'S 2-1/2 Y';
+          });
+
+
+        },
+        child:   Container(
+          height:50,
+          width:MediaQuery.of(context).size.width,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+//    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
+              FittedBox(child: Text('2-1/2 Y',)),
+            ],
+          ),
+        ),
+      );
+  }
+}
+KS3(){
+
+  if(Shoe3 == 0){
+    return
+      Container();
+  }
+  else{
+    return
+      InkWell(
+        onTap: (){
+          setState(()  {
+
+            usersize = 'S 3 Y';
+          });
+
+
+        },
+        child:   Container(
+          height:50,
+          width:MediaQuery.of(context).size.width,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+//    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
+              FittedBox(child: Text('3 Y',)),
+            ],
+          ),
+        ),
+      );
+  }
+}
+KS4(){
+
+  if(Shoe4 == 0){
+    return
+      Container();
+  }
+  else{
+    return
+      InkWell(
+        onTap: (){
+          setState(()  {
+
+            usersize = 'S 3-1/2 Y';
+          });
+
+
+        },
+        child:   Container(
+          height:50,
+          width:MediaQuery.of(context).size.width,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+//    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
+              FittedBox(child: Text('3-1/2 Y',)),
+            ],
+          ),
+        ),
+      );
+  }
+}
+KS5(){
+  if(Shoe5 == 0){
+    return
+      Container();
+  }
+  else{
+    return
+      InkWell(
+        onTap: (){
+          setState(()  {
+
+            usersize = 'S 4 Y';
+          });
+
+
+        },
+        child:   Container(
+          height:50,
+          width:MediaQuery.of(context).size.width,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+//    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
+              FittedBox(child: Text('4 Y',)),
+            ],
+          ),
+        ),
+      );
+  }
+}
+KS6(){
+
+  if(Shoe6 == 0){
+    return
+      Container();
+  }
+  else{
+    return
+      InkWell(
+        onTap: (){
+          setState(()  {
+
+            usersize = 'S 5 Y';
+          });
+
+
+        },
+        child:   Container(
+          height:50,
+          width:MediaQuery.of(context).size.width,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+//    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
+              FittedBox(child: Text(' 5 Y',)),
+            ],
+          ),
+        ),
+      );
+  }
+}
+KS7(){
+  if(Shoe7 == 0){
+    return
+      Container();
+  }
+  else{
+    return
+      InkWell(
+        onTap: (){
+          setState(()  {
+
+            usersize = 'S 6 Y';
+          });
+
+
+        },
+        child:   Container(
+          height:50,
+          width:MediaQuery.of(context).size.width,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+//    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
+              FittedBox(child: Text('6 Y',)),
+            ],
+          ),
+        ),
+      );
+  }
+}
+KS8(){
+  if(Shoe8 == 0){
+    return
+      Container();
+  }
+  else{
+    return
+      InkWell(
+        onTap: (){
+          setState(()  {
+
+            usersize = 'S 7 Y';
+          });
+
+
+        },
+        child:   Container(
+          height:50,
+          width:MediaQuery.of(context).size.width,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+//    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
+              FittedBox(child: Text('7 Y',)),
+            ],
+          ),
+        ),
+      );
+  }
+}
+KS9(){
+  if(Shoe9 == 0){
+    return
+      Container();
+  }
+  else{
+    return
+      InkWell(
+        onTap: (){
+          setState(()  {
+
+            usersize = 'S 8 Y';
+          });
+
+
+        },
+        child:   Container(
+          height:50,
+          width:MediaQuery.of(context).size.width,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+//    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
+              FittedBox(child: Text('8 Y',)),
+            ],
+          ),
+        ),
+      );
+  }
+}
+KS10(){
+  if(Shoe10 == 0){
+    return
+      Container();
+  }
+  else{
+    return
+      InkWell(
+        onTap: (){
+          setState(()  {
+
+            usersize = 'S 8-1/2 Y';
+          });
+
+
+        },
+        child:   Container(
+          height:50,
+          width:MediaQuery.of(context).size.width,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+//    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
+              FittedBox(child: Text('8-1/2 Y',)),
+            ],
+          ),
+        ),
+      );
+  }
+}
+KS11(){
+
+  if(Shoe11 == 0){
+    return
+      Container();
+  }
+  else{
+    return
+      InkWell(
+        onTap: (){
+          setState(()  {
+
+            usersize = 'S 9 Y';
+          });
+
+
+        },
+        child:   Container(
+          height:50,
+          width:MediaQuery.of(context).size.width,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+//    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
+              FittedBox(child: Text('9 Y',)),
+            ],
+          ),
+        ),
+      );
+  }
+}
+KS12(){
+
+  if(Shoe12 == 0){
+    return
+      Container();
+  }
+  else{
+    return
+      InkWell(
+        onTap: (){
+          setState(()  {
+
+            usersize = 'S 10 Y';
+          });
+
+
+        },
+        child:   Container(
+          height:50,
+          width:MediaQuery.of(context).size.width,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+//    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
+              FittedBox(child: Text('10 Y',)),
+            ],
+          ),
+        ),
+      );
+  }
+}
+KS13(){
+
+  if(Shoe13 == 0){
+    return
+      Container();
+  }
+  else
+  {
+    return
+      InkWell(
+        onTap: (){
+          setState(()  {
+
+            usersize = 'S 11 Y';
+          });
+
+
+        },
+        child:   Container(
+          height:50,
+          width:MediaQuery.of(context).size.width,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+//    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
+              FittedBox(child: Text('11 Y',)),
+            ],
+          ),
+        ),
+      );
+  }
+}
+KS14(){
+
+  if(Shoe14 == 0){
+    return
+      Container();
+  }
+  else{
+    return
+      InkWell(
+        onTap: (){
+          setState(()  {
+
+            usersize = 'S 12 Y';
+          });
+
+
+        },
+        child:   Container(
+          height:50,
+          width:MediaQuery.of(context).size.width,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+//    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
+              FittedBox(child: Text('12 Y',)),
+            ],
+          ),
+        ),
+      );
+  }
+}
+T1(){
+
+  if(xxxs == 0){
+    return
+      Container();
+  }
+  else{
+    return
+      InkWell(
+        onTap: (){
+          setState(()  {
+
+            usersize = '13 Y';
+          });
+
+
+        },
+        child:   Container(
+          height:50,
+          width:MediaQuery.of(context).size.width,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+//    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
+              FittedBox(child: Text('13 Y',)),
+            ],
+          ),
+        ),
+
+
+
+      );
+  }
+}
+T2(){
+
+  if(xxs == 0){
+    return
+      Container();
+  }
+  else{
+    return
+      InkWell(
+        onTap: (){
+          setState(()  {
+
+            usersize = '14 Y';
+          });
+
+
+        },
+        child:
+
+        Container(
+          height:50,
+          width:MediaQuery.of(context).size.width,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+//    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
+              FittedBox(child: Text('14 Y',)),
+            ],
+          ),
+        ),
+
+
+
+      );
+  }
+}
+T3(){
+
+  if(xs == 0){
+    return
+      Container();
+  }
+  else{
+    return
+      InkWell(
+        onTap: (){
+          setState(()  {
+
+            usersize = '15 Y';
+          });
+
+
+        },
+        child:   Container(
+          height:50,
+          width:MediaQuery.of(context).size.width,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+//    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
+              FittedBox(child: Text('15 Y',)),
+            ],
+          ),
+        ),
+      );
+  }
+}
+T4(){
+
+  if(s == 0){
+    return
+      Container();
+  }
+  else{
+    return
+      InkWell(
+        onTap: (){
+          setState(()  {
+
+            usersize = '16 Y';
+          });
+
+
+        },
+        child:   Container(
+          height:50,
+          width:MediaQuery.of(context).size.width,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+//    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
+              FittedBox(child: Text('16 Y',)),
+            ],
+          ),
+        ),
+      );
+  }
+}
+TS1(){
+  if(Shoe1 == 0){
+    return
+      Container();
+  }
+  else{
+    return
+      InkWell(
+        onTap: (){
+          setState(()  {
+
+            usersize = 'S 13 Y';
+          });
+
+
+        },
+        child:   Container(
+          height:50,
+          width:MediaQuery.of(context).size.width,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+//    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
+              FittedBox(child: Text('13 Y',)),
+            ],
+          ),
+        ),
+      );
+  }
+}
+TS2(){
+  if(Shoe2 == 0){
+    return
+      Container();
+  }
+  else{
+    return
+      InkWell(
+        onTap: (){
+          setState(()  {
+
+            usersize = 'S 14 Y';
+          });
+
+
+        },
+        child:   Container(
+          height:50,
+          width:MediaQuery.of(context).size.width,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+//    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
+              FittedBox(child: Text('14 Y',)),
+            ],
+          ),
+        ),
+      );
+  }
+}
+TS3(){
+  if(Shoe3 == 0){
+    return
+      Container();
+  }
+  else{
+
+    return
+      InkWell(
+        onTap: (){
+          setState(()  {
+
+            usersize = 'S 15 Y';
+          });
+
+
+        },
+        child:   Container(
+          height:50,
+          width:MediaQuery.of(context).size.width,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+//    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
+              FittedBox(child: Text('15 Y',)),
+            ],
+          ),
+        ),
+      );
+  }
+}
+TS4(){
+
+  if(Shoe4 == 0){
+    return
+      Container();
+  }
+  else{
+    return
+      InkWell(
+        onTap: (){
+          setState(()  {
+
+            usersize = 'S 16 Y';
+          });
+
+
+        },
+        child:   Container(
+          height:50,
+          width:MediaQuery.of(context).size.width,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+//    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
+              FittedBox(child: Text('16 Y',)),
+            ],
+          ),
+        ),
+      );
+  }
+}
+
+Col1(){
+
+  if(color1 == 0){
+    return
+      Container();
+  }
+  else{
+    return
+      InkWell(
+        onTap: (){
+          setState(()  {
+
+            color = 'col 1';
+            usercolor = colorText1;
+
+          });
+
+
+        },
+        child:   Container(
+          height:50,
+          width:MediaQuery.of(context).size.width,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              FittedBox(child: Text('$colorText1',)),
+            ],
+          ),
+        ),
+      );
+  }
+}
+Col2(){
+
+  if(color2 == 0){
+    return
+      Container();
+  }
+  else{
+    return
+      InkWell(
+        onTap: (){
+          setState(()  {
+
+            color = 'col 2';
+            usercolor = colorText2;
+          });
+
+
+        },
+        child:   Container(
+          height:50,
+          width:MediaQuery.of(context).size.width,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              FittedBox(child: Text('$colorText2',)),
+            ],
+          ),
+        ),
+      );
+  }
+}
+Col3(){
+
+  if(color3 == 0){
+    return
+      Container();
+  }
+  else{
+    return
+      InkWell(
+        onTap: (){
+          setState(()  {
+
+            color = 'col 3';
+            usercolor = colorText3;
+          });
+
+
+        },
+        child:   Container(
+          height:50,
+          width:MediaQuery.of(context).size.width,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              FittedBox(child: Text('$colorText3',)),
+            ],
+          ),
+        ),
+      );
+  }
+}
+Col4(){
+
+  if(color4 == 0){
+    return
+      Container();
+  }
+  else{
+    return
+      InkWell(
+        onTap: (){
+          setState(()  {
+
+            color = 'col 4';
+            usercolor = colorText4;
+          });
+
+
+        },
+        child:   Container(
+          height:50,
+          width:MediaQuery.of(context).size.width,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              FittedBox(child: Text('$colorText4',)),
+            ],
+          ),
+        ),
+      );
+  }
+}
+Col5(){
+
+  if(color5 == 0){
+    return
+      Container();
+  }
+  else{
+    return
+      InkWell(
+        onTap: (){
+          setState(()  {
+
+            color = 'col 5';
+            usercolor = colorText5;
+          });
+
+
+        },
+        child:   Container(
+          height:50,
+          width:MediaQuery.of(context).size.width,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              FittedBox(child: Text('$colorText5',)),
+            ],
+          ),
+        ),
+      );
+  }
+}
+Col6(){
+
+  if(color6 == 0){
+    return
+      Container();
+  }
+  else{
+    return
+      InkWell(
+        onTap: (){
+          setState(()  {
+
+            color = 'col 6';
+            usercolor = colorText6;
+          });
+
+
+        },
+        child:   Container(
+          height:50,
+          width:MediaQuery.of(context).size.width,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              FittedBox(child: Text('$colorText6',)),
+            ],
+          ),
+        ),
+      );
+  }
+}
+Col7(){
+
+  if(color7 == 0){
+    return
+      Container();
+  }
+  else{
+    return
+      InkWell(
+        onTap: (){
+          setState(()  {
+
+            color = 'col 7';
+            usercolor = colorText7;
+          });
+
+
+        },
+        child:   Container(
+          height:50,
+          width:MediaQuery.of(context).size.width,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              FittedBox(child: Text('$colorText7',)),
+            ],
+          ),
+        ),
+      );
+  }
+}
+Col8(){
+
+  if(color8 == 0){
+    return
+      Container();
+  }
+  else{
+    return
+      InkWell(
+        onTap: (){
+          setState(()  {
+
+            color = 'col 8';
+            usercolor = colorText8;
+          });
+
+
+        },
+        child:   Container(
+          height:50,
+          width:MediaQuery.of(context).size.width,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              FittedBox(child: Text('$colorText8',)),
+            ],
+          ),
+        ),
+      );
+  }
+}
+Col9(){
+
+  if(color9 == 0){
+    return
+      Container();
+  }
+  else{
+    return
+      InkWell(
+        onTap: (){
+          setState(()  {
+
+            color = 'col 9';
+            usercolor = colorText9;
+          });
+
+
+        },
+        child:   Container(
+          height:50,
+          width:MediaQuery.of(context).size.width,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              FittedBox(child: Text('$colorText9',)),
+            ],
+          ),
+        ),
+      );
+  }
+}
+Col10(){
+
+  if(color10 == 0){
+    return
+      Container();
+  }
+  else{
+    return
+      InkWell(
+        onTap: (){
+          setState(()  {
+
+            color = 'col 10';
+            usercolor = colorText10;
+          });
+
+
+        },
+        child:   Container(
+          height:50,
+          width:MediaQuery.of(context).size.width,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              FittedBox(child: Text('$colorText10',)),
+            ],
+          ),
+        ),
+      );
+  }
+}
+Cus1(){
+
+  if(custom12 == 0){
+    return
+      Container();
+  }
+  else{
+    return
+      InkWell(
+          onTap: (){
+            setState(()  {
+
+              usersize = '$custom1';
+              customprice = customprice1;
+              custompriceusd = custom11usd;
+              custompriceinr = custom11inr;
+
+            });
+
+
+          },
+          child:   Container(
+            height:50,
+            width:MediaQuery.of(context).size.width,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+
+
+                currentUser.country == "India"?  FittedBox(child: Text('$custom1 + ${currentUser.currencysym} $custom11inr',)):
+                currentUser.country == "United States"?  FittedBox(child: Text('$custom1 + \u0024 $custom11usd',)):
+                currentUser.country == country?FittedBox(child: Text('$custom1 + ${currentUser.currencysym} $custom11inr(\u0024 $custom11usd)',)):
+
+                FittedBox(child: Text('$custom1 + ${currentUser.currencysym} $customprice1(\u0024 $custom11usd)',)),
+
+              ],
+            ),
+          )
+      );
+  }
+}
+Cus2(){
+
+  if(custom22 == 0){
+    return
+      Container();
+  }
+  else{
+    return
+      InkWell(
+          onTap: (){
+            setState(()  {
+
+              usersize = '$custom2';
+              customprice = customprice2;
+              custompriceusd = custom21usd;
+              custompriceinr = custom21inr;
+
+            });
+
+
+          },
+          child:   Container(
+            height:50,
+            width:MediaQuery.of(context).size.width,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+
+
+                currentUser.country == "India"?  FittedBox(child: Text('$custom2 + ${currentUser.currencysym} $custom21inr',)):
+                currentUser.country == "United States"?  FittedBox(child: Text('$custom2 + \u0024 $custom21usd',)):
+                currentUser.country == country?FittedBox(child: Text('$custom2 + ${currentUser.currencysym} $custom21inr(\u0024 $custom21usd)',)):
+
+                FittedBox(child: Text('$custom2 + ${currentUser.currencysym} $customprice2(\u0024 $custom21usd)',)),
+
+              ],
+            ),
+          )
+      );
+  }
+}
+Cus3(){
+
+  if(custom32 == 0){
+    return
+      Container();
+  }
+  else{
+    return
+      InkWell(
+          onTap: (){
+            setState(()  {
+
+              usersize = '$custom3';
+              customprice = customprice3;
+              custompriceusd = custom31usd;
+              custompriceinr = custom31inr;
+
+            });
+
+
+          },
+          child:   Container(
+            height:50,
+            width:MediaQuery.of(context).size.width,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+
+
+                currentUser.country == "India"?  FittedBox(child: Text('$custom3 + ${currentUser.currencysym} $custom31inr',)):
+                currentUser.country == "United States"?  FittedBox(child: Text('$custom3 + \u0024 $custom31usd',)):
+                currentUser.country == country?FittedBox(child: Text('$custom3 + ${currentUser.currencysym} $custom31inr(\u0024 $custom31usd)',)):
+
+                FittedBox(child: Text('$custom3 + ${currentUser.currencysym} $customprice3(\u0024 $custom31usd)',)),
+
+              ],
+            ),
+          )
+      );
+  }
+}
+Cus4(){
+
+  if(custom42 == 0){
+    return
+      Container();
+  }
+  else{
+    return
+      InkWell(
+          onTap: (){
+            setState(()  {
+
+              usersize = '$custom4';
+              customprice = customprice4;
+              custompriceusd = custom41usd;
+              custompriceinr = custom41inr;
+
+            });
+
+
+          },
+          child:   Container(
+            height:50,
+            width:MediaQuery.of(context).size.width,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+
+
+                currentUser.country == "India"?  FittedBox(child: Text('$custom4 + ${currentUser.currencysym} $custom41inr',)):
+                currentUser.country == "United States"?  FittedBox(child: Text('$custom4 + \u0024 $custom41usd',)):
+                currentUser.country == country?FittedBox(child: Text('$custom4 + ${currentUser.currencysym} $custom41inr(\u0024 $custom41usd)',)):
+
+                FittedBox(child: Text('$custom4 + ${currentUser.currencysym} $customprice4(\u0024 $custom41usd)',)),
+
+              ],
+            ),
+          )
+      );
+  }
+}
+Cus5(){
+
+  if(custom52 == 0){
+    return
+      Container();
+  }
+  else{
+    return
+      InkWell(
+          onTap: (){
+            setState(()  {
+
+              usersize = '$custom5';
+              customprice = customprice5;
+              custompriceusd = custom51usd;
+              custompriceinr = custom51inr;
+
+            });
+
+
+          },
+          child:   Container(
+            height:50,
+            width:MediaQuery.of(context).size.width,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+
+
+                currentUser.country == "India"?  FittedBox(child: Text('$custom5 + ${currentUser.currencysym} $custom51inr',)):
+                currentUser.country == "United States"?  FittedBox(child: Text('$custom5 + \u0024 $custom51usd',)):
+                currentUser.country == country?FittedBox(child: Text('$custom5 + ${currentUser.currencysym} $custom51inr(\u0024 $custom51usd)',)):
+
+                FittedBox(child: Text('$custom5 + ${currentUser.currencysym} $customprice5(\u0024 $custom51usd)',)),
+
+              ],
+            ),
+          )
+      );
+  }
+}
+Cus6(){
+
+  if(custom62 == 0){
+    return
+      Container();
+  }
+  else{
+    return
+      InkWell(
+          onTap: (){
+            setState(()  {
+
+              usersize = '$custom6';
+              customprice = customprice6;
+              custompriceusd = custom61usd;
+              custompriceinr = custom61inr;
+
+            });
+
+
+          },
+          child:   Container(
+            height:50,
+            width:MediaQuery.of(context).size.width,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+
+
+                currentUser.country == "India"?  FittedBox(child: Text('$custom6 + ${currentUser.currencysym} $custom61inr',)):
+                currentUser.country == "United States"?  FittedBox(child: Text('$custom6 + \u0024 $custom61usd',)):
+                currentUser.country == country?FittedBox(child: Text('$custom6 + ${currentUser.currencysym} $custom61inr(\u0024 $custom61usd)',)):
+
+                FittedBox(child: Text('$custom6 + ${currentUser.currencysym} $customprice6(\u0024 $custom61usd)',)),
+
+              ],
+            ),
+          )
+      );
+  }
+}
+Cus7(){
+
+  if(custom72 == 0){
+    return
+      Container();
+  }
+  else{
+    return
+      InkWell(
+          onTap: (){
+            setState(()  {
+
+              customprice = customprice7;
+              custompriceusd = custom71usd;
+              custompriceinr = custom71inr;
+
+            });
+
+
+          },
+          child:   Container(
+            height:50,
+            width:MediaQuery.of(context).size.width,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+
+
+                currentUser.country == "India"?  FittedBox(child: Text('$custom7 + ${currentUser.currencysym} $custom71inr',)):
+                currentUser.country == "United States"?  FittedBox(child: Text('$custom7 + \u0024 $custom71usd',)):
+                currentUser.country == country?FittedBox(child: Text('$custom7 + ${currentUser.currencysym} $custom71inr(\u0024 $custom71usd)',)):
+
+                FittedBox(child: Text('$custom7 + ${currentUser.currencysym} $customprice7(\u0024 $custom71usd)',)),
+
+              ],
+            ),
+          )
+      );
+  }
+}
+Cus8(){
+
+  if(custom82 == 0){
+    return
+      Container();
+  }
+  else{
+    return
+      InkWell(
+          onTap: (){
+            setState(()  {
+
+              usersize = '$custom8';
+              customprice = customprice8;
+              custompriceusd = custom81usd;
+              custompriceinr = custom81inr;
+
+            });
+
+
+          },
+          child:   Container(
+            height:50,
+            width:MediaQuery.of(context).size.width,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+
+
+                currentUser.country == "India"?  FittedBox(child: Text('$custom8 + ${currentUser.currencysym} $custom81inr',)):
+                currentUser.country == "United States"?  FittedBox(child: Text('$custom8 + \u0024 $custom81usd',)):
+                currentUser.country == country?FittedBox(child: Text('$custom8 + ${currentUser.currencysym} $custom81inr(\u0024 $custom81usd)',)):
+
+                FittedBox(child: Text('$custom8 + ${currentUser.currencysym} $customprice8(\u0024 $custom81usd)',)),
+
+              ],
+            ),
+          )
+      );
+  }
+}
+Cus9(){
+
+  if(custom92 == 0){
+    return
+      Container();
+  }
+  else{
+    return
+      InkWell(
+          onTap: (){
+            setState(()  {
+
+              usersize = '$custom9';
+              customprice = customprice9;
+              custompriceusd = custom91usd;
+              custompriceinr = custom91inr;
+
+            });
+
+
+          },
+          child:   Container(
+            height:50,
+            width:MediaQuery.of(context).size.width,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+
+
+                currentUser.country == "India"?  FittedBox(child: Text('$custom9 + ${currentUser.currencysym} $custom91inr',)):
+                currentUser.country == "United States"?  FittedBox(child: Text('$custom9 + \u0024 $custom91usd',)):
+                currentUser.country == country?FittedBox(child: Text('$custom9 + ${currentUser.currencysym} $custom91inr(\u0024 $custom91usd)',)):
+
+                FittedBox(child: Text('$custom9 + ${currentUser.currencysym} $customprice9(\u0024 $custom91usd)',)),
+
+              ],
+            ),
+          )
+      );
+  }
+}
+Cus10(){
+
+  if(custom102 == 0){
+    return
+      Container();
+  }
+  else{
+    return
+      InkWell(
+        onTap: (){
+          setState(()  {
+
+            usersize = '$custom10';
+            customprice = customprice10;
+            custompriceusd = custom101usd;
+            custompriceinr = custom101inr;
+
+          });
+
+
+        },
+        child:   Container(
+          height:50,
+          width:MediaQuery.of(context).size.width,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+
+
+              currentUser.country == "India"?  FittedBox(child: Text('$custom10 + ${currentUser.currencysym} $custom101inr',)):
+              currentUser.country == "United States"?  FittedBox(child: Text('$custom10 + \u0024 $custom101usd',)):
+              currentUser.country == country?FittedBox(child: Text('$custom10 + ${currentUser.currencysym} $custom101inr(\u0024 $custom101usd)',)):
+
+              FittedBox(child: Text('$custom10 + ${currentUser.currencysym} $customprice10(\u0024 $custom101usd)',)),
+
+            ],
+          ),
+        ),
+      );
+  }
+}
