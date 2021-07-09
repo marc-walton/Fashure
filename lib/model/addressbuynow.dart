@@ -7,7 +7,7 @@ import 'package:get/get.dart';
 
 import 'package:flutter/material.dart';
 //import 'package:flutter_svg/svg.dart';
-// import 'package:frankfurter/frankfurter.dart';
+import 'package:fashow/size_config.dart';
 import 'package:fashow/user.dart';
 import 'package:fashow/add_address.dart';
 import 'package:flutter/cupertino.dart';
@@ -27,6 +27,9 @@ final String OwnerId;
   final String usd;
   final String inr;
   final String gbp;
+  final bool freeship;
+  final bool freeworldship;
+
   final  String profileimg;
   final    String username;
   final  String mediaUrl;
@@ -121,6 +124,7 @@ final String OwnerId;
     final String customprice;
     final String country;
     final String color;
+ final String displaysize;
 
 
   AddressBuy({
@@ -133,6 +137,7 @@ final String OwnerId;
     this.customprice,
     this.country,
     this.color,
+ this.displaysize,
 
     this.mto,
     this.xxxs,
@@ -182,7 +187,7 @@ final String OwnerId;
     this.custom12, this.custom22, this.custom32, this.custom42, this.custom52,
     this.custom62, this.custom72, this.custom82, this.custom92, this.custom102,
     this.color1, this.color2, this.color3, this.color4, this.color5, this.color6,
-    this.color7, this.color8, this.color9, this.color10, this.colorText, this.mtoText, });
+    this.color7, this.color8, this.color9, this.color10, this.colorText, this.mtoText, this.freeship, this.freeworldship, });
 
   @override
   _AddressBuyState createState() => _AddressBuyState();
@@ -257,9 +262,7 @@ backgroundColor: kPrimaryColor,
       ),
       body:
       Container(
-        decoration: BoxDecoration(
-            gradient: fabGradient
-        ) ,
+
         child: StreamBuilder(
             stream: FirebaseFirestore.instance
                 .collection('Address').doc(currentUser.id)
@@ -392,6 +395,9 @@ backgroundColor: kPrimaryColor,
                         customprice: widget.customprice,
                         country: widget.country,
                         color: widget.color,
+                        freeship:widget.freeship,
+                        freeworldship:widget.freeworldship,
+                        displaysize:widget.displaysize,
 
                         freeSize: widget.freeSize,
                       );
@@ -431,6 +437,8 @@ class addressview extends StatelessWidget {
  final String inr;
  final String gbp;
  final String mtoText;
+final bool freeship;
+final bool freeworldship;
 
  final int xxxs;
  final int xxs;
@@ -525,6 +533,7 @@ class addressview extends StatelessWidget {
  final String customprice;
  final String country;
  final String color;
+final String displaysize;
 
 
 
@@ -535,6 +544,8 @@ class addressview extends StatelessWidget {
   this.inr,
   this.gbp,
   this.freeSize,
+this.displaysize,
+
   this.mto,
   this.xxxs,
   this.xxs,
@@ -589,167 +600,180 @@ class addressview extends StatelessWidget {
    this.color1, this.color2, this.color3, this.color4, this.color5, this.color6,
    this.color7, this.color8, this.color9, this.color10, this.colorText, this.mtoText,
   this.Type,this.productname, this.Fullname, this.Addresss, this.City, this.State, this.Country, this.Zip, this.Dialcode, this.Phone, this.userSize, this.prodId, this.total, this.ownerId, this.profileimg, this.username, this.mediaUrl,
-  this.shipcostusd,  this.customusd, this.custominr, this.shipcost});
+  this.shipcostusd,  this.customusd, this.custominr, this.shipcost, this.freeship, this.freeworldship});
   @override
   Widget build(BuildContext context) {
+    SizeConfig().init(context);
+
     return
 
       Column(
         children:[
 
-          Card(
-            margin: EdgeInsets.all(3.0),
-            shape: RoundedRectangleBorder(
-              borderRadius:BorderRadius.circular(10),
-            ),
-            color:Colors.white,
-            child: Padding(
-              padding:EdgeInsets.only(left: 5.0),
-              child: Row(
-                children: [
-                  new Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                  Text(Type,style:TextStyle(color:kText)),
-                  Text(Fullname,style:TextStyle(color:kText)),
-                  Text('$Addresss,$City,$State,$Country',style:TextStyle(color:kText)),
-                  Text(Zip,style:TextStyle(color:kText)),
-                  Text('$Dialcode,$Phone',style:TextStyle(color:kText)),
-                    GFButton(
-                      onPressed: () async
-                      {
-
-                        adPrefs = await SharedPreferences.getInstance();
-                        await adPrefs.setString('type', Type);
-                        await adPrefs.setString('fullname',Fullname);
-                        await adPrefs.setString('address', Addresss);
-                        await adPrefs.setString('city',City);
-                        await adPrefs.setString('state', State);
-                        await adPrefs.setString('country',Country);
-                        await adPrefs.setString('zip',Zip);
-                        await adPrefs.setString('code',Dialcode);
-                        await adPrefs.setString('phone',Phone);
-                        print('presses');
-                        Get.off(
-                            BuyView(
-                              userSize:userSize,
-                              prodId: prodId,
-                              total:total,
-                              ownerId: ownerId,
-                              eur:eur,
-                              usd:usd,
-                              inr:inr,
-                              gbp:gbp,
-                              profileimg: profileimg,
-                              username: username,
-                              mediaUrl: mediaUrl,
-                              productname:productname,
-                              xxxs: xxxs,
-                              xxs: xxs,
-                              xs: xs,
-                              s: s,
-                              m: m,
-                              l: l,
-                              xl: xl,
-                              xxl: xxl,
-                              xxxl: xxxl,
-                              fourxl: fourxl,
-                              fivexl: fivexl,
-                              sixxl: sevenxl,
-                              eightxl: eightxl,
-                              Shoe1: Shoe1,
-                              Shoe2: Shoe2,
-                              Shoe3: Shoe3,
-                              Shoe4: Shoe4,
-                              Shoe5: Shoe5,
-                              Shoe6: Shoe6,
-                              Shoe7: Shoe7,
-                              Shoe8: Shoe8,
-                              Shoe9: Shoe9,
-                              Shoe10: Shoe10,
-                              Shoe11: Shoe11,
-                              Shoe12: Shoe12,
-                              Shoe13: Shoe13,
-                              Shoe14: Shoe14,
-                              Shoe15: Shoe15,
-                              Shoe16: Shoe16,
-                              Shoe17: Shoe17,
-                              Shoe18: Shoe18,
-                              Shoe19: Shoe19,
-                              Shoe20: Shoe20,
-                              Shoe21: Shoe21,
-                              Ring1: Ring1,
-                              Ring2: Ring2,
-                              Ring3: Ring3,
-                              Ring4: Ring4,
-                              Ring5: Ring5,
-                              Ring6: Ring6,
-                              Ring7: Ring7,
-                              Ring8: Ring8,
-                              Ring9: Ring9,
-                              Ring10: Ring10,
-                              Ring11: Ring11,
-                              Ring12: Ring12,
-                              Ring13: Ring13,
-                              Ring14: Ring14,
-                              Ring15: Ring15,
-                              Ring16: Ring16,
-                              Ring17: Ring17,
-                              Ring18: Ring18,
-                              Ring19: Ring19,
-                              Ring20: Ring20,
-                              Ring21: Ring21,
-                              Ring22: Ring22,
-                              Ring23: Ring23,
-                              color1: color1,
-                              color2: color2,
-                              color3: color3,
-                              color4: color4,
-                              color5: color5,
-                              color6: color6,
-                              color7: color7,
-                              color8: color8,
-                              color9: color9,
-                              color10: color10,
-                              custom12: custom12,
-                              custom22: custom22,
-                              custom32: custom32,
-                              custom42: custom42,
-                              custom52: custom52,
-                              custom62: custom62,
-                              custom72: custom72,
-                              custom82: custom82,
-                              custom92: custom92,
-                              custom102: custom102,
-                              mto: mto,
-                              mtoText: mtoText,
-                              colorText: colorText,
-                              freeSize: freeSize,
-
-                              shipcost:shipcost,
-                              shipcostuser:shipcostuser,
-                              custompriceusd:custompriceusd,
-                              custompriceinr:custompriceinr,
-                              price:price,
-                              customprice:customprice,
-                              country:country,
-                              color:color,
-
-                            )
-                        );
-                        // Navigator.push(context, MaterialPageRoute(builder: (context) =>));
-                        // Navigator.pop(context);
-                      },
-                      text: "Select",
-                      shape: GFButtonShape.pills,
-
-                    ),
-                ],
-
-                ),
-                ]
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Card(
+              margin: EdgeInsets.all(3.0),
+              shape: RoundedRectangleBorder(
+                borderRadius:BorderRadius.circular(10),
               ),
+              color:Colors.white.withOpacity(0.5),
+              child: Padding(
+                padding:EdgeInsets.only(left: 5.0),
+                child: Row(
+                  children: [
+                    new Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                    Text(Type,style:TextStyle(color:kText,fontSize:SizeConfig.safeBlockHorizontal * 5,fontWeight: FontWeight.bold)),
+                    Text(Fullname,style:TextStyle(color:kText,fontSize:SizeConfig.safeBlockHorizontal * 5)),
+                    Text('$Addresss,',style:TextStyle(color:kText,fontSize:SizeConfig.safeBlockHorizontal * 4)),
+                     Text('$City',style:TextStyle(color:kText,fontSize:SizeConfig.safeBlockHorizontal * 4)),
+                    Text('$State,',style:TextStyle(color:kText,fontSize:SizeConfig.safeBlockHorizontal * 4)),
+                    Text('$Country',style:TextStyle(color:kText,fontSize:SizeConfig.safeBlockHorizontal * 4)),
 
+                    Text(Zip,style:TextStyle(color:kText,fontSize:SizeConfig.safeBlockHorizontal * 4)),
+                    Text('$Dialcode,$Phone',style:TextStyle(color:kText,fontSize:SizeConfig.safeBlockHorizontal * 4)),
+                      GFButton(
+                        onPressed: () async
+                        {
+
+                          adPrefs = await SharedPreferences.getInstance();
+                          await adPrefs.setString('type', Type);
+                          await adPrefs.setString('fullname',Fullname);
+                          await adPrefs.setString('address', Addresss);
+                          await adPrefs.setString('city',City);
+                          await adPrefs.setString('state', State);
+                          await adPrefs.setString('country',Country);
+                          await adPrefs.setString('zip',Zip);
+                          await adPrefs.setString('code',Dialcode);
+                          await adPrefs.setString('phone',Phone);
+                          print('presses');
+                          Get.off(
+                              BuyView(
+                                displaysize:displaysize,
+                                userSize:userSize,
+                                prodId: prodId,
+                                total:total,
+                                ownerId: ownerId,
+                                eur:eur,
+                                usd:usd,
+                                inr:inr,
+                                gbp:gbp,
+                                freeship:freeship,
+                                freeworldship:freeworldship,
+
+                                profileimg: profileimg,
+                                username: username,
+                                mediaUrl: mediaUrl,
+                                productname:productname,
+                                xxxs: xxxs,
+                                xxs: xxs,
+                                xs: xs,
+                                s: s,
+                                m: m,
+                                l: l,
+                                xl: xl,
+                                xxl: xxl,
+                                xxxl: xxxl,
+                                fourxl: fourxl,
+                                fivexl: fivexl,
+                                sixxl: sevenxl,
+                                eightxl: eightxl,
+                                Shoe1: Shoe1,
+                                Shoe2: Shoe2,
+                                Shoe3: Shoe3,
+                                Shoe4: Shoe4,
+                                Shoe5: Shoe5,
+                                Shoe6: Shoe6,
+                                Shoe7: Shoe7,
+                                Shoe8: Shoe8,
+                                Shoe9: Shoe9,
+                                Shoe10: Shoe10,
+                                Shoe11: Shoe11,
+                                Shoe12: Shoe12,
+                                Shoe13: Shoe13,
+                                Shoe14: Shoe14,
+                                Shoe15: Shoe15,
+                                Shoe16: Shoe16,
+                                Shoe17: Shoe17,
+                                Shoe18: Shoe18,
+                                Shoe19: Shoe19,
+                                Shoe20: Shoe20,
+                                Shoe21: Shoe21,
+                                Ring1: Ring1,
+                                Ring2: Ring2,
+                                Ring3: Ring3,
+                                Ring4: Ring4,
+                                Ring5: Ring5,
+                                Ring6: Ring6,
+                                Ring7: Ring7,
+                                Ring8: Ring8,
+                                Ring9: Ring9,
+                                Ring10: Ring10,
+                                Ring11: Ring11,
+                                Ring12: Ring12,
+                                Ring13: Ring13,
+                                Ring14: Ring14,
+                                Ring15: Ring15,
+                                Ring16: Ring16,
+                                Ring17: Ring17,
+                                Ring18: Ring18,
+                                Ring19: Ring19,
+                                Ring20: Ring20,
+                                Ring21: Ring21,
+                                Ring22: Ring22,
+                                Ring23: Ring23,
+                                color1: color1,
+                                color2: color2,
+                                color3: color3,
+                                color4: color4,
+                                color5: color5,
+                                color6: color6,
+                                color7: color7,
+                                color8: color8,
+                                color9: color9,
+                                color10: color10,
+                                custom12: custom12,
+                                custom22: custom22,
+                                custom32: custom32,
+                                custom42: custom42,
+                                custom52: custom52,
+                                custom62: custom62,
+                                custom72: custom72,
+                                custom82: custom82,
+                                custom92: custom92,
+                                custom102: custom102,
+                                mto: mto,
+                                mtoText: mtoText,
+                                colorText: colorText,
+                                freeSize: freeSize,
+
+                                shipcost:shipcost,
+                                shipcostuser:shipcostuser,
+                                custompriceusd:custompriceusd,
+                                custompriceinr:custompriceinr,
+                                price:price,
+                                customprice:customprice,
+                                country:country,
+                                color:color,
+
+                              )
+                          );
+                          // Navigator.push(context, MaterialPageRoute(builder: (context) =>));
+                          // Navigator.pop(context);
+                        },
+                        text: "Select",
+                        shape: GFButtonShape.pills,
+
+                      ),
+                  ],
+
+                  ),
+                  ]
+                ),
+
+              ),
             ),
           ),
     ],

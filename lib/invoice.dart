@@ -2,7 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fashow/ActivityFeed.dart';
 import 'package:fashow/HomePage.dart';
-import 'package:fashow/model/adressservice.dart';
+import 'package:flutter_currencies_tracker/flutter_currencies_tracker.dart';
 import 'package:fashow/payments/Servicepayment.dart';
 import 'package:fashow/user.dart';
 import 'package:get/get.dart';
@@ -34,7 +34,8 @@ class Invoice extends StatefulWidget {
   final String Finr;
   final String Fcny;
   final String Fgbp;
-// final String selectedSizes;
+
+ final String country;
   final Users currentUser;
 
   Invoice({
@@ -50,6 +51,7 @@ class Invoice extends StatefulWidget {
     this.title,
     this.description,
     this.ordersstatus,
+ this.country,
 
     this.eur,
     this.usd,
@@ -91,6 +93,7 @@ class Invoice extends StatefulWidget {
       Finr: doc.data()['Finr'],
       Fcny: doc.data()['Fcny'],
       Fgbp: doc.data()['Fgbp'],
+ country: doc.data()['country'],
 
     );
   }
@@ -122,6 +125,7 @@ class Invoice extends StatefulWidget {
     inr:this.inr,
     cny: this.cny,
     gbp: this.gbp,
+country: this.country,
 
 
   );
@@ -141,8 +145,13 @@ class _InvoiceState extends State<Invoice> {
   final String cusName;
   final String cusImg;
   final String eur;
-  final String usd;
+  String usd;
+  String advaceprice;
+   String totalprice;
+
   final String inr;
+   final String country;
+
   final String cny;
   final String gbp;
   final String Feur;
@@ -169,6 +178,7 @@ class _InvoiceState extends State<Invoice> {
     this.title,
     this.description,
     this.ordersstatus,
+ this.country,
 
     this.eur,
     this.usd,
@@ -190,123 +200,57 @@ class _InvoiceState extends State<Invoice> {
 print(finalpay);
 print(advancepay);
     super.initState();
+    conversion();
   }
 
 
   currency({String advance,String finalpay}){
-    if(currentUser.country == 'India'){
-      return
+    return
       Column(
         crossAxisAlignment:CrossAxisAlignment.start,
-        children: <Widget>[     Text('Advance payment: ₹$advance',style: TextStyle(
+        children: <Widget>[     Text('Advance payment: ${currentUser.currencysym}$advance',style: TextStyle(
           color: kText.withOpacity(0.5),
         )),
-      SizedBox( height: 8.0,),
-      Row(
-        children: [
+          SizedBox( height: 8.0,),
           Row(
             children: [
-              Text('Payment on delivery: ₹$finalpay',style: TextStyle(
-                color: kText.withOpacity(0.5),
+              Row(
+                children: [
+                  Text('Payment on delivery: ${currentUser.currencysym}$finalpay',style: TextStyle(
+                    color: kText.withOpacity(0.5),
 
-              )),
+                  )),
+                ],
+              ),
             ],
-          ),
-        ],
-      ),],
+          ),],
       );
 
-    }
-    else if(currentUser.country=='US'){
-      return
-        Column(
-          crossAxisAlignment:CrossAxisAlignment.start,
-          children: <Widget>[  Row(
-            children: [
-              Text('Advance payment: \u0024$advance',style: TextStyle(
-        color: kText.withOpacity(0.5),
-    )),
-            ],
-          ),
-      SizedBox( height: 8.0,),
-      Row(
-        children: [
-          Text('Payment on delivery: \u0024$finalpay',style: TextStyle(
-            color: kText.withOpacity(0.5),
-          )),
-        ],
-      ),],
-        );
-
-    }
-    else if(currentUser.country=='Europe'){
-      return
-        Column(
-          crossAxisAlignment:CrossAxisAlignment.start,
-          children: <Widget>[ Row(
-            children: [
-              Text('Advance payment: €$advance',style: TextStyle(
-                color: kText.withOpacity(0.5),
-              )),
-            ],
-          ),
-      SizedBox( height: 8.0,),
-      Row(
-        children: [
-          Text('Payment on delivery: €$finalpay',style: TextStyle(
-            color: kText.withOpacity(0.5),
-          )),
-        ],
-      ),
-    ],
-        );
-
-    }
-    else if(currentUser.country=='UK'){
-      return
-        Column(
-          crossAxisAlignment:CrossAxisAlignment.start,
-          children: <Widget>[ Row(
-            children: [
-              Text('Advance payment: £$advance',style: TextStyle(
-                color: kText.withOpacity(0.5),
-              )),
-            ],
-          ),
-      SizedBox( height: 8.0,),
-      Row(
-        children: [
-          Text('Payment on delivery: £$finalpay',style: TextStyle(
-            color: kText.withOpacity(0.5),
-          )),
-        ],
-      ),],
-        );
-
-    }
-    else{
-      return
-        Column(
-          crossAxisAlignment:CrossAxisAlignment.start,
-          children: <Widget>[  Row(
-            children: [
-              Text('Advance payment: \u0024$advance',style: TextStyle(
-                color: kText.withOpacity(0.5),
-              )),
-            ],
-          ),
-            SizedBox( height: 8.0,),
-            Row(
-              children: [
-                Text('Payment on delivery: \u0024$advance',style: TextStyle(
-                  color: kText.withOpacity(0.5),
-                )),
-              ],
-            ),],
-        );
-
-    }
   }
+  conversion()async{
+    var resultUSD = await Currency.getConversion(
+        from: 'USD', to: '${currentUser.currencyISO}', amount: usd);
+    var resultUSD11 = await Currency.getConversion(
+        from: 'USD', to: '${currentUser.currencyISO}', amount: Fusd );
+    var s;
+    var u;
+    var e;
+
+    setState(() {
+
+
+      e = resultUSD.rate;
+      advaceprice =e.toStringAsFixed(2);
+
+      s = resultUSD11.rate;
+      totalprice =s.toStringAsFixed(2);
+      u = double.tryParse(usd);
+      u = u.toStringAsFixed(2);
+      usd = u.toString();
+    });
+
+  }
+
   paymentbutton({
     String amount, String title,String due,String custId,String cusName,String cusImg,String ownerId,
   }){
@@ -331,13 +275,11 @@ print(advancepay);
                  advancepay: advancepay,
                  finalpay: finalpay,
                  Finr: Finr,
-                 eur: eur,
+
                  usd: usd,
                  inr: inr,
-                 gbp: gbp,
-                 Feur: Feur,
+
                  Fusd: Fusd,
-                 Fgbp: Fgbp,
                ));
              },
              color: kblue,
@@ -360,13 +302,11 @@ print(advancepay);
 Get.to( PaymentSer(              title: widget.title,
   Amount:vString,OrderId: orderId,
   OwnerId: ownerId,profileimg: cusImg,username: cusName,advancepay: advancepay,finalpay: finalpay,Finr: Finr,
-  eur:eur,
   usd:usd,
   inr:inr,
-  gbp:gbp,
-  Feur:Feur,
+
   Fusd:Fusd,
-  Fgbp:Fgbp,));
+  ));
           },
           color: kblue,
           child: Text('Pay Advance',style: TextStyle(
@@ -382,13 +322,11 @@ Get.to( PaymentSer(              title: widget.title,
             onPressed: (){
               Get.to( PaymentSer(  title: widget.title,Amount:duee,OrderId: orderId,
                 OwnerId: ownerId,profileimg: cusImg,username: cusName,advancepay: advancepay,finalpay: finalpay,Finr: Finr,
-                eur:eur,
                 usd:usd,
                 inr:inr,
-                gbp:gbp,
-                Feur:Feur,
                 Fusd:Fusd,
-                Fgbp:Fgbp,));
+
+              ));
 
             },
             color: kblue,
@@ -645,15 +583,20 @@ else{return Container();}
             ),
             SizedBox(height:10.0),
 
-            widget.Finr ==""?  Text('Payment: €${widget.eur}',style: TextStyle(
+            widget.Finr ==""?  Text('Payment:${currentUser.currencysym} ${widget.eur}',style: TextStyle(
               color: kText.withOpacity(0.5),
             )):
 
-            currency(advance: widget.eur,finalpay: widget.Feur),
+          currentUser.country == country?   currency(advance: widget.inr,finalpay: widget.inr):currency(advance: advaceprice,finalpay: totalprice),
             SizedBox(height:10.0),
 
 
-            paymentbutton(amount: widget.eur,due: widget.Feur,
+         currentUser.country == "India"?   paymentbutton(amount: advaceprice,due: totalprice,
+              title: widget.title,
+
+              ownerId:widget.ownerId,
+              cusName:widget.cusName,
+              cusImg:widget.cusImg, ):paymentbutton(amount: widget.usd,due: widget.Fusd,
               title: widget.title,
 
               ownerId:widget.ownerId,

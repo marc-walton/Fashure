@@ -1,3 +1,4 @@
+import 'package:contained_tab_bar_view/contained_tab_bar_view.dart';
 import 'package:dropdown_formfield/dropdown_formfield.dart';
 import 'package:fashow/model/addressbuynow.dart';
 import 'package:firebase_storage/firebase_storage.dart';
@@ -307,6 +308,7 @@ final int  Ring23;
   final String colorText8;
   final String colorText9;
   final String colorText10;
+ final String currency;
 
   final int mto;
   final Users currentUser;
@@ -488,6 +490,8 @@ this.shipinterto,
     this.colorText10,
 
     this.photoUrl,
+     this.currency,
+
     this.currentUser,
   });
 
@@ -675,6 +679,7 @@ freeship: doc.data()['freeship'],
       colorText8: doc.data()['colorText8'],
       colorText9: doc.data()['colorText9'],
       colorText10: doc.data()['colorText10'],
+      currency: doc.data()['currency'],
 
     );
   }
@@ -713,6 +718,8 @@ freeship: doc.data()['freeship'],
     shipcostusd:this.shipcostusd,
     shipcostinterinr:this.shipcostinterinr,
     shipcostinr:this.shipcostinr,
+country:this.country,
+currency:this.currency,
 
     gender:this.gender,
     details:this.details,
@@ -883,7 +890,7 @@ String currencysymbol;
   final String ownerId;
   final String username;
   final String eur;
-  final String usd;
+  String usd;
   final String inr;
   final String cny;
   final String gbp;
@@ -895,10 +902,10 @@ final bool worldship;
 final bool freeworldship;
 final bool freeship;
 String price;
-String custompriceinr;
-String custompriceusd;
+String custompriceinr = "";
+String custompriceusd = "";
 
-String customprice;
+String customprice = "";
 String customprice1;
 String customprice2;
 String customprice3;
@@ -1041,6 +1048,7 @@ String customprice10;
   final String shipcostinterusd;
   final String shipcostinterinr;
   final String shipcostinr;
+ final String currency;
 
   final int processfrom;
   final int processto;
@@ -1102,6 +1110,7 @@ this.shipcostusd,
 this.shipcostinterinr,
 this.shipcostinr,
 this.country,
+this.currency,
 
     this.gender,
     this.details,
@@ -1264,52 +1273,51 @@ this.country,
 
 
   void initState() {
-    // initialize controller
-    // parse();
 
     super.initState();
-
     Views();
-    currency();
+    conversion();
 
   }
-currency()async{
-    print("cg");
+conversion()async{
   var resultUSD = await Currency.getConversion(
-      from: '${currentUser.currencyISO}', to: 'USD', amount: eur);
+      from: 'USD', to: '${currentUser.currencyISO}', amount: usd);
     var resultUSD11 = await Currency.getConversion(
-        from: '${currentUser.currencyISO}', to: 'USD', amount: shipcostinterusd );
+        from: 'USD', to: '${currentUser.currencyISO}', amount: shipcostinterusd );
 var s;
-    print("csfgsdfbsdfdfg");
+var u;
 setState(() {
 
 
   e = resultUSD.rate;
   price =e.toStringAsFixed(2);
+
   s = resultUSD11.rate;
   shipcostuser =s.toStringAsFixed(2);
-
+  u = double.tryParse(usd);
+  u = u.toStringAsFixed(2);
+  usd = u.toString();
 });
     var resultUSD1 = await Currency.getConversion(
-      from: '${currentUser.currencyISO}', to: 'USD', amount: custom11usd  );
+      from: 'USD', to: '${currentUser.currencyISO}', amount: custom11usd  );
   var resultUSD2 = await Currency.getConversion(
-      from: '${currentUser.currencyISO}', to: 'USD', amount: custom21usd  );
+      from: 'USD', to: '${currentUser.currencyISO}', amount: custom21usd  );
   var resultUSD3 = await Currency.getConversion(
-      from: '${currentUser.currencyISO}', to: 'USD', amount: custom31usd  );
+      from: 'USD', to: '${currentUser.currencyISO}', amount: custom31usd  );
   var resultUSD4 = await Currency.getConversion(
-      from: '${currentUser.currencyISO}', to: 'USD', amount: custom41usd  );
+      from: 'USD', to: '${currentUser.currencyISO}', amount: custom41usd  );
   var resultUSD5 = await Currency.getConversion(
-      from: '${currentUser.currencyISO}', to: 'USD', amount: custom51usd  );
+      from: 'USD', to: '${currentUser.currencyISO}', amount: custom51usd  );
   var resultUSD6 = await Currency.getConversion(
-      from: '${currentUser.currencyISO}', to: 'USD', amount: custom61usd  );
+      from: 'USD', to: '${currentUser.currencyISO}', amount: custom61usd  );
   var resultUSD7 = await Currency.getConversion(
-      from: '${currentUser.currencyISO}', to: 'USD', amount: custom71usd  );
+      from: 'USD', to: '${currentUser.currencyISO}', amount: custom71usd  );
   var resultUSD8 = await Currency.getConversion(
-      from: '${currentUser.currencyISO}', to: 'USD', amount: custom81usd  );
+      from: 'USD', to: '${currentUser.currencyISO}', amount: custom81usd  );
   var resultUSD9 = await Currency.getConversion(
-      from: '${currentUser.currencyISO}', to: 'USD', amount: custom91usd  );
+      from: 'USD', to: '${currentUser.currencyISO}', amount: custom91usd  );
   var resultUSD10 = await Currency.getConversion(
-      from: '${currentUser.currencyISO}', to: 'USD', amount: custom101usd  );
+      from: 'USD', to: '${currentUser.currencyISO}', amount: custom101usd  );
 
   var c1;
  var c2;
@@ -1403,16 +1411,7 @@ var custom10usd;
 
       });
 
-   // FirebaseFirestore.instance.collection('users')
-      //  .where("id",isEqualTo:"${widget.ownerId}")
-     //   .snapshots().listen((snapshot){snapshot.docs.forEach((doc){
 
-   //   setState(() {
-    //  views = doc.data()['visits'];
-
-   //  });});
-
-  //  });
     isPostOwner? null: views++;
 
     FirebaseFirestore.instance.collection('users')
@@ -1422,55 +1421,6 @@ var custom10usd;
   }
 
 
-MTO(){
-  if(mto==0){
-    return
-      Container();
-  }
-else {
-    return ExpansionTile(
-      title: Text('Made-to-order', style: TextStyle(color: kText)),
-      maintainState: true,
-      children: [
-       Column(children:[
-         Container(
-          margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0, 8.0),
-          child: TextFormField(
-            style: TextStyle(color: kText),
-            controller: mtoController,
-            decoration: InputDecoration(
-              border: OutlineInputBorder(
-                  borderSide: BorderSide(color: kSubtitle)),
-              enabledBorder: OutlineInputBorder(
-                  borderSide: BorderSide(color: Colors.black)),
-              focusedBorder: OutlineInputBorder(
-                  borderSide: BorderSide(color: Colors.blue)),
-
-              labelText: 'Made-to-order',
-              labelStyle: TextStyle(color: kText),
-              hintText: 'Comment',
-            ),
-            textAlign: TextAlign.center,
-
-          ),
-        ),
-         //Customised
-         Container(
-           // alignment:Alignment.centerLeft,
-           child:   FloatingActionButton.extended(
-             backgroundColor: kblue,
-             onPressed: ()=> setState(() {
-
-               usersize = 'MTO ';
-             }),
-             label: Text('Done',style:TextStyle(color:  Colors.white) ,),
-           ),
-         ),
-       ],),
-      ],
-    );
-  }
-}
 
   report(){
     Fluttertoast.showToast(
@@ -1494,6 +1444,7 @@ String shipcostU,
     }){
     Navigator.push(context, MaterialPageRoute(builder: (context) =>AddressBuy(
 Size: usersize,
+displaysize: size,
 OwnerId: ownerId,prodId:prodId ,
         profileimg: photoUrl ,
         username: username,
@@ -1501,6 +1452,8 @@ OwnerId: ownerId,prodId:prodId ,
         productname:productname,
       usd:usd,
       inr:inr,
+freeship:freeship,
+ freeworldship:freeworldship,
 
       shipcost: ship,
       shipcostuser: shipcostU,
@@ -1603,8 +1556,77 @@ mtoText:mtoController.text ,
 
 
   }
+MTO(){
+  showDialog<void>(
+    context: context,
+    // useRootNavigator:true,
 
-   Buynow({dynamic parentContext,String size}) {
+    barrierDismissible: true,
+    // false = user must tap button, true = tap outside dialog
+    builder: (BuildContext dialogContext) {
+      return
+        Dialog(
+
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(20),),
+          child:
+          Container(
+            height:400,
+
+            child: Center(
+              child: Container(
+                child: Column(
+                  mainAxisAlignment:MainAxisAlignment.center,
+                  children:[
+                  Container(
+                    alignment: Alignment.center,
+                    margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0, 8.0),
+                    child: TextFormField(
+                        keyboardType: TextInputType.multiline,
+                        maxLines: null,
+                      style: TextStyle(color: kText),
+                      controller: mtoController,
+                      decoration: InputDecoration(
+                        border: OutlineInputBorder(
+                            borderSide: BorderSide(color: kSubtitle)),
+                        enabledBorder: OutlineInputBorder(
+                            borderSide: BorderSide(color: Colors.black)),
+                        focusedBorder: OutlineInputBorder(
+                            borderSide: BorderSide(color: Colors.blue)),
+
+                        labelText: 'Made-to-order',
+                        labelStyle: TextStyle(color: kText),
+                        hintText: 'Comment',
+                      ),
+                      textAlign: TextAlign.center,
+
+                    ),
+                  ),
+                  //Customised
+                  Container(
+                    // alignment:Alignment.centerLeft,
+                    child:   FloatingActionButton.extended(
+                      backgroundColor: kblue,
+                      onPressed: () {
+
+                      setState(() {
+                        size = "Made-to-order";
+                        usersize = 'MTO ';
+                      });
+                      Get.back();},
+                      label: Text('Done',style:TextStyle(color:  Colors.white) ,),
+                    ),
+                  ),
+                ],) ,
+              ),
+            ),
+          ),
+
+        );
+    },
+  );
+}
+   Buynow(parentContext) {
      List<String> selectedCategory = <String>[];
      List<String> selectedColor = <String>[];
 
@@ -1634,262 +1656,751 @@ Container(
           shrinkWrap:true,
               children:[
 
+                mto==0?Container():  Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: ElevatedButton(
+
+                    style: ElevatedButton.styleFrom(
+
+                      primary: selectedCategory.contains("MTO") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                      onPrimary:selectedCategory.contains("MTO") ? Colors.white:  Colors.black, // foreground
+                    ),
+                    onPressed: () {
+                      selectedCategory =  <String>[];
+                      selectedCategory.add("MTO");
+                      MTO();
+                     // stateSetter(() {usersize = "Free Size";
+                      //size = 'Free size';
+                      //});
+                    },          child: Text('MTO'),
+                  ),
+                ),
                 freesize==0?Container():   Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: ElevatedButton(
 
-            style: ElevatedButton.styleFrom(
+                    style: ElevatedButton.styleFrom(
 
-              primary: selectedCategory.contains("Free Size") ? Colors.black: Colors.white.withOpacity(0.1), // background
-              onPrimary:selectedCategory.contains("Free Size") ? Colors.white:  Colors.black, // foreground
-            ),
-            onPressed: () {
-              selectedCategory =  <String>[];
-              selectedCategory.add("Free Size");
+                      primary: selectedCategory.contains("Free Size") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                      onPrimary:selectedCategory.contains("Free Size") ? Colors.white:  Colors.black, // foreground
+                    ),
+                    onPressed: () {
+                      selectedCategory =  <String>[];
+                      selectedCategory.add("Free Size");
 
-              stateSetter(() {usersize = "Free Size";});
-            },          child: Text('Free Size'),
-          ),
+                      stateSetter(() {usersize = "Free Size";
+                      size = 'Free size';
+                      });
+                    },          child: Text('Free Size'),
+                  ),
                 ),
- xxxs==0?Container():   Padding(
-   padding: const EdgeInsets.all(8.0),
-   child: ElevatedButton(
 
-              style: ElevatedButton.styleFrom(
+                xxxs==0?Container():   Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: ElevatedButton(
 
-                primary: selectedCategory.contains("XXXS") ? Colors.black: Colors.white.withOpacity(0.1), // background
-                onPrimary:selectedCategory.contains("XXXS") ? Colors.white:  Colors.black, // foreground
-              ),
-              onPressed: () {
-                selectedCategory =  <String>[];
-                selectedCategory.add("XXXS");
+                    style: ElevatedButton.styleFrom(
 
-                stateSetter(() {usersize = "XXXS";});
-              },          child: Text('XXXS'),
-            ),
- ),
-  xxs==0?Container():   Padding(
-    padding: const EdgeInsets.all(8.0),
-    child: ElevatedButton(
+                      primary: selectedCategory.contains("XXXS") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                      onPrimary:selectedCategory.contains("XXXS") ? Colors.white:  Colors.black, // foreground
+                    ),
+                    onPressed: () {
+                      selectedCategory =  <String>[];
+                      selectedCategory.add("XXXS");
 
-              style: ElevatedButton.styleFrom(
+                      stateSetter(() {usersize = "XXXS";
+                      size = 'XXXS';
+                      });
+                    },          child: Text('XXXS'),
+                  ),
+                ),
+                xxs==0?Container():   Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: ElevatedButton(
 
-                primary: selectedCategory.contains("XXS") ? Colors.black: Colors.white.withOpacity(0.1), // background
-                onPrimary:selectedCategory.contains("XXS") ? Colors.white:  Colors.black, // foreground
-              ),
-              onPressed: () {
-                selectedCategory =  <String>[];
-                selectedCategory.add("XXS");
+                    style: ElevatedButton.styleFrom(
 
-                stateSetter(() {usersize = "XXS";});
-              },          child: Text('XXS'),
-            ),
-  ),
-  xs==0?Container():   Padding(
-    padding: const EdgeInsets.all(8.0),
-    child: ElevatedButton(
+                      primary: selectedCategory.contains("XXS") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                      onPrimary:selectedCategory.contains("XXS") ? Colors.white:  Colors.black, // foreground
+                    ),
+                    onPressed: () {
+                      selectedCategory =  <String>[];
+                      selectedCategory.add("XXS");
 
-              style: ElevatedButton.styleFrom(
+                      stateSetter(() {usersize = "XXS";
+                      size = 'XXS';
+                      });
+                    },          child: Text('XXS'),
+                  ),
+                ),
+                xs==0?Container():   Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: ElevatedButton(
 
-                primary: selectedCategory.contains("XS") ? Colors.black: Colors.white.withOpacity(0.1), // background
-                onPrimary:selectedCategory.contains("XS") ? Colors.white:  Colors.black, // foreground
-              ),
-              onPressed: () {
-                selectedCategory =  <String>[];
-                selectedCategory.add("XS");
+                    style: ElevatedButton.styleFrom(
 
-                stateSetter(() {usersize = "XS";});
-              },          child: Text('XS'),
-            ),
-  ),
- s==0?Container():   Padding(
-   padding: const EdgeInsets.all(8.0),
-   child: ElevatedButton(
+                      primary: selectedCategory.contains("XS") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                      onPrimary:selectedCategory.contains("XS") ? Colors.white:  Colors.black, // foreground
+                    ),
+                    onPressed: () {
+                      selectedCategory =  <String>[];
+                      selectedCategory.add("XS");
 
-              style: ElevatedButton.styleFrom(
+                      stateSetter(() {usersize = "XS";
+                      size = 'XS';
+                      });
+                    },          child: Text('XS'),
+                  ),
+                ),
+                s==0?Container():   Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: ElevatedButton(
 
-                primary: selectedCategory.contains("S") ? Colors.black: Colors.white.withOpacity(0.1), // background
-                onPrimary:selectedCategory.contains("S") ? Colors.white:  Colors.black, // foreground
-              ),
-              onPressed: () {
-                selectedCategory =  <String>[];
-                selectedCategory.add("S");
+                    style: ElevatedButton.styleFrom(
 
-                stateSetter(() {usersize = "S";});
-              },          child: Text('S'),
-            ),
- ),
-  m==0?Container():   Padding(
-    padding: const EdgeInsets.all(8.0),
-    child: ElevatedButton(
+                      primary: selectedCategory.contains("S") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                      onPrimary:selectedCategory.contains("S") ? Colors.white:  Colors.black, // foreground
+                    ),
+                    onPressed: () {
+                      selectedCategory =  <String>[];
+                      selectedCategory.add("S");
 
-              style: ElevatedButton.styleFrom(
+                      stateSetter(() {usersize = "S";
+                      size = 'S';
+                      });
+                    },          child: Text('S'),
+                  ),
+                ),
+                m==0?Container():   Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: ElevatedButton(
 
-                primary: selectedCategory.contains("M") ? Colors.black: Colors.white.withOpacity(0.1), // background
-                onPrimary:selectedCategory.contains("M") ? Colors.white:  Colors.black, // foreground
-              ),
-              onPressed: () {
-                selectedCategory =  <String>[];
-                selectedCategory.add("M");
+                    style: ElevatedButton.styleFrom(
 
-                stateSetter(() {usersize = "M";});
-              },          child: Text('M'),
-            ),
-  ),
+                      primary: selectedCategory.contains("M") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                      onPrimary:selectedCategory.contains("M") ? Colors.white:  Colors.black, // foreground
+                    ),
+                    onPressed: () {
+                      selectedCategory =  <String>[];
+                      selectedCategory.add("M");
 
-  l==0?Container():   Padding(
-    padding: const EdgeInsets.all(8.0),
-    child: ElevatedButton(
+                      stateSetter(() {usersize = "M";
+                      size = 'M';
+                      });
+                    },          child: Text('M'),
+                  ),
+                ),
 
-              style: ElevatedButton.styleFrom(
+                l==0?Container():   Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: ElevatedButton(
 
-                primary: selectedCategory.contains("L") ? Colors.black: Colors.white.withOpacity(0.1), // background
-                onPrimary:selectedCategory.contains("L") ? Colors.white:  Colors.black, // foreground
-              ),
-              onPressed: () {
-                selectedCategory =  <String>[];
-                selectedCategory.add("L");
+                    style: ElevatedButton.styleFrom(
 
-                stateSetter(() {usersize = "L";});
-              },          child: Text('L'),
-            ),
-  ),
-   xl==0?Container():   Padding(
-     padding: const EdgeInsets.all(8.0),
-     child: ElevatedButton(
+                      primary: selectedCategory.contains("L") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                      onPrimary:selectedCategory.contains("L") ? Colors.white:  Colors.black, // foreground
+                    ),
+                    onPressed: () {
+                      selectedCategory =  <String>[];
+                      selectedCategory.add("L");
 
-              style: ElevatedButton.styleFrom(
+                      stateSetter(() {usersize = "L";
+                      size = 'L';
+                      });
+                    },          child: Text('L'),
+                  ),
+                ),
+                xl==0?Container():   Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: ElevatedButton(
 
-                primary: selectedCategory.contains("XL") ? Colors.black: Colors.white.withOpacity(0.1), // background
-                onPrimary:selectedCategory.contains("XL") ? Colors.white:  Colors.black, // foreground
-              ),
-              onPressed: () {
-                selectedCategory =  <String>[];
-                selectedCategory.add("XL");
+                    style: ElevatedButton.styleFrom(
 
-                stateSetter(() {usersize = "XL";});
-              },          child: Text('XL'),
-            ),
-   ),
-   xxl==0?Container():   Padding(
-     padding: const EdgeInsets.all(8.0),
-     child: ElevatedButton(
+                      primary: selectedCategory.contains("XL") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                      onPrimary:selectedCategory.contains("XL") ? Colors.white:  Colors.black, // foreground
+                    ),
+                    onPressed: () {
+                      selectedCategory =  <String>[];
+                      selectedCategory.add("XL");
 
-              style: ElevatedButton.styleFrom(
+                      stateSetter(() {usersize = "XL";
+                      size = 'XL';
+                      });
+                    },          child: Text('XL'),
+                  ),
+                ),
+                xxl==0?Container():   Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: ElevatedButton(
 
-                primary: selectedCategory.contains("XXL") ? Colors.black: Colors.white.withOpacity(0.1), // background
-                onPrimary:selectedCategory.contains("XXL") ? Colors.white:  Colors.black, // foreground
-              ),
-              onPressed: () {
-                selectedCategory =  <String>[];
-                selectedCategory.add("XXL");
+                    style: ElevatedButton.styleFrom(
 
-                stateSetter(() {usersize = "XXL";});
-              },          child: Text('XXL'),
-            ),
-   ),
-   xxxl==0?Container():   Padding(
-     padding: const EdgeInsets.all(8.0),
-     child: ElevatedButton(
+                      primary: selectedCategory.contains("XXL") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                      onPrimary:selectedCategory.contains("XXL") ? Colors.white:  Colors.black, // foreground
+                    ),
+                    onPressed: () {
+                      selectedCategory =  <String>[];
+                      selectedCategory.add("XXL");
 
-              style: ElevatedButton.styleFrom(
+                      stateSetter(() {usersize = "XXL";
+                      size = 'XXL';
+                      });
+                    },          child: Text('XXL'),
+                  ),
+                ),
+                xxxl==0?Container():   Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: ElevatedButton(
 
-                primary: selectedCategory.contains("XXXL") ? Colors.black: Colors.white.withOpacity(0.1), // background
-                onPrimary:selectedCategory.contains("XXXL") ? Colors.white:  Colors.black, // foreground
-              ),
-              onPressed: () {
-                selectedCategory =  <String>[];
-                selectedCategory.add("XXXL");
+                    style: ElevatedButton.styleFrom(
 
-                stateSetter(() {usersize = "XXXL";});
-              },          child: Text('XXXL'),
-            ),
-   ),
- fourxl==0?Container():   Padding(
-   padding: const EdgeInsets.all(8.0),
-   child: ElevatedButton(
+                      primary: selectedCategory.contains("XXXL") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                      onPrimary:selectedCategory.contains("XXXL") ? Colors.white:  Colors.black, // foreground
+                    ),
+                    onPressed: () {
+                      selectedCategory =  <String>[];
+                      selectedCategory.add("XXXL");
 
-              style: ElevatedButton.styleFrom(
+                      stateSetter(() {usersize = "XXXL";
+                      size = 'XXXL';
+                      });
+                    },          child: Text('XXXL'),
+                  ),
+                ),
+                fourxl==0?Container():   Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: ElevatedButton(
 
-                primary: selectedCategory.contains("4XL") ? Colors.black: Colors.white.withOpacity(0.1), // background
-                onPrimary:selectedCategory.contains("4XL") ? Colors.white:  Colors.black, // foreground
-              ),
-              onPressed: () {
-                selectedCategory =  <String>[];
-                selectedCategory.add("4XL");
+                    style: ElevatedButton.styleFrom(
 
-                stateSetter(() {usersize = "4XL";});
-              },          child: Text('4XL'),
-            ),
- ),
- fivexl==0?Container():   Padding(
-   padding: const EdgeInsets.all(8.0),
-   child: ElevatedButton(
+                      primary: selectedCategory.contains("4XL") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                      onPrimary:selectedCategory.contains("4XL") ? Colors.white:  Colors.black, // foreground
+                    ),
+                    onPressed: () {
+                      selectedCategory =  <String>[];
+                      selectedCategory.add("4XL");
 
-              style: ElevatedButton.styleFrom(
+                      stateSetter(() {usersize = "4XL";
+                      size = '4XL';
+                      });
+                    },          child: Text('4XL'),
+                  ),
+                ),
+                fivexl==0?Container():   Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: ElevatedButton(
 
-                primary: selectedCategory.contains("5XL") ? Colors.black: Colors.white.withOpacity(0.1), // background
-                onPrimary:selectedCategory.contains("5XL") ? Colors.white:  Colors.black, // foreground
-              ),
-              onPressed: () {
-                selectedCategory =  <String>[];
-                selectedCategory.add("5XL");
+                    style: ElevatedButton.styleFrom(
 
-                stateSetter(() {usersize = "5XL";});
-              },          child: Text('5XL'),
-            ),
- ),
- sixxl==0?Container():   Padding(
-   padding: const EdgeInsets.all(8.0),
-   child: ElevatedButton(
+                      primary: selectedCategory.contains("5XL") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                      onPrimary:selectedCategory.contains("5XL") ? Colors.white:  Colors.black, // foreground
+                    ),
+                    onPressed: () {
+                      selectedCategory =  <String>[];
+                      selectedCategory.add("5XL");
 
-              style: ElevatedButton.styleFrom(
+                      stateSetter(() {usersize = "5XL";
+                      size = '5XL';
+                      });
+                    },          child: Text('5XL'),
+                  ),
+                ),
+                sixxl==0?Container():   Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: ElevatedButton(
 
-                primary: selectedCategory.contains("6XL") ? Colors.black: Colors.white.withOpacity(0.1), // background
-                onPrimary:selectedCategory.contains("6XL") ? Colors.white:  Colors.black, // foreground
-              ),
-              onPressed: () {
-                selectedCategory =  <String>[];
-                selectedCategory.add("6XL");
+                    style: ElevatedButton.styleFrom(
 
-                stateSetter(() {usersize = "6XL";});
-              },          child: Text('6XL'),
-            ),
- ),
- sevenxl==0?Container():   Padding(
-   padding: const EdgeInsets.all(8.0),
-   child: ElevatedButton(
+                      primary: selectedCategory.contains("6XL") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                      onPrimary:selectedCategory.contains("6XL") ? Colors.white:  Colors.black, // foreground
+                    ),
+                    onPressed: () {
+                      selectedCategory =  <String>[];
+                      selectedCategory.add("6XL");
 
-              style: ElevatedButton.styleFrom(
+                      stateSetter(() {usersize = "6XL";
+                      size = '6XL';
+                      });
+                    },          child: Text('6XL'),
+                  ),
+                ),
+                sevenxl==0?Container():   Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: ElevatedButton(
 
-                primary: selectedCategory.contains("7XL") ? Colors.black: Colors.white.withOpacity(0.1), // background
-                onPrimary:selectedCategory.contains("7XL") ? Colors.white:  Colors.black, // foreground
-              ),
-              onPressed: () {
-                selectedCategory =  <String>[];
-                selectedCategory.add("7XL");
+                    style: ElevatedButton.styleFrom(
 
-                stateSetter(() {usersize = "7XL";});
-              },          child: Text('7XL'),
-            ),
- ),
- eightxl==0?Container():   Padding(
-   padding: const EdgeInsets.all(8.0),
-   child: ElevatedButton(
+                      primary: selectedCategory.contains("7XL") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                      onPrimary:selectedCategory.contains("7XL") ? Colors.white:  Colors.black, // foreground
+                    ),
+                    onPressed: () {
+                      selectedCategory =  <String>[];
+                      selectedCategory.add("7XL");
 
-              style: ElevatedButton.styleFrom(
+                      stateSetter(() {usersize = "7XL";
+                      size = '7XL';
+                      });
+                    },          child: Text('7XL'),
+                  ),
+                ),
+                eightxl==0?Container():   Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: ElevatedButton(
 
-                primary: selectedCategory.contains("8XL") ? Colors.black: Colors.white.withOpacity(0.1), // background
-                onPrimary:selectedCategory.contains("8XL") ? Colors.white:  Colors.black, // foreground
-              ),
-              onPressed: () {
-                selectedCategory =  <String>[];
-                selectedCategory.add("8XL");
+                    style: ElevatedButton.styleFrom(
 
-                stateSetter(() {usersize = "8XL";});
-              },          child: Text('8XL'),
-            ),
- ),
+                      primary: selectedCategory.contains("8XL") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                      onPrimary:selectedCategory.contains("8XL") ? Colors.white:  Colors.black, // foreground
+                    ),
+                    onPressed: () {
+                      selectedCategory =  <String>[];
+                      selectedCategory.add("8XL");
+
+                      stateSetter(() {usersize = "8XL";
+                      size = '8XL';
+                      });
+                    },          child: Text('8XL'),
+                  ),
+                ),
+                Ring1==0?Container():   Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: ElevatedButton(
+
+                    style: ElevatedButton.styleFrom(
+
+                      primary: selectedCategory.contains("R 4") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                      onPrimary:selectedCategory.contains("R 4") ? Colors.white:  Colors.black, // foreground
+                    ),
+                    onPressed: () {
+                      selectedCategory =  <String>[];
+                      selectedCategory.add("R 4");
+
+                      stateSetter(() {usersize = "R 4";
+                      size = '(US) 4';
+                      });
+                    },          child: Text('(US) 4'),
+                  ),
+                ),
+                Ring2==0?Container():   Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: ElevatedButton(
+
+                    style: ElevatedButton.styleFrom(
+
+                      primary: selectedCategory.contains("R 4.5") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                      onPrimary:selectedCategory.contains("R 4.5") ? Colors.white:  Colors.black, // foreground
+                    ),
+                    onPressed: () {
+                      selectedCategory =  <String>[];
+                      selectedCategory.add("R 4.5");
+
+                      stateSetter(() {usersize = "R 4.5";
+                      size = '(US) 4.5';
+                      });
+                    },          child: Text('(US) 4.5'),
+                  ),
+                ),
+
+                Ring3==0?Container():   Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: ElevatedButton(
+
+                    style: ElevatedButton.styleFrom(
+
+                      primary: selectedCategory.contains("R 5") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                      onPrimary:selectedCategory.contains("R 5") ? Colors.white:  Colors.black, // foreground
+                    ),
+                    onPressed: () {
+                      selectedCategory =  <String>[];
+                      selectedCategory.add("R 5");
+
+                      stateSetter(() {usersize = "R 5";
+                      size = '(US) 5';
+                      });
+                    },          child: Text('(US) 5'),
+                  ),
+                ),
+                Ring4==0?Container():   Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: ElevatedButton(
+
+                    style: ElevatedButton.styleFrom(
+
+                      primary: selectedCategory.contains("R 5.5") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                      onPrimary:selectedCategory.contains("R 5.5") ? Colors.white:  Colors.black, // foreground
+                    ),
+                    onPressed: () {
+                      selectedCategory =  <String>[];
+                      selectedCategory.add("R 5.5");
+
+                      stateSetter(() {usersize = "R 5.5";
+                      size = '(US) 5.5';
+                      });
+                    },          child: Text('(US) 5.5'),
+                  ),
+                ),
+                Ring5==0?Container():   Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: ElevatedButton(
+
+                    style: ElevatedButton.styleFrom(
+
+                      primary: selectedCategory.contains("R 6") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                      onPrimary:selectedCategory.contains("R 6") ? Colors.white:  Colors.black, // foreground
+                    ),
+                    onPressed: () {
+                      selectedCategory =  <String>[];
+                      selectedCategory.add("R 6");
+
+                      stateSetter(() {usersize = "R 6";
+                      size = '(US) 6';
+                      });
+                    },          child: Text('(US) 6'),
+                  ),
+                ),
+                Ring6==0?Container():   Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: ElevatedButton(
+
+                    style: ElevatedButton.styleFrom(
+
+                      primary: selectedCategory.contains("R 6.5") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                      onPrimary:selectedCategory.contains("R 6.5") ? Colors.white:  Colors.black, // foreground
+                    ),
+                    onPressed: () {
+                      selectedCategory =  <String>[];
+                      selectedCategory.add("R 6.5");
+
+                      stateSetter(() {usersize = "R 6.5";
+                      size = '(US) 6.5';
+                      });
+                    },          child: Text('(US) 6.5'),
+                  ),
+                ),
+                Ring7==0?Container():   Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: ElevatedButton(
+
+                    style: ElevatedButton.styleFrom(
+
+                      primary: selectedCategory.contains("R 7") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                      onPrimary:selectedCategory.contains("R 7") ? Colors.white:  Colors.black, // foreground
+                    ),
+                    onPressed: () {
+                      selectedCategory =  <String>[];
+                      selectedCategory.add("R 7");
+
+                      stateSetter(() {usersize = "R 7";
+                      size = '(US) 7';
+                      });
+                    },          child: Text('(US) 7'),
+                  ),
+                ),
+                Ring8==0?Container():   Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: ElevatedButton(
+
+                    style: ElevatedButton.styleFrom(
+
+                      primary: selectedCategory.contains("R 7.5") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                      onPrimary:selectedCategory.contains("R 7.5") ? Colors.white:  Colors.black, // foreground
+                    ),
+                    onPressed: () {
+                      selectedCategory =  <String>[];
+                      selectedCategory.add("R 7.5");
+
+                      stateSetter(() {usersize = "R 7.5";
+                      size = '(US) 7.5';
+                      });
+                    },          child: Text('(US) 7.5'),
+                  ),
+                ),
+                Ring9==0?Container():   Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: ElevatedButton(
+
+                    style: ElevatedButton.styleFrom(
+
+                      primary: selectedCategory.contains("R 8") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                      onPrimary:selectedCategory.contains("R 8") ? Colors.white:  Colors.black, // foreground
+                    ),
+                    onPressed: () {
+                      selectedCategory =  <String>[];
+                      selectedCategory.add("R 8");
+
+                      stateSetter(() {usersize = "R 8";
+                      size = '(US) 8';
+                      });
+                    },          child: Text('(US) 8'),
+                  ),
+                ),
+                Ring10==0?Container():   Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: ElevatedButton(
+
+                    style: ElevatedButton.styleFrom(
+
+                      primary: selectedCategory.contains("R 8.5") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                      onPrimary:selectedCategory.contains("R 8.5") ? Colors.white:  Colors.black, // foreground
+                    ),
+                    onPressed: () {
+                      selectedCategory =  <String>[];
+                      selectedCategory.add("R 8.5");
+
+                      stateSetter(() {usersize = "R 8.5";
+                      size = '(US) 8.5';
+                      });
+                    },          child: Text('(US) 8.5'),
+                  ),
+                ),
+                Ring11==0?Container():   Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: ElevatedButton(
+
+                    style: ElevatedButton.styleFrom(
+
+                      primary: selectedCategory.contains("R 9") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                      onPrimary:selectedCategory.contains("R 9") ? Colors.white:  Colors.black, // foreground
+                    ),
+                    onPressed: () {
+                      selectedCategory =  <String>[];
+                      selectedCategory.add("R 9");
+
+                      stateSetter(() {usersize = "R 9";
+                      size = '(US) 9';
+                      });
+                    },          child: Text('(US) 9'),
+                  ),
+                ),
+                Ring12==0?Container():   Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: ElevatedButton(
+
+                    style: ElevatedButton.styleFrom(
+
+                      primary: selectedCategory.contains("R 9.5") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                      onPrimary:selectedCategory.contains("R 9.5") ? Colors.white:  Colors.black, // foreground
+                    ),
+                    onPressed: () {
+                      selectedCategory =  <String>[];
+                      selectedCategory.add("R 9.5");
+
+                      stateSetter(() {usersize = "R 9.5";
+                      size = '(US) 9.5';
+                      });
+                    },          child: Text('(US) 9.5'),
+                  ),
+                ),
+                Ring13==0?Container():   Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: ElevatedButton(
+
+                    style: ElevatedButton.styleFrom(
+
+                      primary: selectedCategory.contains("R 10") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                      onPrimary:selectedCategory.contains("R 10") ? Colors.white:  Colors.black, // foreground
+                    ),
+                    onPressed: () {
+                      selectedCategory =  <String>[];
+                      selectedCategory.add("R 10");
+
+                      stateSetter(() {usersize = "R 10";
+                      size = '(US) 10';
+                      });
+                    },          child: Text('(US) 10'),
+                  ),
+                ),
+                Ring14==0?Container():   Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: ElevatedButton(
+
+                    style: ElevatedButton.styleFrom(
+
+                      primary: selectedCategory.contains("R 10.5") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                      onPrimary:selectedCategory.contains("R 10.5") ? Colors.white:  Colors.black, // foreground
+                    ),
+                    onPressed: () {
+                      selectedCategory =  <String>[];
+                      selectedCategory.add("R 10.5");
+
+                      stateSetter(() {usersize = "R 10.5";
+                      size = '(US) 10.5';
+                      });
+                    },          child: Text('(US) 10.5'),
+                  ),
+                ),
+                Ring15==0?Container():   Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: ElevatedButton(
+
+                    style: ElevatedButton.styleFrom(
+
+                      primary: selectedCategory.contains("R 11") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                      onPrimary:selectedCategory.contains("R 11") ? Colors.white:  Colors.black, // foreground
+                    ),
+                    onPressed: () {
+                      selectedCategory =  <String>[];
+                      selectedCategory.add("R 11");
+
+                      stateSetter(() {usersize = "R 11";
+                      size = '(US) 11';
+                      });
+                    },          child: Text('(US) 11'),
+                  ),
+                ),
+                Ring16==0?Container():   Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: ElevatedButton(
+
+                    style: ElevatedButton.styleFrom(
+
+                      primary: selectedCategory.contains("R 11.5") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                      onPrimary:selectedCategory.contains("R 11.5") ? Colors.white:  Colors.black, // foreground
+                    ),
+                    onPressed: () {
+                      selectedCategory =  <String>[];
+                      selectedCategory.add("R 11.5");
+
+                      stateSetter(() {usersize = "R 11.5";
+                      size = '(US) 11.5';
+                      });
+                    },          child: Text('(US) 11.5'),
+                  ),
+                ),
+                Ring17==0?Container():   Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: ElevatedButton(
+
+                    style: ElevatedButton.styleFrom(
+
+                      primary: selectedCategory.contains("R 12") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                      onPrimary:selectedCategory.contains("R 12") ? Colors.white:  Colors.black, // foreground
+                    ),
+                    onPressed: () {
+                      selectedCategory =  <String>[];
+                      selectedCategory.add("R 12");
+
+                      stateSetter(() {usersize = "R 12";
+                      size = '(US) 12';
+                      });
+                    },          child: Text('(US) 12'),
+                  ),
+                ),
+                Ring18==0?Container():   Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: ElevatedButton(
+
+                    style: ElevatedButton.styleFrom(
+
+                      primary: selectedCategory.contains("R 12.5") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                      onPrimary:selectedCategory.contains("R 12.5") ? Colors.white:  Colors.black, // foreground
+                    ),
+                    onPressed: () {
+                      selectedCategory =  <String>[];
+                      selectedCategory.add("R 12.5");
+
+                      stateSetter(() {usersize = "R 12.5";
+                      size = '(US) 12.5';
+                      });
+                    },          child: Text('(US) 12.5'),
+                  ),
+                ),
+                Ring19==0?Container():   Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: ElevatedButton(
+
+                    style: ElevatedButton.styleFrom(
+
+                      primary: selectedCategory.contains("R 13") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                      onPrimary:selectedCategory.contains("R 13") ? Colors.white:  Colors.black, // foreground
+                    ),
+                    onPressed: () {
+                      selectedCategory =  <String>[];
+                      selectedCategory.add("R 13");
+
+                      stateSetter(() {usersize = "R 13";
+                      size = '(US) 13';
+                      });
+                    },          child: Text('(US) 13'),
+                  ),
+                ),
+                Ring20==0?Container():   Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: ElevatedButton(
+
+                    style: ElevatedButton.styleFrom(
+
+                      primary: selectedCategory.contains("R 13.5") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                      onPrimary:selectedCategory.contains("R 13.5") ? Colors.white:  Colors.black, // foreground
+                    ),
+                    onPressed: () {
+                      selectedCategory =  <String>[];
+                      selectedCategory.add("R 13.5");
+
+                      stateSetter(() {
+                        size = '(US) 13.5';
+                        usersize = "R 13.5";});
+                    },          child: Text('(US) 13.5'),
+                  ),
+                ),
+                Ring21==0?Container():   Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: ElevatedButton(
+
+                    style: ElevatedButton.styleFrom(
+
+                      primary: selectedCategory.contains("R 14") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                      onPrimary:selectedCategory.contains("R 14") ? Colors.white:  Colors.black, // foreground
+                    ),
+                    onPressed: () {
+                      selectedCategory =  <String>[];
+                      selectedCategory.add("R 14");
+
+                      stateSetter(() {usersize = "R 14";
+                      size = '(US) 14';
+                      });
+                    },          child: Text('(US) 14'),
+                  ),
+                ),
+                Ring22==0?Container():   Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: ElevatedButton(
+
+                    style: ElevatedButton.styleFrom(
+
+                      primary: selectedCategory.contains("R 14.5") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                      onPrimary:selectedCategory.contains("R 14.5") ? Colors.white:  Colors.black, // foreground
+                    ),
+                    onPressed: () {
+                      selectedCategory =  <String>[];
+                      selectedCategory.add("R 14.5");
+
+                      stateSetter(() {usersize = "R 14.5";
+                      size = '(US) 14.5';
+                      });
+                    },          child: Text('(US) 14.5'),
+                  ),
+                ),
+                Ring23==0?Container():   Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: ElevatedButton(
+
+                    style: ElevatedButton.styleFrom(
+
+                      primary: selectedCategory.contains("R 15") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                      onPrimary:selectedCategory.contains("R 15") ? Colors.white:  Colors.black, // foreground
+                    ),
+                    onPressed: () {
+                      selectedCategory =  <String>[];
+                      selectedCategory.add("R 15");
+
+                      stateSetter(() {usersize = "R 15";
+                      size = '(US) 15';
+
+                      });
+                    },          child: Text('(US) 15'),
+                  ),
+                ),
 Shoe1==0?Container():   Padding(
   padding: const EdgeInsets.all(8.0),
   child:   ElevatedButton(
@@ -1903,7 +2414,9 @@ Shoe1==0?Container():   Padding(
                 selectedCategory =  <String>[];
                 selectedCategory.add("(US) 3 ½");
 
-                stateSetter(() {usersize = "(US) 3 ½";});
+                stateSetter(() {usersize = "(US) 3 ½";
+                size = '(US) 3 ½';
+                });
               },          child: Text('(US) 3 ½'),
             ),
 ),
@@ -1920,7 +2433,9 @@ Shoe1==0?Container():   Padding(
               selectedCategory =  <String>[];
               selectedCategory.add("(US) 4");
 
-              stateSetter(() {usersize = "(US) 4";});
+              stateSetter(() {usersize = "(US) 4";
+              size = '(US) 4';
+              });
             },          child: Text('(US) 4'),
           )),
 Shoe3==0?Container():   Padding(
@@ -1936,7 +2451,9 @@ Shoe3==0?Container():   Padding(
               selectedCategory =  <String>[];
               selectedCategory.add("(US) 4 ½");
 
-              stateSetter(() {usersize = "(US) 4 ½";});
+              stateSetter(() {usersize = "(US) 4 ½";
+              size = '(US) 4 ½';
+              });
             },          child: Text('(US) 4 ½'),
           )),
 Shoe4==0?Container():  Padding(
@@ -1952,7 +2469,9 @@ Shoe4==0?Container():  Padding(
               selectedCategory =  <String>[];
               selectedCategory.add("(US) 5");
 
-              stateSetter(() {usersize = "(US) 5";});
+              stateSetter(() {usersize = "(US) 5";
+              size = '(US) 5';
+              });
             },          child: Text('(US) 5'),
           )),
 Shoe5==0?Container():   Padding(
@@ -1968,7 +2487,9 @@ Shoe5==0?Container():   Padding(
               selectedCategory =  <String>[];
               selectedCategory.add("(US) 5 ½");
 
-              stateSetter(() {usersize = "(US) 5 ½";});
+              stateSetter(() {usersize = "(US) 5 ½";
+              size = '(US) 5 ½';
+              });
             },          child: Text('(US) 5 ½'),
           )),
 Shoe6==0?Container():  Padding(
@@ -1984,7 +2505,9 @@ Shoe6==0?Container():  Padding(
               selectedCategory =  <String>[];
               selectedCategory.add("(US) 6");
 
-              stateSetter(() {usersize = "(US) 6";});
+              stateSetter(() {usersize = "(US) 6";
+              size = '(US) 6';
+              });
             },          child: Text('(US) 6'),
           )),
 Shoe7==0?Container():   Padding(
@@ -2000,7 +2523,9 @@ Shoe7==0?Container():   Padding(
                 selectedCategory =  <String>[];
                 selectedCategory.add("(US) 6 ½");
 
-                stateSetter(() {usersize = "(US) 6 ½";});
+                stateSetter(() {usersize = "(US) 6 ½";
+                size = '(US) 6 ½';
+                });
               },          child: Text('(US) 6 ½'),
             ),
 ),
@@ -2017,7 +2542,9 @@ Shoe8==0?Container():   Padding(
                 selectedCategory =  <String>[];
                 selectedCategory.add("(US) 7");
 
-                stateSetter(() {usersize = "(US) 7";});
+                stateSetter(() {usersize = "(US) 7";
+                size = '(US) 7';
+                });
               },          child: Text('(US) 7'),
             ),
 ),
@@ -2034,7 +2561,9 @@ Shoe9==0?Container():   Padding(
                 selectedCategory =  <String>[];
                 selectedCategory.add("(US) 7 ½");
 
-                stateSetter(() {usersize = "(US) 7 ½";});
+                stateSetter(() {usersize = "(US) 7 ½";
+                size = '(US) 7 ½';
+                });
               },          child: Text('(US) 7 ½'),
             ),
 ),
@@ -2051,7 +2580,9 @@ Shoe10==0?Container():   Padding(
                 selectedCategory =  <String>[];
                 selectedCategory.add("(US) 8");
 
-                stateSetter(() {usersize = "(US) 8";});
+                stateSetter(() {usersize = "(US) 8";
+                size = '(US) 8';
+                });
               },          child: Text('(US) 8'),
             ),
 ),
@@ -2068,7 +2599,9 @@ Shoe11==0?Container():   Padding(
                 selectedCategory =  <String>[];
                 selectedCategory.add("(US) 8 ½");
 
-                stateSetter(() {usersize = "(US) 8 ½";});
+                stateSetter(() {usersize = "(US) 8 ½";
+                size = '(US) 8 ½';
+                });
               },          child: Text('(US) 8 ½'),
             ),
 ),
@@ -2085,7 +2618,9 @@ Shoe12==0?Container():   Padding(
                 selectedCategory =  <String>[];
                 selectedCategory.add("(US) 9");
 
-                stateSetter(() {usersize = "(US) 9";});
+                stateSetter(() {usersize = "(US) 9";
+                size = '(US) 9';
+                });
               },          child: Text('(US) 9'),
             ),
 ),
@@ -2102,7 +2637,10 @@ Shoe13==0?Container():   Padding(
                 selectedCategory =  <String>[];
                 selectedCategory.add("(US) 9 ½");
 
-                stateSetter(() {usersize = "(US) 9 ½";});
+                stateSetter(() {usersize = "(US) 9 ½";
+
+                size = '(US) 9 ½';
+                });
               },          child: Text('(US) 9 ½'),
             ),
 ),
@@ -2119,7 +2657,9 @@ Shoe14==0?Container():   Padding(
                 selectedCategory =  <String>[];
                 selectedCategory.add("(US) 10");
 
-                stateSetter(() {usersize = "(US) 10";});
+                stateSetter(() {usersize = "(US) 10";
+                size = '(US) 10';
+                });
               },          child: Text('(US) 10'),
             ),
 ),
@@ -2136,7 +2676,9 @@ Shoe15==0?Container():   Padding(
                 selectedCategory =  <String>[];
                 selectedCategory.add("(US) 10 ½");
 
-                stateSetter(() {usersize = "(US) 10 ½";});
+                stateSetter(() {usersize = "(US) 10 ½";
+                size = '(US) 10 ½';
+                });
               },          child: Text('(US) 10 ½'),
             ),
 ),
@@ -2164,7 +2706,9 @@ Shoe16==0?Container():   Padding(
 
 
 
-                stateSetter(() {usersize = "(US) 11";});
+                stateSetter(() {usersize = "(US) 11";
+                size = '(US) 11';
+                });
 
               },          child: Text('(US) 11'),
 
@@ -2183,7 +2727,9 @@ Shoe17==0?Container():   Padding(
                 selectedCategory =  <String>[];
                 selectedCategory.add("(US) 11 ½");
 
-                stateSetter(() {usersize = "(US) 11 ½";});
+                stateSetter(() {usersize = "(US) 11 ½";
+                size = '(US) 11 ½';
+                });
               },          child: Text('(US) 11 ½'),
             ),
 ),
@@ -2200,7 +2746,9 @@ Shoe18==0?Container():   Padding(
                 selectedCategory =  <String>[];
                 selectedCategory.add("(US) 12");
 
-                stateSetter(() {usersize = "(US) 12";});
+                stateSetter(() {usersize = "(US) 12";
+                size = '(US) 12';
+                });
               },          child: Text('(US) 12'),
             ),
 ),
@@ -2217,7 +2765,9 @@ Shoe19==0?Container():   Padding(
                 selectedCategory =  <String>[];
                 selectedCategory.add("(US) 12 ½");
 
-                stateSetter(() {usersize = "(US) 12 ½";});
+                stateSetter(() {usersize = "(US) 12 ½";
+                size = '(US) 12 ½';
+                });
               },          child: Text('(US) 12 ½'),
             ),
 ),
@@ -2234,7 +2784,9 @@ Shoe20==0?Container():   Padding(
                 selectedCategory =  <String>[];
                 selectedCategory.add("(US) 13");
 
-                stateSetter(() {usersize = "(US) 13";});
+                stateSetter(() {usersize = "(US) 13";
+                size = '(US) 13';
+                });
               },          child: Text('(US) 13'),
             ),
 ),
@@ -2251,402 +2803,13 @@ Shoe21==0?Container():   Padding(
                 selectedCategory =  <String>[];
                 selectedCategory.add("(US) 13 ½");
 
-                stateSetter(() {usersize = "(US) 13 ½";});
+                stateSetter(() {usersize = "(US) 13 ½";
+                size = '(US) 13 ½';
+                });
               },          child: Text('(US) 13 ½'),
             ),
 ),
- Ring1==0?Container():   Padding(
-   padding: const EdgeInsets.all(8.0),
-   child: ElevatedButton(
 
-              style: ElevatedButton.styleFrom(
-
-                primary: selectedCategory.contains("R 4") ? Colors.black: Colors.white.withOpacity(0.1), // background
-                onPrimary:selectedCategory.contains("R 4") ? Colors.white:  Colors.black, // foreground
-              ),
-              onPressed: () {
-                selectedCategory =  <String>[];
-                selectedCategory.add("R 4");
-
-                stateSetter(() {usersize = "R 4";});
-              },          child: Text('(US) 4'),
-            ),
- ),
-    Ring2==0?Container():   Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: ElevatedButton(
-
-              style: ElevatedButton.styleFrom(
-
-                primary: selectedCategory.contains("R 4.5") ? Colors.black: Colors.white.withOpacity(0.1), // background
-                onPrimary:selectedCategory.contains("R 4.5") ? Colors.white:  Colors.black, // foreground
-              ),
-              onPressed: () {
-                selectedCategory =  <String>[];
-                selectedCategory.add("R 4.5");
-
-                stateSetter(() {usersize = "R 4.5";});
-              },          child: Text('(US) 4.5'),
-            ),
-    ),
-
-    Ring3==0?Container():   Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: ElevatedButton(
-
-              style: ElevatedButton.styleFrom(
-
-                primary: selectedCategory.contains("R 5") ? Colors.black: Colors.white.withOpacity(0.1), // background
-                onPrimary:selectedCategory.contains("R 5") ? Colors.white:  Colors.black, // foreground
-              ),
-              onPressed: () {
-                selectedCategory =  <String>[];
-                selectedCategory.add("R 5");
-
-                stateSetter(() {usersize = "R 5";});
-              },          child: Text('(US) 5'),
-            ),
-    ),
-    Ring4==0?Container():   Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: ElevatedButton(
-
-              style: ElevatedButton.styleFrom(
-
-                primary: selectedCategory.contains("R 5.5") ? Colors.black: Colors.white.withOpacity(0.1), // background
-                onPrimary:selectedCategory.contains("R 5.5") ? Colors.white:  Colors.black, // foreground
-              ),
-              onPressed: () {
-                selectedCategory =  <String>[];
-                selectedCategory.add("R 5.5");
-
-                stateSetter(() {usersize = "R 5.5";});
-              },          child: Text('(US) 5.5'),
-            ),
-    ),
-    Ring5==0?Container():   Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: ElevatedButton(
-
-              style: ElevatedButton.styleFrom(
-
-                primary: selectedCategory.contains("R 6") ? Colors.black: Colors.white.withOpacity(0.1), // background
-                onPrimary:selectedCategory.contains("R 6") ? Colors.white:  Colors.black, // foreground
-              ),
-              onPressed: () {
-                selectedCategory =  <String>[];
-                selectedCategory.add("R 6");
-
-                stateSetter(() {usersize = "R 6";});
-              },          child: Text('(US) 6'),
-            ),
-    ),
-    Ring6==0?Container():   Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: ElevatedButton(
-
-              style: ElevatedButton.styleFrom(
-
-                primary: selectedCategory.contains("R 6.5") ? Colors.black: Colors.white.withOpacity(0.1), // background
-                onPrimary:selectedCategory.contains("R 6.5") ? Colors.white:  Colors.black, // foreground
-              ),
-              onPressed: () {
-                selectedCategory =  <String>[];
-                selectedCategory.add("R 6.5");
-
-                stateSetter(() {usersize = "R 6.5";});
-              },          child: Text('(US) 6.5'),
-            ),
-    ),
-    Ring7==0?Container():   Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: ElevatedButton(
-
-              style: ElevatedButton.styleFrom(
-
-                primary: selectedCategory.contains("R 7") ? Colors.black: Colors.white.withOpacity(0.1), // background
-                onPrimary:selectedCategory.contains("R 7") ? Colors.white:  Colors.black, // foreground
-              ),
-              onPressed: () {
-                selectedCategory =  <String>[];
-                selectedCategory.add("R 7");
-
-                stateSetter(() {usersize = "R 7";});
-              },          child: Text('(US) 7'),
-            ),
-    ),
-    Ring8==0?Container():   Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: ElevatedButton(
-
-              style: ElevatedButton.styleFrom(
-
-                primary: selectedCategory.contains("R 7.5") ? Colors.black: Colors.white.withOpacity(0.1), // background
-                onPrimary:selectedCategory.contains("R 7.5") ? Colors.white:  Colors.black, // foreground
-              ),
-              onPressed: () {
-                selectedCategory =  <String>[];
-                selectedCategory.add("R 7.5");
-
-                stateSetter(() {usersize = "R 7.5";});
-              },          child: Text('(US) 7.5'),
-            ),
-    ),
-    Ring9==0?Container():   Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: ElevatedButton(
-
-              style: ElevatedButton.styleFrom(
-
-                primary: selectedCategory.contains("R 8") ? Colors.black: Colors.white.withOpacity(0.1), // background
-                onPrimary:selectedCategory.contains("R 8") ? Colors.white:  Colors.black, // foreground
-              ),
-              onPressed: () {
-                selectedCategory =  <String>[];
-                selectedCategory.add("R 8");
-
-                stateSetter(() {usersize = "R 8";});
-              },          child: Text('(US) 8'),
-            ),
-    ),
-    Ring10==0?Container():   Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: ElevatedButton(
-
-              style: ElevatedButton.styleFrom(
-
-                primary: selectedCategory.contains("R 8.5") ? Colors.black: Colors.white.withOpacity(0.1), // background
-                onPrimary:selectedCategory.contains("R 8.5") ? Colors.white:  Colors.black, // foreground
-              ),
-              onPressed: () {
-                selectedCategory =  <String>[];
-                selectedCategory.add("R 8.5");
-
-                stateSetter(() {usersize = "R 8.5";});
-              },          child: Text('(US) 8.5'),
-            ),
-    ),
-    Ring11==0?Container():   Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: ElevatedButton(
-
-              style: ElevatedButton.styleFrom(
-
-                primary: selectedCategory.contains("R 9") ? Colors.black: Colors.white.withOpacity(0.1), // background
-                onPrimary:selectedCategory.contains("R 9") ? Colors.white:  Colors.black, // foreground
-              ),
-              onPressed: () {
-                selectedCategory =  <String>[];
-                selectedCategory.add("R 9");
-
-                stateSetter(() {usersize = "R 9";});
-              },          child: Text('(US) 9'),
-            ),
-    ),
-    Ring12==0?Container():   Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: ElevatedButton(
-
-              style: ElevatedButton.styleFrom(
-
-                primary: selectedCategory.contains("R 9.5") ? Colors.black: Colors.white.withOpacity(0.1), // background
-                onPrimary:selectedCategory.contains("R 9.5") ? Colors.white:  Colors.black, // foreground
-              ),
-              onPressed: () {
-                selectedCategory =  <String>[];
-                selectedCategory.add("R 9.5");
-
-                stateSetter(() {usersize = "R 9.5";});
-              },          child: Text('(US) 9.5'),
-            ),
-    ),
-    Ring13==0?Container():   Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: ElevatedButton(
-
-              style: ElevatedButton.styleFrom(
-
-                primary: selectedCategory.contains("R 10") ? Colors.black: Colors.white.withOpacity(0.1), // background
-                onPrimary:selectedCategory.contains("R 10") ? Colors.white:  Colors.black, // foreground
-              ),
-              onPressed: () {
-                selectedCategory =  <String>[];
-                selectedCategory.add("R 10");
-
-                stateSetter(() {usersize = "R 10";});
-              },          child: Text('(US) 10'),
-            ),
-    ),
- Ring14==0?Container():   Padding(
-   padding: const EdgeInsets.all(8.0),
-   child: ElevatedButton(
-
-              style: ElevatedButton.styleFrom(
-
-                primary: selectedCategory.contains("R 10.5") ? Colors.black: Colors.white.withOpacity(0.1), // background
-                onPrimary:selectedCategory.contains("R 10.5") ? Colors.white:  Colors.black, // foreground
-              ),
-              onPressed: () {
-                selectedCategory =  <String>[];
-                selectedCategory.add("R 10.5");
-
-                stateSetter(() {usersize = "R 10.5";});
-              },          child: Text('(US) 10.5'),
-            ),
- ),
- Ring15==0?Container():   Padding(
-   padding: const EdgeInsets.all(8.0),
-   child: ElevatedButton(
-
-              style: ElevatedButton.styleFrom(
-
-                primary: selectedCategory.contains("R 11") ? Colors.black: Colors.white.withOpacity(0.1), // background
-                onPrimary:selectedCategory.contains("R 11") ? Colors.white:  Colors.black, // foreground
-              ),
-              onPressed: () {
-                selectedCategory =  <String>[];
-                selectedCategory.add("R 11");
-
-                stateSetter(() {usersize = "R 11";});
-              },          child: Text('(US) 11'),
-            ),
- ),
- Ring16==0?Container():   Padding(
-   padding: const EdgeInsets.all(8.0),
-   child: ElevatedButton(
-
-              style: ElevatedButton.styleFrom(
-
-                primary: selectedCategory.contains("R 11.5") ? Colors.black: Colors.white.withOpacity(0.1), // background
-                onPrimary:selectedCategory.contains("R 11.5") ? Colors.white:  Colors.black, // foreground
-              ),
-              onPressed: () {
-                selectedCategory =  <String>[];
-                selectedCategory.add("R 11.5");
-
-                stateSetter(() {usersize = "R 11.5";});
-              },          child: Text('(US) 11.5'),
-            ),
- ),
- Ring17==0?Container():   Padding(
-   padding: const EdgeInsets.all(8.0),
-   child: ElevatedButton(
-
-              style: ElevatedButton.styleFrom(
-
-                primary: selectedCategory.contains("R 12") ? Colors.black: Colors.white.withOpacity(0.1), // background
-                onPrimary:selectedCategory.contains("R 12") ? Colors.white:  Colors.black, // foreground
-              ),
-              onPressed: () {
-                selectedCategory =  <String>[];
-                selectedCategory.add("R 12");
-
-                stateSetter(() {usersize = "R 12";});
-              },          child: Text('(US) 12'),
-            ),
- ),
- Ring18==0?Container():   Padding(
-   padding: const EdgeInsets.all(8.0),
-   child: ElevatedButton(
-
-              style: ElevatedButton.styleFrom(
-
-                primary: selectedCategory.contains("R 12.5") ? Colors.black: Colors.white.withOpacity(0.1), // background
-                onPrimary:selectedCategory.contains("R 12.5") ? Colors.white:  Colors.black, // foreground
-              ),
-              onPressed: () {
-                selectedCategory =  <String>[];
-                selectedCategory.add("R 12.5");
-
-                stateSetter(() {usersize = "R 12.5";});
-              },          child: Text('(US) 12.5'),
-            ),
- ),
- Ring19==0?Container():   Padding(
-   padding: const EdgeInsets.all(8.0),
-   child: ElevatedButton(
-
-              style: ElevatedButton.styleFrom(
-
-                primary: selectedCategory.contains("R 13") ? Colors.black: Colors.white.withOpacity(0.1), // background
-                onPrimary:selectedCategory.contains("R 13") ? Colors.white:  Colors.black, // foreground
-              ),
-              onPressed: () {
-                selectedCategory =  <String>[];
-                selectedCategory.add("R 13");
-
-                stateSetter(() {usersize = "R 13";});
-              },          child: Text('(US) 13'),
-            ),
- ),
- Ring20==0?Container():   Padding(
-   padding: const EdgeInsets.all(8.0),
-   child: ElevatedButton(
-
-              style: ElevatedButton.styleFrom(
-
-                primary: selectedCategory.contains("R 13.5") ? Colors.black: Colors.white.withOpacity(0.1), // background
-                onPrimary:selectedCategory.contains("R 13.5") ? Colors.white:  Colors.black, // foreground
-              ),
-              onPressed: () {
-                selectedCategory =  <String>[];
-                selectedCategory.add("R 13.5");
-
-                stateSetter(() {usersize = "R 13.5";});
-              },          child: Text('(US) 13.5'),
-            ),
- ),
- Ring21==0?Container():   Padding(
-   padding: const EdgeInsets.all(8.0),
-   child: ElevatedButton(
-
-              style: ElevatedButton.styleFrom(
-
-                primary: selectedCategory.contains("R 14") ? Colors.black: Colors.white.withOpacity(0.1), // background
-                onPrimary:selectedCategory.contains("R 14") ? Colors.white:  Colors.black, // foreground
-              ),
-              onPressed: () {
-                selectedCategory =  <String>[];
-                selectedCategory.add("R 14");
-
-                stateSetter(() {usersize = "R 14";});
-              },          child: Text('(US) 14'),
-            ),
- ),
- Ring22==0?Container():   Padding(
-   padding: const EdgeInsets.all(8.0),
-   child: ElevatedButton(
-
-              style: ElevatedButton.styleFrom(
-
-                primary: selectedCategory.contains("R 14.5") ? Colors.black: Colors.white.withOpacity(0.1), // background
-                onPrimary:selectedCategory.contains("R 14.5") ? Colors.white:  Colors.black, // foreground
-              ),
-              onPressed: () {
-                selectedCategory =  <String>[];
-                selectedCategory.add("R 14.5");
-
-                stateSetter(() {usersize = "R 14.5";});
-              },          child: Text('(US) 14.5'),
-            ),
- ),
- Ring23==0?Container():   Padding(
-   padding: const EdgeInsets.all(8.0),
-   child: ElevatedButton(
-
-              style: ElevatedButton.styleFrom(
-
-                primary: selectedCategory.contains("R 15") ? Colors.black: Colors.white.withOpacity(0.1), // background
-                onPrimary:selectedCategory.contains("R 15") ? Colors.white:  Colors.black, // foreground
-              ),
-              onPressed: () {
-                selectedCategory =  <String>[];
-                selectedCategory.add("R 15");
-
-                stateSetter(() {usersize = "R 15";});
-              },          child: Text('(US) 15'),
-            ),
- ),
  custom12==0?Container():   Padding(
    padding: const EdgeInsets.all(8.0),
    child: ElevatedButton(
@@ -3145,11 +3308,7 @@ custom102==0?Container():   Padding(
                         child: FloatingActionButton.extended(
                           backgroundColor: kblue,
                           onPressed: () {
-                            if (currentUser.country == 'India' &&
-                                currentUser.country == country) {
-                              Proceedtobuy(
-                                  ship: shipcostinr, shipcostU: shipcostinr);
-                            } else if (currentUser.country == country) {
+                             if (currentUser.country == country) {
                               Proceedtobuy(
                                   ship: shipcostusd, shipcostU: shipcostinr);
                             } else {
@@ -3192,6 +3351,25 @@ custom102==0?Container():   Padding(
                                         scrollDirection:Axis.horizontal,
                                         shrinkWrap:true,
                                         children:[
+                                          mto==0?Container():  Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child: ElevatedButton(
+
+                                              style: ElevatedButton.styleFrom(
+
+                                                primary: selectedCategory.contains("MTO") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                                                onPrimary:selectedCategory.contains("MTO") ? Colors.white:  Colors.black, // foreground
+                                              ),
+                                              onPressed: () {
+                                                selectedCategory =  <String>[];
+                                                selectedCategory.add("MTO");
+                                                MTO();
+                                                // stateSetter(() {usersize = "Free Size";
+                                                //size = 'Free size';
+                                                //});
+                                              },          child: Text('MTO'),
+                                            ),
+                                          ),
 
                                           freesize==0?Container():   Padding(
                                             padding: const EdgeInsets.all(8.0),
@@ -3206,7 +3384,9 @@ custom102==0?Container():   Padding(
                                                 selectedCategory =  <String>[];
                                                 selectedCategory.add("Free Size");
 
-                                                stateSetter(() {usersize = "Free Size";});
+                                                stateSetter(() {usersize = "Free Size";
+                                                size = 'Free size';
+                                                });
                                               },          child: Text('Free Size'),
                                             ),
                                           ),
@@ -3223,7 +3403,9 @@ custom102==0?Container():   Padding(
                                                 selectedCategory =  <String>[];
                                                 selectedCategory.add("XXXS");
 
-                                                stateSetter(() {usersize = "XXXS";});
+                                                stateSetter(() {usersize = "XXXS";
+                                                size = 'XXXS';
+                                                });
                                               },          child: Text('XXXS'),
                                             ),
                                           ),
@@ -3240,7 +3422,9 @@ custom102==0?Container():   Padding(
                                                 selectedCategory =  <String>[];
                                                 selectedCategory.add("XXS");
 
-                                                stateSetter(() {usersize = "XXS";});
+                                                stateSetter(() {usersize = "XXS";
+                                                size = 'XXS';
+                                                });
                                               },          child: Text('XXS'),
                                             ),
                                           ),
@@ -3257,7 +3441,9 @@ custom102==0?Container():   Padding(
                                                 selectedCategory =  <String>[];
                                                 selectedCategory.add("XS");
 
-                                                stateSetter(() {usersize = "XS";});
+                                                stateSetter(() {usersize = "XS";
+                                                size = 'XS';
+                                                });
                                               },          child: Text('XS'),
                                             ),
                                           ),
@@ -3274,7 +3460,9 @@ custom102==0?Container():   Padding(
                                                 selectedCategory =  <String>[];
                                                 selectedCategory.add("S");
 
-                                                stateSetter(() {usersize = "S";});
+                                                stateSetter(() {usersize = "S";
+                                                size = 'S';
+                                                });
                                               },          child: Text('S'),
                                             ),
                                           ),
@@ -3291,7 +3479,9 @@ custom102==0?Container():   Padding(
                                                 selectedCategory =  <String>[];
                                                 selectedCategory.add("M");
 
-                                                stateSetter(() {usersize = "M";});
+                                                stateSetter(() {usersize = "M";
+                                                size = 'M';
+                                                });
                                               },          child: Text('M'),
                                             ),
                                           ),
@@ -3309,7 +3499,9 @@ custom102==0?Container():   Padding(
                                                 selectedCategory =  <String>[];
                                                 selectedCategory.add("L");
 
-                                                stateSetter(() {usersize = "L";});
+                                                stateSetter(() {usersize = "L";
+                                                size = 'L';
+                                                });
                                               },          child: Text('L'),
                                             ),
                                           ),
@@ -3326,7 +3518,9 @@ custom102==0?Container():   Padding(
                                                 selectedCategory =  <String>[];
                                                 selectedCategory.add("XL");
 
-                                                stateSetter(() {usersize = "XL";});
+                                                stateSetter(() {usersize = "XL";
+                                                size = 'XL';
+                                                });
                                               },          child: Text('XL'),
                                             ),
                                           ),
@@ -3343,7 +3537,9 @@ custom102==0?Container():   Padding(
                                                 selectedCategory =  <String>[];
                                                 selectedCategory.add("XXL");
 
-                                                stateSetter(() {usersize = "XXL";});
+                                                stateSetter(() {usersize = "XXL";
+                                                size = 'XXL';
+                                                });
                                               },          child: Text('XXL'),
                                             ),
                                           ),
@@ -3360,7 +3556,9 @@ custom102==0?Container():   Padding(
                                                 selectedCategory =  <String>[];
                                                 selectedCategory.add("XXXL");
 
-                                                stateSetter(() {usersize = "XXXL";});
+                                                stateSetter(() {usersize = "XXXL";
+                                                size = 'XXXL';
+                                                });
                                               },          child: Text('XXXL'),
                                             ),
                                           ),
@@ -3377,7 +3575,9 @@ custom102==0?Container():   Padding(
                                                 selectedCategory =  <String>[];
                                                 selectedCategory.add("4XL");
 
-                                                stateSetter(() {usersize = "4XL";});
+                                                stateSetter(() {usersize = "4XL";
+                                                size = '4XL';
+                                                });
                                               },          child: Text('4XL'),
                                             ),
                                           ),
@@ -3394,7 +3594,9 @@ custom102==0?Container():   Padding(
                                                 selectedCategory =  <String>[];
                                                 selectedCategory.add("5XL");
 
-                                                stateSetter(() {usersize = "5XL";});
+                                                stateSetter(() {usersize = "5XL";
+                                                size = '5XL';
+                                                });
                                               },          child: Text('5XL'),
                                             ),
                                           ),
@@ -3411,7 +3613,9 @@ custom102==0?Container():   Padding(
                                                 selectedCategory =  <String>[];
                                                 selectedCategory.add("6XL");
 
-                                                stateSetter(() {usersize = "6XL";});
+                                                stateSetter(() {usersize = "6XL";
+                                                size = '6XL';
+                                                });
                                               },          child: Text('6XL'),
                                             ),
                                           ),
@@ -3428,7 +3632,9 @@ custom102==0?Container():   Padding(
                                                 selectedCategory =  <String>[];
                                                 selectedCategory.add("7XL");
 
-                                                stateSetter(() {usersize = "7XL";});
+                                                stateSetter(() {usersize = "7XL";
+                                                size = '7XL';
+                                                });
                                               },          child: Text('7XL'),
                                             ),
                                           ),
@@ -3445,8 +3651,449 @@ custom102==0?Container():   Padding(
                                                 selectedCategory =  <String>[];
                                                 selectedCategory.add("8XL");
 
-                                                stateSetter(() {usersize = "8XL";});
+                                                stateSetter(() {usersize = "8XL";
+                                                size = '8XL';
+                                                });
                                               },          child: Text('8XL'),
+                                            ),
+                                          ),
+                                          Ring1==0?Container():   Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child: ElevatedButton(
+
+                                              style: ElevatedButton.styleFrom(
+
+                                                primary: selectedCategory.contains("R 4") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                                                onPrimary:selectedCategory.contains("R 4") ? Colors.white:  Colors.black, // foreground
+                                              ),
+                                              onPressed: () {
+                                                selectedCategory =  <String>[];
+                                                selectedCategory.add("R 4");
+
+                                                stateSetter(() {usersize = "R 4";
+                                                size = '(US) 4';
+                                                });
+                                              },          child: Text('(US) 4'),
+                                            ),
+                                          ),
+                                          Ring2==0?Container():   Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child: ElevatedButton(
+
+                                              style: ElevatedButton.styleFrom(
+
+                                                primary: selectedCategory.contains("R 4.5") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                                                onPrimary:selectedCategory.contains("R 4.5") ? Colors.white:  Colors.black, // foreground
+                                              ),
+                                              onPressed: () {
+                                                selectedCategory =  <String>[];
+                                                selectedCategory.add("R 4.5");
+
+                                                stateSetter(() {usersize = "R 4.5";
+                                                size = '(US) 4.5';
+                                                });
+                                              },          child: Text('(US) 4.5'),
+                                            ),
+                                          ),
+
+                                          Ring3==0?Container():   Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child: ElevatedButton(
+
+                                              style: ElevatedButton.styleFrom(
+
+                                                primary: selectedCategory.contains("R 5") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                                                onPrimary:selectedCategory.contains("R 5") ? Colors.white:  Colors.black, // foreground
+                                              ),
+                                              onPressed: () {
+                                                selectedCategory =  <String>[];
+                                                selectedCategory.add("R 5");
+
+                                                stateSetter(() {usersize = "R 5";
+                                                size = '(US) 5';
+                                                });
+                                              },          child: Text('(US) 5'),
+                                            ),
+                                          ),
+                                          Ring4==0?Container():   Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child: ElevatedButton(
+
+                                              style: ElevatedButton.styleFrom(
+
+                                                primary: selectedCategory.contains("R 5.5") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                                                onPrimary:selectedCategory.contains("R 5.5") ? Colors.white:  Colors.black, // foreground
+                                              ),
+                                              onPressed: () {
+                                                selectedCategory =  <String>[];
+                                                selectedCategory.add("R 5.5");
+
+                                                stateSetter(() {usersize = "R 5.5";
+                                                size = '(US) 5.5';
+                                                });
+                                              },          child: Text('(US) 5.5'),
+                                            ),
+                                          ),
+                                          Ring5==0?Container():   Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child: ElevatedButton(
+
+                                              style: ElevatedButton.styleFrom(
+
+                                                primary: selectedCategory.contains("R 6") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                                                onPrimary:selectedCategory.contains("R 6") ? Colors.white:  Colors.black, // foreground
+                                              ),
+                                              onPressed: () {
+                                                selectedCategory =  <String>[];
+                                                selectedCategory.add("R 6");
+
+                                                stateSetter(() {usersize = "R 6";
+                                                size = '(US) 6';
+                                                });
+                                              },          child: Text('(US) 6'),
+                                            ),
+                                          ),
+                                          Ring6==0?Container():   Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child: ElevatedButton(
+
+                                              style: ElevatedButton.styleFrom(
+
+                                                primary: selectedCategory.contains("R 6.5") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                                                onPrimary:selectedCategory.contains("R 6.5") ? Colors.white:  Colors.black, // foreground
+                                              ),
+                                              onPressed: () {
+                                                selectedCategory =  <String>[];
+                                                selectedCategory.add("R 6.5");
+
+                                                stateSetter(() {usersize = "R 6.5";
+                                                size = '(US) 6.5';
+                                                });
+                                              },          child: Text('(US) 6.5'),
+                                            ),
+                                          ),
+                                          Ring7==0?Container():   Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child: ElevatedButton(
+
+                                              style: ElevatedButton.styleFrom(
+
+                                                primary: selectedCategory.contains("R 7") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                                                onPrimary:selectedCategory.contains("R 7") ? Colors.white:  Colors.black, // foreground
+                                              ),
+                                              onPressed: () {
+                                                selectedCategory =  <String>[];
+                                                selectedCategory.add("R 7");
+
+                                                stateSetter(() {usersize = "R 7";
+                                                size = '(US) 7';
+                                                });
+                                              },          child: Text('(US) 7'),
+                                            ),
+                                          ),
+                                          Ring8==0?Container():   Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child: ElevatedButton(
+
+                                              style: ElevatedButton.styleFrom(
+
+                                                primary: selectedCategory.contains("R 7.5") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                                                onPrimary:selectedCategory.contains("R 7.5") ? Colors.white:  Colors.black, // foreground
+                                              ),
+                                              onPressed: () {
+                                                selectedCategory =  <String>[];
+                                                selectedCategory.add("R 7.5");
+
+                                                stateSetter(() {usersize = "R 7.5";
+                                                size = '(US) 7.5';
+                                                });
+                                              },          child: Text('(US) 7.5'),
+                                            ),
+                                          ),
+                                          Ring9==0?Container():   Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child: ElevatedButton(
+
+                                              style: ElevatedButton.styleFrom(
+
+                                                primary: selectedCategory.contains("R 8") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                                                onPrimary:selectedCategory.contains("R 8") ? Colors.white:  Colors.black, // foreground
+                                              ),
+                                              onPressed: () {
+                                                selectedCategory =  <String>[];
+                                                selectedCategory.add("R 8");
+
+                                                stateSetter(() {usersize = "R 8";
+                                                size = '(US) 8';
+                                                });
+                                              },          child: Text('(US) 8'),
+                                            ),
+                                          ),
+                                          Ring10==0?Container():   Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child: ElevatedButton(
+
+                                              style: ElevatedButton.styleFrom(
+
+                                                primary: selectedCategory.contains("R 8.5") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                                                onPrimary:selectedCategory.contains("R 8.5") ? Colors.white:  Colors.black, // foreground
+                                              ),
+                                              onPressed: () {
+                                                selectedCategory =  <String>[];
+                                                selectedCategory.add("R 8.5");
+
+                                                stateSetter(() {usersize = "R 8.5";
+                                                size = '(US) 8.5';
+                                                });
+                                              },          child: Text('(US) 8.5'),
+                                            ),
+                                          ),
+                                          Ring11==0?Container():   Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child: ElevatedButton(
+
+                                              style: ElevatedButton.styleFrom(
+
+                                                primary: selectedCategory.contains("R 9") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                                                onPrimary:selectedCategory.contains("R 9") ? Colors.white:  Colors.black, // foreground
+                                              ),
+                                              onPressed: () {
+                                                selectedCategory =  <String>[];
+                                                selectedCategory.add("R 9");
+
+                                                stateSetter(() {usersize = "R 9";
+                                                size = '(US) 9';
+                                                });
+                                              },          child: Text('(US) 9'),
+                                            ),
+                                          ),
+                                          Ring12==0?Container():   Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child: ElevatedButton(
+
+                                              style: ElevatedButton.styleFrom(
+
+                                                primary: selectedCategory.contains("R 9.5") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                                                onPrimary:selectedCategory.contains("R 9.5") ? Colors.white:  Colors.black, // foreground
+                                              ),
+                                              onPressed: () {
+                                                selectedCategory =  <String>[];
+                                                selectedCategory.add("R 9.5");
+
+                                                stateSetter(() {usersize = "R 9.5";
+                                                size = '(US) 9.5';
+                                                });
+                                              },          child: Text('(US) 9.5'),
+                                            ),
+                                          ),
+                                          Ring13==0?Container():   Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child: ElevatedButton(
+
+                                              style: ElevatedButton.styleFrom(
+
+                                                primary: selectedCategory.contains("R 10") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                                                onPrimary:selectedCategory.contains("R 10") ? Colors.white:  Colors.black, // foreground
+                                              ),
+                                              onPressed: () {
+                                                selectedCategory =  <String>[];
+                                                selectedCategory.add("R 10");
+
+                                                stateSetter(() {usersize = "R 10";
+                                                size = '(US) 10';
+                                                });
+                                              },          child: Text('(US) 10'),
+                                            ),
+                                          ),
+                                          Ring14==0?Container():   Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child: ElevatedButton(
+
+                                              style: ElevatedButton.styleFrom(
+
+                                                primary: selectedCategory.contains("R 10.5") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                                                onPrimary:selectedCategory.contains("R 10.5") ? Colors.white:  Colors.black, // foreground
+                                              ),
+                                              onPressed: () {
+                                                selectedCategory =  <String>[];
+                                                selectedCategory.add("R 10.5");
+
+                                                stateSetter(() {usersize = "R 10.5";
+                                                size = '(US) 10.5';
+                                                });
+                                              },          child: Text('(US) 10.5'),
+                                            ),
+                                          ),
+                                          Ring15==0?Container():   Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child: ElevatedButton(
+
+                                              style: ElevatedButton.styleFrom(
+
+                                                primary: selectedCategory.contains("R 11") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                                                onPrimary:selectedCategory.contains("R 11") ? Colors.white:  Colors.black, // foreground
+                                              ),
+                                              onPressed: () {
+                                                selectedCategory =  <String>[];
+                                                selectedCategory.add("R 11");
+
+                                                stateSetter(() {usersize = "R 11";
+                                                size = '(US) 11';
+                                                });
+                                              },          child: Text('(US) 11'),
+                                            ),
+                                          ),
+                                          Ring16==0?Container():   Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child: ElevatedButton(
+
+                                              style: ElevatedButton.styleFrom(
+
+                                                primary: selectedCategory.contains("R 11.5") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                                                onPrimary:selectedCategory.contains("R 11.5") ? Colors.white:  Colors.black, // foreground
+                                              ),
+                                              onPressed: () {
+                                                selectedCategory =  <String>[];
+                                                selectedCategory.add("R 11.5");
+
+                                                stateSetter(() {usersize = "R 11.5";
+                                                size = '(US) 11.5';
+                                                });
+                                              },          child: Text('(US) 11.5'),
+                                            ),
+                                          ),
+                                          Ring17==0?Container():   Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child: ElevatedButton(
+
+                                              style: ElevatedButton.styleFrom(
+
+                                                primary: selectedCategory.contains("R 12") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                                                onPrimary:selectedCategory.contains("R 12") ? Colors.white:  Colors.black, // foreground
+                                              ),
+                                              onPressed: () {
+                                                selectedCategory =  <String>[];
+                                                selectedCategory.add("R 12");
+
+                                                stateSetter(() {usersize = "R 12";
+                                                size = '(US) 12';
+                                                });
+                                              },          child: Text('(US) 12'),
+                                            ),
+                                          ),
+                                          Ring18==0?Container():   Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child: ElevatedButton(
+
+                                              style: ElevatedButton.styleFrom(
+
+                                                primary: selectedCategory.contains("R 12.5") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                                                onPrimary:selectedCategory.contains("R 12.5") ? Colors.white:  Colors.black, // foreground
+                                              ),
+                                              onPressed: () {
+                                                selectedCategory =  <String>[];
+                                                selectedCategory.add("R 12.5");
+
+                                                stateSetter(() {usersize = "R 12.5";
+                                                size = '(US) 12.5';
+                                                });
+                                              },          child: Text('(US) 12.5'),
+                                            ),
+                                          ),
+                                          Ring19==0?Container():   Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child: ElevatedButton(
+
+                                              style: ElevatedButton.styleFrom(
+
+                                                primary: selectedCategory.contains("R 13") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                                                onPrimary:selectedCategory.contains("R 13") ? Colors.white:  Colors.black, // foreground
+                                              ),
+                                              onPressed: () {
+                                                selectedCategory =  <String>[];
+                                                selectedCategory.add("R 13");
+
+                                                stateSetter(() {usersize = "R 13";
+                                                size = '(US) 13';
+                                                });
+                                              },          child: Text('(US) 13'),
+                                            ),
+                                          ),
+                                          Ring20==0?Container():   Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child: ElevatedButton(
+
+                                              style: ElevatedButton.styleFrom(
+
+                                                primary: selectedCategory.contains("R 13.5") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                                                onPrimary:selectedCategory.contains("R 13.5") ? Colors.white:  Colors.black, // foreground
+                                              ),
+                                              onPressed: () {
+                                                selectedCategory =  <String>[];
+                                                selectedCategory.add("R 13.5");
+
+                                                stateSetter(() {
+                                                  size = '(US) 13.5';
+                                                  usersize = "R 13.5";});
+                                              },          child: Text('(US) 13.5'),
+                                            ),
+                                          ),
+                                          Ring21==0?Container():   Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child: ElevatedButton(
+
+                                              style: ElevatedButton.styleFrom(
+
+                                                primary: selectedCategory.contains("R 14") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                                                onPrimary:selectedCategory.contains("R 14") ? Colors.white:  Colors.black, // foreground
+                                              ),
+                                              onPressed: () {
+                                                selectedCategory =  <String>[];
+                                                selectedCategory.add("R 14");
+
+                                                stateSetter(() {usersize = "R 14";
+                                                size = '(US) 14';
+                                                });
+                                              },          child: Text('(US) 14'),
+                                            ),
+                                          ),
+                                          Ring22==0?Container():   Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child: ElevatedButton(
+
+                                              style: ElevatedButton.styleFrom(
+
+                                                primary: selectedCategory.contains("R 14.5") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                                                onPrimary:selectedCategory.contains("R 14.5") ? Colors.white:  Colors.black, // foreground
+                                              ),
+                                              onPressed: () {
+                                                selectedCategory =  <String>[];
+                                                selectedCategory.add("R 14.5");
+
+                                                stateSetter(() {usersize = "R 14.5";
+                                                size = '(US) 14.5';
+                                                });
+                                              },          child: Text('(US) 14.5'),
+                                            ),
+                                          ),
+                                          Ring23==0?Container():   Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child: ElevatedButton(
+
+                                              style: ElevatedButton.styleFrom(
+
+                                                primary: selectedCategory.contains("R 15") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                                                onPrimary:selectedCategory.contains("R 15") ? Colors.white:  Colors.black, // foreground
+                                              ),
+                                              onPressed: () {
+                                                selectedCategory =  <String>[];
+                                                selectedCategory.add("R 15");
+
+                                                stateSetter(() {usersize = "R 15";
+                                                size = '(US) 15';
+
+                                                });
+                                              },          child: Text('(US) 15'),
                                             ),
                                           ),
                                           Shoe1==0?Container():   Padding(
@@ -3462,7 +4109,9 @@ custom102==0?Container():   Padding(
                                                 selectedCategory =  <String>[];
                                                 selectedCategory.add("5");
 
-                                                stateSetter(() {usersize = "5";});
+                                                stateSetter(() {usersize = "5";
+                                                size = '5 (US)';
+                                                });
                                               },          child: Text('5 (US)'),
                                             ),
                                           ),
@@ -3479,7 +4128,9 @@ custom102==0?Container():   Padding(
                                                   selectedCategory =  <String>[];
                                                   selectedCategory.add("5 ½");
 
-                                                  stateSetter(() {usersize = "5 ½";});
+                                                  stateSetter(() {usersize = "5 ½";
+                                                  size = '5 ½ (US)';
+                                                  });
                                                 },          child: Text('5 ½ (US)'),
                                               )),
                                           Shoe3==0?Container():   Padding(
@@ -3495,7 +4146,9 @@ custom102==0?Container():   Padding(
                                                   selectedCategory =  <String>[];
                                                   selectedCategory.add("6");
 
-                                                  stateSetter(() {usersize = "6";});
+                                                  stateSetter(() {usersize = "6";
+                                                  size = '6 (US)';
+                                                  });
                                                 },          child: Text('6 (US)'),
                                               )),
                                           Shoe4==0?Container():  Padding(
@@ -3511,7 +4164,9 @@ custom102==0?Container():   Padding(
                                                   selectedCategory =  <String>[];
                                                   selectedCategory.add("6 ½");
 
-                                                  stateSetter(() {usersize = "6 ½";});
+                                                  stateSetter(() {usersize = "6 ½";
+                                                  size = '6 ½ (US)';
+                                                  });
                                                 },          child: Text('6 ½ (US)'),
                                               )),
                                           Shoe5==0?Container():   Padding(
@@ -3527,7 +4182,9 @@ custom102==0?Container():   Padding(
                                                   selectedCategory =  <String>[];
                                                   selectedCategory.add("7");
 
-                                                  stateSetter(() {usersize = "7";});
+                                                  stateSetter(() {usersize = "7";
+                                                  size = '7 (US)';
+                                                  });
                                                 },          child: Text('7 (US)'),
                                               )),
                                           Shoe6==0?Container():  Padding(
@@ -3543,7 +4200,9 @@ custom102==0?Container():   Padding(
                                                   selectedCategory =  <String>[];
                                                   selectedCategory.add("7 ½");
 
-                                                  stateSetter(() {usersize = "7 ½";});
+                                                  stateSetter(() {usersize = "7 ½";
+                                                  size = '7 ½ (US)';
+                                                  });
                                                 },          child: Text('7 ½ (US)'),
                                               )),
                                           Shoe7==0?Container():   Padding(
@@ -3559,7 +4218,9 @@ custom102==0?Container():   Padding(
                                                 selectedCategory =  <String>[];
                                                 selectedCategory.add("8");
 
-                                                stateSetter(() {usersize = "8";});
+                                                stateSetter(() {usersize = "8";
+                                                size = '8 (US)';
+                                                });
                                               },          child: Text('8 (US)'),
                                             ),
                                           ),
@@ -3576,7 +4237,9 @@ custom102==0?Container():   Padding(
                                                 selectedCategory =  <String>[];
                                                 selectedCategory.add("8 ½");
 
-                                                stateSetter(() {usersize = "8 ½";});
+                                                stateSetter(() {usersize = "8 ½";
+                                                size = '8 ½ (US)';
+                                                });
                                               },          child: Text('8 ½ (US)'),
                                             ),
                                           ),
@@ -3610,7 +4273,9 @@ custom102==0?Container():   Padding(
                                                 selectedCategory =  <String>[];
                                                 selectedCategory.add("9 ½");
 
-                                                stateSetter(() {usersize = "9 ½";});
+                                                stateSetter(() {usersize = "9 ½";
+                                                size = '9 ½ (US)';
+                                                });
                                               },          child: Text('9 ½ (US)'),
                                             ),
                                           ),
@@ -3627,7 +4292,9 @@ custom102==0?Container():   Padding(
                                                 selectedCategory =  <String>[];
                                                 selectedCategory.add("10");
 
-                                                stateSetter(() {usersize = "10";});
+                                                stateSetter(() {usersize = "10";
+                                                size = '10 (US)';
+                                                });
                                               },          child: Text('10 (US)'),
                                             ),
                                           ),
@@ -3644,7 +4311,9 @@ custom102==0?Container():   Padding(
                                                 selectedCategory =  <String>[];
                                                 selectedCategory.add("10 ½");
 
-                                                stateSetter(() {usersize = "10 ½";});
+                                                stateSetter(() {usersize = "10 ½";
+                                                size = '10 ½ (US)';
+                                                });
                                               },          child: Text('10 ½ (US)'),
                                             ),
                                           ),
@@ -3661,7 +4330,9 @@ custom102==0?Container():   Padding(
                                                 selectedCategory =  <String>[];
                                                 selectedCategory.add("12");
 
-                                                stateSetter(() {usersize = "12";});
+                                                stateSetter(() {usersize = "12";
+                                                size = '12 (US)';
+                                                });
                                               },          child: Text('12 (US)'),
                                             ),
                                           ),
@@ -3678,7 +4349,9 @@ custom102==0?Container():   Padding(
                                                 selectedCategory =  <String>[];
                                                 selectedCategory.add("13");
 
-                                                stateSetter(() {usersize = "13";});
+                                                stateSetter(() {usersize = "13";
+                                                size = '13 (US)';
+                                                });
                                               },          child: Text('13 (US)'),
                                             ),
                                           ),
@@ -3695,7 +4368,9 @@ custom102==0?Container():   Padding(
                                                 selectedCategory =  <String>[];
                                                 selectedCategory.add("14");
 
-                                                stateSetter(() {usersize = "14";});
+                                                stateSetter(() {usersize = "14";
+                                                size = '14 (US)';
+                                                });
                                               },          child: Text('14 (US)'),
                                             ),
                                           ),
@@ -3723,405 +4398,17 @@ custom102==0?Container():   Padding(
 
 
 
-                                                stateSetter(() {usersize = "15 ½";});
+                                                stateSetter(() {usersize = "15 ½";
+                                                size = '15 ½ (US)';
+
+                                                });
 
                                               },          child: Text('15 ½ (US)'),
 
                                             ),
                                           ),
 
-                                          Ring1==0?Container():   Padding(
-                                            padding: const EdgeInsets.all(8.0),
-                                            child: ElevatedButton(
 
-                                              style: ElevatedButton.styleFrom(
-
-                                                primary: selectedCategory.contains("R 4") ? Colors.black: Colors.white.withOpacity(0.1), // background
-                                                onPrimary:selectedCategory.contains("R 4") ? Colors.white:  Colors.black, // foreground
-                                              ),
-                                              onPressed: () {
-                                                selectedCategory =  <String>[];
-                                                selectedCategory.add("R 4");
-
-                                                stateSetter(() {usersize = "R 4";});
-                                              },          child: Text('(US) 4'),
-                                            ),
-                                          ),
-                                          Ring2==0?Container():   Padding(
-                                            padding: const EdgeInsets.all(8.0),
-                                            child: ElevatedButton(
-
-                                              style: ElevatedButton.styleFrom(
-
-                                                primary: selectedCategory.contains("R 4.5") ? Colors.black: Colors.white.withOpacity(0.1), // background
-                                                onPrimary:selectedCategory.contains("R 4.5") ? Colors.white:  Colors.black, // foreground
-                                              ),
-                                              onPressed: () {
-                                                selectedCategory =  <String>[];
-                                                selectedCategory.add("R 4.5");
-
-                                                stateSetter(() {usersize = "R 4.5";});
-                                              },          child: Text('(US) 4.5'),
-                                            ),
-                                          ),
-
-                                          Ring3==0?Container():   Padding(
-                                            padding: const EdgeInsets.all(8.0),
-                                            child: ElevatedButton(
-
-                                              style: ElevatedButton.styleFrom(
-
-                                                primary: selectedCategory.contains("R 5") ? Colors.black: Colors.white.withOpacity(0.1), // background
-                                                onPrimary:selectedCategory.contains("R 5") ? Colors.white:  Colors.black, // foreground
-                                              ),
-                                              onPressed: () {
-                                                selectedCategory =  <String>[];
-                                                selectedCategory.add("R 5");
-
-                                                stateSetter(() {usersize = "R 5";});
-                                              },          child: Text('(US) 5'),
-                                            ),
-                                          ),
-                                          Ring4==0?Container():   Padding(
-                                            padding: const EdgeInsets.all(8.0),
-                                            child: ElevatedButton(
-
-                                              style: ElevatedButton.styleFrom(
-
-                                                primary: selectedCategory.contains("R 5.5") ? Colors.black: Colors.white.withOpacity(0.1), // background
-                                                onPrimary:selectedCategory.contains("R 5.5") ? Colors.white:  Colors.black, // foreground
-                                              ),
-                                              onPressed: () {
-                                                selectedCategory =  <String>[];
-                                                selectedCategory.add("R 5.5");
-
-                                                stateSetter(() {usersize = "R 5.5";});
-                                              },          child: Text('(US) 5.5'),
-                                            ),
-                                          ),
-                                          Ring5==0?Container():   Padding(
-                                            padding: const EdgeInsets.all(8.0),
-                                            child: ElevatedButton(
-
-                                              style: ElevatedButton.styleFrom(
-
-                                                primary: selectedCategory.contains("R 6") ? Colors.black: Colors.white.withOpacity(0.1), // background
-                                                onPrimary:selectedCategory.contains("R 6") ? Colors.white:  Colors.black, // foreground
-                                              ),
-                                              onPressed: () {
-                                                selectedCategory =  <String>[];
-                                                selectedCategory.add("R 6");
-
-                                                stateSetter(() {usersize = "R 6";});
-                                              },          child: Text('(US) 6'),
-                                            ),
-                                          ),
-                                          Ring6==0?Container():   Padding(
-                                            padding: const EdgeInsets.all(8.0),
-                                            child: ElevatedButton(
-
-                                              style: ElevatedButton.styleFrom(
-
-                                                primary: selectedCategory.contains("R 6.5") ? Colors.black: Colors.white.withOpacity(0.1), // background
-                                                onPrimary:selectedCategory.contains("R 6.5") ? Colors.white:  Colors.black, // foreground
-                                              ),
-                                              onPressed: () {
-                                                selectedCategory =  <String>[];
-                                                selectedCategory.add("R 6.5");
-
-                                                stateSetter(() {usersize = "R 6.5";});
-                                              },          child: Text('(US) 6.5'),
-                                            ),
-                                          ),
-                                          Ring7==0?Container():   Padding(
-                                            padding: const EdgeInsets.all(8.0),
-                                            child: ElevatedButton(
-
-                                              style: ElevatedButton.styleFrom(
-
-                                                primary: selectedCategory.contains("R 7") ? Colors.black: Colors.white.withOpacity(0.1), // background
-                                                onPrimary:selectedCategory.contains("R 7") ? Colors.white:  Colors.black, // foreground
-                                              ),
-                                              onPressed: () {
-                                                selectedCategory =  <String>[];
-                                                selectedCategory.add("R 7");
-
-                                                stateSetter(() {usersize = "R 7";});
-                                              },          child: Text('(US) 7'),
-                                            ),
-                                          ),
-                                          Ring8==0?Container():   Padding(
-                                            padding: const EdgeInsets.all(8.0),
-                                            child: ElevatedButton(
-
-                                              style: ElevatedButton.styleFrom(
-
-                                                primary: selectedCategory.contains("R 7.5") ? Colors.black: Colors.white.withOpacity(0.1), // background
-                                                onPrimary:selectedCategory.contains("R 7.5") ? Colors.white:  Colors.black, // foreground
-                                              ),
-                                              onPressed: () {
-                                                selectedCategory =  <String>[];
-                                                selectedCategory.add("R 7.5");
-
-                                                stateSetter(() {usersize = "R 7.5";});
-                                              },          child: Text('(US) 7.5'),
-                                            ),
-                                          ),
-                                          Ring9==0?Container():   Padding(
-                                            padding: const EdgeInsets.all(8.0),
-                                            child: ElevatedButton(
-
-                                              style: ElevatedButton.styleFrom(
-
-                                                primary: selectedCategory.contains("R 8") ? Colors.black: Colors.white.withOpacity(0.1), // background
-                                                onPrimary:selectedCategory.contains("R 8") ? Colors.white:  Colors.black, // foreground
-                                              ),
-                                              onPressed: () {
-                                                selectedCategory =  <String>[];
-                                                selectedCategory.add("R 8");
-
-                                                stateSetter(() {usersize = "R 8";});
-                                              },          child: Text('(US) 8'),
-                                            ),
-                                          ),
-                                          Ring10==0?Container():   Padding(
-                                            padding: const EdgeInsets.all(8.0),
-                                            child: ElevatedButton(
-
-                                              style: ElevatedButton.styleFrom(
-
-                                                primary: selectedCategory.contains("R 8.5") ? Colors.black: Colors.white.withOpacity(0.1), // background
-                                                onPrimary:selectedCategory.contains("R 8.5") ? Colors.white:  Colors.black, // foreground
-                                              ),
-                                              onPressed: () {
-                                                selectedCategory =  <String>[];
-                                                selectedCategory.add("R 8.5");
-
-                                                stateSetter(() {usersize = "R 8.5";});
-                                              },          child: Text('(US) 8.5'),
-                                            ),
-                                          ),
-                                          Ring11==0?Container():   Padding(
-                                            padding: const EdgeInsets.all(8.0),
-                                            child: ElevatedButton(
-
-                                              style: ElevatedButton.styleFrom(
-
-                                                primary: selectedCategory.contains("R 9") ? Colors.black: Colors.white.withOpacity(0.1), // background
-                                                onPrimary:selectedCategory.contains("R 9") ? Colors.white:  Colors.black, // foreground
-                                              ),
-                                              onPressed: () {
-                                                selectedCategory =  <String>[];
-                                                selectedCategory.add("R 9");
-
-                                                stateSetter(() {usersize = "R 9";});
-                                              },          child: Text('(US) 9'),
-                                            ),
-                                          ),
-                                          Ring12==0?Container():   Padding(
-                                            padding: const EdgeInsets.all(8.0),
-                                            child: ElevatedButton(
-
-                                              style: ElevatedButton.styleFrom(
-
-                                                primary: selectedCategory.contains("R 9.5") ? Colors.black: Colors.white.withOpacity(0.1), // background
-                                                onPrimary:selectedCategory.contains("R 9.5") ? Colors.white:  Colors.black, // foreground
-                                              ),
-                                              onPressed: () {
-                                                selectedCategory =  <String>[];
-                                                selectedCategory.add("R 9.5");
-
-                                                stateSetter(() {usersize = "R 9.5";});
-                                              },          child: Text('(US) 9.5'),
-                                            ),
-                                          ),
-                                          Ring13==0?Container():   Padding(
-                                            padding: const EdgeInsets.all(8.0),
-                                            child: ElevatedButton(
-
-                                              style: ElevatedButton.styleFrom(
-
-                                                primary: selectedCategory.contains("R 10") ? Colors.black: Colors.white.withOpacity(0.1), // background
-                                                onPrimary:selectedCategory.contains("R 10") ? Colors.white:  Colors.black, // foreground
-                                              ),
-                                              onPressed: () {
-                                                selectedCategory =  <String>[];
-                                                selectedCategory.add("R 10");
-
-                                                stateSetter(() {usersize = "R 10";});
-                                              },          child: Text('(US) 10'),
-                                            ),
-                                          ),
-                                          Ring14==0?Container():   Padding(
-                                            padding: const EdgeInsets.all(8.0),
-                                            child: ElevatedButton(
-
-                                              style: ElevatedButton.styleFrom(
-
-                                                primary: selectedCategory.contains("R 10.5") ? Colors.black: Colors.white.withOpacity(0.1), // background
-                                                onPrimary:selectedCategory.contains("R 10.5") ? Colors.white:  Colors.black, // foreground
-                                              ),
-                                              onPressed: () {
-                                                selectedCategory =  <String>[];
-                                                selectedCategory.add("R 10.5");
-
-                                                stateSetter(() {usersize = "R 10.5";});
-                                              },          child: Text('(US) 10.5'),
-                                            ),
-                                          ),
-                                          Ring15==0?Container():   Padding(
-                                            padding: const EdgeInsets.all(8.0),
-                                            child: ElevatedButton(
-
-                                              style: ElevatedButton.styleFrom(
-
-                                                primary: selectedCategory.contains("R 11") ? Colors.black: Colors.white.withOpacity(0.1), // background
-                                                onPrimary:selectedCategory.contains("R 11") ? Colors.white:  Colors.black, // foreground
-                                              ),
-                                              onPressed: () {
-                                                selectedCategory =  <String>[];
-                                                selectedCategory.add("R 11");
-
-                                                stateSetter(() {usersize = "R 11";});
-                                              },          child: Text('(US) 11'),
-                                            ),
-                                          ),
-                                          Ring16==0?Container():   Padding(
-                                            padding: const EdgeInsets.all(8.0),
-                                            child: ElevatedButton(
-
-                                              style: ElevatedButton.styleFrom(
-
-                                                primary: selectedCategory.contains("R 11.5") ? Colors.black: Colors.white.withOpacity(0.1), // background
-                                                onPrimary:selectedCategory.contains("R 11.5") ? Colors.white:  Colors.black, // foreground
-                                              ),
-                                              onPressed: () {
-                                                selectedCategory =  <String>[];
-                                                selectedCategory.add("R 11.5");
-
-                                                stateSetter(() {usersize = "R 11.5";});
-                                              },          child: Text('(US) 11.5'),
-                                            ),
-                                          ),
-                                          Ring17==0?Container():   Padding(
-                                            padding: const EdgeInsets.all(8.0),
-                                            child: ElevatedButton(
-
-                                              style: ElevatedButton.styleFrom(
-
-                                                primary: selectedCategory.contains("R 12") ? Colors.black: Colors.white.withOpacity(0.1), // background
-                                                onPrimary:selectedCategory.contains("R 12") ? Colors.white:  Colors.black, // foreground
-                                              ),
-                                              onPressed: () {
-                                                selectedCategory =  <String>[];
-                                                selectedCategory.add("R 12");
-
-                                                stateSetter(() {usersize = "R 12";});
-                                              },          child: Text('(US) 12'),
-                                            ),
-                                          ),
-                                          Ring18==0?Container():   Padding(
-                                            padding: const EdgeInsets.all(8.0),
-                                            child: ElevatedButton(
-
-                                              style: ElevatedButton.styleFrom(
-
-                                                primary: selectedCategory.contains("R 12.5") ? Colors.black: Colors.white.withOpacity(0.1), // background
-                                                onPrimary:selectedCategory.contains("R 12.5") ? Colors.white:  Colors.black, // foreground
-                                              ),
-                                              onPressed: () {
-                                                selectedCategory =  <String>[];
-                                                selectedCategory.add("R 12.5");
-
-                                                stateSetter(() {usersize = "R 12.5";});
-                                              },          child: Text('(US) 12.5'),
-                                            ),
-                                          ),
-                                          Ring19==0?Container():   Padding(
-                                            padding: const EdgeInsets.all(8.0),
-                                            child: ElevatedButton(
-
-                                              style: ElevatedButton.styleFrom(
-
-                                                primary: selectedCategory.contains("R 13") ? Colors.black: Colors.white.withOpacity(0.1), // background
-                                                onPrimary:selectedCategory.contains("R 13") ? Colors.white:  Colors.black, // foreground
-                                              ),
-                                              onPressed: () {
-                                                selectedCategory =  <String>[];
-                                                selectedCategory.add("R 13");
-
-                                                stateSetter(() {usersize = "R 13";});
-                                              },          child: Text('(US) 13'),
-                                            ),
-                                          ),
-                                          Ring20==0?Container():   Padding(
-                                            padding: const EdgeInsets.all(8.0),
-                                            child: ElevatedButton(
-
-                                              style: ElevatedButton.styleFrom(
-
-                                                primary: selectedCategory.contains("R 13.5") ? Colors.black: Colors.white.withOpacity(0.1), // background
-                                                onPrimary:selectedCategory.contains("R 13.5") ? Colors.white:  Colors.black, // foreground
-                                              ),
-                                              onPressed: () {
-                                                selectedCategory =  <String>[];
-                                                selectedCategory.add("R 13.5");
-
-                                                stateSetter(() {usersize = "R 13.5";});
-                                              },          child: Text('(US) 13.5'),
-                                            ),
-                                          ),
-                                          Ring21==0?Container():   Padding(
-                                            padding: const EdgeInsets.all(8.0),
-                                            child: ElevatedButton(
-
-                                              style: ElevatedButton.styleFrom(
-
-                                                primary: selectedCategory.contains("R 14") ? Colors.black: Colors.white.withOpacity(0.1), // background
-                                                onPrimary:selectedCategory.contains("R 14") ? Colors.white:  Colors.black, // foreground
-                                              ),
-                                              onPressed: () {
-                                                selectedCategory =  <String>[];
-                                                selectedCategory.add("R 14");
-
-                                                stateSetter(() {usersize = "R 14";});
-                                              },          child: Text('(US) 14'),
-                                            ),
-                                          ),
-                                          Ring22==0?Container():   Padding(
-                                            padding: const EdgeInsets.all(8.0),
-                                            child: ElevatedButton(
-
-                                              style: ElevatedButton.styleFrom(
-
-                                                primary: selectedCategory.contains("R 14.5") ? Colors.black: Colors.white.withOpacity(0.1), // background
-                                                onPrimary:selectedCategory.contains("R 14.5") ? Colors.white:  Colors.black, // foreground
-                                              ),
-                                              onPressed: () {
-                                                selectedCategory =  <String>[];
-                                                selectedCategory.add("R 14.5");
-
-                                                stateSetter(() {usersize = "R 14.5";});
-                                              },          child: Text('(US) 14.5'),
-                                            ),
-                                          ),
-                                          Ring23==0?Container():   Padding(
-                                            padding: const EdgeInsets.all(8.0),
-                                            child: ElevatedButton(
-
-                                              style: ElevatedButton.styleFrom(
-
-                                                primary: selectedCategory.contains("R 15") ? Colors.black: Colors.white.withOpacity(0.1), // background
-                                                onPrimary:selectedCategory.contains("R 15") ? Colors.white:  Colors.black, // foreground
-                                              ),
-                                              onPressed: () {
-                                                selectedCategory =  <String>[];
-                                                selectedCategory.add("R 15");
-
-                                                stateSetter(() {usersize = "R 15";});
-                                              },          child: Text('(US) 15'),
-                                            ),
-                                          ),
                                           custom12==0?Container():   Padding(
                                             padding: const EdgeInsets.all(8.0),
                                             child: ElevatedButton(
@@ -4620,11 +4907,7 @@ custom102==0?Container():   Padding(
                                   child: FloatingActionButton.extended(
                                     backgroundColor: kblue,
                                     onPressed: () {
-                                      if (currentUser.country == 'India' &&
-                                          currentUser.country == country) {
-                                        Proceedtobuy(
-                                            ship: shipcostinr, shipcostU: shipcostinr);
-                                      } else if (currentUser.country == country) {
+                                      if (currentUser.country == country) {
                                         Proceedtobuy(
                                             ship: shipcostusd, shipcostU: shipcostinr);
                                       } else {
@@ -4667,6 +4950,25 @@ custom102==0?Container():   Padding(
                                         scrollDirection:Axis.horizontal,
                                         shrinkWrap:true,
                                         children:[
+                                          mto==0?Container():  Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child: ElevatedButton(
+
+                                              style: ElevatedButton.styleFrom(
+
+                                                primary: selectedCategory.contains("MTO") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                                                onPrimary:selectedCategory.contains("MTO") ? Colors.white:  Colors.black, // foreground
+                                              ),
+                                              onPressed: () {
+                                                selectedCategory =  <String>[];
+                                                selectedCategory.add("MTO");
+                                                MTO();
+                                                // stateSetter(() {usersize = "Free Size";
+                                                //size = 'Free size';
+                                                //});
+                                              },          child: Text('MTO'),
+                                            ),
+                                          ),
 
                                           freesize==0?Container():   Padding(
                                             padding: const EdgeInsets.all(8.0),
@@ -4681,7 +4983,9 @@ custom102==0?Container():   Padding(
                                                 selectedCategory =  <String>[];
                                                 selectedCategory.add("Free Size");
 
-                                                stateSetter(() {usersize = "Free Size";});
+                                                stateSetter(() {usersize = "Free Size";
+                                                size = 'Free size';
+                                                });
                                               },          child: Text('Free Size'),
                                             ),
                                           ),
@@ -4698,7 +5002,10 @@ custom102==0?Container():   Padding(
                                                 selectedCategory =  <String>[];
                                                 selectedCategory.add("0-3 M");
 
-                                                stateSetter(() {usersize = "0-3 M";});
+                                                stateSetter(() {usersize = "0-3 M";
+                                                size = '0-3 M';
+
+                                                });
                                               },          child: Text('0-3 M'),
                                             ),
                                           ),
@@ -4715,7 +5022,9 @@ custom102==0?Container():   Padding(
                                                 selectedCategory =  <String>[];
                                                 selectedCategory.add("3-6 M");
 
-                                                stateSetter(() {usersize = "3-6 M";});
+                                                stateSetter(() {usersize = "3-6 M";
+                                                size = '3-6 M';
+                                                });
                                               },          child: Text('3-6 M'),
                                             ),
                                           ),
@@ -4732,7 +5041,9 @@ custom102==0?Container():   Padding(
                                                 selectedCategory =  <String>[];
                                                 selectedCategory.add("6-9 M");
 
-                                                stateSetter(() {usersize = "6-9 M";});
+                                                stateSetter(() {usersize = "6-9 M";
+                                                size = '6-9 M';
+                                                });
                                               },          child: Text('6-9 M'),
                                             ),
                                           ),
@@ -4749,7 +5060,9 @@ custom102==0?Container():   Padding(
                                                 selectedCategory =  <String>[];
                                                 selectedCategory.add("9-12 M");
 
-                                                stateSetter(() {usersize = "9-12 M";});
+                                                stateSetter(() {usersize = "9-12 M";
+                                                size = '9-12 M';
+                                                });
                                               },          child: Text('9-12 M'),
                                             ),
                                           ),
@@ -4766,7 +5079,9 @@ custom102==0?Container():   Padding(
                                                 selectedCategory =  <String>[];
                                                 selectedCategory.add("12-18 M");
 
-                                                stateSetter(() {usersize = "12-18 M";});
+                                                stateSetter(() {usersize = "12-18 M";
+                                                size = '12-18 M';
+                                                });
                                               },          child: Text('12-18 M'),
                                             ),
                                           ),
@@ -4784,7 +5099,9 @@ custom102==0?Container():   Padding(
                                                 selectedCategory =  <String>[];
                                                 selectedCategory.add("18-24 M");
 
-                                                stateSetter(() {usersize = "18-24 M";});
+                                                stateSetter(() {usersize = "18-24 M";
+                                                size = '18-24 M';
+                                                });
                                               },          child: Text('18-24 M'),
                                             ),
                                           ),
@@ -4802,7 +5119,9 @@ custom102==0?Container():   Padding(
                                                 selectedCategory =  <String>[];
                                                 selectedCategory.add("S 0-3 M");
 
-                                                stateSetter(() {usersize = "S 0-3 M";});
+                                                stateSetter(() {usersize = "S 0-3 M";
+                                                size = '0-3 M';
+                                                });
                                               },          child: Text('S 0-3 M'),
                                             ),
                                           ),
@@ -4819,7 +5138,9 @@ custom102==0?Container():   Padding(
                                                   selectedCategory =  <String>[];
                                                   selectedCategory.add("S 3-6 M");
 
-                                                  stateSetter(() {usersize = "S 3-6 M";});
+                                                  stateSetter(() {usersize = "S 3-6 M";
+                                                  size = '3-6 M';
+                                                  });
                                                 },          child: Text('S 3-6 M'),
                                               )),
                                           Shoe3==0?Container():   Padding(
@@ -4835,7 +5156,9 @@ custom102==0?Container():   Padding(
                                                   selectedCategory =  <String>[];
                                                   selectedCategory.add("6 M");
 
-                                                  stateSetter(() {usersize = "6 M";});
+                                                  stateSetter(() {usersize = "6 M";
+                                                  size = '6 M';
+                                                  });
                                                 },          child: Text('6 M'),
                                               )),
                                           Shoe4==0?Container():  Padding(
@@ -4851,7 +5174,9 @@ custom102==0?Container():   Padding(
                                                   selectedCategory =  <String>[];
                                                   selectedCategory.add("9 M");
 
-                                                  stateSetter(() {usersize = "9 M";});
+                                                  stateSetter(() {usersize = "9 M";
+                                                  size = '9 M';
+                                                  });
                                                 },          child: Text('9 M'),
                                               )),
                                           Shoe5==0?Container():   Padding(
@@ -4867,7 +5192,9 @@ custom102==0?Container():   Padding(
                                                   selectedCategory =  <String>[];
                                                   selectedCategory.add("S 9-12 M");
 
-                                                  stateSetter(() {usersize = "S 9-12 M";});
+                                                  stateSetter(() {usersize = "S 9-12 M";
+                                                  size = '9-12 M';
+                                                  });
                                                 },          child: Text('S 9-12 M'),
                                               )),
                                           Shoe6==0?Container():  Padding(
@@ -4883,7 +5210,9 @@ custom102==0?Container():   Padding(
                                                   selectedCategory =  <String>[];
                                                   selectedCategory.add("S 12-18 M");
 
-                                                  stateSetter(() {usersize = "S 12-18 M";});
+                                                  stateSetter(() {usersize = "S 12-18 M";
+                                                  size = '12-18 M';
+                                                  });
                                                 },          child: Text('S 12-18 M'),
                                               )),
                                           Shoe7==0?Container():   Padding(
@@ -4899,174 +5228,10 @@ custom102==0?Container():   Padding(
                                                 selectedCategory =  <String>[];
                                                 selectedCategory.add("S 18-24 M");
 
-                                                stateSetter(() {usersize = "S 18-24 M";});
+                                                stateSetter(() {usersize = "S 18-24 M";
+                                                size = '18-24 M';
+                                                });
                                               },          child: Text('S 18-24 M'),
-                                            ),
-                                          ),
-                                          Shoe8==0?Container():   Padding(
-                                            padding: const EdgeInsets.all(8.0),
-                                            child:   ElevatedButton(
-
-                                              style: ElevatedButton.styleFrom(
-
-                                                primary: selectedCategory.contains("8 ½") ? Colors.black: Colors.white.withOpacity(0.1), // background
-                                                onPrimary:selectedCategory.contains("8 ½") ? Colors.white:  Colors.black, // foreground
-                                              ),
-                                              onPressed: () {
-                                                selectedCategory =  <String>[];
-                                                selectedCategory.add("8 ½");
-
-                                                stateSetter(() {usersize = "8 ½";});
-                                              },          child: Text('8 ½'),
-                                            ),
-                                          ),
-                                          Shoe9==0?Container():   Padding(
-                                            padding: const EdgeInsets.all(8.0),
-                                            child:   ElevatedButton(
-
-                                              style: ElevatedButton.styleFrom(
-
-                                                primary: selectedCategory.contains("9") ? Colors.black: Colors.white.withOpacity(0.1), // background
-                                                onPrimary:selectedCategory.contains("9") ? Colors.white:  Colors.black, // foreground
-                                              ),
-                                              onPressed: () {
-                                                selectedCategory =  <String>[];
-                                                selectedCategory.add("9");
-
-                                                stateSetter(() {usersize = "9";});
-                                              },          child: Text('9'),
-                                            ),
-                                          ),
-                                          Shoe10==0?Container():   Padding(
-                                            padding: const EdgeInsets.all(8.0),
-                                            child:   ElevatedButton(
-
-                                              style: ElevatedButton.styleFrom(
-
-                                                primary: selectedCategory.contains("9 ½") ? Colors.black: Colors.white.withOpacity(0.1), // background
-                                                onPrimary:selectedCategory.contains("9 ½") ? Colors.white:  Colors.black, // foreground
-                                              ),
-                                              onPressed: () {
-                                                selectedCategory =  <String>[];
-                                                selectedCategory.add("9 ½");
-
-                                                stateSetter(() {usersize = "9 ½";});
-                                              },          child: Text('9 ½'),
-                                            ),
-                                          ),
-                                          Shoe11==0?Container():   Padding(
-                                            padding: const EdgeInsets.all(8.0),
-                                            child:   ElevatedButton(
-
-                                              style: ElevatedButton.styleFrom(
-
-                                                primary: selectedCategory.contains("10") ? Colors.black: Colors.white.withOpacity(0.1), // background
-                                                onPrimary:selectedCategory.contains("10") ? Colors.white:  Colors.black, // foreground
-                                              ),
-                                              onPressed: () {
-                                                selectedCategory =  <String>[];
-                                                selectedCategory.add("10");
-
-                                                stateSetter(() {usersize = "10";});
-                                              },          child: Text('10'),
-                                            ),
-                                          ),
-                                          Shoe12==0?Container():   Padding(
-                                            padding: const EdgeInsets.all(8.0),
-                                            child:   ElevatedButton(
-
-                                              style: ElevatedButton.styleFrom(
-
-                                                primary: selectedCategory.contains("10 ½") ? Colors.black: Colors.white.withOpacity(0.1), // background
-                                                onPrimary:selectedCategory.contains("10 ½") ? Colors.white:  Colors.black, // foreground
-                                              ),
-                                              onPressed: () {
-                                                selectedCategory =  <String>[];
-                                                selectedCategory.add("10 ½");
-
-                                                stateSetter(() {usersize = "10 ½";});
-                                              },          child: Text('10 ½'),
-                                            ),
-                                          ),
-                                          Shoe13==0?Container():   Padding(
-                                            padding: const EdgeInsets.all(8.0),
-                                            child:   ElevatedButton(
-
-                                              style: ElevatedButton.styleFrom(
-
-                                                primary: selectedCategory.contains("12") ? Colors.black: Colors.white.withOpacity(0.1), // background
-                                                onPrimary:selectedCategory.contains("12") ? Colors.white:  Colors.black, // foreground
-                                              ),
-                                              onPressed: () {
-                                                selectedCategory =  <String>[];
-                                                selectedCategory.add("12");
-
-                                                stateSetter(() {usersize = "12";});
-                                              },          child: Text('12'),
-                                            ),
-                                          ),
-                                          Shoe14==0?Container():   Padding(
-                                            padding: const EdgeInsets.all(8.0),
-                                            child:   ElevatedButton(
-
-                                              style: ElevatedButton.styleFrom(
-
-                                                primary: selectedCategory.contains("13") ? Colors.black: Colors.white.withOpacity(0.1), // background
-                                                onPrimary:selectedCategory.contains("13") ? Colors.white:  Colors.black, // foreground
-                                              ),
-                                              onPressed: () {
-                                                selectedCategory =  <String>[];
-                                                selectedCategory.add("13");
-
-                                                stateSetter(() {usersize = "13";});
-                                              },          child: Text('13'),
-                                            ),
-                                          ),
-                                          Shoe15==0?Container():   Padding(
-                                            padding: const EdgeInsets.all(8.0),
-                                            child:   ElevatedButton(
-
-                                              style: ElevatedButton.styleFrom(
-
-                                                primary: selectedCategory.contains("14") ? Colors.black: Colors.white.withOpacity(0.1), // background
-                                                onPrimary:selectedCategory.contains("14") ? Colors.white:  Colors.black, // foreground
-                                              ),
-                                              onPressed: () {
-                                                selectedCategory =  <String>[];
-                                                selectedCategory.add("14");
-
-                                                stateSetter(() {usersize = "14";});
-                                              },          child: Text('14'),
-                                            ),
-                                          ),
-                                          Shoe16==0?Container():   Padding(
-                                            padding: const EdgeInsets.all(8.0),
-                                            child:   ElevatedButton(
-
-
-
-                                              style: ElevatedButton.styleFrom(
-
-
-
-                                                primary: selectedCategory.contains("15 ½") ? Colors.black: Colors.white.withOpacity(0.1), // background
-
-                                                onPrimary:selectedCategory.contains("15 ½") ? Colors.white:  Colors.black, // foreground
-
-                                              ),
-
-                                              onPressed: () {
-
-                                                selectedCategory =  <String>[];
-
-                                                selectedCategory.add("15 ½");
-
-
-
-                                                stateSetter(() {usersize = "15 ½";});
-
-                                              },          child: Text('15 ½'),
-
                                             ),
                                           ),
 
@@ -5569,11 +5734,7 @@ custom102==0?Container():   Padding(
                                   child: FloatingActionButton.extended(
                                     backgroundColor: kblue,
                                     onPressed: () {
-                                      if (currentUser.country == 'India' &&
-                                          currentUser.country == country) {
-                                        Proceedtobuy(
-                                            ship: shipcostinr, shipcostU: shipcostinr);
-                                      } else if (currentUser.country == country) {
+                                      if (currentUser.country == country) {
                                         Proceedtobuy(
                                             ship: shipcostusd, shipcostU: shipcostinr);
                                       } else {
@@ -5616,6 +5777,25 @@ custom102==0?Container():   Padding(
                                         scrollDirection:Axis.horizontal,
                                         shrinkWrap:true,
                                         children:[
+                                          mto==0?Container():  Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child: ElevatedButton(
+
+                                              style: ElevatedButton.styleFrom(
+
+                                                primary: selectedCategory.contains("MTO") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                                                onPrimary:selectedCategory.contains("MTO") ? Colors.white:  Colors.black, // foreground
+                                              ),
+                                              onPressed: () {
+                                                selectedCategory =  <String>[];
+                                                selectedCategory.add("MTO");
+                                                MTO();
+                                                // stateSetter(() {usersize = "Free Size";
+                                                //size = 'Free size';
+                                                //});
+                                              },          child: Text('MTO'),
+                                            ),
+                                          ),
 
                                           freesize==0?Container():   Padding(
                                             padding: const EdgeInsets.all(8.0),
@@ -5630,7 +5810,9 @@ custom102==0?Container():   Padding(
                                                 selectedCategory =  <String>[];
                                                 selectedCategory.add("Free Size");
 
-                                                stateSetter(() {usersize = "Free Size";});
+                                                stateSetter(() {usersize = "Free Size";
+                                                size = 'Free size';
+                                                });
                                               },          child: Text('Free Size'),
                                             ),
                                           ),
@@ -5647,7 +5829,9 @@ custom102==0?Container():   Padding(
                                                 selectedCategory =  <String>[];
                                                 selectedCategory.add("2 Y");
 
-                                                stateSetter(() {usersize = "2 Y";});
+                                                stateSetter(() {usersize = "2 Y";
+                                                size = '2 Y';
+                                                });
                                               },          child: Text('2 Y'),
                                             ),
                                           ),
@@ -5664,7 +5848,9 @@ custom102==0?Container():   Padding(
                                                 selectedCategory =  <String>[];
                                                 selectedCategory.add("3-4 Y");
 
-                                                stateSetter(() {usersize = "3-4 Y";});
+                                                stateSetter(() {usersize = "3-4 Y";
+                                                size = '3-4 Y';
+                                                });
                                               },          child: Text('3-4 Y'),
                                             ),
                                           ),
@@ -5681,7 +5867,9 @@ custom102==0?Container():   Padding(
                                                 selectedCategory =  <String>[];
                                                 selectedCategory.add("4-5 Y");
 
-                                                stateSetter(() {usersize = "4-5 Y";});
+                                                stateSetter(() {usersize = "4-5 Y";
+                                                size = '4-5 Y';
+                                                });
                                               },          child: Text('4-5 Y'),
                                             ),
                                           ),
@@ -5698,7 +5886,9 @@ custom102==0?Container():   Padding(
                                                 selectedCategory =  <String>[];
                                                 selectedCategory.add("5-6 Y");
 
-                                                stateSetter(() {usersize = "5-6 Y";});
+                                                stateSetter(() {usersize = "5-6 Y";
+                                                size = '5-6 Y';
+                                                });
                                               },          child: Text('5-6 Y'),
                                             ),
                                           ),
@@ -5715,7 +5905,9 @@ custom102==0?Container():   Padding(
                                                 selectedCategory =  <String>[];
                                                 selectedCategory.add("6-7 Y");
 
-                                                stateSetter(() {usersize = "6-7 Y";});
+                                                stateSetter(() {usersize = "6-7 Y";
+                                                size = '6-7 Y';
+                                                });
                                               },          child: Text('6-7 Y'),
                                             ),
                                           ),
@@ -5733,7 +5925,9 @@ custom102==0?Container():   Padding(
                                                 selectedCategory =  <String>[];
                                                 selectedCategory.add("7-8 Y");
 
-                                                stateSetter(() {usersize = "7-8 Y";});
+                                                stateSetter(() {usersize = "7-8 Y";
+                                                size = '7-8 Y';
+                                                });
                                               },          child: Text('7-8 Y'),
                                             ),
                                           ),
@@ -5750,7 +5944,9 @@ custom102==0?Container():   Padding(
                                                 selectedCategory =  <String>[];
                                                 selectedCategory.add("8-9 Y");
 
-                                                stateSetter(() {usersize = "8-9 Y";});
+                                                stateSetter(() {usersize = "8-9 Y";
+                                                size = '8-9 Y';
+                                                });
                                               },          child: Text('8-9 Y'),
                                             ),
                                           ),
@@ -5767,7 +5963,9 @@ custom102==0?Container():   Padding(
                                                 selectedCategory =  <String>[];
                                                 selectedCategory.add("9-10 Y");
 
-                                                stateSetter(() {usersize = "9-10 Y";});
+                                                stateSetter(() {usersize = "9-10 Y";
+                                                size = '9-10 Y';
+                                                });
                                               },          child: Text('9-10 Y'),
                                             ),
                                           ),
@@ -5784,7 +5982,9 @@ custom102==0?Container():   Padding(
                                                 selectedCategory =  <String>[];
                                                 selectedCategory.add("10-11 Y");
 
-                                                stateSetter(() {usersize = "10-11 Y";});
+                                                stateSetter(() {usersize = "10-11 Y";
+                                                size = '10-11 Y';
+                                                });
                                               },          child: Text('10-11 Y'),
                                             ),
                                           ),
@@ -5801,7 +6001,9 @@ custom102==0?Container():   Padding(
                                                 selectedCategory =  <String>[];
                                                 selectedCategory.add("11-12 Y");
 
-                                                stateSetter(() {usersize = "11-12 Y";});
+                                                stateSetter(() {usersize = "11-12 Y";
+                                                size = '11-12 Y';
+                                                });
                                               },          child: Text('11-12 Y'),
                                             ),
                                           ),
@@ -5819,7 +6021,9 @@ custom102==0?Container():   Padding(
                                                 selectedCategory =  <String>[];
                                                 selectedCategory.add("S 2 Y");
 
-                                                stateSetter(() {usersize = "S 2 Y";});
+                                                stateSetter(() {usersize = "S 2 Y";
+                                                size = '2 Y';
+                                                });
                                               },          child: Text('S 2 Y'),
                                             ),
                                           ),
@@ -5836,7 +6040,9 @@ custom102==0?Container():   Padding(
                                                   selectedCategory =  <String>[];
                                                   selectedCategory.add("S 2 ½ Y");
 
-                                                  stateSetter(() {usersize = "S 2 ½ Y";});
+                                                  stateSetter(() {usersize = "S 2 ½ Y";
+                                                  size = '2 ½ Y';
+                                                  });
                                                 },          child: Text('S 2 ½ Y'),
                                               )),
                                           Shoe3==0?Container():   Padding(
@@ -5852,7 +6058,9 @@ custom102==0?Container():   Padding(
                                                   selectedCategory =  <String>[];
                                                   selectedCategory.add("S 3 Y");
 
-                                                  stateSetter(() {usersize = "S 3 Y";});
+                                                  stateSetter(() {usersize = "S 3 Y";
+                                                  size = '3 Y';
+                                                  });
                                                 },          child: Text('S 3 Y'),
                                               )),
                                           Shoe4==0?Container():  Padding(
@@ -5868,7 +6076,9 @@ custom102==0?Container():   Padding(
                                                   selectedCategory =  <String>[];
                                                   selectedCategory.add("S 3 ½ Y");
 
-                                                  stateSetter(() {usersize = "S 3 ½ Y";});
+                                                  stateSetter(() {usersize = "S 3 ½ Y";
+                                                  size = '3 ½ Y';
+                                                  });
                                                 },          child: Text('S 3 ½ Y'),
                                               )),
                                           Shoe5==0?Container():   Padding(
@@ -5884,7 +6094,9 @@ custom102==0?Container():   Padding(
                                                   selectedCategory =  <String>[];
                                                   selectedCategory.add("S 4 Y");
 
-                                                  stateSetter(() {usersize = "S 4 Y";});
+                                                  stateSetter(() {usersize = "S 4 Y";
+                                                  size = '4 Y';
+                                                  });
                                                 },          child: Text('S 4 Y'),
                                               )),
 
@@ -5901,7 +6113,9 @@ custom102==0?Container():   Padding(
                                                 selectedCategory =  <String>[];
                                                 selectedCategory.add("S 5 Y");
 
-                                                stateSetter(() {usersize = "S 5 Y";});
+                                                stateSetter(() {usersize = "S 5 Y";
+                                                size = '5 Y';
+                                                });
                                               },          child: Text('S 5 Y'),
                                             ),
                                           ),
@@ -5918,7 +6132,9 @@ custom102==0?Container():   Padding(
                                                 selectedCategory =  <String>[];
                                                 selectedCategory.add("S 6 Y");
 
-                                                stateSetter(() {usersize = "S 6 Y";});
+                                                stateSetter(() {usersize = "S 6 Y";
+                                                size = '6 Y';
+                                                });
                                               },          child: Text('S 6 Y'),
                                             ),
                                           ),
@@ -5935,7 +6151,9 @@ custom102==0?Container():   Padding(
                                                 selectedCategory =  <String>[];
                                                 selectedCategory.add("S 7 Y");
 
-                                                stateSetter(() {usersize = "S 7 Y";});
+                                                stateSetter(() {usersize = "S 7 Y";
+                                                size = '7 Y';
+                                                });
                                               },          child: Text('S 7 Y'),
                                             ),
                                           ),
@@ -5952,7 +6170,9 @@ custom102==0?Container():   Padding(
                                                 selectedCategory =  <String>[];
                                                 selectedCategory.add("S 8 Y");
 
-                                                stateSetter(() {usersize = "S 8 Y";});
+                                                stateSetter(() {usersize = "S 8 Y";
+                                                size = '8 Y';
+                                                });
                                               },          child: Text('S 8 Y'),
                                             ),
                                           ),
@@ -5970,7 +6190,9 @@ custom102==0?Container():   Padding(
                                                 selectedCategory =  <String>[];
                                                 selectedCategory.add("S 9 Y");
 
-                                                stateSetter(() {usersize = "S 9 Y";});
+                                                stateSetter(() {usersize = "S 9 Y";
+                                                size = '9 Y';
+                                                });
                                               },          child: Text('S 9 Y'),
                                             ),
                                           ),
@@ -5987,7 +6209,9 @@ custom102==0?Container():   Padding(
                                                 selectedCategory =  <String>[];
                                                 selectedCategory.add("S 10 Y");
 
-                                                stateSetter(() {usersize = "S 10 Y";});
+                                                stateSetter(() {usersize = "S 10 Y";
+                                                size = '10 Y';
+                                                });
                                               },          child: Text('S 10 Y'),
                                             ),
                                           ),
@@ -6004,7 +6228,9 @@ custom102==0?Container():   Padding(
                                                 selectedCategory =  <String>[];
                                                 selectedCategory.add("S 11 Y");
 
-                                                stateSetter(() {usersize = "S 11 Y";});
+                                                stateSetter(() {usersize = "S 11 Y";
+                                                size = '11 Y';
+                                                });
                                               },          child: Text('S 11 Y'),
                                             ),
                                           ),
@@ -6021,7 +6247,9 @@ custom102==0?Container():   Padding(
                                                 selectedCategory =  <String>[];
                                                 selectedCategory.add("S 12 Y");
 
-                                                stateSetter(() {usersize = "S 12 Y";});
+                                                stateSetter(() {usersize = "S 12 Y";
+                                                size = '12 Y';
+                                                });
                                               },          child: Text('S 12 Y'),
                                             ),
                                           ),
@@ -6049,7 +6277,9 @@ custom102==0?Container():   Padding(
 
 
 
-                                                stateSetter(() {usersize = "S 13 Y";});
+                                                stateSetter(() {usersize = "S 13 Y";
+                                                size = '13 Y';
+                                                });
 
                                               },          child: Text('S 13 Y'),
 
@@ -6555,11 +6785,7 @@ custom102==0?Container():   Padding(
                                   child: FloatingActionButton.extended(
                                     backgroundColor: kblue,
                                     onPressed: () {
-                                      if (currentUser.country == 'India' &&
-                                          currentUser.country == country) {
-                                        Proceedtobuy(
-                                            ship: shipcostinr, shipcostU: shipcostinr);
-                                      } else if (currentUser.country == country) {
+                                      if (currentUser.country == country) {
                                         Proceedtobuy(
                                             ship: shipcostusd, shipcostU: shipcostinr);
                                       } else {
@@ -6603,6 +6829,25 @@ custom102==0?Container():   Padding(
                                         scrollDirection:Axis.horizontal,
                                         shrinkWrap:true,
                                         children:[
+                                          mto==0?Container():  Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child: ElevatedButton(
+
+                                              style: ElevatedButton.styleFrom(
+
+                                                primary: selectedCategory.contains("MTO") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                                                onPrimary:selectedCategory.contains("MTO") ? Colors.white:  Colors.black, // foreground
+                                              ),
+                                              onPressed: () {
+                                                selectedCategory =  <String>[];
+                                                selectedCategory.add("MTO");
+                                                MTO();
+                                                // stateSetter(() {usersize = "Free Size";
+                                                //size = 'Free size';
+                                                //});
+                                              },          child: Text('MTO'),
+                                            ),
+                                          ),
 
                                           freesize==0?Container():   Padding(
                                             padding: const EdgeInsets.all(8.0),
@@ -6617,7 +6862,9 @@ custom102==0?Container():   Padding(
                                                 selectedCategory =  <String>[];
                                                 selectedCategory.add("Free Size");
 
-                                                stateSetter(() {usersize = "Free Size";});
+                                                stateSetter(() {usersize = "Free Size";
+                                                size = 'Free size';
+                                                });
                                               },          child: Text('Free Size'),
                                             ),
                                           ),
@@ -6634,7 +6881,9 @@ custom102==0?Container():   Padding(
                                                 selectedCategory =  <String>[];
                                                 selectedCategory.add("13 Y");
 
-                                                stateSetter(() {usersize = "13 Y";});
+                                                stateSetter(() {usersize = "13 Y";
+                                                size = '13 Y';
+                                                });
                                               },          child: Text('13 Y'),
                                             ),
                                           ),
@@ -6651,7 +6900,9 @@ custom102==0?Container():   Padding(
                                                 selectedCategory =  <String>[];
                                                 selectedCategory.add("14 Y");
 
-                                                stateSetter(() {usersize = "14 Y";});
+                                                stateSetter(() {usersize = "14 Y";
+                                                size = '14 Y';
+                                                });
                                               },          child: Text('14 Y'),
                                             ),
                                           ),
@@ -6668,7 +6919,9 @@ custom102==0?Container():   Padding(
                                                 selectedCategory =  <String>[];
                                                 selectedCategory.add("15 Y");
 
-                                                stateSetter(() {usersize = "15 Y";});
+                                                stateSetter(() {usersize = "15 Y";
+                                                size = '15 Y';
+                                                });
                                               },          child: Text('15 Y'),
                                             ),
                                           ),
@@ -6685,11 +6938,12 @@ custom102==0?Container():   Padding(
                                                 selectedCategory =  <String>[];
                                                 selectedCategory.add("16 Y");
 
-                                                stateSetter(() {usersize = "16 Y";});
+                                                stateSetter(() {usersize = "16 Y";
+                                                size = '16 Y';
+                                                });
                                               },          child: Text('16 Y'),
                                             ),
                                           ),
-
                                           Shoe1==0?Container():   Padding(
                                             padding: const EdgeInsets.all(8.0),
                                             child:   ElevatedButton(
@@ -6703,7 +6957,9 @@ custom102==0?Container():   Padding(
                                                 selectedCategory =  <String>[];
                                                 selectedCategory.add("S 13 Y");
 
-                                                stateSetter(() {usersize = "S 13 Y";});
+                                                stateSetter(() {usersize = "S 13 Y";
+                                                size = '13 Y';
+                                                });
                                               },          child: Text('S 13 Y'),
                                             ),
                                           ),
@@ -6720,7 +6976,9 @@ custom102==0?Container():   Padding(
                                                   selectedCategory =  <String>[];
                                                   selectedCategory.add("S 14 Y");
 
-                                                  stateSetter(() {usersize = "S 14 Y";});
+                                                  stateSetter(() {usersize = "S 14 Y";
+                                                  size = '14 Y';
+                                                  });
                                                 },          child: Text('S 14 Y'),
                                               )),
                                           Shoe3==0?Container():   Padding(
@@ -6736,7 +6994,9 @@ custom102==0?Container():   Padding(
                                                   selectedCategory =  <String>[];
                                                   selectedCategory.add("15 Y");
 
-                                                  stateSetter(() {usersize = "15 Y";});
+                                                  stateSetter(() {usersize = "15 Y";
+                                                  size = '15 Y';
+                                                  });
                                                 },          child: Text('15 Y'),
                                               )),
                                           Shoe4==0?Container():   Padding(
@@ -6752,7 +7012,9 @@ custom102==0?Container():   Padding(
                                                   selectedCategory =  <String>[];
                                                   selectedCategory.add("S 16 Y");
 
-                                                  stateSetter(() {usersize = "S 16 Y";});
+                                                  stateSetter(() {usersize = "S 16 Y";
+                                                  size = '16 Y';
+                                                  });
                                                 },          child: Text('S 16 Y'),
                                               )),
 
@@ -6769,7 +7031,9 @@ custom102==0?Container():   Padding(
                                                 selectedCategory =  <String>[];
                                                 selectedCategory.add("R 4");
 
-                                                stateSetter(() {usersize = "R 4";});
+                                                stateSetter(() {usersize = "R 4";
+                                                size = '(US) 4';
+                                                });
                                               },          child: Text('(US) 4'),
                                             ),
                                           ),
@@ -6786,7 +7050,9 @@ custom102==0?Container():   Padding(
                                                 selectedCategory =  <String>[];
                                                 selectedCategory.add("R 4.5");
 
-                                                stateSetter(() {usersize = "R 4.5";});
+                                                stateSetter(() {usersize = "R 4.5";
+                                                size = '(US) 4.5';
+                                                });
                                               },          child: Text('(US) 4.5'),
                                             ),
                                           ),
@@ -6804,7 +7070,9 @@ custom102==0?Container():   Padding(
                                                 selectedCategory =  <String>[];
                                                 selectedCategory.add("R 5");
 
-                                                stateSetter(() {usersize = "R 5";});
+                                                stateSetter(() {usersize = "R 5";
+                                                size = '(US) 5';
+                                                });
                                               },          child: Text('(US) 5'),
                                             ),
                                           ),
@@ -6821,7 +7089,9 @@ custom102==0?Container():   Padding(
                                                 selectedCategory =  <String>[];
                                                 selectedCategory.add("R 5.5");
 
-                                                stateSetter(() {usersize = "R 5.5";});
+                                                stateSetter(() {usersize = "R 5.5";
+                                                size = '(US) 5.5';
+                                                });
                                               },          child: Text('(US) 5.5'),
                                             ),
                                           ),
@@ -6838,7 +7108,9 @@ custom102==0?Container():   Padding(
                                                 selectedCategory =  <String>[];
                                                 selectedCategory.add("R 6");
 
-                                                stateSetter(() {usersize = "R 6";});
+                                                stateSetter(() {usersize = "R 6";
+                                                size = '(US) 6';
+                                                });
                                               },          child: Text('(US) 6'),
                                             ),
                                           ),
@@ -6855,7 +7127,9 @@ custom102==0?Container():   Padding(
                                                 selectedCategory =  <String>[];
                                                 selectedCategory.add("R 6.5");
 
-                                                stateSetter(() {usersize = "R 6.5";});
+                                                stateSetter(() {usersize = "R 6.5";
+                                                size = '(US) 6.5';
+                                                });
                                               },          child: Text('(US) 6.5'),
                                             ),
                                           ),
@@ -6872,7 +7146,9 @@ custom102==0?Container():   Padding(
                                                 selectedCategory =  <String>[];
                                                 selectedCategory.add("R 7");
 
-                                                stateSetter(() {usersize = "R 7";});
+                                                stateSetter(() {usersize = "R 7";
+                                                size = '(US) 7';
+                                                });
                                               },          child: Text('(US) 7'),
                                             ),
                                           ),
@@ -6889,7 +7165,9 @@ custom102==0?Container():   Padding(
                                                 selectedCategory =  <String>[];
                                                 selectedCategory.add("R 7.5");
 
-                                                stateSetter(() {usersize = "R 7.5";});
+                                                stateSetter(() {usersize = "R 7.5";
+                                                size = '(US) 7.5';
+                                                });
                                               },          child: Text('(US) 7.5'),
                                             ),
                                           ),
@@ -6906,7 +7184,9 @@ custom102==0?Container():   Padding(
                                                 selectedCategory =  <String>[];
                                                 selectedCategory.add("R 8");
 
-                                                stateSetter(() {usersize = "R 8";});
+                                                stateSetter(() {usersize = "R 8";
+                                                size = '(US) 8';
+                                                });
                                               },          child: Text('(US) 8'),
                                             ),
                                           ),
@@ -6923,7 +7203,9 @@ custom102==0?Container():   Padding(
                                                 selectedCategory =  <String>[];
                                                 selectedCategory.add("R 8.5");
 
-                                                stateSetter(() {usersize = "R 8.5";});
+                                                stateSetter(() {usersize = "R 8.5";
+                                                size = '(US) 8.5';
+                                                });
                                               },          child: Text('(US) 8.5'),
                                             ),
                                           ),
@@ -6940,7 +7222,9 @@ custom102==0?Container():   Padding(
                                                 selectedCategory =  <String>[];
                                                 selectedCategory.add("R 9");
 
-                                                stateSetter(() {usersize = "R 9";});
+                                                stateSetter(() {usersize = "R 9";
+                                                size = '(US) 9';
+                                                });
                                               },          child: Text('(US) 9'),
                                             ),
                                           ),
@@ -6957,7 +7241,9 @@ custom102==0?Container():   Padding(
                                                 selectedCategory =  <String>[];
                                                 selectedCategory.add("R 9.5");
 
-                                                stateSetter(() {usersize = "R 9.5";});
+                                                stateSetter(() {usersize = "R 9.5";
+                                                size = '(US) 9.5';
+                                                });
                                               },          child: Text('(US) 9.5'),
                                             ),
                                           ),
@@ -6974,7 +7260,9 @@ custom102==0?Container():   Padding(
                                                 selectedCategory =  <String>[];
                                                 selectedCategory.add("R 10");
 
-                                                stateSetter(() {usersize = "R 10";});
+                                                stateSetter(() {usersize = "R 10";
+                                                size = '(US) 10';
+                                                });
                                               },          child: Text('(US) 10'),
                                             ),
                                           ),
@@ -6991,7 +7279,9 @@ custom102==0?Container():   Padding(
                                                 selectedCategory =  <String>[];
                                                 selectedCategory.add("R 10.5");
 
-                                                stateSetter(() {usersize = "R 10.5";});
+                                                stateSetter(() {usersize = "R 10.5";
+                                                size = '(US) 10.5';
+                                                });
                                               },          child: Text('(US) 10.5'),
                                             ),
                                           ),
@@ -7008,7 +7298,9 @@ custom102==0?Container():   Padding(
                                                 selectedCategory =  <String>[];
                                                 selectedCategory.add("R 11");
 
-                                                stateSetter(() {usersize = "R 11";});
+                                                stateSetter(() {usersize = "R 11";
+                                                size = '(US) 11';
+                                                });
                                               },          child: Text('(US) 11'),
                                             ),
                                           ),
@@ -7025,7 +7317,9 @@ custom102==0?Container():   Padding(
                                                 selectedCategory =  <String>[];
                                                 selectedCategory.add("R 11.5");
 
-                                                stateSetter(() {usersize = "R 11.5";});
+                                                stateSetter(() {usersize = "R 11.5";
+                                                size = '(US) 11.5';
+                                                });
                                               },          child: Text('(US) 11.5'),
                                             ),
                                           ),
@@ -7042,7 +7336,9 @@ custom102==0?Container():   Padding(
                                                 selectedCategory =  <String>[];
                                                 selectedCategory.add("R 12");
 
-                                                stateSetter(() {usersize = "R 12";});
+                                                stateSetter(() {usersize = "R 12";
+                                                size = '(US) 12';
+                                                });
                                               },          child: Text('(US) 12'),
                                             ),
                                           ),
@@ -7059,7 +7355,9 @@ custom102==0?Container():   Padding(
                                                 selectedCategory =  <String>[];
                                                 selectedCategory.add("R 12.5");
 
-                                                stateSetter(() {usersize = "R 12.5";});
+                                                stateSetter(() {usersize = "R 12.5";
+                                                size = '(US) 12.5';
+                                                });
                                               },          child: Text('(US) 12.5'),
                                             ),
                                           ),
@@ -7076,7 +7374,9 @@ custom102==0?Container():   Padding(
                                                 selectedCategory =  <String>[];
                                                 selectedCategory.add("R 13");
 
-                                                stateSetter(() {usersize = "R 13";});
+                                                stateSetter(() {usersize = "R 13";
+                                                size = '(US) 13';
+                                                });
                                               },          child: Text('(US) 13'),
                                             ),
                                           ),
@@ -7093,7 +7393,9 @@ custom102==0?Container():   Padding(
                                                 selectedCategory =  <String>[];
                                                 selectedCategory.add("R 13.5");
 
-                                                stateSetter(() {usersize = "R 13.5";});
+                                                stateSetter(() {
+                                                  size = '(US) 13.5';
+                                                usersize = "R 13.5";});
                                               },          child: Text('(US) 13.5'),
                                             ),
                                           ),
@@ -7110,7 +7412,9 @@ custom102==0?Container():   Padding(
                                                 selectedCategory =  <String>[];
                                                 selectedCategory.add("R 14");
 
-                                                stateSetter(() {usersize = "R 14";});
+                                                stateSetter(() {usersize = "R 14";
+                                                size = '(US) 14';
+                                                });
                                               },          child: Text('(US) 14'),
                                             ),
                                           ),
@@ -7127,7 +7431,9 @@ custom102==0?Container():   Padding(
                                                 selectedCategory =  <String>[];
                                                 selectedCategory.add("R 14.5");
 
-                                                stateSetter(() {usersize = "R 14.5";});
+                                                stateSetter(() {usersize = "R 14.5";
+                                                size = '(US) 14.5';
+                                                });
                                               },          child: Text('(US) 14.5'),
                                             ),
                                           ),
@@ -7144,7 +7450,10 @@ custom102==0?Container():   Padding(
                                                 selectedCategory =  <String>[];
                                                 selectedCategory.add("R 15");
 
-                                                stateSetter(() {usersize = "R 15";});
+                                                stateSetter(() {usersize = "R 15";
+                                                size = '(US) 15';
+
+                                                });
                                               },          child: Text('(US) 15'),
                                             ),
                                           ),
@@ -7646,11 +7955,7 @@ custom102==0?Container():   Padding(
                                   child: FloatingActionButton.extended(
                                     backgroundColor: kblue,
                                     onPressed: () {
-                                      if (currentUser.country == 'India' &&
-                                          currentUser.country == country) {
-                                        Proceedtobuy(
-                                            ship: shipcostinr, shipcostU: shipcostinr);
-                                      } else if (currentUser.country == country) {
+                                      if (currentUser.country == country) {
                                         Proceedtobuy(
                                             ship: shipcostusd, shipcostU: shipcostinr);
                                       } else {
@@ -7687,10 +7992,52 @@ custom102==0?Container():   Padding(
 
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(20),),
-              child: Container(
-                height: 400,
-                child:PhotoView(imageProvider: AssetImage
-                  ('assets/img/MenClothingsize.jpg')),),
+              child:
+              Center(
+                child: Container(
+                  child: ContainedTabBarView(
+                    tabs: [
+                      ...[1, 2]
+                          .map(
+                            (e) => Container(
+                          width: 16,
+                          height: 16,
+                          decoration: BoxDecoration(
+                            color: Colors.transparent,
+                            border: Border.all(color: Colors.grey[600]),
+                            borderRadius: BorderRadius.all(
+                              Radius.circular(4.0),
+                            ),
+                          ),
+                        ),
+                      )
+                          .toList(),
+                    ],
+                    tabBarProperties: TabBarProperties(
+                      width: 64,
+                      height: 32,
+                      position: TabBarPosition.bottom,
+                      indicator: ContainerTabIndicator(
+                        width: 16.0,
+                        height: 16.0,
+                        radius: BorderRadius.circular(4.0),
+                        color: Colors.blue,
+                      ),
+                    ),
+                    views: [
+                      Container(
+                        child:PhotoView(imageProvider: AssetImage
+                          ('assets/img/MenClothingsize.jpg')),),
+                      Container(
+                        child:PhotoView(imageProvider: AssetImage
+                          ('assets/img/RING.jpg')),)  ,
+
+                    ],
+                    onChange: (index) => print(index),
+                  ),
+                ),
+              ),
+
             );
         },
       );
@@ -7708,12 +8055,54 @@ custom102==0?Container():   Padding(
 
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(20),),
-              child: Container(
-                height: 400,
-                child:PhotoView(imageProvider: AssetImage
-                  ('assets/img/WomanClothingsize.jpg'),
+              child:
+              Center(
+                child: Container(
+                  child: ContainedTabBarView(
+                    tabs: [
+                      ...[1, 2]
+                          .map(
+                            (e) => Container(
+                          width: 16,
+                          height: 16,
+                          decoration: BoxDecoration(
+                            color: Colors.transparent,
+                            border: Border.all(color: Colors.grey[600]),
+                            borderRadius: BorderRadius.all(
+                              Radius.circular(4.0),
+                            ),
+                          ),
+                        ),
+                      )
+                          .toList(),
+                    ],
+                    tabBarProperties: TabBarProperties(
+                      width: 64,
+                      height: 32,
+                      position: TabBarPosition.bottom,
+                      indicator: ContainerTabIndicator(
+                        width: 16.0,
+                        height: 16.0,
+                        radius: BorderRadius.circular(4.0),
+                        color: Colors.blue,
+                      ),
+                    ),
+                    views: [
+                      Container(
+                        child:PhotoView(imageProvider: AssetImage
+                          ('assets/img/WomanClothingsize.jpg'),
+                        ),),
+                      Container(
+                        child:PhotoView(imageProvider: AssetImage
+                          ('assets/img/RING.jpg')),)  ,
 
-                ),),
+                    ],
+                    onChange: (index) => print(index),
+                  ),
+                ),
+              ),
+
+
             );
         },
       );
@@ -7731,10 +8120,52 @@ custom102==0?Container():   Padding(
 
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(20),),
-              child: Container(
-                height: 400,
-                child:PhotoView(imageProvider: AssetImage
-                  ('assets/img/babysizecloth.jpg')),),
+              child:
+              Center(
+                child: Container(
+                  child: ContainedTabBarView(
+                    tabs: [
+                      ...[1, 2]
+                          .map(
+                            (e) => Container(
+                          width: 16,
+                          height: 16,
+                          decoration: BoxDecoration(
+                            color: Colors.transparent,
+                            border: Border.all(color: Colors.grey[600]),
+                            borderRadius: BorderRadius.all(
+                              Radius.circular(4.0),
+                            ),
+                          ),
+                        ),
+                      )
+                          .toList(),
+                    ],
+                    tabBarProperties: TabBarProperties(
+                      width: 64,
+                      height: 32,
+                      position: TabBarPosition.bottom,
+                      indicator: ContainerTabIndicator(
+                        width: 16.0,
+                        height: 16.0,
+                        radius: BorderRadius.circular(4.0),
+                        color: Colors.blue,
+                      ),
+                    ),
+                    views: [
+                      Container(
+                        child:PhotoView(imageProvider: AssetImage
+                          ('assets/img/babysizecloth.jpg')),),
+                      Container(
+                        child:PhotoView(imageProvider: AssetImage
+                          ('assets/img/RING.jpg')),)  ,
+
+                    ],
+                    onChange: (index) => print(index),
+                  ),
+                ),
+              ),
+
             );
         },
       );
@@ -7752,10 +8183,54 @@ custom102==0?Container():   Padding(
 
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(20),),
-              child: Container(
-                height: 400,
-                child:PhotoView(imageProvider: AssetImage
-                  ('assets/img/kisclothsize.jpg')),),
+              child:
+              Center(
+                child: Container(
+                  child: ContainedTabBarView(
+                    tabs: [
+                      ...[1, 2]
+                          .map(
+                            (e) => Container(
+                          width: 16,
+                          height: 16,
+                          decoration: BoxDecoration(
+                            color: Colors.transparent,
+                            border: Border.all(color: Colors.grey[600]),
+                            borderRadius: BorderRadius.all(
+                              Radius.circular(4.0),
+                            ),
+                          ),
+                        ),
+                      )
+                          .toList(),
+                    ],
+                    tabBarProperties: TabBarProperties(
+                      width: 64,
+                      height: 32,
+                      position: TabBarPosition.bottom,
+                      indicator: ContainerTabIndicator(
+                        width: 16.0,
+                        height: 16.0,
+                        radius: BorderRadius.circular(4.0),
+                        color: Colors.blue,
+                      ),
+                    ),
+                    views: [
+                      Container(
+                        child:PhotoView(imageProvider: AssetImage
+                          ('assets/img/kisclothsize.jpg')),)  ,
+                      Container(
+                        child:PhotoView(imageProvider: AssetImage
+                          ('assets/img/RING.jpg')),)  ,
+
+                    ],
+                    onChange: (index) => print(index),
+                  ),
+                ),
+              ),
+
+
+
             );
         },
       );
@@ -7773,17 +8248,58 @@ custom102==0?Container():   Padding(
 
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(20),),
-              child: Container(
-                height: 400,
-                child:PhotoView(imageProvider: AssetImage
-                  ('assets/img/teenclothing.jpg')),),
+              child:
+              Center(
+                child: Container(
+                  child: ContainedTabBarView(
+                    tabs: [
+                      ...[1, 2]
+                          .map(
+                            (e) => Container(
+                          width: 16,
+                          height: 16,
+                          decoration: BoxDecoration(
+                            color: Colors.transparent,
+                            border: Border.all(color: Colors.grey[600]),
+                            borderRadius: BorderRadius.all(
+                              Radius.circular(4.0),
+                            ),
+                          ),
+                        ),
+                      )
+                          .toList(),
+                    ],
+                    tabBarProperties: TabBarProperties(
+                      width: 64,
+                      height: 32,
+                      position: TabBarPosition.bottom,
+                      indicator: ContainerTabIndicator(
+                        width: 16.0,
+                        height: 16.0,
+                        radius: BorderRadius.circular(4.0),
+                        color: Colors.blue,
+                      ),
+                    ),
+                    views: [
+                      Container(
+                        child:PhotoView(imageProvider: AssetImage
+                          ('assets/img/teenclothing.jpg')),),
+                      Container(
+                        child:PhotoView(imageProvider: AssetImage
+                          ('assets/img/RING.jpg')),)  ,
+
+                    ],
+                    onChange: (index) => print(index),
+                  ),
+                ),
+              ),
+
             );
         },
       );
     }
 
   }
-
 
   handleLikePost() {
     bool _isFav = true;
@@ -8119,7 +8635,7 @@ isLive: true,
                         ),
                         trailing: !isPostOwner? FloatingActionButton(
                           heroTag:null,
-                          onPressed: () => Buynow(parentContext:context),
+                          onPressed: () => Buynow(context),
                           child: Icon(Icons.add_shopping_cart,),
                           shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(16.0))),
                         ): RaisedButton(
@@ -8293,6 +8809,7 @@ isLive: true,
   );
 }
 posteurope(){
+
   return FutureBuilder(
     future: usersRef.doc(ownerId).get(),
     builder: (context, snapshot) {
@@ -8498,11 +9015,10 @@ posteurope(){
                       ),
                   subtitle:    currentUser.country == "$country" ?  Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
-
                     children: [
                       Row(
                         children: [
-                          Text("${currentUser.currencysym} $inr  ",
+                          Text("${currentUser.currencysym} $inr",
                               style: TextStyle(
                                 color: Colors.green,
                                 fontWeight: FontWeight.bold,
@@ -8558,7 +9074,8 @@ posteurope(){
                           fontWeight: FontWeight.bold,
                           fontSize: 20.0,
                         ),
-                      ),Text(
+                      ),
+                        Text(
                         "(\u0024 $usd)",
                         style: TextStyle(
                           color: Colors.green,
@@ -8599,7 +9116,7 @@ posteurope(){
                      trailing: FloatingActionButton(
                         heroTag:null,
 
-                        onPressed: () => Buynow(parentContext:context),
+                        onPressed: () => Buynow(context),
                         child: Icon(Icons.add_shopping_cart,),
                         shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(16.0))),
                       ),
@@ -8627,7 +9144,9 @@ posteurope(){
 
                 ],
               ):Text(''),
-
+              ListTile(title: Text('Processing time'),
+                subtitle:Text("$processfrom - $processto")
+              ),
               ListTileTheme(
                 tileColor:trans,
                 child: ExpansionTile(
@@ -8742,6 +9261,13 @@ posteurope(){
                             color: kText.withOpacity(0.5),
                             fontWeight: FontWeight.bold,fontSize: 20,
                           ),),
+                          ListTile(title: Text('Processing time'),
+                              subtitle:Text("$processfrom - $processto")
+                          ),ListTile(title: Text('Shipping duration to ${country}'),
+                              subtitle:Text("$shipfrom - $shipto")
+                          ),ListTile(title: Text('International shipping duration'),
+                              subtitle:Text("$shipinterfrom - $shipinterto")
+                          ),
                           Text('$shipment', maxLines: 1,softWrap:false,overflow:TextOverflow.fade,style: TextStyle(
                             color: kText.withOpacity(0.5),
 //                          fontWeight: FontWeight.bold,
@@ -8977,7 +9503,7 @@ postuk(){
                       trailing: !isPostOwner? FloatingActionButton(
                         heroTag:null,
 
-                        onPressed: () => Buynow(parentContext:context),
+                        onPressed: () => Buynow(context),
                         child: Icon(Icons.add_shopping_cart,),
                         shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(16.0))),
                       ): RaisedButton(
@@ -9367,7 +9893,7 @@ postusa() {
                       trailing: !isPostOwner? FloatingActionButton(
                         heroTag:null,
 
-                        onPressed: () => Buynow(parentContext:context),
+                        onPressed: () => Buynow(context),
                         child: Icon(Icons.add_shopping_cart,),
                         shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(16.0))),
                       ): RaisedButton(

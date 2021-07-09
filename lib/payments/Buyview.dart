@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fashow/payments/Buynow.dart';
-import 'package:get/get.dart';
+import 'package:fashow/size_config.dart';
 import 'package:flutter/material.dart';
 import 'package:fashow/Constants.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -56,6 +56,8 @@ final String userSize;
   final int Shoe21;
   final int mto;
   final int freeSize;
+  final String displaysize;
+
     // BuyView({Key key, this.prodId, this.ownerId, this.total, this.userSize,}) : super(key: key);
   final int Ring1;
   final int Ring2;
@@ -113,9 +115,15 @@ final String userSize;
   final String customprice;
   final String country;
   final String color;
+final bool freeship;
+final bool freeworldship;
+
 
   BuyView({this.prodId,this.productname,
+
    this.usd,
+    this.displaysize,
+
    this.eur,
    this.inr,
    this.gbp,
@@ -164,7 +172,7 @@ final String userSize;
    this.custom62, this.custom72, this.custom82, this.custom92, this.custom102,
    this.color1, this.color2, this.color3, this.color4, this.color5, this.color6,
    this.color7, this.color8, this.color9, this.color10, this.colorText, this.mtoText,
-   this.ownerId, this.total, this.userSize,this.profileimg,this.username,this.mediaUrl, this.shipcost, this.custompriceusd, this.custompriceinr, this.shipcostusd, this.shipcostuser, this.customusd, this.custominr, this.price, this.customprice, this.country, this.color});
+   this.ownerId, this.total, this.userSize,this.profileimg,this.username,this.mediaUrl, this.shipcost, this.custompriceusd, this.custompriceinr, this.shipcostusd, this.shipcostuser, this.customusd, this.custominr, this.price, this.customprice, this.country, this.color, this.freeship, this.freeworldship});
 @override
   _BuyViewState createState() => _BuyViewState(prodId: this.prodId,
   ownerId: this.ownerId,
@@ -186,6 +194,8 @@ class _BuyViewState extends State<BuyView> {
   String Phone;
   String Country;
   String Code;
+   String totalU;
+
   // var total = 0;
   SharedPreferences adPrefs;
 
@@ -194,19 +204,7 @@ class _BuyViewState extends State<BuyView> {
   void initState() {
     super.initState();
     GetAddress();
-    print(widget.fourxl);
-     print(widget.ownerId);
-     print(widget.total);
-     print(widget.userSize);
-    print(Code);
-    print(Fullname);
-    print(Addresss);
-    print(Type);
-    print(City);
-    print(State);
-    print(Zip);
-    print(Phone);
-    print(Country);
+    totta();
   }
   GetAddress() async{
     adPrefs = await SharedPreferences.getInstance();
@@ -236,6 +234,8 @@ class _BuyViewState extends State<BuyView> {
   }
 Widget st()
 {
+  SizeConfig().init(context);
+
   return
   Card(
     margin: EdgeInsets.all(3.0),
@@ -248,20 +248,51 @@ Widget st()
 
         Row(
           children: [
-            Text("Delivery Address",style:TextStyle(color:kText,              fontSize: 20.0,
+            Text("Delivery Address",style:TextStyle(color:kText,
+              fontSize: SizeConfig.safeBlockHorizontal * 5,
             )),
           ],
         ),
-Row(
-  children: [
-        Text("$Type",style:TextStyle(color:kText)),
-  ],
+Padding(
+  padding: const EdgeInsets.all(8.0),
+  child:   Row(
+
+    children: [
+
+          Text("$Type",style:TextStyle(color:kText,
+            fontSize: SizeConfig.safeBlockHorizontal * 4,
+fontWeight: FontWeight.bold,
+          )),
+
+    ],
+
+  ),
 ),
 
-        Row(
-          children: [
-            Text('$Addresss,$City,$State,$Country',style:TextStyle(color:kText)),
-          ],
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Row(
+            mainAxisAlignment:MainAxisAlignment.start,
+            children: [
+              Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+
+                children: [
+                  Text('$Addresss,',style:TextStyle(color:kText,            fontSize: SizeConfig.safeBlockHorizontal * 4,
+)),
+                  Text('$City,',style:TextStyle(color:kText,            fontSize: SizeConfig.safeBlockHorizontal * 4,
+)),
+                  Text('$State,',style:TextStyle(color:kText,            fontSize: SizeConfig.safeBlockHorizontal * 4,
+)),
+                  Text('$Country',style:TextStyle(color:kText,            fontSize: SizeConfig.safeBlockHorizontal * 4,
+)),
+
+                ],
+              ),
+
+            ],
+          ),
         ),
 
 
@@ -271,6 +302,32 @@ Row(
     ),
   );
 
+}
+totta(){
+    print(widget.shipcostuser);
+    print(widget.custompriceusd);
+    print(widget.custompriceinr);
+    print(widget.price);
+     print(widget.customprice);
+
+    print(widget.inr);
+    print(widget.usd);
+
+ var shipcostuserV = double.tryParse(widget.shipcostuser ?? "0.0")?? 0.0;
+ var custompriceusdV = double.tryParse(widget.custompriceusd ?? "0.0")?? 0.0;
+ var custompriceinrV = double.tryParse(widget.custompriceinr?? "0.0")??0.0;
+ var priceV =  double.tryParse(widget.price?? "0.0")?? 0.0;
+ var inrV =  double.tryParse(widget.inr?? "0.0")?? 0.0;
+ var usdV =  double.tryParse(widget.usd?? "0.0")?? 0.0;
+
+  var custompriceV =  double.tryParse(widget.customprice??"0.0") ?? 0.0;
+var shipcostV =  double.tryParse(widget.shipcost??"0.0")?? 0.0;
+ var paytotal =  usdV + custompriceusdV + shipcostV;
+ var usertotal = priceV + custompriceV + shipcostuserV;
+var sametotal =  inrV + custompriceinrV + shipcostV;
+totalU = currentUser.country == widget.country? sametotal.toStringAsFixed(2):
+ usertotal.toStringAsFixed(2);
+total = paytotal.toStringAsFixed(2);
 }
 uk(){
   return Expanded(
@@ -361,44 +418,193 @@ ind(){
 
 }
 eur(){
-  return Expanded(
-    child: Container(
-      child: Column(children: [
-        ListTile(
+  SizeConfig().init(context);
 
-         leading:   CircleAvatar(backgroundImage: NetworkImage(widget.profileimg),),
+  return SingleChildScrollView(
+    child: Expanded(
+      child: Container(
+        child: Column(children: [
+          ListTile(
 
-          title:  Text(widget.username,style: TextStyle(color: kText)),
+           leading:   CircleAvatar(backgroundImage: NetworkImage(widget.profileimg),),
 
-        ),
-        Row(
-          children: [
-            Text(widget.productname,style: TextStyle(color: kText,
-              fontSize: 25.0,
-            )),
-          ],
-        ),
-        Expanded(
-          child: Container(
-            height:  MediaQuery.of(context).size.height * 0.20,
-            child: ClipRRect(
-                  borderRadius: BorderRadius.circular(20.0),child:CachedNetworkImage(imageUrl: widget.mediaUrl,)),
+            title:  Text(widget.username,style: TextStyle(color: kText)),
 
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Row(
+             children: [
+                FittedBox(
+                  child: Text(widget.productname,style: TextStyle(color: kText,
+                    fontSize: SizeConfig.safeBlockHorizontal * 5,
+                  )),
+                ),
+
+              ],
             ),
           ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            Text('Size:  ${widget.userSize}', style: TextStyle(color: kText,
-                fontWeight: FontWeight.bold)),
-            Text('€  ${widget.total}',style: TextStyle(color: kText,
-              fontSize: 20.0,
-            )),
-          ],
-        ),
-        st(),
+          Container(
+            height: SizeConfig.safeBlockHorizontal * 75,
+            width: MediaQuery.of(context).size.width,
+            child: ClipRRect(
+                borderRadius: BorderRadius.circular(20.0),child:CachedNetworkImage(imageUrl: widget.mediaUrl,)),
 
-      ],),
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              Text('Size: ${widget.displaysize}', style: TextStyle(color: kText,
+                fontWeight: FontWeight.bold,
+                fontSize: SizeConfig.safeBlockHorizontal * 5,
+
+              )),
+              Text('Color: ${widget.colorText}',style: TextStyle(color: kText,
+                fontWeight: FontWeight.bold,
+                fontSize: SizeConfig.safeBlockHorizontal * 5,
+
+              )),
+
+            ],
+          ),
+
+          currentUser.country == "${widget.country}" ?  Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  children: [
+                    Text("${currentUser.currencysym} ${widget.inr}",
+                        style: TextStyle(
+                          color: Colors.green,
+                          fontWeight: FontWeight.bold,
+                          fontSize: SizeConfig.safeBlockHorizontal * 5,
+                        )),
+
+                  ],
+                ),
+                Row(
+                  children: [
+                    Text("${currentUser.currency} ",
+                        style: TextStyle(
+                          color: Colors.green,
+                          fontWeight: FontWeight.bold,
+                          fontSize: SizeConfig.safeBlockHorizontal * 4,
+                        )
+                    ),
+                  ],
+                ),
+                widget.customprice != null ?Text(
+                  "+ ${currentUser.currencysym} ${widget.custominr??"0.0"}",
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 14.0,
+                  ),
+                ):Container() ,
+                widget.freeship?Container(
+                    color:Colors.white.withOpacity(0.1),
+                    child:   Text(
+                      "FREE SHIPPING",
+                      style: TextStyle(
+                        color: Colors.green,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 14.0,
+                      ),
+                    )
+                ) :Text(
+                  "+ ${currentUser.currencysym} ${widget.shipcost}",
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 14.0,
+                  ),
+                ),Text(
+                  "Subtotal ${currentUser.currencysym} ${totalU}",
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 14.0,
+                  ),
+                )
+              ],
+            ),
+          ):
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+
+              children: [
+                Row(children:[Text(
+                  "${currentUser.currencysym} ${widget.price}",
+                  style: TextStyle(
+                    color: Colors.green,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 20.0,
+                  ),
+                ),
+             ]),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+
+                    children: [
+                      Text("${currentUser.currency} ",
+                          style: TextStyle(
+                            color: Colors.green,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 10.0,
+                          )
+                      ),
+                    ],
+                  ),
+                ),
+                widget.customprice == null?Container() :Text(
+                  "+ ${currentUser.currencysym} ${widget.customprice??"0.0"}",
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 14.0,
+                  ),
+                ),
+                widget.freeworldship?Container(
+                    color:Colors.white.withOpacity(0.1),
+                    child:   Text(
+                      "FREE SHIPPING",
+                      style: TextStyle(
+                        color: Colors.green,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 14.0,
+                      ),
+                    )
+                ) :Text(
+                  "+ ${currentUser.currencysym} ${widget.shipcostuser}(\u0024 ${widget.shipcost})",
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 14.0,
+                  ),
+                ),
+                Text(
+                  "Subtotal ${currentUser.currencysym} ${totalU}",
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 14.0,
+                  ),
+                ),
+               currentUser.country == "India"? Container(): Text(
+                  "To be Payed in US dollars: \u0024 ${total}",
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 14.0,
+                  ),
+                )
+              ],
+            ),
+          ) ,
+
+          st(),
+
+        ],),
+      ),
     ),
   );
 
@@ -466,7 +672,8 @@ else {
   }
   @override
   Widget build(BuildContext context) {
-    double vDouble = double.tryParse(widget.total) *100;
+
+    double vDouble = currentUser.country == "India" ?double.tryParse(totalU) *100:double.tryParse(total) *100;
     String vString = vDouble.toInt().toString();
 
     return Scaffold(
@@ -476,31 +683,32 @@ else {
             // fontFamily :"MajorMonoDisplay",
               color: Colors.white),),
         ),),
-      body: Container( decoration: BoxDecoration(
-          gradient: fabGradient
-      ) ,
-        alignment: Alignment.center,
+      body: SingleChildScrollView(
+       // color: Colors.white,
+
         child: Column(
           children: [
             ProdTile(),
-            BottomAppBar(
+       BottomAppBar(
               color: Colors.transparent,
               child: Column(
                 children: [
                   RaisedButton(
                     onPressed: () {
                       Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) =>BuyNow(buynowamount:vString,
-                      prodId: widget.prodId,
-                          ownerId: widget.ownerId,
-                          profileimg: widget.profileimg ,
-                      username: widget.username,
-                      mediaUrl: widget.mediaUrl,
-                          eur:widget.eur,
-                          usd:widget.usd,
-                          inr:widget.inr,
-                          gbp:widget.gbp,
-                          productname:widget.productname,
-                          size:widget.userSize,
+                        prodId: widget.prodId,
+                        ownerId: widget.ownerId,
+                        profileimg: widget.profileimg ,
+                        username: widget.username,
+                        mediaUrl: widget.mediaUrl,
+                        eur:widget.eur,
+                        usd:widget.usd,
+                        inr:widget.inr,
+                        gbp:widget.gbp,
+                        productname:widget.productname,
+                        size:widget.userSize,
+                        usersize:widget.displaysize,
+
                         xxxs: widget.xxxs,
                         xxs: widget.xxs,
                         xs: widget.xs,
@@ -592,9 +800,11 @@ else {
                 ],
               ),
             ),
+
           ],
         ),
       ),
+
     );
   }
 }

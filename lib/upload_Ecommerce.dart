@@ -10395,6 +10395,12 @@ color(){
                                           labelText: 'color',
                                       ),
                                       textAlign: TextAlign.center,
+                                      validator: (text) {
+                                        if ( text.isEmpty) {
+                                          return 'Color is empty';
+                                        }
+                                        return null;
+                                      },
                                     ),
                                   ),
                                   Container(
@@ -11587,9 +11593,10 @@ keyboardType:TextInputType.number,
         from: '${currentUser.currencyISO}', to: 'USD', amount: shipcostintern.text ??  0);
     // String date = result.date; // Returns the last updated date
     setState(() {
-      inrtousd = double.tryParse(resultUSD.rate);
-      inrtousd = inrtousd.toStringAsFixed(2);
+
+      inrtousd = resultUSD.rate;
       inrtousd1 = resultUSD1.rate;
+
       inrtousd2 = resultUSD2.rate;
       inrtousd3 = resultUSD3.rate;
       inrtousd4 = resultUSD4.rate;
@@ -11667,6 +11674,7 @@ keyboardType:TextInputType.number,
               "color9":int.tryParse(colorController91.text) ?? 0,
               "color10":int.tryParse(colorController10.text) ?? 0,
               "country":  currentUser.country,
+"currency":  currentUser.currencyISO,
 
               "indian":indian,
                "worldship":worldship,

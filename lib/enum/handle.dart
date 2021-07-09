@@ -16703,3 +16703,1091 @@ Cus10(){
       );
   }
 }
+void FINRUSD() async {
+  // final frankfurter = Frankfurter();
+  //
+  // final latest = await frankfurter.latest(from: Currency('EUR'));
+  // latest.forEach(print);
+  //
+  // final rate = await frankfurter.getRate(
+  //   from: Currency('EUR'),
+  //   to: Currency('GBP'),
+  // );
+  if (currentUser.country == 'India') {
+    var resultUSD = await Currency.getConversion(
+        from: 'INR', to: 'USD', amount: totalController.text ?? 0);
+    // String date = result.date; // Returns the last updated date
+    setState(() {
+
+
+      Finrtousd = resultUSD.rate;
+      Finrtousd = Finrtousd.round();
+
+      var usd = double.tryParse(totalController.text ?? 0);
+      totalprice = usd.round();
+    });
+
+    print("$Finrtousd");
+    var resultGBP = await Currency.getConversion(
+        from: 'INR', to: 'GBP', amount: totalController.text ?? 0);
+// Returns the last updated date
+    setState(() {
+      Finrtogbp = resultGBP.rate;
+      Finrtogbp = Finrtogbp.round();
+
+    });
+
+    print("$Finrtogbp");
+    var resultEUR = await Currency.getConversion(
+        from: 'INR', to: 'EUR', amount:totalController.text ?? 0);
+    setState(() {
+      Finrtoeur = resultEUR.rate;
+      Finrtoeur = Finrtoeur.round();
+
+    });
+
+    print("$Finrtoeur");
+    var resultCNY = await Currency.getConversion(
+        from: 'INR', to: 'CNY', amount: totalController.text ?? 0);
+    setState(() {
+      Finrtocny = resultCNY.rate;
+      Finrtocny = Finrtocny.round();
+
+    });
+
+    print("$Finrtocny");
+  }
+  else if (currentUser.country == 'China') {
+    var resultUSD = await Currency.getConversion(
+        from: 'CNY', to: 'USD', amount: totalController.text);
+    // String date = result.date; // Returns the last updated date
+    setState(() {
+      Fcnytousd = resultUSD.rate;
+      Fcnytousd = Fcnytousd.round();
+
+      var usd = double.tryParse(totalController.text);
+      totalprice = usd.round();
+    });
+    print("$Fcnytousd");
+    var resultGBP = await Currency.getConversion(
+        from: 'CNY', to: 'GBP', amount: totalController.text);
+// Returns the last updated date
+    setState(() {
+      Fcnytogbp = resultGBP.rate;
+      Fcnytogbp = Fcnytogbp.round();
+
+    });
+    print("$Fcnytogbp");
+    var resultEUR = await Currency.getConversion(
+        from: 'CNY', to: 'EUR', amount: totalController.text);
+    setState(() {
+      Fcnytoeur = resultEUR.rate;
+      Fcnytoeur = Fcnytoeur.round();
+
+    });
+
+    print("$Fcnytoeur");
+    var resultINR = await Currency.getConversion(
+        from: 'CNY', to: 'INR', amount: totalController.text);
+    setState(() {
+      Fcnytoinr = resultINR.rate;
+      Fcnytoinr = Fcnytoinr.round();
+
+    });
+
+    print("$Fcnytoinr");
+  }
+  else if (currentUser.country == 'Europe') {
+    var resultUSD = await Currency.getConversion(
+        from: 'EUR', to: 'USD', amount: totalController.text);
+    // String date = result.date; // Returns the last updated date
+    setState(() {
+      Feurtousd = resultUSD.rate;
+      Feurtousd = Feurtousd.round();
+
+      var usd = double.tryParse(totalController.text);
+      totalprice = usd.round();
+    });
+
+    print("$Feurtousd");
+    var resultGBP = await Currency.getConversion(
+        from: 'EUR', to: 'GBP', amount: totalController.text);
+// Returns the last updated date
+    setState(() {
+      Feurtogbp = resultGBP.rate;
+      Feurtogbp = Feurtogbp.round();
+
+    });
+
+    print("$Feurtogbp");
+    var resultCNY = await Currency.getConversion(
+        from: 'EUR', to: 'CNY', amount: totalController.text);
+    setState(() {
+      Feurtocny = resultCNY.rate;
+      Feurtocny = Feurtocny.round();
+
+    });
+
+    print("$Feurtocny");
+    var resultINR = await Currency.getConversion(
+        from: 'EUR', to: 'INR', amount: totalController.text);
+    setState(() {
+      Feurtoinr = resultINR.rate;
+      Feurtoinr = Feurtoinr.round();
+
+    });
+
+    print("$Feurtoinr");
+  }
+  else if (currentUser.country == 'UK') {
+    var resultUSD = await Currency.getConversion(
+        from: 'GBP', to: 'USD', amount: totalController.text);
+    // String date = result.date; // Returns the last updated date
+    var resultEUR = await Currency.getConversion(
+        from: 'GBP', to: 'EUR', amount: totalController.text);
+    var resultCNY = await Currency.getConversion(
+        from: 'GBP', to: 'CNY', amount: totalController.text);
+    var resultINR = await Currency.getConversion(
+        from: 'GBP', to: 'INR', amount: totalController.text);
+
+    setState(() {
+      Fgbptousd = resultUSD.rate;
+      // int usd = int.tryParse(gbptousd);
+      Fgbptousd = Fgbptousd.round();
+      var usd = double.tryParse(totalController.text);
+      totalprice = usd.round();
+      Fgbptoeur = resultEUR.rate;
+      Fgbptoeur = Fgbptoeur.round();
+
+      Fgbptocny = resultCNY.rate;
+      Fgbptocny = Fgbptocny.round();
+      Fgbptoinr = resultINR.rate;
+      Fgbptoinr = Fgbptoinr.round();
+
+
+
+    });
+
+// Returns the last updated date
+
+  }
+  else if (currentUser.country == 'USA') {
+    var resultGBP = await Currency.getConversion(
+        from: 'USD', to: 'GBP', amount: totalController.text);
+    // String date = result.date; // Returns the last updated date
+    setState(() {
+      Fusdtogbp = resultGBP.rate;
+      Fusdtogbp = Fusdtogbp.round();
+
+      var usd = double.tryParse(totalController.text);
+      totalprice = usd.round();
+
+    });
+
+    print("$Fusdtogbp");
+    var resultEUR = await Currency.getConversion(
+        from: 'USD', to: 'EUR', amount: totalController.text);
+// Returns the last updated date
+    setState(() {
+      Fusdtoeur = resultEUR.rate;
+      Fusdtoeur = Fusdtoeur.round();
+
+
+    });
+    print("$Fusdtoeur");
+    var resultCNY = await Currency.getConversion(
+        from: 'USD', to: 'CNY', amount: totalController.text);
+    setState(() {
+      Fusdtocny = resultCNY.rate;
+      Fusdtocny = Fusdtocny.round();
+
+    });
+    print("$Fusdtocny");
+    var resultINR = await Currency.getConversion(
+        from: 'USD', to: 'INR', amount: totalController.text);
+    setState(() {
+      Fusdtoinr = resultINR.rate;
+      Fusdtoinr = Fusdtoinr.round();
+
+    });
+
+    print("$Fusdtoinr");
+  }
+  else  {
+    var resultGBP = await Currency.getConversion(
+        from: 'USD', to: 'GBP', amount: totalController.text);
+    // String date = result.date; // Returns the last updated date
+    setState(() {
+      Fusdtogbp = resultGBP.rate;
+      Fusdtogbp = Fusdtogbp.round();
+
+      var usd = double.tryParse(totalController.text);
+      totalprice = usd.round();
+
+    });
+
+    print("$Fusdtogbp");
+    var resultEUR = await Currency.getConversion(
+        from: 'USD', to: 'EUR', amount: totalController.text);
+// Returns the last updated date
+    setState(() {
+      Fusdtoeur = resultEUR.rate;
+      Fusdtoeur = Fusdtoeur.round();
+
+
+    });
+    print("$Fusdtoeur");
+    var resultCNY = await Currency.getConversion(
+        from: 'USD', to: 'CNY', amount: totalController.text);
+    setState(() {
+      Fusdtocny = resultCNY.rate;
+      Fusdtocny = Fusdtocny.round();
+
+    });
+    print("$Fusdtocny");
+    var resultINR = await Currency.getConversion(
+        from: 'USD', to: 'INR', amount: totalController.text);
+    setState(() {
+      Fusdtoinr = resultINR.rate;
+      Fusdtoinr = Fusdtoinr.round();
+
+    });
+
+    print("$Fusdtoinr");
+  }
+}
+currency(){
+  if(currentUser.country == 'India'){
+    return
+      Column(
+          children:[
+            Container(
+              margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+              child: TextFormField(
+                style:TextStyle(color:kText),
+
+                keyboardType: TextInputType.number,
+                maxLines: null,
+                controller: advanceController,
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+                  enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+                  focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+
+                  labelText: 'Advance Payment',labelStyle: TextStyle(color: kText),
+                  hintText: '${currentUser.currencysym}',
+                ),
+                textAlign: TextAlign.center,
+                validator: (text) {
+                  if (text.isEmpty) {
+                    return 'Advance Payment is empty';
+                  }
+                  return null;
+                },
+              ),
+            ),
+            SizedBox( height: 8.0,),
+            Text('If one-time payment.Leave payment on delivery empty', style: TextStyle(
+              // fontFamily :"MajorMonoDisplay",
+              // fontSize:  35.0 ,
+                color: Colors.red),),
+
+            Container(
+              margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+              child: TextFormField(
+                style:TextStyle(color:kText),
+                keyboardType: TextInputType.number,
+
+                maxLines: null,
+                controller: totalController,
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+                  enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+                  focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+
+                  labelText: 'Payment on delivery',labelStyle: TextStyle(color: kText),
+                  hintText: '${currentUser.currencysym}' ,
+                ),
+                textAlign: TextAlign.center,
+                // validator: (text) {
+                // if (text.isEmpty) {
+                // return 'Final Payment is empty';
+                // }
+                // return null;
+                // },
+              ),
+            ),
+          ]
+      );
+
+  }
+  else if(currentUser.country=='US'){
+    return
+      Column(
+          children:[
+            Container(
+              margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+              child: TextFormField(
+                style:TextStyle(color:kText),
+
+                keyboardType: TextInputType.number,
+                maxLines: null,
+                controller: advanceController,
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+                  enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+                  focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+
+                  labelText: 'Advance Payment',labelStyle: TextStyle(color: kText),
+                  hintText: '\u0024',
+                ),
+                textAlign: TextAlign.center,
+                validator: (text) {
+                  if (text.isEmpty) {
+                    return 'Advance Payment is empty';
+                  }
+                  return null;
+                },
+              ),
+            ),
+            SizedBox( height: 8.0,),
+            Text('If one-time payment.Leave payment on delivery empty', style: TextStyle(
+              // fontFamily :"MajorMonoDisplay",
+              // fontSize:  35.0 ,
+                color: Colors.red),),
+
+            Container(
+              margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+              child: TextFormField(
+                style:TextStyle(color:kText),
+
+                keyboardType: TextInputType.number,
+                maxLines: null,
+                controller: totalController,
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+                  enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+                  focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+
+                  labelText: 'Payment on delivery',labelStyle: TextStyle(color: kText),
+                  hintText: '\u0024' ,
+                ),
+                textAlign: TextAlign.center,
+                // validator: (text) {
+                //   if (text.isEmpty) {
+                //     return 'Final Payment is empty';
+                //   }
+                //   return null;
+                // },
+              ),
+            ),
+          ]
+      );
+
+
+  }
+  else if(currentUser.country=='Europe'){
+    return
+      Column(
+          children:[
+            Container(
+              margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+              child: TextFormField(
+                style:TextStyle(color:kText),
+
+                keyboardType: TextInputType.number,
+                maxLines: null,
+                controller: advanceController,
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+                  enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+                  focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+
+                  labelText: 'Advance Payment',labelStyle: TextStyle(color: kText),
+                  hintText: '€',
+                ),
+                textAlign: TextAlign.center,
+                validator: (text) {
+                  if (text.isEmpty) {
+                    return 'Advance Payment is empty';
+                  }
+                  return null;
+                },
+              ),
+            ),
+            SizedBox( height: 8.0,),
+            Text('If one-time payment.Leave payment on delivery empty', style: TextStyle(
+              // fontFamily :"MajorMonoDisplay",
+              // fontSize:  35.0 ,
+                color: Colors.red),),
+
+            Container(
+              margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+              child: TextFormField(
+                style:TextStyle(color:kText),
+
+                keyboardType: TextInputType.number,
+                maxLines: null,
+                controller: totalController,
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+                  enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+                  focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+
+                  labelText: 'Payment on delivery',labelStyle: TextStyle(color: kText),
+                  hintText: '€' ,
+                ),
+                // textAlign: TextAlign.center,
+                // validator: (text) {
+                //   if (text.isEmpty) {
+                //     return 'Final Payment is empty';
+                //   }
+                //   return null;
+                // },
+              ),
+            ),
+          ]
+      );
+
+
+  }
+  else if(currentUser.country=='UK'){
+    return
+      Column(
+          children:[
+            Container(
+              margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+              child: TextFormField(
+                style:TextStyle(color:kText),
+
+                keyboardType: TextInputType.number,
+                maxLines: null,
+                controller: advanceController,
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+                  enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+                  focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+
+                  labelText: 'Advance Payment',labelStyle: TextStyle(color: kText),
+                  hintText: '£',
+                ),
+                textAlign: TextAlign.center,
+                // validator: (text) {
+                //   if (text.isEmpty) {
+                //     return 'Advance Payment is empty';
+                //   }
+                //   return null;
+                // },
+              ),
+            ),
+            SizedBox( height: 8.0,),
+            Text('If one-time payment.Leave payment on delivery empty', style: TextStyle(
+              // fontFamily :"MajorMonoDisplay",
+              // fontSize:  35.0 ,
+                color: Colors.red),),
+
+            Container(
+              margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+              child: TextFormField(
+                style:TextStyle(color:kText),
+
+                keyboardType: TextInputType.number,
+                maxLines: null,
+                controller: totalController,
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+                  enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+                  focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+
+                  labelText: 'Payment on delivery',labelStyle: TextStyle(color: kText),
+                  hintText: '£' ,
+                ),
+                // textAlign: TextAlign.center,
+                // validator: (text) {
+                //   if (text.isEmpty) {
+                //     return 'Final Payment is empty';
+                //   }
+                //   return null;
+                // },
+              ),
+            ),
+          ]
+      );
+
+  }
+  else{
+    return
+      Column(
+          children:[
+            Container(
+              margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+              child: TextFormField(
+                style:TextStyle(color:kText),
+
+                keyboardType: TextInputType.number,
+                maxLines: null,
+                controller: advanceController,
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+                  enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+                  focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+
+                  labelText: 'Advance Payment',labelStyle: TextStyle(color: kText),
+                  hintText: '\u0024',
+                ),
+                textAlign: TextAlign.center,
+                validator: (text) {
+                  if (text.isEmpty) {
+                    return 'Advance Payment is empty';
+                  }
+                  return null;
+                },
+              ),
+            ),
+            SizedBox( height: 8.0,),
+            Text('If one-time payment.Leave payment on delivery empty', style: TextStyle(
+              // fontFamily :"MajorMonoDisplay",
+              // fontSize:  35.0 ,
+                color: Colors.red),),
+
+            Container(
+              margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+              child: TextFormField(
+                style:TextStyle(color:kText),
+
+                keyboardType: TextInputType.number,
+                maxLines: null,
+                controller: totalController,
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+                  enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+                  focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+
+                  labelText: 'Payment on delivery',labelStyle: TextStyle(color: kText),
+                  hintText: '\u0024' ,
+                ),
+                textAlign: TextAlign.center,
+                // validator: (text) {
+                //   if (text.isEmpty) {
+                //     return 'Final Payment is empty';
+                //   }
+                //   return null;
+                // },
+              ),
+            ),
+          ]
+      );
+
+
+  }
+}
+Servicecatalog()
+
+{
+  Fluttertoast.showToast(
+      msg: "Please wait:Uploading", timeInSecForIos: 4);
+  print(currentUser.country);
+  setState(() {
+    isUploading = true;
+
+  });
+  if(currentUser.country == 'India') {
+    FirebaseFirestore.instance.collection('serviceCustomer')
+        .doc(widget.reciever)
+        .collection('customerService')
+        .doc(orderId)
+        .set({
+      'cusId':widget.reciever,
+      'cusname':widget.recievername,
+      "cusProfileImg": widget.recieverUrl,
+      'ownerId':currentUser.id,
+      'username':currentUser.displayName,
+      'photoUrl':currentUser.photoUrl,
+      'orderId':orderId,
+      'fulfilled':'false',
+      'orderStatus':'Processing',
+      "usd": advanceController.text ?? "",
+
+      "inr": userprice.toString() ?? "",
+      "Fusd": Finrtousd.toString() ?? "",
+
+      "Finr": totalController.text ?? "",
+      "timestamp": timestamp,
+
+      // 'advance':advanceController.text,
+      // 'final':totalController.text ?? "0",
+      'title':titleController.text,
+      'description':detailsController.text,
+      'advancepay':'false',
+      'finalpay':'false',
+    });
+    FirebaseFirestore.instance.collection('serviceSeller')
+        .doc(currentUser.id)
+        .collection('sellerService')
+        .doc(orderId)
+        .set({
+      'cusId':widget.reciever,
+      'cusname':widget.recievername,
+      "cusProfileImg": widget.recieverUrl,
+      'ownerId':currentUser.id,
+      'username':currentUser.displayName,
+      'photoUrl':currentUser.photoUrl,
+      'orderId':orderId,
+      'fulfilled':'false',
+      'orderStatus':'Processing',
+      "usd": advanceController.text ?? "",
+
+      "inr": userprice.toString() ?? "",
+      "Fusd": Finrtousd.toString() ?? "",
+
+      "Finr": totalController.text ?? "",
+      "timestamp": timestamp,
+
+      // 'final':totalController.text ?? "0",
+      'title':titleController.text,
+      'description':detailsController.text,    'a'
+          'dvancepay':'false',
+      'finalpay':'false',
+
+    });
+    FirebaseFirestore.instance.collection('feed')
+        .doc(currentUser.id)
+        .collection('feedItems')
+        .doc(orderId)
+        .set({
+      "type": "ReqPaymentI",
+      "username": widget.recievername,
+      "userId": widget.reciever,
+      "userProfileImg": widget.recieverUrl,
+
+      "postId": orderId,
+      // "mediaUrl": mediaUrl,
+      "timestamp": timestamp,
+      "read": 'false',
+      'message':'Your invoice has been sent!',
+    });
+    FirebaseFirestore.instance.collection('feed')
+        .doc(widget.reciever)
+        .collection('feedItems')
+        .doc(orderId)
+        .set({
+      "type": "ReqPayment",
+      "username": currentUser.displayName,
+      "userId": currentUser.id,
+      "userProfileImg": currentUser.photoUrl,
+      "postId": orderId,
+      // "mediaUrl": mediaUrl,
+      "timestamp": timestamp,
+      "read": 'false',
+      'message':'You received an order invoice!',
+    });
+    // Navigator.pop(context);
+
+  }
+  else if(currentUser.country=='Europe') {
+    FirebaseFirestore.instance.collection('serviceCustomer')
+        .doc(widget.reciever)
+        .collection('customerService')
+        .doc(orderId)
+        .set({
+      'cusId':widget.reciever,
+      'cusname':widget.recievername,
+      "cusProfileImg": widget.recieverUrl,
+      'ownerId':currentUser.id,
+      'username':currentUser.displayName,
+      'photoUrl':currentUser.photoUrl,
+      'orderId':orderId,
+      'fulfilled':'false',
+      'orderStatus':'Processing',
+      "usd": eurtousd.toString() ?? "",
+      "cny": eurtocny.toString() ?? "",
+      "gbp": eurtogbp.toString() ?? "",
+      "eur": userprice.toString() ?? "0",
+      "inr": eurtoinr.toString() ?? "",
+      "Fusd": Feurtousd.toString() ?? "",
+      "Fcny": Feurtocny.toString() ?? "",
+      "Fgbp": Feurtogbp.toString() ?? "",
+      "Feur": totalprice.toString() ?? "",
+      "Finr": Feurtoinr.toString() ?? "",
+      "timestamp": timestamp,
+
+
+      // 'advance':advanceController.text,
+      // 'final':otalController.text ?? "0"totalController.text ?? "0",
+      'title':titleController.text,
+      'description':detailsController.text,
+      'advancepay':'false',
+      'finalpay':'false',
+    });
+    FirebaseFirestore.instance.collection('serviceSeller')
+        .doc(currentUser.id)
+        .collection('sellerService')
+        .doc(orderId)
+        .set({
+      'cusId':widget.reciever,
+      'cusname':widget.recievername,
+      "cusProfileImg": widget.recieverUrl,
+      'ownerId':currentUser.id,
+      'username':currentUser.displayName,
+      'photoUrl':currentUser.photoUrl,
+      'orderId':orderId,
+      'fulfilled':'false',
+      'orderStatus':'Processing',
+      "usd": eurtousd.toString() ?? "",
+      "cny": eurtocny.toString() ?? "",
+      "gbp": eurtogbp.toString() ?? "",
+      "eur": userprice.toString() ?? "",
+      "inr": eurtoinr.toString() ?? "",
+      "Fusd": Feurtousd.toString() ?? "",
+      "Fcny": Feurtocny.toString() ?? "",
+      "Fgbp": Feurtogbp.toString() ?? "",
+      "Feur": totalprice.toString() ?? "",
+      "Finr": Feurtoinr.toString() ?? "",
+      "timestamp": timestamp,
+
+
+      // 'advance':advanceController.text,
+      // 'final':totalController.text ?? "0",
+      'title':titleController.text,
+      // 'title':titleController.text,
+      'description':detailsController.text,
+      'advancepay':'false',
+      'finalpay':'false',
+
+    });
+    FirebaseFirestore.instance.collection('feed')
+        .doc(currentUser.id)
+        .collection('feedItems')
+        .doc(orderId)
+        .set({
+      "type": "ReqPaymentI",
+      "username": widget.recievername,
+      "userId": widget.reciever,
+      "userProfileImg": widget.recieverUrl,
+
+      "postId": orderId,
+      // "mediaUrl": mediaUrl,
+      "timestamp": timestamp,
+      "read": 'false',
+      'message':'Your invoice has been sent!',
+    });
+    FirebaseFirestore.instance.collection('feed')
+        .doc(widget.reciever)
+        .collection('feedItems')
+        .doc(orderId)
+        .set({
+      "type": "ReqPayment",
+      "username": currentUser.displayName,
+      "userId": currentUser.id,
+      "userProfileImg": currentUser.photoUrl,
+      "postId": orderId,
+      // "mediaUrl": mediaUrl,
+      "timestamp": timestamp,
+      "read": 'false',
+      'message':'Your received an order invoice!',
+    });
+  }
+  else if(currentUser.country=='USA') {
+    FirebaseFirestore.instance.collection('serviceCustomer')
+        .doc(widget.reciever)
+        .collection('customerService')
+        .doc(orderId)
+        .set({
+      'cusId':widget.reciever,
+      'cusname':widget.recievername,
+      "cusProfileImg": widget.recieverUrl,
+      'ownerId':currentUser.id,
+      'username':currentUser.displayName,
+      'photoUrl':currentUser.photoUrl,
+      'orderId':orderId,
+      'fulfilled':'false',
+      'orderStatus':'Processing',
+      "cny": usdtocny.toString() ?? "",
+      "gbp": usdtogbp.toString() ?? "",
+      "eur": usdtoeur.toString() ?? "",
+      "inr": usdtoinr.toString() ?? "",
+      "usd": userprice.toString() ?? "",
+      "Fcny": Fusdtocny.toString() ?? "",
+      "Fgbp": Fusdtogbp.toString() ?? "",
+      "Feur": Fusdtoeur.toString() ?? "",
+      "Finr": Fusdtoinr.toString() ?? "",
+      "Fusd": totalprice.toString() ?? "",
+      "timestamp": timestamp,
+
+      // 'advance':advanceController.text,
+      // 'final':otalController.text ?? "0"totalController.text ?? "0",
+      'title':titleController.text,
+      'description':detailsController.text,
+      'advancepay':'false',
+      'finalpay':'false',
+    });
+    FirebaseFirestore.instance.collection('serviceSeller')
+        .doc(currentUser.id)
+        .collection('sellerService')
+        .doc(orderId)
+        .set({
+      'cusId':widget.reciever,
+      'cusname':widget.recievername,
+      "cusProfileImg": widget.recieverUrl,
+      'ownerId':currentUser.id,
+      'username':currentUser.displayName,
+      'photoUrl':currentUser.photoUrl,
+      'orderId':orderId,
+      'fulfilled':'false',
+      'orderStatus':'Processing',
+      "cny": usdtocny.toString() ?? "",
+      "gbp": usdtogbp.toString() ?? "",
+      "eur": usdtoeur.toString() ?? "",
+      "inr": usdtoinr.toString() ?? "",
+      "usd": userprice.toString() ?? "",
+      "Fcny": Fusdtocny.toString() ?? "",
+      "Fgbp": Fusdtogbp.toString() ?? "",
+      "Feur": Fusdtoeur.toString() ?? "",
+      "Finr": Fusdtoinr.toString() ?? "",
+      "Fusd": totalprice.toString() ?? "",
+      "timestamp": timestamp,
+      // 'advance':advanceController.text,
+      // 'final':totalController.text ?? "0",
+      'title':titleController.text,
+      // 'title':titleController.text,
+      'description':detailsController.text,
+      'advancepay':'false',
+      'finalpay':'false',
+
+    });
+    FirebaseFirestore.instance.collection('feed')
+        .doc(currentUser.id)
+        .collection('feedItems')
+        .doc(orderId)
+        .set({
+      "type": "ReqPaymentI",
+      "username": widget.recievername,
+      "userId": widget.reciever,
+      "userProfileImg": widget.recieverUrl,
+      "postId": orderId,
+      // "mediaUrl": mediaUrl,
+      "timestamp": timestamp,
+      "read": 'false',
+      'message':'Your invoice has been sent!',
+    });
+    FirebaseFirestore.instance.collection('feed')
+        .doc(widget.reciever)
+        .collection('feedItems')
+        .doc(orderId)
+        .set({
+      "type": "ReqPayment",
+      "username": currentUser.displayName,
+      "userId": currentUser.id,
+      "userProfileImg": currentUser.photoUrl,
+      "postId": orderId,
+      // "mediaUrl": mediaUrl,
+      "timestamp": timestamp,
+      "read": 'false',
+      'message':'Your received an order invoice!',
+    });
+  }
+  else if(currentUser.country=='UK') {
+    FirebaseFirestore.instance.collection('serviceCustomer')
+        .doc(widget.reciever)
+        .collection('customerService')
+        .doc(orderId)
+        .set({
+      'cusId':widget.reciever,
+      'cusname':widget.recievername,
+      "cusProfileImg": widget.recieverUrl,
+      'ownerId':currentUser.id,
+      'username':currentUser.displayName,
+      'photoUrl':currentUser.photoUrl,
+      'username':currentUser.displayName,
+      'photoUrl':currentUser.photoUrl,
+      'orderId':orderId,
+      'fulfilled':'false',
+      'orderStatus':'Processing',
+      "usd": gbptousd.toString() ?? "",
+      "cny": gbptocny.toString() ?? "",
+      "gbp": userprice.toString() ?? "",
+      "eur": gbptoeur.toString() ?? "",
+      "inr": gbptoinr.toString() ?? "",
+      "Fusd": Fgbptousd.toString() ?? "",
+      "Fcny": Fgbptocny.toString() ?? "",
+      "Fgbp": totalprice.toString() ?? "",
+      "Feur": Fgbptoeur.toString() ?? "",
+      "Finr": Fgbptoinr.toString() ?? "",
+      "timestamp": timestamp,
+
+      // 'advance':advanceController.text,
+      // 'final':otalController.text ?? "0"totalController.text ?? "0",
+      'title':titleController.text,
+      'description':detailsController.text,
+      'advancepay':'false',
+      'finalpay':'false',
+    });
+    FirebaseFirestore.instance.collection('serviceSeller')
+        .doc(currentUser.id)
+        .collection('sellerService')
+        .doc(orderId)
+        .set({
+      'cusId':widget.reciever,
+      'cusname':widget.recievername,
+      "cusProfileImg": widget.recieverUrl,
+      'ownerId':currentUser.id,
+      'username':currentUser.displayName,
+      'photoUrl':currentUser.photoUrl,
+      'username':currentUser.displayName,
+      'photoUrl':currentUser.photoUrl,
+      'orderId':orderId,
+      'fulfilled':'false',
+      'orderStatus':'Processing',
+      "usd": gbptousd.toString() ?? "",
+      "cny": gbptocny.toString() ?? "",
+      "gbp": userprice.toString() ?? "",
+      "eur": gbptoeur.toString() ?? "",
+      "inr": gbptoinr.toString() ?? "",
+      "Fusd": Fgbptousd.toString() ?? "",
+      "Fcny": Fgbptocny.toString() ?? "",
+      "Fgbp": totalprice.toString() ?? "",
+      "Feur": Fgbptoeur.toString() ?? "",
+      "Finr": Fgbptoinr.toString() ?? "",
+      "timestamp": timestamp,
+
+      // 'advance':advanceController.text,
+      // 'final':totalController.text ?? "0",
+      // 'title':titleController.text,
+      'title':titleController.text,
+      'description':detailsController.text,
+      'advancepay':'false',
+      'finalpay':'false',
+
+    });
+    FirebaseFirestore.instance.collection('feed')
+        .doc(currentUser.id)
+        .collection('feedItems')
+        .doc(orderId)
+        .set({
+      "type": "ReqPaymentI",
+      "username": widget.recievername,
+      "userId": widget.reciever,
+      "userProfileImg": widget.recieverUrl,
+
+      "postId": orderId,
+      // "mediaUrl": mediaUrl,
+      "timestamp": timestamp,
+      "read": 'false',
+      'message':'Your invoice has been sent!',
+    });
+    FirebaseFirestore.instance.collection('feed')
+        .doc(widget.reciever)
+        .collection('feedItems')
+        .doc(orderId)
+        .set({
+      "type": "ReqPayment",
+      "username": currentUser.displayName,
+      "userId": currentUser.id,
+      "userProfileImg": currentUser.photoUrl,
+      "postId": orderId,
+      // "mediaUrl": mediaUrl,
+      "timestamp": timestamp,
+      "read": 'false',
+      'message':'Your received an order invoice!',
+    });
+  }
+  else {
+    FirebaseFirestore.instance.collection('serviceCustomer')
+        .doc(widget.reciever)
+        .collection('customerService')
+        .doc(orderId)
+        .set({
+      'cusId':widget.reciever,
+      'cusname':widget.recievername,
+      "cusProfileImg": widget.recieverUrl,
+      'ownerId':currentUser.id,
+      'username':currentUser.displayName,
+      'photoUrl':currentUser.photoUrl,
+      'orderId':orderId,
+      'fulfilled':'false',
+      'orderStatus':'Processing',
+      "cny": usdtocny.toString() ?? "",
+      "gbp": usdtogbp.toString() ?? "",
+      "eur": usdtoeur.toString() ?? "",
+      "inr": usdtoinr.toString() ?? "",
+      "usd": userprice.toString() ?? "",
+      "Fcny": Fusdtocny.toString() ?? "",
+      "Fgbp": Fusdtogbp.toString() ?? "",
+      "Feur": Fusdtoeur.toString() ?? "",
+      "Finr": Fusdtoinr.toString() ?? "",
+      "Fusd": totalprice.toString() ?? "",
+      "timestamp": timestamp,
+
+      // 'advance':advanceController.text,
+      // 'final':otalController.text ?? "0"totalController.text ?? "0",
+      'title':titleController.text,
+      'description':detailsController.text,
+      'advancepay':'false',
+      'finalpay':'false',
+    });
+    FirebaseFirestore.instance.collection('serviceSeller')
+        .doc(currentUser.id)
+        .collection('sellerService')
+        .doc(orderId)
+        .set({
+      'cusId':widget.reciever,
+      'cusname':widget.recievername,
+      "cusProfileImg": widget.recieverUrl,
+      'ownerId':currentUser.id,
+      'username':currentUser.displayName,
+      'photoUrl':currentUser.photoUrl,
+      'orderId':orderId,
+      'fulfilled':'false',
+      'orderStatus':'Processing',
+      "cny": usdtocny.toString() ?? "",
+      "gbp": usdtogbp.toString() ?? "",
+      "eur": usdtoeur.toString() ?? "",
+      "inr": usdtoinr.toString() ?? "",
+      "usd": userprice.toString() ?? "",
+      "Fcny": Fusdtocny.toString() ?? "",
+      "Fgbp": Fusdtogbp.toString() ?? "",
+      "Feur": Fusdtoeur.toString() ?? "",
+      "Finr": Fusdtoinr.toString() ?? "",
+      "Fusd": totalprice.toString() ?? "",
+      "timestamp": timestamp,
+      // 'advance':advanceController.text,
+      // 'final':totalController.text ?? "0",
+      'title':titleController.text,
+      // 'title':titleController.text,
+      'description':detailsController.text,
+      'advancepay':'false',
+      'finalpay':'false',
+
+    });
+    FirebaseFirestore.instance.collection('feed')
+        .doc(currentUser.id)
+        .collection('feedItems')
+        .doc(orderId)
+        .set({
+      "type": "ReqPaymentI",
+      "username": widget.recievername,
+      "userId": widget.reciever,
+      "userProfileImg": widget.recieverUrl,
+      "postId": orderId,
+      // "mediaUrl": mediaUrl,
+      "timestamp": timestamp,
+      "read": 'false',
+      'message':'Your invoice has been sent!',
+    });
+    FirebaseFirestore.instance.collection('feed')
+        .doc(widget.reciever)
+        .collection('feedItems')
+        .doc(orderId)
+        .set({
+      "type": "ReqPayment",
+      "username": currentUser.displayName,
+      "userId": currentUser.id,
+      "userProfileImg": currentUser.photoUrl,
+      "postId": orderId,
+      // "mediaUrl": mediaUrl,
+      "timestamp": timestamp,
+      "read": 'false',
+      'message':'Your received an order invoice!',
+    });
+  }
+}

@@ -114,6 +114,7 @@ class BuyNow extends StatefulWidget {
   final String customprice;
   final String country;
   final String color;
+final String usersize;
 
   BuyNow({this.buynowamount,
     this.Ring1, this.Ring2, this.Ring3, this.Ring4, this.Ring5, this.Ring6,
@@ -169,6 +170,8 @@ class BuyNow extends StatefulWidget {
   this.ownerId,
     this.productname,
   this.size,
+    this.usersize,
+
   this.profileimg,this.username,this.mediaUrl, this.shipcost, this.custompriceusd, this.custompriceinr, this.shipcostusd, this.shipcostuser, this.customusd, this.custominr, this.price, this.customprice, this.country, this.color});
 
   @override
@@ -207,7 +210,10 @@ class BuyNow extends StatefulWidget {
     Shoe20: Shoe20,
     Shoe21: Shoe21,
     mto: mto,
-    freeSize: freeSize,);
+    freeSize: freeSize,
+   usersize: usersize,
+
+  );
 }
 
 class _BuyNowState extends State<BuyNow> {
@@ -295,7 +301,10 @@ class _BuyNowState extends State<BuyNow> {
   int Shoe21;
   int mto;
   int freeSize;
+  String usersize;
+
   _BuyNowState({
+    this.usersize,
     this.Ring1, this.Ring2, this.Ring3, this.Ring4, this.Ring5, this.Ring6,
     this.Ring7, this.Ring8, this.Ring9, this.Ring10, this.Ring11, this.Ring12,
     this.Ring13, this.Ring14, this.Ring15, this.Ring16, this.Ring17, this.Ring18,
@@ -1932,13 +1941,16 @@ else if(widget.color=='col 10'){
         .doc(orderId)
         .set({'prodId':widget.prodId,
       'ownerId':widget.ownerId,
-      'size':widget.size,
+      'size':widget.usersize,
       'orderId':orderId,
       'cusId':currentUser.id,
       'fulfilled':'false',
       "timestamp": timestamp,
  "productname": widget.productname,
  "shopmediaUrl": widget.mediaUrl,
+   "mtoText": widget.mtoText??"",
+      "color": widget.color??"",
+
       'courierId': "awaiting seller fulfilment",
       'courier': "awaiting seller fulfilment",
       'orderStatus':'Processing',
@@ -1951,9 +1963,11 @@ else if(widget.color=='col 10'){
         .doc(orderId)
         .set({'prodId':widget.prodId,
       'ownerId':widget.ownerId,
-      'size':widget.size,
+      'size':widget.usersize,
       'orderId':orderId,
       'cusId':currentUser.id,
+      "mtoText": widget.mtoText??"",
+      "color": widget.color??"",
 
       "timestamp": timestamp,
       "productname": widget.productname,
@@ -2000,6 +2014,7 @@ payment();
   void _handlePaymentSuccess(PaymentSuccessResponse response) {
     onSuccess();
     subtractQuantity();
+    subtractColor();
     Get.offAll( ActivityFeed());
   Fluttertoast.showToast(
   msg: "Payment SUCCESS: " + response.paymentId, timeInSecForIos: 4);
