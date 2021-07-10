@@ -10385,7 +10385,7 @@ color(){
 
                                   Container(
                                     margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
+                                    child: TextFormField(
 
                                       maxLines: 1,
                                       controller: colorController1,
@@ -11633,10 +11633,6 @@ keyboardType:TextInputType.number,
     TaskSnapshot storageTaskSnapshot = await uploadTask;
 //    print(storageTaskSnapshot.ref.getDownloadURL());
     return storageTaskSnapshot.ref.getDownloadURL();
-  }
-  gsd()async{
-    await INRUSD();
-
   }
   Future<void> handleSubmit() async {
 

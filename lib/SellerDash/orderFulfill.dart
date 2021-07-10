@@ -121,16 +121,11 @@ submit(){
                       enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
                       focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
 
-                      labelText: 'Tracking ID',labelStyle: TextStyle(color: kText),
+                      labelText: 'Tracking ID(optional)',labelStyle: TextStyle(color: kText),
                       hintText: 'Tracking ID',
                     ),
                     textAlign: TextAlign.center,
-                    validator: (text) {
-                      if ( text.isEmpty) {
-                        return 'Tracking ID is empty';
-                      }
-                      return null;
-                    },
+
                   ),
 
                   Center(

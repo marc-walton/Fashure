@@ -20,13 +20,11 @@ import 'package:flutter/cupertino.dart';
 import 'dart:async';
 import 'package:fashow/HomePage.dart';
 import 'package:fashow/Constants.dart';
-import 'package:fashow/ActivityFeed.dart';
 import 'package:fashow/product_custom.dart';
 import 'package:fashow/Profile.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter_currencies_tracker/flutter_currencies_tracker.dart';
-import 'package:modal_progress_hud/modal_progress_hud.dart';
 import 'package:flutter_animated_button/flutter_animated_button.dart';
 
 List <Widget>listOfImages = <Widget>[];
@@ -10269,7 +10267,7 @@ postusa() {
       mainAxisSize: MainAxisSize.min,
       children: <Widget>[
 
-     buildPostHeader(),
+        posteurope(),
 
       ],
 

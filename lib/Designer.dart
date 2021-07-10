@@ -6,10 +6,11 @@ import 'package:fashow/chat_screen.dart';
 import 'package:fashow/clientreview.dart';
 import 'package:fashow/model/user_model.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
 import 'package:fashow/edit_profile.dart';
 import 'package:community_material_icon/community_material_icon.dart';
 import 'package:fashow/user.dart';
+import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:fashow/progress.dart';
 import 'package:fashow/HomePage.dart';
@@ -19,6 +20,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:fashow/post_screen.dart';
 import 'package:fashow/Profile.dart';
+import 'package:paginate_firestore/paginate_firestore.dart';
 class Designer extends StatefulWidget {
 
   @override
@@ -41,7 +43,31 @@ class _DesignerState extends State<Designer>  with  TickerProviderStateMixin{
   ];
   MyTabs _myHandler ;
   TabController _controller ;
+  static const _pageSize = 20;
+
+  final PagingController<int, CharacterSummary> _pagingController =
+  PagingController(firstPageKey: 0);
+
+  @override
+
+  Future<void> _fetchPage(int pageKey) async {
+    try {
+      final newItems = await RemoteApi.getCharacterList(pageKey, _pageSize);
+      final isLastPage = newItems.length < _pageSize;
+      if (isLastPage) {
+        _pagingController.appendLastPage(newItems);
+      } else {
+        final nextPageKey = pageKey + newItems.length;
+        _pagingController.appendPage(newItems, nextPageKey);
+      }
+    } catch (error) {
+      _pagingController.error = error;
+    }
+  }
   void initState() {
+    _pagingController.addPageRequestListener((pageKey) {
+      _fetchPage(pageKey);
+    });
     super.initState();
     _controller = new TabController(length: 9, vsync: this);
     _myHandler = _tabs[0];
@@ -59,7 +85,8 @@ class _DesignerState extends State<Designer>  with  TickerProviderStateMixin{
   bool isLiked;
   bool showHeart = false;
   int followerCount = 0;
-
+String whereQuery = "isGreaterThan";
+String priceQuery = "0";
   editProfile() {
     Navigator.push(
         context,
@@ -68,7 +95,11 @@ class _DesignerState extends State<Designer>  with  TickerProviderStateMixin{
   }
   buildPostDesigner() {
     return FutureBuilder(
-        future: FirebaseFirestore.instance.collection('users').where('designer',isEqualTo:true).get(),
+        future:
+        priceQuery == "100"?
+          FirebaseFirestore.instance.collection('users').where('designer',isEqualTo:true).where('designerAvg',isLessThan:"100").get():
+         FirebaseFirestore.instance.collection('users').where('designer',isEqualTo:true).where('designerAvg',isGreaterThan:"0").get(),
+
         // ignore: missing_return
         builder: (context, snapshot) {
           if (!snapshot.hasData) {
@@ -246,6 +277,71 @@ class _DesignerState extends State<Designer>  with  TickerProviderStateMixin{
           );
         });
   }
+  all(){
+
+
+      return
+        InkWell(
+          onTap: (){whereQuery = isGreaterThan;
+          priceQuery = "0";
+
+            setState(()  {
+
+
+
+            });
+
+Get.back();
+
+          },
+          child:   Container(
+            height:50,
+            width:MediaQuery.of(context).size.width,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+//    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
+                FittedBox(child: Text('All',)),
+              ],
+            ),
+          ),
+        );
+
+  }
+   below100(){
+
+
+      return
+        InkWell(
+          onTap: (){
+            whereQuery = isLesserThan;
+            priceQuery = "100";
+            setState(()  {
+
+
+
+            });
+
+            Get.back();
+
+
+          },
+          child:   Container(
+            height:50,
+            width:MediaQuery.of(context).size.width,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+//    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
+                FittedBox(child: Text('below \u0024 100',)),
+              ],
+            ),
+          ),
+        );
+
+  }
+
+
         @override
   Widget build(BuildContext context) {
 
@@ -298,7 +394,33 @@ isScrollable: true,
             ),
             iconTheme: new IconThemeData(color: kSecondaryColor),
             actions: <Widget>[
+IconButton(icon:Icon(Icons.filter_alt_outlined),
+onPressed: (){  showDialog<void>(
+  context: context,
+  // useRootNavigator:true,
 
+  barrierDismissible: true,
+  // false = user must tap button, true = tap outside dialog
+  builder: (BuildContext dialogContext) {
+    return
+      Dialog(
+
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(20),),
+        child:
+        Center(
+          child: Column(
+            children: [
+              all(),
+            below100(),
+            ],
+          ),
+        ),
+
+      );
+  },
+);},
+)
 
             ]
         ),
@@ -311,7 +433,13 @@ isScrollable: true,
                 child: TabBarView(
                   controller: _controller,
                   children: <Widget>[
+                  PagedListView<int, CharacterSummary>(
+                    pagingController: _pagingController,
+                    builderDelegate: PagedChildBuilderDelegate<CharacterSummary>(
+                    itemBuilder: (context, index) =>
                     buildPostDesigner(),
+              ),
+      ),
                     buildPostIllustrator(),
                     buildPostBlogger(),
                     buildPostStylist(),
@@ -362,6 +490,8 @@ class _DItemState extends State<DItem> {
   final Users user;
   UserModel receiver;
   String products;
+  int client;
+
   int followerCount = 0;
   final String currentUserId = currentUser?.id;
 
@@ -377,6 +507,8 @@ class _DItemState extends State<DItem> {
       );
     });
     getFollowers();
+    g();
+
   }
 
   getPost(){
@@ -392,6 +524,7 @@ class _DItemState extends State<DItem> {
           return
             Container(
               height: 200,
+
               child: ListView.builder(
                   shrinkWrap: true,
                   scrollDirection: Axis.horizontal,
@@ -423,7 +556,7 @@ class _DItemState extends State<DItem> {
                             ),
                           )
                       );
-                  }
+                  },
               ),
             );
 
@@ -433,6 +566,63 @@ class _DItemState extends State<DItem> {
         }
     );
   }
+  getPot(){
+    return StreamBuilder(
+        stream:  FirebaseFirestore.instance.collection('posts').doc(user.id
+        ).collection('userPosts').snapshots(),
+
+        // ignore: missing_return
+        builder: (context,snapshot) {
+          if(!snapshot.hasData){
+            return Text('text');
+          }
+          return
+            Container(
+              height: 200,
+              child:        GridView.builder(
+
+                primary: false,
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: (MediaQuery
+                        .of(context)
+                        .orientation == Orientation.portrait) ? 3 : 3),
+                itemCount: snapshot.data.docs.length,
+                itemBuilder: (context, index) {
+                  DocumentSnapshot docSnapshot = snapshot.data.docs[index];
+                  List image = snapshot.data.docs[index]["mediaUrl"];
+                  return
+
+                    Padding(
+                        padding: EdgeInsets.all(5.0),
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(20.0),
+                          child: GestureDetector(
+                              onTap: (){
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => PostScreen(
+                                      postId: docSnapshot["postId"],
+                                      userId: docSnapshot["ownerId"],
+                                    ),
+                                  ),
+                                );
+                              },
+                              child: CachedNetworkImage( imageUrl: docSnapshot["mediaUrl"],)
+                          ),
+                        )
+                    );
+                }),
+
+          );
+
+
+
+
+        }
+    );
+  }
+
   reviews() {
     StreamBuilder(
       stream:      FirebaseFirestore.instance.collection('Reviews').doc(user.id)
@@ -480,33 +670,32 @@ class _DItemState extends State<DItem> {
   }
   Client(){
     return
-    StreamBuilder(
-      stream:FirebaseFirestore.instance.collection('users')
-          .doc(user.id).snapshots(),
-      builder:(context,snapshot){
-       int client = snapshot.data['client'];
-        return
-          Container(
-            decoration: BoxDecoration(
-                color: kPrimaryColor,
-                boxShadow: [BoxShadow(
-                  color: Colors.grey,
-                  blurRadius: 5.0,
-                ),]
-                ,borderRadius: BorderRadius.all(Radius.circular(10.0))
-            ),
-            height: 60,
-            width: 60,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text('$client',style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
-                Text('Clients',style: TextStyle(color: Colors.white),),
-              ],
-            ),
-          );
+      Container(
+        decoration: BoxDecoration(
+            color: kPrimaryColor,
+            boxShadow: [BoxShadow(
+              color: Colors.grey,
+              blurRadius: 5.0,
+            ),]
+            ,borderRadius: BorderRadius.all(Radius.circular(10.0))
+        ),
+        height: 60,
+        width: 60,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text('${client}',style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
+          ],
+        ),
+      );
   }
-    );
+  g() async {
+    DocumentSnapshot doc = await usersRef.doc(user.id).get();
+  Users ser = Users.fromDocument(doc);
+  setState(() {
+    client = ser.client;
+  });
+
   }
   hireme(){
     bool isProfileOwner = currentUserId == user.id;
@@ -608,6 +797,7 @@ class _DItemState extends State<DItem> {
 
 
   }
+
 followerstile(){
     return
   Container(

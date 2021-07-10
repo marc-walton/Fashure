@@ -183,7 +183,6 @@ isLive: true,
 //        DocumentSnapshot ds = snapshot.data.docs[index];
             String ownerId = documentSnapshot.data()['ownerId'];
             String prodId = documentSnapshot.data()['prodId'];
-            String shopmediaUrl = documentSnapshot.data()['shopmediaUrl'];
             String productname = documentSnapshot.data()['productname'];
             String inr = documentSnapshot.data()['inr'];
             String usd = documentSnapshot.data()['usd'];

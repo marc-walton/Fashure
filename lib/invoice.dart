@@ -583,7 +583,10 @@ else{return Container();}
             ),
             SizedBox(height:10.0),
 
-            widget.Finr ==""?  Text('Payment:${currentUser.currencysym} ${widget.eur}',style: TextStyle(
+            widget.Finr =="" || currentUser.country != country?  Text('Payment:${currentUser.currencysym} ${advaceprice}',style: TextStyle(
+              color: kText.withOpacity(0.5),
+            )):
+widget.Finr =="" || currentUser.country == country?  Text('Payment:${currentUser.currencysym} ${widget.usd}',style: TextStyle(
               color: kText.withOpacity(0.5),
             )):
 

@@ -1945,6 +1945,9 @@ else if(widget.color=='col 10'){
       'orderId':orderId,
       'cusId':currentUser.id,
       'fulfilled':'false',
+      'Accepted':'false',
+      'orderStatus':'awaiting seller acceptance',
+
       "timestamp": timestamp,
  "productname": widget.productname,
  "shopmediaUrl": widget.mediaUrl,
@@ -1953,7 +1956,7 @@ else if(widget.color=='col 10'){
 
       'courierId': "awaiting seller fulfilment",
       'courier': "awaiting seller fulfilment",
-      'orderStatus':'Processing',
+      'orderStatus':'awaiting seller acceptance',
       'read':'false',
       'Address':'$Fullname\n,$Addresss\n,$City,$State,$Country\n,$Zip\n,$Code $Phone',
     });
@@ -1976,7 +1979,8 @@ else if(widget.color=='col 10'){
       'courier': "awaiting seller fulfillment",
 
       'fulfilled':'false',
-      'orderStatus':'Processing',
+      'Accepted':'false',
+      'orderStatus':'awaiting seller acceptance',
       'Address':'$Fullname\n,$Addresss\n,$City,$State,$Country\n,$Zip\n,$Code $Phone',
     }); FirebaseFirestore.instance.collection('feed')
         .doc(currentUser.id)

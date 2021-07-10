@@ -32,12 +32,11 @@ isLive: true,
           String ownerId = documentSnapshot.data()['ownerId'];
           String prodId = documentSnapshot.data()['prodId'];
           String fulfilled = documentSnapshot.data()['fulfilled'];
-          String courierId = documentSnapshot.data()['courierId'];
-           String orderStatus = documentSnapshot.data()['orderStatus'];
+          String Accepted = documentSnapshot.data()['Accepted'];
             String size = documentSnapshot.data()['size'];
            String Address = documentSnapshot.data()['Address'];
 String orderId = documentSnapshot.data()['orderId'];
-String shopmediaUrl = documentSnapshot.data()['shopmediaUrl'];
+List shopmediaUrl = documentSnapshot.data()['shopmediaUrl'];
 String cusId = documentSnapshot.data()['cusId'];
 String productname = documentSnapshot.data()['productname'];
 
@@ -76,8 +75,7 @@ FutureBuilder(  future: productsRef.doc(ownerId).collection('userProducts').doc(
       DocumentSnapshot ds = snapshot.data;
       String usd= ds['usd'];
       String inr= ds['inr'];
-      String eur= ds['eur'];
-      String gbp= ds['gbp'];
+
 if(snapshot.data != null||snapshot.hasData){
   return
     ListTile(
@@ -94,19 +92,8 @@ if(snapshot.data != null||snapshot.hasData){
           ),
         ),
         child: ClipRRect(
-            borderRadius: BorderRadius.circular(20.0),child: Container(child: cachedNetworkImage(shopmediaUrl))),),
-      subtitle: currentUser.country=='India'? Text( "₹$inr",style: TextStyle(color: kText,
-          fontSize: 20.0,
-          fontWeight: FontWeight.bold)):
-      currentUser.country=='USA'? Text( " \u0024 $usd",style: TextStyle(color:  kText,
-          fontSize: 20.0,
-          fontWeight: FontWeight.bold)):
-      currentUser.country == 'Europe'?    Text( " € $eur",style: TextStyle(color: kText,
-          fontSize: 20.0,
-          fontWeight: FontWeight.bold)):
-      currentUser.country == 'UK'? Text( " £ $gbp",style: TextStyle(color: kText,
-          fontSize: 20.0,
-          fontWeight: FontWeight.bold)): Text( " \u0024 $usd",style: TextStyle(color:  kText,
+            borderRadius: BorderRadius.circular(20.0),child: Container(child: cachedNetworkImage(shopmediaUrl.first))),),
+      subtitle:  Text( "${currentUser.currencysym} $inr",style: TextStyle(color: kText,
           fontSize: 20.0,
           fontWeight: FontWeight.bold)),
       title:Text(productname, style: TextStyle(
@@ -133,12 +120,24 @@ else {return Center(child: CircularProgressIndicator(),);}
                             style: TextStyle(color: kText),),
                          ],
                        ),
-                      fulfilled=='false'?   Center(child: RaisedButton(
-                        color: kblue,
-                          onPressed:(){
-                            Navigator.push(context, MaterialPageRoute(builder: (context) =>OrderFulfill(orderId:orderId ,ownerId: ownerId,shopmediaUrl:shopmediaUrl,prodId:prodId,cusId:cusId)));},
-                          child:  Text('Fulfill order',
-                        style: TextStyle(color: Colors.white),),)):Container(),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                         children: [
+                           Accepted=='false'?   Center(child: RaisedButton(
+                             color: kblue,
+                             onPressed:(){
+                               Navigator.push(context, MaterialPageRoute(builder: (context) =>submit(orderId:orderId ,ownerId: ownerId,shopmediaUrl:shopmediaUrl.first,prodId:prodId,cusId:cusId)));},
+                             child:  Text('Accept order',
+                               style: TextStyle(color: Colors.white),),)):Container(),
+fulfilled=='false'?   Center(child: RaisedButton(
+                             color: kblue,
+                             onPressed:(){
+                               Navigator.push(context, MaterialPageRoute(builder: (context) =>OrderFulfill(orderId:orderId ,ownerId: ownerId,shopmediaUrl:shopmediaUrl.first,prodId:prodId,cusId:cusId)));},
+                             child:  Text('Fulfill order',
+                               style: TextStyle(color: Colors.white),),)):Container(),
+
+                         ],
+                       ),
                       Divider(color: kGrey,),
                     ],
 
@@ -173,7 +172,7 @@ isLive: true,
           String size = documentSnapshot.data()['size'];
           String Address = documentSnapshot.data()['Address'];
           String orderId = documentSnapshot.data()['orderId'];
-          String shopmediaUrl = documentSnapshot.data()['shopmediaUrl'];
+          List shopmediaUrl = documentSnapshot.data()['shopmediaUrl'];
           String cusId = documentSnapshot.data()['cusId'];
           String productname = documentSnapshot.data()['productname'];
           return
@@ -212,8 +211,7 @@ isLive: true,
 
                             String usd= ds['usd'];
                             String inr= ds['inr'];
-                            String eur= ds['eur'];
-                            String gbp= ds['gbp'];
+
 
 
                             return
@@ -231,19 +229,8 @@ isLive: true,
                                     ),
                                   ),
                                   child: ClipRRect(
-                                      borderRadius: BorderRadius.circular(20.0),child: Container(child: cachedNetworkImage(shopmediaUrl))),),
-                                subtitle: currentUser.country=='India'? Text( "₹$inr",style: TextStyle(color: kText,
-                                    fontSize: 20.0,
-                                    fontWeight: FontWeight.bold)):
-                                currentUser.country=='USA'? Text( " \u0024 $usd",style: TextStyle(color:  kText,
-                                    fontSize: 20.0,
-                                    fontWeight: FontWeight.bold)):
-                                currentUser.country == 'Europe'?    Text( " € $eur",style: TextStyle(color: kText,
-                                    fontSize: 20.0,
-                                    fontWeight: FontWeight.bold)):
-                                currentUser.country == 'UK'? Text( " £ $gbp",style: TextStyle(color: kText,
-                                    fontSize: 20.0,
-                                    fontWeight: FontWeight.bold)): Text( " \u0024 $usd",style: TextStyle(color:  kText,
+                                      borderRadius: BorderRadius.circular(20.0),child: Container(child: cachedNetworkImage(shopmediaUrl.first))),),
+                                subtitle: Text( "₹$inr",style: TextStyle(color: kText,
                                     fontSize: 20.0,
                                     fontWeight: FontWeight.bold)),
                                 title:Text(productname, style: TextStyle(
@@ -308,6 +295,56 @@ isLive: true,
   void initState() {
     super.initState();
     update();
+  }
+  submit({String ownerId,String orderId,String cusId,String shopmediaUrl,String prodId,}){
+    FirebaseFirestore.instance.collection('ordersSeller')
+        .doc(ownerId)
+        .collection('sellerOrder')
+        .doc(orderId)
+        .update({
+      'Accepted':'true',
+
+      'orderStatus':'Processing',
+      "timestamp": timestamp,
+
+    });
+    FirebaseFirestore.instance.collection('ordersCustomer')
+        .doc(cusId)
+        .collection('userOrder')
+        .doc(orderId)
+        .update({
+      'Accepted':'true',
+
+      'orderStatus':'Processing',
+      "timestamp": timestamp,
+
+    }); FirebaseFirestore.instance.collection('feed')
+        .doc(cusId)
+        .collection('feedItems')
+        .doc(orderId)
+        .update({'message':'Your order has been accepted!',
+      "timestamp": timestamp,
+      "type": "Payment",
+      "userId": ownerId,
+      "mediaUrl":shopmediaUrl,
+      "postId": prodId,
+      "username": currentUser.displayName,
+      "userProfileImg": currentUser.photoUrl,
+      "read": 'false',
+    });FirebaseFirestore.instance.collection('feed')
+        .doc(ownerId)
+        .collection('feedItems')
+        .doc(orderId)
+        .update({'message':'You accepted an order!',
+      "timestamp": timestamp,
+      "type": "PaymentO",
+      "userId": ownerId,
+      "mediaUrl":shopmediaUrl,
+      "postId": prodId,
+      "username": currentUser.displayName,
+      "userProfileImg": currentUser.photoUrl,
+      "read": 'false',
+    });
   }
 
   @override

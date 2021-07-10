@@ -1,7 +1,7 @@
 import 'package:badges/badges.dart';
 import 'package:bubble_tab_indicator/bubble_tab_indicator.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:contained_tab_bar_view/contained_tab_bar_view.dart';
+import 'package:currency_formatter/currency_formatter.dart';
 import 'package:fashow/HomePage.dart';
 import 'package:fashow/SellerDash/sellerdashboard.dart';
 import 'package:fashow/servicedash/ServiceDash.dart';
@@ -103,6 +103,8 @@ getop() async {
 
   @override
   Widget build(BuildContext context) {
+    SizeConfig().init(context);
+
     return Expanded(
       child: DefaultTabController(
         initialIndex:widget.selectedPage ?? 0,
@@ -166,10 +168,7 @@ getop() async {
           ),
           body:
 
-          Container( decoration: BoxDecoration(
-              gradient: fabGradient
-          ) ,
-            alignment: Alignment.center,
+          Container(
             child: TabBarView(
                 children:<Widget> [
                   SellerDash(),

@@ -33,217 +33,44 @@ class _ServiceOrdersState extends State<ServiceOrders> {
     String finalp,
     String orderId,
     String ownerId,}){
+    Column(
+      children: <Widget>[
+        ListTile(
+          title: Text(productname, style: TextStyle(
+              color: kText,
+              fontSize: 20.0,
+              fontWeight: FontWeight.bold),),
+        ),
+        ListTile(
+          title:            Text(des, style: TextStyle(
+            color: kText,
+            fontSize: 15.0,
+          ),),
 
-    if(currentUser.country=='India'){
-      return
-        Column(
-          children: <Widget>[
-            ListTile(
-              title: Text(productname, style: TextStyle(
-                  color: kText,
-                  fontSize: 20.0,
-                  fontWeight: FontWeight.bold),),
-            ),
-            ListTile(
-              title:            Text(des, style: TextStyle(
-                color: kText,
-                fontSize: 15.0,
-              ),),
+        ),
+        ListTile(
+          title:            Text( "Advance payment:₹$inr",style: TextStyle(color: kText,
+              fontSize: 20.0,
+              fontWeight: FontWeight.bold)),
+          subtitle:  adavance == "true"? Text( "(Paid)",style: TextStyle(color:  kText,
+              fontSize: 20.0,
+              fontWeight: FontWeight.bold)): Text('Payment pending'),
 
-            ),
-            ListTile(
-              title:            Text( "Advance payment:₹$inr",style: TextStyle(color: kText,
-                  fontSize: 20.0,
-                  fontWeight: FontWeight.bold)),
-    subtitle:  adavance == "true"? Text( "(Paid)",style: TextStyle(color:  kText,
-    fontSize: 20.0,
-    fontWeight: FontWeight.bold)): Text('Payment pending'),
+        ),
+        ListTile(
+          title:             Text( "Due payment:₹$Finr",style: TextStyle(color: kText,
+              fontSize: 20.0,
+              fontWeight: FontWeight.bold)),
+          subtitle:  finalp == "true"? Text( "(Paid)",style: TextStyle(color:  kText,
+              fontSize: 20.0,
+              fontWeight: FontWeight.bold)): Text('Payment pending'),
 
-            ),
-            ListTile(
-              title:             Text( "Due payment:₹$Finr",style: TextStyle(color: kText,
-                  fontSize: 20.0,
-                  fontWeight: FontWeight.bold)),
-              subtitle:  finalp == "true"? Text( "(Paid)",style: TextStyle(color:  kText,
-                  fontSize: 20.0,
-                  fontWeight: FontWeight.bold)): Text('Payment pending'),
-
-            ),
+        ),
 
 
-          ],
-        );
+      ],
+    );
 
-    }
-    else if(currentUser.country=='US'){
-      return
-        Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: <Widget>[
-            ListTile(
-              title: Text(productname, style: TextStyle(
-                  color: kText,
-                  fontSize: 20.0,
-                  fontWeight: FontWeight.bold),),
-            ),
-            ListTile(
-              title:            Text(des, style: TextStyle(
-                color:  kText,
-                fontSize: 15.0,
-              ),),
-
-            ),
-            ListTile(
-              title:            Text( "Advance payment: \u0024 $usd",style: TextStyle(color:  kText,
-                  fontSize: 20.0,
-                  fontWeight: FontWeight.bold)),
-subtitle:  adavance == "true"? Text( "(Paid)",style: TextStyle(color:  kText,
-    fontSize: 20.0,
-    fontWeight: FontWeight.bold)): Text('Payment pending'),
-          ),
-            ListTile(
-              title:             Text( "Due payment: \u0024 $Fusd",style: TextStyle(color:  kText,
-                  fontSize: 20.0,
-                  fontWeight: FontWeight.bold)),
-              subtitle:  finalp == "true"? Text( "(Paid)",style: TextStyle(color:  kText,
-                  fontSize: 20.0,
-                  fontWeight: FontWeight.bold)): Text('Payment pending'),
-
-            ),
-
-
-          ],
-        );
-
-    }
-
-    else if (currentUser.country == 'Europe'){
-      return
-        Column(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: <Widget>[
-            ListTile(
-              title: Text(productname, style: TextStyle(
-                  color:kText,
-                  fontSize: 20.0,
-                  fontWeight: FontWeight.bold),),
-            ),
-            ListTile(
-              title:            Text(des, style: TextStyle(
-                color: kText,
-                fontSize: 15.0,
-              ),),
-
-            ),
-            ListTile(
-              title:            Text( "Advance payment:  € $eur",style: TextStyle(color: kText,
-                  fontSize: 20.0,
-                  fontWeight: FontWeight.bold)),
-              subtitle:  finalp == "true"? Text( "(Paid)",style: TextStyle(color:  kText,
-                  fontSize: 20.0,
-                  fontWeight: FontWeight.bold)): Text('Payment pending'),
-
-            ),
-            ListTile(
-              title:             Text( "Due payment: € $Feur",style: TextStyle(color: kText,
-                  fontSize: 20.0,
-                  fontWeight: FontWeight.bold)),
-              subtitle:  finalp == "true"? Text( "(Paid)",style: TextStyle(color:  kText,
-                  fontSize: 20.0,
-                  fontWeight: FontWeight.bold)): Text('Payment pending'),
-
-            ),
-
-
-          ],
-        );
-
-    }
-    else if (currentUser.country == 'UK'){
-      return
-        Column(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: <Widget>[
-            ListTile(
-              title: Text(productname, style: TextStyle(
-                  color: kText,
-                  fontSize: 20.0,
-                  fontWeight: FontWeight.bold),),
-            ),
-            ListTile(
-              title:            Text(des, style: TextStyle(
-                color: kText,
-                fontSize: 15.0,
-              ),),
-
-            ),
-            ListTile(
-              title:            Text( "Advance payment: £ $gbp",style: TextStyle(color: kText,
-                  fontSize: 20.0,
-                  fontWeight: FontWeight.bold)),
-              subtitle:  finalp == "true"? Text( "(Paid)",style: TextStyle(color:  kText,
-                  fontSize: 20.0,
-                  fontWeight: FontWeight.bold)): Text('Payment pending'),
-
-            ),
-            ListTile(
-              title:             Text( "Due payment: £ $Fgbp",style: TextStyle(color: kText,
-                  fontSize: 20.0,
-                  fontWeight: FontWeight.bold)),
-              subtitle:  finalp == "true"? Text( "(Paid)",style: TextStyle(color:  kText,
-                  fontSize: 20.0,
-                  fontWeight: FontWeight.bold)): Text('Payment pending'),
-
-            ),
-
-
-
-          ],
-        );
-
-    }
-    else{
-      return
-        Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: <Widget>[
-            ListTile(
-              title: Text(productname, style: TextStyle(
-                  color: kText,
-                  fontSize: 20.0,
-                  fontWeight: FontWeight.bold),),
-            ),
-            ListTile(
-              title:            Text(des, style: TextStyle(
-                color:  kText,
-                fontSize: 15.0,
-              ),),
-
-            ),
-            ListTile(
-              title:            Text( "Advance payment: \u0024 $usd",style: TextStyle(color:  kText,
-                  fontSize: 20.0,
-                  fontWeight: FontWeight.bold)),
-              subtitle:  finalp == "true"? Text( "(Paid)",style: TextStyle(color:  kText,
-                  fontSize: 20.0,
-                  fontWeight: FontWeight.bold)): Text('Payment pending'),
-
-            ),
-            ListTile(
-              title:             Text( "Due payment: \u0024 $Fusd",style: TextStyle(color:  kText,
-                  fontSize: 20.0,
-                  fontWeight: FontWeight.bold)),
-              subtitle:  finalp == "true"? Text( "(Paid)",style: TextStyle(color:  kText,
-                  fontSize: 20.0,
-                  fontWeight: FontWeight.bold)): Text('Payment pending'),
-
-            ),
-
-
-          ],
-        );
-
-    }
   }
   UpcomingOrders(){
     return  Container( decoration: BoxDecoration(

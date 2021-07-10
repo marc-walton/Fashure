@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fashow/HomePage.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_currencies_tracker/currency.dart';
 import 'package:razorpay_flutter/razorpay_flutter.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:uuid/uuid.dart';
@@ -57,6 +58,8 @@ class _PaymentSerState extends State<PaymentSer> {
   var total = 0;
   String key = 'rzp_test_Ut90sdJd5tSty5';
   SharedPreferences adPrefs;
+String inr;
+String usd;
 
   @override
   void initState() {
@@ -65,6 +68,7 @@ class _PaymentSerState extends State<PaymentSer> {
     _razorpay.on(Razorpay.EVENT_PAYMENT_SUCCESS, _handlePaymentSuccess);
     _razorpay.on(Razorpay.EVENT_PAYMENT_ERROR, _handlePaymentError);
     _razorpay.on(Razorpay.EVENT_EXTERNAL_WALLET, _handleExternalWallet);
+
   }
 
   @override
@@ -181,14 +185,11 @@ class _PaymentSerState extends State<PaymentSer> {
       'orderId':widget.OrderId,
       "timestamp": timestamp,
       "userCountry": currentUser.country,
-      'eur':widget.eur,
       'usd':widget.usd,
       'inr':widget.inr,
-      'gbp':widget.gbp,
-      'Feur':widget.Feur,
       'Fusd':widget.Fusd,
       'Finr':widget.Finr,
-      'Fgbp':widget.Fgbp,
+
 'title':widget.title,
       'fulfilled':'false',
     });
