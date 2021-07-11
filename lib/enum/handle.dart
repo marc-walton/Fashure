@@ -17791,3 +17791,74 @@ Servicecatalog()
     });
   }
 }
+buildPostDesigner() {
+  return FutureBuilder(
+      future: priceQuery == "100"
+          ? FirebaseFirestore.instance
+          .collection('users')
+          .where('designer', isEqualTo: true)
+          .where('designerAvg', isLessThan: "100")
+          .get()
+          : FirebaseFirestore.instance
+          .collection('users')
+          .where('designer', isEqualTo: true)
+          .where('designerAvg', isGreaterThan: "0")
+          .get(),
+
+      // ignore: missing_return
+      builder: (context, snapshot) {
+        if (!snapshot.hasData) {
+          return circularProgress();
+        }
+
+        List<DItem> searchResults = [];
+        snapshot.data.docs.forEach((doc) {
+          Users user = Users.fromDocument(doc);
+          DItem searchResult = DItem(user);
+          searchResults.add(searchResult);
+        });
+        return ListView(
+          children: searchResults,
+        );
+      });
+}
+Text(
+' ILLUSTRATOR ',
+style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30),
+),
+Text(
+' CONTENT WRITER ',
+style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30),
+),
+Text(
+' STYLIST ',
+style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30),
+),
+Text(
+' MODEL ',
+style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30),
+),
+Text(
+' MAKEUP ARTIST ',
+style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30),
+),
+Text(
+' HAIR DRESSER ',
+style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30),
+),
+Text(
+' PHOTOGRAPHER ',
+style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30),
+),
+Text(
+' CHOREOGRAPHER ',
+style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30),
+),
+buildPostIllustrator(),
+buildPostBlogger(),
+buildPostStylist(),
+buildPostModel(),
+buildPostMakeup(),
+buildPostHair(),
+buildPostPhotographer(),
+buildPostChoreographer(),

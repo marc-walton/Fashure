@@ -133,7 +133,6 @@ class _EditProfileState extends State<EditProfile> {
         context: context,
         builder: (context) {
           return SimpleDialog(
-//            shape: ,
             title: Text('Select Image'),
 
             children: <Widget>[

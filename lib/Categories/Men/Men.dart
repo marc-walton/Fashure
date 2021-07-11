@@ -46,7 +46,7 @@ pics({String userid,String prodid}){
         builder: (context, snapshot) {
 
           if (snapshot.hasData) {
-            return new ListView.builder(
+            return new ListView.builder(physics: NeverScrollableScrollPhysics(),
                 shrinkWrap: true,
                 scrollDirection:Axis.vertical,
                 itemCount: snapshot.data.docs.length,

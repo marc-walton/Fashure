@@ -1,7 +1,6 @@
 import 'package:badges/badges.dart';
 import 'package:bubble_tab_indicator/bubble_tab_indicator.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:currency_formatter/currency_formatter.dart';
 import 'package:fashow/HomePage.dart';
 import 'package:fashow/SellerDash/sellerdashboard.dart';
 import 'package:fashow/servicedash/ServiceDash.dart';

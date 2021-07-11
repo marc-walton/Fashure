@@ -27,7 +27,7 @@ pics({String userid,String prodid}){
         builder: (context, snapshot) {
 
           if (snapshot.hasData) {
-            return new ListView.builder(
+            return new ListView.builder(physics: NeverScrollableScrollPhysics(), 
                 shrinkWrap: true,
                 scrollDirection:Axis.vertical,
                 itemCount: snapshot.data.docs.length,
@@ -188,8 +188,7 @@ isLive: true,
         String productname = documentSnapshot.data()['productname'];
         String inr = documentSnapshot.data()['inr'];
         String usd = documentSnapshot.data()['usd'];
-        String eur = documentSnapshot.data()['eur'];
-        String gbp = documentSnapshot.data()['gbp'];
+   
         return
           FutureBuilder(
             future: usersRef.doc(ownerId).get(),
@@ -264,8 +263,7 @@ isLive: true,
         String productname = documentSnapshot.data()['productname'];
         String inr = documentSnapshot.data()['inr'];
         String usd = documentSnapshot.data()['usd'];
-        String eur = documentSnapshot.data()['eur'];
-        String gbp = documentSnapshot.data()['gbp'];
+   
         return
           FutureBuilder(
             future: usersRef.doc(ownerId).get(),
@@ -341,8 +339,7 @@ isLive: true,
         String productname = documentSnapshot.data()['productname'];
         String inr = documentSnapshot.data()['inr'];
         String usd = documentSnapshot.data()['usd'];
-        String eur = documentSnapshot.data()['eur'];
-        String gbp = documentSnapshot.data()['gbp'];
+   
         return
           FutureBuilder(
             future: usersRef.doc(ownerId).get(),
@@ -418,8 +415,7 @@ isLive: true,
         String productname = documentSnapshot.data()['productname'];
         String inr = documentSnapshot.data()['inr'];
         String usd = documentSnapshot.data()['usd'];
-        String eur = documentSnapshot.data()['eur'];
-        String gbp = documentSnapshot.data()['gbp'];
+   
         return
           FutureBuilder(
             future: usersRef.doc(ownerId).get(),
@@ -496,8 +492,7 @@ isLive: true,
         String productname = documentSnapshot.data()['productname'];
         String inr = documentSnapshot.data()['inr'];
         String usd = documentSnapshot.data()['usd'];
-        String eur = documentSnapshot.data()['eur'];
-        String gbp = documentSnapshot.data()['gbp'];
+   
         return
           FutureBuilder(
             future: usersRef.doc(ownerId).get(),

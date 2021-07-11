@@ -37,12 +37,11 @@ pics({String userid,String prodid}){
         builder: (context, snapshot) {
 
           if (snapshot.hasData) {
-            return new ListView.builder(
+            return new ListView.builder(physics: NeverScrollableScrollPhysics(), 
                 shrinkWrap: true,
                 scrollDirection:Axis.vertical,
                 itemCount: snapshot.data.docs.length,
                 itemBuilder: (BuildContext context, int index) {
-                  // List<String> images = List.from(snapshot.data.docs[index].data()['collmediaUrl']);
                   listOfImages = [];
                   for (int i = 0;
                   i <
@@ -205,8 +204,7 @@ isLive: true,
           String productname = documentSnapshot.data()['productname'];
           String inr = documentSnapshot.data()['inr'];
           String usd = documentSnapshot.data()['usd'];
-          String eur = documentSnapshot.data()['eur'];
-          String gbp = documentSnapshot.data()['gbp'];
+     
           return
             FutureBuilder(
               future: usersRef.doc(ownerId).get(),
@@ -280,8 +278,82 @@ isLive: true,
           String productname = documentSnapshot.data()['productname'];
           String inr = documentSnapshot.data()['inr'];
           String usd = documentSnapshot.data()['usd'];
-          String eur = documentSnapshot.data()['eur'];
-          String gbp = documentSnapshot.data()['gbp'];
+     
+          return
+            FutureBuilder(
+              future: usersRef.doc(ownerId).get(),
+              builder: (context, snapshot) {
+                if (!snapshot.hasData) {
+                  return circularProgress();
+                }
+                 Users user = Users.fromDocument(snapshot.data);
+//          bool isPostOwner = currentUserId == ownerId;
+                return Column(
+                  children: <Widget>[
+                    GestureDetector(
+                      onTap: () => showProfile(context, profileId: user.id),
+                      child: ListTile(
+                        leading: CircleAvatar(
+                          backgroundImage: CachedNetworkImageProvider(user.photoUrl),
+                          backgroundColor: Colors.grey,
+                        ),
+                        title: Text(
+                          user.displayName,
+                          style: TextStyle(
+                            color: kText,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                    ),
+
+                    GestureDetector(
+                      onTap: () => Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => ProductScreen(
+                            prodId: prodId,
+                            userId: ownerId,
+                          ),
+                        ),
+                      ),
+                      child: Stack(
+                        alignment: Alignment.center,
+                        children: <Widget>[
+                          ClipRRect(
+                              borderRadius: BorderRadius.circular(20.0),child:pics(userid:ownerId,prodid: prodId)),
+                        ],),),
+                    df(productname:productname, usd:usd,inr:inr,eur:eur,gbp:gbp, prodId:prodId, ownerId:ownerId,),
+
+                    Divider(color: kGrey,),
+                  ],
+
+                );
+
+              },
+            );
+        },
+        query: FirebaseFirestore.instance.collectionGroup('userProducts').orderBy('timestamp',descending: true)
+            .where('Gender',isEqualTo: 'Baby-Boys')
+            .where('indian', isEqualTo:false)
+
+    );
+  }
+ All(){
+    return  PaginateFirestore(
+isLive: true,
+//    itemsPerPage: 2,
+        itemBuilderType:
+        PaginateBuilderType.listView,
+        itemBuilder: (index, context, documentSnapshot)   {
+//        DocumentSnapshot ds = snapshot.data.docs[index];
+          String ownerId = documentSnapshot.data()['ownerId'];
+          String prodId = documentSnapshot.data()['prodId'];
+          String shopmediaUrl = documentSnapshot.data()['shopmediaUrl'];
+          String productname = documentSnapshot.data()['productname'];
+          String inr = documentSnapshot.data()['inr'];
+          String usd = documentSnapshot.data()['usd'];
+     
           return
             FutureBuilder(
               future: usersRef.doc(ownerId).get(),
@@ -479,5 +551,441 @@ isLive: true,
       );
     }
 
+  }
+}
+class CItem extends StatefulWidget {
+  final Users user;
+  UserModel receiver;
+  String products;
+  CItem(this.user);
+  @override
+  _CItemState createState() => _CItemState(this.user);
+}
+
+class _CItemState extends State<CItem> {
+  final Users user;
+
+  UserModel receiver;
+  String products;
+  int client;
+  String price;
+
+  int followerCount = 0;
+  final String currentUserId = currentUser?.id;
+
+  _CItemState(this.user);
+  @override
+  void initState() {
+    super.initState();
+    setState(() {
+      receiver = UserModel(
+        id: user.id,
+        displayName: user.displayName,
+        photoUrl: user.photoUrl,
+      );
+    });
+    conversion();
+    getFollowers();
+    g();
+  }
+  conversion()async{
+    var resultUSD1 = await Currency.getConversion(
+        from: '${user.currencyISO}', to: '${currentUser.currencyISO}', amount: user.choreographerAvg  );
+    setState((){  var c1 = resultUSD1.rate;
+    price =c1.toStringAsFixed(2);
+
+    print(price);
+    });
+
+  }
+
+  getPost() {
+    return StreamBuilder(
+        stream: FirebaseFirestore.instance
+            .collection('posts')
+            .doc(user.id)
+            .collection('userPosts')
+            .snapshots(),
+
+        // ignore: missing_return
+        builder: (context, snapshot) {
+          if (!snapshot.hasData) {
+            return Text('text');
+          }
+          return Container(
+            height: 200,
+            child: ListView.builder(
+              shrinkWrap: true,
+              scrollDirection: Axis.horizontal,
+              itemCount: snapshot.data.docs.length,
+              itemBuilder: (context, index) {
+                DocumentSnapshot docSnapshot = snapshot.data.docs[index];
+                List  url = snapshot.data.docs[index]["mediaUrl"];
+                return Padding(
+                    padding: EdgeInsets.all(5.0),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(20.0),
+                      child: GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => PostScreen(
+                                  postId: docSnapshot["postId"],
+                                  userId: docSnapshot["ownerId"],
+                                ),
+                              ),
+                            );
+                          },
+                          child: CachedNetworkImage(
+                            imageUrl: url.first,
+                          )),
+                    ));
+              },
+            ),
+          );
+        });
+  }
+
+
+  reviews() {
+    StreamBuilder(
+      stream: FirebaseFirestore.instance
+          .collection('Reviews')
+          .doc(user.id)
+          .collection('userReviews')
+          .snapshots(),
+      builder: (context, snapshot) {
+        var rating = snapshot.data()['rating'];
+        var avg = rating.reduce((a, b) => a + b) / rating.length;
+        String review = snapshot.data['review'];
+        return GestureDetector(
+          onTap: () => Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => ClientReview(
+                    profileId: user.id,
+                  ))),
+          child: Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(10.0),
+              color: kblue,
+              boxShadow: [BoxShadow(color: kblue)],
+            ),
+            height: 60,
+            width: 60,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Row(
+                  children: [
+                    SizedBox(
+                      width: 6.0,
+                    ),
+                    Icon(
+                      Icons.favorite,
+                      color: Colors.pink,
+                    ),
+                    SizedBox(
+                      width: 3.0,
+                    ),
+                    Text(
+                      avg,
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ],
+                ),
+                Text(
+                  'Rating',
+                  style: TextStyle(color: Colors.white),
+                ),
+              ],
+            ),
+          ),
+        );
+      },
+      // 'rating': rating,
+      // 'review':reviewController.text,
+    );
+  }
+
+  Client() {
+    return Container(
+      decoration: BoxDecoration(
+          color: kPrimaryColor,
+          boxShadow: [
+            BoxShadow(
+              color: Colors.grey,
+              blurRadius: 5.0,
+            ),
+          ],
+          borderRadius: BorderRadius.all(Radius.circular(10.0))),
+      height: 60,
+      width: 60,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Text(
+            '${client}',
+            style: TextStyle(
+              color: Colors.white,
+              fontWeight: FontWeight.bold,
+            ),
+          ),Text(
+            'clients',
+            style: TextStyle(
+              color: Colors.white,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  g() async {
+    DocumentSnapshot doc = await usersRef.doc(user.id).get();
+    Users ser = Users.fromDocument(doc);
+    setState(() {
+      client = ser.client;
+    });
+  }
+
+  hireme() {
+    bool isProfileOwner = currentUserId == user.id;
+    if (isProfileOwner == true) {
+      return Container();
+    } else {
+      return Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [
+          GestureDetector(
+            onTap: () => showProfile(context, profileId: user.id),
+            child: Container(
+              height: 40.0,
+              width: 100.0,
+//
+              decoration: BoxDecoration(
+                  color: kblue,
+                  borderRadius: BorderRadius.all(Radius.circular(20))),
+              child: Align(
+                alignment: Alignment.center,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Icon(
+                      EvaIcons.personOutline,
+                      color: Colors.white,
+                    ),
+                    Text(
+                      'Profile',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+          GestureDetector(
+            onTap: () => Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => ChatScreen(
+                      receiver: receiver,
+                    ))),
+            child: Container(
+              height: 40.0,
+              width: 100.0,
+//
+              decoration: BoxDecoration(
+                  color: kblue,
+                  borderRadius: BorderRadius.all(Radius.circular(20))),
+              child: Align(
+                alignment: Alignment.center,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Icon(
+                      EvaIcons.emailOutline,
+                      color: Colors.white,
+                    ),
+                    Text(
+                      'Hire me!',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+        ],
+      );
+    }
+  }
+
+  getFollowers() async {
+    QuerySnapshot snapshot =
+    await followersRef.doc(user.id).collection('userFollowers').get();
+    setState(() {
+      followerCount = snapshot.docs.length;
+    });
+//    usersRef.doc(widget.currentUserId).update({
+//      'followers':followerCount
+//    });
+  }
+  followerstile() {
+    return Container(
+      decoration: BoxDecoration(
+          color: kPrimaryColor,
+          boxShadow: [
+            BoxShadow(
+              color: Colors.grey,
+              blurRadius: 5.0,
+            ),
+          ],
+          borderRadius: BorderRadius.all(Radius.circular(10.0))),
+      height: 60,
+      width: 60,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Text(
+            '$followerCount',
+            style: TextStyle(
+              color: Colors.white,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          FittedBox(
+              child: Text(
+                'Followers',
+                style: TextStyle(color: Colors.white),
+              )),
+        ],
+      ),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    SizeConfig().init(context);
+
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Container(
+          decoration: BoxDecoration(
+              borderRadius: BorderRadius.all(Radius.circular(20.0))),
+          margin:
+          EdgeInsets.only(top: 10.0, left: 10.0, right: 10.0, bottom: 10.0),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[
+              Divider(
+                color: Colors.grey,
+              ),
+              GestureDetector(
+                onTap: () => showProfile(context, profileId: user.id),
+                child: ListTile(
+                  leading: CircleAvatar(
+                    backgroundImage: CachedNetworkImageProvider(user.photoUrl),
+                    backgroundColor: Colors.grey,
+                  ),
+                  title: Text(
+                    user.displayName,
+                    style: TextStyle(color: kText),
+                  ),
+                ),
+              ),
+              Align(
+                alignment: Alignment.center,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: <Widget>[
+                    followerstile(),
+                    Client(),
+                    GestureDetector(
+                      onTap: () async {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => ClientReview(
+                                  profileId: user.id,
+                                )));
+                      },
+                      child: Container(
+                        decoration: BoxDecoration(
+                            color: kPrimaryColor,
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.grey,
+                                blurRadius: 5.0,
+                              ),
+                            ],
+                            borderRadius:
+                            BorderRadius.all(Radius.circular(10.0))),
+                        height: 60,
+                        width: 60,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Icon(
+                              Icons.favorite,
+                              color: Colors.pink,
+                            ),
+                            Text(
+                              'Rating',
+                              style: TextStyle(color: Colors.white),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              SizedBox(
+                height: 10.0,
+              ),
+              Row(
+                children: [
+                  Text("Average cost", style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: SizeConfig.safeBlockHorizontal * 5
+                  ),),
+                ],
+              ),
+
+              Row(
+                children: [
+                  Text("$price" ,style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: SizeConfig.safeBlockHorizontal * 7
+
+                  ),),
+                ],
+              ),
+
+              SizedBox(
+                height: 10.0,
+              ),
+              hireme(),
+            ],
+          ),
+        ),
+        Container(
+          child: getPost(),
+        )
+      ],
+    );
   }
 }

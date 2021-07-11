@@ -14,6 +14,18 @@ class Users{
    String currencyISO;
    String currency;
  String currencysym;
+ String designerAvg;
+ String illustratorAvg;
+ String artisansAvg;
+ String choreographerAvg;
+ String hairAvg;
+ String makeupAvg;
+ String modelAvg;
+ String photographerAvg;
+ String bloggerAvg;
+ String stylistAvg;
+
+
 
   String language;
   int client;
@@ -40,6 +52,17 @@ bool ban;
      this.currency,
 this.currencysym,
 this.revenue,
+this.designerAvg,
+this.illustratorAvg,
+this.artisansAvg,
+this.choreographerAvg,
+this.hairAvg,
+this.makeupAvg,
+this.modelAvg,
+this.photographerAvg,
+this.bloggerAvg,
+this.stylistAvg,
+
 
     this.language,
     this.client,
@@ -63,6 +86,16 @@ this.revenue,
       currency: doc.data()['currency'],
  currencysym: doc.data()['currencysym'],
  revenue: doc.data()['revenue'],
+      designerAvg: doc.data()['designerAvg'],
+      illustratorAvg: doc.data()['illustratorAvg'],
+      artisansAvg: doc.data()['artisansAvg'],
+      choreographerAvg: doc.data()['choreographerAvg'],
+      hairAvg: doc.data()['hairAvg'],
+      makeupAvg: doc.data()['makeupAvg'],
+      modelAvg: doc.data()['modelAvg'],
+      photographerAvg: doc.data()['photographerAvg'],
+      bloggerAvg: doc.data()['bloggerAvg'],
+      stylistAvg: doc.data()['stylistAvg'],
 
         state: doc.data()['state'],
         client:doc.data()['client'],
