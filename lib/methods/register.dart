@@ -194,8 +194,8 @@ String currencysym = "";
                               showFlag: true,  //displays flag, true by default
                               showDialingCode: false, //displays dialing code, false by default
                               showName: true, //displays country name, true by default
-                              showCurrency: true, //eg. 'British pound'
-                              showCurrencyISO: true, //eg. 'GBP'
+                              showCurrency: false, //eg. 'British pound'
+                              showCurrencyISO: false, //eg. 'GBP'
                               onChanged: (Country select) {
                                 setState(() {
                                   _selected = select;

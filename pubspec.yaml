@@ -114,6 +114,7 @@ dependencies:
   flutter_country_picker: ^0.1.6
   flutter_animated_button: ^2.0.0
   neon: ^0.0.1
+  sticky_headers: ^0.2.0
 
 
 

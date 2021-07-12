@@ -60,7 +60,6 @@ class _DesignerState extends State<Designer> with TickerProviderStateMixin {
   bool isLiked;
   bool showHeart = false;
   int followerCount = 0;
-  String whereQuery = "isGreaterThan";
   String priceQuery = "0";
   String desQuery = "des0";
   String illQuery = "ill0";
@@ -97,8 +96,7 @@ class _DesignerState extends State<Designer> with TickerProviderStateMixin {
         searchResults.add(searchResult);
 
         return Expanded(
-          child: ListView(
-            shrinkWrap: true,
+          child: Column(
             children: searchResults,
           ),
         );
@@ -163,8 +161,7 @@ class _DesignerState extends State<Designer> with TickerProviderStateMixin {
         searchResults.add(searchResult);
 
         return Expanded(
-          child: ListView(
-            shrinkWrap: true,
+          child: Column(
             children: searchResults,
           ),
         );
@@ -229,8 +226,7 @@ class _DesignerState extends State<Designer> with TickerProviderStateMixin {
         searchResults.add(searchResult);
 
         return Expanded(
-          child: ListView(
-            shrinkWrap: true,
+          child:  Column(
             children: searchResults,
           ),
         );
@@ -295,8 +291,7 @@ class _DesignerState extends State<Designer> with TickerProviderStateMixin {
         searchResults.add(searchResult);
 
         return Expanded(
-          child: ListView(
-            shrinkWrap: true,
+          child:  Column(
             children: searchResults,
           ),
         );
@@ -361,8 +356,7 @@ class _DesignerState extends State<Designer> with TickerProviderStateMixin {
         searchResults.add(searchResult);
 
         return Expanded(
-          child: ListView(
-            shrinkWrap: true,
+          child:  Column(
             children: searchResults,
           ),
         );
@@ -426,12 +420,12 @@ class _DesignerState extends State<Designer> with TickerProviderStateMixin {
         MItem searchResult = MItem(user);
         searchResults.add(searchResult);
 
-        return Expanded(
-          child: ListView(
-            shrinkWrap: true,
+             return Expanded(
+          child:  Column(
             children: searchResults,
           ),
         );
+
       },
       query: priceQuery == "100"
           ? FirebaseFirestore.instance
@@ -492,12 +486,12 @@ class _DesignerState extends State<Designer> with TickerProviderStateMixin {
         MAItem searchResult = MAItem(user);
         searchResults.add(searchResult);
 
-        return Expanded(
-          child: ListView(
-            shrinkWrap: true,
+             return Expanded(
+          child:  Column(
             children: searchResults,
           ),
         );
+
       },
       query: priceQuery == "100"
           ? FirebaseFirestore.instance
@@ -559,12 +553,12 @@ class _DesignerState extends State<Designer> with TickerProviderStateMixin {
         HItem searchResult = HItem(user);
         searchResults.add(searchResult);
 
-        return Expanded(
-          child: ListView(
-            shrinkWrap: true,
+             return Expanded(
+          child:  Column(
             children: searchResults,
           ),
         );
+
       },
       query: priceQuery == "100"
           ? FirebaseFirestore.instance
@@ -625,12 +619,12 @@ class _DesignerState extends State<Designer> with TickerProviderStateMixin {
         CItem searchResult = CItem(user);
         searchResults.add(searchResult);
 
-        return Expanded(
-          child: ListView(
-            shrinkWrap: true,
+             return Expanded(
+          child:  Column(
             children: searchResults,
           ),
         );
+
       },
       query: priceQuery == "100"
           ? FirebaseFirestore.instance
@@ -691,12 +685,12 @@ class _DesignerState extends State<Designer> with TickerProviderStateMixin {
         AItem searchResult = AItem(user);
         searchResults.add(searchResult);
 
-        return Expanded(
-          child: ListView(
-            shrinkWrap: true,
+             return Expanded(
+          child:  Column(
             children: searchResults,
           ),
         );
+
       },
       query: priceQuery == "100"
           ? FirebaseFirestore.instance
@@ -1464,113 +1458,115 @@ print(price);
   Widget build(BuildContext context) {
     SizeConfig().init(context);
 
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        Container(
-          decoration: BoxDecoration(
-              borderRadius: BorderRadius.all(Radius.circular(20.0))),
-          margin:
-              EdgeInsets.only(top: 10.0, left: 10.0, right: 10.0, bottom: 10.0),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: <Widget>[
-              Divider(
-                color: Colors.grey,
-              ),
-              GestureDetector(
-                onTap: () => showProfile(context, profileId: user.id),
-                child: ListTile(
-                  leading: CircleAvatar(
-                    backgroundImage: CachedNetworkImageProvider(user.photoUrl),
-                    backgroundColor: Colors.grey,
-                  ),
-                  title: Text(
-                    user.displayName,
-                    style: TextStyle(color: kText),
+    return SingleChildScrollView(
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Container(
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.all(Radius.circular(20.0))),
+            margin:
+                EdgeInsets.only(top: 10.0, left: 10.0, right: 10.0, bottom: 10.0),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: <Widget>[
+                Divider(
+                  color: Colors.grey,
+                ),
+                GestureDetector(
+                  onTap: () => showProfile(context, profileId: user.id),
+                  child: ListTile(
+                    leading: CircleAvatar(
+                      backgroundImage: CachedNetworkImageProvider(user.photoUrl),
+                      backgroundColor: Colors.grey,
+                    ),
+                    title: Text(
+                      user.displayName,
+                      style: TextStyle(color: kText),
+                    ),
                   ),
                 ),
-              ),
-              Align(
-                alignment: Alignment.center,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: <Widget>[
-                    followerstile(),
-                    Client(),
-                    GestureDetector(
-                      onTap: () async {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => ClientReview(
-                                      profileId: user.id,
-                                    )));
-                      },
-                      child: Container(
-                        decoration: BoxDecoration(
-                            color: kPrimaryColor,
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.grey,
-                                blurRadius: 5.0,
+                Align(
+                  alignment: Alignment.center,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: <Widget>[
+                      followerstile(),
+                      Client(),
+                      GestureDetector(
+                        onTap: () async {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => ClientReview(
+                                        profileId: user.id,
+                                      )));
+                        },
+                        child: Container(
+                          decoration: BoxDecoration(
+                              color: kPrimaryColor,
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.grey,
+                                  blurRadius: 5.0,
+                                ),
+                              ],
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(10.0))),
+                          height: 60,
+                          width: 60,
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Icon(
+                                Icons.favorite,
+                                color: Colors.pink,
+                              ),
+                              Text(
+                                'Rating',
+                                style: TextStyle(color: Colors.white),
                               ),
                             ],
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(10.0))),
-                        height: 60,
-                        width: 60,
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Icon(
-                              Icons.favorite,
-                              color: Colors.pink,
-                            ),
-                            Text(
-                              'Rating',
-                              style: TextStyle(color: Colors.white),
-                            ),
-                          ],
+                          ),
                         ),
                       ),
-                    ),
+                    ],
+                  ),
+                ),
+                SizedBox(
+                  height: 10.0,
+                ),
+                Row(
+                  children: [
+                    Text("Average cost", style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: SizeConfig.safeBlockHorizontal * 5
+                    ),),
                   ],
                 ),
-              ),
-              SizedBox(
-                height: 10.0,
-              ),
-              Row(
-                children: [
-                  Text("Average cost", style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: SizeConfig.safeBlockHorizontal * 5
-                  ),),
-                ],
-              ),
 
-              Row(
-                children: [
-                  Text("$price" ,style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                      fontSize: SizeConfig.safeBlockHorizontal * 7
+                Row(
+                  children: [
+                    Text("$price" ,style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                        fontSize: SizeConfig.safeBlockHorizontal * 7
 
-                  ),),
-                ],
-              ),
+                    ),),
+                  ],
+                ),
 
-              SizedBox(
-                height: 10.0,
-              ),
-              hireme(),
-            ],
+                SizedBox(
+                  height: 10.0,
+                ),
+                hireme(),
+              ],
+            ),
           ),
-        ),
-        Container(
-          child: getPost(),
-        )
-      ],
+          Container(
+            child: getPost(),
+          )
+        ],
+      ),
     );
   }
 }

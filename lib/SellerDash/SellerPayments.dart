@@ -81,13 +81,12 @@ isLive: true,
             String inr = documentSnapshot.data()['inr'];
             String cny = documentSnapshot.data()['cny'];
             String usd = documentSnapshot.data()['usd'];
-            String eur = documentSnapshot.data()['eur'];
-            String gbp = documentSnapshot.data()['gbp'];
+
             return
                 Column(
 
                   children: [
-                    df(productname:productname, usd:usd,inr:inr,cny:cny,eur:eur,gbp:gbp, prodId:prodId, ownerId:ownerId,),
+                    df(productname:productname, usd:usd,inr:inr,cny:cny, prodId:prodId, ownerId:ownerId,),
 
                   ],
                 );
@@ -120,13 +119,12 @@ isLive: true,
             String inr = documentSnapshot.data()['inr'];
             String cny = documentSnapshot.data()['cny'];
             String usd = documentSnapshot.data()['usd'];
-            String eur = documentSnapshot.data()['eur'];
-            String gbp = documentSnapshot.data()['gbp'];
+
             return
               Column(
 
                 children: [
-                  df(productname:productname, usd:usd,inr:inr,cny:cny,eur:eur,gbp:gbp, prodId:prodId, ownerId:ownerId,),
+                  df(productname:productname, usd:usd,inr:inr,cny:cny, prodId:prodId, ownerId:ownerId,),
 
                 ],
               );

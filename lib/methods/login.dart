@@ -8,6 +8,11 @@ import 'package:fashow/methods/register.dart';
 import 'package:get/get.dart';
 
 import 'package:fashow/HomePage.dart';
+class RIKeys {
+  static final riKey1 = const Key('__RIKEY1__');
+  static final riKey2 = const Key('__RIKEY2__');
+  static final riKey3 = const Key('__RIKEY3__');
+}
 class LoginPage extends StatefulWidget {
   LoginPage({Key key}) : super(key: key);
 
@@ -16,7 +21,9 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  final GlobalKey<FormState> _loginFormKey = GlobalKey<FormState>();
+   GlobalKey<FormState> _loginFormKey = GlobalKey<FormState>(debugLabel: '_LoginFormState');
+  GlobalKey<FormState> _forgotFormKey = GlobalKey<FormState>(debugLabel: '_forgotFormState');
+
   TextEditingController emailInputController;
   TextEditingController pwdInputController;
 
@@ -56,7 +63,7 @@ class _LoginPageState extends State<LoginPage> {
                 child: Container(
 
                     child:        Form(
-                      key: _loginFormKey,
+                      key: _forgotFormKey,
                       child: Column(
                         children: <Widget>[
                           TextFormField(
@@ -64,7 +71,7 @@ class _LoginPageState extends State<LoginPage> {
                             decoration: InputDecoration(
                                 labelStyle:  TextStyle(color:kText),
                                 hintStyle:  TextStyle(color:kText),
-                                labelText: 'Email*,', hintText: "john.doe@gmail.com"),
+                                labelText: 'Email', ),
                             controller: emailInputController,
                             keyboardType: TextInputType.emailAddress,
                             validator: emailValidator,
@@ -127,7 +134,7 @@ class _LoginPageState extends State<LoginPage> {
                         decoration: InputDecoration(
                             labelStyle:  TextStyle(color:kText),
                             hintStyle:  TextStyle(color:kText),
-                            labelText: 'Email,', hintText: "john.doe@gmail.com"),
+                            labelText: 'Email', hintText: "john.doe@gmail.com"),
                         controller: emailInputController,
                         keyboardType: TextInputType.emailAddress,
                         validator: emailValidator,
@@ -137,7 +144,7 @@ class _LoginPageState extends State<LoginPage> {
                         decoration: InputDecoration(
                             labelStyle:  TextStyle(color:kText),
                             hintStyle:  TextStyle(color:kText),
-                            labelText: 'Password', hintText: "********"),
+                            labelText: 'Password', ),
                         controller: pwdInputController,
                         obscureText: true,
                         validator: pwdValidator,
@@ -145,10 +152,7 @@ class _LoginPageState extends State<LoginPage> {
                       FlatButton(
                         child: Text("Forgot Password?",  style: TextStyle(color:kText),),
                         onPressed: () {
-                          Navigator.pushReplacement(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => RegisterPage()))    ;                    },
+                  resetPassword(parentContext: context,email: emailInputController.text??"")    ;                    },
                       ),
                       RaisedButton(
 

@@ -186,8 +186,7 @@ isLive: true,
             String productname = documentSnapshot.data()['productname'];
             String inr = documentSnapshot.data()['inr'];
             String usd = documentSnapshot.data()['usd'];
-            String eur = documentSnapshot.data()['eur'];
-            String gbp = documentSnapshot.data()['gbp'];
+
             return
               FutureBuilder(
                 future: usersRef.doc(ownerId).get(),
@@ -232,7 +231,7 @@ isLive: true,
                             ClipRRect(
                                 borderRadius: BorderRadius.circular(20.0),child:pics(userid:ownerId,prodid: prodId)),
                           ],),),
-                      df(productname:productname, usd:usd,inr:inr,eur:eur,gbp:gbp, prodId:prodId, ownerId:ownerId,),
+                      df(productname:productname, usd:usd,inr:inr, prodId:prodId, ownerId:ownerId,),
                       Divider(color: kGrey,),
                     ],
 

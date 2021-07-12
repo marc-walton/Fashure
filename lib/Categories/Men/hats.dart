@@ -290,7 +290,7 @@ isLive: true,
                       ClipRRect(
                           borderRadius: BorderRadius.circular(20.0),child:pics(userid:ownerId,prodid: prodId)),
                     ],),),
-                df(productname:productname, usd:usd,inr:inr,eur:eur,gbp:gbp, prodId:prodId, ownerId:ownerId,),
+                df(productname:productname, usd:usd,inr:inr, prodId:prodId, ownerId:ownerId,),
 
                 Divider(color: kGrey,),
               ],
@@ -366,7 +366,7 @@ isLive: true,
                       ClipRRect(
                           borderRadius: BorderRadius.circular(20.0),child:pics(userid:ownerId,prodid: prodId)),
                     ],),),
-                df(productname:productname, usd:usd,inr:inr,eur:eur,gbp:gbp, prodId:prodId, ownerId:ownerId,),
+                df(productname:productname, usd:usd,inr:inr, prodId:prodId, ownerId:ownerId,),
 
                 Divider(color: kGrey,),
               ],
@@ -442,7 +442,7 @@ isLive: true,
                       ClipRRect(
                           borderRadius: BorderRadius.circular(20.0),child:pics(userid:ownerId,prodid: prodId)),
                     ],),),
-                df(productname:productname, usd:usd,inr:inr,eur:eur,gbp:gbp, prodId:prodId, ownerId:ownerId,),
+                df(productname:productname, usd:usd,inr:inr, prodId:prodId, ownerId:ownerId,),
 
                 Divider(color: kGrey,),
               ],
@@ -518,7 +518,7 @@ isLive: true,
                       ClipRRect(
                           borderRadius: BorderRadius.circular(20.0),child:pics(userid:ownerId,prodid: prodId)),
                     ],),),
-                df(productname:productname, usd:usd,inr:inr,eur:eur,gbp:gbp, prodId:prodId, ownerId:ownerId,),
+                df(productname:productname, usd:usd,inr:inr, prodId:prodId, ownerId:ownerId,),
 
                 Divider(color: kGrey,),
               ],
@@ -594,7 +594,7 @@ isLive: true,
                       ClipRRect(
                           borderRadius: BorderRadius.circular(20.0),child:pics(userid:ownerId,prodid: prodId)),
                     ],),),
-                df(productname:productname, usd:usd,inr:inr,eur:eur,gbp:gbp, prodId:prodId, ownerId:ownerId,),
+                df(productname:productname, usd:usd,inr:inr, prodId:prodId, ownerId:ownerId,),
 
                 Divider(color: kGrey,),
               ],
@@ -670,7 +670,7 @@ isLive: true,
                       ClipRRect(
                           borderRadius: BorderRadius.circular(20.0),child:pics(userid:ownerId,prodid: prodId)),
                     ],),),
-                df(productname:productname, usd:usd,inr:inr,eur:eur,gbp:gbp, prodId:prodId, ownerId:ownerId,),
+                df(productname:productname, usd:usd,inr:inr, prodId:prodId, ownerId:ownerId,),
 
                 Divider(color: kGrey,),
               ],
@@ -746,7 +746,7 @@ isLive: true,
                       ClipRRect(
                           borderRadius: BorderRadius.circular(20.0),child:pics(userid:ownerId,prodid: prodId)),
                     ],),),
-                df(productname:productname, usd:usd,inr:inr,eur:eur,gbp:gbp, prodId:prodId, ownerId:ownerId,),
+                df(productname:productname, usd:usd,inr:inr, prodId:prodId, ownerId:ownerId,),
 
                 Divider(color: kGrey,),
               ],

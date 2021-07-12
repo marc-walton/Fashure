@@ -104,8 +104,7 @@ isLive: true,
               String title = documentSnapshot.data()['title'];
               String inr = documentSnapshot.data()['inr'];
               String usd = documentSnapshot.data()['usd'];
-              String eur = documentSnapshot.data()['eur'];
-              String gbp = documentSnapshot.data()['gbp'];
+
               String Finr = documentSnapshot.data()['Finr'];
               String Fusd = documentSnapshot.data()['Fusd'];
               String Feur = documentSnapshot.data()['Feur'];
@@ -116,7 +115,7 @@ isLive: true,
 
                   children: [
                     df(productname:title,
-                      usd:usd,inr:inr,eur:eur,gbp:gbp,
+                      usd:usd,inr:inr,
                       Fusd:Fusd,Finr:Finr,Feur:Feur,Fgbp:Fgbp,
 
                       orderId:orderId, ownerId:ownerId,),
@@ -156,8 +155,7 @@ isLive: true,
               String title = documentSnapshot.data()['title'];
               String inr = documentSnapshot.data()['inr'];
               String usd = documentSnapshot.data()['usd'];
-              String eur = documentSnapshot.data()['eur'];
-              String gbp = documentSnapshot.data()['gbp'];
+
               String Finr = documentSnapshot.data()['Finr'];
               String Fusd = documentSnapshot.data()['Fusd'];
               String Feur = documentSnapshot.data()['Feur'];
@@ -168,7 +166,7 @@ isLive: true,
 
                   children: [
                     df(productname:title,
-                      usd:usd,inr:inr,eur:eur,gbp:gbp,
+                      usd:usd,inr:inr,
                       Fusd:Fusd,Finr:Finr,Feur:Feur,Fgbp:Fgbp,
 
                       orderId:orderId, ownerId:ownerId,),

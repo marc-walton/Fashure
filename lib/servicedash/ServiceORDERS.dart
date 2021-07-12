@@ -141,7 +141,7 @@ isLive: true,
 
                         df(productname:title,
                           des:desciption,
-                          usd:usd,inr:inr,eur:eur,gbp:gbp,
+                          usd:usd,inr:inr,
                           Fusd:Fusd,Finr:Finr,Feur:Feur,Fgbp:Fgbp,
 adavance: advancepay,finalp: finalpay,
                           orderId:orderId, ownerId:ownerId,),
@@ -242,7 +242,7 @@ String description = documentSnapshot.data()['description'];
 
                       df(productname:title,
                         des:description,
-                        usd:usd,inr:inr,eur:eur,gbp:gbp,
+                        usd:usd,inr:inr,
                         Fusd:Fusd,Finr:Finr,Feur:Feur,Fgbp:Fgbp,
 adavance: advancepay, finalp: finalpay,
                         orderId:orderId, ownerId:ownerId,),

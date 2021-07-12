@@ -192,8 +192,7 @@ isLive: true,
 //        DocumentSnapshot ds = snapshot.data.docs[index];
           String ownerId = documentSnapshot.data()['ownerId'];
           String prodId = documentSnapshot.data()['prodId'];
-          String shopmediaUrl = documentSnapshot.data()['shopmediaUrl'];
-          String productname = documentSnapshot.data()['productname'];
+  String productname = documentSnapshot.data()['productname'];
           String inr = documentSnapshot.data()['inr'];
           String usd = documentSnapshot.data()['usd'];
 
@@ -241,7 +240,7 @@ isLive: true,
                           ClipRRect(
                               borderRadius: BorderRadius.circular(20.0),child:pics(userid:ownerId,prodid: prodId)),
                         ],),),
-                    df(productname:productname, usd:usd,inr:inr,eur:eur,gbp:gbp, prodId:prodId, ownerId:ownerId,),
+                    df(productname:productname, usd:usd,inr:inr, prodId:prodId, ownerId:ownerId,),
 
                     Divider(color: kGrey,),
                   ],
@@ -269,8 +268,7 @@ isLive: true,
 //        DocumentSnapshot ds = snapshot.data.docs[index];
           String ownerId = documentSnapshot.data()['ownerId'];
           String prodId = documentSnapshot.data()['prodId'];
-          String shopmediaUrl = documentSnapshot.data()['shopmediaUrl'];
-          String productname = documentSnapshot.data()['productname'];
+  String productname = documentSnapshot.data()['productname'];
           String inr = documentSnapshot.data()['inr'];
           String usd = documentSnapshot.data()['usd'];
 
@@ -318,7 +316,7 @@ isLive: true,
                           ClipRRect(
                               borderRadius: BorderRadius.circular(20.0),child:pics(userid:ownerId,prodid: prodId)),
                         ],),),
-                    df(productname:productname, usd:usd,inr:inr,eur:eur,gbp:gbp, prodId:prodId, ownerId:ownerId,),
+                    df(productname:productname, usd:usd,inr:inr, prodId:prodId, ownerId:ownerId,),
 
                     Divider(color: kGrey,),
                   ],
@@ -345,8 +343,7 @@ isLive: true,
 //        DocumentSnapshot ds = snapshot.data.docs[index];
           String ownerId = documentSnapshot.data()['ownerId'];
           String prodId = documentSnapshot.data()['prodId'];
-          String shopmediaUrl = documentSnapshot.data()['shopmediaUrl'];
-          String productname = documentSnapshot.data()['productname'];
+  String productname = documentSnapshot.data()['productname'];
           String inr = documentSnapshot.data()['inr'];
           String usd = documentSnapshot.data()['usd'];
 
@@ -394,7 +391,7 @@ isLive: true,
                           ClipRRect(
                               borderRadius: BorderRadius.circular(20.0),child:pics(userid:ownerId,prodid: prodId)),
                         ],),),
-                    df(productname:productname, usd:usd,inr:inr,eur:eur,gbp:gbp, prodId:prodId, ownerId:ownerId,),
+                    df(productname:productname, usd:usd,inr:inr, prodId:prodId, ownerId:ownerId,),
 
                     Divider(color: kGrey,),
                   ],
@@ -421,8 +418,7 @@ isLive: true,
 //        DocumentSnapshot ds = snapshot.data.docs[index];
           String ownerId = documentSnapshot.data()['ownerId'];
           String prodId = documentSnapshot.data()['prodId'];
-          String shopmediaUrl = documentSnapshot.data()['shopmediaUrl'];
-          String productname = documentSnapshot.data()['productname'];
+  String productname = documentSnapshot.data()['productname'];
           String inr = documentSnapshot.data()['inr'];
           String usd = documentSnapshot.data()['usd'];
 
@@ -470,7 +466,7 @@ isLive: true,
                           ClipRRect(
                               borderRadius: BorderRadius.circular(20.0),child:pics(userid:ownerId,prodid: prodId)),
                         ],),),
-                    df(productname:productname, usd:usd,inr:inr,eur:eur,gbp:gbp, prodId:prodId, ownerId:ownerId,),
+                    df(productname:productname, usd:usd,inr:inr, prodId:prodId, ownerId:ownerId,),
 
                     Divider(color: kGrey,),
                   ],

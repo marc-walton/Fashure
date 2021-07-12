@@ -14,13 +14,15 @@ import 'package:fashow/Categories/Kids/baby/boy/Trousers.dart';
 import 'package:fashow/Categories/Kids/baby/boy/ETHNIC.dart';
 import 'package:fashow/ActivityFeed.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter_currencies_tracker/currency.dart';
 import 'package:paginate_firestore/paginate_firestore.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fashow/HomePage.dart';
 import 'package:fashow/progress.dart';
 import 'package:fashow/user.dart';
-import 'package:fashow/product_custom.dart';
 import 'package:fashow/Product_screen.dart';
+import 'package:fashow/Products.dart';
+
 import 'package:carousel_slider/carousel_slider.dart';
 
 List <Widget>listOfImages = <Widget>[];
@@ -200,7 +202,7 @@ isLive: true,
 //        DocumentSnapshot ds = snapshot.data.docs[index];
           String ownerId = documentSnapshot.data()['ownerId'];
           String prodId = documentSnapshot.data()['prodId'];
-          String shopmediaUrl = documentSnapshot.data()['shopmediaUrl'];
+          
           String productname = documentSnapshot.data()['productname'];
           String inr = documentSnapshot.data()['inr'];
           String usd = documentSnapshot.data()['usd'];
@@ -249,7 +251,7 @@ isLive: true,
                           ClipRRect(
                               borderRadius: BorderRadius.circular(20.0),child:pics(userid:ownerId,prodid: prodId)),
                         ],),),
-                    df(productname:productname, usd:usd,inr:inr,eur:eur,gbp:gbp, prodId:prodId, ownerId:ownerId,),
+                    df(productname:productname, usd:usd,inr:inr, prodId:prodId, ownerId:ownerId,),
 
                     Divider(color: kGrey,),
                   ],
@@ -274,7 +276,7 @@ isLive: true,
 //        DocumentSnapshot ds = snapshot.data.docs[index];
           String ownerId = documentSnapshot.data()['ownerId'];
           String prodId = documentSnapshot.data()['prodId'];
-          String shopmediaUrl = documentSnapshot.data()['shopmediaUrl'];
+          
           String productname = documentSnapshot.data()['productname'];
           String inr = documentSnapshot.data()['inr'];
           String usd = documentSnapshot.data()['usd'];
@@ -323,7 +325,7 @@ isLive: true,
                           ClipRRect(
                               borderRadius: BorderRadius.circular(20.0),child:pics(userid:ownerId,prodid: prodId)),
                         ],),),
-                    df(productname:productname, usd:usd,inr:inr,eur:eur,gbp:gbp, prodId:prodId, ownerId:ownerId,),
+                    df(productname:productname, usd:usd,inr:inr, prodId:prodId, ownerId:ownerId,),
 
                     Divider(color: kGrey,),
                   ],
@@ -339,7 +341,7 @@ isLive: true,
 
     );
   }
- All(){
+ Alll(){
     return  PaginateFirestore(
 isLive: true,
 //    itemsPerPage: 2,
@@ -349,7 +351,7 @@ isLive: true,
 //        DocumentSnapshot ds = snapshot.data.docs[index];
           String ownerId = documentSnapshot.data()['ownerId'];
           String prodId = documentSnapshot.data()['prodId'];
-          String shopmediaUrl = documentSnapshot.data()['shopmediaUrl'];
+          
           String productname = documentSnapshot.data()['productname'];
           String inr = documentSnapshot.data()['inr'];
           String usd = documentSnapshot.data()['usd'];
@@ -358,11 +360,16 @@ isLive: true,
             FutureBuilder(
               future: usersRef.doc(ownerId).get(),
               builder: (context, snapshot) {
+                List<CItem> searchResults = [];
+
+                Prod prod = Prod.fromDocument(documentSnapshot);
+                CItem searchResult = CItem(prod);
+                searchResults.add(searchResult);
+
                 if (!snapshot.hasData) {
                   return circularProgress();
                 }
                  Users user = Users.fromDocument(snapshot.data);
-//          bool isPostOwner = currentUserId == ownerId;
                 return Column(
                   children: <Widget>[
                     GestureDetector(
@@ -398,8 +405,13 @@ isLive: true,
                           ClipRRect(
                               borderRadius: BorderRadius.circular(20.0),child:pics(userid:ownerId,prodid: prodId)),
                         ],),),
-                    df(productname:productname, usd:usd,inr:inr,eur:eur,gbp:gbp, prodId:prodId, ownerId:ownerId,),
-
+                Expanded(
+                child: ListView(
+                  physics: NeverScrollableScrollPhysics(),
+                shrinkWrap: true,
+                children: searchResults,
+                ),
+                ),
                     Divider(color: kGrey,),
                   ],
 
@@ -554,18 +566,15 @@ isLive: true,
   }
 }
 class CItem extends StatefulWidget {
-  final Users user;
-  UserModel receiver;
+  final Prod prod;
   String products;
-  CItem(this.user);
+  CItem(this.prod);
   @override
-  _CItemState createState() => _CItemState(this.user);
+  _CItemState createState() => _CItemState(this.prod);
 }
 
 class _CItemState extends State<CItem> {
-  final Users user;
-
-  UserModel receiver;
+  final Prod prod;
   String products;
   int client;
   String price;
@@ -573,306 +582,22 @@ class _CItemState extends State<CItem> {
   int followerCount = 0;
   final String currentUserId = currentUser?.id;
 
-  _CItemState(this.user);
+  _CItemState(this.prod);
   @override
   void initState() {
     super.initState();
-    setState(() {
-      receiver = UserModel(
-        id: user.id,
-        displayName: user.displayName,
-        photoUrl: user.photoUrl,
-      );
-    });
+
     conversion();
-    getFollowers();
-    g();
   }
   conversion()async{
     var resultUSD1 = await Currency.getConversion(
-        from: '${user.currencyISO}', to: '${currentUser.currencyISO}', amount: user.choreographerAvg  );
+        from: 'USD', to: '${currentUser.currencyISO}', amount: prod.usd  );
     setState((){  var c1 = resultUSD1.rate;
     price =c1.toStringAsFixed(2);
 
     print(price);
     });
 
-  }
-
-  getPost() {
-    return StreamBuilder(
-        stream: FirebaseFirestore.instance
-            .collection('posts')
-            .doc(user.id)
-            .collection('userPosts')
-            .snapshots(),
-
-        // ignore: missing_return
-        builder: (context, snapshot) {
-          if (!snapshot.hasData) {
-            return Text('text');
-          }
-          return Container(
-            height: 200,
-            child: ListView.builder(
-              shrinkWrap: true,
-              scrollDirection: Axis.horizontal,
-              itemCount: snapshot.data.docs.length,
-              itemBuilder: (context, index) {
-                DocumentSnapshot docSnapshot = snapshot.data.docs[index];
-                List  url = snapshot.data.docs[index]["mediaUrl"];
-                return Padding(
-                    padding: EdgeInsets.all(5.0),
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(20.0),
-                      child: GestureDetector(
-                          onTap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => PostScreen(
-                                  postId: docSnapshot["postId"],
-                                  userId: docSnapshot["ownerId"],
-                                ),
-                              ),
-                            );
-                          },
-                          child: CachedNetworkImage(
-                            imageUrl: url.first,
-                          )),
-                    ));
-              },
-            ),
-          );
-        });
-  }
-
-
-  reviews() {
-    StreamBuilder(
-      stream: FirebaseFirestore.instance
-          .collection('Reviews')
-          .doc(user.id)
-          .collection('userReviews')
-          .snapshots(),
-      builder: (context, snapshot) {
-        var rating = snapshot.data()['rating'];
-        var avg = rating.reduce((a, b) => a + b) / rating.length;
-        String review = snapshot.data['review'];
-        return GestureDetector(
-          onTap: () => Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (context) => ClientReview(
-                    profileId: user.id,
-                  ))),
-          child: Container(
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(10.0),
-              color: kblue,
-              boxShadow: [BoxShadow(color: kblue)],
-            ),
-            height: 60,
-            width: 60,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Row(
-                  children: [
-                    SizedBox(
-                      width: 6.0,
-                    ),
-                    Icon(
-                      Icons.favorite,
-                      color: Colors.pink,
-                    ),
-                    SizedBox(
-                      width: 3.0,
-                    ),
-                    Text(
-                      avg,
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ],
-                ),
-                Text(
-                  'Rating',
-                  style: TextStyle(color: Colors.white),
-                ),
-              ],
-            ),
-          ),
-        );
-      },
-      // 'rating': rating,
-      // 'review':reviewController.text,
-    );
-  }
-
-  Client() {
-    return Container(
-      decoration: BoxDecoration(
-          color: kPrimaryColor,
-          boxShadow: [
-            BoxShadow(
-              color: Colors.grey,
-              blurRadius: 5.0,
-            ),
-          ],
-          borderRadius: BorderRadius.all(Radius.circular(10.0))),
-      height: 60,
-      width: 60,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Text(
-            '${client}',
-            style: TextStyle(
-              color: Colors.white,
-              fontWeight: FontWeight.bold,
-            ),
-          ),Text(
-            'clients',
-            style: TextStyle(
-              color: Colors.white,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  g() async {
-    DocumentSnapshot doc = await usersRef.doc(user.id).get();
-    Users ser = Users.fromDocument(doc);
-    setState(() {
-      client = ser.client;
-    });
-  }
-
-  hireme() {
-    bool isProfileOwner = currentUserId == user.id;
-    if (isProfileOwner == true) {
-      return Container();
-    } else {
-      return Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: [
-          GestureDetector(
-            onTap: () => showProfile(context, profileId: user.id),
-            child: Container(
-              height: 40.0,
-              width: 100.0,
-//
-              decoration: BoxDecoration(
-                  color: kblue,
-                  borderRadius: BorderRadius.all(Radius.circular(20))),
-              child: Align(
-                alignment: Alignment.center,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    Icon(
-                      EvaIcons.personOutline,
-                      color: Colors.white,
-                    ),
-                    Text(
-                      'Profile',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          ),
-          GestureDetector(
-            onTap: () => Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => ChatScreen(
-                      receiver: receiver,
-                    ))),
-            child: Container(
-              height: 40.0,
-              width: 100.0,
-//
-              decoration: BoxDecoration(
-                  color: kblue,
-                  borderRadius: BorderRadius.all(Radius.circular(20))),
-              child: Align(
-                alignment: Alignment.center,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    Icon(
-                      EvaIcons.emailOutline,
-                      color: Colors.white,
-                    ),
-                    Text(
-                      'Hire me!',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          ),
-        ],
-      );
-    }
-  }
-
-  getFollowers() async {
-    QuerySnapshot snapshot =
-    await followersRef.doc(user.id).collection('userFollowers').get();
-    setState(() {
-      followerCount = snapshot.docs.length;
-    });
-//    usersRef.doc(widget.currentUserId).update({
-//      'followers':followerCount
-//    });
-  }
-  followerstile() {
-    return Container(
-      decoration: BoxDecoration(
-          color: kPrimaryColor,
-          boxShadow: [
-            BoxShadow(
-              color: Colors.grey,
-              blurRadius: 5.0,
-            ),
-          ],
-          borderRadius: BorderRadius.all(Radius.circular(10.0))),
-      height: 60,
-      width: 60,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Text(
-            '$followerCount',
-            style: TextStyle(
-              color: Colors.white,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-          FittedBox(
-              child: Text(
-                'Followers',
-                style: TextStyle(color: Colors.white),
-              )),
-        ],
-      ),
-    );
   }
 
   @override
@@ -890,37 +615,21 @@ class _CItemState extends State<CItem> {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
-              Divider(
-                color: Colors.grey,
-              ),
-              GestureDetector(
-                onTap: () => showProfile(context, profileId: user.id),
-                child: ListTile(
-                  leading: CircleAvatar(
-                    backgroundImage: CachedNetworkImageProvider(user.photoUrl),
-                    backgroundColor: Colors.grey,
-                  ),
-                  title: Text(
-                    user.displayName,
-                    style: TextStyle(color: kText),
-                  ),
-                ),
-              ),
               Align(
                 alignment: Alignment.center,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: <Widget>[
-                    followerstile(),
-                    Client(),
+                   
                     GestureDetector(
                       onTap: () async {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => ClientReview(
-                                  profileId: user.id,
-                                )));
+                                builder: (context) =>  ProductScreen(
+                                  prodId: prod.prodId,
+                                  userId: prod.ownerId,
+                                ),));
                       },
                       child: Container(
                         decoration: BoxDecoration(
@@ -956,35 +665,26 @@ class _CItemState extends State<CItem> {
               SizedBox(
                 height: 10.0,
               ),
-              Row(
-                children: [
-                  Text("Average cost", style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: SizeConfig.safeBlockHorizontal * 5
-                  ),),
-                ],
-              ),
 
-              Row(
-                children: [
-                  Text("$price" ,style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: SizeConfig.safeBlockHorizontal * 7
+          ListTile(
+            title:            Text(prod.productname, style: TextStyle(
+                color: kText,
+                fontSize: SizeConfig.safeBlockHorizontal * 3,
+                fontWeight: FontWeight.bold),),
+            subtitle:            Text( "${currentUser.currencysym} $price",style: TextStyle(color: kText,
+                fontSize: SizeConfig.safeBlockHorizontal * 2,
+                fontWeight: FontWeight.bold)),
 
-                  ),),
-                ],
-              ),
+          ),
+
 
               SizedBox(
                 height: 10.0,
               ),
-              hireme(),
             ],
           ),
         ),
-        Container(
-          child: getPost(),
-        )
+       
       ],
     );
   }
