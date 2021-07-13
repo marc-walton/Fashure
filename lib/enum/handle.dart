@@ -17862,3 +17862,150 @@ buildPostMakeup(),
 buildPostHair(),
 buildPostPhotographer(),
 buildPostChoreographer(),
+All(){
+  return  PaginateFirestore(
+      isLive: true,
+//    itemsPerPage: 2,
+      itemBuilderType:
+      PaginateBuilderType.listView,
+      itemBuilder: (index, context, documentSnapshot)   {
+//        DocumentSnapshot ds = snapshot.data.docs[index];
+        String ownerId = documentSnapshot.data()['ownerId'];
+        String prodId = documentSnapshot.data()['prodId'];
+        String productname = documentSnapshot.data()['productname'];
+        String inr = documentSnapshot.data()['inr'];
+        String usd = documentSnapshot.data()['usd'];
+
+        return
+          FutureBuilder(
+            future: usersRef.doc(ownerId).get(),
+            builder: (context, snapshot) {
+              if (!snapshot.hasData) {
+                return circularProgress();
+              }
+              Users user = Users.fromDocument(snapshot.data);
+//          bool isPostOwner = currentUserId == ownerId;
+              return Column(
+                children: <Widget>[
+                  GestureDetector(
+                    onTap: () => showProfile(context, profileId: user.id),
+                    child: ListTile(
+                      leading: CircleAvatar(
+                        backgroundImage: CachedNetworkImageProvider(user.photoUrl),
+                        backgroundColor: Colors.grey,
+                      ),
+                      title: Text(
+                        user.displayName,
+                        style: TextStyle(
+                          color: kText,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                  ),
+
+                  GestureDetector(
+                    onTap: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => ProductScreen(
+                          prodId: prodId,
+                          userId: ownerId,
+                        ),
+                      ),
+                    ),
+                    child: Stack(
+                      alignment: Alignment.center,
+                      children: <Widget>[
+                        ClipRRect(
+                            borderRadius: BorderRadius.circular(20.0),child:pics(userid:ownerId,prodid: prodId)),
+                      ],),),
+                  df(productname:productname, usd:usd,inr:inr, prodId:prodId, ownerId:ownerId,),
+
+                  Divider(color: kGrey,),
+                ],
+
+              );
+
+            },
+          );
+      },
+      query: FirebaseFirestore.instance.collectionGroup('userProducts').orderBy('timestamp',descending: true)
+          .where('Gender',isEqualTo: 'Women')
+          .where('indian', isEqualTo:false)
+
+  );
+}
+Allin(){
+  return  PaginateFirestore(
+      isLive: true,
+//    itemsPerPage: 2,
+      itemBuilderType:
+      PaginateBuilderType.listView,
+      itemBuilder: (index, context, documentSnapshot)   {
+//        DocumentSnapshot ds = snapshot.data.docs[index];
+        String ownerId = documentSnapshot.data()['ownerId'];
+        String prodId = documentSnapshot.data()['prodId'];
+        String productname = documentSnapshot.data()['productname'];
+        String inr = documentSnapshot.data()['inr'];
+        String usd = documentSnapshot.data()['usd'];
+
+        return
+          FutureBuilder(
+            future: usersRef.doc(ownerId).get(),
+            builder: (context, snapshot) {
+              if (!snapshot.hasData) {
+                return circularProgress();
+              }
+              Users user = Users.fromDocument(snapshot.data);
+//          bool isPostOwner = currentUserId == ownerId;
+              return Column(
+                children: <Widget>[
+                  GestureDetector(
+                    onTap: () => showProfile(context, profileId: user.id),
+                    child: ListTile(
+                      leading: CircleAvatar(
+                        backgroundImage: CachedNetworkImageProvider(user.photoUrl),
+                        backgroundColor: Colors.grey,
+                      ),
+                      title: Text(
+                        user.displayName,
+                        style: TextStyle(
+                          color: kText,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                  ),
+
+                  GestureDetector(
+                    onTap: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => ProductScreen(
+                          prodId: prodId,
+                          userId: ownerId,
+                        ),
+                      ),
+                    ),
+                    child: Stack(
+                      alignment: Alignment.center,
+                      children: <Widget>[
+                        ClipRRect(
+                            borderRadius: BorderRadius.circular(20.0),child:pics(userid:ownerId,prodid: prodId)),
+                      ],),),
+                  df(productname:productname, usd:usd,inr:inr, prodId:prodId, ownerId:ownerId,),
+
+                  Divider(color: kGrey,),
+                ],
+
+              );
+
+            },
+          );
+      },
+      query: FirebaseFirestore.instance.collectionGroup('userProducts').orderBy('timestamp',descending: true)
+          .where('Gender',isEqualTo: 'Women')
+
+  );
+}

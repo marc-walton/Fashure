@@ -431,17 +431,17 @@ class _AccessWState extends State<AccessW> {
         FirebaseFirestore.instance.collectionGroup('userProducts')
             .orderBy('round',descending: false)
             .orderBy('timestamp',descending: true)
-            .where('Gender',isEqualTo: 'Men')
+            .where('Gender',isEqualTo: 'Women')
             .where('Category',isEqualTo: 'WBridal & Wedding'):
         priceQuery == "high"?
         FirebaseFirestore.instance.collectionGroup('userProducts')
             .orderBy('round',descending: true)
             .orderBy('timestamp',descending: true)
-            .where('Gender',isEqualTo: 'Men')
+            .where('Gender',isEqualTo: 'Women')
             .where('Category',isEqualTo: 'WBridal & Wedding'):
         FirebaseFirestore.instance.collectionGroup('userProducts')
             .orderBy('timestamp',descending: true)
-            .where('Gender',isEqualTo: 'Men')
+            .where('Gender',isEqualTo: 'Women')
             .where('Category',isEqualTo: 'WBridal & Wedding'),
 
       ),
@@ -567,19 +567,19 @@ class _AccessWState extends State<AccessW> {
         FirebaseFirestore.instance.collectionGroup('userProducts')
             .orderBy('round',descending: false)
             .orderBy('timestamp',descending: true)
-            .where('Gender',isEqualTo: 'Men')
+            .where('Gender',isEqualTo: 'Women')
                       .where('Category',isEqualTo: 'WScarves')
 :
         priceQuery == "high"?
         FirebaseFirestore.instance.collectionGroup('userProducts')
             .orderBy('round',descending: true)
             .orderBy('timestamp',descending: true)
-            .where('Gender',isEqualTo: 'Men')
+            .where('Gender',isEqualTo: 'Women')
                       .where('Category',isEqualTo: 'WScarves')
 :
         FirebaseFirestore.instance.collectionGroup('userProducts')
             .orderBy('timestamp',descending: true)
-            .where('Gender',isEqualTo: 'Men')
+            .where('Gender',isEqualTo: 'Women')
                       .where('Category',isEqualTo: 'WScarves'),
 
       ),
@@ -705,19 +705,19 @@ class _AccessWState extends State<AccessW> {
         FirebaseFirestore.instance.collectionGroup('userProducts')
             .orderBy('round',descending: false)
             .orderBy('timestamp',descending: true)
-            .where('Gender',isEqualTo: 'Men')
+            .where('Gender',isEqualTo: 'Women')
                       .where('Category',isEqualTo: 'WBelts')
 :
         priceQuery == "high"?
         FirebaseFirestore.instance.collectionGroup('userProducts')
             .orderBy('round',descending: true)
             .orderBy('timestamp',descending: true)
-            .where('Gender',isEqualTo: 'Men')
+            .where('Gender',isEqualTo: 'Women')
                       .where('Category',isEqualTo: 'WBelts')
 :
         FirebaseFirestore.instance.collectionGroup('userProducts')
             .orderBy('timestamp',descending: true)
-            .where('Gender',isEqualTo: 'Men')
+            .where('Gender',isEqualTo: 'Women')
                       .where('Category',isEqualTo: 'WBelts'),
 
       ),
@@ -843,19 +843,19 @@ class _AccessWState extends State<AccessW> {
         FirebaseFirestore.instance.collectionGroup('userProducts')
             .orderBy('round',descending: false)
             .orderBy('timestamp',descending: true)
-            .where('Gender',isEqualTo: 'Men')
+            .where('Gender',isEqualTo: 'Women')
                      .where('Category',isEqualTo: 'WBraces')
 :
         priceQuery == "high"?
         FirebaseFirestore.instance.collectionGroup('userProducts')
             .orderBy('round',descending: true)
             .orderBy('timestamp',descending: true)
-            .where('Gender',isEqualTo: 'Men')
+            .where('Gender',isEqualTo: 'Women')
                      .where('Category',isEqualTo: 'WBraces')
 :
         FirebaseFirestore.instance.collectionGroup('userProducts')
             .orderBy('timestamp',descending: true)
-            .where('Gender',isEqualTo: 'Men')
+            .where('Gender',isEqualTo: 'Women')
                      .where('Category',isEqualTo: 'WBraces'),
 
       ),
@@ -981,19 +981,19 @@ class _AccessWState extends State<AccessW> {
         FirebaseFirestore.instance.collectionGroup('userProducts')
             .orderBy('round',descending: false)
             .orderBy('timestamp',descending: true)
-            .where('Gender',isEqualTo: 'Men')
+            .where('Gender',isEqualTo: 'Women')
                      .where('Category',isEqualTo: 'WGlasses & Frames')
 :
         priceQuery == "high"?
         FirebaseFirestore.instance.collectionGroup('userProducts')
             .orderBy('round',descending: true)
             .orderBy('timestamp',descending: true)
-            .where('Gender',isEqualTo: 'Men')
+            .where('Gender',isEqualTo: 'Women')
                      .where('Category',isEqualTo: 'WGlasses & Frames')
 :
         FirebaseFirestore.instance.collectionGroup('userProducts')
             .orderBy('timestamp',descending: true)
-            .where('Gender',isEqualTo: 'Men')
+            .where('Gender',isEqualTo: 'Women')
                      .where('Category',isEqualTo: 'WGlasses & Frames'),
 
       ),
@@ -1119,19 +1119,19 @@ class _AccessWState extends State<AccessW> {
         FirebaseFirestore.instance.collectionGroup('userProducts')
             .orderBy('round',descending: false)
             .orderBy('timestamp',descending: true)
-            .where('Gender',isEqualTo: 'Men')
+            .where('Gender',isEqualTo: 'Women')
                     .where('Category',isEqualTo: 'WSunglasses')
 :
         priceQuery == "high"?
         FirebaseFirestore.instance.collectionGroup('userProducts')
             .orderBy('round',descending: true)
             .orderBy('timestamp',descending: true)
-            .where('Gender',isEqualTo: 'Men')
+            .where('Gender',isEqualTo: 'Women')
                     .where('Category',isEqualTo: 'WSunglasses')
 :
         FirebaseFirestore.instance.collectionGroup('userProducts')
             .orderBy('timestamp',descending: true)
-            .where('Gender',isEqualTo: 'Men')
+            .where('Gender',isEqualTo: 'Women')
                     .where('Category',isEqualTo: 'WSunglasses'),
 
       ),
@@ -1257,19 +1257,19 @@ class _AccessWState extends State<AccessW> {
         FirebaseFirestore.instance.collectionGroup('userProducts')
             .orderBy('round',descending: false)
             .orderBy('timestamp',descending: true)
-            .where('Gender',isEqualTo: 'Men')
+            .where('Gender',isEqualTo: 'Women')
                    .where('Category',isEqualTo: 'WGloves')
 :
         priceQuery == "high"?
         FirebaseFirestore.instance.collectionGroup('userProducts')
             .orderBy('round',descending: true)
             .orderBy('timestamp',descending: true)
-            .where('Gender',isEqualTo: 'Men')
+            .where('Gender',isEqualTo: 'Women')
                    .where('Category',isEqualTo: 'WGloves')
 :
         FirebaseFirestore.instance.collectionGroup('userProducts')
             .orderBy('timestamp',descending: true)
-            .where('Gender',isEqualTo: 'Men')
+            .where('Gender',isEqualTo: 'Women')
                    .where('Category',isEqualTo: 'WGloves'),
 
       ),
@@ -1395,19 +1395,19 @@ class _AccessWState extends State<AccessW> {
         FirebaseFirestore.instance.collectionGroup('userProducts')
             .orderBy('round',descending: false)
             .orderBy('timestamp',descending: true)
-            .where('Gender',isEqualTo: 'Men')
+            .where('Gender',isEqualTo: 'Women')
                    .where('Category',isEqualTo: 'WGloves')
 :
         priceQuery == "high"?
         FirebaseFirestore.instance.collectionGroup('userProducts')
             .orderBy('round',descending: true)
             .orderBy('timestamp',descending: true)
-            .where('Gender',isEqualTo: 'Men')
+            .where('Gender',isEqualTo: 'Women')
                    .where('Category',isEqualTo: 'WGloves')
 :
         FirebaseFirestore.instance.collectionGroup('userProducts')
             .orderBy('timestamp',descending: true)
-            .where('Gender',isEqualTo: 'Men')
+            .where('Gender',isEqualTo: 'Women')
                    .where('Category',isEqualTo: 'WGloves'),
 
       ),
@@ -1533,7 +1533,7 @@ class _AccessWState extends State<AccessW> {
         FirebaseFirestore.instance.collectionGroup('userProducts')
             .orderBy('round',descending: false)
             .orderBy('timestamp',descending: true)
-            .where('Gender',isEqualTo: 'Men')
+            .where('Gender',isEqualTo: 'Women')
                              .where('Category',isEqualTo: 'WHair Accessories')
 
 :
@@ -1541,13 +1541,13 @@ class _AccessWState extends State<AccessW> {
         FirebaseFirestore.instance.collectionGroup('userProducts')
             .orderBy('round',descending: true)
             .orderBy('timestamp',descending: true)
-            .where('Gender',isEqualTo: 'Men')
+            .where('Gender',isEqualTo: 'Women')
                              .where('Category',isEqualTo: 'WHair Accessories')
 
 :
         FirebaseFirestore.instance.collectionGroup('userProducts')
             .orderBy('timestamp',descending: true)
-            .where('Gender',isEqualTo: 'Men')
+            .where('Gender',isEqualTo: 'Women')
                              .where('Category',isEqualTo: 'WHair Accessories')
 ,
 
@@ -1674,7 +1674,7 @@ class _AccessWState extends State<AccessW> {
         FirebaseFirestore.instance.collectionGroup('userProducts')
             .orderBy('round',descending: false)
             .orderBy('timestamp',descending: true)
-            .where('Gender',isEqualTo: 'Men')
+            .where('Gender',isEqualTo: 'Women')
                              .where('Category',isEqualTo: 'WUmbrellas & Travel')
 
 :
@@ -1682,13 +1682,13 @@ class _AccessWState extends State<AccessW> {
         FirebaseFirestore.instance.collectionGroup('userProducts')
             .orderBy('round',descending: true)
             .orderBy('timestamp',descending: true)
-            .where('Gender',isEqualTo: 'Men')
+            .where('Gender',isEqualTo: 'Women')
                              .where('Category',isEqualTo: 'WUmbrellas & Travel')
 
 :
         FirebaseFirestore.instance.collectionGroup('userProducts')
             .orderBy('timestamp',descending: true)
-            .where('Gender',isEqualTo: 'Men')
+            .where('Gender',isEqualTo: 'Women')
                              .where('Category',isEqualTo: 'WUmbrellas & Travel')
 ,
 
@@ -1815,7 +1815,7 @@ class _AccessWState extends State<AccessW> {
         FirebaseFirestore.instance.collectionGroup('userProducts')
             .orderBy('round',descending: false)
             .orderBy('timestamp',descending: true)
-            .where('Gender',isEqualTo: 'Men')
+            .where('Gender',isEqualTo: 'Women')
                             .where('Category',isEqualTo: 'WPhone')
 
 :
@@ -1823,13 +1823,13 @@ class _AccessWState extends State<AccessW> {
         FirebaseFirestore.instance.collectionGroup('userProducts')
             .orderBy('round',descending: true)
             .orderBy('timestamp',descending: true)
-            .where('Gender',isEqualTo: 'Men')
+            .where('Gender',isEqualTo: 'Women')
                             .where('Category',isEqualTo: 'WPhone')
 
 :
         FirebaseFirestore.instance.collectionGroup('userProducts')
             .orderBy('timestamp',descending: true)
-            .where('Gender',isEqualTo: 'Men')
+            .where('Gender',isEqualTo: 'Women')
                             .where('Category',isEqualTo: 'WPhone')
 ,
 
@@ -1888,13 +1888,13 @@ class _AccessWState extends State<AccessW> {
                    quarterTurns: 1,
                    child: TabBarView(
                        children:<Widget> [
-                         Hats(),
+                         WHats(),
                          WHair(),
                          bridal(),
                          WScarves(),
                          WBelts(),
                     WBraces(),
-                    Ties(),
+                    WTies(),
                          WGlasses(),
                          WSunglasses(),
                     WGloves(),

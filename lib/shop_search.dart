@@ -52,6 +52,7 @@ import 'package:fashow/Categories/Women/Denim.dart';
 import 'package:fashow/Categories/Women/Dresses.dart';
 import 'package:fashow/Categories/Women/Jackets.dart';
 import 'package:fashow/Categories/Women/hats.dart';
+import 'package:fashow/Categories/Women/ties.dart';
 
 import 'package:fashow/Categories/Women/Jumpsuits.dart';
 import 'package:fashow/Categories/Women/Jwellery.dart';
@@ -3247,6 +3248,12 @@ class _ShopSearchState extends State<ShopSearch> {
              "Sun Hats in Women",
     "Women's Sun Hats",
     "Womens Sun Hats",
+          "Ties in Women",
+    "Women's Ties",
+    "Womens Ties",
+          "Collars in Women",
+    "Women's Collars",
+    "Womens Collars",
 
   ];
 
@@ -4771,6 +4778,10 @@ else if(i==2824||i==2825||i==2826){ Get.off(WHats(selectedPage: 4,));
 else if(i==2827||i==2828||i==2829){ Get.off(WHats(selectedPage: 5,));
     }
 else if(i==2830||i==2831||i==2832){ Get.off(WHats(selectedPage: 6,));
+    }
+else if(i==2833||i==2834||i==2835){ Get.off(WTies(selectedPage: 0,));
+    }
+else if(i==2836||i==2837||i==2838){ Get.off(WTies(selectedPage: 1,));
     }
 
 else{return null;}

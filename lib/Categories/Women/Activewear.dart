@@ -430,17 +430,17 @@ class _ActiveWearWState extends State<ActiveWearW> {
         FirebaseFirestore.instance.collectionGroup('userProducts')
             .orderBy('round',descending: false)
             .orderBy('timestamp',descending: true)
-            .where('Gender',isEqualTo: 'Men')
+            .where('Gender',isEqualTo: 'Women')
             .where('Category',isEqualTo: 'WATops'):
         priceQuery == "high"?
         FirebaseFirestore.instance.collectionGroup('userProducts')
             .orderBy('round',descending: true)
             .orderBy('timestamp',descending: true)
-            .where('Gender',isEqualTo: 'Men')
+            .where('Gender',isEqualTo: 'Women')
             .where('Category',isEqualTo: 'WATops'):
         FirebaseFirestore.instance.collectionGroup('userProducts')
             .orderBy('timestamp',descending: true)
-            .where('Gender',isEqualTo: 'Men')
+            .where('Gender',isEqualTo: 'Women')
             .where('Category',isEqualTo: 'WATops'),
 
       ),
@@ -566,17 +566,17 @@ class _ActiveWearWState extends State<ActiveWearW> {
         FirebaseFirestore.instance.collectionGroup('userProducts')
             .orderBy('round',descending: false)
             .orderBy('timestamp',descending: true)
-            .where('Gender',isEqualTo: 'Men')
+            .where('Gender',isEqualTo: 'Women')
             .where('Category',isEqualTo: 'WAJackets'):
         priceQuery == "high"?
         FirebaseFirestore.instance.collectionGroup('userProducts')
             .orderBy('round',descending: true)
             .orderBy('timestamp',descending: true)
-            .where('Gender',isEqualTo: 'Men')
+            .where('Gender',isEqualTo: 'Women')
             .where('Category',isEqualTo: 'WAJackets'):
         FirebaseFirestore.instance.collectionGroup('userProducts')
             .orderBy('timestamp',descending: true)
-            .where('Gender',isEqualTo: 'Men')
+            .where('Gender',isEqualTo: 'Women')
             .where('Category',isEqualTo: 'WAJackets'),
 
       ),
@@ -702,17 +702,17 @@ class _ActiveWearWState extends State<ActiveWearW> {
         FirebaseFirestore.instance.collectionGroup('userProducts')
             .orderBy('round',descending: false)
             .orderBy('timestamp',descending: true)
-            .where('Gender',isEqualTo: 'Men')
+            .where('Gender',isEqualTo: 'Women')
             .where('Category',isEqualTo: 'WATrouser'):
         priceQuery == "high"?
         FirebaseFirestore.instance.collectionGroup('userProducts')
             .orderBy('round',descending: true)
             .orderBy('timestamp',descending: true)
-            .where('Gender',isEqualTo: 'Men')
+            .where('Gender',isEqualTo: 'Women')
             .where('Category',isEqualTo: 'WATrouser'):
         FirebaseFirestore.instance.collectionGroup('userProducts')
             .orderBy('timestamp',descending: true)
-            .where('Gender',isEqualTo: 'Men')
+            .where('Gender',isEqualTo: 'Women')
             .where('Category',isEqualTo: 'WATrouser'),
 
       ),
@@ -838,17 +838,17 @@ class _ActiveWearWState extends State<ActiveWearW> {
         FirebaseFirestore.instance.collectionGroup('userProducts')
             .orderBy('round',descending: false)
             .orderBy('timestamp',descending: true)
-            .where('Gender',isEqualTo: 'Men')
+            .where('Gender',isEqualTo: 'Women')
            .where('Category',isEqualTo: 'WAShorts'):
         priceQuery == "high"?
         FirebaseFirestore.instance.collectionGroup('userProducts')
             .orderBy('round',descending: true)
             .orderBy('timestamp',descending: true)
-            .where('Gender',isEqualTo: 'Men')
+            .where('Gender',isEqualTo: 'Women')
            .where('Category',isEqualTo: 'WAShorts'):
         FirebaseFirestore.instance.collectionGroup('userProducts')
             .orderBy('timestamp',descending: true)
-            .where('Gender',isEqualTo: 'Men')
+            .where('Gender',isEqualTo: 'Women')
            .where('Category',isEqualTo: 'WAShorts'),
 
       ),
@@ -974,17 +974,17 @@ class _ActiveWearWState extends State<ActiveWearW> {
         FirebaseFirestore.instance.collectionGroup('userProducts')
             .orderBy('round',descending: false)
             .orderBy('timestamp',descending: true)
-            .where('Gender',isEqualTo: 'Men')
+            .where('Gender',isEqualTo: 'Women')
            .where('Category',isEqualTo: 'WASkirts'):
         priceQuery == "high"?
         FirebaseFirestore.instance.collectionGroup('userProducts')
             .orderBy('round',descending: true)
             .orderBy('timestamp',descending: true)
-            .where('Gender',isEqualTo: 'Men')
+            .where('Gender',isEqualTo: 'Women')
            .where('Category',isEqualTo: 'WASkirts'):
         FirebaseFirestore.instance.collectionGroup('userProducts')
             .orderBy('timestamp',descending: true)
-            .where('Gender',isEqualTo: 'Men')
+            .where('Gender',isEqualTo: 'Women')
            .where('Category',isEqualTo: 'WASkirts'),
 
       ),
@@ -1110,17 +1110,17 @@ class _ActiveWearWState extends State<ActiveWearW> {
         FirebaseFirestore.instance.collectionGroup('userProducts')
             .orderBy('round',descending: false)
             .orderBy('timestamp',descending: true)
-            .where('Gender',isEqualTo: 'Men')
+            .where('Gender',isEqualTo: 'Women')
            .where('Category',isEqualTo: 'WAFootwear'):
         priceQuery == "high"?
         FirebaseFirestore.instance.collectionGroup('userProducts')
             .orderBy('round',descending: true)
             .orderBy('timestamp',descending: true)
-            .where('Gender',isEqualTo: 'Men')
+            .where('Gender',isEqualTo: 'Women')
            .where('Category',isEqualTo: 'WAFootwear'):
         FirebaseFirestore.instance.collectionGroup('userProducts')
             .orderBy('timestamp',descending: true)
-            .where('Gender',isEqualTo: 'Men')
+            .where('Gender',isEqualTo: 'Women')
            .where('Category',isEqualTo: 'WAFootwear'),
 
       ),
@@ -1246,17 +1246,17 @@ class _ActiveWearWState extends State<ActiveWearW> {
         FirebaseFirestore.instance.collectionGroup('userProducts')
             .orderBy('round',descending: false)
             .orderBy('timestamp',descending: true)
-            .where('Gender',isEqualTo: 'Men')
+            .where('Gender',isEqualTo: 'Women')
            .where('Category',isEqualTo: 'wAAccessories'):
         priceQuery == "high"?
         FirebaseFirestore.instance.collectionGroup('userProducts')
             .orderBy('round',descending: true)
             .orderBy('timestamp',descending: true)
-            .where('Gender',isEqualTo: 'Men')
+            .where('Gender',isEqualTo: 'Women')
            .where('Category',isEqualTo: 'wAAccessories'):
         FirebaseFirestore.instance.collectionGroup('userProducts')
             .orderBy('timestamp',descending: true)
-            .where('Gender',isEqualTo: 'Men')
+            .where('Gender',isEqualTo: 'Women')
            .where('Category',isEqualTo: 'wAAccessories'),
 
       ),

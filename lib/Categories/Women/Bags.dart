@@ -428,17 +428,17 @@ class _BagsWState extends State<BagsW> {
         FirebaseFirestore.instance.collectionGroup('userProducts')
             .orderBy('round',descending: false)
             .orderBy('timestamp',descending: true)
-            .where('Gender',isEqualTo: 'Men')
+            .where('Gender',isEqualTo: 'Women')
             .where('Category',isEqualTo: 'WBackpacks'):
         priceQuery == "high"?
         FirebaseFirestore.instance.collectionGroup('userProducts')
             .orderBy('round',descending: true)
             .orderBy('timestamp',descending: true)
-            .where('Gender',isEqualTo: 'Men')
+            .where('Gender',isEqualTo: 'Women')
             .where('Category',isEqualTo: 'WBackpacks'):
         FirebaseFirestore.instance.collectionGroup('userProducts')
             .orderBy('timestamp',descending: true)
-            .where('Gender',isEqualTo: 'Men')
+            .where('Gender',isEqualTo: 'Women')
             .where('Category',isEqualTo: 'WBackpacks'),
 
       ),
@@ -564,17 +564,17 @@ class _BagsWState extends State<BagsW> {
         FirebaseFirestore.instance.collectionGroup('userProducts')
             .orderBy('round',descending: false)
             .orderBy('timestamp',descending: true)
-            .where('Gender',isEqualTo: 'Men')
+            .where('Gender',isEqualTo: 'Women')
            .where('Category',isEqualTo: 'WMini Bag'):
         priceQuery == "high"?
         FirebaseFirestore.instance.collectionGroup('userProducts')
             .orderBy('round',descending: true)
             .orderBy('timestamp',descending: true)
-            .where('Gender',isEqualTo: 'Men')
+            .where('Gender',isEqualTo: 'Women')
            .where('Category',isEqualTo: 'WMini Bag'):
         FirebaseFirestore.instance.collectionGroup('userProducts')
             .orderBy('timestamp',descending: true)
-            .where('Gender',isEqualTo: 'Men')
+            .where('Gender',isEqualTo: 'Women')
            .where('Category',isEqualTo: 'WMini Bag'),
 
       ),
@@ -700,17 +700,17 @@ class _BagsWState extends State<BagsW> {
         FirebaseFirestore.instance.collectionGroup('userProducts')
             .orderBy('round',descending: false)
             .orderBy('timestamp',descending: true)
-            .where('Gender',isEqualTo: 'Men')
+            .where('Gender',isEqualTo: 'Women')
           .where('Category',isEqualTo: 'WLaptop Bags'):
         priceQuery == "high"?
         FirebaseFirestore.instance.collectionGroup('userProducts')
             .orderBy('round',descending: true)
             .orderBy('timestamp',descending: true)
-            .where('Gender',isEqualTo: 'Men')
+            .where('Gender',isEqualTo: 'Women')
           .where('Category',isEqualTo: 'WLaptop Bags'):
         FirebaseFirestore.instance.collectionGroup('userProducts')
             .orderBy('timestamp',descending: true)
-            .where('Gender',isEqualTo: 'Men')
+            .where('Gender',isEqualTo: 'Women')
           .where('Category',isEqualTo: 'WLaptop Bags'),
 
       ),
@@ -836,17 +836,17 @@ class _BagsWState extends State<BagsW> {
         FirebaseFirestore.instance.collectionGroup('userProducts')
             .orderBy('round',descending: false)
             .orderBy('timestamp',descending: true)
-            .where('Gender',isEqualTo: 'Men')
+            .where('Gender',isEqualTo: 'Women')
           .where('Category',isEqualTo: 'WShoulder & Cross body Bags'):
         priceQuery == "high"?
         FirebaseFirestore.instance.collectionGroup('userProducts')
             .orderBy('round',descending: true)
             .orderBy('timestamp',descending: true)
-            .where('Gender',isEqualTo: 'Men')
+            .where('Gender',isEqualTo: 'Women')
           .where('Category',isEqualTo: 'WShoulder & Cross body Bags'):
         FirebaseFirestore.instance.collectionGroup('userProducts')
             .orderBy('timestamp',descending: true)
-            .where('Gender',isEqualTo: 'Men')
+            .where('Gender',isEqualTo: 'Women')
           .where('Category',isEqualTo: 'WShoulder & Cross body Bags'),
 
       ),
@@ -972,17 +972,17 @@ class _BagsWState extends State<BagsW> {
         FirebaseFirestore.instance.collectionGroup('userProducts')
             .orderBy('round',descending: false)
             .orderBy('timestamp',descending: true)
-            .where('Gender',isEqualTo: 'Men')
+            .where('Gender',isEqualTo: 'Women')
           .where('Category',isEqualTo: 'WDuffle bags & holdall'):
         priceQuery == "high"?
         FirebaseFirestore.instance.collectionGroup('userProducts')
             .orderBy('round',descending: true)
             .orderBy('timestamp',descending: true)
-            .where('Gender',isEqualTo: 'Men')
+            .where('Gender',isEqualTo: 'Women')
           .where('Category',isEqualTo: 'WDuffle bags & holdall'):
         FirebaseFirestore.instance.collectionGroup('userProducts')
             .orderBy('timestamp',descending: true)
-            .where('Gender',isEqualTo: 'Men')
+            .where('Gender',isEqualTo: 'Women')
           .where('Category',isEqualTo: 'WDuffle bags & holdall'),
 
       ),
@@ -1108,17 +1108,17 @@ class _BagsWState extends State<BagsW> {
         FirebaseFirestore.instance.collectionGroup('userProducts')
             .orderBy('round',descending: false)
             .orderBy('timestamp',descending: true)
-            .where('Gender',isEqualTo: 'Men')
+            .where('Gender',isEqualTo: 'Women')
           .where('Category',isEqualTo: 'WBelt Bags'):
         priceQuery == "high"?
         FirebaseFirestore.instance.collectionGroup('userProducts')
             .orderBy('round',descending: true)
             .orderBy('timestamp',descending: true)
-            .where('Gender',isEqualTo: 'Men')
+            .where('Gender',isEqualTo: 'Women')
           .where('Category',isEqualTo: 'WBelt Bags'):
         FirebaseFirestore.instance.collectionGroup('userProducts')
             .orderBy('timestamp',descending: true)
-            .where('Gender',isEqualTo: 'Men')
+            .where('Gender',isEqualTo: 'Women')
           .where('Category',isEqualTo: 'WBelt Bags'),
 
       ),
@@ -1244,17 +1244,17 @@ class _BagsWState extends State<BagsW> {
         FirebaseFirestore.instance.collectionGroup('userProducts')
             .orderBy('round',descending: false)
             .orderBy('timestamp',descending: true)
-            .where('Gender',isEqualTo: 'Men')
+            .where('Gender',isEqualTo: 'Women')
          .where('Category',isEqualTo: 'WCosmetic Bags and Cases'):
         priceQuery == "high"?
         FirebaseFirestore.instance.collectionGroup('userProducts')
             .orderBy('round',descending: true)
             .orderBy('timestamp',descending: true)
-            .where('Gender',isEqualTo: 'Men')
+            .where('Gender',isEqualTo: 'Women')
          .where('Category',isEqualTo: 'WCosmetic Bags and Cases'):
         FirebaseFirestore.instance.collectionGroup('userProducts')
             .orderBy('timestamp',descending: true)
-            .where('Gender',isEqualTo: 'Men')
+            .where('Gender',isEqualTo: 'Women')
          .where('Category',isEqualTo: 'WCosmetic Bags and Cases'),
 
       ),
@@ -1380,17 +1380,17 @@ class _BagsWState extends State<BagsW> {
         FirebaseFirestore.instance.collectionGroup('userProducts')
             .orderBy('round',descending: false)
             .orderBy('timestamp',descending: true)
-            .where('Gender',isEqualTo: 'Men')
+            .where('Gender',isEqualTo: 'Women')
          .where('Category',isEqualTo: 'WClutch Bags'):
         priceQuery == "high"?
         FirebaseFirestore.instance.collectionGroup('userProducts')
             .orderBy('round',descending: true)
             .orderBy('timestamp',descending: true)
-            .where('Gender',isEqualTo: 'Men')
+            .where('Gender',isEqualTo: 'Women')
          .where('Category',isEqualTo: 'WClutch Bags'):
         FirebaseFirestore.instance.collectionGroup('userProducts')
             .orderBy('timestamp',descending: true)
-            .where('Gender',isEqualTo: 'Men')
+            .where('Gender',isEqualTo: 'Women')
          .where('Category',isEqualTo: 'WClutch Bags'),
 
       ),
@@ -1516,17 +1516,17 @@ class _BagsWState extends State<BagsW> {
         FirebaseFirestore.instance.collectionGroup('userProducts')
             .orderBy('round',descending: false)
             .orderBy('timestamp',descending: true)
-            .where('Gender',isEqualTo: 'Men')
+            .where('Gender',isEqualTo: 'Women')
          .where('Category',isEqualTo: 'WBucket Bags'):
         priceQuery == "high"?
         FirebaseFirestore.instance.collectionGroup('userProducts')
             .orderBy('round',descending: true)
             .orderBy('timestamp',descending: true)
-            .where('Gender',isEqualTo: 'Men')
+            .where('Gender',isEqualTo: 'Women')
          .where('Category',isEqualTo: 'WBucket Bags'):
         FirebaseFirestore.instance.collectionGroup('userProducts')
             .orderBy('timestamp',descending: true)
-            .where('Gender',isEqualTo: 'Men')
+            .where('Gender',isEqualTo: 'Women')
          .where('Category',isEqualTo: 'WBucket Bags'),
 
       ),
@@ -1652,17 +1652,17 @@ class _BagsWState extends State<BagsW> {
         FirebaseFirestore.instance.collectionGroup('userProducts')
             .orderBy('round',descending: false)
             .orderBy('timestamp',descending: true)
-            .where('Gender',isEqualTo: 'Men')
+            .where('Gender',isEqualTo: 'Women')
          .where('Category',isEqualTo: 'WBeach Bags'):
         priceQuery == "high"?
         FirebaseFirestore.instance.collectionGroup('userProducts')
             .orderBy('round',descending: true)
             .orderBy('timestamp',descending: true)
-            .where('Gender',isEqualTo: 'Men')
+            .where('Gender',isEqualTo: 'Women')
          .where('Category',isEqualTo: 'WBeach Bags'):
         FirebaseFirestore.instance.collectionGroup('userProducts')
             .orderBy('timestamp',descending: true)
-            .where('Gender',isEqualTo: 'Men')
+            .where('Gender',isEqualTo: 'Women')
          .where('Category',isEqualTo: 'WBeach Bags'),
 
       ),
@@ -1788,17 +1788,17 @@ class _BagsWState extends State<BagsW> {
         FirebaseFirestore.instance.collectionGroup('userProducts')
             .orderBy('round',descending: false)
             .orderBy('timestamp',descending: true)
-            .where('Gender',isEqualTo: 'Men')
+            .where('Gender',isEqualTo: 'Women')
          .where('Category',isEqualTo: 'Tote Bags'):
         priceQuery == "high"?
         FirebaseFirestore.instance.collectionGroup('userProducts')
             .orderBy('round',descending: true)
             .orderBy('timestamp',descending: true)
-            .where('Gender',isEqualTo: 'Men')
+            .where('Gender',isEqualTo: 'Women')
          .where('Category',isEqualTo: 'Tote Bags'):
         FirebaseFirestore.instance.collectionGroup('userProducts')
             .orderBy('timestamp',descending: true)
-            .where('Gender',isEqualTo: 'Men')
+            .where('Gender',isEqualTo: 'Women')
          .where('Category',isEqualTo: 'Tote Bags'),
 
       ),
@@ -1924,17 +1924,17 @@ class _BagsWState extends State<BagsW> {
         FirebaseFirestore.instance.collectionGroup('userProducts')
             .orderBy('round',descending: false)
             .orderBy('timestamp',descending: true)
-            .where('Gender',isEqualTo: 'Men')
+            .where('Gender',isEqualTo: 'Women')
          .where('Category',isEqualTo: 'Luggage'):
         priceQuery == "high"?
         FirebaseFirestore.instance.collectionGroup('userProducts')
             .orderBy('round',descending: true)
             .orderBy('timestamp',descending: true)
-            .where('Gender',isEqualTo: 'Men')
+            .where('Gender',isEqualTo: 'Women')
          .where('Category',isEqualTo: 'Luggage'):
         FirebaseFirestore.instance.collectionGroup('userProducts')
             .orderBy('timestamp',descending: true)
-            .where('Gender',isEqualTo: 'Men')
+            .where('Gender',isEqualTo: 'Women')
          .where('Category',isEqualTo: 'Luggage'),
 
       ),

@@ -430,17 +430,17 @@ class _BridalState extends State<Bridal> {
         FirebaseFirestore.instance.collectionGroup('userProducts')
             .orderBy('round',descending: false)
             .orderBy('timestamp',descending: true)
-            .where('Gender',isEqualTo: 'Men')
+            .where('Gender',isEqualTo: 'Women')
             .where('Category',isEqualTo: 'WBridal'):
         priceQuery == "high"?
         FirebaseFirestore.instance.collectionGroup('userProducts')
             .orderBy('round',descending: true)
             .orderBy('timestamp',descending: true)
-            .where('Gender',isEqualTo: 'Men')
+            .where('Gender',isEqualTo: 'Women')
             .where('Category',isEqualTo: 'WBridal'):
         FirebaseFirestore.instance.collectionGroup('userProducts')
             .orderBy('timestamp',descending: true)
-            .where('Gender',isEqualTo: 'Men')
+            .where('Gender',isEqualTo: 'Women')
             .where('Category',isEqualTo: 'WBridal'),
 
       ),
