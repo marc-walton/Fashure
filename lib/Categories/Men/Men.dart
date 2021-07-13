@@ -651,6 +651,7 @@ class _CItemState extends State<CItem> {
     conversion();
   }
   conversion()async{
+
     var resultUSD1 = await Currency.getConversion(
         from: 'USD', to: '${currentUser.currencyISO}', amount: prod.usd  );
     setState((){  var c1 = resultUSD1.rate;
@@ -686,7 +687,11 @@ class _CItemState extends State<CItem> {
                     color: kText,
                     fontSize: SizeConfig.safeBlockHorizontal * 5,
                     fontWeight: FontWeight.bold),),
-                subtitle:            Text( "${currentUser.currencysym} $price",style: TextStyle(color: kText,
+                subtitle:    currentUser.country == prod.country?
+    Text( "${currentUser.currencysym} ${prod.inr}",style: TextStyle(color: kText,
+    fontSize: SizeConfig.safeBlockHorizontal * 4,
+    fontWeight: FontWeight.bold)) :
+                Text( "${currentUser.currencysym} $price",style: TextStyle(color: kText,
                     fontSize: SizeConfig.safeBlockHorizontal * 4,
                     fontWeight: FontWeight.bold)),
 

@@ -51,6 +51,8 @@ import 'package:fashow/Categories/Women/Capes.dart';
 import 'package:fashow/Categories/Women/Denim.dart';
 import 'package:fashow/Categories/Women/Dresses.dart';
 import 'package:fashow/Categories/Women/Jackets.dart';
+import 'package:fashow/Categories/Women/hats.dart';
+
 import 'package:fashow/Categories/Women/Jumpsuits.dart';
 import 'package:fashow/Categories/Women/Jwellery.dart';
 import 'package:fashow/Categories/Women/Knitwear.dart';
@@ -3218,6 +3220,33 @@ class _ShopSearchState extends State<ShopSearch> {
     "Tracks in Teen Girls",
     "Teen Girl's Tracks",
     "Teen Girls Tracks",
+    "Caps in Women",
+    ///2810
+    "Women's Caps",
+    "Womens Caps",
+    "Hats in Women",
+    "Women's Hats",
+    "Womens Hats",
+    "Baker Boy Hats in Women",
+    "Women's Baker Boy Hats",
+    "Womens Baker Boy Hats",
+      "Beanies in Women",
+    "Women's Beanies",
+    ///2820
+    "Womens Beanies",
+         "Berets in Women",
+    "Women's Berets",
+    "Womens Berets",
+          "Fedora in Women",
+    "Women's Fedora",
+    "Womens Fedora",
+           "Bucket Hats in Women",
+    "Women's Bucket Hats",
+    "Womens Bucket Hats",
+    ///2830
+             "Sun Hats in Women",
+    "Women's Sun Hats",
+    "Womens Sun Hats",
 
   ];
 
@@ -4728,6 +4757,20 @@ else if(i==2800||i==2801||i==2802){ Get.off(KidtuGT(selectedPage: 9,));
 else if(i==2803||i==2804||i==2805){ Get.off(KidtuGT(selectedPage: 10,));
     }
 else if(i==2806||i==2807||i==2808){ Get.off(TrackBG());
+    }
+else if(i==2809||i==2810||i==2811||i==2812||i==2813||i==2814){ Get.off(WHats(selectedPage: 0,));
+    }
+else if(i==2815||i==2816||i==2817){ Get.off(WHats(selectedPage: 1,));
+    }
+else if(i==2818||i==2819||i==2820){ Get.off(WHats(selectedPage: 2,));
+    }
+else if(i==2821||i==2822||i==2823){ Get.off(WHats(selectedPage: 3,));
+    }
+else if(i==2824||i==2825||i==2826){ Get.off(WHats(selectedPage: 4,));
+    }
+else if(i==2827||i==2828||i==2829){ Get.off(WHats(selectedPage: 5,));
+    }
+else if(i==2830||i==2831||i==2832){ Get.off(WHats(selectedPage: 6,));
     }
 
 else{return null;}

@@ -16,7 +16,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:sticky_headers/sticky_headers.dart';
 import 'package:flutter_currencies_tracker/currency.dart';
 import 'package:get/get.dart';
-import 'package:fashow/ProductS.dart';
+import 'package:fashow/Products.dart';
 
 List <Widget>listOfImages = <Widget>[];
 
@@ -154,7 +154,10 @@ class _CItemState extends State<CItem> {
                     color: kText,
                     fontSize: SizeConfig.safeBlockHorizontal * 5,
                     fontWeight: FontWeight.bold),),
-                subtitle:            Text( "${currentUser.currencysym} $price",style: TextStyle(color: kText,
+                subtitle:      currentUser.country == prod.country?
+                Text( "${currentUser.currencysym} ${prod.inr}",style: TextStyle(color: kText,
+                    fontSize: SizeConfig.safeBlockHorizontal * 4,
+                    fontWeight: FontWeight.bold)) :       Text( "${currentUser.currencysym} $price",style: TextStyle(color: kText,
                     fontSize: SizeConfig.safeBlockHorizontal * 4,
                     fontWeight: FontWeight.bold)),
 
@@ -276,7 +279,7 @@ subtitle:            Text( "₹$inr",style: TextStyle(color: kText,
   String GQuery = "G0";
   String HQuery = "H0";
   String IQuery = "I0";
-  String JQuery = "art0";
+  String JQuery = "J0";
   all() {
     return InkWell(
       onTap: () {
@@ -290,7 +293,7 @@ subtitle:            Text( "₹$inr",style: TextStyle(color: kText,
         GQuery = "G0";
         HQuery = "H0";
         IQuery = "I0";
-        JQuery = "art0";
+        JQuery = "J0";
 
         setState(() {});
 
@@ -433,10 +436,6 @@ subtitle:            Text( "₹$inr",style: TextStyle(color: kText,
           itemBuilder: (index, context, documentSnapshot)   {
             String ownerId = documentSnapshot.data()['ownerId'];
             String prodId = documentSnapshot.data()['prodId'];
-//String shopmediaUrl = documentSnapshot.data()['shopmediaUrl'];
-            String productname = documentSnapshot.data()['productname'];
-            String inr = documentSnapshot.data()['inr'];
-            String usd = documentSnapshot.data()['usd'];
 
             return
               FutureBuilder(
@@ -575,7 +574,7 @@ subtitle:            Text( "₹$inr",style: TextStyle(color: kText,
             fontWeight: FontWeight.bold,
             fontSize: 25.0,
           ),)),
-          key:ValueKey<String>(AQuery),
+          key:ValueKey<String>(BQuery),
           itemBuilderType:
           PaginateBuilderType.listView,
           itemBuilder: (index, context, documentSnapshot)   {
@@ -723,7 +722,7 @@ subtitle:            Text( "₹$inr",style: TextStyle(color: kText,
             fontWeight: FontWeight.bold,
             fontSize: 25.0,
           ),)),
-          key:ValueKey<String>(AQuery),
+          key:ValueKey<String>(CQuery),
           itemBuilderType:
           PaginateBuilderType.listView,
           itemBuilder: (index, context, documentSnapshot)   {
@@ -825,531 +824,964 @@ subtitle:            Text( "₹$inr",style: TextStyle(color: kText,
       ),
     );
   }
-
   Sunglasses(){
-    return  PaginateFirestore(
-isLive: true,
-//    itemsPerPage: 2,
-      itemBuilderType:
-      PaginateBuilderType.listView,
-      itemBuilder: (index, context, documentSnapshot)   {
-//        DocumentSnapshot ds = snapshot.data.docs[index];
-        String ownerId = documentSnapshot.data()['ownerId'];
-        String prodId = documentSnapshot.data()['prodId'];
-String productname = documentSnapshot.data()['productname'];
-        String inr = documentSnapshot.data()['inr'];
-        String usd = documentSnapshot.data()['usd'];
-   
-        return
-          FutureBuilder(
-            future: usersRef.doc(ownerId).get(),
-            builder: (context, snapshot) {
-              if (!snapshot.hasData) {
-                return circularProgress();
-              }
-               Users user = Users.fromDocument(snapshot.data);
-//          bool isPostOwner = currentUserId == ownerId;
-              return Column(
-                children: <Widget>[
-                  GestureDetector(
-                    onTap: () => showProfile(context, profileId: user.id),
-                    child: ListTile(
-                      leading: CircleAvatar(
-                        backgroundImage: CachedNetworkImageProvider(user.photoUrl),
-                        backgroundColor: Colors.grey,
-                      ),
-                      title: Text(
-                        user.displayName,
-                        style: TextStyle(
-                          color: kText,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                     ),
-                  ),
+    return  StickyHeader(
+      header: Container(
+        height: 50.0,
+        color: Colors.transparent,
+        padding: EdgeInsets.symmetric(horizontal: 16.0),
+        alignment: Alignment.centerLeft,
+        child: ListTile(
+            trailing: FloatingActionButton(child: Icon(Icons.filter_alt_outlined),
+              onPressed: (){        showDialog<void>(
+                context: context,
+                // useRootNavigator:true,
 
-                  GestureDetector(
-                    onTap: () => Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => ProductScreen(
-                          prodId: prodId,
-                          userId: ownerId,
-                        ),
+                barrierDismissible: true,
+                // false = user must tap button, true = tap outside dialog
+                builder: (BuildContext dialogContext) {
+                  return Dialog(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                    child: Container(
+                      height:400,
+                      child: ExpansionTile(
+                          title: Text(""),
+                          children: [Column(
+                            children: [
+                              all(),
+                              low(),
+                              high(),
+
+                            ],
+                          ),
+                          ]
                       ),
                     ),
-                    child: Stack(
-                      alignment: Alignment.center,
-                      children: <Widget>[
-                        ClipRRect(
-                            borderRadius: BorderRadius.circular(20.0),child:pics(userid:ownerId,prodid: prodId)),
-                      ],),),
-                  df(productname:productname, usd:usd,inr:inr, prodId:prodId, ownerId:ownerId,),
+                  );
+                },
+              );},
+            )
+        ),
+      ),
+      content: PaginateFirestore(
+          emptyDisplay: Center(child: Text("Nothing found",style: TextStyle(
+            fontWeight: FontWeight.bold,
+            fontSize: 25.0,
+          ),)),
+          key:ValueKey<String>(DQuery),
+          itemBuilderType:
+          PaginateBuilderType.listView,
+          itemBuilder: (index, context, documentSnapshot)   {
+            String ownerId = documentSnapshot.data()['ownerId'];
+            String prodId = documentSnapshot.data()['prodId'];
+//String shopmediaUrl = documentSnapshot.data()['shopmediaUrl'];
+            String productname = documentSnapshot.data()['productname'];
+            String inr = documentSnapshot.data()['inr'];
+            String usd = documentSnapshot.data()['usd'];
 
-                  Divider(color: kGrey,),
-                ],
+            return
+              FutureBuilder(
+                future: usersRef.doc(ownerId).get(),
+                builder: (context, snapshot) {
+                  List<CItem> searchResults = [];
 
+                  Prod prod = Prod.fromDocument(documentSnapshot);
+                  CItem searchResult = CItem(prod);
+                  searchResults.add(searchResult);
+
+                  if (!snapshot.hasData) {
+                    return circularProgress();
+                  }
+                  Users user = Users.fromDocument(snapshot.data);
+                  return Column(
+                    children: <Widget>[
+                      GestureDetector(
+                        onTap: () => showProfile(context, profileId: user.id),
+                        child:Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Row(children:[
+                            CircleAvatar(
+                              backgroundImage: CachedNetworkImageProvider(user.photoUrl),
+                              backgroundColor: Colors.grey,
+                            ),
+                            SizedBox(width: 7.0,),
+                            Text(
+                              user.displayName,
+                              style: TextStyle(
+                                color: kText,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ]),
+                        ),
+
+                      ),
+
+                      GestureDetector(
+                        onTap: () => Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => ProductScreen(
+                              prodId: prodId,
+                              userId: ownerId,
+                            ),
+                          ),
+                        ),
+                        child: ClipRRect(
+                            borderRadius: BorderRadius.circular(20.0),child: pics(userid:ownerId,prodid: prodId)),),
+
+                      Column(
+
+                        children: searchResults,
+
+                      ),              Divider(color: kGrey,),
+                    ],
+
+                  );
+
+                },
               );
+          },
+          query: priceQuery == "low"?
+          FirebaseFirestore.instance.collectionGroup('userProducts')
+              .orderBy('round',descending: false)
+              .orderBy('timestamp',descending: true)
+              .where('Gender',isEqualTo: 'Men')
+              .where('Category',isEqualTo: 'Sunglasses'):
+          priceQuery == "high"?
+          FirebaseFirestore.instance.collectionGroup('userProducts')
+              .orderBy('round',descending: true)
+              .orderBy('timestamp',descending: true)
+              .where('Gender',isEqualTo: 'Men')
+              .where('Category',isEqualTo: 'Sunglasses'):
+          FirebaseFirestore.instance.collectionGroup('userProducts')
+              .orderBy('timestamp',descending: true)
+              .where('Gender',isEqualTo: 'Men')
+              .where('Category',isEqualTo: 'Sunglasses')
 
-            },
-          );
-      },
-      query: FirebaseFirestore.instance.collectionGroup('userProducts').orderBy('timestamp',descending: true)
-          .where('Gender',isEqualTo: 'Men')
-          .where('Category',isEqualTo: 'Sunglasses'),
 
 
+
+      ),
     );
   }
   Gloves(){
-    return  PaginateFirestore(
-isLive: true,
-//    itemsPerPage: 2,
-      itemBuilderType:
-      PaginateBuilderType.listView,
-      itemBuilder: (index, context, documentSnapshot)   {
-//        DocumentSnapshot ds = snapshot.data.docs[index];
-        String ownerId = documentSnapshot.data()['ownerId'];
-        String prodId = documentSnapshot.data()['prodId'];
-String productname = documentSnapshot.data()['productname'];
-        String inr = documentSnapshot.data()['inr'];
-        String usd = documentSnapshot.data()['usd'];
-   
-        return
-          FutureBuilder(
-            future: usersRef.doc(ownerId).get(),
-            builder: (context, snapshot) {
-              if (!snapshot.hasData) {
-                return circularProgress();
-              }
-               Users user = Users.fromDocument(snapshot.data);
-//          bool isPostOwner = currentUserId == ownerId;
-              return Column(
-                children: <Widget>[
-                  GestureDetector(
-                    onTap: () => showProfile(context, profileId: user.id),
-                    child: ListTile(
-                      leading: CircleAvatar(
-                        backgroundImage: CachedNetworkImageProvider(user.photoUrl),
-                        backgroundColor: Colors.grey,
-                      ),
-                      title: Text(
-                        user.displayName,
-                        style: TextStyle(
-                          color: kText,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                     ),
-                  ),
+    return  StickyHeader(
+      header: Container(
+        height: 50.0,
+        color: Colors.transparent,
+        padding: EdgeInsets.symmetric(horizontal: 16.0),
+        alignment: Alignment.centerLeft,
+        child: ListTile(
+            trailing: FloatingActionButton(child: Icon(Icons.filter_alt_outlined),
+              onPressed: (){        showDialog<void>(
+                context: context,
+                // useRootNavigator:true,
 
-                  GestureDetector(
-                    onTap: () => Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => ProductScreen(
-                          prodId: prodId,
-                          userId: ownerId,
-                        ),
+                barrierDismissible: true,
+                // false = user must tap button, true = tap outside dialog
+                builder: (BuildContext dialogContext) {
+                  return Dialog(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                    child: Container(
+                      height:400,
+                      child: ExpansionTile(
+                          title: Text(""),
+                          children: [Column(
+                            children: [
+                              all(),
+                              low(),
+                              high(),
+
+                            ],
+                          ),
+                          ]
                       ),
                     ),
-                    child: Stack(
-                      alignment: Alignment.center,
-                      children: <Widget>[
-                        ClipRRect(
-                            borderRadius: BorderRadius.circular(20.0),child:pics(userid:ownerId,prodid: prodId)),
-                      ],),),
-                  df(productname:productname, usd:usd,inr:inr, prodId:prodId, ownerId:ownerId,),
+                  );
+                },
+              );},
+            )
+        ),
+      ),
+      content: PaginateFirestore(
+          emptyDisplay: Center(child: Text("Nothing found",style: TextStyle(
+            fontWeight: FontWeight.bold,
+            fontSize: 25.0,
+          ),)),
+          key:ValueKey<String>(EQuery),
+          itemBuilderType:
+          PaginateBuilderType.listView,
+          itemBuilder: (index, context, documentSnapshot)   {
+            String ownerId = documentSnapshot.data()['ownerId'];
+            String prodId = documentSnapshot.data()['prodId'];
 
-                  Divider(color: kGrey,),
-                ],
+            return
+              FutureBuilder(
+                future: usersRef.doc(ownerId).get(),
+                builder: (context, snapshot) {
+                  List<CItem> searchResults = [];
 
+                  Prod prod = Prod.fromDocument(documentSnapshot);
+                  CItem searchResult = CItem(prod);
+                  searchResults.add(searchResult);
+
+                  if (!snapshot.hasData) {
+                    return circularProgress();
+                  }
+                  Users user = Users.fromDocument(snapshot.data);
+                  return Column(
+                    children: <Widget>[
+                      GestureDetector(
+                        onTap: () => showProfile(context, profileId: user.id),
+                        child:Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Row(children:[
+                            CircleAvatar(
+                              backgroundImage: CachedNetworkImageProvider(user.photoUrl),
+                              backgroundColor: Colors.grey,
+                            ),
+                            SizedBox(width: 7.0,),
+                            Text(
+                              user.displayName,
+                              style: TextStyle(
+                                color: kText,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ]),
+                        ),
+
+                      ),
+
+                      GestureDetector(
+                        onTap: () => Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => ProductScreen(
+                              prodId: prodId,
+                              userId: ownerId,
+                            ),
+                          ),
+                        ),
+                        child: ClipRRect(
+                            borderRadius: BorderRadius.circular(20.0),child: pics(userid:ownerId,prodid: prodId)),),
+
+                      Column(
+
+                        children: searchResults,
+
+                      ),              Divider(color: kGrey,),
+                    ],
+
+                  );
+
+                },
               );
+          },
+          query: priceQuery == "low"?
+          FirebaseFirestore.instance.collectionGroup('userProducts')
+              .orderBy('round',descending: false)
+              .orderBy('timestamp',descending: true)
+              .where('Gender',isEqualTo: 'Men')
+              .where('Category',isEqualTo: 'Gloves'):
+          priceQuery == "high"?
+          FirebaseFirestore.instance.collectionGroup('userProducts')
+              .orderBy('round',descending: true)
+              .orderBy('timestamp',descending: true)
+              .where('Gender',isEqualTo: 'Men')
+              .where('Category',isEqualTo: 'Gloves'):
+          FirebaseFirestore.instance.collectionGroup('userProducts')
+              .orderBy('timestamp',descending: true)
+              .where('Gender',isEqualTo: 'Men')
+              .where('Category',isEqualTo: 'Gloves')
 
-            },
-          );
-      },
-      query: FirebaseFirestore.instance.collectionGroup('userProducts').orderBy('timestamp',descending: true)
-          .where('Gender',isEqualTo: 'Men')
-          .where('Category',isEqualTo: 'Gloves'),
 
 
+      ),
     );
   }
   Socks(){
-    return  PaginateFirestore(
-isLive: true,
-//    itemsPerPage: 2,
-      itemBuilderType:
-      PaginateBuilderType.listView,
-      itemBuilder: (index, context, documentSnapshot)   {
-//        DocumentSnapshot ds = snapshot.data.docs[index];
-        String ownerId = documentSnapshot.data()['ownerId'];
-        String prodId = documentSnapshot.data()['prodId'];
-String productname = documentSnapshot.data()['productname'];
-        String inr = documentSnapshot.data()['inr'];
-        String usd = documentSnapshot.data()['usd'];
-   
-        return
-          FutureBuilder(
-            future: usersRef.doc(ownerId).get(),
-            builder: (context, snapshot) {
-              if (!snapshot.hasData) {
-                return circularProgress();
-              }
-               Users user = Users.fromDocument(snapshot.data);
-//          bool isPostOwner = currentUserId == ownerId;
-              return Column(
-                children: <Widget>[
-                  GestureDetector(
-                    onTap: () => showProfile(context, profileId: user.id),
-                    child: ListTile(
-                      leading: CircleAvatar(
-                        backgroundImage: CachedNetworkImageProvider(user.photoUrl),
-                        backgroundColor: Colors.grey,
-                      ),
-                      title: Text(
-                        user.displayName,
-                        style: TextStyle(
-                          color: kText,
-                          fontWeight: FontWeight.bold,
-                        ),
+    return  StickyHeader(
+      header: Container(
+        height: 50.0,
+        color: Colors.transparent,
+        padding: EdgeInsets.symmetric(horizontal: 16.0),
+        alignment: Alignment.centerLeft,
+        child: ListTile(
+            trailing: FloatingActionButton(child: Icon(Icons.filter_alt_outlined),
+              onPressed: (){        showDialog<void>(
+                context: context,
+                // useRootNavigator:true,
+
+                barrierDismissible: true,
+                // false = user must tap button, true = tap outside dialog
+                builder: (BuildContext dialogContext) {
+                  return Dialog(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                    child: Container(
+                      height:400,
+                      child: ExpansionTile(
+                          title: Text(""),
+                          children: [Column(
+                            children: [
+                              all(),
+                              low(),
+                              high(),
+
+                            ],
+                          ),
+                          ]
                       ),
                     ),
-                  ),
+                  );
+                },
+              );},
+            )
+        ),
+      ),
+      content: PaginateFirestore(
+          emptyDisplay: Center(child: Text("Nothing found",style: TextStyle(
+            fontWeight: FontWeight.bold,
+            fontSize: 25.0,
+          ),)),
+          key:ValueKey<String>(FQuery),
+          itemBuilderType:
+          PaginateBuilderType.listView,
+          itemBuilder: (index, context, documentSnapshot)   {
+            String ownerId = documentSnapshot.data()['ownerId'];
+            String prodId = documentSnapshot.data()['prodId'];
 
-                  GestureDetector(
-                    onTap: () => Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => ProductScreen(
-                          prodId: prodId,
-                          userId: ownerId,
+            return
+              FutureBuilder(
+                future: usersRef.doc(ownerId).get(),
+                builder: (context, snapshot) {
+                  List<CItem> searchResults = [];
+
+                  Prod prod = Prod.fromDocument(documentSnapshot);
+                  CItem searchResult = CItem(prod);
+                  searchResults.add(searchResult);
+
+                  if (!snapshot.hasData) {
+                    return circularProgress();
+                  }
+                  Users user = Users.fromDocument(snapshot.data);
+                  return Column(
+                    children: <Widget>[
+                      GestureDetector(
+                        onTap: () => showProfile(context, profileId: user.id),
+                        child:Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Row(children:[
+                            CircleAvatar(
+                              backgroundImage: CachedNetworkImageProvider(user.photoUrl),
+                              backgroundColor: Colors.grey,
+                            ),
+                            SizedBox(width: 7.0,),
+                            Text(
+                              user.displayName,
+                              style: TextStyle(
+                                color: kText,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ]),
                         ),
-                      ),
-                    ),
-                    child: Stack(
-                      alignment: Alignment.center,
-                      children: <Widget>[
-                        ClipRRect(
-                            borderRadius: BorderRadius.circular(20.0),child:pics(userid:ownerId,prodid: prodId)),
-                      ],),),
-                  df(productname:productname, usd:usd,inr:inr, prodId:prodId, ownerId:ownerId,),
-                  Divider(color: kGrey,),
-                ],
 
+                      ),
+
+                      GestureDetector(
+                        onTap: () => Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => ProductScreen(
+                              prodId: prodId,
+                              userId: ownerId,
+                            ),
+                          ),
+                        ),
+                        child: ClipRRect(
+                            borderRadius: BorderRadius.circular(20.0),child: pics(userid:ownerId,prodid: prodId)),),
+
+                      Column(
+
+                        children: searchResults,
+
+                      ),              Divider(color: kGrey,),
+                    ],
+
+                  );
+
+                },
               );
+          },
+          query: priceQuery == "low"?
+          FirebaseFirestore.instance.collectionGroup('userProducts')
+              .orderBy('round',descending: false)
+              .orderBy('timestamp',descending: true)
+              .where('Gender',isEqualTo: 'Men')
+              .where('Category',isEqualTo: 'Socks'):
+          priceQuery == "high"?
+          FirebaseFirestore.instance.collectionGroup('userProducts')
+              .orderBy('round',descending: true)
+              .orderBy('timestamp',descending: true)
+              .where('Gender',isEqualTo: 'Men')
+              .where('Category',isEqualTo: 'Socks'):
+          FirebaseFirestore.instance.collectionGroup('userProducts')
+              .orderBy('timestamp',descending: true)
+              .where('Gender',isEqualTo: 'Men')
+              .where('Category',isEqualTo: 'Socks')
 
-            },
-          );
-      },
-      query: FirebaseFirestore.instance.collectionGroup('userProducts').orderBy('timestamp',descending: true)
-          .where('Gender',isEqualTo: 'Men')
-          .where('Category',isEqualTo: 'Socks'),
 
-
+      ),
     );
   }
   PocketSquare(){
-    return  PaginateFirestore(
-isLive: true,
-//    itemsPerPage: 2,
-      itemBuilderType:
-      PaginateBuilderType.listView,
-      itemBuilder: (index, context, documentSnapshot)   {
-//        DocumentSnapshot ds = snapshot.data.docs[index];
-        String ownerId = documentSnapshot.data()['ownerId'];
-        String prodId = documentSnapshot.data()['prodId'];
-String productname = documentSnapshot.data()['productname'];
-        String inr = documentSnapshot.data()['inr'];
-        String usd = documentSnapshot.data()['usd'];
-   
-        return
-          FutureBuilder(
-            future: usersRef.doc(ownerId).get(),
-            builder: (context, snapshot) {
-              if (!snapshot.hasData) {
-                return circularProgress();
-              }
-               Users user = Users.fromDocument(snapshot.data);
-//          bool isPostOwner = currentUserId == ownerId;
-              return Column(
-                children: <Widget>[
-                  GestureDetector(
-                    onTap: () => showProfile(context, profileId: user.id),
-                    child: ListTile(
-                      leading: CircleAvatar(
-                        backgroundImage: CachedNetworkImageProvider(user.photoUrl),
-                        backgroundColor: Colors.grey,
-                      ),
-                      title: Text(
-                        user.displayName,
-                        style: TextStyle(
-                          color: kText,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                     ),
-                  ),
+    return  StickyHeader(
+      header: Container(
+        height: 50.0,
+        color: Colors.transparent,
+        padding: EdgeInsets.symmetric(horizontal: 16.0),
+        alignment: Alignment.centerLeft,
+        child: ListTile(
+            trailing: FloatingActionButton(child: Icon(Icons.filter_alt_outlined),
+              onPressed: (){        showDialog<void>(
+                context: context,
+                // useRootNavigator:true,
 
-                  GestureDetector(
-                    onTap: () => Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => ProductScreen(
-                          prodId: prodId,
-                          userId: ownerId,
-                        ),
+                barrierDismissible: true,
+                // false = user must tap button, true = tap outside dialog
+                builder: (BuildContext dialogContext) {
+                  return Dialog(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                    child: Container(
+                      height:400,
+                      child: ExpansionTile(
+                          title: Text(""),
+                          children: [Column(
+                            children: [
+                              all(),
+                              low(),
+                              high(),
+
+                            ],
+                          ),
+                          ]
                       ),
                     ),
-                    child: Stack(
-                      alignment: Alignment.center,
-                      children: <Widget>[
-                        ClipRRect(
-                            borderRadius: BorderRadius.circular(20.0),child:pics(userid:ownerId,prodid: prodId)),
-                      ],),),
-                  df(productname:productname, usd:usd,inr:inr, prodId:prodId, ownerId:ownerId,),
+                  );
+                },
+              );},
+            )
+        ),
+      ),
+      content: PaginateFirestore(
+          emptyDisplay: Center(child: Text("Nothing found",style: TextStyle(
+            fontWeight: FontWeight.bold,
+            fontSize: 25.0,
+          ),)),
+          key:ValueKey<String>(GQuery),
+          itemBuilderType:
+          PaginateBuilderType.listView,
+          itemBuilder: (index, context, documentSnapshot)   {
+            String ownerId = documentSnapshot.data()['ownerId'];
+            String prodId = documentSnapshot.data()['prodId'];
 
-                  Divider(color: kGrey,),
-                ],
+            return
+              FutureBuilder(
+                future: usersRef.doc(ownerId).get(),
+                builder: (context, snapshot) {
+                  List<CItem> searchResults = [];
 
+                  Prod prod = Prod.fromDocument(documentSnapshot);
+                  CItem searchResult = CItem(prod);
+                  searchResults.add(searchResult);
+
+                  if (!snapshot.hasData) {
+                    return circularProgress();
+                  }
+                  Users user = Users.fromDocument(snapshot.data);
+                  return Column(
+                    children: <Widget>[
+                      GestureDetector(
+                        onTap: () => showProfile(context, profileId: user.id),
+                        child:Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Row(children:[
+                            CircleAvatar(
+                              backgroundImage: CachedNetworkImageProvider(user.photoUrl),
+                              backgroundColor: Colors.grey,
+                            ),
+                            SizedBox(width: 7.0,),
+                            Text(
+                              user.displayName,
+                              style: TextStyle(
+                                color: kText,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ]),
+                        ),
+
+                      ),
+
+                      GestureDetector(
+                        onTap: () => Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => ProductScreen(
+                              prodId: prodId,
+                              userId: ownerId,
+                            ),
+                          ),
+                        ),
+                        child: ClipRRect(
+                            borderRadius: BorderRadius.circular(20.0),child: pics(userid:ownerId,prodid: prodId)),),
+
+                      Column(
+
+                        children: searchResults,
+
+                      ),              Divider(color: kGrey,),
+                    ],
+
+                  );
+
+                },
               );
+          },
+          query: priceQuery == "low"?
+          FirebaseFirestore.instance.collectionGroup('userProducts')
+              .orderBy('round',descending: false)
+              .orderBy('timestamp',descending: true)
+              .where('Gender',isEqualTo: 'Men')
+              .where('Category',isEqualTo: 'PocketSquare'):
+          priceQuery == "high"?
+          FirebaseFirestore.instance.collectionGroup('userProducts')
+              .orderBy('round',descending: true)
+              .orderBy('timestamp',descending: true)
+              .where('Gender',isEqualTo: 'Men')
+              .where('Category',isEqualTo: 'PocketSquare'):
+          FirebaseFirestore.instance.collectionGroup('userProducts')
+              .orderBy('timestamp',descending: true)
+              .where('Gender',isEqualTo: 'Men')
+              .where('Category',isEqualTo: 'PocketSquare')
 
-            },
-          );
-      },
-      query: FirebaseFirestore.instance.collectionGroup('userProducts').orderBy('timestamp',descending: true)
-          .where('Gender',isEqualTo: 'Men')
-          .where('Category',isEqualTo: 'PocketSquare'),
-
-
+      ),
     );
   }
   Wallets(){
-    return  PaginateFirestore(
-isLive: true,
-//    itemsPerPage: 2,
-      itemBuilderType:
-      PaginateBuilderType.listView,
-      itemBuilder: (index, context, documentSnapshot)   {
-//        DocumentSnapshot ds = snapshot.data.docs[index];
-        String ownerId = documentSnapshot.data()['ownerId'];
-        String prodId = documentSnapshot.data()['prodId'];
-String productname = documentSnapshot.data()['productname'];
-        String inr = documentSnapshot.data()['inr'];
-        String usd = documentSnapshot.data()['usd'];
-   
-        return
-          FutureBuilder(
-            future: usersRef.doc(ownerId).get(),
-            builder: (context, snapshot) {
-              if (!snapshot.hasData) {
-                return circularProgress();
-              }
-               Users user = Users.fromDocument(snapshot.data);
-//          bool isPostOwner = currentUserId == ownerId;
-              return Column(
-                children: <Widget>[
-                  GestureDetector(
-                    onTap: () => showProfile(context, profileId: user.id),
-                    child: ListTile(
-                      leading: CircleAvatar(
-                        backgroundImage: CachedNetworkImageProvider(user.photoUrl),
-                        backgroundColor: Colors.grey,
-                      ),
-                      title: Text(
-                        user.displayName,
-                        style: TextStyle(
-                          color: kText,
-                          fontWeight: FontWeight.bold,
-                        ),
+    return  StickyHeader(
+      header: Container(
+        height: 50.0,
+        color: Colors.transparent,
+        padding: EdgeInsets.symmetric(horizontal: 16.0),
+        alignment: Alignment.centerLeft,
+        child: ListTile(
+            trailing: FloatingActionButton(child: Icon(Icons.filter_alt_outlined),
+              onPressed: (){        showDialog<void>(
+                context: context,
+                // useRootNavigator:true,
+
+                barrierDismissible: true,
+                // false = user must tap button, true = tap outside dialog
+                builder: (BuildContext dialogContext) {
+                  return Dialog(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                    child: Container(
+                      height:400,
+                      child: ExpansionTile(
+                          title: Text(""),
+                          children: [Column(
+                            children: [
+                              all(),
+                              low(),
+                              high(),
+
+                            ],
+                          ),
+                          ]
                       ),
                     ),
-                  ),
+                  );
+                },
+              );},
+            )
+        ),
+      ),
+      content: PaginateFirestore(
+          emptyDisplay: Center(child: Text("Nothing found",style: TextStyle(
+            fontWeight: FontWeight.bold,
+            fontSize: 25.0,
+          ),)),
+          key:ValueKey<String>(HQuery),
+          itemBuilderType:
+          PaginateBuilderType.listView,
+          itemBuilder: (index, context, documentSnapshot)   {
+            String ownerId = documentSnapshot.data()['ownerId'];
+            String prodId = documentSnapshot.data()['prodId'];
 
-                  GestureDetector(
-                    onTap: () => Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => ProductScreen(
-                          prodId: prodId,
-                          userId: ownerId,
+            return
+              FutureBuilder(
+                future: usersRef.doc(ownerId).get(),
+                builder: (context, snapshot) {
+                  List<CItem> searchResults = [];
+
+                  Prod prod = Prod.fromDocument(documentSnapshot);
+                  CItem searchResult = CItem(prod);
+                  searchResults.add(searchResult);
+
+                  if (!snapshot.hasData) {
+                    return circularProgress();
+                  }
+                  Users user = Users.fromDocument(snapshot.data);
+                  return Column(
+                    children: <Widget>[
+                      GestureDetector(
+                        onTap: () => showProfile(context, profileId: user.id),
+                        child:Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Row(children:[
+                            CircleAvatar(
+                              backgroundImage: CachedNetworkImageProvider(user.photoUrl),
+                              backgroundColor: Colors.grey,
+                            ),
+                            SizedBox(width: 7.0,),
+                            Text(
+                              user.displayName,
+                              style: TextStyle(
+                                color: kText,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ]),
                         ),
+
                       ),
-                    ),
-                    child: Stack(
-                      alignment: Alignment.center,
-                      children: <Widget>[
-                        ClipRRect(
-                            borderRadius: BorderRadius.circular(20.0),child:pics(userid:ownerId,prodid: prodId)),
-                      ],),),
-                  df(productname:productname, usd:usd,inr:inr, prodId:prodId, ownerId:ownerId,),
 
-                  Divider(color: kGrey,),
-                ],
+                      GestureDetector(
+                        onTap: () => Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => ProductScreen(
+                              prodId: prodId,
+                              userId: ownerId,
+                            ),
+                          ),
+                        ),
+                        child: ClipRRect(
+                            borderRadius: BorderRadius.circular(20.0),child: pics(userid:ownerId,prodid: prodId)),),
 
+                      Column(
+
+                        children: searchResults,
+
+                      ),              Divider(color: kGrey,),
+                    ],
+
+                  );
+
+                },
               );
-
-            },
-          );
-      },
-      query: FirebaseFirestore.instance.collectionGroup('userProducts').orderBy('timestamp',descending: true)
-          .where('Gender',isEqualTo: 'Men')
-          .where('Category',isEqualTo: 'Wallets'),
-
-
+          },
+          query: priceQuery == "low"?
+          FirebaseFirestore.instance.collectionGroup('userProducts')
+              .orderBy('round',descending: false)
+              .orderBy('timestamp',descending: true)
+              .where('Gender',isEqualTo: 'Men')
+              .where('Category',isEqualTo: 'Wallets'):
+          priceQuery == "high"?
+          FirebaseFirestore.instance.collectionGroup('userProducts')
+              .orderBy('round',descending: true)
+              .orderBy('timestamp',descending: true)
+              .where('Gender',isEqualTo: 'Men')
+              .where('Category',isEqualTo: 'Wallets'):
+          FirebaseFirestore.instance.collectionGroup('userProducts')
+              .orderBy('timestamp',descending: true)
+              .where('Gender',isEqualTo: 'Men')
+              .where('Category',isEqualTo: 'Wallets')
+      ),
     );
   }
   Umbrellas(){
-    return  PaginateFirestore(
-isLive: true,
-//    itemsPerPage: 2,
-      itemBuilderType:
-      PaginateBuilderType.listView,
-      itemBuilder: (index, context, documentSnapshot)   {
-//        DocumentSnapshot ds = snapshot.data.docs[index];
-        String ownerId = documentSnapshot.data()['ownerId'];
-        String prodId = documentSnapshot.data()['prodId'];
-String productname = documentSnapshot.data()['productname'];
-        String inr = documentSnapshot.data()['inr'];
-        String usd = documentSnapshot.data()['usd'];
-   
-        return
-          FutureBuilder(
-            future: usersRef.doc(ownerId).get(),
-            builder: (context, snapshot) {
-              if (!snapshot.hasData) {
-                return circularProgress();
-              }
-               Users user = Users.fromDocument(snapshot.data);
-//          bool isPostOwner = currentUserId == ownerId;
-              return Column(
-                children: <Widget>[
-                  GestureDetector(
-                    onTap: () => showProfile(context, profileId: user.id),
-                    child: ListTile(
-                      leading: CircleAvatar(
-                        backgroundImage: CachedNetworkImageProvider(user.photoUrl),
-                        backgroundColor: Colors.grey,
-                      ),
-                      title: Text(
-                        user.displayName,
-                        style: TextStyle(
-                          color: kText,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                     ),
-                  ),
+    return  StickyHeader(
+      header: Container(
+        height: 50.0,
+        color: Colors.transparent,
+        padding: EdgeInsets.symmetric(horizontal: 16.0),
+        alignment: Alignment.centerLeft,
+        child: ListTile(
+            trailing: FloatingActionButton(child: Icon(Icons.filter_alt_outlined),
+              onPressed: (){        showDialog<void>(
+                context: context,
+                // useRootNavigator:true,
 
-                  GestureDetector(
-                    onTap: () => Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => ProductScreen(
-                          prodId: prodId,
-                          userId: ownerId,
-                        ),
+                barrierDismissible: true,
+                // false = user must tap button, true = tap outside dialog
+                builder: (BuildContext dialogContext) {
+                  return Dialog(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                    child: Container(
+                      height:400,
+                      child: ExpansionTile(
+                          title: Text(""),
+                          children: [Column(
+                            children: [
+                              all(),
+                              low(),
+                              high(),
+
+                            ],
+                          ),
+                          ]
                       ),
                     ),
-                    child: Stack(
-                      alignment: Alignment.center,
-                      children: <Widget>[
-                        ClipRRect(
-                            borderRadius: BorderRadius.circular(20.0),child:pics(userid:ownerId,prodid: prodId)),
-                      ],),),
-                  df(productname:productname, usd:usd,inr:inr, prodId:prodId, ownerId:ownerId,),
+                  );
+                },
+              );},
+            )
+        ),
+      ),
+      content: PaginateFirestore(
+          emptyDisplay: Center(child: Text("Nothing found",style: TextStyle(
+            fontWeight: FontWeight.bold,
+            fontSize: 25.0,
+          ),)),
+          key:ValueKey<String>(IQuery),
+          itemBuilderType:
+          PaginateBuilderType.listView,
+          itemBuilder: (index, context, documentSnapshot)   {
+            String ownerId = documentSnapshot.data()['ownerId'];
+            String prodId = documentSnapshot.data()['prodId'];
 
-                  Divider(color: kGrey,),
-                ],
+            return
+              FutureBuilder(
+                future: usersRef.doc(ownerId).get(),
+                builder: (context, snapshot) {
+                  List<CItem> searchResults = [];
 
+                  Prod prod = Prod.fromDocument(documentSnapshot);
+                  CItem searchResult = CItem(prod);
+                  searchResults.add(searchResult);
+
+                  if (!snapshot.hasData) {
+                    return circularProgress();
+                  }
+                  Users user = Users.fromDocument(snapshot.data);
+                  return Column(
+                    children: <Widget>[
+                      GestureDetector(
+                        onTap: () => showProfile(context, profileId: user.id),
+                        child:Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Row(children:[
+                            CircleAvatar(
+                              backgroundImage: CachedNetworkImageProvider(user.photoUrl),
+                              backgroundColor: Colors.grey,
+                            ),
+                            SizedBox(width: 7.0,),
+                            Text(
+                              user.displayName,
+                              style: TextStyle(
+                                color: kText,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ]),
+                        ),
+
+                      ),
+
+                      GestureDetector(
+                        onTap: () => Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => ProductScreen(
+                              prodId: prodId,
+                              userId: ownerId,
+                            ),
+                          ),
+                        ),
+                        child: ClipRRect(
+                            borderRadius: BorderRadius.circular(20.0),child: pics(userid:ownerId,prodid: prodId)),),
+
+                      Column(
+
+                        children: searchResults,
+
+                      ),              Divider(color: kGrey,),
+                    ],
+
+                  );
+
+                },
               );
-
-            },
-          );
-      },
-      query: FirebaseFirestore.instance.collectionGroup('userProducts').orderBy('timestamp',descending: true)
-          .where('Gender',isEqualTo: 'Men')
-          .where('Category',isEqualTo: 'Umbrellas & Travel'),
-
-
+          },
+          query: priceQuery == "low"?
+          FirebaseFirestore.instance.collectionGroup('userProducts')
+              .orderBy('round',descending: false)
+              .orderBy('timestamp',descending: true)
+              .where('Gender',isEqualTo: 'Men')
+              .where('Category',isEqualTo: 'Umbrellas & Travel'):
+          priceQuery == "high"?
+          FirebaseFirestore.instance.collectionGroup('userProducts')
+              .orderBy('round',descending: true)
+              .orderBy('timestamp',descending: true)
+              .where('Gender',isEqualTo: 'Men')
+              .where('Category',isEqualTo: 'Umbrellas & Travel'):
+          FirebaseFirestore.instance.collectionGroup('userProducts')
+              .orderBy('timestamp',descending: true)
+              .where('Gender',isEqualTo: 'Men')
+              .where('Category',isEqualTo: 'Umbrellas & Travel')      ),
     );
   }
   Phone(){
-    return  PaginateFirestore(
-isLive: true,
-//    itemsPerPage: 2,
-      itemBuilderType:
-      PaginateBuilderType.listView,
-      itemBuilder: (index, context, documentSnapshot)   {
-//        DocumentSnapshot ds = snapshot.data.docs[index];
-        String ownerId = documentSnapshot.data()['ownerId'];
-        String prodId = documentSnapshot.data()['prodId'];
-String productname = documentSnapshot.data()['productname'];
-        String inr = documentSnapshot.data()['inr'];
-        String usd = documentSnapshot.data()['usd'];
-   
-        return
-          FutureBuilder(
-            future: usersRef.doc(ownerId).get(),
-            builder: (context, snapshot) {
-              if (!snapshot.hasData) {
-                return circularProgress();
-              }
-               Users user = Users.fromDocument(snapshot.data);
-//          bool isPostOwner = currentUserId == ownerId;
-              return Column(
-                children: <Widget>[
-                  GestureDetector(
-                    onTap: () => showProfile(context, profileId: user.id),
-                    child: ListTile(
-                      leading: CircleAvatar(
-                        backgroundImage: CachedNetworkImageProvider(user.photoUrl),
-                        backgroundColor: Colors.grey,
-                      ),
-                      title: Text(
-                        user.displayName,
-                        style: TextStyle(
-                          color: kText,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                     ),
-                  ),
+    return  StickyHeader(
+      header: Container(
+        height: 50.0,
+        color: Colors.transparent,
+        padding: EdgeInsets.symmetric(horizontal: 16.0),
+        alignment: Alignment.centerLeft,
+        child: ListTile(
+            trailing: FloatingActionButton(child: Icon(Icons.filter_alt_outlined),
+              onPressed: (){        showDialog<void>(
+                context: context,
+                // useRootNavigator:true,
 
-                  GestureDetector(
-                    onTap: () => Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => ProductScreen(
-                          prodId: prodId,
-                          userId: ownerId,
-                        ),
+                barrierDismissible: true,
+                // false = user must tap button, true = tap outside dialog
+                builder: (BuildContext dialogContext) {
+                  return Dialog(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                    child: Container(
+                      height:400,
+                      child: ExpansionTile(
+                          title: Text(""),
+                          children: [Column(
+                            children: [
+                              all(),
+                              low(),
+                              high(),
+
+                            ],
+                          ),
+                          ]
                       ),
                     ),
-                    child: Stack(
-                      alignment: Alignment.center,
-                      children: <Widget>[
-                        ClipRRect(
-                            borderRadius: BorderRadius.circular(20.0),child:pics(userid:ownerId,prodid: prodId)),
-                      ],),),
-                  df(productname:productname, usd:usd,inr:inr, prodId:prodId, ownerId:ownerId,),
+                  );
+                },
+              );},
+            )
+        ),
+      ),
+      content: PaginateFirestore(
+          emptyDisplay: Center(child: Text("Nothing found",style: TextStyle(
+            fontWeight: FontWeight.bold,
+            fontSize: 25.0,
+          ),)),
+          key:ValueKey<String>(JQuery),
+          itemBuilderType:
+          PaginateBuilderType.listView,
+          itemBuilder: (index, context, documentSnapshot)   {
+            String ownerId = documentSnapshot.data()['ownerId'];
+            String prodId = documentSnapshot.data()['prodId'];
 
-                  Divider(color: kGrey,),
-                ],
+            return
+              FutureBuilder(
+                future: usersRef.doc(ownerId).get(),
+                builder: (context, snapshot) {
+                  List<CItem> searchResults = [];
 
+                  Prod prod = Prod.fromDocument(documentSnapshot);
+                  CItem searchResult = CItem(prod);
+                  searchResults.add(searchResult);
+
+                  if (!snapshot.hasData) {
+                    return circularProgress();
+                  }
+                  Users user = Users.fromDocument(snapshot.data);
+                  return Column(
+                    children: <Widget>[
+                      GestureDetector(
+                        onTap: () => showProfile(context, profileId: user.id),
+                        child:Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Row(children:[
+                            CircleAvatar(
+                              backgroundImage: CachedNetworkImageProvider(user.photoUrl),
+                              backgroundColor: Colors.grey,
+                            ),
+                            SizedBox(width: 7.0,),
+                            Text(
+                              user.displayName,
+                              style: TextStyle(
+                                color: kText,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ]),
+                        ),
+
+                      ),
+
+                      GestureDetector(
+                        onTap: () => Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => ProductScreen(
+                              prodId: prodId,
+                              userId: ownerId,
+                            ),
+                          ),
+                        ),
+                        child: ClipRRect(
+                            borderRadius: BorderRadius.circular(20.0),child: pics(userid:ownerId,prodid: prodId)),),
+
+                      Column(
+
+                        children: searchResults,
+
+                      ),              Divider(color: kGrey,),
+                    ],
+
+                  );
+
+                },
               );
-
-            },
-          );
-      },
-      query: FirebaseFirestore.instance.collectionGroup('userProducts').orderBy('timestamp',descending: true)
-          .where('Gender',isEqualTo: 'Men')
-          .where('Category',isEqualTo: 'Phone'),
-
-
+          },
+          query: priceQuery == "low"?
+          FirebaseFirestore.instance.collectionGroup('userProducts')
+              .orderBy('round',descending: false)
+              .orderBy('timestamp',descending: true)
+              .where('Gender',isEqualTo: 'Men')
+              .where('Category',isEqualTo: 'Phone'):
+          priceQuery == "high"?
+          FirebaseFirestore.instance.collectionGroup('userProducts')
+              .orderBy('round',descending: true)
+              .orderBy('timestamp',descending: true)
+              .where('Gender',isEqualTo: 'Men')
+              .where('Category',isEqualTo: 'Phone'):
+          FirebaseFirestore.instance.collectionGroup('userProducts')
+              .orderBy('timestamp',descending: true)
+              .where('Gender',isEqualTo: 'Men')
+              .where('Category',isEqualTo: 'Phone')      ),
     );
   }
+
 
   @override
   Widget build(BuildContext context) {
