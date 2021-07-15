@@ -14,6 +14,11 @@ import 'package:fashow/user.dart';
 import 'package:fashow/product_custom.dart';
 import 'package:fashow/Product_screen.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:sticky_headers/sticky_headers.dart';
+import 'package:flutter_currencies_tracker/currency.dart';
+import 'package:get/get.dart';
+import 'package:fashow/Products.dart';
+
 List <Widget>listOfImages = <Widget>[];
 
 pics({String userid,String prodid}){
@@ -28,7 +33,7 @@ pics({String userid,String prodid}){
         builder: (context, snapshot) {
 
           if (snapshot.hasData) {
-            return new ListView.builder(physics: NeverScrollableScrollPhysics(), 
+            return new ListView.builder(physics: NeverScrollableScrollPhysics(),
                 shrinkWrap: true,
                 scrollDirection:Axis.vertical,
                 itemCount: snapshot.data.docs.length,
@@ -46,7 +51,7 @@ pics({String userid,String prodid}){
                   return Column(
                     children: <Widget>[
                       Container(
-                          margin: EdgeInsets.all(10.0),
+                          margin: EdgeInsets.all(1.0),
 
                           decoration: BoxDecoration(
                             color: Colors.transparent,
@@ -59,7 +64,6 @@ pics({String userid,String prodid}){
                           CarouselSlider(
                               items: listOfImages,
                               options: CarouselOptions(
-                                height: 500,
                                 aspectRatio: 16/9,
                                 viewportFraction: 0.8,
                                 initialPage: 0,
@@ -89,6 +93,88 @@ pics({String userid,String prodid}){
 
         });
 
+}
+
+class CItem extends StatefulWidget {
+  final Prod prod;
+  String products;
+  CItem(this.prod);
+  @override
+  _CItemState createState() => _CItemState(this.prod);
+}
+
+class _CItemState extends State<CItem> {
+  final Prod prod;
+  String products;
+  int client;
+  String price;
+
+  int followerCount = 0;
+  final String currentUserId = currentUser?.id;
+
+  _CItemState(this.prod);
+  @override
+  void initState() {
+    super.initState();
+
+    conversion();
+  }
+  conversion()async{
+    var resultUSD1 = await Currency.getConversion(
+        from: 'USD', to: '${currentUser.currencyISO}', amount: prod.usd  );
+    setState((){  var c1 = resultUSD1.rate;
+    price =c1.toStringAsFixed(2);
+
+    print(price);
+    });
+
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    SizeConfig().init(context);
+
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Container(
+          decoration: BoxDecoration(
+              borderRadius: BorderRadius.all(Radius.circular(20.0))),
+          margin:
+          EdgeInsets.only(top: 10.0, left: 10.0, right: 10.0, bottom: 10.0),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[
+
+
+              ListTile(
+                dense: true,
+                contentPadding: EdgeInsets.symmetric(horizontal: 0.0, vertical: 0.0),
+                visualDensity: VisualDensity(horizontal: 0, vertical: -4),
+                title:            Text(prod.productname, style: TextStyle(
+                    color: kText,
+                    fontSize: SizeConfig.safeBlockHorizontal * 5,
+                    fontWeight: FontWeight.bold),),
+                subtitle:      currentUser.country == prod.country?
+                Text( "${currentUser.currencysym} ${prod.inr}",style: TextStyle(color: kText,
+                    fontSize: SizeConfig.safeBlockHorizontal * 4,
+                    fontWeight: FontWeight.bold)) :       Text( "${currentUser.currencysym} $price",style: TextStyle(color: kText,
+                    fontSize: SizeConfig.safeBlockHorizontal * 4,
+                    fontWeight: FontWeight.bold)),
+
+              ),
+
+
+              SizedBox(
+                height: 10.0,
+              ),
+            ],
+          ),
+        ),
+
+      ],
+    );
+  }
 }
 df({String productname,String usd,String inr,String cny,String eur,String gbp,String prodId,String ownerId,}){
   if(currentUser.country=='India'){
