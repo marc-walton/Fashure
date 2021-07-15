@@ -694,6 +694,7 @@ class _EditProfileState extends State<EditProfile> {
                                     maintainState:true,
                                     trailing:Icon(Icons.arrow_drop_down,color: kText,),
                                     children: [
+
                                       CheckboxListTile(
                                         title: Text('Designer',style:TextStyle(
                                             color: Colors.white),),

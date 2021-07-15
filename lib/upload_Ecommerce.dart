@@ -474,12 +474,10 @@ bool indian = false;
   var gbptoinr12;
   var gbptocny12;
   var gbptousd12;
-  var gbptoeur12;
   var eurtoinr12;
   var eurtousd12;
-  var eurtocny12;
-  var eurtogbp12;
 
+var rounded;
 int count  = 1;
   @override
   void initState() {
@@ -11595,6 +11593,8 @@ keyboardType:TextInputType.number,
     setState(() {
 
       inrtousd = resultUSD.rate;
+      rounded = inrtousd.round();
+
       inrtousd1 = resultUSD1.rate;
 
       inrtousd2 = resultUSD2.rate;
@@ -11801,14 +11801,15 @@ keyboardType:TextInputType.number,
               "custom101inr": userprice10.toString() ?? "0.0",
               "shipcostusd": inrtousd11.toString() ?? "0.0",
               "shipcostinr": userprice11.toString() ?? "0.0",
- "shipcostinternusd": inrtousd12.toString() ?? "0.0",
+                "shipcostinternusd": inrtousd12.toString() ?? "0.0",
               "shipcostinterninr": userprice12.toString() ?? "0.0",
+"round": int.tryParse(rounded) ?? 0,
 
               "processfrom":  int.tryParse(durationfromp.text) ?? 0,
               "processto":  int.tryParse(durationto.text) ?? 0,
               "shipfrom":  int.tryParse(durationfrom.text) ?? 0,
               "shipto":  int.tryParse(durationto.text) ?? 0,
- "shipinterfrom":  int.tryParse(durationfromw.text) ?? 0,
+              "shipinterfrom":  int.tryParse(durationfromw.text) ?? 0,
               "shipinterto":  int.tryParse(durationtow.text) ?? 0,
 
               "likes": {},
