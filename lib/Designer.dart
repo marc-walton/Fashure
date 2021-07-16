@@ -20,7 +20,10 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:fashow/post_screen.dart';
 import 'package:fashow/Profile.dart';
 import 'package:paginate_firestore/paginate_firestore.dart';
-
+import 'package:sticky_headers/sticky_headers.dart';
+import 'package:flutter_currencies_tracker/currency.dart';
+import 'package:get/get.dart';
+import 'package:fashow/Products.dart';
 class Designer extends StatefulWidget {
   @override
   _DesignerState createState() => _DesignerState();
@@ -60,7 +63,7 @@ class _DesignerState extends State<Designer> with TickerProviderStateMixin {
   bool isLiked;
   bool showHeart = false;
   int followerCount = 0;
-  String priceQuery = "0";
+  String priceQuery = "1";
   String desQuery = "des0";
   String illQuery = "ill0";
   String stylQuery = "styl0";
@@ -101,47 +104,22 @@ class _DesignerState extends State<Designer> with TickerProviderStateMixin {
           ),
         );
       },
-      query: priceQuery == "100"
-          ? FirebaseFirestore.instance
-              .collection('users')
-              .where('designer', isEqualTo: true)
-              .orderBy('designerAvg', descending: true)
-              .where('designerAvg', isLessThanOrEqualTo: "100")
-          :priceQuery == "100-500"
-          ? FirebaseFirestore.instance
-              .collection('users')
-              .where('designer', isEqualTo: true)
-              .orderBy('designerAvg', descending: true)
-          .where('designerAvg', isGreaterThanOrEqualTo: "100")
 
-          .where('designerAvg', isLessThanOrEqualTo: "500")
+      query: priceQuery == "low"
+          ? FirebaseFirestore.instance
+              .collection('users')
+          .orderBy('designerrounded',descending: false)
+              .where('designer', isEqualTo: true)
+          :priceQuery == "high"
+          ? FirebaseFirestore.instance
+              .collection('users')
+          .orderBy('designerrounded',descending: true)
 
-          :priceQuery == "500-1000"
-          ? FirebaseFirestore.instance
-              .collection('users')
-              .where('designer', isEqualTo: true)
-              .orderBy('designerAvg', descending: true)
-              .where('designerAvg', isGreaterThanOrEqualTo: "500")
-      .where('designerAvg', isLessThanOrEqualTo: "1000")
-        :priceQuery == "1000 - 5000"
-          ? FirebaseFirestore.instance
-              .collection('users')
-              .where('designer', isEqualTo: true)
-              .orderBy('designerAvg', descending: true)
-              .where('designerAvg', isGreaterThanOrEqualTo: "1000")
-      .where('designerAvg', isLessThanOrEqualTo: "5000")
-         :priceQuery == "above 5000"
-          ? FirebaseFirestore.instance
-              .collection('users')
-              .where('designer', isEqualTo: true)
-              .orderBy('designerAvg', descending: true)
-              .where('designerAvg', isGreaterThanOrEqualTo: "5000")
-
+          .where('designer', isEqualTo: true)
           : FirebaseFirestore.instance
               .collection('users')
               .where('designer', isEqualTo: true)
-              .orderBy('designerAvg', descending: true)
-              .where('designerAvg', isGreaterThan: "0"),
+              .where('designerrounded', isGreaterThan: 1),
     );
   }
   buildPostIllustrator() {
@@ -166,49 +144,24 @@ class _DesignerState extends State<Designer> with TickerProviderStateMixin {
           ),
         );
       },
-      query: priceQuery == "100"
+      query: priceQuery == "low"
           ? FirebaseFirestore.instance
-              .collection('users')
-              .where('illustrator', isEqualTo: true)
-              .orderBy('illustratorAvg', descending: true)
-              .where('illustratorAvg', isLessThanOrEqualTo: "100")
-          :priceQuery == "100-500"
+          .collection('users')
+          .orderBy('illustratorrounded',descending: false)
+          .where('illustrator', isEqualTo: true)
+          :priceQuery == "high"
           ? FirebaseFirestore.instance
-              .collection('users')
-              .where('illustrator', isEqualTo: true)
-              .orderBy('illustratorAvg', descending: true)
-          .where('illustratorAvg', isGreaterThanOrEqualTo: "100")
+          .collection('users')
+          .orderBy('illustratorrounded',descending: true)
 
-          .where('illustratorAvg', isLessThanOrEqualTo: "500")
-
-          :priceQuery == "500-1000"
-          ? FirebaseFirestore.instance
-              .collection('users')
-              .where('illustrator', isEqualTo: true)
-              .orderBy('illustratorAvg', descending: true)
-              .where('illustratorAvg', isGreaterThanOrEqualTo: "500")
-      .where('illustratorAvg', isLessThanOrEqualTo: "1000")
-        :priceQuery == "1000 - 5000"
-          ? FirebaseFirestore.instance
-              .collection('users')
-              .where('illustrator', isEqualTo: true)
-              .orderBy('illustratorAvg', descending: true)
-              .where('illustratorAvg', isGreaterThanOrEqualTo: "1000")
-      .where('illustratorAvg', isLessThanOrEqualTo: "5000")
-         :priceQuery == "above 5000"
-          ? FirebaseFirestore.instance
-              .collection('users')
-              .where('illustrator', isEqualTo: true)
-              .orderBy('illustratorAvg', descending: true)
-              .where('illustratorAvg', isGreaterThanOrEqualTo: "5000")
-
+          .where('illustrator', isEqualTo: true)
           : FirebaseFirestore.instance
-              .collection('users')
-              .where('illustrator', isEqualTo: true)
-              .orderBy('illustratorAvg', descending: true)
-              .where('illustratorAvg', isGreaterThan: "0"),
+          .collection('users')
+          .where('illustrator', isEqualTo: true)
+          .where('illustratorrounded', isGreaterThan: 1),
     );
   }
+
   buildPostStylist() {
     return PaginateFirestore(
       emptyDisplay: Center(child: Text("No stylist found",style: TextStyle(
@@ -231,47 +184,22 @@ class _DesignerState extends State<Designer> with TickerProviderStateMixin {
           ),
         );
       },
-      query: priceQuery == "100"
+      query: priceQuery == "low"
           ? FirebaseFirestore.instance
-              .collection('users')
-              .where('stylist', isEqualTo: true)
-              .orderBy('stylistAvg', descending: true)
-              .where('stylistAvg', isLessThanOrEqualTo: "100")
-          :priceQuery == "100-500"
+          .collection('users')
+          .orderBy('stylistrounded',descending: false)
+          .where('stylist', isEqualTo: true)
+          :priceQuery == "high"
           ? FirebaseFirestore.instance
-              .collection('users')
-              .where('stylist', isEqualTo: true)
-              .orderBy('stylistAvg', descending: true)
-          .where('stylistAvg', isGreaterThanOrEqualTo: "100")
+          .collection('users')
+          .orderBy('stylistrounded',descending: true)
 
-          .where('stylistAvg', isLessThanOrEqualTo: "500")
-
-          :priceQuery == "500-1000"
-          ? FirebaseFirestore.instance
-              .collection('users')
-              .where('stylist', isEqualTo: true)
-              .orderBy('stylistAvg', descending: true)
-              .where('stylistAvg', isGreaterThanOrEqualTo: "500")
-      .where('stylistAvg', isLessThanOrEqualTo: "1000")
-        :priceQuery == "1000 - 5000"
-          ? FirebaseFirestore.instance
-              .collection('users')
-              .where('stylist', isEqualTo: true)
-              .orderBy('stylistAvg', descending: true)
-              .where('stylistAvg', isGreaterThanOrEqualTo: "1000")
-      .where('stylistAvg', isLessThanOrEqualTo: "5000")
-         :priceQuery == "above 5000"
-          ? FirebaseFirestore.instance
-              .collection('users')
-              .where('stylist', isEqualTo: true)
-              .orderBy('stylistAvg', descending: true)
-              .where('stylistAvg', isGreaterThanOrEqualTo: "5000")
-
+          .where('stylist', isEqualTo: true)
           : FirebaseFirestore.instance
-              .collection('users')
-              .where('stylist', isEqualTo: true)
-              .orderBy('stylistAvg', descending: true)
-              .where('stylistAvg', isGreaterThan: "0"),
+          .collection('users')
+          .where('stylist', isEqualTo: true)
+          .where('stylistrounded', isGreaterThan: 1),
+
     );
   }
   buildPostBlogger() {
@@ -296,47 +224,23 @@ class _DesignerState extends State<Designer> with TickerProviderStateMixin {
           ),
         );
       },
-      query: priceQuery == "100"
+      query: priceQuery == "low"
           ? FirebaseFirestore.instance
-              .collection('users')
-              .where('blogger', isEqualTo: true)
-              .orderBy('bloggerAvg', descending: true)
-              .where('bloggerAvg', isLessThanOrEqualTo: "100")
-          :priceQuery == "100-500"
+          .collection('users')
+          .orderBy('bloggerrounded',descending: false)
+          .where('blogger', isEqualTo: true)
+          :priceQuery == "high"
           ? FirebaseFirestore.instance
-              .collection('users')
-              .where('blogger', isEqualTo: true)
-              .orderBy('bloggerAvg', descending: true)
-          .where('bloggerAvg', isGreaterThanOrEqualTo: "100")
+          .collection('users')
+          .orderBy('bloggerrounded',descending: true)
 
-          .where('bloggerAvg', isLessThanOrEqualTo: "500")
-
-          :priceQuery == "500-1000"
-          ? FirebaseFirestore.instance
-              .collection('users')
-              .where('blogger', isEqualTo: true)
-              .orderBy('bloggerAvg', descending: true)
-              .where('bloggerAvg', isGreaterThanOrEqualTo: "500")
-      .where('bloggerAvg', isLessThanOrEqualTo: "1000")
-        :priceQuery == "1000 - 5000"
-          ? FirebaseFirestore.instance
-              .collection('users')
-              .where('blogger', isEqualTo: true)
-              .orderBy('bloggerAvg', descending: true)
-              .where('bloggerAvg', isGreaterThanOrEqualTo: "1000")
-      .where('bloggerAvg', isLessThanOrEqualTo: "5000")
-         :priceQuery == "above 5000"
-          ? FirebaseFirestore.instance
-              .collection('users')
-              .where('blogger', isEqualTo: true)
-              .orderBy('bloggerAvg', descending: true)
-              .where('bloggerAvg', isGreaterThanOrEqualTo: "5000")
-
+          .where('blogger', isEqualTo: true)
           : FirebaseFirestore.instance
-              .collection('users')
-              .where('blogger', isEqualTo: true)
-              .orderBy('bloggerAvg', descending: true)
-              .where('bloggerAvg', isGreaterThan: "0"),
+          .collection('users')
+          .where('blogger', isEqualTo: true)
+          .where('bloggerrounded', isGreaterThan: 1),
+
+
     );
   }
   buildPostPhotographer() {
@@ -361,47 +265,22 @@ class _DesignerState extends State<Designer> with TickerProviderStateMixin {
           ),
         );
       },
-      query: priceQuery == "100"
+      query: priceQuery == "low"
           ? FirebaseFirestore.instance
-              .collection('users')
-              .where('photographer', isEqualTo: true)
-              .orderBy('photographerAvg', descending: true)
-              .where('photographerAvg', isLessThanOrEqualTo: "100")
-          :priceQuery == "100-500"
+          .collection('users')
+          .orderBy('photographerrounded',descending: false)
+          .where('photographer', isEqualTo: true)
+          :priceQuery == "high"
           ? FirebaseFirestore.instance
-              .collection('users')
-              .where('photographer', isEqualTo: true)
-              .orderBy('photographerAvg', descending: true)
-          .where('photographerAvg', isGreaterThanOrEqualTo: "100")
+          .collection('users')
+          .orderBy('photographerrounded',descending: true)
 
-          .where('photographerAvg', isLessThanOrEqualTo: "500")
-
-          :priceQuery == "500-1000"
-          ? FirebaseFirestore.instance
-              .collection('users')
-              .where('photographer', isEqualTo: true)
-              .orderBy('photographerAvg', descending: true)
-              .where('photographerAvg', isGreaterThanOrEqualTo: "500")
-      .where('photographerAvg', isLessThanOrEqualTo: "1000")
-        :priceQuery == "1000 - 5000"
-          ? FirebaseFirestore.instance
-              .collection('users')
-              .where('photographer', isEqualTo: true)
-              .orderBy('photographerAvg', descending: true)
-              .where('photographerAvg', isGreaterThanOrEqualTo: "1000")
-      .where('photographerAvg', isLessThanOrEqualTo: "5000")
-         :priceQuery == "above 5000"
-          ? FirebaseFirestore.instance
-              .collection('users')
-              .where('photographer', isEqualTo: true)
-              .orderBy('photographerAvg', descending: true)
-              .where('photographerAvg', isGreaterThanOrEqualTo: "5000")
-
+          .where('photographer', isEqualTo: true)
           : FirebaseFirestore.instance
-              .collection('users')
-              .where('photographer', isEqualTo: true)
-              .orderBy('photographerAvg', descending: true)
-              .where('photographerAvg', isGreaterThan: "0"),
+          .collection('users')
+          .where('photographer', isEqualTo: true)
+          .where('photographerrounded', isGreaterThan: 1),
+
     );
   }
   buildPostModel() {
@@ -427,47 +306,22 @@ class _DesignerState extends State<Designer> with TickerProviderStateMixin {
         );
 
       },
-      query: priceQuery == "100"
+      query: priceQuery == "low"
           ? FirebaseFirestore.instance
-              .collection('users')
-              .where('model', isEqualTo: true)
-              .orderBy('modelAvg', descending: true)
-              .where('modelAvg', isLessThanOrEqualTo: "100")
-          :priceQuery == "100-500"
+          .collection('users')
+          .orderBy('modelrounded',descending: false)
+          .where('model', isEqualTo: true)
+          :priceQuery == "high"
           ? FirebaseFirestore.instance
-              .collection('users')
-              .where('model', isEqualTo: true)
-              .orderBy('modelAvg', descending: true)
-          .where('modelAvg', isGreaterThanOrEqualTo: "100")
+          .collection('users')
+          .orderBy('modelrounded',descending: true)
 
-          .where('modelAvg', isLessThanOrEqualTo: "500")
-
-          :priceQuery == "500-1000"
-          ? FirebaseFirestore.instance
-              .collection('users')
-              .where('model', isEqualTo: true)
-              .orderBy('modelAvg', descending: true)
-              .where('modelAvg', isGreaterThanOrEqualTo: "500")
-      .where('modelAvg', isLessThanOrEqualTo: "1000")
-        :priceQuery == "1000 - 5000"
-          ? FirebaseFirestore.instance
-              .collection('users')
-              .where('model', isEqualTo: true)
-              .orderBy('modelAvg', descending: true)
-              .where('modelAvg', isGreaterThanOrEqualTo: "1000")
-      .where('modelAvg', isLessThanOrEqualTo: "5000")
-         :priceQuery == "above 5000"
-          ? FirebaseFirestore.instance
-              .collection('users')
-              .where('model', isEqualTo: true)
-              .orderBy('modelAvg', descending: true)
-              .where('modelAvg', isGreaterThanOrEqualTo: "5000")
-
+          .where('model', isEqualTo: true)
           : FirebaseFirestore.instance
-              .collection('users')
-              .where('model', isEqualTo: true)
-              .orderBy('modelAvg', descending: true)
-              .where('modelAvg', isGreaterThan: "0"),
+          .collection('users')
+          .where('model', isEqualTo: true)
+          .where('modelrounded', isGreaterThan: 1),
+
     );
   }
   buildPostMakeup() {
@@ -493,47 +347,22 @@ class _DesignerState extends State<Designer> with TickerProviderStateMixin {
         );
 
       },
-      query: priceQuery == "100"
+      query: priceQuery == "low"
           ? FirebaseFirestore.instance
-              .collection('users')
-              .where('makeup', isEqualTo: true)
-              .orderBy('makeupAvg', descending: true)
-              .where('makeupAvg', isLessThanOrEqualTo: "100")
-          :priceQuery == "100-500"
+          .collection('users')
+          .orderBy('makeuprounded',descending: false)
+          .where('makeup', isEqualTo: true)
+          :priceQuery == "high"
           ? FirebaseFirestore.instance
-              .collection('users')
-              .where('makeup', isEqualTo: true)
-              .orderBy('makeupAvg', descending: true)
-          .where('makeupAvg', isGreaterThanOrEqualTo: "100")
+          .collection('users')
+          .orderBy('makeuprounded',descending: true)
 
-          .where('makeupAvg', isLessThanOrEqualTo: "500")
-
-          :priceQuery == "500-1000"
-          ? FirebaseFirestore.instance
-              .collection('users')
-              .where('makeup', isEqualTo: true)
-              .orderBy('makeupAvg', descending: true)
-              .where('makeupAvg', isGreaterThanOrEqualTo: "500")
-      .where('makeupAvg', isLessThanOrEqualTo: "1000")
-        :priceQuery == "1000 - 5000"
-          ? FirebaseFirestore.instance
-              .collection('users')
-              .where('makeup', isEqualTo: true)
-              .orderBy('makeupAvg', descending: true)
-              .where('makeupAvg', isGreaterThanOrEqualTo: "1000")
-      .where('makeupAvg', isLessThanOrEqualTo: "5000")
-         :priceQuery == "above 5000"
-          ? FirebaseFirestore.instance
-              .collection('users')
-              .where('makeup', isEqualTo: true)
-              .orderBy('makeupAvg', descending: true)
-              .where('makeupAvg', isGreaterThanOrEqualTo: "5000")
-
+          .where('makeup', isEqualTo: true)
           : FirebaseFirestore.instance
-              .collection('users')
-              .where('makeup', isEqualTo: true)
-              .orderBy('makeupAvg', descending: true)
-              .where('makeupAvg', isGreaterThan: "0"),
+          .collection('users')
+          .where('makeup', isEqualTo: true)
+          .where('makeuprounded', isGreaterThan: 1),
+
     );
   }
   buildPostHair() {
@@ -560,47 +389,23 @@ class _DesignerState extends State<Designer> with TickerProviderStateMixin {
         );
 
       },
-      query: priceQuery == "100"
+      query: priceQuery == "low"
           ? FirebaseFirestore.instance
-              .collection('users')
-              .where('hair', isEqualTo: true)
-              .orderBy('hairAvg', descending: true)
-              .where('hairAvg', isLessThanOrEqualTo: "100")
-          :priceQuery == "100-500"
+          .collection('users')
+          .orderBy('hairrounded',descending: false)
+          .where('hair', isEqualTo: true)
+          :priceQuery == "high"
           ? FirebaseFirestore.instance
-              .collection('users')
-              .where('hair', isEqualTo: true)
-              .orderBy('hairAvg', descending: true)
-          .where('hairAvg', isGreaterThanOrEqualTo: "100")
+          .collection('users')
+          .orderBy('hairrounded',descending: true)
 
-          .where('hairAvg', isLessThanOrEqualTo: "500")
-
-          :priceQuery == "500-1000"
-          ? FirebaseFirestore.instance
-              .collection('users')
-              .where('hair', isEqualTo: true)
-              .orderBy('hairAvg', descending: true)
-              .where('hairAvg', isGreaterThanOrEqualTo: "500")
-      .where('hairAvg', isLessThanOrEqualTo: "1000")
-        :priceQuery == "1000 - 5000"
-          ? FirebaseFirestore.instance
-              .collection('users')
-              .where('hair', isEqualTo: true)
-              .orderBy('hairAvg', descending: true)
-              .where('hairAvg', isGreaterThanOrEqualTo: "1000")
-      .where('hairAvg', isLessThanOrEqualTo: "5000")
-         :priceQuery == "above 5000"
-          ? FirebaseFirestore.instance
-              .collection('users')
-              .where('hair', isEqualTo: true)
-              .orderBy('hairAvg', descending: true)
-              .where('hairAvg', isGreaterThanOrEqualTo: "5000")
-
+          .where('hair', isEqualTo: true)
           : FirebaseFirestore.instance
-              .collection('users')
-              .where('hair', isEqualTo: true)
-              .orderBy('hairAvg', descending: true)
-              .where('hairAvg', isGreaterThan: "0"),
+          .collection('users')
+          .where('hair', isEqualTo: true)
+          .where('hairrounded', isGreaterThan: 1),
+
+
     );
   }
   buildPostChoreographer() {
@@ -626,47 +431,22 @@ class _DesignerState extends State<Designer> with TickerProviderStateMixin {
         );
 
       },
-      query: priceQuery == "100"
+      query: priceQuery == "low"
           ? FirebaseFirestore.instance
-              .collection('users')
-              .where('choreographer', isEqualTo: true)
-              .orderBy('choreographerAvg', descending: true)
-              .where('choreographerAvg', isLessThanOrEqualTo: "100")
-          :priceQuery == "100-500"
+          .collection('users')
+          .orderBy('choreographerrounded',descending: false)
+          .where('choreographer', isEqualTo: true)
+          :priceQuery == "high"
           ? FirebaseFirestore.instance
-              .collection('users')
-              .where('choreographer', isEqualTo: true)
-              .orderBy('choreographerAvg', descending: true)
-          .where('choreographerAvg', isGreaterThanOrEqualTo: "100")
+          .collection('users')
+          .orderBy('choreographerrounded',descending: true)
 
-          .where('choreographerAvg', isLessThanOrEqualTo: "500")
-
-          :priceQuery == "500-1000"
-          ? FirebaseFirestore.instance
-              .collection('users')
-              .where('choreographer', isEqualTo: true)
-              .orderBy('choreographerAvg', descending: true)
-              .where('choreographerAvg', isGreaterThanOrEqualTo: "500")
-      .where('choreographerAvg', isLessThanOrEqualTo: "1000")
-        :priceQuery == "1000 - 5000"
-          ? FirebaseFirestore.instance
-              .collection('users')
-              .where('choreographer', isEqualTo: true)
-              .orderBy('choreographerAvg', descending: true)
-              .where('choreographerAvg', isGreaterThanOrEqualTo: "1000")
-      .where('choreographerAvg', isLessThanOrEqualTo: "5000")
-         :priceQuery == "above 5000"
-          ? FirebaseFirestore.instance
-              .collection('users')
-              .where('choreographer', isEqualTo: true)
-              .orderBy('choreographerAvg', descending: true)
-              .where('choreographerAvg', isGreaterThanOrEqualTo: "5000")
-
+          .where('choreographer', isEqualTo: true)
           : FirebaseFirestore.instance
-              .collection('users')
-              .where('choreographer', isEqualTo: true)
-              .orderBy('choreographerAvg', descending: true)
-              .where('choreographerAvg', isGreaterThan: "0"),
+          .collection('users')
+          .where('choreographer', isEqualTo: true)
+          .where('choreographerrounded', isGreaterThan: 1),
+
     );
   }
  buildPostArtisans() {
@@ -692,53 +472,28 @@ class _DesignerState extends State<Designer> with TickerProviderStateMixin {
         );
 
       },
-      query: priceQuery == "100"
+      query: priceQuery == "low"
           ? FirebaseFirestore.instance
-              .collection('users')
-              .where('artisans', isEqualTo: true)
-              .orderBy('artisansAvg', descending: true)
-              .where('artisansAvg', isLessThanOrEqualTo: "100")
-          :priceQuery == "100-500"
+          .collection('users')
+          .orderBy('artisanrounded',descending: false)
+          .where('artisan', isEqualTo: true)
+          :priceQuery == "high"
           ? FirebaseFirestore.instance
-              .collection('users')
-              .where('artisans', isEqualTo: true)
-              .orderBy('artisansAvg', descending: true)
-          .where('artisansAvg', isGreaterThanOrEqualTo: "100")
+          .collection('users')
+          .orderBy('artisanrounded',descending: true)
 
-          .where('artisansAvg', isLessThanOrEqualTo: "500")
-
-          :priceQuery == "500-1000"
-          ? FirebaseFirestore.instance
-              .collection('users')
-              .where('artisans', isEqualTo: true)
-              .orderBy('artisansAvg', descending: true)
-              .where('artisansAvg', isGreaterThanOrEqualTo: "500")
-      .where('artisansAvg', isLessThanOrEqualTo: "1000")
-        :priceQuery == "1000 - 5000"
-          ? FirebaseFirestore.instance
-              .collection('users')
-              .where('artisans', isEqualTo: true)
-              .orderBy('artisansAvg', descending: true)
-              .where('artisansAvg', isGreaterThanOrEqualTo: "1000")
-      .where('artisansAvg', isLessThanOrEqualTo: "5000")
-         :priceQuery == "above 5000"
-          ? FirebaseFirestore.instance
-              .collection('users')
-              .where('artisans', isEqualTo: true)
-              .orderBy('artisansAvg', descending: true)
-              .where('artisansAvg', isGreaterThanOrEqualTo: "5000")
-
+          .where('artisan', isEqualTo: true)
           : FirebaseFirestore.instance
-              .collection('users')
-              .where('artisans', isEqualTo: true)
-              .orderBy('artisansAvg', descending: true)
-              .where('artisansAvg', isGreaterThan: "0"),
+          .collection('users')
+          .where('artisan', isEqualTo: true)
+          .where('artisanrounded', isGreaterThan: 1),
+
     );
   }
   all() {
     return InkWell(
       onTap: () {
-        priceQuery = "0";
+        priceQuery = "1";
          desQuery = "des0";
          illQuery = "ill0";
          stylQuery = "styl0";
@@ -770,10 +525,10 @@ class _DesignerState extends State<Designer> with TickerProviderStateMixin {
       ),
     );
   }
-  below100() {
+  low() {
     return InkWell(
       onTap: () {
-        priceQuery = "100";
+        priceQuery = "low";
         desQuery = "des100";
         illQuery = "ill100";
         stylQuery = "styl100";
@@ -798,17 +553,17 @@ class _DesignerState extends State<Designer> with TickerProviderStateMixin {
 //    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
             FittedBox(
                 child: Text(
-              'below \u0024 100',
+              'Low to high',
             )),
           ],
         ),
       ),
     );
   }
- B100_500() {
+ high() {
     return InkWell(
       onTap: () {
-        priceQuery = "100-500";
+        priceQuery = "high";
         desQuery = "des100-500";
         illQuery = "ill100-500";
         stylQuery = "styl100-500";
@@ -832,75 +587,7 @@ class _DesignerState extends State<Designer> with TickerProviderStateMixin {
           children: [
             FittedBox(
                 child: Text(
-              '\u0024 100-500',
-            )),
-          ],
-        ),
-      ),
-    );
-  }
- B500_1000() {
-    return InkWell(
-      onTap: () {
-        priceQuery = "500-1000";
-        desQuery = "des500-1000";
-        illQuery = "ill500-1000";
-        stylQuery = "styl500-1000";
-        blogQuery = "blog500-1000";
-        phoQuery = "pho500-1000";
-        modQuery = "mod500-1000";
-        makeQuery = "make500-1000";
-        hairQuery = "hair500-1000";
-        choQuery = "cho500-1000";
-        artQuery = "art500-1000";
-
-        setState(() {});
-
-        Get.back();
-      },
-      child: Container(
-        height: 50,
-        width: MediaQuery.of(context).size.width,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            FittedBox(
-                child: Text(
-              '\u0024 500-1000',
-            )),
-          ],
-        ),
-      ),
-    );
-  }
- B1000_5000() {
-    return InkWell(
-      onTap: () {
-        priceQuery = "1000-5000";
-        desQuery = "des1000-5000";
-        illQuery = "ill1000-5000";
-        stylQuery = "syl1000-5000";
-        blogQuery = "blog1000-5000";
-        phoQuery = "pho1000-5000";
-        modQuery = "mod1000-5000";
-        makeQuery = "make1000-5000";
-        hairQuery = "hair1000-5000";
-        choQuery = "cho1000-5000";
-        artQuery = "art1000-5000";
-
-        setState(() {});
-
-        Get.back();
-      },
-      child: Container(
-        height: 50,
-        width: MediaQuery.of(context).size.width,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            FittedBox(
-                child: Text(
-              '\u0024 1000-5000',
+              'Low to high',
             )),
           ],
         ),
@@ -908,40 +595,6 @@ class _DesignerState extends State<Designer> with TickerProviderStateMixin {
     );
   }
 
- B5000() {
-    return InkWell(
-      onTap: () {
-        priceQuery = "above 5000";
-        desQuery = "desabove 5000";
-        illQuery = "illabove 5000";
-        stylQuery = "stylabove 5000";
-        blogQuery = "blogabove 5000";
-        phoQuery = "phoabove 5000";
-        modQuery = "modabove 5000";
-        makeQuery = "makeabove 5000";
-        hairQuery = "hairabove 5000";
-        choQuery = "choabove 5000";
-        artQuery = "artabove 5000";
-
-        setState(() {});
-
-        Get.back();
-      },
-      child: Container(
-        height: 50,
-        width: MediaQuery.of(context).size.width,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            FittedBox(
-                child: Text(
-              '\u0024 above 5000',
-            )),
-          ],
-        ),
-      ),
-    );
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -1025,18 +678,17 @@ class _DesignerState extends State<Designer> with TickerProviderStateMixin {
                           ),
                           child: Container(
                             height:400,
-                            child: Center(
-                              child: Column(
-                                children: [
-                                  all(),
-                                  below100(),
-                                  B100_500(),
-                                  B500_1000(),
-                                  B1000_5000(),
-                                  B5000(),
+                            child: ExpansionTile(
+                                title: Text(""),
+                                children: [Column(
+                                  children: [
+                                    all(),
+                                    low(),
+                                    high(),
 
-                                ],
-                              ),
+                                  ],
+                                ),
+                                ]
                             ),
                           ),
                         );
@@ -1166,56 +818,6 @@ class _DItemState extends State<DItem> {
         });
   }
 
-  getPot() {
-    return StreamBuilder(
-        stream: FirebaseFirestore.instance
-            .collection('posts')
-            .doc(user.id)
-            .collection('userPosts')
-            .snapshots(),
-
-        // ignore: missing_return
-        builder: (context, snapshot) {
-          if (!snapshot.hasData) {
-            return Text('text');
-          }
-          return Container(
-            height: 200,
-            child: GridView.builder(
-                primary: false,
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: (MediaQuery.of(context).orientation ==
-                            Orientation.portrait)
-                        ? 3
-                        : 3),
-                itemCount: snapshot.data.docs.length,
-                itemBuilder: (context, index) {
-                  DocumentSnapshot docSnapshot = snapshot.data.docs[index];
-                  List image = snapshot.data.docs[index]["mediaUrl"];
-                  return Padding(
-                      padding: EdgeInsets.all(5.0),
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(20.0),
-                        child: GestureDetector(
-                            onTap: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => PostScreen(
-                                    postId: docSnapshot["postId"],
-                                    userId: docSnapshot["ownerId"],
-                                  ),
-                                ),
-                              );
-                            },
-                            child: CachedNetworkImage(
-                              imageUrl: docSnapshot["mediaUrl"],
-                            )),
-                      ));
-                }),
-          );
-        });
-  }
 
   reviews() {
     StreamBuilder(
