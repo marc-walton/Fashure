@@ -18009,3 +18009,25 @@ Allin(){
 
   );
 }
+void initState() {
+  super.initState();
+
+  auth();
+
+
+
+  // Detects when user signed in
+  // googleSignIn.onCurrentUserChanged.listen((account) {
+  //   handleSignIn(account);
+  // }, onError: (err) {
+  //   print('Error signing in: $err');
+  // });
+  // // Reauthenticate user when app is opened
+  // googleSignIn.signInSilently(suppressErrors: false).then((account) {
+  //   handleSignIn(account);
+  // }).catchError((err) {
+  //   print('Error signing in: $err');
+  // });
+  //
+  // WidgetsBinding.instance.addObserver(this);
+}

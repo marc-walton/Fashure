@@ -8,6 +8,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:photo_view/photo_view.dart';
 import 'package:get/get.dart';
+import 'package:share/share.dart';
 import 'package:smooth_star_rating/smooth_star_rating.dart';
 import 'package:fashow/HomePage.dart';
 import 'package:fashow/ActivityFeed.dart';
@@ -26,7 +27,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter_currencies_tracker/flutter_currencies_tracker.dart';
 import 'package:flutter_animated_button/flutter_animated_button.dart';
-
+import 'package:fashow/methods/dynamic_links_service.dart';
 List <Widget>listOfImages = <Widget>[];
 
 pics({String userid,String prodid}){
@@ -880,6 +881,7 @@ Ring20:this.Ring20,
 }
 
 class _ProdState extends State<Prod> {
+  final DynamicLinkService _dynamicLinkService = DynamicLinkService();
   String usersize = "";
   String usercolor = "";
 String currencysymbol;
@@ -8986,7 +8988,26 @@ posteurope(){
 
                   ),
                   Text('Rating' ,style: TextStyle(color: kText,fontWeight: FontWeight.bold,),),
+                  Container(
+                    height: 50,
+                    width: 100,
+                    child: FutureBuilder<Uri>(
+                        future: _dynamicLinkService.createDynamicLink( postId:prodId,ownerId: ownerId,),
+                        builder: (context, snapshot) {
+                          if(snapshot.hasData) {
+                            Uri uri = snapshot.data;
+                            return FlatButton(
+                              color: Colors.amber,
+                              onPressed: () => Share.share(uri.toString()),
+                              child: Text('Share'),
+                            );
+                          } else {
+                            return Container();
+                          }
 
+                        }
+                    ),
+                  ),
                 ],
               ),
               Row(

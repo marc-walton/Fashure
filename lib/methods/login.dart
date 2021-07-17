@@ -23,10 +23,10 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
    GlobalKey<FormState> _loginFormKey = GlobalKey<FormState>(debugLabel: '_LoginFormState');
   GlobalKey<FormState> _forgotFormKey = GlobalKey<FormState>(debugLabel: '_forgotFormState');
-
+bool _passwordVisible = false;
   TextEditingController emailInputController;
   TextEditingController pwdInputController;
-
+String accountErrorMessage;
   @override
   initState() {
     emailInputController = new TextEditingController();
@@ -140,13 +140,29 @@ class _LoginPageState extends State<LoginPage> {
                         validator: emailValidator,
                       ),
                       TextFormField(
+                        obscureText: !_passwordVisible,//This will obscure text dynamically
+
                         style: TextStyle(color:kText),
                         decoration: InputDecoration(
                             labelStyle:  TextStyle(color:kText),
                             hintStyle:  TextStyle(color:kText),
-                            labelText: 'Password', ),
+                            labelText: 'Password',
+                          suffixIcon: IconButton(
+                            icon: Icon(
+                              // Based on passwordVisible state choose the icon
+                              _passwordVisible
+                                  ? Icons.visibility
+                                  : Icons.visibility_off,
+                              color: Theme.of(context).primaryColorDark,
+                            ),
+                            onPressed: () {
+                              // Update the state i.e. toogle the state of passwordVisible variable
+                              setState(() {
+                                _passwordVisible = !_passwordVisible;
+                              });
+                            },
+                          ),),
                         controller: pwdInputController,
-                        obscureText: true,
                         validator: pwdValidator,
                       ),
                       FlatButton(
@@ -185,30 +201,24 @@ class _LoginPageState extends State<LoginPage> {
                                           auth: true,
                                         )),
                                         (_) => false ),
-                                // Navigator.pushReplacement(
-                                //     context,
-                                //     MaterialPageRoute(
-                                //         builder: (context) => Homepage(
-                                //           userid: User.uid,
-                                //           authis: isAuth,
-                                //         )))
-                                // Firestore.instance
-                                //     .collection("users")
-                                //     .document(currentUser.uid)
-                                //     .get()
-                                //     .then((DocumentSnapshot result) =>
-                                //     Navigator.pushReplacement(
-                                //         context,
-                                //         MaterialPageRoute(
-                                //             builder: (context) => HomePage(
-                                //               title: result["fname"] + "'s Tasks",
-                                //               uid: currentUser.uid,
-                                //             ))))
-                                //     .catchError((err) => print(err))
                               }}
 
                             )
-                                .catchError((err) => print(err)))
+                                .catchError((err) {switch (err.code) {
+                              case "auth/invalid-email":
+                              case "auth/wrong-password":
+                              case "auth/user-not-found":
+                                {
+                                  this.accountErrorMessage = "Wrong email address or password.";
+                                  break;
+                                }
+                              case "auth/user-disabled":
+                              case "user-disabled":
+                                {
+                                  this.accountErrorMessage = "This account is disabled";
+                                  break;
+                                }
+                            }}))
                                 .catchError((err) => print(err));
                           }
                         },

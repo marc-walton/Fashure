@@ -1,9 +1,13 @@
+import 'dart:async';
 import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:fashow/methods/register.dart';
 import 'package:fashow/methods/login.dart';
+import 'package:fashow/methods/dynamic_links_service.dart';
+
+
 import 'package:splashscreen/splashscreen.dart';
 import 'package:dropdown_formfield/dropdown_formfield.dart';
 import 'package:flutter/material.dart';
@@ -82,7 +86,9 @@ class Homepage extends StatefulWidget {
 
 }
 
-class _HomepageState extends State<Homepage> with WidgetsBindingObserver  {
+class _HomepageState extends State<Homepage> with WidgetsBindingObserver {
+  final DynamicLinkService _dynamicLinkService = DynamicLinkService();
+  Timer _timerLink;
   final _scaffoldKey = GlobalKey<ScaffoldState>();
 
   int data;
@@ -105,7 +111,6 @@ class _HomepageState extends State<Homepage> with WidgetsBindingObserver  {
   @override
   void initState() {
     super.initState();
-    print("khb,vhkjhb,");
 
     pageController = PageController(
       // initialPage: 2
@@ -113,6 +118,7 @@ class _HomepageState extends State<Homepage> with WidgetsBindingObserver  {
     // auth();
     getFollowers();
     loginuser();
+    WidgetsBinding.instance.addObserver(this);
 
     // Detects when user signed in
     // googleSignIn.onCurrentUserChanged.listen((account) {
@@ -129,7 +135,17 @@ class _HomepageState extends State<Homepage> with WidgetsBindingObserver  {
     //
     // WidgetsBinding.instance.addObserver(this);
   }
-
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    if (state == AppLifecycleState.resumed) {
+      _timerLink = new Timer(
+        const Duration(milliseconds: 1000),
+            () {
+          _dynamicLinkService.retrieveDynamicLink(context);
+        },
+      );
+    }
+  }
   @override
 // auth() async {
 //     FirebaseAuth.instance
@@ -165,6 +181,7 @@ class _HomepageState extends State<Homepage> with WidgetsBindingObserver  {
 //   }
 //     });
 //   }
+
   logO() async {
     // await googleSignIn.signOut();
     await FirebaseAuth.instance.signOut();
@@ -353,7 +370,9 @@ class _HomepageState extends State<Homepage> with WidgetsBindingObserver  {
   void dispose() {
     pageController.dispose();
     WidgetsBinding.instance.removeObserver(this);
-    super.dispose();
+    if (_timerLink != null) {
+      _timerLink.cancel();
+    }    super.dispose();
   }
 
   login() {

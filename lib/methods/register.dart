@@ -31,6 +31,7 @@ String  country = "";
 String currency = "";
 String currencyISO = "";
 String currencysym = "";
+  bool _passwordVisible = false;
 
   final DateTime timestamp = DateTime.now();
   bool save = false;
@@ -119,7 +120,22 @@ String currencysym = "";
                         style: TextStyle(color:kText),
                         decoration: InputDecoration(
                             labelStyle:  TextStyle(color:kText),
-                            hintStyle:  TextStyle(color:kText),                            labelText: 'Password', hintText: "********"),
+                            hintStyle:  TextStyle(color:kText),
+                          labelText: 'Password', hintText: "", suffixIcon: IconButton(
+                          icon: Icon(
+                            // Based on passwordVisible state choose the icon
+                            _passwordVisible
+                                ? Icons.visibility
+                                : Icons.visibility_off,
+                            color: Theme.of(context).primaryColorDark,
+                          ),
+                          onPressed: () {
+                            // Update the state i.e. toogle the state of passwordVisible variable
+                            setState(() {
+                              _passwordVisible = !_passwordVisible;
+                            });
+                          },
+                        ),),
                         controller: pwdInputController,
                         obscureText: true,
                         validator: pwdValidator,
@@ -129,7 +145,24 @@ String currencysym = "";
                         decoration: InputDecoration(
                             labelStyle:  TextStyle(color:kText),
                             hintStyle:  TextStyle(color:kText),
-                            labelText: 'Confirm Password', hintText: "Confirm Password"),
+                            labelText: 'Confirm Password', hintText: "Confirm Password",
+                          suffixIcon: IconButton(
+                        icon: Icon(
+                        // Based on passwordVisible state choose the icon
+                        _passwordVisible
+                        ? Icons.visibility
+                          : Icons.visibility_off,
+                          color: Theme.of(context).primaryColorDark,
+                        ),
+                        onPressed: () {
+                          // Update the state i.e. toogle the state of passwordVisible variable
+                          setState(() {
+                            _passwordVisible = !_passwordVisible;
+                          });
+                        },
+                      ),
+
+                        ),
                         controller: confirmPwdInputController,
                         obscureText: true,
                         validator: pwdValidator,
@@ -283,7 +316,25 @@ String currencysym = "";
                                       )),
                                       (_) => false );
 
-                              });
+                              })
+                                  .catchError((err) => showDialog(
+                                  context: context,
+                                  builder: (BuildContext context) {
+                                    return AlertDialog(
+                                      content: Text("Account already exists",style: TextStyle(color:kText),),
+                                      actions: <Widget>[
+                                        FlatButton(
+                                          child: Text("Close",style: TextStyle(color:kText),),
+                                          onPressed: () {
+                                            Navigator.of(context).pop();
+                                            Navigator.pop(context);
+
+                                          },
+                                        )
+                                      ],
+                                    );
+                                  }));
+
                               //     .then((result) => {
                               //   Navigator.pushAndRemoveUntil(
                               //       context,
@@ -303,7 +354,6 @@ String currencysym = "";
                               //   confirmPwdInputController.clear()
                               // })
                               //     .catchError((err) => print(err)))
-                              //     .catchError((err) => print(err));
                             } else {
                               showDialog(
                                   context: context,
