@@ -47,6 +47,8 @@ final Reference storageRef = FirebaseStorage.instance.ref();
 final usersRef = FirebaseFirestore.instance.collection('users');
 final shopRef = FirebaseFirestore.instance.collectionGroup('userProducts');
 final postsRef = FirebaseFirestore.instance.collection('posts');
+final bidsRef = FirebaseFirestore.instance.collection('bids');
+
 final videoRef = FirebaseFirestore.instance.collection('videos');
 
 final commentsRef = FirebaseFirestore.instance.collection('comments');
@@ -103,7 +105,6 @@ class _HomepageState extends State<Homepage> with WidgetsBindingObserver {
 
   PageController pageController;
   int pageIndex = 0;
-  int followers ;
   SharedPreferences myPrefs;
   String idd;
   String username;
@@ -111,12 +112,7 @@ class _HomepageState extends State<Homepage> with WidgetsBindingObserver {
   @override
   void initState() {
     super.initState();
-
-    pageController = PageController(
-      // initialPage: 2
-    );
-    // auth();
-    getFollowers();
+    pageController = PageController();
     loginuser();
     WidgetsBinding.instance.addObserver(this);
 
@@ -137,7 +133,22 @@ class _HomepageState extends State<Homepage> with WidgetsBindingObserver {
   }
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
+    print("jfvjk f,jnhgbkjngjbjnjbnjbng,kglmk,nk$state");
     if (state == AppLifecycleState.resumed) {
+      _timerLink = new Timer(
+        const Duration(milliseconds: 1000),
+            () {
+          _dynamicLinkService.retrieveDynamicLink(context);
+        },
+      );
+    }  else if (state == AppLifecycleState.paused) {
+      _timerLink = new Timer(
+        const Duration(milliseconds: 1000),
+            () {
+          _dynamicLinkService.retrieveDynamicLink(context);
+        },
+      );
+    }  else if (state == AppLifecycleState.detached) {
       _timerLink = new Timer(
         const Duration(milliseconds: 1000),
             () {
@@ -362,7 +373,6 @@ class _HomepageState extends State<Homepage> with WidgetsBindingObserver {
     myPrefs = await SharedPreferences.getInstance();
     idd = myPrefs.getString('id') ?? '';
     print(idd);
-    badgescount();
 
   }
 
@@ -396,158 +406,6 @@ class _HomepageState extends State<Homepage> with WidgetsBindingObserver {
       duration: Duration(milliseconds: 001),
       curve: Curves.easeInOut,
     );
-  }
-  getFollowers() async {
-    QuerySnapshot snapshot = await followersRef
-        .doc(currentUser.id)
-        .collection('userFollowers')
-        .get();
-    setState(() {
-      followers = snapshot.docs.length;
-    });
-
-
-  }
-  badgescount()  {
-    return
-      StreamBuilder(
-        stream:  activityFeedRef
-            .doc(currentUser.id)
-            .collection('feedItems')
-            .where('read',isEqualTo: 'false').snapshots(),
-        builder: (context,snapshot){
-          int data =  snapshot.data.docs.length;
-          return
-            Badge(
-
-              shape: BadgeShape.circle,
-              padding: EdgeInsets.all(2),
-              badgeContent: Text('$data',style: TextStyle(color: Colors.white),),
-            );
-
-        },
-      );
-
-  }
-  badgescountmessage()  {
-    return
-      StreamBuilder(
-        stream: _messageCollection
-            .doc(currentUser.id)
-
-            .snapshots(),
-        builder: (context,snapshot){
-          if(!snapshot.hasData){return Container();}else{ int data;
-          String messages = snapshot.data['read'];
-          if(messages == 'false');
-          {
-            setState(() {
-              data  = messages.length;
-            });
-            return
-
-              Badge(
-                shape: BadgeShape.circle,
-                padding: EdgeInsets.all(7),
-                badgeContent: Text('$data',style: TextStyle(color: Colors.white),),
-              );
-          }
-
-          }
-
-
-        },
-      );
-
-  }
-  dashbadge(){
-
-    if(serdata == null||data == null) {
-      return Container();
-    }else{
-      var sum = serdata + data;
-      return
-        Badge(
-          shape: BadgeShape.circle,
-          padding: EdgeInsets.all(7),
-          badgeContent: Text('$sum', style: TextStyle(color: Colors.white),),
-        );
-    }
-  }
-  orderbadge(){
-    return
-      StreamBuilder(
-        stream:  FirebaseFirestore.instance.collection('ordersSeller')
-            .doc(currentUser.id)
-            .collection('sellerOrder')
-            .where('read',isEqualTo: 'false').snapshots(),
-        builder: (context,snapshot){
-          setState(() {
-            data =  snapshot.data.docs.length;
-          });
-
-          return
-            StreamBuilder(
-              stream:   FirebaseFirestore.instance.collection('Payments')
-                  .doc(currentUser.id,)
-                  .collection('SellerPayments')
-                  .where('fulfilled',isEqualTo: 'true')
-                  .where('read',isEqualTo: 'false').snapshots(),
-              builder: (context,snapshot){
-
-                setState(() {
-                  data +=  snapshot.data.docs.length;
-                });
-                return
-                  Badge(
-                    shape: BadgeShape.circle,
-                    padding: EdgeInsets.all(7),
-                    badgeContent: Text('$data ',style: TextStyle(color: Colors.white),),
-                  );
-
-              },
-            );
-
-
-        },
-      );
-  }
-  servicebadge(){
-    return
-      StreamBuilder(
-        stream:     FirebaseFirestore.instance.collection('serviceSeller')
-            .doc(currentUser.id)
-            .collection('sellerService')
-            .where('read',isEqualTo: 'false').snapshots(),
-        builder: (context,snapshot){
-          setState(() {
-            serdata =  snapshot.data.docs.length;
-          });
-
-          return
-            StreamBuilder(
-              stream:   FirebaseFirestore.instance.collection('Payments')
-                  .doc(currentUser.id)
-                  .collection('ServicePayments')
-                  .where('fulfilled',isEqualTo: 'true')
-                  .where('read',isEqualTo: 'false').snapshots(),
-              builder: (context,snapshot){
-                setState(() {
-                  serdata +=  snapshot.data.docs.length;
-                });
-                return
-                  Badge(
-                    shape: BadgeShape.circle,
-                    padding: EdgeInsets.all(7),
-                    badgeContent: Text('$serdata ',style: TextStyle(color: Colors.white),),
-                  );
-
-              },
-            );
-
-
-        },
-      );
   }
 
   Scaffold buildAuthScreen() {

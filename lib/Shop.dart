@@ -6,6 +6,7 @@ import 'package:fashow/Categories/Kids/teen/boy/boy.dart';
 import 'package:fashow/Categories/Kids/teen/girl/girl.dart';
 import 'package:fashow/Categories/Men/Men.dart';
 import 'package:fashow/Categories/Women/Women.dart';
+import 'package:fashow/Live/upload_bid.dart';
 import 'package:fashow/fav.dart';
 import 'package:fashow/methods/seller_details.dart';
 import 'package:flutter/cupertino.dart';
@@ -220,7 +221,7 @@ Women(),
           backgroundColor: Colors.black38,
           onPressed: (){
             WidgetsBinding.instance.addPostFrameCallback((_){
-            Navigator.push(context, MaterialPageRoute(builder: (context) =>Uploadecom(currentUser: currentUser, ))) .then((value) {
+            Navigator.push(context, MaterialPageRoute(builder: (context) =>Upload_bid(currentUser:currentUser))) .then((value) {
                 setState(() {});
               });
             },) ;    } ,
