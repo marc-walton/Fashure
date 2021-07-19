@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 
 class DynamicLinkService {
   Future<void> retrieveDynamicLink(BuildContext context) async {
+    print("jfvjk f,jnhgbkjngjbjnjbnjbng,kglmk,nk");
+
     try {
       final PendingDynamicLinkData data =
           await FirebaseDynamicLinks.instance.getInitialLink();
@@ -41,7 +43,7 @@ class DynamicLinkService {
                 )));
       });
     } catch (e) {
-      print("skdj lkjagaskdgfha;sgflska${e.toString()}");
+      print("${e.toString()}");
     }
   }
 

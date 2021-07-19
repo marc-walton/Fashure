@@ -133,22 +133,7 @@ class _HomepageState extends State<Homepage> with WidgetsBindingObserver {
   }
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
-    print("jfvjk f,jnhgbkjngjbjnjbnjbng,kglmk,nk$state");
     if (state == AppLifecycleState.resumed) {
-      _timerLink = new Timer(
-        const Duration(milliseconds: 1000),
-            () {
-          _dynamicLinkService.retrieveDynamicLink(context);
-        },
-      );
-    }  else if (state == AppLifecycleState.paused) {
-      _timerLink = new Timer(
-        const Duration(milliseconds: 1000),
-            () {
-          _dynamicLinkService.retrieveDynamicLink(context);
-        },
-      );
-    }  else if (state == AppLifecycleState.detached) {
       _timerLink = new Timer(
         const Duration(milliseconds: 1000),
             () {
@@ -158,40 +143,7 @@ class _HomepageState extends State<Homepage> with WidgetsBindingObserver {
     }
   }
   @override
-// auth() async {
-//     FirebaseAuth.instance
-//         .currentUser()
-//         .then((User) async => {
-//     if (User == null)
-//     {
-//         setState(() {
-//       isAuth = false;
-//     }),
-//       // Navigator.pushReplacementNamed(context, "/login")
-//     }
-//     else
-//     {
-//       loginuser(userid: User.uid),
-//     setState(() {
-//       isAuth = true;
-//       h = false;
-//     }),
-//     // FirebaseFirestore.instance
-//     //     .collection("users")
-//     //     .doc(currentUser.uid)
-//     //     .get()
-//     //     .then((DocumentSnapshot result) =>
-//     //     Navigator.pushReplacement(
-//     //         context,
-//     //         MaterialPageRoute(
-//     //             builder: (context) => HomePage(
-//     //               title: result["fname"] + "'s Tasks",
-//     //               uid: currentUser.uid,
-//     //             ))))
-//     //     .catchError((err) => print(err))
-//   }
-//     });
-//   }
+
 
   logO() async {
     // await googleSignIn.signOut();
@@ -253,17 +205,6 @@ class _HomepageState extends State<Homepage> with WidgetsBindingObserver {
       );
     }
   }
-  void getUser()async {
-    try{
-      final user = await _auth.currentUser;
-      if(user!=null){
-        loggedInUser = user;
-        print(loggedInUser.displayName);
-      }
-    }catch(e) {
-      print(e);
-    }
-  }
 
   handleSignIn(GoogleSignInAccount account) async {
     if (account != null) {
@@ -285,7 +226,7 @@ class _HomepageState extends State<Homepage> with WidgetsBindingObserver {
     if (Platform.isIOS) getiOSPermission();
 
     _firebaseMessaging.getToken().then((token) {
-     print("Firebase Messaging Token: $token\n");
+      print("Firebase Messaging Token: $token\n");
       usersRef
           .doc(user.id)
           .update({"androidNotificationToken": token});
@@ -493,110 +434,8 @@ class _HomepageState extends State<Homepage> with WidgetsBindingObserver {
               text: splashContent[index]["text"],
             );
           },
-          // onSkipButton: () {
-          //   Navigator.push(
-          //     parentContext,
-          //     MaterialPageRoute(
-          //         builder: (context) => LoginPage(
-          //
-          //         )),
-          //   );
-          // }),
-
-          //       PageView(
-          //         children:[
-          //           Column (
-          //             mainAxisAlignment: MainAxisAlignment.center,
-          //             children: [
-          //               SvgPicture.network(
-          //                 'http://www.w3.org/2000/svg',
-          //                 height:orientation == Orientation.portrait ? 300.0 : 150.0,
-          //               ),
-          //               const Text(
-          //                 "DESIGN",
-          //                 style: TextStyle(fontFamily:'MajorMonoDisplay',fontSize: 24 ),
-          //               )
-          //
-          //             ],
-          //           ),
-          //
-          //
-          //           Column(
-          //             mainAxisAlignment: MainAxisAlignment.center,
-          //             children: [
-          //               SvgPicture.asset(
-          //                 'assets/img/undraw_shopping_eii3.svg',
-          //                 height:orientation == Orientation.portrait ? 300.0 : 150.0,
-          //               ),
-          //               const Text(
-          //                 "SHOP",
-          //                 style: TextStyle(fontFamily:'MajorMonoDisplay',fontSize: 24 ),
-          //               )
-          // ],
-          //           ),
-          //
-          //           Column(mainAxisAlignment: MainAxisAlignment.center,
-          //             children: [
-          //               SvgPicture.asset(
-          //                 'assets/img/undraw_adventure_map_hnin.svg',
-          //                 height:orientation == Orientation.portrait ? 300.0 : 150.0,
-          //               ),
-          //               const Text(
-          //                 "EXPLORE",
-          //                 style: TextStyle(fontFamily:'MajorMonoDisplay',fontSize: 24 ),
-          //               ),
-          //            ]
-          //           ),
-          //           Column(mainAxisAlignment: MainAxisAlignment.center,
-          //               children: [
-          //                 Image.asset(
-          //                   'assets/img/DrawKit-Fashion-Illustration-01.png',
-          //                   height:orientation == Orientation.portrait ? 300.0 : 150.0,
-          //                 ),
-          //                 const Text(
-          //                    "BLOG",
-          //                   style: TextStyle(fontFamily:'MajorMonoDisplay',fontSize: 24 ),
-          //                 ),
-          //               ]
-          //           ),
-          //         ]
-          //
-          //       )
         ),),
 
-//           Column(
-//           mainAxisAlignment: MainAxisAlignment.center,
-//           crossAxisAlignment: CrossAxisAlignment.center,
-//           children: <Widget>[
-//             Container(
-//               child: RotateAnimatedTextKit(text: ["Design","Showcase","influence","Buy","Sell","Blog","Freelance","Live Shows","Community","FASHURE"],
-//               style:  TextStyle(
-//                 fontFamily: "MajorMonoDisplay",
-//                 fontSize:  MediaQuery.of(context).size.width*0.1,
-//                 color: Colors.white,),
-//                 textAlign: TextAlign.center,
-//                 // totalRepeatCount:
-// repeatForever: true,
-//               ),
-//             ),
-//             GoogleSignInButton(
-//               onPressed: login,
-//               darkMode: true, // default: false
-//             ),
-//
-//             Padding(
-//               padding: EdgeInsets.all(16.0),
-//               child: FlatButton.icon(
-//                 onPressed: logout,
-//                 icon: Icon(Icons.cancel, color: Colors.red),
-//                 label: Text(
-//                   "Logout",
-//                   style: TextStyle(color: Colors.red, fontSize: 20.0),
-//                 ),
-//               ),
-//             ),
-//           ],
-//         ),
 
       bottomNavigationBar: Container(
         color: kPrimaryColor,
@@ -652,17 +491,6 @@ class _HomepageState extends State<Homepage> with WidgetsBindingObserver {
       ),
     );
 
-
-  }
-  reauth(){
-    return SplashScreen(
-      seconds: 10,
-      backgroundColor: Colors.black,
-      image: Image.asset('assets/img/loading-38.gif'),
-      loaderColor: Colors.white,
-      photoSize: 150.0,
-      navigateAfterSeconds: buildUnAuthScreen(context),
-    );
 
   }
   @override
