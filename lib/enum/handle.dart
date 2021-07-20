@@ -18172,4 +18172,16 @@ servicebadge(){
       },
     );
 }
-
+for (var dataItems in a) {
+print(a);
+for (int i = 0; i < a.length; i++) {
+image = dataItems["images"][i];
+des = dataItems[i]["description"];
+inr = dataItems[i]['inr'];
+print(image.toString() +
+'\n' +
+des.toString() +
+'\n' +
+inr.toString());
+}
+}

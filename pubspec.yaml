@@ -116,8 +116,8 @@ dependencies:
   neon: ^0.0.1
   sticky_headers: ^0.2.0
   firebase_dynamic_links: ^0.7.0+1
-  share: ^2.0.4
-
+  share: ^2.0.
+  custom_timer: ^0.0.6
 
 
 

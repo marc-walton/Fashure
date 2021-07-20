@@ -168,55 +168,7 @@ String currencysym = "";
                         validator: pwdValidator,
                       ),
                       Text('Select your region',style: TextStyle(color:kText)),
-                      Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: <Widget>[
-                          Container(
-                            padding: EdgeInsets.all(16),
-                            child: DropDownFormField(
 
-                              titleText: '',
-                              hintText: 'Select your region',
-                              value: dropdownValue,
-                              onSaved: (value) {
-                                setState(() {
-                                  dropdownValue = value;
-                                });
-                              },
-                              onChanged: (value) {
-                                setState(() {
-                                  dropdownValue = value;
-                                });
-                              },
-                              dataSource: [
-                                {
-                                  "display": "🇮🇳,India",
-                                  "value": "India",
-                                },
-                                {
-                                  "display": "🇺🇸,USA",
-                                  "value": "USA",
-                                },
-                                {
-                                  "display": "🇪🇺,Europe",
-                                  "value": "Europe",
-                                },
-                                {
-                                  "display": "󠁧󠁢󠁥🇬🇧,United Kingdom",
-                                  "value": "UK",
-                                },
-                                {
-                                  "display": "󠁧󠁢󠁥Rest of the World",
-                                  "value": "Rest",
-                                },
-                              ],
-                              textField: 'display',
-                              valueField: 'value',
-                            ),
-                          ),
-
-                        ],
-                      ),
   Column(
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: <Widget>[
