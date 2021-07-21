@@ -74,7 +74,7 @@ final blogRef = FirebaseFirestore.instance.collection("blogs");
 final collRef = FirebaseFirestore.instance.collection("collections");
 final tagsRef = FirebaseFirestore.instance.collection("tags");
 
-final DateTime timestamp = DateTime.now();
+final DateTime timestamp = DateTime.now().toUtc();
 Users currentUser;
 
 class Homepage extends StatefulWidget {

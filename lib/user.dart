@@ -36,6 +36,7 @@ class Users{
   int state;
   bool seller;
 bool ban;
+bool Bidding;
 
   Users({
     this.id,
@@ -69,11 +70,14 @@ this.stylistAvg,
     this.sales,
     this.visits,
     this.ban,
+this.Bidding,
 
   });
   factory Users.fromDocument(DocumentSnapshot doc){
     return Users(
         id: doc.data()['id'],
+      Bidding: doc.data()['Bidding'],
+
         username :doc.data()['username'],
         email :doc.data()['email'],
         photoUrl: doc.data()['photoUrl'],
