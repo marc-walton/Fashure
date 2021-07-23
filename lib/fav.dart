@@ -168,7 +168,6 @@ class CartItem extends StatelessWidget {
   }
   @override
   Widget build(BuildContext context) {
-//    configureshopmediaPreview(context);
     if(currentUser.country=='India') {
       return
         StreamBuilder(

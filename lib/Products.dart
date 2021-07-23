@@ -8301,43 +8301,6 @@ custom102==0?Container():   Padding(
 
   }
 
-  handleLikePost() {
-    bool _isFav = true;
-    if(_isFav) {
-      favRef.doc(currentUser.id).collection("userFav")
-          .doc(prodId)
-          .set({
-        "username": username,
-        "prodId": prodId,
-        "timestamp": timestamp,
-        "avatarUrl": photoUrl,
-//      "userId":userId,
-        "ownerId": ownerId,
-        "eur":eur,
-        "usd":usd,
-        "inr":inr,
-        "cny":cny,
-        "gbp":gbp,
-        "productname": productname,
-        "shopmediaUrl": shopmediaUrl.first,
-      });
-      setState(() {
-
-        isfav = false;
-//        likes[currentUserId] = false;
-      });
-    } else if (!_isFav) {
-      var docReference = favRef.doc(currentUser.id).collection("userFav").doc(prodId);
-      docReference.delete();
-
-    }
-      else{
-      var docReference = favRef.doc(currentUser.id).collection("userFav").doc(prodId);
-      docReference.delete();
-
-    }
-    handleLikePost();
-  }
   reviews() {
     return
     showModalBottomSheet(
@@ -8436,7 +8399,7 @@ isLive: true,
               GestureDetector(
                 onTap:(){},
                 onDoubleTap: () {
-                  addToFav();
+                  handleLikePost();
                   final snackBar = SnackBar(
                     content: Text('Added to Favorites!'),
                     action: SnackBarAction(
@@ -8549,7 +8512,7 @@ isLive: true,
                     mini: true,
                     shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(16.0))),
                     onPressed: (){
-      addToFav();
+      handleLikePost();
       final snackBar = SnackBar(
       content: Text('Added to Favorites!'),
       action: SnackBarAction(
@@ -8827,7 +8790,7 @@ posteurope(){
               GestureDetector(
                 onTap:(){},
                 onDoubleTap: () {
-                  addToFav();
+                  handleLikePost();
                   final snackBar = SnackBar(
                     content: Text('Added to Favorites!'),
                     action: SnackBarAction(
@@ -8940,7 +8903,7 @@ posteurope(){
                     mini: true,
                     shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(16.0))),
                     onPressed: (){
-                      addToFav();
+                      handleLikePost();
                       final snackBar = SnackBar(
                         content: Text('Added to Favorites!'),
                         action: SnackBarAction(
@@ -9322,7 +9285,7 @@ postuk(){
               GestureDetector(
                 onTap:(){},
                 onDoubleTap: () {
-                  addToFav();
+                  handleLikePost();
                   final snackBar = SnackBar(
                     content: Text('Added to Favorites!'),
                     action: SnackBarAction(
@@ -9435,7 +9398,7 @@ postuk(){
                     mini: true,
                     shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(16.0))),
                     onPressed: (){
-                      addToFav();
+                      handleLikePost();
                       final snackBar = SnackBar(
                         content: Text('Added to Favorites!'),
                         action: SnackBarAction(
@@ -9712,7 +9675,7 @@ postusa() {
               GestureDetector(
                 onTap:(){},
                 onDoubleTap: () {
-                  addToFav();
+                  handleLikePost();
                   final snackBar = SnackBar(
                     content: Text('Added to Favorites!'),
                     action: SnackBarAction(
@@ -9825,7 +9788,7 @@ postusa() {
                     mini: true,
                     shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(16.0))),
                     onPressed: (){
-                      addToFav();
+                      handleLikePost();
                       final snackBar = SnackBar(
                         content: Text('Added to Favorites!'),
                         action: SnackBarAction(
@@ -10184,26 +10147,16 @@ postusa() {
 
   }
 
-  addToFav() {
-    bool _isLiked = likes[currentUser.id] == true;
+  handleLikePost() {
 
-    if (_isLiked) {
-
-      var docReference = favRef.doc(currentUser.id).collection("userFav").doc(prodId);
-      docReference.delete();
-
+    bool _isFav = likes[currentUserId] == true;
+    if(!_isFav) {
       productsRef
           .doc(ownerId)
           .collection('userProducts')
           .doc(prodId)
-          .update({'likes.${currentUser.id}': false});
-      removeLikeFromActivityFeed();
-       setState(() {
-         likeCount -= 1;
-         isfav = false;
-         likes[currentUser.id] = false;
-       });
-    } else if (!_isLiked) {
+          .update({'likes.$currentUserId': true});
+      addLikeToActivityFeed();
       favRef.doc(currentUser.id).collection("userFav")
           .doc(prodId)
           .set({
@@ -10221,24 +10174,28 @@ postusa() {
         "productname": productname,
         "shopmediaUrl": shopmediaUrl.first,
       });
+      setState(() {
+
+        isfav = true;
+        likes[currentUserId] = true;
+      });
+    } else if (_isFav) {
       productsRef
           .doc(ownerId)
           .collection('userProducts')
           .doc(prodId)
-          .update({'likes.${currentUser.id}': true});
-      addLikeToActivityFeed();
-       setState(() {
-         likeCount += 1;
-         isfav = true;
-         likes[currentUser.id] = true;
- //        showHeart = true;
-       });
-      Timer(Duration(milliseconds: 500), () {
-        setState(() {
-          showHeart = false;
-        });
+          .update({'likes.$currentUserId': false});
+      removeLikeFromActivityFeed();
+
+      var docReference = favRef.doc(currentUser.id).collection("userFav").doc(prodId);
+      docReference.delete();
+      setState(() {
+
+        isfav = false;
+        likes[currentUserId] = false;
       });
     }
+
   }
 
   addLikeToActivityFeed() {

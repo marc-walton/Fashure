@@ -139,9 +139,13 @@ auction = false;
     "bidOn": false,
       "ownerId": widget.currentUser.id,
       "postId": postId,
+      "username":currentUser.username,
+      "photoUrl": currentUser.photoUrl,
     "country":currentUser.country,
     "currency":currentUser.currencyISO,
       "timestamp":timestamp,
+  "hasEnded":false,
+      "likes": {},
 
     });
     usersRef.doc(widget.currentUser.id).update({
@@ -154,6 +158,7 @@ auction = false;
           .doc(postId)
           .set({
         "uploaded": true,
+        "hasEnded":false,
         "bidTimer": dropdownValue,
         "endingTime": timestamp.add(Duration(hours: dropdownValue)),
         "bidOn": true,
@@ -162,6 +167,7 @@ auction = false;
         "country":currentUser.country,
         "currency":currentUser.currencyISO,
         "timestamp":timestamp,
+        "likes": {},
 
       });
       usersRef.doc(widget.currentUser.id).update({
@@ -395,60 +401,112 @@ buildWidget(parentContext)  {
 
           Container(
             height:SizeConfig.screenHeight*0.65,
-            child:ListView.builder(
-                scrollDirection: Axis.horizontal,
-                itemCount: images.length,
-                itemBuilder: (BuildContext context, int index) {
+            child:StreamBuilder(
+              stream: bidsRef
+                  .doc(currentUser.id)
+                  .collection("userBids")
+                  .doc(postId)
+                  .collection("Items")
+                  .where("postId"==postId)
+                  .snapshots(),
+              builder: (BuildContext context,
+                  AsyncSnapshot<QuerySnapshot> snapshot) {
+                if (!snapshot.hasData) {
+                  return Container();
+                }
+                return ListView.builder(
+                    scrollDirection: Axis.horizontal,
+                    itemCount: snapshot.data.docs.length,
+                    itemBuilder: (BuildContext context, int index) {
 
+                      int usd = snapshot.data.docs[index]['usd'];
+                         int inr = snapshot.data.docs[index]['inr'];
 
+                      String description = snapshot.data.docs[index]['description'];
+                String docId = snapshot.data.docs[index]['docId'];
 
-                  if (images.isEmpty) {
-                    return
-                      Center();
-                  }
-                  return
+   String images = snapshot
+       .data.docs[index]['images'];
 
-                    Expanded(
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-
-                          children: [
-                            Container(
-                              height:SizeConfig.screenHeight*0.4,
-
-                              child: ClipRRect(
-                                borderRadius: BorderRadius.circular(20.0),
-                                child: Image.file(
-                                    images[index]),
+                      if (images.isEmpty) {
+                        return Container();
+                      }
+                      return Expanded(
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Column(
+                            crossAxisAlignment:
+                            CrossAxisAlignment.start,
+                            children: [
+                              Container(
+                                height: SizeConfig.screenHeight * 0.4,
+                                child: ClipRRect(
+                                  borderRadius:
+                                  BorderRadius.circular(20.0),
+                                  child: Stack(
+                                    children: [
+                                      CachedNetworkImage(
+                                          imageUrl:images ),
+                                      Positioned(
+                                        top: 10.0,
+                                        right: 10.0,
+                                        child: FloatingActionButton(
+                                          mini: true,
+                                          backgroundColor:kText.withOpacity(0.5),
+                                          onPressed: singleDelete,
+                                          child: Icon(Icons.delete,color: Colors.red,),
+                                        ),
+                                      )
+                                    ],
+                                  ),
+                                ),
                               ),
-                            ),
-                            SizedBox(height:SizeConfig.blockSizeVertical*2),
+                              SizedBox(
+                                  height:
+                                  SizeConfig.blockSizeVertical * 2),
+                              Row(
+                                crossAxisAlignment:
+                                CrossAxisAlignment.start,
+                                children: [
+                                  Text("Opening bid:",
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold)),
+                                  Text("${currentUser.currencysym} $inr(\u0024 $usd)"),
+                                ],
+                              ),
+                              SizedBox(
+                                  height:
+                                  SizeConfig.blockSizeVertical * 2),
+                              Row(
+                                children: [
+                                  Text("Description:",
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold)),
+                                     Text("$description:",
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold),overflow: TextOverflow.fade,),
 
-                            Row(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text("Opening bid:",style:TextStyle(fontWeight: FontWeight.bold)),
-                                Text(" ${price[index]}"),
 
-                              ],
-                            ),
-                            SizedBox(height:SizeConfig.blockSizeVertical*2),
+                                ],
+                              ),
 
-                            Row(
-                              children: [
-                                Text("Description:",style:TextStyle(fontWeight: FontWeight.bold)),
-                                Text(" ${description[index]}",overflow: TextOverflow.fade,),
 
-                              ],
-                            ),
 
-                          ],
+
+
+                            ],
+                          ),
                         ),
-                      ),
-                    );
-                }),),
+                      );
+                    });
+              },
+            )
+
+
+
+
+
+          ),
           ],
         ),
 
@@ -569,8 +627,8 @@ description.add(desController.text);
         .doc(fileName)
         .set({
       "images":mediaUrl,
-      "inr":titleController.text,
-      "usd":USD,
+      "inr":int.tryParse(titleController.text),
+      "usd":int.tryParse(USD),
       "description":desController.text,
       "postId":postId,
       "topBid1":"",
@@ -585,6 +643,9 @@ description.add(desController.text);
    "topBidderId1":"",
       "topBidderId2":"",
       "topBidderId3":"",
+  "amount":0,
+      "docId":fileName,
+      "minimumBid":10
 
     });
 
@@ -730,7 +791,17 @@ null:Navigator.pop(context);
       await photo.delete();}
 
   }
+singleDelete({String id}) async {
 
+  var docReference =  bidsRef
+      .doc(widget.currentUser.id)
+      .collection("userBids")
+      .doc(postId)
+      .collection("Items")
+      .doc(id);
+  docReference.delete();
+
+}
 
 
   bool get wantKeepAlive => true;

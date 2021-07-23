@@ -56,6 +56,8 @@ final videocommentsRef = FirebaseFirestore.instance.collection('comments');
 
 final cartRef = FirebaseFirestore.instance.collection('cart');
 final favRef = FirebaseFirestore.instance.collection('favorites');
+final wishRef = FirebaseFirestore.instance.collection('auctionWish');
+
 final productcommentsRef = FirebaseFirestore.instance.collection('productcomments');
 final blogcommentsRef = FirebaseFirestore.instance.collection('blogcomments');
 final collcommentsRef = FirebaseFirestore.instance.collection('collcomments');

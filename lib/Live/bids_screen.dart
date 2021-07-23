@@ -1,3 +1,4 @@
+import 'package:fashow/Live/models/auction_model.dart';
 import 'package:fashow/blogsview.dart';
 import 'package:flutter/material.dart';
 //import 'package:flutter_svg/svg.dart';
@@ -5,25 +6,25 @@ import 'package:fashow/progress.dart';
 import 'package:fashow/HomePage.dart';
 import 'package:fashow/Constants.dart';
 import 'package:flutter/cupertino.dart';
-class BlogScreen extends StatelessWidget {
+class BidScreen extends StatelessWidget {
   final String userId;
-  final String blogId;
+  final String BidId;
 
-  BlogScreen({this.userId, this.blogId});
+  BidScreen({this.userId, this.BidId});
 
   @override
   Widget build(BuildContext context) {
     return StreamBuilder(
-      stream: blogRef
+      stream:     bidsRef
           .doc(userId)
-          .collection('userBlog')
-          .doc(blogId)
+          .collection("userBids")
+          .doc(BidId)
           .snapshots(),
       builder: (context, snapshot) {
         if (!snapshot.hasData) {
           return circularProgress();
         }
-        Blog blog = Blog.fromDocument(snapshot.data);
+        AuctionModel auction = AuctionModel.fromDocument(snapshot.data);
         return Center(
           child: Scaffold(
 
@@ -33,7 +34,7 @@ class BlogScreen extends StatelessWidget {
               title: FittedBox(
                 fit: BoxFit.contain,
                 child: Text(
-                  blog.username,
+                  auction.username,
                   style: TextStyle(color: Colors.white),
                 ),
               ),),
@@ -45,7 +46,7 @@ class BlogScreen extends StatelessWidget {
                 children: <Widget>[
 
                   Container(
-                    child: blog,
+                    child: auction,
                   ),
 
                 ],

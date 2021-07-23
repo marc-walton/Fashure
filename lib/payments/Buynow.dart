@@ -402,6 +402,7 @@ class _BuyNowState extends State<BuyNow> {
   'amount': "${widget.buynowamount}",
   'name': currentUser.id,
   'description': 'Payment',
+    'currency': 'INR',
 
 
     'prefill': { 'email': currentUser.email},
@@ -416,65 +417,7 @@ class _BuyNowState extends State<BuyNow> {
   debugPrint(e);
   }
   }
-  else if (currentUser.country == 'USA') {
-  var options = {
-  'key': key,
-  'amount': "${widget.buynowamount}",
-  'name': currentUser.id,
-  'currency': 'USD',
-  'description': 'Payment',
-  'prefill': { 'email': currentUser.email},
-  'external': {
-  'wallets': ['paytm']
-  }
-  };
 
-  try {
-  _razorpay.open(options);
-  } catch (e) {
-  debugPrint(e);
-  }
-  }
-  else if (currentUser.country == 'Europe') {
-  var options = {
-  'key': key,
-  'amount': "${widget.buynowamount}",
-  'name': currentUser.id,
-  'description': 'Payment',
-  'currency': 'EUR',
-
-  'prefill': { 'email': currentUser.email},
-  'external': {
-  'wallets': ['paytm']
-  }
-  };
-
-  try {
-  _razorpay.open(options);
-  } catch (e) {
-  debugPrint(e);
-  }
-  }
-  else if (currentUser.country == 'UK') {
-  var options = {
-  'key': key,
-  'amount': "${widget.buynowamount}",
-  'name': currentUser.id,
-  'description': 'Payment',
-  'currency': 'GBP',
-
-  'prefill': { 'email': currentUser.email},
-  'external': {
-  'wallets': ['paytm']
-  }
-  };
-
-  try {
-  _razorpay.open(options);
-  } catch (e) {
-  debugPrint(e);
-  }
-  }
   else{
   var options = {
   'key': key,
