@@ -543,9 +543,9 @@ Column(
     update();
   }
   submit({String ownerId,String orderId,String cusId,String shopmediaUrl,String prodId,}){
-    FirebaseFirestore.instance.collection('ordersSeller')
+    FirebaseFirestore.instance.collection('ordersAuctionS')
         .doc(ownerId)
-        .collection('sellerOrder')
+        .collection('auctionSOrder')
         .doc(orderId)
         .update({
       'Accepted':'true',
@@ -554,9 +554,9 @@ Column(
       "timestamp": timestamp,
 
     });
-    FirebaseFirestore.instance.collection('ordersCustomer')
+    FirebaseFirestore.instance.collection('ordersAuctionS')
         .doc(cusId)
-        .collection('userOrder')
+        .collection('auctionSOrder')
         .doc(orderId)
         .update({
       'Accepted':'true',

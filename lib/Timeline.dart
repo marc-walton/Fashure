@@ -5,6 +5,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:fashow/CollectionsUplaod.dart';
+import 'package:fashow/Shipping/shipEngine/ship_engine.dart';
 import 'package:fashow/custom_image.dart';
 import 'package:fashow/upload_editorial.dart';
 import 'package:fashow/Constants.dart';
@@ -143,8 +144,6 @@ TabController _tabController;
         foollowingList = snapshot.docs.map((doc) => doc.id).toList();
       });
     }
-
-
 
 
 
@@ -325,7 +324,7 @@ TabController _tabController;
         FloatingActionButton(
           heroTag:'upload',
           backgroundColor: Colors.black38,
-          onPressed: () async{ Navigator.push(context, MaterialPageRoute(builder: (context) =>Upload(currentUser: currentUser, )));
+          onPressed: () async{ Navigator.push(context, MaterialPageRoute(builder: (context) =>ShipEngine()));
 // Add your onPressed code here!
           },
           child: Icon(Icons.add_a_photo),
