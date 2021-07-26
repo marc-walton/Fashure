@@ -18172,16 +18172,25 @@ servicebadge(){
       },
     );
 }
-for (var dataItems in a) {
-print(a);
-for (int i = 0; i < a.length; i++) {
-image = dataItems["images"][i];
-des = dataItems[i]["description"];
-inr = dataItems[i]['inr'];
-print(image.toString() +
-'\n' +
-des.toString() +
-'\n' +
-inr.toString());
-}
-}
+sf(){ for (var dataItems in items) {
+  print(items);
+  for (int i = 0; i < items.length; i++) {
+    var id = dataItems["rate_id"];
+    var name = dataItems["rate_type"];
+    var price = dataItems['carrier_id'];
+    var shipping_amount = dataItems['shipping_amount'];
+    var datas = json.decode(shipping_amount);
+    for (var sh in datas) {
+      var currency = dataItems['currency'];
+
+      print(name.toString() +
+          '\n' +
+          price.toString() +
+          '\n' +
+          id.toString() +'\n' +
+          currency.toString());
+    }
+  }
+}}
+
+
