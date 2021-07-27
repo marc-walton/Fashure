@@ -167,6 +167,7 @@ flutter:
     - assets/img/influence.png
     - assets/img/shop.png
     - assets/img/RING.jpg
+    - assets/logos/fedex.png
 
   fonts:
     - family: AlteroDCU
