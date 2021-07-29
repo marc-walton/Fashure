@@ -465,7 +465,6 @@ class _BuyNowState extends State<BuyNow> {
 
       'courierId': "awaiting seller fulfilment",
       'courier': "awaiting seller fulfilment",
-      'orderStatus':'awaiting seller acceptance',
       'read':'false',
       'Address':'$Fullname\n,$Addresss\n,$City,$State,$Country\n,$Zip\n,$Code $Phone',
     });

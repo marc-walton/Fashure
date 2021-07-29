@@ -8,7 +8,6 @@ import 'package:fashow/Categories/Men/Men.dart';
 import 'package:fashow/Categories/Women/Women.dart';
 import 'package:fashow/Live/upload_bid.dart';
 import 'package:fashow/fav.dart';
-import 'package:fashow/methods/seller_details.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:bubble_tab_indicator/bubble_tab_indicator.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';

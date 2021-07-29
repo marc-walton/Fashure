@@ -62,6 +62,8 @@ final productcommentsRef = FirebaseFirestore.instance.collection('productcomment
 final blogcommentsRef = FirebaseFirestore.instance.collection('blogcomments');
 final collcommentsRef = FirebaseFirestore.instance.collection('collcomments');
 final addressRef = FirebaseFirestore.instance.collection('Address');
+final sellerAddressRef = FirebaseFirestore.instance.collection('sellerAddress');
+
 final CollectionReference _messageCollection =
 FirebaseFirestore.instance.collection(MESSAGES_COLLECTION);
 

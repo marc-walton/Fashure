@@ -2,10 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fashow/HomePage.dart';
+import 'package:fashow/methods/flutter_country_picker.dart';
+
 import 'package:dropdown_formfield/dropdown_formfield.dart';
 import 'package:fashow/Constants.dart';
 import 'package:alert_dialog/alert_dialog.dart';
-import 'package:flutter_country_picker/flutter_country_picker.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:intl/intl.dart';
 
@@ -24,13 +25,15 @@ class _RegisterPageState extends State<RegisterPage> {
   TextEditingController pwdInputController;
   TextEditingController confirmPwdInputController;
   String dropdownValue = "";
-  Country _selected;
 
   String lang = "en";
 String  country = "";
 String currency = "";
 String currencyISO = "";
 String currencysym = "";
+String countryISO = "";
+  Country _selected;
+
   bool _passwordVisible = false;
 
   final DateTime timestamp = DateTime.now();
@@ -187,6 +190,7 @@ String currencysym = "";
                                   country = select.name;
                                   currency = select.currency;
                                   currencyISO = select.currencyISO;
+                                  countryISO = select.isoCode;
                                   var format = NumberFormat.simpleCurrency(
                                     name: "${select.currencyISO}", //currencyCode
                                   );
@@ -228,6 +232,7 @@ String currencysym = "";
                                 "displayName": firstNameInputController.text,
                                 "bio": "",
                                 "client": 0 ,
+                                "countryISO": countryISO ,
 
                                 "country":country,
                               "currency":currency,

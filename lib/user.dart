@@ -24,6 +24,7 @@ class Users{
  String photographerAvg;
  String bloggerAvg;
  String stylistAvg;
+ String countryISO;
 
 
 
@@ -63,6 +64,7 @@ this.modelAvg,
 this.photographerAvg,
 this.bloggerAvg,
 this.stylistAvg,
+this.countryISO,
 
 
     this.language,
@@ -77,6 +79,7 @@ this.Bidding,
     return Users(
         id: doc.data()['id'],
       Bidding: doc.data()['Bidding'],
+      countryISO: doc.data()['countryISO'],
 
         username :doc.data()['username'],
         email :doc.data()['email'],

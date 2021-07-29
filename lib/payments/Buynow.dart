@@ -1877,6 +1877,7 @@ else if(widget.color=='col 10'){
     String Phone = adPrefs.getString('phone') ?? '';
     String Country = adPrefs.getString('country') ?? '';
     String Code = adPrefs.getString('code') ?? '';
+ String countryISO = adPrefs.getString('countryISO') ?? '';
 
     FirebaseFirestore.instance.collection('ordersSeller')
         .doc(widget.ownerId)
@@ -1896,12 +1897,13 @@ else if(widget.color=='col 10'){
  "shopmediaUrl": widget.mediaUrl,
    "mtoText": widget.mtoText??"",
       "color": widget.color??"",
-
+"shipmentCreated":false,
       'courierId': "awaiting seller fulfilment",
       'courier': "awaiting seller fulfilment",
-      'orderStatus':'awaiting seller acceptance',
       'read':'false',
       'Address':'$Fullname\n,$Addresss\n,$City,$State,$Country\n,$Zip\n,$Code $Phone',
+
+
     });
     FirebaseFirestore.instance.collection('ordersCustomer')
         .doc(currentUser.id)
@@ -1914,7 +1916,8 @@ else if(widget.color=='col 10'){
       'cusId':currentUser.id,
       "mtoText": widget.mtoText??"",
       "color": widget.color??"",
-
+    "TrackingNo":"",
+    "invoice":"",
       "timestamp": timestamp,
       "productname": widget.productname,
       "shopmediaUrl": widget.mediaUrl,
@@ -1925,6 +1928,9 @@ else if(widget.color=='col 10'){
       'Accepted':'false',
       'orderStatus':'awaiting seller acceptance',
       'Address':'$Fullname\n,$Addresss\n,$City,$State,$Country\n,$Zip\n,$Code $Phone',
+
+
+
     }); FirebaseFirestore.instance.collection('feed')
         .doc(currentUser.id)
         .collection('feedItems')

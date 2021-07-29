@@ -293,8 +293,10 @@ backgroundColor: kPrimaryColor,
                         State: ds['state'],
                         Country:  ds['country'],
                         Zip : ds['zip'],
-                        Dialcode: ds['code'],
+                        Dialcode: ds['phone_code'],
                         Phone:  ds['phone'],
+                        countryISO: currentUser.countryISO,
+
                         eur:widget.eur,
                         usd:widget.usd,
                         inr:widget.inr,
@@ -319,7 +321,7 @@ backgroundColor: kPrimaryColor,
                         fourxl: widget.fourxl,
                         fivexl: widget.fivexl,
                         sixxl: widget.sevenxl,
-                        eightxl:widget. eightxl,
+                        eightxl:widget.eightxl,
                         Shoe1: widget.Shoe1,
                         Shoe2: widget.Shoe2,
                         Shoe3: widget.Shoe3,
@@ -437,6 +439,8 @@ class addressview extends StatelessWidget {
  final String inr;
  final String gbp;
  final String mtoText;
+  final String countryISO;
+
 final bool freeship;
 final bool freeworldship;
 
@@ -545,6 +549,7 @@ final String displaysize;
   this.gbp,
   this.freeSize,
 this.displaysize,
+this.countryISO,
 
   this.mto,
   this.xxxs,
@@ -631,6 +636,7 @@ this.displaysize,
                      Text('$City',style:TextStyle(color:kText,fontSize:SizeConfig.safeBlockHorizontal * 4)),
                     Text('$State,',style:TextStyle(color:kText,fontSize:SizeConfig.safeBlockHorizontal * 4)),
                     Text('$Country',style:TextStyle(color:kText,fontSize:SizeConfig.safeBlockHorizontal * 4)),
+                          Text('$countryISO',style:TextStyle(color:kText,fontSize:SizeConfig.safeBlockHorizontal * 4)),
 
                     Text(Zip,style:TextStyle(color:kText,fontSize:SizeConfig.safeBlockHorizontal * 4)),
                     Text('$Dialcode,$Phone',style:TextStyle(color:kText,fontSize:SizeConfig.safeBlockHorizontal * 4)),
@@ -648,7 +654,8 @@ this.displaysize,
                           await adPrefs.setString('zip',Zip);
                           await adPrefs.setString('code',Dialcode);
                           await adPrefs.setString('phone',Phone);
-                          print('presses');
+                           await adPrefs.setString('countryIso',countryISO);
+
                           Get.off(
                               BuyView(
                                 displaysize:displaysize,

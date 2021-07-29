@@ -1,3 +1,4 @@
+import 'package:fashow/methods/flutter_country_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:fashow/HomePage.dart';
@@ -8,6 +9,7 @@ import 'package:country_list_pick/country_list_pick.dart';
 import 'package:fashow/user.dart';
 import 'package:fashow/Constants.dart';
 import 'package:image/image.dart' as Im;
+import 'package:intl/intl.dart';
 import 'package:uuid/uuid.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -40,6 +42,9 @@ class _AddAdressState extends State<AddAdress> {
   String phone;
   String countr;
   String code;
+  String countryISO = "";
+  Country _selected;
+
   File file;
   bool isUploading = false;
   String addId = Uuid().v4();
@@ -72,7 +77,10 @@ class _AddAdressState extends State<AddAdress> {
       "zip":zipcontroller.text,
       "phone":telephonecontroller.text,
       "country":country,
+      "countryISO":currentUser.countryISO,
+
       "code":dialcode,
+
     });
   }
 Widget form(){
@@ -242,27 +250,25 @@ Widget form(){
           },
         ),
       ),
-      Center(
-        child: CountryListPick(
-
-          theme: CountryTheme(
-            isShowFlag: true,
-            isShowTitle: true,
-            isShowCode: true,
-            isDownIcon: true,
-            showEnglishName: true,
-          ),
-          initialSelection: '+91',
-          onChanged: (CountryCode code) {
-            print(code.name);
-            print(code.code);
-            print(code.dialCode);
-            print(code.flagUri);
+ Center(
+        child: CountryPicker(
+          dense: false,
+          showFlag: true,  //displays flag, true by default
+          showDialingCode: true, //displays dialing code, false by default
+          showName: false, //displays country name, true by default
+          showCurrency: false, //eg. 'British pound'
+          showCurrencyISO: false, //eg. 'GBP'
+          onChanged: (Country select) {
             setState(() {
-              country = code.name;
-              dialcode = code.dialCode;
+              _selected = select;
+              country = select.name;
+              dialcode = select.dialingCode;
+
+              countryISO = select.isoCode;
+
             });
           },
+          selectedCountry:_selected,
         ),
       ),
 
