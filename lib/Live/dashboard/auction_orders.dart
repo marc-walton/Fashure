@@ -15,12 +15,12 @@ import 'package:fashow/Product_screen.dart';
 import 'package:fashow/custom_image.dart';
 import 'package:fashow/size_config.dart';
 
-class SellerOrders extends StatefulWidget {
+class AuctionOrders extends StatefulWidget {
   @override
-  _SellerOrdersState createState() => _SellerOrdersState();
+  _AuctionOrdersState createState() => _AuctionOrdersState();
 }
 
-class _SellerOrdersState extends State<SellerOrders> {
+class _AuctionOrdersState extends State<AuctionOrders> {
 
   UpcomingOrders(){
     return  PaginateFirestore(

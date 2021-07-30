@@ -244,6 +244,15 @@ case "blogcomment":
 case "collectioncomment":
           body = `${activityFeedItem.username} commented: ${activityFeedItem.commentData}`;
           break;
+case "PaymentA":
+          body = `${activityFeedItem.username} commented: ${activityFeedItem.message}`;
+          break;
+case "PaymentOA":
+          body = `${activityFeedItem.username} commented: ${activityFeedItem.message}`;
+          break;
+case "topBid":
+          body = `${activityFeedItem.username} commented: ${activityFeedItem.message}`;
+          break;
 
         default:
           break;

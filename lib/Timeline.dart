@@ -288,7 +288,12 @@ TabController _tabController;
                         padding: const EdgeInsets.all(8.0),
                         child: ClipRRect(
                             borderRadius: BorderRadius.circular(15.0),
-                            child: Container(child: Icon(EvaIcons.personOutline),)),
+                            child:
+                            currentUser == null?
+                            Container(child: Icon(EvaIcons.personOutline),):
+                         Container(child: CachedNetworkImage(imageUrl: currentUser.photoUrl),)
+                        
+                        ),
                       ),
                     ),
 

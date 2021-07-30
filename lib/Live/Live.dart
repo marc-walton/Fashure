@@ -235,7 +235,7 @@ class _LiveTvState extends State<LiveTv> with TickerProviderStateMixin {
                     });
                   },) ;
                 },
-                icon: Icon(FrinoIcons.f_gavel))
+                icon: Icon(FrinoIcons.f_bookmark))
 
           ]
         ),
@@ -268,7 +268,7 @@ class _LiveTvState extends State<LiveTv> with TickerProviderStateMixin {
                 child: getStories(),
               ),
               Center(
-                child: getvid(),
+                child: getBids(),
               )
             ]),
           ),
@@ -528,6 +528,7 @@ class _LiveTvState extends State<LiveTv> with TickerProviderStateMixin {
     bool isPostOwner = currentUserId == ownerId;
 
     SizeConfig().init(context);
+    return
     PaginateFirestore(
         emptyDisplay: Center(
             child: Text(

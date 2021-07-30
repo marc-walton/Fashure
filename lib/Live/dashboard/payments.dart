@@ -5,64 +5,13 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:paginate_firestore/paginate_firestore.dart';
 import 'package:fashow/size_config.dart';
-class SellerPayments extends StatefulWidget {
+class AuctionPayments extends StatefulWidget {
   @override
-  _SellerPaymentsState createState() => _SellerPaymentsState();
+  _AuctionPaymentsState createState() => _AuctionPaymentsState();
 }
 
-class _SellerPaymentsState extends State<SellerPayments> {
-  df({String productname,String usd,String inr,String cny,String eur,String gbp,String prodId,String ownerId,}){
+class _AuctionPaymentsState extends State<AuctionPayments> {
 
-    if(currentUser.country=='India'){
-      return
-        Column(
-          children: <Widget>[
-            ListTile(
-              title: Text(productname, style: TextStyle(
-                  color: kText,
-                  fontSize: 20.0,
-                  fontWeight: FontWeight.bold),),
-            ),
-
-            ListTile(
-              title:            Text( "₹$inr",style: TextStyle(color: kText,
-                  fontSize: 20.0,
-                  fontWeight: FontWeight.bold)),
-
-            ),
-
-
-          ],
-        );
-
-    }
-
-    else{
-      return
-        Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: <Widget>[
-            ListTile(
-              title: Text(productname, style: TextStyle(
-                  color: kText,
-                  fontSize: 20.0,
-                  fontWeight: FontWeight.bold),),
-            ),
-
-            ListTile(
-              title:            Text( " \u0024 $usd",style: TextStyle(color:  kText,
-                  fontSize: 20.0,
-                  fontWeight: FontWeight.bold)),
-
-            ),
-
-
-
-          ],
-        );
-
-    }
-  }
   upcoming(){
     return
       PaginateFirestore(
@@ -79,22 +28,36 @@ class _SellerPaymentsState extends State<SellerPayments> {
             String fulfilled = documentSnapshot.data()['fulfilled'];
             String productname = documentSnapshot.data()['productname'];
             String inr = documentSnapshot.data()['inr'];
-            String cny = documentSnapshot.data()['cny'];
             String usd = documentSnapshot.data()['usd'];
 
             return
               Column(
+                children: <Widget>[
+                  Row(
+                    children: [
+                      Text(productname, style: TextStyle(
+                          color: kText,
+                          fontSize: 20.0,
+                          fontWeight: FontWeight.bold),),                    ],
+                  ),
 
-                children: [
-                  df(productname:productname, usd:usd,inr:inr,cny:cny, prodId:prodId, ownerId:ownerId,),
+                  Row(
+                    children: [
+
+                      Text( "${currentUser.currencysym}$inr",style: TextStyle(color: kText,
+                          fontSize: 20.0,
+                          fontWeight: FontWeight.bold)),                    ],
+                  ),
+
 
                 ],
               );
 
+
           },
-          query: FirebaseFirestore.instance.collection('Payments')
-              .doc(currentUser.id,)
-              .collection('SellerPayments')
+          query:  FirebaseFirestore.instance.collection('Payments')
+              .doc(currentUser.id)
+              .collection('AuctionPayments')
               .orderBy('timestamp',descending: true)
               .where('fulfilled',isEqualTo: 'false')
 
@@ -117,22 +80,58 @@ class _SellerPaymentsState extends State<SellerPayments> {
             String fulfilled = documentSnapshot.data()['fulfilled'];
             String productname = documentSnapshot.data()['productname'];
             String inr = documentSnapshot.data()['inr'];
-            String cny = documentSnapshot.data()['cny'];
             String usd = documentSnapshot.data()['usd'];
+   String paymentG = documentSnapshot.data()['paymentGateway'];
+  String TypeOfG = documentSnapshot.data()['TypeOfG'];
 
             return
               Column(
+                children: <Widget>[
+                  Row(
+                    children: [
+                      Text(productname, style: TextStyle(
+                          color: kText,
+                          fontSize: 20.0,
+                          fontWeight: FontWeight.bold),),                    ],
+                  ),
 
-                children: [
-                  df(productname:productname, usd:usd,inr:inr,cny:cny, prodId:prodId, ownerId:ownerId,),
+                  Row(
+                    children: [
+                      Text( "Listed price:",style: TextStyle(color: kText,
+                          fontSize: 20.0,
+                          fontWeight: FontWeight.bold)),
+                      Text( "${currentUser.currencysym}$inr",style: TextStyle(color: kText,
+                          fontSize: 20.0,
+                          fontWeight: FontWeight.bold)),                    ],
+                  ),
+   Row(
+                    children: [
+                      Text( "Payment gateway charges: - ",style: TextStyle(color: kText,
+                          fontSize: 20.0,
+                          fontWeight: FontWeight.bold)),
+                      Text( "${currentUser.currencysym}$paymentG($TypeOfG)",style: TextStyle(color: kText,
+                          fontSize: 20.0,
+                          fontWeight: FontWeight.bold)),                    ],
+                  ),
+
+   Row(
+                    children: [
+                      Text( "Flat commission(2 %): - ",style: TextStyle(color: kText,
+                          fontSize: 20.0,
+                          fontWeight: FontWeight.bold)),
+                      Text( "${currentUser.currencysym}$paymentG",style: TextStyle(color: kText,
+                          fontSize: 20.0,
+                          fontWeight: FontWeight.bold)),                    ],
+                  ),
+
 
                 ],
               );
 
           },
-          query: FirebaseFirestore.instance.collection('Payments')
-              .doc(currentUser.id,)
-              .collection('SellerPayments')
+          query:   FirebaseFirestore.instance.collection('Payments')
+              .doc(currentUser.id)
+              .collection('AuctionPayments')
               .orderBy('timestamp',descending: true)
               .where('fulfilled',isEqualTo: 'true')
 
@@ -201,7 +200,7 @@ class _SellerPaymentsState extends State<SellerPayments> {
 
     QuerySnapshot snapshot = await  FirebaseFirestore.instance.collection('Payments')
         .doc(currentUser.id,)
-        .collection('SellerPayments').get();
+        .collection('AuctionPayments').get();
     snapshot.docs.forEach((doc) {
       doc.reference.update({'read':'true'});
     });

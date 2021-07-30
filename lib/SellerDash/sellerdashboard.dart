@@ -24,17 +24,17 @@ class _SellerDashState extends State<SellerDash> {
   final scaffoldKey = new GlobalKey<ScaffoldState>();
   final _formKey = GlobalKey<FormState>();
   bool _inProcess = false;
-  int data;
-  int datao;
+  int data  = 0;
+  int datao = 0;
 
-  int order;
-  int service;
-  int shop;
-  int ser;
-  int shoppay;
-  int serpay;
+  int order = 0;
+  int service = 0;
+  int shop = 0;
+  int ser = 0;
+  int shoppay = 0;
+  int serpay = 0;
 
-  int serdata;
+  int serdata = 0;
   void initState() {
     super.initState();
 

@@ -899,6 +899,7 @@ class _AuctionModelState extends State<AuctionModel> {
         "mediaUrl": images,
         "timestamp": timestamp,
         "read": 'false',
+        "message": "You're the top bidder!\n purchase within 24 hours."
       }):Container(),
         hasEnded ? currentUser.id == topBidderId1?
 

@@ -1,5 +1,6 @@
 import 'package:badges/badges.dart';
 import 'package:bubble_tab_indicator/bubble_tab_indicator.dart';
+import 'package:fashow/Live/models/auction_model.dart';
 import 'package:fashow/Product_screen.dart';
 import 'package:fashow/SellerDash/alldash.dart';
 import 'package:fashow/SellerDash/sellerdashboard.dart';
@@ -82,62 +83,104 @@ class  _ActivityFeedState extends State<ActivityFeed>  with  TickerProviderState
   }
   badgescount()  {
     return
-    StreamBuilder(
-      stream:  activityFeedRef
-          .doc(currentUser.id)
-          .collection('feedItems')
-          .where('read',isEqualTo: 'false').snapshots(),
-      builder: (context,snapshot){
-        int data =  snapshot.data.docs.length;
-        return
-          Badge(
-            shape: BadgeShape.circle,
-            padding: EdgeInsets.all(7),
-            badgeContent: Text('$data',style: TextStyle(color: Colors.white),),
-          );
+      StreamBuilder(
+        stream:  activityFeedRef
+            .doc(currentUser.id)
+            .collection('feedItems')
+            .where('read',isEqualTo: 'false').snapshots(),
+        builder: (context,snapshot){
+          if(!snapshot.hasData){
+            if(snapshot.data==null){
+              return Badge(
+                shape: BadgeShape.circle,
+                padding: EdgeInsets.all(7),
+                badgeContent: Text('0',style: TextStyle(color: Colors.white),),
+              );
 
-      },
-    );
+            }
+            else {
+              data +=  snapshot.data.docs.length;
 
-  }
+              return
+                Badge(
 
-  badgescountmessage()  {
-    return
-    StreamBuilder(
-      stream: _messageCollection
-          .doc(currentUser.id)
-        .snapshots(),
+                  shape: BadgeShape.circle,
+                  padding: EdgeInsets.all(2),
+                  badgeContent: Text('$data',style: TextStyle(color: Colors.white),),
+                );
 
-      builder: (context,snapshot){
-        if(snapshot.data == null ){return Container();}
-        else{ int data;
-        String messages = snapshot.data['read'];
-        print("mess:$messages");
-        if(messages == 'false');
-        {
-          setState(() {
-            data  =snapshot.data.docs.length;
-          });
-          return
+            }
 
-            Badge(
+          }
+          else {
+            return Badge(
               shape: BadgeShape.circle,
               padding: EdgeInsets.all(7),
-              badgeContent: Text('$data',style: TextStyle(color: Colors.white),),
+              badgeContent: Text('0',style: TextStyle(color: Colors.white),),
             );
-        }
+          }
 
-        }
+        },
+      );
 
+  }
+  badgescountmessage()  {
+    return
+      StreamBuilder(
+        stream: _messageCollection
+            .doc(currentUser.id)
 
-      },
-    );
+            .snapshots(),
+        builder: (context,snapshot){
+          if(!snapshot.hasData)
+          {
+            if(snapshot.data==null){
+              return Badge(
+                shape: BadgeShape.circle,
+                padding: EdgeInsets.all(7),
+                badgeContent: Text('0',style: TextStyle(color: Colors.white),),
+              );
+
+            }
+            else
+            {
+              print("dev f fd");
+
+              String messages = snapshot.data['read'];
+              if(messages == 'false');
+              {
+                setState(() {
+                  data  += messages.length;
+                });
+                return
+
+                  Badge(
+                    shape: BadgeShape.circle,
+                    padding: EdgeInsets.all(7),
+                    badgeContent: Text('$data',style: TextStyle(color: Colors.white),),
+                  );
+              }
+
+            }
+          }
+          else{    return Badge(
+            shape: BadgeShape.circle,
+            padding: EdgeInsets.all(7),
+            badgeContent: Text('0',style: TextStyle(color: Colors.white),),
+          );}
+
+        },
+      );
 
   }
   dashbadge(){
 
     if(serdata == null||data == null) {
-      return Container();
+      return  Badge(
+        shape: BadgeShape.circle,
+        padding: EdgeInsets.all(7),
+        badgeContent: Text('0', style: TextStyle(color: Colors.white),),
+      );
     }else{
       var sum = serdata + data;
       return
@@ -150,203 +193,236 @@ class  _ActivityFeedState extends State<ActivityFeed>  with  TickerProviderState
   }
   orderbadge(){
     return
-    StreamBuilder(
-      stream:  FirebaseFirestore.instance.collection('ordersSeller')
-          .doc(currentUser.id)
-          .collection('sellerOrder')
-          .where('read',isEqualTo: 'false').snapshots(),
-      builder: (context,snapshot){
+      StreamBuilder(
+        stream:  FirebaseFirestore.instance.collection('ordersSeller')
+            .doc(currentUser.id)
+            .collection('sellerOrder')
+            .where('read',isEqualTo: 'false').snapshots(),
+        builder: (context,snapshot){
+          if(snapshot.data.exists) {
+            data +=  snapshot.data.docs.length;
 
-          data =  snapshot.data.docs.length ?? 0;
+            return
+              StreamBuilder(
+                stream: FirebaseFirestore.instance.collection('Payments')
+                    .doc(currentUser.id,)
+                    .collection('SellerPayments')
+                    .where('fulfilled', isEqualTo: 'true')
+                    .where('read', isEqualTo: 'false').snapshots(),
+                builder: (context, snapshot) {
+                  if(snapshot.data.exists) {
+                    data += snapshot.data.docs.length;
 
+                    return
+                      Badge(
+                        shape: BadgeShape.circle,
+                        padding: EdgeInsets.all(7),
+                        badgeContent: Text(
+                          '$data ', style: TextStyle(color: Colors.white),),
+                      );
+                  }
+                  else {return
+                    Badge(
+                      shape: BadgeShape.circle,
+                      padding: EdgeInsets.all(7),
+                      badgeContent: Text(
+                        '$data ', style: TextStyle(color: Colors.white),),
+                    );
+                  }
+                },
+              );
+          }
+          else {
+            return Badge(
+              shape: BadgeShape.circle,
+              padding: EdgeInsets.all(7),
+              badgeContent: Text(
+                '0 ', style: TextStyle(color: Colors.white),),
+            );
+          }
 
-        return
-          StreamBuilder(
-            stream:   FirebaseFirestore.instance.collection('Payments')
-                .doc(currentUser.id,)
-                .collection('SellerPayments')
-                .where('fulfilled',isEqualTo: 'true')
-                .where('read',isEqualTo: 'false').snapshots(),
-            builder: (context,snapshot){
-
-              setState(() {
-                data =  data + snapshot.data.docs.length ?? 0;
-              });
-              return
-                Badge(
-                  shape: BadgeShape.circle,
-                  padding: EdgeInsets.all(7),
-                  badgeContent: Text('$data ',style: TextStyle(color: Colors.white),),
-                );
-
-            },
-          );
-
-
-      },
-    );
+        },
+      );
   }
   servicebadge(){
     return
-    StreamBuilder(
-      stream:     FirebaseFirestore.instance.collection('serviceSeller')
-          .doc(currentUser.id)
-          .collection('sellerService')
-          .where('read',isEqualTo: 'false').snapshots(),
-      builder: (context,snapshot){
-        setState(() {
-          serdata =  snapshot.data.docs.length ?? 0;
-        });
-
-        return
-          StreamBuilder(
-            stream:   FirebaseFirestore.instance.collection('Payments')
-                .doc(currentUser.id)
-                .collection('ServicePayments')
-                .where('fulfilled',isEqualTo: 'true')
-                .where('read',isEqualTo: 'false').snapshots(),
-            builder: (context,snapshot){
-              setState(() {
-                serdata =   serdata + snapshot.data.docs.length;
-              });
-              return
-                Badge(
-                  shape: BadgeShape.circle,
-                  padding: EdgeInsets.all(7),
-                  badgeContent: Text('$serdata ',style: TextStyle(color: Colors.white),),
-                );
-
-            },
-          );
+      StreamBuilder(
+        stream:     FirebaseFirestore.instance.collection('serviceSeller')
+            .doc(currentUser.id)
+            .collection('sellerService')
+            .where('read',isEqualTo: 'false').snapshots(),
+        builder: (context,snapshot){
+          if(snapshot.data.exists) {
+            serdata += snapshot.data.docs.length;
 
 
-      },
-    );
+            return
+              StreamBuilder(
+                stream: FirebaseFirestore.instance.collection('Payments')
+                    .doc(currentUser.id)
+                    .collection('ServicePayments')
+                    .where('fulfilled', isEqualTo: 'true')
+                    .where('read', isEqualTo: 'false').snapshots(),
+                builder: (context, snapshot) {
+                  if(snapshot.data.exists) {
+                    setState(() {
+                      serdata += snapshot.data.docs.length;
+                    });
+                    return
+                      Badge(
+                        shape: BadgeShape.circle,
+                        padding: EdgeInsets.all(7),
+                        badgeContent: Text(
+                          '$serdata ', style: TextStyle(color: Colors.white),),
+                      );
+                  }
+                  else{
+                    return
+                    Badge(
+                      shape: BadgeShape.circle,
+                      padding: EdgeInsets.all(7),
+                      badgeContent: Text(
+                        '$serdata ', style: TextStyle(color: Colors.white),),
+                    );
+                  }
+                },
+              );
+          }
+          else{
+            return  Badge(
+              shape: BadgeShape.circle,
+              padding: EdgeInsets.all(7),
+              badgeContent: Text(
+                '0 ', style: TextStyle(color: Colors.white),),
+            );
+          }
+        },
+      );
   }
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: PreferredSize(
-          preferredSize: Size.fromHeight(130.0),
-          child: AppBar(title:  FittedBox(
-              fit: BoxFit.contain,child: Text(_myHandler.title,style: TextStyle(fontFamily: 'MajorMonoDisplay'),)),
-              backgroundColor: _myHandler.color,
+    return SafeArea(
+      child: Scaffold(
+          appBar: PreferredSize(
+            preferredSize: Size.fromHeight(130.0),
+            child: AppBar(title:  FittedBox(
+                fit: BoxFit.contain,child: Text(_myHandler.title,style: TextStyle(fontFamily: 'MajorMonoDisplay'),)),
+                backgroundColor: _myHandler.color,
 
-              bottom: PreferredSize(
-                preferredSize: Size.fromHeight(100.0),
-                child:Container(
-                  height: 80.0,
-                  child: TabBar(
-                    indicatorSize:TabBarIndicatorSize.tab,
-                    indicator:BubbleTabIndicator(indicatorHeight:40.0,
-                      indicatorColor: kblue,
+                bottom: PreferredSize(
+                  preferredSize: Size.fromHeight(100.0),
+                  child:Container(
+                    height: 80.0,
+                    child: TabBar(
+                      indicatorSize:TabBarIndicatorSize.tab,
+                      indicator:BubbleTabIndicator(indicatorHeight:40.0,
+                        indicatorColor: kblue,
+                      ),
+                      controller: _controller,
+                      tabs: <Widget>[
+                        FittedBox(
+                          fit: BoxFit.contain,
+                          child: Row(
+                            children: [
+                              Text('Notifications'),
+                              badgescount(),
+                            ],
+                          ),
+                        ),
+                        FittedBox(
+                          fit: BoxFit.contain,
+                          child: Row(
+                            children: [
+                              Text('Chats'),
+                             badgescountmessage(),
+                            ],
+                          ),
+                        ),
+                        FittedBox(
+                          fit: BoxFit.contain,
+                          child: Row(
+                            children: [
+                              Text('Settings'),
+                            ],
+                          ),
+                        ),
+
+                      ],
                     ),
-                    controller: _controller,
-                    tabs: <Widget>[
-                      FittedBox(
-                        fit: BoxFit.contain,
-                        child: Row(
-                          children: [
-                            Text('Notifications'),
-                            badgescount(),
-                          ],
-                        ),
-                      ),
-                      FittedBox(
-                        fit: BoxFit.contain,
-                        child: Row(
-                          children: [
-                            Text('Chats'),
-                           // badgescountmessage(),
-                          ],
-                        ),
-                      ),
-                      FittedBox(
-                        fit: BoxFit.contain,
-                        child: Row(
-                          children: [
-                            Text('Settings'),
+                  ),
+                ),
+                iconTheme: new IconThemeData(color: kSecondaryColor),
+                actions: <Widget>[
 
-                          ],
-                        ),
-                      ),
+                  OutlinedButton(
+                    style: ElevatedButton.styleFrom(
+                      side: BorderSide(width: 2.0, color: Colors.blue),
 
+                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20),
+                    ),
+            ),
+                   child: Row(
+                     children: [
+                       Container(
+                         child:dashbadge(),
+                       ),
+                       SizedBox(width:2),
+                       Text('Dashboard',style: TextStyle(color: Colors.white,fontSize: 20.0),),
+                     ],
+                   ),
+                    onPressed: () {
+             Navigator.push(context, MaterialPageRoute(builder: (context) =>AllDash()));
+                      // do something
+                    },
+                  ),
+                ]
+            ),
+          ),
+
+
+          body: Container(decoration: BoxDecoration(
+              gradient: fabGradient
+          ) ,
+            alignment: Alignment.center,
+            child: TabBarView(
+                controller: _controller,
+                children: <Widget>[
+                  ClipRRect(borderRadius: BorderRadius.circular(15.0),
+                    child: Container(
+                      child: FutureBuilder(
+                        future: getActivityFeed(),
+                        builder: (context, snapshot) {
+                          if (!snapshot.hasData) {
+                            return circularProgress();
+                          }
+                          return new Expanded(
+                            child: ListView(
+                              scrollDirection: Axis.vertical,
+                              shrinkWrap: true,
+                              children: snapshot.data,
+                            ),
+                          );
+                        },
+                      ),
+                    ),
+                  ),
+                  Column(
+                      children: [
+                        Expanded(child: Container(child: ChatListScreen()))
+                      ]),
+                  Column(
+                    children: [
+                      Setting()
                     ],
                   ),
-                ),
-              ),
-              iconTheme: new IconThemeData(color: kSecondaryColor),
-              actions: <Widget>[
 
-                Stack(
-                  children: [
-                    OutlineButton(
-                      borderSide: BorderSide(color: kblue),
-                      color: Colors.white,
-                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-                     child: Text('Dashboard',style: TextStyle(color: Colors.white,fontSize: 20.0),),
-                      onPressed: () {
-           Navigator.push(context, MaterialPageRoute(builder: (context) =>AllDash()));
-                        // do something
-                      },
-                    ),
-                    Positioned(
-                      top: 1,
-                      right: 1,
-                      child: Container(
-                        child:dashbadge(),
-                      ),
-                    ),
-
-                  ],
-                ),
-              ]
-          ),
-        ),
-
-
-        body: Container(decoration: BoxDecoration(
-            gradient: fabGradient
-        ) ,
-          alignment: Alignment.center,
-          child: TabBarView(
-              controller: _controller,
-              children: <Widget>[
-                ClipRRect(borderRadius: BorderRadius.circular(15.0),
-                  child: Container(
-                    child: FutureBuilder(
-                      future: getActivityFeed(),
-                      builder: (context, snapshot) {
-                        if (!snapshot.hasData) {
-                          return circularProgress();
-                        }
-                        return new Expanded(
-                          child: ListView(
-                            scrollDirection: Axis.vertical,
-                            shrinkWrap: true,
-                            children: snapshot.data,
-                          ),
-                        );
-                      },
-                    ),
-                  ),
-                ),
-                Column(
-                    children: [
-                      Expanded(child: Container(child: ChatListScreen()))
-                    ]),
-                Column(
-                  children: [
-                    Setting()
-                  ],
-                ),
-
-              ]),
-        )
+                ]),
+          )
 
 
 
 
+      ),
     );
   }
 }
@@ -410,6 +486,18 @@ final String message;
       ),
     );
   }
+    showAuction(context) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => AuctionModel(
+          postId: postId,
+          ownerId: userId,
+        ),
+      ),
+    );
+  }
+
   showProduct(context) {
     Navigator.push(
       context,
@@ -486,6 +574,17 @@ showServiceDash(context) {
       ),
     );
   }
+ showAuctionDash(context) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => AllDash(          selectedPage: 2,
+
+        ),
+      ),
+    );
+  }
+
   showOrderpay(context) {
 
     Navigator.push(
@@ -684,6 +783,16 @@ showOrders(context) {
       return
       activityItemText = "$message";
     }
+    else if (type == 'PaymentA') {
+      activityItemText = '$message';
+    }
+    else if (type == 'PaymentOA') {
+      activityItemText = '$message';
+    }
+    else if (type == 'topBid') {
+      return
+      activityItemText = "$message";
+    }
     else if (type == 'Videocomment') {
       activityItemText = 'Commented on your video: $commentData';
     }
@@ -749,6 +858,137 @@ payent(ParentContext){
       ),
     );
 }
+paymentA(ParentContext){
+  return
+
+    Padding(
+      padding: EdgeInsets.only(bottom: 2.0),
+      child: ClipRRect(borderRadius: BorderRadius.circular(15.0),
+        child: Container(
+          color: Color(0XFFb3b3ff).withOpacity(0.3),
+          child: ListTile(
+            title: GestureDetector(
+              onTap: () => showOrders(ParentContext),
+              child: RichText(
+                maxLines: 1,softWrap:false,overflow:TextOverflow.visible,                    text: TextSpan(
+                  style: TextStyle(
+                    fontSize: 14.0,
+                    color: kText,
+                  ),
+                  children: [
+                    TextSpan(
+                      text: username,
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold, color: Colors.black),
+                    ),
+                    TextSpan(
+                      text: ' $activityItemText',
+                    )
+                  ]),
+              ),
+            ),
+            leading: CircleAvatar(
+              backgroundImage: CachedNetworkImageProvider(userProfileImg),
+            ),
+            subtitle: Text(
+              timeago.format(timestamp.toDate()),
+              overflow: TextOverflow.ellipsis,
+              style: TextStyle(color: kSubtitle),
+            ),
+            trailing: mediaPreview,
+          ),
+        ),
+      ),
+    );
+}
+paymentOA(ParentContext){
+  return
+
+    Padding(
+      padding: EdgeInsets.only(bottom: 2.0),
+      child: ClipRRect(borderRadius: BorderRadius.circular(15.0),
+        child: Container(
+          color: Color(0XFFb3b3ff).withOpacity(0.3),
+          child: ListTile(
+            title: GestureDetector(
+              onTap: () => showAuctionDash(ParentContext),
+              child: RichText(
+                maxLines: 1,softWrap:false,overflow:TextOverflow.visible,                    text: TextSpan(
+                  style: TextStyle(
+                    fontSize: 14.0,
+                    color: kText,
+                  ),
+                  children: [
+                    TextSpan(
+                      text: username,
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold, color: Colors.black),
+                    ),
+                    TextSpan(
+                      text: ' $activityItemText',
+                    )
+                  ]),
+              ),
+            ),
+            leading: CircleAvatar(
+              backgroundImage: CachedNetworkImageProvider(userProfileImg),
+            ),
+            subtitle: Text(
+              timeago.format(timestamp.toDate()),
+              overflow: TextOverflow.ellipsis,
+              style: TextStyle(color: kSubtitle),
+            ),
+            trailing: mediaPreview,
+          ),
+        ),
+      ),
+    );
+}
+Auction(ParentContext){
+  return
+
+    Padding(
+      padding: EdgeInsets.only(bottom: 2.0),
+      child: ClipRRect(borderRadius: BorderRadius.circular(15.0),
+        child: Container(
+          color: Color(0XFFb3b3ff).withOpacity(0.3),
+          child: ListTile(
+            title: GestureDetector(
+              onTap: () => showAuction(ParentContext),
+              child: RichText(
+                maxLines: 1,softWrap:false,overflow:TextOverflow.visible,
+                text: TextSpan(
+                  style: TextStyle(
+                    fontSize: 14.0,
+                    color: kText,
+                  ),
+                  children: [
+                    TextSpan(
+                      text: username,
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold, color: Colors.black),
+                    ),
+                    TextSpan(
+                      text: ' $activityItemText',
+                    )
+                  ]),
+              ),
+            ),
+            leading: CircleAvatar(
+              backgroundImage: CachedNetworkImageProvider(userProfileImg),
+            ),
+            subtitle: Text(
+              timeago.format(timestamp.toDate()),
+              overflow: TextOverflow.ellipsis,
+              style: TextStyle(color: kSubtitle),
+            ),
+            trailing: mediaPreview,
+          ),
+        ),
+      ),
+    );
+}
+
 blog(ParentContext){
   return
     Padding(
@@ -1253,6 +1493,10 @@ ServicePayment(ParentContext){
      type == 'ReviewO' ? ReviewO(context):
      type == 'ServicePaymentI'?   ServicePaymentI(context):
       type == 'ServicePayment'?   ServicePayment(context):
+      type == 'PaymentA'?   paymentA(context):
+      type == 'PaymentOA'?   paymentOA(context):
+       type == 'topBid'?   Auction(context):
+
     Container();
 
   }

@@ -2,6 +2,7 @@ import 'package:badges/badges.dart';
 import 'package:bubble_tab_indicator/bubble_tab_indicator.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fashow/HomePage.dart';
+import 'package:fashow/Live/dashboard/dashboard.dart';
 import 'package:fashow/SellerDash/sellerdashboard.dart';
 import 'package:fashow/servicedash/ServiceDash.dart';
 import 'package:flutter/material.dart';
@@ -21,21 +22,32 @@ class _AllDashState extends State<AllDash> {
     super.initState();
     gets();
     getsp();
+      getA();
+    getAp();
+
     geto();
     getop();
   }
 
-  int data;
-   int datao;
+  int data = 0;
+   int datao = 0;
+int dataA = 0;
 
-  int order;
-  int service;
-int shop;
-int ser;
-int shoppay;
-int serpay;
+  int order = 0;
+  int service = 0;
+    int auction = 0;
 
-  int serdata;
+int shop = 0;
+int ser = 0;
+int auct = 0;
+
+int shoppay = 0;
+int serpay = 0;
+int aucpay = 0;
+
+  int serdata = 0;
+    int aucdata = 0;
+
   orderbadge(){
     return
       Badge(
@@ -55,6 +67,17 @@ int serpay;
       serdata = snapshot.docs.length ?? 0;
     });
 }
+  getA() async {
+    QuerySnapshot snapshot = await FirebaseFirestore.instance.collection('ordersAuctionS')
+        .doc(currentUser.id)
+        .collection('auctionSOrder')
+        .where('read',isEqualTo: 'false')
+        .get();
+    setState(() {
+     aucdata = snapshot.docs.length ?? 0;
+    });
+}
+
 getsp() async {
     QuerySnapshot snapshot = await  FirebaseFirestore.instance.collection('Payments')
         .doc(currentUser.id)
@@ -67,6 +90,19 @@ getsp() async {
     });
 
   }
+ getAp() async {
+    QuerySnapshot snapshot = await  FirebaseFirestore.instance.collection('Payments')
+        .doc(currentUser.id)
+        .collection('AuctionPayments')
+        .where('fulfilled',isEqualTo: 'true')
+        .where('read',isEqualTo: 'false')
+        .get();
+    setState(() {
+      auction = aucdata + snapshot.docs.length ?? 0;
+    });
+
+  }
+
  geto() async {
     QuerySnapshot snapshot = await FirebaseFirestore.instance.collection('ordersSeller')
         .doc(currentUser.id)
@@ -99,6 +135,14 @@ getop() async {
         badgeContent: Text('$service ',style: TextStyle(color: Colors.white),),
       );
   }
+  auctionBadge(){
+    return
+      Badge(
+        shape: BadgeShape.circle,
+        padding: EdgeInsets.all(7),
+        badgeContent: Text('$auction ',style: TextStyle(color: Colors.white),),
+      );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -107,7 +151,7 @@ getop() async {
     return Expanded(
       child: DefaultTabController(
         initialIndex:widget.selectedPage ?? 0,
-        length:2,
+        length:3,
         child: Scaffold(
           backgroundColor: kSecondaryColor,
           // key:  scaffoldKey,
@@ -158,6 +202,15 @@ getop() async {
                           ],
                         ),
                       ),
+FittedBox(
+                        fit: BoxFit.contain,
+                        child: Row(
+                          children: [
+                            Text('Auction'),
+                            auctionBadge(),
+                          ],
+                        ),
+                      ),
 
                     ],
                   ),
@@ -172,6 +225,7 @@ getop() async {
                 children:<Widget> [
                   SellerDash(),
                   ServiceDash(),
+  AuctionDash(),
 
 
                 ]),

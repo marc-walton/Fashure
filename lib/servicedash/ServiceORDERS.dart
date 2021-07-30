@@ -105,66 +105,54 @@ isLive: true,
             String Address = documentSnapshot.data()['Address'];
  String fulfilled = documentSnapshot.data()['fulfilled'];
 
-            return
-              StreamBuilder(
-                stream: usersRef.doc(cusId).snapshots(),
-                builder: (context, snapshot) {
-                  if (!snapshot.hasData) {
-                    return circularProgress();
-                  }
-                  Users user = Users.fromDocument(snapshot.data);
-//          bool isPostOwner = currentUserId == ownerId;
-                  return Expanded(
-                    child: Column(
-                      children: <Widget>[
-                        GestureDetector(
-                          onTap: () => showProfile(context, profileId: user.id),
-                          child: ListTile(
-                            leading: CircleAvatar(
-                              backgroundImage: CachedNetworkImageProvider(user.photoUrl),
-                              backgroundColor: Colors.grey,
-                            ),
-                            title: Text(
-                              user.displayName,
-                              style: TextStyle(
-                                color:kText,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                            ),
+            return Expanded(
+              child: Column(
+                children: <Widget>[
+                  GestureDetector(
+                    onTap: () => showProfile(context, profileId: currentUser.id),
+                    child: ListTile(
+                      leading: CircleAvatar(
+                        backgroundImage: CachedNetworkImageProvider(currentUser.photoUrl),
+                        backgroundColor: Colors.grey,
+                      ),
+                      title: Text(
+                        currentUser.displayName,
+                        style: TextStyle(
+                          color:kText,
+                          fontWeight: FontWeight.bold,
                         ),
-                        Divider(color: kGrey,),
-                        ListTile(
-                          leading: Text('Order Details',
-                            style: TextStyle(color: kText),),
-                        ),
-
-                        df(productname:title,
-                          des:desciption,
-                          usd:usd,inr:inr,
-                          Fusd:Fusd,Finr:Finr,Feur:Feur,Fgbp:Fgbp,
-adavance: advancepay,finalp: finalpay,
-                          orderId:orderId, ownerId:ownerId,),
-                        ListTile(
-                         title:                       Text('orderStatus:$orderStatus',
-                           style: TextStyle(color: kText),),
-
-                        ),
-
-                        fulfilled=='false'  ?Center(child: RaisedButton(
-                          color: kblue,
-                          onPressed:(){
-                            Navigator.push(context, MaterialPageRoute(builder: (context) =>ServiceFulfill(ownerId: ownerId,orderId: orderId,cusId:cusId)));},
-                          child:  Text('Fulfill order',
-                            style: TextStyle(color: Colors.white),),)):Container(),
-                        Divider(color: kGrey,),
-                      ],
-
+                      ),
                     ),
-                  );
+                  ),
+                  Divider(color: kGrey,),
+                  ListTile(
+                    leading: Text('Order Details',
+                      style: TextStyle(color: kText),),
+                  ),
 
-                },
-              );
+                  df(productname:title,
+                    des:desciption,
+                    usd:usd,inr:inr,
+                    Fusd:Fusd,Finr:Finr,Feur:Feur,Fgbp:Fgbp,
+                    adavance: advancepay,finalp: finalpay,
+                    orderId:orderId, ownerId:ownerId,),
+                  ListTile(
+                    title:                       Text('orderStatus:$orderStatus',
+                      style: TextStyle(color: kText),),
+
+                  ),
+
+                  fulfilled=='false'  ?Center(child: RaisedButton(
+                    color: kblue,
+                    onPressed:(){
+                      Navigator.push(context, MaterialPageRoute(builder: (context) =>ServiceFulfill(ownerId: ownerId,orderId: orderId,cusId:cusId)));},
+                    child:  Text('Fulfill order',
+                      style: TextStyle(color: Colors.white),),)):Container(),
+                  Divider(color: kGrey,),
+                ],
+
+              ),
+            );
           },
           query:  FirebaseFirestore.instance.collection('serviceSeller')
               .doc(currentUser.id)
@@ -206,61 +194,49 @@ isLive: true,
             String orderStatus = documentSnapshot.data()['orderStatus'];
             String title = documentSnapshot.data()['title'];
 String description = documentSnapshot.data()['description'];
-
-            return
-              StreamBuilder(
-                stream: usersRef.doc(cusId).snapshots(),
-                builder: (context, snapshot) {
-                  if (!snapshot.hasData) {
-                    return circularProgress();
-                  }
-                  Users user = Users.fromDocument(snapshot.data);
-//          bool isPostOwner = currentUserId == ownerId;
-                  return Column(
-                    children: <Widget>[
-                      GestureDetector(
-                        onTap: () => showProfile(context, profileId: user.id),
-                        child: ListTile(
-                          leading: CircleAvatar(
-                            backgroundImage: CachedNetworkImageProvider(user.photoUrl),
-                            backgroundColor: Colors.grey,
-                          ),
-                          title: Text(
-                            user.displayName,
-                            style: TextStyle(
-                              color:kText,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ),
+            return Column(
+              children: <Widget>[
+                GestureDetector(
+                  onTap: () => showProfile(context, profileId: currentUser.id),
+                  child: ListTile(
+                    leading: CircleAvatar(
+                      backgroundImage: CachedNetworkImageProvider(currentUser.photoUrl),
+                      backgroundColor: Colors.grey,
+                    ),
+                    title: Text(
+                      currentUser.displayName,
+                      style: TextStyle(
+                        color:kText,
+                        fontWeight: FontWeight.bold,
                       ),
-                      Divider(color: kGrey,),
-                      ListTile(
-                        leading: Text('Order Details',
-                          style: TextStyle(color: kText),),
-                      ),
+                    ),
+                  ),
+                ),
+                Divider(color: kGrey,),
+                ListTile(
+                  leading: Text('Order Details',
+                    style: TextStyle(color: kText),),
+                ),
 
-                      df(productname:title,
-                        des:description,
-                        usd:usd,inr:inr,
-                        Fusd:Fusd,Finr:Finr,Feur:Feur,Fgbp:Fgbp,
-adavance: advancepay, finalp: finalpay,
-                        orderId:orderId, ownerId:ownerId,),
-                      ListTile(
-                        title:                       Text('orderStatus:$orderStatus',
-                          style: TextStyle(color: kText),),
+                df(productname:title,
+                  des:description,
+                  usd:usd,inr:inr,
+                  Fusd:Fusd,Finr:Finr,Feur:Feur,Fgbp:Fgbp,
+                  adavance: advancepay, finalp: finalpay,
+                  orderId:orderId, ownerId:ownerId,),
+                ListTile(
+                  title:                       Text('orderStatus:$orderStatus',
+                    style: TextStyle(color: kText),),
 
-                      ),
-
-
+                ),
 
 
-                    ],
 
-                  );
 
-                },
-              );
+              ],
+
+            );
+
           },
           query:  FirebaseFirestore.instance.collection('serviceSeller')
               .doc(currentUser.id)

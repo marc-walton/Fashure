@@ -62,6 +62,7 @@ class _Upload_bidState extends State<Upload_bid>
   List<TextEditingController> _controller = <TextEditingController>[];
   String image ;
   String inr ;
+  var USD;
 
   String des ;
   String _error = 'No Error Dectected';
@@ -134,7 +135,7 @@ auction = false;
         .doc(postId)
         .set({
     "uploaded":true,
-    "bidTimer":dropdownValue,
+    "bidTimer":1,
      "endingTime": "",
     "bidOn": false,
       "ownerId": widget.currentUser.id,
@@ -180,7 +181,7 @@ Get.back();
   }
 buildWidget(parentContext)  {
 
-  SizeConfig().init(context);
+  SizeConfig().init(parentContext);
 
   return         WillPopScope(
     onWillPop: () => _onBackPressed(),
@@ -234,9 +235,7 @@ buildWidget(parentContext)  {
             )
           ],
         ),
-        body: Container(
-
-          //alignment: Alignment.center,
+        body: SingleChildScrollView(
           child: Padding(
             padding: const EdgeInsets.all(8.0),
             child:
@@ -399,116 +398,96 @@ buildWidget(parentContext)  {
             ),
           ),
 
-          Container(
-            height:SizeConfig.screenHeight*0.65,
-            child:StreamBuilder(
-              stream: bidsRef
-                  .doc(currentUser.id)
-                  .collection("userBids")
-                  .doc(postId)
-                  .collection("Items")
-                  .where("postId"==postId)
-                  .snapshots(),
-              builder: (BuildContext context,
-                  AsyncSnapshot<QuerySnapshot> snapshot) {
-                if (!snapshot.hasData) {
-                  return Container();
-                }
-                return ListView.builder(
-                    scrollDirection: Axis.horizontal,
-                    itemCount: snapshot.data.docs.length,
-                    itemBuilder: (BuildContext context, int index) {
+              Container(
+                  height:SizeConfig.screenHeight*0.65,
+                  child: ListView.builder(
+                  shrinkWrap: true,
+                  scrollDirection: Axis.horizontal,
+                  itemCount: images.length,
+                  itemBuilder: (BuildContext context, int index) {
 
-                      int usd = snapshot.data.docs[index]['usd'];
-                         int inr = snapshot.data.docs[index]['inr'];
-
-                      String description = snapshot.data.docs[index]['description'];
-                String docId = snapshot.data.docs[index]['docId'];
-
-   String images = snapshot
-       .data.docs[index]['images'];
-
-                      if (images.isEmpty) {
-                        return Container();
-                      }
-                      return Expanded(
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Column(
-                            crossAxisAlignment:
-                            CrossAxisAlignment.start,
-                            children: [
-                              Container(
-                                height: SizeConfig.screenHeight * 0.4,
-                                child: ClipRRect(
-                                  borderRadius:
-                                  BorderRadius.circular(20.0),
-                                  child: Stack(
-                                    children: [
-                                      CachedNetworkImage(
-                                          imageUrl:images ),
-                                      Positioned(
-                                        top: 10.0,
-                                        right: 10.0,
-                                        child: FloatingActionButton(
-                                          mini: true,
-                                          backgroundColor:kText.withOpacity(0.5),
-                                          onPressed: singleDelete,
-                                          child: Icon(Icons.delete,color: Colors.red,),
-                                        ),
-                                      )
-                                    ],
-                                  ),
+                    if (images.isEmpty) {
+                      print("empty");
+                      return Container();
+                    }
+                    else{
+                      print("exists");
+                      return Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Column(
+                          children: [
+                            Container(
+                              height: SizeConfig.screenHeight * 0.4,
+                              child: ClipRRect(
+                                borderRadius:
+                                BorderRadius.circular(20.0),
+                                child: Stack(
+                                  children: [
+                                    Image.file(
+                                        images[index]),
+                                    Positioned(
+                                      top: 10.0,
+                                      right: 10.0,
+                                      child: FloatingActionButton(
+                                        mini: true,
+                                        backgroundColor: kText
+                                            .withOpacity(0.5),
+                                        onPressed: singleDelete,
+                                        child: Icon(Icons.delete,
+                                          color: Colors.red,),
+                                      ),
+                                    )
+                                  ],
                                 ),
                               ),
-                              SizedBox(
-                                  height:
-                                  SizeConfig.blockSizeVertical * 2),
-                              Row(
-                                crossAxisAlignment:
-                                CrossAxisAlignment.start,
-                                children: [
-                                  Text("Opening bid:",
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.bold)),
-                                  Text("${currentUser.currencysym} $inr(\u0024 $usd)"),
-                                ],
-                              ),
-                              SizedBox(
-                                  height:
-                                  SizeConfig.blockSizeVertical * 2),
-                              Row(
-                                children: [
-                                  Text("Description:",
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.bold)),
-                                     Text("$description:",
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.bold),overflow: TextOverflow.fade,),
+                            ),
+                            SizedBox(
+                                height:
+                                SizeConfig.blockSizeVertical * 2),
+                            Row(
+                              crossAxisAlignment:
+                              CrossAxisAlignment.start,
+                              children: [
+                                Text("Opening bid:",
+                                    style: TextStyle(
+                                        fontWeight: FontWeight
+                                            .bold)),
+                                Text("${currentUser
+                                    .currencysym} ${price[index]}"),
+                              ],
+                            ),
+                            SizedBox(
+                                height:
+                                SizeConfig.blockSizeVertical * 2),
+                            Row(
+                              children: [
+                                Text("Description:",
+                                    style: TextStyle(
+                                        fontWeight: FontWeight
+                                            .bold)),
+                                Text("${description[index]}",
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.bold),
+                                  overflow: TextOverflow.fade,),
 
 
-                                ],
-                              ),
+                              ],
+                            ),
 
 
-
-
-
-                            ],
-                          ),
+                          ],
                         ),
                       );
-                    });
-              },
-            )
+
+                    }
+                  }),
 
 
 
 
 
+              ),          ],
           ),
-          ],
-        ),
 
           ),
         ),
@@ -604,16 +583,29 @@ description.add(desController.text);
       Skey = titleController.text;
       isUploading = true;
     });
+    String U;
     Get.back();
+if(currentUser.countryISO == "US"){
+  var usd;
 
-    var resultUSD = await Currency.getConversion(
-        from: '${currentUser.currencyISO}', to: 'USD', amount: titleController.text);
-    var usd;
-    String USD;
-    setState(() {
-  usd = resultUSD.rate;
-  USD = usd.toStringAsFixed(2);
-});
+
+  setState(() {
+    usd = titleController.text;
+    U = usd.toStringAsFixed(2);
+   USD =  double.tryParse(U);
+  });
+}
+else{
+  var resultUSD = await Currency.getConversion(
+      from: '${currentUser.currencyISO}', to: 'USD', amount: titleController.text);
+  var usd;
+  setState(() {
+    usd = resultUSD.rate;
+    U = usd.toStringAsFixed(2);
+    USD =  double.tryParse(U);
+  });
+}
+
     await compressImage();
     String mediaUrl = await uploadImage(file);
 
@@ -628,7 +620,7 @@ description.add(desController.text);
         .set({
       "images":mediaUrl,
       "inr":int.tryParse(titleController.text),
-      "usd":int.tryParse(USD),
+      "usd":USD,
       "description":desController.text,
       "postId":postId,
       "topBid1":"",
@@ -653,7 +645,6 @@ clearImage();
     
     setState(() {
       url.add(mediaUrl);
-
       isUploading = false;
     });
   }

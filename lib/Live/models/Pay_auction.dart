@@ -468,9 +468,9 @@ class _BuyNowState extends State<BuyNow> {
       'read':'false',
       'Address':'$Fullname\n,$Addresss\n,$City,$State,$Country\n,$Zip\n,$Code $Phone',
     });
-    FirebaseFirestore.instance.collection('ordersAuctionU')
+    FirebaseFirestore.instance.collection('ordersCustomer')
         .doc(widget.ownerId)
-        .collection('auctionUOrder')
+        .collection('userOrder')
         .doc(orderId)
         .set({'prodId':widget.prodId,
       'ownerId':widget.ownerId,

@@ -10,177 +10,129 @@ class ServicePayments extends StatefulWidget {
 }
 
 class _ServicePaymentsState extends State<ServicePayments> {
-  df({String productname,
-    String usd,
-    String inr,
-    String eur,
-    String gbp,
-     String Fusd,
-    String Finr,
-    String Feur,
-    String Fgbp,
-    String orderId,
-    String ownerId,}){
-
-    if(currentUser.country=='India'){
-      return
-        Column(
-          children: <Widget>[
-            ListTile(
-              title: Text(productname, style: TextStyle(
-                  color: kText,
-                  fontSize: 20.0,
-                  fontWeight: FontWeight.bold),),
-            ),
-            ListTile(
-              title:            Text( "Advance payment:₹$inr",style: TextStyle(color: kText,
-                  fontSize: 20.0,
-                  fontWeight: FontWeight.bold)),
-
-            ),
-            ListTile(
-              title:             Text( "Due payment:₹$Finr",style: TextStyle(color: kText,
-                  fontSize: 20.0,
-                  fontWeight: FontWeight.bold)),
-
-            ),
-
-
-          ],
-        );
-
-    }
-
-    else{
-      return
-        Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: <Widget>[
-            ListTile(
-              title: Text(productname, style: TextStyle(
-                  color: kText,
-                  fontSize: 20.0,
-                  fontWeight: FontWeight.bold),),
-            ),
-
-            ListTile(
-              title:            Text( "Advance payment: \u0024 $usd",style: TextStyle(color:  kText,
-                  fontSize: 20.0,
-                  fontWeight: FontWeight.bold)),
-
-            ),
-            ListTile(
-              title:             Text( "Due payment: \u0024 $Fusd",style: TextStyle(color:  kText,
-                  fontSize: 20.0,
-                  fontWeight: FontWeight.bold)),
-
-            ),
-
-
-          ],
-        );
-
-    }
-  }
   upcoming(){
     return
-      Container(decoration: BoxDecoration(
-          gradient: fabGradient
-      ) ,
-        alignment: Alignment.center,
-        child: PaginateFirestore(
-isLive: true,
+      PaginateFirestore(
+          isLive: true,
 //    itemsPerPage: 2,
-            itemBuilderType:
-            PaginateBuilderType.listView,
-            itemBuilder: (index, context, documentSnapshot)   {
+          itemBuilderType:
+          PaginateBuilderType.listView,
+          itemBuilder: (index, context, documentSnapshot)   {
 //        DocumentSnapshot ds = snapshot.data.docs[index];
+            String ownerId = documentSnapshot.data()['ownerId'];
+            String orderId = documentSnapshot.data()['orderId'];
+            String prodId = documentSnapshot.data()['prodId'];
 
-              String ownerId = documentSnapshot.data()['ownerId'];
-              String orderId = documentSnapshot.data()['orderId'];
-              // String prodId = documentSnapshot.data()['prodId'];
+            String fulfilled = documentSnapshot.data()['fulfilled'];
+            String productname = documentSnapshot.data()['productname'];
+            String inr = documentSnapshot.data()['inr'];
+            String usd = documentSnapshot.data()['usd'];
 
-              String fulfilled = documentSnapshot.data()['fulfilled'];
-              String title = documentSnapshot.data()['title'];
-              String inr = documentSnapshot.data()['inr'];
-              String usd = documentSnapshot.data()['usd'];
+            return
+              Column(
+                children: <Widget>[
+                  Row(
+                    children: [
+                      Text(productname, style: TextStyle(
+                          color: kText,
+                          fontSize: 20.0,
+                          fontWeight: FontWeight.bold),),                    ],
+                  ),
 
-              String Finr = documentSnapshot.data()['Finr'];
-              String Fusd = documentSnapshot.data()['Fusd'];
-              String Feur = documentSnapshot.data()['Feur'];
-              String Fgbp = documentSnapshot.data()['Fgbp'];
+                  Row(
+                    children: [
 
-              return
-                Column(
+                      Text( "${currentUser.currencysym}$inr",style: TextStyle(color: kText,
+                          fontSize: 20.0,
+                          fontWeight: FontWeight.bold)),                    ],
+                  ),
 
-                  children: [
-                    df(productname:title,
-                      usd:usd,inr:inr,
-                      Fusd:Fusd,Finr:Finr,Feur:Feur,Fgbp:Fgbp,
 
-                      orderId:orderId, ownerId:ownerId,),
+                ],
+              );
 
-                  ],
-                );
 
-            },
-            query:  FirebaseFirestore.instance.collection('Payments')
-                .doc(currentUser.id)
-                .collection('ServicePayments').orderBy('timestamp',descending: true)
-                .where('fulfilled',isEqualTo: 'false')
+          },
+          query:  FirebaseFirestore.instance.collection('Payments')
+              .doc(currentUser.id)
+              .collection('AuctionPayments')
+              .orderBy('timestamp',descending: true)
+              .where('fulfilled',isEqualTo: 'false')
 
-        ),
       );
 
   }
   fulfilled(){
     return
-      Container(decoration: BoxDecoration(
-          gradient: fabGradient
-      ) ,
-        alignment: Alignment.center,
-        child: PaginateFirestore(
-isLive: true,
+      PaginateFirestore(
+          isLive: true,
 //    itemsPerPage: 2,
-            itemBuilderType:
-            PaginateBuilderType.listView,
-            itemBuilder: (index, context, documentSnapshot)   {
+          itemBuilderType:
+          PaginateBuilderType.listView,
+          itemBuilder: (index, context, documentSnapshot)   {
 //        DocumentSnapshot ds = snapshot.data.docs[index];
+            String ownerId = documentSnapshot.data()['ownerId'];
+            String orderId = documentSnapshot.data()['orderId'];
+            String prodId = documentSnapshot.data()['prodId'];
 
-              String ownerId = documentSnapshot.data()['ownerId'];
-              String orderId = documentSnapshot.data()['orderId'];
-              // String prodId = documentSnapshot.data()['prodId'];
+            String fulfilled = documentSnapshot.data()['fulfilled'];
+            String productname = documentSnapshot.data()['productname'];
+            String inr = documentSnapshot.data()['inr'];
+            String usd = documentSnapshot.data()['usd'];
+            String paymentG = documentSnapshot.data()['paymentGateway'];
+            String TypeOfG = documentSnapshot.data()['TypeOfG'];
 
-              String fulfilled = documentSnapshot.data()['fulfilled'];
-              String title = documentSnapshot.data()['title'];
-              String inr = documentSnapshot.data()['inr'];
-              String usd = documentSnapshot.data()['usd'];
+            return
+              Column(
+                children: <Widget>[
+                  Row(
+                    children: [
+                      Text(productname, style: TextStyle(
+                          color: kText,
+                          fontSize: 20.0,
+                          fontWeight: FontWeight.bold),),                    ],
+                  ),
 
-              String Finr = documentSnapshot.data()['Finr'];
-              String Fusd = documentSnapshot.data()['Fusd'];
-              String Feur = documentSnapshot.data()['Feur'];
-              String Fgbp = documentSnapshot.data()['Fgbp'];
+                  Row(
+                    children: [
+                      Text( "Listed price:",style: TextStyle(color: kText,
+                          fontSize: 20.0,
+                          fontWeight: FontWeight.bold)),
+                      Text( "${currentUser.currencysym}$inr",style: TextStyle(color: kText,
+                          fontSize: 20.0,
+                          fontWeight: FontWeight.bold)),                    ],
+                  ),
+                  Row(
+                    children: [
+                      Text( "Payment gateway charges: - ",style: TextStyle(color: kText,
+                          fontSize: 20.0,
+                          fontWeight: FontWeight.bold)),
+                      Text( "${currentUser.currencysym}$paymentG($TypeOfG)",style: TextStyle(color: kText,
+                          fontSize: 20.0,
+                          fontWeight: FontWeight.bold)),                    ],
+                  ),
 
-              return
-                Column(
+                  Row(
+                    children: [
+                      Text( "Flat commission(2 %): - ",style: TextStyle(color: kText,
+                          fontSize: 20.0,
+                          fontWeight: FontWeight.bold)),
+                      Text( "${currentUser.currencysym}$paymentG",style: TextStyle(color: kText,
+                          fontSize: 20.0,
+                          fontWeight: FontWeight.bold)),                    ],
+                  ),
 
-                  children: [
-                    df(productname:title,
-                      usd:usd,inr:inr,
-                      Fusd:Fusd,Finr:Finr,Feur:Feur,Fgbp:Fgbp,
 
-                      orderId:orderId, ownerId:ownerId,),
+                ],
+              );
 
-                  ],
-                );
+          },
+          query:   FirebaseFirestore.instance.collection('Payments')
+              .doc(currentUser.id)
+              .collection('AuctionPayments')
+              .orderBy('timestamp',descending: true)
+              .where('fulfilled',isEqualTo: 'true')
 
-            },
-            query:  FirebaseFirestore.instance.collection('Payments')
-                .doc(currentUser.id)
-                .collection('ServicePayments').orderBy('timestamp',descending: true)
-                .where('fulfilled',isEqualTo: 'true')
-
-        ),
       );
 
   }

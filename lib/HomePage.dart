@@ -207,6 +207,11 @@ class _HomepageState extends State<Homepage> with WidgetsBindingObserver {
           // print("Notification NOT shown");
         },
       );
+
+              badgescountmessage();
+              badgescount();
+
+
     }
   }
 
@@ -352,6 +357,99 @@ class _HomepageState extends State<Homepage> with WidgetsBindingObserver {
       curve: Curves.easeInOut,
     );
   }
+  badgescount()  {
+
+    return
+      StreamBuilder(
+        stream:  activityFeedRef
+            .doc(currentUser.id)
+            .collection('feedItems')
+            .where('read',isEqualTo: 'false').snapshots(),
+        builder: (context,snapshot){
+          if(!snapshot.hasData){
+            if(snapshot.data==null){
+              return Badge(
+                shape: BadgeShape.circle,
+                padding: EdgeInsets.all(7),
+                badgeContent: Text('0',style: TextStyle(color: Colors.white),),
+              );
+
+            }
+            else {
+              data +=  snapshot.data.docs.length;
+
+              return
+                Badge(
+
+                  shape: BadgeShape.circle,
+                  padding: EdgeInsets.all(2),
+                  badgeContent: Text('$data',style: TextStyle(color: Colors.white),),
+                );
+
+            }
+
+          }
+          else {
+            return Badge(
+              shape: BadgeShape.circle,
+              padding: EdgeInsets.all(7),
+              badgeContent: Text('0',style: TextStyle(color: Colors.white),),
+            );
+          }
+
+        },
+      );
+
+  }
+  badgescountmessage()  {
+    return
+      StreamBuilder(
+        stream: _messageCollection
+            .doc(currentUser.id)
+
+            .snapshots(),
+        builder: (context,snapshot){
+          if(!snapshot.hasData)
+          {
+            if(snapshot.data==null){
+              return Badge(
+                shape: BadgeShape.circle,
+                padding: EdgeInsets.all(7),
+                badgeContent: Text('0',style: TextStyle(color: Colors.white),),
+              );
+
+            }
+            else
+            {
+              print("dev f fd");
+
+              String messages = snapshot.data['read'];
+              if(messages == 'false');
+              {
+                setState(() {
+                  data  += messages.length;
+                });
+                return
+
+                  Badge(
+                    shape: BadgeShape.circle,
+                    padding: EdgeInsets.all(7),
+                    badgeContent: Text('$data',style: TextStyle(color: Colors.white),),
+                  );
+              }
+
+            }
+          }
+          else{    return Badge(
+            shape: BadgeShape.circle,
+            padding: EdgeInsets.all(7),
+            badgeContent: Text('0',style: TextStyle(color: Colors.white),),
+          );}
+
+        },
+      );
+
+  }
 
   Scaffold buildAuthScreen() {
 
@@ -396,9 +494,17 @@ class _HomepageState extends State<Homepage> with WidgetsBindingObserver {
           Icon(Icons.store, size: 30,color: Colors.white,),
           Icon(FontAwesomeIcons.swatchbook, size: 30,color: Colors.white,),
           Icon(Icons.play_arrow, size: 30,color: Colors.white,),
-          Stack(children:[ Icon(Icons.inbox, size: 30,color: Colors.white,),
+          Row(
+            children: [
 
-          ]),
+             currentUser == null?  Badge(
+      shape: BadgeShape.circle,
+      padding: EdgeInsets.all(7),
+      badgeContent: Text('0',style: TextStyle(color: Colors.white),),
+    ):badgescount(),
+              Icon(Icons.inbox, size: 30,color: Colors.white,),
+            ],
+          ),
 
         ],
 

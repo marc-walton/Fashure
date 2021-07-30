@@ -1,25 +1,30 @@
 import 'package:bubble_tab_indicator/bubble_tab_indicator.dart';
-import 'package:fashow/SellerDash/SellerSettings.dart';
-import 'package:badges/badges.dart';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:fashow/servicedash/ServiceORDERS.dart';
-import 'package:fashow/servicedash/Payments_service.dart';
+import 'package:badges/badges.dart';
+import 'package:fashow/Live/dashboard/auction_orders.dart';
+import 'package:fashow/Live/dashboard/payments.dart';
+import 'package:fashow/SellerDash/SellerSettings.dart';
+
 import 'package:flutter/material.dart';
 import 'package:fashow/HomePage.dart';
+import 'package:fashow/user.dart';
+import 'package:country_list_pick/country_list_pick.dart';
 import 'package:fashow/Constants.dart';
-class ServiceDash extends StatefulWidget {
+import 'package:fashow/size_config.dart';
+class AuctionDash extends StatefulWidget {
   final  int selectedPage;
 
-  const ServiceDash({Key key, this.selectedPage}) : super(key: key);
+  const AuctionDash({Key key, this.selectedPage}) : super(key: key);
   @override
-  _ServiceDashState createState() => _ServiceDashState();
+  _AuctionDashState createState() => _AuctionDashState();
 }
 
-class _ServiceDashState extends State<ServiceDash> {
+class _AuctionDashState extends State<AuctionDash> {
   final scaffoldKey = new GlobalKey<ScaffoldState>();
   final _formKey = GlobalKey<FormState>();
   bool _inProcess = false;
-  int data = 0;
+  int data  = 0;
   int datao = 0;
 
   int order = 0;
@@ -32,48 +37,51 @@ class _ServiceDashState extends State<ServiceDash> {
   int serdata = 0;
   void initState() {
     super.initState();
-    gets();
-    getsp();
 
+    geto();
+    getop();
   }
 
-  gets() async {
-    QuerySnapshot snapshot = await FirebaseFirestore.instance.collection('serviceSeller')
+  geto() async {
+    QuerySnapshot snapshot = await FirebaseFirestore.instance.collection('ordersAuctionS')
         .doc(currentUser.id)
-        .collection('sellerService')
+        .collection('auctionSOrder')
         .where('read',isEqualTo: 'false')
         .get();
     setState(() {
-      ser = snapshot.docs.length ?? 0;
+      shop = snapshot.docs.length ?? 0;
     });
-     }
-  getsp() async {
+
+  }
+  getop() async {
     QuerySnapshot snapshot = await  FirebaseFirestore.instance.collection('Payments')
         .doc(currentUser.id)
-        .collection('ServicePayments')
+        .collection('AuctionPayments')
         .where('fulfilled',isEqualTo: 'true')
         .where('read',isEqualTo: 'false')
         .get();
     setState(() {
-      serpay = snapshot.docs.length ?? 0;
+      shoppay = snapshot.docs.length ?? 0;
     });
 
   }
- s()  {
+  ord()  {
 
     return  Badge(
       shape: BadgeShape.circle,
       padding: EdgeInsets.all(7),
-      badgeContent: Text('$ser ',style: TextStyle(color: Colors.white),),
-    ); }
-p()  {
-
-    return  Badge(
-      shape: BadgeShape.circle,
-      padding: EdgeInsets.all(7),
-      badgeContent: Text('$serpay ',style: TextStyle(color:  Colors.white),),
+      badgeContent: Text('$shop ',style: TextStyle(color: kText),),
     );
   }
+  pay()  {
+
+    return  Badge(
+      shape: BadgeShape.circle,
+      padding: EdgeInsets.all(7),
+      badgeContent: Text('$shoppay ',style: TextStyle(color: kText),),
+    );
+  }
+
   @override
 
   Widget build(BuildContext context) {
@@ -82,24 +90,21 @@ p()  {
 
       length:3,
       child: Scaffold(
-        backgroundColor: kSecondaryColor,
         key:  scaffoldKey,
-        appBar: PreferredSize(
+        appBar:PreferredSize(
           preferredSize: Size.fromHeight(100.0),
           child: AppBar(
             backgroundColor: kPrimaryColor,
             automaticallyImplyLeading: false,
-
             title: FittedBox(
               fit: BoxFit.contain,
               child: Text(
-                "Freelance Orders",
+                "Shop Orders",
                 style: TextStyle(color: Colors.white),
               ),
             ),
-
             bottom: PreferredSize(
-              preferredSize: Size.fromHeight(100.0),
+              preferredSize: Size.fromHeight(130.0),
               child: Container(
                 height: 60.0,
                 child: TabBar(
@@ -110,14 +115,13 @@ p()  {
                   indicator:BubbleTabIndicator(indicatorHeight:40.0,
                     indicatorColor: kblue,
                   ),
-
                   tabs:[
                     FittedBox(
                       fit: BoxFit.contain,
                       child: Row(
                         children: [
                           Text('Orders'),
-                         s(),
+                          ord(),
                         ],
                       ),
                     ),FittedBox(
@@ -125,14 +129,12 @@ p()  {
                       child: Row(
                         children: [
                           Text('My payments'),
-                          p(),
+                          pay(),
                         ],
                       ),
                     ),
 
-FittedBox(fit: BoxFit.contain,child: Text("Settings")),
-
-
+                    FittedBox(fit: BoxFit.contain,child: Text("Settings")),
                   ],
                 ),
               ),
@@ -141,12 +143,19 @@ FittedBox(fit: BoxFit.contain,child: Text("Settings")),
         ),
         body:
 
-        TabBarView(
-            children:<Widget> [
-              ServiceOrders(),
-              ServicePayments(),
-              SellerSetting(),
-             ]),
+        Container( decoration: BoxDecoration(
+            gradient: fabGradient
+        ) ,
+          alignment: Alignment.center,
+          child: TabBarView(
+              children:<Widget> [
+                AuctionOrders(),
+                AuctionPayments(),
+
+                SellerSetting(),
+
+              ]),
+        ),
 
       ),
     );
