@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fashow/ActivityFeed.dart';
 import 'package:fashow/Live/upload_bid.dart';
@@ -31,6 +32,7 @@ import 'package:paginate_firestore/paginate_firestore.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:sticky_headers/sticky_headers/widget.dart';
 import 'package:zego_express_engine/zego_express_engine.dart';
+List<Widget> _listOfImages = <Widget>[];
 
 class LiveTv extends StatefulWidget {
   @override
@@ -268,7 +270,7 @@ class _LiveTvState extends State<LiveTv> with TickerProviderStateMixin {
                 child: getStories(),
               ),
               Center(
-                child: getBids(),
+                child: getUserBids(),
               )
             ]),
           ),
@@ -523,176 +525,183 @@ class _LiveTvState extends State<LiveTv> with TickerProviderStateMixin {
       ),
     );
   }
-  getBids() {
+  getUserBids(){
     bool isLiked;
     bool isPostOwner = currentUserId == ownerId;
 
     SizeConfig().init(context);
     return
-    PaginateFirestore(
-        emptyDisplay: Center(
-            child: Text(
-          "Nothing found",
-          style: TextStyle(
-            fontWeight: FontWeight.bold,
-            fontSize: 25.0,
-          ),
-        )),
-        itemBuilderType: PaginateBuilderType.listView,
-        itemBuilder: (index, context, documentSnapshot) {
-
-          String ownerId = documentSnapshot.data()['ownerId'];
-          String postId = documentSnapshot.data()['postId'];
+      PaginateFirestore(
+          emptyDisplay: Center(
+              child: Text(
+                "Nothing found",
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 25.0,
+                ),
+              )),
+          itemBuilderType: PaginateBuilderType.listView,
+          itemBuilder: (index, context, documentSnapshot) {
+            String ownerId = documentSnapshot.data()['ownerId'];
+            String postId = documentSnapshot.data()['postId'];
+            bool bidon = documentSnapshot.data()['bidOn'];
+            int bidTimer = documentSnapshot.data()['bidTimer'];
+            List images = documentSnapshot.data()["images"];
+            String topBid1 = documentSnapshot.data()["topBid1"];
+            String topBid2 = documentSnapshot.data()["topBid2"];
+            String topBid3 = documentSnapshot.data()["topBid3"];
+            String topBidder1 = documentSnapshot.data()["topBidder1"];
+            String topBidder2 = documentSnapshot.data()["topBidder2"];
+            String topBidder3 = documentSnapshot.data()["topBidder3"];
+            String topBidderImg1 = documentSnapshot.data()["topBidderImg1"];
+            String topBidderImg2 = documentSnapshot.data()["topBidderImg2"];
+            String topBidderImg3 = documentSnapshot.data()["topBidderImg3"];
+            String topBidderId1 = documentSnapshot.data()["topBidderId1"];
+            String topBidderId2 = documentSnapshot.data()["topBidderId2"];
+            String topBidderId3 = documentSnapshot.data()["topBidderId3"];
+            var usd = documentSnapshot.data()['usd'];
+            var inr = documentSnapshot.data()['inr'];
             String username = documentSnapshot.data()['username'];
-String photoUrl = documentSnapshot.data()['photoUrl'];
+            String photoUrl = documentSnapshot.data()['photoUrl'];
+            int minimumBid = documentSnapshot.data()['minimumBid'];
+            String endingTime = documentSnapshot.data()['endingTime'];
+            bool hasEnded = documentSnapshot.data()['hasEnded'];
+            Map likes = documentSnapshot.data()['likes'];
 
-  String endingTime = documentSnapshot.data()['endingTime'];
-  bool hasEnded = documentSnapshot.data()['hasEnded'];
- Map likes = documentSnapshot.data()['likes'];
+            String description = documentSnapshot.data()['description'];
+            int amount = documentSnapshot.data()['amount'];
 
-          return         StickyHeader(
-            header: Container(
-              height: 50.0,
-              color: Colors.transparent,
-              padding: EdgeInsets.symmetric(horizontal: 16.0),
-              alignment: Alignment.centerLeft,
-              child: ListTile(trailing: auctionTimer(endingTime: endingTime)),
-            ),
-            content:  Column(
-              children: <Widget>[
-                ListTile(
-                  leading: GestureDetector(
-                    onTap: () => showProfile(context, profileId: ownerId),
-                    child: CircleAvatar(
-                      backgroundImage: CachedNetworkImageProvider(photoUrl),
-                      backgroundColor: Colors.grey,
-                    ),
-                  ),
-                  title: GestureDetector(
-                    onTap: () => showProfile(context, profileId: ownerId),
-                    child: Text(
-                      username,
-                      style: TextStyle(
-                        color: kText,
-                        fontWeight: FontWeight.bold,
+            return   StickyHeader(
+                header: Container(
+                  height: 50.0,
+                  color: Colors.transparent,
+                  padding: EdgeInsets.symmetric(horizontal: 16.0),
+                  alignment: Alignment.centerLeft,
+                  child: ListTile(trailing: auctionTimer(endingTime: endingTime)),
+                ),
+                content: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Column(
+                  crossAxisAlignment:
+                  CrossAxisAlignment.start,
+                  children: [
+                    ListTile(
+                      leading: GestureDetector(
+                        onTap: () => showProfile(context, profileId: ownerId),
+                        child: CircleAvatar(
+                          backgroundImage: CachedNetworkImageProvider(photoUrl),
+                          backgroundColor: Colors.grey,
+                        ),
                       ),
-                    ),
-                  ),
-                  trailing: IconButton(
-                      icon: Icon(
-                        Icons.more_horiz,
-                        color: kText,
+                      title: GestureDetector(
+                        onTap: () => showProfile(context, profileId: ownerId),
+                        child: Text(
+                          username,
+                          style: TextStyle(
+                            color: kText,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
                       ),
-                      onPressed: () {
-                        !isPostOwner
-                            ? showDialog(
-                            context: context,
-                            builder: (BuildContext context) {
-                              return Dialog(
-                                backgroundColor: kSecondaryColor,
-                                shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(
-                                        20.0)), //this right here
-                                child: GestureDetector(
-                                  onTap: () {
-                                    report(postId);
-                                    Navigator.pop(context);
-                                  },
-                                  child: Container(
-                                    height: 100,
-                                    child: Padding(
-                                      padding: const EdgeInsets.all(12.0),
-                                      child: Column(
-                                        mainAxisAlignment: MainAxisAlignment.center,
-                                        crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                        children: [
-                                          Container(
-                                            child: Align(
-                                                alignment: Alignment.center,
-                                                child: Text(
-                                                  'Report this post?',
-                                                  style: TextStyle(
-                                                      color: Colors.blueAccent,
-                                                      fontWeight: FontWeight.bold,
-                                                      fontSize: 20.0),
-                                                )),
+                      trailing: IconButton(
+                          icon: Icon(
+                            Icons.more_horiz,
+                            color: kText,
+                          ),
+                          onPressed: () {
+                            !isPostOwner
+                                ? showDialog(
+                                context: context,
+                                builder: (BuildContext context) {
+                                  return Dialog(
+                                    backgroundColor: kSecondaryColor,
+                                    shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(
+                                            20.0)), //this right here
+                                    child: GestureDetector(
+                                      onTap: () {
+                                        report(postId);
+                                        Navigator.pop(context);
+                                      },
+                                      child: Container(
+                                        height: 100,
+                                        child: Padding(
+                                          padding: const EdgeInsets.all(12.0),
+                                          child: Column(
+                                            mainAxisAlignment: MainAxisAlignment.center,
+                                            crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                            children: [
+                                              Container(
+                                                child: Align(
+                                                    alignment: Alignment.center,
+                                                    child: Text(
+                                                      'Report this post?',
+                                                      style: TextStyle(
+                                                          color: Colors.blueAccent,
+                                                          fontWeight: FontWeight.bold,
+                                                          fontSize: 20.0),
+                                                    )),
+                                              ),
+                                            ],
                                           ),
-                                        ],
+                                        ),
                                       ),
                                     ),
+                                  );
+                                  // ignore: unnecessary_statements
+                                })
+                                : handleDeletePost(parentContext:context,ownerId: ownerId,postId: postId);
+                          }),
+                    ),
+
+                    ListView.builder(physics: NeverScrollableScrollPhysics(),
+                        shrinkWrap: true,
+                        scrollDirection:Axis.vertical,
+                        itemCount: images.length,
+                        itemBuilder: (BuildContext context, int index) {
+                          // List<String> images = List.from(snapshot.data.docs[index].data()['collmediaUrl']);
+                          _listOfImages = [];
+                          for (int i = 0;
+                          i <
+                              images.length;
+                          i++) {
+                            _listOfImages.add(CachedNetworkImage(imageUrl:images[i]));
+                          }
+                          return Stack(
+                            children: <Widget>[
+                              Container(
+                                  margin: EdgeInsets.all(1.0),
+
+                                  decoration: BoxDecoration(
+                                    color: Colors.transparent,
                                   ),
-                                ),
-                              );
-                              // ignore: unnecessary_statements
-                            })
-                            : handleDeletePost(parentContext:context,ownerId: ownerId,postId: postId);
-                      }),
-                ),
-                Container(
-                  child: StreamBuilder(
-                    stream: bidsRef
-                        .doc(ownerId)
-                        .collection("userBids")
-                        .doc(postId)
-                        .collection("Items")
-                        .snapshots(),
-                    builder: (BuildContext context,
-                        AsyncSnapshot<QuerySnapshot> snapshot) {
-                      if (!snapshot.hasData) {
-                        return Text('text');
-                      }
-                      return ListView.builder(
-                          scrollDirection: Axis.horizontal,
-                          itemCount: snapshot.data.docs.length,
-                          itemBuilder: (BuildContext context, int index) {
-                            String a = snapshot.data.docs[index]["images"];
-                            String topBid1 =
-                            snapshot.data.docs[index]["topBid1"];
-                            String topBid2 =
-                            snapshot.data.docs[index]["topBid2"];
-                            String topBid3 =
-                            snapshot.data.docs[index]["topBid3"];
-                            String topBidder1 =
-                            snapshot.data.docs[index]["topBidder1"];
-                            String topBidder2 =
-                            snapshot.data.docs[index]["topBidder2"];
-                            String topBidder3 =
-                            snapshot.data.docs[index]["topBidder3"];
-                            String topBidderImg1 =
-                            snapshot.data.docs[index]["topBidderImg1"];
-                            String topBidderImg2 =
-                            snapshot.data.docs[index]["topBidderImg2"];
-                            String topBidderImg3 =
-                            snapshot.data.docs[index]["topBidderImg3"];
-                            String topBidderId1 =
-                            snapshot.data.docs[index]["topBidderId1"];
-                            String topBidderId2 =
-                            snapshot.data.docs[index]["topBidderId2"];
-                            String topBidderId3 =
-                            snapshot.data.docs[index]["topBidderId3"];
-                            int usd = snapshot.data.docs[index]['usd'];
-                            String description =
-                            snapshot.data.docs[index]['description'];
-                            int amount = snapshot.data.docs[index]['amount'];
-                            int minimumBid =
-                            snapshot.data.docs[index]['minimumBid'];
-                            String docId = snapshot.data.docs[index]['docId'];
-                            String images =
-                            snapshot.data.docs[index]['images'];
-                            listOfImages = [];
-                            for (int i = 0;
-                            i <
-                                images
-                                    .length;
-                            i++) {
-                              listOfImages.add(images);
-                            }
-                            if (a.isEmpty) {
-                              return Container();
-                            }
-                            return StickyHeader(
-                              header: Container(
+                                  width: MediaQuery
+                                      .of(context)
+                                      .size
+                                      .width,
+                                  child:
+                                  CarouselSlider(
+                                      items: _listOfImages,
+                                      options: CarouselOptions(
+                                        aspectRatio: 16/9,
+                                        viewportFraction: 0.8,
+                                        initialPage: 0,
+                                        enableInfiniteScroll: false,
+                                        reverse: false,
+                                        autoPlay: false,
+                                        autoPlayInterval: Duration(seconds: 3),
+                                        autoPlayAnimationDuration: Duration(milliseconds: 800),
+                                        autoPlayCurve: Curves.fastOutSlowIn,
+                                        enlargeCenterPage: true,
+                                        pauseAutoPlayOnManualNavigate: true,
+                                        pauseAutoPlayOnTouch: true,
+                                        // onPageChanged: callbackFunction,
+                                        scrollDirection: Axis.horizontal,
+                                      )
+                                  )
+                              ),
+                              Container(
                                 height: 50.0,
                                 color: Colors.transparent,
                                 padding:
@@ -714,7 +723,7 @@ String photoUrl = documentSnapshot.data()['photoUrl'];
                                             addLikeToActivityFeed(
                                                 ownerId: ownerId,
                                                 postId: postId,
-                                                mediaUrl: images);
+                                                mediaUrl: images.first);
                                             wishRef
                                                 .doc(currentUser.id)
                                                 .collection("userAucWish")
@@ -724,7 +733,7 @@ String photoUrl = documentSnapshot.data()['photoUrl'];
                                               "postId": postId,
                                               "timestamp": timestamp,
                                               "photoUrl": photoUrl,
-                                              "image": images,
+                                              "image": images.first,
                                               "ownerId": ownerId,
                                             });
                                             setState(() {
@@ -759,561 +768,533 @@ String photoUrl = documentSnapshot.data()['photoUrl'];
                                             ? Icon(Icons.bookmark_outlined)
                                             : Icon(Icons.bookmark_outline))),
                               ),
-                              content: Expanded(
-                                child: Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Column(
-                                    crossAxisAlignment:
-                                    CrossAxisAlignment.start,
-                                    children: [
-                                      Container(
-                                        height: SizeConfig.screenHeight * 0.4,
-                                        child: ClipRRect(
-                                          borderRadius:
-                                          BorderRadius.circular(20.0),
-                                          child: CachedNetworkImage(
-                                              imageUrl: snapshot.data
-                                                  .docs[index]['images']),
-                                        ),
-                                      ),
-                                      SizedBox(
-                                          height:
-                                          SizeConfig.blockSizeVertical *
-                                              2),
-                                      Row(
-                                        children: [
-                                          Text("Description:",
-                                              style: TextStyle(
-                                                  fontWeight:
-                                                  FontWeight.bold)),
-                                          ExpandableText(
-                                            " $description",
-                                          ),
-                                        ],
-                                      ),
-                                      SizedBox(
-                                          height:
-                                          SizeConfig.blockSizeVertical *
-                                              2),
-                                      Row(
-                                        crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                        children: [
-                                          Text("Opening bid:",
-                                              style: TextStyle(
-                                                  fontWeight:
-                                                  FontWeight.bold)),
-                                          Text("\u0024  $usd"),
-                                        ],
-                                      ),
-                                      SizedBox(
-                                          height:
-                                          SizeConfig.blockSizeVertical *
-                                              2),
-                                      Row(
-                                        crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                        children: [
-                                          Text("Current bid:",
-                                              style: TextStyle(
-                                                  fontWeight:
-                                                  FontWeight.bold)),
-                                          Text("\u0024  ${usd + amount} "),
-                                        ],
-                                      ),
-                                      SizedBox(
-                                          height:
-                                          SizeConfig.blockSizeVertical *
-                                              2),
-                                      GestureDetector(
-                                        onTap: () => showProfile(context,
-                                            profileId: topBidderId1),
-                                        child: Padding(
-                                          padding: const EdgeInsets.all(8.0),
-                                          child: ListTile(
-                                            title: CircleAvatar(
-                                              backgroundImage:
-                                              CachedNetworkImageProvider(
-                                                  topBidderImg1),
-                                              backgroundColor: Colors.grey,
-                                            ),
-                                            leading: Text(
-                                              topBidder1,
-                                              style: TextStyle(
-                                                color: kText,
-                                                fontWeight: FontWeight.bold,
-                                              ),
-                                            ),
-                                            trailing:
-                                            Text("\u0024  $topBid1"),
-                                          ),
-                                        ),
-                                      ),
-                                      GestureDetector(
-                                        onTap: () => showProfile(context,
-                                            profileId: topBidderId2),
-                                        child: Padding(
-                                          padding: const EdgeInsets.all(8.0),
-                                          child: ListTile(
-                                            title: CircleAvatar(
-                                              backgroundImage:
-                                              CachedNetworkImageProvider(
-                                                  topBidderImg2),
-                                              backgroundColor: Colors.grey,
-                                            ),
-                                            leading: Text(
-                                              topBidder2,
-                                              style: TextStyle(
-                                                color: kText,
-                                                fontWeight: FontWeight.bold,
-                                              ),
-                                            ),
-                                            trailing:
-                                            Text("\u0024  $topBid2"),
-                                          ),
-                                        ),
-                                      ),
-                                      GestureDetector(
-                                        onTap: () => showProfile(context,
-                                            profileId: topBidderId3),
-                                        child: Padding(
-                                          padding: const EdgeInsets.all(8.0),
-                                          child: ListTile(
-                                            title: CircleAvatar(
-                                              backgroundImage:
-                                              CachedNetworkImageProvider(
-                                                  topBidderImg3),
-                                              backgroundColor: Colors.grey,
-                                            ),
-                                            leading: Text(
-                                              topBidder3,
-                                              style: TextStyle(
-                                                color: kText,
-                                                fontWeight: FontWeight.bold,
-                                              ),
-                                            ),
-                                            trailing:
-                                            Text("\u0024  $topBid3"),
-                                          ),
-                                        ),
-                                      ),
-                                      SizedBox(
-                                          height:
-                                          SizeConfig.blockSizeVertical *
-                                              2),
-                                      !hasEnded ?   ElevatedButton(
-                                        onPressed: () {
-                                          if (amount <= 99) {
-                                            int change;
-                                            int a = amount + minimumBid;
-                                            int top = usd + amount;
-                                            amount > 99
-                                                ? change = minimumBid
-                                                : change = 25;
-                                            bidsRef
-                                                .doc(ownerId)
-                                                .collection("userBids")
-                                                .doc(postId)
-                                                .collection("Items")
-                                                .doc(docId)
-                                                .update({
-                                              "amount": a,
-                                              "minimumBid": change,
-                                              "topBid1": top,
-                                              "topBidder1": currentUser
-                                                  .displayName,
-                                              "topBidderImg1":
-                                              currentUser.photoUrl,
-                                              "topBidderId1":
-                                              currentUser.id,
-                                              "topBid2": topBid1,
-                                              "topBidder2": topBidder1,
-                                              "topBidderImg2":
-                                              topBidderImg1,
-                                              "topBidderId2":
-                                              topBidderId1,
-                                              "topBid3": topBid2,
-                                              "topBidder3": topBidder2,
-                                              "topBidderImg3":
-                                              topBidderImg2,
-                                              "topBidderId3":
-                                              topBidderId2,
-                                            });
-                                          } else if (amount <= 299) {
-                                            int change;
-                                            int a = amount + minimumBid;
-                                            int top = usd + amount;
-                                            amount > 299
-                                                ? change = minimumBid
-                                                : change = 50;
+                            ],
+                          );
+                        }
+                    ),
 
-                                            bidsRef
-                                                .doc(ownerId)
-                                                .collection("userBids")
-                                                .doc(postId)
-                                                .collection("Items")
-                                                .doc(docId)
-                                                .update({
-                                              "amount": a,
-                                              "minimumBid": change,
-                                              "topBid1": top,
-                                              "topBidder1": currentUser
-                                                  .displayName,
-                                              "topBidderImg1":
-                                              currentUser.photoUrl,
-                                              "topBidderId1":
-                                              currentUser.id,
-                                              "topBid2": topBid1,
-                                              "topBidder2": topBidder1,
-                                              "topBidderImg2":
-                                              topBidderImg1,
-                                              "topBidderId2":
-                                              topBidderId1,
-                                              "topBid3": topBid2,
-                                              "topBidder3": topBidder2,
-                                              "topBidderImg3":
-                                              topBidderImg2,
-                                              "topBidderId3":
-                                              topBidderId2,
-                                            });
-                                          } else if (amount <= 599) {
-                                            int change;
-                                            int a = amount + minimumBid;
-                                            int top = usd + amount;
-                                            amount > 599
-                                                ? change = minimumBid
-                                                : change = 100;
+                    SizedBox(
+                        height:
+                        SizeConfig.blockSizeVertical * 2),
+                    ExpansionTile(
+                      title: Text("Description:",
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold)),
+                      children: [ Row(
+                        children: [
+                          Text("$description"),
+                        ],
+                      )]
+                    ),
 
-                                            bidsRef
-                                                .doc(ownerId)
-                                                .collection("userBids")
-                                                .doc(postId)
-                                                .collection("Items")
-                                                .doc(docId)
-                                                .update({
-                                              "amount": a,
-                                              "minimumBid": change,
-                                              "topBid1": top,
-                                              "topBidder1": currentUser
-                                                  .displayName,
-                                              "topBidderImg1":
-                                              currentUser.photoUrl,
-                                              "topBidderId1":
-                                              currentUser.id,
-                                              "topBid2": topBid1,
-                                              "topBidder2": topBidder1,
-                                              "topBidderImg2":
-                                              topBidderImg1,
-                                              "topBidderId2":
-                                              topBidderId1,
-                                              "topBid3": topBid2,
-                                              "topBidder3": topBidder2,
-                                              "topBidderImg3":
-                                              topBidderImg2,
-                                              "topBidderId3":
-                                              topBidderId2,
-                                            });
-                                          } else if (amount <= 1499) {
-                                            int change;
-                                            int a = amount + minimumBid;
-                                            int top = usd + amount;
-                                            amount > 1499
-                                                ? change = minimumBid
-                                                : change = 200;
+                    SizedBox(
+                        height:
+                        SizeConfig.blockSizeVertical * 2),
 
-                                            bidsRef
-                                                .doc(ownerId)
-                                                .collection("userBids")
-                                                .doc(postId)
-                                                .collection("Items")
-                                                .doc(docId)
-                                                .update({
-                                              "amount": a,
-                                              "minimumBid": change,
-                                              "topBid1": top,
-                                              "topBidder1": currentUser
-                                                  .displayName,
-                                              "topBidderImg1":
-                                              currentUser.photoUrl,
-                                              "topBidderId1":
-                                              currentUser.id,
-                                              "topBid2": topBid1,
-                                              "topBidder2": topBidder1,
-                                              "topBidderImg2":
-                                              topBidderImg1,
-                                              "topBidderId2":
-                                              topBidderId1,
-                                              "topBid3": topBid2,
-                                              "topBidder3": topBidder2,
-                                              "topBidderImg3":
-                                              topBidderImg2,
-                                              "topBidderId3":
-                                              topBidderId2,
-                                            });
-                                          } else if (amount <= 2499) {
-                                            int change;
-                                            int a = amount + minimumBid;
-                                            int top = usd + amount;
-                                            amount > 2499
-                                                ? change = minimumBid
-                                                : change = 300;
+                    Row(
+                      crossAxisAlignment:
+                      CrossAxisAlignment.start,
+                      children: [
+                        Text("Opening bid:",
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold)),
+                        Text("\u0024  $usd"),
+                      ],
+                    ),
+                    SizedBox(
+                        height:
+                        SizeConfig.blockSizeVertical * 2),
+                    Row(
+                      crossAxisAlignment:
+                      CrossAxisAlignment.start,
+                      children: [
+                        Text("Current bid:",
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold)),
+                        Text("\u0024  ${usd + amount} "),
+                      ],
+                    ),
+                    SizedBox(
+                        height:
+                        SizeConfig.blockSizeVertical * 2),
+                    ExpansionTile(title:
+                    Text(
+                      "Top Bids",
+                      style: TextStyle(
+                        color: kText,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                      children: [
+                        GestureDetector(
+                          onTap: () => showProfile(context, profileId: topBidderId1),
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: ListTile(leading:
+                            CircleAvatar(
+                              backgroundImage:
+                              CachedNetworkImageProvider(topBidderImg1),
+                              backgroundColor: Colors.grey,
+                            ),
 
-                                            bidsRef
-                                                .doc(ownerId)
-                                                .collection("userBids")
-                                                .doc(postId)
-                                                .collection("Items")
-                                                .doc(docId)
-                                                .update({
-                                              "amount": a,
-                                              "minimumBid": change,
-                                              "topBid1": top,
-                                              "topBidder1": currentUser
-                                                  .displayName,
-                                              "topBidderImg1":
-                                              currentUser.photoUrl,
-                                              "topBidderId1":
-                                              currentUser.id,
-                                              "topBid2": topBid1,
-                                              "topBidder2": topBidder1,
-                                              "topBidderImg2":
-                                              topBidderImg1,
-                                              "topBidderId2":
-                                              topBidderId1,
-                                              "topBid3": topBid2,
-                                              "topBidder3": topBidder2,
-                                              "topBidderImg3":
-                                              topBidderImg2,
-                                              "topBidderId3":
-                                              topBidderId2,
-                                            });
-                                          } else if (amount <= 3499) {
-                                            int change;
-                                            int a = amount + minimumBid;
-                                            int top = usd + amount;
-                                            amount > 3499
-                                                ? change = minimumBid
-                                                : change = 400;
-
-                                            bidsRef
-                                                .doc(ownerId)
-                                                .collection("userBids")
-                                                .doc(postId)
-                                                .collection("Items")
-                                                .doc(docId)
-                                                .update({
-                                              "amount": a,
-                                              "minimumBid": change,
-                                              "topBid1": top,
-                                              "topBidder1": currentUser
-                                                  .displayName,
-                                              "topBidderImg1":
-                                              currentUser.photoUrl,
-                                              "topBidderId1":
-                                              currentUser.id,
-                                              "topBid2": topBid1,
-                                              "topBidder2": topBidder1,
-                                              "topBidderImg2":
-                                              topBidderImg1,
-                                              "topBidderId2":
-                                              topBidderId1,
-                                              "topBid3": topBid2,
-                                              "topBidder3": topBidder2,
-                                              "topBidderImg3":
-                                              topBidderImg2,
-                                              "topBidderId3":
-                                              topBidderId2,
-                                            });
-                                          } else if (amount <= 4499) {
-                                            int change;
-                                            int a = amount + minimumBid;
-                                            int top = usd + amount;
-                                            amount > 5499
-                                                ? change = minimumBid
-                                                : change = 500;
-
-                                            bidsRef
-                                                .doc(ownerId)
-                                                .collection("userBids")
-                                                .doc(postId)
-                                                .collection("Items")
-                                                .doc(docId)
-                                                .update({
-                                              "amount": a,
-                                              "minimumBid": change,
-                                              "topBid1": top,
-                                              "topBidder1": currentUser
-                                                  .displayName,
-                                              "topBidderImg1":
-                                              currentUser.photoUrl,
-                                              "topBidderId1":
-                                              currentUser.id,
-                                              "topBid2": topBid1,
-                                              "topBidder2": topBidder1,
-                                              "topBidderImg2":
-                                              topBidderImg1,
-                                              "topBidderId2":
-                                              topBidderId1,
-                                              "topBid3": topBid2,
-                                              "topBidder3": topBidder2,
-                                              "topBidderImg3":
-                                              topBidderImg2,
-                                              "topBidderId3":
-                                              topBidderId2,
-                                            });
-                                          } else if (amount > 5500) {
-                                            int a = amount + minimumBid;
-                                            int top = usd + amount;
-
-                                            bidsRef
-                                                .doc(ownerId)
-                                                .collection("userBids")
-                                                .doc(postId)
-                                                .collection("Items")
-                                                .doc(docId)
-                                                .update({
-                                              "amount": a,
-                                              "topBid1": top,
-                                              "topBidder1": currentUser
-                                                  .displayName,
-                                              "topBidderImg1":
-                                              currentUser.photoUrl,
-                                              "topBidderId1":
-                                              currentUser.id,
-                                              "topBid2": topBid1,
-                                              "topBidder2": topBidder1,
-                                              "topBidderImg2":
-                                              topBidderImg1,
-                                              "topBidderId2":
-                                              topBidderId1,
-                                              "topBid3": topBid2,
-                                              "topBidder3": topBidder2,
-                                              "topBidderImg3":
-                                              topBidderImg2,
-                                              "topBidderId3":
-                                              topBidderId2,
-                                            });
-                                          }
-                                        },
-                                        child: Text(
-                                            "Place Bid(\\u0024 $minimumBid)"),
-                                      ): hasEnded ?   activityFeedRef
-                                          .doc(ownerId)
-                                          .collection("feedItems")
-                                          .doc(postId)
-                                          .set({
-                                        "type": "topBid",
-                                        "username": username,
-                                        "userId": ownerId,
-                                        "userProfileImg": photoUrl,
-                                        "postId": postId,
-                                        "mediaUrl": images,
-                                        "timestamp": timestamp,
-                                        "read": 'false',
-                                      }):Container(),
-                                      hasEnded ? currentUser.id == topBidderId1?
-
-                                      ElevatedButton(onPressed: () {showDialog<void>(
-                                        context: context,
-                                        // useRootNavigator:true,
-
-                                        barrierDismissible: true,
-                                        // false = user must tap button, true = tap outside dialog
-                                        builder: (BuildContext dialogContext) {
-                                          return
-                                            Dialog(
-
-                                              shape: RoundedRectangleBorder(
-                                                borderRadius: BorderRadius.circular(20),),
-                                              child:
-                                              Container(
-                                                height:400,
-
-                                                child: Center(
-                                                  child: Container(
-                                                    child: Column(
-                                                      mainAxisAlignment:MainAxisAlignment.center,
-                                                      children:[
-                                                        Container(
-                                                          alignment: Alignment.center,
-                                                          margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0, 8.0),
-                                                          child: TextFormField(
-                                                            keyboardType: TextInputType.multiline,
-                                                            maxLines: null,
-                                                            style: TextStyle(color: kText),
-                                                            controller: TextController,
-                                                            decoration: InputDecoration(
-                                                              border: OutlineInputBorder(
-                                                                  borderSide: BorderSide(color: kSubtitle)),
-                                                              enabledBorder: OutlineInputBorder(
-                                                                  borderSide: BorderSide(color: Colors.black)),
-                                                              focusedBorder: OutlineInputBorder(
-                                                                  borderSide: BorderSide(color: Colors.blue)),
-
-                                                              labelText: 'Comment',
-                                                              labelStyle: TextStyle(color: kText),
-                                                            ),
-                                                            textAlign: TextAlign.center,
-
-                                                          ),
-                                                        ),
-                                                        //Customised
-                                                        Container(
-                                                          // alignment:Alignment.centerLeft,
-                                                          child:   FloatingActionButton.extended(
-                                                            backgroundColor: kblue,
-                                                            onPressed: () {
-                                                              Navigator.push(context, MaterialPageRoute(builder: (context) =>AddressAuction(Amount: topBid1,
-                                                                prodId: postId,
-                                                                productname: description,
-                                                                OwnerId:ownerId,
-                                                                profileimg:photoUrl,
-                                                                username: username,
-                                                                mediaUrl: images,
-                                                                mtoText: TextController.text,
-
-                                                              )));
-                                                              //Get.back();
-                                                            },
-                                                            label: Text('Done',style:TextStyle(color:  Colors.white) ,),
-                                                          ),
-                                                        ),
-                                                      ],) ,
-                                                  ),
-                                                ),
-                                              ),
-
-                                            );
-                                        },
-                                      );},
-                                          child: Text("Buy Now"))
-
-                                          :
-                                      Container():
-                                      Container(),
-                                    ],
-                                  ),
+                              title:Text(
+                                topBidder1,
+                                style: TextStyle(
+                                  color: kText,
+                                  fontWeight: FontWeight.bold,
                                 ),
                               ),
-                            );
+                              trailing:    Text("\u0024  $topBid1"),
+                            ),
+                          ),
+                        ),
+                        GestureDetector(
+                          onTap: () => showProfile(context, profileId: topBidderId2),
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: ListTile(leading:
+                            CircleAvatar(
+                              backgroundImage:
+                              CachedNetworkImageProvider(topBidderImg2),
+                              backgroundColor: Colors.grey,
+                            ),
+
+                              title:Text(
+                                topBidder2,
+                                style: TextStyle(
+                                  color: kText,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              trailing:    Text("\u0024  $topBid2"),
+                            ),
+                          ),
+                        ),
+                        GestureDetector(
+                          onTap: () => showProfile(context, profileId: topBidderId3),
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: ListTile(leading:
+                            CircleAvatar(
+                              backgroundImage:
+                              CachedNetworkImageProvider(topBidderImg3),
+                              backgroundColor: Colors.grey,
+                            ),
+
+                              title:Text(
+                                topBidder3,
+                                style: TextStyle(
+                                  color: kText,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              trailing:    Text("\u0024  $topBid3"),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    SizedBox(
+                        height:
+                        SizeConfig.blockSizeVertical * 2),
+
+                    !hasEnded ?   ElevatedButton(
+                      onPressed: () {
+                        if (amount <= 99) {
+                          int change;
+                          int a = amount + minimumBid;
+                          int top = usd + amount;
+                          amount > 99
+                              ? change = minimumBid
+                              : change = 25;
+                          bidsRef
+                              .doc(ownerId)
+                              .collection("userBids")
+                              .doc(postId)
+
+                              .update({
+                            "amount": a,
+                            "minimumBid": change,
+                            "topBid1": top,
+                            "topBidder1": currentUser
+                                .displayName,
+                            "topBidderImg1":
+                            currentUser.photoUrl,
+                            "topBidderId1":
+                            currentUser.id,
+                            "topBid2": topBid1,
+                            "topBidder2": topBidder1,
+                            "topBidderImg2":
+                            topBidderImg1,
+                            "topBidderId2":
+                            topBidderId1,
+                            "topBid3": topBid2,
+                            "topBidder3": topBidder2,
+                            "topBidderImg3":
+                            topBidderImg2,
+                            "topBidderId3":
+                            topBidderId2,
                           });
-                    },
-                  ),
-                ),
-                Divider(
-                  color: kGrey,
-                ),
-              ],
-            ),
-          );
+                        } else if (amount <= 299) {
+                          int change;
+                          int a = amount + minimumBid;
+                          int top = usd + amount;
+                          amount > 299
+                              ? change = minimumBid
+                              : change = 50;
 
-        },
-        query: FirebaseFirestore.instance.collectionGroup("userBids")
-        .orderBy('timestamp',descending: true)
-            .where("bidOn", isEqualTo: true)
+                          bidsRef
+                              .doc(ownerId)
+                              .collection("userBids")
+                              .doc(postId)
 
-    );
+                              .update({
+                            "amount": a,
+                            "minimumBid": change,
+                            "topBid1": top,
+                            "topBidder1": currentUser
+                                .displayName,
+                            "topBidderImg1":
+                            currentUser.photoUrl,
+                            "topBidderId1":
+                            currentUser.id,
+                            "topBid2": topBid1,
+                            "topBidder2": topBidder1,
+                            "topBidderImg2":
+                            topBidderImg1,
+                            "topBidderId2":
+                            topBidderId1,
+                            "topBid3": topBid2,
+                            "topBidder3": topBidder2,
+                            "topBidderImg3":
+                            topBidderImg2,
+                            "topBidderId3":
+                            topBidderId2,
+                          });
+                        } else if (amount <= 599) {
+                          int change;
+                          int a = amount + minimumBid;
+                          int top = usd + amount;
+                          amount > 599
+                              ? change = minimumBid
+                              : change = 100;
+
+                          bidsRef
+                              .doc(ownerId)
+                              .collection("userBids")
+                              .doc(postId)
+
+                              .update({
+                            "amount": a,
+                            "minimumBid": change,
+                            "topBid1": top,
+                            "topBidder1": currentUser
+                                .displayName,
+                            "topBidderImg1":
+                            currentUser.photoUrl,
+                            "topBidderId1":
+                            currentUser.id,
+                            "topBid2": topBid1,
+                            "topBidder2": topBidder1,
+                            "topBidderImg2":
+                            topBidderImg1,
+                            "topBidderId2":
+                            topBidderId1,
+                            "topBid3": topBid2,
+                            "topBidder3": topBidder2,
+                            "topBidderImg3":
+                            topBidderImg2,
+                            "topBidderId3":
+                            topBidderId2,
+                          });
+                        } else if (amount <= 1499) {
+                          int change;
+                          int a = amount + minimumBid;
+                          int top = usd + amount;
+                          amount > 1499
+                              ? change = minimumBid
+                              : change = 200;
+
+                          bidsRef
+                              .doc(ownerId)
+                              .collection("userBids")
+                              .doc(postId)
+
+                              .update({
+                            "amount": a,
+                            "minimumBid": change,
+                            "topBid1": top,
+                            "topBidder1": currentUser
+                                .displayName,
+                            "topBidderImg1":
+                            currentUser.photoUrl,
+                            "topBidderId1":
+                            currentUser.id,
+                            "topBid2": topBid1,
+                            "topBidder2": topBidder1,
+                            "topBidderImg2":
+                            topBidderImg1,
+                            "topBidderId2":
+                            topBidderId1,
+                            "topBid3": topBid2,
+                            "topBidder3": topBidder2,
+                            "topBidderImg3":
+                            topBidderImg2,
+                            "topBidderId3":
+                            topBidderId2,
+                          });
+                        } else if (amount <= 2499) {
+                          int change;
+                          int a = amount + minimumBid;
+                          int top = usd + amount;
+                          amount > 2499
+                              ? change = minimumBid
+                              : change = 300;
+
+                          bidsRef
+                              .doc(ownerId)
+                              .collection("userBids")
+                              .doc(postId)
+
+                              .update({
+                            "amount": a,
+                            "minimumBid": change,
+                            "topBid1": top,
+                            "topBidder1": currentUser
+                                .displayName,
+                            "topBidderImg1":
+                            currentUser.photoUrl,
+                            "topBidderId1":
+                            currentUser.id,
+                            "topBid2": topBid1,
+                            "topBidder2": topBidder1,
+                            "topBidderImg2":
+                            topBidderImg1,
+                            "topBidderId2":
+                            topBidderId1,
+                            "topBid3": topBid2,
+                            "topBidder3": topBidder2,
+                            "topBidderImg3":
+                            topBidderImg2,
+                            "topBidderId3":
+                            topBidderId2,
+                          });
+                        } else if (amount <= 3499) {
+                          int change;
+                          int a = amount + minimumBid;
+                          int top = usd + amount;
+                          amount > 3499
+                              ? change = minimumBid
+                              : change = 400;
+
+                          bidsRef
+                              .doc(ownerId)
+                              .collection("userBids")
+                              .doc(postId)
+
+                              .update({
+                            "amount": a,
+                            "minimumBid": change,
+                            "topBid1": top,
+                            "topBidder1": currentUser
+                                .displayName,
+                            "topBidderImg1":
+                            currentUser.photoUrl,
+                            "topBidderId1":
+                            currentUser.id,
+                            "topBid2": topBid1,
+                            "topBidder2": topBidder1,
+                            "topBidderImg2":
+                            topBidderImg1,
+                            "topBidderId2":
+                            topBidderId1,
+                            "topBid3": topBid2,
+                            "topBidder3": topBidder2,
+                            "topBidderImg3":
+                            topBidderImg2,
+                            "topBidderId3":
+                            topBidderId2,
+                          });
+                        } else if (amount <= 4499) {
+                          int change;
+                          int a = amount + minimumBid;
+                          int top = usd + amount;
+                          amount > 5499
+                              ? change = minimumBid
+                              : change = 500;
+
+                          bidsRef
+                              .doc(ownerId)
+                              .collection("userBids")
+                              .doc(postId)
+
+                              .update({
+                            "amount": a,
+                            "minimumBid": change,
+                            "topBid1": top,
+                            "topBidder1": currentUser
+                                .displayName,
+                            "topBidderImg1":
+                            currentUser.photoUrl,
+                            "topBidderId1":
+                            currentUser.id,
+                            "topBid2": topBid1,
+                            "topBidder2": topBidder1,
+                            "topBidderImg2":
+                            topBidderImg1,
+                            "topBidderId2":
+                            topBidderId1,
+                            "topBid3": topBid2,
+                            "topBidder3": topBidder2,
+                            "topBidderImg3":
+                            topBidderImg2,
+                            "topBidderId3":
+                            topBidderId2,
+                          });
+                        } else if (amount > 5500) {
+                          int a = amount + minimumBid;
+                          int top = usd + amount;
+
+                          bidsRef
+                              .doc(ownerId)
+                              .collection("userBids")
+                              .doc(postId)
+
+                              .update({
+                            "amount": a,
+                            "topBid1": top,
+                            "topBidder1": currentUser
+                                .displayName,
+                            "topBidderImg1":
+                            currentUser.photoUrl,
+                            "topBidderId1":
+                            currentUser.id,
+                            "topBid2": topBid1,
+                            "topBidder2": topBidder1,
+                            "topBidderImg2":
+                            topBidderImg1,
+                            "topBidderId2":
+                            topBidderId1,
+                            "topBid3": topBid2,
+                            "topBidder3": topBidder2,
+                            "topBidderImg3":
+                            topBidderImg2,
+                            "topBidderId3":
+                            topBidderId2,
+                          });
+                        }
+                      },
+                      child: Text(
+                          "Place Bid(\\u0024 $minimumBid)"),
+                    ): hasEnded ?   activityFeedRef
+                        .doc(ownerId)
+                        .collection("feedItems")
+                        .doc(postId)
+                        .set({
+                      "type": "topBid",
+                      "username": username,
+                      "userId": ownerId,
+                      "userProfileImg": photoUrl,
+                      "postId": postId,
+                      "mediaUrl": images.first,
+                      "timestamp": timestamp,
+                      "read": 'false',
+                    }):Container(),
+                    hasEnded ? currentUser.id == topBidderId1?
+
+                    ElevatedButton(onPressed: () {showDialog<void>(
+                      context: context,
+                      // useRootNavigator:true,
+
+                      barrierDismissible: true,
+                      // false = user must tap button, true = tap outside dialog
+                      builder: (BuildContext dialogContext) {
+                        return
+                          Dialog(
+
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(20),),
+                            child:
+                            Container(
+                              height:400,
+
+                              child: Center(
+                                child: Container(
+                                  child: Column(
+                                    mainAxisAlignment:MainAxisAlignment.center,
+                                    children:[
+                                      Container(
+                                        alignment: Alignment.center,
+                                        margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0, 8.0),
+                                        child: TextFormField(
+                                          keyboardType: TextInputType.multiline,
+                                          maxLines: null,
+                                          style: TextStyle(color: kText),
+                                          controller: TextController,
+                                          decoration: InputDecoration(
+                                            border: OutlineInputBorder(
+                                                borderSide: BorderSide(color: kSubtitle)),
+                                            enabledBorder: OutlineInputBorder(
+                                                borderSide: BorderSide(color: Colors.black)),
+                                            focusedBorder: OutlineInputBorder(
+                                                borderSide: BorderSide(color: Colors.blue)),
+
+                                            labelText: 'Comment',
+                                            labelStyle: TextStyle(color: kText),
+                                          ),
+                                          textAlign: TextAlign.center,
+
+                                        ),
+                                      ),
+                                      //Customised
+                                      Container(
+                                        // alignment:Alignment.centerLeft,
+                                        child:   FloatingActionButton.extended(
+                                          backgroundColor: kblue,
+                                          onPressed: () {
+                                            Navigator.push(context, MaterialPageRoute(builder: (context) =>AddressAuction(Amount: topBid1,
+                                              prodId: postId,
+                                              productname: description,
+                                              OwnerId:ownerId,
+                                              profileimg:photoUrl,
+                                              username: username,
+                                              mediaUrl: images.first,
+                                              mtoText: TextController.text,
+
+                                            )));
+                                            //Get.back();
+                                          },
+                                          label: Text('Done',style:TextStyle(color:  Colors.white) ,),
+                                        ),
+                                      ),
+                                    ],) ,
+                                ),
+                              ),
+                            ),
+
+                          );
+                      },
+                    );},
+                        child: Text("Buy Now"))
+
+                        :
+                    Container():
+                    Container(),
+                    SizedBox(
+                        height:
+                        SizeConfig.blockSizeVertical * 2),
+
+                  ],
+                ),
+              ),
+            );
+
+          },
+          query:  FirebaseFirestore.instance.collectionGroup("userBids")
+              .orderBy('timestamp',descending: true)
+      );
   }
+
   auctionEnd({String ownerId}){
 
     usersRef.doc(ownerId).update({

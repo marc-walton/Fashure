@@ -74,7 +74,7 @@ dependencies:
   fluttertoast: ^3.1.3
   http: ^0.12.1
   #  firebase_ml_vision: ^0.9.4
-  rxdart: 0.24.1
+  rxdart: 0.25.0
   paginate_firestore: ^0.3.0
   dropdown_formfield: ^0.1.2
   country_icons: ^1.1.1
@@ -118,6 +118,7 @@ dependencies:
   firebase_dynamic_links: ^0.7.0+1
   share: ^2.0.4
   custom_timer: ^0.0.6
+  firestore_collection: ^0.0.6
 
 
 

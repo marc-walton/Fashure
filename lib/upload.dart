@@ -8,6 +8,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 //import 'package:flutter_svg/svg.dart';
 import 'package:fashow/user.dart';
+import 'package:modal_progress_hud/modal_progress_hud.dart';
 import 'package:multi_image_picker/multi_image_picker.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:firebase_storage/firebase_storage.dart';
@@ -94,47 +95,6 @@ class _UploadState extends State<Upload>
         _inProcess = false;
       });
     }
-  }
-  Future<void> loadAssets() async {
-
-    List<Asset> resultList = List<Asset>();
-    String error = 'No Error Dectected';
-//    ByteData byteData = await asset.getByteData(quality: 80);
-    try {
-
-      resultList = await MultiImagePicker.pickImages(
-
-        maxImages: 100,
-        enableCamera: true,
-        selectedAssets: images,
-        cupertinoOptions: CupertinoOptions(takePhotoIcon: "Images"),
-        materialOptions: MaterialOptions(
-          actionBarColor: "#abcdef",
-          actionBarTitle: "Upload Image",
-          allViewTitle: "All Photos",
-          useDetailsView: false,
-          selectCircleStrokeColor: "#000000",
-
-        ),
-      );
-      print(resultList.length);
-      print((await resultList[0].getThumbByteData(122, 100)));
-      print((await resultList[0].getByteData()));
-      print((await resultList[0].metadata));
-
-    } on Exception catch (e) {
-      error = e.toString();
-    }
-
-    // If the widget was removed from the tree while the asynchronous platform
-    // message was in flight, we want to discard the reply rather than calling
-    // setState to update our non-existent appearance.
-    if (!mounted) return;
-    setState(() {
-      _inProcess = true;
-      images = resultList;
-      _error = error;
-    });
   }
 
   Future<dynamic> postImage(Asset imageFile) async {
@@ -238,147 +198,6 @@ class _UploadState extends State<Upload>
     );
   }
 
-up(){
-  return NestedScrollView(
-    headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
-      return <Widget>[
-        SliverAppBar(  backgroundColor: kPrimaryColor,
-          leading: IconButton(
-              icon: Icon(Icons.arrow_back, color: Colors.white),
-              onPressed:()=>  showDialog(
-                context: context,
-                builder: (context) => new AlertDialog(
-                  title: new Text('Are you sure?'),
-                  content: new Text('Do you want to exit without uploading?'),
-                  actions: <Widget>[
-                    new FlatButton(
-
-                      onPressed: () => Navigator.of(context).pop(false),
-                      child: Text("NO"),
-                    ),
-                    SizedBox(height: 16),
-                    new FlatButton(
-
-                      onPressed: () async {Navigator.of(context).pop(true);
-
-//            clearImage();
-                      },
-                      child: Text("YES"),
-                    ),
-                  ],
-                ),
-              ) ??
-                  false),
-          actions: [
-            RaisedButton(color:kblue,
-              onPressed:(){
-
-                if(images.isNotEmpty){                      isUploading ? null : handleSubmit();
-                }
-                else{
-
-                  alert(
-                    context,
-                    // title: Text('Coming Soon'),
-                    content: Text("Coming Soon",
-                    ),
-
-                    textOK: Text("OK",
-                    ),
-                  );
-                }
-              }
-              ,
-
-              child: Text(
-                "Post",
-                style: TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 20.0),
-              ),
-            )
-          ],)
-      ];
-    },
-    body: Hero(
-      tag: 'test',
-      child: Container(
-          padding: EdgeInsets.fromLTRB(16.0, 20.0, 16.0, 16.0),
-          child: Builder(builder: (context) {
-            var handle = NestedScrollView.sliverOverlapAbsorberHandleFor(context);
-            print('test');
-            return Column(  // whatever you want to return here
-            children: [ isUploading ? linearProgress() : Text(""),
-
-
-              Padding(
-                padding: EdgeInsets.only(top: 10.0),
-              ),
-              buildGridView(),
-              ListTile(
-                leading: CircleAvatar(
-                  backgroundImage:
-                  CachedNetworkImageProvider(widget.currentUser.photoUrl),
-                ),
-                title: Container(
-                  width: 250.0,
-                  child: TextField(
-                    style:TextStyle(color: kText),
-
-                    controller: captionController,
-                    decoration: InputDecoration(
-                        hintText: "Write a caption...", border: InputBorder.none),
-                  ),
-                ),
-              ),
-              Divider(),
-              ListTile(
-                leading: Icon(
-                  Icons.pin_drop,
-                  color: Colors.orange,
-                  size: 35.0,
-                ),
-                title: Container(
-                  width: 250.0,
-                  child: TextField(
-                    style:TextStyle(color: kText),
-
-                    controller: locationController,
-                    decoration: InputDecoration(
-                      hintText: "Where was this photo taken?",
-                      border: InputBorder.none,
-                    ),
-                  ),
-                ),
-              ),
-              Container(
-                width: 200.0,
-                height: 100.0,
-                alignment: Alignment.center,
-                child: RaisedButton.icon(
-                    label: Text(
-                      "Use Current Location",
-                      style: TextStyle(color: Colors.white),
-                    ),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(30.0),
-                    ),
-                    color: Colors.blue,
-                    onPressed: getUserLocation,
-                    icon: Icon(
-                      Icons.my_location,
-                      color: Colors.white,
-                    )),
-              ),],
-            );
-           // print('test');
-
-            })
-      ),
-    ),
-  );
-}
 
   Future<bool> _onBackPressed() {
     return showDialog(
@@ -406,38 +225,93 @@ up(){
     ) ??
         false;
   }
-  Container buildSplashScreen() {
-    return Container(
 
-      decoration: BoxDecoration(
-          gradient: fabGradient
-      ) ,
-      alignment: Alignment.center,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[
+  Future<void> loadAssets() async {
+
+    List<Asset> resultList = List<Asset>();
+    String error = 'No Error Dectected';
+//    ByteData byteData = await asset.getByteData(quality: 80);
+    try {
+      setState(() {
+        _inProcess = true;
+
+      });
+      resultList = await MultiImagePicker.pickImages(
+
+        maxImages: 100,
+        enableCamera: true,
+        selectedAssets: images,
+        cupertinoOptions: CupertinoOptions(takePhotoIcon: "Images"),
+        materialOptions: MaterialOptions(
+          actionBarColor: "#abcdef",
+          actionBarTitle: "Upload Image",
+          allViewTitle: "All Photos",
+          useDetailsView: false,
+          selectCircleStrokeColor: "#000000",
+
+        ),
+      );
+      print(resultList.length);
+      print((await resultList[0].getThumbByteData(122, 100)));
+      print((await resultList[0].getByteData()));
+      print((await resultList[0].metadata));
+
+    } on Exception catch (e) {
+      error = e.toString();
+      setState(() {
+        _inProcess = false;
+
+      });
+    }
+
+    // If the widget was removed from the tree while the asynchronous platform
+    // message was in flight, we want to discard the reply rather than calling
+    // setState to update our non-existent appearance.
+    if (!mounted) return;
+    setState(() {
+
+      images = resultList;
+      _error = error;
+    });
+
+  }
+  buildSplashScreen() {
+    return
+      ModalProgressHUD(
+        inAsyncCall: _inProcess,
+        child: Scaffold(
+          body: Container(
+            decoration: BoxDecoration(
+                gradient: fabGradient
+            ) ,
+            alignment: Alignment.center,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
 //          SvgPicture.asset('assets/images/upload.svg', height: 260.0),
-          Padding(
-            padding: EdgeInsets.only(top: 20.0),
-            child: RaisedButton(
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(8.0),
-              ),
-              child: Text(
-                "Select Header Image",
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 22.0,
+                Padding(
+                  padding: EdgeInsets.only(top: 20.0),
+                  child: RaisedButton(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8.0),
+                    ),
+                    child: Text(
+                      "Select images",
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 22.0,
+                      ),
+                    ),
+                    color: Colors.deepOrange,
+                    onPressed: ()  =>loadAssets(),
+                    // selectImage(context),
+                  ),
                 ),
-              ),
-              color: Colors.deepOrange,
-              onPressed: () =>  loadAssets(),
-              // selectImage(context),
+              ],
             ),
           ),
-        ],
-      ),
-    );
+        ),
+      );
   }
   Widget getImageWidget() {
     if (file != null) {

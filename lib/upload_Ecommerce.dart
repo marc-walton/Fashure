@@ -542,7 +542,7 @@ int count  = 1;
 
       this.setState(() {
         file = cropped;
-        _inProcess = false;
+        _inProcess = true;
       });
     } else {
       this.setState(() {
@@ -11874,7 +11874,6 @@ sdf(){
   @override
   Widget build(BuildContext context) {
     super.build(context);
-    List<Widget> children = new List.generate(count, (int i) => new InputWidget(i));
 
     return images.isEmpty ? buildSplashScreen() : builduploadForm();
   }
@@ -11929,16 +11928,5 @@ sdf(){
         },
       ),
     ):Text("Upto 10 allowed");
-  }
-}
-class InputWidget extends StatelessWidget {
-
-  final int index;
-
-  InputWidget(this.index);
-
-  @override
-  Widget build(BuildContext context) {
-    return Text("Upto 10 allowed");
   }
 }
