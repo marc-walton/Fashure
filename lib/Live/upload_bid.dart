@@ -198,6 +198,9 @@ String U;
             "endingTime": timestamp.add(Duration(hours: dropdownValue)),
             "ownerId": widget.currentUser.id,
             "postId": postId,
+             "username": widget.currentUser.username,
+             "photoUrl": widget.currentUser.photoUrl,
+
             "country":currentUser.country,
             "currency":currentUser.currencyISO,
             "timestamp":timestamp,

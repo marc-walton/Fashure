@@ -118,6 +118,7 @@ dependencies:
   firebase_dynamic_links: ^0.7.0+1
   share: ^2.0.4
   custom_timer: ^0.0.6
+  flutter_countdown_timer: ^4.1.0
   firestore_collection: ^0.0.6
 
 

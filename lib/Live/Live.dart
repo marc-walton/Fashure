@@ -1,5 +1,5 @@
 import 'dart:async';
-
+import 'package:custom_timer/custom_timer.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -11,8 +11,6 @@ import 'package:fashow/model/address_auction.dart';
 // import 'package:fashow/Live/video_comments.dart';
 import 'package:fashow/post.dart';
 import 'package:fashow/size_config.dart';
-import 'package:fashow/user.dart';
-import 'package:fashow/utils/universal_variables.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flare_flutter/flare_controls.dart';
 import 'package:flutter/material.dart';
@@ -24,13 +22,12 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:frino_icons/frino_icons.dart';
 import 'package:intl/intl.dart';
 import 'package:fashow/Live/models/livemodel.dart';
-
+import 'package:flutter_countdown_timer/flutter_countdown_timer.dart';
 import 'package:fashow/Live/host.dart';
 import 'package:fashow/Live/join.dart';
 import 'package:paginate_firestore/paginate_firestore.dart';
 
 import 'package:permission_handler/permission_handler.dart';
-import 'package:sticky_headers/sticky_headers/widget.dart';
 import 'package:zego_express_engine/zego_express_engine.dart';
 List<Widget> _listOfImages = <Widget>[];
 
@@ -68,6 +65,10 @@ class _LiveTvState extends State<LiveTv> with TickerProviderStateMixin {
       'abcdefghijklmnopqrstuvwzyv123456789abcdefghijklmnopqrstuvwzyz123';
   TextEditingController TextController = TextEditingController();
 
+  int days;
+  int hours;
+  int minutes;
+  int seconds;
   // Specify test environment and app scenario
   final bool isTestEnv = true;
   final ZegoScenario scenario = ZegoScenario.General;
@@ -93,27 +94,79 @@ class _LiveTvState extends State<LiveTv> with TickerProviderStateMixin {
       await photo.delete();
     }
   }
-  auctionTimer({var endingTime,String ownerId,String postId}){
+  auctionTimer({final endingTime,String postId,String ownerId}){
+//      const duration = const Duration(seconds: 1);
+//      print(endingTime);
+//      final eventTime = DateTime.parse("$endingTime");
+// DateTime d = DateTime.now().toUtc();
+// print(d);
+//     int timeDiff = eventTime.difference(d).inSeconds;
+//     print(timeDiff);
+//
+// Timer timer;
+//
+//        timer = Timer.periodic(duration, (Timer t) {
+//          if (timeDiff > 0) {
+//
+//              setState(() {
+//                if (eventTime !=d) {
+//                  timeDiff = timeDiff - 1;
+//                  return
+//                  print('not ended');
+//                } else {
+//                  return
+//                  print('Times up!');
+//
+//                  //Do something
+//                }
+//              });
+//
+//          }
+//
+//        });
+//
+//
+//      days = timeDiff ~/ (24 * 60 * 60) % 24;
+//      hours = timeDiff ~/ (60 * 60) % 24;
+//      minutes = (timeDiff ~/ 60) % 60;
+//      seconds = timeDiff % 60;
     Duration remainingTime;
-    Timer.periodic(Duration(seconds: 1), (timer) {
-      remainingTime = endingTime.difference(DateTime.now().toUtc());
-      if (remainingTime <= Duration.zero) {
-        timer.cancel();
+     Timer.periodic(Duration(seconds: 1), (timer) {
+       remainingTime = endingTime.difference(DateTime.now().toUtc());
+       if (remainingTime <= Duration.zero) {
+         timer.cancel();
 
 
-        usersRef.doc(ownerId).update({
-          'Bidding':false,
-        });
-        bidsRef
-            .doc(ownerId)
-            .collection("userBids")
-            .doc(postId).update({"hasEnded":true});
-        return Text("Auction ended");
+         usersRef.doc(ownerId).update({
+           'Bidding':false,
+         });
+         bidsRef
+             .doc(ownerId)
+             .collection("userBids")
+             .doc(postId).update({"hasEnded":true});
+         return Text("Auction ended");
 
-      }  else {
-        return Text("${remainingTime.inDays}:${remainingTime.inHours}:${remainingTime.inMinutes}:${remainingTime.inSeconds}");
-      }
-    });
+       }
+       else {
+          Text("${remainingTime.inDays}:${remainingTime.inHours}:${remainingTime.inMinutes}:${remainingTime.inSeconds}");
+       }
+     });
+
+     return
+  Row(
+    mainAxisAlignment: MainAxisAlignment.center,
+    children: <Widget>[
+      LabelText(
+          label: 'DAYS', value: remainingTime.inDays.toString().padLeft(2, '0')),
+      LabelText(
+          label: 'HRS', value: hours.toString().padLeft(2, '0')),
+      LabelText(
+          label: 'MIN', value: minutes.toString().padLeft(2, '0')),
+      LabelText(
+          label: 'SEC', value: seconds.toString().padLeft(2, '0')),
+    ],
+  );
+
   }
   addLikeToActivityFeed({String ownerId,String postId,String mediaUrl}) {
     // add a notification to the postOwner's activity feed only if comment made by OTHER user (to avoid getting notification for our own like)
@@ -205,6 +258,8 @@ class _LiveTvState extends State<LiveTv> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
+    SizeConfig().init(context);
+
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
@@ -246,7 +301,7 @@ class _LiveTvState extends State<LiveTv> with TickerProviderStateMixin {
           alignment: Alignment.center,
           child: Padding(
             padding: const EdgeInsets.all(8.0),
-            child: Column(children: [
+            child: ListView(children: [
               SizedBox(height: 8),
               Row(
                 children: [
@@ -266,10 +321,11 @@ class _LiveTvState extends State<LiveTv> with TickerProviderStateMixin {
                 ],
               ),
               Container(
-                height: 250,
+                height:SizeConfig.screenHeight*0.22,
                 child: getStories(),
               ),
-              Center(
+              Container(
+                height:SizeConfig.screenHeight*0.65,
                 child: getUserBids(),
               )
             ]),
@@ -526,12 +582,13 @@ class _LiveTvState extends State<LiveTv> with TickerProviderStateMixin {
     );
   }
   getUserBids(){
-    bool isLiked;
+
     bool isPostOwner = currentUserId == ownerId;
 
     SizeConfig().init(context);
     return
       PaginateFirestore(
+        isLive: true,
           emptyDisplay: Center(
               child: Text(
                 "Nothing found",
@@ -542,7 +599,11 @@ class _LiveTvState extends State<LiveTv> with TickerProviderStateMixin {
               )),
           itemBuilderType: PaginateBuilderType.listView,
           itemBuilder: (index, context, documentSnapshot) {
-            String ownerId = documentSnapshot.data()['ownerId'];
+           print("${documentSnapshot.data()['endingTime']}");
+           Timestamp Time = documentSnapshot.data()['endingTime'] ;
+            Timestamp timestamp = documentSnapshot.data()['timestamp'] ;
+
+String ownerId = documentSnapshot.data()['ownerId'];
             String postId = documentSnapshot.data()['postId'];
             bool bidon = documentSnapshot.data()['bidOn'];
             int bidTimer = documentSnapshot.data()['bidTimer'];
@@ -564,728 +625,731 @@ class _LiveTvState extends State<LiveTv> with TickerProviderStateMixin {
             String username = documentSnapshot.data()['username'];
             String photoUrl = documentSnapshot.data()['photoUrl'];
             int minimumBid = documentSnapshot.data()['minimumBid'];
-            String endingTime = documentSnapshot.data()['endingTime'];
             bool hasEnded = documentSnapshot.data()['hasEnded'];
             Map likes = documentSnapshot.data()['likes'];
-
+           bool  isLiked = (likes[currentUserId] == true);
             String description = documentSnapshot.data()['description'];
             int amount = documentSnapshot.data()['amount'];
+           var ndTime = DateTime.now().millisecondsSinceEpoch;
+print(ndTime);
+            return   Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Column(
+                crossAxisAlignment:
+                CrossAxisAlignment.start,
+                children: [
+                  CountdownTimer(
+                    endTime: DateTime(2021, 08, 04, 45, 48, 00).millisecondsSinceEpoch,
+                    textStyle: TextStyle(fontSize: 30, color: Colors.pink),
+                  ),
+              CustomTimer(
+              from: Duration(seconds: timestamp.seconds),
+              to: Duration(seconds:Time.seconds ),
+              onBuildAction: CustomTimerAction.auto_start,
+              builder: (CustomTimerRemainingTime remaining) {
+                return Text(
+                  "${remaining.hours}:${remaining.minutes}:${remaining.seconds}",
+                  style: TextStyle(fontSize: 30.0),
+                );
+              },
+            ),
 
-            return   StickyHeader(
-                header: Container(
-                  height: 50.0,
-                  color: Colors.transparent,
-                  padding: EdgeInsets.symmetric(horizontal: 16.0),
-                  alignment: Alignment.centerLeft,
-                  child: ListTile(trailing: auctionTimer(endingTime: endingTime)),
-                ),
-                content: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Column(
-                  crossAxisAlignment:
-                  CrossAxisAlignment.start,
-                  children: [
-                    ListTile(
-                      leading: GestureDetector(
-                        onTap: () => showProfile(context, profileId: ownerId),
-                        child: CircleAvatar(
-                          backgroundImage: CachedNetworkImageProvider(photoUrl),
-                          backgroundColor: Colors.grey,
+
+                  ListTile(
+                    leading: GestureDetector(
+                      onTap: () => showProfile(context, profileId: ownerId),
+                      child: CircleAvatar(
+                        backgroundImage: CachedNetworkImageProvider(photoUrl),
+                        backgroundColor: Colors.grey,
+                      ),
+                    ),
+                    title: GestureDetector(
+                      onTap: () => showProfile(context, profileId: ownerId),
+                      child: Text(
+                        username,
+                        style: TextStyle(
+                          color: kText,
+                          fontWeight: FontWeight.bold,
                         ),
                       ),
-                      title: GestureDetector(
-                        onTap: () => showProfile(context, profileId: ownerId),
-                        child: Text(
-                          username,
-                          style: TextStyle(
-                            color: kText,
-                            fontWeight: FontWeight.bold,
-                          ),
+                    ),
+                    trailing: IconButton(
+                        icon: Icon(
+                          Icons.more_horiz,
+                          color: kText,
                         ),
-                      ),
-                      trailing: IconButton(
-                          icon: Icon(
-                            Icons.more_horiz,
-                            color: kText,
-                          ),
-                          onPressed: () {
-                            !isPostOwner
-                                ? showDialog(
-                                context: context,
-                                builder: (BuildContext context) {
-                                  return Dialog(
-                                    backgroundColor: kSecondaryColor,
-                                    shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(
-                                            20.0)), //this right here
-                                    child: GestureDetector(
-                                      onTap: () {
-                                        report(postId);
-                                        Navigator.pop(context);
-                                      },
-                                      child: Container(
-                                        height: 100,
-                                        child: Padding(
-                                          padding: const EdgeInsets.all(12.0),
-                                          child: Column(
-                                            mainAxisAlignment: MainAxisAlignment.center,
-                                            crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                            children: [
-                                              Container(
-                                                child: Align(
-                                                    alignment: Alignment.center,
-                                                    child: Text(
-                                                      'Report this post?',
-                                                      style: TextStyle(
-                                                          color: Colors.blueAccent,
-                                                          fontWeight: FontWeight.bold,
-                                                          fontSize: 20.0),
-                                                    )),
-                                              ),
-                                            ],
-                                          ),
+                        onPressed: () {
+                          !isPostOwner
+                              ? showDialog(
+                              context: context,
+                              builder: (BuildContext context) {
+                                return Dialog(
+                                  backgroundColor: kSecondaryColor,
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(
+                                          20.0)), //this right here
+                                  child: GestureDetector(
+                                    onTap: () {
+                                      report(postId);
+                                      Navigator.pop(context);
+                                    },
+                                    child: Container(
+                                      height: 100,
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(12.0),
+                                        child: Column(
+                                          mainAxisAlignment: MainAxisAlignment.center,
+                                          crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                          children: [
+                                            Container(
+                                              child: Align(
+                                                  alignment: Alignment.center,
+                                                  child: Text(
+                                                    'Report this post?',
+                                                    style: TextStyle(
+                                                        color: Colors.blueAccent,
+                                                        fontWeight: FontWeight.bold,
+                                                        fontSize: 20.0),
+                                                  )),
+                                            ),
+                                          ],
                                         ),
                                       ),
                                     ),
-                                  );
-                                  // ignore: unnecessary_statements
-                                })
-                                : handleDeletePost(parentContext:context,ownerId: ownerId,postId: postId);
-                          }),
-                    ),
-
-                    ListView.builder(physics: NeverScrollableScrollPhysics(),
-                        shrinkWrap: true,
-                        scrollDirection:Axis.vertical,
-                        itemCount: images.length,
-                        itemBuilder: (BuildContext context, int index) {
-                          // List<String> images = List.from(snapshot.data.docs[index].data()['collmediaUrl']);
-                          _listOfImages = [];
-                          for (int i = 0;
-                          i <
-                              images.length;
-                          i++) {
-                            _listOfImages.add(CachedNetworkImage(imageUrl:images[i]));
-                          }
-                          return Stack(
-                            children: <Widget>[
-                              Container(
-                                  margin: EdgeInsets.all(1.0),
-
-                                  decoration: BoxDecoration(
-                                    color: Colors.transparent,
                                   ),
-                                  width: MediaQuery
-                                      .of(context)
-                                      .size
-                                      .width,
-                                  child:
-                                  CarouselSlider(
-                                      items: _listOfImages,
-                                      options: CarouselOptions(
-                                        aspectRatio: 16/9,
-                                        viewportFraction: 0.8,
-                                        initialPage: 0,
-                                        enableInfiniteScroll: false,
-                                        reverse: false,
-                                        autoPlay: false,
-                                        autoPlayInterval: Duration(seconds: 3),
-                                        autoPlayAnimationDuration: Duration(milliseconds: 800),
-                                        autoPlayCurve: Curves.fastOutSlowIn,
-                                        enlargeCenterPage: true,
-                                        pauseAutoPlayOnManualNavigate: true,
-                                        pauseAutoPlayOnTouch: true,
-                                        // onPageChanged: callbackFunction,
-                                        scrollDirection: Axis.horizontal,
-                                      )
-                                  )
-                              ),
-                              Container(
-                                height: 50.0,
-                                color: Colors.transparent,
-                                padding:
-                                EdgeInsets.symmetric(horizontal: 16.0),
-                                alignment: Alignment.centerLeft,
-                                child: ListTile(
-                                    trailing: IconButton(
-                                        onPressed: () {
-                                          bool _isFav =
-                                              likes[currentUserId] == true;
-                                          if (!_isFav) {
-                                            bidsRef
-                                                .doc(ownerId)
-                                                .collection('userBids')
-                                                .doc(postId)
-                                                .update({
-                                              'likes.$currentUserId': true
-                                            });
-                                            addLikeToActivityFeed(
-                                                ownerId: ownerId,
-                                                postId: postId,
-                                                mediaUrl: images.first);
-                                            wishRef
-                                                .doc(currentUser.id)
-                                                .collection("userAucWish")
-                                                .doc(postId)
-                                                .set({
-                                              "username": username,
-                                              "postId": postId,
-                                              "timestamp": timestamp,
-                                              "photoUrl": photoUrl,
-                                              "image": images.first,
-                                              "ownerId": ownerId,
-                                            });
-                                            setState(() {
-                                              isLiked = true;
-                                              likes[currentUserId] = true;
-                                            });
-                                          }
-                                          else if (_isFav) {
-                                            bidsRef
-                                                .doc(ownerId)
-                                                .collection('userBids')
-                                                .doc(postId)
-                                                .update({
-                                              'likes.$currentUserId': false
-                                            });
-                                            removeLikeFromActivityFeed(
-                                                ownerId: ownerId,
-                                                postId: postId);
+                                );
+                                // ignore: unnecessary_statements
+                              })
+                              : handleDeletePost(parentContext:context,ownerId: ownerId,postId: postId);
+                        }),
+                  ),
 
-                                            var docReference = wishRef
-                                                .doc(currentUser.id)
-                                                .collection("userAucWish")
-                                                .doc(postId);
-                                            docReference.delete();
-                                            setState(() {
-                                              isLiked = false;
-                                              likes[currentUserId] = false;
-                                            });
-                                          }
-                                        },
-                                        icon: isLiked
-                                            ? Icon(Icons.bookmark_outlined)
-                                            : Icon(Icons.bookmark_outline))),
-                              ),
-                            ],
-                          );
+                  ListView.builder(physics: NeverScrollableScrollPhysics(),
+                      shrinkWrap: true,
+                      scrollDirection:Axis.vertical,
+                      itemCount: images.length,
+                      itemBuilder: (BuildContext context, int index) {
+                        // List<String> images = List.from(snapshot.data.docs[index].data()['collmediaUrl']);
+                        _listOfImages = [];
+                        for (int i = 0;
+                        i <
+                            images.length;
+                        i++) {
+                          _listOfImages.add(CachedNetworkImage(imageUrl:images[i]));
                         }
-                    ),
+                        return Stack(
+                          children: <Widget>[
+                            Container(
+                                margin: EdgeInsets.all(1.0),
 
-                    SizedBox(
-                        height:
-                        SizeConfig.blockSizeVertical * 2),
-                    ExpansionTile(
+                                decoration: BoxDecoration(
+                                  color: Colors.transparent,
+                                ),
+                                width: MediaQuery
+                                    .of(context)
+                                    .size
+                                    .width,
+                                child:
+                                CarouselSlider(
+                                    items: _listOfImages,
+                                    options: CarouselOptions(
+                                      aspectRatio: 16/9,
+                                      viewportFraction: 0.8,
+                                      initialPage: 0,
+                                      enableInfiniteScroll: false,
+                                      reverse: false,
+                                      autoPlay: false,
+                                      autoPlayInterval: Duration(seconds: 3),
+                                      autoPlayAnimationDuration: Duration(milliseconds: 800),
+                                      autoPlayCurve: Curves.fastOutSlowIn,
+                                      enlargeCenterPage: true,
+                                      pauseAutoPlayOnManualNavigate: true,
+                                      pauseAutoPlayOnTouch: true,
+                                      // onPageChanged: callbackFunction,
+                                      scrollDirection: Axis.horizontal,
+                                    )
+                                )
+                            ),
+                            Container(
+                              height: 50.0,
+                              color: Colors.transparent,
+                              padding:
+                              EdgeInsets.symmetric(horizontal: 16.0),
+                              alignment: Alignment.centerLeft,
+                              child: ListTile(
+                                  trailing: IconButton(
+                                      onPressed: () {
+                                        bool _isFav =
+                                            likes[currentUserId] == true;
+                                        if (!_isFav) {
+                                          bidsRef
+                                              .doc(ownerId)
+                                              .collection('userBids')
+                                              .doc(postId)
+                                              .update({
+                                            'likes.$currentUserId': true
+                                          });
+                                          addLikeToActivityFeed(
+                                              ownerId: ownerId,
+                                              postId: postId,
+                                              mediaUrl: images.first);
+                                          wishRef
+                                              .doc(currentUser.id)
+                                              .collection("userAucWish")
+                                              .doc(postId)
+                                              .set({
+                                            "username": username,
+                                            "postId": postId,
+                                            "timestamp": timestamp,
+                                            "photoUrl": photoUrl,
+                                            "image": images.first,
+                                            "ownerId": ownerId,
+                                          });
+                                          setState(() {
+                                            isLiked = true;
+                                            likes[currentUserId] = true;
+                                          });
+                                        }
+                                        else if (_isFav) {
+                                          bidsRef
+                                              .doc(ownerId)
+                                              .collection('userBids')
+                                              .doc(postId)
+                                              .update({
+                                            'likes.$currentUserId': false
+                                          });
+                                          removeLikeFromActivityFeed(
+                                              ownerId: ownerId,
+                                              postId: postId);
+
+                                          var docReference = wishRef
+                                              .doc(currentUser.id)
+                                              .collection("userAucWish")
+                                              .doc(postId);
+                                          docReference.delete();
+                                          setState(() {
+                                            isLiked = false;
+                                            likes[currentUserId] = false;
+                                          });
+                                        }
+                                      },
+                                      icon: isLiked
+                                          ? Icon(Icons.bookmark_outlined)
+                                          : Icon(Icons.bookmark_outline))),
+                            ),
+                          ],
+                        );
+                      }
+                  ),
+
+                  SizedBox(
+                      height:
+                      SizeConfig.blockSizeVertical * 2),
+                  ExpansionTile(
                       title: Text("Description:",
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold)),
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold)),
                       children: [ Row(
                         children: [
                           Text("$description"),
                         ],
                       )]
-                    ),
+                  ),
 
-                    SizedBox(
-                        height:
-                        SizeConfig.blockSizeVertical * 2),
+                  SizedBox(
+                      height:
+                      SizeConfig.blockSizeVertical * 2),
 
-                    Row(
-                      crossAxisAlignment:
-                      CrossAxisAlignment.start,
-                      children: [
-                        Text("Opening bid:",
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold)),
-                        Text("\u0024  $usd"),
-                      ],
+                  Row(
+                    crossAxisAlignment:
+                    CrossAxisAlignment.start,
+                    children: [
+                      Text("Opening bid:",
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold)),
+                      Text("\u0024  $usd"),
+                    ],
+                  ),
+                  SizedBox(
+                      height:
+                      SizeConfig.blockSizeVertical * 2),
+                  Row(
+                    crossAxisAlignment:
+                    CrossAxisAlignment.start,
+                    children: [
+                      Text("Current bid:",
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold)),
+                      Text("\u0024  ${usd + amount} "),
+                    ],
+                  ),
+                  SizedBox(
+                      height:
+                      SizeConfig.blockSizeVertical * 2),
+                  ExpansionTile(title:
+                  Text(
+                    "Top Bids",
+                    style: TextStyle(
+                      color: kText,
+                      fontWeight: FontWeight.bold,
                     ),
-                    SizedBox(
-                        height:
-                        SizeConfig.blockSizeVertical * 2),
-                    Row(
-                      crossAxisAlignment:
-                      CrossAxisAlignment.start,
-                      children: [
-                        Text("Current bid:",
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold)),
-                        Text("\u0024  ${usd + amount} "),
-                      ],
-                    ),
-                    SizedBox(
-                        height:
-                        SizeConfig.blockSizeVertical * 2),
-                    ExpansionTile(title:
-                    Text(
-                      "Top Bids",
-                      style: TextStyle(
-                        color: kText,
-                        fontWeight: FontWeight.bold,
+                  ),
+                    children: [
+                      GestureDetector(
+                        onTap: () => showProfile(context, profileId: topBidderId1),
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: ListTile(leading:
+                          CircleAvatar(
+                            backgroundImage:
+                            CachedNetworkImageProvider(topBidderImg1),
+                            backgroundColor: Colors.grey,
+                          ),
+
+                            title:Text(
+                              topBidder1,
+                              style: TextStyle(
+                                color: kText,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            trailing:    Text("\u0024  $topBid1"),
+                          ),
+                        ),
                       ),
-                    ),
-                      children: [
-                        GestureDetector(
-                          onTap: () => showProfile(context, profileId: topBidderId1),
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: ListTile(leading:
-                            CircleAvatar(
-                              backgroundImage:
-                              CachedNetworkImageProvider(topBidderImg1),
-                              backgroundColor: Colors.grey,
-                            ),
+                      GestureDetector(
+                        onTap: () => showProfile(context, profileId: topBidderId2),
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: ListTile(leading:
+                          CircleAvatar(
+                            backgroundImage:
+                            CachedNetworkImageProvider(topBidderImg2),
+                            backgroundColor: Colors.grey,
+                          ),
 
-                              title:Text(
-                                topBidder1,
-                                style: TextStyle(
-                                  color: kText,
-                                  fontWeight: FontWeight.bold,
-                                ),
+                            title:Text(
+                              topBidder2,
+                              style: TextStyle(
+                                color: kText,
+                                fontWeight: FontWeight.bold,
                               ),
-                              trailing:    Text("\u0024  $topBid1"),
                             ),
+                            trailing:    Text("\u0024  $topBid2"),
                           ),
                         ),
-                        GestureDetector(
-                          onTap: () => showProfile(context, profileId: topBidderId2),
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: ListTile(leading:
-                            CircleAvatar(
-                              backgroundImage:
-                              CachedNetworkImageProvider(topBidderImg2),
-                              backgroundColor: Colors.grey,
-                            ),
+                      ),
+                      GestureDetector(
+                        onTap: () => showProfile(context, profileId: topBidderId3),
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: ListTile(leading:
+                          CircleAvatar(
+                            backgroundImage:
+                            CachedNetworkImageProvider(topBidderImg3),
+                            backgroundColor: Colors.grey,
+                          ),
 
-                              title:Text(
-                                topBidder2,
-                                style: TextStyle(
-                                  color: kText,
-                                  fontWeight: FontWeight.bold,
-                                ),
+                            title:Text(
+                              topBidder3,
+                              style: TextStyle(
+                                color: kText,
+                                fontWeight: FontWeight.bold,
                               ),
-                              trailing:    Text("\u0024  $topBid2"),
                             ),
+                            trailing:    Text("\u0024  $topBid3"),
                           ),
                         ),
-                        GestureDetector(
-                          onTap: () => showProfile(context, profileId: topBidderId3),
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: ListTile(leading:
-                            CircleAvatar(
-                              backgroundImage:
-                              CachedNetworkImageProvider(topBidderImg3),
-                              backgroundColor: Colors.grey,
-                            ),
+                      ),
+                    ],
+                  ),
+                  SizedBox(
+                      height:
+                      SizeConfig.blockSizeVertical * 2),
 
-                              title:Text(
-                                topBidder3,
-                                style: TextStyle(
-                                  color: kText,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                              trailing:    Text("\u0024  $topBid3"),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                    SizedBox(
-                        height:
-                        SizeConfig.blockSizeVertical * 2),
+                  !hasEnded ?   ElevatedButton(
+                    onPressed: () {
+                      if (amount <= 99) {
+                        int change;
+                        int a = amount + minimumBid;
+                        int top = usd + amount;
+                        amount > 99
+                            ? change = minimumBid
+                            : change = 25;
+                        bidsRef
+                            .doc(ownerId)
+                            .collection("userBids")
+                            .doc(postId)
 
-                    !hasEnded ?   ElevatedButton(
-                      onPressed: () {
-                        if (amount <= 99) {
-                          int change;
-                          int a = amount + minimumBid;
-                          int top = usd + amount;
-                          amount > 99
-                              ? change = minimumBid
-                              : change = 25;
-                          bidsRef
-                              .doc(ownerId)
-                              .collection("userBids")
-                              .doc(postId)
+                            .update({
+                          "amount": a,
+                          "minimumBid": change,
+                          "topBid1": top,
+                          "topBidder1": currentUser
+                              .displayName,
+                          "topBidderImg1":
+                          currentUser.photoUrl,
+                          "topBidderId1":
+                          currentUser.id,
+                          "topBid2": topBid1,
+                          "topBidder2": topBidder1,
+                          "topBidderImg2":
+                          topBidderImg1,
+                          "topBidderId2":
+                          topBidderId1,
+                          "topBid3": topBid2,
+                          "topBidder3": topBidder2,
+                          "topBidderImg3":
+                          topBidderImg2,
+                          "topBidderId3":
+                          topBidderId2,
+                        });
+                      }
+                      else if (amount <= 299) {
+                        int change;
+                        int a = amount + minimumBid;
+                        int top = usd + amount;
+                        amount > 299
+                            ? change = minimumBid
+                            : change = 50;
 
-                              .update({
-                            "amount": a,
-                            "minimumBid": change,
-                            "topBid1": top,
-                            "topBidder1": currentUser
-                                .displayName,
-                            "topBidderImg1":
-                            currentUser.photoUrl,
-                            "topBidderId1":
-                            currentUser.id,
-                            "topBid2": topBid1,
-                            "topBidder2": topBidder1,
-                            "topBidderImg2":
-                            topBidderImg1,
-                            "topBidderId2":
-                            topBidderId1,
-                            "topBid3": topBid2,
-                            "topBidder3": topBidder2,
-                            "topBidderImg3":
-                            topBidderImg2,
-                            "topBidderId3":
-                            topBidderId2,
-                          });
-                        } else if (amount <= 299) {
-                          int change;
-                          int a = amount + minimumBid;
-                          int top = usd + amount;
-                          amount > 299
-                              ? change = minimumBid
-                              : change = 50;
+                        bidsRef
+                            .doc(ownerId)
+                            .collection("userBids")
+                            .doc(postId)
 
-                          bidsRef
-                              .doc(ownerId)
-                              .collection("userBids")
-                              .doc(postId)
+                            .update({
+                          "amount": a,
+                          "minimumBid": change,
+                          "topBid1": top,
+                          "topBidder1": currentUser
+                              .displayName,
+                          "topBidderImg1":
+                          currentUser.photoUrl,
+                          "topBidderId1":
+                          currentUser.id,
+                          "topBid2": topBid1,
+                          "topBidder2": topBidder1,
+                          "topBidderImg2":
+                          topBidderImg1,
+                          "topBidderId2":
+                          topBidderId1,
+                          "topBid3": topBid2,
+                          "topBidder3": topBidder2,
+                          "topBidderImg3":
+                          topBidderImg2,
+                          "topBidderId3":
+                          topBidderId2,
+                        });
+                      }
+                      else if (amount <= 599) {
+                        int change;
+                        int a = amount + minimumBid;
+                        int top = usd + amount;
+                        amount > 599
+                            ? change = minimumBid
+                            : change = 100;
 
-                              .update({
-                            "amount": a,
-                            "minimumBid": change,
-                            "topBid1": top,
-                            "topBidder1": currentUser
-                                .displayName,
-                            "topBidderImg1":
-                            currentUser.photoUrl,
-                            "topBidderId1":
-                            currentUser.id,
-                            "topBid2": topBid1,
-                            "topBidder2": topBidder1,
-                            "topBidderImg2":
-                            topBidderImg1,
-                            "topBidderId2":
-                            topBidderId1,
-                            "topBid3": topBid2,
-                            "topBidder3": topBidder2,
-                            "topBidderImg3":
-                            topBidderImg2,
-                            "topBidderId3":
-                            topBidderId2,
-                          });
-                        } else if (amount <= 599) {
-                          int change;
-                          int a = amount + minimumBid;
-                          int top = usd + amount;
-                          amount > 599
-                              ? change = minimumBid
-                              : change = 100;
+                        bidsRef
+                            .doc(ownerId)
+                            .collection("userBids")
+                            .doc(postId)
 
-                          bidsRef
-                              .doc(ownerId)
-                              .collection("userBids")
-                              .doc(postId)
+                            .update({
+                          "amount": a,
+                          "minimumBid": change,
+                          "topBid1": top,
+                          "topBidder1": currentUser
+                              .displayName,
+                          "topBidderImg1":
+                          currentUser.photoUrl,
+                          "topBidderId1":
+                          currentUser.id,
+                          "topBid2": topBid1,
+                          "topBidder2": topBidder1,
+                          "topBidderImg2":
+                          topBidderImg1,
+                          "topBidderId2":
+                          topBidderId1,
+                          "topBid3": topBid2,
+                          "topBidder3": topBidder2,
+                          "topBidderImg3":
+                          topBidderImg2,
+                          "topBidderId3":
+                          topBidderId2,
+                        });
+                      }
+                      else if (amount <= 1499) {
+                        int change;
+                        int a = amount + minimumBid;
+                        int top = usd + amount;
+                        amount > 1499
+                            ? change = minimumBid
+                            : change = 200;
 
-                              .update({
-                            "amount": a,
-                            "minimumBid": change,
-                            "topBid1": top,
-                            "topBidder1": currentUser
-                                .displayName,
-                            "topBidderImg1":
-                            currentUser.photoUrl,
-                            "topBidderId1":
-                            currentUser.id,
-                            "topBid2": topBid1,
-                            "topBidder2": topBidder1,
-                            "topBidderImg2":
-                            topBidderImg1,
-                            "topBidderId2":
-                            topBidderId1,
-                            "topBid3": topBid2,
-                            "topBidder3": topBidder2,
-                            "topBidderImg3":
-                            topBidderImg2,
-                            "topBidderId3":
-                            topBidderId2,
-                          });
-                        } else if (amount <= 1499) {
-                          int change;
-                          int a = amount + minimumBid;
-                          int top = usd + amount;
-                          amount > 1499
-                              ? change = minimumBid
-                              : change = 200;
+                        bidsRef
+                            .doc(ownerId)
+                            .collection("userBids")
+                            .doc(postId)
 
-                          bidsRef
-                              .doc(ownerId)
-                              .collection("userBids")
-                              .doc(postId)
+                            .update({
+                          "amount": a,
+                          "minimumBid": change,
+                          "topBid1": top,
+                          "topBidder1": currentUser
+                              .displayName,
+                          "topBidderImg1":
+                          currentUser.photoUrl,
+                          "topBidderId1":
+                          currentUser.id,
+                          "topBid2": topBid1,
+                          "topBidder2": topBidder1,
+                          "topBidderImg2":
+                          topBidderImg1,
+                          "topBidderId2":
+                          topBidderId1,
+                          "topBid3": topBid2,
+                          "topBidder3": topBidder2,
+                          "topBidderImg3":
+                          topBidderImg2,
+                          "topBidderId3":
+                          topBidderId2,
+                        });
+                      }
+                      else if (amount <= 2499) {
+                        int change;
+                        int a = amount + minimumBid;
+                        int top = usd + amount;
+                        amount > 2499
+                            ? change = minimumBid
+                            : change = 300;
 
-                              .update({
-                            "amount": a,
-                            "minimumBid": change,
-                            "topBid1": top,
-                            "topBidder1": currentUser
-                                .displayName,
-                            "topBidderImg1":
-                            currentUser.photoUrl,
-                            "topBidderId1":
-                            currentUser.id,
-                            "topBid2": topBid1,
-                            "topBidder2": topBidder1,
-                            "topBidderImg2":
-                            topBidderImg1,
-                            "topBidderId2":
-                            topBidderId1,
-                            "topBid3": topBid2,
-                            "topBidder3": topBidder2,
-                            "topBidderImg3":
-                            topBidderImg2,
-                            "topBidderId3":
-                            topBidderId2,
-                          });
-                        } else if (amount <= 2499) {
-                          int change;
-                          int a = amount + minimumBid;
-                          int top = usd + amount;
-                          amount > 2499
-                              ? change = minimumBid
-                              : change = 300;
+                        bidsRef
+                            .doc(ownerId)
+                            .collection("userBids")
+                            .doc(postId)
 
-                          bidsRef
-                              .doc(ownerId)
-                              .collection("userBids")
-                              .doc(postId)
+                            .update({
+                          "amount": a,
+                          "minimumBid": change,
+                          "topBid1": top,
+                          "topBidder1": currentUser
+                              .displayName,
+                          "topBidderImg1":
+                          currentUser.photoUrl,
+                          "topBidderId1":
+                          currentUser.id,
+                          "topBid2": topBid1,
+                          "topBidder2": topBidder1,
+                          "topBidderImg2":
+                          topBidderImg1,
+                          "topBidderId2":
+                          topBidderId1,
+                          "topBid3": topBid2,
+                          "topBidder3": topBidder2,
+                          "topBidderImg3":
+                          topBidderImg2,
+                          "topBidderId3":
+                          topBidderId2,
+                        });
+                      }
+                      else if (amount <= 3499) {
+                        int change;
+                        int a = amount + minimumBid;
+                        int top = usd + amount;
+                        amount > 3499
+                            ? change = minimumBid
+                            : change = 400;
 
-                              .update({
-                            "amount": a,
-                            "minimumBid": change,
-                            "topBid1": top,
-                            "topBidder1": currentUser
-                                .displayName,
-                            "topBidderImg1":
-                            currentUser.photoUrl,
-                            "topBidderId1":
-                            currentUser.id,
-                            "topBid2": topBid1,
-                            "topBidder2": topBidder1,
-                            "topBidderImg2":
-                            topBidderImg1,
-                            "topBidderId2":
-                            topBidderId1,
-                            "topBid3": topBid2,
-                            "topBidder3": topBidder2,
-                            "topBidderImg3":
-                            topBidderImg2,
-                            "topBidderId3":
-                            topBidderId2,
-                          });
-                        } else if (amount <= 3499) {
-                          int change;
-                          int a = amount + minimumBid;
-                          int top = usd + amount;
-                          amount > 3499
-                              ? change = minimumBid
-                              : change = 400;
+                        bidsRef
+                            .doc(ownerId)
+                            .collection("userBids")
+                            .doc(postId)
 
-                          bidsRef
-                              .doc(ownerId)
-                              .collection("userBids")
-                              .doc(postId)
+                            .update({
+                          "amount": a,
+                          "minimumBid": change,
+                          "topBid1": top,
+                          "topBidder1": currentUser
+                              .displayName,
+                          "topBidderImg1":
+                          currentUser.photoUrl,
+                          "topBidderId1":
+                          currentUser.id,
+                          "topBid2": topBid1,
+                          "topBidder2": topBidder1,
+                          "topBidderImg2":
+                          topBidderImg1,
+                          "topBidderId2":
+                          topBidderId1,
+                          "topBid3": topBid2,
+                          "topBidder3": topBidder2,
+                          "topBidderImg3":
+                          topBidderImg2,
+                          "topBidderId3":
+                          topBidderId2,
+                        });
+                      }
+                      else if (amount <= 4499) {
+                        int change;
+                        int a = amount + minimumBid;
+                        int top = usd + amount;
+                        amount > 5499
+                            ? change = minimumBid
+                            : change = 500;
 
-                              .update({
-                            "amount": a,
-                            "minimumBid": change,
-                            "topBid1": top,
-                            "topBidder1": currentUser
-                                .displayName,
-                            "topBidderImg1":
-                            currentUser.photoUrl,
-                            "topBidderId1":
-                            currentUser.id,
-                            "topBid2": topBid1,
-                            "topBidder2": topBidder1,
-                            "topBidderImg2":
-                            topBidderImg1,
-                            "topBidderId2":
-                            topBidderId1,
-                            "topBid3": topBid2,
-                            "topBidder3": topBidder2,
-                            "topBidderImg3":
-                            topBidderImg2,
-                            "topBidderId3":
-                            topBidderId2,
-                          });
-                        } else if (amount <= 4499) {
-                          int change;
-                          int a = amount + minimumBid;
-                          int top = usd + amount;
-                          amount > 5499
-                              ? change = minimumBid
-                              : change = 500;
+                        bidsRef
+                            .doc(ownerId)
+                            .collection("userBids")
+                            .doc(postId)
 
-                          bidsRef
-                              .doc(ownerId)
-                              .collection("userBids")
-                              .doc(postId)
+                            .update({
+                          "amount": a,
+                          "minimumBid": change,
+                          "topBid1": top,
+                          "topBidder1": currentUser
+                              .displayName,
+                          "topBidderImg1":
+                          currentUser.photoUrl,
+                          "topBidderId1":
+                          currentUser.id,
+                          "topBid2": topBid1,
+                          "topBidder2": topBidder1,
+                          "topBidderImg2":
+                          topBidderImg1,
+                          "topBidderId2":
+                          topBidderId1,
+                          "topBid3": topBid2,
+                          "topBidder3": topBidder2,
+                          "topBidderImg3":
+                          topBidderImg2,
+                          "topBidderId3":
+                          topBidderId2,
+                        });
+                      }
+                      else if (amount > 5500) {
+                        int a = amount + minimumBid;
+                        int top = usd + amount;
 
-                              .update({
-                            "amount": a,
-                            "minimumBid": change,
-                            "topBid1": top,
-                            "topBidder1": currentUser
-                                .displayName,
-                            "topBidderImg1":
-                            currentUser.photoUrl,
-                            "topBidderId1":
-                            currentUser.id,
-                            "topBid2": topBid1,
-                            "topBidder2": topBidder1,
-                            "topBidderImg2":
-                            topBidderImg1,
-                            "topBidderId2":
-                            topBidderId1,
-                            "topBid3": topBid2,
-                            "topBidder3": topBidder2,
-                            "topBidderImg3":
-                            topBidderImg2,
-                            "topBidderId3":
-                            topBidderId2,
-                          });
-                        } else if (amount > 5500) {
-                          int a = amount + minimumBid;
-                          int top = usd + amount;
+                        bidsRef
+                            .doc(ownerId)
+                            .collection("userBids")
+                            .doc(postId)
 
-                          bidsRef
-                              .doc(ownerId)
-                              .collection("userBids")
-                              .doc(postId)
+                            .update({
+                          "amount": a,
+                          "topBid1": top,
+                          "topBidder1": currentUser
+                              .displayName,
+                          "topBidderImg1":
+                          currentUser.photoUrl,
+                          "topBidderId1":
+                          currentUser.id,
+                          "topBid2": topBid1,
+                          "topBidder2": topBidder1,
+                          "topBidderImg2":
+                          topBidderImg1,
+                          "topBidderId2":
+                          topBidderId1,
+                          "topBid3": topBid2,
+                          "topBidder3": topBidder2,
+                          "topBidderImg3":
+                          topBidderImg2,
+                          "topBidderId3":
+                          topBidderId2,
+                        });
+                      }
+                    },
+                    child: Text(
+                        "Place Bid(\u0024 $minimumBid)"),
+                  ):
+                  hasEnded ?auctionEnd(images: images.first,postId: postId,ownerId: ownerId,photoUrl: photoUrl)  :Container(),
+                  hasEnded ? currentUser.id == topBidderId1?
 
-                              .update({
-                            "amount": a,
-                            "topBid1": top,
-                            "topBidder1": currentUser
-                                .displayName,
-                            "topBidderImg1":
-                            currentUser.photoUrl,
-                            "topBidderId1":
-                            currentUser.id,
-                            "topBid2": topBid1,
-                            "topBidder2": topBidder1,
-                            "topBidderImg2":
-                            topBidderImg1,
-                            "topBidderId2":
-                            topBidderId1,
-                            "topBid3": topBid2,
-                            "topBidder3": topBidder2,
-                            "topBidderImg3":
-                            topBidderImg2,
-                            "topBidderId3":
-                            topBidderId2,
-                          });
-                        }
-                      },
-                      child: Text(
-                          "Place Bid(\\u0024 $minimumBid)"),
-                    ): hasEnded ?   activityFeedRef
-                        .doc(ownerId)
-                        .collection("feedItems")
-                        .doc(postId)
-                        .set({
-                      "type": "topBid",
-                      "username": username,
-                      "userId": ownerId,
-                      "userProfileImg": photoUrl,
-                      "postId": postId,
-                      "mediaUrl": images.first,
-                      "timestamp": timestamp,
-                      "read": 'false',
-                    }):Container(),
-                    hasEnded ? currentUser.id == topBidderId1?
+                  ElevatedButton(onPressed: () {showDialog<void>(
+                    context: context,
+                    // useRootNavigator:true,
 
-                    ElevatedButton(onPressed: () {showDialog<void>(
-                      context: context,
-                      // useRootNavigator:true,
+                    barrierDismissible: true,
+                    // false = user must tap button, true = tap outside dialog
+                    builder: (BuildContext dialogContext) {
+                      return
+                        Dialog(
 
-                      barrierDismissible: true,
-                      // false = user must tap button, true = tap outside dialog
-                      builder: (BuildContext dialogContext) {
-                        return
-                          Dialog(
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(20),),
+                          child:
+                          Container(
+                            height:400,
 
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(20),),
-                            child:
-                            Container(
-                              height:400,
+                            child: Center(
+                              child: Container(
+                                child: Column(
+                                  mainAxisAlignment:MainAxisAlignment.center,
+                                  children:[
+                                    Container(
+                                      alignment: Alignment.center,
+                                      margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0, 8.0),
+                                      child: TextFormField(
+                                        keyboardType: TextInputType.multiline,
+                                        maxLines: null,
+                                        style: TextStyle(color: kText),
+                                        controller: TextController,
+                                        decoration: InputDecoration(
+                                          border: OutlineInputBorder(
+                                              borderSide: BorderSide(color: kSubtitle)),
+                                          enabledBorder: OutlineInputBorder(
+                                              borderSide: BorderSide(color: Colors.black)),
+                                          focusedBorder: OutlineInputBorder(
+                                              borderSide: BorderSide(color: Colors.blue)),
 
-                              child: Center(
-                                child: Container(
-                                  child: Column(
-                                    mainAxisAlignment:MainAxisAlignment.center,
-                                    children:[
-                                      Container(
-                                        alignment: Alignment.center,
-                                        margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0, 8.0),
-                                        child: TextFormField(
-                                          keyboardType: TextInputType.multiline,
-                                          maxLines: null,
-                                          style: TextStyle(color: kText),
-                                          controller: TextController,
-                                          decoration: InputDecoration(
-                                            border: OutlineInputBorder(
-                                                borderSide: BorderSide(color: kSubtitle)),
-                                            enabledBorder: OutlineInputBorder(
-                                                borderSide: BorderSide(color: Colors.black)),
-                                            focusedBorder: OutlineInputBorder(
-                                                borderSide: BorderSide(color: Colors.blue)),
-
-                                            labelText: 'Comment',
-                                            labelStyle: TextStyle(color: kText),
-                                          ),
-                                          textAlign: TextAlign.center,
-
+                                          labelText: 'Comment',
+                                          labelStyle: TextStyle(color: kText),
                                         ),
-                                      ),
-                                      //Customised
-                                      Container(
-                                        // alignment:Alignment.centerLeft,
-                                        child:   FloatingActionButton.extended(
-                                          backgroundColor: kblue,
-                                          onPressed: () {
-                                            Navigator.push(context, MaterialPageRoute(builder: (context) =>AddressAuction(Amount: topBid1,
-                                              prodId: postId,
-                                              productname: description,
-                                              OwnerId:ownerId,
-                                              profileimg:photoUrl,
-                                              username: username,
-                                              mediaUrl: images.first,
-                                              mtoText: TextController.text,
+                                        textAlign: TextAlign.center,
 
-                                            )));
-                                            //Get.back();
-                                          },
-                                          label: Text('Done',style:TextStyle(color:  Colors.white) ,),
-                                        ),
                                       ),
-                                    ],) ,
-                                ),
+                                    ),
+                                    //Customised
+                                    Container(
+                                      // alignment:Alignment.centerLeft,
+                                      child:   FloatingActionButton.extended(
+                                        backgroundColor: kblue,
+                                        onPressed: () {
+                                          Navigator.push(context, MaterialPageRoute(builder: (context) =>AddressAuction(Amount: topBid1,
+                                            prodId: postId,
+                                            productname: description,
+                                            OwnerId:ownerId,
+                                            profileimg:photoUrl,
+                                            username: username,
+                                            mediaUrl: images.first,
+                                            mtoText: TextController.text,
+
+                                          )));
+                                          //Get.back();
+                                        },
+                                        label: Text('Done',style:TextStyle(color:  Colors.white) ,),
+                                      ),
+                                    ),
+                                  ],) ,
                               ),
                             ),
+                          ),
 
-                          );
-                      },
-                    );},
-                        child: Text("Buy Now"))
+                        );
+                    },
+                  );},
+                      child: Text("Buy Now"))
 
-                        :
-                    Container():
-                    Container(),
-                    SizedBox(
-                        height:
-                        SizeConfig.blockSizeVertical * 2),
+                      :
+                  Container():
+                  Container(),
+                  SizedBox(
+                      height:
+                      SizeConfig.blockSizeVertical * 2),
 
-                  ],
-                ),
+                ],
               ),
             );
 
@@ -1295,13 +1359,24 @@ class _LiveTvState extends State<LiveTv> with TickerProviderStateMixin {
       );
   }
 
-  auctionEnd({String ownerId}){
+  auctionEnd({String ownerId,String postId,String photoUrl,String images}){
 
-    usersRef.doc(ownerId).update({
-      'Bidding':false,
+    activityFeedRef
+        .doc(ownerId)
+        .collection("feedItems")
+        .doc(postId)
+        .set({
+      "type": "topBid",
+      "username": username,
+      "userId": ownerId,
+      "userProfileImg": photoUrl,
+      "postId": postId,
+      "mediaUrl": images,
+      "timestamp": timestamp,
+      "read": 'false',
     });
-
-
+return
+    Text("Auction ended");
   }
   Future<void> onJoin(
       {channelName, channelId, username, hostImage, userImage}) async {
@@ -1380,5 +1455,42 @@ class _ExpandableTextState extends State<ExpandableText>
           child: const Text('...'),
           onPressed: () => setState(() => widget.isExpanded = true))
     ]);
+  }
+}
+class LabelText extends StatelessWidget {
+  LabelText({this.label, this.value});
+
+  final String label;
+  final String value;
+
+  @override
+  Widget build(BuildContext context) {
+    SizeConfig().init(context);
+
+    return Container(
+      margin: EdgeInsets.symmetric(horizontal: 5),
+      padding: EdgeInsets.all(20),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(25),
+        color: Colors.grey,
+      ),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: <Widget>[
+          Text(
+            '$value',
+            style: TextStyle(
+                color: Colors.white, fontSize: SizeConfig.blockSizeHorizontal*4, fontWeight: FontWeight.bold),
+          ),
+          Text(
+            '$label',
+            style: TextStyle(
+              color: Colors.white70,
+              fontSize: SizeConfig.blockSizeHorizontal*3.5,
+            ),
+          ),
+        ],
+      ),
+    );
   }
 }
