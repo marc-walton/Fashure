@@ -1,7 +1,10 @@
 import 'dart:convert';
+import 'dart:io';
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:fashow/Blogcomments.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:fashow/user.dart';
 import 'package:fashow/progress.dart';
@@ -12,17 +15,21 @@ import 'package:fashow/ActivityFeed.dart';
 import 'package:fashow/custom_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:photo_view/photo_view.dart';
+import 'package:zefyrka/zefyrka.dart';
 //import 'package:zefyr/zefyr.dart';
 
-List<NetworkImage> _listOfImages = <NetworkImage>[];
+List<Widget> _listOfImages = <Widget>[];
 class Blog extends StatefulWidget {
   final String blogId;
   final String ownerId;
   final String username;
-  final String blogmediaUrl;
+  final List blogmediaUrl;
   final String title;
   final String content;
   final String source;
+    final String photoUrl;
+
   final dynamic likes;
 
   Blog({
@@ -34,18 +41,20 @@ class Blog extends StatefulWidget {
     this.content,
     this.source,
     this.likes,
+     this.photoUrl,
+
   });
 
   factory Blog.fromDocument(DocumentSnapshot doc) {
 //    var ret = new List();
-        _listOfImages = [];
-        for (int i = 0;
-        i <
-        doc.data()['blogmediaUrl']
-        .length;
-        i++) {
-          _listOfImages.add(NetworkImage(doc.data()['blogmediaUrl'][i]));
-    }
+//         _listOfImages = [];
+//         for (int i = 0;
+//         i <
+//         doc.data()['blogmediaUrl']
+//         .length;
+//         i++) {
+//           _listOfImages.add(NetworkImage(doc.data()['blogmediaUrl'][i]));
+//     }
     return Blog(
 
       blogId: doc.data()['blogId'],
@@ -56,6 +65,8 @@ class Blog extends StatefulWidget {
       content: doc.data()['content'],
       source:doc.data()['source'],
       likes: doc.data()['claps'],
+      photoUrl: doc.data()['photoUrl'],
+
     );
   }
 
@@ -84,7 +95,10 @@ class Blog extends StatefulWidget {
     content: this.content,
     source:this.source,
     likes: this.likes,
+    photoUrl: this.photoUrl,
+
     likeCount: getLikeCount(this.likes),
+
   );
 }
 
@@ -93,15 +107,17 @@ class _BlogState extends State<Blog> {
   final String blogId;
   final String ownerId;
   final String username;
-  final String blogmediaUrl;
+  final List blogmediaUrl;
   final String title;
   final String source;
   final String content;
+    final String photoUrl;
+
   int likeCount;
   Map likes;
   bool isLiked;
   bool showHeart = false;
-  //ZefyrController _controller;
+  ZefyrController _controller;
   //ZefyrImageDelegate _imageDelegate;
   /// Zefyr editor like any other input field requires a focus node.
   FocusNode _focusNode;
@@ -115,7 +131,18 @@ class _BlogState extends State<Blog> {
     this.likes,
     this.source,
     this.likeCount,
+      this.photoUrl,
+
   });
+  void initState() {
+    super.initState();
+    _focusNode = FocusNode();
+    _saveDocument().then((document) {
+      setState(() {
+        _controller = ZefyrController(document);
+      });
+    });
+  }
 
 
 
@@ -151,8 +178,6 @@ class _BlogState extends State<Blog> {
           );
         });
   }
-
-// Note: To delete post, ownerId and currentUserId must be equal, so they can be used interchangeably
   deletePost() async {
     // delete post itself
     blogRef
@@ -166,7 +191,11 @@ class _BlogState extends State<Blog> {
       }
     });
     // delete uploaded image for the post
-    storageRef.child("blog_$blogId.jpg").delete();
+//    storageRef.child("postnow${postId}").delete();
+
+    for ( var imageFile in blogmediaUrl) {
+      var photo =  FirebaseStorage.instance.refFromURL(imageFile) ;
+      await photo.delete();}
     // then delete all activity feed notifications
     QuerySnapshot activityFeedSnapshot = await activityFeedRef
         .doc(ownerId)
@@ -189,6 +218,8 @@ class _BlogState extends State<Blog> {
       }
     });
   }
+
+// Note: To delete post, ownerId and currentUserId must be equal, so they can be used interchangeably
 
   handleLikePost() {
     bool _isLiked = likes[currentUserId] == true;
@@ -280,173 +311,250 @@ class _BlogState extends State<Blog> {
   }
 
   buildPostHeader() {
-
-    return
-      FutureBuilder(
-        future: usersRef.doc(ownerId).get(),
-        builder: (context, snapshot) {
-          if (!snapshot.hasData) {
-            return circularProgress();
-          }
-          Users user = Users.fromDocument(snapshot.data);
-         bool isPostOwner = currentUserId == ownerId;
-          return  Column(children: <Widget>[
-              GestureDetector(
-                onTap: () => showProfile(context, profileId: user.id),
-                child:    ListTileTheme(
-
-                  child: ListTile(
-                    leading: CircleAvatar(
-                      backgroundImage: CachedNetworkImageProvider(user.photoUrl),
-                      backgroundColor: Colors.grey,
-                    ),
-                    title: Text(
-                      user.displayName,
-                      style: TextStyle(
-                        color:  kText,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    trailing: IconButton(icon: Icon(Icons.more_horiz,color: kText,),
-                        onPressed: () {
-                          !isPostOwner?showDialog(
-                              context: context,
-                              builder: (BuildContext context) {
-                                return Dialog(
-                                  backgroundColor: kSecondaryColor,
-                                  shape: RoundedRectangleBorder(
-                                      borderRadius:
-                                      BorderRadius.circular(20.0)), //this right here
-                                  child: GestureDetector(
-                                    onTap: (){report();
-                                    Navigator.pop(context);},
-                                    child: Container(
-                                      height: 100,
-                                      child: Padding(
-                                        padding: const EdgeInsets.all(12.0),
-                                        child: Column(
-                                          mainAxisAlignment: MainAxisAlignment.center,
-                                          crossAxisAlignment: CrossAxisAlignment.start,
-                                          children: [
-                                            Container(
-
-                                              child: Align(
-                                                  alignment: Alignment.center,
-                                                  child: Text('Report this post?',style: TextStyle(
-                                                      color: Colors.blueAccent,
-                                                      fontWeight: FontWeight.bold,
-                                                      fontSize: 20.0),)),),
+    bool isPostOwner = currentUserId == ownerId;
 
 
-                                          ],
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                );
-                                // ignore: unnecessary_statements
-                              }):handleDeletePost(context);
-                        }),
+    return  Column(children: <Widget>[
+      GestureDetector(
+        onTap: () => showProfile(context, profileId: ownerId),
+        child:    ListTileTheme(
 
-                  ),
-                ),
+          child: ListTile(
+            leading: CircleAvatar(
+              backgroundImage: CachedNetworkImageProvider(photoUrl),
+              backgroundColor: Colors.grey,
+            ),
+            title: Text(
+              username,
+              style: TextStyle(
+                color:  kText,
+                fontWeight: FontWeight.bold,
               ),
-              SizedBox(height:10.0),
-              ListTile(
-                title: Text(title,
-                  style: TextStyle(
-                    color:kText,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 25.0,
-                  ),),
-              ),
-            SizedBox(height:10.0),
+            ),
+            trailing: IconButton(icon: Icon(Icons.more_horiz,color: kText,),
+                onPressed: () {
+                  !isPostOwner?showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return Dialog(
+                          backgroundColor: kSecondaryColor,
+                          shape: RoundedRectangleBorder(
+                              borderRadius:
+                              BorderRadius.circular(20.0)), //this right here
+                          child: GestureDetector(
+                            onTap: (){report();
+                            Navigator.pop(context);},
+                            child: Container(
+                              height: 100,
+                              child: Padding(
+                                padding: const EdgeInsets.all(12.0),
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Container(
 
-            ClipRRect(
-                borderRadius: BorderRadius.only
-                  (bottomLeft: Radius.circular(20.0),bottomRight: Radius.circular(20.0)),
-                child: Container(
-                    height: MediaQuery.of(context).size.height * 0.65,
-
-                    width:     MediaQuery.of(context).size.width,
-                    child: AspectRatio(
-                        aspectRatio: 16 / 9,
-                        child: cachedNetworkImage(blogmediaUrl)))),
+                                      child: Align(
+                                          alignment: Alignment.center,
+                                          child: Text('Report this post?',style: TextStyle(
+                                              color: Colors.blueAccent,
+                                              fontWeight: FontWeight.bold,
+                                              fontSize: 20.0),)),),
 
 
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ),
+                        );
+                        // ignore: unnecessary_statements
+                      }):handleDeletePost(context);
+                }),
 
-            //Container(
-                  //child: ZefyrView(
-
-                  //  document: _loadDocument(),
-                      // imageDelegate:_loadDocument(),
-                //  )
-            //),
-//            Divider(color: kGrey,),
-              ListTile(
-                title: Text(source,
-                  style: TextStyle(
-                    color:  kText,
-                    fontWeight: FontWeight.bold,
-                  ),),
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: <Widget>[
-                  Padding(padding: EdgeInsets.only(top: 40.0, left: 20.0)),
-                  FloatingActionButton(
-                    heroTag: 'sga',
-                    mini: true,
-                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(16.0))),
-                    onPressed: handleLikePost,
-                    child:
-                    ImageIcon(
-                      isLiked ?  AssetImage("assets/img/clap-hands.png"):AssetImage("assets/img/clap.png"),
-                      color: kGrey,
-                    ),
-
-                  ),//                Padding(padding: EdgeInsets.only(right: 1.0)),
-                  Container(
-//                  margin: EdgeInsets.only(left: 20.0),
-                    child: Text(
-                      "$likeCount ",
-                      style: TextStyle(
-                        color:  Colors.black,
-                        fontSize: 15.0,
-//                      fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ),
-                  Padding(padding: EdgeInsets.only(right: 20.0)),
-                  FloatingActionButton(
-                    heroTag: null,
-                    mini: true,
-                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(16.0))),
-                    onPressed:() => showComments(
-                      context,
-                      blogId: blogId,
-                      ownerId: ownerId,
-                      mediaUrl: blogmediaUrl,
-                    ),
-                    child: Icon(
-          Icons.chat,
-          size: 28.0,
-          color: kText,
           ),
-                  ),//
-                ],
+        ),
+      ),
+      SizedBox(height:10.0),
+      ListTile(
+        title: Text(title,
+          style: TextStyle(
+            color:kText,
+            fontWeight: FontWeight.bold,
+            fontSize: 25.0,
+          ),),
+      ),
+      SizedBox(height:10.0),
+
+      ClipRRect(
+          borderRadius: BorderRadius.only
+            (bottomLeft: Radius.circular(20.0),bottomRight: Radius.circular(20.0)),
+          child: Container(
+              height: MediaQuery.of(context).size.height * 0.65,
+
+              width:     MediaQuery.of(context).size.width,
+              child: new ListView.builder(
+                  physics:NeverScrollableScrollPhysics(),
+
+                  shrinkWrap: true,
+                  scrollDirection:Axis.vertical,
+                  itemCount: blogmediaUrl.length,
+                  itemBuilder: (BuildContext context, int index) {
+
+                    // List<String> images = List.from(snapshot.data.docs[index].data()['collmediaUrl']);
+                    _listOfImages = [];
+                    for (int i = 0;
+                    i <
+                        blogmediaUrl
+                            .length;
+                    i++) {
+                      _listOfImages.add(GestureDetector(
+                        onTap: (){
+                          showDialog<void>(
+                            context: context,
+                            // useRootNavigator:true,
+
+                            barrierDismissible: true,
+                            // false = user must tap button, true = tap outside dialog
+                            builder: (BuildContext dialogContext) {
+
+                              return
+                                Dialog(
+
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(20),),
+                                  child: Container(
+                                    height: 400,
+                                    child:PhotoView(imageProvider: CachedNetworkImageProvider
+                                      (blogmediaUrl[i])),),
+                                );
+                            },
+                          );
+
+                        },
+                        child: CachedNetworkImage(imageUrl:blogmediaUrl[i]),
+                      ));
+                    }
+                    return Column(
+                      children: <Widget>[
+                        Container(
+                            margin: EdgeInsets.all(10.0),
+
+                            decoration: BoxDecoration(
+                              color: Colors.transparent,
+                            ),
+                            width: MediaQuery
+                                .of(context)
+                                .size
+                                .width,
+                            child:
+                            CarouselSlider(
+                              //  items: listOfImages.map((e) { return Builder(builder: (BuildContext context){ return Container();});}),
+                                items: _listOfImages,
+                                options: CarouselOptions(
+                                  height: 400,
+                                  aspectRatio: 16/9,
+                                  viewportFraction: 0.8,
+                                  initialPage: 0,
+                                  enableInfiniteScroll: true,
+                                  reverse: false,
+                                  autoPlay: true,
+                                  autoPlayInterval: Duration(seconds: 3),
+                                  autoPlayAnimationDuration: Duration(milliseconds: 800),
+                                  autoPlayCurve: Curves.fastOutSlowIn,
+                                  enlargeCenterPage: true,
+                                  pauseAutoPlayOnManualNavigate: true,
+                                  pauseAutoPlayOnTouch: true,
+                                  // onPageChanged: callbackFunction,
+                                  scrollDirection: Axis.horizontal,
+                                )
+                            )
+                        ),
+
+                      ],
+                    );
+                  }
+              ))),
+
+
+
+      Container(
+      child: ZefyrEditor(
+
+        controller: _controller,
+        focusNode: _focusNode,
+        autofocus: false,
+
+       )
+      ),
+//            Divider(color: kGrey,),
+      ListTile(
+        title: Text(source,
+          style: TextStyle(
+            color:  kText,
+            fontWeight: FontWeight.bold,
+          ),),
+      ),
+      Row(
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: <Widget>[
+          Padding(padding: EdgeInsets.only(top: 40.0, left: 20.0)),
+          FloatingActionButton(
+            heroTag: 'sga',
+            mini: true,
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(16.0))),
+            onPressed: handleLikePost,
+            child:
+            ImageIcon(
+              isLiked ?  AssetImage("assets/img/clap-hands.png"):AssetImage("assets/img/clap.png"),
+              color: kGrey,
+            ),
+
+          ),//                Padding(padding: EdgeInsets.only(right: 1.0)),
+          Container(
+//                  margin: EdgeInsets.only(left: 20.0),
+            child: Text(
+              "$likeCount ",
+              style: TextStyle(
+                color:  Colors.black,
+                fontSize: 15.0,
+//                      fontWeight: FontWeight.bold,
               ),
-            ],
+            ),
+          ),
+          Padding(padding: EdgeInsets.only(right: 20.0)),
+          FloatingActionButton(
+            heroTag: null,
+            mini: true,
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(16.0))),
+            onPressed:() => showComments(
+              context,
+              blogId: blogId,
+              ownerId: ownerId,
+              mediaUrl: blogmediaUrl.first,
+            ),
+            child: Icon(
+              Icons.chat,
+              size: 28.0,
+              color: kText,
+            ),
+          ),//
+        ],
+      ),
+    ],
 
-            );
-
-        },
-      );
+    );
   }
 //  NotusDocument _loadDocument() {
  //   return NotusDocument.fromJson(jsonDecode(content));
 //  }
-  @override
+   _saveDocument() {
+    // Notus documents can be easily serialized to JSON by passing to
+    // `jsonEncode` directly:
+    final contents = jsonEncode(content);
+    // For this example we save our document to a temporary file.
+    return contents;
+  }  @override
   Widget build(BuildContext context) {
     isLiked = (likes[currentUserId] == true);
     return Column(

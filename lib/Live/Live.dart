@@ -22,7 +22,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:frino_icons/frino_icons.dart';
 import 'package:intl/intl.dart';
 import 'package:fashow/Live/models/livemodel.dart';
-import 'package:flutter_countdown_timer/flutter_countdown_timer.dart';
+import 'package:fashow/Live/countdown_timer/flutter_countdown_timer.dart';
 import 'package:fashow/Live/host.dart';
 import 'package:fashow/Live/join.dart';
 import 'package:paginate_firestore/paginate_firestore.dart';
@@ -601,9 +601,15 @@ class _LiveTvState extends State<LiveTv> with TickerProviderStateMixin {
           itemBuilder: (index, context, documentSnapshot) {
            print("${documentSnapshot.data()['endingTime']}");
            Timestamp Time = documentSnapshot.data()['endingTime'] ;
-            Timestamp timestamp = documentSnapshot.data()['timestamp'] ;
-
-String ownerId = documentSnapshot.data()['ownerId'];
+           // Timestamp timestamp = documentSnapshot.data()['timestamp'] ;
+ int year = documentSnapshot.data()['year'] ;
+ int month = documentSnapshot.data()['month'] ;
+ int day = documentSnapshot.data()['day'] ;
+ int hour = documentSnapshot.data()['hour'] ;
+ int minute = documentSnapshot.data()['minute'] ;
+ int second = documentSnapshot.data()['second'] ;
+           print("$year,$month, $day, $hour, $minute, $second");
+            String ownerId = documentSnapshot.data()['ownerId'];
             String postId = documentSnapshot.data()['postId'];
             bool bidon = documentSnapshot.data()['bidOn'];
             int bidTimer = documentSnapshot.data()['bidTimer'];
@@ -639,20 +645,20 @@ print(ndTime);
                 CrossAxisAlignment.start,
                 children: [
                   CountdownTimer(
-                    endTime: DateTime(2021, 08, 04, 45, 48, 00).millisecondsSinceEpoch,
+                    endTime: DateTime(year, month, day, 22, minute, second).millisecondsSinceEpoch,
                     textStyle: TextStyle(fontSize: 30, color: Colors.pink),
                   ),
-              CustomTimer(
-              from: Duration(seconds: timestamp.seconds),
-              to: Duration(seconds:Time.seconds ),
-              onBuildAction: CustomTimerAction.auto_start,
-              builder: (CustomTimerRemainingTime remaining) {
-                return Text(
-                  "${remaining.hours}:${remaining.minutes}:${remaining.seconds}",
-                  style: TextStyle(fontSize: 30.0),
-                );
-              },
-            ),
+            //   CustomTimer(
+            //   from: Duration(seconds: timestamp.seconds),
+            //   to: Duration(seconds:Time.seconds ),
+            //   onBuildAction: CustomTimerAction.auto_start,
+            //   builder: (CustomTimerRemainingTime remaining) {
+            //     return Text(
+            //       "${remaining.hours}:${remaining.minutes}:${remaining.seconds}",
+            //       style: TextStyle(fontSize: 30.0),
+            //     );
+            //   },
+            // ),
 
 
                   ListTile(

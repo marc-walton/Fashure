@@ -51,7 +51,7 @@ class _Upload_bidState extends State<Upload_bid>
   final _formKey = GlobalKey<FormState>();
   bool isUploading = false;
   String postId = Uuid().v4();
-  List<Asset> images = List<Asset>();
+  List<Asset> images = <Asset>[];
   String _error = 'No Error Dectected';
   int dropdownValue = 2;
   var USD;
@@ -154,7 +154,7 @@ String U;
   Future<dynamic> postImage(Asset imageFile) async {
 //    ByteData byteData = await imageFile.requestOriginal(quality: 75);
     String fileName = DateTime.now().millisecondsSinceEpoch.toString();
-    Reference reference = FirebaseStorage.instance.ref().child("postnow${postId}").child("$fileName.jpg");
+    Reference reference = FirebaseStorage.instance.ref().child("auctioin${postId}").child("$fileName.jpg");
     UploadTask uploadTask = reference.putData((await imageFile.getByteData(quality: 70)).buffer.asUint8List());
     TaskSnapshot storageTaskSnapshot = await uploadTask;
 //    print(storageTaskSnapshot.ref.getDownloadURL());
@@ -164,7 +164,9 @@ String U;
     setState(() {
       isUploading = true;
     });
-    if(currentUser.countryISO == "US"){
+    DateTime f =    timestamp.add(Duration(hours: dropdownValue));
+
+    if(currentUser.currencyISO == "USD"){
       var usd;
 
 
@@ -195,7 +197,16 @@ String U;
               .set({
             "hasEnded":false,
             "bidTimer": dropdownValue,
-            "endingTime": timestamp.add(Duration(hours: dropdownValue)),
+            "endingTime": DateTime,
+
+
+            "year": f.year,
+          "month": f.month,
+           "day": f.day,
+          "hour": f.hour,
+           "minute": f.minute,
+            "second": f.second,
+
             "ownerId": widget.currentUser.id,
             "postId": postId,
              "username": widget.currentUser.username,
