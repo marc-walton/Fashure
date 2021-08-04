@@ -92,14 +92,14 @@ class _CountDownState extends State<CountdownTimer> {
     String value = '';
     if (time.days != null) {
       var days = _getNumberAddZero(time.days);
-      value = '$value$days days ';
+      value = '$value$days d ';
     }
     var hours = _getNumberAddZero(time.hours ?? 0);
-    value = '$value$hours : ';
+    value = '$value$hours h: ';
     var min = _getNumberAddZero(time.min ?? 0);
-    value = '$value$min : ';
+    value = '$value$min m: ';
     var sec = _getNumberAddZero(time.sec ?? 0);
-    value = '$value$sec';
+    value = '$value$sec s';
     return Text(
       value,
       style: textStyle,

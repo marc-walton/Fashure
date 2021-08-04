@@ -4,6 +4,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:fashow/Blogcomments.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:fashow/size_config.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:fashow/user.dart';
@@ -19,7 +20,108 @@ import 'package:photo_view/photo_view.dart';
 import 'package:zefyrka/zefyrka.dart';
 //import 'package:zefyr/zefyr.dart';
 
-List<Widget> _listOfImages = <Widget>[];
+
+List <Widget>listOfImages = <Widget>[];
+
+pics({String userid,String prodid,parentContext}){
+  return
+    FutureBuilder<QuerySnapshot> (
+        future:    blogRef
+            .doc(userid)
+            .collection("userBlog")
+            .where('blogId' ,isEqualTo: '$prodid')
+        // .where('ownerId' ,isEqualTo: '$ownerId')
+            .get(),
+        builder: (context, snapshot) {
+          if (snapshot.hasData) {
+            return new ListView.builder(
+                physics:NeverScrollableScrollPhysics(),
+                shrinkWrap: true,
+                scrollDirection:Axis.vertical,
+                itemCount: snapshot.data.docs.length,
+                itemBuilder: (BuildContext context, int index) {
+                  // List<String> images = List.from(snapshot.data.docs[index].data()['collmediaUrl']);
+                  listOfImages = [];
+                  for (int i = 0;
+                  i <
+                      snapshot.data.docs[index].data()['blogmediaUrl']
+                          .length;
+                  i++) {
+                    listOfImages.add(GestureDetector(
+                      onTap: (){
+                        showDialog<void>(
+                          context: context,
+                          // useRootNavigator:true,
+
+                          barrierDismissible: true,
+                          // false = user must tap button, true = tap outside dialog
+                          builder: (BuildContext dialogContext) {
+                            return
+                              Dialog(
+
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(20),),
+                                child: Container(
+                                  child:PhotoView(imageProvider: CachedNetworkImageProvider
+                                    (snapshot
+                                      .data.docs[index].data()['blogmediaUrl'][i])),),
+                              );
+                          },
+                        );
+                      },
+                      child: CachedNetworkImage(imageUrl:snapshot
+                          .data.docs[index].data()['blogmediaUrl'][i]),
+                    ));
+                  }
+                  return Column(
+                    children: <Widget>[
+                      Container(
+                          margin: EdgeInsets.all(10.0),
+
+                          decoration: BoxDecoration(
+                            color: Colors.transparent,
+                          ),
+                          width: MediaQuery
+                              .of(context)
+                              .size
+                              .width,
+                          child:
+                          CarouselSlider(
+
+                              items: listOfImages,
+                              options: CarouselOptions(
+                                height: 400,
+                                pauseAutoPlayOnManualNavigate: true,
+                                pauseAutoPlayOnTouch: true,
+                                aspectRatio: 16/9,
+                                viewportFraction: 0.8,
+                                initialPage: 0,
+                                enableInfiniteScroll: true,
+                                reverse: false,
+                                autoPlay: true,
+                                autoPlayInterval: Duration(seconds: 3),
+                                autoPlayAnimationDuration: Duration(milliseconds: 800),
+                                autoPlayCurve: Curves.fastOutSlowIn,
+                                enlargeCenterPage: true,
+                                // onPageChanged: callbackFunction,
+                                scrollDirection: Axis.horizontal,
+                              )
+                          )
+                      ),
+
+                    ],
+                  );
+                }
+            );
+          }
+          return Center(
+            child: CircularProgressIndicator(),
+          );
+
+        });
+
+}
+
 class Blog extends StatefulWidget {
   final String blogId;
   final String ownerId;
@@ -112,7 +214,7 @@ class _BlogState extends State<Blog> {
   final String source;
   final String content;
     final String photoUrl;
-
+  var contents ;
   int likeCount;
   Map likes;
   bool isLiked;
@@ -137,11 +239,7 @@ class _BlogState extends State<Blog> {
   void initState() {
     super.initState();
     _focusNode = FocusNode();
-    _saveDocument().then((document) {
-      setState(() {
-        _controller = ZefyrController(document);
-      });
-    });
+    _loadFromAssets();
   }
 
 
@@ -309,7 +407,20 @@ class _BlogState extends State<Blog> {
       "timestamp": timestamp,
     });
   }
-
+  Future<void> _loadFromAssets() async {
+    try {
+      final result = content;
+      final doc = NotusDocument.fromJson(jsonDecode(result));
+      setState(() {
+        _controller = ZefyrController(doc);
+      });
+    } catch (error) {
+      final doc = NotusDocument()..insert(0, 'Empty asset');
+      setState(() {
+        _controller = ZefyrController(doc);
+      });
+    }
+  }
   buildPostHeader() {
     bool isPostOwner = currentUserId == ownerId;
 
@@ -375,6 +486,15 @@ class _BlogState extends State<Blog> {
           ),
         ),
       ),
+      ClipRRect(
+          borderRadius: BorderRadius.only
+            (bottomLeft: Radius.circular(20.0),bottomRight: Radius.circular(20.0)),
+          child: Container(
+            //  height: MediaQuery.of(context).size.height * 0.65,
+
+              width:     MediaQuery.of(context).size.width,
+              child: pics(userid:ownerId,prodid:blogId))),
+
       SizedBox(height:10.0),
       ListTile(
         title: Text(title,
@@ -386,97 +506,6 @@ class _BlogState extends State<Blog> {
       ),
       SizedBox(height:10.0),
 
-      ClipRRect(
-          borderRadius: BorderRadius.only
-            (bottomLeft: Radius.circular(20.0),bottomRight: Radius.circular(20.0)),
-          child: Container(
-              height: MediaQuery.of(context).size.height * 0.65,
-
-              width:     MediaQuery.of(context).size.width,
-              child: new ListView.builder(
-                  physics:NeverScrollableScrollPhysics(),
-
-                  shrinkWrap: true,
-                  scrollDirection:Axis.vertical,
-                  itemCount: blogmediaUrl.length,
-                  itemBuilder: (BuildContext context, int index) {
-
-                    // List<String> images = List.from(snapshot.data.docs[index].data()['collmediaUrl']);
-                    _listOfImages = [];
-                    for (int i = 0;
-                    i <
-                        blogmediaUrl
-                            .length;
-                    i++) {
-                      _listOfImages.add(GestureDetector(
-                        onTap: (){
-                          showDialog<void>(
-                            context: context,
-                            // useRootNavigator:true,
-
-                            barrierDismissible: true,
-                            // false = user must tap button, true = tap outside dialog
-                            builder: (BuildContext dialogContext) {
-
-                              return
-                                Dialog(
-
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(20),),
-                                  child: Container(
-                                    height: 400,
-                                    child:PhotoView(imageProvider: CachedNetworkImageProvider
-                                      (blogmediaUrl[i])),),
-                                );
-                            },
-                          );
-
-                        },
-                        child: CachedNetworkImage(imageUrl:blogmediaUrl[i]),
-                      ));
-                    }
-                    return Column(
-                      children: <Widget>[
-                        Container(
-                            margin: EdgeInsets.all(10.0),
-
-                            decoration: BoxDecoration(
-                              color: Colors.transparent,
-                            ),
-                            width: MediaQuery
-                                .of(context)
-                                .size
-                                .width,
-                            child:
-                            CarouselSlider(
-                              //  items: listOfImages.map((e) { return Builder(builder: (BuildContext context){ return Container();});}),
-                                items: _listOfImages,
-                                options: CarouselOptions(
-                                  height: 400,
-                                  aspectRatio: 16/9,
-                                  viewportFraction: 0.8,
-                                  initialPage: 0,
-                                  enableInfiniteScroll: true,
-                                  reverse: false,
-                                  autoPlay: true,
-                                  autoPlayInterval: Duration(seconds: 3),
-                                  autoPlayAnimationDuration: Duration(milliseconds: 800),
-                                  autoPlayCurve: Curves.fastOutSlowIn,
-                                  enlargeCenterPage: true,
-                                  pauseAutoPlayOnManualNavigate: true,
-                                  pauseAutoPlayOnTouch: true,
-                                  // onPageChanged: callbackFunction,
-                                  scrollDirection: Axis.horizontal,
-                                )
-                            )
-                        ),
-
-                      ],
-                    );
-                  }
-              ))),
-
-
 
       Container(
       child: ZefyrEditor(
@@ -484,17 +513,10 @@ class _BlogState extends State<Blog> {
         controller: _controller,
         focusNode: _focusNode,
         autofocus: false,
-
+readOnly: true,
        )
       ),
 //            Divider(color: kGrey,),
-      ListTile(
-        title: Text(source,
-          style: TextStyle(
-            color:  kText,
-            fontWeight: FontWeight.bold,
-          ),),
-      ),
       Row(
         mainAxisAlignment: MainAxisAlignment.start,
         children: <Widget>[
@@ -551,7 +573,7 @@ class _BlogState extends State<Blog> {
    _saveDocument() {
     // Notus documents can be easily serialized to JSON by passing to
     // `jsonEncode` directly:
-    final contents = jsonEncode(content);
+    final contents = jsonDecode(content);
     // For this example we save our document to a temporary file.
     return contents;
   }  @override

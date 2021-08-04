@@ -120,7 +120,8 @@ dependencies:
   custom_timer: ^0.0.6
   firestore_collection: ^0.0.6
   zefyrka: ^1.0.10
-  quill_format: ^1.0.2
+  instant: ^0.4.1
+
 
 
 

@@ -26,7 +26,7 @@ import 'package:fashow/Live/countdown_timer/flutter_countdown_timer.dart';
 import 'package:fashow/Live/host.dart';
 import 'package:fashow/Live/join.dart';
 import 'package:paginate_firestore/paginate_firestore.dart';
-
+import 'package:instant/instant.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:zego_express_engine/zego_express_engine.dart';
 List<Widget> _listOfImages = <Widget>[];
@@ -600,7 +600,11 @@ class _LiveTvState extends State<LiveTv> with TickerProviderStateMixin {
           itemBuilderType: PaginateBuilderType.listView,
           itemBuilder: (index, context, documentSnapshot) {
            print("${documentSnapshot.data()['endingTime']}");
+
            Timestamp Time = documentSnapshot.data()['endingTime'] ;
+           DateTime mow = DateTime.now().toUtc();
+           print(Time.toDate());
+           print(DateTime.now().toUtc());
            // Timestamp timestamp = documentSnapshot.data()['timestamp'] ;
  int year = documentSnapshot.data()['year'] ;
  int month = documentSnapshot.data()['month'] ;
@@ -637,6 +641,16 @@ class _LiveTvState extends State<LiveTv> with TickerProviderStateMixin {
             String description = documentSnapshot.data()['description'];
             int amount = documentSnapshot.data()['amount'];
            var ndTime = DateTime.now().millisecondsSinceEpoch;
+           DateTime f =    timestamp.add(Duration(hours: 2));
+           print("$timestamp $f");
+
+           DateTime SanFran = curDateTimeByZone(zone: "PDT");
+           print(formatTime(time: SanFran)); //prints current time in PDT
+           print(formatDate(date: SanFran)); //prints current date in PDT
+           DateTime d=   DateTime(year, month, 4, 22, 0, second).toUtc();
+            DateTime a=   DateTime(year, month, 4, 22, 0, second);
+            print("$d $a");
+
 print(ndTime);
             return   Padding(
               padding: const EdgeInsets.all(8.0),
@@ -645,12 +659,12 @@ print(ndTime);
                 CrossAxisAlignment.start,
                 children: [
                   CountdownTimer(
-                    endTime: DateTime(year, month, day, 22, minute, second).millisecondsSinceEpoch,
+                    endTime: d.millisecondsSinceEpoch,
                     textStyle: TextStyle(fontSize: 30, color: Colors.pink),
                   ),
             //   CustomTimer(
-            //   from: Duration(seconds: timestamp.seconds),
-            //   to: Duration(seconds:Time.seconds ),
+            //   to: Duration(seconds: f.second),
+            //   from: Duration(seconds:timestamp.second ),
             //   onBuildAction: CustomTimerAction.auto_start,
             //   builder: (CustomTimerRemainingTime remaining) {
             //     return Text(

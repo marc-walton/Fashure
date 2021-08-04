@@ -29,7 +29,6 @@ class CountdownTimerController extends ChangeNotifier {
   bool get isRunning => _isRunning;
 
   set endTime(int endTime) => _endTime = endTime;
-  DateTime d =  DateTime.now().toUtc();
 
   ///Get the current remaining time
   CurrentRemainingTime get currentRemainingTime => _currentRemainingTime;
@@ -56,10 +55,12 @@ class CountdownTimerController extends ChangeNotifier {
 
   ///Calculate current remaining time.
   CurrentRemainingTime _calculateCurrentRemainingTime() {
+    DateTime d = DateTime.now().toUtc();
+
     if (_endTime == null) return null;
 
     int remainingTimeStamp =
-        ((_endTime - d.millisecondsSinceEpoch) / 1000).floor();
+        ((_endTime -  d.millisecondsSinceEpoch) / 1000).floor();
     if (remainingTimeStamp <= 0) {
       return null;
     }

@@ -49,6 +49,7 @@ class CountdownController extends ValueNotifier<int> {
     _dispose();
     Duration duration = _getDuration();
     if(duration == stepDuration) {
+
       _diffTimer = Timer.periodic(stepDuration, (Timer timer) {
         _diffTime(stepDuration);
       });
@@ -63,8 +64,9 @@ class CountdownController extends ValueNotifier<int> {
   }
 
   _diffTime(Duration duration) {
+    DateTime d = DateTime.now().toUtc();
     value = max(value - duration.inMilliseconds, 0);
-    _lastTimestamp = d.millisecond;
+    _lastTimestamp =  d.millisecond;
     if (value <= 0) {
       stop();
       return;
@@ -73,8 +75,10 @@ class CountdownController extends ValueNotifier<int> {
 
   ///pause
   stop() {
+    DateTime d = DateTime.now().toUtc();
+
     if (_lastTimestamp != null && value > 0) {
-      _lostTime = d.millisecond - _lastTimestamp;
+      _lostTime =  d.millisecond - _lastTimestamp;
     }
     _dispose();
   }

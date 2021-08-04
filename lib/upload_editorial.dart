@@ -19,6 +19,7 @@ import 'package:fashow/progress.dart';
 import 'package:fashow/HomePage.dart';
 import 'package:fashow/Constants.dart';
 import 'package:image/image.dart' as Im;
+import 'package:url_launcher/url_launcher.dart';
 import 'package:uuid/uuid.dart';
 import 'package:zefyrka/zefyrka.dart';
 class UploadEdit extends StatefulWidget {
@@ -77,7 +78,7 @@ class _UploadEditState extends State<UploadEdit>
           .then((data) => Future.delayed(Duration(seconds: 1), () => data));
       return NotusDocument.fromJson(jsonDecode(contents));
     }
-    final delta = Delta()..insert('Zefyr Quick Start\n');
+    final delta = Delta()..insert('');
     return NotusDocument()..compose(delta, ChangeSource.local);
   }
 
@@ -148,6 +149,7 @@ class _UploadEditState extends State<UploadEdit>
                       borderRadius: BorderRadius.circular(8.0),
                     ),
                     child: Text(
+
                       "Select images",
                       style: TextStyle(
                         color: Colors.white,
@@ -202,7 +204,6 @@ class _UploadEditState extends State<UploadEdit>
             "title":  titleController.text,
             "content":contents,
 
-            "source":sourceController.text,
             "timestamp": timestamp,
             "claps": {},
           }).then((_){
@@ -230,11 +231,11 @@ class _UploadEditState extends State<UploadEdit>
     return
       CarouselSlider(
           options: CarouselOptions(
+            height:400,
             enableInfiniteScroll: false,
           ),
           items: images.map((e) => Container(
-            width: 400,
-            height: 400,
+
             child: Padding(
               padding: const EdgeInsets.all(8.0),
               child: AssetThumb(
@@ -354,6 +355,14 @@ class _UploadEditState extends State<UploadEdit>
     String downloadUrl = await storageSnap.ref.getDownloadURL();
     return downloadUrl;
   }
+  _launchRF({String rl}) async {
+    String url = rl;
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw 'Could not launch $url';
+    }
+  }
 
 
 
@@ -386,34 +395,34 @@ Navigator.of(context).pop(true);
         false;
   }
   builduploadForm() {
-    final editor = ZefyrField(
+    final editor = ZefyrEditor(
         maxHeight:400,
       scrollPhysics: ClampingScrollPhysics(),
-      decoration: InputDecoration(labelText: 'Description'),
       controller: _controller,
       focusNode: _focusNode,
       autofocus: false,
     );
     final form =
-    ListView(
-      shrinkWrap: true,
+    Column(
       children: <Widget>[
         isUploading ? linearProgress() : Text(""),
         carousel(),
+        SizedBox(height:20),
         TextFormField(controller: titleController,
             keyboardType: TextInputType.multiline,
             maxLines: null,
             decoration: InputDecoration(labelText: 'Title of the blog',
                 fillColor: transwhite,
                 border:OutlineInputBorder(borderRadius: BorderRadius.circular(25.0),))),
-
+        ZefyrToolbar.basic(controller: _controller),
         editor,
+        SizedBox(height:20),
 
-        TextField(controller: sourceController,
-            keyboardType: TextInputType.multiline,
-            maxLines: null,
-            decoration: InputDecoration(labelText: 'source',        fillColor: transwhite,
-                border:OutlineInputBorder(borderRadius: BorderRadius.circular(25.0),))),
+        // TextField(controller: sourceController,
+        //     keyboardType: TextInputType.multiline,
+        //     maxLines: null,
+        //     decoration: InputDecoration(labelText: 'source',        fillColor: transwhite,
+        //         border:OutlineInputBorder(borderRadius: BorderRadius.circular(25.0),))),
       ],
     );
     return
@@ -426,8 +435,7 @@ Navigator.of(context).pop(true);
           progressIndicator: Image.asset('assets/img/loading-76.gif'),
           inAsyncCall: isUploading,
           child: Scaffold(
-
-            // resizeToAvoidBottomPadding: true,
+            resizeToAvoidBottomInset: true,
             appBar: AppBar(
               backgroundColor: kPrimaryColor,
               leading: IconButton(
@@ -447,12 +455,10 @@ Navigator.of(context).pop(true);
             ),
             body:
 
-            Container(
+            SingleChildScrollView(
+              reverse: true,
 
-              decoration: BoxDecoration(
-                  gradient: fabGradient
-              ) ,
-              alignment: Alignment.center,
+
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
                 child:    form,
@@ -472,7 +478,7 @@ Navigator.of(context).pop(true);
   @override
   Widget build(BuildContext context) {
 
-    return file == null ? buildSplashScreen() : builduploadForm();
+    return images == null ? buildSplashScreen() : builduploadForm();
   }
 /// Loads the document to be edited in Zefyr.
 }
