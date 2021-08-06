@@ -251,7 +251,7 @@ case "PaymentOA":
           body = `${activityFeedItem.username} commented: ${activityFeedItem.message}`;
           break;
 case "topBid":
-          body = `${activityFeedItem.username} commented: ${activityFeedItem.message}`;
+          body = `${activityFeedItem.username} commented: You have won an auction!`;
           break;
 
         default:

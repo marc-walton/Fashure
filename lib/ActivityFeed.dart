@@ -969,7 +969,7 @@ Auction(ParentContext){
                           fontWeight: FontWeight.bold, color: Colors.black),
                     ),
                     TextSpan(
-                      text: ' $activityItemText',
+                      text: 'You have won an auction!',
                     )
                   ]),
               ),

@@ -196,7 +196,7 @@ String U;
               .set({
             "hasEnded":false,
             "bidTimer": dropdownValue,
-            "endingTime": DateTime,
+            "endingTime": f,
 
 
             "year": f.year,

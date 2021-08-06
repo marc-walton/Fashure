@@ -4,6 +4,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fashow/ActivityFeed.dart';
+import 'package:fashow/Live/countdown_timer/current_remaining_time.dart';
 import 'package:fashow/Live/upload_bid.dart';
 import 'package:fashow/Live/user_bids.dart';
 import 'package:fashow/Live/wish_auctions.dart';
@@ -72,7 +73,7 @@ class _LiveTvState extends State<LiveTv> with TickerProviderStateMixin {
   // Specify test environment and app scenario
   final bool isTestEnv = true;
   final ZegoScenario scenario = ZegoScenario.General;
-  deletePost({List url,String Id,String postId}) async {
+  deletePost({List url,String Id,String postId,}) async {
     var collection = bidsRef
         .doc(Id)
         .collection("userBids")
@@ -83,7 +84,7 @@ class _LiveTvState extends State<LiveTv> with TickerProviderStateMixin {
       await doc.reference.delete();
     }
     // delete post itself
-    bidsRef.doc(ownerId).collection("userBids").doc(postId).get().then((doc) {
+    bidsRef.doc(Id).collection("userBids").doc(postId).get().then((doc) {
       if (doc.exists) {
         doc.reference.delete();
       }
@@ -94,100 +95,7 @@ class _LiveTvState extends State<LiveTv> with TickerProviderStateMixin {
       await photo.delete();
     }
   }
-  auctionTimer({final endingTime,String postId,String ownerId}){
-//      const duration = const Duration(seconds: 1);
-//      print(endingTime);
-//      final eventTime = DateTime.parse("$endingTime");
-// DateTime d = DateTime.now().toUtc();
-// print(d);
-//     int timeDiff = eventTime.difference(d).inSeconds;
-//     print(timeDiff);
-//
-// Timer timer;
-//
-//        timer = Timer.periodic(duration, (Timer t) {
-//          if (timeDiff > 0) {
-//
-//              setState(() {
-//                if (eventTime !=d) {
-//                  timeDiff = timeDiff - 1;
-//                  return
-//                  print('not ended');
-//                } else {
-//                  return
-//                  print('Times up!');
-//
-//                  //Do something
-//                }
-//              });
-//
-//          }
-//
-//        });
-//
-//
-//      days = timeDiff ~/ (24 * 60 * 60) % 24;
-//      hours = timeDiff ~/ (60 * 60) % 24;
-//      minutes = (timeDiff ~/ 60) % 60;
-//      seconds = timeDiff % 60;
-    Duration remainingTime;
-     Timer.periodic(Duration(seconds: 1), (timer) {
-       remainingTime = endingTime.difference(DateTime.now().toUtc());
-       if (remainingTime <= Duration.zero) {
-         timer.cancel();
-
-
-         usersRef.doc(ownerId).update({
-           'Bidding':false,
-         });
-         bidsRef
-             .doc(ownerId)
-             .collection("userBids")
-             .doc(postId).update({"hasEnded":true});
-         return Text("Auction ended");
-
-       }
-       else {
-          Text("${remainingTime.inDays}:${remainingTime.inHours}:${remainingTime.inMinutes}:${remainingTime.inSeconds}");
-       }
-     });
-
-     return
-  Row(
-    mainAxisAlignment: MainAxisAlignment.center,
-    children: <Widget>[
-      LabelText(
-          label: 'DAYS', value: remainingTime.inDays.toString().padLeft(2, '0')),
-      LabelText(
-          label: 'HRS', value: hours.toString().padLeft(2, '0')),
-      LabelText(
-          label: 'MIN', value: minutes.toString().padLeft(2, '0')),
-      LabelText(
-          label: 'SEC', value: seconds.toString().padLeft(2, '0')),
-    ],
-  );
-
-  }
-  addLikeToActivityFeed({String ownerId,String postId,String mediaUrl}) {
-    // add a notification to the postOwner's activity feed only if comment made by OTHER user (to avoid getting notification for our own like)
-    bool isNotPostOwner = currentUserId != ownerId;
-    if (isNotPostOwner) {
-      activityFeedRef
-          .doc(ownerId)
-          .collection("feedItems")
-          .doc(postId)
-          .set({
-        "type": "fav",
-        "username": currentUser.displayName,
-        "userId": ownerId,
-        "userProfileImg": currentUser.photoUrl,
-        "postId": postId,
-        "mediaUrl": mediaUrl,
-        "timestamp": timestamp,
-      });
-    }
-  }
-  handleDeletePost({ parentContext,String ownerId,String postId}) {
+  handleDeletePost({ parentContext,String ownerId,String postId,List images}) {
     return showDialog(
         context: parentContext,
         builder: (context) {
@@ -203,7 +111,7 @@ class _LiveTvState extends State<LiveTv> with TickerProviderStateMixin {
                 SimpleDialogOption(
                   onPressed: () {
                     Navigator.pop(context);
-                    deletePost(url:listOfImages,Id:ownerId,postId: postId);
+                    deletePost(url:images,Id:ownerId,postId: postId);
                     Navigator.pop(context);
                   },
                   child: Text(
@@ -224,6 +132,26 @@ class _LiveTvState extends State<LiveTv> with TickerProviderStateMixin {
         });
   }
 
+  addLikeToActivityFeed({String ownerId,String postId,String mediaUrl}) {
+    // add a notification to the postOwner's activity feed only if comment made by OTHER user (to avoid getting notification for our own like)
+    bool isNotPostOwner = currentUserId != ownerId;
+    if (isNotPostOwner) {
+      activityFeedRef
+          .doc(ownerId)
+          .collection("feedItems")
+          .doc(postId)
+          .set({
+        "type": "fav",
+        "username": currentUser.displayName,
+        "userId": ownerId,
+        "userProfileImg": currentUser.photoUrl,
+        "postId": postId,
+        "mediaUrl": mediaUrl,
+        "timestamp": timestamp,
+      });
+    }
+  }
+
   removeLikeFromActivityFeed({String ownerId,String postId,}) {
     bool isNotPostOwner = currentUserId != ownerId;
     if (isNotPostOwner) {
@@ -240,7 +168,7 @@ class _LiveTvState extends State<LiveTv> with TickerProviderStateMixin {
     }
   }
 
-  report(String postId) {
+  report({String postId,String ownerId}) {
     Fluttertoast.showToast(
         msg: "Your report has been submitted", timeInSecForIos: 4);
     FirebaseFirestore.instance
@@ -599,28 +527,20 @@ class _LiveTvState extends State<LiveTv> with TickerProviderStateMixin {
               )),
           itemBuilderType: PaginateBuilderType.listView,
           itemBuilder: (index, context, documentSnapshot) {
-           print("${documentSnapshot.data()['endingTime']}");
 
-           Timestamp Time = documentSnapshot.data()['endingTime'] ;
-           DateTime mow = DateTime.now().toUtc();
-           print(Time.toDate());
-           print(DateTime.now().toUtc());
-           // Timestamp timestamp = documentSnapshot.data()['timestamp'] ;
  int year = documentSnapshot.data()['year'] ;
  int month = documentSnapshot.data()['month'] ;
  int day = documentSnapshot.data()['day'] ;
  int hour = documentSnapshot.data()['hour'] ;
  int minute = documentSnapshot.data()['minute'] ;
  int second = documentSnapshot.data()['second'] ;
-           print("$year,$month, $day, $hour, $minute, $second");
             String ownerId = documentSnapshot.data()['ownerId'];
             String postId = documentSnapshot.data()['postId'];
-            bool bidon = documentSnapshot.data()['bidOn'];
-            int bidTimer = documentSnapshot.data()['bidTimer'];
+
             List images = documentSnapshot.data()["images"];
-            String topBid1 = documentSnapshot.data()["topBid1"];
-            String topBid2 = documentSnapshot.data()["topBid2"];
-            String topBid3 = documentSnapshot.data()["topBid3"];
+            var topBid1 = documentSnapshot.data()["topBid1"];
+            var topBid2 = documentSnapshot.data()["topBid2"];
+            var topBid3 = documentSnapshot.data()["topBid3"];
             String topBidder1 = documentSnapshot.data()["topBidder1"];
             String topBidder2 = documentSnapshot.data()["topBidder2"];
             String topBidder3 = documentSnapshot.data()["topBidder3"];
@@ -640,110 +560,152 @@ class _LiveTvState extends State<LiveTv> with TickerProviderStateMixin {
            bool  isLiked = (likes[currentUserId] == true);
             String description = documentSnapshot.data()['description'];
             int amount = documentSnapshot.data()['amount'];
-           var ndTime = DateTime.now().millisecondsSinceEpoch;
-           DateTime f =    timestamp.add(Duration(hours: 2));
-           print("$timestamp $f");
 
-           DateTime SanFran = curDateTimeByZone(zone: "PDT");
-           print(formatTime(time: SanFran)); //prints current time in PDT
-           print(formatDate(date: SanFran)); //prints current date in PDT
-           DateTime d=   DateTime(year, month, 4, 22, 0, second).toUtc();
-            DateTime a=   DateTime(year, month, 4, 22, 0, second);
-            print("$d $a");
-
-print(ndTime);
             return   Padding(
               padding: const EdgeInsets.all(8.0),
               child: Column(
                 crossAxisAlignment:
                 CrossAxisAlignment.start,
                 children: [
-                  CountdownTimer(
-                    endTime: d.millisecondsSinceEpoch,
-                    textStyle: TextStyle(fontSize: 30, color: Colors.pink),
-                  ),
-            //   CustomTimer(
-            //   to: Duration(seconds: f.second),
-            //   from: Duration(seconds:timestamp.second ),
-            //   onBuildAction: CustomTimerAction.auto_start,
-            //   builder: (CustomTimerRemainingTime remaining) {
-            //     return Text(
-            //       "${remaining.hours}:${remaining.minutes}:${remaining.seconds}",
-            //       style: TextStyle(fontSize: 30.0),
-            //     );
-            //   },
-            // ),
 
 
-                  ListTile(
-                    leading: GestureDetector(
+
+                     Row(
+                      children: [
+                      GestureDetector(
                       onTap: () => showProfile(context, profileId: ownerId),
-                      child: CircleAvatar(
-                        backgroundImage: CachedNetworkImageProvider(photoUrl),
-                        backgroundColor: Colors.grey,
-                      ),
-                    ),
-                    title: GestureDetector(
-                      onTap: () => showProfile(context, profileId: ownerId),
-                      child: Text(
-                        username,
-                        style: TextStyle(
-                          color: kText,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ),
-                    trailing: IconButton(
-                        icon: Icon(
-                          Icons.more_horiz,
-                          color: kText,
-                        ),
-                        onPressed: () {
-                          !isPostOwner
-                              ? showDialog(
-                              context: context,
-                              builder: (BuildContext context) {
-                                return Dialog(
-                                  backgroundColor: kSecondaryColor,
-                                  shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(
-                                          20.0)), //this right here
-                                  child: GestureDetector(
-                                    onTap: () {
-                                      report(postId);
-                                      Navigator.pop(context);
-                                    },
-                                    child: Container(
-                                      height: 100,
-                                      child: Padding(
-                                        padding: const EdgeInsets.all(12.0),
-                                        child: Column(
-                                          mainAxisAlignment: MainAxisAlignment.center,
-                                          crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                          children: [
-                                            Container(
-                                              child: Align(
-                                                  alignment: Alignment.center,
-                                                  child: Text(
-                                                    'Report this post?',
-                                                    style: TextStyle(
-                                                        color: Colors.blueAccent,
-                                                        fontWeight: FontWeight.bold,
-                                                        fontSize: 20.0),
-                                                  )),
+            child: CircleAvatar(
+            backgroundImage: CachedNetworkImageProvider(photoUrl),
+            backgroundColor: Colors.grey,
+            ),
+            ),
+                      SizedBox(width:10),
+                        GestureDetector(
+            onTap: () => showProfile(context, profileId: ownerId),
+            child: Text(
+            username,
+            style: TextStyle(
+            color: kText,
+            fontWeight: FontWeight.bold,
+            ),
+            ),
+            ),
+                        Spacer(),
+                        IconButton(
+
+                            onPressed: () {
+                              bool _isFav =
+                                  likes[currentUserId] == true;
+                              if (!_isFav) {
+                                Fluttertoast.showToast(
+                                    msg: "Added to wishlist! ", timeInSecForIos: 4);
+                                bidsRef
+                                    .doc(ownerId)
+                                    .collection('userBids')
+                                    .doc(postId)
+                                    .update({
+                                  'likes.$currentUserId': true
+                                });
+                                addLikeToActivityFeed(
+                                    ownerId: ownerId,
+                                    postId: postId,
+                                    mediaUrl: images.first);
+                                wishRef
+                                    .doc(currentUser.id)
+                                    .collection("userAucWish")
+                                    .doc(postId)
+                                    .set({
+                                  "username": username,
+                                  "postId": postId,
+                                  "timestamp": timestamp,
+                                  "photoUrl": photoUrl,
+                                  "image": images.first,
+                                  "ownerId": ownerId,
+                                });
+                                setState(() {
+                                  isLiked = true;
+                                  likes[currentUserId] = true;
+                                });
+                              }
+                              else if (_isFav) {
+                                bidsRef
+                                    .doc(ownerId)
+                                    .collection('userBids')
+                                    .doc(postId)
+                                    .update({
+                                  'likes.$currentUserId': false
+                                });
+                                removeLikeFromActivityFeed(
+                                    ownerId: ownerId,
+                                    postId: postId);
+
+                                var docReference = wishRef
+                                    .doc(currentUser.id)
+                                    .collection("userAucWish")
+                                    .doc(postId);
+                                docReference.delete();
+                                setState(() {
+                                  isLiked = false;
+                                  likes[currentUserId] = false;
+                                });
+                              }
+                            },
+                            icon: isLiked
+                                ? Icon(Icons.bookmark_outlined)
+                                : Icon(Icons.bookmark_outline)),
+                        IconButton(
+                            icon: Icon(
+                              Icons.more_vert_outlined,
+                              color: kText,
+                            ),
+                            onPressed: () {
+                              !isPostOwner
+                                  ? showDialog(
+                                  context: context,
+                                  builder: (BuildContext context) {
+                                    return Dialog(
+                                      backgroundColor: kSecondaryColor,
+                                      shape: RoundedRectangleBorder(
+                                          borderRadius: BorderRadius.circular(
+                                              20.0)), //this right here
+                                      child: GestureDetector(
+                                        onTap: () {
+                                          report(postId:postId,ownerId: ownerId);
+                                          Navigator.pop(context);
+                                        },
+                                        child: Container(
+                                          height: 100,
+                                          child: Padding(
+                                            padding: const EdgeInsets.all(12.0),
+                                            child: Column(
+                                              mainAxisAlignment: MainAxisAlignment.center,
+                                              crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                              children: [
+                                                Container(
+                                                  child: Align(
+                                                      alignment: Alignment.center,
+                                                      child: Text(
+                                                        'Report this post?',
+                                                        style: TextStyle(
+                                                            color: Colors.blueAccent,
+                                                            fontWeight: FontWeight.bold,
+                                                            fontSize: 20.0),
+                                                      )),
+                                                ),
+                                              ],
                                             ),
-                                          ],
+                                          ),
                                         ),
                                       ),
-                                    ),
-                                  ),
-                                );
-                                // ignore: unnecessary_statements
-                              })
-                              : handleDeletePost(parentContext:context,ownerId: ownerId,postId: postId);
-                        }),
-                  ),
+                                    );
+                                    // ignore: unnecessary_statements
+                                  })
+                                  : handleDeletePost(parentContext:context,ownerId: ownerId,postId: postId,images:images);
+                            }),
+                      ],
+                    ),
+
 
                   ListView.builder(physics: NeverScrollableScrollPhysics(),
                       shrinkWrap: true,
@@ -758,107 +720,36 @@ print(ndTime);
                         i++) {
                           _listOfImages.add(CachedNetworkImage(imageUrl:images[i]));
                         }
-                        return Stack(
-                          children: <Widget>[
-                            Container(
-                                margin: EdgeInsets.all(1.0),
+                        return Container(
+                            margin: EdgeInsets.all(1.0),
 
-                                decoration: BoxDecoration(
-                                  color: Colors.transparent,
-                                ),
-                                width: MediaQuery
-                                    .of(context)
-                                    .size
-                                    .width,
-                                child:
-                                CarouselSlider(
-                                    items: _listOfImages,
-                                    options: CarouselOptions(
-                                      aspectRatio: 16/9,
-                                      viewportFraction: 0.8,
-                                      initialPage: 0,
-                                      enableInfiniteScroll: false,
-                                      reverse: false,
-                                      autoPlay: false,
-                                      autoPlayInterval: Duration(seconds: 3),
-                                      autoPlayAnimationDuration: Duration(milliseconds: 800),
-                                      autoPlayCurve: Curves.fastOutSlowIn,
-                                      enlargeCenterPage: true,
-                                      pauseAutoPlayOnManualNavigate: true,
-                                      pauseAutoPlayOnTouch: true,
-                                      // onPageChanged: callbackFunction,
-                                      scrollDirection: Axis.horizontal,
-                                    )
-                                )
-                            ),
-                            Container(
-                              height: 50.0,
+                            decoration: BoxDecoration(
                               color: Colors.transparent,
-                              padding:
-                              EdgeInsets.symmetric(horizontal: 16.0),
-                              alignment: Alignment.centerLeft,
-                              child: ListTile(
-                                  trailing: IconButton(
-                                      onPressed: () {
-                                        bool _isFav =
-                                            likes[currentUserId] == true;
-                                        if (!_isFav) {
-                                          bidsRef
-                                              .doc(ownerId)
-                                              .collection('userBids')
-                                              .doc(postId)
-                                              .update({
-                                            'likes.$currentUserId': true
-                                          });
-                                          addLikeToActivityFeed(
-                                              ownerId: ownerId,
-                                              postId: postId,
-                                              mediaUrl: images.first);
-                                          wishRef
-                                              .doc(currentUser.id)
-                                              .collection("userAucWish")
-                                              .doc(postId)
-                                              .set({
-                                            "username": username,
-                                            "postId": postId,
-                                            "timestamp": timestamp,
-                                            "photoUrl": photoUrl,
-                                            "image": images.first,
-                                            "ownerId": ownerId,
-                                          });
-                                          setState(() {
-                                            isLiked = true;
-                                            likes[currentUserId] = true;
-                                          });
-                                        }
-                                        else if (_isFav) {
-                                          bidsRef
-                                              .doc(ownerId)
-                                              .collection('userBids')
-                                              .doc(postId)
-                                              .update({
-                                            'likes.$currentUserId': false
-                                          });
-                                          removeLikeFromActivityFeed(
-                                              ownerId: ownerId,
-                                              postId: postId);
-
-                                          var docReference = wishRef
-                                              .doc(currentUser.id)
-                                              .collection("userAucWish")
-                                              .doc(postId);
-                                          docReference.delete();
-                                          setState(() {
-                                            isLiked = false;
-                                            likes[currentUserId] = false;
-                                          });
-                                        }
-                                      },
-                                      icon: isLiked
-                                          ? Icon(Icons.bookmark_outlined)
-                                          : Icon(Icons.bookmark_outline))),
                             ),
-                          ],
+                            width: MediaQuery
+                                .of(context)
+                                .size
+                                .width,
+                            child:
+                            CarouselSlider(
+                                items: _listOfImages,
+                                options: CarouselOptions(
+                                  aspectRatio: 16/9,
+                                  viewportFraction: 0.8,
+                                  initialPage: 0,
+                                  enableInfiniteScroll: false,
+                                  reverse: false,
+                                  autoPlay: false,
+                                  autoPlayInterval: Duration(seconds: 3),
+                                  autoPlayAnimationDuration: Duration(milliseconds: 800),
+                                  autoPlayCurve: Curves.fastOutSlowIn,
+                                  enlargeCenterPage: true,
+                                  pauseAutoPlayOnManualNavigate: true,
+                                  pauseAutoPlayOnTouch: true,
+                                  // onPageChanged: callbackFunction,
+                                  scrollDirection: Axis.horizontal,
+                                )
+                            )
                         );
                       }
                   ),
@@ -907,6 +798,29 @@ print(ndTime);
                   SizedBox(
                       height:
                       SizeConfig.blockSizeVertical * 2),
+                  CountdownTimer(
+                    endTime:  DateTime.utc(year, month,6, 1, 25, second).millisecondsSinceEpoch,
+                    onEnd: auctionEnd(images: images.first,postId: postId,ownerId: ownerId,photoUrl: photoUrl,name: username),
+                    widgetBuilder: (_, CurrentRemainingTime time) {
+                      if (time == null) {
+                        return Center(child: Text('Auction has ended!' , style: TextStyle(
+                            fontSize: SizeConfig.blockSizeHorizontal*6, fontWeight: FontWeight.bold),));
+                      }
+                      return
+
+                        Row(
+                          children: [
+                            LabelText(label: "days",value:"${time.days?? 0}" ,),
+                            LabelText(label: "hours",value:"${time.hours??0}" ,),
+                            LabelText(label: "min",value:"${time.min?? 0}" ,),
+                            LabelText(label: "sec",value:"${time.sec?? 0}" ,),
+
+
+                          ],
+                        );
+                    },
+                  ),
+
                   ExpansionTile(title:
                   Text(
                     "Top Bids",
@@ -990,13 +904,13 @@ print(ndTime);
 
                   !hasEnded ?   ElevatedButton(
                     onPressed: () {
-                      if (amount <= 99) {
-                        int change;
-                        int a = amount + minimumBid;
-                        int top = usd + amount;
-                        amount > 99
-                            ? change = minimumBid
-                            : change = 25;
+                      if (amount >= 0 && amount <= 300) {
+                        var change;
+                        var a = amount + minimumBid;
+                        var top = usd + a;
+                        print(a);
+                        a >= 300
+                            ?change = 25: change = minimumBid;
                         bidsRef
                             .doc(ownerId)
                             .collection("userBids")
@@ -1026,14 +940,82 @@ print(ndTime);
                           topBidderId2,
                         });
                       }
-                      else if (amount <= 299) {
-                        int change;
-                        int a = amount + minimumBid;
-                        int top = usd + amount;
-                        amount > 299
-                            ? change = minimumBid
-                            : change = 50;
+                      else if (amount >= 301 && amount <=800) {
+                        var change;
+                        var a = amount + minimumBid;
+                        var top = usd + a;
+                        a >= 800
+                            ?   change = 50:change = minimumBid;
+                        bidsRef
+                            .doc(ownerId)
+                            .collection("userBids")
+                            .doc(postId)
 
+                            .update({
+                          "amount": a,
+                          "topBid1": top,
+                          "minimumBid":change,
+                          "topBidder1": currentUser
+                              .displayName,
+                          "topBidderImg1":
+                          currentUser.photoUrl,
+                          "topBidderId1":
+                          currentUser.id,
+                          "topBid2": topBid1,
+                          "topBidder2": topBidder1,
+                          "topBidderImg2":
+                          topBidderImg1,
+                          "topBidderId2":
+                          topBidderId1,
+                          "topBid3": topBid2,
+                          "topBidder3": topBidder2,
+                          "topBidderImg3":
+                          topBidderImg2,
+                          "topBidderId3":
+                          topBidderId2,
+                        });
+
+                      }
+                      else if (amount >= 801 && amount <= 1500) {
+                        var change;
+                        var a = amount + minimumBid;
+                        var top = usd + a;
+                        a >= 1500
+                            ?   change = 100:change = minimumBid;
+                        bidsRef
+                            .doc(ownerId)
+                            .collection("userBids")
+                            .doc(postId)
+                            .update({
+                          "amount": a,
+                          "topBid1": top,
+                          "minimumBid":change,
+                          "topBidder1": currentUser
+                              .displayName,
+                          "topBidderImg1":
+                          currentUser.photoUrl,
+                          "topBidderId1":
+                          currentUser.id,
+                          "topBid2": topBid1,
+                          "topBidder2": topBidder1,
+                          "topBidderImg2":
+                          topBidderImg1,
+                          "topBidderId2":
+                          topBidderId1,
+                          "topBid3": topBid2,
+                          "topBidder3": topBidder2,
+                          "topBidderImg3":
+                          topBidderImg2,
+                          "topBidderId3":
+                          topBidderId2,
+                        });
+                      }
+                      else if (amount >= 1501 && amount <= 2500) {
+                        var change;
+                        var a = amount + minimumBid;
+                        var top = usd + a;
+                        a >= 2500
+                            ?   change = 150:change = minimumBid;
                         bidsRef
                             .doc(ownerId)
                             .collection("userBids")
@@ -1063,14 +1045,12 @@ print(ndTime);
                           topBidderId2,
                         });
                       }
-                      else if (amount <= 599) {
-                        int change;
-                        int a = amount + minimumBid;
-                        int top = usd + amount;
-                        amount > 599
-                            ? change = minimumBid
-                            : change = 100;
-
+                      else if (amount >= 2501 && amount <= 3500) {
+                        var change;
+                        var a = amount + minimumBid;
+                        var top = usd + a;
+                        a >= 3500
+                            ?   change = 200:change = minimumBid;
                         bidsRef
                             .doc(ownerId)
                             .collection("userBids")
@@ -1100,14 +1080,12 @@ print(ndTime);
                           topBidderId2,
                         });
                       }
-                      else if (amount <= 1499) {
-                        int change;
-                        int a = amount + minimumBid;
-                        int top = usd + amount;
-                        amount > 1499
-                            ? change = minimumBid
-                            : change = 200;
-
+                      else if (amount >= 3501 && amount <= 4500) {
+                        var change;
+                        var a = amount + minimumBid;
+                        var top = usd + a;
+                        a >= 4500
+                            ?   change = 250:change = minimumBid;
                         bidsRef
                             .doc(ownerId)
                             .collection("userBids")
@@ -1137,14 +1115,12 @@ print(ndTime);
                           topBidderId2,
                         });
                       }
-                      else if (amount <= 2499) {
-                        int change;
-                        int a = amount + minimumBid;
-                        int top = usd + amount;
-                        amount > 2499
-                            ? change = minimumBid
-                            : change = 300;
-
+                      else if (amount >= 4501 && amount <= 5500) {
+                        var change;
+                        var a = amount + minimumBid;
+                        var top = usd + a;
+                        a >= 5500
+                            ?   change = 300:change = minimumBid;
                         bidsRef
                             .doc(ownerId)
                             .collection("userBids")
@@ -1174,13 +1150,9 @@ print(ndTime);
                           topBidderId2,
                         });
                       }
-                      else if (amount <= 3499) {
-                        int change;
-                        int a = amount + minimumBid;
-                        int top = usd + amount;
-                        amount > 3499
-                            ? change = minimumBid
-                            : change = 400;
+                      else if (amount >= 5501) {
+                        var a = amount + minimumBid;
+                        var top = usd + a;
 
                         bidsRef
                             .doc(ownerId)
@@ -1189,7 +1161,6 @@ print(ndTime);
 
                             .update({
                           "amount": a,
-                          "minimumBid": change,
                           "topBid1": top,
                           "topBidder1": currentUser
                               .displayName,
@@ -1210,81 +1181,44 @@ print(ndTime);
                           "topBidderId3":
                           topBidderId2,
                         });
-                      }
-                      else if (amount <= 4499) {
-                        int change;
-                        int a = amount + minimumBid;
-                        int top = usd + amount;
-                        amount > 5499
-                            ? change = minimumBid
-                            : change = 500;
 
+                      }
+                      bool _isFav = likes[currentUserId] == true;
+                      if (!_isFav) {
+                        Fluttertoast.showToast(
+                            msg: "Added to wishlist! ", timeInSecForIos: 4);
                         bidsRef
                             .doc(ownerId)
-                            .collection("userBids")
+                            .collection('userBids')
                             .doc(postId)
-
                             .update({
-                          "amount": a,
-                          "minimumBid": change,
-                          "topBid1": top,
-                          "topBidder1": currentUser
-                              .displayName,
-                          "topBidderImg1":
-                          currentUser.photoUrl,
-                          "topBidderId1":
-                          currentUser.id,
-                          "topBid2": topBid1,
-                          "topBidder2": topBidder1,
-                          "topBidderImg2":
-                          topBidderImg1,
-                          "topBidderId2":
-                          topBidderId1,
-                          "topBid3": topBid2,
-                          "topBidder3": topBidder2,
-                          "topBidderImg3":
-                          topBidderImg2,
-                          "topBidderId3":
-                          topBidderId2,
+                          'likes.$currentUserId': true
                         });
-                      }
-                      else if (amount > 5500) {
-                        int a = amount + minimumBid;
-                        int top = usd + amount;
-
-                        bidsRef
-                            .doc(ownerId)
-                            .collection("userBids")
+                        addLikeToActivityFeed(
+                            ownerId: ownerId,
+                            postId: postId,
+                            mediaUrl: images.first);
+                        wishRef
+                            .doc(currentUser.id)
+                            .collection("userAucWish")
                             .doc(postId)
-
-                            .update({
-                          "amount": a,
-                          "topBid1": top,
-                          "topBidder1": currentUser
-                              .displayName,
-                          "topBidderImg1":
-                          currentUser.photoUrl,
-                          "topBidderId1":
-                          currentUser.id,
-                          "topBid2": topBid1,
-                          "topBidder2": topBidder1,
-                          "topBidderImg2":
-                          topBidderImg1,
-                          "topBidderId2":
-                          topBidderId1,
-                          "topBid3": topBid2,
-                          "topBidder3": topBidder2,
-                          "topBidderImg3":
-                          topBidderImg2,
-                          "topBidderId3":
-                          topBidderId2,
+                            .set({
+                          "username": username,
+                          "postId": postId,
+                          "timestamp": timestamp,
+                          "photoUrl": photoUrl,
+                          "image": images.first,
+                          "ownerId": ownerId,
+                        });
+                        setState(() {
+                          isLiked = true;
+                          likes[currentUserId] = true;
                         });
                       }
                     },
                     child: Text(
                         "Place Bid(\u0024 $minimumBid)"),
                   ):
-                  hasEnded ?auctionEnd(images: images.first,postId: postId,ownerId: ownerId,photoUrl: photoUrl)  :Container(),
                   hasEnded ? currentUser.id == topBidderId1?
 
                   ElevatedButton(onPressed: () {showDialog<void>(
@@ -1379,15 +1313,15 @@ print(ndTime);
       );
   }
 
-  auctionEnd({String ownerId,String postId,String photoUrl,String images}){
+  auctionEnd ({String ownerId,String postId,String photoUrl,String images,String name}) async {
 
-    activityFeedRef
+  await  activityFeedRef
         .doc(ownerId)
         .collection("feedItems")
         .doc(postId)
         .set({
       "type": "topBid",
-      "username": username,
+      "username": name,
       "userId": ownerId,
       "userProfileImg": photoUrl,
       "postId": postId,
@@ -1395,8 +1329,11 @@ print(ndTime);
       "timestamp": timestamp,
       "read": 'false',
     });
-return
-    Text("Auction ended");
+    bidsRef.doc(ownerId)
+        .collection("userBids")
+        .doc(postId)
+        .update({
+      "hasEnded":true,});
   }
   Future<void> onJoin(
       {channelName, channelId, username, hostImage, userImage}) async {
