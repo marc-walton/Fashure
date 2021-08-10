@@ -8,6 +8,7 @@ const Color Bappbar = Color(0xff240638);
 const Color appbar = Colors.black26;
 const Color trans = Colors.transparent;
 const Color transwhite = Colors.white38;
+ bool tabs = false;
 
  final Gradient fabGradient = LinearGradient(
     colors: [ Color(0xff70e1f5),Color(0xffffd194)],

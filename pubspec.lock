@@ -716,13 +716,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.2"
-  instant:
-    dependency: "direct main"
-    description:
-      name: instant
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.4.1"
   intl:
     dependency: "direct main"
     description:
@@ -1260,6 +1253,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.1.0"
+  vertical_tabs:
+    dependency: "direct main"
+    description:
+      name: vertical_tabs
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.2.0"
   wakelock:
     dependency: "direct main"
     description:

@@ -72,6 +72,7 @@ new Tabs(title: "Teen-Girls",color: kPrimaryColor),
   String ownerId;
   Prod products;
  List<String> followingList = [];
+ Filter filter;
   _ShopState({
     this.prodId, this.products,this.ownerId,
   });
@@ -173,7 +174,18 @@ new Tabs(title: "Teen-Girls",color: kPrimaryColor),
                Icons.search,
               ),
               onPressed: () {
+setState(() {
+  tabs = !tabs;
+});                // do something
+              },
+            ),     IconButton(
+              color: Colors.white,
+              icon: Icon(
+               Icons.search,
+              ),
+              onPressed: () {
                 Get.to (ShopSearch());
+
 
                 // do something
               },
@@ -235,3 +247,8 @@ class Tabs {
   Tabs({this.title,this.color});
 }
 
+class Filter{
+  bool category= false;
+  String price;
+  Filter({this.category,this.price});
+}

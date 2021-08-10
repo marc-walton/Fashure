@@ -27,7 +27,6 @@ import 'package:fashow/Live/countdown_timer/flutter_countdown_timer.dart';
 import 'package:fashow/Live/host.dart';
 import 'package:fashow/Live/join.dart';
 import 'package:paginate_firestore/paginate_firestore.dart';
-import 'package:instant/instant.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:zego_express_engine/zego_express_engine.dart';
 List<Widget> _listOfImages = <Widget>[];
@@ -254,7 +253,7 @@ class _LiveTvState extends State<LiveTv> with TickerProviderStateMixin {
               ),
               Container(
                 height:SizeConfig.screenHeight*0.65,
-                child: getUserBids(),
+                child: getBids(),
               )
             ]),
           ),
@@ -799,26 +798,9 @@ class _LiveTvState extends State<LiveTv> with TickerProviderStateMixin {
                       height:
                       SizeConfig.blockSizeVertical * 2),
                   CountdownTimer(
-                    endTime:  DateTime.utc(year, month,6, 1, 25, second).millisecondsSinceEpoch,
+                    endTime:  DateTime.utc(year, month,7, 20, 30, second).millisecondsSinceEpoch,
                     onEnd: auctionEnd(images: images.first,postId: postId,ownerId: ownerId,photoUrl: photoUrl,name: username),
-                    widgetBuilder: (_, CurrentRemainingTime time) {
-                      if (time == null) {
-                        return Center(child: Text('Auction has ended!' , style: TextStyle(
-                            fontSize: SizeConfig.blockSizeHorizontal*6, fontWeight: FontWeight.bold),));
-                      }
-                      return
 
-                        Row(
-                          children: [
-                            LabelText(label: "days",value:"${time.days?? 0}" ,),
-                            LabelText(label: "hours",value:"${time.hours??0}" ,),
-                            LabelText(label: "min",value:"${time.min?? 0}" ,),
-                            LabelText(label: "sec",value:"${time.sec?? 0}" ,),
-
-
-                          ],
-                        );
-                    },
                   ),
 
                   ExpansionTile(title:
@@ -1312,10 +1294,110 @@ class _LiveTvState extends State<LiveTv> with TickerProviderStateMixin {
               .orderBy('timestamp',descending: true)
       );
   }
+getBids (){
+    return
+  Padding(
+    padding: const EdgeInsets.all(8.0),
+    child: Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Row(children:[
+          LabelText(label:"days",value:"0"),
+          LabelText(label:"hours",value:"0"),
+          LabelText(label:"min",value:"0"),
+         LabelText(label:"sec",value:"00"),
+        ]),
+        Container(
+          color: kText,
+          padding: EdgeInsets.symmetric(vertical: 35, horizontal: 25),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: <Widget>[
+              Text(
+                "coming soon!",
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 30,
+                ),
+              ),
+              SizedBox(height: 25),
+            ],
+          ),
+        ),
+        SizedBox(
+            height:
+            SizeConfig.blockSizeVertical * 2),
+        ExpansionTile(title:
+        Text(
+          "Description",
+          style: TextStyle(
+            color: kText,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+          children: [
+           Text("Description"),
 
-  auctionEnd ({String ownerId,String postId,String photoUrl,String images,String name}) async {
+          ],
+        ),
+        SizedBox(
+            height:
+            SizeConfig.blockSizeVertical * 2),
+        Row(
+          crossAxisAlignment:
+          CrossAxisAlignment.start,
+          children: [
+            Text("Opening bid:",
+                style: TextStyle(
+                    fontWeight: FontWeight.bold)),
+            Text("\u0024 "),
+          ],
+        ),
+        SizedBox(
+            height:
+            SizeConfig.blockSizeVertical * 2),
+        Row(
+          crossAxisAlignment:
+          CrossAxisAlignment.start,
+          children: [
+            Text("Current bid:",
+                style: TextStyle(
+                    fontWeight: FontWeight.bold)),
+            Text("\u0024   "),
+          ],
+        ),
+        ExpansionTile(title:
+        Text(
+          "Top Bids",
+          style: TextStyle(
+            color: kText,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+          children: [
 
-  await  activityFeedRef
+
+
+          ],
+        ),
+        SizedBox(
+            height:
+            SizeConfig.blockSizeVertical * 2),
+     ElevatedButton(
+
+          child: Text(
+              "Place Bid(\u0024 )"),
+        )
+      ],
+    ),
+  );
+}
+  auctionEnd ({String ownerId,String postId,String photoUrl,String images,String name})  {
+
+    activityFeedRef
         .doc(ownerId)
         .collection("feedItems")
         .doc(postId)

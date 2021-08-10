@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:fashow/chatcached_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_currencies_tracker/currency.dart';
 
@@ -35,6 +36,7 @@ import 'package:get/get.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:sticky_headers/sticky_headers.dart';
 
+List <Widget>_listOfImages = <Widget>[];
 List <Widget>listOfImages = <Widget>[];
 
 pics({String userid,String prodid}){
@@ -110,14 +112,69 @@ pics({String userid,String prodid}){
         });
 
 }
+sf({List mediaUrl}){
+  return new ListView.builder(physics: NeverScrollableScrollPhysics(),
+      shrinkWrap: true,
+      scrollDirection:Axis.vertical,
+      itemCount: mediaUrl.length,
+      itemBuilder: (BuildContext context, int index) {
+        // List<String> images = List.from(snapshot.data.docs[index].data()['collmediaUrl']);
+        _listOfImages = [];
+        for (int i = 0;
+        i <
+            mediaUrl
+                .length;
+        i++) {
+          _listOfImages.add(CachedNetworkImage(imageUrl:mediaUrl[i]));
+        }
+        return Column(
+          children: <Widget>[
+            Container(
+                margin: EdgeInsets.all(1.0),
 
+                decoration: BoxDecoration(
+                  color: Colors.transparent,
+                ),
+                width: MediaQuery
+                    .of(context)
+                    .size
+                    .width,
+                child:
+                CarouselSlider(
+                    items: _listOfImages,
+                    options: CarouselOptions(
+                      aspectRatio: 16/9,
+                      viewportFraction: 0.8,
+                      initialPage: 0,
+                      enableInfiniteScroll: true,
+                      reverse: false,
+                      autoPlay: true,
+                      autoPlayInterval: Duration(seconds: 3),
+                      autoPlayAnimationDuration: Duration(milliseconds: 800),
+                      autoPlayCurve: Curves.fastOutSlowIn,
+                      enlargeCenterPage: true,
+                      pauseAutoPlayOnManualNavigate: true,
+                      pauseAutoPlayOnTouch: true,
+                      // onPageChanged: callbackFunction,
+                      scrollDirection: Axis.horizontal,
+                    )
+                )
+            ),
+
+          ],
+        );
+      }
+  );
+}
 class Men extends StatefulWidget {
   @override
   _MenState createState() => _MenState();
 }
 
 class _MenState extends State<Men> {
-
+bool a = true;
+bool b= false;
+bool c = true;
   String priceQuery = "0";
 String desQuery = "des0";
 String illQuery = "ill0";
@@ -443,11 +500,12 @@ All(){
       itemBuilder: (index, context, documentSnapshot)   {
      String ownerId = documentSnapshot.data()['ownerId'];
 String prodId = documentSnapshot.data()['prodId'];
-//String shopmediaUrl = documentSnapshot.data()['shopmediaUrl'];
+List shopmediaUrl = documentSnapshot.data()['shopmediaUrl'];
 String productname = documentSnapshot.data()['productname'];
      String inr = documentSnapshot.data()['inr'];
      String usd = documentSnapshot.data()['usd'];
-
+String s = "${a?priceQuery:'n'}" +"${b?desQuery:'n'}" +"${c?illQuery:'n'}";
+print(s);
       return
         FutureBuilder(
           future: usersRef.doc(ownerId).get(),
@@ -486,7 +544,7 @@ String productname = documentSnapshot.data()['productname'];
 
               ),
 
-              GestureDetector(
+                GestureDetector(
                 onTap: () => Navigator.push(
                   context,
                   MaterialPageRoute(
@@ -497,7 +555,7 @@ String productname = documentSnapshot.data()['productname'];
                   ),
                 ),
                 child: ClipRRect(
-                    borderRadius: BorderRadius.circular(20.0),child: pics(userid:ownerId,prodid: prodId)),),
+                    borderRadius: BorderRadius.circular(20.0),child:CachedImage(shopmediaUrl.first),),),
 
                   Column(
 
@@ -515,15 +573,21 @@ String productname = documentSnapshot.data()['productname'];
        FirebaseFirestore.instance.collectionGroup('userProducts')
       .orderBy('round',descending: false)
           .orderBy('timestamp',descending: true)
-          .where('Gender',isEqualTo: 'Men'):
+           .where('Gender',isEqualTo: 'Men')
+
+          :
 priceQuery == "high"?
        FirebaseFirestore.instance.collectionGroup('userProducts')
       .orderBy('round',descending: true)
           .orderBy('timestamp',descending: true)
-          .where('Gender',isEqualTo: 'Men'):
+           .where('Gender',isEqualTo: 'Men')
+
+         :
+
   FirebaseFirestore.instance.collectionGroup('userProducts')
           .orderBy('timestamp',descending: true)
-          .where('Gender',isEqualTo: 'Men')
+      .where('Gender',isEqualTo: 'Men')
+
 
 
 
@@ -548,7 +612,7 @@ priceQuery == "high"?
               length:20,
               child: Scaffold(
 
-                appBar:AppBar(
+               appBar:tabs? AppBar(
                   toolbarHeight: SizeConfig.safeBlockHorizontal * 15,
                   backgroundColor: kPrimaryColor,
                   elevation: 0,
@@ -558,7 +622,7 @@ priceQuery == "high"?
                     unselectedLabelColor: kIcon,
 
                     tabs:[
-                      Text("New Arrivals",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 8,),),
+                      RotatedBox(quarterTurns:1,child: FittedBox(fit:BoxFit.contain,child: Text("New Arrivals",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 8,),))),
                       Text("Indian Ethnic",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 8,),),
 
                       Text("Shirts",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 8,),),
@@ -581,7 +645,7 @@ priceQuery == "high"?
                       Text("Watches",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 8),),
                     ],
                   ),
-                ),
+                ):null,
 
                 body: Container(
                   decoration: BoxDecoration(
@@ -589,33 +653,33 @@ priceQuery == "high"?
                   ) ,
                   alignment: Alignment.center,
                   child: RotatedBox(
-                    quarterTurns: 1,
-                    child: TabBarView(
+                        quarterTurns: 1,
+                        child: TabBarView(
 
-                        children:<Widget> [
-                          All(),
-                          IndianM(),
-                          ShirtM(),
-                          TshirtM(),
-                          CoatsM(),
-                          JacketM(),
-                          SweaterM(),
-                          DenimM(),
-                          SuitsM(),
-                          TrouserM(),
-                          ShortsM(),
-                          ActiveWear(),
-                          BeachwearM(),
-                          Bags(),
-                          ShoesM(),
-                          SneakersM(),
-                          Accessories(),
-                          GroomingM(),
-                          JewelleryM(),
-                          WatchesM(),
+                            children:<Widget> [
+                              All(),
+                              IndianM(),
+                              ShirtM(),
+                              TshirtM(),
+                              CoatsM(),
+                              JacketM(),
+                              SweaterM(),
+                              DenimM(),
+                              SuitsM(),
+                              TrouserM(),
+                              ShortsM(),
+                              ActiveWear(),
+                              BeachwearM(),
+                              Bags(),
+                              ShoesM(),
+                              SneakersM(),
+                              Accessories(),
+                              GroomingM(),
+                              JewelleryM(),
+                              WatchesM(),
 
-                        ]),
-                  ),
+                            ]),
+                      ),
                 ),
               )
           ),
