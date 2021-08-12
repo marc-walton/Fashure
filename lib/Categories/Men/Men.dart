@@ -1,7 +1,11 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:fashow/chatcached_image.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_currencies_tracker/currency.dart';
+import 'package:getwidget/components/toggle/gf_toggle.dart';
+import 'package:getwidget/types/gf_toggle_type.dart';
+import 'package:intl/intl.dart';
 
 import 'package:paginate_firestore/paginate_firestore.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -35,137 +39,9 @@ import 'package:fashow/Categories/Men/watches.dart';
 import 'package:get/get.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:sticky_headers/sticky_headers.dart';
+import 'package:fashow/methods/dynamic_links_service.dart';
+import 'package:share/share.dart';
 
-List <Widget>_listOfImages = <Widget>[];
-List <Widget>listOfImages = <Widget>[];
-
-pics({String userid,String prodid}){
-  return
-    FutureBuilder<QuerySnapshot> (
-        future:     productsRef
-        .doc(userid)
-        .collection('userProducts')
-     .where('prodId' ,isEqualTo: '$prodid')
-           // .where('ownerId' ,isEqualTo: '$ownerId')
-            .get(),
-        builder: (context, snapshot) {
-
-          if (snapshot.hasData) {
-            return new ListView.builder(physics: NeverScrollableScrollPhysics(),
-                shrinkWrap: true,
-                scrollDirection:Axis.vertical,
-                itemCount: snapshot.data.docs.length,
-                itemBuilder: (BuildContext context, int index) {
-                  // List<String> images = List.from(snapshot.data.docs[index].data()['collmediaUrl']);
-                  listOfImages = [];
-                  for (int i = 0;
-                  i <
-                      snapshot.data.docs[index].data()['shopmediaUrl']
-                          .length;
-                  i++) {
-                    listOfImages.add(CachedNetworkImage(imageUrl:snapshot
-                        .data.docs[index].data()['shopmediaUrl'][i]));
-                  }
-                  return Column(
-                    children: <Widget>[
-                      Container(
-                          margin: EdgeInsets.all(1.0),
-
-                          decoration: BoxDecoration(
-                            color: Colors.transparent,
-                          ),
-                          width: MediaQuery
-                              .of(context)
-                              .size
-                              .width,
-                          child:
-                          CarouselSlider(
-                              items: listOfImages,
-                              options: CarouselOptions(
-                                aspectRatio: 16/9,
-                                viewportFraction: 0.8,
-                                initialPage: 0,
-                                enableInfiniteScroll: true,
-                                reverse: false,
-                                autoPlay: true,
-                                autoPlayInterval: Duration(seconds: 3),
-                                autoPlayAnimationDuration: Duration(milliseconds: 800),
-                                autoPlayCurve: Curves.fastOutSlowIn,
-                                enlargeCenterPage: true,
-                                pauseAutoPlayOnManualNavigate: true,
-                                pauseAutoPlayOnTouch: true,
-                                // onPageChanged: callbackFunction,
-                                scrollDirection: Axis.horizontal,
-                              )
-                          )
-                      ),
-
-                    ],
-                  );
-                }
-            );
-          }
-            return Center(
-              child: CircularProgressIndicator(),
-            );
-
-        });
-
-}
-sf({List mediaUrl}){
-  return new ListView.builder(physics: NeverScrollableScrollPhysics(),
-      shrinkWrap: true,
-      scrollDirection:Axis.vertical,
-      itemCount: mediaUrl.length,
-      itemBuilder: (BuildContext context, int index) {
-        // List<String> images = List.from(snapshot.data.docs[index].data()['collmediaUrl']);
-        _listOfImages = [];
-        for (int i = 0;
-        i <
-            mediaUrl
-                .length;
-        i++) {
-          _listOfImages.add(CachedNetworkImage(imageUrl:mediaUrl[i]));
-        }
-        return Column(
-          children: <Widget>[
-            Container(
-                margin: EdgeInsets.all(1.0),
-
-                decoration: BoxDecoration(
-                  color: Colors.transparent,
-                ),
-                width: MediaQuery
-                    .of(context)
-                    .size
-                    .width,
-                child:
-                CarouselSlider(
-                    items: _listOfImages,
-                    options: CarouselOptions(
-                      aspectRatio: 16/9,
-                      viewportFraction: 0.8,
-                      initialPage: 0,
-                      enableInfiniteScroll: true,
-                      reverse: false,
-                      autoPlay: true,
-                      autoPlayInterval: Duration(seconds: 3),
-                      autoPlayAnimationDuration: Duration(milliseconds: 800),
-                      autoPlayCurve: Curves.fastOutSlowIn,
-                      enlargeCenterPage: true,
-                      pauseAutoPlayOnManualNavigate: true,
-                      pauseAutoPlayOnTouch: true,
-                      // onPageChanged: callbackFunction,
-                      scrollDirection: Axis.horizontal,
-                    )
-                )
-            ),
-
-          ],
-        );
-      }
-  );
-}
 class Men extends StatefulWidget {
   @override
   _MenState createState() => _MenState();
@@ -175,37 +51,36 @@ class _MenState extends State<Men> {
 bool a = true;
 bool b= false;
 bool c = true;
-  String priceQuery = "0";
-String desQuery = "des0";
-String illQuery = "ill0";
-String stylQuery = "styl0";
-String blogQuery = "blog0";
-String phoQuery = "pho0";
-String modQuery = "mod0";
-String makeQuery = "make0";
-String hairQuery = "hair0";
-String choQuery = "cho0";
-String artQuery = "art0";
+
+
   all() {
     return InkWell(
       onTap: () {
         priceQuery = "0";
-        desQuery = "des0";
-        illQuery = "ill0";
-        stylQuery = "styl0";
-        blogQuery = "blog0";
-        phoQuery = "pho0";
-        modQuery = "mod0";
-        makeQuery = "make0";
-        hairQuery = "hair0";
-        choQuery = "cho0";
-        artQuery = "art0";
+        AQuery = "A0";
+        BQuery = "B0";
+        CQuery = "C0";
+        DQuery = "D0";
+        EQuery = "E0";
+        FQuery = "F0";
+        GQuery = "G0";
+        HQuery = "H0";
+        IQuery = "I0";
+        JQuery = "J0";
+        KQuery = "K0";
+        LQuery = "L0";
+         MQuery = "M0";
+         NQuery = "N0";
+         OQuery = "O0";
+         PQuery = "P0";
+         QQuery = "Q0";
+         RQuery = "R0";
+         SQuery = "S0";
 
-        setState(() {});
-
-        Get.back();
       },
       child: Container(
+        color: priceQuery == "0"?kPrimaryColor:Colors.white,
+
         height: 50,
         width: MediaQuery.of(context).size.width,
         child: Column(
@@ -224,22 +99,30 @@ low() {
     return InkWell(
       onTap: () {
         priceQuery = "low";
-        desQuery = "des50";
-        illQuery = "ill50";
-        stylQuery = "styl50";
-        blogQuery = "blog50";
-        phoQuery = "pho50";
-        modQuery = "mod50";
-        makeQuery = "make50";
-        hairQuery = "hair50";
-        choQuery = "cho50";
-        artQuery = "art50";
+        AQuery = "Alow";
+        BQuery = "Blow";
+        CQuery = "Clow";
+        DQuery = "Dlow";
+        EQuery = "Elow";
+        FQuery = "Flow";
+        GQuery = "Glow";
+        HQuery = "Hlow";
+        IQuery = "Ilow";
+        JQuery = "Jlow";
+        KQuery = "Klow";
+        LQuery = "Llow";
+        MQuery = "Mlow";
+        NQuery = "Nlow";
+        OQuery = "Olow";
+        PQuery = "Plow";
+        QQuery = "Qlow";
+        RQuery = "Rlow";
+        SQuery = "Slow";
 
-        setState(() {});
-
-        Get.back();
       },
       child: Container(
+        color: priceQuery == "low"?kPrimaryColor:Colors.white,
+
         height: 50,
         width: MediaQuery.of(context).size.width,
         child: Column(
@@ -258,20 +141,27 @@ low() {
     return InkWell(
       onTap: () {
         priceQuery = "high";
-        desQuery = "des50-100";
-        illQuery = "ill50-100";
-        stylQuery = "styl50-100";
-        blogQuery = "blog50-100";
-        phoQuery = "pho50-100";
-        modQuery = "mod50-100";
-        makeQuery = "make50-100";
-        hairQuery = "hair50-100";
-        choQuery = "cho50-100";
-        artQuery = "art50-100";
+        AQuery = "Ahigh";
+        BQuery = "Bhigh";
+        CQuery = "Chigh";
+        DQuery = "Dhigh";
+        EQuery = "Ehigh";
+        FQuery = "Fhigh";
+        GQuery = "Ghigh";
+        HQuery = "Hhigh";
+        IQuery = "Ihigh";
+        JQuery = "Jhigh";
+        KQuery = "Khigh";
+        LQuery = "Lhigh";
+        MQuery = "Mhigh";
+        NQuery = "Nhigh";
+        OQuery = "Ohigh";
+        PQuery = "Phigh";
+        QQuery = "Qhigh";
+        RQuery = "Rhigh";
+        SQuery = "Shigh";
 
-        setState(() {});
 
-        Get.back();
       },
       child: Container(
         height: 50,
@@ -290,283 +180,373 @@ low() {
   }
 
 
-  df({String productname,String usd,String inr,String cny,String eur,String gbp,String prodId,String ownerId,}){
-    if(currentUser.country=='India'){
-      return
-
-        ListTile(
-          title:            Text(productname, style: TextStyle(
-              color: kText,
-              fontSize: 15.0,
-              fontWeight: FontWeight.bold),),
-          subtitle:            Text( "₹$inr",style: TextStyle(color: kText,
-              fontSize: 20.0,
-              fontWeight: FontWeight.bold)),
-
-        );
-
-    }
-    else if(currentUser.country=='US'){
-      return
-
-        ListTile(
-          title:                      Text(productname, style: TextStyle(
-              color: kText,
-              fontSize: 15.0,
-              fontWeight: FontWeight.bold),),
-
-          subtitle:          Text( "\u0024 $usd",style: TextStyle(color: kText,
-              fontSize: 20.0,
-              fontWeight: FontWeight.bold)),
-
-        );
-
-
-    }
-    else if (currentUser.country == 'Europe'){
-      return
-
-        ListTile(
-          title:                      Text(productname, style: TextStyle(
-              color: kText,
-              fontSize: 15.0,
-              fontWeight: FontWeight.bold),),
-
-          subtitle:           Text( "€ $eur",style: TextStyle(color: kText,
-              fontSize: 20.0,
-              fontWeight: FontWeight.bold)),
-
-        );
-
-    }
-    else if (currentUser.country == 'UK'){
-      return
-
-        ListTile(
-          title:                    Text(productname, style: TextStyle(
-              color: kText,
-              fontSize: 15.0,
-              fontWeight: FontWeight.bold),),
-
-          subtitle:                     Text( "£  $gbp ",style: TextStyle(color: kText,
-              fontSize: 20.0,
-              fontWeight: FontWeight.bold)),
-
-
-        );
-
-    }
-    else{
-      return
-
-        ListTile(
-          title:                      Text(productname, style: TextStyle(
-              color: kText,
-              fontSize: 15.0,
-              fontWeight: FontWeight.bold),),
-
-          subtitle:          Text( "\u0024 $usd",style: TextStyle(color: kText,
-              fontSize: 20.0,
-              fontWeight: FontWeight.bold)),
-
-        );
-
-
-    }
-  }
-Allin(){
-  return  PaginateFirestore(
-isLive: true,
-//    itemsPerPage: 2,
-    itemBuilderType:
-    PaginateBuilderType.listView,
-    itemBuilder: (index, context, documentSnapshot)   {
-//        DocumentSnapshot ds = snapshot.data.docs[index];
-   String ownerId = documentSnapshot.data()['ownerId'];
-String prodId = documentSnapshot.data()['prodId'];
-//String shopmediaUrl = documentSnapshot.data()['shopmediaUrl'];
-String productname = documentSnapshot.data()['productname'];
-   String inr = documentSnapshot.data()['inr'];
-   String usd = documentSnapshot.data()['usd'];
-
-    return
-      FutureBuilder(
-        future: usersRef.doc(ownerId).get(),
-        builder: (context, snapshot) {
-          if (!snapshot.hasData) {
-            return circularProgress();
-          }
-           Users user = Users.fromDocument(snapshot.data);
-//          bool isPostOwner = currentUserId == ownerId;
-          return Column(
-            children: <Widget>[
-            GestureDetector(
-              onTap: () => showProfile(context, profileId: user.id),
-              child: ListTile(
-                leading: CircleAvatar(
-                  backgroundImage: CachedNetworkImageProvider(user.photoUrl),
-                  backgroundColor: Colors.grey,
-                ),
-                title: Text(
-                  user.displayName,
-                  style: TextStyle(
-                    color: kText,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                ),
-            ),
-
-            GestureDetector(
-              onTap: () => Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => ProductScreen(
-                    prodId: prodId,
-                    userId: ownerId,
-                  ),
-                ),
-              ),
-              child: Stack(
-                alignment: Alignment.center,
-                children: <Widget>[
-                  ClipRRect(
-                      borderRadius: BorderRadius.circular(20.0),child:pics(userid:ownerId,prodid: prodId)),
-                ],),),
-              df(productname:productname, usd:usd,inr:inr, prodId:prodId, ownerId:ownerId,),
-
-            Divider(color: kGrey,),
-          ],
-
-          );
-
-        },
-      );
-    },
-    query: FirebaseFirestore.instance.collectionGroup('userProducts').orderBy('timestamp',descending: true)
-        .where('Gender',isEqualTo: 'Men')
-
-  );
-}
+// Allin(){
+//   return  PaginateFirestore(
+// isLive: true,
+// //    itemsPerPage: 2,
+//     itemBuilderType:
+//     PaginateBuilderType.listView,
+//     itemBuilder: (index, context, documentSnapshot)   {
+// //        DocumentSnapshot ds = snapshot.data.docs[index];
+//    String ownerId = documentSnapshot.data()['ownerId'];
+// String prodId = documentSnapshot.data()['prodId'];
+// //String shopmediaUrl = documentSnapshot.data()['shopmediaUrl'];
+// String productname = documentSnapshot.data()['productname'];
+//    String inr = documentSnapshot.data()['inr'];
+//    String usd = documentSnapshot.data()['usd'];
+//
+//     return
+//       FutureBuilder(
+//         future: usersRef.doc(ownerId).get(),
+//         builder: (context, snapshot) {
+//           if (!snapshot.hasData) {
+//             return circularProgress();
+//           }
+//            Users user = Users.fromDocument(snapshot.data);
+// //          bool isPostOwner = currentUserId == ownerId;
+//           return Column(
+//             children: <Widget>[
+//             GestureDetector(
+//               onTap: () => showProfile(context, profileId: user.id),
+//               child: ListTile(
+//                 leading: CircleAvatar(
+//                   backgroundImage: CachedNetworkImageProvider(user.photoUrl),
+//                   backgroundColor: Colors.grey,
+//                 ),
+//                 title: Text(
+//                   user.displayName,
+//                   style: TextStyle(
+//                     color: kText,
+//                     fontWeight: FontWeight.bold,
+//                   ),
+//                 ),
+//                 ),
+//             ),
+//
+//             GestureDetector(
+//               onTap: () => Navigator.push(
+//                 context,
+//                 MaterialPageRoute(
+//                   builder: (context) => ProductScreen(
+//                     prodId: prodId,
+//                     userId: ownerId,
+//                   ),
+//                 ),
+//               ),
+//               child: Stack(
+//                 alignment: Alignment.center,
+//                 children: <Widget>[
+//                   ClipRRect(
+//                       borderRadius: BorderRadius.circular(20.0),child:pics(userid:ownerId,prodid: prodId)),
+//                 ],),),
+//               df(productname:productname, usd:usd,inr:inr, prodId:prodId, ownerId:ownerId,),
+//
+//             Divider(color: kGrey,),
+//           ],
+//
+//           );
+//
+//         },
+//       );
+//     },
+//     query: FirebaseFirestore.instance.collectionGroup('userProducts').orderBy('timestamp',descending: true)
+//         .where('Gender',isEqualTo: 'Men')
+//
+//   );
+// }
 All(){
   return  StickyHeader(
     header: Container(
       height: 50.0,
       color: Colors.transparent,
       padding: EdgeInsets.symmetric(horizontal: 16.0),
-      alignment: Alignment.centerLeft,
-      child: ListTile(
-        trailing: FloatingActionButton(child: Icon(Icons.filter_alt_outlined),
+      child:  Row(
+           mainAxisAlignment:      MainAxisAlignment.end,
+           children: [
+             FloatingActionButton.extended(
+               backgroundColor: Colors.pink.shade50,
+
+               //icon: Icon(Icons.drag_handle),
+               label:Text("category",style:TextStyle(color: Colors.black)),
+               onPressed: (){ setState(() {
+                 tabs = !tabs ;
+               });   },
+             ),
+             FloatingActionButton.extended(
+               backgroundColor: Colors.pink.shade50,
+
+               label:Text("Filter",style:TextStyle(color: Colors.black)),
         onPressed: (){        showDialog<void>(
-          context: context,
-          // useRootNavigator:true,
+              context: context,
+              // useRootNavigator:true,
 
-          barrierDismissible: true,
-          // false = user must tap button, true = tap outside dialog
-          builder: (BuildContext dialogContext) {
-            return Dialog(
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(20),
-              ),
-              child: Container(
-                height:400,
-                child: ExpansionTile(
-                  title: Text(""),
-                  children: [Column(
-                    children: [
-                      all(),
-                      low(),
-                      high(),
+              barrierDismissible: true,
+              // false = user must tap button, true = tap outside dialog
+              builder: (BuildContext dialogContext) {
+                return Builder(builder: (BuildContext context) {
+                  return StatefulBuilder(builder: (BuildContext context, State){
+                    return Dialog(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                    child: Container(
+                      height:400,
+                      child: Column(
+                        children: [
+                          ExpansionTile(
+                              title: Text("Sort by price"),
+                              children: [Column(
+                                children: [
+                                  InkWell(
+                                    onTap: () {
+                                      State((){});
+                                      priceQuery = "0";
+                                      AQuery = "A0";
+                                      BQuery = "B0";
+                                      CQuery = "C0";
+                                      DQuery = "D0";
+                                      EQuery = "E0";
+                                      FQuery = "F0";
+                                      GQuery = "G0";
+                                      HQuery = "H0";
+                                      IQuery = "I0";
+                                      JQuery = "J0";
+                                      KQuery = "K0";
+                                      LQuery = "L0";
+                                      MQuery = "M0";
+                                      NQuery = "N0";
+                                      OQuery = "O0";
+                                      PQuery = "P0";
+                                      QQuery = "Q0";
+                                      RQuery = "R0";
+                                      SQuery = "S0";
 
-                    ],
-                  ),
-              ]
-                ),
-              ),
-            );
-          },
+                                    },
+                                    child: Container(
+                                      color: priceQuery == "0"||priceQuery == "0D"?Colors.pink.shade50:Colors.white,
+
+                                      height: 50,
+                                      width: MediaQuery.of(context).size.width,
+                                      child: Column(
+                                        mainAxisAlignment: MainAxisAlignment.center,
+                                        children: [
+                                          FittedBox(
+                                              child: Text(
+                                                'All',
+                                              )),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                  InkWell(
+                                    onTap: () {
+                                      State((){});
+
+                                      priceQuery = "low";
+                                      AQuery = "Alow";
+                                      BQuery = "Blow";
+                                      CQuery = "Clow";
+                                      DQuery = "Dlow";
+                                      EQuery = "Elow";
+                                      FQuery = "Flow";
+                                      GQuery = "Glow";
+                                      HQuery = "Hlow";
+                                      IQuery = "Ilow";
+                                      JQuery = "Jlow";
+                                      KQuery = "Klow";
+                                      LQuery = "Llow";
+                                      MQuery = "Mlow";
+                                      NQuery = "Nlow";
+                                      OQuery = "Olow";
+                                      PQuery = "Plow";
+                                      QQuery = "Qlow";
+                                      RQuery = "Rlow";
+                                      SQuery = "Slow";
+
+                                    },
+                                    child: Container(
+                                      color: priceQuery == "low"||priceQuery == "lowD"?Colors.pink.shade50:Colors.white,
+
+                                      height: 50,
+                                      width: MediaQuery.of(context).size.width,
+                                      child: Column(
+                                        mainAxisAlignment: MainAxisAlignment.center,
+                                        children: [
+                                          FittedBox(
+                                              child: Text(
+                                                'Low to high',
+                                              )),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                  InkWell(
+                                    onTap: () {
+                                      State((){});
+
+                                      priceQuery = "high";
+                                      AQuery = "Ahigh";
+                                      BQuery = "Bhigh";
+                                      CQuery = "Chigh";
+                                      DQuery = "Dhigh";
+                                      EQuery = "Ehigh";
+                                      FQuery = "Fhigh";
+                                      GQuery = "Ghigh";
+                                      HQuery = "Hhigh";
+                                      IQuery = "Ihigh";
+                                      JQuery = "Jhigh";
+                                      KQuery = "Khigh";
+                                      LQuery = "Lhigh";
+                                      MQuery = "Mhigh";
+                                      NQuery = "Nhigh";
+                                      OQuery = "Ohigh";
+                                      PQuery = "Phigh";
+                                      QQuery = "Qhigh";
+                                      RQuery = "Rhigh";
+                                      SQuery = "Shigh";
+
+
+                                    },
+                                    child: Container(
+                                      color: priceQuery == "high"||priceQuery == "highD"?Colors.pink.shade50:Colors.white,
+
+                                      height: 50,
+                                      width: MediaQuery.of(context).size.width,
+                                      child: Column(
+                                        mainAxisAlignment: MainAxisAlignment.center,
+                                        children: [
+                                          FittedBox(
+                                              child: Text(
+                                                'High to low',
+                                              )),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+
+                                ],
+                              ),
+                              ]
+                          ),
+                          ExpansionTile(
+                              title: Text("Avoid Duties & Taxes"),
+                              children: [Column(
+                                children: [
+                                  Text("(Shop within your country)"),
+                                  GFToggle(
+                                    onChanged: (val){
+                                      setState(() {
+                                        duties = val;
+                                      });
+                                    },
+                                    value: duties,
+                                    type: GFToggleType.custom,
+                                  ),
+                                ],
+                              ),
+                              ]
+                          ),
+                          FloatingActionButton.extended(onPressed: (){
+                            duties? setState((){
+                              priceQuery = priceQuery +  "D";
+
+                            }):
+                            setState((){
+                              priceQuery = priceQuery;
+
+                            });
+
+                          }, label: Text("Apply"))
+                        ],
+                      ),
+                    ),
+                  );
+                  });
+               });
+              },
         );},
-        )
-      ),
+        ),
+
+           ],
+         )
+
+
     ),
     content: PaginateFirestore(
       emptyDisplay: Center(child: Text("Nothing found",style: TextStyle(
         fontWeight: FontWeight.bold,
         fontSize: 25.0,
       ),)),
-      key:ValueKey<String>(desQuery),
+      key:ValueKey<String>(AQuery),
       itemBuilderType:
       PaginateBuilderType.listView,
       itemBuilder: (index, context, documentSnapshot)   {
      String ownerId = documentSnapshot.data()['ownerId'];
+     String displayName = documentSnapshot.data()['displayName'];
+     String photoUrl = documentSnapshot.data()['photoUrl'];
 String prodId = documentSnapshot.data()['prodId'];
 List shopmediaUrl = documentSnapshot.data()['shopmediaUrl'];
-String productname = documentSnapshot.data()['productname'];
-     String inr = documentSnapshot.data()['inr'];
-     String usd = documentSnapshot.data()['usd'];
-String s = "${a?priceQuery:'n'}" +"${b?desQuery:'n'}" +"${c?illQuery:'n'}";
-print(s);
+
+     List<CItem> searchResults = [];
+
+     Prod prod = Prod.fromDocument(documentSnapshot);
+     CItem searchResult = CItem(prod);
+     searchResults.add(searchResult);
+
+print(priceQuery);
       return
-        FutureBuilder(
-          future: usersRef.doc(ownerId).get(),
-          builder: (context, snapshot) {
-            List<CItem> searchResults = [];
-
-            Prod prod = Prod.fromDocument(documentSnapshot);
-            CItem searchResult = CItem(prod);
-            searchResults.add(searchResult);
-
-            if (!snapshot.hasData) {
-              return circularProgress();
-            }
-             Users user = Users.fromDocument(snapshot.data);
-            return Column(
-              children: <Widget>[
-              GestureDetector(
-                onTap: () => showProfile(context, profileId: user.id),
-                child:Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Row(children:[
-                    CircleAvatar(
-                      backgroundImage: CachedNetworkImageProvider(user.photoUrl),
-                      backgroundColor: Colors.grey,
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(20.0),
+            child: Card(
+              child:Column(
+                children: <Widget>[
+                  GestureDetector(
+                    onTap: () => showProfile(context, profileId: ownerId),
+                    child:Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Row(children:[
+                        CircleAvatar(
+                          backgroundImage: CachedNetworkImageProvider(photoUrl),
+                          backgroundColor: Colors.grey,
+                        ),
+                        SizedBox(width: 7.0,),
+                        Text(
+                          displayName,
+                          style: TextStyle(
+                            color: kText,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ]),
                     ),
-                    SizedBox(width: 7.0,),
-                    Text(
-                      user.displayName,
-                      style: TextStyle(
-                        color: kText,
-                        fontWeight: FontWeight.bold,
+
+                  ),
+
+                  GestureDetector(
+                    onTap: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => ProductScreen(
+                          prodId: prodId,
+                          userId: ownerId,
+                        ),
                       ),
                     ),
-                  ]),
-                ),
-
-              ),
-
-                GestureDetector(
-                onTap: () => Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => ProductScreen(
-                      prodId: prodId,
-                      userId: ownerId,
-                    ),
-                  ),
-                ),
-                child: ClipRRect(
-                    borderRadius: BorderRadius.circular(20.0),child:CachedImage(shopmediaUrl.first),),),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(20.0),child:CachedImage(shopmediaUrl.first),),),
 
                   Column(
 
                     children: searchResults,
 
-                ),              Divider(color: kGrey,),
-            ],
+                  ),
+                ],
 
-            );
-
-          },
+              ),
+            ),
+          ),
         );
       },
       query: priceQuery == "low"?
@@ -582,6 +562,20 @@ priceQuery == "high"?
           .orderBy('timestamp',descending: true)
            .where('Gender',isEqualTo: 'Men')
 
+         :priceQuery == "lowD"?
+       FirebaseFirestore.instance.collectionGroup('userProducts')
+      .orderBy('round',descending: false)
+          .orderBy('timestamp',descending: true)
+           .where('Gender',isEqualTo: 'Men')
+.where('country',isEqualTo: '${currentUser.country}')
+
+         :priceQuery == "highD"?
+       FirebaseFirestore.instance.collectionGroup('userProducts')
+      .orderBy('round',descending: true)
+          .orderBy('timestamp',descending: true)
+           .where('Gender',isEqualTo: 'Men')
+           .where('country',isEqualTo: '${currentUser.country}')
+
          :
 
   FirebaseFirestore.instance.collectionGroup('userProducts')
@@ -592,11 +586,6 @@ priceQuery == "high"?
 
 
 
-    //  FirebaseFirestore.instance.collectionGroup('userProducts')
-     //     .orderBy('timestamp',descending: true)
-
-      //    .where('Gender',isEqualTo: 'Men')
-//.where('indian', isEqualTo:false)
     ),
   );
 }
@@ -606,54 +595,61 @@ priceQuery == "high"?
     SizeConfig().init(context);
   return
       RotatedBox(
-        quarterTurns: 3,
+        quarterTurns: 1,
         child: Expanded(
           child: DefaultTabController(
               length:20,
               child: Scaffold(
 
                appBar:tabs? AppBar(
-                  toolbarHeight: SizeConfig.safeBlockHorizontal * 15,
+                  toolbarHeight: SizeConfig.screenWidth * 0.3,
                   backgroundColor: kPrimaryColor,
                   elevation: 0,
-                  bottom: TabBar(
-                    isScrollable: true,
-                    labelColor: Colors.white,
-                    unselectedLabelColor: kIcon,
+                  bottom:  PreferredSize(
+                  preferredSize: Size.fromHeight(100.0),
 
-                    tabs:[
-                      RotatedBox(quarterTurns:1,child: FittedBox(fit:BoxFit.contain,child: Text("New Arrivals",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 8,),))),
-                      Text("Indian Ethnic",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 8,),),
+                    child: Container(
+                    height: SizeConfig.safeBlockHorizontal * 30,
+                      child: TabBar(
 
-                      Text("Shirts",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 8,),),
-                      Text("Casual Tops",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 8),),
-                      Text("Coats",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 8),),
-                      Text("Jackets",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 8),),
-                      Text("Sweatshirts & Sweaters",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 8),),
-                      Text("Denim",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 8),),
-                      Text("Suits",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 8),),
-                      Text("Trousers",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 8),),
-                      Text("Shorts",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 8),),
-                      Text("Activewear",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 8),),
-                      Text("Beach & Swimwear",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 8),),
-                      Text("Bags",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 8),),
-                      Text("Shoes",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 8),),
-                      Text("Sneakers",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 8),),
-                      Text("Accessories",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 8),),
-                      Text("Grooming",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 8),),
-                      Text("Jewellery",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 8),),
-                      Text("Watches",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 8),),
-                    ],
+                        isScrollable: true,
+
+                        ///filled
+                        labelStyle:TextStyle(fontFamily: "AlteroDCURegular" ),
+                        ///outline
+                        unselectedLabelStyle:TextStyle(fontFamily:"AlteroDCU" ),
+                        tabs:[
+                          RotatedBox(quarterTurns:3,child: Text("New Arrivals",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 3,))),
+                          RotatedBox(quarterTurns:3,child: Text("Indian Ethnic",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 3,),)),
+
+                          Text("Shirts",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 8,),),
+                          Text("Casual Tops",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 8),),
+                          Text("Coats",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 8),),
+                          Text("Jackets",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 8),),
+                          Text("Sweatshirts & Sweaters",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 8),),
+                          Text("Denim",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 8),),
+                          Text("Suits",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 8),),
+                          Text("Trousers",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 8),),
+                          Text("Shorts",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 8),),
+                          Text("Activewear",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 8),),
+                          Text("Beach & Swimwear",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 8),),
+                          Text("Bags",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 8),),
+                          Text("Shoes",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 8),),
+                          Text("Sneakers",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 8),),
+                          Text("Accessories",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 8),),
+                          Text("Grooming",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 8),),
+                          Text("Jewellery",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 8),),
+                          Text("Watches",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 8),),
+                        ],
+                      ),
+                    ),
                   ),
                 ):null,
 
                 body: Container(
-                  decoration: BoxDecoration(
-                      gradient: fabGradient
-                  ) ,
-                  alignment: Alignment.center,
+                  color:Colors.grey.shade200,
                   child: RotatedBox(
-                        quarterTurns: 1,
+                        quarterTurns: 3,
                         child: TabBarView(
 
                             children:<Widget> [
@@ -702,7 +698,11 @@ class _CItemState extends State<CItem> {
   final Prod prod;
   String products;
   int client;
-  String price;
+  var price;
+ var inr;
+  var usd;
+
+  var currencyFormatter = NumberFormat('#,##0.00', 'FR');
 
   int followerCount = 0;
   final String currentUserId = currentUser?.id;
@@ -713,23 +713,36 @@ class _CItemState extends State<CItem> {
     super.initState();
 
     conversion();
+
   }
   conversion()async{
 
-    var resultUSD1 = await Currency.getConversion(
-        from: 'USD', to: '${currentUser.currencyISO}', amount: prod.usd  );
-    setState((){  var c1 = resultUSD1.rate;
-    price =c1.toStringAsFixed(2);
+    if(currentUser.currencyISO == "USD") {
+  setState(() {
+    var c1 = prod.usd;
+    price =double.tryParse(c1) ;
 
-    print(price);
-    });
+  }); }
+  else {
+  var resultUSD1 = await Currency.getConversion(
+      from: 'USD', to: '${currentUser.currencyISO}', amount: prod.usd);
+  setState(() {
+    var c1 = resultUSD1.rate;
+price = double.tryParse(c1);
+
+  });
+}
+  setState(() {
+    inr  = double.tryParse(  prod.inr);
+    print("xcvbsds$inr");
+  });
 
   }
 
   @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);
-
+print(currencyFormatter.format(double.tryParse(prod.inr)));
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
@@ -752,10 +765,10 @@ class _CItemState extends State<CItem> {
                     fontSize: SizeConfig.safeBlockHorizontal * 5,
                     fontWeight: FontWeight.bold),),
                 subtitle:    currentUser.country == prod.country?
-    Text( "${currentUser.currencysym} ${prod.inr}",style: TextStyle(color: kText,
+    Text( " ${ currencyFormatter.format(inr)}",style: TextStyle(color: kText,
     fontSize: SizeConfig.safeBlockHorizontal * 4,
     fontWeight: FontWeight.bold)) :
-                Text( "${currentUser.currencysym} $price",style: TextStyle(color: kText,
+                Text( " ${currencyFormatter.format(price)}",style: TextStyle(color: kText,
                     fontSize: SizeConfig.safeBlockHorizontal * 4,
                     fontWeight: FontWeight.bold)),
 

@@ -1,14 +1,48 @@
 import 'package:flutter/material.dart';
 //import 'package:flutter_svg/svg.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:intl/intl.dart';
 
-const Color kPrimaryColor = Color(0xff240638);
+ Color kPrimaryColor = Colors.black;
 const Color Bappbar = Color(0xff240638);
 // const Color kPrimaryColor = Color(0xffffd194);
 const Color appbar = Colors.black26;
 const Color trans = Colors.transparent;
 const Color transwhite = Colors.white38;
+final oCcy = new NumberFormat("#,##0.00", "en_US");
+var eurosInCurrentLocale = NumberFormat.currency(symbol: "€");
  bool tabs = false;
+ bool duties = false;
+String priceQuery = "0";
+String AQuery = "A0";
+String BQuery = "B0";
+String CQuery = "C0";
+String DQuery = "D0";
+String EQuery = "E0";
+String FQuery = "F0";
+String GQuery = "G0";
+String HQuery = "H0";
+String IQuery = "I0";
+String JQuery = "J0";
+String KQuery = "K0";
+String LQuery = "L0";
+String MQuery = "M0";
+String NQuery = "N0";
+String OQuery = "O0";
+String PQuery = "P0";
+String QQuery = "Q0";
+String RQuery = "R0";
+String SQuery = "S0";
+String desQuery = "des0";
+String illQuery = "ill0";
+String stylQuery = "styl0";
+String blogQuery = "blog0";
+String phoQuery = "pho0";
+String modQuery = "mod0";
+String makeQuery = "make0";
+String hairQuery = "hair0";
+String choQuery = "cho0";
+String artQuery = "art0";
 
  final Gradient fabGradient = LinearGradient(
     colors: [ Color(0xff70e1f5),Color(0xffffd194)],

@@ -185,19 +185,7 @@ class CapesW extends StatefulWidget {
 }
 
 class _CapesWState extends State<CapesW> {
-  String priceQuery = "0";
-  String AQuery = "A0";
-  String BQuery = "B0";
-  String CQuery = "C0";
-  String DQuery = "D0";
-  String EQuery = "E0";
-  String FQuery = "F0";
-  String GQuery = "G0";
-  String HQuery = "H0";
-  String IQuery = "I0";
-  String JQuery = "J0";
-  String KQuery = "K0";
-  String LQuery = "L0";
+
 
   all() {
     return InkWell(

@@ -691,6 +691,7 @@ int count  = 1;
             maintainState:true,
             children: [
               SmartSelect<String>.single(
+
                   title: 'Hats',
                   value: value,
                   choiceItems: Hats,
@@ -11679,7 +11680,6 @@ keyboardType:TextInputType.number,
               "shipment": shipcontroller.text,
               "prodId": prodId,
               "ownerId": widget.currentUser.id,
-              "username": widget.currentUser.displayName,
               "photoUrl": widget.currentUser.photoUrl,
               "displayName": widget.currentUser.displayName,
               "shopmediaUrl": imageUrls,

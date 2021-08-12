@@ -8,6 +8,7 @@ import 'package:fashow/Categories/Men/Men.dart';
 import 'package:fashow/Categories/Women/Women.dart';
 import 'package:fashow/Live/upload_bid.dart';
 import 'package:fashow/fav.dart';
+import 'package:fashow/size_config.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:bubble_tab_indicator/bubble_tab_indicator.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -82,22 +83,23 @@ new Tabs(title: "Teen-Girls",color: kPrimaryColor),
 
   @override
   Widget build(BuildContext context) {
+    SizeConfig().init(context);
     return
       Scaffold(appBar: PreferredSize(
         preferredSize: Size.fromHeight(130.0),
         child: AppBar(title:  Text('Shop',style: TextStyle(fontSize: 30,fontFamily: 'MajorMonoDisplay'),),
-          backgroundColor: kPrimaryColor,
+          backgroundColor: Colors.black,
 
           bottom:  PreferredSize(
             preferredSize: Size.fromHeight(100.0),
             child: Container(
               height: 80.0,
               child: new TabBar(
-                indicatorSize:TabBarIndicatorSize.tab,
-                   indicator:BubbleTabIndicator(indicatorHeight:40.0,
-                     indicatorColor: kblue,
 
-                   ),
+                ///filled
+                labelStyle:TextStyle(fontFamily: "AlteroDCURegular" ),
+                ///outline
+                unselectedLabelStyle:TextStyle(fontFamily:"AlteroDCU" ),
                    isScrollable: true,
                 controller: _controller,
                 tabs: <Widget>[
@@ -105,61 +107,65 @@ new Tabs(title: "Teen-Girls",color: kPrimaryColor),
                     fit:BoxFit.fitWidth,
                     child: Text('Men',
                       style: TextStyle(
-                          fontFamily :"MajorMonoDisplay",
-                          // fontSize:  MediaQuery.of(context).size.width,
+
+                     fontSize:    SizeConfig.blockSizeHorizontal*4,
                           color: Colors.white),),
                   ),
                   FittedBox(
                     fit:BoxFit.fitWidth,
                     child: Text(   'Women',
                       style: TextStyle(
-                          fontFamily :"MajorMonoDisplay",
 
+                          fontSize:    SizeConfig.blockSizeHorizontal*4,
                           color: Colors.white),),
                   ),
               FittedBox(
                 fit:BoxFit.fitWidth,
                     child: Text(   'Baby-Boys',
                       style: TextStyle(
-                          fontFamily :"MajorMonoDisplay",
 
+                          fontSize:    SizeConfig.blockSizeHorizontal*4,
                           color: Colors.white),),
                   ),
                   FittedBox(
                     fit:BoxFit.fitWidth,
                     child: Text(   'Baby-Girls',
                       style: TextStyle(
-                          fontFamily :"MajorMonoDisplay",
 
+                          fontSize:    SizeConfig.blockSizeHorizontal*4,
                           color: Colors.white),),
-                  ),  FittedBox(
+                  ),
+                  FittedBox(
                     fit:BoxFit.fitWidth,
                     child: Text(   'Kids-Boys',
                       style: TextStyle(
-                          fontFamily :"MajorMonoDisplay",
 
+                          fontSize:    SizeConfig.blockSizeHorizontal*4,
                           color: Colors.white),),
                   ),
                   FittedBox(
                     fit:BoxFit.fitWidth,
                     child: Text(   'Kids-Girls',
                       style: TextStyle(
-                          fontFamily :"MajorMonoDisplay",
 
+                          fontSize:    SizeConfig.blockSizeHorizontal*4,
                           color: Colors.white),),
-                  ),FittedBox(
+                  ),
+                  FittedBox(
+
                     fit:BoxFit.fitWidth,
                     child: Text(   'Teen-Boys',
                       style: TextStyle(
-                          fontFamily :"MajorMonoDisplay",
 
+                          fontSize:    SizeConfig.blockSizeHorizontal*4,
                           color: Colors.white),),
-                  ),FittedBox(
+                  ),
+                  FittedBox(
                     fit:BoxFit.fitWidth,
                     child: Text(   'Teen-Girls',
                       style: TextStyle(
-                          fontFamily :"MajorMonoDisplay",
 
+                          fontSize:    SizeConfig.blockSizeHorizontal*4,
                           color: Colors.white),),
                   ),
                 ],
@@ -168,17 +174,7 @@ new Tabs(title: "Teen-Girls",color: kPrimaryColor),
           ),
           iconTheme: new IconThemeData(color: kIcon),
           actions:<Widget> [
-            IconButton(
-              color: Colors.white,
-              icon: Icon(
-               Icons.search,
-              ),
-              onPressed: () {
-setState(() {
-  tabs = !tabs;
-});                // do something
-              },
-            ),     IconButton(
+             IconButton(
               color: Colors.white,
               icon: Icon(
                Icons.search,

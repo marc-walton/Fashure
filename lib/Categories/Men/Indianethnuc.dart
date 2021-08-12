@@ -1258,58 +1258,57 @@ class _IndianMState extends State<IndianM> {
   Widget build(BuildContext context) {
 
       SizeConfig().init(context);
-    return  RotatedBox(
-      quarterTurns: 3,
-      child: Expanded(
-        child: DefaultTabController(
-            initialIndex:widget.selectedPage ?? 0,
-            length:7,
-            child: Scaffold(
-              appBar:AppBar(
-                toolbarHeight: SizeConfig.safeBlockHorizontal * 8,
-                backgroundColor: kPrimaryColor,
-                elevation: 0,
-                bottom: TabBar(
-                  isScrollable: true,
-                  labelColor: Colors.white,
-                  unselectedLabelColor: kIcon,
-                  tabs:[
-                    Text("Kurtas",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5,),),
-                    Text("Sherwani",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5),),
-                    Text("Nehru Jacket",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5),),
-                    Text("Bandhgalas",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5),),
-                    Text("Bottoms",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5),),
-                    Text("Jacket & Tuxedo",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5),),
-                    Text("Footwear",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5),),
+    return  Expanded(
+      child: DefaultTabController(
+          initialIndex:widget.selectedPage ?? 0,
+          length:7,
+          child: Scaffold(
 
-                  ],
-                ),
+
+            body: Container(
+              color: Colors.grey.shade200,
+              child: Column(
+                children: [
+                  TabBar(
+                    isScrollable: true,
+                    unselectedLabelColor: Colors.black,
+                    indicatorSize: TabBarIndicatorSize.tab,
+                    indicator: BoxDecoration(
+
+                        borderRadius: BorderRadius.circular(50),
+                        color: Colors.black),
+                    tabs:[
+                      Text("Kurtas",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5,),),
+                      Text("Sherwani",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5),),
+                      Text("Nehru Jacket",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5),),
+                      Text("Bandhgalas",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5),),
+                      Text("Bottoms",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5),),
+                      Text("Jacket & Tuxedo",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5),),
+                      Text("Footwear",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5),),
+
+                    ],
+                  ),
+                  Container(
+                    child: Expanded(
+                      child: TabBarView(
+                          children:<Widget> [
+
+                            Kurtas(),
+                            Sherwani(),
+                            Nehru(),
+                            Bandhgalas(),
+                            Bottoms(),
+                            Jacket(),
+                            Footwear(),
+
+
+                          ]),
+                    ),
+                  ),
+                ],
               ),
-
-              body: Container(
-                decoration: BoxDecoration(
-                    gradient: fabGradient
-                ) ,
-                alignment: Alignment.center,
-                child: RotatedBox(
-                  quarterTurns: 1,
-                  child: TabBarView(
-                      children:<Widget> [
-
-                        Kurtas(),
-                        Sherwani(),
-                        Nehru(),
-                        Bandhgalas(),
-                        Bottoms(),
-                        Jacket(),
-                        Footwear(),
-
-
-                      ]),
-                ),
-              ),
-            )
-        ),
+            ),
+          )
       ),
     );
   }
