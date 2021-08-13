@@ -181,6 +181,7 @@ new Tabs(title: "Teen-Girls",color: kPrimaryColor),
               ),
               onPressed: () {
                 Get.to (ShopSearch());
+                tabs = !tabs ;
 
 
                 // do something
@@ -192,6 +193,7 @@ new Tabs(title: "Teen-Girls",color: kPrimaryColor),
               ),
               onPressed: () {
                 Navigator.push(context, MaterialPageRoute(builder: (context) =>Fav( currentUser: currentUser?.id)));
+                tabs = !tabs ;
 
                 // do something
               },

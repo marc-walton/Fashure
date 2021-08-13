@@ -11189,7 +11189,7 @@ backgroundColor: kblue,
                                     ),
                                     textAlign: TextAlign.center,
                                     validator: (text) {
-                                      if (worldship==true || text.isEmpty) {
+                                      if (worldship==true && text.isEmpty) {
                                         return 'Shipping duration is empty';
                                       }
                                       return null;
@@ -11215,7 +11215,7 @@ backgroundColor: kblue,
                                     ),
                                     textAlign: TextAlign.center,
                                     validator: (text) {
-                                      if (worldship==true || text.isEmpty) {
+                                      if (worldship==true && text.isEmpty) {
                                         return 'Shipping duration is empty';
                                       }
                                       return null;
@@ -11251,7 +11251,7 @@ backgroundColor: kblue,
                             ],
                           ):Container(),
 
-                          worldship && !freeworldship ?   Padding(
+                          worldship && freeworldship == false ?   Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: TextFormField(
                               style:TextStyle(color: kText),
@@ -11268,7 +11268,7 @@ backgroundColor: kblue,
                               ),
                               textAlign: TextAlign.center,
                               validator: (text) {
-                                if ( freeworldship==false || text.isEmpty ) {
+                                if ( freeworldship==false && text.isEmpty ) {
                                   return 'Shipping cost is empty';
                                 }
                                 return null;
@@ -11688,9 +11688,9 @@ keyboardType:TextInputType.number,
               "Gender": dropdownValue,
               "details": detailsController.text,
               "productname": productnameController.text,
-              "usd": inrtousd.toString(),
+              "usd": inrtousd,
 
-              "inr": userprice.toString(),
+              "inr": userprice,
 
               "timestamp": timestamp,
               "composition": compositionController.text,
@@ -11781,7 +11781,7 @@ keyboardType:TextInputType.number,
               "custom102":  int.tryParse(customController102.text) ??0,
 
               "custom11inr": userprice1.toString() ?? "0.0",
-              "custom21usd": inrtousd2.toString() ?? "0.0",
+              "custom21usd": inrtousd2 ?? 0.0,
               "custom21inr": userprice2.toString() ?? "0.0",
               "custom31usd": inrtousd3.toString() ?? "0.0",
               "custom31inr": userprice3.toString() ?? "0.0",
@@ -11803,7 +11803,7 @@ keyboardType:TextInputType.number,
               "shipcostinr": userprice11.toString() ?? "0.0",
                 "shipcostinternusd": inrtousd12.toString() ?? "0.0",
               "shipcostinterninr": userprice12.toString() ?? "0.0",
-"round": int.tryParse(rounded) ?? 0,
+"round": rounded ?? 0.0,
 
               "processfrom":  int.tryParse(durationfromp.text) ?? 0,
               "processto":  int.tryParse(durationto.text) ?? 0,

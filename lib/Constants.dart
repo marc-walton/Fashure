@@ -51,7 +51,7 @@ String artQuery = "art0";
  );
 
 const Color kSecondaryColor = Color(0xFFFFFFFF);
- Color kIcon = Colors.grey[400];
+ Color kIcon = Colors.grey[400]; Color kButton = Colors.pink.shade50;
 const Color kSubtitle = Color(0xFFABB6B8);
 const Color kUser = Color(0xFFAECCCC);
 const Color kText = Color(0xff440a67);

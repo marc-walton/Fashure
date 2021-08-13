@@ -448,11 +448,70 @@ All(){
                           ),
                           FloatingActionButton.extended(onPressed: (){
                             duties? setState((){
-                              priceQuery = priceQuery +  "D";
+                              priceQuery = priceQuery.replaceAll("D","");
+                              AQuery =AQuery.replaceAll("D","");
+                              BQuery =BQuery.replaceAll("D","");
+                              CQuery =CQuery.replaceAll("D","");
+                              DQuery =DQuery.replaceAll("D","");
+                              EQuery =EQuery.replaceAll("D","");
+                              FQuery =FQuery.replaceAll("D","");
+                              GQuery =GQuery.replaceAll("D","");
+                              HQuery =HQuery.replaceAll("D","");
+                              IQuery =IQuery.replaceAll("D","");
+                              JQuery =JQuery.replaceAll("D","");
+                              KQuery =KQuery.replaceAll("D","");
+                              LQuery =LQuery.replaceAll("D","");
+                              MQuery =MQuery.replaceAll("D","");
+                              NQuery =NQuery.replaceAll("D","");
+                              OQuery =OQuery.replaceAll("D","");
+                              PQuery =PQuery.replaceAll("D","");
+                              QQuery =QQuery.replaceAll("D","");
+                              RQuery =RQuery.replaceAll("D","");
+                              SQuery =SQuery.replaceAll("D","");
+                              priceQuery = priceQuery + "D";
+   AQuery = AQuery + "D";
+ BQuery = BQuery + "D";
+ CQuery = CQuery + "D";
+ DQuery = DQuery + "D";
+ EQuery = EQuery + "D";
+ FQuery = FQuery + "D";
+ GQuery = GQuery + "D";
+ HQuery = HQuery + "D";
+ IQuery = IQuery + "D";
+ JQuery = JQuery + "D";
+ KQuery = KQuery + "D";
+ LQuery = LQuery + "D";
+ MQuery = MQuery + "D";
+ NQuery = NQuery + "D";
+ OQuery = OQuery + "D";
+ PQuery = PQuery + "D";
+ QQuery = QQuery + "D";
+ RQuery = RQuery + "D";
+ SQuery = SQuery + "D";
+
 
                             }):
                             setState((){
-                              priceQuery = priceQuery;
+                              priceQuery = priceQuery.replaceAll("D","");
+                              AQuery =AQuery.replaceAll("D","");
+                              BQuery =BQuery.replaceAll("D","");
+                              CQuery =CQuery.replaceAll("D","");
+                              DQuery =DQuery.replaceAll("D","");
+                              EQuery =EQuery.replaceAll("D","");
+                              FQuery =FQuery.replaceAll("D","");
+                              GQuery =GQuery.replaceAll("D","");
+                              HQuery =HQuery.replaceAll("D","");
+                              IQuery =IQuery.replaceAll("D","");
+                              JQuery =JQuery.replaceAll("D","");
+                              KQuery =KQuery.replaceAll("D","");
+                              LQuery =LQuery.replaceAll("D","");
+                               MQuery =MQuery.replaceAll("D","");
+                               NQuery =NQuery.replaceAll("D","");
+                               OQuery =OQuery.replaceAll("D","");
+                               PQuery =PQuery.replaceAll("D","");
+                               QQuery =QQuery.replaceAll("D","");
+                               RQuery =RQuery.replaceAll("D","");
+                               SQuery =SQuery.replaceAll("D","");
 
                             });
 
@@ -562,7 +621,12 @@ priceQuery == "high"?
           .orderBy('timestamp',descending: true)
            .where('Gender',isEqualTo: 'Men')
 
-         :priceQuery == "lowD"?
+         :priceQuery == "0D"?
+       FirebaseFirestore.instance.collectionGroup('userProducts')
+          .orderBy('timestamp',descending: true)
+           .where('Gender',isEqualTo: 'Men')
+.where('country',isEqualTo: '${currentUser.country}')
+:priceQuery == "lowD"?
        FirebaseFirestore.instance.collectionGroup('userProducts')
       .orderBy('round',descending: false)
           .orderBy('timestamp',descending: true)
@@ -698,11 +762,10 @@ class _CItemState extends State<CItem> {
   final Prod prod;
   String products;
   int client;
-  var price;
- var inr;
-  var usd;
+  var price = 0.0;
 
-  var currencyFormatter = NumberFormat('#,##0.00', 'FR');
+
+  var currencyFormatter = NumberFormat('#,##0.00', '${currentUser.countryISO}');
 
   int followerCount = 0;
   final String currentUserId = currentUser?.id;
@@ -719,30 +782,24 @@ class _CItemState extends State<CItem> {
 
     if(currentUser.currencyISO == "USD") {
   setState(() {
-    var c1 = prod.usd;
-    price =double.tryParse(c1) ;
+
+    price =prod.usd ;
 
   }); }
   else {
   var resultUSD1 = await Currency.getConversion(
-      from: 'USD', to: '${currentUser.currencyISO}', amount: prod.usd);
+      from: 'USD', to: '${currentUser.currencyISO}', amount: prod.usd.toString());
   setState(() {
-    var c1 = resultUSD1.rate;
-price = double.tryParse(c1);
-
+    price = resultUSD1.rate;
   });
 }
-  setState(() {
-    inr  = double.tryParse(  prod.inr);
-    print("xcvbsds$inr");
-  });
+
 
   }
 
   @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);
-print(currencyFormatter.format(double.tryParse(prod.inr)));
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
@@ -765,10 +822,10 @@ print(currencyFormatter.format(double.tryParse(prod.inr)));
                     fontSize: SizeConfig.safeBlockHorizontal * 5,
                     fontWeight: FontWeight.bold),),
                 subtitle:    currentUser.country == prod.country?
-    Text( " ${ currencyFormatter.format(inr)}",style: TextStyle(color: kText,
+    Text( " ${currentUser.currencysym} ${ currencyFormatter.format(prod.inr)}",style: TextStyle(color: kText,
     fontSize: SizeConfig.safeBlockHorizontal * 4,
     fontWeight: FontWeight.bold)) :
-                Text( " ${currencyFormatter.format(price)}",style: TextStyle(color: kText,
+                Text( " ${currentUser.currencysym} ${currencyFormatter.format(price)}",style: TextStyle(color: kText,
                     fontSize: SizeConfig.safeBlockHorizontal * 4,
                     fontWeight: FontWeight.bold)),
 

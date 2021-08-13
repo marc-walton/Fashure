@@ -5,6 +5,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_currencies_tracker/currency.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:fashow/user.dart';
 import 'package:fashow/progress.dart';
@@ -65,6 +66,16 @@ class _EditProfileState extends State<EditProfile> {
   bool isCheckedChoreographer = false;
   bool isCheckedStylist = false;
   bool isCheckedBlogger = false;
+  bool selectedDesigner = false;
+  bool selectedArtisan = false;
+  bool selectedIllustrator = false;
+  bool selectedPhotographer = false;
+  bool selectedModel = false;
+  bool selectedMakeup = false;
+  bool selectedHair = false;
+  bool selectedChoreographer = false;
+  bool selectedStylist = false;
+  bool selectedBlogger = false;
   bool CheckedDesigner ;
   bool CheckedIllustrator ;
   bool CheckedPhotographer ;
@@ -76,12 +87,13 @@ class _EditProfileState extends State<EditProfile> {
   bool CheckedBlogger ;
   bool CheckedArtisan ;
 
+
   File file;
   bool isUploading = false;
   bool _inProcess = false;
   String photoId = Uuid().v4();
 
-  var resultHolder = 'Checkbox is UN-CHECKED';
+  var USD;
   @override
   void initState() {
     super.initState();
@@ -169,78 +181,170 @@ class _EditProfileState extends State<EditProfile> {
           );
         });
   }
-  checkbox()
+ //  checkbox()
+ //  async {
+ //    FirebaseFirestore.instance.collection('users')
+ //        .where('id', isEqualTo: currentUser.id)
+ //
+ //        .snapshots()
+ //        .listen((snapshot){  snapshot.docs.forEach((doc) {
+ //      setState(() {
+ //
+ //        CheckedIllustrator = currentUser.illustrator ?? false;
+ //        CheckedModel =  currentUser.model ?? false;
+ //        CheckedMakeup =  currentUser.makeup ?? false;
+ //        CheckedHair =  currentUser.hair ?? false;
+ //        CheckedChoreographer =  currentUser.choreographer ?? false;
+ //        CheckedPhotographer =  currentUser.photographer ?? false;
+ //        CheckedStylist =  currentUser.stylist ?? false;
+ //        CheckedDesigner =  currentUser.designer ?? false;
+ //        CheckedBlogger =  currentUser.blogger ?? false;
+ // CheckedArtisan =  currentUser.artisans ?? false;
+ // //
+ // //        CheckedIllustrator = doc.data()['illustrator'] ?? false;
+ // //        CheckedModel = doc.data()['model'] ?? false;
+ // //        CheckedMakeup = doc.data()['makeup'] ?? false;
+ // //        CheckedHair = doc.data()['hair'] ?? false;
+ // //        CheckedChoreographer = doc.data()['choreographer'] ?? false;
+ // //        CheckedPhotographer = doc.data()['photographer'] ?? false;
+ // //        CheckedStylist = doc.data()['stylist'] ?? false;
+ // //        CheckedDesigner = doc.data()['designer'] ?? false;
+ // //        CheckedBlogger = doc.data()['blogger'] ?? false;
+ // // CheckedArtisan = doc.data()['artisan'] ?? false;
+ //
+ //        if(CheckedDesigner==true){
+ //          setState(() {
+ //            isCheckedDesigner = true;
+ //          });
+ //        }
+ //        else if(CheckedIllustrator==true){
+ //          setState(() {
+ //            isCheckedIllustrator = true;
+ //          });
+ //        }  else if(CheckedArtisan==true){
+ //          setState(() {
+ //            CheckedArtisan = true;
+ //          });
+ //        }
+ //        else if(CheckedPhotographer==true){
+ //          setState(() {
+ //            isCheckedPhotographer = true;
+ //          });
+ //        }
+ //        else if(CheckedModel==true){
+ //          setState(() {
+ //            isCheckedModel = true;
+ //          });
+ //        }
+ //        else if(CheckedMakeup==true){
+ //          setState(() {
+ //            isCheckedMakeup = true;
+ //          });
+ //        }
+ //        else if(CheckedHair==true){
+ //          setState(() {
+ //            isCheckedHair = true;
+ //          });
+ //        }
+ //        else if(CheckedChoreographer==true){
+ //          setState(() {
+ //            isCheckedChoreographer = true;
+ //          });
+ //        }
+ //        else if(CheckedStylist==true){
+ //          setState(() {
+ //            isCheckedStylist = true;
+ //          });
+ //        }
+ //        else if(CheckedBlogger==true){
+ //          setState(() {
+ //            isCheckedBlogger = true;
+ //          });
+ //        }
+ //
+ //      });
+ //    }); });
+ //
+ //
+ //
+ //  }
+ checkbox()
   async {
-    FirebaseFirestore.instance.collection('users')
-        .where('id', isEqualTo: currentUser.id)
+    setState(() {
 
-        .snapshots()
-        .listen((snapshot){  snapshot.docs.forEach((doc) {
-      setState(() {
+      CheckedIllustrator = currentUser.illustrator ?? false;
+      CheckedModel =  currentUser.model ?? false;
+      CheckedMakeup =  currentUser.makeup ?? false;
+      CheckedHair =  currentUser.hair ?? false;
+      CheckedChoreographer =  currentUser.choreographer ?? false;
+      CheckedPhotographer =  currentUser.photographer ?? false;
+      CheckedStylist =  currentUser.stylist ?? false;
+      CheckedDesigner =  currentUser.designer ?? false;
+      CheckedBlogger =  currentUser.blogger ?? false;
+      CheckedArtisan =  currentUser.artisans ?? false;
+      //
+      //        CheckedIllustrator = doc.data()['illustrator'] ?? false;
+      //        CheckedModel = doc.data()['model'] ?? false;
+      //        CheckedMakeup = doc.data()['makeup'] ?? false;
+      //        CheckedHair = doc.data()['hair'] ?? false;
+      //        CheckedChoreographer = doc.data()['choreographer'] ?? false;
+      //        CheckedPhotographer = doc.data()['photographer'] ?? false;
+      //        CheckedStylist = doc.data()['stylist'] ?? false;
+      //        CheckedDesigner = doc.data()['designer'] ?? false;
+      //        CheckedBlogger = doc.data()['blogger'] ?? false;
+      // CheckedArtisan = doc.data()['artisan'] ?? false;
 
-        CheckedIllustrator = doc.data()['illustrator'] ?? false;
-        CheckedModel = doc.data()['model'] ?? false;
-        CheckedMakeup = doc.data()['makeup'] ?? false;
-        CheckedHair = doc.data()['hair'] ?? false;
-        CheckedChoreographer = doc.data()['choreographer'] ?? false;
-        CheckedPhotographer = doc.data()['photographer'] ?? false;
-        CheckedStylist = doc.data()['stylist'] ?? false;
-        CheckedDesigner = doc.data()['designer'] ?? false;
-        CheckedBlogger = doc.data()['blogger'] ?? false;
- CheckedArtisan = doc.data()['artisan'] ?? false;
+      if(CheckedDesigner==true){
+        setState(() {
+          isCheckedDesigner = true;
+        });
+      }
+      else if(CheckedIllustrator==true){
+        setState(() {
+          isCheckedIllustrator = true;
+        });
+      }  else if(CheckedArtisan==true){
+        setState(() {
+          CheckedArtisan = true;
+        });
+      }
+      else if(CheckedPhotographer==true){
+        setState(() {
+          isCheckedPhotographer = true;
+        });
+      }
+      else if(CheckedModel==true){
+        setState(() {
+          isCheckedModel = true;
+        });
+      }
+      else if(CheckedMakeup==true){
+        setState(() {
+          isCheckedMakeup = true;
+        });
+      }
+      else if(CheckedHair==true){
+        setState(() {
+          isCheckedHair = true;
+        });
+      }
+      else if(CheckedChoreographer==true){
+        setState(() {
+          isCheckedChoreographer = true;
+        });
+      }
+      else if(CheckedStylist==true){
+        setState(() {
+          isCheckedStylist = true;
+        });
+      }
+      else if(CheckedBlogger==true){
+        setState(() {
+          isCheckedBlogger = true;
+        });
+      }
 
-        if(CheckedDesigner==true){
-          setState(() {
-            isCheckedDesigner = true;
-          });
-        }
-        else if(CheckedIllustrator==true){
-          setState(() {
-            isCheckedIllustrator = true;
-          });
-        }  else if(CheckedArtisan==true){
-          setState(() {
-            CheckedArtisan = true;
-          });
-        }
-        else if(CheckedPhotographer==true){
-          setState(() {
-            isCheckedPhotographer = true;
-          });
-        }
-        else if(CheckedModel==true){
-          setState(() {
-            isCheckedModel = true;
-          });
-        }
-        else if(CheckedMakeup==true){
-          setState(() {
-            isCheckedMakeup = true;
-          });
-        }
-        else if(CheckedHair==true){
-          setState(() {
-            isCheckedHair = true;
-          });
-        }
-        else if(CheckedChoreographer==true){
-          setState(() {
-            isCheckedChoreographer = true;
-          });
-        }
-        else if(CheckedStylist==true){
-          setState(() {
-            isCheckedStylist = true;
-          });
-        }
-        else if(CheckedBlogger==true){
-          setState(() {
-            isCheckedBlogger = true;
-          });
-        }
-
-      });
-    }); });
+    });
 
 
 
@@ -300,9 +404,6 @@ class _EditProfileState extends State<EditProfile> {
         isCheckedDesigner = true;
 
       });
-      usersRef.doc(widget.currentUserId).update({
-        'designer':true
-      });
 
     }
     else
@@ -311,9 +412,6 @@ class _EditProfileState extends State<EditProfile> {
       setState(() {
         isCheckedDesigner = false;
 
-      });
-      usersRef.doc(widget.currentUserId).update({
-        'designer':false
       });
     }
   }
@@ -326,9 +424,6 @@ class _EditProfileState extends State<EditProfile> {
         isCheckedIllustrator = true;
 
       });
-      usersRef.doc(widget.currentUserId).update({
-        'illustrator':true
-      });
 
     }
     else
@@ -337,9 +432,6 @@ class _EditProfileState extends State<EditProfile> {
       setState(() {
         isCheckedIllustrator = false;
 
-      });
-      usersRef.doc(widget.currentUserId).update({
-        'illustrator':false
       });
     }
   }
@@ -352,9 +444,6 @@ class _EditProfileState extends State<EditProfile> {
         isCheckedPhotographer = true;
 
       });
-      usersRef.doc(widget.currentUserId).update({
-        'photographer':true
-      });
 
     }
     else
@@ -363,9 +452,6 @@ class _EditProfileState extends State<EditProfile> {
       setState(() {
         isCheckedPhotographer = false;
 
-      });
-      usersRef.doc(widget.currentUserId).update({
-        'photographer':false
       });
     }
   }
@@ -378,10 +464,6 @@ class _EditProfileState extends State<EditProfile> {
         isCheckedModel = true;
 
       });
-      usersRef.doc(widget.currentUserId).update({
-        'model':true
-
-      });
 
     }
     else
@@ -390,9 +472,6 @@ class _EditProfileState extends State<EditProfile> {
       setState(() {
         isCheckedModel = false;
 
-      });
-      usersRef.doc(widget.currentUserId).update({
-        'model':false
       });
     }
   }
@@ -405,9 +484,6 @@ class _EditProfileState extends State<EditProfile> {
         isCheckedMakeup = true;
 
       });
-      usersRef.doc(widget.currentUserId).update({
-        'makeup':true
-      });
 
     }
     else
@@ -416,9 +492,6 @@ class _EditProfileState extends State<EditProfile> {
       setState(() {
         isCheckedMakeup = false;
 
-      });
-      usersRef.doc(widget.currentUserId).update({
-        'makeup':false
       });
     }
   }
@@ -431,9 +504,6 @@ class _EditProfileState extends State<EditProfile> {
         isCheckedHair = true;
 
       });
-      usersRef.doc(widget.currentUserId).update({
-        'hair':true
-      });
 
     }
     else
@@ -442,9 +512,6 @@ class _EditProfileState extends State<EditProfile> {
       setState(() {
         isCheckedHair = false;
 
-      });
-      usersRef.doc(widget.currentUserId).update({
-        'hair':false
       });
     }
   }
@@ -457,9 +524,6 @@ class _EditProfileState extends State<EditProfile> {
         isCheckedChoreographer = true;
 
       });
-      usersRef.doc(widget.currentUserId).update({
-        'choreographer':true
-      });
 
     }
     else
@@ -468,9 +532,6 @@ class _EditProfileState extends State<EditProfile> {
       setState(() {
         isCheckedChoreographer = false;
 
-      });
-      usersRef.doc(widget.currentUserId).update({
-        'choreographer':false
       });
     }
   }
@@ -483,9 +544,6 @@ class _EditProfileState extends State<EditProfile> {
         isCheckedStylist = true;
 
       });
-      usersRef.doc(widget.currentUserId).update({
-        'stylist':true
-      });
 
     }
     else
@@ -494,9 +552,6 @@ class _EditProfileState extends State<EditProfile> {
       setState(() {
         isCheckedStylist = false;
 
-      });
-      usersRef.doc(widget.currentUserId).update({
-        'stylist':false
       });
     }
   }
@@ -509,9 +564,6 @@ class _EditProfileState extends State<EditProfile> {
         isCheckedBlogger = true;
 
       });
-      usersRef.doc(widget.currentUserId).update({
-        'blogger':true
-      });
 
     }
     else
@@ -520,9 +572,6 @@ class _EditProfileState extends State<EditProfile> {
       setState(() {
         isCheckedBlogger = false;
 
-      });
-      usersRef.doc(widget.currentUserId).update({
-        'blogger':false
       });
     }
   }
@@ -535,9 +584,6 @@ void toggleArtisan(bool value) {
         isCheckedArtisan = true;
 
       });
-      usersRef.doc(widget.currentUserId).update({
-        'artisan':true
-      });
 
     }
     else
@@ -546,9 +592,6 @@ void toggleArtisan(bool value) {
       setState(() {
         isCheckedArtisan = false;
 
-      });
-      usersRef.doc(widget.currentUserId).update({
-        'artisan':false
       });
     }
   }
@@ -656,6 +699,24 @@ void toggleArtisan(bool value) {
             )),
             (_) => false );
     // Navigator.push(context, MaterialPageRoute(builder: (context) => Homepage()));
+  }
+  conversion({String price})async{
+
+    if(currentUser.currencyISO == "USD") {
+      setState(() {
+
+        USD =price;
+
+      }); }
+    else {
+      var resultUSD1 = await Currency.getConversion(
+          from: 'USD', to: '${currentUser.currencyISO}', amount: price);
+      setState(() {
+        USD = resultUSD1.rate;
+      });
+    }
+
+
   }
 
   @override
@@ -784,26 +845,34 @@ void toggleArtisan(bool value) {
 
                                             child: Padding(
                                               padding: const EdgeInsets.all(8.0),
-                                              child:  GFButton(
-                                                color: kblue,
+                                              child:  ElevatedButton(
+                                                style: ElevatedButton.styleFrom(
+                                                   textStyle: TextStyle(color: Colors.black) ,
+                                                  onPrimary:kButton,  primary:kButton, // foreground
+                                                ),
+                                                child:selectedDesigner?
+                                                CircularProgressIndicator(color: Colors.black,):
+                                                Text("Save", style: TextStyle(color: Colors.black) ),
                                                 onPressed: (){
-                                                  var rounded;
-                                                  var price;
-                                                  setState(() {
-                                                     price = int.tryParse(designerController.text)?? 0;
-                                                    // inrtousd = resultUSD.rate;
-                                                    rounded = price.round();
+                                                 setState((){selectedDesigner=true;});
+                                                  conversion(price:designerController.text);
 
-
-                                                  });
-                                                  usersRef.doc(widget.currentUserId).update({
+                                                 isCheckedDesigner?   usersRef.doc(widget.currentUserId).update({
                                                     'designerAvg':designerController.text?? "Contact for price",
-                                                    "designerrounded":int.tryParse(rounded)?? 0,
+                                                    "usd":USD,
+                                                    'designer':true
+                                                  }): usersRef.doc(widget.currentUserId).update({
+                                                    'designerAvg':designerController.text?? "Contact for price",
+                                                    "usd":USD,
+                                                    'designer':false
                                                   });
 
+
+                                                 setState((){selectedDesigner=false;});
+                                                 Fluttertoast.showToast(
+                                                     msg: "Saved! ", timeInSecForIos: 4);
 
                                                 },
-                                                text: "Save",
                                               ),
                                             ),
                                           ),
@@ -852,26 +921,34 @@ void toggleArtisan(bool value) {
 
                                             child: Padding(
                                               padding: const EdgeInsets.all(8.0),
-                                              child:  GFButton(
-                                                color: kblue,
+                                              child:  ElevatedButton(
+                                                style: ElevatedButton.styleFrom(
+                                                  textStyle: TextStyle(color: Colors.black) ,
+                                                  onPrimary:kButton,  primary:kButton, // foreground
+                                                ),
+                                                child:selectedArtisan?
+                                                CircularProgressIndicator(color: Colors.black,):
+                                                Text("Save", style: TextStyle(color: Colors.black) ),
                                                 onPressed: (){
-                                                  var rounded;
-                                                  var price;
-                                                  setState(() {
-                                                    price = int.tryParse(artisanController.text)?? 0;
-                                                    // inrtousd = resultUSD.rate;
-                                                    rounded = price.round();
+                                                  setState((){selectedArtisan=true;});
+                                                  conversion(price:artisanController.text);
 
-
-                                                  });
-                                                  usersRef.doc(widget.currentUserId).update({
+                                                  isCheckedArtisan?   usersRef.doc(widget.currentUserId).update({
                                                     'artisanAvg':artisanController.text?? "Contact for price",
-                                                    "artisanrounded":int.tryParse(rounded)?? 0,
+                                                    "usd":USD,
+                                                    'artisan':true
+                                                  }): usersRef.doc(widget.currentUserId).update({
+                                                    'artisanAvg':artisanController.text?? "Contact for price",
+                                                    "usd":USD,
+                                                    'artisan':false
                                                   });
 
+
+                                                  setState((){selectedArtisan=false;});
+                                                  Fluttertoast.showToast(
+                                                      msg: "Saved! ", timeInSecForIos: 4);
 
                                                 },
-                                                text: "Save",
                                               ),
                                             ),
                                           ),
@@ -918,29 +995,38 @@ void toggleArtisan(bool value) {
 
                                             child: Padding(
                                               padding: const EdgeInsets.all(8.0),
-                                              child:  GFButton(
-                                                color: kblue,
+                                              child:  ElevatedButton(
+                                                style: ElevatedButton.styleFrom(
+                                                  textStyle: TextStyle(color: Colors.black) ,
+                                                  onPrimary:kButton,  primary:kButton, // foreground
+                                                ),
+                                                child:selectedStylist?
+                                                CircularProgressIndicator(color: Colors.black,):
+                                                Text("Save", style: TextStyle(color: Colors.black) ),
                                                 onPressed: (){
-                                                  var rounded;
-                                                  var price;
-                                                  setState(() {
-                                                    price = int.tryParse(stylController.text)?? 0;
-                                                    // inrtousd = resultUSD.rate;
-                                                    rounded = price.round();
+                                                  setState((){selectedStylist=true;});
+                                                  conversion(price:stylController.text);
 
-
-                                                  });
-                                                  usersRef.doc(widget.currentUserId).update({
+                                                  isCheckedStylist?   usersRef.doc(widget.currentUserId).update({
                                                     'stylistAvg':stylController.text?? "Contact for price",
-                                                    "stylistrounded":int.tryParse(rounded)?? 0,
+                                                    "usd":USD,
+                                                    'stylist':true
+                                                  }): usersRef.doc(widget.currentUserId).update({
+                                                    'stylistAvg':stylController.text?? "Contact for price",
+                                                    "usd":USD,
+                                                    'stylist':false
                                                   });
 
+
+                                                  setState((){selectedStylist=false;});
+                                                  Fluttertoast.showToast(
+                                                      msg: "Saved! ", timeInSecForIos: 4);
 
                                                 },
-                                                text: "Save",
                                               ),
                                             ),
                                           ),
+
 
                                         ],
                                       ):Container(),
@@ -983,29 +1069,38 @@ void toggleArtisan(bool value) {
 
                                             child: Padding(
                                               padding: const EdgeInsets.all(8.0),
-                                              child:  GFButton(
-                                                color: kblue,
+                                              child:  ElevatedButton(
+                                                style: ElevatedButton.styleFrom(
+                                                  textStyle: TextStyle(color: Colors.black) ,
+                                                  onPrimary:kButton,  primary:kButton, // foreground
+                                                ),
+                                                child:selectedBlogger?
+                                                CircularProgressIndicator(color: Colors.black,):
+                                                Text("Save", style: TextStyle(color: Colors.black) ),
                                                 onPressed: (){
-                                                  var rounded;
-                                                  var price;
-                                                  setState(() {
-                                                    price = int.tryParse(blogController.text)?? 0;
-                                                    // inrtousd = resultUSD.rate;
-                                                    rounded = price.round();
+                                                  setState((){selectedBlogger=true;});
+                                                  conversion(price:blogController.text);
 
-
-                                                  });
-                                                  usersRef.doc(widget.currentUserId).update({
+                                                  isCheckedBlogger?   usersRef.doc(widget.currentUserId).update({
                                                     'bloggerAvg':blogController.text?? "Contact for price",
-                                                    "bloggerrounded":int.tryParse(rounded)?? 0,
+                                                    "usd":USD,
+                                                    'blogger':true
+                                                  }): usersRef.doc(widget.currentUserId).update({
+                                                    'bloggerAvg':blogController.text?? "Contact for price",
+                                                    "usd":USD,
+                                                    'blogger':false
                                                   });
 
+
+                                                  setState((){selectedBlogger=false;});
+                                                  Fluttertoast.showToast(
+                                                      msg: "Saved! ", timeInSecForIos: 4);
 
                                                 },
-                                                text: "Save",
                                               ),
                                             ),
                                           ),
+
 
                                         ],
                                       ):Container(),
@@ -1048,29 +1143,38 @@ void toggleArtisan(bool value) {
 
                                             child: Padding(
                                               padding: const EdgeInsets.all(8.0),
-                                              child:  GFButton(
-                                                color: kblue,
+                                              child:  ElevatedButton(
+                                                style: ElevatedButton.styleFrom(
+                                                  textStyle: TextStyle(color: Colors.black) ,
+                                                  onPrimary:kButton,  primary:kButton, // foreground
+                                                ),
+                                                child:selectedIllustrator?
+                                                CircularProgressIndicator(color: Colors.black,):
+                                                Text("Save", style: TextStyle(color: Colors.black) ),
                                                 onPressed: (){
-                                                  var rounded;
-                                                  var price;
-                                                  setState(() {
-                                                    price = int.tryParse(illustController.text)?? 0;
-                                                    // inrtousd = resultUSD.rate;
-                                                    rounded = price.round();
+                                                  setState((){selectedIllustrator=true;});
+                                                  conversion(price:illustController.text);
 
-
-                                                  });
-                                                  usersRef.doc(widget.currentUserId).update({
+                                                  isCheckedIllustrator?   usersRef.doc(widget.currentUserId).update({
                                                     'illustratorAvg':illustController.text?? "Contact for price",
-                                                    "illustratorrounded":int.tryParse(rounded)?? 0,
+                                                    "usd":USD,
+                                                    'illustrator':true
+                                                  }): usersRef.doc(widget.currentUserId).update({
+                                                    'illustratorAvg':illustController.text?? "Contact for price",
+                                                    "usd":USD,
+                                                    'illustrator':false
                                                   });
 
+
+                                                  setState((){selectedIllustrator=false;});
+                                                  Fluttertoast.showToast(
+                                                      msg: "Saved! ", timeInSecForIos: 4);
 
                                                 },
-                                                text: "Save",
                                               ),
                                             ),
                                           ),
+
 
                                         ],
                                       ):Container(),
@@ -1108,34 +1212,42 @@ void toggleArtisan(bool value) {
                                               ),
                                             ),
                                           ),
-
                                           Expanded(
 
                                             child: Padding(
                                               padding: const EdgeInsets.all(8.0),
-                                              child:  GFButton(
-                                                color: kblue,
+                                              child:  ElevatedButton(
+                                                style: ElevatedButton.styleFrom(
+                                                  textStyle: TextStyle(color: Colors.black) ,
+                                                  onPrimary:kButton,  primary:kButton, // foreground
+                                                ),
+                                                child:selectedPhotographer?
+                                                CircularProgressIndicator(color: Colors.black,):
+                                                Text("Save", style: TextStyle(color: Colors.black) ),
                                                 onPressed: (){
-                                                  var rounded;
-                                                  var price;
-                                                  setState(() {
-                                                    price = int.tryParse(photoController.text)?? 0;
-                                                    // inrtousd = resultUSD.rate;
-                                                    rounded = price.round();
+                                                  setState((){selectedPhotographer=true;});
+                                                  conversion(price:photoController.text);
 
-
-                                                  });
-                                                  usersRef.doc(widget.currentUserId).update({
+                                                  isCheckedPhotographer?   usersRef.doc(widget.currentUserId).update({
                                                     'photographerAvg':photoController.text?? "Contact for price",
-                                                    "photographerrounded":int.tryParse(rounded)?? 0,
+                                                    "usd":USD,
+                                                    'photographer':true
+                                                  }): usersRef.doc(widget.currentUserId).update({
+                                                    'photographerAvg':photoController.text?? "Contact for price",
+                                                    "usd":USD,
+                                                    'photographer':false
                                                   });
 
+
+                                                  setState((){selectedPhotographer=false;});
+                                                  Fluttertoast.showToast(
+                                                      msg: "Saved! ", timeInSecForIos: 4);
 
                                                 },
-                                                text: "Save",
                                               ),
                                             ),
                                           ),
+
 
                                         ],
                                       ):Container(),
@@ -1178,29 +1290,38 @@ void toggleArtisan(bool value) {
 
                                             child: Padding(
                                               padding: const EdgeInsets.all(8.0),
-                                              child:  GFButton(
-                                                color: kblue,
+                                              child:  ElevatedButton(
+                                                style: ElevatedButton.styleFrom(
+                                                  textStyle: TextStyle(color: Colors.black) ,
+                                                  onPrimary:kButton,  primary:kButton, // foreground
+                                                ),
+                                                child:selectedModel?
+                                                CircularProgressIndicator(color: Colors.black,):
+                                                Text("Save", style: TextStyle(color: Colors.black) ),
                                                 onPressed: (){
-                                                  var rounded;
-                                                  var price;
-                                                  setState(() {
-                                                    price = int.tryParse(modelController.text)?? 0;
-                                                    // inrtousd = resultUSD.rate;
-                                                    rounded = price.round();
+                                                  setState((){selectedModel=true;});
+                                                  conversion(price:modelController.text);
 
-
-                                                  });
-                                                  usersRef.doc(widget.currentUserId).update({
+                                                  isCheckedModel?   usersRef.doc(widget.currentUserId).update({
                                                     'modelAvg':modelController.text?? "Contact for price",
-                                                    "modelrounded":int.tryParse(rounded)?? 0,
+                                                    "usd":USD,
+                                                    'model':true
+                                                  }): usersRef.doc(widget.currentUserId).update({
+                                                    'modelAvg':modelController.text?? "Contact for price",
+                                                    "usd":USD,
+                                                    'model':false
                                                   });
 
+
+                                                  setState((){selectedModel=false;});
+                                                  Fluttertoast.showToast(
+                                                      msg: "Saved! ", timeInSecForIos: 4);
 
                                                 },
-                                                text: "Save",
                                               ),
                                             ),
                                           ),
+
 
                                         ],
                                       ):Container(),
@@ -1243,26 +1364,34 @@ void toggleArtisan(bool value) {
 
                                             child: Padding(
                                               padding: const EdgeInsets.all(8.0),
-                                              child:  GFButton(
-                                                color: kblue,
+                                              child:  ElevatedButton(
+                                                style: ElevatedButton.styleFrom(
+                                                  textStyle: TextStyle(color: Colors.black) ,
+                                                  onPrimary:kButton,  primary:kButton, // foreground
+                                                ),
+                                                child:selectedMakeup?
+                                                CircularProgressIndicator(color: Colors.black,):
+                                                Text("Save", style: TextStyle(color: Colors.black) ),
                                                 onPressed: (){
-                                                  var rounded;
-                                                  var price;
-                                                  setState(() {
-                                                    price = int.tryParse(makeController.text)?? 0;
-                                                    // inrtousd = resultUSD.rate;
-                                                    rounded = price.round();
+                                                  setState((){selectedMakeup=true;});
+                                                  conversion(price:makeController.text);
 
-
-                                                  });
-                                                  usersRef.doc(widget.currentUserId).update({
+                                                  isCheckedMakeup?   usersRef.doc(widget.currentUserId).update({
                                                     'makeupAvg':makeController.text?? "Contact for price",
-                                                    "makeuprounded":int.tryParse(rounded)?? 0,
+                                                    "usd":USD,
+                                                    'makeup':true
+                                                  }): usersRef.doc(widget.currentUserId).update({
+                                                    'makeupAvg':makeController.text?? "Contact for price",
+                                                    "usd":USD,
+                                                    'makeup':false
                                                   });
 
+
+                                                  setState((){selectedMakeup=false;});
+                                                  Fluttertoast.showToast(
+                                                      msg: "Saved! ", timeInSecForIos: 4);
 
                                                 },
-                                                text: "Save",
                                               ),
                                             ),
                                           ),
@@ -1303,34 +1432,42 @@ void toggleArtisan(bool value) {
                                               ),
                                             ),
                                           ),
-
                                           Expanded(
 
                                             child: Padding(
                                               padding: const EdgeInsets.all(8.0),
-                                              child:  GFButton(
-                                                color: kblue,
+                                              child:  ElevatedButton(
+                                                style: ElevatedButton.styleFrom(
+                                                  textStyle: TextStyle(color: Colors.black) ,
+                                                  onPrimary:kButton,  primary:kButton, // foreground
+                                                ),
+                                                child:selectedHair?
+                                                CircularProgressIndicator(color: Colors.black,):
+                                                Text("Save", style: TextStyle(color: Colors.black) ),
                                                 onPressed: (){
-                                                  var rounded;
-                                                  var price;
-                                                  setState(() {
-                                                    price = int.tryParse(hairController.text)?? 0;
-                                                    // inrtousd = resultUSD.rate;
-                                                    rounded = price.round();
+                                                  setState((){selectedHair=true;});
+                                                  conversion(price:hairController.text);
 
-
-                                                  });
-                                                  usersRef.doc(widget.currentUserId).update({
+                                                  isCheckedHair?   usersRef.doc(widget.currentUserId).update({
                                                     'hairAvg':hairController.text?? "Contact for price",
-                                                    "hairrounded":int.tryParse(rounded)?? 0,
+                                                    "usd":USD,
+                                                    'hair':true
+                                                  }): usersRef.doc(widget.currentUserId).update({
+                                                    'hairAvg':hairController.text?? "Contact for price",
+                                                    "usd":USD,
+                                                    'hair':false
                                                   });
 
+
+                                                  setState((){selectedHair=false;});
+                                                  Fluttertoast.showToast(
+                                                      msg: "Saved! ", timeInSecForIos: 4);
 
                                                 },
-                                                text: "Save",
                                               ),
                                             ),
                                           ),
+
 
                                         ],
                                       ):Container(),
@@ -1368,34 +1505,42 @@ void toggleArtisan(bool value) {
                                               ),
                                             ),
                                           ),
-
                                           Expanded(
 
                                             child: Padding(
                                               padding: const EdgeInsets.all(8.0),
-                                              child:  GFButton(
-                                                color: kblue,
+                                              child:  ElevatedButton(
+                                                style: ElevatedButton.styleFrom(
+                                                  textStyle: TextStyle(color: Colors.black) ,
+                                                  onPrimary:kButton,  primary:kButton, // foreground
+                                                ),
+                                                child:selectedChoreographer?
+                                                CircularProgressIndicator(color: Colors.black,):
+                                                Text("Save", style: TextStyle(color: Colors.black) ),
                                                 onPressed: (){
-                                                  var rounded;
-                                                  var price;
-                                                  setState(() {
-                                                    price = int.tryParse(choController.text)?? 0;
-                                                    // inrtousd = resultUSD.rate;
-                                                    rounded = price.round();
+                                                  setState((){selectedChoreographer=true;});
+                                                  conversion(price:choController.text);
 
-
-                                                  });
-                                                  usersRef.doc(widget.currentUserId).update({
+                                                  isCheckedChoreographer?   usersRef.doc(widget.currentUserId).update({
                                                     'choreographerAvg':choController.text?? "Contact for price",
-                                                    "choreographerrounded":int.tryParse(rounded)?? 0,
+                                                    "usd":USD,
+                                                    'choreographer':true
+                                                  }): usersRef.doc(widget.currentUserId).update({
+                                                    'choreographerAvg':choController.text?? "Contact for price",
+                                                    "usd":USD,
+                                                    'choreographer':false
                                                   });
 
+
+                                                  setState((){selectedChoreographer=false;});
+                                                  Fluttertoast.showToast(
+                                                      msg: "Saved! ", timeInSecForIos: 4);
 
                                                 },
-                                                text: "Save",
                                               ),
                                             ),
                                           ),
+
 
                                         ],
                                       ):Container(),

@@ -4795,8 +4795,10 @@ else{return null;}
 
         length:3,
         child: Scaffold(
+          backgroundColor:Colors.grey.shade200,
+
           appBar:AppBar(
-            title: Text('Search by',style: TextStyle(color: Colors.white),),
+            title: Text('Search',style: TextStyle(color: Colors.white),),
             backgroundColor: kPrimaryColor,
             elevation: 0,
             bottom: TabBar(
@@ -4817,19 +4819,15 @@ else{return null;}
           body:
             Container(
               padding: const EdgeInsets.all(20.0),
-
-              decoration: BoxDecoration(
-                  gradient: fabGradient
-              ),
-              alignment: Alignment.center,
               child:
               TabBarView(
                   children:<Widget> [
                     SingleChildScrollView(
                       child: Container(
                         child: AutoSearchInput(
-                            unSelectedTextColor: kText,
-                            selectedTextColor: kText,
+                            unSelectedTextColor: Colors.grey,
+                            selectedTextColor: Colors.black,
+                            
                             hintText: 'Search',
                             itemsShownAtStart: 20,
                             singleItemHeight: 60.0,
@@ -4939,7 +4937,7 @@ class _SearchDesignerState extends State<SearchDesigner> {
         style:  TextStyle(color: Colors.white),
         controller: _searchController,
         decoration: InputDecoration(
-          hintText: "Search for a user...",
+          hintText: "Search for a designer",
           hintStyle: TextStyle(color: Colors.white),
 
           filled: true,
@@ -4960,12 +4958,12 @@ class _SearchDesignerState extends State<SearchDesigner> {
 
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor:Colors.grey.shade200,
+
       appBar: buildSearchField(),
       body: Container(
-        decoration: BoxDecoration(
-            gradient: fabGradient
-        ),
-        alignment: Alignment.center,
+        color:Colors.grey.shade200,
+
         child: Column(
           children: <Widget>[
             Expanded(
@@ -5082,10 +5080,8 @@ class _SearchProductState extends State<SearchProduct> {
     return Scaffold(
       appBar: buildSearchField(),
       body: Container(
-        decoration: BoxDecoration(
-            gradient: fabGradient
-        ),
-        alignment: Alignment.center,        child: Column(
+        color:Colors.grey.shade200,
+        child: Column(
           children: <Widget>[
             Expanded(
                 child: ListView.builder(

@@ -24,6 +24,17 @@ class Users{
  String photographerAvg;
  String bloggerAvg;
  String stylistAvg;
+  bool designer;
+ bool illustrator;
+ bool artisans;
+ bool choreographer;
+ bool hair;
+ bool makeup;
+ bool model;
+ bool photographer;
+ bool blogger;
+ bool stylist;
+
  String countryISO;
 
 
@@ -64,6 +75,17 @@ this.modelAvg,
 this.photographerAvg,
 this.bloggerAvg,
 this.stylistAvg,
+  this.designer,
+this.illustrator,
+this.artisans,
+this.choreographer,
+this.hair,
+this.makeup,
+this.model,
+this.photographer,
+this.blogger,
+this.stylist,
+
 this.countryISO,
 
 
@@ -103,6 +125,16 @@ this.Bidding,
       photographerAvg: doc.data()['photographerAvg'],
       bloggerAvg: doc.data()['bloggerAvg'],
       stylistAvg: doc.data()['stylistAvg'],
+    designer: doc.data()['designer'],
+      illustrator: doc.data()['illustrator'],
+      artisans: doc.data()['artisan'],
+      choreographer: doc.data()['choreographer'],
+      hair: doc.data()['hair'],
+      makeup: doc.data()['makeup'],
+      model: doc.data()['model'],
+      photographer: doc.data()['photographer'],
+      blogger: doc.data()['blogger'],
+      stylist: doc.data()['stylist'],
 
         state: doc.data()['state'],
         client:doc.data()['client'],
