@@ -859,11 +859,11 @@ void toggleArtisan(bool value) {
 
                                                  isCheckedDesigner?   usersRef.doc(widget.currentUserId).update({
                                                     'designerAvg':designerController.text?? "Contact for price",
-                                                    "usd":USD,
+                                                    "designerUsd":USD ?? 0,
                                                     'designer':true
                                                   }): usersRef.doc(widget.currentUserId).update({
                                                     'designerAvg':designerController.text?? "Contact for price",
-                                                    "usd":USD,
+                                                    "designerUsd":USD ?? 0,
                                                     'designer':false
                                                   });
 
@@ -935,11 +935,11 @@ void toggleArtisan(bool value) {
 
                                                   isCheckedArtisan?   usersRef.doc(widget.currentUserId).update({
                                                     'artisanAvg':artisanController.text?? "Contact for price",
-                                                    "usd":USD,
+                                                    "artisanUsd":USD ?? 0,
                                                     'artisan':true
                                                   }): usersRef.doc(widget.currentUserId).update({
                                                     'artisanAvg':artisanController.text?? "Contact for price",
-                                                    "usd":USD,
+                                                    "artisanUsd":USD ?? 0,
                                                     'artisan':false
                                                   });
 
@@ -1009,11 +1009,11 @@ void toggleArtisan(bool value) {
 
                                                   isCheckedStylist?   usersRef.doc(widget.currentUserId).update({
                                                     'stylistAvg':stylController.text?? "Contact for price",
-                                                    "usd":USD,
+                                                    "stylistUsd":USD ?? 0,
                                                     'stylist':true
                                                   }): usersRef.doc(widget.currentUserId).update({
                                                     'stylistAvg':stylController.text?? "Contact for price",
-                                                    "usd":USD,
+                                                    "stylistUsd":USD ?? 0,
                                                     'stylist':false
                                                   });
 
@@ -1083,11 +1083,11 @@ void toggleArtisan(bool value) {
 
                                                   isCheckedBlogger?   usersRef.doc(widget.currentUserId).update({
                                                     'bloggerAvg':blogController.text?? "Contact for price",
-                                                    "usd":USD,
+                                                    "bloggerUsd":USD ?? 0,
                                                     'blogger':true
                                                   }): usersRef.doc(widget.currentUserId).update({
                                                     'bloggerAvg':blogController.text?? "Contact for price",
-                                                    "usd":USD,
+                                                    "bloggerUsd":USD ?? 0,
                                                     'blogger':false
                                                   });
 
@@ -1157,11 +1157,11 @@ void toggleArtisan(bool value) {
 
                                                   isCheckedIllustrator?   usersRef.doc(widget.currentUserId).update({
                                                     'illustratorAvg':illustController.text?? "Contact for price",
-                                                    "usd":USD,
+                                                    "illustratorUsd":USD ?? 0,
                                                     'illustrator':true
                                                   }): usersRef.doc(widget.currentUserId).update({
                                                     'illustratorAvg':illustController.text?? "Contact for price",
-                                                    "usd":USD,
+                                                    "illustratorUsd":USD ?? 0,
                                                     'illustrator':false
                                                   });
 
@@ -1230,11 +1230,11 @@ void toggleArtisan(bool value) {
 
                                                   isCheckedPhotographer?   usersRef.doc(widget.currentUserId).update({
                                                     'photographerAvg':photoController.text?? "Contact for price",
-                                                    "usd":USD,
+                                                    "photographerUsd":USD ?? 0,
                                                     'photographer':true
                                                   }): usersRef.doc(widget.currentUserId).update({
                                                     'photographerAvg':photoController.text?? "Contact for price",
-                                                    "usd":USD,
+                                                    "photographerUsd":USD ?? 0,
                                                     'photographer':false
                                                   });
 
@@ -1304,11 +1304,11 @@ void toggleArtisan(bool value) {
 
                                                   isCheckedModel?   usersRef.doc(widget.currentUserId).update({
                                                     'modelAvg':modelController.text?? "Contact for price",
-                                                    "usd":USD,
+                                                    "modelUsd":USD ?? 0,
                                                     'model':true
                                                   }): usersRef.doc(widget.currentUserId).update({
                                                     'modelAvg':modelController.text?? "Contact for price",
-                                                    "usd":USD,
+                                                    "modelUsd":USD ?? 0,
                                                     'model':false
                                                   });
 
@@ -1378,11 +1378,11 @@ void toggleArtisan(bool value) {
 
                                                   isCheckedMakeup?   usersRef.doc(widget.currentUserId).update({
                                                     'makeupAvg':makeController.text?? "Contact for price",
-                                                    "usd":USD,
+                                                    "makeupUsd":USD ?? 0,
                                                     'makeup':true
                                                   }): usersRef.doc(widget.currentUserId).update({
                                                     'makeupAvg':makeController.text?? "Contact for price",
-                                                    "usd":USD,
+                                                    "makeupUsd":USD ?? 0,
                                                     'makeup':false
                                                   });
 
@@ -1450,11 +1450,11 @@ void toggleArtisan(bool value) {
 
                                                   isCheckedHair?   usersRef.doc(widget.currentUserId).update({
                                                     'hairAvg':hairController.text?? "Contact for price",
-                                                    "usd":USD,
+                                                    "hairUsd":USD ?? 0,
                                                     'hair':true
                                                   }): usersRef.doc(widget.currentUserId).update({
                                                     'hairAvg':hairController.text?? "Contact for price",
-                                                    "usd":USD,
+                                                    "hairUsd":USD ?? 0,
                                                     'hair':false
                                                   });
 
@@ -1523,11 +1523,11 @@ void toggleArtisan(bool value) {
 
                                                   isCheckedChoreographer?   usersRef.doc(widget.currentUserId).update({
                                                     'choreographerAvg':choController.text?? "Contact for price",
-                                                    "usd":USD,
+                                                    "choreographerUsd":USD ?? 0,
                                                     'choreographer':true
                                                   }): usersRef.doc(widget.currentUserId).update({
                                                     'choreographerAvg':choController.text?? "Contact for price",
-                                                    "usd":USD,
+                                                    "choreographerUsd":USD ?? 0,
                                                     'choreographer':false
                                                   });
 

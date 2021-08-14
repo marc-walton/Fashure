@@ -1,7 +1,12 @@
 import 'package:contained_tab_bar_view/contained_tab_bar_view.dart';
 import 'package:dropdown_formfield/dropdown_formfield.dart';
+import 'package:fashow/Product_screen.dart';
+import 'package:fashow/chatcached_image.dart';
 import 'package:fashow/model/addressbuynow.dart';
+import 'package:fashow/model/tags.dart';
+import 'package:fashow/size_config.dart';
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:intl/intl.dart';
 import 'package:paginate_firestore/paginate_firestore.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -28,109 +33,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter_currencies_tracker/flutter_currencies_tracker.dart';
 import 'package:flutter_animated_button/flutter_animated_button.dart';
 import 'package:fashow/methods/dynamic_links_service.dart';
-List <Widget>listOfImages = <Widget>[];
 
-pics({String userid,String prodid}){
-  return
-    FutureBuilder<QuerySnapshot> (
-        future:     productsRef
-            .doc(userid)
-            .collection('userProducts')
-
-            .where('prodId' ,isEqualTo: '$prodid')
-        // .where('ownerId' ,isEqualTo: '$ownerId')
-            .get(),
-        builder: (context, snapshot) {
-
-          if (snapshot.hasData) {
-            return new ListView.builder(
-              physics:NeverScrollableScrollPhysics(),
-                shrinkWrap: true,
-                scrollDirection:Axis.vertical,
-                itemCount: snapshot.data.docs.length,
-                itemBuilder: (BuildContext context, int index) {
-                  // List<String> images = List.from(snapshot.data.docs[index].data()['collmediaUrl']);
-                  listOfImages = [];
-                  for (int i = 0;
-                  i <
-                      snapshot.data.docs[index].data()['shopmediaUrl']
-                          .length;
-                  i++) {
-                    listOfImages.add(GestureDetector(
-                      onTap: (){
-                        showDialog<void>(
-                          context: context,
-                          // useRootNavigator:true,
-
-                          barrierDismissible: true,
-                          // false = user must tap button, true = tap outside dialog
-                          builder: (BuildContext dialogContext) {
-                            return
-                              Dialog(
-
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(20),),
-                                child: Container(
-                                  height: 400,
-                                  child:PhotoView(imageProvider: CachedNetworkImageProvider
-                                    (snapshot
-                                      .data.docs[index].data()['shopmediaUrl'][i])),),
-                              );
-                          },
-                        );
-},
-                      child: CachedNetworkImage(imageUrl:snapshot
-                          .data.docs[index].data()['shopmediaUrl'][i]),
-                    ));
-                  }
-                  return Column(
-                    children: <Widget>[
-                      Container(
-                          margin: EdgeInsets.all(10.0),
-
-                          decoration: BoxDecoration(
-                            color: Colors.transparent,
-                          ),
-                          width: MediaQuery
-                              .of(context)
-                              .size
-                              .width,
-                          child:
-                          CarouselSlider(
-
-                                items: listOfImages,
-                              options: CarouselOptions(
-
-                                pauseAutoPlayOnManualNavigate: true,
-                                pauseAutoPlayOnTouch: true,
-                                aspectRatio: 16/9,
-                                viewportFraction: 0.8,
-                                initialPage: 0,
-                                enableInfiniteScroll: true,
-                                reverse: false,
-                                autoPlay: true,
-                                autoPlayInterval: Duration(seconds: 3),
-                                autoPlayAnimationDuration: Duration(milliseconds: 800),
-                                autoPlayCurve: Curves.fastOutSlowIn,
-                                enlargeCenterPage: true,
-                                // onPageChanged: callbackFunction,
-                                scrollDirection: Axis.horizontal,
-                              )
-                          )
-                      ),
-
-                    ],
-                  );
-                }
-            );
-          }
-          return Center(
-            child: CircularProgressIndicator(),
-          );
-
-        });
-
-}
 
 class Prod extends StatefulWidget {
   final String prodId;
@@ -885,6 +788,8 @@ class _ProdState extends State<Prod> {
   String usersize = "";
   String usercolor = "";
 String currencysymbol;
+  var currencyFormatter = NumberFormat('#,##0.00', '${currentUser.countryISO}');
+
   final String currentUserId = currentUser?.id;
   final String prodId;
   final String ownerId;
@@ -1091,6 +996,7 @@ int views;
 bool isUploading = false;
 var e;
   TextEditingController mtoController = TextEditingController();
+  List <Widget>listOfImages = <Widget>[];
 
   _ProdState({
     this.prodId,
@@ -1270,18 +1176,124 @@ this.currency,
     this.likeCount,
     this.photoUrl,
   });
+  pics({String userid,String prodid}){
+    return
+      FutureBuilder<QuerySnapshot> (
+          future:     productsRef
+              .doc(userid)
+              .collection('userProducts')
+
+              .where('prodId' ,isEqualTo: '$prodid')
+          // .where('ownerId' ,isEqualTo: '$ownerId')
+              .get(),
+          builder: (context, snapshot) {
+
+            if (snapshot.hasData) {
+              return new Container( height:490,child:ListView.builder(
+
+                  physics:NeverScrollableScrollPhysics(),
+                  shrinkWrap: true,
+                  scrollDirection:Axis.vertical,
+                  itemCount: snapshot.data.docs.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    // List<String> images = List.from(snapshot.data.docs[index].data()['collmediaUrl']);
+                    listOfImages = [];
+                    for (int i = 0;
+                    i <
+                        snapshot.data.docs[index].data()['shopmediaUrl']
+                            .length;
+                    i++) {
+                      listOfImages.add(GestureDetector(
+                        onTap: (){
+                          showDialog<void>(
+                            context: context,
+                            // useRootNavigator:true,
+
+                            barrierDismissible: true,
+                            // false = user must tap button, true = tap outside dialog
+                            builder: (BuildContext dialogContext) {
+                              return
+                                Dialog(
+
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(20),),
+                                  child: Container(
+                                    height: 400,
+                                    child:PhotoView(imageProvider: CachedNetworkImageProvider
+                                      (snapshot
+                                        .data.docs[index].data()['shopmediaUrl'][i])),),
+                                );
+                            },
+                          );
+                        },
+                        child: Container(
+                          height:490,
+                          child: CachedNetworkImage(imageUrl:snapshot
+                              .data.docs[index].data()['shopmediaUrl'][i]),
+                        ),
+                      ));
+                    }
+                    return Column(
+                      children: <Widget>[
+                        Container(
+                            height:490,
+                            width: MediaQuery
+                                .of(context)
+                                .size
+                                .width,
+                            child:
+                            CarouselSlider(
+
+                                items: listOfImages,
+                                options: CarouselOptions(
+                                  height:500,
+                                  pauseAutoPlayOnManualNavigate: true,
+                                  pauseAutoPlayOnTouch: true,
+                                  aspectRatio: 16/9,
+                                  viewportFraction: 0.8,
+                                  initialPage: 0,
+                                  enableInfiniteScroll: false,
+                                  reverse: false,
+                                  autoPlay: true,
+                                  autoPlayInterval: Duration(seconds: 3),
+                                  autoPlayAnimationDuration: Duration(milliseconds: 800),
+                                  autoPlayCurve: Curves.fastOutSlowIn,
+                                  enlargeCenterPage: true,
+                                  // onPageChanged: callbackFunction,
+                                  scrollDirection: Axis.horizontal,
+                                )
+                            )
+                        ),
+
+                      ],
+                    );
+                  }
+              ));
+            }
+            return Center(
+              child: CircularProgressIndicator(),
+            );
+
+          });
+
+  }
 
 
   void initState() {
 
     super.initState();
     Views();
+    print("11111111111111111111111111111111$price");
+
     conversion();
+    print("2222222222222222222222222222222222222$price");
 
   }
 conversion()async{
+  print("<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<>$price");
+
   var resultUSD = await Currency.getConversion(
-      from: 'USD', to: '${currentUser.currencyISO}', amount: usd);
+      from: 'USD', to: '${currentUser.currencyISO}', amount: usd.toString());
     var resultUSD11 = await Currency.getConversion(
         from: 'USD', to: '${currentUser.currencyISO}', amount: shipcostinterusd );
 var s;
@@ -1291,12 +1303,12 @@ setState(() {
 
   e = resultUSD.rate;
   price =e.toStringAsFixed(2);
-
+print(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>$price");
   s = resultUSD11.rate;
   shipcostuser =s.toStringAsFixed(2);
-  u = double.tryParse(usd);
-  u = u.toStringAsFixed(2);
-  usd = u.toString();
+  // u = double.tryParse(usd);
+  // u = u.toStringAsFixed(2);
+  // usd = u.toString();
 });
     var resultUSD1 = await Currency.getConversion(
       from: 'USD', to: '${currentUser.currencyISO}', amount: custom11usd  );
@@ -8772,229 +8784,310 @@ isLive: true,
   );
 }
 posteurope(){
+  bool isPostOwner = currentUserId == ownerId;
 
-  return FutureBuilder(
-    future: usersRef.doc(ownerId).get(),
-    builder: (context, snapshot) {
-      if (!snapshot.hasData) {
-        return circularProgress();
-      }
-       Users user = Users.fromDocument(snapshot.data);
-      bool isPostOwner = currentUserId == ownerId;
-      return Container(
-        margin: EdgeInsets.only(top:10.0,left: 10.0,right: 10.0, bottom: 10.0 ),
+  return Container(
+    margin: EdgeInsets.only(top:10.0,left: 10.0,right: 10.0, bottom: 10.0 ),
 
-        child: Expanded(
-          child: Column(
-            children:  [
-              GestureDetector(
-                onTap:(){},
-                onDoubleTap: () {
+    child: Expanded(
+      child: Column(
+        children:  [
+          GestureDetector(
+            onTap:(){},
+            onDoubleTap: () {
+              handleLikePost();
+              final snackBar = SnackBar(
+                content: Text('Added to Favorites!'),
+                action: SnackBarAction(
+                  // label: 'Undo',
+                  // onPressed: () {
+                  //   // Some code to undo the change.
+                  // },
+                ),
+              );
+
+
+              Scaffold.of(context).showSnackBar(snackBar);
+            },
+            child: Stack(
+              alignment: Alignment.center,
+              children: <Widget>[
+                ClipRRect(
+                    borderRadius: BorderRadius.only
+                      (bottomLeft: Radius.circular(20.0),bottomRight: Radius.circular(20.0)),
+                    child: Container(
+                      //  height: MediaQuery.of(context).size.height * 0.65,
+
+                        width:     MediaQuery.of(context).size.width,
+                        child: pics(userid:ownerId,prodid:prodId))),
+                Positioned.fill(
+                  child: Align(
+                    alignment: Alignment.topCenter,
+                    child:   ListTile(
+                      leading:FloatingActionButton(
+                        mini: true,
+                        backgroundColor:Colors.white.withOpacity(0.5),
+                        child:Icon(Icons.arrow_back_ios,color: Colors.white,),
+                        onPressed:() { Navigator.pop(context);},
+                      ),
+                    ),
+                  ),
+                ),
+                Positioned.fill(
+                  child: Align(
+                    alignment: Alignment.bottomCenter,
+                    child:           FutureBuilder(
+                        future:FirebaseFirestore.instance.collection("products").doc(ownerId).collection("userProducts").doc(prodId)
+                            .collection("tags").get(),
+                        builder: (context, snapshot) {
+
+                          if (!snapshot.hasData || snapshot.data.docs.isEmpty){
+                            return
+                              Text("snapshot.data[]");
+                          }
+                          else{
+                            return
+
+                              GestureDetector(
+                                onTap: () =>   showModalBottomSheet(
+                                    context: context,
+                                    elevation: 0,
+                                    builder: (context) {
+                                      return PaginateFirestore(
+                                        emptyDisplay: Center(child: Text("Nothing found",style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 25.0,
+                                        ),)),
+                                        itemBuilderType:
+                                        PaginateBuilderType.listView,
+                                        itemBuilder: (index, context, documentSnapshot)    {
+                                          String ownerId = documentSnapshot.data()['ownerId'];
+                                          String prodId = documentSnapshot.data()['prodId'];
+  String image = documentSnapshot.data()['image'];
+  String name = documentSnapshot.data()['name'];
+ var usd = documentSnapshot.data()['usd'];
+
+                                          return
+
+                                                GestureDetector(
+                                                  onTap: () => Navigator.push(
+                                                    context,
+                                                    MaterialPageRoute(
+                                                      builder: (context) => ProductScreen(
+                                                        prodId: prodId,
+                                                        userId: ownerId,
+                                                      ),
+                                                    ),
+                                                  ),
+                                                  child:Padding(
+                                                    padding: const EdgeInsets.all(8.0),
+                                                    child: Column(children:[
+                                                    ClipRRect(
+                                                    borderRadius: BorderRadius.circular(20.0),
+                                                      child: CachedImage(image)),
+                                                Row(
+                                                  children: [
+                                                    Text(name,
+                                                    style: TextStyle(color: kText,
+                                                        fontSize: SizeConfig.safeBlockHorizontal * 4,
+                                                        fontWeight: FontWeight.bold))
+                                                  ],
+                                                ),
+                                                Row(
+                                                  children: [
+                                                    Text("\u0024 ${currencyFormatter.format(usd)}",),
+                                                  ],
+                                                ),
+
+                                              ]),
+                                          ));
+
+
+                                        },
+                                        query: FirebaseFirestore.instance.collection("products").doc(ownerId).collection("userProducts").doc(prodId)
+                                            .collection("tags")
+                                            .orderBy('timestamp',descending: true)
+
+                                      );
+                                    }),
+
+                                child: Container(
+                                  color:trans,
+                                  child:  ListTile(
+                                    leading:Icon(Icons.shopping_bag),
+                                    title:Text("shop",style:TextStyle(color:Colors.white))
+                                  )
+                                ),
+                              );
+                          }
+
+                        }
+
+                    ),
+
+                  ),
+                ),
+              ],
+            ),
+          ),
+          GestureDetector(
+            onTap: () => showProfile(context, profileId: ownerId),
+            child: ListTile(
+              leading: CircleAvatar(
+                backgroundImage: CachedNetworkImageProvider(photoUrl),
+                backgroundColor: Colors.grey,
+              ),
+              title: Text(
+                username,
+                style: TextStyle(
+                  color: kText,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+
+              trailing: IconButton(icon: Icon(Icons.more_horiz,color: Colors.white,),
+                  onPressed: () {
+                    !isPostOwner?showDialog(
+                        context: context,
+                        builder: (BuildContext context) {
+                          return Dialog(
+                            backgroundColor: kSecondaryColor,
+                            shape: RoundedRectangleBorder(
+                                borderRadius:
+                                BorderRadius.circular(20.0)), //this right here
+                            child: GestureDetector(
+                              onTap: (){report();
+                              Navigator.pop(context);},
+                              child: Container(
+                                height: 100,
+                                child: Padding(
+                                  padding: const EdgeInsets.all(12.0),
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      Container(
+
+                                        child: Align(
+                                            alignment: Alignment.center,
+                                            child: Text('Report this post?',style: TextStyle(
+                                                color: Colors.blueAccent,
+                                                fontWeight: FontWeight.bold,
+                                                fontSize: 20.0),)),),
+
+
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ),
+                          );
+                          // ignore: unnecessary_statements
+                        }):handleDeletePost(context);
+                  }),
+
+            ),
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: <Widget>[
+              Padding(padding: EdgeInsets.only(top: 40.0, left: 20.0)),
+              FloatingActionButton(
+                mini: true,
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(16.0))),
+                onPressed: (){
                   handleLikePost();
                   final snackBar = SnackBar(
                     content: Text('Added to Favorites!'),
                     action: SnackBarAction(
-                      // label: 'Undo',
-                      // onPressed: () {
-                      //   // Some code to undo the change.
-                      // },
+
                     ),
                   );
 
 
                   Scaffold.of(context).showSnackBar(snackBar);
                 },
-                child: Stack(
-                  alignment: Alignment.center,
-                  children: <Widget>[
-                    ClipRRect(
-                        borderRadius: BorderRadius.only
-                          (bottomLeft: Radius.circular(20.0),bottomRight: Radius.circular(20.0)),
-                        child: Container(
-                          //  height: MediaQuery.of(context).size.height * 0.65,
-
-                            width:     MediaQuery.of(context).size.width,
-                            child: pics(userid:ownerId,prodid:prodId))),
-                    Positioned.fill(
-                      child: Align(
-                        alignment: Alignment.topCenter,
-                        child:   ListTile(
-                          leading:FloatingActionButton(
-                            mini: true,
-                            backgroundColor:Colors.white.withOpacity(0.5),
-                            child:Icon(Icons.arrow_back_ios,color: Colors.white,),
-                            onPressed:() { Navigator.pop(context);},
-                          ),
-                        ),
-                      ),
-                    ),
-                    Positioned.fill(
-                      child: Align(
-                        alignment: Alignment.bottomCenter,
-                        child: ListTile(
-                          leading: CircleAvatar(
-                            backgroundImage: CachedNetworkImageProvider(user.photoUrl),
-                            backgroundColor: Colors.grey,
-                          ),
-                          title: GestureDetector(
-                            onTap: () => showProfile(context, profileId: user.id),
-                            child: Text(
-                              user.username,
-                              style: TextStyle(
-                                color: kText,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ),
-
-                          trailing: IconButton(icon: Icon(Icons.more_horiz,color: Colors.white,),
-                              onPressed: () {
-                                !isPostOwner?showDialog(
-                                    context: context,
-                                    builder: (BuildContext context) {
-                                      return Dialog(
-                                        backgroundColor: kSecondaryColor,
-                                        shape: RoundedRectangleBorder(
-                                            borderRadius:
-                                            BorderRadius.circular(20.0)), //this right here
-                                        child: GestureDetector(
-                                          onTap: (){report();
-                                          Navigator.pop(context);},
-                                          child: Container(
-                                            height: 100,
-                                            child: Padding(
-                                              padding: const EdgeInsets.all(12.0),
-                                              child: Column(
-                                                mainAxisAlignment: MainAxisAlignment.center,
-                                                crossAxisAlignment: CrossAxisAlignment.start,
-                                                children: [
-                                                  Container(
-
-                                                    child: Align(
-                                                        alignment: Alignment.center,
-                                                        child: Text('Report this post?',style: TextStyle(
-                                                            color: Colors.blueAccent,
-                                                            fontWeight: FontWeight.bold,
-                                                            fontSize: 20.0),)),),
-
-
-                                                ],
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                      );
-                                      // ignore: unnecessary_statements
-                                    }):handleDeletePost(context);
-                              }),
-
-                        ),
-                      ),
-                    ),
-                  ],
+                child: Icon(
+                  isfav ?   Icons.favorite:Icons.favorite_border ,
+                  size: 28.0,
+                  color:  Colors.white,
                 ),
               ),
-
-              Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: <Widget>[
-                  Padding(padding: EdgeInsets.only(top: 40.0, left: 20.0)),
-                  FloatingActionButton(
-                    mini: true,
-                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(16.0))),
-                    onPressed: (){
-                      handleLikePost();
-                      final snackBar = SnackBar(
-                        content: Text('Added to Favorites!'),
-                        action: SnackBarAction(
-
-                        ),
-                      );
-
-
-                      Scaffold.of(context).showSnackBar(snackBar);
-                    },
-                    child: Icon(
-                      isfav ?   Icons.favorite:Icons.favorite_border ,
+              Container(
+                child: Text(
+                  "$likeCount ",
+                  style: TextStyle(
+                    color:kText,
+                    fontSize: 15.0,
+                    //                      fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+              Padding(padding: EdgeInsets.only(right: 20.0)),
+              FloatingActionButton(
+                mini: true,
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(16.0))),
+                onPressed: () => reviews(),
+                child:  Column(
+                  mainAxisAlignment:MainAxisAlignment.center,
+                  children: [
+                    SizedBox(width: 6.0,),
+                    Icon(
+                      Icons.star,
                       size: 28.0,
                       color:  Colors.white,
                     ),
-                  ),
-                  Container(
-                    child: Text(
-                      "$likeCount ",
-                      style: TextStyle(
-                        color:kText,
-                        fontSize: 15.0,
-                        //                      fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ),
-                  Padding(padding: EdgeInsets.only(right: 20.0)),
-                  FloatingActionButton(
-                    mini: true,
-                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(16.0))),
-                    onPressed: () => reviews(),
-                    child:  Column(
-                      mainAxisAlignment:MainAxisAlignment.center,
-                      children: [
-                        SizedBox(width: 6.0,),
-                        Icon(
-                          Icons.star,
-                          size: 28.0,
-                          color:  Colors.white,
-                        ),
-                        SizedBox(width: 3.0,),
-                      ],
-                    ),
-
-
-                  ),
-                  Text('Rating' ,style: TextStyle(color: kText,fontWeight: FontWeight.bold,),),
-                  Container(
-                    height: 50,
-                    width: 100,
-                    child: FutureBuilder<Uri>(
-                        future: _dynamicLinkService.createDynamicLink( postId:prodId,ownerId: ownerId,),
-                        builder: (context, snapshot) {
-                          if(snapshot.hasData) {
-                            Uri uri = snapshot.data;
-                            return FlatButton(
-                              color: Colors.amber,
-                              onPressed: () => Share.share(uri.toString()),
-                              child: Text('Share'),
-                            );
-                          } else {
-                            return Container();
-                          }
-
-                        }
-                    ),
-                  ),
-                ],
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children:[   FloatingActionButton.extended(
-                  backgroundColor: kblue,
-                  onPressed: ()=>sizeGuide(),
-                  label: Text('Size Guide',style:TextStyle(color:  Colors.white) ,),
+                    SizedBox(width: 3.0,),
+                  ],
                 ),
-                ],
+
+
               ),
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Expanded(
-                    child: ListTile(
-                      title: Text(
-                        "$productname ",
-                        style: TextStyle(
-                          color: kText,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 24.0,
-                        ),
-                      ),
+              Text('Rating' ,style: TextStyle(color: kText,fontWeight: FontWeight.bold,),),
+              Container(
+                height: 50,
+                width: 100,
+                child: FutureBuilder<Uri>(
+                    future: _dynamicLinkService.createDynamicLink( postId:prodId,ownerId: ownerId,),
+                    builder: (context, snapshot) {
+                      if(snapshot.hasData) {
+                        Uri uri = snapshot.data;
+                        return FlatButton(
+                          color: Colors.amber,
+                          onPressed: () => Share.share(uri.toString()),
+                          child: Text('Share'),
+                        );
+                      } else {
+                        return Container();
+                      }
+
+                    }
+                ),
+              ),
+            ],
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children:[   FloatingActionButton.extended(
+              backgroundColor: kblue,
+              onPressed: ()=>sizeGuide(),
+              label: Text('Size Guide',style:TextStyle(color:  Colors.white) ,),
+            ),
+            ],
+          ),
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              Expanded(
+                child: ListTile(
+                  title: Text(
+                    "$productname ",
+                    style: TextStyle(
+                      color: kText,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 24.0,
+                    ),
+                  ),
                   subtitle:    currentUser.country == "$country" ?  Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -9027,17 +9120,17 @@ posteurope(){
                           ),
                         ],
                       ),
-                     freeship?Container(
-                       color:Colors.white.withOpacity(0.1),
-                      child:   Text(
-                           "FREE SHIPPING",
-                           style: TextStyle(
-                             color: Colors.green,
-                             fontWeight: FontWeight.bold,
-                             fontSize: 14.0,
-                           ),
-                         )
-                     ) :Text(
+                      freeship?Container(
+                          color:Colors.white.withOpacity(0.1),
+                          child:   Text(
+                            "FREE SHIPPING",
+                            style: TextStyle(
+                              color: Colors.green,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 14.0,
+                            ),
+                          )
+                      ) :Text(
                         "+ ${currentUser.currencysym} $shipcostinr",
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
@@ -9047,10 +9140,27 @@ posteurope(){
                     ],
                   ):   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
+                    // ListTile(
+                    //   dense: true,
+                    //   contentPadding: EdgeInsets.symmetric(horizontal: 0.0, vertical: 0.0),
+                    //   visualDensity: VisualDensity(horizontal: 0, vertical: -4),
+                    //   title:            Text(prod.productname, style: TextStyle(
+                    //       color: kText,
+                    //       fontSize: SizeConfig.safeBlockHorizontal * 5,
+                    //       fontWeight: FontWeight.bold),),
+                    //   subtitle:    currentUser.country == prod.country?
+                    //   Text( " ${currentUser.currencysym} ${ currencyFormatter.format(prod.inr)}",style: TextStyle(color: kText,
+                    //       fontSize: SizeConfig.safeBlockHorizontal * 4,
+                    //       fontWeight: FontWeight.bold)) :
+                    //   Text( " ${currentUser.currencysym} ${currencyFormatter.format(price)}",style: TextStyle(color: kText,
+                    //       fontSize: SizeConfig.safeBlockHorizontal * 4,
+                    //       fontWeight: FontWeight.bold)),
+                    //
+                    // ),
 
                     children: [
                       Row(children:[Text(
-                        "${currentUser.currencysym} $price",
+                        "${currentUser.currencysym}  ${ currencyFormatter.format(price)}",
                         style: TextStyle(
                           color: Colors.green,
                           fontWeight: FontWeight.bold,
@@ -9058,24 +9168,24 @@ posteurope(){
                         ),
                       ),
                         Text(
-                        "(\u0024 $usd)",
-                        style: TextStyle(
-                          color: Colors.green,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 14.0,
-                        ),
-                      )]),
-                  Row(
-                    children: [
-                      Text("${currentUser.currency} ",
-                        style: TextStyle(
-                          color: Colors.green,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 10.0,
-                        )
+                          "(\u0024 $usd)",
+                          style: TextStyle(
+                            color: Colors.green,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 14.0,
+                          ),
+                        )]),
+                      Row(
+                        children: [
+                          Text("${currentUser.currency} ",
+                              style: TextStyle(
+                                color: Colors.green,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 10.0,
+                              )
+                          ),
+                        ],
                       ),
-                    ],
-                  ),
                       freeworldship?Container(
                           color:Colors.white.withOpacity(0.1),
                           child:   Text(
@@ -9095,176 +9205,174 @@ posteurope(){
                       )
                     ],
                   ) ,
-                     trailing: FloatingActionButton(
-                        heroTag:null,
+                  trailing: FloatingActionButton(
+                    heroTag:null,
 
-                        onPressed: () => Buynow(context),
-                        child: Icon(Icons.add_shopping_cart,),
-                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(16.0))),
-                      ),
-                    ),
+                    onPressed: () => Buynow(context),
+                    child: Icon(Icons.add_shopping_cart,),
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(16.0))),
                   ),
-
-                ],
-              ),
-              worldship == false?Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Expanded(
-                    child: ListTile(
-                      leading:  Icon(Icons.cancel, color: Colors.red),
-                      title: Text(
-                        "This product doesn't ship worldwide,check shipping & returns info below ",
-                        style: TextStyle(
-                          color: Colors.red,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 14.0,
-                        ),
-                      ),
-                    ),
-                  ),
-
-                ],
-              ):Text(''),
-              ListTile(title: Text('Processing time'),
-                subtitle:Text("$processfrom - $processto")
-              ),
-              ListTileTheme(
-                tileColor:trans,
-                child: ExpansionTile(
-                  backgroundColor:trans,
-                  title:  Text(
-                    " Description",
-                    style: TextStyle(
-                      color: kText.withOpacity(0.5),
-                      fontWeight: FontWeight.bold,fontSize: 20,
-                    ),),
-                  trailing:Icon(Icons.expand_more,color: kText,),
-
-                  maintainState: true,
-                  children: [
-
-                    Container(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.stretch,
-                        children: <Widget>[
-                          Text("$details", maxLines: 1,softWrap:false,overflow:TextOverflow.fade,style: TextStyle(
-                            color: kText.withOpacity(0.5),
-//                          fontWeight: FontWeight.bold,
-                          ),),SizedBox(height: 8,),
-                          Text("Color:",style: TextStyle(
-                            color: kText.withOpacity(0.5),
-                            fontWeight: FontWeight.bold,
-                            fontSize: 20,
-                          ),),
-                          Text('$color',style: TextStyle(
-                            color: kText.withOpacity(0.5),
-//                          fontWeight: FontWeight.bold,
-                          ),),
-                          SizedBox(height: 8,),
-                          Text('Composition:',style: TextStyle(
-                            color: kText.withOpacity(0.5),
-                            fontWeight: FontWeight.bold,fontSize: 20,
-                          ),),
-                          Text('$composition', maxLines: 1,softWrap:false,overflow:TextOverflow.fade,style: TextStyle(
-                            color: kText.withOpacity(0.5),
-//                          fontWeight: FontWeight.bold,
-                          ),),SizedBox(height: 8,),
-                          Text('Wash and Care:',style: TextStyle(
-                            color: kText.withOpacity(0.5),
-                            fontWeight: FontWeight.bold,fontSize: 20,
-                          ),),
-                          Text('$washandcare', maxLines: 1,softWrap:false,overflow:TextOverflow.fade,style: TextStyle(
-                            color: kText.withOpacity(0.5),
-//                          fontWeight: FontWeight.bold,
-                          ),),
-                        ],
-                      ),
-                    ),
-                  ],
                 ),
               ),
-              ListTileTheme(
-                tileColor:trans,
-                child: ExpansionTile(
-                  backgroundColor:trans,
-                  title:  Text(
-                    " Size and Fit:",
-                    style: TextStyle(
-                      color: kText.withOpacity(0.5),
-                      fontWeight: FontWeight.bold,fontSize: 20,
-                    ),),
-                  leading: FaIcon(FontAwesomeIcons.rulerCombined,color: kText,),
-                  trailing:Icon(Icons.expand_more,color: kText,),
 
-                  maintainState: true,
-                  children: [
-
-                    Container(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.stretch,
-                        children: <Widget>[
-
-                          Text('Size and Fit:',style: TextStyle(
-                            color: kText.withOpacity(0.5),
-                            fontWeight: FontWeight.bold,fontSize: 20,
-                          ),),
-                          Text('$sizeandfit', maxLines: 1,softWrap:false,overflow:TextOverflow.fade,style: TextStyle(
-                            color: kText.withOpacity(0.5),
-//                          fontWeight: FontWeight.bold,
-                          ),),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              ListTileTheme(
-                tileColor:trans,
-                child: ExpansionTile(
-                  backgroundColor:trans,
-                  leading: Icon(Icons.local_shipping,color: kText,),
-                  title:  Text(
-                    " Shipping  and Returns:",
-                    style: TextStyle(
-                      color: kText.withOpacity(0.5),
-                      fontWeight: FontWeight.bold,fontSize: 20,
-                    ),),
-                  trailing:Icon(Icons.expand_more,color: kText,),
-                  maintainState: true,
-                  children: [
-
-                    Container(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.stretch,
-                        children: <Widget>[
-
-                          Text('Shipping  and Returns:',style: TextStyle(
-                            color: kText.withOpacity(0.5),
-                            fontWeight: FontWeight.bold,fontSize: 20,
-                          ),),
-                          ListTile(title: Text('Processing time'),
-                              subtitle:Text("$processfrom - $processto")
-                          ),ListTile(title: Text('Shipping duration to ${country}'),
-                              subtitle:Text("$shipfrom - $shipto")
-                          ),ListTile(title: Text('International shipping duration'),
-                              subtitle:Text("$shipinterfrom - $shipinterto")
-                          ),
-                          Text('$shipment', maxLines: 1,softWrap:false,overflow:TextOverflow.fade,style: TextStyle(
-                            color: kText.withOpacity(0.5),
-//                          fontWeight: FontWeight.bold,
-                          ),),
-                        ],
-                      ),
-                    ),                ],
-                ),
-              ),
             ],
           ),
-        ),
+          worldship == false?Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              Expanded(
+                child: ListTile(
+                  leading:  Icon(Icons.cancel, color: Colors.red),
+                  title: Text(
+                    "This product doesn't ship worldwide,check shipping & returns info below ",
+                    style: TextStyle(
+                      color: Colors.red,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 14.0,
+                    ),
+                  ),
+                ),
+              ),
 
-      );
-    },
+            ],
+          ):Text(''),
+          ListTile(title: Text('Processing time'),
+              subtitle:Text("$processfrom - $processto")
+          ),
+          ListTileTheme(
+            tileColor:trans,
+            child: ExpansionTile(
+              backgroundColor:trans,
+              title:  Text(
+                " Description",
+                style: TextStyle(
+                  color: kText.withOpacity(0.5),
+                  fontWeight: FontWeight.bold,fontSize: 20,
+                ),),
+              trailing:Icon(Icons.expand_more,color: kText,),
+
+              maintainState: true,
+              children: [
+
+                Container(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: <Widget>[
+                      Text("$details", maxLines: 1,softWrap:false,overflow:TextOverflow.fade,style: TextStyle(
+                        color: kText.withOpacity(0.5),
+//                          fontWeight: FontWeight.bold,
+                      ),),SizedBox(height: 8,),
+                      Text("Color:",style: TextStyle(
+                        color: kText.withOpacity(0.5),
+                        fontWeight: FontWeight.bold,
+                        fontSize: 20,
+                      ),),
+                      Text('$color',style: TextStyle(
+                        color: kText.withOpacity(0.5),
+//                          fontWeight: FontWeight.bold,
+                      ),),
+                      SizedBox(height: 8,),
+                      Text('Composition:',style: TextStyle(
+                        color: kText.withOpacity(0.5),
+                        fontWeight: FontWeight.bold,fontSize: 20,
+                      ),),
+                      Text('$composition', maxLines: 1,softWrap:false,overflow:TextOverflow.fade,style: TextStyle(
+                        color: kText.withOpacity(0.5),
+//                          fontWeight: FontWeight.bold,
+                      ),),SizedBox(height: 8,),
+                      Text('Wash and Care:',style: TextStyle(
+                        color: kText.withOpacity(0.5),
+                        fontWeight: FontWeight.bold,fontSize: 20,
+                      ),),
+                      Text('$washandcare', maxLines: 1,softWrap:false,overflow:TextOverflow.fade,style: TextStyle(
+                        color: kText.withOpacity(0.5),
+//                          fontWeight: FontWeight.bold,
+                      ),),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+          ListTileTheme(
+            tileColor:trans,
+            child: ExpansionTile(
+              backgroundColor:trans,
+              title:  Text(
+                " Size and Fit:",
+                style: TextStyle(
+                  color: kText.withOpacity(0.5),
+                  fontWeight: FontWeight.bold,fontSize: 20,
+                ),),
+              leading: FaIcon(FontAwesomeIcons.rulerCombined,color: kText,),
+              trailing:Icon(Icons.expand_more,color: kText,),
+
+              maintainState: true,
+              children: [
+
+                Container(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: <Widget>[
+
+                      Text('Size and Fit:',style: TextStyle(
+                        color: kText.withOpacity(0.5),
+                        fontWeight: FontWeight.bold,fontSize: 20,
+                      ),),
+                      Text('$sizeandfit', maxLines: 1,softWrap:false,overflow:TextOverflow.fade,style: TextStyle(
+                        color: kText.withOpacity(0.5),
+//                          fontWeight: FontWeight.bold,
+                      ),),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+          ListTileTheme(
+            tileColor:trans,
+            child: ExpansionTile(
+              backgroundColor:trans,
+              leading: Icon(Icons.local_shipping,color: kText,),
+              title:  Text(
+                " Shipping  and Returns:",
+                style: TextStyle(
+                  color: kText.withOpacity(0.5),
+                  fontWeight: FontWeight.bold,fontSize: 20,
+                ),),
+              trailing:Icon(Icons.expand_more,color: kText,),
+              maintainState: true,
+              children: [
+
+                Container(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: <Widget>[
+
+                      Text('Shipping  and Returns:',style: TextStyle(
+                        color: kText.withOpacity(0.5),
+                        fontWeight: FontWeight.bold,fontSize: 20,
+                      ),),
+                      ListTile(title: Text('Processing time'),
+                          subtitle:Text("$processfrom - $processto")
+                      ),ListTile(title: Text('Shipping duration to ${country}'),
+                          subtitle:Text("$shipfrom - $shipto")
+                      ),ListTile(title: Text('International shipping duration'),
+                          subtitle:Text("$shipinterfrom - $shipinterto")
+                      ),
+                      Text('$shipment', maxLines: 1,softWrap:false,overflow:TextOverflow.fade,style: TextStyle(
+                        color: kText.withOpacity(0.5),
+//                          fontWeight: FontWeight.bold,
+                      ),),
+                    ],
+                  ),
+                ),                ],
+            ),
+          ),
+        ],
+      ),
+    ),
+
   );
 }
 postuk(){

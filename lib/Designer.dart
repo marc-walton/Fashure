@@ -19,11 +19,15 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:fashow/post_screen.dart';
 import 'package:fashow/Profile.dart';
+import 'package:getwidget/components/toggle/gf_toggle.dart';
+import 'package:getwidget/types/gf_toggle_type.dart';
 import 'package:paginate_firestore/paginate_firestore.dart';
 import 'package:sticky_headers/sticky_headers.dart';
 import 'package:flutter_currencies_tracker/currency.dart';
 import 'package:get/get.dart';
-import 'package:fashow/Products.dart';
+import 'package:intl/intl.dart';
+
+var currencyFormatter = NumberFormat('#,##0.00', '${currentUser.countryISO}');
 class Designer extends StatefulWidget {
   @override
   _DesignerState createState() => _DesignerState();
@@ -63,17 +67,7 @@ class _DesignerState extends State<Designer> with TickerProviderStateMixin {
   bool isLiked;
   bool showHeart = false;
   int followerCount = 0;
-  String priceQuery = "1";
-  String desQuery = "des0";
-  String illQuery = "ill0";
-  String stylQuery = "styl0";
-  String blogQuery = "blog0";
-  String phoQuery = "pho0";
-  String modQuery = "mod0";
-  String makeQuery = "make0";
-  String hairQuery = "hair0";
-  String choQuery = "cho0";
-  String artQuery = "art0";
+
   int value = 0;
   editProfile() {
     Navigator.push(
@@ -104,22 +98,43 @@ class _DesignerState extends State<Designer> with TickerProviderStateMixin {
           ),
         );
       },
+        query: priceQuery == "low"?
+        FirebaseFirestore.instance
+            .collection('users')
+            .orderBy('designerUsd',descending: false)
+            .where('designer', isEqualTo: true)
+            :
+        priceQuery == "high"?
+        FirebaseFirestore.instance
+            .collection('users')
+            .orderBy('designerUsd',descending: true)
+            .where('designer', isEqualTo: true)
+            :priceQuery == "0D"?
+        FirebaseFirestore.instance
+            .collection('users')
+            .where('designer', isEqualTo: true)
+            .where('country',isEqualTo: '${currentUser.country}')
+            :priceQuery == "lowD"?
+        FirebaseFirestore.instance
+            .collection('users')
+            .orderBy('designerUsd',descending: false)
+            .where('designer', isEqualTo: true)
+            .where('country',isEqualTo: '${currentUser.country}')
 
-      query: priceQuery == "low"
-          ? FirebaseFirestore.instance
-              .collection('users')
-          .orderBy('designerrounded',descending: false)
-              .where('designer', isEqualTo: true)
-          :priceQuery == "high"
-          ? FirebaseFirestore.instance
-              .collection('users')
-          .orderBy('designerrounded',descending: true)
+            :priceQuery == "highD"?
+        FirebaseFirestore.instance
+            .collection('users')
+            .orderBy('designerUsd',descending: true)
+            .where('designer', isEqualTo: true)
+            .where('country',isEqualTo: '${currentUser.country}')
 
-          .where('designer', isEqualTo: true)
-          : FirebaseFirestore.instance
-              .collection('users')
-              .where('designer', isEqualTo: true)
-              .where('designerrounded', isGreaterThan: 1),
+            :
+        FirebaseFirestore.instance
+            .collection('users')
+            .where('designer', isEqualTo: true)
+            .where('designerUsd', isGreaterThan: 1),
+
+
     );
   }
   buildPostIllustrator() {
@@ -144,21 +159,44 @@ class _DesignerState extends State<Designer> with TickerProviderStateMixin {
           ),
         );
       },
-      query: priceQuery == "low"
-          ? FirebaseFirestore.instance
+      query: priceQuery == "low"?
+      FirebaseFirestore.instance
           .collection('users')
-          .orderBy('illustratorrounded',descending: false)
+          .orderBy('illustratorUsd',descending: false)
           .where('illustrator', isEqualTo: true)
-          :priceQuery == "high"
-          ? FirebaseFirestore.instance
+          :
+      priceQuery == "high"?
+      FirebaseFirestore.instance
           .collection('users')
-          .orderBy('illustratorrounded',descending: true)
+          .orderBy('illustratorUsd',descending: true)
+          .where('illustrator', isEqualTo: true)
+          :priceQuery == "0D"?
+      FirebaseFirestore.instance
+          .collection('users')
+          .where('illustrator', isEqualTo: true)
+          .where('country',isEqualTo: '${currentUser.country}')
+          :priceQuery == "lowD"?
+      FirebaseFirestore.instance
+          .collection('users')
+          .orderBy('illustratorUsd',descending: false)
+          .where('illustrator', isEqualTo: true)
+          .where('country',isEqualTo: '${currentUser.country}')
 
+          :priceQuery == "highD"?
+      FirebaseFirestore.instance
+          .collection('users')
+          .orderBy('illustratorUsd',descending: true)
           .where('illustrator', isEqualTo: true)
-          : FirebaseFirestore.instance
+          .where('country',isEqualTo: '${currentUser.country}')
+
+          :
+      FirebaseFirestore.instance
           .collection('users')
           .where('illustrator', isEqualTo: true)
-          .where('illustratorrounded', isGreaterThan: 1),
+          .where('illustratorUsd', isGreaterThan: 1),
+
+
+
     );
   }
 
@@ -184,21 +222,42 @@ class _DesignerState extends State<Designer> with TickerProviderStateMixin {
           ),
         );
       },
-      query: priceQuery == "low"
-          ? FirebaseFirestore.instance
+      query: priceQuery == "low"?
+      FirebaseFirestore.instance
           .collection('users')
-          .orderBy('stylistrounded',descending: false)
+          .orderBy('stylistUsd',descending: false)
           .where('stylist', isEqualTo: true)
-          :priceQuery == "high"
-          ? FirebaseFirestore.instance
+          :
+      priceQuery == "high"?
+      FirebaseFirestore.instance
           .collection('users')
-          .orderBy('stylistrounded',descending: true)
+          .orderBy('stylistUsd',descending: true)
+          .where('stylist', isEqualTo: true)
+          :priceQuery == "0D"?
+      FirebaseFirestore.instance
+          .collection('users')
+          .where('stylist', isEqualTo: true)
+          .where('country',isEqualTo: '${currentUser.country}')
+          :priceQuery == "lowD"?
+      FirebaseFirestore.instance
+          .collection('users')
+          .orderBy('stylistUsd',descending: false)
+          .where('stylist', isEqualTo: true)
+          .where('country',isEqualTo: '${currentUser.country}')
 
+          :priceQuery == "highD"?
+      FirebaseFirestore.instance
+          .collection('users')
+          .orderBy('stylistUsd',descending: true)
           .where('stylist', isEqualTo: true)
-          : FirebaseFirestore.instance
+          .where('country',isEqualTo: '${currentUser.country}')
+
+          :
+      FirebaseFirestore.instance
           .collection('users')
           .where('stylist', isEqualTo: true)
-          .where('stylistrounded', isGreaterThan: 1),
+          .where('stylistUsd', isGreaterThan: 1),
+
 
     );
   }
@@ -224,22 +283,41 @@ class _DesignerState extends State<Designer> with TickerProviderStateMixin {
           ),
         );
       },
-      query: priceQuery == "low"
-          ? FirebaseFirestore.instance
+      query: priceQuery == "low"?
+      FirebaseFirestore.instance
           .collection('users')
-          .orderBy('bloggerrounded',descending: false)
+          .orderBy('bloggerUsd',descending: false)
           .where('blogger', isEqualTo: true)
-          :priceQuery == "high"
-          ? FirebaseFirestore.instance
+          :
+      priceQuery == "high"?
+      FirebaseFirestore.instance
           .collection('users')
-          .orderBy('bloggerrounded',descending: true)
+          .orderBy('bloggerUsd',descending: true)
+          .where('blogger', isEqualTo: true)
+          :priceQuery == "0D"?
+      FirebaseFirestore.instance
+          .collection('users')
+          .where('blogger', isEqualTo: true)
+          .where('country',isEqualTo: '${currentUser.country}')
+          :priceQuery == "lowD"?
+      FirebaseFirestore.instance
+          .collection('users')
+          .orderBy('bloggerUsd',descending: false)
+          .where('blogger', isEqualTo: true)
+          .where('country',isEqualTo: '${currentUser.country}')
 
+          :priceQuery == "highD"?
+      FirebaseFirestore.instance
+          .collection('users')
+          .orderBy('bloggerUsd',descending: true)
           .where('blogger', isEqualTo: true)
-          : FirebaseFirestore.instance
+          .where('country',isEqualTo: '${currentUser.country}')
+
+          :
+      FirebaseFirestore.instance
           .collection('users')
           .where('blogger', isEqualTo: true)
-          .where('bloggerrounded', isGreaterThan: 1),
-
+          .where('bloggerUsd', isGreaterThan: 1),
 
     );
   }
@@ -265,21 +343,41 @@ class _DesignerState extends State<Designer> with TickerProviderStateMixin {
           ),
         );
       },
-      query: priceQuery == "low"
-          ? FirebaseFirestore.instance
+      query: priceQuery == "low"?
+      FirebaseFirestore.instance
           .collection('users')
-          .orderBy('photographerrounded',descending: false)
+          .orderBy('photographerUsd',descending: false)
           .where('photographer', isEqualTo: true)
-          :priceQuery == "high"
-          ? FirebaseFirestore.instance
+          :
+      priceQuery == "high"?
+      FirebaseFirestore.instance
           .collection('users')
-          .orderBy('photographerrounded',descending: true)
+          .orderBy('photographerUsd',descending: true)
+          .where('photographer', isEqualTo: true)
+          :priceQuery == "0D"?
+      FirebaseFirestore.instance
+          .collection('users')
+          .where('photographer', isEqualTo: true)
+          .where('country',isEqualTo: '${currentUser.country}')
+          :priceQuery == "lowD"?
+      FirebaseFirestore.instance
+          .collection('users')
+          .orderBy('photographerUsd',descending: false)
+          .where('photographer', isEqualTo: true)
+          .where('country',isEqualTo: '${currentUser.country}')
 
+          :priceQuery == "highD"?
+      FirebaseFirestore.instance
+          .collection('users')
+          .orderBy('photographerUsd',descending: true)
           .where('photographer', isEqualTo: true)
-          : FirebaseFirestore.instance
+          .where('country',isEqualTo: '${currentUser.country}')
+
+          :
+      FirebaseFirestore.instance
           .collection('users')
           .where('photographer', isEqualTo: true)
-          .where('photographerrounded', isGreaterThan: 1),
+          .where('photographerUsd', isGreaterThan: 1),
 
     );
   }
@@ -306,21 +404,42 @@ class _DesignerState extends State<Designer> with TickerProviderStateMixin {
         );
 
       },
-      query: priceQuery == "low"
-          ? FirebaseFirestore.instance
+      query: priceQuery == "low"?
+      FirebaseFirestore.instance
           .collection('users')
-          .orderBy('modelrounded',descending: false)
+          .orderBy('modelUsd',descending: false)
           .where('model', isEqualTo: true)
-          :priceQuery == "high"
-          ? FirebaseFirestore.instance
+          :
+      priceQuery == "high"?
+      FirebaseFirestore.instance
           .collection('users')
-          .orderBy('modelrounded',descending: true)
+          .orderBy('modelUsd',descending: true)
+          .where('model', isEqualTo: true)
+          :priceQuery == "0D"?
+      FirebaseFirestore.instance
+          .collection('users')
+          .where('model', isEqualTo: true)
+          .where('country',isEqualTo: '${currentUser.country}')
+          :priceQuery == "lowD"?
+      FirebaseFirestore.instance
+          .collection('users')
+          .orderBy('modelUsd',descending: false)
+          .where('model', isEqualTo: true)
+          .where('country',isEqualTo: '${currentUser.country}')
 
+          :priceQuery == "highD"?
+      FirebaseFirestore.instance
+          .collection('users')
+          .orderBy('modelUsd',descending: true)
           .where('model', isEqualTo: true)
-          : FirebaseFirestore.instance
+          .where('country',isEqualTo: '${currentUser.country}')
+
+          :
+      FirebaseFirestore.instance
           .collection('users')
           .where('model', isEqualTo: true)
-          .where('modelrounded', isGreaterThan: 1),
+          .where('modelUsd', isGreaterThan: 1),
+
 
     );
   }
@@ -347,21 +466,42 @@ class _DesignerState extends State<Designer> with TickerProviderStateMixin {
         );
 
       },
-      query: priceQuery == "low"
-          ? FirebaseFirestore.instance
+      query: priceQuery == "low"?
+      FirebaseFirestore.instance
           .collection('users')
-          .orderBy('makeuprounded',descending: false)
+          .orderBy('makeupUsd',descending: false)
           .where('makeup', isEqualTo: true)
-          :priceQuery == "high"
-          ? FirebaseFirestore.instance
+          :
+      priceQuery == "high"?
+      FirebaseFirestore.instance
           .collection('users')
-          .orderBy('makeuprounded',descending: true)
+          .orderBy('makeupUsd',descending: true)
+          .where('makeup', isEqualTo: true)
+          :priceQuery == "0D"?
+      FirebaseFirestore.instance
+          .collection('users')
+          .where('makeup', isEqualTo: true)
+          .where('country',isEqualTo: '${currentUser.country}')
+          :priceQuery == "lowD"?
+      FirebaseFirestore.instance
+          .collection('users')
+          .orderBy('makeupUsd',descending: false)
+          .where('makeup', isEqualTo: true)
+          .where('country',isEqualTo: '${currentUser.country}')
 
+          :priceQuery == "highD"?
+      FirebaseFirestore.instance
+          .collection('users')
+          .orderBy('makeupUsd',descending: true)
           .where('makeup', isEqualTo: true)
-          : FirebaseFirestore.instance
+          .where('country',isEqualTo: '${currentUser.country}')
+
+          :
+      FirebaseFirestore.instance
           .collection('users')
           .where('makeup', isEqualTo: true)
-          .where('makeuprounded', isGreaterThan: 1),
+          .where('makeupUsd', isGreaterThan: 1),
+
 
     );
   }
@@ -389,21 +529,42 @@ class _DesignerState extends State<Designer> with TickerProviderStateMixin {
         );
 
       },
-      query: priceQuery == "low"
-          ? FirebaseFirestore.instance
+      query: priceQuery == "low"?
+      FirebaseFirestore.instance
           .collection('users')
-          .orderBy('hairrounded',descending: false)
+          .orderBy('hairUsd',descending: false)
           .where('hair', isEqualTo: true)
-          :priceQuery == "high"
-          ? FirebaseFirestore.instance
+          :
+      priceQuery == "high"?
+      FirebaseFirestore.instance
           .collection('users')
-          .orderBy('hairrounded',descending: true)
+          .orderBy('hairUsd',descending: true)
+          .where('hair', isEqualTo: true)
+          :priceQuery == "0D"?
+      FirebaseFirestore.instance
+          .collection('users')
+          .where('hair', isEqualTo: true)
+          .where('country',isEqualTo: '${currentUser.country}')
+          :priceQuery == "lowD"?
+      FirebaseFirestore.instance
+          .collection('users')
+          .orderBy('hairUsd',descending: false)
+          .where('hair', isEqualTo: true)
+          .where('country',isEqualTo: '${currentUser.country}')
 
+          :priceQuery == "highD"?
+      FirebaseFirestore.instance
+          .collection('users')
+          .orderBy('hairUsd',descending: true)
           .where('hair', isEqualTo: true)
-          : FirebaseFirestore.instance
+          .where('country',isEqualTo: '${currentUser.country}')
+
+          :
+      FirebaseFirestore.instance
           .collection('users')
           .where('hair', isEqualTo: true)
-          .where('hairrounded', isGreaterThan: 1),
+          .where('hairUsd', isGreaterThan: 1),
+
 
 
     );
@@ -431,21 +592,42 @@ class _DesignerState extends State<Designer> with TickerProviderStateMixin {
         );
 
       },
-      query: priceQuery == "low"
-          ? FirebaseFirestore.instance
+      query: priceQuery == "low"?
+      FirebaseFirestore.instance
           .collection('users')
-          .orderBy('choreographerrounded',descending: false)
+          .orderBy('choreographerUsd',descending: false)
           .where('choreographer', isEqualTo: true)
-          :priceQuery == "high"
-          ? FirebaseFirestore.instance
+          :
+      priceQuery == "high"?
+      FirebaseFirestore.instance
           .collection('users')
-          .orderBy('choreographerrounded',descending: true)
+          .orderBy('choreographerUsd',descending: true)
+          .where('choreographer', isEqualTo: true)
+          :priceQuery == "0D"?
+      FirebaseFirestore.instance
+          .collection('users')
+          .where('choreographer', isEqualTo: true)
+          .where('country',isEqualTo: '${currentUser.country}')
+          :priceQuery == "lowD"?
+      FirebaseFirestore.instance
+          .collection('users')
+          .orderBy('choreographerUsd',descending: false)
+          .where('choreographer', isEqualTo: true)
+          .where('country',isEqualTo: '${currentUser.country}')
 
+          :priceQuery == "highD"?
+      FirebaseFirestore.instance
+          .collection('users')
+          .orderBy('choreographerUsd',descending: true)
           .where('choreographer', isEqualTo: true)
-          : FirebaseFirestore.instance
+          .where('country',isEqualTo: '${currentUser.country}')
+
+          :
+      FirebaseFirestore.instance
           .collection('users')
           .where('choreographer', isEqualTo: true)
-          .where('choreographerrounded', isGreaterThan: 1),
+          .where('choreographerUsd', isGreaterThan: 1),
+
 
     );
   }
@@ -472,126 +654,42 @@ class _DesignerState extends State<Designer> with TickerProviderStateMixin {
         );
 
       },
-      query: priceQuery == "low"
-          ? FirebaseFirestore.instance
+      query: priceQuery == "low"?
+      FirebaseFirestore.instance
           .collection('users')
-          .orderBy('artisanrounded',descending: false)
+          .orderBy('artisanUsd',descending: false)
           .where('artisan', isEqualTo: true)
-          :priceQuery == "high"
-          ? FirebaseFirestore.instance
+          :
+      priceQuery == "high"?
+      FirebaseFirestore.instance
           .collection('users')
-          .orderBy('artisanrounded',descending: true)
-
+          .orderBy('artisanUsd',descending: true)
           .where('artisan', isEqualTo: true)
-          : FirebaseFirestore.instance
+          :priceQuery == "0D"?
+      FirebaseFirestore.instance
           .collection('users')
           .where('artisan', isEqualTo: true)
-          .where('artisanrounded', isGreaterThan: 1),
+          .where('country',isEqualTo: '${currentUser.country}')
+          :priceQuery == "lowD"?
+      FirebaseFirestore.instance
+          .collection('users')
+          .orderBy('artisanUsd',descending: false)
+          .where('artisan', isEqualTo: true)
+          .where('country',isEqualTo: '${currentUser.country}')
 
-    );
-  }
-  all() {
-    return InkWell(
-      onTap: () {
-        priceQuery = "1";
-         desQuery = "des0";
-         illQuery = "ill0";
-         stylQuery = "styl0";
-         blogQuery = "blog0";
-         phoQuery = "pho0";
-         modQuery = "mod0";
-         makeQuery = "make0";
-         hairQuery = "hair0";
-         choQuery = "cho0";
-        artQuery = "art0";
+          :priceQuery == "highD"?
+      FirebaseFirestore.instance
+          .collection('users')
+          .orderBy('artisanUsd',descending: true)
+          .where('artisan', isEqualTo: true)
+          .where('country',isEqualTo: '${currentUser.country}')
 
-        setState(() {});
+          :
+      FirebaseFirestore.instance
+          .collection('users')
+          .where('artisan', isEqualTo: true)
+          .where('artisanUsd', isGreaterThan: 1),
 
-        Get.back();
-      },
-      child: Container(
-        height: 50,
-        width: MediaQuery.of(context).size.width,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-//    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
-            FittedBox(
-                child: Text(
-              'All',
-            )),
-          ],
-        ),
-      ),
-    );
-  }
-  low() {
-    return InkWell(
-      onTap: () {
-        priceQuery = "low";
-        desQuery = "des100";
-        illQuery = "ill100";
-        stylQuery = "styl100";
-        blogQuery = "blog100";
-        phoQuery = "pho100";
-        modQuery = "mod100";
-        makeQuery = "make100";
-        hairQuery = "hair100";
-        choQuery = "cho100";
- artQuery = "art100";
-
-        setState(() {});
-
-        Get.back();
-      },
-      child: Container(
-        height: 50,
-        width: MediaQuery.of(context).size.width,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-//    Text(user.followers,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
-            FittedBox(
-                child: Text(
-              'Low to high',
-            )),
-          ],
-        ),
-      ),
-    );
-  }
- high() {
-    return InkWell(
-      onTap: () {
-        priceQuery = "high";
-        desQuery = "des100-500";
-        illQuery = "ill100-500";
-        stylQuery = "styl100-500";
-        blogQuery = "blog100-500";
-        phoQuery = "pho100-500";
-        modQuery = "mod100-500";
-        makeQuery = "make100-500";
-        hairQuery = "hair100-500";
-        choQuery = "cho100-500";
-        artQuery = "art100-500";
-
-        setState(() {});
-
-        Get.back();
-      },
-      child: Container(
-        height: 50,
-        width: MediaQuery.of(context).size.width,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            FittedBox(
-                child: Text(
-              'Low to high',
-            )),
-          ],
-        ),
-      ),
     );
   }
 
@@ -662,39 +760,209 @@ class _DesignerState extends State<Designer> with TickerProviderStateMixin {
               ),
               iconTheme: new IconThemeData(color: kSecondaryColor),
               actions: <Widget>[
-                IconButton(
-                  icon: Icon(Icons.filter_alt_outlined),
-                  onPressed: () {
-                    showDialog<void>(
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: IconButton(
+                    icon: Icon(Icons.filter_alt_outlined),
+                    onPressed: (){
+
+                      showDialog<void>(
                       context: context,
                       // useRootNavigator:true,
 
                       barrierDismissible: true,
                       // false = user must tap button, true = tap outside dialog
                       builder: (BuildContext dialogContext) {
-                        return Dialog(
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(20),
-                          ),
-                          child: Container(
-                            height:400,
-                            child: ExpansionTile(
-                                title: Text(""),
-                                children: [Column(
-                                  children: [
-                                    all(),
-                                    low(),
-                                    high(),
+                        return Builder(builder: (BuildContext context) {
+                          return StatefulBuilder(builder: (BuildContext context, State){
+                            return Dialog(
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(20),
+                              ),
+                              child: Container(
 
+                                height:400,
+                                child: Column(
+                                  children: [
+                                    ExpansionTile(
+                                        title: Text("Sort by price"),
+                                        children: [Column(
+                                          children: [
+                                            InkWell(
+                                              onTap: () {
+                                                State((){});
+                                                priceQuery = "0";
+                                                desQuery = "des0";
+                                                illQuery = "ill0";
+                                                stylQuery = "styl0";
+                                                blogQuery = "blog0";
+                                                phoQuery = "pho0";
+                                                modQuery = "mod0";
+                                                makeQuery = "make0";
+                                                hairQuery = "hair0";
+                                                choQuery = "cho0";
+                                                artQuery = "art0";
+
+                                              },
+                                              child: Container(
+                                                color: priceQuery == "0"||priceQuery == "0D"?Colors.pink.shade50:Colors.white,
+
+                                                height: 50,
+                                                width: MediaQuery.of(context).size.width,
+                                                child: Column(
+                                                  mainAxisAlignment: MainAxisAlignment.center,
+                                                  children: [
+                                                    FittedBox(
+                                                        child: Text(
+                                                          'All',
+                                                        )),
+                                                  ],
+                                                ),
+                                              ),
+                                            ),
+                                            InkWell(
+                                              onTap: () {
+                                                State((){});
+
+                                                priceQuery = "low";
+                                                desQuery = "deslow";
+                                                illQuery = "illlow";
+                                                stylQuery = "styllow";
+                                                blogQuery = "bloglow";
+                                                phoQuery = "pholow";
+                                                modQuery = "modlow";
+                                                makeQuery = "makelow";
+                                                hairQuery = "hairlow";
+                                                choQuery = "cholow";
+                                                artQuery = "artlow";
+
+                                              },
+                                              child: Container(
+                                                color: priceQuery == "low"||priceQuery == "lowD"?Colors.pink.shade50:Colors.white,
+
+                                                height: 50,
+                                                width: MediaQuery.of(context).size.width,
+                                                child: Column(
+                                                  mainAxisAlignment: MainAxisAlignment.center,
+                                                  children: [
+                                                    FittedBox(
+                                                        child: Text(
+                                                          'Low to high',
+                                                        )),
+                                                  ],
+                                                ),
+                                              ),
+                                            ),
+                                            InkWell(
+                                              onTap: () {
+                                                State((){});
+
+                                                priceQuery = "high";
+                                                desQuery = "deshigh";
+                                                illQuery = "illhigh";
+                                                stylQuery = "stylhigh";
+                                                blogQuery = "bloghigh";
+                                                phoQuery = "phohigh";
+                                                modQuery = "modhigh";
+                                                makeQuery = "makehigh";
+                                                hairQuery = "hairhigh";
+                                                choQuery = "chohigh";
+                                                artQuery = "arthigh";
+
+                                              },
+                                              child: Container(
+                                                color: priceQuery == "high"||priceQuery == "highD"?Colors.pink.shade50:Colors.white,
+
+                                                height: 50,
+                                                width: MediaQuery.of(context).size.width,
+                                                child: Column(
+                                                  mainAxisAlignment: MainAxisAlignment.center,
+                                                  children: [
+                                                    FittedBox(
+                                                        child: Text(
+                                                          'High to low',
+                                                        )),
+                                                  ],
+                                                ),
+                                              ),
+                                            ),
+
+                                          ],
+                                        ),
+                                        ]
+                                    ),
+                                    ExpansionTile(
+                                        title: Text("Avoid Duties & Taxes"),
+                                        children: [Column(
+                                          children: [
+                                            Text("(Shop within your country)"),
+                                            GFToggle(
+                                              onChanged: (val){
+                                                setState(() {
+                                                  duties = val;
+                                                });
+                                              },
+                                              value: duties,
+                                              type: GFToggleType.custom,
+                                            ),
+                                          ],
+                                        ),
+                                        ]
+                                    ),
+                                    FloatingActionButton.extended(onPressed: (){
+                                      duties? setState((){
+                                        priceQuery = priceQuery.replaceAll("D","");
+                                         desQuery = desQuery.replaceAll("D","");
+                                         illQuery = illQuery.replaceAll("D","");
+                                         stylQuery = stylQuery.replaceAll("D","");
+                                         blogQuery = blogQuery.replaceAll("D","");
+                                         phoQuery = phoQuery.replaceAll("D","");
+                                         modQuery = modQuery.replaceAll("D","");
+                                         makeQuery = makeQuery.replaceAll("D","");
+                                         hairQuery = hairQuery.replaceAll("D","");
+                                         choQuery = choQuery.replaceAll("D","");
+                                         artQuery = artQuery.replaceAll("D","");
+
+                                        priceQuery = priceQuery + "D";
+                                      desQuery = desQuery + "D";
+                                      illQuery = illQuery + "D";
+                                      stylQuery = stylQuery + "D";
+                                      blogQuery = blogQuery + "D";
+                                      phoQuery = phoQuery + "D";
+                                      modQuery = modQuery + "D";
+                                      makeQuery = makeQuery + "D";
+                                      hairQuery = hairQuery + "D";
+                                      choQuery = choQuery + "D";
+                                      artQuery = artQuery + "D";
+
+
+
+                                      }):
+                                      setState((){
+                                        priceQuery = priceQuery.replaceAll("D","");
+                                        desQuery = desQuery.replaceAll("D","");
+                                        illQuery = illQuery.replaceAll("D","");
+                                        stylQuery = stylQuery.replaceAll("D","");
+                                        blogQuery = blogQuery.replaceAll("D","");
+                                        phoQuery = phoQuery.replaceAll("D","");
+                                        modQuery = modQuery.replaceAll("D","");
+                                        makeQuery = makeQuery.replaceAll("D","");
+                                        hairQuery = hairQuery.replaceAll("D","");
+                                        choQuery = choQuery.replaceAll("D","");
+                                        artQuery = artQuery.replaceAll("D","");
+
+                                      });
+Get.back();
+                                    }, label: Text("Apply"))
                                   ],
                                 ),
-                                ]
-                            ),
-                          ),
-                        );
+                              ),
+                            );
+                          });
+                        });
                       },
-                    );
-                  },
+                    );},
+                  ),
                 )
               ]),
         ),
@@ -749,8 +1017,7 @@ class _DItemState extends State<DItem> {
   UserModel receiver;
   String products;
   int client;
- String price;
-
+var price = 0.0;
   int followerCount = 0;
   final String currentUserId = currentUser?.id;
 
@@ -781,8 +1048,9 @@ class _DItemState extends State<DItem> {
         // ignore: missing_return
         builder: (context, snapshot) {
           if (!snapshot.hasData) {
-            return Text('text');
+            return Container();
           }
+          else{
           return Container(
             height: 200,
             child: ListView.builder(
@@ -814,7 +1082,7 @@ class _DItemState extends State<DItem> {
                     ));
               },
             ),
-          );
+          );}
         });
   }
 
@@ -1013,16 +1281,24 @@ class _DItemState extends State<DItem> {
 //      'followers':followerCount
 //    });
   }
-conversion()async{
-  var resultUSD1 = await Currency.getConversion(
-      from: '${user.currencyISO}', to: '${currentUser.currencyISO}', amount: user.designerAvg  );
-setState((){  var c1 = resultUSD1.rate;
-price =c1.toStringAsFixed(2);
+  conversion()async{
 
-print(price);
-});
+    if(currentUser.currencyISO == "USD") {
+      setState(() {
 
-}
+        price =user.designerUsd ;
+
+      }); }
+    else {
+      var resultUSD1 = await Currency.getConversion(
+          from: 'USD', to: '${currentUser.currencyISO}', amount: user.designerUsd.toString());
+      setState(() {
+        price = resultUSD1.rate;
+      });
+    }
+
+
+  }
   followerstile() {
     return Container(
       decoration: BoxDecoration(
@@ -1147,15 +1423,21 @@ print(price);
                   ],
                 ),
 
-                Row(
-                  children: [
-                    Text("$price" ,style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                        fontSize: SizeConfig.safeBlockHorizontal * 7
+                ListTile(
+                  dense: true,
+                  contentPadding: EdgeInsets.symmetric(horizontal: 0.0, vertical: 0.0),
+                  visualDensity: VisualDensity(horizontal: 0, vertical: -4),
+                  title:            Text("Average cost", style: TextStyle(
+                      color: kText,
+                      fontSize: SizeConfig.safeBlockHorizontal * 5,
+                      fontWeight: FontWeight.bold),),
+                  subtitle:
+                  Text( " ${currentUser.currencysym} ${currencyFormatter.format(price)}",style: TextStyle(color: kText,
+                      fontSize: SizeConfig.safeBlockHorizontal * 4,
+                      fontWeight: FontWeight.bold)),
 
-                    ),),
-                  ],
                 ),
+
 
                 SizedBox(
                   height: 10.0,
@@ -1187,7 +1469,7 @@ class _IItemState extends State<IItem> {
   UserModel receiver;
   String products;
   int client;
- String price;
+  var price = 0.0;
 
   int followerCount = 0;
   final String currentUserId = currentUser?.id;
@@ -1208,13 +1490,21 @@ class _IItemState extends State<IItem> {
     g();
   }
   conversion()async{
-    var resultUSD1 = await Currency.getConversion(
-        from: '${user.currencyISO}', to: '${currentUser.currencyISO}', amount: user.illustratorAvg  );
-    setState((){  var c1 = resultUSD1.rate;
-    price =c1.toStringAsFixed(2);
 
-    print(price);
-    });
+    if(currentUser.currencyISO == "USD") {
+      setState(() {
+
+        price =user.illustratorUsd ;
+
+      }); }
+    else {
+      var resultUSD1 = await Currency.getConversion(
+          from: 'USD', to: '${currentUser.currencyISO}', amount: user.illustratorUsd.toString());
+      setState(() {
+        price = resultUSD1.rate;
+      });
+    }
+
 
   }
 
@@ -1584,14 +1874,19 @@ class _IItemState extends State<IItem> {
                 ],
               ),
 
-              Row(
-                children: [
-                  Text("$price" ,style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                      fontSize: SizeConfig.safeBlockHorizontal * 7
+              ListTile(
+                dense: true,
+                contentPadding: EdgeInsets.symmetric(horizontal: 0.0, vertical: 0.0),
+                visualDensity: VisualDensity(horizontal: 0, vertical: -4),
+                title:            Text("Average cost", style: TextStyle(
+                    color: kText,
+                    fontSize: SizeConfig.safeBlockHorizontal * 5,
+                    fontWeight: FontWeight.bold),),
+                subtitle:
+                Text( " ${currentUser.currencysym} ${currencyFormatter.format(price)}",style: TextStyle(color: kText,
+                    fontSize: SizeConfig.safeBlockHorizontal * 4,
+                    fontWeight: FontWeight.bold)),
 
-                  ),),
-                ],
               ),
 
               SizedBox(
@@ -1619,11 +1914,11 @@ class SItem extends StatefulWidget {
 
 class _SItemState extends State<SItem> {
   final Users user;
+  var price = 0.0;
 
   UserModel receiver;
   String products;
   int client;
- String price;
 
   int followerCount = 0;
   final String currentUserId = currentUser?.id;
@@ -1644,13 +1939,21 @@ class _SItemState extends State<SItem> {
     g();
   }
   conversion()async{
-    var resultUSD1 = await Currency.getConversion(
-        from: '${user.currencyISO}', to: '${currentUser.currencyISO}', amount: user.stylistAvg  );
-    setState((){  var c1 = resultUSD1.rate;
-    price =c1.toStringAsFixed(2);
 
-    print(price);
-    });
+    if(currentUser.currencyISO == "USD") {
+      setState(() {
+
+        price =user.stylistUsd ;
+
+      }); }
+    else {
+      var resultUSD1 = await Currency.getConversion(
+          from: 'USD', to: '${currentUser.currencyISO}', amount: user.stylistUsd.toString());
+      setState(() {
+        price = resultUSD1.rate;
+      });
+    }
+
 
   }
 
@@ -2020,14 +2323,19 @@ class _SItemState extends State<SItem> {
                 ],
               ),
 
-              Row(
-                children: [
-                  Text("$price" ,style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                      fontSize: SizeConfig.safeBlockHorizontal * 7
+              ListTile(
+                dense: true,
+                contentPadding: EdgeInsets.symmetric(horizontal: 0.0, vertical: 0.0),
+                visualDensity: VisualDensity(horizontal: 0, vertical: -4),
+                title:            Text("Average cost", style: TextStyle(
+                    color: kText,
+                    fontSize: SizeConfig.safeBlockHorizontal * 5,
+                    fontWeight: FontWeight.bold),),
+                subtitle:
+                Text( " ${currentUser.currencysym} ${currencyFormatter.format(price)}",style: TextStyle(color: kText,
+                    fontSize: SizeConfig.safeBlockHorizontal * 4,
+                    fontWeight: FontWeight.bold)),
 
-                  ),),
-                ],
               ),
 
               SizedBox(
@@ -2055,11 +2363,10 @@ class BItem extends StatefulWidget {
 
 class _BItemState extends State<BItem> {
   final Users user;
+  var price = 0.0;
 
   UserModel receiver;
-  String products;
   int client;
- String price;
 
   int followerCount = 0;
   final String currentUserId = currentUser?.id;
@@ -2080,13 +2387,21 @@ class _BItemState extends State<BItem> {
     g();
   }
   conversion()async{
-    var resultUSD1 = await Currency.getConversion(
-        from: '${user.currencyISO}', to: '${currentUser.currencyISO}', amount: user.bloggerAvg  );
-    setState((){  var c1 = resultUSD1.rate;
-    price =c1.toStringAsFixed(2);
 
-    print(price);
-    });
+    if(currentUser.currencyISO == "USD") {
+      setState(() {
+
+        price =user.bloggerUsd ;
+
+      }); }
+    else {
+      var resultUSD1 = await Currency.getConversion(
+          from: 'USD', to: '${currentUser.currencyISO}', amount: user.bloggerUsd.toString());
+      setState(() {
+        price = resultUSD1.rate;
+      });
+    }
+
 
   }
 
@@ -2456,14 +2771,19 @@ class _BItemState extends State<BItem> {
                 ],
               ),
 
-              Row(
-                children: [
-                  Text("$price" ,style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                      fontSize: SizeConfig.safeBlockHorizontal * 7
+              ListTile(
+                dense: true,
+                contentPadding: EdgeInsets.symmetric(horizontal: 0.0, vertical: 0.0),
+                visualDensity: VisualDensity(horizontal: 0, vertical: -4),
+                title:            Text("Average cost", style: TextStyle(
+                    color: kText,
+                    fontSize: SizeConfig.safeBlockHorizontal * 5,
+                    fontWeight: FontWeight.bold),),
+                subtitle:
+                Text( " ${currentUser.currencysym} ${currencyFormatter.format(price)}",style: TextStyle(color: kText,
+                    fontSize: SizeConfig.safeBlockHorizontal * 4,
+                    fontWeight: FontWeight.bold)),
 
-                  ),),
-                ],
               ),
 
               SizedBox(
@@ -2491,11 +2811,11 @@ class PItem extends StatefulWidget {
 
 class _PItemState extends State<PItem> {
   final Users user;
+  var price = 0.0;
 
   UserModel receiver;
   String products;
   int client;
- String price;
 
   int followerCount = 0;
   final String currentUserId = currentUser?.id;
@@ -2516,13 +2836,21 @@ class _PItemState extends State<PItem> {
     g();
   }
   conversion()async{
-    var resultUSD1 = await Currency.getConversion(
-        from: '${user.currencyISO}', to: '${currentUser.currencyISO}', amount: user.photographerAvg  );
-    setState((){  var c1 = resultUSD1.rate;
-    price =c1.toStringAsFixed(2);
 
-    print(price);
-    });
+    if(currentUser.currencyISO == "USD") {
+      setState(() {
+
+        price =user.photographerUsd ;
+
+      }); }
+    else {
+      var resultUSD1 = await Currency.getConversion(
+          from: 'USD', to: '${currentUser.currencyISO}', amount: user.photographerUsd.toString());
+      setState(() {
+        price = resultUSD1.rate;
+      });
+    }
+
 
   }
 
@@ -2892,14 +3220,19 @@ class _PItemState extends State<PItem> {
                 ],
               ),
 
-              Row(
-                children: [
-                  Text("$price" ,style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                      fontSize: SizeConfig.safeBlockHorizontal * 7
+              ListTile(
+                dense: true,
+                contentPadding: EdgeInsets.symmetric(horizontal: 0.0, vertical: 0.0),
+                visualDensity: VisualDensity(horizontal: 0, vertical: -4),
+                title:            Text("Average cost", style: TextStyle(
+                    color: kText,
+                    fontSize: SizeConfig.safeBlockHorizontal * 5,
+                    fontWeight: FontWeight.bold),),
+                subtitle:
+                Text( " ${currentUser.currencysym} ${currencyFormatter.format(price)}",style: TextStyle(color: kText,
+                    fontSize: SizeConfig.safeBlockHorizontal * 4,
+                    fontWeight: FontWeight.bold)),
 
-                  ),),
-                ],
               ),
 
               SizedBox(
@@ -2927,11 +3260,11 @@ class MAItem extends StatefulWidget {
 
 class _MAItemState extends State<MAItem> {
   final Users user;
+  var price = 0.0;
 
   UserModel receiver;
   String products;
   int client;
- String price;
 
   int followerCount = 0;
   final String currentUserId = currentUser?.id;
@@ -2952,13 +3285,21 @@ class _MAItemState extends State<MAItem> {
     g();
   }
   conversion()async{
-    var resultUSD1 = await Currency.getConversion(
-        from: '${user.currencyISO}', to: '${currentUser.currencyISO}', amount: user.makeupAvg  );
-    setState((){  var c1 = resultUSD1.rate;
-    price =c1.toStringAsFixed(2);
 
-    print(price);
-    });
+    if(currentUser.currencyISO == "USD") {
+      setState(() {
+
+        price =user.makeupUsd ;
+
+      }); }
+    else {
+      var resultUSD1 = await Currency.getConversion(
+          from: 'USD', to: '${currentUser.currencyISO}', amount: user.makeupUsd.toString());
+      setState(() {
+        price = resultUSD1.rate;
+      });
+    }
+
 
   }
 
@@ -3328,14 +3669,19 @@ class _MAItemState extends State<MAItem> {
                 ],
               ),
 
-              Row(
-                children: [
-                  Text("$price" ,style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                      fontSize: SizeConfig.safeBlockHorizontal * 7
+              ListTile(
+                dense: true,
+                contentPadding: EdgeInsets.symmetric(horizontal: 0.0, vertical: 0.0),
+                visualDensity: VisualDensity(horizontal: 0, vertical: -4),
+                title:            Text("Average cost", style: TextStyle(
+                    color: kText,
+                    fontSize: SizeConfig.safeBlockHorizontal * 5,
+                    fontWeight: FontWeight.bold),),
+                subtitle:
+                Text( " ${currentUser.currencysym} ${currencyFormatter.format(price)}",style: TextStyle(color: kText,
+                    fontSize: SizeConfig.safeBlockHorizontal * 4,
+                    fontWeight: FontWeight.bold)),
 
-                  ),),
-                ],
               ),
 
               SizedBox(
@@ -3363,11 +3709,11 @@ class MItem extends StatefulWidget {
 
 class _MItemState extends State<MItem> {
   final Users user;
+  var price = 0.0;
 
   UserModel receiver;
   String products;
   int client;
- String price;
 
   int followerCount = 0;
   final String currentUserId = currentUser?.id;
@@ -3388,13 +3734,21 @@ class _MItemState extends State<MItem> {
     g();
   }
   conversion()async{
-    var resultUSD1 = await Currency.getConversion(
-        from: '${user.currencyISO}', to: '${currentUser.currencyISO}', amount: user.modelAvg  );
-    setState((){  var c1 = resultUSD1.rate;
-    price =c1.toStringAsFixed(2);
 
-    print(price);
-    });
+    if(currentUser.currencyISO == "USD") {
+      setState(() {
+
+        price =user.modelUsd ;
+
+      }); }
+    else {
+      var resultUSD1 = await Currency.getConversion(
+          from: 'USD', to: '${currentUser.currencyISO}', amount: user.modelUsd.toString());
+      setState(() {
+        price = resultUSD1.rate;
+      });
+    }
+
 
   }
 
@@ -3764,14 +4118,19 @@ class _MItemState extends State<MItem> {
                 ],
               ),
 
-              Row(
-                children: [
-                  Text("$price" ,style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                      fontSize: SizeConfig.safeBlockHorizontal * 7
+              ListTile(
+                dense: true,
+                contentPadding: EdgeInsets.symmetric(horizontal: 0.0, vertical: 0.0),
+                visualDensity: VisualDensity(horizontal: 0, vertical: -4),
+                title:            Text("Average cost", style: TextStyle(
+                    color: kText,
+                    fontSize: SizeConfig.safeBlockHorizontal * 5,
+                    fontWeight: FontWeight.bold),),
+                subtitle:
+                Text( " ${currentUser.currencysym} ${currencyFormatter.format(price)}",style: TextStyle(color: kText,
+                    fontSize: SizeConfig.safeBlockHorizontal * 4,
+                    fontWeight: FontWeight.bold)),
 
-                  ),),
-                ],
               ),
 
               SizedBox(
@@ -3799,11 +4158,11 @@ class HItem extends StatefulWidget {
 
 class _HItemState extends State<HItem> {
   final Users user;
+  var price = 0.0;
 
   UserModel receiver;
   String products;
   int client;
- String price;
 
   int followerCount = 0;
   final String currentUserId = currentUser?.id;
@@ -3824,13 +4183,21 @@ class _HItemState extends State<HItem> {
     g();
   }
   conversion()async{
-    var resultUSD1 = await Currency.getConversion(
-        from: '${user.currencyISO}', to: '${currentUser.currencyISO}', amount: user.hairAvg  );
-    setState((){  var c1 = resultUSD1.rate;
-    price =c1.toStringAsFixed(2);
 
-    print(price);
-    });
+    if(currentUser.currencyISO == "USD") {
+      setState(() {
+
+        price =user.hairUsd ;
+
+      }); }
+    else {
+      var resultUSD1 = await Currency.getConversion(
+          from: 'USD', to: '${currentUser.currencyISO}', amount: user.hairUsd.toString());
+      setState(() {
+        price = resultUSD1.rate;
+      });
+    }
+
 
   }
 
@@ -4200,14 +4567,19 @@ class _HItemState extends State<HItem> {
                 ],
               ),
 
-              Row(
-                children: [
-                  Text("$price" ,style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                      fontSize: SizeConfig.safeBlockHorizontal * 7
+              ListTile(
+                dense: true,
+                contentPadding: EdgeInsets.symmetric(horizontal: 0.0, vertical: 0.0),
+                visualDensity: VisualDensity(horizontal: 0, vertical: -4),
+                title:            Text("Average cost", style: TextStyle(
+                    color: kText,
+                    fontSize: SizeConfig.safeBlockHorizontal * 5,
+                    fontWeight: FontWeight.bold),),
+                subtitle:
+                Text( " ${currentUser.currencysym} ${currencyFormatter.format(price)}",style: TextStyle(color: kText,
+                    fontSize: SizeConfig.safeBlockHorizontal * 4,
+                    fontWeight: FontWeight.bold)),
 
-                  ),),
-                ],
               ),
 
               SizedBox(
@@ -4235,11 +4607,11 @@ class AItem extends StatefulWidget {
 
 class _AItemState extends State<AItem> {
   final Users user;
+  var price = 0.0;
 
   UserModel receiver;
   String products;
   int client;
- String price;
 
   int followerCount = 0;
   final String currentUserId = currentUser?.id;
@@ -4260,13 +4632,21 @@ class _AItemState extends State<AItem> {
     g();
   }
   conversion()async{
-    var resultUSD1 = await Currency.getConversion(
-        from: '${user.currencyISO}', to: '${currentUser.currencyISO}', amount: user.artisansAvg  );
-    setState((){  var c1 = resultUSD1.rate;
-    price =c1.toStringAsFixed(2);
 
-    print(price);
-    });
+    if(currentUser.currencyISO == "USD") {
+      setState(() {
+
+        price =user.artisansUsd ;
+
+      }); }
+    else {
+      var resultUSD1 = await Currency.getConversion(
+          from: 'USD', to: '${currentUser.currencyISO}', amount: user.artisansUsd.toString());
+      setState(() {
+        price = resultUSD1.rate;
+      });
+    }
+
 
   }
 
@@ -4636,14 +5016,19 @@ class _AItemState extends State<AItem> {
                 ],
               ),
 
-              Row(
-                children: [
-                  Text("$price" ,style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                      fontSize: SizeConfig.safeBlockHorizontal * 7
+              ListTile(
+                dense: true,
+                contentPadding: EdgeInsets.symmetric(horizontal: 0.0, vertical: 0.0),
+                visualDensity: VisualDensity(horizontal: 0, vertical: -4),
+                title:            Text("Average cost", style: TextStyle(
+                    color: kText,
+                    fontSize: SizeConfig.safeBlockHorizontal * 5,
+                    fontWeight: FontWeight.bold),),
+                subtitle:
+                Text( " ${currentUser.currencysym} ${currencyFormatter.format(price)}",style: TextStyle(color: kText,
+                    fontSize: SizeConfig.safeBlockHorizontal * 4,
+                    fontWeight: FontWeight.bold)),
 
-                  ),),
-                ],
               ),
 
               SizedBox(
@@ -4671,11 +5056,11 @@ class CItem extends StatefulWidget {
 
 class _CItemState extends State<CItem> {
   final Users user;
+  var price = 0.0;
 
   UserModel receiver;
   String products;
   int client;
- String price;
 
   int followerCount = 0;
   final String currentUserId = currentUser?.id;
@@ -4696,13 +5081,21 @@ class _CItemState extends State<CItem> {
     g();
   }
   conversion()async{
-    var resultUSD1 = await Currency.getConversion(
-        from: '${user.currencyISO}', to: '${currentUser.currencyISO}', amount: user.choreographerAvg  );
-    setState((){  var c1 = resultUSD1.rate;
-    price =c1.toStringAsFixed(2);
 
-    print(price);
-    });
+    if(currentUser.currencyISO == "USD") {
+      setState(() {
+
+        price =user.choreographerUsd ;
+
+      }); }
+    else {
+      var resultUSD1 = await Currency.getConversion(
+          from: 'USD', to: '${currentUser.currencyISO}', amount: user.choreographerUsd.toString());
+      setState(() {
+        price = resultUSD1.rate;
+      });
+    }
+
 
   }
 
@@ -5072,14 +5465,19 @@ class _CItemState extends State<CItem> {
                 ],
               ),
 
-              Row(
-                children: [
-                  Text("$price" ,style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                      fontSize: SizeConfig.safeBlockHorizontal * 7
+              ListTile(
+                dense: true,
+                contentPadding: EdgeInsets.symmetric(horizontal: 0.0, vertical: 0.0),
+                visualDensity: VisualDensity(horizontal: 0, vertical: -4),
+                title:            Text("Average cost", style: TextStyle(
+                    color: kText,
+                    fontSize: SizeConfig.safeBlockHorizontal * 5,
+                    fontWeight: FontWeight.bold),),
+                subtitle:
+                Text( " ${currentUser.currencysym} ${currencyFormatter.format(price)}",style: TextStyle(color: kText,
+                    fontSize: SizeConfig.safeBlockHorizontal * 4,
+                    fontWeight: FontWeight.bold)),
 
-                  ),),
-                ],
               ),
 
               SizedBox(

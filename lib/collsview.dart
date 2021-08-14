@@ -115,9 +115,6 @@ class _CollState extends State<Coll> {
   void initState() {
     super.initState();
     // images();
-print(ownerId);
-print(collId);
-print(collmediaUrl);
 
   }
 

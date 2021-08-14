@@ -15,6 +15,112 @@ import 'package:fashow/upload_Ecommerce.dart';
 import 'package:fashow/progress.dart';
 import 'package:fashow/HomePage.dart';
 import 'package:fashow/Constants.dart';
+import 'package:photo_view/photo_view.dart';
+import 'package:carousel_slider/carousel_slider.dart';
+List <Widget>listOfImages = <Widget>[];
+
+pics({String userid,String prodid}){
+  return
+    FutureBuilder<QuerySnapshot> (
+        future:     productsRef
+            .doc(userid)
+            .collection('userProducts')
+
+            .where('prodId' ,isEqualTo: '$prodid')
+        // .where('ownerId' ,isEqualTo: '$ownerId')
+            .get(),
+        builder: (context, snapshot) {
+
+          if (snapshot.hasData) {
+            return new Container( height:490,child:ListView.builder(
+
+                physics:NeverScrollableScrollPhysics(),
+                shrinkWrap: true,
+                scrollDirection:Axis.vertical,
+                itemCount: snapshot.data.docs.length,
+                itemBuilder: (BuildContext context, int index) {
+                  // List<String> images = List.from(snapshot.data.docs[index].data()['collmediaUrl']);
+                  listOfImages = [];
+                  for (int i = 0;
+                  i <
+                      snapshot.data.docs[index].data()['shopmediaUrl']
+                          .length;
+                  i++) {
+                    listOfImages.add(GestureDetector(
+                      onTap: (){
+                        showDialog<void>(
+                          context: context,
+                          // useRootNavigator:true,
+
+                          barrierDismissible: true,
+                          // false = user must tap button, true = tap outside dialog
+                          builder: (BuildContext dialogContext) {
+                            return
+                              Dialog(
+
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(20),),
+                                child: Container(
+                                  height: 400,
+                                  child:PhotoView(imageProvider: CachedNetworkImageProvider
+                                    (snapshot
+                                      .data.docs[index].data()['shopmediaUrl'][i])),),
+                              );
+                          },
+                        );
+                      },
+                      child: Container(
+                        height:490,
+                        child: CachedNetworkImage(imageUrl:snapshot
+                            .data.docs[index].data()['shopmediaUrl'][i]),
+                      ),
+                    ));
+                  }
+                  return Column(
+                    children: <Widget>[
+                      Container(
+                          height:490,
+                          width: MediaQuery
+                              .of(context)
+                              .size
+                              .width,
+                          child:
+                          CarouselSlider(
+
+                              items: listOfImages,
+                              options: CarouselOptions(
+                                height:500,
+                                pauseAutoPlayOnManualNavigate: true,
+                                pauseAutoPlayOnTouch: true,
+                                aspectRatio: 16/9,
+                                viewportFraction: 0.8,
+                                initialPage: 0,
+                                enableInfiniteScroll: false,
+                                reverse: false,
+                                autoPlay: true,
+                                autoPlayInterval: Duration(seconds: 3),
+                                autoPlayAnimationDuration: Duration(milliseconds: 800),
+                                autoPlayCurve: Curves.fastOutSlowIn,
+                                enlargeCenterPage: true,
+                                // onPageChanged: callbackFunction,
+                                scrollDirection: Axis.horizontal,
+                              )
+                          )
+                      ),
+
+                    ],
+                  );
+                }
+            ));
+          }
+          return Center(
+            child: CircularProgressIndicator(),
+          );
+
+        });
+
+}
+
 class Fav extends StatefulWidget {
 
   final String currentUser;
@@ -39,6 +145,7 @@ class _FavState extends State<Fav> {
   String prodId;
   String ownerId;
   Prod products;
+
   _FavState({
     this.prodId, this.products,this.ownerId,
   });

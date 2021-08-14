@@ -24,6 +24,16 @@ class Users{
  String photographerAvg;
  String bloggerAvg;
  String stylistAvg;
+ var designerUsd;
+ var illustratorUsd;
+ var artisansUsd;
+ var choreographerUsd;
+ var hairUsd;
+ var makeupUsd;
+ var modelUsd;
+ var photographerUsd;
+ var bloggerUsd;
+ var stylistUsd;
   bool designer;
  bool illustrator;
  bool artisans;
@@ -74,7 +84,16 @@ this.makeupAvg,
 this.modelAvg,
 this.photographerAvg,
 this.bloggerAvg,
-this.stylistAvg,
+this.stylistAvg,this.designerUsd,
+this.illustratorUsd,
+this.artisansUsd,
+this.choreographerUsd,
+this.hairUsd,
+this.makeupUsd,
+this.modelUsd,
+this.photographerUsd,
+this.bloggerUsd,
+this.stylistUsd,
   this.designer,
 this.illustrator,
 this.artisans,
@@ -125,6 +144,16 @@ this.Bidding,
       photographerAvg: doc.data()['photographerAvg'],
       bloggerAvg: doc.data()['bloggerAvg'],
       stylistAvg: doc.data()['stylistAvg'],
+      designerUsd: doc.data()['designerUsd'],
+      illustratorUsd: doc.data()['illustratorUsd'],
+      artisansUsd: doc.data()['artisanUsd'],
+      choreographerUsd: doc.data()['choreographerUsd'],
+      hairUsd: doc.data()['hairUsd'],
+      makeupUsd: doc.data()['makeupUsd'],
+      modelUsd: doc.data()['modelUsd'],
+      photographerUsd: doc.data()['photographerUsd'],
+      bloggerUsd: doc.data()['bloggerUsd'],
+      stylistUsd: doc.data()['stylistUsd'],
     designer: doc.data()['designer'],
       illustrator: doc.data()['illustrator'],
       artisans: doc.data()['artisan'],
