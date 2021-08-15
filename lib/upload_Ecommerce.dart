@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'dart:async';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fashow/Categories/BboyEcomUp.dart';
 import 'package:fashow/Categories/BgirlEcomUp.dart';
 import 'package:fashow/Categories/KboyEcomUp.dart';
@@ -9,6 +10,7 @@ import 'package:fashow/Categories/MenEcomUp.dart';
 import 'package:fashow/Categories/WomenEcomUp.dart';
 import 'package:fashow/Categories/TboyEcomUp.dart';
 import 'package:fashow/Categories/TgirlEcomUp.dart';
+import 'package:fashow/Products.dart';
 import 'package:flutter_chip_tags/flutter_chip_tags.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
 import 'package:multi_image_picker/multi_image_picker.dart';
@@ -36,6 +38,9 @@ import 'package:get/get.dart';
 import 'package:back_pressed/back_pressed.dart';
 import 'package:fashow/size_config.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
+import 'package:cached_network_image/cached_network_image.dart';
+String prodId = Uuid().v4();
+
 class Uploadecom extends StatefulWidget {
   final Users currentUser;
 
@@ -48,7 +53,7 @@ class Uploadecom extends StatefulWidget {
 class _UploadecomState extends State<Uploadecom>
     with AutomaticKeepAliveClientMixin<Uploadecom> {
 
-  String value = 'None';
+  String value = 'Select Category';
   List colors;
 bool worldship = true;
 bool freeship = true;
@@ -187,304 +192,69 @@ TextEditingController shipcostintern = TextEditingController();
 
 TextEditingController namecontroller = TextEditingController();
 TextEditingController shipcontroller = TextEditingController();
-  List<Asset> images = List<Asset>();
-  String _error = 'No Error Dectected';
+  List<Asset> images = <Asset>[];
 
   List<String> imageUrls = <String>[];
   File file;
+   File file1;
+   File file2;
+   File file3;
+   File file4;
+   File file5;
+   File file6;
+   File file7;
+   File file8;
+   File file9;
+   bool tile = false;
+   bool tile1 = false;
+   bool tile2 = false;
+   bool tile3 = false;
+   bool tile4 = false;
+   bool tile5 = false;
+   bool tile6 = false;
+   bool tile7 = false;
+   bool tile8 = false;
+   bool tile9 = false;
+
+
   bool isUploading = false;
-  String prodId = Uuid().v4();
   List<String> selectedSizes = <String>[];
 
   String dropdownValue = 'Women';
 
-bool indian = false;
 
   final scaffoldKey = new GlobalKey<ScaffoldState>();
- // final GlobalKey<TagsState> _tagStateKey = GlobalKey<TagsState>();
 
   final _formKey = GlobalKey<FormState>();
   bool _inProcess = false;
-  var userprice;
+
   var inrtousd;
-
-  var inrtocny;
-  var inrtogbp;
-  var inrtoeur;
-  var usdtoinr;
-  var usdtocny;
-  var usdtogbp;
-  var usdtoeur;
-  var cnytoinr;
-  var cnytousd;
-  var cnytogbp;
-  var cnytoeur;
-  var gbptoinr;
-  var gbptocny;
-  var gbptousd;
-  var gbptoeur;
-  var eurtoinr;
-  var eurtousd;
-  var eurtocny;
-  var eurtogbp;
-  var userprice1;
   var inrtousd1;
-  var inrtocny1;
-  var inrtogbp1;
-  var inrtoeur1;
-  var usdtoinr1;
-  var usdtocny1;
-  var usdtogbp1;
-  var usdtoeur1;
-  var cnytoinr1;
-  var cnytousd1;
-  var cnytogbp1;
-  var cnytoeur1;
-  var gbptoinr1;
-  var gbptocny1;
-  var gbptousd1;
-  var gbptoeur1;
-  var eurtoinr1;
-  var eurtousd1;
-  var eurtocny1;
-  var eurtogbp1;
-  var userprice2;
   var inrtousd2;
-  var inrtocny2;
-  var inrtogbp2;
-  var inrtoeur2;
-  var usdtoinr2;
-  var usdtocny2;
-  var usdtogbp2;
-  var usdtoeur2;
-  var cnytoinr2;
-  var cnytousd2;
-  var cnytogbp2;
-  var cnytoeur2;
-  var gbptoinr2;
-  var gbptocny2;
-  var gbptousd2;
-  var gbptoeur2;
-  var eurtoinr2;
-  var eurtousd2;
-  var eurtocny2;
-  var eurtogbp2;
-  var userprice3;
   var inrtousd3;
-  var inrtocny3;
-  var inrtogbp3;
-  var inrtoeur3;
-  var usdtoinr3;
-  var usdtocny3;
-  var usdtogbp3;
-  var usdtoeur3;
-  var cnytoinr3;
-  var cnytousd3;
-  var cnytogbp3;
-  var cnytoeur3;
-  var gbptoinr3;
-  var gbptocny3;
-  var gbptousd3;
-  var gbptoeur3;
-  var eurtoinr3;
-  var eurtousd3;
-  var eurtocny3;
-  var eurtogbp3;
-  var userprice4;
   var inrtousd4;
-  var inrtocny4;
-  var inrtogbp4;
-  var inrtoeur4;
-  var usdtoinr4;
-  var usdtocny4;
-  var usdtogbp4;
-  var usdtoeur4;
-  var cnytoinr4;
-  var cnytousd4;
-  var cnytogbp4;
-  var cnytoeur4;
-  var gbptoinr4;
-  var gbptocny4;
-  var gbptousd4;
-  var gbptoeur4;
-  var eurtoinr4;
-  var eurtousd4;
-  var eurtocny4;
-  var eurtogbp4;
-  var userprice5;
   var inrtousd5;
-  var inrtocny5;
-  var inrtogbp5;
-  var inrtoeur5;
-  var usdtoinr5;
-  var usdtocny5;
-  var usdtogbp5;
-  var usdtoeur5;
-  var cnytoinr5;
-  var cnytousd5;
-  var cnytogbp5;
-  var cnytoeur5;
-  var gbptoinr5;
-  var gbptocny5;
-  var gbptousd5;
-  var gbptoeur5;
-  var eurtoinr5;
-  var eurtousd5;
-  var eurtocny5;
-  var eurtogbp5;
-  var userprice6;
   var inrtousd6;
-  var inrtocny6;
-  var inrtogbp6;
-  var inrtoeur6;
-  var usdtoinr6;
-  var usdtocny6;
-  var usdtogbp6;
-  var usdtoeur6;
-  var cnytoinr6;
-  var cnytousd6;
-  var cnytogbp6;
-  var cnytoeur6;
-  var gbptoinr6;
-  var gbptocny6;
-  var gbptousd6;
-  var gbptoeur6;
-  var eurtoinr6;
-  var eurtousd6;
-  var eurtocny6;
-  var eurtogbp6;
-  var userprice7;
   var inrtousd7;
-  var inrtocny7;
-  var inrtogbp7;
-  var inrtoeur7;
-  var usdtoinr7;
-  var usdtocny7;
-  var usdtogbp7;
-  var usdtoeur7;
-  var cnytoinr7;
-  var cnytousd7;
-  var cnytogbp7;
-  var cnytoeur7;
-  var gbptoinr7;
-  var gbptocny7;
-  var gbptousd7;
-  var gbptoeur7;
-  var eurtoinr7;
-  var eurtousd7;
-  var eurtocny7;
-  var eurtogbp7;
-  var userprice8;
   var inrtousd8;
-  var inrtocny8;
-  var inrtogbp8;
-  var inrtoeur8;
-  var usdtoinr8;
-  var usdtocny8;
-  var usdtogbp8;
-  var usdtoeur8;
-  var cnytoinr8;
-  var cnytousd8;
-  var cnytogbp8;
-  var cnytoeur8;
-  var gbptoinr8;
-  var gbptocny8;
-  var gbptousd8;
-  var gbptoeur8;
-  var eurtoinr8;
-  var eurtousd8;
-  var eurtocny8;
-  var eurtogbp8;
-  var userprice9;
   var inrtousd9;
-  var inrtocny9;
-  var inrtogbp9;
-  var inrtoeur9;
-  var usdtoinr9;
-  var usdtocny9;
-  var usdtogbp9;
-  var usdtoeur9;
-  var cnytoinr9;
-  var cnytousd9;
-  var cnytogbp9;
-  var cnytoeur9;
-  var gbptoinr9;
-  var gbptocny9;
-  var gbptousd9;
-  var gbptoeur9;
-  var eurtoinr9;
-  var eurtousd9;
-  var eurtocny9;
-  var eurtogbp9;
-  var userprice10;
   var inrtousd10;
-  var inrtocny10;
-  var inrtogbp10;
-  var inrtoeur10;
-  var usdtoinr10;
-  var usdtocny10;
-  var usdtogbp10;
-  var usdtoeur10;
-  var cnytoinr10;
-  var cnytousd10;
-  var cnytogbp10;
-  var cnytoeur10;
-  var gbptoinr10;
-  var gbptocny10;
-  var gbptousd10;
-  var gbptoeur10;
-  var eurtoinr10;
-  var eurtousd10;
-  var eurtocny10;
-  var eurtogbp10;
-  var userprice11;
   var inrtousd11;
-  var inrtocny11;
-  var inrtogbp11;
-  var inrtoeur11;
-  var usdtoinr11;
-  var usdtocny11;
-  var usdtogbp11;
-  var usdtoeur11;
-  var cnytoinr11;
-  var cnytousd11;
-  var cnytogbp11;
-  var cnytoeur11;
-  var gbptoinr11;
-  var gbptocny11;
-  var gbptousd11;
-  var gbptoeur11;
-  var eurtoinr11;
-  var eurtousd11;
-  var eurtocny11;
-  var eurtogbp11;
-  var userprice12;
   var inrtousd12;
-  var inrtocny12;
-  var inrtogbp12;
-  var inrtoeur12;
-  var usdtoinr12;
-  var usdtocny12;
-  var usdtogbp12;
-  var usdtoeur12;
-  var cnytoinr12;
-  var cnytousd12;
-  var cnytogbp12;
-  var cnytoeur12;
-  var gbptoinr12;
-  var gbptocny12;
-  var gbptousd12;
-  var eurtoinr12;
-  var eurtousd12;
+ 
 
-var rounded;
 int count  = 1;
   @override
   void initState() {
-    _controller = ScrollController();
-    _controller.addListener(_scrollListener); //the listener for up and down.
+    // _controller = ScrollController();
+    // _controller.addListener(_scrollListener); //the listener for up and down.
     super.initState();
     // _tabController = TabController(length: 2,vsync: this);
+    productsRef
+        .doc(widget.currentUser.id)
+        .collection("userProducts")
+        .doc(prodId)
+        .set({"prodId":prodId});
   }
 
   _scrollListener() {
@@ -502,27 +272,33 @@ int count  = 1;
 
   Widget getImageWidget() {
     if (file != null) {
-      return Image.file(
-        file,
-        width: 250,
-        height: 250,
-        fit: BoxFit.cover,
+      return InkWell(
+        onTap:()=>getImage(),
+        child: Image.file(
+          file,
+          width: 150,
+          height: 150,
+          fit: BoxFit.cover,
+        ),
       );
     } else {
-      return Image.asset(
-        "assets/placeholder.jpg",
-        width: 250,
-        height: 250,
-        fit: BoxFit.cover,
+      return InkWell(
+        onTap:()=>getImage(),
+        child: Icon(
+        Icons.add,
+          size:50,
+        ),
       );
     }
   }
 
-  getImage(ImageSource source) async {
+  getImage() async {
+    Get.back();
     this.setState(() {
       _inProcess = true;
     });
-    File image = await ImagePicker.pickImage(source: source);
+    PickedFile pickedFile = await  ImagePicker().getImage(source: ImageSource.gallery);
+    File image  = File(pickedFile.path);
     if (image != null) {
       File cropped = await ImageCropper.cropImage(
           sourcePath: image.path,
@@ -543,6 +319,123 @@ int count  = 1;
       this.setState(() {
         file = cropped;
         _inProcess = true;
+        custom();
+      });
+    } else {
+      this.setState(() {
+        _inProcess = false;
+      });
+    }
+  }
+  Widget getImageWidget1() {
+    if (file1 != null) {
+      return InkWell(
+        onTap:()=>getImage1(),
+        child: Image.file(
+          file1,
+          width: 150,
+          height: 150,
+          fit: BoxFit.cover,
+        ),
+      );
+    } else {
+      return InkWell(
+        onTap:()=>getImage1(),
+         child: Icon(
+      Icons.add,
+        size:50,
+      ));
+    }
+  }
+
+  getImage1() async {
+    Get.back();
+
+    this.setState(() {
+      _inProcess = true;
+    });
+    File image = File(await ImagePicker().getImage(source: ImageSource.gallery).then((pickedFile) => pickedFile.path));
+
+    if (image != null) {
+      File cropped = await ImageCropper.cropImage(
+          sourcePath: image.path,
+          aspectRatio: CropAspectRatio(
+              ratioX: 1, ratioY: 1),
+          compressQuality: 100,
+          maxWidth: 700,
+          maxHeight: 700,
+          compressFormat: ImageCompressFormat.jpg,
+          androidUiSettings: AndroidUiSettings(
+            toolbarColor: Colors.deepOrange,
+            toolbarTitle: "RPS Cropper",
+            statusBarColor: Colors.deepOrange.shade900,
+            backgroundColor: Colors.white,
+          )
+      );
+
+      this.setState(() {
+        file1 = cropped;
+        _inProcess = true;
+        custom();
+
+      });
+    } else {
+      this.setState(() {
+        _inProcess = false;
+      });
+    }
+  }
+  Widget getImageWidget2() {
+    if (file2 != null) {
+      return InkWell(
+        onTap:()=>getImage2(),
+        child: Image.file(
+          file2,
+          width: 150,
+          height: 150,
+          fit: BoxFit.cover,
+        ),
+      );
+    } else {
+      return InkWell(
+        onTap:()=>getImage2(),
+         child: Icon(
+      Icons.add,
+        size:50,
+      ));
+    }
+  }
+
+  getImage2() async {
+    Get.back();
+
+    this.setState(() {
+      _inProcess = true;
+    });
+    File image = File(await ImagePicker().getImage(source: ImageSource.gallery).then((pickedFile) => pickedFile.path));
+
+    if (image != null) {
+      File cropped = await ImageCropper.cropImage(
+          sourcePath: image.path,
+          aspectRatio: CropAspectRatio(
+              ratioX: 1, ratioY: 1),
+          compressQuality: 100,
+          maxWidth: 700,
+          maxHeight: 700,
+          compressFormat: ImageCompressFormat.jpg,
+          androidUiSettings: AndroidUiSettings(
+            toolbarColor: Colors.deepOrange,
+            toolbarTitle: "RPS Cropper",
+            statusBarColor: Colors.deepOrange.shade900,
+            backgroundColor: Colors.white,
+          )
+      );
+
+      this.setState(() {
+        file2 = cropped;
+        _inProcess = true;
+        custom();
+
       });
     } else {
       this.setState(() {
@@ -551,7 +444,413 @@ int count  = 1;
     }
   }
 
+  Widget getImageWidget3() {
+    if (file3 != null) {
+      return InkWell(
+        onTap:()=>getImage3(),
+        child: Image.file(
+          file3,
+          width: 150,
+          height: 150,
+          fit: BoxFit.cover,
+        ),
+      );
+    } else {
+      return InkWell(
+        onTap:()=>getImage3(),
+         child: Icon(
+      Icons.add,
+        size:50,
+      ));
+    }
+  }
 
+  getImage3() async {
+    Get.back();
+
+    this.setState(() {
+      _inProcess = true;
+    });
+    File image = File(await ImagePicker().getImage(source: ImageSource.gallery).then((pickedFile) => pickedFile.path));
+
+    if (image != null) {
+      File cropped = await ImageCropper.cropImage(
+          sourcePath: image.path,
+          aspectRatio: CropAspectRatio(
+              ratioX: 1, ratioY: 1),
+          compressQuality: 100,
+          maxWidth: 700,
+          maxHeight: 700,
+          compressFormat: ImageCompressFormat.jpg,
+          androidUiSettings: AndroidUiSettings(
+            toolbarColor: Colors.deepOrange,
+            toolbarTitle: "RPS Cropper",
+            statusBarColor: Colors.deepOrange.shade900,
+            backgroundColor: Colors.white,
+          )
+      );
+
+      this.setState(() {
+        file3 = cropped;
+        _inProcess = true;
+        custom();
+
+      });
+    } else {
+      this.setState(() {
+        _inProcess = false;
+      });
+    }
+  }
+Widget getImageWidget4() {
+    if (file4 != null) {
+      return InkWell(
+        onTap:()=>getImage4(),
+        child: Image.file(
+          file4,
+          width: 150,
+          height: 150,
+          fit: BoxFit.cover,
+        ),
+      );
+    } else {
+      return InkWell(
+        onTap:()=>getImage4(),
+         child: Icon(
+      Icons.add,
+        size:50,
+      ));
+    }
+  }
+
+  getImage4() async {
+    Get.back();
+
+    this.setState(() {
+      _inProcess = true;
+    });
+    File image = File(await ImagePicker().getImage(source: ImageSource.gallery).then((pickedFile) => pickedFile.path));
+
+    if (image != null) {
+      File cropped = await ImageCropper.cropImage(
+          sourcePath: image.path,
+          aspectRatio: CropAspectRatio(
+              ratioX: 1, ratioY: 1),
+          compressQuality: 100,
+          maxWidth: 700,
+          maxHeight: 700,
+          compressFormat: ImageCompressFormat.jpg,
+          androidUiSettings: AndroidUiSettings(
+            toolbarColor: Colors.deepOrange,
+            toolbarTitle: "RPS Cropper",
+            statusBarColor: Colors.deepOrange.shade900,
+            backgroundColor: Colors.white,
+          )
+      );
+
+      this.setState(() {
+        file4 = cropped;
+        _inProcess = true;
+        custom();
+
+      });
+    } else {
+      this.setState(() {
+        _inProcess = false;
+      });
+    }
+  }
+Widget getImageWidget5() {
+    if (file5 != null) {
+      return InkWell(
+        onTap:()=>getImage5(),
+        child: Image.file(
+          file5,
+          width: 150,
+          height: 150,
+          fit: BoxFit.cover,
+        ),
+      );
+    } else {
+      return InkWell(
+        onTap:()=>getImage5(),
+         child: Icon(
+      Icons.add,
+        size:50,
+      ));
+    }
+  }
+
+  getImage5() async {
+    Get.back();
+
+    this.setState(() {
+      _inProcess = true;
+    });
+    File image = File(await ImagePicker().getImage(source: ImageSource.gallery).then((pickedFile) => pickedFile.path));
+
+    if (image != null) {
+      File cropped = await ImageCropper.cropImage(
+          sourcePath: image.path,
+          aspectRatio: CropAspectRatio(
+              ratioX: 1, ratioY: 1),
+          compressQuality: 100,
+          maxWidth: 700,
+          maxHeight: 700,
+          compressFormat: ImageCompressFormat.jpg,
+          androidUiSettings: AndroidUiSettings(
+            toolbarColor: Colors.deepOrange,
+            toolbarTitle: "RPS Cropper",
+            statusBarColor: Colors.deepOrange.shade900,
+            backgroundColor: Colors.white,
+          )
+      );
+
+      this.setState(() {
+        file5 = cropped;
+        _inProcess = true;
+        custom();
+
+      });
+    } else {
+      this.setState(() {
+        _inProcess = false;
+      });
+    }
+  }
+
+Widget getImageWidget6() {
+    if (file6 != null) {
+      return InkWell(
+        onTap:()=>getImage6(),
+        child: Image.file(
+          file6,
+          width: 150,
+          height: 150,
+          fit: BoxFit.cover,
+        ),
+      );
+    } else {
+      return InkWell(
+        onTap:()=>getImage6(),
+         child: Icon(
+      Icons.add,
+        size:50,
+      ));
+    }
+  }
+
+  getImage6() async {
+    Get.back();
+
+    this.setState(() {
+      _inProcess = true;
+    });
+    File image = File(await ImagePicker().getImage(source: ImageSource.gallery).then((pickedFile) => pickedFile.path));
+
+    if (image != null) {
+      File cropped = await ImageCropper.cropImage(
+          sourcePath: image.path,
+          aspectRatio: CropAspectRatio(
+              ratioX: 1, ratioY: 1),
+          compressQuality: 100,
+          maxWidth: 700,
+          maxHeight: 700,
+          compressFormat: ImageCompressFormat.jpg,
+          androidUiSettings: AndroidUiSettings(
+            toolbarColor: Colors.deepOrange,
+            toolbarTitle: "RPS Cropper",
+            statusBarColor: Colors.deepOrange.shade900,
+            backgroundColor: Colors.white,
+          )
+      );
+
+      this.setState(() {
+        file6 = cropped;
+        _inProcess = true;
+        custom();
+
+      });
+    } else {
+      this.setState(() {
+        _inProcess = false;
+      });
+    }
+  }
+Widget getImageWidget7() {
+    if (file7 != null) {
+      return InkWell(
+        onTap:()=>getImage7(),
+        child: Image.file(
+          file7,
+          width: 150,
+          height: 150,
+          fit: BoxFit.cover,
+        ),
+      );
+    } else {
+      return InkWell(
+        onTap:()=>getImage7(),
+         child: Icon(
+      Icons.add,
+        size:50,
+      ));
+    }
+  }
+
+  getImage7() async {
+    Get.back();
+
+    this.setState(() {
+      _inProcess = true;
+    });
+    File image = File(await ImagePicker().getImage(source: ImageSource.gallery).then((pickedFile) => pickedFile.path));
+
+    if (image != null) {
+      File cropped = await ImageCropper.cropImage(
+          sourcePath: image.path,
+          aspectRatio: CropAspectRatio(
+              ratioX: 1, ratioY: 1),
+          compressQuality: 100,
+          maxWidth: 700,
+          maxHeight: 700,
+          compressFormat: ImageCompressFormat.jpg,
+          androidUiSettings: AndroidUiSettings(
+            toolbarColor: Colors.deepOrange,
+            toolbarTitle: "RPS Cropper",
+            statusBarColor: Colors.deepOrange.shade900,
+            backgroundColor: Colors.white,
+          )
+      );
+
+      this.setState(() {
+        file7 = cropped;
+        _inProcess = true;
+        custom();
+
+      });
+    } else {
+      this.setState(() {
+        _inProcess = false;
+      });
+    }
+  }
+Widget getImageWidget8() {
+    if (file8 != null) {
+      return InkWell(
+        onTap:()=>getImage8(),
+        child: Image.file(
+          file8,
+          width: 150,
+          height: 150,
+          fit: BoxFit.cover,
+        ),
+      );
+    } else {
+      return InkWell(
+        onTap:()=>getImage8(),
+         child: Icon(
+      Icons.add,
+        size:50,
+      ));
+    }
+  }
+
+  getImage8() async {
+    Get.back();
+
+    this.setState(() {
+      _inProcess = true;
+    });
+    File image = File(await ImagePicker().getImage(source: ImageSource.gallery).then((pickedFile) => pickedFile.path));
+
+    if (image != null) {
+      File cropped = await ImageCropper.cropImage(
+          sourcePath: image.path,
+          aspectRatio: CropAspectRatio(
+              ratioX: 1, ratioY: 1),
+          compressQuality: 100,
+          maxWidth: 700,
+          maxHeight: 700,
+          compressFormat: ImageCompressFormat.jpg,
+          androidUiSettings: AndroidUiSettings(
+            toolbarColor: Colors.deepOrange,
+            toolbarTitle: "RPS Cropper",
+            statusBarColor: Colors.deepOrange.shade900,
+            backgroundColor: Colors.white,
+          )
+      );
+
+      this.setState(() {
+        file8 = cropped;
+        _inProcess = true;
+        custom();
+
+      });
+    } else {
+      this.setState(() {
+        _inProcess = false;
+      });
+    }
+  }
+Widget getImageWidget9() {
+    if (file9 != null) {
+      return InkWell(
+        onTap:()=>getImage9(),
+        child: Image.file(
+          file9,
+          width: 150,
+          height: 150,
+          fit: BoxFit.cover,
+        ),
+      );
+    } else {
+      return InkWell(
+        onTap:()=>getImage9(),
+         child: Icon(
+      Icons.add,
+        size:50,
+      ));
+    }
+  }
+
+  getImage9() async {
+    Get.back();
+
+    this.setState(() {
+      _inProcess = true;
+    });
+    File image = File(await ImagePicker().getImage(source: ImageSource.gallery).then((pickedFile) => pickedFile.path));
+
+    if (image != null) {
+      File cropped = await ImageCropper.cropImage(
+          sourcePath: image.path,
+          aspectRatio: CropAspectRatio(
+              ratioX: 1, ratioY: 1),
+          compressQuality: 100,
+          maxWidth: 700,
+          maxHeight: 700,
+          compressFormat: ImageCompressFormat.jpg,
+          androidUiSettings: AndroidUiSettings(
+            toolbarColor: Colors.deepOrange,
+            toolbarTitle: "RPS Cropper",
+            statusBarColor: Colors.deepOrange.shade900,
+            backgroundColor: Colors.white,
+          )
+      );
+
+      this.setState(() {
+        file9 = cropped;
+        _inProcess = true;
+        custom();
+
+      });
+    } else {
+      this.setState(() {
+        _inProcess = false;
+      });
+    }
+  }
   selectImage() {
     return showDialog(
         context: context,
@@ -561,13 +860,13 @@ int count  = 1;
             children: <Widget>[
               SimpleDialogOption(
                   child: Text("Photo with Camera"), onPressed: () {
-                getImage(ImageSource.camera);
+                getImage();
                 Navigator.pop(context);
               }),
               SimpleDialogOption(
                   child: Text("Image from Gallery"),
                   onPressed: () {
-                    getImage(ImageSource.gallery);
+                    getImage();
                     Navigator.pop(context);
                   }
               ),
@@ -580,16 +879,14 @@ int count  = 1;
         });
   }
 
+
    buildSplashScreen() {
     return
       ModalProgressHUD(
       inAsyncCall: _inProcess,
           child: Scaffold(
             body: Container(
-              decoration: BoxDecoration(
-                  gradient: fabGradient
-              ) ,
-              alignment: Alignment.center,
+alignment:Alignment.center,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
@@ -601,7 +898,7 @@ int count  = 1;
                           borderRadius: BorderRadius.circular(8.0),
                         ),
                         child: Text(
-                          "Upload Product",
+                          "Select Image",
                           style: TextStyle(
                             color: Colors.white,
                             fontSize: 22.0,
@@ -622,6 +919,16 @@ int count  = 1;
   clearImage() {
     setState(() {
       file = null;
+      file1 = null;
+      file2 = null;
+      file3 = null;
+      file4 = null;
+      file5 = null;
+      file6 = null;
+      file7 = null;
+      file8 = null;
+      file9 = null;
+
     });
   }
 
@@ -647,13 +954,197 @@ int count  = 1;
       file = compressedImageFile;
     });
   }
+  compressImage1() async {
+    final tempDir = await getTemporaryDirectory();
+    final path = tempDir.path;
+    Im.Image imageFile = Im.decodeImage(file1.readAsBytesSync());
+    final compressedImageFile = File('$path/img1_$prodId.jpg')
+      ..writeAsBytesSync(Im.encodeJpg(imageFile, quality: 85));
+    setState(() {
+      file1 = compressedImageFile;
+    });
+  }
+compressImage2() async {
+    final tempDir = await getTemporaryDirectory();
+    final path = tempDir.path;
+    Im.Image imageFile = Im.decodeImage(file2.readAsBytesSync());
+    final compressedImageFile = File('$path/img2_$prodId.jpg')
+      ..writeAsBytesSync(Im.encodeJpg(imageFile, quality: 85));
+    setState(() {
+      file2 = compressedImageFile;
+    });
+  }
+compressImage3() async {
+    final tempDir = await getTemporaryDirectory();
+    final path = tempDir.path;
+    Im.Image imageFile = Im.decodeImage(file3.readAsBytesSync());
+    final compressedImageFile = File('$path/img3_$prodId.jpg')
+      ..writeAsBytesSync(Im.encodeJpg(imageFile, quality: 85));
+    setState(() {
+      file3 = compressedImageFile;
+    });
+  }
+compressImage4() async {
+    final tempDir = await getTemporaryDirectory();
+    final path = tempDir.path;
+    Im.Image imageFile = Im.decodeImage(file4.readAsBytesSync());
+    final compressedImageFile = File('$path/img4_$prodId.jpg')
+      ..writeAsBytesSync(Im.encodeJpg(imageFile, quality: 85));
+    setState(() {
+      file4 = compressedImageFile;
+    });
+  }
+compressImage5() async {
+    final tempDir = await getTemporaryDirectory();
+    final path = tempDir.path;
+    Im.Image imageFile = Im.decodeImage(file5.readAsBytesSync());
+    final compressedImageFile = File('$path/img5_$prodId.jpg')
+      ..writeAsBytesSync(Im.encodeJpg(imageFile, quality: 85));
+    setState(() {
+      file5 = compressedImageFile;
+    });
+  }
+compressImage6() async {
+    final tempDir = await getTemporaryDirectory();
+    final path = tempDir.path;
+    Im.Image imageFile = Im.decodeImage(file6.readAsBytesSync());
+    final compressedImageFile = File('$path/img6_$prodId.jpg')
+      ..writeAsBytesSync(Im.encodeJpg(imageFile, quality: 85));
+    setState(() {
+      file6 = compressedImageFile;
+    });
+  }
+compressImage7() async {
+    final tempDir = await getTemporaryDirectory();
+    final path = tempDir.path;
+    Im.Image imageFile = Im.decodeImage(file7.readAsBytesSync());
+    final compressedImageFile = File('$path/img7_$prodId.jpg')
+      ..writeAsBytesSync(Im.encodeJpg(imageFile, quality: 85));
+    setState(() {
+      file7 = compressedImageFile;
+    });
+  }
+compressImage8() async {
+    final tempDir = await getTemporaryDirectory();
+    final path = tempDir.path;
+    Im.Image imageFile = Im.decodeImage(file8.readAsBytesSync());
+    final compressedImageFile = File('$path/img8_$prodId.jpg')
+      ..writeAsBytesSync(Im.encodeJpg(imageFile, quality: 85));
+    setState(() {
+      file8 = compressedImageFile;
+    });
+  }
+compressImage9() async {
+    final tempDir = await getTemporaryDirectory();
+    final path = tempDir.path;
+    Im.Image imageFile = Im.decodeImage(file9.readAsBytesSync());
+    final compressedImageFile = File('$path/img9_$prodId.jpg')
+      ..writeAsBytesSync(Im.encodeJpg(imageFile, quality: 85));
+    setState(() {
+      file9 = compressedImageFile;
+    });
+  }
 
   Future<String> uploadImage(imageFile) async {
-   UploadTask uploadTask =
-    storageRef.child("prod_$prodId.jpg").putFile(imageFile);
+    String fileName = DateTime.now().millisecondsSinceEpoch.toString();
+    Reference reference = FirebaseStorage.instance.ref().child("Shop${prodId}").child("$fileName.jpg");
+    UploadTask uploadTask = reference.putData((await imageFile.getByteData(quality: 70)).buffer.asUint8List());
+
     TaskSnapshot storageSnap = await uploadTask;
     String downloadUrl = await storageSnap.ref.getDownloadURL();
     return downloadUrl;
+  }
+   Future<String> uploadImage1(imageFile) async {
+    String fileName = DateTime.now().millisecondsSinceEpoch.toString();
+    Reference reference = FirebaseStorage.instance.ref().child("Shop${prodId}").child("$fileName.jpg");
+    UploadTask uploadTask = reference.putData((await imageFile.getByteData(quality: 70)).buffer.asUint8List());
+
+    TaskSnapshot storageSnap = await uploadTask;
+    String downloadUrl = await storageSnap.ref.getDownloadURL();
+    return downloadUrl;
+  }
+    Future<String> uploadImage2(imageFile) async {
+    String fileName = DateTime.now().millisecondsSinceEpoch.toString();
+    Reference reference = FirebaseStorage.instance.ref().child("Shop${prodId}").child("$fileName.jpg");
+    UploadTask uploadTask = reference.putData((await imageFile.getByteData(quality: 70)).buffer.asUint8List());
+
+    TaskSnapshot storageSnap = await uploadTask;
+    String downloadUrl = await storageSnap.ref.getDownloadURL();
+    return downloadUrl;
+  }
+    Future<String> uploadImage3(imageFile) async {
+    String fileName = DateTime.now().millisecondsSinceEpoch.toString();
+    Reference reference = FirebaseStorage.instance.ref().child("Shop${prodId}").child("$fileName.jpg");
+    UploadTask uploadTask = reference.putData((await imageFile.getByteData(quality: 70)).buffer.asUint8List());
+
+    TaskSnapshot storageSnap = await uploadTask;
+    String downloadUrl = await storageSnap.ref.getDownloadURL();
+    return downloadUrl;
+  }
+    Future<String> uploadImage4(imageFile) async {
+    String fileName = DateTime.now().millisecondsSinceEpoch.toString();
+    Reference reference = FirebaseStorage.instance.ref().child("Shop${prodId}").child("$fileName.jpg");
+    UploadTask uploadTask = reference.putData((await imageFile.getByteData(quality: 70)).buffer.asUint8List());
+
+    TaskSnapshot storageSnap = await uploadTask;
+    String downloadUrl = await storageSnap.ref.getDownloadURL();
+    return downloadUrl;
+  }
+    Future<String> uploadImage5(imageFile) async {
+    String fileName = DateTime.now().millisecondsSinceEpoch.toString();
+    Reference reference = FirebaseStorage.instance.ref().child("Shop${prodId}").child("$fileName.jpg");
+    UploadTask uploadTask = reference.putData((await imageFile.getByteData(quality: 70)).buffer.asUint8List());
+
+    TaskSnapshot storageSnap = await uploadTask;
+    String downloadUrl = await storageSnap.ref.getDownloadURL();
+    return downloadUrl;
+  }
+    Future<String> uploadImage6(imageFile) async {
+    String fileName = DateTime.now().millisecondsSinceEpoch.toString();
+    Reference reference = FirebaseStorage.instance.ref().child("Shop${prodId}").child("$fileName.jpg");
+    UploadTask uploadTask = reference.putData((await imageFile.getByteData(quality: 70)).buffer.asUint8List());
+
+    TaskSnapshot storageSnap = await uploadTask;
+    String downloadUrl = await storageSnap.ref.getDownloadURL();
+    return downloadUrl;
+  }
+    Future<String> uploadImage7(imageFile) async {
+    String fileName = DateTime.now().millisecondsSinceEpoch.toString();
+    Reference reference = FirebaseStorage.instance.ref().child("Shop${prodId}").child("$fileName.jpg");
+    UploadTask uploadTask = reference.putData((await imageFile.getByteData(quality: 70)).buffer.asUint8List());
+
+    TaskSnapshot storageSnap = await uploadTask;
+    String downloadUrl = await storageSnap.ref.getDownloadURL();
+    return downloadUrl;
+  }
+    Future<String> uploadImage8(imageFile) async {
+    String fileName = DateTime.now().millisecondsSinceEpoch.toString();
+    Reference reference = FirebaseStorage.instance.ref().child("Shop${prodId}").child("$fileName.jpg");
+    UploadTask uploadTask = reference.putData((await imageFile.getByteData(quality: 70)).buffer.asUint8List());
+
+    TaskSnapshot storageSnap = await uploadTask;
+    String downloadUrl = await storageSnap.ref.getDownloadURL();
+    return downloadUrl;
+  }
+    Future<String> uploadImage9(imageFile) async {
+    String fileName = DateTime.now().millisecondsSinceEpoch.toString();
+    Reference reference = FirebaseStorage.instance.ref().child("Shop${prodId}").child("$fileName.jpg");
+    UploadTask uploadTask = reference.putData((await imageFile.getByteData(quality: 70)).buffer.asUint8List());
+
+    TaskSnapshot storageSnap = await uploadTask;
+    String downloadUrl = await storageSnap.ref.getDownloadURL();
+    return downloadUrl;
+  }
+
+
+  Future<dynamic> postImage(Asset imageFile) async {
+//    ByteData byteData = await imageFile.requestOriginal(quality: 75);
+    String fileName = DateTime.now().millisecondsSinceEpoch.toString();
+    Reference reference = FirebaseStorage.instance.ref().child("Shop${prodId}").child("$fileName.jpg");
+    UploadTask uploadTask = reference.putData((await imageFile.getByteData(quality: 70)).buffer.asUint8List());
+    TaskSnapshot storageTaskSnapshot = await uploadTask;
+//    print(storageTaskSnapshot.ref.getDownloadURL());
+    return storageTaskSnapshot.ref.getDownloadURL();
   }
 
 
@@ -840,7 +1331,7 @@ int count  = 1;
                   title: 'Indian Ethnic',
                   value: value,
                   choiceItems: Indian,
-                  onChange: (state) => setState(() { value = state.value; indian = true;})
+                  onChange: (state) => setState(() { value = state.value; })
               ),
 
             ],
@@ -1100,7 +1591,7 @@ SmartSelect<String>.single(
                  title: 'Indian Ethnic',
                  value: value,
                  choiceItems: WEthnic,
-                 onChange: (state) => setState(() { value = state.value; indian = true;})
+                 onChange: (state) => setState(() { value = state.value; })
              ),
 
            ],
@@ -1387,7 +1878,7 @@ Widget BabyBCategory(){
                       title: 'Indian Ethnic',
                       value: value,
                       choiceItems: BBEthnic,
-                      onChange: (state) => setState((){ value = state.value; indian = true;})
+                      onChange: (state) => setState((){ value = state.value; })
                   ),
 
                 ],
@@ -1548,7 +2039,7 @@ Widget BabyGCategory() {
                 title: 'Indian Ethnic',
                 value: value,
                 choiceItems: GGEthnic,
-                onChange: (state) => setState(() { value = state.value; indian = true;})
+                onChange: (state) => setState(() { value = state.value; })
             ),
 
           ],
@@ -1749,7 +2240,7 @@ Widget KidBCategory(){
                       title: 'Indian Ethnic',
                       value: value,
                       choiceItems: KBEthnic,
-                      onChange: (state) => setState(() { value = state.value; indian = true;})
+                      onChange: (state) => setState(() { value = state.value; })
                   ),
 
                 ],
@@ -1943,7 +2434,7 @@ return
                   title: 'Indian Ethnic',
                   value: value,
                   choiceItems: KGEthnic,
-                  onChange: (state) => setState(() { value = state.value; indian = true;})
+                  onChange: (state) => setState(() { value = state.value; })
               ),
 
             ],
@@ -2189,7 +2680,7 @@ Widget TeenBCategory(){
                 title: 'Indian Ethnic',
                 value: value,
                 choiceItems: TBEthnic,
-                onChange: (state) => setState((){ value = state.value; indian = true;})
+                onChange: (state) => setState((){ value = state.value; })
             ),
 
           ],
@@ -2376,7 +2867,7 @@ Widget TeenGCategory(){
                   title: 'Indian Ethnic',
                   value: value,
                   choiceItems: TGEthnic,
-                  onChange: (state) => setState((){ value = state.value; indian = true;})
+                  onChange: (state) => setState((){ value = state.value; })
               ),
 
             ],
@@ -2850,6 +3341,694 @@ Widget sizeGuide(){
    }
 
 }
+custom(){
+    return
+      showMaterialModalBottomSheet(
+        context: context,
+        builder: (BuildContext context)
+    {
+      SizeConfig().init(context);
+
+      return
+       Builder(builder: (BuildContext context) {
+         return StatefulBuilder(builder: (BuildContext context, State) {
+          return
+            Container(
+              height: MediaQuery
+                  .of(context)
+                  .size
+                  .height * 0.75,
+
+              child: ListView(
+
+
+                children: [
+
+
+                  ExpansionTile(
+                    onExpansionChanged: (val){
+                      State((){
+                        tile = val;
+                      });
+                    },
+                    initiallyExpanded:tile,
+                    title: Text('Custom size 1'),
+                    maintainState: true,
+                    children: [
+                      getImageWidget(),
+                      Container(
+                        margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+                        child: TextField(
+
+                          maxLines: 1,
+                          controller: customController1,
+                          decoration: InputDecoration(
+                              border: OutlineInputBorder(
+                                  borderSide: BorderSide(color: kGrey)),
+                              labelText: 'Title',
+                              hintText: '117 cm'
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
+                      Container(
+                        margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+                        child: TextField(
+
+                          keyboardType: TextInputType.number,
+                          maxLines: 1,
+                          controller: customController11,
+                          decoration: InputDecoration(
+                            border: OutlineInputBorder(
+                                borderSide: BorderSide(color: kGrey)),
+                            labelText: 'Additional price(optional)',
+                            hintText: " ${currentUser.currencysym}0",
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
+                      Container(
+                        margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+                        child: TextField(
+
+                          keyboardType: TextInputType.number,
+                          maxLines: 1,
+                          controller: customController12,
+                          decoration: InputDecoration(
+                              border: OutlineInputBorder(
+                                  borderSide: BorderSide(color: kGrey)),
+                              labelText: 'Quantity in inventory',
+                              hintText: '0'
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
+
+                    ],
+                  ),
+                  ExpansionTile(
+                  onExpansionChanged: (val){
+                    State((){
+                      tile1 = val;
+                    });
+                  },
+           initiallyExpanded:tile1,
+                    title: Text('Custom size 2'),
+                    maintainState: true,
+                    children: [
+                      getImageWidget1(),
+
+                      Container(
+                        margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+                        child: TextField(
+
+                          maxLines: 1,
+                          controller: customController2,
+                          decoration: InputDecoration(
+                              border: OutlineInputBorder(
+                                  borderSide: BorderSide(color: kGrey)),
+                              labelText: 'Title',
+                              hintText: '117 cm'
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
+                      Container(
+                        margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+                        child: TextField(
+
+                          keyboardType: TextInputType.number,
+                          maxLines: 1,
+                          controller: customController21,
+                          decoration: InputDecoration(
+                            border: OutlineInputBorder(
+                                borderSide: BorderSide(color: kGrey)),
+                            labelText: 'Additional price(optional)',
+                            hintText: " ${currentUser.currencysym}0",
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
+                      Container(
+                        margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+                        child: TextField(
+
+                          keyboardType: TextInputType.number,
+                          maxLines: 1,
+                          controller: customController22,
+                          decoration: InputDecoration(
+                              border: OutlineInputBorder(
+                                  borderSide: BorderSide(color: kGrey)),
+                              labelText: 'Quantity in inventory',
+                              hintText: '0'
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
+
+                    ],
+                  ),
+                  ExpansionTile(
+                    onExpansionChanged: (val){
+                      State((){
+                        tile2 = val;
+                      });
+                    },
+                    initiallyExpanded:tile2,
+                    title: Text('Custom size 3'),
+                    maintainState: true,
+                    children: [
+                      getImageWidget2(),
+
+                      Container(
+                        margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+                        child: TextField(
+
+                          maxLines: 1,
+                          controller: customController3,
+                          decoration: InputDecoration(
+                              border: OutlineInputBorder(
+                                  borderSide: BorderSide(color: kGrey)),
+                              labelText: 'Title',
+                              hintText: '117 cm'
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
+                      Container(
+                        margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+                        child: TextField(
+
+                          keyboardType: TextInputType.number,
+                          maxLines: 1,
+                          controller: customController31,
+                          decoration: InputDecoration(
+                            border: OutlineInputBorder(
+                                borderSide: BorderSide(color: kGrey)),
+                            labelText: 'Additional price(optional)',
+                            hintText: " ${currentUser.currencysym}0",
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
+                      Container(
+                        margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+                        child: TextField(
+
+                          keyboardType: TextInputType.number,
+                          maxLines: 1,
+                          controller: customController32,
+                          decoration: InputDecoration(
+                              border: OutlineInputBorder(
+                                  borderSide: BorderSide(color: kGrey)),
+                              labelText: 'Quantity in inventory',
+                              hintText: '0'
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
+
+                    ],
+                  ),
+                  ExpansionTile(
+                    onExpansionChanged: (val){
+                      State((){
+                        tile3 = val;
+                      });
+                    },
+                    initiallyExpanded:tile3,
+                    title: Text('Custom size 4'),
+                    maintainState: true,
+                    children: [
+                      getImageWidget3(),
+
+                      Container(
+                        margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+                        child: TextField(
+
+                          maxLines: 1,
+                          controller: customController4,
+                          decoration: InputDecoration(
+                              border: OutlineInputBorder(
+                                  borderSide: BorderSide(color: kGrey)),
+                              labelText: 'Title',
+                              hintText: '117 cm'
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
+                      Container(
+                        margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+                        child: TextField(
+
+                          keyboardType: TextInputType.number,
+                          maxLines: 1,
+                          controller: customController41,
+                          decoration: InputDecoration(
+                            border: OutlineInputBorder(
+                                borderSide: BorderSide(color: kGrey)),
+                            labelText: 'Additional price(optional)',
+                            hintText: " ${currentUser.currencysym}0",
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
+                      Container(
+                        margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+                        child: TextField(
+
+                          keyboardType: TextInputType.number,
+                          maxLines: 1,
+                          controller: customController42,
+                          decoration: InputDecoration(
+                              border: OutlineInputBorder(
+                                  borderSide: BorderSide(color: kGrey)),
+                              labelText: 'Quantity in inventory',
+                              hintText: '0'
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
+
+                    ],
+                  ),
+                  ExpansionTile(
+                    onExpansionChanged: (val){
+                      State((){
+                        tile4 = val;
+                      });
+                    },
+                    initiallyExpanded:tile4,
+                    title: Text('Custom size 5'),
+                    maintainState: true,
+                    children: [
+                      getImageWidget4(),
+
+                      Container(
+                        margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+                        child: TextField(
+
+                          maxLines: 1,
+                          controller: customController5,
+                          decoration: InputDecoration(
+                              border: OutlineInputBorder(
+                                  borderSide: BorderSide(color: kGrey)),
+                              labelText: 'Title',
+                              hintText: '117 cm'
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
+                      Container(
+                        margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+                        child: TextField(
+
+                          keyboardType: TextInputType.number,
+                          maxLines: 1,
+                          controller: customController51,
+                          decoration: InputDecoration(
+                            border: OutlineInputBorder(
+                                borderSide: BorderSide(color: kGrey)),
+                            labelText: 'Additional price(optional)',
+                            hintText: " ${currentUser.currencysym}0",
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
+                      Container(
+                        margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+                        child: TextField(
+
+                          keyboardType: TextInputType.number,
+                          maxLines: 1,
+                          controller: customController52,
+                          decoration: InputDecoration(
+                              border: OutlineInputBorder(
+                                  borderSide: BorderSide(color: kGrey)),
+                              labelText: 'Quantity in inventory',
+                              hintText: '0'
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
+
+                    ],
+                  ),
+                  ExpansionTile(
+                    onExpansionChanged: (val){
+                      State((){
+                        tile5 = val;
+                      });
+                    },
+                    initiallyExpanded:tile5,
+                    title: Text('Custom size 6'),
+                    maintainState: true,
+                    children: [
+                      getImageWidget5(),
+
+                      Container(
+                        margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+                        child: TextField(
+
+                          maxLines: 1,
+                          controller: customController6,
+                          decoration: InputDecoration(
+                              border: OutlineInputBorder(
+                                  borderSide: BorderSide(color: kGrey)),
+                              labelText: 'Title',
+                              hintText: '117 cm'
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
+                      Container(
+                        margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+                        child: TextField(
+
+                          keyboardType: TextInputType.number,
+                          maxLines: 1,
+                          controller: customController61,
+                          decoration: InputDecoration(
+                            border: OutlineInputBorder(
+                                borderSide: BorderSide(color: kGrey)),
+                            labelText: 'Additional price(optional)',
+                            hintText: " ${currentUser.currencysym}0",
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
+                      Container(
+                        margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+                        child: TextField(
+
+                          keyboardType: TextInputType.number,
+                          maxLines: 1,
+                          controller: customController62,
+                          decoration: InputDecoration(
+                              border: OutlineInputBorder(
+                                  borderSide: BorderSide(color: kGrey)),
+                              labelText: 'Quantity in inventory',
+                              hintText: '0'
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
+
+                    ],
+                  ),
+                  ExpansionTile(
+                    onExpansionChanged: (val){
+                      State((){
+                        tile6 = val;
+                      });
+                    },
+                    initiallyExpanded:tile6,
+                    title: Text('Custom size 7'),
+                    maintainState: true,
+                    children: [
+                      getImageWidget6(),
+
+                      Container(
+                        margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+                        child: TextField(
+
+                          maxLines: 1,
+                          controller: customController7,
+                          decoration: InputDecoration(
+                              border: OutlineInputBorder(
+                                  borderSide: BorderSide(color: kGrey)),
+                              labelText: 'Title',
+                              hintText: '117 cm'
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
+                      Container(
+                        margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+                        child: TextField(
+
+                          keyboardType: TextInputType.number,
+                          maxLines: 1,
+                          controller: customController71,
+                          decoration: InputDecoration(
+                            border: OutlineInputBorder(
+                                borderSide: BorderSide(color: kGrey)),
+                            labelText: 'Additional price(optional)',
+                            hintText: " ${currentUser.currencysym}0",
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
+                      Container(
+                        margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+                        child: TextField(
+
+                          keyboardType: TextInputType.number,
+                          maxLines: 1,
+                          controller: customController72,
+                          decoration: InputDecoration(
+                              border: OutlineInputBorder(
+                                  borderSide: BorderSide(color: kGrey)),
+                              labelText: 'Quantity in inventory',
+                              hintText: '0'
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
+
+                    ],
+                  ),
+                  ExpansionTile(
+                    onExpansionChanged: (val){
+                      State((){
+                        tile7 = val;
+                      });
+                    },
+                    initiallyExpanded:tile7,
+                    title: Text('Custom size 8'),
+                    maintainState: true,
+                    children: [
+                      getImageWidget7(),
+
+                      Container(
+                        margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+                        child: TextField(
+
+                          maxLines: 1,
+                          controller: customController8,
+                          decoration: InputDecoration(
+                              border: OutlineInputBorder(
+                                  borderSide: BorderSide(color: kGrey)),
+                              labelText: 'Title',
+                              hintText: '117 cm'
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
+                      Container(
+                        margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+                        child: TextField(
+
+                          keyboardType: TextInputType.number,
+                          maxLines: 1,
+                          controller: customController81,
+                          decoration: InputDecoration(
+                            border: OutlineInputBorder(
+                                borderSide: BorderSide(color: kGrey)),
+                            labelText: 'Additional price(optional)',
+                            hintText: " ${currentUser.currencysym}0",
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
+                      Container(
+                        margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+                        child: TextField(
+
+                          keyboardType: TextInputType.number,
+                          maxLines: 1,
+                          controller: customController82,
+                          decoration: InputDecoration(
+                              border: OutlineInputBorder(
+                                  borderSide: BorderSide(color: kGrey)),
+                              labelText: 'Quantity in inventory',
+                              hintText: '0'
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
+
+                    ],
+                  ),
+                  ExpansionTile(
+                    onExpansionChanged: (val){
+                      State((){
+                        tile8 = val;
+                      });
+                    },
+                    initiallyExpanded:tile8,
+                    title: Text('Custom size 9'),
+                    maintainState: true,
+                    children: [
+                      getImageWidget8(),
+
+                      Container(
+                        margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+                        child: TextField(
+
+                          maxLines: 1,
+                          controller: customController9,
+                          decoration: InputDecoration(
+                              border: OutlineInputBorder(
+                                  borderSide: BorderSide(color: kGrey)),
+                              labelText: 'Title',
+                              hintText: '117 cm'
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
+                      Container(
+                        margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+                        child: TextField(
+
+                          keyboardType: TextInputType.number,
+                          maxLines: 1,
+                          controller: customController91,
+                          decoration: InputDecoration(
+                            border: OutlineInputBorder(
+                                borderSide: BorderSide(color: kGrey)),
+                            labelText: 'Additional price(optional)',
+                            hintText: " ${currentUser.currencysym}0",
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
+                      Container(
+                        margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+                        child: TextField(
+
+                          keyboardType: TextInputType.number,
+                          maxLines: 1,
+                          controller: customController92,
+                          decoration: InputDecoration(
+                              border: OutlineInputBorder(
+                                  borderSide: BorderSide(color: kGrey)),
+                              labelText: 'Quantity in inventory',
+                              hintText: '0'
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
+
+                    ],
+                  ),
+                  ExpansionTile(
+                    onExpansionChanged: (val){
+                      State((){
+                        tile9 = val;
+                      });
+                    },
+                    initiallyExpanded:tile9,
+                    title: Text('Custom size 10'),
+                    maintainState: true,
+                    children: [
+                      getImageWidget9(),
+
+                      Container(
+                        margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+                        child: TextField(
+
+                          maxLines: 1,
+                          controller: customController10,
+                          decoration: InputDecoration(
+                              border: OutlineInputBorder(
+                                  borderSide: BorderSide(color: kGrey)),
+                              labelText: 'Title',
+                              hintText: '117 cm'
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
+                      Container(
+                        margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+                        child: TextField(
+
+                          keyboardType: TextInputType.number,
+                          maxLines: 1,
+                          controller: customController101,
+                          decoration: InputDecoration(
+                            border: OutlineInputBorder(
+                                borderSide: BorderSide(color: kGrey)),
+                            labelText: 'Additional price(optional)',
+                            hintText: " ${currentUser.currencysym}0",
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
+                      Container(
+                        margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+                        child: TextField(
+
+                          keyboardType: TextInputType.number,
+                          maxLines: 1,
+                          controller: customController102,
+                          decoration: InputDecoration(
+                              border: OutlineInputBorder(
+                                  borderSide: BorderSide(color: kGrey)),
+                              labelText: 'Quantity in inventory',
+                              hintText: '0'
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
+
+                    ],
+                  ),
+
+
+                ],
+              ),
+
+            );
+        }
+        );
+    }
+      );
+          },
+      );
+
+}
+tag(){
+    return
+      showMaterialModalBottomSheet(
+        expand:true,
+        context: context,
+        builder: (BuildContext context)
+    {
+      SizeConfig().init(context);
+
+      return
+       Builder(builder: (BuildContext context) {
+         return StatefulBuilder(builder: (BuildContext context, State) {
+          return
+            Container(
+              height: MediaQuery
+                  .of(context)
+                  .size
+                  .height * 0.75,
+
+              child: SearchTag(),
+
+            );
+        }
+        );
+    }
+      );
+          },
+      );
+
+}
+
  AddSize(){
   if(dropdownValue=='Men') {
 return
@@ -2865,7 +4044,7 @@ return
 
             child: DefaultTabController(
 
-                length:6,
+                length:5,
                 child: Scaffold(
                   resizeToAvoidBottomInset:true,
                   appBar:AppBar(
@@ -2881,7 +4060,6 @@ return
                         Text("Clothing",style: TextStyle(fontSize:  SizeConfig.safeBlockHorizontal *5,),),
                         Text("Made-to-order",style: TextStyle(fontSize:  SizeConfig.safeBlockHorizontal *5,),),
                         Text("Free size",style: TextStyle(fontSize:  SizeConfig.safeBlockHorizontal *5),),
-                        Text("Custom size(upto 10)",style: TextStyle(fontSize:  SizeConfig.safeBlockHorizontal *5),),
                        Text("Ring(US)",style: TextStyle(fontSize:  SizeConfig.safeBlockHorizontal *5),),
                        Text("Shoes(US)",style: TextStyle(fontSize:  SizeConfig.safeBlockHorizontal *5),),
 
@@ -3292,567 +4470,6 @@ return
                                   ),
                                 ],
                               ),
-
-
-                            ],
-                          ),
-                          ListView(
-
-
-                            children: [
-
-
-                              ExpansionTile(
-                                title: Text('Custom size 1'),
-                                maintainState: true,
-                                children: [
-
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      maxLines: 1,
-                                      controller: customController1,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Title',
-                                          hintText: '117 cm'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: customController11,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Additional price(optional)',
-                                        hintText:" ${currentUser.currencysym}0",
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: customController12,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-
-                                ],
-                              ),
-                              ExpansionTile(
-                                title: Text('Custom size 2'),
-                                maintainState: true,
-                                children: [
-
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      maxLines: 1,
-                                      controller: customController2,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Title',
-                                          hintText: '117 cm'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: customController21,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Additional price(optional)',
-                                        hintText:" ${currentUser.currencysym}0",
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: customController22,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-
-                                ],
-                              ),
-                              ExpansionTile(
-                                title: Text('Custom size 3'),
-                                maintainState: true,
-                                children: [
-
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      maxLines: 1,
-                                      controller: customController3,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Title',
-                                          hintText: '117 cm'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: customController31,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Additional price(optional)',
-                                        hintText:" ${currentUser.currencysym}0",
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: customController32,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-
-                                ],
-                              ),
-                              ExpansionTile(
-                                title: Text('Custom size 4'),
-                                maintainState: true,
-                                children: [
-
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      maxLines: 1,
-                                      controller: customController4,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Title',
-                                          hintText: '117 cm'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: customController41,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Additional price(optional)',
-                                        hintText:" ${currentUser.currencysym}0",
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: customController42,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-
-                                ],
-                              ),
-                              ExpansionTile(
-                                title: Text('Custom size 5'),
-                                maintainState: true,
-                                children: [
-
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      maxLines: 1,
-                                      controller: customController5,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Title',
-                                          hintText: '117 cm'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: customController51,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Additional price(optional)',
-                                        hintText:" ${currentUser.currencysym}0",
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: customController52,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-
-                                ],
-                              ),
-                              ExpansionTile(
-                                title: Text('Custom size 6'),
-                                maintainState: true,
-                                children: [
-
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      maxLines: 1,
-                                      controller: customController6,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Title',
-                                          hintText: '117 cm'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: customController61,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Additional price(optional)',
-                                        hintText:" ${currentUser.currencysym}0",
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: customController62,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-
-                                ],
-                              ),
-                              ExpansionTile(
-                                title: Text('Custom size 7'),
-                                maintainState: true,
-                                children: [
-
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      maxLines: 1,
-                                      controller: customController7,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Title',
-                                          hintText: '117 cm'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: customController71,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Additional price(optional)',
-                                        hintText:" ${currentUser.currencysym}0",
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: customController72,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-
-                                ],
-                              ),
-                              ExpansionTile(
-                                title: Text('Custom size 8'),
-                                maintainState: true,
-                                children: [
-
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      maxLines: 1,
-                                      controller: customController8,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Title',
-                                          hintText: '117 cm'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: customController81,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Additional price(optional)',
-                                        hintText:" ${currentUser.currencysym}0",
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: customController82,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-
-                                ],
-                              ),
-                              ExpansionTile(
-                                title: Text('Custom size 9'),
-                                maintainState: true,
-                                children: [
-
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      maxLines: 1,
-                                      controller: customController9,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Title',
-                                          hintText: '117 cm'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: customController91,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Additional price(optional)',
-                                        hintText:" ${currentUser.currencysym}0",
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: customController92,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-
-                                ],
-                              ),
-                              ExpansionTile(
-                                title: Text('Custom size 10'),
-                                maintainState: true,
-                                children: [
-
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      maxLines: 1,
-                                      controller: customController10,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Title',
-                                          hintText: '117 cm'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: customController101,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Additional price(optional)',
-                                        hintText:" ${currentUser.currencysym}0",
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: customController102,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-
-                                ],
-                              ),
-
 
 
                             ],
@@ -10789,7 +11406,7 @@ color(){
               style: TextStyle(color: Colors.white),
             ),
             actions: [
-              FlatButton(
+              TextButton(
                 onPressed: () async{
 
 
@@ -10814,10 +11431,7 @@ else {          _formKey.currentState.validate()? Container(): Fluttertoast.show
               )
             ],
           ),
-          body: Container( decoration: BoxDecoration(
-              gradient: fabGradient
-          ) ,
-            alignment: Alignment.center,
+          body: Container(
             child: Stack(
               children:[
                 Form(
@@ -10864,7 +11478,7 @@ else {          _formKey.currentState.validate()? Container(): Fluttertoast.show
                       margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0,8.0),
                       child: RaisedButton(
                         color:kblue,
-                      child: Text('Select Category',style:TextStyle(color: Colors.white) ,),
+                      child: Text('$value',style:TextStyle(color: Colors.white) ,),
                       onPressed: (){
                           showModalBottomSheet(context: context, builder:(BuildContext context){
 
@@ -10914,11 +11528,31 @@ else {          _formKey.currentState.validate()? Container(): Fluttertoast.show
                       ,
                           ),
                     ),
-                    value == 'None' ?   Text('Select Category',style:TextStyle(color: kText,fontSize:20.0),):
-                    Text(' ',),
+
 
 
                     SizedBox(height: 8.0,),
+                          Container(
+                            // alignment:Alignment.centerLeft,
+                            child:   FloatingActionButton.extended(
+                              backgroundColor: kblue,
+                              onPressed: ()=>custom(),
+
+                              label:   Text("Customization/variations",style: TextStyle(fontSize:  SizeConfig.safeBlockHorizontal *5),),
+                            ),
+                          ),
+
+SizedBox(height: 8.0,),          Container(
+                            // alignment:Alignment.centerLeft,
+                            child:   FloatingActionButton.extended(
+                              backgroundColor: kblue,
+                              onPressed: ()=>tag(),
+
+                              label:   Text("Tag other products",style: TextStyle(fontSize:  SizeConfig.safeBlockHorizontal *5),),
+                            ),
+                          ),
+
+SizedBox(height: 8.0,),
 
                  Row(
                    mainAxisAlignment:MainAxisAlignment.center,
@@ -10928,9 +11562,13 @@ else {          _formKey.currentState.validate()? Container(): Fluttertoast.show
                        child:   FloatingActionButton.extended(
 backgroundColor: kblue,
                          onPressed: ()=>AddSize(),
+
                          label: Text('Specify Quantity',style:TextStyle(color:  Colors.white) ,),
                        ),
                      ),
+
+
+
         SizedBox(width: 8.0,),Container(
                  // alignment:Alignment.centerRight,
                        child:   FloatingActionButton.extended(
@@ -10942,6 +11580,7 @@ backgroundColor: kblue,
 
                       ],
                     ),
+
                     SizedBox(height: 8.0,),
 
                          Text("Processing time",  style:TextStyle(color: kText,fontSize:20.0)),
@@ -11512,7 +12151,7 @@ keyboardType:TextInputType.number,
 
   Future<void> loadAssets() async {
 
-    List<Asset> resultList = List<Asset>();
+    List<Asset> resultList = <Asset>[];
     String error = 'No Error Dectected';
 //    ByteData byteData = await asset.getByteData(quality: 80);
     try {
@@ -11535,10 +12174,7 @@ keyboardType:TextInputType.number,
 
         ),
       );
-      print(resultList.length);
-      print((await resultList[0].getThumbByteData(122, 100)));
-      print((await resultList[0].getByteData()));
-      print((await resultList[0].metadata));
+
 
     } on Exception catch (e) {
       error = e.toString();
@@ -11555,7 +12191,6 @@ keyboardType:TextInputType.number,
     setState(() {
 
       images = resultList;
-      _error = error;
     });
 
   }
@@ -11594,7 +12229,6 @@ keyboardType:TextInputType.number,
     setState(() {
 
       inrtousd = resultUSD.rate;
-      rounded = inrtousd.round();
 
       inrtousd1 = resultUSD1.rate;
 
@@ -11609,35 +12243,34 @@ keyboardType:TextInputType.number,
       inrtousd10 = resultUSD10.rate;
       inrtousd11 = resultUSD11.rate;
       inrtousd12 = resultUSD12.rate;
-      userprice = priceController.text;
-      userprice1 = customController11.text;
-      userprice2 = customController21.text;
-      userprice3 = customController31.text;
-      userprice4 = customController41.text;
-      userprice5 = customController51.text;
-      userprice6 = customController61.text;
-      userprice7 = customController71.text;
-      userprice8 = customController81.text;
-      userprice9 = customController91.text;
-      userprice10 = customController101.text;
-      userprice11 = shipcost.text;
-      userprice12 = shipcostintern.text;
+  
 
     });
   }
 
-  Future<dynamic> postImage(Asset imageFile) async {
-//    ByteData byteData = await imageFile.requestOriginal(quality: 75);
-    String fileName = DateTime.now().millisecondsSinceEpoch.toString();
-    Reference reference = FirebaseStorage.instance.ref().child("Shop${prodId}").child("$fileName.jpg");
-    UploadTask uploadTask = reference.putData((await imageFile.getByteData(quality: 70)).buffer.asUint8List());
-    TaskSnapshot storageTaskSnapshot = await uploadTask;
-//    print(storageTaskSnapshot.ref.getDownloadURL());
-    return storageTaskSnapshot.ref.getDownloadURL();
-  }
   Future<void> handleSubmit() async {
 
     setState((){loading = "Uploading to database!";});
+   file!=null? await compressImage():null;
+    String mediaUrl =  file!=null?await uploadImage(file):"";
+  file1!=null? await compressImage1():null;
+    String mediaUrl1 =  file1!=null?await uploadImage1(file):"";
+  file2!=null? await compressImage2():null;
+    String mediaUrl2 =  file2!=null?await uploadImage2(file):"";
+  file3!=null? await compressImage3():null;
+    String mediaUrl3 =  file3!=null?await uploadImage3(file):"";
+  file4!=null? await compressImage4():null;
+    String mediaUrl4 =  file4!=null?await uploadImage4(file):"";
+  file5!=null? await compressImage5():null;
+    String mediaUrl5 =  file5!=null?await uploadImage5(file):"";
+  file6!=null? await compressImage6():null;
+    String mediaUrl6 =  file6!=null?await uploadImage6(file):"";
+  file7!=null? await compressImage7():null;
+    String mediaUrl7 =  file7!=null?await uploadImage7(file):"";
+  file8!=null? await compressImage8():null;
+    String mediaUrl8 =  file8!=null?await uploadImage8(file):"";
+ file9!=null? await compressImage9():null;
+    String mediaUrl9 =  file9!=null?await uploadImage9(file):"";
 
     for ( var imageFile in images) {
       postImage(imageFile).then((downloadUrl)  {
@@ -11649,7 +12282,7 @@ keyboardType:TextInputType.number,
                 .doc(widget.currentUser.id)
                 .collection("userProducts")
                 .doc(prodId)
-                .set({
+                .update({
               "colorText1":colorController1.text ?? "",
               "colorText2":colorController2.text ?? "",
               "colorText3":colorController3.text ?? "",
@@ -11673,7 +12306,6 @@ keyboardType:TextInputType.number,
               "country":  currentUser.country,
 "currency":  currentUser.currencyISO,
 
-              "indian":indian,
                "worldship":worldship,
                "freeworldship":freeworldship,
               "freeship":freeship,
@@ -11681,7 +12313,7 @@ keyboardType:TextInputType.number,
               "prodId": prodId,
               "ownerId": widget.currentUser.id,
               "photoUrl": widget.currentUser.photoUrl,
-              "displayName": widget.currentUser.displayName,
+              "username": widget.currentUser.displayName,
               "shopmediaUrl": imageUrls,
               "Category": value,
               // "type":type,
@@ -11690,8 +12322,8 @@ keyboardType:TextInputType.number,
               "productname": productnameController.text,
               "usd": inrtousd,
 
-              "inr": userprice,
-
+              "inr": priceController.text,
+            
               "timestamp": timestamp,
               "composition": compositionController.text,
               "washandcare": washandcareController.text,
@@ -11769,6 +12401,17 @@ keyboardType:TextInputType.number,
               "custom8":  customController8.text ?? "",
               "custom9":  customController9.text ?? "",
               "custom10":  customController10.text ?? "",
+               "custom1img":  mediaUrl ?? "",
+              "custom2img":  mediaUrl1 ?? "",
+              "custom3img":  mediaUrl2 ?? "",
+              "custom4img":  mediaUrl3 ?? "",
+              "custom5img":  mediaUrl4 ?? "",
+              "custom6img":  mediaUrl5 ?? "",
+              "custom7img":  mediaUrl6 ?? "",
+              "custom8img":  mediaUrl7 ?? "",
+              "custom9img":  mediaUrl8 ?? "",
+              "custom10img":  mediaUrl9 ?? "",
+
               "custom12":  int.tryParse(customController12.text) ?? 0,
               "custom22":  int.tryParse(customController22.text) ?? 0,
               "custom32":  int.tryParse(customController32.text) ?? 0,
@@ -11779,31 +12422,33 @@ keyboardType:TextInputType.number,
               "custom82":  int.tryParse(customController82.text) ?? 0,
               "custom92":  int.tryParse(customController92.text) ?? 0,
               "custom102":  int.tryParse(customController102.text) ??0,
-
-              "custom11inr": userprice1.toString() ?? "0.0",
+         
+              "custom11inr": customController11.text??  "",
+              "custom11usd": inrtousd2?? 0.0,
+              
               "custom21usd": inrtousd2 ?? 0.0,
-              "custom21inr": userprice2.toString() ?? "0.0",
-              "custom31usd": inrtousd3.toString() ?? "0.0",
-              "custom31inr": userprice3.toString() ?? "0.0",
-              "custom41usd": inrtousd4.toString() ?? "0.0",
-              "custom41inr": userprice4.toString() ?? "0.0",
-              "custom51usd": inrtousd5.toString() ?? "0.0",
-              "custom51inr": userprice5.toString() ?? "0.0",
-              "custom61usd": inrtousd6.toString() ?? "0.0",
-              "custom61inr": userprice6.toString() ?? "0.0",
-              "custom71usd": inrtousd7.toString() ?? "0.0",
-              "custom71inr": userprice7.toString() ?? "0.0",
-              "custom81usd": inrtousd8.toString() ?? "0.0",
-              "custom81inr": userprice8.toString() ?? "0.0",
-              "custom91usd": inrtousd9.toString() ?? "0.0",
-              "custom91inr": userprice9.toString() ?? "0.0",
-              "custom101usd": inrtousd10.toString() ?? "0.0",
-              "custom101inr": userprice10.toString() ?? "0.0",
-              "shipcostusd": inrtousd11.toString() ?? "0.0",
-              "shipcostinr": userprice11.toString() ?? "0.0",
-                "shipcostinternusd": inrtousd12.toString() ?? "0.0",
-              "shipcostinterninr": userprice12.toString() ?? "0.0",
-"round": rounded ?? 0.0,
+              "custom21inr": customController21.text??  "",
+              "custom31usd": inrtousd3?? 0.0,
+              "custom31inr": customController31.text??  "",
+              "custom41usd": inrtousd4?? 0.0,
+              "custom41inr": customController41.text??  "",
+              "custom51usd": inrtousd5?? 0.0,
+              "custom51inr": customController51.text??  "",
+              "custom61usd": inrtousd6?? 0.0,
+              "custom61inr": customController61.text??  "",
+              "custom71usd": inrtousd7?? 0.0,
+              "custom71inr": customController71.text??  "",
+              "custom81usd": inrtousd8?? 0.0,
+              "custom81inr": customController81.text??  "",
+              "custom91usd": inrtousd9?? 0.0,
+              "custom91inr": customController91.text??  "",
+              "custom101usd": inrtousd10?? 0.0,
+              "custom101inr": customController101.text??  "",
+              "shipcostusd": inrtousd11?? 0.0,
+              "shipcostinr": shipcost.text??  "",
+                "shipcostinternusd": inrtousd12?? 0.0,
+              "shipcostinterninr": shipcostintern.text??  "",
+"round": inrtousd ?? 0.0,
 
               "processfrom":  int.tryParse(durationfromp.text) ?? 0,
               "processto":  int.tryParse(durationto.text) ?? 0,
@@ -11836,7 +12481,6 @@ keyboardType:TextInputType.number,
 
 
   }
-
   carousel(){
 
     return
@@ -11861,16 +12505,6 @@ keyboardType:TextInputType.number,
 
   }
   bool get wantKeepAlive => true;
-sdf(){
-  floatingActionButton: new FloatingActionButton(
-    child: new Icon(Icons.add),
-    onPressed: () {
-      setState(() {
-        count = count + 1;
-      });
-    },
-  );
-}
   @override
   Widget build(BuildContext context) {
     super.build(context);
@@ -11878,55 +12512,351 @@ sdf(){
     return images.isEmpty ? buildSplashScreen() : builduploadForm();
   }
 
-  customSize({int index}){
-    return index == 0  ?   Container(
-      margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
-      child: TextFormField(
-        style:TextStyle(color: kText),
+}
 
-        keyboardType: TextInputType.multiline,
-        maxLines: null,
-        controller: customController1,
+class SearchTag extends StatefulWidget {
+  @override
+  _SearchTagState createState() => _SearchTagState();
+}
+
+class _SearchTagState extends State<SearchTag> {
+  TextEditingController _searchController = TextEditingController();
+
+  Future resultsLoaded;
+  List _allResults = [];
+  List _resultsList = [];
+
+  @override
+  void initState() {
+    super.initState();
+    _searchController.addListener(_onSearchChanged);
+  }
+
+  @override
+  void dispose() {
+    _searchController.removeListener(_onSearchChanged);
+    _searchController.dispose();
+    super.dispose();
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    resultsLoaded = getUsersPastTripsStreamSnapshots();
+  }
+
+
+  _onSearchChanged() {
+    searchResultsList();
+  }
+
+  searchResultsList() {
+    var showResults = [];
+
+    if(_searchController.text != "") {
+      for(var tripSnapshot in _allResults){
+        var title = Users.fromDocument(tripSnapshot).displayName.toLowerCase();
+
+        if(title.contains(_searchController.text.toLowerCase())) {
+          showResults.add(tripSnapshot);
+        }
+      }
+
+    } else {
+      showResults = List.from(_allResults);
+    }
+    setState(() {
+      _resultsList = showResults;
+    });
+  }
+
+  getUsersPastTripsStreamSnapshots() async {
+    var data = await FirebaseFirestore.instance
+        .collection('users')
+
+        .where("seller", isEqualTo: true)
+        .get();
+    setState(() {
+      _allResults = data.docs;
+    });
+    searchResultsList();
+    return "complete";
+  }
+  clearSearch() {
+    _searchController.clear();
+  }
+  AppBar buildSearchField() {
+    return AppBar(
+      backgroundColor:kPrimaryColor,
+      title: TextFormField(
+        style:  TextStyle(color: Colors.white),
+        controller: _searchController,
         decoration: InputDecoration(
-          border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
-          enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
-          focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+          hintText: "Search for a user...",
+          hintStyle: TextStyle(color: Colors.white),
 
-          labelText: 'Custom size',labelStyle: TextStyle(color: kText),
-          hintText: 'ex.117 cm',
+          filled: true,
+          prefixIcon: Icon(
+            Icons.account_box,
+            size: 28.0,
+          ),
+          suffixIcon: IconButton(
+            icon: Icon(Icons.clear,
+                color: Colors.white),
+            onPressed: clearSearch,
+          ),
         ),
-        textAlign: TextAlign.center,
-        validator: (text) {
-          if ( text.isEmpty) {
-            return 'Shoud not be empty';
-          }
-          return null;
-        },
       ),
-    ):index == 1  ?   Container(
-      margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
-      child: TextFormField(
-        style:TextStyle(color: kText),
+    );
+  }
 
-        keyboardType: TextInputType.multiline,
-        maxLines: null,
-        controller: customController1,
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: buildSearchField(),
+      body: Container(
+        child: Column(
+          children: <Widget>[
+            Expanded(
+                child: ListView.builder(
+                  itemCount: _resultsList.length,
+                  itemBuilder: (BuildContext context, int index) =>
+                      buCard(context, _resultsList[index]),
+                )
+
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+  df({String ownerId}){
+    return
+      showMaterialModalBottomSheet(
+        expand:true,
+        context: context,
+        builder: (BuildContext context)
+        {
+          SizeConfig().init(context);
+
+          return
+            Builder(builder: (BuildContext context) {
+              return StatefulBuilder(builder: (BuildContext context, State) {
+                return
+                  Container(
+                    height: MediaQuery
+                        .of(context)
+                        .size
+                        .height * 0.75,
+
+                    child: SearchTagProduct(ownerId),
+
+                  );
+              }
+              );
+            }
+            );
+        },
+      );
+
+  }
+  Widget buCard(BuildContext context, DocumentSnapshot document) {
+    final user = Users.fromDocument(document);
+    // final tripType = trip.types();
+
+    return new Container(
+      child: Card(
+        child: InkWell(
+          child: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: ListTile(
+              leading: CircleAvatar(
+                backgroundColor: Colors.grey,
+                backgroundImage: CachedNetworkImageProvider(  user.photoUrl,),
+              ),
+              title: Text(
+                user.displayName,
+                style:
+                TextStyle(color:kText, fontWeight: FontWeight.bold),
+              ),
+
+            ),
+          ),
+
+
+          onTap: ()  {
+            Get.back();
+            df(ownerId: user.id);},
+        ),
+      ),
+    );
+  }
+
+}
+
+
+class SearchTagProduct extends StatefulWidget {
+  final String ownerId;
+  SearchTagProduct(this.ownerId);
+  @override
+  _SearchTagProductState createState() => _SearchTagProductState();
+}
+
+class _SearchTagProductState extends State<SearchTagProduct> {
+  TextEditingController _searchController = TextEditingController();
+
+  Future resultsLoaded;
+  List _allResults = [];
+  List _resultsList = [];
+
+  @override
+  void initState() {
+    super.initState();
+    _searchController.addListener(_onSearchChanged);
+  }
+
+  @override
+  void dispose() {
+    _searchController.removeListener(_onSearchChanged);
+    _searchController.dispose();
+    super.dispose();
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    resultsLoaded = getUsersPastTripsStreamSnapshots();
+  }
+
+
+  _onSearchChanged() {
+    searchResultsList();
+  }
+
+  searchResultsList() {
+    var showResults = [];
+
+    if(_searchController.text != "") {
+      for(var tripSnapshot in _allResults){
+        var title = Prod.fromDocument(tripSnapshot).productname.toLowerCase();
+
+        if(title.contains(_searchController.text.toLowerCase())) {
+          showResults.add(tripSnapshot);
+        }
+      }
+
+    } else {
+      showResults = List.from(_allResults);
+    }
+    setState(() {
+      _resultsList = showResults;
+    });
+  }
+
+  getUsersPastTripsStreamSnapshots() async {
+    var data = await FirebaseFirestore.instance
+        .collection('products')
+        .doc(widget.ownerId)
+        .collection('userProducts')
+        .get();
+    setState(() {
+      _allResults = data.docs;
+    });
+    searchResultsList();
+    return "complete";
+  }
+  clearSearch() {
+    _searchController.clear();
+  }
+  AppBar buildSearchField() {
+    return AppBar(
+      automaticallyImplyLeading: false,
+      backgroundColor:kPrimaryColor,
+      title: TextFormField(
+        style:  TextStyle(color: Colors.white),
+        controller: _searchController,
         decoration: InputDecoration(
-          border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
-          enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
-          focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+          hintText: "Search for a product...",
+          hintStyle: TextStyle(color: Colors.white),
 
-          labelText: 'Custom size',labelStyle: TextStyle(color: kText),
-          hintText: 'ex.117 cm',
+          filled: true,
+
+          suffixIcon: IconButton(
+            icon: Icon(Icons.clear,
+                color: Colors.white),
+            onPressed: clearSearch,
+          ),
         ),
-        textAlign: TextAlign.center,
-        validator: (text) {
-          if ( text.isEmpty) {
-            return 'Shoud not be empty';
-          }
-          return null;
-        },
       ),
-    ):Text("Upto 10 allowed");
+    );
+  }
+
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: buildSearchField(),
+      body: Container(
+        color:Colors.grey.shade200,
+        child: Column(
+          children: <Widget>[
+            Expanded(
+                child: ListView.builder(
+                  itemCount: _resultsList.length,
+                  itemBuilder: (BuildContext context, int index) =>
+                      buprod(context, _resultsList[index]),
+                )
+
+            ),
+          ],
+        ),
+      ),
+    );
   }
 }
+
+Widget buprod(BuildContext context, DocumentSnapshot document) {
+  final prod = Prod.fromDocument(document);
+  // final tripType = trip.types();
+
+  return new Container(
+    child: Card(
+      child: InkWell(
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: ListTile(
+            leading: ClipRRect(
+                borderRadius: BorderRadius.circular(15.0),
+                child: Container(child: Image.network(prod.shopmediaUrl.first),)),
+
+            title: Text(
+              prod.productname,
+              style:
+              TextStyle(color:kText, fontWeight: FontWeight.bold),
+            ),
+
+          ),
+        ),
+
+
+        onTap: ()
+        {
+          FirebaseFirestore.instance
+              .collection('products')
+              .doc(currentUser.id)
+              .collection('userProducts')
+              .doc(prodId)
+              .collection('tags')
+              .doc(prodId)
+              .set({
+            "ownerId":prod.ownerId,
+            "prodId":prod.prodId,
+            "image":prod.shopmediaUrl,
+            "name":prod.productname,
+            "usd":prod.usd,
+            "timestamp":timestamp,
+
+          });
+          Get.back();},
+      ),
+    ),
+  );
+}
+

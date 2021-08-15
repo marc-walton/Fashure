@@ -180,358 +180,8 @@ low() {
   }
 
 
-// Allin(){
-//   return  PaginateFirestore(
-// isLive: true,
-// //    itemsPerPage: 2,
-//     itemBuilderType:
-//     PaginateBuilderType.listView,
-//     itemBuilder: (index, context, documentSnapshot)   {
-// //        DocumentSnapshot ds = snapshot.data.docs[index];
-//    String ownerId = documentSnapshot.data()['ownerId'];
-// String prodId = documentSnapshot.data()['prodId'];
-// //String shopmediaUrl = documentSnapshot.data()['shopmediaUrl'];
-// String productname = documentSnapshot.data()['productname'];
-//    String inr = documentSnapshot.data()['inr'];
-//    String usd = documentSnapshot.data()['usd'];
-//
-//     return
-//       FutureBuilder(
-//         future: usersRef.doc(ownerId).get(),
-//         builder: (context, snapshot) {
-//           if (!snapshot.hasData) {
-//             return circularProgress();
-//           }
-//            Users user = Users.fromDocument(snapshot.data);
-// //          bool isPostOwner = currentUserId == ownerId;
-//           return Column(
-//             children: <Widget>[
-//             GestureDetector(
-//               onTap: () => showProfile(context, profileId: user.id),
-//               child: ListTile(
-//                 leading: CircleAvatar(
-//                   backgroundImage: CachedNetworkImageProvider(user.photoUrl),
-//                   backgroundColor: Colors.grey,
-//                 ),
-//                 title: Text(
-//                   user.displayName,
-//                   style: TextStyle(
-//                     color: kText,
-//                     fontWeight: FontWeight.bold,
-//                   ),
-//                 ),
-//                 ),
-//             ),
-//
-//             GestureDetector(
-//               onTap: () => Navigator.push(
-//                 context,
-//                 MaterialPageRoute(
-//                   builder: (context) => ProductScreen(
-//                     prodId: prodId,
-//                     userId: ownerId,
-//                   ),
-//                 ),
-//               ),
-//               child: Stack(
-//                 alignment: Alignment.center,
-//                 children: <Widget>[
-//                   ClipRRect(
-//                       borderRadius: BorderRadius.circular(20.0),child:pics(userid:ownerId,prodid: prodId)),
-//                 ],),),
-//               df(productname:productname, usd:usd,inr:inr, prodId:prodId, ownerId:ownerId,),
-//
-//             Divider(color: kGrey,),
-//           ],
-//
-//           );
-//
-//         },
-//       );
-//     },
-//     query: FirebaseFirestore.instance.collectionGroup('userProducts').orderBy('timestamp',descending: true)
-//         .where('Gender',isEqualTo: 'Men')
-//
-//   );
-// }
 All(){
-  return  StickyHeader(
-    header: Container(
-      height: 50.0,
-      color: Colors.transparent,
-      padding: EdgeInsets.symmetric(horizontal: 16.0),
-      child:  Row(
-           mainAxisAlignment:      MainAxisAlignment.end,
-           children: [
-             FloatingActionButton.extended(
-               backgroundColor: Colors.pink.shade50,
-
-               //icon: Icon(Icons.drag_handle),
-               label:Text("category",style:TextStyle(color: Colors.black)),
-               onPressed: (){ setState(() {
-                 tabs = !tabs ;
-               });   },
-             ),
-             FloatingActionButton.extended(
-               backgroundColor: Colors.pink.shade50,
-
-               label:Text("Filter",style:TextStyle(color: Colors.black)),
-        onPressed: (){        showDialog<void>(
-              context: context,
-              // useRootNavigator:true,
-
-              barrierDismissible: true,
-              // false = user must tap button, true = tap outside dialog
-              builder: (BuildContext dialogContext) {
-                return Builder(builder: (BuildContext context) {
-                  return StatefulBuilder(builder: (BuildContext context, State){
-                    return Dialog(
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(20),
-                    ),
-                    child: Container(
-                      height:400,
-                      child: Column(
-                        children: [
-                          ExpansionTile(
-                              title: Text("Sort by price"),
-                              children: [Column(
-                                children: [
-                                  InkWell(
-                                    onTap: () {
-                                      State((){});
-                                      priceQuery = "0";
-                                      AQuery = "A0";
-                                      BQuery = "B0";
-                                      CQuery = "C0";
-                                      DQuery = "D0";
-                                      EQuery = "E0";
-                                      FQuery = "F0";
-                                      GQuery = "G0";
-                                      HQuery = "H0";
-                                      IQuery = "I0";
-                                      JQuery = "J0";
-                                      KQuery = "K0";
-                                      LQuery = "L0";
-                                      MQuery = "M0";
-                                      NQuery = "N0";
-                                      OQuery = "O0";
-                                      PQuery = "P0";
-                                      QQuery = "Q0";
-                                      RQuery = "R0";
-                                      SQuery = "S0";
-
-                                    },
-                                    child: Container(
-                                      color: priceQuery == "0"||priceQuery == "0D"?Colors.pink.shade50:Colors.white,
-
-                                      height: 50,
-                                      width: MediaQuery.of(context).size.width,
-                                      child: Column(
-                                        mainAxisAlignment: MainAxisAlignment.center,
-                                        children: [
-                                          FittedBox(
-                                              child: Text(
-                                                'All',
-                                              )),
-                                        ],
-                                      ),
-                                    ),
-                                  ),
-                                  InkWell(
-                                    onTap: () {
-                                      State((){});
-
-                                      priceQuery = "low";
-                                      AQuery = "Alow";
-                                      BQuery = "Blow";
-                                      CQuery = "Clow";
-                                      DQuery = "Dlow";
-                                      EQuery = "Elow";
-                                      FQuery = "Flow";
-                                      GQuery = "Glow";
-                                      HQuery = "Hlow";
-                                      IQuery = "Ilow";
-                                      JQuery = "Jlow";
-                                      KQuery = "Klow";
-                                      LQuery = "Llow";
-                                      MQuery = "Mlow";
-                                      NQuery = "Nlow";
-                                      OQuery = "Olow";
-                                      PQuery = "Plow";
-                                      QQuery = "Qlow";
-                                      RQuery = "Rlow";
-                                      SQuery = "Slow";
-
-                                    },
-                                    child: Container(
-                                      color: priceQuery == "low"||priceQuery == "lowD"?Colors.pink.shade50:Colors.white,
-
-                                      height: 50,
-                                      width: MediaQuery.of(context).size.width,
-                                      child: Column(
-                                        mainAxisAlignment: MainAxisAlignment.center,
-                                        children: [
-                                          FittedBox(
-                                              child: Text(
-                                                'Low to high',
-                                              )),
-                                        ],
-                                      ),
-                                    ),
-                                  ),
-                                  InkWell(
-                                    onTap: () {
-                                      State((){});
-
-                                      priceQuery = "high";
-                                      AQuery = "Ahigh";
-                                      BQuery = "Bhigh";
-                                      CQuery = "Chigh";
-                                      DQuery = "Dhigh";
-                                      EQuery = "Ehigh";
-                                      FQuery = "Fhigh";
-                                      GQuery = "Ghigh";
-                                      HQuery = "Hhigh";
-                                      IQuery = "Ihigh";
-                                      JQuery = "Jhigh";
-                                      KQuery = "Khigh";
-                                      LQuery = "Lhigh";
-                                      MQuery = "Mhigh";
-                                      NQuery = "Nhigh";
-                                      OQuery = "Ohigh";
-                                      PQuery = "Phigh";
-                                      QQuery = "Qhigh";
-                                      RQuery = "Rhigh";
-                                      SQuery = "Shigh";
-
-
-                                    },
-                                    child: Container(
-                                      color: priceQuery == "high"||priceQuery == "highD"?Colors.pink.shade50:Colors.white,
-
-                                      height: 50,
-                                      width: MediaQuery.of(context).size.width,
-                                      child: Column(
-                                        mainAxisAlignment: MainAxisAlignment.center,
-                                        children: [
-                                          FittedBox(
-                                              child: Text(
-                                                'High to low',
-                                              )),
-                                        ],
-                                      ),
-                                    ),
-                                  ),
-
-                                ],
-                              ),
-                              ]
-                          ),
-                          ExpansionTile(
-                              title: Text("Avoid Duties & Taxes"),
-                              children: [Column(
-                                children: [
-                                  Text("(Shop within your country)"),
-                                  GFToggle(
-                                    onChanged: (val){
-                                      setState(() {
-                                        duties = val;
-                                      });
-                                    },
-                                    value: duties,
-                                    type: GFToggleType.custom,
-                                  ),
-                                ],
-                              ),
-                              ]
-                          ),
-                          FloatingActionButton.extended(onPressed: (){
-                            duties? setState((){
-                              priceQuery = priceQuery.replaceAll("D","");
-                              AQuery =AQuery.replaceAll("D","");
-                              BQuery =BQuery.replaceAll("D","");
-                              CQuery =CQuery.replaceAll("D","");
-                              DQuery =DQuery.replaceAll("D","");
-                              EQuery =EQuery.replaceAll("D","");
-                              FQuery =FQuery.replaceAll("D","");
-                              GQuery =GQuery.replaceAll("D","");
-                              HQuery =HQuery.replaceAll("D","");
-                              IQuery =IQuery.replaceAll("D","");
-                              JQuery =JQuery.replaceAll("D","");
-                              KQuery =KQuery.replaceAll("D","");
-                              LQuery =LQuery.replaceAll("D","");
-                              MQuery =MQuery.replaceAll("D","");
-                              NQuery =NQuery.replaceAll("D","");
-                              OQuery =OQuery.replaceAll("D","");
-                              PQuery =PQuery.replaceAll("D","");
-                              QQuery =QQuery.replaceAll("D","");
-                              RQuery =RQuery.replaceAll("D","");
-                              SQuery =SQuery.replaceAll("D","");
-                              priceQuery = priceQuery + "D";
-   AQuery = AQuery + "D";
- BQuery = BQuery + "D";
- CQuery = CQuery + "D";
- DQuery = DQuery + "D";
- EQuery = EQuery + "D";
- FQuery = FQuery + "D";
- GQuery = GQuery + "D";
- HQuery = HQuery + "D";
- IQuery = IQuery + "D";
- JQuery = JQuery + "D";
- KQuery = KQuery + "D";
- LQuery = LQuery + "D";
- MQuery = MQuery + "D";
- NQuery = NQuery + "D";
- OQuery = OQuery + "D";
- PQuery = PQuery + "D";
- QQuery = QQuery + "D";
- RQuery = RQuery + "D";
- SQuery = SQuery + "D";
-
-
-                            }):
-                            setState((){
-                              priceQuery = priceQuery.replaceAll("D","");
-                              AQuery =AQuery.replaceAll("D","");
-                              BQuery =BQuery.replaceAll("D","");
-                              CQuery =CQuery.replaceAll("D","");
-                              DQuery =DQuery.replaceAll("D","");
-                              EQuery =EQuery.replaceAll("D","");
-                              FQuery =FQuery.replaceAll("D","");
-                              GQuery =GQuery.replaceAll("D","");
-                              HQuery =HQuery.replaceAll("D","");
-                              IQuery =IQuery.replaceAll("D","");
-                              JQuery =JQuery.replaceAll("D","");
-                              KQuery =KQuery.replaceAll("D","");
-                              LQuery =LQuery.replaceAll("D","");
-                               MQuery =MQuery.replaceAll("D","");
-                               NQuery =NQuery.replaceAll("D","");
-                               OQuery =OQuery.replaceAll("D","");
-                               PQuery =PQuery.replaceAll("D","");
-                               QQuery =QQuery.replaceAll("D","");
-                               RQuery =RQuery.replaceAll("D","");
-                               SQuery =SQuery.replaceAll("D","");
-
-                            });
-
-                          }, label: Text("Apply"))
-                        ],
-                      ),
-                    ),
-                  );
-                  });
-               });
-              },
-        );},
-        ),
-
-           ],
-         )
-
-
-    ),
-    content: PaginateFirestore(
+  return PaginateFirestore(
       emptyDisplay: Center(child: Text("Nothing found",style: TextStyle(
         fontWeight: FontWeight.bold,
         fontSize: 25.0,
@@ -540,117 +190,116 @@ All(){
       itemBuilderType:
       PaginateBuilderType.listView,
       itemBuilder: (index, context, documentSnapshot)   {
-     String ownerId = documentSnapshot.data()['ownerId'];
-     String displayName = documentSnapshot.data()['displayName'];
-     String photoUrl = documentSnapshot.data()['photoUrl'];
-String prodId = documentSnapshot.data()['prodId'];
-List shopmediaUrl = documentSnapshot.data()['shopmediaUrl'];
+        String ownerId = documentSnapshot.data()['ownerId'];
+        String displayName = documentSnapshot.data()['displayName'];
+        String photoUrl = documentSnapshot.data()['photoUrl'];
+        String prodId = documentSnapshot.data()['prodId'];
+        List shopmediaUrl = documentSnapshot.data()['shopmediaUrl'];
 
-     List<CItem> searchResults = [];
+        List<CItem> searchResults = [];
 
-     Prod prod = Prod.fromDocument(documentSnapshot);
-     CItem searchResult = CItem(prod);
-     searchResults.add(searchResult);
+        Prod prod = Prod.fromDocument(documentSnapshot);
+        CItem searchResult = CItem(prod);
+        searchResults.add(searchResult);
 
-print(priceQuery);
-      return
-        Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: ClipRRect(
-            borderRadius: BorderRadius.circular(20.0),
-            child: Card(
-              child:Column(
-                children: <Widget>[
-                  GestureDetector(
-                    onTap: () => showProfile(context, profileId: ownerId),
-                    child:Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Row(children:[
-                        CircleAvatar(
-                          backgroundImage: CachedNetworkImageProvider(photoUrl),
-                          backgroundColor: Colors.grey,
-                        ),
-                        SizedBox(width: 7.0,),
-                        Text(
-                          displayName,
-                          style: TextStyle(
-                            color: kText,
-                            fontWeight: FontWeight.bold,
+        print(priceQuery);
+        return
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(20.0),
+              child: Card(
+                child:Column(
+                  children: <Widget>[
+
+                    GestureDetector(
+                      onTap: () => Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => ProductScreen(
+                            prodId: prodId,
+                            userId: ownerId,
                           ),
                         ),
-                      ]),
-                    ),
-
-                  ),
-
-                  GestureDetector(
-                    onTap: () => Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => ProductScreen(
-                          prodId: prodId,
-                          userId: ownerId,
-                        ),
                       ),
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(20.0),child:CachedImage(shopmediaUrl.first),),),
+                    GestureDetector(
+                      onTap: () => showProfile(context, profileId: ownerId),
+                      child:Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Row(children:[
+                          CircleAvatar(
+                            backgroundImage: CachedNetworkImageProvider(photoUrl),
+                            backgroundColor: Colors.grey,
+                          ),
+                          SizedBox(width: 7.0,),
+                          Text(
+                            displayName,
+                            style: TextStyle(
+                              color: kText,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ]),
+                      ),
+
                     ),
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(20.0),child:CachedImage(shopmediaUrl.first),),),
 
-                  Column(
+                    Column(
 
-                    children: searchResults,
+                      children: searchResults,
 
-                  ),
-                ],
+                    ),
+                  ],
 
+                ),
               ),
             ),
-          ),
-        );
+          );
       },
       query: priceQuery == "low"?
-       FirebaseFirestore.instance.collectionGroup('userProducts')
-      .orderBy('round',descending: false)
+      FirebaseFirestore.instance.collectionGroup('userProducts')
+          .orderBy('round',descending: false)
           .orderBy('timestamp',descending: true)
-           .where('Gender',isEqualTo: 'Men')
+          .where('Gender',isEqualTo: 'Men')
 
           :
-priceQuery == "high"?
-       FirebaseFirestore.instance.collectionGroup('userProducts')
-      .orderBy('round',descending: true)
+      priceQuery == "high"?
+      FirebaseFirestore.instance.collectionGroup('userProducts')
+          .orderBy('round',descending: true)
           .orderBy('timestamp',descending: true)
-           .where('Gender',isEqualTo: 'Men')
+          .where('Gender',isEqualTo: 'Men')
 
-         :priceQuery == "0D"?
-       FirebaseFirestore.instance.collectionGroup('userProducts')
+          :priceQuery == "0D"?
+      FirebaseFirestore.instance.collectionGroup('userProducts')
           .orderBy('timestamp',descending: true)
-           .where('Gender',isEqualTo: 'Men')
-.where('country',isEqualTo: '${currentUser.country}')
-:priceQuery == "lowD"?
-       FirebaseFirestore.instance.collectionGroup('userProducts')
-      .orderBy('round',descending: false)
+          .where('Gender',isEqualTo: 'Men')
+          .where('country',isEqualTo: '${currentUser.country}')
+          :priceQuery == "lowD"?
+      FirebaseFirestore.instance.collectionGroup('userProducts')
+          .orderBy('round',descending: false)
           .orderBy('timestamp',descending: true)
-           .where('Gender',isEqualTo: 'Men')
-.where('country',isEqualTo: '${currentUser.country}')
+          .where('Gender',isEqualTo: 'Men')
+          .where('country',isEqualTo: '${currentUser.country}')
 
-         :priceQuery == "highD"?
-       FirebaseFirestore.instance.collectionGroup('userProducts')
-      .orderBy('round',descending: true)
+          :priceQuery == "highD"?
+      FirebaseFirestore.instance.collectionGroup('userProducts')
+          .orderBy('round',descending: true)
           .orderBy('timestamp',descending: true)
-           .where('Gender',isEqualTo: 'Men')
-           .where('country',isEqualTo: '${currentUser.country}')
+          .where('Gender',isEqualTo: 'Men')
+          .where('country',isEqualTo: '${currentUser.country}')
 
-         :
+          :
 
-  FirebaseFirestore.instance.collectionGroup('userProducts')
+      FirebaseFirestore.instance.collectionGroup('userProducts')
           .orderBy('timestamp',descending: true)
-      .where('Gender',isEqualTo: 'Men')
+          .where('Gender',isEqualTo: 'Men')
 
 
 
 
 
-    ),
   );
 }
 
