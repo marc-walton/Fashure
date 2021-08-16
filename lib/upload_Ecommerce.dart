@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'dart:async';
+import 'package:alert_dialog/alert_dialog.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fashow/Categories/BboyEcomUp.dart';
@@ -11,7 +12,8 @@ import 'package:fashow/Categories/WomenEcomUp.dart';
 import 'package:fashow/Categories/TboyEcomUp.dart';
 import 'package:fashow/Categories/TgirlEcomUp.dart';
 import 'package:fashow/Products.dart';
-import 'package:flutter_chip_tags/flutter_chip_tags.dart';
+import 'package:fashow/chatcached_image.dart';
+import 'package:intl/intl.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
 import 'package:multi_image_picker/multi_image_picker.dart';
 import 'package:smart_select/smart_select.dart';
@@ -58,6 +60,7 @@ class _UploadecomState extends State<Uploadecom>
 bool worldship = true;
 bool freeship = true;
 bool freeworldship = true;
+bool isTag = false;
 String loading = "Converting currencies";
  TabController _tabController;
   ScrollController _controller;
@@ -193,6 +196,7 @@ TextEditingController shipcostintern = TextEditingController();
 TextEditingController namecontroller = TextEditingController();
 TextEditingController shipcontroller = TextEditingController();
   List<Asset> images = <Asset>[];
+  PageController pageController = PageController();
 
   List<String> imageUrls = <String>[];
   File file;
@@ -226,6 +230,9 @@ TextEditingController shipcontroller = TextEditingController();
   final scaffoldKey = new GlobalKey<ScaffoldState>();
 
   final _formKey = GlobalKey<FormState>();
+   final _formKey1 = GlobalKey<FormState>();
+   final _formKey2 = GlobalKey<FormState>();
+
   bool _inProcess = false;
 
   var inrtousd;
@@ -243,7 +250,7 @@ TextEditingController shipcontroller = TextEditingController();
   var inrtousd12;
  
 
-int count  = 1;
+int pageChanged  = 0;
   @override
   void initState() {
     // _controller = ScrollController();
@@ -1156,17 +1163,21 @@ compressImage9() async {
         title: new Text('Are you sure?'),
         content: new Text('Do you want to exit without uploading?'),
         actions: <Widget>[
-          new FlatButton(
+          new TextButton(
 
             onPressed: () => Navigator.of(context).pop(false),
             child: Text("NO"),
           ),
           SizedBox(height: 16),
-          new FlatButton(
+          new TextButton(
+              child: Text("YES"),
 
-            onPressed: () => Navigator.of(context).maybePop(true),
-                       child: Text("YES"),
-          ),
+            onPressed: ()
+            {
+                        Navigator.of(context).maybePop(true);
+            delete();
+                      }
+    ),
         ],
       ),
     ) ??
@@ -4028,7 +4039,18 @@ tag(){
       );
 
 }
+delete()async{     productsRef
+    .doc(currentUser.id)
+    .collection('userProducts')
+    .doc(prodId)
+    .get()
+    .then((doc) {
+  if (doc.exists) {
+    doc.reference.delete();
+  }
+});
 
+  }
  AddSize(){
   if(dropdownValue=='Men') {
 return
@@ -5473,7 +5495,7 @@ return
           Expanded(
             child: DefaultTabController(
 
-                length:6,
+                length:5,
                 child: Scaffold(
 
                   appBar:AppBar(
@@ -5489,7 +5511,6 @@ return
                         Text("Clothing",style: TextStyle(fontSize:  SizeConfig.safeBlockHorizontal *5,),),
                         Text("Made-to-order",style: TextStyle(fontSize:  SizeConfig.safeBlockHorizontal *5,),),
                         Text("Free size",style: TextStyle(fontSize:  SizeConfig.safeBlockHorizontal *5),),
-                        Text("Custom size(upto 10)",style: TextStyle(fontSize:  SizeConfig.safeBlockHorizontal *5),),
                        Text("Ring(US)",style: TextStyle(fontSize:  SizeConfig.safeBlockHorizontal *5),),
                        Text("Shoes(US)",style: TextStyle(fontSize:  SizeConfig.safeBlockHorizontal *5),),
 
@@ -5881,567 +5902,6 @@ return
                                   ),
                                 ],
                               ),
-
-
-                            ],
-                          ),
-                          ListView(
-
-
-                            children: [
-
-
-                              ExpansionTile(
-                                title: Text('Custom size 1'),
-                                maintainState: true,
-                                children: [
-
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      maxLines: 1,
-                                      controller: customController1,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Title',
-                                          hintText: '117 cm'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: customController11,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Additional price(optional)',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: customController12,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-
-                                ],
-                              ),
-                              ExpansionTile(
-                                title: Text('Custom size 2'),
-                                maintainState: true,
-                                children: [
-
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      maxLines: 1,
-                                      controller: customController2,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Title',
-                                          hintText: '117 cm'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: customController21,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Additional price(optional)',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: customController22,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-
-                                ],
-                              ),
-                              ExpansionTile(
-                                title: Text('Custom size 3'),
-                                maintainState: true,
-                                children: [
-
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      maxLines: 1,
-                                      controller: customController3,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Title',
-                                          hintText: '117 cm'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: customController31,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Additional price(optional)',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: customController32,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-
-                                ],
-                              ),
-                              ExpansionTile(
-                                title: Text('Custom size 4'),
-                                maintainState: true,
-                                children: [
-
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      maxLines: 1,
-                                      controller: customController4,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Title',
-                                          hintText: '117 cm'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: customController41,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Additional price(optional)',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: customController42,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-
-                                ],
-                              ),
-                              ExpansionTile(
-                                title: Text('Custom size 5'),
-                                maintainState: true,
-                                children: [
-
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      maxLines: 1,
-                                      controller: customController5,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Title',
-                                          hintText: '117 cm'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: customController51,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Additional price(optional)',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: customController52,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-
-                                ],
-                              ),
-                              ExpansionTile(
-                                title: Text('Custom size 6'),
-                                maintainState: true,
-                                children: [
-
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      maxLines: 1,
-                                      controller: customController6,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Title',
-                                          hintText: '117 cm'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: customController61,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Additional price(optional)',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: customController62,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-
-                                ],
-                              ),
-                              ExpansionTile(
-                                title: Text('Custom size 7'),
-                                maintainState: true,
-                                children: [
-
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      maxLines: 1,
-                                      controller: customController7,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Title',
-                                          hintText: '117 cm'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: customController71,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Additional price(optional)',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: customController72,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-
-                                ],
-                              ),
-                              ExpansionTile(
-                                title: Text('Custom size 8'),
-                                maintainState: true,
-                                children: [
-
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      maxLines: 1,
-                                      controller: customController8,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Title',
-                                          hintText: '117 cm'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: customController81,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Additional price(optional)',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: customController82,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-
-                                ],
-                              ),
-                              ExpansionTile(
-                                title: Text('Custom size 9'),
-                                maintainState: true,
-                                children: [
-
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      maxLines: 1,
-                                      controller: customController9,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Title',
-                                          hintText: '117 cm'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: customController91,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Additional price(optional)',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: customController92,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-
-                                ],
-                              ),
-                              ExpansionTile(
-                                title: Text('Custom size 10'),
-                                maintainState: true,
-                                children: [
-
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      maxLines: 1,
-                                      controller: customController10,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Title',
-                                          hintText: '117 cm'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: customController101,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Additional price(optional)',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: customController102,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-
-                                ],
-                              ),
-
 
 
                             ],
@@ -7351,7 +6811,6 @@ return
                         Text("Clothing",style: TextStyle(fontSize:  SizeConfig.safeBlockHorizontal *5,),),
                         Text("Made-to-order",style: TextStyle(fontSize:  SizeConfig.safeBlockHorizontal *5,),),
                         Text("Free size",style: TextStyle(fontSize:  SizeConfig.safeBlockHorizontal *5),),
-                        Text("Custom size(upto 10)",style: TextStyle(fontSize:  SizeConfig.safeBlockHorizontal *5),),
                        Text("Shoes(US)",style: TextStyle(fontSize:  SizeConfig.safeBlockHorizontal *5),),
 
                       ],
@@ -7571,567 +7030,6 @@ return
                             ],
                           ),
                           ListView(
-
-
-                            children: [
-
-
-                              ExpansionTile(
-                                title: Text('Custom size 1'),
-                                maintainState: true,
-                                children: [
-
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      maxLines: 1,
-                                      controller: customController1,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Title',
-                                          hintText: '117 cm'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: customController11,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Additional price(optional)',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: customController12,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-
-                                ],
-                              ),
-                              ExpansionTile(
-                                title: Text('Custom size 2'),
-                                maintainState: true,
-                                children: [
-
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      maxLines: 1,
-                                      controller: customController2,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Title',
-                                          hintText: '117 cm'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: customController21,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Additional price(optional)',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: customController22,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-
-                                ],
-                              ),
-                              ExpansionTile(
-                                title: Text('Custom size 3'),
-                                maintainState: true,
-                                children: [
-
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      maxLines: 1,
-                                      controller: customController3,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Title',
-                                          hintText: '117 cm'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: customController31,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Additional price(optional)',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: customController32,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-
-                                ],
-                              ),
-                              ExpansionTile(
-                                title: Text('Custom size 4'),
-                                maintainState: true,
-                                children: [
-
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      maxLines: 1,
-                                      controller: customController4,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Title',
-                                          hintText: '117 cm'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: customController41,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Additional price(optional)',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: customController42,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-
-                                ],
-                              ),
-                              ExpansionTile(
-                                title: Text('Custom size 5'),
-                                maintainState: true,
-                                children: [
-
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      maxLines: 1,
-                                      controller: customController5,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Title',
-                                          hintText: '117 cm'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: customController51,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Additional price(optional)',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: customController52,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-
-                                ],
-                              ),
-                              ExpansionTile(
-                                title: Text('Custom size 6'),
-                                maintainState: true,
-                                children: [
-
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      maxLines: 1,
-                                      controller: customController6,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Title',
-                                          hintText: '117 cm'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: customController61,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Additional price(optional)',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: customController62,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-
-                                ],
-                              ),
-                              ExpansionTile(
-                                title: Text('Custom size 7'),
-                                maintainState: true,
-                                children: [
-
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      maxLines: 1,
-                                      controller: customController7,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Title',
-                                          hintText: '117 cm'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: customController71,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Additional price(optional)',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: customController72,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-
-                                ],
-                              ),
-                              ExpansionTile(
-                                title: Text('Custom size 8'),
-                                maintainState: true,
-                                children: [
-
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      maxLines: 1,
-                                      controller: customController8,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Title',
-                                          hintText: '117 cm'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: customController81,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Additional price(optional)',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: customController82,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-
-                                ],
-                              ),
-                              ExpansionTile(
-                                title: Text('Custom size 9'),
-                                maintainState: true,
-                                children: [
-
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      maxLines: 1,
-                                      controller: customController9,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Title',
-                                          hintText: '117 cm'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: customController91,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Additional price(optional)',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: customController92,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-
-                                ],
-                              ),
-                              ExpansionTile(
-                                title: Text('Custom size 10'),
-                                maintainState: true,
-                                children: [
-
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      maxLines: 1,
-                                      controller: customController10,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Title',
-                                          hintText: '117 cm'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: customController101,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Additional price(optional)',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: customController102,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-
-                                ],
-                              ),
-
-
-
-                            ],
-                          ),
-                          ListView(
                             children: [
                               ExpansionTile(
                                 title: Text('0-3 mth'),
@@ -8329,7 +7227,6 @@ return
                         Text("Clothing",style: TextStyle(fontSize:  SizeConfig.safeBlockHorizontal *5,),),
                         Text("Made-to-order",style: TextStyle(fontSize:  SizeConfig.safeBlockHorizontal *5,),),
                         Text("Free size",style: TextStyle(fontSize:  SizeConfig.safeBlockHorizontal *5),),
-                        Text("Custom size(upto 10)",style: TextStyle(fontSize:  SizeConfig.safeBlockHorizontal *5),),
                        Text("Shoes(US)",style: TextStyle(fontSize:  SizeConfig.safeBlockHorizontal *5),),
 
                       ],
@@ -8631,567 +7528,6 @@ return
                                   ),
                                 ],
                               ),
-
-
-                            ],
-                          ),
-                          ListView(
-
-
-                            children: [
-
-
-                              ExpansionTile(
-                                title: Text('Custom size 1'),
-                                maintainState: true,
-                                children: [
-
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      maxLines: 1,
-                                      controller: customController1,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Title',
-                                          hintText: '117 cm'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: customController11,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Additional price(optional)',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: customController12,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-
-                                ],
-                              ),
-                              ExpansionTile(
-                                title: Text('Custom size 2'),
-                                maintainState: true,
-                                children: [
-
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      maxLines: 1,
-                                      controller: customController2,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Title',
-                                          hintText: '117 cm'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: customController21,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Additional price(optional)',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: customController22,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-
-                                ],
-                              ),
-                              ExpansionTile(
-                                title: Text('Custom size 3'),
-                                maintainState: true,
-                                children: [
-
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      maxLines: 1,
-                                      controller: customController3,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Title',
-                                          hintText: '117 cm'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: customController31,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Additional price(optional)',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: customController32,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-
-                                ],
-                              ),
-                              ExpansionTile(
-                                title: Text('Custom size 4'),
-                                maintainState: true,
-                                children: [
-
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      maxLines: 1,
-                                      controller: customController4,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Title',
-                                          hintText: '117 cm'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: customController41,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Additional price(optional)',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: customController42,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-
-                                ],
-                              ),
-                              ExpansionTile(
-                                title: Text('Custom size 5'),
-                                maintainState: true,
-                                children: [
-
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      maxLines: 1,
-                                      controller: customController5,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Title',
-                                          hintText: '117 cm'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: customController51,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Additional price(optional)',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: customController52,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-
-                                ],
-                              ),
-                              ExpansionTile(
-                                title: Text('Custom size 6'),
-                                maintainState: true,
-                                children: [
-
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      maxLines: 1,
-                                      controller: customController6,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Title',
-                                          hintText: '117 cm'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: customController61,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Additional price(optional)',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: customController62,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-
-                                ],
-                              ),
-                              ExpansionTile(
-                                title: Text('Custom size 7'),
-                                maintainState: true,
-                                children: [
-
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      maxLines: 1,
-                                      controller: customController7,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Title',
-                                          hintText: '117 cm'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: customController71,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Additional price(optional)',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: customController72,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-
-                                ],
-                              ),
-                              ExpansionTile(
-                                title: Text('Custom size 8'),
-                                maintainState: true,
-                                children: [
-
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      maxLines: 1,
-                                      controller: customController8,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Title',
-                                          hintText: '117 cm'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: customController81,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Additional price(optional)',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: customController82,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-
-                                ],
-                              ),
-                              ExpansionTile(
-                                title: Text('Custom size 9'),
-                                maintainState: true,
-                                children: [
-
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      maxLines: 1,
-                                      controller: customController9,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Title',
-                                          hintText: '117 cm'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: customController91,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Additional price(optional)',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: customController92,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-
-                                ],
-                              ),
-                              ExpansionTile(
-                                title: Text('Custom size 10'),
-                                maintainState: true,
-                                children: [
-
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      maxLines: 1,
-                                      controller: customController10,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Title',
-                                          hintText: '117 cm'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: customController101,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Additional price(optional)',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: customController102,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-
-                                ],
-                              ),
-
 
 
                             ],
@@ -9532,7 +7868,7 @@ return
           Expanded(
             child: DefaultTabController(
 
-                length:6,
+                length:5,
                 child: Scaffold(
 
                   appBar:AppBar(
@@ -9548,7 +7884,6 @@ return
                         Text("Clothing",style: TextStyle(fontSize:  SizeConfig.safeBlockHorizontal *5,),),
                         Text("Made-to-order",style: TextStyle(fontSize:  SizeConfig.safeBlockHorizontal *5,),),
                         Text("Free size",style: TextStyle(fontSize:  SizeConfig.safeBlockHorizontal *5),),
-                        Text("Custom size(upto 10)",style: TextStyle(fontSize:  SizeConfig.safeBlockHorizontal *5),),
                        Text("Ring(US)",style: TextStyle(fontSize:  SizeConfig.safeBlockHorizontal *5),),
                        Text("Shoes(US)",style: TextStyle(fontSize:  SizeConfig.safeBlockHorizontal *5),),
 
@@ -9719,567 +8054,6 @@ return
                                   ),
                                 ],
                               ),
-
-
-                            ],
-                          ),
-                          ListView(
-
-
-                            children: [
-
-
-                              ExpansionTile(
-                                title: Text('Custom size 1'),
-                                maintainState: true,
-                                children: [
-
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      maxLines: 1,
-                                      controller: customController1,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Title',
-                                          hintText: '117 cm'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: customController11,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Additional price(optional)',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: customController12,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-
-                                ],
-                              ),
-                              ExpansionTile(
-                                title: Text('Custom size 2'),
-                                maintainState: true,
-                                children: [
-
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      maxLines: 1,
-                                      controller: customController2,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Title',
-                                          hintText: '117 cm'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: customController21,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Additional price(optional)',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: customController22,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-
-                                ],
-                              ),
-                              ExpansionTile(
-                                title: Text('Custom size 3'),
-                                maintainState: true,
-                                children: [
-
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      maxLines: 1,
-                                      controller: customController3,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Title',
-                                          hintText: '117 cm'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: customController31,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Additional price(optional)',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: customController32,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-
-                                ],
-                              ),
-                              ExpansionTile(
-                                title: Text('Custom size 4'),
-                                maintainState: true,
-                                children: [
-
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      maxLines: 1,
-                                      controller: customController4,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Title',
-                                          hintText: '117 cm'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: customController41,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Additional price(optional)',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: customController42,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-
-                                ],
-                              ),
-                              ExpansionTile(
-                                title: Text('Custom size 5'),
-                                maintainState: true,
-                                children: [
-
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      maxLines: 1,
-                                      controller: customController5,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Title',
-                                          hintText: '117 cm'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: customController51,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Additional price(optional)',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: customController52,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-
-                                ],
-                              ),
-                              ExpansionTile(
-                                title: Text('Custom size 6'),
-                                maintainState: true,
-                                children: [
-
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      maxLines: 1,
-                                      controller: customController6,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Title',
-                                          hintText: '117 cm'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: customController61,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Additional price(optional)',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: customController62,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-
-                                ],
-                              ),
-                              ExpansionTile(
-                                title: Text('Custom size 7'),
-                                maintainState: true,
-                                children: [
-
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      maxLines: 1,
-                                      controller: customController7,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Title',
-                                          hintText: '117 cm'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: customController71,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Additional price(optional)',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: customController72,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-
-                                ],
-                              ),
-                              ExpansionTile(
-                                title: Text('Custom size 8'),
-                                maintainState: true,
-                                children: [
-
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      maxLines: 1,
-                                      controller: customController8,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Title',
-                                          hintText: '117 cm'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: customController81,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Additional price(optional)',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: customController82,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-
-                                ],
-                              ),
-                              ExpansionTile(
-                                title: Text('Custom size 9'),
-                                maintainState: true,
-                                children: [
-
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      maxLines: 1,
-                                      controller: customController9,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Title',
-                                          hintText: '117 cm'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: customController91,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Additional price(optional)',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: customController92,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-
-                                ],
-                              ),
-                              ExpansionTile(
-                                title: Text('Custom size 10'),
-                                maintainState: true,
-                                children: [
-
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      maxLines: 1,
-                                      controller: customController10,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Title',
-                                          hintText: '117 cm'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: customController101,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Additional price(optional)',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: customController102,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-
-                                ],
-                              ),
-
 
 
                             ],
@@ -11400,754 +9174,1790 @@ color(){
             backgroundColor: kPrimaryColor,
             leading: IconButton(
                 icon: Icon(Icons.arrow_back, color: kSecondaryColor),
-                onPressed:_onBackPressed),
+                onPressed:(){
+                  return showDialog(
+                      context : context,
+                      builder: (context) => new AlertDialog(
+                          title: new Text('Are you sure?'),
+                          content: new Text('Do you want to exit without uploading?'),
+                          actions: <Widget>[
+                      new TextButton(
+
+                      onPressed: () => Navigator.of(context).pop(false),
+                  child: Text("NO"),
+                  ),
+                  SizedBox(height: 16),
+                  new TextButton(
+
+                  onPressed: ()
+                  {
+                    Get.back();
+                   Get.back();
+
+                  delete();
+                  },
+                  child: Text("YES"),
+                  ),
+                  ],
+                  ),
+                  );
+                }),
             title: Text(
               "Product Details",
               style: TextStyle(color: Colors.white),
             ),
-            actions: [
-              TextButton(
-                onPressed: () async{
 
-
-                  if(_formKey.currentState.validate()) {
-                    // ignore: unnecessary_statements
-                    await INRUSD();
-
-                   handleSubmit();
-                  Get.back();
-                  }
-else {          _formKey.currentState.validate()? Container(): Fluttertoast.showToast(
-                      msg: "Fill the required fields " , timeInSecForIos: 4);}
-                },
-
-                child: Text(
-                  "Post",
-                  style: TextStyle(
-                      color: Colors.blueAccent,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 20.0),
-                ),
-              )
-            ],
           ),
-          body: Container(
-            child: Stack(
-              children:[
-                Form(
-                key: _formKey,
-                child:
-                Column(
-                    children: <Widget>[
-                    isUploading ? linearProgress() : Text(""),
-
-                      carousel(),
-                         Expanded(
-                           child: SingleChildScrollView(
-                             child: Column(
-                        children: [
-
-                    SizedBox(height: 8.0,),
-                    Text('Select Gender',style:TextStyle(color: kText,fontSize:20.0) ,),
-                    SizedBox(height: 8.0,),
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: DropdownButton<String>(
-                          value: dropdownValue,
-                          icon: Icon(Icons.keyboard_arrow_down_sharp),
-                          iconSize: 24,
-                          elevation: 16,
-                          style: TextStyle(color: kText,fontSize:20.0),
-
-                          onChanged: (String newValue) {
-                                setState(() {
-                                  dropdownValue = newValue;
-                                });
-                          },
-                          items: <String>['Women', 'Men', 'Baby-Boys', 'Baby-Girls', 'Kids-Boys', 'Kids-Girls', 'Teen-Boys', 'Teen-Girls']
-                                  .map<DropdownMenuItem<String>>((String value) {
-                                return DropdownMenuItem<String>(
-                                  value: value,
-                                  child: Text(value),
-
-                                );
-                          }).toList(),
-                      ),
-                    ),
-                    Container(
-                      margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0,8.0),
-                      child: RaisedButton(
-                        color:kblue,
-                      child: Text('$value',style:TextStyle(color: Colors.white) ,),
-                      onPressed: (){
-                          showModalBottomSheet(context: context, builder:(BuildContext context){
-
-
-                                if(dropdownValue=='Women')
-                                {
-                                  return
-                                    WomenCategory();
-                                }
-                                else if(dropdownValue=='Men')
-                                {
-                                  return
-                                    MenCategory();
-                                }
-      else if(dropdownValue=='Baby-Boys')
-      {
-        return
-        BabyBCategory();
-      }
-      else if(dropdownValue== 'Baby-Girls'){
-        return
-        BabyGCategory();
-      }
-      else if(dropdownValue=='Kids-Boys'){
-        return
-        KidBCategory();
-      }
-      else if(dropdownValue=='Kids-Girls'){
-        return
-        KidGCategory();
-      }
-      else if(dropdownValue== 'Teen-Boys'){
-        return
-        TeenBCategory();
-      }
-      else if(dropdownValue=='Teen-Girls'){
-        return
-        TeenGCategory();
-      }
-                                else{
-                                  return
-                                  Text('text');
-                                }
-                          },
-                          );
-                      }
-                      ,
-                          ),
-                    ),
-
-
-
-                    SizedBox(height: 8.0,),
-                          Container(
-                            // alignment:Alignment.centerLeft,
-                            child:   FloatingActionButton.extended(
-                              backgroundColor: kblue,
-                              onPressed: ()=>custom(),
-
-                              label:   Text("Customization/variations",style: TextStyle(fontSize:  SizeConfig.safeBlockHorizontal *5),),
-                            ),
-                          ),
-
-SizedBox(height: 8.0,),          Container(
-                            // alignment:Alignment.centerLeft,
-                            child:   FloatingActionButton.extended(
-                              backgroundColor: kblue,
-                              onPressed: ()=>tag(),
-
-                              label:   Text("Tag other products",style: TextStyle(fontSize:  SizeConfig.safeBlockHorizontal *5),),
-                            ),
-                          ),
-
-SizedBox(height: 8.0,),
-
-                 Row(
-                   mainAxisAlignment:MainAxisAlignment.center,
-                      children:[
-                     Container(
-                 // alignment:Alignment.centerLeft,
-                       child:   FloatingActionButton.extended(
-backgroundColor: kblue,
-                         onPressed: ()=>AddSize(),
-
-                         label: Text('Specify Quantity',style:TextStyle(color:  Colors.white) ,),
-                       ),
-                     ),
-
-
-
-        SizedBox(width: 8.0,),Container(
-                 // alignment:Alignment.centerRight,
-                       child:   FloatingActionButton.extended(
-backgroundColor: kblue,
-                         onPressed: ()=>sizeGuide(),
-                         label: Text('Size Guide',style:TextStyle(color:  Colors.white) ,),
-                       ),
-                     ),
-
-                      ],
-                    ),
-
-                    SizedBox(height: 8.0,),
-
-                         Text("Processing time",  style:TextStyle(color: kText,fontSize:20.0)),
-                          SizedBox(height: 8.0,),
-
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Expanded(
-                                child: Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: TextFormField(
-                                    style:TextStyle(color: kText),
-                                    keyboardType: TextInputType.number,
-
-                                    controller: durationfromp,
-                                    decoration: InputDecoration(
-                                      border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
-                                      enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
-                                      focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
-
-                                      labelText: 'Business days',labelStyle: TextStyle(color: kText),
-                                    ),
-                                    textAlign: TextAlign.center,
-                                    validator: (text) {
-                                      if ( text.isEmpty) {
-                                        return 'Processing time is empty';
-                                      }
-                                      return null;
-                                    },
-                                  ),
-                                ),
-                              ),
-                              Text("-",  style:TextStyle(color: kText)),
-
-                              Expanded(
-
-                                child: Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: TextFormField(
-                                    style:TextStyle(color: kText),
-                                    keyboardType: TextInputType.number,
-
-                                    controller: durationtop,
-                                    decoration: InputDecoration(
-                                      border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
-                                      enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
-                                      focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
-
-                                    ),
-                                    textAlign: TextAlign.center,
-                                    validator: (text) {
-                                      if ( text.isEmpty) {
-                                        return 'Processing time is empty';
-                                      }
-                                      return null;
-                                    },
-                                  ),
-                                ),
-                              ),
-
-                            ],
-                          ),
-                          SizedBox(height: 8.0,),
-
-                          ListTile(
-                            leading: Icon(
-                              Icons.local_shipping,
-                              color: Colors.orange,
-                              size: 35.0,
-                            ),
-                            title:Text("Shipping duration to ${currentUser.country}",  style:TextStyle(color: kText)),
-
-                          ),
-                          SizedBox(height: 8.0,),
-
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-
-                      children: [
-                        Expanded(
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: TextFormField(
-                              style:TextStyle(color: kText),
-                              keyboardType: TextInputType.number,
-
-                              controller: durationfrom,
-                              decoration: InputDecoration(
-                                border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
-                                enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
-                                focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
-
-                               // labelText: 'Between',labelStyle: TextStyle(color: kText),
-                              ),
-                              textAlign: TextAlign.center,
-                              validator: (text) {
-                                if ( text.isEmpty) {
-                                  return 'Shipping duration is empty';
-                                }
-                                return null;
-                              },
-                            ),
-                          ),
-                        ),
-                        Text("-",  style:TextStyle(color: kText)),
-
-                        Expanded(
-
-                        child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: TextFormField(
-                              style:TextStyle(color: kText),
-                              keyboardType: TextInputType.number,
-
-                              controller: durationto,
-                              decoration: InputDecoration(
-                                border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
-                                enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
-                                focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
-
-                              ),
-                              textAlign: TextAlign.center,
-                              validator: (text) {
-                                if ( text.isEmpty) {
-                                  return 'Shipping duration is empty';
-                                }
-                                return null;
-                              },
-                            ),
-                          ),
-                        ),
-
-                      ],
-                    ),
-                          SizedBox( height: 8.0,),
-                          Text('Free shipping',style:TextStyle(color: kText)) ,
-                          SizedBox( height: 8.0,),
-
-                              Row(
-                            mainAxisAlignment:MainAxisAlignment.center,
-                            children: [
-                              Text('No'),
-                              SizedBox( width: 8.0,),
-
-                              Switch(
-                                value: freeship,
-                                onChanged: (value){setState(() {
-                                  freeship = value;
-                                });},
-                                activeColor: Colors.blue,
-                                activeTrackColor: kPrimaryColor,
-                              ),
-                              SizedBox( width: 8.0,),
-
-                              Text('Yes')
-                            ],
-                          ),
-
-                          SizedBox( height: 8.0,),
-
-                          !freeship?  Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: TextFormField(
-                              style:TextStyle(color: kText),
-                              keyboardType: TextInputType.number,
-
-                              controller: shipcost,
-                              decoration: InputDecoration(
-                                border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
-                                enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
-                                focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
-                                hintText:" ${currentUser.currencysym}",
-
-                                labelText: '${currentUser.currencysym}Shipping cost',labelStyle: TextStyle(color: kText),
-
-                              ),
-                              textAlign: TextAlign.center,
-                              validator: (text) {
-                                if ( freeship==false || text.isEmpty ) {
-                                  return 'Shipping cost is empty';
-                                }
-                                return null;
-                              },
-                            ),
-                          ):Container(),
-
-                          SizedBox( height: 8.0,),
-                          Text('Worldwide shipping',style:TextStyle(color: kText)) ,
-                          SizedBox( height: 8.0,),
-                          Row(
-                            mainAxisAlignment:MainAxisAlignment.center,
-                            children: [
-                              Text('No'),
-                              SizedBox( width: 8.0,),
-
-                              Switch(
-                                value: worldship,
-                                onChanged: (value){setState(() {
-                                  worldship = value;
-                                });},
-                                activeColor: Colors.blue,
-                                activeTrackColor:kPrimaryColor,
-                              ),
-                              SizedBox( width: 8.0,),
-
-                              Text('Yes')
-                            ],
-                          ),
-                          SizedBox(height: 8.0,),
-
-                          worldship ?     Container(
-                            margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
-                            child: ListTile(
-                              leading: Icon(
-                                Icons.local_shipping,
-                                color: Colors.orange,
-                                size: 35.0,
-                              ),
-                              title:Text("Shipping duration to worldwide",  style:TextStyle(color: kText)),
-
-                            ),
-                          ):Container(),
-                          SizedBox(height: 8.0,),
-
-                          worldship ?   Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-
-                            children: [
-                              Expanded(
-                                child: Padding(
-                                  padding: const EdgeInsets.all(8.0),
-
-                                  child: TextFormField(
-                                    style:TextStyle(color: kText),
-                                    keyboardType: TextInputType.number,
-
-                                    controller: durationfromw,
-                                    decoration: InputDecoration(
-                                      border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
-                                      enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
-                                      focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
-
-// labelText: 'Between',labelStyle: TextStyle(color: kText),
-                                    ),
-                                    textAlign: TextAlign.center,
-                                    validator: (text) {
-                                      if (worldship==true && text.isEmpty) {
-                                        return 'Shipping duration is empty';
-                                      }
-                                      return null;
-                                    },
-                                  ),
-                                ),
-                              ),
-                              Text("-",  style:TextStyle(color: kText)),
-
-                              Expanded(
-
-                                child: Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: TextFormField(
-                                    style:TextStyle(color: kText),
-                                    keyboardType: TextInputType.number,
-                                    controller: durationtow,
-                                    decoration: InputDecoration(
-                                      border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
-                                      enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
-                                      focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
-
-                                    ),
-                                    textAlign: TextAlign.center,
-                                    validator: (text) {
-                                      if (worldship==true && text.isEmpty) {
-                                        return 'Shipping duration is empty';
-                                      }
-                                      return null;
-                                    },
-                                  ),
-                                ),
-                              ),
-
-                            ],
-                          ):Container(),
-                          SizedBox( height: 8.0,),
-                          Text('Free shipping',style:TextStyle(color: kText)) ,
-
-                          SizedBox( height: 8.0,),
-
-                          worldship ? Row(
-                            mainAxisAlignment:MainAxisAlignment.center,
-                            children: [
-                              Text('No'),
-                              SizedBox( width: 8.0,),
-
-                              Switch(
-                                value: freeworldship,
-                                onChanged: (value){setState(() {
-                                  freeworldship = value;
-                                });},
-                                activeColor: Colors.blue,
-                                activeTrackColor:kPrimaryColor,
-                              ),
-                              SizedBox( width: 8.0,),
-
-                              Text('Yes')
-                            ],
-                          ):Container(),
-
-                          worldship && freeworldship == false ?   Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: TextFormField(
-                              style:TextStyle(color: kText),
-                              keyboardType: TextInputType.number,
-
-                              controller: shipcostintern,
-                              decoration: InputDecoration(
-                                border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
-                                enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
-                                focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
-                                hintText:" ${currentUser.currencysym}",
-
-                                labelText: 'Shipping cost',labelStyle: TextStyle(color: kText),
-                              ),
-                              textAlign: TextAlign.center,
-                              validator: (text) {
-                                if ( freeworldship==false && text.isEmpty ) {
-                                  return 'Shipping cost is empty';
-                                }
-                                return null;
-                              },
-                            ),
-                          ):Container(),
-                          SizedBox(height: 8.0,),
-
-
-                    Container(
-                      margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
-                          child: ListTile(
-                                leading: Icon(
-                                  EvilIcons.eye,
-                                  color: Colors.orange,
-                                  size: 35.0,
-                                ),
-                                title:  TextFormField(
-                                  style:TextStyle(color: kText),
-                                  controller: productnameController,
-                                  decoration: InputDecoration(
-                                    border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
-                                    enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
-                                    focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
-
-                                    labelText: 'Product Name',labelStyle: TextStyle(color: kText),
-                                    hintText: 'Product Name',
-                                  ),
-                                  textAlign: TextAlign.center,
-                                  validator: (text) {
-                                    if ( text.isEmpty) {
-                                      return 'Product Name is empty';
-                                    }
-                                    return null;
-                                  },
-                                ),
-                          ),
-                        ),
-                        SizedBox(height: 8.0,),
-                    Container(
-                      margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
-                          child: ListTile(
-                                leading: Icon(
-                                  EvilIcons.tag,
-                                  color: Colors.orange,
-                                  size: 35.0,
-                                ),
-                                title:TextFormField(
-                                  style:TextStyle(color: kText),
-keyboardType:TextInputType.number,
-                                  controller: priceController,
-                                  decoration: InputDecoration(
-                                    border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
-                                    enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
-                                    focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
-
-                                    labelText: 'Price',labelStyle: TextStyle(color: kText),
-                                    hintText:" ${currentUser.currencysym}",
-                                  ),
-                                  textAlign: TextAlign.center,
-                                  validator: (text) {
-                                    if (text.isEmpty) {
-                                      return 'Price is empty';
-                                    }
-                                    return null;
-                                  },
-                                ),
-                          ),
-                        ),
-                        SizedBox( height: 8.0,),
-
-                          //Customised
-                          Container(
-                            // alignment:Alignment.centerLeft,
-                            child:   FloatingActionButton.extended(
-                              backgroundColor: kblue,
-                              onPressed: ()=>color(),
-                              label: Text('Add Colors',style:TextStyle(color:  Colors.white) ,),
-                            ),
-                          ),
-
-                        SizedBox( height: 8.0,),
-                    Container(
-                      margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
-                          child: TextFormField(
-                            style:TextStyle(color: kText),
-
-                            keyboardType: TextInputType.multiline,
-                                maxLines: null,
-                                controller: detailsController,
-                                decoration: InputDecoration(
-                                  border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
-                                  enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
-                                  focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
-
-                                  labelText: 'Product description',labelStyle: TextStyle(color: kText),
-                                  hintText: 'Product description',
-                                ),
-                                textAlign: TextAlign.center,
-                                validator: (text) {
-                                  if ( text.isEmpty) {
-                                    return 'Description is empty';
-                                  }
-                                  return null;
-                                },
-                          ),
-                        ),
-                        SizedBox( height: 8.0,),
-                    Container(
-                      margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
-                          child: TextFormField(
-                            style:TextStyle(color: kText),
-
-                            keyboardType: TextInputType.multiline,
-                                maxLines: null,
-                                controller: compositionController,
-                                decoration: InputDecoration(
-                                  border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
-                                  enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
-                                  focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
-
-                                  labelText: 'Fabric description',labelStyle: TextStyle(color: kText),
-                                  hintText: 'ex.Cotton: 100%' ,
-                                ),
-                                textAlign: TextAlign.center,
-                                validator: (text) {
-                                  if ( text.isEmpty) {
-                                    return 'Fabric description is empty';
-                                  }
-                                  return null;
-                                },
-                          ),
-                        ),
-                        SizedBox( height: 8.0,),
-                    Container(
-                      margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
-                          child: TextFormField(
-                            style:TextStyle(color: kText),
-
-                            keyboardType: TextInputType.multiline,
-                                maxLines: null,
-                                controller: washandcareController,
-                                decoration: InputDecoration(
-                                  border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
-                                  enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
-                                  focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
-
-                                  labelText: 'Wash & Care',labelStyle: TextStyle(color: kText),
-                                  hintText: 'Wash & Care instructions',
-                                ),
-                                textAlign: TextAlign.center,
-                                validator: (text) {
-                                  if ( text.isEmpty) {
-                                    return 'Wash & Care instructions is empty';
-                                  }
-                                  return null;
-                                },
-                          ),
-                        ),
-                        SizedBox( height: 8.0,),
-                    Container(
-                      margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
-                          child: TextFormField(
-                            style:TextStyle(color: kText),
-
-                            keyboardType: TextInputType.multiline,
-                                maxLines: null,
-                                controller: sizeandfitController,
-                                decoration: InputDecoration(
-                                  border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
-                                  enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
-                                  focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
-
-                                  labelText: 'Size & Fit recommendations',labelStyle: TextStyle(color: kText),
-                                  hintText: 'ex.Cut for slim fit,take your normal size',
-                                ),
-                                textAlign: TextAlign.center,
-                                validator: (text) {
-                                  if ( text.isEmpty) {
-                                    return ' Size & Fit recommendations is empty';
-                                  }
-                                  return null;
-                                },
-                          ),
-                        ),
-
-                          SizedBox( height: 8.0,),
-                    Container(
-                      margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
-                          child: TextFormField(
-                            style:TextStyle(color: kText),
-
-                            keyboardType: TextInputType.multiline,
-                                maxLines: null,
-                                controller: shipcontroller,
-                                decoration: InputDecoration(
-                                  border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
-                                  enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
-                                  focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
-
-                                  labelText: 'Shipping & returns',labelStyle: TextStyle(color: kText),
-                                  hintText: 'countries served & return policy',
-                                ),
-                                textAlign: TextAlign.center,
-                                validator: (text) {
-                                  if ( text.isEmpty) {
-                                    return 'Shipping & returns';
-                                  }
-                                  return null;
-                                },
-                          ),
-                        ),
-
-
-
-  SizedBox( height: 8.0,),
-
-
-                         ],
-                      ),
-                           ),
-                         ),
-
-
-                ],
-                ),
-
-
-
-
-              ),
-
-                isUploading ? Center(child:  CircularProgressIndicator()) : Text(""),
-              ],
+          body: PageView(
+            physics:new NeverScrollableScrollPhysics(),
+          pageSnapping: true,
+          controller: pageController,
+          onPageChanged: (index) {
+            setState(() {
+              pageChanged = index;
+            });
+            print(pageChanged);
+          },
+          children: [
+            Container(
+              child: page0(),
+            ), Container(
+              child: page3(),
             ),
+            Container(
+              child: page1(),
+            ),
+            Container(
+              child: page2(),
+            ),
+
+          ],
           ),
         ),
       ),
     );
   }
+// sdf(){              Container(
+//   child: Stack(
+//     children:[
+//       Form(
+//         key: _formKey,
+//         child:
+//         Column(
+//           children: <Widget>[
+//             isUploading ? linearProgress() : Text(""),
+//
+//             carousel(),
+//             Expanded(
+//               child: SingleChildScrollView(
+//                 child: Column(
+//                   children: [
+//
+//                     SizedBox(height: 8.0,),
+//                     Text('Select Gender',style:TextStyle(color: kText,fontSize:20.0) ,),
+//                     SizedBox(height: 8.0,),
+//                     Padding(
+//                       padding: const EdgeInsets.all(8.0),
+//                       child: DropdownButton<String>(
+//                         value: dropdownValue,
+//                         icon: Icon(Icons.keyboard_arrow_down_sharp),
+//                         iconSize: 24,
+//                         elevation: 16,
+//                         style: TextStyle(color: kText,fontSize:20.0),
+//
+//                         onChanged: (String newValue) {
+//                           setState(() {
+//                             dropdownValue = newValue;
+//                           });
+//                         },
+//                         items: <String>['Women', 'Men', 'Baby-Boys', 'Baby-Girls', 'Kids-Boys', 'Kids-Girls', 'Teen-Boys', 'Teen-Girls']
+//                             .map<DropdownMenuItem<String>>((String value) {
+//                           return DropdownMenuItem<String>(
+//                             value: value,
+//                             child: Text(value),
+//
+//                           );
+//                         }).toList(),
+//                       ),
+//                     ),
+//                     Container(
+//                       margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0,8.0),
+//                       child: RaisedButton(
+//                         color:kblue,
+//                         child: Text('$value',style:TextStyle(color: Colors.white) ,),
+//                         onPressed: (){
+//                           showModalBottomSheet(context: context, builder:(BuildContext context){
+//
+//
+//                             if(dropdownValue=='Women')
+//                             {
+//                               return
+//                                 WomenCategory();
+//                             }
+//                             else if(dropdownValue=='Men')
+//                             {
+//                               return
+//                                 MenCategory();
+//                             }
+//                             else if(dropdownValue=='Baby-Boys')
+//                             {
+//                               return
+//                                 BabyBCategory();
+//                             }
+//                             else if(dropdownValue== 'Baby-Girls'){
+//                               return
+//                                 BabyGCategory();
+//                             }
+//                             else if(dropdownValue=='Kids-Boys'){
+//                               return
+//                                 KidBCategory();
+//                             }
+//                             else if(dropdownValue=='Kids-Girls'){
+//                               return
+//                                 KidGCategory();
+//                             }
+//                             else if(dropdownValue== 'Teen-Boys'){
+//                               return
+//                                 TeenBCategory();
+//                             }
+//                             else if(dropdownValue=='Teen-Girls'){
+//                               return
+//                                 TeenGCategory();
+//                             }
+//                             else{
+//                               return
+//                                 Text('text');
+//                             }
+//                           },
+//                           );
+//                         }
+//                         ,
+//                       ),
+//                     ),
+//
+//
+//
+//                     SizedBox(height: 8.0,),
+//                     Container(
+//                       // alignment:Alignment.centerLeft,
+//                       child:   FloatingActionButton.extended(
+//                         backgroundColor: kblue,
+//                         onPressed: ()=>custom(),
+//
+//                         label:   Text("Customization/variations",style: TextStyle(fontSize:  SizeConfig.safeBlockHorizontal *5),),
+//                       ),
+//                     ),
+//
+//                     SizedBox(height: 8.0,),          Container(
+//                       // alignment:Alignment.centerLeft,
+//                       child:   FloatingActionButton.extended(
+//                         backgroundColor: kblue,
+//                         onPressed: ()=>tag(),
+//
+//                         label:   Text("Tag other products",style: TextStyle(fontSize:  SizeConfig.safeBlockHorizontal *5),),
+//                       ),
+//                     ),
+//
+//                     SizedBox(height: 8.0,),
+//
+//                     Row(
+//                       mainAxisAlignment:MainAxisAlignment.center,
+//                       children:[
+//                         Container(
+//                           // alignment:Alignment.centerLeft,
+//                           child:   FloatingActionButton.extended(
+//                             backgroundColor: kblue,
+//                             onPressed: ()=>AddSize(),
+//
+//                             label: Text('Specify Quantity',style:TextStyle(color:  Colors.white) ,),
+//                           ),
+//                         ),
+//
+//
+//
+//                         SizedBox(width: 8.0,),Container(
+//                           // alignment:Alignment.centerRight,
+//                           child:   FloatingActionButton.extended(
+//                             backgroundColor: kblue,
+//                             onPressed: ()=>sizeGuide(),
+//                             label: Text('Size Guide',style:TextStyle(color:  Colors.white) ,),
+//                           ),
+//                         ),
+//
+//                       ],
+//                     ),
+//
+//                     SizedBox(height: 8.0,),
+//
+//                     Text("Processing time",  style:TextStyle(color: kText,fontSize:20.0)),
+//                     SizedBox(height: 8.0,),
+//
+//                     Row(
+//                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+//                       children: [
+//                         Expanded(
+//                           child: Padding(
+//                             padding: const EdgeInsets.all(8.0),
+//                             child: TextFormField(
+//                               style:TextStyle(color: kText),
+//                               keyboardType: TextInputType.number,
+//
+//                               controller: durationfromp,
+//                               decoration: InputDecoration(
+//                                 border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+//                                 enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+//                                 focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+//
+//                                 labelText: 'Business days',labelStyle: TextStyle(color: kText),
+//                               ),
+//                               textAlign: TextAlign.center,
+//                               validator: (text) {
+//                                 if ( text.isEmpty) {
+//                                   return 'Processing time is empty';
+//                                 }
+//                                 return null;
+//                               },
+//                             ),
+//                           ),
+//                         ),
+//                         Text("-",  style:TextStyle(color: kText)),
+//
+//                         Expanded(
+//
+//                           child: Padding(
+//                             padding: const EdgeInsets.all(8.0),
+//                             child: TextFormField(
+//                               style:TextStyle(color: kText),
+//                               keyboardType: TextInputType.number,
+//
+//                               controller: durationtop,
+//                               decoration: InputDecoration(
+//                                 border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+//                                 enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+//                                 focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+//
+//                               ),
+//                               textAlign: TextAlign.center,
+//                               validator: (text) {
+//                                 if ( text.isEmpty) {
+//                                   return 'Processing time is empty';
+//                                 }
+//                                 return null;
+//                               },
+//                             ),
+//                           ),
+//                         ),
+//
+//                       ],
+//                     ),
+//                     SizedBox(height: 8.0,),
+//
+//                     ListTile(
+//                       leading: Icon(
+//                         Icons.local_shipping,
+//                         color: Colors.orange,
+//                         size: 35.0,
+//                       ),
+//                       title:Text("Shipping duration to ${currentUser.country}",  style:TextStyle(color: kText)),
+//
+//                     ),
+//                     SizedBox(height: 8.0,),
+//
+//                     Row(
+//                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+//
+//                       children: [
+//                         Expanded(
+//                           child: Padding(
+//                             padding: const EdgeInsets.all(8.0),
+//                             child: TextFormField(
+//                               style:TextStyle(color: kText),
+//                               keyboardType: TextInputType.number,
+//
+//                               controller: durationfrom,
+//                               decoration: InputDecoration(
+//                                 border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+//                                 enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+//                                 focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+//
+//                                 // labelText: 'Between',labelStyle: TextStyle(color: kText),
+//                               ),
+//                               textAlign: TextAlign.center,
+//                               validator: (text) {
+//                                 if ( text.isEmpty) {
+//                                   return 'Shipping duration is empty';
+//                                 }
+//                                 return null;
+//                               },
+//                             ),
+//                           ),
+//                         ),
+//                         Text("-",  style:TextStyle(color: kText)),
+//
+//                         Expanded(
+//
+//                           child: Padding(
+//                             padding: const EdgeInsets.all(8.0),
+//                             child: TextFormField(
+//                               style:TextStyle(color: kText),
+//                               keyboardType: TextInputType.number,
+//
+//                               controller: durationto,
+//                               decoration: InputDecoration(
+//                                 border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+//                                 enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+//                                 focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+//
+//                               ),
+//                               textAlign: TextAlign.center,
+//                               validator: (text) {
+//                                 if ( text.isEmpty) {
+//                                   return 'Shipping duration is empty';
+//                                 }
+//                                 return null;
+//                               },
+//                             ),
+//                           ),
+//                         ),
+//
+//                       ],
+//                     ),
+//                     SizedBox( height: 8.0,),
+//                     Text('Free shipping',style:TextStyle(color: kText)) ,
+//                     SizedBox( height: 8.0,),
+//
+//                     Row(
+//                       mainAxisAlignment:MainAxisAlignment.center,
+//                       children: [
+//                         Text('No'),
+//                         SizedBox( width: 8.0,),
+//
+//                         Switch(
+//                           value: freeship,
+//                           onChanged: (value){setState(() {
+//                             freeship = value;
+//                           });},
+//                           activeColor: Colors.blue,
+//                           activeTrackColor: kPrimaryColor,
+//                         ),
+//                         SizedBox( width: 8.0,),
+//
+//                         Text('Yes')
+//                       ],
+//                     ),
+//
+//                     SizedBox( height: 8.0,),
+//
+//                     !freeship?  Padding(
+//                       padding: const EdgeInsets.all(8.0),
+//                       child: TextFormField(
+//                         style:TextStyle(color: kText),
+//                         keyboardType: TextInputType.number,
+//
+//                         controller: shipcost,
+//                         decoration: InputDecoration(
+//                           border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+//                           enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+//                           focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+//                           hintText:" ${currentUser.currencysym}",
+//
+//                           labelText: '${currentUser.currencysym}Shipping cost',labelStyle: TextStyle(color: kText),
+//
+//                         ),
+//                         textAlign: TextAlign.center,
+//                         validator: (text) {
+//                           if ( freeship==false || text.isEmpty ) {
+//                             return 'Shipping cost is empty';
+//                           }
+//                           return null;
+//                         },
+//                       ),
+//                     ):Container(),
+//
+//                     SizedBox( height: 8.0,),
+//                     Text('Worldwide shipping',style:TextStyle(color: kText)) ,
+//                     SizedBox( height: 8.0,),
+//                     Row(
+//                       mainAxisAlignment:MainAxisAlignment.center,
+//                       children: [
+//                         Text('No'),
+//                         SizedBox( width: 8.0,),
+//
+//                         Switch(
+//                           value: worldship,
+//                           onChanged: (value){setState(() {
+//                             worldship = value;
+//                           });},
+//                           activeColor: Colors.blue,
+//                           activeTrackColor:kPrimaryColor,
+//                         ),
+//                         SizedBox( width: 8.0,),
+//
+//                         Text('Yes')
+//                       ],
+//                     ),
+//                     SizedBox(height: 8.0,),
+//
+//                     worldship ?     Container(
+//                       margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+//                       child: ListTile(
+//                         leading: Icon(
+//                           Icons.local_shipping,
+//                           color: Colors.orange,
+//                           size: 35.0,
+//                         ),
+//                         title:Text("Shipping duration to worldwide",  style:TextStyle(color: kText)),
+//
+//                       ),
+//                     ):Container(),
+//                     SizedBox(height: 8.0,),
+//
+//                     worldship ?   Row(
+//                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+//
+//                       children: [
+//                         Expanded(
+//                           child: Padding(
+//                             padding: const EdgeInsets.all(8.0),
+//
+//                             child: TextFormField(
+//                               style:TextStyle(color: kText),
+//                               keyboardType: TextInputType.number,
+//
+//                               controller: durationfromw,
+//                               decoration: InputDecoration(
+//                                 border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+//                                 enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+//                                 focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+//
+// // labelText: 'Between',labelStyle: TextStyle(color: kText),
+//                               ),
+//                               textAlign: TextAlign.center,
+//                               validator: (text) {
+//                                 if (worldship==true && text.isEmpty) {
+//                                   return 'Shipping duration is empty';
+//                                 }
+//                                 return null;
+//                               },
+//                             ),
+//                           ),
+//                         ),
+//                         Text("-",  style:TextStyle(color: kText)),
+//
+//                         Expanded(
+//
+//                           child: Padding(
+//                             padding: const EdgeInsets.all(8.0),
+//                             child: TextFormField(
+//                               style:TextStyle(color: kText),
+//                               keyboardType: TextInputType.number,
+//                               controller: durationtow,
+//                               decoration: InputDecoration(
+//                                 border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+//                                 enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+//                                 focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+//
+//                               ),
+//                               textAlign: TextAlign.center,
+//                               validator: (text) {
+//                                 if (worldship==true && text.isEmpty) {
+//                                   return 'Shipping duration is empty';
+//                                 }
+//                                 return null;
+//                               },
+//                             ),
+//                           ),
+//                         ),
+//
+//                       ],
+//                     ):Container(),
+//                     SizedBox( height: 8.0,),
+//                     Text('Free shipping',style:TextStyle(color: kText)) ,
+//
+//                     SizedBox( height: 8.0,),
+//
+//                     worldship ? Row(
+//                       mainAxisAlignment:MainAxisAlignment.center,
+//                       children: [
+//                         Text('No'),
+//                         SizedBox( width: 8.0,),
+//
+//                         Switch(
+//                           value: freeworldship,
+//                           onChanged: (value){setState(() {
+//                             freeworldship = value;
+//                           });},
+//                           activeColor: Colors.blue,
+//                           activeTrackColor:kPrimaryColor,
+//                         ),
+//                         SizedBox( width: 8.0,),
+//
+//                         Text('Yes')
+//                       ],
+//                     ):Container(),
+//
+//                     worldship && freeworldship == false ?   Padding(
+//                       padding: const EdgeInsets.all(8.0),
+//                       child: TextFormField(
+//                         style:TextStyle(color: kText),
+//                         keyboardType: TextInputType.number,
+//
+//                         controller: shipcostintern,
+//                         decoration: InputDecoration(
+//                           border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+//                           enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+//                           focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+//                           hintText:" ${currentUser.currencysym}",
+//
+//                           labelText: 'Shipping cost',labelStyle: TextStyle(color: kText),
+//                         ),
+//                         textAlign: TextAlign.center,
+//                         validator: (text) {
+//                           if ( freeworldship==false && text.isEmpty ) {
+//                             return 'Shipping cost is empty';
+//                           }
+//                           return null;
+//                         },
+//                       ),
+//                     ):Container(),
+//                     SizedBox(height: 8.0,),
+//
+//
+//                     Container(
+//                       margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+//                       child: ListTile(
+//                         leading: Icon(
+//                           EvilIcons.eye,
+//                           color: Colors.orange,
+//                           size: 35.0,
+//                         ),
+//                         title:  TextFormField(
+//                           style:TextStyle(color: kText),
+//                           controller: productnameController,
+//                           decoration: InputDecoration(
+//                             border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+//                             enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+//                             focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+//
+//                             labelText: 'Product Name',labelStyle: TextStyle(color: kText),
+//                             hintText: 'Product Name',
+//                           ),
+//                           textAlign: TextAlign.center,
+//                           validator: (text) {
+//                             if ( text.isEmpty) {
+//                               return 'Product Name is empty';
+//                             }
+//                             return null;
+//                           },
+//                         ),
+//                       ),
+//                     ),
+//                     SizedBox(height: 8.0,),
+//                     Container(
+//                       margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+//                       child: ListTile(
+//                         leading: Icon(
+//                           EvilIcons.tag,
+//                           color: Colors.orange,
+//                           size: 35.0,
+//                         ),
+//                         title:TextFormField(
+//                           style:TextStyle(color: kText),
+//                           keyboardType:TextInputType.number,
+//                           controller: priceController,
+//                           decoration: InputDecoration(
+//                             border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+//                             enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+//                             focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+//
+//                             labelText: 'Price',labelStyle: TextStyle(color: kText),
+//                             hintText:" ${currentUser.currencysym}",
+//                           ),
+//                           textAlign: TextAlign.center,
+//                           validator: (text) {
+//                             if (text.isEmpty) {
+//                               return 'Price is empty';
+//                             }
+//                             return null;
+//                           },
+//                         ),
+//                       ),
+//                     ),
+//                     SizedBox( height: 8.0,),
+//
+//                     //Customised
+//                     Container(
+//                       // alignment:Alignment.centerLeft,
+//                       child:   FloatingActionButton.extended(
+//                         backgroundColor: kblue,
+//                         onPressed: ()=>color(),
+//                         label: Text('Add Colors',style:TextStyle(color:  Colors.white) ,),
+//                       ),
+//                     ),
+//
+//                     SizedBox( height: 8.0,),
+//                     Container(
+//                       margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+//                       child: TextFormField(
+//                         style:TextStyle(color: kText),
+//
+//                         keyboardType: TextInputType.multiline,
+//                         maxLines: null,
+//                         controller: detailsController,
+//                         decoration: InputDecoration(
+//                           border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+//                           enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+//                           focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+//
+//                           labelText: 'Product description',labelStyle: TextStyle(color: kText),
+//                           hintText: 'Product description',
+//                         ),
+//                         textAlign: TextAlign.center,
+//                         validator: (text) {
+//                           if ( text.isEmpty) {
+//                             return 'Description is empty';
+//                           }
+//                           return null;
+//                         },
+//                       ),
+//                     ),
+//                     SizedBox( height: 8.0,),
+//                     Container(
+//                       margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+//                       child: TextFormField(
+//                         style:TextStyle(color: kText),
+//
+//                         keyboardType: TextInputType.multiline,
+//                         maxLines: null,
+//                         controller: compositionController,
+//                         decoration: InputDecoration(
+//                           border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+//                           enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+//                           focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+//
+//                           labelText: 'Fabric description',labelStyle: TextStyle(color: kText),
+//                           hintText: 'ex.Cotton: 100%' ,
+//                         ),
+//                         textAlign: TextAlign.center,
+//                         validator: (text) {
+//                           if ( text.isEmpty) {
+//                             return 'Fabric description is empty';
+//                           }
+//                           return null;
+//                         },
+//                       ),
+//                     ),
+//                     SizedBox( height: 8.0,),
+//                     Container(
+//                       margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+//                       child: TextFormField(
+//                         style:TextStyle(color: kText),
+//
+//                         keyboardType: TextInputType.multiline,
+//                         maxLines: null,
+//                         controller: washandcareController,
+//                         decoration: InputDecoration(
+//                           border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+//                           enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+//                           focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+//
+//                           labelText: 'Wash & Care',labelStyle: TextStyle(color: kText),
+//                           hintText: 'Wash & Care instructions',
+//                         ),
+//                         textAlign: TextAlign.center,
+//                         validator: (text) {
+//                           if ( text.isEmpty) {
+//                             return 'Wash & Care instructions is empty';
+//                           }
+//                           return null;
+//                         },
+//                       ),
+//                     ),
+//                     SizedBox( height: 8.0,),
+//                     Container(
+//                       margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+//                       child: TextFormField(
+//                         style:TextStyle(color: kText),
+//
+//                         keyboardType: TextInputType.multiline,
+//                         maxLines: null,
+//                         controller: sizeandfitController,
+//                         decoration: InputDecoration(
+//                           border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+//                           enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+//                           focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+//
+//                           labelText: 'Size & Fit recommendations',labelStyle: TextStyle(color: kText),
+//                           hintText: 'ex.Cut for slim fit,take your normal size',
+//                         ),
+//                         textAlign: TextAlign.center,
+//                         validator: (text) {
+//                           if ( text.isEmpty) {
+//                             return ' Size & Fit recommendations is empty';
+//                           }
+//                           return null;
+//                         },
+//                       ),
+//                     ),
+//
+//                     SizedBox( height: 8.0,),
+//                     Container(
+//                       margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+//                       child: TextFormField(
+//                         style:TextStyle(color: kText),
+//
+//                         keyboardType: TextInputType.multiline,
+//                         maxLines: null,
+//                         controller: shipcontroller,
+//                         decoration: InputDecoration(
+//                           border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+//                           enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+//                           focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+//
+//                           labelText: 'Shipping & returns',labelStyle: TextStyle(color: kText),
+//                           hintText: 'countries served & return policy',
+//                         ),
+//                         textAlign: TextAlign.center,
+//                         validator: (text) {
+//                           if ( text.isEmpty) {
+//                             return 'Shipping & returns';
+//                           }
+//                           return null;
+//                         },
+//                       ),
+//                     ),
+//
+//
+//
+//                     SizedBox( height: 8.0,),
+//
+//
+//                   ],
+//                 ),
+//               ),
+//             ),
+//
+//
+//           ],
+//         ),
+//
+//
+//
+//
+//       ),
+//
+//       isUploading ? Center(child:  CircularProgressIndicator()) : Text(""),
+//     ],
+//   ),
+// );
+// }
+page0(){
+    SizeConfig().init(context);
+    return
+      Form(
+        key: _formKey,
+        child:
+        Column(
+          children: <Widget>[
+            isUploading ? linearProgress() : Text(""),
+
+            carousel(),
+            Expanded(
+              child: SingleChildScrollView(
+                child: Column(
+                  children: [
+
+                    SizedBox(height: SizeConfig.safeBlockVertical*0.5,),
+                    Text('Select Gender',style:TextStyle(color: kText,fontSize:SizeConfig.safeBlockHorizontal *4) ,),
+                    SizedBox(height: SizeConfig.safeBlockVertical*0.5,),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: DropdownButton<String>(
+                        value: dropdownValue,
+                        icon: Icon(Icons.keyboard_arrow_down_sharp),
+                        iconSize: SizeConfig.safeBlockHorizontal *4,
+                        elevation: 4,
+                        style: TextStyle(color: kText,fontSize:SizeConfig.safeBlockHorizontal *4.5),
+
+                        onChanged: (String newValue) {
+                          setState(() {
+                            dropdownValue = newValue;
+                          });
+                        },
+                        items: <String>['Women', 'Men', 'Baby-Boys', 'Baby-Girls', 'Kids-Boys', 'Kids-Girls', 'Teen-Boys', 'Teen-Girls']
+                            .map<DropdownMenuItem<String>>((String value) {
+                          return DropdownMenuItem<String>(
+                            value: value,
+                            child: Text(value),
+
+                          );
+                        }).toList(),
+                      ),
+                    ),
+                    SizedBox(height: SizeConfig.safeBlockVertical*0.5,),
+
+                    Container(
+                      margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0,8.0),
+                      child: ElevatedButton(
+
+                        style: ElevatedButton.styleFrom(
+
+                          primary:kButton, // foreground
+                        ),
+                        child: Text('$value',style:TextStyle(color: kText) ,),
+                        onPressed: (){
+                          showModalBottomSheet(context: context, builder:(BuildContext context){
+
+
+                            if(dropdownValue=='Women')
+                            {
+                              return
+                                WomenCategory();
+                            }
+                            else if(dropdownValue=='Men')
+                            {
+                              return
+                                MenCategory();
+                            }
+                            else if(dropdownValue=='Baby-Boys')
+                            {
+                              return
+                                BabyBCategory();
+                            }
+                            else if(dropdownValue== 'Baby-Girls'){
+                              return
+                                BabyGCategory();
+                            }
+                            else if(dropdownValue=='Kids-Boys'){
+                              return
+                                KidBCategory();
+                            }
+                            else if(dropdownValue=='Kids-Girls'){
+                              return
+                                KidGCategory();
+                            }
+                            else if(dropdownValue== 'Teen-Boys'){
+                              return
+                                TeenBCategory();
+                            }
+                            else if(dropdownValue=='Teen-Girls'){
+                              return
+                                TeenGCategory();
+                            }
+                            else{
+                              return
+                                Text('text');
+                            }
+                          },
+                          );
+                        }
+                        ,
+                      ),
+                    ),
+
+                    SizedBox(height: SizeConfig.safeBlockVertical*0.5,),
+
+                    Row(
+                      mainAxisAlignment:MainAxisAlignment.center,
+                      children:[
+                        Container(
+                          // alignment:Alignment.centerLeft,
+                          child:   ElevatedButton(
+
+                            style: ElevatedButton.styleFrom(
+
+                              primary:kButton, // foreground
+                            ),
+                            onPressed: ()=>AddSize(),
+
+                            child: Text('Specify Quantity',style:TextStyle(color: kText,fontSize:SizeConfig.safeBlockHorizontal *3.5) ,),
+                          ),
+                        ),
+
+
+
+                        SizedBox(width: SizeConfig.safeBlockHorizontal *3),Container(
+                          // alignment:Alignment.centerRight,
+                          child:  ElevatedButton(
+
+                            style: ElevatedButton.styleFrom(
+
+                              primary:kButton, // foreground
+                            ),
+                            onPressed: ()=>sizeGuide(),
+                            child: Text('Size Guide',style:TextStyle(color:kText,fontSize:SizeConfig.safeBlockHorizontal *3.5) ,),
+                          ),
+                        ),
+
+                      ],
+                    ),
+
+                    SizedBox(height: SizeConfig.safeBlockVertical*0.5,),
+                    Row(
+                      mainAxisAlignment:MainAxisAlignment.center,
+                      children: [
+                        Container(
+                          // alignment:Alignment.centerLeft,
+                          child:   ElevatedButton(
+
+                            style: ElevatedButton.styleFrom(
+
+                              primary:kButton, // foreground
+                            ),
+                            onPressed: ()=>custom(),
+
+                            child:   Text("Customization/variations",style: TextStyle(fontSize:  SizeConfig.safeBlockHorizontal *4,color:kText),),
+                          ),
+                        ),
+         Text("(optional)",style: TextStyle(fontSize:  SizeConfig.safeBlockHorizontal *3.5,color:kText),),
+                      ],
+                    ),
+                    SizedBox(height: SizeConfig.safeBlockVertical*0.5,),
+
+
+                  ],
+                ),
+              ),
+            ),
+            Container(
+                height:SizeConfig.screenHeight*0.05,
+                child:Row(
+                  mainAxisAlignment:MainAxisAlignment.end,
+                  children: [
+                    InkWell(
+                      onTap: (){
+                        value == 'Select Category' ?
+ alert(
+                        context,
+                        // title: Text('Coming Soon'),
+                        content:Text("Select a category",
+                        ),
+
+                        textOK: Text("Ok",
+                        ),
+
+                        ):
+                        pageController.animateToPage(++pageChanged, duration: Duration(milliseconds: 250), curve: Curves.bounceInOut);
+
+                      },
+                      child: FittedBox(
+                        fit:  BoxFit.fitHeight,
+                        child: Container(
+                          alignment:Alignment.center,
+                          height:SizeConfig.screenHeight*0.05,
+                          width:SizeConfig.blockSizeHorizontal*50,
+
+                          //icon: Icon(Icons.drag_handle),
+                          child:Text("Next",style:TextStyle(color: Colors.black)),
+
+                        ),
+                      ),
+                    ),
+
+
+                  ],
+                )),
+
+
+          ],
+        ),
+      );
+}
+page1(){
+    return
+      Form(
+        key: _formKey1,
+        child:
+        SingleChildScrollView(
+          child: Column(
+            children: <Widget>[
+              isUploading ? linearProgress() : Text(""),
+
+
+
+                      Text("Processing time",  style:TextStyle(color: kText,fontSize:20.0)),
+                      SizedBox(height: 8.0,),
+
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Expanded(
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: TextFormField(
+                                style:TextStyle(color: kText),
+                                keyboardType: TextInputType.number,
+
+                                controller: durationfromp,
+                                decoration: InputDecoration(
+                                  border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+                                  enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+                                  focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+
+                                  labelText: 'Business days',labelStyle: TextStyle(color: kText),
+                                ),
+                                textAlign: TextAlign.center,
+                                validator: (text) {
+                                  if ( text.isEmpty) {
+                                    return 'Processing time is empty';
+                                  }
+                                  return null;
+                                },
+                              ),
+                            ),
+                          ),
+                          Text("-",  style:TextStyle(color: kText)),
+
+                          Expanded(
+
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: TextFormField(
+                                style:TextStyle(color: kText),
+                                keyboardType: TextInputType.number,
+
+                                controller: durationtop,
+                                decoration: InputDecoration(
+                                  border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+                                  enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+                                  focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+
+                                ),
+                                textAlign: TextAlign.center,
+                                validator: (text) {
+                                  if ( text.isEmpty) {
+                                    return 'Processing time is empty';
+                                  }
+                                  return null;
+                                },
+                              ),
+                            ),
+                          ),
+
+                        ],
+                      ),
+                      SizedBox(height: 8.0,),
+
+                      ListTile(
+                        leading: Icon(
+                          Icons.local_shipping,
+                          color: Colors.orange,
+                          size: 35.0,
+                        ),
+                        title:Text("Shipping duration to ${currentUser.country}",  style:TextStyle(color: kText)),
+
+                      ),
+                      SizedBox(height: 8.0,),
+
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+
+                        children: [
+                          Expanded(
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: TextFormField(
+                                style:TextStyle(color: kText),
+                                keyboardType: TextInputType.number,
+
+                                controller: durationfrom,
+                                decoration: InputDecoration(
+                                  border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+                                  enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+                                  focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+
+                                  // labelText: 'Between',labelStyle: TextStyle(color: kText),
+                                ),
+                                textAlign: TextAlign.center,
+                                validator: (text) {
+                                  if ( text.isEmpty) {
+                                    return 'Shipping duration is empty';
+                                  }
+                                  return null;
+                                },
+                              ),
+                            ),
+                          ),
+                          Text("-",  style:TextStyle(color: kText)),
+
+                          Expanded(
+
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: TextFormField(
+                                style:TextStyle(color: kText),
+                                keyboardType: TextInputType.number,
+
+                                controller: durationto,
+                                decoration: InputDecoration(
+                                  border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+                                  enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+                                  focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+
+                                ),
+                                textAlign: TextAlign.center,
+                                validator: (text) {
+                                  if ( text.isEmpty) {
+                                    return 'Shipping duration is empty';
+                                  }
+                                  return null;
+                                },
+                              ),
+                            ),
+                          ),
+
+                        ],
+                      ),
+                      SizedBox( height: 8.0,),
+                      Text('Free shipping',style:TextStyle(color: kText)) ,
+                      SizedBox( height: 8.0,),
+
+                      Row(
+                        mainAxisAlignment:MainAxisAlignment.center,
+                        children: [
+                          Text('No'),
+                          SizedBox( width: 8.0,),
+
+                          Switch(
+                            value: freeship,
+                            onChanged: (value){setState(() {
+                              freeship = value;
+                            });},
+                            activeColor: Colors.blue,
+                            activeTrackColor: kPrimaryColor,
+                          ),
+                          SizedBox( width: 8.0,),
+
+                          Text('Yes')
+                        ],
+                      ),
+
+                      SizedBox( height: 8.0,),
+
+                      !freeship?  Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: TextFormField(
+                          style:TextStyle(color: kText),
+                          keyboardType: TextInputType.number,
+
+                          controller: shipcost,
+                          decoration: InputDecoration(
+                            border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+                            enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+                            focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+                            hintText:" ${currentUser.currencysym}",
+
+                            labelText: '${currentUser.currencysym}Shipping cost',labelStyle: TextStyle(color: kText),
+
+                          ),
+                          textAlign: TextAlign.center,
+                          validator: (text) {
+                            if ( freeship==false || text.isEmpty ) {
+                              return 'Shipping cost is empty';
+                            }
+                            return null;
+                          },
+                        ),
+                      ):Container(),
+
+                      SizedBox( height: 8.0,),
+                      Text('Worldwide shipping',style:TextStyle(color: kText)) ,
+                      SizedBox( height: 8.0,),
+                      Row(
+                        mainAxisAlignment:MainAxisAlignment.center,
+                        children: [
+                          Text('No'),
+                          SizedBox( width: 8.0,),
+
+                          Switch(
+                            value: worldship,
+                            onChanged: (value){setState(() {
+                              worldship = value;
+                            });},
+                            activeColor: Colors.blue,
+                            activeTrackColor:kPrimaryColor,
+                          ),
+                          SizedBox( width: 8.0,),
+
+                          Text('Yes')
+                        ],
+                      ),
+                      SizedBox(height: 8.0,),
+
+                      worldship ?     Container(
+                        margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+                        child: ListTile(
+                          leading: Icon(
+                            Icons.local_shipping,
+                            color: Colors.orange,
+                            size: 35.0,
+                          ),
+                          title:Text("Shipping duration to worldwide",  style:TextStyle(color: kText)),
+
+                        ),
+                      ):Container(),
+                      SizedBox(height: 8.0,),
+
+                      worldship ?   Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+
+                        children: [
+                          Expanded(
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+
+                              child: TextFormField(
+                                style:TextStyle(color: kText),
+                                keyboardType: TextInputType.number,
+
+                                controller: durationfromw,
+                                decoration: InputDecoration(
+                                  border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+                                  enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+                                  focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+
+// labelText: 'Between',labelStyle: TextStyle(color: kText),
+                                ),
+                                textAlign: TextAlign.center,
+                                validator: (text) {
+                                  if (worldship==true && text.isEmpty) {
+                                    return 'Shipping duration is empty';
+                                  }
+                                  return null;
+                                },
+                              ),
+                            ),
+                          ),
+                          Text("-",  style:TextStyle(color: kText)),
+
+                          Expanded(
+
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: TextFormField(
+                                style:TextStyle(color: kText),
+                                keyboardType: TextInputType.number,
+                                controller: durationtow,
+                                decoration: InputDecoration(
+                                  border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+                                  enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+                                  focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+
+                                ),
+                                textAlign: TextAlign.center,
+                                validator: (text) {
+                                  if (worldship==true && text.isEmpty) {
+                                    return 'Shipping duration is empty';
+                                  }
+                                  return null;
+                                },
+                              ),
+                            ),
+                          ),
+
+                        ],
+                      ):Container(),
+                      SizedBox( height: 8.0,),
+                      Text('Free shipping',style:TextStyle(color: kText)) ,
+
+                      SizedBox( height: 8.0,),
+
+                      worldship ? Row(
+                        mainAxisAlignment:MainAxisAlignment.center,
+                        children: [
+                          Text('No'),
+                          SizedBox( width: 8.0,),
+
+                          Switch(
+                            value: freeworldship,
+                            onChanged: (value){setState(() {
+                              freeworldship = value;
+                            });},
+                            activeColor: Colors.blue,
+                            activeTrackColor:kPrimaryColor,
+                          ),
+                          SizedBox( width: 8.0,),
+
+                          Text('Yes')
+                        ],
+                      ):Container(),
+
+                      worldship && freeworldship == false ?   Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: TextFormField(
+                          style:TextStyle(color: kText),
+                          keyboardType: TextInputType.number,
+
+                          controller: shipcostintern,
+                          decoration: InputDecoration(
+                            border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+                            enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+                            focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+                            hintText:" ${currentUser.currencysym}",
+
+                            labelText: 'Shipping cost',labelStyle: TextStyle(color: kText),
+                          ),
+                          textAlign: TextAlign.center,
+                          validator: (text) {
+                            if ( freeworldship==false && text.isEmpty ) {
+                              return 'Shipping cost is empty';
+                            }
+                            return null;
+                          },
+                        ),
+                      ):Container(),
+              Container(
+                  height:SizeConfig.screenHeight*0.05,
+                  child:Row(
+                    children: [
+                      InkWell(
+                        onTap: (){
+                          pageController.animateToPage(--pageChanged, duration: Duration(milliseconds: 250), curve: Curves.bounceInOut);
+                        },
+                        child: FittedBox(
+                          fit:  BoxFit.fitHeight,
+                          child: Container(
+                            alignment:Alignment.center,
+                            width:SizeConfig.blockSizeHorizontal*50,
+                            height:SizeConfig.screenHeight*0.05,
+
+                            //icon: Icon(Icons.drag_handle),
+                            child:Text("Previous",style:TextStyle(color: Colors.black)),
+
+                          ),
+                        ),
+                      ),
+                      InkWell(
+                        onTap: (){
+                          if(_formKey1.currentState.validate()) {
+                            pageController.animateToPage(++pageChanged,
+                                duration: Duration(milliseconds: 250),
+                                curve: Curves.bounceInOut);
+                          }
+                          else{
+                            return
+                            alert(
+                              context,
+                              // title: Text('Coming Soon'),
+                              content:Text("Fill the required the fields",
+                              ),
+
+                              textOK: Text("Ok",
+                              ),
+
+                            );
+                          }
+                        },
+                        child: FittedBox(
+                          fit:  BoxFit.fitHeight,
+                          child: Container(
+                            alignment:Alignment.center,
+                            height:SizeConfig.screenHeight*0.05,
+
+                            width:SizeConfig.blockSizeHorizontal*50,
+
+                            //icon: Icon(Icons.drag_handle),
+                            child:Text("Next",style:TextStyle(color: Colors.black)),
+
+                          ),
+                        ),
+                      ),
+
+
+                    ],
+                  )),
+
+
+
+
+            ],
+                  ),
+        ),
+              );
+
+}
+page3(){
+    return
+      Form(
+        key: _formKey1,
+        child:
+        SingleChildScrollView(
+          child: Column(
+            children: <Widget>[
+              isUploading ? linearProgress() : Text(""),
+              Row(
+                mainAxisAlignment:MainAxisAlignment.center,
+
+                children: [
+                  ElevatedButton(
+
+                    style: ElevatedButton.styleFrom(
+
+                      primary:kButton, // foreground
+                    ),
+                    onPressed: () {
+                      tag();
+                    },
+
+                    child:   Text("Tag other products",style: TextStyle(fontSize:  SizeConfig.safeBlockHorizontal *3.5
+                        ,color:kText),),
+                  ),
+                  Text("(optional)",style: TextStyle(fontSize:  SizeConfig.safeBlockHorizontal *2.5
+                      ,color:kText),),
+                ],
+              ),
+
+              Container(
+                  height:SizeConfig.screenHeight*0.05,
+                  child:Row(
+                    children: [
+                      InkWell(
+                        onTap: (){
+                          pageController.animateToPage(--pageChanged, duration: Duration(milliseconds: 250), curve: Curves.bounceInOut);
+                        },
+                        child: FittedBox(
+                          fit:  BoxFit.fitHeight,
+                          child: Container(
+                            alignment:Alignment.center,
+                            width:SizeConfig.blockSizeHorizontal*50,
+                            height:SizeConfig.screenHeight*0.05,
+
+                            //icon: Icon(Icons.drag_handle),
+                            child:Text("Previous",style:TextStyle(color: Colors.black)),
+
+                          ),
+                        ),
+                      ),
+                      InkWell(
+                        onTap: (){
+                          if(_formKey1.currentState.validate()) {
+                            pageController.animateToPage(++pageChanged,
+                                duration: Duration(milliseconds: 250),
+                                curve: Curves.bounceInOut);
+                          }
+                          else{
+                            return
+                            alert(
+                              context,
+                              // title: Text('Coming Soon'),
+                              content:Text("Fill the required the fields",
+                              ),
+
+                              textOK: Text("Ok",
+                              ),
+
+                            );
+                          }
+                        },
+                        child: FittedBox(
+                          fit:  BoxFit.fitHeight,
+                          child: Container(
+                            alignment:Alignment.center,
+                            height:SizeConfig.screenHeight*0.05,
+
+                            width:SizeConfig.blockSizeHorizontal*50,
+
+                            //icon: Icon(Icons.drag_handle),
+                            child:Text("Next",style:TextStyle(color: Colors.black)),
+
+                          ),
+                        ),
+                      ),
+
+
+                    ],
+                  )),
+
+
+
+
+            ],
+                  ),
+        ),
+              );
+
+}
+
+page2(){
+    return
+  Form(
+    key: _formKey2,
+    child:
+    SingleChildScrollView(
+      child: Column(
+        children: <Widget>[
+          isUploading ? linearProgress() : Text(""),
+
+          Container(
+            margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+            child: ListTile(
+              leading: Icon(
+                EvilIcons.eye,
+                color: Colors.orange,
+                size: 35.0,
+              ),
+              title:  TextFormField(
+                style:TextStyle(color: kText),
+                controller: productnameController,
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+                  enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+                  focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+
+                  labelText: 'Product Name',labelStyle: TextStyle(color: kText),
+                  hintText: 'Product Name',
+                ),
+                textAlign: TextAlign.center,
+                validator: (text) {
+                  if ( text.isEmpty) {
+                    return 'Product Name is empty';
+                  }
+                  return null;
+                },
+              ),
+            ),
+          ),
+          SizedBox(height: 8.0,),
+          Container(
+            margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+            child: ListTile(
+              leading: Icon(
+                EvilIcons.tag,
+                color: Colors.orange,
+                size: 35.0,
+              ),
+              title:TextFormField(
+                style:TextStyle(color: kText),
+                keyboardType:TextInputType.number,
+                controller: priceController,
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+                  enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+                  focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+
+                  labelText: 'Price',labelStyle: TextStyle(color: kText),
+                  hintText:" ${currentUser.currencysym}",
+                ),
+                textAlign: TextAlign.center,
+                validator: (text) {
+                  if (text.isEmpty) {
+                    return 'Price is empty';
+                  }
+                  return null;
+                },
+              ),
+            ),
+          ),
+          SizedBox( height: 8.0,),
+
+          //Customised
+          Container(
+            // alignment:Alignment.centerLeft,
+            child:   FloatingActionButton.extended(
+              backgroundColor: kblue,
+              onPressed: ()=>color(),
+              label: Text('Add Colors',style:TextStyle(color:  Colors.white) ,),
+            ),
+          ),
+
+          SizedBox( height: 8.0,),
+          Container(
+            margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+            child: TextFormField(
+              style:TextStyle(color: kText),
+
+              keyboardType: TextInputType.multiline,
+              maxLines: null,
+              controller: detailsController,
+              decoration: InputDecoration(
+                border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+                enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+                focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+
+                labelText: 'Product description',labelStyle: TextStyle(color: kText),
+                hintText: 'Product description',
+              ),
+              textAlign: TextAlign.center,
+              validator: (text) {
+                if ( text.isEmpty) {
+                  return 'Description is empty';
+                }
+                return null;
+              },
+            ),
+          ),
+          SizedBox( height: 8.0,),
+          Container(
+            margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+            child: TextFormField(
+              style:TextStyle(color: kText),
+
+              keyboardType: TextInputType.multiline,
+              maxLines: null,
+              controller: compositionController,
+              decoration: InputDecoration(
+                border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+                enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+                focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+
+                labelText: 'Fabric description',labelStyle: TextStyle(color: kText),
+                hintText: 'ex.Cotton: 100%' ,
+              ),
+              textAlign: TextAlign.center,
+              validator: (text) {
+                if ( text.isEmpty) {
+                  return 'Fabric description is empty';
+                }
+                return null;
+              },
+            ),
+          ),
+          SizedBox( height: 8.0,),
+          Container(
+            margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+            child: TextFormField(
+              style:TextStyle(color: kText),
+
+              keyboardType: TextInputType.multiline,
+              maxLines: null,
+              controller: washandcareController,
+              decoration: InputDecoration(
+                border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+                enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+                focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+
+                labelText: 'Wash & Care',labelStyle: TextStyle(color: kText),
+                hintText: 'Wash & Care instructions',
+              ),
+              textAlign: TextAlign.center,
+              validator: (text) {
+                if ( text.isEmpty) {
+                  return 'Wash & Care instructions is empty';
+                }
+                return null;
+              },
+            ),
+          ),
+          SizedBox( height: 8.0,),
+          Container(
+            margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+            child: TextFormField(
+              style:TextStyle(color: kText),
+
+              keyboardType: TextInputType.multiline,
+              maxLines: null,
+              controller: sizeandfitController,
+              decoration: InputDecoration(
+                border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+                enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+                focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+
+                labelText: 'Size & Fit recommendations',labelStyle: TextStyle(color: kText),
+                hintText: 'ex.Cut for slim fit,take your normal size',
+              ),
+              textAlign: TextAlign.center,
+              validator: (text) {
+                if ( text.isEmpty) {
+                  return ' Size & Fit recommendations is empty';
+                }
+                return null;
+              },
+            ),
+          ),
+
+          SizedBox( height: 8.0,),
+          Container(
+            margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+            child: TextFormField(
+              style:TextStyle(color: kText),
+
+              keyboardType: TextInputType.multiline,
+              maxLines: null,
+              controller: shipcontroller,
+              decoration: InputDecoration(
+                border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+                enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+                focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+
+                labelText: 'Shipping & returns',labelStyle: TextStyle(color: kText),
+                hintText: 'countries served & return policy',
+              ),
+              textAlign: TextAlign.center,
+              validator: (text) {
+                if ( text.isEmpty) {
+                  return 'Shipping & returns';
+                }
+                return null;
+              },
+            ),
+          ),
+          Container(
+              height:SizeConfig.screenHeight*0.05,
+              child:Row(
+                children: [
+                  InkWell(
+                    onTap: (){
+                      pageController.animateToPage(--pageChanged, duration: Duration(milliseconds: 250), curve: Curves.bounceInOut);
+                    },
+                    child: FittedBox(
+                      fit:  BoxFit.fitHeight,
+                      child: Container(
+                        alignment:Alignment.center,
+                        width:SizeConfig.blockSizeHorizontal*50,
+                        height:SizeConfig.screenHeight*0.05,
+
+                        //icon: Icon(Icons.drag_handle),
+                        child:Text("Previous",style:TextStyle(color: Colors.black)),
+
+                      ),
+                    ),
+                  ),
+                  InkWell(
+                    onTap: () async {
+                      if(_formKey1.currentState.validate()) {
+                        await INRUSD();
+
+                        handleSubmit();
+                        Get.back();
+                      }
+                      else{
+                        return
+                          alert(
+                            context,
+                            // title: Text('Coming Soon'),
+                            content:Text("Fill the required the fields",
+                            ),
+
+                            textOK: Text("Ok",
+                            ),
+
+                          );
+                      }
+                    },
+                    child: FittedBox(
+                      fit:  BoxFit.fitHeight,
+                      child: Container(
+                        alignment:Alignment.center,
+                        height:SizeConfig.screenHeight*0.05,
+
+                        width:SizeConfig.blockSizeHorizontal*50,
+                         color: kButton,
+                        //icon: Icon(Icons.drag_handle),
+                        child:Text("Post",style:TextStyle(color: Colors.black)),
+
+                      ),
+                    ),
+                  ),
+
+
+                ],
+              )),
+
+        ],
+      ),
+    ),
+  );
+}
 
   Future<void> loadAssets() async {
 
@@ -12844,7 +11654,7 @@ Widget buprod(BuildContext context, DocumentSnapshot document) {
               .collection('userProducts')
               .doc(prodId)
               .collection('tags')
-              .doc(prodId)
+              .doc(prod.prodId)
               .set({
             "ownerId":prod.ownerId,
             "prodId":prod.prodId,
@@ -12858,5 +11668,66 @@ Widget buprod(BuildContext context, DocumentSnapshot document) {
       ),
     ),
   );
+}
+class tagItem extends StatelessWidget {
+  String ownerId ;
+  String prodId ;
+  String image ;
+  String name;
+  var usd ;
+  var currencyFormatter = NumberFormat('#,##0.00', 'US');
+
+  tagItem({this.ownerId,this.prodId,this.image,this.name,this.usd});
+
+  delete(){
+  var  docReference =  FirebaseFirestore.instance
+        .collection('products')
+        .doc(currentUser.id)
+        .collection('userProducts')
+        .doc(prodId)
+        .collection('tags')
+        .doc(prodId);
+    docReference.delete();
+
+  }
+  @override
+  Widget build(BuildContext context) {
+    return Stack(
+      children:[
+        Padding(
+    padding: const EdgeInsets.all(8.0),
+    child: Column(children:[
+    ClipRRect(
+    borderRadius: BorderRadius.circular(20.0),
+    child: CachedImage(image)),
+    Row(
+    children: [
+    Text(name,
+    style: TextStyle(color: kText,
+    fontSize: SizeConfig.safeBlockHorizontal * 4,
+    fontWeight: FontWeight.bold))
+    ],
+    ),
+    Row(
+    children: [
+    Text("\u0024 ${currencyFormatter.format(usd)}",),
+    ],
+    ),
+
+    ]),
+    ),
+        Positioned(
+          top: 10.0,
+          right: 10.0,
+          child: FloatingActionButton(
+            mini: true,
+            backgroundColor:kText.withOpacity(0.5),
+            onPressed: delete,
+            child: Icon(Icons.delete,color: Colors.red,),
+          ),
+        ),
+    ]
+    );
+  }
 }
 
