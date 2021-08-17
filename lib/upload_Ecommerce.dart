@@ -41,7 +41,6 @@ import 'package:back_pressed/back_pressed.dart';
 import 'package:fashow/size_config.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-String prodId = Uuid().v4();
 
 class Uploadecom extends StatefulWidget {
   final Users currentUser;
@@ -54,6 +53,7 @@ class Uploadecom extends StatefulWidget {
 
 class _UploadecomState extends State<Uploadecom>
     with AutomaticKeepAliveClientMixin<Uploadecom> {
+  String prodId = Uuid().v4();
 
   String value = 'Select Category';
   List colors;
@@ -261,7 +261,7 @@ int pageChanged  = 0;
         .doc(widget.currentUser.id)
         .collection("userProducts")
         .doc(prodId)
-        .set({"prodId":prodId});
+        .set({});
   }
 
   _scrollListener() {
@@ -291,9 +291,14 @@ int pageChanged  = 0;
     } else {
       return InkWell(
         onTap:()=>getImage(),
-        child: Icon(
-        Icons.add,
-          size:50,
+        child: Column(
+          children: [
+            Icon(
+            Icons.add,
+              size:50,
+            ),
+            Text("Add image")
+          ],
         ),
       );
     }
@@ -348,10 +353,16 @@ int pageChanged  = 0;
     } else {
       return InkWell(
         onTap:()=>getImage1(),
-         child: Icon(
+         child: Column(
+           children: [
+             Icon(
       Icons.add,
         size:50,
-      ));
+      ),
+             Text("Add image")
+
+           ],
+         ));
     }
   }
 
@@ -406,10 +417,16 @@ int pageChanged  = 0;
     } else {
       return InkWell(
         onTap:()=>getImage2(),
-         child: Icon(
+         child: Column(
+           children: [
+             Icon(
       Icons.add,
         size:50,
-      ));
+      ),
+             Text("Add image")
+
+           ],
+         ));
     }
   }
 
@@ -465,10 +482,16 @@ int pageChanged  = 0;
     } else {
       return InkWell(
         onTap:()=>getImage3(),
-         child: Icon(
+         child: Column(
+           children: [
+             Icon(
       Icons.add,
         size:50,
-      ));
+      ),
+                    Text("Add image")
+
+           ],
+         ));
     }
   }
 
@@ -523,10 +546,16 @@ Widget getImageWidget4() {
     } else {
       return InkWell(
         onTap:()=>getImage4(),
-         child: Icon(
+         child: Column(
+           children: [
+             Icon(
       Icons.add,
         size:50,
-      ));
+      ),
+                    Text("Add image")
+
+           ],
+         ));
     }
   }
 
@@ -581,10 +610,16 @@ Widget getImageWidget5() {
     } else {
       return InkWell(
         onTap:()=>getImage5(),
-         child: Icon(
+         child: Column(
+           children: [
+             Icon(
       Icons.add,
         size:50,
-      ));
+      ),
+             Text("Add image")
+
+           ],
+         ));
     }
   }
 
@@ -640,10 +675,16 @@ Widget getImageWidget6() {
     } else {
       return InkWell(
         onTap:()=>getImage6(),
-         child: Icon(
+         child: Column(
+           children: [
+             Icon(
       Icons.add,
         size:50,
-      ));
+      ),
+             Text("Add image")
+
+           ],
+         ));
     }
   }
 
@@ -698,10 +739,16 @@ Widget getImageWidget7() {
     } else {
       return InkWell(
         onTap:()=>getImage7(),
-         child: Icon(
+         child: Column(
+           children: [
+             Icon(
       Icons.add,
         size:50,
-      ));
+      ),
+                    Text("Add image")
+
+           ],
+         ));
     }
   }
 
@@ -756,10 +803,16 @@ Widget getImageWidget8() {
     } else {
       return InkWell(
         onTap:()=>getImage8(),
-         child: Icon(
+         child: Column(
+           children: [
+             Icon(
       Icons.add,
         size:50,
-      ));
+      ),
+             Text("Add image")
+
+           ],
+         ));
     }
   }
 
@@ -814,10 +867,16 @@ Widget getImageWidget9() {
     } else {
       return InkWell(
         onTap:()=>getImage9(),
-         child: Icon(
+         child: Column(
+           children: [
+             Icon(
       Icons.add,
         size:50,
-      ));
+      ),
+                    Text("Add image")
+
+           ],
+         ));
     }
   }
 
@@ -956,8 +1015,9 @@ alignment:Alignment.center,
     final path = tempDir.path;
     Im.Image imageFile = Im.decodeImage(file.readAsBytesSync());
     final compressedImageFile = File('$path/img_$prodId.jpg')
-      ..writeAsBytesSync(Im.encodeJpg(imageFile, quality: 85));
-    setState(() {
+      ..writeAsBytesSync(Im.encodeJpg(imageFile, quality: 50));
+    if (!mounted) return;
+    if (!mounted) return; setState(() {
       file = compressedImageFile;
     });
   }
@@ -966,8 +1026,9 @@ alignment:Alignment.center,
     final path = tempDir.path;
     Im.Image imageFile = Im.decodeImage(file1.readAsBytesSync());
     final compressedImageFile = File('$path/img1_$prodId.jpg')
-      ..writeAsBytesSync(Im.encodeJpg(imageFile, quality: 85));
-    setState(() {
+      ..writeAsBytesSync(Im.encodeJpg(imageFile, quality: 50));
+    if (!mounted) return;
+    if (!mounted) return; setState(() {
       file1 = compressedImageFile;
     });
   }
@@ -976,8 +1037,8 @@ compressImage2() async {
     final path = tempDir.path;
     Im.Image imageFile = Im.decodeImage(file2.readAsBytesSync());
     final compressedImageFile = File('$path/img2_$prodId.jpg')
-      ..writeAsBytesSync(Im.encodeJpg(imageFile, quality: 85));
-    setState(() {
+      ..writeAsBytesSync(Im.encodeJpg(imageFile, quality: 50));
+    if (!mounted) return; setState(() {
       file2 = compressedImageFile;
     });
   }
@@ -986,8 +1047,8 @@ compressImage3() async {
     final path = tempDir.path;
     Im.Image imageFile = Im.decodeImage(file3.readAsBytesSync());
     final compressedImageFile = File('$path/img3_$prodId.jpg')
-      ..writeAsBytesSync(Im.encodeJpg(imageFile, quality: 85));
-    setState(() {
+      ..writeAsBytesSync(Im.encodeJpg(imageFile, quality: 50));
+    if (!mounted) return; setState(() {
       file3 = compressedImageFile;
     });
   }
@@ -996,8 +1057,8 @@ compressImage4() async {
     final path = tempDir.path;
     Im.Image imageFile = Im.decodeImage(file4.readAsBytesSync());
     final compressedImageFile = File('$path/img4_$prodId.jpg')
-      ..writeAsBytesSync(Im.encodeJpg(imageFile, quality: 85));
-    setState(() {
+      ..writeAsBytesSync(Im.encodeJpg(imageFile, quality: 50));
+    if (!mounted) return; setState(() {
       file4 = compressedImageFile;
     });
   }
@@ -1006,8 +1067,8 @@ compressImage5() async {
     final path = tempDir.path;
     Im.Image imageFile = Im.decodeImage(file5.readAsBytesSync());
     final compressedImageFile = File('$path/img5_$prodId.jpg')
-      ..writeAsBytesSync(Im.encodeJpg(imageFile, quality: 85));
-    setState(() {
+      ..writeAsBytesSync(Im.encodeJpg(imageFile, quality: 50));
+    if (!mounted) return; setState(() {
       file5 = compressedImageFile;
     });
   }
@@ -1016,8 +1077,8 @@ compressImage6() async {
     final path = tempDir.path;
     Im.Image imageFile = Im.decodeImage(file6.readAsBytesSync());
     final compressedImageFile = File('$path/img6_$prodId.jpg')
-      ..writeAsBytesSync(Im.encodeJpg(imageFile, quality: 85));
-    setState(() {
+      ..writeAsBytesSync(Im.encodeJpg(imageFile, quality: 50));
+    if (!mounted) return; setState(() {
       file6 = compressedImageFile;
     });
   }
@@ -1026,8 +1087,8 @@ compressImage7() async {
     final path = tempDir.path;
     Im.Image imageFile = Im.decodeImage(file7.readAsBytesSync());
     final compressedImageFile = File('$path/img7_$prodId.jpg')
-      ..writeAsBytesSync(Im.encodeJpg(imageFile, quality: 85));
-    setState(() {
+      ..writeAsBytesSync(Im.encodeJpg(imageFile, quality: 50));
+    if (!mounted) return; setState(() {
       file7 = compressedImageFile;
     });
   }
@@ -1036,8 +1097,8 @@ compressImage8() async {
     final path = tempDir.path;
     Im.Image imageFile = Im.decodeImage(file8.readAsBytesSync());
     final compressedImageFile = File('$path/img8_$prodId.jpg')
-      ..writeAsBytesSync(Im.encodeJpg(imageFile, quality: 85));
-    setState(() {
+      ..writeAsBytesSync(Im.encodeJpg(imageFile, quality: 50));
+    if (!mounted) return; setState(() {
       file8 = compressedImageFile;
     });
   }
@@ -1046,8 +1107,8 @@ compressImage9() async {
     final path = tempDir.path;
     Im.Image imageFile = Im.decodeImage(file9.readAsBytesSync());
     final compressedImageFile = File('$path/img9_$prodId.jpg')
-      ..writeAsBytesSync(Im.encodeJpg(imageFile, quality: 85));
-    setState(() {
+      ..writeAsBytesSync(Im.encodeJpg(imageFile, quality: 50));
+    if (!mounted) return; setState(() {
       file9 = compressedImageFile;
     });
   }
@@ -1055,7 +1116,7 @@ compressImage9() async {
   Future<String> uploadImage(imageFile) async {
     String fileName = DateTime.now().millisecondsSinceEpoch.toString();
     Reference reference = FirebaseStorage.instance.ref().child("Shop${prodId}").child("$fileName.jpg");
-    UploadTask uploadTask = reference.putData((await imageFile.getByteData(quality: 70)).buffer.asUint8List());
+    UploadTask uploadTask = reference.putFile(imageFile);
 
     TaskSnapshot storageSnap = await uploadTask;
     String downloadUrl = await storageSnap.ref.getDownloadURL();
@@ -1064,7 +1125,7 @@ compressImage9() async {
    Future<String> uploadImage1(imageFile) async {
     String fileName = DateTime.now().millisecondsSinceEpoch.toString();
     Reference reference = FirebaseStorage.instance.ref().child("Shop${prodId}").child("$fileName.jpg");
-    UploadTask uploadTask = reference.putData((await imageFile.getByteData(quality: 70)).buffer.asUint8List());
+    UploadTask uploadTask = reference.putFile(imageFile);
 
     TaskSnapshot storageSnap = await uploadTask;
     String downloadUrl = await storageSnap.ref.getDownloadURL();
@@ -1073,7 +1134,7 @@ compressImage9() async {
     Future<String> uploadImage2(imageFile) async {
     String fileName = DateTime.now().millisecondsSinceEpoch.toString();
     Reference reference = FirebaseStorage.instance.ref().child("Shop${prodId}").child("$fileName.jpg");
-    UploadTask uploadTask = reference.putData((await imageFile.getByteData(quality: 70)).buffer.asUint8List());
+    UploadTask uploadTask = reference.putFile(imageFile);
 
     TaskSnapshot storageSnap = await uploadTask;
     String downloadUrl = await storageSnap.ref.getDownloadURL();
@@ -1082,7 +1143,7 @@ compressImage9() async {
     Future<String> uploadImage3(imageFile) async {
     String fileName = DateTime.now().millisecondsSinceEpoch.toString();
     Reference reference = FirebaseStorage.instance.ref().child("Shop${prodId}").child("$fileName.jpg");
-    UploadTask uploadTask = reference.putData((await imageFile.getByteData(quality: 70)).buffer.asUint8List());
+    UploadTask uploadTask = reference.putFile(imageFile);
 
     TaskSnapshot storageSnap = await uploadTask;
     String downloadUrl = await storageSnap.ref.getDownloadURL();
@@ -1091,7 +1152,7 @@ compressImage9() async {
     Future<String> uploadImage4(imageFile) async {
     String fileName = DateTime.now().millisecondsSinceEpoch.toString();
     Reference reference = FirebaseStorage.instance.ref().child("Shop${prodId}").child("$fileName.jpg");
-    UploadTask uploadTask = reference.putData((await imageFile.getByteData(quality: 70)).buffer.asUint8List());
+    UploadTask uploadTask = reference.putFile(imageFile);
 
     TaskSnapshot storageSnap = await uploadTask;
     String downloadUrl = await storageSnap.ref.getDownloadURL();
@@ -1100,7 +1161,7 @@ compressImage9() async {
     Future<String> uploadImage5(imageFile) async {
     String fileName = DateTime.now().millisecondsSinceEpoch.toString();
     Reference reference = FirebaseStorage.instance.ref().child("Shop${prodId}").child("$fileName.jpg");
-    UploadTask uploadTask = reference.putData((await imageFile.getByteData(quality: 70)).buffer.asUint8List());
+    UploadTask uploadTask = reference.putFile(imageFile);
 
     TaskSnapshot storageSnap = await uploadTask;
     String downloadUrl = await storageSnap.ref.getDownloadURL();
@@ -1109,7 +1170,7 @@ compressImage9() async {
     Future<String> uploadImage6(imageFile) async {
     String fileName = DateTime.now().millisecondsSinceEpoch.toString();
     Reference reference = FirebaseStorage.instance.ref().child("Shop${prodId}").child("$fileName.jpg");
-    UploadTask uploadTask = reference.putData((await imageFile.getByteData(quality: 70)).buffer.asUint8List());
+    UploadTask uploadTask = reference.putFile(imageFile);
 
     TaskSnapshot storageSnap = await uploadTask;
     String downloadUrl = await storageSnap.ref.getDownloadURL();
@@ -1118,7 +1179,7 @@ compressImage9() async {
     Future<String> uploadImage7(imageFile) async {
     String fileName = DateTime.now().millisecondsSinceEpoch.toString();
     Reference reference = FirebaseStorage.instance.ref().child("Shop${prodId}").child("$fileName.jpg");
-    UploadTask uploadTask = reference.putData((await imageFile.getByteData(quality: 70)).buffer.asUint8List());
+    UploadTask uploadTask = reference.putFile(imageFile);
 
     TaskSnapshot storageSnap = await uploadTask;
     String downloadUrl = await storageSnap.ref.getDownloadURL();
@@ -1127,7 +1188,7 @@ compressImage9() async {
     Future<String> uploadImage8(imageFile) async {
     String fileName = DateTime.now().millisecondsSinceEpoch.toString();
     Reference reference = FirebaseStorage.instance.ref().child("Shop${prodId}").child("$fileName.jpg");
-    UploadTask uploadTask = reference.putData((await imageFile.getByteData(quality: 70)).buffer.asUint8List());
+    UploadTask uploadTask = reference.putFile(imageFile);
 
     TaskSnapshot storageSnap = await uploadTask;
     String downloadUrl = await storageSnap.ref.getDownloadURL();
@@ -1136,7 +1197,7 @@ compressImage9() async {
     Future<String> uploadImage9(imageFile) async {
     String fileName = DateTime.now().millisecondsSinceEpoch.toString();
     Reference reference = FirebaseStorage.instance.ref().child("Shop${prodId}").child("$fileName.jpg");
-    UploadTask uploadTask = reference.putData((await imageFile.getByteData(quality: 70)).buffer.asUint8List());
+    UploadTask uploadTask = reference.putFile(imageFile);
 
     TaskSnapshot storageSnap = await uploadTask;
     String downloadUrl = await storageSnap.ref.getDownloadURL();
@@ -4028,7 +4089,7 @@ tag(){
                   .size
                   .height * 0.75,
 
-              child: SearchTag(),
+              child: SearchTag(prodId:prodId),
 
             );
         }
@@ -9165,7 +9226,8 @@ color(){
 
         progressIndicator:Column(mainAxisAlignment:MainAxisAlignment.center,
             children:[
-          Text("Uploading...",style:TextStyle(color:Colors.red,fontSize:20,decoration:TextDecoration.none)),Text("$loading",style:TextStyle(color:Colors.red,fontSize:20,decoration:TextDecoration.none)),
+        Text("$loading",style:TextStyle(color:Colors.blue,fontSize:15,decoration:TextDecoration.none)),
+              CircularProgressIndicator(),
         ]),
         inAsyncCall: isUploading,
         child: Scaffold(
@@ -9951,6 +10013,37 @@ color(){
 //   ),
 // );
 // }
+  tagView(){
+    return
+      StreamBuilder(
+        stream: FirebaseFirestore.instance.collection("products")
+            .doc(currentUser.id).collection("userProducts").doc(prodId)
+            .collection("tags")
+            .orderBy('timestamp',descending: true).snapshots(),
+        builder: (context, snapshot) {
+          if (!snapshot.hasData) {
+            return Container();
+          } else {
+            return new ListView.builder(
+                itemCount: snapshot.data.docs.length,
+                itemBuilder: (context, index) {
+                  DocumentSnapshot ds = snapshot.data.docs[index];
+                  return TagItem(
+                    Id: ds['prodId'],
+                   ownerId: ds['ownerId'],
+                   name: ds['name'],
+                   usd: ds['usd'],
+                   image: ds['image'],
+                    prodId: prodId,
+
+                  );
+                }
+            );
+          }
+        },
+      );
+
+  }
 page0(){
     SizeConfig().init(context);
     return
@@ -10073,9 +10166,6 @@ page0(){
                             child: Text('Specify Quantity',style:TextStyle(color: kText,fontSize:SizeConfig.safeBlockHorizontal *3.5) ,),
                           ),
                         ),
-
-
-
                         SizedBox(width: SizeConfig.safeBlockHorizontal *3),Container(
                           // alignment:Alignment.centerRight,
                           child:  ElevatedButton(
@@ -10113,6 +10203,20 @@ page0(){
                       ],
                     ),
                     SizedBox(height: SizeConfig.safeBlockVertical*0.5,),
+                    //Customised
+                    Container(
+                      // alignment:Alignment.centerLeft,
+                      child:   ElevatedButton(
+
+                        style: ElevatedButton.styleFrom(
+
+                          primary:kButton, // foreground
+                        ),
+                        onPressed: ()=>color(),
+
+                        child: Text('Add Colors',style:TextStyle(color: kText,fontSize:SizeConfig.safeBlockHorizontal *3.5) ,),
+                      ),
+                    ),
 
 
                   ],
@@ -10577,107 +10681,91 @@ page1(){
 
 }
 page3(){
+    SizeConfig().init(context);
     return
-      Form(
-        key: _formKey1,
-        child:
-        SingleChildScrollView(
-          child: Column(
-            children: <Widget>[
-              isUploading ? linearProgress() : Text(""),
-              Row(
-                mainAxisAlignment:MainAxisAlignment.center,
+      SingleChildScrollView(
+        child: Column(
+          children: <Widget>[
+            isUploading ? linearProgress() : Text(""),
+            Row(
+              mainAxisAlignment:MainAxisAlignment.center,
 
-                children: [
-                  ElevatedButton(
+              children: [
+                ElevatedButton(
 
-                    style: ElevatedButton.styleFrom(
+                  style: ElevatedButton.styleFrom(
 
-                      primary:kButton, // foreground
-                    ),
-                    onPressed: () {
-                      tag();
-                    },
-
-                    child:   Text("Tag other products",style: TextStyle(fontSize:  SizeConfig.safeBlockHorizontal *3.5
-                        ,color:kText),),
+                    primary:kButton, // foreground
                   ),
-                  Text("(optional)",style: TextStyle(fontSize:  SizeConfig.safeBlockHorizontal *2.5
+                  onPressed: () {
+                    tag();
+                  },
+
+                  child:   Text("Tag other products",style: TextStyle(fontSize:  SizeConfig.safeBlockHorizontal *3.5
                       ,color:kText),),
-                ],
-              ),
+                ),
+                Text("(optional)",style: TextStyle(fontSize:  SizeConfig.safeBlockHorizontal *2.5
+                    ,color:kText),),
+              ],
+            ),
+            Container(
+              height:SizeConfig.screenHeight*0.75,
+              child: tagView(),
+            ),
+            Container(
+                height:SizeConfig.screenHeight*0.05,
+                child:Row(
+                  children: [
+                    InkWell(
+                      onTap: (){
+                        pageController.animateToPage(--pageChanged, duration: Duration(milliseconds: 250), curve: Curves.bounceInOut);
+                      },
+                      child: FittedBox(
+                        fit:  BoxFit.fitHeight,
+                        child: Container(
+                          alignment:Alignment.center,
+                          width:SizeConfig.blockSizeHorizontal*50,
+                          height:SizeConfig.screenHeight*0.05,
 
-              Container(
-                  height:SizeConfig.screenHeight*0.05,
-                  child:Row(
-                    children: [
-                      InkWell(
-                        onTap: (){
-                          pageController.animateToPage(--pageChanged, duration: Duration(milliseconds: 250), curve: Curves.bounceInOut);
-                        },
-                        child: FittedBox(
-                          fit:  BoxFit.fitHeight,
-                          child: Container(
-                            alignment:Alignment.center,
-                            width:SizeConfig.blockSizeHorizontal*50,
-                            height:SizeConfig.screenHeight*0.05,
+                          //icon: Icon(Icons.drag_handle),
+                          child:Text("Previous",style:TextStyle(color: Colors.black)),
 
-                            //icon: Icon(Icons.drag_handle),
-                            child:Text("Previous",style:TextStyle(color: Colors.black)),
-
-                          ),
                         ),
                       ),
-                      InkWell(
-                        onTap: (){
-                          if(_formKey1.currentState.validate()) {
-                            pageController.animateToPage(++pageChanged,
-                                duration: Duration(milliseconds: 250),
-                                curve: Curves.bounceInOut);
-                          }
-                          else{
-                            return
-                            alert(
-                              context,
-                              // title: Text('Coming Soon'),
-                              content:Text("Fill the required the fields",
-                              ),
+                    ),
+                    InkWell(
+                      onTap: (){
+                        pageController.animateToPage(++pageChanged,
+                            duration: Duration(milliseconds: 250),
+                            curve: Curves.bounceInOut);
+                      },
+                      child: FittedBox(
+                        fit:  BoxFit.fitHeight,
+                        child: Container(
+                          alignment:Alignment.center,
+                          height:SizeConfig.screenHeight*0.05,
 
-                              textOK: Text("Ok",
-                              ),
+                          width:SizeConfig.blockSizeHorizontal*50,
 
-                            );
-                          }
-                        },
-                        child: FittedBox(
-                          fit:  BoxFit.fitHeight,
-                          child: Container(
-                            alignment:Alignment.center,
-                            height:SizeConfig.screenHeight*0.05,
+                          //icon: Icon(Icons.drag_handle),
+                          child:Text("Next",style:TextStyle(color: Colors.black)),
 
-                            width:SizeConfig.blockSizeHorizontal*50,
-
-                            //icon: Icon(Icons.drag_handle),
-                            child:Text("Next",style:TextStyle(color: Colors.black)),
-
-                          ),
                         ),
                       ),
+                    ),
 
 
-                    ],
-                  )),
+                  ],
+                )),
 
 
 
 
-            ],
-                  ),
-        ),
-              );
+          ],
+                ),
+      );
 
 }
-
 page2(){
     return
   Form(
@@ -10748,17 +10836,8 @@ page2(){
               ),
             ),
           ),
-          SizedBox( height: 8.0,),
 
-          //Customised
-          Container(
-            // alignment:Alignment.centerLeft,
-            child:   FloatingActionButton.extended(
-              backgroundColor: kblue,
-              onPressed: ()=>color(),
-              label: Text('Add Colors',style:TextStyle(color:  Colors.white) ,),
-            ),
-          ),
+
 
           SizedBox( height: 8.0,),
           Container(
@@ -10914,7 +10993,7 @@ page2(){
                   ),
                   InkWell(
                     onTap: () async {
-                      if(_formKey1.currentState.validate()) {
+                      if(_formKey2.currentState.validate()) {
                         await INRUSD();
 
                         handleSubmit();
@@ -11325,6 +11404,8 @@ page2(){
 }
 
 class SearchTag extends StatefulWidget {
+  final String prodId;
+  SearchTag({this.prodId});
   @override
   _SearchTagState createState() => _SearchTagState();
 }
@@ -11439,7 +11520,7 @@ class _SearchTagState extends State<SearchTag> {
       ),
     );
   }
-  df({String ownerId}){
+  df({String ownerId,String prodId}){
     return
       showMaterialModalBottomSheet(
         expand:true,
@@ -11458,7 +11539,7 @@ class _SearchTagState extends State<SearchTag> {
                         .size
                         .height * 0.75,
 
-                    child: SearchTagProduct(ownerId),
+                    child: SearchTagProduct(ownerId:ownerId,prodId:prodId),
 
                   );
               }
@@ -11495,7 +11576,7 @@ class _SearchTagState extends State<SearchTag> {
 
           onTap: ()  {
             Get.back();
-            df(ownerId: user.id);},
+            df(ownerId: user.id,prodId: widget.prodId);},
         ),
       ),
     );
@@ -11506,7 +11587,8 @@ class _SearchTagState extends State<SearchTag> {
 
 class SearchTagProduct extends StatefulWidget {
   final String ownerId;
-  SearchTagProduct(this.ownerId);
+ final String prodId;
+  SearchTagProduct({this.ownerId, this.prodId});
   @override
   _SearchTagProductState createState() => _SearchTagProductState();
 }
@@ -11567,6 +11649,7 @@ class _SearchTagProductState extends State<SearchTagProduct> {
         .collection('products')
         .doc(widget.ownerId)
         .collection('userProducts')
+        .orderBy('timestamp',descending: true)
         .get();
     setState(() {
       _allResults = data.docs;
@@ -11611,7 +11694,7 @@ class _SearchTagProductState extends State<SearchTagProduct> {
                 child: ListView.builder(
                   itemCount: _resultsList.length,
                   itemBuilder: (BuildContext context, int index) =>
-                      buprod(context, _resultsList[index]),
+                      buprod(context, _resultsList[index],widget.prodId),
                 )
 
             ),
@@ -11622,7 +11705,7 @@ class _SearchTagProductState extends State<SearchTagProduct> {
   }
 }
 
-Widget buprod(BuildContext context, DocumentSnapshot document) {
+Widget buprod(BuildContext context, DocumentSnapshot document,prodId) {
   final prod = Prod.fromDocument(document);
   // final tripType = trip.types();
 
@@ -11658,7 +11741,7 @@ Widget buprod(BuildContext context, DocumentSnapshot document) {
               .set({
             "ownerId":prod.ownerId,
             "prodId":prod.prodId,
-            "image":prod.shopmediaUrl,
+            "image":prod.shopmediaUrl.first,
             "name":prod.productname,
             "usd":prod.usd,
             "timestamp":timestamp,
@@ -11669,15 +11752,17 @@ Widget buprod(BuildContext context, DocumentSnapshot document) {
     ),
   );
 }
-class tagItem extends StatelessWidget {
-  String ownerId ;
-  String prodId ;
-  String image ;
-  String name;
-  var usd ;
-  var currencyFormatter = NumberFormat('#,##0.00', 'US');
+class TagItem extends StatelessWidget {
+ final String ownerId ;
+  final String prodId ;
 
-  tagItem({this.ownerId,this.prodId,this.image,this.name,this.usd});
+ final String Id ;
+ final String image ;
+ final String name;
+ final usd ;
+  var currencyFormatter = NumberFormat('#,##0.00', );
+
+  TagItem({this.ownerId,this.prodId,this.Id,this.image,this.name,this.usd});
 
   delete(){
   var  docReference =  FirebaseFirestore.instance
@@ -11686,7 +11771,7 @@ class tagItem extends StatelessWidget {
         .collection('userProducts')
         .doc(prodId)
         .collection('tags')
-        .doc(prodId);
+        .doc(Id);
     docReference.delete();
 
   }

@@ -414,7 +414,7 @@ class _CItemState extends State<CItem> {
   var price = 0.0;
 
 
-  var currencyFormatter = NumberFormat('#,##0.00', '${currentUser.countryISO}');
+  var currencyFormatter = currentUser.countryISO == 'US'?NumberFormat('#,##0.00', ):NumberFormat('#,##0.00', '${currentUser.countryISO}');
 
   int followerCount = 0;
   final String currentUserId = currentUser?.id;

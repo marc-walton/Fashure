@@ -4917,7 +4917,7 @@ class _SearchDesignerState extends State<SearchDesigner> {
         .collection('users')
     // .doc(uid)
     // .collection('trips')
-    .where("designer", isEqualTo: true)
+    .where("seller", isEqualTo: true)
     // .orderBy('endDate')
         .get();
     setState(() {
@@ -5043,6 +5043,8 @@ class _SearchProductState extends State<SearchProduct> {
     // .doc(uid)
     // .collection('trips')
     // .orderBy('endDate')
+            .orderBy('timestamp',descending: true)
+
         .get();
     setState(() {
       _allResults = data.docs;

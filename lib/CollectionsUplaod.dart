@@ -4,7 +4,15 @@ import 'dart:async';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:multi_image_picker/multi_image_picker.dart';
 import 'package:flutter/material.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:fashow/Products.dart';
+import 'package:fashow/chatcached_image.dart';
+import 'package:fashow/size_config.dart';
+import 'package:get/get.dart';
+import 'package:intl/intl.dart';
+import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:fashow/user.dart';
 
 import 'package:image_cropper/image_cropper.dart';
@@ -31,7 +39,7 @@ class UploadColl extends StatefulWidget {
 
 class _UploadCollState extends State<UploadColl>
     with AutomaticKeepAliveClientMixin<UploadColl> {
-  List<Asset> images = List<Asset>();
+  List<Asset> images = <Asset>[];
   String _error = 'No Error Dectected';
 
   List<String> imageUrls = <String>[];
@@ -42,7 +50,8 @@ class _UploadCollState extends State<UploadColl>
   bool isUploading = false;
   String CollId = Uuid().v4();
 
-
+  PageController pageController = PageController();
+  int pageChanged  = 0;
   final scaffoldKey = new GlobalKey<ScaffoldState>();
   final _formKey = GlobalKey<FormState>();
   bool _inProcess = false;
@@ -50,10 +59,252 @@ class _UploadCollState extends State<UploadColl>
   void initState() {
     super.initState();
     // Here we must load the document and pass it to Zefyr controller.
+    collRef .doc(widget.currentUser.id)
+        .collection("userCollections").doc(CollId)
+        .set({});
+  }
+
+  tag(){
+    return
+      showMaterialModalBottomSheet(
+        expand:true,
+        context: context,
+        builder: (BuildContext context)
+        {
+          SizeConfig().init(context);
+
+          return
+            Builder(builder: (BuildContext context) {
+              return StatefulBuilder(builder: (BuildContext context, State) {
+                return
+                  Container(
+                    height: MediaQuery
+                        .of(context)
+                        .size
+                        .height * 0.75,
+
+                    child: SearchTag(prodId:CollId),
+
+                  );
+              }
+              );
+            }
+            );
+        },
+      );
+
+  }
+  tagView(){
+    return
+      StreamBuilder(
+        stream: collRef .doc(widget.currentUser.id)
+            .collection("userCollections").doc(CollId)
+            .collection("tags")
+            .orderBy('timestamp',descending: true).snapshots(),
+        builder: (context, snapshot) {
+          if (!snapshot.hasData) {
+            return Container();
+          } else {
+            return new ListView.builder(
+                itemCount: snapshot.data.docs.length,
+                itemBuilder: (context, index) {
+                  DocumentSnapshot ds = snapshot.data.docs[index];
+                  return TagItem(
+                    Id: ds['prodId'],
+                    ownerId: ds['ownerId'],
+                    name: ds['name'],
+                    usd: ds['usd'],
+                    image: ds['image'],
+                    prodId: CollId,
+
+                  );
+                }
+            );
+          }
+        },
+      );
+
+  }
+  delete()async{         collRef .doc(widget.currentUser.id)
+      .collection("userCollections").doc(CollId)
+      .get()
+      .then((doc) {
+    if (doc.exists) {
+      doc.reference.delete();
+    }
+  });
 
   }
 
+  page0(){
+    final form =  ListView(
+      shrinkWrap: true,
+      children: <Widget>[
+        isUploading ? linearProgress() : Text(""),
+        Carousel(),
+        // getImageWidget(),
+        SizedBox(height:12.0),
 
+        TextFormField(
+            style:TextStyle(color: kText),
+
+            controller: titleController,
+            keyboardType: TextInputType.multiline,
+            maxLines: null,
+
+            decoration: InputDecoration(labelText: 'Name of the Collection',
+                labelStyle: TextStyle(
+                  color: kText, ),
+                fillColor: transwhite,
+                border:OutlineInputBorder(borderRadius: BorderRadius.circular(25.0),) )
+        ),
+
+        SizedBox(height:12.0),
+
+        TextField(
+            style:TextStyle(color: kText),
+
+            controller: sourceController,
+            keyboardType: TextInputType.multiline,
+            maxLines: null,
+
+            decoration: InputDecoration(labelText: 'Description of Collection',labelStyle:TextStyle(
+              color: kText, ),
+
+                fillColor: transwhite,
+                border:OutlineInputBorder(borderRadius: BorderRadius.circular(25.0),))),
+        SizedBox(height:12.0),
+
+      ],
+    );
+    return
+      SingleChildScrollView(
+        reverse: true,
+
+
+        child: Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child:    form,
+            ),
+            Container(
+                height:SizeConfig.screenHeight*0.05,
+                child:Row(
+                  mainAxisAlignment:MainAxisAlignment.end,
+                  children: [
+                    InkWell(
+                      onTap: (){
+
+                        pageController.animateToPage(++pageChanged, duration: Duration(milliseconds: 250), curve: Curves.bounceInOut);
+
+                      },
+                      child: FittedBox(
+                        fit:  BoxFit.fitHeight,
+                        child: Container(
+                          alignment:Alignment.center,
+                          height:SizeConfig.screenHeight*0.05,
+                          width:SizeConfig.blockSizeHorizontal*50,
+
+                          //icon: Icon(Icons.drag_handle),
+                          child:Text("Next",style:TextStyle(color: Colors.black)),
+
+                        ),
+                      ),
+                    ),
+
+
+                  ],
+                )),
+
+          ],
+        ),
+      );
+
+  }
+  page1(){
+    SizeConfig().init(context);
+    return
+      SingleChildScrollView(
+        child: Column(
+          children: <Widget>[
+            isUploading ? linearProgress() : Text(""),
+            Row(
+              mainAxisAlignment:MainAxisAlignment.center,
+
+              children: [
+                ElevatedButton(
+
+                  style: ElevatedButton.styleFrom(
+
+                    primary:kButton, // foreground
+                  ),
+                  onPressed: () {
+                    tag();
+                  },
+
+                  child:   Text("Tag other products",style: TextStyle(fontSize:  SizeConfig.safeBlockHorizontal *3.5
+                      ,color:kText),),
+                ),
+                Text("(optional)",style: TextStyle(fontSize:  SizeConfig.safeBlockHorizontal *2.5
+                    ,color:kText),),
+              ],
+            ),
+            Container(
+              height:SizeConfig.screenHeight*0.75,
+              child: tagView(),
+            ),
+            Container(
+                height:SizeConfig.screenHeight*0.05,
+                child:Row(
+                  children: [
+                    InkWell(
+                      onTap: (){
+                        pageController.animateToPage(--pageChanged, duration: Duration(milliseconds: 250), curve: Curves.bounceInOut);
+                      },
+                      child: FittedBox(
+                        fit:  BoxFit.fitHeight,
+                        child: Container(
+                          alignment:Alignment.center,
+                          width:SizeConfig.blockSizeHorizontal*50,
+                          height:SizeConfig.screenHeight*0.05,
+
+                          //icon: Icon(Icons.drag_handle),
+                          child:Text("Previous",style:TextStyle(color: Colors.black)),
+
+                        ),
+                      ),
+                    ),
+                    InkWell(
+                      onTap: () async {
+                        isUploading ? null : () => handleSubmit();                  },
+                      child: FittedBox(
+                        fit:  BoxFit.fitHeight,
+                        child: Container(
+                          alignment:Alignment.center,
+                          height:SizeConfig.screenHeight*0.05,
+
+                          width:SizeConfig.blockSizeHorizontal*50,
+                          color: kButton,
+                          //icon: Icon(Icons.drag_handle),
+                          child:Text("Post",style:TextStyle(color: Colors.black)),
+
+                        ),
+                      ),
+                    ),
+
+
+                  ],
+                )),
+
+
+
+
+          ],
+        ),
+      );
+
+  }
   selectImage(parentContext) {
     return showDialog(
         context: parentContext,
@@ -302,15 +553,16 @@ Carousel(){
         title: new Text('Are you sure?'),
         content: new Text('Do you want to exit without uploading?'),
         actions: <Widget>[
-          new FlatButton(
+          new TextButton(
 
             onPressed: () => Navigator.of(context).pop(false),
             child: Text("NO"),
           ),
           SizedBox(height: 16),
-          new FlatButton(
+          new TextButton(
 
             onPressed: () async {Navigator.of(context).pop(true);
+            delete();
 
 //            clearImage();
             },
@@ -385,16 +637,19 @@ SizedBox(height:12.0),
                     title: new Text('Are you sure?'),
                     content: new Text('Do you want to exit without uploading?'),
                     actions: <Widget>[
-                      new FlatButton(
+                      new TextButton(
 
                         onPressed: () => Navigator.of(context).pop(false),
                         child: Text("NO"),
                       ),
                       SizedBox(height: 16),
-                      new FlatButton(
+                      new TextButton(
 
-                        onPressed: () async {Navigator.of(context).pop(true);
+                        onPressed: () async {
+Get.back();
+Get.back();
 
+delete();
 //            clearImage();
                         },
                         child: Text("YES"),
@@ -480,4 +735,413 @@ SizedBox(height:12.0),
 
   }
 
+}
+
+class SearchTag extends StatefulWidget {
+  final String prodId;
+  SearchTag({this.prodId});
+  @override
+  _SearchTagState createState() => _SearchTagState();
+}
+
+class _SearchTagState extends State<SearchTag> {
+  TextEditingController _searchController = TextEditingController();
+
+  Future resultsLoaded;
+  List _allResults = [];
+  List _resultsList = [];
+
+  @override
+  void initState() {
+    super.initState();
+    _searchController.addListener(_onSearchChanged);
+  }
+
+  @override
+  void dispose() {
+    _searchController.removeListener(_onSearchChanged);
+    _searchController.dispose();
+    super.dispose();
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    resultsLoaded = getUsersPastTripsStreamSnapshots();
+  }
+
+
+  _onSearchChanged() {
+    searchResultsList();
+  }
+
+  searchResultsList() {
+    var showResults = [];
+
+    if(_searchController.text != "") {
+      for(var tripSnapshot in _allResults){
+        var title = Users.fromDocument(tripSnapshot).displayName.toLowerCase();
+
+        if(title.contains(_searchController.text.toLowerCase())) {
+          showResults.add(tripSnapshot);
+        }
+      }
+
+    } else {
+      showResults = List.from(_allResults);
+    }
+    setState(() {
+      _resultsList = showResults;
+    });
+  }
+
+  getUsersPastTripsStreamSnapshots() async {
+    var data = await FirebaseFirestore.instance
+        .collection('users')
+
+        .where("seller", isEqualTo: true)
+        .get();
+    setState(() {
+      _allResults = data.docs;
+    });
+    searchResultsList();
+    return "complete";
+  }
+  clearSearch() {
+    _searchController.clear();
+  }
+  AppBar buildSearchField() {
+    return AppBar(
+      backgroundColor:kPrimaryColor,
+      title: TextFormField(
+        style:  TextStyle(color: Colors.white),
+        controller: _searchController,
+        decoration: InputDecoration(
+          hintText: "Search for a user...",
+          hintStyle: TextStyle(color: Colors.white),
+
+          filled: true,
+          prefixIcon: Icon(
+            Icons.account_box,
+            size: 28.0,
+          ),
+          suffixIcon: IconButton(
+            icon: Icon(Icons.clear,
+                color: Colors.white),
+            onPressed: clearSearch,
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: buildSearchField(),
+      body: Container(
+        child: Column(
+          children: <Widget>[
+            Expanded(
+                child: ListView.builder(
+                  itemCount: _resultsList.length,
+                  itemBuilder: (BuildContext context, int index) =>
+                      buCard(context, _resultsList[index]),
+                )
+
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+  df({String ownerId,String prodId}){
+    return
+      showMaterialModalBottomSheet(
+        expand:true,
+        context: context,
+        builder: (BuildContext context)
+        {
+          SizeConfig().init(context);
+
+          return
+            Builder(builder: (BuildContext context) {
+              return StatefulBuilder(builder: (BuildContext context, State) {
+                return
+                  Container(
+                    height: MediaQuery
+                        .of(context)
+                        .size
+                        .height * 0.75,
+
+                    child: SearchTagProduct(ownerId:ownerId,prodId:prodId),
+
+                  );
+              }
+              );
+            }
+            );
+        },
+      );
+
+  }
+  Widget buCard(BuildContext context, DocumentSnapshot document) {
+    final user = Users.fromDocument(document);
+    // final tripType = trip.types();
+
+    return new Container(
+      child: Card(
+        child: InkWell(
+          child: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: ListTile(
+              leading: CircleAvatar(
+                backgroundColor: Colors.grey,
+                backgroundImage: CachedNetworkImageProvider(  user.photoUrl,),
+              ),
+              title: Text(
+                user.displayName,
+                style:
+                TextStyle(color:kText, fontWeight: FontWeight.bold),
+              ),
+
+            ),
+          ),
+
+
+          onTap: ()  {
+            Get.back();
+            df(ownerId: user.id,prodId: widget.prodId);},
+        ),
+      ),
+    );
+  }
+
+}
+
+
+class SearchTagProduct extends StatefulWidget {
+  final String ownerId;
+  final String prodId;
+  SearchTagProduct({this.ownerId, this.prodId});
+  @override
+  _SearchTagProductState createState() => _SearchTagProductState();
+}
+
+class _SearchTagProductState extends State<SearchTagProduct> {
+  TextEditingController _searchController = TextEditingController();
+
+  Future resultsLoaded;
+  List _allResults = [];
+  List _resultsList = [];
+
+  @override
+  void initState() {
+    super.initState();
+    _searchController.addListener(_onSearchChanged);
+  }
+
+  @override
+  void dispose() {
+    _searchController.removeListener(_onSearchChanged);
+    _searchController.dispose();
+    super.dispose();
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    resultsLoaded = getUsersPastTripsStreamSnapshots();
+  }
+
+
+  _onSearchChanged() {
+    searchResultsList();
+  }
+
+  searchResultsList() {
+    var showResults = [];
+
+    if(_searchController.text != "") {
+      for(var tripSnapshot in _allResults){
+        var title = Prod.fromDocument(tripSnapshot).productname.toLowerCase();
+
+        if(title.contains(_searchController.text.toLowerCase())) {
+          showResults.add(tripSnapshot);
+        }
+      }
+
+    } else {
+      showResults = List.from(_allResults);
+    }
+    setState(() {
+      _resultsList = showResults;
+    });
+  }
+
+  getUsersPastTripsStreamSnapshots() async {
+    var data = await FirebaseFirestore.instance
+        .collection('products')
+        .doc(widget.ownerId)
+        .collection('userProducts')
+        .orderBy('timestamp',descending: true)
+        .get();
+    setState(() {
+      _allResults = data.docs;
+    });
+    searchResultsList();
+    return "complete";
+  }
+  clearSearch() {
+    _searchController.clear();
+  }
+  AppBar buildSearchField() {
+    return AppBar(
+      automaticallyImplyLeading: false,
+      backgroundColor:kPrimaryColor,
+      title: TextFormField(
+        style:  TextStyle(color: Colors.white),
+        controller: _searchController,
+        decoration: InputDecoration(
+          hintText: "Search for a product...",
+          hintStyle: TextStyle(color: Colors.white),
+
+          filled: true,
+
+          suffixIcon: IconButton(
+            icon: Icon(Icons.clear,
+                color: Colors.white),
+            onPressed: clearSearch,
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: buildSearchField(),
+      body: Container(
+        color:Colors.grey.shade200,
+        child: Column(
+          children: <Widget>[
+            Expanded(
+                child: ListView.builder(
+                  itemCount: _resultsList.length,
+                  itemBuilder: (BuildContext context, int index) =>
+                      buprod(context, _resultsList[index],widget.prodId),
+                )
+
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+Widget buprod(BuildContext context, DocumentSnapshot document,prodId) {
+  final prod = Prod.fromDocument(document);
+  // final tripType = trip.types();
+
+  return new Container(
+    child: Card(
+      child: InkWell(
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: ListTile(
+            leading: ClipRRect(
+                borderRadius: BorderRadius.circular(15.0),
+                child: Container(child: Image.network(prod.shopmediaUrl.first),)),
+
+            title: Text(
+              prod.productname,
+              style:
+              TextStyle(color:kText, fontWeight: FontWeight.bold),
+            ),
+
+          ),
+        ),
+
+
+        onTap: ()
+        {
+          collRef .doc(currentUser.id)
+              .collection("userCollections")
+              .doc(prodId)
+              .collection('tags')
+              .doc(prod.prodId)
+              .set({
+            "ownerId":prod.ownerId,
+            "prodId":prod.prodId,
+            "image":prod.shopmediaUrl.first,
+            "name":prod.productname,
+            "usd":prod.usd,
+            "timestamp":timestamp,
+
+          });
+          Get.back();},
+      ),
+    ),
+  );
+}
+class TagItem extends StatelessWidget {
+  final String ownerId ;
+  final String prodId ;
+
+  final String Id ;
+  final String image ;
+  final String name;
+  final usd ;
+  var currencyFormatter = NumberFormat('#,##0.00', );
+
+  TagItem({this.ownerId,this.prodId,this.Id,this.image,this.name,this.usd});
+
+  delete(){
+    var  docReference =      collRef .doc(currentUser.id)
+        .collection("userCollections")
+        .doc(prodId)
+        .collection('tags')
+        .doc(Id);
+    docReference.delete();
+
+  }
+  @override
+  Widget build(BuildContext context) {
+    return Stack(
+        children:[
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(children:[
+              ClipRRect(
+                  borderRadius: BorderRadius.circular(20.0),
+                  child: CachedImage(image)),
+              Row(
+                children: [
+                  Text(name,
+                      style: TextStyle(color: kText,
+                          fontSize: SizeConfig.safeBlockHorizontal * 4,
+                          fontWeight: FontWeight.bold))
+                ],
+              ),
+              Row(
+                children: [
+                  Text("\u0024 ${currencyFormatter.format(usd)}",),
+                ],
+              ),
+
+            ]),
+          ),
+          Positioned(
+            top: 10.0,
+            right: 10.0,
+            child: FloatingActionButton(
+              mini: true,
+              backgroundColor:kText.withOpacity(0.5),
+              onPressed: delete,
+              child: Icon(Icons.delete,color: Colors.red,),
+            ),
+          ),
+        ]
+    );
+  }
 }
