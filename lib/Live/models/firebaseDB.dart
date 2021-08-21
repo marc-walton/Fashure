@@ -14,17 +14,17 @@ class FireStoreClass{
   static final emailCollection = 'user_email';
 
   static void createLiveUser({username,name, id, time,image}) async{
-    final snapShot = await _db.collection(liveCollection).doc(name).get();
+    final snapShot = await _db.collection(liveCollection).doc(id).get();
     if(snapShot.exists){
-      await _db.collection(liveCollection).doc(name).update({
-        'name': username,
+      await _db.collection(liveCollection).doc(id).update({
+        'name': name,
         'channel': id,
         'time':time,
         'image': image
       });
     } else {
-      await _db.collection(liveCollection).doc(name).set({
-        'name': username,
+      await _db.collection(liveCollection).doc(id).set({
+        'name': name,
         'channel': id,
         'time':time,
         'image': image

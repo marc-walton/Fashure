@@ -13,6 +13,8 @@ import 'package:fashow/size_config.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
+import 'package:fashow/Constants.dart';
+
 import 'package:fashow/user.dart';
 
 import 'package:image_cropper/image_cropper.dart';
@@ -22,7 +24,6 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:fashow/progress.dart';
 import 'package:fashow/HomePage.dart';
-import 'package:fashow/Constants.dart';
 import 'package:image/image.dart' as Im;
 import 'package:uuid/uuid.dart';
 

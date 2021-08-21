@@ -1447,9 +1447,10 @@ getBids (){
       context,
       MaterialPageRoute(
         builder: (context) => CallPage(
-          channelName: username,
+          channelName: currentUser.displayName,
           time: currentTime,
-          image: image,
+          uid:currentUser.id,
+          image: currentUser.photoUrl,
         ),
       ),
     );
