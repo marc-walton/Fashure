@@ -54,6 +54,7 @@ class _CallPageState extends State<CallPage>{
   var tryingToEnd = false;
   bool personBool = false;
   bool accepted =false;
+  bool tags =false;
 
   final _channelMessageController = TextEditingController();
 
@@ -765,6 +766,8 @@ class _CallPageState extends State<CallPage>{
                     if(tryingToEnd==false)messageList(),
                     if(tryingToEnd==true)endLive(),// view message
                     if(personBool==true && waiting==false) personList(),
+
+                    if(tags == true) adddProduct(),
                     if(accepted == true) stopSharing(),
                     if(waiting == true) guestWaiting(),
                   ],
@@ -853,7 +856,7 @@ class _CallPageState extends State<CallPage>{
     padding: const EdgeInsets.fromLTRB(4.0, 0, 0, 0),
     child: MaterialButton(
     minWidth: 0,
-    onPressed: () => tag(widget.uid),
+    onPressed: addProduct,
     child: Icon(
     Icons.add_shopping_cart,
     color: Colors.white,
@@ -891,6 +894,11 @@ class _CallPageState extends State<CallPage>{
   void _addPerson() {
     setState(() {
       personBool = !personBool;
+    });
+  }
+  void addProduct() {
+    setState(() {
+      tags = !tags;
     });
   }
 
@@ -1095,6 +1103,7 @@ class _CallPageState extends State<CallPage>{
             return Container();
           } else {
             return new ListView.builder(
+                scrollDirection :Axis.horizontal,
                 itemCount: snapshot.data.docs.length,
                 itemBuilder: (context, index) {
                   DocumentSnapshot ds = snapshot.data.docs[index];
@@ -1114,6 +1123,94 @@ class _CallPageState extends State<CallPage>{
       );
 
   }
+  Widget adddProduct(){
+    return Container(
+      alignment: Alignment.bottomRight,
+      child: Container(
+        height: 2*MediaQuery.of(context).size.height/3,
+        width: MediaQuery.of(context).size.height,
+        decoration: new BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(25),
+              topRight: Radius.circular(25)
+          ),
+        ),
+        child: Stack(
+          children: <Widget>[
+            Container(
+              height: 2*MediaQuery.of(context).size.height/3 -50,
+              child: Column(
+                children: <Widget>[
+                  SizedBox(height: 10,),
+                  Container(
+                    padding: EdgeInsets.symmetric(vertical: 12),
+                    width: MediaQuery.of(context).size.width,
+                    alignment: Alignment.center,
+                    child: Text('Tag a Product',style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold,),),
+                  ),
+                  SizedBox(height: 10,),
+                  Align(
+                    alignment: Alignment.bottomCenter,
+                    child: GestureDetector(
+                      onTap: (){
+                        tag(widget.uid);
+                      },
+                      child: Container(
+                        color: Colors.grey[850],
+                        alignment: Alignment.bottomCenter,
+                        height: 50,
+                        child: Stack(
+                          children: <Widget>[
+                            Container(
+                              color: Colors.grey,
+                                height: double.maxFinite,
+
+                                alignment: Alignment.center ,
+                                child: Text('Select',style: TextStyle(fontWeight: FontWeight.bold,color: Colors.white),)),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+
+                  Divider(color: Colors.grey[800],thickness: 0.5,height: 0,),
+                 Container(      height: MediaQuery.of(context).size.height/2 -30,child:tagView(),),
+                ],
+              ),
+            ),
+            Align(
+              alignment: Alignment.bottomCenter,
+              child: GestureDetector(
+                onTap: (){
+                  setState(() {
+                    tags= !tags;
+                  });
+                },
+                child: Container(
+                  color: Colors.grey[850],
+                  alignment: Alignment.bottomCenter,
+                  height: 50,
+                  child: Stack(
+                    children: <Widget>[
+                      Container(
+                          height: double.maxFinite,
+                          alignment: Alignment.center ,
+                          child: Text('Done',style: TextStyle(fontWeight: FontWeight.bold,color: Colors.white),)),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+
+          ],
+        ),
+      ),
+    );
+
+  }
+
+
 }
 class SearchTag extends StatefulWidget {
   final String prodId;
@@ -1474,9 +1571,8 @@ class TagItem extends StatelessWidget {
   TagItem({this.ownerId,this.prodId,this.Id,this.image,this.name,this.usd});
 
   delete(){
-    var  docReference =  blogRef
-        .doc(currentUser.id)
-        .collection('userBlog')
+    var  docReference = FirebaseFirestore.instance
+        .collection('liveuser')
         .doc(prodId)
         .collection('tags')
         .doc(Id);
@@ -1490,9 +1586,12 @@ class TagItem extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Column(children:[
-              ClipRRect(
-                  borderRadius: BorderRadius.circular(20.0),
-                  child: CachedImage(image)),
+              Container(
+                height: SizeConfig.safeBlockHorizontal * 80,
+                child: ClipRRect(
+                    borderRadius: BorderRadius.circular(20.0),
+                    child: CachedImage(image)),
+              ),
               Row(
                 children: [
                   Text(name,

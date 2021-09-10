@@ -1,13 +1,19 @@
 import 'dart:async';
 import 'package:agora_rtm/agora_rtm.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:fashow/Constants.dart';
 import 'package:fashow/Live/models/firebaseDB.dart';
 import 'package:fashow/Live/models/message.dart';
 import 'package:fashow/Live/loading.dart';
 import 'package:agora_rtc_engine/agora_rtc_engine.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:fashow/Product_screen.dart';
+import 'package:fashow/chatcached_image.dart';
+import 'package:fashow/size_config.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:fashow/Live/models/app_id.dart';
+import 'package:intl/intl.dart';
 import 'package:wakelock/wakelock.dart';
 import 'dart:math' as math;
 import 'package:fashow/Live/models/heartAnim.dart';
@@ -15,7 +21,7 @@ import 'package:fashow/Live/models/heartAnim.dart';
 class JoinPage extends StatefulWidget {
   /// non-modifiable channel name of the page
   final String channelName;
-  final int channelId;
+  var channelId;
   final String username;
   final String hostImage;
   final String userImage;
@@ -23,7 +29,7 @@ class JoinPage extends StatefulWidget {
 
 
   /// Creates a call page with given channel name.
-  const JoinPage({Key key, this.channelName, this.channelId, this.username,this.hostImage,this.userImage}) : super(key: key);
+   JoinPage({Key key, this.channelName, this.channelId, this.username,this.hostImage,this.userImage}) : super(key: key);
 
 
   @override
@@ -39,6 +45,7 @@ class _JoinPageState extends State<JoinPage> {
   var userMap ;
   bool heart = false;
   bool requested = false;
+  bool tags =false;
 
   bool _isLogin = true;
   bool _isInChannel = true;
@@ -704,6 +711,8 @@ class _JoinPageState extends State<JoinPage> {
                     _username(),
                     _liveText(),
                     if(completed==false)_messageList(),
+                    if(tags == true) adddProduct(),
+
                     if(heart == true && completed==false) heartPop(),
                     if(requested == true) requestedWidget(),
                     if(accepted == true) stopSharing(),
@@ -719,6 +728,98 @@ class _JoinPageState extends State<JoinPage> {
     );
   }
   // Agora RTM
+  void addProduct() {
+    setState(() {
+      tags = !tags;
+    });
+  }
+  tagView(){
+    return
+      StreamBuilder(
+        stream: FirebaseFirestore.instance
+            .collection("liveuser").doc(widget.channelId)
+            .collection("tags")
+            .orderBy('timestamp',descending: true).snapshots(),
+        builder: (context, snapshot) {
+          if (!snapshot.hasData) {
+            return Container();
+          } else {
+            return new ListView.builder(
+                scrollDirection :Axis.horizontal,
+                itemCount: snapshot.data.docs.length,
+                itemBuilder: (context, index) {
+                  DocumentSnapshot ds = snapshot.data.docs[index];
+                  return TagItem(
+                    Id: ds['prodId'],
+                    ownerId: ds['ownerId'],
+                    name: ds['name'],
+                    usd: ds['usd'],
+                    image: ds['image'],
+                    prodId: widget.channelId,
+
+                  );
+                }
+            );
+          }
+        },
+      );
+
+  }
+
+  Widget adddProduct(){
+    return Container(
+      alignment: Alignment.bottomRight,
+      child: Container(
+        height: 2*MediaQuery.of(context).size.height/3,
+        width: MediaQuery.of(context).size.height,
+        decoration: new BoxDecoration(
+          borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(25),
+              topRight: Radius.circular(25)
+          ),
+        ),
+        child: Stack(
+          children: <Widget>[
+            Container(
+              height: 2*MediaQuery.of(context).size.height/3 -50,
+              child: Column(
+                children: <Widget>[
+                  SizedBox(height: 10,),
+
+                  Container(      height: MediaQuery.of(context).size.height/2 -30,child:tagView(),),
+                ],
+              ),
+            ),
+            Align(
+              alignment: Alignment.bottomCenter,
+              child: GestureDetector(
+                onTap: (){
+                  setState(() {
+                    tags= !tags;
+                  });
+                },
+                child: Container(
+                  color: Colors.grey[850],
+                  alignment: Alignment.bottomCenter,
+                  height: 50,
+                  child: Stack(
+                    children: <Widget>[
+                      Container(
+                          height: double.maxFinite,
+                          alignment: Alignment.center ,
+                          child: Text('Close',style: TextStyle(fontWeight: FontWeight.bold,color: Colors.white),)),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+
+          ],
+        ),
+      ),
+    );
+
+  }
 
 
   Widget _bottomBar() {
@@ -776,6 +877,23 @@ class _JoinPageState extends State<JoinPage> {
                     padding: const EdgeInsets.all(12.0),
                   ),
                 ),
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(4.0, 0, 0, 0),
+                  child: MaterialButton(
+                    minWidth: 0,
+                    onPressed: addProduct,
+                    child: Icon(
+                      Icons.add_shopping_cart,
+                      color: Colors.white,
+                      size: 20.0,
+                    ),
+                    shape: CircleBorder(),
+                    elevation: 2.0,
+                    color:Colors.blue[400] ,
+                    padding: const EdgeInsets.all(12.0),
+                  ),
+                ),
+
                 Padding(
                   padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
                   child: MaterialButton(
@@ -946,3 +1064,78 @@ class _JoinPageState extends State<JoinPage> {
   }
 }
 
+class TagItem extends StatelessWidget {
+  final String ownerId ;
+  final String prodId ;
+
+  final String Id ;
+  final String image ;
+  final String name;
+  final usd ;
+  var currencyFormatter = NumberFormat('#,##0.00', );
+
+  TagItem({this.ownerId,this.prodId,this.Id,this.image,this.name,this.usd});
+
+  delete(){
+    var  docReference = FirebaseFirestore.instance
+        .collection('liveuser')
+        .doc(prodId)
+        .collection('tags')
+        .doc(Id);
+    docReference.delete();
+
+  }
+  @override
+  Widget build(BuildContext context) {
+    return Stack(
+        children:[
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(children:[
+              Container(
+                height: SizeConfig.safeBlockHorizontal * 40,
+                child: InkWell(
+                  onTap: () => Navigator.push(
+    context,
+    MaterialPageRoute(
+    builder: (context) => ProductScreen(
+    prodId: Id,
+    userId: ownerId,
+    ),
+    ),
+    ),
+                  child: ClipRRect(
+                      borderRadius: BorderRadius.circular(20.0),
+                      child: CachedImage(image)),
+                ),
+              ),
+              Row(
+                children: [
+                  Text(name,
+                      style: TextStyle(color: kText,
+                          fontSize: SizeConfig.safeBlockHorizontal * 4,
+                          fontWeight: FontWeight.bold))
+                ],
+              ),
+              Row(
+                children: [
+                  Text("\u0024 ${currencyFormatter.format(usd)}",),
+                ],
+              ),
+
+            ]),
+          ),
+          Positioned(
+            top: 10.0,
+            right: 10.0,
+            child: FloatingActionButton(
+              mini: true,
+              backgroundColor:kText.withOpacity(0.5),
+              onPressed: delete,
+              child: Icon(Icons.delete,color: Colors.red,),
+            ),
+          ),
+        ]
+    );
+  }
+}
