@@ -178,7 +178,7 @@ class _UploadState extends State<Upload>
 
     return
       CarouselSlider(
-          options: CarouselOptions(),
+          options: CarouselOptions(enableInfiniteScroll:false,),
           items: images.map((e) => Container(
             width: 400,
             height: 400,
@@ -541,36 +541,36 @@ class _UploadState extends State<Upload>
                  color: Colors.white,
                )),
          ),
-         Container(
-             height:SizeConfig.screenHeight*0.05,
-             child:Row(
-               mainAxisAlignment:MainAxisAlignment.end,
+         SizedBox( height:MediaQuery. of(context). size. width *0.5,
+         ),
+         Row(
+           mainAxisAlignment:MainAxisAlignment.end,
 
-               children: [
-                 InkWell(
-                   onTap: (){
-                     pageController.animateToPage(++pageChanged,
-                         duration: Duration(milliseconds: 250),
-                         curve: Curves.bounceInOut);
-                   },
-                   child: FittedBox(
-                     fit:  BoxFit.fitHeight,
-                     child: Container(
-                       alignment:Alignment.center,
-                       height:SizeConfig.screenHeight*0.05,
+           children: [
+             InkWell(
+               onTap: (){
+                 pageController.animateToPage(++pageChanged,
+                     duration: Duration(milliseconds: 250),
+                     curve: Curves.bounceInOut);
+               },
+               child: FittedBox(
+                 fit:  BoxFit.fitHeight,
+                 child: Container(
+                   alignment:Alignment.center,
+                   height:MediaQuery. of(context). size. height *0.06,
 
-                       width:SizeConfig.blockSizeHorizontal*50,
+                   width:MediaQuery. of(context). size. width *0.5,
 
-                       //icon: Icon(Icons.drag_handle),
-                       child:Text("Next",style:TextStyle(color: Colors.black)),
+                   //icon: Icon(Icons.drag_handle),
+                   child:Text("Next",style:TextStyle(color: Colors.black)),
 
-                     ),
-                   ),
                  ),
+               ),
+             ),
 
 
-               ],
-             )),
+           ],
+         ),
 
        ],
      );
@@ -599,57 +599,57 @@ page1(){
                 child:   Text("Tag other products",style: TextStyle(fontSize:  SizeConfig.safeBlockHorizontal *3.5
                     ,color:kText),),
               ),
+SizedBox(width: 10,)  ,
               Text("(optional)",style: TextStyle(fontSize:  SizeConfig.safeBlockHorizontal *2.5
                   ,color:kText),),
             ],
           ),
           Container(
-            height:SizeConfig.screenHeight*0.75,
+            height:MediaQuery. of(context). size. height *0.75,
             child: tagView(),
           ),
-          Container(
-              height:SizeConfig.screenHeight*0.05,
-              child:Row(
-                children: [
-                  InkWell(
-                    onTap: (){
-                      pageController.animateToPage(--pageChanged, duration: Duration(milliseconds: 250), curve: Curves.bounceInOut);
-                    },
-                    child: FittedBox(
-                      fit:  BoxFit.fitHeight,
-                      child: Container(
-                        alignment:Alignment.center,
-                        width:SizeConfig.blockSizeHorizontal*50,
-                        height:SizeConfig.screenHeight*0.05,
+          Row(
+            children: [
+              InkWell(
+                onTap: (){
+                  pageController.animateToPage(--pageChanged, duration: Duration(milliseconds: 250), curve: Curves.bounceInOut);
+                },
+                child: FittedBox(
+                  fit:  BoxFit.fitHeight,
+                  child: Container(
+                    alignment:Alignment.center,
+                    height:MediaQuery. of(context). size. height *0.06,
 
-                        //icon: Icon(Icons.drag_handle),
-                        child:Text("Previous",style:TextStyle(color: Colors.black)),
+                    width:MediaQuery. of(context). size. width *0.5,
 
-                      ),
-                    ),
+                    //icon: Icon(Icons.drag_handle),
+                    child:Text("Previous",style:TextStyle(color: Colors.black)),
+
                   ),
-                  InkWell(
-                    onTap: () async {
-                      isUploading ? null : handleSubmit();
-                    },
-                    child: FittedBox(
-                      fit:  BoxFit.fitHeight,
-                      child: Container(
-                        alignment:Alignment.center,
-                        height:SizeConfig.screenHeight*0.05,
+                ),
+              ),
+              InkWell(
+                onTap: () async {
+                  isUploading ? null : handleSubmit();
+                },
+                child: FittedBox(
+                  fit:  BoxFit.fitHeight,
+                  child: Container(
+                    alignment:Alignment.center,
+                    height:MediaQuery. of(context). size. height *0.06,
 
-                        width:SizeConfig.blockSizeHorizontal*50,
-                        color: kButton,
-                        //icon: Icon(Icons.drag_handle),
-                        child:Text("Post",style:TextStyle(color: Colors.black)),
+                    width:MediaQuery. of(context). size. width *0.5,
 
-                      ),
-                    ),
+                    //icon: Icon(Icons.drag_handle),
+                    child:Text("Post",style:TextStyle(color: Colors.black)),
+
                   ),
+                ),
+              ),
 
 
-                ],
-              )),
+            ],
+          ),
 
 
 

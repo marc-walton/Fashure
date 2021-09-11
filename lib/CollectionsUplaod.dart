@@ -189,35 +189,36 @@ class _UploadCollState extends State<UploadColl>
               padding: const EdgeInsets.all(8.0),
               child:    form,
             ),
-            Container(
-                height:SizeConfig.screenHeight*0.05,
-                child:Row(
-                  mainAxisAlignment:MainAxisAlignment.end,
-                  children: [
-                    InkWell(
-                      onTap: (){
+            SizedBox( height:MediaQuery. of(context). size. width *0.5,
+            ),
+            Row(
+              mainAxisAlignment:MainAxisAlignment.end,
 
-                        pageController.animateToPage(++pageChanged, duration: Duration(milliseconds: 250), curve: Curves.bounceInOut);
+              children: [
+                InkWell(
+                  onTap: (){
+                    pageController.animateToPage(++pageChanged,
+                        duration: Duration(milliseconds: 250),
+                        curve: Curves.bounceInOut);
+                  },
+                  child: FittedBox(
+                    fit:  BoxFit.fitHeight,
+                    child: Container(
+                      alignment:Alignment.center,
+                      height:MediaQuery. of(context). size. height *0.06,
 
-                      },
-                      child: FittedBox(
-                        fit:  BoxFit.fitHeight,
-                        child: Container(
-                          alignment:Alignment.center,
-                          height:SizeConfig.screenHeight*0.05,
-                          width:SizeConfig.blockSizeHorizontal*50,
+                      width:MediaQuery. of(context). size. width *0.5,
 
-                          //icon: Icon(Icons.drag_handle),
-                          child:Text("Next",style:TextStyle(color: Colors.black)),
+                      //icon: Icon(Icons.drag_handle),
+                      child:Text("Next",style:TextStyle(color: Colors.black)),
 
-                        ),
-                      ),
                     ),
+                  ),
+                ),
 
 
-                  ],
-                )),
-
+              ],
+            ),
           ],
         ),
       );
@@ -247,6 +248,8 @@ class _UploadCollState extends State<UploadColl>
                   child:   Text("Tag other products",style: TextStyle(fontSize:  SizeConfig.safeBlockHorizontal *3.5
                       ,color:kText),),
                 ),
+                SizedBox(width: 10,)  ,
+
                 Text("(optional)",style: TextStyle(fontSize:  SizeConfig.safeBlockHorizontal *2.5
                     ,color:kText),),
               ],
@@ -255,50 +258,48 @@ class _UploadCollState extends State<UploadColl>
               height:SizeConfig.screenHeight*0.75,
               child: tagView(),
             ),
-            Container(
-                height:SizeConfig.screenHeight*0.05,
-                child:Row(
-                  children: [
-                    InkWell(
-                      onTap: (){
-                        pageController.animateToPage(--pageChanged, duration: Duration(milliseconds: 250), curve: Curves.bounceInOut);
-                      },
-                      child: FittedBox(
-                        fit:  BoxFit.fitHeight,
-                        child: Container(
-                          alignment:Alignment.center,
-                          width:SizeConfig.blockSizeHorizontal*50,
-                          height:SizeConfig.screenHeight*0.05,
+            Row(
+              children: [
+                InkWell(
+                  onTap: (){
+                    pageController.animateToPage(--pageChanged, duration: Duration(milliseconds: 250), curve: Curves.bounceInOut);
+                  },
+                  child: FittedBox(
+                    fit:  BoxFit.fitHeight,
+                    child: Container(
+                      alignment:Alignment.center,
+                      height:MediaQuery. of(context). size. height *0.06,
 
-                          //icon: Icon(Icons.drag_handle),
-                          child:Text("Previous",style:TextStyle(color: Colors.black)),
+                      width:MediaQuery. of(context). size. width *0.5,
 
-                        ),
-                      ),
+                      //icon: Icon(Icons.drag_handle),
+                      child:Text("Previous",style:TextStyle(color: Colors.black)),
+
                     ),
-                    InkWell(
-                      onTap: () async {
-                        isUploading ? null : () => handleSubmit();                  },
-                      child: FittedBox(
-                        fit:  BoxFit.fitHeight,
-                        child: Container(
-                          alignment:Alignment.center,
-                          height:SizeConfig.screenHeight*0.05,
+                  ),
+                ),
+                InkWell(
+                  onTap: () async {
+                    isUploading ? null : handleSubmit();
+                  },
+                  child: FittedBox(
+                    fit:  BoxFit.fitHeight,
+                    child: Container(
+                      alignment:Alignment.center,
+                      height:MediaQuery. of(context). size. height *0.06,
 
-                          width:SizeConfig.blockSizeHorizontal*50,
-                          color: kButton,
-                          //icon: Icon(Icons.drag_handle),
-                          child:Text("Post",style:TextStyle(color: Colors.black)),
+                      width:MediaQuery. of(context). size. width *0.5,
 
-                        ),
-                      ),
+                      //icon: Icon(Icons.drag_handle),
+                      child:Text("Post",style:TextStyle(color: Colors.black)),
+
                     ),
+                  ),
+                ),
 
 
-                  ],
-                )),
-
-
+              ],
+            ),
 
 
           ],
@@ -485,7 +486,7 @@ Carousel(){
 
     return
         CarouselSlider(
-          options: CarouselOptions(),
+          options: CarouselOptions(enableInfiniteScroll : false),
           items: images.map((e) => Container(
             width: 400,
             height: 400,
@@ -579,47 +580,7 @@ Carousel(){
       _inProcess = true;
 
     });
-    final form =
-    ListView(
-      shrinkWrap: true,
-      children: <Widget>[
-        isUploading ? linearProgress() : Text(""),
-        Carousel(),
-       // getImageWidget(),
-        SizedBox(height:12.0),
 
-        TextFormField(
-            style:TextStyle(color: kText),
-
-            controller: titleController,
-            keyboardType: TextInputType.multiline,
-            maxLines: null,
-
-            decoration: InputDecoration(labelText: 'Name of the Collection',
-            labelStyle: TextStyle(
-              color: kText, ),
-            fillColor: transwhite,
-            border:OutlineInputBorder(borderRadius: BorderRadius.circular(25.0),) )
-        ),
-
-        SizedBox(height:12.0),
-
-        TextField(
-            style:TextStyle(color: kText),
-
-            controller: sourceController,
-            keyboardType: TextInputType.multiline,
-            maxLines: null,
-
-            decoration: InputDecoration(labelText: 'Description of Collection',labelStyle:TextStyle(
-              color: kText, ),
-
-                fillColor: transwhite,
-                border:OutlineInputBorder(borderRadius: BorderRadius.circular(25.0),))),
-SizedBox(height:12.0),
-
-      ],
-    );
     return
       Stack(
         children: [
@@ -659,32 +620,31 @@ delete();
                   ),
                 ) ??
                     false),
-                actions: [
-                  RaisedButton(color:kblue,
-                    onPressed: isUploading ? null : () => handleSubmit(),
-                    child: Text(
-                      "Post",
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 20.0),
-                    ),
-                  )
-                ],
+
               ),
               body:
-
-                Container(
-
-                  decoration: BoxDecoration(
-                      gradient: fabGradient
-                  ) ,
-                 // alignment: Alignment.center,
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: form,
+              PageView(
+                physics:new NeverScrollableScrollPhysics(),
+                pageSnapping: true,
+                controller: pageController,
+                onPageChanged: (index) {
+                  setState(() {
+                    pageChanged = index;
+                  });
+                  print(pageChanged);
+                },
+                children: [
+                  Container(
+                    child: page0(),
                   ),
-                ),
+                  Container(
+                    child: page1(),
+                  ),
+
+
+                ],
+              ),
+
 
             ),
 

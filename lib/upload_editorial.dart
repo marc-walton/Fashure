@@ -215,7 +215,6 @@ class _UploadEditState extends State<UploadEdit>
     final form =
     Column(
       children: <Widget>[
-        isUploading ? linearProgress() : Text(""),
         carousel(),
         SizedBox(height:20),
         TextFormField(controller: titleController,
@@ -226,6 +225,7 @@ class _UploadEditState extends State<UploadEdit>
                 border:OutlineInputBorder(borderRadius: BorderRadius.circular(25.0),))),
         ZefyrToolbar.basic(controller: _controller),
         editor,
+
         SizedBox(height:20),
 
         // TextField(controller: sourceController,
@@ -244,36 +244,62 @@ class _UploadEditState extends State<UploadEdit>
           children: [
             Padding(
               padding: const EdgeInsets.all(8.0),
-              child:    form,
+              child:      Column(
+                children: <Widget>[
+                  carousel(),
+                  SizedBox(height:20),
+                  TextFormField(controller: titleController,
+                      keyboardType: TextInputType.multiline,
+                      maxLines: null,
+                      decoration: InputDecoration(labelText: 'Title of the blog',
+                          fillColor: transwhite,
+                          border:OutlineInputBorder(borderRadius: BorderRadius.circular(25.0),))),
+                  ZefyrToolbar.basic(controller: _controller),
+                  ZefyrEditor(
+                    maxHeight:400,
+                    scrollPhysics: ClampingScrollPhysics(),
+                    controller: _controller,
+                    focusNode: _focusNode,
+                    autofocus: false,
+                  ),
+
+                  SizedBox(height:20),
+
+                  // TextField(controller: sourceController,
+                  //     keyboardType: TextInputType.multiline,
+                  //     maxLines: null,
+                  //     decoration: InputDecoration(labelText: 'source',        fillColor: transwhite,
+                  //         border:OutlineInputBorder(borderRadius: BorderRadius.circular(25.0),))),
+                ],
+              ),
             ),
-            Container(
-                height:SizeConfig.screenHeight*0.05,
-                child:Row(
-                  mainAxisAlignment:MainAxisAlignment.end,
-                  children: [
-                    InkWell(
-                      onTap: (){
+            Row(
+              mainAxisAlignment:MainAxisAlignment.end,
+              children: [
+                InkWell(
+                  onTap: (){
 
-                        pageController.animateToPage(++pageChanged, duration: Duration(milliseconds: 250), curve: Curves.bounceInOut);
+                    pageController.animateToPage(++pageChanged, duration: Duration(milliseconds: 250), curve: Curves.bounceInOut);
 
-                      },
-                      child: FittedBox(
-                        fit:  BoxFit.fitHeight,
-                        child: Container(
-                          alignment:Alignment.center,
-                          height:SizeConfig.screenHeight*0.05,
-                          width:SizeConfig.blockSizeHorizontal*50,
+                  },
+                  child: FittedBox(
+                    fit:  BoxFit.fitHeight,
+                    child: Container(
+                      alignment:Alignment.center,
+                      height:MediaQuery. of(context). size. height *0.06,
 
-                          //icon: Icon(Icons.drag_handle),
-                          child:Text("Next",style:TextStyle(color: Colors.black)),
+                      width:MediaQuery. of(context). size. width *0.5,
 
-                        ),
-                      ),
+                      //icon: Icon(Icons.drag_handle),
+                      child:Text("Next",style:TextStyle(color: Colors.black)),
+
                     ),
+                  ),
+                ),
 
 
-                  ],
-                )),
+              ],
+            ),
 
           ],
         ),
@@ -304,6 +330,8 @@ class _UploadEditState extends State<UploadEdit>
                   child:   Text("Tag other products",style: TextStyle(fontSize:  SizeConfig.safeBlockHorizontal *3.5
                       ,color:kText),),
                 ),
+                SizedBox(width: 10,)  ,
+
                 Text("(optional)",style: TextStyle(fontSize:  SizeConfig.safeBlockHorizontal *2.5
                     ,color:kText),),
               ],
@@ -312,48 +340,48 @@ class _UploadEditState extends State<UploadEdit>
               height:SizeConfig.screenHeight*0.75,
               child: tagView(),
             ),
-            Container(
-                height:SizeConfig.screenHeight*0.05,
-                child:Row(
-                  children: [
-                    InkWell(
-                      onTap: (){
-                        pageController.animateToPage(--pageChanged, duration: Duration(milliseconds: 250), curve: Curves.bounceInOut);
-                      },
-                      child: FittedBox(
-                        fit:  BoxFit.fitHeight,
-                        child: Container(
-                          alignment:Alignment.center,
-                          width:SizeConfig.blockSizeHorizontal*50,
-                          height:SizeConfig.screenHeight*0.05,
+            Row(
+              children: [
+                InkWell(
+                  onTap: (){
+                    pageController.animateToPage(--pageChanged, duration: Duration(milliseconds: 250), curve: Curves.bounceInOut);
+                  },
+                  child: FittedBox(
+                    fit:  BoxFit.fitHeight,
+                    child: Container(
+                      alignment:Alignment.center,
+                      height:MediaQuery. of(context). size. height *0.06,
 
-                          //icon: Icon(Icons.drag_handle),
-                          child:Text("Previous",style:TextStyle(color: Colors.black)),
+                      width:MediaQuery. of(context). size. width *0.5,
 
-                        ),
-                      ),
+                      //icon: Icon(Icons.drag_handle),
+                      child:Text("Previous",style:TextStyle(color: Colors.black)),
+
                     ),
-                    InkWell(
-                      onTap: () async {
-                        isUploading ? null : () => handleSubmit();                     },
-                      child: FittedBox(
-                        fit:  BoxFit.fitHeight,
-                        child: Container(
-                          alignment:Alignment.center,
-                          height:SizeConfig.screenHeight*0.05,
+                  ),
+                ),
+                InkWell(
+                  onTap: () async {
+                    isUploading ? null : handleSubmit();
+                  },
+                  child: FittedBox(
+                    fit:  BoxFit.fitHeight,
+                    child: Container(
+                      alignment:Alignment.center,
+                      height:MediaQuery. of(context). size. height *0.06,
 
-                          width:SizeConfig.blockSizeHorizontal*50,
-                          color: kButton,
-                          //icon: Icon(Icons.drag_handle),
-                          child:Text("Post",style:TextStyle(color: Colors.black)),
+                      width:MediaQuery. of(context). size. width *0.5,
 
-                        ),
-                      ),
+                      //icon: Icon(Icons.drag_handle),
+                      child:Text("Post",style:TextStyle(color: Colors.black)),
+
                     ),
+                  ),
+                ),
 
 
-                  ],
-                )),
+              ],
+            ),
 
 
 
@@ -638,36 +666,7 @@ Navigator.of(context).pop(true);
         false;
   }
   builduploadForm() {
-    final editor = ZefyrEditor(
-        maxHeight:400,
-      scrollPhysics: ClampingScrollPhysics(),
-      controller: _controller,
-      focusNode: _focusNode,
-      autofocus: false,
-    );
-    final form =
-    Column(
-      children: <Widget>[
-        isUploading ? linearProgress() : Text(""),
-        carousel(),
-        SizedBox(height:20),
-        TextFormField(controller: titleController,
-            keyboardType: TextInputType.multiline,
-            maxLines: null,
-            decoration: InputDecoration(labelText: 'Title of the blog',
-                fillColor: transwhite,
-                border:OutlineInputBorder(borderRadius: BorderRadius.circular(25.0),))),
-        ZefyrToolbar.basic(controller: _controller),
-        editor,
-        SizedBox(height:20),
 
-        // TextField(controller: sourceController,
-        //     keyboardType: TextInputType.multiline,
-        //     maxLines: null,
-        //     decoration: InputDecoration(labelText: 'source',        fillColor: transwhite,
-        //         border:OutlineInputBorder(borderRadius: BorderRadius.circular(25.0),))),
-      ],
-    );
     return
 
       WillPopScope(
@@ -722,7 +721,7 @@ Navigator.of(context).pop(true);
   @override
   Widget build(BuildContext context) {
 
-    return images == null ? buildSplashScreen() : builduploadForm();
+    return images.isEmpty ? buildSplashScreen() : builduploadForm();
   }
 /// Loads the document to be edited in Zefyr.
 }

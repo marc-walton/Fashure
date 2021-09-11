@@ -329,8 +329,9 @@ TabController _tabController;
         FloatingActionButton(
           heroTag:'upload',
           backgroundColor: Colors.black38,
-          onPressed: () async{ Navigator.push(context, MaterialPageRoute(builder: (context) =>ShipEngine()));
-// Add your onPressed code here!
+          onPressed: () async{
+            //Navigator.push(context, MaterialPageRoute(builder: (context) =>ShipEngine()));
+            Navigator.push(context, MaterialPageRoute(builder: (context) =>Upload(currentUser: currentUser)));
           },
           child: Icon(Icons.add_a_photo),
         );}
@@ -340,7 +341,8 @@ TabController _tabController;
 
           backgroundColor: Colors.black38,
           onPressed: ()
-          async{ Navigator.push(context, MaterialPageRoute(builder: (context) =>UploadColl(currentUser: currentUser)));
+          async{
+            Navigator.push(context, MaterialPageRoute(builder: (context) =>UploadColl(currentUser: currentUser)));
           },
           child: Icon(Icons.add_box),
         );}
