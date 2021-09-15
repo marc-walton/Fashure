@@ -37,10 +37,7 @@ class BlogScreen extends StatelessWidget {
                   style: TextStyle(color: Colors.white),
                 ),
               ),),
-            body: Container( decoration: BoxDecoration(
-                gradient: fabGradient
-            ) ,
-              alignment: Alignment.center,
+            body: Container(
               child: ListView(
                 children: <Widget>[
 

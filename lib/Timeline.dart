@@ -447,7 +447,7 @@ class Collection extends StatelessWidget {
           },
         );
       },
-      query:  collRef.orderBy('timestamp',descending: true),
+      query:  FirebaseFirestore.instance.collectionGroup('userCollections').orderBy('timestamp',descending: true),
 
     );
 

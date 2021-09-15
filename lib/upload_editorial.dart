@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 import 'dart:async';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 
@@ -72,27 +73,18 @@ class _UploadEditState extends State<UploadEdit>
   void initState() {
     super.initState();
     _focusNode = FocusNode();
-    _loadDocument().then((document) {
-      setState(() {
-        _controller = ZefyrController(document);
-      });
-    });
+    _loadFromAssets();
     blogRef
         .doc(widget.currentUser.id)
         .collection("userBlog")
         .doc(blogId)
         .set({});
   }
-  Future<NotusDocument> _loadDocument() async {
-    final file = File(Directory.systemTemp.path + '/quick_start.json');
-    if (await file.exists()) {
-      final contents = await file
-          .readAsString()
-          .then((data) => Future.delayed(Duration(seconds: 1), () => data));
-      return NotusDocument.fromJson(jsonDecode(contents));
-    }
-    final delta = Delta()..insert('');
-    return NotusDocument()..compose(delta, ChangeSource.local);
+  Future<void> _loadFromAssets() async {
+    final doc = NotusDocument()..insert(0, '');
+    setState(() {
+      _controller = ZefyrController(doc);
+    });
   }
 
   Future<void> loadAssets() async {
@@ -205,45 +197,14 @@ class _UploadEditState extends State<UploadEdit>
   }
 
   page0(){
-    final editor = ZefyrEditor(
-      maxHeight:400,
-      scrollPhysics: ClampingScrollPhysics(),
-      controller: _controller,
-      focusNode: _focusNode,
-      autofocus: false,
-    );
-    final form =
-    Column(
-      children: <Widget>[
-        carousel(),
-        SizedBox(height:20),
-        TextFormField(controller: titleController,
-            keyboardType: TextInputType.multiline,
-            maxLines: null,
-            decoration: InputDecoration(labelText: 'Title of the blog',
-                fillColor: transwhite,
-                border:OutlineInputBorder(borderRadius: BorderRadius.circular(25.0),))),
-        ZefyrToolbar.basic(controller: _controller),
-        editor,
 
-        SizedBox(height:20),
-
-        // TextField(controller: sourceController,
-        //     keyboardType: TextInputType.multiline,
-        //     maxLines: null,
-        //     decoration: InputDecoration(labelText: 'source',        fillColor: transwhite,
-        //         border:OutlineInputBorder(borderRadius: BorderRadius.circular(25.0),))),
-      ],
-    );
     return
       SingleChildScrollView(
         reverse: true,
-
-
         child: Column(
           children: [
             Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding: const EdgeInsets.only(left: 8.0,right: 8.0),
               child:      Column(
                 children: <Widget>[
                   carousel(),
@@ -256,20 +217,15 @@ class _UploadEditState extends State<UploadEdit>
                           border:OutlineInputBorder(borderRadius: BorderRadius.circular(25.0),))),
                   ZefyrToolbar.basic(controller: _controller),
                   ZefyrEditor(
-                    maxHeight:400,
+                    maxHeight: 900,
                     scrollPhysics: ClampingScrollPhysics(),
                     controller: _controller,
                     focusNode: _focusNode,
                     autofocus: false,
-                  ),
+                     ),
 
                   SizedBox(height:20),
 
-                  // TextField(controller: sourceController,
-                  //     keyboardType: TextInputType.multiline,
-                  //     maxLines: null,
-                  //     decoration: InputDecoration(labelText: 'source',        fillColor: transwhite,
-                  //         border:OutlineInputBorder(borderRadius: BorderRadius.circular(25.0),))),
                 ],
               ),
             ),
@@ -279,6 +235,9 @@ class _UploadEditState extends State<UploadEdit>
                 InkWell(
                   onTap: (){
 
+                    titleController.text == '' ||       _controller.document == "" ?
+                    Fluttertoast.showToast(
+                        msg: "Fill the required fields", timeInSecForIos: 4):
                     pageController.animateToPage(++pageChanged, duration: Duration(milliseconds: 250), curve: Curves.bounceInOut);
 
                   },
@@ -492,7 +451,7 @@ class _UploadEditState extends State<UploadEdit>
     return
       CarouselSlider(
           options: CarouselOptions(
-            height:400,
+            height:500,
             enableInfiniteScroll: false,
           ),
           items: images.map((e) => Container(
@@ -502,7 +461,7 @@ class _UploadEditState extends State<UploadEdit>
               child: AssetThumb(
                 asset: e,
                 width: 500,
-                height: 500,
+                height: 400,
               ),
             ),
           ), ).toList()

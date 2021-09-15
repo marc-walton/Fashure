@@ -4,6 +4,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:fashow/Blogcomments.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:fashow/Product_screen.dart';
 import 'package:fashow/size_config.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
@@ -16,8 +17,14 @@ import 'package:fashow/ActivityFeed.dart';
 import 'package:fashow/custom_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:intl/intl.dart';
+import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
+import 'package:multi_image_picker/multi_image_picker.dart';
 import 'package:photo_view/photo_view.dart';
+import 'package:sticky_headers/sticky_headers/widget.dart';
 import 'package:zefyrka/zefyrka.dart';
+
+import 'chatcached_image.dart';
 //import 'package:zefyr/zefyr.dart';
 
 
@@ -85,6 +92,8 @@ pics({String userid,String prodid,parentContext}){
                               .of(context)
                               .size
                               .width,
+                          height: MediaQuery.of(context).size.height * 0.4,
+
                           child:
                           CarouselSlider(
 
@@ -219,6 +228,8 @@ class _BlogState extends State<Blog> {
   Map likes;
   bool isLiked;
   bool showHeart = false;
+   bool tags = false;
+
   ZefyrController _controller;
   //ZefyrImageDelegate _imageDelegate;
   /// Zefyr editor like any other input field requires a focus node.
@@ -242,6 +253,29 @@ class _BlogState extends State<Blog> {
     _loadFromAssets();
   }
 
+  carousel(){
+
+    return
+      CarouselSlider(
+          options: CarouselOptions(
+            height:500,
+            enableInfiniteScroll: false,
+          ),
+          items: blogmediaUrl.map((e) => Container(
+
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: AssetThumb(
+                asset: e,
+                width: 500,
+                height: 400,
+              ),
+            ),
+          ), ).toList()
+
+      );
+
+  }
 
 
   handleDeletePost(BuildContext parentContext) {
@@ -392,7 +426,111 @@ class _BlogState extends State<Blog> {
     }
   }
   // final defaultStyle = DefaultTextStyle.of(context);
+  void addProduct() {
+    setState(() {
+      tags = !tags;
+    });
+  }
+  tagView(){
+    return
+      StreamBuilder(
+        stream:  blogRef
+            .doc(ownerId)
+            .collection("userBlog")
+        .doc(blogId)
+            .collection("tags")
+            .orderBy('timestamp',descending: true).snapshots(),
+        builder: (context, snapshot) {
+          if (!snapshot.hasData) {
+            return Container();
+          } else {
+            return new ListView.builder(
+                scrollDirection :Axis.horizontal,
+                itemCount: snapshot.data.docs.length,
+                itemBuilder: (context, index) {
+                  DocumentSnapshot ds = snapshot.data.docs[index];
+                  return TagItem(
+                    Id: ds['prodId'],
+                    ownerId: ds['ownerId'],
+                    name: ds['name'],
+                    usd: ds['usd'],
+                    image: ds['image'],
+                    prodId: blogId,
 
+                  );
+                }
+            );
+          }
+        },
+      );
+
+  }
+viewProducts(){
+return  showMaterialModalBottomSheet(
+      context: context,
+      builder: (BuildContext context)
+      {
+        SizeConfig().init(context);
+
+        return
+          Container(      height: MediaQuery.of(context).size.height/2 -30,child:tagView(),);
+      });
+}
+  Widget adddProduct(){
+    return Container(
+      alignment: Alignment.bottomRight,
+      child: Container(
+        height: 2*MediaQuery.of(context).size.height/3,
+        width: MediaQuery.of(context).size.width,
+        decoration: new BoxDecoration(
+          borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(25),
+              topRight: Radius.circular(25)
+          ),
+        ),
+        child:  Stack(
+            children: <Widget>[
+              Container(
+                height: 2*MediaQuery.of(context).size.height/3 -50,
+                child: Column(
+                  children: <Widget>[
+                    SizedBox(height: 10,),
+
+                    Container(      height: MediaQuery.of(context).size.height/2 -30,child:tagView(),),
+                  ],
+                ),
+              ),
+              Align(
+                alignment: Alignment.bottomCenter,
+                child: GestureDetector(
+                  onTap: (){
+                    setState(() {
+                      tags= !tags;
+                    });
+                  },
+                  child: Container(
+                    color: Colors.grey[850],
+                    alignment: Alignment.bottomCenter,
+                    height: 50,
+                    child: Stack(
+                      children: <Widget>[
+                        Container(
+                            height: double.maxFinite,
+                            alignment: Alignment.center ,
+                            child: Text('Close',style: TextStyle(fontWeight: FontWeight.bold,color: Colors.white),)),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+
+            ],
+          ),
+        ),
+
+    );
+
+  }
   report(){
     Fluttertoast.showToast(
         msg: "Your report has been submitted", timeInSecForIos: 4);
@@ -425,7 +563,7 @@ class _BlogState extends State<Blog> {
     bool isPostOwner = currentUserId == ownerId;
 
 
-    return  Column(children: <Widget>[
+    return   Column(children: <Widget>[
       GestureDetector(
         onTap: () => showProfile(context, profileId: ownerId),
         child:    ListTileTheme(
@@ -490,11 +628,40 @@ class _BlogState extends State<Blog> {
           borderRadius: BorderRadius.only
             (bottomLeft: Radius.circular(20.0),bottomRight: Radius.circular(20.0)),
           child: Container(
-            //  height: MediaQuery.of(context).size.height * 0.65,
+              height: MediaQuery.of(context).size.height * 0.4,
 
               width:     MediaQuery.of(context).size.width,
-              child: pics(userid:ownerId,prodid:blogId))),
-
+              child: pics(userid:ownerId,prodid:blogId,))),
+      FutureBuilder(
+        future:  blogRef
+            .doc(ownerId)
+            .collection("userBlog")
+            .doc(blogId)
+            .collection("tags")
+            .orderBy('timestamp',descending: true).get(),
+        builder: (context, snapshot) {
+          if (!snapshot.hasData) {
+            return Container();
+          } else {
+            return new                 Padding(
+              padding: const EdgeInsets.fromLTRB(4.0, 0, 0, 0),
+              child: MaterialButton(
+                minWidth: 0,
+                onPressed: viewProducts,
+                child: Icon(
+                  Icons.add_shopping_cart,
+                  color: Colors.white,
+                  size: 20.0,
+                ),
+                shape: CircleBorder(),
+                elevation: 2.0,
+                color:Colors.blue[400] ,
+                padding: const EdgeInsets.all(12.0),
+              ),
+            );
+          }
+        },
+      ),
       SizedBox(height:10.0),
       ListTile(
         title: Text(title,
@@ -508,13 +675,13 @@ class _BlogState extends State<Blog> {
 
 
       Container(
-      child: ZefyrEditor(
+          child: ZefyrEditor(
 
-        controller: _controller,
-        focusNode: _focusNode,
-        autofocus: false,
-readOnly: true,
-       )
+            controller: _controller,
+            focusNode: _focusNode,
+            autofocus: false,
+            readOnly: true,
+          )
       ),
 //            Divider(color: kGrey,),
       Row(
@@ -597,4 +764,59 @@ showComments(BuildContext context,
      blogMediaUrl: mediaUrl,
     );
   }));
+}
+class TagItem extends StatelessWidget {
+  final String ownerId ;
+  final String prodId ;
+
+  final String Id ;
+  final String image ;
+  final String name;
+  final usd ;
+  var currencyFormatter = NumberFormat('#,##0.00', );
+
+  TagItem({this.ownerId,this.prodId,this.Id,this.image,this.name,this.usd});
+
+  @override
+  Widget build(BuildContext context) {
+    return Stack(
+        children:[
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(children:[
+              Container(
+                height: MediaQuery.of(context).size.height/3 * 1.2,
+                child: InkWell(
+                  onTap: () => Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => ProductScreen(
+                        prodId: Id,
+                        userId: ownerId,
+                      ),
+                    ),
+                  ),
+                  child: ClipRRect(
+                      borderRadius: BorderRadius.circular(20.0),
+                      child: CachedImage(image)),
+                ),
+              ),
+              Row(
+                children: [
+                  Text(name,
+                      style: TextStyle(color: kText,
+                          fontWeight: FontWeight.bold))
+                ],
+              ),
+              Row(
+                children: [
+                  Text("\u0024 ${currencyFormatter.format(usd)}",),
+                ],
+              ),
+
+            ]),
+          ),
+        ]
+    );
+  }
 }

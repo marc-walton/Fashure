@@ -1076,15 +1076,7 @@ class TagItem extends StatelessWidget {
 
   TagItem({this.ownerId,this.prodId,this.Id,this.image,this.name,this.usd});
 
-  delete(){
-    var  docReference = FirebaseFirestore.instance
-        .collection('liveuser')
-        .doc(prodId)
-        .collection('tags')
-        .doc(Id);
-    docReference.delete();
 
-  }
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -1124,16 +1116,6 @@ class TagItem extends StatelessWidget {
               ),
 
             ]),
-          ),
-          Positioned(
-            top: 10.0,
-            right: 10.0,
-            child: FloatingActionButton(
-              mini: true,
-              backgroundColor:kText.withOpacity(0.5),
-              onPressed: delete,
-              child: Icon(Icons.delete,color: Colors.red,),
-            ),
           ),
         ]
     );
