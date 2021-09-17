@@ -33,7 +33,9 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter_currencies_tracker/flutter_currencies_tracker.dart';
 import 'package:flutter_animated_button/flutter_animated_button.dart';
 import 'package:fashow/methods/dynamic_links_service.dart';
-
+import 'package:getwidget/components/button/gf_button.dart';
+import 'package:getwidget/shape/gf_button_shape.dart';
+import 'package:getwidget/types/gf_button_type.dart';
 
 class Prod extends StatefulWidget {
   final String prodId;
@@ -997,7 +999,8 @@ bool isUploading = false;
 var e;
   TextEditingController mtoController = TextEditingController();
   List <Widget>listOfImages = <Widget>[];
-
+  int _current = 0;
+  final CarouselController _ccontroller = CarouselController();
   _ProdState({
     this.prodId,
     this.ownerId,
@@ -8833,102 +8836,130 @@ posteurope(){
                     ),
                   ),
                 ),
-                Positioned.fill(
-                  child: Align(
-                    alignment: Alignment.bottomCenter,
-                    child:           FutureBuilder(
-                        future:FirebaseFirestore.instance.collection("products").doc(ownerId).collection("userProducts").doc(prodId)
-                            .collection("tags").get(),
-                        builder: (context, snapshot) {
 
-                          if (!snapshot.hasData || snapshot.data.docs.isEmpty){
-                            return
-                              Text("snapshot.data[]");
-                          }
-                          else{
-                            return
+              ],
+            ),
+          ),
 
-                              GestureDetector(
-                                onTap: () =>   showModalBottomSheet(
-                                    context: context,
-                                    elevation: 0,
-                                    builder: (context) {
-                                      return PaginateFirestore(
-                                        emptyDisplay: Center(child: Text("Nothing found",style: TextStyle(
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 25.0,
-                                        ),)),
-                                        itemBuilderType:
-                                        PaginateBuilderType.listView,
-                                        itemBuilder: (index, context, documentSnapshot)    {
-                                          String ownerId = documentSnapshot.data()['ownerId'];
-                                          String prodId = documentSnapshot.data()['prodId'];
-  String image = documentSnapshot.data()['image'];
-  String name = documentSnapshot.data()['name'];
- var usd = documentSnapshot.data()['usd'];
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: shopmediaUrl.asMap().entries.map((entry) {
+              return GestureDetector(
+                onTap: () => _ccontroller.animateToPage(entry.key),
+                child: Container(
+                  width: 6.0,
+                  height: 6.0,
+                  margin: EdgeInsets.symmetric(vertical: 8.0, horizontal: 4.0),
+                  decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: (Theme.of(context).brightness == Brightness.dark
+                          ? Colors.white
+                          : Colors.black)
+                          .withOpacity(_current == entry.key ? 0.9 : 0.4)),
+                ),
+              );
+            }).toList(),
+          ),
+          FutureBuilder(
+              future:FirebaseFirestore.instance.collection("products").doc(ownerId).collection("userProducts").doc(prodId)
+                  .collection("tags").get(),
+              builder: (context, snapshot) {
 
-                                          return
+                if (!snapshot.hasData || snapshot.data.docs.isEmpty){
+                  return
+                    Text("");
+                }
+                else{
+                  return
 
-                                                GestureDetector(
-                                                  onTap: () => Navigator.push(
-                                                    context,
-                                                    MaterialPageRoute(
-                                                      builder: (context) => ProductScreen(
-                                                        prodId: prodId,
-                                                        userId: ownerId,
-                                                      ),
-                                                    ),
-                                                  ),
-                                                  child:Padding(
-                                                    padding: const EdgeInsets.all(8.0),
-                                                    child: Column(children:[
-                                                    ClipRRect(
-                                                    borderRadius: BorderRadius.circular(20.0),
-                                                      child: CachedImage(image)),
-                                                Row(
-                                                  children: [
-                                                    Text(name,
+                    GestureDetector(
+                      onTap: () =>   showModalBottomSheet(
+                          context: context,
+                          elevation: 0,
+                          builder: (context) {
+                            return PaginateFirestore(
+                                emptyDisplay: Center(child: Text("Nothing found",style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 25.0,
+                                ),)),
+                                itemBuilderType:
+                                PaginateBuilderType.listView,
+                                itemBuilder: (index, context, documentSnapshot)    {
+                                  String ownerId = documentSnapshot.data()['ownerId'];
+                                  String prodId = documentSnapshot.data()['prodId'];
+                                  String image = documentSnapshot.data()['image'];
+                                  String name = documentSnapshot.data()['name'];
+                                  var usd = documentSnapshot.data()['usd'];
+
+                                  return
+
+                                    GestureDetector(
+                                        onTap: () => Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) => ProductScreen(
+                                              prodId: prodId,
+                                              userId: ownerId,
+                                            ),
+                                          ),
+                                        ),
+                                        child:Padding(
+                                          padding: const EdgeInsets.all(8.0),
+                                          child: Column(children:[
+                                            ClipRRect(
+                                                borderRadius: BorderRadius.circular(20.0),
+                                                child: CachedImage(image)),
+                                            Row(
+                                              children: [
+                                                Text(name,
                                                     style: TextStyle(color: kText,
                                                         fontSize: SizeConfig.safeBlockHorizontal * 4,
                                                         fontWeight: FontWeight.bold))
-                                                  ],
-                                                ),
-                                                Row(
-                                                  children: [
-                                                    Text("\u0024 ${currencyFormatter.format(usd)}",),
-                                                  ],
-                                                ),
+                                              ],
+                                            ),
+                                            Row(
+                                              children: [
+                                                Text("\u0024 ${currencyFormatter.format(usd)}",),
+                                              ],
+                                            ),
 
-                                              ]),
-                                          ));
+                                          ]),
+                                        ));
 
 
-                                        },
-                                        query: FirebaseFirestore.instance.collection("products").doc(ownerId).collection("userProducts").doc(prodId)
-                                            .collection("tags")
-                                            .orderBy('timestamp',descending: true)
+                                },
+                                query: FirebaseFirestore.instance.collection("products").doc(ownerId).collection("userProducts").doc(prodId)
+                                    .collection("tags")
+                                    .orderBy('timestamp',descending: true)
 
-                                      );
-                                    }),
+                            );
+                          }),
 
-                                child: Container(
-                                  color:trans,
-                                  child:  ListTile(
-                                    leading:Icon(Icons.shopping_bag),
-                                    title:Text("shop",style:TextStyle(color:Colors.white))
-                                  )
-                                ),
-                              );
-                          }
+                      child: Row(
+                        children: [
+                          SizedBox(width:12.0),
 
-                        }
+                          GFButton(
+                            color: Colors.black,
+                            shape:  GFButtonShape.pills,
+                            textColor: Colors.black,
+                            type : GFButtonType.outline,
+                            onPressed: null,
+                            text:"View other Products",
+                            icon: Icon(
+                              Icons.add_shopping_cart,
+                              // color: Colors.white,
+                              size: 20.0,
+                            ),
 
-                    ),
+                          ),
+                        ],
+                      ),
+                    );
+                }
 
-                  ),
-                ),
-              ],
-            ),
+              }
+
           ),
           GestureDetector(
             onTap: () => showProfile(context, profileId: ownerId),

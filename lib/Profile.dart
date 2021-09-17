@@ -239,7 +239,7 @@ return
             child: Padding(
               padding: EdgeInsets.only(top: 150.0, left: 110),
               child: Text(
-                "No Posts",
+                "No Collections",
                 style: TextStyle(
                   color: Colors.redAccent,
                   fontSize: 40.0,
@@ -352,6 +352,7 @@ return
                 itemCount: snapshot.data.docs.length,
                 itemBuilder: (context, index) {
                   DocumentSnapshot docSnapshot = snapshot.data.docs[index];
+                  List IM = docSnapshot["blogmediaUrl"];
                   return
 
                     Padding(
@@ -386,7 +387,7 @@ return
                                         .width,
                                     child:
                                     CachedNetworkImage(
-                                      imageUrl: docSnapshot["blogmediaUrl"],)
+                                      imageUrl: IM.first,)
                                   // Carousel(
                                   //
                                   //     boxFit: BoxFit.cover,

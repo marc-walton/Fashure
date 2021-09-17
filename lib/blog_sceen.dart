@@ -39,6 +39,7 @@ class BlogScreen extends StatelessWidget {
               ),),
             body: Container(
               child: ListView(
+                padding: EdgeInsets.all(0),
                 children: <Widget>[
 
                   Container(

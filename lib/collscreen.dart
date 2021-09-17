@@ -30,7 +30,7 @@ class CollScreen extends StatelessWidget {
 
             appBar: AppBar(
 
-              backgroundColor: appbar,
+              backgroundColor: kPrimaryColor,
 
               title: FittedBox(
                 fit: BoxFit.contain,
@@ -40,10 +40,7 @@ class CollScreen extends StatelessWidget {
                 ),
               ),),
             body: Container(
-              decoration: BoxDecoration(
-                  gradient: fabGradient
-              ) ,
-              alignment: Alignment.center,
+
               child: ListView(
                 children: <Widget>[
 

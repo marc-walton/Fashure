@@ -1,3 +1,5 @@
+import 'package:fashow/chatcached_image.dart';
+import 'package:fashow/size_config.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
@@ -16,6 +18,11 @@ import 'package:fashow/custom_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:fashow/Product_screen.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:getwidget/components/button/gf_button.dart';
+import 'package:getwidget/shape/gf_button_shape.dart';
+import 'package:getwidget/types/gf_button_type.dart';
+import 'package:intl/intl.dart';
+import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:photo_view/photo_view.dart';
 List <Widget>listOfImages = <Widget>[];
 class Coll extends StatefulWidget {
@@ -98,6 +105,9 @@ class _CollState extends State<Coll> {
   Map likes;
   bool isLiked;
   var images =[];
+  int _current = 0;
+  final CarouselController _ccontroller = CarouselController();
+
   bool showHeart = false;
   _CollState({
     this.collId,
@@ -341,13 +351,18 @@ return
                           CarouselSlider(
                               items: listOfImages,
                               options: CarouselOptions(
+                                onPageChanged: (index, reason) {
+                                  setState(() {
+                                    _current = index;
+                                  });
+                                },
                                 height: 400,
                                 aspectRatio: 16/9,
                                 viewportFraction: 0.8,
                                 initialPage: 0,
-                                enableInfiniteScroll: true,
+                                enableInfiniteScroll: false,
                                 reverse: false,
-                                autoPlay: true,
+                                autoPlay: false,
                                 autoPlayInterval: Duration(seconds: 3),
                                 autoPlayAnimationDuration: Duration(milliseconds: 800),
                                 autoPlayCurve: Curves.fastOutSlowIn,
@@ -370,6 +385,51 @@ return
           });
 
 }
+  tagView(){
+    return
+      StreamBuilder(
+        stream:  collRef
+            .doc(ownerId)
+            .collection("userCollections")
+            .doc(collId)
+            .collection("tags")
+            .orderBy('timestamp',descending: true).snapshots(),
+        builder: (context, snapshot) {
+          if (!snapshot.hasData) {
+            return Container();
+          } else {
+            return new ListView.builder(
+                scrollDirection :Axis.horizontal,
+                itemCount: snapshot.data.docs.length,
+                itemBuilder: (context, index) {
+                  DocumentSnapshot ds = snapshot.data.docs[index];
+                  return TagItem(
+                    Id: ds['prodId'],
+                    ownerId: ds['ownerId'],
+                    name: ds['name'],
+                    usd: ds['usd'],
+                    image: ds['image'],
+                    prodId: collId,
+
+                  );
+                }
+            );
+          }
+        },
+      );
+
+  }
+  viewProducts(){
+    return  showMaterialModalBottomSheet(
+        context: context,
+        builder: (BuildContext context)
+        {
+          SizeConfig().init(context);
+
+          return
+            Container(   color:trans,    height: MediaQuery.of(context).size.height/2 -30,child:tagView(),);
+        });
+  }
 buildPostHeader() {
 
     return
@@ -456,6 +516,59 @@ scrollDirection:Axis.vertical,
     ),
 
         pics()  ,
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: collmediaUrl.asMap().entries.map((entry) {
+            return GestureDetector(
+              onTap: () => _ccontroller.animateToPage(entry.key),
+              child: Container(
+                width: 6.0,
+                height: 6.0,
+                margin: EdgeInsets.symmetric(vertical: 8.0, horizontal: 4.0),
+                decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: (Theme.of(context).brightness == Brightness.dark
+                        ? Colors.white
+                        : Colors.black)
+                        .withOpacity(_current == entry.key ? 0.9 : 0.4)),
+              ),
+            );
+          }).toList(),
+        ),
+        FutureBuilder(
+          future:  collRef
+              .doc(ownerId)
+              .collection("userCollections")
+              .doc(collId)
+              .collection("tags")
+              .orderBy('timestamp',descending: true).get(),
+          builder: (context, snapshot) {
+            if (!snapshot.hasData) {
+              return Container();
+            }
+            else {
+              return  Row(
+                children: [
+                  SizedBox(width:12.0),
+                  GFButton(
+                    color: Colors.black,
+                    shape:  GFButtonShape.pills,
+                    textColor: Colors.black,
+                    type : GFButtonType.outline,
+                    onPressed: viewProducts,
+                    text:"View Products",
+                    icon: Icon(
+                      Icons.add_shopping_cart,
+                      // color: Colors.white,
+                      size: 20.0,
+                    ),
+
+                  ),
+                ],
+              );
+            }
+          },
+        ),
         ListTile(
           leading: Text(source,
             style: TextStyle(
@@ -465,11 +578,13 @@ scrollDirection:Axis.vertical,
         ),
 
     Row(
+
     mainAxisAlignment: MainAxisAlignment.start,
     children: <Widget>[
     Padding(padding: EdgeInsets.only(top: 40.0, left: 20.0)),
     FloatingActionButton(
       heroTag: 'cfg',
+      backgroundColor: Colors.white,
 
       mini: true,
     shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(16.0))),
@@ -495,6 +610,7 @@ scrollDirection:Axis.vertical,
     Padding(padding: EdgeInsets.only(right: 20.0)),
       FloatingActionButton(
         heroTag: null,
+        backgroundColor: Colors.white,
 
         mini: true,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(16.0))),
@@ -542,4 +658,59 @@ showComments(BuildContext context,
      blogMediaUrl: mediaUrl,
     );
   }));
+}
+class TagItem extends StatelessWidget {
+  final String ownerId ;
+  final String prodId ;
+
+  final String Id ;
+  final String image ;
+  final String name;
+  final usd ;
+  var currencyFormatter = NumberFormat('#,##0.00', );
+
+  TagItem({this.ownerId,this.prodId,this.Id,this.image,this.name,this.usd});
+
+  @override
+  Widget build(BuildContext context) {
+    return Stack(
+        children:[
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(children:[
+              Container(
+                height: MediaQuery.of(context).size.height/3 * 1.2,
+                child: InkWell(
+                  onTap: () => Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => ProductScreen(
+                        prodId: Id,
+                        userId: ownerId,
+                      ),
+                    ),
+                  ),
+                  child: ClipRRect(
+                      borderRadius: BorderRadius.circular(20.0),
+                      child: CachedImage(image)),
+                ),
+              ),
+              Row(
+                children: [
+                  Text(name,
+                      style: TextStyle(color: kText,
+                          fontWeight: FontWeight.bold))
+                ],
+              ),
+              Row(
+                children: [
+                  Text("\u0024 ${currencyFormatter.format(usd)}",),
+                ],
+              ),
+
+            ]),
+          ),
+        ]
+    );
+  }
 }

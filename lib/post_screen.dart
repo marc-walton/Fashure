@@ -40,10 +40,7 @@ class PostScreen extends StatelessWidget {
             body: ListView(
               children: <Widget>[
                  Container(
-                   decoration: BoxDecoration(
-                       gradient: fabGradient
-                   ) ,
-                   alignment: Alignment.center,                    child: post,
+                                  child: post,
                   ),
               ],
             ),

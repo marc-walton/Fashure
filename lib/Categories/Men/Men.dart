@@ -202,7 +202,6 @@ All(){
         CItem searchResult = CItem(prod);
         searchResults.add(searchResult);
 
-        print(priceQuery);
         return
           Padding(
             padding: const EdgeInsets.all(8.0),

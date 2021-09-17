@@ -303,22 +303,14 @@ TabController _tabController;
 
       body:
       Container(
-        decoration: BoxDecoration(
-            gradient: fabGradient
-        ) ,
-        alignment: Alignment.center,
-        child:     BackdropFilter(
-          filter:
-          new ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0),
+        color: Colors.grey.shade200,
+        child:     RefreshIndicator(
+                onRefresh: () => getTimeline(), child: TabBarView(controller: _tabController, children: [
+          buildTimeline(),
+          Collection(),
+          Blog(),
 
-          child: RefreshIndicator(
-                  onRefresh: () => getTimeline(), child: TabBarView(controller: _tabController, children: [
-            buildTimeline(),
-            Collection(),
-            Blog(),
-
-          ]),
-          ),
+        ]),
         ),
       ),
             floatingActionButton: _bottomButtons()
@@ -374,6 +366,7 @@ class Collection extends StatelessWidget {
       itemBuilderType:
       PaginateBuilderType.listView,
       itemBuilder: (index, context, documentSnapshot)  {
+      List images =   documentSnapshot.data()['collmediaUrl'];
         return new  FutureBuilder(
           future: usersRef.doc( documentSnapshot.data()['ownerId']).get(),
           builder: (context, snapshot) {
@@ -382,68 +375,74 @@ class Collection extends StatelessWidget {
             }
              Users user = Users.fromDocument(snapshot.data);
 //          bool isPostOwner = currentUserId == ownerId;
-            return Column(children: <Widget>[
-              ListTile(
-                leading: GestureDetector(
-                  onTap: () => showProfile(context, profileId: user.id),
-                  child: CircleAvatar(
-                    backgroundImage: CachedNetworkImageProvider(user.photoUrl),
-                    backgroundColor: Colors.grey,
-                  ),
-                ),
-                title: GestureDetector(
-                  onTap: () => showProfile(context, profileId: user.id),
-                  child: Text(
-                    user.displayName,
-                    style: TextStyle(
-                      color: kText,
-                      fontWeight: FontWeight.bold,
+            return Padding(
+                padding: const EdgeInsets.all(8.0),
+
+                child:  ClipRRect(
+                  borderRadius: BorderRadius.circular(20.0),
+                  child: Card(
+
+              child: Column(children: <Widget>[
+                  ListTile(
+                    leading: GestureDetector(
+                      onTap: () => showProfile(context, profileId: user.id),
+                      child: CircleAvatar(
+                        backgroundImage: CachedNetworkImageProvider(user.photoUrl),
+                        backgroundColor: Colors.grey,
+                      ),
                     ),
-                  ),
-                ),
-               ),
-              ListTile(
-                title: Text(documentSnapshot.data()['title'],
-                    maxLines: 3,
-                    style: new TextStyle(
-                        fontWeight: FontWeight.w500,
-                        color:kText,
-                        fontSize: 18.0)),
-              ),
-              Column(
-                children: <Widget>[
-                  GestureDetector(
-                    onTap:() {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => CollScreen(
-                            collId: documentSnapshot.data()['collId'],
-                            userId:  documentSnapshot.data()['ownerId'],
-                          ),
+                    title: GestureDetector(
+                      onTap: () => showProfile(context, profileId: user.id),
+                      child: Text(
+                        user.displayName,
+                        style: TextStyle(
+                          color: kText,
+                          fontWeight: FontWeight.bold,
                         ),
-                      );
-                    },
-                    child: Container(
-                        margin: EdgeInsets.all(10.0),
-                        height: MediaQuery.of(context).size.height/2,
-                        // decoration: BoxDecoration(
-                        //   color: Colors.white,
-                        // ),
-                        width: MediaQuery.of(context).size.width,
-                        child:
-                        CachedNetworkImage(
-                          imageUrl:  documentSnapshot.data()['headerImage'],
-                        )
+                      ),
                     ),
+                   ),
+                  ListTile(
+                    title: Text(documentSnapshot.data()['title'],
+                        maxLines: 3,
+                        style: new TextStyle(
+                            fontWeight: FontWeight.w500,
+                            color:kText,
+                            fontSize: 18.0)),
                   ),
-                  Divider(color:kGrey),
-                ],
+                  Column(
+                    children: <Widget>[
+                      GestureDetector(
+                        onTap:() {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => CollScreen(
+                                collId: documentSnapshot.data()['collId'],
+                                userId:  documentSnapshot.data()['ownerId'],
+                              ),
+                            ),
+                          );
+                        },
+                        child: Container(
+                            // decoration: BoxDecoration(
+                            //   color: Colors.white,
+                            // ),
+                            width: MediaQuery.of(context).size.width,
+                            child:
+                            CachedNetworkImage(
+                              imageUrl: images.first,
+                            )
+                        ),
+                      ),
+                    ],
+                  ),
+
+              ],
+
               ),
-
-            ],
-
-            );
+            ),
+                ));
           },
         );
       },
@@ -462,71 +461,73 @@ class Blog extends StatelessWidget {
         PaginateBuilderType.listView, //Change types accordingly
         itemBuilder: (index, context, documentSnapshot) {
           List<dynamic> blogMedia =  documentSnapshot.data()['blogmediaUrl'];
-          return     Column(children: <Widget>[
-          GestureDetector(                      onTap: () => showProfile(context, profileId: documentSnapshot.data()['ownerId']),
+          return     Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(20.0),
+              child: Card(
+              child: Column(children: <Widget>[
+              GestureDetector(                      onTap: () => showProfile(context, profileId: documentSnapshot.data()['ownerId']),
 
-            child: ListTile(
-              leading: GestureDetector(
-                onTap: () => showProfile(context, profileId: documentSnapshot.data()['ownerId']),
-                child: CircleAvatar(
-                  backgroundImage: CachedNetworkImageProvider(documentSnapshot.data()['photoUrl']),
-                  backgroundColor: Colors.grey,
-                ),
-              ),
-              title: GestureDetector(
-                onTap: () => showProfile(context, profileId: documentSnapshot.data()['ownerId']),
-                child: Text(
-                  documentSnapshot.data()['username'],
-                  style: TextStyle(
-                    color: kText,
-                    fontWeight: FontWeight.bold,
+                child: ListTile(
+                  leading: GestureDetector(
+                    onTap: () => showProfile(context, profileId: documentSnapshot.data()['ownerId']),
+                    child: CircleAvatar(
+                      backgroundImage: CachedNetworkImageProvider(documentSnapshot.data()['photoUrl']),
+                      backgroundColor: Colors.grey,
+                    ),
                   ),
-                ),
-              ),
-            ),
-          ),
-          ListTile(
-
-            title: Text(documentSnapshot.data()['title'],
-                maxLines: 3,
-                style: new TextStyle(
-                    fontWeight: FontWeight.w500,
-                    color: kText,
-                    fontSize: 18.0)),
-          ),
-          Column(
-            children: <Widget>[
-              GestureDetector(
-                onTap:() {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => BlogScreen(
-                        blogId: documentSnapshot.data()['blogId'],
-                        userId:  documentSnapshot.data()['ownerId'],
+                  title: GestureDetector(
+                    onTap: () => showProfile(context, profileId: documentSnapshot.data()['ownerId']),
+                    child: Text(
+                      documentSnapshot.data()['username'],
+                      style: TextStyle(
+                        color: kText,
+                        fontWeight: FontWeight.bold,
                       ),
                     ),
-                  );
-                },
-                child: Container(
-                  margin: EdgeInsets.all(10.0),
-                  height: MediaQuery.of(context).size.height/2,
-
-                  decoration: BoxDecoration(
                   ),
-                  width: MediaQuery.of(context).size.width,
-
-                  child:  CachedNetworkImage( imageUrl: blogMedia.first),
-
                 ),
               ),
-            ],
-          ),
-          Divider(color: kGrey,),
+              ListTile(
+
+                title: Text(documentSnapshot.data()['title'],
+                    maxLines: 3,
+                    style: new TextStyle(
+                        fontWeight: FontWeight.w500,
+                        color: kText,
+                        fontSize: 18.0)),
+              ),
+              Column(
+                children: <Widget>[
+                  GestureDetector(
+                    onTap:() {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => BlogScreen(
+                            blogId: documentSnapshot.data()['blogId'],
+                            userId:  documentSnapshot.data()['ownerId'],
+                          ),
+                        ),
+                      );
+                    },
+                    child: Container(
+
+                      width: MediaQuery.of(context).size.width,
+
+                      child:  CachedNetworkImage( imageUrl: blogMedia.first),
+
+                    ),
+                  ),
+                ],
+              ),
 
         ],
 
-        );
+        ),
+            ),)
+          );
 
 
         },
