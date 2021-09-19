@@ -849,21 +849,21 @@ String currencysymbol;
 final bool worldship;
 final bool freeworldship;
 final bool freeship;
-String price;
-String custompriceinr = "";
-String custompriceusd = "";
+var price;
+var custompriceinr ;
+var custompriceusd ;
 
-String customprice = "";
-String customprice1;
-String customprice2;
-String customprice3;
-String customprice4;
-String customprice5;
-String customprice6;
-String customprice7;
-String customprice8;
-String customprice9;
-String customprice10;
+var customprice;
+var customprice1;
+var customprice2;
+var customprice3;
+var customprice4;
+var customprice5;
+var customprice6;
+var customprice7;
+var customprice8;
+var customprice9;
+var customprice10;
   final String custom1img;
   final String custom2img;
   final String custom3img;
@@ -1354,129 +1354,127 @@ this.currency,
     print("2222222222222222222222222222222222222$price");
 
   }
-conversion()async{
-  print("<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<>$price");
-
-  var resultUSD = await Currency.getConversion(
-      from: 'USD', to: '${currentUser.currencyISO}', amount: usd.toString());
+conversion()async {
+  if (currentUser.currencyISO == "USD") {}
+  else {
+    var resultUSD = await Currency.getConversion(
+        from: 'USD', to: '${currentUser.currencyISO}', amount: usd.toString());
     var resultUSD11 = await Currency.getConversion(
-        from: 'USD', to: '${currentUser.currencyISO}', amount: shipcostinterusd );
-var s;
-var u;
-setState(() {
-
-
-  e = resultUSD.rate;
-  price =e.toStringAsFixed(2);
-print(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>$price");
-  s = resultUSD11.rate;
-  shipcostuser =s.toStringAsFixed(2);
-  // u = double.tryParse(usd);
-  // u = u.toStringAsFixed(2);
-  // usd = u.toString();
-});
+        from: 'USD',
+        to: '${currentUser.currencyISO}',
+        amount: shipcostinterusd);
+    var s;
+    var u;
+    setState(() {
+      e = resultUSD.rate;
+      price = e.toStringAsFixed(2);
+      s = resultUSD11.rate;
+      shipcostuser = s.toStringAsFixed(2);
+      // u = double.tryParse(usd);
+      // u = u.toStringAsFixed(2);
+      // usd = u.toString();
+    });
     var resultUSD1 = await Currency.getConversion(
-      from: 'USD', to: '${currentUser.currencyISO}', amount: custom11usd  );
-  var resultUSD2 = await Currency.getConversion(
-      from: 'USD', to: '${currentUser.currencyISO}', amount: custom21usd  );
-  var resultUSD3 = await Currency.getConversion(
-      from: 'USD', to: '${currentUser.currencyISO}', amount: custom31usd  );
-  var resultUSD4 = await Currency.getConversion(
-      from: 'USD', to: '${currentUser.currencyISO}', amount: custom41usd  );
-  var resultUSD5 = await Currency.getConversion(
-      from: 'USD', to: '${currentUser.currencyISO}', amount: custom51usd  );
-  var resultUSD6 = await Currency.getConversion(
-      from: 'USD', to: '${currentUser.currencyISO}', amount: custom61usd  );
-  var resultUSD7 = await Currency.getConversion(
-      from: 'USD', to: '${currentUser.currencyISO}', amount: custom71usd  );
-  var resultUSD8 = await Currency.getConversion(
-      from: 'USD', to: '${currentUser.currencyISO}', amount: custom81usd  );
-  var resultUSD9 = await Currency.getConversion(
-      from: 'USD', to: '${currentUser.currencyISO}', amount: custom91usd  );
-  var resultUSD10 = await Currency.getConversion(
-      from: 'USD', to: '${currentUser.currencyISO}', amount: custom101usd  );
+        from: 'USD', to: '${currentUser.currencyISO}', amount: custom11usd);
+    var resultUSD2 = await Currency.getConversion(
+        from: 'USD', to: '${currentUser.currencyISO}', amount: custom21usd);
+    var resultUSD3 = await Currency.getConversion(
+        from: 'USD', to: '${currentUser.currencyISO}', amount: custom31usd);
+    var resultUSD4 = await Currency.getConversion(
+        from: 'USD', to: '${currentUser.currencyISO}', amount: custom41usd);
+    var resultUSD5 = await Currency.getConversion(
+        from: 'USD', to: '${currentUser.currencyISO}', amount: custom51usd);
+    var resultUSD6 = await Currency.getConversion(
+        from: 'USD', to: '${currentUser.currencyISO}', amount: custom61usd);
+    var resultUSD7 = await Currency.getConversion(
+        from: 'USD', to: '${currentUser.currencyISO}', amount: custom71usd);
+    var resultUSD8 = await Currency.getConversion(
+        from: 'USD', to: '${currentUser.currencyISO}', amount: custom81usd);
+    var resultUSD9 = await Currency.getConversion(
+        from: 'USD', to: '${currentUser.currencyISO}', amount: custom91usd);
+    var resultUSD10 = await Currency.getConversion(
+        from: 'USD', to: '${currentUser.currencyISO}', amount: custom101usd);
 
-  var c1;
- var c2;
- var c3;
- var c4;
- var c5;
- var c6;
- var c7;
- var c8;
- var c9;
- var c10;
-var custom1usd;
-var custom2usd;
-var custom3usd;
-var custom4usd;
-var custom5usd;
-var custom6usd;
-var custom7usd;
-var custom8usd;
-var custom9usd;
-var custom10usd;
+    var c1;
+    var c2;
+    var c3;
+    var c4;
+    var c5;
+    var c6;
+    var c7;
+    var c8;
+    var c9;
+    var c10;
+    var custom1usd;
+    var custom2usd;
+    var custom3usd;
+    var custom4usd;
+    var custom5usd;
+    var custom6usd;
+    var custom7usd;
+    var custom8usd;
+    var custom9usd;
+    var custom10usd;
 
-  setState(() {
+    setState(() {
+      custom1usd = double.tryParse(custom11usd);
+      custom1usd = custom1usd.toStringAsFixed(2);
+      custom11usd = custom1usd.toString();
+      custom2usd = double.tryParse(custom21usd);
+      custom2usd = custom2usd.toStringAsFixed(2);
+      custom21usd = custom2usd.toString();
+      custom3usd = double.tryParse(custom31usd);
+      custom3usd = custom3usd.toStringAsFixed(2);
+      custom31usd = custom3usd.toString();
+      custom4usd = double.tryParse(custom41usd);
+      custom4usd = custom4usd.toStringAsFixed(2);
+      custom41usd = custom4usd.toString();
+      custom5usd = double.tryParse(custom51usd);
+      custom5usd = custom5usd.toStringAsFixed(2);
+      custom51usd = custom5usd.toString();
+      custom6usd = double.tryParse(custom61usd);
+      custom6usd = custom6usd.toStringAsFixed(2);
+      custom61usd = custom6usd.toString();
+      custom7usd = double.tryParse(custom71usd);
+      custom7usd = custom7usd.toStringAsFixed(2);
+      custom71usd = custom7usd.toString();
+      custom8usd = double.tryParse(custom81usd);
+      custom8usd = custom8usd.toStringAsFixed(2);
+      custom81usd = custom8usd.toString();
+      custom9usd = double.tryParse(custom91usd);
+      custom9usd = custom9usd.toStringAsFixed(2);
+      custom91usd = custom9usd.toString();
+      custom10usd = double.tryParse(custom101usd);
+      custom10usd = custom10usd.toStringAsFixed(2);
+      custom101usd = custom10usd.toString();
 
-    custom1usd = double.tryParse(custom11usd);
-    custom1usd = custom1usd.toStringAsFixed(2);
-     custom11usd = custom1usd.toString();
-       custom2usd = double.tryParse(custom21usd);
-    custom2usd = custom2usd.toStringAsFixed(2);
-     custom21usd = custom2usd.toString();
-       custom3usd = double.tryParse(custom31usd);
-    custom3usd = custom3usd.toStringAsFixed(2);
-     custom31usd = custom3usd.toString();
-       custom4usd = double.tryParse(custom41usd);
-    custom4usd = custom4usd.toStringAsFixed(2);
-     custom41usd = custom4usd.toString();
-       custom5usd = double.tryParse(custom51usd);
-    custom5usd = custom5usd.toStringAsFixed(2);
-     custom51usd = custom5usd.toString();
-       custom6usd = double.tryParse(custom61usd);
-    custom6usd = custom6usd.toStringAsFixed(2);
-     custom61usd = custom6usd.toString();
-       custom7usd = double.tryParse(custom71usd);
-    custom7usd = custom7usd.toStringAsFixed(2);
-     custom71usd = custom7usd.toString();
-       custom8usd = double.tryParse(custom81usd);
-    custom8usd = custom8usd.toStringAsFixed(2);
-     custom81usd = custom8usd.toString();
-       custom9usd = double.tryParse(custom91usd);
-    custom9usd = custom9usd.toStringAsFixed(2);
-     custom91usd = custom9usd.toString();
-       custom10usd = double.tryParse(custom101usd);
-    custom10usd = custom10usd.toStringAsFixed(2);
-     custom101usd = custom10usd.toString();
+
+      c1 = resultUSD1.rate;
+      customprice1 = c1.toStringAsFixed(2);
 
 
-    c1 = resultUSD1.rate;
-    customprice1 =c1.toStringAsFixed(2);
-    print(resultUSD1.rate);
-    print(customprice1);
+      c2 = resultUSD2.rate;
+      customprice2 = c2.toStringAsFixed(2);
+      c3 = resultUSD3.rate;
+      customprice3 = c3.toStringAsFixed(2);
+      c4 = resultUSD4.rate;
+      customprice4 = c4.toStringAsFixed(2);
+      c5 = resultUSD5.rate;
+      customprice5 = c5.toStringAsFixed(2);
+      c6 = resultUSD6.rate;
+      customprice6 = c6.toStringAsFixed(2);
+      c7 = resultUSD7.rate;
+      customprice7 = c7.toStringAsFixed(2);
+      c8 = resultUSD8.rate;
+      customprice8 = c8.toStringAsFixed(2);
+      c9 = resultUSD9.rate;
+      customprice9 = c9.toStringAsFixed(2);
+      c10 = resultUSD10.rate;
+      customprice10 = c10.toStringAsFixed(2);
 
-   c2 = resultUSD2.rate;
-    customprice2 =c2.toStringAsFixed(2);
-   c3 = resultUSD3.rate;
-    customprice3 =c3.toStringAsFixed(2);
-   c4 = resultUSD4.rate;
-    customprice4 = c4.toStringAsFixed(2);
-   c5 = resultUSD5.rate;
-    customprice5 =c5.toStringAsFixed(2);
-   c6 = resultUSD6.rate;
-    customprice6 =c6.toStringAsFixed(2);
-   c7 = resultUSD7.rate;
-    customprice7 =c7.toStringAsFixed(2);
-   c8 = resultUSD8.rate;
-    customprice8 =c8.toStringAsFixed(2);
-   c9 = resultUSD9.rate;
-    customprice9 =c9.toStringAsFixed(2);
-   c10 = resultUSD10.rate;
-    customprice10 =c10.toStringAsFixed(2);
-
-    isUploading = false;
-  });
+      isUploading = false;
+    });
+  }
 }
   Views()async{
     bool isPostOwner = currentUserId == ownerId;
@@ -1515,8 +1513,8 @@ var custom10usd;
   }
 
   Proceedtobuy({
-String ship,
-String shipcostU,
+var ship,
+var shipcostU,
 
     }){
     Navigator.push(context, MaterialPageRoute(builder: (context) =>AddressBuy(
@@ -1537,13 +1535,14 @@ freeship:freeship,
 
       custompriceusd:custompriceusd,
       custompriceinr:custompriceinr,
-
+customIndex:Custom,
+      userCustom:userCustom,
       price:price,
           customprice:customprice,
 country:country,
 color:color,
 colorText:usercolor,
-mtoText:mtoController.text ,
+mtoText:mtoController.text??"" ,
 
         xxxs: xxxs,
         xxs: xxs,
@@ -1627,8 +1626,6 @@ mtoText:mtoController.text ,
         freeSize: freesize,
 
     )));
-
-
 
 
 
@@ -1753,7 +1750,7 @@ return
                               ),
                             ),
                             Container(
-                              height:190.0,
+                              height:205.0,
 
                               child:   Expanded(
                                   child:   ListView(
@@ -1768,6 +1765,12 @@ return
                                                   height:120.0,
                                                   width:120.0,
                                                   child: CachedImage(custom1img)),
+
+                                              currentUser.country == "India"?  FittedBox(child: Text(' + ${currentUser.currencysym} $custom11inr',)):
+                                              currentUser.country == "United States"?  FittedBox(child: Text(' + \u0024 $custom11usd',)):
+                                              currentUser.country == country?FittedBox(child: Text('+ ${currentUser.currencysym} $custom11inr(\u0024 $custom11usd)',)):
+
+                                              FittedBox(child: Text(' + ${currentUser.currencysym} $customprice1(\u0024 $custom11usd)',)),
                                               ElevatedButton(
 
                                                 style: ElevatedButton.styleFrom(
@@ -1780,7 +1783,10 @@ return
                                                   selectedCustom.add("Custom 1");
 
                                                   stateSetter(() { Custom = 'Custom 1';
-                                                  userCustom = custom1;});
+                                                  userCustom = custom1;
+                                                  customprice = customprice1;
+                                                  custompriceusd = custom11usd;
+                                                  custompriceinr = custom11inr;});
                                                 },          child: Text(custom1),
                                               ),
                                             ],
@@ -1794,6 +1800,11 @@ return
                                                   height:120.0,
                                                   width:120.0,
                                                   child: CachedImage(custom2img)),
+                                              currentUser.country == "India"?  FittedBox(child: Text(' + ${currentUser.currencysym} $custom21inr',)):
+                                              currentUser.country == "United States"?  FittedBox(child: Text(' + \u0024 $custom21usd',)):
+                                              currentUser.country == country?FittedBox(child: Text(' + ${currentUser.currencysym} $custom21inr(\u0024 $custom21usd)',)):
+
+                                              FittedBox(child: Text(' + ${currentUser.currencysym} $customprice2(\u0024 $custom21usd)',)),
                                               ElevatedButton(
 
                                                 style: ElevatedButton.styleFrom(
@@ -1806,7 +1817,10 @@ return
                                                   selectedCustom.add("Custom 2");
 
                                                   stateSetter(() { Custom = 'Custom 2';
-                                                  userCustom = custom2;});
+                                                  userCustom = custom2;
+                                                  customprice = customprice2;
+                                                  custompriceusd = custom21usd;
+                                                  custompriceinr = custom21inr;});
                                                 },          child: Text(custom2),
                                               ),
                                             ],
@@ -1821,6 +1835,12 @@ return
                                                   height:120.0,
                                                   width:120.0,
                                                   child: CachedImage(custom3img)),
+
+                                              currentUser.country == "India"?  FittedBox(child: Text(' + ${currentUser.currencysym} $custom31inr',)):
+                                              currentUser.country == "United States"?  FittedBox(child: Text(' + \u0024 $custom31usd',)):
+                                              currentUser.country == country?FittedBox(child: Text(' + ${currentUser.currencysym} $custom31inr(\u0024 $custom31usd)',)):
+
+                                              FittedBox(child: Text(' + ${currentUser.currencysym} $customprice3(\u0024 $custom31usd)',)),
                                               ElevatedButton(
 
                                                 style: ElevatedButton.styleFrom(
@@ -1833,7 +1853,10 @@ return
                                                   selectedCustom.add("Custom 3");
 
                                                   stateSetter(() { Custom = 'Custom 3';
-                                                  userCustom = custom3;});
+                                                  userCustom = custom3;
+                                                  customprice = customprice3;
+                                                  custompriceusd = custom31usd;
+                                                  custompriceinr = custom31inr;});
                                                 },          child: Text(custom3),
                                               ),
                                             ],
@@ -1847,6 +1870,11 @@ return
                                                   height:120.0,
                                                   width:120.0,
                                                   child: CachedImage(custom4img)),
+                                              currentUser.country == "India"?  FittedBox(child: Text(' + ${currentUser.currencysym} $custom41inr',)):
+                                              currentUser.country == "United States"?  FittedBox(child: Text(' + \u0024 $custom41usd',)):
+                                              currentUser.country == country?FittedBox(child: Text(' + ${currentUser.currencysym} $custom41inr(\u0024 $custom41usd)',)):
+
+                                              FittedBox(child: Text(' + ${currentUser.currencysym} $customprice4(\u0024 $custom41usd)',)),
                                               ElevatedButton(
 
                                                 style: ElevatedButton.styleFrom(
@@ -1859,7 +1887,10 @@ return
                                                   selectedCustom.add("Custom 4");
 
                                                   stateSetter(() { Custom = 'Custom 4';
-                                                  userCustom = custom4;});
+                                                  userCustom = custom4;
+                                                  customprice = customprice4;
+                                                  custompriceusd = custom41usd;
+                                                  custompriceinr = custom41inr;});
                                                 },          child: Text(custom4),
                                               ),
                                             ],
@@ -1873,6 +1904,12 @@ return
                                                   height:120.0,
                                                   width:120.0,
                                                   child: CachedImage(custom5img)),
+                                              currentUser.country == "India"?  FittedBox(child: Text(' + ${currentUser.currencysym} $custom51inr',)):
+                                              currentUser.country == "United States"?  FittedBox(child: Text(' + \u0024 $custom51usd',)):
+                                              currentUser.country == country?FittedBox(child: Text(' + ${currentUser.currencysym} $custom51inr(\u0024 $custom51usd)',)):
+
+                                              FittedBox(child: Text(' + ${currentUser.currencysym} $customprice5(\u0024 $custom51usd)',)),
+
                                               ElevatedButton(
 
                                                 style: ElevatedButton.styleFrom(
@@ -1885,7 +1922,10 @@ return
                                                   selectedCustom.add("Custom 5");
 
                                                   stateSetter(() { Custom = 'Custom 5';
-                                                  userCustom = custom5;});
+                                                  userCustom = custom5;
+                                                  customprice = customprice5;
+                                                  custompriceusd = custom51usd;
+                                                  custompriceinr = custom51inr;});
                                                 },          child: Text(custom5),
                                               ),
                                             ],
@@ -1899,6 +1939,11 @@ return
                                                   height:120.0,
                                                   width:120.0,
                                                   child: CachedImage(custom6img)),
+                                              currentUser.country == "India"?  FittedBox(child: Text(' + ${currentUser.currencysym} $custom61inr',)):
+                                              currentUser.country == "United States"?  FittedBox(child: Text(' + \u0024 $custom61usd',)):
+                                              currentUser.country == country?FittedBox(child: Text(' + ${currentUser.currencysym} $custom61inr(\u0024 $custom61usd)',)):
+
+                                              FittedBox(child: Text(' + ${currentUser.currencysym} $customprice6(\u0024 $custom61usd)',)),
                                               ElevatedButton(
 
                                                 style: ElevatedButton.styleFrom(
@@ -1911,7 +1956,10 @@ return
                                                   selectedCustom.add("Custom 6");
 
                                                   stateSetter(() { Custom = 'Custom 6';
-                                                  userCustom = custom6;});
+                                                  userCustom = custom6;
+                                                  customprice = customprice6;
+                                                  custompriceusd = custom61usd;
+                                                  custompriceinr = custom61inr;});
                                                 },          child: Text(custom6),
                                               ),
                                             ],
@@ -1925,6 +1973,11 @@ return
                                                   height:120.0,
                                                   width:120.0,
                                                   child: CachedImage(custom7img)),
+                                              currentUser.country == "India"?  FittedBox(child: Text(' + ${currentUser.currencysym} $custom71inr',)):
+                                              currentUser.country == "United States"?  FittedBox(child: Text(' + \u0024 $custom71usd',)):
+                                              currentUser.country == country?FittedBox(child: Text(' + ${currentUser.currencysym} $custom71inr(\u0024 $custom71usd)',)):
+
+                                              FittedBox(child: Text(' + ${currentUser.currencysym} $customprice7(\u0024 $custom71usd)',)),
                                               ElevatedButton(
 
                                                 style: ElevatedButton.styleFrom(
@@ -1937,7 +1990,10 @@ return
                                                   selectedCustom.add("Custom 7");
 
                                                   stateSetter(() { Custom = 'Custom 7';
-                                                  userCustom = custom7;});
+                                                  userCustom = custom7;
+                                                  customprice = customprice7;
+                                                  custompriceusd = custom71usd;
+                                                  custompriceinr = custom71inr;});
                                                 },          child: Text(custom7),
                                               ),
                                             ],
@@ -1951,6 +2007,11 @@ return
                                                   height:120.0,
                                                   width:120.0,
                                                   child: CachedImage(custom8img)),
+                                              currentUser.country == "India"?  FittedBox(child: Text(' + ${currentUser.currencysym} $custom81inr',)):
+                                              currentUser.country == "United States"?  FittedBox(child: Text(' + \u0024 $custom81usd',)):
+                                              currentUser.country == country?FittedBox(child: Text(' + ${currentUser.currencysym} $custom81inr(\u0024 $custom81usd)',)):
+
+                                              FittedBox(child: Text(' + ${currentUser.currencysym} $customprice8(\u0024 $custom81usd)',)),
                                               ElevatedButton(
 
                                                 style: ElevatedButton.styleFrom(
@@ -1963,7 +2024,10 @@ return
                                                   selectedCustom.add("Custom 8");
 
                                                   stateSetter(() { Custom = 'Custom 8';
-                                                  userCustom = custom8;});
+                                                  userCustom = custom8;
+                                                  customprice = customprice8;
+                                                  custompriceusd = custom81usd;
+                                                  custompriceinr = custom81inr;});
                                                 },          child: Text(custom8),
                                               ),
                                             ],
@@ -1977,6 +2041,11 @@ return
                                                   height:120.0,
                                                   width:120.0,
                                                   child: CachedImage(custom9img)),
+                                              currentUser.country == "India"?  FittedBox(child: Text(' + ${currentUser.currencysym} $custom91inr',)):
+                                              currentUser.country == "United States"?  FittedBox(child: Text(' + \u0024 $custom91usd',)):
+                                              currentUser.country == country?FittedBox(child: Text(' + ${currentUser.currencysym} $custom91inr(\u0024 $custom91usd)',)):
+
+                                              FittedBox(child: Text(' + ${currentUser.currencysym} $customprice9(\u0024 $custom91usd)',)),
                                               ElevatedButton(
 
                                                 style: ElevatedButton.styleFrom(
@@ -1989,7 +2058,10 @@ return
                                                   selectedCustom.add("Custom 9");
 
                                                   stateSetter(() { Custom = 'Custom 9';
-                                                  userCustom = custom9;});
+                                                  userCustom = custom9;
+                                                  customprice = customprice9;
+                                                  custompriceusd = custom91usd;
+                                                  custompriceinr = custom91inr;});
                                                 },          child: Text(custom9),
                                               ),
                                             ],
@@ -2003,7 +2075,12 @@ return
                                                   height:120.0,
                                                   width:120.0,
                                                   child: CachedImage(custom10img)),
-                                              ElevatedButton(
+
+                                              currentUser.country == "India"?  FittedBox(child: Text(' + ${currentUser.currencysym} $custom101inr',)):
+                                              currentUser.country == "United States"?  FittedBox(child: Text(' + \u0024 $custom101usd',)):
+                                              currentUser.country == country?FittedBox(child: Text(' + ${currentUser.currencysym} $custom101inr(\u0024 $custom101usd)',)):
+
+                                              FittedBox(child: Text(' + ${currentUser.currencysym} $customprice10(\u0024 $custom101usd)',)),                                              ElevatedButton(
 
                                                 style: ElevatedButton.styleFrom(
 
@@ -2015,7 +2092,10 @@ return
                                                   selectedCustom.add("Custom 10");
 
                                                   stateSetter(() { Custom = 'Custom 10';
-                                                  userCustom = custom10;});
+                                                  userCustom = custom10;
+                                                  customprice = customprice10;
+                                                  custompriceusd = custom101usd;
+                                                  custompriceinr = custom101inr;});
                                                 },          child: Text(custom10),
                                               ),
                                             ],
@@ -3189,295 +3269,6 @@ Shoe21==0?Container():   Padding(
             ),
 ),
 
- custom12==0?Container():   Padding(
-   padding: const EdgeInsets.all(8.0),
-   child: ElevatedButton(
-
-              style: ElevatedButton.styleFrom(
-
-                  primary: selectedCategory.contains("C 1") ? Colors.black: Colors.white.withOpacity(0.1), // background
-                  onPrimary:selectedCategory.contains("C 1") ? Colors.white:  Colors.black, // foreground
-              ),
-              onPressed: () {
-                  selectedCategory =  <String>[];
-                  selectedCategory.add("C 1");
-
-                  stateSetter(() { usersize = 'C 1';
-                  custom = true;
-                  size = custom1;
-                  customprice = customprice1;
-                  custompriceusd = custom11usd;
-                  custompriceinr = custom11inr;});
-              },          child:
-   currentUser.country == "India"?  FittedBox(child: Text('$custom1 + ${currentUser.currencysym} $custom11inr',)):
-   currentUser.country == "United States"?  FittedBox(child: Text('$custom1 + \u0024 $custom11usd',)):
-   currentUser.country == country?FittedBox(child: Text('$custom1 + ${currentUser.currencysym} $custom11inr(\u0024 $custom11usd)',)):
-
-   FittedBox(child: Text('$custom1 + ${currentUser.currencysym} $customprice1(\u0024 $custom11usd)',)),
-
-   ),
- ),
-custom22==0?Container():   Padding(
-  padding: const EdgeInsets.all(8.0),
-  child:   ElevatedButton(
-
-              style: ElevatedButton.styleFrom(
-
-                  primary: selectedCategory.contains("C 2") ? Colors.black: Colors.white.withOpacity(0.1), // background
-                  onPrimary:selectedCategory.contains("C 2") ? Colors.white:  Colors.black, // foreground
-              ),
-              onPressed: () {
-                  selectedCategory =  <String>[];
-                  selectedCategory.add("C 2");
-
-                  stateSetter(() { usersize = 'C 2';
-                  custom = true;
-                  size = custom2;
-                  customprice = customprice2;
-                  custompriceusd = custom21usd;
-                  custompriceinr = custom21inr;});
-              },          child:
-
-  currentUser.country == "India"?  FittedBox(child: Text('$custom2 + ${currentUser.currencysym} $custom21inr',)):
-  currentUser.country == "United States"?  FittedBox(child: Text('$custom2 + \u0024 $custom21usd',)):
-  currentUser.country == country?FittedBox(child: Text('$custom2 + ${currentUser.currencysym} $custom21inr(\u0024 $custom21usd)',)):
-
-  FittedBox(child: Text('$custom2 + ${currentUser.currencysym} $customprice2(\u0024 $custom21usd)',)),
-
-   ),
-),
-custom32==0?Container():   Padding(
-  padding: const EdgeInsets.all(8.0),
-  child:   ElevatedButton(
-
-              style: ElevatedButton.styleFrom(
-
-                  primary: selectedCategory.contains("C 3") ? Colors.black: Colors.white.withOpacity(0.1), // background
-                  onPrimary:selectedCategory.contains("C 3") ? Colors.white:  Colors.black, // foreground
-              ),
-              onPressed: () {
-                  selectedCategory =  <String>[];
-                  selectedCategory.add("C 3");
-
-                  stateSetter(() { usersize = 'C 3';
-                  custom = true;
-                  size = custom3;
-                  customprice = customprice3;
-                  custompriceusd = custom31usd;
-                  custompriceinr = custom31inr;});
-              },          child:
-
-  currentUser.country == "India"?  FittedBox(child: Text('$custom3 + ${currentUser.currencysym} $custom31inr',)):
-  currentUser.country == "United States"?  FittedBox(child: Text('$custom3 + \u0024 $custom31usd',)):
-  currentUser.country == country?FittedBox(child: Text('$custom3 + ${currentUser.currencysym} $custom31inr(\u0024 $custom31usd)',)):
-
-  FittedBox(child: Text('$custom3 + ${currentUser.currencysym} $customprice3(\u0024 $custom31usd)',)),
-
-   ),
-),
-custom42==0?Container():   Padding(
-  padding: const EdgeInsets.all(8.0),
-  child:   ElevatedButton(
-
-              style: ElevatedButton.styleFrom(
-
-                  primary: selectedCategory.contains("C 4") ? Colors.black: Colors.white.withOpacity(0.1), // background
-                  onPrimary:selectedCategory.contains("C 4") ? Colors.white:  Colors.black, // foreground
-              ),
-              onPressed: () {
-                  selectedCategory =  <String>[];
-                  selectedCategory.add("C 4");
-
-                  stateSetter(() { usersize = 'C 4';
-                  custom = true;
-                  size = custom4;
-                  customprice = customprice4;
-                  custompriceusd = custom41usd;
-                  custompriceinr = custom41inr;});
-              },          child:
-
-  currentUser.country == "India"?  FittedBox(child: Text('$custom4 + ${currentUser.currencysym} $custom41inr',)):
-  currentUser.country == "United States"?  FittedBox(child: Text('$custom4 + \u0024 $custom41usd',)):
-  currentUser.country == country?FittedBox(child: Text('$custom4 + ${currentUser.currencysym} $custom41inr(\u0024 $custom41usd)',)):
-
-  FittedBox(child: Text('$custom4 + ${currentUser.currencysym} $customprice4(\u0024 $custom41usd)',)),
-
-   ),
-),
-custom52==0?Container():   Padding(
-  padding: const EdgeInsets.all(8.0),
-  child:   ElevatedButton(
-
-              style: ElevatedButton.styleFrom(
-
-                  primary: selectedCategory.contains("C 5") ? Colors.black: Colors.white.withOpacity(0.1), // background
-                  onPrimary:selectedCategory.contains("C 5") ? Colors.white:  Colors.black, // foreground
-              ),
-              onPressed: () {
-                  selectedCategory =  <String>[];
-                  selectedCategory.add("C 5");
-
-                  stateSetter(() { usersize = 'C 5';
-                  custom = true;
-                  size = custom5;
-                  customprice = customprice5;
-                  custompriceusd = custom51usd;
-                  custompriceinr = custom51inr;});
-              },          child:
-
-  currentUser.country == "India"?  FittedBox(child: Text('$custom5 + ${currentUser.currencysym} $custom51inr',)):
-  currentUser.country == "United States"?  FittedBox(child: Text('$custom5 + \u0024 $custom51usd',)):
-  currentUser.country == country?FittedBox(child: Text('$custom5 + ${currentUser.currencysym} $custom51inr(\u0024 $custom51usd)',)):
-
-  FittedBox(child: Text('$custom5 + ${currentUser.currencysym} $customprice5(\u0024 $custom51usd)',)),
-
-   ),
-),
-custom62==0?Container():   Padding(
-  padding: const EdgeInsets.all(8.0),
-  child:   ElevatedButton(
-
-              style: ElevatedButton.styleFrom(
-
-                  primary: selectedCategory.contains("C 6") ? Colors.black: Colors.white.withOpacity(0.1), // background
-                  onPrimary:selectedCategory.contains("C 6") ? Colors.white:  Colors.black, // foreground
-              ),
-              onPressed: () {
-                  selectedCategory =  <String>[];
-                  selectedCategory.add("C 6");
-
-                  stateSetter(() { usersize = 'C 6';
-                  custom = true;
-                  size = custom6;
-                  customprice = customprice6;
-                  custompriceusd = custom61usd;
-                  custompriceinr = custom61inr;});
-              },          child:
-
-  currentUser.country == "India"?  FittedBox(child: Text('$custom6 + ${currentUser.currencysym} $custom61inr',)):
-  currentUser.country == "United States"?  FittedBox(child: Text('$custom6 + \u0024 $custom61usd',)):
-  currentUser.country == country?FittedBox(child: Text('$custom6 + ${currentUser.currencysym} $custom61inr(\u0024 $custom61usd)',)):
-
-  FittedBox(child: Text('$custom6 + ${currentUser.currencysym} $customprice6(\u0024 $custom61usd)',)),
-
-   ),
-),
-custom72==0?Container():   Padding(
-  padding: const EdgeInsets.all(8.0),
-  child:   ElevatedButton(
-
-              style: ElevatedButton.styleFrom(
-
-                  primary: selectedCategory.contains("C 7") ? Colors.black: Colors.white.withOpacity(0.1), // background
-                  onPrimary:selectedCategory.contains("C 7") ? Colors.white:  Colors.black, // foreground
-              ),
-              onPressed: () {
-                  selectedCategory =  <String>[];
-                  selectedCategory.add("C 7");
-
-                  stateSetter(() { usersize = 'C 7';
-                  custom = true;
-                  size = custom7;
-                  customprice = customprice7;
-                  custompriceusd = custom71usd;
-                  custompriceinr = custom71inr;});
-              },          child:
-
-  currentUser.country == "India"?  FittedBox(child: Text('$custom7 + ${currentUser.currencysym} $custom71inr',)):
-  currentUser.country == "United States"?  FittedBox(child: Text('$custom7 + \u0024 $custom71usd',)):
-  currentUser.country == country?FittedBox(child: Text('$custom7 + ${currentUser.currencysym} $custom71inr(\u0024 $custom71usd)',)):
-
-  FittedBox(child: Text('$custom7 + ${currentUser.currencysym} $customprice7(\u0024 $custom71usd)',)),
-
-   ),
-),
-custom82==0?Container():   Padding(
-  padding: const EdgeInsets.all(8.0),
-  child:   ElevatedButton(
-
-              style: ElevatedButton.styleFrom(
-
-                  primary: selectedCategory.contains("C 8") ? Colors.black: Colors.white.withOpacity(0.1), // background
-                  onPrimary:selectedCategory.contains("C 8") ? Colors.white:  Colors.black, // foreground
-              ),
-              onPressed: () {
-                  selectedCategory =  <String>[];
-                  selectedCategory.add("C 8");
-
-                  stateSetter(() { usersize = 'C 8';
-                  custom = true;
-                  size = custom8;
-                  customprice = customprice8;
-                  custompriceusd = custom81usd;
-                  custompriceinr = custom81inr;});
-              },          child:
-
-  currentUser.country == "India"?  FittedBox(child: Text('$custom8 + ${currentUser.currencysym} $custom81inr',)):
-  currentUser.country == "United States"?  FittedBox(child: Text('$custom8 + \u0024 $custom81usd',)):
-  currentUser.country == country?FittedBox(child: Text('$custom8 + ${currentUser.currencysym} $custom81inr(\u0024 $custom81usd)',)):
-
-  FittedBox(child: Text('$custom8 + ${currentUser.currencysym} $customprice8(\u0024 $custom81usd)',)),
-
-   ),
-),
-custom92==0?Container():   Padding(
-  padding: const EdgeInsets.all(8.0),
-  child:   ElevatedButton(
-
-              style: ElevatedButton.styleFrom(
-
-                  primary: selectedCategory.contains("C 9") ? Colors.black: Colors.white.withOpacity(0.1), // background
-                  onPrimary:selectedCategory.contains("C 9") ? Colors.white:  Colors.black, // foreground
-              ),
-              onPressed: () {
-                  selectedCategory =  <String>[];
-                  selectedCategory.add("C 9");
-
-                  stateSetter(() { usersize = 'C 9';
-                  custom = true;
-                  size = custom9;
-                  customprice = customprice9;
-                  custompriceusd = custom91usd;
-                  custompriceinr = custom91inr;});
-              },          child:
-
-  currentUser.country == "India"?  FittedBox(child: Text('$custom9 + ${currentUser.currencysym} $custom91inr',)):
-  currentUser.country == "United States"?  FittedBox(child: Text('$custom9 + \u0024 $custom91usd',)):
-  currentUser.country == country?FittedBox(child: Text('$custom9 + ${currentUser.currencysym} $custom91inr(\u0024 $custom91usd)',)):
-
-  FittedBox(child: Text('$custom9 + ${currentUser.currencysym} $customprice9(\u0024 $custom91usd)',)),
-
-   ),
-),
-custom102==0?Container():   Padding(
-  padding: const EdgeInsets.all(8.0),
-  child:   ElevatedButton(
-
-              style: ElevatedButton.styleFrom(
-
-                  primary: selectedCategory.contains("C 10") ? Colors.black: Colors.white.withOpacity(0.1), // background
-                  onPrimary:selectedCategory.contains("C 10") ? Colors.white:  Colors.black, // foreground
-              ),
-              onPressed: () {
-                  selectedCategory =  <String>[];
-                  selectedCategory.add("C 10");
-
-                  stateSetter(() { usersize = 'C 10';
-                  custom = true;
-                  size = custom10;
-                  customprice = customprice10;
-                  custompriceusd = custom101usd;
-                  custompriceinr = custom101inr;});
-              },          child:
-
-  currentUser.country == "India"?  FittedBox(child: Text('$custom10 + ${currentUser.currencysym} $custom101inr',)):
-  currentUser.country == "United States"?  FittedBox(child: Text('$custom10 + \u0024 $custom101usd',)):
-  currentUser.country == country?FittedBox(child: Text('$custom10 + ${currentUser.currencysym} $custom101inr(\u0024 $custom101usd)',)):
-
-  FittedBox(child: Text('$custom10 + ${currentUser.currencysym} $customprice10(\u0024 $custom101usd)',)),
-
-   ),
-),
 
 
         ]
@@ -3746,7 +3537,7 @@ custom102==0?Container():   Padding(
                                   ),
                                 ),
                                 Container(
-                                  height:190.0,
+                                  height:205.0,
 
                                   child:   Expanded(
                                       child:   ListView(
@@ -3761,6 +3552,12 @@ custom102==0?Container():   Padding(
                                                       height:120.0,
                                                       width:120.0,
                                                       child: CachedImage(custom1img)),
+
+                                                  currentUser.country == "India"?  FittedBox(child: Text(' + ${currentUser.currencysym} $custom11inr',)):
+                                                  currentUser.country == "United States"?  FittedBox(child: Text(' + \u0024 $custom11usd',)):
+                                                  currentUser.country == country?FittedBox(child: Text('+ ${currentUser.currencysym} $custom11inr(\u0024 $custom11usd)',)):
+
+                                                  FittedBox(child: Text(' + ${currentUser.currencysym} $customprice1(\u0024 $custom11usd)',)),
                                                   ElevatedButton(
 
                                                     style: ElevatedButton.styleFrom(
@@ -3773,7 +3570,10 @@ custom102==0?Container():   Padding(
                                                       selectedCustom.add("Custom 1");
 
                                                       stateSetter(() { Custom = 'Custom 1';
-                                                      userCustom = custom1;});
+                                                      userCustom = custom1;
+                                                      customprice = customprice1;
+                                                      custompriceusd = custom11usd;
+                                                      custompriceinr = custom11inr;});
                                                     },          child: Text(custom1),
                                                   ),
                                                 ],
@@ -3787,6 +3587,11 @@ custom102==0?Container():   Padding(
                                                       height:120.0,
                                                       width:120.0,
                                                       child: CachedImage(custom2img)),
+                                                  currentUser.country == "India"?  FittedBox(child: Text(' + ${currentUser.currencysym} $custom21inr',)):
+                                                  currentUser.country == "United States"?  FittedBox(child: Text(' + \u0024 $custom21usd',)):
+                                                  currentUser.country == country?FittedBox(child: Text(' + ${currentUser.currencysym} $custom21inr(\u0024 $custom21usd)',)):
+
+                                                  FittedBox(child: Text(' + ${currentUser.currencysym} $customprice2(\u0024 $custom21usd)',)),
                                                   ElevatedButton(
 
                                                     style: ElevatedButton.styleFrom(
@@ -3799,7 +3604,10 @@ custom102==0?Container():   Padding(
                                                       selectedCustom.add("Custom 2");
 
                                                       stateSetter(() { Custom = 'Custom 2';
-                                                      userCustom = custom2;});
+                                                      userCustom = custom2;
+                                                      customprice = customprice2;
+                                                      custompriceusd = custom21usd;
+                                                      custompriceinr = custom21inr;});
                                                     },          child: Text(custom2),
                                                   ),
                                                 ],
@@ -3814,6 +3622,12 @@ custom102==0?Container():   Padding(
                                                       height:120.0,
                                                       width:120.0,
                                                       child: CachedImage(custom3img)),
+
+                                                  currentUser.country == "India"?  FittedBox(child: Text(' + ${currentUser.currencysym} $custom31inr',)):
+                                                  currentUser.country == "United States"?  FittedBox(child: Text(' + \u0024 $custom31usd',)):
+                                                  currentUser.country == country?FittedBox(child: Text(' + ${currentUser.currencysym} $custom31inr(\u0024 $custom31usd)',)):
+
+                                                  FittedBox(child: Text(' + ${currentUser.currencysym} $customprice3(\u0024 $custom31usd)',)),
                                                   ElevatedButton(
 
                                                     style: ElevatedButton.styleFrom(
@@ -3826,7 +3640,10 @@ custom102==0?Container():   Padding(
                                                       selectedCustom.add("Custom 3");
 
                                                       stateSetter(() { Custom = 'Custom 3';
-                                                      userCustom = custom3;});
+                                                      userCustom = custom3;
+                                                      customprice = customprice3;
+                                                      custompriceusd = custom31usd;
+                                                      custompriceinr = custom31inr;});
                                                     },          child: Text(custom3),
                                                   ),
                                                 ],
@@ -3840,6 +3657,11 @@ custom102==0?Container():   Padding(
                                                       height:120.0,
                                                       width:120.0,
                                                       child: CachedImage(custom4img)),
+                                                  currentUser.country == "India"?  FittedBox(child: Text(' + ${currentUser.currencysym} $custom41inr',)):
+                                                  currentUser.country == "United States"?  FittedBox(child: Text(' + \u0024 $custom41usd',)):
+                                                  currentUser.country == country?FittedBox(child: Text(' + ${currentUser.currencysym} $custom41inr(\u0024 $custom41usd)',)):
+
+                                                  FittedBox(child: Text(' + ${currentUser.currencysym} $customprice4(\u0024 $custom41usd)',)),
                                                   ElevatedButton(
 
                                                     style: ElevatedButton.styleFrom(
@@ -3852,7 +3674,10 @@ custom102==0?Container():   Padding(
                                                       selectedCustom.add("Custom 4");
 
                                                       stateSetter(() { Custom = 'Custom 4';
-                                                      userCustom = custom4;});
+                                                      userCustom = custom4;
+                                                      customprice = customprice4;
+                                                      custompriceusd = custom41usd;
+                                                      custompriceinr = custom41inr;});
                                                     },          child: Text(custom4),
                                                   ),
                                                 ],
@@ -3866,6 +3691,12 @@ custom102==0?Container():   Padding(
                                                       height:120.0,
                                                       width:120.0,
                                                       child: CachedImage(custom5img)),
+                                                  currentUser.country == "India"?  FittedBox(child: Text(' + ${currentUser.currencysym} $custom51inr',)):
+                                                  currentUser.country == "United States"?  FittedBox(child: Text(' + \u0024 $custom51usd',)):
+                                                  currentUser.country == country?FittedBox(child: Text(' + ${currentUser.currencysym} $custom51inr(\u0024 $custom51usd)',)):
+
+                                                  FittedBox(child: Text(' + ${currentUser.currencysym} $customprice5(\u0024 $custom51usd)',)),
+
                                                   ElevatedButton(
 
                                                     style: ElevatedButton.styleFrom(
@@ -3878,7 +3709,10 @@ custom102==0?Container():   Padding(
                                                       selectedCustom.add("Custom 5");
 
                                                       stateSetter(() { Custom = 'Custom 5';
-                                                      userCustom = custom5;});
+                                                      userCustom = custom5;
+                                                      customprice = customprice5;
+                                                      custompriceusd = custom51usd;
+                                                      custompriceinr = custom51inr;});
                                                     },          child: Text(custom5),
                                                   ),
                                                 ],
@@ -3892,6 +3726,11 @@ custom102==0?Container():   Padding(
                                                       height:120.0,
                                                       width:120.0,
                                                       child: CachedImage(custom6img)),
+                                                  currentUser.country == "India"?  FittedBox(child: Text(' + ${currentUser.currencysym} $custom61inr',)):
+                                                  currentUser.country == "United States"?  FittedBox(child: Text(' + \u0024 $custom61usd',)):
+                                                  currentUser.country == country?FittedBox(child: Text(' + ${currentUser.currencysym} $custom61inr(\u0024 $custom61usd)',)):
+
+                                                  FittedBox(child: Text(' + ${currentUser.currencysym} $customprice6(\u0024 $custom61usd)',)),
                                                   ElevatedButton(
 
                                                     style: ElevatedButton.styleFrom(
@@ -3904,7 +3743,10 @@ custom102==0?Container():   Padding(
                                                       selectedCustom.add("Custom 6");
 
                                                       stateSetter(() { Custom = 'Custom 6';
-                                                      userCustom = custom6;});
+                                                      userCustom = custom6;
+                                                      customprice = customprice6;
+                                                      custompriceusd = custom61usd;
+                                                      custompriceinr = custom61inr;});
                                                     },          child: Text(custom6),
                                                   ),
                                                 ],
@@ -3918,6 +3760,11 @@ custom102==0?Container():   Padding(
                                                       height:120.0,
                                                       width:120.0,
                                                       child: CachedImage(custom7img)),
+                                                  currentUser.country == "India"?  FittedBox(child: Text(' + ${currentUser.currencysym} $custom71inr',)):
+                                                  currentUser.country == "United States"?  FittedBox(child: Text(' + \u0024 $custom71usd',)):
+                                                  currentUser.country == country?FittedBox(child: Text(' + ${currentUser.currencysym} $custom71inr(\u0024 $custom71usd)',)):
+
+                                                  FittedBox(child: Text(' + ${currentUser.currencysym} $customprice7(\u0024 $custom71usd)',)),
                                                   ElevatedButton(
 
                                                     style: ElevatedButton.styleFrom(
@@ -3930,7 +3777,10 @@ custom102==0?Container():   Padding(
                                                       selectedCustom.add("Custom 7");
 
                                                       stateSetter(() { Custom = 'Custom 7';
-                                                      userCustom = custom7;});
+                                                      userCustom = custom7;
+                                                      customprice = customprice7;
+                                                      custompriceusd = custom71usd;
+                                                      custompriceinr = custom71inr;});
                                                     },          child: Text(custom7),
                                                   ),
                                                 ],
@@ -3944,6 +3794,11 @@ custom102==0?Container():   Padding(
                                                       height:120.0,
                                                       width:120.0,
                                                       child: CachedImage(custom8img)),
+                                                  currentUser.country == "India"?  FittedBox(child: Text(' + ${currentUser.currencysym} $custom81inr',)):
+                                                  currentUser.country == "United States"?  FittedBox(child: Text(' + \u0024 $custom81usd',)):
+                                                  currentUser.country == country?FittedBox(child: Text(' + ${currentUser.currencysym} $custom81inr(\u0024 $custom81usd)',)):
+
+                                                  FittedBox(child: Text(' + ${currentUser.currencysym} $customprice8(\u0024 $custom81usd)',)),
                                                   ElevatedButton(
 
                                                     style: ElevatedButton.styleFrom(
@@ -3956,7 +3811,10 @@ custom102==0?Container():   Padding(
                                                       selectedCustom.add("Custom 8");
 
                                                       stateSetter(() { Custom = 'Custom 8';
-                                                      userCustom = custom8;});
+                                                      userCustom = custom8;
+                                                      customprice = customprice8;
+                                                      custompriceusd = custom81usd;
+                                                      custompriceinr = custom81inr;});
                                                     },          child: Text(custom8),
                                                   ),
                                                 ],
@@ -3970,6 +3828,11 @@ custom102==0?Container():   Padding(
                                                       height:120.0,
                                                       width:120.0,
                                                       child: CachedImage(custom9img)),
+                                                  currentUser.country == "India"?  FittedBox(child: Text(' + ${currentUser.currencysym} $custom91inr',)):
+                                                  currentUser.country == "United States"?  FittedBox(child: Text(' + \u0024 $custom91usd',)):
+                                                  currentUser.country == country?FittedBox(child: Text(' + ${currentUser.currencysym} $custom91inr(\u0024 $custom91usd)',)):
+
+                                                  FittedBox(child: Text(' + ${currentUser.currencysym} $customprice9(\u0024 $custom91usd)',)),
                                                   ElevatedButton(
 
                                                     style: ElevatedButton.styleFrom(
@@ -3982,7 +3845,10 @@ custom102==0?Container():   Padding(
                                                       selectedCustom.add("Custom 9");
 
                                                       stateSetter(() { Custom = 'Custom 9';
-                                                      userCustom = custom9;});
+                                                      userCustom = custom9;
+                                                      customprice = customprice9;
+                                                      custompriceusd = custom91usd;
+                                                      custompriceinr = custom91inr;});
                                                     },          child: Text(custom9),
                                                   ),
                                                 ],
@@ -3996,7 +3862,12 @@ custom102==0?Container():   Padding(
                                                       height:120.0,
                                                       width:120.0,
                                                       child: CachedImage(custom10img)),
-                                                  ElevatedButton(
+
+                                                  currentUser.country == "India"?  FittedBox(child: Text(' + ${currentUser.currencysym} $custom101inr',)):
+                                                  currentUser.country == "United States"?  FittedBox(child: Text(' + \u0024 $custom101usd',)):
+                                                  currentUser.country == country?FittedBox(child: Text(' + ${currentUser.currencysym} $custom101inr(\u0024 $custom101usd)',)):
+
+                                                  FittedBox(child: Text(' + ${currentUser.currencysym} $customprice10(\u0024 $custom101usd)',)),                                              ElevatedButton(
 
                                                     style: ElevatedButton.styleFrom(
 
@@ -4008,7 +3879,10 @@ custom102==0?Container():   Padding(
                                                       selectedCustom.add("Custom 10");
 
                                                       stateSetter(() { Custom = 'Custom 10';
-                                                      userCustom = custom10;});
+                                                      userCustom = custom10;
+                                                      customprice = customprice10;
+                                                      custompriceusd = custom101usd;
+                                                      custompriceinr = custom101inr;});
                                                     },          child: Text(custom10),
                                                   ),
                                                 ],
@@ -5084,298 +4958,6 @@ custom102==0?Container():   Padding(
                                             ),
                                           ),
 
-
-                                          custom12==0?Container():   Padding(
-                                            padding: const EdgeInsets.all(8.0),
-                                            child: ElevatedButton(
-
-                                              style: ElevatedButton.styleFrom(
-
-                                                primary: selectedCategory.contains("C 1") ? Colors.black: Colors.white.withOpacity(0.1), // background
-                                                onPrimary:selectedCategory.contains("C 1") ? Colors.white:  Colors.black, // foreground
-                                              ),
-                                              onPressed: () {
-                                                selectedCategory =  <String>[];
-                                                selectedCategory.add("C 1");
-
-                                                stateSetter(() { usersize = 'C 1';
-                                                custom = true;
-                                                size = custom1;
-                                                customprice = customprice1;
-                                                custompriceusd = custom11usd;
-                                                custompriceinr = custom11inr;});
-                                              },          child:
-                                            currentUser.country == "India"?  FittedBox(child: Text('$custom1 + ${currentUser.currencysym} $custom11inr',)):
-                                            currentUser.country == "United States"?  FittedBox(child: Text('$custom1 + \u0024 $custom11usd',)):
-                                            currentUser.country == country?FittedBox(child: Text('$custom1 + ${currentUser.currencysym} $custom11inr(\u0024 $custom11usd)',)):
-
-                                            FittedBox(child: Text('$custom1 + ${currentUser.currencysym} $customprice1(\u0024 $custom11usd)',)),
-
-                                            ),
-                                          ),
-                                          custom22==0?Container():   Padding(
-                                            padding: const EdgeInsets.all(8.0),
-                                            child:   ElevatedButton(
-
-                                              style: ElevatedButton.styleFrom(
-
-                                                primary: selectedCategory.contains("C 2") ? Colors.black: Colors.white.withOpacity(0.1), // background
-                                                onPrimary:selectedCategory.contains("C 2") ? Colors.white:  Colors.black, // foreground
-                                              ),
-                                              onPressed: () {
-                                                selectedCategory =  <String>[];
-                                                selectedCategory.add("C 2");
-
-                                                stateSetter(() { usersize = 'C 2';
-                                                custom = true;
-                                                size = custom2;
-                                                customprice = customprice2;
-                                                custompriceusd = custom21usd;
-                                                custompriceinr = custom21inr;});
-                                              },          child:
-
-                                            currentUser.country == "India"?  FittedBox(child: Text('$custom2 + ${currentUser.currencysym} $custom21inr',)):
-                                            currentUser.country == "United States"?  FittedBox(child: Text('$custom2 + \u0024 $custom21usd',)):
-                                            currentUser.country == country?FittedBox(child: Text('$custom2 + ${currentUser.currencysym} $custom21inr(\u0024 $custom21usd)',)):
-
-                                            FittedBox(child: Text('$custom2 + ${currentUser.currencysym} $customprice2(\u0024 $custom21usd)',)),
-
-                                            ),
-                                          ),
-                                          custom32==0?Container():   Padding(
-                                            padding: const EdgeInsets.all(8.0),
-                                            child:   ElevatedButton(
-
-                                              style: ElevatedButton.styleFrom(
-
-                                                primary: selectedCategory.contains("C 3") ? Colors.black: Colors.white.withOpacity(0.1), // background
-                                                onPrimary:selectedCategory.contains("C 3") ? Colors.white:  Colors.black, // foreground
-                                              ),
-                                              onPressed: () {
-                                                selectedCategory =  <String>[];
-                                                selectedCategory.add("C 3");
-
-                                                stateSetter(() { usersize = 'C 3';
-                                                custom = true;
-                                                size = custom3;
-                                                customprice = customprice3;
-                                                custompriceusd = custom31usd;
-                                                custompriceinr = custom31inr;});
-                                              },          child:
-
-                                            currentUser.country == "India"?  FittedBox(child: Text('$custom3 + ${currentUser.currencysym} $custom31inr',)):
-                                            currentUser.country == "United States"?  FittedBox(child: Text('$custom3 + \u0024 $custom31usd',)):
-                                            currentUser.country == country?FittedBox(child: Text('$custom3 + ${currentUser.currencysym} $custom31inr(\u0024 $custom31usd)',)):
-
-                                            FittedBox(child: Text('$custom3 + ${currentUser.currencysym} $customprice3(\u0024 $custom31usd)',)),
-
-                                            ),
-                                          ),
-                                          custom42==0?Container():   Padding(
-                                            padding: const EdgeInsets.all(8.0),
-                                            child:   ElevatedButton(
-
-                                              style: ElevatedButton.styleFrom(
-
-                                                primary: selectedCategory.contains("C 4") ? Colors.black: Colors.white.withOpacity(0.1), // background
-                                                onPrimary:selectedCategory.contains("C 4") ? Colors.white:  Colors.black, // foreground
-                                              ),
-                                              onPressed: () {
-                                                selectedCategory =  <String>[];
-                                                selectedCategory.add("C 4");
-
-                                                stateSetter(() { usersize = 'C 4';
-                                                custom = true;
-                                                size = custom4;
-                                                customprice = customprice4;
-                                                custompriceusd = custom41usd;
-                                                custompriceinr = custom41inr;});
-                                              },          child:
-
-                                            currentUser.country == "India"?  FittedBox(child: Text('$custom4 + ${currentUser.currencysym} $custom41inr',)):
-                                            currentUser.country == "United States"?  FittedBox(child: Text('$custom4 + \u0024 $custom41usd',)):
-                                            currentUser.country == country?FittedBox(child: Text('$custom4 + ${currentUser.currencysym} $custom41inr(\u0024 $custom41usd)',)):
-
-                                            FittedBox(child: Text('$custom4 + ${currentUser.currencysym} $customprice4(\u0024 $custom41usd)',)),
-
-                                            ),
-                                          ),
-                                          custom52==0?Container():   Padding(
-                                            padding: const EdgeInsets.all(8.0),
-                                            child:   ElevatedButton(
-
-                                              style: ElevatedButton.styleFrom(
-
-                                                primary: selectedCategory.contains("C 5") ? Colors.black: Colors.white.withOpacity(0.1), // background
-                                                onPrimary:selectedCategory.contains("C 5") ? Colors.white:  Colors.black, // foreground
-                                              ),
-                                              onPressed: () {
-                                                selectedCategory =  <String>[];
-                                                selectedCategory.add("C 5");
-
-                                                stateSetter(() { usersize = 'C 5';
-                                                custom = true;
-                                                size = custom5;
-                                                customprice = customprice5;
-                                                custompriceusd = custom51usd;
-                                                custompriceinr = custom51inr;});
-                                              },          child:
-
-                                            currentUser.country == "India"?  FittedBox(child: Text('$custom5 + ${currentUser.currencysym} $custom51inr',)):
-                                            currentUser.country == "United States"?  FittedBox(child: Text('$custom5 + \u0024 $custom51usd',)):
-                                            currentUser.country == country?FittedBox(child: Text('$custom5 + ${currentUser.currencysym} $custom51inr(\u0024 $custom51usd)',)):
-
-                                            FittedBox(child: Text('$custom5 + ${currentUser.currencysym} $customprice5(\u0024 $custom51usd)',)),
-
-                                            ),
-                                          ),
-                                          custom62==0?Container():   Padding(
-                                            padding: const EdgeInsets.all(8.0),
-                                            child:   ElevatedButton(
-
-                                              style: ElevatedButton.styleFrom(
-
-                                                primary: selectedCategory.contains("C 6") ? Colors.black: Colors.white.withOpacity(0.1), // background
-                                                onPrimary:selectedCategory.contains("C 6") ? Colors.white:  Colors.black, // foreground
-                                              ),
-                                              onPressed: () {
-                                                selectedCategory =  <String>[];
-                                                selectedCategory.add("C 6");
-
-                                                stateSetter(() { usersize = 'C 6';
-                                                custom = true;
-                                                size = custom6;
-                                                customprice = customprice6;
-                                                custompriceusd = custom61usd;
-                                                custompriceinr = custom61inr;});
-                                              },          child:
-
-                                            currentUser.country == "India"?  FittedBox(child: Text('$custom6 + ${currentUser.currencysym} $custom61inr',)):
-                                            currentUser.country == "United States"?  FittedBox(child: Text('$custom6 + \u0024 $custom61usd',)):
-                                            currentUser.country == country?FittedBox(child: Text('$custom6 + ${currentUser.currencysym} $custom61inr(\u0024 $custom61usd)',)):
-
-                                            FittedBox(child: Text('$custom6 + ${currentUser.currencysym} $customprice6(\u0024 $custom61usd)',)),
-
-                                            ),
-                                          ),
-                                          custom72==0?Container():   Padding(
-                                            padding: const EdgeInsets.all(8.0),
-                                            child:   ElevatedButton(
-
-                                              style: ElevatedButton.styleFrom(
-
-                                                primary: selectedCategory.contains("C 7") ? Colors.black: Colors.white.withOpacity(0.1), // background
-                                                onPrimary:selectedCategory.contains("C 7") ? Colors.white:  Colors.black, // foreground
-                                              ),
-                                              onPressed: () {
-                                                selectedCategory =  <String>[];
-                                                selectedCategory.add("C 7");
-
-                                                stateSetter(() { usersize = 'C 7';
-                                                custom = true;
-                                                size = custom7;
-                                                customprice = customprice7;
-                                                custompriceusd = custom71usd;
-                                                custompriceinr = custom71inr;});
-                                              },          child:
-
-                                            currentUser.country == "India"?  FittedBox(child: Text('$custom7 + ${currentUser.currencysym} $custom71inr',)):
-                                            currentUser.country == "United States"?  FittedBox(child: Text('$custom7 + \u0024 $custom71usd',)):
-                                            currentUser.country == country?FittedBox(child: Text('$custom7 + ${currentUser.currencysym} $custom71inr(\u0024 $custom71usd)',)):
-
-                                            FittedBox(child: Text('$custom7 + ${currentUser.currencysym} $customprice7(\u0024 $custom71usd)',)),
-
-                                            ),
-                                          ),
-                                          custom82==0?Container():   Padding(
-                                            padding: const EdgeInsets.all(8.0),
-                                            child:   ElevatedButton(
-
-                                              style: ElevatedButton.styleFrom(
-
-                                                primary: selectedCategory.contains("C 8") ? Colors.black: Colors.white.withOpacity(0.1), // background
-                                                onPrimary:selectedCategory.contains("C 8") ? Colors.white:  Colors.black, // foreground
-                                              ),
-                                              onPressed: () {
-                                                selectedCategory =  <String>[];
-                                                selectedCategory.add("C 8");
-
-                                                stateSetter(() { usersize = 'C 8';
-                                                custom = true;
-                                                size = custom8;
-                                                customprice = customprice8;
-                                                custompriceusd = custom81usd;
-                                                custompriceinr = custom81inr;});
-                                              },          child:
-
-                                            currentUser.country == "India"?  FittedBox(child: Text('$custom8 + ${currentUser.currencysym} $custom81inr',)):
-                                            currentUser.country == "United States"?  FittedBox(child: Text('$custom8 + \u0024 $custom81usd',)):
-                                            currentUser.country == country?FittedBox(child: Text('$custom8 + ${currentUser.currencysym} $custom81inr(\u0024 $custom81usd)',)):
-
-                                            FittedBox(child: Text('$custom8 + ${currentUser.currencysym} $customprice8(\u0024 $custom81usd)',)),
-
-                                            ),
-                                          ),
-                                          custom92==0?Container():   Padding(
-                                            padding: const EdgeInsets.all(8.0),
-                                            child:   ElevatedButton(
-
-                                              style: ElevatedButton.styleFrom(
-
-                                                primary: selectedCategory.contains("C 9") ? Colors.black: Colors.white.withOpacity(0.1), // background
-                                                onPrimary:selectedCategory.contains("C 9") ? Colors.white:  Colors.black, // foreground
-                                              ),
-                                              onPressed: () {
-                                                selectedCategory =  <String>[];
-                                                selectedCategory.add("C 9");
-
-                                                stateSetter(() { usersize = 'C 9';
-                                                custom = true;
-                                                size = custom9;
-                                                customprice = customprice9;
-                                                custompriceusd = custom91usd;
-                                                custompriceinr = custom91inr;});
-                                              },          child:
-
-                                            currentUser.country == "India"?  FittedBox(child: Text('$custom9 + ${currentUser.currencysym} $custom91inr',)):
-                                            currentUser.country == "United States"?  FittedBox(child: Text('$custom9 + \u0024 $custom91usd',)):
-                                            currentUser.country == country?FittedBox(child: Text('$custom9 + ${currentUser.currencysym} $custom91inr(\u0024 $custom91usd)',)):
-
-                                            FittedBox(child: Text('$custom9 + ${currentUser.currencysym} $customprice9(\u0024 $custom91usd)',)),
-
-                                            ),
-                                          ),
-                                          custom102==0?Container():   Padding(
-                                            padding: const EdgeInsets.all(8.0),
-                                            child:   ElevatedButton(
-
-                                              style: ElevatedButton.styleFrom(
-
-                                                primary: selectedCategory.contains("C 10") ? Colors.black: Colors.white.withOpacity(0.1), // background
-                                                onPrimary:selectedCategory.contains("C 10") ? Colors.white:  Colors.black, // foreground
-                                              ),
-                                              onPressed: () {
-                                                selectedCategory =  <String>[];
-                                                selectedCategory.add("C 10");
-
-                                                stateSetter(() { usersize = 'C 10';
-                                                custom = true;
-                                                size = custom10;
-                                                customprice = customprice10;
-                                                custompriceusd = custom101usd;
-                                                custompriceinr = custom101inr;});
-                                              },          child:
-
-                                            currentUser.country == "India"?  FittedBox(child: Text('$custom10 + ${currentUser.currencysym} $custom101inr',)):
-                                            currentUser.country == "United States"?  FittedBox(child: Text('$custom10 + \u0024 $custom101usd',)):
-                                            currentUser.country == country?FittedBox(child: Text('$custom10 + ${currentUser.currencysym} $custom101inr(\u0024 $custom101usd)',)):
-
-                                            FittedBox(child: Text('$custom10 + ${currentUser.currencysym} $customprice10(\u0024 $custom101usd)',)),
-
-                                            ),
-                                          ),
-
-
                                         ]
                                     ),
                                   ),
@@ -5641,7 +5223,7 @@ custom102==0?Container():   Padding(
                                   ),
                                 ),
                                 Container(
-                                  height:190.0,
+                                  height:205.0,
 
                                   child:   Expanded(
                                       child:   ListView(
@@ -5656,6 +5238,12 @@ custom102==0?Container():   Padding(
                                                       height:120.0,
                                                       width:120.0,
                                                       child: CachedImage(custom1img)),
+
+                                                  currentUser.country == "India"?  FittedBox(child: Text(' + ${currentUser.currencysym} $custom11inr',)):
+                                                  currentUser.country == "United States"?  FittedBox(child: Text(' + \u0024 $custom11usd',)):
+                                                  currentUser.country == country?FittedBox(child: Text('+ ${currentUser.currencysym} $custom11inr(\u0024 $custom11usd)',)):
+
+                                                  FittedBox(child: Text(' + ${currentUser.currencysym} $customprice1(\u0024 $custom11usd)',)),
                                                   ElevatedButton(
 
                                                     style: ElevatedButton.styleFrom(
@@ -5668,7 +5256,10 @@ custom102==0?Container():   Padding(
                                                       selectedCustom.add("Custom 1");
 
                                                       stateSetter(() { Custom = 'Custom 1';
-                                                      userCustom = custom1;});
+                                                      userCustom = custom1;
+                                                      customprice = customprice1;
+                                                      custompriceusd = custom11usd;
+                                                      custompriceinr = custom11inr;});
                                                     },          child: Text(custom1),
                                                   ),
                                                 ],
@@ -5682,6 +5273,11 @@ custom102==0?Container():   Padding(
                                                       height:120.0,
                                                       width:120.0,
                                                       child: CachedImage(custom2img)),
+                                                  currentUser.country == "India"?  FittedBox(child: Text(' + ${currentUser.currencysym} $custom21inr',)):
+                                                  currentUser.country == "United States"?  FittedBox(child: Text(' + \u0024 $custom21usd',)):
+                                                  currentUser.country == country?FittedBox(child: Text(' + ${currentUser.currencysym} $custom21inr(\u0024 $custom21usd)',)):
+
+                                                  FittedBox(child: Text(' + ${currentUser.currencysym} $customprice2(\u0024 $custom21usd)',)),
                                                   ElevatedButton(
 
                                                     style: ElevatedButton.styleFrom(
@@ -5694,7 +5290,10 @@ custom102==0?Container():   Padding(
                                                       selectedCustom.add("Custom 2");
 
                                                       stateSetter(() { Custom = 'Custom 2';
-                                                      userCustom = custom2;});
+                                                      userCustom = custom2;
+                                                      customprice = customprice2;
+                                                      custompriceusd = custom21usd;
+                                                      custompriceinr = custom21inr;});
                                                     },          child: Text(custom2),
                                                   ),
                                                 ],
@@ -5709,6 +5308,12 @@ custom102==0?Container():   Padding(
                                                       height:120.0,
                                                       width:120.0,
                                                       child: CachedImage(custom3img)),
+
+                                                  currentUser.country == "India"?  FittedBox(child: Text(' + ${currentUser.currencysym} $custom31inr',)):
+                                                  currentUser.country == "United States"?  FittedBox(child: Text(' + \u0024 $custom31usd',)):
+                                                  currentUser.country == country?FittedBox(child: Text(' + ${currentUser.currencysym} $custom31inr(\u0024 $custom31usd)',)):
+
+                                                  FittedBox(child: Text(' + ${currentUser.currencysym} $customprice3(\u0024 $custom31usd)',)),
                                                   ElevatedButton(
 
                                                     style: ElevatedButton.styleFrom(
@@ -5721,7 +5326,10 @@ custom102==0?Container():   Padding(
                                                       selectedCustom.add("Custom 3");
 
                                                       stateSetter(() { Custom = 'Custom 3';
-                                                      userCustom = custom3;});
+                                                      userCustom = custom3;
+                                                      customprice = customprice3;
+                                                      custompriceusd = custom31usd;
+                                                      custompriceinr = custom31inr;});
                                                     },          child: Text(custom3),
                                                   ),
                                                 ],
@@ -5735,6 +5343,11 @@ custom102==0?Container():   Padding(
                                                       height:120.0,
                                                       width:120.0,
                                                       child: CachedImage(custom4img)),
+                                                  currentUser.country == "India"?  FittedBox(child: Text(' + ${currentUser.currencysym} $custom41inr',)):
+                                                  currentUser.country == "United States"?  FittedBox(child: Text(' + \u0024 $custom41usd',)):
+                                                  currentUser.country == country?FittedBox(child: Text(' + ${currentUser.currencysym} $custom41inr(\u0024 $custom41usd)',)):
+
+                                                  FittedBox(child: Text(' + ${currentUser.currencysym} $customprice4(\u0024 $custom41usd)',)),
                                                   ElevatedButton(
 
                                                     style: ElevatedButton.styleFrom(
@@ -5747,7 +5360,10 @@ custom102==0?Container():   Padding(
                                                       selectedCustom.add("Custom 4");
 
                                                       stateSetter(() { Custom = 'Custom 4';
-                                                      userCustom = custom4;});
+                                                      userCustom = custom4;
+                                                      customprice = customprice4;
+                                                      custompriceusd = custom41usd;
+                                                      custompriceinr = custom41inr;});
                                                     },          child: Text(custom4),
                                                   ),
                                                 ],
@@ -5761,6 +5377,12 @@ custom102==0?Container():   Padding(
                                                       height:120.0,
                                                       width:120.0,
                                                       child: CachedImage(custom5img)),
+                                                  currentUser.country == "India"?  FittedBox(child: Text(' + ${currentUser.currencysym} $custom51inr',)):
+                                                  currentUser.country == "United States"?  FittedBox(child: Text(' + \u0024 $custom51usd',)):
+                                                  currentUser.country == country?FittedBox(child: Text(' + ${currentUser.currencysym} $custom51inr(\u0024 $custom51usd)',)):
+
+                                                  FittedBox(child: Text(' + ${currentUser.currencysym} $customprice5(\u0024 $custom51usd)',)),
+
                                                   ElevatedButton(
 
                                                     style: ElevatedButton.styleFrom(
@@ -5773,7 +5395,10 @@ custom102==0?Container():   Padding(
                                                       selectedCustom.add("Custom 5");
 
                                                       stateSetter(() { Custom = 'Custom 5';
-                                                      userCustom = custom5;});
+                                                      userCustom = custom5;
+                                                      customprice = customprice5;
+                                                      custompriceusd = custom51usd;
+                                                      custompriceinr = custom51inr;});
                                                     },          child: Text(custom5),
                                                   ),
                                                 ],
@@ -5787,6 +5412,11 @@ custom102==0?Container():   Padding(
                                                       height:120.0,
                                                       width:120.0,
                                                       child: CachedImage(custom6img)),
+                                                  currentUser.country == "India"?  FittedBox(child: Text(' + ${currentUser.currencysym} $custom61inr',)):
+                                                  currentUser.country == "United States"?  FittedBox(child: Text(' + \u0024 $custom61usd',)):
+                                                  currentUser.country == country?FittedBox(child: Text(' + ${currentUser.currencysym} $custom61inr(\u0024 $custom61usd)',)):
+
+                                                  FittedBox(child: Text(' + ${currentUser.currencysym} $customprice6(\u0024 $custom61usd)',)),
                                                   ElevatedButton(
 
                                                     style: ElevatedButton.styleFrom(
@@ -5799,7 +5429,10 @@ custom102==0?Container():   Padding(
                                                       selectedCustom.add("Custom 6");
 
                                                       stateSetter(() { Custom = 'Custom 6';
-                                                      userCustom = custom6;});
+                                                      userCustom = custom6;
+                                                      customprice = customprice6;
+                                                      custompriceusd = custom61usd;
+                                                      custompriceinr = custom61inr;});
                                                     },          child: Text(custom6),
                                                   ),
                                                 ],
@@ -5813,6 +5446,11 @@ custom102==0?Container():   Padding(
                                                       height:120.0,
                                                       width:120.0,
                                                       child: CachedImage(custom7img)),
+                                                  currentUser.country == "India"?  FittedBox(child: Text(' + ${currentUser.currencysym} $custom71inr',)):
+                                                  currentUser.country == "United States"?  FittedBox(child: Text(' + \u0024 $custom71usd',)):
+                                                  currentUser.country == country?FittedBox(child: Text(' + ${currentUser.currencysym} $custom71inr(\u0024 $custom71usd)',)):
+
+                                                  FittedBox(child: Text(' + ${currentUser.currencysym} $customprice7(\u0024 $custom71usd)',)),
                                                   ElevatedButton(
 
                                                     style: ElevatedButton.styleFrom(
@@ -5825,7 +5463,10 @@ custom102==0?Container():   Padding(
                                                       selectedCustom.add("Custom 7");
 
                                                       stateSetter(() { Custom = 'Custom 7';
-                                                      userCustom = custom7;});
+                                                      userCustom = custom7;
+                                                      customprice = customprice7;
+                                                      custompriceusd = custom71usd;
+                                                      custompriceinr = custom71inr;});
                                                     },          child: Text(custom7),
                                                   ),
                                                 ],
@@ -5839,6 +5480,11 @@ custom102==0?Container():   Padding(
                                                       height:120.0,
                                                       width:120.0,
                                                       child: CachedImage(custom8img)),
+                                                  currentUser.country == "India"?  FittedBox(child: Text(' + ${currentUser.currencysym} $custom81inr',)):
+                                                  currentUser.country == "United States"?  FittedBox(child: Text(' + \u0024 $custom81usd',)):
+                                                  currentUser.country == country?FittedBox(child: Text(' + ${currentUser.currencysym} $custom81inr(\u0024 $custom81usd)',)):
+
+                                                  FittedBox(child: Text(' + ${currentUser.currencysym} $customprice8(\u0024 $custom81usd)',)),
                                                   ElevatedButton(
 
                                                     style: ElevatedButton.styleFrom(
@@ -5851,7 +5497,10 @@ custom102==0?Container():   Padding(
                                                       selectedCustom.add("Custom 8");
 
                                                       stateSetter(() { Custom = 'Custom 8';
-                                                      userCustom = custom8;});
+                                                      userCustom = custom8;
+                                                      customprice = customprice8;
+                                                      custompriceusd = custom81usd;
+                                                      custompriceinr = custom81inr;});
                                                     },          child: Text(custom8),
                                                   ),
                                                 ],
@@ -5865,6 +5514,11 @@ custom102==0?Container():   Padding(
                                                       height:120.0,
                                                       width:120.0,
                                                       child: CachedImage(custom9img)),
+                                                  currentUser.country == "India"?  FittedBox(child: Text(' + ${currentUser.currencysym} $custom91inr',)):
+                                                  currentUser.country == "United States"?  FittedBox(child: Text(' + \u0024 $custom91usd',)):
+                                                  currentUser.country == country?FittedBox(child: Text(' + ${currentUser.currencysym} $custom91inr(\u0024 $custom91usd)',)):
+
+                                                  FittedBox(child: Text(' + ${currentUser.currencysym} $customprice9(\u0024 $custom91usd)',)),
                                                   ElevatedButton(
 
                                                     style: ElevatedButton.styleFrom(
@@ -5877,7 +5531,10 @@ custom102==0?Container():   Padding(
                                                       selectedCustom.add("Custom 9");
 
                                                       stateSetter(() { Custom = 'Custom 9';
-                                                      userCustom = custom9;});
+                                                      userCustom = custom9;
+                                                      customprice = customprice9;
+                                                      custompriceusd = custom91usd;
+                                                      custompriceinr = custom91inr;});
                                                     },          child: Text(custom9),
                                                   ),
                                                 ],
@@ -5891,7 +5548,12 @@ custom102==0?Container():   Padding(
                                                       height:120.0,
                                                       width:120.0,
                                                       child: CachedImage(custom10img)),
-                                                  ElevatedButton(
+
+                                                  currentUser.country == "India"?  FittedBox(child: Text(' + ${currentUser.currencysym} $custom101inr',)):
+                                                  currentUser.country == "United States"?  FittedBox(child: Text(' + \u0024 $custom101usd',)):
+                                                  currentUser.country == country?FittedBox(child: Text(' + ${currentUser.currencysym} $custom101inr(\u0024 $custom101usd)',)):
+
+                                                  FittedBox(child: Text(' + ${currentUser.currencysym} $customprice10(\u0024 $custom101usd)',)),                                              ElevatedButton(
 
                                                     style: ElevatedButton.styleFrom(
 
@@ -5903,7 +5565,10 @@ custom102==0?Container():   Padding(
                                                       selectedCustom.add("Custom 10");
 
                                                       stateSetter(() { Custom = 'Custom 10';
-                                                      userCustom = custom10;});
+                                                      userCustom = custom10;
+                                                      customprice = customprice10;
+                                                      custompriceusd = custom101usd;
+                                                      custompriceinr = custom101inr;});
                                                     },          child: Text(custom10),
                                                   ),
                                                 ],
@@ -6208,297 +5873,6 @@ custom102==0?Container():   Padding(
                                           ),
 
 
-                                          custom12==0?Container():   Padding(
-                                            padding: const EdgeInsets.all(8.0),
-                                            child: ElevatedButton(
-
-                                              style: ElevatedButton.styleFrom(
-
-                                                primary: selectedCategory.contains("C 1") ? Colors.black: Colors.white.withOpacity(0.1), // background
-                                                onPrimary:selectedCategory.contains("C 1") ? Colors.white:  Colors.black, // foreground
-                                              ),
-                                              onPressed: () {
-                                                selectedCategory =  <String>[];
-                                                selectedCategory.add("C 1");
-
-                                                stateSetter(() { usersize = 'C 1';
-                                                custom = true;
-                                                size = custom1;
-                                                customprice = customprice1;
-                                                custompriceusd = custom11usd;
-                                                custompriceinr = custom11inr;});
-                                              },          child:
-                                            currentUser.country == "India"?  FittedBox(child: Text('$custom1 + ${currentUser.currencysym} $custom11inr',)):
-                                            currentUser.country == "United States"?  FittedBox(child: Text('$custom1 + \u0024 $custom11usd',)):
-                                            currentUser.country == country?FittedBox(child: Text('$custom1 + ${currentUser.currencysym} $custom11inr(\u0024 $custom11usd)',)):
-
-                                            FittedBox(child: Text('$custom1 + ${currentUser.currencysym} $customprice1(\u0024 $custom11usd)',)),
-
-                                            ),
-                                          ),
-                                          custom22==0?Container():   Padding(
-                                            padding: const EdgeInsets.all(8.0),
-                                            child:   ElevatedButton(
-
-                                              style: ElevatedButton.styleFrom(
-
-                                                primary: selectedCategory.contains("C 2") ? Colors.black: Colors.white.withOpacity(0.1), // background
-                                                onPrimary:selectedCategory.contains("C 2") ? Colors.white:  Colors.black, // foreground
-                                              ),
-                                              onPressed: () {
-                                                selectedCategory =  <String>[];
-                                                selectedCategory.add("C 2");
-
-                                                stateSetter(() { usersize = 'C 2';
-                                                custom = true;
-                                                size = custom2;
-                                                customprice = customprice2;
-                                                custompriceusd = custom21usd;
-                                                custompriceinr = custom21inr;});
-                                              },          child:
-
-                                            currentUser.country == "India"?  FittedBox(child: Text('$custom2 + ${currentUser.currencysym} $custom21inr',)):
-                                            currentUser.country == "United States"?  FittedBox(child: Text('$custom2 + \u0024 $custom21usd',)):
-                                            currentUser.country == country?FittedBox(child: Text('$custom2 + ${currentUser.currencysym} $custom21inr(\u0024 $custom21usd)',)):
-
-                                            FittedBox(child: Text('$custom2 + ${currentUser.currencysym} $customprice2(\u0024 $custom21usd)',)),
-
-                                            ),
-                                          ),
-                                          custom32==0?Container():   Padding(
-                                            padding: const EdgeInsets.all(8.0),
-                                            child:   ElevatedButton(
-
-                                              style: ElevatedButton.styleFrom(
-
-                                                primary: selectedCategory.contains("C 3") ? Colors.black: Colors.white.withOpacity(0.1), // background
-                                                onPrimary:selectedCategory.contains("C 3") ? Colors.white:  Colors.black, // foreground
-                                              ),
-                                              onPressed: () {
-                                                selectedCategory =  <String>[];
-                                                selectedCategory.add("C 3");
-
-                                                stateSetter(() { usersize = 'C 3';
-                                                custom = true;
-                                                size = custom3;
-                                                customprice = customprice3;
-                                                custompriceusd = custom31usd;
-                                                custompriceinr = custom31inr;});
-                                              },          child:
-
-                                            currentUser.country == "India"?  FittedBox(child: Text('$custom3 + ${currentUser.currencysym} $custom31inr',)):
-                                            currentUser.country == "United States"?  FittedBox(child: Text('$custom3 + \u0024 $custom31usd',)):
-                                            currentUser.country == country?FittedBox(child: Text('$custom3 + ${currentUser.currencysym} $custom31inr(\u0024 $custom31usd)',)):
-
-                                            FittedBox(child: Text('$custom3 + ${currentUser.currencysym} $customprice3(\u0024 $custom31usd)',)),
-
-                                            ),
-                                          ),
-                                          custom42==0?Container():   Padding(
-                                            padding: const EdgeInsets.all(8.0),
-                                            child:   ElevatedButton(
-
-                                              style: ElevatedButton.styleFrom(
-
-                                                primary: selectedCategory.contains("C 4") ? Colors.black: Colors.white.withOpacity(0.1), // background
-                                                onPrimary:selectedCategory.contains("C 4") ? Colors.white:  Colors.black, // foreground
-                                              ),
-                                              onPressed: () {
-                                                selectedCategory =  <String>[];
-                                                selectedCategory.add("C 4");
-
-                                                stateSetter(() { usersize = 'C 4';
-                                                custom = true;
-                                                size = custom4;
-                                                customprice = customprice4;
-                                                custompriceusd = custom41usd;
-                                                custompriceinr = custom41inr;});
-                                              },          child:
-
-                                            currentUser.country == "India"?  FittedBox(child: Text('$custom4 + ${currentUser.currencysym} $custom41inr',)):
-                                            currentUser.country == "United States"?  FittedBox(child: Text('$custom4 + \u0024 $custom41usd',)):
-                                            currentUser.country == country?FittedBox(child: Text('$custom4 + ${currentUser.currencysym} $custom41inr(\u0024 $custom41usd)',)):
-
-                                            FittedBox(child: Text('$custom4 + ${currentUser.currencysym} $customprice4(\u0024 $custom41usd)',)),
-
-                                            ),
-                                          ),
-                                          custom52==0?Container():   Padding(
-                                            padding: const EdgeInsets.all(8.0),
-                                            child:   ElevatedButton(
-
-                                              style: ElevatedButton.styleFrom(
-
-                                                primary: selectedCategory.contains("C 5") ? Colors.black: Colors.white.withOpacity(0.1), // background
-                                                onPrimary:selectedCategory.contains("C 5") ? Colors.white:  Colors.black, // foreground
-                                              ),
-                                              onPressed: () {
-                                                selectedCategory =  <String>[];
-                                                selectedCategory.add("C 5");
-
-                                                stateSetter(() { usersize = 'C 5';
-                                                custom = true;
-                                                size = custom5;
-                                                customprice = customprice5;
-                                                custompriceusd = custom51usd;
-                                                custompriceinr = custom51inr;});
-                                              },          child:
-
-                                            currentUser.country == "India"?  FittedBox(child: Text('$custom5 + ${currentUser.currencysym} $custom51inr',)):
-                                            currentUser.country == "United States"?  FittedBox(child: Text('$custom5 + \u0024 $custom51usd',)):
-                                            currentUser.country == country?FittedBox(child: Text('$custom5 + ${currentUser.currencysym} $custom51inr(\u0024 $custom51usd)',)):
-
-                                            FittedBox(child: Text('$custom5 + ${currentUser.currencysym} $customprice5(\u0024 $custom51usd)',)),
-
-                                            ),
-                                          ),
-                                          custom62==0?Container():   Padding(
-                                            padding: const EdgeInsets.all(8.0),
-                                            child:   ElevatedButton(
-
-                                              style: ElevatedButton.styleFrom(
-
-                                                primary: selectedCategory.contains("C 6") ? Colors.black: Colors.white.withOpacity(0.1), // background
-                                                onPrimary:selectedCategory.contains("C 6") ? Colors.white:  Colors.black, // foreground
-                                              ),
-                                              onPressed: () {
-                                                selectedCategory =  <String>[];
-                                                selectedCategory.add("C 6");
-
-                                                stateSetter(() { usersize = 'C 6';
-                                                custom = true;
-                                                size = custom6;
-                                                customprice = customprice6;
-                                                custompriceusd = custom61usd;
-                                                custompriceinr = custom61inr;});
-                                              },          child:
-
-                                            currentUser.country == "India"?  FittedBox(child: Text('$custom6 + ${currentUser.currencysym} $custom61inr',)):
-                                            currentUser.country == "United States"?  FittedBox(child: Text('$custom6 + \u0024 $custom61usd',)):
-                                            currentUser.country == country?FittedBox(child: Text('$custom6 + ${currentUser.currencysym} $custom61inr(\u0024 $custom61usd)',)):
-
-                                            FittedBox(child: Text('$custom6 + ${currentUser.currencysym} $customprice6(\u0024 $custom61usd)',)),
-
-                                            ),
-                                          ),
-                                          custom72==0?Container():   Padding(
-                                            padding: const EdgeInsets.all(8.0),
-                                            child:   ElevatedButton(
-
-                                              style: ElevatedButton.styleFrom(
-
-                                                primary: selectedCategory.contains("C 7") ? Colors.black: Colors.white.withOpacity(0.1), // background
-                                                onPrimary:selectedCategory.contains("C 7") ? Colors.white:  Colors.black, // foreground
-                                              ),
-                                              onPressed: () {
-                                                selectedCategory =  <String>[];
-                                                selectedCategory.add("C 7");
-
-                                                stateSetter(() { usersize = 'C 7';
-                                                custom = true;
-                                                size = custom7;
-                                                customprice = customprice7;
-                                                custompriceusd = custom71usd;
-                                                custompriceinr = custom71inr;});
-                                              },          child:
-
-                                            currentUser.country == "India"?  FittedBox(child: Text('$custom7 + ${currentUser.currencysym} $custom71inr',)):
-                                            currentUser.country == "United States"?  FittedBox(child: Text('$custom7 + \u0024 $custom71usd',)):
-                                            currentUser.country == country?FittedBox(child: Text('$custom7 + ${currentUser.currencysym} $custom71inr(\u0024 $custom71usd)',)):
-
-                                            FittedBox(child: Text('$custom7 + ${currentUser.currencysym} $customprice7(\u0024 $custom71usd)',)),
-
-                                            ),
-                                          ),
-                                          custom82==0?Container():   Padding(
-                                            padding: const EdgeInsets.all(8.0),
-                                            child:   ElevatedButton(
-
-                                              style: ElevatedButton.styleFrom(
-
-                                                primary: selectedCategory.contains("C 8") ? Colors.black: Colors.white.withOpacity(0.1), // background
-                                                onPrimary:selectedCategory.contains("C 8") ? Colors.white:  Colors.black, // foreground
-                                              ),
-                                              onPressed: () {
-                                                selectedCategory =  <String>[];
-                                                selectedCategory.add("C 8");
-
-                                                stateSetter(() { usersize = 'C 8';
-                                                custom = true;
-                                                size = custom8;
-                                                customprice = customprice8;
-                                                custompriceusd = custom81usd;
-                                                custompriceinr = custom81inr;});
-                                              },          child:
-
-                                            currentUser.country == "India"?  FittedBox(child: Text('$custom8 + ${currentUser.currencysym} $custom81inr',)):
-                                            currentUser.country == "United States"?  FittedBox(child: Text('$custom8 + \u0024 $custom81usd',)):
-                                            currentUser.country == country?FittedBox(child: Text('$custom8 + ${currentUser.currencysym} $custom81inr(\u0024 $custom81usd)',)):
-
-                                            FittedBox(child: Text('$custom8 + ${currentUser.currencysym} $customprice8(\u0024 $custom81usd)',)),
-
-                                            ),
-                                          ),
-                                          custom92==0?Container():   Padding(
-                                            padding: const EdgeInsets.all(8.0),
-                                            child:   ElevatedButton(
-
-                                              style: ElevatedButton.styleFrom(
-
-                                                primary: selectedCategory.contains("C 9") ? Colors.black: Colors.white.withOpacity(0.1), // background
-                                                onPrimary:selectedCategory.contains("C 9") ? Colors.white:  Colors.black, // foreground
-                                              ),
-                                              onPressed: () {
-                                                selectedCategory =  <String>[];
-                                                selectedCategory.add("C 9");
-
-                                                stateSetter(() { usersize = 'C 9';
-                                                custom = true;
-                                                size = custom9;
-                                                customprice = customprice9;
-                                                custompriceusd = custom91usd;
-                                                custompriceinr = custom91inr;});
-                                              },          child:
-
-                                            currentUser.country == "India"?  FittedBox(child: Text('$custom9 + ${currentUser.currencysym} $custom91inr',)):
-                                            currentUser.country == "United States"?  FittedBox(child: Text('$custom9 + \u0024 $custom91usd',)):
-                                            currentUser.country == country?FittedBox(child: Text('$custom9 + ${currentUser.currencysym} $custom91inr(\u0024 $custom91usd)',)):
-
-                                            FittedBox(child: Text('$custom9 + ${currentUser.currencysym} $customprice9(\u0024 $custom91usd)',)),
-
-                                            ),
-                                          ),
-                                          custom102==0?Container():   Padding(
-                                            padding: const EdgeInsets.all(8.0),
-                                            child:   ElevatedButton(
-
-                                              style: ElevatedButton.styleFrom(
-
-                                                primary: selectedCategory.contains("C 10") ? Colors.black: Colors.white.withOpacity(0.1), // background
-                                                onPrimary:selectedCategory.contains("C 10") ? Colors.white:  Colors.black, // foreground
-                                              ),
-                                              onPressed: () {
-                                                selectedCategory =  <String>[];
-                                                selectedCategory.add("C 10");
-
-                                                stateSetter(() { usersize = 'C 10';
-                                                custom = true;
-                                                size = custom10;
-                                                customprice = customprice10;
-                                                custompriceusd = custom101usd;
-                                                custompriceinr = custom101inr;});
-                                              },          child:
-
-                                            currentUser.country == "India"?  FittedBox(child: Text('$custom10 + ${currentUser.currencysym} $custom101inr',)):
-                                            currentUser.country == "United States"?  FittedBox(child: Text('$custom10 + \u0024 $custom101usd',)):
-                                            currentUser.country == country?FittedBox(child: Text('$custom10 + ${currentUser.currencysym} $custom101inr(\u0024 $custom101usd)',)):
-
-                                            FittedBox(child: Text('$custom10 + ${currentUser.currencysym} $customprice10(\u0024 $custom101usd)',)),
-
-                                            ),
-                                          ),
-
-
                                         ]
                                     ),
                                   ),
@@ -6764,7 +6138,7 @@ custom102==0?Container():   Padding(
                                   ),
                                 ),
                                 Container(
-                                  height:190.0,
+                                  height:205.0,
 
                                   child:   Expanded(
                                       child:   ListView(
@@ -6779,6 +6153,12 @@ custom102==0?Container():   Padding(
                                                       height:120.0,
                                                       width:120.0,
                                                       child: CachedImage(custom1img)),
+
+                                                  currentUser.country == "India"?  FittedBox(child: Text(' + ${currentUser.currencysym} $custom11inr',)):
+                                                  currentUser.country == "United States"?  FittedBox(child: Text(' + \u0024 $custom11usd',)):
+                                                  currentUser.country == country?FittedBox(child: Text('+ ${currentUser.currencysym} $custom11inr(\u0024 $custom11usd)',)):
+
+                                                  FittedBox(child: Text(' + ${currentUser.currencysym} $customprice1(\u0024 $custom11usd)',)),
                                                   ElevatedButton(
 
                                                     style: ElevatedButton.styleFrom(
@@ -6791,7 +6171,10 @@ custom102==0?Container():   Padding(
                                                       selectedCustom.add("Custom 1");
 
                                                       stateSetter(() { Custom = 'Custom 1';
-                                                      userCustom = custom1;});
+                                                      userCustom = custom1;
+                                                      customprice = customprice1;
+                                                      custompriceusd = custom11usd;
+                                                      custompriceinr = custom11inr;});
                                                     },          child: Text(custom1),
                                                   ),
                                                 ],
@@ -6805,6 +6188,11 @@ custom102==0?Container():   Padding(
                                                       height:120.0,
                                                       width:120.0,
                                                       child: CachedImage(custom2img)),
+                                                  currentUser.country == "India"?  FittedBox(child: Text(' + ${currentUser.currencysym} $custom21inr',)):
+                                                  currentUser.country == "United States"?  FittedBox(child: Text(' + \u0024 $custom21usd',)):
+                                                  currentUser.country == country?FittedBox(child: Text(' + ${currentUser.currencysym} $custom21inr(\u0024 $custom21usd)',)):
+
+                                                  FittedBox(child: Text(' + ${currentUser.currencysym} $customprice2(\u0024 $custom21usd)',)),
                                                   ElevatedButton(
 
                                                     style: ElevatedButton.styleFrom(
@@ -6817,7 +6205,10 @@ custom102==0?Container():   Padding(
                                                       selectedCustom.add("Custom 2");
 
                                                       stateSetter(() { Custom = 'Custom 2';
-                                                      userCustom = custom2;});
+                                                      userCustom = custom2;
+                                                      customprice = customprice2;
+                                                      custompriceusd = custom21usd;
+                                                      custompriceinr = custom21inr;});
                                                     },          child: Text(custom2),
                                                   ),
                                                 ],
@@ -6832,6 +6223,12 @@ custom102==0?Container():   Padding(
                                                       height:120.0,
                                                       width:120.0,
                                                       child: CachedImage(custom3img)),
+
+                                                  currentUser.country == "India"?  FittedBox(child: Text(' + ${currentUser.currencysym} $custom31inr',)):
+                                                  currentUser.country == "United States"?  FittedBox(child: Text(' + \u0024 $custom31usd',)):
+                                                  currentUser.country == country?FittedBox(child: Text(' + ${currentUser.currencysym} $custom31inr(\u0024 $custom31usd)',)):
+
+                                                  FittedBox(child: Text(' + ${currentUser.currencysym} $customprice3(\u0024 $custom31usd)',)),
                                                   ElevatedButton(
 
                                                     style: ElevatedButton.styleFrom(
@@ -6844,7 +6241,10 @@ custom102==0?Container():   Padding(
                                                       selectedCustom.add("Custom 3");
 
                                                       stateSetter(() { Custom = 'Custom 3';
-                                                      userCustom = custom3;});
+                                                      userCustom = custom3;
+                                                      customprice = customprice3;
+                                                      custompriceusd = custom31usd;
+                                                      custompriceinr = custom31inr;});
                                                     },          child: Text(custom3),
                                                   ),
                                                 ],
@@ -6858,6 +6258,11 @@ custom102==0?Container():   Padding(
                                                       height:120.0,
                                                       width:120.0,
                                                       child: CachedImage(custom4img)),
+                                                  currentUser.country == "India"?  FittedBox(child: Text(' + ${currentUser.currencysym} $custom41inr',)):
+                                                  currentUser.country == "United States"?  FittedBox(child: Text(' + \u0024 $custom41usd',)):
+                                                  currentUser.country == country?FittedBox(child: Text(' + ${currentUser.currencysym} $custom41inr(\u0024 $custom41usd)',)):
+
+                                                  FittedBox(child: Text(' + ${currentUser.currencysym} $customprice4(\u0024 $custom41usd)',)),
                                                   ElevatedButton(
 
                                                     style: ElevatedButton.styleFrom(
@@ -6870,7 +6275,10 @@ custom102==0?Container():   Padding(
                                                       selectedCustom.add("Custom 4");
 
                                                       stateSetter(() { Custom = 'Custom 4';
-                                                      userCustom = custom4;});
+                                                      userCustom = custom4;
+                                                      customprice = customprice4;
+                                                      custompriceusd = custom41usd;
+                                                      custompriceinr = custom41inr;});
                                                     },          child: Text(custom4),
                                                   ),
                                                 ],
@@ -6884,6 +6292,12 @@ custom102==0?Container():   Padding(
                                                       height:120.0,
                                                       width:120.0,
                                                       child: CachedImage(custom5img)),
+                                                  currentUser.country == "India"?  FittedBox(child: Text(' + ${currentUser.currencysym} $custom51inr',)):
+                                                  currentUser.country == "United States"?  FittedBox(child: Text(' + \u0024 $custom51usd',)):
+                                                  currentUser.country == country?FittedBox(child: Text(' + ${currentUser.currencysym} $custom51inr(\u0024 $custom51usd)',)):
+
+                                                  FittedBox(child: Text(' + ${currentUser.currencysym} $customprice5(\u0024 $custom51usd)',)),
+
                                                   ElevatedButton(
 
                                                     style: ElevatedButton.styleFrom(
@@ -6896,7 +6310,10 @@ custom102==0?Container():   Padding(
                                                       selectedCustom.add("Custom 5");
 
                                                       stateSetter(() { Custom = 'Custom 5';
-                                                      userCustom = custom5;});
+                                                      userCustom = custom5;
+                                                      customprice = customprice5;
+                                                      custompriceusd = custom51usd;
+                                                      custompriceinr = custom51inr;});
                                                     },          child: Text(custom5),
                                                   ),
                                                 ],
@@ -6910,6 +6327,11 @@ custom102==0?Container():   Padding(
                                                       height:120.0,
                                                       width:120.0,
                                                       child: CachedImage(custom6img)),
+                                                  currentUser.country == "India"?  FittedBox(child: Text(' + ${currentUser.currencysym} $custom61inr',)):
+                                                  currentUser.country == "United States"?  FittedBox(child: Text(' + \u0024 $custom61usd',)):
+                                                  currentUser.country == country?FittedBox(child: Text(' + ${currentUser.currencysym} $custom61inr(\u0024 $custom61usd)',)):
+
+                                                  FittedBox(child: Text(' + ${currentUser.currencysym} $customprice6(\u0024 $custom61usd)',)),
                                                   ElevatedButton(
 
                                                     style: ElevatedButton.styleFrom(
@@ -6922,7 +6344,10 @@ custom102==0?Container():   Padding(
                                                       selectedCustom.add("Custom 6");
 
                                                       stateSetter(() { Custom = 'Custom 6';
-                                                      userCustom = custom6;});
+                                                      userCustom = custom6;
+                                                      customprice = customprice6;
+                                                      custompriceusd = custom61usd;
+                                                      custompriceinr = custom61inr;});
                                                     },          child: Text(custom6),
                                                   ),
                                                 ],
@@ -6936,6 +6361,11 @@ custom102==0?Container():   Padding(
                                                       height:120.0,
                                                       width:120.0,
                                                       child: CachedImage(custom7img)),
+                                                  currentUser.country == "India"?  FittedBox(child: Text(' + ${currentUser.currencysym} $custom71inr',)):
+                                                  currentUser.country == "United States"?  FittedBox(child: Text(' + \u0024 $custom71usd',)):
+                                                  currentUser.country == country?FittedBox(child: Text(' + ${currentUser.currencysym} $custom71inr(\u0024 $custom71usd)',)):
+
+                                                  FittedBox(child: Text(' + ${currentUser.currencysym} $customprice7(\u0024 $custom71usd)',)),
                                                   ElevatedButton(
 
                                                     style: ElevatedButton.styleFrom(
@@ -6948,7 +6378,10 @@ custom102==0?Container():   Padding(
                                                       selectedCustom.add("Custom 7");
 
                                                       stateSetter(() { Custom = 'Custom 7';
-                                                      userCustom = custom7;});
+                                                      userCustom = custom7;
+                                                      customprice = customprice7;
+                                                      custompriceusd = custom71usd;
+                                                      custompriceinr = custom71inr;});
                                                     },          child: Text(custom7),
                                                   ),
                                                 ],
@@ -6962,6 +6395,11 @@ custom102==0?Container():   Padding(
                                                       height:120.0,
                                                       width:120.0,
                                                       child: CachedImage(custom8img)),
+                                                  currentUser.country == "India"?  FittedBox(child: Text(' + ${currentUser.currencysym} $custom81inr',)):
+                                                  currentUser.country == "United States"?  FittedBox(child: Text(' + \u0024 $custom81usd',)):
+                                                  currentUser.country == country?FittedBox(child: Text(' + ${currentUser.currencysym} $custom81inr(\u0024 $custom81usd)',)):
+
+                                                  FittedBox(child: Text(' + ${currentUser.currencysym} $customprice8(\u0024 $custom81usd)',)),
                                                   ElevatedButton(
 
                                                     style: ElevatedButton.styleFrom(
@@ -6974,7 +6412,10 @@ custom102==0?Container():   Padding(
                                                       selectedCustom.add("Custom 8");
 
                                                       stateSetter(() { Custom = 'Custom 8';
-                                                      userCustom = custom8;});
+                                                      userCustom = custom8;
+                                                      customprice = customprice8;
+                                                      custompriceusd = custom81usd;
+                                                      custompriceinr = custom81inr;});
                                                     },          child: Text(custom8),
                                                   ),
                                                 ],
@@ -6988,6 +6429,11 @@ custom102==0?Container():   Padding(
                                                       height:120.0,
                                                       width:120.0,
                                                       child: CachedImage(custom9img)),
+                                                  currentUser.country == "India"?  FittedBox(child: Text(' + ${currentUser.currencysym} $custom91inr',)):
+                                                  currentUser.country == "United States"?  FittedBox(child: Text(' + \u0024 $custom91usd',)):
+                                                  currentUser.country == country?FittedBox(child: Text(' + ${currentUser.currencysym} $custom91inr(\u0024 $custom91usd)',)):
+
+                                                  FittedBox(child: Text(' + ${currentUser.currencysym} $customprice9(\u0024 $custom91usd)',)),
                                                   ElevatedButton(
 
                                                     style: ElevatedButton.styleFrom(
@@ -7000,7 +6446,10 @@ custom102==0?Container():   Padding(
                                                       selectedCustom.add("Custom 9");
 
                                                       stateSetter(() { Custom = 'Custom 9';
-                                                      userCustom = custom9;});
+                                                      userCustom = custom9;
+                                                      customprice = customprice9;
+                                                      custompriceusd = custom91usd;
+                                                      custompriceinr = custom91inr;});
                                                     },          child: Text(custom9),
                                                   ),
                                                 ],
@@ -7014,7 +6463,12 @@ custom102==0?Container():   Padding(
                                                       height:120.0,
                                                       width:120.0,
                                                       child: CachedImage(custom10img)),
-                                                  ElevatedButton(
+
+                                                  currentUser.country == "India"?  FittedBox(child: Text(' + ${currentUser.currencysym} $custom101inr',)):
+                                                  currentUser.country == "United States"?  FittedBox(child: Text(' + \u0024 $custom101usd',)):
+                                                  currentUser.country == country?FittedBox(child: Text(' + ${currentUser.currencysym} $custom101inr(\u0024 $custom101usd)',)):
+
+                                                  FittedBox(child: Text(' + ${currentUser.currencysym} $customprice10(\u0024 $custom101usd)',)),                                              ElevatedButton(
 
                                                     style: ElevatedButton.styleFrom(
 
@@ -7026,7 +6480,10 @@ custom102==0?Container():   Padding(
                                                       selectedCustom.add("Custom 10");
 
                                                       stateSetter(() { Custom = 'Custom 10';
-                                                      userCustom = custom10;});
+                                                      userCustom = custom10;
+                                                      customprice = customprice10;
+                                                      custompriceusd = custom101usd;
+                                                      custompriceinr = custom101inr;});
                                                     },          child: Text(custom10),
                                                   ),
                                                 ],
@@ -7555,296 +7012,6 @@ custom102==0?Container():   Padding(
                                           ),
 
 
-                                          custom12==0?Container():   Padding(
-                                            padding: const EdgeInsets.all(8.0),
-                                            child: ElevatedButton(
-
-                                              style: ElevatedButton.styleFrom(
-
-                                                primary: selectedCategory.contains("C 1") ? Colors.black: Colors.white.withOpacity(0.1), // background
-                                                onPrimary:selectedCategory.contains("C 1") ? Colors.white:  Colors.black, // foreground
-                                              ),
-                                              onPressed: () {
-                                                selectedCategory =  <String>[];
-                                                selectedCategory.add("C 1");
-
-                                                stateSetter(() { usersize = 'C 1';
-                                                custom = true;
-                                                size = custom1;
-                                                customprice = customprice1;
-                                                custompriceusd = custom11usd;
-                                                custompriceinr = custom11inr;});
-                                              },          child:
-                                            currentUser.country == "India"?  FittedBox(child: Text('$custom1 + ${currentUser.currencysym} $custom11inr',)):
-                                            currentUser.country == "United States"?  FittedBox(child: Text('$custom1 + \u0024 $custom11usd',)):
-                                            currentUser.country == country?FittedBox(child: Text('$custom1 + ${currentUser.currencysym} $custom11inr(\u0024 $custom11usd)',)):
-
-                                            FittedBox(child: Text('$custom1 + ${currentUser.currencysym} $customprice1(\u0024 $custom11usd)',)),
-
-                                            ),
-                                          ),
-                                          custom22==0?Container():   Padding(
-                                            padding: const EdgeInsets.all(8.0),
-                                            child:   ElevatedButton(
-
-                                              style: ElevatedButton.styleFrom(
-
-                                                primary: selectedCategory.contains("C 2") ? Colors.black: Colors.white.withOpacity(0.1), // background
-                                                onPrimary:selectedCategory.contains("C 2") ? Colors.white:  Colors.black, // foreground
-                                              ),
-                                              onPressed: () {
-                                                selectedCategory =  <String>[];
-                                                selectedCategory.add("C 2");
-
-                                                stateSetter(() { usersize = 'C 2';
-                                                custom = true;
-                                                size = custom2;
-                                                customprice = customprice2;
-                                                custompriceusd = custom21usd;
-                                                custompriceinr = custom21inr;});
-                                              },          child:
-
-                                            currentUser.country == "India"?  FittedBox(child: Text('$custom2 + ${currentUser.currencysym} $custom21inr',)):
-                                            currentUser.country == "United States"?  FittedBox(child: Text('$custom2 + \u0024 $custom21usd',)):
-                                            currentUser.country == country?FittedBox(child: Text('$custom2 + ${currentUser.currencysym} $custom21inr(\u0024 $custom21usd)',)):
-
-                                            FittedBox(child: Text('$custom2 + ${currentUser.currencysym} $customprice2(\u0024 $custom21usd)',)),
-
-                                            ),
-                                          ),
-                                          custom32==0?Container():   Padding(
-                                            padding: const EdgeInsets.all(8.0),
-                                            child:   ElevatedButton(
-
-                                              style: ElevatedButton.styleFrom(
-
-                                                primary: selectedCategory.contains("C 3") ? Colors.black: Colors.white.withOpacity(0.1), // background
-                                                onPrimary:selectedCategory.contains("C 3") ? Colors.white:  Colors.black, // foreground
-                                              ),
-                                              onPressed: () {
-                                                selectedCategory =  <String>[];
-                                                selectedCategory.add("C 3");
-
-                                                stateSetter(() { usersize = 'C 3';
-                                                custom = true;
-                                                size = custom3;
-                                                customprice = customprice3;
-                                                custompriceusd = custom31usd;
-                                                custompriceinr = custom31inr;});
-                                              },          child:
-
-                                            currentUser.country == "India"?  FittedBox(child: Text('$custom3 + ${currentUser.currencysym} $custom31inr',)):
-                                            currentUser.country == "United States"?  FittedBox(child: Text('$custom3 + \u0024 $custom31usd',)):
-                                            currentUser.country == country?FittedBox(child: Text('$custom3 + ${currentUser.currencysym} $custom31inr(\u0024 $custom31usd)',)):
-
-                                            FittedBox(child: Text('$custom3 + ${currentUser.currencysym} $customprice3(\u0024 $custom31usd)',)),
-
-                                            ),
-                                          ),
-                                          custom42==0?Container():   Padding(
-                                            padding: const EdgeInsets.all(8.0),
-                                            child:   ElevatedButton(
-
-                                              style: ElevatedButton.styleFrom(
-
-                                                primary: selectedCategory.contains("C 4") ? Colors.black: Colors.white.withOpacity(0.1), // background
-                                                onPrimary:selectedCategory.contains("C 4") ? Colors.white:  Colors.black, // foreground
-                                              ),
-                                              onPressed: () {
-                                                selectedCategory =  <String>[];
-                                                selectedCategory.add("C 4");
-
-                                                stateSetter(() { usersize = 'C 4';
-                                                custom = true;
-                                                size = custom4;
-                                                customprice = customprice4;
-                                                custompriceusd = custom41usd;
-                                                custompriceinr = custom41inr;});
-                                              },          child:
-
-                                            currentUser.country == "India"?  FittedBox(child: Text('$custom4 + ${currentUser.currencysym} $custom41inr',)):
-                                            currentUser.country == "United States"?  FittedBox(child: Text('$custom4 + \u0024 $custom41usd',)):
-                                            currentUser.country == country?FittedBox(child: Text('$custom4 + ${currentUser.currencysym} $custom41inr(\u0024 $custom41usd)',)):
-
-                                            FittedBox(child: Text('$custom4 + ${currentUser.currencysym} $customprice4(\u0024 $custom41usd)',)),
-
-                                            ),
-                                          ),
-                                          custom52==0?Container():   Padding(
-                                            padding: const EdgeInsets.all(8.0),
-                                            child:   ElevatedButton(
-
-                                              style: ElevatedButton.styleFrom(
-
-                                                primary: selectedCategory.contains("C 5") ? Colors.black: Colors.white.withOpacity(0.1), // background
-                                                onPrimary:selectedCategory.contains("C 5") ? Colors.white:  Colors.black, // foreground
-                                              ),
-                                              onPressed: () {
-                                                selectedCategory =  <String>[];
-                                                selectedCategory.add("C 5");
-
-                                                stateSetter(() { usersize = 'C 5';
-                                                custom = true;
-                                                size = custom5;
-                                                customprice = customprice5;
-                                                custompriceusd = custom51usd;
-                                                custompriceinr = custom51inr;});
-                                              },          child:
-
-                                            currentUser.country == "India"?  FittedBox(child: Text('$custom5 + ${currentUser.currencysym} $custom51inr',)):
-                                            currentUser.country == "United States"?  FittedBox(child: Text('$custom5 + \u0024 $custom51usd',)):
-                                            currentUser.country == country?FittedBox(child: Text('$custom5 + ${currentUser.currencysym} $custom51inr(\u0024 $custom51usd)',)):
-
-                                            FittedBox(child: Text('$custom5 + ${currentUser.currencysym} $customprice5(\u0024 $custom51usd)',)),
-
-                                            ),
-                                          ),
-                                          custom62==0?Container():   Padding(
-                                            padding: const EdgeInsets.all(8.0),
-                                            child:   ElevatedButton(
-
-                                              style: ElevatedButton.styleFrom(
-
-                                                primary: selectedCategory.contains("C 6") ? Colors.black: Colors.white.withOpacity(0.1), // background
-                                                onPrimary:selectedCategory.contains("C 6") ? Colors.white:  Colors.black, // foreground
-                                              ),
-                                              onPressed: () {
-                                                selectedCategory =  <String>[];
-                                                selectedCategory.add("C 6");
-
-                                                stateSetter(() { usersize = 'C 6';
-                                                custom = true;
-                                                size = custom6;
-                                                customprice = customprice6;
-                                                custompriceusd = custom61usd;
-                                                custompriceinr = custom61inr;});
-                                              },          child:
-
-                                            currentUser.country == "India"?  FittedBox(child: Text('$custom6 + ${currentUser.currencysym} $custom61inr',)):
-                                            currentUser.country == "United States"?  FittedBox(child: Text('$custom6 + \u0024 $custom61usd',)):
-                                            currentUser.country == country?FittedBox(child: Text('$custom6 + ${currentUser.currencysym} $custom61inr(\u0024 $custom61usd)',)):
-
-                                            FittedBox(child: Text('$custom6 + ${currentUser.currencysym} $customprice6(\u0024 $custom61usd)',)),
-
-                                            ),
-                                          ),
-                                          custom72==0?Container():   Padding(
-                                            padding: const EdgeInsets.all(8.0),
-                                            child:   ElevatedButton(
-
-                                              style: ElevatedButton.styleFrom(
-
-                                                primary: selectedCategory.contains("C 7") ? Colors.black: Colors.white.withOpacity(0.1), // background
-                                                onPrimary:selectedCategory.contains("C 7") ? Colors.white:  Colors.black, // foreground
-                                              ),
-                                              onPressed: () {
-                                                selectedCategory =  <String>[];
-                                                selectedCategory.add("C 7");
-
-                                                stateSetter(() { usersize = 'C 7';
-                                                custom = true;
-                                                size = custom7;
-                                                customprice = customprice7;
-                                                custompriceusd = custom71usd;
-                                                custompriceinr = custom71inr;});
-                                              },          child:
-
-                                            currentUser.country == "India"?  FittedBox(child: Text('$custom7 + ${currentUser.currencysym} $custom71inr',)):
-                                            currentUser.country == "United States"?  FittedBox(child: Text('$custom7 + \u0024 $custom71usd',)):
-                                            currentUser.country == country?FittedBox(child: Text('$custom7 + ${currentUser.currencysym} $custom71inr(\u0024 $custom71usd)',)):
-
-                                            FittedBox(child: Text('$custom7 + ${currentUser.currencysym} $customprice7(\u0024 $custom71usd)',)),
-
-                                            ),
-                                          ),
-                                          custom82==0?Container():   Padding(
-                                            padding: const EdgeInsets.all(8.0),
-                                            child:   ElevatedButton(
-
-                                              style: ElevatedButton.styleFrom(
-
-                                                primary: selectedCategory.contains("C 8") ? Colors.black: Colors.white.withOpacity(0.1), // background
-                                                onPrimary:selectedCategory.contains("C 8") ? Colors.white:  Colors.black, // foreground
-                                              ),
-                                              onPressed: () {
-                                                selectedCategory =  <String>[];
-                                                selectedCategory.add("C 8");
-
-                                                stateSetter(() { usersize = 'C 8';
-                                                custom = true;
-                                                size = custom8;
-                                                customprice = customprice8;
-                                                custompriceusd = custom81usd;
-                                                custompriceinr = custom81inr;});
-                                              },          child:
-
-                                            currentUser.country == "India"?  FittedBox(child: Text('$custom8 + ${currentUser.currencysym} $custom81inr',)):
-                                            currentUser.country == "United States"?  FittedBox(child: Text('$custom8 + \u0024 $custom81usd',)):
-                                            currentUser.country == country?FittedBox(child: Text('$custom8 + ${currentUser.currencysym} $custom81inr(\u0024 $custom81usd)',)):
-
-                                            FittedBox(child: Text('$custom8 + ${currentUser.currencysym} $customprice8(\u0024 $custom81usd)',)),
-
-                                            ),
-                                          ),
-                                          custom92==0?Container():   Padding(
-                                            padding: const EdgeInsets.all(8.0),
-                                            child:   ElevatedButton(
-
-                                              style: ElevatedButton.styleFrom(
-
-                                                primary: selectedCategory.contains("C 9") ? Colors.black: Colors.white.withOpacity(0.1), // background
-                                                onPrimary:selectedCategory.contains("C 9") ? Colors.white:  Colors.black, // foreground
-                                              ),
-                                              onPressed: () {
-                                                selectedCategory =  <String>[];
-                                                selectedCategory.add("C 9");
-
-                                                stateSetter(() { usersize = 'C 9';
-                                                custom = true;
-                                                size = custom9;
-                                                customprice = customprice9;
-                                                custompriceusd = custom91usd;
-                                                custompriceinr = custom91inr;});
-                                              },          child:
-
-                                            currentUser.country == "India"?  FittedBox(child: Text('$custom9 + ${currentUser.currencysym} $custom91inr',)):
-                                            currentUser.country == "United States"?  FittedBox(child: Text('$custom9 + \u0024 $custom91usd',)):
-                                            currentUser.country == country?FittedBox(child: Text('$custom9 + ${currentUser.currencysym} $custom91inr(\u0024 $custom91usd)',)):
-
-                                            FittedBox(child: Text('$custom9 + ${currentUser.currencysym} $customprice9(\u0024 $custom91usd)',)),
-
-                                            ),
-                                          ),
-                                          custom102==0?Container():   Padding(
-                                            padding: const EdgeInsets.all(8.0),
-                                            child:   ElevatedButton(
-
-                                              style: ElevatedButton.styleFrom(
-
-                                                primary: selectedCategory.contains("C 10") ? Colors.black: Colors.white.withOpacity(0.1), // background
-                                                onPrimary:selectedCategory.contains("C 10") ? Colors.white:  Colors.black, // foreground
-                                              ),
-                                              onPressed: () {
-                                                selectedCategory =  <String>[];
-                                                selectedCategory.add("C 10");
-
-                                                stateSetter(() { usersize = 'C 10';
-                                                custom = true;
-                                                size = custom10;
-                                                customprice = customprice10;
-                                                custompriceusd = custom101usd;
-                                                custompriceinr = custom101inr;});
-                                              },          child:
-
-                                            currentUser.country == "India"?  FittedBox(child: Text('$custom10 + ${currentUser.currencysym} $custom101inr',)):
-                                            currentUser.country == "United States"?  FittedBox(child: Text('$custom10 + \u0024 $custom101usd',)):
-                                            currentUser.country == country?FittedBox(child: Text('$custom10 + ${currentUser.currencysym} $custom101inr(\u0024 $custom101usd)',)):
-
-                                            FittedBox(child: Text('$custom10 + ${currentUser.currencysym} $customprice10(\u0024 $custom101usd)',)),
-
-                                            ),
-                                          ),
-
 
                                         ]
                                     ),
@@ -8112,7 +7279,7 @@ custom102==0?Container():   Padding(
                                   ),
                                 ),
                                 Container(
-                                  height:190.0,
+                                  height:205.0,
 
                                   child:   Expanded(
                                       child:   ListView(
@@ -8127,6 +7294,12 @@ custom102==0?Container():   Padding(
                                                       height:120.0,
                                                       width:120.0,
                                                       child: CachedImage(custom1img)),
+
+                                                  currentUser.country == "India"?  FittedBox(child: Text(' + ${currentUser.currencysym} $custom11inr',)):
+                                                  currentUser.country == "United States"?  FittedBox(child: Text(' + \u0024 $custom11usd',)):
+                                                  currentUser.country == country?FittedBox(child: Text('+ ${currentUser.currencysym} $custom11inr(\u0024 $custom11usd)',)):
+
+                                                  FittedBox(child: Text(' + ${currentUser.currencysym} $customprice1(\u0024 $custom11usd)',)),
                                                   ElevatedButton(
 
                                                     style: ElevatedButton.styleFrom(
@@ -8139,7 +7312,10 @@ custom102==0?Container():   Padding(
                                                       selectedCustom.add("Custom 1");
 
                                                       stateSetter(() { Custom = 'Custom 1';
-                                                      userCustom = custom1;});
+                                                      userCustom = custom1;
+                                                      customprice = customprice1;
+                                                      custompriceusd = custom11usd;
+                                                      custompriceinr = custom11inr;});
                                                     },          child: Text(custom1),
                                                   ),
                                                 ],
@@ -8153,6 +7329,11 @@ custom102==0?Container():   Padding(
                                                       height:120.0,
                                                       width:120.0,
                                                       child: CachedImage(custom2img)),
+                                                  currentUser.country == "India"?  FittedBox(child: Text(' + ${currentUser.currencysym} $custom21inr',)):
+                                                  currentUser.country == "United States"?  FittedBox(child: Text(' + \u0024 $custom21usd',)):
+                                                  currentUser.country == country?FittedBox(child: Text(' + ${currentUser.currencysym} $custom21inr(\u0024 $custom21usd)',)):
+
+                                                  FittedBox(child: Text(' + ${currentUser.currencysym} $customprice2(\u0024 $custom21usd)',)),
                                                   ElevatedButton(
 
                                                     style: ElevatedButton.styleFrom(
@@ -8165,7 +7346,10 @@ custom102==0?Container():   Padding(
                                                       selectedCustom.add("Custom 2");
 
                                                       stateSetter(() { Custom = 'Custom 2';
-                                                      userCustom = custom2;});
+                                                      userCustom = custom2;
+                                                      customprice = customprice2;
+                                                      custompriceusd = custom21usd;
+                                                      custompriceinr = custom21inr;});
                                                     },          child: Text(custom2),
                                                   ),
                                                 ],
@@ -8180,6 +7364,12 @@ custom102==0?Container():   Padding(
                                                       height:120.0,
                                                       width:120.0,
                                                       child: CachedImage(custom3img)),
+
+                                                  currentUser.country == "India"?  FittedBox(child: Text(' + ${currentUser.currencysym} $custom31inr',)):
+                                                  currentUser.country == "United States"?  FittedBox(child: Text(' + \u0024 $custom31usd',)):
+                                                  currentUser.country == country?FittedBox(child: Text(' + ${currentUser.currencysym} $custom31inr(\u0024 $custom31usd)',)):
+
+                                                  FittedBox(child: Text(' + ${currentUser.currencysym} $customprice3(\u0024 $custom31usd)',)),
                                                   ElevatedButton(
 
                                                     style: ElevatedButton.styleFrom(
@@ -8192,7 +7382,10 @@ custom102==0?Container():   Padding(
                                                       selectedCustom.add("Custom 3");
 
                                                       stateSetter(() { Custom = 'Custom 3';
-                                                      userCustom = custom3;});
+                                                      userCustom = custom3;
+                                                      customprice = customprice3;
+                                                      custompriceusd = custom31usd;
+                                                      custompriceinr = custom31inr;});
                                                     },          child: Text(custom3),
                                                   ),
                                                 ],
@@ -8206,6 +7399,11 @@ custom102==0?Container():   Padding(
                                                       height:120.0,
                                                       width:120.0,
                                                       child: CachedImage(custom4img)),
+                                                  currentUser.country == "India"?  FittedBox(child: Text(' + ${currentUser.currencysym} $custom41inr',)):
+                                                  currentUser.country == "United States"?  FittedBox(child: Text(' + \u0024 $custom41usd',)):
+                                                  currentUser.country == country?FittedBox(child: Text(' + ${currentUser.currencysym} $custom41inr(\u0024 $custom41usd)',)):
+
+                                                  FittedBox(child: Text(' + ${currentUser.currencysym} $customprice4(\u0024 $custom41usd)',)),
                                                   ElevatedButton(
 
                                                     style: ElevatedButton.styleFrom(
@@ -8218,7 +7416,10 @@ custom102==0?Container():   Padding(
                                                       selectedCustom.add("Custom 4");
 
                                                       stateSetter(() { Custom = 'Custom 4';
-                                                      userCustom = custom4;});
+                                                      userCustom = custom4;
+                                                      customprice = customprice4;
+                                                      custompriceusd = custom41usd;
+                                                      custompriceinr = custom41inr;});
                                                     },          child: Text(custom4),
                                                   ),
                                                 ],
@@ -8232,6 +7433,12 @@ custom102==0?Container():   Padding(
                                                       height:120.0,
                                                       width:120.0,
                                                       child: CachedImage(custom5img)),
+                                                  currentUser.country == "India"?  FittedBox(child: Text(' + ${currentUser.currencysym} $custom51inr',)):
+                                                  currentUser.country == "United States"?  FittedBox(child: Text(' + \u0024 $custom51usd',)):
+                                                  currentUser.country == country?FittedBox(child: Text(' + ${currentUser.currencysym} $custom51inr(\u0024 $custom51usd)',)):
+
+                                                  FittedBox(child: Text(' + ${currentUser.currencysym} $customprice5(\u0024 $custom51usd)',)),
+
                                                   ElevatedButton(
 
                                                     style: ElevatedButton.styleFrom(
@@ -8244,7 +7451,10 @@ custom102==0?Container():   Padding(
                                                       selectedCustom.add("Custom 5");
 
                                                       stateSetter(() { Custom = 'Custom 5';
-                                                      userCustom = custom5;});
+                                                      userCustom = custom5;
+                                                      customprice = customprice5;
+                                                      custompriceusd = custom51usd;
+                                                      custompriceinr = custom51inr;});
                                                     },          child: Text(custom5),
                                                   ),
                                                 ],
@@ -8258,6 +7468,11 @@ custom102==0?Container():   Padding(
                                                       height:120.0,
                                                       width:120.0,
                                                       child: CachedImage(custom6img)),
+                                                  currentUser.country == "India"?  FittedBox(child: Text(' + ${currentUser.currencysym} $custom61inr',)):
+                                                  currentUser.country == "United States"?  FittedBox(child: Text(' + \u0024 $custom61usd',)):
+                                                  currentUser.country == country?FittedBox(child: Text(' + ${currentUser.currencysym} $custom61inr(\u0024 $custom61usd)',)):
+
+                                                  FittedBox(child: Text(' + ${currentUser.currencysym} $customprice6(\u0024 $custom61usd)',)),
                                                   ElevatedButton(
 
                                                     style: ElevatedButton.styleFrom(
@@ -8270,7 +7485,10 @@ custom102==0?Container():   Padding(
                                                       selectedCustom.add("Custom 6");
 
                                                       stateSetter(() { Custom = 'Custom 6';
-                                                      userCustom = custom6;});
+                                                      userCustom = custom6;
+                                                      customprice = customprice6;
+                                                      custompriceusd = custom61usd;
+                                                      custompriceinr = custom61inr;});
                                                     },          child: Text(custom6),
                                                   ),
                                                 ],
@@ -8284,6 +7502,11 @@ custom102==0?Container():   Padding(
                                                       height:120.0,
                                                       width:120.0,
                                                       child: CachedImage(custom7img)),
+                                                  currentUser.country == "India"?  FittedBox(child: Text(' + ${currentUser.currencysym} $custom71inr',)):
+                                                  currentUser.country == "United States"?  FittedBox(child: Text(' + \u0024 $custom71usd',)):
+                                                  currentUser.country == country?FittedBox(child: Text(' + ${currentUser.currencysym} $custom71inr(\u0024 $custom71usd)',)):
+
+                                                  FittedBox(child: Text(' + ${currentUser.currencysym} $customprice7(\u0024 $custom71usd)',)),
                                                   ElevatedButton(
 
                                                     style: ElevatedButton.styleFrom(
@@ -8296,7 +7519,10 @@ custom102==0?Container():   Padding(
                                                       selectedCustom.add("Custom 7");
 
                                                       stateSetter(() { Custom = 'Custom 7';
-                                                      userCustom = custom7;});
+                                                      userCustom = custom7;
+                                                      customprice = customprice7;
+                                                      custompriceusd = custom71usd;
+                                                      custompriceinr = custom71inr;});
                                                     },          child: Text(custom7),
                                                   ),
                                                 ],
@@ -8310,6 +7536,11 @@ custom102==0?Container():   Padding(
                                                       height:120.0,
                                                       width:120.0,
                                                       child: CachedImage(custom8img)),
+                                                  currentUser.country == "India"?  FittedBox(child: Text(' + ${currentUser.currencysym} $custom81inr',)):
+                                                  currentUser.country == "United States"?  FittedBox(child: Text(' + \u0024 $custom81usd',)):
+                                                  currentUser.country == country?FittedBox(child: Text(' + ${currentUser.currencysym} $custom81inr(\u0024 $custom81usd)',)):
+
+                                                  FittedBox(child: Text(' + ${currentUser.currencysym} $customprice8(\u0024 $custom81usd)',)),
                                                   ElevatedButton(
 
                                                     style: ElevatedButton.styleFrom(
@@ -8322,7 +7553,10 @@ custom102==0?Container():   Padding(
                                                       selectedCustom.add("Custom 8");
 
                                                       stateSetter(() { Custom = 'Custom 8';
-                                                      userCustom = custom8;});
+                                                      userCustom = custom8;
+                                                      customprice = customprice8;
+                                                      custompriceusd = custom81usd;
+                                                      custompriceinr = custom81inr;});
                                                     },          child: Text(custom8),
                                                   ),
                                                 ],
@@ -8336,6 +7570,11 @@ custom102==0?Container():   Padding(
                                                       height:120.0,
                                                       width:120.0,
                                                       child: CachedImage(custom9img)),
+                                                  currentUser.country == "India"?  FittedBox(child: Text(' + ${currentUser.currencysym} $custom91inr',)):
+                                                  currentUser.country == "United States"?  FittedBox(child: Text(' + \u0024 $custom91usd',)):
+                                                  currentUser.country == country?FittedBox(child: Text(' + ${currentUser.currencysym} $custom91inr(\u0024 $custom91usd)',)):
+
+                                                  FittedBox(child: Text(' + ${currentUser.currencysym} $customprice9(\u0024 $custom91usd)',)),
                                                   ElevatedButton(
 
                                                     style: ElevatedButton.styleFrom(
@@ -8348,7 +7587,10 @@ custom102==0?Container():   Padding(
                                                       selectedCustom.add("Custom 9");
 
                                                       stateSetter(() { Custom = 'Custom 9';
-                                                      userCustom = custom9;});
+                                                      userCustom = custom9;
+                                                      customprice = customprice9;
+                                                      custompriceusd = custom91usd;
+                                                      custompriceinr = custom91inr;});
                                                     },          child: Text(custom9),
                                                   ),
                                                 ],
@@ -8362,7 +7604,12 @@ custom102==0?Container():   Padding(
                                                       height:120.0,
                                                       width:120.0,
                                                       child: CachedImage(custom10img)),
-                                                  ElevatedButton(
+
+                                                  currentUser.country == "India"?  FittedBox(child: Text(' + ${currentUser.currencysym} $custom101inr',)):
+                                                  currentUser.country == "United States"?  FittedBox(child: Text(' + \u0024 $custom101usd',)):
+                                                  currentUser.country == country?FittedBox(child: Text(' + ${currentUser.currencysym} $custom101inr(\u0024 $custom101usd)',)):
+
+                                                  FittedBox(child: Text(' + ${currentUser.currencysym} $customprice10(\u0024 $custom101usd)',)),                                              ElevatedButton(
 
                                                     style: ElevatedButton.styleFrom(
 
@@ -8374,7 +7621,10 @@ custom102==0?Container():   Padding(
                                                       selectedCustom.add("Custom 10");
 
                                                       stateSetter(() { Custom = 'Custom 10';
-                                                      userCustom = custom10;});
+                                                      userCustom = custom10;
+                                                      customprice = customprice10;
+                                                      custompriceusd = custom101usd;
+                                                      custompriceinr = custom101inr;});
                                                     },          child: Text(custom10),
                                                   ),
                                                 ],
@@ -9019,295 +8269,6 @@ custom102==0?Container():   Padding(
 
                                                 });
                                               },          child: Text('(US) 15'),
-                                            ),
-                                          ),
-                                          custom12==0?Container():   Padding(
-                                            padding: const EdgeInsets.all(8.0),
-                                            child: ElevatedButton(
-
-                                              style: ElevatedButton.styleFrom(
-
-                                                primary: selectedCategory.contains("C 1") ? Colors.black: Colors.white.withOpacity(0.1), // background
-                                                onPrimary:selectedCategory.contains("C 1") ? Colors.white:  Colors.black, // foreground
-                                              ),
-                                              onPressed: () {
-                                                selectedCategory =  <String>[];
-                                                selectedCategory.add("C 1");
-
-                                                stateSetter(() { usersize = 'C 1';
-                                                custom = true;
-                                                size = custom1;
-                                                customprice = customprice1;
-                                                custompriceusd = custom11usd;
-                                                custompriceinr = custom11inr;});
-                                              },          child:
-                                            currentUser.country == "India"?  FittedBox(child: Text('$custom1 + ${currentUser.currencysym} $custom11inr',)):
-                                            currentUser.country == "United States"?  FittedBox(child: Text('$custom1 + \u0024 $custom11usd',)):
-                                            currentUser.country == country?FittedBox(child: Text('$custom1 + ${currentUser.currencysym} $custom11inr(\u0024 $custom11usd)',)):
-
-                                            FittedBox(child: Text('$custom1 + ${currentUser.currencysym} $customprice1(\u0024 $custom11usd)',)),
-
-                                            ),
-                                          ),
-                                          custom22==0?Container():   Padding(
-                                            padding: const EdgeInsets.all(8.0),
-                                            child:   ElevatedButton(
-
-                                              style: ElevatedButton.styleFrom(
-
-                                                primary: selectedCategory.contains("C 2") ? Colors.black: Colors.white.withOpacity(0.1), // background
-                                                onPrimary:selectedCategory.contains("C 2") ? Colors.white:  Colors.black, // foreground
-                                              ),
-                                              onPressed: () {
-                                                selectedCategory =  <String>[];
-                                                selectedCategory.add("C 2");
-
-                                                stateSetter(() { usersize = 'C 2';
-                                                custom = true;
-                                                size = custom2;
-                                                customprice = customprice2;
-                                                custompriceusd = custom21usd;
-                                                custompriceinr = custom21inr;});
-                                              },          child:
-
-                                            currentUser.country == "India"?  FittedBox(child: Text('$custom2 + ${currentUser.currencysym} $custom21inr',)):
-                                            currentUser.country == "United States"?  FittedBox(child: Text('$custom2 + \u0024 $custom21usd',)):
-                                            currentUser.country == country?FittedBox(child: Text('$custom2 + ${currentUser.currencysym} $custom21inr(\u0024 $custom21usd)',)):
-
-                                            FittedBox(child: Text('$custom2 + ${currentUser.currencysym} $customprice2(\u0024 $custom21usd)',)),
-
-                                            ),
-                                          ),
-                                          custom32==0?Container():   Padding(
-                                            padding: const EdgeInsets.all(8.0),
-                                            child:   ElevatedButton(
-
-                                              style: ElevatedButton.styleFrom(
-
-                                                primary: selectedCategory.contains("C 3") ? Colors.black: Colors.white.withOpacity(0.1), // background
-                                                onPrimary:selectedCategory.contains("C 3") ? Colors.white:  Colors.black, // foreground
-                                              ),
-                                              onPressed: () {
-                                                selectedCategory =  <String>[];
-                                                selectedCategory.add("C 3");
-
-                                                stateSetter(() { usersize = 'C 3';
-                                                custom = true;
-                                                size = custom3;
-                                                customprice = customprice3;
-                                                custompriceusd = custom31usd;
-                                                custompriceinr = custom31inr;});
-                                              },          child:
-
-                                            currentUser.country == "India"?  FittedBox(child: Text('$custom3 + ${currentUser.currencysym} $custom31inr',)):
-                                            currentUser.country == "United States"?  FittedBox(child: Text('$custom3 + \u0024 $custom31usd',)):
-                                            currentUser.country == country?FittedBox(child: Text('$custom3 + ${currentUser.currencysym} $custom31inr(\u0024 $custom31usd)',)):
-
-                                            FittedBox(child: Text('$custom3 + ${currentUser.currencysym} $customprice3(\u0024 $custom31usd)',)),
-
-                                            ),
-                                          ),
-                                          custom42==0?Container():   Padding(
-                                            padding: const EdgeInsets.all(8.0),
-                                            child:   ElevatedButton(
-
-                                              style: ElevatedButton.styleFrom(
-
-                                                primary: selectedCategory.contains("C 4") ? Colors.black: Colors.white.withOpacity(0.1), // background
-                                                onPrimary:selectedCategory.contains("C 4") ? Colors.white:  Colors.black, // foreground
-                                              ),
-                                              onPressed: () {
-                                                selectedCategory =  <String>[];
-                                                selectedCategory.add("C 4");
-
-                                                stateSetter(() { usersize = 'C 4';
-                                                custom = true;
-                                                size = custom4;
-                                                customprice = customprice4;
-                                                custompriceusd = custom41usd;
-                                                custompriceinr = custom41inr;});
-                                              },          child:
-
-                                            currentUser.country == "India"?  FittedBox(child: Text('$custom4 + ${currentUser.currencysym} $custom41inr',)):
-                                            currentUser.country == "United States"?  FittedBox(child: Text('$custom4 + \u0024 $custom41usd',)):
-                                            currentUser.country == country?FittedBox(child: Text('$custom4 + ${currentUser.currencysym} $custom41inr(\u0024 $custom41usd)',)):
-
-                                            FittedBox(child: Text('$custom4 + ${currentUser.currencysym} $customprice4(\u0024 $custom41usd)',)),
-
-                                            ),
-                                          ),
-                                          custom52==0?Container():   Padding(
-                                            padding: const EdgeInsets.all(8.0),
-                                            child:   ElevatedButton(
-
-                                              style: ElevatedButton.styleFrom(
-
-                                                primary: selectedCategory.contains("C 5") ? Colors.black: Colors.white.withOpacity(0.1), // background
-                                                onPrimary:selectedCategory.contains("C 5") ? Colors.white:  Colors.black, // foreground
-                                              ),
-                                              onPressed: () {
-                                                selectedCategory =  <String>[];
-                                                selectedCategory.add("C 5");
-
-                                                stateSetter(() { usersize = 'C 5';
-                                                custom = true;
-                                                size = custom5;
-                                                customprice = customprice5;
-                                                custompriceusd = custom51usd;
-                                                custompriceinr = custom51inr;});
-                                              },          child:
-
-                                            currentUser.country == "India"?  FittedBox(child: Text('$custom5 + ${currentUser.currencysym} $custom51inr',)):
-                                            currentUser.country == "United States"?  FittedBox(child: Text('$custom5 + \u0024 $custom51usd',)):
-                                            currentUser.country == country?FittedBox(child: Text('$custom5 + ${currentUser.currencysym} $custom51inr(\u0024 $custom51usd)',)):
-
-                                            FittedBox(child: Text('$custom5 + ${currentUser.currencysym} $customprice5(\u0024 $custom51usd)',)),
-
-                                            ),
-                                          ),
-                                          custom62==0?Container():   Padding(
-                                            padding: const EdgeInsets.all(8.0),
-                                            child:   ElevatedButton(
-
-                                              style: ElevatedButton.styleFrom(
-
-                                                primary: selectedCategory.contains("C 6") ? Colors.black: Colors.white.withOpacity(0.1), // background
-                                                onPrimary:selectedCategory.contains("C 6") ? Colors.white:  Colors.black, // foreground
-                                              ),
-                                              onPressed: () {
-                                                selectedCategory =  <String>[];
-                                                selectedCategory.add("C 6");
-
-                                                stateSetter(() { usersize = 'C 6';
-                                                custom = true;
-                                                size = custom6;
-                                                customprice = customprice6;
-                                                custompriceusd = custom61usd;
-                                                custompriceinr = custom61inr;});
-                                              },          child:
-
-                                            currentUser.country == "India"?  FittedBox(child: Text('$custom6 + ${currentUser.currencysym} $custom61inr',)):
-                                            currentUser.country == "United States"?  FittedBox(child: Text('$custom6 + \u0024 $custom61usd',)):
-                                            currentUser.country == country?FittedBox(child: Text('$custom6 + ${currentUser.currencysym} $custom61inr(\u0024 $custom61usd)',)):
-
-                                            FittedBox(child: Text('$custom6 + ${currentUser.currencysym} $customprice6(\u0024 $custom61usd)',)),
-
-                                            ),
-                                          ),
-                                          custom72==0?Container():   Padding(
-                                            padding: const EdgeInsets.all(8.0),
-                                            child:   ElevatedButton(
-
-                                              style: ElevatedButton.styleFrom(
-
-                                                primary: selectedCategory.contains("C 7") ? Colors.black: Colors.white.withOpacity(0.1), // background
-                                                onPrimary:selectedCategory.contains("C 7") ? Colors.white:  Colors.black, // foreground
-                                              ),
-                                              onPressed: () {
-                                                selectedCategory =  <String>[];
-                                                selectedCategory.add("C 7");
-
-                                                stateSetter(() { usersize = 'C 7';
-                                                custom = true;
-                                                size = custom7;
-                                                customprice = customprice7;
-                                                custompriceusd = custom71usd;
-                                                custompriceinr = custom71inr;});
-                                              },          child:
-
-                                            currentUser.country == "India"?  FittedBox(child: Text('$custom7 + ${currentUser.currencysym} $custom71inr',)):
-                                            currentUser.country == "United States"?  FittedBox(child: Text('$custom7 + \u0024 $custom71usd',)):
-                                            currentUser.country == country?FittedBox(child: Text('$custom7 + ${currentUser.currencysym} $custom71inr(\u0024 $custom71usd)',)):
-
-                                            FittedBox(child: Text('$custom7 + ${currentUser.currencysym} $customprice7(\u0024 $custom71usd)',)),
-
-                                            ),
-                                          ),
-                                          custom82==0?Container():   Padding(
-                                            padding: const EdgeInsets.all(8.0),
-                                            child:   ElevatedButton(
-
-                                              style: ElevatedButton.styleFrom(
-
-                                                primary: selectedCategory.contains("C 8") ? Colors.black: Colors.white.withOpacity(0.1), // background
-                                                onPrimary:selectedCategory.contains("C 8") ? Colors.white:  Colors.black, // foreground
-                                              ),
-                                              onPressed: () {
-                                                selectedCategory =  <String>[];
-                                                selectedCategory.add("C 8");
-
-                                                stateSetter(() { usersize = 'C 8';
-                                                custom = true;
-                                                size = custom8;
-                                                customprice = customprice8;
-                                                custompriceusd = custom81usd;
-                                                custompriceinr = custom81inr;});
-                                              },          child:
-
-                                            currentUser.country == "India"?  FittedBox(child: Text('$custom8 + ${currentUser.currencysym} $custom81inr',)):
-                                            currentUser.country == "United States"?  FittedBox(child: Text('$custom8 + \u0024 $custom81usd',)):
-                                            currentUser.country == country?FittedBox(child: Text('$custom8 + ${currentUser.currencysym} $custom81inr(\u0024 $custom81usd)',)):
-
-                                            FittedBox(child: Text('$custom8 + ${currentUser.currencysym} $customprice8(\u0024 $custom81usd)',)),
-
-                                            ),
-                                          ),
-                                          custom92==0?Container():   Padding(
-                                            padding: const EdgeInsets.all(8.0),
-                                            child:   ElevatedButton(
-
-                                              style: ElevatedButton.styleFrom(
-
-                                                primary: selectedCategory.contains("C 9") ? Colors.black: Colors.white.withOpacity(0.1), // background
-                                                onPrimary:selectedCategory.contains("C 9") ? Colors.white:  Colors.black, // foreground
-                                              ),
-                                              onPressed: () {
-                                                selectedCategory =  <String>[];
-                                                selectedCategory.add("C 9");
-
-                                                stateSetter(() { usersize = 'C 9';
-                                                custom = true;
-                                                size = custom9;
-                                                customprice = customprice9;
-                                                custompriceusd = custom91usd;
-                                                custompriceinr = custom91inr;});
-                                              },          child:
-
-                                            currentUser.country == "India"?  FittedBox(child: Text('$custom9 + ${currentUser.currencysym} $custom91inr',)):
-                                            currentUser.country == "United States"?  FittedBox(child: Text('$custom9 + \u0024 $custom91usd',)):
-                                            currentUser.country == country?FittedBox(child: Text('$custom9 + ${currentUser.currencysym} $custom91inr(\u0024 $custom91usd)',)):
-
-                                            FittedBox(child: Text('$custom9 + ${currentUser.currencysym} $customprice9(\u0024 $custom91usd)',)),
-
-                                            ),
-                                          ),
-                                          custom102==0?Container():   Padding(
-                                            padding: const EdgeInsets.all(8.0),
-                                            child:   ElevatedButton(
-
-                                              style: ElevatedButton.styleFrom(
-
-                                                primary: selectedCategory.contains("C 10") ? Colors.black: Colors.white.withOpacity(0.1), // background
-                                                onPrimary:selectedCategory.contains("C 10") ? Colors.white:  Colors.black, // foreground
-                                              ),
-                                              onPressed: () {
-                                                selectedCategory =  <String>[];
-                                                selectedCategory.add("C 10");
-
-                                                stateSetter(() { usersize = 'C 10';
-                                                custom = true;
-                                                size = custom10;
-                                                customprice = customprice10;
-                                                custompriceusd = custom101usd;
-                                                custompriceinr = custom101inr;});
-                                              },          child:
-
-                                            currentUser.country == "India"?  FittedBox(child: Text('$custom10 + ${currentUser.currencysym} $custom101inr',)):
-                                            currentUser.country == "United States"?  FittedBox(child: Text('$custom10 + \u0024 $custom101usd',)):
-                                            currentUser.country == country?FittedBox(child: Text('$custom10 + ${currentUser.currencysym} $custom101inr(\u0024 $custom101usd)',)):
-
-                                            FittedBox(child: Text('$custom10 + ${currentUser.currencysym} $customprice10(\u0024 $custom101usd)',)),
-
                                             ),
                                           ),
 

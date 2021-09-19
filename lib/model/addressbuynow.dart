@@ -23,10 +23,10 @@ class AddressBuy extends StatefulWidget {
 final String Size;
 final String prodId;
 final String OwnerId;
-  final String eur;
-  final String usd;
-  final String inr;
-  final String gbp;
+  var eur;
+  var usd;
+  var inr;
+  var gbp;
   final bool freeship;
   final bool freeworldship;
 
@@ -116,15 +116,17 @@ final String OwnerId;
   final int color10;
    final String colorText;
     final String mtoText;
-    final String shipcost;
-    final String shipcostuser;
-    final String custompriceusd;
-    final String custompriceinr;
-      final String price;
-    final String customprice;
+     var shipcost;
+  var shipcostuser;
+  var custompriceusd;
+  var custompriceinr;
+  var price;
+  var customprice;
     final String country;
     final String color;
  final String displaysize;
+ final String customIndex;
+  final String userCustom;
 
 
   AddressBuy({
@@ -138,6 +140,8 @@ final String OwnerId;
     this.country,
     this.color,
  this.displaysize,
+this.customIndex,
+this.userCustom,
 
     this.mto,
     this.xxxs,
@@ -262,7 +266,7 @@ backgroundColor: kPrimaryColor,
       ),
       body:
       Container(
-
+        color:Colors.grey.shade200,
         child: StreamBuilder(
             stream: FirebaseFirestore.instance
                 .collection('Address').doc(currentUser.id)
@@ -293,7 +297,7 @@ backgroundColor: kPrimaryColor,
                         State: ds['state'],
                         Country:  ds['country'],
                         Zip : ds['zip'],
-                        Dialcode: ds['phone_code'],
+                        Dialcode: ds['code'],
                         Phone:  ds['phone'],
                         countryISO: currentUser.countryISO,
 
@@ -400,6 +404,8 @@ backgroundColor: kPrimaryColor,
                         freeship:widget.freeship,
                         freeworldship:widget.freeworldship,
                         displaysize:widget.displaysize,
+                        customIndex:widget.customIndex,
+                        userCustom:widget.userCustom,
 
                         freeSize: widget.freeSize,
                       );
@@ -435,13 +441,15 @@ class addressview extends StatelessWidget {
  final String mediaUrl;
  final String productname;
  final String eur;
- final String usd;
- final String inr;
+var usd;
+ var inr;
  final String gbp;
  final String mtoText;
   final String countryISO;
+ final String customIndex;
+ final String userCustom;
 
-final bool freeship;
+ final bool freeship;
 final bool freeworldship;
 
  final int xxxs;
@@ -526,15 +534,15 @@ final bool freeworldship;
  final int color9;
  final int color10;
  final String colorText;
- final String shipcost;
- final String custompriceusd;
- final String custompriceinr;
- final String shipcostusd;
- final String shipcostuser;
- final String customusd;
- final String custominr;
- final String price;
- final String customprice;
+ var shipcost;
+ var custompriceusd;
+ var custompriceinr;
+ var shipcostusd;
+ var shipcostuser;
+ var customusd;
+ var custominr;
+ var price;
+ var customprice;
  final String country;
  final String color;
 final String displaysize;
@@ -550,8 +558,11 @@ final String displaysize;
   this.freeSize,
 this.displaysize,
 this.countryISO,
+this.customIndex,
+this.userCustom,
 
-  this.mto,
+
+   this.mto,
   this.xxxs,
   this.xxs,
   this.xs,
@@ -622,7 +633,7 @@ this.countryISO,
               shape: RoundedRectangleBorder(
                 borderRadius:BorderRadius.circular(10),
               ),
-              color:Colors.white.withOpacity(0.5),
+              color:Colors.white,
               child: Padding(
                 padding:EdgeInsets.only(left: 5.0),
                 child: Row(
@@ -630,7 +641,7 @@ this.countryISO,
                     new Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
-                    Text(Type,style:TextStyle(color:kText,fontSize:SizeConfig.safeBlockHorizontal * 5,fontWeight: FontWeight.bold)),
+                    Text(Type,style:TextStyle(color:kText,fontSize:SizeConfig.safeBlockHorizontal * 4,fontWeight: FontWeight.bold)),
                     Text(Fullname,style:TextStyle(color:kText,fontSize:SizeConfig.safeBlockHorizontal * 5)),
                     Text('$Addresss,',style:TextStyle(color:kText,fontSize:SizeConfig.safeBlockHorizontal * 4)),
                      Text('$City',style:TextStyle(color:kText,fontSize:SizeConfig.safeBlockHorizontal * 4)),
@@ -656,7 +667,7 @@ this.countryISO,
                           await adPrefs.setString('phone',Phone);
                            await adPrefs.setString('countryIso',countryISO);
 
-                          Get.off(
+                          Get.off(()=>
                               BuyView(
                                 displaysize:displaysize,
                                 userSize:userSize,
@@ -755,6 +766,8 @@ this.countryISO,
                                 mtoText: mtoText,
                                 colorText: colorText,
                                 freeSize: freeSize,
+                                customIndex:customIndex,
+                                userCustom:userCustom,
 
                                 shipcost:shipcost,
                                 shipcostuser:shipcostuser,

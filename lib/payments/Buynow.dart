@@ -18,8 +18,8 @@ class BuyNow extends StatefulWidget {
   final  String mediaUrl;
   final  String productname;
   final String eur;
-  final String usd;
-  final String inr;
+  var usd;
+  var inr;
   final String gbp;
   final int xxxs;
   final int xxs;
@@ -115,6 +115,8 @@ class BuyNow extends StatefulWidget {
   final String country;
   final String color;
 final String usersize;
+  final String customIndex;
+  final String userCustom;
 
   BuyNow({this.buynowamount,
     this.Ring1, this.Ring2, this.Ring3, this.Ring4, this.Ring5, this.Ring6,
@@ -126,6 +128,9 @@ final String usersize;
     this.color1, this.color2, this.color3, this.color4, this.color5, this.color6,
     this.color7, this.color8, this.color9, this.color10, this.colorText, this.mtoText,
     this.eur,
+     this.customIndex,
+     this.userCustom,
+
     this.usd,
     this.inr,
     this.gbp,
@@ -209,6 +214,26 @@ final String usersize;
     Shoe19: Shoe19,
     Shoe20: Shoe20,
     Shoe21: Shoe21,
+     color1:color1,
+     color2:color2,
+     color3:color3,
+     color4:color4,
+     color5:color5,
+     color6:color6,
+     color7:color7,
+     color8:color8,
+     color9:color9,
+     color10:color10,
+     custom12:custom12,
+     custom22:custom22,
+     custom32:custom32,
+     custom42:custom42,
+     custom52:custom52,
+     custom62:custom62,
+     custom72:custom72,
+      custom82:custom82,
+     custom92:custom92,
+     custom102:custom102,
     mto: mto,
     freeSize: freeSize,
    usersize: usersize,
@@ -1866,6 +1891,100 @@ else if(widget.color=='col 10'){
   }
 
 }
+subtractCustom(){
+  if(widget.customIndex=='Custom 1'){
+    custom12--;
+    FirebaseFirestore.instance.collection('products')
+        .doc(widget.ownerId)
+        .collection('userProducts')
+        .doc(widget.prodId)
+        .update({'custom12':custom12,
+    });
+  }
+else if(widget.customIndex=='Custom 2'){
+    custom22--;
+    FirebaseFirestore.instance.collection('products')
+        .doc(widget.ownerId)
+        .collection('userProducts')
+        .doc(widget.prodId)
+        .update({'custom22':custom22,
+    });
+  }
+else if(widget.customIndex=='Custom 3'){
+    custom32--;
+    FirebaseFirestore.instance.collection('products')
+        .doc(widget.ownerId)
+        .collection('userProducts')
+        .doc(widget.prodId)
+        .update({'custom32':custom32,
+    });
+  }
+else if(widget.customIndex=='Custom 4'){
+    custom42--;
+    FirebaseFirestore.instance.collection('products')
+        .doc(widget.ownerId)
+        .collection('userProducts')
+        .doc(widget.prodId)
+        .update({'custom42':custom42,
+    });
+  }
+else if(widget.color=='Custom 5'){
+    custom52--;
+    FirebaseFirestore.instance.collection('products')
+        .doc(widget.ownerId)
+        .collection('userProducts')
+        .doc(widget.prodId)
+        .update({'custom52':custom52,
+    });
+  }
+else if(widget.customIndex=='Custom 6'){
+    custom62--;
+    FirebaseFirestore.instance.collection('products')
+        .doc(widget.ownerId)
+        .collection('userProducts')
+        .doc(widget.prodId)
+        .update({'custom62':custom62,
+    });
+  }
+else if(widget.customIndex=='Custom 7'){
+    custom72--;
+    FirebaseFirestore.instance.collection('products')
+        .doc(widget.ownerId)
+        .collection('userProducts')
+        .doc(widget.prodId)
+        .update({'custom72':custom72,
+    });
+  }
+else if(widget.customIndex=='Custom 8'){
+    custom82--;
+    FirebaseFirestore.instance.collection('products')
+        .doc(widget.ownerId)
+        .collection('userProducts')
+        .doc(widget.prodId)
+        .update({'custom82':custom82,
+    });
+  }
+else if(widget.customIndex=='Custom 9'){
+    custom92--;
+    FirebaseFirestore.instance.collection('products')
+        .doc(widget.ownerId)
+        .collection('userProducts')
+        .doc(widget.prodId)
+        .update({'custom92':custom92,
+    });
+  }
+else if(widget.customIndex=='Custom 10'){
+    custom102--;
+    FirebaseFirestore.instance.collection('products')
+        .doc(widget.ownerId)
+        .collection('userProducts')
+        .doc(widget.prodId)
+        .update({'custom102':custom102,
+    });
+  }
+
+}
+
   onSuccess()async{
     adPrefs = await SharedPreferences.getInstance();
     String Fullname = adPrefs.getString('fullname') ?? '';
@@ -1968,6 +2087,7 @@ payment();
     onSuccess();
     subtractQuantity();
     subtractColor();
+    subtractCustom();
     Get.offAll( ActivityFeed());
   Fluttertoast.showToast(
   msg: "Payment SUCCESS: " + response.paymentId, timeInSecForIos: 4);

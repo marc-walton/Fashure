@@ -16,8 +16,8 @@ final String userSize;
   final  String mediaUrl;
   final  String productname;
   final String eur;
-  final String usd;
-  final String inr;
+ var usd;
+ var inr;
   final String gbp;
   final int xxxs;
   final int xxs;
@@ -104,25 +104,28 @@ final String userSize;
   final int color10;
   final String colorText;
   final String mtoText;
-  final String shipcost;
-  final String custompriceusd;
-  final String custompriceinr;
-  final String shipcostusd;
-  final String shipcostuser;
-  final String customusd;
-  final String custominr;
-  final String price;
-  final String customprice;
+  var shipcost;
+  var custompriceusd;
+  var custompriceinr;
+  var shipcostusd;
+  var shipcostuser;
+  var customusd;
+  var custominr;
+  var price;
+  var customprice;
   final String country;
   final String color;
 final bool freeship;
 final bool freeworldship;
-
+  final String customIndex;
+  final String userCustom;
 
   BuyView({this.prodId,this.productname,
 
    this.usd,
     this.displaysize,
+ this.customIndex,
+ this.userCustom,
 
    this.eur,
    this.inr,
@@ -313,18 +316,9 @@ totta(){
     print(widget.inr);
     print(widget.usd);
 
- var shipcostuserV = double.tryParse(widget.shipcostuser ?? "0.0")?? 0.0;
- var custompriceusdV = double.tryParse(widget.custompriceusd ?? "0.0")?? 0.0;
- var custompriceinrV = double.tryParse(widget.custompriceinr?? "0.0")??0.0;
- var priceV =  double.tryParse(widget.price?? "0.0")?? 0.0;
- var inrV =  double.tryParse(widget.inr?? "0.0")?? 0.0;
- var usdV =  double.tryParse(widget.usd?? "0.0")?? 0.0;
-
-  var custompriceV =  double.tryParse(widget.customprice??"0.0") ?? 0.0;
-var shipcostV =  double.tryParse(widget.shipcost??"0.0")?? 0.0;
- var paytotal =  usdV + custompriceusdV + shipcostV;
- var usertotal = priceV + custompriceV + shipcostuserV;
-var sametotal =  inrV + custompriceinrV + shipcostV;
+ var paytotal =  widget.usd + widget.custompriceusd + widget.shipcost;
+ var usertotal = widget.price + widget.customprice + widget.shipcostuser;
+var sametotal =  widget.inr + widget.custompriceinr + widget.shipcost;
 totalU = currentUser.country == widget.country? sametotal.toStringAsFixed(2):
  usertotal.toStringAsFixed(2);
 total = paytotal.toStringAsFixed(2);
@@ -688,7 +682,7 @@ else {
 
         child: Column(
           children: [
-            ProdTile(),
+            eur(),
        BottomAppBar(
               color: Colors.transparent,
               child: Column(
