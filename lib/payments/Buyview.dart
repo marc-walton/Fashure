@@ -319,9 +319,9 @@ totta(){
  var paytotal =  widget.usd + widget.custompriceusd + widget.shipcost;
  var usertotal = widget.price + widget.customprice + widget.shipcostuser;
 var sametotal =  widget.inr + widget.custompriceinr + widget.shipcost;
-totalU = currentUser.country == widget.country? sametotal.toStringAsFixed(2):
- usertotal.toStringAsFixed(2);
-total = paytotal.toStringAsFixed(2);
+totalU = currentUser.country == widget.country? sametotal.toString():
+ usertotal.toString();
+total = paytotal.toString();
 }
 uk(){
   return Expanded(
@@ -438,12 +438,23 @@ eur(){
               ],
             ),
           ),
-          Container(
-            height: SizeConfig.safeBlockHorizontal * 75,
-            width: MediaQuery.of(context).size.width,
-            child: ClipRRect(
-                borderRadius: BorderRadius.circular(20.0),child:CachedNetworkImage(imageUrl: widget.mediaUrl,)),
 
+          Card(
+            child: Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: ListTile(
+                leading: CircleAvatar(
+                  backgroundColor: Colors.grey,
+                  backgroundImage: CachedNetworkImageProvider(widget.mediaUrl),
+                ),
+                title: Text(
+                  'Size: ${widget.displaysize}',
+                  style:
+                  TextStyle(color:kText, fontWeight: FontWeight.bold),
+                ),
+
+              ),
+            ),
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,

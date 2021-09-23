@@ -7,6 +7,7 @@ import 'package:fashow/model/tags.dart';
 import 'package:fashow/size_config.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:intl/intl.dart';
+import 'package:modal_progress_hud/modal_progress_hud.dart';
 import 'package:paginate_firestore/paginate_firestore.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -829,7 +830,7 @@ class _ProdState extends State<Prod> {
   String usersize = "";
   String usercolor = "";
   String userCustom = "";
-
+var  time = const Duration(  seconds: 2);
 String currencysymbol;
   var currencyFormatter = currentUser.countryISO=="US"? NumberFormat('#,##0.00'): NumberFormat('#,##0.00', '${currentUser.countryISO}');
 
@@ -1036,7 +1037,7 @@ var customprice10;
    final String colorText8;
    final String colorText9;
    final String colorText10;
-String shipcostuser;
+var shipcostuser;
 String size;
 bool custom;
 
@@ -1050,6 +1051,7 @@ bool custom;
 int views;
 bool isUploading = false;
 var e;
+bool loader = false;
   TextEditingController mtoController = TextEditingController();
   List <Widget>listOfImages = <Widget>[];
   int _current = 0;
@@ -1355,45 +1357,103 @@ this.currency,
 
   }
 conversion()async {
-  if (currentUser.currencyISO == "USD") {}
+  isUploading = true;
+  if (currentUser.currencyISO == "USD") {
+    var custom1usd;
+    var custom2usd;
+    var custom3usd;
+    var custom4usd;
+    var custom5usd;
+    var custom6usd;
+    var custom7usd;
+    var custom8usd;
+    var custom9usd;
+    var custom10usd;
+    setState((){
+      price = usd.toStringAsFixed(2);
+      price = double.tryParse(price);
+
+      shipcostuser = currentUser.country == country?shipcostusd.toStringAsFixed(2):shipcostinterusd.toStringAsFixed(2);
+      shipcostuser = double.tryParse(shipcostuser);
+
+
+      custom1usd = custom11usd.toStringAsFixed(2);
+    custom11usd = double.tryParse(custom1usd);
+
+    custom2usd = custom21usd.toStringAsFixed(2);
+    custom21usd = double.tryParse(custom2usd);
+
+    custom3usd = custom31usd.toStringAsFixed(2);
+    custom31usd = double.tryParse(custom3usd);
+
+    custom4usd = custom41usd.toStringAsFixed(2);
+    custom41usd = double.tryParse(custom4usd);
+
+    custom5usd = custom51usd.toStringAsFixed(2);
+    custom51usd = double.tryParse(custom5usd);
+
+    custom6usd = custom61usd.toStringAsFixed(2);
+    custom61usd = double.tryParse(custom6usd);
+
+    custom7usd = custom71usd.toStringAsFixed(2);
+    custom71usd = double.tryParse(custom7usd);
+
+    custom8usd = custom81usd.toStringAsFixed(2);
+    custom81usd = double.tryParse(custom8usd);
+
+    custom9usd = custom91usd.toStringAsFixed(2);
+    custom91usd = double.tryParse(custom9usd);
+
+    custom10usd = custom101usd.toStringAsFixed(2);
+    custom101usd = double.tryParse(custom10usd);
+
+    });
+  }
   else {
     var resultUSD = await Currency.getConversion(
         from: 'USD', to: '${currentUser.currencyISO}', amount: usd.toString());
     var resultUSD11 = await Currency.getConversion(
         from: 'USD',
         to: '${currentUser.currencyISO}',
-        amount: shipcostinterusd);
+        amount: shipcostinterusd.toString());
     var s;
-    var u;
     setState(() {
       e = resultUSD.rate;
       price = e.toStringAsFixed(2);
+       price = double.tryParse(price);
+print(price);
       s = resultUSD11.rate;
-      shipcostuser = s.toStringAsFixed(2);
-      // u = double.tryParse(usd);
-      // u = u.toStringAsFixed(2);
-      // usd = u.toString();
+      shipcostuser = currentUser.country == country?shipcostusd.toStringAsFixed(2):s.toStringAsFixed(2);
+      shipcostuser = double.tryParse(shipcostuser);
+      print(shipcostuser);
+
     });
+    print("before conversiom");
+
     var resultUSD1 = await Currency.getConversion(
-        from: 'USD', to: '${currentUser.currencyISO}', amount: custom11usd);
+        from: 'USD', to: '${currentUser.currencyISO}', amount: custom11usd.toString());
+    print("after first" );
+
     var resultUSD2 = await Currency.getConversion(
-        from: 'USD', to: '${currentUser.currencyISO}', amount: custom21usd);
+        from: 'USD', to: '${currentUser.currencyISO}', amount: custom21usd.toString());
+    print("second");
+
     var resultUSD3 = await Currency.getConversion(
-        from: 'USD', to: '${currentUser.currencyISO}', amount: custom31usd);
+        from: 'USD', to: '${currentUser.currencyISO}', amount: custom31usd.toString());
     var resultUSD4 = await Currency.getConversion(
-        from: 'USD', to: '${currentUser.currencyISO}', amount: custom41usd);
+        from: 'USD', to: '${currentUser.currencyISO}', amount: custom41usd.toString());
     var resultUSD5 = await Currency.getConversion(
-        from: 'USD', to: '${currentUser.currencyISO}', amount: custom51usd);
+        from: 'USD', to: '${currentUser.currencyISO}', amount: custom51usd.toString());
     var resultUSD6 = await Currency.getConversion(
-        from: 'USD', to: '${currentUser.currencyISO}', amount: custom61usd);
+        from: 'USD', to: '${currentUser.currencyISO}', amount: custom61usd.toString());
     var resultUSD7 = await Currency.getConversion(
-        from: 'USD', to: '${currentUser.currencyISO}', amount: custom71usd);
+        from: 'USD', to: '${currentUser.currencyISO}', amount: custom71usd.toString());
     var resultUSD8 = await Currency.getConversion(
-        from: 'USD', to: '${currentUser.currencyISO}', amount: custom81usd);
+        from: 'USD', to: '${currentUser.currencyISO}', amount: custom81usd.toString());
     var resultUSD9 = await Currency.getConversion(
-        from: 'USD', to: '${currentUser.currencyISO}', amount: custom91usd);
+        from: 'USD', to: '${currentUser.currencyISO}', amount: custom91usd.toString());
     var resultUSD10 = await Currency.getConversion(
-        from: 'USD', to: '${currentUser.currencyISO}', amount: custom101usd);
+        from: 'USD', to: '${currentUser.currencyISO}', amount: custom101usd.toString());
 
     var c1;
     var c2;
@@ -1417,60 +1477,84 @@ conversion()async {
     var custom10usd;
 
     setState(() {
-      custom1usd = double.tryParse(custom11usd);
-      custom1usd = custom1usd.toStringAsFixed(2);
-      custom11usd = custom1usd.toString();
-      custom2usd = double.tryParse(custom21usd);
-      custom2usd = custom2usd.toStringAsFixed(2);
-      custom21usd = custom2usd.toString();
-      custom3usd = double.tryParse(custom31usd);
-      custom3usd = custom3usd.toStringAsFixed(2);
-      custom31usd = custom3usd.toString();
-      custom4usd = double.tryParse(custom41usd);
-      custom4usd = custom4usd.toStringAsFixed(2);
-      custom41usd = custom4usd.toString();
-      custom5usd = double.tryParse(custom51usd);
-      custom5usd = custom5usd.toStringAsFixed(2);
-      custom51usd = custom5usd.toString();
-      custom6usd = double.tryParse(custom61usd);
-      custom6usd = custom6usd.toStringAsFixed(2);
-      custom61usd = custom6usd.toString();
-      custom7usd = double.tryParse(custom71usd);
-      custom7usd = custom7usd.toStringAsFixed(2);
-      custom71usd = custom7usd.toString();
-      custom8usd = double.tryParse(custom81usd);
-      custom8usd = custom8usd.toStringAsFixed(2);
-      custom81usd = custom8usd.toString();
-      custom9usd = double.tryParse(custom91usd);
-      custom9usd = custom9usd.toStringAsFixed(2);
-      custom91usd = custom9usd.toString();
-      custom10usd = double.tryParse(custom101usd);
-      custom10usd = custom10usd.toStringAsFixed(2);
-      custom101usd = custom10usd.toString();
+      print("setstste2$shipcostuser");
+
+      custom1usd = custom11usd.toStringAsFixed(2);
+      custom11usd = double.tryParse(custom1usd);
+
+      custom2usd = custom21usd.toStringAsFixed(2);
+      custom21usd = double.tryParse(custom2usd);
+
+      custom3usd = custom31usd.toStringAsFixed(2);
+      custom31usd = double.tryParse(custom3usd);
+
+      custom4usd = custom41usd.toStringAsFixed(2);
+      custom41usd = double.tryParse(custom4usd);
+
+      custom5usd = custom51usd.toStringAsFixed(2);
+      custom51usd = double.tryParse(custom5usd);
+
+      custom6usd = custom61usd.toStringAsFixed(2);
+      custom61usd = double.tryParse(custom6usd);
+
+      custom7usd = custom71usd.toStringAsFixed(2);
+      custom71usd = double.tryParse(custom7usd);
+
+      custom8usd = custom81usd.toStringAsFixed(2);
+      custom81usd = double.tryParse(custom8usd);
+
+      custom9usd = custom91usd.toStringAsFixed(2);
+      custom91usd = double.tryParse(custom9usd);
+
+      custom10usd = custom101usd.toStringAsFixed(2);
+      custom101usd = double.tryParse(custom10usd);
 
 
       c1 = resultUSD1.rate;
+      print(c1);
       customprice1 = c1.toStringAsFixed(2);
+      print(customprice1);
+
+      customprice1 = double.tryParse(customprice1);
+      print(customprice1);
 
 
       c2 = resultUSD2.rate;
       customprice2 = c2.toStringAsFixed(2);
+      customprice2 = double.tryParse(customprice2);
+
       c3 = resultUSD3.rate;
       customprice3 = c3.toStringAsFixed(2);
+      customprice3 = double.tryParse(customprice3);
+
       c4 = resultUSD4.rate;
       customprice4 = c4.toStringAsFixed(2);
+      customprice4 = double.tryParse(customprice4);
+
       c5 = resultUSD5.rate;
       customprice5 = c5.toStringAsFixed(2);
+      customprice5 = double.tryParse(customprice5);
+
       c6 = resultUSD6.rate;
       customprice6 = c6.toStringAsFixed(2);
+      customprice6 = double.tryParse(customprice6);
+
       c7 = resultUSD7.rate;
       customprice7 = c7.toStringAsFixed(2);
+      customprice7 = double.tryParse(customprice7);
+
       c8 = resultUSD8.rate;
       customprice8 = c8.toStringAsFixed(2);
+      customprice8 = double.tryParse(customprice8);
+
       c9 = resultUSD9.rate;
       customprice9 = c9.toStringAsFixed(2);
+      customprice9 = double.tryParse(customprice9);
+
       c10 = resultUSD10.rate;
       customprice10 = c10.toStringAsFixed(2);
+      customprice10 = double.tryParse(customprice10);
+
 
       isUploading = false;
     });
@@ -1714,7 +1798,7 @@ return
                StatefulBuilder(
                    builder: (BuildContext ctx, StateSetter stateSetter){
 
-                 return
+                     return
                 ClipRRect(
                   borderRadius: BorderRadius.only(
                       topLeft: Radius.circular(25),
@@ -1781,7 +1865,7 @@ return
                                                 onPressed: () {
                                                   selectedCustom =  <String>[];
                                                   selectedCustom.add("Custom 1");
-
+print(customprice1);
                                                   stateSetter(() { Custom = 'Custom 1';
                                                   userCustom = custom1;
                                                   customprice = customprice1;
@@ -3472,23 +3556,26 @@ Shoe21==0?Container():   Padding(
                               ),
                             ),
                             SizedBox(height:8.0),
-                            usersize == "" || color == ""|| Custom == ""?Container():  Container(
-                              // alignment:Alignment.centerLeft,
-                              child: FloatingActionButton.extended(
-                                backgroundColor: kblue,
-                                onPressed: () {
-                                  if (currentUser.country == country) {
-                                    Proceedtobuy(
-                                        ship: shipcostusd, shipcostU: shipcostinr);
-                                  } else {
-                                    Proceedtobuy(ship: shipcostinterusd,
-                                        shipcostU: shipcostuser);
-                                  }
-                                },
-                                label: Text(
-                                  'Proceed', style: TextStyle(color: Colors.white),),
-                              ),
-                            ),
+
+                            usersize == "" || color == ""|| Custom == ""?Container():
+                  FloatingActionButton.extended(
+                  backgroundColor: kblue,
+                  onPressed: () {
+                    if (currentUser.country == country) {
+                      isUploading?    null
+                          :  Proceedtobuy(
+                          ship: shipcostusd, shipcostU: shipcostinr);
+                    } else {
+                      isUploading?null:  Proceedtobuy(ship: shipcostinterusd,
+                          shipcostU: shipcostuser);
+                    }
+                  },
+                  label:
+
+                  Text(
+                    'Proceed', style: TextStyle(color: Colors.white),),
+                ),
+
 
                           ])
 
@@ -9324,9 +9411,11 @@ posteurope(){
                   ) ,
                   trailing: FloatingActionButton(
                     heroTag:null,
-
-                    onPressed: () => Buynow(context),
-                    child: Icon(Icons.add_shopping_cart,),
+backgroundColor: Colors.black,
+                    onPressed: (){
+                      isUploading?null:
+                      Buynow(context);},
+                    child:   isUploading?CircularProgressIndicator(): Icon(Icons.add_shopping_cart,),
                     shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(16.0))),
                   ),
                 ),
