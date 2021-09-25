@@ -617,18 +617,14 @@ void toggleArtisan(bool value) {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          Padding(
-            padding: EdgeInsets.only(top: 12.0),
-            child: Text(
-              "Display Name",
-              style: TextStyle(color: kText),
-            ),
-          ),
+
+
           TextField(
             style: TextStyle(color: kSubtitle),
             controller: displayNameController,
             decoration: InputDecoration(
                 hintText: "Update Display Name",
+                labelText: "Name",
                 hintStyle: TextStyle(color: kGrey),
                 errorText: _displayNameValid ? null : "Display Name too short",
                 fillColor: transwhite,
@@ -645,17 +641,11 @@ void toggleArtisan(bool value) {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          Padding(
-            padding: EdgeInsets.only(top: 12.0),
-            child: Text(
-              "Bio",
-              style: TextStyle(color: kText),
-            ),
-          ),
           TextField(style: TextStyle(color: kSubtitle),
             controller: bioController,
             decoration: InputDecoration(
                 hintText: "Bio",
+                labelText: "Bio",
                 hintStyle: TextStyle(color: kGrey),
                 errorText: _bioValid ? null : "Bio too long",
                 fillColor: transwhite,
@@ -741,10 +731,7 @@ void toggleArtisan(bool value) {
         ),
         body: isLoading
             ? circularProgress()
-            : Container( decoration: BoxDecoration(
-            gradient: fabGradient
-        ) ,
-          alignment: Alignment.center,
+            : Container(
           child: ListView(
             children: <Widget>[
               Container(
@@ -772,9 +759,9 @@ void toggleArtisan(bool value) {
                               },
                               child: Container(
                                 decoration: BoxDecoration(
-                                    color: kblue,
+                                    color: Colors.black,
                                     borderRadius: BorderRadius.circular(30)),
-                                child: Icon(Icons.add,color: kText,),
+                                child: Icon(Icons.add,color: Colors.white,),
                               ),
                             ),
                           ),
@@ -787,6 +774,8 @@ void toggleArtisan(bool value) {
                       child: Column(
                         children: <Widget>[
                           buildDisplayNameField(),
+                          SizedBox(height: 10.0,),
+
                           buildBioField(),
                           SizedBox(height: 10.0,),
                           Container(
@@ -796,18 +785,16 @@ void toggleArtisan(bool value) {
                               children: [
 
                                 ListTileTheme(
-                                  tileColor:kblue,
+                                  // tileColor:Colors.black,
 
                                   child: ExpansionTile (
-                                    title: Text('I Freelance in',style:TextStyle(
-                                        color: Colors.white),),
+                                    title: Text('I Freelance in',),
                                     maintainState:true,
                                     trailing:Icon(Icons.arrow_drop_down,color: kText,),
                                     children: [
 
                                       CheckboxListTile(
-                                        title: Text('Designer',style:TextStyle(
-                                            color: Colors.white),),
+                                        title: Text('Designer',),
                                         value: isCheckedDesigner,
                                         onChanged: (value){toggleDesigner(value);},
                                         activeColor: Colors.pink,
@@ -847,8 +834,9 @@ void toggleArtisan(bool value) {
                                               padding: const EdgeInsets.all(8.0),
                                               child:  ElevatedButton(
                                                 style: ElevatedButton.styleFrom(
-                                                   textStyle: TextStyle(color: Colors.black) ,
-                                                  onPrimary:kButton,  primary:kButton, // foreground
+                                                  
+                                                   textStyle: TextStyle(color: Colors.white) ,
+                                                  onPrimary:kButton,  primary:Colors.black, // foreground
                                                 ),
                                                 child:selectedDesigner?
                                                 CircularProgressIndicator(color: Colors.black,):
@@ -923,8 +911,8 @@ void toggleArtisan(bool value) {
                                               padding: const EdgeInsets.all(8.0),
                                               child:  ElevatedButton(
                                                 style: ElevatedButton.styleFrom(
-                                                  textStyle: TextStyle(color: Colors.black) ,
-                                                  onPrimary:kButton,  primary:kButton, // foreground
+                                                  textStyle: TextStyle(color: Colors.white) ,
+                                                  onPrimary:kButton,  primary:Colors.black, // foreground
                                                 ),
                                                 child:selectedArtisan?
                                                 CircularProgressIndicator(color: Colors.black,):
@@ -997,8 +985,8 @@ void toggleArtisan(bool value) {
                                               padding: const EdgeInsets.all(8.0),
                                               child:  ElevatedButton(
                                                 style: ElevatedButton.styleFrom(
-                                                  textStyle: TextStyle(color: Colors.black) ,
-                                                  onPrimary:kButton,  primary:kButton, // foreground
+                                                  textStyle: TextStyle(color: Colors.white) ,
+                                                  onPrimary:kButton,  primary:Colors.black, // foreground
                                                 ),
                                                 child:selectedStylist?
                                                 CircularProgressIndicator(color: Colors.black,):
@@ -1071,8 +1059,8 @@ void toggleArtisan(bool value) {
                                               padding: const EdgeInsets.all(8.0),
                                               child:  ElevatedButton(
                                                 style: ElevatedButton.styleFrom(
-                                                  textStyle: TextStyle(color: Colors.black) ,
-                                                  onPrimary:kButton,  primary:kButton, // foreground
+                                                  textStyle: TextStyle(color: Colors.white) ,
+                                                  onPrimary:kButton,  primary:Colors.black, // foreground
                                                 ),
                                                 child:selectedBlogger?
                                                 CircularProgressIndicator(color: Colors.black,):
@@ -1145,8 +1133,8 @@ void toggleArtisan(bool value) {
                                               padding: const EdgeInsets.all(8.0),
                                               child:  ElevatedButton(
                                                 style: ElevatedButton.styleFrom(
-                                                  textStyle: TextStyle(color: Colors.black) ,
-                                                  onPrimary:kButton,  primary:kButton, // foreground
+                                                  textStyle: TextStyle(color: Colors.white) ,
+                                                  onPrimary:kButton,  primary:Colors.black, // foreground
                                                 ),
                                                 child:selectedIllustrator?
                                                 CircularProgressIndicator(color: Colors.black,):
@@ -1218,8 +1206,8 @@ void toggleArtisan(bool value) {
                                               padding: const EdgeInsets.all(8.0),
                                               child:  ElevatedButton(
                                                 style: ElevatedButton.styleFrom(
-                                                  textStyle: TextStyle(color: Colors.black) ,
-                                                  onPrimary:kButton,  primary:kButton, // foreground
+                                                  textStyle: TextStyle(color: Colors.white) ,
+                                                  onPrimary:kButton,  primary:Colors.black, // foreground
                                                 ),
                                                 child:selectedPhotographer?
                                                 CircularProgressIndicator(color: Colors.black,):
@@ -1292,8 +1280,8 @@ void toggleArtisan(bool value) {
                                               padding: const EdgeInsets.all(8.0),
                                               child:  ElevatedButton(
                                                 style: ElevatedButton.styleFrom(
-                                                  textStyle: TextStyle(color: Colors.black) ,
-                                                  onPrimary:kButton,  primary:kButton, // foreground
+                                                  textStyle: TextStyle(color: Colors.white) ,
+                                                  onPrimary:kButton,  primary:Colors.black, // foreground
                                                 ),
                                                 child:selectedModel?
                                                 CircularProgressIndicator(color: Colors.black,):
@@ -1366,8 +1354,8 @@ void toggleArtisan(bool value) {
                                               padding: const EdgeInsets.all(8.0),
                                               child:  ElevatedButton(
                                                 style: ElevatedButton.styleFrom(
-                                                  textStyle: TextStyle(color: Colors.black) ,
-                                                  onPrimary:kButton,  primary:kButton, // foreground
+                                                  textStyle: TextStyle(color: Colors.white) ,
+                                                  onPrimary:kButton,  primary:Colors.black, // foreground
                                                 ),
                                                 child:selectedMakeup?
                                                 CircularProgressIndicator(color: Colors.black,):
@@ -1438,8 +1426,8 @@ void toggleArtisan(bool value) {
                                               padding: const EdgeInsets.all(8.0),
                                               child:  ElevatedButton(
                                                 style: ElevatedButton.styleFrom(
-                                                  textStyle: TextStyle(color: Colors.black) ,
-                                                  onPrimary:kButton,  primary:kButton, // foreground
+                                                  textStyle: TextStyle(color: Colors.white) ,
+                                                  onPrimary:kButton,  primary:Colors.black, // foreground
                                                 ),
                                                 child:selectedHair?
                                                 CircularProgressIndicator(color: Colors.black,):
@@ -1511,8 +1499,8 @@ void toggleArtisan(bool value) {
                                               padding: const EdgeInsets.all(8.0),
                                               child:  ElevatedButton(
                                                 style: ElevatedButton.styleFrom(
-                                                  textStyle: TextStyle(color: Colors.black) ,
-                                                  onPrimary:kButton,  primary:kButton, // foreground
+                                                  textStyle: TextStyle(color: Colors.white) ,
+                                                  onPrimary:kButton,  primary:Colors.black, // foreground
                                                 ),
                                                 child:selectedChoreographer?
                                                 CircularProgressIndicator(color: Colors.black,):

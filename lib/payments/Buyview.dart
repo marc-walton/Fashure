@@ -1,6 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:fashow/chatcached_image.dart';
 import 'package:fashow/payments/Buynow.dart';
 import 'package:fashow/size_config.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fashow/Constants.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -235,7 +237,7 @@ class _BuyViewState extends State<BuyView> {
     print(Country);
 
   }
-Widget st()
+Widget address()
 {
   SizeConfig().init(context);
 
@@ -251,26 +253,18 @@ Widget st()
 
         Row(
           children: [
-            Text("Delivery Address",style:TextStyle(color:kText,
-              fontSize: SizeConfig.safeBlockHorizontal * 5,
+            Text("Shipping to:",style:TextStyle(color:kGrey,
+
             )),
+            Expanded(
+              child: Text("$Type,$Addresss,$City$State,$Country,$Zip",
+                  overflow: TextOverflow.ellipsis,
+                  style:TextStyle(color:kText,
+                    fontWeight: FontWeight.bold,
+                  )),
+            ),
           ],
         ),
-Padding(
-  padding: const EdgeInsets.all(8.0),
-  child:   Row(
-
-    children: [
-
-          Text("$Type",style:TextStyle(color:kText,
-            fontSize: SizeConfig.safeBlockHorizontal * 4,
-fontWeight: FontWeight.bold,
-          )),
-
-    ],
-
-  ),
-),
 
         Padding(
           padding: const EdgeInsets.all(8.0),
@@ -282,14 +276,8 @@ fontWeight: FontWeight.bold,
                 crossAxisAlignment: CrossAxisAlignment.start,
 
                 children: [
-                  Text('$Addresss,',style:TextStyle(color:kText,            fontSize: SizeConfig.safeBlockHorizontal * 4,
-)),
-                  Text('$City,',style:TextStyle(color:kText,            fontSize: SizeConfig.safeBlockHorizontal * 4,
-)),
-                  Text('$State,',style:TextStyle(color:kText,            fontSize: SizeConfig.safeBlockHorizontal * 4,
-)),
-                  Text('$Country',style:TextStyle(color:kText,            fontSize: SizeConfig.safeBlockHorizontal * 4,
-)),
+                  Text('Estimated Delivery:',style:TextStyle(color:kGrey,
+                  )),
 
                 ],
               ),
@@ -307,110 +295,23 @@ fontWeight: FontWeight.bold,
 
 }
 totta(){
-    print(widget.shipcostuser);
-    print(widget.custompriceusd);
-    print(widget.custompriceinr);
-    print(widget.price);
-     print(widget.customprice);
-
-    print(widget.inr);
-    print(widget.usd);
+    // print(widget.shipcostuser);
+    // print(widget.custompriceusd);
+    // print(widget.custompriceinr);
+    // print(widget.price);
+    //  print(widget.customprice);
+    //
+    // print(widget.inr);
+    // print(widget.usd);
 
  var paytotal =  widget.usd + widget.custompriceusd + widget.shipcost;
  var usertotal = widget.price + widget.customprice + widget.shipcostuser;
-var sametotal =  widget.inr + widget.custompriceinr + widget.shipcost;
-totalU = currentUser.country == widget.country? sametotal.toString():
+// var sametotal =  widget.inr + widget.custompriceinr + widget.shipcost;
+totalU =
  usertotal.toString();
 total = paytotal.toString();
 }
-uk(){
-  return Expanded(
-    child: Container(
-      child: Column(children: [
-        ListTile(
 
-          leading:   CircleAvatar(backgroundImage: NetworkImage(widget.profileimg),),
-
-          title:  Text(widget.username,style: TextStyle(color: kText)),
-
-        ),
-        Row(
-          children: [
-            Text(widget.productname,style: TextStyle(color: kText,
-              fontSize: 25.0,
-            )),
-          ],
-        ),
-        Expanded(
-          child: Container(
-            height:  MediaQuery.of(context).size.height * 0.5,
-            child: ClipRRect(
-                borderRadius: BorderRadius.circular(20.0),child:CachedNetworkImage(imageUrl: widget.mediaUrl,)),
-
-          ),
-        ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            Text('Size:  ${widget.userSize}', style: TextStyle(color: kText,
-                fontWeight: FontWeight.bold)),
-             Text('Color:  ${widget.colorText}', style: TextStyle(color: kText,
-                fontWeight: FontWeight.bold)),
-               Text('Price:  ${widget.price}', style: TextStyle(color: kText,
-                fontWeight: FontWeight.bold)),
-
-
-          ],
-        ),
-        st(),
-
-      ],),
-    ),
-  );
-}
-ind(){
-  return Expanded(
-    child: Container(
-      child: Column(children: [
-        ListTile(
-
-         leading:   CircleAvatar(backgroundImage: NetworkImage(widget.profileimg),),
-
-          title:  Text(widget.username,style: TextStyle(color: kText)),
-
-        ),
-        Row(
-          children: [
-            Text(widget.productname,style: TextStyle(color: kText,
-              fontSize: 25.0,
-            )),
-          ],
-        ),
-        Expanded(
-          child: Container(
-            height:  MediaQuery.of(context).size.height * 0.20,
-            child: ClipRRect(
-                  borderRadius: BorderRadius.circular(20.0),child:CachedNetworkImage(imageUrl: widget.mediaUrl,)),
-
-            ),
-          ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            Text('Size:  ${widget.userSize}', style: TextStyle(color: kText,
-                fontWeight: FontWeight.bold)),
-            Text('₹  ${widget.total}',style: TextStyle(color: kText,
-              fontSize: 20.0,
-            )),
-          ],
-        ),
-        st(),
-
-      ],),
-    ),
-  );
-
-}
 eur(){
   SizeConfig().init(context);
 
@@ -418,195 +319,193 @@ eur(){
     child: Expanded(
       child: Container(
         child: Column(children: [
-          ListTile(
-
-           leading:   CircleAvatar(backgroundImage: NetworkImage(widget.profileimg),),
-
-            title:  Text(widget.username,style: TextStyle(color: kText)),
-
-          ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Row(
-             children: [
-                FittedBox(
-                  child: Text(widget.productname,style: TextStyle(color: kText,
-                    fontSize: SizeConfig.safeBlockHorizontal * 5,
-                  )),
-                ),
-
-              ],
-            ),
-          ),
+SizedBox(height: 8,),
+          address(),
 
           Card(
             child: Padding(
               padding: const EdgeInsets.all(16.0),
-              child: ListTile(
-                leading: CircleAvatar(
-                  backgroundColor: Colors.grey,
-                  backgroundImage: CachedNetworkImageProvider(widget.mediaUrl),
-                ),
-                title: Text(
-                  'Size: ${widget.displaysize}',
-                  style:
-                  TextStyle(color:kText, fontWeight: FontWeight.bold),
-                ),
+              child: Column(
+                children: [
+                  IntrinsicHeight(
+                    child: Row(
+                      children: [
 
+                        Expanded(
+                          child: Text("${widget.productname}",
+                              style:TextStyle(color:kText,
+                                fontWeight: FontWeight.bold,
+                              )),
+                        ),
+                        VerticalDivider(),
+                        ClipRRect(
+                            borderRadius: BorderRadius.circular(15.0),
+                            child: CachedImage(widget.mediaUrl,height:SizeConfig.safeBlockVertical*25,width:SizeConfig.safeBlockVertical*20, )),
+
+
+                      ],
+                    ),
+                  ),
+                ],
               ),
             ),
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              Text('Size: ${widget.displaysize}', style: TextStyle(color: kText,
-                fontWeight: FontWeight.bold,
-                fontSize: SizeConfig.safeBlockHorizontal * 5,
+  Card(
+            child: Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Column(
+                children: [
 
-              )),
-              Text('Color: ${widget.colorText}',style: TextStyle(color: kText,
-                fontWeight: FontWeight.bold,
-                fontSize: SizeConfig.safeBlockHorizontal * 5,
 
-              )),
 
-            ],
+                      Row(
+
+                        children: [
+                          Text(
+                            'Size:',
+                            style:
+                            TextStyle(color:kGrey, ),
+                          ),
+                          Spacer(),
+
+                          Text(
+                            '${widget.displaysize}',
+                            style:
+                            TextStyle(color:kText, ),
+                          ),
+                        ],
+                      ),
+                      Row(
+
+                        children: [
+                          Text('Color:',style: TextStyle(color: kGrey,)),
+                          Spacer(),
+
+                          Text('${widget.colorText}',style: TextStyle(color: kText,
+
+                          )),
+                        ],
+                      ),
+                  widget.mtoText==""?Container():Row(
+
+                        children: [
+                          Text('Made-to-order:',style: TextStyle(color: kGrey,)),
+
+                          Expanded(
+                            child: Text('${widget.mtoText}',style: TextStyle(color: kText,
+
+                            )),
+                          ),
+                        ],
+                      ),
+
+                ],
+              ),
+            ),
           ),
 
-          currentUser.country == "${widget.country}" ?  Padding(
+        Card(child:Column(children: [
+
+          currentUser.country == "India" ?   Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+
+              children: [
+                Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children:[
+                      Text("price:",style: TextStyle(color: kGrey,)),
+                      Spacer(),
+                      Text(
+                        "+ ${currentUser.currencysym} ${widget.price}",
+                        style: TextStyle(
+                        ),
+                      ),
+                    ]),
+
+                widget.customprice == 0?Container() :Row(
+
+                  children: [
+                    Text("customization:",style: TextStyle(color: kGrey,)),
+                    Spacer(),
+                    Text(
+                      "+ ${currentUser.currencysym} ${widget.customprice??"0.0"}",
+                      style: TextStyle(
+                      ),
+                    ),
+                  ],
+                ),
+                shipping(),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+
+                  children: [
+                    Text('Total:',style: TextStyle(color: kGrey,)),
+                    Spacer(),
+                    Text(
+                      " ${currentUser.currencysym} ${totalU}",
+                      style: TextStyle(
+                        fontSize: 14.0,
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ) : Padding(
             padding: const EdgeInsets.all(8.0),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+
                   children: [
-                    Text("${currentUser.currencysym} ${widget.inr}",
+                    Text("price:",style: TextStyle(color: kGrey,)),
+                    Spacer(),
+                    Text("\u0024  ${widget.usd}",
                         style: TextStyle(
-                          color: Colors.green,
-                          fontWeight: FontWeight.bold,
-                          fontSize: SizeConfig.safeBlockHorizontal * 5,
+
                         )),
 
                   ],
                 ),
-                Row(
+
+                widget.customprice == 0 ?Container():Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+
                   children: [
-                    Text("${currentUser.currency} ",
-                        style: TextStyle(
-                          color: Colors.green,
-                          fontWeight: FontWeight.bold,
-                          fontSize: SizeConfig.safeBlockHorizontal * 4,
-                        )
+                    Text("customization:",style: TextStyle(color: kGrey,)),
+                    Spacer(),
+                    Text(
+                      "\u0024 ${widget.custompriceusd??"0.0"}",
+                      style: TextStyle(
+
+                      ),
                     ),
                   ],
-                ),
-                widget.customprice != null ?Text(
-                  "+ ${currentUser.currencysym} ${widget.custominr??"0.0"}",
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 14.0,
-                  ),
-                ):Container() ,
-                widget.freeship?Container(
-                    color:Colors.white.withOpacity(0.1),
-                    child:   Text(
-                      "FREE SHIPPING",
+                ) ,
+                shipping(),
+
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+
+                  children: [
+                    Text('Total:',style: TextStyle(color: kGrey,)),
+                    Spacer(),
+                    Text(
+                      "\u0024 ${total}",
                       style: TextStyle(
-                        color: Colors.green,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 14.0,
+
                       ),
-                    )
-                ) :Text(
-                  "+ ${currentUser.currencysym} ${widget.shipcost}",
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 14.0,
-                  ),
-                ),Text(
-                  "Subtotal ${currentUser.currencysym} ${totalU}",
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 14.0,
-                  ),
+                    ),
+                  ],
                 )
               ],
             ),
-          ):
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-
-              children: [
-                Row(children:[Text(
-                  "${currentUser.currencysym} ${widget.price}",
-                  style: TextStyle(
-                    color: Colors.green,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 20.0,
-                  ),
-                ),
-             ]),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-
-                    children: [
-                      Text("${currentUser.currency} ",
-                          style: TextStyle(
-                            color: Colors.green,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 10.0,
-                          )
-                      ),
-                    ],
-                  ),
-                ),
-                widget.customprice == null?Container() :Text(
-                  "+ ${currentUser.currencysym} ${widget.customprice??"0.0"}",
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 14.0,
-                  ),
-                ),
-                widget.freeworldship?Container(
-                    color:Colors.white.withOpacity(0.1),
-                    child:   Text(
-                      "FREE SHIPPING",
-                      style: TextStyle(
-                        color: Colors.green,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 14.0,
-                      ),
-                    )
-                ) :Text(
-                  "+ ${currentUser.currencysym} ${widget.shipcostuser}(\u0024 ${widget.shipcost})",
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 14.0,
-                  ),
-                ),
-                Text(
-                  "Subtotal ${currentUser.currencysym} ${totalU}",
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 14.0,
-                  ),
-                ),
-               currentUser.country == "India"? Container(): Text(
-                  "To be Payed in US dollars: \u0024 ${total}",
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 14.0,
-                  ),
-                )
-              ],
-            ),
-          ) ,
-
-          st(),
+          ),
+        ],)),
 
         ],),
       ),
@@ -614,67 +513,76 @@ eur(){
   );
 
 }
-us(){
-  return Expanded(
-    child: Container(
-      child: Column(children: [
-        ListTile(
+shipping(){
+  if(  currentUser.country == widget.country){
+    return
+    widget.freeship?Row(
+    mainAxisAlignment: MainAxisAlignment.end,
 
-         leading:   CircleAvatar(backgroundImage: NetworkImage(widget.profileimg),),
-
-          title:  Text(widget.username,style: TextStyle(color: kText)),
-
-        ),
-        Row(
-          children: [
-            Text(widget.productname,style: TextStyle(color: kText,
-              fontSize: 25.0,
-            )),
-          ],
-        ),
-        Expanded(
-          child: Container(
-            height:  MediaQuery.of(context).size.height * 0.20,
-            child: ClipRRect(
-                  borderRadius: BorderRadius.circular(20.0),child:CachedNetworkImage(imageUrl: widget.mediaUrl,)),
+    children: [
+      Text('Shipping:',style: TextStyle(color: kGrey,)),
+      Spacer(),
+      Container(
+          color:Colors.grey.withOpacity(0.1),
+          child:   Text(
+            "FREE SHIPPING",
+            style: TextStyle(
 
             ),
-          ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            Text('Size:  ${widget.userSize}', style: TextStyle(color: kText,
-                fontWeight: FontWeight.bold)),
-            Text('\u0024  ${widget.total}',style: TextStyle(color: kText,
-              fontSize: 20.0,
-            )),
-          ],
+          )
+      ),
+    ],
+  ) :
+  Row(
+    mainAxisAlignment: MainAxisAlignment.end,
+
+    children: [
+      Text('Shipping:',style: TextStyle(color: kGrey,)),
+      Spacer(),
+    currentUser.country =="India"?  Text(
+        "+  ${currentUser.currencysym} ${widget.shipcostuser}",
+
+      ):Text(
+        "+ \u0024  ${widget.shipcost}",
+
+      ),
+    ],
+  );}
+  else{return
+    widget.freeworldship?Row(
+      mainAxisAlignment: MainAxisAlignment.end,
+
+      children: [
+        Text('Shipping:',style: TextStyle(color: kGrey,)),
+        Spacer(),
+        Container(
+            color:Colors.grey.withOpacity(0.2),
+            child:   Text(
+              "FREE SHIPPING",
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 14.0,
+              ),
+            )
         ),
-        st(),
+      ],
+    ) :Row(
+      mainAxisAlignment: MainAxisAlignment.end,
 
-      ],),
-    ),
-  );
+      children: [
+        Text('shipping:',style: TextStyle(color: kGrey,)),
+        Spacer(),
+        currentUser.country =="India"?  Text(
+          "+  ${currentUser.currencysym} ${widget.shipcostuser}",
 
+        ):Text(
+          "+ \u0024  ${widget.shipcost}",
+
+        ),
+      ],
+    );
 }
-
-  Widget ProdTile(){
-    if(currentUser.country=='Europe'){
-     return
-       eur();}
-    else if (currentUser.country == 'India'){
-      return
-    ind();}
-    else if (currentUser.country == 'UK'){
-return uk();
-    }
-    else if (currentUser.country == 'USA'){
-      return
-        us();}
-else {
-      return
-        us();}
-  }
+}
   @override
   Widget build(BuildContext context) {
 
@@ -698,7 +606,11 @@ else {
               color: Colors.transparent,
               child: Column(
                 children: [
-                  RaisedButton(
+                  ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+
+                      primary:   Colors.black, // foreground
+                    ),
                     onPressed: () {
                       Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) =>BuyNow(buynowamount:vString,
                         prodId: widget.prodId,
@@ -798,9 +710,8 @@ else {
                       )));
 
                     },
-                    color: kblue,
 
-                    child: Text('PROCEED TO PAY', style: TextStyle(color: Colors.white),),
+                    child: Text('Pay and Place Your Order', style: TextStyle(color: Colors.white),),
                   ),
                 ],
               ),

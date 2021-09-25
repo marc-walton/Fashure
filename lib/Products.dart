@@ -1423,7 +1423,7 @@ conversion()async {
        price = double.tryParse(price);
 print(price);
       s = resultUSD11.rate;
-      shipcostuser = currentUser.country == country?shipcostusd.toStringAsFixed(2):s.toStringAsFixed(2);
+      shipcostuser = currentUser.country == country?shipcostinr.toStringAsFixed(2):s.toStringAsFixed(2);
       shipcostuser = double.tryParse(shipcostuser);
       print(shipcostuser);
 
@@ -3559,7 +3559,7 @@ Shoe21==0?Container():   Padding(
 
                             usersize == "" || color == ""|| Custom == ""?Container():
                   FloatingActionButton.extended(
-                  backgroundColor: kblue,
+                  backgroundColor: kPrimaryColor,
                   onPressed: () {
                     if (currentUser.country == country) {
                       isUploading?    null
@@ -3573,7 +3573,7 @@ Shoe21==0?Container():   Padding(
                   label:
 
                   Text(
-                    'Proceed', style: TextStyle(color: Colors.white),),
+                    'Buy Now', style: TextStyle(color: Colors.white),),
                 ),
 
 
@@ -5247,23 +5247,25 @@ Shoe21==0?Container():   Padding(
                                 ),
 
 
-                                usersize == "" || color == ""|| Custom == ""?Container():  Container(
-                                  // alignment:Alignment.centerLeft,
-                                  child: FloatingActionButton.extended(
-                                    backgroundColor: kblue,
-                                    onPressed: () {
-                                      if (currentUser.country == country) {
-                                        Proceedtobuy(
-                                            ship: shipcostusd, shipcostU: shipcostinr);
-                                      } else {
-                                        Proceedtobuy(ship: shipcostinterusd,
-                                            shipcostU: shipcostuser);
-                                      }
-                                    },
-                                    label: Text(
-                                      'Proceed', style: TextStyle(color: Colors.white),),
-                                  ),
-                                ),
+                                usersize == "" || color == ""|| Custom == ""?Container():
+                                FloatingActionButton.extended(
+                    backgroundColor: kPrimaryColor,
+                    onPressed: () {
+                    if (currentUser.country == country) {
+                    isUploading?    null
+                        :  Proceedtobuy(
+                    ship: shipcostusd, shipcostU: shipcostinr);
+                    } else {
+                    isUploading?null:  Proceedtobuy(ship: shipcostinterusd,
+                    shipcostU: shipcostuser);
+                    }
+                    },
+                    label:
+
+                    Text(
+                    'Buy Now', style: TextStyle(color: Colors.white),),
+                    ),
+
                               ])
 
                       );
@@ -6162,23 +6164,25 @@ Shoe21==0?Container():   Padding(
                                 ),
 
 
-                                usersize == "" || color == ""|| Custom == ""?Container():  Container(
-                                  // alignment:Alignment.centerLeft,
-                                  child: FloatingActionButton.extended(
-                                    backgroundColor: kblue,
-                                    onPressed: () {
-                                      if (currentUser.country == country) {
-                                        Proceedtobuy(
-                                            ship: shipcostusd, shipcostU: shipcostinr);
-                                      } else {
-                                        Proceedtobuy(ship: shipcostinterusd,
-                                            shipcostU: shipcostuser);
-                                      }
-                                    },
-                                    label: Text(
-                                      'Proceed', style: TextStyle(color: Colors.white),),
-                                  ),
+                                usersize == "" || color == ""|| Custom == ""?Container():
+                                FloatingActionButton.extended(
+                                  backgroundColor: kPrimaryColor,
+                                  onPressed: () {
+                                    if (currentUser.country == country) {
+                                      isUploading?    null
+                                          :  Proceedtobuy(
+                                          ship: shipcostusd, shipcostU: shipcostinr);
+                                    } else {
+                                      isUploading?null:  Proceedtobuy(ship: shipcostinterusd,
+                                          shipcostU: shipcostuser);
+                                    }
+                                  },
+                                  label:
+
+                                  Text(
+                                    'Buy Now', style: TextStyle(color: Colors.white),),
                                 ),
+
                               ])
 
                       );
@@ -7302,22 +7306,23 @@ Shoe21==0?Container():   Padding(
                                 ),
 
 
-                                usersize == "" || color == ""|| Custom == ""?Container():  Container(
-                                  // alignment:Alignment.centerLeft,
-                                  child: FloatingActionButton.extended(
-                                    backgroundColor: kblue,
-                                    onPressed: () {
-                                      if (currentUser.country == country) {
-                                        Proceedtobuy(
-                                            ship: shipcostusd, shipcostU: shipcostinr);
-                                      } else {
-                                        Proceedtobuy(ship: shipcostinterusd,
-                                            shipcostU: shipcostuser);
-                                      }
-                                    },
-                                    label: Text(
-                                      'Proceed', style: TextStyle(color: Colors.white),),
-                                  ),
+                                usersize == "" || color == ""|| Custom == ""?Container():
+                                FloatingActionButton.extended(
+                                  backgroundColor: kPrimaryColor,
+                                  onPressed: () {
+                                    if (currentUser.country == country) {
+                                      isUploading?    null
+                                          :  Proceedtobuy(
+                                          ship: shipcostusd, shipcostU: shipcostinr);
+                                    } else {
+                                      isUploading?null:  Proceedtobuy(ship: shipcostinterusd,
+                                          shipcostU: shipcostuser);
+                                    }
+                                  },
+                                  label:
+
+                                  Text(
+                                    'Buy Now', style: TextStyle(color: Colors.white),),
                                 ),
                               ])
 
@@ -8562,22 +8567,23 @@ Shoe21==0?Container():   Padding(
                                 ),
 
 
-                                usersize == "" || color == ""|| Custom == ""?Container():  Container(
-                                  // alignment:Alignment.centerLeft,
-                                  child: FloatingActionButton.extended(
-                                    backgroundColor: kblue,
-                                    onPressed: () {
-                                      if (currentUser.country == country) {
-                                        Proceedtobuy(
-                                            ship: shipcostusd, shipcostU: shipcostinr);
-                                      } else {
-                                        Proceedtobuy(ship: shipcostinterusd,
-                                            shipcostU: shipcostuser);
-                                      }
-                                    },
-                                    label: Text(
-                                      'Proceed', style: TextStyle(color: Colors.white),),
-                                  ),
+                                usersize == "" || color == ""|| Custom == ""?Container():
+                                FloatingActionButton.extended(
+                                  backgroundColor: kPrimaryColor,
+                                  onPressed: () {
+                                    if (currentUser.country == country) {
+                                      isUploading?    null
+                                          :  Proceedtobuy(
+                                          ship: shipcostusd, shipcostU: shipcostinr);
+                                    } else {
+                                      isUploading?null:  Proceedtobuy(ship: shipcostinterusd,
+                                          shipcostU: shipcostuser);
+                                    }
+                                  },
+                                  label:
+
+                                  Text(
+                                    'Buy Now', style: TextStyle(color: Colors.white),),
                                 ),
                               ])
 

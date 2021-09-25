@@ -11,6 +11,8 @@ class Users{
   String bio;
   String coverPhoto;
   String country;
+  String city;
+
    String currencyISO;
    String currency;
  String currencysym;
@@ -73,6 +75,8 @@ bool Bidding;
     this.country,
      this.currencyISO,
      this.currency,
+    this.city,
+
 this.currencysym,
 this.revenue,
 this.designerAvg,
@@ -121,6 +125,7 @@ this.Bidding,
         id: doc.data()['id'],
       Bidding: doc.data()['Bidding'],
       countryISO: doc.data()['countryISO'],
+      city: doc.data()['city'],
 
         username :doc.data()['username'],
         email :doc.data()['email'],

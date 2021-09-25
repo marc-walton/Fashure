@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:fashow/chatcached_image.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:fashow/products.dart';
@@ -18,7 +19,7 @@ Widget buildprod(BuildContext context, DocumentSnapshot document) {
           child: ListTile(
             leading: ClipRRect(
                 borderRadius: BorderRadius.circular(15.0),
-                child: Container(child: Image.network(prod.shopmediaUrl.first),)),
+                child: Container(child: CachedImage(prod.shopmediaUrl.first),)),
 
             title: Text(
               prod.productname,

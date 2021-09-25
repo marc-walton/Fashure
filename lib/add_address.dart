@@ -1,3 +1,4 @@
+import 'package:alert_dialog/alert_dialog.dart';
 import 'package:fashow/methods/flutter_country_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -10,6 +11,7 @@ import 'package:fashow/user.dart';
 import 'package:fashow/Constants.dart';
 import 'package:image/image.dart' as Im;
 import 'package:intl/intl.dart';
+import 'package:modal_progress_hud/modal_progress_hud.dart';
 import 'package:uuid/uuid.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -30,8 +32,8 @@ class _AddAdressState extends State<AddAdress> {
   TextEditingController statecontroller = TextEditingController();
   TextEditingController zipcontroller = TextEditingController();
   TextEditingController telephonecontroller = TextEditingController();
-  String country = 'India';
-  String dialcode = '+91';
+  String country = '';
+  String dialcode = '';
   SharedPreferences adPrefs;
   String fullname;
   String type;
@@ -87,273 +89,297 @@ Widget form(){
     return
   Form(
   key: _formKey,
-  child: ListView(
-    shrinkWrap:true,
-    children: [
-      Container(
-        margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
-
-        child: TextFormField(
-          keyboardType: TextInputType.name,
-          maxLines: null,
-          controller: namecontroller,
-          style:TextStyle(color: kText),
-          decoration: InputDecoration(
-            border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
-            enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.white)),
-            focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
-            // labelText: 'Full name',labelStyle: TextStyle(color: kText),
-            hintText: 'Full name',
-            hintStyle: TextStyle(color: kText),
-
-          ),
-          textAlign: TextAlign.start,
-          validator: (text) {
-            if (text == null || text.isEmpty) {
-              return 'Name is empty';
-            }
-            return null;
-          },
-        ),
-      ),
-      Container(
-        margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
-        child: TextFormField(
-          keyboardType: TextInputType.name,
-          maxLines: null,
-          controller: nicknamecontroller,
-          style:TextStyle(color: kText),
-          decoration: InputDecoration(
-            border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
-            enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.white)),
-            focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
-            // labelText: 'Full name',labelStyle: TextStyle(color: kText),
-            hintText: 'Type of address is empty(Home,Work..)',
-            hintStyle: TextStyle(color: kText),
-
-          ),
-
-          textAlign: TextAlign.start,
-          validator: (text) {
-            if (text == null || text.isEmpty) {
-              return 'Type of address is empty';
-            }
-            return null;
-          },
-        ),
-      ),
-      Container(
-        margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
-        child: TextFormField(
-          keyboardType: TextInputType.streetAddress,
-          maxLines: null,
-          controller: addresscontroller,
-          style:TextStyle(color: kText),
-          decoration: InputDecoration(
-            border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
-            enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.white)),
-            focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
-            // labelText: 'Full name',labelStyle: TextStyle(color: kText),
-            hintText: 'Address',
-            hintStyle: TextStyle(color: kText),
-
-          ),
-
-          textAlign: TextAlign.start,
-          validator: (text) {
-            if (text == null || text.isEmpty) {
-              return 'Address is empty';
-            }
-            return null;
-          },
-        ),
-      ),
 
 
-      Container(
-        margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
-        child: TextFormField(
-          keyboardType: TextInputType.text,
-          maxLines: null,
-          controller: citycontroller,
-          style:TextStyle(color: kText),
-          decoration: InputDecoration(
-            border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
-            enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.white)),
-            focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
-            // labelText: 'Full name',labelStyle: TextStyle(color: kText),
-            hintText: 'City',
-            hintStyle: TextStyle(color: kText),
+    child: ListView(
+      shrinkWrap:true,
+      children: [
+        Container(
+          margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
 
-          ),
+          child: TextFormField(
+            keyboardType: TextInputType.name,
+            maxLines: null,
+            controller: namecontroller,
+            style:TextStyle(color: kText),
+            decoration: InputDecoration(
+              border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+              enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.grey)),
+              focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+              // labelText: 'Full name',labelStyle: TextStyle(color: kText),
+              hintText: 'Full name',
+              hintStyle: TextStyle(color: kText),
 
-          textAlign: TextAlign.start,
-          validator: (text) {
-            if (text == null || text.isEmpty) {
-              return 'City is empty';
-            }
-            return null;
-          },
-        ),
-      ),
-      Container(
-        margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
-        child: TextFormField(
-          keyboardType: TextInputType.text,
-          maxLines: null,
-          controller: statecontroller,
-          style:TextStyle(color: kText),
-          decoration: InputDecoration(
-            border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
-            enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.white)),
-            focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
-            // labelText: 'Full name',labelStyle: TextStyle(color: kText),
-            hintText: 'State',
-            hintStyle: TextStyle(color: kText),
-
-          ),
-
-          textAlign: TextAlign.start,
-          validator: (text) {
-            if (text == null || text.isEmpty) {
-              return 'State is empty';
-            }
-            return null;
-          },
-        ),
-      ),
-      Container(
-        margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
-        child: TextFormField(
-          keyboardType: TextInputType.text,
-          maxLines: null,
-          controller: zipcontroller,
-          style:TextStyle(color: kText),
-          decoration: InputDecoration(
-            border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
-            enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.white)),
-            focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
-            // labelText: 'Full name',labelStyle: TextStyle(color: kText),
-            hintText: 'Zip Code',
-
-            hintStyle: TextStyle(color: kText),
-
-          ),
-
-
-          textAlign: TextAlign.start,
-          validator: (text) {
-            if (text == null || text.isEmpty) {
-              return 'Zip Code is empty';
-            }
-            return null;
-          },
-        ),
-      ),
- Center(
-        child: CountryPicker(
-          dense: false,
-          showFlag: true,  //displays flag, true by default
-          showDialingCode: true, //displays dialing code, false by default
-          showName: false, //displays country name, true by default
-          showCurrency: false, //eg. 'British pound'
-          showCurrencyISO: false, //eg. 'GBP'
-          onChanged: (Country select) {
-            setState(() {
-              _selected = select;
-              country = select.name;
-              dialcode = select.dialingCode;
-
-              countryISO = select.isoCode;
-
-            });
-          },
-          selectedCountry:_selected,
-        ),
-      ),
-
-      Container(
-        margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
-        child: TextFormField(
-          keyboardType: TextInputType.phone,
-          maxLines: null,
-          controller: telephonecontroller,
-          style:TextStyle(color: kText),
-          decoration: InputDecoration(
-            border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
-            enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.white)),
-            focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
-            // labelText: 'Full name',labelStyle: TextStyle(color: kText),
-            hintText: '$dialcode Mobile number',
-
-            hintStyle: TextStyle(color: kText),
-
-          ),
-
-          textAlign: TextAlign.start,
-          validator: (text) {
-            if (text == null || text.isEmpty) {
-              return 'Mobile number is empty';
-            }
-            return null;
-          },
-        ),
-      ),
-
-      Row(
-        children: [
-          RaisedButton(
-            child: Text('Cancel'),
-            onPressed: ()=>Get.back(),
-          ),
-          SizedBox(width: 5.0,),
-          RaisedButton(
-              child: Text('Save'),
-              onPressed: () async {
-               await Saveaddress();
-               // Get.snackbar(title:"Address added!"{
-               // colorText: kText,
-               // barBlur: 20,
-               // });
-                Get.back();
-
+            ),
+            textAlign: TextAlign.start,
+            validator: (text) {
+              if (text == null || text.isEmpty) {
+                return 'Name is empty';
               }
-          )
+              return null;
+            },
+          ),
+        ),
+        Container(
+          margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+          child: TextFormField(
+            keyboardType: TextInputType.name,
+            maxLines: null,
+            controller: nicknamecontroller,
+            style:TextStyle(color: kText),
+            decoration: InputDecoration(
+              border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+              enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.grey)),
+              focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+              // labelText: 'Full name',labelStyle: TextStyle(color: kText),
+              hintText: 'Type of address is empty(Home,Work..)',
+              hintStyle: TextStyle(color: kText),
 
-        ],
-      ),
+            ),
+
+            textAlign: TextAlign.start,
+            validator: (text) {
+              if (text == null || text.isEmpty) {
+                return 'Type of address is empty';
+              }
+              return null;
+            },
+          ),
+        ),
+        Container(
+          margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+          child: TextFormField(
+            keyboardType: TextInputType.streetAddress,
+            maxLines: null,
+            controller: addresscontroller,
+            style:TextStyle(color: kText),
+            decoration: InputDecoration(
+              border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+              enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.grey)),
+              focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+              // labelText: 'Full name',labelStyle: TextStyle(color: kText),
+              hintText: 'Address',
+              hintStyle: TextStyle(color: kText),
+
+            ),
+
+            textAlign: TextAlign.start,
+            validator: (text) {
+              if (text == null || text.isEmpty) {
+                return 'Address is empty';
+              }
+              return null;
+            },
+          ),
+        ),
 
 
-    ],
-  )
+        Container(
+          margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+          child: TextFormField(
+            keyboardType: TextInputType.text,
+            maxLines: null,
+            controller: citycontroller,
+            style:TextStyle(color: kText),
+            decoration: InputDecoration(
+              border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+              enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.grey)),
+              focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+              // labelText: 'Full name',labelStyle: TextStyle(color: kText),
+              hintText: 'City',
+              hintStyle: TextStyle(color: kText),
+
+            ),
+
+            textAlign: TextAlign.start,
+            validator: (text) {
+              if (text == null || text.isEmpty) {
+                return 'City is empty';
+              }
+              return null;
+            },
+          ),
+        ),
+        Container(
+          margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+          child: TextFormField(
+            keyboardType: TextInputType.text,
+            maxLines: null,
+            controller: statecontroller,
+            style:TextStyle(color: kText),
+            decoration: InputDecoration(
+              border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+              enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.grey)),
+              focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+              // labelText: 'Full name',labelStyle: TextStyle(color: kText),
+              hintText: 'State',
+              hintStyle: TextStyle(color: kText),
+
+            ),
+
+            textAlign: TextAlign.start,
+            validator: (text) {
+              if (text == null || text.isEmpty) {
+                return 'State is empty';
+              }
+              return null;
+            },
+          ),
+        ),
+        Container(
+          margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+          child: TextFormField(
+            keyboardType: TextInputType.text,
+            maxLines: null,
+            controller: zipcontroller,
+            style:TextStyle(color: kText),
+            decoration: InputDecoration(
+              border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+              enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.grey)),
+              focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+              // labelText: 'Full name',labelStyle: TextStyle(color: kText),
+              hintText: 'Zip Code',
+
+              hintStyle: TextStyle(color: kText),
+
+            ),
+
+
+            textAlign: TextAlign.start,
+            validator: (text) {
+              if (text == null || text.isEmpty) {
+                return 'Zip Code is empty';
+              }
+              return null;
+            },
+          ),
+        ),
+ Center(
+          child: CountryPicker(
+            dense: false,
+            showFlag: true,  //displays flag, true by default
+            showDialingCode: true, //displays dialing code, false by default
+            showName: false, //displays country name, true by default
+            showCurrency: false, //eg. 'British pound'
+            showCurrencyISO: false, //eg. 'GBP'
+            onChanged: (Country select) {
+              setState(() {
+                _selected = select;
+                country = select.name;
+                dialcode = select.dialingCode;
+
+                countryISO = select.isoCode;
+
+              });
+            },
+            selectedCountry:_selected,
+          ),
+        ),
+
+        Container(
+          margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+          child: TextFormField(
+            keyboardType: TextInputType.phone,
+            maxLines: null,
+            controller: telephonecontroller,
+            style:TextStyle(color: kText),
+            decoration: InputDecoration(
+              border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+              enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.grey)),
+              focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+              // labelText: 'Full name',labelStyle: TextStyle(color: kText),
+              hintText: '$dialcode Mobile number',
+
+              hintStyle: TextStyle(color: kText),
+
+            ),
+
+            textAlign: TextAlign.start,
+            validator: (text) {
+              if (text == null || text.isEmpty) {
+                return 'Mobile number is empty';
+              }
+              return null;
+            },
+          ),
+        ),
+
+        Row(
+          children: [
+            ElevatedButton(
+              style: ElevatedButton.styleFrom(primary:Colors.black),
+              child: Text('Cancel',style:TextStyle(color: Colors.white)),
+              onPressed: ()=>Get.back(),
+            ),
+            SizedBox(width: 5.0,),
+            ElevatedButton(
+                style: ElevatedButton.styleFrom(primary:Colors.black),
+
+                child: Text('Save',style:TextStyle(color: Colors.white)),
+                onPressed: () async {
+                  if(_formKey.currentState.validate()) {
+                    setState(() {
+                      isUploading = true;
+                    });
+                    await Saveaddress();
+                    Get.back();
+
+                  }
+                  else{
+                    return
+                      alert(
+                        context,
+                        // title: Text('Coming Soon'),
+                        content:Text("Fill the required the fields",
+                        ),
+
+                        textOK: Text("Ok",
+                        ),
+
+                      );
+                  }
+
+
+
+
+                }
+            )
+
+          ],
+        ),
+
+
+      ],
+    ),
+
     );
 }
   @override
   Widget build(BuildContext context) {
     return
-      Scaffold(
-          key:  scaffoldKey,
-          appBar: AppBar(
-            backgroundColor: kPrimaryColor,
-            leading: IconButton(
-                icon: Icon(Icons.arrow_back, color: kSecondaryColor),
-                onPressed:()=>Navigator.pop(context)),
-            title: FittedBox(
-              fit: BoxFit.contain,
-              child: Text(
-                "Add address",
-                style: TextStyle(color: Colors.white),
+      ModalProgressHUD(
+        inAsyncCall:isUploading ,
+        child: Scaffold(
+            key:  scaffoldKey,
+            appBar: AppBar(
+              backgroundColor: kPrimaryColor,
+              leading: IconButton(
+                  icon: Icon(Icons.arrow_back, color: kSecondaryColor),
+                  onPressed:()=>Navigator.pop(context)),
+              title: FittedBox(
+                fit: BoxFit.contain,
+                child: Text(
+                  "Add address",
+                  style: TextStyle(color: Colors.white),
+                ),
               ),
             ),
-          ),
-          body:
-          Container( decoration: BoxDecoration(
-              gradient: fabGradient
-          ) ,
-              alignment: Alignment.center,child: form()),
+            body:
+            Container(child: form()),
 
 
 
+        ),
       );
 
 
