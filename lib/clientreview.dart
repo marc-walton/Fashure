@@ -42,7 +42,7 @@ isLive: true,
 //          bool isPostOwner = currentUserId == ownerId;
                 return Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: Column(
+                  child:  Card(  child: Column(
                     children: <Widget>[
                       GestureDetector(
                         onTap: () => showProfile(context, profileId: user.id),
@@ -72,13 +72,12 @@ isLive: true,
                       SizedBox(height: 8.0,),
                       Row(
                         children: [
-                          Text(review,style: TextStyle(color:kText),),
+                          Expanded(child: Text(review,style: TextStyle(color:kText),)),
                         ],
                       ),
-                      Divider(color: kGrey,),
                     ],
 
-                  ),
+                  ),),
                 );
 
               },
@@ -99,7 +98,6 @@ isLive: true,
           child: Text('Client Reviews',
             style: TextStyle(
                 fontFamily :"MajorMonoDisplay",
-                fontSize:  35.0 ,
                 color: Colors.white),
           ),
         ),
@@ -107,10 +105,7 @@ isLive: true,
       ),
 
       body:
-           Container( decoration: BoxDecoration(
-               gradient: fabGradient
-           ) ,
-             alignment: Alignment.center,
+           Container(
              child:  reviews(),
            ),
 

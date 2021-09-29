@@ -5,6 +5,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fashow/ActivityFeed.dart';
 import 'package:fashow/Live/countdown_timer/current_remaining_time.dart';
+import 'package:fashow/Live/models/video_item.dart';
 import 'package:fashow/Live/upload_bid.dart';
 import 'package:fashow/Live/user_bids.dart';
 import 'package:fashow/Live/wish_auctions.dart';
@@ -28,6 +29,7 @@ import 'package:fashow/Live/host.dart';
 import 'package:fashow/Live/join.dart';
 import 'package:paginate_firestore/paginate_firestore.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:video_player/video_player.dart';
 import 'package:zego_express_engine/zego_express_engine.dart';
 List<Widget> _listOfImages = <Widget>[];
 
@@ -253,7 +255,19 @@ class _LiveTvState extends State<LiveTv> with TickerProviderStateMixin {
               ),
               Container(
                 height:SizeConfig.screenHeight*0.65,
-                child: getBids(),
+                child: ListView(
+                  children: <Widget>[
+
+                    VideoItems(
+                      videoPlayerController: VideoPlayerController.network(
+                          'https://www.instagram.com/tv/CUAiiIbh9Cu/?utm_source=ig_web_copy_link'
+                      ),
+                      looping: false,
+                      autoplay: true,
+                    ),
+
+                  ],
+                ),
               )
             ]),
           ),

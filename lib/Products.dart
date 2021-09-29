@@ -1295,7 +1295,7 @@ this.currency,
                         },
                         child: Container(
                           height:490,
-                          child: CachedNetworkImage(imageUrl:snapshot
+                          child: CachedImage(snapshot
                               .data.docs[index].data()['shopmediaUrl'][i]),
                         ),
                       ));
@@ -9075,7 +9075,7 @@ posteurope(){
 
                     if (!snapshot.hasData || snapshot.data.docs.isEmpty){
                       return
-                        Text("");
+                        Container();
                     }
                     else{
                       return

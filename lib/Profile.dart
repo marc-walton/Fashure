@@ -1,10 +1,12 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fashow/chat_screen.dart';
+import 'package:fashow/chatcached_image.dart';
 import 'package:fashow/clientreview.dart';
 import 'package:fashow/colltile.dart';
 import 'package:fashow/model/user_model.dart';
 import 'package:fashow/Constants.dart';
+import 'package:fashow/size_config.dart';
 import 'package:sizer/sizer.dart';
 import 'package:fashow/post_screen.dart';
 import 'package:fashow/blog_sceen.dart';
@@ -210,8 +212,8 @@ return
                                   ),
                                 );
                               },
-                              child: CachedNetworkImage(
-                                imageUrl: image.first,)
+                              child: CachedImage(
+                                 image.first,)
                           ),
                         )
                     );
@@ -278,36 +280,31 @@ return
                                 ),
                               );
                             },
-                            child: Column(
-                              children: <Widget>[
-                                Text(docSnapshot["title"]),
-                                Container(
-                                    margin: EdgeInsets.all(10.0),
-                                    height: MediaQuery
-                                        .of(context)
-                                        .size
-                                        .width / 2,
-                                    decoration: BoxDecoration(
-                                      color: Colors.white,
-                                    ),
-                                    width: MediaQuery
-                                        .of(context)
-                                        .size
-                                        .width,
-                                    child:
-                                    CachedNetworkImage(
-                                      imageUrl: image.first,)
+                            child: Card(
+                              child: Column(
+                                children: <Widget>[
+                                  Row(
+                                      children: <Widget>[ Expanded(child: Text(docSnapshot["title"])),]),
+                                  Container(
+                                      margin: EdgeInsets.all(10.0),
+                                      height: MediaQuery
+                                          .of(context)
+                                          .size
+                                          .width / 2,
+                                      decoration: BoxDecoration(
+                                        color: Colors.white,
+                                      ),
+                                      width: MediaQuery
+                                          .of(context)
+                                          .size
+                                          .width,
+                                      child:
+                                      CachedImage(
+                                         image.first,)
 
-                                ),
-                                Container(
-                                  height: 1,
-                                  width: MediaQuery
-                                      .of(context)
-                                      .size
-                                      .width,
-                                  color: Colors.red,
-                                )
-                              ],
+                                  ),
+                                ],
+                              ),
                             ),
                           ),
                         )
@@ -372,36 +369,33 @@ return
                                 ),
                               );
                             },
-                            child: Column(
-                              children: <Widget>[
-                                Text(docSnapshot["title"]),
-                                Container(
-                                    margin: EdgeInsets.all(10.0),
-                                    height: MediaQuery
-                                        .of(context)
-                                        .size
-                                        .width / 2,
-                                    width: MediaQuery
-                                        .of(context)
-                                        .size
-                                        .width,
-                                    child:
-                                    CachedNetworkImage(
-                                      imageUrl: IM.first,)
-                                  // Carousel(
-                                  //
-                                  //     boxFit: BoxFit.cover,
-                                  //     images: docSnapshot["collmediaUrl"][index],
-                                  //     autoplay: false,
-                                  //     indicatorBgPadding: 5.0,
-                                  //     dotPosition: DotPosition.bottomCenter,
-                                  //     animationCurve: Curves.fastOutSlowIn,
-                                  //     animationDuration:
-                                  //     Duration(milliseconds: 2000)),
-                                ),
-                                Divider(),
-                              ],
+                            child: Card(
+                              child: Column(
+                                children: <Widget>[
+                                  Row(
+                                      children: <Widget>[SizedBox(width:5.0), Expanded(child: Text(docSnapshot["title"])),]),
+                                  Container(
+                                      margin: EdgeInsets.all(10.0),
+                                      height: MediaQuery
+                                          .of(context)
+                                          .size
+                                          .width / 2,
+                                      decoration: BoxDecoration(
+                                        color: Colors.white,
+                                      ),
+                                      width: MediaQuery
+                                          .of(context)
+                                          .size
+                                          .width,
+                                      child:
+                                      CachedImage(
+                                        IM.first,)
+
+                                  ),
+                                ],
+                              ),
                             ),
+
                           ),
                         )
                     );
@@ -466,8 +460,8 @@ else{
                               ),
                             );
                           },
-                          child: CachedNetworkImage(
-                            imageUrl:shop.first,)
+                          child: CachedImage(
+                            shop.first,)
                       ),
                     )
                 );
@@ -1205,10 +1199,12 @@ SizedBox(height: 10.0,),
 
   @override
   Widget build(BuildContext context) {
+    SizeConfig().init(context);
+
     bool isProfileOwner = currentUserId == widget.profileId;
 
     return Scaffold(
-      backgroundColor:  Color(0xff70e1f5),
+      backgroundColor:  Colors.white,
 
       appBar: AppBar(
         backgroundColor: kPrimaryColor,
@@ -1228,36 +1224,36 @@ SizedBox(height: 10.0,),
         ),),
       body:
 
-      Container(            decoration: BoxDecoration(
-          gradient: fabGradient
-      ) ,
-        alignment: Alignment.center,
+      Container(
         child: ListView(
           children: <Widget>[
             buildProfileHeader(),
 
             Divider(),
             Container(
+              color:Colors.grey.shade200,
               child: DefaultTabController(
                 length: 4,
                 child: SizedBox(
-                  height: double.maxFinite,
+                  height:   MediaQuery
+                      .of(context)
+                      .size
+                      .height/1.55,
                   child: Column(
                     children: <Widget>[
-                      ButtonsTabBar(
-                        backgroundColor: kPrimaryColor,
-                        radius: 12,
-                        contentPadding: EdgeInsets.symmetric(horizontal: 12),
-                        borderWidth: 2,
-                        borderColor: Colors.transparent,
-                        unselectedLabelStyle: TextStyle(color: Colors.black),
-                        labelStyle: TextStyle(color: Colors.white),
-                        height: 56,
+                     TabBar(
+                       ///filled
+                       labelStyle:TextStyle(fontFamily: "AlteroDCURegular" ),
+                       ///outline
+                       unselectedLabelStyle:TextStyle(fontFamily:"AlteroDCU" ),
+                       isScrollable:true,
+                       indicatorWeight : 0.1,
                         tabs: [
-                          Tab( icon: Icon(Icons.weekend,color: Colors.white,)),
-                          Tab(  icon:Icon(Icons.store,color: Colors.white,)),
-                          Tab( icon: Icon(Icons.self_improvement,color: Colors.white,)),
-                          Tab( icon: Icon(Icons.create,color: Colors.white,)),
+                          Tab( child: Text("Posts",style: TextStyle(color:Colors.black),)),
+                          Tab( child: Text("Shop",style: TextStyle(color:Colors.black),)),
+                          Tab( child: Text("Collections",style: TextStyle(color:Colors.black),)),
+                          Tab( child: Text("Editorial",style: TextStyle(color:Colors.black),)),
+
 
                         ],
                       ),

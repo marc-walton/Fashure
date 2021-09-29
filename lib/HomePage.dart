@@ -6,7 +6,7 @@ import 'package:get/get.dart';
 import 'package:fashow/methods/register.dart';
 import 'package:fashow/methods/login.dart';
 import 'package:fashow/methods/dynamic_links_service.dart';
-
+import 'package:bottom_bar/bottom_bar.dart';
 
 import 'package:splashscreen/splashscreen.dart';
 import 'package:dropdown_formfield/dropdown_formfield.dart';
@@ -478,37 +478,91 @@ class _HomepageState extends State<Homepage> with WidgetsBindingObserver {
           physics: NeverScrollableScrollPhysics(),
         ),
       ),
-      bottomNavigationBar: CurvedNavigationBar(
+      bottomNavigationBar:
+      BottomBar(
+        backgroundColor: Colors.black,
+        selectedIndex: pageIndex,
+        onTap: (int index) {
+          pageController.jumpToPage(index);
+          setState(() => pageIndex = index);
+        },
+        items: <BottomBarItem>[
+          BottomBarItem(
+            icon: Icon(Icons.weekend),
+            title: Text('Home',style: TextStyle(color: Colors.white),),
+            activeColor: Colors.white,
+            inactiveColor: Colors.grey,
 
-//    currentIndex : pageIndex,
-        onTap: onTap,
-        color: kPrimaryColor,
-        buttonBackgroundColor: Colors.transparent,
-        backgroundColor:kblue,
-        animationCurve: Curves.elasticInOut,
-        animationDuration: Duration(milliseconds: 001),
-        height: 50.0,
-        items: <Widget>[
-
-          Icon(Icons.weekend, size: 30, color: Colors.white,),
-          Icon(Icons.store, size: 30,color: Colors.white,),
-          Icon(FontAwesomeIcons.swatchbook, size: 30,color: Colors.white,),
-          Icon(Icons.play_arrow, size: 30,color: Colors.white,),
-          Row(
-            children: [
-
-             currentUser == null?  Badge(
-      shape: BadgeShape.circle,
-      padding: EdgeInsets.all(7),
-      badgeContent: Text('0',style: TextStyle(color: Colors.white),),
-    ):badgescount(),
-              Icon(Icons.inbox, size: 30,color: Colors.white,),
-            ],
           ),
+          BottomBarItem(
+            icon:    Icon(Icons.store,),
 
+            title: Text('Shop',style: TextStyle(color: Colors.white),),
+            activeColor: Colors.white,
+            inactiveColor: Colors.grey,
+          ), BottomBarItem(
+            icon: Icon(FontAwesomeIcons.swatchbook),
+            title: Text('Freelancers',style: TextStyle(color: Colors.white),),
+            activeColor: Colors.white,
+            inactiveColor: Colors.grey,
+          ),
+          BottomBarItem(
+            icon:Icon(Icons.play_arrow),
+            title: Text('FashureTV',style: TextStyle(color: Colors.white),),
+            activeColor: Colors.white,
+            inactiveColor: Colors.grey,
+          ),
+          BottomBarItem(
+            icon:      FittedBox(
+              child: Row(
+              children: [
+
+               currentUser == null?  Container(
+
+    ):badgescount(),
+                Icon(Icons.inbox,),
+              ],
+          ),
+            ),
+
+            title: Text('Settings',style: TextStyle(color: Colors.white),),
+            activeColor: Colors.white,
+            inactiveColor: Colors.grey,
+
+          ),
         ],
-
       ),
+//       CurvedNavigationBar(
+//
+// //    currentIndex : pageIndex,
+//         onTap: onTap,
+//         color: kPrimaryColor,
+//         buttonBackgroundColor: Colors.transparent,
+//         backgroundColor:kblue,
+//         animationCurve: Curves.elasticInOut,
+//         animationDuration: Duration(milliseconds: 001),
+//         height: 50.0,
+//         items: <Widget>[
+//
+//           Icon(Icons.weekend, size: 30, color: Colors.white,),
+//           Icon(Icons.store, size: 30,color: Colors.white,),
+//           Icon(FontAwesomeIcons.swatchbook, size: 30,color: Colors.white,),
+//           Icon(Icons.play_arrow, size: 30,color: Colors.white,),
+//           Row(
+//             children: [
+//
+//              currentUser == null?  Badge(
+//       shape: BadgeShape.circle,
+//       padding: EdgeInsets.all(7),
+//       badgeContent: Text('0',style: TextStyle(color: Colors.white),),
+//     ):badgescount(),
+//               Icon(Icons.inbox, size: 30,color: Colors.white,),
+//             ],
+//           ),
+//
+//         ],
+//
+//       ),
 
     );
 //    return RaisedButton(

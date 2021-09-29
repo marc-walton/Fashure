@@ -222,7 +222,13 @@ All(){
                         ),
                       ),
                       child: ClipRRect(
-                        borderRadius: BorderRadius.circular(20.0),child:CachedImage(shopmediaUrl.first),),),
+                        borderRadius: BorderRadius.circular(20.0),child:CachedImage(shopmediaUrl.first,height: MediaQuery
+                          .of(context)
+                          .size
+                          .height/3,width: MediaQuery
+                          .of(context)
+                          .size
+                          .width,),),),
                     GestureDetector(
                       onTap: () => showProfile(context, profileId: ownerId),
                       child:Padding(

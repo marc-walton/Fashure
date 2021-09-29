@@ -3,6 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:fashow/ActivityFeed.dart';
 import 'package:fashow/chat_screen.dart';
+import 'package:fashow/chatcached_image.dart';
 import 'package:fashow/clientreview.dart';
 import 'package:fashow/model/user_model.dart';
 import 'package:flutter/material.dart';
@@ -19,7 +20,10 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:fashow/post_screen.dart';
 import 'package:fashow/Profile.dart';
+import 'package:getwidget/components/button/gf_button.dart';
 import 'package:getwidget/components/toggle/gf_toggle.dart';
+import 'package:getwidget/shape/gf_button_shape.dart';
+import 'package:getwidget/types/gf_button_type.dart';
 import 'package:getwidget/types/gf_toggle_type.dart';
 import 'package:paginate_firestore/paginate_firestore.dart';
 import 'package:sticky_headers/sticky_headers.dart';
@@ -704,57 +708,89 @@ class _DesignerState extends State<Designer> with TickerProviderStateMixin {
               title: FittedBox(
                   fit: BoxFit.contain,
                   child: Text(
-                    "FREELANCERS",
-                    style: TextStyle(fontSize: 40, fontFamily: 'Halfomania'),
+                    "Freelancers",
+                    style: TextStyle( fontFamily: 'MajorMonoDisplay'),
                   )),
               backgroundColor: kPrimaryColor,
               bottom: new TabBar(
                 ///filled
-                labelStyle: TextStyle(fontFamily: "AlteroDCURegular"),
+                labelStyle: TextStyle(fontFamily: "AlteroDCURegular",fontWeight: FontWeight.bold, ),
 
                 ///outline
                 unselectedLabelStyle: TextStyle(fontFamily: "AlteroDCU"),
                 isScrollable: true,
+                indicatorWeight: 0.1,
                 controller: _controller,
                 tabs: <Widget>[
-                  Text(
-                    ' Artisans ',
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30),
-                  ), Text(
-                    ' DESIGNER ',
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text(
+                      ' Artisans ',
+                      style: TextStyle( fontSize: 15),
+                    ),
                   ),
-                  Text(
-                    ' ILLUSTRATOR ',
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text(
+                      ' DESIGNER ',
+                      style: TextStyle( fontSize: 15),
+                    ),
                   ),
-                  Text(
-                    ' CONTENT WRITER ',
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text(
+                      ' ILLUSTRATOR ',
+                      style: TextStyle(fontSize: 15),
+                    ),
                   ),
-                  Text(
-                    ' STYLIST ',
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text(
+                      ' CONTENT WRITER ',
+                      style: TextStyle( fontSize: 15),
+                    ),
                   ),
-                  Text(
-                    ' MODEL ',
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text(
+                      ' STYLIST ',
+                      style: TextStyle( fontSize: 15),
+                    ),
                   ),
-                  Text(
-                    ' MAKEUP ARTIST ',
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text(
+                      ' MODEL ',
+                      style: TextStyle( fontSize: 15),
+                    ),
                   ),
-                  Text(
-                    ' HAIR DRESSER ',
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text(
+                      ' MAKEUP ARTIST ',
+                      style: TextStyle( fontSize: 15),
+                    ),
                   ),
-                  Text(
-                    ' PHOTOGRAPHER ',
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text(
+                      ' HAIR DRESSER ',
+                      style: TextStyle( fontSize: 15),
+                    ),
                   ),
-                  Text(
-                    ' CHOREOGRAPHER ',
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text(
+                      ' PHOTOGRAPHER ',
+                      style: TextStyle( fontSize: 15),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text(
+                      ' CHOREOGRAPHER ',
+                      style: TextStyle( fontSize: 15),
+                    ),
                   ),
                 ],
               ),
@@ -967,8 +1003,7 @@ Get.back();
               ]),
         ),
         body: Container(
-          decoration: BoxDecoration(gradient: fabGradient),
-          alignment: Alignment.center,
+      
           child: TabBarView(
             controller: _controller,
             children: <Widget>[
@@ -1010,7 +1045,6 @@ class DItem extends StatefulWidget {
   @override
   _DItemState createState() => _DItemState(this.user);
 }
-
 class _DItemState extends State<DItem> {
   final Users user;
 
@@ -1035,23 +1069,25 @@ var price = 0.0;
     conversion();
     getFollowers();
     g();
+    reviews();
   }
 
   getPost() {
-    return StreamBuilder(
-        stream: FirebaseFirestore.instance
+    return FutureBuilder(
+        future: FirebaseFirestore.instance
             .collection('posts')
             .doc(user.id)
             .collection('userPosts')
-            .snapshots(),
+            .get(),
 
         // ignore: missing_return
         builder: (context, snapshot) {
-          if (!snapshot.hasData) {
+          if (!snapshot.hasData||snapshot.data.docs.isEmpty) {
             return Container();
           }
           else{
           return Container(
+            alignment:Alignment.centerLeft,
             height: 200,
             child: ListView.builder(
               shrinkWrap: true,
@@ -1061,25 +1097,32 @@ var price = 0.0;
                 DocumentSnapshot docSnapshot = snapshot.data.docs[index];
              List  url = snapshot.data.docs[index]["mediaUrl"];
                 return Padding(
-                    padding: EdgeInsets.all(5.0),
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(20.0),
-                      child: GestureDetector(
-                          onTap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => PostScreen(
-                                  postId: docSnapshot["postId"],
-                                  userId: docSnapshot["ownerId"],
-                                ),
+                  padding: const EdgeInsets.all(8.0),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(20.0),
+                    child: GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => PostScreen(
+                                postId: docSnapshot["postId"],
+                                userId: docSnapshot["ownerId"],
                               ),
-                            );
-                          },
-                          child: CachedNetworkImage(
-                            imageUrl: url.first,
-                          )),
-                    ));
+                            ),
+                          );
+                        },
+                        child: CachedImage(
+                    url.first,
+                          width: MediaQuery
+                              .of(context)
+                              .size
+                              .width/2,
+                        
+                        )
+                    ),
+                  ),
+                );
               },
             ),
           );}
@@ -1088,6 +1131,7 @@ var price = 0.0;
 
 
   reviews() {
+    return
     StreamBuilder(
       stream: FirebaseFirestore.instance
           .collection('Reviews')
@@ -1096,7 +1140,11 @@ var price = 0.0;
           .snapshots(),
       builder: (context, snapshot) {
         var rating = snapshot.data()['rating'];
-        var avg = rating.reduce((a, b) => a + b) / rating.length;
+        List mean = rating.toList();
+        print(mean);
+        var avg = mean.reduce((a, b) => a + b) / mean.length;
+        print(avg);
+
         String review = snapshot.data['review'];
         return GestureDetector(
           onTap: () => Navigator.push(
@@ -1138,7 +1186,7 @@ var price = 0.0;
                   ],
                 ),
                 Text(
-                  'Rating',
+                  '$avg',
                   style: TextStyle(color: Colors.white),
                 ),
               ],
@@ -1151,39 +1199,6 @@ var price = 0.0;
     );
   }
 
-  Client() {
-    return Container(
-      decoration: BoxDecoration(
-          color: kPrimaryColor,
-          boxShadow: [
-            BoxShadow(
-              color: Colors.grey,
-              blurRadius: 5.0,
-            ),
-          ],
-          borderRadius: BorderRadius.all(Radius.circular(10.0))),
-      height: 60,
-      width: 60,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Text(
-            '${client}',
-            style: TextStyle(
-              color: Colors.white,
-              fontWeight: FontWeight.bold,
-            ),
-          ),Text(
-            'clients',
-            style: TextStyle(
-              color: Colors.white,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-        ],
-      ),
-    );
-  }
 
   g() async {
     DocumentSnapshot doc = await usersRef.doc(user.id).get();
@@ -1193,81 +1208,31 @@ var price = 0.0;
     });
   }
 
-  hireme() {
+  hireMe() {
     bool isProfileOwner = currentUserId == user.id;
     if (isProfileOwner == true) {
       return Container();
     } else {
-      return Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: [
-          GestureDetector(
-            onTap: () => showProfile(context, profileId: user.id),
-            child: Container(
-              height: 40.0,
-              width: 100.0,
-//
-              decoration: BoxDecoration(
-                  color: kblue,
-                  borderRadius: BorderRadius.all(Radius.circular(20))),
-              child: Align(
-                alignment: Alignment.center,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    Icon(
-                      EvaIcons.personOutline,
-                      color: Colors.white,
-                    ),
-                    Text(
-                      'Profile',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
+
+      return
+        FloatingActionButton(
+          backgroundColor:Colors.white.withOpacity(0.5),
+mini:true,
+          shape: BeveledRectangleBorder(
+              borderRadius: BorderRadius.circular(5.0)
           ),
-          GestureDetector(
-            onTap: () => Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => ChatScreen(
-                          receiver: receiver,
-                        ))),
-            child: Container(
-              height: 40.0,
-              width: 100.0,
-//
-              decoration: BoxDecoration(
-                  color: kblue,
-                  borderRadius: BorderRadius.all(Radius.circular(20))),
-              child: Align(
-                alignment: Alignment.center,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    Icon(
-                      EvaIcons.emailOutline,
-                      color: Colors.white,
-                    ),
-                    Text(
-                      'Hire me!',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          ),
-        ],
-      );
+          onPressed: () => Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => ChatScreen(
+                    receiver: receiver,
+                  ))),
+child:  Icon(
+  EvaIcons.emailOutline,
+  color: Colors.black,
+),
+
+        );
     }
   }
 
@@ -1299,161 +1264,123 @@ var price = 0.0;
 
 
   }
-  followerstile() {
-    return Container(
-      decoration: BoxDecoration(
-          color: kPrimaryColor,
-          boxShadow: [
-            BoxShadow(
-              color: Colors.grey,
-              blurRadius: 5.0,
-            ),
-          ],
-          borderRadius: BorderRadius.all(Radius.circular(10.0))),
-      height: 60,
-      width: 60,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Text(
-            '$followerCount',
-            style: TextStyle(
-              color: Colors.white,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-          FittedBox(
-              child: Text(
-            'Followers',
-            style: TextStyle(color: Colors.white),
-          )),
-        ],
-      ),
-    );
-  }
 
   @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);
 
     return SingleChildScrollView(
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Container(
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.all(Radius.circular(20.0))),
-            margin:
-                EdgeInsets.only(top: 10.0, left: 10.0, right: 10.0, bottom: 10.0),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: <Widget>[
-                Divider(
-                  color: Colors.grey,
-                ),
-                GestureDetector(
-                  onTap: () => showProfile(context, profileId: user.id),
-                  child: ListTile(
-                    leading: CircleAvatar(
-                      backgroundImage: CachedNetworkImageProvider(user.photoUrl),
-                      backgroundColor: Colors.grey,
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Card(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Container(
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.all(Radius.circular(20.0))),
+                margin:
+                    EdgeInsets.only(top: 10.0, left: 10.0, right: 10.0, bottom: 10.0),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: <Widget>[
+
+                    GestureDetector(
+                      onTap: () => showProfile(context, profileId: user.id),
+                      child: ListTile(
+                        leading: CircleAvatar(
+                          backgroundImage: CachedNetworkImageProvider(user.photoUrl),
+                          backgroundColor: Colors.grey,
+                        ),
+                        title: Text(
+                          user.displayName,
+                          style: TextStyle(color: kText),
+                        ),
+                        subtitle:Text(
+                          user.country,
+                          style: TextStyle(color: kText),
+                        ),
+                       trailing:                          Column(children:[
+                         Text( " ${currentUser.currencysym} ${currencyFormatter.format(price)}",style: TextStyle(color: kText,
+                             fontSize: SizeConfig.safeBlockHorizontal * 3,
+                             fontWeight: FontWeight.bold)),
+                         Text("Average cost", style: TextStyle(
+                           color: Colors.grey,
+                         ),),
+
+                       ]),
+
+
+                      ),
                     ),
-                    title: Text(
-                      user.displayName,
-                      style: TextStyle(color: kText),
-                    ),
-                  ),
-                ),
-                Align(
-                  alignment: Alignment.center,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: <Widget>[
-                      followerstile(),
-                      Client(),
-                      GestureDetector(
-                        onTap: () async {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => ClientReview(
-                                        profileId: user.id,
-                                      )));
-                        },
-                        child: Container(
-                          decoration: BoxDecoration(
-                              color: kPrimaryColor,
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.grey,
-                                  blurRadius: 5.0,
-                                ),
-                              ],
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(10.0))),
-                          height: 60,
-                          width: 60,
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Icon(
-                                Icons.favorite,
-                                color: Colors.pink,
+                    Align(
+                      alignment: Alignment.center,
+                      child: IntrinsicHeight(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: <Widget>[
+                            followerTile(followerCount),
+                            clients(client),
+                            VerticalDivider(),
+                            Column(children:[
+                              hireMe(),
+                              SizedBox(
+                                height: 10.0,
                               ),
-                              Text(
-                                'Rating',
-                                style: TextStyle(color: Colors.white),
+
+                              InkWell(
+                              onTap:() async {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => ClientReview(
+                                          profileId: user.id,
+                                        )));
+                              },
+                              child: Row(
+                                children: [
+                                  Icon(
+                                    Icons.star_border_rounded,
+                                    color:  Colors.grey,
+                                  ),
+                                  Text("Reviews",style:TextStyle(color:Colors.grey)),
+                                  Icon(
+                                    Icons.arrow_forward_ios_rounded,
+                                    color:  Colors.black,
+                                  ),
+
+
+
+                                ],
                               ),
-                            ],
-                          ),
+                            ),
+                            ]),
+
+                          ],
                         ),
                       ),
-                    ],
-                  ),
-                ),
-                SizedBox(
-                  height: 10.0,
-                ),
-                Row(
-                  children: [
-                    Text("Average cost", style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: SizeConfig.safeBlockHorizontal * 5
-                    ),),
+                    ),
+
+
+
+
+                    SizedBox(
+                      height: 10.0,
+                    ),
                   ],
                 ),
-
-                ListTile(
-                  dense: true,
-                  contentPadding: EdgeInsets.symmetric(horizontal: 0.0, vertical: 0.0),
-                  visualDensity: VisualDensity(horizontal: 0, vertical: -4),
-                  title:            Text("Average cost", style: TextStyle(
-                      color: kText,
-                      fontSize: SizeConfig.safeBlockHorizontal * 5,
-                      fontWeight: FontWeight.bold),),
-                  subtitle:
-                  Text( " ${currentUser.currencysym} ${currencyFormatter.format(price)}",style: TextStyle(color: kText,
-                      fontSize: SizeConfig.safeBlockHorizontal * 4,
-                      fontWeight: FontWeight.bold)),
-
-                ),
-
-
-                SizedBox(
-                  height: 10.0,
-                ),
-                hireme(),
-              ],
-            ),
+              ),
+              Container(
+                child: getPost(),
+              )
+            ],
           ),
-          Container(
-            child: getPost(),
-          )
-        ],
+        ),
       ),
     );
   }
 }
+
 class IItem extends StatefulWidget {
   final Users user;
   UserModel receiver;
@@ -1462,7 +1389,6 @@ class IItem extends StatefulWidget {
   @override
   _IItemState createState() => _IItemState(this.user);
 }
-
 class _IItemState extends State<IItem> {
   final Users user;
 
@@ -1509,29 +1435,31 @@ class _IItemState extends State<IItem> {
   }
 
   getPost() {
-    return StreamBuilder(
-        stream: FirebaseFirestore.instance
+    return FutureBuilder(
+        future: FirebaseFirestore.instance
             .collection('posts')
             .doc(user.id)
             .collection('userPosts')
-            .snapshots(),
+            .get(),
 
         // ignore: missing_return
         builder: (context, snapshot) {
-          if (!snapshot.hasData) {
-            return Text('text');
+          if (!snapshot.hasData||snapshot.data.docs.isEmpty) {
+            return Container();
           }
-          return Container(
-            height: 200,
-            child: ListView.builder(
-              shrinkWrap: true,
-              scrollDirection: Axis.horizontal,
-              itemCount: snapshot.data.docs.length,
-              itemBuilder: (context, index) {
-                DocumentSnapshot docSnapshot = snapshot.data.docs[index];
-             List  url = snapshot.data.docs[index]["mediaUrl"];
-                return Padding(
-                    padding: EdgeInsets.all(5.0),
+          else{
+            return Container(
+              alignment:Alignment.centerLeft,
+              height: 200,
+              child: ListView.builder(
+                shrinkWrap: true,
+                scrollDirection: Axis.horizontal,
+                itemCount: snapshot.data.docs.length,
+                itemBuilder: (context, index) {
+                  DocumentSnapshot docSnapshot = snapshot.data.docs[index];
+                  List  url = snapshot.data.docs[index]["mediaUrl"];
+                  return Padding(
+                    padding: const EdgeInsets.all(8.0),
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(20.0),
                       child: GestureDetector(
@@ -1546,16 +1474,48 @@ class _IItemState extends State<IItem> {
                               ),
                             );
                           },
-                          child: CachedNetworkImage(
-                            imageUrl: url.first,
-                          )),
-                    ));
-              },
-            ),
-          );
+                          child: CachedImage(
+                             url.first,
+                          width: MediaQuery
+                              .of(context)
+                              .size
+                              .width/2,
+                          )
+                      ),
+                    ),
+                  );
+                },
+              ),
+            );}
         });
   }
+  hireMe() {
+    bool isProfileOwner = currentUserId == user.id;
+    if (isProfileOwner == true) {
+      return Container();
+    } else {
 
+      return
+        FloatingActionButton(
+          backgroundColor:Colors.white.withOpacity(0.5),
+          mini:true,
+          shape: BeveledRectangleBorder(
+              borderRadius: BorderRadius.circular(5.0)
+          ),
+          onPressed: () => Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => ChatScreen(
+                    receiver: receiver,
+                  ))),
+          child:  Icon(
+            EvaIcons.emailOutline,
+            color: Colors.black,
+          ),
+
+        );
+    }
+  }
 
   reviews() {
     StreamBuilder(
@@ -1663,83 +1623,6 @@ class _IItemState extends State<IItem> {
     });
   }
 
-  hireme() {
-    bool isProfileOwner = currentUserId == user.id;
-    if (isProfileOwner == true) {
-      return Container();
-    } else {
-      return Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: [
-          GestureDetector(
-            onTap: () => showProfile(context, profileId: user.id),
-            child: Container(
-              height: 40.0,
-              width: 100.0,
-//
-              decoration: BoxDecoration(
-                  color: kblue,
-                  borderRadius: BorderRadius.all(Radius.circular(20))),
-              child: Align(
-                alignment: Alignment.center,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    Icon(
-                      EvaIcons.personOutline,
-                      color: Colors.white,
-                    ),
-                    Text(
-                      'Profile',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          ),
-          GestureDetector(
-            onTap: () => Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => ChatScreen(
-                          receiver: receiver,
-                        ))),
-            child: Container(
-              height: 40.0,
-              width: 100.0,
-//
-              decoration: BoxDecoration(
-                  color: kblue,
-                  borderRadius: BorderRadius.all(Radius.circular(20))),
-              child: Align(
-                alignment: Alignment.center,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    Icon(
-                      EvaIcons.emailOutline,
-                      color: Colors.white,
-                    ),
-                    Text(
-                      'Hire me!',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          ),
-        ],
-      );
-    }
-  }
 
   getFollowers() async {
     QuerySnapshot snapshot =
@@ -1751,158 +1634,123 @@ class _IItemState extends State<IItem> {
 //      'followers':followerCount
 //    });
   }
-  followerstile() {
-    return Container(
-      decoration: BoxDecoration(
-          color: kPrimaryColor,
-          boxShadow: [
-            BoxShadow(
-              color: Colors.grey,
-              blurRadius: 5.0,
-            ),
-          ],
-          borderRadius: BorderRadius.all(Radius.circular(10.0))),
-      height: 60,
-      width: 60,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Text(
-            '$followerCount',
-            style: TextStyle(
-              color: Colors.white,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-          FittedBox(
-              child: Text(
-            'Followers',
-            style: TextStyle(color: Colors.white),
-          )),
-        ],
-      ),
-    );
-  }
 
   @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);
 
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        Container(
-          decoration: BoxDecoration(
-              borderRadius: BorderRadius.all(Radius.circular(20.0))),
-          margin:
-              EdgeInsets.only(top: 10.0, left: 10.0, right: 10.0, bottom: 10.0),
+    return SingleChildScrollView(
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Card(
           child: Column(
             mainAxisSize: MainAxisSize.min,
-            children: <Widget>[
-              Divider(
-                color: Colors.grey,
-              ),
-              GestureDetector(
-                onTap: () => showProfile(context, profileId: user.id),
-                child: ListTile(
-                  leading: CircleAvatar(
-                    backgroundImage: CachedNetworkImageProvider(user.photoUrl),
-                    backgroundColor: Colors.grey,
-                  ),
-                  title: Text(
-                    user.displayName,
-                    style: TextStyle(color: kText),
-                  ),
-                ),
-              ),
-              Align(
-                alignment: Alignment.center,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              Container(
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.all(Radius.circular(20.0))),
+                margin:
+                EdgeInsets.only(top: 10.0, left: 10.0, right: 10.0, bottom: 10.0),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
                   children: <Widget>[
-                    followerstile(),
-                    Client(),
+
                     GestureDetector(
-                      onTap: () async {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => ClientReview(
-                                      profileId: user.id,
-                                    )));
-                      },
-                      child: Container(
-                        decoration: BoxDecoration(
-                            color: kPrimaryColor,
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.grey,
-                                blurRadius: 5.0,
+                      onTap: () => showProfile(context, profileId: user.id),
+                      child: ListTile(
+                        leading: CircleAvatar(
+                          backgroundImage: CachedNetworkImageProvider(user.photoUrl),
+                          backgroundColor: Colors.grey,
+                        ),
+                        title: Text(
+                          user.displayName,
+                          style: TextStyle(color: kText),
+                        ),
+                        subtitle:Text(
+                          user.country,
+                          style: TextStyle(color: kText),
+                        ),
+                        trailing:                          Column(children:[
+                          Text( " ${currentUser.currencysym} ${currencyFormatter.format(price)}",style: TextStyle(color: kText,
+                              fontSize: SizeConfig.safeBlockHorizontal * 3,
+                              fontWeight: FontWeight.bold)),
+                          Text("Average cost", style: TextStyle(
+                            color: Colors.grey,
+                          ),),
+
+                        ]),
+
+
+                      ),
+                    ),
+                    Align(
+                      alignment: Alignment.center,
+                      child: IntrinsicHeight(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: <Widget>[
+                            followerTile(followerCount),
+                            clients(client),
+                            VerticalDivider(),
+                            Column(children:[
+                              hireMe(),
+                              SizedBox(
+                                height: 10.0,
                               ),
-                            ],
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(10.0))),
-                        height: 60,
-                        width: 60,
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Icon(
-                              Icons.favorite,
-                              color: Colors.pink,
-                            ),
-                            Text(
-                              'Rating',
-                              style: TextStyle(color: Colors.white),
-                            ),
+
+                              InkWell(
+                                onTap:() async {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => ClientReview(
+                                            profileId: user.id,
+                                          )));
+                                },
+                                child: Row(
+                                  children: [
+                                    Icon(
+                                      Icons.star_border_rounded,
+                                      color:  Colors.grey,
+                                    ),
+                                    Text("Reviews",style:TextStyle(color:Colors.grey)),
+                                    Icon(
+                                      Icons.arrow_forward_ios_rounded,
+                                      color:  Colors.black,
+                                    ),
+
+
+
+                                  ],
+                                ),
+                              ),
+                            ]),
+
                           ],
                         ),
                       ),
                     ),
+
+
+
+
+                    SizedBox(
+                      height: 10.0,
+                    ),
                   ],
                 ),
               ),
-              SizedBox(
-                height: 10.0,
-              ),
-              Row(
-                children: [
-                  Text("Average cost", style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: SizeConfig.safeBlockHorizontal * 5
-                  ),),
-                ],
-              ),
-
-              ListTile(
-                dense: true,
-                contentPadding: EdgeInsets.symmetric(horizontal: 0.0, vertical: 0.0),
-                visualDensity: VisualDensity(horizontal: 0, vertical: -4),
-                title:            Text("Average cost", style: TextStyle(
-                    color: kText,
-                    fontSize: SizeConfig.safeBlockHorizontal * 5,
-                    fontWeight: FontWeight.bold),),
-                subtitle:
-                Text( " ${currentUser.currencysym} ${currencyFormatter.format(price)}",style: TextStyle(color: kText,
-                    fontSize: SizeConfig.safeBlockHorizontal * 4,
-                    fontWeight: FontWeight.bold)),
-
-              ),
-
-              SizedBox(
-                height: 10.0,
-              ),
-              hireme(),
+              Container(
+                child: getPost(),
+              )
             ],
           ),
         ),
-        Container(
-          child: getPost(),
-        )
-      ],
+      ),
     );
   }
 }
+
 class SItem extends StatefulWidget {
   final Users user;
   UserModel receiver;
@@ -1911,7 +1759,6 @@ class SItem extends StatefulWidget {
   @override
   _SItemState createState() => _SItemState(this.user);
 }
-
 class _SItemState extends State<SItem> {
   final Users user;
   var price = 0.0;
@@ -1957,20 +1804,22 @@ class _SItemState extends State<SItem> {
 
   }
 
-  getPost() {
-    return StreamBuilder(
-        stream: FirebaseFirestore.instance
+    getPost() {
+    return FutureBuilder(
+        future: FirebaseFirestore.instance
             .collection('posts')
             .doc(user.id)
             .collection('userPosts')
-            .snapshots(),
+            .get(),
 
         // ignore: missing_return
         builder: (context, snapshot) {
-          if (!snapshot.hasData) {
-            return Text('text');
+          if (!snapshot.hasData||snapshot.data.docs.isEmpty) {
+            return Container();
           }
+          else{
           return Container(
+            alignment:Alignment.centerLeft,
             height: 200,
             child: ListView.builder(
               shrinkWrap: true,
@@ -1980,32 +1829,63 @@ class _SItemState extends State<SItem> {
                 DocumentSnapshot docSnapshot = snapshot.data.docs[index];
              List  url = snapshot.data.docs[index]["mediaUrl"];
                 return Padding(
-                    padding: EdgeInsets.all(5.0),
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(20.0),
-                      child: GestureDetector(
-                          onTap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => PostScreen(
-                                  postId: docSnapshot["postId"],
-                                  userId: docSnapshot["ownerId"],
-                                ),
+                  padding: const EdgeInsets.all(8.0),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(20.0),
+                    child: GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => PostScreen(
+                                postId: docSnapshot["postId"],
+                                userId: docSnapshot["ownerId"],
                               ),
-                            );
-                          },
-                          child: CachedNetworkImage(
-                            imageUrl: url.first,
-                          )),
-                    ));
+                            ),
+                          );
+                        },
+                        child: CachedImage(
+                    url.first,
+                          width: MediaQuery
+                              .of(context)
+                              .size
+                              .width/2,
+                        )
+                    ),
+                  ),
+                );
               },
             ),
-          );
+          );}
         });
   }
+  hireMe() {
+    bool isProfileOwner = currentUserId == user.id;
+    if (isProfileOwner == true) {
+      return Container();
+    } else {
 
+      return
+        FloatingActionButton(
+          backgroundColor:Colors.white.withOpacity(0.5),
+          mini:true,
+          shape: BeveledRectangleBorder(
+              borderRadius: BorderRadius.circular(5.0)
+          ),
+          onPressed: () => Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => ChatScreen(
+                    receiver: receiver,
+                  ))),
+          child:  Icon(
+            EvaIcons.emailOutline,
+            color: Colors.black,
+          ),
 
+        );
+    }
+  }
   reviews() {
     StreamBuilder(
       stream: FirebaseFirestore.instance
@@ -2112,83 +1992,6 @@ class _SItemState extends State<SItem> {
     });
   }
 
-  hireme() {
-    bool isProfileOwner = currentUserId == user.id;
-    if (isProfileOwner == true) {
-      return Container();
-    } else {
-      return Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: [
-          GestureDetector(
-            onTap: () => showProfile(context, profileId: user.id),
-            child: Container(
-              height: 40.0,
-              width: 100.0,
-//
-              decoration: BoxDecoration(
-                  color: kblue,
-                  borderRadius: BorderRadius.all(Radius.circular(20))),
-              child: Align(
-                alignment: Alignment.center,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    Icon(
-                      EvaIcons.personOutline,
-                      color: Colors.white,
-                    ),
-                    Text(
-                      'Profile',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          ),
-          GestureDetector(
-            onTap: () => Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => ChatScreen(
-                          receiver: receiver,
-                        ))),
-            child: Container(
-              height: 40.0,
-              width: 100.0,
-//
-              decoration: BoxDecoration(
-                  color: kblue,
-                  borderRadius: BorderRadius.all(Radius.circular(20))),
-              child: Align(
-                alignment: Alignment.center,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    Icon(
-                      EvaIcons.emailOutline,
-                      color: Colors.white,
-                    ),
-                    Text(
-                      'Hire me!',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          ),
-        ],
-      );
-    }
-  }
 
   getFollowers() async {
     QuerySnapshot snapshot =
@@ -2200,158 +2003,123 @@ class _SItemState extends State<SItem> {
 //      'followers':followerCount
 //    });
   }
-  followerstile() {
-    return Container(
-      decoration: BoxDecoration(
-          color: kPrimaryColor,
-          boxShadow: [
-            BoxShadow(
-              color: Colors.grey,
-              blurRadius: 5.0,
-            ),
-          ],
-          borderRadius: BorderRadius.all(Radius.circular(10.0))),
-      height: 60,
-      width: 60,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Text(
-            '$followerCount',
-            style: TextStyle(
-              color: Colors.white,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-          FittedBox(
-              child: Text(
-            'Followers',
-            style: TextStyle(color: Colors.white),
-          )),
-        ],
-      ),
-    );
-  }
 
   @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);
 
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        Container(
-          decoration: BoxDecoration(
-              borderRadius: BorderRadius.all(Radius.circular(20.0))),
-          margin:
-              EdgeInsets.only(top: 10.0, left: 10.0, right: 10.0, bottom: 10.0),
+    return SingleChildScrollView(
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Card(
           child: Column(
             mainAxisSize: MainAxisSize.min,
-            children: <Widget>[
-              Divider(
-                color: Colors.grey,
-              ),
-              GestureDetector(
-                onTap: () => showProfile(context, profileId: user.id),
-                child: ListTile(
-                  leading: CircleAvatar(
-                    backgroundImage: CachedNetworkImageProvider(user.photoUrl),
-                    backgroundColor: Colors.grey,
-                  ),
-                  title: Text(
-                    user.displayName,
-                    style: TextStyle(color: kText),
-                  ),
-                ),
-              ),
-              Align(
-                alignment: Alignment.center,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              Container(
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.all(Radius.circular(20.0))),
+                margin:
+                EdgeInsets.only(top: 10.0, left: 10.0, right: 10.0, bottom: 10.0),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
                   children: <Widget>[
-                    followerstile(),
-                    Client(),
+
                     GestureDetector(
-                      onTap: () async {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => ClientReview(
-                                      profileId: user.id,
-                                    )));
-                      },
-                      child: Container(
-                        decoration: BoxDecoration(
-                            color: kPrimaryColor,
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.grey,
-                                blurRadius: 5.0,
+                      onTap: () => showProfile(context, profileId: user.id),
+                      child: ListTile(
+                        leading: CircleAvatar(
+                          backgroundImage: CachedNetworkImageProvider(user.photoUrl),
+                          backgroundColor: Colors.grey,
+                        ),
+                        title: Text(
+                          user.displayName,
+                          style: TextStyle(color: kText),
+                        ),
+                        subtitle:Text(
+                          user.country,
+                          style: TextStyle(color: kText),
+                        ),
+                        trailing:                          Column(children:[
+                          Text( " ${currentUser.currencysym} ${currencyFormatter.format(price)}",style: TextStyle(color: kText,
+                              fontSize: SizeConfig.safeBlockHorizontal * 3,
+                              fontWeight: FontWeight.bold)),
+                          Text("Average cost", style: TextStyle(
+                            color: Colors.grey,
+                          ),),
+
+                        ]),
+
+
+                      ),
+                    ),
+                    Align(
+                      alignment: Alignment.center,
+                      child: IntrinsicHeight(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: <Widget>[
+                            followerTile(followerCount),
+                            clients(client),
+                            VerticalDivider(),
+                            Column(children:[
+                              hireMe(),
+                              SizedBox(
+                                height: 10.0,
                               ),
-                            ],
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(10.0))),
-                        height: 60,
-                        width: 60,
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Icon(
-                              Icons.favorite,
-                              color: Colors.pink,
-                            ),
-                            Text(
-                              'Rating',
-                              style: TextStyle(color: Colors.white),
-                            ),
+
+                              InkWell(
+                                onTap:() async {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => ClientReview(
+                                            profileId: user.id,
+                                          )));
+                                },
+                                child: Row(
+                                  children: [
+                                    Icon(
+                                      Icons.star_border_rounded,
+                                      color:  Colors.grey,
+                                    ),
+                                    Text("Reviews",style:TextStyle(color:Colors.grey)),
+                                    Icon(
+                                      Icons.arrow_forward_ios_rounded,
+                                      color:  Colors.black,
+                                    ),
+
+
+
+                                  ],
+                                ),
+                              ),
+                            ]),
+
                           ],
                         ),
                       ),
                     ),
+
+
+
+
+                    SizedBox(
+                      height: 10.0,
+                    ),
                   ],
                 ),
               ),
-              SizedBox(
-                height: 10.0,
-              ),
-              Row(
-                children: [
-                  Text("Average cost", style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: SizeConfig.safeBlockHorizontal * 5
-                  ),),
-                ],
-              ),
-
-              ListTile(
-                dense: true,
-                contentPadding: EdgeInsets.symmetric(horizontal: 0.0, vertical: 0.0),
-                visualDensity: VisualDensity(horizontal: 0, vertical: -4),
-                title:            Text("Average cost", style: TextStyle(
-                    color: kText,
-                    fontSize: SizeConfig.safeBlockHorizontal * 5,
-                    fontWeight: FontWeight.bold),),
-                subtitle:
-                Text( " ${currentUser.currencysym} ${currencyFormatter.format(price)}",style: TextStyle(color: kText,
-                    fontSize: SizeConfig.safeBlockHorizontal * 4,
-                    fontWeight: FontWeight.bold)),
-
-              ),
-
-              SizedBox(
-                height: 10.0,
-              ),
-              hireme(),
+              Container(
+                child: getPost(),
+              )
             ],
           ),
         ),
-        Container(
-          child: getPost(),
-        )
-      ],
+      ),
     );
   }
 }
+
 class BItem extends StatefulWidget {
   final Users user;
   UserModel receiver;
@@ -2360,7 +2128,6 @@ class BItem extends StatefulWidget {
   @override
   _BItemState createState() => _BItemState(this.user);
 }
-
 class _BItemState extends State<BItem> {
   final Users user;
   var price = 0.0;
@@ -2405,20 +2172,22 @@ class _BItemState extends State<BItem> {
 
   }
 
-  getPost() {
-    return StreamBuilder(
-        stream: FirebaseFirestore.instance
+    getPost() {
+    return FutureBuilder(
+        future: FirebaseFirestore.instance
             .collection('posts')
             .doc(user.id)
             .collection('userPosts')
-            .snapshots(),
+            .get(),
 
         // ignore: missing_return
         builder: (context, snapshot) {
-          if (!snapshot.hasData) {
-            return Text('text');
+          if (!snapshot.hasData||snapshot.data.docs.isEmpty) {
+            return Container();
           }
+          else{
           return Container(
+            alignment:Alignment.centerLeft,
             height: 200,
             child: ListView.builder(
               shrinkWrap: true,
@@ -2428,31 +2197,64 @@ class _BItemState extends State<BItem> {
                 DocumentSnapshot docSnapshot = snapshot.data.docs[index];
              List  url = snapshot.data.docs[index]["mediaUrl"];
                 return Padding(
-                    padding: EdgeInsets.all(5.0),
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(20.0),
-                      child: GestureDetector(
-                          onTap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => PostScreen(
-                                  postId: docSnapshot["postId"],
-                                  userId: docSnapshot["ownerId"],
-                                ),
+                  padding: const EdgeInsets.all(8.0),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(20.0),
+                    child: GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => PostScreen(
+                                postId: docSnapshot["postId"],
+                                userId: docSnapshot["ownerId"],
                               ),
-                            );
-                          },
-                          child: CachedNetworkImage(
-                            imageUrl: url.first,
-                          )),
-                    ));
+                            ),
+                          );
+                        },
+                        child: CachedImage(
+                    url.first,
+                          width: MediaQuery
+                              .of(context)
+                              .size
+                              .width/2,
+                        )
+                    ),
+                  ),
+                );
               },
             ),
-          );
+          );}
         });
   }
 
+  hireMe() {
+    bool isProfileOwner = currentUserId == user.id;
+    if (isProfileOwner == true) {
+      return Container();
+    } else {
+
+      return
+        FloatingActionButton(
+          backgroundColor:Colors.white.withOpacity(0.5),
+          mini:true,
+          shape: BeveledRectangleBorder(
+              borderRadius: BorderRadius.circular(5.0)
+          ),
+          onPressed: () => Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => ChatScreen(
+                    receiver: receiver,
+                  ))),
+          child:  Icon(
+            EvaIcons.emailOutline,
+            color: Colors.black,
+          ),
+
+        );
+    }
+  }
 
   reviews() {
     StreamBuilder(
@@ -2560,83 +2362,6 @@ class _BItemState extends State<BItem> {
     });
   }
 
-  hireme() {
-    bool isProfileOwner = currentUserId == user.id;
-    if (isProfileOwner == true) {
-      return Container();
-    } else {
-      return Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: [
-          GestureDetector(
-            onTap: () => showProfile(context, profileId: user.id),
-            child: Container(
-              height: 40.0,
-              width: 100.0,
-//
-              decoration: BoxDecoration(
-                  color: kblue,
-                  borderRadius: BorderRadius.all(Radius.circular(20))),
-              child: Align(
-                alignment: Alignment.center,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    Icon(
-                      EvaIcons.personOutline,
-                      color: Colors.white,
-                    ),
-                    Text(
-                      'Profile',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          ),
-          GestureDetector(
-            onTap: () => Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => ChatScreen(
-                          receiver: receiver,
-                        ))),
-            child: Container(
-              height: 40.0,
-              width: 100.0,
-//
-              decoration: BoxDecoration(
-                  color: kblue,
-                  borderRadius: BorderRadius.all(Radius.circular(20))),
-              child: Align(
-                alignment: Alignment.center,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    Icon(
-                      EvaIcons.emailOutline,
-                      color: Colors.white,
-                    ),
-                    Text(
-                      'Hire me!',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          ),
-        ],
-      );
-    }
-  }
 
   getFollowers() async {
     QuerySnapshot snapshot =
@@ -2648,158 +2373,123 @@ class _BItemState extends State<BItem> {
 //      'followers':followerCount
 //    });
   }
-  followerstile() {
-    return Container(
-      decoration: BoxDecoration(
-          color: kPrimaryColor,
-          boxShadow: [
-            BoxShadow(
-              color: Colors.grey,
-              blurRadius: 5.0,
-            ),
-          ],
-          borderRadius: BorderRadius.all(Radius.circular(10.0))),
-      height: 60,
-      width: 60,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Text(
-            '$followerCount',
-            style: TextStyle(
-              color: Colors.white,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-          FittedBox(
-              child: Text(
-            'Followers',
-            style: TextStyle(color: Colors.white),
-          )),
-        ],
-      ),
-    );
-  }
 
   @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);
 
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        Container(
-          decoration: BoxDecoration(
-              borderRadius: BorderRadius.all(Radius.circular(20.0))),
-          margin:
-              EdgeInsets.only(top: 10.0, left: 10.0, right: 10.0, bottom: 10.0),
+    return SingleChildScrollView(
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Card(
           child: Column(
             mainAxisSize: MainAxisSize.min,
-            children: <Widget>[
-              Divider(
-                color: Colors.grey,
-              ),
-              GestureDetector(
-                onTap: () => showProfile(context, profileId: user.id),
-                child: ListTile(
-                  leading: CircleAvatar(
-                    backgroundImage: CachedNetworkImageProvider(user.photoUrl),
-                    backgroundColor: Colors.grey,
-                  ),
-                  title: Text(
-                    user.displayName,
-                    style: TextStyle(color: kText),
-                  ),
-                ),
-              ),
-              Align(
-                alignment: Alignment.center,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              Container(
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.all(Radius.circular(20.0))),
+                margin:
+                EdgeInsets.only(top: 10.0, left: 10.0, right: 10.0, bottom: 10.0),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
                   children: <Widget>[
-                    followerstile(),
-                    Client(),
+
                     GestureDetector(
-                      onTap: () async {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => ClientReview(
-                                      profileId: user.id,
-                                    )));
-                      },
-                      child: Container(
-                        decoration: BoxDecoration(
-                            color: kPrimaryColor,
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.grey,
-                                blurRadius: 5.0,
+                      onTap: () => showProfile(context, profileId: user.id),
+                      child: ListTile(
+                        leading: CircleAvatar(
+                          backgroundImage: CachedNetworkImageProvider(user.photoUrl),
+                          backgroundColor: Colors.grey,
+                        ),
+                        title: Text(
+                          user.displayName,
+                          style: TextStyle(color: kText),
+                        ),
+                        subtitle:Text(
+                          user.country,
+                          style: TextStyle(color: kText),
+                        ),
+                        trailing:                          Column(children:[
+                          Text( " ${currentUser.currencysym} ${currencyFormatter.format(price)}",style: TextStyle(color: kText,
+                              fontSize: SizeConfig.safeBlockHorizontal * 3,
+                              fontWeight: FontWeight.bold)),
+                          Text("Average cost", style: TextStyle(
+                            color: Colors.grey,
+                          ),),
+
+                        ]),
+
+
+                      ),
+                    ),
+                    Align(
+                      alignment: Alignment.center,
+                      child: IntrinsicHeight(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: <Widget>[
+                            followerTile(followerCount),
+                            clients(client),
+                            VerticalDivider(),
+                            Column(children:[
+                              hireMe(),
+                              SizedBox(
+                                height: 10.0,
                               ),
-                            ],
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(10.0))),
-                        height: 60,
-                        width: 60,
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Icon(
-                              Icons.favorite,
-                              color: Colors.pink,
-                            ),
-                            Text(
-                              'Rating',
-                              style: TextStyle(color: Colors.white),
-                            ),
+
+                              InkWell(
+                                onTap:() async {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => ClientReview(
+                                            profileId: user.id,
+                                          )));
+                                },
+                                child: Row(
+                                  children: [
+                                    Icon(
+                                      Icons.star_border_rounded,
+                                      color:  Colors.grey,
+                                    ),
+                                    Text("Reviews",style:TextStyle(color:Colors.grey)),
+                                    Icon(
+                                      Icons.arrow_forward_ios_rounded,
+                                      color:  Colors.black,
+                                    ),
+
+
+
+                                  ],
+                                ),
+                              ),
+                            ]),
+
                           ],
                         ),
                       ),
                     ),
+
+
+
+
+                    SizedBox(
+                      height: 10.0,
+                    ),
                   ],
                 ),
               ),
-              SizedBox(
-                height: 10.0,
-              ),
-              Row(
-                children: [
-                  Text("Average cost", style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: SizeConfig.safeBlockHorizontal * 5
-                  ),),
-                ],
-              ),
-
-              ListTile(
-                dense: true,
-                contentPadding: EdgeInsets.symmetric(horizontal: 0.0, vertical: 0.0),
-                visualDensity: VisualDensity(horizontal: 0, vertical: -4),
-                title:            Text("Average cost", style: TextStyle(
-                    color: kText,
-                    fontSize: SizeConfig.safeBlockHorizontal * 5,
-                    fontWeight: FontWeight.bold),),
-                subtitle:
-                Text( " ${currentUser.currencysym} ${currencyFormatter.format(price)}",style: TextStyle(color: kText,
-                    fontSize: SizeConfig.safeBlockHorizontal * 4,
-                    fontWeight: FontWeight.bold)),
-
-              ),
-
-              SizedBox(
-                height: 10.0,
-              ),
-              hireme(),
+              Container(
+                child: getPost(),
+              )
             ],
           ),
         ),
-        Container(
-          child: getPost(),
-        )
-      ],
+      ),
     );
   }
 }
+
 class PItem extends StatefulWidget {
   final Users user;
   UserModel receiver;
@@ -2808,7 +2498,6 @@ class PItem extends StatefulWidget {
   @override
   _PItemState createState() => _PItemState(this.user);
 }
-
 class _PItemState extends State<PItem> {
   final Users user;
   var price = 0.0;
@@ -2854,20 +2543,22 @@ class _PItemState extends State<PItem> {
 
   }
 
-  getPost() {
-    return StreamBuilder(
-        stream: FirebaseFirestore.instance
+    getPost() {
+    return FutureBuilder(
+        future: FirebaseFirestore.instance
             .collection('posts')
             .doc(user.id)
             .collection('userPosts')
-            .snapshots(),
+            .get(),
 
         // ignore: missing_return
         builder: (context, snapshot) {
-          if (!snapshot.hasData) {
-            return Text('text');
+          if (!snapshot.hasData||snapshot.data.docs.isEmpty) {
+            return Container();
           }
+          else{
           return Container(
+            alignment:Alignment.centerLeft,
             height: 200,
             child: ListView.builder(
               shrinkWrap: true,
@@ -2877,31 +2568,63 @@ class _PItemState extends State<PItem> {
                 DocumentSnapshot docSnapshot = snapshot.data.docs[index];
              List  url = snapshot.data.docs[index]["mediaUrl"];
                 return Padding(
-                    padding: EdgeInsets.all(5.0),
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(20.0),
-                      child: GestureDetector(
-                          onTap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => PostScreen(
-                                  postId: docSnapshot["postId"],
-                                  userId: docSnapshot["ownerId"],
-                                ),
+                  padding: const EdgeInsets.all(8.0),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(20.0),
+                    child: GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => PostScreen(
+                                postId: docSnapshot["postId"],
+                                userId: docSnapshot["ownerId"],
                               ),
-                            );
-                          },
-                          child: CachedNetworkImage(
-                            imageUrl: url.first,
-                          )),
-                    ));
+                            ),
+                          );
+                        },
+                        child: CachedImage(
+                    url.first,
+                          width: MediaQuery
+                              .of(context)
+                              .size
+                              .width/2,
+                        )
+                    ),
+                  ),
+                );
               },
             ),
-          );
+          );}
         });
   }
+  hireMe() {
+    bool isProfileOwner = currentUserId == user.id;
+    if (isProfileOwner == true) {
+      return Container();
+    } else {
 
+      return
+        FloatingActionButton(
+          backgroundColor:Colors.white.withOpacity(0.5),
+          mini:true,
+          shape: BeveledRectangleBorder(
+              borderRadius: BorderRadius.circular(5.0)
+          ),
+          onPressed: () => Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => ChatScreen(
+                    receiver: receiver,
+                  ))),
+          child:  Icon(
+            EvaIcons.emailOutline,
+            color: Colors.black,
+          ),
+
+        );
+    }
+  }
 
   reviews() {
     StreamBuilder(
@@ -3009,83 +2732,6 @@ class _PItemState extends State<PItem> {
     });
   }
 
-  hireme() {
-    bool isProfileOwner = currentUserId == user.id;
-    if (isProfileOwner == true) {
-      return Container();
-    } else {
-      return Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: [
-          GestureDetector(
-            onTap: () => showProfile(context, profileId: user.id),
-            child: Container(
-              height: 40.0,
-              width: 100.0,
-//
-              decoration: BoxDecoration(
-                  color: kblue,
-                  borderRadius: BorderRadius.all(Radius.circular(20))),
-              child: Align(
-                alignment: Alignment.center,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    Icon(
-                      EvaIcons.personOutline,
-                      color: Colors.white,
-                    ),
-                    Text(
-                      'Profile',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          ),
-          GestureDetector(
-            onTap: () => Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => ChatScreen(
-                          receiver: receiver,
-                        ))),
-            child: Container(
-              height: 40.0,
-              width: 100.0,
-//
-              decoration: BoxDecoration(
-                  color: kblue,
-                  borderRadius: BorderRadius.all(Radius.circular(20))),
-              child: Align(
-                alignment: Alignment.center,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    Icon(
-                      EvaIcons.emailOutline,
-                      color: Colors.white,
-                    ),
-                    Text(
-                      'Hire me!',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          ),
-        ],
-      );
-    }
-  }
 
   getFollowers() async {
     QuerySnapshot snapshot =
@@ -3097,158 +2743,123 @@ class _PItemState extends State<PItem> {
 //      'followers':followerCount
 //    });
   }
-  followerstile() {
-    return Container(
-      decoration: BoxDecoration(
-          color: kPrimaryColor,
-          boxShadow: [
-            BoxShadow(
-              color: Colors.grey,
-              blurRadius: 5.0,
-            ),
-          ],
-          borderRadius: BorderRadius.all(Radius.circular(10.0))),
-      height: 60,
-      width: 60,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Text(
-            '$followerCount',
-            style: TextStyle(
-              color: Colors.white,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-          FittedBox(
-              child: Text(
-            'Followers',
-            style: TextStyle(color: Colors.white),
-          )),
-        ],
-      ),
-    );
-  }
 
   @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);
 
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        Container(
-          decoration: BoxDecoration(
-              borderRadius: BorderRadius.all(Radius.circular(20.0))),
-          margin:
-              EdgeInsets.only(top: 10.0, left: 10.0, right: 10.0, bottom: 10.0),
+    return SingleChildScrollView(
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Card(
           child: Column(
             mainAxisSize: MainAxisSize.min,
-            children: <Widget>[
-              Divider(
-                color: Colors.grey,
-              ),
-              GestureDetector(
-                onTap: () => showProfile(context, profileId: user.id),
-                child: ListTile(
-                  leading: CircleAvatar(
-                    backgroundImage: CachedNetworkImageProvider(user.photoUrl),
-                    backgroundColor: Colors.grey,
-                  ),
-                  title: Text(
-                    user.displayName,
-                    style: TextStyle(color: kText),
-                  ),
-                ),
-              ),
-              Align(
-                alignment: Alignment.center,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              Container(
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.all(Radius.circular(20.0))),
+                margin:
+                EdgeInsets.only(top: 10.0, left: 10.0, right: 10.0, bottom: 10.0),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
                   children: <Widget>[
-                    followerstile(),
-                    Client(),
+
                     GestureDetector(
-                      onTap: () async {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => ClientReview(
-                                      profileId: user.id,
-                                    )));
-                      },
-                      child: Container(
-                        decoration: BoxDecoration(
-                            color: kPrimaryColor,
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.grey,
-                                blurRadius: 5.0,
+                      onTap: () => showProfile(context, profileId: user.id),
+                      child: ListTile(
+                        leading: CircleAvatar(
+                          backgroundImage: CachedNetworkImageProvider(user.photoUrl),
+                          backgroundColor: Colors.grey,
+                        ),
+                        title: Text(
+                          user.displayName,
+                          style: TextStyle(color: kText),
+                        ),
+                        subtitle:Text(
+                          user.country,
+                          style: TextStyle(color: kText),
+                        ),
+                        trailing:                          Column(children:[
+                          Text( " ${currentUser.currencysym} ${currencyFormatter.format(price)}",style: TextStyle(color: kText,
+                              fontSize: SizeConfig.safeBlockHorizontal * 3,
+                              fontWeight: FontWeight.bold)),
+                          Text("Average cost", style: TextStyle(
+                            color: Colors.grey,
+                          ),),
+
+                        ]),
+
+
+                      ),
+                    ),
+                    Align(
+                      alignment: Alignment.center,
+                      child: IntrinsicHeight(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: <Widget>[
+                            followerTile(followerCount),
+                            clients(client),
+                            VerticalDivider(),
+                            Column(children:[
+                              hireMe(),
+                              SizedBox(
+                                height: 10.0,
                               ),
-                            ],
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(10.0))),
-                        height: 60,
-                        width: 60,
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Icon(
-                              Icons.favorite,
-                              color: Colors.pink,
-                            ),
-                            Text(
-                              'Rating',
-                              style: TextStyle(color: Colors.white),
-                            ),
+
+                              InkWell(
+                                onTap:() async {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => ClientReview(
+                                            profileId: user.id,
+                                          )));
+                                },
+                                child: Row(
+                                  children: [
+                                    Icon(
+                                      Icons.star_border_rounded,
+                                      color:  Colors.grey,
+                                    ),
+                                    Text("Reviews",style:TextStyle(color:Colors.grey)),
+                                    Icon(
+                                      Icons.arrow_forward_ios_rounded,
+                                      color:  Colors.black,
+                                    ),
+
+
+
+                                  ],
+                                ),
+                              ),
+                            ]),
+
                           ],
                         ),
                       ),
                     ),
+
+
+
+
+                    SizedBox(
+                      height: 10.0,
+                    ),
                   ],
                 ),
               ),
-              SizedBox(
-                height: 10.0,
-              ),
-              Row(
-                children: [
-                  Text("Average cost", style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: SizeConfig.safeBlockHorizontal * 5
-                  ),),
-                ],
-              ),
-
-              ListTile(
-                dense: true,
-                contentPadding: EdgeInsets.symmetric(horizontal: 0.0, vertical: 0.0),
-                visualDensity: VisualDensity(horizontal: 0, vertical: -4),
-                title:            Text("Average cost", style: TextStyle(
-                    color: kText,
-                    fontSize: SizeConfig.safeBlockHorizontal * 5,
-                    fontWeight: FontWeight.bold),),
-                subtitle:
-                Text( " ${currentUser.currencysym} ${currencyFormatter.format(price)}",style: TextStyle(color: kText,
-                    fontSize: SizeConfig.safeBlockHorizontal * 4,
-                    fontWeight: FontWeight.bold)),
-
-              ),
-
-              SizedBox(
-                height: 10.0,
-              ),
-              hireme(),
+              Container(
+                child: getPost(),
+              )
             ],
           ),
         ),
-        Container(
-          child: getPost(),
-        )
-      ],
+      ),
     );
   }
 }
+
 class MAItem extends StatefulWidget {
   final Users user;
   UserModel receiver;
@@ -3257,7 +2868,6 @@ class MAItem extends StatefulWidget {
   @override
   _MAItemState createState() => _MAItemState(this.user);
 }
-
 class _MAItemState extends State<MAItem> {
   final Users user;
   var price = 0.0;
@@ -3303,20 +2913,22 @@ class _MAItemState extends State<MAItem> {
 
   }
 
-  getPost() {
-    return StreamBuilder(
-        stream: FirebaseFirestore.instance
+    getPost() {
+    return FutureBuilder(
+        future: FirebaseFirestore.instance
             .collection('posts')
             .doc(user.id)
             .collection('userPosts')
-            .snapshots(),
+            .get(),
 
         // ignore: missing_return
         builder: (context, snapshot) {
-          if (!snapshot.hasData) {
-            return Text('text');
+          if (!snapshot.hasData||snapshot.data.docs.isEmpty) {
+            return Container();
           }
+          else{
           return Container(
+            alignment:Alignment.centerLeft,
             height: 200,
             child: ListView.builder(
               shrinkWrap: true,
@@ -3326,31 +2938,63 @@ class _MAItemState extends State<MAItem> {
                 DocumentSnapshot docSnapshot = snapshot.data.docs[index];
              List  url = snapshot.data.docs[index]["mediaUrl"];
                 return Padding(
-                    padding: EdgeInsets.all(5.0),
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(20.0),
-                      child: GestureDetector(
-                          onTap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => PostScreen(
-                                  postId: docSnapshot["postId"],
-                                  userId: docSnapshot["ownerId"],
-                                ),
+                  padding: const EdgeInsets.all(8.0),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(20.0),
+                    child: GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => PostScreen(
+                                postId: docSnapshot["postId"],
+                                userId: docSnapshot["ownerId"],
                               ),
-                            );
-                          },
-                          child: CachedNetworkImage(
-                            imageUrl: url.first,
-                          )),
-                    ));
+                            ),
+                          );
+                        },
+                        child: CachedImage(
+                    url.first,
+                          width: MediaQuery
+                              .of(context)
+                              .size
+                              .width/2,
+                        )
+                    ),
+                  ),
+                );
               },
             ),
-          );
+          );}
         });
   }
+  hireMe() {
+    bool isProfileOwner = currentUserId == user.id;
+    if (isProfileOwner == true) {
+      return Container();
+    } else {
 
+      return
+        FloatingActionButton(
+          backgroundColor:Colors.white.withOpacity(0.5),
+          mini:true,
+          shape: BeveledRectangleBorder(
+              borderRadius: BorderRadius.circular(5.0)
+          ),
+          onPressed: () => Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => ChatScreen(
+                    receiver: receiver,
+                  ))),
+          child:  Icon(
+            EvaIcons.emailOutline,
+            color: Colors.black,
+          ),
+
+        );
+    }
+  }
 
   reviews() {
     StreamBuilder(
@@ -3458,83 +3102,6 @@ class _MAItemState extends State<MAItem> {
     });
   }
 
-  hireme() {
-    bool isProfileOwner = currentUserId == user.id;
-    if (isProfileOwner == true) {
-      return Container();
-    } else {
-      return Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: [
-          GestureDetector(
-            onTap: () => showProfile(context, profileId: user.id),
-            child: Container(
-              height: 40.0,
-              width: 100.0,
-//
-              decoration: BoxDecoration(
-                  color: kblue,
-                  borderRadius: BorderRadius.all(Radius.circular(20))),
-              child: Align(
-                alignment: Alignment.center,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    Icon(
-                      EvaIcons.personOutline,
-                      color: Colors.white,
-                    ),
-                    Text(
-                      'Profile',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          ),
-          GestureDetector(
-            onTap: () => Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => ChatScreen(
-                          receiver: receiver,
-                        ))),
-            child: Container(
-              height: 40.0,
-              width: 100.0,
-//
-              decoration: BoxDecoration(
-                  color: kblue,
-                  borderRadius: BorderRadius.all(Radius.circular(20))),
-              child: Align(
-                alignment: Alignment.center,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    Icon(
-                      EvaIcons.emailOutline,
-                      color: Colors.white,
-                    ),
-                    Text(
-                      'Hire me!',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          ),
-        ],
-      );
-    }
-  }
 
   getFollowers() async {
     QuerySnapshot snapshot =
@@ -3546,158 +3113,123 @@ class _MAItemState extends State<MAItem> {
 //      'followers':followerCount
 //    });
   }
-  followerstile() {
-    return Container(
-      decoration: BoxDecoration(
-          color: kPrimaryColor,
-          boxShadow: [
-            BoxShadow(
-              color: Colors.grey,
-              blurRadius: 5.0,
-            ),
-          ],
-          borderRadius: BorderRadius.all(Radius.circular(10.0))),
-      height: 60,
-      width: 60,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Text(
-            '$followerCount',
-            style: TextStyle(
-              color: Colors.white,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-          FittedBox(
-              child: Text(
-            'Followers',
-            style: TextStyle(color: Colors.white),
-          )),
-        ],
-      ),
-    );
-  }
 
   @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);
 
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        Container(
-          decoration: BoxDecoration(
-              borderRadius: BorderRadius.all(Radius.circular(20.0))),
-          margin:
-              EdgeInsets.only(top: 10.0, left: 10.0, right: 10.0, bottom: 10.0),
+    return SingleChildScrollView(
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Card(
           child: Column(
             mainAxisSize: MainAxisSize.min,
-            children: <Widget>[
-              Divider(
-                color: Colors.grey,
-              ),
-              GestureDetector(
-                onTap: () => showProfile(context, profileId: user.id),
-                child: ListTile(
-                  leading: CircleAvatar(
-                    backgroundImage: CachedNetworkImageProvider(user.photoUrl),
-                    backgroundColor: Colors.grey,
-                  ),
-                  title: Text(
-                    user.displayName,
-                    style: TextStyle(color: kText),
-                  ),
-                ),
-              ),
-              Align(
-                alignment: Alignment.center,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              Container(
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.all(Radius.circular(20.0))),
+                margin:
+                EdgeInsets.only(top: 10.0, left: 10.0, right: 10.0, bottom: 10.0),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
                   children: <Widget>[
-                    followerstile(),
-                    Client(),
+
                     GestureDetector(
-                      onTap: () async {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => ClientReview(
-                                      profileId: user.id,
-                                    )));
-                      },
-                      child: Container(
-                        decoration: BoxDecoration(
-                            color: kPrimaryColor,
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.grey,
-                                blurRadius: 5.0,
+                      onTap: () => showProfile(context, profileId: user.id),
+                      child: ListTile(
+                        leading: CircleAvatar(
+                          backgroundImage: CachedNetworkImageProvider(user.photoUrl),
+                          backgroundColor: Colors.grey,
+                        ),
+                        title: Text(
+                          user.displayName,
+                          style: TextStyle(color: kText),
+                        ),
+                        subtitle:Text(
+                          user.country,
+                          style: TextStyle(color: kText),
+                        ),
+                        trailing:                          Column(children:[
+                          Text( " ${currentUser.currencysym} ${currencyFormatter.format(price)}",style: TextStyle(color: kText,
+                              fontSize: SizeConfig.safeBlockHorizontal * 3,
+                              fontWeight: FontWeight.bold)),
+                          Text("Average cost", style: TextStyle(
+                            color: Colors.grey,
+                          ),),
+
+                        ]),
+
+
+                      ),
+                    ),
+                    Align(
+                      alignment: Alignment.center,
+                      child: IntrinsicHeight(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: <Widget>[
+                            followerTile(followerCount),
+                            clients(client),
+                            VerticalDivider(),
+                            Column(children:[
+                              hireMe(),
+                              SizedBox(
+                                height: 10.0,
                               ),
-                            ],
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(10.0))),
-                        height: 60,
-                        width: 60,
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Icon(
-                              Icons.favorite,
-                              color: Colors.pink,
-                            ),
-                            Text(
-                              'Rating',
-                              style: TextStyle(color: Colors.white),
-                            ),
+
+                              InkWell(
+                                onTap:() async {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => ClientReview(
+                                            profileId: user.id,
+                                          )));
+                                },
+                                child: Row(
+                                  children: [
+                                    Icon(
+                                      Icons.star_border_rounded,
+                                      color:  Colors.grey,
+                                    ),
+                                    Text("Reviews",style:TextStyle(color:Colors.grey)),
+                                    Icon(
+                                      Icons.arrow_forward_ios_rounded,
+                                      color:  Colors.black,
+                                    ),
+
+
+
+                                  ],
+                                ),
+                              ),
+                            ]),
+
                           ],
                         ),
                       ),
                     ),
+
+
+
+
+                    SizedBox(
+                      height: 10.0,
+                    ),
                   ],
                 ),
               ),
-              SizedBox(
-                height: 10.0,
-              ),
-              Row(
-                children: [
-                  Text("Average cost", style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: SizeConfig.safeBlockHorizontal * 5
-                  ),),
-                ],
-              ),
-
-              ListTile(
-                dense: true,
-                contentPadding: EdgeInsets.symmetric(horizontal: 0.0, vertical: 0.0),
-                visualDensity: VisualDensity(horizontal: 0, vertical: -4),
-                title:            Text("Average cost", style: TextStyle(
-                    color: kText,
-                    fontSize: SizeConfig.safeBlockHorizontal * 5,
-                    fontWeight: FontWeight.bold),),
-                subtitle:
-                Text( " ${currentUser.currencysym} ${currencyFormatter.format(price)}",style: TextStyle(color: kText,
-                    fontSize: SizeConfig.safeBlockHorizontal * 4,
-                    fontWeight: FontWeight.bold)),
-
-              ),
-
-              SizedBox(
-                height: 10.0,
-              ),
-              hireme(),
+              Container(
+                child: getPost(),
+              )
             ],
           ),
         ),
-        Container(
-          child: getPost(),
-        )
-      ],
+      ),
     );
   }
 }
+
 class MItem extends StatefulWidget {
   final Users user;
   UserModel receiver;
@@ -3706,7 +3238,6 @@ class MItem extends StatefulWidget {
   @override
   _MItemState createState() => _MItemState(this.user);
 }
-
 class _MItemState extends State<MItem> {
   final Users user;
   var price = 0.0;
@@ -3752,20 +3283,22 @@ class _MItemState extends State<MItem> {
 
   }
 
-  getPost() {
-    return StreamBuilder(
-        stream: FirebaseFirestore.instance
+    getPost() {
+    return FutureBuilder(
+        future: FirebaseFirestore.instance
             .collection('posts')
             .doc(user.id)
             .collection('userPosts')
-            .snapshots(),
+            .get(),
 
         // ignore: missing_return
         builder: (context, snapshot) {
-          if (!snapshot.hasData) {
-            return Text('text');
+          if (!snapshot.hasData||snapshot.data.docs.isEmpty) {
+            return Container();
           }
+          else{
           return Container(
+            alignment:Alignment.centerLeft,
             height: 200,
             child: ListView.builder(
               shrinkWrap: true,
@@ -3775,31 +3308,64 @@ class _MItemState extends State<MItem> {
                 DocumentSnapshot docSnapshot = snapshot.data.docs[index];
              List  url = snapshot.data.docs[index]["mediaUrl"];
                 return Padding(
-                    padding: EdgeInsets.all(5.0),
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(20.0),
-                      child: GestureDetector(
-                          onTap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => PostScreen(
-                                  postId: docSnapshot["postId"],
-                                  userId: docSnapshot["ownerId"],
-                                ),
+                  padding: const EdgeInsets.all(8.0),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(20.0),
+                    child: GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => PostScreen(
+                                postId: docSnapshot["postId"],
+                                userId: docSnapshot["ownerId"],
                               ),
-                            );
-                          },
-                          child: CachedNetworkImage(
-                            imageUrl: url.first,
-                          )),
-                    ));
+                            ),
+                          );
+                        },
+                        child: CachedImage(
+                    url.first,
+                          width: MediaQuery
+                              .of(context)
+                              .size
+                              .width/2,
+                        )
+                    ),
+                  ),
+                );
               },
             ),
-          );
+          );}
         });
   }
 
+  hireMe() {
+    bool isProfileOwner = currentUserId == user.id;
+    if (isProfileOwner == true) {
+      return Container();
+    } else {
+
+      return
+        FloatingActionButton(
+          backgroundColor:Colors.white.withOpacity(0.5),
+          mini:true,
+          shape: BeveledRectangleBorder(
+              borderRadius: BorderRadius.circular(5.0)
+          ),
+          onPressed: () => Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => ChatScreen(
+                    receiver: receiver,
+                  ))),
+          child:  Icon(
+            EvaIcons.emailOutline,
+            color: Colors.black,
+          ),
+
+        );
+    }
+  }
 
   reviews() {
     StreamBuilder(
@@ -3907,83 +3473,6 @@ class _MItemState extends State<MItem> {
     });
   }
 
-  hireme() {
-    bool isProfileOwner = currentUserId == user.id;
-    if (isProfileOwner == true) {
-      return Container();
-    } else {
-      return Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: [
-          GestureDetector(
-            onTap: () => showProfile(context, profileId: user.id),
-            child: Container(
-              height: 40.0,
-              width: 100.0,
-//
-              decoration: BoxDecoration(
-                  color: kblue,
-                  borderRadius: BorderRadius.all(Radius.circular(20))),
-              child: Align(
-                alignment: Alignment.center,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    Icon(
-                      EvaIcons.personOutline,
-                      color: Colors.white,
-                    ),
-                    Text(
-                      'Profile',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          ),
-          GestureDetector(
-            onTap: () => Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => ChatScreen(
-                          receiver: receiver,
-                        ))),
-            child: Container(
-              height: 40.0,
-              width: 100.0,
-//
-              decoration: BoxDecoration(
-                  color: kblue,
-                  borderRadius: BorderRadius.all(Radius.circular(20))),
-              child: Align(
-                alignment: Alignment.center,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    Icon(
-                      EvaIcons.emailOutline,
-                      color: Colors.white,
-                    ),
-                    Text(
-                      'Hire me!',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          ),
-        ],
-      );
-    }
-  }
 
   getFollowers() async {
     QuerySnapshot snapshot =
@@ -3995,158 +3484,123 @@ class _MItemState extends State<MItem> {
 //      'followers':followerCount
 //    });
   }
-  followerstile() {
-    return Container(
-      decoration: BoxDecoration(
-          color: kPrimaryColor,
-          boxShadow: [
-            BoxShadow(
-              color: Colors.grey,
-              blurRadius: 5.0,
-            ),
-          ],
-          borderRadius: BorderRadius.all(Radius.circular(10.0))),
-      height: 60,
-      width: 60,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Text(
-            '$followerCount',
-            style: TextStyle(
-              color: Colors.white,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-          FittedBox(
-              child: Text(
-            'Followers',
-            style: TextStyle(color: Colors.white),
-          )),
-        ],
-      ),
-    );
-  }
 
   @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);
 
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        Container(
-          decoration: BoxDecoration(
-              borderRadius: BorderRadius.all(Radius.circular(20.0))),
-          margin:
-              EdgeInsets.only(top: 10.0, left: 10.0, right: 10.0, bottom: 10.0),
+    return SingleChildScrollView(
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Card(
           child: Column(
             mainAxisSize: MainAxisSize.min,
-            children: <Widget>[
-              Divider(
-                color: Colors.grey,
-              ),
-              GestureDetector(
-                onTap: () => showProfile(context, profileId: user.id),
-                child: ListTile(
-                  leading: CircleAvatar(
-                    backgroundImage: CachedNetworkImageProvider(user.photoUrl),
-                    backgroundColor: Colors.grey,
-                  ),
-                  title: Text(
-                    user.displayName,
-                    style: TextStyle(color: kText),
-                  ),
-                ),
-              ),
-              Align(
-                alignment: Alignment.center,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              Container(
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.all(Radius.circular(20.0))),
+                margin:
+                EdgeInsets.only(top: 10.0, left: 10.0, right: 10.0, bottom: 10.0),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
                   children: <Widget>[
-                    followerstile(),
-                    Client(),
+
                     GestureDetector(
-                      onTap: () async {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => ClientReview(
-                                      profileId: user.id,
-                                    )));
-                      },
-                      child: Container(
-                        decoration: BoxDecoration(
-                            color: kPrimaryColor,
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.grey,
-                                blurRadius: 5.0,
+                      onTap: () => showProfile(context, profileId: user.id),
+                      child: ListTile(
+                        leading: CircleAvatar(
+                          backgroundImage: CachedNetworkImageProvider(user.photoUrl),
+                          backgroundColor: Colors.grey,
+                        ),
+                        title: Text(
+                          user.displayName,
+                          style: TextStyle(color: kText),
+                        ),
+                        subtitle:Text(
+                          user.country,
+                          style: TextStyle(color: kText),
+                        ),
+                        trailing:                          Column(children:[
+                          Text( " ${currentUser.currencysym} ${currencyFormatter.format(price)}",style: TextStyle(color: kText,
+                              fontSize: SizeConfig.safeBlockHorizontal * 3,
+                              fontWeight: FontWeight.bold)),
+                          Text("Average cost", style: TextStyle(
+                            color: Colors.grey,
+                          ),),
+
+                        ]),
+
+
+                      ),
+                    ),
+                    Align(
+                      alignment: Alignment.center,
+                      child: IntrinsicHeight(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: <Widget>[
+                            followerTile(followerCount),
+                            clients(client),
+                            VerticalDivider(),
+                            Column(children:[
+                              hireMe(),
+                              SizedBox(
+                                height: 10.0,
                               ),
-                            ],
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(10.0))),
-                        height: 60,
-                        width: 60,
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Icon(
-                              Icons.favorite,
-                              color: Colors.pink,
-                            ),
-                            Text(
-                              'Rating',
-                              style: TextStyle(color: Colors.white),
-                            ),
+
+                              InkWell(
+                                onTap:() async {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => ClientReview(
+                                            profileId: user.id,
+                                          )));
+                                },
+                                child: Row(
+                                  children: [
+                                    Icon(
+                                      Icons.star_border_rounded,
+                                      color:  Colors.grey,
+                                    ),
+                                    Text("Reviews",style:TextStyle(color:Colors.grey)),
+                                    Icon(
+                                      Icons.arrow_forward_ios_rounded,
+                                      color:  Colors.black,
+                                    ),
+
+
+
+                                  ],
+                                ),
+                              ),
+                            ]),
+
                           ],
                         ),
                       ),
                     ),
+
+
+
+
+                    SizedBox(
+                      height: 10.0,
+                    ),
                   ],
                 ),
               ),
-              SizedBox(
-                height: 10.0,
-              ),
-              Row(
-                children: [
-                  Text("Average cost", style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: SizeConfig.safeBlockHorizontal * 5
-                  ),),
-                ],
-              ),
-
-              ListTile(
-                dense: true,
-                contentPadding: EdgeInsets.symmetric(horizontal: 0.0, vertical: 0.0),
-                visualDensity: VisualDensity(horizontal: 0, vertical: -4),
-                title:            Text("Average cost", style: TextStyle(
-                    color: kText,
-                    fontSize: SizeConfig.safeBlockHorizontal * 5,
-                    fontWeight: FontWeight.bold),),
-                subtitle:
-                Text( " ${currentUser.currencysym} ${currencyFormatter.format(price)}",style: TextStyle(color: kText,
-                    fontSize: SizeConfig.safeBlockHorizontal * 4,
-                    fontWeight: FontWeight.bold)),
-
-              ),
-
-              SizedBox(
-                height: 10.0,
-              ),
-              hireme(),
+              Container(
+                child: getPost(),
+              )
             ],
           ),
         ),
-        Container(
-          child: getPost(),
-        )
-      ],
+      ),
     );
   }
 }
+
 class HItem extends StatefulWidget {
   final Users user;
   UserModel receiver;
@@ -4155,7 +3609,6 @@ class HItem extends StatefulWidget {
   @override
   _HItemState createState() => _HItemState(this.user);
 }
-
 class _HItemState extends State<HItem> {
   final Users user;
   var price = 0.0;
@@ -4201,20 +3654,22 @@ class _HItemState extends State<HItem> {
 
   }
 
-  getPost() {
-    return StreamBuilder(
-        stream: FirebaseFirestore.instance
+    getPost() {
+    return FutureBuilder(
+        future: FirebaseFirestore.instance
             .collection('posts')
             .doc(user.id)
             .collection('userPosts')
-            .snapshots(),
+            .get(),
 
         // ignore: missing_return
         builder: (context, snapshot) {
-          if (!snapshot.hasData) {
-            return Text('text');
+          if (!snapshot.hasData||snapshot.data.docs.isEmpty) {
+            return Container();
           }
+          else{
           return Container(
+            alignment:Alignment.centerLeft,
             height: 200,
             child: ListView.builder(
               shrinkWrap: true,
@@ -4224,31 +3679,63 @@ class _HItemState extends State<HItem> {
                 DocumentSnapshot docSnapshot = snapshot.data.docs[index];
              List  url = snapshot.data.docs[index]["mediaUrl"];
                 return Padding(
-                    padding: EdgeInsets.all(5.0),
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(20.0),
-                      child: GestureDetector(
-                          onTap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => PostScreen(
-                                  postId: docSnapshot["postId"],
-                                  userId: docSnapshot["ownerId"],
-                                ),
+                  padding: const EdgeInsets.all(8.0),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(20.0),
+                    child: GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => PostScreen(
+                                postId: docSnapshot["postId"],
+                                userId: docSnapshot["ownerId"],
                               ),
-                            );
-                          },
-                          child: CachedNetworkImage(
-                            imageUrl: url.first,
-                          )),
-                    ));
+                            ),
+                          );
+                        },
+                        child: CachedImage(
+                    url.first,
+                          width: MediaQuery
+                              .of(context)
+                              .size
+                              .width/2,
+                        )
+                    ),
+                  ),
+                );
               },
             ),
-          );
+          );}
         });
   }
+  hireMe() {
+    bool isProfileOwner = currentUserId == user.id;
+    if (isProfileOwner == true) {
+      return Container();
+    } else {
 
+      return
+        FloatingActionButton(
+          backgroundColor:Colors.white.withOpacity(0.5),
+          mini:true,
+          shape: BeveledRectangleBorder(
+              borderRadius: BorderRadius.circular(5.0)
+          ),
+          onPressed: () => Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => ChatScreen(
+                    receiver: receiver,
+                  ))),
+          child:  Icon(
+            EvaIcons.emailOutline,
+            color: Colors.black,
+          ),
+
+        );
+    }
+  }
 
   reviews() {
     StreamBuilder(
@@ -4356,83 +3843,6 @@ class _HItemState extends State<HItem> {
     });
   }
 
-  hireme() {
-    bool isProfileOwner = currentUserId == user.id;
-    if (isProfileOwner == true) {
-      return Container();
-    } else {
-      return Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: [
-          GestureDetector(
-            onTap: () => showProfile(context, profileId: user.id),
-            child: Container(
-              height: 40.0,
-              width: 100.0,
-//
-              decoration: BoxDecoration(
-                  color: kblue,
-                  borderRadius: BorderRadius.all(Radius.circular(20))),
-              child: Align(
-                alignment: Alignment.center,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    Icon(
-                      EvaIcons.personOutline,
-                      color: Colors.white,
-                    ),
-                    Text(
-                      'Profile',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          ),
-          GestureDetector(
-            onTap: () => Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => ChatScreen(
-                          receiver: receiver,
-                        ))),
-            child: Container(
-              height: 40.0,
-              width: 100.0,
-//
-              decoration: BoxDecoration(
-                  color: kblue,
-                  borderRadius: BorderRadius.all(Radius.circular(20))),
-              child: Align(
-                alignment: Alignment.center,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    Icon(
-                      EvaIcons.emailOutline,
-                      color: Colors.white,
-                    ),
-                    Text(
-                      'Hire me!',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          ),
-        ],
-      );
-    }
-  }
 
   getFollowers() async {
     QuerySnapshot snapshot =
@@ -4444,158 +3854,123 @@ class _HItemState extends State<HItem> {
 //      'followers':followerCount
 //    });
   }
-  followerstile() {
-    return Container(
-      decoration: BoxDecoration(
-          color: kPrimaryColor,
-          boxShadow: [
-            BoxShadow(
-              color: Colors.grey,
-              blurRadius: 5.0,
-            ),
-          ],
-          borderRadius: BorderRadius.all(Radius.circular(10.0))),
-      height: 60,
-      width: 60,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Text(
-            '$followerCount',
-            style: TextStyle(
-              color: Colors.white,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-          FittedBox(
-              child: Text(
-            'Followers',
-            style: TextStyle(color: Colors.white),
-          )),
-        ],
-      ),
-    );
-  }
 
   @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);
 
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        Container(
-          decoration: BoxDecoration(
-              borderRadius: BorderRadius.all(Radius.circular(20.0))),
-          margin:
-              EdgeInsets.only(top: 10.0, left: 10.0, right: 10.0, bottom: 10.0),
+    return SingleChildScrollView(
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Card(
           child: Column(
             mainAxisSize: MainAxisSize.min,
-            children: <Widget>[
-              Divider(
-                color: Colors.grey,
-              ),
-              GestureDetector(
-                onTap: () => showProfile(context, profileId: user.id),
-                child: ListTile(
-                  leading: CircleAvatar(
-                    backgroundImage: CachedNetworkImageProvider(user.photoUrl),
-                    backgroundColor: Colors.grey,
-                  ),
-                  title: Text(
-                    user.displayName,
-                    style: TextStyle(color: kText),
-                  ),
-                ),
-              ),
-              Align(
-                alignment: Alignment.center,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              Container(
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.all(Radius.circular(20.0))),
+                margin:
+                EdgeInsets.only(top: 10.0, left: 10.0, right: 10.0, bottom: 10.0),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
                   children: <Widget>[
-                    followerstile(),
-                    Client(),
+
                     GestureDetector(
-                      onTap: () async {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => ClientReview(
-                                      profileId: user.id,
-                                    )));
-                      },
-                      child: Container(
-                        decoration: BoxDecoration(
-                            color: kPrimaryColor,
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.grey,
-                                blurRadius: 5.0,
+                      onTap: () => showProfile(context, profileId: user.id),
+                      child: ListTile(
+                        leading: CircleAvatar(
+                          backgroundImage: CachedNetworkImageProvider(user.photoUrl),
+                          backgroundColor: Colors.grey,
+                        ),
+                        title: Text(
+                          user.displayName,
+                          style: TextStyle(color: kText),
+                        ),
+                        subtitle:Text(
+                          user.country,
+                          style: TextStyle(color: kText),
+                        ),
+                        trailing:                          Column(children:[
+                          Text( " ${currentUser.currencysym} ${currencyFormatter.format(price)}",style: TextStyle(color: kText,
+                              fontSize: SizeConfig.safeBlockHorizontal * 3,
+                              fontWeight: FontWeight.bold)),
+                          Text("Average cost", style: TextStyle(
+                            color: Colors.grey,
+                          ),),
+
+                        ]),
+
+
+                      ),
+                    ),
+                    Align(
+                      alignment: Alignment.center,
+                      child: IntrinsicHeight(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: <Widget>[
+                            followerTile(followerCount),
+                            clients(client),
+                            VerticalDivider(),
+                            Column(children:[
+                              hireMe(),
+                              SizedBox(
+                                height: 10.0,
                               ),
-                            ],
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(10.0))),
-                        height: 60,
-                        width: 60,
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Icon(
-                              Icons.favorite,
-                              color: Colors.pink,
-                            ),
-                            Text(
-                              'Rating',
-                              style: TextStyle(color: Colors.white),
-                            ),
+
+                              InkWell(
+                                onTap:() async {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => ClientReview(
+                                            profileId: user.id,
+                                          )));
+                                },
+                                child: Row(
+                                  children: [
+                                    Icon(
+                                      Icons.star_border_rounded,
+                                      color:  Colors.grey,
+                                    ),
+                                    Text("Reviews",style:TextStyle(color:Colors.grey)),
+                                    Icon(
+                                      Icons.arrow_forward_ios_rounded,
+                                      color:  Colors.black,
+                                    ),
+
+
+
+                                  ],
+                                ),
+                              ),
+                            ]),
+
                           ],
                         ),
                       ),
                     ),
+
+
+
+
+                    SizedBox(
+                      height: 10.0,
+                    ),
                   ],
                 ),
               ),
-              SizedBox(
-                height: 10.0,
-              ),
-              Row(
-                children: [
-                  Text("Average cost", style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: SizeConfig.safeBlockHorizontal * 5
-                  ),),
-                ],
-              ),
-
-              ListTile(
-                dense: true,
-                contentPadding: EdgeInsets.symmetric(horizontal: 0.0, vertical: 0.0),
-                visualDensity: VisualDensity(horizontal: 0, vertical: -4),
-                title:            Text("Average cost", style: TextStyle(
-                    color: kText,
-                    fontSize: SizeConfig.safeBlockHorizontal * 5,
-                    fontWeight: FontWeight.bold),),
-                subtitle:
-                Text( " ${currentUser.currencysym} ${currencyFormatter.format(price)}",style: TextStyle(color: kText,
-                    fontSize: SizeConfig.safeBlockHorizontal * 4,
-                    fontWeight: FontWeight.bold)),
-
-              ),
-
-              SizedBox(
-                height: 10.0,
-              ),
-              hireme(),
+              Container(
+                child: getPost(),
+              )
             ],
           ),
         ),
-        Container(
-          child: getPost(),
-        )
-      ],
+      ),
     );
   }
 }
+
 class AItem extends StatefulWidget {
   final Users user;
   UserModel receiver;
@@ -4604,7 +3979,6 @@ class AItem extends StatefulWidget {
   @override
   _AItemState createState() => _AItemState(this.user);
 }
-
 class _AItemState extends State<AItem> {
   final Users user;
   var price = 0.0;
@@ -4650,20 +4024,22 @@ class _AItemState extends State<AItem> {
 
   }
 
-  getPost() {
-    return StreamBuilder(
-        stream: FirebaseFirestore.instance
+    getPost() {
+    return FutureBuilder(
+        future: FirebaseFirestore.instance
             .collection('posts')
             .doc(user.id)
             .collection('userPosts')
-            .snapshots(),
+            .get(),
 
         // ignore: missing_return
         builder: (context, snapshot) {
-          if (!snapshot.hasData) {
-            return Text('text');
+          if (!snapshot.hasData||snapshot.data.docs.isEmpty) {
+            return Container();
           }
+          else{
           return Container(
+            alignment:Alignment.centerLeft,
             height: 200,
             child: ListView.builder(
               shrinkWrap: true,
@@ -4673,31 +4049,64 @@ class _AItemState extends State<AItem> {
                 DocumentSnapshot docSnapshot = snapshot.data.docs[index];
              List  url = snapshot.data.docs[index]["mediaUrl"];
                 return Padding(
-                    padding: EdgeInsets.all(5.0),
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(20.0),
-                      child: GestureDetector(
-                          onTap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => PostScreen(
-                                  postId: docSnapshot["postId"],
-                                  userId: docSnapshot["ownerId"],
-                                ),
+                  padding: const EdgeInsets.all(8.0),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(20.0),
+                    child: GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => PostScreen(
+                                postId: docSnapshot["postId"],
+                                userId: docSnapshot["ownerId"],
                               ),
-                            );
-                          },
-                          child: CachedNetworkImage(
-                            imageUrl: url.first,
-                          )),
-                    ));
+                            ),
+                          );
+                        },
+                        child: CachedImage(
+                    url.first,
+                          width: MediaQuery
+                              .of(context)
+                              .size
+                              .width/2,
+
+                        )
+                    ),
+                  ),
+                );
               },
             ),
-          );
+          );}
         });
   }
+  hireMe() {
+    bool isProfileOwner = currentUserId == user.id;
+    if (isProfileOwner == true) {
+      return Container();
+    } else {
 
+      return
+        FloatingActionButton(
+          backgroundColor:Colors.white.withOpacity(0.5),
+          mini:true,
+          shape: BeveledRectangleBorder(
+              borderRadius: BorderRadius.circular(5.0)
+          ),
+          onPressed: () => Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => ChatScreen(
+                    receiver: receiver,
+                  ))),
+          child:  Icon(
+            EvaIcons.emailOutline,
+            color: Colors.black,
+          ),
+
+        );
+    }
+  }
 
   reviews() {
     StreamBuilder(
@@ -4805,83 +4214,6 @@ class _AItemState extends State<AItem> {
     });
   }
 
-  hireme() {
-    bool isProfileOwner = currentUserId == user.id;
-    if (isProfileOwner == true) {
-      return Container();
-    } else {
-      return Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: [
-          GestureDetector(
-            onTap: () => showProfile(context, profileId: user.id),
-            child: Container(
-              height: 40.0,
-              width: 100.0,
-//
-              decoration: BoxDecoration(
-                  color: kblue,
-                  borderRadius: BorderRadius.all(Radius.circular(20))),
-              child: Align(
-                alignment: Alignment.center,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    Icon(
-                      EvaIcons.personOutline,
-                      color: Colors.white,
-                    ),
-                    Text(
-                      'Profile',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          ),
-          GestureDetector(
-            onTap: () => Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => ChatScreen(
-                          receiver: receiver,
-                        ))),
-            child: Container(
-              height: 40.0,
-              width: 100.0,
-//
-              decoration: BoxDecoration(
-                  color: kblue,
-                  borderRadius: BorderRadius.all(Radius.circular(20))),
-              child: Align(
-                alignment: Alignment.center,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    Icon(
-                      EvaIcons.emailOutline,
-                      color: Colors.white,
-                    ),
-                    Text(
-                      'Hire me!',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          ),
-        ],
-      );
-    }
-  }
 
   getFollowers() async {
     QuerySnapshot snapshot =
@@ -4893,158 +4225,123 @@ class _AItemState extends State<AItem> {
 //      'followers':followerCount
 //    });
   }
-  followerstile() {
-    return Container(
-      decoration: BoxDecoration(
-          color: kPrimaryColor,
-          boxShadow: [
-            BoxShadow(
-              color: Colors.grey,
-              blurRadius: 5.0,
-            ),
-          ],
-          borderRadius: BorderRadius.all(Radius.circular(10.0))),
-      height: 60,
-      width: 60,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Text(
-            '$followerCount',
-            style: TextStyle(
-              color: Colors.white,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-          FittedBox(
-              child: Text(
-            'Followers',
-            style: TextStyle(color: Colors.white),
-          )),
-        ],
-      ),
-    );
-  }
 
   @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);
 
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        Container(
-          decoration: BoxDecoration(
-              borderRadius: BorderRadius.all(Radius.circular(20.0))),
-          margin:
-              EdgeInsets.only(top: 10.0, left: 10.0, right: 10.0, bottom: 10.0),
+    return SingleChildScrollView(
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Card(
           child: Column(
             mainAxisSize: MainAxisSize.min,
-            children: <Widget>[
-              Divider(
-                color: Colors.grey,
-              ),
-              GestureDetector(
-                onTap: () => showProfile(context, profileId: user.id),
-                child: ListTile(
-                  leading: CircleAvatar(
-                    backgroundImage: CachedNetworkImageProvider(user.photoUrl),
-                    backgroundColor: Colors.grey,
-                  ),
-                  title: Text(
-                    user.displayName,
-                    style: TextStyle(color: kText),
-                  ),
-                ),
-              ),
-              Align(
-                alignment: Alignment.center,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              Container(
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.all(Radius.circular(20.0))),
+                margin:
+                EdgeInsets.only(top: 10.0, left: 10.0, right: 10.0, bottom: 10.0),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
                   children: <Widget>[
-                    followerstile(),
-                    Client(),
+
                     GestureDetector(
-                      onTap: () async {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => ClientReview(
-                                      profileId: user.id,
-                                    )));
-                      },
-                      child: Container(
-                        decoration: BoxDecoration(
-                            color: kPrimaryColor,
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.grey,
-                                blurRadius: 5.0,
+                      onTap: () => showProfile(context, profileId: user.id),
+                      child: ListTile(
+                        leading: CircleAvatar(
+                          backgroundImage: CachedNetworkImageProvider(user.photoUrl),
+                          backgroundColor: Colors.grey,
+                        ),
+                        title: Text(
+                          user.displayName,
+                          style: TextStyle(color: kText),
+                        ),
+                        subtitle:Text(
+                          user.country,
+                          style: TextStyle(color: kText),
+                        ),
+                        trailing:                          Column(children:[
+                          Text( " ${currentUser.currencysym} ${currencyFormatter.format(price)}",style: TextStyle(color: kText,
+                              fontSize: SizeConfig.safeBlockHorizontal * 3,
+                              fontWeight: FontWeight.bold)),
+                          Text("Average cost", style: TextStyle(
+                            color: Colors.grey,
+                          ),),
+
+                        ]),
+
+
+                      ),
+                    ),
+                    Align(
+                      alignment: Alignment.center,
+                      child: IntrinsicHeight(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: <Widget>[
+                            followerTile(followerCount),
+                            clients(client),
+                            VerticalDivider(),
+                            Column(children:[
+                              hireMe(),
+                              SizedBox(
+                                height: 10.0,
                               ),
-                            ],
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(10.0))),
-                        height: 60,
-                        width: 60,
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Icon(
-                              Icons.favorite,
-                              color: Colors.pink,
-                            ),
-                            Text(
-                              'Rating',
-                              style: TextStyle(color: Colors.white),
-                            ),
+
+                              InkWell(
+                                onTap:() async {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => ClientReview(
+                                            profileId: user.id,
+                                          )));
+                                },
+                                child: Row(
+                                  children: [
+                                    Icon(
+                                      Icons.star_border_rounded,
+                                      color:  Colors.grey,
+                                    ),
+                                    Text("Reviews",style:TextStyle(color:Colors.grey)),
+                                    Icon(
+                                      Icons.arrow_forward_ios_rounded,
+                                      color:  Colors.black,
+                                    ),
+
+
+
+                                  ],
+                                ),
+                              ),
+                            ]),
+
                           ],
                         ),
                       ),
                     ),
+
+
+
+
+                    SizedBox(
+                      height: 10.0,
+                    ),
                   ],
                 ),
               ),
-              SizedBox(
-                height: 10.0,
-              ),
-              Row(
-                children: [
-                  Text("Average cost", style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: SizeConfig.safeBlockHorizontal * 5
-                  ),),
-                ],
-              ),
-
-              ListTile(
-                dense: true,
-                contentPadding: EdgeInsets.symmetric(horizontal: 0.0, vertical: 0.0),
-                visualDensity: VisualDensity(horizontal: 0, vertical: -4),
-                title:            Text("Average cost", style: TextStyle(
-                    color: kText,
-                    fontSize: SizeConfig.safeBlockHorizontal * 5,
-                    fontWeight: FontWeight.bold),),
-                subtitle:
-                Text( " ${currentUser.currencysym} ${currencyFormatter.format(price)}",style: TextStyle(color: kText,
-                    fontSize: SizeConfig.safeBlockHorizontal * 4,
-                    fontWeight: FontWeight.bold)),
-
-              ),
-
-              SizedBox(
-                height: 10.0,
-              ),
-              hireme(),
+              Container(
+                child: getPost(),
+              )
             ],
           ),
         ),
-        Container(
-          child: getPost(),
-        )
-      ],
+      ),
     );
   }
 }
+
 class CItem extends StatefulWidget {
   final Users user;
   UserModel receiver;
@@ -5053,7 +4350,6 @@ class CItem extends StatefulWidget {
   @override
   _CItemState createState() => _CItemState(this.user);
 }
-
 class _CItemState extends State<CItem> {
   final Users user;
   var price = 0.0;
@@ -5099,20 +4395,22 @@ class _CItemState extends State<CItem> {
 
   }
 
-  getPost() {
-    return StreamBuilder(
-        stream: FirebaseFirestore.instance
+    getPost() {
+    return FutureBuilder(
+        future: FirebaseFirestore.instance
             .collection('posts')
             .doc(user.id)
             .collection('userPosts')
-            .snapshots(),
+            .get(),
 
         // ignore: missing_return
         builder: (context, snapshot) {
-          if (!snapshot.hasData) {
-            return Text('text');
+          if (!snapshot.hasData||snapshot.data.docs.isEmpty) {
+            return Container();
           }
+          else{
           return Container(
+            alignment:Alignment.centerLeft,
             height: 200,
             child: ListView.builder(
               shrinkWrap: true,
@@ -5122,31 +4420,63 @@ class _CItemState extends State<CItem> {
                 DocumentSnapshot docSnapshot = snapshot.data.docs[index];
              List  url = snapshot.data.docs[index]["mediaUrl"];
                 return Padding(
-                    padding: EdgeInsets.all(5.0),
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(20.0),
-                      child: GestureDetector(
-                          onTap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => PostScreen(
-                                  postId: docSnapshot["postId"],
-                                  userId: docSnapshot["ownerId"],
-                                ),
+                  padding: const EdgeInsets.all(8.0),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(20.0),
+                    child: GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => PostScreen(
+                                postId: docSnapshot["postId"],
+                                userId: docSnapshot["ownerId"],
                               ),
-                            );
-                          },
-                          child: CachedNetworkImage(
-                            imageUrl: url.first,
-                          )),
-                    ));
+                            ),
+                          );
+                        },
+                        child: CachedImage(
+                    url.first,
+                          width: MediaQuery
+                              .of(context)
+                              .size
+                              .width/2,
+                        )
+                    ),
+                  ),
+                );
               },
             ),
-          );
+          );}
         });
   }
+  hireMe() {
+    bool isProfileOwner = currentUserId == user.id;
+    if (isProfileOwner == true) {
+      return Container();
+    } else {
 
+      return
+        FloatingActionButton(
+          backgroundColor:Colors.white.withOpacity(0.5),
+          mini:true,
+          shape: BeveledRectangleBorder(
+              borderRadius: BorderRadius.circular(5.0)
+          ),
+          onPressed: () => Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => ChatScreen(
+                    receiver: receiver,
+                  ))),
+          child:  Icon(
+            EvaIcons.emailOutline,
+            color: Colors.black,
+          ),
+
+        );
+    }
+  }
 
   reviews() {
     StreamBuilder(
@@ -5254,83 +4584,6 @@ class _CItemState extends State<CItem> {
     });
   }
 
-  hireme() {
-    bool isProfileOwner = currentUserId == user.id;
-    if (isProfileOwner == true) {
-      return Container();
-    } else {
-      return Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: [
-          GestureDetector(
-            onTap: () => showProfile(context, profileId: user.id),
-            child: Container(
-              height: 40.0,
-              width: 100.0,
-//
-              decoration: BoxDecoration(
-                  color: kblue,
-                  borderRadius: BorderRadius.all(Radius.circular(20))),
-              child: Align(
-                alignment: Alignment.center,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    Icon(
-                      EvaIcons.personOutline,
-                      color: Colors.white,
-                    ),
-                    Text(
-                      'Profile',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          ),
-          GestureDetector(
-            onTap: () => Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => ChatScreen(
-                          receiver: receiver,
-                        ))),
-            child: Container(
-              height: 40.0,
-              width: 100.0,
-//
-              decoration: BoxDecoration(
-                  color: kblue,
-                  borderRadius: BorderRadius.all(Radius.circular(20))),
-              child: Align(
-                alignment: Alignment.center,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    Icon(
-                      EvaIcons.emailOutline,
-                      color: Colors.white,
-                    ),
-                    Text(
-                      'Hire me!',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          ),
-        ],
-      );
-    }
-  }
 
   getFollowers() async {
     QuerySnapshot snapshot =
@@ -5342,155 +4595,162 @@ class _CItemState extends State<CItem> {
 //      'followers':followerCount
 //    });
   }
-  followerstile() {
-    return Container(
-      decoration: BoxDecoration(
-          color: kPrimaryColor,
-          boxShadow: [
-            BoxShadow(
-              color: Colors.grey,
-              blurRadius: 5.0,
-            ),
-          ],
-          borderRadius: BorderRadius.all(Radius.circular(10.0))),
-      height: 60,
-      width: 60,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Text(
-            '$followerCount',
-            style: TextStyle(
-              color: Colors.white,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-          FittedBox(
-              child: Text(
-            'Followers',
-            style: TextStyle(color: Colors.white),
-          )),
-        ],
-      ),
-    );
-  }
 
   @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);
 
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        Container(
-          decoration: BoxDecoration(
-              borderRadius: BorderRadius.all(Radius.circular(20.0))),
-          margin:
-              EdgeInsets.only(top: 10.0, left: 10.0, right: 10.0, bottom: 10.0),
+    return SingleChildScrollView(
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Card(
           child: Column(
             mainAxisSize: MainAxisSize.min,
-            children: <Widget>[
-              Divider(
-                color: Colors.grey,
-              ),
-              GestureDetector(
-                onTap: () => showProfile(context, profileId: user.id),
-                child: ListTile(
-                  leading: CircleAvatar(
-                    backgroundImage: CachedNetworkImageProvider(user.photoUrl),
-                    backgroundColor: Colors.grey,
-                  ),
-                  title: Text(
-                    user.displayName,
-                    style: TextStyle(color: kText),
-                  ),
-                ),
-              ),
-              Align(
-                alignment: Alignment.center,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              Container(
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.all(Radius.circular(20.0))),
+                margin:
+                EdgeInsets.only(top: 10.0, left: 10.0, right: 10.0, bottom: 10.0),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
                   children: <Widget>[
-                    followerstile(),
-                    Client(),
+
                     GestureDetector(
-                      onTap: () async {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => ClientReview(
-                                      profileId: user.id,
-                                    )));
-                      },
-                      child: Container(
-                        decoration: BoxDecoration(
-                            color: kPrimaryColor,
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.grey,
-                                blurRadius: 5.0,
+                      onTap: () => showProfile(context, profileId: user.id),
+                      child: ListTile(
+                        leading: CircleAvatar(
+                          backgroundImage: CachedNetworkImageProvider(user.photoUrl),
+                          backgroundColor: Colors.grey,
+                        ),
+                        title: Text(
+                          user.displayName,
+                          style: TextStyle(color: kText),
+                        ),
+                        subtitle:Text(
+                          user.country,
+                          style: TextStyle(color: kText),
+                        ),
+                        trailing:                          Column(children:[
+                          Text( " ${currentUser.currencysym} ${currencyFormatter.format(price)}",style: TextStyle(color: kText,
+                              fontSize: SizeConfig.safeBlockHorizontal * 3,
+                              fontWeight: FontWeight.bold)),
+                          Text("Average cost", style: TextStyle(
+                            color: Colors.grey,
+                          ),),
+
+                        ]),
+
+
+                      ),
+                    ),
+                    Align(
+                      alignment: Alignment.center,
+                      child: IntrinsicHeight(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: <Widget>[
+                            followerTile(followerCount),
+                            clients(client),
+                            VerticalDivider(),
+                            Column(children:[
+                              hireMe(),
+                              SizedBox(
+                                height: 10.0,
                               ),
-                            ],
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(10.0))),
-                        height: 60,
-                        width: 60,
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Icon(
-                              Icons.favorite,
-                              color: Colors.pink,
-                            ),
-                            Text(
-                              'Rating',
-                              style: TextStyle(color: Colors.white),
-                            ),
+
+                              InkWell(
+                                onTap:() async {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => ClientReview(
+                                            profileId: user.id,
+                                          )));
+                                },
+                                child: Row(
+                                  children: [
+                                    Icon(
+                                      Icons.star_border_rounded,
+                                      color:  Colors.grey,
+                                    ),
+                                    Text("Reviews",style:TextStyle(color:Colors.grey)),
+                                    Icon(
+                                      Icons.arrow_forward_ios_rounded,
+                                      color:  Colors.black,
+                                    ),
+
+
+
+                                  ],
+                                ),
+                              ),
+                            ]),
+
                           ],
                         ),
                       ),
                     ),
+
+
+
+
+                    SizedBox(
+                      height: 10.0,
+                    ),
                   ],
                 ),
               ),
-              SizedBox(
-                height: 10.0,
-              ),
-              Row(
-                children: [
-                  Text("Average cost", style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: SizeConfig.safeBlockHorizontal * 5
-                  ),),
-                ],
-              ),
-
-              ListTile(
-                dense: true,
-                contentPadding: EdgeInsets.symmetric(horizontal: 0.0, vertical: 0.0),
-                visualDensity: VisualDensity(horizontal: 0, vertical: -4),
-                title:            Text("Average cost", style: TextStyle(
-                    color: kText,
-                    fontSize: SizeConfig.safeBlockHorizontal * 5,
-                    fontWeight: FontWeight.bold),),
-                subtitle:
-                Text( " ${currentUser.currencysym} ${currencyFormatter.format(price)}",style: TextStyle(color: kText,
-                    fontSize: SizeConfig.safeBlockHorizontal * 4,
-                    fontWeight: FontWeight.bold)),
-
-              ),
-
-              SizedBox(
-                height: 10.0,
-              ),
-              hireme(),
+              Container(
+                child: getPost(),
+              )
             ],
           ),
         ),
-        Container(
-          child: getPost(),
-        )
-      ],
+      ),
     );
   }
+}
+followerTile(followerCount) {
+  return Container(
+    child: Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Text(
+          '$followerCount',
+          style: TextStyle(
+            color: Colors.black,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        FittedBox(
+            child: Text(
+              'Followers',
+              style: TextStyle(color: Colors.grey),
+            )),
+      ],
+    ),
+  );
+}
+clients(client) {
+  return Container(
+    child: Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Text(
+          '${client}',
+          style: TextStyle(
+            color: Colors.black,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        Text(
+          'clients',
+          style: TextStyle(
+            color: Colors.grey,
+          ),
+        ),
+      ],
+    ),
+  );
 }

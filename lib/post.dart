@@ -537,7 +537,7 @@ class _PostState extends State<Post> {
                    .collection("tags")
                    .orderBy('timestamp',descending: true).get(),
                builder: (context, snapshot) {
-                 if (!snapshot.hasData) {
+                 if (!snapshot.hasData||snapshot.data.docs.isEmpty) {
                    return Container();
                  }
                  else {
