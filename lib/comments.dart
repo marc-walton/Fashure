@@ -103,10 +103,7 @@ class CommentsState extends State<Comments> {
             style: TextStyle(color: Colors.white),
           ),
         ),),
-      body: Container( decoration: BoxDecoration(
-          gradient: fabGradient
-      ) ,
-        alignment: Alignment.center,
+      body: Container(
         child: Column(
           children: <Widget>[
             Expanded(child: buildComments()),
@@ -114,14 +111,14 @@ class CommentsState extends State<Comments> {
             ListTile(
               title: ClipRRect(borderRadius: BorderRadius.circular(30.0),
                 child: TextFormField(
-                  style: TextStyle(color: Colors.white),
+                  // style: TextStyle(color: Colors.white),
 
                   controller: commentController,
                   decoration: InputDecoration(
                     filled: true,
-                    fillColor: kPrimaryColor,
+                    // fillColor: kPrimaryColor,
                     hintText:  "Write a comment...",
-                    hintStyle: TextStyle(color: Colors.white)
+                    // hintStyle: TextStyle(color: Colors.white)
                   ),
 
                 ),

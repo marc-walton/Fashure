@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:curved_splash_screen/curved_splash_screen.dart';
 import 'package:fashow/Product_screen.dart';
+import 'package:fashow/Support/SupportButton.dart';
 import 'package:fashow/chatcached_image.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
@@ -26,6 +27,9 @@ class Post extends StatefulWidget {
   final String postId;
   final String ownerId;
   final String username;
+  final String photoUrl;
+  final String currency;
+
   final String location;
   final String description;
   final List mediaUrl;
@@ -38,7 +42,8 @@ class Post extends StatefulWidget {
     this.location,
     this.description,
     this.mediaUrl,
-    this.likes,
+    this.likes, this.photoUrl, this.currency,
+
   });
 
   factory Post.fromDocument(DocumentSnapshot doc) {
@@ -50,6 +55,10 @@ class Post extends StatefulWidget {
       description: doc.data()['description'],
     mediaUrl: doc.data()['mediaUrl'],
       likes: doc.data()['likes'],
+        currency: doc.data()['currency'],
+        photoUrl: doc.data()['photoUrl'],
+
+
     );
   }
 
@@ -77,6 +86,9 @@ class Post extends StatefulWidget {
     description: this.description,
     mediaUrl: this.mediaUrl,
     likes: this.likes,
+      photoUrl: this.photoUrl,
+      currency: this.currency,
+
     likeCount: getLikeCount(this.likes),
   );
 }
@@ -89,6 +101,9 @@ class _PostState extends State<Post> {
   final String location;
   final String description;
   final List mediaUrl;
+
+  final String photoUrl;
+  final String currency;
   int likeCount;
   Map likes;
   bool isLiked;
@@ -97,7 +112,7 @@ class _PostState extends State<Post> {
   String media;
   int _current = 0;
   final CarouselController _ccontroller = CarouselController();
-  _PostState({
+  _PostState( {
     this.postId,
     this.ownerId,
     this.username,
@@ -106,6 +121,7 @@ class _PostState extends State<Post> {
     this.mediaUrl,
     this.likes,
     this.likeCount,
+    this.photoUrl, this.currency,
   });
 
 
@@ -386,8 +402,9 @@ class _PostState extends State<Post> {
             .collection("tags")
             .orderBy('timestamp',descending: true).snapshots(),
         builder: (context, snapshot) {
-          if (!snapshot.hasData) {
-            return Container();
+          if (!snapshot.hasData || snapshot.data.docs.isEmpty){
+            return
+              Container();
           } else {
             return new ListView.builder(
                 scrollDirection :Axis.horizontal,
@@ -399,6 +416,10 @@ class _PostState extends State<Post> {
                     ownerId: ds['ownerId'],
                     name: ds['name'],
                     usd: ds['usd'],
+                    inr: ds['inr'],
+                    eur: ds['eur'],
+                    gbp: ds['gbp'],
+
                     image: ds['image'],
                     prodId:postId,
 
@@ -421,226 +442,214 @@ class _PostState extends State<Post> {
         });
   }
   buildPostHeader() {
-    return FutureBuilder(
-      future: usersRef.doc(ownerId).get(),
-      builder: (context, snapshot) {
-        if (!snapshot.hasData) {
-          return circularProgress();
-        }
-         Users user = Users.fromDocument(snapshot.data);
-        bool isPostOwner = currentUserId == ownerId;
-        return  Container(
-          margin: EdgeInsets.only(top:1.0,left: 10.0,right: 10.0, bottom: 1.0 ),
-         child: Column(
-           children:  <Widget> [
-             ListTile(
-               leading: GestureDetector(
-                 onTap: () => showProfile(context, profileId: user.id),
+    bool isPostOwner = currentUserId == ownerId;
 
-                 child: CircleAvatar(
-                   backgroundImage: CachedNetworkImageProvider(user.photoUrl),
-                   backgroundColor: Colors.grey,
-                 ),
-               ),
-               title: GestureDetector(
-                 onTap: () => showProfile(context, profileId: user.id),
-                 child: Text(
-                   user.username,
-                   style: TextStyle(
-                     color: kText,
-                     fontWeight: FontWeight.bold,
-                   ),
-                 ),
-               ),
-               subtitle: Text(location,
-                 style: TextStyle(color: kText),),
-               trailing: IconButton(icon: Icon(Icons.more_horiz,color: kText,),
-        onPressed: () {
-          !isPostOwner?showDialog(
-        context: context,
-        builder: (BuildContext context) {
-        return Dialog(
-        backgroundColor: kSecondaryColor,
-        shape: RoundedRectangleBorder(
-        borderRadius:
-        BorderRadius.circular(20.0)), //this right here
-        child: GestureDetector(
-          onTap: (){report();
-          Navigator.pop(context);},
-          child: Container(
-          height: 100,
-          child: Padding(
-          padding: const EdgeInsets.all(12.0),
-          child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-          Container(
+    return  Container(
+      margin: EdgeInsets.only(top:1.0,left: 10.0,right: 10.0, bottom: 1.0 ),
+      child: Column(
+        children:  <Widget> [
+          ListTile(
+            leading: GestureDetector(
+              onTap: () => showProfile(context, profileId: ownerId),
 
-          child: Align(
-          alignment: Alignment.center,
-          child: Text('Report this post?',style: TextStyle(
-              color: Colors.blueAccent,
-              fontWeight: FontWeight.bold,
-              fontSize: 20.0),)),),
+              child: CircleAvatar(
+                backgroundImage: CachedNetworkImageProvider(photoUrl),
+                backgroundColor: Colors.grey,
+              ),
+            ),
+            title: GestureDetector(
+              onTap: () => showProfile(context, profileId: ownerId),
+              child: Text(
+                username,
+                style: TextStyle(
+                  color: kText,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+            subtitle: Text(location,
+              style: TextStyle(color: kText),),
+            trailing: IconButton(icon: Icon(Icons.more_horiz,color: kText,),
+                onPressed: () {
+                  !isPostOwner?showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return Dialog(
+                          backgroundColor: kSecondaryColor,
+                          shape: RoundedRectangleBorder(
+                              borderRadius:
+                              BorderRadius.circular(20.0)), //this right here
+                          child: GestureDetector(
+                            onTap: (){report();
+                            Navigator.pop(context);},
+                            child: Container(
+                              height: 100,
+                              child: Padding(
+                                padding: const EdgeInsets.all(12.0),
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Container(
+
+                                      child: Align(
+                                          alignment: Alignment.center,
+                                          child: Text('Report this post?',style: TextStyle(
+                                              color: Colors.blueAccent,
+                                              fontWeight: FontWeight.bold,
+                                              fontSize: 20.0),)),),
 
 
-          ],
-          ),
-          ),
-          ),
-        ),
-        );
-        // ignore: unnecessary_statements
-        }):handleDeletePost(context);
-        }),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ),
+                        );
+                        // ignore: unnecessary_statements
+                      }):handleDeletePost(context);
+                }),
 
-             ),SizedBox( height:0.0,),
-        GestureDetector(
-        onDoubleTap: handleLikePost,
-        child: Stack(
-        alignment: Alignment.center,
-        children: <Widget>[
+          ),SizedBox( height:0.0,),
+          GestureDetector(
+              onDoubleTap: handleLikePost,
+              child: Stack(
+                alignment: Alignment.center,
+                children: <Widget>[
 //          Text('text',style: TextStyle(color: kText),),
-        ClipRRect(borderRadius: BorderRadius.circular(20.0),
-            child: pics(userid:ownerId,prodid: postId)),
+                  ClipRRect(borderRadius: BorderRadius.circular(20.0),
+                      child: pics(userid:ownerId,prodid: postId)),
 
 //           products(),
 
-        ],
-        )
-        ),
-             Row(
-               mainAxisAlignment: MainAxisAlignment.center,
-               children: mediaUrl.asMap().entries.map((entry) {
-                 return GestureDetector(
-                   onTap: () => _ccontroller.animateToPage(entry.key),
-                   child: Container(
-                     width: 6.0,
-                     height: 6.0,
-                     margin: EdgeInsets.symmetric(vertical: 8.0, horizontal: 4.0),
-                     decoration: BoxDecoration(
-                         shape: BoxShape.circle,
-                         color: (Theme.of(context).brightness == Brightness.dark
-                             ? Colors.white
-                             : Colors.black)
-                             .withOpacity(_current == entry.key ? 0.9 : 0.4)),
-                   ),
-                 );
-               }).toList(),
-             ),
-             FutureBuilder(
-               future:  postsRef
-                   .doc(ownerId)
-                   .collection("userPosts")
-                   .doc(postId)
-                   .collection("tags")
-                   .orderBy('timestamp',descending: true).get(),
-               builder: (context, snapshot) {
-                 if (!snapshot.hasData||snapshot.data.docs.isEmpty) {
-                   return Container();
-                 }
-                 else {
-                   return  Row(
-                     children: [
-                       SizedBox(width:12.0),
-                       GFButton(
-                         color: Colors.black,
-                         shape:  GFButtonShape.pills,
-                         textColor: Colors.black,
-                         type : GFButtonType.outline,
-                         onPressed: viewProducts,
-                         text:"View Products",
-                         icon: Icon(
-                           Icons.add_shopping_cart,
-                           // color: Colors.white,
-                           size: 20.0,
-                         ),
+                ],
+              )
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: mediaUrl.asMap().entries.map((entry) {
+              return GestureDetector(
+                onTap: () => _ccontroller.animateToPage(entry.key),
+                child: Container(
+                  width: 6.0,
+                  height: 6.0,
+                  margin: EdgeInsets.symmetric(vertical: 8.0, horizontal: 4.0),
+                  decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: (Theme.of(context).brightness == Brightness.dark
+                          ? Colors.white
+                          : Colors.black)
+                          .withOpacity(_current == entry.key ? 0.9 : 0.4)),
+                ),
+              );
+            }).toList(),
+          ),
+          FutureBuilder(
+            future:  postsRef
+                .doc(ownerId)
+                .collection("userPosts")
+                .doc(postId)
+                .collection("tags")
+                .orderBy('timestamp',descending: true).get(),
+            builder: (context, snapshot) {
+              if (!snapshot.hasData||snapshot.data.docs.isEmpty) {
+                return Container();
+              }
+              else {
+                return  Row(
+                  children: [
+                    SizedBox(width:12.0),
+                    GFButton(
+                      color: Colors.black,
+                      shape:  GFButtonShape.pills,
+                      textColor: Colors.black,
+                      type : GFButtonType.outline,
+                      onPressed: viewProducts,
+                      text:"View Products",
+                      icon: Icon(
+                        Icons.add_shopping_cart,
+                        // color: Colors.white,
+                        size: 20.0,
+                      ),
 
-                       ),
-                     ],
-                   );
-                 }
-               },
-             ),
-             SizedBox( height:3.0,),
-             Row(
-               crossAxisAlignment: CrossAxisAlignment.start,
-               children: <Widget>[
-                 Container(
-                   padding: EdgeInsets.only(bottom: 10.0),
-                   margin: EdgeInsets.only(left: 20.0),
-                   child: Text(
-                     "$description ",
-                     style: TextStyle(
-                       color: kText,
-                       fontWeight: FontWeight.bold,
-                     ),
-                   ),
-                 ),
+                    ),
+                  ],
+                );
+              }
+            },
+          ),
+          SizedBox( height:3.0,),
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              Container(
+                padding: EdgeInsets.only(bottom: 10.0),
+                margin: EdgeInsets.only(left: 20.0),
+                child: Text(
+                  "$description ",
+                  style: TextStyle(
+                    color: kText,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
 //                 Expanded(child: Text(description, style: TextStyle(color: kGrey),))
-               ],
-             ),
-             Row(
-               mainAxisAlignment: MainAxisAlignment.start,
-               children: <Widget>[
-                 Padding(padding: EdgeInsets.only(top: 40.0, left: 20.0)),
-                 FloatingActionButton(
-                   heroTag: 'null',
-                   backgroundColor: Colors.white,
+            ],
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: <Widget>[
+              Padding(padding: EdgeInsets.only(top: 40.0, left: 20.0)),
 
-                   mini: true,
-                   shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(16.0))),
-                   onPressed: handleLikePost,
-                   child:
-                   ImageIcon(
-                     isLiked ?  AssetImage("assets/img/clap-hands.png"):AssetImage("assets/img/clap.png"),
-                     color: kText,
-                   ),
-                 ),
-//                Padding(padding: EdgeInsets.only(right: 1.0)),
-                 Container(
+              GestureDetector(
+                onTap: handleLikePost,
+
+                child: ImageIcon(
+                  isLiked ?  AssetImage("assets/img/clap-hands.png"):AssetImage("assets/img/clap.png"),
+                  color: kText,
+                ),
+              ),
+              SizedBox(width: 5.0,),
+              Container(
 //                  margin: EdgeInsets.only(left: 20.0),
-                   child: Text(
-                     "$likeCount ",
-                     style: TextStyle(
-                       color: Colors.black,
-                       fontSize: 15.0,
+                child: Text(
+                  "$likeCount ",
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 15.0,
 //                      fontWeight: FontWeight.bold,
-                     ),
-                   ),
-                 ),
-                 Padding(padding: EdgeInsets.only(right: 20.0)),
-                 FloatingActionButton(
-                   heroTag: null,
-                   backgroundColor: Colors.white,
+                  ),
+                ),
+              ),
+              Padding(padding: EdgeInsets.only(right: 20.0)),
+              GestureDetector(
+                onTap: () => showComments(
+                  context,
+                  postId: postId,
+                  ownerId: ownerId,
+                  mediaUrl: mediaUrl.first,
+                ),
+                child: Icon(
+                  Icons.mode_comment_outlined,
+                  size: 28.0,
+                  color: kText,
+                ),
 
-                   mini: true,
-                   shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(16.0))),
-                   onPressed: () => showComments(
-                     context,
-                     postId: postId,
-                     ownerId: ownerId,
-                     mediaUrl: mediaUrl.first,
-                   ),
-                   child: Icon(
-                     Icons.chat,
-                     size: 28.0,
-                     color: kText,
-                   ),
-                 ),
-
-               ],
-             ),
+              ),
+Spacer(),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: SupportButton(userId: ownerId,displayName: username,currency: currency,imgUrl: photoUrl,mediaUrl: mediaUrl.first,),
+              ),
+            ],
+          ),
 
 //            SizedBox( height:10.0,),
 
-           ],
-         ) ,
+        ],
+      ) ,
 
 
-        );
-      },
     );
   }
 
@@ -676,9 +685,16 @@ class TagItem extends StatelessWidget {
   final String image ;
   final String name;
   final usd ;
-  var currencyFormatter = NumberFormat('#,##0.00', );
+  final inr ;
+  final gbp ;
+  final eur ;
 
-  TagItem({this.ownerId,this.prodId,this.Id,this.image,this.name,this.usd});
+  var currencyFormatter =      currentUser.currency == "USD"? NumberFormat('#,##0.00', ):
+  currentUser.currency == "INR"?NumberFormat.currency(locale:"HI"):
+  currentUser.currency == "EUR"? NumberFormat.currency(locale:" ${currentUser.currencyISO}"):
+  currentUser.currency == "GBP"?NumberFormat.currency(locale:" ${currentUser.currencyISO}"): NumberFormat('#,##0.00', );
+
+  TagItem({this.ownerId,this.prodId,this.Id,this.image,this.name,this.usd, this.inr, this.gbp, this.eur});
 
   @override
   Widget build(BuildContext context) {
@@ -713,7 +729,12 @@ class TagItem extends StatelessWidget {
               ),
               Row(
                 children: [
-                  Text("\u0024 ${currencyFormatter.format(usd)}",),
+                  currentUser.currency == "USD"?Text("\u0024 ${currencyFormatter.format(usd)}",):
+                  currentUser.currency == "INR"?Text("₹ ${currencyFormatter.format(inr)}",):
+                  currentUser.currency == "EUR"?Text("€ ${currencyFormatter.format(eur)}",):
+                  currentUser.currency == "GBP"?Text("£ ${currencyFormatter.format(gbp)}",):Text("\u0024 ${currencyFormatter.format(usd)}",),
+
+
                 ],
               ),
 

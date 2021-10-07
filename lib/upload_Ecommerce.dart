@@ -10021,8 +10021,9 @@ color(){
             .collection("tags")
             .orderBy('timestamp',descending: true).snapshots(),
         builder: (context, snapshot) {
-          if (!snapshot.hasData) {
-            return Container();
+          if (!snapshot.hasData || snapshot.data.docs.isEmpty){
+            return
+              Container();
           } else {
             return new ListView.builder(
                 itemCount: snapshot.data.docs.length,
@@ -10033,7 +10034,11 @@ color(){
                    ownerId: ds['ownerId'],
                    name: ds['name'],
                    usd: ds['usd'],
-                   image: ds['image'],
+                    inr: ds['inr'],
+                    eur: ds['eur'],
+                    gbp: ds['gbp'],
+
+                    image: ds['image'],
                     prodId: prodId,
 
                   );
@@ -11193,7 +11198,7 @@ page2(){
               "color9":int.tryParse(colorController91.text) ?? 0,
               "color10":int.tryParse(colorController10.text) ?? 0,
               "country":  currentUser.country,
-"currency":  currentUser.currencyISO,
+"currency":  currentUser.currency,
 
                "worldship":worldship,
                "freeworldship":freeworldship,
@@ -11760,9 +11765,16 @@ class TagItem extends StatelessWidget {
  final String image ;
  final String name;
  final usd ;
-  var currencyFormatter = NumberFormat('#,##0.00', );
+ final inr ;
+ final gbp ;
+ final eur ;
 
-  TagItem({this.ownerId,this.prodId,this.Id,this.image,this.name,this.usd});
+ var currencyFormatter =      currentUser.currency == "USD"? NumberFormat('#,##0.00', ):
+ currentUser.currency == "INR"?NumberFormat.currency(locale:"HI"):
+ currentUser.currency == "EUR"? NumberFormat.currency(locale:" ${currentUser.currencyISO}"):
+ currentUser.currency == "GBP"?NumberFormat.currency(locale:" ${currentUser.currencyISO}"): NumberFormat('#,##0.00', );
+
+ TagItem({this.ownerId,this.prodId,this.Id,this.image,this.name,this.usd, this.inr, this.gbp, this.eur});
 
   delete(){
   var  docReference =  FirebaseFirestore.instance
@@ -11793,12 +11805,16 @@ class TagItem extends StatelessWidget {
     fontWeight: FontWeight.bold))
     ],
     ),
-    Row(
-    children: [
-    Text("\u0024 ${currencyFormatter.format(usd)}",),
-    ],
-    ),
+      Row(
+        children: [
+          currentUser.currency == "USD"?Text("\u0024 ${currencyFormatter.format(usd)}",):
+          currentUser.currency == "INR"?Text("₹ ${currencyFormatter.format(inr)}",):
+          currentUser.currency == "EUR"?Text("€ ${currencyFormatter.format(eur)}",):
+          currentUser.currency == "GBP"?Text("£ ${currencyFormatter.format(gbp)}",):Text("\u0024 ${currencyFormatter.format(usd)}",),
 
+
+        ],
+      ),
     ]),
     ),
         Positioned(

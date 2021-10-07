@@ -103,8 +103,9 @@ class _UploadCollState extends State<UploadColl>
             .collection("tags")
             .orderBy('timestamp',descending: true).snapshots(),
         builder: (context, snapshot) {
-          if (!snapshot.hasData) {
-            return Container();
+          if (!snapshot.hasData || snapshot.data.docs.isEmpty){
+            return
+              Container();
           } else {
             return new ListView.builder(
                 itemCount: snapshot.data.docs.length,
@@ -115,6 +116,10 @@ class _UploadCollState extends State<UploadColl>
                     ownerId: ds['ownerId'],
                     name: ds['name'],
                     usd: ds['usd'],
+                    inr: ds['inr'],
+                    eur: ds['eur'],
+                    gbp: ds['gbp'],
+
                     image: ds['image'],
                     prodId: CollId,
 
@@ -523,7 +528,7 @@ Carousel(){
           "ownerId": widget.currentUser.id,
           "username": widget.currentUser.displayName,
           "photoUrl": widget.currentUser.photoUrl,
-         // "headerImage":headerImage,
+           "currency":  currentUser.currency,
           "title": titleController.text,
           "source": sourceController.text,
           "timestamp": timestamp,
@@ -1053,9 +1058,16 @@ class TagItem extends StatelessWidget {
   final String image ;
   final String name;
   final usd ;
-  var currencyFormatter = NumberFormat('#,##0.00', );
+  final inr ;
+  final gbp ;
+  final eur ;
 
-  TagItem({this.ownerId,this.prodId,this.Id,this.image,this.name,this.usd});
+  var currencyFormatter =      currentUser.currency == "USD"? NumberFormat('#,##0.00', ):
+  currentUser.currency == "INR"?NumberFormat.currency(locale:"HI"):
+  currentUser.currency == "EUR"? NumberFormat.currency(locale:" ${currentUser.currencyISO}"):
+  currentUser.currency == "GBP"?NumberFormat.currency(locale:" ${currentUser.currencyISO}"): NumberFormat('#,##0.00', );
+
+  TagItem({this.ownerId,this.prodId,this.Id,this.image,this.name,this.usd, this.inr, this.gbp, this.eur});
 
   delete(){
     var  docReference =      collRef .doc(currentUser.id)
@@ -1086,7 +1098,12 @@ class TagItem extends StatelessWidget {
               ),
               Row(
                 children: [
-                  Text("\u0024 ${currencyFormatter.format(usd)}",),
+                  currentUser.currency == "USD"?Text("\u0024 ${currencyFormatter.format(usd)}",):
+                  currentUser.currency == "INR"?Text("₹ ${currencyFormatter.format(inr)}",):
+                  currentUser.currency == "EUR"?Text("€ ${currencyFormatter.format(eur)}",):
+                  currentUser.currency == "GBP"?Text("£ ${currencyFormatter.format(gbp)}",):Text("\u0024 ${currencyFormatter.format(usd)}",),
+
+
                 ],
               ),
 

@@ -1,3 +1,4 @@
+import 'package:fashow/Support/SupportButton.dart';
 import 'package:fashow/chatcached_image.dart';
 import 'package:fashow/size_config.dart';
 import 'package:firebase_storage/firebase_storage.dart';
@@ -7,7 +8,7 @@ import 'package:fashow/collcomments.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-//import 'package:flutter_svg/svg.dart';
+import 'package:fashow/model/tags.dart';
 import 'package:fashow/user.dart';
 import 'package:fashow/progress.dart';
 import 'package:fashow/HomePage.dart';
@@ -33,7 +34,8 @@ class Coll extends StatefulWidget {
   // List<NetworkImage> _listOfImages = <NetworkImage>[];
 
   final String title;
-   final String headerImage;
+   final String currency;
+final String photoUrl;
 
   final String source;
   final dynamic likes;
@@ -46,13 +48,15 @@ int index;
     this.title,
     this.source,
     this.likes,
-    this.headerImage,
+    this.photoUrl,
+
+    this.currency,
   });
 
   factory Coll.fromDocument(DocumentSnapshot doc) {
 
     return Coll(
-     headerImage:doc.data()['headerImage'],
+     currency:doc.data()['currency'],
       collId: doc.data()['collId'],
       ownerId: doc.data()['ownerId'],
       username: doc.data()['username'],
@@ -60,6 +64,8 @@ int index;
       title: doc.data()['title'],
       source:doc.data()['source'],
       likes: doc.data()['claps'],
+      photoUrl: doc.data()['photoUrl'],
+
     );
   }
 
@@ -87,6 +93,8 @@ int index;
     title: this.title,
     source:this.source,
     likes: this.likes,
+    photoUrl: this.photoUrl,
+
     likeCount: getLikeCount(this.likes),
   );
 }
@@ -96,7 +104,8 @@ class _CollState extends State<Coll> {
   final String collId;
   final String ownerId;
   final String username;
-   final String headerImage;
+   final String currency;
+final String photoUrl;
 
   final List collmediaUrl;
   final String title;
@@ -118,7 +127,9 @@ class _CollState extends State<Coll> {
     this.likes,
     this.source,
     this.likeCount,
-    this.headerImage,
+    this.currency,
+    this.photoUrl,
+
   });
 
   @override
@@ -395,8 +406,9 @@ return
             .collection("tags")
             .orderBy('timestamp',descending: true).snapshots(),
         builder: (context, snapshot) {
-          if (!snapshot.hasData) {
-            return Container();
+          if (!snapshot.hasData || snapshot.data.docs.isEmpty){
+            return
+              Container();
           } else {
             return new ListView.builder(
                 scrollDirection :Axis.horizontal,
@@ -408,6 +420,10 @@ return
                     ownerId: ds['ownerId'],
                     name: ds['name'],
                     usd: ds['usd'],
+                    inr: ds['inr'],
+                    eur: ds['eur'],
+                    gbp: ds['gbp'],
+
                     image: ds['image'],
                     prodId: collId,
 
@@ -431,214 +447,196 @@ return
         });
   }
 buildPostHeader() {
+  bool isPostOwner = currentUserId == ownerId;
+  return  ListView(
+      shrinkWrap: true,
+      scrollDirection:Axis.vertical,
 
-    return
-      FutureBuilder(
-        future: usersRef.doc(ownerId).get(),
-        builder: (context, snapshot) {
-          // int count = snapshot.data.lenght;
-          if (!snapshot.hasData) {
-            return circularProgress();
-          }
-           Users user = Users.fromDocument(snapshot.data);
-         bool isPostOwner = currentUserId == ownerId;
-          return  ListView(
-            shrinkWrap: true,
-scrollDirection:Axis.vertical,
-
-    children: [Column(
-      children: <Widget>[
-    ListTile(
-    leading:  GestureDetector(
-      onTap: () => showProfile(context, profileId: user.id),
-      child: CircleAvatar(
-      backgroundImage: CachedNetworkImageProvider(user.photoUrl),
-      backgroundColor: Colors.grey,
-      ),
-    ),
-    title:  GestureDetector(
-      onTap: () => showProfile(context, profileId: user.id),
-      child: Text(
-      user.displayName,
-      style: TextStyle(
-      color:kText,
-      fontWeight: FontWeight.bold,
-      ),
-      ),
-    ),
-      trailing: IconButton(icon: Icon(Icons.more_horiz,color:kText,),
-          onPressed: () {
-            !isPostOwner?showDialog(
-                context: context,
-                builder: (BuildContext context) {
-                  return Dialog(
-                    backgroundColor: kSecondaryColor,
-                    shape: RoundedRectangleBorder(
-                        borderRadius:
-                        BorderRadius.circular(20.0)), //this right here
-                    child: GestureDetector(
-                      onTap: (){report();
-                      Navigator.pop(context);},
-                      child: Container(
-                        height: 100,
-                        child: Padding(
-                          padding: const EdgeInsets.all(12.0),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Container(
-
-                                child: Align(
-                                    alignment: Alignment.center,
-                                    child: Text('Report this post?',style: TextStyle(
-                                        color: Colors.blueAccent,
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 20.0),)),),
-
-                            ],
-                          ),
-                        ),
-                      ),
-                    ),
-                  );
-                  // ignore: unnecessary_statements
-                }):handleDeletePost(context);
-          }),
-    ),
+      children: [Column(
+        children: <Widget>[
           ListTile(
-          leading:
-   Text(title,
-      style: TextStyle(
-      color: kText,
-      fontWeight: FontWeight.bold,
-      ),),
-    ),
-
-        pics()  ,
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: collmediaUrl.asMap().entries.map((entry) {
-            return GestureDetector(
-              onTap: () => _ccontroller.animateToPage(entry.key),
-              child: Container(
-                width: 6.0,
-                height: 6.0,
-                margin: EdgeInsets.symmetric(vertical: 8.0, horizontal: 4.0),
-                decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    color: (Theme.of(context).brightness == Brightness.dark
-                        ? Colors.white
-                        : Colors.black)
-                        .withOpacity(_current == entry.key ? 0.9 : 0.4)),
+            leading:  GestureDetector(
+              onTap: () => showProfile(context, profileId: ownerId),
+              child: CircleAvatar(
+                backgroundImage: CachedNetworkImageProvider(photoUrl),
+                backgroundColor: Colors.grey,
               ),
-            );
-          }).toList(),
-        ),
-        FutureBuilder(
-          future:  collRef
-              .doc(ownerId)
-              .collection("userCollections")
-              .doc(collId)
-              .collection("tags")
-              .orderBy('timestamp',descending: true).get(),
-          builder: (context, snapshot) {
-            if (!snapshot.hasData||snapshot.data.docs.isEmpty) {
-              return Container();
-            }
-            else {
-              return  Row(
-                children: [
-                  SizedBox(width:12.0),
-                  GFButton(
-                    color: Colors.black,
-                    shape:  GFButtonShape.pills,
-                    textColor: Colors.black,
-                    type : GFButtonType.outline,
-                    onPressed: viewProducts,
-                    text:"View Products",
-                    icon: Icon(
-                      Icons.add_shopping_cart,
-                      // color: Colors.white,
-                      size: 20.0,
-                    ),
+            ),
+            title:  GestureDetector(
+              onTap: () => showProfile(context, profileId:ownerId),
+              child: Text(
+                username,
+                style: TextStyle(
+                  color:kText,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+            trailing: IconButton(icon: Icon(Icons.more_horiz,color:kText,),
+                onPressed: () {
+                  !isPostOwner?showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return Dialog(
+                          backgroundColor: kSecondaryColor,
+                          shape: RoundedRectangleBorder(
+                              borderRadius:
+                              BorderRadius.circular(20.0)), //this right here
+                          child: GestureDetector(
+                            onTap: (){report();
+                            Navigator.pop(context);},
+                            child: Container(
+                              height: 100,
+                              child: Padding(
+                                padding: const EdgeInsets.all(12.0),
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Container(
 
-                  ),
-                ],
+                                      child: Align(
+                                          alignment: Alignment.center,
+                                          child: Text('Report this post?',style: TextStyle(
+                                              color: Colors.blueAccent,
+                                              fontWeight: FontWeight.bold,
+                                              fontSize: 20.0),)),),
+
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ),
+                        );
+                        // ignore: unnecessary_statements
+                      }):handleDeletePost(context);
+                }),
+          ),
+          ListTile(
+            leading:
+            Text(title,
+              style: TextStyle(
+                color: kText,
+                fontWeight: FontWeight.bold,
+              ),),
+          ),
+
+          pics()  ,
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: collmediaUrl.asMap().entries.map((entry) {
+              return GestureDetector(
+                onTap: () => _ccontroller.animateToPage(entry.key),
+                child: Container(
+                  width: 6.0,
+                  height: 6.0,
+                  margin: EdgeInsets.symmetric(vertical: 8.0, horizontal: 4.0),
+                  decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: (Theme.of(context).brightness == Brightness.dark
+                          ? Colors.white
+                          : Colors.black)
+                          .withOpacity(_current == entry.key ? 0.9 : 0.4)),
+                ),
               );
-            }
-          },
-        ),
-        ListTile(
-          leading: Text(source,
-            style: TextStyle(
-              color:kText,
-              fontWeight: FontWeight.bold,
-            ),),
-        ),
+            }).toList(),
+          ),
+          FutureBuilder(
+            future:  collRef
+                .doc(ownerId)
+                .collection("userCollections")
+                .doc(collId)
+                .collection("tags")
+                .orderBy('timestamp',descending: true).get(),
+            builder: (context, snapshot) {
+              if (!snapshot.hasData||snapshot.data.docs.isEmpty) {
+                return Container();
+              }
+              else {
+                return  Row(
+                  children: [
+                    SizedBox(width:12.0),
+                    GFButton(
+                      color: Colors.black,
+                      shape:  GFButtonShape.pills,
+                      textColor: Colors.black,
+                      type : GFButtonType.outline,
+                      onPressed: viewProducts,
+                      text:"View Products",
+                      icon: Icon(
+                        Icons.add_shopping_cart,
+                        // color: Colors.white,
+                        size: 20.0,
+                      ),
 
-    Row(
+                    ),
+                  ],
+                );
+              }
+            },
+          ),
+          ListTile(
+            leading: Text(source,
+              style: TextStyle(
+                color:kText,
+                fontWeight: FontWeight.bold,
+              ),),
+          ),
 
-    mainAxisAlignment: MainAxisAlignment.start,
-    children: <Widget>[
-    Padding(padding: EdgeInsets.only(top: 40.0, left: 20.0)),
-    FloatingActionButton(
-      heroTag: 'cfg',
-      backgroundColor: Colors.white,
+          Row(
 
-      mini: true,
-    shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(16.0))),
-    onPressed: handleLikePost,
-    child:
-    ImageIcon(
-    isLiked ? AssetImage("assets/img/clap-hands.png"):AssetImage("assets/img/clap.png"),
-    color: kGrey,
-    ),
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: <Widget>[
+              Padding(padding: EdgeInsets.only(top: 40.0, left: 20.0)),
+              GestureDetector(
+                onTap: handleLikePost,
 
-    ),//                Padding(padding: EdgeInsets.only(right: 1.0)),
-    Container(
+                child: ImageIcon(
+                  isLiked ?  AssetImage("assets/img/clap-hands.png"):AssetImage("assets/img/clap.png"),
+                  color: kText,
+                ),
+              ),
+              SizedBox(width: 5.0,),
+              Container(
 //                  margin: EdgeInsets.only(left: 20.0),
-    child: Text(
-    "$likeCount ",
-    style: TextStyle(
-    color: kText,
-    fontSize: 15.0,
+                child: Text(
+                  "$likeCount ",
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 15.0,
 //                      fontWeight: FontWeight.bold,
-    ),
-    ),
-    ),
-    Padding(padding: EdgeInsets.only(right: 20.0)),
-      FloatingActionButton(
-        heroTag: null,
-        backgroundColor: Colors.white,
+                  ),
+                ),
+              ),
+              Padding(padding: EdgeInsets.only(right: 20.0)),
+              GestureDetector(
+                onTap: () => showComments(
+                  context,
+                  collId: collId,
+                  ownerId: ownerId,
+                  mediaUrl: collmediaUrl.first,
+                ),
+                child: Icon(
+                  Icons.mode_comment_outlined,
+                  size: 28.0,
+                  color: kText,
+                ),
 
-        mini: true,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(16.0))),
-        onPressed: () => showComments(
-          context,
-          collId: collId,
-          ownerId: ownerId,
-          mediaUrl: headerImage,
-        ),
-        child:
-        Icon(
-          Icons.chat,
-          size: 28.0,
-          color: kGrey,
-        ),
-      ),//
+              ),
+              Spacer(),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: SupportButton(userId: ownerId,displayName: username,currency: currency,imgUrl: photoUrl,mediaUrl: collmediaUrl.first,),
+              ),
+            ],
+          ),
+        ],
 
-    ],
-    ),
-    ],
+      ),
 
-    ),
+      ]
+  );
 
-]
-          );
-
-        },
-      );
   }
 
   @override
@@ -658,59 +656,4 @@ showComments(BuildContext context,
      blogMediaUrl: mediaUrl,
     );
   }));
-}
-class TagItem extends StatelessWidget {
-  final String ownerId ;
-  final String prodId ;
-
-  final String Id ;
-  final String image ;
-  final String name;
-  final usd ;
-  var currencyFormatter = NumberFormat('#,##0.00', );
-
-  TagItem({this.ownerId,this.prodId,this.Id,this.image,this.name,this.usd});
-
-  @override
-  Widget build(BuildContext context) {
-    return Stack(
-        children:[
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Column(children:[
-              Container(
-                height: MediaQuery.of(context).size.height/3 * 1.2,
-                child: InkWell(
-                  onTap: () => Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => ProductScreen(
-                        prodId: Id,
-                        userId: ownerId,
-                      ),
-                    ),
-                  ),
-                  child: ClipRRect(
-                      borderRadius: BorderRadius.circular(20.0),
-                      child: CachedImage(image)),
-                ),
-              ),
-              Row(
-                children: [
-                  Text(name,
-                      style: TextStyle(color: kText,
-                          fontWeight: FontWeight.bold))
-                ],
-              ),
-              Row(
-                children: [
-                  Text("\u0024 ${currencyFormatter.format(usd)}",),
-                ],
-              ),
-
-            ]),
-          ),
-        ]
-    );
-  }
 }

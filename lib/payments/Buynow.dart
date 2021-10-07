@@ -544,6 +544,7 @@ class _BuyNowState extends State<BuyNow> {
 
       });
     }
+
     else if(widget.size=='XXXL'){
       xxxl--;
       FirebaseFirestore.instance.collection('products')

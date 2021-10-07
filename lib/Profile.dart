@@ -1,5 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:fashow/Live/Live.dart';
+import 'package:fashow/Support/SupportButton.dart';
 import 'package:fashow/chat_screen.dart';
 import 'package:fashow/chatcached_image.dart';
 import 'package:fashow/clientreview.dart';
@@ -686,7 +688,7 @@ else{
 
         Text(
           count.toString(),
-          style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.bold,
+          style: TextStyle(fontSize: MediaQuery.of(context).size.width/30, fontWeight: FontWeight.bold,
           color: kIcon),
         ),
 
@@ -696,8 +698,8 @@ else{
               label,
               style: TextStyle(
                   color: kGrey,
-                  fontSize: 15.0,
-                  fontWeight: FontWeight.w400),
+                  fontSize: MediaQuery.of(context).size.width/40,
+                 ),
             ),
           ),
     ],
@@ -821,7 +823,35 @@ Widget rev(){
     bool isProfileOwner = currentUserId == widget.profileId;
     if (isProfileOwner) {
       return
-      Container();
+        GestureDetector(
+            onTap: () {  Navigator.push(context, MaterialPageRoute(builder: (context) =>EditProfile(currentUserId:widget.profileId))); },
+
+          child:Column(
+            children: <Widget>[
+              Container(
+                width: MediaQuery.of(context).size.width/4,
+                height: MediaQuery.of(context).size.height/20,
+
+                margin: EdgeInsets.only(top:10.0,left: 10.0,right: 10.0, bottom: 10.0 ),
+                decoration: BoxDecoration(borderRadius: BorderRadius.circular(10.0),
+                  color: Colors.grey.withOpacity(0.3),
+                  // boxShadow: [BoxShadow(color: Colors.black)],
+                ),
+                child:     Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+
+                  children: [
+                    Icon(EvaIcons.settings2Outline,color: Colors.black,),
+                    Text('Settings',style: TextStyle(color:  Colors.black),),
+                  ],
+                ),
+
+              ),
+
+            ],
+          ),
+        );
+
 
     }
 
@@ -838,18 +868,18 @@ Widget rev(){
                 child: Column(
                   children: <Widget>[
                     Container(
-                      height: 45,
-                      width: 45,
+                      width: MediaQuery.of(context).size.width/10,
+                      height: MediaQuery.of(context).size.height/20,
 
                       margin: EdgeInsets.only(top:10.0,left: 10.0,right: 10.0, bottom: 10.0 ),
                       decoration: BoxDecoration(borderRadius: BorderRadius.circular(10.0),
-                        color: kblue,
-                        boxShadow: [BoxShadow(color: kblue)],
+                        color: Colors.grey.withOpacity(0.3),
+
                       ),
-                     child:Icon(EvaIcons.personDeleteOutline,color: Colors.white,),
+                     child:Icon(EvaIcons.personDeleteOutline,color: Colors.black,),
                     ),
                     Container(
-                      child: Text('UnFollow',style: TextStyle(color: kGrey),),
+                      child: Text('unfollow',style: TextStyle(color: kGrey,fontSize: MediaQuery.of(context).size.width/30,)),
                     )
                   ],
                 ),
@@ -868,18 +898,18 @@ Widget rev(){
                 child: Column(
                   children: <Widget>[
                     Container(
-                      height: 45,
-                      width: 45,
+                      width: MediaQuery.of(context).size.width/10,
+                      height: MediaQuery.of(context).size.height/20,
 
                       margin: EdgeInsets.only(top:10.0,left: 10.0,right: 10.0, bottom: 10.0 ),
                       decoration: BoxDecoration(borderRadius: BorderRadius.circular(10.0),
-                        color: kblue,
-                        boxShadow: [BoxShadow(color: kblue)],
+                        color: Colors.grey.withOpacity(0.3),
+
                       ),
-                      child:Icon(EvaIcons.emailOutline,color: Colors.white,),
+                      child:Icon(EvaIcons.emailOutline,color: Colors.black,),
                     ),
                     Container(
-                      child: Text('Message',style: TextStyle(color: kGrey),),
+                      child: Text('Message',style: TextStyle(color: kGrey,fontSize: MediaQuery.of(context).size.width/30,),),
                     )
                   ],
                 ),
@@ -898,20 +928,25 @@ Widget rev(){
           child:Column(
             children: <Widget>[
               Container(
-                height: 45,
-                width: 45,
+                width: MediaQuery.of(context).size.width/4,
+                height: MediaQuery.of(context).size.height/20,
 
                 margin: EdgeInsets.only(top:10.0,left: 10.0,right: 10.0, bottom: 10.0 ),
                 decoration: BoxDecoration(borderRadius: BorderRadius.circular(10.0),
-                  color: kblue,
-                  boxShadow: [BoxShadow(color: kblue)],
+                  color: Colors.grey.withOpacity(0.3),
+                  // boxShadow: [BoxShadow(color: Colors.black)],
                 ),
-                child:     Icon(EvaIcons.personAddOutline,color: Colors.white,size: 30.0,),
+                child:     Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+
+                  children: [
+                    Icon(EvaIcons.personAddOutline,color: Colors.black,),
+                    Text('Follow',style: TextStyle(color:  Colors.black),),
+                  ],
+                ),
 
               ),
-              Container(
-                child: Text('Follow',style: TextStyle(color: kGrey),),
-              )
+
             ],
           ),
         );
@@ -1011,8 +1046,8 @@ Widget rev(){
                   imageBuilder: (context, imageProvider) => ClipRRect(
                     borderRadius:BorderRadius.all(Radius.circular(10.0)),
                     child: Container(
-                      width: 92.0,
-                      height: 92.0,
+                      width: MediaQuery.of(context).size.width/2.5,
+                      height: MediaQuery.of(context).size.height/5,
                       decoration: BoxDecoration(
                         shape: BoxShape.rectangle,
                         image: DecorationImage(
@@ -1021,68 +1056,90 @@ Widget rev(){
                     ),
                   ),
                 ),
-                Row(   mainAxisSize: MainAxisSize.max,
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    buildCountColumn("Clients", client),
-                    SizedBox(width: 10.0,),
+                    SizedBox(width:MediaQuery.of(context).size.width/50),
+                    Column(
+                      children: [
+                        Text(
+                              user.displayName,
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: MediaQuery.of(context).size.width/20,
+                                color:kText,
+                              ),
+                            ),
+                        Text(
+                                user.country,
+                                style:TextStyle(color: kGrey,),
+                              ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: <Widget>[
+                            buildProfileButton(),
+                          ],
+                        ),
+
+                      ],
+                    ),
+
+
+              ]),
+              SizedBox(height: 10.0,),
+
+              Row(   mainAxisSize: MainAxisSize.max,
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  buildCountColumn("Clients", client),
 
                   buildCountColumn("followers", followerCount),
-                    SizedBox(width: 10.0,),
 
                   buildCountColumn("following", followingCount),
+
                 ],),
-              ]),
-          ListTile(
-            title:     Text(
-              user.displayName,
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 26.0,
-                color:kText,
-              ),
-            ),
-            subtitle:                   Container(
 
-              padding: EdgeInsets.only(top: 2.0),
-              child: Text(
-                user.bio,
-                style:TextStyle(color: kGrey,),
-              ),
-            ),
-
-            trailing:GestureDetector(
-              onTap: () async
-              {
-                Navigator.push(context, MaterialPageRoute(builder: (context) =>
-                    ClientReview(profileId: widget.profileId, )));
-              },
-
-              child: Container(
-                alignment: Alignment.center,
-
-                decoration: BoxDecoration(borderRadius: BorderRadius.circular(10.0),
-                  color: kText,
-                  boxShadow: [BoxShadow(color: kText)],
-                ),
-                height: 45,
-                width: 85,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Icon(Icons.favorite,color: Colors.pink,),
-
-                    Text('Rating',style: TextStyle(color: Colors.white),),
-                  ],
-                ),
-              ),
-            ),
-          ),
 SizedBox(height: 10.0,),
               Row(
+                children: [
+                  ExpandableText(user.bio),
+                ],
+              ),
+              SizedBox(height: 10.0,),
+              Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: <Widget>[
-                  buildProfileButton(),
+
+                children: [
+                  GestureDetector(
+                    onTap: () async
+                    {
+                      Navigator.push(context, MaterialPageRoute(builder: (context) =>
+                          ClientReview(profileId: widget.profileId, )));
+                    },
+                    child:Column(
+                      children: <Widget>[
+                        Container(
+                          width: MediaQuery.of(context).size.width/4,
+                          height: MediaQuery.of(context).size.height/20,
+
+                          margin: EdgeInsets.only(top:10.0,left: 10.0,right: 10.0, bottom: 10.0 ),
+                          decoration: BoxDecoration(borderRadius: BorderRadius.circular(10.0),
+                            color: Colors.grey.withOpacity(0.3),
+                            // boxShadow: [BoxShadow(color: Colors.black)],
+                          ),
+                          child:     Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+
+                            children: [
+                              Icon(EvaIcons.heartOutline,color: Colors.black,),
+                              Text('Rating',style: TextStyle(color:  Colors.black),),
+                            ],
+                          ),
+
+                        ),
+
+                      ],
+                    ),
+                  ),
+                  SupportButton(userId: widget.profileId,displayName: user.username,imgUrl: user.photoUrl,mediaUrl: user.photoUrl,currency: user.currency,)
+
                 ],
               ),
 
@@ -1208,11 +1265,7 @@ SizedBox(height: 10.0,),
 
       appBar: AppBar(
         backgroundColor: kPrimaryColor,
-        actions: <Widget>[
-          isProfileOwner ?
-              IconButton(            onPressed: () {  Navigator.push(context, MaterialPageRoute(builder: (context) =>EditProfile(currentUserId:widget.profileId))); },
-                  icon:Icon(EvaIcons.settings2Outline,color: Colors.white,))
-        :Container(),        ],
+
         title: FittedBox(
           fit: BoxFit.contain,
           child: Text(
@@ -1229,54 +1282,56 @@ SizedBox(height: 10.0,),
           children: <Widget>[
             buildProfileHeader(),
 
-            Divider(),
-            Container(
-              color:Colors.grey.shade200,
-              child: DefaultTabController(
-                length: 4,
-                child: SizedBox(
-                  height:   MediaQuery
-                      .of(context)
-                      .size
-                      .height/1.55,
-                  child: Column(
-                    children: <Widget>[
-                     TabBar(
-                       ///filled
-                       labelStyle:TextStyle(fontFamily: "AlteroDCURegular" ),
-                       ///outline
-                       unselectedLabelStyle:TextStyle(fontFamily:"AlteroDCU" ),
-                       isScrollable:true,
-                       indicatorWeight : 0.1,
-                        tabs: [
-                          Tab( child: Text("Posts",style: TextStyle(color:Colors.black),)),
-                          Tab( child: Text("Shop",style: TextStyle(color:Colors.black),)),
-                          Tab( child: Text("Collections",style: TextStyle(color:Colors.black),)),
-                          Tab( child: Text("Editorial",style: TextStyle(color:Colors.black),)),
+            ClipRRect(
+              borderRadius: BorderRadius.only(topLeft: Radius.circular(40.0),topRight: Radius.circular(40.0)),
+              child: Container(
+                color:Colors.grey.shade200,
+                child: DefaultTabController(
+                  length: 4,
+                  child: SizedBox(
+                    height:   MediaQuery
+                        .of(context)
+                        .size
+                        .height/1.55,
+                    child: Column(
+                      children: <Widget>[
+                       TabBar(
+                         ///filled
+                         labelStyle:TextStyle(fontFamily: "AlteroDCURegular" ),
+                         ///outline
+                         unselectedLabelStyle:TextStyle(fontFamily:"AlteroDCU" ),
+                         isScrollable:true,
+                         indicatorWeight : 0.1,
+                          tabs: [
+                            Tab( child: Text("Posts",style: TextStyle(color:Colors.black),)),
+                            Tab( child: Text("Shop",style: TextStyle(color:Colors.black),)),
+                            Tab( child: Text("Collections",style: TextStyle(color:Colors.black),)),
+                            Tab( child: Text("Editorial",style: TextStyle(color:Colors.black),)),
 
 
-                        ],
-                      ),
-
-                      Expanded(
-                        child: TabBarView(
-                          children: <Widget>[
-                            Container(
-                              child:getPosts(),
-                            ),  Container(
-                              child: getProds(),
-                            ),Container(
-                              child: getcollections(),
-                            ),Container(
-                              child: geteditorial(),
-                            ),
                           ],
                         ),
-                      ),
-                    ],
+
+                        Expanded(
+                          child: TabBarView(
+                            children: <Widget>[
+                              Container(
+                                child:getPosts(),
+                              ),  Container(
+                                child: getProds(),
+                              ),Container(
+                                child: getcollections(),
+                              ),Container(
+                                child: geteditorial(),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
-                ),
-              ),            ),
+                ),            ),
+            ),
 
           ],
         ),

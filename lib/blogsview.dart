@@ -5,6 +5,7 @@ import 'package:fashow/Blogcomments.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fashow/Product_screen.dart';
+import 'package:fashow/Support/SupportButton.dart';
 import 'package:fashow/size_config.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
@@ -40,6 +41,7 @@ class Blog extends StatefulWidget {
   final String content;
   final String source;
     final String photoUrl;
+final String currency;
 
   final dynamic likes;
 
@@ -48,6 +50,8 @@ class Blog extends StatefulWidget {
     this.ownerId,
     this.username,
     this.blogmediaUrl,
+    this.currency,
+
     this.title,
     this.content,
     this.source,
@@ -77,6 +81,7 @@ class Blog extends StatefulWidget {
       source:doc.data()['source'],
       likes: doc.data()['claps'],
       photoUrl: doc.data()['photoUrl'],
+      currency: doc.data()['currency'],
 
     );
   }
@@ -107,6 +112,7 @@ class Blog extends StatefulWidget {
     source:this.source,
     likes: this.likes,
     photoUrl: this.photoUrl,
+    currency: this.currency,
 
     likeCount: getLikeCount(this.likes),
 
@@ -123,6 +129,8 @@ class _BlogState extends State<Blog> {
   final String source;
   final String content;
     final String photoUrl;
+     final String currency;
+
   var contents ;
   int likeCount;
   Map likes;
@@ -148,6 +156,7 @@ class _BlogState extends State<Blog> {
     this.source,
     this.likeCount,
       this.photoUrl,
+ this.currency,
 
   });
 
@@ -445,8 +454,9 @@ class _BlogState extends State<Blog> {
             .collection("tags")
             .orderBy('timestamp',descending: true).snapshots(),
         builder: (context, snapshot) {
-          if (!snapshot.hasData) {
-            return Container();
+          if (!snapshot.hasData || snapshot.data.docs.isEmpty){
+            return
+              Container();
           } else {
             return new ListView.builder(
                 scrollDirection :Axis.horizontal,
@@ -458,6 +468,10 @@ class _BlogState extends State<Blog> {
                     ownerId: ds['ownerId'],
                     name: ds['name'],
                     usd: ds['usd'],
+                    inr: ds['inr'],
+                    eur: ds['eur'],
+                    gbp: ds['gbp'],
+
                     image: ds['image'],
                     prodId: blogId,
 
@@ -652,48 +666,45 @@ return  showMaterialModalBottomSheet(
         mainAxisAlignment: MainAxisAlignment.start,
         children: <Widget>[
           Padding(padding: EdgeInsets.only(top: 40.0, left: 20.0)),
-          FloatingActionButton(
-            backgroundColor: Colors.white,
-            heroTag: 'sga',
-            mini: true,
-            shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(16.0))),
-            onPressed: handleLikePost,
-            child:
-            ImageIcon(
-              isLiked ?  AssetImage("assets/img/clap-hands.png"):AssetImage("assets/img/clap.png"),
-              color: kGrey,
-            ),
+          GestureDetector(
+            onTap: handleLikePost,
 
-          ),//                Padding(padding: EdgeInsets.only(right: 1.0)),
+            child: ImageIcon(
+              isLiked ?  AssetImage("assets/img/clap-hands.png"):AssetImage("assets/img/clap.png"),
+              color: kText,
+            ),
+          ),
+          SizedBox(width: 5.0,),
           Container(
 //                  margin: EdgeInsets.only(left: 20.0),
             child: Text(
               "$likeCount ",
               style: TextStyle(
-                color:  Colors.black,
+                color: Colors.black,
                 fontSize: 15.0,
 //                      fontWeight: FontWeight.bold,
               ),
             ),
           ),
           Padding(padding: EdgeInsets.only(right: 20.0)),
-          FloatingActionButton(
-            backgroundColor: Colors.white,
-
-            heroTag: null,
-            mini: true,
-            shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(16.0))),
-            onPressed:() => showComments(
+          GestureDetector(
+            onTap: () => showComments(
               context,
               blogId: blogId,
               ownerId: ownerId,
               mediaUrl: blogmediaUrl.first,
             ),
             child: Icon(
-              Icons.chat,
+              Icons.mode_comment_outlined,
               size: 28.0,
               color: kText,
             ),
+
+          ),
+          Spacer(),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: SupportButton(userId: ownerId,displayName: username,currency: currency,imgUrl: photoUrl,mediaUrl: blogmediaUrl.first,),
           ),//
         ],
       ),
@@ -740,9 +751,16 @@ class TagItem extends StatelessWidget {
   final String image ;
   final String name;
   final usd ;
-  var currencyFormatter = NumberFormat('#,##0.00', );
+  final inr ;
+  final gbp ;
+  final eur ;
 
-  TagItem({this.ownerId,this.prodId,this.Id,this.image,this.name,this.usd});
+  var currencyFormatter =      currentUser.currency == "USD"? NumberFormat('#,##0.00', ):
+  currentUser.currency == "INR"?NumberFormat.currency(locale:"HI"):
+  currentUser.currency == "EUR"? NumberFormat.currency(locale:" ${currentUser.currencyISO}"):
+  currentUser.currency == "GBP"?NumberFormat.currency(locale:" ${currentUser.currencyISO}"): NumberFormat('#,##0.00', );
+
+  TagItem({this.ownerId,this.prodId,this.Id,this.image,this.name,this.usd, this.inr, this.gbp, this.eur});
 
   @override
   Widget build(BuildContext context) {
@@ -777,7 +795,12 @@ class TagItem extends StatelessWidget {
               ),
               Row(
                 children: [
-                  Text("\u0024 ${currencyFormatter.format(usd)}",),
+                  currentUser.currency == "USD"?Text("\u0024 ${currencyFormatter.format(usd)}",):
+                  currentUser.currency == "INR"?Text("₹ ${currencyFormatter.format(inr)}",):
+                  currentUser.currency == "EUR"?Text("€ ${currencyFormatter.format(eur)}",):
+                  currentUser.currency == "GBP"?Text("£ ${currencyFormatter.format(gbp)}",):Text("\u0024 ${currencyFormatter.format(usd)}",),
+
+
                 ],
               ),
 

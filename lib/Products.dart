@@ -832,7 +832,13 @@ class _ProdState extends State<Prod> {
   String userCustom = "";
 var  time = const Duration(  seconds: 2);
 String currencysymbol;
-  var currencyFormatter = currentUser.countryISO=="US"? NumberFormat('#,##0.00'): NumberFormat('#,##0.00', '${currentUser.countryISO}');
+
+
+  var currencyFormatter =      currentUser.currency == "USD"? NumberFormat('#,##0.00', ):
+  currentUser.currency == "INR"?NumberFormat.currency(locale:"HI"):
+  currentUser.currency == "EUR"? NumberFormat('#,##0.00'," ${currentUser.currencyISO}"):
+  currentUser.currency == "GBP"?NumberFormat('#,##0.00'," ${currentUser.currencyISO}"): NumberFormat('#,##0.00', );
+
 
   final String currentUserId = currentUser?.id;
   final String prodId;
@@ -9098,6 +9104,9 @@ posteurope(){
                                       String image = documentSnapshot.data()['image'];
                                       String name = documentSnapshot.data()['name'];
                                       var usd = documentSnapshot.data()['usd'];
+var inr = documentSnapshot.data()['inr'];
+var gbp = documentSnapshot.data()['gbp'];
+var eur = documentSnapshot.data()['eur'];
 
                                       return
 
@@ -9127,10 +9136,14 @@ posteurope(){
                                                 ),
                                                 Row(
                                                   children: [
-                                                    Text("\u0024 ${currencyFormatter.format(usd)}",),
+                                                    currentUser.currency == "USD"?Text("\u0024 ${currencyFormatter.format(usd)}",):
+                                                    currentUser.currency == "INR"?Text("₹ ${currencyFormatter.format(inr)}",):
+                                                    currentUser.currency == "EUR"?Text("€ ${currencyFormatter.format(eur)}",):
+                                                    currentUser.currency == "GBP"?Text("£ ${currencyFormatter.format(gbp)}",):Text("\u0024 ${currencyFormatter.format(usd)}",),
+
+
                                                   ],
                                                 ),
-
                                               ]),
                                             ));
 

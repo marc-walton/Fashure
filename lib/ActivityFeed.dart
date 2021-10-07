@@ -779,6 +779,13 @@ showOrders(context) {
     else if (type == 'ServicePayment') {
       activityItemText = '$message';
     }
+     else if (type == 'SupportPaymentSender') {
+      activityItemText = '$message';
+    }
+    else if (type == 'SupportPaymentReceiver') {
+      activityItemText = '$message';
+    }
+    
     else if (type == 'PaymentO') {
       return
       activityItemText = "$message";
@@ -815,6 +822,99 @@ else if (type == 'fav') {
     }
   }
 
+  supportPaymentSender(ParentContext){
+  return
+
+    Padding(
+      padding: EdgeInsets.only(bottom: 2.0),
+      child: ClipRRect(borderRadius: BorderRadius.circular(15.0),
+        child: Container(
+          color: Color(0XFFb3b3ff).withOpacity(0.3),
+          child: ListTile(
+            title: GestureDetector(
+              onTap: () => showProfile(ParentContext,profileId: userId),
+              child: RichText(
+                maxLines: 1,softWrap:false,overflow:TextOverflow.visible,                    text: TextSpan(
+                  style: TextStyle(
+                    fontSize: 14.0,
+                    color: kText,
+                  ),
+                  children: [
+                    TextSpan(
+                      text: username,
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold, color: Colors.black),
+                    ),
+                    TextSpan(
+                      text: ' $activityItemText',
+                    )
+                  ]),
+              ),
+            ),
+            leading: GestureDetector(
+              onTap: () => showProfile(ParentContext,profileId: userId),
+child:CircleAvatar(
+              backgroundImage: CachedNetworkImageProvider(userProfileImg),
+            ),
+),
+            subtitle: Text(
+              timeago.format(timestamp.toDate()),
+              overflow: TextOverflow.ellipsis,
+              style: TextStyle(color: kSubtitle),
+            ),
+            trailing: mediaPreview,
+          ),
+        ),
+      ),
+    );
+}
+ supportPaymentReceiver(ParentContext){
+  return
+
+    Padding(
+      padding: EdgeInsets.only(bottom: 2.0),
+      child: ClipRRect(borderRadius: BorderRadius.circular(15.0),
+        child: Container(
+          color: Color(0XFFb3b3ff).withOpacity(0.3),
+          child: ListTile(
+            title: GestureDetector(
+              onTap: () => showProfile(ParentContext,profileId: userId),
+              child: RichText(
+                maxLines: 1,softWrap:false,overflow:TextOverflow.visible,                    text: TextSpan(
+                  style: TextStyle(
+                    fontSize: 14.0,
+                    color: kText,
+                  ),
+                  children: [
+                    TextSpan(
+                      text: username,
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold, color: Colors.black),
+                    ),
+                    TextSpan(
+                      text: ' $activityItemText',
+                    )
+                  ]),
+              ),
+            ),
+            leading: GestureDetector(
+              onTap: () => showProfile(ParentContext,profileId: userId),
+child:CircleAvatar(
+              backgroundImage: CachedNetworkImageProvider(userProfileImg),
+            ),
+),
+            subtitle: Text(
+              timeago.format(timestamp.toDate()),
+              overflow: TextOverflow.ellipsis,
+              style: TextStyle(color: kSubtitle),
+            ),
+            trailing: mediaPreview,
+          ),
+        ),
+      ),
+    );
+}
+
 payent(ParentContext){
   return
 
@@ -844,9 +944,12 @@ payent(ParentContext){
                   ]),
               ),
             ),
-            leading: CircleAvatar(
+            leading: GestureDetector(
+              onTap: () => showProfile(ParentContext,profileId: userId),
+child:CircleAvatar(
               backgroundImage: CachedNetworkImageProvider(userProfileImg),
             ),
+),
             subtitle: Text(
               timeago.format(timestamp.toDate()),
               overflow: TextOverflow.ellipsis,
@@ -858,6 +961,7 @@ payent(ParentContext){
       ),
     );
 }
+
 paymentA(ParentContext){
   return
 
@@ -887,9 +991,12 @@ paymentA(ParentContext){
                   ]),
               ),
             ),
-            leading: CircleAvatar(
+            leading: GestureDetector(
+              onTap: () => showProfile(ParentContext,profileId: userId),
+child:CircleAvatar(
               backgroundImage: CachedNetworkImageProvider(userProfileImg),
             ),
+),
             subtitle: Text(
               timeago.format(timestamp.toDate()),
               overflow: TextOverflow.ellipsis,
@@ -930,9 +1037,12 @@ paymentOA(ParentContext){
                   ]),
               ),
             ),
-            leading: CircleAvatar(
+            leading: GestureDetector(
+              onTap: () => showProfile(ParentContext,profileId: userId),
+child:CircleAvatar(
               backgroundImage: CachedNetworkImageProvider(userProfileImg),
             ),
+),
             subtitle: Text(
               timeago.format(timestamp.toDate()),
               overflow: TextOverflow.ellipsis,
@@ -974,9 +1084,12 @@ Auction(ParentContext){
                   ]),
               ),
             ),
-            leading: CircleAvatar(
+            leading: GestureDetector(
+              onTap: () => showProfile(ParentContext,profileId: userId),
+child:CircleAvatar(
               backgroundImage: CachedNetworkImageProvider(userProfileImg),
             ),
+),
             subtitle: Text(
               timeago.format(timestamp.toDate()),
               overflow: TextOverflow.ellipsis,
@@ -1017,9 +1130,12 @@ blog(ParentContext){
                     ]),
               ),
             ),
-            leading: CircleAvatar(
+            leading: GestureDetector(
+              onTap: () => showProfile(ParentContext,profileId: userId),
+child:CircleAvatar(
               backgroundImage: CachedNetworkImageProvider(userProfileImg),
             ),
+),
             subtitle: Text(
               timeago.format(timestamp.toDate()),
               overflow: TextOverflow.ellipsis,
@@ -1061,9 +1177,12 @@ collection(ParentContext){
                   ]),
               ),
             ),
-            leading: CircleAvatar(
+            leading: GestureDetector(
+              onTap: () => showProfile(ParentContext,profileId: userId),
+child:CircleAvatar(
               backgroundImage: CachedNetworkImageProvider(userProfileImg),
             ),
+),
             subtitle: Text(
               timeago.format(timestamp.toDate()),
               overflow: TextOverflow.ellipsis,
@@ -1105,9 +1224,12 @@ payo(ParentContext){
                   ]),
               ),
             ),
-            leading: CircleAvatar(
+            leading: GestureDetector(
+              onTap: () => showProfile(ParentContext,profileId: userId),
+child:CircleAvatar(
               backgroundImage: CachedNetworkImageProvider(userProfileImg),
             ),
+),
             subtitle: Text(
               timeago.format(timestamp.toDate()),
               overflow: TextOverflow.ellipsis,
@@ -1149,9 +1271,12 @@ prod(ParentContext){
                   ]),
               ),
             ),
-            leading: CircleAvatar(
+            leading: GestureDetector(
+              onTap: () => showProfile(ParentContext,profileId: userId),
+child:CircleAvatar(
               backgroundImage: CachedNetworkImageProvider(userProfileImg),
             ),
+),
             subtitle: Text(
               timeago.format(timestamp.toDate()),
               overflow: TextOverflow.ellipsis,
@@ -1195,9 +1320,12 @@ prod(ParentContext){
                     ]),
                 ),
               ),
-              leading: CircleAvatar(
-                backgroundImage: CachedNetworkImageProvider(userProfileImg),
-              ),
+              leading: GestureDetector(
+              onTap: () => showProfile(ParentContext,profileId: userId),
+child:CircleAvatar(
+              backgroundImage: CachedNetworkImageProvider(userProfileImg),
+            ),
+),
               subtitle: Text(
                 timeago.format(timestamp.toDate()),
                 overflow: TextOverflow.ellipsis,
@@ -1239,9 +1367,12 @@ ReqPaymentI(ParentContext){
                   ]),
               ),
             ),
-            leading: CircleAvatar(
+            leading: GestureDetector(
+              onTap: () => showProfile(ParentContext,profileId: userId),
+child:CircleAvatar(
               backgroundImage: CachedNetworkImageProvider(userProfileImg),
             ),
+),
             subtitle: Text(
               timeago.format(timestamp.toDate()),
               overflow: TextOverflow.ellipsis,
@@ -1283,9 +1414,12 @@ ReqPaymentI(ParentContext){
                     ]),
                 ),
               ),
-              leading: CircleAvatar(
-                backgroundImage: CachedNetworkImageProvider(userProfileImg),
-              ),
+              leading: GestureDetector(
+              onTap: () => showProfile(ParentContext,profileId: userId),
+child:CircleAvatar(
+              backgroundImage: CachedNetworkImageProvider(userProfileImg),
+            ),
+),
               subtitle: Text(
                 timeago.format(timestamp.toDate()),
                 overflow: TextOverflow.ellipsis,
@@ -1327,9 +1461,12 @@ ReviewO(ParentContext){
                   ]),
               ),
             ),
-            leading: CircleAvatar(
+            leading: GestureDetector(
+              onTap: () => showProfile(ParentContext,profileId: userId),
+child:CircleAvatar(
               backgroundImage: CachedNetworkImageProvider(userProfileImg),
             ),
+),
             subtitle: Text(
               timeago.format(timestamp.toDate()),
               overflow: TextOverflow.ellipsis,
@@ -1371,9 +1508,12 @@ ReviewO(ParentContext){
                     ]),
                 ),
               ),
-              leading: CircleAvatar(
-                backgroundImage: CachedNetworkImageProvider(userProfileImg),
-              ),
+              leading: GestureDetector(
+              onTap: () => showProfile(ParentContext,profileId: userId),
+child:CircleAvatar(
+              backgroundImage: CachedNetworkImageProvider(userProfileImg),
+            ),
+),
               subtitle: Text(
                 timeago.format(timestamp.toDate()),
                 overflow: TextOverflow.ellipsis,
@@ -1416,9 +1556,12 @@ ServicePayment(ParentContext){
                   ]),
               ),
             ),
-            leading: CircleAvatar(
+            leading: GestureDetector(
+              onTap: () => showProfile(ParentContext,profileId: userId),
+child:CircleAvatar(
               backgroundImage: CachedNetworkImageProvider(userProfileImg),
             ),
+),
             subtitle: Text(
               timeago.format(timestamp.toDate()),
               overflow: TextOverflow.ellipsis,
@@ -1461,9 +1604,12 @@ ServicePayment(ParentContext){
                      ]),
                  ),
                ),
-               leading: CircleAvatar(
-                 backgroundImage: CachedNetworkImageProvider(userProfileImg),
-               ),
+               leading: GestureDetector(
+              onTap: () => showProfile(ParentContext,profileId: userId),
+child:CircleAvatar(
+              backgroundImage: CachedNetworkImageProvider(userProfileImg),
+            ),
+),
                subtitle: Text(
                  timeago.format(timestamp.toDate()),
                  overflow: TextOverflow.ellipsis,
@@ -1488,6 +1634,9 @@ ServicePayment(ParentContext){
     type == 'Payment'?payent(context):
     type == 'PaymentO' ? payo(context):
     type == 'ReqPayment' ? ReqPayment(context):
+      type == 'SupportPaymentSender' ? supportPaymentSender(context):
+      type == 'SupportPaymentReceiver' ? supportPaymentReceiver(context):
+
      type == 'ReqPaymentI' ? ReqPaymentI(context):
      type == 'ReviewC' ? ReviewC(context):
      type == 'ReviewO' ? ReviewO(context):

@@ -642,8 +642,11 @@ void toggleArtisan(bool value) {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           TextField(style: TextStyle(color: kSubtitle),
+            keyboardType: TextInputType.multiline,
+            maxLines: null,
             controller: bioController,
             decoration: InputDecoration(
+
                 hintText: "Bio",
                 labelText: "Bio",
                 hintStyle: TextStyle(color: kGrey),

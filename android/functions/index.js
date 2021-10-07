@@ -214,6 +214,13 @@ case "Videolike":
 case "payment":
           body = `${activityFeedItem.username} ${activityFeedItem.message}`;
           break;
+ case "SupportPaymentSender":
+          body = `${activityFeedItem.username} ${activityFeedItem.message}`;
+          break;
+   case "SupportPaymentReceiver":
+          body = `${activityFeedItem.username} ${activityFeedItem.message}`;
+          break;
+
 case "ReqPayment":
           body = `${activityFeedItem.username} ${activityFeedItem.message}`;
           break;
