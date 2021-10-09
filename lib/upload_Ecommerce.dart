@@ -151,16 +151,16 @@ TextEditingController customController71 = TextEditingController();
 TextEditingController customController81 = TextEditingController();
 TextEditingController customController91 = TextEditingController();
 TextEditingController customController101 = TextEditingController();
-TextEditingController customController12 = TextEditingController();
-TextEditingController customController22 = TextEditingController();
-TextEditingController customController32 = TextEditingController();
-TextEditingController customController42 = TextEditingController();
-TextEditingController customController52 = TextEditingController();
-TextEditingController customController62 = TextEditingController();
-TextEditingController customController72 = TextEditingController();
-TextEditingController customController82 = TextEditingController();
-TextEditingController customController92 = TextEditingController();
-TextEditingController customController102 = TextEditingController();
+TextEditingController customControllerQuantity1 = TextEditingController();
+TextEditingController customControllerQuantity2 = TextEditingController();
+TextEditingController customControllerQuantity3 = TextEditingController();
+TextEditingController customControllerQuantity4 = TextEditingController();
+TextEditingController customControllerQuantity5 = TextEditingController();
+TextEditingController customControllerQuantity6 = TextEditingController();
+TextEditingController customControllerQuantity7 = TextEditingController();
+TextEditingController customControllerQuantity8 = TextEditingController();
+TextEditingController customControllerQuantity9 = TextEditingController();
+TextEditingController customControllerQuantity10 = TextEditingController();
 
   TextEditingController colorController1 = TextEditingController();
   TextEditingController colorController2 = TextEditingController();
@@ -234,6 +234,19 @@ TextEditingController shipcontroller = TextEditingController();
    final _formKey2 = GlobalKey<FormState>();
 
   bool _inProcess = false;
+var userPrice;
+var userPrice1;
+var userPrice2;
+var userPrice3;
+var userPrice4;
+var userPrice5;
+var userPrice6;
+var userPrice7;
+var userPrice8;
+var userPrice9;
+var userPrice10;
+var userPrice11;
+var userPrice12;
 
   var inrtousd;
   var inrtousd1;
@@ -248,7 +261,153 @@ TextEditingController shipcontroller = TextEditingController();
   var inrtousd10;
   var inrtousd11;
   var inrtousd12;
- 
+   var inrtoeur;
+  var inrtoeur1;
+  var inrtoeur2;
+  var inrtoeur3;
+  var inrtoeur4;
+  var inrtoeur5;
+  var inrtoeur6;
+  var inrtoeur7;
+  var inrtoeur8;
+  var inrtoeur9;
+  var inrtoeur10;
+  var inrtoeur11;
+  var inrtoeur12;
+  var inrtogbp;
+  var inrtogbp1;
+  var inrtogbp2;
+  var inrtogbp3;
+  var inrtogbp4;
+  var inrtogbp5;
+  var inrtogbp6;
+  var inrtogbp7;
+  var inrtogbp8;
+  var inrtogbp9;
+  var inrtogbp10;
+  var inrtogbp11;
+  var inrtogbp12;
+
+  var usdtoinr;
+  var usdtoinr1;
+  var usdtoinr2;
+  var usdtoinr3;
+  var usdtoinr4;
+  var usdtoinr5;
+  var usdtoinr6;
+  var usdtoinr7;
+  var usdtoinr8;
+  var usdtoinr9;
+  var usdtoinr10;
+  var usdtoinr11;
+  var usdtoinr12;
+ var usdtoeur;
+  var usdtoeur1;
+  var usdtoeur2;
+  var usdtoeur3;
+  var usdtoeur4;
+  var usdtoeur5;
+  var usdtoeur6;
+  var usdtoeur7;
+  var usdtoeur8;
+  var usdtoeur9;
+  var usdtoeur10;
+  var usdtoeur11;
+  var usdtoeur12;
+ var usdtogbp;
+  var usdtogbp1;
+  var usdtogbp2;
+  var usdtogbp3;
+  var usdtogbp4;
+  var usdtogbp5;
+  var usdtogbp6;
+  var usdtogbp7;
+  var usdtogbp8;
+  var usdtogbp9;
+  var usdtogbp10;
+  var usdtogbp11;
+  var usdtogbp12;
+
+ var eurtoinr;
+  var eurtoinr1;
+  var eurtoinr2;
+  var eurtoinr3;
+  var eurtoinr4;
+  var eurtoinr5;
+  var eurtoinr6;
+  var eurtoinr7;
+  var eurtoinr8;
+  var eurtoinr9;
+  var eurtoinr10;
+  var eurtoinr11;
+  var eurtoinr12;
+ var eurtousd;
+  var eurtousd1;
+  var eurtousd2;
+  var eurtousd3;
+  var eurtousd4;
+  var eurtousd5;
+  var eurtousd6;
+  var eurtousd7;
+  var eurtousd8;
+  var eurtousd9;
+  var eurtousd10;
+  var eurtousd11;
+  var eurtousd12;
+ var eurtogbp;
+  var eurtogbp1;
+  var eurtogbp2;
+  var eurtogbp3;
+  var eurtogbp4;
+  var eurtogbp5;
+  var eurtogbp6;
+  var eurtogbp7;
+  var eurtogbp8;
+  var eurtogbp9;
+  var eurtogbp10;
+  var eurtogbp11;
+  var eurtogbp12;
+
+ var gbptoinr;
+  var gbptoinr1;
+  var gbptoinr2;
+  var gbptoinr3;
+  var gbptoinr4;
+  var gbptoinr5;
+  var gbptoinr6;
+  var gbptoinr7;
+  var gbptoinr8;
+  var gbptoinr9;
+  var gbptoinr10;
+  var gbptoinr11;
+  var gbptoinr12;
+ var gbptousd;
+  var gbptousd1;
+  var gbptousd2;
+  var gbptousd3;
+  var gbptousd4;
+  var gbptousd5;
+  var gbptousd6;
+  var gbptousd7;
+  var gbptousd8;
+  var gbptousd9;
+  var gbptousd10;
+  var gbptousd11;
+  var gbptousd12;
+ var gbptoeur;
+  var gbptoeur1;
+  var gbptoeur2;
+  var gbptoeur3;
+  var gbptoeur4;
+  var gbptoeur5;
+  var gbptoeur6;
+  var gbptoeur7;
+  var gbptoeur8;
+  var gbptoeur9;
+  var gbptoeur10;
+  var gbptoeur11;
+  var gbptoeur12;
+
 
 int pageChanged  = 0;
   @override
@@ -1016,7 +1175,6 @@ alignment:Alignment.center,
     Im.Image imageFile = Im.decodeImage(file.readAsBytesSync());
     final compressedImageFile = File('$path/img_$prodId.jpg')
       ..writeAsBytesSync(Im.encodeJpg(imageFile, quality: 50));
-    if (!mounted) return;
     if (!mounted) return; setState(() {
       file = compressedImageFile;
     });
@@ -1027,7 +1185,6 @@ alignment:Alignment.center,
     Im.Image imageFile = Im.decodeImage(file1.readAsBytesSync());
     final compressedImageFile = File('$path/img1_$prodId.jpg')
       ..writeAsBytesSync(Im.encodeJpg(imageFile, quality: 50));
-    if (!mounted) return;
     if (!mounted) return; setState(() {
       file1 = compressedImageFile;
     });
@@ -1121,6 +1278,8 @@ compressImage9() async {
     TaskSnapshot storageSnap = await uploadTask;
     String downloadUrl = await storageSnap.ref.getDownloadURL();
     return downloadUrl;
+
+
   }
    Future<String> uploadImage1(imageFile) async {
     String fileName = DateTime.now().millisecondsSinceEpoch.toString();
@@ -3485,7 +3644,7 @@ custom(){
 
                           keyboardType: TextInputType.number,
                           maxLines: 1,
-                          controller: customController12,
+                          controller: customControllerQuantity1,
                           decoration: InputDecoration(
                               border: OutlineInputBorder(
                                   borderSide: BorderSide(color: kGrey)),
@@ -3547,7 +3706,7 @@ custom(){
 
                           keyboardType: TextInputType.number,
                           maxLines: 1,
-                          controller: customController22,
+                          controller: customControllerQuantity2,
                           decoration: InputDecoration(
                               border: OutlineInputBorder(
                                   borderSide: BorderSide(color: kGrey)),
@@ -3609,7 +3768,7 @@ custom(){
 
                           keyboardType: TextInputType.number,
                           maxLines: 1,
-                          controller: customController32,
+                          controller: customControllerQuantity3,
                           decoration: InputDecoration(
                               border: OutlineInputBorder(
                                   borderSide: BorderSide(color: kGrey)),
@@ -3671,7 +3830,7 @@ custom(){
 
                           keyboardType: TextInputType.number,
                           maxLines: 1,
-                          controller: customController42,
+                          controller: customControllerQuantity4,
                           decoration: InputDecoration(
                               border: OutlineInputBorder(
                                   borderSide: BorderSide(color: kGrey)),
@@ -3733,7 +3892,7 @@ custom(){
 
                           keyboardType: TextInputType.number,
                           maxLines: 1,
-                          controller: customController52,
+                          controller: customControllerQuantity5,
                           decoration: InputDecoration(
                               border: OutlineInputBorder(
                                   borderSide: BorderSide(color: kGrey)),
@@ -3795,7 +3954,7 @@ custom(){
 
                           keyboardType: TextInputType.number,
                           maxLines: 1,
-                          controller: customController62,
+                          controller: customControllerQuantity6,
                           decoration: InputDecoration(
                               border: OutlineInputBorder(
                                   borderSide: BorderSide(color: kGrey)),
@@ -3857,7 +4016,7 @@ custom(){
 
                           keyboardType: TextInputType.number,
                           maxLines: 1,
-                          controller: customController72,
+                          controller: customControllerQuantity7,
                           decoration: InputDecoration(
                               border: OutlineInputBorder(
                                   borderSide: BorderSide(color: kGrey)),
@@ -3919,7 +4078,7 @@ custom(){
 
                           keyboardType: TextInputType.number,
                           maxLines: 1,
-                          controller: customController82,
+                          controller: customControllerQuantity8,
                           decoration: InputDecoration(
                               border: OutlineInputBorder(
                                   borderSide: BorderSide(color: kGrey)),
@@ -3981,7 +4140,7 @@ custom(){
 
                           keyboardType: TextInputType.number,
                           maxLines: 1,
-                          controller: customController92,
+                          controller: customControllerQuantity9,
                           decoration: InputDecoration(
                               border: OutlineInputBorder(
                                   borderSide: BorderSide(color: kGrey)),
@@ -4043,7 +4202,7 @@ custom(){
 
                           keyboardType: TextInputType.number,
                           maxLines: 1,
-                          controller: customController102,
+                          controller: customControllerQuantity10,
                           decoration: InputDecoration(
                               border: OutlineInputBorder(
                                   borderSide: BorderSide(color: kGrey)),
@@ -11091,41 +11250,106 @@ page2(){
   void INRUSD() async {
     setState(() {
       isUploading = true;
+      userPrice = double.tryParse(priceController.text ?? 0.1);
+      userPrice1 = double.tryParse(customController11.text ?? 0.1);
+      userPrice2 = double.tryParse(customController21.text ?? 0.1);
+      userPrice3 = double.tryParse(customController31.text ?? 0.1);
+      userPrice4 = double.tryParse(customController41.text ?? 0.1);
+      userPrice5 = double.tryParse(customController51.text ?? 0.1);
+      userPrice6 = double.tryParse(customController61.text ?? 0.1);
+      userPrice7 = double.tryParse(customController71.text ?? 0.1);
+      userPrice8 = double.tryParse(customController81.text ?? 0.1);
+      userPrice9 = double.tryParse(customController91.text ?? 0.1);
+      userPrice10 = double.tryParse(customController101.text ?? 0.1);
+      userPrice11 = double.tryParse(shipcost.text ?? 0.1);
+      userPrice12 = double.tryParse(shipcostintern.text ?? 0.1);
     });
-
-    var resultUSD = await Currency.getConversion(
-        from: '${currentUser.currencyISO}', to: 'USD', amount: priceController.text);
+    if(currentUser.currency == "INR"){
+      var resultUSD = await Currency.getConversion(
+        from: 'INR', to: 'USD', amount: priceController.text);
     var resultUSD1 = await Currency.getConversion(
-        from: '${currentUser.currencyISO}', to: 'USD', amount: customController11.text ??  0);
+        from: 'INR', to: 'USD', amount: customController11.text ??  0);
     var resultUSD2 = await Currency.getConversion(
-        from: '${currentUser.currencyISO}', to: 'USD', amount: customController21.text ??  0);
+        from: 'INR', to: 'USD', amount: customController21.text ??  0);
     var resultUSD3 = await Currency.getConversion(
-        from: '${currentUser.currencyISO}', to: 'USD', amount: customController31.text ??  0);
+        from: 'INR', to: 'USD', amount: customController31.text ??  0);
     var resultUSD4 = await Currency.getConversion(
-        from: '${currentUser.currencyISO}', to: 'USD', amount: customController41.text ??  0);
+        from: 'INR', to: 'USD', amount: customController41.text ??  0);
     var resultUSD5 = await Currency.getConversion(
-        from: '${currentUser.currencyISO}', to: 'USD', amount: customController51.text ??  0);
+        from: 'INR', to: 'USD', amount: customController51.text ??  0);
     var resultUSD6 = await Currency.getConversion(
-        from: '${currentUser.currencyISO}', to: 'USD', amount: customController61.text ??  0);
+        from: 'INR', to: 'USD', amount: customController61.text ??  0);
     var resultUSD7 = await Currency.getConversion(
-        from: '${currentUser.currencyISO}', to: 'USD', amount: customController71.text ??  0);
+        from: 'INR', to: 'USD', amount: customController71.text ??  0);
     var resultUSD8 = await Currency.getConversion(
-        from: '${currentUser.currencyISO}', to: 'USD', amount: customController81.text ??  0);
+        from: 'INR', to: 'USD', amount: customController81.text ??  0);
     var resultUSD9 = await Currency.getConversion(
-        from: '${currentUser.currencyISO}', to: 'USD', amount: customController91.text ??  0);
+        from: 'INR', to: 'USD', amount: customController91.text ??  0);
     var resultUSD10 = await Currency.getConversion(
-        from: '${currentUser.currencyISO}', to: 'USD', amount: customController101.text ??  0);
+        from: 'INR', to: 'USD', amount: customController101.text ??  0);
     var resultUSD11 = await Currency.getConversion(
-        from: '${currentUser.currencyISO}', to: 'USD', amount: shipcost.text ??  0);
+        from: 'INR', to: 'USD', amount: shipcost.text ??  0);
     var resultUSD12 = await Currency.getConversion(
-        from: '${currentUser.currencyISO}', to: 'USD', amount: shipcostintern.text ??  0);
+        from: 'INR', to: 'USD', amount: shipcostintern.text ??  0);
+       var resultEUR = await Currency.getConversion(
+        from: 'INR', to: 'EUR', amount: priceController.text);
+    var resultEUR1 = await Currency.getConversion(
+        from: 'INR', to: 'EUR', amount: customController11.text ??  0);
+    var resultEUR2 = await Currency.getConversion(
+        from: 'INR', to: 'EUR', amount: customController21.text ??  0);
+    var resultEUR3 = await Currency.getConversion(
+        from: 'INR', to: 'EUR', amount: customController31.text ??  0);
+    var resultEUR4 = await Currency.getConversion(
+        from: 'INR', to: 'EUR', amount: customController41.text ??  0);
+    var resultEUR5 = await Currency.getConversion(
+        from: 'INR', to: 'EUR', amount: customController51.text ??  0);
+    var resultEUR6 = await Currency.getConversion(
+        from: 'INR', to: 'EUR', amount: customController61.text ??  0);
+    var resultEUR7 = await Currency.getConversion(
+        from: 'INR', to: 'EUR', amount: customController71.text ??  0);
+    var resultEUR8 = await Currency.getConversion(
+        from: 'INR', to: 'EUR', amount: customController81.text ??  0);
+    var resultEUR9 = await Currency.getConversion(
+        from: 'INR', to: 'EUR', amount: customController91.text ??  0);
+    var resultEUR10 = await Currency.getConversion(
+        from: 'INR', to: 'EUR', amount: customController101.text ??  0);
+    var resultEUR11 = await Currency.getConversion(
+        from: 'INR', to: 'EUR', amount: shipcost.text ??  0);
+    var resultEUR12 = await Currency.getConversion(
+        from: 'INR', to: 'EUR', amount: shipcostintern.text ??  0);
+   var resultGBP = await Currency.getConversion(
+        from: 'INR', to: 'GBP', amount: priceController.text);
+    var resultGBP1 = await Currency.getConversion(
+        from: 'INR', to: 'GBP', amount: customController11.text ??  0);
+    var resultGBP2 = await Currency.getConversion(
+        from: 'INR', to: 'GBP', amount: customController21.text ??  0);
+    var resultGBP3 = await Currency.getConversion(
+        from: 'INR', to: 'GBP', amount: customController31.text ??  0);
+    var resultGBP4 = await Currency.getConversion(
+        from: 'INR', to: 'GBP', amount: customController41.text ??  0);
+    var resultGBP5 = await Currency.getConversion(
+        from: 'INR', to: 'GBP', amount: customController51.text ??  0);
+    var resultGBP6 = await Currency.getConversion(
+        from: 'INR', to: 'GBP', amount: customController61.text ??  0);
+    var resultGBP7 = await Currency.getConversion(
+        from: 'INR', to: 'GBP', amount: customController71.text ??  0);
+    var resultGBP8 = await Currency.getConversion(
+        from: 'INR', to: 'GBP', amount: customController81.text ??  0);
+    var resultGBP9 = await Currency.getConversion(
+        from: 'INR', to: 'GBP', amount: customController91.text ??  0);
+    var resultGBP10 = await Currency.getConversion(
+        from: 'INR', to: 'GBP', amount: customController101.text ??  0);
+    var resultGBP11 = await Currency.getConversion(
+        from: 'INR', to: 'GBP', amount: shipcost.text ??  0);
+    var resultGBP12 = await Currency.getConversion(
+        from: 'INR', to: 'GBP', amount: shipcostintern.text ??  0);
+
     // String date = result.date; // Returns the last updated date
     setState(() {
 
+
       inrtousd = resultUSD.rate;
-
       inrtousd1 = resultUSD1.rate;
-
       inrtousd2 = resultUSD2.rate;
       inrtousd3 = resultUSD3.rate;
       inrtousd4 = resultUSD4.rate;
@@ -11137,9 +11361,431 @@ page2(){
       inrtousd10 = resultUSD10.rate;
       inrtousd11 = resultUSD11.rate;
       inrtousd12 = resultUSD12.rate;
-  
+
+      inrtoeur = resultEUR.rate;
+
+      inrtoeur1 = resultEUR1.rate;
+
+      inrtoeur2 = resultEUR2.rate;
+      inrtoeur3 = resultEUR3.rate;
+      inrtoeur4 = resultEUR4.rate;
+      inrtoeur5 = resultEUR5.rate;
+      inrtoeur6 = resultEUR6.rate;
+      inrtoeur7 = resultEUR7.rate;
+      inrtoeur8 = resultEUR8.rate;
+      inrtoeur9 = resultEUR9.rate;
+      inrtoeur10 = resultEUR10.rate;
+      inrtoeur11 = resultEUR11.rate;
+      inrtoeur12 = resultEUR12.rate;
+
+      inrtogbp = resultGBP.rate;
+
+      inrtogbp1 = resultGBP1.rate;
+
+      inrtogbp2 = resultGBP2.rate;
+      inrtogbp3 = resultGBP3.rate;
+      inrtogbp4 = resultGBP4.rate;
+      inrtogbp5 = resultGBP5.rate;
+      inrtogbp6 = resultGBP6.rate;
+      inrtogbp7 = resultGBP7.rate;
+      inrtogbp8 = resultGBP8.rate;
+      inrtogbp9 = resultGBP9.rate;
+      inrtogbp10 = resultGBP10.rate;
+      inrtogbp11 = resultGBP11.rate;
+      inrtogbp12 = resultGBP12.rate;
+
 
     });
+    }
+    else if(currentUser.currency == "EUR"){
+      var resultUSD = await Currency.getConversion(
+        from: 'EUR', to: 'USD', amount: priceController.text);
+    var resultUSD1 = await Currency.getConversion(
+        from: 'EUR', to: 'USD', amount: customController11.text ??  0);
+    var resultUSD2 = await Currency.getConversion(
+        from: 'EUR', to: 'USD', amount: customController21.text ??  0);
+    var resultUSD3 = await Currency.getConversion(
+        from: 'EUR', to: 'USD', amount: customController31.text ??  0);
+    var resultUSD4 = await Currency.getConversion(
+        from: 'EUR', to: 'USD', amount: customController41.text ??  0);
+    var resultUSD5 = await Currency.getConversion(
+        from: 'EUR', to: 'USD', amount: customController51.text ??  0);
+    var resultUSD6 = await Currency.getConversion(
+        from: 'EUR', to: 'USD', amount: customController61.text ??  0);
+    var resultUSD7 = await Currency.getConversion(
+        from: 'EUR', to: 'USD', amount: customController71.text ??  0);
+    var resultUSD8 = await Currency.getConversion(
+        from: 'EUR', to: 'USD', amount: customController81.text ??  0);
+    var resultUSD9 = await Currency.getConversion(
+        from: 'EUR', to: 'USD', amount: customController91.text ??  0);
+    var resultUSD10 = await Currency.getConversion(
+        from: 'EUR', to: 'USD', amount: customController101.text ??  0);
+    var resultUSD11 = await Currency.getConversion(
+        from: 'EUR', to: 'USD', amount: shipcost.text ??  0);
+     var resultUSD12 = await Currency.getConversion(
+        from: 'EUR', to: 'USD', amount: shipcostintern.text ??  0);
+
+    var resultINR = await Currency.getConversion(
+        from: 'EUR', to: 'INR', amount: priceController.text);
+    var resultINR1 = await Currency.getConversion(
+        from: 'EUR', to: 'INR', amount: customController11.text ??  0);
+    var resultINR2 = await Currency.getConversion(
+        from: 'EUR', to: 'INR', amount: customController21.text ??  0);
+    var resultINR3 = await Currency.getConversion(
+        from: 'EUR', to: 'INR', amount: customController31.text ??  0);
+    var resultINR4 = await Currency.getConversion(
+        from: 'EUR', to: 'INR', amount: customController41.text ??  0);
+    var resultINR5 = await Currency.getConversion(
+        from: 'EUR', to: 'INR', amount: customController51.text ??  0);
+    var resultINR6 = await Currency.getConversion(
+        from: 'EUR', to: 'INR', amount: customController61.text ??  0);
+    var resultINR7 = await Currency.getConversion(
+        from: 'EUR', to: 'INR', amount: customController71.text ??  0);
+    var resultINR8 = await Currency.getConversion(
+        from: 'EUR', to: 'INR', amount: customController81.text ??  0);
+    var resultINR9 = await Currency.getConversion(
+        from: 'EUR', to: 'INR', amount: customController91.text ??  0);
+    var resultINR10 = await Currency.getConversion(
+        from: 'EUR', to: 'INR', amount: customController101.text ??  0);
+    var resultINR11 = await Currency.getConversion(
+        from: 'EUR', to: 'INR', amount: shipcost.text ??  0);
+    var resultINR12 = await Currency.getConversion(
+        from: 'EUR', to: 'INR', amount: shipcostintern.text ??  0);
+     var resultGBP = await Currency.getConversion(
+        from: 'EUR', to: 'GBP', amount: priceController.text);
+    var resultGBP1 = await Currency.getConversion(
+        from: 'EUR', to: 'GBP', amount: customController11.text ??  0);
+    var resultGBP2 = await Currency.getConversion(
+        from: 'EUR', to: 'GBP', amount: customController21.text ??  0);
+    var resultGBP3 = await Currency.getConversion(
+        from: 'EUR', to: 'GBP', amount: customController31.text ??  0);
+    var resultGBP4 = await Currency.getConversion(
+        from: 'EUR', to: 'GBP', amount: customController41.text ??  0);
+    var resultGBP5 = await Currency.getConversion(
+        from: 'EUR', to: 'GBP', amount: customController51.text ??  0);
+    var resultGBP6 = await Currency.getConversion(
+        from: 'EUR', to: 'GBP', amount: customController61.text ??  0);
+    var resultGBP7 = await Currency.getConversion(
+        from: 'EUR', to: 'GBP', amount: customController71.text ??  0);
+    var resultGBP8 = await Currency.getConversion(
+        from: 'EUR', to: 'GBP', amount: customController81.text ??  0);
+    var resultGBP9 = await Currency.getConversion(
+        from: 'EUR', to: 'GBP', amount: customController91.text ??  0);
+    var resultGBP10 = await Currency.getConversion(
+        from: 'EUR', to: 'GBP', amount: customController101.text ??  0);
+    var resultGBP11 = await Currency.getConversion(
+        from: 'EUR', to: 'GBP', amount: shipcost.text ??  0);
+    var resultGBP12 = await Currency.getConversion(
+        from: 'EUR', to: 'GBP', amount: shipcostintern.text ??  0);
+
+    // String date = result.date; // Returns the last updated date
+    setState(() {
+
+      eurtousd = resultUSD.rate;
+
+      eurtousd1 = resultUSD1.rate;
+
+      eurtousd2 = resultUSD2.rate;
+      eurtousd3 = resultUSD3.rate;
+      eurtousd4 = resultUSD4.rate;
+      eurtousd5 = resultUSD5.rate;
+      eurtousd6 = resultUSD6.rate;
+      eurtousd7 = resultUSD7.rate;
+      eurtousd8 = resultUSD8.rate;
+      eurtousd9 = resultUSD9.rate;
+      eurtousd10 = resultUSD10.rate;
+      eurtousd11 = resultUSD11.rate;
+      eurtousd12 = resultUSD12.rate;
+
+      eurtoinr = resultINR.rate;
+      eurtoinr1 = resultINR1.rate;
+      eurtoinr2 = resultINR2.rate;
+      eurtoinr3 = resultINR3.rate;
+      eurtoinr4 = resultINR4.rate;
+      eurtoinr5 = resultINR5.rate;
+      eurtoinr6 = resultINR6.rate;
+      eurtoinr7 = resultINR7.rate;
+      eurtoinr8 = resultINR8.rate;
+      eurtoinr9 = resultINR9.rate;
+      eurtoinr10 = resultINR10.rate;
+      eurtoinr11 = resultINR11.rate;
+      eurtoinr12 = resultINR12.rate;
+
+      eurtogbp = resultGBP.rate;
+      eurtogbp1 = resultGBP1.rate;
+      eurtogbp2 = resultGBP2.rate;
+      eurtogbp3 = resultGBP3.rate;
+      eurtogbp4 = resultGBP4.rate;
+      eurtogbp5 = resultGBP5.rate;
+      eurtogbp6 = resultGBP6.rate;
+      eurtogbp7 = resultGBP7.rate;
+      eurtogbp8 = resultGBP8.rate;
+      eurtogbp9 = resultGBP9.rate;
+      eurtogbp10 = resultGBP10.rate;
+      eurtogbp11 = resultGBP11.rate;
+      eurtogbp12 = resultGBP12.rate;
+
+
+    });
+    }
+    else if(currentUser.currency == "GBP"){
+      var resultUSD = await Currency.getConversion(
+          from: 'GBP', to: 'USD', amount: priceController.text);
+      var resultUSD1 = await Currency.getConversion(
+          from: 'GBP', to: 'USD', amount: customController11.text ??  0);
+      var resultUSD2 = await Currency.getConversion(
+          from: 'GBP', to: 'USD', amount: customController21.text ??  0);
+      var resultUSD3 = await Currency.getConversion(
+          from: 'GBP', to: 'USD', amount: customController31.text ??  0);
+      var resultUSD4 = await Currency.getConversion(
+          from: 'GBP', to: 'USD', amount: customController41.text ??  0);
+      var resultUSD5 = await Currency.getConversion(
+          from: 'GBP', to: 'USD', amount: customController51.text ??  0);
+      var resultUSD6 = await Currency.getConversion(
+          from: 'GBP', to: 'USD', amount: customController61.text ??  0);
+      var resultUSD7 = await Currency.getConversion(
+          from: 'GBP', to: 'USD', amount: customController71.text ??  0);
+      var resultUSD8 = await Currency.getConversion(
+          from: 'GBP', to: 'USD', amount: customController81.text ??  0);
+      var resultUSD9 = await Currency.getConversion(
+          from: 'GBP', to: 'USD', amount: customController91.text ??  0);
+      var resultUSD10 = await Currency.getConversion(
+          from: 'GBP', to: 'USD', amount: customController101.text ??  0);
+      var resultUSD11 = await Currency.getConversion(
+          from: 'GBP', to: 'USD', amount: shipcost.text ??  0);
+      var resultUSD12 = await Currency.getConversion(
+          from: 'GBP', to: 'USD', amount: shipcostintern.text ??  0);
+           var resultEUR = await Currency.getConversion(
+          from: 'GBP', to: 'EUR', amount: priceController.text);
+      var resultEUR1 = await Currency.getConversion(
+          from: 'GBP', to: 'EUR', amount: customController11.text ??  0);
+      var resultEUR2 = await Currency.getConversion(
+          from: 'GBP', to: 'EUR', amount: customController21.text ??  0);
+      var resultEUR3 = await Currency.getConversion(
+          from: 'GBP', to: 'EUR', amount: customController31.text ??  0);
+      var resultEUR4 = await Currency.getConversion(
+          from: 'GBP', to: 'EUR', amount: customController41.text ??  0);
+      var resultEUR5 = await Currency.getConversion(
+          from: 'GBP', to: 'EUR', amount: customController51.text ??  0);
+      var resultEUR6 = await Currency.getConversion(
+          from: 'GBP', to: 'EUR', amount: customController61.text ??  0);
+      var resultEUR7 = await Currency.getConversion(
+          from: 'GBP', to: 'EUR', amount: customController71.text ??  0);
+      var resultEUR8 = await Currency.getConversion(
+          from: 'GBP', to: 'EUR', amount: customController81.text ??  0);
+      var resultEUR9 = await Currency.getConversion(
+          from: 'GBP', to: 'EUR', amount: customController91.text ??  0);
+      var resultEUR10 = await Currency.getConversion(
+          from: 'GBP', to: 'EUR', amount: customController101.text ??  0);
+      var resultEUR11 = await Currency.getConversion(
+          from: 'GBP', to: 'EUR', amount: shipcost.text ??  0);
+      var resultEUR12 = await Currency.getConversion(
+          from: 'GBP', to: 'EUR', amount: shipcostintern.text ??  0);
+       var resultINR = await Currency.getConversion(
+          from: 'GBP', to: 'INR', amount: priceController.text);
+      var resultINR1 = await Currency.getConversion(
+          from: 'GBP', to: 'INR', amount: customController11.text ??  0);
+      var resultINR2 = await Currency.getConversion(
+          from: 'GBP', to: 'INR', amount: customController21.text ??  0);
+      var resultINR3 = await Currency.getConversion(
+          from: 'GBP', to: 'INR', amount: customController31.text ??  0);
+      var resultINR4 = await Currency.getConversion(
+          from: 'GBP', to: 'INR', amount: customController41.text ??  0);
+      var resultINR5 = await Currency.getConversion(
+          from: 'GBP', to: 'INR', amount: customController51.text ??  0);
+      var resultINR6 = await Currency.getConversion(
+          from: 'GBP', to: 'INR', amount: customController61.text ??  0);
+      var resultINR7 = await Currency.getConversion(
+          from: 'GBP', to: 'INR', amount: customController71.text ??  0);
+      var resultINR8 = await Currency.getConversion(
+          from: 'GBP', to: 'INR', amount: customController81.text ??  0);
+      var resultINR9 = await Currency.getConversion(
+          from: 'GBP', to: 'INR', amount: customController91.text ??  0);
+      var resultINR10 = await Currency.getConversion(
+          from: 'GBP', to: 'INR', amount: customController101.text ??  0);
+      var resultINR11 = await Currency.getConversion(
+          from: 'GBP', to: 'INR', amount: shipcost.text ??  0);
+      var resultINR12 = await Currency.getConversion(
+          from: 'GBP', to: 'INR', amount: shipcostintern.text ??  0);
+
+      // String date = result.date; // Returns the last updated date
+      setState(() {
+
+        gbptousd = resultUSD.rate;
+        gbptousd1 = resultUSD1.rate;
+        gbptousd2 = resultUSD2.rate;
+        gbptousd3 = resultUSD3.rate;
+        gbptousd4 = resultUSD4.rate;
+        gbptousd5 = resultUSD5.rate;
+        gbptousd6 = resultUSD6.rate;
+        gbptousd7 = resultUSD7.rate;
+        gbptousd8 = resultUSD8.rate;
+        gbptousd9 = resultUSD9.rate;
+        gbptousd10 = resultUSD10.rate;
+        gbptousd11 = resultUSD11.rate;
+        gbptousd12 = resultUSD12.rate;
+
+        gbptoinr = resultINR.rate;
+        gbptoinr1 = resultINR1.rate;
+        gbptoinr2 = resultINR2.rate;
+        gbptoinr3 = resultINR3.rate;
+        gbptoinr4 = resultINR4.rate;
+        gbptoinr5 = resultINR5.rate;
+        gbptoinr6 = resultINR6.rate;
+        gbptoinr7 = resultINR7.rate;
+        gbptoinr8 = resultINR8.rate;
+        gbptoinr9 = resultINR9.rate;
+        gbptoinr10 = resultINR10.rate;
+        gbptoinr11 = resultINR11.rate;
+        gbptoinr12 = resultINR12.rate;
+
+        gbptoeur = resultEUR.rate;
+        gbptoeur1 = resultEUR1.rate;
+        gbptoeur2 = resultEUR2.rate;
+        gbptoeur3 = resultEUR3.rate;
+        gbptoeur4 = resultEUR4.rate;
+        gbptoeur5 = resultEUR5.rate;
+        gbptoeur6 = resultEUR6.rate;
+        gbptoeur7 = resultEUR7.rate;
+        gbptoeur8 = resultEUR8.rate;
+        gbptoeur9 = resultEUR9.rate;
+        gbptoeur10 = resultEUR10.rate;
+        gbptoeur11 = resultEUR11.rate;
+        gbptoeur12 = resultEUR12.rate;
+
+
+      });
+    }
+    else{
+      var resultINR = await Currency.getConversion(
+          from: 'USD', to: 'INR', amount: priceController.text);
+      var resultINR1 = await Currency.getConversion(
+          from: 'USD', to: 'INR', amount: customController11.text ??  0);
+      var resultINR2 = await Currency.getConversion(
+          from: 'USD', to: 'INR', amount: customController21.text ??  0);
+      var resultINR3 = await Currency.getConversion(
+          from: 'USD', to: 'INR', amount: customController31.text ??  0);
+      var resultINR4 = await Currency.getConversion(
+          from: 'USD', to: 'INR', amount: customController41.text ??  0);
+      var resultINR5 = await Currency.getConversion(
+          from: 'USD', to: 'INR', amount: customController51.text ??  0);
+      var resultINR6 = await Currency.getConversion(
+          from: 'USD', to: 'INR', amount: customController61.text ??  0);
+      var resultINR7 = await Currency.getConversion(
+          from: 'USD', to: 'INR', amount: customController71.text ??  0);
+      var resultINR8 = await Currency.getConversion(
+          from: 'USD', to: 'INR', amount: customController81.text ??  0);
+      var resultINR9 = await Currency.getConversion(
+          from: 'USD', to: 'INR', amount: customController91.text ??  0);
+      var resultINR10 = await Currency.getConversion(
+          from: 'USD', to: 'INR', amount: customController101.text ??  0);
+      var resultINR11 = await Currency.getConversion(
+          from: 'USD', to: 'INR', amount: shipcost.text ??  0);
+      var resultINR12 = await Currency.getConversion(
+          from: 'USD', to: 'INR', amount: shipcostintern.text ??  0);
+var resultEUR = await Currency.getConversion(
+          from: 'USD', to: 'EUR', amount: priceController.text);
+      var resultEUR1 = await Currency.getConversion(
+          from: 'USD', to: 'EUR', amount: customController11.text ??  0);
+      var resultEUR2 = await Currency.getConversion(
+          from: 'USD', to: 'EUR', amount: customController21.text ??  0);
+      var resultEUR3 = await Currency.getConversion(
+          from: 'USD', to: 'EUR', amount: customController31.text ??  0);
+      var resultEUR4 = await Currency.getConversion(
+          from: 'USD', to: 'EUR', amount: customController41.text ??  0);
+      var resultEUR5 = await Currency.getConversion(
+          from: 'USD', to: 'EUR', amount: customController51.text ??  0);
+      var resultEUR6 = await Currency.getConversion(
+          from: 'USD', to: 'EUR', amount: customController61.text ??  0);
+      var resultEUR7 = await Currency.getConversion(
+          from: 'USD', to: 'EUR', amount: customController71.text ??  0);
+      var resultEUR8 = await Currency.getConversion(
+          from: 'USD', to: 'EUR', amount: customController81.text ??  0);
+      var resultEUR9 = await Currency.getConversion(
+          from: 'USD', to: 'EUR', amount: customController91.text ??  0);
+      var resultEUR10 = await Currency.getConversion(
+          from: 'USD', to: 'EUR', amount: customController101.text ??  0);
+      var resultEUR11 = await Currency.getConversion(
+          from: 'USD', to: 'EUR', amount: shipcost.text ??  0);
+      var resultEUR12 = await Currency.getConversion(
+          from: 'USD', to: 'EUR', amount: shipcostintern.text ??  0);
+var resultGBP = await Currency.getConversion(
+          from: 'USD', to: 'GBP', amount: priceController.text);
+      var resultGBP1 = await Currency.getConversion(
+          from: 'USD', to: 'GBP', amount: customController11.text ??  0);
+      var resultGBP2 = await Currency.getConversion(
+          from: 'USD', to: 'GBP', amount: customController21.text ??  0);
+      var resultGBP3 = await Currency.getConversion(
+          from: 'USD', to: 'GBP', amount: customController31.text ??  0);
+      var resultGBP4 = await Currency.getConversion(
+          from: 'USD', to: 'GBP', amount: customController41.text ??  0);
+      var resultGBP5 = await Currency.getConversion(
+          from: 'USD', to: 'GBP', amount: customController51.text ??  0);
+      var resultGBP6 = await Currency.getConversion(
+          from: 'USD', to: 'GBP', amount: customController61.text ??  0);
+      var resultGBP7 = await Currency.getConversion(
+          from: 'USD', to: 'GBP', amount: customController71.text ??  0);
+      var resultGBP8 = await Currency.getConversion(
+          from: 'USD', to: 'GBP', amount: customController81.text ??  0);
+      var resultGBP9 = await Currency.getConversion(
+          from: 'USD', to: 'GBP', amount: customController91.text ??  0);
+      var resultGBP10 = await Currency.getConversion(
+          from: 'USD', to: 'GBP', amount: customController101.text ??  0);
+      var resultGBP11 = await Currency.getConversion(
+          from: 'USD', to: 'GBP', amount: shipcost.text ??  0);
+      var resultGBP12 = await Currency.getConversion(
+          from: 'USD', to: 'GBP', amount: shipcostintern.text ??  0);
+
+      // String date = result.date; // Returns the last updated date
+      setState(() {
+
+        usdtoinr = resultINR.rate;
+        usdtoinr1 = resultINR1.rate;
+        usdtoinr2 = resultINR2.rate;
+        usdtoinr3 = resultINR3.rate;
+        usdtoinr4 = resultINR4.rate;
+        usdtoinr5 = resultINR5.rate;
+        usdtoinr6 = resultINR6.rate;
+        usdtoinr7 = resultINR7.rate;
+        usdtoinr8 = resultINR8.rate;
+        usdtoinr9 = resultINR9.rate;
+        usdtoinr10 = resultINR10.rate;
+        usdtoinr11 = resultINR11.rate;
+        usdtoinr12 = resultINR12.rate;
+
+        usdtoeur = resultEUR.rate;
+        usdtoeur1 = resultEUR1.rate;
+        usdtoeur2 = resultEUR2.rate;
+        usdtoeur3 = resultEUR3.rate;
+        usdtoeur4 = resultEUR4.rate;
+        usdtoeur5 = resultEUR5.rate;
+        usdtoeur6 = resultEUR6.rate;
+        usdtoeur7 = resultEUR7.rate;
+        usdtoeur8 = resultEUR8.rate;
+        usdtoeur9 = resultEUR9.rate;
+        usdtoeur10 = resultEUR10.rate;
+        usdtoeur11 = resultEUR11.rate;
+        usdtoeur12 = resultEUR12.rate;
+
+        usdtogbp = resultGBP.rate;
+        usdtogbp1 = resultGBP1.rate;
+        usdtogbp2 = resultGBP2.rate;
+        usdtogbp3 = resultGBP3.rate;
+        usdtogbp4 = resultGBP4.rate;
+        usdtogbp5 = resultGBP5.rate;
+        usdtogbp6 = resultGBP6.rate;
+        usdtogbp7 = resultGBP7.rate;
+        usdtogbp8 = resultGBP8.rate;
+        usdtogbp9 = resultGBP9.rate;
+        usdtogbp10 = resultGBP10.rate;
+        usdtogbp11 = resultGBP11.rate;
+        usdtogbp12 = resultGBP12.rate;
+
+
+      });
+    }
+
+
   }
 
   Future<void> handleSubmit() async {
@@ -11148,229 +11794,986 @@ page2(){
    file!=null? await compressImage():null;
     String mediaUrl =  file!=null?await uploadImage(file):"";
   file1!=null? await compressImage1():null;
-    String mediaUrl1 =  file1!=null?await uploadImage1(file):"";
+    String mediaUrl1 =  file1!=null?await uploadImage1(file1):"";
   file2!=null? await compressImage2():null;
-    String mediaUrl2 =  file2!=null?await uploadImage2(file):"";
+    String mediaUrl2 =  file2!=null?await uploadImage2(file2):"";
   file3!=null? await compressImage3():null;
-    String mediaUrl3 =  file3!=null?await uploadImage3(file):"";
+    String mediaUrl3 =  file3!=null?await uploadImage3(file3):"";
   file4!=null? await compressImage4():null;
-    String mediaUrl4 =  file4!=null?await uploadImage4(file):"";
+    String mediaUrl4 =  file4!=null?await uploadImage4(file4):"";
   file5!=null? await compressImage5():null;
-    String mediaUrl5 =  file5!=null?await uploadImage5(file):"";
+    String mediaUrl5 =  file5!=null?await uploadImage5(file5):"";
   file6!=null? await compressImage6():null;
-    String mediaUrl6 =  file6!=null?await uploadImage6(file):"";
+    String mediaUrl6 =  file6!=null?await uploadImage6(file6):"";
   file7!=null? await compressImage7():null;
-    String mediaUrl7 =  file7!=null?await uploadImage7(file):"";
+    String mediaUrl7 =  file7!=null?await uploadImage7(file7):"";
   file8!=null? await compressImage8():null;
-    String mediaUrl8 =  file8!=null?await uploadImage8(file):"";
+    String mediaUrl8 =  file8!=null?await uploadImage8(file8):"";
  file9!=null? await compressImage9():null;
-    String mediaUrl9 =  file9!=null?await uploadImage9(file):"";
+    String mediaUrl9 =  file9!=null?await uploadImage9(file9):"";
+if(currentUser.currency == "INR"){
+  for ( var imageFile in images) {
+    postImage(imageFile).then((downloadUrl)  {
+      imageUrls.add(downloadUrl.toString());
+      if(imageUrls.length==images.length){
+        String documnetID = DateTime.now().millisecondsSinceEpoch.toString();
 
-    for ( var imageFile in images) {
-      postImage(imageFile).then((downloadUrl)  {
-        imageUrls.add(downloadUrl.toString());
-        if(imageUrls.length==images.length){
-          String documnetID = DateTime.now().millisecondsSinceEpoch.toString();
+        productsRef
+            .doc(widget.currentUser.id)
+            .collection("userProducts")
+            .doc(prodId)
+            .update({
+          "colorText1":colorController1.text ?? "",
+          "colorText2":colorController2.text ?? "",
+          "colorText3":colorController3.text ?? "",
+          "colorText4":colorController4.text ?? "",
+          "colorText5":colorController5.text ?? "",
+          "colorText6":colorController6.text ?? "",
+          "colorText7":colorController7.text ?? "",
+          "colorText8":colorController8.text ?? "",
+          "colorText9":colorController9.text ?? "",
+          "colorText10":colorController10.text ?? "",
+          "color1":int.tryParse(colorController11.text) ?? 0,
+          "color2":int.tryParse(colorController21.text) ?? 0,
+          "color3":int.tryParse(colorController31.text) ?? 0,
+          "color4":int.tryParse(colorController41.text) ?? 0,
+          "color5":int.tryParse(colorController51.text) ?? 0,
+          "color6":int.tryParse(colorController61.text) ?? 0,
+          "color7":int.tryParse(colorController71.text) ?? 0,
+          "color8":int.tryParse(colorController81.text) ?? 0,
+          "color9":int.tryParse(colorController91.text) ?? 0,
+          "color10":int.tryParse(colorController10.text) ?? 0,
+          "country":  currentUser.country,
+          "currency":  currentUser.currency,
 
-            productsRef
-                .doc(widget.currentUser.id)
-                .collection("userProducts")
-                .doc(prodId)
-                .update({
-              "colorText1":colorController1.text ?? "",
-              "colorText2":colorController2.text ?? "",
-              "colorText3":colorController3.text ?? "",
-              "colorText4":colorController4.text ?? "",
-              "colorText5":colorController5.text ?? "",
-              "colorText6":colorController6.text ?? "",
-              "colorText7":colorController7.text ?? "",
-              "colorText8":colorController8.text ?? "",
-              "colorText9":colorController9.text ?? "",
-              "colorText10":colorController10.text ?? "",
-              "color1":int.tryParse(colorController11.text) ?? 0,
-              "color2":int.tryParse(colorController21.text) ?? 0,
-              "color3":int.tryParse(colorController31.text) ?? 0,
-              "color4":int.tryParse(colorController41.text) ?? 0,
-              "color5":int.tryParse(colorController51.text) ?? 0,
-              "color6":int.tryParse(colorController61.text) ?? 0,
-              "color7":int.tryParse(colorController71.text) ?? 0,
-              "color8":int.tryParse(colorController81.text) ?? 0,
-              "color9":int.tryParse(colorController91.text) ?? 0,
-              "color10":int.tryParse(colorController10.text) ?? 0,
-              "country":  currentUser.country,
-"currency":  currentUser.currency,
+          "worldship":worldship,
+          "freeworldship":freeworldship,
+          "freeship":freeship,
+          "shipment": shipcontroller.text,
+          "prodId": prodId,
+          "ownerId": widget.currentUser.id,
+          "photoUrl": widget.currentUser.photoUrl,
+          "username": widget.currentUser.displayName,
+          "shopmediaUrl": imageUrls,
+          "Category": value,
+          "Gender": dropdownValue,
+          "details": detailsController.text,
+          "productname": productnameController.text,
+          "usd": inrtousd,
+          "eur": inrtoeur,
+          "gbp": inrtogbp,
+          "inr": userPrice ?? 0.1,
 
-               "worldship":worldship,
-               "freeworldship":freeworldship,
-              "freeship":freeship,
-              "shipment": shipcontroller.text,
-              "prodId": prodId,
-              "ownerId": widget.currentUser.id,
-              "photoUrl": widget.currentUser.photoUrl,
-              "username": widget.currentUser.displayName,
-              "shopmediaUrl": imageUrls,
-              "Category": value,
-              // "type":type,
-              "Gender": dropdownValue,
-              "details": detailsController.text,
-              "productname": productnameController.text,
-              "usd": inrtousd,
+          "timestamp": timestamp,
+          "composition": compositionController.text,
+          "washandcare": washandcareController.text,
+          "sizeandfit": sizeandfitController.text,
+          "xxxsQuantity": int.tryParse(xxxscontroller.text) ?? 0,
+          "xxsQuantity": int.tryParse(xxscontroller.text) ?? 0,
+          "xsQuantity":  int.tryParse(xscontroller.text )?? 0,
+          "sQuantity": int.tryParse(scontroller.text) ?? 0,
 
-              "inr": priceController.text,
-            
-              "timestamp": timestamp,
-              "composition": compositionController.text,
-              "washandcare": washandcareController.text,
-              "sizeandfit": sizeandfitController.text,
-              "xxxsQuantity": int.tryParse(xxxscontroller.text) ?? 0,
-              "xxsQuantity": int.tryParse(xxscontroller.text) ?? 0,
-              "xsQuantity":  int.tryParse(xscontroller.text )?? 0,
-              "sQuantity": int.tryParse(scontroller.text) ?? 0,
-
-              "mtoQuantity":  int.tryParse(mtocontroller.text) ?? 0,
-              "freesizeQuantity":   int.tryParse(freesizecontroller.text) ?? 0,
-
-
-              "mQuantity":  int.tryParse(mcontroller.text) ?? 0,
-              "lQuantity":  int.tryParse(lcontroller.text) ?? 0,
-              "xlQuantity":  int.tryParse(xlcontroller.text) ?? 0,
-              "xxlQuantity":  int.tryParse(xxlcontroller.text) ?? 0,
-              "xxxlQuantity":  int.tryParse(xxlcontroller.text) ?? 0,
-              "fourxlQuantity":  int.tryParse(fourxlcontroller.text) ?? 0,
-              "fivexlQuantity":  int.tryParse(fivexlcontroller.text) ?? 0,
-              "sixxlQuantity":  int.tryParse(sixxlcontroller.text) ?? 0,
-              "sevenxlQuantity":  int.tryParse(sevenxlcontroller.text) ?? 0,
-              "eightxlQuantity":  int.tryParse(eightxlcontroller.text) ?? 0,
-              "Shoe1":   int.tryParse(Shoe1controller.text) ?? 0,
-              "Shoe2":   int.tryParse(Shoe2controller.text) ?? 0,
-              "Shoe3":   int.tryParse(Shoe3controller.text) ?? 0,
-              "Shoe4":   int.tryParse(Shoe4controller.text) ?? 0,
-              "Shoe5":   int.tryParse(Shoe5controller.text) ?? 0,
-              "Shoe6":   int.tryParse(Shoe6controller.text) ?? 0,
-              "Shoe7":   int.tryParse(Shoe7controller.text) ?? 0,
-              "Shoe8":   int.tryParse(Shoe8controller.text) ?? 0,
-              "Shoe9":   int.tryParse(Shoe9controller.text) ?? 0,
-              "Shoe10":   int.tryParse(Shoe10controller.text) ?? 0,
-              "Shoe11":   int.tryParse(Shoe11controller.text) ?? 0,
-              "Shoe12":   int.tryParse(Shoe12controller.text) ?? 0,
-              "Shoe13":   int.tryParse(Shoe13controller.text) ?? 0,
-              "Shoe14":   int.tryParse(Shoe14controller.text) ?? 0,
-              "Shoe15":  int.tryParse(Shoe15controller.text) ?? 0,
-              "Shoe16":  int.tryParse(Shoe16controller.text) ?? 0,
-              "Shoe17":  int.tryParse(Shoe17controller.text) ?? 0,
-              "Shoe18":  int.tryParse(Shoe18controller.text) ?? 0,
-              "Shoe19":  int.tryParse(Shoe19controller.text) ?? 0,
-              "Shoe20":  int.tryParse(Shoe20controller.text) ?? 0,
-              "Shoe21":  int.tryParse(Shoe21controller.text) ?? 0,
-              "Ring1":   int.tryParse(Ring1controller.text) ?? 0,
-              "Ring2":   int.tryParse(Ring2controller.text) ?? 0,
-              "Ring3":   int.tryParse(Ring3controller.text) ?? 0,
-              "Ring4":   int.tryParse(Ring4controller.text) ?? 0,
-              "Ring5":   int.tryParse(Ring5controller.text) ?? 0,
-              "Ring6":   int.tryParse(Ring6controller.text) ?? 0,
-              "Ring7":   int.tryParse(Ring7controller.text) ?? 0,
-              "Ring8":   int.tryParse(Ring8controller.text) ?? 0,
-              "Ring9":   int.tryParse(Ring9controller.text) ?? 0,
-              "Ring10":   int.tryParse(Ring10controller.text) ?? 0,
-              "Ring11":   int.tryParse(Ring11controller.text) ?? 0,
-              "Ring12":   int.tryParse(Ring12controller.text) ?? 0,
-              "Ring13":   int.tryParse(Ring13controller.text) ?? 0,
-              "Ring14":   int.tryParse(Ring14controller.text) ?? 0,
-              "Ring15":  int.tryParse(Ring15controller.text) ?? 0,
-              "Ring16":  int.tryParse(Ring16controller.text) ?? 0,
-              "Ring17":  int.tryParse(Ring17controller.text) ?? 0,
-              "Ring18":  int.tryParse(Ring18controller.text) ?? 0,
-              "Ring19":  int.tryParse(Ring19controller.text) ?? 0,
-              "Ring20":  int.tryParse(Ring20controller.text) ?? 0,
-              "Ring21":  int.tryParse(Ring21controller.text) ?? 0,
-              "Ring22":  int.tryParse(Ring22controller.text) ?? 0,
-              "Ring23":  int.tryParse(Ring23controller.text) ?? 0,
-              "custom1":  customController1.text ?? "",
-              "custom2":  customController2.text ?? "",
-              "custom3":  customController3.text ?? "",
-              "custom4":  customController4.text ?? "",
-              "custom5":  customController5.text ?? "",
-              "custom6":  customController6.text ?? "",
-              "custom7":  customController7.text ?? "",
-              "custom8":  customController8.text ?? "",
-              "custom9":  customController9.text ?? "",
-              "custom10":  customController10.text ?? "",
-               "custom1img":  mediaUrl ?? "",
-              "custom2img":  mediaUrl1 ?? "",
-              "custom3img":  mediaUrl2 ?? "",
-              "custom4img":  mediaUrl3 ?? "",
-              "custom5img":  mediaUrl4 ?? "",
-              "custom6img":  mediaUrl5 ?? "",
-              "custom7img":  mediaUrl6 ?? "",
-              "custom8img":  mediaUrl7 ?? "",
-              "custom9img":  mediaUrl8 ?? "",
-              "custom10img":  mediaUrl9 ?? "",
-
-              "custom12":  int.tryParse(customController12.text) ?? 0,
-              "custom22":  int.tryParse(customController22.text) ?? 0,
-              "custom32":  int.tryParse(customController32.text) ?? 0,
-              "custom42":  int.tryParse(customController42.text) ?? 0,
-              "custom52":  int.tryParse(customController52.text) ?? 0,
-              "custom62":  int.tryParse(customController62.text) ?? 0,
-              "custom72":  int.tryParse(customController72.text) ?? 0,
-              "custom82":  int.tryParse(customController82.text) ?? 0,
-              "custom92":  int.tryParse(customController92.text) ?? 0,
-              "custom102":  int.tryParse(customController102.text) ??0,
-         
-              "custom11inr": customController11.text??  0.1,
-              "custom11usd": inrtousd2?? 0.1,
-              
-              "custom21usd": inrtousd2 ?? 0.1,
-              "custom21inr": customController21.text??  0.1,
-              "custom31usd": inrtousd3?? 0.1,
-              "custom31inr": customController31.text??  0.1,
-              "custom41usd": inrtousd4?? 0.1,
-              "custom41inr": customController41.text??  0.1,
-              "custom51usd": inrtousd5?? 0.1,
-              "custom51inr": customController51.text??  0.1,
-              "custom61usd": inrtousd6?? 0.1,
-              "custom61inr": customController61.text??  0.1,
-              "custom71usd": inrtousd7?? 0.1,
-              "custom71inr": customController71.text??  0.1,
-              "custom81usd": inrtousd8?? 0.1,
-              "custom81inr": customController81.text??  0.1,
-              "custom91usd": inrtousd9?? 0.1,
-              "custom91inr": customController91.text??  0.1,
-              "custom101usd": inrtousd10?? 0.1,
-              "custom101inr": customController101.text??  0.1,
-              "shipcostusd": inrtousd11?? 0.1,
-              "shipcostinr": shipcost.text??  0.1,
-                "shipcostinternusd": inrtousd12?? 0.1,
-              "shipcostinterninr": shipcostintern.text??  0.1,
-"round": inrtousd ?? 0.0,
-
-              "processfrom":  int.tryParse(durationfromp.text) ?? 0,
-              "processto":  int.tryParse(durationto.text) ?? 0,
-              "shipfrom":  int.tryParse(durationfrom.text) ?? 0,
-              "shipto":  int.tryParse(durationto.text) ?? 0,
-              "shipinterfrom":  int.tryParse(durationfromw.text) ?? 0,
-              "shipinterto":  int.tryParse(durationtow.text) ?? 0,
-
-              "likes": {},
-            });
+          "mtoQuantity":  int.tryParse(mtocontroller.text) ?? 0,
+          "freesizeQuantity":   int.tryParse(freesizecontroller.text) ?? 0,
 
 
+          "mQuantity":  int.tryParse(mcontroller.text) ?? 0,
+          "lQuantity":  int.tryParse(lcontroller.text) ?? 0,
+          "xlQuantity":  int.tryParse(xlcontroller.text) ?? 0,
+          "xxlQuantity":  int.tryParse(xxlcontroller.text) ?? 0,
+          "xxxlQuantity":  int.tryParse(xxlcontroller.text) ?? 0,
+          "fourxlQuantity":  int.tryParse(fourxlcontroller.text) ?? 0,
+          "fivexlQuantity":  int.tryParse(fivexlcontroller.text) ?? 0,
+          "sixxlQuantity":  int.tryParse(sixxlcontroller.text) ?? 0,
+          "sevenxlQuantity":  int.tryParse(sevenxlcontroller.text) ?? 0,
+          "eightxlQuantity":  int.tryParse(eightxlcontroller.text) ?? 0,
+          "Shoe1":   int.tryParse(Shoe1controller.text) ?? 0,
+          "Shoe2":   int.tryParse(Shoe2controller.text) ?? 0,
+          "Shoe3":   int.tryParse(Shoe3controller.text) ?? 0,
+          "Shoe4":   int.tryParse(Shoe4controller.text) ?? 0,
+          "Shoe5":   int.tryParse(Shoe5controller.text) ?? 0,
+          "Shoe6":   int.tryParse(Shoe6controller.text) ?? 0,
+          "Shoe7":   int.tryParse(Shoe7controller.text) ?? 0,
+          "Shoe8":   int.tryParse(Shoe8controller.text) ?? 0,
+          "Shoe9":   int.tryParse(Shoe9controller.text) ?? 0,
+          "Shoe10":   int.tryParse(Shoe10controller.text) ?? 0,
+          "Shoe11":   int.tryParse(Shoe11controller.text) ?? 0,
+          "Shoe12":   int.tryParse(Shoe12controller.text) ?? 0,
+          "Shoe13":   int.tryParse(Shoe13controller.text) ?? 0,
+          "Shoe14":   int.tryParse(Shoe14controller.text) ?? 0,
+          "Shoe15":  int.tryParse(Shoe15controller.text) ?? 0,
+          "Shoe16":  int.tryParse(Shoe16controller.text) ?? 0,
+          "Shoe17":  int.tryParse(Shoe17controller.text) ?? 0,
+          "Shoe18":  int.tryParse(Shoe18controller.text) ?? 0,
+          "Shoe19":  int.tryParse(Shoe19controller.text) ?? 0,
+          "Shoe20":  int.tryParse(Shoe20controller.text) ?? 0,
+          "Shoe21":  int.tryParse(Shoe21controller.text) ?? 0,
+          "Ring1":   int.tryParse(Ring1controller.text) ?? 0,
+          "Ring2":   int.tryParse(Ring2controller.text) ?? 0,
+          "Ring3":   int.tryParse(Ring3controller.text) ?? 0,
+          "Ring4":   int.tryParse(Ring4controller.text) ?? 0,
+          "Ring5":   int.tryParse(Ring5controller.text) ?? 0,
+          "Ring6":   int.tryParse(Ring6controller.text) ?? 0,
+          "Ring7":   int.tryParse(Ring7controller.text) ?? 0,
+          "Ring8":   int.tryParse(Ring8controller.text) ?? 0,
+          "Ring9":   int.tryParse(Ring9controller.text) ?? 0,
+          "Ring10":   int.tryParse(Ring10controller.text) ?? 0,
+          "Ring11":   int.tryParse(Ring11controller.text) ?? 0,
+          "Ring12":   int.tryParse(Ring12controller.text) ?? 0,
+          "Ring13":   int.tryParse(Ring13controller.text) ?? 0,
+          "Ring14":   int.tryParse(Ring14controller.text) ?? 0,
+          "Ring15":  int.tryParse(Ring15controller.text) ?? 0,
+          "Ring16":  int.tryParse(Ring16controller.text) ?? 0,
+          "Ring17":  int.tryParse(Ring17controller.text) ?? 0,
+          "Ring18":  int.tryParse(Ring18controller.text) ?? 0,
+          "Ring19":  int.tryParse(Ring19controller.text) ?? 0,
+          "Ring20":  int.tryParse(Ring20controller.text) ?? 0,
+          "Ring21":  int.tryParse(Ring21controller.text) ?? 0,
+          "Ring22":  int.tryParse(Ring22controller.text) ?? 0,
+          "Ring23":  int.tryParse(Ring23controller.text) ?? 0,
+          "custom1":  customController1.text ?? "",
+          "custom2":  customController2.text ?? "",
+          "custom3":  customController3.text ?? "",
+          "custom4":  customController4.text ?? "",
+          "custom5":  customController5.text ?? "",
+          "custom6":  customController6.text ?? "",
+          "custom7":  customController7.text ?? "",
+          "custom8":  customController8.text ?? "",
+          "custom9":  customController9.text ?? "",
+          "custom10":  customController10.text ?? "",
+          "custom1img":  mediaUrl ?? "",
+          "custom2img":  mediaUrl1 ?? "",
+          "custom3img":  mediaUrl2 ?? "",
+          "custom4img":  mediaUrl3 ?? "",
+          "custom5img":  mediaUrl4 ?? "",
+          "custom6img":  mediaUrl5 ?? "",
+          "custom7img":  mediaUrl6 ?? "",
+          "custom8img":  mediaUrl7 ?? "",
+          "custom9img":  mediaUrl8 ?? "",
+          "custom10img":  mediaUrl9 ?? "",
 
-            setState(() {
-              file = null;
-              isUploading = false;
-            });
+          "customQuantity1":  int.tryParse(customControllerQuantity1.text) ?? 0,
+          "customQuantity2":  int.tryParse(customControllerQuantity2.text) ?? 0,
+          "customQuantity3":  int.tryParse(customControllerQuantity3.text) ?? 0,
+          "customQuantity4":  int.tryParse(customControllerQuantity4.text) ?? 0,
+          "customQuantity5":  int.tryParse(customControllerQuantity5.text) ?? 0,
+          "customQuantity6":  int.tryParse(customControllerQuantity6.text) ?? 0,
+          "customQuantity7":  int.tryParse(customControllerQuantity7.text) ?? 0,
+          "customQuantity8":  int.tryParse(customControllerQuantity8.text) ?? 0,
+          "customQuantity9":  int.tryParse(customControllerQuantity9.text) ?? 0,
+          "customQuantity10":  int.tryParse(customControllerQuantity10.text) ??0,
+
+          "custom11inr": userPrice1??  0.1,
+          "custom11usd": inrtousd1?? 0.1,
+          "custom11eur": inrtoeur1?? 0.1,
+          "custom11gbp": inrtogbp1?? 0.1,
+
+          "custom21inr": userPrice2??  0.1,
+          "custom21usd": inrtousd2 ?? 0.1,
+          "custom21gbp": inrtogbp2??  0.1,
+          "custom21eur": inrtoeur2??  0.1,
+
+          "custom31usd": inrtousd3?? 0.1,
+          "custom31inr": userPrice3??  0.1,
+          "custom31gbp": inrtogbp3??  0.1,
+          "custom31eur": inrtoeur3??  0.1,
+
+          "custom41usd": inrtousd4?? 0.1,
+          "custom41inr": userPrice4??  0.1,
+          "custom41gbp": inrtogbp4??  0.1,
+          "custom41eur": inrtoeur4??  0.1,
+
+          "custom51usd": inrtousd5?? 0.1,
+          "custom51inr": userPrice5??  0.1,
+           "custom51gbp": inrtogbp5??  0.1,
+           "custom51eur": inrtoeur5??  0.1,
+
+          "custom61usd": inrtousd6?? 0.1,
+          "custom61inr": userPrice6??  0.1,
+           "custom61eur": inrtoeur6??  0.1,
+           "custom61gbp": inrtogbp6??  0.1,
+
+          "custom71usd": inrtousd7?? 0.1,
+          "custom71inr": userPrice7??  0.1,
+           "custom71eur": inrtoeur7??  0.1,
+           "custom71gbp": inrtogbp7??  0.1,
+
+          "custom81usd": inrtousd8?? 0.1,
+          "custom81inr": userPrice8??  0.1,
+          "custom81eur": inrtoeur8??  0.1,
+          "custom81gbp": inrtogbp8??  0.1,
+
+          "custom91usd": inrtousd9?? 0.1,
+          "custom91inr": userPrice9??  0.1,
+          "custom91eur": inrtoeur9??  0.1,
+          "custom91gbp": inrtogbp9??  0.1,
+
+          "custom101usd": inrtousd10?? 0.1,
+          "custom101inr": userPrice10??  0.1,
+          "custom101eur": inrtoeur10??  0.1,
+          "custom101gbp": inrtogbp10??  0.1,
+
+          "shipcostusd": inrtousd11?? 0.1,
+          "shipcostinr": userPrice11??  0.1,
+          "shipcostgbp": inrtogbp11??  0.1,
+          "shipcosteur": inrtoeur11??  0.1,
+
+          "shipcostinternusd": inrtousd12?? 0.1,
+          "shipcostinterninr": userPrice12??  0.1,
+          "shipcostinterneur": inrtoeur12??  0.1,
+          "shipcostinterngbp": inrtogbp12??  0.1,
+
+          "round": inrtousd ?? 0.0,
+
+          "processfrom":  int.tryParse(durationfromp.text) ?? 0,
+          "processto":  int.tryParse(durationto.text) ?? 0,
+          "shipfrom":  int.tryParse(durationfrom.text) ?? 0,
+          "shipto":  int.tryParse(durationto.text) ?? 0,
+          "shipinterfrom":  int.tryParse(durationfromw.text) ?? 0,
+          "shipinterto":  int.tryParse(durationtow.text) ?? 0,
+
+          "likes": {},
+        });
 
 
 
-        }
-      }).catchError((err) {
-        print(err);
-        print('rtherjhertjnherj${imageUrls.length}');
-        print('rjertertj${images.length}');
+        setState(() {
+          file = null;
+          isUploading = false;
+        });
 
-      });
-    }
+
+
+      }
+    }).catchError((err) {
+      print(err);
+      print('rtherjhertjnherj${imageUrls.length}');
+      print('rjertertj${images.length}');
+
+    });
+  }
+}
+else if(currentUser.currency == "EUR"){
+  for ( var imageFile in images) {
+    postImage(imageFile).then((downloadUrl)  {
+      imageUrls.add(downloadUrl.toString());
+      if(imageUrls.length==images.length){
+        String documnetID = DateTime.now().millisecondsSinceEpoch.toString();
+
+        productsRef
+            .doc(widget.currentUser.id)
+            .collection("userProducts")
+            .doc(prodId)
+            .update({
+          "colorText1":colorController1.text ?? "",
+          "colorText2":colorController2.text ?? "",
+          "colorText3":colorController3.text ?? "",
+          "colorText4":colorController4.text ?? "",
+          "colorText5":colorController5.text ?? "",
+          "colorText6":colorController6.text ?? "",
+          "colorText7":colorController7.text ?? "",
+          "colorText8":colorController8.text ?? "",
+          "colorText9":colorController9.text ?? "",
+          "colorText10":colorController10.text ?? "",
+          "color1":int.tryParse(colorController11.text) ?? 0,
+          "color2":int.tryParse(colorController21.text) ?? 0,
+          "color3":int.tryParse(colorController31.text) ?? 0,
+          "color4":int.tryParse(colorController41.text) ?? 0,
+          "color5":int.tryParse(colorController51.text) ?? 0,
+          "color6":int.tryParse(colorController61.text) ?? 0,
+          "color7":int.tryParse(colorController71.text) ?? 0,
+          "color8":int.tryParse(colorController81.text) ?? 0,
+          "color9":int.tryParse(colorController91.text) ?? 0,
+          "color10":int.tryParse(colorController10.text) ?? 0,
+          "country":  currentUser.country,
+          "currency":  currentUser.currency,
+
+          "worldship":worldship,
+          "freeworldship":freeworldship,
+          "freeship":freeship,
+          "shipment": shipcontroller.text,
+          "prodId": prodId,
+          "ownerId": widget.currentUser.id,
+          "photoUrl": widget.currentUser.photoUrl,
+          "username": widget.currentUser.displayName,
+          "shopmediaUrl": imageUrls,
+          "Category": value,
+          "Gender": dropdownValue,
+          "details": detailsController.text,
+          "productname": productnameController.text,
+          "usd": eurtousd ?? 0.1,
+          "eur": userPrice ?? 0.1,
+          "gbp": eurtogbp ?? 0.1,
+          "inr": eurtoinr ?? 0.1,
+
+          "timestamp": timestamp,
+          "composition": compositionController.text,
+          "washandcare": washandcareController.text,
+          "sizeandfit": sizeandfitController.text,
+          "xxxsQuantity": int.tryParse(xxxscontroller.text) ?? 0,
+          "xxsQuantity": int.tryParse(xxscontroller.text) ?? 0,
+          "xsQuantity":  int.tryParse(xscontroller.text )?? 0,
+          "sQuantity": int.tryParse(scontroller.text) ?? 0,
+
+          "mtoQuantity":  int.tryParse(mtocontroller.text) ?? 0,
+          "freesizeQuantity":   int.tryParse(freesizecontroller.text) ?? 0,
+
+
+          "mQuantity":  int.tryParse(mcontroller.text) ?? 0,
+          "lQuantity":  int.tryParse(lcontroller.text) ?? 0,
+          "xlQuantity":  int.tryParse(xlcontroller.text) ?? 0,
+          "xxlQuantity":  int.tryParse(xxlcontroller.text) ?? 0,
+          "xxxlQuantity":  int.tryParse(xxlcontroller.text) ?? 0,
+          "fourxlQuantity":  int.tryParse(fourxlcontroller.text) ?? 0,
+          "fivexlQuantity":  int.tryParse(fivexlcontroller.text) ?? 0,
+          "sixxlQuantity":  int.tryParse(sixxlcontroller.text) ?? 0,
+          "sevenxlQuantity":  int.tryParse(sevenxlcontroller.text) ?? 0,
+          "eightxlQuantity":  int.tryParse(eightxlcontroller.text) ?? 0,
+          "Shoe1":   int.tryParse(Shoe1controller.text) ?? 0,
+          "Shoe2":   int.tryParse(Shoe2controller.text) ?? 0,
+          "Shoe3":   int.tryParse(Shoe3controller.text) ?? 0,
+          "Shoe4":   int.tryParse(Shoe4controller.text) ?? 0,
+          "Shoe5":   int.tryParse(Shoe5controller.text) ?? 0,
+          "Shoe6":   int.tryParse(Shoe6controller.text) ?? 0,
+          "Shoe7":   int.tryParse(Shoe7controller.text) ?? 0,
+          "Shoe8":   int.tryParse(Shoe8controller.text) ?? 0,
+          "Shoe9":   int.tryParse(Shoe9controller.text) ?? 0,
+          "Shoe10":   int.tryParse(Shoe10controller.text) ?? 0,
+          "Shoe11":   int.tryParse(Shoe11controller.text) ?? 0,
+          "Shoe12":   int.tryParse(Shoe12controller.text) ?? 0,
+          "Shoe13":   int.tryParse(Shoe13controller.text) ?? 0,
+          "Shoe14":   int.tryParse(Shoe14controller.text) ?? 0,
+          "Shoe15":  int.tryParse(Shoe15controller.text) ?? 0,
+          "Shoe16":  int.tryParse(Shoe16controller.text) ?? 0,
+          "Shoe17":  int.tryParse(Shoe17controller.text) ?? 0,
+          "Shoe18":  int.tryParse(Shoe18controller.text) ?? 0,
+          "Shoe19":  int.tryParse(Shoe19controller.text) ?? 0,
+          "Shoe20":  int.tryParse(Shoe20controller.text) ?? 0,
+          "Shoe21":  int.tryParse(Shoe21controller.text) ?? 0,
+          "Ring1":   int.tryParse(Ring1controller.text) ?? 0,
+          "Ring2":   int.tryParse(Ring2controller.text) ?? 0,
+          "Ring3":   int.tryParse(Ring3controller.text) ?? 0,
+          "Ring4":   int.tryParse(Ring4controller.text) ?? 0,
+          "Ring5":   int.tryParse(Ring5controller.text) ?? 0,
+          "Ring6":   int.tryParse(Ring6controller.text) ?? 0,
+          "Ring7":   int.tryParse(Ring7controller.text) ?? 0,
+          "Ring8":   int.tryParse(Ring8controller.text) ?? 0,
+          "Ring9":   int.tryParse(Ring9controller.text) ?? 0,
+          "Ring10":   int.tryParse(Ring10controller.text) ?? 0,
+          "Ring11":   int.tryParse(Ring11controller.text) ?? 0,
+          "Ring12":   int.tryParse(Ring12controller.text) ?? 0,
+          "Ring13":   int.tryParse(Ring13controller.text) ?? 0,
+          "Ring14":   int.tryParse(Ring14controller.text) ?? 0,
+          "Ring15":  int.tryParse(Ring15controller.text) ?? 0,
+          "Ring16":  int.tryParse(Ring16controller.text) ?? 0,
+          "Ring17":  int.tryParse(Ring17controller.text) ?? 0,
+          "Ring18":  int.tryParse(Ring18controller.text) ?? 0,
+          "Ring19":  int.tryParse(Ring19controller.text) ?? 0,
+          "Ring20":  int.tryParse(Ring20controller.text) ?? 0,
+          "Ring21":  int.tryParse(Ring21controller.text) ?? 0,
+          "Ring22":  int.tryParse(Ring22controller.text) ?? 0,
+          "Ring23":  int.tryParse(Ring23controller.text) ?? 0,
+          "custom1":  customController1.text ?? "",
+          "custom2":  customController2.text ?? "",
+          "custom3":  customController3.text ?? "",
+          "custom4":  customController4.text ?? "",
+          "custom5":  customController5.text ?? "",
+          "custom6":  customController6.text ?? "",
+          "custom7":  customController7.text ?? "",
+          "custom8":  customController8.text ?? "",
+          "custom9":  customController9.text ?? "",
+          "custom10":  customController10.text ?? "",
+          "custom1img":  mediaUrl ?? "",
+          "custom2img":  mediaUrl1 ?? "",
+          "custom3img":  mediaUrl2 ?? "",
+          "custom4img":  mediaUrl3 ?? "",
+          "custom5img":  mediaUrl4 ?? "",
+          "custom6img":  mediaUrl5 ?? "",
+          "custom7img":  mediaUrl6 ?? "",
+          "custom8img":  mediaUrl7 ?? "",
+          "custom9img":  mediaUrl8 ?? "",
+          "custom10img":  mediaUrl9 ?? "",
+
+          "customQuantity1":  int.tryParse(customControllerQuantity1.text) ?? 0,
+          "customQuantity2":  int.tryParse(customControllerQuantity2.text) ?? 0,
+          "customQuantity3":  int.tryParse(customControllerQuantity3.text) ?? 0,
+          "customQuantity4":  int.tryParse(customControllerQuantity4.text) ?? 0,
+          "customQuantity5":  int.tryParse(customControllerQuantity5.text) ?? 0,
+          "customQuantity6":  int.tryParse(customControllerQuantity6.text) ?? 0,
+          "customQuantity7":  int.tryParse(customControllerQuantity7.text) ?? 0,
+          "customQuantity8":  int.tryParse(customControllerQuantity8.text) ?? 0,
+          "customQuantity9":  int.tryParse(customControllerQuantity9.text) ?? 0,
+          "customQuantity10":  int.tryParse(customControllerQuantity10.text) ??0,
+
+          "custom11inr": eurtoinr1??  0.1,
+          "custom11usd": eurtousd1?? 0.1,
+          "custom11eur": userPrice1?? 0.1,
+          "custom11gbp": eurtogbp1?? 0.1,
+
+          "custom21inr": eurtoinr2??  0.1,
+          "custom21usd": eurtousd2 ?? 0.1,
+          "custom21gbp": eurtogbp2??  0.1,
+          "custom21eur": userPrice2??  0.1,
+
+          "custom31usd": eurtousd3?? 0.1,
+          "custom31inr": eurtoinr3??  0.1,
+          "custom31gbp": eurtogbp3??  0.1,
+          "custom31eur": userPrice3??  0.1,
+
+          "custom41usd": eurtousd4?? 0.1,
+          "custom41inr": eurtoinr4??  0.1,
+          "custom41gbp": eurtogbp4??  0.1,
+          "custom41eur": userPrice4??  0.1,
+
+          "custom51usd": eurtousd5?? 0.1,
+          "custom51inr": eurtoinr5??  0.1,
+          "custom51gbp": eurtogbp5??  0.1,
+          "custom51eur": userPrice5??  0.1,
+
+          "custom61usd": eurtousd6?? 0.1,
+          "custom61inr": eurtoinr6??  0.1,
+          "custom61eur": userPrice6??  0.1,
+          "custom61gbp": eurtogbp6??  0.1,
+
+          "custom71usd": eurtousd7?? 0.1,
+          "custom71inr": eurtoinr7??  0.1,
+          "custom71eur": userPrice7??  0.1,
+          "custom71gbp": eurtogbp7??  0.1,
+
+          "custom81usd": eurtousd8?? 0.1,
+          "custom81inr": eurtoinr8??  0.1,
+          "custom81eur": userPrice8??  0.1,
+          "custom81gbp": eurtogbp8??  0.1,
+
+          "custom91usd": eurtousd9?? 0.1,
+          "custom91inr": eurtoinr9??  0.1,
+          "custom91eur": userPrice9??  0.1,
+          "custom91gbp": eurtogbp9??  0.1,
+
+          "custom101usd": eurtousd10?? 0.1,
+          "custom101inr": eurtoinr10??  0.1,
+          "custom101eur": userPrice10??  0.1,
+          "custom101gbp": eurtogbp10??  0.1,
+
+          "shipcostusd": eurtousd11?? 0.1,
+          "shipcostinr": eurtoinr11??  0.1,
+          "shipcostgbp": eurtogbp11??  0.1,
+          "shipcosteur": userPrice11??  0.1,
+
+          "shipcostinternusd": eurtousd12?? 0.1,
+          "shipcostinterninr": eurtoinr12??  0.1,
+          "shipcostinterneur": userPrice12??  0.1,
+          "shipcostinterngbp": eurtogbp12??  0.1,
+
+          "round": eurtousd ?? 0.0,
+
+          "processfrom":  int.tryParse(durationfromp.text) ?? 0,
+          "processto":  int.tryParse(durationto.text) ?? 0,
+          "shipfrom":  int.tryParse(durationfrom.text) ?? 0,
+          "shipto":  int.tryParse(durationto.text) ?? 0,
+          "shipinterfrom":  int.tryParse(durationfromw.text) ?? 0,
+          "shipinterto":  int.tryParse(durationtow.text) ?? 0,
+
+          "likes": {},
+        });
+
+
+
+        setState(() {
+          file = null;
+          isUploading = false;
+        });
+
+
+
+      }
+    }).catchError((err) {
+      print(err);
+
+
+    });
+  }
+}
+else if(currentUser.currency == "GBP"){
+  for ( var imageFile in images) {
+    postImage(imageFile).then((downloadUrl)  {
+      imageUrls.add(downloadUrl.toString());
+      if(imageUrls.length==images.length){
+        String documnetID = DateTime.now().millisecondsSinceEpoch.toString();
+
+        productsRef
+            .doc(widget.currentUser.id)
+            .collection("userProducts")
+            .doc(prodId)
+            .update({
+          "colorText1":colorController1.text ?? "",
+          "colorText2":colorController2.text ?? "",
+          "colorText3":colorController3.text ?? "",
+          "colorText4":colorController4.text ?? "",
+          "colorText5":colorController5.text ?? "",
+          "colorText6":colorController6.text ?? "",
+          "colorText7":colorController7.text ?? "",
+          "colorText8":colorController8.text ?? "",
+          "colorText9":colorController9.text ?? "",
+          "colorText10":colorController10.text ?? "",
+          "color1":int.tryParse(colorController11.text) ?? 0,
+          "color2":int.tryParse(colorController21.text) ?? 0,
+          "color3":int.tryParse(colorController31.text) ?? 0,
+          "color4":int.tryParse(colorController41.text) ?? 0,
+          "color5":int.tryParse(colorController51.text) ?? 0,
+          "color6":int.tryParse(colorController61.text) ?? 0,
+          "color7":int.tryParse(colorController71.text) ?? 0,
+          "color8":int.tryParse(colorController81.text) ?? 0,
+          "color9":int.tryParse(colorController91.text) ?? 0,
+          "color10":int.tryParse(colorController10.text) ?? 0,
+          "country":  currentUser.country,
+          "currency":  currentUser.currency,
+
+          "worldship":worldship,
+          "freeworldship":freeworldship,
+          "freeship":freeship,
+          "shipment": shipcontroller.text,
+          "prodId": prodId,
+          "ownerId": widget.currentUser.id,
+          "photoUrl": widget.currentUser.photoUrl,
+          "username": widget.currentUser.displayName,
+          "shopmediaUrl": imageUrls,
+          "Category": value,
+          "Gender": dropdownValue,
+          "details": detailsController.text,
+          "productname": productnameController.text,
+          "usd": gbptousd ?? 0.1,
+          "eur": gbptousd ?? 0.1,
+          "gbp": userPrice ?? 0.1,
+          "inr": gbptoinr ?? 0.1,
+
+          "timestamp": timestamp,
+          "composition": compositionController.text,
+          "washandcare": washandcareController.text,
+          "sizeandfit": sizeandfitController.text,
+          "xxxsQuantity": int.tryParse(xxxscontroller.text) ?? 0,
+          "xxsQuantity": int.tryParse(xxscontroller.text) ?? 0,
+          "xsQuantity":  int.tryParse(xscontroller.text )?? 0,
+          "sQuantity": int.tryParse(scontroller.text) ?? 0,
+
+          "mtoQuantity":  int.tryParse(mtocontroller.text) ?? 0,
+          "freesizeQuantity":   int.tryParse(freesizecontroller.text) ?? 0,
+
+
+          "mQuantity":  int.tryParse(mcontroller.text) ?? 0,
+          "lQuantity":  int.tryParse(lcontroller.text) ?? 0,
+          "xlQuantity":  int.tryParse(xlcontroller.text) ?? 0,
+          "xxlQuantity":  int.tryParse(xxlcontroller.text) ?? 0,
+          "xxxlQuantity":  int.tryParse(xxlcontroller.text) ?? 0,
+          "fourxlQuantity":  int.tryParse(fourxlcontroller.text) ?? 0,
+          "fivexlQuantity":  int.tryParse(fivexlcontroller.text) ?? 0,
+          "sixxlQuantity":  int.tryParse(sixxlcontroller.text) ?? 0,
+          "sevenxlQuantity":  int.tryParse(sevenxlcontroller.text) ?? 0,
+          "eightxlQuantity":  int.tryParse(eightxlcontroller.text) ?? 0,
+          "Shoe1":   int.tryParse(Shoe1controller.text) ?? 0,
+          "Shoe2":   int.tryParse(Shoe2controller.text) ?? 0,
+          "Shoe3":   int.tryParse(Shoe3controller.text) ?? 0,
+          "Shoe4":   int.tryParse(Shoe4controller.text) ?? 0,
+          "Shoe5":   int.tryParse(Shoe5controller.text) ?? 0,
+          "Shoe6":   int.tryParse(Shoe6controller.text) ?? 0,
+          "Shoe7":   int.tryParse(Shoe7controller.text) ?? 0,
+          "Shoe8":   int.tryParse(Shoe8controller.text) ?? 0,
+          "Shoe9":   int.tryParse(Shoe9controller.text) ?? 0,
+          "Shoe10":   int.tryParse(Shoe10controller.text) ?? 0,
+          "Shoe11":   int.tryParse(Shoe11controller.text) ?? 0,
+          "Shoe12":   int.tryParse(Shoe12controller.text) ?? 0,
+          "Shoe13":   int.tryParse(Shoe13controller.text) ?? 0,
+          "Shoe14":   int.tryParse(Shoe14controller.text) ?? 0,
+          "Shoe15":  int.tryParse(Shoe15controller.text) ?? 0,
+          "Shoe16":  int.tryParse(Shoe16controller.text) ?? 0,
+          "Shoe17":  int.tryParse(Shoe17controller.text) ?? 0,
+          "Shoe18":  int.tryParse(Shoe18controller.text) ?? 0,
+          "Shoe19":  int.tryParse(Shoe19controller.text) ?? 0,
+          "Shoe20":  int.tryParse(Shoe20controller.text) ?? 0,
+          "Shoe21":  int.tryParse(Shoe21controller.text) ?? 0,
+          "Ring1":   int.tryParse(Ring1controller.text) ?? 0,
+          "Ring2":   int.tryParse(Ring2controller.text) ?? 0,
+          "Ring3":   int.tryParse(Ring3controller.text) ?? 0,
+          "Ring4":   int.tryParse(Ring4controller.text) ?? 0,
+          "Ring5":   int.tryParse(Ring5controller.text) ?? 0,
+          "Ring6":   int.tryParse(Ring6controller.text) ?? 0,
+          "Ring7":   int.tryParse(Ring7controller.text) ?? 0,
+          "Ring8":   int.tryParse(Ring8controller.text) ?? 0,
+          "Ring9":   int.tryParse(Ring9controller.text) ?? 0,
+          "Ring10":   int.tryParse(Ring10controller.text) ?? 0,
+          "Ring11":   int.tryParse(Ring11controller.text) ?? 0,
+          "Ring12":   int.tryParse(Ring12controller.text) ?? 0,
+          "Ring13":   int.tryParse(Ring13controller.text) ?? 0,
+          "Ring14":   int.tryParse(Ring14controller.text) ?? 0,
+          "Ring15":  int.tryParse(Ring15controller.text) ?? 0,
+          "Ring16":  int.tryParse(Ring16controller.text) ?? 0,
+          "Ring17":  int.tryParse(Ring17controller.text) ?? 0,
+          "Ring18":  int.tryParse(Ring18controller.text) ?? 0,
+          "Ring19":  int.tryParse(Ring19controller.text) ?? 0,
+          "Ring20":  int.tryParse(Ring20controller.text) ?? 0,
+          "Ring21":  int.tryParse(Ring21controller.text) ?? 0,
+          "Ring22":  int.tryParse(Ring22controller.text) ?? 0,
+          "Ring23":  int.tryParse(Ring23controller.text) ?? 0,
+          "custom1":  customController1.text ?? "",
+          "custom2":  customController2.text ?? "",
+          "custom3":  customController3.text ?? "",
+          "custom4":  customController4.text ?? "",
+          "custom5":  customController5.text ?? "",
+          "custom6":  customController6.text ?? "",
+          "custom7":  customController7.text ?? "",
+          "custom8":  customController8.text ?? "",
+          "custom9":  customController9.text ?? "",
+          "custom10":  customController10.text ?? "",
+          "custom1img":  mediaUrl ?? "",
+          "custom2img":  mediaUrl1 ?? "",
+          "custom3img":  mediaUrl2 ?? "",
+          "custom4img":  mediaUrl3 ?? "",
+          "custom5img":  mediaUrl4 ?? "",
+          "custom6img":  mediaUrl5 ?? "",
+          "custom7img":  mediaUrl6 ?? "",
+          "custom8img":  mediaUrl7 ?? "",
+          "custom9img":  mediaUrl8 ?? "",
+          "custom10img":  mediaUrl9 ?? "",
+
+          "customQuantity1":  int.tryParse(customControllerQuantity1.text) ?? 0,
+          "customQuantity2":  int.tryParse(customControllerQuantity2.text) ?? 0,
+          "customQuantity3":  int.tryParse(customControllerQuantity3.text) ?? 0,
+          "customQuantity4":  int.tryParse(customControllerQuantity4.text) ?? 0,
+          "customQuantity5":  int.tryParse(customControllerQuantity5.text) ?? 0,
+          "customQuantity6":  int.tryParse(customControllerQuantity6.text) ?? 0,
+          "customQuantity7":  int.tryParse(customControllerQuantity7.text) ?? 0,
+          "customQuantity8":  int.tryParse(customControllerQuantity8.text) ?? 0,
+          "customQuantity9":  int.tryParse(customControllerQuantity9.text) ?? 0,
+          "customQuantity10":  int.tryParse(customControllerQuantity10.text) ??0,
+
+          "custom11inr": gbptoinr1??  0.1,
+          "custom11usd": gbptousd1?? 0.1,
+          "custom11eur": gbptoeur1?? 0.1,
+          "custom11gbp": userPrice1?? 0.1,
+
+          "custom21inr": gbptoinr2??  0.1,
+          "custom21usd": gbptousd2 ?? 0.1,
+          "custom21gbp": userPrice2??  0.1,
+          "custom21eur": gbptoeur2??  0.1,
+
+          "custom31usd": gbptousd3?? 0.1,
+          "custom31inr": gbptoinr3??  0.1,
+          "custom31gbp": userPrice3??  0.1,
+          "custom31eur": gbptoeur3??  0.1,
+
+          "custom41usd": gbptousd4?? 0.1,
+          "custom41inr": gbptoinr4??  0.1,
+          "custom41gbp": userPrice4??  0.1,
+          "custom41eur": gbptoeur4??  0.1,
+
+          "custom51usd": gbptousd5?? 0.1,
+          "custom51inr": gbptoinr5??  0.1,
+          "custom51gbp": userPrice5??  0.1,
+          "custom51eur": gbptoeur5??  0.1,
+
+          "custom61usd": gbptousd6?? 0.1,
+          "custom61inr": gbptoinr6??  0.1,
+          "custom61eur": gbptoeur6??  0.1,
+          "custom61gbp": userPrice6??  0.1,
+
+          "custom71usd": gbptousd7?? 0.1,
+          "custom71inr": gbptoinr7??  0.1,
+          "custom71eur": gbptoeur7??  0.1,
+          "custom71gbp": userPrice7??  0.1,
+
+          "custom81usd": gbptousd8?? 0.1,
+          "custom81inr": gbptoinr8??  0.1,
+          "custom81eur": gbptoeur8??  0.1,
+          "custom81gbp": userPrice8??  0.1,
+
+          "custom91usd": gbptousd9?? 0.1,
+          "custom91inr": gbptoinr9??  0.1,
+          "custom91eur": gbptoeur9??  0.1,
+          "custom91gbp": userPrice9??  0.1,
+
+          "custom101usd": gbptousd10?? 0.1,
+          "custom101inr": gbptoinr10??  0.1,
+          "custom101eur": gbptoeur10??  0.1,
+          "custom101gbp": userPrice10??  0.1,
+
+          "shipcostusd": gbptousd11?? 0.1,
+          "shipcostinr": gbptoinr11??  0.1,
+          "shipcostgbp": userPrice11??  0.1,
+          "shipcosteur": gbptoeur11??  0.1,
+
+          "shipcostinternusd": gbptousd12?? 0.1,
+          "shipcostinterninr": gbptoinr12??  0.1,
+          "shipcostinterneur": gbptoeur12??  0.1,
+          "shipcostinterngbp": userPrice12??  0.1,
+
+          "round": gbptousd ?? 0.0,
+
+          "processfrom":  int.tryParse(durationfromp.text) ?? 0,
+          "processto":  int.tryParse(durationto.text) ?? 0,
+          "shipfrom":  int.tryParse(durationfrom.text) ?? 0,
+          "shipto":  int.tryParse(durationto.text) ?? 0,
+          "shipinterfrom":  int.tryParse(durationfromw.text) ?? 0,
+          "shipinterto":  int.tryParse(durationtow.text) ?? 0,
+
+          "likes": {},
+        });
+
+
+
+        setState(() {
+          file = null;
+          isUploading = false;
+        });
+
+
+
+      }
+    }).catchError((err) {
+      print(err);
+    });
+  }
+}
+else{
+  for ( var imageFile in images) {
+    postImage(imageFile).then((downloadUrl)  {
+      imageUrls.add(downloadUrl.toString());
+      if(imageUrls.length==images.length){
+        String documnetID = DateTime.now().millisecondsSinceEpoch.toString();
+
+        productsRef
+            .doc(widget.currentUser.id)
+            .collection("userProducts")
+            .doc(prodId)
+            .update({
+          "colorText1":colorController1.text ?? "",
+          "colorText2":colorController2.text ?? "",
+          "colorText3":colorController3.text ?? "",
+          "colorText4":colorController4.text ?? "",
+          "colorText5":colorController5.text ?? "",
+          "colorText6":colorController6.text ?? "",
+          "colorText7":colorController7.text ?? "",
+          "colorText8":colorController8.text ?? "",
+          "colorText9":colorController9.text ?? "",
+          "colorText10":colorController10.text ?? "",
+          "color1":int.tryParse(colorController11.text) ?? 0,
+          "color2":int.tryParse(colorController21.text) ?? 0,
+          "color3":int.tryParse(colorController31.text) ?? 0,
+          "color4":int.tryParse(colorController41.text) ?? 0,
+          "color5":int.tryParse(colorController51.text) ?? 0,
+          "color6":int.tryParse(colorController61.text) ?? 0,
+          "color7":int.tryParse(colorController71.text) ?? 0,
+          "color8":int.tryParse(colorController81.text) ?? 0,
+          "color9":int.tryParse(colorController91.text) ?? 0,
+          "color10":int.tryParse(colorController10.text) ?? 0,
+          "country":  currentUser.country,
+          "currency":  currentUser.currency,
+
+          "worldship":worldship,
+          "freeworldship":freeworldship,
+          "freeship":freeship,
+          "shipment": shipcontroller.text,
+          "prodId": prodId,
+          "ownerId": widget.currentUser.id,
+          "photoUrl": widget.currentUser.photoUrl,
+          "username": widget.currentUser.displayName,
+          "shopmediaUrl": imageUrls,
+          "Category": value,
+          "Gender": dropdownValue,
+          "details": detailsController.text,
+          "productname": productnameController.text,
+          "usd": userPrice ?? 0.1,
+          "eur": usdtoeur ?? 0.1,
+          "gbp": usdtoinr ?? 0.1,
+          "inr": usdtoinr ?? 0.1,
+
+          "timestamp": timestamp,
+          "composition": compositionController.text,
+          "washandcare": washandcareController.text,
+          "sizeandfit": sizeandfitController.text,
+          "xxxsQuantity": int.tryParse(xxxscontroller.text) ?? 0,
+          "xxsQuantity": int.tryParse(xxscontroller.text) ?? 0,
+          "xsQuantity":  int.tryParse(xscontroller.text )?? 0,
+          "sQuantity": int.tryParse(scontroller.text) ?? 0,
+
+          "mtoQuantity":  int.tryParse(mtocontroller.text) ?? 0,
+          "freesizeQuantity":   int.tryParse(freesizecontroller.text) ?? 0,
+
+
+          "mQuantity":  int.tryParse(mcontroller.text) ?? 0,
+          "lQuantity":  int.tryParse(lcontroller.text) ?? 0,
+          "xlQuantity":  int.tryParse(xlcontroller.text) ?? 0,
+          "xxlQuantity":  int.tryParse(xxlcontroller.text) ?? 0,
+          "xxxlQuantity":  int.tryParse(xxlcontroller.text) ?? 0,
+          "fourxlQuantity":  int.tryParse(fourxlcontroller.text) ?? 0,
+          "fivexlQuantity":  int.tryParse(fivexlcontroller.text) ?? 0,
+          "sixxlQuantity":  int.tryParse(sixxlcontroller.text) ?? 0,
+          "sevenxlQuantity":  int.tryParse(sevenxlcontroller.text) ?? 0,
+          "eightxlQuantity":  int.tryParse(eightxlcontroller.text) ?? 0,
+          "Shoe1":   int.tryParse(Shoe1controller.text) ?? 0,
+          "Shoe2":   int.tryParse(Shoe2controller.text) ?? 0,
+          "Shoe3":   int.tryParse(Shoe3controller.text) ?? 0,
+          "Shoe4":   int.tryParse(Shoe4controller.text) ?? 0,
+          "Shoe5":   int.tryParse(Shoe5controller.text) ?? 0,
+          "Shoe6":   int.tryParse(Shoe6controller.text) ?? 0,
+          "Shoe7":   int.tryParse(Shoe7controller.text) ?? 0,
+          "Shoe8":   int.tryParse(Shoe8controller.text) ?? 0,
+          "Shoe9":   int.tryParse(Shoe9controller.text) ?? 0,
+          "Shoe10":   int.tryParse(Shoe10controller.text) ?? 0,
+          "Shoe11":   int.tryParse(Shoe11controller.text) ?? 0,
+          "Shoe12":   int.tryParse(Shoe12controller.text) ?? 0,
+          "Shoe13":   int.tryParse(Shoe13controller.text) ?? 0,
+          "Shoe14":   int.tryParse(Shoe14controller.text) ?? 0,
+          "Shoe15":  int.tryParse(Shoe15controller.text) ?? 0,
+          "Shoe16":  int.tryParse(Shoe16controller.text) ?? 0,
+          "Shoe17":  int.tryParse(Shoe17controller.text) ?? 0,
+          "Shoe18":  int.tryParse(Shoe18controller.text) ?? 0,
+          "Shoe19":  int.tryParse(Shoe19controller.text) ?? 0,
+          "Shoe20":  int.tryParse(Shoe20controller.text) ?? 0,
+          "Shoe21":  int.tryParse(Shoe21controller.text) ?? 0,
+          "Ring1":   int.tryParse(Ring1controller.text) ?? 0,
+          "Ring2":   int.tryParse(Ring2controller.text) ?? 0,
+          "Ring3":   int.tryParse(Ring3controller.text) ?? 0,
+          "Ring4":   int.tryParse(Ring4controller.text) ?? 0,
+          "Ring5":   int.tryParse(Ring5controller.text) ?? 0,
+          "Ring6":   int.tryParse(Ring6controller.text) ?? 0,
+          "Ring7":   int.tryParse(Ring7controller.text) ?? 0,
+          "Ring8":   int.tryParse(Ring8controller.text) ?? 0,
+          "Ring9":   int.tryParse(Ring9controller.text) ?? 0,
+          "Ring10":   int.tryParse(Ring10controller.text) ?? 0,
+          "Ring11":   int.tryParse(Ring11controller.text) ?? 0,
+          "Ring12":   int.tryParse(Ring12controller.text) ?? 0,
+          "Ring13":   int.tryParse(Ring13controller.text) ?? 0,
+          "Ring14":   int.tryParse(Ring14controller.text) ?? 0,
+          "Ring15":  int.tryParse(Ring15controller.text) ?? 0,
+          "Ring16":  int.tryParse(Ring16controller.text) ?? 0,
+          "Ring17":  int.tryParse(Ring17controller.text) ?? 0,
+          "Ring18":  int.tryParse(Ring18controller.text) ?? 0,
+          "Ring19":  int.tryParse(Ring19controller.text) ?? 0,
+          "Ring20":  int.tryParse(Ring20controller.text) ?? 0,
+          "Ring21":  int.tryParse(Ring21controller.text) ?? 0,
+          "Ring22":  int.tryParse(Ring22controller.text) ?? 0,
+          "Ring23":  int.tryParse(Ring23controller.text) ?? 0,
+          "custom1":  customController1.text ?? "",
+          "custom2":  customController2.text ?? "",
+          "custom3":  customController3.text ?? "",
+          "custom4":  customController4.text ?? "",
+          "custom5":  customController5.text ?? "",
+          "custom6":  customController6.text ?? "",
+          "custom7":  customController7.text ?? "",
+          "custom8":  customController8.text ?? "",
+          "custom9":  customController9.text ?? "",
+          "custom10":  customController10.text ?? "",
+          "custom1img":  mediaUrl ?? "",
+          "custom2img":  mediaUrl1 ?? "",
+          "custom3img":  mediaUrl2 ?? "",
+          "custom4img":  mediaUrl3 ?? "",
+          "custom5img":  mediaUrl4 ?? "",
+          "custom6img":  mediaUrl5 ?? "",
+          "custom7img":  mediaUrl6 ?? "",
+          "custom8img":  mediaUrl7 ?? "",
+          "custom9img":  mediaUrl8 ?? "",
+          "custom10img":  mediaUrl9 ?? "",
+
+          "customQuantity1":  int.tryParse(customControllerQuantity1.text) ?? 0,
+          "customQuantity2":  int.tryParse(customControllerQuantity2.text) ?? 0,
+          "customQuantity3":  int.tryParse(customControllerQuantity3.text) ?? 0,
+          "customQuantity4":  int.tryParse(customControllerQuantity4.text) ?? 0,
+          "customQuantity5":  int.tryParse(customControllerQuantity5.text) ?? 0,
+          "customQuantity6":  int.tryParse(customControllerQuantity6.text) ?? 0,
+          "customQuantity7":  int.tryParse(customControllerQuantity7.text) ?? 0,
+          "customQuantity8":  int.tryParse(customControllerQuantity8.text) ?? 0,
+          "customQuantity9":  int.tryParse(customControllerQuantity9.text) ?? 0,
+          "customQuantity10":  int.tryParse(customControllerQuantity10.text) ??0,
+
+          "custom11inr": usdtoinr1??  0.1,
+          "custom11usd": userPrice1?? 0.1,
+          "custom11eur": usdtoeur1?? 0.1,
+          "custom11gbp": usdtogbp1?? 0.1,
+
+          "custom21inr": usdtoinr2??  0.1,
+          "custom21usd": userPrice2 ?? 0.1,
+          "custom21gbp": usdtogbp2??  0.1,
+          "custom21eur": usdtoeur2??  0.1,
+
+          "custom31usd": userPrice3?? 0.1,
+          "custom31inr": usdtoinr3??  0.1,
+          "custom31gbp": usdtogbp3??  0.1,
+          "custom31eur": usdtoeur3??  0.1,
+
+          "custom41usd": userPrice4?? 0.1,
+          "custom41inr": usdtoinr4??  0.1,
+          "custom41gbp": usdtogbp4??  0.1,
+          "custom41eur": usdtoeur4??  0.1,
+
+          "custom51usd": userPrice5?? 0.1,
+          "custom51inr": usdtoinr5??  0.1,
+          "custom51gbp": usdtogbp5??  0.1,
+          "custom51eur": usdtoeur5??  0.1,
+
+          "custom61usd": userPrice6?? 0.1,
+          "custom61inr": usdtoinr6??  0.1,
+          "custom61eur": usdtoeur6??  0.1,
+          "custom61gbp": usdtogbp6??  0.1,
+
+          "custom71usd": userPrice7?? 0.1,
+          "custom71inr": usdtoinr7??  0.1,
+          "custom71eur": usdtoeur7??  0.1,
+          "custom71gbp": usdtogbp7??  0.1,
+
+          "custom81usd": userPrice8?? 0.1,
+          "custom81inr": usdtoinr8??  0.1,
+          "custom81eur": usdtoeur8??  0.1,
+          "custom81gbp": usdtogbp8??  0.1,
+
+          "custom91usd": userPrice9?? 0.1,
+          "custom91inr": usdtoinr9??  0.1,
+          "custom91eur": usdtoeur9??  0.1,
+          "custom91gbp": usdtogbp9??  0.1,
+
+          "custom101usd": userPrice10?? 0.1,
+          "custom101inr": usdtoinr10??  0.1,
+          "custom101eur": usdtoeur10??  0.1,
+          "custom101gbp": usdtogbp10??  0.1,
+
+          "shipcostusd": userPrice11?? 0.1,
+          "shipcostinr": usdtoinr11??  0.1,
+          "shipcostgbp": usdtogbp11??  0.1,
+          "shipcosteur": usdtoeur11??  0.1,
+
+          "shipcostinternusd": userPrice12?? 0.1,
+          "shipcostinterninr": usdtoinr12??  0.1,
+          "shipcostinterneur": usdtoeur12??  0.1,
+          "shipcostinterngbp": usdtogbp12??  0.1,
+
+          "round": userPrice ?? 0.0,
+
+          "processfrom":  int.tryParse(durationfromp.text) ?? 0,
+          "processto":  int.tryParse(durationto.text) ?? 0,
+          "shipfrom":  int.tryParse(durationfrom.text) ?? 0,
+          "shipto":  int.tryParse(durationto.text) ?? 0,
+          "shipinterfrom":  int.tryParse(durationfromw.text) ?? 0,
+          "shipinterto":  int.tryParse(durationtow.text) ?? 0,
+
+          "likes": {},
+        });
+
+
+
+        setState(() {
+          file = null;
+          isUploading = false;
+        });
+
+
+
+      }
+    }).catchError((err) {
+      print(err);
+    });
+  }
+}
+
+
     Get.back();
 
 

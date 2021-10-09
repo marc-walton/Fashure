@@ -86,8 +86,6 @@ void INRUSD() async {
     // String date = result.date; // Returns the last updated date
     setState(() {
       inrtousd = resultUSD.rate;
-
-
       Finrtousd = resultUSDF.rate;
 
     });
