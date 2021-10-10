@@ -71,29 +71,124 @@ var Feurtoinr;
 var Feurtousd;
 var Feurtocny;
 var Feurtogbp;
-var userprice;
-var totalprice;
+var advancePrice;
+var totalPrice;
+var USD;
+var GBP;
+var EUR;
+var INR;
+var USDF;
+var GBPF;
+var EURF;
+var INRF;
+
 void INRUSD() async {
   setState(() {
     isUploading = true;
+    advancePrice = double.tryParse(advanceController.text ?? "0.0");
+    totalPrice = double.tryParse(totalController.text ??"0.0");
+
   });
-
+  if(currentUser.currency == "INR") {
     var resultUSD = await Currency.getConversion(
-        from: '${currentUser.currencyISO}', to: 'USD', amount: advanceController.text ?? 0);
-    // String date = result.date; // Returns the last updated date
-    var resultUSDF = await Currency.getConversion(
-        from: '${currentUser.currencyISO}', to: 'USD', amount: totalController.text ?? 0);
-    // String date = result.date; // Returns the last updated date
+        from: 'INR', to: 'USD', amount: advanceController.text ?? 0);
+    var resultEUR = await Currency.getConversion(
+        from: 'INR', to: 'EUR', amount: advanceController.text ?? 0);
+    var resultGBP = await Currency.getConversion(
+        from: 'INR', to: 'GBP', amount: advanceController.text ?? 0);
+ var resultUSDF = await Currency.getConversion(
+        from: 'INR', to: 'USD', amount: totalController.text ?? 0);
+    var resultEURF = await Currency.getConversion(
+        from: 'INR', to: 'EUR', amount: totalController.text ?? 0);
+    var resultGBPF = await Currency.getConversion(
+        from: 'INR', to: 'GBP', amount: totalController.text ?? 0);
+
     setState(() {
-      inrtousd = resultUSD.rate;
-      Finrtousd = resultUSDF.rate;
+      INR = advancePrice ?? 0.00001;
+      USD = resultUSD.rate ?? 0.00001;
+      EUR = resultEUR.rate ?? 0.00001;
+      GBP = resultGBP.rate ?? 0.00001;
+  INRF = totalPrice ?? 0.00001;
+      USDF = resultUSDF.rate ?? 0.00001;
+      EURF = resultEURF.rate ?? 0.00001;
+      GBPF = resultGBPF.rate ?? 0.00001;
 
-    });
+    }); }
+  else if(currentUser.currency == "EUR") {
+    var resultUSD = await Currency.getConversion(
+        from: 'EUR', to: 'USD', amount: advanceController.text ?? 0);
+    var resultINR = await Currency.getConversion(
+        from: 'EUR', to: 'INR', amount: advanceController.text ?? 0);
+    var resultGBP = await Currency.getConversion(
+        from: 'EUR', to: 'GBP', amount: advanceController.text ?? 0);
+ var resultUSDF = await Currency.getConversion(
+        from: 'EUR', to: 'USD', amount: totalController.text ?? 0);
+    var resultINRF = await Currency.getConversion(
+        from: 'EUR', to: 'INR', amount: totalController.text ?? 0);
+    var resultGBPF = await Currency.getConversion(
+        from: 'EUR', to: 'GBP', amount: totalController.text ?? 0);
 
-    print("$Finrtousd");
+    setState(() {
+      INR =  resultINR.rate?? 0.00001;
+      USD = resultUSD.rate ?? 0.00001;
+      EUR = advancePrice ?? 0.00001;
+      GBP = resultGBP.rate ?? 0.00001;
+  INRF = resultINRF.rate ?? 0.00001;
+      USDF = resultUSDF.rate ?? 0.00001;
+      EURF =  totalPrice ?? 0.00001;
+      GBPF = resultGBPF.rate ?? 0.00001;
 
+    }); }
+  else if(currentUser.currency == "GBP") {
+    var resultUSD = await Currency.getConversion(
+        from: 'GBP', to: 'USD', amount: advanceController.text ?? 0);
+    var resultINR = await Currency.getConversion(
+        from: 'GBP', to: 'INR', amount: advanceController.text ?? 0);
+    var resultEUR = await Currency.getConversion(
+        from: 'GBP', to: 'EUR', amount: advanceController.text ?? 0);
+ var resultUSDF = await Currency.getConversion(
+        from: 'GBP', to: 'USD', amount: totalController.text ?? 0);
+    var resultINRF = await Currency.getConversion(
+        from: 'GBP', to: 'INR', amount: totalController.text ?? 0);
+    var resultEURF = await Currency.getConversion(
+        from: 'GBP', to: 'EUR', amount: totalController.text ?? 0);
 
-    print("$inrtousd");
+    setState(() {
+      INR =  resultINR.rate?? 0.00001;
+      USD = resultUSD.rate ?? 0.00001;
+      EUR = resultEUR.rate  ?? 0.00001;
+      GBP =  advancePrice ?? 0.00001;
+  INRF = resultINRF.rate ?? 0.00001;
+      USDF = resultUSDF.rate ?? 0.00001;
+      EURF =  resultEURF.rate  ?? 0.00001;
+      GBPF = totalPrice ?? 0.00001;
+
+    }); }
+else {
+    var resultGBP = await Currency.getConversion(
+        from: 'USD', to: 'GBP', amount: advanceController.text ?? 0);
+    var resultINR = await Currency.getConversion(
+        from: 'USD', to: 'INR', amount: advanceController.text ?? 0);
+    var resultEUR = await Currency.getConversion(
+        from: 'USD', to: 'EUR', amount: advanceController.text ?? 0);
+ var resultEURF = await Currency.getConversion(
+        from: 'USD', to: 'EUR', amount: totalController.text ?? 0);
+    var resultINRF = await Currency.getConversion(
+        from: 'USD', to: 'INR', amount: totalController.text ?? 0);
+    var resultGBPF = await Currency.getConversion(
+        from: 'USD', to: 'GBP', amount: totalController.text ?? 0);
+
+    setState(() {
+      INR =  resultINR.rate?? 0.00001;
+      USD = advancePrice ?? 0.00001;
+      EUR = resultEUR.rate  ?? 0.00001;
+      GBP =   resultGBP.rate ?? 0.00001;
+  INRF = resultINRF.rate ?? 0.00001;
+      USDF = totalPrice ?? 0.00001;
+      EURF =  resultEURF.rate  ?? 0.00001;
+      GBPF = resultGBPF.rate ?? 0.00001;
+
+    }); }
 
 
 
@@ -179,12 +274,14 @@ currency(){
       'orderStatus':'Processing',
       'country':currentUser.country,
 
-      "usd": advanceController.text ?? "",
-
-      "inr": userprice.toString() ?? "",
-      "Fusd": Finrtousd.toString() ?? "",
-
-      "Finr": totalController.text ?? "",
+      "usd": USD,
+      "eur":EUR,
+      "gbp":GBP,
+      "inr": INR ,
+      "Fusd": USDF,
+      "Feur":EURF,
+      "Fgbp":GBPF,
+      "Finr": INRF,
       "timestamp": timestamp,
 
       // 'advance':advanceController.text,
@@ -209,13 +306,14 @@ currency(){
       'fulfilled':'false',
       'orderStatus':'Processing',
       'country':currentUser.country,
-
-      "usd": advanceController.text ?? "",
-
-      "inr": userprice.toString() ?? "",
-      "Fusd": Finrtousd.toString() ?? "",
-
-      "Finr": totalController.text ?? "",
+      "usd": USD,
+      "eur":EUR,
+      "gbp":GBP,
+      "inr": INR ,
+      "Fusd": USDF,
+      "Feur":EURF,
+      "Fgbp":GBPF,
+      "Finr": INRF,
       "timestamp": timestamp,
 
       // 'final':totalController.text ?? "0",

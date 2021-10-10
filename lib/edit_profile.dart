@@ -94,6 +94,11 @@ class _EditProfileState extends State<EditProfile> {
   String photoId = Uuid().v4();
 
   var USD;
+   var GBP;
+   var EUR;
+  var INR;
+   var userAVG;
+  
   @override
   void initState() {
     super.initState();
@@ -694,20 +699,71 @@ void toggleArtisan(bool value) {
     // Navigator.push(context, MaterialPageRoute(builder: (context) => Homepage()));
   }
   conversion({String price})async{
+setState((){    
+  userAVG = double.tryParse(price ?? "0.0");
+});
+    if(currentUser.currency == "INR") {
+      var resultUSD = await Currency.getConversion(
+          from: 'INR', to: 'USD', amount: price);
+  var resultEUR = await Currency.getConversion(
+          from: 'INR', to: 'EUR', amount: price);
+  var resultGBP = await Currency.getConversion(
+          from: 'INR', to: 'GBP', amount: price);
 
-    if(currentUser.currencyISO == "USD") {
       setState(() {
-
-        USD =price;
+INR = userAVG;
+        USD = resultUSD.rate;
+ EUR = resultEUR.rate;
+ GBP = resultGBP.rate;
 
       }); }
-    else {
-      var resultUSD1 = await Currency.getConversion(
-          from: 'USD', to: '${currentUser.currencyISO}', amount: price);
+   else if(currentUser.currency == "EUR") {
+      var resultUSD = await Currency.getConversion(
+          from: 'EUR', to: 'USD', amount: price);
+  var resultINR = await Currency.getConversion(
+          from: 'EUR', to: 'INR', amount: price);
+  var resultGBP = await Currency.getConversion(
+          from: 'EUR', to: 'GBP', amount: price);
+
       setState(() {
-        USD = resultUSD1.rate;
-      });
-    }
+
+        USD = resultUSD.rate;
+ EUR = userAVG;
+ GBP = resultGBP.rate;
+INR = resultINR.rate;
+      }); }
+   else if(currentUser.currency == "GBP") {
+      var resultUSD = await Currency.getConversion(
+          from: 'GBP', to: 'USD', amount: price);
+  var resultINR = await Currency.getConversion(
+          from: 'GBP', to: 'INR', amount: price);
+  var resultEUR = await Currency.getConversion(
+          from: 'GBP', to: 'EUR', amount: price);
+
+      setState(() {
+
+        USD = resultUSD.rate;
+ EUR = resultEUR.rate;
+ GBP = userAVG;
+INR = resultINR.rate;
+      }); }
+    else  {
+      var resultGBP = await Currency.getConversion(
+          from: 'USD', to: 'GBP', amount: price);
+  var resultINR = await Currency.getConversion(
+          from: 'USD', to: 'INR', amount: price);
+  var resultEUR = await Currency.getConversion(
+          from: 'USD', to: 'EUR', amount: price);
+
+      setState(() {
+
+        USD =userAVG ;
+ EUR = resultEUR.rate;
+ GBP = resultGBP.rate;
+INR = resultINR.rate;
+      }); }
+    
+    
 
 
   }
@@ -823,7 +879,9 @@ void toggleArtisan(bool value) {
                                                   focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
 
                                                   labelText: 'Average cost',labelStyle: TextStyle(color: kText),
-                                                  hintText:" ${currentUser.currencysym}",
+                                                  hintText: currentUser.currency == "INR"?'₹':
+                            currentUser.currency == "EUR"?'€':
+                            currentUser.currency == "GBP"?'£':'\u0024',
                                                 ),
                                                 textAlign: TextAlign.center,
 
@@ -844,18 +902,24 @@ void toggleArtisan(bool value) {
                                                 child:selectedDesigner?
                                                 CircularProgressIndicator(color: Colors.black,):
                                                 Text("Save", style: TextStyle(color: Colors.black) ),
-                                                onPressed: (){
+                                                onPressed: () async {
                                                  setState((){selectedDesigner=true;});
-                                                  conversion(price:designerController.text);
+                                                 await conversion(price:designerController.text);
 
                                                  isCheckedDesigner?   usersRef.doc(widget.currentUserId).update({
-                                                    'designerAvg':designerController.text?? "Contact for price",
                                                     "designerUsd":USD ?? 0,
+                                                   "designerInr":INR ?? 0,
+                                                   "designerEur":EUR ?? 0,
+                                                   "designerGbp":GBP ?? 0,
+                                                   
                                                     'designer':true
                                                   }): usersRef.doc(widget.currentUserId).update({
-                                                    'designerAvg':designerController.text?? "Contact for price",
                                                     "designerUsd":USD ?? 0,
-                                                    'designer':false
+                                                   "designerInr":INR ?? 0,
+                                                   "designerEur":EUR ?? 0,
+                                                   "designerGbp":GBP ?? 0,
+
+                                                   'designer':false
                                                   });
 
 
@@ -900,7 +964,9 @@ void toggleArtisan(bool value) {
                                                   focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
 
                                                   labelText: 'Average cost',labelStyle: TextStyle(color: kText),
-                                                  hintText:" ${currentUser.currencysym}",
+                                                  hintText: currentUser.currency == "INR"?'₹':
+                            currentUser.currency == "EUR"?'€':
+                            currentUser.currency == "GBP"?'£':'\u0024',
                                                 ),
                                                 textAlign: TextAlign.center,
 
@@ -920,17 +986,23 @@ void toggleArtisan(bool value) {
                                                 child:selectedArtisan?
                                                 CircularProgressIndicator(color: Colors.black,):
                                                 Text("Save", style: TextStyle(color: Colors.black) ),
-                                                onPressed: (){
+                                                onPressed: () async {
                                                   setState((){selectedArtisan=true;});
-                                                  conversion(price:artisanController.text);
+                                                  await conversion(price:artisanController.text);
 
                                                   isCheckedArtisan?   usersRef.doc(widget.currentUserId).update({
-                                                    'artisanAvg':artisanController.text?? "Contact for price",
                                                     "artisanUsd":USD ?? 0,
+                                                    "artisanInr":INR ?? 0,
+                                                    "artisanEur":EUR ?? 0,
+                                                    "artisanGbp":GBP ?? 0,
+
                                                     'artisan':true
                                                   }): usersRef.doc(widget.currentUserId).update({
-                                                    'artisanAvg':artisanController.text?? "Contact for price",
                                                     "artisanUsd":USD ?? 0,
+                                                    "artisanInr":INR ?? 0,
+                                                    "artisanEur":EUR ?? 0,
+                                                    "artisanGbp":GBP ?? 0,
+
                                                     'artisan':false
                                                   });
 
@@ -974,7 +1046,9 @@ void toggleArtisan(bool value) {
                                                   focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
 
                                                   labelText: 'Average cost',labelStyle: TextStyle(color: kText),
-                                                  hintText:" ${currentUser.currencysym}",
+                                                  hintText: currentUser.currency == "INR"?'₹':
+                            currentUser.currency == "EUR"?'€':
+                            currentUser.currency == "GBP"?'£':'\u0024',
                                                 ),
                                                 textAlign: TextAlign.center,
 
@@ -994,17 +1068,21 @@ void toggleArtisan(bool value) {
                                                 child:selectedStylist?
                                                 CircularProgressIndicator(color: Colors.black,):
                                                 Text("Save", style: TextStyle(color: Colors.black) ),
-                                                onPressed: (){
+                                                onPressed: () async {
                                                   setState((){selectedStylist=true;});
-                                                  conversion(price:stylController.text);
+                                                await  conversion(price:stylController.text);
 
                                                   isCheckedStylist?   usersRef.doc(widget.currentUserId).update({
-                                                    'stylistAvg':stylController.text?? "Contact for price",
                                                     "stylistUsd":USD ?? 0,
+                                                    "stylistInr":INR ?? 0,
+                                                    "stylistEur":EUR ?? 0,
+                                                    "stylistGbp":GBP ?? 0,
                                                     'stylist':true
                                                   }): usersRef.doc(widget.currentUserId).update({
-                                                    'stylistAvg':stylController.text?? "Contact for price",
                                                     "stylistUsd":USD ?? 0,
+                                                    "stylistInr":INR ?? 0,
+                                                    "stylistEur":EUR ?? 0,
+                                                    "stylistGbp":GBP ?? 0,
                                                     'stylist':false
                                                   });
 
@@ -1048,7 +1126,9 @@ void toggleArtisan(bool value) {
                                                   focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
 
                                                   labelText: 'Average cost',labelStyle: TextStyle(color: kText),
-                                                  hintText:" ${currentUser.currencysym}",
+                                                  hintText: currentUser.currency == "INR"?'₹':
+                            currentUser.currency == "EUR"?'€':
+                            currentUser.currency == "GBP"?'£':'\u0024',
                                                 ),
                                                 textAlign: TextAlign.center,
 
@@ -1068,17 +1148,21 @@ void toggleArtisan(bool value) {
                                                 child:selectedBlogger?
                                                 CircularProgressIndicator(color: Colors.black,):
                                                 Text("Save", style: TextStyle(color: Colors.black) ),
-                                                onPressed: (){
+                                                onPressed: ()async{
                                                   setState((){selectedBlogger=true;});
-                                                  conversion(price:blogController.text);
+                                                 await conversion(price:blogController.text);
 
                                                   isCheckedBlogger?   usersRef.doc(widget.currentUserId).update({
-                                                    'bloggerAvg':blogController.text?? "Contact for price",
                                                     "bloggerUsd":USD ?? 0,
+                                                    "bloggerInr":INR ?? 0,
+                                                    "bloggerEur":EUR ?? 0,
+                                                    "bloggerGbp":GBP ?? 0,
                                                     'blogger':true
                                                   }): usersRef.doc(widget.currentUserId).update({
-                                                    'bloggerAvg':blogController.text?? "Contact for price",
                                                     "bloggerUsd":USD ?? 0,
+                                                    "bloggerInr":INR ?? 0,
+                                                    "bloggerEur":EUR ?? 0,
+                                                    "bloggerGbp":GBP ?? 0,
                                                     'blogger':false
                                                   });
 
@@ -1122,7 +1206,9 @@ void toggleArtisan(bool value) {
                                                   focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
 
                                                   labelText: 'Average cost',labelStyle: TextStyle(color: kText),
-                                                  hintText:" ${currentUser.currencysym}",
+                                                  hintText: currentUser.currency == "INR"?'₹':
+                            currentUser.currency == "EUR"?'€':
+                            currentUser.currency == "GBP"?'£':'\u0024',
                                                 ),
                                                 textAlign: TextAlign.center,
 
@@ -1142,17 +1228,21 @@ void toggleArtisan(bool value) {
                                                 child:selectedIllustrator?
                                                 CircularProgressIndicator(color: Colors.black,):
                                                 Text("Save", style: TextStyle(color: Colors.black) ),
-                                                onPressed: (){
+                                                onPressed: ()async{
                                                   setState((){selectedIllustrator=true;});
-                                                  conversion(price:illustController.text);
+                                                 await conversion(price:illustController.text);
 
                                                   isCheckedIllustrator?   usersRef.doc(widget.currentUserId).update({
-                                                    'illustratorAvg':illustController.text?? "Contact for price",
                                                     "illustratorUsd":USD ?? 0,
+                                                    "illustratorInr":INR ?? 0,
+                                                    "illustratorEur":EUR ?? 0,
+                                                    "illustratorGbp":GBP ?? 0,
                                                     'illustrator':true
                                                   }): usersRef.doc(widget.currentUserId).update({
-                                                    'illustratorAvg':illustController.text?? "Contact for price",
                                                     "illustratorUsd":USD ?? 0,
+                                                    "illustratorInr":INR ?? 0,
+                                                    "illustratorEur":EUR ?? 0,
+                                                    "illustratorGbp":GBP ?? 0,
                                                     'illustrator':false
                                                   });
 
@@ -1196,7 +1286,9 @@ void toggleArtisan(bool value) {
                                                   focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
 
                                                   labelText: 'Average cost',labelStyle: TextStyle(color: kText),
-                                                  hintText:" ${currentUser.currencysym}",
+                                                  hintText: currentUser.currency == "INR"?'₹':
+                            currentUser.currency == "EUR"?'€':
+                            currentUser.currency == "GBP"?'£':'\u0024',
                                                 ),
                                                 textAlign: TextAlign.center,
 
@@ -1215,17 +1307,21 @@ void toggleArtisan(bool value) {
                                                 child:selectedPhotographer?
                                                 CircularProgressIndicator(color: Colors.black,):
                                                 Text("Save", style: TextStyle(color: Colors.black) ),
-                                                onPressed: (){
+                                                onPressed: () async {
                                                   setState((){selectedPhotographer=true;});
-                                                  conversion(price:photoController.text);
+                                                 await conversion(price:photoController.text);
 
                                                   isCheckedPhotographer?   usersRef.doc(widget.currentUserId).update({
-                                                    'photographerAvg':photoController.text?? "Contact for price",
                                                     "photographerUsd":USD ?? 0,
+                                                    "photographerInr":INR ?? 0,
+                                                    "photographerEur":EUR ?? 0,
+                                                    "photographerGbp":GBP ?? 0,
                                                     'photographer':true
                                                   }): usersRef.doc(widget.currentUserId).update({
-                                                    'photographerAvg':photoController.text?? "Contact for price",
                                                     "photographerUsd":USD ?? 0,
+                                                    "photographerInr":INR ?? 0,
+                                                    "photographerEur":EUR ?? 0,
+                                                    "photographerGbp":GBP ?? 0,
                                                     'photographer':false
                                                   });
 
@@ -1269,7 +1365,9 @@ void toggleArtisan(bool value) {
                                                   focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
 
                                                   labelText: 'Average cost',labelStyle: TextStyle(color: kText),
-                                                  hintText:" ${currentUser.currencysym}",
+                                                  hintText: currentUser.currency == "INR"?'₹':
+                            currentUser.currency == "EUR"?'€':
+                            currentUser.currency == "GBP"?'£':'\u0024',
                                                 ),
                                                 textAlign: TextAlign.center,
 
@@ -1289,17 +1387,21 @@ void toggleArtisan(bool value) {
                                                 child:selectedModel?
                                                 CircularProgressIndicator(color: Colors.black,):
                                                 Text("Save", style: TextStyle(color: Colors.black) ),
-                                                onPressed: (){
+                                                onPressed: () async {
                                                   setState((){selectedModel=true;});
-                                                  conversion(price:modelController.text);
+                                                 await conversion(price:modelController.text);
 
                                                   isCheckedModel?   usersRef.doc(widget.currentUserId).update({
-                                                    'modelAvg':modelController.text?? "Contact for price",
                                                     "modelUsd":USD ?? 0,
+                                                    "modelInr":INR ?? 0,
+                                                    "modelEur":EUR ?? 0,
+                                                    "modelGbp":GBP ?? 0,
                                                     'model':true
                                                   }): usersRef.doc(widget.currentUserId).update({
-                                                    'modelAvg':modelController.text?? "Contact for price",
                                                     "modelUsd":USD ?? 0,
+                                                    "modelInr":INR ?? 0,
+                                                    "modelEur":EUR ?? 0,
+                                                    "modelGbp":GBP ?? 0,
                                                     'model':false
                                                   });
 
@@ -1343,7 +1445,9 @@ void toggleArtisan(bool value) {
                                                   focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
 
                                                   labelText: 'Average cost',labelStyle: TextStyle(color: kText),
-                                                  hintText:" ${currentUser.currencysym}",
+                                                  hintText: currentUser.currency == "INR"?'₹':
+                            currentUser.currency == "EUR"?'€':
+                            currentUser.currency == "GBP"?'£':'\u0024',
                                                 ),
                                                 textAlign: TextAlign.center,
 
@@ -1363,17 +1467,21 @@ void toggleArtisan(bool value) {
                                                 child:selectedMakeup?
                                                 CircularProgressIndicator(color: Colors.black,):
                                                 Text("Save", style: TextStyle(color: Colors.black) ),
-                                                onPressed: (){
+                                                onPressed: ()async{
                                                   setState((){selectedMakeup=true;});
-                                                  conversion(price:makeController.text);
+                                                 await conversion(price:makeController.text);
 
                                                   isCheckedMakeup?   usersRef.doc(widget.currentUserId).update({
-                                                    'makeupAvg':makeController.text?? "Contact for price",
                                                     "makeupUsd":USD ?? 0,
+                                                    "makeupInr":INR ?? 0,
+                                                    "makeupEur":EUR ?? 0,
+                                                    "makeupGbp":GBP ?? 0,
                                                     'makeup':true
                                                   }): usersRef.doc(widget.currentUserId).update({
-                                                    'makeupAvg':makeController.text?? "Contact for price",
                                                     "makeupUsd":USD ?? 0,
+                                                    "makeupInr":INR ?? 0,
+                                                    "makeupEur":EUR ?? 0,
+                                                    "makeupGbp":GBP ?? 0,
                                                     'makeup':false
                                                   });
 
@@ -1416,7 +1524,9 @@ void toggleArtisan(bool value) {
                                                   focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
 
                                                   labelText: 'Average cost',labelStyle: TextStyle(color: kText),
-                                                  hintText:" ${currentUser.currencysym}",
+                                                  hintText: currentUser.currency == "INR"?'₹':
+                            currentUser.currency == "EUR"?'€':
+                            currentUser.currency == "GBP"?'£':'\u0024',
                                                 ),
                                                 textAlign: TextAlign.center,
 
@@ -1435,17 +1545,21 @@ void toggleArtisan(bool value) {
                                                 child:selectedHair?
                                                 CircularProgressIndicator(color: Colors.black,):
                                                 Text("Save", style: TextStyle(color: Colors.black) ),
-                                                onPressed: (){
+                                                onPressed: () async {
                                                   setState((){selectedHair=true;});
-                                                  conversion(price:hairController.text);
+                                                await  conversion(price:hairController.text);
 
                                                   isCheckedHair?   usersRef.doc(widget.currentUserId).update({
-                                                    'hairAvg':hairController.text?? "Contact for price",
                                                     "hairUsd":USD ?? 0,
+                                                    "hairInr":INR ?? 0,
+                                                    "hairEur":EUR ?? 0,
+                                                    "hairGbp":GBP ?? 0,
                                                     'hair':true
                                                   }): usersRef.doc(widget.currentUserId).update({
-                                                    'hairAvg':hairController.text?? "Contact for price",
                                                     "hairUsd":USD ?? 0,
+                                                    "hairInr":INR ?? 0,
+                                                    "hairEur":EUR ?? 0,
+                                                    "hairGbp":GBP ?? 0,
                                                     'hair':false
                                                   });
 
@@ -1489,7 +1603,9 @@ void toggleArtisan(bool value) {
                                                   focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
 
                                                   labelText: 'Average cost',labelStyle: TextStyle(color: kText),
-                                                  hintText:" ${currentUser.currencysym}",
+                                                  hintText: currentUser.currency == "INR"?'₹':
+                            currentUser.currency == "EUR"?'€':
+                            currentUser.currency == "GBP"?'£':'\u0024',
                                                 ),
                                                 textAlign: TextAlign.center,
 
@@ -1508,17 +1624,21 @@ void toggleArtisan(bool value) {
                                                 child:selectedChoreographer?
                                                 CircularProgressIndicator(color: Colors.black,):
                                                 Text("Save", style: TextStyle(color: Colors.black) ),
-                                                onPressed: (){
+                                                onPressed: () async {
                                                   setState((){selectedChoreographer=true;});
-                                                  conversion(price:choController.text);
+                                                await  conversion(price:choController.text);
 
                                                   isCheckedChoreographer?   usersRef.doc(widget.currentUserId).update({
-                                                    'choreographerAvg':choController.text?? "Contact for price",
                                                     "choreographerUsd":USD ?? 0,
+                                                    "choreographerInr":INR ?? 0,
+                                                    "choreographerEur":EUR ?? 0,
+                                                    "choreographerGbp":GBP ?? 0,
                                                     'choreographer':true
                                                   }): usersRef.doc(widget.currentUserId).update({
-                                                    'choreographerAvg':choController.text?? "Contact for price",
                                                     "choreographerUsd":USD ?? 0,
+                                                    "choreographerInr":INR ?? 0,
+                                                    "choreographerEur":EUR ?? 0,
+                                                    "choreographerGbp":GBP ?? 0,
                                                     'choreographer':false
                                                   });
 

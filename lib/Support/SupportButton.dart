@@ -65,11 +65,11 @@ class _SupportButtonState extends State<SupportButton> {
                             enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
                             focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
 
-                            labelText: currentUser.currency == "USD"?'\u0024':
+                            labelText:
                             currentUser.currency == "INR"?'₹':
                             currentUser.currency == "EUR"?'€':
                             currentUser.currency == "GBP"?'£':'\u0024', labelStyle: TextStyle(color: kText),
-                            hintText: currentUser.currency == "USD"?'\u0024':
+                            hintText:
                             currentUser.currency == "INR"?'₹':
                             currentUser.currency == "EUR"?'€':
                             currentUser.currency == "GBP"?'£':'\u0024',

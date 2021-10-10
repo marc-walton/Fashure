@@ -11,6 +11,8 @@ import 'package:fashow/Categories/MenEcomUp.dart';
 import 'package:fashow/Categories/WomenEcomUp.dart';
 import 'package:fashow/Categories/TboyEcomUp.dart';
 import 'package:fashow/Categories/TgirlEcomUp.dart';
+import 'package:fashow/enum/Variables.dart';
+
 import 'package:fashow/Products.dart';
 import 'package:fashow/chatcached_image.dart';
 import 'package:intl/intl.dart';
@@ -55,170 +57,11 @@ class _UploadecomState extends State<Uploadecom>
     with AutomaticKeepAliveClientMixin<Uploadecom> {
   String prodId = Uuid().v4();
 
-  String value = 'Select Category';
-  List colors;
-bool worldship = true;
-bool freeship = true;
-bool freeworldship = true;
-bool isTag = false;
-String loading = "Converting currencies";
- TabController _tabController;
-  ScrollController _controller;
-  TextEditingController detailsController = TextEditingController();
-  TextEditingController productnameController = TextEditingController();
-  TextEditingController compositionController = TextEditingController();
-  TextEditingController colorController = TextEditingController();
-  TextEditingController washandcareController = TextEditingController();
-  TextEditingController sizeandfitController = TextEditingController();
-  TextEditingController priceController = TextEditingController();
-  TextEditingController xxxscontroller = TextEditingController();
-  TextEditingController xxscontroller = TextEditingController();
-  TextEditingController xscontroller = TextEditingController();
-  TextEditingController scontroller = TextEditingController();
-  TextEditingController mcontroller = TextEditingController();
-  TextEditingController lcontroller = TextEditingController();
-  TextEditingController xlcontroller = TextEditingController();
-  TextEditingController xxlcontroller = TextEditingController();
-  TextEditingController xxxlcontroller = TextEditingController();
-   TextEditingController fourxlcontroller = TextEditingController();
-  TextEditingController fivexlcontroller = TextEditingController();
-  TextEditingController sixxlcontroller = TextEditingController();
-  TextEditingController sevenxlcontroller = TextEditingController();
-  TextEditingController eightxlcontroller = TextEditingController();
-  TextEditingController mtocontroller = TextEditingController();
-  TextEditingController freesizecontroller = TextEditingController();
-TextEditingController Shoe1controller = TextEditingController();
-TextEditingController Shoe2controller = TextEditingController();
-TextEditingController Shoe3controller = TextEditingController();
-TextEditingController Shoe4controller = TextEditingController();
-TextEditingController Shoe5controller = TextEditingController();
-TextEditingController Shoe6controller = TextEditingController();
-TextEditingController Shoe7controller = TextEditingController();
-TextEditingController Shoe8controller = TextEditingController();
-TextEditingController Shoe9controller = TextEditingController();
-TextEditingController Shoe10controller = TextEditingController();
-TextEditingController Shoe11controller = TextEditingController();
-TextEditingController Shoe12controller = TextEditingController();
-TextEditingController Shoe13controller = TextEditingController();
-TextEditingController Shoe14controller = TextEditingController();
-TextEditingController Shoe15controller = TextEditingController();
-TextEditingController Shoe16controller = TextEditingController();
-TextEditingController Shoe17controller = TextEditingController();
-TextEditingController Shoe18controller = TextEditingController();
-TextEditingController Shoe19controller = TextEditingController();
-TextEditingController Shoe20controller = TextEditingController();
-TextEditingController Shoe21controller = TextEditingController();
-TextEditingController Ring1controller = TextEditingController();
-TextEditingController Ring2controller = TextEditingController();
-TextEditingController Ring3controller = TextEditingController();
-TextEditingController Ring4controller = TextEditingController();
-TextEditingController Ring5controller = TextEditingController();
-TextEditingController Ring6controller = TextEditingController();
-TextEditingController Ring7controller = TextEditingController();
-TextEditingController Ring8controller = TextEditingController();
-TextEditingController Ring9controller = TextEditingController();
-TextEditingController Ring10controller = TextEditingController();
-TextEditingController Ring11controller = TextEditingController();
-TextEditingController Ring12controller = TextEditingController();
-TextEditingController Ring13controller = TextEditingController();
-TextEditingController Ring14controller = TextEditingController();
-TextEditingController Ring15controller = TextEditingController();
-TextEditingController Ring16controller = TextEditingController();
-TextEditingController Ring17controller = TextEditingController();
-TextEditingController Ring18controller = TextEditingController();
-TextEditingController Ring19controller = TextEditingController();
-TextEditingController Ring20controller = TextEditingController();
-TextEditingController Ring21controller = TextEditingController();
-TextEditingController Ring22controller = TextEditingController();
-TextEditingController Ring23controller = TextEditingController();
-TextEditingController customController1 = TextEditingController();
-TextEditingController customController2 = TextEditingController();
-TextEditingController customController3 = TextEditingController();
-TextEditingController customController4 = TextEditingController();
-TextEditingController customController5 = TextEditingController();
-TextEditingController customController6 = TextEditingController();
-TextEditingController customController7 = TextEditingController();
-TextEditingController customController8 = TextEditingController();
-TextEditingController customController9 = TextEditingController();
-TextEditingController customController10 = TextEditingController();
-TextEditingController customController11 = TextEditingController();
-TextEditingController customController21 = TextEditingController();
-TextEditingController customController31 = TextEditingController();
-TextEditingController customController41 = TextEditingController();
-TextEditingController customController51 = TextEditingController();
-TextEditingController customController61 = TextEditingController();
-TextEditingController customController71 = TextEditingController();
-TextEditingController customController81 = TextEditingController();
-TextEditingController customController91 = TextEditingController();
-TextEditingController customController101 = TextEditingController();
-TextEditingController customControllerQuantity1 = TextEditingController();
-TextEditingController customControllerQuantity2 = TextEditingController();
-TextEditingController customControllerQuantity3 = TextEditingController();
-TextEditingController customControllerQuantity4 = TextEditingController();
-TextEditingController customControllerQuantity5 = TextEditingController();
-TextEditingController customControllerQuantity6 = TextEditingController();
-TextEditingController customControllerQuantity7 = TextEditingController();
-TextEditingController customControllerQuantity8 = TextEditingController();
-TextEditingController customControllerQuantity9 = TextEditingController();
-TextEditingController customControllerQuantity10 = TextEditingController();
 
-  TextEditingController colorController1 = TextEditingController();
-  TextEditingController colorController2 = TextEditingController();
-  TextEditingController colorController3 = TextEditingController();
-  TextEditingController colorController4 = TextEditingController();
-  TextEditingController colorController5 = TextEditingController();
-  TextEditingController colorController6 = TextEditingController();
-  TextEditingController colorController7 = TextEditingController();
-  TextEditingController colorController8 = TextEditingController();
-  TextEditingController colorController9 = TextEditingController();
-  TextEditingController colorController10 = TextEditingController();
-  TextEditingController colorController11 = TextEditingController();
-  TextEditingController colorController21 = TextEditingController();
-  TextEditingController colorController31 = TextEditingController();
-  TextEditingController colorController41 = TextEditingController();
-  TextEditingController colorController51 = TextEditingController();
-  TextEditingController colorController61 = TextEditingController();
-  TextEditingController colorController71 = TextEditingController();
-  TextEditingController colorController81 = TextEditingController();
-  TextEditingController colorController91 = TextEditingController();
-  TextEditingController colorController101 = TextEditingController();
-
-  TextEditingController durationfrom = TextEditingController();
-TextEditingController durationto = TextEditingController();
-TextEditingController durationfromw = TextEditingController();
-TextEditingController durationtow = TextEditingController();
-TextEditingController durationfromp = TextEditingController();
-TextEditingController durationtop = TextEditingController();
-
-TextEditingController shipcost = TextEditingController();
-TextEditingController shipcostintern = TextEditingController();
-
-TextEditingController namecontroller = TextEditingController();
-TextEditingController shipcontroller = TextEditingController();
   List<Asset> images = <Asset>[];
   PageController pageController = PageController();
 
   List<String> imageUrls = <String>[];
-  File file;
-   File file1;
-   File file2;
-   File file3;
-   File file4;
-   File file5;
-   File file6;
-   File file7;
-   File file8;
-   File file9;
-   bool tile = false;
-   bool tile1 = false;
-   bool tile2 = false;
-   bool tile3 = false;
-   bool tile4 = false;
-   bool tile5 = false;
-   bool tile6 = false;
-   bool tile7 = false;
-   bool tile8 = false;
-   bool tile9 = false;
 
 
   bool isUploading = false;
@@ -407,7 +250,10 @@ var userPrice12;
   var gbptoeur10;
   var gbptoeur11;
   var gbptoeur12;
-
+var INR;
+var USD;
+var EUR;
+var GBP;
 
 int pageChanged  = 0;
   @override
@@ -423,18 +269,6 @@ int pageChanged  = 0;
         .set({});
   }
 
-  _scrollListener() {
-    if (_controller.offset >= _controller.position.maxScrollExtent &&
-        !_controller.position.outOfRange) {
-      setState(() { //you can do anything here
-      });
-    }
-    if (_controller.offset <= _controller.position.minScrollExtent &&
-        !_controller.position.outOfRange) {
-      setState(() { //you can do anything here
-      });
-    }
-  }
 
   Widget getImageWidget() {
     if (file != null) {
@@ -1076,6 +910,3109 @@ Widget getImageWidget9() {
       });
     }
   }
+
+  Widget getImageWidget01() {
+    if (customImg1 != null) {
+      return InkWell(
+        onTap:()=>getImage01(),
+        child: Image.file(
+          customImg1,
+          width: 150,
+          height: 150,
+          fit: BoxFit.cover,
+        ),
+      );
+    } else {
+      return InkWell(
+        onTap:()=>getImage01(),
+         child: Column(
+           children: [
+             Icon(
+      Icons.add,
+        size:50,
+      ),
+                    Text("Add image")
+
+           ],
+         ));
+    }
+  }
+  getImage01() async {
+    Get.back();
+
+    this.setState(() {
+      _inProcess = true;
+    });
+    File image = File(await ImagePicker().getImage(source: ImageSource.gallery).then((pickedFile) => pickedFile.path));
+
+    if (image != null) {
+      File cropped = await ImageCropper.cropImage(
+          sourcePath: image.path,
+          aspectRatio: CropAspectRatio(
+              ratioX: 1, ratioY: 1),
+          compressQuality: 100,
+          maxWidth: 700,
+          maxHeight: 700,
+          compressFormat: ImageCompressFormat.jpg,
+          androidUiSettings: AndroidUiSettings(
+            toolbarColor: Colors.deepOrange,
+            toolbarTitle: "RPS Cropper",
+            statusBarColor: Colors.deepOrange.shade900,
+            backgroundColor: Colors.white,
+          )
+      );
+
+      this.setState(() {
+        customImg1 = cropped;
+        _inProcess = true;
+
+      });
+    } else {
+      this.setState(() {
+        _inProcess = false;
+      });
+    }
+  }
+    Widget getImageWidget02() {
+    if (customImg2 != null) {
+      return InkWell(
+        onTap:()=>getImage02(),
+        child: Image.file(
+          customImg2,
+          width: 150,
+          height: 150,
+          fit: BoxFit.cover,
+        ),
+      );
+    } else {
+      return InkWell(
+        onTap:()=>getImage02(),
+         child: Column(
+           children: [
+             Icon(
+      Icons.add,
+        size:50,
+      ),
+                    Text("Add image")
+
+           ],
+         ));
+    }
+  }
+  getImage02() async {
+    Get.back();
+
+    this.setState(() {
+      _inProcess = true;
+    });
+    File image = File(await ImagePicker().getImage(source: ImageSource.gallery).then((pickedFile) => pickedFile.path));
+
+    if (image != null) {
+      File cropped = await ImageCropper.cropImage(
+          sourcePath: image.path,
+          aspectRatio: CropAspectRatio(
+              ratioX: 1, ratioY: 1),
+          compressQuality: 100,
+          maxWidth: 700,
+          maxHeight: 700,
+          compressFormat: ImageCompressFormat.jpg,
+          androidUiSettings: AndroidUiSettings(
+            toolbarColor: Colors.deepOrange,
+            toolbarTitle: "RPS Cropper",
+            statusBarColor: Colors.deepOrange.shade900,
+            backgroundColor: Colors.white,
+          )
+      );
+
+      this.setState(() {
+        customImg2 = cropped;
+        _inProcess = true;
+
+      });
+    } else {
+      this.setState(() {
+        _inProcess = false;
+      });
+    }
+  }
+    Widget getImageWidget03() {
+    if (customImg3 != null) {
+      return InkWell(
+        onTap:()=>getImage03(),
+        child: Image.file(
+          customImg3,
+          width: 150,
+          height: 150,
+          fit: BoxFit.cover,
+        ),
+      );
+    } else {
+      return InkWell(
+        onTap:()=>getImage03(),
+         child: Column(
+           children: [
+             Icon(
+      Icons.add,
+        size:50,
+      ),
+                    Text("Add image")
+
+           ],
+         ));
+    }
+  }
+  getImage03() async {
+    Get.back();
+
+    this.setState(() {
+      _inProcess = true;
+    });
+    File image = File(await ImagePicker().getImage(source: ImageSource.gallery).then((pickedFile) => pickedFile.path));
+
+    if (image != null) {
+      File cropped = await ImageCropper.cropImage(
+          sourcePath: image.path,
+          aspectRatio: CropAspectRatio(
+              ratioX: 1, ratioY: 1),
+          compressQuality: 100,
+          maxWidth: 700,
+          maxHeight: 700,
+          compressFormat: ImageCompressFormat.jpg,
+          androidUiSettings: AndroidUiSettings(
+            toolbarColor: Colors.deepOrange,
+            toolbarTitle: "RPS Cropper",
+            statusBarColor: Colors.deepOrange.shade900,
+            backgroundColor: Colors.white,
+          )
+      );
+
+      this.setState(() {
+        customImg3 = cropped;
+        _inProcess = true;
+
+      });
+    } else {
+      this.setState(() {
+        _inProcess = false;
+      });
+    }
+  }
+    Widget getImageWidget04() {
+    if (customImg4 != null) {
+      return InkWell(
+        onTap:()=>getImage04(),
+        child: Image.file(
+          customImg4,
+          width: 150,
+          height: 150,
+          fit: BoxFit.cover,
+        ),
+      );
+    } else {
+      return InkWell(
+        onTap:()=>getImage04(),
+         child: Column(
+           children: [
+             Icon(
+      Icons.add,
+        size:50,
+      ),
+                    Text("Add image")
+
+           ],
+         ));
+    }
+  }
+  getImage04() async {
+    Get.back();
+
+    this.setState(() {
+      _inProcess = true;
+    });
+    File image = File(await ImagePicker().getImage(source: ImageSource.gallery).then((pickedFile) => pickedFile.path));
+
+    if (image != null) {
+      File cropped = await ImageCropper.cropImage(
+          sourcePath: image.path,
+          aspectRatio: CropAspectRatio(
+              ratioX: 1, ratioY: 1),
+          compressQuality: 100,
+          maxWidth: 700,
+          maxHeight: 700,
+          compressFormat: ImageCompressFormat.jpg,
+          androidUiSettings: AndroidUiSettings(
+            toolbarColor: Colors.deepOrange,
+            toolbarTitle: "RPS Cropper",
+            statusBarColor: Colors.deepOrange.shade900,
+            backgroundColor: Colors.white,
+          )
+      );
+
+      this.setState(() {
+        customImg4 = cropped;
+        _inProcess = true;
+
+      });
+    } else {
+      this.setState(() {
+        _inProcess = false;
+      });
+    }
+  }
+   Widget getImageWidget05() {
+    if (customImg5 != null) {
+      return InkWell(
+        onTap:()=>getImage05(),
+        child: Image.file(
+          customImg5,
+          width: 150,
+          height: 150,
+          fit: BoxFit.cover,
+        ),
+      );
+    } else {
+      return InkWell(
+        onTap:()=>getImage05(),
+         child: Column(
+           children: [
+             Icon(
+      Icons.add,
+        size:50,
+      ),
+                    Text("Add image")
+
+           ],
+         ));
+    }
+  }
+  getImage05() async {
+    Get.back();
+
+    this.setState(() {
+      _inProcess = true;
+    });
+    File image = File(await ImagePicker().getImage(source: ImageSource.gallery).then((pickedFile) => pickedFile.path));
+
+    if (image != null) {
+      File cropped = await ImageCropper.cropImage(
+          sourcePath: image.path,
+          aspectRatio: CropAspectRatio(
+              ratioX: 1, ratioY: 1),
+          compressQuality: 100,
+          maxWidth: 700,
+          maxHeight: 700,
+          compressFormat: ImageCompressFormat.jpg,
+          androidUiSettings: AndroidUiSettings(
+            toolbarColor: Colors.deepOrange,
+            toolbarTitle: "RPS Cropper",
+            statusBarColor: Colors.deepOrange.shade900,
+            backgroundColor: Colors.white,
+          )
+      );
+
+      this.setState(() {
+        customImg5 = cropped;
+        _inProcess = true;
+
+      });
+    } else {
+      this.setState(() {
+        _inProcess = false;
+      });
+    }
+  }
+   Widget getImageWidget06() {
+    if (customImg6 != null) {
+      return InkWell(
+        onTap:()=>getImage06(),
+        child: Image.file(
+          customImg6,
+          width: 150,
+          height: 150,
+          fit: BoxFit.cover,
+        ),
+      );
+    } else {
+      return InkWell(
+        onTap:()=>getImage06(),
+         child: Column(
+           children: [
+             Icon(
+      Icons.add,
+        size:50,
+      ),
+                    Text("Add image")
+
+           ],
+         ));
+    }
+  }
+  getImage06() async {
+    Get.back();
+
+    this.setState(() {
+      _inProcess = true;
+    });
+    File image = File(await ImagePicker().getImage(source: ImageSource.gallery).then((pickedFile) => pickedFile.path));
+
+    if (image != null) {
+      File cropped = await ImageCropper.cropImage(
+          sourcePath: image.path,
+          aspectRatio: CropAspectRatio(
+              ratioX: 1, ratioY: 1),
+          compressQuality: 100,
+          maxWidth: 700,
+          maxHeight: 700,
+          compressFormat: ImageCompressFormat.jpg,
+          androidUiSettings: AndroidUiSettings(
+            toolbarColor: Colors.deepOrange,
+            toolbarTitle: "RPS Cropper",
+            statusBarColor: Colors.deepOrange.shade900,
+            backgroundColor: Colors.white,
+          )
+      );
+
+      this.setState(() {
+        customImg6 = cropped;
+        _inProcess = true;
+
+      });
+    } else {
+      this.setState(() {
+        _inProcess = false;
+      });
+    }
+  }
+   Widget getImageWidget07() {
+    if (customImg7 != null) {
+      return InkWell(
+        onTap:()=>getImage07(),
+        child: Image.file(
+          customImg7,
+          width: 150,
+          height: 150,
+          fit: BoxFit.cover,
+        ),
+      );
+    } else {
+      return InkWell(
+        onTap:()=>getImage07(),
+         child: Column(
+           children: [
+             Icon(
+      Icons.add,
+        size:50,
+      ),
+                    Text("Add image")
+
+           ],
+         ));
+    }
+  }
+  getImage07() async {
+    Get.back();
+
+    this.setState(() {
+      _inProcess = true;
+    });
+    File image = File(await ImagePicker().getImage(source: ImageSource.gallery).then((pickedFile) => pickedFile.path));
+
+    if (image != null) {
+      File cropped = await ImageCropper.cropImage(
+          sourcePath: image.path,
+          aspectRatio: CropAspectRatio(
+              ratioX: 1, ratioY: 1),
+          compressQuality: 100,
+          maxWidth: 700,
+          maxHeight: 700,
+          compressFormat: ImageCompressFormat.jpg,
+          androidUiSettings: AndroidUiSettings(
+            toolbarColor: Colors.deepOrange,
+            toolbarTitle: "RPS Cropper",
+            statusBarColor: Colors.deepOrange.shade900,
+            backgroundColor: Colors.white,
+          )
+      );
+
+      this.setState(() {
+        customImg7 = cropped;
+        _inProcess = true;
+
+      });
+    } else {
+      this.setState(() {
+        _inProcess = false;
+      });
+    }
+  }
+    Widget getImageWidget08() {
+    if (customImg8 != null) {
+      return InkWell(
+        onTap:()=>getImage08(),
+        child: Image.file(
+          customImg8,
+          width: 150,
+          height: 150,
+          fit: BoxFit.cover,
+        ),
+      );
+    } else {
+      return InkWell(
+        onTap:()=>getImage08(),
+         child: Column(
+           children: [
+             Icon(
+      Icons.add,
+        size:50,
+      ),
+                    Text("Add image")
+
+           ],
+         ));
+    }
+  }
+  getImage08() async {
+    Get.back();
+
+    this.setState(() {
+      _inProcess = true;
+    });
+    File image = File(await ImagePicker().getImage(source: ImageSource.gallery).then((pickedFile) => pickedFile.path));
+
+    if (image != null) {
+      File cropped = await ImageCropper.cropImage(
+          sourcePath: image.path,
+          aspectRatio: CropAspectRatio(
+              ratioX: 1, ratioY: 1),
+          compressQuality: 100,
+          maxWidth: 700,
+          maxHeight: 700,
+          compressFormat: ImageCompressFormat.jpg,
+          androidUiSettings: AndroidUiSettings(
+            toolbarColor: Colors.deepOrange,
+            toolbarTitle: "RPS Cropper",
+            statusBarColor: Colors.deepOrange.shade900,
+            backgroundColor: Colors.white,
+          )
+      );
+
+      this.setState(() {
+        customImg8 = cropped;
+        _inProcess = true;
+
+      });
+    } else {
+      this.setState(() {
+        _inProcess = false;
+      });
+    }
+  }
+   Widget getImageWidget09() {
+    if (customImg9 != null) {
+      return InkWell(
+        onTap:()=>getImage09(),
+        child: Image.file(
+          customImg9,
+          width: 150,
+          height: 150,
+          fit: BoxFit.cover,
+        ),
+      );
+    } else {
+      return InkWell(
+        onTap:()=>getImage09(),
+         child: Column(
+           children: [
+             Icon(
+      Icons.add,
+        size:50,
+      ),
+                    Text("Add image")
+
+           ],
+         ));
+    }
+  }
+  getImage09() async {
+    Get.back();
+
+    this.setState(() {
+      _inProcess = true;
+    });
+    File image = File(await ImagePicker().getImage(source: ImageSource.gallery).then((pickedFile) => pickedFile.path));
+
+    if (image != null) {
+      File cropped = await ImageCropper.cropImage(
+          sourcePath: image.path,
+          aspectRatio: CropAspectRatio(
+              ratioX: 1, ratioY: 1),
+          compressQuality: 100,
+          maxWidth: 700,
+          maxHeight: 700,
+          compressFormat: ImageCompressFormat.jpg,
+          androidUiSettings: AndroidUiSettings(
+            toolbarColor: Colors.deepOrange,
+            toolbarTitle: "RPS Cropper",
+            statusBarColor: Colors.deepOrange.shade900,
+            backgroundColor: Colors.white,
+          )
+      );
+
+      this.setState(() {
+        customImg9 = cropped;
+        _inProcess = true;
+
+      });
+    } else {
+      this.setState(() {
+        _inProcess = false;
+      });
+    }
+  }
+   Widget getImageWidget010() {
+    if (customImg10 != null) {
+      return InkWell(
+        onTap:()=>getImage010(),
+        child: Image.file(
+          customImg10,
+          width: 150,
+          height: 150,
+          fit: BoxFit.cover,
+        ),
+      );
+    } else {
+      return InkWell(
+        onTap:()=>getImage010(),
+         child: Column(
+           children: [
+             Icon(
+      Icons.add,
+        size:50,
+      ),
+                    Text("Add image")
+
+           ],
+         ));
+    }
+  }
+  getImage010() async {
+    Get.back();
+
+    this.setState(() {
+      _inProcess = true;
+    });
+    File image = File(await ImagePicker().getImage(source: ImageSource.gallery).then((pickedFile) => pickedFile.path));
+
+    if (image != null) {
+      File cropped = await ImageCropper.cropImage(
+          sourcePath: image.path,
+          aspectRatio: CropAspectRatio(
+              ratioX: 1, ratioY: 1),
+          compressQuality: 100,
+          maxWidth: 700,
+          maxHeight: 700,
+          compressFormat: ImageCompressFormat.jpg,
+          androidUiSettings: AndroidUiSettings(
+            toolbarColor: Colors.deepOrange,
+            toolbarTitle: "RPS Cropper",
+            statusBarColor: Colors.deepOrange.shade900,
+            backgroundColor: Colors.white,
+          )
+      );
+
+      this.setState(() {
+        customImg10 = cropped;
+        _inProcess = true;
+
+      });
+    } else {
+      this.setState(() {
+        _inProcess = false;
+      });
+    }
+  }
+    Widget getImageWidget011() {
+    if (customImg11 != null) {
+      return InkWell(
+        onTap:()=>getImage011(),
+        child: Image.file(
+          customImg11,
+          width: 150,
+          height: 150,
+          fit: BoxFit.cover,
+        ),
+      );
+    } else {
+      return InkWell(
+        onTap:()=>getImage011(),
+         child: Column(
+           children: [
+             Icon(
+      Icons.add,
+        size:50,
+      ),
+                    Text("Add image")
+
+           ],
+         ));
+    }
+  }
+  getImage011() async {
+    Get.back();
+
+    this.setState(() {
+      _inProcess = true;
+    });
+    File image = File(await ImagePicker().getImage(source: ImageSource.gallery).then((pickedFile) => pickedFile.path));
+
+    if (image != null) {
+      File cropped = await ImageCropper.cropImage(
+          sourcePath: image.path,
+          aspectRatio: CropAspectRatio(
+              ratioX: 1, ratioY: 1),
+          compressQuality: 100,
+          maxWidth: 700,
+          maxHeight: 700,
+          compressFormat: ImageCompressFormat.jpg,
+          androidUiSettings: AndroidUiSettings(
+            toolbarColor: Colors.deepOrange,
+            toolbarTitle: "RPS Cropper",
+            statusBarColor: Colors.deepOrange.shade900,
+            backgroundColor: Colors.white,
+          )
+      );
+
+      this.setState(() {
+        customImg11 = cropped;
+        _inProcess = true;
+
+      });
+    } else {
+      this.setState(() {
+        _inProcess = false;
+      });
+    }
+  }
+   Widget getImageWidget012() {
+    if (customImg12 != null) {
+      return InkWell(
+        onTap:()=>getImage012(),
+        child: Image.file(
+          customImg12,
+          width: 150,
+          height: 150,
+          fit: BoxFit.cover,
+        ),
+      );
+    } else {
+      return InkWell(
+        onTap:()=>getImage012(),
+         child: Column(
+           children: [
+             Icon(
+      Icons.add,
+        size:50,
+      ),
+                    Text("Add image")
+
+           ],
+         ));
+    }
+  }
+  getImage012() async {
+    Get.back();
+
+    this.setState(() {
+      _inProcess = true;
+    });
+    File image = File(await ImagePicker().getImage(source: ImageSource.gallery).then((pickedFile) => pickedFile.path));
+
+    if (image != null) {
+      File cropped = await ImageCropper.cropImage(
+          sourcePath: image.path,
+          aspectRatio: CropAspectRatio(
+              ratioX: 1, ratioY: 1),
+          compressQuality: 100,
+          maxWidth: 700,
+          maxHeight: 700,
+          compressFormat: ImageCompressFormat.jpg,
+          androidUiSettings: AndroidUiSettings(
+            toolbarColor: Colors.deepOrange,
+            toolbarTitle: "RPS Cropper",
+            statusBarColor: Colors.deepOrange.shade900,
+            backgroundColor: Colors.white,
+          )
+      );
+
+      this.setState(() {
+        customImg12 = cropped;
+        _inProcess = true;
+
+      });
+    } else {
+      this.setState(() {
+        _inProcess = false;
+      });
+    }
+  }
+  Widget getImageWidget013() {
+    if (customImg13 != null) {
+      return InkWell(
+        onTap:()=>getImage013(),
+        child: Image.file(
+          customImg13,
+          width: 150,
+          height: 150,
+          fit: BoxFit.cover,
+        ),
+      );
+    } else {
+      return InkWell(
+        onTap:()=>getImage013(),
+         child: Column(
+           children: [
+             Icon(
+      Icons.add,
+        size:50,
+      ),
+                    Text("Add image")
+
+           ],
+         ));
+    }
+  }
+  getImage013() async {
+    Get.back();
+
+    this.setState(() {
+      _inProcess = true;
+    });
+    File image = File(await ImagePicker().getImage(source: ImageSource.gallery).then((pickedFile) => pickedFile.path));
+
+    if (image != null) {
+      File cropped = await ImageCropper.cropImage(
+          sourcePath: image.path,
+          aspectRatio: CropAspectRatio(
+              ratioX: 1, ratioY: 1),
+          compressQuality: 100,
+          maxWidth: 700,
+          maxHeight: 700,
+          compressFormat: ImageCompressFormat.jpg,
+          androidUiSettings: AndroidUiSettings(
+            toolbarColor: Colors.deepOrange,
+            toolbarTitle: "RPS Cropper",
+            statusBarColor: Colors.deepOrange.shade900,
+            backgroundColor: Colors.white,
+          )
+      );
+
+      this.setState(() {
+        customImg13 = cropped;
+        _inProcess = true;
+
+      });
+    } else {
+      this.setState(() {
+        _inProcess = false;
+      });
+    }
+  }
+ Widget getImageWidget014() {
+    if (customImg14 != null) {
+      return InkWell(
+        onTap:()=>getImage014(),
+        child: Image.file(
+          customImg14,
+          width: 150,
+          height: 150,
+          fit: BoxFit.cover,
+        ),
+      );
+    } else {
+      return InkWell(
+        onTap:()=>getImage014(),
+         child: Column(
+           children: [
+             Icon(
+      Icons.add,
+        size:50,
+      ),
+                    Text("Add image")
+
+           ],
+         ));
+    }
+  }
+  getImage014() async {
+    Get.back();
+
+    this.setState(() {
+      _inProcess = true;
+    });
+    File image = File(await ImagePicker().getImage(source: ImageSource.gallery).then((pickedFile) => pickedFile.path));
+
+    if (image != null) {
+      File cropped = await ImageCropper.cropImage(
+          sourcePath: image.path,
+          aspectRatio: CropAspectRatio(
+              ratioX: 1, ratioY: 1),
+          compressQuality: 100,
+          maxWidth: 700,
+          maxHeight: 700,
+          compressFormat: ImageCompressFormat.jpg,
+          androidUiSettings: AndroidUiSettings(
+            toolbarColor: Colors.deepOrange,
+            toolbarTitle: "RPS Cropper",
+            statusBarColor: Colors.deepOrange.shade900,
+            backgroundColor: Colors.white,
+          )
+      );
+
+      this.setState(() {
+        customImg14 = cropped;
+        _inProcess = true;
+
+      });
+    } else {
+      this.setState(() {
+        _inProcess = false;
+      });
+    }
+  }
+ Widget getImageWidget015() {
+    if (customImg15 != null) {
+      return InkWell(
+        onTap:()=>getImage015(),
+        child: Image.file(
+          customImg15,
+          width: 150,
+          height: 150,
+          fit: BoxFit.cover,
+        ),
+      );
+    } else {
+      return InkWell(
+        onTap:()=>getImage015(),
+         child: Column(
+           children: [
+             Icon(
+      Icons.add,
+        size:50,
+      ),
+                    Text("Add image")
+
+           ],
+         ));
+    }
+  }
+  getImage015() async {
+    Get.back();
+
+    this.setState(() {
+      _inProcess = true;
+    });
+    File image = File(await ImagePicker().getImage(source: ImageSource.gallery).then((pickedFile) => pickedFile.path));
+
+    if (image != null) {
+      File cropped = await ImageCropper.cropImage(
+          sourcePath: image.path,
+          aspectRatio: CropAspectRatio(
+              ratioX: 1, ratioY: 1),
+          compressQuality: 100,
+          maxWidth: 700,
+          maxHeight: 700,
+          compressFormat: ImageCompressFormat.jpg,
+          androidUiSettings: AndroidUiSettings(
+            toolbarColor: Colors.deepOrange,
+            toolbarTitle: "RPS Cropper",
+            statusBarColor: Colors.deepOrange.shade900,
+            backgroundColor: Colors.white,
+          )
+      );
+
+      this.setState(() {
+        customImg15 = cropped;
+        _inProcess = true;
+
+      });
+    } else {
+      this.setState(() {
+        _inProcess = false;
+      });
+    }
+  }
+ Widget getImageWidget016() {
+    if (customImg16 != null) {
+      return InkWell(
+        onTap:()=>getImage016(),
+        child: Image.file(
+          customImg16,
+          width: 150,
+          height: 150,
+          fit: BoxFit.cover,
+        ),
+      );
+    } else {
+      return InkWell(
+        onTap:()=>getImage016(),
+         child: Column(
+           children: [
+             Icon(
+      Icons.add,
+        size:50,
+      ),
+                    Text("Add image")
+
+           ],
+         ));
+    }
+  }
+  getImage016() async {
+    Get.back();
+
+    this.setState(() {
+      _inProcess = true;
+    });
+    File image = File(await ImagePicker().getImage(source: ImageSource.gallery).then((pickedFile) => pickedFile.path));
+
+    if (image != null) {
+      File cropped = await ImageCropper.cropImage(
+          sourcePath: image.path,
+          aspectRatio: CropAspectRatio(
+              ratioX: 1, ratioY: 1),
+          compressQuality: 100,
+          maxWidth: 700,
+          maxHeight: 700,
+          compressFormat: ImageCompressFormat.jpg,
+          androidUiSettings: AndroidUiSettings(
+            toolbarColor: Colors.deepOrange,
+            toolbarTitle: "RPS Cropper",
+            statusBarColor: Colors.deepOrange.shade900,
+            backgroundColor: Colors.white,
+          )
+      );
+
+      this.setState(() {
+        customImg16 = cropped;
+        _inProcess = true;
+
+      });
+    } else {
+      this.setState(() {
+        _inProcess = false;
+      });
+    }
+  }
+ Widget getImageWidget017() {
+    if (customImg17 != null) {
+      return InkWell(
+        onTap:()=>getImage017(),
+        child: Image.file(
+          customImg17,
+          width: 150,
+          height: 150,
+          fit: BoxFit.cover,
+        ),
+      );
+    } else {
+      return InkWell(
+        onTap:()=>getImage017(),
+         child: Column(
+           children: [
+             Icon(
+      Icons.add,
+        size:50,
+      ),
+                    Text("Add image")
+
+           ],
+         ));
+    }
+  }
+  getImage017() async {
+    Get.back();
+
+    this.setState(() {
+      _inProcess = true;
+    });
+    File image = File(await ImagePicker().getImage(source: ImageSource.gallery).then((pickedFile) => pickedFile.path));
+
+    if (image != null) {
+      File cropped = await ImageCropper.cropImage(
+          sourcePath: image.path,
+          aspectRatio: CropAspectRatio(
+              ratioX: 1, ratioY: 1),
+          compressQuality: 100,
+          maxWidth: 700,
+          maxHeight: 700,
+          compressFormat: ImageCompressFormat.jpg,
+          androidUiSettings: AndroidUiSettings(
+            toolbarColor: Colors.deepOrange,
+            toolbarTitle: "RPS Cropper",
+            statusBarColor: Colors.deepOrange.shade900,
+            backgroundColor: Colors.white,
+          )
+      );
+
+      this.setState(() {
+        customImg17 = cropped;
+        _inProcess = true;
+
+      });
+    } else {
+      this.setState(() {
+        _inProcess = false;
+      });
+    }
+  }
+ Widget getImageWidget018() {
+    if (customImg18 != null) {
+      return InkWell(
+        onTap:()=>getImage018(),
+        child: Image.file(
+          customImg18,
+          width: 150,
+          height: 150,
+          fit: BoxFit.cover,
+        ),
+      );
+    } else {
+      return InkWell(
+        onTap:()=>getImage018(),
+         child: Column(
+           children: [
+             Icon(
+      Icons.add,
+        size:50,
+      ),
+                    Text("Add image")
+
+           ],
+         ));
+    }
+  }
+  getImage018() async {
+    Get.back();
+
+    this.setState(() {
+      _inProcess = true;
+    });
+    File image = File(await ImagePicker().getImage(source: ImageSource.gallery).then((pickedFile) => pickedFile.path));
+
+    if (image != null) {
+      File cropped = await ImageCropper.cropImage(
+          sourcePath: image.path,
+          aspectRatio: CropAspectRatio(
+              ratioX: 1, ratioY: 1),
+          compressQuality: 100,
+          maxWidth: 700,
+          maxHeight: 700,
+          compressFormat: ImageCompressFormat.jpg,
+          androidUiSettings: AndroidUiSettings(
+            toolbarColor: Colors.deepOrange,
+            toolbarTitle: "RPS Cropper",
+            statusBarColor: Colors.deepOrange.shade900,
+            backgroundColor: Colors.white,
+          )
+      );
+
+      this.setState(() {
+        customImg18 = cropped;
+        _inProcess = true;
+
+      });
+    } else {
+      this.setState(() {
+        _inProcess = false;
+      });
+    }
+  }
+ Widget getImageWidget019() {
+    if (customImg19 != null) {
+      return InkWell(
+        onTap:()=>getImage019(),
+        child: Image.file(
+          customImg19,
+          width: 150,
+          height: 150,
+          fit: BoxFit.cover,
+        ),
+      );
+    } else {
+      return InkWell(
+        onTap:()=>getImage019(),
+         child: Column(
+           children: [
+             Icon(
+      Icons.add,
+        size:50,
+      ),
+                    Text("Add image")
+
+           ],
+         ));
+    }
+  }
+  getImage019() async {
+    Get.back();
+
+    this.setState(() {
+      _inProcess = true;
+    });
+    File image = File(await ImagePicker().getImage(source: ImageSource.gallery).then((pickedFile) => pickedFile.path));
+
+    if (image != null) {
+      File cropped = await ImageCropper.cropImage(
+          sourcePath: image.path,
+          aspectRatio: CropAspectRatio(
+              ratioX: 1, ratioY: 1),
+          compressQuality: 100,
+          maxWidth: 700,
+          maxHeight: 700,
+          compressFormat: ImageCompressFormat.jpg,
+          androidUiSettings: AndroidUiSettings(
+            toolbarColor: Colors.deepOrange,
+            toolbarTitle: "RPS Cropper",
+            statusBarColor: Colors.deepOrange.shade900,
+            backgroundColor: Colors.white,
+          )
+      );
+
+      this.setState(() {
+        customImg19 = cropped;
+        _inProcess = true;
+
+      });
+    } else {
+      this.setState(() {
+        _inProcess = false;
+      });
+    }
+  }
+ Widget getImageWidget020() {
+    if (customImg20 != null) {
+      return InkWell(
+        onTap:()=>getImage020(),
+        child: Image.file(
+          customImg20,
+          width: 150,
+          height: 150,
+          fit: BoxFit.cover,
+        ),
+      );
+    } else {
+      return InkWell(
+        onTap:()=>getImage020(),
+         child: Column(
+           children: [
+             Icon(
+      Icons.add,
+        size:50,
+      ),
+                    Text("Add image")
+
+           ],
+         ));
+    }
+  }
+  getImage020() async {
+    Get.back();
+
+    this.setState(() {
+      _inProcess = true;
+    });
+    File image = File(await ImagePicker().getImage(source: ImageSource.gallery).then((pickedFile) => pickedFile.path));
+
+    if (image != null) {
+      File cropped = await ImageCropper.cropImage(
+          sourcePath: image.path,
+          aspectRatio: CropAspectRatio(
+              ratioX: 1, ratioY: 1),
+          compressQuality: 100,
+          maxWidth: 700,
+          maxHeight: 700,
+          compressFormat: ImageCompressFormat.jpg,
+          androidUiSettings: AndroidUiSettings(
+            toolbarColor: Colors.deepOrange,
+            toolbarTitle: "RPS Cropper",
+            statusBarColor: Colors.deepOrange.shade900,
+            backgroundColor: Colors.white,
+          )
+      );
+
+      this.setState(() {
+        customImg20 = cropped;
+        _inProcess = true;
+
+      });
+    } else {
+      this.setState(() {
+        _inProcess = false;
+      });
+    }
+  }
+ Widget getImageWidget021() {
+    if (customImg21 != null) {
+      return InkWell(
+        onTap:()=>getImage021(),
+        child: Image.file(
+          customImg21,
+          width: 150,
+          height: 150,
+          fit: BoxFit.cover,
+        ),
+      );
+    } else {
+      return InkWell(
+        onTap:()=>getImage021(),
+         child: Column(
+           children: [
+             Icon(
+      Icons.add,
+        size:50,
+      ),
+                    Text("Add image")
+
+           ],
+         ));
+    }
+  }
+  getImage021() async {
+    Get.back();
+
+    this.setState(() {
+      _inProcess = true;
+    });
+    File image = File(await ImagePicker().getImage(source: ImageSource.gallery).then((pickedFile) => pickedFile.path));
+
+    if (image != null) {
+      File cropped = await ImageCropper.cropImage(
+          sourcePath: image.path,
+          aspectRatio: CropAspectRatio(
+              ratioX: 1, ratioY: 1),
+          compressQuality: 100,
+          maxWidth: 700,
+          maxHeight: 700,
+          compressFormat: ImageCompressFormat.jpg,
+          androidUiSettings: AndroidUiSettings(
+            toolbarColor: Colors.deepOrange,
+            toolbarTitle: "RPS Cropper",
+            statusBarColor: Colors.deepOrange.shade900,
+            backgroundColor: Colors.white,
+          )
+      );
+
+      this.setState(() {
+        customImg21 = cropped;
+        _inProcess = true;
+
+      });
+    } else {
+      this.setState(() {
+        _inProcess = false;
+      });
+    }
+  }
+ Widget getImageWidget022() {
+    if (customImg22 != null) {
+      return InkWell(
+        onTap:()=>getImage022(),
+        child: Image.file(
+          customImg22,
+          width: 150,
+          height: 150,
+          fit: BoxFit.cover,
+        ),
+      );
+    } else {
+      return InkWell(
+        onTap:()=>getImage022(),
+         child: Column(
+           children: [
+             Icon(
+      Icons.add,
+        size:50,
+      ),
+                    Text("Add image")
+
+           ],
+         ));
+    }
+  }
+  getImage022() async {
+    Get.back();
+
+    this.setState(() {
+      _inProcess = true;
+    });
+    File image = File(await ImagePicker().getImage(source: ImageSource.gallery).then((pickedFile) => pickedFile.path));
+
+    if (image != null) {
+      File cropped = await ImageCropper.cropImage(
+          sourcePath: image.path,
+          aspectRatio: CropAspectRatio(
+              ratioX: 1, ratioY: 1),
+          compressQuality: 100,
+          maxWidth: 700,
+          maxHeight: 700,
+          compressFormat: ImageCompressFormat.jpg,
+          androidUiSettings: AndroidUiSettings(
+            toolbarColor: Colors.deepOrange,
+            toolbarTitle: "RPS Cropper",
+            statusBarColor: Colors.deepOrange.shade900,
+            backgroundColor: Colors.white,
+          )
+      );
+
+      this.setState(() {
+        customImg22 = cropped;
+        _inProcess = true;
+
+      });
+    } else {
+      this.setState(() {
+        _inProcess = false;
+      });
+    }
+  }
+ Widget getImageWidget023() {
+    if (customImg23 != null) {
+      return InkWell(
+        onTap:()=>getImage023(),
+        child: Image.file(
+          customImg23,
+          width: 150,
+          height: 150,
+          fit: BoxFit.cover,
+        ),
+      );
+    } else {
+      return InkWell(
+        onTap:()=>getImage023(),
+         child: Column(
+           children: [
+             Icon(
+      Icons.add,
+        size:50,
+      ),
+                    Text("Add image")
+
+           ],
+         ));
+    }
+  }
+  getImage023() async {
+    Get.back();
+
+    this.setState(() {
+      _inProcess = true;
+    });
+    File image = File(await ImagePicker().getImage(source: ImageSource.gallery).then((pickedFile) => pickedFile.path));
+
+    if (image != null) {
+      File cropped = await ImageCropper.cropImage(
+          sourcePath: image.path,
+          aspectRatio: CropAspectRatio(
+              ratioX: 1, ratioY: 1),
+          compressQuality: 100,
+          maxWidth: 700,
+          maxHeight: 700,
+          compressFormat: ImageCompressFormat.jpg,
+          androidUiSettings: AndroidUiSettings(
+            toolbarColor: Colors.deepOrange,
+            toolbarTitle: "RPS Cropper",
+            statusBarColor: Colors.deepOrange.shade900,
+            backgroundColor: Colors.white,
+          )
+      );
+
+      this.setState(() {
+        customImg23 = cropped;
+        _inProcess = true;
+
+      });
+    } else {
+      this.setState(() {
+        _inProcess = false;
+      });
+    }
+  }
+ Widget getImageWidget024() {
+    if (customImg24 != null) {
+      return InkWell(
+        onTap:()=>getImage024(),
+        child: Image.file(
+          customImg24,
+          width: 150,
+          height: 150,
+          fit: BoxFit.cover,
+        ),
+      );
+    } else {
+      return InkWell(
+        onTap:()=>getImage024(),
+         child: Column(
+           children: [
+             Icon(
+      Icons.add,
+        size:50,
+      ),
+                    Text("Add image")
+
+           ],
+         ));
+    }
+  }
+  getImage024() async {
+    Get.back();
+
+    this.setState(() {
+      _inProcess = true;
+    });
+    File image = File(await ImagePicker().getImage(source: ImageSource.gallery).then((pickedFile) => pickedFile.path));
+
+    if (image != null) {
+      File cropped = await ImageCropper.cropImage(
+          sourcePath: image.path,
+          aspectRatio: CropAspectRatio(
+              ratioX: 1, ratioY: 1),
+          compressQuality: 100,
+          maxWidth: 700,
+          maxHeight: 700,
+          compressFormat: ImageCompressFormat.jpg,
+          androidUiSettings: AndroidUiSettings(
+            toolbarColor: Colors.deepOrange,
+            toolbarTitle: "RPS Cropper",
+            statusBarColor: Colors.deepOrange.shade900,
+            backgroundColor: Colors.white,
+          )
+      );
+
+      this.setState(() {
+        customImg24 = cropped;
+        _inProcess = true;
+
+      });
+    } else {
+      this.setState(() {
+        _inProcess = false;
+      });
+    }
+  }
+ Widget getImageWidget025() {
+    if (customImg25 != null) {
+      return InkWell(
+        onTap:()=>getImage025(),
+        child: Image.file(
+          customImg25,
+          width: 150,
+          height: 150,
+          fit: BoxFit.cover,
+        ),
+      );
+    } else {
+      return InkWell(
+        onTap:()=>getImage025(),
+         child: Column(
+           children: [
+             Icon(
+      Icons.add,
+        size:50,
+      ),
+                    Text("Add image")
+
+           ],
+         ));
+    }
+  }
+  getImage025() async {
+    Get.back();
+
+    this.setState(() {
+      _inProcess = true;
+    });
+    File image = File(await ImagePicker().getImage(source: ImageSource.gallery).then((pickedFile) => pickedFile.path));
+
+    if (image != null) {
+      File cropped = await ImageCropper.cropImage(
+          sourcePath: image.path,
+          aspectRatio: CropAspectRatio(
+              ratioX: 1, ratioY: 1),
+          compressQuality: 100,
+          maxWidth: 700,
+          maxHeight: 700,
+          compressFormat: ImageCompressFormat.jpg,
+          androidUiSettings: AndroidUiSettings(
+            toolbarColor: Colors.deepOrange,
+            toolbarTitle: "RPS Cropper",
+            statusBarColor: Colors.deepOrange.shade900,
+            backgroundColor: Colors.white,
+          )
+      );
+
+      this.setState(() {
+        customImg25 = cropped;
+        _inProcess = true;
+
+      });
+    } else {
+      this.setState(() {
+        _inProcess = false;
+      });
+    }
+  }
+ Widget getImageWidget026() {
+    if (customImg26 != null) {
+      return InkWell(
+        onTap:()=>getImage026(),
+        child: Image.file(
+          customImg26,
+          width: 150,
+          height: 150,
+          fit: BoxFit.cover,
+        ),
+      );
+    } else {
+      return InkWell(
+        onTap:()=>getImage026(),
+         child: Column(
+           children: [
+             Icon(
+      Icons.add,
+        size:50,
+      ),
+                    Text("Add image")
+
+           ],
+         ));
+    }
+  }
+  getImage026() async {
+    Get.back();
+
+    this.setState(() {
+      _inProcess = true;
+    });
+    File image = File(await ImagePicker().getImage(source: ImageSource.gallery).then((pickedFile) => pickedFile.path));
+
+    if (image != null) {
+      File cropped = await ImageCropper.cropImage(
+          sourcePath: image.path,
+          aspectRatio: CropAspectRatio(
+              ratioX: 1, ratioY: 1),
+          compressQuality: 100,
+          maxWidth: 700,
+          maxHeight: 700,
+          compressFormat: ImageCompressFormat.jpg,
+          androidUiSettings: AndroidUiSettings(
+            toolbarColor: Colors.deepOrange,
+            toolbarTitle: "RPS Cropper",
+            statusBarColor: Colors.deepOrange.shade900,
+            backgroundColor: Colors.white,
+          )
+      );
+
+      this.setState(() {
+        customImg26 = cropped;
+        _inProcess = true;
+
+      });
+    } else {
+      this.setState(() {
+        _inProcess = false;
+      });
+    }
+  }
+ Widget getImageWidget027() {
+    if (customImg27 != null) {
+      return InkWell(
+        onTap:()=>getImage027(),
+        child: Image.file(
+          customImg27,
+          width: 150,
+          height: 150,
+          fit: BoxFit.cover,
+        ),
+      );
+    } else {
+      return InkWell(
+        onTap:()=>getImage027(),
+         child: Column(
+           children: [
+             Icon(
+      Icons.add,
+        size:50,
+      ),
+                    Text("Add image")
+
+           ],
+         ));
+    }
+  }
+  getImage027() async {
+    Get.back();
+
+    this.setState(() {
+      _inProcess = true;
+    });
+    File image = File(await ImagePicker().getImage(source: ImageSource.gallery).then((pickedFile) => pickedFile.path));
+
+    if (image != null) {
+      File cropped = await ImageCropper.cropImage(
+          sourcePath: image.path,
+          aspectRatio: CropAspectRatio(
+              ratioX: 1, ratioY: 1),
+          compressQuality: 100,
+          maxWidth: 700,
+          maxHeight: 700,
+          compressFormat: ImageCompressFormat.jpg,
+          androidUiSettings: AndroidUiSettings(
+            toolbarColor: Colors.deepOrange,
+            toolbarTitle: "RPS Cropper",
+            statusBarColor: Colors.deepOrange.shade900,
+            backgroundColor: Colors.white,
+          )
+      );
+
+      this.setState(() {
+        customImg27 = cropped;
+        _inProcess = true;
+
+      });
+    } else {
+      this.setState(() {
+        _inProcess = false;
+      });
+    }
+  }
+ Widget getImageWidget028() {
+    if (customImg28 != null) {
+      return InkWell(
+        onTap:()=>getImage028(),
+        child: Image.file(
+          customImg28,
+          width: 150,
+          height: 150,
+          fit: BoxFit.cover,
+        ),
+      );
+    } else {
+      return InkWell(
+        onTap:()=>getImage028(),
+         child: Column(
+           children: [
+             Icon(
+      Icons.add,
+        size:50,
+      ),
+                    Text("Add image")
+
+           ],
+         ));
+    }
+  }
+  getImage028() async {
+    Get.back();
+
+    this.setState(() {
+      _inProcess = true;
+    });
+    File image = File(await ImagePicker().getImage(source: ImageSource.gallery).then((pickedFile) => pickedFile.path));
+
+    if (image != null) {
+      File cropped = await ImageCropper.cropImage(
+          sourcePath: image.path,
+          aspectRatio: CropAspectRatio(
+              ratioX: 1, ratioY: 1),
+          compressQuality: 100,
+          maxWidth: 700,
+          maxHeight: 700,
+          compressFormat: ImageCompressFormat.jpg,
+          androidUiSettings: AndroidUiSettings(
+            toolbarColor: Colors.deepOrange,
+            toolbarTitle: "RPS Cropper",
+            statusBarColor: Colors.deepOrange.shade900,
+            backgroundColor: Colors.white,
+          )
+      );
+
+      this.setState(() {
+        customImg28 = cropped;
+        _inProcess = true;
+
+      });
+    } else {
+      this.setState(() {
+        _inProcess = false;
+      });
+    }
+  }
+ Widget getImageWidget029() {
+    if (customImg29 != null) {
+      return InkWell(
+        onTap:()=>getImage029(),
+        child: Image.file(
+          customImg29,
+          width: 150,
+          height: 150,
+          fit: BoxFit.cover,
+        ),
+      );
+    } else {
+      return InkWell(
+        onTap:()=>getImage029(),
+         child: Column(
+           children: [
+             Icon(
+      Icons.add,
+        size:50,
+      ),
+                    Text("Add image")
+
+           ],
+         ));
+    }
+  }
+  getImage029() async {
+    Get.back();
+
+    this.setState(() {
+      _inProcess = true;
+    });
+    File image = File(await ImagePicker().getImage(source: ImageSource.gallery).then((pickedFile) => pickedFile.path));
+
+    if (image != null) {
+      File cropped = await ImageCropper.cropImage(
+          sourcePath: image.path,
+          aspectRatio: CropAspectRatio(
+              ratioX: 1, ratioY: 1),
+          compressQuality: 100,
+          maxWidth: 700,
+          maxHeight: 700,
+          compressFormat: ImageCompressFormat.jpg,
+          androidUiSettings: AndroidUiSettings(
+            toolbarColor: Colors.deepOrange,
+            toolbarTitle: "RPS Cropper",
+            statusBarColor: Colors.deepOrange.shade900,
+            backgroundColor: Colors.white,
+          )
+      );
+
+      this.setState(() {
+        customImg29 = cropped;
+        _inProcess = true;
+
+      });
+    } else {
+      this.setState(() {
+        _inProcess = false;
+      });
+    }
+  }
+ Widget getImageWidget030() {
+    if (customImg30 != null) {
+      return InkWell(
+        onTap:()=>getImage030(),
+        child: Image.file(
+          customImg30,
+          width: 150,
+          height: 150,
+          fit: BoxFit.cover,
+        ),
+      );
+    } else {
+      return InkWell(
+        onTap:()=>getImage030(),
+         child: Column(
+           children: [
+             Icon(
+      Icons.add,
+        size:50,
+      ),
+                    Text("Add image")
+
+           ],
+         ));
+    }
+  }
+  getImage030() async {
+    Get.back();
+
+    this.setState(() {
+      _inProcess = true;
+    });
+    File image = File(await ImagePicker().getImage(source: ImageSource.gallery).then((pickedFile) => pickedFile.path));
+
+    if (image != null) {
+      File cropped = await ImageCropper.cropImage(
+          sourcePath: image.path,
+          aspectRatio: CropAspectRatio(
+              ratioX: 1, ratioY: 1),
+          compressQuality: 100,
+          maxWidth: 700,
+          maxHeight: 700,
+          compressFormat: ImageCompressFormat.jpg,
+          androidUiSettings: AndroidUiSettings(
+            toolbarColor: Colors.deepOrange,
+            toolbarTitle: "RPS Cropper",
+            statusBarColor: Colors.deepOrange.shade900,
+            backgroundColor: Colors.white,
+          )
+      );
+
+      this.setState(() {
+        customImg30 = cropped;
+        _inProcess = true;
+
+      });
+    } else {
+      this.setState(() {
+        _inProcess = false;
+      });
+    }
+  }
+ Widget getImageWidget031() {
+    if (customImg31 != null) {
+      return InkWell(
+        onTap:()=>getImage031(),
+        child: Image.file(
+          customImg31,
+          width: 150,
+          height: 150,
+          fit: BoxFit.cover,
+        ),
+      );
+    } else {
+      return InkWell(
+        onTap:()=>getImage031(),
+         child: Column(
+           children: [
+             Icon(
+      Icons.add,
+        size:50,
+      ),
+                    Text("Add image")
+
+           ],
+         ));
+    }
+  }
+  getImage031() async {
+    Get.back();
+
+    this.setState(() {
+      _inProcess = true;
+    });
+    File image = File(await ImagePicker().getImage(source: ImageSource.gallery).then((pickedFile) => pickedFile.path));
+
+    if (image != null) {
+      File cropped = await ImageCropper.cropImage(
+          sourcePath: image.path,
+          aspectRatio: CropAspectRatio(
+              ratioX: 1, ratioY: 1),
+          compressQuality: 100,
+          maxWidth: 700,
+          maxHeight: 700,
+          compressFormat: ImageCompressFormat.jpg,
+          androidUiSettings: AndroidUiSettings(
+            toolbarColor: Colors.deepOrange,
+            toolbarTitle: "RPS Cropper",
+            statusBarColor: Colors.deepOrange.shade900,
+            backgroundColor: Colors.white,
+          )
+      );
+
+      this.setState(() {
+        customImg31 = cropped;
+        _inProcess = true;
+
+      });
+    } else {
+      this.setState(() {
+        _inProcess = false;
+      });
+    }
+  }
+ Widget getImageWidget032() {
+    if (customImg32 != null) {
+      return InkWell(
+        onTap:()=>getImage032(),
+        child: Image.file(
+          customImg32,
+          width: 150,
+          height: 150,
+          fit: BoxFit.cover,
+        ),
+      );
+    } else {
+      return InkWell(
+        onTap:()=>getImage032(),
+         child: Column(
+           children: [
+             Icon(
+      Icons.add,
+        size:50,
+      ),
+                    Text("Add image")
+
+           ],
+         ));
+    }
+  }
+  getImage032() async {
+    Get.back();
+
+    this.setState(() {
+      _inProcess = true;
+    });
+    File image = File(await ImagePicker().getImage(source: ImageSource.gallery).then((pickedFile) => pickedFile.path));
+
+    if (image != null) {
+      File cropped = await ImageCropper.cropImage(
+          sourcePath: image.path,
+          aspectRatio: CropAspectRatio(
+              ratioX: 1, ratioY: 1),
+          compressQuality: 100,
+          maxWidth: 700,
+          maxHeight: 700,
+          compressFormat: ImageCompressFormat.jpg,
+          androidUiSettings: AndroidUiSettings(
+            toolbarColor: Colors.deepOrange,
+            toolbarTitle: "RPS Cropper",
+            statusBarColor: Colors.deepOrange.shade900,
+            backgroundColor: Colors.white,
+          )
+      );
+
+      this.setState(() {
+        customImg32 = cropped;
+        _inProcess = true;
+
+      });
+    } else {
+      this.setState(() {
+        _inProcess = false;
+      });
+    }
+  }
+ Widget getImageWidget033() {
+    if (customImg33 != null) {
+      return InkWell(
+        onTap:()=>getImage033(),
+        child: Image.file(
+          customImg33,
+          width: 150,
+          height: 150,
+          fit: BoxFit.cover,
+        ),
+      );
+    } else {
+      return InkWell(
+        onTap:()=>getImage033(),
+         child: Column(
+           children: [
+             Icon(
+      Icons.add,
+        size:50,
+      ),
+                    Text("Add image")
+
+           ],
+         ));
+    }
+  }
+  getImage033() async {
+    Get.back();
+
+    this.setState(() {
+      _inProcess = true;
+    });
+    File image = File(await ImagePicker().getImage(source: ImageSource.gallery).then((pickedFile) => pickedFile.path));
+
+    if (image != null) {
+      File cropped = await ImageCropper.cropImage(
+          sourcePath: image.path,
+          aspectRatio: CropAspectRatio(
+              ratioX: 1, ratioY: 1),
+          compressQuality: 100,
+          maxWidth: 700,
+          maxHeight: 700,
+          compressFormat: ImageCompressFormat.jpg,
+          androidUiSettings: AndroidUiSettings(
+            toolbarColor: Colors.deepOrange,
+            toolbarTitle: "RPS Cropper",
+            statusBarColor: Colors.deepOrange.shade900,
+            backgroundColor: Colors.white,
+          )
+      );
+
+      this.setState(() {
+        customImg33 = cropped;
+        _inProcess = true;
+
+      });
+    } else {
+      this.setState(() {
+        _inProcess = false;
+      });
+    }
+  }
+ Widget getImageWidget034() {
+    if (customImg34 != null) {
+      return InkWell(
+        onTap:()=>getImage034(),
+        child: Image.file(
+          customImg34,
+          width: 150,
+          height: 150,
+          fit: BoxFit.cover,
+        ),
+      );
+    } else {
+      return InkWell(
+        onTap:()=>getImage034(),
+         child: Column(
+           children: [
+             Icon(
+      Icons.add,
+        size:50,
+      ),
+                    Text("Add image")
+
+           ],
+         ));
+    }
+  }
+  getImage034() async {
+    Get.back();
+
+    this.setState(() {
+      _inProcess = true;
+    });
+    File image = File(await ImagePicker().getImage(source: ImageSource.gallery).then((pickedFile) => pickedFile.path));
+
+    if (image != null) {
+      File cropped = await ImageCropper.cropImage(
+          sourcePath: image.path,
+          aspectRatio: CropAspectRatio(
+              ratioX: 1, ratioY: 1),
+          compressQuality: 100,
+          maxWidth: 700,
+          maxHeight: 700,
+          compressFormat: ImageCompressFormat.jpg,
+          androidUiSettings: AndroidUiSettings(
+            toolbarColor: Colors.deepOrange,
+            toolbarTitle: "RPS Cropper",
+            statusBarColor: Colors.deepOrange.shade900,
+            backgroundColor: Colors.white,
+          )
+      );
+
+      this.setState(() {
+        customImg34 = cropped;
+        _inProcess = true;
+
+      });
+    } else {
+      this.setState(() {
+        _inProcess = false;
+      });
+    }
+  }
+ Widget getImageWidget035() {
+    if (customImg35 != null) {
+      return InkWell(
+        onTap:()=>getImage035(),
+        child: Image.file(
+          customImg35,
+          width: 150,
+          height: 150,
+          fit: BoxFit.cover,
+        ),
+      );
+    } else {
+      return InkWell(
+        onTap:()=>getImage035(),
+         child: Column(
+           children: [
+             Icon(
+      Icons.add,
+        size:50,
+      ),
+                    Text("Add image")
+
+           ],
+         ));
+    }
+  }
+  getImage035() async {
+    Get.back();
+
+    this.setState(() {
+      _inProcess = true;
+    });
+    File image = File(await ImagePicker().getImage(source: ImageSource.gallery).then((pickedFile) => pickedFile.path));
+
+    if (image != null) {
+      File cropped = await ImageCropper.cropImage(
+          sourcePath: image.path,
+          aspectRatio: CropAspectRatio(
+              ratioX: 1, ratioY: 1),
+          compressQuality: 100,
+          maxWidth: 700,
+          maxHeight: 700,
+          compressFormat: ImageCompressFormat.jpg,
+          androidUiSettings: AndroidUiSettings(
+            toolbarColor: Colors.deepOrange,
+            toolbarTitle: "RPS Cropper",
+            statusBarColor: Colors.deepOrange.shade900,
+            backgroundColor: Colors.white,
+          )
+      );
+
+      this.setState(() {
+        customImg35 = cropped;
+        _inProcess = true;
+
+      });
+    } else {
+      this.setState(() {
+        _inProcess = false;
+      });
+    }
+  }
+ Widget getImageWidget036() {
+    if (customImg36 != null) {
+      return InkWell(
+        onTap:()=>getImage036(),
+        child: Image.file(
+          customImg36,
+          width: 150,
+          height: 150,
+          fit: BoxFit.cover,
+        ),
+      );
+    } else {
+      return InkWell(
+        onTap:()=>getImage036(),
+         child: Column(
+           children: [
+             Icon(
+      Icons.add,
+        size:50,
+      ),
+                    Text("Add image")
+
+           ],
+         ));
+    }
+  }
+  getImage036() async {
+    Get.back();
+
+    this.setState(() {
+      _inProcess = true;
+    });
+    File image = File(await ImagePicker().getImage(source: ImageSource.gallery).then((pickedFile) => pickedFile.path));
+
+    if (image != null) {
+      File cropped = await ImageCropper.cropImage(
+          sourcePath: image.path,
+          aspectRatio: CropAspectRatio(
+              ratioX: 1, ratioY: 1),
+          compressQuality: 100,
+          maxWidth: 700,
+          maxHeight: 700,
+          compressFormat: ImageCompressFormat.jpg,
+          androidUiSettings: AndroidUiSettings(
+            toolbarColor: Colors.deepOrange,
+            toolbarTitle: "RPS Cropper",
+            statusBarColor: Colors.deepOrange.shade900,
+            backgroundColor: Colors.white,
+          )
+      );
+
+      this.setState(() {
+        customImg36 = cropped;
+        _inProcess = true;
+
+      });
+    } else {
+      this.setState(() {
+        _inProcess = false;
+      });
+    }
+  }
+ Widget getImageWidget037() {
+    if (customImg37 != null) {
+      return InkWell(
+        onTap:()=>getImage037(),
+        child: Image.file(
+          customImg37,
+          width: 150,
+          height: 150,
+          fit: BoxFit.cover,
+        ),
+      );
+    } else {
+      return InkWell(
+        onTap:()=>getImage037(),
+         child: Column(
+           children: [
+             Icon(
+      Icons.add,
+        size:50,
+      ),
+                    Text("Add image")
+
+           ],
+         ));
+    }
+  }
+  getImage037() async {
+    Get.back();
+
+    this.setState(() {
+      _inProcess = true;
+    });
+    File image = File(await ImagePicker().getImage(source: ImageSource.gallery).then((pickedFile) => pickedFile.path));
+
+    if (image != null) {
+      File cropped = await ImageCropper.cropImage(
+          sourcePath: image.path,
+          aspectRatio: CropAspectRatio(
+              ratioX: 1, ratioY: 1),
+          compressQuality: 100,
+          maxWidth: 700,
+          maxHeight: 700,
+          compressFormat: ImageCompressFormat.jpg,
+          androidUiSettings: AndroidUiSettings(
+            toolbarColor: Colors.deepOrange,
+            toolbarTitle: "RPS Cropper",
+            statusBarColor: Colors.deepOrange.shade900,
+            backgroundColor: Colors.white,
+          )
+      );
+
+      this.setState(() {
+        customImg37 = cropped;
+        _inProcess = true;
+
+      });
+    } else {
+      this.setState(() {
+        _inProcess = false;
+      });
+    }
+  }
+ Widget getImageWidget038() {
+    if (customImg38 != null) {
+      return InkWell(
+        onTap:()=>getImage038(),
+        child: Image.file(
+          customImg38,
+          width: 150,
+          height: 150,
+          fit: BoxFit.cover,
+        ),
+      );
+    } else {
+      return InkWell(
+        onTap:()=>getImage038(),
+         child: Column(
+           children: [
+             Icon(
+      Icons.add,
+        size:50,
+      ),
+                    Text("Add image")
+
+           ],
+         ));
+    }
+  }
+  getImage038() async {
+    Get.back();
+
+    this.setState(() {
+      _inProcess = true;
+    });
+    File image = File(await ImagePicker().getImage(source: ImageSource.gallery).then((pickedFile) => pickedFile.path));
+
+    if (image != null) {
+      File cropped = await ImageCropper.cropImage(
+          sourcePath: image.path,
+          aspectRatio: CropAspectRatio(
+              ratioX: 1, ratioY: 1),
+          compressQuality: 100,
+          maxWidth: 700,
+          maxHeight: 700,
+          compressFormat: ImageCompressFormat.jpg,
+          androidUiSettings: AndroidUiSettings(
+            toolbarColor: Colors.deepOrange,
+            toolbarTitle: "RPS Cropper",
+            statusBarColor: Colors.deepOrange.shade900,
+            backgroundColor: Colors.white,
+          )
+      );
+
+      this.setState(() {
+        customImg38 = cropped;
+        _inProcess = true;
+
+      });
+    } else {
+      this.setState(() {
+        _inProcess = false;
+      });
+    }
+  }
+ Widget getImageWidget039() {
+    if (customImg39 != null) {
+      return InkWell(
+        onTap:()=>getImage039(),
+        child: Image.file(
+          customImg39,
+          width: 150,
+          height: 150,
+          fit: BoxFit.cover,
+        ),
+      );
+    } else {
+      return InkWell(
+        onTap:()=>getImage039(),
+         child: Column(
+           children: [
+             Icon(
+      Icons.add,
+        size:50,
+      ),
+                    Text("Add image")
+
+           ],
+         ));
+    }
+  }
+  getImage039() async {
+    Get.back();
+
+    this.setState(() {
+      _inProcess = true;
+    });
+    File image = File(await ImagePicker().getImage(source: ImageSource.gallery).then((pickedFile) => pickedFile.path));
+
+    if (image != null) {
+      File cropped = await ImageCropper.cropImage(
+          sourcePath: image.path,
+          aspectRatio: CropAspectRatio(
+              ratioX: 1, ratioY: 1),
+          compressQuality: 100,
+          maxWidth: 700,
+          maxHeight: 700,
+          compressFormat: ImageCompressFormat.jpg,
+          androidUiSettings: AndroidUiSettings(
+            toolbarColor: Colors.deepOrange,
+            toolbarTitle: "RPS Cropper",
+            statusBarColor: Colors.deepOrange.shade900,
+            backgroundColor: Colors.white,
+          )
+      );
+
+      this.setState(() {
+        customImg39 = cropped;
+        _inProcess = true;
+
+      });
+    } else {
+      this.setState(() {
+        _inProcess = false;
+      });
+    }
+  }
+ Widget getImageWidget040() {
+    if (customImg40 != null) {
+      return InkWell(
+        onTap:()=>getImage040(),
+        child: Image.file(
+          customImg40,
+          width: 150,
+          height: 150,
+          fit: BoxFit.cover,
+        ),
+      );
+    } else {
+      return InkWell(
+        onTap:()=>getImage040(),
+         child: Column(
+           children: [
+             Icon(
+      Icons.add,
+        size:50,
+      ),
+                    Text("Add image")
+
+           ],
+         ));
+    }
+  }
+  getImage040() async {
+    Get.back();
+
+    this.setState(() {
+      _inProcess = true;
+    });
+    File image = File(await ImagePicker().getImage(source: ImageSource.gallery).then((pickedFile) => pickedFile.path));
+
+    if (image != null) {
+      File cropped = await ImageCropper.cropImage(
+          sourcePath: image.path,
+          aspectRatio: CropAspectRatio(
+              ratioX: 1, ratioY: 1),
+          compressQuality: 100,
+          maxWidth: 700,
+          maxHeight: 700,
+          compressFormat: ImageCompressFormat.jpg,
+          androidUiSettings: AndroidUiSettings(
+            toolbarColor: Colors.deepOrange,
+            toolbarTitle: "RPS Cropper",
+            statusBarColor: Colors.deepOrange.shade900,
+            backgroundColor: Colors.white,
+          )
+      );
+
+      this.setState(() {
+        customImg40 = cropped;
+        _inProcess = true;
+
+      });
+    } else {
+      this.setState(() {
+        _inProcess = false;
+      });
+    }
+  }
+ Widget getImageWidget041() {
+    if (customImg41 != null) {
+      return InkWell(
+        onTap:()=>getImage041(),
+        child: Image.file(
+          customImg41,
+          width: 150,
+          height: 150,
+          fit: BoxFit.cover,
+        ),
+      );
+    } else {
+      return InkWell(
+        onTap:()=>getImage041(),
+         child: Column(
+           children: [
+             Icon(
+      Icons.add,
+        size:50,
+      ),
+                    Text("Add image")
+
+           ],
+         ));
+    }
+  }
+  getImage041() async {
+    Get.back();
+
+    this.setState(() {
+      _inProcess = true;
+    });
+    File image = File(await ImagePicker().getImage(source: ImageSource.gallery).then((pickedFile) => pickedFile.path));
+
+    if (image != null) {
+      File cropped = await ImageCropper.cropImage(
+          sourcePath: image.path,
+          aspectRatio: CropAspectRatio(
+              ratioX: 1, ratioY: 1),
+          compressQuality: 100,
+          maxWidth: 700,
+          maxHeight: 700,
+          compressFormat: ImageCompressFormat.jpg,
+          androidUiSettings: AndroidUiSettings(
+            toolbarColor: Colors.deepOrange,
+            toolbarTitle: "RPS Cropper",
+            statusBarColor: Colors.deepOrange.shade900,
+            backgroundColor: Colors.white,
+          )
+      );
+
+      this.setState(() {
+        customImg41 = cropped;
+        _inProcess = true;
+
+      });
+    } else {
+      this.setState(() {
+        _inProcess = false;
+      });
+    }
+  }
+ Widget getImageWidget042() {
+    if (customImg42 != null) {
+      return InkWell(
+        onTap:()=>getImage042(),
+        child: Image.file(
+          customImg42,
+          width: 150,
+          height: 150,
+          fit: BoxFit.cover,
+        ),
+      );
+    } else {
+      return InkWell(
+        onTap:()=>getImage042(),
+         child: Column(
+           children: [
+             Icon(
+      Icons.add,
+        size:50,
+      ),
+                    Text("Add image")
+
+           ],
+         ));
+    }
+  }
+  getImage042() async {
+    Get.back();
+
+    this.setState(() {
+      _inProcess = true;
+    });
+    File image = File(await ImagePicker().getImage(source: ImageSource.gallery).then((pickedFile) => pickedFile.path));
+
+    if (image != null) {
+      File cropped = await ImageCropper.cropImage(
+          sourcePath: image.path,
+          aspectRatio: CropAspectRatio(
+              ratioX: 1, ratioY: 1),
+          compressQuality: 100,
+          maxWidth: 700,
+          maxHeight: 700,
+          compressFormat: ImageCompressFormat.jpg,
+          androidUiSettings: AndroidUiSettings(
+            toolbarColor: Colors.deepOrange,
+            toolbarTitle: "RPS Cropper",
+            statusBarColor: Colors.deepOrange.shade900,
+            backgroundColor: Colors.white,
+          )
+      );
+
+      this.setState(() {
+        customImg42 = cropped;
+        _inProcess = true;
+
+      });
+    } else {
+      this.setState(() {
+        _inProcess = false;
+      });
+    }
+  }
+ Widget getImageWidget043() {
+    if (customImg43 != null) {
+      return InkWell(
+        onTap:()=>getImage043(),
+        child: Image.file(
+          customImg43,
+          width: 150,
+          height: 150,
+          fit: BoxFit.cover,
+        ),
+      );
+    } else {
+      return InkWell(
+        onTap:()=>getImage043(),
+         child: Column(
+           children: [
+             Icon(
+      Icons.add,
+        size:50,
+      ),
+                    Text("Add image")
+
+           ],
+         ));
+    }
+  }
+  getImage043() async {
+    Get.back();
+
+    this.setState(() {
+      _inProcess = true;
+    });
+    File image = File(await ImagePicker().getImage(source: ImageSource.gallery).then((pickedFile) => pickedFile.path));
+
+    if (image != null) {
+      File cropped = await ImageCropper.cropImage(
+          sourcePath: image.path,
+          aspectRatio: CropAspectRatio(
+              ratioX: 1, ratioY: 1),
+          compressQuality: 100,
+          maxWidth: 700,
+          maxHeight: 700,
+          compressFormat: ImageCompressFormat.jpg,
+          androidUiSettings: AndroidUiSettings(
+            toolbarColor: Colors.deepOrange,
+            toolbarTitle: "RPS Cropper",
+            statusBarColor: Colors.deepOrange.shade900,
+            backgroundColor: Colors.white,
+          )
+      );
+
+      this.setState(() {
+        customImg43 = cropped;
+        _inProcess = true;
+
+      });
+    } else {
+      this.setState(() {
+        _inProcess = false;
+      });
+    }
+  }
+ Widget getImageWidget044() {
+    if (customImg44 != null) {
+      return InkWell(
+        onTap:()=>getImage044(),
+        child: Image.file(
+          customImg44,
+          width: 150,
+          height: 150,
+          fit: BoxFit.cover,
+        ),
+      );
+    } else {
+      return InkWell(
+        onTap:()=>getImage044(),
+         child: Column(
+           children: [
+             Icon(
+      Icons.add,
+        size:50,
+      ),
+                    Text("Add image")
+
+           ],
+         ));
+    }
+  }
+  getImage044() async {
+    Get.back();
+
+    this.setState(() {
+      _inProcess = true;
+    });
+    File image = File(await ImagePicker().getImage(source: ImageSource.gallery).then((pickedFile) => pickedFile.path));
+
+    if (image != null) {
+      File cropped = await ImageCropper.cropImage(
+          sourcePath: image.path,
+          aspectRatio: CropAspectRatio(
+              ratioX: 1, ratioY: 1),
+          compressQuality: 100,
+          maxWidth: 700,
+          maxHeight: 700,
+          compressFormat: ImageCompressFormat.jpg,
+          androidUiSettings: AndroidUiSettings(
+            toolbarColor: Colors.deepOrange,
+            toolbarTitle: "RPS Cropper",
+            statusBarColor: Colors.deepOrange.shade900,
+            backgroundColor: Colors.white,
+          )
+      );
+
+      this.setState(() {
+        customImg44 = cropped;
+        _inProcess = true;
+
+      });
+    } else {
+      this.setState(() {
+        _inProcess = false;
+      });
+    }
+  }
+ Widget getImageWidget045() {
+    if (customImg45 != null) {
+      return InkWell(
+        onTap:()=>getImage045(),
+        child: Image.file(
+          customImg45,
+          width: 150,
+          height: 150,
+          fit: BoxFit.cover,
+        ),
+      );
+    } else {
+      return InkWell(
+        onTap:()=>getImage045(),
+         child: Column(
+           children: [
+             Icon(
+      Icons.add,
+        size:50,
+      ),
+                    Text("Add image")
+
+           ],
+         ));
+    }
+  }
+  getImage045() async {
+    Get.back();
+
+    this.setState(() {
+      _inProcess = true;
+    });
+    File image = File(await ImagePicker().getImage(source: ImageSource.gallery).then((pickedFile) => pickedFile.path));
+
+    if (image != null) {
+      File cropped = await ImageCropper.cropImage(
+          sourcePath: image.path,
+          aspectRatio: CropAspectRatio(
+              ratioX: 1, ratioY: 1),
+          compressQuality: 100,
+          maxWidth: 700,
+          maxHeight: 700,
+          compressFormat: ImageCompressFormat.jpg,
+          androidUiSettings: AndroidUiSettings(
+            toolbarColor: Colors.deepOrange,
+            toolbarTitle: "RPS Cropper",
+            statusBarColor: Colors.deepOrange.shade900,
+            backgroundColor: Colors.white,
+          )
+      );
+
+      this.setState(() {
+        customImg45 = cropped;
+        _inProcess = true;
+
+      });
+    } else {
+      this.setState(() {
+        _inProcess = false;
+      });
+    }
+  }
+ Widget getImageWidget046() {
+    if (customImg46 != null) {
+      return InkWell(
+        onTap:()=>getImage046(),
+        child: Image.file(
+          customImg46,
+          width: 150,
+          height: 150,
+          fit: BoxFit.cover,
+        ),
+      );
+    } else {
+      return InkWell(
+        onTap:()=>getImage046(),
+         child: Column(
+           children: [
+             Icon(
+      Icons.add,
+        size:50,
+      ),
+                    Text("Add image")
+
+           ],
+         ));
+    }
+  }
+  getImage046() async {
+    Get.back();
+
+    this.setState(() {
+      _inProcess = true;
+    });
+    File image = File(await ImagePicker().getImage(source: ImageSource.gallery).then((pickedFile) => pickedFile.path));
+
+    if (image != null) {
+      File cropped = await ImageCropper.cropImage(
+          sourcePath: image.path,
+          aspectRatio: CropAspectRatio(
+              ratioX: 1, ratioY: 1),
+          compressQuality: 100,
+          maxWidth: 700,
+          maxHeight: 700,
+          compressFormat: ImageCompressFormat.jpg,
+          androidUiSettings: AndroidUiSettings(
+            toolbarColor: Colors.deepOrange,
+            toolbarTitle: "RPS Cropper",
+            statusBarColor: Colors.deepOrange.shade900,
+            backgroundColor: Colors.white,
+          )
+      );
+
+      this.setState(() {
+        customImg46 = cropped;
+        _inProcess = true;
+
+      });
+    } else {
+      this.setState(() {
+        _inProcess = false;
+      });
+    }
+  }
+ Widget getImageWidget047() {
+    if (customImg47 != null) {
+      return InkWell(
+        onTap:()=>getImage047(),
+        child: Image.file(
+          customImg47,
+          width: 150,
+          height: 150,
+          fit: BoxFit.cover,
+        ),
+      );
+    } else {
+      return InkWell(
+        onTap:()=>getImage047(),
+         child: Column(
+           children: [
+             Icon(
+      Icons.add,
+        size:50,
+      ),
+                    Text("Add image")
+
+           ],
+         ));
+    }
+  }
+  getImage047() async {
+    Get.back();
+
+    this.setState(() {
+      _inProcess = true;
+    });
+    File image = File(await ImagePicker().getImage(source: ImageSource.gallery).then((pickedFile) => pickedFile.path));
+
+    if (image != null) {
+      File cropped = await ImageCropper.cropImage(
+          sourcePath: image.path,
+          aspectRatio: CropAspectRatio(
+              ratioX: 1, ratioY: 1),
+          compressQuality: 100,
+          maxWidth: 700,
+          maxHeight: 700,
+          compressFormat: ImageCompressFormat.jpg,
+          androidUiSettings: AndroidUiSettings(
+            toolbarColor: Colors.deepOrange,
+            toolbarTitle: "RPS Cropper",
+            statusBarColor: Colors.deepOrange.shade900,
+            backgroundColor: Colors.white,
+          )
+      );
+
+      this.setState(() {
+        customImg47 = cropped;
+        _inProcess = true;
+
+      });
+    } else {
+      this.setState(() {
+        _inProcess = false;
+      });
+    }
+  }
+ Widget getImageWidget048() {
+    if (customImg48 != null) {
+      return InkWell(
+        onTap:()=>getImage048(),
+        child: Image.file(
+          customImg48,
+          width: 150,
+          height: 150,
+          fit: BoxFit.cover,
+        ),
+      );
+    } else {
+      return InkWell(
+        onTap:()=>getImage048(),
+         child: Column(
+           children: [
+             Icon(
+      Icons.add,
+        size:50,
+      ),
+                    Text("Add image")
+
+           ],
+         ));
+    }
+  }
+  getImage048() async {
+    Get.back();
+
+    this.setState(() {
+      _inProcess = true;
+    });
+    File image = File(await ImagePicker().getImage(source: ImageSource.gallery).then((pickedFile) => pickedFile.path));
+
+    if (image != null) {
+      File cropped = await ImageCropper.cropImage(
+          sourcePath: image.path,
+          aspectRatio: CropAspectRatio(
+              ratioX: 1, ratioY: 1),
+          compressQuality: 100,
+          maxWidth: 700,
+          maxHeight: 700,
+          compressFormat: ImageCompressFormat.jpg,
+          androidUiSettings: AndroidUiSettings(
+            toolbarColor: Colors.deepOrange,
+            toolbarTitle: "RPS Cropper",
+            statusBarColor: Colors.deepOrange.shade900,
+            backgroundColor: Colors.white,
+          )
+      );
+
+      this.setState(() {
+        customImg48 = cropped;
+        _inProcess = true;
+
+      });
+    } else {
+      this.setState(() {
+        _inProcess = false;
+      });
+    }
+  }
+ Widget getImageWidget049() {
+    if (customImg49 != null) {
+      return InkWell(
+        onTap:()=>getImage049(),
+        child: Image.file(
+          customImg49,
+          width: 150,
+          height: 150,
+          fit: BoxFit.cover,
+        ),
+      );
+    } else {
+      return InkWell(
+        onTap:()=>getImage049(),
+         child: Column(
+           children: [
+             Icon(
+      Icons.add,
+        size:50,
+      ),
+                    Text("Add image")
+
+           ],
+         ));
+    }
+  }
+  getImage049() async {
+    Get.back();
+
+    this.setState(() {
+      _inProcess = true;
+    });
+    File image = File(await ImagePicker().getImage(source: ImageSource.gallery).then((pickedFile) => pickedFile.path));
+
+    if (image != null) {
+      File cropped = await ImageCropper.cropImage(
+          sourcePath: image.path,
+          aspectRatio: CropAspectRatio(
+              ratioX: 1, ratioY: 1),
+          compressQuality: 100,
+          maxWidth: 700,
+          maxHeight: 700,
+          compressFormat: ImageCompressFormat.jpg,
+          androidUiSettings: AndroidUiSettings(
+            toolbarColor: Colors.deepOrange,
+            toolbarTitle: "RPS Cropper",
+            statusBarColor: Colors.deepOrange.shade900,
+            backgroundColor: Colors.white,
+          )
+      );
+
+      this.setState(() {
+        customImg49 = cropped;
+        _inProcess = true;
+
+      });
+    } else {
+      this.setState(() {
+        _inProcess = false;
+      });
+    }
+  }
+ Widget getImageWidget050() {
+    if (customImg50 != null) {
+      return InkWell(
+        onTap:()=>getImage050(),
+        child: Image.file(
+          customImg50,
+          width: 150,
+          height: 150,
+          fit: BoxFit.cover,
+        ),
+      );
+    } else {
+      return InkWell(
+        onTap:()=>getImage050(),
+         child: Column(
+           children: [
+             Icon(
+      Icons.add,
+        size:50,
+      ),
+                    Text("Add image")
+
+           ],
+         ));
+    }
+  }
+  getImage050() async {
+    Get.back();
+
+    this.setState(() {
+      _inProcess = true;
+    });
+    File image = File(await ImagePicker().getImage(source: ImageSource.gallery).then((pickedFile) => pickedFile.path));
+
+    if (image != null) {
+      File cropped = await ImageCropper.cropImage(
+          sourcePath: image.path,
+          aspectRatio: CropAspectRatio(
+              ratioX: 1, ratioY: 1),
+          compressQuality: 100,
+          maxWidth: 700,
+          maxHeight: 700,
+          compressFormat: ImageCompressFormat.jpg,
+          androidUiSettings: AndroidUiSettings(
+            toolbarColor: Colors.deepOrange,
+            toolbarTitle: "RPS Cropper",
+            statusBarColor: Colors.deepOrange.shade900,
+            backgroundColor: Colors.white,
+          )
+      );
+
+      this.setState(() {
+        customImg50 = cropped;
+        _inProcess = true;
+
+      });
+    } else {
+      this.setState(() {
+        _inProcess = false;
+      });
+    }
+  }
+
+  
   selectImage() {
     return showDialog(
         context: context,
@@ -1269,6 +4206,506 @@ compressImage9() async {
       file9 = compressedImageFile;
     });
   }
+compressImage01() async {
+    final tempDir = await getTemporaryDirectory();
+    final path = tempDir.path;
+    Im.Image imageFile = Im.decodeImage(customImg1.readAsBytesSync());
+    final compressedImageFile = File('$path/img01_$prodId.jpg')
+      ..writeAsBytesSync(Im.encodeJpg(imageFile, quality: 50));
+    if (!mounted) return; setState(() {
+      customImg1 = compressedImageFile;
+    });
+  }
+compressImage02() async {
+    final tempDir = await getTemporaryDirectory();
+    final path = tempDir.path;
+    Im.Image imageFile = Im.decodeImage(customImg2.readAsBytesSync());
+    final compressedImageFile = File('$path/img02_$prodId.jpg')
+      ..writeAsBytesSync(Im.encodeJpg(imageFile, quality: 50));
+    if (!mounted) return; setState(() {
+      customImg2 = compressedImageFile;
+    });
+  }
+compressImage03() async {
+    final tempDir = await getTemporaryDirectory();
+    final path = tempDir.path;
+    Im.Image imageFile = Im.decodeImage(customImg3.readAsBytesSync());
+    final compressedImageFile = File('$path/img03_$prodId.jpg')
+      ..writeAsBytesSync(Im.encodeJpg(imageFile, quality: 50));
+    if (!mounted) return; setState(() {
+      customImg3 = compressedImageFile;
+    });
+  }
+compressImage04() async {
+    final tempDir = await getTemporaryDirectory();
+    final path = tempDir.path;
+    Im.Image imageFile = Im.decodeImage(customImg4.readAsBytesSync());
+    final compressedImageFile = File('$path/img04_$prodId.jpg')
+      ..writeAsBytesSync(Im.encodeJpg(imageFile, quality: 50));
+    if (!mounted) return; setState(() {
+      customImg4 = compressedImageFile;
+    });
+  }
+compressImage05() async {
+    final tempDir = await getTemporaryDirectory();
+    final path = tempDir.path;
+    Im.Image imageFile = Im.decodeImage(customImg5.readAsBytesSync());
+    final compressedImageFile = File('$path/img05_$prodId.jpg')
+      ..writeAsBytesSync(Im.encodeJpg(imageFile, quality: 50));
+    if (!mounted) return; setState(() {
+      customImg5 = compressedImageFile;
+    });
+  }
+compressImage06() async {
+    final tempDir = await getTemporaryDirectory();
+    final path = tempDir.path;
+    Im.Image imageFile = Im.decodeImage(customImg6.readAsBytesSync());
+    final compressedImageFile = File('$path/img06_$prodId.jpg')
+      ..writeAsBytesSync(Im.encodeJpg(imageFile, quality: 50));
+    if (!mounted) return; setState(() {
+      customImg6 = compressedImageFile;
+    });
+  }
+compressImage07() async {
+    final tempDir = await getTemporaryDirectory();
+    final path = tempDir.path;
+    Im.Image imageFile = Im.decodeImage(customImg7.readAsBytesSync());
+    final compressedImageFile = File('$path/img07_$prodId.jpg')
+      ..writeAsBytesSync(Im.encodeJpg(imageFile, quality: 50));
+    if (!mounted) return; setState(() {
+      customImg7 = compressedImageFile;
+    });
+  }
+compressImage08() async {
+    final tempDir = await getTemporaryDirectory();
+    final path = tempDir.path;
+    Im.Image imageFile = Im.decodeImage(customImg8.readAsBytesSync());
+    final compressedImageFile = File('$path/img08_$prodId.jpg')
+      ..writeAsBytesSync(Im.encodeJpg(imageFile, quality: 50));
+    if (!mounted) return; setState(() {
+      customImg8 = compressedImageFile;
+    });
+  }
+compressImage09() async {
+    final tempDir = await getTemporaryDirectory();
+    final path = tempDir.path;
+    Im.Image imageFile = Im.decodeImage(customImg9.readAsBytesSync());
+    final compressedImageFile = File('$path/img09_$prodId.jpg')
+      ..writeAsBytesSync(Im.encodeJpg(imageFile, quality: 50));
+    if (!mounted) return; setState(() {
+      customImg9 = compressedImageFile;
+    });
+  }
+compressImage010() async {
+    final tempDir = await getTemporaryDirectory();
+    final path = tempDir.path;
+    Im.Image imageFile = Im.decodeImage(customImg10.readAsBytesSync());
+    final compressedImageFile = File('$path/img010_$prodId.jpg')
+      ..writeAsBytesSync(Im.encodeJpg(imageFile, quality: 50));
+    if (!mounted) return; setState(() {
+      customImg10 = compressedImageFile;
+    });
+  }
+compressImage011() async {
+    final tempDir = await getTemporaryDirectory();
+    final path = tempDir.path;
+    Im.Image imageFile = Im.decodeImage(customImg11.readAsBytesSync());
+    final compressedImageFile = File('$path/img011_$prodId.jpg')
+      ..writeAsBytesSync(Im.encodeJpg(imageFile, quality: 50));
+    if (!mounted) return; setState(() {
+      customImg11 = compressedImageFile;
+    });
+  }
+compressImage012() async {
+    final tempDir = await getTemporaryDirectory();
+    final path = tempDir.path;
+    Im.Image imageFile = Im.decodeImage(customImg12.readAsBytesSync());
+    final compressedImageFile = File('$path/img012_$prodId.jpg')
+      ..writeAsBytesSync(Im.encodeJpg(imageFile, quality: 50));
+    if (!mounted) return; setState(() {
+      customImg12 = compressedImageFile;
+    });
+  }
+compressImage013() async {
+    final tempDir = await getTemporaryDirectory();
+    final path = tempDir.path;
+    Im.Image imageFile = Im.decodeImage(customImg13.readAsBytesSync());
+    final compressedImageFile = File('$path/img013_$prodId.jpg')
+      ..writeAsBytesSync(Im.encodeJpg(imageFile, quality: 50));
+    if (!mounted) return; setState(() {
+      customImg13 = compressedImageFile;
+    });
+  }
+compressImage014() async {
+    final tempDir = await getTemporaryDirectory();
+    final path = tempDir.path;
+    Im.Image imageFile = Im.decodeImage(customImg14.readAsBytesSync());
+    final compressedImageFile = File('$path/img014_$prodId.jpg')
+      ..writeAsBytesSync(Im.encodeJpg(imageFile, quality: 50));
+    if (!mounted) return; setState(() {
+      customImg14 = compressedImageFile;
+    });
+  }
+compressImage015() async {
+    final tempDir = await getTemporaryDirectory();
+    final path = tempDir.path;
+    Im.Image imageFile = Im.decodeImage(customImg15.readAsBytesSync());
+    final compressedImageFile = File('$path/img015_$prodId.jpg')
+      ..writeAsBytesSync(Im.encodeJpg(imageFile, quality: 50));
+    if (!mounted) return; setState(() {
+      customImg15 = compressedImageFile;
+    });
+  }
+compressImage016() async {
+    final tempDir = await getTemporaryDirectory();
+    final path = tempDir.path;
+    Im.Image imageFile = Im.decodeImage(customImg16.readAsBytesSync());
+    final compressedImageFile = File('$path/img016_$prodId.jpg')
+      ..writeAsBytesSync(Im.encodeJpg(imageFile, quality: 50));
+    if (!mounted) return; setState(() {
+      customImg16 = compressedImageFile;
+    });
+  }
+compressImage017() async {
+    final tempDir = await getTemporaryDirectory();
+    final path = tempDir.path;
+    Im.Image imageFile = Im.decodeImage(customImg17.readAsBytesSync());
+    final compressedImageFile = File('$path/img017_$prodId.jpg')
+      ..writeAsBytesSync(Im.encodeJpg(imageFile, quality: 50));
+    if (!mounted) return; setState(() {
+      customImg17 = compressedImageFile;
+    });
+  }
+compressImage018() async {
+    final tempDir = await getTemporaryDirectory();
+    final path = tempDir.path;
+    Im.Image imageFile = Im.decodeImage(customImg18.readAsBytesSync());
+    final compressedImageFile = File('$path/img018_$prodId.jpg')
+      ..writeAsBytesSync(Im.encodeJpg(imageFile, quality: 50));
+    if (!mounted) return; setState(() {
+      customImg18 = compressedImageFile;
+    });
+  }
+compressImage019() async {
+    final tempDir = await getTemporaryDirectory();
+    final path = tempDir.path;
+    Im.Image imageFile = Im.decodeImage(customImg19.readAsBytesSync());
+    final compressedImageFile = File('$path/img019_$prodId.jpg')
+      ..writeAsBytesSync(Im.encodeJpg(imageFile, quality: 50));
+    if (!mounted) return; setState(() {
+      customImg19 = compressedImageFile;
+    });
+  }
+compressImage020() async {
+    final tempDir = await getTemporaryDirectory();
+    final path = tempDir.path;
+    Im.Image imageFile = Im.decodeImage(customImg20.readAsBytesSync());
+    final compressedImageFile = File('$path/img020_$prodId.jpg')
+      ..writeAsBytesSync(Im.encodeJpg(imageFile, quality: 50));
+    if (!mounted) return; setState(() {
+      customImg20 = compressedImageFile;
+    });
+  }
+compressImage021() async {
+    final tempDir = await getTemporaryDirectory();
+    final path = tempDir.path;
+    Im.Image imageFile = Im.decodeImage(customImg21.readAsBytesSync());
+    final compressedImageFile = File('$path/img021_$prodId.jpg')
+      ..writeAsBytesSync(Im.encodeJpg(imageFile, quality: 50));
+    if (!mounted) return; setState(() {
+      customImg21 = compressedImageFile;
+    });
+  }
+compressImage022() async {
+    final tempDir = await getTemporaryDirectory();
+    final path = tempDir.path;
+    Im.Image imageFile = Im.decodeImage(customImg22.readAsBytesSync());
+    final compressedImageFile = File('$path/img022_$prodId.jpg')
+      ..writeAsBytesSync(Im.encodeJpg(imageFile, quality: 50));
+    if (!mounted) return; setState(() {
+      customImg22 = compressedImageFile;
+    });
+  }
+compressImage023() async {
+    final tempDir = await getTemporaryDirectory();
+    final path = tempDir.path;
+    Im.Image imageFile = Im.decodeImage(customImg23.readAsBytesSync());
+    final compressedImageFile = File('$path/img023_$prodId.jpg')
+      ..writeAsBytesSync(Im.encodeJpg(imageFile, quality: 50));
+    if (!mounted) return; setState(() {
+      customImg23 = compressedImageFile;
+    });
+  }
+compressImage024() async {
+    final tempDir = await getTemporaryDirectory();
+    final path = tempDir.path;
+    Im.Image imageFile = Im.decodeImage(customImg24.readAsBytesSync());
+    final compressedImageFile = File('$path/img024_$prodId.jpg')
+      ..writeAsBytesSync(Im.encodeJpg(imageFile, quality: 50));
+    if (!mounted) return; setState(() {
+      customImg24 = compressedImageFile;
+    });
+  }
+compressImage025() async {
+    final tempDir = await getTemporaryDirectory();
+    final path = tempDir.path;
+    Im.Image imageFile = Im.decodeImage(customImg25.readAsBytesSync());
+    final compressedImageFile = File('$path/img025_$prodId.jpg')
+      ..writeAsBytesSync(Im.encodeJpg(imageFile, quality: 50));
+    if (!mounted) return; setState(() {
+      customImg25 = compressedImageFile;
+    });
+  }
+compressImage026() async {
+    final tempDir = await getTemporaryDirectory();
+    final path = tempDir.path;
+    Im.Image imageFile = Im.decodeImage(customImg26.readAsBytesSync());
+    final compressedImageFile = File('$path/img026_$prodId.jpg')
+      ..writeAsBytesSync(Im.encodeJpg(imageFile, quality: 50));
+    if (!mounted) return; setState(() {
+      customImg26 = compressedImageFile;
+    });
+  }
+compressImage027() async {
+    final tempDir = await getTemporaryDirectory();
+    final path = tempDir.path;
+    Im.Image imageFile = Im.decodeImage(customImg27.readAsBytesSync());
+    final compressedImageFile = File('$path/img027_$prodId.jpg')
+      ..writeAsBytesSync(Im.encodeJpg(imageFile, quality: 50));
+    if (!mounted) return; setState(() {
+      customImg27 = compressedImageFile;
+    });
+  }
+compressImage028() async {
+    final tempDir = await getTemporaryDirectory();
+    final path = tempDir.path;
+    Im.Image imageFile = Im.decodeImage(customImg28.readAsBytesSync());
+    final compressedImageFile = File('$path/img028_$prodId.jpg')
+      ..writeAsBytesSync(Im.encodeJpg(imageFile, quality: 50));
+    if (!mounted) return; setState(() {
+      customImg28 = compressedImageFile;
+    });
+  }
+compressImage029() async {
+    final tempDir = await getTemporaryDirectory();
+    final path = tempDir.path;
+    Im.Image imageFile = Im.decodeImage(customImg29.readAsBytesSync());
+    final compressedImageFile = File('$path/img029_$prodId.jpg')
+      ..writeAsBytesSync(Im.encodeJpg(imageFile, quality: 50));
+    if (!mounted) return; setState(() {
+      customImg29 = compressedImageFile;
+    });
+  }
+compressImage030() async {
+    final tempDir = await getTemporaryDirectory();
+    final path = tempDir.path;
+    Im.Image imageFile = Im.decodeImage(customImg30.readAsBytesSync());
+    final compressedImageFile = File('$path/img030_$prodId.jpg')
+      ..writeAsBytesSync(Im.encodeJpg(imageFile, quality: 50));
+    if (!mounted) return; setState(() {
+      customImg30 = compressedImageFile;
+    });
+  }
+compressImage031() async {
+    final tempDir = await getTemporaryDirectory();
+    final path = tempDir.path;
+    Im.Image imageFile = Im.decodeImage(customImg31.readAsBytesSync());
+    final compressedImageFile = File('$path/img031_$prodId.jpg')
+      ..writeAsBytesSync(Im.encodeJpg(imageFile, quality: 50));
+    if (!mounted) return; setState(() {
+      customImg31 = compressedImageFile;
+    });
+  }
+compressImage032() async {
+    final tempDir = await getTemporaryDirectory();
+    final path = tempDir.path;
+    Im.Image imageFile = Im.decodeImage(customImg32.readAsBytesSync());
+    final compressedImageFile = File('$path/img032_$prodId.jpg')
+      ..writeAsBytesSync(Im.encodeJpg(imageFile, quality: 50));
+    if (!mounted) return; setState(() {
+      customImg32 = compressedImageFile;
+    });
+  }
+compressImage033() async {
+    final tempDir = await getTemporaryDirectory();
+    final path = tempDir.path;
+    Im.Image imageFile = Im.decodeImage(customImg33.readAsBytesSync());
+    final compressedImageFile = File('$path/img033_$prodId.jpg')
+      ..writeAsBytesSync(Im.encodeJpg(imageFile, quality: 50));
+    if (!mounted) return; setState(() {
+      customImg33 = compressedImageFile;
+    });
+  }
+compressImage034() async {
+    final tempDir = await getTemporaryDirectory();
+    final path = tempDir.path;
+    Im.Image imageFile = Im.decodeImage(customImg34.readAsBytesSync());
+    final compressedImageFile = File('$path/img034_$prodId.jpg')
+      ..writeAsBytesSync(Im.encodeJpg(imageFile, quality: 50));
+    if (!mounted) return; setState(() {
+      customImg34 = compressedImageFile;
+    });
+  }
+compressImage035() async {
+    final tempDir = await getTemporaryDirectory();
+    final path = tempDir.path;
+    Im.Image imageFile = Im.decodeImage(customImg35.readAsBytesSync());
+    final compressedImageFile = File('$path/img035_$prodId.jpg')
+      ..writeAsBytesSync(Im.encodeJpg(imageFile, quality: 50));
+    if (!mounted) return; setState(() {
+      customImg35 = compressedImageFile;
+    });
+  }
+compressImage036() async {
+    final tempDir = await getTemporaryDirectory();
+    final path = tempDir.path;
+    Im.Image imageFile = Im.decodeImage(customImg36.readAsBytesSync());
+    final compressedImageFile = File('$path/img036_$prodId.jpg')
+      ..writeAsBytesSync(Im.encodeJpg(imageFile, quality: 50));
+    if (!mounted) return; setState(() {
+      customImg36 = compressedImageFile;
+    });
+  }
+compressImage037() async {
+    final tempDir = await getTemporaryDirectory();
+    final path = tempDir.path;
+    Im.Image imageFile = Im.decodeImage(customImg37.readAsBytesSync());
+    final compressedImageFile = File('$path/img037_$prodId.jpg')
+      ..writeAsBytesSync(Im.encodeJpg(imageFile, quality: 50));
+    if (!mounted) return; setState(() {
+      customImg37 = compressedImageFile;
+    });
+  }
+compressImage038() async {
+    final tempDir = await getTemporaryDirectory();
+    final path = tempDir.path;
+    Im.Image imageFile = Im.decodeImage(customImg38.readAsBytesSync());
+    final compressedImageFile = File('$path/img038_$prodId.jpg')
+      ..writeAsBytesSync(Im.encodeJpg(imageFile, quality: 50));
+    if (!mounted) return; setState(() {
+      customImg38 = compressedImageFile;
+    });
+  }
+compressImage039() async {
+    final tempDir = await getTemporaryDirectory();
+    final path = tempDir.path;
+    Im.Image imageFile = Im.decodeImage(customImg39.readAsBytesSync());
+    final compressedImageFile = File('$path/img039_$prodId.jpg')
+      ..writeAsBytesSync(Im.encodeJpg(imageFile, quality: 50));
+    if (!mounted) return; setState(() {
+      customImg39 = compressedImageFile;
+    });
+  }
+compressImage040() async {
+    final tempDir = await getTemporaryDirectory();
+    final path = tempDir.path;
+    Im.Image imageFile = Im.decodeImage(customImg40.readAsBytesSync());
+    final compressedImageFile = File('$path/img040_$prodId.jpg')
+      ..writeAsBytesSync(Im.encodeJpg(imageFile, quality: 50));
+    if (!mounted) return; setState(() {
+      customImg40 = compressedImageFile;
+    });
+  }
+compressImage041() async {
+    final tempDir = await getTemporaryDirectory();
+    final path = tempDir.path;
+    Im.Image imageFile = Im.decodeImage(customImg41.readAsBytesSync());
+    final compressedImageFile = File('$path/img041_$prodId.jpg')
+      ..writeAsBytesSync(Im.encodeJpg(imageFile, quality: 50));
+    if (!mounted) return; setState(() {
+      customImg41 = compressedImageFile;
+    });
+  }
+compressImage042() async {
+    final tempDir = await getTemporaryDirectory();
+    final path = tempDir.path;
+    Im.Image imageFile = Im.decodeImage(customImg42.readAsBytesSync());
+    final compressedImageFile = File('$path/img042_$prodId.jpg')
+      ..writeAsBytesSync(Im.encodeJpg(imageFile, quality: 50));
+    if (!mounted) return; setState(() {
+      customImg42 = compressedImageFile;
+    });
+  }
+compressImage043() async {
+    final tempDir = await getTemporaryDirectory();
+    final path = tempDir.path;
+    Im.Image imageFile = Im.decodeImage(customImg43.readAsBytesSync());
+    final compressedImageFile = File('$path/img043_$prodId.jpg')
+      ..writeAsBytesSync(Im.encodeJpg(imageFile, quality: 50));
+    if (!mounted) return; setState(() {
+      customImg43 = compressedImageFile;
+    });
+  }
+compressImage044() async {
+    final tempDir = await getTemporaryDirectory();
+    final path = tempDir.path;
+    Im.Image imageFile = Im.decodeImage(customImg44.readAsBytesSync());
+    final compressedImageFile = File('$path/img044_$prodId.jpg')
+      ..writeAsBytesSync(Im.encodeJpg(imageFile, quality: 50));
+    if (!mounted) return; setState(() {
+      customImg44 = compressedImageFile;
+    });
+  }
+compressImage045() async {
+    final tempDir = await getTemporaryDirectory();
+    final path = tempDir.path;
+    Im.Image imageFile = Im.decodeImage(customImg45.readAsBytesSync());
+    final compressedImageFile = File('$path/img045_$prodId.jpg')
+      ..writeAsBytesSync(Im.encodeJpg(imageFile, quality: 50));
+    if (!mounted) return; setState(() {
+      customImg45 = compressedImageFile;
+    });
+  }
+compressImage046() async {
+    final tempDir = await getTemporaryDirectory();
+    final path = tempDir.path;
+    Im.Image imageFile = Im.decodeImage(customImg46.readAsBytesSync());
+    final compressedImageFile = File('$path/img046_$prodId.jpg')
+      ..writeAsBytesSync(Im.encodeJpg(imageFile, quality: 50));
+    if (!mounted) return; setState(() {
+      customImg46 = compressedImageFile;
+    });
+  }
+compressImage047() async {
+    final tempDir = await getTemporaryDirectory();
+    final path = tempDir.path;
+    Im.Image imageFile = Im.decodeImage(customImg47.readAsBytesSync());
+    final compressedImageFile = File('$path/img047_$prodId.jpg')
+      ..writeAsBytesSync(Im.encodeJpg(imageFile, quality: 50));
+    if (!mounted) return; setState(() {
+      customImg47 = compressedImageFile;
+    });
+  }
+compressImage048() async {
+    final tempDir = await getTemporaryDirectory();
+    final path = tempDir.path;
+    Im.Image imageFile = Im.decodeImage(customImg48.readAsBytesSync());
+    final compressedImageFile = File('$path/img048_$prodId.jpg')
+      ..writeAsBytesSync(Im.encodeJpg(imageFile, quality: 50));
+    if (!mounted) return; setState(() {
+      customImg48 = compressedImageFile;
+    });
+  }
+compressImage049() async {
+    final tempDir = await getTemporaryDirectory();
+    final path = tempDir.path;
+    Im.Image imageFile = Im.decodeImage(customImg49.readAsBytesSync());
+    final compressedImageFile = File('$path/img049_$prodId.jpg')
+      ..writeAsBytesSync(Im.encodeJpg(imageFile, quality: 50));
+    if (!mounted) return; setState(() {
+      customImg49 = compressedImageFile;
+    });
+  }
+compressImage050() async {
+    final tempDir = await getTemporaryDirectory();
+    final path = tempDir.path;
+    Im.Image imageFile = Im.decodeImage(customImg50.readAsBytesSync());
+    final compressedImageFile = File('$path/img050_$prodId.jpg')
+      ..writeAsBytesSync(Im.encodeJpg(imageFile, quality: 50));
+    if (!mounted) return; setState(() {
+      customImg50 = compressedImageFile;
+    });
+  }
 
   Future<String> uploadImage(imageFile) async {
     String fileName = DateTime.now().millisecondsSinceEpoch.toString();
@@ -1281,7 +4718,7 @@ compressImage9() async {
 
 
   }
-   Future<String> uploadImage1(imageFile) async {
+  Future<String> uploadImage1(imageFile) async {
     String fileName = DateTime.now().millisecondsSinceEpoch.toString();
     Reference reference = FirebaseStorage.instance.ref().child("Shop${prodId}").child("$fileName.jpg");
     UploadTask uploadTask = reference.putFile(imageFile);
@@ -1290,7 +4727,7 @@ compressImage9() async {
     String downloadUrl = await storageSnap.ref.getDownloadURL();
     return downloadUrl;
   }
-    Future<String> uploadImage2(imageFile) async {
+  Future<String> uploadImage2(imageFile) async {
     String fileName = DateTime.now().millisecondsSinceEpoch.toString();
     Reference reference = FirebaseStorage.instance.ref().child("Shop${prodId}").child("$fileName.jpg");
     UploadTask uploadTask = reference.putFile(imageFile);
@@ -1299,7 +4736,7 @@ compressImage9() async {
     String downloadUrl = await storageSnap.ref.getDownloadURL();
     return downloadUrl;
   }
-    Future<String> uploadImage3(imageFile) async {
+  Future<String> uploadImage3(imageFile) async {
     String fileName = DateTime.now().millisecondsSinceEpoch.toString();
     Reference reference = FirebaseStorage.instance.ref().child("Shop${prodId}").child("$fileName.jpg");
     UploadTask uploadTask = reference.putFile(imageFile);
@@ -1308,7 +4745,7 @@ compressImage9() async {
     String downloadUrl = await storageSnap.ref.getDownloadURL();
     return downloadUrl;
   }
-    Future<String> uploadImage4(imageFile) async {
+  Future<String> uploadImage4(imageFile) async {
     String fileName = DateTime.now().millisecondsSinceEpoch.toString();
     Reference reference = FirebaseStorage.instance.ref().child("Shop${prodId}").child("$fileName.jpg");
     UploadTask uploadTask = reference.putFile(imageFile);
@@ -1317,7 +4754,7 @@ compressImage9() async {
     String downloadUrl = await storageSnap.ref.getDownloadURL();
     return downloadUrl;
   }
-    Future<String> uploadImage5(imageFile) async {
+  Future<String> uploadImage5(imageFile) async {
     String fileName = DateTime.now().millisecondsSinceEpoch.toString();
     Reference reference = FirebaseStorage.instance.ref().child("Shop${prodId}").child("$fileName.jpg");
     UploadTask uploadTask = reference.putFile(imageFile);
@@ -1326,7 +4763,7 @@ compressImage9() async {
     String downloadUrl = await storageSnap.ref.getDownloadURL();
     return downloadUrl;
   }
-    Future<String> uploadImage6(imageFile) async {
+  Future<String> uploadImage6(imageFile) async {
     String fileName = DateTime.now().millisecondsSinceEpoch.toString();
     Reference reference = FirebaseStorage.instance.ref().child("Shop${prodId}").child("$fileName.jpg");
     UploadTask uploadTask = reference.putFile(imageFile);
@@ -1335,7 +4772,7 @@ compressImage9() async {
     String downloadUrl = await storageSnap.ref.getDownloadURL();
     return downloadUrl;
   }
-    Future<String> uploadImage7(imageFile) async {
+  Future<String> uploadImage7(imageFile) async {
     String fileName = DateTime.now().millisecondsSinceEpoch.toString();
     Reference reference = FirebaseStorage.instance.ref().child("Shop${prodId}").child("$fileName.jpg");
     UploadTask uploadTask = reference.putFile(imageFile);
@@ -1344,7 +4781,7 @@ compressImage9() async {
     String downloadUrl = await storageSnap.ref.getDownloadURL();
     return downloadUrl;
   }
-    Future<String> uploadImage8(imageFile) async {
+  Future<String> uploadImage8(imageFile) async {
     String fileName = DateTime.now().millisecondsSinceEpoch.toString();
     Reference reference = FirebaseStorage.instance.ref().child("Shop${prodId}").child("$fileName.jpg");
     UploadTask uploadTask = reference.putFile(imageFile);
@@ -1353,7 +4790,7 @@ compressImage9() async {
     String downloadUrl = await storageSnap.ref.getDownloadURL();
     return downloadUrl;
   }
-    Future<String> uploadImage9(imageFile) async {
+  Future<String> uploadImage9(imageFile) async {
     String fileName = DateTime.now().millisecondsSinceEpoch.toString();
     Reference reference = FirebaseStorage.instance.ref().child("Shop${prodId}").child("$fileName.jpg");
     UploadTask uploadTask = reference.putFile(imageFile);
@@ -1363,6 +4800,456 @@ compressImage9() async {
     return downloadUrl;
   }
 
+  Future<String> uploadImage01(imageFile) async {
+    String fileName = DateTime.now().millisecondsSinceEpoch.toString();
+    Reference reference = FirebaseStorage.instance.ref().child("Shop${prodId}").child("$fileName.jpg");
+    UploadTask uploadTask = reference.putFile(imageFile);
+
+    TaskSnapshot storageSnap = await uploadTask;
+    String downloadUrl = await storageSnap.ref.getDownloadURL();
+    return downloadUrl;
+  }
+  Future<String> uploadImage02(imageFile) async {
+    String fileName = DateTime.now().millisecondsSinceEpoch.toString();
+    Reference reference = FirebaseStorage.instance.ref().child("Shop${prodId}").child("$fileName.jpg");
+    UploadTask uploadTask = reference.putFile(imageFile);
+
+    TaskSnapshot storageSnap = await uploadTask;
+    String downloadUrl = await storageSnap.ref.getDownloadURL();
+    return downloadUrl;
+  }
+  Future<String> uploadImage03(imageFile) async {
+    String fileName = DateTime.now().millisecondsSinceEpoch.toString();
+    Reference reference = FirebaseStorage.instance.ref().child("Shop${prodId}").child("$fileName.jpg");
+    UploadTask uploadTask = reference.putFile(imageFile);
+
+    TaskSnapshot storageSnap = await uploadTask;
+    String downloadUrl = await storageSnap.ref.getDownloadURL();
+    return downloadUrl;
+  }
+  Future<String> uploadImage04(imageFile) async {
+    String fileName = DateTime.now().millisecondsSinceEpoch.toString();
+    Reference reference = FirebaseStorage.instance.ref().child("Shop${prodId}").child("$fileName.jpg");
+    UploadTask uploadTask = reference.putFile(imageFile);
+
+    TaskSnapshot storageSnap = await uploadTask;
+    String downloadUrl = await storageSnap.ref.getDownloadURL();
+    return downloadUrl;
+  }
+  Future<String> uploadImage05(imageFile) async {
+    String fileName = DateTime.now().millisecondsSinceEpoch.toString();
+    Reference reference = FirebaseStorage.instance.ref().child("Shop${prodId}").child("$fileName.jpg");
+    UploadTask uploadTask = reference.putFile(imageFile);
+
+    TaskSnapshot storageSnap = await uploadTask;
+    String downloadUrl = await storageSnap.ref.getDownloadURL();
+    return downloadUrl;
+  }
+  Future<String> uploadImage06(imageFile) async {
+    String fileName = DateTime.now().millisecondsSinceEpoch.toString();
+    Reference reference = FirebaseStorage.instance.ref().child("Shop${prodId}").child("$fileName.jpg");
+    UploadTask uploadTask = reference.putFile(imageFile);
+
+    TaskSnapshot storageSnap = await uploadTask;
+    String downloadUrl = await storageSnap.ref.getDownloadURL();
+    return downloadUrl;
+  }
+  Future<String> uploadImage07(imageFile) async {
+    String fileName = DateTime.now().millisecondsSinceEpoch.toString();
+    Reference reference = FirebaseStorage.instance.ref().child("Shop${prodId}").child("$fileName.jpg");
+    UploadTask uploadTask = reference.putFile(imageFile);
+
+    TaskSnapshot storageSnap = await uploadTask;
+    String downloadUrl = await storageSnap.ref.getDownloadURL();
+    return downloadUrl;
+  }
+  Future<String> uploadImage08(imageFile) async {
+    String fileName = DateTime.now().millisecondsSinceEpoch.toString();
+    Reference reference = FirebaseStorage.instance.ref().child("Shop${prodId}").child("$fileName.jpg");
+    UploadTask uploadTask = reference.putFile(imageFile);
+
+    TaskSnapshot storageSnap = await uploadTask;
+    String downloadUrl = await storageSnap.ref.getDownloadURL();
+    return downloadUrl;
+  }
+  Future<String> uploadImage09(imageFile) async {
+    String fileName = DateTime.now().millisecondsSinceEpoch.toString();
+    Reference reference = FirebaseStorage.instance.ref().child("Shop${prodId}").child("$fileName.jpg");
+    UploadTask uploadTask = reference.putFile(imageFile);
+
+    TaskSnapshot storageSnap = await uploadTask;
+    String downloadUrl = await storageSnap.ref.getDownloadURL();
+    return downloadUrl;
+  }
+  Future<String> uploadImage010(imageFile) async {
+    String fileName = DateTime.now().millisecondsSinceEpoch.toString();
+    Reference reference = FirebaseStorage.instance.ref().child("Shop${prodId}").child("$fileName.jpg");
+    UploadTask uploadTask = reference.putFile(imageFile);
+
+    TaskSnapshot storageSnap = await uploadTask;
+    String downloadUrl = await storageSnap.ref.getDownloadURL();
+    return downloadUrl;
+  }
+  Future<String> uploadImage011(imageFile) async {
+    String fileName = DateTime.now().millisecondsSinceEpoch.toString();
+    Reference reference = FirebaseStorage.instance.ref().child("Shop${prodId}").child("$fileName.jpg");
+    UploadTask uploadTask = reference.putFile(imageFile);
+
+    TaskSnapshot storageSnap = await uploadTask;
+    String downloadUrl = await storageSnap.ref.getDownloadURL();
+    return downloadUrl;
+  }
+  Future<String> uploadImage012(imageFile) async {
+    String fileName = DateTime.now().millisecondsSinceEpoch.toString();
+    Reference reference = FirebaseStorage.instance.ref().child("Shop${prodId}").child("$fileName.jpg");
+    UploadTask uploadTask = reference.putFile(imageFile);
+
+    TaskSnapshot storageSnap = await uploadTask;
+    String downloadUrl = await storageSnap.ref.getDownloadURL();
+    return downloadUrl;
+  }
+  Future<String> uploadImage013(imageFile) async {
+    String fileName = DateTime.now().millisecondsSinceEpoch.toString();
+    Reference reference = FirebaseStorage.instance.ref().child("Shop${prodId}").child("$fileName.jpg");
+    UploadTask uploadTask = reference.putFile(imageFile);
+
+    TaskSnapshot storageSnap = await uploadTask;
+    String downloadUrl = await storageSnap.ref.getDownloadURL();
+    return downloadUrl;
+  }
+  Future<String> uploadImage014(imageFile) async {
+    String fileName = DateTime.now().millisecondsSinceEpoch.toString();
+    Reference reference = FirebaseStorage.instance.ref().child("Shop${prodId}").child("$fileName.jpg");
+    UploadTask uploadTask = reference.putFile(imageFile);
+
+    TaskSnapshot storageSnap = await uploadTask;
+    String downloadUrl = await storageSnap.ref.getDownloadURL();
+    return downloadUrl;
+  }
+  Future<String> uploadImage015(imageFile) async {
+    String fileName = DateTime.now().millisecondsSinceEpoch.toString();
+    Reference reference = FirebaseStorage.instance.ref().child("Shop${prodId}").child("$fileName.jpg");
+    UploadTask uploadTask = reference.putFile(imageFile);
+
+    TaskSnapshot storageSnap = await uploadTask;
+    String downloadUrl = await storageSnap.ref.getDownloadURL();
+    return downloadUrl;
+  }
+  Future<String> uploadImage016(imageFile) async {
+    String fileName = DateTime.now().millisecondsSinceEpoch.toString();
+    Reference reference = FirebaseStorage.instance.ref().child("Shop${prodId}").child("$fileName.jpg");
+    UploadTask uploadTask = reference.putFile(imageFile);
+
+    TaskSnapshot storageSnap = await uploadTask;
+    String downloadUrl = await storageSnap.ref.getDownloadURL();
+    return downloadUrl;
+  }
+  Future<String> uploadImage017(imageFile) async {
+    String fileName = DateTime.now().millisecondsSinceEpoch.toString();
+    Reference reference = FirebaseStorage.instance.ref().child("Shop${prodId}").child("$fileName.jpg");
+    UploadTask uploadTask = reference.putFile(imageFile);
+
+    TaskSnapshot storageSnap = await uploadTask;
+    String downloadUrl = await storageSnap.ref.getDownloadURL();
+    return downloadUrl;
+  }
+  Future<String> uploadImage018(imageFile) async {
+    String fileName = DateTime.now().millisecondsSinceEpoch.toString();
+    Reference reference = FirebaseStorage.instance.ref().child("Shop${prodId}").child("$fileName.jpg");
+    UploadTask uploadTask = reference.putFile(imageFile);
+
+    TaskSnapshot storageSnap = await uploadTask;
+    String downloadUrl = await storageSnap.ref.getDownloadURL();
+    return downloadUrl;
+  }
+  Future<String> uploadImage019(imageFile) async {
+    String fileName = DateTime.now().millisecondsSinceEpoch.toString();
+    Reference reference = FirebaseStorage.instance.ref().child("Shop${prodId}").child("$fileName.jpg");
+    UploadTask uploadTask = reference.putFile(imageFile);
+
+    TaskSnapshot storageSnap = await uploadTask;
+    String downloadUrl = await storageSnap.ref.getDownloadURL();
+    return downloadUrl;
+  }
+  Future<String> uploadImage020(imageFile) async {
+    String fileName = DateTime.now().millisecondsSinceEpoch.toString();
+    Reference reference = FirebaseStorage.instance.ref().child("Shop${prodId}").child("$fileName.jpg");
+    UploadTask uploadTask = reference.putFile(imageFile);
+
+    TaskSnapshot storageSnap = await uploadTask;
+    String downloadUrl = await storageSnap.ref.getDownloadURL();
+    return downloadUrl;
+  }
+  Future<String> uploadImage021(imageFile) async {
+    String fileName = DateTime.now().millisecondsSinceEpoch.toString();
+    Reference reference = FirebaseStorage.instance.ref().child("Shop${prodId}").child("$fileName.jpg");
+    UploadTask uploadTask = reference.putFile(imageFile);
+
+    TaskSnapshot storageSnap = await uploadTask;
+    String downloadUrl = await storageSnap.ref.getDownloadURL();
+    return downloadUrl;
+  }
+  Future<String> uploadImage022(imageFile) async {
+    String fileName = DateTime.now().millisecondsSinceEpoch.toString();
+    Reference reference = FirebaseStorage.instance.ref().child("Shop${prodId}").child("$fileName.jpg");
+    UploadTask uploadTask = reference.putFile(imageFile);
+
+    TaskSnapshot storageSnap = await uploadTask;
+    String downloadUrl = await storageSnap.ref.getDownloadURL();
+    return downloadUrl;
+  }
+  Future<String> uploadImage023(imageFile) async {
+    String fileName = DateTime.now().millisecondsSinceEpoch.toString();
+    Reference reference = FirebaseStorage.instance.ref().child("Shop${prodId}").child("$fileName.jpg");
+    UploadTask uploadTask = reference.putFile(imageFile);
+
+    TaskSnapshot storageSnap = await uploadTask;
+    String downloadUrl = await storageSnap.ref.getDownloadURL();
+    return downloadUrl;
+  }
+  Future<String> uploadImage024(imageFile) async {
+    String fileName = DateTime.now().millisecondsSinceEpoch.toString();
+    Reference reference = FirebaseStorage.instance.ref().child("Shop${prodId}").child("$fileName.jpg");
+    UploadTask uploadTask = reference.putFile(imageFile);
+
+    TaskSnapshot storageSnap = await uploadTask;
+    String downloadUrl = await storageSnap.ref.getDownloadURL();
+    return downloadUrl;
+  }
+  Future<String> uploadImage025(imageFile) async {
+    String fileName = DateTime.now().millisecondsSinceEpoch.toString();
+    Reference reference = FirebaseStorage.instance.ref().child("Shop${prodId}").child("$fileName.jpg");
+    UploadTask uploadTask = reference.putFile(imageFile);
+
+    TaskSnapshot storageSnap = await uploadTask;
+    String downloadUrl = await storageSnap.ref.getDownloadURL();
+    return downloadUrl;
+  }
+  Future<String> uploadImage026(imageFile) async {
+    String fileName = DateTime.now().millisecondsSinceEpoch.toString();
+    Reference reference = FirebaseStorage.instance.ref().child("Shop${prodId}").child("$fileName.jpg");
+    UploadTask uploadTask = reference.putFile(imageFile);
+
+    TaskSnapshot storageSnap = await uploadTask;
+    String downloadUrl = await storageSnap.ref.getDownloadURL();
+    return downloadUrl;
+  }
+  Future<String> uploadImage027(imageFile) async {
+    String fileName = DateTime.now().millisecondsSinceEpoch.toString();
+    Reference reference = FirebaseStorage.instance.ref().child("Shop${prodId}").child("$fileName.jpg");
+    UploadTask uploadTask = reference.putFile(imageFile);
+
+    TaskSnapshot storageSnap = await uploadTask;
+    String downloadUrl = await storageSnap.ref.getDownloadURL();
+    return downloadUrl;
+  }
+  Future<String> uploadImage028(imageFile) async {
+    String fileName = DateTime.now().millisecondsSinceEpoch.toString();
+    Reference reference = FirebaseStorage.instance.ref().child("Shop${prodId}").child("$fileName.jpg");
+    UploadTask uploadTask = reference.putFile(imageFile);
+
+    TaskSnapshot storageSnap = await uploadTask;
+    String downloadUrl = await storageSnap.ref.getDownloadURL();
+    return downloadUrl;
+  }
+  Future<String> uploadImage029(imageFile) async {
+    String fileName = DateTime.now().millisecondsSinceEpoch.toString();
+    Reference reference = FirebaseStorage.instance.ref().child("Shop${prodId}").child("$fileName.jpg");
+    UploadTask uploadTask = reference.putFile(imageFile);
+
+    TaskSnapshot storageSnap = await uploadTask;
+    String downloadUrl = await storageSnap.ref.getDownloadURL();
+    return downloadUrl;
+  }
+  Future<String> uploadImage030(imageFile) async {
+    String fileName = DateTime.now().millisecondsSinceEpoch.toString();
+    Reference reference = FirebaseStorage.instance.ref().child("Shop${prodId}").child("$fileName.jpg");
+    UploadTask uploadTask = reference.putFile(imageFile);
+
+    TaskSnapshot storageSnap = await uploadTask;
+    String downloadUrl = await storageSnap.ref.getDownloadURL();
+    return downloadUrl;
+  }
+  Future<String> uploadImage031(imageFile) async {
+    String fileName = DateTime.now().millisecondsSinceEpoch.toString();
+    Reference reference = FirebaseStorage.instance.ref().child("Shop${prodId}").child("$fileName.jpg");
+    UploadTask uploadTask = reference.putFile(imageFile);
+
+    TaskSnapshot storageSnap = await uploadTask;
+    String downloadUrl = await storageSnap.ref.getDownloadURL();
+    return downloadUrl;
+  }
+  Future<String> uploadImage032(imageFile) async {
+    String fileName = DateTime.now().millisecondsSinceEpoch.toString();
+    Reference reference = FirebaseStorage.instance.ref().child("Shop${prodId}").child("$fileName.jpg");
+    UploadTask uploadTask = reference.putFile(imageFile);
+
+    TaskSnapshot storageSnap = await uploadTask;
+    String downloadUrl = await storageSnap.ref.getDownloadURL();
+    return downloadUrl;
+  }
+  Future<String> uploadImage033(imageFile) async {
+    String fileName = DateTime.now().millisecondsSinceEpoch.toString();
+    Reference reference = FirebaseStorage.instance.ref().child("Shop${prodId}").child("$fileName.jpg");
+    UploadTask uploadTask = reference.putFile(imageFile);
+
+    TaskSnapshot storageSnap = await uploadTask;
+    String downloadUrl = await storageSnap.ref.getDownloadURL();
+    return downloadUrl;
+  }
+  Future<String> uploadImage034(imageFile) async {
+    String fileName = DateTime.now().millisecondsSinceEpoch.toString();
+    Reference reference = FirebaseStorage.instance.ref().child("Shop${prodId}").child("$fileName.jpg");
+    UploadTask uploadTask = reference.putFile(imageFile);
+
+    TaskSnapshot storageSnap = await uploadTask;
+    String downloadUrl = await storageSnap.ref.getDownloadURL();
+    return downloadUrl;
+  }
+  Future<String> uploadImage035(imageFile) async {
+    String fileName = DateTime.now().millisecondsSinceEpoch.toString();
+    Reference reference = FirebaseStorage.instance.ref().child("Shop${prodId}").child("$fileName.jpg");
+    UploadTask uploadTask = reference.putFile(imageFile);
+
+    TaskSnapshot storageSnap = await uploadTask;
+    String downloadUrl = await storageSnap.ref.getDownloadURL();
+    return downloadUrl;
+  }
+  Future<String> uploadImage036(imageFile) async {
+    String fileName = DateTime.now().millisecondsSinceEpoch.toString();
+    Reference reference = FirebaseStorage.instance.ref().child("Shop${prodId}").child("$fileName.jpg");
+    UploadTask uploadTask = reference.putFile(imageFile);
+
+    TaskSnapshot storageSnap = await uploadTask;
+    String downloadUrl = await storageSnap.ref.getDownloadURL();
+    return downloadUrl;
+  }
+  Future<String> uploadImage037(imageFile) async {
+    String fileName = DateTime.now().millisecondsSinceEpoch.toString();
+    Reference reference = FirebaseStorage.instance.ref().child("Shop${prodId}").child("$fileName.jpg");
+    UploadTask uploadTask = reference.putFile(imageFile);
+
+    TaskSnapshot storageSnap = await uploadTask;
+    String downloadUrl = await storageSnap.ref.getDownloadURL();
+    return downloadUrl;
+  }
+  Future<String> uploadImage038(imageFile) async {
+    String fileName = DateTime.now().millisecondsSinceEpoch.toString();
+    Reference reference = FirebaseStorage.instance.ref().child("Shop${prodId}").child("$fileName.jpg");
+    UploadTask uploadTask = reference.putFile(imageFile);
+
+    TaskSnapshot storageSnap = await uploadTask;
+    String downloadUrl = await storageSnap.ref.getDownloadURL();
+    return downloadUrl;
+  }
+  Future<String> uploadImage039(imageFile) async {
+    String fileName = DateTime.now().millisecondsSinceEpoch.toString();
+    Reference reference = FirebaseStorage.instance.ref().child("Shop${prodId}").child("$fileName.jpg");
+    UploadTask uploadTask = reference.putFile(imageFile);
+
+    TaskSnapshot storageSnap = await uploadTask;
+    String downloadUrl = await storageSnap.ref.getDownloadURL();
+    return downloadUrl;
+  }
+  Future<String> uploadImage040(imageFile) async {
+    String fileName = DateTime.now().millisecondsSinceEpoch.toString();
+    Reference reference = FirebaseStorage.instance.ref().child("Shop${prodId}").child("$fileName.jpg");
+    UploadTask uploadTask = reference.putFile(imageFile);
+
+    TaskSnapshot storageSnap = await uploadTask;
+    String downloadUrl = await storageSnap.ref.getDownloadURL();
+    return downloadUrl;
+  }
+  Future<String> uploadImage041(imageFile) async {
+    String fileName = DateTime.now().millisecondsSinceEpoch.toString();
+    Reference reference = FirebaseStorage.instance.ref().child("Shop${prodId}").child("$fileName.jpg");
+    UploadTask uploadTask = reference.putFile(imageFile);
+
+    TaskSnapshot storageSnap = await uploadTask;
+    String downloadUrl = await storageSnap.ref.getDownloadURL();
+    return downloadUrl;
+  }
+  Future<String> uploadImage042(imageFile) async {
+    String fileName = DateTime.now().millisecondsSinceEpoch.toString();
+    Reference reference = FirebaseStorage.instance.ref().child("Shop${prodId}").child("$fileName.jpg");
+    UploadTask uploadTask = reference.putFile(imageFile);
+
+    TaskSnapshot storageSnap = await uploadTask;
+    String downloadUrl = await storageSnap.ref.getDownloadURL();
+    return downloadUrl;
+  }
+  Future<String> uploadImage043(imageFile) async {
+    String fileName = DateTime.now().millisecondsSinceEpoch.toString();
+    Reference reference = FirebaseStorage.instance.ref().child("Shop${prodId}").child("$fileName.jpg");
+    UploadTask uploadTask = reference.putFile(imageFile);
+
+    TaskSnapshot storageSnap = await uploadTask;
+    String downloadUrl = await storageSnap.ref.getDownloadURL();
+    return downloadUrl;
+  }
+  Future<String> uploadImage044(imageFile) async {
+    String fileName = DateTime.now().millisecondsSinceEpoch.toString();
+    Reference reference = FirebaseStorage.instance.ref().child("Shop${prodId}").child("$fileName.jpg");
+    UploadTask uploadTask = reference.putFile(imageFile);
+
+    TaskSnapshot storageSnap = await uploadTask;
+    String downloadUrl = await storageSnap.ref.getDownloadURL();
+    return downloadUrl;
+  }
+  Future<String> uploadImage045(imageFile) async {
+    String fileName = DateTime.now().millisecondsSinceEpoch.toString();
+    Reference reference = FirebaseStorage.instance.ref().child("Shop${prodId}").child("$fileName.jpg");
+    UploadTask uploadTask = reference.putFile(imageFile);
+
+    TaskSnapshot storageSnap = await uploadTask;
+    String downloadUrl = await storageSnap.ref.getDownloadURL();
+    return downloadUrl;
+  }
+  Future<String> uploadImage046(imageFile) async {
+    String fileName = DateTime.now().millisecondsSinceEpoch.toString();
+    Reference reference = FirebaseStorage.instance.ref().child("Shop${prodId}").child("$fileName.jpg");
+    UploadTask uploadTask = reference.putFile(imageFile);
+
+    TaskSnapshot storageSnap = await uploadTask;
+    String downloadUrl = await storageSnap.ref.getDownloadURL();
+    return downloadUrl;
+  }
+  Future<String> uploadImage047(imageFile) async {
+    String fileName = DateTime.now().millisecondsSinceEpoch.toString();
+    Reference reference = FirebaseStorage.instance.ref().child("Shop${prodId}").child("$fileName.jpg");
+    UploadTask uploadTask = reference.putFile(imageFile);
+
+    TaskSnapshot storageSnap = await uploadTask;
+    String downloadUrl = await storageSnap.ref.getDownloadURL();
+    return downloadUrl;
+  }
+  Future<String> uploadImage048(imageFile) async {
+    String fileName = DateTime.now().millisecondsSinceEpoch.toString();
+    Reference reference = FirebaseStorage.instance.ref().child("Shop${prodId}").child("$fileName.jpg");
+    UploadTask uploadTask = reference.putFile(imageFile);
+
+    TaskSnapshot storageSnap = await uploadTask;
+    String downloadUrl = await storageSnap.ref.getDownloadURL();
+    return downloadUrl;
+  }
+  Future<String> uploadImage049(imageFile) async {
+    String fileName = DateTime.now().millisecondsSinceEpoch.toString();
+    Reference reference = FirebaseStorage.instance.ref().child("Shop${prodId}").child("$fileName.jpg");
+    UploadTask uploadTask = reference.putFile(imageFile);
+
+    TaskSnapshot storageSnap = await uploadTask;
+    String downloadUrl = await storageSnap.ref.getDownloadURL();
+    return downloadUrl;
+  }
+  Future<String> uploadImage050(imageFile) async {
+    String fileName = DateTime.now().millisecondsSinceEpoch.toString();
+    Reference reference = FirebaseStorage.instance.ref().child("Shop${prodId}").child("$fileName.jpg");
+    UploadTask uploadTask = reference.putFile(imageFile);
+
+    TaskSnapshot storageSnap = await uploadTask;
+    String downloadUrl = await storageSnap.ref.getDownloadURL();
+    return downloadUrl;
+  }
 
   Future<dynamic> postImage(Asset imageFile) async {
 //    ByteData byteData = await imageFile.requestOriginal(quality: 75);
@@ -11250,19 +15137,19 @@ page2(){
   void INRUSD() async {
     setState(() {
       isUploading = true;
-      userPrice = double.tryParse(priceController.text ?? 0.1);
-      userPrice1 = double.tryParse(customController11.text ?? 0.1);
-      userPrice2 = double.tryParse(customController21.text ?? 0.1);
-      userPrice3 = double.tryParse(customController31.text ?? 0.1);
-      userPrice4 = double.tryParse(customController41.text ?? 0.1);
-      userPrice5 = double.tryParse(customController51.text ?? 0.1);
-      userPrice6 = double.tryParse(customController61.text ?? 0.1);
-      userPrice7 = double.tryParse(customController71.text ?? 0.1);
-      userPrice8 = double.tryParse(customController81.text ?? 0.1);
-      userPrice9 = double.tryParse(customController91.text ?? 0.1);
-      userPrice10 = double.tryParse(customController101.text ?? 0.1);
-      userPrice11 = double.tryParse(shipcost.text ?? 0.1);
-      userPrice12 = double.tryParse(shipcostintern.text ?? 0.1);
+      userPrice = double.tryParse(priceController.text ?? "0.1");
+      userPrice1 = double.tryParse(customController11.text ?? "0.1");
+      userPrice2 = double.tryParse(customController21.text ?? "0.1");
+      userPrice3 = double.tryParse(customController31.text ?? "0.1");
+      userPrice4 = double.tryParse(customController41.text ?? "0.1");
+      userPrice5 = double.tryParse(customController51.text ?? "0.1");
+      userPrice6 = double.tryParse(customController61.text ?? "0.1");
+      userPrice7 = double.tryParse(customController71.text ?? "0.1");
+      userPrice8 = double.tryParse(customController81.text ?? "0.1");
+      userPrice9 = double.tryParse(customController91.text ?? "0.1");
+      userPrice10 = double.tryParse(customController101.text ?? "0.1");
+      userPrice11 = double.tryParse(shipcost.text ?? "0.1");
+      userPrice12 = double.tryParse(shipcostintern.text ?? "0.1");
     });
     if(currentUser.currency == "INR"){
       var resultUSD = await Currency.getConversion(
@@ -11811,6 +15698,108 @@ var resultGBP = await Currency.getConversion(
     String mediaUrl8 =  file8!=null?await uploadImage8(file8):"";
  file9!=null? await compressImage9():null;
     String mediaUrl9 =  file9!=null?await uploadImage9(file9):"";
+
+    customImg1!=null? await compressImage01():null;
+    String mediaUrl01 =  customImg1!=null?await uploadImage01(customImg1):"";
+    customImg2!=null? await compressImage02():null;
+    String mediaUrl02 =  customImg2!=null?await uploadImage02(customImg2):"";
+    customImg3!=null? await compressImage03():null;
+    String mediaUrl03 =  customImg3!=null?await uploadImage03(customImg3):"";
+    customImg4!=null? await compressImage04():null;
+    String mediaUrl04 =  customImg4!=null?await uploadImage04(customImg4):"";
+    customImg5!=null? await compressImage05():null;
+    String mediaUrl05 =  customImg5!=null?await uploadImage05(customImg5):"";
+    customImg6!=null? await compressImage06():null;
+    String mediaUrl06 =  customImg6!=null?await uploadImage06(customImg6):"";
+    customImg7!=null? await compressImage07():null;
+    String mediaUrl07 =  customImg7!=null?await uploadImage07(customImg7):"";
+    customImg8!=null? await compressImage08():null;
+    String mediaUrl08 =  customImg8!=null?await uploadImage08(customImg8):"";
+    customImg9!=null? await compressImage09():null;
+    String mediaUrl09 =  customImg9!=null?await uploadImage09(customImg9):"";
+    customImg10!=null? await compressImage010():null;
+    String mediaUrl010 =  customImg10!=null?await uploadImage010(customImg10):"";
+    customImg11!=null? await compressImage011():null;
+    String mediaUrl011 =  customImg11!=null?await uploadImage011(customImg11):"";
+    customImg12!=null? await compressImage012():null;
+    String mediaUrl012 =  customImg12!=null?await uploadImage012(customImg12):"";
+    customImg13!=null? await compressImage013():null;
+    String mediaUrl013 =  customImg13!=null?await uploadImage013(customImg13):"";
+    customImg14!=null? await compressImage014():null;
+    String mediaUrl014 =  customImg14!=null?await uploadImage014(customImg14):"";
+    customImg15!=null? await compressImage015():null;
+    String mediaUrl015 =  customImg15!=null?await uploadImage015(customImg15):"";
+    customImg16!=null? await compressImage016():null;
+    String mediaUrl016 =  customImg16!=null?await uploadImage016(customImg16):"";
+    customImg17!=null? await compressImage017():null;
+    String mediaUrl017 =  customImg17!=null?await uploadImage017(customImg17):"";
+    customImg18!=null? await compressImage018():null;
+    String mediaUrl018 =  customImg18!=null?await uploadImage018(customImg18):"";
+    customImg19!=null? await compressImage019():null;
+    String mediaUrl019 =  customImg19!=null?await uploadImage019(customImg19):"";
+    customImg20!=null? await compressImage020():null;
+    String mediaUrl020 =  customImg20!=null?await uploadImage020(customImg20):"";
+    customImg21!=null? await compressImage021():null;
+    String mediaUrl021 =  customImg21!=null?await uploadImage021(customImg21):"";
+    customImg22!=null? await compressImage022():null;
+    String mediaUrl022 =  customImg22!=null?await uploadImage022(customImg22):"";
+    customImg23!=null? await compressImage023():null;
+    String mediaUrl023 =  customImg23!=null?await uploadImage023(customImg23):"";
+    customImg24!=null? await compressImage024():null;
+    String mediaUrl024 =  customImg24!=null?await uploadImage024(customImg24):"";
+    customImg25!=null? await compressImage025():null;
+    String mediaUrl025 =  customImg25!=null?await uploadImage025(customImg25):"";
+    customImg26!=null? await compressImage026():null;
+    String mediaUrl026 =  customImg26!=null?await uploadImage026(customImg26):"";
+    customImg27!=null? await compressImage027():null;
+    String mediaUrl027 =  customImg27!=null?await uploadImage027(customImg27):"";
+    customImg28!=null? await compressImage028():null;
+    String mediaUrl028 =  customImg28!=null?await uploadImage028(customImg28):"";
+    customImg29!=null? await compressImage029():null;
+    String mediaUrl029 =  customImg29!=null?await uploadImage029(customImg29):"";
+    customImg30!=null? await compressImage030():null;
+    String mediaUrl030 =  customImg30!=null?await uploadImage030(customImg30):"";
+    customImg31!=null? await compressImage031():null;
+    String mediaUrl031 =  customImg31!=null?await uploadImage031(customImg31):"";
+    customImg32!=null? await compressImage032():null;
+    String mediaUrl032 =  customImg32!=null?await uploadImage032(customImg32):"";
+    customImg33!=null? await compressImage033():null;
+    String mediaUrl033 =  customImg33!=null?await uploadImage033(customImg33):"";
+    customImg34!=null? await compressImage034():null;
+    String mediaUrl034 =  customImg34!=null?await uploadImage034(customImg34):"";
+    customImg35!=null? await compressImage035():null;
+    String mediaUrl035 =  customImg35!=null?await uploadImage035(customImg35):"";
+    customImg36!=null? await compressImage036():null;
+    String mediaUrl01 =  customImg1!=null?await uploadImage01(customImg1):"";
+    customImg37!=null? await compressImage037():null;
+    String mediaUrl037 =  customImg37!=null?await uploadImage037(customImg37):"";
+    customImg38!=null? await compressImage038():null;
+    String mediaUrl038 =  customImg38!=null?await uploadImage038(customImg38):"";
+    customImg39!=null? await compressImage039():null;
+    String mediaUrl039 =  customImg39!=null?await uploadImage039(customImg39):"";
+    customImg40!=null? await compressImage040():null;
+    String mediaUrl040 =  customImg40!=null?await uploadImage040(customImg40):"";
+    customImg41!=null? await compressImage041():null;
+    String mediaUrl041 =  customImg41!=null?await uploadImage041(customImg41):"";
+    customImg42!=null? await compressImage042():null;
+    String mediaUrl042 =  customImg42!=null?await uploadImage042(customImg42):"";
+    customImg43!=null? await compressImage043():null;
+    String mediaUrl043 =  customImg43!=null?await uploadImage043(customImg43):"";
+    customImg44!=null? await compressImage044():null;
+    String mediaUrl044 =  customImg44!=null?await uploadImage044(customImg44):"";
+    customImg45!=null? await compressImage045():null;
+    String mediaUrl045 =  customImg45!=null?await uploadImage045(customImg45):"";
+    customImg46!=null? await compressImage046():null;
+    String mediaUrl046 =  customImg46!=null?await uploadImage046(customImg46):"";
+    customImg47!=null? await compressImage047():null;
+    String mediaUrl047 =  customImg47!=null?await uploadImage047(customImg47):"";
+    customImg48!=null? await compressImage048():null;
+    String mediaUrl048 =  customImg48!=null?await uploadImage048(customImg48):"";
+     customImg49!=null? await compressImage049():null;
+    String mediaUrl049 =  customImg49!=null?await uploadImage049(customImg49):"";
+     customImg50!=null? await compressImage050():null;
+    String mediaUrl050 =  customImg50!=null?await uploadImage050(customImg50):"";
+
 if(currentUser.currency == "INR"){
   for ( var imageFile in images) {
     postImage(imageFile).then((downloadUrl)  {
@@ -11859,9 +15848,9 @@ if(currentUser.currency == "INR"){
           "Gender": dropdownValue,
           "details": detailsController.text,
           "productname": productnameController.text,
-          "usd": inrtousd,
-          "eur": inrtoeur,
-          "gbp": inrtogbp,
+          "usd": inrtousd ?? 0.1,
+          "eur": inrtoeur ?? 0.1,
+          "gbp": inrtogbp ?? 0.1,
           "inr": userPrice ?? 0.1,
 
           "timestamp": timestamp,
