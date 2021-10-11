@@ -7,6 +7,7 @@ import 'package:fashow/model/tags.dart';
 import 'package:fashow/size_config.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:intl/intl.dart';
+import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
 import 'package:paginate_firestore/paginate_firestore.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -42,11 +43,41 @@ class Prod extends StatefulWidget {
   final String prodId;
   final String ownerId;
   final String username;
-   String eur;
+   var eur;
    var usd;
    var inr;
   final String cny;
-  final String gbp;
+  var gbp;
+  final String variation1;
+  final String variation2;
+  final String variation3;
+  final String variation4;
+  final String variation5;
+  final String variation6;
+  final String variation7;
+  final String variation8;
+  final String variation9;
+  final String variation10;
+  final  variationQuantity1;
+  final  variationQuantity2;
+  final  variationQuantity3;
+  final  variationQuantity4;
+  final  variationQuantity5;
+  final  variationQuantity6;
+  final  variationQuantity7;
+  final  variationQuantity8;
+  final  variationQuantity9;
+  final  variationQuantity10;
+  final String variation1img;
+  final String variation2img;
+  final String variation3img;
+  final String variation4img;
+  final String variation5img;
+  final String variation6img;
+  final String variation7img;
+  final String variation8img;
+  final String variation9img;
+  final String variation10img;
 final String gender;
 final String country;
 final String custom1img;
@@ -59,6 +90,51 @@ final String custom7img;
 final String custom8img;
 final String custom9img;
 final String custom10img;
+final String custom11img;
+final String custom12img;
+final String custom13img;
+final String custom14img;
+final String custom15img;
+final String custom16img;
+final String custom17img;
+final String custom18img;
+final String custom19img;
+final String custom20img;
+final String custom21img;
+final String custom22img;
+final String custom23img;
+final String custom24img;
+final String custom25img;
+final String custom26img;
+final String custom27img;
+final String custom28img;
+final String custom29img;
+final String custom30img;
+final String custom31img;
+final String custom32img;
+final String custom33img;
+final String custom34img;
+final String custom35img;
+final String custom36img;
+final String custom37img;
+final String custom38img;
+final String custom39img;
+final String custom40img;
+final String custom41img;
+final String custom42img;
+final String custom43img;
+final String custom44img;
+final String custom45img;
+final String custom46img;
+final String custom47img;
+final String custom48img;
+final String custom49img;
+final String custom50img;
+final String customTitle1;
+final String customTitle2;
+final String customTitle3;
+final String customTitle4;
+final String customTitle5;
 
 final String shipment;
 final bool worldship;
@@ -131,26 +207,7 @@ final int Ring19;
 final int  Ring21;
 final int  Ring22;
 final int  Ring23;
-  final String custom1;
-  final String custom2;
-  final String custom3;
-  final String custom4;
-  final String custom5;
-  final String custom6;
-  final String custom7;
-  final String  custom8;
-  final String custom9;
-  final String custom10;
-  final int custom12;
-  final int custom22;
-  final int custom32;
-  final int custom42;
-  final int custom52;
-  final int custom62;
-  final int custom72;
-  final int  custom82;
-  final int custom92;
-  final int custom102;
+
   final  custom11eur;
   final  custom11usd;
   final  custom11inr;
@@ -195,6 +252,10 @@ final int  Ring23;
   final  shipcostinterusd;
    final  shipcostinr;
   final  shipcostinterinr;
+ final  shipcosteur;
+  final  shipcostintereur;
+   final  shipcostgbp;
+  final  shipcostintergbp;
 
    final int processfrom;
     final int processto;
@@ -224,6 +285,56 @@ final int  Ring23;
   final String colorText9;
   final String colorText10;
  final String currency;
+  final  customQuantity1;
+  final  customQuantity2;
+  final  customQuantity3;
+  final  customQuantity4;
+  final  customQuantity5;
+  final  customQuantity6;
+  final  customQuantity7;
+  final  customQuantity8;
+  final  customQuantity9;
+  final  customQuantity10;
+  final  customQuantity11;
+  final  customQuantity12;
+  final  customQuantity13;
+  final  customQuantity14;
+  final  customQuantity15;
+  final  customQuantity16;
+  final  customQuantity17;
+  final  customQuantity18;
+  final  customQuantity19;
+  final  customQuantity20;
+  final  customQuantity21;
+  final  customQuantity22;
+  final  customQuantity23;
+  final  customQuantity24;
+  final  customQuantity25;
+  final  customQuantity26;
+  final  customQuantity27;
+  final  customQuantity28;
+  final  customQuantity29;
+  final  customQuantity30;
+  final  customQuantity31;
+  final  customQuantity32;
+  final  customQuantity33;
+  final  customQuantity34;
+  final  customQuantity35;
+  final  customQuantity36;
+  final  customQuantity37;
+  final  customQuantity38;
+  final  customQuantity39;
+  final  customQuantity40;
+  final  customQuantity41;
+  final  customQuantity42;
+  final  customQuantity43;
+  final  customQuantity44;
+  final  customQuantity45;
+  final  customQuantity46;
+  final  customQuantity47;
+  final  customQuantity48;
+  final  customQuantity49;
+  final  customQuantity50;
 
   final int mto;
   final Users currentUser;
@@ -246,7 +357,93 @@ this.shipcostinterusd,
 this.shipcostusd,
 this.shipcostinterinr,
 this.shipcostinr,
+ this.shipcostintereur,
+this.shipcosteur,
+this.shipcostintergbp,
+this.shipcostgbp,
+
 this.country,
+    this.variation1,
+    this.variation2,
+    this.variation3,
+    this.variation4,
+    this.variation5,
+    this.variation6,
+    this.variation7,
+    this.variation8,
+    this.variation9,
+    this.variation10,
+    this.variationQuantity1,
+    this.variationQuantity2,
+    this.variationQuantity3,
+    this.variationQuantity4,
+    this.variationQuantity5,
+    this.variationQuantity6,
+    this.variationQuantity7,
+    this.variationQuantity8,
+    this.variationQuantity9,
+    this.variationQuantity10,
+    this.variation1img,
+    this.variation2img,
+    this.variation3img,
+    this.variation4img,
+    this.variation5img,
+    this.variation6img,
+    this.variation7img,
+    this.variation8img,
+    this.variation9img,
+    this.variation10img,
+    this.customQuantity1,
+    this.customQuantity2,
+    this.customQuantity3,
+    this.customQuantity4,
+    this.customQuantity5,
+    this.customQuantity6,
+    this.customQuantity7,
+    this.customQuantity8,
+    this.customQuantity9,
+    this.customQuantity10,
+    this.customQuantity11,
+    this.customQuantity12,
+    this.customQuantity13,
+    this.customQuantity14,
+    this.customQuantity15,
+    this.customQuantity16,
+    this.customQuantity17,
+    this.customQuantity18,
+    this.customQuantity19,
+    this.customQuantity20,
+    this.customQuantity21,
+    this.customQuantity22,
+    this.customQuantity23,
+    this.customQuantity24,
+    this.customQuantity25,
+    this.customQuantity26,
+    this.customQuantity27,
+    this.customQuantity28,
+    this.customQuantity29,
+    this.customQuantity30,
+    this.customQuantity31,
+    this.customQuantity32,
+    this.customQuantity33,
+    this.customQuantity34,
+    this.customQuantity35,
+    this.customQuantity36,
+    this.customQuantity37,
+    this.customQuantity38,
+    this.customQuantity39,
+    this.customQuantity40,
+    this.customQuantity41,
+    this.customQuantity42,
+    this.customQuantity43,
+    this.customQuantity44,
+    this.customQuantity45,
+    this.customQuantity46,
+    this.customQuantity47,
+    this.customQuantity48,
+    this.customQuantity49,
+    this.customQuantity50,
+
     this.custom1img,
     this.custom2img,
     this.custom3img,
@@ -257,6 +454,51 @@ this.country,
     this.custom8img,
     this.custom9img,
     this.custom10img,
+ this.custom11img,
+    this.custom12img,
+    this.custom13img,
+    this.custom14img,
+    this.custom15img,
+    this.custom16img,
+    this.custom17img,
+    this.custom18img,
+    this.custom19img,
+    this.custom20img,
+ this.custom21img,
+    this.custom22img,
+    this.custom23img,
+    this.custom24img,
+    this.custom25img,
+    this.custom26img,
+    this.custom27img,
+    this.custom28img,
+    this.custom29img,
+    this.custom30img,
+ this.custom31img,
+    this.custom32img,
+    this.custom33img,
+    this.custom34img,
+    this.custom35img,
+    this.custom36img,
+    this.custom37img,
+    this.custom38img,
+    this.custom39img,
+    this.custom40img,
+ this.custom41img,
+    this.custom42img,
+    this.custom43img,
+    this.custom44img,
+    this.custom45img,
+    this.custom46img,
+    this.custom47img,
+    this.custom48img,
+    this.custom49img,
+    this.custom50img,
+this.customTitle1,
+this.customTitle2,
+this.customTitle3,
+this.customTitle4,
+this.customTitle5,
 
     this.gender,
     this.details,
@@ -326,26 +568,7 @@ this.country,
     this. Ring21,
     this. Ring22,
     this. Ring23,
-    this.custom1,
-    this.custom2,
-    this.custom3,
-    this.custom4,
-    this.custom5,
-    this.custom6,
-    this.custom7,
-    this.custom8,
-    this.custom9,
-    this.custom10,
-    this.custom12,
-    this.custom22,
-    this.custom32,
-    this.custom42,
-    this.custom52,
-    this.custom62,
-    this.custom72,
-    this.custom82,
-    this.custom92,
-    this.custom102,
+
     this.custom11eur,
     this.custom11usd,
     this.custom11inr,
@@ -499,26 +722,7 @@ freeship: doc.data()['freeship'],
        Ring21: doc.data()['Ring21'],
        Ring22: doc.data()['Ring22'],
        Ring23: doc.data()['Ring23'],
-      custom1: doc.data()['custom1'],
-      custom2: doc.data()['custom2'],
-      custom3: doc.data()['custom3'],
-      custom4: doc.data()['custom4'],
-      custom5: doc.data()['custom5'],
-      custom6: doc.data()['custom6'],
-      custom7: doc.data()['custom7'],
-      custom8: doc.data()['custom8'],
-      custom9: doc.data()['custom9'],
-      custom10: doc.data()['custom10'],
-      custom12: doc.data()['custom12'],
-      custom22: doc.data()['custom22'],
-      custom32: doc.data()['custom32'],
-      custom42: doc.data()['custom42'],
-      custom52: doc.data()['custom52'],
-      custom62: doc.data()['custom62'],
-      custom72: doc.data()['custom72'],
-      custom82: doc.data()['custom82'],
-      custom92: doc.data()['custom92'],
-      custom102: doc.data()['custom102'],
+
       custom11eur: doc.data()['custom11eur'],
       custom11usd: doc.data()['custom11usd'],
       custom11inr: doc.data()['custom11inr'],
@@ -573,6 +777,13 @@ freeship: doc.data()['freeship'],
       shipcostinterusd:  doc.data()['shipcostinternusd'],
 
       shipcostusd:  doc.data()['shipcostusd'],
+   shipcostintereur:  doc.data()['shipcostinterneur'],
+
+      shipcosteur:  doc.data()['shipcosteur'],
+
+      shipcostintergbp:  doc.data()['shipcostinterngbp'],
+
+      shipcostgbp:  doc.data()['shipcostgbp'],
 
 
         productname: doc.data()['productname'],
@@ -605,6 +816,17 @@ freeship: doc.data()['freeship'],
       colorText9: doc.data()['colorText9'],
       colorText10: doc.data()['colorText10'],
       currency: doc.data()['currency'],
+      variation1img: doc.data()['variation1img'],
+      variation2img: doc.data()['variation2img'],
+      variation3img: doc.data()['variation3img'],
+      variation4img: doc.data()['variation4img'],
+      variation5img: doc.data()['variation5img'],
+      variation6img: doc.data()['variation6img'],
+      variation7img: doc.data()['variation7img'],
+      variation8img: doc.data()['variation8img'],
+      variation9img: doc.data()['variation9img'],
+      variation10img: doc.data()['variation10img'],
+
       custom1img: doc.data()['custom1img'],
  custom2img: doc.data()['custom2img'],
  custom3img: doc.data()['custom3img'],
@@ -615,6 +837,123 @@ freeship: doc.data()['freeship'],
  custom8img: doc.data()['custom8img'],
  custom9img: doc.data()['custom9img'],
  custom10img: doc.data()['custom10img'],
+
+      custom11img:doc.data()['custom11img'],
+      custom12img:doc.data()['custom12img'],
+      custom13img:doc.data()['custom13img'],
+      custom14img:doc.data()['custom14img'],
+      custom15img:doc.data()['custom15img'],
+      custom16img:doc.data()['custom16img'],
+      custom17img:doc.data()['custom17img'],
+      custom18img:doc.data()['custom18img'],
+      custom19img:doc.data()['custom19img'],
+      custom20img:doc.data()['custom20img'],
+      custom21img:doc.data()['custom21img'],
+      custom22img:doc.data()['custom22img'],
+      custom23img:doc.data()['custom23img'],
+      custom24img:doc.data()['custom24img'],
+      custom25img:doc.data()['custom25img'],
+      custom26img:doc.data()['custom26img'],
+      custom27img:doc.data()['custom27img'],
+      custom28img:doc.data()['custom28img'],
+      custom29img:doc.data()['custom29img'],
+      custom30img:doc.data()['custom30img'],
+      custom31img:doc.data()['custom31img'],
+      custom32img:doc.data()['custom32img'],
+      custom33img:doc.data()['custom33img'],
+      custom34img:doc.data()['custom34img'],
+      custom35img:doc.data()['custom35img'],
+      custom36img:doc.data()['custom36img'],
+      custom37img:doc.data()['custom37img'],
+      custom38img:doc.data()['custom38img'],
+      custom39img:doc.data()['custom39img'],
+      custom40img:doc.data()['custom40img'],
+      custom41img:doc.data()['custom41img'],
+      custom42img:doc.data()['custom42img'],
+      custom43img:doc.data()['custom43img'],
+      custom44img:doc.data()['custom44img'],
+      custom45img:doc.data()['custom45img'],
+      custom46img:doc.data()['custom46img'],
+      custom47img:doc.data()['custom47img'],
+      custom48img:doc.data()['custom48img'],
+      custom49img:doc.data()['custom49img'],
+      custom50img:doc.data()['custom50img'],
+   variationQuantity1: doc.data()['variationQuantity1'],
+ variationQuantity2: doc.data()['variationQuantity2'],
+ variationQuantity3: doc.data()['variationQuantity3'],
+ variationQuantity4: doc.data()['variationQuantity4'],
+ variationQuantity5: doc.data()['variationQuantity5'],
+ variationQuantity6: doc.data()['variationQuantity6'],
+ variationQuantity7: doc.data()['variationQuantity7'],
+ variationQuantity8: doc.data()['variationQuantity8'],
+ variationQuantity9: doc.data()['variationQuantity9'],
+ variationQuantity10: doc.data()['variationQuantity10'],
+      variation1: doc.data()['variation1'],
+ variation2: doc.data()['variation2'],
+ variation3: doc.data()['variation3'],
+ variation4: doc.data()['variation4'],
+ variation5: doc.data()['variation5'],
+ variation6: doc.data()['variation6'],
+ variation7: doc.data()['variation7'],
+ variation8: doc.data()['variation8'],
+ variation9: doc.data()['variation9'],
+ variation10: doc.data()['variation10'],
+      customQuantity1: doc.data()['customQuantity1'],
+ customQuantity2: doc.data()['customQuantity2'],
+ customQuantity3: doc.data()['customQuantity3'],
+ customQuantity4: doc.data()['customQuantity4'],
+ customQuantity5: doc.data()['customQuantity5'],
+ customQuantity6: doc.data()['customQuantity6'],
+ customQuantity7: doc.data()['customQuantity7'],
+ customQuantity8: doc.data()['customQuantity8'],
+ customQuantity9: doc.data()['customQuantity9'],
+ customQuantity10: doc.data()['customQuantity10'],
+      customQuantity11:doc.data()['customQuantity11'],
+      customQuantity12:doc.data()['customQuantity12'],
+      customQuantity13:doc.data()['customQuantity13'],
+      customQuantity14:doc.data()['customQuantity14'],
+      customQuantity15:doc.data()['customQuantity15'],
+      customQuantity16:doc.data()['customQuantity16'],
+      customQuantity17:doc.data()['customQuantity17'],
+      customQuantity18:doc.data()['customQuantity18'],
+      customQuantity19:doc.data()['customQuantity19'],
+      customQuantity20:doc.data()['customQuantity20'],
+      customQuantity21:doc.data()['customQuantity21'],
+      customQuantity22:doc.data()['customQuantity22'],
+      customQuantity23:doc.data()['customQuantity23'],
+      customQuantity24:doc.data()['customQuantity24'],
+      customQuantity25:doc.data()['customQuantity25'],
+      customQuantity26:doc.data()['customQuantity26'],
+      customQuantity27:doc.data()['customQuantity27'],
+      customQuantity28:doc.data()['customQuantity28'],
+      customQuantity29:doc.data()['customQuantity29'],
+      customQuantity30:doc.data()['customQuantity30'],
+      customQuantity31:doc.data()['customQuantity31'],
+      customQuantity32:doc.data()['customQuantity32'],
+      customQuantity33:doc.data()['customQuantity33'],
+      customQuantity34:doc.data()['customQuantity34'],
+      customQuantity35:doc.data()['customQuantity35'],
+      customQuantity36:doc.data()['customQuantity36'],
+      customQuantity37:doc.data()['customQuantity37'],
+      customQuantity38:doc.data()['customQuantity38'],
+      customQuantity39:doc.data()['customQuantity39'],
+      customQuantity40:doc.data()['customQuantity40'],
+      customQuantity41:doc.data()['customQuantity41'],
+      customQuantity42:doc.data()['customQuantity42'],
+      customQuantity43:doc.data()['customQuantity43'],
+      customQuantity44:doc.data()['customQuantity44'],
+      customQuantity45:doc.data()['customQuantity45'],
+      customQuantity46:doc.data()['customQuantity46'],
+      customQuantity47:doc.data()['customQuantity47'],
+      customQuantity48:doc.data()['customQuantity48'],
+      customQuantity49:doc.data()['customQuantity49'],
+      customQuantity50:doc.data()['customQuantity50'],
+
+      customTitle1:doc.data()['customTitle1'],
+      customTitle2:doc.data()['customTitle2'],
+      customTitle3:doc.data()['customTitle3'],
+      customTitle4:doc.data()['customTitle4'],
+      customTitle5:doc.data()['customTitle5'],
 
     );
   }
@@ -653,6 +992,11 @@ freeship: doc.data()['freeship'],
     shipcostusd:this.shipcostusd,
     shipcostinterinr:this.shipcostinterinr,
     shipcostinr:this.shipcostinr,
+ shipcostintereur:this.shipcostintereur,
+    shipcosteur:this.shipcosteur,
+    shipcostintergbp:this.shipcostintergbp,
+    shipcostgbp:this.shipcostgbp,
+
 country:this.country,
 currency:this.currency,
 
@@ -725,26 +1069,7 @@ Ring20:this.Ring20,
     Ring21:this.Ring21,
     Ring22:this.Ring22,
     Ring23:this.Ring23,
-    custom1:this.custom1,
-    custom2:this.custom2,
-    custom3:this.custom3,
-    custom4:this.custom4,
-    custom5:this.custom5,
-    custom6:this.custom6,
-    custom7:this.custom7,
-    custom8:this.custom8,
-    custom9:this.custom9,
-    custom10:this.custom10,
-    custom12:this.custom12,
-    custom22:this.custom22,
-    custom32:this.custom32,
-    custom42:this.custom42,
-    custom52:this.custom52,
-    custom62:this.custom62,
-    custom72:this.custom72,
-    custom82:this.custom82,
-    custom92:this.custom92,
-    custom102:this.custom102,
+
     custom11eur:this.custom11eur,
     custom11usd:this.custom11usd,
     custom11inr:this.custom11inr,
@@ -811,6 +1136,26 @@ Ring20:this.Ring20,
     colorText8:this.colorText8,
     colorText9:this.colorText9,
     colorText10:this.colorText10,
+    variation1:this.variation1,
+    variation2:this.variation2,
+    variation3:this.variation3,
+    variation4:this.variation4,
+    variation5:this.variation5,
+    variation6:this.variation6,
+    variation7:this.variation7,
+    variation8:this.variation8,
+    variation9:this.variation9,
+    variation10:this.variation10,
+    variation1img:this.variation1img,
+    variation2img:this.variation2img,
+    variation3img:this.variation3img,
+    variation4img:this.variation4img,
+    variation5img:this.variation5img,
+    variation6img:this.variation6img,
+    variation7img:this.variation7img,
+    variation8img:this.variation8img,
+    variation9img:this.variation9img,
+    variation10img:this.variation10img,
     custom1img:this.custom1img,
    custom2img:this.custom2img,
     custom3img:this.custom3img,
@@ -821,6 +1166,113 @@ Ring20:this.Ring20,
     custom8img:this.custom8img,
     custom9img:this.custom9img,
     custom10img:this.custom10img,
+    custom11img:this.custom11img,
+   custom12img:this.custom12img,
+    custom13img:this.custom13img,
+    custom14img:this.custom14img,
+    custom15img:this.custom15img,
+    custom16img:this.custom16img,
+    custom17img:this.custom17img,
+    custom18img:this.custom18img,
+    custom19img:this.custom19img,
+    custom20img:this.custom20img,
+     custom21img:this.custom21img,
+   custom22img:this.custom22img,
+    custom23img:this.custom23img,
+    custom24img:this.custom24img,
+    custom25img:this.custom25img,
+    custom26img:this.custom26img,
+    custom27img:this.custom27img,
+    custom28img:this.custom28img,
+    custom29img:this.custom29img,
+    custom30img:this.custom30img,
+     custom31img:this.custom31img,
+   custom32img:this.custom32img,
+    custom33img:this.custom33img,
+    custom34img:this.custom34img,
+    custom35img:this.custom35img,
+    custom36img:this.custom36img,
+    custom37img:this.custom37img,
+    custom38img:this.custom38img,
+    custom39img:this.custom39img,
+    custom40img:this.custom40img,
+     custom41img:this.custom41img,
+   custom42img:this.custom42img,
+    custom43img:this.custom43img,
+    custom44img:this.custom44img,
+    custom45img:this.custom45img,
+    custom46img:this.custom46img,
+    custom47img:this.custom47img,
+    custom48img:this.custom48img,
+    custom49img:this.custom49img,
+    custom50img:this.custom50img,
+    variationQuantity1:this.variationQuantity1,
+    variationQuantity2:this.variationQuantity2,
+    variationQuantity3:this.variationQuantity3,
+    variationQuantity4:this.variationQuantity4,
+    variationQuantity5:this.variationQuantity5,
+    variationQuantity6:this.variationQuantity6,
+    variationQuantity7:this.variationQuantity7,
+    variationQuantity8:this.variationQuantity8,
+    variationQuantity9:this.variationQuantity9,
+    variationQuantity10:this.variationQuantity10,
+      customQuantity1:this.customQuantity1,
+   customQuantity2:this.customQuantity2,
+    customQuantity3:this.customQuantity3,
+    customQuantity4:this.customQuantity4,
+    customQuantity5:this.customQuantity5,
+    customQuantity6:this.customQuantity6,
+    customQuantity7:this.customQuantity7,
+    customQuantity8:this.customQuantity8,
+    customQuantity9:this.customQuantity9,
+    customQuantity10:this.customQuantity10,
+    customQuantity11:this.customQuantity11,
+   customQuantity12:this.customQuantity12,
+    customQuantity13:this.customQuantity13,
+    customQuantity14:this.customQuantity14,
+    customQuantity15:this.customQuantity15,
+    customQuantity16:this.customQuantity16,
+    customQuantity17:this.customQuantity17,
+    customQuantity18:this.customQuantity18,
+    customQuantity19:this.customQuantity19,
+    customQuantity20:this.customQuantity20,
+     customQuantity21:this.customQuantity21,
+   customQuantity22:this.customQuantity22,
+    customQuantity23:this.customQuantity23,
+    customQuantity24:this.customQuantity24,
+    customQuantity25:this.customQuantity25,
+    customQuantity26:this.customQuantity26,
+    customQuantity27:this.customQuantity27,
+    customQuantity28:this.customQuantity28,
+    customQuantity29:this.customQuantity29,
+    customQuantity30:this.customQuantity30,
+     customQuantity31:this.customQuantity31,
+   customQuantity32:this.customQuantity32,
+    customQuantity33:this.customQuantity33,
+    customQuantity34:this.customQuantity34,
+    customQuantity35:this.customQuantity35,
+    customQuantity36:this.customQuantity36,
+    customQuantity37:this.customQuantity37,
+    customQuantity38:this.customQuantity38,
+    customQuantity39:this.customQuantity39,
+    customQuantity40:this.customQuantity40,
+     customQuantity41:this.customQuantity41,
+   customQuantity42:this.customQuantity42,
+    customQuantity43:this.customQuantity43,
+    customQuantity44:this.customQuantity44,
+    customQuantity45:this.customQuantity45,
+    customQuantity46:this.customQuantity46,
+    customQuantity47:this.customQuantity47,
+    customQuantity48:this.customQuantity48,
+    customQuantity49:this.customQuantity49,
+    customQuantity50:this.customQuantity50,
+
+    customTitle1:this.customTitle1,
+    customTitle2:this.customTitle2,
+    customTitle3:this.customTitle3,
+    customTitle4:this.customTitle4,
+    customTitle5:this.customTitle5,
+
     likeCount: getLikeCount(this.likes),
   );
 }
@@ -830,6 +1282,11 @@ class _ProdState extends State<Prod> {
   String usersize = "";
   String usercolor = "";
   String userCustom = "";
+  String userVariation;
+   String variationIndex;
+
+  var userVariationPrice = "";
+
 var  time = const Duration(  seconds: 2);
 String currencysymbol;
 
@@ -848,7 +1305,7 @@ String currencysymbol;
   var usd;
    var inr;
   final String cny;
-  final String gbp;
+  var gbp;
    final String gender;
  final String shipment;
   final String country;
@@ -856,21 +1313,7 @@ String currencysymbol;
 final bool worldship;
 final bool freeworldship;
 final bool freeship;
-var price;
-var custompriceinr ;
-var custompriceusd ;
 
-var customprice;
-var customprice1;
-var customprice2;
-var customprice3;
-var customprice4;
-var customprice5;
-var customprice6;
-var customprice7;
-var customprice8;
-var customprice9;
-var customprice10;
   final String custom1img;
   final String custom2img;
   final String custom3img;
@@ -881,6 +1324,51 @@ var customprice10;
   final String custom8img;
   final String custom9img;
   final String custom10img;
+  final String custom11img;
+  final String custom12img;
+  final String custom13img;
+  final String custom14img;
+  final String custom15img;
+  final String custom16img;
+  final String custom17img;
+  final String custom18img;
+  final String custom19img;
+  final String custom20img;
+  final String custom21img;
+  final String custom22img;
+  final String custom23img;
+  final String custom24img;
+  final String custom25img;
+  final String custom26img;
+  final String custom27img;
+  final String custom28img;
+  final String custom29img;
+  final String custom30img;
+  final String custom31img;
+  final String custom32img;
+  final String custom33img;
+  final String custom34img;
+  final String custom35img;
+  final String custom36img;
+  final String custom37img;
+  final String custom38img;
+  final String custom39img;
+  final String custom40img;
+  final String custom41img;
+  final String custom42img;
+  final String custom43img;
+  final String custom44img;
+  final String custom45img;
+  final String custom46img;
+  final String custom47img;
+  final String custom48img;
+  final String custom49img;
+  final String custom50img;
+final String customTitle1;
+final String customTitle2;
+final String customTitle3;
+final String customTitle4;
+final String customTitle5;
 
   final String productname;
   final String details;
@@ -951,70 +1439,56 @@ var customprice10;
   final int  Ring21;
    final int  Ring22;
    final int  Ring23;
-  final String custom1;
-  final String custom2;
-  final String custom3;
-  final String custom4;
-  final String custom5;
-  final String custom6;
-  final String custom7;
-  final String  custom8;
-  final String custom9;
-   final String custom10;
-  final int custom12;
-  final int custom22;
-  final int custom32;
-  final int custom42;
-  final int custom52;
-  final int custom62;
-  final int custom72;
-  final int  custom82;
-  final int custom92;
-  final int custom102;
-  final  custom11eur;
+
+  var  custom11eur;
    var custom11usd;
-  final  custom11inr;
-  final  custom11gbp;
-  final  custom21eur;
+  var  custom11inr;
+  var  custom11gbp;
+  var  custom21eur;
    var custom21usd;
-  final  custom21inr;
-  final  custom21gbp;
-  final  custom31eur;
+  var  custom21inr;
+  var  custom21gbp;
+  var  custom31eur;
   var custom31usd;
-  final  custom31inr;
-  final  custom31gbp;
-  final  custom41eur;
+  var  custom31inr;
+  var  custom31gbp;
+  var  custom41eur;
    var custom41usd;
-  final  custom41inr;
-  final  custom41gbp;
-  final  custom51eur;
+  var  custom41inr;
+  var  custom41gbp;
+  var  custom51eur;
   var custom51usd;
-  final  custom51inr;
-  final  custom51gbp;
-  final  custom61eur;
+  var  custom51inr;
+  var  custom51gbp;
+  var  custom61eur;
   var   custom61usd;
-  final  custom61inr;
-  final  custom61gbp;
-  final  custom71eur;
+  var  custom61inr;
+  var  custom61gbp;
+  var  custom71eur;
   var custom71usd;
-  final  custom71inr;
-  final  custom71gbp;
-  final  custom81eur;
+  var  custom71inr;
+  var  custom71gbp;
+  var  custom81eur;
   var custom81usd;
-  final  custom81inr;
-  final  custom81gbp;
-  final  custom91eur;
+  var  custom81inr;
+  var  custom81gbp;
+  var  custom91eur;
     var custom91usd;
-  final  custom91inr;
-  final  custom91gbp;
-  final  custom101eur;
+  var  custom91inr;
+  var  custom91gbp;
+  var  custom101eur;
     var custom101usd;
-  final  custom101inr;
-  final  custom101gbp;
-  final  shipcostusd;
-  final  shipcostinterusd;
-  final  shipcostinterinr;
-  final  shipcostinr;
+  var  custom101inr;
+  var  custom101gbp;
+  var  shipcostusd;
+  var  shipcostinterusd;
+  var  shipcostinterinr;
+  var  shipcostinr;
+   var  shipcosteur;
+  var  shipcostintereur;
+  var  shipcostintergbp;
+  var  shipcostgbp;
+
  final String currency;
 
   final int processfrom;
@@ -1043,6 +1517,86 @@ var customprice10;
    final String colorText8;
    final String colorText9;
    final String colorText10;
+  final  customQuantity1;
+  final  customQuantity2;
+  final  customQuantity3;
+  final  customQuantity4;
+  final  customQuantity5;
+  final  customQuantity6;
+  final  customQuantity7;
+  final  customQuantity8;
+  final  customQuantity9;
+  final  customQuantity10;
+  final  customQuantity11;
+  final  customQuantity12;
+  final  customQuantity13;
+  final  customQuantity14;
+  final  customQuantity15;
+  final  customQuantity16;
+  final  customQuantity17;
+  final  customQuantity18;
+  final  customQuantity19;
+  final  customQuantity20;
+  final  customQuantity21;
+  final  customQuantity22;
+  final  customQuantity23;
+  final  customQuantity24;
+  final  customQuantity25;
+  final  customQuantity26;
+  final  customQuantity27;
+  final  customQuantity28;
+  final  customQuantity29;
+  final  customQuantity30;
+  final  customQuantity31;
+  final  customQuantity32;
+  final  customQuantity33;
+  final  customQuantity34;
+  final  customQuantity35;
+  final  customQuantity36;
+  final  customQuantity37;
+  final  customQuantity38;
+  final  customQuantity39;
+  final  customQuantity40;
+  final  customQuantity41;
+  final  customQuantity42;
+  final  customQuantity43;
+  final  customQuantity44;
+  final  customQuantity45;
+  final  customQuantity46;
+  final  customQuantity47;
+  final  customQuantity48;
+  final  customQuantity49;
+  final  customQuantity50;
+  final String variation1;
+  final String variation2;
+  final String variation3;
+  final String variation4;
+  final String variation5;
+  final String variation6;
+  final String variation7;
+  final String variation8;
+  final String variation9;
+  final String variation10;
+  final  variationQuantity1;
+  final  variationQuantity2;
+  final  variationQuantity3;
+  final  variationQuantity4;
+  final  variationQuantity5;
+  final  variationQuantity6;
+  final  variationQuantity7;
+  final  variationQuantity8;
+  final  variationQuantity9;
+  final  variationQuantity10;
+  final String variation1img;
+  final String variation2img;
+  final String variation3img;
+  final String variation4img;
+  final String variation5img;
+  final String variation6img;
+  final String variation7img;
+  final String variation8img;
+  final String variation9img;
+  final String variation10img;
 var shipcostuser;
 String size;
 bool custom;
@@ -1079,8 +1633,43 @@ this.shipcostinterusd,
 this.shipcostusd,
 this.shipcostinterinr,
 this.shipcostinr,
+ this.shipcostintereur,
+this.shipcosteur,
+this.shipcostintergbp,
+this.shipcostgbp,
+
 this.country,
 this.currency,
+    this.variation1,
+    this.variation2,
+    this.variation3,
+    this.variation4,
+    this.variation5,
+    this.variation6,
+    this.variation7,
+    this.variation8,
+    this.variation9,
+    this.variation10,
+    this.variationQuantity1,
+    this.variationQuantity2,
+    this.variationQuantity3,
+    this.variationQuantity4,
+    this.variationQuantity5,
+    this.variationQuantity6,
+    this.variationQuantity7,
+    this.variationQuantity8,
+    this.variationQuantity9,
+    this.variationQuantity10,
+    this.variation1img,
+    this.variation2img,
+    this.variation3img,
+    this.variation4img,
+    this.variation5img,
+    this.variation6img,
+    this.variation7img,
+    this.variation8img,
+    this.variation9img,
+    this.variation10img,
     this.custom1img,
     this.custom2img,
     this.custom3img,
@@ -1091,6 +1680,102 @@ this.currency,
     this.custom8img,
     this.custom9img,
     this.custom10img,
+    this.custom11img,
+    this.custom12img,
+    this.custom13img,
+    this.custom14img,
+    this.custom15img,
+    this.custom16img,
+    this.custom17img,
+    this.custom18img,
+    this.custom19img,
+    this.custom20img,
+    this.custom21img,
+    this.custom22img,
+    this.custom23img,
+    this.custom24img,
+    this.custom25img,
+    this.custom26img,
+    this.custom27img,
+    this.custom28img,
+    this.custom29img,
+    this.custom30img,
+    this.custom31img,
+    this.custom32img,
+    this.custom33img,
+    this.custom34img,
+    this.custom35img,
+    this.custom36img,
+    this.custom37img,
+    this.custom38img,
+    this.custom39img,
+    this.custom40img,
+    this.custom41img,
+    this.custom42img,
+    this.custom43img,
+    this.custom44img,
+    this.custom45img,
+    this.custom46img,
+    this.custom47img,
+    this.custom48img,
+    this.custom49img,
+    this.custom50img,
+    this.customQuantity1,
+    this.customQuantity2,
+    this.customQuantity3,
+    this.customQuantity4,
+    this.customQuantity5,
+    this.customQuantity6,
+    this.customQuantity7,
+    this.customQuantity8,
+    this.customQuantity9,
+    this.customQuantity10,
+    this.customQuantity11,
+    this.customQuantity12,
+    this.customQuantity13,
+    this.customQuantity14,
+    this.customQuantity15,
+    this.customQuantity16,
+    this.customQuantity17,
+    this.customQuantity18,
+    this.customQuantity19,
+    this.customQuantity20,
+    this.customQuantity21,
+    this.customQuantity22,
+    this.customQuantity23,
+    this.customQuantity24,
+    this.customQuantity25,
+    this.customQuantity26,
+    this.customQuantity27,
+    this.customQuantity28,
+    this.customQuantity29,
+    this.customQuantity30,
+    this.customQuantity31,
+    this.customQuantity32,
+    this.customQuantity33,
+    this.customQuantity34,
+    this.customQuantity35,
+    this.customQuantity36,
+    this.customQuantity37,
+    this.customQuantity38,
+    this.customQuantity39,
+    this.customQuantity40,
+    this.customQuantity41,
+    this.customQuantity42,
+    this.customQuantity43,
+    this.customQuantity44,
+    this.customQuantity45,
+    this.customQuantity46,
+    this.customQuantity47,
+    this.customQuantity48,
+    this.customQuantity49,
+    this.customQuantity50,
+    this.customTitle1,
+    this.customTitle2,
+    this.customTitle3,
+    this.customTitle4,
+    this.customTitle5,
+
     this.gender,
     this.details,
     this.productname,
@@ -1154,26 +1839,7 @@ this.currency,
     this. Ring21,
      this. Ring22,
      this. Ring23,
-    this.custom1,
-    this.custom2,
-    this.custom3,
-    this.custom4,
-    this.custom5,
-    this.custom6,
-    this.custom7,
-    this.custom8,
-    this.custom9,
-    this.custom10,
-    this.custom12,
-    this.custom22,
-    this.custom32,
-    this.custom42,
-    this.custom52,
-    this.custom62,
-    this.custom72,
-    this.custom82,
-    this.custom92,
-    this.custom102,
+
     this.custom11eur,
     this.custom11usd,
     this.custom11inr,
@@ -1356,215 +2022,136 @@ this.currency,
 
     super.initState();
     Views();
-    print("11111111111111111111111111111111$price");
 
     conversion();
-    print("2222222222222222222222222222222222222$price");
+
 
   }
 conversion()async {
   isUploading = true;
-  if (currentUser.currencyISO == "USD") {
-    var custom1usd;
-    var custom2usd;
-    var custom3usd;
-    var custom4usd;
-    var custom5usd;
-    var custom6usd;
-    var custom7usd;
-    var custom8usd;
-    var custom9usd;
-    var custom10usd;
-    setState((){
-      price = usd.toStringAsFixed(2);
-      price = double.tryParse(price);
+  var convertor;
+   var convertor1;
+   var convertor2;
+   var convertor3;
+   var convertor4;
+   var convertor5;
+   var convertor6;
+   var convertor7;
+   var convertor8;
+   var convertor9;
+   var convertor10;
+   var convertor11;
 
-      shipcostuser = currentUser.country == country?shipcostusd.toStringAsFixed(2):shipcostinterusd.toStringAsFixed(2);
-      shipcostuser = double.tryParse(shipcostuser);
+  if (currentUser.currency == "INR"){
+    convertor = inr.toStringAsFixed(2);
+    inr = double.tryParse(convertor);
+     convertor1 = custom11inr.toStringAsFixed(2);
+    custom11inr = double.tryParse(convertor1);
+  convertor2 = custom21inr.toStringAsFixed(2);
+    custom21inr = double.tryParse(convertor2);
+  convertor3 = custom31inr.toStringAsFixed(2);
+    custom31inr = double.tryParse(convertor3);
+  convertor4 = custom41inr.toStringAsFixed(2);
+    custom41inr = double.tryParse(convertor4);
+  convertor5 = custom51inr.toStringAsFixed(2);
+    custom51inr = double.tryParse(convertor5);
+  convertor6 = custom61inr.toStringAsFixed(2);
+    custom61inr = double.tryParse(convertor6);
+  convertor7 = custom71inr.toStringAsFixed(2);
+    custom71inr = double.tryParse(convertor7);
+  convertor8 = custom81inr.toStringAsFixed(2);
+    custom81inr = double.tryParse(convertor8);
+  convertor9 = custom91inr.toStringAsFixed(2);
+    custom91inr = double.tryParse(convertor9);
+  convertor10 = custom101inr.toStringAsFixed(2);
+    custom101inr = double.tryParse(convertor10);
+  convertor11 = currentUser.country == country?shipcostinr.toStringAsFixed(2):shipcostinterinr.toStringAsFixed(2);
+    shipcostuser = double.tryParse(convertor11);
 
-
-      custom1usd = custom11usd.toStringAsFixed(2);
-    custom11usd = double.tryParse(custom1usd);
-
-    custom2usd = custom21usd.toStringAsFixed(2);
-    custom21usd = double.tryParse(custom2usd);
-
-    custom3usd = custom31usd.toStringAsFixed(2);
-    custom31usd = double.tryParse(custom3usd);
-
-    custom4usd = custom41usd.toStringAsFixed(2);
-    custom41usd = double.tryParse(custom4usd);
-
-    custom5usd = custom51usd.toStringAsFixed(2);
-    custom51usd = double.tryParse(custom5usd);
-
-    custom6usd = custom61usd.toStringAsFixed(2);
-    custom61usd = double.tryParse(custom6usd);
-
-    custom7usd = custom71usd.toStringAsFixed(2);
-    custom71usd = double.tryParse(custom7usd);
-
-    custom8usd = custom81usd.toStringAsFixed(2);
-    custom81usd = double.tryParse(custom8usd);
-
-    custom9usd = custom91usd.toStringAsFixed(2);
-    custom91usd = double.tryParse(custom9usd);
-
-    custom10usd = custom101usd.toStringAsFixed(2);
-    custom101usd = double.tryParse(custom10usd);
-
-    });
   }
-  else {
-    var resultUSD = await Currency.getConversion(
-        from: 'USD', to: '${currentUser.currencyISO}', amount: usd.toString());
-    var resultUSD11 = await Currency.getConversion(
-        from: 'USD',
-        to: '${currentUser.currencyISO}',
-        amount: shipcostinterusd.toString());
-    var s;
-    setState(() {
-      e = resultUSD.rate;
-      price = e.toStringAsFixed(2);
-       price = double.tryParse(price);
-print(price);
-      s = resultUSD11.rate;
-      shipcostuser = currentUser.country == country?shipcostinr.toStringAsFixed(2):s.toStringAsFixed(2);
-      shipcostuser = double.tryParse(shipcostuser);
-      print(shipcostuser);
+  else if (currentUser.currency == "EUR"){
+    convertor = eur.toStringAsFixed(2);
+    eur = double.tryParse(convertor);
+     convertor1 = custom11eur.toStringAsFixed(2);
+    custom11eur = double.tryParse(convertor1);
+  convertor2 = custom21eur.toStringAsFixed(2);
+    custom21eur = double.tryParse(convertor2);
+  convertor3 = custom31eur.toStringAsFixed(2);
+    custom31eur = double.tryParse(convertor3);
+  convertor4 = custom41eur.toStringAsFixed(2);
+    custom41eur = double.tryParse(convertor4);
+  convertor5 = custom51eur.toStringAsFixed(2);
+    custom51eur = double.tryParse(convertor5);
+  convertor6 = custom61eur.toStringAsFixed(2);
+    custom61eur = double.tryParse(convertor6);
+  convertor7 = custom71eur.toStringAsFixed(2);
+    custom71eur = double.tryParse(convertor7);
+  convertor8 = custom81eur.toStringAsFixed(2);
+    custom81eur = double.tryParse(convertor8);
+  convertor9 = custom91eur.toStringAsFixed(2);
+    custom91eur = double.tryParse(convertor9);
+  convertor10 = custom101eur.toStringAsFixed(2);
+    custom101eur = double.tryParse(convertor10);
+  convertor11 = currentUser.country == country?shipcosteur.toStringAsFixed(2):shipcostintereur.toStringAsFixed(2);
+    shipcostuser = double.tryParse(convertor11);
 
-    });
-    print("before conversiom");
-
-    var resultUSD1 = await Currency.getConversion(
-        from: 'USD', to: '${currentUser.currencyISO}', amount: custom11usd.toString());
-    print("after first" );
-
-    var resultUSD2 = await Currency.getConversion(
-        from: 'USD', to: '${currentUser.currencyISO}', amount: custom21usd.toString());
-    print("second");
-
-    var resultUSD3 = await Currency.getConversion(
-        from: 'USD', to: '${currentUser.currencyISO}', amount: custom31usd.toString());
-    var resultUSD4 = await Currency.getConversion(
-        from: 'USD', to: '${currentUser.currencyISO}', amount: custom41usd.toString());
-    var resultUSD5 = await Currency.getConversion(
-        from: 'USD', to: '${currentUser.currencyISO}', amount: custom51usd.toString());
-    var resultUSD6 = await Currency.getConversion(
-        from: 'USD', to: '${currentUser.currencyISO}', amount: custom61usd.toString());
-    var resultUSD7 = await Currency.getConversion(
-        from: 'USD', to: '${currentUser.currencyISO}', amount: custom71usd.toString());
-    var resultUSD8 = await Currency.getConversion(
-        from: 'USD', to: '${currentUser.currencyISO}', amount: custom81usd.toString());
-    var resultUSD9 = await Currency.getConversion(
-        from: 'USD', to: '${currentUser.currencyISO}', amount: custom91usd.toString());
-    var resultUSD10 = await Currency.getConversion(
-        from: 'USD', to: '${currentUser.currencyISO}', amount: custom101usd.toString());
-
-    var c1;
-    var c2;
-    var c3;
-    var c4;
-    var c5;
-    var c6;
-    var c7;
-    var c8;
-    var c9;
-    var c10;
-    var custom1usd;
-    var custom2usd;
-    var custom3usd;
-    var custom4usd;
-    var custom5usd;
-    var custom6usd;
-    var custom7usd;
-    var custom8usd;
-    var custom9usd;
-    var custom10usd;
-
-    setState(() {
-      print("setstste2$shipcostuser");
-
-      custom1usd = custom11usd.toStringAsFixed(2);
-      custom11usd = double.tryParse(custom1usd);
-
-      custom2usd = custom21usd.toStringAsFixed(2);
-      custom21usd = double.tryParse(custom2usd);
-
-      custom3usd = custom31usd.toStringAsFixed(2);
-      custom31usd = double.tryParse(custom3usd);
-
-      custom4usd = custom41usd.toStringAsFixed(2);
-      custom41usd = double.tryParse(custom4usd);
-
-      custom5usd = custom51usd.toStringAsFixed(2);
-      custom51usd = double.tryParse(custom5usd);
-
-      custom6usd = custom61usd.toStringAsFixed(2);
-      custom61usd = double.tryParse(custom6usd);
-
-      custom7usd = custom71usd.toStringAsFixed(2);
-      custom71usd = double.tryParse(custom7usd);
-
-      custom8usd = custom81usd.toStringAsFixed(2);
-      custom81usd = double.tryParse(custom8usd);
-
-      custom9usd = custom91usd.toStringAsFixed(2);
-      custom91usd = double.tryParse(custom9usd);
-
-      custom10usd = custom101usd.toStringAsFixed(2);
-      custom101usd = double.tryParse(custom10usd);
-
-
-      c1 = resultUSD1.rate;
-      print(c1);
-      customprice1 = c1.toStringAsFixed(2);
-      print(customprice1);
-
-      customprice1 = double.tryParse(customprice1);
-      print(customprice1);
-
-
-      c2 = resultUSD2.rate;
-      customprice2 = c2.toStringAsFixed(2);
-      customprice2 = double.tryParse(customprice2);
-
-      c3 = resultUSD3.rate;
-      customprice3 = c3.toStringAsFixed(2);
-      customprice3 = double.tryParse(customprice3);
-
-      c4 = resultUSD4.rate;
-      customprice4 = c4.toStringAsFixed(2);
-      customprice4 = double.tryParse(customprice4);
-
-      c5 = resultUSD5.rate;
-      customprice5 = c5.toStringAsFixed(2);
-      customprice5 = double.tryParse(customprice5);
-
-      c6 = resultUSD6.rate;
-      customprice6 = c6.toStringAsFixed(2);
-      customprice6 = double.tryParse(customprice6);
-
-      c7 = resultUSD7.rate;
-      customprice7 = c7.toStringAsFixed(2);
-      customprice7 = double.tryParse(customprice7);
-
-      c8 = resultUSD8.rate;
-      customprice8 = c8.toStringAsFixed(2);
-      customprice8 = double.tryParse(customprice8);
-
-      c9 = resultUSD9.rate;
-      customprice9 = c9.toStringAsFixed(2);
-      customprice9 = double.tryParse(customprice9);
-
-      c10 = resultUSD10.rate;
-      customprice10 = c10.toStringAsFixed(2);
-      customprice10 = double.tryParse(customprice10);
-
-
-      isUploading = false;
-    });
   }
+  else if (currentUser.currency == "GBP"){
+    convertor = gbp.toStringAsFixed(2);
+    gbp = double.tryParse(convertor);
+     convertor1 = custom11gbp.toStringAsFixed(2);
+    custom11gbp = double.tryParse(convertor1);
+  convertor2 = custom21gbp.toStringAsFixed(2);
+    custom21gbp = double.tryParse(convertor2);
+  convertor3 = custom31gbp.toStringAsFixed(2);
+    custom31gbp = double.tryParse(convertor3);
+  convertor4 = custom41gbp.toStringAsFixed(2);
+    custom41gbp = double.tryParse(convertor4);
+  convertor5 = custom51gbp.toStringAsFixed(2);
+    custom51gbp = double.tryParse(convertor5);
+  convertor6 = custom61gbp.toStringAsFixed(2);
+    custom61gbp = double.tryParse(convertor6);
+  convertor7 = custom71gbp.toStringAsFixed(2);
+    custom71gbp = double.tryParse(convertor7);
+  convertor8 = custom81gbp.toStringAsFixed(2);
+    custom81gbp = double.tryParse(convertor8);
+  convertor9 = custom91gbp.toStringAsFixed(2);
+    custom91gbp = double.tryParse(convertor9);
+  convertor10 = custom101gbp.toStringAsFixed(2);
+    custom101gbp = double.tryParse(convertor10);
+  convertor11 = currentUser.country == country?shipcostgbp.toStringAsFixed(2):shipcostintergbp.toStringAsFixed(2);
+    shipcostuser = double.tryParse(convertor11);
+
+  }
+  else{
+    convertor = usd.toStringAsFixed(2);
+    usd = double.tryParse(convertor);
+    convertor1 = custom11usd.toStringAsFixed(2);
+    custom11usd = double.tryParse(convertor1);
+    convertor2 = custom21usd.toStringAsFixed(2);
+    custom21usd = double.tryParse(convertor2);
+    convertor3 = custom31usd.toStringAsFixed(2);
+    custom31usd = double.tryParse(convertor3);
+    convertor4 = custom41usd.toStringAsFixed(2);
+    custom41usd = double.tryParse(convertor4);
+    convertor5 = custom51usd.toStringAsFixed(2);
+    custom51usd = double.tryParse(convertor5);
+    convertor6 = custom61usd.toStringAsFixed(2);
+    custom61usd = double.tryParse(convertor6);
+    convertor7 = custom71usd.toStringAsFixed(2);
+    custom71usd = double.tryParse(convertor7);
+    convertor8 = custom81usd.toStringAsFixed(2);
+    custom81usd = double.tryParse(convertor8);
+    convertor9 = custom91usd.toStringAsFixed(2);
+    custom91usd = double.tryParse(convertor9);
+    convertor10 = custom101usd.toStringAsFixed(2);
+    custom101usd = double.tryParse(convertor10);
+    convertor11 = currentUser.country == country?shipcostusd.toStringAsFixed(2):shipcostinterusd.toStringAsFixed(2);
+    shipcostuser = double.tryParse(convertor11);
+
+  }
+  isUploading = false;
+
 }
   Views()async{
     bool isPostOwner = currentUserId == ownerId;
@@ -1797,8 +2384,10 @@ List<String> selectedCustom = <String>[];
 
     if (gender == 'Men') {
 return
-        showModalBottomSheet(
-            context: parentContext,
+  showMaterialModalBottomSheet(
+      expand:true,
+
+      context: parentContext,
             builder: (BuildContext context) {
               return
                StatefulBuilder(
@@ -1847,39 +2436,77 @@ return
                                       scrollDirection:Axis.horizontal,
                                       shrinkWrap:true,
                                       children:[
-                                        custom12==0?Container():   Padding(
+                                        variationQuantity1==0?Container():   Padding(
                                           padding: const EdgeInsets.all(8.0),
-                                          child: Column(
-                                            children: [
-                                              Container(
-                                                  height:120.0,
-                                                  width:120.0,
-                                                  child: CachedImage(custom1img)),
-
-                                              currentUser.country == "India"?  FittedBox(child: Text(' + ${currentUser.currencysym} $custom11inr',)):
-                                              currentUser.country == "United States"?  FittedBox(child: Text(' + \u0024 $custom11usd',)):
-                                              currentUser.country == country?FittedBox(child: Text('+ ${currentUser.currencysym} $custom11inr(\u0024 $custom11usd)',)):
-
-                                              FittedBox(child: Text(' + ${currentUser.currencysym} $customprice1(\u0024 $custom11usd)',)),
-                                              ElevatedButton(
-
-                                                style: ElevatedButton.styleFrom(
-
-                                                  primary: selectedCustom.contains("Custom 1") ? Colors.black: Colors.white.withOpacity(0.1), // background
-                                                  onPrimary:selectedCustom.contains("Custom 1") ? Colors.white:  Colors.black, // foreground
+                                          child: Card(
+                                            child: Column(
+                                              children: [
+                                                Container(
+                                                    height:120.0,
+                                                    width:120.0,
+                                                    child: CachedImage(variation1img)),
+                                                currentUser.currency == "INR"? Row(
+                                                  children: [
+                                                    Text("₹ ${currencyFormatter.format(custom11inr)}",
+                                                        style: TextStyle(
+                                                          color: Colors.black,
+                                                          fontWeight: FontWeight.bold,
+                                                          fontSize: 20.0,
+                                                        )),
+                                                  ],
+                                                ):
+                                                currentUser.currency == "EUR"?Row(
+                                                  children: [
+                                                    Text("${currencyFormatter.format(custom11eur)}  €",
+                                                        style: TextStyle(
+                                                          color: Colors.black,
+                                                          fontWeight: FontWeight.bold,
+                                                          fontSize: 20.0,
+                                                        )),
+                                                  ],
+                                                ):
+                                                currentUser.currency == "GBP"?Row(
+                                                  children: [
+                                                    Text("£ ${currencyFormatter.format(custom11gbp)}",
+                                                        style: TextStyle(
+                                                          color: Colors.black,
+                                                          fontWeight: FontWeight.bold,
+                                                          fontSize: 20.0,
+                                                        )),
+                                                  ],
+                                                ):
+                                                Row(
+                                                  children: [
+                                                    Text("\u0024 ${currencyFormatter.format(custom11usd)}",
+                                                        style: TextStyle(
+                                                          color: Colors.black,
+                                                          fontWeight: FontWeight.bold,
+                                                          fontSize: 20.0,
+                                                        )),
+                                                  ],
                                                 ),
-                                                onPressed: () {
-                                                  selectedCustom =  <String>[];
-                                                  selectedCustom.add("Custom 1");
-print(customprice1);
-                                                  stateSetter(() { Custom = 'Custom 1';
-                                                  userCustom = custom1;
-                                                  customprice = customprice1;
-                                                  custompriceusd = custom11usd;
-                                                  custompriceinr = custom11inr;});
-                                                },          child: Text(custom1),
-                                              ),
-                                            ],
+
+                                                ElevatedButton(
+
+                                                  style: ElevatedButton.styleFrom(
+
+                                                    primary: selectedCustom.contains("Variation 1") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                                                    onPrimary:selectedCustom.contains("Variation 1") ? Colors.white:  Colors.black, // foreground
+                                                  ),
+                                                  onPressed: () {
+                                                    selectedCustom =  <String>[];
+                                                    selectedCustom.add("Variation 1");
+                                                    stateSetter(() { variationIndex = 'Variation 1';
+                                                    userVariation = variation1;
+                                                    userVariationPrice =  currentUser.currency == "EUR"? custom11eur:
+                                                    currentUser.currency == "INR"? custom11inr:
+                                                     currentUser.currency == "GBP"? custom11gbp:
+                                                     custom11usd;
+                                                 });
+                                                  },          child: Text(variation1),
+                                                ),
+                                              ],
+                                            ),
                                           ),
                                         ),
                                         custom22==0?Container():   Padding(
@@ -9330,33 +9957,43 @@ var eur = documentSnapshot.data()['eur'];
                   subtitle:    currentUser.country == "$country" ?  Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Row(
+                      currentUser.currency == "INR"? Row(
                         children: [
-                          Text("${currentUser.currencysym} $inr",
+                          Text("₹ ${currencyFormatter.format(inr)}",
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 20.0,
+                          )),
+                        ],
+                      ):
+                      currentUser.currency == "EUR"?Row(
+                        children: [
+                          Text("${currencyFormatter.format(eur)}  €",
                               style: TextStyle(
                                 color: Colors.black,
                                 fontWeight: FontWeight.bold,
                                 fontSize: 20.0,
                               )),
-                          Text(
-                            "(\u0024 $usd)",
-                            style: TextStyle(
-                              color: Colors.black,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 14.0,
-                            ),
-                          )
                         ],
-                      ),
-                      Row(
+                      ):
+                      currentUser.currency == "GBP"?Row(
                         children: [
-                          Text("${currentUser.currency} ",
+                          Text("£ ${currencyFormatter.format(gbp)}",
                               style: TextStyle(
                                 color: Colors.black,
                                 fontWeight: FontWeight.bold,
-                                fontSize: 10.0,
-                              )
-                          ),
+                                fontSize: 20.0,
+                              )),
+                        ],
+                      ):Row(
+                        children: [
+                          Text("\u0024 ${currencyFormatter.format(usd)}",
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 20.0,
+                              )),
                         ],
                       ),
                       freeship?Container(
@@ -9370,62 +10007,143 @@ var eur = documentSnapshot.data()['eur'];
                               fontSize: 14.0,
                             ),
                           )
-                      ) :Text(
-                        "+ ${currentUser.currencysym} $shipcostinr",
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 14.0,
-                        ),
-                      )
+                      ) :
+                      currentUser.currency == "INR"? Row(
+                        children: [
+                          Text("₹ ${currencyFormatter.format(shipcostinr)}",
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 20.0,
+                              )),
+                        ],
+                      ):
+                      currentUser.currency == "EUR"?Row(
+                        children: [
+                          Text("${currencyFormatter.format(shipcosteur)}  €",
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 20.0,
+                              )),
+                        ],
+                      ):
+                      currentUser.currency == "GBP"?Row(
+                        children: [
+                          Text("£ ${currencyFormatter.format(shipcostgbp)}",
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 20.0,
+                              )),
+                        ],
+                      ):Row(
+                        children: [
+                          Text("\u0024 ${currencyFormatter.format(shipcostusd)}",
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 20.0,
+                              )),
+                        ],
+                      ),
+
                     ],
                   ):   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
 
                     children: [
-                      Row(children:[Text(
-                        "${currentUser.currencysym}  ${ currencyFormatter.format(price)}",
-                        style: TextStyle(
-                          color: Colors.black,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 20.0,
-                        ),
-                      ),
-                        Text(
-                          "(\u0024 $usd)",
-                          style: TextStyle(
-                            color: Colors.black,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 14.0,
-                          ),
-                        )]),
-                      Row(
+                      currentUser.currency == "INR"? Row(
                         children: [
-                          Text("${currentUser.currency} ",
+                          Text("₹ ${currencyFormatter.format(inr)}",
                               style: TextStyle(
                                 color: Colors.black,
                                 fontWeight: FontWeight.bold,
-                                fontSize: 10.0,
-                              )
-                          ),
+                                fontSize: 20.0,
+                              )),
+                        ],
+                      ):
+                      currentUser.currency == "EUR"?Row(
+                        children: [
+                          Text("${currencyFormatter.format(eur)}  €",
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 20.0,
+                              )),
+                        ],
+                      ):
+                      currentUser.currency == "GBP"?Row(
+                        children: [
+                          Text("£ ${currencyFormatter.format(gbp)}",
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 20.0,
+                              )),
+                        ],
+                      ):Row(
+                        children: [
+                          Text("\u0024 ${currencyFormatter.format(usd)}",
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 20.0,
+                              )),
                         ],
                       ),
                       freeworldship?Container(
-                          color:Colors.white.withOpacity(0.1),
+                          color:Colors.grey.withOpacity(0.2),
                           child:   Text(
                             "FREE SHIPPING",
                             style: TextStyle(
                               color: Colors.black,
+
                               fontWeight: FontWeight.bold,
                               fontSize: 14.0,
                             ),
                           )
-                      ) :Text(
-                        "+ ${currentUser.currencysym} $shipcostuser(\u0024 $shipcostinterusd)",
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 14.0,
-                        ),
-                      )
+                      ) :
+                      currentUser.currency == "INR"? Row(
+                        children: [
+                          Text("₹ ${currencyFormatter.format(shipcostinterinr)}",
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 20.0,
+                              )),
+                        ],
+                      ):
+                      currentUser.currency == "EUR"?Row(
+                        children: [
+                          Text("${currencyFormatter.format(shipcostintereur)}  €",
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 20.0,
+                              )),
+                        ],
+                      ):
+                      currentUser.currency == "GBP"?Row(
+                        children: [
+                          Text("£ ${currencyFormatter.format(shipcostintergbp)}",
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 20.0,
+                              )),
+                        ],
+                      ):Row(
+                        children: [
+                          Text("\u0024 ${currencyFormatter.format(shipcostinterusd)}",
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 20.0,
+                              )),
+                        ],
+                      ),
+
                     ],
                   ) ,
                   trailing: FloatingActionButton(

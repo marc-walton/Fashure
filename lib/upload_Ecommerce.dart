@@ -91,169 +91,62 @@ var userPrice10;
 var userPrice11;
 var userPrice12;
 
-  var inrtousd;
-  var inrtousd1;
-  var inrtousd2;
-  var inrtousd3;
-  var inrtousd4;
-  var inrtousd5;
-  var inrtousd6;
-  var inrtousd7;
-  var inrtousd8;
-  var inrtousd9;
-  var inrtousd10;
-  var inrtousd11;
-  var inrtousd12;
-   var inrtoeur;
-  var inrtoeur1;
-  var inrtoeur2;
-  var inrtoeur3;
-  var inrtoeur4;
-  var inrtoeur5;
-  var inrtoeur6;
-  var inrtoeur7;
-  var inrtoeur8;
-  var inrtoeur9;
-  var inrtoeur10;
-  var inrtoeur11;
-  var inrtoeur12;
-  var inrtogbp;
-  var inrtogbp1;
-  var inrtogbp2;
-  var inrtogbp3;
-  var inrtogbp4;
-  var inrtogbp5;
-  var inrtogbp6;
-  var inrtogbp7;
-  var inrtogbp8;
-  var inrtogbp9;
-  var inrtogbp10;
-  var inrtogbp11;
-  var inrtogbp12;
 
-  var usdtoinr;
-  var usdtoinr1;
-  var usdtoinr2;
-  var usdtoinr3;
-  var usdtoinr4;
-  var usdtoinr5;
-  var usdtoinr6;
-  var usdtoinr7;
-  var usdtoinr8;
-  var usdtoinr9;
-  var usdtoinr10;
-  var usdtoinr11;
-  var usdtoinr12;
- var usdtoeur;
-  var usdtoeur1;
-  var usdtoeur2;
-  var usdtoeur3;
-  var usdtoeur4;
-  var usdtoeur5;
-  var usdtoeur6;
-  var usdtoeur7;
-  var usdtoeur8;
-  var usdtoeur9;
-  var usdtoeur10;
-  var usdtoeur11;
-  var usdtoeur12;
- var usdtogbp;
-  var usdtogbp1;
-  var usdtogbp2;
-  var usdtogbp3;
-  var usdtogbp4;
-  var usdtogbp5;
-  var usdtogbp6;
-  var usdtogbp7;
-  var usdtogbp8;
-  var usdtogbp9;
-  var usdtogbp10;
-  var usdtogbp11;
-  var usdtogbp12;
-
- var eurtoinr;
-  var eurtoinr1;
-  var eurtoinr2;
-  var eurtoinr3;
-  var eurtoinr4;
-  var eurtoinr5;
-  var eurtoinr6;
-  var eurtoinr7;
-  var eurtoinr8;
-  var eurtoinr9;
-  var eurtoinr10;
-  var eurtoinr11;
-  var eurtoinr12;
- var eurtousd;
-  var eurtousd1;
-  var eurtousd2;
-  var eurtousd3;
-  var eurtousd4;
-  var eurtousd5;
-  var eurtousd6;
-  var eurtousd7;
-  var eurtousd8;
-  var eurtousd9;
-  var eurtousd10;
-  var eurtousd11;
-  var eurtousd12;
- var eurtogbp;
-  var eurtogbp1;
-  var eurtogbp2;
-  var eurtogbp3;
-  var eurtogbp4;
-  var eurtogbp5;
-  var eurtogbp6;
-  var eurtogbp7;
-  var eurtogbp8;
-  var eurtogbp9;
-  var eurtogbp10;
-  var eurtogbp11;
-  var eurtogbp12;
-
- var gbptoinr;
-  var gbptoinr1;
-  var gbptoinr2;
-  var gbptoinr3;
-  var gbptoinr4;
-  var gbptoinr5;
-  var gbptoinr6;
-  var gbptoinr7;
-  var gbptoinr8;
-  var gbptoinr9;
-  var gbptoinr10;
-  var gbptoinr11;
-  var gbptoinr12;
- var gbptousd;
-  var gbptousd1;
-  var gbptousd2;
-  var gbptousd3;
-  var gbptousd4;
-  var gbptousd5;
-  var gbptousd6;
-  var gbptousd7;
-  var gbptousd8;
-  var gbptousd9;
-  var gbptousd10;
-  var gbptousd11;
-  var gbptousd12;
- var gbptoeur;
-  var gbptoeur1;
-  var gbptoeur2;
-  var gbptoeur3;
-  var gbptoeur4;
-  var gbptoeur5;
-  var gbptoeur6;
-  var gbptoeur7;
-  var gbptoeur8;
-  var gbptoeur9;
-  var gbptoeur10;
-  var gbptoeur11;
-  var gbptoeur12;
 var INR;
+var INR1;
+var INR2;
+var INR3;
+var INR4;
+var INR5;
+var INR6;
+var INR7;
+var INR8;
+var INR9;
+var INR10;
+var INR11;
+var INR12;
+
 var USD;
+var USD1;
+var USD2;
+var USD3;
+var USD4;
+var USD5;
+var USD6;
+var USD7;
+var USD8;
+var USD9;
+var USD10;
+var USD11;
+var USD12;
+
 var EUR;
+var EUR1;
+var EUR2;
+var EUR3;
+var EUR4;
+var EUR5;
+var EUR6;
+var EUR7;
+var EUR8;
+var EUR9;
+var EUR10;
+var EUR11;
+var EUR12;
+
 var GBP;
+var GBP1;
+var GBP2;
+var GBP3;
+var GBP4;
+var GBP5;
+var GBP6;
+var GBP7;
+var GBP8;
+var GBP9;
+var GBP10;
+var GBP11;
+var GBP12;
 
 int pageChanged  = 0;
   @override
@@ -13329,7 +13222,12 @@ color(){
           children: [
             Container(
               child: page0(),
-            ), Container(
+            ),
+            Container(
+              child: page4(),
+            ),
+
+            Container(
               child: page3(),
             ),
             Container(
@@ -13345,720 +13243,7 @@ color(){
       ),
     );
   }
-// sdf(){              Container(
-//   child: Stack(
-//     children:[
-//       Form(
-//         key: _formKey,
-//         child:
-//         Column(
-//           children: <Widget>[
-//             isUploading ? linearProgress() : Text(""),
-//
-//             carousel(),
-//             Expanded(
-//               child: SingleChildScrollView(
-//                 child: Column(
-//                   children: [
-//
-//                     SizedBox(height: 8.0,),
-//                     Text('Select Gender',style:TextStyle(color: kText,fontSize:20.0) ,),
-//                     SizedBox(height: 8.0,),
-//                     Padding(
-//                       padding: const EdgeInsets.all(8.0),
-//                       child: DropdownButton<String>(
-//                         value: dropdownValue,
-//                         icon: Icon(Icons.keyboard_arrow_down_sharp),
-//                         iconSize: 24,
-//                         elevation: 16,
-//                         style: TextStyle(color: kText,fontSize:20.0),
-//
-//                         onChanged: (String newValue) {
-//                           setState(() {
-//                             dropdownValue = newValue;
-//                           });
-//                         },
-//                         items: <String>['Women', 'Men', 'Baby-Boys', 'Baby-Girls', 'Kids-Boys', 'Kids-Girls', 'Teen-Boys', 'Teen-Girls']
-//                             .map<DropdownMenuItem<String>>((String value) {
-//                           return DropdownMenuItem<String>(
-//                             value: value,
-//                             child: Text(value),
-//
-//                           );
-//                         }).toList(),
-//                       ),
-//                     ),
-//                     Container(
-//                       margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0,8.0),
-//                       child: RaisedButton(
-//                         color:kblue,
-//                         child: Text('$value',style:TextStyle(color: Colors.white) ,),
-//                         onPressed: (){
-//                           showModalBottomSheet(context: context, builder:(BuildContext context){
-//
-//
-//                             if(dropdownValue=='Women')
-//                             {
-//                               return
-//                                 WomenCategory();
-//                             }
-//                             else if(dropdownValue=='Men')
-//                             {
-//                               return
-//                                 MenCategory();
-//                             }
-//                             else if(dropdownValue=='Baby-Boys')
-//                             {
-//                               return
-//                                 BabyBCategory();
-//                             }
-//                             else if(dropdownValue== 'Baby-Girls'){
-//                               return
-//                                 BabyGCategory();
-//                             }
-//                             else if(dropdownValue=='Kids-Boys'){
-//                               return
-//                                 KidBCategory();
-//                             }
-//                             else if(dropdownValue=='Kids-Girls'){
-//                               return
-//                                 KidGCategory();
-//                             }
-//                             else if(dropdownValue== 'Teen-Boys'){
-//                               return
-//                                 TeenBCategory();
-//                             }
-//                             else if(dropdownValue=='Teen-Girls'){
-//                               return
-//                                 TeenGCategory();
-//                             }
-//                             else{
-//                               return
-//                                 Text('text');
-//                             }
-//                           },
-//                           );
-//                         }
-//                         ,
-//                       ),
-//                     ),
-//
-//
-//
-//                     SizedBox(height: 8.0,),
-//                     Container(
-//                       // alignment:Alignment.centerLeft,
-//                       child:   FloatingActionButton.extended(
-//                         backgroundColor: kblue,
-//                         onPressed: ()=>custom(),
-//
-//                         label:   Text("Customization/variations",style: TextStyle(fontSize:  SizeConfig.safeBlockHorizontal *5),),
-//                       ),
-//                     ),
-//
-//                     SizedBox(height: 8.0,),          Container(
-//                       // alignment:Alignment.centerLeft,
-//                       child:   FloatingActionButton.extended(
-//                         backgroundColor: kblue,
-//                         onPressed: ()=>tag(),
-//
-//                         label:   Text("Tag other products",style: TextStyle(fontSize:  SizeConfig.safeBlockHorizontal *5),),
-//                       ),
-//                     ),
-//
-//                     SizedBox(height: 8.0,),
-//
-//                     Row(
-//                       mainAxisAlignment:MainAxisAlignment.center,
-//                       children:[
-//                         Container(
-//                           // alignment:Alignment.centerLeft,
-//                           child:   FloatingActionButton.extended(
-//                             backgroundColor: kblue,
-//                             onPressed: ()=>AddSize(),
-//
-//                             label: Text('Specify Quantity',style:TextStyle(color:  Colors.white) ,),
-//                           ),
-//                         ),
-//
-//
-//
-//                         SizedBox(width: 8.0,),Container(
-//                           // alignment:Alignment.centerRight,
-//                           child:   FloatingActionButton.extended(
-//                             backgroundColor: kblue,
-//                             onPressed: ()=>sizeGuide(),
-//                             label: Text('Size Guide',style:TextStyle(color:  Colors.white) ,),
-//                           ),
-//                         ),
-//
-//                       ],
-//                     ),
-//
-//                     SizedBox(height: 8.0,),
-//
-//                     Text("Processing time",  style:TextStyle(color: kText,fontSize:20.0)),
-//                     SizedBox(height: 8.0,),
-//
-//                     Row(
-//                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-//                       children: [
-//                         Expanded(
-//                           child: Padding(
-//                             padding: const EdgeInsets.all(8.0),
-//                             child: TextFormField(
-//                               style:TextStyle(color: kText),
-//                               keyboardType: TextInputType.number,
-//
-//                               controller: durationfromp,
-//                               decoration: InputDecoration(
-//                                 border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
-//                                 enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
-//                                 focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
-//
-//                                 labelText: 'Business days',labelStyle: TextStyle(color: kText),
-//                               ),
-//                               textAlign: TextAlign.center,
-//                               validator: (text) {
-//                                 if ( text.isEmpty) {
-//                                   return 'Processing time is empty';
-//                                 }
-//                                 return null;
-//                               },
-//                             ),
-//                           ),
-//                         ),
-//                         Text("-",  style:TextStyle(color: kText)),
-//
-//                         Expanded(
-//
-//                           child: Padding(
-//                             padding: const EdgeInsets.all(8.0),
-//                             child: TextFormField(
-//                               style:TextStyle(color: kText),
-//                               keyboardType: TextInputType.number,
-//
-//                               controller: durationtop,
-//                               decoration: InputDecoration(
-//                                 border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
-//                                 enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
-//                                 focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
-//
-//                               ),
-//                               textAlign: TextAlign.center,
-//                               validator: (text) {
-//                                 if ( text.isEmpty) {
-//                                   return 'Processing time is empty';
-//                                 }
-//                                 return null;
-//                               },
-//                             ),
-//                           ),
-//                         ),
-//
-//                       ],
-//                     ),
-//                     SizedBox(height: 8.0,),
-//
-//                     ListTile(
-//                       leading: Icon(
-//                         Icons.local_shipping,
-//                         color: Colors.orange,
-//                         size: 35.0,
-//                       ),
-//                       title:Text("Shipping duration to ${currentUser.country}",  style:TextStyle(color: kText)),
-//
-//                     ),
-//                     SizedBox(height: 8.0,),
-//
-//                     Row(
-//                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-//
-//                       children: [
-//                         Expanded(
-//                           child: Padding(
-//                             padding: const EdgeInsets.all(8.0),
-//                             child: TextFormField(
-//                               style:TextStyle(color: kText),
-//                               keyboardType: TextInputType.number,
-//
-//                               controller: durationfrom,
-//                               decoration: InputDecoration(
-//                                 border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
-//                                 enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
-//                                 focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
-//
-//                                 // labelText: 'Between',labelStyle: TextStyle(color: kText),
-//                               ),
-//                               textAlign: TextAlign.center,
-//                               validator: (text) {
-//                                 if ( text.isEmpty) {
-//                                   return 'Shipping duration is empty';
-//                                 }
-//                                 return null;
-//                               },
-//                             ),
-//                           ),
-//                         ),
-//                         Text("-",  style:TextStyle(color: kText)),
-//
-//                         Expanded(
-//
-//                           child: Padding(
-//                             padding: const EdgeInsets.all(8.0),
-//                             child: TextFormField(
-//                               style:TextStyle(color: kText),
-//                               keyboardType: TextInputType.number,
-//
-//                               controller: durationto,
-//                               decoration: InputDecoration(
-//                                 border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
-//                                 enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
-//                                 focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
-//
-//                               ),
-//                               textAlign: TextAlign.center,
-//                               validator: (text) {
-//                                 if ( text.isEmpty) {
-//                                   return 'Shipping duration is empty';
-//                                 }
-//                                 return null;
-//                               },
-//                             ),
-//                           ),
-//                         ),
-//
-//                       ],
-//                     ),
-//                     SizedBox( height: 8.0,),
-//                     Text('Free shipping',style:TextStyle(color: kText)) ,
-//                     SizedBox( height: 8.0,),
-//
-//                     Row(
-//                       mainAxisAlignment:MainAxisAlignment.center,
-//                       children: [
-//                         Text('No'),
-//                         SizedBox( width: 8.0,),
-//
-//                         Switch(
-//                           value: freeship,
-//                           onChanged: (value){setState(() {
-//                             freeship = value;
-//                           });},
-//                           activeColor: Colors.blue,
-//                           activeTrackColor: kPrimaryColor,
-//                         ),
-//                         SizedBox( width: 8.0,),
-//
-//                         Text('Yes')
-//                       ],
-//                     ),
-//
-//                     SizedBox( height: 8.0,),
-//
-//                     !freeship?  Padding(
-//                       padding: const EdgeInsets.all(8.0),
-//                       child: TextFormField(
-//                         style:TextStyle(color: kText),
-//                         keyboardType: TextInputType.number,
-//
-//                         controller: shipcost,
-//                         decoration: InputDecoration(
-//                           border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
-//                           enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
-//                           focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
-//                           hintText:" ${currentUser.currencysym}",
-//
-//                           labelText: '${currentUser.currencysym}Shipping cost',labelStyle: TextStyle(color: kText),
-//
-//                         ),
-//                         textAlign: TextAlign.center,
-//                         validator: (text) {
-//                           if ( freeship==false || text.isEmpty ) {
-//                             return 'Shipping cost is empty';
-//                           }
-//                           return null;
-//                         },
-//                       ),
-//                     ):Container(),
-//
-//                     SizedBox( height: 8.0,),
-//                     Text('Worldwide shipping',style:TextStyle(color: kText)) ,
-//                     SizedBox( height: 8.0,),
-//                     Row(
-//                       mainAxisAlignment:MainAxisAlignment.center,
-//                       children: [
-//                         Text('No'),
-//                         SizedBox( width: 8.0,),
-//
-//                         Switch(
-//                           value: worldship,
-//                           onChanged: (value){setState(() {
-//                             worldship = value;
-//                           });},
-//                           activeColor: Colors.blue,
-//                           activeTrackColor:kPrimaryColor,
-//                         ),
-//                         SizedBox( width: 8.0,),
-//
-//                         Text('Yes')
-//                       ],
-//                     ),
-//                     SizedBox(height: 8.0,),
-//
-//                     worldship ?     Container(
-//                       margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
-//                       child: ListTile(
-//                         leading: Icon(
-//                           Icons.local_shipping,
-//                           color: Colors.orange,
-//                           size: 35.0,
-//                         ),
-//                         title:Text("Shipping duration to worldwide",  style:TextStyle(color: kText)),
-//
-//                       ),
-//                     ):Container(),
-//                     SizedBox(height: 8.0,),
-//
-//                     worldship ?   Row(
-//                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-//
-//                       children: [
-//                         Expanded(
-//                           child: Padding(
-//                             padding: const EdgeInsets.all(8.0),
-//
-//                             child: TextFormField(
-//                               style:TextStyle(color: kText),
-//                               keyboardType: TextInputType.number,
-//
-//                               controller: durationfromw,
-//                               decoration: InputDecoration(
-//                                 border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
-//                                 enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
-//                                 focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
-//
-// // labelText: 'Between',labelStyle: TextStyle(color: kText),
-//                               ),
-//                               textAlign: TextAlign.center,
-//                               validator: (text) {
-//                                 if (worldship==true && text.isEmpty) {
-//                                   return 'Shipping duration is empty';
-//                                 }
-//                                 return null;
-//                               },
-//                             ),
-//                           ),
-//                         ),
-//                         Text("-",  style:TextStyle(color: kText)),
-//
-//                         Expanded(
-//
-//                           child: Padding(
-//                             padding: const EdgeInsets.all(8.0),
-//                             child: TextFormField(
-//                               style:TextStyle(color: kText),
-//                               keyboardType: TextInputType.number,
-//                               controller: durationtow,
-//                               decoration: InputDecoration(
-//                                 border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
-//                                 enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
-//                                 focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
-//
-//                               ),
-//                               textAlign: TextAlign.center,
-//                               validator: (text) {
-//                                 if (worldship==true && text.isEmpty) {
-//                                   return 'Shipping duration is empty';
-//                                 }
-//                                 return null;
-//                               },
-//                             ),
-//                           ),
-//                         ),
-//
-//                       ],
-//                     ):Container(),
-//                     SizedBox( height: 8.0,),
-//                     Text('Free shipping',style:TextStyle(color: kText)) ,
-//
-//                     SizedBox( height: 8.0,),
-//
-//                     worldship ? Row(
-//                       mainAxisAlignment:MainAxisAlignment.center,
-//                       children: [
-//                         Text('No'),
-//                         SizedBox( width: 8.0,),
-//
-//                         Switch(
-//                           value: freeworldship,
-//                           onChanged: (value){setState(() {
-//                             freeworldship = value;
-//                           });},
-//                           activeColor: Colors.blue,
-//                           activeTrackColor:kPrimaryColor,
-//                         ),
-//                         SizedBox( width: 8.0,),
-//
-//                         Text('Yes')
-//                       ],
-//                     ):Container(),
-//
-//                     worldship && freeworldship == false ?   Padding(
-//                       padding: const EdgeInsets.all(8.0),
-//                       child: TextFormField(
-//                         style:TextStyle(color: kText),
-//                         keyboardType: TextInputType.number,
-//
-//                         controller: shipcostintern,
-//                         decoration: InputDecoration(
-//                           border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
-//                           enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
-//                           focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
-//                           hintText:" ${currentUser.currencysym}",
-//
-//                           labelText: 'Shipping cost',labelStyle: TextStyle(color: kText),
-//                         ),
-//                         textAlign: TextAlign.center,
-//                         validator: (text) {
-//                           if ( freeworldship==false && text.isEmpty ) {
-//                             return 'Shipping cost is empty';
-//                           }
-//                           return null;
-//                         },
-//                       ),
-//                     ):Container(),
-//                     SizedBox(height: 8.0,),
-//
-//
-//                     Container(
-//                       margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
-//                       child: ListTile(
-//                         leading: Icon(
-//                           EvilIcons.eye,
-//                           color: Colors.orange,
-//                           size: 35.0,
-//                         ),
-//                         title:  TextFormField(
-//                           style:TextStyle(color: kText),
-//                           controller: productnameController,
-//                           decoration: InputDecoration(
-//                             border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
-//                             enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
-//                             focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
-//
-//                             labelText: 'Product Name',labelStyle: TextStyle(color: kText),
-//                             hintText: 'Product Name',
-//                           ),
-//                           textAlign: TextAlign.center,
-//                           validator: (text) {
-//                             if ( text.isEmpty) {
-//                               return 'Product Name is empty';
-//                             }
-//                             return null;
-//                           },
-//                         ),
-//                       ),
-//                     ),
-//                     SizedBox(height: 8.0,),
-//                     Container(
-//                       margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
-//                       child: ListTile(
-//                         leading: Icon(
-//                           EvilIcons.tag,
-//                           color: Colors.orange,
-//                           size: 35.0,
-//                         ),
-//                         title:TextFormField(
-//                           style:TextStyle(color: kText),
-//                           keyboardType:TextInputType.number,
-//                           controller: priceController,
-//                           decoration: InputDecoration(
-//                             border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
-//                             enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
-//                             focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
-//
-//                             labelText: 'Price',labelStyle: TextStyle(color: kText),
-//                             hintText:" ${currentUser.currencysym}",
-//                           ),
-//                           textAlign: TextAlign.center,
-//                           validator: (text) {
-//                             if (text.isEmpty) {
-//                               return 'Price is empty';
-//                             }
-//                             return null;
-//                           },
-//                         ),
-//                       ),
-//                     ),
-//                     SizedBox( height: 8.0,),
-//
-//                     //Customised
-//                     Container(
-//                       // alignment:Alignment.centerLeft,
-//                       child:   FloatingActionButton.extended(
-//                         backgroundColor: kblue,
-//                         onPressed: ()=>color(),
-//                         label: Text('Add Colors',style:TextStyle(color:  Colors.white) ,),
-//                       ),
-//                     ),
-//
-//                     SizedBox( height: 8.0,),
-//                     Container(
-//                       margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
-//                       child: TextFormField(
-//                         style:TextStyle(color: kText),
-//
-//                         keyboardType: TextInputType.multiline,
-//                         maxLines: null,
-//                         controller: detailsController,
-//                         decoration: InputDecoration(
-//                           border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
-//                           enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
-//                           focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
-//
-//                           labelText: 'Product description',labelStyle: TextStyle(color: kText),
-//                           hintText: 'Product description',
-//                         ),
-//                         textAlign: TextAlign.center,
-//                         validator: (text) {
-//                           if ( text.isEmpty) {
-//                             return 'Description is empty';
-//                           }
-//                           return null;
-//                         },
-//                       ),
-//                     ),
-//                     SizedBox( height: 8.0,),
-//                     Container(
-//                       margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
-//                       child: TextFormField(
-//                         style:TextStyle(color: kText),
-//
-//                         keyboardType: TextInputType.multiline,
-//                         maxLines: null,
-//                         controller: compositionController,
-//                         decoration: InputDecoration(
-//                           border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
-//                           enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
-//                           focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
-//
-//                           labelText: 'Fabric description',labelStyle: TextStyle(color: kText),
-//                           hintText: 'ex.Cotton: 100%' ,
-//                         ),
-//                         textAlign: TextAlign.center,
-//                         validator: (text) {
-//                           if ( text.isEmpty) {
-//                             return 'Fabric description is empty';
-//                           }
-//                           return null;
-//                         },
-//                       ),
-//                     ),
-//                     SizedBox( height: 8.0,),
-//                     Container(
-//                       margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
-//                       child: TextFormField(
-//                         style:TextStyle(color: kText),
-//
-//                         keyboardType: TextInputType.multiline,
-//                         maxLines: null,
-//                         controller: washandcareController,
-//                         decoration: InputDecoration(
-//                           border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
-//                           enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
-//                           focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
-//
-//                           labelText: 'Wash & Care',labelStyle: TextStyle(color: kText),
-//                           hintText: 'Wash & Care instructions',
-//                         ),
-//                         textAlign: TextAlign.center,
-//                         validator: (text) {
-//                           if ( text.isEmpty) {
-//                             return 'Wash & Care instructions is empty';
-//                           }
-//                           return null;
-//                         },
-//                       ),
-//                     ),
-//                     SizedBox( height: 8.0,),
-//                     Container(
-//                       margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
-//                       child: TextFormField(
-//                         style:TextStyle(color: kText),
-//
-//                         keyboardType: TextInputType.multiline,
-//                         maxLines: null,
-//                         controller: sizeandfitController,
-//                         decoration: InputDecoration(
-//                           border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
-//                           enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
-//                           focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
-//
-//                           labelText: 'Size & Fit recommendations',labelStyle: TextStyle(color: kText),
-//                           hintText: 'ex.Cut for slim fit,take your normal size',
-//                         ),
-//                         textAlign: TextAlign.center,
-//                         validator: (text) {
-//                           if ( text.isEmpty) {
-//                             return ' Size & Fit recommendations is empty';
-//                           }
-//                           return null;
-//                         },
-//                       ),
-//                     ),
-//
-//                     SizedBox( height: 8.0,),
-//                     Container(
-//                       margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
-//                       child: TextFormField(
-//                         style:TextStyle(color: kText),
-//
-//                         keyboardType: TextInputType.multiline,
-//                         maxLines: null,
-//                         controller: shipcontroller,
-//                         decoration: InputDecoration(
-//                           border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
-//                           enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
-//                           focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
-//
-//                           labelText: 'Shipping & returns',labelStyle: TextStyle(color: kText),
-//                           hintText: 'countries served & return policy',
-//                         ),
-//                         textAlign: TextAlign.center,
-//                         validator: (text) {
-//                           if ( text.isEmpty) {
-//                             return 'Shipping & returns';
-//                           }
-//                           return null;
-//                         },
-//                       ),
-//                     ),
-//
-//
-//
-//                     SizedBox( height: 8.0,),
-//
-//
-//                   ],
-//                 ),
-//               ),
-//             ),
-//
-//
-//           ],
-//         ),
-//
-//
-//
-//
-//       ),
-//
-//       isUploading ? Center(child:  CircularProgressIndicator()) : Text(""),
-//     ],
-//   ),
-// );
-// }
+
   tagView(){
     return
       StreamBuilder(
@@ -14817,6 +14002,1282 @@ page3(){
       );
 
 }
+page4(){
+    SizeConfig().init(context);
+    return
+      SingleChildScrollView(
+        child: Column(
+          children: <Widget>[
+            Container(
+              height:SizeConfig.screenHeight*0.85,
+
+            child: Column(
+        children: <Widget>[
+
+        ExpansionTile(
+                  title: title1Controller.text == ""?
+                  Text("Title",
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold))
+
+                  :Text("${title1Controller.text}",
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold)),
+                  children: [
+                      SizedBox(height: 8.0,),
+                      Container(
+                        margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+                        child: TextFormField(
+                          style:TextStyle(color: kText),
+                          controller: title1Controller,
+                          decoration: InputDecoration(
+                            border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+                            enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+                            focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+
+                            labelText: 'title',labelStyle: TextStyle(color: kText),
+                            hintText:"Ex:Collar",
+                          ),
+                          textAlign: TextAlign.center,
+
+                        ),
+                      ),
+
+                      getImageWidget01(),
+                      SizedBox(height: 8.0,),
+                      Container(
+                        margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+                        child: TextFormField(
+                          style:TextStyle(color: kText),
+                          keyboardType:TextInputType.number,
+                          controller: custom1,
+                          decoration: InputDecoration(
+                            border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+                            enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+                            focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+
+                            labelText: 'Quantity',labelStyle: TextStyle(color: kText),
+                            hintText:"Quantity in Inventory",
+                          ),
+                          textAlign: TextAlign.center,
+
+                        ),
+                      ),
+
+                      getImageWidget02(),
+                      SizedBox(height: 8.0,),
+                      Container(
+                        margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+                        child: TextFormField(
+                          style:TextStyle(color: kText),
+                          keyboardType:TextInputType.number,
+                          controller: custom2,
+                          decoration: InputDecoration(
+                            border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+                            enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+                            focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+
+                            labelText: 'Quantity',labelStyle: TextStyle(color: kText),
+                            hintText:"Quantity in Inventory",
+                          ),
+                          textAlign: TextAlign.center,
+
+                        ),
+                      ),
+
+                      getImageWidget03(),
+                      SizedBox(height: 8.0,),
+                      Container(
+                        margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+                        child: TextFormField(
+                          style:TextStyle(color: kText),
+                          keyboardType:TextInputType.number,
+                          controller: custom3,
+                          decoration: InputDecoration(
+                            border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+                            enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+                            focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+
+                            labelText: 'Quantity',labelStyle: TextStyle(color: kText),
+                            hintText:"Quantity in Inventory",
+                          ),
+                          textAlign: TextAlign.center,
+
+                        ),
+                      ),
+
+                      getImageWidget04(),
+                      SizedBox(height: 8.0,),
+                      Container(
+                        margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+                        child: TextFormField(
+                          style:TextStyle(color: kText),
+                          keyboardType:TextInputType.number,
+                          controller: custom4,
+                          decoration: InputDecoration(
+                            border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+                            enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+                            focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+
+                            labelText: 'Quantity',labelStyle: TextStyle(color: kText),
+                            hintText:"Quantity in Inventory",
+                          ),
+                          textAlign: TextAlign.center,
+
+                        ),
+                      ),
+
+                      getImageWidget05(),
+                      SizedBox(height: 8.0,),
+                      Container(
+                        margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+                        child: TextFormField(
+                          style:TextStyle(color: kText),
+                          keyboardType:TextInputType.number,
+                          controller: custom5,
+                          decoration: InputDecoration(
+                            border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+                            enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+                            focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+
+                            labelText: 'Quantity',labelStyle: TextStyle(color: kText),
+                            hintText:"Quantity in Inventory",
+                          ),
+                          textAlign: TextAlign.center,
+
+                        ),
+                      ),
+
+                      getImageWidget06(),
+                      SizedBox(height: 8.0,),
+                      Container(
+                        margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+                        child: TextFormField(
+                          style:TextStyle(color: kText),
+                          keyboardType:TextInputType.number,
+                          controller: custom6,
+                          decoration: InputDecoration(
+                            border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+                            enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+                            focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+
+                            labelText: 'Quantity',labelStyle: TextStyle(color: kText),
+                            hintText:"Quantity in Inventory",
+                          ),
+                          textAlign: TextAlign.center,
+
+                        ),
+                      ),
+
+                      getImageWidget07(),
+                      SizedBox(height: 8.0,),
+                      Container(
+                        margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+                        child: TextFormField(
+                          style:TextStyle(color: kText),
+                          keyboardType:TextInputType.number,
+                          controller: custom7,
+                          decoration: InputDecoration(
+                            border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+                            enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+                            focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+
+                            labelText: 'Quantity',labelStyle: TextStyle(color: kText),
+                            hintText:"Quantity in Inventory",
+                          ),
+                          textAlign: TextAlign.center,
+
+                        ),
+                      ),
+
+                      getImageWidget08(),
+                      SizedBox(height: 8.0,),
+                      Container(
+                        margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+                        child: TextFormField(
+                          style:TextStyle(color: kText),
+                          keyboardType:TextInputType.number,
+                          controller: custom8,
+                          decoration: InputDecoration(
+                            border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+                            enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+                            focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+
+                            labelText: 'Quantity',labelStyle: TextStyle(color: kText),
+                            hintText:"Quantity in Inventory",
+                          ),
+                          textAlign: TextAlign.center,
+
+                        ),
+                      ),
+
+                      getImageWidget09(),
+                      SizedBox(height: 8.0,),
+                      Container(
+                        margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+                        child: TextFormField(
+                          style:TextStyle(color: kText),
+                          keyboardType:TextInputType.number,
+                          controller: custom9,
+                          decoration: InputDecoration(
+                            border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+                            enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+                            focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+
+                            labelText: 'Quantity',labelStyle: TextStyle(color: kText),
+                            hintText:"Quantity in Inventory",
+                          ),
+                          textAlign: TextAlign.center,
+
+                        ),
+                      ),
+
+                      getImageWidget010(),
+                      SizedBox(height: 8.0,),
+                      Container(
+                        margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+                        child: TextFormField(
+                          style:TextStyle(color: kText),
+                          keyboardType:TextInputType.number,
+                          controller: custom10,
+                          decoration: InputDecoration(
+                            border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+                            enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+                            focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+
+                            labelText: 'Quantity',labelStyle: TextStyle(color: kText),
+                            hintText:"Quantity in Inventory",
+                          ),
+                          textAlign: TextAlign.center,
+
+                        ),
+                      ),
+
+                   ]
+              ),
+        ExpansionTile(
+                  title: title2Controller.text == ""?
+                  Text("Title",
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold))
+
+                  :Text("${title2Controller.text}",
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold)),
+                  children: [
+                      SizedBox(height: 8.0,),
+                      Container(
+                        margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+                        child: TextFormField(
+                          style:TextStyle(color: kText),
+                          controller: title2Controller,
+                          decoration: InputDecoration(
+                            border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+                            enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+                            focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+
+                            labelText: 'title',labelStyle: TextStyle(color: kText),
+                            hintText:"Ex:Collar",
+                          ),
+                          textAlign: TextAlign.center,
+
+                        ),
+                      ),
+
+                      getImageWidget011(),
+                      SizedBox(height: 8.0,),
+                      Container(
+                        margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+                        child: TextFormField(
+                          style:TextStyle(color: kText),
+                          keyboardType:TextInputType.number,
+                          controller: custom11,
+                          decoration: InputDecoration(
+                            border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+                            enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+                            focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+
+                            labelText: 'Quantity',labelStyle: TextStyle(color: kText),
+                            hintText:"Quantity in Inventory",
+                          ),
+                          textAlign: TextAlign.center,
+
+                        ),
+                      ),
+
+                      getImageWidget012(),
+                      SizedBox(height: 8.0,),
+                      Container(
+                        margin: EdgeInsets.fromLTRB(120.0, 8.0, 20.0,8.0),
+                        child: TextFormField(
+                          style:TextStyle(color: kText),
+                          keyboardType:TextInputType.number,
+                          controller: custom12,
+                          decoration: InputDecoration(
+                            border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+                            enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+                            focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+
+                            labelText: 'Quantity',labelStyle: TextStyle(color: kText),
+                            hintText:"Quantity in Inventory",
+                          ),
+                          textAlign: TextAlign.center,
+
+                        ),
+                      ),
+
+                      getImageWidget013(),
+                      SizedBox(height: 8.0,),
+                      Container(
+                        margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+                        child: TextFormField(
+                          style:TextStyle(color: kText),
+                          keyboardType:TextInputType.number,
+                          controller: custom13,
+                          decoration: InputDecoration(
+                            border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+                            enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+                            focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+
+                            labelText: 'Quantity',labelStyle: TextStyle(color: kText),
+                            hintText:"Quantity in Inventory",
+                          ),
+                          textAlign: TextAlign.center,
+
+                        ),
+                      ),
+
+                      getImageWidget014(),
+                      SizedBox(height: 8.0,),
+                      Container(
+                        margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+                        child: TextFormField(
+                          style:TextStyle(color: kText),
+                          keyboardType:TextInputType.number,
+                          controller: custom14,
+                          decoration: InputDecoration(
+                            border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+                            enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+                            focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+
+                            labelText: 'Quantity',labelStyle: TextStyle(color: kText),
+                            hintText:"Quantity in Inventory",
+                          ),
+                          textAlign: TextAlign.center,
+
+                        ),
+                      ),
+
+                      getImageWidget015(),
+                      SizedBox(height: 8.0,),
+                      Container(
+                        margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+                        child: TextFormField(
+                          style:TextStyle(color: kText),
+                          keyboardType:TextInputType.number,
+                          controller: custom15,
+                          decoration: InputDecoration(
+                            border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+                            enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+                            focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+
+                            labelText: 'Quantity',labelStyle: TextStyle(color: kText),
+                            hintText:"Quantity in Inventory",
+                          ),
+                          textAlign: TextAlign.center,
+
+                        ),
+                      ),
+
+                      getImageWidget016(),
+                      SizedBox(height: 8.0,),
+                      Container(
+                        margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+                        child: TextFormField(
+                          style:TextStyle(color: kText),
+                          keyboardType:TextInputType.number,
+                          controller: custom16,
+                          decoration: InputDecoration(
+                            border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+                            enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+                            focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+
+                            labelText: 'Quantity',labelStyle: TextStyle(color: kText),
+                            hintText:"Quantity in Inventory",
+                          ),
+                          textAlign: TextAlign.center,
+
+                        ),
+                      ),
+
+                      getImageWidget017(),
+                      SizedBox(height: 8.0,),
+                      Container(
+                        margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+                        child: TextFormField(
+                          style:TextStyle(color: kText),
+                          keyboardType:TextInputType.number,
+                          controller: custom17,
+                          decoration: InputDecoration(
+                            border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+                            enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+                            focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+
+                            labelText: 'Quantity',labelStyle: TextStyle(color: kText),
+                            hintText:"Quantity in Inventory",
+                          ),
+                          textAlign: TextAlign.center,
+
+                        ),
+                      ),
+
+                      getImageWidget018(),
+                      SizedBox(height: 8.0,),
+                      Container(
+                        margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+                        child: TextFormField(
+                          style:TextStyle(color: kText),
+                          keyboardType:TextInputType.number,
+                          controller: custom18,
+                          decoration: InputDecoration(
+                            border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+                            enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+                            focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+
+                            labelText: 'Quantity',labelStyle: TextStyle(color: kText),
+                            hintText:"Quantity in Inventory",
+                          ),
+                          textAlign: TextAlign.center,
+
+                        ),
+                      ),
+
+                      getImageWidget019(),
+                      SizedBox(height: 8.0,),
+                      Container(
+                        margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+                        child: TextFormField(
+                          style:TextStyle(color: kText),
+                          keyboardType:TextInputType.number,
+                          controller: custom19,
+                          decoration: InputDecoration(
+                            border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+                            enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+                            focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+
+                            labelText: 'Quantity',labelStyle: TextStyle(color: kText),
+                            hintText:"Quantity in Inventory",
+                          ),
+                          textAlign: TextAlign.center,
+
+                        ),
+                      ),
+
+                      getImageWidget020(),
+                      SizedBox(height: 8.0,),
+                      Container(
+                        margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+                        child: TextFormField(
+                          style:TextStyle(color: kText),
+                          keyboardType:TextInputType.number,
+                          controller: custom20,
+                          decoration: InputDecoration(
+                            border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+                            enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+                            focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+
+                            labelText: 'Quantity',labelStyle: TextStyle(color: kText),
+                            hintText:"Quantity in Inventory",
+                          ),
+                          textAlign: TextAlign.center,
+
+                        ),
+                      ),
+
+                   ]
+              ),
+        ExpansionTile(
+                  title: title3Controller.text == ""?
+                  Text("Title",
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold))
+
+                  :Text("${title3Controller.text}",
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold)),
+                  children: [
+                      SizedBox(height: 8.0,),
+                      Container(
+                        margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+                        child: TextFormField(
+                          style:TextStyle(color: kText),
+                          controller: title3Controller,
+                          decoration: InputDecoration(
+                            border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+                            enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+                            focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+
+                            labelText: 'title',labelStyle: TextStyle(color: kText),
+                            hintText:"Ex:Collar",
+                          ),
+                          textAlign: TextAlign.center,
+
+                        ),
+                      ),
+
+                      getImageWidget021(),
+                      SizedBox(height: 8.0,),
+                      Container(
+                        margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+                        child: TextFormField(
+                          style:TextStyle(color: kText),
+                          keyboardType:TextInputType.number,
+                          controller: custom21,
+                          decoration: InputDecoration(
+                            border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+                            enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+                            focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+
+                            labelText: 'Quantity',labelStyle: TextStyle(color: kText),
+                            hintText:"Quantity in Inventory",
+                          ),
+                          textAlign: TextAlign.center,
+
+                        ),
+                      ),
+
+                      getImageWidget022(),
+                      SizedBox(height: 8.0,),
+                      Container(
+                        margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+                        child: TextFormField(
+                          style:TextStyle(color: kText),
+                          keyboardType:TextInputType.number,
+                          controller: custom22,
+                          decoration: InputDecoration(
+                            border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+                            enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+                            focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+
+                            labelText: 'Quantity',labelStyle: TextStyle(color: kText),
+                            hintText:"Quantity in Inventory",
+                          ),
+                          textAlign: TextAlign.center,
+
+                        ),
+                      ),
+
+                      getImageWidget023(),
+                      SizedBox(height: 8.0,),
+                      Container(
+                        margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+                        child: TextFormField(
+                          style:TextStyle(color: kText),
+                          keyboardType:TextInputType.number,
+                          controller: custom23,
+                          decoration: InputDecoration(
+                            border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+                            enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+                            focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+
+                            labelText: 'Quantity',labelStyle: TextStyle(color: kText),
+                            hintText:"Quantity in Inventory",
+                          ),
+                          textAlign: TextAlign.center,
+
+                        ),
+                      ),
+
+                      getImageWidget024(),
+                      SizedBox(height: 8.0,),
+                      Container(
+                        margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+                        child: TextFormField(
+                          style:TextStyle(color: kText),
+                          keyboardType:TextInputType.number,
+                          controller: custom24,
+                          decoration: InputDecoration(
+                            border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+                            enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+                            focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+
+                            labelText: 'Quantity',labelStyle: TextStyle(color: kText),
+                            hintText:"Quantity in Inventory",
+                          ),
+                          textAlign: TextAlign.center,
+
+                        ),
+                      ),
+
+                      getImageWidget025(),
+                      SizedBox(height: 8.0,),
+                      Container(
+                        margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+                        child: TextFormField(
+                          style:TextStyle(color: kText),
+                          keyboardType:TextInputType.number,
+                          controller: custom25,
+                          decoration: InputDecoration(
+                            border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+                            enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+                            focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+
+                            labelText: 'Quantity',labelStyle: TextStyle(color: kText),
+                            hintText:"Quantity in Inventory",
+                          ),
+                          textAlign: TextAlign.center,
+
+                        ),
+                      ),
+
+                      getImageWidget026(),
+                      SizedBox(height: 8.0,),
+                      Container(
+                        margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+                        child: TextFormField(
+                          style:TextStyle(color: kText),
+                          keyboardType:TextInputType.number,
+                          controller: custom26,
+                          decoration: InputDecoration(
+                            border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+                            enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+                            focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+
+                            labelText: 'Quantity',labelStyle: TextStyle(color: kText),
+                            hintText:"Quantity in Inventory",
+                          ),
+                          textAlign: TextAlign.center,
+
+                        ),
+                      ),
+
+                      getImageWidget027(),
+                      SizedBox(height: 8.0,),
+                      Container(
+                        margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+                        child: TextFormField(
+                          style:TextStyle(color: kText),
+                          keyboardType:TextInputType.number,
+                          controller: custom27,
+                          decoration: InputDecoration(
+                            border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+                            enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+                            focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+
+                            labelText: 'Quantity',labelStyle: TextStyle(color: kText),
+                            hintText:"Quantity in Inventory",
+                          ),
+                          textAlign: TextAlign.center,
+
+                        ),
+                      ),
+
+                      getImageWidget028(),
+                      SizedBox(height: 8.0,),
+                      Container(
+                        margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+                        child: TextFormField(
+                          style:TextStyle(color: kText),
+                          keyboardType:TextInputType.number,
+                          controller: custom28,
+                          decoration: InputDecoration(
+                            border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+                            enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+                            focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+
+                            labelText: 'Quantity',labelStyle: TextStyle(color: kText),
+                            hintText:"Quantity in Inventory",
+                          ),
+                          textAlign: TextAlign.center,
+
+                        ),
+                      ),
+
+                      getImageWidget029(),
+                      SizedBox(height: 8.0,),
+                      Container(
+                        margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+                        child: TextFormField(
+                          style:TextStyle(color: kText),
+                          keyboardType:TextInputType.number,
+                          controller: custom29,
+                          decoration: InputDecoration(
+                            border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+                            enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+                            focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+
+                            labelText: 'Quantity',labelStyle: TextStyle(color: kText),
+                            hintText:"Quantity in Inventory",
+                          ),
+                          textAlign: TextAlign.center,
+
+                        ),
+                      ),
+
+                      getImageWidget030(),
+                      SizedBox(height: 8.0,),
+                      Container(
+                        margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+                        child: TextFormField(
+                          style:TextStyle(color: kText),
+                          keyboardType:TextInputType.number,
+                          controller: custom30,
+                          decoration: InputDecoration(
+                            border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+                            enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+                            focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+
+                            labelText: 'Quantity',labelStyle: TextStyle(color: kText),
+                            hintText:"Quantity in Inventory",
+                          ),
+                          textAlign: TextAlign.center,
+
+                        ),
+                      ),
+
+                   ]
+              ),
+        ExpansionTile(
+                  title: title4Controller.text == ""?
+                  Text("Title",
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold))
+
+                  :Text("${title4Controller.text}",
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold)),
+                  children: [
+                      SizedBox(height: 8.0,),
+                      Container(
+                        margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+                        child: TextFormField(
+                          style:TextStyle(color: kText),
+                          controller: title4Controller,
+                          decoration: InputDecoration(
+                            border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+                            enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+                            focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+
+                            labelText: 'title',labelStyle: TextStyle(color: kText),
+                            hintText:"Ex:Collar",
+                          ),
+                          textAlign: TextAlign.center,
+
+                        ),
+                      ),
+
+                      getImageWidget031(),
+                      SizedBox(height: 8.0,),
+                      Container(
+                        margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+                        child: TextFormField(
+                          style:TextStyle(color: kText),
+                          keyboardType:TextInputType.number,
+                          controller: custom31,
+                          decoration: InputDecoration(
+                            border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+                            enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+                            focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+
+                            labelText: 'Quantity',labelStyle: TextStyle(color: kText),
+                            hintText:"Quantity in Inventory",
+                          ),
+                          textAlign: TextAlign.center,
+
+                        ),
+                      ),
+
+                      getImageWidget032(),
+                      SizedBox(height: 8.0,),
+                      Container(
+                        margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+                        child: TextFormField(
+                          style:TextStyle(color: kText),
+                          keyboardType:TextInputType.number,
+                          controller: custom32,
+                          decoration: InputDecoration(
+                            border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+                            enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+                            focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+
+                            labelText: 'Quantity',labelStyle: TextStyle(color: kText),
+                            hintText:"Quantity in Inventory",
+                          ),
+                          textAlign: TextAlign.center,
+
+                        ),
+                      ),
+
+                      getImageWidget033(),
+                      SizedBox(height: 8.0,),
+                      Container(
+                        margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+                        child: TextFormField(
+                          style:TextStyle(color: kText),
+                          keyboardType:TextInputType.number,
+                          controller: custom33,
+                          decoration: InputDecoration(
+                            border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+                            enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+                            focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+
+                            labelText: 'Quantity',labelStyle: TextStyle(color: kText),
+                            hintText:"Quantity in Inventory",
+                          ),
+                          textAlign: TextAlign.center,
+
+                        ),
+                      ),
+
+                      getImageWidget034(),
+                      SizedBox(height: 8.0,),
+                      Container(
+                        margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+                        child: TextFormField(
+                          style:TextStyle(color: kText),
+                          keyboardType:TextInputType.number,
+                          controller: custom34,
+                          decoration: InputDecoration(
+                            border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+                            enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+                            focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+
+                            labelText: 'Quantity',labelStyle: TextStyle(color: kText),
+                            hintText:"Quantity in Inventory",
+                          ),
+                          textAlign: TextAlign.center,
+
+                        ),
+                      ),
+
+                      getImageWidget035(),
+                      SizedBox(height: 8.0,),
+                      Container(
+                        margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+                        child: TextFormField(
+                          style:TextStyle(color: kText),
+                          keyboardType:TextInputType.number,
+                          controller: custom35,
+                          decoration: InputDecoration(
+                            border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+                            enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+                            focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+
+                            labelText: 'Quantity',labelStyle: TextStyle(color: kText),
+                            hintText:"Quantity in Inventory",
+                          ),
+                          textAlign: TextAlign.center,
+
+                        ),
+                      ),
+
+                      getImageWidget036(),
+                      SizedBox(height: 8.0,),
+                      Container(
+                        margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+                        child: TextFormField(
+                          style:TextStyle(color: kText),
+                          keyboardType:TextInputType.number,
+                          controller: custom36,
+                          decoration: InputDecoration(
+                            border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+                            enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+                            focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+
+                            labelText: 'Quantity',labelStyle: TextStyle(color: kText),
+                            hintText:"Quantity in Inventory",
+                          ),
+                          textAlign: TextAlign.center,
+
+                        ),
+                      ),
+
+                      getImageWidget037(),
+                      SizedBox(height: 8.0,),
+                      Container(
+                        margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+                        child: TextFormField(
+                          style:TextStyle(color: kText),
+                          keyboardType:TextInputType.number,
+                          controller: custom37,
+                          decoration: InputDecoration(
+                            border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+                            enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+                            focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+
+                            labelText: 'Quantity',labelStyle: TextStyle(color: kText),
+                            hintText:"Quantity in Inventory",
+                          ),
+                          textAlign: TextAlign.center,
+
+                        ),
+                      ),
+
+                      getImageWidget038(),
+                      SizedBox(height: 8.0,),
+                      Container(
+                        margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+                        child: TextFormField(
+                          style:TextStyle(color: kText),
+                          keyboardType:TextInputType.number,
+                          controller: custom38,
+                          decoration: InputDecoration(
+                            border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+                            enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+                            focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+
+                            labelText: 'Quantity',labelStyle: TextStyle(color: kText),
+                            hintText:"Quantity in Inventory",
+                          ),
+                          textAlign: TextAlign.center,
+
+                        ),
+                      ),
+
+                      getImageWidget039(),
+                      SizedBox(height: 8.0,),
+                      Container(
+                        margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+                        child: TextFormField(
+                          style:TextStyle(color: kText),
+                          keyboardType:TextInputType.number,
+                          controller: custom39,
+                          decoration: InputDecoration(
+                            border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+                            enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+                            focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+
+                            labelText: 'Quantity',labelStyle: TextStyle(color: kText),
+                            hintText:"Quantity in Inventory",
+                          ),
+                          textAlign: TextAlign.center,
+
+                        ),
+                      ),
+
+                      getImageWidget040(),
+                      SizedBox(height: 8.0,),
+                      Container(
+                        margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+                        child: TextFormField(
+                          style:TextStyle(color: kText),
+                          keyboardType:TextInputType.number,
+                          controller: custom40,
+                          decoration: InputDecoration(
+                            border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+                            enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+                            focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+
+                            labelText: 'Quantity',labelStyle: TextStyle(color: kText),
+                            hintText:"Quantity in Inventory",
+                          ),
+                          textAlign: TextAlign.center,
+
+                        ),
+                      ),
+
+                   ]
+              ),
+        ExpansionTile(
+                  title: title5Controller.text == ""?
+                  Text("Title",
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold))
+
+                  :Text("${title5Controller.text}",
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold)),
+                  children: [
+                      SizedBox(height: 8.0,),
+                      Container(
+                        margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+                        child: TextFormField(
+                          style:TextStyle(color: kText),
+                          controller: title5Controller,
+                          decoration: InputDecoration(
+                            border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+                            enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+                            focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+
+                            labelText: 'title',labelStyle: TextStyle(color: kText),
+                            hintText:"Ex:Collar",
+                          ),
+                          textAlign: TextAlign.center,
+
+                        ),
+                      ),
+
+                      getImageWidget041(),
+                      SizedBox(height: 8.0,),
+                      Container(
+                        margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+                        child: TextFormField(
+                          style:TextStyle(color: kText),
+                          keyboardType:TextInputType.number,
+                          controller: custom41,
+                          decoration: InputDecoration(
+                            border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+                            enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+                            focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+
+                            labelText: 'Quantity',labelStyle: TextStyle(color: kText),
+                            hintText:"Quantity in Inventory",
+                          ),
+                          textAlign: TextAlign.center,
+
+                        ),
+                      ),
+
+                      getImageWidget042(),
+                      SizedBox(height: 8.0,),
+                      Container(
+                        margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+                        child: TextFormField(
+                          style:TextStyle(color: kText),
+                          keyboardType:TextInputType.number,
+                          controller: custom42,
+                          decoration: InputDecoration(
+                            border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+                            enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+                            focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+
+                            labelText: 'Quantity',labelStyle: TextStyle(color: kText),
+                            hintText:"Quantity in Inventory",
+                          ),
+                          textAlign: TextAlign.center,
+
+                        ),
+                      ),
+
+                      getImageWidget043(),
+                      SizedBox(height: 8.0,),
+                      Container(
+                        margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+                        child: TextFormField(
+                          style:TextStyle(color: kText),
+                          keyboardType:TextInputType.number,
+                          controller: custom43,
+                          decoration: InputDecoration(
+                            border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+                            enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+                            focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+
+                            labelText: 'Quantity',labelStyle: TextStyle(color: kText),
+                            hintText:"Quantity in Inventory",
+                          ),
+                          textAlign: TextAlign.center,
+
+                        ),
+                      ),
+
+                      getImageWidget044(),
+                      SizedBox(height: 8.0,),
+                      Container(
+                        margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+                        child: TextFormField(
+                          style:TextStyle(color: kText),
+                          keyboardType:TextInputType.number,
+                          controller: custom44,
+                          decoration: InputDecoration(
+                            border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+                            enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+                            focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+
+                            labelText: 'Quantity',labelStyle: TextStyle(color: kText),
+                            hintText:"Quantity in Inventory",
+                          ),
+                          textAlign: TextAlign.center,
+
+                        ),
+                      ),
+
+                      getImageWidget045(),
+                      SizedBox(height: 8.0,),
+                      Container(
+                        margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+                        child: TextFormField(
+                          style:TextStyle(color: kText),
+                          keyboardType:TextInputType.number,
+                          controller: custom45,
+                          decoration: InputDecoration(
+                            border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+                            enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+                            focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+
+                            labelText: 'Quantity',labelStyle: TextStyle(color: kText),
+                            hintText:"Quantity in Inventory",
+                          ),
+                          textAlign: TextAlign.center,
+
+                        ),
+                      ),
+
+                      getImageWidget046(),
+                      SizedBox(height: 8.0,),
+                      Container(
+                        margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+                        child: TextFormField(
+                          style:TextStyle(color: kText),
+                          keyboardType:TextInputType.number,
+                          controller: custom46,
+                          decoration: InputDecoration(
+                            border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+                            enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+                            focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+
+                            labelText: 'Quantity',labelStyle: TextStyle(color: kText),
+                            hintText:"Quantity in Inventory",
+                          ),
+                          textAlign: TextAlign.center,
+
+                        ),
+                      ),
+
+                      getImageWidget047(),
+                      SizedBox(height: 8.0,),
+                      Container(
+                        margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+                        child: TextFormField(
+                          style:TextStyle(color: kText),
+                          keyboardType:TextInputType.number,
+                          controller: custom47,
+                          decoration: InputDecoration(
+                            border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+                            enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+                            focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+
+                            labelText: 'Quantity',labelStyle: TextStyle(color: kText),
+                            hintText:"Quantity in Inventory",
+                          ),
+                          textAlign: TextAlign.center,
+
+                        ),
+                      ),
+
+                      getImageWidget048(),
+                      SizedBox(height: 8.0,),
+                      Container(
+                        margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+                        child: TextFormField(
+                          style:TextStyle(color: kText),
+                          keyboardType:TextInputType.number,
+                          controller: custom48,
+                          decoration: InputDecoration(
+                            border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+                            enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+                            focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+
+                            labelText: 'Quantity',labelStyle: TextStyle(color: kText),
+                            hintText:"Quantity in Inventory",
+                          ),
+                          textAlign: TextAlign.center,
+
+                        ),
+                      ),
+
+                      getImageWidget049(),
+                      SizedBox(height: 8.0,),
+                      Container(
+                        margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+                        child: TextFormField(
+                          style:TextStyle(color: kText),
+                          keyboardType:TextInputType.number,
+                          controller: custom49,
+                          decoration: InputDecoration(
+                            border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+                            enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+                            focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+
+                            labelText: 'Quantity',labelStyle: TextStyle(color: kText),
+                            hintText:"Quantity in Inventory",
+                          ),
+                          textAlign: TextAlign.center,
+
+                        ),
+                      ),
+
+                      getImageWidget050(),
+                      SizedBox(height: 8.0,),
+                      Container(
+                        margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+                        child: TextFormField(
+                          style:TextStyle(color: kText),
+                          keyboardType:TextInputType.number,
+                          controller: custom50,
+                          decoration: InputDecoration(
+                            border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+                            enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+                            focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+
+                            labelText: 'Quantity',labelStyle: TextStyle(color: kText),
+                            hintText:"Quantity in Inventory",
+                          ),
+                          textAlign: TextAlign.center,
+
+                        ),
+                      ),
+
+                   ]
+              ),
+
+
+        ])
+            ),
+            Container(
+                height:SizeConfig.screenHeight*0.05,
+                child:Row(
+                  children: [
+                    InkWell(
+                      onTap: (){
+                        pageController.animateToPage(--pageChanged, duration: Duration(milliseconds: 250), curve: Curves.bounceInOut);
+                      },
+                      child: FittedBox(
+                        fit:  BoxFit.fitHeight,
+                        child: Container(
+                          alignment:Alignment.center,
+                          width:SizeConfig.blockSizeHorizontal*50,
+                          height:SizeConfig.screenHeight*0.05,
+
+                          //icon: Icon(Icons.drag_handle),
+                          child:Text("Previous",style:TextStyle(color: Colors.black)),
+
+                        ),
+                      ),
+                    ),
+                    InkWell(
+                      onTap: (){
+                        pageController.animateToPage(++pageChanged,
+                            duration: Duration(milliseconds: 250),
+                            curve: Curves.bounceInOut);
+                      },
+                      child: FittedBox(
+                        fit:  BoxFit.fitHeight,
+                        child: Container(
+                          alignment:Alignment.center,
+                          height:SizeConfig.screenHeight*0.05,
+
+                          width:SizeConfig.blockSizeHorizontal*50,
+
+                          //icon: Icon(Icons.drag_handle),
+                          child:Text("Next",style:TextStyle(color: Colors.black)),
+
+                        ),
+                      ),
+                    ),
+
+
+                  ],
+                )),
+
+
+
+
+          ],
+                ),
+      );
+
+}
+
 page2(){
     return
   Form(
@@ -15235,51 +15696,61 @@ page2(){
     setState(() {
 
 
-      inrtousd = resultUSD.rate;
-      inrtousd1 = resultUSD1.rate;
-      inrtousd2 = resultUSD2.rate;
-      inrtousd3 = resultUSD3.rate;
-      inrtousd4 = resultUSD4.rate;
-      inrtousd5 = resultUSD5.rate;
-      inrtousd6 = resultUSD6.rate;
-      inrtousd7 = resultUSD7.rate;
-      inrtousd8 = resultUSD8.rate;
-      inrtousd9 = resultUSD9.rate;
-      inrtousd10 = resultUSD10.rate;
-      inrtousd11 = resultUSD11.rate;
-      inrtousd12 = resultUSD12.rate;
+      INR = userPrice?? 0.00001;
+      INR1 = userPrice1?? 0.00001;
+      INR2 = userPrice2?? 0.00001;
+      INR3 = userPrice3?? 0.00001;
+      INR4 = userPrice4?? 0.00001;
+      INR5 = userPrice5?? 0.00001;
+      INR6 = userPrice6?? 0.00001;
+      INR7 = userPrice7?? 0.00001;
+      INR8 = userPrice8?? 0.00001;
+      INR9 = userPrice9?? 0.00001;
+      INR10 = userPrice10?? 0.00001;
+      INR11 = userPrice11?? 0.00001;
+      INR12 = userPrice12?? 0.00001;
+      
+       USD = resultUSD.rate?? 0.00001;
+      USD1 = resultUSD1.rate?? 0.00001;
+      USD2 = resultUSD2.rate?? 0.00001;
+      USD3 = resultUSD3.rate?? 0.00001;
+      USD4 = resultUSD4.rate?? 0.00001;
+      USD5 = resultUSD5.rate?? 0.00001;
+      USD6 = resultUSD6.rate?? 0.00001;
+      USD7 = resultUSD7.rate?? 0.00001;
+      USD8 = resultUSD8.rate?? 0.00001;
+      USD9 = resultUSD9.rate?? 0.00001;
+      USD10 = resultUSD10.rate?? 0.00001;
+      USD11 = resultUSD11.rate?? 0.00001;
+      USD12 = resultUSD12.rate?? 0.00001;
 
-      inrtoeur = resultEUR.rate;
+      EUR = resultEUR.rate?? 0.00001;
+      EUR1 = resultEUR1.rate?? 0.00001;
+      EUR2 = resultEUR2.rate?? 0.00001;
+      EUR3 = resultEUR3.rate?? 0.00001;
+      EUR4 = resultEUR4.rate?? 0.00001;
+      EUR5 = resultEUR5.rate?? 0.00001;
+      EUR6 = resultEUR6.rate?? 0.00001;
+      EUR7 = resultEUR7.rate?? 0.00001;
+      EUR8 = resultEUR8.rate?? 0.00001;
+      EUR9 = resultEUR9.rate?? 0.00001;
+      EUR10 = resultEUR10.rate?? 0.00001;
+      EUR11 = resultEUR11.rate?? 0.00001;
+      EUR12 = resultEUR12.rate?? 0.00001;
 
-      inrtoeur1 = resultEUR1.rate;
-
-      inrtoeur2 = resultEUR2.rate;
-      inrtoeur3 = resultEUR3.rate;
-      inrtoeur4 = resultEUR4.rate;
-      inrtoeur5 = resultEUR5.rate;
-      inrtoeur6 = resultEUR6.rate;
-      inrtoeur7 = resultEUR7.rate;
-      inrtoeur8 = resultEUR8.rate;
-      inrtoeur9 = resultEUR9.rate;
-      inrtoeur10 = resultEUR10.rate;
-      inrtoeur11 = resultEUR11.rate;
-      inrtoeur12 = resultEUR12.rate;
-
-      inrtogbp = resultGBP.rate;
-
-      inrtogbp1 = resultGBP1.rate;
-
-      inrtogbp2 = resultGBP2.rate;
-      inrtogbp3 = resultGBP3.rate;
-      inrtogbp4 = resultGBP4.rate;
-      inrtogbp5 = resultGBP5.rate;
-      inrtogbp6 = resultGBP6.rate;
-      inrtogbp7 = resultGBP7.rate;
-      inrtogbp8 = resultGBP8.rate;
-      inrtogbp9 = resultGBP9.rate;
-      inrtogbp10 = resultGBP10.rate;
-      inrtogbp11 = resultGBP11.rate;
-      inrtogbp12 = resultGBP12.rate;
+      GBP = resultGBP.rate?? 0.00001;
+      GBP1 = resultGBP1.rate?? 0.00001;
+      GBP2 = resultGBP2.rate?? 0.00001;
+      GBP3 = resultGBP3.rate?? 0.00001;
+      GBP4 = resultGBP4.rate?? 0.00001;
+      GBP5 = resultGBP5.rate?? 0.00001;
+      GBP6 = resultGBP6.rate?? 0.00001;
+      GBP7 = resultGBP7.rate?? 0.00001;
+      GBP8 = resultGBP8.rate?? 0.00001;
+      GBP9 = resultGBP9.rate?? 0.00001;
+      GBP10 = resultGBP10.rate?? 0.00001;
+      GBP11 = resultGBP11.rate?? 0.00001;
+      GBP12 = resultGBP12.rate?? 0.00001;
 
 
     });
@@ -15367,50 +15838,61 @@ page2(){
 
     // String date = result.date; // Returns the last updated date
     setState(() {
+      EUR = userPrice?? 0.00001;
+      EUR1 = userPrice1?? 0.00001;
+      EUR2 = userPrice2?? 0.00001;
+      EUR3 = userPrice3?? 0.00001;
+      EUR4 = userPrice4?? 0.00001;
+      EUR5 = userPrice5?? 0.00001;
+      EUR6 = userPrice6?? 0.00001;
+      EUR7 = userPrice7?? 0.00001;
+      EUR8 = userPrice8?? 0.00001;
+      EUR9 = userPrice9?? 0.00001;
+      EUR10 = userPrice10?? 0.00001;
+      EUR11 = userPrice11?? 0.00001;
+      EUR12 = userPrice12?? 0.00001;
 
-      eurtousd = resultUSD.rate;
+      USD = resultUSD.rate?? 0.00001;
+      USD1 = resultUSD1.rate?? 0.00001;
+      USD2 = resultUSD2.rate?? 0.00001;
+      USD3 = resultUSD3.rate?? 0.00001;
+      USD4 = resultUSD4.rate?? 0.00001;
+      USD5 = resultUSD5.rate?? 0.00001;
+      USD6 = resultUSD6.rate?? 0.00001;
+      USD7 = resultUSD7.rate?? 0.00001;
+      USD8 = resultUSD8.rate?? 0.00001;
+      USD9 = resultUSD9.rate?? 0.00001;
+      USD10 = resultUSD10.rate?? 0.00001;
+      USD11 = resultUSD11.rate?? 0.00001;
+      USD12 = resultUSD12.rate?? 0.00001;
 
-      eurtousd1 = resultUSD1.rate;
+      INR = resultINR.rate?? 0.00001;
+      INR1 = resultINR1.rate?? 0.00001;
+      INR2 = resultINR2.rate?? 0.00001;
+      INR3 = resultINR3.rate?? 0.00001;
+      INR4 = resultINR4.rate?? 0.00001;
+      INR5 = resultINR5.rate?? 0.00001;
+      INR6 = resultINR6.rate?? 0.00001;
+      INR7 = resultINR7.rate?? 0.00001;
+      INR8 = resultINR8.rate?? 0.00001;
+      INR9 = resultINR9.rate?? 0.00001;
+      INR10 = resultINR10.rate?? 0.00001;
+      INR11 = resultINR11.rate?? 0.00001;
+      INR12 = resultINR12.rate?? 0.00001;
 
-      eurtousd2 = resultUSD2.rate;
-      eurtousd3 = resultUSD3.rate;
-      eurtousd4 = resultUSD4.rate;
-      eurtousd5 = resultUSD5.rate;
-      eurtousd6 = resultUSD6.rate;
-      eurtousd7 = resultUSD7.rate;
-      eurtousd8 = resultUSD8.rate;
-      eurtousd9 = resultUSD9.rate;
-      eurtousd10 = resultUSD10.rate;
-      eurtousd11 = resultUSD11.rate;
-      eurtousd12 = resultUSD12.rate;
-
-      eurtoinr = resultINR.rate;
-      eurtoinr1 = resultINR1.rate;
-      eurtoinr2 = resultINR2.rate;
-      eurtoinr3 = resultINR3.rate;
-      eurtoinr4 = resultINR4.rate;
-      eurtoinr5 = resultINR5.rate;
-      eurtoinr6 = resultINR6.rate;
-      eurtoinr7 = resultINR7.rate;
-      eurtoinr8 = resultINR8.rate;
-      eurtoinr9 = resultINR9.rate;
-      eurtoinr10 = resultINR10.rate;
-      eurtoinr11 = resultINR11.rate;
-      eurtoinr12 = resultINR12.rate;
-
-      eurtogbp = resultGBP.rate;
-      eurtogbp1 = resultGBP1.rate;
-      eurtogbp2 = resultGBP2.rate;
-      eurtogbp3 = resultGBP3.rate;
-      eurtogbp4 = resultGBP4.rate;
-      eurtogbp5 = resultGBP5.rate;
-      eurtogbp6 = resultGBP6.rate;
-      eurtogbp7 = resultGBP7.rate;
-      eurtogbp8 = resultGBP8.rate;
-      eurtogbp9 = resultGBP9.rate;
-      eurtogbp10 = resultGBP10.rate;
-      eurtogbp11 = resultGBP11.rate;
-      eurtogbp12 = resultGBP12.rate;
+      GBP = resultGBP.rate?? 0.00001;
+      GBP1 = resultGBP1.rate?? 0.00001;
+      GBP2 = resultGBP2.rate?? 0.00001;
+      GBP3 = resultGBP3.rate?? 0.00001;
+      GBP4 = resultGBP4.rate?? 0.00001;
+      GBP5 = resultGBP5.rate?? 0.00001;
+      GBP6 = resultGBP6.rate?? 0.00001;
+      GBP7 = resultGBP7.rate?? 0.00001;
+      GBP8 = resultGBP8.rate?? 0.00001;
+      GBP9 = resultGBP9.rate?? 0.00001;
+      GBP10 = resultGBP10.rate?? 0.00001;
+      GBP11 = resultGBP11.rate?? 0.00001;
+      GBP12 = resultGBP12.rate?? 0.00001;
 
 
     });
@@ -15497,48 +15979,61 @@ page2(){
 
       // String date = result.date; // Returns the last updated date
       setState(() {
+        GBP = userPrice?? 0.00001;
+        GBP1 = userPrice1?? 0.00001;
+        GBP2 = userPrice2?? 0.00001;
+        GBP3 = userPrice3?? 0.00001;
+        GBP4 = userPrice4?? 0.00001;
+        GBP5 = userPrice5?? 0.00001;
+        GBP6 = userPrice6?? 0.00001;
+        GBP7 = userPrice7?? 0.00001;
+        GBP8 = userPrice8?? 0.00001;
+        GBP9 = userPrice9?? 0.00001;
+        GBP10 = userPrice10?? 0.00001;
+        GBP11 = userPrice11?? 0.00001;
+        GBP12 = userPrice12?? 0.00001;
 
-        gbptousd = resultUSD.rate;
-        gbptousd1 = resultUSD1.rate;
-        gbptousd2 = resultUSD2.rate;
-        gbptousd3 = resultUSD3.rate;
-        gbptousd4 = resultUSD4.rate;
-        gbptousd5 = resultUSD5.rate;
-        gbptousd6 = resultUSD6.rate;
-        gbptousd7 = resultUSD7.rate;
-        gbptousd8 = resultUSD8.rate;
-        gbptousd9 = resultUSD9.rate;
-        gbptousd10 = resultUSD10.rate;
-        gbptousd11 = resultUSD11.rate;
-        gbptousd12 = resultUSD12.rate;
+        USD = resultUSD.rate?? 0.00001;
+        USD1 = resultUSD1.rate?? 0.00001;
+        USD2 = resultUSD2.rate?? 0.00001;
+        USD3 = resultUSD3.rate?? 0.00001;
+        USD4 = resultUSD4.rate?? 0.00001;
+        USD5 = resultUSD5.rate?? 0.00001;
+        USD6 = resultUSD6.rate?? 0.00001;
+        USD7 = resultUSD7.rate?? 0.00001;
+        USD8 = resultUSD8.rate?? 0.00001;
+        USD9 = resultUSD9.rate?? 0.00001;
+        USD10 = resultUSD10.rate?? 0.00001;
+        USD11 = resultUSD11.rate?? 0.00001;
+        USD12 = resultUSD12.rate?? 0.00001;
 
-        gbptoinr = resultINR.rate;
-        gbptoinr1 = resultINR1.rate;
-        gbptoinr2 = resultINR2.rate;
-        gbptoinr3 = resultINR3.rate;
-        gbptoinr4 = resultINR4.rate;
-        gbptoinr5 = resultINR5.rate;
-        gbptoinr6 = resultINR6.rate;
-        gbptoinr7 = resultINR7.rate;
-        gbptoinr8 = resultINR8.rate;
-        gbptoinr9 = resultINR9.rate;
-        gbptoinr10 = resultINR10.rate;
-        gbptoinr11 = resultINR11.rate;
-        gbptoinr12 = resultINR12.rate;
+        INR = resultINR.rate?? 0.00001;
+        INR1 = resultINR1.rate?? 0.00001;
+        INR2 = resultINR2.rate?? 0.00001;
+        INR3 = resultINR3.rate?? 0.00001;
+        INR4 = resultINR4.rate?? 0.00001;
+        INR5 = resultINR5.rate?? 0.00001;
+        INR6 = resultINR6.rate?? 0.00001;
+        INR7 = resultINR7.rate?? 0.00001;
+        INR8 = resultINR8.rate?? 0.00001;
+        INR9 = resultINR9.rate?? 0.00001;
+        INR10 = resultINR10.rate?? 0.00001;
+        INR11 = resultINR11.rate?? 0.00001;
+        INR12 = resultINR12.rate?? 0.00001;
 
-        gbptoeur = resultEUR.rate;
-        gbptoeur1 = resultEUR1.rate;
-        gbptoeur2 = resultEUR2.rate;
-        gbptoeur3 = resultEUR3.rate;
-        gbptoeur4 = resultEUR4.rate;
-        gbptoeur5 = resultEUR5.rate;
-        gbptoeur6 = resultEUR6.rate;
-        gbptoeur7 = resultEUR7.rate;
-        gbptoeur8 = resultEUR8.rate;
-        gbptoeur9 = resultEUR9.rate;
-        gbptoeur10 = resultEUR10.rate;
-        gbptoeur11 = resultEUR11.rate;
-        gbptoeur12 = resultEUR12.rate;
+        EUR = resultEUR.rate?? 0.00001;
+        EUR1 = resultEUR1.rate?? 0.00001;
+        EUR2 = resultEUR2.rate?? 0.00001;
+        EUR3 = resultEUR3.rate?? 0.00001;
+        EUR4 = resultEUR4.rate?? 0.00001;
+        EUR5 = resultEUR5.rate?? 0.00001;
+        EUR6 = resultEUR6.rate?? 0.00001;
+        EUR7 = resultEUR7.rate?? 0.00001;
+        EUR8 = resultEUR8.rate?? 0.00001;
+        EUR9 = resultEUR9.rate?? 0.00001;
+        EUR10 = resultEUR10.rate?? 0.00001;
+        EUR11 = resultEUR11.rate?? 0.00001;
+        EUR12 = resultEUR12.rate?? 0.00001;
 
 
       });
@@ -15625,48 +16120,60 @@ var resultGBP = await Currency.getConversion(
 
       // String date = result.date; // Returns the last updated date
       setState(() {
+        USD = userPrice?? 0.00001;
+        USD1 = userPrice1?? 0.00001;
+        USD2 = userPrice2?? 0.00001;
+        USD3 = userPrice3?? 0.00001;
+        USD4 = userPrice4?? 0.00001;
+        USD5 = userPrice5?? 0.00001;
+        USD6 = userPrice6?? 0.00001;
+        USD7 = userPrice7?? 0.00001;
+        USD8 = userPrice8?? 0.00001;
+        USD9 = userPrice9?? 0.00001;
+        USD10 = userPrice10?? 0.00001;
+        USD11 = userPrice11?? 0.00001;
+        USD12 = userPrice12?? 0.00001;
+        INR = resultINR.rate?? 0.00001;
+        INR1 = resultINR1.rate?? 0.00001;
+        INR2 = resultINR2.rate?? 0.00001;
+        INR3 = resultINR3.rate?? 0.00001;
+        INR4 = resultINR4.rate?? 0.00001;
+        INR5 = resultINR5.rate?? 0.00001;
+        INR6 = resultINR6.rate?? 0.00001;
+        INR7 = resultINR7.rate?? 0.00001;
+        INR8 = resultINR8.rate?? 0.00001;
+        INR9 = resultINR9.rate?? 0.00001;
+        INR10 = resultINR10.rate?? 0.00001;
+        INR11 = resultINR11.rate?? 0.00001;
+        INR12 = resultINR12.rate?? 0.00001;
 
-        usdtoinr = resultINR.rate;
-        usdtoinr1 = resultINR1.rate;
-        usdtoinr2 = resultINR2.rate;
-        usdtoinr3 = resultINR3.rate;
-        usdtoinr4 = resultINR4.rate;
-        usdtoinr5 = resultINR5.rate;
-        usdtoinr6 = resultINR6.rate;
-        usdtoinr7 = resultINR7.rate;
-        usdtoinr8 = resultINR8.rate;
-        usdtoinr9 = resultINR9.rate;
-        usdtoinr10 = resultINR10.rate;
-        usdtoinr11 = resultINR11.rate;
-        usdtoinr12 = resultINR12.rate;
+        EUR = resultEUR.rate?? 0.00001;
+        EUR1 = resultEUR1.rate?? 0.00001;
+        EUR2 = resultEUR2.rate?? 0.00001;
+        EUR3 = resultEUR3.rate?? 0.00001;
+        EUR4 = resultEUR4.rate?? 0.00001;
+        EUR5 = resultEUR5.rate?? 0.00001;
+        EUR6 = resultEUR6.rate?? 0.00001;
+        EUR7 = resultEUR7.rate?? 0.00001;
+        EUR8 = resultEUR8.rate?? 0.00001;
+        EUR9 = resultEUR9.rate?? 0.00001;
+        EUR10 = resultEUR10.rate?? 0.00001;
+        EUR11 = resultEUR11.rate?? 0.00001;
+        EUR12 = resultEUR12.rate?? 0.00001;
 
-        usdtoeur = resultEUR.rate;
-        usdtoeur1 = resultEUR1.rate;
-        usdtoeur2 = resultEUR2.rate;
-        usdtoeur3 = resultEUR3.rate;
-        usdtoeur4 = resultEUR4.rate;
-        usdtoeur5 = resultEUR5.rate;
-        usdtoeur6 = resultEUR6.rate;
-        usdtoeur7 = resultEUR7.rate;
-        usdtoeur8 = resultEUR8.rate;
-        usdtoeur9 = resultEUR9.rate;
-        usdtoeur10 = resultEUR10.rate;
-        usdtoeur11 = resultEUR11.rate;
-        usdtoeur12 = resultEUR12.rate;
-
-        usdtogbp = resultGBP.rate;
-        usdtogbp1 = resultGBP1.rate;
-        usdtogbp2 = resultGBP2.rate;
-        usdtogbp3 = resultGBP3.rate;
-        usdtogbp4 = resultGBP4.rate;
-        usdtogbp5 = resultGBP5.rate;
-        usdtogbp6 = resultGBP6.rate;
-        usdtogbp7 = resultGBP7.rate;
-        usdtogbp8 = resultGBP8.rate;
-        usdtogbp9 = resultGBP9.rate;
-        usdtogbp10 = resultGBP10.rate;
-        usdtogbp11 = resultGBP11.rate;
-        usdtogbp12 = resultGBP12.rate;
+        GBP = resultGBP.rate?? 0.00001;
+        GBP1 = resultGBP1.rate?? 0.00001;
+        GBP2 = resultGBP2.rate?? 0.00001;
+        GBP3 = resultGBP3.rate?? 0.00001;
+        GBP4 = resultGBP4.rate?? 0.00001;
+        GBP5 = resultGBP5.rate?? 0.00001;
+        GBP6 = resultGBP6.rate?? 0.00001;
+        GBP7 = resultGBP7.rate?? 0.00001;
+        GBP8 = resultGBP8.rate?? 0.00001;
+        GBP9 = resultGBP9.rate?? 0.00001;
+        GBP10 = resultGBP10.rate?? 0.00001;
+        GBP11 = resultGBP11.rate?? 0.00001;
+        GBP12 = resultGBP12.rate?? 0.00001;
 
 
       });
@@ -15770,7 +16277,7 @@ var resultGBP = await Currency.getConversion(
     customImg35!=null? await compressImage035():null;
     String mediaUrl035 =  customImg35!=null?await uploadImage035(customImg35):"";
     customImg36!=null? await compressImage036():null;
-    String mediaUrl01 =  customImg1!=null?await uploadImage01(customImg1):"";
+    String mediaUrl036 =  customImg36!=null?await uploadImage036(customImg36):"";
     customImg37!=null? await compressImage037():null;
     String mediaUrl037 =  customImg37!=null?await uploadImage037(customImg37):"";
     customImg38!=null? await compressImage038():null;
@@ -15799,969 +16306,357 @@ var resultGBP = await Currency.getConversion(
     String mediaUrl049 =  customImg49!=null?await uploadImage049(customImg49):"";
      customImg50!=null? await compressImage050():null;
     String mediaUrl050 =  customImg50!=null?await uploadImage050(customImg50):"";
-
-if(currentUser.currency == "INR"){
-  for ( var imageFile in images) {
-    postImage(imageFile).then((downloadUrl)  {
-      imageUrls.add(downloadUrl.toString());
-      if(imageUrls.length==images.length){
-        String documnetID = DateTime.now().millisecondsSinceEpoch.toString();
-
-        productsRef
-            .doc(widget.currentUser.id)
-            .collection("userProducts")
-            .doc(prodId)
-            .update({
-          "colorText1":colorController1.text ?? "",
-          "colorText2":colorController2.text ?? "",
-          "colorText3":colorController3.text ?? "",
-          "colorText4":colorController4.text ?? "",
-          "colorText5":colorController5.text ?? "",
-          "colorText6":colorController6.text ?? "",
-          "colorText7":colorController7.text ?? "",
-          "colorText8":colorController8.text ?? "",
-          "colorText9":colorController9.text ?? "",
-          "colorText10":colorController10.text ?? "",
-          "color1":int.tryParse(colorController11.text) ?? 0,
-          "color2":int.tryParse(colorController21.text) ?? 0,
-          "color3":int.tryParse(colorController31.text) ?? 0,
-          "color4":int.tryParse(colorController41.text) ?? 0,
-          "color5":int.tryParse(colorController51.text) ?? 0,
-          "color6":int.tryParse(colorController61.text) ?? 0,
-          "color7":int.tryParse(colorController71.text) ?? 0,
-          "color8":int.tryParse(colorController81.text) ?? 0,
-          "color9":int.tryParse(colorController91.text) ?? 0,
-          "color10":int.tryParse(colorController10.text) ?? 0,
-          "country":  currentUser.country,
-          "currency":  currentUser.currency,
-
-          "worldship":worldship,
-          "freeworldship":freeworldship,
-          "freeship":freeship,
-          "shipment": shipcontroller.text,
-          "prodId": prodId,
-          "ownerId": widget.currentUser.id,
-          "photoUrl": widget.currentUser.photoUrl,
-          "username": widget.currentUser.displayName,
-          "shopmediaUrl": imageUrls,
-          "Category": value,
-          "Gender": dropdownValue,
-          "details": detailsController.text,
-          "productname": productnameController.text,
-          "usd": inrtousd ?? 0.1,
-          "eur": inrtoeur ?? 0.1,
-          "gbp": inrtogbp ?? 0.1,
-          "inr": userPrice ?? 0.1,
-
-          "timestamp": timestamp,
-          "composition": compositionController.text,
-          "washandcare": washandcareController.text,
-          "sizeandfit": sizeandfitController.text,
-          "xxxsQuantity": int.tryParse(xxxscontroller.text) ?? 0,
-          "xxsQuantity": int.tryParse(xxscontroller.text) ?? 0,
-          "xsQuantity":  int.tryParse(xscontroller.text )?? 0,
-          "sQuantity": int.tryParse(scontroller.text) ?? 0,
-
-          "mtoQuantity":  int.tryParse(mtocontroller.text) ?? 0,
-          "freesizeQuantity":   int.tryParse(freesizecontroller.text) ?? 0,
-
-
-          "mQuantity":  int.tryParse(mcontroller.text) ?? 0,
-          "lQuantity":  int.tryParse(lcontroller.text) ?? 0,
-          "xlQuantity":  int.tryParse(xlcontroller.text) ?? 0,
-          "xxlQuantity":  int.tryParse(xxlcontroller.text) ?? 0,
-          "xxxlQuantity":  int.tryParse(xxlcontroller.text) ?? 0,
-          "fourxlQuantity":  int.tryParse(fourxlcontroller.text) ?? 0,
-          "fivexlQuantity":  int.tryParse(fivexlcontroller.text) ?? 0,
-          "sixxlQuantity":  int.tryParse(sixxlcontroller.text) ?? 0,
-          "sevenxlQuantity":  int.tryParse(sevenxlcontroller.text) ?? 0,
-          "eightxlQuantity":  int.tryParse(eightxlcontroller.text) ?? 0,
-          "Shoe1":   int.tryParse(Shoe1controller.text) ?? 0,
-          "Shoe2":   int.tryParse(Shoe2controller.text) ?? 0,
-          "Shoe3":   int.tryParse(Shoe3controller.text) ?? 0,
-          "Shoe4":   int.tryParse(Shoe4controller.text) ?? 0,
-          "Shoe5":   int.tryParse(Shoe5controller.text) ?? 0,
-          "Shoe6":   int.tryParse(Shoe6controller.text) ?? 0,
-          "Shoe7":   int.tryParse(Shoe7controller.text) ?? 0,
-          "Shoe8":   int.tryParse(Shoe8controller.text) ?? 0,
-          "Shoe9":   int.tryParse(Shoe9controller.text) ?? 0,
-          "Shoe10":   int.tryParse(Shoe10controller.text) ?? 0,
-          "Shoe11":   int.tryParse(Shoe11controller.text) ?? 0,
-          "Shoe12":   int.tryParse(Shoe12controller.text) ?? 0,
-          "Shoe13":   int.tryParse(Shoe13controller.text) ?? 0,
-          "Shoe14":   int.tryParse(Shoe14controller.text) ?? 0,
-          "Shoe15":  int.tryParse(Shoe15controller.text) ?? 0,
-          "Shoe16":  int.tryParse(Shoe16controller.text) ?? 0,
-          "Shoe17":  int.tryParse(Shoe17controller.text) ?? 0,
-          "Shoe18":  int.tryParse(Shoe18controller.text) ?? 0,
-          "Shoe19":  int.tryParse(Shoe19controller.text) ?? 0,
-          "Shoe20":  int.tryParse(Shoe20controller.text) ?? 0,
-          "Shoe21":  int.tryParse(Shoe21controller.text) ?? 0,
-          "Ring1":   int.tryParse(Ring1controller.text) ?? 0,
-          "Ring2":   int.tryParse(Ring2controller.text) ?? 0,
-          "Ring3":   int.tryParse(Ring3controller.text) ?? 0,
-          "Ring4":   int.tryParse(Ring4controller.text) ?? 0,
-          "Ring5":   int.tryParse(Ring5controller.text) ?? 0,
-          "Ring6":   int.tryParse(Ring6controller.text) ?? 0,
-          "Ring7":   int.tryParse(Ring7controller.text) ?? 0,
-          "Ring8":   int.tryParse(Ring8controller.text) ?? 0,
-          "Ring9":   int.tryParse(Ring9controller.text) ?? 0,
-          "Ring10":   int.tryParse(Ring10controller.text) ?? 0,
-          "Ring11":   int.tryParse(Ring11controller.text) ?? 0,
-          "Ring12":   int.tryParse(Ring12controller.text) ?? 0,
-          "Ring13":   int.tryParse(Ring13controller.text) ?? 0,
-          "Ring14":   int.tryParse(Ring14controller.text) ?? 0,
-          "Ring15":  int.tryParse(Ring15controller.text) ?? 0,
-          "Ring16":  int.tryParse(Ring16controller.text) ?? 0,
-          "Ring17":  int.tryParse(Ring17controller.text) ?? 0,
-          "Ring18":  int.tryParse(Ring18controller.text) ?? 0,
-          "Ring19":  int.tryParse(Ring19controller.text) ?? 0,
-          "Ring20":  int.tryParse(Ring20controller.text) ?? 0,
-          "Ring21":  int.tryParse(Ring21controller.text) ?? 0,
-          "Ring22":  int.tryParse(Ring22controller.text) ?? 0,
-          "Ring23":  int.tryParse(Ring23controller.text) ?? 0,
-          "custom1":  customController1.text ?? "",
-          "custom2":  customController2.text ?? "",
-          "custom3":  customController3.text ?? "",
-          "custom4":  customController4.text ?? "",
-          "custom5":  customController5.text ?? "",
-          "custom6":  customController6.text ?? "",
-          "custom7":  customController7.text ?? "",
-          "custom8":  customController8.text ?? "",
-          "custom9":  customController9.text ?? "",
-          "custom10":  customController10.text ?? "",
-          "custom1img":  mediaUrl ?? "",
-          "custom2img":  mediaUrl1 ?? "",
-          "custom3img":  mediaUrl2 ?? "",
-          "custom4img":  mediaUrl3 ?? "",
-          "custom5img":  mediaUrl4 ?? "",
-          "custom6img":  mediaUrl5 ?? "",
-          "custom7img":  mediaUrl6 ?? "",
-          "custom8img":  mediaUrl7 ?? "",
-          "custom9img":  mediaUrl8 ?? "",
-          "custom10img":  mediaUrl9 ?? "",
-
-          "customQuantity1":  int.tryParse(customControllerQuantity1.text) ?? 0,
-          "customQuantity2":  int.tryParse(customControllerQuantity2.text) ?? 0,
-          "customQuantity3":  int.tryParse(customControllerQuantity3.text) ?? 0,
-          "customQuantity4":  int.tryParse(customControllerQuantity4.text) ?? 0,
-          "customQuantity5":  int.tryParse(customControllerQuantity5.text) ?? 0,
-          "customQuantity6":  int.tryParse(customControllerQuantity6.text) ?? 0,
-          "customQuantity7":  int.tryParse(customControllerQuantity7.text) ?? 0,
-          "customQuantity8":  int.tryParse(customControllerQuantity8.text) ?? 0,
-          "customQuantity9":  int.tryParse(customControllerQuantity9.text) ?? 0,
-          "customQuantity10":  int.tryParse(customControllerQuantity10.text) ??0,
-
-          "custom11inr": userPrice1??  0.1,
-          "custom11usd": inrtousd1?? 0.1,
-          "custom11eur": inrtoeur1?? 0.1,
-          "custom11gbp": inrtogbp1?? 0.1,
-
-          "custom21inr": userPrice2??  0.1,
-          "custom21usd": inrtousd2 ?? 0.1,
-          "custom21gbp": inrtogbp2??  0.1,
-          "custom21eur": inrtoeur2??  0.1,
-
-          "custom31usd": inrtousd3?? 0.1,
-          "custom31inr": userPrice3??  0.1,
-          "custom31gbp": inrtogbp3??  0.1,
-          "custom31eur": inrtoeur3??  0.1,
-
-          "custom41usd": inrtousd4?? 0.1,
-          "custom41inr": userPrice4??  0.1,
-          "custom41gbp": inrtogbp4??  0.1,
-          "custom41eur": inrtoeur4??  0.1,
-
-          "custom51usd": inrtousd5?? 0.1,
-          "custom51inr": userPrice5??  0.1,
-           "custom51gbp": inrtogbp5??  0.1,
-           "custom51eur": inrtoeur5??  0.1,
-
-          "custom61usd": inrtousd6?? 0.1,
-          "custom61inr": userPrice6??  0.1,
-           "custom61eur": inrtoeur6??  0.1,
-           "custom61gbp": inrtogbp6??  0.1,
-
-          "custom71usd": inrtousd7?? 0.1,
-          "custom71inr": userPrice7??  0.1,
-           "custom71eur": inrtoeur7??  0.1,
-           "custom71gbp": inrtogbp7??  0.1,
-
-          "custom81usd": inrtousd8?? 0.1,
-          "custom81inr": userPrice8??  0.1,
-          "custom81eur": inrtoeur8??  0.1,
-          "custom81gbp": inrtogbp8??  0.1,
-
-          "custom91usd": inrtousd9?? 0.1,
-          "custom91inr": userPrice9??  0.1,
-          "custom91eur": inrtoeur9??  0.1,
-          "custom91gbp": inrtogbp9??  0.1,
-
-          "custom101usd": inrtousd10?? 0.1,
-          "custom101inr": userPrice10??  0.1,
-          "custom101eur": inrtoeur10??  0.1,
-          "custom101gbp": inrtogbp10??  0.1,
-
-          "shipcostusd": inrtousd11?? 0.1,
-          "shipcostinr": userPrice11??  0.1,
-          "shipcostgbp": inrtogbp11??  0.1,
-          "shipcosteur": inrtoeur11??  0.1,
-
-          "shipcostinternusd": inrtousd12?? 0.1,
-          "shipcostinterninr": userPrice12??  0.1,
-          "shipcostinterneur": inrtoeur12??  0.1,
-          "shipcostinterngbp": inrtogbp12??  0.1,
-
-          "round": inrtousd ?? 0.0,
-
-          "processfrom":  int.tryParse(durationfromp.text) ?? 0,
-          "processto":  int.tryParse(durationto.text) ?? 0,
-          "shipfrom":  int.tryParse(durationfrom.text) ?? 0,
-          "shipto":  int.tryParse(durationto.text) ?? 0,
-          "shipinterfrom":  int.tryParse(durationfromw.text) ?? 0,
-          "shipinterto":  int.tryParse(durationtow.text) ?? 0,
-
-          "likes": {},
-        });
-
-
-
-        setState(() {
-          file = null;
-          isUploading = false;
-        });
-
-
-
-      }
-    }).catchError((err) {
-      print(err);
-      print('rtherjhertjnherj${imageUrls.length}');
-      print('rjertertj${images.length}');
-
-    });
-  }
-}
-else if(currentUser.currency == "EUR"){
-  for ( var imageFile in images) {
-    postImage(imageFile).then((downloadUrl)  {
-      imageUrls.add(downloadUrl.toString());
-      if(imageUrls.length==images.length){
-        String documnetID = DateTime.now().millisecondsSinceEpoch.toString();
-
-        productsRef
-            .doc(widget.currentUser.id)
-            .collection("userProducts")
-            .doc(prodId)
-            .update({
-          "colorText1":colorController1.text ?? "",
-          "colorText2":colorController2.text ?? "",
-          "colorText3":colorController3.text ?? "",
-          "colorText4":colorController4.text ?? "",
-          "colorText5":colorController5.text ?? "",
-          "colorText6":colorController6.text ?? "",
-          "colorText7":colorController7.text ?? "",
-          "colorText8":colorController8.text ?? "",
-          "colorText9":colorController9.text ?? "",
-          "colorText10":colorController10.text ?? "",
-          "color1":int.tryParse(colorController11.text) ?? 0,
-          "color2":int.tryParse(colorController21.text) ?? 0,
-          "color3":int.tryParse(colorController31.text) ?? 0,
-          "color4":int.tryParse(colorController41.text) ?? 0,
-          "color5":int.tryParse(colorController51.text) ?? 0,
-          "color6":int.tryParse(colorController61.text) ?? 0,
-          "color7":int.tryParse(colorController71.text) ?? 0,
-          "color8":int.tryParse(colorController81.text) ?? 0,
-          "color9":int.tryParse(colorController91.text) ?? 0,
-          "color10":int.tryParse(colorController10.text) ?? 0,
-          "country":  currentUser.country,
-          "currency":  currentUser.currency,
-
-          "worldship":worldship,
-          "freeworldship":freeworldship,
-          "freeship":freeship,
-          "shipment": shipcontroller.text,
-          "prodId": prodId,
-          "ownerId": widget.currentUser.id,
-          "photoUrl": widget.currentUser.photoUrl,
-          "username": widget.currentUser.displayName,
-          "shopmediaUrl": imageUrls,
-          "Category": value,
-          "Gender": dropdownValue,
-          "details": detailsController.text,
-          "productname": productnameController.text,
-          "usd": eurtousd ?? 0.1,
-          "eur": userPrice ?? 0.1,
-          "gbp": eurtogbp ?? 0.1,
-          "inr": eurtoinr ?? 0.1,
-
-          "timestamp": timestamp,
-          "composition": compositionController.text,
-          "washandcare": washandcareController.text,
-          "sizeandfit": sizeandfitController.text,
-          "xxxsQuantity": int.tryParse(xxxscontroller.text) ?? 0,
-          "xxsQuantity": int.tryParse(xxscontroller.text) ?? 0,
-          "xsQuantity":  int.tryParse(xscontroller.text )?? 0,
-          "sQuantity": int.tryParse(scontroller.text) ?? 0,
-
-          "mtoQuantity":  int.tryParse(mtocontroller.text) ?? 0,
-          "freesizeQuantity":   int.tryParse(freesizecontroller.text) ?? 0,
-
-
-          "mQuantity":  int.tryParse(mcontroller.text) ?? 0,
-          "lQuantity":  int.tryParse(lcontroller.text) ?? 0,
-          "xlQuantity":  int.tryParse(xlcontroller.text) ?? 0,
-          "xxlQuantity":  int.tryParse(xxlcontroller.text) ?? 0,
-          "xxxlQuantity":  int.tryParse(xxlcontroller.text) ?? 0,
-          "fourxlQuantity":  int.tryParse(fourxlcontroller.text) ?? 0,
-          "fivexlQuantity":  int.tryParse(fivexlcontroller.text) ?? 0,
-          "sixxlQuantity":  int.tryParse(sixxlcontroller.text) ?? 0,
-          "sevenxlQuantity":  int.tryParse(sevenxlcontroller.text) ?? 0,
-          "eightxlQuantity":  int.tryParse(eightxlcontroller.text) ?? 0,
-          "Shoe1":   int.tryParse(Shoe1controller.text) ?? 0,
-          "Shoe2":   int.tryParse(Shoe2controller.text) ?? 0,
-          "Shoe3":   int.tryParse(Shoe3controller.text) ?? 0,
-          "Shoe4":   int.tryParse(Shoe4controller.text) ?? 0,
-          "Shoe5":   int.tryParse(Shoe5controller.text) ?? 0,
-          "Shoe6":   int.tryParse(Shoe6controller.text) ?? 0,
-          "Shoe7":   int.tryParse(Shoe7controller.text) ?? 0,
-          "Shoe8":   int.tryParse(Shoe8controller.text) ?? 0,
-          "Shoe9":   int.tryParse(Shoe9controller.text) ?? 0,
-          "Shoe10":   int.tryParse(Shoe10controller.text) ?? 0,
-          "Shoe11":   int.tryParse(Shoe11controller.text) ?? 0,
-          "Shoe12":   int.tryParse(Shoe12controller.text) ?? 0,
-          "Shoe13":   int.tryParse(Shoe13controller.text) ?? 0,
-          "Shoe14":   int.tryParse(Shoe14controller.text) ?? 0,
-          "Shoe15":  int.tryParse(Shoe15controller.text) ?? 0,
-          "Shoe16":  int.tryParse(Shoe16controller.text) ?? 0,
-          "Shoe17":  int.tryParse(Shoe17controller.text) ?? 0,
-          "Shoe18":  int.tryParse(Shoe18controller.text) ?? 0,
-          "Shoe19":  int.tryParse(Shoe19controller.text) ?? 0,
-          "Shoe20":  int.tryParse(Shoe20controller.text) ?? 0,
-          "Shoe21":  int.tryParse(Shoe21controller.text) ?? 0,
-          "Ring1":   int.tryParse(Ring1controller.text) ?? 0,
-          "Ring2":   int.tryParse(Ring2controller.text) ?? 0,
-          "Ring3":   int.tryParse(Ring3controller.text) ?? 0,
-          "Ring4":   int.tryParse(Ring4controller.text) ?? 0,
-          "Ring5":   int.tryParse(Ring5controller.text) ?? 0,
-          "Ring6":   int.tryParse(Ring6controller.text) ?? 0,
-          "Ring7":   int.tryParse(Ring7controller.text) ?? 0,
-          "Ring8":   int.tryParse(Ring8controller.text) ?? 0,
-          "Ring9":   int.tryParse(Ring9controller.text) ?? 0,
-          "Ring10":   int.tryParse(Ring10controller.text) ?? 0,
-          "Ring11":   int.tryParse(Ring11controller.text) ?? 0,
-          "Ring12":   int.tryParse(Ring12controller.text) ?? 0,
-          "Ring13":   int.tryParse(Ring13controller.text) ?? 0,
-          "Ring14":   int.tryParse(Ring14controller.text) ?? 0,
-          "Ring15":  int.tryParse(Ring15controller.text) ?? 0,
-          "Ring16":  int.tryParse(Ring16controller.text) ?? 0,
-          "Ring17":  int.tryParse(Ring17controller.text) ?? 0,
-          "Ring18":  int.tryParse(Ring18controller.text) ?? 0,
-          "Ring19":  int.tryParse(Ring19controller.text) ?? 0,
-          "Ring20":  int.tryParse(Ring20controller.text) ?? 0,
-          "Ring21":  int.tryParse(Ring21controller.text) ?? 0,
-          "Ring22":  int.tryParse(Ring22controller.text) ?? 0,
-          "Ring23":  int.tryParse(Ring23controller.text) ?? 0,
-          "custom1":  customController1.text ?? "",
-          "custom2":  customController2.text ?? "",
-          "custom3":  customController3.text ?? "",
-          "custom4":  customController4.text ?? "",
-          "custom5":  customController5.text ?? "",
-          "custom6":  customController6.text ?? "",
-          "custom7":  customController7.text ?? "",
-          "custom8":  customController8.text ?? "",
-          "custom9":  customController9.text ?? "",
-          "custom10":  customController10.text ?? "",
-          "custom1img":  mediaUrl ?? "",
-          "custom2img":  mediaUrl1 ?? "",
-          "custom3img":  mediaUrl2 ?? "",
-          "custom4img":  mediaUrl3 ?? "",
-          "custom5img":  mediaUrl4 ?? "",
-          "custom6img":  mediaUrl5 ?? "",
-          "custom7img":  mediaUrl6 ?? "",
-          "custom8img":  mediaUrl7 ?? "",
-          "custom9img":  mediaUrl8 ?? "",
-          "custom10img":  mediaUrl9 ?? "",
-
-          "customQuantity1":  int.tryParse(customControllerQuantity1.text) ?? 0,
-          "customQuantity2":  int.tryParse(customControllerQuantity2.text) ?? 0,
-          "customQuantity3":  int.tryParse(customControllerQuantity3.text) ?? 0,
-          "customQuantity4":  int.tryParse(customControllerQuantity4.text) ?? 0,
-          "customQuantity5":  int.tryParse(customControllerQuantity5.text) ?? 0,
-          "customQuantity6":  int.tryParse(customControllerQuantity6.text) ?? 0,
-          "customQuantity7":  int.tryParse(customControllerQuantity7.text) ?? 0,
-          "customQuantity8":  int.tryParse(customControllerQuantity8.text) ?? 0,
-          "customQuantity9":  int.tryParse(customControllerQuantity9.text) ?? 0,
-          "customQuantity10":  int.tryParse(customControllerQuantity10.text) ??0,
-
-          "custom11inr": eurtoinr1??  0.1,
-          "custom11usd": eurtousd1?? 0.1,
-          "custom11eur": userPrice1?? 0.1,
-          "custom11gbp": eurtogbp1?? 0.1,
-
-          "custom21inr": eurtoinr2??  0.1,
-          "custom21usd": eurtousd2 ?? 0.1,
-          "custom21gbp": eurtogbp2??  0.1,
-          "custom21eur": userPrice2??  0.1,
-
-          "custom31usd": eurtousd3?? 0.1,
-          "custom31inr": eurtoinr3??  0.1,
-          "custom31gbp": eurtogbp3??  0.1,
-          "custom31eur": userPrice3??  0.1,
-
-          "custom41usd": eurtousd4?? 0.1,
-          "custom41inr": eurtoinr4??  0.1,
-          "custom41gbp": eurtogbp4??  0.1,
-          "custom41eur": userPrice4??  0.1,
-
-          "custom51usd": eurtousd5?? 0.1,
-          "custom51inr": eurtoinr5??  0.1,
-          "custom51gbp": eurtogbp5??  0.1,
-          "custom51eur": userPrice5??  0.1,
-
-          "custom61usd": eurtousd6?? 0.1,
-          "custom61inr": eurtoinr6??  0.1,
-          "custom61eur": userPrice6??  0.1,
-          "custom61gbp": eurtogbp6??  0.1,
-
-          "custom71usd": eurtousd7?? 0.1,
-          "custom71inr": eurtoinr7??  0.1,
-          "custom71eur": userPrice7??  0.1,
-          "custom71gbp": eurtogbp7??  0.1,
-
-          "custom81usd": eurtousd8?? 0.1,
-          "custom81inr": eurtoinr8??  0.1,
-          "custom81eur": userPrice8??  0.1,
-          "custom81gbp": eurtogbp8??  0.1,
-
-          "custom91usd": eurtousd9?? 0.1,
-          "custom91inr": eurtoinr9??  0.1,
-          "custom91eur": userPrice9??  0.1,
-          "custom91gbp": eurtogbp9??  0.1,
-
-          "custom101usd": eurtousd10?? 0.1,
-          "custom101inr": eurtoinr10??  0.1,
-          "custom101eur": userPrice10??  0.1,
-          "custom101gbp": eurtogbp10??  0.1,
-
-          "shipcostusd": eurtousd11?? 0.1,
-          "shipcostinr": eurtoinr11??  0.1,
-          "shipcostgbp": eurtogbp11??  0.1,
-          "shipcosteur": userPrice11??  0.1,
-
-          "shipcostinternusd": eurtousd12?? 0.1,
-          "shipcostinterninr": eurtoinr12??  0.1,
-          "shipcostinterneur": userPrice12??  0.1,
-          "shipcostinterngbp": eurtogbp12??  0.1,
-
-          "round": eurtousd ?? 0.0,
-
-          "processfrom":  int.tryParse(durationfromp.text) ?? 0,
-          "processto":  int.tryParse(durationto.text) ?? 0,
-          "shipfrom":  int.tryParse(durationfrom.text) ?? 0,
-          "shipto":  int.tryParse(durationto.text) ?? 0,
-          "shipinterfrom":  int.tryParse(durationfromw.text) ?? 0,
-          "shipinterto":  int.tryParse(durationtow.text) ?? 0,
-
-          "likes": {},
-        });
-
-
-
-        setState(() {
-          file = null;
-          isUploading = false;
-        });
-
-
-
-      }
-    }).catchError((err) {
-      print(err);
-
-
-    });
-  }
-}
-else if(currentUser.currency == "GBP"){
-  for ( var imageFile in images) {
-    postImage(imageFile).then((downloadUrl)  {
-      imageUrls.add(downloadUrl.toString());
-      if(imageUrls.length==images.length){
-        String documnetID = DateTime.now().millisecondsSinceEpoch.toString();
-
-        productsRef
-            .doc(widget.currentUser.id)
-            .collection("userProducts")
-            .doc(prodId)
-            .update({
-          "colorText1":colorController1.text ?? "",
-          "colorText2":colorController2.text ?? "",
-          "colorText3":colorController3.text ?? "",
-          "colorText4":colorController4.text ?? "",
-          "colorText5":colorController5.text ?? "",
-          "colorText6":colorController6.text ?? "",
-          "colorText7":colorController7.text ?? "",
-          "colorText8":colorController8.text ?? "",
-          "colorText9":colorController9.text ?? "",
-          "colorText10":colorController10.text ?? "",
-          "color1":int.tryParse(colorController11.text) ?? 0,
-          "color2":int.tryParse(colorController21.text) ?? 0,
-          "color3":int.tryParse(colorController31.text) ?? 0,
-          "color4":int.tryParse(colorController41.text) ?? 0,
-          "color5":int.tryParse(colorController51.text) ?? 0,
-          "color6":int.tryParse(colorController61.text) ?? 0,
-          "color7":int.tryParse(colorController71.text) ?? 0,
-          "color8":int.tryParse(colorController81.text) ?? 0,
-          "color9":int.tryParse(colorController91.text) ?? 0,
-          "color10":int.tryParse(colorController10.text) ?? 0,
-          "country":  currentUser.country,
-          "currency":  currentUser.currency,
-
-          "worldship":worldship,
-          "freeworldship":freeworldship,
-          "freeship":freeship,
-          "shipment": shipcontroller.text,
-          "prodId": prodId,
-          "ownerId": widget.currentUser.id,
-          "photoUrl": widget.currentUser.photoUrl,
-          "username": widget.currentUser.displayName,
-          "shopmediaUrl": imageUrls,
-          "Category": value,
-          "Gender": dropdownValue,
-          "details": detailsController.text,
-          "productname": productnameController.text,
-          "usd": gbptousd ?? 0.1,
-          "eur": gbptousd ?? 0.1,
-          "gbp": userPrice ?? 0.1,
-          "inr": gbptoinr ?? 0.1,
-
-          "timestamp": timestamp,
-          "composition": compositionController.text,
-          "washandcare": washandcareController.text,
-          "sizeandfit": sizeandfitController.text,
-          "xxxsQuantity": int.tryParse(xxxscontroller.text) ?? 0,
-          "xxsQuantity": int.tryParse(xxscontroller.text) ?? 0,
-          "xsQuantity":  int.tryParse(xscontroller.text )?? 0,
-          "sQuantity": int.tryParse(scontroller.text) ?? 0,
-
-          "mtoQuantity":  int.tryParse(mtocontroller.text) ?? 0,
-          "freesizeQuantity":   int.tryParse(freesizecontroller.text) ?? 0,
-
-
-          "mQuantity":  int.tryParse(mcontroller.text) ?? 0,
-          "lQuantity":  int.tryParse(lcontroller.text) ?? 0,
-          "xlQuantity":  int.tryParse(xlcontroller.text) ?? 0,
-          "xxlQuantity":  int.tryParse(xxlcontroller.text) ?? 0,
-          "xxxlQuantity":  int.tryParse(xxlcontroller.text) ?? 0,
-          "fourxlQuantity":  int.tryParse(fourxlcontroller.text) ?? 0,
-          "fivexlQuantity":  int.tryParse(fivexlcontroller.text) ?? 0,
-          "sixxlQuantity":  int.tryParse(sixxlcontroller.text) ?? 0,
-          "sevenxlQuantity":  int.tryParse(sevenxlcontroller.text) ?? 0,
-          "eightxlQuantity":  int.tryParse(eightxlcontroller.text) ?? 0,
-          "Shoe1":   int.tryParse(Shoe1controller.text) ?? 0,
-          "Shoe2":   int.tryParse(Shoe2controller.text) ?? 0,
-          "Shoe3":   int.tryParse(Shoe3controller.text) ?? 0,
-          "Shoe4":   int.tryParse(Shoe4controller.text) ?? 0,
-          "Shoe5":   int.tryParse(Shoe5controller.text) ?? 0,
-          "Shoe6":   int.tryParse(Shoe6controller.text) ?? 0,
-          "Shoe7":   int.tryParse(Shoe7controller.text) ?? 0,
-          "Shoe8":   int.tryParse(Shoe8controller.text) ?? 0,
-          "Shoe9":   int.tryParse(Shoe9controller.text) ?? 0,
-          "Shoe10":   int.tryParse(Shoe10controller.text) ?? 0,
-          "Shoe11":   int.tryParse(Shoe11controller.text) ?? 0,
-          "Shoe12":   int.tryParse(Shoe12controller.text) ?? 0,
-          "Shoe13":   int.tryParse(Shoe13controller.text) ?? 0,
-          "Shoe14":   int.tryParse(Shoe14controller.text) ?? 0,
-          "Shoe15":  int.tryParse(Shoe15controller.text) ?? 0,
-          "Shoe16":  int.tryParse(Shoe16controller.text) ?? 0,
-          "Shoe17":  int.tryParse(Shoe17controller.text) ?? 0,
-          "Shoe18":  int.tryParse(Shoe18controller.text) ?? 0,
-          "Shoe19":  int.tryParse(Shoe19controller.text) ?? 0,
-          "Shoe20":  int.tryParse(Shoe20controller.text) ?? 0,
-          "Shoe21":  int.tryParse(Shoe21controller.text) ?? 0,
-          "Ring1":   int.tryParse(Ring1controller.text) ?? 0,
-          "Ring2":   int.tryParse(Ring2controller.text) ?? 0,
-          "Ring3":   int.tryParse(Ring3controller.text) ?? 0,
-          "Ring4":   int.tryParse(Ring4controller.text) ?? 0,
-          "Ring5":   int.tryParse(Ring5controller.text) ?? 0,
-          "Ring6":   int.tryParse(Ring6controller.text) ?? 0,
-          "Ring7":   int.tryParse(Ring7controller.text) ?? 0,
-          "Ring8":   int.tryParse(Ring8controller.text) ?? 0,
-          "Ring9":   int.tryParse(Ring9controller.text) ?? 0,
-          "Ring10":   int.tryParse(Ring10controller.text) ?? 0,
-          "Ring11":   int.tryParse(Ring11controller.text) ?? 0,
-          "Ring12":   int.tryParse(Ring12controller.text) ?? 0,
-          "Ring13":   int.tryParse(Ring13controller.text) ?? 0,
-          "Ring14":   int.tryParse(Ring14controller.text) ?? 0,
-          "Ring15":  int.tryParse(Ring15controller.text) ?? 0,
-          "Ring16":  int.tryParse(Ring16controller.text) ?? 0,
-          "Ring17":  int.tryParse(Ring17controller.text) ?? 0,
-          "Ring18":  int.tryParse(Ring18controller.text) ?? 0,
-          "Ring19":  int.tryParse(Ring19controller.text) ?? 0,
-          "Ring20":  int.tryParse(Ring20controller.text) ?? 0,
-          "Ring21":  int.tryParse(Ring21controller.text) ?? 0,
-          "Ring22":  int.tryParse(Ring22controller.text) ?? 0,
-          "Ring23":  int.tryParse(Ring23controller.text) ?? 0,
-          "custom1":  customController1.text ?? "",
-          "custom2":  customController2.text ?? "",
-          "custom3":  customController3.text ?? "",
-          "custom4":  customController4.text ?? "",
-          "custom5":  customController5.text ?? "",
-          "custom6":  customController6.text ?? "",
-          "custom7":  customController7.text ?? "",
-          "custom8":  customController8.text ?? "",
-          "custom9":  customController9.text ?? "",
-          "custom10":  customController10.text ?? "",
-          "custom1img":  mediaUrl ?? "",
-          "custom2img":  mediaUrl1 ?? "",
-          "custom3img":  mediaUrl2 ?? "",
-          "custom4img":  mediaUrl3 ?? "",
-          "custom5img":  mediaUrl4 ?? "",
-          "custom6img":  mediaUrl5 ?? "",
-          "custom7img":  mediaUrl6 ?? "",
-          "custom8img":  mediaUrl7 ?? "",
-          "custom9img":  mediaUrl8 ?? "",
-          "custom10img":  mediaUrl9 ?? "",
-
-          "customQuantity1":  int.tryParse(customControllerQuantity1.text) ?? 0,
-          "customQuantity2":  int.tryParse(customControllerQuantity2.text) ?? 0,
-          "customQuantity3":  int.tryParse(customControllerQuantity3.text) ?? 0,
-          "customQuantity4":  int.tryParse(customControllerQuantity4.text) ?? 0,
-          "customQuantity5":  int.tryParse(customControllerQuantity5.text) ?? 0,
-          "customQuantity6":  int.tryParse(customControllerQuantity6.text) ?? 0,
-          "customQuantity7":  int.tryParse(customControllerQuantity7.text) ?? 0,
-          "customQuantity8":  int.tryParse(customControllerQuantity8.text) ?? 0,
-          "customQuantity9":  int.tryParse(customControllerQuantity9.text) ?? 0,
-          "customQuantity10":  int.tryParse(customControllerQuantity10.text) ??0,
-
-          "custom11inr": gbptoinr1??  0.1,
-          "custom11usd": gbptousd1?? 0.1,
-          "custom11eur": gbptoeur1?? 0.1,
-          "custom11gbp": userPrice1?? 0.1,
-
-          "custom21inr": gbptoinr2??  0.1,
-          "custom21usd": gbptousd2 ?? 0.1,
-          "custom21gbp": userPrice2??  0.1,
-          "custom21eur": gbptoeur2??  0.1,
-
-          "custom31usd": gbptousd3?? 0.1,
-          "custom31inr": gbptoinr3??  0.1,
-          "custom31gbp": userPrice3??  0.1,
-          "custom31eur": gbptoeur3??  0.1,
-
-          "custom41usd": gbptousd4?? 0.1,
-          "custom41inr": gbptoinr4??  0.1,
-          "custom41gbp": userPrice4??  0.1,
-          "custom41eur": gbptoeur4??  0.1,
-
-          "custom51usd": gbptousd5?? 0.1,
-          "custom51inr": gbptoinr5??  0.1,
-          "custom51gbp": userPrice5??  0.1,
-          "custom51eur": gbptoeur5??  0.1,
-
-          "custom61usd": gbptousd6?? 0.1,
-          "custom61inr": gbptoinr6??  0.1,
-          "custom61eur": gbptoeur6??  0.1,
-          "custom61gbp": userPrice6??  0.1,
-
-          "custom71usd": gbptousd7?? 0.1,
-          "custom71inr": gbptoinr7??  0.1,
-          "custom71eur": gbptoeur7??  0.1,
-          "custom71gbp": userPrice7??  0.1,
-
-          "custom81usd": gbptousd8?? 0.1,
-          "custom81inr": gbptoinr8??  0.1,
-          "custom81eur": gbptoeur8??  0.1,
-          "custom81gbp": userPrice8??  0.1,
-
-          "custom91usd": gbptousd9?? 0.1,
-          "custom91inr": gbptoinr9??  0.1,
-          "custom91eur": gbptoeur9??  0.1,
-          "custom91gbp": userPrice9??  0.1,
-
-          "custom101usd": gbptousd10?? 0.1,
-          "custom101inr": gbptoinr10??  0.1,
-          "custom101eur": gbptoeur10??  0.1,
-          "custom101gbp": userPrice10??  0.1,
-
-          "shipcostusd": gbptousd11?? 0.1,
-          "shipcostinr": gbptoinr11??  0.1,
-          "shipcostgbp": userPrice11??  0.1,
-          "shipcosteur": gbptoeur11??  0.1,
-
-          "shipcostinternusd": gbptousd12?? 0.1,
-          "shipcostinterninr": gbptoinr12??  0.1,
-          "shipcostinterneur": gbptoeur12??  0.1,
-          "shipcostinterngbp": userPrice12??  0.1,
-
-          "round": gbptousd ?? 0.0,
-
-          "processfrom":  int.tryParse(durationfromp.text) ?? 0,
-          "processto":  int.tryParse(durationto.text) ?? 0,
-          "shipfrom":  int.tryParse(durationfrom.text) ?? 0,
-          "shipto":  int.tryParse(durationto.text) ?? 0,
-          "shipinterfrom":  int.tryParse(durationfromw.text) ?? 0,
-          "shipinterto":  int.tryParse(durationtow.text) ?? 0,
-
-          "likes": {},
-        });
-
-
-
-        setState(() {
-          file = null;
-          isUploading = false;
-        });
-
-
-
-      }
-    }).catchError((err) {
-      print(err);
-    });
-  }
-}
-else{
-  for ( var imageFile in images) {
-    postImage(imageFile).then((downloadUrl)  {
-      imageUrls.add(downloadUrl.toString());
-      if(imageUrls.length==images.length){
-        String documnetID = DateTime.now().millisecondsSinceEpoch.toString();
-
-        productsRef
-            .doc(widget.currentUser.id)
-            .collection("userProducts")
-            .doc(prodId)
-            .update({
-          "colorText1":colorController1.text ?? "",
-          "colorText2":colorController2.text ?? "",
-          "colorText3":colorController3.text ?? "",
-          "colorText4":colorController4.text ?? "",
-          "colorText5":colorController5.text ?? "",
-          "colorText6":colorController6.text ?? "",
-          "colorText7":colorController7.text ?? "",
-          "colorText8":colorController8.text ?? "",
-          "colorText9":colorController9.text ?? "",
-          "colorText10":colorController10.text ?? "",
-          "color1":int.tryParse(colorController11.text) ?? 0,
-          "color2":int.tryParse(colorController21.text) ?? 0,
-          "color3":int.tryParse(colorController31.text) ?? 0,
-          "color4":int.tryParse(colorController41.text) ?? 0,
-          "color5":int.tryParse(colorController51.text) ?? 0,
-          "color6":int.tryParse(colorController61.text) ?? 0,
-          "color7":int.tryParse(colorController71.text) ?? 0,
-          "color8":int.tryParse(colorController81.text) ?? 0,
-          "color9":int.tryParse(colorController91.text) ?? 0,
-          "color10":int.tryParse(colorController10.text) ?? 0,
-          "country":  currentUser.country,
-          "currency":  currentUser.currency,
-
-          "worldship":worldship,
-          "freeworldship":freeworldship,
-          "freeship":freeship,
-          "shipment": shipcontroller.text,
-          "prodId": prodId,
-          "ownerId": widget.currentUser.id,
-          "photoUrl": widget.currentUser.photoUrl,
-          "username": widget.currentUser.displayName,
-          "shopmediaUrl": imageUrls,
-          "Category": value,
-          "Gender": dropdownValue,
-          "details": detailsController.text,
-          "productname": productnameController.text,
-          "usd": userPrice ?? 0.1,
-          "eur": usdtoeur ?? 0.1,
-          "gbp": usdtoinr ?? 0.1,
-          "inr": usdtoinr ?? 0.1,
-
-          "timestamp": timestamp,
-          "composition": compositionController.text,
-          "washandcare": washandcareController.text,
-          "sizeandfit": sizeandfitController.text,
-          "xxxsQuantity": int.tryParse(xxxscontroller.text) ?? 0,
-          "xxsQuantity": int.tryParse(xxscontroller.text) ?? 0,
-          "xsQuantity":  int.tryParse(xscontroller.text )?? 0,
-          "sQuantity": int.tryParse(scontroller.text) ?? 0,
-
-          "mtoQuantity":  int.tryParse(mtocontroller.text) ?? 0,
-          "freesizeQuantity":   int.tryParse(freesizecontroller.text) ?? 0,
-
-
-          "mQuantity":  int.tryParse(mcontroller.text) ?? 0,
-          "lQuantity":  int.tryParse(lcontroller.text) ?? 0,
-          "xlQuantity":  int.tryParse(xlcontroller.text) ?? 0,
-          "xxlQuantity":  int.tryParse(xxlcontroller.text) ?? 0,
-          "xxxlQuantity":  int.tryParse(xxlcontroller.text) ?? 0,
-          "fourxlQuantity":  int.tryParse(fourxlcontroller.text) ?? 0,
-          "fivexlQuantity":  int.tryParse(fivexlcontroller.text) ?? 0,
-          "sixxlQuantity":  int.tryParse(sixxlcontroller.text) ?? 0,
-          "sevenxlQuantity":  int.tryParse(sevenxlcontroller.text) ?? 0,
-          "eightxlQuantity":  int.tryParse(eightxlcontroller.text) ?? 0,
-          "Shoe1":   int.tryParse(Shoe1controller.text) ?? 0,
-          "Shoe2":   int.tryParse(Shoe2controller.text) ?? 0,
-          "Shoe3":   int.tryParse(Shoe3controller.text) ?? 0,
-          "Shoe4":   int.tryParse(Shoe4controller.text) ?? 0,
-          "Shoe5":   int.tryParse(Shoe5controller.text) ?? 0,
-          "Shoe6":   int.tryParse(Shoe6controller.text) ?? 0,
-          "Shoe7":   int.tryParse(Shoe7controller.text) ?? 0,
-          "Shoe8":   int.tryParse(Shoe8controller.text) ?? 0,
-          "Shoe9":   int.tryParse(Shoe9controller.text) ?? 0,
-          "Shoe10":   int.tryParse(Shoe10controller.text) ?? 0,
-          "Shoe11":   int.tryParse(Shoe11controller.text) ?? 0,
-          "Shoe12":   int.tryParse(Shoe12controller.text) ?? 0,
-          "Shoe13":   int.tryParse(Shoe13controller.text) ?? 0,
-          "Shoe14":   int.tryParse(Shoe14controller.text) ?? 0,
-          "Shoe15":  int.tryParse(Shoe15controller.text) ?? 0,
-          "Shoe16":  int.tryParse(Shoe16controller.text) ?? 0,
-          "Shoe17":  int.tryParse(Shoe17controller.text) ?? 0,
-          "Shoe18":  int.tryParse(Shoe18controller.text) ?? 0,
-          "Shoe19":  int.tryParse(Shoe19controller.text) ?? 0,
-          "Shoe20":  int.tryParse(Shoe20controller.text) ?? 0,
-          "Shoe21":  int.tryParse(Shoe21controller.text) ?? 0,
-          "Ring1":   int.tryParse(Ring1controller.text) ?? 0,
-          "Ring2":   int.tryParse(Ring2controller.text) ?? 0,
-          "Ring3":   int.tryParse(Ring3controller.text) ?? 0,
-          "Ring4":   int.tryParse(Ring4controller.text) ?? 0,
-          "Ring5":   int.tryParse(Ring5controller.text) ?? 0,
-          "Ring6":   int.tryParse(Ring6controller.text) ?? 0,
-          "Ring7":   int.tryParse(Ring7controller.text) ?? 0,
-          "Ring8":   int.tryParse(Ring8controller.text) ?? 0,
-          "Ring9":   int.tryParse(Ring9controller.text) ?? 0,
-          "Ring10":   int.tryParse(Ring10controller.text) ?? 0,
-          "Ring11":   int.tryParse(Ring11controller.text) ?? 0,
-          "Ring12":   int.tryParse(Ring12controller.text) ?? 0,
-          "Ring13":   int.tryParse(Ring13controller.text) ?? 0,
-          "Ring14":   int.tryParse(Ring14controller.text) ?? 0,
-          "Ring15":  int.tryParse(Ring15controller.text) ?? 0,
-          "Ring16":  int.tryParse(Ring16controller.text) ?? 0,
-          "Ring17":  int.tryParse(Ring17controller.text) ?? 0,
-          "Ring18":  int.tryParse(Ring18controller.text) ?? 0,
-          "Ring19":  int.tryParse(Ring19controller.text) ?? 0,
-          "Ring20":  int.tryParse(Ring20controller.text) ?? 0,
-          "Ring21":  int.tryParse(Ring21controller.text) ?? 0,
-          "Ring22":  int.tryParse(Ring22controller.text) ?? 0,
-          "Ring23":  int.tryParse(Ring23controller.text) ?? 0,
-          "custom1":  customController1.text ?? "",
-          "custom2":  customController2.text ?? "",
-          "custom3":  customController3.text ?? "",
-          "custom4":  customController4.text ?? "",
-          "custom5":  customController5.text ?? "",
-          "custom6":  customController6.text ?? "",
-          "custom7":  customController7.text ?? "",
-          "custom8":  customController8.text ?? "",
-          "custom9":  customController9.text ?? "",
-          "custom10":  customController10.text ?? "",
-          "custom1img":  mediaUrl ?? "",
-          "custom2img":  mediaUrl1 ?? "",
-          "custom3img":  mediaUrl2 ?? "",
-          "custom4img":  mediaUrl3 ?? "",
-          "custom5img":  mediaUrl4 ?? "",
-          "custom6img":  mediaUrl5 ?? "",
-          "custom7img":  mediaUrl6 ?? "",
-          "custom8img":  mediaUrl7 ?? "",
-          "custom9img":  mediaUrl8 ?? "",
-          "custom10img":  mediaUrl9 ?? "",
-
-          "customQuantity1":  int.tryParse(customControllerQuantity1.text) ?? 0,
-          "customQuantity2":  int.tryParse(customControllerQuantity2.text) ?? 0,
-          "customQuantity3":  int.tryParse(customControllerQuantity3.text) ?? 0,
-          "customQuantity4":  int.tryParse(customControllerQuantity4.text) ?? 0,
-          "customQuantity5":  int.tryParse(customControllerQuantity5.text) ?? 0,
-          "customQuantity6":  int.tryParse(customControllerQuantity6.text) ?? 0,
-          "customQuantity7":  int.tryParse(customControllerQuantity7.text) ?? 0,
-          "customQuantity8":  int.tryParse(customControllerQuantity8.text) ?? 0,
-          "customQuantity9":  int.tryParse(customControllerQuantity9.text) ?? 0,
-          "customQuantity10":  int.tryParse(customControllerQuantity10.text) ??0,
-
-          "custom11inr": usdtoinr1??  0.1,
-          "custom11usd": userPrice1?? 0.1,
-          "custom11eur": usdtoeur1?? 0.1,
-          "custom11gbp": usdtogbp1?? 0.1,
-
-          "custom21inr": usdtoinr2??  0.1,
-          "custom21usd": userPrice2 ?? 0.1,
-          "custom21gbp": usdtogbp2??  0.1,
-          "custom21eur": usdtoeur2??  0.1,
-
-          "custom31usd": userPrice3?? 0.1,
-          "custom31inr": usdtoinr3??  0.1,
-          "custom31gbp": usdtogbp3??  0.1,
-          "custom31eur": usdtoeur3??  0.1,
-
-          "custom41usd": userPrice4?? 0.1,
-          "custom41inr": usdtoinr4??  0.1,
-          "custom41gbp": usdtogbp4??  0.1,
-          "custom41eur": usdtoeur4??  0.1,
-
-          "custom51usd": userPrice5?? 0.1,
-          "custom51inr": usdtoinr5??  0.1,
-          "custom51gbp": usdtogbp5??  0.1,
-          "custom51eur": usdtoeur5??  0.1,
-
-          "custom61usd": userPrice6?? 0.1,
-          "custom61inr": usdtoinr6??  0.1,
-          "custom61eur": usdtoeur6??  0.1,
-          "custom61gbp": usdtogbp6??  0.1,
-
-          "custom71usd": userPrice7?? 0.1,
-          "custom71inr": usdtoinr7??  0.1,
-          "custom71eur": usdtoeur7??  0.1,
-          "custom71gbp": usdtogbp7??  0.1,
-
-          "custom81usd": userPrice8?? 0.1,
-          "custom81inr": usdtoinr8??  0.1,
-          "custom81eur": usdtoeur8??  0.1,
-          "custom81gbp": usdtogbp8??  0.1,
-
-          "custom91usd": userPrice9?? 0.1,
-          "custom91inr": usdtoinr9??  0.1,
-          "custom91eur": usdtoeur9??  0.1,
-          "custom91gbp": usdtogbp9??  0.1,
-
-          "custom101usd": userPrice10?? 0.1,
-          "custom101inr": usdtoinr10??  0.1,
-          "custom101eur": usdtoeur10??  0.1,
-          "custom101gbp": usdtogbp10??  0.1,
-
-          "shipcostusd": userPrice11?? 0.1,
-          "shipcostinr": usdtoinr11??  0.1,
-          "shipcostgbp": usdtogbp11??  0.1,
-          "shipcosteur": usdtoeur11??  0.1,
-
-          "shipcostinternusd": userPrice12?? 0.1,
-          "shipcostinterninr": usdtoinr12??  0.1,
-          "shipcostinterneur": usdtoeur12??  0.1,
-          "shipcostinterngbp": usdtogbp12??  0.1,
-
-          "round": userPrice ?? 0.0,
-
-          "processfrom":  int.tryParse(durationfromp.text) ?? 0,
-          "processto":  int.tryParse(durationto.text) ?? 0,
-          "shipfrom":  int.tryParse(durationfrom.text) ?? 0,
-          "shipto":  int.tryParse(durationto.text) ?? 0,
-          "shipinterfrom":  int.tryParse(durationfromw.text) ?? 0,
-          "shipinterto":  int.tryParse(durationtow.text) ?? 0,
-
-          "likes": {},
-        });
-
-
-
-        setState(() {
-          file = null;
-          isUploading = false;
-        });
-
-
-
-      }
-    }).catchError((err) {
-      print(err);
-    });
-  }
-}
-
+    for ( var imageFile in images) {
+      postImage(imageFile).then((downloadUrl)  {
+        imageUrls.add(downloadUrl.toString());
+        if(imageUrls.length==images.length){
+          String documnetID = DateTime.now().millisecondsSinceEpoch.toString();
+
+          productsRef
+              .doc(widget.currentUser.id)
+              .collection("userProducts")
+              .doc(prodId)
+              .update({
+            "colorText1":colorController1.text ?? "",
+            "colorText2":colorController2.text ?? "",
+            "colorText3":colorController3.text ?? "",
+            "colorText4":colorController4.text ?? "",
+            "colorText5":colorController5.text ?? "",
+            "colorText6":colorController6.text ?? "",
+            "colorText7":colorController7.text ?? "",
+            "colorText8":colorController8.text ?? "",
+            "colorText9":colorController9.text ?? "",
+            "colorText10":colorController10.text ?? "",
+            "color1":int.tryParse(colorController11.text) ?? 0,
+            "color2":int.tryParse(colorController21.text) ?? 0,
+            "color3":int.tryParse(colorController31.text) ?? 0,
+            "color4":int.tryParse(colorController41.text) ?? 0,
+            "color5":int.tryParse(colorController51.text) ?? 0,
+            "color6":int.tryParse(colorController61.text) ?? 0,
+            "color7":int.tryParse(colorController71.text) ?? 0,
+            "color8":int.tryParse(colorController81.text) ?? 0,
+            "color9":int.tryParse(colorController91.text) ?? 0,
+            "color10":int.tryParse(colorController10.text) ?? 0,
+            "country":  currentUser.country,
+            "currency":  currentUser.currency,
+
+            "worldship":worldship,
+            "freeworldship":freeworldship,
+            "freeship":freeship,
+            "shipment": shipcontroller.text,
+            "prodId": prodId,
+            "ownerId": widget.currentUser.id,
+            "photoUrl": widget.currentUser.photoUrl,
+            "username": widget.currentUser.displayName,
+            "shopmediaUrl": imageUrls,
+            "Category": value,
+            "Gender": dropdownValue,
+            "details": detailsController.text,
+            "productname": productnameController.text,
+            "usd": USD ,
+            "eur": EUR,
+            "gbp": GBP,
+            "inr": INR,
+
+            "timestamp": timestamp,
+            "composition": compositionController.text,
+            "washandcare": washandcareController.text,
+            "sizeandfit": sizeandfitController.text,
+            "xxxsQuantity": int.tryParse(xxxscontroller.text) ?? 0,
+            "xxsQuantity": int.tryParse(xxscontroller.text) ?? 0,
+            "xsQuantity":  int.tryParse(xscontroller.text )?? 0,
+            "sQuantity": int.tryParse(scontroller.text) ?? 0,
+
+            "mtoQuantity":  int.tryParse(mtocontroller.text) ?? 0,
+            "freesizeQuantity":   int.tryParse(freesizecontroller.text) ?? 0,
+
+
+            "mQuantity":  int.tryParse(mcontroller.text) ?? 0,
+            "lQuantity":  int.tryParse(lcontroller.text) ?? 0,
+            "xlQuantity":  int.tryParse(xlcontroller.text) ?? 0,
+            "xxlQuantity":  int.tryParse(xxlcontroller.text) ?? 0,
+            "xxxlQuantity":  int.tryParse(xxlcontroller.text) ?? 0,
+            "fourxlQuantity":  int.tryParse(fourxlcontroller.text) ?? 0,
+            "fivexlQuantity":  int.tryParse(fivexlcontroller.text) ?? 0,
+            "sixxlQuantity":  int.tryParse(sixxlcontroller.text) ?? 0,
+            "sevenxlQuantity":  int.tryParse(sevenxlcontroller.text) ?? 0,
+            "eightxlQuantity":  int.tryParse(eightxlcontroller.text) ?? 0,
+            "Shoe1":   int.tryParse(Shoe1controller.text) ?? 0,
+            "Shoe2":   int.tryParse(Shoe2controller.text) ?? 0,
+            "Shoe3":   int.tryParse(Shoe3controller.text) ?? 0,
+            "Shoe4":   int.tryParse(Shoe4controller.text) ?? 0,
+            "Shoe5":   int.tryParse(Shoe5controller.text) ?? 0,
+            "Shoe6":   int.tryParse(Shoe6controller.text) ?? 0,
+            "Shoe7":   int.tryParse(Shoe7controller.text) ?? 0,
+            "Shoe8":   int.tryParse(Shoe8controller.text) ?? 0,
+            "Shoe9":   int.tryParse(Shoe9controller.text) ?? 0,
+            "Shoe10":   int.tryParse(Shoe10controller.text) ?? 0,
+            "Shoe11":   int.tryParse(Shoe11controller.text) ?? 0,
+            "Shoe12":   int.tryParse(Shoe12controller.text) ?? 0,
+            "Shoe13":   int.tryParse(Shoe13controller.text) ?? 0,
+            "Shoe14":   int.tryParse(Shoe14controller.text) ?? 0,
+            "Shoe15":  int.tryParse(Shoe15controller.text) ?? 0,
+            "Shoe16":  int.tryParse(Shoe16controller.text) ?? 0,
+            "Shoe17":  int.tryParse(Shoe17controller.text) ?? 0,
+            "Shoe18":  int.tryParse(Shoe18controller.text) ?? 0,
+            "Shoe19":  int.tryParse(Shoe19controller.text) ?? 0,
+            "Shoe20":  int.tryParse(Shoe20controller.text) ?? 0,
+            "Shoe21":  int.tryParse(Shoe21controller.text) ?? 0,
+            "Ring1":   int.tryParse(Ring1controller.text) ?? 0,
+            "Ring2":   int.tryParse(Ring2controller.text) ?? 0,
+            "Ring3":   int.tryParse(Ring3controller.text) ?? 0,
+            "Ring4":   int.tryParse(Ring4controller.text) ?? 0,
+            "Ring5":   int.tryParse(Ring5controller.text) ?? 0,
+            "Ring6":   int.tryParse(Ring6controller.text) ?? 0,
+            "Ring7":   int.tryParse(Ring7controller.text) ?? 0,
+            "Ring8":   int.tryParse(Ring8controller.text) ?? 0,
+            "Ring9":   int.tryParse(Ring9controller.text) ?? 0,
+            "Ring10":   int.tryParse(Ring10controller.text) ?? 0,
+            "Ring11":   int.tryParse(Ring11controller.text) ?? 0,
+            "Ring12":   int.tryParse(Ring12controller.text) ?? 0,
+            "Ring13":   int.tryParse(Ring13controller.text) ?? 0,
+            "Ring14":   int.tryParse(Ring14controller.text) ?? 0,
+            "Ring15":  int.tryParse(Ring15controller.text) ?? 0,
+            "Ring16":  int.tryParse(Ring16controller.text) ?? 0,
+            "Ring17":  int.tryParse(Ring17controller.text) ?? 0,
+            "Ring18":  int.tryParse(Ring18controller.text) ?? 0,
+            "Ring19":  int.tryParse(Ring19controller.text) ?? 0,
+            "Ring20":  int.tryParse(Ring20controller.text) ?? 0,
+            "Ring21":  int.tryParse(Ring21controller.text) ?? 0,
+            "Ring22":  int.tryParse(Ring22controller.text) ?? 0,
+            "Ring23":  int.tryParse(Ring23controller.text) ?? 0,
+
+            "customTitle1":  title1Controller.text ?? "",
+ "customTitle2":  title2Controller.text ?? "",
+ "customTitle3":  title3Controller.text ?? "",
+ "customTitle4":  title4Controller.text ?? "",
+ "customTitle5":  title5Controller.text ?? "",
+
+ "customQuantity1":   int.tryParse(custom1.text ) ?? 0,
+ "customQuantity2":   int.tryParse(custom2.text ) ?? 0,
+ "customQuantity3":   int.tryParse(custom3.text ) ?? 0,
+ "customQuantity4":   int.tryParse(custom4.text ) ?? 0,
+ "customQuantity5":   int.tryParse(custom5.text ) ?? 0,
+ "customQuantity6":   int.tryParse(custom6.text ) ?? 0,
+ "customQuantity7":   int.tryParse(custom7.text ) ?? 0,
+ "customQuantity8":   int.tryParse(custom8.text ) ?? 0,
+ "customQuantity9":   int.tryParse(custom9.text ) ?? 0,
+ "customQuantity10":   int.tryParse(custom10.text ) ?? 0,
+ "customQuantity11":   int.tryParse(custom11.text ) ?? 0,
+ "customQuantity12":   int.tryParse(custom12.text ) ?? 0,
+ "customQuantity13":   int.tryParse(custom13.text ) ?? 0,
+"customQuantity14":   int.tryParse(custom14.text ) ?? 0,
+"customQuantity15":   int.tryParse(custom15.text ) ?? 0,
+"customQuantity16":   int.tryParse(custom16.text ) ?? 0,
+"customQuantity17":   int.tryParse(custom17.text ) ?? 0,
+"customQuantity18":   int.tryParse(custom18.text ) ?? 0,
+"customQuantity19":   int.tryParse(custom19.text ) ?? 0,
+"customQuantity20":   int.tryParse(custom20.text ) ?? 0,
+"customQuantity21":   int.tryParse(custom21.text ) ?? 0,
+"customQuantity22":   int.tryParse(custom22.text ) ?? 0,
+"customQuantity23":   int.tryParse(custom23.text ) ?? 0,
+"customQuantity24":   int.tryParse(custom24.text ) ?? 0,
+"customQuantity25":   int.tryParse(custom25.text ) ?? 0,
+"customQuantity26":   int.tryParse(custom26.text ) ?? 0,
+"customQuantity27":   int.tryParse(custom27.text ) ?? 0,
+"customQuantity28":   int.tryParse(custom28.text ) ?? 0,
+"customQuantity29":   int.tryParse(custom29.text ) ?? 0,
+"customQuantity30":   int.tryParse(custom30.text ) ?? 0,
+"customQuantity31":   int.tryParse(custom31.text ) ?? 0,
+"customQuantity32":   int.tryParse(custom32.text ) ?? 0,
+"customQuantity33":   int.tryParse(custom33.text ) ?? 0,
+"customQuantity34":   int.tryParse(custom34.text ) ?? 0,
+"customQuantity35":   int.tryParse(custom35.text ) ?? 0,
+"customQuantity36":   int.tryParse(custom36.text ) ?? 0,
+"customQuantity37":   int.tryParse(custom37.text ) ?? 0,
+"customQuantity38":   int.tryParse(custom38.text ) ?? 0,
+"customQuantity39":   int.tryParse(custom39.text ) ?? 0,
+"customQuantity40":   int.tryParse(custom40.text ) ?? 0,
+"customQuantity41":   int.tryParse(custom41.text ) ?? 0,
+"customQuantity42":   int.tryParse(custom42.text ) ?? 0,
+"customQuantity43":   int.tryParse(custom43.text ) ?? 0,
+"customQuantity44":   int.tryParse(custom44.text ) ?? 0,
+"customQuantity45":   int.tryParse(custom45.text ) ?? 0,
+"customQuantity46":   int.tryParse(custom46.text ) ?? 0,
+"customQuantity47":   int.tryParse(custom47.text ) ?? 0,
+"customQuantity48":   int.tryParse(custom48.text ) ?? 0,
+"customQuantity49":   int.tryParse(custom49.text ) ?? 0,
+"customQuantity50":   int.tryParse(custom50.text ) ?? 0,
+
+            "custom1img":  mediaUrl01 ?? "",
+"custom2img":  mediaUrl02 ?? "",
+"custom3img":  mediaUrl03 ?? "",
+"custom4img":  mediaUrl04 ?? "",
+"custom5img":  mediaUrl05 ?? "",
+"custom6img":  mediaUrl06 ?? "",
+"custom7img":  mediaUrl07 ?? "",
+"custom8img":  mediaUrl08 ?? "",
+"custom9img":  mediaUrl09 ?? "",
+"custom10img":  mediaUrl010 ?? "",
+"custom11img":  mediaUrl011 ?? "",
+"custom12img":  mediaUrl012 ?? "",
+"custom13img":  mediaUrl013 ?? "",
+"custom14img":  mediaUrl014 ?? "",
+"custom15img":  mediaUrl015 ?? "",
+"custom16img":  mediaUrl016 ?? "",
+"custom17img":  mediaUrl017 ?? "",
+"custom18img":  mediaUrl018 ?? "",
+"custom19img":  mediaUrl019 ?? "",
+"custom20img":  mediaUrl020 ?? "",
+"custom21img":  mediaUrl021 ?? "",
+"custom22img":  mediaUrl022 ?? "",
+"custom23img":  mediaUrl023 ?? "",
+"custom24img":  mediaUrl024 ?? "",
+"custom25img":  mediaUrl025 ?? "",
+"custom26img":  mediaUrl026 ?? "",
+"custom27img":  mediaUrl027 ?? "",
+"custom28img":  mediaUrl028 ?? "",
+"custom29img":  mediaUrl029 ?? "",
+"custom30img":  mediaUrl030 ?? "",
+"custom31img":  mediaUrl031 ?? "",
+"custom32img":  mediaUrl032 ?? "",
+"custom33img":  mediaUrl033 ?? "",
+"custom34img":  mediaUrl034 ?? "",
+"custom35img":  mediaUrl035 ?? "",
+"custom36img":  mediaUrl036 ?? "",
+"custom37img":  mediaUrl037 ?? "",
+"custom38img":  mediaUrl038 ?? "",
+"custom39img":  mediaUrl039 ?? "",
+"custom40img":  mediaUrl040 ?? "",
+"custom41img":  mediaUrl041 ?? "",
+"custom42img":  mediaUrl042 ?? "",
+"custom43img":  mediaUrl043 ?? "",
+"custom44img":  mediaUrl044 ?? "",
+"custom45img":  mediaUrl045 ?? "",
+"custom46img":  mediaUrl046 ?? "",
+"custom47img":  mediaUrl047 ?? "",
+"custom48img":  mediaUrl048 ?? "",
+"custom49img":  mediaUrl049 ?? "",
+"custom50img":  mediaUrl050 ?? "",
+
+
+
+            "variation1":  customController1.text ?? "",
+            "variation2":  customController2.text ?? "",
+            "variation3":  customController3.text ?? "",
+            "variation4":  customController4.text ?? "",
+            "variation5":  customController5.text ?? "",
+            "variation6":  customController6.text ?? "",
+            "variation7":  customController7.text ?? "",
+            "variation8":  customController8.text ?? "",
+            "variation9":  customController9.text ?? "",
+            "variation10":  customController10.text ?? "",
+
+
+            "variation1img":  mediaUrl ?? "",
+            "variation2img":  mediaUrl1 ?? "",
+            "variation3img":  mediaUrl2 ?? "",
+            "variation4img":  mediaUrl3 ?? "",
+            "variation5img":  mediaUrl4 ?? "",
+            "variation6img":  mediaUrl5 ?? "",
+            "variation7img":  mediaUrl6 ?? "",
+            "variation8img":  mediaUrl7 ?? "",
+            "variation9img":  mediaUrl8 ?? "",
+            "variation10img":  mediaUrl9 ?? "",
+
+            "variationQuantity1":  int.tryParse(customControllerQuantity1.text) ?? 0,
+            "variationQuantity2":  int.tryParse(customControllerQuantity2.text) ?? 0,
+            "variationQuantity3":  int.tryParse(customControllerQuantity3.text) ?? 0,
+            "variationQuantity4":  int.tryParse(customControllerQuantity4.text) ?? 0,
+            "variationQuantity5":  int.tryParse(customControllerQuantity5.text) ?? 0,
+            "variationQuantity6":  int.tryParse(customControllerQuantity6.text) ?? 0,
+            "variationQuantity7":  int.tryParse(customControllerQuantity7.text) ?? 0,
+            "variationQuantity8":  int.tryParse(customControllerQuantity8.text) ?? 0,
+            "variationQuantity9":  int.tryParse(customControllerQuantity9.text) ?? 0,
+            "variationQuantity10":  int.tryParse(customControllerQuantity10.text) ??0,
+
+            "custom11inr": INR1,
+            "custom11usd": USD1,
+            "custom11eur": EUR1,
+            "custom11gbp": GBP1,
+
+            "custom21inr": INR2,
+            "custom21usd": USD2 ,
+            "custom21gbp": GBP2,
+            "custom21eur": EUR2,
+
+            "custom31usd": USD3,
+            "custom31inr": INR3,
+            "custom31gbp": GBP3,
+            "custom31eur": EUR3,
+
+            "custom41usd": USD4,
+            "custom41inr": INR4,
+            "custom41gbp": GBP4,
+            "custom41eur": EUR4,
+
+            "custom51usd": USD5,
+            "custom51inr": INR5,
+            "custom51gbp": GBP5,
+            "custom51eur": EUR5,
+
+            "custom61usd": USD6,
+            "custom61inr": INR6,
+            "custom61eur": EUR6,
+            "custom61gbp": GBP6,
+
+            "custom71usd": USD7,
+            "custom71inr": INR7,
+            "custom71eur": EUR7,
+            "custom71gbp": GBP7,
+
+            "custom81usd": USD8,
+            "custom81inr": INR8,
+            "custom81eur": EUR8,
+            "custom81gbp": GBP8,
+
+            "custom91usd": USD9,
+            "custom91inr": INR9,
+            "custom91eur": EUR9,
+            "custom91gbp": GBP9,
+
+            "custom101usd": USD10,
+            "custom101inr": INR10,
+            "custom101eur": EUR10,
+            "custom101gbp": GBP10,
+
+            "shipcostusd": USD11,
+            "shipcostinr": INR11,
+            "shipcostgbp": GBP11,
+            "shipcosteur": EUR11,
+
+            "shipcostinternusd": USD12,
+            "shipcostinterninr": INR12,
+            "shipcostinterneur": EUR12,
+            "shipcostinterngbp": GBP12,
+
+            "round": USD ?? 0.0,
+
+            "processfrom":  int.tryParse(durationfromp.text) ?? 0,
+            "processto":  int.tryParse(durationto.text) ?? 0,
+            "shipfrom":  int.tryParse(durationfrom.text) ?? 0,
+            "shipto":  int.tryParse(durationto.text) ?? 0,
+            "shipinterfrom":  int.tryParse(durationfromw.text) ?? 0,
+            "shipinterto":  int.tryParse(durationtow.text) ?? 0,
+
+            "likes": {},
+          });
+
+
+
+          setState(() {
+            file = null;
+            isUploading = false;
+          });
+
+
+
+        }
+      }).catchError((err) {
+        print(err);
+
+      });
+    }
 
     Get.back();
 
