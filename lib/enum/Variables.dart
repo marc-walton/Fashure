@@ -44,6 +44,12 @@ import 'package:fashow/size_config.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 
+var currencyFormatter =      currentUser.currency == "USD"? NumberFormat('#,##0.00', ):
+currentUser.currency == "INR"?NumberFormat.currency(locale:"HI"):
+currentUser.currency == "EUR"? NumberFormat('#,##0.00'," ${currentUser.currencyISO}"):
+currentUser.currency == "GBP"?NumberFormat('#,##0.00'," ${currentUser.currencyISO}"): NumberFormat('#,##0.00', );
+
+
 
 File file;
 File file1;
@@ -315,6 +321,57 @@ TextEditingController custom47 = TextEditingController();
 TextEditingController custom48 = TextEditingController();
 TextEditingController custom49 = TextEditingController();
 TextEditingController custom50 = TextEditingController();
+
+TextEditingController customName1 = TextEditingController();
+TextEditingController customName2 = TextEditingController();
+TextEditingController customName3 = TextEditingController();
+TextEditingController customName4 = TextEditingController();
+TextEditingController customName5 = TextEditingController();
+TextEditingController customName6 = TextEditingController();
+TextEditingController customName7 = TextEditingController();
+TextEditingController customName8 = TextEditingController();
+TextEditingController customName9 = TextEditingController();
+TextEditingController customName10 = TextEditingController();
+TextEditingController customName11 = TextEditingController();
+TextEditingController customName12 = TextEditingController();
+TextEditingController customName13 = TextEditingController();
+TextEditingController customName14 = TextEditingController();
+TextEditingController customName15 = TextEditingController();
+TextEditingController customName16 = TextEditingController();
+TextEditingController customName17 = TextEditingController();
+TextEditingController customName18 = TextEditingController();
+TextEditingController customName19 = TextEditingController();
+TextEditingController customName20 = TextEditingController();
+TextEditingController customName21 = TextEditingController();
+TextEditingController customName22 = TextEditingController();
+TextEditingController customName23 = TextEditingController();
+TextEditingController customName24 = TextEditingController();
+TextEditingController customName25 = TextEditingController();
+TextEditingController customName26 = TextEditingController();
+TextEditingController customName27 = TextEditingController();
+TextEditingController customName28 = TextEditingController();
+TextEditingController customName29 = TextEditingController();
+TextEditingController customName30 = TextEditingController();
+TextEditingController customName31 = TextEditingController();
+TextEditingController customName32 = TextEditingController();
+TextEditingController customName33 = TextEditingController();
+TextEditingController customName34 = TextEditingController();
+TextEditingController customName35 = TextEditingController();
+TextEditingController customName36 = TextEditingController();
+TextEditingController customName37 = TextEditingController();
+TextEditingController customName38 = TextEditingController();
+TextEditingController customName39 = TextEditingController();
+TextEditingController customName40 = TextEditingController();
+TextEditingController customName41 = TextEditingController();
+TextEditingController customName42 = TextEditingController();
+TextEditingController customName43 = TextEditingController();
+TextEditingController customName44 = TextEditingController();
+TextEditingController customName45 = TextEditingController();
+TextEditingController customName46 = TextEditingController();
+TextEditingController customName47 = TextEditingController();
+TextEditingController customName48 = TextEditingController();
+TextEditingController customName49 = TextEditingController();
+TextEditingController customName50 = TextEditingController();
 
 
 

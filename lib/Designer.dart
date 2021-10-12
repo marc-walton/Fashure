@@ -30,8 +30,8 @@ import 'package:sticky_headers/sticky_headers.dart';
 import 'package:flutter_currencies_tracker/currency.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:fashow/enum/Variables.dart';
 
-var currencyFormatter = NumberFormat('#,##0.00', '${currentUser.countryISO}');
 class Designer extends StatefulWidget {
   @override
   _DesignerState createState() => _DesignerState();
@@ -1037,25 +1037,26 @@ class MyTabs {
   MyTabs({this.title, this.color});
 }
 
-class DItem extends StatefulWidget {
+
+class BItem extends StatefulWidget {
   final Users user;
   UserModel receiver;
   String products;
-  DItem(this.user);
+  BItem(this.user);
   @override
-  _DItemState createState() => _DItemState(this.user);
+  _BItemState createState() => _BItemState(this.user);
 }
-class _DItemState extends State<DItem> {
+class _BItemState extends State<BItem> {
   final Users user;
+  var price = 0.0;
 
   UserModel receiver;
-  String products;
   int client;
-var price = 0.0;
+
   int followerCount = 0;
   final String currentUserId = currentUser?.id;
 
-  _DItemState(this.user);
+  _BItemState(this.user);
   @override
   void initState() {
     super.initState();
@@ -1069,10 +1070,33 @@ var price = 0.0;
     conversion();
     getFollowers();
     g();
-    reviews();
+  }
+  conversion()async{
+    var convertor;
+
+    if(currentUser.currency == "INR") {
+      convertor = user.bloggerInr.toStringAsFixed(2);
+      price = double.tryParse(convertor);
+    }
+    if(currentUser.currency == "EUR") {
+      convertor = user.bloggerEur.toStringAsFixed(2);
+      price = double.tryParse(convertor);
+    }
+    if(currentUser.currency == "GBP") {
+      convertor = user.bloggerGbp.toStringAsFixed(2);
+      price = double.tryParse(convertor);
+    }
+
+    else {
+      convertor = user.bloggerUsd.toStringAsFixed(2);
+      price = double.tryParse(convertor);
+    }
+
+
+
   }
 
-  getPost() {
+    getPost() {
     return FutureBuilder(
         future: FirebaseFirestore.instance
             .collection('posts')
@@ -1118,7 +1142,6 @@ var price = 0.0;
                               .of(context)
                               .size
                               .width/2,
-                        
                         )
                     ),
                   ),
@@ -1129,366 +1152,6 @@ var price = 0.0;
         });
   }
 
-
-  reviews() {
-    return
-    StreamBuilder(
-      stream: FirebaseFirestore.instance
-          .collection('Reviews')
-          .doc(user.id)
-          .collection('userReviews')
-          .snapshots(),
-      builder: (context, snapshot) {
-        var rating = snapshot.data()['rating'];
-        List mean = rating.toList();
-        print(mean);
-        var avg = mean.reduce((a, b) => a + b) / mean.length;
-        print(avg);
-
-        String review = snapshot.data['review'];
-        return GestureDetector(
-          onTap: () => Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (context) => ClientReview(
-                        profileId: user.id,
-                      ))),
-          child: Container(
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(10.0),
-              color: kblue,
-              boxShadow: [BoxShadow(color: kblue)],
-            ),
-            height: 60,
-            width: 60,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Row(
-                  children: [
-                    SizedBox(
-                      width: 6.0,
-                    ),
-                    Icon(
-                      Icons.favorite,
-                      color: Colors.pink,
-                    ),
-                    SizedBox(
-                      width: 3.0,
-                    ),
-                    Text(
-                      avg,
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ],
-                ),
-                Text(
-                  '$avg',
-                  style: TextStyle(color: Colors.white),
-                ),
-              ],
-            ),
-          ),
-        );
-      },
-      // 'rating': rating,
-      // 'review':reviewController.text,
-    );
-  }
-
-
-  g() async {
-    DocumentSnapshot doc = await usersRef.doc(user.id).get();
-    Users ser = Users.fromDocument(doc);
-    setState(() {
-      client = ser.client;
-    });
-  }
-
-  hireMe() {
-    bool isProfileOwner = currentUserId == user.id;
-    if (isProfileOwner == true) {
-      return Container();
-    } else {
-
-      return
-        FloatingActionButton(
-          backgroundColor:Colors.white.withOpacity(0.5),
-mini:true,
-          shape: BeveledRectangleBorder(
-              borderRadius: BorderRadius.circular(5.0)
-          ),
-          onPressed: () => Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (context) => ChatScreen(
-                    receiver: receiver,
-                  ))),
-child:  Icon(
-  EvaIcons.emailOutline,
-  color: Colors.black,
-),
-
-        );
-    }
-  }
-
-  getFollowers() async {
-    QuerySnapshot snapshot =
-        await followersRef.doc(user.id).collection('userFollowers').get();
-    setState(() {
-      followerCount = snapshot.docs.length;
-    });
-//    usersRef.doc(widget.currentUserId).update({
-//      'followers':followerCount
-//    });
-  }
-  conversion()async{
-
-    if(currentUser.currencyISO == "USD") {
-      setState(() {
-
-        price =user.designerUsd ;
-
-      }); }
-    else {
-      var resultUSD1 = await Currency.getConversion(
-          from: 'USD', to: '${currentUser.currencyISO}', amount: user.designerUsd.toString());
-      setState(() {
-        price = resultUSD1.rate;
-      });
-    }
-
-
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    SizeConfig().init(context);
-
-    return SingleChildScrollView(
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Card(
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Container(
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.all(Radius.circular(20.0))),
-                margin:
-                    EdgeInsets.only(top: 10.0, left: 10.0, right: 10.0, bottom: 10.0),
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: <Widget>[
-
-                    GestureDetector(
-                      onTap: () => showProfile(context, profileId: user.id),
-                      child: ListTile(
-                        leading: CircleAvatar(
-                          backgroundImage: CachedNetworkImageProvider(user.photoUrl),
-                          backgroundColor: Colors.grey,
-                        ),
-                        title: Text(
-                          user.displayName,
-                          style: TextStyle(color: kText),
-                        ),
-                        subtitle:Text(
-                          user.country,
-                          style: TextStyle(color: kText),
-                        ),
-                       trailing:                          Column(children:[
-                         Text( " ${currentUser.currencysym} ${currencyFormatter.format(price)}",style: TextStyle(color: kText,
-                             fontSize: SizeConfig.safeBlockHorizontal * 3,
-                             fontWeight: FontWeight.bold)),
-                         Text("Average cost", style: TextStyle(
-                           color: Colors.grey,
-                         ),),
-
-                       ]),
-
-
-                      ),
-                    ),
-                    Align(
-                      alignment: Alignment.center,
-                      child: IntrinsicHeight(
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: <Widget>[
-                            followerTile(followerCount),
-                            clients(client),
-                            VerticalDivider(),
-                            Column(children:[
-                              hireMe(),
-                              SizedBox(
-                                height: 10.0,
-                              ),
-
-                              InkWell(
-                              onTap:() async {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => ClientReview(
-                                          profileId: user.id,
-                                        )));
-                              },
-                              child: Row(
-                                children: [
-                                  Icon(
-                                    Icons.star_border_rounded,
-                                    color:  Colors.grey,
-                                  ),
-                                  Text("Reviews",style:TextStyle(color:Colors.grey)),
-                                  Icon(
-                                    Icons.arrow_forward_ios_rounded,
-                                    color:  Colors.black,
-                                  ),
-
-
-
-                                ],
-                              ),
-                            ),
-                            ]),
-
-                          ],
-                        ),
-                      ),
-                    ),
-
-
-
-
-                    SizedBox(
-                      height: 10.0,
-                    ),
-                  ],
-                ),
-              ),
-              Container(
-                child: getPost(),
-              )
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-class IItem extends StatefulWidget {
-  final Users user;
-  UserModel receiver;
-  String products;
-  IItem(this.user);
-  @override
-  _IItemState createState() => _IItemState(this.user);
-}
-class _IItemState extends State<IItem> {
-  final Users user;
-
-  UserModel receiver;
-  String products;
-  int client;
-  var price = 0.0;
-
-  int followerCount = 0;
-  final String currentUserId = currentUser?.id;
-
-  _IItemState(this.user);
-  @override
-  void initState() {
-    super.initState();
-    setState(() {
-      receiver = UserModel(
-        id: user.id,
-        displayName: user.displayName,
-        photoUrl: user.photoUrl,
-      );
-    });
-    conversion();
-    getFollowers();
-    g();
-  }
-  conversion()async{
-
-    if(currentUser.currencyISO == "USD") {
-      setState(() {
-
-        price =user.illustratorUsd ;
-
-      }); }
-    else {
-      var resultUSD1 = await Currency.getConversion(
-          from: 'USD', to: '${currentUser.currencyISO}', amount: user.illustratorUsd.toString());
-      setState(() {
-        price = resultUSD1.rate;
-      });
-    }
-
-
-  }
-
-  getPost() {
-    return FutureBuilder(
-        future: FirebaseFirestore.instance
-            .collection('posts')
-            .doc(user.id)
-            .collection('userPosts')
-            .get(),
-
-        // ignore: missing_return
-        builder: (context, snapshot) {
-          if (!snapshot.hasData||snapshot.data.docs.isEmpty) {
-            return Container();
-          }
-          else{
-            return Container(
-              alignment:Alignment.centerLeft,
-              height: 200,
-              child: ListView.builder(
-                shrinkWrap: true,
-                scrollDirection: Axis.horizontal,
-                itemCount: snapshot.data.docs.length,
-                itemBuilder: (context, index) {
-                  DocumentSnapshot docSnapshot = snapshot.data.docs[index];
-                  List  url = snapshot.data.docs[index]["mediaUrl"];
-                  return Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(20.0),
-                      child: GestureDetector(
-                          onTap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => PostScreen(
-                                  postId: docSnapshot["postId"],
-                                  userId: docSnapshot["ownerId"],
-                                ),
-                              ),
-                            );
-                          },
-                          child: CachedImage(
-                             url.first,
-                          width: MediaQuery
-                              .of(context)
-                              .size
-                              .width/2,
-                          )
-                      ),
-                    ),
-                  );
-                },
-              ),
-            );}
-        });
-  }
   hireMe() {
     bool isProfileOwner = currentUserId == user.id;
     if (isProfileOwner == true) {
@@ -1671,7 +1334,769 @@ class _IItemState extends State<IItem> {
                           style: TextStyle(color: kText),
                         ),
                         trailing:                          Column(children:[
-                          Text( " ${currentUser.currencysym} ${currencyFormatter.format(price)}",style: TextStyle(color: kText,
+                            currentUser.currency == "INR"?  
+                          Text( "₹ ${currencyFormatter.format(price)}",style: TextStyle(color: kText,
+                                  fontSize: SizeConfig.safeBlockHorizontal * 3,
+                              fontWeight: FontWeight.bold)):
+                          currentUser.currency == "EUR"?
+                          Text( "${currencyFormatter.format(price)} €",style: TextStyle(color: kText,
+                              fontSize: SizeConfig.safeBlockHorizontal * 3,
+                              fontWeight: FontWeight.bold)):
+                          currentUser.currency == "GBP"?
+                          Text( "£ ${currencyFormatter.format(price)} ",style: TextStyle(color: kText,
+                              fontSize: SizeConfig.safeBlockHorizontal * 3,
+                              fontWeight: FontWeight.bold))
+                              :   Text( "\u0024 ${currencyFormatter.format(price)} ",style: TextStyle(color: kText,
+                              fontSize: SizeConfig.safeBlockHorizontal * 3,
+                              fontWeight: FontWeight.bold)),
+                          Text("Average cost", style: TextStyle(
+                            color: Colors.grey,
+                          ),),
+
+                        ]),
+
+
+                      ),
+                    ),
+                    Align(
+                      alignment: Alignment.center,
+                      child: IntrinsicHeight(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: <Widget>[
+                            followerTile(followerCount),
+                            clients(client),
+                            VerticalDivider(),
+                            Column(children:[
+                              hireMe(),
+                              SizedBox(
+                                height: 10.0,
+                              ),
+
+                              InkWell(
+                                onTap:() async {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => ClientReview(
+                                            profileId: user.id,
+                                          )));
+                                },
+                                child: Row(
+                                  children: [
+                                    Icon(
+                                      Icons.star_border_rounded,
+                                      color:  Colors.grey,
+                                    ),
+                                    Text("Reviews",style:TextStyle(color:Colors.grey)),
+                                    Icon(
+                                      Icons.arrow_forward_ios_rounded,
+                                      color:  Colors.black,
+                                    ),
+
+
+
+                                  ],
+                                ),
+                              ),
+                            ]),
+
+                          ],
+                        ),
+                      ),
+                    ),
+
+
+
+
+                    SizedBox(
+                      height: 10.0,
+                    ),
+                  ],
+                ),
+              ),
+              Container(
+                child: getPost(),
+              )
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class DItem extends StatefulWidget {
+  final Users user;
+  UserModel receiver;
+  String products;
+  DItem(this.user);
+  @override
+  _DItemState createState() => _DItemState(this.user);
+}
+class _DItemState extends State<DItem> {
+  final Users user;
+
+  UserModel receiver;
+  String products;
+  int client;
+  var price = 0.0;
+  int followerCount = 0;
+  final String currentUserId = currentUser?.id;
+
+  _DItemState(this.user);
+  @override
+  void initState() {
+    super.initState();
+    setState(() {
+      receiver = UserModel(
+        id: user.id,
+        displayName: user.displayName,
+        photoUrl: user.photoUrl,
+      );
+    });
+    conversion();
+    getFollowers();
+    g();
+    reviews();
+  }
+
+  getPost() {
+    return FutureBuilder(
+        future: FirebaseFirestore.instance
+            .collection('posts')
+            .doc(user.id)
+            .collection('userPosts')
+            .get(),
+
+        // ignore: missing_return
+        builder: (context, snapshot) {
+          if (!snapshot.hasData||snapshot.data.docs.isEmpty) {
+            return Container();
+          }
+          else{
+            return Container(
+              alignment:Alignment.centerLeft,
+              height: 200,
+              child: ListView.builder(
+                shrinkWrap: true,
+                scrollDirection: Axis.horizontal,
+                itemCount: snapshot.data.docs.length,
+                itemBuilder: (context, index) {
+                  DocumentSnapshot docSnapshot = snapshot.data.docs[index];
+                  List  url = snapshot.data.docs[index]["mediaUrl"];
+                  return Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(20.0),
+                      child: GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => PostScreen(
+                                  postId: docSnapshot["postId"],
+                                  userId: docSnapshot["ownerId"],
+                                ),
+                              ),
+                            );
+                          },
+                          child: CachedImage(
+                            url.first,
+                            width: MediaQuery
+                                .of(context)
+                                .size
+                                .width/2,
+
+                          )
+                      ),
+                    ),
+                  );
+                },
+              ),
+            );}
+        });
+  }
+
+
+  reviews() {
+    return
+      StreamBuilder(
+        stream: FirebaseFirestore.instance
+            .collection('Reviews')
+            .doc(user.id)
+            .collection('userReviews')
+            .snapshots(),
+        builder: (context, snapshot) {
+          var rating = snapshot.data()['rating'];
+          List mean = rating.toList();
+          print(mean);
+          var avg = mean.reduce((a, b) => a + b) / mean.length;
+          print(avg);
+
+          String review = snapshot.data['review'];
+          return GestureDetector(
+            onTap: () => Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => ClientReview(
+                      profileId: user.id,
+                    ))),
+            child: Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10.0),
+                color: kblue,
+                boxShadow: [BoxShadow(color: kblue)],
+              ),
+              height: 60,
+              width: 60,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Row(
+                    children: [
+                      SizedBox(
+                        width: 6.0,
+                      ),
+                      Icon(
+                        Icons.favorite,
+                        color: Colors.pink,
+                      ),
+                      SizedBox(
+                        width: 3.0,
+                      ),
+                      Text(
+                        avg,
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ],
+                  ),
+                  Text(
+                    '$avg',
+                    style: TextStyle(color: Colors.white),
+                  ),
+                ],
+              ),
+            ),
+          );
+        },
+        // 'rating': rating,
+        // 'review':reviewController.text,
+      );
+  }
+
+
+  g() async {
+    DocumentSnapshot doc = await usersRef.doc(user.id).get();
+    Users ser = Users.fromDocument(doc);
+    setState(() {
+      client = ser.client;
+    });
+  }
+
+  hireMe() {
+    bool isProfileOwner = currentUserId == user.id;
+    if (isProfileOwner == true) {
+      return Container();
+    } else {
+
+      return
+        FloatingActionButton(
+          backgroundColor:Colors.white.withOpacity(0.5),
+          mini:true,
+          shape: BeveledRectangleBorder(
+              borderRadius: BorderRadius.circular(5.0)
+          ),
+          onPressed: () => Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => ChatScreen(
+                    receiver: receiver,
+                  ))),
+          child:  Icon(
+            EvaIcons.emailOutline,
+            color: Colors.black,
+          ),
+
+        );
+    }
+  }
+
+  getFollowers() async {
+    QuerySnapshot snapshot =
+    await followersRef.doc(user.id).collection('userFollowers').get();
+    setState(() {
+      followerCount = snapshot.docs.length;
+    });
+//    usersRef.doc(widget.currentUserId).update({
+//      'followers':followerCount
+//    });
+  }
+  conversion()async{
+    var convertor;
+
+    if(currentUser.currency == "INR") {
+      convertor = user.designerInr.toStringAsFixed(2);
+      price = double.tryParse(convertor);
+    }
+    if(currentUser.currency == "EUR") {
+      convertor = user.designerEur.toStringAsFixed(2);
+      price = double.tryParse(convertor);
+    }
+    if(currentUser.currency == "GBP") {
+      convertor = user.designerGbp.toStringAsFixed(2);
+      price = double.tryParse(convertor);
+    }
+
+    else {
+      convertor = user.designerUsd.toStringAsFixed(2);
+      price = double.tryParse(convertor);
+    }
+
+
+
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    SizeConfig().init(context);
+
+    return SingleChildScrollView(
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Card(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Container(
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.all(Radius.circular(20.0))),
+                margin:
+                EdgeInsets.only(top: 10.0, left: 10.0, right: 10.0, bottom: 10.0),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: <Widget>[
+
+                    GestureDetector(
+                      onTap: () => showProfile(context, profileId: user.id),
+                      child: ListTile(
+                        leading: CircleAvatar(
+                          backgroundImage: CachedNetworkImageProvider(user.photoUrl),
+                          backgroundColor: Colors.grey,
+                        ),
+                        title: Text(
+                          user.displayName,
+                          style: TextStyle(color: kText),
+                        ),
+                        subtitle:Text(
+                          user.country,
+                          style: TextStyle(color: kText),
+                        ),
+                        trailing:                          Column(children:[
+                          currentUser.currency == "INR"?
+                          Text( "₹ ${currencyFormatter.format(price)}",style: TextStyle(color: kText,
+                              fontSize: SizeConfig.safeBlockHorizontal * 3,
+                              fontWeight: FontWeight.bold)):
+                          currentUser.currency == "EUR"?
+                          Text( "${currencyFormatter.format(price)} €",style: TextStyle(color: kText,
+                              fontSize: SizeConfig.safeBlockHorizontal * 3,
+                              fontWeight: FontWeight.bold)):
+                          currentUser.currency == "GBP"?
+                          Text( "£ ${currencyFormatter.format(price)} ",style: TextStyle(color: kText,
+                              fontSize: SizeConfig.safeBlockHorizontal * 3,
+                              fontWeight: FontWeight.bold))
+                              :   Text( "\u0024 ${currencyFormatter.format(price)} ",style: TextStyle(color: kText,
+                              fontSize: SizeConfig.safeBlockHorizontal * 3,
+                              fontWeight: FontWeight.bold)),
+                          Text("Average cost", style: TextStyle(
+                            color: Colors.grey,
+                          ),),
+
+                        ]),
+
+
+                      ),
+                    ),
+                    Align(
+                      alignment: Alignment.center,
+                      child: IntrinsicHeight(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: <Widget>[
+                            followerTile(followerCount),
+                            clients(client),
+                            VerticalDivider(),
+                            Column(children:[
+                              hireMe(),
+                              SizedBox(
+                                height: 10.0,
+                              ),
+
+                              InkWell(
+                                onTap:() async {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => ClientReview(
+                                            profileId: user.id,
+                                          )));
+                                },
+                                child: Row(
+                                  children: [
+                                    Icon(
+                                      Icons.star_border_rounded,
+                                      color:  Colors.grey,
+                                    ),
+                                    Text("Reviews",style:TextStyle(color:Colors.grey)),
+                                    Icon(
+                                      Icons.arrow_forward_ios_rounded,
+                                      color:  Colors.black,
+                                    ),
+
+
+
+                                  ],
+                                ),
+                              ),
+                            ]),
+
+                          ],
+                        ),
+                      ),
+                    ),
+
+
+
+
+                    SizedBox(
+                      height: 10.0,
+                    ),
+                  ],
+                ),
+              ),
+              Container(
+                child: getPost(),
+              )
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class IItem extends StatefulWidget {
+  final Users user;
+  UserModel receiver;
+  String products;
+  IItem(this.user);
+  @override
+  _IItemState createState() => _IItemState(this.user);
+}
+class _IItemState extends State<IItem> {
+  final Users user;
+
+  UserModel receiver;
+  String products;
+  int client;
+  var price = 0.0;
+
+  int followerCount = 0;
+  final String currentUserId = currentUser?.id;
+
+  _IItemState(this.user);
+  @override
+  void initState() {
+    super.initState();
+    setState(() {
+      receiver = UserModel(
+        id: user.id,
+        displayName: user.displayName,
+        photoUrl: user.photoUrl,
+      );
+    });
+    conversion();
+    getFollowers();
+    g();
+  }
+  conversion()async{
+    var convertor;
+
+    if(currentUser.currency == "INR") {
+      convertor = user.illustratorInr.toStringAsFixed(2);
+      price = double.tryParse(convertor);
+    }
+    if(currentUser.currency == "EUR") {
+      convertor = user.illustratorEur.toStringAsFixed(2);
+      price = double.tryParse(convertor);
+    }
+    if(currentUser.currency == "GBP") {
+      convertor = user.illustratorGbp.toStringAsFixed(2);
+      price = double.tryParse(convertor);
+    }
+
+    else {
+      convertor = user.illustratorUsd.toStringAsFixed(2);
+      price = double.tryParse(convertor);
+    }
+
+
+
+  }
+
+  getPost() {
+    return FutureBuilder(
+        future: FirebaseFirestore.instance
+            .collection('posts')
+            .doc(user.id)
+            .collection('userPosts')
+            .get(),
+
+        // ignore: missing_return
+        builder: (context, snapshot) {
+          if (!snapshot.hasData||snapshot.data.docs.isEmpty) {
+            return Container();
+          }
+          else{
+            return Container(
+              alignment:Alignment.centerLeft,
+              height: 200,
+              child: ListView.builder(
+                shrinkWrap: true,
+                scrollDirection: Axis.horizontal,
+                itemCount: snapshot.data.docs.length,
+                itemBuilder: (context, index) {
+                  DocumentSnapshot docSnapshot = snapshot.data.docs[index];
+                  List  url = snapshot.data.docs[index]["mediaUrl"];
+                  return Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(20.0),
+                      child: GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => PostScreen(
+                                  postId: docSnapshot["postId"],
+                                  userId: docSnapshot["ownerId"],
+                                ),
+                              ),
+                            );
+                          },
+                          child: CachedImage(
+                            url.first,
+                            width: MediaQuery
+                                .of(context)
+                                .size
+                                .width/2,
+                          )
+                      ),
+                    ),
+                  );
+                },
+              ),
+            );}
+        });
+  }
+  hireMe() {
+    bool isProfileOwner = currentUserId == user.id;
+    if (isProfileOwner == true) {
+      return Container();
+    } else {
+
+      return
+        FloatingActionButton(
+          backgroundColor:Colors.white.withOpacity(0.5),
+          mini:true,
+          shape: BeveledRectangleBorder(
+              borderRadius: BorderRadius.circular(5.0)
+          ),
+          onPressed: () => Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => ChatScreen(
+                    receiver: receiver,
+                  ))),
+          child:  Icon(
+            EvaIcons.emailOutline,
+            color: Colors.black,
+          ),
+
+        );
+    }
+  }
+
+  reviews() {
+    StreamBuilder(
+      stream: FirebaseFirestore.instance
+          .collection('Reviews')
+          .doc(user.id)
+          .collection('userReviews')
+          .snapshots(),
+      builder: (context, snapshot) {
+        var rating = snapshot.data()['rating'];
+        var avg = rating.reduce((a, b) => a + b) / rating.length;
+        String review = snapshot.data['review'];
+        return GestureDetector(
+          onTap: () => Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => ClientReview(
+                    profileId: user.id,
+                  ))),
+          child: Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(10.0),
+              color: kblue,
+              boxShadow: [BoxShadow(color: kblue)],
+            ),
+            height: 60,
+            width: 60,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Row(
+                  children: [
+                    SizedBox(
+                      width: 6.0,
+                    ),
+                    Icon(
+                      Icons.favorite,
+                      color: Colors.pink,
+                    ),
+                    SizedBox(
+                      width: 3.0,
+                    ),
+                    Text(
+                      avg,
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ],
+                ),
+                Text(
+                  'Rating',
+                  style: TextStyle(color: Colors.white),
+                ),
+              ],
+            ),
+          ),
+        );
+      },
+      // 'rating': rating,
+      // 'review':reviewController.text,
+    );
+  }
+
+  Client() {
+    return Container(
+      decoration: BoxDecoration(
+          color: kPrimaryColor,
+          boxShadow: [
+            BoxShadow(
+              color: Colors.grey,
+              blurRadius: 5.0,
+            ),
+          ],
+          borderRadius: BorderRadius.all(Radius.circular(10.0))),
+      height: 60,
+      width: 60,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Text(
+            '${client}',
+            style: TextStyle(
+              color: Colors.white,
+              fontWeight: FontWeight.bold,
+            ),
+          ),Text(
+            'clients',
+            style: TextStyle(
+              color: Colors.white,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  g() async {
+    DocumentSnapshot doc = await usersRef.doc(user.id).get();
+    Users ser = Users.fromDocument(doc);
+    setState(() {
+      client = ser.client;
+    });
+  }
+
+
+  getFollowers() async {
+    QuerySnapshot snapshot =
+    await followersRef.doc(user.id).collection('userFollowers').get();
+    setState(() {
+      followerCount = snapshot.docs.length;
+    });
+//    usersRef.doc(widget.currentUserId).update({
+//      'followers':followerCount
+//    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    SizeConfig().init(context);
+
+    return SingleChildScrollView(
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Card(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Container(
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.all(Radius.circular(20.0))),
+                margin:
+                EdgeInsets.only(top: 10.0, left: 10.0, right: 10.0, bottom: 10.0),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: <Widget>[
+
+                    GestureDetector(
+                      onTap: () => showProfile(context, profileId: user.id),
+                      child: ListTile(
+                        leading: CircleAvatar(
+                          backgroundImage: CachedNetworkImageProvider(user.photoUrl),
+                          backgroundColor: Colors.grey,
+                        ),
+                        title: Text(
+                          user.displayName,
+                          style: TextStyle(color: kText),
+                        ),
+                        subtitle:Text(
+                          user.country,
+                          style: TextStyle(color: kText),
+                        ),
+                        trailing:                          Column(children:[
+                          currentUser.currency == "INR"?
+                          Text( "₹ ${currencyFormatter.format(price)}",style: TextStyle(color: kText,
+                              fontSize: SizeConfig.safeBlockHorizontal * 3,
+                              fontWeight: FontWeight.bold)):
+                          currentUser.currency == "EUR"?
+                          Text( "${currencyFormatter.format(price)} €",style: TextStyle(color: kText,
+                              fontSize: SizeConfig.safeBlockHorizontal * 3,
+                              fontWeight: FontWeight.bold)):
+                          currentUser.currency == "GBP"?
+                          Text( "£ ${currencyFormatter.format(price)} ",style: TextStyle(color: kText,
+                              fontSize: SizeConfig.safeBlockHorizontal * 3,
+                              fontWeight: FontWeight.bold))
+                              :   Text( "\u0024 ${currencyFormatter.format(price)} ",style: TextStyle(color: kText,
                               fontSize: SizeConfig.safeBlockHorizontal * 3,
                               fontWeight: FontWeight.bold)),
                           Text("Average cost", style: TextStyle(
@@ -1786,25 +2211,31 @@ class _SItemState extends State<SItem> {
     g();
   }
   conversion()async{
+    var convertor;
 
-    if(currentUser.currencyISO == "USD") {
-      setState(() {
-
-        price =user.stylistUsd ;
-
-      }); }
-    else {
-      var resultUSD1 = await Currency.getConversion(
-          from: 'USD', to: '${currentUser.currencyISO}', amount: user.stylistUsd.toString());
-      setState(() {
-        price = resultUSD1.rate;
-      });
+    if(currentUser.currency == "INR") {
+      convertor = user.stylistInr.toStringAsFixed(2);
+      price = double.tryParse(convertor);
     }
+    if(currentUser.currency == "EUR") {
+      convertor = user.stylistEur.toStringAsFixed(2);
+      price = double.tryParse(convertor);
+    }
+    if(currentUser.currency == "GBP") {
+      convertor = user.stylistGbp.toStringAsFixed(2);
+      price = double.tryParse(convertor);
+    }
+
+    else {
+      convertor = user.stylistUsd.toStringAsFixed(2);
+      price = double.tryParse(convertor);
+    }
+
 
 
   }
 
-    getPost() {
+  getPost() {
     return FutureBuilder(
         future: FirebaseFirestore.instance
             .collection('posts')
@@ -1818,45 +2249,45 @@ class _SItemState extends State<SItem> {
             return Container();
           }
           else{
-          return Container(
-            alignment:Alignment.centerLeft,
-            height: 200,
-            child: ListView.builder(
-              shrinkWrap: true,
-              scrollDirection: Axis.horizontal,
-              itemCount: snapshot.data.docs.length,
-              itemBuilder: (context, index) {
-                DocumentSnapshot docSnapshot = snapshot.data.docs[index];
-             List  url = snapshot.data.docs[index]["mediaUrl"];
-                return Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(20.0),
-                    child: GestureDetector(
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => PostScreen(
-                                postId: docSnapshot["postId"],
-                                userId: docSnapshot["ownerId"],
+            return Container(
+              alignment:Alignment.centerLeft,
+              height: 200,
+              child: ListView.builder(
+                shrinkWrap: true,
+                scrollDirection: Axis.horizontal,
+                itemCount: snapshot.data.docs.length,
+                itemBuilder: (context, index) {
+                  DocumentSnapshot docSnapshot = snapshot.data.docs[index];
+                  List  url = snapshot.data.docs[index]["mediaUrl"];
+                  return Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(20.0),
+                      child: GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => PostScreen(
+                                  postId: docSnapshot["postId"],
+                                  userId: docSnapshot["ownerId"],
+                                ),
                               ),
-                            ),
-                          );
-                        },
-                        child: CachedImage(
-                    url.first,
-                          width: MediaQuery
-                              .of(context)
-                              .size
-                              .width/2,
-                        )
+                            );
+                          },
+                          child: CachedImage(
+                            url.first,
+                            width: MediaQuery
+                                .of(context)
+                                .size
+                                .width/2,
+                          )
+                      ),
                     ),
-                  ),
-                );
-              },
-            ),
-          );}
+                  );
+                },
+              ),
+            );}
         });
   }
   hireMe() {
@@ -1902,8 +2333,8 @@ class _SItemState extends State<SItem> {
               context,
               MaterialPageRoute(
                   builder: (context) => ClientReview(
-                        profileId: user.id,
-                      ))),
+                    profileId: user.id,
+                  ))),
           child: Container(
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10.0),
@@ -1995,7 +2426,7 @@ class _SItemState extends State<SItem> {
 
   getFollowers() async {
     QuerySnapshot snapshot =
-        await followersRef.doc(user.id).collection('userFollowers').get();
+    await followersRef.doc(user.id).collection('userFollowers').get();
     setState(() {
       followerCount = snapshot.docs.length;
     });
@@ -2040,7 +2471,19 @@ class _SItemState extends State<SItem> {
                           style: TextStyle(color: kText),
                         ),
                         trailing:                          Column(children:[
-                          Text( " ${currentUser.currencysym} ${currencyFormatter.format(price)}",style: TextStyle(color: kText,
+                          currentUser.currency == "INR"?
+                          Text( "₹ ${currencyFormatter.format(price)}",style: TextStyle(color: kText,
+                              fontSize: SizeConfig.safeBlockHorizontal * 3,
+                              fontWeight: FontWeight.bold)):
+                          currentUser.currency == "EUR"?
+                          Text( "${currencyFormatter.format(price)} €",style: TextStyle(color: kText,
+                              fontSize: SizeConfig.safeBlockHorizontal * 3,
+                              fontWeight: FontWeight.bold)):
+                          currentUser.currency == "GBP"?
+                          Text( "£ ${currencyFormatter.format(price)} ",style: TextStyle(color: kText,
+                              fontSize: SizeConfig.safeBlockHorizontal * 3,
+                              fontWeight: FontWeight.bold))
+                              :   Text( "\u0024 ${currencyFormatter.format(price)} ",style: TextStyle(color: kText,
                               fontSize: SizeConfig.safeBlockHorizontal * 3,
                               fontWeight: FontWeight.bold)),
                           Text("Average cost", style: TextStyle(
@@ -2119,377 +2562,6 @@ class _SItemState extends State<SItem> {
     );
   }
 }
-
-class BItem extends StatefulWidget {
-  final Users user;
-  UserModel receiver;
-  String products;
-  BItem(this.user);
-  @override
-  _BItemState createState() => _BItemState(this.user);
-}
-class _BItemState extends State<BItem> {
-  final Users user;
-  var price = 0.0;
-
-  UserModel receiver;
-  int client;
-
-  int followerCount = 0;
-  final String currentUserId = currentUser?.id;
-
-  _BItemState(this.user);
-  @override
-  void initState() {
-    super.initState();
-    setState(() {
-      receiver = UserModel(
-        id: user.id,
-        displayName: user.displayName,
-        photoUrl: user.photoUrl,
-      );
-    });
-    conversion();
-    getFollowers();
-    g();
-  }
-  conversion()async{
-
-    if(currentUser.currencyISO == "USD") {
-      setState(() {
-
-        price =user.bloggerUsd ;
-
-      }); }
-    else {
-      var resultUSD1 = await Currency.getConversion(
-          from: 'USD', to: '${currentUser.currencyISO}', amount: user.bloggerUsd.toString());
-      setState(() {
-        price = resultUSD1.rate;
-      });
-    }
-
-
-  }
-
-    getPost() {
-    return FutureBuilder(
-        future: FirebaseFirestore.instance
-            .collection('posts')
-            .doc(user.id)
-            .collection('userPosts')
-            .get(),
-
-        // ignore: missing_return
-        builder: (context, snapshot) {
-          if (!snapshot.hasData||snapshot.data.docs.isEmpty) {
-            return Container();
-          }
-          else{
-          return Container(
-            alignment:Alignment.centerLeft,
-            height: 200,
-            child: ListView.builder(
-              shrinkWrap: true,
-              scrollDirection: Axis.horizontal,
-              itemCount: snapshot.data.docs.length,
-              itemBuilder: (context, index) {
-                DocumentSnapshot docSnapshot = snapshot.data.docs[index];
-             List  url = snapshot.data.docs[index]["mediaUrl"];
-                return Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(20.0),
-                    child: GestureDetector(
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => PostScreen(
-                                postId: docSnapshot["postId"],
-                                userId: docSnapshot["ownerId"],
-                              ),
-                            ),
-                          );
-                        },
-                        child: CachedImage(
-                    url.first,
-                          width: MediaQuery
-                              .of(context)
-                              .size
-                              .width/2,
-                        )
-                    ),
-                  ),
-                );
-              },
-            ),
-          );}
-        });
-  }
-
-  hireMe() {
-    bool isProfileOwner = currentUserId == user.id;
-    if (isProfileOwner == true) {
-      return Container();
-    } else {
-
-      return
-        FloatingActionButton(
-          backgroundColor:Colors.white.withOpacity(0.5),
-          mini:true,
-          shape: BeveledRectangleBorder(
-              borderRadius: BorderRadius.circular(5.0)
-          ),
-          onPressed: () => Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (context) => ChatScreen(
-                    receiver: receiver,
-                  ))),
-          child:  Icon(
-            EvaIcons.emailOutline,
-            color: Colors.black,
-          ),
-
-        );
-    }
-  }
-
-  reviews() {
-    StreamBuilder(
-      stream: FirebaseFirestore.instance
-          .collection('Reviews')
-          .doc(user.id)
-          .collection('userReviews')
-          .snapshots(),
-      builder: (context, snapshot) {
-        var rating = snapshot.data()['rating'];
-        var avg = rating.reduce((a, b) => a + b) / rating.length;
-        String review = snapshot.data['review'];
-        return GestureDetector(
-          onTap: () => Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (context) => ClientReview(
-                        profileId: user.id,
-                      ))),
-          child: Container(
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(10.0),
-              color: kblue,
-              boxShadow: [BoxShadow(color: kblue)],
-            ),
-            height: 60,
-            width: 60,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Row(
-                  children: [
-                    SizedBox(
-                      width: 6.0,
-                    ),
-                    Icon(
-                      Icons.favorite,
-                      color: Colors.pink,
-                    ),
-                    SizedBox(
-                      width: 3.0,
-                    ),
-                    Text(
-                      avg,
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ],
-                ),
-                Text(
-                  'Rating',
-                  style: TextStyle(color: Colors.white),
-                ),
-              ],
-            ),
-          ),
-        );
-      },
-      // 'rating': rating,
-      // 'review':reviewController.text,
-    );
-  }
-
-  Client() {
-    return Container(
-      decoration: BoxDecoration(
-          color: kPrimaryColor,
-          boxShadow: [
-            BoxShadow(
-              color: Colors.grey,
-              blurRadius: 5.0,
-            ),
-          ],
-          borderRadius: BorderRadius.all(Radius.circular(10.0))),
-      height: 60,
-      width: 60,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Text(
-            '${client}',
-            style: TextStyle(
-              color: Colors.white,
-              fontWeight: FontWeight.bold,
-            ),
-          ),Text(
-            'clients',
-            style: TextStyle(
-              color: Colors.white,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  g() async {
-    DocumentSnapshot doc = await usersRef.doc(user.id).get();
-    Users ser = Users.fromDocument(doc);
-    setState(() {
-      client = ser.client;
-    });
-  }
-
-
-  getFollowers() async {
-    QuerySnapshot snapshot =
-        await followersRef.doc(user.id).collection('userFollowers').get();
-    setState(() {
-      followerCount = snapshot.docs.length;
-    });
-//    usersRef.doc(widget.currentUserId).update({
-//      'followers':followerCount
-//    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    SizeConfig().init(context);
-
-    return SingleChildScrollView(
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Card(
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Container(
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.all(Radius.circular(20.0))),
-                margin:
-                EdgeInsets.only(top: 10.0, left: 10.0, right: 10.0, bottom: 10.0),
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: <Widget>[
-
-                    GestureDetector(
-                      onTap: () => showProfile(context, profileId: user.id),
-                      child: ListTile(
-                        leading: CircleAvatar(
-                          backgroundImage: CachedNetworkImageProvider(user.photoUrl),
-                          backgroundColor: Colors.grey,
-                        ),
-                        title: Text(
-                          user.displayName,
-                          style: TextStyle(color: kText),
-                        ),
-                        subtitle:Text(
-                          user.country,
-                          style: TextStyle(color: kText),
-                        ),
-                        trailing:                          Column(children:[
-                          Text( " ${currentUser.currencysym} ${currencyFormatter.format(price)}",style: TextStyle(color: kText,
-                              fontSize: SizeConfig.safeBlockHorizontal * 3,
-                              fontWeight: FontWeight.bold)),
-                          Text("Average cost", style: TextStyle(
-                            color: Colors.grey,
-                          ),),
-
-                        ]),
-
-
-                      ),
-                    ),
-                    Align(
-                      alignment: Alignment.center,
-                      child: IntrinsicHeight(
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: <Widget>[
-                            followerTile(followerCount),
-                            clients(client),
-                            VerticalDivider(),
-                            Column(children:[
-                              hireMe(),
-                              SizedBox(
-                                height: 10.0,
-                              ),
-
-                              InkWell(
-                                onTap:() async {
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) => ClientReview(
-                                            profileId: user.id,
-                                          )));
-                                },
-                                child: Row(
-                                  children: [
-                                    Icon(
-                                      Icons.star_border_rounded,
-                                      color:  Colors.grey,
-                                    ),
-                                    Text("Reviews",style:TextStyle(color:Colors.grey)),
-                                    Icon(
-                                      Icons.arrow_forward_ios_rounded,
-                                      color:  Colors.black,
-                                    ),
-
-
-
-                                  ],
-                                ),
-                              ),
-                            ]),
-
-                          ],
-                        ),
-                      ),
-                    ),
-
-
-
-
-                    SizedBox(
-                      height: 10.0,
-                    ),
-                  ],
-                ),
-              ),
-              Container(
-                child: getPost(),
-              )
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-}
-
 class PItem extends StatefulWidget {
   final Users user;
   UserModel receiver;
@@ -2525,20 +2597,26 @@ class _PItemState extends State<PItem> {
     g();
   }
   conversion()async{
+    var convertor;
 
-    if(currentUser.currencyISO == "USD") {
-      setState(() {
-
-        price =user.photographerUsd ;
-
-      }); }
-    else {
-      var resultUSD1 = await Currency.getConversion(
-          from: 'USD', to: '${currentUser.currencyISO}', amount: user.photographerUsd.toString());
-      setState(() {
-        price = resultUSD1.rate;
-      });
+    if(currentUser.currency == "INR") {
+      convertor = user.photographerInr.toStringAsFixed(2);
+      price = double.tryParse(convertor);
     }
+    if(currentUser.currency == "EUR") {
+      convertor = user.photographerEur.toStringAsFixed(2);
+      price = double.tryParse(convertor);
+    }
+    if(currentUser.currency == "GBP") {
+      convertor = user.photographerGbp.toStringAsFixed(2);
+      price = double.tryParse(convertor);
+    }
+
+    else {
+      convertor = user.photographerUsd.toStringAsFixed(2);
+      price = double.tryParse(convertor);
+    }
+
 
 
   }
@@ -2780,7 +2858,19 @@ class _PItemState extends State<PItem> {
                           style: TextStyle(color: kText),
                         ),
                         trailing:                          Column(children:[
-                          Text( " ${currentUser.currencysym} ${currencyFormatter.format(price)}",style: TextStyle(color: kText,
+                            currentUser.currency == "INR"?  
+                          Text( "₹ ${currencyFormatter.format(price)}",style: TextStyle(color: kText,
+                                  fontSize: SizeConfig.safeBlockHorizontal * 3,
+                              fontWeight: FontWeight.bold)):
+                          currentUser.currency == "EUR"?
+                          Text( "${currencyFormatter.format(price)} €",style: TextStyle(color: kText,
+                              fontSize: SizeConfig.safeBlockHorizontal * 3,
+                              fontWeight: FontWeight.bold)):
+                          currentUser.currency == "GBP"?
+                          Text( "£ ${currencyFormatter.format(price)} ",style: TextStyle(color: kText,
+                              fontSize: SizeConfig.safeBlockHorizontal * 3,
+                              fontWeight: FontWeight.bold))
+                              :   Text( "\u0024 ${currencyFormatter.format(price)} ",style: TextStyle(color: kText,
                               fontSize: SizeConfig.safeBlockHorizontal * 3,
                               fontWeight: FontWeight.bold)),
                           Text("Average cost", style: TextStyle(
@@ -2895,20 +2985,26 @@ class _MAItemState extends State<MAItem> {
     g();
   }
   conversion()async{
+    var convertor;
 
-    if(currentUser.currencyISO == "USD") {
-      setState(() {
-
-        price =user.makeupUsd ;
-
-      }); }
-    else {
-      var resultUSD1 = await Currency.getConversion(
-          from: 'USD', to: '${currentUser.currencyISO}', amount: user.makeupUsd.toString());
-      setState(() {
-        price = resultUSD1.rate;
-      });
+    if(currentUser.currency == "INR") {
+      convertor = user.makeupInr.toStringAsFixed(2);
+      price = double.tryParse(convertor);
     }
+    if(currentUser.currency == "EUR") {
+      convertor = user.makeupEur.toStringAsFixed(2);
+      price = double.tryParse(convertor);
+    }
+    if(currentUser.currency == "GBP") {
+      convertor = user.makeupGbp.toStringAsFixed(2);
+      price = double.tryParse(convertor);
+    }
+
+    else {
+      convertor = user.makeupUsd.toStringAsFixed(2);
+      price = double.tryParse(convertor);
+    }
+
 
 
   }
@@ -3150,7 +3246,19 @@ class _MAItemState extends State<MAItem> {
                           style: TextStyle(color: kText),
                         ),
                         trailing:                          Column(children:[
-                          Text( " ${currentUser.currencysym} ${currencyFormatter.format(price)}",style: TextStyle(color: kText,
+                            currentUser.currency == "INR"?  
+                          Text( "₹ ${currencyFormatter.format(price)}",style: TextStyle(color: kText,
+                                  fontSize: SizeConfig.safeBlockHorizontal * 3,
+                              fontWeight: FontWeight.bold)):
+                          currentUser.currency == "EUR"?
+                          Text( "${currencyFormatter.format(price)} €",style: TextStyle(color: kText,
+                              fontSize: SizeConfig.safeBlockHorizontal * 3,
+                              fontWeight: FontWeight.bold)):
+                          currentUser.currency == "GBP"?
+                          Text( "£ ${currencyFormatter.format(price)} ",style: TextStyle(color: kText,
+                              fontSize: SizeConfig.safeBlockHorizontal * 3,
+                              fontWeight: FontWeight.bold))
+                              :   Text( "\u0024 ${currencyFormatter.format(price)} ",style: TextStyle(color: kText,
                               fontSize: SizeConfig.safeBlockHorizontal * 3,
                               fontWeight: FontWeight.bold)),
                           Text("Average cost", style: TextStyle(
@@ -3265,20 +3373,26 @@ class _MItemState extends State<MItem> {
     g();
   }
   conversion()async{
+    var convertor;
 
-    if(currentUser.currencyISO == "USD") {
-      setState(() {
-
-        price =user.modelUsd ;
-
-      }); }
-    else {
-      var resultUSD1 = await Currency.getConversion(
-          from: 'USD', to: '${currentUser.currencyISO}', amount: user.modelUsd.toString());
-      setState(() {
-        price = resultUSD1.rate;
-      });
+    if(currentUser.currency == "INR") {
+      convertor = user.modelInr.toStringAsFixed(2);
+      price = double.tryParse(convertor);
     }
+    if(currentUser.currency == "EUR") {
+      convertor = user.modelEur.toStringAsFixed(2);
+      price = double.tryParse(convertor);
+    }
+    if(currentUser.currency == "GBP") {
+      convertor = user.modelGbp.toStringAsFixed(2);
+      price = double.tryParse(convertor);
+    }
+
+    else {
+      convertor = user.modelUsd.toStringAsFixed(2);
+      price = double.tryParse(convertor);
+    }
+
 
 
   }
@@ -3521,7 +3635,19 @@ class _MItemState extends State<MItem> {
                           style: TextStyle(color: kText),
                         ),
                         trailing:                          Column(children:[
-                          Text( " ${currentUser.currencysym} ${currencyFormatter.format(price)}",style: TextStyle(color: kText,
+                            currentUser.currency == "INR"?  
+                          Text( "₹ ${currencyFormatter.format(price)}",style: TextStyle(color: kText,
+                                  fontSize: SizeConfig.safeBlockHorizontal * 3,
+                              fontWeight: FontWeight.bold)):
+                          currentUser.currency == "EUR"?
+                          Text( "${currencyFormatter.format(price)} €",style: TextStyle(color: kText,
+                              fontSize: SizeConfig.safeBlockHorizontal * 3,
+                              fontWeight: FontWeight.bold)):
+                          currentUser.currency == "GBP"?
+                          Text( "£ ${currencyFormatter.format(price)} ",style: TextStyle(color: kText,
+                              fontSize: SizeConfig.safeBlockHorizontal * 3,
+                              fontWeight: FontWeight.bold))
+                              :   Text( "\u0024 ${currencyFormatter.format(price)} ",style: TextStyle(color: kText,
                               fontSize: SizeConfig.safeBlockHorizontal * 3,
                               fontWeight: FontWeight.bold)),
                           Text("Average cost", style: TextStyle(
@@ -3636,20 +3762,26 @@ class _HItemState extends State<HItem> {
     g();
   }
   conversion()async{
+    var convertor;
 
-    if(currentUser.currencyISO == "USD") {
-      setState(() {
-
-        price =user.hairUsd ;
-
-      }); }
-    else {
-      var resultUSD1 = await Currency.getConversion(
-          from: 'USD', to: '${currentUser.currencyISO}', amount: user.hairUsd.toString());
-      setState(() {
-        price = resultUSD1.rate;
-      });
+    if(currentUser.currency == "INR") {
+      convertor = user.hairInr.toStringAsFixed(2);
+      price = double.tryParse(convertor);
     }
+    if(currentUser.currency == "EUR") {
+      convertor = user.hairEur.toStringAsFixed(2);
+      price = double.tryParse(convertor);
+    }
+    if(currentUser.currency == "GBP") {
+      convertor = user.hairGbp.toStringAsFixed(2);
+      price = double.tryParse(convertor);
+    }
+
+    else {
+      convertor = user.hairUsd.toStringAsFixed(2);
+      price = double.tryParse(convertor);
+    }
+
 
 
   }
@@ -3891,7 +4023,19 @@ class _HItemState extends State<HItem> {
                           style: TextStyle(color: kText),
                         ),
                         trailing:                          Column(children:[
-                          Text( " ${currentUser.currencysym} ${currencyFormatter.format(price)}",style: TextStyle(color: kText,
+                            currentUser.currency == "INR"?  
+                          Text( "₹ ${currencyFormatter.format(price)}",style: TextStyle(color: kText,
+                                  fontSize: SizeConfig.safeBlockHorizontal * 3,
+                              fontWeight: FontWeight.bold)):
+                          currentUser.currency == "EUR"?
+                          Text( "${currencyFormatter.format(price)} €",style: TextStyle(color: kText,
+                              fontSize: SizeConfig.safeBlockHorizontal * 3,
+                              fontWeight: FontWeight.bold)):
+                          currentUser.currency == "GBP"?
+                          Text( "£ ${currencyFormatter.format(price)} ",style: TextStyle(color: kText,
+                              fontSize: SizeConfig.safeBlockHorizontal * 3,
+                              fontWeight: FontWeight.bold))
+                              :   Text( "\u0024 ${currencyFormatter.format(price)} ",style: TextStyle(color: kText,
                               fontSize: SizeConfig.safeBlockHorizontal * 3,
                               fontWeight: FontWeight.bold)),
                           Text("Average cost", style: TextStyle(
@@ -4006,20 +4150,26 @@ class _AItemState extends State<AItem> {
     g();
   }
   conversion()async{
+    var convertor;
 
-    if(currentUser.currencyISO == "USD") {
-      setState(() {
-
-        price =user.artisansUsd ;
-
-      }); }
-    else {
-      var resultUSD1 = await Currency.getConversion(
-          from: 'USD', to: '${currentUser.currencyISO}', amount: user.artisansUsd.toString());
-      setState(() {
-        price = resultUSD1.rate;
-      });
+    if(currentUser.currency == "INR") {
+      convertor = user.artisansInr.toStringAsFixed(2);
+      price = double.tryParse(convertor);
     }
+    if(currentUser.currency == "EUR") {
+      convertor = user.artisansEur.toStringAsFixed(2);
+      price = double.tryParse(convertor);
+    }
+    if(currentUser.currency == "GBP") {
+      convertor = user.artisansGbp.toStringAsFixed(2);
+      price = double.tryParse(convertor);
+    }
+
+    else {
+      convertor = user.artisansUsd.toStringAsFixed(2);
+      price = double.tryParse(convertor);
+    }
+
 
 
   }
@@ -4261,8 +4411,21 @@ class _AItemState extends State<AItem> {
                           user.country,
                           style: TextStyle(color: kText),
                         ),
-                        trailing:                          Column(children:[
-                          Text( " ${currentUser.currencysym} ${currencyFormatter.format(price)}",style: TextStyle(color: kText,
+                        trailing:                       
+                        Column(children:[
+                            currentUser.currency == "INR"?  
+                          Text( "₹ ${currencyFormatter.format(price)}",style: TextStyle(color: kText,
+                                  fontSize: SizeConfig.safeBlockHorizontal * 3,
+                              fontWeight: FontWeight.bold)):
+                          currentUser.currency == "EUR"?
+                          Text( "${currencyFormatter.format(price)} €",style: TextStyle(color: kText,
+                              fontSize: SizeConfig.safeBlockHorizontal * 3,
+                              fontWeight: FontWeight.bold)):
+                          currentUser.currency == "GBP"?
+                          Text( "£ ${currencyFormatter.format(price)} ",style: TextStyle(color: kText,
+                              fontSize: SizeConfig.safeBlockHorizontal * 3,
+                              fontWeight: FontWeight.bold))
+                              :   Text( "\u0024 ${currencyFormatter.format(price)} ",style: TextStyle(color: kText,
                               fontSize: SizeConfig.safeBlockHorizontal * 3,
                               fontWeight: FontWeight.bold)),
                           Text("Average cost", style: TextStyle(
@@ -4377,19 +4540,24 @@ class _CItemState extends State<CItem> {
     g();
   }
   conversion()async{
+    var convertor;
 
-    if(currentUser.currencyISO == "USD") {
-      setState(() {
+    if(currentUser.currency == "INR") {
+      convertor = user.choreographerInr.toStringAsFixed(2);
+      price = double.tryParse(convertor);
+    }
+    if(currentUser.currency == "EUR") {
+      convertor = user.choreographerEur.toStringAsFixed(2);
+      price = double.tryParse(convertor);
+    }
+    if(currentUser.currency == "GBP") {
+      convertor = user.choreographerGbp.toStringAsFixed(2);
+      price = double.tryParse(convertor);
+    }
 
-        price =user.choreographerUsd ;
-
-      }); }
     else {
-      var resultUSD1 = await Currency.getConversion(
-          from: 'USD', to: '${currentUser.currencyISO}', amount: user.choreographerUsd.toString());
-      setState(() {
-        price = resultUSD1.rate;
-      });
+      convertor = user.choreographerUsd.toStringAsFixed(2);
+      price = double.tryParse(convertor);
     }
 
 
@@ -4632,9 +4800,22 @@ class _CItemState extends State<CItem> {
                           style: TextStyle(color: kText),
                         ),
                         trailing:                          Column(children:[
-                          Text( " ${currentUser.currencysym} ${currencyFormatter.format(price)}",style: TextStyle(color: kText,
+                          currentUser.currency == "INR"?  
+                          Text( "₹ ${currencyFormatter.format(price)}",style: TextStyle(color: kText,
+                                  fontSize: SizeConfig.safeBlockHorizontal * 3,
+                              fontWeight: FontWeight.bold)):
+                          currentUser.currency == "EUR"?
+                          Text( "${currencyFormatter.format(price)} €",style: TextStyle(color: kText,
+                              fontSize: SizeConfig.safeBlockHorizontal * 3,
+                              fontWeight: FontWeight.bold)):
+                          currentUser.currency == "GBP"?
+                          Text( "£ ${currencyFormatter.format(price)} ",style: TextStyle(color: kText,
+                              fontSize: SizeConfig.safeBlockHorizontal * 3,
+                              fontWeight: FontWeight.bold))
+                              :   Text( "\u0024 ${currencyFormatter.format(price)} ",style: TextStyle(color: kText,
                               fontSize: SizeConfig.safeBlockHorizontal * 3,
                               fontWeight: FontWeight.bold)),
+                        
                           Text("Average cost", style: TextStyle(
                             color: Colors.grey,
                           ),),

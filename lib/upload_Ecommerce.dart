@@ -14045,7 +14045,26 @@ page4(){
 
                       getImageWidget01(),
                       SizedBox(height: 8.0,),
-                      Container(
+                    Container(
+                      margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+                      child: TextFormField(
+                        style:TextStyle(color: kText),
+                        controller: customName1,
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+                          enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+                          focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+
+                          labelText: 'Title',labelStyle: TextStyle(color: kText),
+                          hintText:"Title",
+                        ),
+                        textAlign: TextAlign.center,
+
+                      ),
+                    ),
+                    SizedBox(height: 8.0,),
+
+                    Container(
                         margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
                         child: TextFormField(
                           style:TextStyle(color: kText),
@@ -14066,7 +14085,26 @@ page4(){
 
                       getImageWidget02(),
                       SizedBox(height: 8.0,),
-                      Container(
+                    Container(
+                      margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+                      child: TextFormField(
+                        style:TextStyle(color: kText),
+                        controller: customName2,
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+                          enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+                          focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+
+                          labelText: 'Title',labelStyle: TextStyle(color: kText),
+                          hintText:"Title",
+                        ),
+                        textAlign: TextAlign.center,
+
+                      ),
+                    ),
+                    SizedBox(height: 8.0,),
+
+                    Container(
                         margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
                         child: TextFormField(
                           style:TextStyle(color: kText),
@@ -14087,7 +14125,25 @@ page4(){
 
                       getImageWidget03(),
                       SizedBox(height: 8.0,),
-                      Container(
+                    Container(
+                      margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+                      child: TextFormField(
+                        style:TextStyle(color: kText),
+                        controller: customName3,
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+                          enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+                          focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+
+                          labelText: 'Title',labelStyle: TextStyle(color: kText),
+                          hintText:"Title",
+                        ),
+                        textAlign: TextAlign.center,
+
+                      ),
+                    ),
+                    SizedBox(height: 8.0,),
+                         Container(
                         margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
                         child: TextFormField(
                           style:TextStyle(color: kText),
@@ -14108,6 +14164,24 @@ page4(){
 
                       getImageWidget04(),
                       SizedBox(height: 8.0,),
+                    Container(
+                      margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+                      child: TextFormField(
+                        style:TextStyle(color: kText),
+                        controller: customName4,
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+                          enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+                          focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+
+                          labelText: 'Title',labelStyle: TextStyle(color: kText),
+                          hintText:"Title",
+                        ),
+                        textAlign: TextAlign.center,
+
+                      ),
+                    ),
+                    SizedBox(height: 8.0,),
                       Container(
                         margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
                         child: TextFormField(
@@ -14129,6 +14203,24 @@ page4(){
 
                       getImageWidget05(),
                       SizedBox(height: 8.0,),
+                    Container(
+                      margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+                      child: TextFormField(
+                        style:TextStyle(color: kText),
+                        controller: customName5,
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+                          enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+                          focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+
+                          labelText: 'Title',labelStyle: TextStyle(color: kText),
+                          hintText:"Title",
+                        ),
+                        textAlign: TextAlign.center,
+
+                      ),
+                    ),
+                    SizedBox(height: 8.0,),
                       Container(
                         margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
                         child: TextFormField(
@@ -14150,6 +14242,24 @@ page4(){
 
                       getImageWidget06(),
                       SizedBox(height: 8.0,),
+                    Container(
+                      margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+                      child: TextFormField(
+                        style:TextStyle(color: kText),
+                        controller: customName6,
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+                          enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+                          focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+
+                          labelText: 'Title',labelStyle: TextStyle(color: kText),
+                          hintText:"Title",
+                        ),
+                        textAlign: TextAlign.center,
+
+                      ),
+                    ),
+                    SizedBox(height: 8.0,),
                       Container(
                         margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
                         child: TextFormField(
@@ -14171,6 +14281,24 @@ page4(){
 
                       getImageWidget07(),
                       SizedBox(height: 8.0,),
+                    Container(
+                      margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+                      child: TextFormField(
+                        style:TextStyle(color: kText),
+                        controller: customName7,
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+                          enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+                          focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+
+                          labelText: 'Title',labelStyle: TextStyle(color: kText),
+                          hintText:"Title",
+                        ),
+                        textAlign: TextAlign.center,
+
+                      ),
+                    ),
+                    SizedBox(height: 8.0,),
                       Container(
                         margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
                         child: TextFormField(
@@ -14192,6 +14320,24 @@ page4(){
 
                       getImageWidget08(),
                       SizedBox(height: 8.0,),
+                    Container(
+                      margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+                      child: TextFormField(
+                        style:TextStyle(color: kText),
+                        controller: customName8,
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+                          enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+                          focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+
+                          labelText: 'Title',labelStyle: TextStyle(color: kText),
+                          hintText:"Title",
+                        ),
+                        textAlign: TextAlign.center,
+
+                      ),
+                    ),
+                    SizedBox(height: 8.0,),
                       Container(
                         margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
                         child: TextFormField(
@@ -14213,6 +14359,24 @@ page4(){
 
                       getImageWidget09(),
                       SizedBox(height: 8.0,),
+                    Container(
+                      margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+                      child: TextFormField(
+                        style:TextStyle(color: kText),
+                        controller: customName9,
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+                          enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+                          focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+
+                          labelText: 'Title',labelStyle: TextStyle(color: kText),
+                          hintText:"Title",
+                        ),
+                        textAlign: TextAlign.center,
+
+                      ),
+                    ),
+                    SizedBox(height: 8.0,),
                       Container(
                         margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
                         child: TextFormField(
@@ -14234,6 +14398,24 @@ page4(){
 
                       getImageWidget010(),
                       SizedBox(height: 8.0,),
+                    Container(
+                      margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+                      child: TextFormField(
+                        style:TextStyle(color: kText),
+                        controller: customName10,
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+                          enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+                          focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+
+                          labelText: 'Title',labelStyle: TextStyle(color: kText),
+                          hintText:"Title",
+                        ),
+                        textAlign: TextAlign.center,
+
+                      ),
+                    ),
+                    SizedBox(height: 8.0,),
                       Container(
                         margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
                         child: TextFormField(
@@ -14286,6 +14468,24 @@ page4(){
 
                       getImageWidget011(),
                       SizedBox(height: 8.0,),
+                    Container(
+                      margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+                      child: TextFormField(
+                        style:TextStyle(color: kText),
+                        controller: customName11,
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+                          enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+                          focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+
+                          labelText: 'Title',labelStyle: TextStyle(color: kText),
+                          hintText:"Title",
+                        ),
+                        textAlign: TextAlign.center,
+
+                      ),
+                    ),
+                    SizedBox(height: 8.0,),
                       Container(
                         margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
                         child: TextFormField(
@@ -14307,6 +14507,24 @@ page4(){
 
                       getImageWidget012(),
                       SizedBox(height: 8.0,),
+                    Container(
+                      margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+                      child: TextFormField(
+                        style:TextStyle(color: kText),
+                        controller: customName12,
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+                          enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+                          focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+
+                          labelText: 'Title',labelStyle: TextStyle(color: kText),
+                          hintText:"Title",
+                        ),
+                        textAlign: TextAlign.center,
+
+                      ),
+                    ),
+                    SizedBox(height: 8.0,),
                       Container(
                         margin: EdgeInsets.fromLTRB(120.0, 8.0, 20.0,8.0),
                         child: TextFormField(
@@ -14328,6 +14546,24 @@ page4(){
 
                       getImageWidget013(),
                       SizedBox(height: 8.0,),
+                    Container(
+                      margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+                      child: TextFormField(
+                        style:TextStyle(color: kText),
+                        controller: customName13,
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+                          enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+                          focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+
+                          labelText: 'Title',labelStyle: TextStyle(color: kText),
+                          hintText:"Title",
+                        ),
+                        textAlign: TextAlign.center,
+
+                      ),
+                    ),
+                    SizedBox(height: 8.0,),
                       Container(
                         margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
                         child: TextFormField(
@@ -14349,6 +14585,24 @@ page4(){
 
                       getImageWidget014(),
                       SizedBox(height: 8.0,),
+                    Container(
+                      margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+                      child: TextFormField(
+                        style:TextStyle(color: kText),
+                        controller: customName14,
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+                          enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+                          focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+
+                          labelText: 'Title',labelStyle: TextStyle(color: kText),
+                          hintText:"Title",
+                        ),
+                        textAlign: TextAlign.center,
+
+                      ),
+                    ),
+                    SizedBox(height: 8.0,),
                       Container(
                         margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
                         child: TextFormField(
@@ -14370,6 +14624,24 @@ page4(){
 
                       getImageWidget015(),
                       SizedBox(height: 8.0,),
+                    Container(
+                      margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+                      child: TextFormField(
+                        style:TextStyle(color: kText),
+                        controller: customName15,
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+                          enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+                          focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+
+                          labelText: 'Title',labelStyle: TextStyle(color: kText),
+                          hintText:"Title",
+                        ),
+                        textAlign: TextAlign.center,
+
+                      ),
+                    ),
+                    SizedBox(height: 8.0,),
                       Container(
                         margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
                         child: TextFormField(
@@ -14391,6 +14663,24 @@ page4(){
 
                       getImageWidget016(),
                       SizedBox(height: 8.0,),
+                    Container(
+                      margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+                      child: TextFormField(
+                        style:TextStyle(color: kText),
+                        controller: customName16,
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+                          enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+                          focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+
+                          labelText: 'Title',labelStyle: TextStyle(color: kText),
+                          hintText:"Title",
+                        ),
+                        textAlign: TextAlign.center,
+
+                      ),
+                    ),
+                    SizedBox(height: 8.0,),
                       Container(
                         margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
                         child: TextFormField(
@@ -14412,6 +14702,24 @@ page4(){
 
                       getImageWidget017(),
                       SizedBox(height: 8.0,),
+                    Container(
+                      margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+                      child: TextFormField(
+                        style:TextStyle(color: kText),
+                        controller: customName17,
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+                          enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+                          focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+
+                          labelText: 'Title',labelStyle: TextStyle(color: kText),
+                          hintText:"Title",
+                        ),
+                        textAlign: TextAlign.center,
+
+                      ),
+                    ),
+                    SizedBox(height: 8.0,),
                       Container(
                         margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
                         child: TextFormField(
@@ -14433,6 +14741,24 @@ page4(){
 
                       getImageWidget018(),
                       SizedBox(height: 8.0,),
+                    Container(
+                      margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+                      child: TextFormField(
+                        style:TextStyle(color: kText),
+                        controller: customName18,
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+                          enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+                          focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+
+                          labelText: 'Title',labelStyle: TextStyle(color: kText),
+                          hintText:"Title",
+                        ),
+                        textAlign: TextAlign.center,
+
+                      ),
+                    ),
+                    SizedBox(height: 8.0,),
                       Container(
                         margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
                         child: TextFormField(
@@ -14454,6 +14780,24 @@ page4(){
 
                       getImageWidget019(),
                       SizedBox(height: 8.0,),
+                    Container(
+                      margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+                      child: TextFormField(
+                        style:TextStyle(color: kText),
+                        controller: customName19,
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+                          enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+                          focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+
+                          labelText: 'Title',labelStyle: TextStyle(color: kText),
+                          hintText:"Title",
+                        ),
+                        textAlign: TextAlign.center,
+
+                      ),
+                    ),
+                    SizedBox(height: 8.0,),
                       Container(
                         margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
                         child: TextFormField(
@@ -14475,6 +14819,24 @@ page4(){
 
                       getImageWidget020(),
                       SizedBox(height: 8.0,),
+                    Container(
+                      margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+                      child: TextFormField(
+                        style:TextStyle(color: kText),
+                        controller: customName20,
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+                          enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+                          focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+
+                          labelText: 'Title',labelStyle: TextStyle(color: kText),
+                          hintText:"Title",
+                        ),
+                        textAlign: TextAlign.center,
+
+                      ),
+                    ),
+                    SizedBox(height: 8.0,),
                       Container(
                         margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
                         child: TextFormField(
@@ -14527,6 +14889,24 @@ page4(){
 
                       getImageWidget021(),
                       SizedBox(height: 8.0,),
+                    Container(
+                      margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+                      child: TextFormField(
+                        style:TextStyle(color: kText),
+                        controller: customName21,
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+                          enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+                          focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+
+                          labelText: 'Title',labelStyle: TextStyle(color: kText),
+                          hintText:"Title",
+                        ),
+                        textAlign: TextAlign.center,
+
+                      ),
+                    ),
+                    SizedBox(height: 8.0,),
                       Container(
                         margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
                         child: TextFormField(
@@ -14548,6 +14928,24 @@ page4(){
 
                       getImageWidget022(),
                       SizedBox(height: 8.0,),
+                    Container(
+                      margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+                      child: TextFormField(
+                        style:TextStyle(color: kText),
+                        controller: customName22,
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+                          enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+                          focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+
+                          labelText: 'Title',labelStyle: TextStyle(color: kText),
+                          hintText:"Title",
+                        ),
+                        textAlign: TextAlign.center,
+
+                      ),
+                    ),
+                    SizedBox(height: 8.0,),
                       Container(
                         margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
                         child: TextFormField(
@@ -14569,6 +14967,24 @@ page4(){
 
                       getImageWidget023(),
                       SizedBox(height: 8.0,),
+                    Container(
+                      margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+                      child: TextFormField(
+                        style:TextStyle(color: kText),
+                        controller: customName23,
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+                          enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+                          focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+
+                          labelText: 'Title',labelStyle: TextStyle(color: kText),
+                          hintText:"Title",
+                        ),
+                        textAlign: TextAlign.center,
+
+                      ),
+                    ),
+                    SizedBox(height: 8.0,),
                       Container(
                         margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
                         child: TextFormField(
@@ -14590,6 +15006,24 @@ page4(){
 
                       getImageWidget024(),
                       SizedBox(height: 8.0,),
+                    Container(
+                      margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+                      child: TextFormField(
+                        style:TextStyle(color: kText),
+                        controller: customName24,
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+                          enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+                          focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+
+                          labelText: 'Title',labelStyle: TextStyle(color: kText),
+                          hintText:"Title",
+                        ),
+                        textAlign: TextAlign.center,
+
+                      ),
+                    ),
+                    SizedBox(height: 8.0,),
                       Container(
                         margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
                         child: TextFormField(
@@ -14611,6 +15045,24 @@ page4(){
 
                       getImageWidget025(),
                       SizedBox(height: 8.0,),
+                    Container(
+                      margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+                      child: TextFormField(
+                        style:TextStyle(color: kText),
+                        controller: customName25,
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+                          enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+                          focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+
+                          labelText: 'Title',labelStyle: TextStyle(color: kText),
+                          hintText:"Title",
+                        ),
+                        textAlign: TextAlign.center,
+
+                      ),
+                    ),
+                    SizedBox(height: 8.0,),
                       Container(
                         margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
                         child: TextFormField(
@@ -14632,6 +15084,24 @@ page4(){
 
                       getImageWidget026(),
                       SizedBox(height: 8.0,),
+                    Container(
+                      margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+                      child: TextFormField(
+                        style:TextStyle(color: kText),
+                        controller: customName26,
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+                          enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+                          focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+
+                          labelText: 'Title',labelStyle: TextStyle(color: kText),
+                          hintText:"Title",
+                        ),
+                        textAlign: TextAlign.center,
+
+                      ),
+                    ),
+                    SizedBox(height: 8.0,),
                       Container(
                         margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
                         child: TextFormField(
@@ -14653,6 +15123,24 @@ page4(){
 
                       getImageWidget027(),
                       SizedBox(height: 8.0,),
+                    Container(
+                      margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+                      child: TextFormField(
+                        style:TextStyle(color: kText),
+                        controller: customName27,
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+                          enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+                          focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+
+                          labelText: 'Title',labelStyle: TextStyle(color: kText),
+                          hintText:"Title",
+                        ),
+                        textAlign: TextAlign.center,
+
+                      ),
+                    ),
+                    SizedBox(height: 8.0,),
                       Container(
                         margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
                         child: TextFormField(
@@ -14674,6 +15162,24 @@ page4(){
 
                       getImageWidget028(),
                       SizedBox(height: 8.0,),
+                    Container(
+                      margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+                      child: TextFormField(
+                        style:TextStyle(color: kText),
+                        controller: customName28,
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+                          enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+                          focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+
+                          labelText: 'Title',labelStyle: TextStyle(color: kText),
+                          hintText:"Title",
+                        ),
+                        textAlign: TextAlign.center,
+
+                      ),
+                    ),
+                    SizedBox(height: 8.0,),
                       Container(
                         margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
                         child: TextFormField(
@@ -14695,6 +15201,24 @@ page4(){
 
                       getImageWidget029(),
                       SizedBox(height: 8.0,),
+                    Container(
+                      margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+                      child: TextFormField(
+                        style:TextStyle(color: kText),
+                        controller: customName29,
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+                          enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+                          focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+
+                          labelText: 'Title',labelStyle: TextStyle(color: kText),
+                          hintText:"Title",
+                        ),
+                        textAlign: TextAlign.center,
+
+                      ),
+                    ),
+                    SizedBox(height: 8.0,),
                       Container(
                         margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
                         child: TextFormField(
@@ -14716,6 +15240,24 @@ page4(){
 
                       getImageWidget030(),
                       SizedBox(height: 8.0,),
+                    Container(
+                      margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+                      child: TextFormField(
+                        style:TextStyle(color: kText),
+                        controller: customName30,
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+                          enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+                          focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+
+                          labelText: 'Title',labelStyle: TextStyle(color: kText),
+                          hintText:"Title",
+                        ),
+                        textAlign: TextAlign.center,
+
+                      ),
+                    ),
+                    SizedBox(height: 8.0,),
                       Container(
                         margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
                         child: TextFormField(
@@ -14768,6 +15310,24 @@ page4(){
 
                       getImageWidget031(),
                       SizedBox(height: 8.0,),
+                    Container(
+                      margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+                      child: TextFormField(
+                        style:TextStyle(color: kText),
+                        controller: customName31,
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+                          enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+                          focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+
+                          labelText: 'Title',labelStyle: TextStyle(color: kText),
+                          hintText:"Title",
+                        ),
+                        textAlign: TextAlign.center,
+
+                      ),
+                    ),
+                    SizedBox(height: 8.0,),
                       Container(
                         margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
                         child: TextFormField(
@@ -14789,6 +15349,24 @@ page4(){
 
                       getImageWidget032(),
                       SizedBox(height: 8.0,),
+                    Container(
+                      margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+                      child: TextFormField(
+                        style:TextStyle(color: kText),
+                        controller: customName32,
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+                          enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+                          focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+
+                          labelText: 'Title',labelStyle: TextStyle(color: kText),
+                          hintText:"Title",
+                        ),
+                        textAlign: TextAlign.center,
+
+                      ),
+                    ),
+                    SizedBox(height: 8.0,),
                       Container(
                         margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
                         child: TextFormField(
@@ -14810,6 +15388,24 @@ page4(){
 
                       getImageWidget033(),
                       SizedBox(height: 8.0,),
+                    Container(
+                      margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+                      child: TextFormField(
+                        style:TextStyle(color: kText),
+                        controller: customName33,
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+                          enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+                          focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+
+                          labelText: 'Title',labelStyle: TextStyle(color: kText),
+                          hintText:"Title",
+                        ),
+                        textAlign: TextAlign.center,
+
+                      ),
+                    ),
+                    SizedBox(height: 8.0,),
                       Container(
                         margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
                         child: TextFormField(
@@ -14831,6 +15427,24 @@ page4(){
 
                       getImageWidget034(),
                       SizedBox(height: 8.0,),
+                    Container(
+                      margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+                      child: TextFormField(
+                        style:TextStyle(color: kText),
+                        controller: customName34,
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+                          enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+                          focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+
+                          labelText: 'Title',labelStyle: TextStyle(color: kText),
+                          hintText:"Title",
+                        ),
+                        textAlign: TextAlign.center,
+
+                      ),
+                    ),
+                    SizedBox(height: 8.0,),
                       Container(
                         margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
                         child: TextFormField(
@@ -14852,6 +15466,24 @@ page4(){
 
                       getImageWidget035(),
                       SizedBox(height: 8.0,),
+                    Container(
+                      margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+                      child: TextFormField(
+                        style:TextStyle(color: kText),
+                        controller: customName35,
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+                          enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+                          focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+
+                          labelText: 'Title',labelStyle: TextStyle(color: kText),
+                          hintText:"Title",
+                        ),
+                        textAlign: TextAlign.center,
+
+                      ),
+                    ),
+                    SizedBox(height: 8.0,),
                       Container(
                         margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
                         child: TextFormField(
@@ -14873,6 +15505,24 @@ page4(){
 
                       getImageWidget036(),
                       SizedBox(height: 8.0,),
+                    Container(
+                      margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+                      child: TextFormField(
+                        style:TextStyle(color: kText),
+                        controller: customName36,
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+                          enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+                          focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+
+                          labelText: 'Title',labelStyle: TextStyle(color: kText),
+                          hintText:"Title",
+                        ),
+                        textAlign: TextAlign.center,
+
+                      ),
+                    ),
+                    SizedBox(height: 8.0,),
                       Container(
                         margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
                         child: TextFormField(
@@ -14894,6 +15544,24 @@ page4(){
 
                       getImageWidget037(),
                       SizedBox(height: 8.0,),
+                    Container(
+                      margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+                      child: TextFormField(
+                        style:TextStyle(color: kText),
+                        controller: customName37,
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+                          enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+                          focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+
+                          labelText: 'Title',labelStyle: TextStyle(color: kText),
+                          hintText:"Title",
+                        ),
+                        textAlign: TextAlign.center,
+
+                      ),
+                    ),
+                    SizedBox(height: 8.0,),
                       Container(
                         margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
                         child: TextFormField(
@@ -14915,6 +15583,24 @@ page4(){
 
                       getImageWidget038(),
                       SizedBox(height: 8.0,),
+                    Container(
+                      margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+                      child: TextFormField(
+                        style:TextStyle(color: kText),
+                        controller: customName38,
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+                          enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+                          focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+
+                          labelText: 'Title',labelStyle: TextStyle(color: kText),
+                          hintText:"Title",
+                        ),
+                        textAlign: TextAlign.center,
+
+                      ),
+                    ),
+                    SizedBox(height: 8.0,),
                       Container(
                         margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
                         child: TextFormField(
@@ -14936,6 +15622,24 @@ page4(){
 
                       getImageWidget039(),
                       SizedBox(height: 8.0,),
+                    Container(
+                      margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+                      child: TextFormField(
+                        style:TextStyle(color: kText),
+                        controller: customName39,
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+                          enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+                          focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+
+                          labelText: 'Title',labelStyle: TextStyle(color: kText),
+                          hintText:"Title",
+                        ),
+                        textAlign: TextAlign.center,
+
+                      ),
+                    ),
+                    SizedBox(height: 8.0,),
                       Container(
                         margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
                         child: TextFormField(
@@ -14957,6 +15661,24 @@ page4(){
 
                       getImageWidget040(),
                       SizedBox(height: 8.0,),
+                    Container(
+                      margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+                      child: TextFormField(
+                        style:TextStyle(color: kText),
+                        controller: customName40,
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+                          enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+                          focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+
+                          labelText: 'Title',labelStyle: TextStyle(color: kText),
+                          hintText:"Title",
+                        ),
+                        textAlign: TextAlign.center,
+
+                      ),
+                    ),
+                    SizedBox(height: 8.0,),
                       Container(
                         margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
                         child: TextFormField(
@@ -15009,6 +15731,24 @@ page4(){
 
                       getImageWidget041(),
                       SizedBox(height: 8.0,),
+                    Container(
+                      margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+                      child: TextFormField(
+                        style:TextStyle(color: kText),
+                        controller: customName41,
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+                          enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+                          focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+
+                          labelText: 'Title',labelStyle: TextStyle(color: kText),
+                          hintText:"Title",
+                        ),
+                        textAlign: TextAlign.center,
+
+                      ),
+                    ),
+                    SizedBox(height: 8.0,),
                       Container(
                         margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
                         child: TextFormField(
@@ -15030,6 +15770,24 @@ page4(){
 
                       getImageWidget042(),
                       SizedBox(height: 8.0,),
+                    Container(
+                      margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+                      child: TextFormField(
+                        style:TextStyle(color: kText),
+                        controller: customName42,
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+                          enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+                          focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+
+                          labelText: 'Title',labelStyle: TextStyle(color: kText),
+                          hintText:"Title",
+                        ),
+                        textAlign: TextAlign.center,
+
+                      ),
+                    ),
+                    SizedBox(height: 8.0,),
                       Container(
                         margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
                         child: TextFormField(
@@ -15051,6 +15809,24 @@ page4(){
 
                       getImageWidget043(),
                       SizedBox(height: 8.0,),
+                    Container(
+                      margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+                      child: TextFormField(
+                        style:TextStyle(color: kText),
+                        controller: customName43,
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+                          enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+                          focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+
+                          labelText: 'Title',labelStyle: TextStyle(color: kText),
+                          hintText:"Title",
+                        ),
+                        textAlign: TextAlign.center,
+
+                      ),
+                    ),
+                    SizedBox(height: 8.0,),
                       Container(
                         margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
                         child: TextFormField(
@@ -15072,6 +15848,24 @@ page4(){
 
                       getImageWidget044(),
                       SizedBox(height: 8.0,),
+                    Container(
+                      margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+                      child: TextFormField(
+                        style:TextStyle(color: kText),
+                        controller: customName44,
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+                          enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+                          focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+
+                          labelText: 'Title',labelStyle: TextStyle(color: kText),
+                          hintText:"Title",
+                        ),
+                        textAlign: TextAlign.center,
+
+                      ),
+                    ),
+                    SizedBox(height: 8.0,),
                       Container(
                         margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
                         child: TextFormField(
@@ -15093,6 +15887,24 @@ page4(){
 
                       getImageWidget045(),
                       SizedBox(height: 8.0,),
+                    Container(
+                      margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+                      child: TextFormField(
+                        style:TextStyle(color: kText),
+                        controller: customName45,
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+                          enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+                          focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+
+                          labelText: 'Title',labelStyle: TextStyle(color: kText),
+                          hintText:"Title",
+                        ),
+                        textAlign: TextAlign.center,
+
+                      ),
+                    ),
+                    SizedBox(height: 8.0,),
                       Container(
                         margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
                         child: TextFormField(
@@ -15114,6 +15926,24 @@ page4(){
 
                       getImageWidget046(),
                       SizedBox(height: 8.0,),
+                    Container(
+                      margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+                      child: TextFormField(
+                        style:TextStyle(color: kText),
+                        controller: customName46,
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+                          enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+                          focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+
+                          labelText: 'Title',labelStyle: TextStyle(color: kText),
+                          hintText:"Title",
+                        ),
+                        textAlign: TextAlign.center,
+
+                      ),
+                    ),
+                    SizedBox(height: 8.0,),
                       Container(
                         margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
                         child: TextFormField(
@@ -15135,6 +15965,24 @@ page4(){
 
                       getImageWidget047(),
                       SizedBox(height: 8.0,),
+                    Container(
+                      margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+                      child: TextFormField(
+                        style:TextStyle(color: kText),
+                        controller: customName47,
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+                          enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+                          focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+
+                          labelText: 'Title',labelStyle: TextStyle(color: kText),
+                          hintText:"Title",
+                        ),
+                        textAlign: TextAlign.center,
+
+                      ),
+                    ),
+                    SizedBox(height: 8.0,),
                       Container(
                         margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
                         child: TextFormField(
@@ -15156,6 +16004,24 @@ page4(){
 
                       getImageWidget048(),
                       SizedBox(height: 8.0,),
+                    Container(
+                      margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+                      child: TextFormField(
+                        style:TextStyle(color: kText),
+                        controller: customName48,
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+                          enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+                          focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+
+                          labelText: 'Title',labelStyle: TextStyle(color: kText),
+                          hintText:"Title",
+                        ),
+                        textAlign: TextAlign.center,
+
+                      ),
+                    ),
+                    SizedBox(height: 8.0,),
                       Container(
                         margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
                         child: TextFormField(
@@ -15177,6 +16043,24 @@ page4(){
 
                       getImageWidget049(),
                       SizedBox(height: 8.0,),
+                    Container(
+                      margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+                      child: TextFormField(
+                        style:TextStyle(color: kText),
+                        controller: customName49,
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+                          enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+                          focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+
+                          labelText: 'Title',labelStyle: TextStyle(color: kText),
+                          hintText:"Title",
+                        ),
+                        textAlign: TextAlign.center,
+
+                      ),
+                    ),
+                    SizedBox(height: 8.0,),
                       Container(
                         margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
                         child: TextFormField(
@@ -15198,6 +16082,24 @@ page4(){
 
                       getImageWidget050(),
                       SizedBox(height: 8.0,),
+                    Container(
+                      margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+                      child: TextFormField(
+                        style:TextStyle(color: kText),
+                        controller: customName50,
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+                          enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+                          focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+
+                          labelText: 'Title',labelStyle: TextStyle(color: kText),
+                          hintText:"Title",
+                        ),
+                        textAlign: TextAlign.center,
+
+                      ),
+                    ),
+                    SizedBox(height: 8.0,),
                       Container(
                         margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
                         child: TextFormField(
@@ -16482,6 +17384,57 @@ var resultGBP = await Currency.getConversion(
 "customQuantity48":   int.tryParse(custom48.text ) ?? 0,
 "customQuantity49":   int.tryParse(custom49.text ) ?? 0,
 "customQuantity50":   int.tryParse(custom50.text ) ?? 0,
+
+ "customName1":   customName1.text ?? "",
+ "customName2":   customName2.text ?? "",
+ "customName3":   customName3.text ?? "",
+ "customName4":   customName4.text ?? "",
+ "customName5":   customName5.text ?? "",
+ "customName6":   customName6.text ?? "",
+ "customName7":   customName7.text ?? "",
+ "customName8":   customName8.text ?? "",
+ "customName9":   customName9.text ?? "",
+ "customName10":  customName10.text ?? "",
+ "customName11":  customName11.text ?? "",
+ "customName12":  customName12.text ?? "",
+ "customName13":  customName13.text ?? "",
+"customName14":   customName14.text ?? "",
+"customName15":   customName15.text ?? "",
+"customName16":   customName16.text ?? "",
+"customName17":   customName17.text ?? "",
+"customName18":   customName18.text ?? "",
+"customName19":   customName19.text ?? "",
+"customName20":   customName20.text ?? "",
+"customName21":   customName21.text ?? "",
+"customName22":   customName22.text ?? "",
+"customName23":   customName23.text ?? "",
+"customName24":   customName24.text ?? "",
+"customName25":   customName25.text ?? "",
+"customName26":   customName26.text ?? "",
+"customName27":   customName27.text ?? "",
+"customName28":   customName28.text ?? "",
+"customName29":   customName29.text ?? "",
+"customName30":   customName30.text ?? "",
+"customName31":   customName31.text ?? "",
+"customName32":   customName32.text ?? "",
+"customName33":   customName33.text ?? "",
+"customName34":   customName34.text ?? "",
+"customName35":   customName35.text ?? "",
+"customName36":   customName36.text ?? "",
+"customName37":   customName37.text ?? "",
+"customName38":   customName38.text ?? "",
+"customName39":   customName39.text ?? "",
+"customName40":   customName40.text ?? "",
+"customName41":   customName41.text ?? "",
+"customName42":   customName42.text ?? "",
+"customName43":   customName43.text ?? "",
+"customName44":   customName44.text ?? "",
+"customName45":   customName45.text ?? "",
+"customName46":   customName46.text ?? "",
+"customName47":   customName47.text ?? "",
+"customName48":   customName48.text ?? "",
+"customName49":   customName49.text ?? "",
+"customName50":   customName50.text ?? "",
 
             "custom1img":  mediaUrl01 ?? "",
 "custom2img":  mediaUrl02 ?? "",

@@ -16,16 +16,16 @@ class Users{
    String currencyISO;
    String currency;
  String currencysym;
- String designerAvg;
- String illustratorAvg;
- String artisansAvg;
- String choreographerAvg;
- String hairAvg;
- String makeupAvg;
- String modelAvg;
- String photographerAvg;
- String bloggerAvg;
- String stylistAvg;
+ var designerInr;
+ var illustratorInr;
+ var artisansInr;
+ var choreographerInr;
+ var hairInr;
+ var makeupInr;
+ var modelInr;
+ var photographerInr;
+ var bloggerInr;
+ var stylistInr;
  var designerUsd;
  var illustratorUsd;
  var artisansUsd;
@@ -36,6 +36,27 @@ class Users{
  var photographerUsd;
  var bloggerUsd;
  var stylistUsd;
+  var designerEur;
+ var illustratorEur;
+ var artisansEur;
+ var choreographerEur;
+ var hairEur;
+ var makeupEur;
+ var modelEur;
+ var photographerEur;
+ var bloggerEur;
+ var stylistEur;
+   var designerGbp;
+ var illustratorGbp;
+ var artisansGbp;
+ var choreographerGbp;
+ var hairGbp;
+ var makeupGbp;
+ var modelGbp;
+ var photographerGbp;
+ var bloggerGbp;
+ var stylistGbp;
+
   bool designer;
  bool illustrator;
  bool artisans;
@@ -79,16 +100,17 @@ bool Bidding;
 
 this.currencysym,
 this.revenue,
-this.designerAvg,
-this.illustratorAvg,
-this.artisansAvg,
-this.choreographerAvg,
-this.hairAvg,
-this.makeupAvg,
-this.modelAvg,
-this.photographerAvg,
-this.bloggerAvg,
-this.stylistAvg,this.designerUsd,
+this.designerInr,
+this.illustratorInr,
+this.artisansInr,
+this.choreographerInr,
+this.hairInr,
+this.makeupInr,
+this.modelInr,
+this.photographerInr,
+this.bloggerInr,
+this.stylistInr,
+    this.designerUsd,
 this.illustratorUsd,
 this.artisansUsd,
 this.choreographerUsd,
@@ -98,6 +120,27 @@ this.modelUsd,
 this.photographerUsd,
 this.bloggerUsd,
 this.stylistUsd,
+    this.designerEur,
+this.illustratorEur,
+this.artisansEur,
+this.choreographerEur,
+this.hairEur,
+this.makeupEur,
+this.modelEur,
+this.photographerEur,
+this.bloggerEur,
+this.stylistEur,
+     this.designerGbp,
+this.illustratorGbp,
+this.artisansGbp,
+this.choreographerGbp,
+this.hairGbp,
+this.makeupGbp,
+this.modelGbp,
+this.photographerGbp,
+this.bloggerGbp,
+this.stylistGbp,
+
   this.designer,
 this.illustrator,
 this.artisans,
@@ -139,16 +182,16 @@ this.Bidding,
       currency: doc.data()['currency'],
  currencysym: doc.data()['currencysym'],
  revenue: doc.data()['revenue'],
-      designerAvg: doc.data()['designerAvg'],
-      illustratorAvg: doc.data()['illustratorAvg'],
-      artisansAvg: doc.data()['artisanAvg'],
-      choreographerAvg: doc.data()['choreographerAvg'],
-      hairAvg: doc.data()['hairAvg'],
-      makeupAvg: doc.data()['makeupAvg'],
-      modelAvg: doc.data()['modelAvg'],
-      photographerAvg: doc.data()['photographerAvg'],
-      bloggerAvg: doc.data()['bloggerAvg'],
-      stylistAvg: doc.data()['stylistAvg'],
+      designerInr: doc.data()['designerInr'],
+      illustratorInr: doc.data()['illustratorInr'],
+      artisansInr: doc.data()['artisanInr'],
+      choreographerInr: doc.data()['choreographerInr'],
+      hairInr: doc.data()['hairInr'],
+      makeupInr: doc.data()['makeupInr'],
+      modelInr: doc.data()['modelInr'],
+      photographerInr: doc.data()['photographerInr'],
+      bloggerInr: doc.data()['bloggerInr'],
+      stylistInr: doc.data()['stylistInr'],
       designerUsd: doc.data()['designerUsd'],
       illustratorUsd: doc.data()['illustratorUsd'],
       artisansUsd: doc.data()['artisanUsd'],
@@ -159,6 +202,27 @@ this.Bidding,
       photographerUsd: doc.data()['photographerUsd'],
       bloggerUsd: doc.data()['bloggerUsd'],
       stylistUsd: doc.data()['stylistUsd'],
+      designerEur: doc.data()['designerEur'],
+      illustratorEur: doc.data()['illustratorEur'],
+      artisansEur: doc.data()['artisanEur'],
+      choreographerEur: doc.data()['choreographerEur'],
+      hairEur: doc.data()['hairEur'],
+      makeupEur: doc.data()['makeupEur'],
+      modelEur: doc.data()['modelEur'],
+      photographerEur: doc.data()['photographerEur'],
+      bloggerEur: doc.data()['bloggerEur'],
+      stylistEur: doc.data()['stylistEur'],
+         designerGbp: doc.data()['designerGbp'],
+      illustratorGbp: doc.data()['illustratorGbp'],
+      artisansGbp: doc.data()['artisanGbp'],
+      choreographerGbp: doc.data()['choreographerGbp'],
+      hairGbp: doc.data()['hairGbp'],
+      makeupGbp: doc.data()['makeupGbp'],
+      modelGbp: doc.data()['modelGbp'],
+      photographerGbp: doc.data()['photographerGbp'],
+      bloggerGbp: doc.data()['bloggerGbp'],
+      stylistGbp: doc.data()['stylistGbp'],
+
     designer: doc.data()['designer'],
       illustrator: doc.data()['illustrator'],
       artisans: doc.data()['artisan'],
