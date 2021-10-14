@@ -1496,10 +1496,6 @@ class _ProdState extends State<Prod> {
    String variationIndex;
  String userVariationImg ="";
  String userCustomImg="";
-  var custompriceusd,
-  var custompriceeur,
-  var custompriceinr,
-  var custompricegbp,
 
   var userVariationPrice ;
 
