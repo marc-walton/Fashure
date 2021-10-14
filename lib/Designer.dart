@@ -30,7 +30,11 @@ import 'package:sticky_headers/sticky_headers.dart';
 import 'package:flutter_currencies_tracker/currency.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-import 'package:fashow/enum/Variables.dart';
+
+var currencyFormatter =
+currentUser.currency == "INR"?NumberFormat.currency(locale:"HI"):
+currentUser.currency == "EUR"? NumberFormat.currency(locale:" ${currentUser.countryISO}"):
+currentUser.currency == "GBP"?NumberFormat.currency(locale:" ${currentUser.countryISO}"): NumberFormat('#,##0.00', );
 
 class Designer extends StatefulWidget {
   @override

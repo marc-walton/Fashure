@@ -191,7 +191,7 @@ All(){
       PaginateBuilderType.listView,
       itemBuilder: (index, context, documentSnapshot)   {
         String ownerId = documentSnapshot.data()['ownerId'];
-        String displayName = documentSnapshot.data()['displayName'];
+        String displayName = documentSnapshot.data()['username'];
         String photoUrl = documentSnapshot.data()['photoUrl'];
         String prodId = documentSnapshot.data()['prodId'];
         List shopmediaUrl = documentSnapshot.data()['shopmediaUrl'];

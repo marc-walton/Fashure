@@ -44,6 +44,11 @@ import 'package:fashow/size_config.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 
+var currencyFormatter =
+currentUser.currency == "INR"?NumberFormat.currency(locale:"HI"):
+currentUser.currency == "EUR"? NumberFormat.currency(locale:" ${currentUser.countryISO}"):
+currentUser.currency == "GBP"?NumberFormat.currency(locale:" ${currentUser.countryISO}"): NumberFormat('#,##0.00', );
+
 class Uploadecom extends StatefulWidget {
   final Users currentUser;
 
@@ -804,3108 +809,3109 @@ Widget getImageWidget9() {
     }
   }
 
-  Widget getImageWidget01() {
-    if (customImg1 != null) {
-      return InkWell(
-        onTap:()=>getImage01(),
-        child: Image.file(
-          customImg1,
-          width: 150,
-          height: 150,
-          fit: BoxFit.cover,
-        ),
-      );
-    } else {
-      return InkWell(
-        onTap:()=>getImage01(),
-         child: Column(
-           children: [
-             Icon(
-      Icons.add,
-        size:50,
-      ),
-                    Text("Add image")
-
-           ],
-         ));
-    }
-  }
-  getImage01() async {
-    Get.back();
-
-    this.setState(() {
-      _inProcess = true;
-    });
-    File image = File(await ImagePicker().getImage(source: ImageSource.gallery).then((pickedFile) => pickedFile.path));
-
-    if (image != null) {
-      File cropped = await ImageCropper.cropImage(
-          sourcePath: image.path,
-          aspectRatio: CropAspectRatio(
-              ratioX: 1, ratioY: 1),
-          compressQuality: 100,
-          maxWidth: 700,
-          maxHeight: 700,
-          compressFormat: ImageCompressFormat.jpg,
-          androidUiSettings: AndroidUiSettings(
-            toolbarColor: Colors.deepOrange,
-            toolbarTitle: "RPS Cropper",
-            statusBarColor: Colors.deepOrange.shade900,
-            backgroundColor: Colors.white,
-          )
-      );
-
-      this.setState(() {
-        customImg1 = cropped;
-        _inProcess = true;
-
-      });
-    } else {
-      this.setState(() {
-        _inProcess = false;
-      });
-    }
-  }
-    Widget getImageWidget02() {
-    if (customImg2 != null) {
-      return InkWell(
-        onTap:()=>getImage02(),
-        child: Image.file(
-          customImg2,
-          width: 150,
-          height: 150,
-          fit: BoxFit.cover,
-        ),
-      );
-    } else {
-      return InkWell(
-        onTap:()=>getImage02(),
-         child: Column(
-           children: [
-             Icon(
-      Icons.add,
-        size:50,
-      ),
-                    Text("Add image")
-
-           ],
-         ));
-    }
-  }
-  getImage02() async {
-    Get.back();
-
-    this.setState(() {
-      _inProcess = true;
-    });
-    File image = File(await ImagePicker().getImage(source: ImageSource.gallery).then((pickedFile) => pickedFile.path));
-
-    if (image != null) {
-      File cropped = await ImageCropper.cropImage(
-          sourcePath: image.path,
-          aspectRatio: CropAspectRatio(
-              ratioX: 1, ratioY: 1),
-          compressQuality: 100,
-          maxWidth: 700,
-          maxHeight: 700,
-          compressFormat: ImageCompressFormat.jpg,
-          androidUiSettings: AndroidUiSettings(
-            toolbarColor: Colors.deepOrange,
-            toolbarTitle: "RPS Cropper",
-            statusBarColor: Colors.deepOrange.shade900,
-            backgroundColor: Colors.white,
-          )
-      );
-
-      this.setState(() {
-        customImg2 = cropped;
-        _inProcess = true;
-
-      });
-    } else {
-      this.setState(() {
-        _inProcess = false;
-      });
-    }
-  }
-    Widget getImageWidget03() {
-    if (customImg3 != null) {
-      return InkWell(
-        onTap:()=>getImage03(),
-        child: Image.file(
-          customImg3,
-          width: 150,
-          height: 150,
-          fit: BoxFit.cover,
-        ),
-      );
-    } else {
-      return InkWell(
-        onTap:()=>getImage03(),
-         child: Column(
-           children: [
-             Icon(
-      Icons.add,
-        size:50,
-      ),
-                    Text("Add image")
-
-           ],
-         ));
-    }
-  }
-  getImage03() async {
-    Get.back();
-
-    this.setState(() {
-      _inProcess = true;
-    });
-    File image = File(await ImagePicker().getImage(source: ImageSource.gallery).then((pickedFile) => pickedFile.path));
-
-    if (image != null) {
-      File cropped = await ImageCropper.cropImage(
-          sourcePath: image.path,
-          aspectRatio: CropAspectRatio(
-              ratioX: 1, ratioY: 1),
-          compressQuality: 100,
-          maxWidth: 700,
-          maxHeight: 700,
-          compressFormat: ImageCompressFormat.jpg,
-          androidUiSettings: AndroidUiSettings(
-            toolbarColor: Colors.deepOrange,
-            toolbarTitle: "RPS Cropper",
-            statusBarColor: Colors.deepOrange.shade900,
-            backgroundColor: Colors.white,
-          )
-      );
-
-      this.setState(() {
-        customImg3 = cropped;
-        _inProcess = true;
-
-      });
-    } else {
-      this.setState(() {
-        _inProcess = false;
-      });
-    }
-  }
-    Widget getImageWidget04() {
-    if (customImg4 != null) {
-      return InkWell(
-        onTap:()=>getImage04(),
-        child: Image.file(
-          customImg4,
-          width: 150,
-          height: 150,
-          fit: BoxFit.cover,
-        ),
-      );
-    } else {
-      return InkWell(
-        onTap:()=>getImage04(),
-         child: Column(
-           children: [
-             Icon(
-      Icons.add,
-        size:50,
-      ),
-                    Text("Add image")
-
-           ],
-         ));
-    }
-  }
-  getImage04() async {
-    Get.back();
-
-    this.setState(() {
-      _inProcess = true;
-    });
-    File image = File(await ImagePicker().getImage(source: ImageSource.gallery).then((pickedFile) => pickedFile.path));
-
-    if (image != null) {
-      File cropped = await ImageCropper.cropImage(
-          sourcePath: image.path,
-          aspectRatio: CropAspectRatio(
-              ratioX: 1, ratioY: 1),
-          compressQuality: 100,
-          maxWidth: 700,
-          maxHeight: 700,
-          compressFormat: ImageCompressFormat.jpg,
-          androidUiSettings: AndroidUiSettings(
-            toolbarColor: Colors.deepOrange,
-            toolbarTitle: "RPS Cropper",
-            statusBarColor: Colors.deepOrange.shade900,
-            backgroundColor: Colors.white,
-          )
-      );
-
-      this.setState(() {
-        customImg4 = cropped;
-        _inProcess = true;
-
-      });
-    } else {
-      this.setState(() {
-        _inProcess = false;
-      });
-    }
-  }
-   Widget getImageWidget05() {
-    if (customImg5 != null) {
-      return InkWell(
-        onTap:()=>getImage05(),
-        child: Image.file(
-          customImg5,
-          width: 150,
-          height: 150,
-          fit: BoxFit.cover,
-        ),
-      );
-    } else {
-      return InkWell(
-        onTap:()=>getImage05(),
-         child: Column(
-           children: [
-             Icon(
-      Icons.add,
-        size:50,
-      ),
-                    Text("Add image")
-
-           ],
-         ));
-    }
-  }
-  getImage05() async {
-    Get.back();
-
-    this.setState(() {
-      _inProcess = true;
-    });
-    File image = File(await ImagePicker().getImage(source: ImageSource.gallery).then((pickedFile) => pickedFile.path));
-
-    if (image != null) {
-      File cropped = await ImageCropper.cropImage(
-          sourcePath: image.path,
-          aspectRatio: CropAspectRatio(
-              ratioX: 1, ratioY: 1),
-          compressQuality: 100,
-          maxWidth: 700,
-          maxHeight: 700,
-          compressFormat: ImageCompressFormat.jpg,
-          androidUiSettings: AndroidUiSettings(
-            toolbarColor: Colors.deepOrange,
-            toolbarTitle: "RPS Cropper",
-            statusBarColor: Colors.deepOrange.shade900,
-            backgroundColor: Colors.white,
-          )
-      );
-
-      this.setState(() {
-        customImg5 = cropped;
-        _inProcess = true;
-
-      });
-    } else {
-      this.setState(() {
-        _inProcess = false;
-      });
-    }
-  }
-   Widget getImageWidget06() {
-    if (customImg6 != null) {
-      return InkWell(
-        onTap:()=>getImage06(),
-        child: Image.file(
-          customImg6,
-          width: 150,
-          height: 150,
-          fit: BoxFit.cover,
-        ),
-      );
-    } else {
-      return InkWell(
-        onTap:()=>getImage06(),
-         child: Column(
-           children: [
-             Icon(
-      Icons.add,
-        size:50,
-      ),
-                    Text("Add image")
-
-           ],
-         ));
-    }
-  }
-  getImage06() async {
-    Get.back();
-
-    this.setState(() {
-      _inProcess = true;
-    });
-    File image = File(await ImagePicker().getImage(source: ImageSource.gallery).then((pickedFile) => pickedFile.path));
-
-    if (image != null) {
-      File cropped = await ImageCropper.cropImage(
-          sourcePath: image.path,
-          aspectRatio: CropAspectRatio(
-              ratioX: 1, ratioY: 1),
-          compressQuality: 100,
-          maxWidth: 700,
-          maxHeight: 700,
-          compressFormat: ImageCompressFormat.jpg,
-          androidUiSettings: AndroidUiSettings(
-            toolbarColor: Colors.deepOrange,
-            toolbarTitle: "RPS Cropper",
-            statusBarColor: Colors.deepOrange.shade900,
-            backgroundColor: Colors.white,
-          )
-      );
-
-      this.setState(() {
-        customImg6 = cropped;
-        _inProcess = true;
-
-      });
-    } else {
-      this.setState(() {
-        _inProcess = false;
-      });
-    }
-  }
-   Widget getImageWidget07() {
-    if (customImg7 != null) {
-      return InkWell(
-        onTap:()=>getImage07(),
-        child: Image.file(
-          customImg7,
-          width: 150,
-          height: 150,
-          fit: BoxFit.cover,
-        ),
-      );
-    } else {
-      return InkWell(
-        onTap:()=>getImage07(),
-         child: Column(
-           children: [
-             Icon(
-      Icons.add,
-        size:50,
-      ),
-                    Text("Add image")
-
-           ],
-         ));
-    }
-  }
-  getImage07() async {
-    Get.back();
-
-    this.setState(() {
-      _inProcess = true;
-    });
-    File image = File(await ImagePicker().getImage(source: ImageSource.gallery).then((pickedFile) => pickedFile.path));
-
-    if (image != null) {
-      File cropped = await ImageCropper.cropImage(
-          sourcePath: image.path,
-          aspectRatio: CropAspectRatio(
-              ratioX: 1, ratioY: 1),
-          compressQuality: 100,
-          maxWidth: 700,
-          maxHeight: 700,
-          compressFormat: ImageCompressFormat.jpg,
-          androidUiSettings: AndroidUiSettings(
-            toolbarColor: Colors.deepOrange,
-            toolbarTitle: "RPS Cropper",
-            statusBarColor: Colors.deepOrange.shade900,
-            backgroundColor: Colors.white,
-          )
-      );
-
-      this.setState(() {
-        customImg7 = cropped;
-        _inProcess = true;
-
-      });
-    } else {
-      this.setState(() {
-        _inProcess = false;
-      });
-    }
-  }
-    Widget getImageWidget08() {
-    if (customImg8 != null) {
-      return InkWell(
-        onTap:()=>getImage08(),
-        child: Image.file(
-          customImg8,
-          width: 150,
-          height: 150,
-          fit: BoxFit.cover,
-        ),
-      );
-    } else {
-      return InkWell(
-        onTap:()=>getImage08(),
-         child: Column(
-           children: [
-             Icon(
-      Icons.add,
-        size:50,
-      ),
-                    Text("Add image")
-
-           ],
-         ));
-    }
-  }
-  getImage08() async {
-    Get.back();
-
-    this.setState(() {
-      _inProcess = true;
-    });
-    File image = File(await ImagePicker().getImage(source: ImageSource.gallery).then((pickedFile) => pickedFile.path));
-
-    if (image != null) {
-      File cropped = await ImageCropper.cropImage(
-          sourcePath: image.path,
-          aspectRatio: CropAspectRatio(
-              ratioX: 1, ratioY: 1),
-          compressQuality: 100,
-          maxWidth: 700,
-          maxHeight: 700,
-          compressFormat: ImageCompressFormat.jpg,
-          androidUiSettings: AndroidUiSettings(
-            toolbarColor: Colors.deepOrange,
-            toolbarTitle: "RPS Cropper",
-            statusBarColor: Colors.deepOrange.shade900,
-            backgroundColor: Colors.white,
-          )
-      );
-
-      this.setState(() {
-        customImg8 = cropped;
-        _inProcess = true;
-
-      });
-    } else {
-      this.setState(() {
-        _inProcess = false;
-      });
-    }
-  }
-   Widget getImageWidget09() {
-    if (customImg9 != null) {
-      return InkWell(
-        onTap:()=>getImage09(),
-        child: Image.file(
-          customImg9,
-          width: 150,
-          height: 150,
-          fit: BoxFit.cover,
-        ),
-      );
-    } else {
-      return InkWell(
-        onTap:()=>getImage09(),
-         child: Column(
-           children: [
-             Icon(
-      Icons.add,
-        size:50,
-      ),
-                    Text("Add image")
-
-           ],
-         ));
-    }
-  }
-  getImage09() async {
-    Get.back();
-
-    this.setState(() {
-      _inProcess = true;
-    });
-    File image = File(await ImagePicker().getImage(source: ImageSource.gallery).then((pickedFile) => pickedFile.path));
-
-    if (image != null) {
-      File cropped = await ImageCropper.cropImage(
-          sourcePath: image.path,
-          aspectRatio: CropAspectRatio(
-              ratioX: 1, ratioY: 1),
-          compressQuality: 100,
-          maxWidth: 700,
-          maxHeight: 700,
-          compressFormat: ImageCompressFormat.jpg,
-          androidUiSettings: AndroidUiSettings(
-            toolbarColor: Colors.deepOrange,
-            toolbarTitle: "RPS Cropper",
-            statusBarColor: Colors.deepOrange.shade900,
-            backgroundColor: Colors.white,
-          )
-      );
-
-      this.setState(() {
-        customImg9 = cropped;
-        _inProcess = true;
-
-      });
-    } else {
-      this.setState(() {
-        _inProcess = false;
-      });
-    }
-  }
-   Widget getImageWidget010() {
-    if (customImg10 != null) {
-      return InkWell(
-        onTap:()=>getImage010(),
-        child: Image.file(
-          customImg10,
-          width: 150,
-          height: 150,
-          fit: BoxFit.cover,
-        ),
-      );
-    } else {
-      return InkWell(
-        onTap:()=>getImage010(),
-         child: Column(
-           children: [
-             Icon(
-      Icons.add,
-        size:50,
-      ),
-                    Text("Add image")
-
-           ],
-         ));
-    }
-  }
-  getImage010() async {
-    Get.back();
-
-    this.setState(() {
-      _inProcess = true;
-    });
-    File image = File(await ImagePicker().getImage(source: ImageSource.gallery).then((pickedFile) => pickedFile.path));
-
-    if (image != null) {
-      File cropped = await ImageCropper.cropImage(
-          sourcePath: image.path,
-          aspectRatio: CropAspectRatio(
-              ratioX: 1, ratioY: 1),
-          compressQuality: 100,
-          maxWidth: 700,
-          maxHeight: 700,
-          compressFormat: ImageCompressFormat.jpg,
-          androidUiSettings: AndroidUiSettings(
-            toolbarColor: Colors.deepOrange,
-            toolbarTitle: "RPS Cropper",
-            statusBarColor: Colors.deepOrange.shade900,
-            backgroundColor: Colors.white,
-          )
-      );
-
-      this.setState(() {
-        customImg10 = cropped;
-        _inProcess = true;
-
-      });
-    } else {
-      this.setState(() {
-        _inProcess = false;
-      });
-    }
-  }
-    Widget getImageWidget011() {
-    if (customImg11 != null) {
-      return InkWell(
-        onTap:()=>getImage011(),
-        child: Image.file(
-          customImg11,
-          width: 150,
-          height: 150,
-          fit: BoxFit.cover,
-        ),
-      );
-    } else {
-      return InkWell(
-        onTap:()=>getImage011(),
-         child: Column(
-           children: [
-             Icon(
-      Icons.add,
-        size:50,
-      ),
-                    Text("Add image")
-
-           ],
-         ));
-    }
-  }
-  getImage011() async {
-    Get.back();
-
-    this.setState(() {
-      _inProcess = true;
-    });
-    File image = File(await ImagePicker().getImage(source: ImageSource.gallery).then((pickedFile) => pickedFile.path));
-
-    if (image != null) {
-      File cropped = await ImageCropper.cropImage(
-          sourcePath: image.path,
-          aspectRatio: CropAspectRatio(
-              ratioX: 1, ratioY: 1),
-          compressQuality: 100,
-          maxWidth: 700,
-          maxHeight: 700,
-          compressFormat: ImageCompressFormat.jpg,
-          androidUiSettings: AndroidUiSettings(
-            toolbarColor: Colors.deepOrange,
-            toolbarTitle: "RPS Cropper",
-            statusBarColor: Colors.deepOrange.shade900,
-            backgroundColor: Colors.white,
-          )
-      );
-
-      this.setState(() {
-        customImg11 = cropped;
-        _inProcess = true;
-
-      });
-    } else {
-      this.setState(() {
-        _inProcess = false;
-      });
-    }
-  }
-   Widget getImageWidget012() {
-    if (customImg12 != null) {
-      return InkWell(
-        onTap:()=>getImage012(),
-        child: Image.file(
-          customImg12,
-          width: 150,
-          height: 150,
-          fit: BoxFit.cover,
-        ),
-      );
-    } else {
-      return InkWell(
-        onTap:()=>getImage012(),
-         child: Column(
-           children: [
-             Icon(
-      Icons.add,
-        size:50,
-      ),
-                    Text("Add image")
-
-           ],
-         ));
-    }
-  }
-  getImage012() async {
-    Get.back();
-
-    this.setState(() {
-      _inProcess = true;
-    });
-    File image = File(await ImagePicker().getImage(source: ImageSource.gallery).then((pickedFile) => pickedFile.path));
-
-    if (image != null) {
-      File cropped = await ImageCropper.cropImage(
-          sourcePath: image.path,
-          aspectRatio: CropAspectRatio(
-              ratioX: 1, ratioY: 1),
-          compressQuality: 100,
-          maxWidth: 700,
-          maxHeight: 700,
-          compressFormat: ImageCompressFormat.jpg,
-          androidUiSettings: AndroidUiSettings(
-            toolbarColor: Colors.deepOrange,
-            toolbarTitle: "RPS Cropper",
-            statusBarColor: Colors.deepOrange.shade900,
-            backgroundColor: Colors.white,
-          )
-      );
-
-      this.setState(() {
-        customImg12 = cropped;
-        _inProcess = true;
-
-      });
-    } else {
-      this.setState(() {
-        _inProcess = false;
-      });
-    }
-  }
-  Widget getImageWidget013() {
-    if (customImg13 != null) {
-      return InkWell(
-        onTap:()=>getImage013(),
-        child: Image.file(
-          customImg13,
-          width: 150,
-          height: 150,
-          fit: BoxFit.cover,
-        ),
-      );
-    } else {
-      return InkWell(
-        onTap:()=>getImage013(),
-         child: Column(
-           children: [
-             Icon(
-      Icons.add,
-        size:50,
-      ),
-                    Text("Add image")
-
-           ],
-         ));
-    }
-  }
-  getImage013() async {
-    Get.back();
-
-    this.setState(() {
-      _inProcess = true;
-    });
-    File image = File(await ImagePicker().getImage(source: ImageSource.gallery).then((pickedFile) => pickedFile.path));
-
-    if (image != null) {
-      File cropped = await ImageCropper.cropImage(
-          sourcePath: image.path,
-          aspectRatio: CropAspectRatio(
-              ratioX: 1, ratioY: 1),
-          compressQuality: 100,
-          maxWidth: 700,
-          maxHeight: 700,
-          compressFormat: ImageCompressFormat.jpg,
-          androidUiSettings: AndroidUiSettings(
-            toolbarColor: Colors.deepOrange,
-            toolbarTitle: "RPS Cropper",
-            statusBarColor: Colors.deepOrange.shade900,
-            backgroundColor: Colors.white,
-          )
-      );
-
-      this.setState(() {
-        customImg13 = cropped;
-        _inProcess = true;
-
-      });
-    } else {
-      this.setState(() {
-        _inProcess = false;
-      });
-    }
-  }
- Widget getImageWidget014() {
-    if (customImg14 != null) {
-      return InkWell(
-        onTap:()=>getImage014(),
-        child: Image.file(
-          customImg14,
-          width: 150,
-          height: 150,
-          fit: BoxFit.cover,
-        ),
-      );
-    } else {
-      return InkWell(
-        onTap:()=>getImage014(),
-         child: Column(
-           children: [
-             Icon(
-      Icons.add,
-        size:50,
-      ),
-                    Text("Add image")
-
-           ],
-         ));
-    }
-  }
-  getImage014() async {
-    Get.back();
-
-    this.setState(() {
-      _inProcess = true;
-    });
-    File image = File(await ImagePicker().getImage(source: ImageSource.gallery).then((pickedFile) => pickedFile.path));
-
-    if (image != null) {
-      File cropped = await ImageCropper.cropImage(
-          sourcePath: image.path,
-          aspectRatio: CropAspectRatio(
-              ratioX: 1, ratioY: 1),
-          compressQuality: 100,
-          maxWidth: 700,
-          maxHeight: 700,
-          compressFormat: ImageCompressFormat.jpg,
-          androidUiSettings: AndroidUiSettings(
-            toolbarColor: Colors.deepOrange,
-            toolbarTitle: "RPS Cropper",
-            statusBarColor: Colors.deepOrange.shade900,
-            backgroundColor: Colors.white,
-          )
-      );
-
-      this.setState(() {
-        customImg14 = cropped;
-        _inProcess = true;
-
-      });
-    } else {
-      this.setState(() {
-        _inProcess = false;
-      });
-    }
-  }
- Widget getImageWidget015() {
-    if (customImg15 != null) {
-      return InkWell(
-        onTap:()=>getImage015(),
-        child: Image.file(
-          customImg15,
-          width: 150,
-          height: 150,
-          fit: BoxFit.cover,
-        ),
-      );
-    } else {
-      return InkWell(
-        onTap:()=>getImage015(),
-         child: Column(
-           children: [
-             Icon(
-      Icons.add,
-        size:50,
-      ),
-                    Text("Add image")
-
-           ],
-         ));
-    }
-  }
-  getImage015() async {
-    Get.back();
-
-    this.setState(() {
-      _inProcess = true;
-    });
-    File image = File(await ImagePicker().getImage(source: ImageSource.gallery).then((pickedFile) => pickedFile.path));
-
-    if (image != null) {
-      File cropped = await ImageCropper.cropImage(
-          sourcePath: image.path,
-          aspectRatio: CropAspectRatio(
-              ratioX: 1, ratioY: 1),
-          compressQuality: 100,
-          maxWidth: 700,
-          maxHeight: 700,
-          compressFormat: ImageCompressFormat.jpg,
-          androidUiSettings: AndroidUiSettings(
-            toolbarColor: Colors.deepOrange,
-            toolbarTitle: "RPS Cropper",
-            statusBarColor: Colors.deepOrange.shade900,
-            backgroundColor: Colors.white,
-          )
-      );
-
-      this.setState(() {
-        customImg15 = cropped;
-        _inProcess = true;
-
-      });
-    } else {
-      this.setState(() {
-        _inProcess = false;
-      });
-    }
-  }
- Widget getImageWidget016() {
-    if (customImg16 != null) {
-      return InkWell(
-        onTap:()=>getImage016(),
-        child: Image.file(
-          customImg16,
-          width: 150,
-          height: 150,
-          fit: BoxFit.cover,
-        ),
-      );
-    } else {
-      return InkWell(
-        onTap:()=>getImage016(),
-         child: Column(
-           children: [
-             Icon(
-      Icons.add,
-        size:50,
-      ),
-                    Text("Add image")
-
-           ],
-         ));
-    }
-  }
-  getImage016() async {
-    Get.back();
-
-    this.setState(() {
-      _inProcess = true;
-    });
-    File image = File(await ImagePicker().getImage(source: ImageSource.gallery).then((pickedFile) => pickedFile.path));
-
-    if (image != null) {
-      File cropped = await ImageCropper.cropImage(
-          sourcePath: image.path,
-          aspectRatio: CropAspectRatio(
-              ratioX: 1, ratioY: 1),
-          compressQuality: 100,
-          maxWidth: 700,
-          maxHeight: 700,
-          compressFormat: ImageCompressFormat.jpg,
-          androidUiSettings: AndroidUiSettings(
-            toolbarColor: Colors.deepOrange,
-            toolbarTitle: "RPS Cropper",
-            statusBarColor: Colors.deepOrange.shade900,
-            backgroundColor: Colors.white,
-          )
-      );
-
-      this.setState(() {
-        customImg16 = cropped;
-        _inProcess = true;
-
-      });
-    } else {
-      this.setState(() {
-        _inProcess = false;
-      });
-    }
-  }
- Widget getImageWidget017() {
-    if (customImg17 != null) {
-      return InkWell(
-        onTap:()=>getImage017(),
-        child: Image.file(
-          customImg17,
-          width: 150,
-          height: 150,
-          fit: BoxFit.cover,
-        ),
-      );
-    } else {
-      return InkWell(
-        onTap:()=>getImage017(),
-         child: Column(
-           children: [
-             Icon(
-      Icons.add,
-        size:50,
-      ),
-                    Text("Add image")
-
-           ],
-         ));
-    }
-  }
-  getImage017() async {
-    Get.back();
-
-    this.setState(() {
-      _inProcess = true;
-    });
-    File image = File(await ImagePicker().getImage(source: ImageSource.gallery).then((pickedFile) => pickedFile.path));
-
-    if (image != null) {
-      File cropped = await ImageCropper.cropImage(
-          sourcePath: image.path,
-          aspectRatio: CropAspectRatio(
-              ratioX: 1, ratioY: 1),
-          compressQuality: 100,
-          maxWidth: 700,
-          maxHeight: 700,
-          compressFormat: ImageCompressFormat.jpg,
-          androidUiSettings: AndroidUiSettings(
-            toolbarColor: Colors.deepOrange,
-            toolbarTitle: "RPS Cropper",
-            statusBarColor: Colors.deepOrange.shade900,
-            backgroundColor: Colors.white,
-          )
-      );
-
-      this.setState(() {
-        customImg17 = cropped;
-        _inProcess = true;
-
-      });
-    } else {
-      this.setState(() {
-        _inProcess = false;
-      });
-    }
-  }
- Widget getImageWidget018() {
-    if (customImg18 != null) {
-      return InkWell(
-        onTap:()=>getImage018(),
-        child: Image.file(
-          customImg18,
-          width: 150,
-          height: 150,
-          fit: BoxFit.cover,
-        ),
-      );
-    } else {
-      return InkWell(
-        onTap:()=>getImage018(),
-         child: Column(
-           children: [
-             Icon(
-      Icons.add,
-        size:50,
-      ),
-                    Text("Add image")
-
-           ],
-         ));
-    }
-  }
-  getImage018() async {
-    Get.back();
-
-    this.setState(() {
-      _inProcess = true;
-    });
-    File image = File(await ImagePicker().getImage(source: ImageSource.gallery).then((pickedFile) => pickedFile.path));
-
-    if (image != null) {
-      File cropped = await ImageCropper.cropImage(
-          sourcePath: image.path,
-          aspectRatio: CropAspectRatio(
-              ratioX: 1, ratioY: 1),
-          compressQuality: 100,
-          maxWidth: 700,
-          maxHeight: 700,
-          compressFormat: ImageCompressFormat.jpg,
-          androidUiSettings: AndroidUiSettings(
-            toolbarColor: Colors.deepOrange,
-            toolbarTitle: "RPS Cropper",
-            statusBarColor: Colors.deepOrange.shade900,
-            backgroundColor: Colors.white,
-          )
-      );
-
-      this.setState(() {
-        customImg18 = cropped;
-        _inProcess = true;
-
-      });
-    } else {
-      this.setState(() {
-        _inProcess = false;
-      });
-    }
-  }
- Widget getImageWidget019() {
-    if (customImg19 != null) {
-      return InkWell(
-        onTap:()=>getImage019(),
-        child: Image.file(
-          customImg19,
-          width: 150,
-          height: 150,
-          fit: BoxFit.cover,
-        ),
-      );
-    } else {
-      return InkWell(
-        onTap:()=>getImage019(),
-         child: Column(
-           children: [
-             Icon(
-      Icons.add,
-        size:50,
-      ),
-                    Text("Add image")
-
-           ],
-         ));
-    }
-  }
-  getImage019() async {
-    Get.back();
-
-    this.setState(() {
-      _inProcess = true;
-    });
-    File image = File(await ImagePicker().getImage(source: ImageSource.gallery).then((pickedFile) => pickedFile.path));
-
-    if (image != null) {
-      File cropped = await ImageCropper.cropImage(
-          sourcePath: image.path,
-          aspectRatio: CropAspectRatio(
-              ratioX: 1, ratioY: 1),
-          compressQuality: 100,
-          maxWidth: 700,
-          maxHeight: 700,
-          compressFormat: ImageCompressFormat.jpg,
-          androidUiSettings: AndroidUiSettings(
-            toolbarColor: Colors.deepOrange,
-            toolbarTitle: "RPS Cropper",
-            statusBarColor: Colors.deepOrange.shade900,
-            backgroundColor: Colors.white,
-          )
-      );
-
-      this.setState(() {
-        customImg19 = cropped;
-        _inProcess = true;
-
-      });
-    } else {
-      this.setState(() {
-        _inProcess = false;
-      });
-    }
-  }
- Widget getImageWidget020() {
-    if (customImg20 != null) {
-      return InkWell(
-        onTap:()=>getImage020(),
-        child: Image.file(
-          customImg20,
-          width: 150,
-          height: 150,
-          fit: BoxFit.cover,
-        ),
-      );
-    } else {
-      return InkWell(
-        onTap:()=>getImage020(),
-         child: Column(
-           children: [
-             Icon(
-      Icons.add,
-        size:50,
-      ),
-                    Text("Add image")
-
-           ],
-         ));
-    }
-  }
-  getImage020() async {
-    Get.back();
-
-    this.setState(() {
-      _inProcess = true;
-    });
-    File image = File(await ImagePicker().getImage(source: ImageSource.gallery).then((pickedFile) => pickedFile.path));
-
-    if (image != null) {
-      File cropped = await ImageCropper.cropImage(
-          sourcePath: image.path,
-          aspectRatio: CropAspectRatio(
-              ratioX: 1, ratioY: 1),
-          compressQuality: 100,
-          maxWidth: 700,
-          maxHeight: 700,
-          compressFormat: ImageCompressFormat.jpg,
-          androidUiSettings: AndroidUiSettings(
-            toolbarColor: Colors.deepOrange,
-            toolbarTitle: "RPS Cropper",
-            statusBarColor: Colors.deepOrange.shade900,
-            backgroundColor: Colors.white,
-          )
-      );
-
-      this.setState(() {
-        customImg20 = cropped;
-        _inProcess = true;
-
-      });
-    } else {
-      this.setState(() {
-        _inProcess = false;
-      });
-    }
-  }
- Widget getImageWidget021() {
-    if (customImg21 != null) {
-      return InkWell(
-        onTap:()=>getImage021(),
-        child: Image.file(
-          customImg21,
-          width: 150,
-          height: 150,
-          fit: BoxFit.cover,
-        ),
-      );
-    } else {
-      return InkWell(
-        onTap:()=>getImage021(),
-         child: Column(
-           children: [
-             Icon(
-      Icons.add,
-        size:50,
-      ),
-                    Text("Add image")
-
-           ],
-         ));
-    }
-  }
-  getImage021() async {
-    Get.back();
-
-    this.setState(() {
-      _inProcess = true;
-    });
-    File image = File(await ImagePicker().getImage(source: ImageSource.gallery).then((pickedFile) => pickedFile.path));
-
-    if (image != null) {
-      File cropped = await ImageCropper.cropImage(
-          sourcePath: image.path,
-          aspectRatio: CropAspectRatio(
-              ratioX: 1, ratioY: 1),
-          compressQuality: 100,
-          maxWidth: 700,
-          maxHeight: 700,
-          compressFormat: ImageCompressFormat.jpg,
-          androidUiSettings: AndroidUiSettings(
-            toolbarColor: Colors.deepOrange,
-            toolbarTitle: "RPS Cropper",
-            statusBarColor: Colors.deepOrange.shade900,
-            backgroundColor: Colors.white,
-          )
-      );
-
-      this.setState(() {
-        customImg21 = cropped;
-        _inProcess = true;
-
-      });
-    } else {
-      this.setState(() {
-        _inProcess = false;
-      });
-    }
-  }
- Widget getImageWidget022() {
-    if (customImg22 != null) {
-      return InkWell(
-        onTap:()=>getImage022(),
-        child: Image.file(
-          customImg22,
-          width: 150,
-          height: 150,
-          fit: BoxFit.cover,
-        ),
-      );
-    } else {
-      return InkWell(
-        onTap:()=>getImage022(),
-         child: Column(
-           children: [
-             Icon(
-      Icons.add,
-        size:50,
-      ),
-                    Text("Add image")
-
-           ],
-         ));
-    }
-  }
-  getImage022() async {
-    Get.back();
-
-    this.setState(() {
-      _inProcess = true;
-    });
-    File image = File(await ImagePicker().getImage(source: ImageSource.gallery).then((pickedFile) => pickedFile.path));
-
-    if (image != null) {
-      File cropped = await ImageCropper.cropImage(
-          sourcePath: image.path,
-          aspectRatio: CropAspectRatio(
-              ratioX: 1, ratioY: 1),
-          compressQuality: 100,
-          maxWidth: 700,
-          maxHeight: 700,
-          compressFormat: ImageCompressFormat.jpg,
-          androidUiSettings: AndroidUiSettings(
-            toolbarColor: Colors.deepOrange,
-            toolbarTitle: "RPS Cropper",
-            statusBarColor: Colors.deepOrange.shade900,
-            backgroundColor: Colors.white,
-          )
-      );
-
-      this.setState(() {
-        customImg22 = cropped;
-        _inProcess = true;
-
-      });
-    } else {
-      this.setState(() {
-        _inProcess = false;
-      });
-    }
-  }
- Widget getImageWidget023() {
-    if (customImg23 != null) {
-      return InkWell(
-        onTap:()=>getImage023(),
-        child: Image.file(
-          customImg23,
-          width: 150,
-          height: 150,
-          fit: BoxFit.cover,
-        ),
-      );
-    } else {
-      return InkWell(
-        onTap:()=>getImage023(),
-         child: Column(
-           children: [
-             Icon(
-      Icons.add,
-        size:50,
-      ),
-                    Text("Add image")
-
-           ],
-         ));
-    }
-  }
-  getImage023() async {
-    Get.back();
-
-    this.setState(() {
-      _inProcess = true;
-    });
-    File image = File(await ImagePicker().getImage(source: ImageSource.gallery).then((pickedFile) => pickedFile.path));
-
-    if (image != null) {
-      File cropped = await ImageCropper.cropImage(
-          sourcePath: image.path,
-          aspectRatio: CropAspectRatio(
-              ratioX: 1, ratioY: 1),
-          compressQuality: 100,
-          maxWidth: 700,
-          maxHeight: 700,
-          compressFormat: ImageCompressFormat.jpg,
-          androidUiSettings: AndroidUiSettings(
-            toolbarColor: Colors.deepOrange,
-            toolbarTitle: "RPS Cropper",
-            statusBarColor: Colors.deepOrange.shade900,
-            backgroundColor: Colors.white,
-          )
-      );
-
-      this.setState(() {
-        customImg23 = cropped;
-        _inProcess = true;
-
-      });
-    } else {
-      this.setState(() {
-        _inProcess = false;
-      });
-    }
-  }
- Widget getImageWidget024() {
-    if (customImg24 != null) {
-      return InkWell(
-        onTap:()=>getImage024(),
-        child: Image.file(
-          customImg24,
-          width: 150,
-          height: 150,
-          fit: BoxFit.cover,
-        ),
-      );
-    } else {
-      return InkWell(
-        onTap:()=>getImage024(),
-         child: Column(
-           children: [
-             Icon(
-      Icons.add,
-        size:50,
-      ),
-                    Text("Add image")
-
-           ],
-         ));
-    }
-  }
-  getImage024() async {
-    Get.back();
-
-    this.setState(() {
-      _inProcess = true;
-    });
-    File image = File(await ImagePicker().getImage(source: ImageSource.gallery).then((pickedFile) => pickedFile.path));
-
-    if (image != null) {
-      File cropped = await ImageCropper.cropImage(
-          sourcePath: image.path,
-          aspectRatio: CropAspectRatio(
-              ratioX: 1, ratioY: 1),
-          compressQuality: 100,
-          maxWidth: 700,
-          maxHeight: 700,
-          compressFormat: ImageCompressFormat.jpg,
-          androidUiSettings: AndroidUiSettings(
-            toolbarColor: Colors.deepOrange,
-            toolbarTitle: "RPS Cropper",
-            statusBarColor: Colors.deepOrange.shade900,
-            backgroundColor: Colors.white,
-          )
-      );
-
-      this.setState(() {
-        customImg24 = cropped;
-        _inProcess = true;
-
-      });
-    } else {
-      this.setState(() {
-        _inProcess = false;
-      });
-    }
-  }
- Widget getImageWidget025() {
-    if (customImg25 != null) {
-      return InkWell(
-        onTap:()=>getImage025(),
-        child: Image.file(
-          customImg25,
-          width: 150,
-          height: 150,
-          fit: BoxFit.cover,
-        ),
-      );
-    } else {
-      return InkWell(
-        onTap:()=>getImage025(),
-         child: Column(
-           children: [
-             Icon(
-      Icons.add,
-        size:50,
-      ),
-                    Text("Add image")
-
-           ],
-         ));
-    }
-  }
-  getImage025() async {
-    Get.back();
-
-    this.setState(() {
-      _inProcess = true;
-    });
-    File image = File(await ImagePicker().getImage(source: ImageSource.gallery).then((pickedFile) => pickedFile.path));
-
-    if (image != null) {
-      File cropped = await ImageCropper.cropImage(
-          sourcePath: image.path,
-          aspectRatio: CropAspectRatio(
-              ratioX: 1, ratioY: 1),
-          compressQuality: 100,
-          maxWidth: 700,
-          maxHeight: 700,
-          compressFormat: ImageCompressFormat.jpg,
-          androidUiSettings: AndroidUiSettings(
-            toolbarColor: Colors.deepOrange,
-            toolbarTitle: "RPS Cropper",
-            statusBarColor: Colors.deepOrange.shade900,
-            backgroundColor: Colors.white,
-          )
-      );
-
-      this.setState(() {
-        customImg25 = cropped;
-        _inProcess = true;
-
-      });
-    } else {
-      this.setState(() {
-        _inProcess = false;
-      });
-    }
-  }
- Widget getImageWidget026() {
-    if (customImg26 != null) {
-      return InkWell(
-        onTap:()=>getImage026(),
-        child: Image.file(
-          customImg26,
-          width: 150,
-          height: 150,
-          fit: BoxFit.cover,
-        ),
-      );
-    } else {
-      return InkWell(
-        onTap:()=>getImage026(),
-         child: Column(
-           children: [
-             Icon(
-      Icons.add,
-        size:50,
-      ),
-                    Text("Add image")
-
-           ],
-         ));
-    }
-  }
-  getImage026() async {
-    Get.back();
-
-    this.setState(() {
-      _inProcess = true;
-    });
-    File image = File(await ImagePicker().getImage(source: ImageSource.gallery).then((pickedFile) => pickedFile.path));
-
-    if (image != null) {
-      File cropped = await ImageCropper.cropImage(
-          sourcePath: image.path,
-          aspectRatio: CropAspectRatio(
-              ratioX: 1, ratioY: 1),
-          compressQuality: 100,
-          maxWidth: 700,
-          maxHeight: 700,
-          compressFormat: ImageCompressFormat.jpg,
-          androidUiSettings: AndroidUiSettings(
-            toolbarColor: Colors.deepOrange,
-            toolbarTitle: "RPS Cropper",
-            statusBarColor: Colors.deepOrange.shade900,
-            backgroundColor: Colors.white,
-          )
-      );
-
-      this.setState(() {
-        customImg26 = cropped;
-        _inProcess = true;
-
-      });
-    } else {
-      this.setState(() {
-        _inProcess = false;
-      });
-    }
-  }
- Widget getImageWidget027() {
-    if (customImg27 != null) {
-      return InkWell(
-        onTap:()=>getImage027(),
-        child: Image.file(
-          customImg27,
-          width: 150,
-          height: 150,
-          fit: BoxFit.cover,
-        ),
-      );
-    } else {
-      return InkWell(
-        onTap:()=>getImage027(),
-         child: Column(
-           children: [
-             Icon(
-      Icons.add,
-        size:50,
-      ),
-                    Text("Add image")
-
-           ],
-         ));
-    }
-  }
-  getImage027() async {
-    Get.back();
-
-    this.setState(() {
-      _inProcess = true;
-    });
-    File image = File(await ImagePicker().getImage(source: ImageSource.gallery).then((pickedFile) => pickedFile.path));
-
-    if (image != null) {
-      File cropped = await ImageCropper.cropImage(
-          sourcePath: image.path,
-          aspectRatio: CropAspectRatio(
-              ratioX: 1, ratioY: 1),
-          compressQuality: 100,
-          maxWidth: 700,
-          maxHeight: 700,
-          compressFormat: ImageCompressFormat.jpg,
-          androidUiSettings: AndroidUiSettings(
-            toolbarColor: Colors.deepOrange,
-            toolbarTitle: "RPS Cropper",
-            statusBarColor: Colors.deepOrange.shade900,
-            backgroundColor: Colors.white,
-          )
-      );
-
-      this.setState(() {
-        customImg27 = cropped;
-        _inProcess = true;
-
-      });
-    } else {
-      this.setState(() {
-        _inProcess = false;
-      });
-    }
-  }
- Widget getImageWidget028() {
-    if (customImg28 != null) {
-      return InkWell(
-        onTap:()=>getImage028(),
-        child: Image.file(
-          customImg28,
-          width: 150,
-          height: 150,
-          fit: BoxFit.cover,
-        ),
-      );
-    } else {
-      return InkWell(
-        onTap:()=>getImage028(),
-         child: Column(
-           children: [
-             Icon(
-      Icons.add,
-        size:50,
-      ),
-                    Text("Add image")
-
-           ],
-         ));
-    }
-  }
-  getImage028() async {
-    Get.back();
-
-    this.setState(() {
-      _inProcess = true;
-    });
-    File image = File(await ImagePicker().getImage(source: ImageSource.gallery).then((pickedFile) => pickedFile.path));
-
-    if (image != null) {
-      File cropped = await ImageCropper.cropImage(
-          sourcePath: image.path,
-          aspectRatio: CropAspectRatio(
-              ratioX: 1, ratioY: 1),
-          compressQuality: 100,
-          maxWidth: 700,
-          maxHeight: 700,
-          compressFormat: ImageCompressFormat.jpg,
-          androidUiSettings: AndroidUiSettings(
-            toolbarColor: Colors.deepOrange,
-            toolbarTitle: "RPS Cropper",
-            statusBarColor: Colors.deepOrange.shade900,
-            backgroundColor: Colors.white,
-          )
-      );
-
-      this.setState(() {
-        customImg28 = cropped;
-        _inProcess = true;
-
-      });
-    } else {
-      this.setState(() {
-        _inProcess = false;
-      });
-    }
-  }
- Widget getImageWidget029() {
-    if (customImg29 != null) {
-      return InkWell(
-        onTap:()=>getImage029(),
-        child: Image.file(
-          customImg29,
-          width: 150,
-          height: 150,
-          fit: BoxFit.cover,
-        ),
-      );
-    } else {
-      return InkWell(
-        onTap:()=>getImage029(),
-         child: Column(
-           children: [
-             Icon(
-      Icons.add,
-        size:50,
-      ),
-                    Text("Add image")
-
-           ],
-         ));
-    }
-  }
-  getImage029() async {
-    Get.back();
-
-    this.setState(() {
-      _inProcess = true;
-    });
-    File image = File(await ImagePicker().getImage(source: ImageSource.gallery).then((pickedFile) => pickedFile.path));
-
-    if (image != null) {
-      File cropped = await ImageCropper.cropImage(
-          sourcePath: image.path,
-          aspectRatio: CropAspectRatio(
-              ratioX: 1, ratioY: 1),
-          compressQuality: 100,
-          maxWidth: 700,
-          maxHeight: 700,
-          compressFormat: ImageCompressFormat.jpg,
-          androidUiSettings: AndroidUiSettings(
-            toolbarColor: Colors.deepOrange,
-            toolbarTitle: "RPS Cropper",
-            statusBarColor: Colors.deepOrange.shade900,
-            backgroundColor: Colors.white,
-          )
-      );
-
-      this.setState(() {
-        customImg29 = cropped;
-        _inProcess = true;
-
-      });
-    } else {
-      this.setState(() {
-        _inProcess = false;
-      });
-    }
-  }
- Widget getImageWidget030() {
-    if (customImg30 != null) {
-      return InkWell(
-        onTap:()=>getImage030(),
-        child: Image.file(
-          customImg30,
-          width: 150,
-          height: 150,
-          fit: BoxFit.cover,
-        ),
-      );
-    } else {
-      return InkWell(
-        onTap:()=>getImage030(),
-         child: Column(
-           children: [
-             Icon(
-      Icons.add,
-        size:50,
-      ),
-                    Text("Add image")
-
-           ],
-         ));
-    }
-  }
-  getImage030() async {
-    Get.back();
-
-    this.setState(() {
-      _inProcess = true;
-    });
-    File image = File(await ImagePicker().getImage(source: ImageSource.gallery).then((pickedFile) => pickedFile.path));
-
-    if (image != null) {
-      File cropped = await ImageCropper.cropImage(
-          sourcePath: image.path,
-          aspectRatio: CropAspectRatio(
-              ratioX: 1, ratioY: 1),
-          compressQuality: 100,
-          maxWidth: 700,
-          maxHeight: 700,
-          compressFormat: ImageCompressFormat.jpg,
-          androidUiSettings: AndroidUiSettings(
-            toolbarColor: Colors.deepOrange,
-            toolbarTitle: "RPS Cropper",
-            statusBarColor: Colors.deepOrange.shade900,
-            backgroundColor: Colors.white,
-          )
-      );
-
-      this.setState(() {
-        customImg30 = cropped;
-        _inProcess = true;
-
-      });
-    } else {
-      this.setState(() {
-        _inProcess = false;
-      });
-    }
-  }
- Widget getImageWidget031() {
-    if (customImg31 != null) {
-      return InkWell(
-        onTap:()=>getImage031(),
-        child: Image.file(
-          customImg31,
-          width: 150,
-          height: 150,
-          fit: BoxFit.cover,
-        ),
-      );
-    } else {
-      return InkWell(
-        onTap:()=>getImage031(),
-         child: Column(
-           children: [
-             Icon(
-      Icons.add,
-        size:50,
-      ),
-                    Text("Add image")
-
-           ],
-         ));
-    }
-  }
-  getImage031() async {
-    Get.back();
-
-    this.setState(() {
-      _inProcess = true;
-    });
-    File image = File(await ImagePicker().getImage(source: ImageSource.gallery).then((pickedFile) => pickedFile.path));
-
-    if (image != null) {
-      File cropped = await ImageCropper.cropImage(
-          sourcePath: image.path,
-          aspectRatio: CropAspectRatio(
-              ratioX: 1, ratioY: 1),
-          compressQuality: 100,
-          maxWidth: 700,
-          maxHeight: 700,
-          compressFormat: ImageCompressFormat.jpg,
-          androidUiSettings: AndroidUiSettings(
-            toolbarColor: Colors.deepOrange,
-            toolbarTitle: "RPS Cropper",
-            statusBarColor: Colors.deepOrange.shade900,
-            backgroundColor: Colors.white,
-          )
-      );
-
-      this.setState(() {
-        customImg31 = cropped;
-        _inProcess = true;
-
-      });
-    } else {
-      this.setState(() {
-        _inProcess = false;
-      });
-    }
-  }
- Widget getImageWidget032() {
-    if (customImg32 != null) {
-      return InkWell(
-        onTap:()=>getImage032(),
-        child: Image.file(
-          customImg32,
-          width: 150,
-          height: 150,
-          fit: BoxFit.cover,
-        ),
-      );
-    } else {
-      return InkWell(
-        onTap:()=>getImage032(),
-         child: Column(
-           children: [
-             Icon(
-      Icons.add,
-        size:50,
-      ),
-                    Text("Add image")
-
-           ],
-         ));
-    }
-  }
-  getImage032() async {
-    Get.back();
-
-    this.setState(() {
-      _inProcess = true;
-    });
-    File image = File(await ImagePicker().getImage(source: ImageSource.gallery).then((pickedFile) => pickedFile.path));
-
-    if (image != null) {
-      File cropped = await ImageCropper.cropImage(
-          sourcePath: image.path,
-          aspectRatio: CropAspectRatio(
-              ratioX: 1, ratioY: 1),
-          compressQuality: 100,
-          maxWidth: 700,
-          maxHeight: 700,
-          compressFormat: ImageCompressFormat.jpg,
-          androidUiSettings: AndroidUiSettings(
-            toolbarColor: Colors.deepOrange,
-            toolbarTitle: "RPS Cropper",
-            statusBarColor: Colors.deepOrange.shade900,
-            backgroundColor: Colors.white,
-          )
-      );
-
-      this.setState(() {
-        customImg32 = cropped;
-        _inProcess = true;
-
-      });
-    } else {
-      this.setState(() {
-        _inProcess = false;
-      });
-    }
-  }
- Widget getImageWidget033() {
-    if (customImg33 != null) {
-      return InkWell(
-        onTap:()=>getImage033(),
-        child: Image.file(
-          customImg33,
-          width: 150,
-          height: 150,
-          fit: BoxFit.cover,
-        ),
-      );
-    } else {
-      return InkWell(
-        onTap:()=>getImage033(),
-         child: Column(
-           children: [
-             Icon(
-      Icons.add,
-        size:50,
-      ),
-                    Text("Add image")
-
-           ],
-         ));
-    }
-  }
-  getImage033() async {
-    Get.back();
-
-    this.setState(() {
-      _inProcess = true;
-    });
-    File image = File(await ImagePicker().getImage(source: ImageSource.gallery).then((pickedFile) => pickedFile.path));
-
-    if (image != null) {
-      File cropped = await ImageCropper.cropImage(
-          sourcePath: image.path,
-          aspectRatio: CropAspectRatio(
-              ratioX: 1, ratioY: 1),
-          compressQuality: 100,
-          maxWidth: 700,
-          maxHeight: 700,
-          compressFormat: ImageCompressFormat.jpg,
-          androidUiSettings: AndroidUiSettings(
-            toolbarColor: Colors.deepOrange,
-            toolbarTitle: "RPS Cropper",
-            statusBarColor: Colors.deepOrange.shade900,
-            backgroundColor: Colors.white,
-          )
-      );
-
-      this.setState(() {
-        customImg33 = cropped;
-        _inProcess = true;
-
-      });
-    } else {
-      this.setState(() {
-        _inProcess = false;
-      });
-    }
-  }
- Widget getImageWidget034() {
-    if (customImg34 != null) {
-      return InkWell(
-        onTap:()=>getImage034(),
-        child: Image.file(
-          customImg34,
-          width: 150,
-          height: 150,
-          fit: BoxFit.cover,
-        ),
-      );
-    } else {
-      return InkWell(
-        onTap:()=>getImage034(),
-         child: Column(
-           children: [
-             Icon(
-      Icons.add,
-        size:50,
-      ),
-                    Text("Add image")
-
-           ],
-         ));
-    }
-  }
-  getImage034() async {
-    Get.back();
-
-    this.setState(() {
-      _inProcess = true;
-    });
-    File image = File(await ImagePicker().getImage(source: ImageSource.gallery).then((pickedFile) => pickedFile.path));
-
-    if (image != null) {
-      File cropped = await ImageCropper.cropImage(
-          sourcePath: image.path,
-          aspectRatio: CropAspectRatio(
-              ratioX: 1, ratioY: 1),
-          compressQuality: 100,
-          maxWidth: 700,
-          maxHeight: 700,
-          compressFormat: ImageCompressFormat.jpg,
-          androidUiSettings: AndroidUiSettings(
-            toolbarColor: Colors.deepOrange,
-            toolbarTitle: "RPS Cropper",
-            statusBarColor: Colors.deepOrange.shade900,
-            backgroundColor: Colors.white,
-          )
-      );
-
-      this.setState(() {
-        customImg34 = cropped;
-        _inProcess = true;
-
-      });
-    } else {
-      this.setState(() {
-        _inProcess = false;
-      });
-    }
-  }
- Widget getImageWidget035() {
-    if (customImg35 != null) {
-      return InkWell(
-        onTap:()=>getImage035(),
-        child: Image.file(
-          customImg35,
-          width: 150,
-          height: 150,
-          fit: BoxFit.cover,
-        ),
-      );
-    } else {
-      return InkWell(
-        onTap:()=>getImage035(),
-         child: Column(
-           children: [
-             Icon(
-      Icons.add,
-        size:50,
-      ),
-                    Text("Add image")
-
-           ],
-         ));
-    }
-  }
-  getImage035() async {
-    Get.back();
-
-    this.setState(() {
-      _inProcess = true;
-    });
-    File image = File(await ImagePicker().getImage(source: ImageSource.gallery).then((pickedFile) => pickedFile.path));
-
-    if (image != null) {
-      File cropped = await ImageCropper.cropImage(
-          sourcePath: image.path,
-          aspectRatio: CropAspectRatio(
-              ratioX: 1, ratioY: 1),
-          compressQuality: 100,
-          maxWidth: 700,
-          maxHeight: 700,
-          compressFormat: ImageCompressFormat.jpg,
-          androidUiSettings: AndroidUiSettings(
-            toolbarColor: Colors.deepOrange,
-            toolbarTitle: "RPS Cropper",
-            statusBarColor: Colors.deepOrange.shade900,
-            backgroundColor: Colors.white,
-          )
-      );
-
-      this.setState(() {
-        customImg35 = cropped;
-        _inProcess = true;
-
-      });
-    } else {
-      this.setState(() {
-        _inProcess = false;
-      });
-    }
-  }
- Widget getImageWidget036() {
-    if (customImg36 != null) {
-      return InkWell(
-        onTap:()=>getImage036(),
-        child: Image.file(
-          customImg36,
-          width: 150,
-          height: 150,
-          fit: BoxFit.cover,
-        ),
-      );
-    } else {
-      return InkWell(
-        onTap:()=>getImage036(),
-         child: Column(
-           children: [
-             Icon(
-      Icons.add,
-        size:50,
-      ),
-                    Text("Add image")
-
-           ],
-         ));
-    }
-  }
-  getImage036() async {
-    Get.back();
-
-    this.setState(() {
-      _inProcess = true;
-    });
-    File image = File(await ImagePicker().getImage(source: ImageSource.gallery).then((pickedFile) => pickedFile.path));
-
-    if (image != null) {
-      File cropped = await ImageCropper.cropImage(
-          sourcePath: image.path,
-          aspectRatio: CropAspectRatio(
-              ratioX: 1, ratioY: 1),
-          compressQuality: 100,
-          maxWidth: 700,
-          maxHeight: 700,
-          compressFormat: ImageCompressFormat.jpg,
-          androidUiSettings: AndroidUiSettings(
-            toolbarColor: Colors.deepOrange,
-            toolbarTitle: "RPS Cropper",
-            statusBarColor: Colors.deepOrange.shade900,
-            backgroundColor: Colors.white,
-          )
-      );
-
-      this.setState(() {
-        customImg36 = cropped;
-        _inProcess = true;
-
-      });
-    } else {
-      this.setState(() {
-        _inProcess = false;
-      });
-    }
-  }
- Widget getImageWidget037() {
-    if (customImg37 != null) {
-      return InkWell(
-        onTap:()=>getImage037(),
-        child: Image.file(
-          customImg37,
-          width: 150,
-          height: 150,
-          fit: BoxFit.cover,
-        ),
-      );
-    } else {
-      return InkWell(
-        onTap:()=>getImage037(),
-         child: Column(
-           children: [
-             Icon(
-      Icons.add,
-        size:50,
-      ),
-                    Text("Add image")
-
-           ],
-         ));
-    }
-  }
-  getImage037() async {
-    Get.back();
-
-    this.setState(() {
-      _inProcess = true;
-    });
-    File image = File(await ImagePicker().getImage(source: ImageSource.gallery).then((pickedFile) => pickedFile.path));
-
-    if (image != null) {
-      File cropped = await ImageCropper.cropImage(
-          sourcePath: image.path,
-          aspectRatio: CropAspectRatio(
-              ratioX: 1, ratioY: 1),
-          compressQuality: 100,
-          maxWidth: 700,
-          maxHeight: 700,
-          compressFormat: ImageCompressFormat.jpg,
-          androidUiSettings: AndroidUiSettings(
-            toolbarColor: Colors.deepOrange,
-            toolbarTitle: "RPS Cropper",
-            statusBarColor: Colors.deepOrange.shade900,
-            backgroundColor: Colors.white,
-          )
-      );
-
-      this.setState(() {
-        customImg37 = cropped;
-        _inProcess = true;
-
-      });
-    } else {
-      this.setState(() {
-        _inProcess = false;
-      });
-    }
-  }
- Widget getImageWidget038() {
-    if (customImg38 != null) {
-      return InkWell(
-        onTap:()=>getImage038(),
-        child: Image.file(
-          customImg38,
-          width: 150,
-          height: 150,
-          fit: BoxFit.cover,
-        ),
-      );
-    } else {
-      return InkWell(
-        onTap:()=>getImage038(),
-         child: Column(
-           children: [
-             Icon(
-      Icons.add,
-        size:50,
-      ),
-                    Text("Add image")
-
-           ],
-         ));
-    }
-  }
-  getImage038() async {
-    Get.back();
-
-    this.setState(() {
-      _inProcess = true;
-    });
-    File image = File(await ImagePicker().getImage(source: ImageSource.gallery).then((pickedFile) => pickedFile.path));
-
-    if (image != null) {
-      File cropped = await ImageCropper.cropImage(
-          sourcePath: image.path,
-          aspectRatio: CropAspectRatio(
-              ratioX: 1, ratioY: 1),
-          compressQuality: 100,
-          maxWidth: 700,
-          maxHeight: 700,
-          compressFormat: ImageCompressFormat.jpg,
-          androidUiSettings: AndroidUiSettings(
-            toolbarColor: Colors.deepOrange,
-            toolbarTitle: "RPS Cropper",
-            statusBarColor: Colors.deepOrange.shade900,
-            backgroundColor: Colors.white,
-          )
-      );
-
-      this.setState(() {
-        customImg38 = cropped;
-        _inProcess = true;
-
-      });
-    } else {
-      this.setState(() {
-        _inProcess = false;
-      });
-    }
-  }
- Widget getImageWidget039() {
-    if (customImg39 != null) {
-      return InkWell(
-        onTap:()=>getImage039(),
-        child: Image.file(
-          customImg39,
-          width: 150,
-          height: 150,
-          fit: BoxFit.cover,
-        ),
-      );
-    } else {
-      return InkWell(
-        onTap:()=>getImage039(),
-         child: Column(
-           children: [
-             Icon(
-      Icons.add,
-        size:50,
-      ),
-                    Text("Add image")
-
-           ],
-         ));
-    }
-  }
-  getImage039() async {
-    Get.back();
-
-    this.setState(() {
-      _inProcess = true;
-    });
-    File image = File(await ImagePicker().getImage(source: ImageSource.gallery).then((pickedFile) => pickedFile.path));
-
-    if (image != null) {
-      File cropped = await ImageCropper.cropImage(
-          sourcePath: image.path,
-          aspectRatio: CropAspectRatio(
-              ratioX: 1, ratioY: 1),
-          compressQuality: 100,
-          maxWidth: 700,
-          maxHeight: 700,
-          compressFormat: ImageCompressFormat.jpg,
-          androidUiSettings: AndroidUiSettings(
-            toolbarColor: Colors.deepOrange,
-            toolbarTitle: "RPS Cropper",
-            statusBarColor: Colors.deepOrange.shade900,
-            backgroundColor: Colors.white,
-          )
-      );
-
-      this.setState(() {
-        customImg39 = cropped;
-        _inProcess = true;
-
-      });
-    } else {
-      this.setState(() {
-        _inProcess = false;
-      });
-    }
-  }
- Widget getImageWidget040() {
-    if (customImg40 != null) {
-      return InkWell(
-        onTap:()=>getImage040(),
-        child: Image.file(
-          customImg40,
-          width: 150,
-          height: 150,
-          fit: BoxFit.cover,
-        ),
-      );
-    } else {
-      return InkWell(
-        onTap:()=>getImage040(),
-         child: Column(
-           children: [
-             Icon(
-      Icons.add,
-        size:50,
-      ),
-                    Text("Add image")
-
-           ],
-         ));
-    }
-  }
-  getImage040() async {
-    Get.back();
-
-    this.setState(() {
-      _inProcess = true;
-    });
-    File image = File(await ImagePicker().getImage(source: ImageSource.gallery).then((pickedFile) => pickedFile.path));
-
-    if (image != null) {
-      File cropped = await ImageCropper.cropImage(
-          sourcePath: image.path,
-          aspectRatio: CropAspectRatio(
-              ratioX: 1, ratioY: 1),
-          compressQuality: 100,
-          maxWidth: 700,
-          maxHeight: 700,
-          compressFormat: ImageCompressFormat.jpg,
-          androidUiSettings: AndroidUiSettings(
-            toolbarColor: Colors.deepOrange,
-            toolbarTitle: "RPS Cropper",
-            statusBarColor: Colors.deepOrange.shade900,
-            backgroundColor: Colors.white,
-          )
-      );
-
-      this.setState(() {
-        customImg40 = cropped;
-        _inProcess = true;
-
-      });
-    } else {
-      this.setState(() {
-        _inProcess = false;
-      });
-    }
-  }
- Widget getImageWidget041() {
-    if (customImg41 != null) {
-      return InkWell(
-        onTap:()=>getImage041(),
-        child: Image.file(
-          customImg41,
-          width: 150,
-          height: 150,
-          fit: BoxFit.cover,
-        ),
-      );
-    } else {
-      return InkWell(
-        onTap:()=>getImage041(),
-         child: Column(
-           children: [
-             Icon(
-      Icons.add,
-        size:50,
-      ),
-                    Text("Add image")
-
-           ],
-         ));
-    }
-  }
-  getImage041() async {
-    Get.back();
-
-    this.setState(() {
-      _inProcess = true;
-    });
-    File image = File(await ImagePicker().getImage(source: ImageSource.gallery).then((pickedFile) => pickedFile.path));
-
-    if (image != null) {
-      File cropped = await ImageCropper.cropImage(
-          sourcePath: image.path,
-          aspectRatio: CropAspectRatio(
-              ratioX: 1, ratioY: 1),
-          compressQuality: 100,
-          maxWidth: 700,
-          maxHeight: 700,
-          compressFormat: ImageCompressFormat.jpg,
-          androidUiSettings: AndroidUiSettings(
-            toolbarColor: Colors.deepOrange,
-            toolbarTitle: "RPS Cropper",
-            statusBarColor: Colors.deepOrange.shade900,
-            backgroundColor: Colors.white,
-          )
-      );
-
-      this.setState(() {
-        customImg41 = cropped;
-        _inProcess = true;
-
-      });
-    } else {
-      this.setState(() {
-        _inProcess = false;
-      });
-    }
-  }
- Widget getImageWidget042() {
-    if (customImg42 != null) {
-      return InkWell(
-        onTap:()=>getImage042(),
-        child: Image.file(
-          customImg42,
-          width: 150,
-          height: 150,
-          fit: BoxFit.cover,
-        ),
-      );
-    } else {
-      return InkWell(
-        onTap:()=>getImage042(),
-         child: Column(
-           children: [
-             Icon(
-      Icons.add,
-        size:50,
-      ),
-                    Text("Add image")
-
-           ],
-         ));
-    }
-  }
-  getImage042() async {
-    Get.back();
-
-    this.setState(() {
-      _inProcess = true;
-    });
-    File image = File(await ImagePicker().getImage(source: ImageSource.gallery).then((pickedFile) => pickedFile.path));
-
-    if (image != null) {
-      File cropped = await ImageCropper.cropImage(
-          sourcePath: image.path,
-          aspectRatio: CropAspectRatio(
-              ratioX: 1, ratioY: 1),
-          compressQuality: 100,
-          maxWidth: 700,
-          maxHeight: 700,
-          compressFormat: ImageCompressFormat.jpg,
-          androidUiSettings: AndroidUiSettings(
-            toolbarColor: Colors.deepOrange,
-            toolbarTitle: "RPS Cropper",
-            statusBarColor: Colors.deepOrange.shade900,
-            backgroundColor: Colors.white,
-          )
-      );
-
-      this.setState(() {
-        customImg42 = cropped;
-        _inProcess = true;
-
-      });
-    } else {
-      this.setState(() {
-        _inProcess = false;
-      });
-    }
-  }
- Widget getImageWidget043() {
-    if (customImg43 != null) {
-      return InkWell(
-        onTap:()=>getImage043(),
-        child: Image.file(
-          customImg43,
-          width: 150,
-          height: 150,
-          fit: BoxFit.cover,
-        ),
-      );
-    } else {
-      return InkWell(
-        onTap:()=>getImage043(),
-         child: Column(
-           children: [
-             Icon(
-      Icons.add,
-        size:50,
-      ),
-                    Text("Add image")
-
-           ],
-         ));
-    }
-  }
-  getImage043() async {
-    Get.back();
-
-    this.setState(() {
-      _inProcess = true;
-    });
-    File image = File(await ImagePicker().getImage(source: ImageSource.gallery).then((pickedFile) => pickedFile.path));
-
-    if (image != null) {
-      File cropped = await ImageCropper.cropImage(
-          sourcePath: image.path,
-          aspectRatio: CropAspectRatio(
-              ratioX: 1, ratioY: 1),
-          compressQuality: 100,
-          maxWidth: 700,
-          maxHeight: 700,
-          compressFormat: ImageCompressFormat.jpg,
-          androidUiSettings: AndroidUiSettings(
-            toolbarColor: Colors.deepOrange,
-            toolbarTitle: "RPS Cropper",
-            statusBarColor: Colors.deepOrange.shade900,
-            backgroundColor: Colors.white,
-          )
-      );
-
-      this.setState(() {
-        customImg43 = cropped;
-        _inProcess = true;
-
-      });
-    } else {
-      this.setState(() {
-        _inProcess = false;
-      });
-    }
-  }
- Widget getImageWidget044() {
-    if (customImg44 != null) {
-      return InkWell(
-        onTap:()=>getImage044(),
-        child: Image.file(
-          customImg44,
-          width: 150,
-          height: 150,
-          fit: BoxFit.cover,
-        ),
-      );
-    } else {
-      return InkWell(
-        onTap:()=>getImage044(),
-         child: Column(
-           children: [
-             Icon(
-      Icons.add,
-        size:50,
-      ),
-                    Text("Add image")
-
-           ],
-         ));
-    }
-  }
-  getImage044() async {
-    Get.back();
-
-    this.setState(() {
-      _inProcess = true;
-    });
-    File image = File(await ImagePicker().getImage(source: ImageSource.gallery).then((pickedFile) => pickedFile.path));
-
-    if (image != null) {
-      File cropped = await ImageCropper.cropImage(
-          sourcePath: image.path,
-          aspectRatio: CropAspectRatio(
-              ratioX: 1, ratioY: 1),
-          compressQuality: 100,
-          maxWidth: 700,
-          maxHeight: 700,
-          compressFormat: ImageCompressFormat.jpg,
-          androidUiSettings: AndroidUiSettings(
-            toolbarColor: Colors.deepOrange,
-            toolbarTitle: "RPS Cropper",
-            statusBarColor: Colors.deepOrange.shade900,
-            backgroundColor: Colors.white,
-          )
-      );
-
-      this.setState(() {
-        customImg44 = cropped;
-        _inProcess = true;
-
-      });
-    } else {
-      this.setState(() {
-        _inProcess = false;
-      });
-    }
-  }
- Widget getImageWidget045() {
-    if (customImg45 != null) {
-      return InkWell(
-        onTap:()=>getImage045(),
-        child: Image.file(
-          customImg45,
-          width: 150,
-          height: 150,
-          fit: BoxFit.cover,
-        ),
-      );
-    } else {
-      return InkWell(
-        onTap:()=>getImage045(),
-         child: Column(
-           children: [
-             Icon(
-      Icons.add,
-        size:50,
-      ),
-                    Text("Add image")
-
-           ],
-         ));
-    }
-  }
-  getImage045() async {
-    Get.back();
-
-    this.setState(() {
-      _inProcess = true;
-    });
-    File image = File(await ImagePicker().getImage(source: ImageSource.gallery).then((pickedFile) => pickedFile.path));
-
-    if (image != null) {
-      File cropped = await ImageCropper.cropImage(
-          sourcePath: image.path,
-          aspectRatio: CropAspectRatio(
-              ratioX: 1, ratioY: 1),
-          compressQuality: 100,
-          maxWidth: 700,
-          maxHeight: 700,
-          compressFormat: ImageCompressFormat.jpg,
-          androidUiSettings: AndroidUiSettings(
-            toolbarColor: Colors.deepOrange,
-            toolbarTitle: "RPS Cropper",
-            statusBarColor: Colors.deepOrange.shade900,
-            backgroundColor: Colors.white,
-          )
-      );
-
-      this.setState(() {
-        customImg45 = cropped;
-        _inProcess = true;
-
-      });
-    } else {
-      this.setState(() {
-        _inProcess = false;
-      });
-    }
-  }
- Widget getImageWidget046() {
-    if (customImg46 != null) {
-      return InkWell(
-        onTap:()=>getImage046(),
-        child: Image.file(
-          customImg46,
-          width: 150,
-          height: 150,
-          fit: BoxFit.cover,
-        ),
-      );
-    } else {
-      return InkWell(
-        onTap:()=>getImage046(),
-         child: Column(
-           children: [
-             Icon(
-      Icons.add,
-        size:50,
-      ),
-                    Text("Add image")
-
-           ],
-         ));
-    }
-  }
-  getImage046() async {
-    Get.back();
-
-    this.setState(() {
-      _inProcess = true;
-    });
-    File image = File(await ImagePicker().getImage(source: ImageSource.gallery).then((pickedFile) => pickedFile.path));
-
-    if (image != null) {
-      File cropped = await ImageCropper.cropImage(
-          sourcePath: image.path,
-          aspectRatio: CropAspectRatio(
-              ratioX: 1, ratioY: 1),
-          compressQuality: 100,
-          maxWidth: 700,
-          maxHeight: 700,
-          compressFormat: ImageCompressFormat.jpg,
-          androidUiSettings: AndroidUiSettings(
-            toolbarColor: Colors.deepOrange,
-            toolbarTitle: "RPS Cropper",
-            statusBarColor: Colors.deepOrange.shade900,
-            backgroundColor: Colors.white,
-          )
-      );
-
-      this.setState(() {
-        customImg46 = cropped;
-        _inProcess = true;
-
-      });
-    } else {
-      this.setState(() {
-        _inProcess = false;
-      });
-    }
-  }
- Widget getImageWidget047() {
-    if (customImg47 != null) {
-      return InkWell(
-        onTap:()=>getImage047(),
-        child: Image.file(
-          customImg47,
-          width: 150,
-          height: 150,
-          fit: BoxFit.cover,
-        ),
-      );
-    } else {
-      return InkWell(
-        onTap:()=>getImage047(),
-         child: Column(
-           children: [
-             Icon(
-      Icons.add,
-        size:50,
-      ),
-                    Text("Add image")
-
-           ],
-         ));
-    }
-  }
-  getImage047() async {
-    Get.back();
-
-    this.setState(() {
-      _inProcess = true;
-    });
-    File image = File(await ImagePicker().getImage(source: ImageSource.gallery).then((pickedFile) => pickedFile.path));
-
-    if (image != null) {
-      File cropped = await ImageCropper.cropImage(
-          sourcePath: image.path,
-          aspectRatio: CropAspectRatio(
-              ratioX: 1, ratioY: 1),
-          compressQuality: 100,
-          maxWidth: 700,
-          maxHeight: 700,
-          compressFormat: ImageCompressFormat.jpg,
-          androidUiSettings: AndroidUiSettings(
-            toolbarColor: Colors.deepOrange,
-            toolbarTitle: "RPS Cropper",
-            statusBarColor: Colors.deepOrange.shade900,
-            backgroundColor: Colors.white,
-          )
-      );
-
-      this.setState(() {
-        customImg47 = cropped;
-        _inProcess = true;
-
-      });
-    } else {
-      this.setState(() {
-        _inProcess = false;
-      });
-    }
-  }
- Widget getImageWidget048() {
-    if (customImg48 != null) {
-      return InkWell(
-        onTap:()=>getImage048(),
-        child: Image.file(
-          customImg48,
-          width: 150,
-          height: 150,
-          fit: BoxFit.cover,
-        ),
-      );
-    } else {
-      return InkWell(
-        onTap:()=>getImage048(),
-         child: Column(
-           children: [
-             Icon(
-      Icons.add,
-        size:50,
-      ),
-                    Text("Add image")
-
-           ],
-         ));
-    }
-  }
-  getImage048() async {
-    Get.back();
-
-    this.setState(() {
-      _inProcess = true;
-    });
-    File image = File(await ImagePicker().getImage(source: ImageSource.gallery).then((pickedFile) => pickedFile.path));
-
-    if (image != null) {
-      File cropped = await ImageCropper.cropImage(
-          sourcePath: image.path,
-          aspectRatio: CropAspectRatio(
-              ratioX: 1, ratioY: 1),
-          compressQuality: 100,
-          maxWidth: 700,
-          maxHeight: 700,
-          compressFormat: ImageCompressFormat.jpg,
-          androidUiSettings: AndroidUiSettings(
-            toolbarColor: Colors.deepOrange,
-            toolbarTitle: "RPS Cropper",
-            statusBarColor: Colors.deepOrange.shade900,
-            backgroundColor: Colors.white,
-          )
-      );
-
-      this.setState(() {
-        customImg48 = cropped;
-        _inProcess = true;
-
-      });
-    } else {
-      this.setState(() {
-        _inProcess = false;
-      });
-    }
-  }
- Widget getImageWidget049() {
-    if (customImg49 != null) {
-      return InkWell(
-        onTap:()=>getImage049(),
-        child: Image.file(
-          customImg49,
-          width: 150,
-          height: 150,
-          fit: BoxFit.cover,
-        ),
-      );
-    } else {
-      return InkWell(
-        onTap:()=>getImage049(),
-         child: Column(
-           children: [
-             Icon(
-      Icons.add,
-        size:50,
-      ),
-                    Text("Add image")
-
-           ],
-         ));
-    }
-  }
-  getImage049() async {
-    Get.back();
-
-    this.setState(() {
-      _inProcess = true;
-    });
-    File image = File(await ImagePicker().getImage(source: ImageSource.gallery).then((pickedFile) => pickedFile.path));
-
-    if (image != null) {
-      File cropped = await ImageCropper.cropImage(
-          sourcePath: image.path,
-          aspectRatio: CropAspectRatio(
-              ratioX: 1, ratioY: 1),
-          compressQuality: 100,
-          maxWidth: 700,
-          maxHeight: 700,
-          compressFormat: ImageCompressFormat.jpg,
-          androidUiSettings: AndroidUiSettings(
-            toolbarColor: Colors.deepOrange,
-            toolbarTitle: "RPS Cropper",
-            statusBarColor: Colors.deepOrange.shade900,
-            backgroundColor: Colors.white,
-          )
-      );
-
-      this.setState(() {
-        customImg49 = cropped;
-        _inProcess = true;
-
-      });
-    } else {
-      this.setState(() {
-        _inProcess = false;
-      });
-    }
-  }
- Widget getImageWidget050() {
-    if (customImg50 != null) {
-      return InkWell(
-        onTap:()=>getImage050(),
-        child: Image.file(
-          customImg50,
-          width: 150,
-          height: 150,
-          fit: BoxFit.cover,
-        ),
-      );
-    } else {
-      return InkWell(
-        onTap:()=>getImage050(),
-         child: Column(
-           children: [
-             Icon(
-      Icons.add,
-        size:50,
-      ),
-                    Text("Add image")
-
-           ],
-         ));
-    }
-  }
-  getImage050() async {
-    Get.back();
-
-    this.setState(() {
-      _inProcess = true;
-    });
-    File image = File(await ImagePicker().getImage(source: ImageSource.gallery).then((pickedFile) => pickedFile.path));
-
-    if (image != null) {
-      File cropped = await ImageCropper.cropImage(
-          sourcePath: image.path,
-          aspectRatio: CropAspectRatio(
-              ratioX: 1, ratioY: 1),
-          compressQuality: 100,
-          maxWidth: 700,
-          maxHeight: 700,
-          compressFormat: ImageCompressFormat.jpg,
-          androidUiSettings: AndroidUiSettings(
-            toolbarColor: Colors.deepOrange,
-            toolbarTitle: "RPS Cropper",
-            statusBarColor: Colors.deepOrange.shade900,
-            backgroundColor: Colors.white,
-          )
-      );
-
-      this.setState(() {
-        customImg50 = cropped;
-        _inProcess = true;
-
-      });
-    } else {
-      this.setState(() {
-        _inProcess = false;
-      });
-    }
-  }
-
-  
+ //  Widget getImageWidget01() {
+ //    if (customImg1 != null) {
+ //      return InkWell(
+ //        onTap:()=>getImage01(),
+ //        child: Image.file(
+ //          customImg1,
+ //          width: 150,
+ //          height: 150,
+ //          fit: BoxFit.cover,
+ //        ),
+ //      );
+ //    } else {
+ //      return InkWell(
+ //        onTap:()=>getImage01(),
+ //         child: Column(
+ //           children: [
+ //             Icon(
+ //      Icons.add,
+ //        size:50,
+ //      ),
+ //                    Text("Add image")
+ //
+ //           ],
+ //         ));
+ //    }
+ //  }
+ //  getImage01() async {
+ //
+ //    this.setState(() {
+ //      _inProcess = true;
+ //    });
+ //    File image = File(await ImagePicker().getImage(source: ImageSource.gallery).then((pickedFile) => pickedFile.path));
+ //
+ //    if (image != null) {
+ //      File cropped = await ImageCropper.cropImage(
+ //          sourcePath: image.path,
+ //          aspectRatio: CropAspectRatio(
+ //              ratioX: 1, ratioY: 1),
+ //          compressQuality: 100,
+ //          maxWidth: 700,
+ //          maxHeight: 700,
+ //          compressFormat: ImageCompressFormat.jpg,
+ //          androidUiSettings: AndroidUiSettings(
+ //            toolbarColor: Colors.deepOrange,
+ //            toolbarTitle: "RPS Cropper",
+ //            statusBarColor: Colors.deepOrange.shade900,
+ //            backgroundColor: Colors.white,
+ //          )
+ //      );
+ //      if (!mounted) {
+ //        return;
+ //      }
+ //      setState(() {
+ //        customImg1 = cropped;
+ //        _inProcess = true;
+ //
+ //      });
+ //    } else {
+ //      this.setState(() {
+ //        _inProcess = false;
+ //      });
+ //    }
+ //  }
+ //    Widget getImageWidget02() {
+ //    if (customImg2 != null) {
+ //      return InkWell(
+ //        onTap:()=>getImage02(),
+ //        child: Image.file(
+ //          customImg2,
+ //          width: 150,
+ //          height: 150,
+ //          fit: BoxFit.cover,
+ //        ),
+ //      );
+ //    } else {
+ //      return InkWell(
+ //        onTap:()=>getImage02(),
+ //         child: Column(
+ //           children: [
+ //             Icon(
+ //      Icons.add,
+ //        size:50,
+ //      ),
+ //                    Text("Add image")
+ //
+ //           ],
+ //         ));
+ //    }
+ //  }
+ //  getImage02() async {
+ //
+ //
+ //    this.setState(() {
+ //      _inProcess = true;
+ //    });
+ //    File image = File(await ImagePicker().getImage(source: ImageSource.gallery).then((pickedFile) => pickedFile.path));
+ //
+ //    if (image != null) {
+ //      File cropped = await ImageCropper.cropImage(
+ //          sourcePath: image.path,
+ //          aspectRatio: CropAspectRatio(
+ //              ratioX: 1, ratioY: 1),
+ //          compressQuality: 100,
+ //          maxWidth: 700,
+ //          maxHeight: 700,
+ //          compressFormat: ImageCompressFormat.jpg,
+ //          androidUiSettings: AndroidUiSettings(
+ //            toolbarColor: Colors.deepOrange,
+ //            toolbarTitle: "RPS Cropper",
+ //            statusBarColor: Colors.deepOrange.shade900,
+ //            backgroundColor: Colors.white,
+ //          )
+ //      );
+ //
+ //      this.setState(() {
+ //        customImg2 = cropped;
+ //        _inProcess = true;
+ //
+ //      });
+ //    } else {
+ //      this.setState(() {
+ //        _inProcess = false;
+ //      });
+ //    }
+ //  }
+ //    Widget getImageWidget03() {
+ //    if (customImg3 != null) {
+ //      return InkWell(
+ //        onTap:()=>getImage03(),
+ //        child: Image.file(
+ //          customImg3,
+ //          width: 150,
+ //          height: 150,
+ //          fit: BoxFit.cover,
+ //        ),
+ //      );
+ //    } else {
+ //      return InkWell(
+ //        onTap:()=>getImage03(),
+ //         child: Column(
+ //           children: [
+ //             Icon(
+ //      Icons.add,
+ //        size:50,
+ //      ),
+ //                    Text("Add image")
+ //
+ //           ],
+ //         ));
+ //    }
+ //  }
+ //  getImage03() async {
+ //
+ //
+ //    this.setState(() {
+ //      _inProcess = true;
+ //    });
+ //    File image = File(await ImagePicker().getImage(source: ImageSource.gallery).then((pickedFile) => pickedFile.path));
+ //
+ //    if (image != null) {
+ //      File cropped = await ImageCropper.cropImage(
+ //          sourcePath: image.path,
+ //          aspectRatio: CropAspectRatio(
+ //              ratioX: 1, ratioY: 1),
+ //          compressQuality: 100,
+ //          maxWidth: 700,
+ //          maxHeight: 700,
+ //          compressFormat: ImageCompressFormat.jpg,
+ //          androidUiSettings: AndroidUiSettings(
+ //            toolbarColor: Colors.deepOrange,
+ //            toolbarTitle: "RPS Cropper",
+ //            statusBarColor: Colors.deepOrange.shade900,
+ //            backgroundColor: Colors.white,
+ //          )
+ //      );
+ //
+ //      this.setState(() {
+ //        customImg3 = cropped;
+ //        _inProcess = true;
+ //
+ //      });
+ //    } else {
+ //      this.setState(() {
+ //        _inProcess = false;
+ //      });
+ //    }
+ //  }
+ //    Widget getImageWidget04() {
+ //    if (customImg4 != null) {
+ //      return InkWell(
+ //        onTap:()=>getImage04(),
+ //        child: Image.file(
+ //          customImg4,
+ //          width: 150,
+ //          height: 150,
+ //          fit: BoxFit.cover,
+ //        ),
+ //      );
+ //    } else {
+ //      return InkWell(
+ //        onTap:()=>getImage04(),
+ //         child: Column(
+ //           children: [
+ //             Icon(
+ //      Icons.add,
+ //        size:50,
+ //      ),
+ //                    Text("Add image")
+ //
+ //           ],
+ //         ));
+ //    }
+ //  }
+ //  getImage04() async {
+ //
+ //
+ //    this.setState(() {
+ //      _inProcess = true;
+ //    });
+ //    File image = File(await ImagePicker().getImage(source: ImageSource.gallery).then((pickedFile) => pickedFile.path));
+ //
+ //    if (image != null) {
+ //      File cropped = await ImageCropper.cropImage(
+ //          sourcePath: image.path,
+ //          aspectRatio: CropAspectRatio(
+ //              ratioX: 1, ratioY: 1),
+ //          compressQuality: 100,
+ //          maxWidth: 700,
+ //          maxHeight: 700,
+ //          compressFormat: ImageCompressFormat.jpg,
+ //          androidUiSettings: AndroidUiSettings(
+ //            toolbarColor: Colors.deepOrange,
+ //            toolbarTitle: "RPS Cropper",
+ //            statusBarColor: Colors.deepOrange.shade900,
+ //            backgroundColor: Colors.white,
+ //          )
+ //      );
+ //
+ //      this.setState(() {
+ //        customImg4 = cropped;
+ //        _inProcess = true;
+ //
+ //      });
+ //    } else {
+ //      this.setState(() {
+ //        _inProcess = false;
+ //      });
+ //    }
+ //  }
+ //   Widget getImageWidget05() {
+ //    if (customImg5 != null) {
+ //      return InkWell(
+ //        onTap:()=>getImage05(),
+ //        child: Image.file(
+ //          customImg5,
+ //          width: 150,
+ //          height: 150,
+ //          fit: BoxFit.cover,
+ //        ),
+ //      );
+ //    } else {
+ //      return InkWell(
+ //        onTap:()=>getImage05(),
+ //         child: Column(
+ //           children: [
+ //             Icon(
+ //      Icons.add,
+ //        size:50,
+ //      ),
+ //                    Text("Add image")
+ //
+ //           ],
+ //         ));
+ //    }
+ //  }
+ //  getImage05() async {
+ //
+ //
+ //    this.setState(() {
+ //      _inProcess = true;
+ //    });
+ //    File image = File(await ImagePicker().getImage(source: ImageSource.gallery).then((pickedFile) => pickedFile.path));
+ //
+ //    if (image != null) {
+ //      File cropped = await ImageCropper.cropImage(
+ //          sourcePath: image.path,
+ //          aspectRatio: CropAspectRatio(
+ //              ratioX: 1, ratioY: 1),
+ //          compressQuality: 100,
+ //          maxWidth: 700,
+ //          maxHeight: 700,
+ //          compressFormat: ImageCompressFormat.jpg,
+ //          androidUiSettings: AndroidUiSettings(
+ //            toolbarColor: Colors.deepOrange,
+ //            toolbarTitle: "RPS Cropper",
+ //            statusBarColor: Colors.deepOrange.shade900,
+ //            backgroundColor: Colors.white,
+ //          )
+ //      );
+ //
+ //      this.setState(() {
+ //        customImg5 = cropped;
+ //        _inProcess = true;
+ //
+ //      });
+ //    } else {
+ //      this.setState(() {
+ //        _inProcess = false;
+ //      });
+ //    }
+ //  }
+ //   Widget getImageWidget06() {
+ //    if (customImg6 != null) {
+ //      return InkWell(
+ //        onTap:()=>getImage06(),
+ //        child: Image.file(
+ //          customImg6,
+ //          width: 150,
+ //          height: 150,
+ //          fit: BoxFit.cover,
+ //        ),
+ //      );
+ //    } else {
+ //      return InkWell(
+ //        onTap:()=>getImage06(),
+ //         child: Column(
+ //           children: [
+ //             Icon(
+ //      Icons.add,
+ //        size:50,
+ //      ),
+ //                    Text("Add image")
+ //
+ //           ],
+ //         ));
+ //    }
+ //  }
+ //  getImage06() async {
+ //
+ //
+ //    this.setState(() {
+ //      _inProcess = true;
+ //    });
+ //    File image = File(await ImagePicker().getImage(source: ImageSource.gallery).then((pickedFile) => pickedFile.path));
+ //
+ //    if (image != null) {
+ //      File cropped = await ImageCropper.cropImage(
+ //          sourcePath: image.path,
+ //          aspectRatio: CropAspectRatio(
+ //              ratioX: 1, ratioY: 1),
+ //          compressQuality: 100,
+ //          maxWidth: 700,
+ //          maxHeight: 700,
+ //          compressFormat: ImageCompressFormat.jpg,
+ //          androidUiSettings: AndroidUiSettings(
+ //            toolbarColor: Colors.deepOrange,
+ //            toolbarTitle: "RPS Cropper",
+ //            statusBarColor: Colors.deepOrange.shade900,
+ //            backgroundColor: Colors.white,
+ //          )
+ //      );
+ //
+ //      this.setState(() {
+ //        customImg6 = cropped;
+ //        _inProcess = true;
+ //
+ //      });
+ //    } else {
+ //      this.setState(() {
+ //        _inProcess = false;
+ //      });
+ //    }
+ //  }
+ //   Widget getImageWidget07() {
+ //    if (customImg7 != null) {
+ //      return InkWell(
+ //        onTap:()=>getImage07(),
+ //        child: Image.file(
+ //          customImg7,
+ //          width: 150,
+ //          height: 150,
+ //          fit: BoxFit.cover,
+ //        ),
+ //      );
+ //    } else {
+ //      return InkWell(
+ //        onTap:()=>getImage07(),
+ //         child: Column(
+ //           children: [
+ //             Icon(
+ //      Icons.add,
+ //        size:50,
+ //      ),
+ //                    Text("Add image")
+ //
+ //           ],
+ //         ));
+ //    }
+ //  }
+ //  getImage07() async {
+ //
+ //
+ //    this.setState(() {
+ //      _inProcess = true;
+ //    });
+ //    File image = File(await ImagePicker().getImage(source: ImageSource.gallery).then((pickedFile) => pickedFile.path));
+ //
+ //    if (image != null) {
+ //      File cropped = await ImageCropper.cropImage(
+ //          sourcePath: image.path,
+ //          aspectRatio: CropAspectRatio(
+ //              ratioX: 1, ratioY: 1),
+ //          compressQuality: 100,
+ //          maxWidth: 700,
+ //          maxHeight: 700,
+ //          compressFormat: ImageCompressFormat.jpg,
+ //          androidUiSettings: AndroidUiSettings(
+ //            toolbarColor: Colors.deepOrange,
+ //            toolbarTitle: "RPS Cropper",
+ //            statusBarColor: Colors.deepOrange.shade900,
+ //            backgroundColor: Colors.white,
+ //          )
+ //      );
+ //
+ //      this.setState(() {
+ //        customImg7 = cropped;
+ //        _inProcess = true;
+ //
+ //      });
+ //    } else {
+ //      this.setState(() {
+ //        _inProcess = false;
+ //      });
+ //    }
+ //  }
+ //    Widget getImageWidget08() {
+ //    if (customImg8 != null) {
+ //      return InkWell(
+ //        onTap:()=>getImage08(),
+ //        child: Image.file(
+ //          customImg8,
+ //          width: 150,
+ //          height: 150,
+ //          fit: BoxFit.cover,
+ //        ),
+ //      );
+ //    } else {
+ //      return InkWell(
+ //        onTap:()=>getImage08(),
+ //         child: Column(
+ //           children: [
+ //             Icon(
+ //      Icons.add,
+ //        size:50,
+ //      ),
+ //                    Text("Add image")
+ //
+ //           ],
+ //         ));
+ //    }
+ //  }
+ //  getImage08() async {
+ //
+ //
+ //    this.setState(() {
+ //      _inProcess = true;
+ //    });
+ //    File image = File(await ImagePicker().getImage(source: ImageSource.gallery).then((pickedFile) => pickedFile.path));
+ //
+ //    if (image != null) {
+ //      File cropped = await ImageCropper.cropImage(
+ //          sourcePath: image.path,
+ //          aspectRatio: CropAspectRatio(
+ //              ratioX: 1, ratioY: 1),
+ //          compressQuality: 100,
+ //          maxWidth: 700,
+ //          maxHeight: 700,
+ //          compressFormat: ImageCompressFormat.jpg,
+ //          androidUiSettings: AndroidUiSettings(
+ //            toolbarColor: Colors.deepOrange,
+ //            toolbarTitle: "RPS Cropper",
+ //            statusBarColor: Colors.deepOrange.shade900,
+ //            backgroundColor: Colors.white,
+ //          )
+ //      );
+ //
+ //      this.setState(() {
+ //        customImg8 = cropped;
+ //        _inProcess = true;
+ //
+ //      });
+ //    } else {
+ //      this.setState(() {
+ //        _inProcess = false;
+ //      });
+ //    }
+ //  }
+ //   Widget getImageWidget09() {
+ //    if (customImg9 != null) {
+ //      return InkWell(
+ //        onTap:()=>getImage09(),
+ //        child: Image.file(
+ //          customImg9,
+ //          width: 150,
+ //          height: 150,
+ //          fit: BoxFit.cover,
+ //        ),
+ //      );
+ //    } else {
+ //      return InkWell(
+ //        onTap:()=>getImage09(),
+ //         child: Column(
+ //           children: [
+ //             Icon(
+ //      Icons.add,
+ //        size:50,
+ //      ),
+ //                    Text("Add image")
+ //
+ //           ],
+ //         ));
+ //    }
+ //  }
+ //  getImage09() async {
+ //
+ //
+ //    this.setState(() {
+ //      _inProcess = true;
+ //    });
+ //    File image = File(await ImagePicker().getImage(source: ImageSource.gallery).then((pickedFile) => pickedFile.path));
+ //
+ //    if (image != null) {
+ //      File cropped = await ImageCropper.cropImage(
+ //          sourcePath: image.path,
+ //          aspectRatio: CropAspectRatio(
+ //              ratioX: 1, ratioY: 1),
+ //          compressQuality: 100,
+ //          maxWidth: 700,
+ //          maxHeight: 700,
+ //          compressFormat: ImageCompressFormat.jpg,
+ //          androidUiSettings: AndroidUiSettings(
+ //            toolbarColor: Colors.deepOrange,
+ //            toolbarTitle: "RPS Cropper",
+ //            statusBarColor: Colors.deepOrange.shade900,
+ //            backgroundColor: Colors.white,
+ //          )
+ //      );
+ //
+ //      this.setState(() {
+ //        customImg9 = cropped;
+ //        _inProcess = true;
+ //
+ //      });
+ //    } else {
+ //      this.setState(() {
+ //        _inProcess = false;
+ //      });
+ //    }
+ //  }
+ //   Widget getImageWidget010() {
+ //    if (customImg10 != null) {
+ //      return InkWell(
+ //        onTap:()=>getImage010(),
+ //        child: Image.file(
+ //          customImg10,
+ //          width: 150,
+ //          height: 150,
+ //          fit: BoxFit.cover,
+ //        ),
+ //      );
+ //    } else {
+ //      return InkWell(
+ //        onTap:()=>getImage010(),
+ //         child: Column(
+ //           children: [
+ //             Icon(
+ //      Icons.add,
+ //        size:50,
+ //      ),
+ //                    Text("Add image")
+ //
+ //           ],
+ //         ));
+ //    }
+ //  }
+ //  getImage010() async {
+ //
+ //
+ //    this.setState(() {
+ //      _inProcess = true;
+ //    });
+ //    File image = File(await ImagePicker().getImage(source: ImageSource.gallery).then((pickedFile) => pickedFile.path));
+ //
+ //    if (image != null) {
+ //      File cropped = await ImageCropper.cropImage(
+ //          sourcePath: image.path,
+ //          aspectRatio: CropAspectRatio(
+ //              ratioX: 1, ratioY: 1),
+ //          compressQuality: 100,
+ //          maxWidth: 700,
+ //          maxHeight: 700,
+ //          compressFormat: ImageCompressFormat.jpg,
+ //          androidUiSettings: AndroidUiSettings(
+ //            toolbarColor: Colors.deepOrange,
+ //            toolbarTitle: "RPS Cropper",
+ //            statusBarColor: Colors.deepOrange.shade900,
+ //            backgroundColor: Colors.white,
+ //          )
+ //      );
+ //
+ //      this.setState(() {
+ //        customImg10 = cropped;
+ //        _inProcess = true;
+ //
+ //      });
+ //    } else {
+ //      this.setState(() {
+ //        _inProcess = false;
+ //      });
+ //    }
+ //  }
+ //    Widget getImageWidget011() {
+ //    if (customImg11 != null) {
+ //      return InkWell(
+ //        onTap:()=>getImage011(),
+ //        child: Image.file(
+ //          customImg11,
+ //          width: 150,
+ //          height: 150,
+ //          fit: BoxFit.cover,
+ //        ),
+ //      );
+ //    } else {
+ //      return InkWell(
+ //        onTap:()=>getImage011(),
+ //         child: Column(
+ //           children: [
+ //             Icon(
+ //      Icons.add,
+ //        size:50,
+ //      ),
+ //                    Text("Add image")
+ //
+ //           ],
+ //         ));
+ //    }
+ //  }
+ //  getImage011() async {
+ //
+ //
+ //    this.setState(() {
+ //      _inProcess = true;
+ //    });
+ //    File image = File(await ImagePicker().getImage(source: ImageSource.gallery).then((pickedFile) => pickedFile.path));
+ //
+ //    if (image != null) {
+ //      File cropped = await ImageCropper.cropImage(
+ //          sourcePath: image.path,
+ //          aspectRatio: CropAspectRatio(
+ //              ratioX: 1, ratioY: 1),
+ //          compressQuality: 100,
+ //          maxWidth: 700,
+ //          maxHeight: 700,
+ //          compressFormat: ImageCompressFormat.jpg,
+ //          androidUiSettings: AndroidUiSettings(
+ //            toolbarColor: Colors.deepOrange,
+ //            toolbarTitle: "RPS Cropper",
+ //            statusBarColor: Colors.deepOrange.shade900,
+ //            backgroundColor: Colors.white,
+ //          )
+ //      );
+ //
+ //      this.setState(() {
+ //        customImg11 = cropped;
+ //        _inProcess = true;
+ //
+ //      });
+ //    } else {
+ //      this.setState(() {
+ //        _inProcess = false;
+ //      });
+ //    }
+ //  }
+ //   Widget getImageWidget012() {
+ //    if (customImg12 != null) {
+ //      return InkWell(
+ //        onTap:()=>getImage012(),
+ //        child: Image.file(
+ //          customImg12,
+ //          width: 150,
+ //          height: 150,
+ //          fit: BoxFit.cover,
+ //        ),
+ //      );
+ //    } else {
+ //      return InkWell(
+ //        onTap:()=>getImage012(),
+ //         child: Column(
+ //           children: [
+ //             Icon(
+ //      Icons.add,
+ //        size:50,
+ //      ),
+ //                    Text("Add image")
+ //
+ //           ],
+ //         ));
+ //    }
+ //  }
+ //  getImage012() async {
+ //
+ //
+ //    this.setState(() {
+ //      _inProcess = true;
+ //    });
+ //    File image = File(await ImagePicker().getImage(source: ImageSource.gallery).then((pickedFile) => pickedFile.path));
+ //
+ //    if (image != null) {
+ //      File cropped = await ImageCropper.cropImage(
+ //          sourcePath: image.path,
+ //          aspectRatio: CropAspectRatio(
+ //              ratioX: 1, ratioY: 1),
+ //          compressQuality: 100,
+ //          maxWidth: 700,
+ //          maxHeight: 700,
+ //          compressFormat: ImageCompressFormat.jpg,
+ //          androidUiSettings: AndroidUiSettings(
+ //            toolbarColor: Colors.deepOrange,
+ //            toolbarTitle: "RPS Cropper",
+ //            statusBarColor: Colors.deepOrange.shade900,
+ //            backgroundColor: Colors.white,
+ //          )
+ //      );
+ //
+ //      this.setState(() {
+ //        customImg12 = cropped;
+ //        _inProcess = true;
+ //
+ //      });
+ //    } else {
+ //      this.setState(() {
+ //        _inProcess = false;
+ //      });
+ //    }
+ //  }
+ //  Widget getImageWidget013() {
+ //    if (customImg13 != null) {
+ //      return InkWell(
+ //        onTap:()=>getImage013(),
+ //        child: Image.file(
+ //          customImg13,
+ //          width: 150,
+ //          height: 150,
+ //          fit: BoxFit.cover,
+ //        ),
+ //      );
+ //    } else {
+ //      return InkWell(
+ //        onTap:()=>getImage013(),
+ //         child: Column(
+ //           children: [
+ //             Icon(
+ //      Icons.add,
+ //        size:50,
+ //      ),
+ //                    Text("Add image")
+ //
+ //           ],
+ //         ));
+ //    }
+ //  }
+ //  getImage013() async {
+ //
+ //
+ //    this.setState(() {
+ //      _inProcess = true;
+ //    });
+ //    File image = File(await ImagePicker().getImage(source: ImageSource.gallery).then((pickedFile) => pickedFile.path));
+ //
+ //    if (image != null) {
+ //      File cropped = await ImageCropper.cropImage(
+ //          sourcePath: image.path,
+ //          aspectRatio: CropAspectRatio(
+ //              ratioX: 1, ratioY: 1),
+ //          compressQuality: 100,
+ //          maxWidth: 700,
+ //          maxHeight: 700,
+ //          compressFormat: ImageCompressFormat.jpg,
+ //          androidUiSettings: AndroidUiSettings(
+ //            toolbarColor: Colors.deepOrange,
+ //            toolbarTitle: "RPS Cropper",
+ //            statusBarColor: Colors.deepOrange.shade900,
+ //            backgroundColor: Colors.white,
+ //          )
+ //      );
+ //
+ //      this.setState(() {
+ //        customImg13 = cropped;
+ //        _inProcess = true;
+ //
+ //      });
+ //    } else {
+ //      this.setState(() {
+ //        _inProcess = false;
+ //      });
+ //    }
+ //  }
+ // Widget getImageWidget014() {
+ //    if (customImg14 != null) {
+ //      return InkWell(
+ //        onTap:()=>getImage014(),
+ //        child: Image.file(
+ //          customImg14,
+ //          width: 150,
+ //          height: 150,
+ //          fit: BoxFit.cover,
+ //        ),
+ //      );
+ //    } else {
+ //      return InkWell(
+ //        onTap:()=>getImage014(),
+ //         child: Column(
+ //           children: [
+ //             Icon(
+ //      Icons.add,
+ //        size:50,
+ //      ),
+ //                    Text("Add image")
+ //
+ //           ],
+ //         ));
+ //    }
+ //  }
+ //  getImage014() async {
+ //
+ //
+ //    this.setState(() {
+ //      _inProcess = true;
+ //    });
+ //    File image = File(await ImagePicker().getImage(source: ImageSource.gallery).then((pickedFile) => pickedFile.path));
+ //
+ //    if (image != null) {
+ //      File cropped = await ImageCropper.cropImage(
+ //          sourcePath: image.path,
+ //          aspectRatio: CropAspectRatio(
+ //              ratioX: 1, ratioY: 1),
+ //          compressQuality: 100,
+ //          maxWidth: 700,
+ //          maxHeight: 700,
+ //          compressFormat: ImageCompressFormat.jpg,
+ //          androidUiSettings: AndroidUiSettings(
+ //            toolbarColor: Colors.deepOrange,
+ //            toolbarTitle: "RPS Cropper",
+ //            statusBarColor: Colors.deepOrange.shade900,
+ //            backgroundColor: Colors.white,
+ //          )
+ //      );
+ //
+ //      this.setState(() {
+ //        customImg14 = cropped;
+ //        _inProcess = true;
+ //
+ //      });
+ //    } else {
+ //      this.setState(() {
+ //        _inProcess = false;
+ //      });
+ //    }
+ //  }
+ // Widget getImageWidget015() {
+ //    if (customImg15 != null) {
+ //      return InkWell(
+ //        onTap:()=>getImage015(),
+ //        child: Image.file(
+ //          customImg15,
+ //          width: 150,
+ //          height: 150,
+ //          fit: BoxFit.cover,
+ //        ),
+ //      );
+ //    } else {
+ //      return InkWell(
+ //        onTap:()=>getImage015(),
+ //         child: Column(
+ //           children: [
+ //             Icon(
+ //      Icons.add,
+ //        size:50,
+ //      ),
+ //                    Text("Add image")
+ //
+ //           ],
+ //         ));
+ //    }
+ //  }
+ //  getImage015() async {
+ //
+ //
+ //    this.setState(() {
+ //      _inProcess = true;
+ //    });
+ //    File image = File(await ImagePicker().getImage(source: ImageSource.gallery).then((pickedFile) => pickedFile.path));
+ //
+ //    if (image != null) {
+ //      File cropped = await ImageCropper.cropImage(
+ //          sourcePath: image.path,
+ //          aspectRatio: CropAspectRatio(
+ //              ratioX: 1, ratioY: 1),
+ //          compressQuality: 100,
+ //          maxWidth: 700,
+ //          maxHeight: 700,
+ //          compressFormat: ImageCompressFormat.jpg,
+ //          androidUiSettings: AndroidUiSettings(
+ //            toolbarColor: Colors.deepOrange,
+ //            toolbarTitle: "RPS Cropper",
+ //            statusBarColor: Colors.deepOrange.shade900,
+ //            backgroundColor: Colors.white,
+ //          )
+ //      );
+ //
+ //      this.setState(() {
+ //        customImg15 = cropped;
+ //        _inProcess = true;
+ //
+ //      });
+ //    } else {
+ //      this.setState(() {
+ //        _inProcess = false;
+ //      });
+ //    }
+ //  }
+ // Widget getImageWidget016() {
+ //    if (customImg16 != null) {
+ //      return InkWell(
+ //        onTap:()=>getImage016(),
+ //        child: Image.file(
+ //          customImg16,
+ //          width: 150,
+ //          height: 150,
+ //          fit: BoxFit.cover,
+ //        ),
+ //      );
+ //    } else {
+ //      return InkWell(
+ //        onTap:()=>getImage016(),
+ //         child: Column(
+ //           children: [
+ //             Icon(
+ //      Icons.add,
+ //        size:50,
+ //      ),
+ //                    Text("Add image")
+ //
+ //           ],
+ //         ));
+ //    }
+ //  }
+ //  getImage016() async {
+ //
+ //
+ //    this.setState(() {
+ //      _inProcess = true;
+ //    });
+ //    File image = File(await ImagePicker().getImage(source: ImageSource.gallery).then((pickedFile) => pickedFile.path));
+ //
+ //    if (image != null) {
+ //      File cropped = await ImageCropper.cropImage(
+ //          sourcePath: image.path,
+ //          aspectRatio: CropAspectRatio(
+ //              ratioX: 1, ratioY: 1),
+ //          compressQuality: 100,
+ //          maxWidth: 700,
+ //          maxHeight: 700,
+ //          compressFormat: ImageCompressFormat.jpg,
+ //          androidUiSettings: AndroidUiSettings(
+ //            toolbarColor: Colors.deepOrange,
+ //            toolbarTitle: "RPS Cropper",
+ //            statusBarColor: Colors.deepOrange.shade900,
+ //            backgroundColor: Colors.white,
+ //          )
+ //      );
+ //
+ //      this.setState(() {
+ //        customImg16 = cropped;
+ //        _inProcess = true;
+ //
+ //      });
+ //    } else {
+ //      this.setState(() {
+ //        _inProcess = false;
+ //      });
+ //    }
+ //  }
+ // Widget getImageWidget017() {
+ //    if (customImg17 != null) {
+ //      return InkWell(
+ //        onTap:()=>getImage017(),
+ //        child: Image.file(
+ //          customImg17,
+ //          width: 150,
+ //          height: 150,
+ //          fit: BoxFit.cover,
+ //        ),
+ //      );
+ //    } else {
+ //      return InkWell(
+ //        onTap:()=>getImage017(),
+ //         child: Column(
+ //           children: [
+ //             Icon(
+ //      Icons.add,
+ //        size:50,
+ //      ),
+ //                    Text("Add image")
+ //
+ //           ],
+ //         ));
+ //    }
+ //  }
+ //  getImage017() async {
+ //
+ //
+ //    this.setState(() {
+ //      _inProcess = true;
+ //    });
+ //    File image = File(await ImagePicker().getImage(source: ImageSource.gallery).then((pickedFile) => pickedFile.path));
+ //
+ //    if (image != null) {
+ //      File cropped = await ImageCropper.cropImage(
+ //          sourcePath: image.path,
+ //          aspectRatio: CropAspectRatio(
+ //              ratioX: 1, ratioY: 1),
+ //          compressQuality: 100,
+ //          maxWidth: 700,
+ //          maxHeight: 700,
+ //          compressFormat: ImageCompressFormat.jpg,
+ //          androidUiSettings: AndroidUiSettings(
+ //            toolbarColor: Colors.deepOrange,
+ //            toolbarTitle: "RPS Cropper",
+ //            statusBarColor: Colors.deepOrange.shade900,
+ //            backgroundColor: Colors.white,
+ //          )
+ //      );
+ //
+ //      this.setState(() {
+ //        customImg17 = cropped;
+ //        _inProcess = true;
+ //
+ //      });
+ //    } else {
+ //      this.setState(() {
+ //        _inProcess = false;
+ //      });
+ //    }
+ //  }
+ // Widget getImageWidget018() {
+ //    if (customImg18 != null) {
+ //      return InkWell(
+ //        onTap:()=>getImage018(),
+ //        child: Image.file(
+ //          customImg18,
+ //          width: 150,
+ //          height: 150,
+ //          fit: BoxFit.cover,
+ //        ),
+ //      );
+ //    } else {
+ //      return InkWell(
+ //        onTap:()=>getImage018(),
+ //         child: Column(
+ //           children: [
+ //             Icon(
+ //      Icons.add,
+ //        size:50,
+ //      ),
+ //                    Text("Add image")
+ //
+ //           ],
+ //         ));
+ //    }
+ //  }
+ //  getImage018() async {
+ //
+ //
+ //    this.setState(() {
+ //      _inProcess = true;
+ //    });
+ //    File image = File(await ImagePicker().getImage(source: ImageSource.gallery).then((pickedFile) => pickedFile.path));
+ //
+ //    if (image != null) {
+ //      File cropped = await ImageCropper.cropImage(
+ //          sourcePath: image.path,
+ //          aspectRatio: CropAspectRatio(
+ //              ratioX: 1, ratioY: 1),
+ //          compressQuality: 100,
+ //          maxWidth: 700,
+ //          maxHeight: 700,
+ //          compressFormat: ImageCompressFormat.jpg,
+ //          androidUiSettings: AndroidUiSettings(
+ //            toolbarColor: Colors.deepOrange,
+ //            toolbarTitle: "RPS Cropper",
+ //            statusBarColor: Colors.deepOrange.shade900,
+ //            backgroundColor: Colors.white,
+ //          )
+ //      );
+ //
+ //      this.setState(() {
+ //        customImg18 = cropped;
+ //        _inProcess = true;
+ //
+ //      });
+ //    } else {
+ //      this.setState(() {
+ //        _inProcess = false;
+ //      });
+ //    }
+ //  }
+ // Widget getImageWidget019() {
+ //    if (customImg19 != null) {
+ //      return InkWell(
+ //        onTap:()=>getImage019(),
+ //        child: Image.file(
+ //          customImg19,
+ //          width: 150,
+ //          height: 150,
+ //          fit: BoxFit.cover,
+ //        ),
+ //      );
+ //    } else {
+ //      return InkWell(
+ //        onTap:()=>getImage019(),
+ //         child: Column(
+ //           children: [
+ //             Icon(
+ //      Icons.add,
+ //        size:50,
+ //      ),
+ //                    Text("Add image")
+ //
+ //           ],
+ //         ));
+ //    }
+ //  }
+ //  getImage019() async {
+ //
+ //
+ //    this.setState(() {
+ //      _inProcess = true;
+ //    });
+ //    File image = File(await ImagePicker().getImage(source: ImageSource.gallery).then((pickedFile) => pickedFile.path));
+ //
+ //    if (image != null) {
+ //      File cropped = await ImageCropper.cropImage(
+ //          sourcePath: image.path,
+ //          aspectRatio: CropAspectRatio(
+ //              ratioX: 1, ratioY: 1),
+ //          compressQuality: 100,
+ //          maxWidth: 700,
+ //          maxHeight: 700,
+ //          compressFormat: ImageCompressFormat.jpg,
+ //          androidUiSettings: AndroidUiSettings(
+ //            toolbarColor: Colors.deepOrange,
+ //            toolbarTitle: "RPS Cropper",
+ //            statusBarColor: Colors.deepOrange.shade900,
+ //            backgroundColor: Colors.white,
+ //          )
+ //      );
+ //
+ //      this.setState(() {
+ //        customImg19 = cropped;
+ //        _inProcess = true;
+ //
+ //      });
+ //    } else {
+ //      this.setState(() {
+ //        _inProcess = false;
+ //      });
+ //    }
+ //  }
+ // Widget getImageWidget020() {
+ //    if (customImg20 != null) {
+ //      return InkWell(
+ //        onTap:()=>getImage020(),
+ //        child: Image.file(
+ //          customImg20,
+ //          width: 150,
+ //          height: 150,
+ //          fit: BoxFit.cover,
+ //        ),
+ //      );
+ //    } else {
+ //      return InkWell(
+ //        onTap:()=>getImage020(),
+ //         child: Column(
+ //           children: [
+ //             Icon(
+ //      Icons.add,
+ //        size:50,
+ //      ),
+ //                    Text("Add image")
+ //
+ //           ],
+ //         ));
+ //    }
+ //  }
+ //  getImage020() async {
+ //
+ //
+ //    this.setState(() {
+ //      _inProcess = true;
+ //    });
+ //    File image = File(await ImagePicker().getImage(source: ImageSource.gallery).then((pickedFile) => pickedFile.path));
+ //
+ //    if (image != null) {
+ //      File cropped = await ImageCropper.cropImage(
+ //          sourcePath: image.path,
+ //          aspectRatio: CropAspectRatio(
+ //              ratioX: 1, ratioY: 1),
+ //          compressQuality: 100,
+ //          maxWidth: 700,
+ //          maxHeight: 700,
+ //          compressFormat: ImageCompressFormat.jpg,
+ //          androidUiSettings: AndroidUiSettings(
+ //            toolbarColor: Colors.deepOrange,
+ //            toolbarTitle: "RPS Cropper",
+ //            statusBarColor: Colors.deepOrange.shade900,
+ //            backgroundColor: Colors.white,
+ //          )
+ //      );
+ //
+ //      this.setState(() {
+ //        customImg20 = cropped;
+ //        _inProcess = true;
+ //
+ //      });
+ //    } else {
+ //      this.setState(() {
+ //        _inProcess = false;
+ //      });
+ //    }
+ //  }
+ // Widget getImageWidget021() {
+ //    if (customImg21 != null) {
+ //      return InkWell(
+ //        onTap:()=>getImage021(),
+ //        child: Image.file(
+ //          customImg21,
+ //          width: 150,
+ //          height: 150,
+ //          fit: BoxFit.cover,
+ //        ),
+ //      );
+ //    } else {
+ //      return InkWell(
+ //        onTap:()=>getImage021(),
+ //         child: Column(
+ //           children: [
+ //             Icon(
+ //      Icons.add,
+ //        size:50,
+ //      ),
+ //                    Text("Add image")
+ //
+ //           ],
+ //         ));
+ //    }
+ //  }
+ //  getImage021() async {
+ //
+ //
+ //    this.setState(() {
+ //      _inProcess = true;
+ //    });
+ //    File image = File(await ImagePicker().getImage(source: ImageSource.gallery).then((pickedFile) => pickedFile.path));
+ //
+ //    if (image != null) {
+ //      File cropped = await ImageCropper.cropImage(
+ //          sourcePath: image.path,
+ //          aspectRatio: CropAspectRatio(
+ //              ratioX: 1, ratioY: 1),
+ //          compressQuality: 100,
+ //          maxWidth: 700,
+ //          maxHeight: 700,
+ //          compressFormat: ImageCompressFormat.jpg,
+ //          androidUiSettings: AndroidUiSettings(
+ //            toolbarColor: Colors.deepOrange,
+ //            toolbarTitle: "RPS Cropper",
+ //            statusBarColor: Colors.deepOrange.shade900,
+ //            backgroundColor: Colors.white,
+ //          )
+ //      );
+ //
+ //      this.setState(() {
+ //        customImg21 = cropped;
+ //        _inProcess = true;
+ //
+ //      });
+ //    } else {
+ //      this.setState(() {
+ //        _inProcess = false;
+ //      });
+ //    }
+ //  }
+ // Widget getImageWidget022() {
+ //    if (customImg22 != null) {
+ //      return InkWell(
+ //        onTap:()=>getImage022(),
+ //        child: Image.file(
+ //          customImg22,
+ //          width: 150,
+ //          height: 150,
+ //          fit: BoxFit.cover,
+ //        ),
+ //      );
+ //    } else {
+ //      return InkWell(
+ //        onTap:()=>getImage022(),
+ //         child: Column(
+ //           children: [
+ //             Icon(
+ //      Icons.add,
+ //        size:50,
+ //      ),
+ //                    Text("Add image")
+ //
+ //           ],
+ //         ));
+ //    }
+ //  }
+ //  getImage022() async {
+ //
+ //
+ //    this.setState(() {
+ //      _inProcess = true;
+ //    });
+ //    File image = File(await ImagePicker().getImage(source: ImageSource.gallery).then((pickedFile) => pickedFile.path));
+ //
+ //    if (image != null) {
+ //      File cropped = await ImageCropper.cropImage(
+ //          sourcePath: image.path,
+ //          aspectRatio: CropAspectRatio(
+ //              ratioX: 1, ratioY: 1),
+ //          compressQuality: 100,
+ //          maxWidth: 700,
+ //          maxHeight: 700,
+ //          compressFormat: ImageCompressFormat.jpg,
+ //          androidUiSettings: AndroidUiSettings(
+ //            toolbarColor: Colors.deepOrange,
+ //            toolbarTitle: "RPS Cropper",
+ //            statusBarColor: Colors.deepOrange.shade900,
+ //            backgroundColor: Colors.white,
+ //          )
+ //      );
+ //
+ //      this.setState(() {
+ //        customImg22 = cropped;
+ //        _inProcess = true;
+ //
+ //      });
+ //    } else {
+ //      this.setState(() {
+ //        _inProcess = false;
+ //      });
+ //    }
+ //  }
+ // Widget getImageWidget023() {
+ //    if (customImg23 != null) {
+ //      return InkWell(
+ //        onTap:()=>getImage023(),
+ //        child: Image.file(
+ //          customImg23,
+ //          width: 150,
+ //          height: 150,
+ //          fit: BoxFit.cover,
+ //        ),
+ //      );
+ //    } else {
+ //      return InkWell(
+ //        onTap:()=>getImage023(),
+ //         child: Column(
+ //           children: [
+ //             Icon(
+ //      Icons.add,
+ //        size:50,
+ //      ),
+ //                    Text("Add image")
+ //
+ //           ],
+ //         ));
+ //    }
+ //  }
+ //  getImage023() async {
+ //
+ //
+ //    this.setState(() {
+ //      _inProcess = true;
+ //    });
+ //    File image = File(await ImagePicker().getImage(source: ImageSource.gallery).then((pickedFile) => pickedFile.path));
+ //
+ //    if (image != null) {
+ //      File cropped = await ImageCropper.cropImage(
+ //          sourcePath: image.path,
+ //          aspectRatio: CropAspectRatio(
+ //              ratioX: 1, ratioY: 1),
+ //          compressQuality: 100,
+ //          maxWidth: 700,
+ //          maxHeight: 700,
+ //          compressFormat: ImageCompressFormat.jpg,
+ //          androidUiSettings: AndroidUiSettings(
+ //            toolbarColor: Colors.deepOrange,
+ //            toolbarTitle: "RPS Cropper",
+ //            statusBarColor: Colors.deepOrange.shade900,
+ //            backgroundColor: Colors.white,
+ //          )
+ //      );
+ //
+ //      this.setState(() {
+ //        customImg23 = cropped;
+ //        _inProcess = true;
+ //
+ //      });
+ //    } else {
+ //      this.setState(() {
+ //        _inProcess = false;
+ //      });
+ //    }
+ //  }
+ // Widget getImageWidget024() {
+ //    if (customImg24 != null) {
+ //      return InkWell(
+ //        onTap:()=>getImage024(),
+ //        child: Image.file(
+ //          customImg24,
+ //          width: 150,
+ //          height: 150,
+ //          fit: BoxFit.cover,
+ //        ),
+ //      );
+ //    } else {
+ //      return InkWell(
+ //        onTap:()=>getImage024(),
+ //         child: Column(
+ //           children: [
+ //             Icon(
+ //      Icons.add,
+ //        size:50,
+ //      ),
+ //                    Text("Add image")
+ //
+ //           ],
+ //         ));
+ //    }
+ //  }
+ //  getImage024() async {
+ //
+ //
+ //    this.setState(() {
+ //      _inProcess = true;
+ //    });
+ //    File image = File(await ImagePicker().getImage(source: ImageSource.gallery).then((pickedFile) => pickedFile.path));
+ //
+ //    if (image != null) {
+ //      File cropped = await ImageCropper.cropImage(
+ //          sourcePath: image.path,
+ //          aspectRatio: CropAspectRatio(
+ //              ratioX: 1, ratioY: 1),
+ //          compressQuality: 100,
+ //          maxWidth: 700,
+ //          maxHeight: 700,
+ //          compressFormat: ImageCompressFormat.jpg,
+ //          androidUiSettings: AndroidUiSettings(
+ //            toolbarColor: Colors.deepOrange,
+ //            toolbarTitle: "RPS Cropper",
+ //            statusBarColor: Colors.deepOrange.shade900,
+ //            backgroundColor: Colors.white,
+ //          )
+ //      );
+ //
+ //      this.setState(() {
+ //        customImg24 = cropped;
+ //        _inProcess = true;
+ //
+ //      });
+ //    } else {
+ //      this.setState(() {
+ //        _inProcess = false;
+ //      });
+ //    }
+ //  }
+ // Widget getImageWidget025() {
+ //    if (customImg25 != null) {
+ //      return InkWell(
+ //        onTap:()=>getImage025(),
+ //        child: Image.file(
+ //          customImg25,
+ //          width: 150,
+ //          height: 150,
+ //          fit: BoxFit.cover,
+ //        ),
+ //      );
+ //    } else {
+ //      return InkWell(
+ //        onTap:()=>getImage025(),
+ //         child: Column(
+ //           children: [
+ //             Icon(
+ //      Icons.add,
+ //        size:50,
+ //      ),
+ //                    Text("Add image")
+ //
+ //           ],
+ //         ));
+ //    }
+ //  }
+ //  getImage025() async {
+ //
+ //
+ //    this.setState(() {
+ //      _inProcess = true;
+ //    });
+ //    File image = File(await ImagePicker().getImage(source: ImageSource.gallery).then((pickedFile) => pickedFile.path));
+ //
+ //    if (image != null) {
+ //      File cropped = await ImageCropper.cropImage(
+ //          sourcePath: image.path,
+ //          aspectRatio: CropAspectRatio(
+ //              ratioX: 1, ratioY: 1),
+ //          compressQuality: 100,
+ //          maxWidth: 700,
+ //          maxHeight: 700,
+ //          compressFormat: ImageCompressFormat.jpg,
+ //          androidUiSettings: AndroidUiSettings(
+ //            toolbarColor: Colors.deepOrange,
+ //            toolbarTitle: "RPS Cropper",
+ //            statusBarColor: Colors.deepOrange.shade900,
+ //            backgroundColor: Colors.white,
+ //          )
+ //      );
+ //
+ //      this.setState(() {
+ //        customImg25 = cropped;
+ //        _inProcess = true;
+ //
+ //      });
+ //    } else {
+ //      this.setState(() {
+ //        _inProcess = false;
+ //      });
+ //    }
+ //  }
+ // Widget getImageWidget026() {
+ //    if (customImg26 != null) {
+ //      return InkWell(
+ //        onTap:()=>getImage026(),
+ //        child: Image.file(
+ //          customImg26,
+ //          width: 150,
+ //          height: 150,
+ //          fit: BoxFit.cover,
+ //        ),
+ //      );
+ //    } else {
+ //      return InkWell(
+ //        onTap:()=>getImage026(),
+ //         child: Column(
+ //           children: [
+ //             Icon(
+ //      Icons.add,
+ //        size:50,
+ //      ),
+ //                    Text("Add image")
+ //
+ //           ],
+ //         ));
+ //    }
+ //  }
+ //  getImage026() async {
+ //
+ //
+ //    this.setState(() {
+ //      _inProcess = true;
+ //    });
+ //    File image = File(await ImagePicker().getImage(source: ImageSource.gallery).then((pickedFile) => pickedFile.path));
+ //
+ //    if (image != null) {
+ //      File cropped = await ImageCropper.cropImage(
+ //          sourcePath: image.path,
+ //          aspectRatio: CropAspectRatio(
+ //              ratioX: 1, ratioY: 1),
+ //          compressQuality: 100,
+ //          maxWidth: 700,
+ //          maxHeight: 700,
+ //          compressFormat: ImageCompressFormat.jpg,
+ //          androidUiSettings: AndroidUiSettings(
+ //            toolbarColor: Colors.deepOrange,
+ //            toolbarTitle: "RPS Cropper",
+ //            statusBarColor: Colors.deepOrange.shade900,
+ //            backgroundColor: Colors.white,
+ //          )
+ //      );
+ //
+ //      this.setState(() {
+ //        customImg26 = cropped;
+ //        _inProcess = true;
+ //
+ //      });
+ //    } else {
+ //      this.setState(() {
+ //        _inProcess = false;
+ //      });
+ //    }
+ //  }
+ // Widget getImageWidget027() {
+ //    if (customImg27 != null) {
+ //      return InkWell(
+ //        onTap:()=>getImage027(),
+ //        child: Image.file(
+ //          customImg27,
+ //          width: 150,
+ //          height: 150,
+ //          fit: BoxFit.cover,
+ //        ),
+ //      );
+ //    } else {
+ //      return InkWell(
+ //        onTap:()=>getImage027(),
+ //         child: Column(
+ //           children: [
+ //             Icon(
+ //      Icons.add,
+ //        size:50,
+ //      ),
+ //                    Text("Add image")
+ //
+ //           ],
+ //         ));
+ //    }
+ //  }
+ //  getImage027() async {
+ //
+ //
+ //    this.setState(() {
+ //      _inProcess = true;
+ //    });
+ //    File image = File(await ImagePicker().getImage(source: ImageSource.gallery).then((pickedFile) => pickedFile.path));
+ //
+ //    if (image != null) {
+ //      File cropped = await ImageCropper.cropImage(
+ //          sourcePath: image.path,
+ //          aspectRatio: CropAspectRatio(
+ //              ratioX: 1, ratioY: 1),
+ //          compressQuality: 100,
+ //          maxWidth: 700,
+ //          maxHeight: 700,
+ //          compressFormat: ImageCompressFormat.jpg,
+ //          androidUiSettings: AndroidUiSettings(
+ //            toolbarColor: Colors.deepOrange,
+ //            toolbarTitle: "RPS Cropper",
+ //            statusBarColor: Colors.deepOrange.shade900,
+ //            backgroundColor: Colors.white,
+ //          )
+ //      );
+ //
+ //      this.setState(() {
+ //        customImg27 = cropped;
+ //        _inProcess = true;
+ //
+ //      });
+ //    } else {
+ //      this.setState(() {
+ //        _inProcess = false;
+ //      });
+ //    }
+ //  }
+ // Widget getImageWidget028() {
+ //    if (customImg28 != null) {
+ //      return InkWell(
+ //        onTap:()=>getImage028(),
+ //        child: Image.file(
+ //          customImg28,
+ //          width: 150,
+ //          height: 150,
+ //          fit: BoxFit.cover,
+ //        ),
+ //      );
+ //    } else {
+ //      return InkWell(
+ //        onTap:()=>getImage028(),
+ //         child: Column(
+ //           children: [
+ //             Icon(
+ //      Icons.add,
+ //        size:50,
+ //      ),
+ //                    Text("Add image")
+ //
+ //           ],
+ //         ));
+ //    }
+ //  }
+ //  getImage028() async {
+ //
+ //
+ //    this.setState(() {
+ //      _inProcess = true;
+ //    });
+ //    File image = File(await ImagePicker().getImage(source: ImageSource.gallery).then((pickedFile) => pickedFile.path));
+ //
+ //    if (image != null) {
+ //      File cropped = await ImageCropper.cropImage(
+ //          sourcePath: image.path,
+ //          aspectRatio: CropAspectRatio(
+ //              ratioX: 1, ratioY: 1),
+ //          compressQuality: 100,
+ //          maxWidth: 700,
+ //          maxHeight: 700,
+ //          compressFormat: ImageCompressFormat.jpg,
+ //          androidUiSettings: AndroidUiSettings(
+ //            toolbarColor: Colors.deepOrange,
+ //            toolbarTitle: "RPS Cropper",
+ //            statusBarColor: Colors.deepOrange.shade900,
+ //            backgroundColor: Colors.white,
+ //          )
+ //      );
+ //
+ //      this.setState(() {
+ //        customImg28 = cropped;
+ //        _inProcess = true;
+ //
+ //      });
+ //    } else {
+ //      this.setState(() {
+ //        _inProcess = false;
+ //      });
+ //    }
+ //  }
+ // Widget getImageWidget029() {
+ //    if (customImg29 != null) {
+ //      return InkWell(
+ //        onTap:()=>getImage029(),
+ //        child: Image.file(
+ //          customImg29,
+ //          width: 150,
+ //          height: 150,
+ //          fit: BoxFit.cover,
+ //        ),
+ //      );
+ //    } else {
+ //      return InkWell(
+ //        onTap:()=>getImage029(),
+ //         child: Column(
+ //           children: [
+ //             Icon(
+ //      Icons.add,
+ //        size:50,
+ //      ),
+ //                    Text("Add image")
+ //
+ //           ],
+ //         ));
+ //    }
+ //  }
+ //  getImage029() async {
+ //
+ //
+ //    this.setState(() {
+ //      _inProcess = true;
+ //    });
+ //    File image = File(await ImagePicker().getImage(source: ImageSource.gallery).then((pickedFile) => pickedFile.path));
+ //
+ //    if (image != null) {
+ //      File cropped = await ImageCropper.cropImage(
+ //          sourcePath: image.path,
+ //          aspectRatio: CropAspectRatio(
+ //              ratioX: 1, ratioY: 1),
+ //          compressQuality: 100,
+ //          maxWidth: 700,
+ //          maxHeight: 700,
+ //          compressFormat: ImageCompressFormat.jpg,
+ //          androidUiSettings: AndroidUiSettings(
+ //            toolbarColor: Colors.deepOrange,
+ //            toolbarTitle: "RPS Cropper",
+ //            statusBarColor: Colors.deepOrange.shade900,
+ //            backgroundColor: Colors.white,
+ //          )
+ //      );
+ //
+ //      this.setState(() {
+ //        customImg29 = cropped;
+ //        _inProcess = true;
+ //
+ //      });
+ //    } else {
+ //      this.setState(() {
+ //        _inProcess = false;
+ //      });
+ //    }
+ //  }
+ // Widget getImageWidget030() {
+ //    if (customImg30 != null) {
+ //      return InkWell(
+ //        onTap:()=>getImage030(),
+ //        child: Image.file(
+ //          customImg30,
+ //          width: 150,
+ //          height: 150,
+ //          fit: BoxFit.cover,
+ //        ),
+ //      );
+ //    } else {
+ //      return InkWell(
+ //        onTap:()=>getImage030(),
+ //         child: Column(
+ //           children: [
+ //             Icon(
+ //      Icons.add,
+ //        size:50,
+ //      ),
+ //                    Text("Add image")
+ //
+ //           ],
+ //         ));
+ //    }
+ //  }
+ //  getImage030() async {
+ //
+ //
+ //    this.setState(() {
+ //      _inProcess = true;
+ //    });
+ //    File image = File(await ImagePicker().getImage(source: ImageSource.gallery).then((pickedFile) => pickedFile.path));
+ //
+ //    if (image != null) {
+ //      File cropped = await ImageCropper.cropImage(
+ //          sourcePath: image.path,
+ //          aspectRatio: CropAspectRatio(
+ //              ratioX: 1, ratioY: 1),
+ //          compressQuality: 100,
+ //          maxWidth: 700,
+ //          maxHeight: 700,
+ //          compressFormat: ImageCompressFormat.jpg,
+ //          androidUiSettings: AndroidUiSettings(
+ //            toolbarColor: Colors.deepOrange,
+ //            toolbarTitle: "RPS Cropper",
+ //            statusBarColor: Colors.deepOrange.shade900,
+ //            backgroundColor: Colors.white,
+ //          )
+ //      );
+ //
+ //      this.setState(() {
+ //        customImg30 = cropped;
+ //        _inProcess = true;
+ //
+ //      });
+ //    } else {
+ //      this.setState(() {
+ //        _inProcess = false;
+ //      });
+ //    }
+ //  }
+ // Widget getImageWidget031() {
+ //    if (customImg31 != null) {
+ //      return InkWell(
+ //        onTap:()=>getImage031(),
+ //        child: Image.file(
+ //          customImg31,
+ //          width: 150,
+ //          height: 150,
+ //          fit: BoxFit.cover,
+ //        ),
+ //      );
+ //    } else {
+ //      return InkWell(
+ //        onTap:()=>getImage031(),
+ //         child: Column(
+ //           children: [
+ //             Icon(
+ //      Icons.add,
+ //        size:50,
+ //      ),
+ //                    Text("Add image")
+ //
+ //           ],
+ //         ));
+ //    }
+ //  }
+ //  getImage031() async {
+ //
+ //
+ //    this.setState(() {
+ //      _inProcess = true;
+ //    });
+ //    File image = File(await ImagePicker().getImage(source: ImageSource.gallery).then((pickedFile) => pickedFile.path));
+ //
+ //    if (image != null) {
+ //      File cropped = await ImageCropper.cropImage(
+ //          sourcePath: image.path,
+ //          aspectRatio: CropAspectRatio(
+ //              ratioX: 1, ratioY: 1),
+ //          compressQuality: 100,
+ //          maxWidth: 700,
+ //          maxHeight: 700,
+ //          compressFormat: ImageCompressFormat.jpg,
+ //          androidUiSettings: AndroidUiSettings(
+ //            toolbarColor: Colors.deepOrange,
+ //            toolbarTitle: "RPS Cropper",
+ //            statusBarColor: Colors.deepOrange.shade900,
+ //            backgroundColor: Colors.white,
+ //          )
+ //      );
+ //
+ //      this.setState(() {
+ //        customImg31 = cropped;
+ //        _inProcess = true;
+ //
+ //      });
+ //    } else {
+ //      this.setState(() {
+ //        _inProcess = false;
+ //      });
+ //    }
+ //  }
+ // Widget getImageWidget032() {
+ //    if (customImg32 != null) {
+ //      return InkWell(
+ //        onTap:()=>getImage032(),
+ //        child: Image.file(
+ //          customImg32,
+ //          width: 150,
+ //          height: 150,
+ //          fit: BoxFit.cover,
+ //        ),
+ //      );
+ //    } else {
+ //      return InkWell(
+ //        onTap:()=>getImage032(),
+ //         child: Column(
+ //           children: [
+ //             Icon(
+ //      Icons.add,
+ //        size:50,
+ //      ),
+ //                    Text("Add image")
+ //
+ //           ],
+ //         ));
+ //    }
+ //  }
+ //  getImage032() async {
+ //
+ //
+ //    this.setState(() {
+ //      _inProcess = true;
+ //    });
+ //    File image = File(await ImagePicker().getImage(source: ImageSource.gallery).then((pickedFile) => pickedFile.path));
+ //
+ //    if (image != null) {
+ //      File cropped = await ImageCropper.cropImage(
+ //          sourcePath: image.path,
+ //          aspectRatio: CropAspectRatio(
+ //              ratioX: 1, ratioY: 1),
+ //          compressQuality: 100,
+ //          maxWidth: 700,
+ //          maxHeight: 700,
+ //          compressFormat: ImageCompressFormat.jpg,
+ //          androidUiSettings: AndroidUiSettings(
+ //            toolbarColor: Colors.deepOrange,
+ //            toolbarTitle: "RPS Cropper",
+ //            statusBarColor: Colors.deepOrange.shade900,
+ //            backgroundColor: Colors.white,
+ //          )
+ //      );
+ //
+ //      this.setState(() {
+ //        customImg32 = cropped;
+ //        _inProcess = true;
+ //
+ //      });
+ //    } else {
+ //      this.setState(() {
+ //        _inProcess = false;
+ //      });
+ //    }
+ //  }
+ // Widget getImageWidget033() {
+ //    if (customImg33 != null) {
+ //      return InkWell(
+ //        onTap:()=>getImage033(),
+ //        child: Image.file(
+ //          customImg33,
+ //          width: 150,
+ //          height: 150,
+ //          fit: BoxFit.cover,
+ //        ),
+ //      );
+ //    } else {
+ //      return InkWell(
+ //        onTap:()=>getImage033(),
+ //         child: Column(
+ //           children: [
+ //             Icon(
+ //      Icons.add,
+ //        size:50,
+ //      ),
+ //                    Text("Add image")
+ //
+ //           ],
+ //         ));
+ //    }
+ //  }
+ //  getImage033() async {
+ //
+ //
+ //    this.setState(() {
+ //      _inProcess = true;
+ //    });
+ //    File image = File(await ImagePicker().getImage(source: ImageSource.gallery).then((pickedFile) => pickedFile.path));
+ //
+ //    if (image != null) {
+ //      File cropped = await ImageCropper.cropImage(
+ //          sourcePath: image.path,
+ //          aspectRatio: CropAspectRatio(
+ //              ratioX: 1, ratioY: 1),
+ //          compressQuality: 100,
+ //          maxWidth: 700,
+ //          maxHeight: 700,
+ //          compressFormat: ImageCompressFormat.jpg,
+ //          androidUiSettings: AndroidUiSettings(
+ //            toolbarColor: Colors.deepOrange,
+ //            toolbarTitle: "RPS Cropper",
+ //            statusBarColor: Colors.deepOrange.shade900,
+ //            backgroundColor: Colors.white,
+ //          )
+ //      );
+ //
+ //      this.setState(() {
+ //        customImg33 = cropped;
+ //        _inProcess = true;
+ //
+ //      });
+ //    } else {
+ //      this.setState(() {
+ //        _inProcess = false;
+ //      });
+ //    }
+ //  }
+ // Widget getImageWidget034() {
+ //    if (customImg34 != null) {
+ //      return InkWell(
+ //        onTap:()=>getImage034(),
+ //        child: Image.file(
+ //          customImg34,
+ //          width: 150,
+ //          height: 150,
+ //          fit: BoxFit.cover,
+ //        ),
+ //      );
+ //    } else {
+ //      return InkWell(
+ //        onTap:()=>getImage034(),
+ //         child: Column(
+ //           children: [
+ //             Icon(
+ //      Icons.add,
+ //        size:50,
+ //      ),
+ //                    Text("Add image")
+ //
+ //           ],
+ //         ));
+ //    }
+ //  }
+ //  getImage034() async {
+ //
+ //
+ //    this.setState(() {
+ //      _inProcess = true;
+ //    });
+ //    File image = File(await ImagePicker().getImage(source: ImageSource.gallery).then((pickedFile) => pickedFile.path));
+ //
+ //    if (image != null) {
+ //      File cropped = await ImageCropper.cropImage(
+ //          sourcePath: image.path,
+ //          aspectRatio: CropAspectRatio(
+ //              ratioX: 1, ratioY: 1),
+ //          compressQuality: 100,
+ //          maxWidth: 700,
+ //          maxHeight: 700,
+ //          compressFormat: ImageCompressFormat.jpg,
+ //          androidUiSettings: AndroidUiSettings(
+ //            toolbarColor: Colors.deepOrange,
+ //            toolbarTitle: "RPS Cropper",
+ //            statusBarColor: Colors.deepOrange.shade900,
+ //            backgroundColor: Colors.white,
+ //          )
+ //      );
+ //
+ //      this.setState(() {
+ //        customImg34 = cropped;
+ //        _inProcess = true;
+ //
+ //      });
+ //    } else {
+ //      this.setState(() {
+ //        _inProcess = false;
+ //      });
+ //    }
+ //  }
+ // Widget getImageWidget035() {
+ //    if (customImg35 != null) {
+ //      return InkWell(
+ //        onTap:()=>getImage035(),
+ //        child: Image.file(
+ //          customImg35,
+ //          width: 150,
+ //          height: 150,
+ //          fit: BoxFit.cover,
+ //        ),
+ //      );
+ //    } else {
+ //      return InkWell(
+ //        onTap:()=>getImage035(),
+ //         child: Column(
+ //           children: [
+ //             Icon(
+ //      Icons.add,
+ //        size:50,
+ //      ),
+ //                    Text("Add image")
+ //
+ //           ],
+ //         ));
+ //    }
+ //  }
+ //  getImage035() async {
+ //
+ //
+ //    this.setState(() {
+ //      _inProcess = true;
+ //    });
+ //    File image = File(await ImagePicker().getImage(source: ImageSource.gallery).then((pickedFile) => pickedFile.path));
+ //
+ //    if (image != null) {
+ //      File cropped = await ImageCropper.cropImage(
+ //          sourcePath: image.path,
+ //          aspectRatio: CropAspectRatio(
+ //              ratioX: 1, ratioY: 1),
+ //          compressQuality: 100,
+ //          maxWidth: 700,
+ //          maxHeight: 700,
+ //          compressFormat: ImageCompressFormat.jpg,
+ //          androidUiSettings: AndroidUiSettings(
+ //            toolbarColor: Colors.deepOrange,
+ //            toolbarTitle: "RPS Cropper",
+ //            statusBarColor: Colors.deepOrange.shade900,
+ //            backgroundColor: Colors.white,
+ //          )
+ //      );
+ //
+ //      this.setState(() {
+ //        customImg35 = cropped;
+ //        _inProcess = true;
+ //
+ //      });
+ //    } else {
+ //      this.setState(() {
+ //        _inProcess = false;
+ //      });
+ //    }
+ //  }
+ // Widget getImageWidget036() {
+ //    if (customImg36 != null) {
+ //      return InkWell(
+ //        onTap:()=>getImage036(),
+ //        child: Image.file(
+ //          customImg36,
+ //          width: 150,
+ //          height: 150,
+ //          fit: BoxFit.cover,
+ //        ),
+ //      );
+ //    } else {
+ //      return InkWell(
+ //        onTap:()=>getImage036(),
+ //         child: Column(
+ //           children: [
+ //             Icon(
+ //      Icons.add,
+ //        size:50,
+ //      ),
+ //                    Text("Add image")
+ //
+ //           ],
+ //         ));
+ //    }
+ //  }
+ //  getImage036() async {
+ //
+ //
+ //    this.setState(() {
+ //      _inProcess = true;
+ //    });
+ //    File image = File(await ImagePicker().getImage(source: ImageSource.gallery).then((pickedFile) => pickedFile.path));
+ //
+ //    if (image != null) {
+ //      File cropped = await ImageCropper.cropImage(
+ //          sourcePath: image.path,
+ //          aspectRatio: CropAspectRatio(
+ //              ratioX: 1, ratioY: 1),
+ //          compressQuality: 100,
+ //          maxWidth: 700,
+ //          maxHeight: 700,
+ //          compressFormat: ImageCompressFormat.jpg,
+ //          androidUiSettings: AndroidUiSettings(
+ //            toolbarColor: Colors.deepOrange,
+ //            toolbarTitle: "RPS Cropper",
+ //            statusBarColor: Colors.deepOrange.shade900,
+ //            backgroundColor: Colors.white,
+ //          )
+ //      );
+ //
+ //      this.setState(() {
+ //        customImg36 = cropped;
+ //        _inProcess = true;
+ //
+ //      });
+ //    } else {
+ //      this.setState(() {
+ //        _inProcess = false;
+ //      });
+ //    }
+ //  }
+ // Widget getImageWidget037() {
+ //    if (customImg37 != null) {
+ //      return InkWell(
+ //        onTap:()=>getImage037(),
+ //        child: Image.file(
+ //          customImg37,
+ //          width: 150,
+ //          height: 150,
+ //          fit: BoxFit.cover,
+ //        ),
+ //      );
+ //    } else {
+ //      return InkWell(
+ //        onTap:()=>getImage037(),
+ //         child: Column(
+ //           children: [
+ //             Icon(
+ //      Icons.add,
+ //        size:50,
+ //      ),
+ //                    Text("Add image")
+ //
+ //           ],
+ //         ));
+ //    }
+ //  }
+ //  getImage037() async {
+ //
+ //
+ //    this.setState(() {
+ //      _inProcess = true;
+ //    });
+ //    File image = File(await ImagePicker().getImage(source: ImageSource.gallery).then((pickedFile) => pickedFile.path));
+ //
+ //    if (image != null) {
+ //      File cropped = await ImageCropper.cropImage(
+ //          sourcePath: image.path,
+ //          aspectRatio: CropAspectRatio(
+ //              ratioX: 1, ratioY: 1),
+ //          compressQuality: 100,
+ //          maxWidth: 700,
+ //          maxHeight: 700,
+ //          compressFormat: ImageCompressFormat.jpg,
+ //          androidUiSettings: AndroidUiSettings(
+ //            toolbarColor: Colors.deepOrange,
+ //            toolbarTitle: "RPS Cropper",
+ //            statusBarColor: Colors.deepOrange.shade900,
+ //            backgroundColor: Colors.white,
+ //          )
+ //      );
+ //
+ //      this.setState(() {
+ //        customImg37 = cropped;
+ //        _inProcess = true;
+ //
+ //      });
+ //    } else {
+ //      this.setState(() {
+ //        _inProcess = false;
+ //      });
+ //    }
+ //  }
+ // Widget getImageWidget038() {
+ //    if (customImg38 != null) {
+ //      return InkWell(
+ //        onTap:()=>getImage038(),
+ //        child: Image.file(
+ //          customImg38,
+ //          width: 150,
+ //          height: 150,
+ //          fit: BoxFit.cover,
+ //        ),
+ //      );
+ //    } else {
+ //      return InkWell(
+ //        onTap:()=>getImage038(),
+ //         child: Column(
+ //           children: [
+ //             Icon(
+ //      Icons.add,
+ //        size:50,
+ //      ),
+ //                    Text("Add image")
+ //
+ //           ],
+ //         ));
+ //    }
+ //  }
+ //  getImage038() async {
+ //
+ //
+ //    this.setState(() {
+ //      _inProcess = true;
+ //    });
+ //    File image = File(await ImagePicker().getImage(source: ImageSource.gallery).then((pickedFile) => pickedFile.path));
+ //
+ //    if (image != null) {
+ //      File cropped = await ImageCropper.cropImage(
+ //          sourcePath: image.path,
+ //          aspectRatio: CropAspectRatio(
+ //              ratioX: 1, ratioY: 1),
+ //          compressQuality: 100,
+ //          maxWidth: 700,
+ //          maxHeight: 700,
+ //          compressFormat: ImageCompressFormat.jpg,
+ //          androidUiSettings: AndroidUiSettings(
+ //            toolbarColor: Colors.deepOrange,
+ //            toolbarTitle: "RPS Cropper",
+ //            statusBarColor: Colors.deepOrange.shade900,
+ //            backgroundColor: Colors.white,
+ //          )
+ //      );
+ //
+ //      this.setState(() {
+ //        customImg38 = cropped;
+ //        _inProcess = true;
+ //
+ //      });
+ //    } else {
+ //      this.setState(() {
+ //        _inProcess = false;
+ //      });
+ //    }
+ //  }
+ // Widget getImageWidget039() {
+ //    if (customImg39 != null) {
+ //      return InkWell(
+ //        onTap:()=>getImage039(),
+ //        child: Image.file(
+ //          customImg39,
+ //          width: 150,
+ //          height: 150,
+ //          fit: BoxFit.cover,
+ //        ),
+ //      );
+ //    } else {
+ //      return InkWell(
+ //        onTap:()=>getImage039(),
+ //         child: Column(
+ //           children: [
+ //             Icon(
+ //      Icons.add,
+ //        size:50,
+ //      ),
+ //                    Text("Add image")
+ //
+ //           ],
+ //         ));
+ //    }
+ //  }
+ //  getImage039() async {
+ //
+ //
+ //    this.setState(() {
+ //      _inProcess = true;
+ //    });
+ //    File image = File(await ImagePicker().getImage(source: ImageSource.gallery).then((pickedFile) => pickedFile.path));
+ //
+ //    if (image != null) {
+ //      File cropped = await ImageCropper.cropImage(
+ //          sourcePath: image.path,
+ //          aspectRatio: CropAspectRatio(
+ //              ratioX: 1, ratioY: 1),
+ //          compressQuality: 100,
+ //          maxWidth: 700,
+ //          maxHeight: 700,
+ //          compressFormat: ImageCompressFormat.jpg,
+ //          androidUiSettings: AndroidUiSettings(
+ //            toolbarColor: Colors.deepOrange,
+ //            toolbarTitle: "RPS Cropper",
+ //            statusBarColor: Colors.deepOrange.shade900,
+ //            backgroundColor: Colors.white,
+ //          )
+ //      );
+ //
+ //      this.setState(() {
+ //        customImg39 = cropped;
+ //        _inProcess = true;
+ //
+ //      });
+ //    } else {
+ //      this.setState(() {
+ //        _inProcess = false;
+ //      });
+ //    }
+ //  }
+ // Widget getImageWidget040() {
+ //    if (customImg40 != null) {
+ //      return InkWell(
+ //        onTap:()=>getImage040(),
+ //        child: Image.file(
+ //          customImg40,
+ //          width: 150,
+ //          height: 150,
+ //          fit: BoxFit.cover,
+ //        ),
+ //      );
+ //    } else {
+ //      return InkWell(
+ //        onTap:()=>getImage040(),
+ //         child: Column(
+ //           children: [
+ //             Icon(
+ //      Icons.add,
+ //        size:50,
+ //      ),
+ //                    Text("Add image")
+ //
+ //           ],
+ //         ));
+ //    }
+ //  }
+ //  getImage040() async {
+ //
+ //
+ //    this.setState(() {
+ //      _inProcess = true;
+ //    });
+ //    File image = File(await ImagePicker().getImage(source: ImageSource.gallery).then((pickedFile) => pickedFile.path));
+ //
+ //    if (image != null) {
+ //      File cropped = await ImageCropper.cropImage(
+ //          sourcePath: image.path,
+ //          aspectRatio: CropAspectRatio(
+ //              ratioX: 1, ratioY: 1),
+ //          compressQuality: 100,
+ //          maxWidth: 700,
+ //          maxHeight: 700,
+ //          compressFormat: ImageCompressFormat.jpg,
+ //          androidUiSettings: AndroidUiSettings(
+ //            toolbarColor: Colors.deepOrange,
+ //            toolbarTitle: "RPS Cropper",
+ //            statusBarColor: Colors.deepOrange.shade900,
+ //            backgroundColor: Colors.white,
+ //          )
+ //      );
+ //
+ //      this.setState(() {
+ //        customImg40 = cropped;
+ //        _inProcess = true;
+ //
+ //      });
+ //    } else {
+ //      this.setState(() {
+ //        _inProcess = false;
+ //      });
+ //    }
+ //  }
+ // Widget getImageWidget041() {
+ //    if (customImg41 != null) {
+ //      return InkWell(
+ //        onTap:()=>getImage041(),
+ //        child: Image.file(
+ //          customImg41,
+ //          width: 150,
+ //          height: 150,
+ //          fit: BoxFit.cover,
+ //        ),
+ //      );
+ //    } else {
+ //      return InkWell(
+ //        onTap:()=>getImage041(),
+ //         child: Column(
+ //           children: [
+ //             Icon(
+ //      Icons.add,
+ //        size:50,
+ //      ),
+ //                    Text("Add image")
+ //
+ //           ],
+ //         ));
+ //    }
+ //  }
+ //  getImage041() async {
+ //
+ //
+ //    this.setState(() {
+ //      _inProcess = true;
+ //    });
+ //    File image = File(await ImagePicker().getImage(source: ImageSource.gallery).then((pickedFile) => pickedFile.path));
+ //
+ //    if (image != null) {
+ //      File cropped = await ImageCropper.cropImage(
+ //          sourcePath: image.path,
+ //          aspectRatio: CropAspectRatio(
+ //              ratioX: 1, ratioY: 1),
+ //          compressQuality: 100,
+ //          maxWidth: 700,
+ //          maxHeight: 700,
+ //          compressFormat: ImageCompressFormat.jpg,
+ //          androidUiSettings: AndroidUiSettings(
+ //            toolbarColor: Colors.deepOrange,
+ //            toolbarTitle: "RPS Cropper",
+ //            statusBarColor: Colors.deepOrange.shade900,
+ //            backgroundColor: Colors.white,
+ //          )
+ //      );
+ //
+ //      this.setState(() {
+ //        customImg41 = cropped;
+ //        _inProcess = true;
+ //
+ //      });
+ //    } else {
+ //      this.setState(() {
+ //        _inProcess = false;
+ //      });
+ //    }
+ //  }
+ // Widget getImageWidget042() {
+ //    if (customImg42 != null) {
+ //      return InkWell(
+ //        onTap:()=>getImage042(),
+ //        child: Image.file(
+ //          customImg42,
+ //          width: 150,
+ //          height: 150,
+ //          fit: BoxFit.cover,
+ //        ),
+ //      );
+ //    } else {
+ //      return InkWell(
+ //        onTap:()=>getImage042(),
+ //         child: Column(
+ //           children: [
+ //             Icon(
+ //      Icons.add,
+ //        size:50,
+ //      ),
+ //                    Text("Add image")
+ //
+ //           ],
+ //         ));
+ //    }
+ //  }
+ //  getImage042() async {
+ //
+ //
+ //    this.setState(() {
+ //      _inProcess = true;
+ //    });
+ //    File image = File(await ImagePicker().getImage(source: ImageSource.gallery).then((pickedFile) => pickedFile.path));
+ //
+ //    if (image != null) {
+ //      File cropped = await ImageCropper.cropImage(
+ //          sourcePath: image.path,
+ //          aspectRatio: CropAspectRatio(
+ //              ratioX: 1, ratioY: 1),
+ //          compressQuality: 100,
+ //          maxWidth: 700,
+ //          maxHeight: 700,
+ //          compressFormat: ImageCompressFormat.jpg,
+ //          androidUiSettings: AndroidUiSettings(
+ //            toolbarColor: Colors.deepOrange,
+ //            toolbarTitle: "RPS Cropper",
+ //            statusBarColor: Colors.deepOrange.shade900,
+ //            backgroundColor: Colors.white,
+ //          )
+ //      );
+ //
+ //      this.setState(() {
+ //        customImg42 = cropped;
+ //        _inProcess = true;
+ //
+ //      });
+ //    } else {
+ //      this.setState(() {
+ //        _inProcess = false;
+ //      });
+ //    }
+ //  }
+ // Widget getImageWidget043() {
+ //    if (customImg43 != null) {
+ //      return InkWell(
+ //        onTap:()=>getImage043(),
+ //        child: Image.file(
+ //          customImg43,
+ //          width: 150,
+ //          height: 150,
+ //          fit: BoxFit.cover,
+ //        ),
+ //      );
+ //    } else {
+ //      return InkWell(
+ //        onTap:()=>getImage043(),
+ //         child: Column(
+ //           children: [
+ //             Icon(
+ //      Icons.add,
+ //        size:50,
+ //      ),
+ //                    Text("Add image")
+ //
+ //           ],
+ //         ));
+ //    }
+ //  }
+ //  getImage043() async {
+ //
+ //
+ //    this.setState(() {
+ //      _inProcess = true;
+ //    });
+ //    File image = File(await ImagePicker().getImage(source: ImageSource.gallery).then((pickedFile) => pickedFile.path));
+ //
+ //    if (image != null) {
+ //      File cropped = await ImageCropper.cropImage(
+ //          sourcePath: image.path,
+ //          aspectRatio: CropAspectRatio(
+ //              ratioX: 1, ratioY: 1),
+ //          compressQuality: 100,
+ //          maxWidth: 700,
+ //          maxHeight: 700,
+ //          compressFormat: ImageCompressFormat.jpg,
+ //          androidUiSettings: AndroidUiSettings(
+ //            toolbarColor: Colors.deepOrange,
+ //            toolbarTitle: "RPS Cropper",
+ //            statusBarColor: Colors.deepOrange.shade900,
+ //            backgroundColor: Colors.white,
+ //          )
+ //      );
+ //
+ //      this.setState(() {
+ //        customImg43 = cropped;
+ //        _inProcess = true;
+ //
+ //      });
+ //    } else {
+ //      this.setState(() {
+ //        _inProcess = false;
+ //      });
+ //    }
+ //  }
+ // Widget getImageWidget044() {
+ //    if (customImg44 != null) {
+ //      return InkWell(
+ //        onTap:()=>getImage044(),
+ //        child: Image.file(
+ //          customImg44,
+ //          width: 150,
+ //          height: 150,
+ //          fit: BoxFit.cover,
+ //        ),
+ //      );
+ //    } else {
+ //      return InkWell(
+ //        onTap:()=>getImage044(),
+ //         child: Column(
+ //           children: [
+ //             Icon(
+ //      Icons.add,
+ //        size:50,
+ //      ),
+ //                    Text("Add image")
+ //
+ //           ],
+ //         ));
+ //    }
+ //  }
+ //  getImage044() async {
+ //
+ //
+ //    this.setState(() {
+ //      _inProcess = true;
+ //    });
+ //    File image = File(await ImagePicker().getImage(source: ImageSource.gallery).then((pickedFile) => pickedFile.path));
+ //
+ //    if (image != null) {
+ //      File cropped = await ImageCropper.cropImage(
+ //          sourcePath: image.path,
+ //          aspectRatio: CropAspectRatio(
+ //              ratioX: 1, ratioY: 1),
+ //          compressQuality: 100,
+ //          maxWidth: 700,
+ //          maxHeight: 700,
+ //          compressFormat: ImageCompressFormat.jpg,
+ //          androidUiSettings: AndroidUiSettings(
+ //            toolbarColor: Colors.deepOrange,
+ //            toolbarTitle: "RPS Cropper",
+ //            statusBarColor: Colors.deepOrange.shade900,
+ //            backgroundColor: Colors.white,
+ //          )
+ //      );
+ //
+ //      this.setState(() {
+ //        customImg44 = cropped;
+ //        _inProcess = true;
+ //
+ //      });
+ //    } else {
+ //      this.setState(() {
+ //        _inProcess = false;
+ //      });
+ //    }
+ //  }
+ // Widget getImageWidget045() {
+ //    if (customImg45 != null) {
+ //      return InkWell(
+ //        onTap:()=>getImage045(),
+ //        child: Image.file(
+ //          customImg45,
+ //          width: 150,
+ //          height: 150,
+ //          fit: BoxFit.cover,
+ //        ),
+ //      );
+ //    } else {
+ //      return InkWell(
+ //        onTap:()=>getImage045(),
+ //         child: Column(
+ //           children: [
+ //             Icon(
+ //      Icons.add,
+ //        size:50,
+ //      ),
+ //                    Text("Add image")
+ //
+ //           ],
+ //         ));
+ //    }
+ //  }
+ //  getImage045() async {
+ //
+ //
+ //    this.setState(() {
+ //      _inProcess = true;
+ //    });
+ //    File image = File(await ImagePicker().getImage(source: ImageSource.gallery).then((pickedFile) => pickedFile.path));
+ //
+ //    if (image != null) {
+ //      File cropped = await ImageCropper.cropImage(
+ //          sourcePath: image.path,
+ //          aspectRatio: CropAspectRatio(
+ //              ratioX: 1, ratioY: 1),
+ //          compressQuality: 100,
+ //          maxWidth: 700,
+ //          maxHeight: 700,
+ //          compressFormat: ImageCompressFormat.jpg,
+ //          androidUiSettings: AndroidUiSettings(
+ //            toolbarColor: Colors.deepOrange,
+ //            toolbarTitle: "RPS Cropper",
+ //            statusBarColor: Colors.deepOrange.shade900,
+ //            backgroundColor: Colors.white,
+ //          )
+ //      );
+ //
+ //      this.setState(() {
+ //        customImg45 = cropped;
+ //        _inProcess = true;
+ //
+ //      });
+ //    } else {
+ //      this.setState(() {
+ //        _inProcess = false;
+ //      });
+ //    }
+ //  }
+ // Widget getImageWidget046() {
+ //    if (customImg46 != null) {
+ //      return InkWell(
+ //        onTap:()=>getImage046(),
+ //        child: Image.file(
+ //          customImg46,
+ //          width: 150,
+ //          height: 150,
+ //          fit: BoxFit.cover,
+ //        ),
+ //      );
+ //    } else {
+ //      return InkWell(
+ //        onTap:()=>getImage046(),
+ //         child: Column(
+ //           children: [
+ //             Icon(
+ //      Icons.add,
+ //        size:50,
+ //      ),
+ //                    Text("Add image")
+ //
+ //           ],
+ //         ));
+ //    }
+ //  }
+ //  getImage046() async {
+ //
+ //
+ //    this.setState(() {
+ //      _inProcess = true;
+ //    });
+ //    File image = File(await ImagePicker().getImage(source: ImageSource.gallery).then((pickedFile) => pickedFile.path));
+ //
+ //    if (image != null) {
+ //      File cropped = await ImageCropper.cropImage(
+ //          sourcePath: image.path,
+ //          aspectRatio: CropAspectRatio(
+ //              ratioX: 1, ratioY: 1),
+ //          compressQuality: 100,
+ //          maxWidth: 700,
+ //          maxHeight: 700,
+ //          compressFormat: ImageCompressFormat.jpg,
+ //          androidUiSettings: AndroidUiSettings(
+ //            toolbarColor: Colors.deepOrange,
+ //            toolbarTitle: "RPS Cropper",
+ //            statusBarColor: Colors.deepOrange.shade900,
+ //            backgroundColor: Colors.white,
+ //          )
+ //      );
+ //
+ //      this.setState(() {
+ //        customImg46 = cropped;
+ //        _inProcess = true;
+ //
+ //      });
+ //    } else {
+ //      this.setState(() {
+ //        _inProcess = false;
+ //      });
+ //    }
+ //  }
+ // Widget getImageWidget047() {
+ //    if (customImg47 != null) {
+ //      return InkWell(
+ //        onTap:()=>getImage047(),
+ //        child: Image.file(
+ //          customImg47,
+ //          width: 150,
+ //          height: 150,
+ //          fit: BoxFit.cover,
+ //        ),
+ //      );
+ //    } else {
+ //      return InkWell(
+ //        onTap:()=>getImage047(),
+ //         child: Column(
+ //           children: [
+ //             Icon(
+ //      Icons.add,
+ //        size:50,
+ //      ),
+ //                    Text("Add image")
+ //
+ //           ],
+ //         ));
+ //    }
+ //  }
+ //  getImage047() async {
+ //
+ //
+ //    this.setState(() {
+ //      _inProcess = true;
+ //    });
+ //    File image = File(await ImagePicker().getImage(source: ImageSource.gallery).then((pickedFile) => pickedFile.path));
+ //
+ //    if (image != null) {
+ //      File cropped = await ImageCropper.cropImage(
+ //          sourcePath: image.path,
+ //          aspectRatio: CropAspectRatio(
+ //              ratioX: 1, ratioY: 1),
+ //          compressQuality: 100,
+ //          maxWidth: 700,
+ //          maxHeight: 700,
+ //          compressFormat: ImageCompressFormat.jpg,
+ //          androidUiSettings: AndroidUiSettings(
+ //            toolbarColor: Colors.deepOrange,
+ //            toolbarTitle: "RPS Cropper",
+ //            statusBarColor: Colors.deepOrange.shade900,
+ //            backgroundColor: Colors.white,
+ //          )
+ //      );
+ //
+ //      this.setState(() {
+ //        customImg47 = cropped;
+ //        _inProcess = true;
+ //
+ //      });
+ //    } else {
+ //      this.setState(() {
+ //        _inProcess = false;
+ //      });
+ //    }
+ //  }
+ // Widget getImageWidget048() {
+ //    if (customImg48 != null) {
+ //      return InkWell(
+ //        onTap:()=>getImage048(),
+ //        child: Image.file(
+ //          customImg48,
+ //          width: 150,
+ //          height: 150,
+ //          fit: BoxFit.cover,
+ //        ),
+ //      );
+ //    } else {
+ //      return InkWell(
+ //        onTap:()=>getImage048(),
+ //         child: Column(
+ //           children: [
+ //             Icon(
+ //      Icons.add,
+ //        size:50,
+ //      ),
+ //                    Text("Add image")
+ //
+ //           ],
+ //         ));
+ //    }
+ //  }
+ //  getImage048() async {
+ //
+ //
+ //    this.setState(() {
+ //      _inProcess = true;
+ //    });
+ //    File image = File(await ImagePicker().getImage(source: ImageSource.gallery).then((pickedFile) => pickedFile.path));
+ //
+ //    if (image != null) {
+ //      File cropped = await ImageCropper.cropImage(
+ //          sourcePath: image.path,
+ //          aspectRatio: CropAspectRatio(
+ //              ratioX: 1, ratioY: 1),
+ //          compressQuality: 100,
+ //          maxWidth: 700,
+ //          maxHeight: 700,
+ //          compressFormat: ImageCompressFormat.jpg,
+ //          androidUiSettings: AndroidUiSettings(
+ //            toolbarColor: Colors.deepOrange,
+ //            toolbarTitle: "RPS Cropper",
+ //            statusBarColor: Colors.deepOrange.shade900,
+ //            backgroundColor: Colors.white,
+ //          )
+ //      );
+ //
+ //      this.setState(() {
+ //        customImg48 = cropped;
+ //        _inProcess = true;
+ //
+ //      });
+ //    } else {
+ //      this.setState(() {
+ //        _inProcess = false;
+ //      });
+ //    }
+ //  }
+ // Widget getImageWidget049() {
+ //    if (customImg49 != null) {
+ //      return InkWell(
+ //        onTap:()=>getImage049(),
+ //        child: Image.file(
+ //          customImg49,
+ //          width: 150,
+ //          height: 150,
+ //          fit: BoxFit.cover,
+ //        ),
+ //      );
+ //    } else {
+ //      return InkWell(
+ //        onTap:()=>getImage049(),
+ //         child: Column(
+ //           children: [
+ //             Icon(
+ //      Icons.add,
+ //        size:50,
+ //      ),
+ //                    Text("Add image")
+ //
+ //           ],
+ //         ));
+ //    }
+ //  }
+ //  getImage049() async {
+ //
+ //
+ //    this.setState(() {
+ //      _inProcess = true;
+ //    });
+ //    File image = File(await ImagePicker().getImage(source: ImageSource.gallery).then((pickedFile) => pickedFile.path));
+ //
+ //    if (image != null) {
+ //      File cropped = await ImageCropper.cropImage(
+ //          sourcePath: image.path,
+ //          aspectRatio: CropAspectRatio(
+ //              ratioX: 1, ratioY: 1),
+ //          compressQuality: 100,
+ //          maxWidth: 700,
+ //          maxHeight: 700,
+ //          compressFormat: ImageCompressFormat.jpg,
+ //          androidUiSettings: AndroidUiSettings(
+ //            toolbarColor: Colors.deepOrange,
+ //            toolbarTitle: "RPS Cropper",
+ //            statusBarColor: Colors.deepOrange.shade900,
+ //            backgroundColor: Colors.white,
+ //          )
+ //      );
+ //
+ //      this.setState(() {
+ //        customImg49 = cropped;
+ //        _inProcess = true;
+ //
+ //      });
+ //    } else {
+ //      this.setState(() {
+ //        _inProcess = false;
+ //      });
+ //    }
+ //  }
+ // Widget getImageWidget050() {
+ //    if (customImg50 != null) {
+ //      return InkWell(
+ //        onTap:()=>getImage050(),
+ //        child: Image.file(
+ //          customImg50,
+ //          width: 150,
+ //          height: 150,
+ //          fit: BoxFit.cover,
+ //        ),
+ //      );
+ //    } else {
+ //      return InkWell(
+ //        onTap:()=>getImage050(),
+ //         child: Column(
+ //           children: [
+ //             Icon(
+ //      Icons.add,
+ //        size:50,
+ //      ),
+ //                    Text("Add image")
+ //
+ //           ],
+ //         ));
+ //    }
+ //  }
+ //  getImage050() async {
+ //
+ //
+ //    this.setState(() {
+ //      _inProcess = true;
+ //    });
+ //    File image = File(await ImagePicker().getImage(source: ImageSource.gallery).then((pickedFile) => pickedFile.path));
+ //
+ //    if (image != null) {
+ //      File cropped = await ImageCropper.cropImage(
+ //          sourcePath: image.path,
+ //          aspectRatio: CropAspectRatio(
+ //              ratioX: 1, ratioY: 1),
+ //          compressQuality: 100,
+ //          maxWidth: 700,
+ //          maxHeight: 700,
+ //          compressFormat: ImageCompressFormat.jpg,
+ //          androidUiSettings: AndroidUiSettings(
+ //            toolbarColor: Colors.deepOrange,
+ //            toolbarTitle: "RPS Cropper",
+ //            statusBarColor: Colors.deepOrange.shade900,
+ //            backgroundColor: Colors.white,
+ //          )
+ //      );
+ //
+ //      this.setState(() {
+ //        customImg50 = cropped;
+ //        _inProcess = true;
+ //
+ //      });
+ //    } else {
+ //      this.setState(() {
+ //        _inProcess = false;
+ //      });
+ //    }
+ //  }
+ //
+ //
   selectImage() {
     return showDialog(
         context: context,
@@ -4099,506 +4105,506 @@ compressImage9() async {
       file9 = compressedImageFile;
     });
   }
-compressImage01() async {
-    final tempDir = await getTemporaryDirectory();
-    final path = tempDir.path;
-    Im.Image imageFile = Im.decodeImage(customImg1.readAsBytesSync());
-    final compressedImageFile = File('$path/img01_$prodId.jpg')
-      ..writeAsBytesSync(Im.encodeJpg(imageFile, quality: 50));
-    if (!mounted) return; setState(() {
-      customImg1 = compressedImageFile;
-    });
-  }
-compressImage02() async {
-    final tempDir = await getTemporaryDirectory();
-    final path = tempDir.path;
-    Im.Image imageFile = Im.decodeImage(customImg2.readAsBytesSync());
-    final compressedImageFile = File('$path/img02_$prodId.jpg')
-      ..writeAsBytesSync(Im.encodeJpg(imageFile, quality: 50));
-    if (!mounted) return; setState(() {
-      customImg2 = compressedImageFile;
-    });
-  }
-compressImage03() async {
-    final tempDir = await getTemporaryDirectory();
-    final path = tempDir.path;
-    Im.Image imageFile = Im.decodeImage(customImg3.readAsBytesSync());
-    final compressedImageFile = File('$path/img03_$prodId.jpg')
-      ..writeAsBytesSync(Im.encodeJpg(imageFile, quality: 50));
-    if (!mounted) return; setState(() {
-      customImg3 = compressedImageFile;
-    });
-  }
-compressImage04() async {
-    final tempDir = await getTemporaryDirectory();
-    final path = tempDir.path;
-    Im.Image imageFile = Im.decodeImage(customImg4.readAsBytesSync());
-    final compressedImageFile = File('$path/img04_$prodId.jpg')
-      ..writeAsBytesSync(Im.encodeJpg(imageFile, quality: 50));
-    if (!mounted) return; setState(() {
-      customImg4 = compressedImageFile;
-    });
-  }
-compressImage05() async {
-    final tempDir = await getTemporaryDirectory();
-    final path = tempDir.path;
-    Im.Image imageFile = Im.decodeImage(customImg5.readAsBytesSync());
-    final compressedImageFile = File('$path/img05_$prodId.jpg')
-      ..writeAsBytesSync(Im.encodeJpg(imageFile, quality: 50));
-    if (!mounted) return; setState(() {
-      customImg5 = compressedImageFile;
-    });
-  }
-compressImage06() async {
-    final tempDir = await getTemporaryDirectory();
-    final path = tempDir.path;
-    Im.Image imageFile = Im.decodeImage(customImg6.readAsBytesSync());
-    final compressedImageFile = File('$path/img06_$prodId.jpg')
-      ..writeAsBytesSync(Im.encodeJpg(imageFile, quality: 50));
-    if (!mounted) return; setState(() {
-      customImg6 = compressedImageFile;
-    });
-  }
-compressImage07() async {
-    final tempDir = await getTemporaryDirectory();
-    final path = tempDir.path;
-    Im.Image imageFile = Im.decodeImage(customImg7.readAsBytesSync());
-    final compressedImageFile = File('$path/img07_$prodId.jpg')
-      ..writeAsBytesSync(Im.encodeJpg(imageFile, quality: 50));
-    if (!mounted) return; setState(() {
-      customImg7 = compressedImageFile;
-    });
-  }
-compressImage08() async {
-    final tempDir = await getTemporaryDirectory();
-    final path = tempDir.path;
-    Im.Image imageFile = Im.decodeImage(customImg8.readAsBytesSync());
-    final compressedImageFile = File('$path/img08_$prodId.jpg')
-      ..writeAsBytesSync(Im.encodeJpg(imageFile, quality: 50));
-    if (!mounted) return; setState(() {
-      customImg8 = compressedImageFile;
-    });
-  }
-compressImage09() async {
-    final tempDir = await getTemporaryDirectory();
-    final path = tempDir.path;
-    Im.Image imageFile = Im.decodeImage(customImg9.readAsBytesSync());
-    final compressedImageFile = File('$path/img09_$prodId.jpg')
-      ..writeAsBytesSync(Im.encodeJpg(imageFile, quality: 50));
-    if (!mounted) return; setState(() {
-      customImg9 = compressedImageFile;
-    });
-  }
-compressImage010() async {
-    final tempDir = await getTemporaryDirectory();
-    final path = tempDir.path;
-    Im.Image imageFile = Im.decodeImage(customImg10.readAsBytesSync());
-    final compressedImageFile = File('$path/img010_$prodId.jpg')
-      ..writeAsBytesSync(Im.encodeJpg(imageFile, quality: 50));
-    if (!mounted) return; setState(() {
-      customImg10 = compressedImageFile;
-    });
-  }
-compressImage011() async {
-    final tempDir = await getTemporaryDirectory();
-    final path = tempDir.path;
-    Im.Image imageFile = Im.decodeImage(customImg11.readAsBytesSync());
-    final compressedImageFile = File('$path/img011_$prodId.jpg')
-      ..writeAsBytesSync(Im.encodeJpg(imageFile, quality: 50));
-    if (!mounted) return; setState(() {
-      customImg11 = compressedImageFile;
-    });
-  }
-compressImage012() async {
-    final tempDir = await getTemporaryDirectory();
-    final path = tempDir.path;
-    Im.Image imageFile = Im.decodeImage(customImg12.readAsBytesSync());
-    final compressedImageFile = File('$path/img012_$prodId.jpg')
-      ..writeAsBytesSync(Im.encodeJpg(imageFile, quality: 50));
-    if (!mounted) return; setState(() {
-      customImg12 = compressedImageFile;
-    });
-  }
-compressImage013() async {
-    final tempDir = await getTemporaryDirectory();
-    final path = tempDir.path;
-    Im.Image imageFile = Im.decodeImage(customImg13.readAsBytesSync());
-    final compressedImageFile = File('$path/img013_$prodId.jpg')
-      ..writeAsBytesSync(Im.encodeJpg(imageFile, quality: 50));
-    if (!mounted) return; setState(() {
-      customImg13 = compressedImageFile;
-    });
-  }
-compressImage014() async {
-    final tempDir = await getTemporaryDirectory();
-    final path = tempDir.path;
-    Im.Image imageFile = Im.decodeImage(customImg14.readAsBytesSync());
-    final compressedImageFile = File('$path/img014_$prodId.jpg')
-      ..writeAsBytesSync(Im.encodeJpg(imageFile, quality: 50));
-    if (!mounted) return; setState(() {
-      customImg14 = compressedImageFile;
-    });
-  }
-compressImage015() async {
-    final tempDir = await getTemporaryDirectory();
-    final path = tempDir.path;
-    Im.Image imageFile = Im.decodeImage(customImg15.readAsBytesSync());
-    final compressedImageFile = File('$path/img015_$prodId.jpg')
-      ..writeAsBytesSync(Im.encodeJpg(imageFile, quality: 50));
-    if (!mounted) return; setState(() {
-      customImg15 = compressedImageFile;
-    });
-  }
-compressImage016() async {
-    final tempDir = await getTemporaryDirectory();
-    final path = tempDir.path;
-    Im.Image imageFile = Im.decodeImage(customImg16.readAsBytesSync());
-    final compressedImageFile = File('$path/img016_$prodId.jpg')
-      ..writeAsBytesSync(Im.encodeJpg(imageFile, quality: 50));
-    if (!mounted) return; setState(() {
-      customImg16 = compressedImageFile;
-    });
-  }
-compressImage017() async {
-    final tempDir = await getTemporaryDirectory();
-    final path = tempDir.path;
-    Im.Image imageFile = Im.decodeImage(customImg17.readAsBytesSync());
-    final compressedImageFile = File('$path/img017_$prodId.jpg')
-      ..writeAsBytesSync(Im.encodeJpg(imageFile, quality: 50));
-    if (!mounted) return; setState(() {
-      customImg17 = compressedImageFile;
-    });
-  }
-compressImage018() async {
-    final tempDir = await getTemporaryDirectory();
-    final path = tempDir.path;
-    Im.Image imageFile = Im.decodeImage(customImg18.readAsBytesSync());
-    final compressedImageFile = File('$path/img018_$prodId.jpg')
-      ..writeAsBytesSync(Im.encodeJpg(imageFile, quality: 50));
-    if (!mounted) return; setState(() {
-      customImg18 = compressedImageFile;
-    });
-  }
-compressImage019() async {
-    final tempDir = await getTemporaryDirectory();
-    final path = tempDir.path;
-    Im.Image imageFile = Im.decodeImage(customImg19.readAsBytesSync());
-    final compressedImageFile = File('$path/img019_$prodId.jpg')
-      ..writeAsBytesSync(Im.encodeJpg(imageFile, quality: 50));
-    if (!mounted) return; setState(() {
-      customImg19 = compressedImageFile;
-    });
-  }
-compressImage020() async {
-    final tempDir = await getTemporaryDirectory();
-    final path = tempDir.path;
-    Im.Image imageFile = Im.decodeImage(customImg20.readAsBytesSync());
-    final compressedImageFile = File('$path/img020_$prodId.jpg')
-      ..writeAsBytesSync(Im.encodeJpg(imageFile, quality: 50));
-    if (!mounted) return; setState(() {
-      customImg20 = compressedImageFile;
-    });
-  }
-compressImage021() async {
-    final tempDir = await getTemporaryDirectory();
-    final path = tempDir.path;
-    Im.Image imageFile = Im.decodeImage(customImg21.readAsBytesSync());
-    final compressedImageFile = File('$path/img021_$prodId.jpg')
-      ..writeAsBytesSync(Im.encodeJpg(imageFile, quality: 50));
-    if (!mounted) return; setState(() {
-      customImg21 = compressedImageFile;
-    });
-  }
-compressImage022() async {
-    final tempDir = await getTemporaryDirectory();
-    final path = tempDir.path;
-    Im.Image imageFile = Im.decodeImage(customImg22.readAsBytesSync());
-    final compressedImageFile = File('$path/img022_$prodId.jpg')
-      ..writeAsBytesSync(Im.encodeJpg(imageFile, quality: 50));
-    if (!mounted) return; setState(() {
-      customImg22 = compressedImageFile;
-    });
-  }
-compressImage023() async {
-    final tempDir = await getTemporaryDirectory();
-    final path = tempDir.path;
-    Im.Image imageFile = Im.decodeImage(customImg23.readAsBytesSync());
-    final compressedImageFile = File('$path/img023_$prodId.jpg')
-      ..writeAsBytesSync(Im.encodeJpg(imageFile, quality: 50));
-    if (!mounted) return; setState(() {
-      customImg23 = compressedImageFile;
-    });
-  }
-compressImage024() async {
-    final tempDir = await getTemporaryDirectory();
-    final path = tempDir.path;
-    Im.Image imageFile = Im.decodeImage(customImg24.readAsBytesSync());
-    final compressedImageFile = File('$path/img024_$prodId.jpg')
-      ..writeAsBytesSync(Im.encodeJpg(imageFile, quality: 50));
-    if (!mounted) return; setState(() {
-      customImg24 = compressedImageFile;
-    });
-  }
-compressImage025() async {
-    final tempDir = await getTemporaryDirectory();
-    final path = tempDir.path;
-    Im.Image imageFile = Im.decodeImage(customImg25.readAsBytesSync());
-    final compressedImageFile = File('$path/img025_$prodId.jpg')
-      ..writeAsBytesSync(Im.encodeJpg(imageFile, quality: 50));
-    if (!mounted) return; setState(() {
-      customImg25 = compressedImageFile;
-    });
-  }
-compressImage026() async {
-    final tempDir = await getTemporaryDirectory();
-    final path = tempDir.path;
-    Im.Image imageFile = Im.decodeImage(customImg26.readAsBytesSync());
-    final compressedImageFile = File('$path/img026_$prodId.jpg')
-      ..writeAsBytesSync(Im.encodeJpg(imageFile, quality: 50));
-    if (!mounted) return; setState(() {
-      customImg26 = compressedImageFile;
-    });
-  }
-compressImage027() async {
-    final tempDir = await getTemporaryDirectory();
-    final path = tempDir.path;
-    Im.Image imageFile = Im.decodeImage(customImg27.readAsBytesSync());
-    final compressedImageFile = File('$path/img027_$prodId.jpg')
-      ..writeAsBytesSync(Im.encodeJpg(imageFile, quality: 50));
-    if (!mounted) return; setState(() {
-      customImg27 = compressedImageFile;
-    });
-  }
-compressImage028() async {
-    final tempDir = await getTemporaryDirectory();
-    final path = tempDir.path;
-    Im.Image imageFile = Im.decodeImage(customImg28.readAsBytesSync());
-    final compressedImageFile = File('$path/img028_$prodId.jpg')
-      ..writeAsBytesSync(Im.encodeJpg(imageFile, quality: 50));
-    if (!mounted) return; setState(() {
-      customImg28 = compressedImageFile;
-    });
-  }
-compressImage029() async {
-    final tempDir = await getTemporaryDirectory();
-    final path = tempDir.path;
-    Im.Image imageFile = Im.decodeImage(customImg29.readAsBytesSync());
-    final compressedImageFile = File('$path/img029_$prodId.jpg')
-      ..writeAsBytesSync(Im.encodeJpg(imageFile, quality: 50));
-    if (!mounted) return; setState(() {
-      customImg29 = compressedImageFile;
-    });
-  }
-compressImage030() async {
-    final tempDir = await getTemporaryDirectory();
-    final path = tempDir.path;
-    Im.Image imageFile = Im.decodeImage(customImg30.readAsBytesSync());
-    final compressedImageFile = File('$path/img030_$prodId.jpg')
-      ..writeAsBytesSync(Im.encodeJpg(imageFile, quality: 50));
-    if (!mounted) return; setState(() {
-      customImg30 = compressedImageFile;
-    });
-  }
-compressImage031() async {
-    final tempDir = await getTemporaryDirectory();
-    final path = tempDir.path;
-    Im.Image imageFile = Im.decodeImage(customImg31.readAsBytesSync());
-    final compressedImageFile = File('$path/img031_$prodId.jpg')
-      ..writeAsBytesSync(Im.encodeJpg(imageFile, quality: 50));
-    if (!mounted) return; setState(() {
-      customImg31 = compressedImageFile;
-    });
-  }
-compressImage032() async {
-    final tempDir = await getTemporaryDirectory();
-    final path = tempDir.path;
-    Im.Image imageFile = Im.decodeImage(customImg32.readAsBytesSync());
-    final compressedImageFile = File('$path/img032_$prodId.jpg')
-      ..writeAsBytesSync(Im.encodeJpg(imageFile, quality: 50));
-    if (!mounted) return; setState(() {
-      customImg32 = compressedImageFile;
-    });
-  }
-compressImage033() async {
-    final tempDir = await getTemporaryDirectory();
-    final path = tempDir.path;
-    Im.Image imageFile = Im.decodeImage(customImg33.readAsBytesSync());
-    final compressedImageFile = File('$path/img033_$prodId.jpg')
-      ..writeAsBytesSync(Im.encodeJpg(imageFile, quality: 50));
-    if (!mounted) return; setState(() {
-      customImg33 = compressedImageFile;
-    });
-  }
-compressImage034() async {
-    final tempDir = await getTemporaryDirectory();
-    final path = tempDir.path;
-    Im.Image imageFile = Im.decodeImage(customImg34.readAsBytesSync());
-    final compressedImageFile = File('$path/img034_$prodId.jpg')
-      ..writeAsBytesSync(Im.encodeJpg(imageFile, quality: 50));
-    if (!mounted) return; setState(() {
-      customImg34 = compressedImageFile;
-    });
-  }
-compressImage035() async {
-    final tempDir = await getTemporaryDirectory();
-    final path = tempDir.path;
-    Im.Image imageFile = Im.decodeImage(customImg35.readAsBytesSync());
-    final compressedImageFile = File('$path/img035_$prodId.jpg')
-      ..writeAsBytesSync(Im.encodeJpg(imageFile, quality: 50));
-    if (!mounted) return; setState(() {
-      customImg35 = compressedImageFile;
-    });
-  }
-compressImage036() async {
-    final tempDir = await getTemporaryDirectory();
-    final path = tempDir.path;
-    Im.Image imageFile = Im.decodeImage(customImg36.readAsBytesSync());
-    final compressedImageFile = File('$path/img036_$prodId.jpg')
-      ..writeAsBytesSync(Im.encodeJpg(imageFile, quality: 50));
-    if (!mounted) return; setState(() {
-      customImg36 = compressedImageFile;
-    });
-  }
-compressImage037() async {
-    final tempDir = await getTemporaryDirectory();
-    final path = tempDir.path;
-    Im.Image imageFile = Im.decodeImage(customImg37.readAsBytesSync());
-    final compressedImageFile = File('$path/img037_$prodId.jpg')
-      ..writeAsBytesSync(Im.encodeJpg(imageFile, quality: 50));
-    if (!mounted) return; setState(() {
-      customImg37 = compressedImageFile;
-    });
-  }
-compressImage038() async {
-    final tempDir = await getTemporaryDirectory();
-    final path = tempDir.path;
-    Im.Image imageFile = Im.decodeImage(customImg38.readAsBytesSync());
-    final compressedImageFile = File('$path/img038_$prodId.jpg')
-      ..writeAsBytesSync(Im.encodeJpg(imageFile, quality: 50));
-    if (!mounted) return; setState(() {
-      customImg38 = compressedImageFile;
-    });
-  }
-compressImage039() async {
-    final tempDir = await getTemporaryDirectory();
-    final path = tempDir.path;
-    Im.Image imageFile = Im.decodeImage(customImg39.readAsBytesSync());
-    final compressedImageFile = File('$path/img039_$prodId.jpg')
-      ..writeAsBytesSync(Im.encodeJpg(imageFile, quality: 50));
-    if (!mounted) return; setState(() {
-      customImg39 = compressedImageFile;
-    });
-  }
-compressImage040() async {
-    final tempDir = await getTemporaryDirectory();
-    final path = tempDir.path;
-    Im.Image imageFile = Im.decodeImage(customImg40.readAsBytesSync());
-    final compressedImageFile = File('$path/img040_$prodId.jpg')
-      ..writeAsBytesSync(Im.encodeJpg(imageFile, quality: 50));
-    if (!mounted) return; setState(() {
-      customImg40 = compressedImageFile;
-    });
-  }
-compressImage041() async {
-    final tempDir = await getTemporaryDirectory();
-    final path = tempDir.path;
-    Im.Image imageFile = Im.decodeImage(customImg41.readAsBytesSync());
-    final compressedImageFile = File('$path/img041_$prodId.jpg')
-      ..writeAsBytesSync(Im.encodeJpg(imageFile, quality: 50));
-    if (!mounted) return; setState(() {
-      customImg41 = compressedImageFile;
-    });
-  }
-compressImage042() async {
-    final tempDir = await getTemporaryDirectory();
-    final path = tempDir.path;
-    Im.Image imageFile = Im.decodeImage(customImg42.readAsBytesSync());
-    final compressedImageFile = File('$path/img042_$prodId.jpg')
-      ..writeAsBytesSync(Im.encodeJpg(imageFile, quality: 50));
-    if (!mounted) return; setState(() {
-      customImg42 = compressedImageFile;
-    });
-  }
-compressImage043() async {
-    final tempDir = await getTemporaryDirectory();
-    final path = tempDir.path;
-    Im.Image imageFile = Im.decodeImage(customImg43.readAsBytesSync());
-    final compressedImageFile = File('$path/img043_$prodId.jpg')
-      ..writeAsBytesSync(Im.encodeJpg(imageFile, quality: 50));
-    if (!mounted) return; setState(() {
-      customImg43 = compressedImageFile;
-    });
-  }
-compressImage044() async {
-    final tempDir = await getTemporaryDirectory();
-    final path = tempDir.path;
-    Im.Image imageFile = Im.decodeImage(customImg44.readAsBytesSync());
-    final compressedImageFile = File('$path/img044_$prodId.jpg')
-      ..writeAsBytesSync(Im.encodeJpg(imageFile, quality: 50));
-    if (!mounted) return; setState(() {
-      customImg44 = compressedImageFile;
-    });
-  }
-compressImage045() async {
-    final tempDir = await getTemporaryDirectory();
-    final path = tempDir.path;
-    Im.Image imageFile = Im.decodeImage(customImg45.readAsBytesSync());
-    final compressedImageFile = File('$path/img045_$prodId.jpg')
-      ..writeAsBytesSync(Im.encodeJpg(imageFile, quality: 50));
-    if (!mounted) return; setState(() {
-      customImg45 = compressedImageFile;
-    });
-  }
-compressImage046() async {
-    final tempDir = await getTemporaryDirectory();
-    final path = tempDir.path;
-    Im.Image imageFile = Im.decodeImage(customImg46.readAsBytesSync());
-    final compressedImageFile = File('$path/img046_$prodId.jpg')
-      ..writeAsBytesSync(Im.encodeJpg(imageFile, quality: 50));
-    if (!mounted) return; setState(() {
-      customImg46 = compressedImageFile;
-    });
-  }
-compressImage047() async {
-    final tempDir = await getTemporaryDirectory();
-    final path = tempDir.path;
-    Im.Image imageFile = Im.decodeImage(customImg47.readAsBytesSync());
-    final compressedImageFile = File('$path/img047_$prodId.jpg')
-      ..writeAsBytesSync(Im.encodeJpg(imageFile, quality: 50));
-    if (!mounted) return; setState(() {
-      customImg47 = compressedImageFile;
-    });
-  }
-compressImage048() async {
-    final tempDir = await getTemporaryDirectory();
-    final path = tempDir.path;
-    Im.Image imageFile = Im.decodeImage(customImg48.readAsBytesSync());
-    final compressedImageFile = File('$path/img048_$prodId.jpg')
-      ..writeAsBytesSync(Im.encodeJpg(imageFile, quality: 50));
-    if (!mounted) return; setState(() {
-      customImg48 = compressedImageFile;
-    });
-  }
-compressImage049() async {
-    final tempDir = await getTemporaryDirectory();
-    final path = tempDir.path;
-    Im.Image imageFile = Im.decodeImage(customImg49.readAsBytesSync());
-    final compressedImageFile = File('$path/img049_$prodId.jpg')
-      ..writeAsBytesSync(Im.encodeJpg(imageFile, quality: 50));
-    if (!mounted) return; setState(() {
-      customImg49 = compressedImageFile;
-    });
-  }
-compressImage050() async {
-    final tempDir = await getTemporaryDirectory();
-    final path = tempDir.path;
-    Im.Image imageFile = Im.decodeImage(customImg50.readAsBytesSync());
-    final compressedImageFile = File('$path/img050_$prodId.jpg')
-      ..writeAsBytesSync(Im.encodeJpg(imageFile, quality: 50));
-    if (!mounted) return; setState(() {
-      customImg50 = compressedImageFile;
-    });
-  }
+// compressImage01() async {
+//     final tempDir = await getTemporaryDirectory();
+//     final path = tempDir.path;
+//     Im.Image imageFile = Im.decodeImage(customImg1.readAsBytesSync());
+//     final compressedImageFile = File('$path/img01_$prodId.jpg')
+//       ..writeAsBytesSync(Im.encodeJpg(imageFile, quality: 50));
+//     if (!mounted) return; setState(() {
+//       customImg1 = compressedImageFile;
+//     });
+//   }
+// compressImage02() async {
+//     final tempDir = await getTemporaryDirectory();
+//     final path = tempDir.path;
+//     Im.Image imageFile = Im.decodeImage(customImg2.readAsBytesSync());
+//     final compressedImageFile = File('$path/img02_$prodId.jpg')
+//       ..writeAsBytesSync(Im.encodeJpg(imageFile, quality: 50));
+//     if (!mounted) return; setState(() {
+//       customImg2 = compressedImageFile;
+//     });
+//   }
+// compressImage03() async {
+//     final tempDir = await getTemporaryDirectory();
+//     final path = tempDir.path;
+//     Im.Image imageFile = Im.decodeImage(customImg3.readAsBytesSync());
+//     final compressedImageFile = File('$path/img03_$prodId.jpg')
+//       ..writeAsBytesSync(Im.encodeJpg(imageFile, quality: 50));
+//     if (!mounted) return; setState(() {
+//       customImg3 = compressedImageFile;
+//     });
+//   }
+// compressImage04() async {
+//     final tempDir = await getTemporaryDirectory();
+//     final path = tempDir.path;
+//     Im.Image imageFile = Im.decodeImage(customImg4.readAsBytesSync());
+//     final compressedImageFile = File('$path/img04_$prodId.jpg')
+//       ..writeAsBytesSync(Im.encodeJpg(imageFile, quality: 50));
+//     if (!mounted) return; setState(() {
+//       customImg4 = compressedImageFile;
+//     });
+//   }
+// compressImage05() async {
+//     final tempDir = await getTemporaryDirectory();
+//     final path = tempDir.path;
+//     Im.Image imageFile = Im.decodeImage(customImg5.readAsBytesSync());
+//     final compressedImageFile = File('$path/img05_$prodId.jpg')
+//       ..writeAsBytesSync(Im.encodeJpg(imageFile, quality: 50));
+//     if (!mounted) return; setState(() {
+//       customImg5 = compressedImageFile;
+//     });
+//   }
+// compressImage06() async {
+//     final tempDir = await getTemporaryDirectory();
+//     final path = tempDir.path;
+//     Im.Image imageFile = Im.decodeImage(customImg6.readAsBytesSync());
+//     final compressedImageFile = File('$path/img06_$prodId.jpg')
+//       ..writeAsBytesSync(Im.encodeJpg(imageFile, quality: 50));
+//     if (!mounted) return; setState(() {
+//       customImg6 = compressedImageFile;
+//     });
+//   }
+// compressImage07() async {
+//     final tempDir = await getTemporaryDirectory();
+//     final path = tempDir.path;
+//     Im.Image imageFile = Im.decodeImage(customImg7.readAsBytesSync());
+//     final compressedImageFile = File('$path/img07_$prodId.jpg')
+//       ..writeAsBytesSync(Im.encodeJpg(imageFile, quality: 50));
+//     if (!mounted) return; setState(() {
+//       customImg7 = compressedImageFile;
+//     });
+//   }
+// compressImage08() async {
+//     final tempDir = await getTemporaryDirectory();
+//     final path = tempDir.path;
+//     Im.Image imageFile = Im.decodeImage(customImg8.readAsBytesSync());
+//     final compressedImageFile = File('$path/img08_$prodId.jpg')
+//       ..writeAsBytesSync(Im.encodeJpg(imageFile, quality: 50));
+//     if (!mounted) return; setState(() {
+//       customImg8 = compressedImageFile;
+//     });
+//   }
+// compressImage09() async {
+//     final tempDir = await getTemporaryDirectory();
+//     final path = tempDir.path;
+//     Im.Image imageFile = Im.decodeImage(customImg9.readAsBytesSync());
+//     final compressedImageFile = File('$path/img09_$prodId.jpg')
+//       ..writeAsBytesSync(Im.encodeJpg(imageFile, quality: 50));
+//     if (!mounted) return; setState(() {
+//       customImg9 = compressedImageFile;
+//     });
+//   }
+// compressImage010() async {
+//     final tempDir = await getTemporaryDirectory();
+//     final path = tempDir.path;
+//     Im.Image imageFile = Im.decodeImage(customImg10.readAsBytesSync());
+//     final compressedImageFile = File('$path/img010_$prodId.jpg')
+//       ..writeAsBytesSync(Im.encodeJpg(imageFile, quality: 50));
+//     if (!mounted) return; setState(() {
+//       customImg10 = compressedImageFile;
+//     });
+//   }
+// compressImage011() async {
+//     final tempDir = await getTemporaryDirectory();
+//     final path = tempDir.path;
+//     Im.Image imageFile = Im.decodeImage(customImg11.readAsBytesSync());
+//     final compressedImageFile = File('$path/img011_$prodId.jpg')
+//       ..writeAsBytesSync(Im.encodeJpg(imageFile, quality: 50));
+//     if (!mounted) return; setState(() {
+//       customImg11 = compressedImageFile;
+//     });
+//   }
+// compressImage012() async {
+//     final tempDir = await getTemporaryDirectory();
+//     final path = tempDir.path;
+//     Im.Image imageFile = Im.decodeImage(customImg12.readAsBytesSync());
+//     final compressedImageFile = File('$path/img012_$prodId.jpg')
+//       ..writeAsBytesSync(Im.encodeJpg(imageFile, quality: 50));
+//     if (!mounted) return; setState(() {
+//       customImg12 = compressedImageFile;
+//     });
+//   }
+// compressImage013() async {
+//     final tempDir = await getTemporaryDirectory();
+//     final path = tempDir.path;
+//     Im.Image imageFile = Im.decodeImage(customImg13.readAsBytesSync());
+//     final compressedImageFile = File('$path/img013_$prodId.jpg')
+//       ..writeAsBytesSync(Im.encodeJpg(imageFile, quality: 50));
+//     if (!mounted) return; setState(() {
+//       customImg13 = compressedImageFile;
+//     });
+//   }
+// compressImage014() async {
+//     final tempDir = await getTemporaryDirectory();
+//     final path = tempDir.path;
+//     Im.Image imageFile = Im.decodeImage(customImg14.readAsBytesSync());
+//     final compressedImageFile = File('$path/img014_$prodId.jpg')
+//       ..writeAsBytesSync(Im.encodeJpg(imageFile, quality: 50));
+//     if (!mounted) return; setState(() {
+//       customImg14 = compressedImageFile;
+//     });
+//   }
+// compressImage015() async {
+//     final tempDir = await getTemporaryDirectory();
+//     final path = tempDir.path;
+//     Im.Image imageFile = Im.decodeImage(customImg15.readAsBytesSync());
+//     final compressedImageFile = File('$path/img015_$prodId.jpg')
+//       ..writeAsBytesSync(Im.encodeJpg(imageFile, quality: 50));
+//     if (!mounted) return; setState(() {
+//       customImg15 = compressedImageFile;
+//     });
+//   }
+// compressImage016() async {
+//     final tempDir = await getTemporaryDirectory();
+//     final path = tempDir.path;
+//     Im.Image imageFile = Im.decodeImage(customImg16.readAsBytesSync());
+//     final compressedImageFile = File('$path/img016_$prodId.jpg')
+//       ..writeAsBytesSync(Im.encodeJpg(imageFile, quality: 50));
+//     if (!mounted) return; setState(() {
+//       customImg16 = compressedImageFile;
+//     });
+//   }
+// compressImage017() async {
+//     final tempDir = await getTemporaryDirectory();
+//     final path = tempDir.path;
+//     Im.Image imageFile = Im.decodeImage(customImg17.readAsBytesSync());
+//     final compressedImageFile = File('$path/img017_$prodId.jpg')
+//       ..writeAsBytesSync(Im.encodeJpg(imageFile, quality: 50));
+//     if (!mounted) return; setState(() {
+//       customImg17 = compressedImageFile;
+//     });
+//   }
+// compressImage018() async {
+//     final tempDir = await getTemporaryDirectory();
+//     final path = tempDir.path;
+//     Im.Image imageFile = Im.decodeImage(customImg18.readAsBytesSync());
+//     final compressedImageFile = File('$path/img018_$prodId.jpg')
+//       ..writeAsBytesSync(Im.encodeJpg(imageFile, quality: 50));
+//     if (!mounted) return; setState(() {
+//       customImg18 = compressedImageFile;
+//     });
+//   }
+// compressImage019() async {
+//     final tempDir = await getTemporaryDirectory();
+//     final path = tempDir.path;
+//     Im.Image imageFile = Im.decodeImage(customImg19.readAsBytesSync());
+//     final compressedImageFile = File('$path/img019_$prodId.jpg')
+//       ..writeAsBytesSync(Im.encodeJpg(imageFile, quality: 50));
+//     if (!mounted) return; setState(() {
+//       customImg19 = compressedImageFile;
+//     });
+//   }
+// compressImage020() async {
+//     final tempDir = await getTemporaryDirectory();
+//     final path = tempDir.path;
+//     Im.Image imageFile = Im.decodeImage(customImg20.readAsBytesSync());
+//     final compressedImageFile = File('$path/img020_$prodId.jpg')
+//       ..writeAsBytesSync(Im.encodeJpg(imageFile, quality: 50));
+//     if (!mounted) return; setState(() {
+//       customImg20 = compressedImageFile;
+//     });
+//   }
+// compressImage021() async {
+//     final tempDir = await getTemporaryDirectory();
+//     final path = tempDir.path;
+//     Im.Image imageFile = Im.decodeImage(customImg21.readAsBytesSync());
+//     final compressedImageFile = File('$path/img021_$prodId.jpg')
+//       ..writeAsBytesSync(Im.encodeJpg(imageFile, quality: 50));
+//     if (!mounted) return; setState(() {
+//       customImg21 = compressedImageFile;
+//     });
+//   }
+// compressImage022() async {
+//     final tempDir = await getTemporaryDirectory();
+//     final path = tempDir.path;
+//     Im.Image imageFile = Im.decodeImage(customImg22.readAsBytesSync());
+//     final compressedImageFile = File('$path/img022_$prodId.jpg')
+//       ..writeAsBytesSync(Im.encodeJpg(imageFile, quality: 50));
+//     if (!mounted) return; setState(() {
+//       customImg22 = compressedImageFile;
+//     });
+//   }
+// compressImage023() async {
+//     final tempDir = await getTemporaryDirectory();
+//     final path = tempDir.path;
+//     Im.Image imageFile = Im.decodeImage(customImg23.readAsBytesSync());
+//     final compressedImageFile = File('$path/img023_$prodId.jpg')
+//       ..writeAsBytesSync(Im.encodeJpg(imageFile, quality: 50));
+//     if (!mounted) return; setState(() {
+//       customImg23 = compressedImageFile;
+//     });
+//   }
+// compressImage024() async {
+//     final tempDir = await getTemporaryDirectory();
+//     final path = tempDir.path;
+//     Im.Image imageFile = Im.decodeImage(customImg24.readAsBytesSync());
+//     final compressedImageFile = File('$path/img024_$prodId.jpg')
+//       ..writeAsBytesSync(Im.encodeJpg(imageFile, quality: 50));
+//     if (!mounted) return; setState(() {
+//       customImg24 = compressedImageFile;
+//     });
+//   }
+// compressImage025() async {
+//     final tempDir = await getTemporaryDirectory();
+//     final path = tempDir.path;
+//     Im.Image imageFile = Im.decodeImage(customImg25.readAsBytesSync());
+//     final compressedImageFile = File('$path/img025_$prodId.jpg')
+//       ..writeAsBytesSync(Im.encodeJpg(imageFile, quality: 50));
+//     if (!mounted) return; setState(() {
+//       customImg25 = compressedImageFile;
+//     });
+//   }
+// compressImage026() async {
+//     final tempDir = await getTemporaryDirectory();
+//     final path = tempDir.path;
+//     Im.Image imageFile = Im.decodeImage(customImg26.readAsBytesSync());
+//     final compressedImageFile = File('$path/img026_$prodId.jpg')
+//       ..writeAsBytesSync(Im.encodeJpg(imageFile, quality: 50));
+//     if (!mounted) return; setState(() {
+//       customImg26 = compressedImageFile;
+//     });
+//   }
+// compressImage027() async {
+//     final tempDir = await getTemporaryDirectory();
+//     final path = tempDir.path;
+//     Im.Image imageFile = Im.decodeImage(customImg27.readAsBytesSync());
+//     final compressedImageFile = File('$path/img027_$prodId.jpg')
+//       ..writeAsBytesSync(Im.encodeJpg(imageFile, quality: 50));
+//     if (!mounted) return; setState(() {
+//       customImg27 = compressedImageFile;
+//     });
+//   }
+// compressImage028() async {
+//     final tempDir = await getTemporaryDirectory();
+//     final path = tempDir.path;
+//     Im.Image imageFile = Im.decodeImage(customImg28.readAsBytesSync());
+//     final compressedImageFile = File('$path/img028_$prodId.jpg')
+//       ..writeAsBytesSync(Im.encodeJpg(imageFile, quality: 50));
+//     if (!mounted) return; setState(() {
+//       customImg28 = compressedImageFile;
+//     });
+//   }
+// compressImage029() async {
+//     final tempDir = await getTemporaryDirectory();
+//     final path = tempDir.path;
+//     Im.Image imageFile = Im.decodeImage(customImg29.readAsBytesSync());
+//     final compressedImageFile = File('$path/img029_$prodId.jpg')
+//       ..writeAsBytesSync(Im.encodeJpg(imageFile, quality: 50));
+//     if (!mounted) return; setState(() {
+//       customImg29 = compressedImageFile;
+//     });
+//   }
+// compressImage030() async {
+//     final tempDir = await getTemporaryDirectory();
+//     final path = tempDir.path;
+//     Im.Image imageFile = Im.decodeImage(customImg30.readAsBytesSync());
+//     final compressedImageFile = File('$path/img030_$prodId.jpg')
+//       ..writeAsBytesSync(Im.encodeJpg(imageFile, quality: 50));
+//     if (!mounted) return; setState(() {
+//       customImg30 = compressedImageFile;
+//     });
+//   }
+// compressImage031() async {
+//     final tempDir = await getTemporaryDirectory();
+//     final path = tempDir.path;
+//     Im.Image imageFile = Im.decodeImage(customImg31.readAsBytesSync());
+//     final compressedImageFile = File('$path/img031_$prodId.jpg')
+//       ..writeAsBytesSync(Im.encodeJpg(imageFile, quality: 50));
+//     if (!mounted) return; setState(() {
+//       customImg31 = compressedImageFile;
+//     });
+//   }
+// compressImage032() async {
+//     final tempDir = await getTemporaryDirectory();
+//     final path = tempDir.path;
+//     Im.Image imageFile = Im.decodeImage(customImg32.readAsBytesSync());
+//     final compressedImageFile = File('$path/img032_$prodId.jpg')
+//       ..writeAsBytesSync(Im.encodeJpg(imageFile, quality: 50));
+//     if (!mounted) return; setState(() {
+//       customImg32 = compressedImageFile;
+//     });
+//   }
+// compressImage033() async {
+//     final tempDir = await getTemporaryDirectory();
+//     final path = tempDir.path;
+//     Im.Image imageFile = Im.decodeImage(customImg33.readAsBytesSync());
+//     final compressedImageFile = File('$path/img033_$prodId.jpg')
+//       ..writeAsBytesSync(Im.encodeJpg(imageFile, quality: 50));
+//     if (!mounted) return; setState(() {
+//       customImg33 = compressedImageFile;
+//     });
+//   }
+// compressImage034() async {
+//     final tempDir = await getTemporaryDirectory();
+//     final path = tempDir.path;
+//     Im.Image imageFile = Im.decodeImage(customImg34.readAsBytesSync());
+//     final compressedImageFile = File('$path/img034_$prodId.jpg')
+//       ..writeAsBytesSync(Im.encodeJpg(imageFile, quality: 50));
+//     if (!mounted) return; setState(() {
+//       customImg34 = compressedImageFile;
+//     });
+//   }
+// compressImage035() async {
+//     final tempDir = await getTemporaryDirectory();
+//     final path = tempDir.path;
+//     Im.Image imageFile = Im.decodeImage(customImg35.readAsBytesSync());
+//     final compressedImageFile = File('$path/img035_$prodId.jpg')
+//       ..writeAsBytesSync(Im.encodeJpg(imageFile, quality: 50));
+//     if (!mounted) return; setState(() {
+//       customImg35 = compressedImageFile;
+//     });
+//   }
+// compressImage036() async {
+//     final tempDir = await getTemporaryDirectory();
+//     final path = tempDir.path;
+//     Im.Image imageFile = Im.decodeImage(customImg36.readAsBytesSync());
+//     final compressedImageFile = File('$path/img036_$prodId.jpg')
+//       ..writeAsBytesSync(Im.encodeJpg(imageFile, quality: 50));
+//     if (!mounted) return; setState(() {
+//       customImg36 = compressedImageFile;
+//     });
+//   }
+// compressImage037() async {
+//     final tempDir = await getTemporaryDirectory();
+//     final path = tempDir.path;
+//     Im.Image imageFile = Im.decodeImage(customImg37.readAsBytesSync());
+//     final compressedImageFile = File('$path/img037_$prodId.jpg')
+//       ..writeAsBytesSync(Im.encodeJpg(imageFile, quality: 50));
+//     if (!mounted) return; setState(() {
+//       customImg37 = compressedImageFile;
+//     });
+//   }
+// compressImage038() async {
+//     final tempDir = await getTemporaryDirectory();
+//     final path = tempDir.path;
+//     Im.Image imageFile = Im.decodeImage(customImg38.readAsBytesSync());
+//     final compressedImageFile = File('$path/img038_$prodId.jpg')
+//       ..writeAsBytesSync(Im.encodeJpg(imageFile, quality: 50));
+//     if (!mounted) return; setState(() {
+//       customImg38 = compressedImageFile;
+//     });
+//   }
+// compressImage039() async {
+//     final tempDir = await getTemporaryDirectory();
+//     final path = tempDir.path;
+//     Im.Image imageFile = Im.decodeImage(customImg39.readAsBytesSync());
+//     final compressedImageFile = File('$path/img039_$prodId.jpg')
+//       ..writeAsBytesSync(Im.encodeJpg(imageFile, quality: 50));
+//     if (!mounted) return; setState(() {
+//       customImg39 = compressedImageFile;
+//     });
+//   }
+// compressImage040() async {
+//     final tempDir = await getTemporaryDirectory();
+//     final path = tempDir.path;
+//     Im.Image imageFile = Im.decodeImage(customImg40.readAsBytesSync());
+//     final compressedImageFile = File('$path/img040_$prodId.jpg')
+//       ..writeAsBytesSync(Im.encodeJpg(imageFile, quality: 50));
+//     if (!mounted) return; setState(() {
+//       customImg40 = compressedImageFile;
+//     });
+//   }
+// compressImage041() async {
+//     final tempDir = await getTemporaryDirectory();
+//     final path = tempDir.path;
+//     Im.Image imageFile = Im.decodeImage(customImg41.readAsBytesSync());
+//     final compressedImageFile = File('$path/img041_$prodId.jpg')
+//       ..writeAsBytesSync(Im.encodeJpg(imageFile, quality: 50));
+//     if (!mounted) return; setState(() {
+//       customImg41 = compressedImageFile;
+//     });
+//   }
+// compressImage042() async {
+//     final tempDir = await getTemporaryDirectory();
+//     final path = tempDir.path;
+//     Im.Image imageFile = Im.decodeImage(customImg42.readAsBytesSync());
+//     final compressedImageFile = File('$path/img042_$prodId.jpg')
+//       ..writeAsBytesSync(Im.encodeJpg(imageFile, quality: 50));
+//     if (!mounted) return; setState(() {
+//       customImg42 = compressedImageFile;
+//     });
+//   }
+// compressImage043() async {
+//     final tempDir = await getTemporaryDirectory();
+//     final path = tempDir.path;
+//     Im.Image imageFile = Im.decodeImage(customImg43.readAsBytesSync());
+//     final compressedImageFile = File('$path/img043_$prodId.jpg')
+//       ..writeAsBytesSync(Im.encodeJpg(imageFile, quality: 50));
+//     if (!mounted) return; setState(() {
+//       customImg43 = compressedImageFile;
+//     });
+//   }
+// compressImage044() async {
+//     final tempDir = await getTemporaryDirectory();
+//     final path = tempDir.path;
+//     Im.Image imageFile = Im.decodeImage(customImg44.readAsBytesSync());
+//     final compressedImageFile = File('$path/img044_$prodId.jpg')
+//       ..writeAsBytesSync(Im.encodeJpg(imageFile, quality: 50));
+//     if (!mounted) return; setState(() {
+//       customImg44 = compressedImageFile;
+//     });
+//   }
+// compressImage045() async {
+//     final tempDir = await getTemporaryDirectory();
+//     final path = tempDir.path;
+//     Im.Image imageFile = Im.decodeImage(customImg45.readAsBytesSync());
+//     final compressedImageFile = File('$path/img045_$prodId.jpg')
+//       ..writeAsBytesSync(Im.encodeJpg(imageFile, quality: 50));
+//     if (!mounted) return; setState(() {
+//       customImg45 = compressedImageFile;
+//     });
+//   }
+// compressImage046() async {
+//     final tempDir = await getTemporaryDirectory();
+//     final path = tempDir.path;
+//     Im.Image imageFile = Im.decodeImage(customImg46.readAsBytesSync());
+//     final compressedImageFile = File('$path/img046_$prodId.jpg')
+//       ..writeAsBytesSync(Im.encodeJpg(imageFile, quality: 50));
+//     if (!mounted) return; setState(() {
+//       customImg46 = compressedImageFile;
+//     });
+//   }
+// compressImage047() async {
+//     final tempDir = await getTemporaryDirectory();
+//     final path = tempDir.path;
+//     Im.Image imageFile = Im.decodeImage(customImg47.readAsBytesSync());
+//     final compressedImageFile = File('$path/img047_$prodId.jpg')
+//       ..writeAsBytesSync(Im.encodeJpg(imageFile, quality: 50));
+//     if (!mounted) return; setState(() {
+//       customImg47 = compressedImageFile;
+//     });
+//   }
+// compressImage048() async {
+//     final tempDir = await getTemporaryDirectory();
+//     final path = tempDir.path;
+//     Im.Image imageFile = Im.decodeImage(customImg48.readAsBytesSync());
+//     final compressedImageFile = File('$path/img048_$prodId.jpg')
+//       ..writeAsBytesSync(Im.encodeJpg(imageFile, quality: 50));
+//     if (!mounted) return; setState(() {
+//       customImg48 = compressedImageFile;
+//     });
+//   }
+// compressImage049() async {
+//     final tempDir = await getTemporaryDirectory();
+//     final path = tempDir.path;
+//     Im.Image imageFile = Im.decodeImage(customImg49.readAsBytesSync());
+//     final compressedImageFile = File('$path/img049_$prodId.jpg')
+//       ..writeAsBytesSync(Im.encodeJpg(imageFile, quality: 50));
+//     if (!mounted) return; setState(() {
+//       customImg49 = compressedImageFile;
+//     });
+//   }
+// compressImage050() async {
+//     final tempDir = await getTemporaryDirectory();
+//     final path = tempDir.path;
+//     Im.Image imageFile = Im.decodeImage(customImg50.readAsBytesSync());
+//     final compressedImageFile = File('$path/img050_$prodId.jpg')
+//       ..writeAsBytesSync(Im.encodeJpg(imageFile, quality: 50));
+//     if (!mounted) return; setState(() {
+//       customImg50 = compressedImageFile;
+//     });
+//   }
 
   Future<String> uploadImage(imageFile) async {
     String fileName = DateTime.now().millisecondsSinceEpoch.toString();
@@ -4692,457 +4698,457 @@ compressImage050() async {
     String downloadUrl = await storageSnap.ref.getDownloadURL();
     return downloadUrl;
   }
-
-  Future<String> uploadImage01(imageFile) async {
-    String fileName = DateTime.now().millisecondsSinceEpoch.toString();
-    Reference reference = FirebaseStorage.instance.ref().child("Shop${prodId}").child("$fileName.jpg");
-    UploadTask uploadTask = reference.putFile(imageFile);
-
-    TaskSnapshot storageSnap = await uploadTask;
-    String downloadUrl = await storageSnap.ref.getDownloadURL();
-    return downloadUrl;
-  }
-  Future<String> uploadImage02(imageFile) async {
-    String fileName = DateTime.now().millisecondsSinceEpoch.toString();
-    Reference reference = FirebaseStorage.instance.ref().child("Shop${prodId}").child("$fileName.jpg");
-    UploadTask uploadTask = reference.putFile(imageFile);
-
-    TaskSnapshot storageSnap = await uploadTask;
-    String downloadUrl = await storageSnap.ref.getDownloadURL();
-    return downloadUrl;
-  }
-  Future<String> uploadImage03(imageFile) async {
-    String fileName = DateTime.now().millisecondsSinceEpoch.toString();
-    Reference reference = FirebaseStorage.instance.ref().child("Shop${prodId}").child("$fileName.jpg");
-    UploadTask uploadTask = reference.putFile(imageFile);
-
-    TaskSnapshot storageSnap = await uploadTask;
-    String downloadUrl = await storageSnap.ref.getDownloadURL();
-    return downloadUrl;
-  }
-  Future<String> uploadImage04(imageFile) async {
-    String fileName = DateTime.now().millisecondsSinceEpoch.toString();
-    Reference reference = FirebaseStorage.instance.ref().child("Shop${prodId}").child("$fileName.jpg");
-    UploadTask uploadTask = reference.putFile(imageFile);
-
-    TaskSnapshot storageSnap = await uploadTask;
-    String downloadUrl = await storageSnap.ref.getDownloadURL();
-    return downloadUrl;
-  }
-  Future<String> uploadImage05(imageFile) async {
-    String fileName = DateTime.now().millisecondsSinceEpoch.toString();
-    Reference reference = FirebaseStorage.instance.ref().child("Shop${prodId}").child("$fileName.jpg");
-    UploadTask uploadTask = reference.putFile(imageFile);
-
-    TaskSnapshot storageSnap = await uploadTask;
-    String downloadUrl = await storageSnap.ref.getDownloadURL();
-    return downloadUrl;
-  }
-  Future<String> uploadImage06(imageFile) async {
-    String fileName = DateTime.now().millisecondsSinceEpoch.toString();
-    Reference reference = FirebaseStorage.instance.ref().child("Shop${prodId}").child("$fileName.jpg");
-    UploadTask uploadTask = reference.putFile(imageFile);
-
-    TaskSnapshot storageSnap = await uploadTask;
-    String downloadUrl = await storageSnap.ref.getDownloadURL();
-    return downloadUrl;
-  }
-  Future<String> uploadImage07(imageFile) async {
-    String fileName = DateTime.now().millisecondsSinceEpoch.toString();
-    Reference reference = FirebaseStorage.instance.ref().child("Shop${prodId}").child("$fileName.jpg");
-    UploadTask uploadTask = reference.putFile(imageFile);
-
-    TaskSnapshot storageSnap = await uploadTask;
-    String downloadUrl = await storageSnap.ref.getDownloadURL();
-    return downloadUrl;
-  }
-  Future<String> uploadImage08(imageFile) async {
-    String fileName = DateTime.now().millisecondsSinceEpoch.toString();
-    Reference reference = FirebaseStorage.instance.ref().child("Shop${prodId}").child("$fileName.jpg");
-    UploadTask uploadTask = reference.putFile(imageFile);
-
-    TaskSnapshot storageSnap = await uploadTask;
-    String downloadUrl = await storageSnap.ref.getDownloadURL();
-    return downloadUrl;
-  }
-  Future<String> uploadImage09(imageFile) async {
-    String fileName = DateTime.now().millisecondsSinceEpoch.toString();
-    Reference reference = FirebaseStorage.instance.ref().child("Shop${prodId}").child("$fileName.jpg");
-    UploadTask uploadTask = reference.putFile(imageFile);
-
-    TaskSnapshot storageSnap = await uploadTask;
-    String downloadUrl = await storageSnap.ref.getDownloadURL();
-    return downloadUrl;
-  }
-  Future<String> uploadImage010(imageFile) async {
-    String fileName = DateTime.now().millisecondsSinceEpoch.toString();
-    Reference reference = FirebaseStorage.instance.ref().child("Shop${prodId}").child("$fileName.jpg");
-    UploadTask uploadTask = reference.putFile(imageFile);
-
-    TaskSnapshot storageSnap = await uploadTask;
-    String downloadUrl = await storageSnap.ref.getDownloadURL();
-    return downloadUrl;
-  }
-  Future<String> uploadImage011(imageFile) async {
-    String fileName = DateTime.now().millisecondsSinceEpoch.toString();
-    Reference reference = FirebaseStorage.instance.ref().child("Shop${prodId}").child("$fileName.jpg");
-    UploadTask uploadTask = reference.putFile(imageFile);
-
-    TaskSnapshot storageSnap = await uploadTask;
-    String downloadUrl = await storageSnap.ref.getDownloadURL();
-    return downloadUrl;
-  }
-  Future<String> uploadImage012(imageFile) async {
-    String fileName = DateTime.now().millisecondsSinceEpoch.toString();
-    Reference reference = FirebaseStorage.instance.ref().child("Shop${prodId}").child("$fileName.jpg");
-    UploadTask uploadTask = reference.putFile(imageFile);
-
-    TaskSnapshot storageSnap = await uploadTask;
-    String downloadUrl = await storageSnap.ref.getDownloadURL();
-    return downloadUrl;
-  }
-  Future<String> uploadImage013(imageFile) async {
-    String fileName = DateTime.now().millisecondsSinceEpoch.toString();
-    Reference reference = FirebaseStorage.instance.ref().child("Shop${prodId}").child("$fileName.jpg");
-    UploadTask uploadTask = reference.putFile(imageFile);
-
-    TaskSnapshot storageSnap = await uploadTask;
-    String downloadUrl = await storageSnap.ref.getDownloadURL();
-    return downloadUrl;
-  }
-  Future<String> uploadImage014(imageFile) async {
-    String fileName = DateTime.now().millisecondsSinceEpoch.toString();
-    Reference reference = FirebaseStorage.instance.ref().child("Shop${prodId}").child("$fileName.jpg");
-    UploadTask uploadTask = reference.putFile(imageFile);
-
-    TaskSnapshot storageSnap = await uploadTask;
-    String downloadUrl = await storageSnap.ref.getDownloadURL();
-    return downloadUrl;
-  }
-  Future<String> uploadImage015(imageFile) async {
-    String fileName = DateTime.now().millisecondsSinceEpoch.toString();
-    Reference reference = FirebaseStorage.instance.ref().child("Shop${prodId}").child("$fileName.jpg");
-    UploadTask uploadTask = reference.putFile(imageFile);
-
-    TaskSnapshot storageSnap = await uploadTask;
-    String downloadUrl = await storageSnap.ref.getDownloadURL();
-    return downloadUrl;
-  }
-  Future<String> uploadImage016(imageFile) async {
-    String fileName = DateTime.now().millisecondsSinceEpoch.toString();
-    Reference reference = FirebaseStorage.instance.ref().child("Shop${prodId}").child("$fileName.jpg");
-    UploadTask uploadTask = reference.putFile(imageFile);
-
-    TaskSnapshot storageSnap = await uploadTask;
-    String downloadUrl = await storageSnap.ref.getDownloadURL();
-    return downloadUrl;
-  }
-  Future<String> uploadImage017(imageFile) async {
-    String fileName = DateTime.now().millisecondsSinceEpoch.toString();
-    Reference reference = FirebaseStorage.instance.ref().child("Shop${prodId}").child("$fileName.jpg");
-    UploadTask uploadTask = reference.putFile(imageFile);
-
-    TaskSnapshot storageSnap = await uploadTask;
-    String downloadUrl = await storageSnap.ref.getDownloadURL();
-    return downloadUrl;
-  }
-  Future<String> uploadImage018(imageFile) async {
-    String fileName = DateTime.now().millisecondsSinceEpoch.toString();
-    Reference reference = FirebaseStorage.instance.ref().child("Shop${prodId}").child("$fileName.jpg");
-    UploadTask uploadTask = reference.putFile(imageFile);
-
-    TaskSnapshot storageSnap = await uploadTask;
-    String downloadUrl = await storageSnap.ref.getDownloadURL();
-    return downloadUrl;
-  }
-  Future<String> uploadImage019(imageFile) async {
-    String fileName = DateTime.now().millisecondsSinceEpoch.toString();
-    Reference reference = FirebaseStorage.instance.ref().child("Shop${prodId}").child("$fileName.jpg");
-    UploadTask uploadTask = reference.putFile(imageFile);
-
-    TaskSnapshot storageSnap = await uploadTask;
-    String downloadUrl = await storageSnap.ref.getDownloadURL();
-    return downloadUrl;
-  }
-  Future<String> uploadImage020(imageFile) async {
-    String fileName = DateTime.now().millisecondsSinceEpoch.toString();
-    Reference reference = FirebaseStorage.instance.ref().child("Shop${prodId}").child("$fileName.jpg");
-    UploadTask uploadTask = reference.putFile(imageFile);
-
-    TaskSnapshot storageSnap = await uploadTask;
-    String downloadUrl = await storageSnap.ref.getDownloadURL();
-    return downloadUrl;
-  }
-  Future<String> uploadImage021(imageFile) async {
-    String fileName = DateTime.now().millisecondsSinceEpoch.toString();
-    Reference reference = FirebaseStorage.instance.ref().child("Shop${prodId}").child("$fileName.jpg");
-    UploadTask uploadTask = reference.putFile(imageFile);
-
-    TaskSnapshot storageSnap = await uploadTask;
-    String downloadUrl = await storageSnap.ref.getDownloadURL();
-    return downloadUrl;
-  }
-  Future<String> uploadImage022(imageFile) async {
-    String fileName = DateTime.now().millisecondsSinceEpoch.toString();
-    Reference reference = FirebaseStorage.instance.ref().child("Shop${prodId}").child("$fileName.jpg");
-    UploadTask uploadTask = reference.putFile(imageFile);
-
-    TaskSnapshot storageSnap = await uploadTask;
-    String downloadUrl = await storageSnap.ref.getDownloadURL();
-    return downloadUrl;
-  }
-  Future<String> uploadImage023(imageFile) async {
-    String fileName = DateTime.now().millisecondsSinceEpoch.toString();
-    Reference reference = FirebaseStorage.instance.ref().child("Shop${prodId}").child("$fileName.jpg");
-    UploadTask uploadTask = reference.putFile(imageFile);
-
-    TaskSnapshot storageSnap = await uploadTask;
-    String downloadUrl = await storageSnap.ref.getDownloadURL();
-    return downloadUrl;
-  }
-  Future<String> uploadImage024(imageFile) async {
-    String fileName = DateTime.now().millisecondsSinceEpoch.toString();
-    Reference reference = FirebaseStorage.instance.ref().child("Shop${prodId}").child("$fileName.jpg");
-    UploadTask uploadTask = reference.putFile(imageFile);
-
-    TaskSnapshot storageSnap = await uploadTask;
-    String downloadUrl = await storageSnap.ref.getDownloadURL();
-    return downloadUrl;
-  }
-  Future<String> uploadImage025(imageFile) async {
-    String fileName = DateTime.now().millisecondsSinceEpoch.toString();
-    Reference reference = FirebaseStorage.instance.ref().child("Shop${prodId}").child("$fileName.jpg");
-    UploadTask uploadTask = reference.putFile(imageFile);
-
-    TaskSnapshot storageSnap = await uploadTask;
-    String downloadUrl = await storageSnap.ref.getDownloadURL();
-    return downloadUrl;
-  }
-  Future<String> uploadImage026(imageFile) async {
-    String fileName = DateTime.now().millisecondsSinceEpoch.toString();
-    Reference reference = FirebaseStorage.instance.ref().child("Shop${prodId}").child("$fileName.jpg");
-    UploadTask uploadTask = reference.putFile(imageFile);
-
-    TaskSnapshot storageSnap = await uploadTask;
-    String downloadUrl = await storageSnap.ref.getDownloadURL();
-    return downloadUrl;
-  }
-  Future<String> uploadImage027(imageFile) async {
-    String fileName = DateTime.now().millisecondsSinceEpoch.toString();
-    Reference reference = FirebaseStorage.instance.ref().child("Shop${prodId}").child("$fileName.jpg");
-    UploadTask uploadTask = reference.putFile(imageFile);
-
-    TaskSnapshot storageSnap = await uploadTask;
-    String downloadUrl = await storageSnap.ref.getDownloadURL();
-    return downloadUrl;
-  }
-  Future<String> uploadImage028(imageFile) async {
-    String fileName = DateTime.now().millisecondsSinceEpoch.toString();
-    Reference reference = FirebaseStorage.instance.ref().child("Shop${prodId}").child("$fileName.jpg");
-    UploadTask uploadTask = reference.putFile(imageFile);
-
-    TaskSnapshot storageSnap = await uploadTask;
-    String downloadUrl = await storageSnap.ref.getDownloadURL();
-    return downloadUrl;
-  }
-  Future<String> uploadImage029(imageFile) async {
-    String fileName = DateTime.now().millisecondsSinceEpoch.toString();
-    Reference reference = FirebaseStorage.instance.ref().child("Shop${prodId}").child("$fileName.jpg");
-    UploadTask uploadTask = reference.putFile(imageFile);
-
-    TaskSnapshot storageSnap = await uploadTask;
-    String downloadUrl = await storageSnap.ref.getDownloadURL();
-    return downloadUrl;
-  }
-  Future<String> uploadImage030(imageFile) async {
-    String fileName = DateTime.now().millisecondsSinceEpoch.toString();
-    Reference reference = FirebaseStorage.instance.ref().child("Shop${prodId}").child("$fileName.jpg");
-    UploadTask uploadTask = reference.putFile(imageFile);
-
-    TaskSnapshot storageSnap = await uploadTask;
-    String downloadUrl = await storageSnap.ref.getDownloadURL();
-    return downloadUrl;
-  }
-  Future<String> uploadImage031(imageFile) async {
-    String fileName = DateTime.now().millisecondsSinceEpoch.toString();
-    Reference reference = FirebaseStorage.instance.ref().child("Shop${prodId}").child("$fileName.jpg");
-    UploadTask uploadTask = reference.putFile(imageFile);
-
-    TaskSnapshot storageSnap = await uploadTask;
-    String downloadUrl = await storageSnap.ref.getDownloadURL();
-    return downloadUrl;
-  }
-  Future<String> uploadImage032(imageFile) async {
-    String fileName = DateTime.now().millisecondsSinceEpoch.toString();
-    Reference reference = FirebaseStorage.instance.ref().child("Shop${prodId}").child("$fileName.jpg");
-    UploadTask uploadTask = reference.putFile(imageFile);
-
-    TaskSnapshot storageSnap = await uploadTask;
-    String downloadUrl = await storageSnap.ref.getDownloadURL();
-    return downloadUrl;
-  }
-  Future<String> uploadImage033(imageFile) async {
-    String fileName = DateTime.now().millisecondsSinceEpoch.toString();
-    Reference reference = FirebaseStorage.instance.ref().child("Shop${prodId}").child("$fileName.jpg");
-    UploadTask uploadTask = reference.putFile(imageFile);
-
-    TaskSnapshot storageSnap = await uploadTask;
-    String downloadUrl = await storageSnap.ref.getDownloadURL();
-    return downloadUrl;
-  }
-  Future<String> uploadImage034(imageFile) async {
-    String fileName = DateTime.now().millisecondsSinceEpoch.toString();
-    Reference reference = FirebaseStorage.instance.ref().child("Shop${prodId}").child("$fileName.jpg");
-    UploadTask uploadTask = reference.putFile(imageFile);
-
-    TaskSnapshot storageSnap = await uploadTask;
-    String downloadUrl = await storageSnap.ref.getDownloadURL();
-    return downloadUrl;
-  }
-  Future<String> uploadImage035(imageFile) async {
-    String fileName = DateTime.now().millisecondsSinceEpoch.toString();
-    Reference reference = FirebaseStorage.instance.ref().child("Shop${prodId}").child("$fileName.jpg");
-    UploadTask uploadTask = reference.putFile(imageFile);
-
-    TaskSnapshot storageSnap = await uploadTask;
-    String downloadUrl = await storageSnap.ref.getDownloadURL();
-    return downloadUrl;
-  }
-  Future<String> uploadImage036(imageFile) async {
-    String fileName = DateTime.now().millisecondsSinceEpoch.toString();
-    Reference reference = FirebaseStorage.instance.ref().child("Shop${prodId}").child("$fileName.jpg");
-    UploadTask uploadTask = reference.putFile(imageFile);
-
-    TaskSnapshot storageSnap = await uploadTask;
-    String downloadUrl = await storageSnap.ref.getDownloadURL();
-    return downloadUrl;
-  }
-  Future<String> uploadImage037(imageFile) async {
-    String fileName = DateTime.now().millisecondsSinceEpoch.toString();
-    Reference reference = FirebaseStorage.instance.ref().child("Shop${prodId}").child("$fileName.jpg");
-    UploadTask uploadTask = reference.putFile(imageFile);
-
-    TaskSnapshot storageSnap = await uploadTask;
-    String downloadUrl = await storageSnap.ref.getDownloadURL();
-    return downloadUrl;
-  }
-  Future<String> uploadImage038(imageFile) async {
-    String fileName = DateTime.now().millisecondsSinceEpoch.toString();
-    Reference reference = FirebaseStorage.instance.ref().child("Shop${prodId}").child("$fileName.jpg");
-    UploadTask uploadTask = reference.putFile(imageFile);
-
-    TaskSnapshot storageSnap = await uploadTask;
-    String downloadUrl = await storageSnap.ref.getDownloadURL();
-    return downloadUrl;
-  }
-  Future<String> uploadImage039(imageFile) async {
-    String fileName = DateTime.now().millisecondsSinceEpoch.toString();
-    Reference reference = FirebaseStorage.instance.ref().child("Shop${prodId}").child("$fileName.jpg");
-    UploadTask uploadTask = reference.putFile(imageFile);
-
-    TaskSnapshot storageSnap = await uploadTask;
-    String downloadUrl = await storageSnap.ref.getDownloadURL();
-    return downloadUrl;
-  }
-  Future<String> uploadImage040(imageFile) async {
-    String fileName = DateTime.now().millisecondsSinceEpoch.toString();
-    Reference reference = FirebaseStorage.instance.ref().child("Shop${prodId}").child("$fileName.jpg");
-    UploadTask uploadTask = reference.putFile(imageFile);
-
-    TaskSnapshot storageSnap = await uploadTask;
-    String downloadUrl = await storageSnap.ref.getDownloadURL();
-    return downloadUrl;
-  }
-  Future<String> uploadImage041(imageFile) async {
-    String fileName = DateTime.now().millisecondsSinceEpoch.toString();
-    Reference reference = FirebaseStorage.instance.ref().child("Shop${prodId}").child("$fileName.jpg");
-    UploadTask uploadTask = reference.putFile(imageFile);
-
-    TaskSnapshot storageSnap = await uploadTask;
-    String downloadUrl = await storageSnap.ref.getDownloadURL();
-    return downloadUrl;
-  }
-  Future<String> uploadImage042(imageFile) async {
-    String fileName = DateTime.now().millisecondsSinceEpoch.toString();
-    Reference reference = FirebaseStorage.instance.ref().child("Shop${prodId}").child("$fileName.jpg");
-    UploadTask uploadTask = reference.putFile(imageFile);
-
-    TaskSnapshot storageSnap = await uploadTask;
-    String downloadUrl = await storageSnap.ref.getDownloadURL();
-    return downloadUrl;
-  }
-  Future<String> uploadImage043(imageFile) async {
-    String fileName = DateTime.now().millisecondsSinceEpoch.toString();
-    Reference reference = FirebaseStorage.instance.ref().child("Shop${prodId}").child("$fileName.jpg");
-    UploadTask uploadTask = reference.putFile(imageFile);
-
-    TaskSnapshot storageSnap = await uploadTask;
-    String downloadUrl = await storageSnap.ref.getDownloadURL();
-    return downloadUrl;
-  }
-  Future<String> uploadImage044(imageFile) async {
-    String fileName = DateTime.now().millisecondsSinceEpoch.toString();
-    Reference reference = FirebaseStorage.instance.ref().child("Shop${prodId}").child("$fileName.jpg");
-    UploadTask uploadTask = reference.putFile(imageFile);
-
-    TaskSnapshot storageSnap = await uploadTask;
-    String downloadUrl = await storageSnap.ref.getDownloadURL();
-    return downloadUrl;
-  }
-  Future<String> uploadImage045(imageFile) async {
-    String fileName = DateTime.now().millisecondsSinceEpoch.toString();
-    Reference reference = FirebaseStorage.instance.ref().child("Shop${prodId}").child("$fileName.jpg");
-    UploadTask uploadTask = reference.putFile(imageFile);
-
-    TaskSnapshot storageSnap = await uploadTask;
-    String downloadUrl = await storageSnap.ref.getDownloadURL();
-    return downloadUrl;
-  }
-  Future<String> uploadImage046(imageFile) async {
-    String fileName = DateTime.now().millisecondsSinceEpoch.toString();
-    Reference reference = FirebaseStorage.instance.ref().child("Shop${prodId}").child("$fileName.jpg");
-    UploadTask uploadTask = reference.putFile(imageFile);
-
-    TaskSnapshot storageSnap = await uploadTask;
-    String downloadUrl = await storageSnap.ref.getDownloadURL();
-    return downloadUrl;
-  }
-  Future<String> uploadImage047(imageFile) async {
-    String fileName = DateTime.now().millisecondsSinceEpoch.toString();
-    Reference reference = FirebaseStorage.instance.ref().child("Shop${prodId}").child("$fileName.jpg");
-    UploadTask uploadTask = reference.putFile(imageFile);
-
-    TaskSnapshot storageSnap = await uploadTask;
-    String downloadUrl = await storageSnap.ref.getDownloadURL();
-    return downloadUrl;
-  }
-  Future<String> uploadImage048(imageFile) async {
-    String fileName = DateTime.now().millisecondsSinceEpoch.toString();
-    Reference reference = FirebaseStorage.instance.ref().child("Shop${prodId}").child("$fileName.jpg");
-    UploadTask uploadTask = reference.putFile(imageFile);
-
-    TaskSnapshot storageSnap = await uploadTask;
-    String downloadUrl = await storageSnap.ref.getDownloadURL();
-    return downloadUrl;
-  }
-  Future<String> uploadImage049(imageFile) async {
-    String fileName = DateTime.now().millisecondsSinceEpoch.toString();
-    Reference reference = FirebaseStorage.instance.ref().child("Shop${prodId}").child("$fileName.jpg");
-    UploadTask uploadTask = reference.putFile(imageFile);
-
-    TaskSnapshot storageSnap = await uploadTask;
-    String downloadUrl = await storageSnap.ref.getDownloadURL();
-    return downloadUrl;
-  }
-  Future<String> uploadImage050(imageFile) async {
-    String fileName = DateTime.now().millisecondsSinceEpoch.toString();
-    Reference reference = FirebaseStorage.instance.ref().child("Shop${prodId}").child("$fileName.jpg");
-    UploadTask uploadTask = reference.putFile(imageFile);
-
-    TaskSnapshot storageSnap = await uploadTask;
-    String downloadUrl = await storageSnap.ref.getDownloadURL();
-    return downloadUrl;
-  }
+  //
+  // Future<String> uploadImage01(imageFile) async {
+  //   String fileName = DateTime.now().millisecondsSinceEpoch.toString();
+  //   Reference reference = FirebaseStorage.instance.ref().child("Shop${prodId}").child("$fileName.jpg");
+  //   UploadTask uploadTask = reference.putFile(imageFile);
+  //
+  //   TaskSnapshot storageSnap = await uploadTask;
+  //   String downloadUrl = await storageSnap.ref.getDownloadURL();
+  //   return downloadUrl;
+  // }
+  // Future<String> uploadImage02(imageFile) async {
+  //   String fileName = DateTime.now().millisecondsSinceEpoch.toString();
+  //   Reference reference = FirebaseStorage.instance.ref().child("Shop${prodId}").child("$fileName.jpg");
+  //   UploadTask uploadTask = reference.putFile(imageFile);
+  //
+  //   TaskSnapshot storageSnap = await uploadTask;
+  //   String downloadUrl = await storageSnap.ref.getDownloadURL();
+  //   return downloadUrl;
+  // }
+  // Future<String> uploadImage03(imageFile) async {
+  //   String fileName = DateTime.now().millisecondsSinceEpoch.toString();
+  //   Reference reference = FirebaseStorage.instance.ref().child("Shop${prodId}").child("$fileName.jpg");
+  //   UploadTask uploadTask = reference.putFile(imageFile);
+  //
+  //   TaskSnapshot storageSnap = await uploadTask;
+  //   String downloadUrl = await storageSnap.ref.getDownloadURL();
+  //   return downloadUrl;
+  // }
+  // Future<String> uploadImage04(imageFile) async {
+  //   String fileName = DateTime.now().millisecondsSinceEpoch.toString();
+  //   Reference reference = FirebaseStorage.instance.ref().child("Shop${prodId}").child("$fileName.jpg");
+  //   UploadTask uploadTask = reference.putFile(imageFile);
+  //
+  //   TaskSnapshot storageSnap = await uploadTask;
+  //   String downloadUrl = await storageSnap.ref.getDownloadURL();
+  //   return downloadUrl;
+  // }
+  // Future<String> uploadImage05(imageFile) async {
+  //   String fileName = DateTime.now().millisecondsSinceEpoch.toString();
+  //   Reference reference = FirebaseStorage.instance.ref().child("Shop${prodId}").child("$fileName.jpg");
+  //   UploadTask uploadTask = reference.putFile(imageFile);
+  //
+  //   TaskSnapshot storageSnap = await uploadTask;
+  //   String downloadUrl = await storageSnap.ref.getDownloadURL();
+  //   return downloadUrl;
+  // }
+  // Future<String> uploadImage06(imageFile) async {
+  //   String fileName = DateTime.now().millisecondsSinceEpoch.toString();
+  //   Reference reference = FirebaseStorage.instance.ref().child("Shop${prodId}").child("$fileName.jpg");
+  //   UploadTask uploadTask = reference.putFile(imageFile);
+  //
+  //   TaskSnapshot storageSnap = await uploadTask;
+  //   String downloadUrl = await storageSnap.ref.getDownloadURL();
+  //   return downloadUrl;
+  // }
+  // Future<String> uploadImage07(imageFile) async {
+  //   String fileName = DateTime.now().millisecondsSinceEpoch.toString();
+  //   Reference reference = FirebaseStorage.instance.ref().child("Shop${prodId}").child("$fileName.jpg");
+  //   UploadTask uploadTask = reference.putFile(imageFile);
+  //
+  //   TaskSnapshot storageSnap = await uploadTask;
+  //   String downloadUrl = await storageSnap.ref.getDownloadURL();
+  //   return downloadUrl;
+  // }
+  // Future<String> uploadImage08(imageFile) async {
+  //   String fileName = DateTime.now().millisecondsSinceEpoch.toString();
+  //   Reference reference = FirebaseStorage.instance.ref().child("Shop${prodId}").child("$fileName.jpg");
+  //   UploadTask uploadTask = reference.putFile(imageFile);
+  //
+  //   TaskSnapshot storageSnap = await uploadTask;
+  //   String downloadUrl = await storageSnap.ref.getDownloadURL();
+  //   return downloadUrl;
+  // }
+  // Future<String> uploadImage09(imageFile) async {
+  //   String fileName = DateTime.now().millisecondsSinceEpoch.toString();
+  //   Reference reference = FirebaseStorage.instance.ref().child("Shop${prodId}").child("$fileName.jpg");
+  //   UploadTask uploadTask = reference.putFile(imageFile);
+  //
+  //   TaskSnapshot storageSnap = await uploadTask;
+  //   String downloadUrl = await storageSnap.ref.getDownloadURL();
+  //   return downloadUrl;
+  // }
+  // Future<String> uploadImage010(imageFile) async {
+  //   String fileName = DateTime.now().millisecondsSinceEpoch.toString();
+  //   Reference reference = FirebaseStorage.instance.ref().child("Shop${prodId}").child("$fileName.jpg");
+  //   UploadTask uploadTask = reference.putFile(imageFile);
+  //
+  //   TaskSnapshot storageSnap = await uploadTask;
+  //   String downloadUrl = await storageSnap.ref.getDownloadURL();
+  //   return downloadUrl;
+  // }
+  // Future<String> uploadImage011(imageFile) async {
+  //   String fileName = DateTime.now().millisecondsSinceEpoch.toString();
+  //   Reference reference = FirebaseStorage.instance.ref().child("Shop${prodId}").child("$fileName.jpg");
+  //   UploadTask uploadTask = reference.putFile(imageFile);
+  //
+  //   TaskSnapshot storageSnap = await uploadTask;
+  //   String downloadUrl = await storageSnap.ref.getDownloadURL();
+  //   return downloadUrl;
+  // }
+  // Future<String> uploadImage012(imageFile) async {
+  //   String fileName = DateTime.now().millisecondsSinceEpoch.toString();
+  //   Reference reference = FirebaseStorage.instance.ref().child("Shop${prodId}").child("$fileName.jpg");
+  //   UploadTask uploadTask = reference.putFile(imageFile);
+  //
+  //   TaskSnapshot storageSnap = await uploadTask;
+  //   String downloadUrl = await storageSnap.ref.getDownloadURL();
+  //   return downloadUrl;
+  // }
+  // Future<String> uploadImage013(imageFile) async {
+  //   String fileName = DateTime.now().millisecondsSinceEpoch.toString();
+  //   Reference reference = FirebaseStorage.instance.ref().child("Shop${prodId}").child("$fileName.jpg");
+  //   UploadTask uploadTask = reference.putFile(imageFile);
+  //
+  //   TaskSnapshot storageSnap = await uploadTask;
+  //   String downloadUrl = await storageSnap.ref.getDownloadURL();
+  //   return downloadUrl;
+  // }
+  // Future<String> uploadImage014(imageFile) async {
+  //   String fileName = DateTime.now().millisecondsSinceEpoch.toString();
+  //   Reference reference = FirebaseStorage.instance.ref().child("Shop${prodId}").child("$fileName.jpg");
+  //   UploadTask uploadTask = reference.putFile(imageFile);
+  //
+  //   TaskSnapshot storageSnap = await uploadTask;
+  //   String downloadUrl = await storageSnap.ref.getDownloadURL();
+  //   return downloadUrl;
+  // }
+  // Future<String> uploadImage015(imageFile) async {
+  //   String fileName = DateTime.now().millisecondsSinceEpoch.toString();
+  //   Reference reference = FirebaseStorage.instance.ref().child("Shop${prodId}").child("$fileName.jpg");
+  //   UploadTask uploadTask = reference.putFile(imageFile);
+  //
+  //   TaskSnapshot storageSnap = await uploadTask;
+  //   String downloadUrl = await storageSnap.ref.getDownloadURL();
+  //   return downloadUrl;
+  // }
+  // Future<String> uploadImage016(imageFile) async {
+  //   String fileName = DateTime.now().millisecondsSinceEpoch.toString();
+  //   Reference reference = FirebaseStorage.instance.ref().child("Shop${prodId}").child("$fileName.jpg");
+  //   UploadTask uploadTask = reference.putFile(imageFile);
+  //
+  //   TaskSnapshot storageSnap = await uploadTask;
+  //   String downloadUrl = await storageSnap.ref.getDownloadURL();
+  //   return downloadUrl;
+  // }
+  // Future<String> uploadImage017(imageFile) async {
+  //   String fileName = DateTime.now().millisecondsSinceEpoch.toString();
+  //   Reference reference = FirebaseStorage.instance.ref().child("Shop${prodId}").child("$fileName.jpg");
+  //   UploadTask uploadTask = reference.putFile(imageFile);
+  //
+  //   TaskSnapshot storageSnap = await uploadTask;
+  //   String downloadUrl = await storageSnap.ref.getDownloadURL();
+  //   return downloadUrl;
+  // }
+  // Future<String> uploadImage018(imageFile) async {
+  //   String fileName = DateTime.now().millisecondsSinceEpoch.toString();
+  //   Reference reference = FirebaseStorage.instance.ref().child("Shop${prodId}").child("$fileName.jpg");
+  //   UploadTask uploadTask = reference.putFile(imageFile);
+  //
+  //   TaskSnapshot storageSnap = await uploadTask;
+  //   String downloadUrl = await storageSnap.ref.getDownloadURL();
+  //   return downloadUrl;
+  // }
+  // Future<String> uploadImage019(imageFile) async {
+  //   String fileName = DateTime.now().millisecondsSinceEpoch.toString();
+  //   Reference reference = FirebaseStorage.instance.ref().child("Shop${prodId}").child("$fileName.jpg");
+  //   UploadTask uploadTask = reference.putFile(imageFile);
+  //
+  //   TaskSnapshot storageSnap = await uploadTask;
+  //   String downloadUrl = await storageSnap.ref.getDownloadURL();
+  //   return downloadUrl;
+  // }
+  // Future<String> uploadImage020(imageFile) async {
+  //   String fileName = DateTime.now().millisecondsSinceEpoch.toString();
+  //   Reference reference = FirebaseStorage.instance.ref().child("Shop${prodId}").child("$fileName.jpg");
+  //   UploadTask uploadTask = reference.putFile(imageFile);
+  //
+  //   TaskSnapshot storageSnap = await uploadTask;
+  //   String downloadUrl = await storageSnap.ref.getDownloadURL();
+  //   return downloadUrl;
+  // }
+  // Future<String> uploadImage021(imageFile) async {
+  //   String fileName = DateTime.now().millisecondsSinceEpoch.toString();
+  //   Reference reference = FirebaseStorage.instance.ref().child("Shop${prodId}").child("$fileName.jpg");
+  //   UploadTask uploadTask = reference.putFile(imageFile);
+  //
+  //   TaskSnapshot storageSnap = await uploadTask;
+  //   String downloadUrl = await storageSnap.ref.getDownloadURL();
+  //   return downloadUrl;
+  // }
+  // Future<String> uploadImage022(imageFile) async {
+  //   String fileName = DateTime.now().millisecondsSinceEpoch.toString();
+  //   Reference reference = FirebaseStorage.instance.ref().child("Shop${prodId}").child("$fileName.jpg");
+  //   UploadTask uploadTask = reference.putFile(imageFile);
+  //
+  //   TaskSnapshot storageSnap = await uploadTask;
+  //   String downloadUrl = await storageSnap.ref.getDownloadURL();
+  //   return downloadUrl;
+  // }
+  // Future<String> uploadImage023(imageFile) async {
+  //   String fileName = DateTime.now().millisecondsSinceEpoch.toString();
+  //   Reference reference = FirebaseStorage.instance.ref().child("Shop${prodId}").child("$fileName.jpg");
+  //   UploadTask uploadTask = reference.putFile(imageFile);
+  //
+  //   TaskSnapshot storageSnap = await uploadTask;
+  //   String downloadUrl = await storageSnap.ref.getDownloadURL();
+  //   return downloadUrl;
+  // }
+  // Future<String> uploadImage024(imageFile) async {
+  //   String fileName = DateTime.now().millisecondsSinceEpoch.toString();
+  //   Reference reference = FirebaseStorage.instance.ref().child("Shop${prodId}").child("$fileName.jpg");
+  //   UploadTask uploadTask = reference.putFile(imageFile);
+  //
+  //   TaskSnapshot storageSnap = await uploadTask;
+  //   String downloadUrl = await storageSnap.ref.getDownloadURL();
+  //   return downloadUrl;
+  // }
+  // Future<String> uploadImage025(imageFile) async {
+  //   String fileName = DateTime.now().millisecondsSinceEpoch.toString();
+  //   Reference reference = FirebaseStorage.instance.ref().child("Shop${prodId}").child("$fileName.jpg");
+  //   UploadTask uploadTask = reference.putFile(imageFile);
+  //
+  //   TaskSnapshot storageSnap = await uploadTask;
+  //   String downloadUrl = await storageSnap.ref.getDownloadURL();
+  //   return downloadUrl;
+  // }
+  // Future<String> uploadImage026(imageFile) async {
+  //   String fileName = DateTime.now().millisecondsSinceEpoch.toString();
+  //   Reference reference = FirebaseStorage.instance.ref().child("Shop${prodId}").child("$fileName.jpg");
+  //   UploadTask uploadTask = reference.putFile(imageFile);
+  //
+  //   TaskSnapshot storageSnap = await uploadTask;
+  //   String downloadUrl = await storageSnap.ref.getDownloadURL();
+  //   return downloadUrl;
+  // }
+  // Future<String> uploadImage027(imageFile) async {
+  //   String fileName = DateTime.now().millisecondsSinceEpoch.toString();
+  //   Reference reference = FirebaseStorage.instance.ref().child("Shop${prodId}").child("$fileName.jpg");
+  //   UploadTask uploadTask = reference.putFile(imageFile);
+  //
+  //   TaskSnapshot storageSnap = await uploadTask;
+  //   String downloadUrl = await storageSnap.ref.getDownloadURL();
+  //   return downloadUrl;
+  // }
+  // Future<String> uploadImage028(imageFile) async {
+  //   String fileName = DateTime.now().millisecondsSinceEpoch.toString();
+  //   Reference reference = FirebaseStorage.instance.ref().child("Shop${prodId}").child("$fileName.jpg");
+  //   UploadTask uploadTask = reference.putFile(imageFile);
+  //
+  //   TaskSnapshot storageSnap = await uploadTask;
+  //   String downloadUrl = await storageSnap.ref.getDownloadURL();
+  //   return downloadUrl;
+  // }
+  // Future<String> uploadImage029(imageFile) async {
+  //   String fileName = DateTime.now().millisecondsSinceEpoch.toString();
+  //   Reference reference = FirebaseStorage.instance.ref().child("Shop${prodId}").child("$fileName.jpg");
+  //   UploadTask uploadTask = reference.putFile(imageFile);
+  //
+  //   TaskSnapshot storageSnap = await uploadTask;
+  //   String downloadUrl = await storageSnap.ref.getDownloadURL();
+  //   return downloadUrl;
+  // }
+  // Future<String> uploadImage030(imageFile) async {
+  //   String fileName = DateTime.now().millisecondsSinceEpoch.toString();
+  //   Reference reference = FirebaseStorage.instance.ref().child("Shop${prodId}").child("$fileName.jpg");
+  //   UploadTask uploadTask = reference.putFile(imageFile);
+  //
+  //   TaskSnapshot storageSnap = await uploadTask;
+  //   String downloadUrl = await storageSnap.ref.getDownloadURL();
+  //   return downloadUrl;
+  // }
+  // Future<String> uploadImage031(imageFile) async {
+  //   String fileName = DateTime.now().millisecondsSinceEpoch.toString();
+  //   Reference reference = FirebaseStorage.instance.ref().child("Shop${prodId}").child("$fileName.jpg");
+  //   UploadTask uploadTask = reference.putFile(imageFile);
+  //
+  //   TaskSnapshot storageSnap = await uploadTask;
+  //   String downloadUrl = await storageSnap.ref.getDownloadURL();
+  //   return downloadUrl;
+  // }
+  // Future<String> uploadImage032(imageFile) async {
+  //   String fileName = DateTime.now().millisecondsSinceEpoch.toString();
+  //   Reference reference = FirebaseStorage.instance.ref().child("Shop${prodId}").child("$fileName.jpg");
+  //   UploadTask uploadTask = reference.putFile(imageFile);
+  //
+  //   TaskSnapshot storageSnap = await uploadTask;
+  //   String downloadUrl = await storageSnap.ref.getDownloadURL();
+  //   return downloadUrl;
+  // }
+  // Future<String> uploadImage033(imageFile) async {
+  //   String fileName = DateTime.now().millisecondsSinceEpoch.toString();
+  //   Reference reference = FirebaseStorage.instance.ref().child("Shop${prodId}").child("$fileName.jpg");
+  //   UploadTask uploadTask = reference.putFile(imageFile);
+  //
+  //   TaskSnapshot storageSnap = await uploadTask;
+  //   String downloadUrl = await storageSnap.ref.getDownloadURL();
+  //   return downloadUrl;
+  // }
+  // Future<String> uploadImage034(imageFile) async {
+  //   String fileName = DateTime.now().millisecondsSinceEpoch.toString();
+  //   Reference reference = FirebaseStorage.instance.ref().child("Shop${prodId}").child("$fileName.jpg");
+  //   UploadTask uploadTask = reference.putFile(imageFile);
+  //
+  //   TaskSnapshot storageSnap = await uploadTask;
+  //   String downloadUrl = await storageSnap.ref.getDownloadURL();
+  //   return downloadUrl;
+  // }
+  // Future<String> uploadImage035(imageFile) async {
+  //   String fileName = DateTime.now().millisecondsSinceEpoch.toString();
+  //   Reference reference = FirebaseStorage.instance.ref().child("Shop${prodId}").child("$fileName.jpg");
+  //   UploadTask uploadTask = reference.putFile(imageFile);
+  //
+  //   TaskSnapshot storageSnap = await uploadTask;
+  //   String downloadUrl = await storageSnap.ref.getDownloadURL();
+  //   return downloadUrl;
+  // }
+  // Future<String> uploadImage036(imageFile) async {
+  //   String fileName = DateTime.now().millisecondsSinceEpoch.toString();
+  //   Reference reference = FirebaseStorage.instance.ref().child("Shop${prodId}").child("$fileName.jpg");
+  //   UploadTask uploadTask = reference.putFile(imageFile);
+  //
+  //   TaskSnapshot storageSnap = await uploadTask;
+  //   String downloadUrl = await storageSnap.ref.getDownloadURL();
+  //   return downloadUrl;
+  // }
+  // Future<String> uploadImage037(imageFile) async {
+  //   String fileName = DateTime.now().millisecondsSinceEpoch.toString();
+  //   Reference reference = FirebaseStorage.instance.ref().child("Shop${prodId}").child("$fileName.jpg");
+  //   UploadTask uploadTask = reference.putFile(imageFile);
+  //
+  //   TaskSnapshot storageSnap = await uploadTask;
+  //   String downloadUrl = await storageSnap.ref.getDownloadURL();
+  //   return downloadUrl;
+  // }
+  // Future<String> uploadImage038(imageFile) async {
+  //   String fileName = DateTime.now().millisecondsSinceEpoch.toString();
+  //   Reference reference = FirebaseStorage.instance.ref().child("Shop${prodId}").child("$fileName.jpg");
+  //   UploadTask uploadTask = reference.putFile(imageFile);
+  //
+  //   TaskSnapshot storageSnap = await uploadTask;
+  //   String downloadUrl = await storageSnap.ref.getDownloadURL();
+  //   return downloadUrl;
+  // }
+  // Future<String> uploadImage039(imageFile) async {
+  //   String fileName = DateTime.now().millisecondsSinceEpoch.toString();
+  //   Reference reference = FirebaseStorage.instance.ref().child("Shop${prodId}").child("$fileName.jpg");
+  //   UploadTask uploadTask = reference.putFile(imageFile);
+  //
+  //   TaskSnapshot storageSnap = await uploadTask;
+  //   String downloadUrl = await storageSnap.ref.getDownloadURL();
+  //   return downloadUrl;
+  // }
+  // Future<String> uploadImage040(imageFile) async {
+  //   String fileName = DateTime.now().millisecondsSinceEpoch.toString();
+  //   Reference reference = FirebaseStorage.instance.ref().child("Shop${prodId}").child("$fileName.jpg");
+  //   UploadTask uploadTask = reference.putFile(imageFile);
+  //
+  //   TaskSnapshot storageSnap = await uploadTask;
+  //   String downloadUrl = await storageSnap.ref.getDownloadURL();
+  //   return downloadUrl;
+  // }
+  // Future<String> uploadImage041(imageFile) async {
+  //   String fileName = DateTime.now().millisecondsSinceEpoch.toString();
+  //   Reference reference = FirebaseStorage.instance.ref().child("Shop${prodId}").child("$fileName.jpg");
+  //   UploadTask uploadTask = reference.putFile(imageFile);
+  //
+  //   TaskSnapshot storageSnap = await uploadTask;
+  //   String downloadUrl = await storageSnap.ref.getDownloadURL();
+  //   return downloadUrl;
+  // }
+  // Future<String> uploadImage042(imageFile) async {
+  //   String fileName = DateTime.now().millisecondsSinceEpoch.toString();
+  //   Reference reference = FirebaseStorage.instance.ref().child("Shop${prodId}").child("$fileName.jpg");
+  //   UploadTask uploadTask = reference.putFile(imageFile);
+  //
+  //   TaskSnapshot storageSnap = await uploadTask;
+  //   String downloadUrl = await storageSnap.ref.getDownloadURL();
+  //   return downloadUrl;
+  // }
+  // Future<String> uploadImage043(imageFile) async {
+  //   String fileName = DateTime.now().millisecondsSinceEpoch.toString();
+  //   Reference reference = FirebaseStorage.instance.ref().child("Shop${prodId}").child("$fileName.jpg");
+  //   UploadTask uploadTask = reference.putFile(imageFile);
+  //
+  //   TaskSnapshot storageSnap = await uploadTask;
+  //   String downloadUrl = await storageSnap.ref.getDownloadURL();
+  //   return downloadUrl;
+  // }
+  // Future<String> uploadImage044(imageFile) async {
+  //   String fileName = DateTime.now().millisecondsSinceEpoch.toString();
+  //   Reference reference = FirebaseStorage.instance.ref().child("Shop${prodId}").child("$fileName.jpg");
+  //   UploadTask uploadTask = reference.putFile(imageFile);
+  //
+  //   TaskSnapshot storageSnap = await uploadTask;
+  //   String downloadUrl = await storageSnap.ref.getDownloadURL();
+  //   return downloadUrl;
+  // }
+  // Future<String> uploadImage045(imageFile) async {
+  //   String fileName = DateTime.now().millisecondsSinceEpoch.toString();
+  //   Reference reference = FirebaseStorage.instance.ref().child("Shop${prodId}").child("$fileName.jpg");
+  //   UploadTask uploadTask = reference.putFile(imageFile);
+  //
+  //   TaskSnapshot storageSnap = await uploadTask;
+  //   String downloadUrl = await storageSnap.ref.getDownloadURL();
+  //   return downloadUrl;
+  // }
+  // Future<String> uploadImage046(imageFile) async {
+  //   String fileName = DateTime.now().millisecondsSinceEpoch.toString();
+  //   Reference reference = FirebaseStorage.instance.ref().child("Shop${prodId}").child("$fileName.jpg");
+  //   UploadTask uploadTask = reference.putFile(imageFile);
+  //
+  //   TaskSnapshot storageSnap = await uploadTask;
+  //   String downloadUrl = await storageSnap.ref.getDownloadURL();
+  //   return downloadUrl;
+  // }
+  // Future<String> uploadImage047(imageFile) async {
+  //   String fileName = DateTime.now().millisecondsSinceEpoch.toString();
+  //   Reference reference = FirebaseStorage.instance.ref().child("Shop${prodId}").child("$fileName.jpg");
+  //   UploadTask uploadTask = reference.putFile(imageFile);
+  //
+  //   TaskSnapshot storageSnap = await uploadTask;
+  //   String downloadUrl = await storageSnap.ref.getDownloadURL();
+  //   return downloadUrl;
+  // }
+  // Future<String> uploadImage048(imageFile) async {
+  //   String fileName = DateTime.now().millisecondsSinceEpoch.toString();
+  //   Reference reference = FirebaseStorage.instance.ref().child("Shop${prodId}").child("$fileName.jpg");
+  //   UploadTask uploadTask = reference.putFile(imageFile);
+  //
+  //   TaskSnapshot storageSnap = await uploadTask;
+  //   String downloadUrl = await storageSnap.ref.getDownloadURL();
+  //   return downloadUrl;
+  // }
+  // Future<String> uploadImage049(imageFile) async {
+  //   String fileName = DateTime.now().millisecondsSinceEpoch.toString();
+  //   Reference reference = FirebaseStorage.instance.ref().child("Shop${prodId}").child("$fileName.jpg");
+  //   UploadTask uploadTask = reference.putFile(imageFile);
+  //
+  //   TaskSnapshot storageSnap = await uploadTask;
+  //   String downloadUrl = await storageSnap.ref.getDownloadURL();
+  //   return downloadUrl;
+  // }
+  // Future<String> uploadImage050(imageFile) async {
+  //   String fileName = DateTime.now().millisecondsSinceEpoch.toString();
+  //   Reference reference = FirebaseStorage.instance.ref().child("Shop${prodId}").child("$fileName.jpg");
+  //   UploadTask uploadTask = reference.putFile(imageFile);
+  //
+  //   TaskSnapshot storageSnap = await uploadTask;
+  //   String downloadUrl = await storageSnap.ref.getDownloadURL();
+  //   return downloadUrl;
+  // }
 
   Future<dynamic> postImage(Asset imageFile) async {
 //    ByteData byteData = await imageFile.requestOriginal(quality: 75);
@@ -13204,7 +13210,7 @@ color(){
                   );
                 }),
             title: Text(
-              "Product Details",
+              "Upload to Shop",
               style: TextStyle(color: Colors.white),
             ),
 
@@ -13223,9 +13229,9 @@ color(){
             Container(
               child: page0(),
             ),
-            Container(
-              child: page4(),
-            ),
+            // Container(
+            //   child: page4(),
+            // ),
 
             Container(
               child: page3(),
@@ -13325,63 +13331,87 @@ page0(){
                     ),
                     SizedBox(height: SizeConfig.safeBlockVertical*0.5,),
 
-                    Container(
-                      margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0,8.0),
-                      child: ElevatedButton(
+                    Row(
+                      mainAxisAlignment:MainAxisAlignment.spaceEvenly,
+                      children: [
+                        Container(
+                          margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0,8.0),
+                          child: ElevatedButton(
 
-                        style: ElevatedButton.styleFrom(
+                            style: ElevatedButton.styleFrom(
 
-                          primary:kButton, // foreground
+                                                            primary:   Colors.black,
+  
+                         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+
+  ),
+
+                            child: Text('$value',style:TextStyle(color: Colors.white) ,),
+                            onPressed: (){
+                              showModalBottomSheet(context: context, builder:(BuildContext context){
+
+
+                                if(dropdownValue=='Women')
+                                {
+                                  return
+                                    WomenCategory();
+                                }
+                                else if(dropdownValue=='Men')
+                                {
+                                  return
+                                    MenCategory();
+                                }
+                                else if(dropdownValue=='Baby-Boys')
+                                {
+                                  return
+                                    BabyBCategory();
+                                }
+                                else if(dropdownValue== 'Baby-Girls'){
+                                  return
+                                    BabyGCategory();
+                                }
+                                else if(dropdownValue=='Kids-Boys'){
+                                  return
+                                    KidBCategory();
+                                }
+                                else if(dropdownValue=='Kids-Girls'){
+                                  return
+                                    KidGCategory();
+                                }
+                                else if(dropdownValue== 'Teen-Boys'){
+                                  return
+                                    TeenBCategory();
+                                }
+                                else if(dropdownValue=='Teen-Girls'){
+                                  return
+                                    TeenGCategory();
+                                }
+                                else{
+                                  return
+                                    Text('text');
+                                }
+                              },
+                              );
+                            }
+                            ,
+                          ),
                         ),
-                        child: Text('$value',style:TextStyle(color: kText) ,),
-                        onPressed: (){
-                          showModalBottomSheet(context: context, builder:(BuildContext context){
+                        Container(
+                          // alignment:Alignment.centerLeft,
+                          child:   ElevatedButton(
 
+                            style: ElevatedButton.styleFrom(
+                                                              primary:   Colors.black,
+  
+                                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+                            ),
+                            onPressed: ()=>color(),
 
-                            if(dropdownValue=='Women')
-                            {
-                              return
-                                WomenCategory();
-                            }
-                            else if(dropdownValue=='Men')
-                            {
-                              return
-                                MenCategory();
-                            }
-                            else if(dropdownValue=='Baby-Boys')
-                            {
-                              return
-                                BabyBCategory();
-                            }
-                            else if(dropdownValue== 'Baby-Girls'){
-                              return
-                                BabyGCategory();
-                            }
-                            else if(dropdownValue=='Kids-Boys'){
-                              return
-                                KidBCategory();
-                            }
-                            else if(dropdownValue=='Kids-Girls'){
-                              return
-                                KidGCategory();
-                            }
-                            else if(dropdownValue== 'Teen-Boys'){
-                              return
-                                TeenBCategory();
-                            }
-                            else if(dropdownValue=='Teen-Girls'){
-                              return
-                                TeenGCategory();
-                            }
-                            else{
-                              return
-                                Text('text');
-                            }
-                          },
-                          );
-                        }
-                        ,
-                      ),
+                            child: Text('Add Colors',style:TextStyle(color: Colors.white,fontSize:SizeConfig.safeBlockHorizontal *3.5) ,),
+                          ),
+                        ),
+
+                      ],
                     ),
 
                     SizedBox(height: SizeConfig.safeBlockVertical*0.5,),
@@ -13395,11 +13425,12 @@ page0(){
 
                             style: ElevatedButton.styleFrom(
 
-                              primary:kButton, // foreground
+                                                           primary:   Colors.black,
+                                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)), // foreground
                             ),
                             onPressed: ()=>AddSize(),
 
-                            child: Text('Specify Quantity',style:TextStyle(color: kText,fontSize:SizeConfig.safeBlockHorizontal *3.5) ,),
+                            child: Text('Specify Quantity',style:TextStyle(color:  Colors.white,fontSize:SizeConfig.safeBlockHorizontal *3.5) ,),
                           ),
                         ),
                         SizedBox(width: SizeConfig.safeBlockHorizontal *3),Container(
@@ -13408,10 +13439,12 @@ page0(){
 
                             style: ElevatedButton.styleFrom(
 
-                              primary:kButton, // foreground
+                                                                                         primary:   Colors.black,
+  
+                                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)), // foreground
                             ),
                             onPressed: ()=>sizeGuide(),
-                            child: Text('Size Guide',style:TextStyle(color:kText,fontSize:SizeConfig.safeBlockHorizontal *3.5) ,),
+                            child: Text('Size Guide',style:TextStyle(color: Colors.white,fontSize:SizeConfig.safeBlockHorizontal *3.5) ,),
                           ),
                         ),
 
@@ -13428,11 +13461,13 @@ page0(){
 
                             style: ElevatedButton.styleFrom(
 
-                              primary:kButton, // foreground
+                                                                                         primary:   Colors.black,
+  
+                                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)), // foreground
                             ),
                             onPressed: ()=>custom(),
 
-                            child:   Text("Customization/variations",style: TextStyle(fontSize:  SizeConfig.safeBlockHorizontal *4,color:kText),),
+                            child:   Text("Variations",style: TextStyle(fontSize:  SizeConfig.safeBlockHorizontal *4,color: Colors.white),),
                           ),
                         ),
          Text("(optional)",style: TextStyle(fontSize:  SizeConfig.safeBlockHorizontal *3.5,color:kText),),
@@ -13440,19 +13475,6 @@ page0(){
                     ),
                     SizedBox(height: SizeConfig.safeBlockVertical*0.5,),
                     //Customised
-                    Container(
-                      // alignment:Alignment.centerLeft,
-                      child:   ElevatedButton(
-
-                        style: ElevatedButton.styleFrom(
-
-                          primary:kButton, // foreground
-                        ),
-                        onPressed: ()=>color(),
-
-                        child: Text('Add Colors',style:TextStyle(color: kText,fontSize:SizeConfig.safeBlockHorizontal *3.5) ,),
-                      ),
-                    ),
 
 
                   ],
@@ -13685,9 +13707,11 @@ page1(){
                             border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
                             enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
                             focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
-                            hintText:" ${currentUser.currencysym}",
-
-                            labelText: '${currentUser.currencysym}Shipping cost',labelStyle: TextStyle(color: kText),
+                            hintText:
+                            currentUser.currency == "INR"?'₹':
+                            currentUser.currency == "EUR"?'€':
+                            currentUser.currency == "GBP"?'£':'\u0024',
+                            labelText: 'Shipping cost',labelStyle: TextStyle(color: kText),
 
                           ),
                           textAlign: TextAlign.center,
@@ -13833,7 +13857,10 @@ page1(){
                             border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
                             enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
                             focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
-                            hintText:" ${currentUser.currencysym}",
+                            hintText:
+                            currentUser.currency == "INR"?'₹':
+                            currentUser.currency == "EUR"?'€':
+                            currentUser.currency == "GBP"?'£':'\u0024',
 
                             labelText: 'Shipping cost',labelStyle: TextStyle(color: kText),
                           ),
@@ -13931,14 +13958,16 @@ page3(){
 
                   style: ElevatedButton.styleFrom(
 
-                    primary:kButton, // foreground
+                                                                               primary:   Colors.black,
+  
+                                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)), // foreground
                   ),
                   onPressed: () {
                     tag();
                   },
 
                   child:   Text("Tag other products",style: TextStyle(fontSize:  SizeConfig.safeBlockHorizontal *3.5
-                      ,color:kText),),
+                      ,color:Colors.white),),
                 ),
                 Text("(optional)",style: TextStyle(fontSize:  SizeConfig.safeBlockHorizontal *2.5
                     ,color:kText),),
@@ -14002,2183 +14031,2184 @@ page3(){
       );
 
 }
-page4(){
-    SizeConfig().init(context);
-    return
-      SingleChildScrollView(
-        child: Column(
-          children: <Widget>[
-            Container(
-              height:SizeConfig.screenHeight*0.85,
-
-            child: Column(
-        children: <Widget>[
-
-        ExpansionTile(
-                  title: title1Controller.text == ""?
-                  Text("Title",
-                      style: TextStyle(
-                          fontWeight: FontWeight.bold))
-
-                  :Text("${title1Controller.text}",
-                      style: TextStyle(
-                          fontWeight: FontWeight.bold)),
-                  children: [
-                      SizedBox(height: 8.0,),
-                      Container(
-                        margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
-                        child: TextFormField(
-                          style:TextStyle(color: kText),
-                          controller: title1Controller,
-                          decoration: InputDecoration(
-                            border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
-                            enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
-                            focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
-
-                            labelText: 'title',labelStyle: TextStyle(color: kText),
-                            hintText:"Ex:Collar",
-                          ),
-                          textAlign: TextAlign.center,
-
-                        ),
-                      ),
-
-                      getImageWidget01(),
-                      SizedBox(height: 8.0,),
-                    Container(
-                      margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
-                      child: TextFormField(
-                        style:TextStyle(color: kText),
-                        controller: customName1,
-                        decoration: InputDecoration(
-                          border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
-                          enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
-                          focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
-
-                          labelText: 'Title',labelStyle: TextStyle(color: kText),
-                          hintText:"Title",
-                        ),
-                        textAlign: TextAlign.center,
-
-                      ),
-                    ),
-                    SizedBox(height: 8.0,),
-
-                    Container(
-                        margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
-                        child: TextFormField(
-                          style:TextStyle(color: kText),
-                          keyboardType:TextInputType.number,
-                          controller: custom1,
-                          decoration: InputDecoration(
-                            border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
-                            enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
-                            focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
-
-                            labelText: 'Quantity',labelStyle: TextStyle(color: kText),
-                            hintText:"Quantity in Inventory",
-                          ),
-                          textAlign: TextAlign.center,
-
-                        ),
-                      ),
-
-                      getImageWidget02(),
-                      SizedBox(height: 8.0,),
-                    Container(
-                      margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
-                      child: TextFormField(
-                        style:TextStyle(color: kText),
-                        controller: customName2,
-                        decoration: InputDecoration(
-                          border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
-                          enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
-                          focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
-
-                          labelText: 'Title',labelStyle: TextStyle(color: kText),
-                          hintText:"Title",
-                        ),
-                        textAlign: TextAlign.center,
-
-                      ),
-                    ),
-                    SizedBox(height: 8.0,),
-
-                    Container(
-                        margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
-                        child: TextFormField(
-                          style:TextStyle(color: kText),
-                          keyboardType:TextInputType.number,
-                          controller: custom2,
-                          decoration: InputDecoration(
-                            border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
-                            enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
-                            focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
-
-                            labelText: 'Quantity',labelStyle: TextStyle(color: kText),
-                            hintText:"Quantity in Inventory",
-                          ),
-                          textAlign: TextAlign.center,
-
-                        ),
-                      ),
-
-                      getImageWidget03(),
-                      SizedBox(height: 8.0,),
-                    Container(
-                      margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
-                      child: TextFormField(
-                        style:TextStyle(color: kText),
-                        controller: customName3,
-                        decoration: InputDecoration(
-                          border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
-                          enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
-                          focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
-
-                          labelText: 'Title',labelStyle: TextStyle(color: kText),
-                          hintText:"Title",
-                        ),
-                        textAlign: TextAlign.center,
-
-                      ),
-                    ),
-                    SizedBox(height: 8.0,),
-                         Container(
-                        margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
-                        child: TextFormField(
-                          style:TextStyle(color: kText),
-                          keyboardType:TextInputType.number,
-                          controller: custom3,
-                          decoration: InputDecoration(
-                            border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
-                            enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
-                            focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
-
-                            labelText: 'Quantity',labelStyle: TextStyle(color: kText),
-                            hintText:"Quantity in Inventory",
-                          ),
-                          textAlign: TextAlign.center,
-
-                        ),
-                      ),
-
-                      getImageWidget04(),
-                      SizedBox(height: 8.0,),
-                    Container(
-                      margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
-                      child: TextFormField(
-                        style:TextStyle(color: kText),
-                        controller: customName4,
-                        decoration: InputDecoration(
-                          border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
-                          enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
-                          focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
-
-                          labelText: 'Title',labelStyle: TextStyle(color: kText),
-                          hintText:"Title",
-                        ),
-                        textAlign: TextAlign.center,
-
-                      ),
-                    ),
-                    SizedBox(height: 8.0,),
-                      Container(
-                        margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
-                        child: TextFormField(
-                          style:TextStyle(color: kText),
-                          keyboardType:TextInputType.number,
-                          controller: custom4,
-                          decoration: InputDecoration(
-                            border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
-                            enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
-                            focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
-
-                            labelText: 'Quantity',labelStyle: TextStyle(color: kText),
-                            hintText:"Quantity in Inventory",
-                          ),
-                          textAlign: TextAlign.center,
-
-                        ),
-                      ),
-
-                      getImageWidget05(),
-                      SizedBox(height: 8.0,),
-                    Container(
-                      margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
-                      child: TextFormField(
-                        style:TextStyle(color: kText),
-                        controller: customName5,
-                        decoration: InputDecoration(
-                          border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
-                          enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
-                          focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
-
-                          labelText: 'Title',labelStyle: TextStyle(color: kText),
-                          hintText:"Title",
-                        ),
-                        textAlign: TextAlign.center,
-
-                      ),
-                    ),
-                    SizedBox(height: 8.0,),
-                      Container(
-                        margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
-                        child: TextFormField(
-                          style:TextStyle(color: kText),
-                          keyboardType:TextInputType.number,
-                          controller: custom5,
-                          decoration: InputDecoration(
-                            border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
-                            enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
-                            focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
-
-                            labelText: 'Quantity',labelStyle: TextStyle(color: kText),
-                            hintText:"Quantity in Inventory",
-                          ),
-                          textAlign: TextAlign.center,
-
-                        ),
-                      ),
-
-                      getImageWidget06(),
-                      SizedBox(height: 8.0,),
-                    Container(
-                      margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
-                      child: TextFormField(
-                        style:TextStyle(color: kText),
-                        controller: customName6,
-                        decoration: InputDecoration(
-                          border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
-                          enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
-                          focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
-
-                          labelText: 'Title',labelStyle: TextStyle(color: kText),
-                          hintText:"Title",
-                        ),
-                        textAlign: TextAlign.center,
-
-                      ),
-                    ),
-                    SizedBox(height: 8.0,),
-                      Container(
-                        margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
-                        child: TextFormField(
-                          style:TextStyle(color: kText),
-                          keyboardType:TextInputType.number,
-                          controller: custom6,
-                          decoration: InputDecoration(
-                            border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
-                            enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
-                            focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
-
-                            labelText: 'Quantity',labelStyle: TextStyle(color: kText),
-                            hintText:"Quantity in Inventory",
-                          ),
-                          textAlign: TextAlign.center,
-
-                        ),
-                      ),
-
-                      getImageWidget07(),
-                      SizedBox(height: 8.0,),
-                    Container(
-                      margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
-                      child: TextFormField(
-                        style:TextStyle(color: kText),
-                        controller: customName7,
-                        decoration: InputDecoration(
-                          border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
-                          enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
-                          focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
-
-                          labelText: 'Title',labelStyle: TextStyle(color: kText),
-                          hintText:"Title",
-                        ),
-                        textAlign: TextAlign.center,
-
-                      ),
-                    ),
-                    SizedBox(height: 8.0,),
-                      Container(
-                        margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
-                        child: TextFormField(
-                          style:TextStyle(color: kText),
-                          keyboardType:TextInputType.number,
-                          controller: custom7,
-                          decoration: InputDecoration(
-                            border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
-                            enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
-                            focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
-
-                            labelText: 'Quantity',labelStyle: TextStyle(color: kText),
-                            hintText:"Quantity in Inventory",
-                          ),
-                          textAlign: TextAlign.center,
-
-                        ),
-                      ),
-
-                      getImageWidget08(),
-                      SizedBox(height: 8.0,),
-                    Container(
-                      margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
-                      child: TextFormField(
-                        style:TextStyle(color: kText),
-                        controller: customName8,
-                        decoration: InputDecoration(
-                          border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
-                          enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
-                          focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
-
-                          labelText: 'Title',labelStyle: TextStyle(color: kText),
-                          hintText:"Title",
-                        ),
-                        textAlign: TextAlign.center,
-
-                      ),
-                    ),
-                    SizedBox(height: 8.0,),
-                      Container(
-                        margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
-                        child: TextFormField(
-                          style:TextStyle(color: kText),
-                          keyboardType:TextInputType.number,
-                          controller: custom8,
-                          decoration: InputDecoration(
-                            border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
-                            enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
-                            focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
-
-                            labelText: 'Quantity',labelStyle: TextStyle(color: kText),
-                            hintText:"Quantity in Inventory",
-                          ),
-                          textAlign: TextAlign.center,
-
-                        ),
-                      ),
-
-                      getImageWidget09(),
-                      SizedBox(height: 8.0,),
-                    Container(
-                      margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
-                      child: TextFormField(
-                        style:TextStyle(color: kText),
-                        controller: customName9,
-                        decoration: InputDecoration(
-                          border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
-                          enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
-                          focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
-
-                          labelText: 'Title',labelStyle: TextStyle(color: kText),
-                          hintText:"Title",
-                        ),
-                        textAlign: TextAlign.center,
-
-                      ),
-                    ),
-                    SizedBox(height: 8.0,),
-                      Container(
-                        margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
-                        child: TextFormField(
-                          style:TextStyle(color: kText),
-                          keyboardType:TextInputType.number,
-                          controller: custom9,
-                          decoration: InputDecoration(
-                            border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
-                            enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
-                            focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
-
-                            labelText: 'Quantity',labelStyle: TextStyle(color: kText),
-                            hintText:"Quantity in Inventory",
-                          ),
-                          textAlign: TextAlign.center,
-
-                        ),
-                      ),
-
-                      getImageWidget010(),
-                      SizedBox(height: 8.0,),
-                    Container(
-                      margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
-                      child: TextFormField(
-                        style:TextStyle(color: kText),
-                        controller: customName10,
-                        decoration: InputDecoration(
-                          border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
-                          enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
-                          focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
-
-                          labelText: 'Title',labelStyle: TextStyle(color: kText),
-                          hintText:"Title",
-                        ),
-                        textAlign: TextAlign.center,
-
-                      ),
-                    ),
-                    SizedBox(height: 8.0,),
-                      Container(
-                        margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
-                        child: TextFormField(
-                          style:TextStyle(color: kText),
-                          keyboardType:TextInputType.number,
-                          controller: custom10,
-                          decoration: InputDecoration(
-                            border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
-                            enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
-                            focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
-
-                            labelText: 'Quantity',labelStyle: TextStyle(color: kText),
-                            hintText:"Quantity in Inventory",
-                          ),
-                          textAlign: TextAlign.center,
-
-                        ),
-                      ),
-
-                   ]
-              ),
-        ExpansionTile(
-                  title: title2Controller.text == ""?
-                  Text("Title",
-                      style: TextStyle(
-                          fontWeight: FontWeight.bold))
-
-                  :Text("${title2Controller.text}",
-                      style: TextStyle(
-                          fontWeight: FontWeight.bold)),
-                  children: [
-                      SizedBox(height: 8.0,),
-                      Container(
-                        margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
-                        child: TextFormField(
-                          style:TextStyle(color: kText),
-                          controller: title2Controller,
-                          decoration: InputDecoration(
-                            border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
-                            enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
-                            focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
-
-                            labelText: 'title',labelStyle: TextStyle(color: kText),
-                            hintText:"Ex:Collar",
-                          ),
-                          textAlign: TextAlign.center,
-
-                        ),
-                      ),
-
-                      getImageWidget011(),
-                      SizedBox(height: 8.0,),
-                    Container(
-                      margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
-                      child: TextFormField(
-                        style:TextStyle(color: kText),
-                        controller: customName11,
-                        decoration: InputDecoration(
-                          border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
-                          enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
-                          focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
-
-                          labelText: 'Title',labelStyle: TextStyle(color: kText),
-                          hintText:"Title",
-                        ),
-                        textAlign: TextAlign.center,
-
-                      ),
-                    ),
-                    SizedBox(height: 8.0,),
-                      Container(
-                        margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
-                        child: TextFormField(
-                          style:TextStyle(color: kText),
-                          keyboardType:TextInputType.number,
-                          controller: custom11,
-                          decoration: InputDecoration(
-                            border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
-                            enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
-                            focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
-
-                            labelText: 'Quantity',labelStyle: TextStyle(color: kText),
-                            hintText:"Quantity in Inventory",
-                          ),
-                          textAlign: TextAlign.center,
-
-                        ),
-                      ),
-
-                      getImageWidget012(),
-                      SizedBox(height: 8.0,),
-                    Container(
-                      margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
-                      child: TextFormField(
-                        style:TextStyle(color: kText),
-                        controller: customName12,
-                        decoration: InputDecoration(
-                          border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
-                          enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
-                          focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
-
-                          labelText: 'Title',labelStyle: TextStyle(color: kText),
-                          hintText:"Title",
-                        ),
-                        textAlign: TextAlign.center,
-
-                      ),
-                    ),
-                    SizedBox(height: 8.0,),
-                      Container(
-                        margin: EdgeInsets.fromLTRB(120.0, 8.0, 20.0,8.0),
-                        child: TextFormField(
-                          style:TextStyle(color: kText),
-                          keyboardType:TextInputType.number,
-                          controller: custom12,
-                          decoration: InputDecoration(
-                            border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
-                            enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
-                            focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
-
-                            labelText: 'Quantity',labelStyle: TextStyle(color: kText),
-                            hintText:"Quantity in Inventory",
-                          ),
-                          textAlign: TextAlign.center,
-
-                        ),
-                      ),
-
-                      getImageWidget013(),
-                      SizedBox(height: 8.0,),
-                    Container(
-                      margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
-                      child: TextFormField(
-                        style:TextStyle(color: kText),
-                        controller: customName13,
-                        decoration: InputDecoration(
-                          border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
-                          enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
-                          focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
-
-                          labelText: 'Title',labelStyle: TextStyle(color: kText),
-                          hintText:"Title",
-                        ),
-                        textAlign: TextAlign.center,
-
-                      ),
-                    ),
-                    SizedBox(height: 8.0,),
-                      Container(
-                        margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
-                        child: TextFormField(
-                          style:TextStyle(color: kText),
-                          keyboardType:TextInputType.number,
-                          controller: custom13,
-                          decoration: InputDecoration(
-                            border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
-                            enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
-                            focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
-
-                            labelText: 'Quantity',labelStyle: TextStyle(color: kText),
-                            hintText:"Quantity in Inventory",
-                          ),
-                          textAlign: TextAlign.center,
-
-                        ),
-                      ),
-
-                      getImageWidget014(),
-                      SizedBox(height: 8.0,),
-                    Container(
-                      margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
-                      child: TextFormField(
-                        style:TextStyle(color: kText),
-                        controller: customName14,
-                        decoration: InputDecoration(
-                          border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
-                          enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
-                          focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
-
-                          labelText: 'Title',labelStyle: TextStyle(color: kText),
-                          hintText:"Title",
-                        ),
-                        textAlign: TextAlign.center,
-
-                      ),
-                    ),
-                    SizedBox(height: 8.0,),
-                      Container(
-                        margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
-                        child: TextFormField(
-                          style:TextStyle(color: kText),
-                          keyboardType:TextInputType.number,
-                          controller: custom14,
-                          decoration: InputDecoration(
-                            border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
-                            enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
-                            focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
-
-                            labelText: 'Quantity',labelStyle: TextStyle(color: kText),
-                            hintText:"Quantity in Inventory",
-                          ),
-                          textAlign: TextAlign.center,
-
-                        ),
-                      ),
-
-                      getImageWidget015(),
-                      SizedBox(height: 8.0,),
-                    Container(
-                      margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
-                      child: TextFormField(
-                        style:TextStyle(color: kText),
-                        controller: customName15,
-                        decoration: InputDecoration(
-                          border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
-                          enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
-                          focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
-
-                          labelText: 'Title',labelStyle: TextStyle(color: kText),
-                          hintText:"Title",
-                        ),
-                        textAlign: TextAlign.center,
-
-                      ),
-                    ),
-                    SizedBox(height: 8.0,),
-                      Container(
-                        margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
-                        child: TextFormField(
-                          style:TextStyle(color: kText),
-                          keyboardType:TextInputType.number,
-                          controller: custom15,
-                          decoration: InputDecoration(
-                            border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
-                            enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
-                            focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
-
-                            labelText: 'Quantity',labelStyle: TextStyle(color: kText),
-                            hintText:"Quantity in Inventory",
-                          ),
-                          textAlign: TextAlign.center,
-
-                        ),
-                      ),
-
-                      getImageWidget016(),
-                      SizedBox(height: 8.0,),
-                    Container(
-                      margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
-                      child: TextFormField(
-                        style:TextStyle(color: kText),
-                        controller: customName16,
-                        decoration: InputDecoration(
-                          border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
-                          enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
-                          focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
-
-                          labelText: 'Title',labelStyle: TextStyle(color: kText),
-                          hintText:"Title",
-                        ),
-                        textAlign: TextAlign.center,
-
-                      ),
-                    ),
-                    SizedBox(height: 8.0,),
-                      Container(
-                        margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
-                        child: TextFormField(
-                          style:TextStyle(color: kText),
-                          keyboardType:TextInputType.number,
-                          controller: custom16,
-                          decoration: InputDecoration(
-                            border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
-                            enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
-                            focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
-
-                            labelText: 'Quantity',labelStyle: TextStyle(color: kText),
-                            hintText:"Quantity in Inventory",
-                          ),
-                          textAlign: TextAlign.center,
-
-                        ),
-                      ),
-
-                      getImageWidget017(),
-                      SizedBox(height: 8.0,),
-                    Container(
-                      margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
-                      child: TextFormField(
-                        style:TextStyle(color: kText),
-                        controller: customName17,
-                        decoration: InputDecoration(
-                          border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
-                          enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
-                          focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
-
-                          labelText: 'Title',labelStyle: TextStyle(color: kText),
-                          hintText:"Title",
-                        ),
-                        textAlign: TextAlign.center,
-
-                      ),
-                    ),
-                    SizedBox(height: 8.0,),
-                      Container(
-                        margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
-                        child: TextFormField(
-                          style:TextStyle(color: kText),
-                          keyboardType:TextInputType.number,
-                          controller: custom17,
-                          decoration: InputDecoration(
-                            border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
-                            enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
-                            focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
-
-                            labelText: 'Quantity',labelStyle: TextStyle(color: kText),
-                            hintText:"Quantity in Inventory",
-                          ),
-                          textAlign: TextAlign.center,
-
-                        ),
-                      ),
-
-                      getImageWidget018(),
-                      SizedBox(height: 8.0,),
-                    Container(
-                      margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
-                      child: TextFormField(
-                        style:TextStyle(color: kText),
-                        controller: customName18,
-                        decoration: InputDecoration(
-                          border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
-                          enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
-                          focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
-
-                          labelText: 'Title',labelStyle: TextStyle(color: kText),
-                          hintText:"Title",
-                        ),
-                        textAlign: TextAlign.center,
-
-                      ),
-                    ),
-                    SizedBox(height: 8.0,),
-                      Container(
-                        margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
-                        child: TextFormField(
-                          style:TextStyle(color: kText),
-                          keyboardType:TextInputType.number,
-                          controller: custom18,
-                          decoration: InputDecoration(
-                            border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
-                            enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
-                            focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
-
-                            labelText: 'Quantity',labelStyle: TextStyle(color: kText),
-                            hintText:"Quantity in Inventory",
-                          ),
-                          textAlign: TextAlign.center,
-
-                        ),
-                      ),
-
-                      getImageWidget019(),
-                      SizedBox(height: 8.0,),
-                    Container(
-                      margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
-                      child: TextFormField(
-                        style:TextStyle(color: kText),
-                        controller: customName19,
-                        decoration: InputDecoration(
-                          border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
-                          enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
-                          focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
-
-                          labelText: 'Title',labelStyle: TextStyle(color: kText),
-                          hintText:"Title",
-                        ),
-                        textAlign: TextAlign.center,
-
-                      ),
-                    ),
-                    SizedBox(height: 8.0,),
-                      Container(
-                        margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
-                        child: TextFormField(
-                          style:TextStyle(color: kText),
-                          keyboardType:TextInputType.number,
-                          controller: custom19,
-                          decoration: InputDecoration(
-                            border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
-                            enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
-                            focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
-
-                            labelText: 'Quantity',labelStyle: TextStyle(color: kText),
-                            hintText:"Quantity in Inventory",
-                          ),
-                          textAlign: TextAlign.center,
-
-                        ),
-                      ),
-
-                      getImageWidget020(),
-                      SizedBox(height: 8.0,),
-                    Container(
-                      margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
-                      child: TextFormField(
-                        style:TextStyle(color: kText),
-                        controller: customName20,
-                        decoration: InputDecoration(
-                          border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
-                          enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
-                          focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
-
-                          labelText: 'Title',labelStyle: TextStyle(color: kText),
-                          hintText:"Title",
-                        ),
-                        textAlign: TextAlign.center,
-
-                      ),
-                    ),
-                    SizedBox(height: 8.0,),
-                      Container(
-                        margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
-                        child: TextFormField(
-                          style:TextStyle(color: kText),
-                          keyboardType:TextInputType.number,
-                          controller: custom20,
-                          decoration: InputDecoration(
-                            border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
-                            enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
-                            focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
-
-                            labelText: 'Quantity',labelStyle: TextStyle(color: kText),
-                            hintText:"Quantity in Inventory",
-                          ),
-                          textAlign: TextAlign.center,
-
-                        ),
-                      ),
-
-                   ]
-              ),
-        ExpansionTile(
-                  title: title3Controller.text == ""?
-                  Text("Title",
-                      style: TextStyle(
-                          fontWeight: FontWeight.bold))
-
-                  :Text("${title3Controller.text}",
-                      style: TextStyle(
-                          fontWeight: FontWeight.bold)),
-                  children: [
-                      SizedBox(height: 8.0,),
-                      Container(
-                        margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
-                        child: TextFormField(
-                          style:TextStyle(color: kText),
-                          controller: title3Controller,
-                          decoration: InputDecoration(
-                            border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
-                            enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
-                            focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
-
-                            labelText: 'title',labelStyle: TextStyle(color: kText),
-                            hintText:"Ex:Collar",
-                          ),
-                          textAlign: TextAlign.center,
-
-                        ),
-                      ),
-
-                      getImageWidget021(),
-                      SizedBox(height: 8.0,),
-                    Container(
-                      margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
-                      child: TextFormField(
-                        style:TextStyle(color: kText),
-                        controller: customName21,
-                        decoration: InputDecoration(
-                          border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
-                          enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
-                          focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
-
-                          labelText: 'Title',labelStyle: TextStyle(color: kText),
-                          hintText:"Title",
-                        ),
-                        textAlign: TextAlign.center,
-
-                      ),
-                    ),
-                    SizedBox(height: 8.0,),
-                      Container(
-                        margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
-                        child: TextFormField(
-                          style:TextStyle(color: kText),
-                          keyboardType:TextInputType.number,
-                          controller: custom21,
-                          decoration: InputDecoration(
-                            border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
-                            enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
-                            focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
-
-                            labelText: 'Quantity',labelStyle: TextStyle(color: kText),
-                            hintText:"Quantity in Inventory",
-                          ),
-                          textAlign: TextAlign.center,
-
-                        ),
-                      ),
-
-                      getImageWidget022(),
-                      SizedBox(height: 8.0,),
-                    Container(
-                      margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
-                      child: TextFormField(
-                        style:TextStyle(color: kText),
-                        controller: customName22,
-                        decoration: InputDecoration(
-                          border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
-                          enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
-                          focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
-
-                          labelText: 'Title',labelStyle: TextStyle(color: kText),
-                          hintText:"Title",
-                        ),
-                        textAlign: TextAlign.center,
-
-                      ),
-                    ),
-                    SizedBox(height: 8.0,),
-                      Container(
-                        margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
-                        child: TextFormField(
-                          style:TextStyle(color: kText),
-                          keyboardType:TextInputType.number,
-                          controller: custom22,
-                          decoration: InputDecoration(
-                            border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
-                            enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
-                            focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
-
-                            labelText: 'Quantity',labelStyle: TextStyle(color: kText),
-                            hintText:"Quantity in Inventory",
-                          ),
-                          textAlign: TextAlign.center,
-
-                        ),
-                      ),
-
-                      getImageWidget023(),
-                      SizedBox(height: 8.0,),
-                    Container(
-                      margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
-                      child: TextFormField(
-                        style:TextStyle(color: kText),
-                        controller: customName23,
-                        decoration: InputDecoration(
-                          border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
-                          enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
-                          focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
-
-                          labelText: 'Title',labelStyle: TextStyle(color: kText),
-                          hintText:"Title",
-                        ),
-                        textAlign: TextAlign.center,
-
-                      ),
-                    ),
-                    SizedBox(height: 8.0,),
-                      Container(
-                        margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
-                        child: TextFormField(
-                          style:TextStyle(color: kText),
-                          keyboardType:TextInputType.number,
-                          controller: custom23,
-                          decoration: InputDecoration(
-                            border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
-                            enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
-                            focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
-
-                            labelText: 'Quantity',labelStyle: TextStyle(color: kText),
-                            hintText:"Quantity in Inventory",
-                          ),
-                          textAlign: TextAlign.center,
-
-                        ),
-                      ),
-
-                      getImageWidget024(),
-                      SizedBox(height: 8.0,),
-                    Container(
-                      margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
-                      child: TextFormField(
-                        style:TextStyle(color: kText),
-                        controller: customName24,
-                        decoration: InputDecoration(
-                          border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
-                          enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
-                          focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
-
-                          labelText: 'Title',labelStyle: TextStyle(color: kText),
-                          hintText:"Title",
-                        ),
-                        textAlign: TextAlign.center,
-
-                      ),
-                    ),
-                    SizedBox(height: 8.0,),
-                      Container(
-                        margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
-                        child: TextFormField(
-                          style:TextStyle(color: kText),
-                          keyboardType:TextInputType.number,
-                          controller: custom24,
-                          decoration: InputDecoration(
-                            border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
-                            enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
-                            focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
-
-                            labelText: 'Quantity',labelStyle: TextStyle(color: kText),
-                            hintText:"Quantity in Inventory",
-                          ),
-                          textAlign: TextAlign.center,
-
-                        ),
-                      ),
-
-                      getImageWidget025(),
-                      SizedBox(height: 8.0,),
-                    Container(
-                      margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
-                      child: TextFormField(
-                        style:TextStyle(color: kText),
-                        controller: customName25,
-                        decoration: InputDecoration(
-                          border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
-                          enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
-                          focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
-
-                          labelText: 'Title',labelStyle: TextStyle(color: kText),
-                          hintText:"Title",
-                        ),
-                        textAlign: TextAlign.center,
-
-                      ),
-                    ),
-                    SizedBox(height: 8.0,),
-                      Container(
-                        margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
-                        child: TextFormField(
-                          style:TextStyle(color: kText),
-                          keyboardType:TextInputType.number,
-                          controller: custom25,
-                          decoration: InputDecoration(
-                            border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
-                            enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
-                            focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
-
-                            labelText: 'Quantity',labelStyle: TextStyle(color: kText),
-                            hintText:"Quantity in Inventory",
-                          ),
-                          textAlign: TextAlign.center,
-
-                        ),
-                      ),
-
-                      getImageWidget026(),
-                      SizedBox(height: 8.0,),
-                    Container(
-                      margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
-                      child: TextFormField(
-                        style:TextStyle(color: kText),
-                        controller: customName26,
-                        decoration: InputDecoration(
-                          border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
-                          enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
-                          focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
-
-                          labelText: 'Title',labelStyle: TextStyle(color: kText),
-                          hintText:"Title",
-                        ),
-                        textAlign: TextAlign.center,
-
-                      ),
-                    ),
-                    SizedBox(height: 8.0,),
-                      Container(
-                        margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
-                        child: TextFormField(
-                          style:TextStyle(color: kText),
-                          keyboardType:TextInputType.number,
-                          controller: custom26,
-                          decoration: InputDecoration(
-                            border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
-                            enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
-                            focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
-
-                            labelText: 'Quantity',labelStyle: TextStyle(color: kText),
-                            hintText:"Quantity in Inventory",
-                          ),
-                          textAlign: TextAlign.center,
-
-                        ),
-                      ),
-
-                      getImageWidget027(),
-                      SizedBox(height: 8.0,),
-                    Container(
-                      margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
-                      child: TextFormField(
-                        style:TextStyle(color: kText),
-                        controller: customName27,
-                        decoration: InputDecoration(
-                          border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
-                          enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
-                          focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
-
-                          labelText: 'Title',labelStyle: TextStyle(color: kText),
-                          hintText:"Title",
-                        ),
-                        textAlign: TextAlign.center,
-
-                      ),
-                    ),
-                    SizedBox(height: 8.0,),
-                      Container(
-                        margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
-                        child: TextFormField(
-                          style:TextStyle(color: kText),
-                          keyboardType:TextInputType.number,
-                          controller: custom27,
-                          decoration: InputDecoration(
-                            border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
-                            enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
-                            focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
-
-                            labelText: 'Quantity',labelStyle: TextStyle(color: kText),
-                            hintText:"Quantity in Inventory",
-                          ),
-                          textAlign: TextAlign.center,
-
-                        ),
-                      ),
-
-                      getImageWidget028(),
-                      SizedBox(height: 8.0,),
-                    Container(
-                      margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
-                      child: TextFormField(
-                        style:TextStyle(color: kText),
-                        controller: customName28,
-                        decoration: InputDecoration(
-                          border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
-                          enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
-                          focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
-
-                          labelText: 'Title',labelStyle: TextStyle(color: kText),
-                          hintText:"Title",
-                        ),
-                        textAlign: TextAlign.center,
-
-                      ),
-                    ),
-                    SizedBox(height: 8.0,),
-                      Container(
-                        margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
-                        child: TextFormField(
-                          style:TextStyle(color: kText),
-                          keyboardType:TextInputType.number,
-                          controller: custom28,
-                          decoration: InputDecoration(
-                            border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
-                            enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
-                            focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
-
-                            labelText: 'Quantity',labelStyle: TextStyle(color: kText),
-                            hintText:"Quantity in Inventory",
-                          ),
-                          textAlign: TextAlign.center,
-
-                        ),
-                      ),
-
-                      getImageWidget029(),
-                      SizedBox(height: 8.0,),
-                    Container(
-                      margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
-                      child: TextFormField(
-                        style:TextStyle(color: kText),
-                        controller: customName29,
-                        decoration: InputDecoration(
-                          border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
-                          enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
-                          focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
-
-                          labelText: 'Title',labelStyle: TextStyle(color: kText),
-                          hintText:"Title",
-                        ),
-                        textAlign: TextAlign.center,
-
-                      ),
-                    ),
-                    SizedBox(height: 8.0,),
-                      Container(
-                        margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
-                        child: TextFormField(
-                          style:TextStyle(color: kText),
-                          keyboardType:TextInputType.number,
-                          controller: custom29,
-                          decoration: InputDecoration(
-                            border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
-                            enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
-                            focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
-
-                            labelText: 'Quantity',labelStyle: TextStyle(color: kText),
-                            hintText:"Quantity in Inventory",
-                          ),
-                          textAlign: TextAlign.center,
-
-                        ),
-                      ),
-
-                      getImageWidget030(),
-                      SizedBox(height: 8.0,),
-                    Container(
-                      margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
-                      child: TextFormField(
-                        style:TextStyle(color: kText),
-                        controller: customName30,
-                        decoration: InputDecoration(
-                          border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
-                          enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
-                          focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
-
-                          labelText: 'Title',labelStyle: TextStyle(color: kText),
-                          hintText:"Title",
-                        ),
-                        textAlign: TextAlign.center,
-
-                      ),
-                    ),
-                    SizedBox(height: 8.0,),
-                      Container(
-                        margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
-                        child: TextFormField(
-                          style:TextStyle(color: kText),
-                          keyboardType:TextInputType.number,
-                          controller: custom30,
-                          decoration: InputDecoration(
-                            border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
-                            enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
-                            focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
-
-                            labelText: 'Quantity',labelStyle: TextStyle(color: kText),
-                            hintText:"Quantity in Inventory",
-                          ),
-                          textAlign: TextAlign.center,
-
-                        ),
-                      ),
-
-                   ]
-              ),
-        ExpansionTile(
-                  title: title4Controller.text == ""?
-                  Text("Title",
-                      style: TextStyle(
-                          fontWeight: FontWeight.bold))
-
-                  :Text("${title4Controller.text}",
-                      style: TextStyle(
-                          fontWeight: FontWeight.bold)),
-                  children: [
-                      SizedBox(height: 8.0,),
-                      Container(
-                        margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
-                        child: TextFormField(
-                          style:TextStyle(color: kText),
-                          controller: title4Controller,
-                          decoration: InputDecoration(
-                            border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
-                            enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
-                            focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
-
-                            labelText: 'title',labelStyle: TextStyle(color: kText),
-                            hintText:"Ex:Collar",
-                          ),
-                          textAlign: TextAlign.center,
-
-                        ),
-                      ),
-
-                      getImageWidget031(),
-                      SizedBox(height: 8.0,),
-                    Container(
-                      margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
-                      child: TextFormField(
-                        style:TextStyle(color: kText),
-                        controller: customName31,
-                        decoration: InputDecoration(
-                          border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
-                          enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
-                          focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
-
-                          labelText: 'Title',labelStyle: TextStyle(color: kText),
-                          hintText:"Title",
-                        ),
-                        textAlign: TextAlign.center,
-
-                      ),
-                    ),
-                    SizedBox(height: 8.0,),
-                      Container(
-                        margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
-                        child: TextFormField(
-                          style:TextStyle(color: kText),
-                          keyboardType:TextInputType.number,
-                          controller: custom31,
-                          decoration: InputDecoration(
-                            border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
-                            enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
-                            focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
-
-                            labelText: 'Quantity',labelStyle: TextStyle(color: kText),
-                            hintText:"Quantity in Inventory",
-                          ),
-                          textAlign: TextAlign.center,
-
-                        ),
-                      ),
-
-                      getImageWidget032(),
-                      SizedBox(height: 8.0,),
-                    Container(
-                      margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
-                      child: TextFormField(
-                        style:TextStyle(color: kText),
-                        controller: customName32,
-                        decoration: InputDecoration(
-                          border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
-                          enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
-                          focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
-
-                          labelText: 'Title',labelStyle: TextStyle(color: kText),
-                          hintText:"Title",
-                        ),
-                        textAlign: TextAlign.center,
-
-                      ),
-                    ),
-                    SizedBox(height: 8.0,),
-                      Container(
-                        margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
-                        child: TextFormField(
-                          style:TextStyle(color: kText),
-                          keyboardType:TextInputType.number,
-                          controller: custom32,
-                          decoration: InputDecoration(
-                            border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
-                            enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
-                            focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
-
-                            labelText: 'Quantity',labelStyle: TextStyle(color: kText),
-                            hintText:"Quantity in Inventory",
-                          ),
-                          textAlign: TextAlign.center,
-
-                        ),
-                      ),
-
-                      getImageWidget033(),
-                      SizedBox(height: 8.0,),
-                    Container(
-                      margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
-                      child: TextFormField(
-                        style:TextStyle(color: kText),
-                        controller: customName33,
-                        decoration: InputDecoration(
-                          border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
-                          enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
-                          focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
-
-                          labelText: 'Title',labelStyle: TextStyle(color: kText),
-                          hintText:"Title",
-                        ),
-                        textAlign: TextAlign.center,
-
-                      ),
-                    ),
-                    SizedBox(height: 8.0,),
-                      Container(
-                        margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
-                        child: TextFormField(
-                          style:TextStyle(color: kText),
-                          keyboardType:TextInputType.number,
-                          controller: custom33,
-                          decoration: InputDecoration(
-                            border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
-                            enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
-                            focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
-
-                            labelText: 'Quantity',labelStyle: TextStyle(color: kText),
-                            hintText:"Quantity in Inventory",
-                          ),
-                          textAlign: TextAlign.center,
-
-                        ),
-                      ),
-
-                      getImageWidget034(),
-                      SizedBox(height: 8.0,),
-                    Container(
-                      margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
-                      child: TextFormField(
-                        style:TextStyle(color: kText),
-                        controller: customName34,
-                        decoration: InputDecoration(
-                          border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
-                          enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
-                          focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
-
-                          labelText: 'Title',labelStyle: TextStyle(color: kText),
-                          hintText:"Title",
-                        ),
-                        textAlign: TextAlign.center,
-
-                      ),
-                    ),
-                    SizedBox(height: 8.0,),
-                      Container(
-                        margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
-                        child: TextFormField(
-                          style:TextStyle(color: kText),
-                          keyboardType:TextInputType.number,
-                          controller: custom34,
-                          decoration: InputDecoration(
-                            border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
-                            enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
-                            focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
-
-                            labelText: 'Quantity',labelStyle: TextStyle(color: kText),
-                            hintText:"Quantity in Inventory",
-                          ),
-                          textAlign: TextAlign.center,
-
-                        ),
-                      ),
-
-                      getImageWidget035(),
-                      SizedBox(height: 8.0,),
-                    Container(
-                      margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
-                      child: TextFormField(
-                        style:TextStyle(color: kText),
-                        controller: customName35,
-                        decoration: InputDecoration(
-                          border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
-                          enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
-                          focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
-
-                          labelText: 'Title',labelStyle: TextStyle(color: kText),
-                          hintText:"Title",
-                        ),
-                        textAlign: TextAlign.center,
-
-                      ),
-                    ),
-                    SizedBox(height: 8.0,),
-                      Container(
-                        margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
-                        child: TextFormField(
-                          style:TextStyle(color: kText),
-                          keyboardType:TextInputType.number,
-                          controller: custom35,
-                          decoration: InputDecoration(
-                            border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
-                            enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
-                            focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
-
-                            labelText: 'Quantity',labelStyle: TextStyle(color: kText),
-                            hintText:"Quantity in Inventory",
-                          ),
-                          textAlign: TextAlign.center,
-
-                        ),
-                      ),
-
-                      getImageWidget036(),
-                      SizedBox(height: 8.0,),
-                    Container(
-                      margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
-                      child: TextFormField(
-                        style:TextStyle(color: kText),
-                        controller: customName36,
-                        decoration: InputDecoration(
-                          border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
-                          enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
-                          focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
-
-                          labelText: 'Title',labelStyle: TextStyle(color: kText),
-                          hintText:"Title",
-                        ),
-                        textAlign: TextAlign.center,
-
-                      ),
-                    ),
-                    SizedBox(height: 8.0,),
-                      Container(
-                        margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
-                        child: TextFormField(
-                          style:TextStyle(color: kText),
-                          keyboardType:TextInputType.number,
-                          controller: custom36,
-                          decoration: InputDecoration(
-                            border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
-                            enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
-                            focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
-
-                            labelText: 'Quantity',labelStyle: TextStyle(color: kText),
-                            hintText:"Quantity in Inventory",
-                          ),
-                          textAlign: TextAlign.center,
-
-                        ),
-                      ),
-
-                      getImageWidget037(),
-                      SizedBox(height: 8.0,),
-                    Container(
-                      margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
-                      child: TextFormField(
-                        style:TextStyle(color: kText),
-                        controller: customName37,
-                        decoration: InputDecoration(
-                          border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
-                          enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
-                          focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
-
-                          labelText: 'Title',labelStyle: TextStyle(color: kText),
-                          hintText:"Title",
-                        ),
-                        textAlign: TextAlign.center,
-
-                      ),
-                    ),
-                    SizedBox(height: 8.0,),
-                      Container(
-                        margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
-                        child: TextFormField(
-                          style:TextStyle(color: kText),
-                          keyboardType:TextInputType.number,
-                          controller: custom37,
-                          decoration: InputDecoration(
-                            border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
-                            enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
-                            focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
-
-                            labelText: 'Quantity',labelStyle: TextStyle(color: kText),
-                            hintText:"Quantity in Inventory",
-                          ),
-                          textAlign: TextAlign.center,
-
-                        ),
-                      ),
-
-                      getImageWidget038(),
-                      SizedBox(height: 8.0,),
-                    Container(
-                      margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
-                      child: TextFormField(
-                        style:TextStyle(color: kText),
-                        controller: customName38,
-                        decoration: InputDecoration(
-                          border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
-                          enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
-                          focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
-
-                          labelText: 'Title',labelStyle: TextStyle(color: kText),
-                          hintText:"Title",
-                        ),
-                        textAlign: TextAlign.center,
-
-                      ),
-                    ),
-                    SizedBox(height: 8.0,),
-                      Container(
-                        margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
-                        child: TextFormField(
-                          style:TextStyle(color: kText),
-                          keyboardType:TextInputType.number,
-                          controller: custom38,
-                          decoration: InputDecoration(
-                            border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
-                            enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
-                            focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
-
-                            labelText: 'Quantity',labelStyle: TextStyle(color: kText),
-                            hintText:"Quantity in Inventory",
-                          ),
-                          textAlign: TextAlign.center,
-
-                        ),
-                      ),
-
-                      getImageWidget039(),
-                      SizedBox(height: 8.0,),
-                    Container(
-                      margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
-                      child: TextFormField(
-                        style:TextStyle(color: kText),
-                        controller: customName39,
-                        decoration: InputDecoration(
-                          border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
-                          enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
-                          focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
-
-                          labelText: 'Title',labelStyle: TextStyle(color: kText),
-                          hintText:"Title",
-                        ),
-                        textAlign: TextAlign.center,
-
-                      ),
-                    ),
-                    SizedBox(height: 8.0,),
-                      Container(
-                        margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
-                        child: TextFormField(
-                          style:TextStyle(color: kText),
-                          keyboardType:TextInputType.number,
-                          controller: custom39,
-                          decoration: InputDecoration(
-                            border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
-                            enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
-                            focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
-
-                            labelText: 'Quantity',labelStyle: TextStyle(color: kText),
-                            hintText:"Quantity in Inventory",
-                          ),
-                          textAlign: TextAlign.center,
-
-                        ),
-                      ),
-
-                      getImageWidget040(),
-                      SizedBox(height: 8.0,),
-                    Container(
-                      margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
-                      child: TextFormField(
-                        style:TextStyle(color: kText),
-                        controller: customName40,
-                        decoration: InputDecoration(
-                          border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
-                          enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
-                          focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
-
-                          labelText: 'Title',labelStyle: TextStyle(color: kText),
-                          hintText:"Title",
-                        ),
-                        textAlign: TextAlign.center,
-
-                      ),
-                    ),
-                    SizedBox(height: 8.0,),
-                      Container(
-                        margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
-                        child: TextFormField(
-                          style:TextStyle(color: kText),
-                          keyboardType:TextInputType.number,
-                          controller: custom40,
-                          decoration: InputDecoration(
-                            border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
-                            enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
-                            focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
-
-                            labelText: 'Quantity',labelStyle: TextStyle(color: kText),
-                            hintText:"Quantity in Inventory",
-                          ),
-                          textAlign: TextAlign.center,
-
-                        ),
-                      ),
-
-                   ]
-              ),
-        ExpansionTile(
-                  title: title5Controller.text == ""?
-                  Text("Title",
-                      style: TextStyle(
-                          fontWeight: FontWeight.bold))
-
-                  :Text("${title5Controller.text}",
-                      style: TextStyle(
-                          fontWeight: FontWeight.bold)),
-                  children: [
-                      SizedBox(height: 8.0,),
-                      Container(
-                        margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
-                        child: TextFormField(
-                          style:TextStyle(color: kText),
-                          controller: title5Controller,
-                          decoration: InputDecoration(
-                            border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
-                            enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
-                            focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
-
-                            labelText: 'title',labelStyle: TextStyle(color: kText),
-                            hintText:"Ex:Collar",
-                          ),
-                          textAlign: TextAlign.center,
-
-                        ),
-                      ),
-
-                      getImageWidget041(),
-                      SizedBox(height: 8.0,),
-                    Container(
-                      margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
-                      child: TextFormField(
-                        style:TextStyle(color: kText),
-                        controller: customName41,
-                        decoration: InputDecoration(
-                          border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
-                          enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
-                          focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
-
-                          labelText: 'Title',labelStyle: TextStyle(color: kText),
-                          hintText:"Title",
-                        ),
-                        textAlign: TextAlign.center,
-
-                      ),
-                    ),
-                    SizedBox(height: 8.0,),
-                      Container(
-                        margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
-                        child: TextFormField(
-                          style:TextStyle(color: kText),
-                          keyboardType:TextInputType.number,
-                          controller: custom41,
-                          decoration: InputDecoration(
-                            border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
-                            enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
-                            focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
-
-                            labelText: 'Quantity',labelStyle: TextStyle(color: kText),
-                            hintText:"Quantity in Inventory",
-                          ),
-                          textAlign: TextAlign.center,
-
-                        ),
-                      ),
-
-                      getImageWidget042(),
-                      SizedBox(height: 8.0,),
-                    Container(
-                      margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
-                      child: TextFormField(
-                        style:TextStyle(color: kText),
-                        controller: customName42,
-                        decoration: InputDecoration(
-                          border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
-                          enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
-                          focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
-
-                          labelText: 'Title',labelStyle: TextStyle(color: kText),
-                          hintText:"Title",
-                        ),
-                        textAlign: TextAlign.center,
-
-                      ),
-                    ),
-                    SizedBox(height: 8.0,),
-                      Container(
-                        margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
-                        child: TextFormField(
-                          style:TextStyle(color: kText),
-                          keyboardType:TextInputType.number,
-                          controller: custom42,
-                          decoration: InputDecoration(
-                            border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
-                            enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
-                            focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
-
-                            labelText: 'Quantity',labelStyle: TextStyle(color: kText),
-                            hintText:"Quantity in Inventory",
-                          ),
-                          textAlign: TextAlign.center,
-
-                        ),
-                      ),
-
-                      getImageWidget043(),
-                      SizedBox(height: 8.0,),
-                    Container(
-                      margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
-                      child: TextFormField(
-                        style:TextStyle(color: kText),
-                        controller: customName43,
-                        decoration: InputDecoration(
-                          border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
-                          enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
-                          focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
-
-                          labelText: 'Title',labelStyle: TextStyle(color: kText),
-                          hintText:"Title",
-                        ),
-                        textAlign: TextAlign.center,
-
-                      ),
-                    ),
-                    SizedBox(height: 8.0,),
-                      Container(
-                        margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
-                        child: TextFormField(
-                          style:TextStyle(color: kText),
-                          keyboardType:TextInputType.number,
-                          controller: custom43,
-                          decoration: InputDecoration(
-                            border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
-                            enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
-                            focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
-
-                            labelText: 'Quantity',labelStyle: TextStyle(color: kText),
-                            hintText:"Quantity in Inventory",
-                          ),
-                          textAlign: TextAlign.center,
-
-                        ),
-                      ),
-
-                      getImageWidget044(),
-                      SizedBox(height: 8.0,),
-                    Container(
-                      margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
-                      child: TextFormField(
-                        style:TextStyle(color: kText),
-                        controller: customName44,
-                        decoration: InputDecoration(
-                          border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
-                          enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
-                          focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
-
-                          labelText: 'Title',labelStyle: TextStyle(color: kText),
-                          hintText:"Title",
-                        ),
-                        textAlign: TextAlign.center,
-
-                      ),
-                    ),
-                    SizedBox(height: 8.0,),
-                      Container(
-                        margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
-                        child: TextFormField(
-                          style:TextStyle(color: kText),
-                          keyboardType:TextInputType.number,
-                          controller: custom44,
-                          decoration: InputDecoration(
-                            border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
-                            enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
-                            focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
-
-                            labelText: 'Quantity',labelStyle: TextStyle(color: kText),
-                            hintText:"Quantity in Inventory",
-                          ),
-                          textAlign: TextAlign.center,
-
-                        ),
-                      ),
-
-                      getImageWidget045(),
-                      SizedBox(height: 8.0,),
-                    Container(
-                      margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
-                      child: TextFormField(
-                        style:TextStyle(color: kText),
-                        controller: customName45,
-                        decoration: InputDecoration(
-                          border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
-                          enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
-                          focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
-
-                          labelText: 'Title',labelStyle: TextStyle(color: kText),
-                          hintText:"Title",
-                        ),
-                        textAlign: TextAlign.center,
-
-                      ),
-                    ),
-                    SizedBox(height: 8.0,),
-                      Container(
-                        margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
-                        child: TextFormField(
-                          style:TextStyle(color: kText),
-                          keyboardType:TextInputType.number,
-                          controller: custom45,
-                          decoration: InputDecoration(
-                            border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
-                            enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
-                            focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
-
-                            labelText: 'Quantity',labelStyle: TextStyle(color: kText),
-                            hintText:"Quantity in Inventory",
-                          ),
-                          textAlign: TextAlign.center,
-
-                        ),
-                      ),
-
-                      getImageWidget046(),
-                      SizedBox(height: 8.0,),
-                    Container(
-                      margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
-                      child: TextFormField(
-                        style:TextStyle(color: kText),
-                        controller: customName46,
-                        decoration: InputDecoration(
-                          border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
-                          enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
-                          focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
-
-                          labelText: 'Title',labelStyle: TextStyle(color: kText),
-                          hintText:"Title",
-                        ),
-                        textAlign: TextAlign.center,
-
-                      ),
-                    ),
-                    SizedBox(height: 8.0,),
-                      Container(
-                        margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
-                        child: TextFormField(
-                          style:TextStyle(color: kText),
-                          keyboardType:TextInputType.number,
-                          controller: custom46,
-                          decoration: InputDecoration(
-                            border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
-                            enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
-                            focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
-
-                            labelText: 'Quantity',labelStyle: TextStyle(color: kText),
-                            hintText:"Quantity in Inventory",
-                          ),
-                          textAlign: TextAlign.center,
-
-                        ),
-                      ),
-
-                      getImageWidget047(),
-                      SizedBox(height: 8.0,),
-                    Container(
-                      margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
-                      child: TextFormField(
-                        style:TextStyle(color: kText),
-                        controller: customName47,
-                        decoration: InputDecoration(
-                          border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
-                          enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
-                          focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
-
-                          labelText: 'Title',labelStyle: TextStyle(color: kText),
-                          hintText:"Title",
-                        ),
-                        textAlign: TextAlign.center,
-
-                      ),
-                    ),
-                    SizedBox(height: 8.0,),
-                      Container(
-                        margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
-                        child: TextFormField(
-                          style:TextStyle(color: kText),
-                          keyboardType:TextInputType.number,
-                          controller: custom47,
-                          decoration: InputDecoration(
-                            border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
-                            enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
-                            focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
-
-                            labelText: 'Quantity',labelStyle: TextStyle(color: kText),
-                            hintText:"Quantity in Inventory",
-                          ),
-                          textAlign: TextAlign.center,
-
-                        ),
-                      ),
-
-                      getImageWidget048(),
-                      SizedBox(height: 8.0,),
-                    Container(
-                      margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
-                      child: TextFormField(
-                        style:TextStyle(color: kText),
-                        controller: customName48,
-                        decoration: InputDecoration(
-                          border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
-                          enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
-                          focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
-
-                          labelText: 'Title',labelStyle: TextStyle(color: kText),
-                          hintText:"Title",
-                        ),
-                        textAlign: TextAlign.center,
-
-                      ),
-                    ),
-                    SizedBox(height: 8.0,),
-                      Container(
-                        margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
-                        child: TextFormField(
-                          style:TextStyle(color: kText),
-                          keyboardType:TextInputType.number,
-                          controller: custom48,
-                          decoration: InputDecoration(
-                            border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
-                            enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
-                            focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
-
-                            labelText: 'Quantity',labelStyle: TextStyle(color: kText),
-                            hintText:"Quantity in Inventory",
-                          ),
-                          textAlign: TextAlign.center,
-
-                        ),
-                      ),
-
-                      getImageWidget049(),
-                      SizedBox(height: 8.0,),
-                    Container(
-                      margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
-                      child: TextFormField(
-                        style:TextStyle(color: kText),
-                        controller: customName49,
-                        decoration: InputDecoration(
-                          border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
-                          enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
-                          focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
-
-                          labelText: 'Title',labelStyle: TextStyle(color: kText),
-                          hintText:"Title",
-                        ),
-                        textAlign: TextAlign.center,
-
-                      ),
-                    ),
-                    SizedBox(height: 8.0,),
-                      Container(
-                        margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
-                        child: TextFormField(
-                          style:TextStyle(color: kText),
-                          keyboardType:TextInputType.number,
-                          controller: custom49,
-                          decoration: InputDecoration(
-                            border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
-                            enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
-                            focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
-
-                            labelText: 'Quantity',labelStyle: TextStyle(color: kText),
-                            hintText:"Quantity in Inventory",
-                          ),
-                          textAlign: TextAlign.center,
-
-                        ),
-                      ),
-
-                      getImageWidget050(),
-                      SizedBox(height: 8.0,),
-                    Container(
-                      margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
-                      child: TextFormField(
-                        style:TextStyle(color: kText),
-                        controller: customName50,
-                        decoration: InputDecoration(
-                          border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
-                          enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
-                          focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
-
-                          labelText: 'Title',labelStyle: TextStyle(color: kText),
-                          hintText:"Title",
-                        ),
-                        textAlign: TextAlign.center,
-
-                      ),
-                    ),
-                    SizedBox(height: 8.0,),
-                      Container(
-                        margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
-                        child: TextFormField(
-                          style:TextStyle(color: kText),
-                          keyboardType:TextInputType.number,
-                          controller: custom50,
-                          decoration: InputDecoration(
-                            border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
-                            enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
-                            focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
-
-                            labelText: 'Quantity',labelStyle: TextStyle(color: kText),
-                            hintText:"Quantity in Inventory",
-                          ),
-                          textAlign: TextAlign.center,
-
-                        ),
-                      ),
-
-                   ]
-              ),
-
-
-        ])
-            ),
-            Container(
-                height:SizeConfig.screenHeight*0.05,
-                child:Row(
-                  children: [
-                    InkWell(
-                      onTap: (){
-                        pageController.animateToPage(--pageChanged, duration: Duration(milliseconds: 250), curve: Curves.bounceInOut);
-                      },
-                      child: FittedBox(
-                        fit:  BoxFit.fitHeight,
-                        child: Container(
-                          alignment:Alignment.center,
-                          width:SizeConfig.blockSizeHorizontal*50,
-                          height:SizeConfig.screenHeight*0.05,
-
-                          //icon: Icon(Icons.drag_handle),
-                          child:Text("Previous",style:TextStyle(color: Colors.black)),
-
-                        ),
-                      ),
-                    ),
-                    InkWell(
-                      onTap: (){
-                        pageController.animateToPage(++pageChanged,
-                            duration: Duration(milliseconds: 250),
-                            curve: Curves.bounceInOut);
-                      },
-                      child: FittedBox(
-                        fit:  BoxFit.fitHeight,
-                        child: Container(
-                          alignment:Alignment.center,
-                          height:SizeConfig.screenHeight*0.05,
-
-                          width:SizeConfig.blockSizeHorizontal*50,
-
-                          //icon: Icon(Icons.drag_handle),
-                          child:Text("Next",style:TextStyle(color: Colors.black)),
-
-                        ),
-                      ),
-                    ),
-
-
-                  ],
-                )),
-
-
-
-
-          ],
-                ),
-      );
-
-}
+// page4(){
+//     SizeConfig().init(context);
+//     return
+//       SingleChildScrollView(
+//         child: Column(
+//           children: <Widget>[
+//             Container(
+//               height:SizeConfig.screenHeight*0.85,
+//
+//             child: ListView(
+//         children: <Widget>[
+//
+//         ExpansionTile(
+//                   title: title1Controller.text == ""?
+//                   Text("Title",
+//                       style: TextStyle(
+//                           fontWeight: FontWeight.bold))
+//
+//                   :Text("${title1Controller.text}",
+//                       style: TextStyle(
+//                           fontWeight: FontWeight.bold)),
+//                   children: [
+//           // SingleChildScrollView(child: Column(children:[])),
+//                       SizedBox(height: 8.0,),
+//                       Container(
+//                         margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+//                         child: TextFormField(
+//                           style:TextStyle(color: kText),
+//                           controller: title1Controller,
+//                           decoration: InputDecoration(
+//                             border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+//                             enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+//                             focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+//
+//                             labelText: 'title',labelStyle: TextStyle(color: kText),
+//                             hintText:"Ex:Collar",
+//                           ),
+//                           textAlign: TextAlign.center,
+//
+//                         ),
+//                       ),
+//
+//                       getImageWidget01(),
+//                       SizedBox(height: 8.0,),
+//                     Container(
+//                       margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+//                       child: TextFormField(
+//                         style:TextStyle(color: kText),
+//                         controller: customName1,
+//                         decoration: InputDecoration(
+//                           border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+//                           enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+//                           focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+//
+//                           labelText: 'Title',labelStyle: TextStyle(color: kText),
+//                           hintText:"Title",
+//                         ),
+//                         textAlign: TextAlign.center,
+//
+//                       ),
+//                     ),
+//                     SizedBox(height: 8.0,),
+//
+//                     Container(
+//                         margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+//                         child: TextFormField(
+//                           style:TextStyle(color: kText),
+//                           keyboardType:TextInputType.number,
+//                           controller: custom1,
+//                           decoration: InputDecoration(
+//                             border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+//                             enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+//                             focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+//
+//                             labelText: 'Quantity',labelStyle: TextStyle(color: kText),
+//                             hintText:"Quantity in Inventory",
+//                           ),
+//                           textAlign: TextAlign.center,
+//
+//                         ),
+//                       ),
+//
+//                       getImageWidget02(),
+//                       SizedBox(height: 8.0,),
+//                     Container(
+//                       margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+//                       child: TextFormField(
+//                         style:TextStyle(color: kText),
+//                         controller: customName2,
+//                         decoration: InputDecoration(
+//                           border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+//                           enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+//                           focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+//
+//                           labelText: 'Title',labelStyle: TextStyle(color: kText),
+//                           hintText:"Title",
+//                         ),
+//                         textAlign: TextAlign.center,
+//
+//                       ),
+//                     ),
+//                     SizedBox(height: 8.0,),
+//
+//                     Container(
+//                         margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+//                         child: TextFormField(
+//                           style:TextStyle(color: kText),
+//                           keyboardType:TextInputType.number,
+//                           controller: custom2,
+//                           decoration: InputDecoration(
+//                             border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+//                             enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+//                             focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+//
+//                             labelText: 'Quantity',labelStyle: TextStyle(color: kText),
+//                             hintText:"Quantity in Inventory",
+//                           ),
+//                           textAlign: TextAlign.center,
+//
+//                         ),
+//                       ),
+//
+//                       getImageWidget03(),
+//                       SizedBox(height: 8.0,),
+//                     Container(
+//                       margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+//                       child: TextFormField(
+//                         style:TextStyle(color: kText),
+//                         controller: customName3,
+//                         decoration: InputDecoration(
+//                           border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+//                           enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+//                           focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+//
+//                           labelText: 'Title',labelStyle: TextStyle(color: kText),
+//                           hintText:"Title",
+//                         ),
+//                         textAlign: TextAlign.center,
+//
+//                       ),
+//                     ),
+//                     SizedBox(height: 8.0,),
+//                          Container(
+//                         margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+//                         child: TextFormField(
+//                           style:TextStyle(color: kText),
+//                           keyboardType:TextInputType.number,
+//                           controller: custom3,
+//                           decoration: InputDecoration(
+//                             border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+//                             enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+//                             focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+//
+//                             labelText: 'Quantity',labelStyle: TextStyle(color: kText),
+//                             hintText:"Quantity in Inventory",
+//                           ),
+//                           textAlign: TextAlign.center,
+//
+//                         ),
+//                       ),
+//
+//                       getImageWidget04(),
+//                       SizedBox(height: 8.0,),
+//                     Container(
+//                       margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+//                       child: TextFormField(
+//                         style:TextStyle(color: kText),
+//                         controller: customName4,
+//                         decoration: InputDecoration(
+//                           border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+//                           enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+//                           focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+//
+//                           labelText: 'Title',labelStyle: TextStyle(color: kText),
+//                           hintText:"Title",
+//                         ),
+//                         textAlign: TextAlign.center,
+//
+//                       ),
+//                     ),
+//                     SizedBox(height: 8.0,),
+//                       Container(
+//                         margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+//                         child: TextFormField(
+//                           style:TextStyle(color: kText),
+//                           keyboardType:TextInputType.number,
+//                           controller: custom4,
+//                           decoration: InputDecoration(
+//                             border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+//                             enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+//                             focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+//
+//                             labelText: 'Quantity',labelStyle: TextStyle(color: kText),
+//                             hintText:"Quantity in Inventory",
+//                           ),
+//                           textAlign: TextAlign.center,
+//
+//                         ),
+//                       ),
+//
+//                       getImageWidget05(),
+//                       SizedBox(height: 8.0,),
+//                     Container(
+//                       margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+//                       child: TextFormField(
+//                         style:TextStyle(color: kText),
+//                         controller: customName5,
+//                         decoration: InputDecoration(
+//                           border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+//                           enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+//                           focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+//
+//                           labelText: 'Title',labelStyle: TextStyle(color: kText),
+//                           hintText:"Title",
+//                         ),
+//                         textAlign: TextAlign.center,
+//
+//                       ),
+//                     ),
+//                     SizedBox(height: 8.0,),
+//                       Container(
+//                         margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+//                         child: TextFormField(
+//                           style:TextStyle(color: kText),
+//                           keyboardType:TextInputType.number,
+//                           controller: custom5,
+//                           decoration: InputDecoration(
+//                             border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+//                             enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+//                             focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+//
+//                             labelText: 'Quantity',labelStyle: TextStyle(color: kText),
+//                             hintText:"Quantity in Inventory",
+//                           ),
+//                           textAlign: TextAlign.center,
+//
+//                         ),
+//                       ),
+//
+//                       getImageWidget06(),
+//                       SizedBox(height: 8.0,),
+//                     Container(
+//                       margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+//                       child: TextFormField(
+//                         style:TextStyle(color: kText),
+//                         controller: customName6,
+//                         decoration: InputDecoration(
+//                           border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+//                           enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+//                           focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+//
+//                           labelText: 'Title',labelStyle: TextStyle(color: kText),
+//                           hintText:"Title",
+//                         ),
+//                         textAlign: TextAlign.center,
+//
+//                       ),
+//                     ),
+//                     SizedBox(height: 8.0,),
+//                       Container(
+//                         margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+//                         child: TextFormField(
+//                           style:TextStyle(color: kText),
+//                           keyboardType:TextInputType.number,
+//                           controller: custom6,
+//                           decoration: InputDecoration(
+//                             border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+//                             enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+//                             focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+//
+//                             labelText: 'Quantity',labelStyle: TextStyle(color: kText),
+//                             hintText:"Quantity in Inventory",
+//                           ),
+//                           textAlign: TextAlign.center,
+//
+//                         ),
+//                       ),
+//
+//                       getImageWidget07(),
+//                       SizedBox(height: 8.0,),
+//                     Container(
+//                       margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+//                       child: TextFormField(
+//                         style:TextStyle(color: kText),
+//                         controller: customName7,
+//                         decoration: InputDecoration(
+//                           border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+//                           enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+//                           focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+//
+//                           labelText: 'Title',labelStyle: TextStyle(color: kText),
+//                           hintText:"Title",
+//                         ),
+//                         textAlign: TextAlign.center,
+//
+//                       ),
+//                     ),
+//                     SizedBox(height: 8.0,),
+//                       Container(
+//                         margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+//                         child: TextFormField(
+//                           style:TextStyle(color: kText),
+//                           keyboardType:TextInputType.number,
+//                           controller: custom7,
+//                           decoration: InputDecoration(
+//                             border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+//                             enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+//                             focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+//
+//                             labelText: 'Quantity',labelStyle: TextStyle(color: kText),
+//                             hintText:"Quantity in Inventory",
+//                           ),
+//                           textAlign: TextAlign.center,
+//
+//                         ),
+//                       ),
+//
+//                       getImageWidget08(),
+//                       SizedBox(height: 8.0,),
+//                     Container(
+//                       margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+//                       child: TextFormField(
+//                         style:TextStyle(color: kText),
+//                         controller: customName8,
+//                         decoration: InputDecoration(
+//                           border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+//                           enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+//                           focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+//
+//                           labelText: 'Title',labelStyle: TextStyle(color: kText),
+//                           hintText:"Title",
+//                         ),
+//                         textAlign: TextAlign.center,
+//
+//                       ),
+//                     ),
+//                     SizedBox(height: 8.0,),
+//                       Container(
+//                         margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+//                         child: TextFormField(
+//                           style:TextStyle(color: kText),
+//                           keyboardType:TextInputType.number,
+//                           controller: custom8,
+//                           decoration: InputDecoration(
+//                             border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+//                             enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+//                             focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+//
+//                             labelText: 'Quantity',labelStyle: TextStyle(color: kText),
+//                             hintText:"Quantity in Inventory",
+//                           ),
+//                           textAlign: TextAlign.center,
+//
+//                         ),
+//                       ),
+//
+//                       getImageWidget09(),
+//                       SizedBox(height: 8.0,),
+//                     Container(
+//                       margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+//                       child: TextFormField(
+//                         style:TextStyle(color: kText),
+//                         controller: customName9,
+//                         decoration: InputDecoration(
+//                           border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+//                           enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+//                           focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+//
+//                           labelText: 'Title',labelStyle: TextStyle(color: kText),
+//                           hintText:"Title",
+//                         ),
+//                         textAlign: TextAlign.center,
+//
+//                       ),
+//                     ),
+//                     SizedBox(height: 8.0,),
+//                       Container(
+//                         margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+//                         child: TextFormField(
+//                           style:TextStyle(color: kText),
+//                           keyboardType:TextInputType.number,
+//                           controller: custom9,
+//                           decoration: InputDecoration(
+//                             border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+//                             enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+//                             focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+//
+//                             labelText: 'Quantity',labelStyle: TextStyle(color: kText),
+//                             hintText:"Quantity in Inventory",
+//                           ),
+//                           textAlign: TextAlign.center,
+//
+//                         ),
+//                       ),
+//
+//                       getImageWidget010(),
+//                       SizedBox(height: 8.0,),
+//                     Container(
+//                       margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+//                       child: TextFormField(
+//                         style:TextStyle(color: kText),
+//                         controller: customName10,
+//                         decoration: InputDecoration(
+//                           border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+//                           enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+//                           focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+//
+//                           labelText: 'Title',labelStyle: TextStyle(color: kText),
+//                           hintText:"Title",
+//                         ),
+//                         textAlign: TextAlign.center,
+//
+//                       ),
+//                     ),
+//                     SizedBox(height: 8.0,),
+//                       Container(
+//                         margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+//                         child: TextFormField(
+//                           style:TextStyle(color: kText),
+//                           keyboardType:TextInputType.number,
+//                           controller: custom10,
+//                           decoration: InputDecoration(
+//                             border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+//                             enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+//                             focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+//
+//                             labelText: 'Quantity',labelStyle: TextStyle(color: kText),
+//                             hintText:"Quantity in Inventory",
+//                           ),
+//                           textAlign: TextAlign.center,
+//
+//                         ),
+//                       ),
+//
+//                    ]
+//               ),
+//         ExpansionTile(
+//                   title: title2Controller.text == ""?
+//                   Text("Title",
+//                       style: TextStyle(
+//                           fontWeight: FontWeight.bold))
+//
+//                   :Text("${title2Controller.text}",
+//                       style: TextStyle(
+//                           fontWeight: FontWeight.bold)),
+//                   children: [
+//                       SizedBox(height: 8.0,),
+//                       Container(
+//                         margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+//                         child: TextFormField(
+//                           style:TextStyle(color: kText),
+//                           controller: title2Controller,
+//                           decoration: InputDecoration(
+//                             border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+//                             enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+//                             focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+//
+//                             labelText: 'title',labelStyle: TextStyle(color: kText),
+//                             hintText:"Ex:Collar",
+//                           ),
+//                           textAlign: TextAlign.center,
+//
+//                         ),
+//                       ),
+//
+//                       getImageWidget011(),
+//                       SizedBox(height: 8.0,),
+//                     Container(
+//                       margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+//                       child: TextFormField(
+//                         style:TextStyle(color: kText),
+//                         controller: customName11,
+//                         decoration: InputDecoration(
+//                           border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+//                           enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+//                           focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+//
+//                           labelText: 'Title',labelStyle: TextStyle(color: kText),
+//                           hintText:"Title",
+//                         ),
+//                         textAlign: TextAlign.center,
+//
+//                       ),
+//                     ),
+//                     SizedBox(height: 8.0,),
+//                       Container(
+//                         margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+//                         child: TextFormField(
+//                           style:TextStyle(color: kText),
+//                           keyboardType:TextInputType.number,
+//                           controller: custom11,
+//                           decoration: InputDecoration(
+//                             border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+//                             enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+//                             focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+//
+//                             labelText: 'Quantity',labelStyle: TextStyle(color: kText),
+//                             hintText:"Quantity in Inventory",
+//                           ),
+//                           textAlign: TextAlign.center,
+//
+//                         ),
+//                       ),
+//
+//                       getImageWidget012(),
+//                       SizedBox(height: 8.0,),
+//                     Container(
+//                       margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+//                       child: TextFormField(
+//                         style:TextStyle(color: kText),
+//                         controller: customName12,
+//                         decoration: InputDecoration(
+//                           border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+//                           enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+//                           focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+//
+//                           labelText: 'Title',labelStyle: TextStyle(color: kText),
+//                           hintText:"Title",
+//                         ),
+//                         textAlign: TextAlign.center,
+//
+//                       ),
+//                     ),
+//                     SizedBox(height: 8.0,),
+//                       Container(
+//                         margin: EdgeInsets.fromLTRB(120.0, 8.0, 20.0,8.0),
+//                         child: TextFormField(
+//                           style:TextStyle(color: kText),
+//                           keyboardType:TextInputType.number,
+//                           controller: custom12,
+//                           decoration: InputDecoration(
+//                             border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+//                             enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+//                             focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+//
+//                             labelText: 'Quantity',labelStyle: TextStyle(color: kText),
+//                             hintText:"Quantity in Inventory",
+//                           ),
+//                           textAlign: TextAlign.center,
+//
+//                         ),
+//                       ),
+//
+//                       getImageWidget013(),
+//                       SizedBox(height: 8.0,),
+//                     Container(
+//                       margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+//                       child: TextFormField(
+//                         style:TextStyle(color: kText),
+//                         controller: customName13,
+//                         decoration: InputDecoration(
+//                           border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+//                           enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+//                           focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+//
+//                           labelText: 'Title',labelStyle: TextStyle(color: kText),
+//                           hintText:"Title",
+//                         ),
+//                         textAlign: TextAlign.center,
+//
+//                       ),
+//                     ),
+//                     SizedBox(height: 8.0,),
+//                       Container(
+//                         margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+//                         child: TextFormField(
+//                           style:TextStyle(color: kText),
+//                           keyboardType:TextInputType.number,
+//                           controller: custom13,
+//                           decoration: InputDecoration(
+//                             border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+//                             enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+//                             focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+//
+//                             labelText: 'Quantity',labelStyle: TextStyle(color: kText),
+//                             hintText:"Quantity in Inventory",
+//                           ),
+//                           textAlign: TextAlign.center,
+//
+//                         ),
+//                       ),
+//
+//                       getImageWidget014(),
+//                       SizedBox(height: 8.0,),
+//                     Container(
+//                       margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+//                       child: TextFormField(
+//                         style:TextStyle(color: kText),
+//                         controller: customName14,
+//                         decoration: InputDecoration(
+//                           border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+//                           enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+//                           focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+//
+//                           labelText: 'Title',labelStyle: TextStyle(color: kText),
+//                           hintText:"Title",
+//                         ),
+//                         textAlign: TextAlign.center,
+//
+//                       ),
+//                     ),
+//                     SizedBox(height: 8.0,),
+//                       Container(
+//                         margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+//                         child: TextFormField(
+//                           style:TextStyle(color: kText),
+//                           keyboardType:TextInputType.number,
+//                           controller: custom14,
+//                           decoration: InputDecoration(
+//                             border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+//                             enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+//                             focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+//
+//                             labelText: 'Quantity',labelStyle: TextStyle(color: kText),
+//                             hintText:"Quantity in Inventory",
+//                           ),
+//                           textAlign: TextAlign.center,
+//
+//                         ),
+//                       ),
+//
+//                       getImageWidget015(),
+//                       SizedBox(height: 8.0,),
+//                     Container(
+//                       margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+//                       child: TextFormField(
+//                         style:TextStyle(color: kText),
+//                         controller: customName15,
+//                         decoration: InputDecoration(
+//                           border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+//                           enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+//                           focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+//
+//                           labelText: 'Title',labelStyle: TextStyle(color: kText),
+//                           hintText:"Title",
+//                         ),
+//                         textAlign: TextAlign.center,
+//
+//                       ),
+//                     ),
+//                     SizedBox(height: 8.0,),
+//                       Container(
+//                         margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+//                         child: TextFormField(
+//                           style:TextStyle(color: kText),
+//                           keyboardType:TextInputType.number,
+//                           controller: custom15,
+//                           decoration: InputDecoration(
+//                             border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+//                             enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+//                             focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+//
+//                             labelText: 'Quantity',labelStyle: TextStyle(color: kText),
+//                             hintText:"Quantity in Inventory",
+//                           ),
+//                           textAlign: TextAlign.center,
+//
+//                         ),
+//                       ),
+//
+//                       getImageWidget016(),
+//                       SizedBox(height: 8.0,),
+//                     Container(
+//                       margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+//                       child: TextFormField(
+//                         style:TextStyle(color: kText),
+//                         controller: customName16,
+//                         decoration: InputDecoration(
+//                           border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+//                           enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+//                           focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+//
+//                           labelText: 'Title',labelStyle: TextStyle(color: kText),
+//                           hintText:"Title",
+//                         ),
+//                         textAlign: TextAlign.center,
+//
+//                       ),
+//                     ),
+//                     SizedBox(height: 8.0,),
+//                       Container(
+//                         margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+//                         child: TextFormField(
+//                           style:TextStyle(color: kText),
+//                           keyboardType:TextInputType.number,
+//                           controller: custom16,
+//                           decoration: InputDecoration(
+//                             border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+//                             enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+//                             focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+//
+//                             labelText: 'Quantity',labelStyle: TextStyle(color: kText),
+//                             hintText:"Quantity in Inventory",
+//                           ),
+//                           textAlign: TextAlign.center,
+//
+//                         ),
+//                       ),
+//
+//                       getImageWidget017(),
+//                       SizedBox(height: 8.0,),
+//                     Container(
+//                       margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+//                       child: TextFormField(
+//                         style:TextStyle(color: kText),
+//                         controller: customName17,
+//                         decoration: InputDecoration(
+//                           border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+//                           enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+//                           focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+//
+//                           labelText: 'Title',labelStyle: TextStyle(color: kText),
+//                           hintText:"Title",
+//                         ),
+//                         textAlign: TextAlign.center,
+//
+//                       ),
+//                     ),
+//                     SizedBox(height: 8.0,),
+//                       Container(
+//                         margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+//                         child: TextFormField(
+//                           style:TextStyle(color: kText),
+//                           keyboardType:TextInputType.number,
+//                           controller: custom17,
+//                           decoration: InputDecoration(
+//                             border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+//                             enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+//                             focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+//
+//                             labelText: 'Quantity',labelStyle: TextStyle(color: kText),
+//                             hintText:"Quantity in Inventory",
+//                           ),
+//                           textAlign: TextAlign.center,
+//
+//                         ),
+//                       ),
+//
+//                       getImageWidget018(),
+//                       SizedBox(height: 8.0,),
+//                     Container(
+//                       margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+//                       child: TextFormField(
+//                         style:TextStyle(color: kText),
+//                         controller: customName18,
+//                         decoration: InputDecoration(
+//                           border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+//                           enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+//                           focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+//
+//                           labelText: 'Title',labelStyle: TextStyle(color: kText),
+//                           hintText:"Title",
+//                         ),
+//                         textAlign: TextAlign.center,
+//
+//                       ),
+//                     ),
+//                     SizedBox(height: 8.0,),
+//                       Container(
+//                         margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+//                         child: TextFormField(
+//                           style:TextStyle(color: kText),
+//                           keyboardType:TextInputType.number,
+//                           controller: custom18,
+//                           decoration: InputDecoration(
+//                             border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+//                             enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+//                             focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+//
+//                             labelText: 'Quantity',labelStyle: TextStyle(color: kText),
+//                             hintText:"Quantity in Inventory",
+//                           ),
+//                           textAlign: TextAlign.center,
+//
+//                         ),
+//                       ),
+//
+//                       getImageWidget019(),
+//                       SizedBox(height: 8.0,),
+//                     Container(
+//                       margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+//                       child: TextFormField(
+//                         style:TextStyle(color: kText),
+//                         controller: customName19,
+//                         decoration: InputDecoration(
+//                           border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+//                           enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+//                           focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+//
+//                           labelText: 'Title',labelStyle: TextStyle(color: kText),
+//                           hintText:"Title",
+//                         ),
+//                         textAlign: TextAlign.center,
+//
+//                       ),
+//                     ),
+//                     SizedBox(height: 8.0,),
+//                       Container(
+//                         margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+//                         child: TextFormField(
+//                           style:TextStyle(color: kText),
+//                           keyboardType:TextInputType.number,
+//                           controller: custom19,
+//                           decoration: InputDecoration(
+//                             border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+//                             enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+//                             focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+//
+//                             labelText: 'Quantity',labelStyle: TextStyle(color: kText),
+//                             hintText:"Quantity in Inventory",
+//                           ),
+//                           textAlign: TextAlign.center,
+//
+//                         ),
+//                       ),
+//
+//                       getImageWidget020(),
+//                       SizedBox(height: 8.0,),
+//                     Container(
+//                       margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+//                       child: TextFormField(
+//                         style:TextStyle(color: kText),
+//                         controller: customName20,
+//                         decoration: InputDecoration(
+//                           border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+//                           enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+//                           focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+//
+//                           labelText: 'Title',labelStyle: TextStyle(color: kText),
+//                           hintText:"Title",
+//                         ),
+//                         textAlign: TextAlign.center,
+//
+//                       ),
+//                     ),
+//                     SizedBox(height: 8.0,),
+//                       Container(
+//                         margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+//                         child: TextFormField(
+//                           style:TextStyle(color: kText),
+//                           keyboardType:TextInputType.number,
+//                           controller: custom20,
+//                           decoration: InputDecoration(
+//                             border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+//                             enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+//                             focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+//
+//                             labelText: 'Quantity',labelStyle: TextStyle(color: kText),
+//                             hintText:"Quantity in Inventory",
+//                           ),
+//                           textAlign: TextAlign.center,
+//
+//                         ),
+//                       ),
+//
+//                    ]
+//               ),
+//         ExpansionTile(
+//                   title: title3Controller.text == ""?
+//                   Text("Title",
+//                       style: TextStyle(
+//                           fontWeight: FontWeight.bold))
+//
+//                   :Text("${title3Controller.text}",
+//                       style: TextStyle(
+//                           fontWeight: FontWeight.bold)),
+//                   children: [
+//                       SizedBox(height: 8.0,),
+//                       Container(
+//                         margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+//                         child: TextFormField(
+//                           style:TextStyle(color: kText),
+//                           controller: title3Controller,
+//                           decoration: InputDecoration(
+//                             border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+//                             enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+//                             focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+//
+//                             labelText: 'title',labelStyle: TextStyle(color: kText),
+//                             hintText:"Ex:Collar",
+//                           ),
+//                           textAlign: TextAlign.center,
+//
+//                         ),
+//                       ),
+//
+//                       getImageWidget021(),
+//                       SizedBox(height: 8.0,),
+//                     Container(
+//                       margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+//                       child: TextFormField(
+//                         style:TextStyle(color: kText),
+//                         controller: customName21,
+//                         decoration: InputDecoration(
+//                           border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+//                           enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+//                           focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+//
+//                           labelText: 'Title',labelStyle: TextStyle(color: kText),
+//                           hintText:"Title",
+//                         ),
+//                         textAlign: TextAlign.center,
+//
+//                       ),
+//                     ),
+//                     SizedBox(height: 8.0,),
+//                       Container(
+//                         margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+//                         child: TextFormField(
+//                           style:TextStyle(color: kText),
+//                           keyboardType:TextInputType.number,
+//                           controller: custom21,
+//                           decoration: InputDecoration(
+//                             border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+//                             enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+//                             focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+//
+//                             labelText: 'Quantity',labelStyle: TextStyle(color: kText),
+//                             hintText:"Quantity in Inventory",
+//                           ),
+//                           textAlign: TextAlign.center,
+//
+//                         ),
+//                       ),
+//
+//                       getImageWidget022(),
+//                       SizedBox(height: 8.0,),
+//                     Container(
+//                       margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+//                       child: TextFormField(
+//                         style:TextStyle(color: kText),
+//                         controller: customName22,
+//                         decoration: InputDecoration(
+//                           border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+//                           enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+//                           focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+//
+//                           labelText: 'Title',labelStyle: TextStyle(color: kText),
+//                           hintText:"Title",
+//                         ),
+//                         textAlign: TextAlign.center,
+//
+//                       ),
+//                     ),
+//                     SizedBox(height: 8.0,),
+//                       Container(
+//                         margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+//                         child: TextFormField(
+//                           style:TextStyle(color: kText),
+//                           keyboardType:TextInputType.number,
+//                           controller: custom22,
+//                           decoration: InputDecoration(
+//                             border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+//                             enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+//                             focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+//
+//                             labelText: 'Quantity',labelStyle: TextStyle(color: kText),
+//                             hintText:"Quantity in Inventory",
+//                           ),
+//                           textAlign: TextAlign.center,
+//
+//                         ),
+//                       ),
+//
+//                       getImageWidget023(),
+//                       SizedBox(height: 8.0,),
+//                     Container(
+//                       margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+//                       child: TextFormField(
+//                         style:TextStyle(color: kText),
+//                         controller: customName23,
+//                         decoration: InputDecoration(
+//                           border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+//                           enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+//                           focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+//
+//                           labelText: 'Title',labelStyle: TextStyle(color: kText),
+//                           hintText:"Title",
+//                         ),
+//                         textAlign: TextAlign.center,
+//
+//                       ),
+//                     ),
+//                     SizedBox(height: 8.0,),
+//                       Container(
+//                         margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+//                         child: TextFormField(
+//                           style:TextStyle(color: kText),
+//                           keyboardType:TextInputType.number,
+//                           controller: custom23,
+//                           decoration: InputDecoration(
+//                             border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+//                             enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+//                             focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+//
+//                             labelText: 'Quantity',labelStyle: TextStyle(color: kText),
+//                             hintText:"Quantity in Inventory",
+//                           ),
+//                           textAlign: TextAlign.center,
+//
+//                         ),
+//                       ),
+//
+//                       getImageWidget024(),
+//                       SizedBox(height: 8.0,),
+//                     Container(
+//                       margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+//                       child: TextFormField(
+//                         style:TextStyle(color: kText),
+//                         controller: customName24,
+//                         decoration: InputDecoration(
+//                           border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+//                           enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+//                           focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+//
+//                           labelText: 'Title',labelStyle: TextStyle(color: kText),
+//                           hintText:"Title",
+//                         ),
+//                         textAlign: TextAlign.center,
+//
+//                       ),
+//                     ),
+//                     SizedBox(height: 8.0,),
+//                       Container(
+//                         margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+//                         child: TextFormField(
+//                           style:TextStyle(color: kText),
+//                           keyboardType:TextInputType.number,
+//                           controller: custom24,
+//                           decoration: InputDecoration(
+//                             border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+//                             enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+//                             focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+//
+//                             labelText: 'Quantity',labelStyle: TextStyle(color: kText),
+//                             hintText:"Quantity in Inventory",
+//                           ),
+//                           textAlign: TextAlign.center,
+//
+//                         ),
+//                       ),
+//
+//                       getImageWidget025(),
+//                       SizedBox(height: 8.0,),
+//                     Container(
+//                       margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+//                       child: TextFormField(
+//                         style:TextStyle(color: kText),
+//                         controller: customName25,
+//                         decoration: InputDecoration(
+//                           border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+//                           enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+//                           focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+//
+//                           labelText: 'Title',labelStyle: TextStyle(color: kText),
+//                           hintText:"Title",
+//                         ),
+//                         textAlign: TextAlign.center,
+//
+//                       ),
+//                     ),
+//                     SizedBox(height: 8.0,),
+//                       Container(
+//                         margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+//                         child: TextFormField(
+//                           style:TextStyle(color: kText),
+//                           keyboardType:TextInputType.number,
+//                           controller: custom25,
+//                           decoration: InputDecoration(
+//                             border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+//                             enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+//                             focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+//
+//                             labelText: 'Quantity',labelStyle: TextStyle(color: kText),
+//                             hintText:"Quantity in Inventory",
+//                           ),
+//                           textAlign: TextAlign.center,
+//
+//                         ),
+//                       ),
+//
+//                       getImageWidget026(),
+//                       SizedBox(height: 8.0,),
+//                     Container(
+//                       margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+//                       child: TextFormField(
+//                         style:TextStyle(color: kText),
+//                         controller: customName26,
+//                         decoration: InputDecoration(
+//                           border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+//                           enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+//                           focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+//
+//                           labelText: 'Title',labelStyle: TextStyle(color: kText),
+//                           hintText:"Title",
+//                         ),
+//                         textAlign: TextAlign.center,
+//
+//                       ),
+//                     ),
+//                     SizedBox(height: 8.0,),
+//                       Container(
+//                         margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+//                         child: TextFormField(
+//                           style:TextStyle(color: kText),
+//                           keyboardType:TextInputType.number,
+//                           controller: custom26,
+//                           decoration: InputDecoration(
+//                             border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+//                             enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+//                             focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+//
+//                             labelText: 'Quantity',labelStyle: TextStyle(color: kText),
+//                             hintText:"Quantity in Inventory",
+//                           ),
+//                           textAlign: TextAlign.center,
+//
+//                         ),
+//                       ),
+//
+//                       getImageWidget027(),
+//                       SizedBox(height: 8.0,),
+//                     Container(
+//                       margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+//                       child: TextFormField(
+//                         style:TextStyle(color: kText),
+//                         controller: customName27,
+//                         decoration: InputDecoration(
+//                           border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+//                           enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+//                           focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+//
+//                           labelText: 'Title',labelStyle: TextStyle(color: kText),
+//                           hintText:"Title",
+//                         ),
+//                         textAlign: TextAlign.center,
+//
+//                       ),
+//                     ),
+//                     SizedBox(height: 8.0,),
+//                       Container(
+//                         margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+//                         child: TextFormField(
+//                           style:TextStyle(color: kText),
+//                           keyboardType:TextInputType.number,
+//                           controller: custom27,
+//                           decoration: InputDecoration(
+//                             border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+//                             enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+//                             focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+//
+//                             labelText: 'Quantity',labelStyle: TextStyle(color: kText),
+//                             hintText:"Quantity in Inventory",
+//                           ),
+//                           textAlign: TextAlign.center,
+//
+//                         ),
+//                       ),
+//
+//                       getImageWidget028(),
+//                       SizedBox(height: 8.0,),
+//                     Container(
+//                       margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+//                       child: TextFormField(
+//                         style:TextStyle(color: kText),
+//                         controller: customName28,
+//                         decoration: InputDecoration(
+//                           border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+//                           enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+//                           focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+//
+//                           labelText: 'Title',labelStyle: TextStyle(color: kText),
+//                           hintText:"Title",
+//                         ),
+//                         textAlign: TextAlign.center,
+//
+//                       ),
+//                     ),
+//                     SizedBox(height: 8.0,),
+//                       Container(
+//                         margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+//                         child: TextFormField(
+//                           style:TextStyle(color: kText),
+//                           keyboardType:TextInputType.number,
+//                           controller: custom28,
+//                           decoration: InputDecoration(
+//                             border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+//                             enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+//                             focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+//
+//                             labelText: 'Quantity',labelStyle: TextStyle(color: kText),
+//                             hintText:"Quantity in Inventory",
+//                           ),
+//                           textAlign: TextAlign.center,
+//
+//                         ),
+//                       ),
+//
+//                       getImageWidget029(),
+//                       SizedBox(height: 8.0,),
+//                     Container(
+//                       margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+//                       child: TextFormField(
+//                         style:TextStyle(color: kText),
+//                         controller: customName29,
+//                         decoration: InputDecoration(
+//                           border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+//                           enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+//                           focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+//
+//                           labelText: 'Title',labelStyle: TextStyle(color: kText),
+//                           hintText:"Title",
+//                         ),
+//                         textAlign: TextAlign.center,
+//
+//                       ),
+//                     ),
+//                     SizedBox(height: 8.0,),
+//                       Container(
+//                         margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+//                         child: TextFormField(
+//                           style:TextStyle(color: kText),
+//                           keyboardType:TextInputType.number,
+//                           controller: custom29,
+//                           decoration: InputDecoration(
+//                             border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+//                             enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+//                             focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+//
+//                             labelText: 'Quantity',labelStyle: TextStyle(color: kText),
+//                             hintText:"Quantity in Inventory",
+//                           ),
+//                           textAlign: TextAlign.center,
+//
+//                         ),
+//                       ),
+//
+//                       getImageWidget030(),
+//                       SizedBox(height: 8.0,),
+//                     Container(
+//                       margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+//                       child: TextFormField(
+//                         style:TextStyle(color: kText),
+//                         controller: customName30,
+//                         decoration: InputDecoration(
+//                           border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+//                           enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+//                           focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+//
+//                           labelText: 'Title',labelStyle: TextStyle(color: kText),
+//                           hintText:"Title",
+//                         ),
+//                         textAlign: TextAlign.center,
+//
+//                       ),
+//                     ),
+//                     SizedBox(height: 8.0,),
+//                       Container(
+//                         margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+//                         child: TextFormField(
+//                           style:TextStyle(color: kText),
+//                           keyboardType:TextInputType.number,
+//                           controller: custom30,
+//                           decoration: InputDecoration(
+//                             border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+//                             enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+//                             focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+//
+//                             labelText: 'Quantity',labelStyle: TextStyle(color: kText),
+//                             hintText:"Quantity in Inventory",
+//                           ),
+//                           textAlign: TextAlign.center,
+//
+//                         ),
+//                       ),
+//
+//                    ]
+//               ),
+//         ExpansionTile(
+//                   title: title4Controller.text == ""?
+//                   Text("Title",
+//                       style: TextStyle(
+//                           fontWeight: FontWeight.bold))
+//
+//                   :Text("${title4Controller.text}",
+//                       style: TextStyle(
+//                           fontWeight: FontWeight.bold)),
+//                   children: [
+//                       SizedBox(height: 8.0,),
+//                       Container(
+//                         margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+//                         child: TextFormField(
+//                           style:TextStyle(color: kText),
+//                           controller: title4Controller,
+//                           decoration: InputDecoration(
+//                             border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+//                             enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+//                             focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+//
+//                             labelText: 'title',labelStyle: TextStyle(color: kText),
+//                             hintText:"Ex:Collar",
+//                           ),
+//                           textAlign: TextAlign.center,
+//
+//                         ),
+//                       ),
+//
+//                       getImageWidget031(),
+//                       SizedBox(height: 8.0,),
+//                     Container(
+//                       margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+//                       child: TextFormField(
+//                         style:TextStyle(color: kText),
+//                         controller: customName31,
+//                         decoration: InputDecoration(
+//                           border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+//                           enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+//                           focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+//
+//                           labelText: 'Title',labelStyle: TextStyle(color: kText),
+//                           hintText:"Title",
+//                         ),
+//                         textAlign: TextAlign.center,
+//
+//                       ),
+//                     ),
+//                     SizedBox(height: 8.0,),
+//                       Container(
+//                         margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+//                         child: TextFormField(
+//                           style:TextStyle(color: kText),
+//                           keyboardType:TextInputType.number,
+//                           controller: custom31,
+//                           decoration: InputDecoration(
+//                             border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+//                             enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+//                             focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+//
+//                             labelText: 'Quantity',labelStyle: TextStyle(color: kText),
+//                             hintText:"Quantity in Inventory",
+//                           ),
+//                           textAlign: TextAlign.center,
+//
+//                         ),
+//                       ),
+//
+//                       getImageWidget032(),
+//                       SizedBox(height: 8.0,),
+//                     Container(
+//                       margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+//                       child: TextFormField(
+//                         style:TextStyle(color: kText),
+//                         controller: customName32,
+//                         decoration: InputDecoration(
+//                           border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+//                           enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+//                           focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+//
+//                           labelText: 'Title',labelStyle: TextStyle(color: kText),
+//                           hintText:"Title",
+//                         ),
+//                         textAlign: TextAlign.center,
+//
+//                       ),
+//                     ),
+//                     SizedBox(height: 8.0,),
+//                       Container(
+//                         margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+//                         child: TextFormField(
+//                           style:TextStyle(color: kText),
+//                           keyboardType:TextInputType.number,
+//                           controller: custom32,
+//                           decoration: InputDecoration(
+//                             border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+//                             enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+//                             focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+//
+//                             labelText: 'Quantity',labelStyle: TextStyle(color: kText),
+//                             hintText:"Quantity in Inventory",
+//                           ),
+//                           textAlign: TextAlign.center,
+//
+//                         ),
+//                       ),
+//
+//                       getImageWidget033(),
+//                       SizedBox(height: 8.0,),
+//                     Container(
+//                       margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+//                       child: TextFormField(
+//                         style:TextStyle(color: kText),
+//                         controller: customName33,
+//                         decoration: InputDecoration(
+//                           border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+//                           enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+//                           focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+//
+//                           labelText: 'Title',labelStyle: TextStyle(color: kText),
+//                           hintText:"Title",
+//                         ),
+//                         textAlign: TextAlign.center,
+//
+//                       ),
+//                     ),
+//                     SizedBox(height: 8.0,),
+//                       Container(
+//                         margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+//                         child: TextFormField(
+//                           style:TextStyle(color: kText),
+//                           keyboardType:TextInputType.number,
+//                           controller: custom33,
+//                           decoration: InputDecoration(
+//                             border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+//                             enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+//                             focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+//
+//                             labelText: 'Quantity',labelStyle: TextStyle(color: kText),
+//                             hintText:"Quantity in Inventory",
+//                           ),
+//                           textAlign: TextAlign.center,
+//
+//                         ),
+//                       ),
+//
+//                       getImageWidget034(),
+//                       SizedBox(height: 8.0,),
+//                     Container(
+//                       margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+//                       child: TextFormField(
+//                         style:TextStyle(color: kText),
+//                         controller: customName34,
+//                         decoration: InputDecoration(
+//                           border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+//                           enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+//                           focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+//
+//                           labelText: 'Title',labelStyle: TextStyle(color: kText),
+//                           hintText:"Title",
+//                         ),
+//                         textAlign: TextAlign.center,
+//
+//                       ),
+//                     ),
+//                     SizedBox(height: 8.0,),
+//                       Container(
+//                         margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+//                         child: TextFormField(
+//                           style:TextStyle(color: kText),
+//                           keyboardType:TextInputType.number,
+//                           controller: custom34,
+//                           decoration: InputDecoration(
+//                             border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+//                             enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+//                             focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+//
+//                             labelText: 'Quantity',labelStyle: TextStyle(color: kText),
+//                             hintText:"Quantity in Inventory",
+//                           ),
+//                           textAlign: TextAlign.center,
+//
+//                         ),
+//                       ),
+//
+//                       getImageWidget035(),
+//                       SizedBox(height: 8.0,),
+//                     Container(
+//                       margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+//                       child: TextFormField(
+//                         style:TextStyle(color: kText),
+//                         controller: customName35,
+//                         decoration: InputDecoration(
+//                           border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+//                           enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+//                           focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+//
+//                           labelText: 'Title',labelStyle: TextStyle(color: kText),
+//                           hintText:"Title",
+//                         ),
+//                         textAlign: TextAlign.center,
+//
+//                       ),
+//                     ),
+//                     SizedBox(height: 8.0,),
+//                       Container(
+//                         margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+//                         child: TextFormField(
+//                           style:TextStyle(color: kText),
+//                           keyboardType:TextInputType.number,
+//                           controller: custom35,
+//                           decoration: InputDecoration(
+//                             border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+//                             enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+//                             focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+//
+//                             labelText: 'Quantity',labelStyle: TextStyle(color: kText),
+//                             hintText:"Quantity in Inventory",
+//                           ),
+//                           textAlign: TextAlign.center,
+//
+//                         ),
+//                       ),
+//
+//                       getImageWidget036(),
+//                       SizedBox(height: 8.0,),
+//                     Container(
+//                       margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+//                       child: TextFormField(
+//                         style:TextStyle(color: kText),
+//                         controller: customName36,
+//                         decoration: InputDecoration(
+//                           border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+//                           enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+//                           focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+//
+//                           labelText: 'Title',labelStyle: TextStyle(color: kText),
+//                           hintText:"Title",
+//                         ),
+//                         textAlign: TextAlign.center,
+//
+//                       ),
+//                     ),
+//                     SizedBox(height: 8.0,),
+//                       Container(
+//                         margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+//                         child: TextFormField(
+//                           style:TextStyle(color: kText),
+//                           keyboardType:TextInputType.number,
+//                           controller: custom36,
+//                           decoration: InputDecoration(
+//                             border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+//                             enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+//                             focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+//
+//                             labelText: 'Quantity',labelStyle: TextStyle(color: kText),
+//                             hintText:"Quantity in Inventory",
+//                           ),
+//                           textAlign: TextAlign.center,
+//
+//                         ),
+//                       ),
+//
+//                       getImageWidget037(),
+//                       SizedBox(height: 8.0,),
+//                     Container(
+//                       margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+//                       child: TextFormField(
+//                         style:TextStyle(color: kText),
+//                         controller: customName37,
+//                         decoration: InputDecoration(
+//                           border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+//                           enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+//                           focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+//
+//                           labelText: 'Title',labelStyle: TextStyle(color: kText),
+//                           hintText:"Title",
+//                         ),
+//                         textAlign: TextAlign.center,
+//
+//                       ),
+//                     ),
+//                     SizedBox(height: 8.0,),
+//                       Container(
+//                         margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+//                         child: TextFormField(
+//                           style:TextStyle(color: kText),
+//                           keyboardType:TextInputType.number,
+//                           controller: custom37,
+//                           decoration: InputDecoration(
+//                             border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+//                             enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+//                             focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+//
+//                             labelText: 'Quantity',labelStyle: TextStyle(color: kText),
+//                             hintText:"Quantity in Inventory",
+//                           ),
+//                           textAlign: TextAlign.center,
+//
+//                         ),
+//                       ),
+//
+//                       getImageWidget038(),
+//                       SizedBox(height: 8.0,),
+//                     Container(
+//                       margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+//                       child: TextFormField(
+//                         style:TextStyle(color: kText),
+//                         controller: customName38,
+//                         decoration: InputDecoration(
+//                           border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+//                           enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+//                           focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+//
+//                           labelText: 'Title',labelStyle: TextStyle(color: kText),
+//                           hintText:"Title",
+//                         ),
+//                         textAlign: TextAlign.center,
+//
+//                       ),
+//                     ),
+//                     SizedBox(height: 8.0,),
+//                       Container(
+//                         margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+//                         child: TextFormField(
+//                           style:TextStyle(color: kText),
+//                           keyboardType:TextInputType.number,
+//                           controller: custom38,
+//                           decoration: InputDecoration(
+//                             border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+//                             enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+//                             focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+//
+//                             labelText: 'Quantity',labelStyle: TextStyle(color: kText),
+//                             hintText:"Quantity in Inventory",
+//                           ),
+//                           textAlign: TextAlign.center,
+//
+//                         ),
+//                       ),
+//
+//                       getImageWidget039(),
+//                       SizedBox(height: 8.0,),
+//                     Container(
+//                       margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+//                       child: TextFormField(
+//                         style:TextStyle(color: kText),
+//                         controller: customName39,
+//                         decoration: InputDecoration(
+//                           border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+//                           enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+//                           focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+//
+//                           labelText: 'Title',labelStyle: TextStyle(color: kText),
+//                           hintText:"Title",
+//                         ),
+//                         textAlign: TextAlign.center,
+//
+//                       ),
+//                     ),
+//                     SizedBox(height: 8.0,),
+//                       Container(
+//                         margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+//                         child: TextFormField(
+//                           style:TextStyle(color: kText),
+//                           keyboardType:TextInputType.number,
+//                           controller: custom39,
+//                           decoration: InputDecoration(
+//                             border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+//                             enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+//                             focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+//
+//                             labelText: 'Quantity',labelStyle: TextStyle(color: kText),
+//                             hintText:"Quantity in Inventory",
+//                           ),
+//                           textAlign: TextAlign.center,
+//
+//                         ),
+//                       ),
+//
+//                       getImageWidget040(),
+//                       SizedBox(height: 8.0,),
+//                     Container(
+//                       margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+//                       child: TextFormField(
+//                         style:TextStyle(color: kText),
+//                         controller: customName40,
+//                         decoration: InputDecoration(
+//                           border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+//                           enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+//                           focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+//
+//                           labelText: 'Title',labelStyle: TextStyle(color: kText),
+//                           hintText:"Title",
+//                         ),
+//                         textAlign: TextAlign.center,
+//
+//                       ),
+//                     ),
+//                     SizedBox(height: 8.0,),
+//                       Container(
+//                         margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+//                         child: TextFormField(
+//                           style:TextStyle(color: kText),
+//                           keyboardType:TextInputType.number,
+//                           controller: custom40,
+//                           decoration: InputDecoration(
+//                             border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+//                             enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+//                             focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+//
+//                             labelText: 'Quantity',labelStyle: TextStyle(color: kText),
+//                             hintText:"Quantity in Inventory",
+//                           ),
+//                           textAlign: TextAlign.center,
+//
+//                         ),
+//                       ),
+//
+//                    ]
+//               ),
+//         ExpansionTile(
+//                   title: title5Controller.text == ""?
+//                   Text("Title",
+//                       style: TextStyle(
+//                           fontWeight: FontWeight.bold))
+//
+//                   :Text("${title5Controller.text}",
+//                       style: TextStyle(
+//                           fontWeight: FontWeight.bold)),
+//                   children: [
+//                       SizedBox(height: 8.0,),
+//                       Container(
+//                         margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+//                         child: TextFormField(
+//                           style:TextStyle(color: kText),
+//                           controller: title5Controller,
+//                           decoration: InputDecoration(
+//                             border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+//                             enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+//                             focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+//
+//                             labelText: 'title',labelStyle: TextStyle(color: kText),
+//                             hintText:"Ex:Collar",
+//                           ),
+//                           textAlign: TextAlign.center,
+//
+//                         ),
+//                       ),
+//
+//                       getImageWidget041(),
+//                       SizedBox(height: 8.0,),
+//                     Container(
+//                       margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+//                       child: TextFormField(
+//                         style:TextStyle(color: kText),
+//                         controller: customName41,
+//                         decoration: InputDecoration(
+//                           border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+//                           enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+//                           focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+//
+//                           labelText: 'Title',labelStyle: TextStyle(color: kText),
+//                           hintText:"Title",
+//                         ),
+//                         textAlign: TextAlign.center,
+//
+//                       ),
+//                     ),
+//                     SizedBox(height: 8.0,),
+//                       Container(
+//                         margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+//                         child: TextFormField(
+//                           style:TextStyle(color: kText),
+//                           keyboardType:TextInputType.number,
+//                           controller: custom41,
+//                           decoration: InputDecoration(
+//                             border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+//                             enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+//                             focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+//
+//                             labelText: 'Quantity',labelStyle: TextStyle(color: kText),
+//                             hintText:"Quantity in Inventory",
+//                           ),
+//                           textAlign: TextAlign.center,
+//
+//                         ),
+//                       ),
+//
+//                       getImageWidget042(),
+//                       SizedBox(height: 8.0,),
+//                     Container(
+//                       margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+//                       child: TextFormField(
+//                         style:TextStyle(color: kText),
+//                         controller: customName42,
+//                         decoration: InputDecoration(
+//                           border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+//                           enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+//                           focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+//
+//                           labelText: 'Title',labelStyle: TextStyle(color: kText),
+//                           hintText:"Title",
+//                         ),
+//                         textAlign: TextAlign.center,
+//
+//                       ),
+//                     ),
+//                     SizedBox(height: 8.0,),
+//                       Container(
+//                         margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+//                         child: TextFormField(
+//                           style:TextStyle(color: kText),
+//                           keyboardType:TextInputType.number,
+//                           controller: custom42,
+//                           decoration: InputDecoration(
+//                             border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+//                             enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+//                             focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+//
+//                             labelText: 'Quantity',labelStyle: TextStyle(color: kText),
+//                             hintText:"Quantity in Inventory",
+//                           ),
+//                           textAlign: TextAlign.center,
+//
+//                         ),
+//                       ),
+//
+//                       getImageWidget043(),
+//                       SizedBox(height: 8.0,),
+//                     Container(
+//                       margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+//                       child: TextFormField(
+//                         style:TextStyle(color: kText),
+//                         controller: customName43,
+//                         decoration: InputDecoration(
+//                           border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+//                           enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+//                           focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+//
+//                           labelText: 'Title',labelStyle: TextStyle(color: kText),
+//                           hintText:"Title",
+//                         ),
+//                         textAlign: TextAlign.center,
+//
+//                       ),
+//                     ),
+//                     SizedBox(height: 8.0,),
+//                       Container(
+//                         margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+//                         child: TextFormField(
+//                           style:TextStyle(color: kText),
+//                           keyboardType:TextInputType.number,
+//                           controller: custom43,
+//                           decoration: InputDecoration(
+//                             border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+//                             enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+//                             focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+//
+//                             labelText: 'Quantity',labelStyle: TextStyle(color: kText),
+//                             hintText:"Quantity in Inventory",
+//                           ),
+//                           textAlign: TextAlign.center,
+//
+//                         ),
+//                       ),
+//
+//                       getImageWidget044(),
+//                       SizedBox(height: 8.0,),
+//                     Container(
+//                       margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+//                       child: TextFormField(
+//                         style:TextStyle(color: kText),
+//                         controller: customName44,
+//                         decoration: InputDecoration(
+//                           border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+//                           enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+//                           focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+//
+//                           labelText: 'Title',labelStyle: TextStyle(color: kText),
+//                           hintText:"Title",
+//                         ),
+//                         textAlign: TextAlign.center,
+//
+//                       ),
+//                     ),
+//                     SizedBox(height: 8.0,),
+//                       Container(
+//                         margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+//                         child: TextFormField(
+//                           style:TextStyle(color: kText),
+//                           keyboardType:TextInputType.number,
+//                           controller: custom44,
+//                           decoration: InputDecoration(
+//                             border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+//                             enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+//                             focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+//
+//                             labelText: 'Quantity',labelStyle: TextStyle(color: kText),
+//                             hintText:"Quantity in Inventory",
+//                           ),
+//                           textAlign: TextAlign.center,
+//
+//                         ),
+//                       ),
+//
+//                       getImageWidget045(),
+//                       SizedBox(height: 8.0,),
+//                     Container(
+//                       margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+//                       child: TextFormField(
+//                         style:TextStyle(color: kText),
+//                         controller: customName45,
+//                         decoration: InputDecoration(
+//                           border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+//                           enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+//                           focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+//
+//                           labelText: 'Title',labelStyle: TextStyle(color: kText),
+//                           hintText:"Title",
+//                         ),
+//                         textAlign: TextAlign.center,
+//
+//                       ),
+//                     ),
+//                     SizedBox(height: 8.0,),
+//                       Container(
+//                         margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+//                         child: TextFormField(
+//                           style:TextStyle(color: kText),
+//                           keyboardType:TextInputType.number,
+//                           controller: custom45,
+//                           decoration: InputDecoration(
+//                             border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+//                             enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+//                             focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+//
+//                             labelText: 'Quantity',labelStyle: TextStyle(color: kText),
+//                             hintText:"Quantity in Inventory",
+//                           ),
+//                           textAlign: TextAlign.center,
+//
+//                         ),
+//                       ),
+//
+//                       getImageWidget046(),
+//                       SizedBox(height: 8.0,),
+//                     Container(
+//                       margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+//                       child: TextFormField(
+//                         style:TextStyle(color: kText),
+//                         controller: customName46,
+//                         decoration: InputDecoration(
+//                           border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+//                           enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+//                           focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+//
+//                           labelText: 'Title',labelStyle: TextStyle(color: kText),
+//                           hintText:"Title",
+//                         ),
+//                         textAlign: TextAlign.center,
+//
+//                       ),
+//                     ),
+//                     SizedBox(height: 8.0,),
+//                       Container(
+//                         margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+//                         child: TextFormField(
+//                           style:TextStyle(color: kText),
+//                           keyboardType:TextInputType.number,
+//                           controller: custom46,
+//                           decoration: InputDecoration(
+//                             border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+//                             enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+//                             focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+//
+//                             labelText: 'Quantity',labelStyle: TextStyle(color: kText),
+//                             hintText:"Quantity in Inventory",
+//                           ),
+//                           textAlign: TextAlign.center,
+//
+//                         ),
+//                       ),
+//
+//                       getImageWidget047(),
+//                       SizedBox(height: 8.0,),
+//                     Container(
+//                       margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+//                       child: TextFormField(
+//                         style:TextStyle(color: kText),
+//                         controller: customName47,
+//                         decoration: InputDecoration(
+//                           border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+//                           enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+//                           focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+//
+//                           labelText: 'Title',labelStyle: TextStyle(color: kText),
+//                           hintText:"Title",
+//                         ),
+//                         textAlign: TextAlign.center,
+//
+//                       ),
+//                     ),
+//                     SizedBox(height: 8.0,),
+//                       Container(
+//                         margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+//                         child: TextFormField(
+//                           style:TextStyle(color: kText),
+//                           keyboardType:TextInputType.number,
+//                           controller: custom47,
+//                           decoration: InputDecoration(
+//                             border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+//                             enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+//                             focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+//
+//                             labelText: 'Quantity',labelStyle: TextStyle(color: kText),
+//                             hintText:"Quantity in Inventory",
+//                           ),
+//                           textAlign: TextAlign.center,
+//
+//                         ),
+//                       ),
+//
+//                       getImageWidget048(),
+//                       SizedBox(height: 8.0,),
+//                     Container(
+//                       margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+//                       child: TextFormField(
+//                         style:TextStyle(color: kText),
+//                         controller: customName48,
+//                         decoration: InputDecoration(
+//                           border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+//                           enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+//                           focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+//
+//                           labelText: 'Title',labelStyle: TextStyle(color: kText),
+//                           hintText:"Title",
+//                         ),
+//                         textAlign: TextAlign.center,
+//
+//                       ),
+//                     ),
+//                     SizedBox(height: 8.0,),
+//                       Container(
+//                         margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+//                         child: TextFormField(
+//                           style:TextStyle(color: kText),
+//                           keyboardType:TextInputType.number,
+//                           controller: custom48,
+//                           decoration: InputDecoration(
+//                             border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+//                             enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+//                             focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+//
+//                             labelText: 'Quantity',labelStyle: TextStyle(color: kText),
+//                             hintText:"Quantity in Inventory",
+//                           ),
+//                           textAlign: TextAlign.center,
+//
+//                         ),
+//                       ),
+//
+//                       getImageWidget049(),
+//                       SizedBox(height: 8.0,),
+//                     Container(
+//                       margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+//                       child: TextFormField(
+//                         style:TextStyle(color: kText),
+//                         controller: customName49,
+//                         decoration: InputDecoration(
+//                           border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+//                           enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+//                           focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+//
+//                           labelText: 'Title',labelStyle: TextStyle(color: kText),
+//                           hintText:"Title",
+//                         ),
+//                         textAlign: TextAlign.center,
+//
+//                       ),
+//                     ),
+//                     SizedBox(height: 8.0,),
+//                       Container(
+//                         margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+//                         child: TextFormField(
+//                           style:TextStyle(color: kText),
+//                           keyboardType:TextInputType.number,
+//                           controller: custom49,
+//                           decoration: InputDecoration(
+//                             border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+//                             enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+//                             focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+//
+//                             labelText: 'Quantity',labelStyle: TextStyle(color: kText),
+//                             hintText:"Quantity in Inventory",
+//                           ),
+//                           textAlign: TextAlign.center,
+//
+//                         ),
+//                       ),
+//
+//                       getImageWidget050(),
+//                       SizedBox(height: 8.0,),
+//                     Container(
+//                       margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+//                       child: TextFormField(
+//                         style:TextStyle(color: kText),
+//                         controller: customName50,
+//                         decoration: InputDecoration(
+//                           border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+//                           enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+//                           focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+//
+//                           labelText: 'Title',labelStyle: TextStyle(color: kText),
+//                           hintText:"Title",
+//                         ),
+//                         textAlign: TextAlign.center,
+//
+//                       ),
+//                     ),
+//                     SizedBox(height: 8.0,),
+//                       Container(
+//                         margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+//                         child: TextFormField(
+//                           style:TextStyle(color: kText),
+//                           keyboardType:TextInputType.number,
+//                           controller: custom50,
+//                           decoration: InputDecoration(
+//                             border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+//                             enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+//                             focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+//
+//                             labelText: 'Quantity',labelStyle: TextStyle(color: kText),
+//                             hintText:"Quantity in Inventory",
+//                           ),
+//                           textAlign: TextAlign.center,
+//
+//                         ),
+//                       ),
+//
+//                    ]
+//               ),
+//
+//
+//         ])
+//             ),
+//             Container(
+//                 height:SizeConfig.screenHeight*0.05,
+//                 child:Row(
+//                   children: [
+//                     InkWell(
+//                       onTap: (){
+//                         pageController.animateToPage(--pageChanged, duration: Duration(milliseconds: 250), curve: Curves.bounceInOut);
+//                       },
+//                       child: FittedBox(
+//                         fit:  BoxFit.fitHeight,
+//                         child: Container(
+//                           alignment:Alignment.center,
+//                           width:SizeConfig.blockSizeHorizontal*50,
+//                           height:SizeConfig.screenHeight*0.05,
+//
+//                           //icon: Icon(Icons.drag_handle),
+//                           child:Text("Previous",style:TextStyle(color: Colors.black)),
+//
+//                         ),
+//                       ),
+//                     ),
+//                     InkWell(
+//                       onTap: (){
+//                         pageController.animateToPage(++pageChanged,
+//                             duration: Duration(milliseconds: 250),
+//                             curve: Curves.bounceInOut);
+//                       },
+//                       child: FittedBox(
+//                         fit:  BoxFit.fitHeight,
+//                         child: Container(
+//                           alignment:Alignment.center,
+//                           height:SizeConfig.screenHeight*0.05,
+//
+//                           width:SizeConfig.blockSizeHorizontal*50,
+//
+//                           //icon: Icon(Icons.drag_handle),
+//                           child:Text("Next",style:TextStyle(color: Colors.black)),
+//
+//                         ),
+//                       ),
+//                     ),
+//
+//
+//                   ],
+//                 )),
+//
+//
+//
+//
+//           ],
+//                 ),
+//       );
+//
+// }
 
 page2(){
     return
@@ -16189,201 +16219,208 @@ page2(){
       child: Column(
         children: <Widget>[
           isUploading ? linearProgress() : Text(""),
+Container(              height:SizeConfig.screenHeight*0.83,
 
-          Container(
-            margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
-            child: ListTile(
-              leading: Icon(
-                EvilIcons.eye,
-                color: Colors.orange,
-                size: 35.0,
-              ),
-              title:  TextFormField(
-                style:TextStyle(color: kText),
-                controller: productnameController,
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
-                  enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
-                  focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+  child:Column(children:[
+  Container(
+    margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+    child: ListTile(
+      leading: Icon(
+        EvilIcons.eye,
+        color: Colors.orange,
+        size: 35.0,
+      ),
+      title:  TextFormField(
+        style:TextStyle(color: kText),
+        controller: productnameController,
+        decoration: InputDecoration(
+          border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+          enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+          focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
 
-                  labelText: 'Product Name',labelStyle: TextStyle(color: kText),
-                  hintText: 'Product Name',
-                ),
-                textAlign: TextAlign.center,
-                validator: (text) {
-                  if ( text.isEmpty) {
-                    return 'Product Name is empty';
-                  }
-                  return null;
-                },
-              ),
-            ),
-          ),
-          SizedBox(height: 8.0,),
-          Container(
-            margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
-            child: ListTile(
-              leading: Icon(
-                EvilIcons.tag,
-                color: Colors.orange,
-                size: 35.0,
-              ),
-              title:TextFormField(
-                style:TextStyle(color: kText),
-                keyboardType:TextInputType.number,
-                controller: priceController,
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
-                  enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
-                  focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+          labelText: 'Product Name',labelStyle: TextStyle(color: kText),
+          hintText: 'Product Name',
+        ),
+        textAlign: TextAlign.center,
+        validator: (text) {
+          if ( text.isEmpty) {
+            return 'Product Name is empty';
+          }
+          return null;
+        },
+      ),
+    ),
+  ),
+  SizedBox(height: 8.0,),
+  Container(
+    margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+    child: ListTile(
+      leading: Icon(
+        EvilIcons.tag,
+        color: Colors.orange,
+        size: 35.0,
+      ),
+      title:TextFormField(
+        style:TextStyle(color: kText),
+        keyboardType:TextInputType.number,
+        controller: priceController,
+        decoration: InputDecoration(
+          border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+          enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+          focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
 
-                  labelText: 'Price',labelStyle: TextStyle(color: kText),
-                  hintText:" ${currentUser.currencysym}",
-                ),
-                textAlign: TextAlign.center,
-                validator: (text) {
-                  if (text.isEmpty) {
-                    return 'Price is empty';
-                  }
-                  return null;
-                },
-              ),
-            ),
-          ),
+          labelText: 'Price',labelStyle: TextStyle(color: kText),
+          hintText:
+          currentUser.currency == "INR"?'₹':
+          currentUser.currency == "EUR"?'€':
+          currentUser.currency == "GBP"?'£':'\u0024',
+        ),
+        textAlign: TextAlign.center,
+        validator: (text) {
+          if (text.isEmpty) {
+            return 'Price is empty';
+          }
+          return null;
+        },
+      ),
+    ),
+  ),
 
 
 
-          SizedBox( height: 8.0,),
-          Container(
-            margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
-            child: TextFormField(
-              style:TextStyle(color: kText),
+  SizedBox( height: 8.0,),
+  Container(
+    margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+    child: TextFormField(
+      style:TextStyle(color: kText),
 
-              keyboardType: TextInputType.multiline,
-              maxLines: null,
-              controller: detailsController,
-              decoration: InputDecoration(
-                border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
-                enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
-                focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+      keyboardType: TextInputType.multiline,
+      maxLines: null,
+      controller: detailsController,
+      decoration: InputDecoration(
+        border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+        enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+        focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
 
-                labelText: 'Product description',labelStyle: TextStyle(color: kText),
-                hintText: 'Product description',
-              ),
-              textAlign: TextAlign.center,
-              validator: (text) {
-                if ( text.isEmpty) {
-                  return 'Description is empty';
-                }
-                return null;
-              },
-            ),
-          ),
-          SizedBox( height: 8.0,),
-          Container(
-            margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
-            child: TextFormField(
-              style:TextStyle(color: kText),
+        labelText: 'Product description',labelStyle: TextStyle(color: kText),
+        hintText: 'Product description',
+      ),
+      textAlign: TextAlign.center,
+      validator: (text) {
+        if ( text.isEmpty) {
+          return 'Description is empty';
+        }
+        return null;
+      },
+    ),
+  ),
+  SizedBox( height: 8.0,),
+  Container(
+    margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+    child: TextFormField(
+      style:TextStyle(color: kText),
 
-              keyboardType: TextInputType.multiline,
-              maxLines: null,
-              controller: compositionController,
-              decoration: InputDecoration(
-                border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
-                enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
-                focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+      keyboardType: TextInputType.multiline,
+      maxLines: null,
+      controller: compositionController,
+      decoration: InputDecoration(
+        border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+        enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+        focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
 
-                labelText: 'Fabric description',labelStyle: TextStyle(color: kText),
-                hintText: 'ex.Cotton: 100%' ,
-              ),
-              textAlign: TextAlign.center,
-              validator: (text) {
-                if ( text.isEmpty) {
-                  return 'Fabric description is empty';
-                }
-                return null;
-              },
-            ),
-          ),
-          SizedBox( height: 8.0,),
-          Container(
-            margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
-            child: TextFormField(
-              style:TextStyle(color: kText),
+        labelText: 'Fabric description',labelStyle: TextStyle(color: kText),
+        hintText: 'ex.Cotton: 100%' ,
+      ),
+      textAlign: TextAlign.center,
+      validator: (text) {
+        if ( text.isEmpty) {
+          return 'Fabric description is empty';
+        }
+        return null;
+      },
+    ),
+  ),
+  SizedBox( height: 8.0,),
+  Container(
+    margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+    child: TextFormField(
+      style:TextStyle(color: kText),
 
-              keyboardType: TextInputType.multiline,
-              maxLines: null,
-              controller: washandcareController,
-              decoration: InputDecoration(
-                border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
-                enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
-                focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+      keyboardType: TextInputType.multiline,
+      maxLines: null,
+      controller: washandcareController,
+      decoration: InputDecoration(
+        border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+        enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+        focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
 
-                labelText: 'Wash & Care',labelStyle: TextStyle(color: kText),
-                hintText: 'Wash & Care instructions',
-              ),
-              textAlign: TextAlign.center,
-              validator: (text) {
-                if ( text.isEmpty) {
-                  return 'Wash & Care instructions is empty';
-                }
-                return null;
-              },
-            ),
-          ),
-          SizedBox( height: 8.0,),
-          Container(
-            margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
-            child: TextFormField(
-              style:TextStyle(color: kText),
+        labelText: 'Wash & Care',labelStyle: TextStyle(color: kText),
+        hintText: 'Wash & Care instructions',
+      ),
+      textAlign: TextAlign.center,
+      validator: (text) {
+        if ( text.isEmpty) {
+          return 'Wash & Care instructions is empty';
+        }
+        return null;
+      },
+    ),
+  ),
+  SizedBox( height: 8.0,),
+  Container(
+    margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+    child: TextFormField(
+      style:TextStyle(color: kText),
 
-              keyboardType: TextInputType.multiline,
-              maxLines: null,
-              controller: sizeandfitController,
-              decoration: InputDecoration(
-                border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
-                enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
-                focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+      keyboardType: TextInputType.multiline,
+      maxLines: null,
+      controller: sizeandfitController,
+      decoration: InputDecoration(
+        border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+        enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+        focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
 
-                labelText: 'Size & Fit recommendations',labelStyle: TextStyle(color: kText),
-                hintText: 'ex.Cut for slim fit,take your normal size',
-              ),
-              textAlign: TextAlign.center,
-              validator: (text) {
-                if ( text.isEmpty) {
-                  return ' Size & Fit recommendations is empty';
-                }
-                return null;
-              },
-            ),
-          ),
+        labelText: 'Size & Fit recommendations',labelStyle: TextStyle(color: kText),
+        hintText: 'ex.Cut for slim fit,take your normal size',
+      ),
+      textAlign: TextAlign.center,
+      validator: (text) {
+        if ( text.isEmpty) {
+          return ' Size & Fit recommendations is empty';
+        }
+        return null;
+      },
+    ),
+  ),
 
-          SizedBox( height: 8.0,),
-          Container(
-            margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
-            child: TextFormField(
-              style:TextStyle(color: kText),
+  SizedBox( height: 8.0,),
+  Container(
+    margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
+    child: TextFormField(
+      style:TextStyle(color: kText),
 
-              keyboardType: TextInputType.multiline,
-              maxLines: null,
-              controller: shipcontroller,
-              decoration: InputDecoration(
-                border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
-                enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
-                focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+      keyboardType: TextInputType.multiline,
+      maxLines: null,
+      controller: shipcontroller,
+      decoration: InputDecoration(
+        border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+        enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+        focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
 
-                labelText: 'Shipping & returns',labelStyle: TextStyle(color: kText),
-                hintText: 'countries served & return policy',
-              ),
-              textAlign: TextAlign.center,
-              validator: (text) {
-                if ( text.isEmpty) {
-                  return 'Shipping & returns';
-                }
-                return null;
-              },
-            ),
-          ),
+        labelText: 'Shipping & returns',labelStyle: TextStyle(color: kText),
+        hintText: 'countries served & return policy',
+      ),
+      textAlign: TextAlign.center,
+      validator: (text) {
+        if ( text.isEmpty) {
+          return 'Shipping & returns';
+        }
+        return null;
+      },
+    ),
+  ),
+]),),
+
           Container(
               height:SizeConfig.screenHeight*0.05,
               child:Row(
@@ -17108,106 +17145,106 @@ var resultGBP = await Currency.getConversion(
  file9!=null? await compressImage9():null;
     String mediaUrl9 =  file9!=null?await uploadImage9(file9):"";
 
-    customImg1!=null? await compressImage01():null;
-    String mediaUrl01 =  customImg1!=null?await uploadImage01(customImg1):"";
-    customImg2!=null? await compressImage02():null;
-    String mediaUrl02 =  customImg2!=null?await uploadImage02(customImg2):"";
-    customImg3!=null? await compressImage03():null;
-    String mediaUrl03 =  customImg3!=null?await uploadImage03(customImg3):"";
-    customImg4!=null? await compressImage04():null;
-    String mediaUrl04 =  customImg4!=null?await uploadImage04(customImg4):"";
-    customImg5!=null? await compressImage05():null;
-    String mediaUrl05 =  customImg5!=null?await uploadImage05(customImg5):"";
-    customImg6!=null? await compressImage06():null;
-    String mediaUrl06 =  customImg6!=null?await uploadImage06(customImg6):"";
-    customImg7!=null? await compressImage07():null;
-    String mediaUrl07 =  customImg7!=null?await uploadImage07(customImg7):"";
-    customImg8!=null? await compressImage08():null;
-    String mediaUrl08 =  customImg8!=null?await uploadImage08(customImg8):"";
-    customImg9!=null? await compressImage09():null;
-    String mediaUrl09 =  customImg9!=null?await uploadImage09(customImg9):"";
-    customImg10!=null? await compressImage010():null;
-    String mediaUrl010 =  customImg10!=null?await uploadImage010(customImg10):"";
-    customImg11!=null? await compressImage011():null;
-    String mediaUrl011 =  customImg11!=null?await uploadImage011(customImg11):"";
-    customImg12!=null? await compressImage012():null;
-    String mediaUrl012 =  customImg12!=null?await uploadImage012(customImg12):"";
-    customImg13!=null? await compressImage013():null;
-    String mediaUrl013 =  customImg13!=null?await uploadImage013(customImg13):"";
-    customImg14!=null? await compressImage014():null;
-    String mediaUrl014 =  customImg14!=null?await uploadImage014(customImg14):"";
-    customImg15!=null? await compressImage015():null;
-    String mediaUrl015 =  customImg15!=null?await uploadImage015(customImg15):"";
-    customImg16!=null? await compressImage016():null;
-    String mediaUrl016 =  customImg16!=null?await uploadImage016(customImg16):"";
-    customImg17!=null? await compressImage017():null;
-    String mediaUrl017 =  customImg17!=null?await uploadImage017(customImg17):"";
-    customImg18!=null? await compressImage018():null;
-    String mediaUrl018 =  customImg18!=null?await uploadImage018(customImg18):"";
-    customImg19!=null? await compressImage019():null;
-    String mediaUrl019 =  customImg19!=null?await uploadImage019(customImg19):"";
-    customImg20!=null? await compressImage020():null;
-    String mediaUrl020 =  customImg20!=null?await uploadImage020(customImg20):"";
-    customImg21!=null? await compressImage021():null;
-    String mediaUrl021 =  customImg21!=null?await uploadImage021(customImg21):"";
-    customImg22!=null? await compressImage022():null;
-    String mediaUrl022 =  customImg22!=null?await uploadImage022(customImg22):"";
-    customImg23!=null? await compressImage023():null;
-    String mediaUrl023 =  customImg23!=null?await uploadImage023(customImg23):"";
-    customImg24!=null? await compressImage024():null;
-    String mediaUrl024 =  customImg24!=null?await uploadImage024(customImg24):"";
-    customImg25!=null? await compressImage025():null;
-    String mediaUrl025 =  customImg25!=null?await uploadImage025(customImg25):"";
-    customImg26!=null? await compressImage026():null;
-    String mediaUrl026 =  customImg26!=null?await uploadImage026(customImg26):"";
-    customImg27!=null? await compressImage027():null;
-    String mediaUrl027 =  customImg27!=null?await uploadImage027(customImg27):"";
-    customImg28!=null? await compressImage028():null;
-    String mediaUrl028 =  customImg28!=null?await uploadImage028(customImg28):"";
-    customImg29!=null? await compressImage029():null;
-    String mediaUrl029 =  customImg29!=null?await uploadImage029(customImg29):"";
-    customImg30!=null? await compressImage030():null;
-    String mediaUrl030 =  customImg30!=null?await uploadImage030(customImg30):"";
-    customImg31!=null? await compressImage031():null;
-    String mediaUrl031 =  customImg31!=null?await uploadImage031(customImg31):"";
-    customImg32!=null? await compressImage032():null;
-    String mediaUrl032 =  customImg32!=null?await uploadImage032(customImg32):"";
-    customImg33!=null? await compressImage033():null;
-    String mediaUrl033 =  customImg33!=null?await uploadImage033(customImg33):"";
-    customImg34!=null? await compressImage034():null;
-    String mediaUrl034 =  customImg34!=null?await uploadImage034(customImg34):"";
-    customImg35!=null? await compressImage035():null;
-    String mediaUrl035 =  customImg35!=null?await uploadImage035(customImg35):"";
-    customImg36!=null? await compressImage036():null;
-    String mediaUrl036 =  customImg36!=null?await uploadImage036(customImg36):"";
-    customImg37!=null? await compressImage037():null;
-    String mediaUrl037 =  customImg37!=null?await uploadImage037(customImg37):"";
-    customImg38!=null? await compressImage038():null;
-    String mediaUrl038 =  customImg38!=null?await uploadImage038(customImg38):"";
-    customImg39!=null? await compressImage039():null;
-    String mediaUrl039 =  customImg39!=null?await uploadImage039(customImg39):"";
-    customImg40!=null? await compressImage040():null;
-    String mediaUrl040 =  customImg40!=null?await uploadImage040(customImg40):"";
-    customImg41!=null? await compressImage041():null;
-    String mediaUrl041 =  customImg41!=null?await uploadImage041(customImg41):"";
-    customImg42!=null? await compressImage042():null;
-    String mediaUrl042 =  customImg42!=null?await uploadImage042(customImg42):"";
-    customImg43!=null? await compressImage043():null;
-    String mediaUrl043 =  customImg43!=null?await uploadImage043(customImg43):"";
-    customImg44!=null? await compressImage044():null;
-    String mediaUrl044 =  customImg44!=null?await uploadImage044(customImg44):"";
-    customImg45!=null? await compressImage045():null;
-    String mediaUrl045 =  customImg45!=null?await uploadImage045(customImg45):"";
-    customImg46!=null? await compressImage046():null;
-    String mediaUrl046 =  customImg46!=null?await uploadImage046(customImg46):"";
-    customImg47!=null? await compressImage047():null;
-    String mediaUrl047 =  customImg47!=null?await uploadImage047(customImg47):"";
-    customImg48!=null? await compressImage048():null;
-    String mediaUrl048 =  customImg48!=null?await uploadImage048(customImg48):"";
-     customImg49!=null? await compressImage049():null;
-    String mediaUrl049 =  customImg49!=null?await uploadImage049(customImg49):"";
-     customImg50!=null? await compressImage050():null;
-    String mediaUrl050 =  customImg50!=null?await uploadImage050(customImg50):"";
+    // customImg1!=null? await compressImage01():null;
+    // String mediaUrl01 =  customImg1!=null?await uploadImage01(customImg1):"";
+    // customImg2!=null? await compressImage02():null;
+    // String mediaUrl02 =  customImg2!=null?await uploadImage02(customImg2):"";
+    // customImg3!=null? await compressImage03():null;
+    // String mediaUrl03 =  customImg3!=null?await uploadImage03(customImg3):"";
+    // customImg4!=null? await compressImage04():null;
+    // String mediaUrl04 =  customImg4!=null?await uploadImage04(customImg4):"";
+    // customImg5!=null? await compressImage05():null;
+    // String mediaUrl05 =  customImg5!=null?await uploadImage05(customImg5):"";
+    // customImg6!=null? await compressImage06():null;
+    // String mediaUrl06 =  customImg6!=null?await uploadImage06(customImg6):"";
+    // customImg7!=null? await compressImage07():null;
+    // String mediaUrl07 =  customImg7!=null?await uploadImage07(customImg7):"";
+    // customImg8!=null? await compressImage08():null;
+    // String mediaUrl08 =  customImg8!=null?await uploadImage08(customImg8):"";
+    // customImg9!=null? await compressImage09():null;
+    // String mediaUrl09 =  customImg9!=null?await uploadImage09(customImg9):"";
+    // customImg10!=null? await compressImage010():null;
+    // String mediaUrl010 =  customImg10!=null?await uploadImage010(customImg10):"";
+    // customImg11!=null? await compressImage011():null;
+    // String mediaUrl011 =  customImg11!=null?await uploadImage011(customImg11):"";
+    // customImg12!=null? await compressImage012():null;
+    // String mediaUrl012 =  customImg12!=null?await uploadImage012(customImg12):"";
+    // customImg13!=null? await compressImage013():null;
+    // String mediaUrl013 =  customImg13!=null?await uploadImage013(customImg13):"";
+    // customImg14!=null? await compressImage014():null;
+    // String mediaUrl014 =  customImg14!=null?await uploadImage014(customImg14):"";
+    // customImg15!=null? await compressImage015():null;
+    // String mediaUrl015 =  customImg15!=null?await uploadImage015(customImg15):"";
+    // customImg16!=null? await compressImage016():null;
+    // String mediaUrl016 =  customImg16!=null?await uploadImage016(customImg16):"";
+    // customImg17!=null? await compressImage017():null;
+    // String mediaUrl017 =  customImg17!=null?await uploadImage017(customImg17):"";
+    // customImg18!=null? await compressImage018():null;
+    // String mediaUrl018 =  customImg18!=null?await uploadImage018(customImg18):"";
+    // customImg19!=null? await compressImage019():null;
+    // String mediaUrl019 =  customImg19!=null?await uploadImage019(customImg19):"";
+    // customImg20!=null? await compressImage020():null;
+    // String mediaUrl020 =  customImg20!=null?await uploadImage020(customImg20):"";
+    // customImg21!=null? await compressImage021():null;
+    // String mediaUrl021 =  customImg21!=null?await uploadImage021(customImg21):"";
+    // customImg22!=null? await compressImage022():null;
+    // String mediaUrl022 =  customImg22!=null?await uploadImage022(customImg22):"";
+    // customImg23!=null? await compressImage023():null;
+    // String mediaUrl023 =  customImg23!=null?await uploadImage023(customImg23):"";
+    // customImg24!=null? await compressImage024():null;
+    // String mediaUrl024 =  customImg24!=null?await uploadImage024(customImg24):"";
+    // customImg25!=null? await compressImage025():null;
+    // String mediaUrl025 =  customImg25!=null?await uploadImage025(customImg25):"";
+    // customImg26!=null? await compressImage026():null;
+    // String mediaUrl026 =  customImg26!=null?await uploadImage026(customImg26):"";
+    // customImg27!=null? await compressImage027():null;
+    // String mediaUrl027 =  customImg27!=null?await uploadImage027(customImg27):"";
+    // customImg28!=null? await compressImage028():null;
+    // String mediaUrl028 =  customImg28!=null?await uploadImage028(customImg28):"";
+    // customImg29!=null? await compressImage029():null;
+    // String mediaUrl029 =  customImg29!=null?await uploadImage029(customImg29):"";
+    // customImg30!=null? await compressImage030():null;
+    // String mediaUrl030 =  customImg30!=null?await uploadImage030(customImg30):"";
+    // customImg31!=null? await compressImage031():null;
+    // String mediaUrl031 =  customImg31!=null?await uploadImage031(customImg31):"";
+    // customImg32!=null? await compressImage032():null;
+    // String mediaUrl032 =  customImg32!=null?await uploadImage032(customImg32):"";
+    // customImg33!=null? await compressImage033():null;
+    // String mediaUrl033 =  customImg33!=null?await uploadImage033(customImg33):"";
+    // customImg34!=null? await compressImage034():null;
+    // String mediaUrl034 =  customImg34!=null?await uploadImage034(customImg34):"";
+    // customImg35!=null? await compressImage035():null;
+    // String mediaUrl035 =  customImg35!=null?await uploadImage035(customImg35):"";
+    // customImg36!=null? await compressImage036():null;
+    // String mediaUrl036 =  customImg36!=null?await uploadImage036(customImg36):"";
+    // customImg37!=null? await compressImage037():null;
+    // String mediaUrl037 =  customImg37!=null?await uploadImage037(customImg37):"";
+    // customImg38!=null? await compressImage038():null;
+    // String mediaUrl038 =  customImg38!=null?await uploadImage038(customImg38):"";
+    // customImg39!=null? await compressImage039():null;
+    // String mediaUrl039 =  customImg39!=null?await uploadImage039(customImg39):"";
+    // customImg40!=null? await compressImage040():null;
+    // String mediaUrl040 =  customImg40!=null?await uploadImage040(customImg40):"";
+    // customImg41!=null? await compressImage041():null;
+    // String mediaUrl041 =  customImg41!=null?await uploadImage041(customImg41):"";
+    // customImg42!=null? await compressImage042():null;
+    // String mediaUrl042 =  customImg42!=null?await uploadImage042(customImg42):"";
+    // customImg43!=null? await compressImage043():null;
+    // String mediaUrl043 =  customImg43!=null?await uploadImage043(customImg43):"";
+    // customImg44!=null? await compressImage044():null;
+    // String mediaUrl044 =  customImg44!=null?await uploadImage044(customImg44):"";
+    // customImg45!=null? await compressImage045():null;
+    // String mediaUrl045 =  customImg45!=null?await uploadImage045(customImg45):"";
+    // customImg46!=null? await compressImage046():null;
+    // String mediaUrl046 =  customImg46!=null?await uploadImage046(customImg46):"";
+    // customImg47!=null? await compressImage047():null;
+    // String mediaUrl047 =  customImg47!=null?await uploadImage047(customImg47):"";
+    // customImg48!=null? await compressImage048():null;
+    // String mediaUrl048 =  customImg48!=null?await uploadImage048(customImg48):"";
+    //  customImg49!=null? await compressImage049():null;
+    // String mediaUrl049 =  customImg49!=null?await uploadImage049(customImg49):"";
+    //  customImg50!=null? await compressImage050():null;
+    // String mediaUrl050 =  customImg50!=null?await uploadImage050(customImg50):"";
     for ( var imageFile in images) {
       postImage(imageFile).then((downloadUrl)  {
         imageUrls.add(downloadUrl.toString());
@@ -17328,165 +17365,165 @@ var resultGBP = await Currency.getConversion(
             "Ring22":  int.tryParse(Ring22controller.text) ?? 0,
             "Ring23":  int.tryParse(Ring23controller.text) ?? 0,
 
-            "customTitle1":  title1Controller.text ?? "",
- "customTitle2":  title2Controller.text ?? "",
- "customTitle3":  title3Controller.text ?? "",
- "customTitle4":  title4Controller.text ?? "",
- "customTitle5":  title5Controller.text ?? "",
-
- "customQuantity1":   int.tryParse(custom1.text ) ?? 0,
- "customQuantity2":   int.tryParse(custom2.text ) ?? 0,
- "customQuantity3":   int.tryParse(custom3.text ) ?? 0,
- "customQuantity4":   int.tryParse(custom4.text ) ?? 0,
- "customQuantity5":   int.tryParse(custom5.text ) ?? 0,
- "customQuantity6":   int.tryParse(custom6.text ) ?? 0,
- "customQuantity7":   int.tryParse(custom7.text ) ?? 0,
- "customQuantity8":   int.tryParse(custom8.text ) ?? 0,
- "customQuantity9":   int.tryParse(custom9.text ) ?? 0,
- "customQuantity10":   int.tryParse(custom10.text ) ?? 0,
- "customQuantity11":   int.tryParse(custom11.text ) ?? 0,
- "customQuantity12":   int.tryParse(custom12.text ) ?? 0,
- "customQuantity13":   int.tryParse(custom13.text ) ?? 0,
-"customQuantity14":   int.tryParse(custom14.text ) ?? 0,
-"customQuantity15":   int.tryParse(custom15.text ) ?? 0,
-"customQuantity16":   int.tryParse(custom16.text ) ?? 0,
-"customQuantity17":   int.tryParse(custom17.text ) ?? 0,
-"customQuantity18":   int.tryParse(custom18.text ) ?? 0,
-"customQuantity19":   int.tryParse(custom19.text ) ?? 0,
-"customQuantity20":   int.tryParse(custom20.text ) ?? 0,
-"customQuantity21":   int.tryParse(custom21.text ) ?? 0,
-"customQuantity22":   int.tryParse(custom22.text ) ?? 0,
-"customQuantity23":   int.tryParse(custom23.text ) ?? 0,
-"customQuantity24":   int.tryParse(custom24.text ) ?? 0,
-"customQuantity25":   int.tryParse(custom25.text ) ?? 0,
-"customQuantity26":   int.tryParse(custom26.text ) ?? 0,
-"customQuantity27":   int.tryParse(custom27.text ) ?? 0,
-"customQuantity28":   int.tryParse(custom28.text ) ?? 0,
-"customQuantity29":   int.tryParse(custom29.text ) ?? 0,
-"customQuantity30":   int.tryParse(custom30.text ) ?? 0,
-"customQuantity31":   int.tryParse(custom31.text ) ?? 0,
-"customQuantity32":   int.tryParse(custom32.text ) ?? 0,
-"customQuantity33":   int.tryParse(custom33.text ) ?? 0,
-"customQuantity34":   int.tryParse(custom34.text ) ?? 0,
-"customQuantity35":   int.tryParse(custom35.text ) ?? 0,
-"customQuantity36":   int.tryParse(custom36.text ) ?? 0,
-"customQuantity37":   int.tryParse(custom37.text ) ?? 0,
-"customQuantity38":   int.tryParse(custom38.text ) ?? 0,
-"customQuantity39":   int.tryParse(custom39.text ) ?? 0,
-"customQuantity40":   int.tryParse(custom40.text ) ?? 0,
-"customQuantity41":   int.tryParse(custom41.text ) ?? 0,
-"customQuantity42":   int.tryParse(custom42.text ) ?? 0,
-"customQuantity43":   int.tryParse(custom43.text ) ?? 0,
-"customQuantity44":   int.tryParse(custom44.text ) ?? 0,
-"customQuantity45":   int.tryParse(custom45.text ) ?? 0,
-"customQuantity46":   int.tryParse(custom46.text ) ?? 0,
-"customQuantity47":   int.tryParse(custom47.text ) ?? 0,
-"customQuantity48":   int.tryParse(custom48.text ) ?? 0,
-"customQuantity49":   int.tryParse(custom49.text ) ?? 0,
-"customQuantity50":   int.tryParse(custom50.text ) ?? 0,
-
- "customName1":   customName1.text ?? "",
- "customName2":   customName2.text ?? "",
- "customName3":   customName3.text ?? "",
- "customName4":   customName4.text ?? "",
- "customName5":   customName5.text ?? "",
- "customName6":   customName6.text ?? "",
- "customName7":   customName7.text ?? "",
- "customName8":   customName8.text ?? "",
- "customName9":   customName9.text ?? "",
- "customName10":  customName10.text ?? "",
- "customName11":  customName11.text ?? "",
- "customName12":  customName12.text ?? "",
- "customName13":  customName13.text ?? "",
-"customName14":   customName14.text ?? "",
-"customName15":   customName15.text ?? "",
-"customName16":   customName16.text ?? "",
-"customName17":   customName17.text ?? "",
-"customName18":   customName18.text ?? "",
-"customName19":   customName19.text ?? "",
-"customName20":   customName20.text ?? "",
-"customName21":   customName21.text ?? "",
-"customName22":   customName22.text ?? "",
-"customName23":   customName23.text ?? "",
-"customName24":   customName24.text ?? "",
-"customName25":   customName25.text ?? "",
-"customName26":   customName26.text ?? "",
-"customName27":   customName27.text ?? "",
-"customName28":   customName28.text ?? "",
-"customName29":   customName29.text ?? "",
-"customName30":   customName30.text ?? "",
-"customName31":   customName31.text ?? "",
-"customName32":   customName32.text ?? "",
-"customName33":   customName33.text ?? "",
-"customName34":   customName34.text ?? "",
-"customName35":   customName35.text ?? "",
-"customName36":   customName36.text ?? "",
-"customName37":   customName37.text ?? "",
-"customName38":   customName38.text ?? "",
-"customName39":   customName39.text ?? "",
-"customName40":   customName40.text ?? "",
-"customName41":   customName41.text ?? "",
-"customName42":   customName42.text ?? "",
-"customName43":   customName43.text ?? "",
-"customName44":   customName44.text ?? "",
-"customName45":   customName45.text ?? "",
-"customName46":   customName46.text ?? "",
-"customName47":   customName47.text ?? "",
-"customName48":   customName48.text ?? "",
-"customName49":   customName49.text ?? "",
-"customName50":   customName50.text ?? "",
-
-            "custom1img":  mediaUrl01 ?? "",
-"custom2img":  mediaUrl02 ?? "",
-"custom3img":  mediaUrl03 ?? "",
-"custom4img":  mediaUrl04 ?? "",
-"custom5img":  mediaUrl05 ?? "",
-"custom6img":  mediaUrl06 ?? "",
-"custom7img":  mediaUrl07 ?? "",
-"custom8img":  mediaUrl08 ?? "",
-"custom9img":  mediaUrl09 ?? "",
-"custom10img":  mediaUrl010 ?? "",
-"custom11img":  mediaUrl011 ?? "",
-"custom12img":  mediaUrl012 ?? "",
-"custom13img":  mediaUrl013 ?? "",
-"custom14img":  mediaUrl014 ?? "",
-"custom15img":  mediaUrl015 ?? "",
-"custom16img":  mediaUrl016 ?? "",
-"custom17img":  mediaUrl017 ?? "",
-"custom18img":  mediaUrl018 ?? "",
-"custom19img":  mediaUrl019 ?? "",
-"custom20img":  mediaUrl020 ?? "",
-"custom21img":  mediaUrl021 ?? "",
-"custom22img":  mediaUrl022 ?? "",
-"custom23img":  mediaUrl023 ?? "",
-"custom24img":  mediaUrl024 ?? "",
-"custom25img":  mediaUrl025 ?? "",
-"custom26img":  mediaUrl026 ?? "",
-"custom27img":  mediaUrl027 ?? "",
-"custom28img":  mediaUrl028 ?? "",
-"custom29img":  mediaUrl029 ?? "",
-"custom30img":  mediaUrl030 ?? "",
-"custom31img":  mediaUrl031 ?? "",
-"custom32img":  mediaUrl032 ?? "",
-"custom33img":  mediaUrl033 ?? "",
-"custom34img":  mediaUrl034 ?? "",
-"custom35img":  mediaUrl035 ?? "",
-"custom36img":  mediaUrl036 ?? "",
-"custom37img":  mediaUrl037 ?? "",
-"custom38img":  mediaUrl038 ?? "",
-"custom39img":  mediaUrl039 ?? "",
-"custom40img":  mediaUrl040 ?? "",
-"custom41img":  mediaUrl041 ?? "",
-"custom42img":  mediaUrl042 ?? "",
-"custom43img":  mediaUrl043 ?? "",
-"custom44img":  mediaUrl044 ?? "",
-"custom45img":  mediaUrl045 ?? "",
-"custom46img":  mediaUrl046 ?? "",
-"custom47img":  mediaUrl047 ?? "",
-"custom48img":  mediaUrl048 ?? "",
-"custom49img":  mediaUrl049 ?? "",
-"custom50img":  mediaUrl050 ?? "",
-
+//             "customTitle1":  title1Controller.text ?? "",
+//  "customTitle2":  title2Controller.text ?? "",
+//  "customTitle3":  title3Controller.text ?? "",
+//  "customTitle4":  title4Controller.text ?? "",
+//  "customTitle5":  title5Controller.text ?? "",
+//
+//  "customQuantity1":   int.tryParse(custom1.text ) ?? 0,
+//  "customQuantity2":   int.tryParse(custom2.text ) ?? 0,
+//  "customQuantity3":   int.tryParse(custom3.text ) ?? 0,
+//  "customQuantity4":   int.tryParse(custom4.text ) ?? 0,
+//  "customQuantity5":   int.tryParse(custom5.text ) ?? 0,
+//  "customQuantity6":   int.tryParse(custom6.text ) ?? 0,
+//  "customQuantity7":   int.tryParse(custom7.text ) ?? 0,
+//  "customQuantity8":   int.tryParse(custom8.text ) ?? 0,
+//  "customQuantity9":   int.tryParse(custom9.text ) ?? 0,
+//  "customQuantity10":   int.tryParse(custom10.text ) ?? 0,
+//  "customQuantity11":   int.tryParse(custom11.text ) ?? 0,
+//  "customQuantity12":   int.tryParse(custom12.text ) ?? 0,
+//  "customQuantity13":   int.tryParse(custom13.text ) ?? 0,
+// "customQuantity14":   int.tryParse(custom14.text ) ?? 0,
+// "customQuantity15":   int.tryParse(custom15.text ) ?? 0,
+// "customQuantity16":   int.tryParse(custom16.text ) ?? 0,
+// "customQuantity17":   int.tryParse(custom17.text ) ?? 0,
+// "customQuantity18":   int.tryParse(custom18.text ) ?? 0,
+// "customQuantity19":   int.tryParse(custom19.text ) ?? 0,
+// "customQuantity20":   int.tryParse(custom20.text ) ?? 0,
+// "customQuantity21":   int.tryParse(custom21.text ) ?? 0,
+// "customQuantity22":   int.tryParse(custom22.text ) ?? 0,
+// "customQuantity23":   int.tryParse(custom23.text ) ?? 0,
+// "customQuantity24":   int.tryParse(custom24.text ) ?? 0,
+// "customQuantity25":   int.tryParse(custom25.text ) ?? 0,
+// "customQuantity26":   int.tryParse(custom26.text ) ?? 0,
+// "customQuantity27":   int.tryParse(custom27.text ) ?? 0,
+// "customQuantity28":   int.tryParse(custom28.text ) ?? 0,
+// "customQuantity29":   int.tryParse(custom29.text ) ?? 0,
+// "customQuantity30":   int.tryParse(custom30.text ) ?? 0,
+// "customQuantity31":   int.tryParse(custom31.text ) ?? 0,
+// "customQuantity32":   int.tryParse(custom32.text ) ?? 0,
+// "customQuantity33":   int.tryParse(custom33.text ) ?? 0,
+// "customQuantity34":   int.tryParse(custom34.text ) ?? 0,
+// "customQuantity35":   int.tryParse(custom35.text ) ?? 0,
+// "customQuantity36":   int.tryParse(custom36.text ) ?? 0,
+// "customQuantity37":   int.tryParse(custom37.text ) ?? 0,
+// "customQuantity38":   int.tryParse(custom38.text ) ?? 0,
+// "customQuantity39":   int.tryParse(custom39.text ) ?? 0,
+// "customQuantity40":   int.tryParse(custom40.text ) ?? 0,
+// "customQuantity41":   int.tryParse(custom41.text ) ?? 0,
+// "customQuantity42":   int.tryParse(custom42.text ) ?? 0,
+// "customQuantity43":   int.tryParse(custom43.text ) ?? 0,
+// "customQuantity44":   int.tryParse(custom44.text ) ?? 0,
+// "customQuantity45":   int.tryParse(custom45.text ) ?? 0,
+// "customQuantity46":   int.tryParse(custom46.text ) ?? 0,
+// "customQuantity47":   int.tryParse(custom47.text ) ?? 0,
+// "customQuantity48":   int.tryParse(custom48.text ) ?? 0,
+// "customQuantity49":   int.tryParse(custom49.text ) ?? 0,
+// "customQuantity50":   int.tryParse(custom50.text ) ?? 0,
+//
+//  "customName1":   customName1.text ?? "",
+//  "customName2":   customName2.text ?? "",
+//  "customName3":   customName3.text ?? "",
+//  "customName4":   customName4.text ?? "",
+//  "customName5":   customName5.text ?? "",
+//  "customName6":   customName6.text ?? "",
+//  "customName7":   customName7.text ?? "",
+//  "customName8":   customName8.text ?? "",
+//  "customName9":   customName9.text ?? "",
+//  "customName10":  customName10.text ?? "",
+//  "customName11":  customName11.text ?? "",
+//  "customName12":  customName12.text ?? "",
+//  "customName13":  customName13.text ?? "",
+// "customName14":   customName14.text ?? "",
+// "customName15":   customName15.text ?? "",
+// "customName16":   customName16.text ?? "",
+// "customName17":   customName17.text ?? "",
+// "customName18":   customName18.text ?? "",
+// "customName19":   customName19.text ?? "",
+// "customName20":   customName20.text ?? "",
+// "customName21":   customName21.text ?? "",
+// "customName22":   customName22.text ?? "",
+// "customName23":   customName23.text ?? "",
+// "customName24":   customName24.text ?? "",
+// "customName25":   customName25.text ?? "",
+// "customName26":   customName26.text ?? "",
+// "customName27":   customName27.text ?? "",
+// "customName28":   customName28.text ?? "",
+// "customName29":   customName29.text ?? "",
+// "customName30":   customName30.text ?? "",
+// "customName31":   customName31.text ?? "",
+// "customName32":   customName32.text ?? "",
+// "customName33":   customName33.text ?? "",
+// "customName34":   customName34.text ?? "",
+// "customName35":   customName35.text ?? "",
+// "customName36":   customName36.text ?? "",
+// "customName37":   customName37.text ?? "",
+// "customName38":   customName38.text ?? "",
+// "customName39":   customName39.text ?? "",
+// "customName40":   customName40.text ?? "",
+// "customName41":   customName41.text ?? "",
+// "customName42":   customName42.text ?? "",
+// "customName43":   customName43.text ?? "",
+// "customName44":   customName44.text ?? "",
+// "customName45":   customName45.text ?? "",
+// "customName46":   customName46.text ?? "",
+// "customName47":   customName47.text ?? "",
+// "customName48":   customName48.text ?? "",
+// "customName49":   customName49.text ?? "",
+// "customName50":   customName50.text ?? "",
+//
+//             "custom1img":  mediaUrl01 ?? "",
+// "custom2img":  mediaUrl02 ?? "",
+// "custom3img":  mediaUrl03 ?? "",
+// "custom4img":  mediaUrl04 ?? "",
+// "custom5img":  mediaUrl05 ?? "",
+// "custom6img":  mediaUrl06 ?? "",
+// "custom7img":  mediaUrl07 ?? "",
+// "custom8img":  mediaUrl08 ?? "",
+// "custom9img":  mediaUrl09 ?? "",
+// "custom10img":  mediaUrl010 ?? "",
+// "custom11img":  mediaUrl011 ?? "",
+// "custom12img":  mediaUrl012 ?? "",
+// "custom13img":  mediaUrl013 ?? "",
+// "custom14img":  mediaUrl014 ?? "",
+// "custom15img":  mediaUrl015 ?? "",
+// "custom16img":  mediaUrl016 ?? "",
+// "custom17img":  mediaUrl017 ?? "",
+// "custom18img":  mediaUrl018 ?? "",
+// "custom19img":  mediaUrl019 ?? "",
+// "custom20img":  mediaUrl020 ?? "",
+// "custom21img":  mediaUrl021 ?? "",
+// "custom22img":  mediaUrl022 ?? "",
+// "custom23img":  mediaUrl023 ?? "",
+// "custom24img":  mediaUrl024 ?? "",
+// "custom25img":  mediaUrl025 ?? "",
+// "custom26img":  mediaUrl026 ?? "",
+// "custom27img":  mediaUrl027 ?? "",
+// "custom28img":  mediaUrl028 ?? "",
+// "custom29img":  mediaUrl029 ?? "",
+// "custom30img":  mediaUrl030 ?? "",
+// "custom31img":  mediaUrl031 ?? "",
+// "custom32img":  mediaUrl032 ?? "",
+// "custom33img":  mediaUrl033 ?? "",
+// "custom34img":  mediaUrl034 ?? "",
+// "custom35img":  mediaUrl035 ?? "",
+// "custom36img":  mediaUrl036 ?? "",
+// "custom37img":  mediaUrl037 ?? "",
+// "custom38img":  mediaUrl038 ?? "",
+// "custom39img":  mediaUrl039 ?? "",
+// "custom40img":  mediaUrl040 ?? "",
+// "custom41img":  mediaUrl041 ?? "",
+// "custom42img":  mediaUrl042 ?? "",
+// "custom43img":  mediaUrl043 ?? "",
+// "custom44img":  mediaUrl044 ?? "",
+// "custom45img":  mediaUrl045 ?? "",
+// "custom46img":  mediaUrl046 ?? "",
+// "custom47img":  mediaUrl047 ?? "",
+// "custom48img":  mediaUrl048 ?? "",
+// "custom49img":  mediaUrl049 ?? "",
+// "custom50img":  mediaUrl050 ?? "",
+//
 
 
             "variation1":  customController1.text ?? "",
