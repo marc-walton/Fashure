@@ -2506,11 +2506,11 @@ var shipcostU,
 
     }){
     Navigator.push(context, MaterialPageRoute(builder: (context) =>AddressBuy(
-     userVariationQuantity:userVariationQuantity
+     userVariationQuantity:userVariationQuantity,
      userSizeQuantity: userSizeQuantity,
      userColorQuantity:userColorQuantity,
 
-      userVariationImg:    userVariationImg ,
+      userVariationImg:    userVariationImg ?? "" ,
 
 Size: usersize,
 displaysize: size,
@@ -2530,7 +2530,10 @@ freeship:freeship,
 //
 //       custompriceusd:custompriceusd,
 //       custompriceinr:custompriceinr,
-// custompriceeur:custompriceinr,
+price:  currentUser.currency == "EUR"? eur:
+currentUser.currency == "INR"? inr:
+currentUser.currency == "GBP"? gbp:
+usd,
 // custompricegbp:custompriceinr,
 
 customIndex:variationIndex,
