@@ -40,8 +40,8 @@ import 'package:getwidget/types/gf_button_type.dart';
 
 var currencyFormatter =
 currentUser.currency == "INR"?NumberFormat.currency(locale:"HI"):
-currentUser.currency == "EUR"? NumberFormat.currency(locale:" ${currentUser.countryISO}"):
-currentUser.currency == "GBP"?NumberFormat.currency(locale:" ${currentUser.countryISO}"): NumberFormat('#,##0.00', );
+currentUser.currency == "EUR"? NumberFormat('#.##0,00',):
+ NumberFormat('#,##0.00', );
 
 class Prod extends StatefulWidget {
   final String prodId;
@@ -778,11 +778,11 @@ freeship: doc.data()['freeship'],
       xl: doc.data()['xlQuantity'],
       xxl: doc.data()['xxlQuantity'],
       xxxl: doc.data()['xxxlQuantity'],
-      fourxl: doc.data()['4xlQuantity'],
-      fivexl: doc.data()['5xlQuantity'],
-      sixxl: doc.data()['6xlQuantity'],
-      sevenxl: doc.data()['7xlQuantity'],
-      eightxl: doc.data()['8xlQuantity'],
+      fourxl: doc.data()['fourxlQuantity'],
+      fivexl: doc.data()['fivexlQuantity'],
+      sixxl: doc.data()['sixxlQuantity'],
+      sevenxl: doc.data()['sevenxlQuantity'],
+      eightxl: doc.data()['eightxlQuantity'],
       Shoe1: doc.data()['Shoe1'],
       Shoe2: doc.data()['Shoe2'],
       Shoe3: doc.data()['Shoe3'],
@@ -1501,8 +1501,6 @@ class _ProdState extends State<Prod> {
 
 var  time = const Duration(  seconds: 2);
 String currencysymbol;
-
-
   final String currentUserId = currentUser?.id;
   final String prodId;
   final String ownerId;
@@ -1857,6 +1855,8 @@ final bool freeship;
 var shipcostuser;
 String size;
 bool custom;
+  List<String> selectedCustom1 = <String>[];
+  List<String> selectedVariation = <String>[];
 
   final int mto;
   int likeCount;
@@ -2480,7 +2480,900 @@ conversion()async {
   }
 
 
+Variations(){
 
+  if (variationQuantity1==0&&
+        variationQuantity2==0&&
+        variationQuantity3==0&&
+        variationQuantity4==0&&
+        variationQuantity5==0&&
+        variationQuantity6==0&&
+        variationQuantity7==0&&
+        variationQuantity8==0&&
+        variationQuantity9==0&&
+        variationQuantity10==0
+       ){return Container();}
+    else{
+      return
+        Container(
+          height:250.0,
+
+          child:   Expanded(
+              child:   ListView(
+                  scrollDirection:Axis.horizontal,
+                  shrinkWrap:true,
+                  children:[
+                    variationQuantity1==0?Container():   Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Column(
+                        children: [
+                          // GestureDetector(
+                          //   onTap: () {
+                          //
+                          //     selectedCustom1 =  <String>[];
+                          //     selectedCustom1.add("Variation 1");print(selectedCustom1);
+                          //     setState(() {
+                          //       selectedCustom1.contains("Variation 1")?print("true"):print("false");
+                          //       variationIndex = 'Variation 1';
+                          //       userVariation = variation1;
+                          //       userVariationPrice =  currentUser.currency == "EUR"? custom11eur:
+                          //       currentUser.currency == "INR"? custom11inr:
+                          //       currentUser.currency == "GBP"? custom11gbp:
+                          //       custom11usd;
+                          //
+                          //       userVariationImg = variation1img;
+                          //       userVariationQuantity = variationQuantity1;
+                          //     });
+                          //   },
+                          //
+                          //   child: Card(
+                          //     shape: selectedCustom1.contains("Variation 1")
+                          //         ? new RoundedRectangleBorder(
+                          //         side: new BorderSide(color: Colors.blue, width: 2.0),
+                          //         borderRadius: BorderRadius.circular(4.0))
+                          //         : new RoundedRectangleBorder(
+                          //         side: new BorderSide(color: Colors.white, width: 2.0),
+                          //         borderRadius: BorderRadius.circular(4.0)),
+                          //     child: Column(
+                          //       children: [
+                          //         Container(
+                          //             height:120.0,
+                          //             width:120.0,
+                          //             child: CachedImage(variation1img)),
+                          //         currentUser.currency == "INR"? Row(
+                          //           children: [
+                          //             Text("₹ ${currencyFormatter.format(custom11inr)}",
+                          //                 style: TextStyle(
+                          //                   color: Colors.black,
+                          //                   fontWeight: FontWeight.bold,
+                          //
+                          //                 )),
+                          //           ],
+                          //         ):
+                          //         currentUser.currency == "EUR"?Row(
+                          //           children: [
+                          //             Text("${currencyFormatter.format(custom11eur)}  €",
+                          //                 style: TextStyle(
+                          //                   color: Colors.black,
+                          //                   fontWeight: FontWeight.bold,
+                          //
+                          //                 )),
+                          //           ],
+                          //         ):
+                          //         currentUser.currency == "GBP"?Row(
+                          //           children: [
+                          //             Text("£ ${currencyFormatter.format(custom11gbp)}",
+                          //                 style: TextStyle(
+                          //                   color: Colors.black,
+                          //                   fontWeight: FontWeight.bold,
+                          //
+                          //                 )),
+                          //           ],
+                          //         ):
+                          //         Row(
+                          //           children: [
+                          //             Text("\u0024 ${currencyFormatter.format(custom11usd)}",
+                          //                 style: TextStyle(
+                          //                   color: Colors.black,
+                          //                   fontWeight: FontWeight.bold,
+                          //
+                          //                 )),
+                          //           ],
+                          //         ),
+                          //
+                          //         Text(variation1),
+                          //       ],
+                          //     ),
+                          //   ),
+                          // ),
+                          ElevatedButton(
+
+                            style: ElevatedButton.styleFrom(
+
+                              primary: selectedCustom1.contains("Variation 1") ? Colors.black: Colors.white.withOpacity(0.1),
+                              onPrimary: selectedCustom1.contains("Variation 1") ? Colors.black: Colors.white.withOpacity(0.1),
+
+                            ),
+                            onPressed: () {
+                              setState(() {
+                                selectedCustom1 =  <String>[];
+                                selectedCustom1.add("Variation 1");
+                                variationIndex = 'Variation 1';
+                                userVariation = variation1;
+                                userVariationPrice =  currentUser.currency == "EUR"? custom11eur:
+                                currentUser.currency == "INR"? custom11inr:
+                                currentUser.currency == "GBP"? custom11gbp:
+                                custom11usd;
+
+                                userVariationImg = variation1img;
+                                userVariationQuantity = variationQuantity1;
+                              });
+                            },        child: Text(variation1),
+                          ),
+
+                        ],
+                      ),
+                    ),
+
+                    variationQuantity2==0?Container():   Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Column(
+                        children: [
+                          Card(
+
+                            child: Column(
+                              children: [
+                                Container(
+                                    height:120.0,
+                                    width:120.0,
+                                    child: CachedImage(variation2img)),
+                                currentUser.currency == "INR"? Row(
+                                  children: [
+                                    Text("₹ ${currencyFormatter.format(custom21inr)}",
+                                        style: TextStyle(
+                                          color: Colors.black,
+                                          fontWeight: FontWeight.bold,
+
+                                        )),
+                                  ],
+                                ):
+                                currentUser.currency == "EUR"?Row(
+                                  children: [
+                                    Text("${custom21eur}  €",
+                                        style: TextStyle(
+                                          color: Colors.black,
+                                          fontWeight: FontWeight.bold,
+
+                                        )),
+                                  ],
+                                ):
+                                currentUser.currency == "GBP"?Row(
+                                  children: [
+                                    Text("£ ${currencyFormatter.format(custom21gbp)}",
+                                        style: TextStyle(
+                                          color: Colors.black,
+                                          fontWeight: FontWeight.bold,
+
+                                        )),
+                                  ],
+                                ):
+                                Row(
+                                  children: [
+                                    Text("\u0024 ${currencyFormatter.format(custom21usd)}",
+                                        style: TextStyle(
+                                          color: Colors.black,
+                                          fontWeight: FontWeight.bold,
+
+                                        )),
+                                  ],
+                                ),
+
+                                Text(variation2),
+                              ],
+                            ),
+                          ),
+                          ElevatedButton(
+
+                            style: ElevatedButton.styleFrom(
+
+                              primary: selectedVariation.contains("Variation 2") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                            ),
+                            onPressed: () {
+                              selectedVariation =  <String>[];
+                              selectedVariation.add("Variation 2");
+                              setState(() { variationIndex = 'Variation 2';
+                              userVariation = variation2;
+                              userVariationPrice =  currentUser.currency == "EUR"? custom21eur:
+                              currentUser.currency == "INR"? custom21inr:
+                              currentUser.currency == "GBP"? custom21gbp:
+                              custom21usd;
+
+                              userVariationImg = variation2img;
+                              userVariationQuantity = variationQuantity2;
+                              });
+                            },        child: Text(variation2),
+                          ),
+
+                        ],
+                      ),
+                    ),
+                    variationQuantity3==0?Container():   Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Column(
+                        children: [
+                          Card(
+
+                            child: Column(
+                              children: [
+                                Container(
+                                    height:120.0,
+                                    width:120.0,
+                                    child: CachedImage(variation3img)),
+                                currentUser.currency == "INR"? Row(
+                                  children: [
+                                    Text("₹ ${currencyFormatter.format(custom31inr)}",
+                                        style: TextStyle(
+                                          color: Colors.black,
+                                          fontWeight: FontWeight.bold,
+
+                                        )),
+                                  ],
+                                ):
+                                currentUser.currency == "EUR"?Row(
+                                  children: [
+                                    Text("${currencyFormatter.format(custom31eur)}  €",
+                                        style: TextStyle(
+                                          color: Colors.black,
+                                          fontWeight: FontWeight.bold,
+
+                                        )),
+                                  ],
+                                ):
+                                currentUser.currency == "GBP"?Row(
+                                  children: [
+                                    Text("£ ${currencyFormatter.format(custom31gbp)}",
+                                        style: TextStyle(
+                                          color: Colors.black,
+                                          fontWeight: FontWeight.bold,
+
+                                        )),
+                                  ],
+                                ):
+                                Row(
+                                  children: [
+                                    Text("\u0024 ${currencyFormatter.format(custom31usd)}",
+                                        style: TextStyle(
+                                          color: Colors.black,
+                                          fontWeight: FontWeight.bold,
+
+                                        )),
+                                  ],
+                                ),
+
+                                Text(variation3),
+                              ],
+                            ),
+                          ),
+                          ElevatedButton(
+
+                            style: ElevatedButton.styleFrom(
+
+                              primary: selectedVariation.contains("Variation 3") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                            ),
+                            onPressed: () {
+                              selectedVariation =  <String>[];
+                              selectedVariation.add("Variation 3");
+                              setState(() { variationIndex = 'Variation 3';
+                              userVariation = variation3;
+                              userVariationPrice =  currentUser.currency == "EUR"? custom31eur:
+                              currentUser.currency == "INR"? custom31inr:
+                              currentUser.currency == "GBP"? custom31gbp:
+                              custom31usd;
+
+                              userVariationImg = variation3img;
+                              userVariationQuantity = variationQuantity3;
+                              });
+                            },        child: Text(variation3),
+                          ),
+
+                        ],
+                      ),
+                    ),
+                    variationQuantity4==0?Container():   Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Column(
+                        children: [
+                          Card(
+
+                            child: Column(
+                              children: [
+                                Container(
+                                    height:120.0,
+                                    width:120.0,
+                                    child: CachedImage(variation4img)),
+                                currentUser.currency == "INR"? Row(
+                                  children: [
+                                    Text("₹ ${currencyFormatter.format(custom41inr)}",
+                                        style: TextStyle(
+                                          color: Colors.black,
+                                          fontWeight: FontWeight.bold,
+
+                                        )),
+                                  ],
+                                ):
+                                currentUser.currency == "EUR"?Row(
+                                  children: [
+                                    Text("${currencyFormatter.format(custom41eur)}  €",
+                                        style: TextStyle(
+                                          color: Colors.black,
+                                          fontWeight: FontWeight.bold,
+
+                                        )),
+                                  ],
+                                ):
+                                currentUser.currency == "GBP"?Row(
+                                  children: [
+                                    Text("£ ${currencyFormatter.format(custom41gbp)}",
+                                        style: TextStyle(
+                                          color: Colors.black,
+                                          fontWeight: FontWeight.bold,
+
+                                        )),
+                                  ],
+                                ):
+                                Row(
+                                  children: [
+                                    Text("\u0024 ${currencyFormatter.format(custom41usd)}",
+                                        style: TextStyle(
+                                          color: Colors.black,
+                                          fontWeight: FontWeight.bold,
+
+                                        )),
+                                  ],
+                                ),
+
+                                Text(variation4),
+                              ],
+                            ),
+                          ),
+                          ElevatedButton(
+
+                            style: ElevatedButton.styleFrom(
+
+                              primary: selectedVariation.contains("Variation 4") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                            ),
+                            onPressed: () {
+                              selectedVariation =  <String>[];
+                              selectedVariation.add("Variation 4");
+                              setState(() { variationIndex = 'Variation 4';
+                              userVariation = variation4;
+                              userVariationPrice =  currentUser.currency == "EUR"? custom41eur:
+                              currentUser.currency == "INR"? custom41inr:
+                              currentUser.currency == "GBP"? custom41gbp:
+                              custom41usd;
+
+                              userVariationImg = variation4img;
+                              userVariationQuantity = variationQuantity4;
+                              });
+                            },        child: Text(variation4),
+                          ),
+
+                        ],
+                      ),
+                    ),
+                    variationQuantity5==0?Container():   Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Column(
+                        children: [
+                          Card(
+
+                            child: Column(
+                              children: [
+                                Container(
+                                    height:120.0,
+                                    width:120.0,
+                                    child: CachedImage(variation5img)),
+                                currentUser.currency == "INR"? Row(
+                                  children: [
+                                    Text("₹ ${currencyFormatter.format(custom51inr)}",
+                                        style: TextStyle(
+                                          color: Colors.black,
+                                          fontWeight: FontWeight.bold,
+
+                                        )),
+                                  ],
+                                ):
+                                currentUser.currency == "EUR"?Row(
+                                  children: [
+                                    Text("${currencyFormatter.format(custom51eur)}  €",
+                                        style: TextStyle(
+                                          color: Colors.black,
+                                          fontWeight: FontWeight.bold,
+
+                                        )),
+                                  ],
+                                ):
+                                currentUser.currency == "GBP"?Row(
+                                  children: [
+                                    Text("£ ${currencyFormatter.format(custom51gbp)}",
+                                        style: TextStyle(
+                                          color: Colors.black,
+                                          fontWeight: FontWeight.bold,
+
+                                        )),
+                                  ],
+                                ):
+                                Row(
+                                  children: [
+                                    Text("\u0024 ${currencyFormatter.format(custom51usd)}",
+                                        style: TextStyle(
+                                          color: Colors.black,
+                                          fontWeight: FontWeight.bold,
+
+                                        )),
+                                  ],
+                                ),
+
+                                Text(variation5),
+                              ],
+                            ),
+                          ),
+                          ElevatedButton(
+
+                            style: ElevatedButton.styleFrom(
+
+                              primary: selectedVariation.contains("Variation 5") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                            ),
+                            onPressed: () {
+                              selectedVariation =  <String>[];
+                              selectedVariation.add("Variation 5");
+                              setState(() { variationIndex = 'Variation 5';
+                              userVariation = variation5;
+                              userVariationPrice =  currentUser.currency == "EUR"? custom51eur:
+                              currentUser.currency == "INR"? custom51inr:
+                              currentUser.currency == "GBP"? custom51gbp:
+                              custom51usd;
+
+                              userVariationImg = variation5img;
+                              userVariationQuantity = variationQuantity5;
+                              });
+                            },        child: Text(variation5),
+                          ),
+
+                        ],
+                      ),
+
+                    ),
+                    variationQuantity6==0?Container():   Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Column(
+                        children: [
+                          Card(
+
+                            child: Column(
+                              children: [
+                                Container(
+                                    height:120.0,
+                                    width:120.0,
+                                    child: CachedImage(variation6img)),
+                                currentUser.currency == "INR"? Row(
+                                  children: [
+                                    Text("₹ ${currencyFormatter.format(custom61inr)}",
+                                        style: TextStyle(
+                                          color: Colors.black,
+                                          fontWeight: FontWeight.bold,
+
+                                        )),
+                                  ],
+                                ):
+                                currentUser.currency == "EUR"?Row(
+                                  children: [
+                                    Text("${currencyFormatter.format(custom61eur)}  €",
+                                        style: TextStyle(
+                                          color: Colors.black,
+                                          fontWeight: FontWeight.bold,
+
+                                        )),
+                                  ],
+                                ):
+                                currentUser.currency == "GBP"?Row(
+                                  children: [
+                                    Text("£ ${currencyFormatter.format(custom61gbp)}",
+                                        style: TextStyle(
+                                          color: Colors.black,
+                                          fontWeight: FontWeight.bold,
+
+                                        )),
+                                  ],
+                                ):
+                                Row(
+                                  children: [
+                                    Text("\u0024 ${currencyFormatter.format(custom61usd)}",
+                                        style: TextStyle(
+                                          color: Colors.black,
+                                          fontWeight: FontWeight.bold,
+
+                                        )),
+                                  ],
+                                ),
+
+                                Text(variation6),
+                              ],
+                            ),
+                          ),
+                          ElevatedButton(
+
+                            style: ElevatedButton.styleFrom(
+
+                              primary: selectedVariation.contains("Variation 6") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                            ),
+                            onPressed: () {
+                              selectedVariation =  <String>[];
+                              selectedVariation.add("Variation 6");
+                              setState(() { variationIndex = 'Variation 6';
+                              userVariation = variation6;
+                              userVariationPrice =  currentUser.currency == "EUR"? custom61eur:
+                              currentUser.currency == "INR"? custom61inr:
+                              currentUser.currency == "GBP"? custom61gbp:
+                              custom61usd;
+                              userVariationImg = variation6img;
+
+                              userVariationQuantity = variationQuantity6;
+                              });
+                            },        child: Text(variation6),
+                          ),
+
+                        ],
+                      ),
+                    ),
+                    variationQuantity7==0?Container():   Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Column(
+                        children: [
+                          Card(
+
+                            child: Column(
+                              children: [
+                                Container(
+                                    height:120.0,
+                                    width:120.0,
+                                    child: CachedImage(variation7img)),
+                                currentUser.currency == "INR"? Row(
+                                  children: [
+                                    Text("₹ ${currencyFormatter.format(custom71inr)}",
+                                        style: TextStyle(
+                                          color: Colors.black,
+                                          fontWeight: FontWeight.bold,
+
+                                        )),
+                                  ],
+                                ):
+                                currentUser.currency == "EUR"?Row(
+                                  children: [
+                                    Text("${currencyFormatter.format(custom71eur)}  €",
+                                        style: TextStyle(
+                                          color: Colors.black,
+                                          fontWeight: FontWeight.bold,
+
+                                        )),
+                                  ],
+                                ):
+                                currentUser.currency == "GBP"?Row(
+                                  children: [
+                                    Text("£ ${currencyFormatter.format(custom71gbp)}",
+                                        style: TextStyle(
+                                          color: Colors.black,
+                                          fontWeight: FontWeight.bold,
+
+                                        )),
+                                  ],
+                                ):
+                                Row(
+                                  children: [
+                                    Text("\u0024 ${currencyFormatter.format(custom71usd)}",
+                                        style: TextStyle(
+                                          color: Colors.black,
+                                          fontWeight: FontWeight.bold,
+
+                                        )),
+                                  ],
+                                ),
+
+                                Text(variation7),
+                              ],
+                            ),
+                          ),
+                          ElevatedButton(
+
+                            style: ElevatedButton.styleFrom(
+
+                              primary: selectedVariation.contains("Variation 7") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                            ),
+                            onPressed: () {
+                              selectedVariation =  <String>[];
+                              selectedVariation.add("Variation 7");
+                              setState(() { variationIndex = 'Variation 7';
+                              userVariation = variation7;
+                              userVariationPrice =  currentUser.currency == "EUR"? custom71eur:
+                              currentUser.currency == "INR"? custom71inr:
+                              currentUser.currency == "GBP"? custom71gbp:
+                              custom71usd;
+                              userVariationImg = variation7img;
+
+                              userVariationQuantity = variationQuantity7;
+                              });
+                            },        child: Text(variation7),
+                          ),
+
+                        ],
+                      ),
+                    ),
+                    variationQuantity8==0?Container():   Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Column(
+                        children: [
+                          Card(
+
+                            child: Column(
+                              children: [
+                                Container(
+                                    height:120.0,
+                                    width:120.0,
+                                    child: CachedImage(variation8img)),
+                                currentUser.currency == "INR"? Row(
+                                  children: [
+                                    Text("₹ ${currencyFormatter.format(custom81inr)}",
+                                        style: TextStyle(
+                                          color: Colors.black,
+                                          fontWeight: FontWeight.bold,
+
+                                        )),
+                                  ],
+                                ):
+                                currentUser.currency == "EUR"?Row(
+                                  children: [
+                                    Text("${currencyFormatter.format(custom81eur)}  €",
+                                        style: TextStyle(
+                                          color: Colors.black,
+                                          fontWeight: FontWeight.bold,
+
+                                        )),
+                                  ],
+                                ):
+                                currentUser.currency == "GBP"?Row(
+                                  children: [
+                                    Text("£ ${currencyFormatter.format(custom81gbp)}",
+                                        style: TextStyle(
+                                          color: Colors.black,
+                                          fontWeight: FontWeight.bold,
+
+                                        )),
+                                  ],
+                                ):
+                                Row(
+                                  children: [
+                                    Text("\u0024 ${currencyFormatter.format(custom81usd)}",
+                                        style: TextStyle(
+                                          color: Colors.black,
+                                          fontWeight: FontWeight.bold,
+
+                                        )),
+                                  ],
+                                ),
+
+                                Text(variation8),
+                              ],
+                            ),
+                          ),
+                          ElevatedButton(
+
+                            style: ElevatedButton.styleFrom(
+
+                              primary: selectedVariation.contains("Variation 8") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                            ),
+                            onPressed: () {
+                              selectedVariation =  <String>[];
+                              selectedVariation.add("Variation 8");
+                              setState(() { variationIndex = 'Variation 8';
+                              userVariation = variation8;
+                              userVariationPrice =  currentUser.currency == "EUR"? custom81eur:
+                              currentUser.currency == "INR"? custom81inr:
+                              currentUser.currency == "GBP"? custom81gbp:
+                              custom81usd;
+                              userVariationImg = variation8img;
+
+                              userVariationQuantity = variationQuantity8;
+                              });
+                            },        child: Text(variation8),
+                          ),
+
+                        ],
+                      ),
+                    ),
+                    variationQuantity9==0?Container():   Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Column(
+                        children: [
+                          Card(
+
+                            child: Column(
+                              children: [
+                                Container(
+                                    height:120.0,
+                                    width:120.0,
+                                    child: CachedImage(variation9img)),
+                                currentUser.currency == "INR"? Row(
+                                  children: [
+                                    Text("₹ ${currencyFormatter.format(custom91inr)}",
+                                        style: TextStyle(
+                                          color: Colors.black,
+                                          fontWeight: FontWeight.bold,
+
+                                        )),
+                                  ],
+                                ):
+                                currentUser.currency == "EUR"?Row(
+                                  children: [
+                                    Text("${currencyFormatter.format(custom91eur)}  €",
+                                        style: TextStyle(
+                                          color: Colors.black,
+                                          fontWeight: FontWeight.bold,
+
+                                        )),
+                                  ],
+                                ):
+                                currentUser.currency == "GBP"?Row(
+                                  children: [
+                                    Text("£ ${currencyFormatter.format(custom91gbp)}",
+                                        style: TextStyle(
+                                          color: Colors.black,
+                                          fontWeight: FontWeight.bold,
+
+                                        )),
+                                  ],
+                                ):
+                                Row(
+                                  children: [
+                                    Text("\u0024 ${currencyFormatter.format(custom91usd)}",
+                                        style: TextStyle(
+                                          color: Colors.black,
+                                          fontWeight: FontWeight.bold,
+
+                                        )),
+                                  ],
+                                ),
+
+                                Text(variation9),
+                              ],
+                            ),
+                          ),
+                          ElevatedButton(
+
+                            style: ElevatedButton.styleFrom(
+
+                              primary: selectedVariation.contains("Variation 9") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                            ),
+                            onPressed: () {
+                              selectedVariation =  <String>[];
+                              selectedVariation.add("Variation 9");
+                              setState(() { variationIndex = 'Variation 9';
+                              userVariation = variation9;
+                              userVariationPrice =  currentUser.currency == "EUR"? custom91eur:
+                              currentUser.currency == "INR"? custom91inr:
+                              currentUser.currency == "GBP"? custom91gbp:
+                              custom91usd;
+                              userVariationImg = variation9img;
+
+                              userVariationQuantity = variationQuantity9;
+                              });
+                            },        child: Text(variation9),
+                          ),
+
+                        ],
+                      ),
+                    ),
+                    variationQuantity10==0?Container():   Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: GestureDetector(
+                        onTap: () {
+                          selectedVariation =  <String>[];
+                          selectedVariation.add("Variation 10");
+                          setState(() { variationIndex = 'Variation 10';
+                          userVariation = variation10;
+                          userVariationPrice =  currentUser.currency == "EUR"? custom101eur:
+                          currentUser.currency == "INR"? custom101inr:
+                          currentUser.currency == "GBP"? custom101gbp:
+                          custom101usd;
+                          userVariationImg = variation10img;
+
+                          userVariationQuantity = variationQuantity10;
+                          });
+                        },
+                        child: Column(
+                          children: [
+                            Card(
+                              child: Column(
+                                children: [
+                                  Container(
+                                      height:120.0,
+                                      width:120.0,
+                                      child: CachedImage(variation10img)),
+                                  currentUser.currency == "INR"? Row(
+                                    children: [
+                                      Text("₹ ${currencyFormatter.format(custom101inr)}",
+                                          style: TextStyle(
+                                            color: Colors.black,
+                                            fontWeight: FontWeight.bold,
+
+                                          )),
+                                    ],
+                                  ):
+                                  currentUser.currency == "EUR"?Row(
+                                    children: [
+                                      Text("${currencyFormatter.format(custom101eur)}  €",
+                                          style: TextStyle(
+                                            color: Colors.black,
+                                            fontWeight: FontWeight.bold,
+
+                                          )),
+                                    ],
+                                  ):
+                                  currentUser.currency == "GBP"?Row(
+                                    children: [
+                                      Text("£ ${currencyFormatter.format(custom101gbp)}",
+                                          style: TextStyle(
+                                            color: Colors.black,
+                                            fontWeight: FontWeight.bold,
+
+                                          )),
+                                    ],
+                                  ):
+                                  Row(
+                                    children: [
+                                      Text("\u0024 ${currencyFormatter.format(custom101usd)}",
+                                          style: TextStyle(
+                                            color: Colors.black,
+                                            fontWeight: FontWeight.bold,
+
+                                          )),
+                                    ],
+                                  ),
+
+                                  Text(variation10),
+                                ],
+                              ),
+                            ),
+                            ElevatedButton(
+
+                              style: ElevatedButton.styleFrom(
+
+                                primary: selectedVariation.contains("Variation 10") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                              ),
+                              onPressed: () {
+                                selectedVariation =  <String>[];
+                                selectedVariation.add("Variation 10");
+                                setState(() { variationIndex = 'Variation 10';
+                                userVariation = variation10;
+                                userVariationPrice =  currentUser.currency == "EUR"? custom101eur:
+                                currentUser.currency == "INR"? custom101inr:
+                                currentUser.currency == "GBP"? custom101gbp:
+                                custom101usd;
+                                userVariationQuantity = variationQuantity10;
+                                });
+                              },        child: Text(variation10),
+                            ),
+
+                          ],
+                        ),
+                      ),
+                    ),
+
+                  ])
+          ),
+        );
+
+}
+}
   report(){
     Fluttertoast.showToast(
         msg: "Your report has been submitted", timeInSecForIos: 4);
@@ -2495,19 +3388,12 @@ conversion()async {
       "timestamp": timestamp,
     });
   }
-
-  Proceedtobuy({
-var ship,
-var shipcostU,
-
-    }){
+   Proceedtobuy(){
     Navigator.push(context, MaterialPageRoute(builder: (context) =>AddressBuy(
      userVariationQuantity:userVariationQuantity,
      userSizeQuantity: userSizeQuantity,
      userColorQuantity:userColorQuantity,
-
-      userVariationImg:    userVariationImg ?? "" ,
-
+      userVariationImg: userVariationImg ?? "" ,
 Size: usersize,
 displaysize: size,
 OwnerId: ownerId,prodId:prodId ,
@@ -2619,16 +3505,13 @@ MTO(){
    Buynow(parentContext) {
      List<String> selectedCategory = <String>[];
      List<String> selectedColor = <String>[];
-List<String> selectedCustom1 = <String>[];
 List<String> selectedCustom2 = <String>[];
 List<String> selectedCustom3 = <String>[];
 List<String> selectedCustom4 = <String>[];
 List<String> selectedCustom5 = <String>[];
 
-List<String> selectedVariation = <String>[];
      return
        showMaterialModalBottomSheet(
-           expand:true,
 
            context: parentContext,
            builder: (BuildContext context) {
@@ -6365,18 +7248,18 @@ List<String> selectedVariation = <String>[];
                                              ])
                                      ),
                                    ),
-                                   variationQuantity1==0||
-                                       variationQuantity2==0||
-                                       variationQuantity3==0||
-                                       variationQuantity4==0||
-                                       variationQuantity5==0||
-                                       variationQuantity6==0||
-                                       variationQuantity7==0||
-                                       variationQuantity8==0||
-                                       variationQuantity9==0||
-                                       variationQuantity10==0
-                                       ?Container():    Container(
-                                     height:205.0,
+                                   variationQuantity1==0&&
+                                       variationQuantity2==0&&
+                                       variationQuantity3==0&&
+                                       variationQuantity4==0&&
+                                       variationQuantity5==0&&
+                                       variationQuantity6==0&&
+                                       variationQuantity7==0&&
+                                       variationQuantity8==0&&
+                                       variationQuantity9==0&&
+                                       variationQuantity10==0?Container():
+                                   Container(
+                                     height:250.0,
 
                                      child:   Expanded(
                                          child:   ListView(
@@ -6401,17 +7284,17 @@ List<String> selectedVariation = <String>[];
                                                                    style: TextStyle(
                                                                      color: Colors.black,
                                                                      fontWeight: FontWeight.bold,
-                                                                     fontSize: 20.0,
+
                                                                    )),
                                                              ],
                                                            ):
                                                            currentUser.currency == "EUR"?Row(
                                                              children: [
-                                                               Text("${currencyFormatter.format(custom11eur)}  €",
+                                                               Text("${custom11eur}  €",
                                                                    style: TextStyle(
                                                                      color: Colors.black,
                                                                      fontWeight: FontWeight.bold,
-                                                                     fontSize: 20.0,
+
                                                                    )),
                                                              ],
                                                            ):
@@ -6421,7 +7304,7 @@ List<String> selectedVariation = <String>[];
                                                                    style: TextStyle(
                                                                      color: Colors.black,
                                                                      fontWeight: FontWeight.bold,
-                                                                     fontSize: 20.0,
+
                                                                    )),
                                                              ],
                                                            ):
@@ -6431,7 +7314,7 @@ List<String> selectedVariation = <String>[];
                                                                    style: TextStyle(
                                                                      color: Colors.black,
                                                                      fontWeight: FontWeight.bold,
-                                                                     fontSize: 20.0,
+
                                                                    )),
                                                              ],
                                                            ),
@@ -6444,12 +7327,14 @@ List<String> selectedVariation = <String>[];
 
                                                        style: ElevatedButton.styleFrom(
 
-                                                         primary: selectedColor.contains("Variation 1") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                                                         primary: selectedCustom1.contains("Variation 1") ? Colors.black: Colors.white.withOpacity(0.1),
+                                                         onPrimary: selectedCustom1.contains("Variation 1") ? Colors.white: Colors.black.withOpacity(0.1),
+
                                                        ),
                                                        onPressed: () {
                                                          stateSetter(() {
-                                                           selectedVariation =  <String>[];
-                                                           selectedVariation.add("Variation 1");
+                                                           selectedCustom1 =  <String>[];
+                                                           selectedCustom1.add("Variation 1");
                                                            variationIndex = 'Variation 1';
                                                            userVariation = variation1;
                                                            userVariationPrice =  currentUser.currency == "EUR"? custom11eur:
@@ -6485,17 +7370,17 @@ List<String> selectedVariation = <String>[];
                                                                    style: TextStyle(
                                                                      color: Colors.black,
                                                                      fontWeight: FontWeight.bold,
-                                                                     fontSize: 20.0,
+
                                                                    )),
                                                              ],
                                                            ):
                                                            currentUser.currency == "EUR"?Row(
                                                              children: [
-                                                               Text("${currencyFormatter.format(custom21eur)}  €",
+                                                               Text("${custom21eur}  €",
                                                                    style: TextStyle(
                                                                      color: Colors.black,
                                                                      fontWeight: FontWeight.bold,
-                                                                     fontSize: 20.0,
+
                                                                    )),
                                                              ],
                                                            ):
@@ -6505,7 +7390,7 @@ List<String> selectedVariation = <String>[];
                                                                    style: TextStyle(
                                                                      color: Colors.black,
                                                                      fontWeight: FontWeight.bold,
-                                                                     fontSize: 20.0,
+
                                                                    )),
                                                              ],
                                                            ):
@@ -6515,7 +7400,7 @@ List<String> selectedVariation = <String>[];
                                                                    style: TextStyle(
                                                                      color: Colors.black,
                                                                      fontWeight: FontWeight.bold,
-                                                                     fontSize: 20.0,
+
                                                                    )),
                                                              ],
                                                            ),
@@ -6525,14 +7410,14 @@ List<String> selectedVariation = <String>[];
                                                        ),
                                                      ),
                                                      ElevatedButton(
-
                                                        style: ElevatedButton.styleFrom(
 
-                                                         primary: selectedColor.contains("Variation 2") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                                                         primary: selectedCustom1.contains("Variation 2") ? Colors.black: Colors.white.withOpacity(0.1),
+                                                         onPrimary: selectedCustom1.contains("Variation 2") ? Colors.white: Colors.black.withOpacity(0.1),
                                                        ),
                                                        onPressed: () {
-                                                         selectedVariation =  <String>[];
-                                                         selectedVariation.add("Variation 2");
+                                                         selectedCustom1 =  <String>[];
+                                                         selectedCustom1.add("Variation 2");
                                                          stateSetter(() { variationIndex = 'Variation 2';
                                                          userVariation = variation2;
                                                          userVariationPrice =  currentUser.currency == "EUR"? custom21eur:
@@ -6567,7 +7452,7 @@ List<String> selectedVariation = <String>[];
                                                                    style: TextStyle(
                                                                      color: Colors.black,
                                                                      fontWeight: FontWeight.bold,
-                                                                     fontSize: 20.0,
+
                                                                    )),
                                                              ],
                                                            ):
@@ -6577,7 +7462,7 @@ List<String> selectedVariation = <String>[];
                                                                    style: TextStyle(
                                                                      color: Colors.black,
                                                                      fontWeight: FontWeight.bold,
-                                                                     fontSize: 20.0,
+
                                                                    )),
                                                              ],
                                                            ):
@@ -6587,7 +7472,7 @@ List<String> selectedVariation = <String>[];
                                                                    style: TextStyle(
                                                                      color: Colors.black,
                                                                      fontWeight: FontWeight.bold,
-                                                                     fontSize: 20.0,
+
                                                                    )),
                                                              ],
                                                            ):
@@ -6597,7 +7482,7 @@ List<String> selectedVariation = <String>[];
                                                                    style: TextStyle(
                                                                      color: Colors.black,
                                                                      fontWeight: FontWeight.bold,
-                                                                     fontSize: 20.0,
+
                                                                    )),
                                                              ],
                                                            ),
@@ -6610,11 +7495,12 @@ List<String> selectedVariation = <String>[];
 
                                                        style: ElevatedButton.styleFrom(
 
-                                                         primary: selectedColor.contains("Variation 3") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                                                         primary: selectedCustom1.contains("Variation 3") ? Colors.black: Colors.white.withOpacity(0.1),
+                                                         onPrimary: selectedCustom1.contains("Variation 3") ? Colors.white: Colors.black.withOpacity(0.1),
                                                        ),
                                                        onPressed: () {
-                                                         selectedVariation =  <String>[];
-                                                         selectedVariation.add("Variation 3");
+                                                         selectedCustom1 =  <String>[];
+                                                         selectedCustom1.add("Variation 3");
                                                          stateSetter(() { variationIndex = 'Variation 3';
                                                          userVariation = variation3;
                                                          userVariationPrice =  currentUser.currency == "EUR"? custom31eur:
@@ -6649,7 +7535,7 @@ List<String> selectedVariation = <String>[];
                                                                    style: TextStyle(
                                                                      color: Colors.black,
                                                                      fontWeight: FontWeight.bold,
-                                                                     fontSize: 20.0,
+
                                                                    )),
                                                              ],
                                                            ):
@@ -6659,7 +7545,7 @@ List<String> selectedVariation = <String>[];
                                                                    style: TextStyle(
                                                                      color: Colors.black,
                                                                      fontWeight: FontWeight.bold,
-                                                                     fontSize: 20.0,
+
                                                                    )),
                                                              ],
                                                            ):
@@ -6669,7 +7555,7 @@ List<String> selectedVariation = <String>[];
                                                                    style: TextStyle(
                                                                      color: Colors.black,
                                                                      fontWeight: FontWeight.bold,
-                                                                     fontSize: 20.0,
+
                                                                    )),
                                                              ],
                                                            ):
@@ -6679,7 +7565,7 @@ List<String> selectedVariation = <String>[];
                                                                    style: TextStyle(
                                                                      color: Colors.black,
                                                                      fontWeight: FontWeight.bold,
-                                                                     fontSize: 20.0,
+
                                                                    )),
                                                              ],
                                                            ),
@@ -6692,11 +7578,12 @@ List<String> selectedVariation = <String>[];
 
                                                        style: ElevatedButton.styleFrom(
 
-                                                         primary: selectedColor.contains("Variation 4") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                                                         primary: selectedCustom1.contains("Variation 4") ? Colors.black: Colors.white.withOpacity(0.1),
+                                                         onPrimary: selectedCustom1.contains("Variation 4") ? Colors.white: Colors.black.withOpacity(0.1),
                                                        ),
                                                        onPressed: () {
-                                                         selectedVariation =  <String>[];
-                                                         selectedVariation.add("Variation 4");
+                                                         selectedCustom1 =  <String>[];
+                                                         selectedCustom1.add("Variation 4");
                                                          stateSetter(() { variationIndex = 'Variation 4';
                                                          userVariation = variation4;
                                                          userVariationPrice =  currentUser.currency == "EUR"? custom41eur:
@@ -6731,7 +7618,7 @@ List<String> selectedVariation = <String>[];
                                                                    style: TextStyle(
                                                                      color: Colors.black,
                                                                      fontWeight: FontWeight.bold,
-                                                                     fontSize: 20.0,
+
                                                                    )),
                                                              ],
                                                            ):
@@ -6741,7 +7628,7 @@ List<String> selectedVariation = <String>[];
                                                                    style: TextStyle(
                                                                      color: Colors.black,
                                                                      fontWeight: FontWeight.bold,
-                                                                     fontSize: 20.0,
+
                                                                    )),
                                                              ],
                                                            ):
@@ -6751,7 +7638,7 @@ List<String> selectedVariation = <String>[];
                                                                    style: TextStyle(
                                                                      color: Colors.black,
                                                                      fontWeight: FontWeight.bold,
-                                                                     fontSize: 20.0,
+
                                                                    )),
                                                              ],
                                                            ):
@@ -6761,7 +7648,7 @@ List<String> selectedVariation = <String>[];
                                                                    style: TextStyle(
                                                                      color: Colors.black,
                                                                      fontWeight: FontWeight.bold,
-                                                                     fontSize: 20.0,
+
                                                                    )),
                                                              ],
                                                            ),
@@ -6774,11 +7661,12 @@ List<String> selectedVariation = <String>[];
 
                                                        style: ElevatedButton.styleFrom(
 
-                                                         primary: selectedColor.contains("Variation 5") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                                                         primary: selectedCustom1.contains("Variation 5") ? Colors.black: Colors.white.withOpacity(0.1),
+                                                         onPrimary: selectedCustom1.contains("Variation 5") ? Colors.white: Colors.black.withOpacity(0.1),
                                                        ),
                                                        onPressed: () {
-                                                         selectedVariation =  <String>[];
-                                                         selectedVariation.add("Variation 5");
+                                                         selectedCustom1 =  <String>[];
+                                                         selectedCustom1.add("Variation 5");
                                                          stateSetter(() { variationIndex = 'Variation 5';
                                                          userVariation = variation5;
                                                          userVariationPrice =  currentUser.currency == "EUR"? custom51eur:
@@ -6814,7 +7702,7 @@ List<String> selectedVariation = <String>[];
                                                                    style: TextStyle(
                                                                      color: Colors.black,
                                                                      fontWeight: FontWeight.bold,
-                                                                     fontSize: 20.0,
+
                                                                    )),
                                                              ],
                                                            ):
@@ -6824,7 +7712,7 @@ List<String> selectedVariation = <String>[];
                                                                    style: TextStyle(
                                                                      color: Colors.black,
                                                                      fontWeight: FontWeight.bold,
-                                                                     fontSize: 20.0,
+
                                                                    )),
                                                              ],
                                                            ):
@@ -6834,7 +7722,7 @@ List<String> selectedVariation = <String>[];
                                                                    style: TextStyle(
                                                                      color: Colors.black,
                                                                      fontWeight: FontWeight.bold,
-                                                                     fontSize: 20.0,
+
                                                                    )),
                                                              ],
                                                            ):
@@ -6844,7 +7732,7 @@ List<String> selectedVariation = <String>[];
                                                                    style: TextStyle(
                                                                      color: Colors.black,
                                                                      fontWeight: FontWeight.bold,
-                                                                     fontSize: 20.0,
+
                                                                    )),
                                                              ],
                                                            ),
@@ -6857,11 +7745,12 @@ List<String> selectedVariation = <String>[];
 
                                                        style: ElevatedButton.styleFrom(
 
-                                                         primary: selectedColor.contains("Variation 6") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                                                         primary: selectedCustom1.contains("Variation 6") ? Colors.black: Colors.white.withOpacity(0.1),
+                                                         onPrimary: selectedCustom1.contains("Variation 6") ? Colors.white: Colors.black.withOpacity(0.1),
                                                        ),
                                                        onPressed: () {
-                                                         selectedVariation =  <String>[];
-                                                         selectedVariation.add("Variation 6");
+                                                         selectedCustom1 =  <String>[];
+                                                         selectedCustom1.add("Variation 6");
                                                          stateSetter(() { variationIndex = 'Variation 6';
                                                          userVariation = variation6;
                                                          userVariationPrice =  currentUser.currency == "EUR"? custom61eur:
@@ -6896,7 +7785,7 @@ List<String> selectedVariation = <String>[];
                                                                    style: TextStyle(
                                                                      color: Colors.black,
                                                                      fontWeight: FontWeight.bold,
-                                                                     fontSize: 20.0,
+
                                                                    )),
                                                              ],
                                                            ):
@@ -6906,7 +7795,7 @@ List<String> selectedVariation = <String>[];
                                                                    style: TextStyle(
                                                                      color: Colors.black,
                                                                      fontWeight: FontWeight.bold,
-                                                                     fontSize: 20.0,
+
                                                                    )),
                                                              ],
                                                            ):
@@ -6916,7 +7805,7 @@ List<String> selectedVariation = <String>[];
                                                                    style: TextStyle(
                                                                      color: Colors.black,
                                                                      fontWeight: FontWeight.bold,
-                                                                     fontSize: 20.0,
+
                                                                    )),
                                                              ],
                                                            ):
@@ -6926,7 +7815,7 @@ List<String> selectedVariation = <String>[];
                                                                    style: TextStyle(
                                                                      color: Colors.black,
                                                                      fontWeight: FontWeight.bold,
-                                                                     fontSize: 20.0,
+
                                                                    )),
                                                              ],
                                                            ),
@@ -6939,11 +7828,12 @@ List<String> selectedVariation = <String>[];
 
                                                        style: ElevatedButton.styleFrom(
 
-                                                         primary: selectedColor.contains("Variation 7") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                                                         primary: selectedCustom1.contains("Variation 7") ? Colors.black: Colors.white.withOpacity(0.1),
+                                                         onPrimary: selectedCustom1.contains("Variation 7") ? Colors.white: Colors.black.withOpacity(0.1),
                                                        ),
                                                        onPressed: () {
-                                                         selectedVariation =  <String>[];
-                                                         selectedVariation.add("Variation 7");
+                                                         selectedCustom1 =  <String>[];
+                                                         selectedCustom1.add("Variation 7");
                                                          stateSetter(() { variationIndex = 'Variation 7';
                                                          userVariation = variation7;
                                                          userVariationPrice =  currentUser.currency == "EUR"? custom71eur:
@@ -6978,7 +7868,7 @@ List<String> selectedVariation = <String>[];
                                                                    style: TextStyle(
                                                                      color: Colors.black,
                                                                      fontWeight: FontWeight.bold,
-                                                                     fontSize: 20.0,
+
                                                                    )),
                                                              ],
                                                            ):
@@ -6988,7 +7878,7 @@ List<String> selectedVariation = <String>[];
                                                                    style: TextStyle(
                                                                      color: Colors.black,
                                                                      fontWeight: FontWeight.bold,
-                                                                     fontSize: 20.0,
+
                                                                    )),
                                                              ],
                                                            ):
@@ -6998,7 +7888,7 @@ List<String> selectedVariation = <String>[];
                                                                    style: TextStyle(
                                                                      color: Colors.black,
                                                                      fontWeight: FontWeight.bold,
-                                                                     fontSize: 20.0,
+
                                                                    )),
                                                              ],
                                                            ):
@@ -7008,7 +7898,7 @@ List<String> selectedVariation = <String>[];
                                                                    style: TextStyle(
                                                                      color: Colors.black,
                                                                      fontWeight: FontWeight.bold,
-                                                                     fontSize: 20.0,
+
                                                                    )),
                                                              ],
                                                            ),
@@ -7021,11 +7911,12 @@ List<String> selectedVariation = <String>[];
 
                                                        style: ElevatedButton.styleFrom(
 
-                                                         primary: selectedColor.contains("Variation 8") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                                                         primary: selectedCustom1.contains("Variation 8") ? Colors.black: Colors.white.withOpacity(0.1),
+                                                         onPrimary: selectedCustom1.contains("Variation 8") ? Colors.white: Colors.black.withOpacity(0.1),
                                                        ),
                                                        onPressed: () {
-                                                         selectedVariation =  <String>[];
-                                                         selectedVariation.add("Variation 8");
+                                                         selectedCustom1 =  <String>[];
+                                                         selectedCustom1.add("Variation 8");
                                                          stateSetter(() { variationIndex = 'Variation 8';
                                                          userVariation = variation8;
                                                          userVariationPrice =  currentUser.currency == "EUR"? custom81eur:
@@ -7060,7 +7951,7 @@ List<String> selectedVariation = <String>[];
                                                                    style: TextStyle(
                                                                      color: Colors.black,
                                                                      fontWeight: FontWeight.bold,
-                                                                     fontSize: 20.0,
+
                                                                    )),
                                                              ],
                                                            ):
@@ -7070,7 +7961,7 @@ List<String> selectedVariation = <String>[];
                                                                    style: TextStyle(
                                                                      color: Colors.black,
                                                                      fontWeight: FontWeight.bold,
-                                                                     fontSize: 20.0,
+
                                                                    )),
                                                              ],
                                                            ):
@@ -7080,7 +7971,7 @@ List<String> selectedVariation = <String>[];
                                                                    style: TextStyle(
                                                                      color: Colors.black,
                                                                      fontWeight: FontWeight.bold,
-                                                                     fontSize: 20.0,
+
                                                                    )),
                                                              ],
                                                            ):
@@ -7090,7 +7981,7 @@ List<String> selectedVariation = <String>[];
                                                                    style: TextStyle(
                                                                      color: Colors.black,
                                                                      fontWeight: FontWeight.bold,
-                                                                     fontSize: 20.0,
+
                                                                    )),
                                                              ],
                                                            ),
@@ -7103,11 +7994,12 @@ List<String> selectedVariation = <String>[];
 
                                                        style: ElevatedButton.styleFrom(
 
-                                                         primary: selectedColor.contains("Variation 9") ? Colors.black: Colors.white.withOpacity(0.1), // background
+                                                         primary: selectedCustom1.contains("Variation 9") ? Colors.black: Colors.white.withOpacity(0.1),
+                                                         onPrimary: selectedCustom1.contains("Variation 9") ? Colors.white: Colors.black.withOpacity(0.1),
                                                        ),
                                                        onPressed: () {
-                                                         selectedVariation =  <String>[];
-                                                         selectedVariation.add("Variation 9");
+                                                         selectedCustom1 =  <String>[];
+                                                         selectedCustom1.add("Variation 9");
                                                          stateSetter(() { variationIndex = 'Variation 9';
                                                          userVariation = variation9;
                                                          userVariationPrice =  currentUser.currency == "EUR"? custom91eur:
@@ -7126,97 +8018,82 @@ List<String> selectedVariation = <String>[];
                                                ),
                                                variationQuantity10==0?Container():   Padding(
                                                  padding: const EdgeInsets.all(8.0),
-                                                 child: GestureDetector(
-                                                   onTap: () {
-                                                     selectedVariation =  <String>[];
-                                                     selectedVariation.add("Variation 10");
-                                                     stateSetter(() { variationIndex = 'Variation 10';
-                                                     userVariation = variation10;
-                                                     userVariationPrice =  currentUser.currency == "EUR"? custom101eur:
-                                                     currentUser.currency == "INR"? custom101inr:
-                                                     currentUser.currency == "GBP"? custom101gbp:
-                                                     custom101usd;
-                                                     userVariationImg = variation10img;
+                                                 child: Column(
+                                                   children: [
+                                                     Card(
+                                                       child: Column(
+                                                         children: [
+                                                           Container(
+                                                               height:120.0,
+                                                               width:120.0,
+                                                               child: CachedImage(variation10img)),
+                                                           currentUser.currency == "INR"? Row(
+                                                             children: [
+                                                               Text("₹ ${currencyFormatter.format(custom101inr)}",
+                                                                   style: TextStyle(
+                                                                     color: Colors.black,
+                                                                     fontWeight: FontWeight.bold,
 
-                                                     userVariationQuantity = variationQuantity10;
-                                                     });
-                                                   },
-                                                   child: Column(
-                                                     children: [
-                                                       Card(
-                                                         child: Column(
-                                                           children: [
-                                                             Container(
-                                                                 height:120.0,
-                                                                 width:120.0,
-                                                                 child: CachedImage(variation10img)),
-                                                             currentUser.currency == "INR"? Row(
-                                                               children: [
-                                                                 Text("₹ ${currencyFormatter.format(custom101inr)}",
-                                                                     style: TextStyle(
-                                                                       color: Colors.black,
-                                                                       fontWeight: FontWeight.bold,
-                                                                       fontSize: 20.0,
-                                                                     )),
-                                                               ],
-                                                             ):
-                                                             currentUser.currency == "EUR"?Row(
-                                                               children: [
-                                                                 Text("${currencyFormatter.format(custom101eur)}  €",
-                                                                     style: TextStyle(
-                                                                       color: Colors.black,
-                                                                       fontWeight: FontWeight.bold,
-                                                                       fontSize: 20.0,
-                                                                     )),
-                                                               ],
-                                                             ):
-                                                             currentUser.currency == "GBP"?Row(
-                                                               children: [
-                                                                 Text("£ ${currencyFormatter.format(custom101gbp)}",
-                                                                     style: TextStyle(
-                                                                       color: Colors.black,
-                                                                       fontWeight: FontWeight.bold,
-                                                                       fontSize: 20.0,
-                                                                     )),
-                                                               ],
-                                                             ):
-                                                             Row(
-                                                               children: [
-                                                                 Text("\u0024 ${currencyFormatter.format(custom101usd)}",
-                                                                     style: TextStyle(
-                                                                       color: Colors.black,
-                                                                       fontWeight: FontWeight.bold,
-                                                                       fontSize: 20.0,
-                                                                     )),
-                                                               ],
-                                                             ),
+                                                                   )),
+                                                             ],
+                                                           ):
+                                                           currentUser.currency == "EUR"?Row(
+                                                             children: [
+                                                               Text("${currencyFormatter.format(custom101eur)}  €",
+                                                                   style: TextStyle(
+                                                                     color: Colors.black,
+                                                                     fontWeight: FontWeight.bold,
 
-                                                             Text(variation10),
-                                                           ],
-                                                         ),
+                                                                   )),
+                                                             ],
+                                                           ):
+                                                           currentUser.currency == "GBP"?Row(
+                                                             children: [
+                                                               Text("£ ${currencyFormatter.format(custom101gbp)}",
+                                                                   style: TextStyle(
+                                                                     color: Colors.black,
+                                                                     fontWeight: FontWeight.bold,
+
+                                                                   )),
+                                                             ],
+                                                           ):
+                                                           Row(
+                                                             children: [
+                                                               Text("\u0024 ${currencyFormatter.format(custom101usd)}",
+                                                                   style: TextStyle(
+                                                                     color: Colors.black,
+                                                                     fontWeight: FontWeight.bold,
+
+                                                                   )),
+                                                             ],
+                                                           ),
+
+                                                           Text(variation10),
+                                                         ],
                                                        ),
-                                                       ElevatedButton(
+                                                     ),
+                                                     ElevatedButton(
 
-                                                         style: ElevatedButton.styleFrom(
+                                                       style: ElevatedButton.styleFrom(
 
-                                                           primary: selectedColor.contains("Variation 10") ? Colors.black: Colors.white.withOpacity(0.1), // background
-                                                         ),
-                                                         onPressed: () {
-                                                           selectedVariation =  <String>[];
-                                                           selectedVariation.add("Variation 10");
-                                                           stateSetter(() { variationIndex = 'Variation 10';
-                                                           userVariation = variation10;
-                                                           userVariationPrice =  currentUser.currency == "EUR"? custom101eur:
-                                                           currentUser.currency == "INR"? custom101inr:
-                                                           currentUser.currency == "GBP"? custom101gbp:
-                                                           custom101usd;
-                                                           userVariationQuantity = variationQuantity10;
-                                                           });
-                                                         },        child: Text(variation10),
+                                                         primary: selectedCustom1.contains("Variation 10") ? Colors.black: Colors.white.withOpacity(0.1),
+                                                         onPrimary: selectedCustom1.contains("Variation 10") ? Colors.white: Colors.black.withOpacity(0.1),
                                                        ),
+                                                       onPressed: () {
+                                                         selectedCustom1 =  <String>[];
+                                                         selectedCustom1.add("Variation 10");
+                                                         stateSetter(() { variationIndex = 'Variation 10';
+                                                         userVariation = variation10;
+                                                         userVariationPrice =  currentUser.currency == "EUR"? custom101eur:
+                                                         currentUser.currency == "INR"? custom101inr:
+                                                         currentUser.currency == "GBP"? custom101gbp:
+                                                         custom101usd;
+                                                         userVariationQuantity = variationQuantity10;
+                                                         });
+                                                       },        child: Text(variation10),
+                                                     ),
 
-                                                     ],
-                                                   ),
+                                                   ],
                                                  ),
                                                ),
 
@@ -9085,6 +9962,7 @@ List<String> selectedVariation = <String>[];
                                      Text(
                                        'Buy Now', style: TextStyle(color: Colors.white),),
                                    ),
+                                   SizedBox(height:8.0),
 
 
                                  ])
@@ -9838,7 +10716,7 @@ var eur = documentSnapshot.data()['eur'];
                       ):
                       currentUser.currency == "EUR"?Row(
                         children: [
-                          Text("${currencyFormatter.format(eur)}  €",
+                          Text("${eur}  €",
                               style: TextStyle(
                                 color: Colors.black,
                                 fontWeight: FontWeight.bold,

@@ -380,10 +380,7 @@ class  _ActivityFeedState extends State<ActivityFeed>  with  TickerProviderState
           ),
 
 
-          body: Container(decoration: BoxDecoration(
-              gradient: fabGradient
-          ) ,
-            alignment: Alignment.center,
+          body: Container(
             child: TabBarView(
                 controller: _controller,
                 children: <Widget>[

@@ -1,4 +1,3 @@
-// ingore_for_file: prefer_expression_function_bodies
 
 import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -30,7 +29,6 @@ final String OwnerId;
   var userVariationQuantity;
   var userSizeQuantity;
  var userColorQuantity;
-
   final String  userVariationImg ;
 
   final bool freeship;
@@ -275,10 +273,10 @@ class addressview extends StatelessWidget {
  final String username;
  final String mediaUrl;
  final String productname;
- final String eur;
+ var eur;
 var usd;
  var inr;
- final String gbp;
+ var gbp;
  final String mtoText;
   final String countryISO;
  final String customIndex;

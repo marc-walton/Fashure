@@ -17,10 +17,10 @@ final String userSize;
   final    String username;
   final  String mediaUrl;
   final  String productname;
-  final String eur;
+  var eur;
  var usd;
  var inr;
-  final String gbp;
+  var gbp;
   final String displaysize;
 
   final String colorText;
@@ -51,7 +51,6 @@ final bool freeworldship;
     this.displaysize,
  this.customIndex,
  this.userCustom,
-
    this.eur,
    this.inr,
    this.gbp,
@@ -211,19 +210,16 @@ SizedBox(height: 8,),
                   IntrinsicHeight(
                     child: Row(
                       children: [
-
+                        ClipRRect(
+                            borderRadius: BorderRadius.circular(15.0),
+                            child: CachedImage(widget.mediaUrl,height:SizeConfig.safeBlockVertical*25,width:SizeConfig.safeBlockVertical*20, )),
+                        VerticalDivider(color: Colors.grey,),
                         Expanded(
                           child: Text("${widget.productname}",
                               style:TextStyle(color:kText,
                                 fontWeight: FontWeight.bold,
                               )),
                         ),
-                        VerticalDivider(),
-                        ClipRRect(
-                            borderRadius: BorderRadius.circular(15.0),
-                            child: CachedImage(widget.mediaUrl,height:SizeConfig.safeBlockVertical*25,width:SizeConfig.safeBlockVertical*20, )),
-
-
                       ],
                     ),
                   ),
@@ -279,7 +275,23 @@ SizedBox(height: 8,),
                           ),
                         ],
                       ),
+                  widget.userCustom ==""?Container():Row(
 
+                    children: [
+                      Text(
+                        'Customization:',
+                        style:
+                        TextStyle(color:kGrey, ),
+                      ),
+                      Spacer(),
+
+                      Text(
+                        '${widget.userCustom}',
+                        style:
+                        TextStyle(color:kText, ),
+                      ),
+                    ],
+                  ),
                 ],
               ),
             ),
