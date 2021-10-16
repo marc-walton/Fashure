@@ -37,7 +37,7 @@ import 'package:fashow/methods/dynamic_links_service.dart';
 import 'package:getwidget/components/button/gf_button.dart';
 import 'package:getwidget/shape/gf_button_shape.dart';
 import 'package:getwidget/types/gf_button_type.dart';
-
+import 'package:currency_formatter/currency_formatter.dart';
 var currencyFormatter =
 currentUser.currency == "INR"?NumberFormat.currency(locale:"HI"):
 currentUser.currency == "EUR"? NumberFormat('#.##0,00',):
@@ -2480,900 +2480,6 @@ conversion()async {
   }
 
 
-Variations(){
-
-  if (variationQuantity1==0&&
-        variationQuantity2==0&&
-        variationQuantity3==0&&
-        variationQuantity4==0&&
-        variationQuantity5==0&&
-        variationQuantity6==0&&
-        variationQuantity7==0&&
-        variationQuantity8==0&&
-        variationQuantity9==0&&
-        variationQuantity10==0
-       ){return Container();}
-    else{
-      return
-        Container(
-          height:250.0,
-
-          child:   Expanded(
-              child:   ListView(
-                  scrollDirection:Axis.horizontal,
-                  shrinkWrap:true,
-                  children:[
-                    variationQuantity1==0?Container():   Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Column(
-                        children: [
-                          // GestureDetector(
-                          //   onTap: () {
-                          //
-                          //     selectedCustom1 =  <String>[];
-                          //     selectedCustom1.add("Variation 1");print(selectedCustom1);
-                          //     setState(() {
-                          //       selectedCustom1.contains("Variation 1")?print("true"):print("false");
-                          //       variationIndex = 'Variation 1';
-                          //       userVariation = variation1;
-                          //       userVariationPrice =  currentUser.currency == "EUR"? custom11eur:
-                          //       currentUser.currency == "INR"? custom11inr:
-                          //       currentUser.currency == "GBP"? custom11gbp:
-                          //       custom11usd;
-                          //
-                          //       userVariationImg = variation1img;
-                          //       userVariationQuantity = variationQuantity1;
-                          //     });
-                          //   },
-                          //
-                          //   child: Card(
-                          //     shape: selectedCustom1.contains("Variation 1")
-                          //         ? new RoundedRectangleBorder(
-                          //         side: new BorderSide(color: Colors.blue, width: 2.0),
-                          //         borderRadius: BorderRadius.circular(4.0))
-                          //         : new RoundedRectangleBorder(
-                          //         side: new BorderSide(color: Colors.white, width: 2.0),
-                          //         borderRadius: BorderRadius.circular(4.0)),
-                          //     child: Column(
-                          //       children: [
-                          //         Container(
-                          //             height:120.0,
-                          //             width:120.0,
-                          //             child: CachedImage(variation1img)),
-                          //         currentUser.currency == "INR"? Row(
-                          //           children: [
-                          //             Text("₹ ${currencyFormatter.format(custom11inr)}",
-                          //                 style: TextStyle(
-                          //                   color: Colors.black,
-                          //                   fontWeight: FontWeight.bold,
-                          //
-                          //                 )),
-                          //           ],
-                          //         ):
-                          //         currentUser.currency == "EUR"?Row(
-                          //           children: [
-                          //             Text("${currencyFormatter.format(custom11eur)}  €",
-                          //                 style: TextStyle(
-                          //                   color: Colors.black,
-                          //                   fontWeight: FontWeight.bold,
-                          //
-                          //                 )),
-                          //           ],
-                          //         ):
-                          //         currentUser.currency == "GBP"?Row(
-                          //           children: [
-                          //             Text("£ ${currencyFormatter.format(custom11gbp)}",
-                          //                 style: TextStyle(
-                          //                   color: Colors.black,
-                          //                   fontWeight: FontWeight.bold,
-                          //
-                          //                 )),
-                          //           ],
-                          //         ):
-                          //         Row(
-                          //           children: [
-                          //             Text("\u0024 ${currencyFormatter.format(custom11usd)}",
-                          //                 style: TextStyle(
-                          //                   color: Colors.black,
-                          //                   fontWeight: FontWeight.bold,
-                          //
-                          //                 )),
-                          //           ],
-                          //         ),
-                          //
-                          //         Text(variation1),
-                          //       ],
-                          //     ),
-                          //   ),
-                          // ),
-                          ElevatedButton(
-
-                            style: ElevatedButton.styleFrom(
-
-                              primary: selectedCustom1.contains("Variation 1") ? Colors.black: Colors.white.withOpacity(0.1),
-                              onPrimary: selectedCustom1.contains("Variation 1") ? Colors.black: Colors.white.withOpacity(0.1),
-
-                            ),
-                            onPressed: () {
-                              setState(() {
-                                selectedCustom1 =  <String>[];
-                                selectedCustom1.add("Variation 1");
-                                variationIndex = 'Variation 1';
-                                userVariation = variation1;
-                                userVariationPrice =  currentUser.currency == "EUR"? custom11eur:
-                                currentUser.currency == "INR"? custom11inr:
-                                currentUser.currency == "GBP"? custom11gbp:
-                                custom11usd;
-
-                                userVariationImg = variation1img;
-                                userVariationQuantity = variationQuantity1;
-                              });
-                            },        child: Text(variation1),
-                          ),
-
-                        ],
-                      ),
-                    ),
-
-                    variationQuantity2==0?Container():   Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Column(
-                        children: [
-                          Card(
-
-                            child: Column(
-                              children: [
-                                Container(
-                                    height:120.0,
-                                    width:120.0,
-                                    child: CachedImage(variation2img)),
-                                currentUser.currency == "INR"? Row(
-                                  children: [
-                                    Text("₹ ${currencyFormatter.format(custom21inr)}",
-                                        style: TextStyle(
-                                          color: Colors.black,
-                                          fontWeight: FontWeight.bold,
-
-                                        )),
-                                  ],
-                                ):
-                                currentUser.currency == "EUR"?Row(
-                                  children: [
-                                    Text("${custom21eur}  €",
-                                        style: TextStyle(
-                                          color: Colors.black,
-                                          fontWeight: FontWeight.bold,
-
-                                        )),
-                                  ],
-                                ):
-                                currentUser.currency == "GBP"?Row(
-                                  children: [
-                                    Text("£ ${currencyFormatter.format(custom21gbp)}",
-                                        style: TextStyle(
-                                          color: Colors.black,
-                                          fontWeight: FontWeight.bold,
-
-                                        )),
-                                  ],
-                                ):
-                                Row(
-                                  children: [
-                                    Text("\u0024 ${currencyFormatter.format(custom21usd)}",
-                                        style: TextStyle(
-                                          color: Colors.black,
-                                          fontWeight: FontWeight.bold,
-
-                                        )),
-                                  ],
-                                ),
-
-                                Text(variation2),
-                              ],
-                            ),
-                          ),
-                          ElevatedButton(
-
-                            style: ElevatedButton.styleFrom(
-
-                              primary: selectedVariation.contains("Variation 2") ? Colors.black: Colors.white.withOpacity(0.1), // background
-                            ),
-                            onPressed: () {
-                              selectedVariation =  <String>[];
-                              selectedVariation.add("Variation 2");
-                              setState(() { variationIndex = 'Variation 2';
-                              userVariation = variation2;
-                              userVariationPrice =  currentUser.currency == "EUR"? custom21eur:
-                              currentUser.currency == "INR"? custom21inr:
-                              currentUser.currency == "GBP"? custom21gbp:
-                              custom21usd;
-
-                              userVariationImg = variation2img;
-                              userVariationQuantity = variationQuantity2;
-                              });
-                            },        child: Text(variation2),
-                          ),
-
-                        ],
-                      ),
-                    ),
-                    variationQuantity3==0?Container():   Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Column(
-                        children: [
-                          Card(
-
-                            child: Column(
-                              children: [
-                                Container(
-                                    height:120.0,
-                                    width:120.0,
-                                    child: CachedImage(variation3img)),
-                                currentUser.currency == "INR"? Row(
-                                  children: [
-                                    Text("₹ ${currencyFormatter.format(custom31inr)}",
-                                        style: TextStyle(
-                                          color: Colors.black,
-                                          fontWeight: FontWeight.bold,
-
-                                        )),
-                                  ],
-                                ):
-                                currentUser.currency == "EUR"?Row(
-                                  children: [
-                                    Text("${currencyFormatter.format(custom31eur)}  €",
-                                        style: TextStyle(
-                                          color: Colors.black,
-                                          fontWeight: FontWeight.bold,
-
-                                        )),
-                                  ],
-                                ):
-                                currentUser.currency == "GBP"?Row(
-                                  children: [
-                                    Text("£ ${currencyFormatter.format(custom31gbp)}",
-                                        style: TextStyle(
-                                          color: Colors.black,
-                                          fontWeight: FontWeight.bold,
-
-                                        )),
-                                  ],
-                                ):
-                                Row(
-                                  children: [
-                                    Text("\u0024 ${currencyFormatter.format(custom31usd)}",
-                                        style: TextStyle(
-                                          color: Colors.black,
-                                          fontWeight: FontWeight.bold,
-
-                                        )),
-                                  ],
-                                ),
-
-                                Text(variation3),
-                              ],
-                            ),
-                          ),
-                          ElevatedButton(
-
-                            style: ElevatedButton.styleFrom(
-
-                              primary: selectedVariation.contains("Variation 3") ? Colors.black: Colors.white.withOpacity(0.1), // background
-                            ),
-                            onPressed: () {
-                              selectedVariation =  <String>[];
-                              selectedVariation.add("Variation 3");
-                              setState(() { variationIndex = 'Variation 3';
-                              userVariation = variation3;
-                              userVariationPrice =  currentUser.currency == "EUR"? custom31eur:
-                              currentUser.currency == "INR"? custom31inr:
-                              currentUser.currency == "GBP"? custom31gbp:
-                              custom31usd;
-
-                              userVariationImg = variation3img;
-                              userVariationQuantity = variationQuantity3;
-                              });
-                            },        child: Text(variation3),
-                          ),
-
-                        ],
-                      ),
-                    ),
-                    variationQuantity4==0?Container():   Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Column(
-                        children: [
-                          Card(
-
-                            child: Column(
-                              children: [
-                                Container(
-                                    height:120.0,
-                                    width:120.0,
-                                    child: CachedImage(variation4img)),
-                                currentUser.currency == "INR"? Row(
-                                  children: [
-                                    Text("₹ ${currencyFormatter.format(custom41inr)}",
-                                        style: TextStyle(
-                                          color: Colors.black,
-                                          fontWeight: FontWeight.bold,
-
-                                        )),
-                                  ],
-                                ):
-                                currentUser.currency == "EUR"?Row(
-                                  children: [
-                                    Text("${currencyFormatter.format(custom41eur)}  €",
-                                        style: TextStyle(
-                                          color: Colors.black,
-                                          fontWeight: FontWeight.bold,
-
-                                        )),
-                                  ],
-                                ):
-                                currentUser.currency == "GBP"?Row(
-                                  children: [
-                                    Text("£ ${currencyFormatter.format(custom41gbp)}",
-                                        style: TextStyle(
-                                          color: Colors.black,
-                                          fontWeight: FontWeight.bold,
-
-                                        )),
-                                  ],
-                                ):
-                                Row(
-                                  children: [
-                                    Text("\u0024 ${currencyFormatter.format(custom41usd)}",
-                                        style: TextStyle(
-                                          color: Colors.black,
-                                          fontWeight: FontWeight.bold,
-
-                                        )),
-                                  ],
-                                ),
-
-                                Text(variation4),
-                              ],
-                            ),
-                          ),
-                          ElevatedButton(
-
-                            style: ElevatedButton.styleFrom(
-
-                              primary: selectedVariation.contains("Variation 4") ? Colors.black: Colors.white.withOpacity(0.1), // background
-                            ),
-                            onPressed: () {
-                              selectedVariation =  <String>[];
-                              selectedVariation.add("Variation 4");
-                              setState(() { variationIndex = 'Variation 4';
-                              userVariation = variation4;
-                              userVariationPrice =  currentUser.currency == "EUR"? custom41eur:
-                              currentUser.currency == "INR"? custom41inr:
-                              currentUser.currency == "GBP"? custom41gbp:
-                              custom41usd;
-
-                              userVariationImg = variation4img;
-                              userVariationQuantity = variationQuantity4;
-                              });
-                            },        child: Text(variation4),
-                          ),
-
-                        ],
-                      ),
-                    ),
-                    variationQuantity5==0?Container():   Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Column(
-                        children: [
-                          Card(
-
-                            child: Column(
-                              children: [
-                                Container(
-                                    height:120.0,
-                                    width:120.0,
-                                    child: CachedImage(variation5img)),
-                                currentUser.currency == "INR"? Row(
-                                  children: [
-                                    Text("₹ ${currencyFormatter.format(custom51inr)}",
-                                        style: TextStyle(
-                                          color: Colors.black,
-                                          fontWeight: FontWeight.bold,
-
-                                        )),
-                                  ],
-                                ):
-                                currentUser.currency == "EUR"?Row(
-                                  children: [
-                                    Text("${currencyFormatter.format(custom51eur)}  €",
-                                        style: TextStyle(
-                                          color: Colors.black,
-                                          fontWeight: FontWeight.bold,
-
-                                        )),
-                                  ],
-                                ):
-                                currentUser.currency == "GBP"?Row(
-                                  children: [
-                                    Text("£ ${currencyFormatter.format(custom51gbp)}",
-                                        style: TextStyle(
-                                          color: Colors.black,
-                                          fontWeight: FontWeight.bold,
-
-                                        )),
-                                  ],
-                                ):
-                                Row(
-                                  children: [
-                                    Text("\u0024 ${currencyFormatter.format(custom51usd)}",
-                                        style: TextStyle(
-                                          color: Colors.black,
-                                          fontWeight: FontWeight.bold,
-
-                                        )),
-                                  ],
-                                ),
-
-                                Text(variation5),
-                              ],
-                            ),
-                          ),
-                          ElevatedButton(
-
-                            style: ElevatedButton.styleFrom(
-
-                              primary: selectedVariation.contains("Variation 5") ? Colors.black: Colors.white.withOpacity(0.1), // background
-                            ),
-                            onPressed: () {
-                              selectedVariation =  <String>[];
-                              selectedVariation.add("Variation 5");
-                              setState(() { variationIndex = 'Variation 5';
-                              userVariation = variation5;
-                              userVariationPrice =  currentUser.currency == "EUR"? custom51eur:
-                              currentUser.currency == "INR"? custom51inr:
-                              currentUser.currency == "GBP"? custom51gbp:
-                              custom51usd;
-
-                              userVariationImg = variation5img;
-                              userVariationQuantity = variationQuantity5;
-                              });
-                            },        child: Text(variation5),
-                          ),
-
-                        ],
-                      ),
-
-                    ),
-                    variationQuantity6==0?Container():   Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Column(
-                        children: [
-                          Card(
-
-                            child: Column(
-                              children: [
-                                Container(
-                                    height:120.0,
-                                    width:120.0,
-                                    child: CachedImage(variation6img)),
-                                currentUser.currency == "INR"? Row(
-                                  children: [
-                                    Text("₹ ${currencyFormatter.format(custom61inr)}",
-                                        style: TextStyle(
-                                          color: Colors.black,
-                                          fontWeight: FontWeight.bold,
-
-                                        )),
-                                  ],
-                                ):
-                                currentUser.currency == "EUR"?Row(
-                                  children: [
-                                    Text("${currencyFormatter.format(custom61eur)}  €",
-                                        style: TextStyle(
-                                          color: Colors.black,
-                                          fontWeight: FontWeight.bold,
-
-                                        )),
-                                  ],
-                                ):
-                                currentUser.currency == "GBP"?Row(
-                                  children: [
-                                    Text("£ ${currencyFormatter.format(custom61gbp)}",
-                                        style: TextStyle(
-                                          color: Colors.black,
-                                          fontWeight: FontWeight.bold,
-
-                                        )),
-                                  ],
-                                ):
-                                Row(
-                                  children: [
-                                    Text("\u0024 ${currencyFormatter.format(custom61usd)}",
-                                        style: TextStyle(
-                                          color: Colors.black,
-                                          fontWeight: FontWeight.bold,
-
-                                        )),
-                                  ],
-                                ),
-
-                                Text(variation6),
-                              ],
-                            ),
-                          ),
-                          ElevatedButton(
-
-                            style: ElevatedButton.styleFrom(
-
-                              primary: selectedVariation.contains("Variation 6") ? Colors.black: Colors.white.withOpacity(0.1), // background
-                            ),
-                            onPressed: () {
-                              selectedVariation =  <String>[];
-                              selectedVariation.add("Variation 6");
-                              setState(() { variationIndex = 'Variation 6';
-                              userVariation = variation6;
-                              userVariationPrice =  currentUser.currency == "EUR"? custom61eur:
-                              currentUser.currency == "INR"? custom61inr:
-                              currentUser.currency == "GBP"? custom61gbp:
-                              custom61usd;
-                              userVariationImg = variation6img;
-
-                              userVariationQuantity = variationQuantity6;
-                              });
-                            },        child: Text(variation6),
-                          ),
-
-                        ],
-                      ),
-                    ),
-                    variationQuantity7==0?Container():   Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Column(
-                        children: [
-                          Card(
-
-                            child: Column(
-                              children: [
-                                Container(
-                                    height:120.0,
-                                    width:120.0,
-                                    child: CachedImage(variation7img)),
-                                currentUser.currency == "INR"? Row(
-                                  children: [
-                                    Text("₹ ${currencyFormatter.format(custom71inr)}",
-                                        style: TextStyle(
-                                          color: Colors.black,
-                                          fontWeight: FontWeight.bold,
-
-                                        )),
-                                  ],
-                                ):
-                                currentUser.currency == "EUR"?Row(
-                                  children: [
-                                    Text("${currencyFormatter.format(custom71eur)}  €",
-                                        style: TextStyle(
-                                          color: Colors.black,
-                                          fontWeight: FontWeight.bold,
-
-                                        )),
-                                  ],
-                                ):
-                                currentUser.currency == "GBP"?Row(
-                                  children: [
-                                    Text("£ ${currencyFormatter.format(custom71gbp)}",
-                                        style: TextStyle(
-                                          color: Colors.black,
-                                          fontWeight: FontWeight.bold,
-
-                                        )),
-                                  ],
-                                ):
-                                Row(
-                                  children: [
-                                    Text("\u0024 ${currencyFormatter.format(custom71usd)}",
-                                        style: TextStyle(
-                                          color: Colors.black,
-                                          fontWeight: FontWeight.bold,
-
-                                        )),
-                                  ],
-                                ),
-
-                                Text(variation7),
-                              ],
-                            ),
-                          ),
-                          ElevatedButton(
-
-                            style: ElevatedButton.styleFrom(
-
-                              primary: selectedVariation.contains("Variation 7") ? Colors.black: Colors.white.withOpacity(0.1), // background
-                            ),
-                            onPressed: () {
-                              selectedVariation =  <String>[];
-                              selectedVariation.add("Variation 7");
-                              setState(() { variationIndex = 'Variation 7';
-                              userVariation = variation7;
-                              userVariationPrice =  currentUser.currency == "EUR"? custom71eur:
-                              currentUser.currency == "INR"? custom71inr:
-                              currentUser.currency == "GBP"? custom71gbp:
-                              custom71usd;
-                              userVariationImg = variation7img;
-
-                              userVariationQuantity = variationQuantity7;
-                              });
-                            },        child: Text(variation7),
-                          ),
-
-                        ],
-                      ),
-                    ),
-                    variationQuantity8==0?Container():   Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Column(
-                        children: [
-                          Card(
-
-                            child: Column(
-                              children: [
-                                Container(
-                                    height:120.0,
-                                    width:120.0,
-                                    child: CachedImage(variation8img)),
-                                currentUser.currency == "INR"? Row(
-                                  children: [
-                                    Text("₹ ${currencyFormatter.format(custom81inr)}",
-                                        style: TextStyle(
-                                          color: Colors.black,
-                                          fontWeight: FontWeight.bold,
-
-                                        )),
-                                  ],
-                                ):
-                                currentUser.currency == "EUR"?Row(
-                                  children: [
-                                    Text("${currencyFormatter.format(custom81eur)}  €",
-                                        style: TextStyle(
-                                          color: Colors.black,
-                                          fontWeight: FontWeight.bold,
-
-                                        )),
-                                  ],
-                                ):
-                                currentUser.currency == "GBP"?Row(
-                                  children: [
-                                    Text("£ ${currencyFormatter.format(custom81gbp)}",
-                                        style: TextStyle(
-                                          color: Colors.black,
-                                          fontWeight: FontWeight.bold,
-
-                                        )),
-                                  ],
-                                ):
-                                Row(
-                                  children: [
-                                    Text("\u0024 ${currencyFormatter.format(custom81usd)}",
-                                        style: TextStyle(
-                                          color: Colors.black,
-                                          fontWeight: FontWeight.bold,
-
-                                        )),
-                                  ],
-                                ),
-
-                                Text(variation8),
-                              ],
-                            ),
-                          ),
-                          ElevatedButton(
-
-                            style: ElevatedButton.styleFrom(
-
-                              primary: selectedVariation.contains("Variation 8") ? Colors.black: Colors.white.withOpacity(0.1), // background
-                            ),
-                            onPressed: () {
-                              selectedVariation =  <String>[];
-                              selectedVariation.add("Variation 8");
-                              setState(() { variationIndex = 'Variation 8';
-                              userVariation = variation8;
-                              userVariationPrice =  currentUser.currency == "EUR"? custom81eur:
-                              currentUser.currency == "INR"? custom81inr:
-                              currentUser.currency == "GBP"? custom81gbp:
-                              custom81usd;
-                              userVariationImg = variation8img;
-
-                              userVariationQuantity = variationQuantity8;
-                              });
-                            },        child: Text(variation8),
-                          ),
-
-                        ],
-                      ),
-                    ),
-                    variationQuantity9==0?Container():   Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Column(
-                        children: [
-                          Card(
-
-                            child: Column(
-                              children: [
-                                Container(
-                                    height:120.0,
-                                    width:120.0,
-                                    child: CachedImage(variation9img)),
-                                currentUser.currency == "INR"? Row(
-                                  children: [
-                                    Text("₹ ${currencyFormatter.format(custom91inr)}",
-                                        style: TextStyle(
-                                          color: Colors.black,
-                                          fontWeight: FontWeight.bold,
-
-                                        )),
-                                  ],
-                                ):
-                                currentUser.currency == "EUR"?Row(
-                                  children: [
-                                    Text("${currencyFormatter.format(custom91eur)}  €",
-                                        style: TextStyle(
-                                          color: Colors.black,
-                                          fontWeight: FontWeight.bold,
-
-                                        )),
-                                  ],
-                                ):
-                                currentUser.currency == "GBP"?Row(
-                                  children: [
-                                    Text("£ ${currencyFormatter.format(custom91gbp)}",
-                                        style: TextStyle(
-                                          color: Colors.black,
-                                          fontWeight: FontWeight.bold,
-
-                                        )),
-                                  ],
-                                ):
-                                Row(
-                                  children: [
-                                    Text("\u0024 ${currencyFormatter.format(custom91usd)}",
-                                        style: TextStyle(
-                                          color: Colors.black,
-                                          fontWeight: FontWeight.bold,
-
-                                        )),
-                                  ],
-                                ),
-
-                                Text(variation9),
-                              ],
-                            ),
-                          ),
-                          ElevatedButton(
-
-                            style: ElevatedButton.styleFrom(
-
-                              primary: selectedVariation.contains("Variation 9") ? Colors.black: Colors.white.withOpacity(0.1), // background
-                            ),
-                            onPressed: () {
-                              selectedVariation =  <String>[];
-                              selectedVariation.add("Variation 9");
-                              setState(() { variationIndex = 'Variation 9';
-                              userVariation = variation9;
-                              userVariationPrice =  currentUser.currency == "EUR"? custom91eur:
-                              currentUser.currency == "INR"? custom91inr:
-                              currentUser.currency == "GBP"? custom91gbp:
-                              custom91usd;
-                              userVariationImg = variation9img;
-
-                              userVariationQuantity = variationQuantity9;
-                              });
-                            },        child: Text(variation9),
-                          ),
-
-                        ],
-                      ),
-                    ),
-                    variationQuantity10==0?Container():   Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: GestureDetector(
-                        onTap: () {
-                          selectedVariation =  <String>[];
-                          selectedVariation.add("Variation 10");
-                          setState(() { variationIndex = 'Variation 10';
-                          userVariation = variation10;
-                          userVariationPrice =  currentUser.currency == "EUR"? custom101eur:
-                          currentUser.currency == "INR"? custom101inr:
-                          currentUser.currency == "GBP"? custom101gbp:
-                          custom101usd;
-                          userVariationImg = variation10img;
-
-                          userVariationQuantity = variationQuantity10;
-                          });
-                        },
-                        child: Column(
-                          children: [
-                            Card(
-                              child: Column(
-                                children: [
-                                  Container(
-                                      height:120.0,
-                                      width:120.0,
-                                      child: CachedImage(variation10img)),
-                                  currentUser.currency == "INR"? Row(
-                                    children: [
-                                      Text("₹ ${currencyFormatter.format(custom101inr)}",
-                                          style: TextStyle(
-                                            color: Colors.black,
-                                            fontWeight: FontWeight.bold,
-
-                                          )),
-                                    ],
-                                  ):
-                                  currentUser.currency == "EUR"?Row(
-                                    children: [
-                                      Text("${currencyFormatter.format(custom101eur)}  €",
-                                          style: TextStyle(
-                                            color: Colors.black,
-                                            fontWeight: FontWeight.bold,
-
-                                          )),
-                                    ],
-                                  ):
-                                  currentUser.currency == "GBP"?Row(
-                                    children: [
-                                      Text("£ ${currencyFormatter.format(custom101gbp)}",
-                                          style: TextStyle(
-                                            color: Colors.black,
-                                            fontWeight: FontWeight.bold,
-
-                                          )),
-                                    ],
-                                  ):
-                                  Row(
-                                    children: [
-                                      Text("\u0024 ${currencyFormatter.format(custom101usd)}",
-                                          style: TextStyle(
-                                            color: Colors.black,
-                                            fontWeight: FontWeight.bold,
-
-                                          )),
-                                    ],
-                                  ),
-
-                                  Text(variation10),
-                                ],
-                              ),
-                            ),
-                            ElevatedButton(
-
-                              style: ElevatedButton.styleFrom(
-
-                                primary: selectedVariation.contains("Variation 10") ? Colors.black: Colors.white.withOpacity(0.1), // background
-                              ),
-                              onPressed: () {
-                                selectedVariation =  <String>[];
-                                selectedVariation.add("Variation 10");
-                                setState(() { variationIndex = 'Variation 10';
-                                userVariation = variation10;
-                                userVariationPrice =  currentUser.currency == "EUR"? custom101eur:
-                                currentUser.currency == "INR"? custom101inr:
-                                currentUser.currency == "GBP"? custom101gbp:
-                                custom101usd;
-                                userVariationQuantity = variationQuantity10;
-                                });
-                              },        child: Text(variation10),
-                            ),
-
-                          ],
-                        ),
-                      ),
-                    ),
-
-                  ])
-          ),
-        );
-
-}
-}
   report(){
     Fluttertoast.showToast(
         msg: "Your report has been submitted", timeInSecForIos: 4);
@@ -3568,6 +2674,7 @@ List<String> selectedCustom5 = <String>[];
                                                child: ElevatedButton(
 
                                                  style: ElevatedButton.styleFrom(
+                                                         elevation : 0.1,
 
                                                    primary: selectedCategory.contains("MTO") ? Colors.black: Colors.white.withOpacity(0.1), // background
                                                    onPrimary:selectedCategory.contains("MTO") ? Colors.white:  Colors.black, // foreground
@@ -3590,6 +2697,7 @@ List<String> selectedCustom5 = <String>[];
                                                child: ElevatedButton(
 
                                                  style: ElevatedButton.styleFrom(
+elevation : 0.1,
 
                                                    primary: selectedCategory.contains("Free Size") ? Colors.black: Colors.white.withOpacity(0.1), // background
                                                    onPrimary:selectedCategory.contains("Free Size") ? Colors.white:  Colors.black, // foreground
@@ -3612,6 +2720,7 @@ List<String> selectedCustom5 = <String>[];
                                                child: ElevatedButton(
 
                                                  style: ElevatedButton.styleFrom(
+elevation : 0.1,
 
                                                    primary: selectedCategory.contains("XXXS") ? Colors.black: Colors.white.withOpacity(0.1), // background
                                                    onPrimary:selectedCategory.contains("XXXS") ? Colors.white:  Colors.black, // foreground
@@ -3633,6 +2742,7 @@ List<String> selectedCustom5 = <String>[];
                                                child: ElevatedButton(
 
                                                  style: ElevatedButton.styleFrom(
+elevation : 0.1,
 
                                                    primary: selectedCategory.contains("XXS") ? Colors.black: Colors.white.withOpacity(0.1), // background
                                                    onPrimary:selectedCategory.contains("XXS") ? Colors.white:  Colors.black, // foreground
@@ -3654,6 +2764,7 @@ List<String> selectedCustom5 = <String>[];
                                                child: ElevatedButton(
 
                                                  style: ElevatedButton.styleFrom(
+elevation : 0.1,
 
                                                    primary: selectedCategory.contains("XS") ? Colors.black: Colors.white.withOpacity(0.1), // background
                                                    onPrimary:selectedCategory.contains("XS") ? Colors.white:  Colors.black, // foreground
@@ -3675,6 +2786,7 @@ List<String> selectedCustom5 = <String>[];
                                                child: ElevatedButton(
 
                                                  style: ElevatedButton.styleFrom(
+elevation : 0.1,
 
                                                    primary: selectedCategory.contains("S") ? Colors.black: Colors.white.withOpacity(0.1), // background
                                                    onPrimary:selectedCategory.contains("S") ? Colors.white:  Colors.black, // foreground
@@ -3696,6 +2808,7 @@ List<String> selectedCustom5 = <String>[];
                                                child: ElevatedButton(
 
                                                  style: ElevatedButton.styleFrom(
+elevation : 0.1,
 
                                                    primary: selectedCategory.contains("M") ? Colors.black: Colors.white.withOpacity(0.1), // background
                                                    onPrimary:selectedCategory.contains("M") ? Colors.white:  Colors.black, // foreground
@@ -3718,6 +2831,7 @@ List<String> selectedCustom5 = <String>[];
                                                child: ElevatedButton(
 
                                                  style: ElevatedButton.styleFrom(
+elevation : 0.1,
 
                                                    primary: selectedCategory.contains("L") ? Colors.black: Colors.white.withOpacity(0.1), // background
                                                    onPrimary:selectedCategory.contains("L") ? Colors.white:  Colors.black, // foreground
@@ -3739,6 +2853,7 @@ List<String> selectedCustom5 = <String>[];
                                                child: ElevatedButton(
 
                                                  style: ElevatedButton.styleFrom(
+elevation : 0.1,
 
                                                    primary: selectedCategory.contains("XL") ? Colors.black: Colors.white.withOpacity(0.1), // background
                                                    onPrimary:selectedCategory.contains("XL") ? Colors.white:  Colors.black, // foreground
@@ -3760,6 +2875,7 @@ List<String> selectedCustom5 = <String>[];
                                                child: ElevatedButton(
 
                                                  style: ElevatedButton.styleFrom(
+elevation : 0.1,
 
                                                    primary: selectedCategory.contains("XXL") ? Colors.black: Colors.white.withOpacity(0.1), // background
                                                    onPrimary:selectedCategory.contains("XXL") ? Colors.white:  Colors.black, // foreground
@@ -3781,6 +2897,7 @@ List<String> selectedCustom5 = <String>[];
                                                child: ElevatedButton(
 
                                                  style: ElevatedButton.styleFrom(
+elevation : 0.1,
 
                                                    primary: selectedCategory.contains("XXXL") ? Colors.black: Colors.white.withOpacity(0.1), // background
                                                    onPrimary:selectedCategory.contains("XXXL") ? Colors.white:  Colors.black, // foreground
@@ -3802,6 +2919,7 @@ List<String> selectedCustom5 = <String>[];
                                                child: ElevatedButton(
 
                                                  style: ElevatedButton.styleFrom(
+elevation : 0.1,
 
                                                    primary: selectedCategory.contains("4XL") ? Colors.black: Colors.white.withOpacity(0.1), // background
                                                    onPrimary:selectedCategory.contains("4XL") ? Colors.white:  Colors.black, // foreground
@@ -3823,6 +2941,7 @@ List<String> selectedCustom5 = <String>[];
                                                child: ElevatedButton(
 
                                                  style: ElevatedButton.styleFrom(
+elevation : 0.1,
 
                                                    primary: selectedCategory.contains("5XL") ? Colors.black: Colors.white.withOpacity(0.1), // background
                                                    onPrimary:selectedCategory.contains("5XL") ? Colors.white:  Colors.black, // foreground
@@ -3844,6 +2963,7 @@ List<String> selectedCustom5 = <String>[];
                                                child: ElevatedButton(
 
                                                  style: ElevatedButton.styleFrom(
+elevation : 0.1,
 
                                                    primary: selectedCategory.contains("6XL") ? Colors.black: Colors.white.withOpacity(0.1), // background
                                                    onPrimary:selectedCategory.contains("6XL") ? Colors.white:  Colors.black, // foreground
@@ -3865,6 +2985,7 @@ List<String> selectedCustom5 = <String>[];
                                                child: ElevatedButton(
 
                                                  style: ElevatedButton.styleFrom(
+elevation : 0.1,
 
                                                    primary: selectedCategory.contains("7XL") ? Colors.black: Colors.white.withOpacity(0.1), // background
                                                    onPrimary:selectedCategory.contains("7XL") ? Colors.white:  Colors.black, // foreground
@@ -3886,6 +3007,7 @@ List<String> selectedCustom5 = <String>[];
                                                child: ElevatedButton(
 
                                                  style: ElevatedButton.styleFrom(
+elevation : 0.1,
 
                                                    primary: selectedCategory.contains("8XL") ? Colors.black: Colors.white.withOpacity(0.1), // background
                                                    onPrimary:selectedCategory.contains("8XL") ? Colors.white:  Colors.black, // foreground
@@ -3907,6 +3029,7 @@ List<String> selectedCustom5 = <String>[];
                                                child: ElevatedButton(
 
                                                  style: ElevatedButton.styleFrom(
+elevation : 0.1,
 
                                                    primary: selectedCategory.contains("R 4") ? Colors.black: Colors.white.withOpacity(0.1), // background
                                                    onPrimary:selectedCategory.contains("R 4") ? Colors.white:  Colors.black, // foreground
@@ -3928,6 +3051,7 @@ List<String> selectedCustom5 = <String>[];
                                                child: ElevatedButton(
 
                                                  style: ElevatedButton.styleFrom(
+elevation : 0.1,
 
                                                    primary: selectedCategory.contains("R 4.5") ? Colors.black: Colors.white.withOpacity(0.1), // background
                                                    onPrimary:selectedCategory.contains("R 4.5") ? Colors.white:  Colors.black, // foreground
@@ -3950,6 +3074,7 @@ List<String> selectedCustom5 = <String>[];
                                                child: ElevatedButton(
 
                                                  style: ElevatedButton.styleFrom(
+elevation : 0.1,
 
                                                    primary: selectedCategory.contains("R 5") ? Colors.black: Colors.white.withOpacity(0.1), // background
                                                    onPrimary:selectedCategory.contains("R 5") ? Colors.white:  Colors.black, // foreground
@@ -3971,6 +3096,7 @@ List<String> selectedCustom5 = <String>[];
                                                child: ElevatedButton(
 
                                                  style: ElevatedButton.styleFrom(
+elevation : 0.1,
 
                                                    primary: selectedCategory.contains("R 5.5") ? Colors.black: Colors.white.withOpacity(0.1), // background
                                                    onPrimary:selectedCategory.contains("R 5.5") ? Colors.white:  Colors.black, // foreground
@@ -3992,6 +3118,7 @@ List<String> selectedCustom5 = <String>[];
                                                child: ElevatedButton(
 
                                                  style: ElevatedButton.styleFrom(
+elevation : 0.1,
 
                                                    primary: selectedCategory.contains("R 6") ? Colors.black: Colors.white.withOpacity(0.1), // background
                                                    onPrimary:selectedCategory.contains("R 6") ? Colors.white:  Colors.black, // foreground
@@ -4013,6 +3140,7 @@ List<String> selectedCustom5 = <String>[];
                                                child: ElevatedButton(
 
                                                  style: ElevatedButton.styleFrom(
+elevation : 0.1,
 
                                                    primary: selectedCategory.contains("R 6.5") ? Colors.black: Colors.white.withOpacity(0.1), // background
                                                    onPrimary:selectedCategory.contains("R 6.5") ? Colors.white:  Colors.black, // foreground
@@ -4033,6 +3161,7 @@ List<String> selectedCustom5 = <String>[];
                                                child: ElevatedButton(
 
                                                  style: ElevatedButton.styleFrom(
+elevation : 0.1,
 
                                                    primary: selectedCategory.contains("R 7") ? Colors.black: Colors.white.withOpacity(0.1), // background
                                                    onPrimary:selectedCategory.contains("R 7") ? Colors.white:  Colors.black, // foreground
@@ -4053,6 +3182,7 @@ List<String> selectedCustom5 = <String>[];
                                                child: ElevatedButton(
 
                                                  style: ElevatedButton.styleFrom(
+elevation : 0.1,
 
                                                    primary: selectedCategory.contains("R 7.5") ? Colors.black: Colors.white.withOpacity(0.1), // background
                                                    onPrimary:selectedCategory.contains("R 7.5") ? Colors.white:  Colors.black, // foreground
@@ -4073,6 +3203,7 @@ List<String> selectedCustom5 = <String>[];
                                                child: ElevatedButton(
 
                                                  style: ElevatedButton.styleFrom(
+elevation : 0.1,
 
                                                    primary: selectedCategory.contains("R 8") ? Colors.black: Colors.white.withOpacity(0.1), // background
                                                    onPrimary:selectedCategory.contains("R 8") ? Colors.white:  Colors.black, // foreground
@@ -4093,6 +3224,7 @@ List<String> selectedCustom5 = <String>[];
                                                child: ElevatedButton(
 
                                                  style: ElevatedButton.styleFrom(
+elevation : 0.1,
 
                                                    primary: selectedCategory.contains("R 8.5") ? Colors.black: Colors.white.withOpacity(0.1), // background
                                                    onPrimary:selectedCategory.contains("R 8.5") ? Colors.white:  Colors.black, // foreground
@@ -4113,6 +3245,7 @@ List<String> selectedCustom5 = <String>[];
                                                child: ElevatedButton(
 
                                                  style: ElevatedButton.styleFrom(
+elevation : 0.1,
 
                                                    primary: selectedCategory.contains("R 9") ? Colors.black: Colors.white.withOpacity(0.1), // background
                                                    onPrimary:selectedCategory.contains("R 9") ? Colors.white:  Colors.black, // foreground
@@ -4133,6 +3266,7 @@ List<String> selectedCustom5 = <String>[];
                                                child: ElevatedButton(
 
                                                  style: ElevatedButton.styleFrom(
+elevation : 0.1,
 
                                                    primary: selectedCategory.contains("R 9.5") ? Colors.black: Colors.white.withOpacity(0.1), // background
                                                    onPrimary:selectedCategory.contains("R 9.5") ? Colors.white:  Colors.black, // foreground
@@ -4153,6 +3287,7 @@ List<String> selectedCustom5 = <String>[];
                                                child: ElevatedButton(
 
                                                  style: ElevatedButton.styleFrom(
+elevation : 0.1,
 
                                                    primary: selectedCategory.contains("R 10") ? Colors.black: Colors.white.withOpacity(0.1), // background
                                                    onPrimary:selectedCategory.contains("R 10") ? Colors.white:  Colors.black, // foreground
@@ -4173,6 +3308,7 @@ List<String> selectedCustom5 = <String>[];
                                                child: ElevatedButton(
 
                                                  style: ElevatedButton.styleFrom(
+elevation : 0.1,
 
                                                    primary: selectedCategory.contains("R 10.5") ? Colors.black: Colors.white.withOpacity(0.1), // background
                                                    onPrimary:selectedCategory.contains("R 10.5") ? Colors.white:  Colors.black, // foreground
@@ -4193,6 +3329,7 @@ List<String> selectedCustom5 = <String>[];
                                                child: ElevatedButton(
 
                                                  style: ElevatedButton.styleFrom(
+elevation : 0.1,
 
                                                    primary: selectedCategory.contains("R 11") ? Colors.black: Colors.white.withOpacity(0.1), // background
                                                    onPrimary:selectedCategory.contains("R 11") ? Colors.white:  Colors.black, // foreground
@@ -4213,6 +3350,7 @@ List<String> selectedCustom5 = <String>[];
                                                child: ElevatedButton(
 
                                                  style: ElevatedButton.styleFrom(
+elevation : 0.1,
 
                                                    primary: selectedCategory.contains("R 11.5") ? Colors.black: Colors.white.withOpacity(0.1), // background
                                                    onPrimary:selectedCategory.contains("R 11.5") ? Colors.white:  Colors.black, // foreground
@@ -4233,6 +3371,7 @@ List<String> selectedCustom5 = <String>[];
                                                child: ElevatedButton(
 
                                                  style: ElevatedButton.styleFrom(
+elevation : 0.1,
 
                                                    primary: selectedCategory.contains("R 12") ? Colors.black: Colors.white.withOpacity(0.1), // background
                                                    onPrimary:selectedCategory.contains("R 12") ? Colors.white:  Colors.black, // foreground
@@ -4253,6 +3392,7 @@ List<String> selectedCustom5 = <String>[];
                                                child: ElevatedButton(
 
                                                  style: ElevatedButton.styleFrom(
+elevation : 0.1,
 
                                                    primary: selectedCategory.contains("R 12.5") ? Colors.black: Colors.white.withOpacity(0.1), // background
                                                    onPrimary:selectedCategory.contains("R 12.5") ? Colors.white:  Colors.black, // foreground
@@ -4273,6 +3413,7 @@ List<String> selectedCustom5 = <String>[];
                                                child: ElevatedButton(
 
                                                  style: ElevatedButton.styleFrom(
+elevation : 0.1,
 
                                                    primary: selectedCategory.contains("R 13") ? Colors.black: Colors.white.withOpacity(0.1), // background
                                                    onPrimary:selectedCategory.contains("R 13") ? Colors.white:  Colors.black, // foreground
@@ -4293,6 +3434,7 @@ List<String> selectedCustom5 = <String>[];
                                                child: ElevatedButton(
 
                                                  style: ElevatedButton.styleFrom(
+elevation : 0.1,
 
                                                    primary: selectedCategory.contains("R 13.5") ? Colors.black: Colors.white.withOpacity(0.1), // background
                                                    onPrimary:selectedCategory.contains("R 13.5") ? Colors.white:  Colors.black, // foreground
@@ -4313,6 +3455,7 @@ List<String> selectedCustom5 = <String>[];
                                                child: ElevatedButton(
 
                                                  style: ElevatedButton.styleFrom(
+elevation : 0.1,
 
                                                    primary: selectedCategory.contains("R 14") ? Colors.black: Colors.white.withOpacity(0.1), // background
                                                    onPrimary:selectedCategory.contains("R 14") ? Colors.white:  Colors.black, // foreground
@@ -4333,6 +3476,7 @@ List<String> selectedCustom5 = <String>[];
                                                child: ElevatedButton(
 
                                                  style: ElevatedButton.styleFrom(
+elevation : 0.1,
 
                                                    primary: selectedCategory.contains("R 14.5") ? Colors.black: Colors.white.withOpacity(0.1), // background
                                                    onPrimary:selectedCategory.contains("R 14.5") ? Colors.white:  Colors.black, // foreground
@@ -4353,6 +3497,7 @@ List<String> selectedCustom5 = <String>[];
                                                child: ElevatedButton(
 
                                                  style: ElevatedButton.styleFrom(
+elevation : 0.1,
 
                                                    primary: selectedCategory.contains("R 15") ? Colors.black: Colors.white.withOpacity(0.1), // background
                                                    onPrimary:selectedCategory.contains("R 15") ? Colors.white:  Colors.black, // foreground
@@ -4374,6 +3519,7 @@ List<String> selectedCustom5 = <String>[];
                                                child:   ElevatedButton(
 
                                                  style: ElevatedButton.styleFrom(
+elevation : 0.1,
 
                                                    primary: selectedCategory.contains("(US) 3 ½") ? Colors.black: Colors.white.withOpacity(0.1), // background
                                                    onPrimary:selectedCategory.contains("(US) 3 ½") ? Colors.white:  Colors.black, // foreground
@@ -4394,6 +3540,7 @@ List<String> selectedCustom5 = <String>[];
                                                  child:   ElevatedButton(
 
                                                    style: ElevatedButton.styleFrom(
+elevation : 0.1,
 
                                                      primary: selectedCategory.contains("(US) 4") ? Colors.black: Colors.white.withOpacity(0.1), // background
                                                      onPrimary:selectedCategory.contains("(US) 4") ? Colors.white:  Colors.black, // foreground
@@ -4413,6 +3560,7 @@ List<String> selectedCustom5 = <String>[];
                                                  child:  ElevatedButton(
 
                                                    style: ElevatedButton.styleFrom(
+elevation : 0.1,
 
                                                      primary: selectedCategory.contains("(US) 4 ½") ? Colors.black: Colors.white.withOpacity(0.1), // background
                                                      onPrimary:selectedCategory.contains("(US) 4 ½") ? Colors.white:  Colors.black, // foreground
@@ -4432,6 +3580,7 @@ List<String> selectedCustom5 = <String>[];
                                                  child:   ElevatedButton(
 
                                                    style: ElevatedButton.styleFrom(
+elevation : 0.1,
 
                                                      primary: selectedCategory.contains("(US) 5") ? Colors.black: Colors.white.withOpacity(0.1), // background
                                                      onPrimary:selectedCategory.contains("(US) 5") ? Colors.white:  Colors.black, // foreground
@@ -4451,6 +3600,7 @@ List<String> selectedCustom5 = <String>[];
                                                  child:  ElevatedButton(
 
                                                    style: ElevatedButton.styleFrom(
+elevation : 0.1,
 
                                                      primary: selectedCategory.contains("(US) 5 ½") ? Colors.black: Colors.white.withOpacity(0.1), // background
                                                      onPrimary:selectedCategory.contains("(US) 5 ½") ? Colors.white:  Colors.black, // foreground
@@ -4470,6 +3620,7 @@ List<String> selectedCustom5 = <String>[];
                                                  child:   ElevatedButton(
 
                                                    style: ElevatedButton.styleFrom(
+elevation : 0.1,
 
                                                      primary: selectedCategory.contains("(US) 6") ? Colors.black: Colors.white.withOpacity(0.1), // background
                                                      onPrimary:selectedCategory.contains("(US) 6") ? Colors.white:  Colors.black, // foreground
@@ -4489,6 +3640,7 @@ List<String> selectedCustom5 = <String>[];
                                                child:   ElevatedButton(
 
                                                  style: ElevatedButton.styleFrom(
+elevation : 0.1,
 
                                                    primary: selectedCategory.contains("(US) 6 ½") ? Colors.black: Colors.white.withOpacity(0.1), // background
                                                    onPrimary:selectedCategory.contains("(US) 6 ½") ? Colors.white:  Colors.black, // foreground
@@ -4509,6 +3661,7 @@ List<String> selectedCustom5 = <String>[];
                                                child:   ElevatedButton(
 
                                                  style: ElevatedButton.styleFrom(
+elevation : 0.1,
 
                                                    primary: selectedCategory.contains("(US) 7") ? Colors.black: Colors.white.withOpacity(0.1), // background
                                                    onPrimary:selectedCategory.contains("(US) 7") ? Colors.white:  Colors.black, // foreground
@@ -4529,6 +3682,7 @@ List<String> selectedCustom5 = <String>[];
                                                child:   ElevatedButton(
 
                                                  style: ElevatedButton.styleFrom(
+elevation : 0.1,
 
                                                    primary: selectedCategory.contains("(US) 7 ½") ? Colors.black: Colors.white.withOpacity(0.1), // background
                                                    onPrimary:selectedCategory.contains("(US) 7 ½") ? Colors.white:  Colors.black, // foreground
@@ -4549,6 +3703,7 @@ List<String> selectedCustom5 = <String>[];
                                                child:   ElevatedButton(
 
                                                  style: ElevatedButton.styleFrom(
+elevation : 0.1,
 
                                                    primary: selectedCategory.contains("(US) 8") ? Colors.black: Colors.white.withOpacity(0.1), // background
                                                    onPrimary:selectedCategory.contains("(US) 8") ? Colors.white:  Colors.black, // foreground
@@ -4569,6 +3724,7 @@ List<String> selectedCustom5 = <String>[];
                                                child:   ElevatedButton(
 
                                                  style: ElevatedButton.styleFrom(
+elevation : 0.1,
 
                                                    primary: selectedCategory.contains("(US) 8 ½") ? Colors.black: Colors.white.withOpacity(0.1), // background
                                                    onPrimary:selectedCategory.contains("(US) 8 ½") ? Colors.white:  Colors.black, // foreground
@@ -4589,6 +3745,7 @@ List<String> selectedCustom5 = <String>[];
                                                child:   ElevatedButton(
 
                                                  style: ElevatedButton.styleFrom(
+elevation : 0.1,
 
                                                    primary: selectedCategory.contains("(US) 9") ? Colors.black: Colors.white.withOpacity(0.1), // background
                                                    onPrimary:selectedCategory.contains("(US) 9") ? Colors.white:  Colors.black, // foreground
@@ -4609,6 +3766,7 @@ List<String> selectedCustom5 = <String>[];
                                                child:   ElevatedButton(
 
                                                  style: ElevatedButton.styleFrom(
+elevation : 0.1,
 
                                                    primary: selectedCategory.contains("(US) 9 ½") ? Colors.black: Colors.white.withOpacity(0.1), // background
                                                    onPrimary:selectedCategory.contains("(US) 9 ½") ? Colors.white:  Colors.black, // foreground
@@ -4630,6 +3788,7 @@ List<String> selectedCustom5 = <String>[];
                                                child:   ElevatedButton(
 
                                                  style: ElevatedButton.styleFrom(
+elevation : 0.1,
 
                                                    primary: selectedCategory.contains("(US) 10") ? Colors.black: Colors.white.withOpacity(0.1), // background
                                                    onPrimary:selectedCategory.contains("(US) 10") ? Colors.white:  Colors.black, // foreground
@@ -4650,6 +3809,7 @@ List<String> selectedCustom5 = <String>[];
                                                child:   ElevatedButton(
 
                                                  style: ElevatedButton.styleFrom(
+elevation : 0.1,
 
                                                    primary: selectedCategory.contains("(US) 10 ½") ? Colors.black: Colors.white.withOpacity(0.1), // background
                                                    onPrimary:selectedCategory.contains("(US) 10 ½") ? Colors.white:  Colors.black, // foreground
@@ -4672,6 +3832,7 @@ List<String> selectedCustom5 = <String>[];
 
 
                                                  style: ElevatedButton.styleFrom(
+elevation : 0.1,
 
 
 
@@ -4703,6 +3864,7 @@ List<String> selectedCustom5 = <String>[];
                                                child:   ElevatedButton(
 
                                                  style: ElevatedButton.styleFrom(
+elevation : 0.1,
 
                                                    primary: selectedCategory.contains("(US) 11 ½") ? Colors.black: Colors.white.withOpacity(0.1), // background
                                                    onPrimary:selectedCategory.contains("(US) 11 ½") ? Colors.white:  Colors.black, // foreground
@@ -4723,6 +3885,7 @@ List<String> selectedCustom5 = <String>[];
                                                child:   ElevatedButton(
 
                                                  style: ElevatedButton.styleFrom(
+elevation : 0.1,
 
                                                    primary: selectedCategory.contains("(US) 12") ? Colors.black: Colors.white.withOpacity(0.1), // background
                                                    onPrimary:selectedCategory.contains("(US) 12") ? Colors.white:  Colors.black, // foreground
@@ -4743,6 +3906,7 @@ List<String> selectedCustom5 = <String>[];
                                                child:   ElevatedButton(
 
                                                  style: ElevatedButton.styleFrom(
+elevation : 0.1,
 
                                                    primary: selectedCategory.contains("(US) 12 ½") ? Colors.black: Colors.white.withOpacity(0.1), // background
                                                    onPrimary:selectedCategory.contains("(US) 12 ½") ? Colors.white:  Colors.black, // foreground
@@ -4763,6 +3927,7 @@ List<String> selectedCustom5 = <String>[];
                                                child:   ElevatedButton(
 
                                                  style: ElevatedButton.styleFrom(
+elevation : 0.1,
 
                                                    primary: selectedCategory.contains("(US) 13") ? Colors.black: Colors.white.withOpacity(0.1), // background
                                                    onPrimary:selectedCategory.contains("(US) 13") ? Colors.white:  Colors.black, // foreground
@@ -4783,6 +3948,7 @@ List<String> selectedCustom5 = <String>[];
                                                child:   ElevatedButton(
 
                                                  style: ElevatedButton.styleFrom(
+elevation : 0.1,
 
                                                    primary: selectedCategory.contains("(US) 13 ½") ? Colors.black: Colors.white.withOpacity(0.1), // background
                                                    onPrimary:selectedCategory.contains("(US) 13 ½") ? Colors.white:  Colors.black, // foreground
@@ -4818,6 +3984,7 @@ List<String> selectedCustom5 = <String>[];
                                                child: ElevatedButton(
 
                                                  style: ElevatedButton.styleFrom(
+elevation : 0.1,
 
                                                    primary: selectedCategory.contains("MTO") ? Colors.black: Colors.white.withOpacity(0.1), // background
                                                    onPrimary:selectedCategory.contains("MTO") ? Colors.white:  Colors.black, // foreground
@@ -4840,6 +4007,7 @@ List<String> selectedCustom5 = <String>[];
                                                child: ElevatedButton(
 
                                                  style: ElevatedButton.styleFrom(
+elevation : 0.1,
 
                                                    primary: selectedCategory.contains("Free Size") ? Colors.black: Colors.white.withOpacity(0.1), // background
                                                    onPrimary:selectedCategory.contains("Free Size") ? Colors.white:  Colors.black, // foreground
@@ -4862,6 +4030,7 @@ List<String> selectedCustom5 = <String>[];
                                                child: ElevatedButton(
 
                                                  style: ElevatedButton.styleFrom(
+elevation : 0.1,
 
                                                    primary: selectedCategory.contains("0-3 M") ? Colors.black: Colors.white.withOpacity(0.1), // background
                                                    onPrimary:selectedCategory.contains("0-3 M") ? Colors.white:  Colors.black, // foreground
@@ -4883,6 +4052,7 @@ List<String> selectedCustom5 = <String>[];
                                                child: ElevatedButton(
 
                                                  style: ElevatedButton.styleFrom(
+elevation : 0.1,
 
                                                    primary: selectedCategory.contains("3-6 M") ? Colors.black: Colors.white.withOpacity(0.1), // background
                                                    onPrimary:selectedCategory.contains("3-6 M") ? Colors.white:  Colors.black, // foreground
@@ -4903,6 +4073,7 @@ List<String> selectedCustom5 = <String>[];
                                                child: ElevatedButton(
 
                                                  style: ElevatedButton.styleFrom(
+elevation : 0.1,
 
                                                    primary: selectedCategory.contains("6-9 M") ? Colors.black: Colors.white.withOpacity(0.1), // background
                                                    onPrimary:selectedCategory.contains("6-9 M") ? Colors.white:  Colors.black, // foreground
@@ -4923,6 +4094,7 @@ List<String> selectedCustom5 = <String>[];
                                                child: ElevatedButton(
 
                                                  style: ElevatedButton.styleFrom(
+elevation : 0.1,
 
                                                    primary: selectedCategory.contains("9-12 M") ? Colors.black: Colors.white.withOpacity(0.1), // background
                                                    onPrimary:selectedCategory.contains("9-12 M") ? Colors.white:  Colors.black, // foreground
@@ -4943,6 +4115,7 @@ List<String> selectedCustom5 = <String>[];
                                                child: ElevatedButton(
 
                                                  style: ElevatedButton.styleFrom(
+elevation : 0.1,
 
                                                    primary: selectedCategory.contains("12-18 M") ? Colors.black: Colors.white.withOpacity(0.1), // background
                                                    onPrimary:selectedCategory.contains("12-18 M") ? Colors.white:  Colors.black, // foreground
@@ -4964,6 +4137,7 @@ List<String> selectedCustom5 = <String>[];
                                                child: ElevatedButton(
 
                                                  style: ElevatedButton.styleFrom(
+elevation : 0.1,
 
                                                    primary: selectedCategory.contains("18-24 M") ? Colors.black: Colors.white.withOpacity(0.1), // background
                                                    onPrimary:selectedCategory.contains("18-24 M") ? Colors.white:  Colors.black, // foreground
@@ -4985,6 +4159,7 @@ List<String> selectedCustom5 = <String>[];
                                                child:   ElevatedButton(
 
                                                  style: ElevatedButton.styleFrom(
+elevation : 0.1,
 
                                                    primary: selectedCategory.contains("S 0-3 M") ? Colors.black: Colors.white.withOpacity(0.1), // background
                                                    onPrimary:selectedCategory.contains("S 0-3 M") ? Colors.white:  Colors.black, // foreground
@@ -5005,6 +4180,7 @@ List<String> selectedCustom5 = <String>[];
                                                  child:   ElevatedButton(
 
                                                    style: ElevatedButton.styleFrom(
+elevation : 0.1,
 
                                                      primary: selectedCategory.contains("S 3-6 M") ? Colors.black: Colors.white.withOpacity(0.1), // background
                                                      onPrimary:selectedCategory.contains("S 3-6 M") ? Colors.white:  Colors.black, // foreground
@@ -5024,6 +4200,7 @@ List<String> selectedCustom5 = <String>[];
                                                  child:  ElevatedButton(
 
                                                    style: ElevatedButton.styleFrom(
+elevation : 0.1,
 
                                                      primary: selectedCategory.contains("6 M") ? Colors.black: Colors.white.withOpacity(0.1), // background
                                                      onPrimary:selectedCategory.contains("6 M") ? Colors.white:  Colors.black, // foreground
@@ -5043,6 +4220,7 @@ List<String> selectedCustom5 = <String>[];
                                                  child:   ElevatedButton(
 
                                                    style: ElevatedButton.styleFrom(
+elevation : 0.1,
 
                                                      primary: selectedCategory.contains("9 M") ? Colors.black: Colors.white.withOpacity(0.1), // background
                                                      onPrimary:selectedCategory.contains("9 M") ? Colors.white:  Colors.black, // foreground
@@ -5062,6 +4240,7 @@ List<String> selectedCustom5 = <String>[];
                                                  child:  ElevatedButton(
 
                                                    style: ElevatedButton.styleFrom(
+elevation : 0.1,
 
                                                      primary: selectedCategory.contains("S 9-12 M") ? Colors.black: Colors.white.withOpacity(0.1), // background
                                                      onPrimary:selectedCategory.contains("S 9-12 M") ? Colors.white:  Colors.black, // foreground
@@ -5081,6 +4260,7 @@ List<String> selectedCustom5 = <String>[];
                                                  child:   ElevatedButton(
 
                                                    style: ElevatedButton.styleFrom(
+elevation : 0.1,
 
                                                      primary: selectedCategory.contains("S 12-18 M") ? Colors.black: Colors.white.withOpacity(0.1), // background
                                                      onPrimary:selectedCategory.contains("S 12-18 M") ? Colors.white:  Colors.black, // foreground
@@ -5100,6 +4280,7 @@ List<String> selectedCustom5 = <String>[];
                                                child:   ElevatedButton(
 
                                                  style: ElevatedButton.styleFrom(
+elevation : 0.1,
 
                                                    primary: selectedCategory.contains("S 18-24 M") ? Colors.black: Colors.white.withOpacity(0.1), // background
                                                    onPrimary:selectedCategory.contains("S 18-24 M") ? Colors.white:  Colors.black, // foreground
@@ -5135,6 +4316,7 @@ List<String> selectedCustom5 = <String>[];
                                                child: ElevatedButton(
 
                                                  style: ElevatedButton.styleFrom(
+elevation : 0.1,
 
                                                    primary: selectedCategory.contains("MTO") ? Colors.black: Colors.white.withOpacity(0.1), // background
                                                    onPrimary:selectedCategory.contains("MTO") ? Colors.white:  Colors.black, // foreground
@@ -5157,6 +4339,7 @@ List<String> selectedCustom5 = <String>[];
                                                child: ElevatedButton(
 
                                                  style: ElevatedButton.styleFrom(
+elevation : 0.1,
 
                                                    primary: selectedCategory.contains("Free Size") ? Colors.black: Colors.white.withOpacity(0.1), // background
                                                    onPrimary:selectedCategory.contains("Free Size") ? Colors.white:  Colors.black, // foreground
@@ -5179,6 +4362,7 @@ List<String> selectedCustom5 = <String>[];
                                                child: ElevatedButton(
 
                                                  style: ElevatedButton.styleFrom(
+elevation : 0.1,
 
                                                    primary: selectedCategory.contains("2 Y") ? Colors.black: Colors.white.withOpacity(0.1), // background
                                                    onPrimary:selectedCategory.contains("2 Y") ? Colors.white:  Colors.black, // foreground
@@ -5199,6 +4383,7 @@ List<String> selectedCustom5 = <String>[];
                                                child: ElevatedButton(
 
                                                  style: ElevatedButton.styleFrom(
+elevation : 0.1,
 
                                                    primary: selectedCategory.contains("3-4 Y") ? Colors.black: Colors.white.withOpacity(0.1), // background
                                                    onPrimary:selectedCategory.contains("3-4 Y") ? Colors.white:  Colors.black, // foreground
@@ -5219,6 +4404,7 @@ List<String> selectedCustom5 = <String>[];
                                                child: ElevatedButton(
 
                                                  style: ElevatedButton.styleFrom(
+elevation : 0.1,
 
                                                    primary: selectedCategory.contains("4-5 Y") ? Colors.black: Colors.white.withOpacity(0.1), // background
                                                    onPrimary:selectedCategory.contains("4-5 Y") ? Colors.white:  Colors.black, // foreground
@@ -5239,6 +4425,7 @@ List<String> selectedCustom5 = <String>[];
                                                child: ElevatedButton(
 
                                                  style: ElevatedButton.styleFrom(
+elevation : 0.1,
 
                                                    primary: selectedCategory.contains("5-6 Y") ? Colors.black: Colors.white.withOpacity(0.1), // background
                                                    onPrimary:selectedCategory.contains("5-6 Y") ? Colors.white:  Colors.black, // foreground
@@ -5259,6 +4446,7 @@ List<String> selectedCustom5 = <String>[];
                                                child: ElevatedButton(
 
                                                  style: ElevatedButton.styleFrom(
+elevation : 0.1,
 
                                                    primary: selectedCategory.contains("6-7 Y") ? Colors.black: Colors.white.withOpacity(0.1), // background
                                                    onPrimary:selectedCategory.contains("6-7 Y") ? Colors.white:  Colors.black, // foreground
@@ -5280,6 +4468,7 @@ List<String> selectedCustom5 = <String>[];
                                                child: ElevatedButton(
 
                                                  style: ElevatedButton.styleFrom(
+elevation : 0.1,
 
                                                    primary: selectedCategory.contains("7-8 Y") ? Colors.black: Colors.white.withOpacity(0.1), // background
                                                    onPrimary:selectedCategory.contains("7-8 Y") ? Colors.white:  Colors.black, // foreground
@@ -5300,6 +4489,7 @@ List<String> selectedCustom5 = <String>[];
                                                child: ElevatedButton(
 
                                                  style: ElevatedButton.styleFrom(
+elevation : 0.1,
 
                                                    primary: selectedCategory.contains("8-9 Y") ? Colors.black: Colors.white.withOpacity(0.1), // background
                                                    onPrimary:selectedCategory.contains("8-9 Y") ? Colors.white:  Colors.black, // foreground
@@ -5320,6 +4510,7 @@ List<String> selectedCustom5 = <String>[];
                                                child: ElevatedButton(
 
                                                  style: ElevatedButton.styleFrom(
+elevation : 0.1,
 
                                                    primary: selectedCategory.contains("9-10 Y") ? Colors.black: Colors.white.withOpacity(0.1), // background
                                                    onPrimary:selectedCategory.contains("9-10 Y") ? Colors.white:  Colors.black, // foreground
@@ -5340,6 +4531,7 @@ List<String> selectedCustom5 = <String>[];
                                                child: ElevatedButton(
 
                                                  style: ElevatedButton.styleFrom(
+elevation : 0.1,
 
                                                    primary: selectedCategory.contains("10-11 Y") ? Colors.black: Colors.white.withOpacity(0.1), // background
                                                    onPrimary:selectedCategory.contains("10-11 Y") ? Colors.white:  Colors.black, // foreground
@@ -5360,6 +4552,7 @@ List<String> selectedCustom5 = <String>[];
                                                child: ElevatedButton(
 
                                                  style: ElevatedButton.styleFrom(
+elevation : 0.1,
 
                                                    primary: selectedCategory.contains("11-12 Y") ? Colors.black: Colors.white.withOpacity(0.1), // background
                                                    onPrimary:selectedCategory.contains("11-12 Y") ? Colors.white:  Colors.black, // foreground
@@ -5381,6 +4574,7 @@ List<String> selectedCustom5 = <String>[];
                                                child:   ElevatedButton(
 
                                                  style: ElevatedButton.styleFrom(
+elevation : 0.1,
 
                                                    primary: selectedCategory.contains("S 2 Y") ? Colors.black: Colors.white.withOpacity(0.1), // background
                                                    onPrimary:selectedCategory.contains("S 2 Y") ? Colors.white:  Colors.black, // foreground
@@ -5401,6 +4595,7 @@ List<String> selectedCustom5 = <String>[];
                                                  child:   ElevatedButton(
 
                                                    style: ElevatedButton.styleFrom(
+elevation : 0.1,
 
                                                      primary: selectedCategory.contains("S 2 ½ Y") ? Colors.black: Colors.white.withOpacity(0.1), // background
                                                      onPrimary:selectedCategory.contains("S 2 ½ Y") ? Colors.white:  Colors.black, // foreground
@@ -5420,6 +4615,7 @@ List<String> selectedCustom5 = <String>[];
                                                  child:  ElevatedButton(
 
                                                    style: ElevatedButton.styleFrom(
+elevation : 0.1,
 
                                                      primary: selectedCategory.contains("S 3 Y") ? Colors.black: Colors.white.withOpacity(0.1), // background
                                                      onPrimary:selectedCategory.contains("S 3 Y") ? Colors.white:  Colors.black, // foreground
@@ -5439,6 +4635,7 @@ List<String> selectedCustom5 = <String>[];
                                                  child:   ElevatedButton(
 
                                                    style: ElevatedButton.styleFrom(
+elevation : 0.1,
 
                                                      primary: selectedCategory.contains("S 3 ½ Y") ? Colors.black: Colors.white.withOpacity(0.1), // background
                                                      onPrimary:selectedCategory.contains("S 3 ½ Y") ? Colors.white:  Colors.black, // foreground
@@ -5458,6 +4655,7 @@ List<String> selectedCustom5 = <String>[];
                                                  child:  ElevatedButton(
 
                                                    style: ElevatedButton.styleFrom(
+elevation : 0.1,
 
                                                      primary: selectedCategory.contains("S 4 Y") ? Colors.black: Colors.white.withOpacity(0.1), // background
                                                      onPrimary:selectedCategory.contains("S 4 Y") ? Colors.white:  Colors.black, // foreground
@@ -5478,6 +4676,7 @@ List<String> selectedCustom5 = <String>[];
                                                child:   ElevatedButton(
 
                                                  style: ElevatedButton.styleFrom(
+elevation : 0.1,
 
                                                    primary: selectedCategory.contains("S 5 Y") ? Colors.black: Colors.white.withOpacity(0.1), // background
                                                    onPrimary:selectedCategory.contains("S 5 Y") ? Colors.white:  Colors.black, // foreground
@@ -5498,6 +4697,7 @@ List<String> selectedCustom5 = <String>[];
                                                child:   ElevatedButton(
 
                                                  style: ElevatedButton.styleFrom(
+elevation : 0.1,
 
                                                    primary: selectedCategory.contains("S 6 Y") ? Colors.black: Colors.white.withOpacity(0.1), // background
                                                    onPrimary:selectedCategory.contains("S 6 Y") ? Colors.white:  Colors.black, // foreground
@@ -5518,6 +4718,7 @@ List<String> selectedCustom5 = <String>[];
                                                child:   ElevatedButton(
 
                                                  style: ElevatedButton.styleFrom(
+elevation : 0.1,
 
                                                    primary: selectedCategory.contains("S 7 Y") ? Colors.black: Colors.white.withOpacity(0.1), // background
                                                    onPrimary:selectedCategory.contains("S 7 Y") ? Colors.white:  Colors.black, // foreground
@@ -5538,6 +4739,7 @@ List<String> selectedCustom5 = <String>[];
                                                child:   ElevatedButton(
 
                                                  style: ElevatedButton.styleFrom(
+elevation : 0.1,
 
                                                    primary: selectedCategory.contains("S 8 Y") ? Colors.black: Colors.white.withOpacity(0.1), // background
                                                    onPrimary:selectedCategory.contains("S 8 Y") ? Colors.white:  Colors.black, // foreground
@@ -5559,6 +4761,7 @@ List<String> selectedCustom5 = <String>[];
                                                child:   ElevatedButton(
 
                                                  style: ElevatedButton.styleFrom(
+elevation : 0.1,
 
                                                    primary: selectedCategory.contains("S 9 Y") ? Colors.black: Colors.white.withOpacity(0.1), // background
                                                    onPrimary:selectedCategory.contains("S 9 Y") ? Colors.white:  Colors.black, // foreground
@@ -5579,6 +4782,7 @@ List<String> selectedCustom5 = <String>[];
                                                child:   ElevatedButton(
 
                                                  style: ElevatedButton.styleFrom(
+elevation : 0.1,
 
                                                    primary: selectedCategory.contains("S 10 Y") ? Colors.black: Colors.white.withOpacity(0.1), // background
                                                    onPrimary:selectedCategory.contains("S 10 Y") ? Colors.white:  Colors.black, // foreground
@@ -5599,6 +4803,7 @@ List<String> selectedCustom5 = <String>[];
                                                child:   ElevatedButton(
 
                                                  style: ElevatedButton.styleFrom(
+elevation : 0.1,
 
                                                    primary: selectedCategory.contains("S 11 Y") ? Colors.black: Colors.white.withOpacity(0.1), // background
                                                    onPrimary:selectedCategory.contains("S 11 Y") ? Colors.white:  Colors.black, // foreground
@@ -5619,6 +4824,7 @@ List<String> selectedCustom5 = <String>[];
                                                child:   ElevatedButton(
 
                                                  style: ElevatedButton.styleFrom(
+elevation : 0.1,
 
                                                    primary: selectedCategory.contains("S 12 Y") ? Colors.black: Colors.white.withOpacity(0.1), // background
                                                    onPrimary:selectedCategory.contains("S 12 Y") ? Colors.white:  Colors.black, // foreground
@@ -5641,6 +4847,7 @@ List<String> selectedCustom5 = <String>[];
 
 
                                                  style: ElevatedButton.styleFrom(
+elevation : 0.1,
 
 
 
@@ -5688,6 +4895,7 @@ List<String> selectedCustom5 = <String>[];
                                                child: ElevatedButton(
 
                                                  style: ElevatedButton.styleFrom(
+elevation : 0.1,
 
                                                    primary: selectedCategory.contains("MTO") ? Colors.black: Colors.white.withOpacity(0.1), // background
                                                    onPrimary:selectedCategory.contains("MTO") ? Colors.white:  Colors.black, // foreground
@@ -5710,6 +4918,7 @@ List<String> selectedCustom5 = <String>[];
                                                child: ElevatedButton(
 
                                                  style: ElevatedButton.styleFrom(
+elevation : 0.1,
 
                                                    primary: selectedCategory.contains("Free Size") ? Colors.black: Colors.white.withOpacity(0.1), // background
                                                    onPrimary:selectedCategory.contains("Free Size") ? Colors.white:  Colors.black, // foreground
@@ -5732,6 +4941,7 @@ List<String> selectedCustom5 = <String>[];
                                                child: ElevatedButton(
 
                                                  style: ElevatedButton.styleFrom(
+elevation : 0.1,
 
                                                    primary: selectedCategory.contains("13 Y") ? Colors.black: Colors.white.withOpacity(0.1), // background
                                                    onPrimary:selectedCategory.contains("13 Y") ? Colors.white:  Colors.black, // foreground
@@ -5752,6 +4962,7 @@ List<String> selectedCustom5 = <String>[];
                                                child: ElevatedButton(
 
                                                  style: ElevatedButton.styleFrom(
+elevation : 0.1,
 
                                                    primary: selectedCategory.contains("14 Y") ? Colors.black: Colors.white.withOpacity(0.1), // background
                                                    onPrimary:selectedCategory.contains("14 Y") ? Colors.white:  Colors.black, // foreground
@@ -5772,6 +4983,7 @@ List<String> selectedCustom5 = <String>[];
                                                child: ElevatedButton(
 
                                                  style: ElevatedButton.styleFrom(
+elevation : 0.1,
 
                                                    primary: selectedCategory.contains("15 Y") ? Colors.black: Colors.white.withOpacity(0.1), // background
                                                    onPrimary:selectedCategory.contains("15 Y") ? Colors.white:  Colors.black, // foreground
@@ -5792,6 +5004,7 @@ List<String> selectedCustom5 = <String>[];
                                                child: ElevatedButton(
 
                                                  style: ElevatedButton.styleFrom(
+elevation : 0.1,
 
                                                    primary: selectedCategory.contains("16 Y") ? Colors.black: Colors.white.withOpacity(0.1), // background
                                                    onPrimary:selectedCategory.contains("16 Y") ? Colors.white:  Colors.black, // foreground
@@ -5812,6 +5025,7 @@ List<String> selectedCustom5 = <String>[];
                                                child:   ElevatedButton(
 
                                                  style: ElevatedButton.styleFrom(
+elevation : 0.1,
 
                                                    primary: selectedCategory.contains("S 13 Y") ? Colors.black: Colors.white.withOpacity(0.1), // background
                                                    onPrimary:selectedCategory.contains("S 13 Y") ? Colors.white:  Colors.black, // foreground
@@ -5832,6 +5046,7 @@ List<String> selectedCustom5 = <String>[];
                                                  child:   ElevatedButton(
 
                                                    style: ElevatedButton.styleFrom(
+elevation : 0.1,
 
                                                      primary: selectedCategory.contains("S 14 Y") ? Colors.black: Colors.white.withOpacity(0.1), // background
                                                      onPrimary:selectedCategory.contains("S 14 Y") ? Colors.white:  Colors.black, // foreground
@@ -5851,6 +5066,7 @@ List<String> selectedCustom5 = <String>[];
                                                  child:  ElevatedButton(
 
                                                    style: ElevatedButton.styleFrom(
+elevation : 0.1,
 
                                                      primary: selectedCategory.contains("15 Y") ? Colors.black: Colors.white.withOpacity(0.1), // background
                                                      onPrimary:selectedCategory.contains("15 Y") ? Colors.white:  Colors.black, // foreground
@@ -5870,6 +5086,7 @@ List<String> selectedCustom5 = <String>[];
                                                  child:  ElevatedButton(
 
                                                    style: ElevatedButton.styleFrom(
+elevation : 0.1,
 
                                                      primary: selectedCategory.contains("S 16 Y") ? Colors.black: Colors.white.withOpacity(0.1), // background
                                                      onPrimary:selectedCategory.contains("S 16 Y") ? Colors.white:  Colors.black, // foreground
@@ -5905,6 +5122,7 @@ List<String> selectedCustom5 = <String>[];
                                                child: ElevatedButton(
 
                                                  style: ElevatedButton.styleFrom(
+elevation : 0.1,
 
                                                    primary: selectedCategory.contains("MTO") ? Colors.black: Colors.white.withOpacity(0.1), // background
                                                    onPrimary:selectedCategory.contains("MTO") ? Colors.white:  Colors.black, // foreground
@@ -5927,6 +5145,7 @@ List<String> selectedCustom5 = <String>[];
                                                child: ElevatedButton(
 
                                                  style: ElevatedButton.styleFrom(
+elevation : 0.1,
 
                                                    primary: selectedCategory.contains("Free Size") ? Colors.black: Colors.white.withOpacity(0.1), // background
                                                    onPrimary:selectedCategory.contains("Free Size") ? Colors.white:  Colors.black, // foreground
@@ -5949,6 +5168,7 @@ List<String> selectedCustom5 = <String>[];
                                                child: ElevatedButton(
 
                                                  style: ElevatedButton.styleFrom(
+elevation : 0.1,
 
                                                    primary: selectedCategory.contains("XXXS") ? Colors.black: Colors.white.withOpacity(0.1), // background
                                                    onPrimary:selectedCategory.contains("XXXS") ? Colors.white:  Colors.black, // foreground
@@ -5970,6 +5190,7 @@ List<String> selectedCustom5 = <String>[];
                                                child: ElevatedButton(
 
                                                  style: ElevatedButton.styleFrom(
+elevation : 0.1,
 
                                                    primary: selectedCategory.contains("XXS") ? Colors.black: Colors.white.withOpacity(0.1), // background
                                                    onPrimary:selectedCategory.contains("XXS") ? Colors.white:  Colors.black, // foreground
@@ -5991,6 +5212,7 @@ List<String> selectedCustom5 = <String>[];
                                                child: ElevatedButton(
 
                                                  style: ElevatedButton.styleFrom(
+elevation : 0.1,
 
                                                    primary: selectedCategory.contains("XS") ? Colors.black: Colors.white.withOpacity(0.1), // background
                                                    onPrimary:selectedCategory.contains("XS") ? Colors.white:  Colors.black, // foreground
@@ -6012,6 +5234,7 @@ List<String> selectedCustom5 = <String>[];
                                                child: ElevatedButton(
 
                                                  style: ElevatedButton.styleFrom(
+elevation : 0.1,
 
                                                    primary: selectedCategory.contains("S") ? Colors.black: Colors.white.withOpacity(0.1), // background
                                                    onPrimary:selectedCategory.contains("S") ? Colors.white:  Colors.black, // foreground
@@ -6033,6 +5256,7 @@ List<String> selectedCustom5 = <String>[];
                                                child: ElevatedButton(
 
                                                  style: ElevatedButton.styleFrom(
+elevation : 0.1,
 
                                                    primary: selectedCategory.contains("M") ? Colors.black: Colors.white.withOpacity(0.1), // background
                                                    onPrimary:selectedCategory.contains("M") ? Colors.white:  Colors.black, // foreground
@@ -6055,6 +5279,7 @@ List<String> selectedCustom5 = <String>[];
                                                child: ElevatedButton(
 
                                                  style: ElevatedButton.styleFrom(
+elevation : 0.1,
 
                                                    primary: selectedCategory.contains("L") ? Colors.black: Colors.white.withOpacity(0.1), // background
                                                    onPrimary:selectedCategory.contains("L") ? Colors.white:  Colors.black, // foreground
@@ -6076,6 +5301,7 @@ List<String> selectedCustom5 = <String>[];
                                                child: ElevatedButton(
 
                                                  style: ElevatedButton.styleFrom(
+elevation : 0.1,
 
                                                    primary: selectedCategory.contains("XL") ? Colors.black: Colors.white.withOpacity(0.1), // background
                                                    onPrimary:selectedCategory.contains("XL") ? Colors.white:  Colors.black, // foreground
@@ -6097,6 +5323,7 @@ List<String> selectedCustom5 = <String>[];
                                                child: ElevatedButton(
 
                                                  style: ElevatedButton.styleFrom(
+elevation : 0.1,
 
                                                    primary: selectedCategory.contains("XXL") ? Colors.black: Colors.white.withOpacity(0.1), // background
                                                    onPrimary:selectedCategory.contains("XXL") ? Colors.white:  Colors.black, // foreground
@@ -6118,6 +5345,7 @@ List<String> selectedCustom5 = <String>[];
                                                child: ElevatedButton(
 
                                                  style: ElevatedButton.styleFrom(
+elevation : 0.1,
 
                                                    primary: selectedCategory.contains("XXXL") ? Colors.black: Colors.white.withOpacity(0.1), // background
                                                    onPrimary:selectedCategory.contains("XXXL") ? Colors.white:  Colors.black, // foreground
@@ -6139,6 +5367,7 @@ List<String> selectedCustom5 = <String>[];
                                                child: ElevatedButton(
 
                                                  style: ElevatedButton.styleFrom(
+elevation : 0.1,
 
                                                    primary: selectedCategory.contains("4XL") ? Colors.black: Colors.white.withOpacity(0.1), // background
                                                    onPrimary:selectedCategory.contains("4XL") ? Colors.white:  Colors.black, // foreground
@@ -6160,6 +5389,7 @@ List<String> selectedCustom5 = <String>[];
                                                child: ElevatedButton(
 
                                                  style: ElevatedButton.styleFrom(
+elevation : 0.1,
 
                                                    primary: selectedCategory.contains("5XL") ? Colors.black: Colors.white.withOpacity(0.1), // background
                                                    onPrimary:selectedCategory.contains("5XL") ? Colors.white:  Colors.black, // foreground
@@ -6181,6 +5411,7 @@ List<String> selectedCustom5 = <String>[];
                                                child: ElevatedButton(
 
                                                  style: ElevatedButton.styleFrom(
+elevation : 0.1,
 
                                                    primary: selectedCategory.contains("6XL") ? Colors.black: Colors.white.withOpacity(0.1), // background
                                                    onPrimary:selectedCategory.contains("6XL") ? Colors.white:  Colors.black, // foreground
@@ -6202,6 +5433,7 @@ List<String> selectedCustom5 = <String>[];
                                                child: ElevatedButton(
 
                                                  style: ElevatedButton.styleFrom(
+elevation : 0.1,
 
                                                    primary: selectedCategory.contains("7XL") ? Colors.black: Colors.white.withOpacity(0.1), // background
                                                    onPrimary:selectedCategory.contains("7XL") ? Colors.white:  Colors.black, // foreground
@@ -6223,6 +5455,7 @@ List<String> selectedCustom5 = <String>[];
                                                child: ElevatedButton(
 
                                                  style: ElevatedButton.styleFrom(
+elevation : 0.1,
 
                                                    primary: selectedCategory.contains("8XL") ? Colors.black: Colors.white.withOpacity(0.1), // background
                                                    onPrimary:selectedCategory.contains("8XL") ? Colors.white:  Colors.black, // foreground
@@ -6244,6 +5477,7 @@ List<String> selectedCustom5 = <String>[];
                                                child: ElevatedButton(
 
                                                  style: ElevatedButton.styleFrom(
+elevation : 0.1,
 
                                                    primary: selectedCategory.contains("R 4") ? Colors.black: Colors.white.withOpacity(0.1), // background
                                                    onPrimary:selectedCategory.contains("R 4") ? Colors.white:  Colors.black, // foreground
@@ -6265,6 +5499,7 @@ List<String> selectedCustom5 = <String>[];
                                                child: ElevatedButton(
 
                                                  style: ElevatedButton.styleFrom(
+elevation : 0.1,
 
                                                    primary: selectedCategory.contains("R 4.5") ? Colors.black: Colors.white.withOpacity(0.1), // background
                                                    onPrimary:selectedCategory.contains("R 4.5") ? Colors.white:  Colors.black, // foreground
@@ -6287,6 +5522,7 @@ List<String> selectedCustom5 = <String>[];
                                                child: ElevatedButton(
 
                                                  style: ElevatedButton.styleFrom(
+elevation : 0.1,
 
                                                    primary: selectedCategory.contains("R 5") ? Colors.black: Colors.white.withOpacity(0.1), // background
                                                    onPrimary:selectedCategory.contains("R 5") ? Colors.white:  Colors.black, // foreground
@@ -6308,6 +5544,7 @@ List<String> selectedCustom5 = <String>[];
                                                child: ElevatedButton(
 
                                                  style: ElevatedButton.styleFrom(
+elevation : 0.1,
 
                                                    primary: selectedCategory.contains("R 5.5") ? Colors.black: Colors.white.withOpacity(0.1), // background
                                                    onPrimary:selectedCategory.contains("R 5.5") ? Colors.white:  Colors.black, // foreground
@@ -6329,6 +5566,7 @@ List<String> selectedCustom5 = <String>[];
                                                child: ElevatedButton(
 
                                                  style: ElevatedButton.styleFrom(
+elevation : 0.1,
 
                                                    primary: selectedCategory.contains("R 6") ? Colors.black: Colors.white.withOpacity(0.1), // background
                                                    onPrimary:selectedCategory.contains("R 6") ? Colors.white:  Colors.black, // foreground
@@ -6350,6 +5588,7 @@ List<String> selectedCustom5 = <String>[];
                                                child: ElevatedButton(
 
                                                  style: ElevatedButton.styleFrom(
+elevation : 0.1,
 
                                                    primary: selectedCategory.contains("R 6.5") ? Colors.black: Colors.white.withOpacity(0.1), // background
                                                    onPrimary:selectedCategory.contains("R 6.5") ? Colors.white:  Colors.black, // foreground
@@ -6370,6 +5609,7 @@ List<String> selectedCustom5 = <String>[];
                                                child: ElevatedButton(
 
                                                  style: ElevatedButton.styleFrom(
+elevation : 0.1,
 
                                                    primary: selectedCategory.contains("R 7") ? Colors.black: Colors.white.withOpacity(0.1), // background
                                                    onPrimary:selectedCategory.contains("R 7") ? Colors.white:  Colors.black, // foreground
@@ -6390,6 +5630,7 @@ List<String> selectedCustom5 = <String>[];
                                                child: ElevatedButton(
 
                                                  style: ElevatedButton.styleFrom(
+elevation : 0.1,
 
                                                    primary: selectedCategory.contains("R 7.5") ? Colors.black: Colors.white.withOpacity(0.1), // background
                                                    onPrimary:selectedCategory.contains("R 7.5") ? Colors.white:  Colors.black, // foreground
@@ -6410,6 +5651,7 @@ List<String> selectedCustom5 = <String>[];
                                                child: ElevatedButton(
 
                                                  style: ElevatedButton.styleFrom(
+elevation : 0.1,
 
                                                    primary: selectedCategory.contains("R 8") ? Colors.black: Colors.white.withOpacity(0.1), // background
                                                    onPrimary:selectedCategory.contains("R 8") ? Colors.white:  Colors.black, // foreground
@@ -6430,6 +5672,7 @@ List<String> selectedCustom5 = <String>[];
                                                child: ElevatedButton(
 
                                                  style: ElevatedButton.styleFrom(
+elevation : 0.1,
 
                                                    primary: selectedCategory.contains("R 8.5") ? Colors.black: Colors.white.withOpacity(0.1), // background
                                                    onPrimary:selectedCategory.contains("R 8.5") ? Colors.white:  Colors.black, // foreground
@@ -6450,6 +5693,7 @@ List<String> selectedCustom5 = <String>[];
                                                child: ElevatedButton(
 
                                                  style: ElevatedButton.styleFrom(
+elevation : 0.1,
 
                                                    primary: selectedCategory.contains("R 9") ? Colors.black: Colors.white.withOpacity(0.1), // background
                                                    onPrimary:selectedCategory.contains("R 9") ? Colors.white:  Colors.black, // foreground
@@ -6470,6 +5714,7 @@ List<String> selectedCustom5 = <String>[];
                                                child: ElevatedButton(
 
                                                  style: ElevatedButton.styleFrom(
+elevation : 0.1,
 
                                                    primary: selectedCategory.contains("R 9.5") ? Colors.black: Colors.white.withOpacity(0.1), // background
                                                    onPrimary:selectedCategory.contains("R 9.5") ? Colors.white:  Colors.black, // foreground
@@ -6490,6 +5735,7 @@ List<String> selectedCustom5 = <String>[];
                                                child: ElevatedButton(
 
                                                  style: ElevatedButton.styleFrom(
+elevation : 0.1,
 
                                                    primary: selectedCategory.contains("R 10") ? Colors.black: Colors.white.withOpacity(0.1), // background
                                                    onPrimary:selectedCategory.contains("R 10") ? Colors.white:  Colors.black, // foreground
@@ -6510,6 +5756,7 @@ List<String> selectedCustom5 = <String>[];
                                                child: ElevatedButton(
 
                                                  style: ElevatedButton.styleFrom(
+elevation : 0.1,
 
                                                    primary: selectedCategory.contains("R 10.5") ? Colors.black: Colors.white.withOpacity(0.1), // background
                                                    onPrimary:selectedCategory.contains("R 10.5") ? Colors.white:  Colors.black, // foreground
@@ -6530,6 +5777,7 @@ List<String> selectedCustom5 = <String>[];
                                                child: ElevatedButton(
 
                                                  style: ElevatedButton.styleFrom(
+elevation : 0.1,
 
                                                    primary: selectedCategory.contains("R 11") ? Colors.black: Colors.white.withOpacity(0.1), // background
                                                    onPrimary:selectedCategory.contains("R 11") ? Colors.white:  Colors.black, // foreground
@@ -6550,6 +5798,7 @@ List<String> selectedCustom5 = <String>[];
                                                child: ElevatedButton(
 
                                                  style: ElevatedButton.styleFrom(
+elevation : 0.1,
 
                                                    primary: selectedCategory.contains("R 11.5") ? Colors.black: Colors.white.withOpacity(0.1), // background
                                                    onPrimary:selectedCategory.contains("R 11.5") ? Colors.white:  Colors.black, // foreground
@@ -6570,6 +5819,7 @@ List<String> selectedCustom5 = <String>[];
                                                child: ElevatedButton(
 
                                                  style: ElevatedButton.styleFrom(
+elevation : 0.1,
 
                                                    primary: selectedCategory.contains("R 12") ? Colors.black: Colors.white.withOpacity(0.1), // background
                                                    onPrimary:selectedCategory.contains("R 12") ? Colors.white:  Colors.black, // foreground
@@ -6590,6 +5840,7 @@ List<String> selectedCustom5 = <String>[];
                                                child: ElevatedButton(
 
                                                  style: ElevatedButton.styleFrom(
+elevation : 0.1,
 
                                                    primary: selectedCategory.contains("R 12.5") ? Colors.black: Colors.white.withOpacity(0.1), // background
                                                    onPrimary:selectedCategory.contains("R 12.5") ? Colors.white:  Colors.black, // foreground
@@ -6610,6 +5861,7 @@ List<String> selectedCustom5 = <String>[];
                                                child: ElevatedButton(
 
                                                  style: ElevatedButton.styleFrom(
+elevation : 0.1,
 
                                                    primary: selectedCategory.contains("R 13") ? Colors.black: Colors.white.withOpacity(0.1), // background
                                                    onPrimary:selectedCategory.contains("R 13") ? Colors.white:  Colors.black, // foreground
@@ -6630,6 +5882,7 @@ List<String> selectedCustom5 = <String>[];
                                                child: ElevatedButton(
 
                                                  style: ElevatedButton.styleFrom(
+elevation : 0.1,
 
                                                    primary: selectedCategory.contains("R 13.5") ? Colors.black: Colors.white.withOpacity(0.1), // background
                                                    onPrimary:selectedCategory.contains("R 13.5") ? Colors.white:  Colors.black, // foreground
@@ -6650,6 +5903,7 @@ List<String> selectedCustom5 = <String>[];
                                                child: ElevatedButton(
 
                                                  style: ElevatedButton.styleFrom(
+elevation : 0.1,
 
                                                    primary: selectedCategory.contains("R 14") ? Colors.black: Colors.white.withOpacity(0.1), // background
                                                    onPrimary:selectedCategory.contains("R 14") ? Colors.white:  Colors.black, // foreground
@@ -6670,6 +5924,7 @@ List<String> selectedCustom5 = <String>[];
                                                child: ElevatedButton(
 
                                                  style: ElevatedButton.styleFrom(
+elevation : 0.1,
 
                                                    primary: selectedCategory.contains("R 14.5") ? Colors.black: Colors.white.withOpacity(0.1), // background
                                                    onPrimary:selectedCategory.contains("R 14.5") ? Colors.white:  Colors.black, // foreground
@@ -6690,6 +5945,7 @@ List<String> selectedCustom5 = <String>[];
                                                child: ElevatedButton(
 
                                                  style: ElevatedButton.styleFrom(
+elevation : 0.1,
 
                                                    primary: selectedCategory.contains("R 15") ? Colors.black: Colors.white.withOpacity(0.1), // background
                                                    onPrimary:selectedCategory.contains("R 15") ? Colors.white:  Colors.black, // foreground
@@ -6711,6 +5967,7 @@ List<String> selectedCustom5 = <String>[];
                                                child:   ElevatedButton(
 
                                                  style: ElevatedButton.styleFrom(
+elevation : 0.1,
 
                                                    primary: selectedCategory.contains("5") ? Colors.black: Colors.white.withOpacity(0.1), // background
                                                    onPrimary:selectedCategory.contains("5") ? Colors.white:  Colors.black, // foreground
@@ -6731,6 +5988,7 @@ List<String> selectedCustom5 = <String>[];
                                                  child:   ElevatedButton(
 
                                                    style: ElevatedButton.styleFrom(
+elevation : 0.1,
 
                                                      primary: selectedCategory.contains("5 ½") ? Colors.black: Colors.white.withOpacity(0.1), // background
                                                      onPrimary:selectedCategory.contains("5 ½") ? Colors.white:  Colors.black, // foreground
@@ -6750,6 +6008,7 @@ List<String> selectedCustom5 = <String>[];
                                                  child:  ElevatedButton(
 
                                                    style: ElevatedButton.styleFrom(
+elevation : 0.1,
 
                                                      primary: selectedCategory.contains("6") ? Colors.black: Colors.white.withOpacity(0.1), // background
                                                      onPrimary:selectedCategory.contains("6") ? Colors.white:  Colors.black, // foreground
@@ -6769,6 +6028,7 @@ List<String> selectedCustom5 = <String>[];
                                                  child:   ElevatedButton(
 
                                                    style: ElevatedButton.styleFrom(
+elevation : 0.1,
 
                                                      primary: selectedCategory.contains("6 ½") ? Colors.black: Colors.white.withOpacity(0.1), // background
                                                      onPrimary:selectedCategory.contains("6 ½") ? Colors.white:  Colors.black, // foreground
@@ -6788,6 +6048,7 @@ List<String> selectedCustom5 = <String>[];
                                                  child:  ElevatedButton(
 
                                                    style: ElevatedButton.styleFrom(
+elevation : 0.1,
 
                                                      primary: selectedCategory.contains("7") ? Colors.black: Colors.white.withOpacity(0.1), // background
                                                      onPrimary:selectedCategory.contains("7") ? Colors.white:  Colors.black, // foreground
@@ -6807,6 +6068,7 @@ List<String> selectedCustom5 = <String>[];
                                                  child:   ElevatedButton(
 
                                                    style: ElevatedButton.styleFrom(
+elevation : 0.1,
 
                                                      primary: selectedCategory.contains("7 ½") ? Colors.black: Colors.white.withOpacity(0.1), // background
                                                      onPrimary:selectedCategory.contains("7 ½") ? Colors.white:  Colors.black, // foreground
@@ -6826,6 +6088,7 @@ List<String> selectedCustom5 = <String>[];
                                                child:   ElevatedButton(
 
                                                  style: ElevatedButton.styleFrom(
+elevation : 0.1,
 
                                                    primary: selectedCategory.contains("8") ? Colors.black: Colors.white.withOpacity(0.1), // background
                                                    onPrimary:selectedCategory.contains("8") ? Colors.white:  Colors.black, // foreground
@@ -6846,6 +6109,7 @@ List<String> selectedCustom5 = <String>[];
                                                child:   ElevatedButton(
 
                                                  style: ElevatedButton.styleFrom(
+elevation : 0.1,
 
                                                    primary: selectedCategory.contains("8 ½") ? Colors.black: Colors.white.withOpacity(0.1), // background
                                                    onPrimary:selectedCategory.contains("8 ½") ? Colors.white:  Colors.black, // foreground
@@ -6866,6 +6130,7 @@ List<String> selectedCustom5 = <String>[];
                                                child:   ElevatedButton(
 
                                                  style: ElevatedButton.styleFrom(
+elevation : 0.1,
 
                                                    primary: selectedCategory.contains("9") ? Colors.black: Colors.white.withOpacity(0.1), // background
                                                    onPrimary:selectedCategory.contains("9") ? Colors.white:  Colors.black, // foreground
@@ -6887,6 +6152,7 @@ List<String> selectedCustom5 = <String>[];
                                                child:   ElevatedButton(
 
                                                  style: ElevatedButton.styleFrom(
+elevation : 0.1,
 
                                                    primary: selectedCategory.contains("9 ½") ? Colors.black: Colors.white.withOpacity(0.1), // background
                                                    onPrimary:selectedCategory.contains("9 ½") ? Colors.white:  Colors.black, // foreground
@@ -6907,6 +6173,7 @@ List<String> selectedCustom5 = <String>[];
                                                child:   ElevatedButton(
 
                                                  style: ElevatedButton.styleFrom(
+elevation : 0.1,
 
                                                    primary: selectedCategory.contains("10") ? Colors.black: Colors.white.withOpacity(0.1), // background
                                                    onPrimary:selectedCategory.contains("10") ? Colors.white:  Colors.black, // foreground
@@ -6927,6 +6194,7 @@ List<String> selectedCustom5 = <String>[];
                                                child:   ElevatedButton(
 
                                                  style: ElevatedButton.styleFrom(
+elevation : 0.1,
 
                                                    primary: selectedCategory.contains("10 ½") ? Colors.black: Colors.white.withOpacity(0.1), // background
                                                    onPrimary:selectedCategory.contains("10 ½") ? Colors.white:  Colors.black, // foreground
@@ -6947,6 +6215,7 @@ List<String> selectedCustom5 = <String>[];
                                                child:   ElevatedButton(
 
                                                  style: ElevatedButton.styleFrom(
+elevation : 0.1,
 
                                                    primary: selectedCategory.contains("12") ? Colors.black: Colors.white.withOpacity(0.1), // background
                                                    onPrimary:selectedCategory.contains("12") ? Colors.white:  Colors.black, // foreground
@@ -6967,6 +6236,7 @@ List<String> selectedCustom5 = <String>[];
                                                child:   ElevatedButton(
 
                                                  style: ElevatedButton.styleFrom(
+elevation : 0.1,
 
                                                    primary: selectedCategory.contains("13") ? Colors.black: Colors.white.withOpacity(0.1), // background
                                                    onPrimary:selectedCategory.contains("13") ? Colors.white:  Colors.black, // foreground
@@ -6987,6 +6257,7 @@ List<String> selectedCustom5 = <String>[];
                                                child:   ElevatedButton(
 
                                                  style: ElevatedButton.styleFrom(
+elevation : 0.1,
 
                                                    primary: selectedCategory.contains("14") ? Colors.black: Colors.white.withOpacity(0.1), // background
                                                    onPrimary:selectedCategory.contains("14") ? Colors.white:  Colors.black, // foreground
@@ -7009,6 +6280,7 @@ List<String> selectedCustom5 = <String>[];
 
 
                                                  style: ElevatedButton.styleFrom(
+elevation : 0.1,
 
 
 
@@ -7059,6 +6331,7 @@ List<String> selectedCustom5 = <String>[];
                                                  child: ElevatedButton(
 
                                                    style: ElevatedButton.styleFrom(
+elevation : 0.1,
 
                                                      primary: selectedColor.contains("col 1") ? Colors.black: Colors.white.withOpacity(0.1), // background
                                                      onPrimary:selectedColor.contains("col 1") ? Colors.white:  Colors.black, // foreground
@@ -7078,6 +6351,7 @@ List<String> selectedCustom5 = <String>[];
                                                  child: ElevatedButton(
 
                                                    style: ElevatedButton.styleFrom(
+elevation : 0.1,
 
                                                      primary: selectedColor.contains("col 2") ? Colors.black: Colors.white.withOpacity(0.1), // background
                                                      onPrimary:selectedColor.contains("col 2") ? Colors.white:  Colors.black, // foreground
@@ -7097,6 +6371,7 @@ List<String> selectedCustom5 = <String>[];
                                                  child: ElevatedButton(
 
                                                    style: ElevatedButton.styleFrom(
+elevation : 0.1,
 
                                                      primary: selectedColor.contains("col 3") ? Colors.black: Colors.white.withOpacity(0.1), // background
                                                      onPrimary:selectedColor.contains("col 3") ? Colors.white:  Colors.black, // foreground
@@ -7116,6 +6391,7 @@ List<String> selectedCustom5 = <String>[];
                                                  child: ElevatedButton(
 
                                                    style: ElevatedButton.styleFrom(
+elevation : 0.1,
 
                                                      primary: selectedColor.contains("col 4") ? Colors.black: Colors.white.withOpacity(0.1), // background
                                                      onPrimary:selectedColor.contains("col 4") ? Colors.white:  Colors.black, // foreground
@@ -7135,6 +6411,7 @@ List<String> selectedCustom5 = <String>[];
                                                  child: ElevatedButton(
 
                                                    style: ElevatedButton.styleFrom(
+elevation : 0.1,
 
                                                      primary: selectedColor.contains("col 5") ? Colors.black: Colors.white.withOpacity(0.1), // background
                                                      onPrimary:selectedColor.contains("col 5") ? Colors.white:  Colors.black, // foreground
@@ -7154,6 +6431,7 @@ List<String> selectedCustom5 = <String>[];
                                                  child: ElevatedButton(
 
                                                    style: ElevatedButton.styleFrom(
+elevation : 0.1,
 
                                                      primary: selectedColor.contains("col 6") ? Colors.black: Colors.white.withOpacity(0.1), // background
                                                      onPrimary:selectedColor.contains("col 6") ? Colors.white:  Colors.black, // foreground
@@ -7173,6 +6451,7 @@ List<String> selectedCustom5 = <String>[];
                                                  child: ElevatedButton(
 
                                                    style: ElevatedButton.styleFrom(
+elevation : 0.1,
 
                                                      primary: selectedColor.contains("col 7") ? Colors.black: Colors.white.withOpacity(0.1), // background
                                                      onPrimary:selectedColor.contains("col 7") ? Colors.white:  Colors.black, // foreground
@@ -7192,6 +6471,7 @@ List<String> selectedCustom5 = <String>[];
                                                  child: ElevatedButton(
 
                                                    style: ElevatedButton.styleFrom(
+elevation : 0.1,
 
                                                      primary: selectedColor.contains("col 8") ? Colors.black: Colors.white.withOpacity(0.1), // background
                                                      onPrimary:selectedColor.contains("col 8") ? Colors.white:  Colors.black, // foreground
@@ -7211,6 +6491,7 @@ List<String> selectedCustom5 = <String>[];
                                                  child: ElevatedButton(
 
                                                    style: ElevatedButton.styleFrom(
+elevation : 0.1,
 
                                                      primary: selectedColor.contains("col 9") ? Colors.black: Colors.white.withOpacity(0.1), // background
                                                      onPrimary:selectedColor.contains("col 9") ? Colors.white:  Colors.black, // foreground
@@ -7230,6 +6511,7 @@ List<String> selectedCustom5 = <String>[];
                                                  child: ElevatedButton(
 
                                                    style: ElevatedButton.styleFrom(
+elevation : 0.1,
 
                                                      primary: selectedColor.contains("col 10") ? Colors.black: Colors.white.withOpacity(0.1), // background
                                                      onPrimary:selectedColor.contains("col 10") ? Colors.white:  Colors.black, // foreground
@@ -7280,7 +6562,7 @@ List<String> selectedCustom5 = <String>[];
                                                                child: CachedImage(variation1img)),
                                                            currentUser.currency == "INR"? Row(
                                                              children: [
-                                                               Text("₹ ${currencyFormatter.format(custom11inr)}",
+                                                               Text("${cf.format(custom11inr, CurrencyFormatter.inr)}",
                                                                    style: TextStyle(
                                                                      color: Colors.black,
                                                                      fontWeight: FontWeight.bold,
@@ -7290,7 +6572,7 @@ List<String> selectedCustom5 = <String>[];
                                                            ):
                                                            currentUser.currency == "EUR"?Row(
                                                              children: [
-                                                               Text("${custom11eur}  €",
+                                                               Text("${cf.format(custom11eur, CurrencyFormatter.eur)}",
                                                                    style: TextStyle(
                                                                      color: Colors.black,
                                                                      fontWeight: FontWeight.bold,
@@ -7300,7 +6582,7 @@ List<String> selectedCustom5 = <String>[];
                                                            ):
                                                            currentUser.currency == "GBP"?Row(
                                                              children: [
-                                                               Text("£ ${currencyFormatter.format(custom11gbp)}",
+                                                               Text("${cf.format(custom11gbp, CurrencyFormatter.gbp)}",
                                                                    style: TextStyle(
                                                                      color: Colors.black,
                                                                      fontWeight: FontWeight.bold,
@@ -7310,7 +6592,7 @@ List<String> selectedCustom5 = <String>[];
                                                            ):
                                                            Row(
                                                              children: [
-                                                               Text("\u0024 ${currencyFormatter.format(custom11usd)}",
+                                                               Text("${cf.format(custom11usd, CurrencyFormatter.usd)}",
                                                                    style: TextStyle(
                                                                      color: Colors.black,
                                                                      fontWeight: FontWeight.bold,
@@ -7324,11 +6606,11 @@ List<String> selectedCustom5 = <String>[];
                                                        ),
                                                      ),
                                                      ElevatedButton(
-
-                                                       style: ElevatedButton.styleFrom(
-
+                                                         style: ElevatedButton.styleFrom(
+elevation : 0.1,
+                                                                      
                                                          primary: selectedCustom1.contains("Variation 1") ? Colors.black: Colors.white.withOpacity(0.1),
-                                                         onPrimary: selectedCustom1.contains("Variation 1") ? Colors.white: Colors.black.withOpacity(0.1),
+                                                         onPrimary: selectedCustom1.contains("Variation 1") ? Colors.white: Colors.black,
 
                                                        ),
                                                        onPressed: () {
@@ -7366,7 +6648,7 @@ List<String> selectedCustom5 = <String>[];
                                                                child: CachedImage(variation2img)),
                                                            currentUser.currency == "INR"? Row(
                                                              children: [
-                                                               Text("₹ ${currencyFormatter.format(custom21inr)}",
+                                                               Text("${cf.format(custom21inr, CurrencyFormatter.inr)}",
                                                                    style: TextStyle(
                                                                      color: Colors.black,
                                                                      fontWeight: FontWeight.bold,
@@ -7376,7 +6658,7 @@ List<String> selectedCustom5 = <String>[];
                                                            ):
                                                            currentUser.currency == "EUR"?Row(
                                                              children: [
-                                                               Text("${custom21eur}  €",
+                                                               Text("${cf.format(custom21eur, CurrencyFormatter.eur)}",
                                                                    style: TextStyle(
                                                                      color: Colors.black,
                                                                      fontWeight: FontWeight.bold,
@@ -7386,7 +6668,7 @@ List<String> selectedCustom5 = <String>[];
                                                            ):
                                                            currentUser.currency == "GBP"?Row(
                                                              children: [
-                                                               Text("£ ${currencyFormatter.format(custom21gbp)}",
+                                                               Text("${cf.format(custom21gbp, CurrencyFormatter.gbp)}",
                                                                    style: TextStyle(
                                                                      color: Colors.black,
                                                                      fontWeight: FontWeight.bold,
@@ -7396,7 +6678,7 @@ List<String> selectedCustom5 = <String>[];
                                                            ):
                                                            Row(
                                                              children: [
-                                                               Text("\u0024 ${currencyFormatter.format(custom21usd)}",
+                                                               Text("${cf.format(custom21usd, CurrencyFormatter.usd)}",
                                                                    style: TextStyle(
                                                                      color: Colors.black,
                                                                      fontWeight: FontWeight.bold,
@@ -7411,9 +6693,10 @@ List<String> selectedCustom5 = <String>[];
                                                      ),
                                                      ElevatedButton(
                                                        style: ElevatedButton.styleFrom(
+elevation : 0.1,
 
                                                          primary: selectedCustom1.contains("Variation 2") ? Colors.black: Colors.white.withOpacity(0.1),
-                                                         onPrimary: selectedCustom1.contains("Variation 2") ? Colors.white: Colors.black.withOpacity(0.1),
+                                                         onPrimary: selectedCustom1.contains("Variation 2") ? Colors.white: Colors.black,
                                                        ),
                                                        onPressed: () {
                                                          selectedCustom1 =  <String>[];
@@ -7448,7 +6731,7 @@ List<String> selectedCustom5 = <String>[];
                                                                child: CachedImage(variation3img)),
                                                            currentUser.currency == "INR"? Row(
                                                              children: [
-                                                               Text("₹ ${currencyFormatter.format(custom31inr)}",
+                                                               Text("${cf.format(custom31inr, CurrencyFormatter.inr)}",
                                                                    style: TextStyle(
                                                                      color: Colors.black,
                                                                      fontWeight: FontWeight.bold,
@@ -7458,7 +6741,7 @@ List<String> selectedCustom5 = <String>[];
                                                            ):
                                                            currentUser.currency == "EUR"?Row(
                                                              children: [
-                                                               Text("${currencyFormatter.format(custom31eur)}  €",
+                                                               Text("${cf.format(custom31eur, CurrencyFormatter.eur)}",
                                                                    style: TextStyle(
                                                                      color: Colors.black,
                                                                      fontWeight: FontWeight.bold,
@@ -7468,7 +6751,7 @@ List<String> selectedCustom5 = <String>[];
                                                            ):
                                                            currentUser.currency == "GBP"?Row(
                                                              children: [
-                                                               Text("£ ${currencyFormatter.format(custom31gbp)}",
+                                                               Text("${cf.format(custom31gbp, CurrencyFormatter.gbp)}",
                                                                    style: TextStyle(
                                                                      color: Colors.black,
                                                                      fontWeight: FontWeight.bold,
@@ -7478,7 +6761,7 @@ List<String> selectedCustom5 = <String>[];
                                                            ):
                                                            Row(
                                                              children: [
-                                                               Text("\u0024 ${currencyFormatter.format(custom31usd)}",
+                                                               Text("${cf.format(custom31usd, CurrencyFormatter.usd)}",
                                                                    style: TextStyle(
                                                                      color: Colors.black,
                                                                      fontWeight: FontWeight.bold,
@@ -7494,9 +6777,10 @@ List<String> selectedCustom5 = <String>[];
                                                      ElevatedButton(
 
                                                        style: ElevatedButton.styleFrom(
+elevation : 0.1,
 
                                                          primary: selectedCustom1.contains("Variation 3") ? Colors.black: Colors.white.withOpacity(0.1),
-                                                         onPrimary: selectedCustom1.contains("Variation 3") ? Colors.white: Colors.black.withOpacity(0.1),
+                                                         onPrimary: selectedCustom1.contains("Variation 3") ? Colors.white: Colors.black,
                                                        ),
                                                        onPressed: () {
                                                          selectedCustom1 =  <String>[];
@@ -7531,7 +6815,7 @@ List<String> selectedCustom5 = <String>[];
                                                                child: CachedImage(variation4img)),
                                                            currentUser.currency == "INR"? Row(
                                                              children: [
-                                                               Text("₹ ${currencyFormatter.format(custom41inr)}",
+                                                               Text("${cf.format(custom41inr, CurrencyFormatter.inr)}",
                                                                    style: TextStyle(
                                                                      color: Colors.black,
                                                                      fontWeight: FontWeight.bold,
@@ -7541,7 +6825,7 @@ List<String> selectedCustom5 = <String>[];
                                                            ):
                                                            currentUser.currency == "EUR"?Row(
                                                              children: [
-                                                               Text("${currencyFormatter.format(custom41eur)}  €",
+                                                               Text("${cf.format(custom41eur, CurrencyFormatter.eur)}",
                                                                    style: TextStyle(
                                                                      color: Colors.black,
                                                                      fontWeight: FontWeight.bold,
@@ -7551,7 +6835,7 @@ List<String> selectedCustom5 = <String>[];
                                                            ):
                                                            currentUser.currency == "GBP"?Row(
                                                              children: [
-                                                               Text("£ ${currencyFormatter.format(custom41gbp)}",
+                                                               Text("${cf.format(custom41gbp, CurrencyFormatter.gbp)}",
                                                                    style: TextStyle(
                                                                      color: Colors.black,
                                                                      fontWeight: FontWeight.bold,
@@ -7561,7 +6845,7 @@ List<String> selectedCustom5 = <String>[];
                                                            ):
                                                            Row(
                                                              children: [
-                                                               Text("\u0024 ${currencyFormatter.format(custom41usd)}",
+                                                               Text("${cf.format(custom41usd, CurrencyFormatter.usd)}",
                                                                    style: TextStyle(
                                                                      color: Colors.black,
                                                                      fontWeight: FontWeight.bold,
@@ -7577,9 +6861,10 @@ List<String> selectedCustom5 = <String>[];
                                                      ElevatedButton(
 
                                                        style: ElevatedButton.styleFrom(
+elevation : 0.1,
 
                                                          primary: selectedCustom1.contains("Variation 4") ? Colors.black: Colors.white.withOpacity(0.1),
-                                                         onPrimary: selectedCustom1.contains("Variation 4") ? Colors.white: Colors.black.withOpacity(0.1),
+                                                         onPrimary: selectedCustom1.contains("Variation 4") ? Colors.white: Colors.black,
                                                        ),
                                                        onPressed: () {
                                                          selectedCustom1 =  <String>[];
@@ -7614,7 +6899,7 @@ List<String> selectedCustom5 = <String>[];
                                                                child: CachedImage(variation5img)),
                                                            currentUser.currency == "INR"? Row(
                                                              children: [
-                                                               Text("₹ ${currencyFormatter.format(custom51inr)}",
+                                                               Text("${cf.format(custom51inr, CurrencyFormatter.inr)}",
                                                                    style: TextStyle(
                                                                      color: Colors.black,
                                                                      fontWeight: FontWeight.bold,
@@ -7624,7 +6909,7 @@ List<String> selectedCustom5 = <String>[];
                                                            ):
                                                            currentUser.currency == "EUR"?Row(
                                                              children: [
-                                                               Text("${currencyFormatter.format(custom51eur)}  €",
+                                                               Text("${cf.format(custom51eur, CurrencyFormatter.eur)}",
                                                                    style: TextStyle(
                                                                      color: Colors.black,
                                                                      fontWeight: FontWeight.bold,
@@ -7634,7 +6919,7 @@ List<String> selectedCustom5 = <String>[];
                                                            ):
                                                            currentUser.currency == "GBP"?Row(
                                                              children: [
-                                                               Text("£ ${currencyFormatter.format(custom51gbp)}",
+                                                               Text("${cf.format(custom51gbp, CurrencyFormatter.gbp)}",
                                                                    style: TextStyle(
                                                                      color: Colors.black,
                                                                      fontWeight: FontWeight.bold,
@@ -7644,7 +6929,7 @@ List<String> selectedCustom5 = <String>[];
                                                            ):
                                                            Row(
                                                              children: [
-                                                               Text("\u0024 ${currencyFormatter.format(custom51usd)}",
+                                                               Text("${cf.format(custom51usd, CurrencyFormatter.usd)}",
                                                                    style: TextStyle(
                                                                      color: Colors.black,
                                                                      fontWeight: FontWeight.bold,
@@ -7660,9 +6945,10 @@ List<String> selectedCustom5 = <String>[];
                                                      ElevatedButton(
 
                                                        style: ElevatedButton.styleFrom(
+elevation : 0.1,
 
                                                          primary: selectedCustom1.contains("Variation 5") ? Colors.black: Colors.white.withOpacity(0.1),
-                                                         onPrimary: selectedCustom1.contains("Variation 5") ? Colors.white: Colors.black.withOpacity(0.1),
+                                                         onPrimary: selectedCustom1.contains("Variation 5") ? Colors.white: Colors.black,
                                                        ),
                                                        onPressed: () {
                                                          selectedCustom1 =  <String>[];
@@ -7698,7 +6984,7 @@ List<String> selectedCustom5 = <String>[];
                                                                child: CachedImage(variation6img)),
                                                            currentUser.currency == "INR"? Row(
                                                              children: [
-                                                               Text("₹ ${currencyFormatter.format(custom61inr)}",
+                                                               Text("${cf.format(custom61inr, CurrencyFormatter.inr)}",
                                                                    style: TextStyle(
                                                                      color: Colors.black,
                                                                      fontWeight: FontWeight.bold,
@@ -7708,7 +6994,7 @@ List<String> selectedCustom5 = <String>[];
                                                            ):
                                                            currentUser.currency == "EUR"?Row(
                                                              children: [
-                                                               Text("${currencyFormatter.format(custom61eur)}  €",
+                                                               Text("${cf.format(custom61eur, CurrencyFormatter.eur)}",
                                                                    style: TextStyle(
                                                                      color: Colors.black,
                                                                      fontWeight: FontWeight.bold,
@@ -7718,7 +7004,7 @@ List<String> selectedCustom5 = <String>[];
                                                            ):
                                                            currentUser.currency == "GBP"?Row(
                                                              children: [
-                                                               Text("£ ${currencyFormatter.format(custom61gbp)}",
+                                                               Text("${cf.format(custom61gbp, CurrencyFormatter.gbp)}",
                                                                    style: TextStyle(
                                                                      color: Colors.black,
                                                                      fontWeight: FontWeight.bold,
@@ -7728,7 +7014,7 @@ List<String> selectedCustom5 = <String>[];
                                                            ):
                                                            Row(
                                                              children: [
-                                                               Text("\u0024 ${currencyFormatter.format(custom61usd)}",
+                                                               Text("${cf.format(custom61usd, CurrencyFormatter.usd)}",
                                                                    style: TextStyle(
                                                                      color: Colors.black,
                                                                      fontWeight: FontWeight.bold,
@@ -7744,9 +7030,10 @@ List<String> selectedCustom5 = <String>[];
                                                      ElevatedButton(
 
                                                        style: ElevatedButton.styleFrom(
+elevation : 0.1,
 
                                                          primary: selectedCustom1.contains("Variation 6") ? Colors.black: Colors.white.withOpacity(0.1),
-                                                         onPrimary: selectedCustom1.contains("Variation 6") ? Colors.white: Colors.black.withOpacity(0.1),
+                                                         onPrimary: selectedCustom1.contains("Variation 6") ? Colors.white: Colors.black,
                                                        ),
                                                        onPressed: () {
                                                          selectedCustom1 =  <String>[];
@@ -7781,7 +7068,7 @@ List<String> selectedCustom5 = <String>[];
                                                                child: CachedImage(variation7img)),
                                                            currentUser.currency == "INR"? Row(
                                                              children: [
-                                                               Text("₹ ${currencyFormatter.format(custom71inr)}",
+                                                               Text("${cf.format(custom71inr, CurrencyFormatter.inr)}",
                                                                    style: TextStyle(
                                                                      color: Colors.black,
                                                                      fontWeight: FontWeight.bold,
@@ -7791,7 +7078,7 @@ List<String> selectedCustom5 = <String>[];
                                                            ):
                                                            currentUser.currency == "EUR"?Row(
                                                              children: [
-                                                               Text("${currencyFormatter.format(custom71eur)}  €",
+                                                               Text("${cf.format(custom71eur, CurrencyFormatter.eur)}",
                                                                    style: TextStyle(
                                                                      color: Colors.black,
                                                                      fontWeight: FontWeight.bold,
@@ -7801,7 +7088,7 @@ List<String> selectedCustom5 = <String>[];
                                                            ):
                                                            currentUser.currency == "GBP"?Row(
                                                              children: [
-                                                               Text("£ ${currencyFormatter.format(custom71gbp)}",
+                                                               Text("${cf.format(custom71gbp, CurrencyFormatter.gbp)}",
                                                                    style: TextStyle(
                                                                      color: Colors.black,
                                                                      fontWeight: FontWeight.bold,
@@ -7811,7 +7098,7 @@ List<String> selectedCustom5 = <String>[];
                                                            ):
                                                            Row(
                                                              children: [
-                                                               Text("\u0024 ${currencyFormatter.format(custom71usd)}",
+                                                               Text("${cf.format(custom71usd, CurrencyFormatter.usd)}",
                                                                    style: TextStyle(
                                                                      color: Colors.black,
                                                                      fontWeight: FontWeight.bold,
@@ -7827,9 +7114,10 @@ List<String> selectedCustom5 = <String>[];
                                                      ElevatedButton(
 
                                                        style: ElevatedButton.styleFrom(
+elevation : 0.1,
 
                                                          primary: selectedCustom1.contains("Variation 7") ? Colors.black: Colors.white.withOpacity(0.1),
-                                                         onPrimary: selectedCustom1.contains("Variation 7") ? Colors.white: Colors.black.withOpacity(0.1),
+                                                         onPrimary: selectedCustom1.contains("Variation 7") ? Colors.white: Colors.black,
                                                        ),
                                                        onPressed: () {
                                                          selectedCustom1 =  <String>[];
@@ -7864,7 +7152,7 @@ List<String> selectedCustom5 = <String>[];
                                                                child: CachedImage(variation8img)),
                                                            currentUser.currency == "INR"? Row(
                                                              children: [
-                                                               Text("₹ ${currencyFormatter.format(custom81inr)}",
+                                                               Text("${cf.format(custom81inr, CurrencyFormatter.inr)}",
                                                                    style: TextStyle(
                                                                      color: Colors.black,
                                                                      fontWeight: FontWeight.bold,
@@ -7874,7 +7162,7 @@ List<String> selectedCustom5 = <String>[];
                                                            ):
                                                            currentUser.currency == "EUR"?Row(
                                                              children: [
-                                                               Text("${currencyFormatter.format(custom81eur)}  €",
+                                                               Text("${cf.format(custom81eur, CurrencyFormatter.eur)}",
                                                                    style: TextStyle(
                                                                      color: Colors.black,
                                                                      fontWeight: FontWeight.bold,
@@ -7884,7 +7172,7 @@ List<String> selectedCustom5 = <String>[];
                                                            ):
                                                            currentUser.currency == "GBP"?Row(
                                                              children: [
-                                                               Text("£ ${currencyFormatter.format(custom81gbp)}",
+                                                               Text("${cf.format(custom81gbp, CurrencyFormatter.gbp)}",
                                                                    style: TextStyle(
                                                                      color: Colors.black,
                                                                      fontWeight: FontWeight.bold,
@@ -7894,7 +7182,7 @@ List<String> selectedCustom5 = <String>[];
                                                            ):
                                                            Row(
                                                              children: [
-                                                               Text("\u0024 ${currencyFormatter.format(custom81usd)}",
+                                                               Text("${cf.format(custom81usd, CurrencyFormatter.usd)}",
                                                                    style: TextStyle(
                                                                      color: Colors.black,
                                                                      fontWeight: FontWeight.bold,
@@ -7910,9 +7198,10 @@ List<String> selectedCustom5 = <String>[];
                                                      ElevatedButton(
 
                                                        style: ElevatedButton.styleFrom(
+elevation : 0.1,
 
                                                          primary: selectedCustom1.contains("Variation 8") ? Colors.black: Colors.white.withOpacity(0.1),
-                                                         onPrimary: selectedCustom1.contains("Variation 8") ? Colors.white: Colors.black.withOpacity(0.1),
+                                                         onPrimary: selectedCustom1.contains("Variation 8") ? Colors.white: Colors.black,
                                                        ),
                                                        onPressed: () {
                                                          selectedCustom1 =  <String>[];
@@ -7947,7 +7236,7 @@ List<String> selectedCustom5 = <String>[];
                                                                child: CachedImage(variation9img)),
                                                            currentUser.currency == "INR"? Row(
                                                              children: [
-                                                               Text("₹ ${currencyFormatter.format(custom91inr)}",
+                                                               Text("${cf.format(custom91inr, CurrencyFormatter.inr)}",
                                                                    style: TextStyle(
                                                                      color: Colors.black,
                                                                      fontWeight: FontWeight.bold,
@@ -7957,7 +7246,7 @@ List<String> selectedCustom5 = <String>[];
                                                            ):
                                                            currentUser.currency == "EUR"?Row(
                                                              children: [
-                                                               Text("${currencyFormatter.format(custom91eur)}  €",
+                                                               Text("${cf.format(custom91eur, CurrencyFormatter.eur)}",
                                                                    style: TextStyle(
                                                                      color: Colors.black,
                                                                      fontWeight: FontWeight.bold,
@@ -7967,7 +7256,7 @@ List<String> selectedCustom5 = <String>[];
                                                            ):
                                                            currentUser.currency == "GBP"?Row(
                                                              children: [
-                                                               Text("£ ${currencyFormatter.format(custom91gbp)}",
+                                                               Text("${cf.format(custom91gbp, CurrencyFormatter.gbp)}",
                                                                    style: TextStyle(
                                                                      color: Colors.black,
                                                                      fontWeight: FontWeight.bold,
@@ -7977,7 +7266,7 @@ List<String> selectedCustom5 = <String>[];
                                                            ):
                                                            Row(
                                                              children: [
-                                                               Text("\u0024 ${currencyFormatter.format(custom91usd)}",
+                                                               Text("${cf.format(custom91usd, CurrencyFormatter.usd)}",
                                                                    style: TextStyle(
                                                                      color: Colors.black,
                                                                      fontWeight: FontWeight.bold,
@@ -7993,9 +7282,10 @@ List<String> selectedCustom5 = <String>[];
                                                      ElevatedButton(
 
                                                        style: ElevatedButton.styleFrom(
+elevation : 0.1,
 
                                                          primary: selectedCustom1.contains("Variation 9") ? Colors.black: Colors.white.withOpacity(0.1),
-                                                         onPrimary: selectedCustom1.contains("Variation 9") ? Colors.white: Colors.black.withOpacity(0.1),
+                                                         onPrimary: selectedCustom1.contains("Variation 9") ? Colors.white: Colors.black,
                                                        ),
                                                        onPressed: () {
                                                          selectedCustom1 =  <String>[];
@@ -8029,7 +7319,7 @@ List<String> selectedCustom5 = <String>[];
                                                                child: CachedImage(variation10img)),
                                                            currentUser.currency == "INR"? Row(
                                                              children: [
-                                                               Text("₹ ${currencyFormatter.format(custom101inr)}",
+                                                               Text("${cf.format(custom101inr, CurrencyFormatter.inr)}",
                                                                    style: TextStyle(
                                                                      color: Colors.black,
                                                                      fontWeight: FontWeight.bold,
@@ -8039,7 +7329,7 @@ List<String> selectedCustom5 = <String>[];
                                                            ):
                                                            currentUser.currency == "EUR"?Row(
                                                              children: [
-                                                               Text("${currencyFormatter.format(custom101eur)}  €",
+                                                               Text("${cf.format(custom101eur, CurrencyFormatter.eur)}",
                                                                    style: TextStyle(
                                                                      color: Colors.black,
                                                                      fontWeight: FontWeight.bold,
@@ -8049,7 +7339,7 @@ List<String> selectedCustom5 = <String>[];
                                                            ):
                                                            currentUser.currency == "GBP"?Row(
                                                              children: [
-                                                               Text("£ ${currencyFormatter.format(custom101gbp)}",
+                                                               Text("${cf.format(custom101gbp, CurrencyFormatter.gbp)}",
                                                                    style: TextStyle(
                                                                      color: Colors.black,
                                                                      fontWeight: FontWeight.bold,
@@ -8059,7 +7349,7 @@ List<String> selectedCustom5 = <String>[];
                                                            ):
                                                            Row(
                                                              children: [
-                                                               Text("\u0024 ${currencyFormatter.format(custom101usd)}",
+                                                               Text("${cf.format(custom101usd, CurrencyFormatter.usd)}",
                                                                    style: TextStyle(
                                                                      color: Colors.black,
                                                                      fontWeight: FontWeight.bold,
@@ -8075,9 +7365,10 @@ List<String> selectedCustom5 = <String>[];
                                                      ElevatedButton(
 
                                                        style: ElevatedButton.styleFrom(
+elevation : 0.1,
 
                                                          primary: selectedCustom1.contains("Variation 10") ? Colors.black: Colors.white.withOpacity(0.1),
-                                                         onPrimary: selectedCustom1.contains("Variation 10") ? Colors.white: Colors.black.withOpacity(0.1),
+                                                         onPrimary: selectedCustom1.contains("Variation 10") ? Colors.white: Colors.black,
                                                        ),
                                                        onPressed: () {
                                                          selectedCustom1 =  <String>[];
@@ -10510,10 +9801,10 @@ var eur = documentSnapshot.data()['eur'];
                                                 ),
                                                 Row(
                                                   children: [
-                                                    currentUser.currency == "USD"?Text("\u0024 ${currencyFormatter.format(usd)}",):
-                                                    currentUser.currency == "INR"?Text("₹ ${currencyFormatter.format(inr)}",):
+                                                    currentUser.currency == "INR"?Text("${cf.format(inr, CurrencyFormatter.inr)}",):
                                                     currentUser.currency == "EUR"?Text("€ ${currencyFormatter.format(eur)}",):
-                                                    currentUser.currency == "GBP"?Text("£ ${currencyFormatter.format(gbp)}",):Text("\u0024 ${currencyFormatter.format(usd)}",),
+                                                    currentUser.currency == "GBP"?Text("${cf.format(gbp, CurrencyFormatter.gbp)}",):
+                                                    Text("${cf.format(usd, CurrencyFormatter.usd)}",),
 
 
                                                   ],
@@ -10706,7 +9997,7 @@ var eur = documentSnapshot.data()['eur'];
                     children: [
                       currentUser.currency == "INR"? Row(
                         children: [
-                          Text("₹ ${currencyFormatter.format(inr)}",
+                          Text("${cf.format(inr, CurrencyFormatter.inr)}",
                           style: TextStyle(
                             color: Colors.black,
                             fontWeight: FontWeight.bold,
@@ -10716,7 +10007,7 @@ var eur = documentSnapshot.data()['eur'];
                       ):
                       currentUser.currency == "EUR"?Row(
                         children: [
-                          Text("${eur}  €",
+                          Text("${cf.format(eur, CurrencyFormatter.eur)}",
                               style: TextStyle(
                                 color: Colors.black,
                                 fontWeight: FontWeight.bold,
@@ -10726,7 +10017,7 @@ var eur = documentSnapshot.data()['eur'];
                       ):
                       currentUser.currency == "GBP"?Row(
                         children: [
-                          Text("£ ${currencyFormatter.format(gbp)}",
+                          Text("${cf.format(gbp, CurrencyFormatter.gbp)}",
                               style: TextStyle(
                                 color: Colors.black,
                                 fontWeight: FontWeight.bold,
@@ -10735,7 +10026,7 @@ var eur = documentSnapshot.data()['eur'];
                         ],
                       ):Row(
                         children: [
-                          Text("\u0024 ${currencyFormatter.format(usd)}",
+                          Text("${cf.format(usd, CurrencyFormatter.usd)}",
                               style: TextStyle(
                                 color: Colors.black,
                                 fontWeight: FontWeight.bold,
@@ -10757,7 +10048,7 @@ var eur = documentSnapshot.data()['eur'];
                       ) :
                       currentUser.currency == "INR"? Row(
                         children: [
-                          Text("₹ ${currencyFormatter.format(shipcostinr)}",
+                          Text(" ${cf.format(shipcostinr, CurrencyFormatter.inr)}",
                               style: TextStyle(
                                 color: Colors.black,
                                 fontWeight: FontWeight.bold,
@@ -10767,7 +10058,7 @@ var eur = documentSnapshot.data()['eur'];
                       ):
                       currentUser.currency == "EUR"?Row(
                         children: [
-                          Text("${currencyFormatter.format(shipcosteur)}  €",
+                          Text("${cf.format(shipcostusd, CurrencyFormatter.usd)}  €",
                               style: TextStyle(
                                 color: Colors.black,
                                 fontWeight: FontWeight.bold,
@@ -10777,7 +10068,7 @@ var eur = documentSnapshot.data()['eur'];
                       ):
                       currentUser.currency == "GBP"?Row(
                         children: [
-                          Text("£ ${currencyFormatter.format(shipcostgbp)}",
+                          Text(" ${cf.format(shipcostgbp, CurrencyFormatter.gbp)}",
                               style: TextStyle(
                                 color: Colors.black,
                                 fontWeight: FontWeight.bold,
@@ -10786,7 +10077,7 @@ var eur = documentSnapshot.data()['eur'];
                         ],
                       ):Row(
                         children: [
-                          Text("\u0024 ${currencyFormatter.format(shipcostusd)}",
+                          Text("${cf.format(shipcostusd, CurrencyFormatter.usd)}",
                               style: TextStyle(
                                 color: Colors.black,
                                 fontWeight: FontWeight.bold,
@@ -10802,7 +10093,7 @@ var eur = documentSnapshot.data()['eur'];
                     children: [
                       currentUser.currency == "INR"? Row(
                         children: [
-                          Text("₹ ${currencyFormatter.format(inr)}",
+                          Text("${cf.format(inr, CurrencyFormatter.inr)}",
                               style: TextStyle(
                                 color: Colors.black,
                                 fontWeight: FontWeight.bold,
@@ -10812,7 +10103,7 @@ var eur = documentSnapshot.data()['eur'];
                       ):
                       currentUser.currency == "EUR"?Row(
                         children: [
-                          Text("${currencyFormatter.format(eur)}  €",
+                          Text("${cf.format(eur, CurrencyFormatter.eur)}",
                               style: TextStyle(
                                 color: Colors.black,
                                 fontWeight: FontWeight.bold,
@@ -10822,7 +10113,7 @@ var eur = documentSnapshot.data()['eur'];
                       ):
                       currentUser.currency == "GBP"?Row(
                         children: [
-                          Text("£ ${currencyFormatter.format(gbp)}",
+                          Text("${cf.format(gbp, CurrencyFormatter.gbp)}",
                               style: TextStyle(
                                 color: Colors.black,
                                 fontWeight: FontWeight.bold,
@@ -10831,7 +10122,7 @@ var eur = documentSnapshot.data()['eur'];
                         ],
                       ):Row(
                         children: [
-                          Text("\u0024 ${currencyFormatter.format(usd)}",
+                          Text("${cf.format(usd, CurrencyFormatter.usd)}",
                               style: TextStyle(
                                 color: Colors.black,
                                 fontWeight: FontWeight.bold,
@@ -10853,7 +10144,7 @@ var eur = documentSnapshot.data()['eur'];
                       ) :
                       currentUser.currency == "INR"? Row(
                         children: [
-                          Text("₹ ${currencyFormatter.format(shipcostinterinr)}",
+                          Text("${cf.format(shipcostinterinr, CurrencyFormatter.inr)}",
                               style: TextStyle(
                                 color: Colors.black,
                                 fontWeight: FontWeight.bold,
@@ -10863,7 +10154,7 @@ var eur = documentSnapshot.data()['eur'];
                       ):
                       currentUser.currency == "EUR"?Row(
                         children: [
-                          Text("${currencyFormatter.format(shipcostintereur)}  €",
+                          Text("${cf.format(shipcostintereur, CurrencyFormatter.eur)}",
                               style: TextStyle(
                                 color: Colors.black,
                                 fontWeight: FontWeight.bold,
@@ -10873,7 +10164,7 @@ var eur = documentSnapshot.data()['eur'];
                       ):
                       currentUser.currency == "GBP"?Row(
                         children: [
-                          Text("£ ${currencyFormatter.format(shipcostintergbp)}",
+                          Text("${cf.format(shipcostintergbp, CurrencyFormatter.gbp)}",
                               style: TextStyle(
                                 color: Colors.black,
                                 fontWeight: FontWeight.bold,
@@ -10882,7 +10173,7 @@ var eur = documentSnapshot.data()['eur'];
                         ],
                       ):Row(
                         children: [
-                          Text("\u0024 ${currencyFormatter.format(shipcostinterusd)}",
+                          Text("${cf.format(shipcostinterusd, CurrencyFormatter.usd)}",
                               style: TextStyle(
                                 color: Colors.black,
                                 fontWeight: FontWeight.bold,

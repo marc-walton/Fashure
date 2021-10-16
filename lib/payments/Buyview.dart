@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fashow/chatcached_image.dart';
+import 'package:fashow/enum/Variables.dart';
 import 'package:fashow/payments/Buynow.dart';
 import 'package:fashow/size_config.dart';
 import 'package:flutter/cupertino.dart';
@@ -8,6 +9,7 @@ import 'package:fashow/Constants.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:fashow/HomePage.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:currency_formatter/currency_formatter.dart';
 class BuyView extends StatefulWidget {
   final String prodId;
     final  String ownerId;
@@ -309,11 +311,11 @@ SizedBox(height: 8,),
                   children: [
                     Text("price:",style: TextStyle(color: kGrey,)),
                     Spacer(),
-                    currentUser.currency == "INR"?  Text( "+  ₹ ${widget.price}", ):
-                    currentUser.currency == "EUR"?Text("+  ${widget.price} €", ):
-                    currentUser.currency == "GBP"?Text("+  £ ${widget.price}", ):
+                    currentUser.currency == "INR"?  Text( "+  ${cf.format(widget.price, CurrencyFormatter.inr)}", ):
+                    currentUser.currency == "EUR"?Text("+  ${cf.format(widget.price, CurrencyFormatter.eur)}", ):
+                    currentUser.currency == "GBP"?Text("+  ${cf.format(widget.price, CurrencyFormatter.gbp)}", ):
                     Text(
-                      "+  \u0024 ${widget.price}",      )
+                      "+  ${cf.format(widget.price, CurrencyFormatter.usd)}",      )
 
                   ],
                 ),
@@ -324,11 +326,11 @@ SizedBox(height: 8,),
                   children: [
                     Text("customization:",style: TextStyle(color: kGrey,)),
                     Spacer(),
-     currentUser.currency == "INR"?  Text( "+  ₹ ${widget.customprice}", ):
-     currentUser.currency == "EUR"?Text("+  ${widget.customprice} €", ):
-     currentUser.currency == "GBP"?Text("+  £ ${widget.customprice}", ):
+     currentUser.currency == "INR"?  Text( "+  ${cf.format(widget.customprice, CurrencyFormatter.inr)}", ):
+     currentUser.currency == "EUR"?Text("+  ${cf.format(widget.customprice, CurrencyFormatter.eur)}", ):
+     currentUser.currency == "GBP"?Text("+  ${cf.format(widget.customprice, CurrencyFormatter.gbp)}", ):
      Text(
-       "+  \u0024 ${widget.customprice}",      )
+       "+  ${cf.format(widget.customprice, CurrencyFormatter.usd)}",      )
 
                   ],
                 ) ,
@@ -340,11 +342,11 @@ SizedBox(height: 8,),
                   children: [
                     Text('Total:',style: TextStyle(color: kGrey,)),
                     Spacer(),
-                    currentUser.currency == "INR"?  Text( "+  ₹ ${totalU}", ):
-                    currentUser.currency == "EUR"?Text("+  ${totalU} €", ):
-                    currentUser.currency == "GBP"?Text("+  £ ${totalU}", ):
+                    currentUser.currency == "INR"?  Text( "+  ${cf.format(totalU, CurrencyFormatter.inr)}", ):
+                    currentUser.currency == "EUR"?Text("+ ${cf.format(totalU, CurrencyFormatter.eur)}", ):
+                    currentUser.currency == "GBP"?Text("+  ${cf.format(totalU, CurrencyFormatter.gbp)}", ):
                     Text(
-                      "+  \u0024 ${totalU}",      )
+                      "+  ${cf.format(totalU, CurrencyFormatter.usd)}",      )
                   ],
                 )
               ],
@@ -385,11 +387,11 @@ shipping(){
       Text('Shipping:',style: TextStyle(color: kGrey,)),
       Spacer(),
 
-      currentUser.currency == "INR"?  Text( "+  ₹ ${widget.shipcostuser}", ):
-      currentUser.currency == "EUR"?Text("+  ${widget.shipcostuser} €", ):
-      currentUser.currency == "GBP"?Text("+  £ ${widget.shipcostuser}", ):
+      currentUser.currency == "INR"?  Text( "+  ${cf.format(widget.shipcostuser, CurrencyFormatter.inr)}", ):
+      currentUser.currency == "EUR"?Text("+  ${cf.format(widget.shipcostuser, CurrencyFormatter.eur)}", ):
+      currentUser.currency == "GBP"?Text("+  ${cf.format(widget.shipcostuser, CurrencyFormatter.gbp)}", ):
      Text(
-        "+  \u0024 ${widget.shipcostuser}",      )
+        "+  ${cf.format(widget.shipcostuser, CurrencyFormatter.usd)}",      )
     ],
   );}
   else{return
@@ -416,11 +418,11 @@ shipping(){
       children: [
         Text('shipping:',style: TextStyle(color: kGrey,)),
         Spacer(),
-        currentUser.currency == "INR"?  Text( "+  ₹ ${widget.shipcostuser}", ):
-        currentUser.currency == "EUR"?Text("+  ${widget.shipcostuser} €", ):
-        currentUser.currency == "GBP"?Text("+  £ ${widget.shipcostuser}", ):
+        currentUser.currency == "INR"?  Text( "+  ${cf.format(widget.shipcostuser, CurrencyFormatter.inr)}", ):
+        currentUser.currency == "EUR"?Text("+  ${cf.format(widget.shipcostuser, CurrencyFormatter.eur)}", ):
+        currentUser.currency == "GBP"?Text("+  ${cf.format(widget.shipcostuser, CurrencyFormatter.gbp)}", ):
         Text(
-          "+  \u0024 ${widget.shipcostuser}",      )
+          "+  ${cf.format(widget.shipcostuser, CurrencyFormatter.usd)}",      )
       ],
     );
 }

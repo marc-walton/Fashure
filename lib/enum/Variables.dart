@@ -43,11 +43,15 @@ import 'package:back_pressed/back_pressed.dart';
 import 'package:fashow/size_config.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:currency_formatter/currency_formatter.dart';
 
 // userVariationPrice =  currentUser.currency == "EUR"? custom11eur:
 // currentUser.currency == "INR"? custom11inr:
 // currentUser.currency == "GBP"? custom11gbp:
 // custom11usd;
+CurrencyFormatter cf = CurrencyFormatter();
+
+
 
 File file;
 File file1;

@@ -143,13 +143,55 @@ var userSizeQuantity;
     });
   }
   openCheckout()  {
-  if (currentUser.country == 'India') {
+  if (currentUser.currency == 'INR') {
   var options = {
   'key': key,
   'amount': "${widget.buynowamount}",
   'name': currentUser.id,
   'description': 'Payment',
     'currency': 'INR',
+
+
+    'prefill': { 'email': currentUser.email},
+  'external': {
+  'wallets': ['paytm']
+  }
+  };
+
+  try {
+  _razorpay.open(options);
+  } catch (e) {
+  debugPrint(e);
+  }
+  }
+else if (currentUser.currency == 'EUR') {
+  var options = {
+  'key': key,
+  'amount': "${widget.buynowamount}",
+  'name': currentUser.id,
+  'description': 'Payment',
+    'currency': 'EUR',
+
+
+    'prefill': { 'email': currentUser.email},
+  'external': {
+  'wallets': ['paytm']
+  }
+  };
+
+  try {
+  _razorpay.open(options);
+  } catch (e) {
+  debugPrint(e);
+  }
+  }
+else if (currentUser.currency == 'GBP') {
+  var options = {
+  'key': key,
+  'amount': "${widget.buynowamount}",
+  'name': currentUser.id,
+  'description': 'Payment',
+    'currency': 'GBP',
 
 
     'prefill': { 'email': currentUser.email},
@@ -1633,6 +1675,9 @@ subtractCustom(){
       'size':widget.usersize,
       'orderId':orderId,
       'cusId':currentUser.id,
+      'cusName':currentUser.displayName,
+      'cusImg':currentUser.photoUrl,
+
       'fulfilled':'false',
       'Accepted':'false',
       'orderStatus':'awaiting seller acceptance',
