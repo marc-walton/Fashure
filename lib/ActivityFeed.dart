@@ -831,7 +831,8 @@ else if (type == 'fav') {
             title: GestureDetector(
               onTap: () => showProfile(ParentContext,profileId: userId),
               child: RichText(
-                maxLines: 1,softWrap:false,overflow:TextOverflow.visible,                    text: TextSpan(
+                maxLines: 1,softWrap:false,overflow:TextOverflow.visible,
+                text: TextSpan(
                   style: TextStyle(
                     fontSize: 14.0,
                     color: kText,

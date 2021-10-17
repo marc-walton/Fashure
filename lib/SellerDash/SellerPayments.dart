@@ -1,6 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:currency_formatter/currency_formatter.dart';
 import 'package:fashow/Constants.dart';
 import 'package:fashow/HomePage.dart';
+import 'package:fashow/enum/Variables.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:paginate_firestore/paginate_firestore.dart';
@@ -11,57 +13,72 @@ class SellerPayments extends StatefulWidget {
 }
 
 class _SellerPaymentsState extends State<SellerPayments> {
-  df({String productname,String usd,String inr,String cny,String eur,String gbp,String prodId,String ownerId,}){
-
-    if(currentUser.country=='India'){
-      return
-        Column(
-          children: <Widget>[
-            ListTile(
-              title: Text(productname, style: TextStyle(
-                  color: kText,
-                  fontSize: 20.0,
-                  fontWeight: FontWeight.bold),),
+  df({String productname,var usd,var inr,var cny,var eur,var gbp,String prodId,String ownerId,}){
+    return
+      Column(
+        children: <Widget>[
+          ListTile(
+            title: Text(productname, style: TextStyle(
+                color: kText,
+                fontSize: 20.0,
+                fontWeight: FontWeight.bold),),
+          ),
+          currentUser.currency == "INR"? Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Row(
+              children: [
+                Text("${cf.format(inr, CurrencyFormatter.inr)}",
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 20.0,
+                    )),
+              ],
             ),
-
-            ListTile(
-              title:            Text( "₹$inr",style: TextStyle(color: kText,
-                  fontSize: 20.0,
-                  fontWeight: FontWeight.bold)),
-
+          ):
+          currentUser.currency == "EUR"?Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Row(
+              children: [
+                Text("${cf.format(eur, CurrencyFormatter.eur)}",
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 20.0,
+                    )),
+              ],
             ),
-
-
-          ],
-        );
-
-    }
-
-    else{
-      return
-        Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: <Widget>[
-            ListTile(
-              title: Text(productname, style: TextStyle(
-                  color: kText,
-                  fontSize: 20.0,
-                  fontWeight: FontWeight.bold),),
+          ):
+          currentUser.currency == "GBP"?Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Row(
+              children: [
+                Text("${cf.format(gbp, CurrencyFormatter.gbp)}",
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 20.0,
+                    )),
+              ],
             ),
-
-            ListTile(
-              title:            Text( " \u0024 $usd",style: TextStyle(color:  kText,
-                  fontSize: 20.0,
-                  fontWeight: FontWeight.bold)),
-
+          ):
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Row(
+              children: [
+                Text("${cf.format(usd, CurrencyFormatter.usd)}",
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 20.0,
+                    )),
+              ],
             ),
+          ),
 
 
-
-          ],
-        );
-
-    }
+        ],
+      );
   }
   upcoming(){
     return
@@ -78,18 +95,63 @@ isLive: true,
 
             String fulfilled = documentSnapshot.data()['fulfilled'];
             String productname = documentSnapshot.data()['productname'];
-            String inr = documentSnapshot.data()['inr'];
-            String cny = documentSnapshot.data()['cny'];
-            String usd = documentSnapshot.data()['usd'];
+            var eur = documentSnapshot.data()['eur'];
+            var usd =documentSnapshot.data()['usd'];
+            var inr =documentSnapshot.data()['inr'];
+            var gbp = documentSnapshot.data()['gbp'];
+            String size = documentSnapshot.data()['size'];
 
+            String mtoText = documentSnapshot.data()['mtoText'];
+            String color = documentSnapshot.data()['color'];
+            String variation = documentSnapshot.data()['variation'];
+            String orderStatus = documentSnapshot.data()['orderStatus'];
             return
-                Column(
+               Padding(
+                 padding: const EdgeInsets.all(8.0),
+                 child: Card(child: Column(
 
-                  children: [
-                    df(productname:productname, usd:usd,inr:inr,cny:cny, prodId:prodId, ownerId:ownerId,),
+                    children: [
+                      df(productname:productname, usd:usd,inr:inr,eur:eur,gbp:gbp, prodId:prodId, ownerId:ownerId,),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Row(
+                          children: [
+                            Text('Size:  $size',
+                              style: TextStyle(color: kText),),
+                          ],
+                        ),
+                      ),
 
-                  ],
-                );
+                      mtoText ==""? Container(): Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Row(
+                          children: [
+                            Text('Made-to-Order:  $mtoText',
+                              style: TextStyle(color: kText),),
+                          ],
+                        ),
+                      ),
+                      mtoText ==""? Container():Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Row(
+                          children: [
+                            Text('color:  $color',
+                              style: TextStyle(color: kText),),
+                          ],
+                        ),
+                      ),
+                      variation == ""? Container():Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Row(
+                          children: [
+                            Text('variation:  $variation',
+                              style: TextStyle(color: kText),),
+                          ],
+                        ),
+                      ),
+                    ],
+                  )),
+               );
 
           },
           query: FirebaseFirestore.instance.collection('Payments')
@@ -113,20 +175,115 @@ isLive: true,
             String ownerId = documentSnapshot.data()['ownerId'];
             String orderId = documentSnapshot.data()['orderId'];
             String prodId = documentSnapshot.data()['prodId'];
+            String size = documentSnapshot.data()['size'];
 
+            String mtoText = documentSnapshot.data()['mtoText'];
+            String color = documentSnapshot.data()['color'];
+            String variation = documentSnapshot.data()['variation'];
+            String orderStatus = documentSnapshot.data()['orderStatus'];
             String fulfilled = documentSnapshot.data()['fulfilled'];
             String productname = documentSnapshot.data()['productname'];
-            String inr = documentSnapshot.data()['inr'];
-            String cny = documentSnapshot.data()['cny'];
-            String usd = documentSnapshot.data()['usd'];
+            var eur = documentSnapshot.data()['eur'];
+            var usd =documentSnapshot.data()['usd'];
+            var inr =documentSnapshot.data()['inr'];
+            var gbp = documentSnapshot.data()['gbp'];
+            var commission = documentSnapshot.data()['commission'];
+            var payment = documentSnapshot.data()['payment'];
+            var paymentGateway = documentSnapshot.data()['paymentGateway'];
+
+            var conversion = documentSnapshot.data()['conversion'];
+            var commissionPercent = documentSnapshot.data()['commissionPercent'];
+
+            var paymentPercent = documentSnapshot.data()['paymentPercent'];
+            var conversionPercent = documentSnapshot.data()['conversionPercent'];
+            var total = documentSnapshot.data()['total'];
 
             return
-              Column(
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Card(
+                  child: Column(
 
-                children: [
-                  df(productname:productname, usd:usd,inr:inr,cny:cny, prodId:prodId, ownerId:ownerId,),
+                    children: [
+                      df(productname:productname, usd:usd,inr:inr,eur:eur,gbp:gbp, prodId:prodId, ownerId:ownerId,),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Row(
+                          children: [
+                            Text('Size:  $size',
+                              style: TextStyle(color: kText),),
+                          ],
+                        ),
+                      ),
 
-                ],
+                      mtoText ==""? Container(): Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Row(
+                          children: [
+                            Text('Made-to-Order:  $mtoText',
+                              style: TextStyle(color: kText),),
+                          ],
+                        ),
+                      ),
+                      mtoText ==""? Container():Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Row(
+                          children: [
+                            Text('color:  $color',
+                              style: TextStyle(color: kText),),
+                          ],
+                        ),
+                      ),
+                      variation == ""? Container():Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Row(
+                          children: [
+                            Text('variation:  $variation',
+                              style: TextStyle(color: kText),),
+                          ],
+                        ),
+                      ),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Row(
+                        children: [
+                          Text('commission($commissionPercent%):  -$commission',
+                            style: TextStyle(color: kText),),
+                        ],
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Row(
+                        children: [
+                          Text('payment gateway charges($paymentGateway-$paymentPercent%):  -$payment',
+                            style: TextStyle(color: kText),),
+                        ],
+                      ),
+                    ),
+                   Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Row(
+                        children: [
+                          Text('conversion($conversionPercent%):  -$conversion',
+                            style: TextStyle(color: kText),),
+                        ],
+                      ),
+                    ),
+                  Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Row(
+                        children: [
+                          Text('total: -$total',
+                            style: TextStyle(color: kText),),
+                        ],
+                      ),
+                    ),
+
+
+            ],
+                  ),
+                ),
               );
 
           },
@@ -175,10 +332,7 @@ isLive: true,
                   ),
                 ),
 
-                body: Container( decoration: BoxDecoration(
-                    gradient: fabGradient
-                ) ,
-                  alignment: Alignment.center,
+                body: Container( color: Cont,
                   child: RotatedBox(
                     quarterTurns: 1,
                     child: TabBarView(

@@ -72,6 +72,8 @@ submit(){
     "userProfileImg": currentUser.photoUrl,
     "read": 'false',
   });
+  fulfill =fulfill.replaceAll("D","");
+  fulfill = fulfill + "D";
 }
   @override
   Widget build(BuildContext context) {
@@ -80,10 +82,7 @@ submit(){
         backgroundColor: kPrimaryColor,
 
       ),
-        body: Container( decoration: BoxDecoration(
-            gradient: fabGradient
-        ) ,
-          alignment: Alignment.center,
+        body: Container( color: Cont,
           child: Form(
             key: _formKey,
             child: ListView(
@@ -94,42 +93,51 @@ submit(){
                   Center(child: Text('Enter Shipment tracking ID',style: TextStyle(color: kText,fontSize: 20.0)),),
                   SizedBox(height: 20.0,),
 
-                  TextFormField(
-                    style: TextStyle(color: kText),
-                    controller: courierController,
-                    decoration: InputDecoration(
-                      enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
-                      focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: TextFormField(
+                      style: TextStyle(color: kText),
+                      controller: courierController,
+                      decoration: InputDecoration(
+                        enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+                        focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
 
-                      labelText: 'Delivery provider name',labelStyle: TextStyle(color: kText),
-                      hintText: 'Delivery provider mame',
+                        labelText: 'Delivery provider name',labelStyle: TextStyle(color: kText),
+                        hintText: 'Delivery provider mame',
+                      ),
+                      textAlign: TextAlign.center,
+                      validator: (text) {
+                        if ( text.isEmpty) {
+                          return 'Delivery provider name is empty';
+                        }
+                        return null;
+                      },
                     ),
-                    textAlign: TextAlign.center,
-                    validator: (text) {
-                      if ( text.isEmpty) {
-                        return 'Delivery provider name is empty';
-                      }
-                      return null;
-                    },
                   ),
                   SizedBox(height: 20.0,),
 
-                  TextFormField(
-                    style: TextStyle(color: kText),
-                    controller: courierIdController,
-                    decoration: InputDecoration(
-                      enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
-                      focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: TextFormField(
+                      style: TextStyle(color: kText),
+                      controller: courierIdController,
+                      decoration: InputDecoration(
+                        enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+                        focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
 
-                      labelText: 'Tracking ID(optional)',labelStyle: TextStyle(color: kText),
-                      hintText: 'Tracking ID',
+                        labelText: 'Tracking ID(optional)',labelStyle: TextStyle(color: kText),
+                        hintText: 'Tracking ID',
+                      ),
+                      textAlign: TextAlign.center,
+
                     ),
-                    textAlign: TextAlign.center,
-
                   ),
 
                   Center(
-                    child: RaisedButton(
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        elevation : 0.1,
+                        primary:  Colors.black, ),
                       onPressed: () {
                         if(_formKey.currentState.validate()) {
                           // ignore: unnecessary_statements
@@ -137,7 +145,6 @@ submit(){
                           Navigator.pop(context);
                         }
                       },
-                      color: kblue,
                       child: Text('Submit',style: TextStyle(color: Colors.white)),
                     ),
                   )

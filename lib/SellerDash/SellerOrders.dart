@@ -4,6 +4,7 @@ import 'package:currency_formatter/currency_formatter.dart';
 import 'package:fashow/HomePage.dart';
 import 'package:fashow/SellerDash/orderFulfill.dart';
 import 'package:fashow/Shipping/shipEngine/ship_engine.dart';
+import 'package:fashow/chatcached_image.dart';
 import 'package:fashow/enum/Variables.dart';
 import 'package:flutter/material.dart';
 import 'package:getwidget/components/button/gf_button.dart';
@@ -24,11 +25,10 @@ class SellerOrders extends StatefulWidget {
 }
 
 class _SellerOrdersState extends State<SellerOrders> {
-String fulfill = 's';
   UpcomingOrders(){
     return  PaginateFirestore(
 isLive: true,
-        key: ValueKey<String>(fulfill),
+        key: ValueKey<String>(accept),
         itemBuilderType:
         PaginateBuilderType.listView,
         itemBuilder: (index, context, documentSnapshot)   {
@@ -39,7 +39,6 @@ isLive: true,
             String size = documentSnapshot.data()['size'];
              String cusName = documentSnapshot.data()['cusName'];
              String cusImg = documentSnapshot.data()['cusImg'];
-             
           var eur = documentSnapshot.data()['eur'];
           var usd =documentSnapshot.data()['usd'];
           var inr =documentSnapshot.data()['inr'];
@@ -63,9 +62,6 @@ bool shipmentCreated = documentSnapshot.data()['shipmentCreated'];
  String labelId = documentSnapshot.data()['labelId'];
  String TrackingNo = documentSnapshot.data()['TrackingNo'];
  String invoice = documentSnapshot.data()['invoice'];
-
-
-
           String orderId = documentSnapshot.data()['orderId'];
           String shopmediaUrl = documentSnapshot.data()['shopmediaUrl'];
 String cusId = documentSnapshot.data()['cusId'];
@@ -98,18 +94,21 @@ String productname = documentSnapshot.data()['productname'];
                       ListTile(
 
 
-                        leading: GestureDetector(
-                          onTap: () => Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => ProductScreen(
-                                prodId: prodId,
-                                userId: ownerId,
+                        leading: ClipRRect(
+                          borderRadius: BorderRadius.circular(10.0),
+                          child: GestureDetector(
+                            onTap: () => Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => ProductScreen(
+                                  prodId: prodId,
+                                  userId: ownerId,
+                                ),
                               ),
                             ),
+                            child: Container(child: CachedImage(shopmediaUrl,width: 60,)),
                           ),
-                          child: ClipRRect(
-                              borderRadius: BorderRadius.circular(20.0),child: Container(child: cachedNetworkImage(shopmediaUrl))),),
+                        ),
                         subtitle:    currentUser.currency == "INR"? Row(
                           children: [
                             Text("${cf.format(inr, CurrencyFormatter.inr)}",
@@ -150,74 +149,140 @@ String productname = documentSnapshot.data()['productname'];
                                 )),
                           ],
                         ),
-                        title:Text(productname, style: TextStyle(
-                            color:kText,
-                            fontSize: 20.0,
-                            fontWeight: FontWeight.bold),),
+                        title:RichText(
+                          maxLines: 1,softWrap:false,overflow:TextOverflow.fade,
+                          text: TextSpan(
+                              style:TextStyle(
+                                  color:kText,
+                                  fontSize: 20.0,
+                                  fontWeight: FontWeight.bold),
+                              children: [
+                                TextSpan(
+                                  text: productname,
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.bold, color: Colors.black),
+                                ),
+
+                              ]),
+                        ),
 
 
                       ),
 
-                      Row(
-                        children: [
-                          Text('Size:  $size',
-                            style: TextStyle(color: kText),),
-                        ],
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Row(
+                          children: [
+                            Text('Size:  $size',
+                              style: TextStyle(color: kText),),
+                          ],
+                        ),
                       ),
+
+          mtoText ==""? Container(): Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Row(
+                          children: [
+                            Text('Made-to-Order:  $mtoText',
+                              style: TextStyle(color: kText),),
+                          ],
+                        ),
+          ),
+                      mtoText ==""? Container():Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Row(
+                          children: [
+                            Text('color:  $color',
+                              style: TextStyle(color: kText),),
+                          ],
+                        ),
+                      ),
+          variation == ""? Container():Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Row(
+                          children: [
+                            Text('variation:  $variation',
+                              style: TextStyle(color: kText),),
+                          ],
+                        ),
+          ),
                       SizedBox(height:10.0),
-                      Row(
-                        children: [
-                          Text('Address: $cusName',
-                            style: TextStyle(color: kText),),
-                        ],
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Row(
+                          children: [
+                            Text('Address: $cusName',
+                              style: TextStyle(color: kText),),
+                          ],
+                        ),
                       ),
-                      Row(
-                        children: [
-                          Text('$Address',
-                            style: TextStyle(color: kText),),
-                        ],
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Row(
+                          children: [
+                            Text('$Address',
+                              style: TextStyle(color: kText),),
+                          ],
+                        ),
                       ),
-                      Row(
-                        children: [
-                          Text(' $city',
-                            style: TextStyle(color: kText),),
-                        ],
-                      ),
-                      Row(
-                        children: [
-                          Text('$state',
-                            style: TextStyle(color: kText),),
-                        ],
-                      ),
-                      Row(
-                        children: [
-                          Text(' $zip',
-                            style: TextStyle(color: kText),),
-                        ],
-                      ),
-                      Row(
-                        children: [
-                          Text('$code$phone',
-                            style: TextStyle(color: kText),),
-                        ],
-                      ),
-                      Row(
-                        children: [
-                          Text('$country',
-                            style: TextStyle(color: kText),),
-                        ],
-                      ),
+                      // Padding(
+                      //   padding: const EdgeInsets.all(8.0),
+                      //   child: Row(
+                      //     children: [
+                      //       Text(' $city',
+                      //         style: TextStyle(color: kText),),
+                      //     ],
+                      //   ),
+                      // ),
+                      // Padding(
+                      //   padding: const EdgeInsets.all(8.0),
+                      //   child: Row(
+                      //     children: [
+                      //       Text('$state',
+                      //         style: TextStyle(color: kText),),
+                      //     ],
+                      //   ),
+                      // ),
+                      // Padding(
+                      //   padding: const EdgeInsets.all(8.0),
+                      //   child: Row(
+                      //     children: [
+                      //       Text(' $zip',
+                      //         style: TextStyle(color: kText),),
+                      //     ],
+                      //   ),
+                      // ),
+                      // Padding(
+                      //   padding: const EdgeInsets.all(8.0),
+                      //   child: Row(
+                      //     children: [
+                      //       Text('$code$phone',
+                      //         style: TextStyle(color: kText),),
+                      //     ],
+                      //   ),
+                      // ),
+                      // Row(
+                      //   children: [
+                      //     Text('$country',
+                      //       style: TextStyle(color: kText),),
+                      //   ],
+                      // ),
 
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
                           Accepted=='false'?   Center(child: ElevatedButton(
-
+                            style: ElevatedButton.styleFrom(
+                              elevation : 0.1,
+                              primary:  Colors.black, ),
                             onPressed:(){
-                              Navigator.push(context, MaterialPageRoute(builder: (context) =>submit(orderId:orderId ,ownerId: ownerId,shopmediaUrl:shopmediaUrl,prodId:prodId,cusId:cusId)));},
+                              submit(orderId:orderId ,ownerId: ownerId,shopmediaUrl:shopmediaUrl,prodId:prodId,cusId:cusId);},
                             child:  Text('Accept order',
                               style: TextStyle(color: Colors.white),),)):Container(),
                           fulfilled=='false'?   Center(child: ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              elevation : 0.1,
+                              primary:  Colors.black, ),
                             onPressed:(){
                               Navigator.push(context, MaterialPageRoute(builder: (context) =>OrderFulfill(orderId:orderId ,ownerId: ownerId,shopmediaUrl:shopmediaUrl,prodId:prodId,cusId:cusId)));},
                             child:  Text('Fulfill order',
@@ -229,7 +294,6 @@ String productname = documentSnapshot.data()['productname'];
                     ],
                   ),
 
-                  Divider(color: kGrey,),
                 ],
 
               ),
@@ -246,13 +310,21 @@ String productname = documentSnapshot.data()['productname'];
   OrdersFulfilled(){
     return  PaginateFirestore(
 isLive: true,
+        key: ValueKey<String>(fulfill),
+
         itemBuilderType:
         PaginateBuilderType.listView,
         itemBuilder: (index, context, documentSnapshot)   {
           String ownerId = documentSnapshot.data()['ownerId'];
           String prodId = documentSnapshot.data()['prodId'];
           String fulfilled = documentSnapshot.data()['fulfilled'];
+          String shopmediaUrl = documentSnapshot.data()['shopmediaUrl'];
+          String cusId = documentSnapshot.data()['cusId'];
           String courierId = documentSnapshot.data()['courierId'];
+          String courier = documentSnapshot.data()['courier'];
+
+          String cusName = documentSnapshot.data()['cusName'];
+          String cusImg = documentSnapshot.data()['cusImg'];
           var eur = documentSnapshot.data()['eur'];
           var usd =documentSnapshot.data()['usd'];
           var inr =documentSnapshot.data()['inr'];
@@ -260,11 +332,10 @@ isLive: true,
           String Address = documentSnapshot.data()['Address'];
           String mtoText = documentSnapshot.data()['mtoText'];
           String color = documentSnapshot.data()['color'];
-         String variation = documentSnapshot.data()['variation'];
+          String variation = documentSnapshot.data()['variation'];
           String orderStatus = documentSnapshot.data()['orderStatus'];
           String size = documentSnapshot.data()['size'];
           String orderId = documentSnapshot.data()['orderId'];
-          List shopmediaUrl = documentSnapshot.data()['shopmediaUrl'];
           String productname = documentSnapshot.data()['productname'];
           return Padding(
             padding: const EdgeInsets.all(8.0),
@@ -274,14 +345,14 @@ isLive: true,
 
                 children: <Widget>[
                   GestureDetector(
-                    onTap: () => showProfile(context, profileId: currentUser.id),
+                    onTap: () => showProfile(context, profileId: cusId),
                     child: ListTile(
                       leading: CircleAvatar(
-                        backgroundImage: CachedNetworkImageProvider(currentUser.photoUrl),
+                        backgroundImage: CachedNetworkImageProvider(cusImg),
                         backgroundColor: Colors.grey,
                       ),
                       title: Text(
-                        currentUser.displayName,
+                        cusName,
                         style: TextStyle(
                           color: kText,
                           fontWeight: FontWeight.bold,
@@ -289,76 +360,167 @@ isLive: true,
                       ),
                     ),
                   ),
-                  StreamBuilder(  stream: productsRef.doc(ownerId).collection('userProducts').doc(prodId).snapshots(),
-                      builder: (context, snapshot){
-                        DocumentSnapshot ds = snapshot.data;
-
-                        String usd= ds['usd'];
-                        String inr= ds['inr'];
+                  ListTile(
 
 
+                    leading: GestureDetector(
+                      onTap: () => Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => ProductScreen(
+                            prodId: prodId,
+                            userId: ownerId,
+                          ),
+                        ),
+                      ),
+                      child: ClipRRect(
+                          borderRadius: BorderRadius.circular(20.0),child: Container(child: CachedImage(shopmediaUrl,width: 60,))),),
+                    subtitle:    currentUser.currency == "INR"? Row(
+                      children: [
+                        Text("${cf.format(inr, CurrencyFormatter.inr)}",
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 20.0,
+                            )),
+                      ],
+                    ):
+                    currentUser.currency == "EUR"?Row(
+                      children: [
+                        Text("${cf.format(eur, CurrencyFormatter.eur)}",
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 20.0,
+                            )),
+                      ],
+                    ):
+                    currentUser.currency == "GBP"?Row(
+                      children: [
+                        Text("${cf.format(gbp, CurrencyFormatter.gbp)}",
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 20.0,
+                            )),
+                      ],
+                    ):
+                    Row(
+                      children: [
+                        Text("${cf.format(usd, CurrencyFormatter.usd)}",
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 20.0,
+                            )),
+                      ],
+                    ),
+                    title:RichText(
+                      maxLines: 1,softWrap:false,overflow:TextOverflow.fade,
+                      text: TextSpan(
+                          style:TextStyle(
+                              color:kText,
+                              fontSize: 20.0,
+                              fontWeight: FontWeight.bold),
+                          children: [
+                            TextSpan(
+                              text: productname,
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold, color: Colors.black),
+                            ),
 
-                        return
-                          ListTile(
+                          ]),
+                    ),
 
 
-                            leading: GestureDetector(
-                              onTap: () => Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => ProductScreen(
-                                    prodId: prodId,
-                                    userId: ownerId,
-                                  ),
-                                ),
-                              ),
-                              child: ClipRRect(
-                                  borderRadius: BorderRadius.circular(20.0),child: Container(child: cachedNetworkImage(shopmediaUrl.first))),),
-                            subtitle: Text( "₹$inr",style: TextStyle(color: kText,
-                                fontSize: 20.0,
-                                fontWeight: FontWeight.bold)),
-                            title:Text(productname, style: TextStyle(
-                                color:kText,
-                                fontSize: 20.0,
-                                fontWeight: FontWeight.bold),),
+                  ),
 
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Row(
+                      children: [
+                        Text('Size:  $size',
+                          style: TextStyle(color: kText),),
+                      ],
+                    ),
+                  ),
 
-                          );
-                      }),
-
-                  Row(
-                    children: [
-                      Text('Size:  $size',
-                        style: TextStyle(color: kText),),
-                    ],
+                  mtoText ==""? Container(): Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Row(
+                      children: [
+                        Text('Made-to-Order:  $mtoText',
+                          style: TextStyle(color: kText),),
+                      ],
+                    ),
+                  ),
+                  mtoText ==""? Container():Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Row(
+                      children: [
+                        Text('color:  $color',
+                          style: TextStyle(color: kText),),
+                      ],
+                    ),
+                  ),
+                  variation == ""? Container():Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Row(
+                      children: [
+                        Text('variation:  $variation',
+                          style: TextStyle(color: kText),),
+                      ],
+                    ),
                   ),
                   SizedBox(height:10.0),
-                  Row(
-                    children: [
-                      Text('Address: $Address',
-                        style: TextStyle(color: kText),),
-                    ],
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Row(
+                      children: [
+                        Text('Address: $cusName',
+                          style: TextStyle(color: kText),),
+                      ],
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Row(
+                      children: [
+                        Text('$Address',
+                          style: TextStyle(color: kText),),
+                      ],
+                    ),
                   ),
                   SizedBox(height:10.0),
 
-                  Row(
-                    children: [
-                      Text('orderStatus:  $orderStatus',
-                        style: TextStyle(color: kText),),
-                    ],
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Row(
+                      children: [
+                        Text('orderStatus:  $orderStatus',
+                          style: TextStyle(color: kText),),
+                      ],
+                    ),
                   ),
                   SizedBox(height:10.0),
 
-                  Row(
-                    children: [
-                      Text('Shipment Service:  $courierId',
-                        style: TextStyle(color: kText),),
-                    ],
-                  ),Row(
-                    children: [
-                      Text('Shipment Id:  $courierId',
-                        style: TextStyle(color: kText),),
-                    ],
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Row(
+                      children: [
+                        Text('Shipment Service:  $courier',
+                          style: TextStyle(color: kText),),
+                      ],
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Row(
+                      children: [
+                        Text('Shipment Id:  $courierId',
+                          style: TextStyle(color: kText),),
+                      ],
+                    ),
                   ),
 
                 ],
@@ -379,6 +541,7 @@ isLive: true,
     update();
   }
   submit({String ownerId,String orderId,String cusId,String shopmediaUrl,String prodId,}){
+
     FirebaseFirestore.instance.collection('ordersSeller')
         .doc(ownerId)
         .collection('sellerOrder')
@@ -427,6 +590,8 @@ isLive: true,
       "userProfileImg": currentUser.photoUrl,
       "read": 'false',
     });
+    accept =accept.replaceAll("D","");
+    accept = accept + "D";
   }
 
   @override
@@ -459,10 +624,7 @@ isLive: true,
                 ),
               ),
 
-              body: Container( decoration: BoxDecoration(
-                  gradient: fabGradient
-              ) ,
-                alignment: Alignment.center,
+              body: Container( color: Cont,
                 child: RotatedBox(
                   quarterTurns: 1,
                   child: TabBarView(

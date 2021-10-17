@@ -21,7 +21,9 @@ class _SellerSettingState extends State<SellerSetting> {
             // return Container();
             // }
 
-            return Container(
+            return
+
+              Container(
               child:Column(  mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [

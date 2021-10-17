@@ -216,11 +216,21 @@ SizedBox(height: 8,),
                             borderRadius: BorderRadius.circular(15.0),
                             child: CachedImage(widget.mediaUrl,height:SizeConfig.safeBlockVertical*25,width:SizeConfig.safeBlockVertical*20, )),
                         VerticalDivider(color: Colors.grey,),
-                        Expanded(
-                          child: Text("${widget.productname}",
-                              style:TextStyle(color:kText,
-                                fontWeight: FontWeight.bold,
-                              )),
+                        RichText(
+                          maxLines: 1,softWrap:false,overflow:TextOverflow.fade,
+                          text: TextSpan(
+                              style:TextStyle(
+                                  color:kText,
+                                  fontSize: 20.0,
+                                  fontWeight: FontWeight.bold),
+                              children: [
+                                TextSpan(
+                                  text: widget.productname,
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.bold, color: Colors.black),
+                                ),
+
+                              ]),
                         ),
                       ],
                     ),

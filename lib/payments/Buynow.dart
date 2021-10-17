@@ -133,6 +133,8 @@ var userSizeQuantity;
       'gbp':widget.gbp,
 "sellerCountry": widget.country,
 "variation":widget.userCustom,
+      "mtoText": widget.mtoText??"",
+
       "size":widget.size,
       "color":widget.color,
       'fulfilled':'false',
@@ -1690,6 +1692,7 @@ subtractCustom(){
  "productname": widget.productname,
  "shopmediaUrl": widget.mediaUrl,
    "mtoText": widget.mtoText??"",
+      "variation":widget.userCustom??"",
       "color": widget.color??"",
 "shipmentCreated":false,
       'courierId': "awaiting seller fulfilment",

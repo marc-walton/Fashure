@@ -4,8 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:intl/intl.dart';
 
  Color kPrimaryColor = Colors.black;
-const Color Bappbar = Color(0xff240638);
-// const Color kPrimaryColor = Color(0xffffd194);
+ Color Cont = Colors.grey.shade200;
 const Color appbar = Colors.black26;
 const Color trans = Colors.transparent;
 const Color transwhite = Colors.white38;
@@ -43,6 +42,8 @@ String makeQuery = "make0";
 String hairQuery = "hair0";
 String choQuery = "cho0";
 String artQuery = "art0";
+String fulfill = 'fulfill';
+String accept = 'accept';
 
  final Gradient fabGradient = LinearGradient(
     colors: [ Color(0xff70e1f5),Color(0xffffd194)],

@@ -144,10 +144,7 @@ class _SellerDashState extends State<SellerDash> {
           ),
           body:
 
-          Container( decoration: BoxDecoration(
-              gradient: fabGradient
-          ) ,
-            alignment: Alignment.center,
+          Container( color: Cont,
             child: TabBarView(
                 children:<Widget> [
                   SellerOrders(),
