@@ -1,3 +1,6 @@
+import 'package:currency_formatter/currency_formatter.dart';
+import 'package:fashow/chatcached_image.dart';
+import 'package:fashow/enum/Variables.dart';
 import 'package:get/get.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fashow/invoiceview.dart';
@@ -120,9 +123,19 @@ isLive: true,
        String fulfilled = documentSnapshot.data()['fulfilled'];
 
       String productname = documentSnapshot.data()['productname'];
- String Address = documentSnapshot.data()['Address'];
-String courierId = documentSnapshot.data()['courierId'];
+      var eur = documentSnapshot.data()['eur'];
+      var usd =documentSnapshot.data()['usd'];
+      var inr =documentSnapshot.data()['inr'];
+      var gbp = documentSnapshot.data()['gbp'];
+      String Address = documentSnapshot.data()['Address'];
+      String mtoText = documentSnapshot.data()['mtoText'];
+      String color = documentSnapshot.data()['color'];
+      String variation = documentSnapshot.data()['variation'];
+      String courierId = documentSnapshot.data()['courierId'];
 String courier = documentSnapshot.data()['courier'];
+      var shipcostuser = documentSnapshot.data()['shipcostuser'];
+      var customprice = documentSnapshot.data()['customprice'];
+      var total = documentSnapshot.data()['total'];
 
       if (!documentSnapshot.exists) {
         return  Center(child: Text('No Orders',
@@ -135,58 +148,243 @@ String courier = documentSnapshot.data()['courier'];
       }
       else{    return
 
-        Column(
-          children: [
-            ListTile(
-              leading:GestureDetector(onTap:   ()=>  Navigator.push(
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Card(
+            child: Column(
+              children: [
+                ListTile(
+                  leading:GestureDetector(onTap:   ()=>  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => ProductScreen(
+                          prodId: prodId,
+                          userId: ownerId,
+                        ),)),
+                    child: ClipRRect(
+                        borderRadius: BorderRadius.circular(0.1),
+                        child: Container(child:  CachedImage(shopmediaUrl,width: 60,))),
+                  ),
+                  title: GestureDetector(onTap:   ()=>  Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => ProductScreen(
-                      prodId: prodId,
-                      userId: ownerId,
-                    ),)),
-                child: ClipRRect(
-                    borderRadius: BorderRadius.circular(15.0),
-                    child: Container(child: Image.network(shopmediaUrl),)),
-              ),
-              title: GestureDetector(onTap:   ()=>  Navigator.push(
-              context,
-              MaterialPageRoute(
-              builder: (context) => ProductScreen(
-              prodId: prodId,
-              userId: ownerId,
-              ),)),
-              child: Text(productname)),
-              subtitle: Text(orderStatus),
-              trailing: Text(size),
-            ),
-            SizedBox(height:10.0),
+                  builder: (context) => ProductScreen(
+                  prodId: prodId,
+                  userId: ownerId,
+                  ),)),
+                  child:   RichText(
+      maxLines: 1,softWrap:false,overflow:TextOverflow.fade,
+      text: TextSpan(
+      style:TextStyle(
+      color:kText,
+      fontSize: 20.0,
+      fontWeight: FontWeight.bold),
+      children: [
+      TextSpan(
+      text: productname,
+      style: TextStyle(
+      fontWeight: FontWeight.bold, color: Colors.black),
+      ),
 
-            ListTile(
-              title: Text('Address:  $Address'),
-              subtitle: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text('Shipment company: $courierId'),
-                  SizedBox(height:10.0),
+      ]),
+      ),
+      ),
+                  subtitle: Text(orderStatus),
+                  // trailing: ,
+                ),
+                SizedBox(height:10.0),
 
-                  Text('Tracking Id: $courier'),
-                  SizedBox(height:10.0),
+                ListTile(
+                  title: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                    Text('Order Id: $orderId'),
+      SizedBox(height:10.0),
+      Text('Shipment company: $courierId'),
+                      SizedBox(height:10.0),
+      Text('Tracking Id: $courier'),
+                      SizedBox(height:10.0),
+                      Text(size),
+      SizedBox(height:10.0),
+                      Text('Address:  $Address'),
+          SizedBox(height:10.0),
+                      customprice == 0? Container():Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child:
+                        currentUser.currency == "INR"? Row(
+                          children: [
+                            Text('variation:',
+                              style: TextStyle(color: kText),),Spacer(),
+                            Text(" $variation -${cf.format(customprice, CurrencyFormatter.inr)}",
+                                style: TextStyle(
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 20.0,
+                                )),
+                          ],
+                        ):
+                        currentUser.currency == "EUR"?Row(
+                          children: [
+                            Text('variation:',
+                              style: TextStyle(color: kText),),Spacer(),
+                            Text(" $variation -${cf.format(customprice, CurrencyFormatter.eur)}",
+                                style: TextStyle(
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 20.0,
+                                )),
+                          ],
+                        ):
+                        currentUser.currency == "GBP"?Row(
+                          children: [
+                            Text('variation:',
+                              style: TextStyle(color: kText),),Spacer(),
+                            Text(" $variation -${cf.format(customprice, CurrencyFormatter.gbp)}",
+                                style: TextStyle(
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 20.0,
+                                )),
+                          ],
+                        ):
+                        Row(
+                          children: [
+                            Text('variation:',
+                              style: TextStyle(color: kText),),Spacer(),
+                            Text(" $variation -${cf.format(customprice, CurrencyFormatter.usd)}",
+                                style: TextStyle(
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 20.0,
+                                )),
+                          ],
+                        ),
+                      ),
+                      SizedBox(height:10.0),
 
-                  Text('Order Id: $orderId'),
-                  SizedBox(height:10.0),
+                      shipcostuser == 0? Container():Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child:
+                        currentUser.currency == "INR"? Row(
+                          children: [
+                            Text('shipping:',
+                              style: TextStyle(color: kText),),Spacer(),
+                            Text("${cf.format(shipcostuser, CurrencyFormatter.inr)}",
+                                style: TextStyle(
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 20.0,
+                                )),
+                          ],
+                        ):
+                        currentUser.currency == "EUR"?Row(
+                          children: [
+                            Text('shipping:',
+                              style: TextStyle(color: kText),),Spacer(),
+                            Text("${cf.format(shipcostuser, CurrencyFormatter.eur)}",
+                                style: TextStyle(
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 20.0,
+                                )),
+                          ],
+                        ):
+                        currentUser.currency == "GBP"?Row(
+                          children: [
+                            Text('shipping:',
+                              style: TextStyle(color: kText),),Spacer(),
+                            Text("${cf.format(shipcostuser, CurrencyFormatter.gbp)}",
+                                style: TextStyle(
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 20.0,
+                                )),
+                          ],
+                        ):
+                        Row(
+                          children: [
+                            Text('shipping:',
+                              style: TextStyle(color: kText),),Spacer(),
+                            Text("${cf.format(shipcostuser, CurrencyFormatter.usd)}",
+                                style: TextStyle(
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 20.0,
+                                )),
+                          ],
+                        ),
+                      ),
+                      SizedBox(height:10.0),
 
-                  fulfilled=='true'?
-RaisedButton(
+                      total == 0? Container():Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child:
+                        currentUser.currency == "INR"? Row(
+                          children: [
+                            Text('total:',
+                              style: TextStyle(color: kText),),Spacer(),
+                            Text("${cf.format(total, CurrencyFormatter.inr)}",
+                                style: TextStyle(
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 20.0,
+                                )),
+                          ],
+                        ):
+                        currentUser.currency == "EUR"?Row(
+                          children: [
+                            Text('total:',
+                              style: TextStyle(color: kText),),Spacer(),
+                            Text("${cf.format(total, CurrencyFormatter.eur)}",
+                                style: TextStyle(
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 20.0,
+                                )),
+                          ],
+                        ):
+                        currentUser.currency == "GBP"?Row(
+                          children: [
+                            Text('total:',
+                              style: TextStyle(color: kText),),Spacer(),
+                            Text("${cf.format(total, CurrencyFormatter.gbp)}",
+                                style: TextStyle(
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 20.0,
+                                )),
+                          ],
+                        ):
+                        Row(
+                          children: [
+                            Text('total:',
+                              style: TextStyle(color: kText),),Spacer(),
+                            Text("${cf.format(total, CurrencyFormatter.usd)}",
+                                style: TextStyle(
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 20.0,
+                                )),
+                          ],
+                        ),
+                      ),
+
+                      fulfilled=='true'?
+ElevatedButton(
+  style: ElevatedButton.styleFrom(
+    elevation : 0.1,
+    primary:  Colors.black, ),
   onPressed:()
 
-   {Rating(fulfill:fulfilled,parentContext: context,OwnerId: ownerId,ProdId: prodId);},color:kblue,child: Text('Rate Order',style:TextStyle(color: Colors.white)),):
-                      Container(),
-                ],
-              ),
-            ),
+   {Rating(fulfill:fulfilled,parentContext: context,OwnerId: ownerId,ProdId: prodId);},child: Text('Rate Order',style:TextStyle(color: Colors.white)),):
+                          Container(),
+                    ],
+                  ),
+                ),
 
-          ],
+              ],
+            ),
+          ),
         );}
 
 
@@ -231,23 +429,39 @@ String title = documentSnapshot.data()['title'];
             )
             );
           }else{
-return  Column(
-  children: [
-    GestureDetector(
-      onTap: () {
+return  Padding(
+  padding: const EdgeInsets.all(8.0),
+  child:   GestureDetector(
+    onTap: () {
 
-        Navigator.push(
+      Navigator.push(
           context,
           MaterialPageRoute(
               builder: (context) => InvoiceView(orderId:orderId,ownerId: ownerId,)));
-        },
-      child: ListTile(
-        // leading:CachedNetworkImage(imageUrl: ds['shopmediUrl'],),
-        title: Text(title),
-        subtitle: Text(orderStatus),
+    },
+    child: Card(
+      child: Column(
+        children: [
+          ListTile(
+            // leading:CachedNetworkImage(imageUrl: ds['shopmediUrl'],),
+            title: Text(title),
+            subtitle: Text(orderStatus),
+          ),
+          ElevatedButton(
+            style: ElevatedButton.styleFrom(
+              elevation : 0.1,
+              primary:  Colors.black, ),
+            onPressed:()
+
+            {     Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => InvoiceView(orderId:orderId,ownerId: ownerId,)));},
+            child: Text('More',style:TextStyle(color: Colors.white)),)
+        ],
       ),
-    )
-  ],
+    ),
+  ),
 );}
 
 
@@ -276,10 +490,7 @@ return  Column(
       backgroundColor: kPrimaryColor,
 
       body:
-      Container( decoration: BoxDecoration(
-          gradient: fabGradient
-      ) ,
-        alignment: Alignment.center,
+      Container(color:Cont,
         child: ContainedTabBarView(
           tabs: [
             Text('Shop',style:TextStyle(color:kText)),

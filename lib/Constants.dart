@@ -44,6 +44,7 @@ String choQuery = "cho0";
 String artQuery = "art0";
 String fulfill = 'fulfill';
 String accept = 'accept';
+String full = 'full';
 
  final Gradient fabGradient = LinearGradient(
     colors: [ Color(0xff70e1f5),Color(0xffffd194)],

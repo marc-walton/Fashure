@@ -62,11 +62,7 @@ class _UploadState extends State<Upload>
     // _controller.addListener(_scrollListener); //the listener for up and down.
     super.initState();
     // _tabController = TabController(length: 2,vsync: this);
-    postsRef
-        .doc(widget.currentUser.id)
-        .collection("userPosts")
-        .doc(postId)
-        .set({});
+
   }
 
   compressImage() async {
@@ -257,7 +253,7 @@ class _UploadState extends State<Upload>
 
   Future<void> loadAssets() async {
 
-    List<Asset> resultList = List<Asset>();
+    List<Asset> resultList = <Asset>[];
     String error = 'No Error Dectected';
 //    ByteData byteData = await asset.getByteData(quality: 80);
     try {

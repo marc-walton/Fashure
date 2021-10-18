@@ -86,6 +86,8 @@ class _ServiceFulfillState extends State<ServiceFulfill> {
     });
 
   Client();
+    full =full.replaceAll("D","");
+    full = full + "D";
   }
   @override
   Widget build(BuildContext context) {
@@ -96,10 +98,7 @@ class _ServiceFulfillState extends State<ServiceFulfill> {
 
          ),
 
-        body: Container(   decoration: BoxDecoration(
-            gradient: fabGradient
-        ) ,
-          alignment: Alignment.center,
+        body: Container(
           child: Form(
             key: _formKey,
             child: ListView(
@@ -125,7 +124,10 @@ class _ServiceFulfillState extends State<ServiceFulfill> {
                   SizedBox(height: 20.0,),
 
                   Center(
-                    child: RaisedButton(
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        elevation : 0.1,
+                        primary:  Colors.black, ),
                       onPressed: () {
 
                           // ignore: unnecessary_statements
@@ -133,7 +135,6 @@ class _ServiceFulfillState extends State<ServiceFulfill> {
                           Navigator.pop(context);
 
                       },
-                      color: kblue,
                       child: Text('Submit',style: TextStyle(color: Colors.white)),
                     ),
                   )

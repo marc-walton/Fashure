@@ -1,5 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:currency_formatter/currency_formatter.dart';
 import 'package:fashow/HomePage.dart';
+import 'package:fashow/enum/Variables.dart';
 import 'package:fashow/model/adressservice.dart';
 import 'package:fashow/payments/Servicepayment.dart';
 import 'package:flutter/material.dart';
@@ -39,40 +41,96 @@ class _InvoiceViewState extends State<InvoiceView> {
 
   var rating = 0.0;
   currency({String advance,String finalpay}){
-    if(currentUser.country == 'India'){
-      Text('Advance payment: ₹$advance');
-      SizedBox( height: 8.0,);
-      Text('Payment on delivery: ₹$finalpay');
-    }
-    else if (currentUser.country == 'China'){
-      Text('Advance payment: ¥$advance');
+    return
+    currentUser.currency == "INR"? Row(
+      children: [
 
-      SizedBox( height: 8.0,);
-      Text('Payment on delivery: ¥$finalpay');
-    }
-    else if(currentUser.country=='US'){
+        Text('Advance payment:',
+          style: TextStyle(color: kText),),Spacer(),
+        Text(" ${cf.format(advance, CurrencyFormatter.inr)}",
+            style: TextStyle(
+              color: Colors.black,
+              fontWeight: FontWeight.bold,
+              fontSize: 20.0,
+            )),
 
-      Text('Advance payment: \u0024$advance');
-      SizedBox( height: 8.0,);
-      Text('Payment on delivery: \u0024$advance');
-    }
-    else if(currentUser.country=='Europe'){
-      Text('Advance payment: €$advance');
-      SizedBox( height: 8.0,);
-      Text('Payment on delivery: €$finalpay');
+        SizedBox( height: 8.0,),
+        Text('Payment on delivery:',
+          style: TextStyle(color: kText),),Spacer(),
+        Text(" ${cf.format(finalpay, CurrencyFormatter.inr)}",
+            style: TextStyle(
+              color: Colors.black,
+              fontWeight: FontWeight.bold,
+              fontSize: 20.0,
+            )),
+      ],
+    ):
+    currentUser.currency == "EUR"?Row(
+      children: [
+        Text('Advance payment:',
+          style: TextStyle(color: kText),),Spacer(),
+        Text(" ${cf.format(advance, CurrencyFormatter.eur)}",
+            style: TextStyle(
+              color: Colors.black,
+              fontWeight: FontWeight.bold,
+              fontSize: 20.0,
+            )),
 
-    }
-    else if(currentUser.country=='UK'){
-      Text('Advance payment: £$advance');
-      SizedBox( height: 8.0,);
-      Text('Payment on delivery: £$finalpay');
-    }
-    else{
+        SizedBox( height: 8.0,),
+        Text('Payment on delivery:',
+          style: TextStyle(color: kText),),Spacer(),
+        Text(" ${cf.format(finalpay, CurrencyFormatter.eur)}",
+            style: TextStyle(
+              color: Colors.black,
+              fontWeight: FontWeight.bold,
+              fontSize: 20.0,
+            )),
+      ],
+    ):
+    currentUser.currency == "GBP"?Row(
+      children: [
+        Text('Advance payment:',
+          style: TextStyle(color: kText),),Spacer(),
+        Text(" ${cf.format(advance, CurrencyFormatter.gbp)}",
+            style: TextStyle(
+              color: Colors.black,
+              fontWeight: FontWeight.bold,
+              fontSize: 20.0,
+            )),
 
-      Text('Advance payment: \u0024$advance');
-      SizedBox( height: 8.0,);
-      Text('Payment on delivery: \u0024$advance');
-    }
+        SizedBox( height: 8.0,),
+        Text('Payment on delivery:',
+          style: TextStyle(color: kText),),Spacer(),
+        Text(" ${cf.format(finalpay, CurrencyFormatter.gbp)}",
+            style: TextStyle(
+              color: Colors.black,
+              fontWeight: FontWeight.bold,
+              fontSize: 20.0,
+            )),
+      ],
+    ):
+    Row(
+      children: [
+        Text('Advance payment:',
+          style: TextStyle(color: kText),),Spacer(),
+        Text(" ${cf.format(advance, CurrencyFormatter.usd)}",
+            style: TextStyle(
+              color: Colors.black,
+              fontWeight: FontWeight.bold,
+              fontSize: 20.0,
+            )),
+
+        SizedBox( height: 8.0,),
+        Text('Payment on delivery:',
+          style: TextStyle(color: kText),),Spacer(),
+        Text(" ${cf.format(finalpay, CurrencyFormatter.usd)}",
+            style: TextStyle(
+              color: Colors.black,
+              fontWeight: FontWeight.bold,
+              fontSize: 20.0,
+            )),
+      ],
+    );
   }
   paymentbutton({String amount,String due,String custId,String cusName,String cusImg,String ownerId,String orderId}){
     //installment
@@ -201,8 +259,6 @@ class _InvoiceViewState extends State<InvoiceView> {
   }
   @override
   Widget build(BuildContext context) {
-    print(widget.orderId);
- print(widget.ownerId);
 
     return StreamBuilder(
         stream: FirebaseFirestore.instance.collection('serviceSeller')
@@ -229,10 +285,7 @@ class _InvoiceViewState extends State<InvoiceView> {
                       color: Colors.white),
                 ),
               ),),
-            body: Container( decoration: BoxDecoration(
-                gradient: fabGradient
-            ) ,
-              alignment: Alignment.center,
+            body: Container(color:Cont,
               child: ListView(
                 children: <Widget>[
                   Container(

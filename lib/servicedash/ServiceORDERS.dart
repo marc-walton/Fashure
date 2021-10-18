@@ -1,7 +1,10 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:currency_formatter/currency_formatter.dart';
 import 'package:fashow/HomePage.dart';
+import 'package:fashow/Live/Live.dart';
 import 'package:fashow/SellerDash/orderFulfill.dart';
+import 'package:fashow/enum/Variables.dart';
 import 'package:fashow/servicedash/servicefulfill.dart';
 import 'package:flutter/material.dart';
 
@@ -20,47 +23,133 @@ class _ServiceOrdersState extends State<ServiceOrders> {
   df({
     String productname,
      String des,
-
-    String usd,
-    String inr,
-    String eur,
-    String gbp,
-    String Fusd,
-    String Finr,
-    String Feur,
-    String Fgbp,
+    var usd,
+    var inr,
+    var eur,
+    var gbp,
+    var Fusd,
+    var Finr,
+    var Feur,
+    var Fgbp,
     String adavance,
     String finalp,
     String orderId,
     String ownerId,}){
+    return
     Column(
       children: <Widget>[
         ListTile(
-          title: Text(productname, style: TextStyle(
-              color: kText,
-              fontSize: 20.0,
-              fontWeight: FontWeight.bold),),
-        ),
-        ListTile(
-          title:            Text(des, style: TextStyle(
-            color: kText,
-            fontSize: 15.0,
-          ),),
+          title:RichText(
+            maxLines: 1,softWrap:false,overflow:TextOverflow.fade,
+            text: TextSpan(
+                style:TextStyle(
+                    color:kText,
+                    fontSize: 20.0,
+                    fontWeight: FontWeight.bold),
+                children: [
+                  TextSpan(
+                    text: productname,
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold, color: Colors.black),
+                  ),
+
+                ]),
+          ),
+          subtitle:  ExpandableText(
+              des
+          ),
 
         ),
+
         ListTile(
-          title:            Text( "Advance payment:₹$inr",style: TextStyle(color: kText,
-              fontSize: 20.0,
-              fontWeight: FontWeight.bold)),
+          title:
+          currentUser.currency == "INR"? Row(
+            children: [
+              Text("Advance payment:${cf.format(inr, CurrencyFormatter.inr)}",
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 20.0,
+                  )),
+            ],
+          ):
+          currentUser.currency == "EUR"?Row(
+            children: [
+              Text("Advance payment:${cf.format(eur, CurrencyFormatter.eur)}",
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 20.0,
+                  )),
+            ],
+          ):
+          currentUser.currency == "GBP"?Row(
+            children: [
+              Text("Advance payment:${cf.format(gbp, CurrencyFormatter.gbp)}",
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 20.0,
+                  )),
+            ],
+          ):
+          Row(
+            children: [
+              Text("Advance payment:${cf.format(usd, CurrencyFormatter.usd)}",
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 20.0,
+                  )),
+            ],
+          ),
+
           subtitle:  adavance == "true"? Text( "(Paid)",style: TextStyle(color:  kText,
               fontSize: 20.0,
               fontWeight: FontWeight.bold)): Text('Payment pending'),
-
         ),
         ListTile(
-          title:             Text( "Due payment:₹$Finr",style: TextStyle(color: kText,
-              fontSize: 20.0,
-              fontWeight: FontWeight.bold)),
+          title:
+          currentUser.currency == "INR"? Row(
+            children: [
+              Text("Due payment:${cf.format(Finr, CurrencyFormatter.inr)}",
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 20.0,
+                  )),
+            ],
+          ):
+          currentUser.currency == "EUR"?Row(
+            children: [
+              Text("Due payment:${cf.format(Feur, CurrencyFormatter.eur)}",
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 20.0,
+                  )),
+            ],
+          ):
+          currentUser.currency == "GBP"?Row(
+            children: [
+              Text("Due payment:${cf.format(Fgbp, CurrencyFormatter.gbp)}",
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 20.0,
+                  )),
+            ],
+          ):
+          Row(
+            children: [
+              Text("Due payment:${cf.format(Fusd, CurrencyFormatter.usd)}",
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 20.0,
+                  )),
+            ],
+          ),
           subtitle:  finalp == "true"? Text( "(Paid)",style: TextStyle(color:  kText,
               fontSize: 20.0,
               fontWeight: FontWeight.bold)): Text('Payment pending'),
@@ -73,29 +162,29 @@ class _ServiceOrdersState extends State<ServiceOrders> {
 
   }
   UpcomingOrders(){
-    return  Container( decoration: BoxDecoration(
-        gradient: fabGradient
-    ) ,
-      alignment: Alignment.center,
+    return  Container( color:Cont,
       child: PaginateFirestore(
 isLive: true,
-//    itemsPerPage: 2,
+          key: ValueKey<String>(full),
           itemBuilderType:
           PaginateBuilderType.listView,
           itemBuilder: (index, context, documentSnapshot)   {
 //        DocumentSnapshot ds = snapshot.data.docs[index];
 
-            String usd = documentSnapshot.data()['usd'];
-            String inr = documentSnapshot.data()['inr'];
-            String gbp = documentSnapshot.data()['gbp'];
-            String eur = documentSnapshot.data()['eur'];
-            String Fusd = documentSnapshot.data()['Fusd'];
-            String Finr = documentSnapshot.data()['Finr'];
-            String Fgbp = documentSnapshot.data()['Fgbp'];
-            String Feur = documentSnapshot.data()['Feur'];
+            var usd = documentSnapshot.data()['usd'];
+            var inr = documentSnapshot.data()['inr'];
+            var gbp = documentSnapshot.data()['gbp'];
+            var eur = documentSnapshot.data()['eur'];
+            var Fusd = documentSnapshot.data()['Fusd'];
+            var Finr = documentSnapshot.data()['Finr'];
+            var Fgbp = documentSnapshot.data()['Fgbp'];
+            var Feur = documentSnapshot.data()['Feur'];
 
             String ownerId = documentSnapshot.data()['ownerId'];
             String cusId = documentSnapshot.data()['cusId'];
+            String cusname = documentSnapshot.data()['cusname'];
+            String cusProfileImg = documentSnapshot.data()['cusProfileImg'];
+
             String title = documentSnapshot.data()['title'];
             String desciption = documentSnapshot.data()['description'];
             String orderId = documentSnapshot.data()['orderId'];
@@ -106,51 +195,54 @@ isLive: true,
  String fulfilled = documentSnapshot.data()['fulfilled'];
 
             return Expanded(
-              child: Column(
-                children: <Widget>[
-                  GestureDetector(
-                    onTap: () => showProfile(context, profileId: currentUser.id),
-                    child: ListTile(
-                      leading: CircleAvatar(
-                        backgroundImage: CachedNetworkImageProvider(currentUser.photoUrl),
-                        backgroundColor: Colors.grey,
-                      ),
-                      title: Text(
-                        currentUser.displayName,
-                        style: TextStyle(
-                          color:kText,
-                          fontWeight: FontWeight.bold,
+              child: Card(
+                child: Column(
+                  children: <Widget>[
+                    GestureDetector(
+                      onTap: () => showProfile(context, profileId: cusId),
+                      child: ListTile(
+                        leading: CircleAvatar(
+                          backgroundImage: CachedNetworkImageProvider(cusProfileImg),
+                          backgroundColor: Colors.grey,
+                        ),
+                        title: Text(
+                          cusname,
+                          style: TextStyle(
+                            color:kText,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                       ),
                     ),
-                  ),
-                  Divider(color: kGrey,),
-                  ListTile(
-                    leading: Text('Order Details',
-                      style: TextStyle(color: kText),),
-                  ),
+                    ListTile(
+                      leading: Text('Order Details',
+                        style: TextStyle(color: kText),),
+                    ),
 
-                  df(productname:title,
-                    des:desciption,
-                    usd:usd,inr:inr,
-                    Fusd:Fusd,Finr:Finr,Feur:Feur,Fgbp:Fgbp,
-                    adavance: advancepay,finalp: finalpay,
-                    orderId:orderId, ownerId:ownerId,),
-                  ListTile(
-                    title:                       Text('orderStatus:$orderStatus',
-                      style: TextStyle(color: kText),),
+                    df(productname:title,
+                      des:desciption,
+                      usd:usd,inr:inr,
+                      gbp:gbp,eur:eur,
+                      Fusd:Fusd,Finr:Finr,Feur:Feur,Fgbp:Fgbp,
+                      adavance: advancepay,finalp: finalpay,
+                      orderId:orderId, ownerId:ownerId,),
+                    ListTile(
+                      title:Text('orderStatus:$orderStatus',
+                        style: TextStyle(color: kText),),
 
-                  ),
+                    ),
 
-                  fulfilled=='false'  ?Center(child: RaisedButton(
-                    color: kblue,
-                    onPressed:(){
-                      Navigator.push(context, MaterialPageRoute(builder: (context) =>ServiceFulfill(ownerId: ownerId,orderId: orderId,cusId:cusId)));},
-                    child:  Text('Fulfill order',
-                      style: TextStyle(color: Colors.white),),)):Container(),
-                  Divider(color: kGrey,),
-                ],
+                    fulfilled=='false'  ?Center(child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        elevation : 0.1,
+                        primary:  Colors.black, ),
+                      onPressed:(){
+                        Navigator.push(context, MaterialPageRoute(builder: (context) =>ServiceFulfill(ownerId: ownerId,orderId: orderId,cusId:cusId)));},
+                      child:  Text('Fulfill Order',
+                        style: TextStyle(color: Colors.white),),)):Container(),
+                  ],
 
+                ),
               ),
             );
           },
@@ -163,10 +255,7 @@ isLive: true,
     );
   }
   OrdersFulfilled(){
-    return  Container( decoration: BoxDecoration(
-        gradient: fabGradient
-    ) ,
-      alignment: Alignment.center,
+    return  Container( color:Cont,
       child: PaginateFirestore(
 isLive: true,
 //    itemsPerPage: 2,
@@ -175,66 +264,70 @@ isLive: true,
           itemBuilder: (index, context, documentSnapshot)   {
 
 
-            String usd = documentSnapshot.data()['usd'];
-            String inr = documentSnapshot.data()['inr'];
-            String gbp = documentSnapshot.data()['gbp'];
-            String eur = documentSnapshot.data()['eur'];
-           String Fusd = documentSnapshot.data()['Fusd'];
-            String Finr = documentSnapshot.data()['Finr'];
-            String Fgbp = documentSnapshot.data()['Fgbp'];
-            String Feur = documentSnapshot.data()['Feur'];
+            var usd = documentSnapshot.data()['usd'];
+            var inr = documentSnapshot.data()['inr'];
+            var gbp = documentSnapshot.data()['gbp'];
+            var eur = documentSnapshot.data()['eur'];
+            var Fusd = documentSnapshot.data()['Fusd'];
+            var Finr = documentSnapshot.data()['Finr'];
+            var Fgbp = documentSnapshot.data()['Fgbp'];
+            var Feur = documentSnapshot.data()['Feur'];
+
+            String ownerId = documentSnapshot.data()['ownerId'];
+            String cusId = documentSnapshot.data()['cusId'];
+            String cusname = documentSnapshot.data()['cusname'];
+            String cusProfileImg = documentSnapshot.data()['cusProfileImg'];
 
             String orderId = documentSnapshot.data()['orderId'];
-             String ownerId = documentSnapshot.data()['ownerId'];
-
-             String cusId = documentSnapshot.data()['cusId'];
-
             String advancepay = documentSnapshot.data()['advancepay'];
             String finalpay = documentSnapshot.data()['finalpay'];
             String orderStatus = documentSnapshot.data()['orderStatus'];
             String title = documentSnapshot.data()['title'];
 String description = documentSnapshot.data()['description'];
-            return Column(
-              children: <Widget>[
-                GestureDetector(
-                  onTap: () => showProfile(context, profileId: currentUser.id),
-                  child: ListTile(
-                    leading: CircleAvatar(
-                      backgroundImage: CachedNetworkImageProvider(currentUser.photoUrl),
-                      backgroundColor: Colors.grey,
-                    ),
-                    title: Text(
-                      currentUser.displayName,
-                      style: TextStyle(
-                        color:kText,
-                        fontWeight: FontWeight.bold,
+            return Card(
+              child: Column(
+                children: <Widget>[
+                  GestureDetector(
+                    onTap: () => showProfile(context, profileId: cusId),
+                    child: ListTile(
+                      leading: CircleAvatar(
+                        backgroundImage: CachedNetworkImageProvider(cusProfileImg),
+                        backgroundColor: Colors.grey,
+                      ),
+                      title: Text(
+                        cusname,
+                        style: TextStyle(
+                          color:kText,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                     ),
                   ),
-                ),
-                Divider(color: kGrey,),
-                ListTile(
-                  leading: Text('Order Details',
-                    style: TextStyle(color: kText),),
-                ),
+                  ListTile(
+                    leading: Text('Order Details',
+                      style: TextStyle(color: kText),),
+                  ),
 
-                df(productname:title,
-                  des:description,
-                  usd:usd,inr:inr,
-                  Fusd:Fusd,Finr:Finr,Feur:Feur,Fgbp:Fgbp,
-                  adavance: advancepay, finalp: finalpay,
-                  orderId:orderId, ownerId:ownerId,),
-                ListTile(
-                  title:                       Text('orderStatus:$orderStatus',
-                    style: TextStyle(color: kText),),
+                  df(productname:title,
+                    des:description,
+                    usd:usd,inr:inr,
+                     gbp:gbp,eur:eur,
 
-                ),
+                    Fusd:Fusd,Finr:Finr,Feur:Feur,Fgbp:Fgbp,
+                    adavance: advancepay, finalp: finalpay,
+                    orderId:orderId, ownerId:ownerId,),
+                  ListTile(
+                    title:Text('orderStatus:$orderStatus',
+                      style: TextStyle(color: kText),),
 
-
+                  ),
 
 
-              ],
 
+
+                ],
+
+              ),
             );
 
           },

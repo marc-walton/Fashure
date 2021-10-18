@@ -196,7 +196,10 @@ isLive: true,
 
             var paymentPercent = documentSnapshot.data()['paymentPercent'];
             var conversionPercent = documentSnapshot.data()['conversionPercent'];
-            var total = documentSnapshot.data()['total'];
+            var totalC = documentSnapshot.data()['totalC'];
+var shipcostuser = documentSnapshot.data()['shipcostuser'];
+var customprice = documentSnapshot.data()['customprice'];
+var total = documentSnapshot.data()['total'];
 
             return
               Padding(
@@ -234,30 +237,329 @@ isLive: true,
                           ],
                         ),
                       ),
-                      variation == ""? Container():Padding(
+                      customprice == 0? Container():Padding(
                         padding: const EdgeInsets.all(8.0),
-                        child: Row(
+                        child:
+                        currentUser.currency == "INR"? Row(
                           children: [
-                            Text('variation:  $variation',
-                              style: TextStyle(color: kText),),
+                            Text('variation:',
+                              style: TextStyle(color: kText),),Spacer(),
+                            Text(" $variation -${cf.format(customprice, CurrencyFormatter.inr)}",
+                                style: TextStyle(
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 20.0,
+                                )),
+                          ],
+                        ):
+                        currentUser.currency == "EUR"?Row(
+                          children: [
+                            Text('variation:',
+                              style: TextStyle(color: kText),),Spacer(),
+                            Text(" $variation -${cf.format(customprice, CurrencyFormatter.eur)}",
+                                style: TextStyle(
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 20.0,
+                                )),
+                          ],
+                        ):
+                        currentUser.currency == "GBP"?Row(
+                          children: [
+                            Text('variation:',
+                              style: TextStyle(color: kText),),Spacer(),
+                            Text(" $variation -${cf.format(customprice, CurrencyFormatter.gbp)}",
+                                style: TextStyle(
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 20.0,
+                                )),
+                          ],
+                        ):
+                        Row(
+                          children: [
+                            Text('variation:',
+                              style: TextStyle(color: kText),),Spacer(),
+                            Text(" $variation -${cf.format(customprice, CurrencyFormatter.usd)}",
+                                style: TextStyle(
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 20.0,
+                                )),
                           ],
                         ),
                       ),
+                      shipcostuser == 0? Container():Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child:
+                        currentUser.currency == "INR"? Row(
+                          children: [
+                            Text('shipping:',
+                              style: TextStyle(color: kText),),Spacer(),
+                            Text("${cf.format(shipcostuser, CurrencyFormatter.inr)}",
+                                style: TextStyle(
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 20.0,
+                                )),
+                          ],
+                        ):
+                        currentUser.currency == "EUR"?Row(
+                          children: [
+                            Text('shipping:',
+                              style: TextStyle(color: kText),),Spacer(),
+                            Text("${cf.format(shipcostuser, CurrencyFormatter.eur)}",
+                                style: TextStyle(
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 20.0,
+                                )),
+                          ],
+                        ):
+                        currentUser.currency == "GBP"?Row(
+                          children: [
+                            Text('shipping:',
+                              style: TextStyle(color: kText),),Spacer(),
+                            Text("${cf.format(shipcostuser, CurrencyFormatter.gbp)}",
+                                style: TextStyle(
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 20.0,
+                                )),
+                          ],
+                        ):
+                        Row(
+                          children: [
+                            Text('shipping:',
+                              style: TextStyle(color: kText),),Spacer(),
+                            Text("${cf.format(shipcostuser, CurrencyFormatter.usd)}",
+                                style: TextStyle(
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 20.0,
+                                )),
+                          ],
+                        ),
+                      ),
+ total == 0? Container():Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child:
+                        currentUser.currency == "INR"? Row(
+                          children: [
+                            Text('total:',
+                              style: TextStyle(color: kText),),Spacer(),
+                            Text("${cf.format(total, CurrencyFormatter.inr)}",
+                                style: TextStyle(
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 20.0,
+                                )),
+                          ],
+                        ):
+                        currentUser.currency == "EUR"?Row(
+                          children: [
+                            Text('total:',
+                              style: TextStyle(color: kText),),Spacer(),
+                            Text("${cf.format(total, CurrencyFormatter.eur)}",
+                                style: TextStyle(
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 20.0,
+                                )),
+                          ],
+                        ):
+                        currentUser.currency == "GBP"?Row(
+                          children: [
+                            Text('total:',
+                              style: TextStyle(color: kText),),Spacer(),
+                            Text("${cf.format(total, CurrencyFormatter.gbp)}",
+                                style: TextStyle(
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 20.0,
+                                )),
+                          ],
+                        ):
+                        Row(
+                          children: [
+                            Text('total:',
+                              style: TextStyle(color: kText),),Spacer(),
+                            Text("${cf.format(total, CurrencyFormatter.usd)}",
+                                style: TextStyle(
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 20.0,
+                                )),
+                          ],
+                        ),
+                      ),
+
                     Padding(
                       padding: const EdgeInsets.all(8.0),
-                      child: Row(
+                      child:
+                      currentUser.currency == "INR"? Row(
                         children: [
-                          Text('commission($commissionPercent%):  -$commission',
-                            style: TextStyle(color: kText),),
+                          Text('commission($commissionPercent%):',
+                            style: TextStyle(color: kText),),Spacer(),
+                          Text("${cf.format(commission, CurrencyFormatter.inr)}",
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 20.0,
+                              )),
+                        ],
+                      ):
+                      currentUser.currency == "EUR"?Row(
+                        children: [
+                          Text('commission($commissionPercent%):',
+                            style: TextStyle(color: kText),),Spacer(),
+                          Text("${cf.format(commission, CurrencyFormatter.eur)}",
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 20.0,
+                              )),
+                        ],
+                      ):
+                      currentUser.currency == "GBP"?Row(
+                        children: [
+                          Text('commission($commissionPercent%):',
+                            style: TextStyle(color: kText),),Spacer(),
+                          Text("${cf.format(commission, CurrencyFormatter.gbp)}",
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 20.0,
+                              )),
+                        ],
+                      ):
+                      Row(
+                        children: [
+                          Text('commission($commissionPercent%):',
+                            style: TextStyle(color: kText),),Spacer(),
+                          Text("${cf.format(commission, CurrencyFormatter.gbp)}",
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 20.0,
+                              )),
                         ],
                       ),
                     ),
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Row(
+
                         children: [
-                          Text('payment gateway charges($paymentGateway-$paymentPercent%):  -$payment',
-                            style: TextStyle(color: kText),),
+                          currentUser.currency == "INR"? Row(
+                            children: [
+                              Column(
+                                children: [
+                                  Row(
+                                    children: [
+                                      Text('payment gateway charges:',
+                                        style: TextStyle(color: kText),),
+                                    ],
+                                  ),
+                                  Row(
+                                    children: [
+                                      Text('$paymentGateway-$paymentPercent%',
+                                        style: TextStyle(color: kText),),
+                                    ],
+                                  ),
+
+                                ],
+                              ),Spacer(),
+                              Text("${cf.format(payment, CurrencyFormatter.inr)}",
+                                  style: TextStyle(
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 20.0,
+                                  )),
+                            ],
+                          ):
+                          currentUser.currency == "EUR"?Row(
+                            children: [
+                              Column(
+                                children: [
+                                  Row(
+                                    children: [
+                                      Text('payment gateway charges:',
+                                        style: TextStyle(color: kText),),
+                                    ],
+                                  ),
+                                  Row(
+                                    children: [
+                                      Text('$paymentGateway-$paymentPercent%',
+                                        style: TextStyle(color: kText),),
+                                    ],
+                                  ),
+
+                                ],
+                              ),Spacer(),
+                              Text("${cf.format(payment, CurrencyFormatter.eur)}",
+                                  style: TextStyle(
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 20.0,
+                                  )),
+                            ],
+                          ):
+                          currentUser.currency == "GBP"?Row(
+                            children: [
+                              Column(
+                                children: [
+                                  Row(
+                                    children: [
+                                      Text('payment gateway charges:',
+                                        style: TextStyle(color: kText),),
+                                    ],
+                                  ),
+                                  Row(
+                                    children: [
+                                      Text('$paymentGateway-$paymentPercent%',
+                                        style: TextStyle(color: kText),),
+                                    ],
+                                  ),
+
+                                ],
+                              ),Spacer(),
+                              Text("${cf.format(payment, CurrencyFormatter.gbp)}",
+                                  style: TextStyle(
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 20.0,
+                                  )),
+                            ],
+                          ):
+                          Row(
+                            children: [
+                              Column(
+                                children: [
+                                  Row(
+                                    children: [
+                                      Text('payment gateway charges:',
+                                        style: TextStyle(color: kText),),
+                                    ],
+                                  ),
+                                  Row(
+                                    children: [
+                                      Text('$paymentGateway-$paymentPercent%',
+                                        style: TextStyle(color: kText),),
+                                    ],
+                                  ),
+
+                                ],
+                              ),Spacer(),
+                              Text("${cf.format(payment, CurrencyFormatter.usd)}",
+                                  style: TextStyle(
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 20.0,
+                                  )),
+                            ],
+                          ),
+
                         ],
                       ),
                     ),
@@ -265,8 +567,71 @@ isLive: true,
                       padding: const EdgeInsets.all(8.0),
                       child: Row(
                         children: [
-                          Text('conversion($conversionPercent%):  -$conversion',
+                          currentUser.currency == "INR"? Row(
+                            children: [
+                          Row(
+                          children: [
+                          Text('conversion($conversionPercent%):',
                             style: TextStyle(color: kText),),
+                        ],
+                      ),Spacer(),
+                              Text("${cf.format(conversion, CurrencyFormatter.inr)}",
+                                  style: TextStyle(
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 20.0,
+                                  )),
+                            ],
+                          ):
+                          currentUser.currency == "EUR"?Row(
+                            children: [
+                              Row(
+                                children: [
+                                  Text('conversion($conversionPercent%):',
+                                    style: TextStyle(color: kText),),
+                                ],
+                              ),Spacer(),
+                              Text("${cf.format(conversion, CurrencyFormatter.eur)}",
+                                  style: TextStyle(
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 20.0,
+                                  )),
+                            ],
+                          ):
+                          currentUser.currency == "GBP"?Row(
+                            children: [
+                              Row(
+                                children: [
+                                  Text('conversion($conversionPercent%):',
+                                    style: TextStyle(color: kText),),
+                                ],
+                              ),Spacer(),
+                              Text("${cf.format(conversion, CurrencyFormatter.gbp)}",
+                                  style: TextStyle(
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 20.0,
+                                  )),
+                            ],
+                          ):
+                          Row(
+                            children: [
+                              Row(
+                                children: [
+                                  Text('conversion($conversionPercent%):',
+                                    style: TextStyle(color: kText),),
+                                ],
+                              ),Spacer(),
+                              Text("${cf.format(conversion, CurrencyFormatter.usd)}",
+                                  style: TextStyle(
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 20.0,
+                                  )),
+                            ],
+                          ),
+
                         ],
                       ),
                     ),
@@ -274,8 +639,71 @@ isLive: true,
                       padding: const EdgeInsets.all(8.0),
                       child: Row(
                         children: [
-                          Text('total: -$total',
-                            style: TextStyle(color: kText),),
+                          currentUser.currency == "INR"? Row(
+                            children: [
+                              Row(
+                                children: [
+                                  Text('subtotal:',
+                                    style: TextStyle(color: kText),),
+                                ],
+                              ),Spacer(),
+                              Text("${cf.format(totalC, CurrencyFormatter.inr)}",
+                                  style: TextStyle(
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 20.0,
+                                  )),
+                            ],
+                          ):
+                          currentUser.currency == "EUR"?Row(
+                            children: [
+                              Row(
+                                children: [
+                                  Text('subtotal:',
+                                    style: TextStyle(color: kText),),
+                                ],
+                              ),Spacer(),
+                              Text("${cf.format(totalC, CurrencyFormatter.eur)}",
+                                  style: TextStyle(
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 20.0,
+                                  )),
+                            ],
+                          ):
+                          currentUser.currency == "GBP"?Row(
+                            children: [
+                              Row(
+                                children: [
+                                  Text('subtotal:',
+                                    style: TextStyle(color: kText),),
+                                ],
+                              ),Spacer(),
+                              Text("${cf.format(totalC, CurrencyFormatter.gbp)}",
+                                  style: TextStyle(
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 20.0,
+                                  )),
+                            ],
+                          ):
+                          Row(
+                            children: [
+                              Row(
+                                children: [
+                                  Text('subtotal:',
+                                    style: TextStyle(color: kText),),
+                                ],
+                              ),Spacer(),
+                              Text("${cf.format(totalC, CurrencyFormatter.usd)}",
+                                  style: TextStyle(
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 20.0,
+                                  )),
+                            ],
+                          ),
+
                         ],
                       ),
                     ),
