@@ -136,7 +136,7 @@ class _InvoiceViewState extends State<InvoiceView> {
     //installment
     if(widget.advancepay == 'false'||widget.finalpay == 'false'|| widget.Address == "") {
       Center(
-        child: RaisedButton(
+        child: ElevatedButton(
           onPressed: (){
             Navigator.push(context, MaterialPageRoute(builder: (context) => PaymentSer(Amount:amount,OwnerId:orderId,
               OrderId: orderId,
@@ -145,7 +145,9 @@ class _InvoiceViewState extends State<InvoiceView> {
               profileimg: cusImg,)));
 
           },
-          color: kblue,
+  style: ElevatedButton.styleFrom(
+              elevation : 0.1,
+              primary:  Colors.black, ),
           child: Text('Pay Advance',style: TextStyle(
               color: Colors.white),),
         ),
@@ -154,7 +156,7 @@ class _InvoiceViewState extends State<InvoiceView> {
     //one-time payment
     if(widget.advancepay == 'false'||widget.finalpay == 'true'|| widget.Address == "") {
       Center(
-        child: RaisedButton(
+        child: ElevatedButton(
           onPressed: (){
             Navigator.push(context, MaterialPageRoute(builder: (context) => PaymentSer(Amount:amount,OwnerId:orderId,
               OrderId: orderId,
@@ -164,7 +166,9 @@ class _InvoiceViewState extends State<InvoiceView> {
             )));
 
           },
-          color: kblue,
+  style: ElevatedButton.styleFrom(
+              elevation : 0.1,
+              primary:  Colors.black, ),
           child: Text('Pay Now',style: TextStyle(
               color: Colors.white),),
         ),
@@ -173,7 +177,7 @@ class _InvoiceViewState extends State<InvoiceView> {
     if(widget.advancepay == 'true'||widget.finalpay == 'false')
     {
       Center(
-        child: RaisedButton(
+        child: ElevatedButton(
           onPressed: (){
             Navigator.push(context, MaterialPageRoute(builder: (context) => PaymentSer(
               Amount:due,OrderId: orderId,              cusId: custId,
@@ -181,7 +185,9 @@ class _InvoiceViewState extends State<InvoiceView> {
               OwnerId: ownerId,profileimg: cusImg,username: cusName,)));
 
           },
-          color: kblue,
+  style: ElevatedButton.styleFrom(
+              elevation : 0.1,
+              primary:  Colors.black, ),
           child: Text('Pay Due',style: TextStyle(
               color: Colors.white),),
         ),

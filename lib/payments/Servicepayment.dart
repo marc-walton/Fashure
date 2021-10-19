@@ -77,7 +77,7 @@ String usd;
     _razorpay.clear();
   }
   openCheckout() async {
-    if (currentUser.country == 'India') {
+    if (currentUser.currency == 'INR') {
       var options = {
         'key': key,
         'amount': "${widget.Amount}",
@@ -95,26 +95,7 @@ String usd;
         debugPrint(e);
       }
     }
-    else if (currentUser.country == 'USA') {
-      var options = {
-        'key': key,
-        'amount': "${widget.Amount}",
-        'name': currentUser.id,
-        'currency': 'USD',
-        'description': 'Payment',
-        'prefill': { 'email': currentUser.email},
-        'external': {
-          'wallets': ['paytm']
-        }
-      };
-
-      try {
-        _razorpay.open(options);
-      } catch (e) {
-        debugPrint(e);
-      }
-    }
-    else if (currentUser.country == 'Europe') {
+    else if (currentUser.currency == 'EUR') {
       var options = {
         'key': key,
         'amount': "${widget.Amount}",
@@ -134,7 +115,7 @@ String usd;
         debugPrint(e);
       }
     }
-    else if (currentUser.country == 'UK') {
+    else if (currentUser.currency == 'GBP') {
       var options = {
         'key': key,
         'amount':"${widget.Amount}",
@@ -187,8 +168,13 @@ String usd;
       "userCountry": currentUser.country,
       'usd':widget.usd,
       'inr':widget.inr,
+       'gbp':widget.gbp,
+      'eur':widget.eur,
+
       'Fusd':widget.Fusd,
       'Finr':widget.Finr,
+'Feur':widget.Feur,
+      'Fgbp':widget.Fgbp,
 
 'title':widget.title,
       'fulfilled':'false',

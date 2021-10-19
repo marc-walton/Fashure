@@ -65,7 +65,14 @@ class _ServiceOrdersState extends State<ServiceOrders> {
           title:
           currentUser.currency == "INR"? Row(
             children: [
-              Text("Advance payment:${cf.format(inr, CurrencyFormatter.inr)}",
+              Text("Advance payment:",
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 20.0,
+                  )),
+              Spacer(),
+              Text("${cf.format(inr??0, CurrencyFormatter.inr)}",
                   style: TextStyle(
                     color: Colors.black,
                     fontWeight: FontWeight.bold,
@@ -75,33 +82,51 @@ class _ServiceOrdersState extends State<ServiceOrders> {
           ):
           currentUser.currency == "EUR"?Row(
             children: [
-              Text("Advance payment:${cf.format(eur, CurrencyFormatter.eur)}",
+              Text("Advance payment:",
                   style: TextStyle(
                     color: Colors.black,
                     fontWeight: FontWeight.bold,
                     fontSize: 20.0,
                   )),
-            ],
+              Spacer(),
+              Text("${cf.format(eur??0, CurrencyFormatter.eur)}",
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 20.0,
+                  )),                      ],
           ):
           currentUser.currency == "GBP"?Row(
             children: [
-              Text("Advance payment:${cf.format(gbp, CurrencyFormatter.gbp)}",
+              Text("Advance payment:",
                   style: TextStyle(
                     color: Colors.black,
                     fontWeight: FontWeight.bold,
                     fontSize: 20.0,
                   )),
-            ],
+              Spacer(),
+              Text("${cf.format(gbp??0, CurrencyFormatter.gbp)}",
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 20.0,
+                  )),                       ],
           ):
           Row(
             children: [
-              Text("Advance payment:${cf.format(usd, CurrencyFormatter.usd)}",
+              Text("Advance payment:",
                   style: TextStyle(
                     color: Colors.black,
                     fontWeight: FontWeight.bold,
                     fontSize: 20.0,
                   )),
-            ],
+              Spacer(),
+              Text("${cf.format(usd??0, CurrencyFormatter.usd)}",
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 20.0,
+                  )),                       ],
           ),
 
           subtitle:  adavance == "true"? Text( "(Paid)",style: TextStyle(color:  kText,
@@ -112,7 +137,14 @@ class _ServiceOrdersState extends State<ServiceOrders> {
           title:
           currentUser.currency == "INR"? Row(
             children: [
-              Text("Due payment:${cf.format(Finr, CurrencyFormatter.inr)}",
+              Text("Final Payment:",
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 20.0,
+                  )),
+              Spacer(),
+              Text("${cf.format(Finr??0, CurrencyFormatter.inr)}",
                   style: TextStyle(
                     color: Colors.black,
                     fontWeight: FontWeight.bold,
@@ -122,33 +154,51 @@ class _ServiceOrdersState extends State<ServiceOrders> {
           ):
           currentUser.currency == "EUR"?Row(
             children: [
-              Text("Due payment:${cf.format(Feur, CurrencyFormatter.eur)}",
+              Text("Final Payment:",
                   style: TextStyle(
                     color: Colors.black,
                     fontWeight: FontWeight.bold,
                     fontSize: 20.0,
                   )),
-            ],
+              Spacer(),
+              Text("${cf.format(Feur??0, CurrencyFormatter.eur)}",
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 20.0,
+                  )),                      ],
           ):
           currentUser.currency == "GBP"?Row(
             children: [
-              Text("Due payment:${cf.format(Fgbp, CurrencyFormatter.gbp)}",
+              Text("Final Payment:",
                   style: TextStyle(
                     color: Colors.black,
                     fontWeight: FontWeight.bold,
                     fontSize: 20.0,
                   )),
-            ],
+              Spacer(),
+              Text("${cf.format(Fgbp??0, CurrencyFormatter.gbp)}",
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 20.0,
+                  )),                       ],
           ):
           Row(
             children: [
-              Text("Due payment:${cf.format(Fusd, CurrencyFormatter.usd)}",
+              Text("Final Payment:",
                   style: TextStyle(
                     color: Colors.black,
                     fontWeight: FontWeight.bold,
                     fontSize: 20.0,
                   )),
-            ],
+              Spacer(),
+              Text("${cf.format(Fusd??0, CurrencyFormatter.usd)}",
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 20.0,
+                  )),                       ],
           ),
           subtitle:  finalp == "true"? Text( "(Paid)",style: TextStyle(color:  kText,
               fontSize: 20.0,
@@ -213,10 +263,6 @@ isLive: true,
                           ),
                         ),
                       ),
-                    ),
-                    ListTile(
-                      leading: Text('Order Details',
-                        style: TextStyle(color: kText),),
                     ),
 
                     df(productname:title,

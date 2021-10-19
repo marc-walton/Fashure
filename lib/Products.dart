@@ -2330,136 +2330,135 @@ this.currency,
     super.initState();
     Views();
 
-    conversion();
 
 
   }
-conversion()async {
-  isUploading = true;
-  var convertor;
-   var convertor1;
-   var convertor2;
-   var convertor3;
-   var convertor4;
-   var convertor5;
-   var convertor6;
-   var convertor7;
-   var convertor8;
-   var convertor9;
-   var convertor10;
-   var convertor11;
-
-  if (currentUser.currency == "INR"){
-    convertor = inr.toStringAsFixed(2);
-    inr = double.tryParse(convertor);
-     convertor1 = custom11inr.toStringAsFixed(2);
-    custom11inr = double.tryParse(convertor1);
-  convertor2 = custom21inr.toStringAsFixed(2);
-    custom21inr = double.tryParse(convertor2);
-  convertor3 = custom31inr.toStringAsFixed(2);
-    custom31inr = double.tryParse(convertor3);
-  convertor4 = custom41inr.toStringAsFixed(2);
-    custom41inr = double.tryParse(convertor4);
-  convertor5 = custom51inr.toStringAsFixed(2);
-    custom51inr = double.tryParse(convertor5);
-  convertor6 = custom61inr.toStringAsFixed(2);
-    custom61inr = double.tryParse(convertor6);
-  convertor7 = custom71inr.toStringAsFixed(2);
-    custom71inr = double.tryParse(convertor7);
-  convertor8 = custom81inr.toStringAsFixed(2);
-    custom81inr = double.tryParse(convertor8);
-  convertor9 = custom91inr.toStringAsFixed(2);
-    custom91inr = double.tryParse(convertor9);
-  convertor10 = custom101inr.toStringAsFixed(2);
-    custom101inr = double.tryParse(convertor10);
-  convertor11 = currentUser.country == country?shipcostinr.toStringAsFixed(2):shipcostinterinr.toStringAsFixed(2);
-    shipcostuser = double.tryParse(convertor11);
-
-  }
-  else if (currentUser.currency == "EUR"){
-    convertor = eur.toStringAsFixed(2);
-    eur = double.tryParse(convertor);
-     convertor1 = custom11eur.toStringAsFixed(2);
-    custom11eur = double.tryParse(convertor1);
-  convertor2 = custom21eur.toStringAsFixed(2);
-    custom21eur = double.tryParse(convertor2);
-  convertor3 = custom31eur.toStringAsFixed(2);
-    custom31eur = double.tryParse(convertor3);
-  convertor4 = custom41eur.toStringAsFixed(2);
-    custom41eur = double.tryParse(convertor4);
-  convertor5 = custom51eur.toStringAsFixed(2);
-    custom51eur = double.tryParse(convertor5);
-  convertor6 = custom61eur.toStringAsFixed(2);
-    custom61eur = double.tryParse(convertor6);
-  convertor7 = custom71eur.toStringAsFixed(2);
-    custom71eur = double.tryParse(convertor7);
-  convertor8 = custom81eur.toStringAsFixed(2);
-    custom81eur = double.tryParse(convertor8);
-  convertor9 = custom91eur.toStringAsFixed(2);
-    custom91eur = double.tryParse(convertor9);
-  convertor10 = custom101eur.toStringAsFixed(2);
-    custom101eur = double.tryParse(convertor10);
-  convertor11 = currentUser.country == country?shipcosteur.toStringAsFixed(2):shipcostintereur.toStringAsFixed(2);
-    shipcostuser = double.tryParse(convertor11);
-
-  }
-  else if (currentUser.currency == "GBP"){
-    convertor = gbp.toStringAsFixed(2);
-    gbp = double.tryParse(convertor);
-     convertor1 = custom11gbp.toStringAsFixed(2);
-    custom11gbp = double.tryParse(convertor1);
-  convertor2 = custom21gbp.toStringAsFixed(2);
-    custom21gbp = double.tryParse(convertor2);
-  convertor3 = custom31gbp.toStringAsFixed(2);
-    custom31gbp = double.tryParse(convertor3);
-  convertor4 = custom41gbp.toStringAsFixed(2);
-    custom41gbp = double.tryParse(convertor4);
-  convertor5 = custom51gbp.toStringAsFixed(2);
-    custom51gbp = double.tryParse(convertor5);
-  convertor6 = custom61gbp.toStringAsFixed(2);
-    custom61gbp = double.tryParse(convertor6);
-  convertor7 = custom71gbp.toStringAsFixed(2);
-    custom71gbp = double.tryParse(convertor7);
-  convertor8 = custom81gbp.toStringAsFixed(2);
-    custom81gbp = double.tryParse(convertor8);
-  convertor9 = custom91gbp.toStringAsFixed(2);
-    custom91gbp = double.tryParse(convertor9);
-  convertor10 = custom101gbp.toStringAsFixed(2);
-    custom101gbp = double.tryParse(convertor10);
-  convertor11 = currentUser.country == country?shipcostgbp.toStringAsFixed(2):shipcostintergbp.toStringAsFixed(2);
-    shipcostuser = double.tryParse(convertor11);
-
-  }
-  else{
-    convertor = usd.toStringAsFixed(2);
-    usd = double.tryParse(convertor);
-    convertor1 = custom11usd.toStringAsFixed(2);
-    custom11usd = double.tryParse(convertor1);
-    convertor2 = custom21usd.toStringAsFixed(2);
-    custom21usd = double.tryParse(convertor2);
-    convertor3 = custom31usd.toStringAsFixed(2);
-    custom31usd = double.tryParse(convertor3);
-    convertor4 = custom41usd.toStringAsFixed(2);
-    custom41usd = double.tryParse(convertor4);
-    convertor5 = custom51usd.toStringAsFixed(2);
-    custom51usd = double.tryParse(convertor5);
-    convertor6 = custom61usd.toStringAsFixed(2);
-    custom61usd = double.tryParse(convertor6);
-    convertor7 = custom71usd.toStringAsFixed(2);
-    custom71usd = double.tryParse(convertor7);
-    convertor8 = custom81usd.toStringAsFixed(2);
-    custom81usd = double.tryParse(convertor8);
-    convertor9 = custom91usd.toStringAsFixed(2);
-    custom91usd = double.tryParse(convertor9);
-    convertor10 = custom101usd.toStringAsFixed(2);
-    custom101usd = double.tryParse(convertor10);
-    convertor11 = currentUser.country == country?shipcostusd.toStringAsFixed(2):shipcostinterusd.toStringAsFixed(2);
-    shipcostuser = double.tryParse(convertor11);
-
-  }
-  isUploading = false;
-
-}
+// conversion()async {
+//   isUploading = true;
+//   var convertor;
+//    var convertor1;
+//    var convertor2;
+//    var convertor3;
+//    var convertor4;
+//    var convertor5;
+//    var convertor6;
+//    var convertor7;
+//    var convertor8;
+//    var convertor9;
+//    var convertor10;
+//    var convertor11;
+//
+//   if (currentUser.currency == "INR"){
+//     convertor = inr.toStringAsFixed(2);
+//     inr = double.tryParse(convertor);
+//      convertor1 = custom11inr.toStringAsFixed(2);
+//     custom11inr = double.tryParse(convertor1);
+//   convertor2 = custom21inr.toStringAsFixed(2);
+//     custom21inr = double.tryParse(convertor2);
+//   convertor3 = custom31inr.toStringAsFixed(2);
+//     custom31inr = double.tryParse(convertor3);
+//   convertor4 = custom41inr.toStringAsFixed(2);
+//     custom41inr = double.tryParse(convertor4);
+//   convertor5 = custom51inr.toStringAsFixed(2);
+//     custom51inr = double.tryParse(convertor5);
+//   convertor6 = custom61inr.toStringAsFixed(2);
+//     custom61inr = double.tryParse(convertor6);
+//   convertor7 = custom71inr.toStringAsFixed(2);
+//     custom71inr = double.tryParse(convertor7);
+//   convertor8 = custom81inr.toStringAsFixed(2);
+//     custom81inr = double.tryParse(convertor8);
+//   convertor9 = custom91inr.toStringAsFixed(2);
+//     custom91inr = double.tryParse(convertor9);
+//   convertor10 = custom101inr.toStringAsFixed(2);
+//     custom101inr = double.tryParse(convertor10);
+//   convertor11 = currentUser.country == country?shipcostinr.toStringAsFixed(2):shipcostinterinr.toStringAsFixed(2);
+//     shipcostuser = double.tryParse(convertor11);
+//
+//   }
+//   else if (currentUser.currency == "EUR"){
+//     convertor = eur.toStringAsFixed(2);
+//     eur = double.tryParse(convertor);
+//      convertor1 = custom11eur.toStringAsFixed(2);
+//     custom11eur = double.tryParse(convertor1);
+//   convertor2 = custom21eur.toStringAsFixed(2);
+//     custom21eur = double.tryParse(convertor2);
+//   convertor3 = custom31eur.toStringAsFixed(2);
+//     custom31eur = double.tryParse(convertor3);
+//   convertor4 = custom41eur.toStringAsFixed(2);
+//     custom41eur = double.tryParse(convertor4);
+//   convertor5 = custom51eur.toStringAsFixed(2);
+//     custom51eur = double.tryParse(convertor5);
+//   convertor6 = custom61eur.toStringAsFixed(2);
+//     custom61eur = double.tryParse(convertor6);
+//   convertor7 = custom71eur.toStringAsFixed(2);
+//     custom71eur = double.tryParse(convertor7);
+//   convertor8 = custom81eur.toStringAsFixed(2);
+//     custom81eur = double.tryParse(convertor8);
+//   convertor9 = custom91eur.toStringAsFixed(2);
+//     custom91eur = double.tryParse(convertor9);
+//   convertor10 = custom101eur.toStringAsFixed(2);
+//     custom101eur = double.tryParse(convertor10);
+//   convertor11 = currentUser.country == country?shipcosteur.toStringAsFixed(2):shipcostintereur.toStringAsFixed(2);
+//     shipcostuser = double.tryParse(convertor11);
+//
+//   }
+//   else if (currentUser.currency == "GBP"){
+//     convertor = gbp.toStringAsFixed(2);
+//     gbp = double.tryParse(convertor);
+//      convertor1 = custom11gbp.toStringAsFixed(2);
+//     custom11gbp = double.tryParse(convertor1);
+//   convertor2 = custom21gbp.toStringAsFixed(2);
+//     custom21gbp = double.tryParse(convertor2);
+//   convertor3 = custom31gbp.toStringAsFixed(2);
+//     custom31gbp = double.tryParse(convertor3);
+//   convertor4 = custom41gbp.toStringAsFixed(2);
+//     custom41gbp = double.tryParse(convertor4);
+//   convertor5 = custom51gbp.toStringAsFixed(2);
+//     custom51gbp = double.tryParse(convertor5);
+//   convertor6 = custom61gbp.toStringAsFixed(2);
+//     custom61gbp = double.tryParse(convertor6);
+//   convertor7 = custom71gbp.toStringAsFixed(2);
+//     custom71gbp = double.tryParse(convertor7);
+//   convertor8 = custom81gbp.toStringAsFixed(2);
+//     custom81gbp = double.tryParse(convertor8);
+//   convertor9 = custom91gbp.toStringAsFixed(2);
+//     custom91gbp = double.tryParse(convertor9);
+//   convertor10 = custom101gbp.toStringAsFixed(2);
+//     custom101gbp = double.tryParse(convertor10);
+//   convertor11 = currentUser.country == country?shipcostgbp.toStringAsFixed(2):shipcostintergbp.toStringAsFixed(2);
+//     shipcostuser = double.tryParse(convertor11);
+//
+//   }
+//   else{
+//     convertor = usd.toStringAsFixed(2);
+//     usd = double.tryParse(convertor);
+//     convertor1 = custom11usd.toStringAsFixed(2);
+//     custom11usd = double.tryParse(convertor1);
+//     convertor2 = custom21usd.toStringAsFixed(2);
+//     custom21usd = double.tryParse(convertor2);
+//     convertor3 = custom31usd.toStringAsFixed(2);
+//     custom31usd = double.tryParse(convertor3);
+//     convertor4 = custom41usd.toStringAsFixed(2);
+//     custom41usd = double.tryParse(convertor4);
+//     convertor5 = custom51usd.toStringAsFixed(2);
+//     custom51usd = double.tryParse(convertor5);
+//     convertor6 = custom61usd.toStringAsFixed(2);
+//     custom61usd = double.tryParse(convertor6);
+//     convertor7 = custom71usd.toStringAsFixed(2);
+//     custom71usd = double.tryParse(convertor7);
+//     convertor8 = custom81usd.toStringAsFixed(2);
+//     custom81usd = double.tryParse(convertor8);
+//     convertor9 = custom91usd.toStringAsFixed(2);
+//     custom91usd = double.tryParse(convertor9);
+//     convertor10 = custom101usd.toStringAsFixed(2);
+//     custom101usd = double.tryParse(convertor10);
+//     convertor11 = currentUser.country == country?shipcostusd.toStringAsFixed(2):shipcostinterusd.toStringAsFixed(2);
+//     shipcostuser = double.tryParse(convertor11);
+//
+//   }
+//   isUploading = false;
+//
+// }
   Views()async{
     bool isPostOwner = currentUserId == ownerId;
 

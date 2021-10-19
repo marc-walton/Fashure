@@ -500,6 +500,15 @@ Future<String> uploadImage5(imageFile) async {
  return downloadUrl;
 }
 void INRUSD() async {
+  var I;
+  var E;
+  var G;
+  var U;
+  var I1;
+  var E1;
+  var G1;
+  var U1;
+  
   setState(() {
     isUploading = true;
     advancePrice = double.tryParse(advanceController.text ?? "0.0");
@@ -521,15 +530,30 @@ void INRUSD() async {
         from: 'INR', to: 'GBP', amount: totalController.text ?? 0);
 
     setState(() {
-      INR = advancePrice ?? 0.00001;
-      USD = resultUSD.rate ?? 0.00001;
-      EUR = resultEUR.rate ?? 0.00001;
-      GBP = resultGBP.rate ?? 0.00001;
-  INRF = totalPrice ?? 0.00001;
-      USDF = resultUSDF.rate ?? 0.00001;
-      EURF = resultEURF.rate ?? 0.00001;
-      GBPF = resultGBPF.rate ?? 0.00001;
-
+      INR = advancePrice ?? 0.001;
+      USD = resultUSD.rate ?? 0.001;
+      EUR = resultEUR.rate ?? 0.001;
+      GBP = resultGBP.rate ?? 0.001;
+  INRF = totalPrice ?? 0.001;
+      USDF = resultUSDF.rate ?? 0.001;
+      EURF = resultEURF.rate ?? 0.001;
+      GBPF = resultGBPF.rate ?? 0.001;
+      I = INR.toStringAsFixed(2);
+      INR = double.tryParse(I);
+      I1 = INRF.toStringAsFixed(2);
+      INRF = double.tryParse(I1);
+      U = USD.toStringAsFixed(2);
+      USD = double.tryParse(U);
+      U1 = USDF.toStringAsFixed(2);
+      USDF = double.tryParse(U1);
+      E = EUR.toStringAsFixed(2);
+      EUR = double.tryParse(E);
+      E1 = EURF.toStringAsFixed(2);
+      EURF = double.tryParse(E1);
+      G = GBP.toStringAsFixed(2);
+      GBP = double.tryParse(G);
+      G1 = GBPF.toStringAsFixed(2);
+      GBPF = double.tryParse(G1);
     }); }
   else if(currentUser.currency == "EUR") {
     var resultUSD = await Currency.getConversion(
@@ -546,15 +570,30 @@ void INRUSD() async {
         from: 'EUR', to: 'GBP', amount: totalController.text ?? 0);
 
     setState(() {
-      INR =  resultINR.rate?? 0.00001;
-      USD = resultUSD.rate ?? 0.00001;
-      EUR = advancePrice ?? 0.00001;
-      GBP = resultGBP.rate ?? 0.00001;
-  INRF = resultINRF.rate ?? 0.00001;
-      USDF = resultUSDF.rate ?? 0.00001;
-      EURF =  totalPrice ?? 0.00001;
-      GBPF = resultGBPF.rate ?? 0.00001;
-
+      INR =  resultINR.rate?? 0.001;
+      USD = resultUSD.rate ?? 0.001;
+      EUR = advancePrice ?? 0.001;
+      GBP = resultGBP.rate ?? 0.001;
+  INRF = resultINRF.rate ?? 0.001;
+      USDF = resultUSDF.rate ?? 0.001;
+      EURF =  totalPrice ?? 0.001;
+      GBPF = resultGBPF.rate ?? 0.001;
+      I = INR.toStringAsFixed(2);
+      INR = double.tryParse(I);
+      I1 = INRF.toStringAsFixed(2);
+      INRF = double.tryParse(I1);
+      U = USD.toStringAsFixed(2);
+      USD = double.tryParse(U);
+      U1 = USDF.toStringAsFixed(2);
+      USDF = double.tryParse(U1);
+      E = EUR.toStringAsFixed(2);
+      EUR = double.tryParse(E);
+      E1 = EURF.toStringAsFixed(2);
+      EURF = double.tryParse(E1);
+      G = GBP.toStringAsFixed(2);
+      GBP = double.tryParse(G);
+      G1 = GBPF.toStringAsFixed(2);
+      GBPF = double.tryParse(G1);
     }); }
   else if(currentUser.currency == "GBP") {
     var resultUSD = await Currency.getConversion(
@@ -571,15 +610,30 @@ void INRUSD() async {
         from: 'GBP', to: 'EUR', amount: totalController.text ?? 0);
 
     setState(() {
-      INR =  resultINR.rate?? 0.00001;
-      USD = resultUSD.rate ?? 0.00001;
-      EUR = resultEUR.rate  ?? 0.00001;
-      GBP =  advancePrice ?? 0.00001;
-  INRF = resultINRF.rate ?? 0.00001;
-      USDF = resultUSDF.rate ?? 0.00001;
-      EURF =  resultEURF.rate  ?? 0.00001;
-      GBPF = totalPrice ?? 0.00001;
-
+      INR =  resultINR.rate?? 0.001;
+      USD = resultUSD.rate ?? 0.001;
+      EUR = resultEUR.rate  ?? 0.001;
+      GBP =  advancePrice ?? 0.001;
+  INRF = resultINRF.rate ?? 0.001;
+      USDF = resultUSDF.rate ?? 0.001;
+      EURF =  resultEURF.rate  ?? 0.001;
+      GBPF = totalPrice ?? 0.001;
+      I = INR.toStringAsFixed(2);
+      INR = double.tryParse(I);
+      I1 = INRF.toStringAsFixed(2);
+      INRF = double.tryParse(I1);
+      U = USD.toStringAsFixed(2);
+      USD = double.tryParse(U);
+      U1 = USDF.toStringAsFixed(2);
+      USDF = double.tryParse(U1);
+      E = EUR.toStringAsFixed(2);
+      EUR = double.tryParse(E);
+      E1 = EURF.toStringAsFixed(2);
+      EURF = double.tryParse(E1);
+      G = GBP.toStringAsFixed(2);
+      GBP = double.tryParse(G);
+      G1 = GBPF.toStringAsFixed(2);
+      GBPF = double.tryParse(G1);
     }); }
 else {
     var resultGBP = await Currency.getConversion(
@@ -596,15 +650,30 @@ else {
         from: 'USD', to: 'GBP', amount: totalController.text ?? 0);
 
     setState(() {
-      INR =  resultINR.rate?? 0.00001;
-      USD = advancePrice ?? 0.00001;
-      EUR = resultEUR.rate  ?? 0.00001;
-      GBP =   resultGBP.rate ?? 0.00001;
-  INRF = resultINRF.rate ?? 0.00001;
-      USDF = totalPrice ?? 0.00001;
-      EURF =  resultEURF.rate  ?? 0.00001;
-      GBPF = resultGBPF.rate ?? 0.00001;
-
+      INR =  resultINR.rate?? 0.001;
+      USD = advancePrice ?? 0.001;
+      EUR = resultEUR.rate  ?? 0.001;
+      GBP =   resultGBP.rate ?? 0.001;
+  INRF = resultINRF.rate ?? 0.001;
+      USDF = totalPrice ?? 0.001;
+      EURF =  resultEURF.rate  ?? 0.001;
+      GBPF = resultGBPF.rate ?? 0.001;
+      I = INR.toStringAsFixed(2);
+      INR = double.tryParse(I);
+      I1 = INRF.toStringAsFixed(2);
+      INRF = double.tryParse(I1);
+      U = USD.toStringAsFixed(2);
+      USD = double.tryParse(U);
+      U1 = USDF.toStringAsFixed(2);
+      USDF = double.tryParse(U1);
+      E = EUR.toStringAsFixed(2);
+      EUR = double.tryParse(E);
+      E1 = EURF.toStringAsFixed(2);
+      EURF = double.tryParse(E1);
+      G = GBP.toStringAsFixed(2);
+      GBP = double.tryParse(G);
+      G1 = GBPF.toStringAsFixed(2);
+      GBPF = double.tryParse(G1);
     }); }
 
 
@@ -815,7 +884,7 @@ buildSplashScreen() {
                 padding: EdgeInsets.only(top: 20.0),
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                    elevation : 0.1,
+                    elevation : 0.001,
                     primary:  Colors.black,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(8.0),
@@ -951,7 +1020,7 @@ buildUploadScreen()  {
                         margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
                         child: ElevatedButton(
                           style: ElevatedButton.styleFrom(
-                            elevation : 0.1,
+                            elevation : 0.001,
                             primary:  Colors.black, ),
                           onPressed:() async{
                             Fluttertoast.showToast(

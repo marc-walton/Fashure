@@ -1,7 +1,11 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:currency_formatter/currency_formatter.dart';
 import 'package:fashow/ActivityFeed.dart';
 import 'package:fashow/HomePage.dart';
+import 'package:fashow/chatcached_image.dart';
+import 'package:fashow/enum/Variables.dart';
 import 'package:flutter_currencies_tracker/flutter_currencies_tracker.dart';
 import 'package:fashow/payments/Servicepayment.dart';
 import 'package:fashow/user.dart';
@@ -9,10 +13,14 @@ import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'package:fashow/Constants.dart';
 import 'package:fashow/progress.dart';
+import 'package:photo_view/photo_view.dart';
 import 'package:uuid/uuid.dart';
 import 'package:smooth_star_rating/smooth_star_rating.dart';
 class Invoice extends StatefulWidget {
   final String ownerId;
+  final String username;
+  final String photoUrl;
+
   final String title;
   final String description;
   final String cusid;
@@ -24,22 +32,25 @@ class Invoice extends StatefulWidget {
   final String ordersstatus;
   final String cusName;
   final String cusImg;
-  final String eur;
-  final String usd;
-  final String inr;
-  final String cny;
-  final String gbp;
-  final String Feur;
-  final String Fusd;
-  final String Finr;
-  final String Fcny;
-  final String Fgbp;
+  var eur;
+  var usd;
+  var inr;
+  var cny;
+  var gbp;
+  var Feur;
+  var Fusd;
+  var Finr;
+  var Fcny;
+  var Fgbp;
 
  final String country;
   final Users currentUser;
+ final List images;
 
   Invoice({
     this.orderId,
+    this.photoUrl,
+this.username,
     this.ownerId,
     this.cusName,
     this.cusImg,
@@ -63,7 +74,7 @@ class Invoice extends StatefulWidget {
     this.Finr,
     this.Fcny,
     this.Fgbp,
-    // this.selectedSizes,
+     this.images,
     this.currentUser,
   });
 
@@ -73,6 +84,8 @@ class Invoice extends StatefulWidget {
     return Invoice(
       orderId: doc.data()['orderId'],
       ownerId: doc.data()['ownerId'],
+      photoUrl: doc.data()['photoUrl'],
+      username: doc.data()['username'],
       cusName: doc.data()['cusname'],
       cusid: doc.data()['cusId'],
       cusImg: doc.data()['cusProfileImg'],
@@ -94,6 +107,7 @@ class Invoice extends StatefulWidget {
       Fcny: doc.data()['Fcny'],
       Fgbp: doc.data()['Fgbp'],
  country: doc.data()['country'],
+ images: doc.data()['images'],
 
     );
   }
@@ -113,12 +127,15 @@ class Invoice extends StatefulWidget {
     title:  this.title,
     description: this.description,
     ordersstatus:  this.ordersstatus,
+    photoUrl:  this.photoUrl,
+    username:  this.username,
 
     Feur:  this.Feur,
     Fusd: this.Fusd,
     Finr:this.Finr,
     Fcny:this.Fcny,
     Fgbp: this.Fgbp,
+images: this.images,
 
     eur:this.eur,
     usd:this.usd,
@@ -133,6 +150,10 @@ country: this.country,
 
 class _InvoiceState extends State<Invoice> {
   final String ownerId;
+   final String photoUrl;
+   final String username;
+
+
   final String title;
   final String description;
   final String cusid;
@@ -144,29 +165,34 @@ class _InvoiceState extends State<Invoice> {
   final String ordersstatus;
   final String cusName;
   final String cusImg;
-  final String eur;
-  String usd;
+  var eur;
+  var usd;
   String advaceprice;
    String totalprice;
 
-  final String inr;
+ var inr;
    final String country;
+final List images;
 
-  final String cny;
-  final String gbp;
-  final String Feur;
-  final String Fusd;
-  final String Finr;
-  final String Fcny;
-  final String Fgbp;
+ var cny;
+ var gbp;
+ var Feur;
+ var Fusd;
+ var Finr;
+ var Fcny;
+ var Fgbp;
   String reviewId = Uuid().v4();
   TextEditingController reviewController = TextEditingController();
-
+List<Widget>  listOfImages = <Widget>[];
+  int _current = 0;
+  final CarouselController _ccontroller = CarouselController();
   var rating = 0.0;
 // final String selectedSizes;
 
   _InvoiceState({
     this.orderId,
+    this.photoUrl,
+    this.username,
     this.ownerId,
     this.cusName,
     this.cusImg,
@@ -179,6 +205,7 @@ class _InvoiceState extends State<Invoice> {
     this.description,
     this.ordersstatus,
  this.country,
+ this.images,
 
     this.eur,
     this.usd,
@@ -195,60 +222,102 @@ class _InvoiceState extends State<Invoice> {
 
 
   void initState() {
-    // initialize controller
-    // parse();
-print(finalpay);
-print(advancepay);
+
     super.initState();
-    conversion();
   }
 
 
-  currency({String advance,String finalpay}){
+  currency(){
     return
-      Column(
-        crossAxisAlignment:CrossAxisAlignment.start,
-        children: <Widget>[     Text('Advance payment: ${currentUser.currencysym}$advance',style: TextStyle(
-          color: kText.withOpacity(0.5),
-        )),
+      currentUser.currency == "INR"? Row(
+        children: [
+
+          Text('Advance payment:',
+            style: TextStyle(color: kText),),Spacer(),
+          Text(" ${cf.format(inr??0, CurrencyFormatter.inr)}",
+              style: TextStyle(
+                color: Colors.black,
+                fontWeight: FontWeight.bold,
+                fontSize: 20.0,
+              )),
+
           SizedBox( height: 8.0,),
-          Row(
-            children: [
-              Row(
-                children: [
-                  Text('Payment on delivery: ${currentUser.currencysym}$finalpay',style: TextStyle(
-                    color: kText.withOpacity(0.5),
+          Text('Payment on delivery:',
+            style: TextStyle(color: kText),),Spacer(),
+          Text(" ${cf.format(Finr??0, CurrencyFormatter.inr)}",
+              style: TextStyle(
+                color: Colors.black,
+                fontWeight: FontWeight.bold,
+                fontSize: 20.0,
+              )),
+        ],
+      ):
+      currentUser.currency == "EUR"?Row(
+        children: [
+          Text('Advance payment:',
+            style: TextStyle(color: kText),),Spacer(),
+          Text(" ${cf.format(eur??0, CurrencyFormatter.eur)}",
+              style: TextStyle(
+                color: Colors.black,
+                fontWeight: FontWeight.bold,
+                fontSize: 20.0,
+              )),
 
-                  )),
-                ],
-              ),
-            ],
-          ),],
+          SizedBox( height: 8.0,),
+          Text('Payment on delivery:',
+            style: TextStyle(color: kText),),Spacer(),
+          Text(" ${cf.format(Feur??0, CurrencyFormatter.eur)}",
+              style: TextStyle(
+                color: Colors.black,
+                fontWeight: FontWeight.bold,
+                fontSize: 20.0,
+              )),
+        ],
+      ):
+      currentUser.currency == "GBP"?Row(
+        children: [
+          Text('Advance payment:',
+            style: TextStyle(color: kText),),Spacer(),
+          Text(" ${cf.format(gbp??0, CurrencyFormatter.gbp)}",
+              style: TextStyle(
+                color: Colors.black,
+                fontWeight: FontWeight.bold,
+                fontSize: 20.0,
+              )),
+
+          SizedBox( height: 8.0,),
+          Text('Payment on delivery:',
+            style: TextStyle(color: kText),),Spacer(),
+          Text(" ${cf.format(Fgbp??0, CurrencyFormatter.gbp)}",
+              style: TextStyle(
+                color: Colors.black,
+                fontWeight: FontWeight.bold,
+                fontSize: 20.0,
+              )),
+        ],
+      ):
+      Row(
+        children: [
+          Text('Advance payment:',
+            style: TextStyle(color: kText),),Spacer(),
+          Text(" ${cf.format(usd??0, CurrencyFormatter.usd)}",
+              style: TextStyle(
+                color: Colors.black,
+                fontWeight: FontWeight.bold,
+                fontSize: 20.0,
+              )),
+
+          SizedBox( height: 8.0,),
+          Text('Payment on delivery:',
+            style: TextStyle(color: kText),),Spacer(),
+          Text(" ${cf.format(Fusd??0, CurrencyFormatter.usd)}",
+              style: TextStyle(
+                color: Colors.black,
+                fontWeight: FontWeight.bold,
+                fontSize: 20.0,
+              )),
+        ],
       );
-
-  }
-  conversion()async{
-    var resultUSD = await Currency.getConversion(
-        from: 'USD', to: '${currentUser.currencyISO}', amount: usd);
-    var resultUSD11 = await Currency.getConversion(
-        from: 'USD', to: '${currentUser.currencyISO}', amount: Fusd );
-    var s;
-    var u;
-    var e;
-
-    setState(() {
-
-
-      e = resultUSD.rate;
-      advaceprice =e.toStringAsFixed(2);
-
-      s = resultUSD11.rate;
-      totalprice =s.toStringAsFixed(2);
-      u = double.tryParse(usd);
-      u = u.toStringAsFixed(2);
-      usd = u.toString();
-    });
-
   }
 
   paymentbutton({
@@ -264,7 +333,7 @@ print(advancepay);
        if (widget.advancepay == 'false') {
          return
          Center(
-           child: RaisedButton(
+           child: ElevatedButton(
              onPressed: () {
                Get.to(PaymentSer(title: widget.title,
                  Amount: vString,
@@ -278,11 +347,17 @@ print(advancepay);
 
                  usd: usd,
                  inr: inr,
+                 eur: eur,
+                 gbp: gbp,
+                 Feur: Feur,
+                 Fgbp: Fgbp,
 
                  Fusd: Fusd,
                ));
              },
-             color: kblue,
+               style: ElevatedButton.styleFrom(
+              elevation : 0.1,
+              primary:  Colors.black, ),
              child: Text('Pay Now', style: TextStyle(
                  color: Colors.white),),
            ),
@@ -296,7 +371,7 @@ print(advancepay);
      else if(widget.advancepay == 'false') {
       return
       Center(
-        child: RaisedButton(
+        child: ElevatedButton(
           onPressed: (){
 
 Get.to( PaymentSer(              title: widget.title,
@@ -304,11 +379,16 @@ Get.to( PaymentSer(              title: widget.title,
   OwnerId: ownerId,profileimg: cusImg,username: cusName,advancepay: advancepay,finalpay: finalpay,Finr: Finr,
   usd:usd,
   inr:inr,
-
+  Feur: Feur,
+  Fgbp: Fgbp,
+  eur: eur,
+  gbp: gbp,
   Fusd:Fusd,
   ));
           },
-          color: kblue,
+            style: ElevatedButton.styleFrom(
+              elevation : 0.1,
+              primary:  Colors.black, ),
           child: Text('Pay Advance',style: TextStyle(
               color: Colors.white),),
         ),
@@ -318,18 +398,23 @@ Get.to( PaymentSer(              title: widget.title,
     {
       return
         Center(
-          child: RaisedButton(
+          child: ElevatedButton(
             onPressed: (){
               Get.to( PaymentSer(  title: widget.title,Amount:duee,OrderId: orderId,
                 OwnerId: ownerId,profileimg: cusImg,username: cusName,advancepay: advancepay,finalpay: finalpay,Finr: Finr,
                 usd:usd,
                 inr:inr,
                 Fusd:Fusd,
-
+                Feur: Feur,
+                Fgbp: Fgbp,
+                eur: eur,
+                gbp: gbp,
               ));
 
             },
-            color: kblue,
+              style: ElevatedButton.styleFrom(
+              elevation : 0.1,
+              primary:  Colors.black, ),
             child: Text('Pay Due',style: TextStyle(
                 color: Colors.white),),
           ),
@@ -405,9 +490,11 @@ else{return Container();}
                           ),
                           textAlign: TextAlign.start,
                         ),
-                        RaisedButton(
+                        ElevatedButton(
                           onPressed: () {review();Get.back();},
-                          color: kblue,
+                            style: ElevatedButton.styleFrom(
+              elevation : 0.1,
+              primary:  Colors.black, ),
                           child: Text('Save',style: TextStyle(color: Colors.white),),)
                       ],
                     ),
@@ -425,6 +512,107 @@ else{return Container();}
   }
 
 
+  pics(){
+    return
+      FutureBuilder<QuerySnapshot> (
+          future:     FirebaseFirestore.instance.collection('serviceSeller')
+              .doc(widget.ownerId)
+              .collection('sellerService')
+
+              .where('orderId' ,isEqualTo: '$widget.orderId')
+          // .where('ownerId' ,isEqualTo: '$ownerId')
+              .get(),
+          builder: (context, snapshot) {
+
+            if (snapshot.hasData) {
+              return new Container( height:490,child:ListView.builder(
+
+                  physics:NeverScrollableScrollPhysics(),
+                  shrinkWrap: true,
+                  scrollDirection:Axis.vertical,
+                  itemCount: snapshot.data.docs.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    // List<String> images = List.from(snapshot.data.docs[index].data()['collmediaUrl']);
+                    listOfImages = [];
+                    for (int i = 0;
+                    i <
+                        snapshot.data.docs[index].data()['images']
+                            .length;
+                    i++) {
+                      listOfImages.add(GestureDetector(
+                        onTap: (){
+                          showDialog<void>(
+                            context: context,
+                            // useRootNavigator:true,
+
+                            barrierDismissible: true,
+                            // false = user must tap button, true = tap outside dialog
+                            builder: (BuildContext dialogContext) {
+                              return
+                                Dialog(
+
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(20),),
+                                  child: Container(
+                                    height: 400,
+                                    child:PhotoView(imageProvider: CachedNetworkImageProvider
+                                      (snapshot
+                                        .data.docs[index].data()['images'][i])),),
+                                );
+                            },
+                          );
+                        },
+                        child: Container(
+                          height:490,
+                          child: CachedImage(snapshot
+                              .data.docs[index].data()['images'][i]),
+                        ),
+                      ));
+                    }
+                    return Column(
+                      children: <Widget>[
+                        Container(
+                            height:490,
+                            width: MediaQuery
+                                .of(context)
+                                .size
+                                .width,
+                            child:
+                            CarouselSlider(
+
+                                items: listOfImages,
+                                options: CarouselOptions(
+                                  height:500,
+                                  pauseAutoPlayOnManualNavigate: true,
+                                  pauseAutoPlayOnTouch: true,
+                                  aspectRatio: 16/9,
+                                  viewportFraction: 0.8,
+                                  initialPage: 0,
+                                  enableInfiniteScroll: false,
+                                  reverse: false,
+                                  autoPlay: true,
+                                  autoPlayInterval: Duration(seconds: 3),
+                                  autoPlayAnimationDuration: Duration(milliseconds: 800),
+                                  autoPlayCurve: Curves.fastOutSlowIn,
+                                  enlargeCenterPage: true,
+                                  // onPageChanged: callbackFunction,
+                                  scrollDirection: Axis.horizontal,
+                                )
+                            )
+                        ),
+
+                      ],
+                    );
+                  }
+              ));
+            }
+            return Center(
+              child: CircularProgressIndicator(),
+            );
+
+          });
+
+  }
 
   postindia(parentContext){
     bool isPostOwner = currentUser.id == ownerId;
@@ -433,38 +621,72 @@ else{return Container();}
         padding: const EdgeInsets.all(8.0),
         child: Column(
           children: <Widget>[
-            FutureBuilder(
-              future: usersRef.doc(widget.ownerId).get(),
-              builder: (context, snapshot) {
-                if (!snapshot.hasData) {
-                  return circularProgress();
-                }
-                 Users user = Users.fromDocument(snapshot.data);
-//          bool isPostOwner = currentUserId == ownerId;
-                return Column(
-                  children: <Widget>[
-                    GestureDetector(
-                      onTap: () => showProfile(context, profileId: user.id),
-                      child: ListTile(
-                        leading: CircleAvatar(
-                          backgroundImage: CachedNetworkImageProvider(user.photoUrl),
-                          backgroundColor: Colors.grey,
-                        ),
-                        title: Text(
-                          user.displayName,
-                          style: TextStyle(
-                            color: kText,
-                            fontWeight: FontWeight.bold,
-                          ),
+            GestureDetector(
+              onTap: () => showProfile(context, profileId:ownerId),
+              child: ListTile(
+                leading: CircleAvatar(
+                  backgroundImage: CachedNetworkImageProvider(photoUrl),
+                  backgroundColor: Colors.grey,
+                ),
+                title: Text(
+                  username,
+                  style: TextStyle(
+                    color: kText,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+            ),
+            GestureDetector(
+              onTap:(){},
+
+              child: Stack(
+                alignment: Alignment.center,
+                children: <Widget>[
+                  ClipRRect(
+                      borderRadius: BorderRadius.only
+                        (bottomLeft: Radius.circular(20.0),bottomRight: Radius.circular(20.0)),
+                      child: Container(
+                        //  height: MediaQuery.of(context).size.height * 0.65,
+
+                          width:     MediaQuery.of(context).size.width,
+                          child: pics())),
+                  Positioned.fill(
+                    child: Align(
+                      alignment: Alignment.topCenter,
+                      child:   ListTile(
+                        leading:FloatingActionButton(
+                          mini: true,
+                          backgroundColor:Colors.white.withOpacity(0.5),
+                          child:Icon(Icons.arrow_back_ios,color: Colors.white,),
+                          onPressed:() { Navigator.pop(context);},
                         ),
                       ),
                     ),
+                  ),
 
-                  ],
+                ],
+              ),
+            ),
 
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: images.asMap().entries.map((entry) {
+                return GestureDetector(
+                  onTap: () => _ccontroller.animateToPage(entry.key),
+                  child: Container(
+                    width: 6.0,
+                    height: 6.0,
+                    margin: EdgeInsets.symmetric(vertical: 8.0, horizontal: 4.0),
+                    decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: (Theme.of(context).brightness == Brightness.dark
+                            ? Colors.white
+                            : Colors.black)
+                            .withOpacity(_current == entry.key ? 0.9 : 0.4)),
+                  ),
                 );
-
-              },
+              }).toList(),
             ),
             SizedBox(height:10.0),
 
@@ -494,9 +716,7 @@ else{return Container();}
 
 
 
-            widget.Finr ==""?  Text('Payment: ₹${widget.inr}',style: TextStyle(
-              color: kText.withOpacity(0.5),
-            )):currency(advance: widget.inr,finalpay: widget.Finr),
+          currency(),
             SizedBox(height:10.0),
 
 
@@ -508,314 +728,15 @@ else{return Container();}
               cusImg:widget.cusImg, ),
             SizedBox(height:10.0),
 
-            !isPostOwner?   fulfilled=='true'?
-            RaisedButton(onPressed:()=>Rating(fulfill:fulfilled,parentContext: parentContext,OwnerId: ownerId),color:kblue,child: Text('Rate Order',style:TextStyle(color: Colors.white)),):
-            Container(): Container()
+            !isPostOwner&& fulfilled=='true'?
+            ElevatedButton(onPressed:()=>Rating(fulfill:fulfilled,parentContext: parentContext,OwnerId: ownerId),  style: ElevatedButton.styleFrom(
+                        elevation : 0.1,
+                        primary:  Colors.black, ),child: Text('Rate Order',style:TextStyle(color: Colors.white)),):
+            Container()
 
           ],
         ),
       );
-  }
-  posteurope(parentContext){
-    bool isPostOwner = currentUser.id == ownerId;
-
-    return
-      Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Column(
-          children: <Widget>[
-
-            FutureBuilder(
-              future: usersRef.doc(widget.ownerId).get(),
-              builder: (context, snapshot) {
-                if (!snapshot.hasData) {
-                  return circularProgress();
-                }
-                 Users user = Users.fromDocument(snapshot.data);
-//          bool isPostOwner = currentUserId == ownerId;
-                return Column(
-                  children: <Widget>[
-                    GestureDetector(
-                      onTap: () => showProfile(context, profileId: user.id),
-                      child: ListTile(
-                        leading: CircleAvatar(
-                          backgroundImage: CachedNetworkImageProvider(user.photoUrl),
-                          backgroundColor: Colors.grey,
-                        ),
-                        title: Text(
-                          user.displayName,
-                          style: TextStyle(
-                            color: kText,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ),
-                    ),
-
-                  ],
-
-                );
-
-              },
-            ),
-            SizedBox(height:10.0),
-            Row(
-              children: [
-                Text( widget.title   ,style: TextStyle(
-                    color: kText),),
-              ],
-            ),
-            SizedBox(height:10.0),
-
-            Row(
-              children: [
-                Text( 'Description: ${widget.description}'   ,style: TextStyle(
-                    color: kText),),
-              ],
-            ),
-            SizedBox(height:10.0),
-
-            Row(
-              children: [
-                Text('order Status: ${widget.ordersstatus}'   ,style: TextStyle(
-                    color: kText),),
-              ],
-            ),
-            SizedBox(height:10.0),
-
-            widget.Finr =="" || currentUser.country != country?  Text('Payment:${currentUser.currencysym} ${advaceprice}',style: TextStyle(
-              color: kText.withOpacity(0.5),
-            )):
-widget.Finr =="" || currentUser.country == country?  Text('Payment:${currentUser.currencysym} ${widget.usd}',style: TextStyle(
-              color: kText.withOpacity(0.5),
-            )):
-
-          currentUser.country == country?   currency(advance: widget.inr,finalpay: widget.inr):currency(advance: advaceprice,finalpay: totalprice),
-            SizedBox(height:10.0),
-
-
-         currentUser.country == "India"?   paymentbutton(amount: advaceprice,due: totalprice,
-              title: widget.title,
-
-              ownerId:widget.ownerId,
-              cusName:widget.cusName,
-              cusImg:widget.cusImg, ):paymentbutton(amount: widget.usd,due: widget.Fusd,
-              title: widget.title,
-
-              ownerId:widget.ownerId,
-              cusName:widget.cusName,
-              cusImg:widget.cusImg, ),
-            SizedBox(height:10.0),
-
-            !isPostOwner?   fulfilled=='true'?
-            RaisedButton(onPressed:()=>Rating(fulfill:fulfilled,parentContext: parentContext,OwnerId: ownerId),color:kblue,child: Text('Rate Order',style:TextStyle(color: Colors.white)),):
-            Container(): Container()
-
-          ],
-        ),
-      );
-  }
-  postuk(parentContext){
-    bool isPostOwner = currentUser.id == ownerId;
-
-    return
-      Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Column(
-          children: <Widget>[
-            FutureBuilder(
-              future: usersRef.doc(widget.ownerId).get(),
-              builder: (context, snapshot) {
-                if (!snapshot.hasData) {
-                  return circularProgress();
-                }
-                 Users user = Users.fromDocument(snapshot.data);
-//          bool isPostOwner = currentUserId == ownerId;
-                return Column(
-                  children: <Widget>[
-                    GestureDetector(
-                      onTap: () => showProfile(context, profileId: user.id),
-                      child: ListTile(
-                        leading: CircleAvatar(
-                          backgroundImage: CachedNetworkImageProvider(user.photoUrl),
-                          backgroundColor: Colors.grey,
-                        ),
-                        title: Text(
-                          user.displayName,
-                          style: TextStyle(
-                            color: kText,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                       ),
-                    ),
-
-                  ],
-
-                );
-
-              },
-            ),
-            SizedBox(height:10.0),
-
-            Row(
-              children: [
-                Text( widget.title   ,style: TextStyle(
-                    color: kText),),
-              ],
-            ),
-            SizedBox(height:10.0),
-
-            Row(
-              children: [
-                Text( 'Description: ${widget.description}'   ,style: TextStyle(
-                    color: kText),),
-              ],
-            ),
-            SizedBox(height:10.0),
-
-            Row(
-              children: [
-                Text('order Status: ${widget.ordersstatus}'   ,style: TextStyle(
-                    color: kText),),
-              ],
-            ),
-            SizedBox(height:10.0),
-
-
-    widget.Finr ==""?  Text('Payment: £${widget.gbp}',style: TextStyle(
-    color: kText.withOpacity(0.5),
-    )):
-            currency(advance: widget.gbp,finalpay: widget.Fgbp),
-            SizedBox(height:10.0),
-
-
-            paymentbutton(amount: widget.gbp,due: widget.Fgbp,
-              ownerId:widget.ownerId,
-              title: widget.title,
-
-              cusName:widget.cusName,
-              cusImg:widget.cusImg, ),
-            SizedBox(height:10.0),
-
-            !isPostOwner?   fulfilled=='true'?
-            RaisedButton(onPressed:()=>Rating(fulfill:fulfilled,parentContext: parentContext,OwnerId: ownerId),color:kblue,child: Text('Rate Order',style:TextStyle(color: Colors.white)),):
-            Container(): Container()
-
-          ],
-        ),
-      );
-  }
-  postusa(parentContext) {
-    bool isPostOwner = currentUser.id == ownerId;
-
-    return
-      Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Column(
-          children: <Widget>[
-            FutureBuilder(
-              future: usersRef.doc(widget.ownerId).get(),
-              builder: (context, snapshot) {
-                if (!snapshot.hasData) {
-                  return circularProgress();
-                }
-                 Users user = Users.fromDocument(snapshot.data);
-//          bool isPostOwner = currentUserId == ownerId;
-                return Column(
-                  children: <Widget>[
-                    GestureDetector(
-                      onTap: () => showProfile(context, profileId: user.id),
-                      child: ListTile(
-                        leading: CircleAvatar(
-                          backgroundImage: CachedNetworkImageProvider(user.photoUrl),
-                          backgroundColor: Colors.grey,
-                        ),
-                        title: Text(
-                          user.displayName,
-                          style: TextStyle(
-                            color: kText,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                       ),
-                    ),
-
-                  ],
-
-                );
-
-              },
-            ),
-            SizedBox(height:10.0),
-
-            Row(
-              children: [
-                Text( widget.title   ,style: TextStyle(
-                    color: kText),),
-              ],
-            ),
-            SizedBox(height:10.0),
-
-            Row(
-              children: [
-                Text( 'Description: ${widget.description}'   ,style: TextStyle(
-                    color: kText),),
-              ],
-            ),
-            SizedBox(height:10.0),
-
-            Row(
-              children: [
-                Text('order Status: ${widget.ordersstatus}'   ,style: TextStyle(
-                    color: kText),),
-              ],
-            ),
-            SizedBox(height:10.0),
-
-
-            widget.Finr ==""?  Text('Payment: \u0024${widget.usd}',style: TextStyle(
-              color: kText.withOpacity(0.5),
-            )):
-
-            currency(advance: widget.usd,finalpay: widget.Fusd),
-            SizedBox(height:10.0),
-
-            paymentbutton(              title: widget.title,
-              amount: widget.usd,due: widget.Fusd,
-              ownerId:widget.ownerId,
-              cusName:widget.cusName,
-              cusImg:widget.cusImg, ),
-            SizedBox(height:10.0),
-
-            !isPostOwner?   fulfilled=='true'?
-            RaisedButton(onPressed:()=>Rating(fulfill:fulfilled,parentContext: parentContext,OwnerId: ownerId),color:kblue,child: Text('Rate Order',style:TextStyle(color: Colors.white)),):
-            Container(): Container()
-
-          ],
-        ),
-      );
-  }
-  buildPostHeader(parentContext) {
-    if(currentUser.country=='India'){
-      return
-        postindia(parentContext);
-    }
-    else if (currentUser.country == 'Europe') {
-
-      return posteurope(parentContext);
-
-    }
-    else if (currentUser.country == 'UK')  {
-      return postuk(parentContext);
-    }
-    else if (currentUser.country == 'USA') {
-      return postusa(parentContext);
-    }
-    else{
-      return postusa(parentContext);
-    }
-
   }
 
 
@@ -824,15 +745,12 @@ widget.Finr =="" || currentUser.country == country?  Text('Payment:${currentUser
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(8.0),
-      child: Container( decoration: BoxDecoration(
-          gradient: fabGradient
-      ) ,
-        alignment: Alignment.center,
+      child: Container( color:Cont,
         child: Column(
 
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
-            buildPostHeader(context),
+            postindia(context),
 
           ],
         ),
