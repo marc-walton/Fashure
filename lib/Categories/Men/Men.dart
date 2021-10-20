@@ -41,7 +41,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:sticky_headers/sticky_headers.dart';
 import 'package:fashow/methods/dynamic_links_service.dart';
 import 'package:share/share.dart';
-
+// import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 class Men extends StatefulWidget {
   @override
   _MenState createState() => _MenState();
@@ -203,38 +203,27 @@ All(){
         searchResults.add(searchResult);
 
         return
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(20.0),
-              child: Card(
-                child:Column(
-                  children: <Widget>[
+          Container(
+height: MediaQuery.of(context).size.height,
+ width: MediaQuery.of(context).size.width,
 
-                    GestureDetector(
-                      onTap: () => Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => ProductScreen(
-                            prodId: prodId,
-                            userId: ownerId,
-                          ),
-                        ),
-                      ),
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(20.0),child:CachedImage(shopmediaUrl.first,height: MediaQuery
-                          .of(context)
-                          .size
-                          .height/3,width: MediaQuery
-                          .of(context)
-                          .size
-                          .width,),),),
+            child: GridView.count(
+              crossAxisCount: 2,
+                childAspectRatio: (0.1 / .4),
+
+              shrinkWrap: true,
+              physics: NeverScrollableScrollPhysics(),
+              children:[ Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Column(
+                  children: <Widget>[
                     GestureDetector(
                       onTap: () => showProfile(context, profileId: ownerId),
                       child:Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Row(children:[
                           CircleAvatar(
+                            radius: 10,
                             backgroundImage: CachedNetworkImageProvider(photoUrl),
                             backgroundColor: Colors.grey,
                           ),
@@ -251,15 +240,45 @@ All(){
 
                     ),
 
+                    GestureDetector(
+                      onTap: () => Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => ProductScreen(
+                            prodId: prodId,
+                            userId: ownerId,
+                          ),
+                        ),
+                      ),
+                      child: CachedImage(shopmediaUrl.first,height: MediaQuery
+                        .of(context)
+                        .size
+                        .height/6,width: MediaQuery
+                        .of(context)
+                        .size
+                        .width/3,),),
+
                     Column(
 
-                      children: searchResults,
+                      children:  [
+                        Text(prod.productname, style: TextStyle(
+                          color: kText,
+                          fontWeight: FontWeight.bold),),
+                      Text(prod.productname, style: TextStyle(
+                          color: kText,
+                          fontWeight: FontWeight.bold),),
+                      Text(prod.productname, style: TextStyle(
+                          color: kText,
+                          fontWeight: FontWeight.bold),),
+
+                      ]
 
                     ),
+
                   ],
 
                 ),
-              ),
+              ),]
             ),
           );
       },

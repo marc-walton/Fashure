@@ -23,7 +23,7 @@ import 'package:fashow/HomePage.dart';
 import 'package:fashow/Constants.dart';
 import 'package:getwidget/components/toggle/gf_toggle.dart';
 import 'package:getwidget/types/gf_toggle_type.dart';
-
+import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 class Shop extends StatefulWidget {
 
   final Users currentUser;
@@ -87,9 +87,9 @@ new Tabs(title: "Teen-Girls",color: kPrimaryColor),
   Widget build(BuildContext context) {
     SizeConfig().init(context);
     return
-      Scaffold(appBar: PreferredSize(
-        preferredSize: Size.fromHeight(130.0),
-        child: AppBar(title:  Text('Shop',style: TextStyle(fontSize: 30,fontFamily: 'MajorMonoDisplay'),),
+      DefaultTabController(
+        length:2,
+        child: Scaffold(appBar: AppBar(title:  Text('Shop',style: TextStyle(fontSize: 30,fontFamily: 'MajorMonoDisplay'),),
           backgroundColor: Colors.black,
 
           bottom:  PreferredSize(
@@ -103,7 +103,6 @@ new Tabs(title: "Teen-Girls",color: kPrimaryColor),
                 ///outline
                 unselectedLabelStyle:TextStyle(fontFamily:"AlteroDCU" ),
                    isScrollable: true,
-                controller: _controller,
                 tabs: <Widget>[
                   FittedBox(
                     fit:BoxFit.fitWidth,
@@ -121,55 +120,7 @@ new Tabs(title: "Teen-Girls",color: kPrimaryColor),
                           fontSize:    SizeConfig.blockSizeHorizontal*4,
                           color: Colors.white),),
                   ),
-              FittedBox(
-                fit:BoxFit.fitWidth,
-                    child: Text(   'Baby-Boys',
-                      style: TextStyle(
 
-                          fontSize:    SizeConfig.blockSizeHorizontal*4,
-                          color: Colors.white),),
-                  ),
-                  FittedBox(
-                    fit:BoxFit.fitWidth,
-                    child: Text(   'Baby-Girls',
-                      style: TextStyle(
-
-                          fontSize:    SizeConfig.blockSizeHorizontal*4,
-                          color: Colors.white),),
-                  ),
-                  FittedBox(
-                    fit:BoxFit.fitWidth,
-                    child: Text(   'Kids-Boys',
-                      style: TextStyle(
-
-                          fontSize:    SizeConfig.blockSizeHorizontal*4,
-                          color: Colors.white),),
-                  ),
-                  FittedBox(
-                    fit:BoxFit.fitWidth,
-                    child: Text(   'Kids-Girls',
-                      style: TextStyle(
-
-                          fontSize:    SizeConfig.blockSizeHorizontal*4,
-                          color: Colors.white),),
-                  ),
-                  FittedBox(
-
-                    fit:BoxFit.fitWidth,
-                    child: Text(   'Teen-Boys',
-                      style: TextStyle(
-
-                          fontSize:    SizeConfig.blockSizeHorizontal*4,
-                          color: Colors.white),),
-                  ),
-                  FittedBox(
-                    fit:BoxFit.fitWidth,
-                    child: Text(   'Teen-Girls',
-                      style: TextStyle(
-
-                          fontSize:    SizeConfig.blockSizeHorizontal*4,
-                          color: Colors.white),),
-                  ),
                 ],
               ),
             ),
@@ -201,344 +152,451 @@ new Tabs(title: "Teen-Girls",color: kPrimaryColor),
               },
             ),
           ],
-        ),),
+        ),
 //        backgroundColor: kPrimaryColor,
 
-        body:
-            Column(
-              children: [
-                Container(
-            height:SizeConfig.screenHeight*0.05,
-child:Row(
-                  children: [
-                   InkWell(
-                     onTap: (){        showDialog<void>(
-                       context: context,
-                       // useRootNavigator:true,
+          body:
+          TabBarView(
+            children: [
+              Row(
+                children: [
+                  RotatedBox(
+                    quarterTurns: 3,
+                    child: Container(
+                      decoration: new BoxDecoration(color: Colors.black),
+                      width: MediaQuery.of(context).size.height,
+                      height: MediaQuery.of(context).size.height/20,
+                      child: new TabBar(
 
-                       barrierDismissible: true,
-                       // false = user must tap button, true = tap outside dialog
-                       builder: (BuildContext dialogContext) {
-                         return Builder(builder: (BuildContext context) {
-                           return StatefulBuilder(builder: (BuildContext context, State){
-                             return Dialog(
-                               shape: RoundedRectangleBorder(
-                                 borderRadius: BorderRadius.circular(20),
-                               ),
-                               child: Container(
-                                 height:400,
-                                 child: Column(
-                                   children: [
-                                     ExpansionTile(
-                                         title: Text("Sort by price"),
-                                         children: [Column(
-                                           children: [
-                                             InkWell(
-                                               onTap: () {
-                                                 State((){});
-                                                 priceQuery = "0";
-                                                 AQuery = "A0";
-                                                 BQuery = "B0";
-                                                 CQuery = "C0";
-                                                 DQuery = "D0";
-                                                 EQuery = "E0";
-                                                 FQuery = "F0";
-                                                 GQuery = "G0";
-                                                 HQuery = "H0";
-                                                 IQuery = "I0";
-                                                 JQuery = "J0";
-                                                 KQuery = "K0";
-                                                 LQuery = "L0";
-                                                 MQuery = "M0";
-                                                 NQuery = "N0";
-                                                 OQuery = "O0";
-                                                 PQuery = "P0";
-                                                 QQuery = "Q0";
-                                                 RQuery = "R0";
-                                                 SQuery = "S0";
+                        ///filled
+                        labelStyle:TextStyle(fontFamily: "AlteroDCURegular" ),
+                        ///outline
+                        unselectedLabelStyle:TextStyle(fontFamily:"AlteroDCU" ),
+                        isScrollable: true,
+                        controller: _controller,
+                        tabs: <Widget>[
+                          FittedBox(
+                            fit:BoxFit.fitWidth,
+                            child: Text('Men',
+                              style: TextStyle(
 
-                                               },
-                                               child: Container(
-                                                 color: priceQuery == "0"||priceQuery == "0D"?Colors.pink.shade50:Colors.white,
-
-                                                 height: 50,
-                                                 width: MediaQuery.of(context).size.width,
-                                                 child: Column(
-                                                   mainAxisAlignment: MainAxisAlignment.center,
-                                                   children: [
-                                                     FittedBox(
-                                                         child: Text(
-                                                           'All',
-                                                         )),
-                                                   ],
-                                                 ),
-                                               ),
-                                             ),
-                                             InkWell(
-                                               onTap: () {
-                                                 State((){});
-
-                                                 priceQuery = "low";
-                                                 AQuery = "Alow";
-                                                 BQuery = "Blow";
-                                                 CQuery = "Clow";
-                                                 DQuery = "Dlow";
-                                                 EQuery = "Elow";
-                                                 FQuery = "Flow";
-                                                 GQuery = "Glow";
-                                                 HQuery = "Hlow";
-                                                 IQuery = "Ilow";
-                                                 JQuery = "Jlow";
-                                                 KQuery = "Klow";
-                                                 LQuery = "Llow";
-                                                 MQuery = "Mlow";
-                                                 NQuery = "Nlow";
-                                                 OQuery = "Olow";
-                                                 PQuery = "Plow";
-                                                 QQuery = "Qlow";
-                                                 RQuery = "Rlow";
-                                                 SQuery = "Slow";
-
-                                               },
-                                               child: Container(
-                                                 color: priceQuery == "low"||priceQuery == "lowD"?Colors.pink.shade50:Colors.white,
-
-                                                 height: 50,
-                                                 width: MediaQuery.of(context).size.width,
-                                                 child: Column(
-                                                   mainAxisAlignment: MainAxisAlignment.center,
-                                                   children: [
-                                                     FittedBox(
-                                                         child: Text(
-                                                           'Low to high',
-                                                         )),
-                                                   ],
-                                                 ),
-                                               ),
-                                             ),
-                                             InkWell(
-                                               onTap: () {
-                                                 State((){});
-
-                                                 priceQuery = "high";
-                                                 AQuery = "Ahigh";
-                                                 BQuery = "Bhigh";
-                                                 CQuery = "Chigh";
-                                                 DQuery = "Dhigh";
-                                                 EQuery = "Ehigh";
-                                                 FQuery = "Fhigh";
-                                                 GQuery = "Ghigh";
-                                                 HQuery = "Hhigh";
-                                                 IQuery = "Ihigh";
-                                                 JQuery = "Jhigh";
-                                                 KQuery = "Khigh";
-                                                 LQuery = "Lhigh";
-                                                 MQuery = "Mhigh";
-                                                 NQuery = "Nhigh";
-                                                 OQuery = "Ohigh";
-                                                 PQuery = "Phigh";
-                                                 QQuery = "Qhigh";
-                                                 RQuery = "Rhigh";
-                                                 SQuery = "Shigh";
-
-
-                                               },
-                                               child: Container(
-                                                 color: priceQuery == "high"||priceQuery == "highD"?Colors.pink.shade50:Colors.white,
-
-                                                 height: 50,
-                                                 width: MediaQuery.of(context).size.width,
-                                                 child: Column(
-                                                   mainAxisAlignment: MainAxisAlignment.center,
-                                                   children: [
-                                                     FittedBox(
-                                                         child: Text(
-                                                           'High to low',
-                                                         )),
-                                                   ],
-                                                 ),
-                                               ),
-                                             ),
-
-                                           ],
-                                         ),
-                                         ]
-                                     ),
-                                     ExpansionTile(
-                                         title: Text("Avoid Duties & Taxes"),
-                                         children: [Column(
-                                           children: [
-                                             Text("(Shop within your country)"),
-                                             GFToggle(
-                                               onChanged: (val){
-                                                 setState(() {
-                                                   duties = val;
-                                                 });
-                                               },
-                                               value: duties,
-                                               type: GFToggleType.custom,
-                                             ),
-                                           ],
-                                         ),
-                                         ]
-                                     ),
-                                     FloatingActionButton.extended(onPressed: (){
-                                       duties? setState((){
-                                         priceQuery = priceQuery.replaceAll("D","");
-                                         AQuery =AQuery.replaceAll("D","");
-                                         BQuery =BQuery.replaceAll("D","");
-                                         CQuery =CQuery.replaceAll("D","");
-                                         DQuery =DQuery.replaceAll("D","");
-                                         EQuery =EQuery.replaceAll("D","");
-                                         FQuery =FQuery.replaceAll("D","");
-                                         GQuery =GQuery.replaceAll("D","");
-                                         HQuery =HQuery.replaceAll("D","");
-                                         IQuery =IQuery.replaceAll("D","");
-                                         JQuery =JQuery.replaceAll("D","");
-                                         KQuery =KQuery.replaceAll("D","");
-                                         LQuery =LQuery.replaceAll("D","");
-                                         MQuery =MQuery.replaceAll("D","");
-                                         NQuery =NQuery.replaceAll("D","");
-                                         OQuery =OQuery.replaceAll("D","");
-                                         PQuery =PQuery.replaceAll("D","");
-                                         QQuery =QQuery.replaceAll("D","");
-                                         RQuery =RQuery.replaceAll("D","");
-                                         SQuery =SQuery.replaceAll("D","");
-                                         priceQuery = priceQuery + "D";
-                                         AQuery = AQuery + "D";
-                                         BQuery = BQuery + "D";
-                                         CQuery = CQuery + "D";
-                                         DQuery = DQuery + "D";
-                                         EQuery = EQuery + "D";
-                                         FQuery = FQuery + "D";
-                                         GQuery = GQuery + "D";
-                                         HQuery = HQuery + "D";
-                                         IQuery = IQuery + "D";
-                                         JQuery = JQuery + "D";
-                                         KQuery = KQuery + "D";
-                                         LQuery = LQuery + "D";
-                                         MQuery = MQuery + "D";
-                                         NQuery = NQuery + "D";
-                                         OQuery = OQuery + "D";
-                                         PQuery = PQuery + "D";
-                                         QQuery = QQuery + "D";
-                                         RQuery = RQuery + "D";
-                                         SQuery = SQuery + "D";
-
-
-                                       }):
-                                       setState((){
-                                         priceQuery = priceQuery.replaceAll("D","");
-                                         AQuery =AQuery.replaceAll("D","");
-                                         BQuery =BQuery.replaceAll("D","");
-                                         CQuery =CQuery.replaceAll("D","");
-                                         DQuery =DQuery.replaceAll("D","");
-                                         EQuery =EQuery.replaceAll("D","");
-                                         FQuery =FQuery.replaceAll("D","");
-                                         GQuery =GQuery.replaceAll("D","");
-                                         HQuery =HQuery.replaceAll("D","");
-                                         IQuery =IQuery.replaceAll("D","");
-                                         JQuery =JQuery.replaceAll("D","");
-                                         KQuery =KQuery.replaceAll("D","");
-                                         LQuery =LQuery.replaceAll("D","");
-                                         MQuery =MQuery.replaceAll("D","");
-                                         NQuery =NQuery.replaceAll("D","");
-                                         OQuery =OQuery.replaceAll("D","");
-                                         PQuery =PQuery.replaceAll("D","");
-                                         QQuery =QQuery.replaceAll("D","");
-                                         RQuery =RQuery.replaceAll("D","");
-                                         SQuery =SQuery.replaceAll("D","");
-
-                                       });
-
-                                     }, label: Text("Apply"))
-                                   ],
-                                 ),
-                               ),
-                             );
-                           });
-                         });
-                       },
-                     );},
-                      child: FittedBox(
-                      fit:  BoxFit.fitHeight,
-                        child: Container(
-
-  width:SizeConfig.blockSizeHorizontal*50,
-
-                          //icon: Icon(Icons.drag_handle),
-                          child:Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Icon(Icons.filter_list_outlined),
-                              SizedBox(width: 5,),
-                              Text("Filter",style:TextStyle(color: Colors.black)),
-                            ],
+                                  fontSize:    SizeConfig.blockSizeHorizontal*4,
+                                  color: Colors.white),),
                           ),
+                          FittedBox(
+                            fit:BoxFit.fitWidth,
+                            child: Text(   'Women',
+                              style: TextStyle(
 
-                        ),
-                      ),
-                 ),
-                    InkWell(
-                      onTap: (){ setState(() {
-                        tabs = !tabs ;
-                      });   },
-                      child: FittedBox(
-                        fit:  BoxFit.fitHeight,
-                        child: Container(
-
-                          width:SizeConfig.blockSizeHorizontal*50,
-
-                          //icon: Icon(Icons.drag_handle),
-                          child:Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text("Category",style:TextStyle(color: Colors.black)),
-                              SizedBox(width: 5,),
-
-                              Icon(Icons.sort),
-
-                            ],
+                                  fontSize:    SizeConfig.blockSizeHorizontal*4,
+                                  color: Colors.white),),
                           ),
+                          FittedBox(
+                            fit:BoxFit.fitWidth,
+                            child: Text(   'Baby-Boys',
+                              style: TextStyle(
 
-                        ),
+                                  fontSize:    SizeConfig.blockSizeHorizontal*4,
+                                  color: Colors.white),),
+                          ),
+                          FittedBox(
+                            fit:BoxFit.fitWidth,
+                            child: Text(   'Baby-Girls',
+                              style: TextStyle(
+
+                                  fontSize:    SizeConfig.blockSizeHorizontal*4,
+                                  color: Colors.white),),
+                          ),
+                          FittedBox(
+                            fit:BoxFit.fitWidth,
+                            child: Text(   'Kids-Boys',
+                              style: TextStyle(
+
+                                  fontSize:    SizeConfig.blockSizeHorizontal*4,
+                                  color: Colors.white),),
+                          ),
+                          FittedBox(
+                            fit:BoxFit.fitWidth,
+                            child: Text(   'Kids-Girls',
+                              style: TextStyle(
+
+                                  fontSize:    SizeConfig.blockSizeHorizontal*4,
+                                  color: Colors.white),),
+                          ),
+                          FittedBox(
+
+                            fit:BoxFit.fitWidth,
+                            child: Text(   'Teen-Boys',
+                              style: TextStyle(
+
+                                  fontSize:    SizeConfig.blockSizeHorizontal*4,
+                                  color: Colors.white),),
+                          ),
+                          FittedBox(
+                            fit:BoxFit.fitWidth,
+                            child: Text(   'Teen-Girls',
+                              style: TextStyle(
+
+                                  fontSize:    SizeConfig.blockSizeHorizontal*4,
+                                  color: Colors.white),),
+                          ),
+                        ],
                       ),
                     ),
-
-
-                  ],
-                )),
-
-                Expanded(
-                  child: TabBarView(
-                    controller: _controller,
-                     children: [
-                       Men(),
-Women(),
-                       BabyBoy(),
-                       BabyGirl(),
-                       KidBoy(),
-                       KidGirl(),
-                       TeenBoy(),
-                       TeenGirl(),
-                  ],
                   ),
-                ),
-              ],
-            ),
+                  Container(
+                    height: MediaQuery.of(context).size.height,
+                    width: MediaQuery.of(context).size.height/2.3,
+
+                    child: Column(
+                      children: [
+                        Container(
+                            height:MediaQuery.of(context).size.height/19,
+                            child:Row(
+                              children: [
+                                InkWell(
+                                  onTap: (){        showDialog<void>(
+                                    context: context,
+                                    // useRootNavigator:true,
+
+                                    barrierDismissible: true,
+                                    // false = user must tap button, true = tap outside dialog
+                                    builder: (BuildContext dialogContext) {
+                                      return Builder(builder: (BuildContext context) {
+                                        return StatefulBuilder(builder: (BuildContext context, State){
+                                          return Dialog(
+                                            shape: RoundedRectangleBorder(
+                                              borderRadius: BorderRadius.circular(20),
+                                            ),
+                                            child: Container(
+                                              height:MediaQuery.of(context).size.height/2,
+                                              child: SingleChildScrollView(
+                                                child: Column(
+                                                  children: [
+                                                    ExpansionTile(
+                                                        title: Text("Sort by price"),
+                                                        children: [Column(
+                                                          children: [
+                                                            InkWell(
+                                                              onTap: () {
+                                                                State((){});
+                                                                priceQuery = "0";
+                                                                AQuery = "A0";
+                                                                BQuery = "B0";
+                                                                CQuery = "C0";
+                                                                DQuery = "D0";
+                                                                EQuery = "E0";
+                                                                FQuery = "F0";
+                                                                GQuery = "G0";
+                                                                HQuery = "H0";
+                                                                IQuery = "I0";
+                                                                JQuery = "J0";
+                                                                KQuery = "K0";
+                                                                LQuery = "L0";
+                                                                MQuery = "M0";
+                                                                NQuery = "N0";
+                                                                OQuery = "O0";
+                                                                PQuery = "P0";
+                                                                QQuery = "Q0";
+                                                                RQuery = "R0";
+                                                                SQuery = "S0";
+
+                                                              },
+                                                              child: Container(
+                                                                color: priceQuery == "0"||priceQuery == "0D"?Colors.pink.shade50:Colors.white,
+
+                                                                height: 50,
+                                                                width: MediaQuery.of(context).size.width,
+                                                                child: Column(
+                                                                  mainAxisAlignment: MainAxisAlignment.center,
+                                                                  children: [
+                                                                    FittedBox(
+                                                                        child: Text(
+                                                                          'All',
+                                                                        )),
+                                                                  ],
+                                                                ),
+                                                              ),
+                                                            ),
+                                                            InkWell(
+                                                              onTap: () {
+                                                                State((){});
+
+                                                                priceQuery = "low";
+                                                                AQuery = "Alow";
+                                                                BQuery = "Blow";
+                                                                CQuery = "Clow";
+                                                                DQuery = "Dlow";
+                                                                EQuery = "Elow";
+                                                                FQuery = "Flow";
+                                                                GQuery = "Glow";
+                                                                HQuery = "Hlow";
+                                                                IQuery = "Ilow";
+                                                                JQuery = "Jlow";
+                                                                KQuery = "Klow";
+                                                                LQuery = "Llow";
+                                                                MQuery = "Mlow";
+                                                                NQuery = "Nlow";
+                                                                OQuery = "Olow";
+                                                                PQuery = "Plow";
+                                                                QQuery = "Qlow";
+                                                                RQuery = "Rlow";
+                                                                SQuery = "Slow";
+
+                                                              },
+                                                              child: Container(
+                                                                color: priceQuery == "low"||priceQuery == "lowD"?Colors.pink.shade50:Colors.white,
+
+                                                                height: 50,
+                                                                width: MediaQuery.of(context).size.width,
+                                                                child: Column(
+                                                                  mainAxisAlignment: MainAxisAlignment.center,
+                                                                  children: [
+                                                                    FittedBox(
+                                                                        child: Text(
+                                                                          'Low to high',
+                                                                        )),
+                                                                  ],
+                                                                ),
+                                                              ),
+                                                            ),
+                                                            InkWell(
+                                                              onTap: () {
+                                                                State((){});
+
+                                                                priceQuery = "high";
+                                                                AQuery = "Ahigh";
+                                                                BQuery = "Bhigh";
+                                                                CQuery = "Chigh";
+                                                                DQuery = "Dhigh";
+                                                                EQuery = "Ehigh";
+                                                                FQuery = "Fhigh";
+                                                                GQuery = "Ghigh";
+                                                                HQuery = "Hhigh";
+                                                                IQuery = "Ihigh";
+                                                                JQuery = "Jhigh";
+                                                                KQuery = "Khigh";
+                                                                LQuery = "Lhigh";
+                                                                MQuery = "Mhigh";
+                                                                NQuery = "Nhigh";
+                                                                OQuery = "Ohigh";
+                                                                PQuery = "Phigh";
+                                                                QQuery = "Qhigh";
+                                                                RQuery = "Rhigh";
+                                                                SQuery = "Shigh";
+
+
+                                                              },
+                                                              child: Container(
+                                                                color: priceQuery == "high"||priceQuery == "highD"?Colors.pink.shade50:Colors.white,
+
+                                                                height: 50,
+                                                                width: MediaQuery.of(context).size.width,
+                                                                child: Column(
+                                                                  mainAxisAlignment: MainAxisAlignment.center,
+                                                                  children: [
+                                                                    FittedBox(
+                                                                        child: Text(
+                                                                          'High to low',
+                                                                        )),
+                                                                  ],
+                                                                ),
+                                                              ),
+                                                            ),
+
+                                                          ],
+                                                        ),
+                                                        ]
+                                                    ),
+                                                    ExpansionTile(
+                                                        title: Text("Avoid Duties & Taxes"),
+                                                        children: [Column(
+                                                          children: [
+                                                            Text("(Shop within your country)"),
+                                                            GFToggle(
+                                                              onChanged: (val){
+                                                                setState(() {
+                                                                  duties = val;
+                                                                });
+                                                              },
+                                                              value: duties,
+                                                              type: GFToggleType.custom,
+                                                            ),
+                                                          ],
+                                                        ),
+                                                        ]
+                                                    ),
+                                                    FloatingActionButton.extended(onPressed: (){
+                                                      duties? setState((){
+                                                        priceQuery = priceQuery.replaceAll("D","");
+                                                        AQuery =AQuery.replaceAll("D","");
+                                                        BQuery =BQuery.replaceAll("D","");
+                                                        CQuery =CQuery.replaceAll("D","");
+                                                        DQuery =DQuery.replaceAll("D","");
+                                                        EQuery =EQuery.replaceAll("D","");
+                                                        FQuery =FQuery.replaceAll("D","");
+                                                        GQuery =GQuery.replaceAll("D","");
+                                                        HQuery =HQuery.replaceAll("D","");
+                                                        IQuery =IQuery.replaceAll("D","");
+                                                        JQuery =JQuery.replaceAll("D","");
+                                                        KQuery =KQuery.replaceAll("D","");
+                                                        LQuery =LQuery.replaceAll("D","");
+                                                        MQuery =MQuery.replaceAll("D","");
+                                                        NQuery =NQuery.replaceAll("D","");
+                                                        OQuery =OQuery.replaceAll("D","");
+                                                        PQuery =PQuery.replaceAll("D","");
+                                                        QQuery =QQuery.replaceAll("D","");
+                                                        RQuery =RQuery.replaceAll("D","");
+                                                        SQuery =SQuery.replaceAll("D","");
+                                                        priceQuery = priceQuery + "D";
+                                                        AQuery = AQuery + "D";
+                                                        BQuery = BQuery + "D";
+                                                        CQuery = CQuery + "D";
+                                                        DQuery = DQuery + "D";
+                                                        EQuery = EQuery + "D";
+                                                        FQuery = FQuery + "D";
+                                                        GQuery = GQuery + "D";
+                                                        HQuery = HQuery + "D";
+                                                        IQuery = IQuery + "D";
+                                                        JQuery = JQuery + "D";
+                                                        KQuery = KQuery + "D";
+                                                        LQuery = LQuery + "D";
+                                                        MQuery = MQuery + "D";
+                                                        NQuery = NQuery + "D";
+                                                        OQuery = OQuery + "D";
+                                                        PQuery = PQuery + "D";
+                                                        QQuery = QQuery + "D";
+                                                        RQuery = RQuery + "D";
+                                                        SQuery = SQuery + "D";
+
+
+                                                      }):
+                                                      setState((){
+                                                        priceQuery = priceQuery.replaceAll("D","");
+                                                        AQuery =AQuery.replaceAll("D","");
+                                                        BQuery =BQuery.replaceAll("D","");
+                                                        CQuery =CQuery.replaceAll("D","");
+                                                        DQuery =DQuery.replaceAll("D","");
+                                                        EQuery =EQuery.replaceAll("D","");
+                                                        FQuery =FQuery.replaceAll("D","");
+                                                        GQuery =GQuery.replaceAll("D","");
+                                                        HQuery =HQuery.replaceAll("D","");
+                                                        IQuery =IQuery.replaceAll("D","");
+                                                        JQuery =JQuery.replaceAll("D","");
+                                                        KQuery =KQuery.replaceAll("D","");
+                                                        LQuery =LQuery.replaceAll("D","");
+                                                        MQuery =MQuery.replaceAll("D","");
+                                                        NQuery =NQuery.replaceAll("D","");
+                                                        OQuery =OQuery.replaceAll("D","");
+                                                        PQuery =PQuery.replaceAll("D","");
+                                                        QQuery =QQuery.replaceAll("D","");
+                                                        RQuery =RQuery.replaceAll("D","");
+                                                        SQuery =SQuery.replaceAll("D","");
+
+                                                      });
+
+                                                    }, label: Text("Apply"))
+                                                  ],
+                                                ),
+                                              ),
+                                            ),
+                                          );
+                                        });
+                                      });
+                                    },
+                                  );},
+                                  child: FittedBox(
+                                    fit:  BoxFit.fitHeight,
+                                    child: Container(
+
+                                      width:MediaQuery.of(context).size.height/5,
+
+                                      //icon: Icon(Icons.drag_handle),
+                                      child:Row(
+                                        mainAxisAlignment: MainAxisAlignment.center,
+                                        children: [
+                                          Icon(Icons.filter_list_outlined),
+                                          SizedBox(width: 5,),
+                                          Text("Filter",style:TextStyle(color: Colors.black)),
+                                        ],
+                                      ),
+
+                                    ),
+                                  ),
+                                ),
+                                InkWell(
+                                  onTap: (){ setState(() {
+                                    tabs = !tabs ;
+                                  });   },
+                                  child: FittedBox(
+                                    fit:  BoxFit.fitHeight,
+                                    child: Container(
+
+                                      width:MediaQuery.of(context).size.height/5,
+
+                                      //icon: Icon(Icons.drag_handle),
+                                      child:Row(
+                                        mainAxisAlignment: MainAxisAlignment.center,
+                                        children: [
+                                          Text("Category",style:TextStyle(color: Colors.black)),
+                                          SizedBox(width: 5,),
+
+                                          Icon(Icons.sort),
+
+                                        ],
+                                      ),
+
+                                    ),
+                                  ),
+                                ),
+
+
+                              ],
+                            )),
+
+                        Container(
+                          height: MediaQuery.of(context).size.height*0.65,
+                          width:MediaQuery.of(context).size.height*0.97,
+                          child: Expanded(
+                            child: TabBarView(
+                              controller: _controller,
+                              children: [
+                                Men(),
+                                Women(),
+                                BabyBoy(),
+                                BabyGirl(),
+                                KidBoy(),
+                                KidGirl(),
+                                TeenBoy(),
+                                TeenGirl(),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+
+              Men(),
+
+            ],
+          ),
 
 
 
-        floatingActionButton: FloatingActionButton(
-          heroTag:'shop',
-          backgroundColor: Colors.black38,
-          onPressed: (){
-            WidgetsBinding.instance.addPostFrameCallback((_){
-            Navigator.push(context, MaterialPageRoute(builder: (context) =>Uploadecom(currentUser:currentUser))) .then((value) {
-                setState(() {});
-              });
-            },) ;    } ,
-          child: Icon(Icons.add_box),
+          floatingActionButton: FloatingActionButton(
+            heroTag:'shop',
+            backgroundColor: Colors.black38,
+            onPressed: (){
+              WidgetsBinding.instance.addPostFrameCallback((_){
+              Navigator.push(context, MaterialPageRoute(builder: (context) =>Uploadecom(currentUser:currentUser))) .then((value) {
+                  setState(() {});
+                });
+              },) ;    } ,
+            child: Icon(Icons.add_box),
+          ),
         ),
       );
   }
