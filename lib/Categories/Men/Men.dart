@@ -1,5 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:currency_formatter/currency_formatter.dart';
 import 'package:fashow/chatcached_image.dart';
+import 'package:fashow/enum/Variables.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_currencies_tracker/currency.dart';
@@ -191,95 +193,109 @@ All(){
       PaginateBuilderType.listView,
       itemBuilder: (index, context, documentSnapshot)   {
         String ownerId = documentSnapshot.data()['ownerId'];
-        String displayName = documentSnapshot.data()['username'];
+        String username = documentSnapshot.data()['username'];
+        String productname = documentSnapshot.data()['productname'];
+       var eur = documentSnapshot.data()['eur'];
+        var usd = documentSnapshot.data()['usd'];
+        var inr = documentSnapshot.data()['eur'];
+        var gbp = documentSnapshot.data()['usd'];
+
         String photoUrl = documentSnapshot.data()['photoUrl'];
         String prodId = documentSnapshot.data()['prodId'];
         List shopmediaUrl = documentSnapshot.data()['shopmediaUrl'];
 
         List<CItem> searchResults = [];
 
+
         Prod prod = Prod.fromDocument(documentSnapshot);
         CItem searchResult = CItem(prod);
         searchResults.add(searchResult);
-
+        //
+        // for (var i = 0; i < documentSnapshot.data().length; i++) {
+        //   CItem searchResult = CItem(prod);
+        //   searchResults.add(searchResult);
+        // }
         return
           Container(
 height: MediaQuery.of(context).size.height,
  width: MediaQuery.of(context).size.width,
 
-            child: GridView.count(
-              crossAxisCount: 2,
-                childAspectRatio: (0.1 / .4),
-
-              shrinkWrap: true,
-              physics: NeverScrollableScrollPhysics(),
-              children:[ Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Column(
-                  children: <Widget>[
-                    GestureDetector(
-                      onTap: () => showProfile(context, profileId: ownerId),
-                      child:Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Row(children:[
-                          CircleAvatar(
-                            radius: 10,
-                            backgroundImage: CachedNetworkImageProvider(photoUrl),
-                            backgroundColor: Colors.grey,
-                          ),
-                          SizedBox(width: 7.0,),
-                          Text(
-                            displayName,
-                            style: TextStyle(
-                              color: kText,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ]),
-                      ),
-
-                    ),
-
-                    GestureDetector(
-                      onTap: () => Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => ProductScreen(
-                            prodId: prodId,
-                            userId: ownerId,
+            child:
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  GestureDetector(
+                    onTap: () => showProfile(context, profileId: ownerId),
+                    child:Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Row(children:[
+                        CircleAvatar(
+                          radius: 15,
+                          backgroundImage: CachedNetworkImageProvider(photoUrl),
+                          backgroundColor: Colors.grey,
+                        ),
+                        SizedBox(width: 7.0,),
+                        Text(
+                          username,
+                          style: TextStyle(
+                            color: kText,
+                            fontWeight: FontWeight.bold,
                           ),
                         ),
-                      ),
-                      child: CachedImage(shopmediaUrl.first,height: MediaQuery
-                        .of(context)
-                        .size
-                        .height/6,width: MediaQuery
-                        .of(context)
-                        .size
-                        .width/3,),),
-
-                    Column(
-
-                      children:  [
-                        Text(prod.productname, style: TextStyle(
-                          color: kText,
-                          fontWeight: FontWeight.bold),),
-                      Text(prod.productname, style: TextStyle(
-                          color: kText,
-                          fontWeight: FontWeight.bold),),
-                      Text(prod.productname, style: TextStyle(
-                          color: kText,
-                          fontWeight: FontWeight.bold),),
-
-                      ]
-
+                      ]),
                     ),
 
-                  ],
+                  ),
 
-                ),
-              ),]
+                  GestureDetector(
+                    onTap: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => ProductScreen(
+                          prodId: prodId,
+                          userId: ownerId,
+                        ),
+                      ),
+                    ),
+                    child: CachedImage(shopmediaUrl.first,height: MediaQuery
+                        .of(context)
+                        .size
+                        .height/3,width: MediaQuery
+                        .of(context)
+                        .size
+                        .width,),),
+                  SizedBox(height: 7.0,),
+
+                  Text(productname, style: TextStyle(
+                      color: kText,
+                      ),),
+                  SizedBox(height: 7.0,),
+
+                  currentUser.currency == "INR"?  Text( "${cf.format(inr, CurrencyFormatter.inr)}",style:TextStyle(fontWeight:FontWeight.bold) ):
+                  currentUser.currency == "EUR"?Text("${cf.format(eur, CurrencyFormatter.eur)}",style:TextStyle(fontWeight:FontWeight.bold) ):
+                  currentUser.currency == "GBP"?Text("${cf.format(gbp, CurrencyFormatter.gbp)}",style:TextStyle(fontWeight:FontWeight.bold) ):
+                  Text(
+                    "${cf.format(usd, CurrencyFormatter.usd)}",style:TextStyle(fontWeight:FontWeight.bold))
+
+
+                ],
+
+              ),
             ),
+
+
+
+            // GridView.count(
+            //   crossAxisCount: 2,
+            //     childAspectRatio: (0.1 / .4),
+            //
+            //   shrinkWrap: true,
+            //   physics: NeverScrollableScrollPhysics(),
+            //   children:
+            //     searchResults
+            // ),
           );
       },
       query: priceQuery == "low"?
@@ -384,7 +400,7 @@ height: MediaQuery.of(context).size.height,
                 ):null,
 
                 body: Container(
-                  color:Colors.grey.shade200,
+                  // color:Colors.grey.shade200,
                   child: RotatedBox(
                         quarterTurns: 3,
                         child: TabBarView(
@@ -473,46 +489,71 @@ class _CItemState extends State<CItem> {
   @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        Container(
-          decoration: BoxDecoration(
-              borderRadius: BorderRadius.all(Radius.circular(20.0))),
-          margin:
-          EdgeInsets.only(top: 10.0, left: 10.0, right: 10.0, bottom: 10.0),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: <Widget>[
-
-
-              ListTile(
-                dense: true,
-                contentPadding: EdgeInsets.symmetric(horizontal: 0.0, vertical: 0.0),
-                visualDensity: VisualDensity(horizontal: 0, vertical: -4),
-                title:            Text(prod.productname, style: TextStyle(
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Column(
+        children: <Widget>[
+          GestureDetector(
+            onTap: () => showProfile(context, profileId: prod.ownerId),
+            child:Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Row(children:[
+                CircleAvatar(
+                  radius: 10,
+                  backgroundImage: CachedNetworkImageProvider(prod.photoUrl),
+                  backgroundColor: Colors.grey,
+                ),
+                SizedBox(width: 7.0,),
+                Text(
+                  prod.username,
+                  style: TextStyle(
                     color: kText,
-                    fontSize: SizeConfig.safeBlockHorizontal * 5,
-                    fontWeight: FontWeight.bold),),
-                subtitle:    currentUser.country == prod.country?
-    Text( " ${currentUser.currencysym} ${ currencyFormatter.format(prod.inr)}",style: TextStyle(color: kText,
-    fontSize: SizeConfig.safeBlockHorizontal * 4,
-    fontWeight: FontWeight.bold)) :
-                Text( " ${currentUser.currencysym} ${currencyFormatter.format(price)}",style: TextStyle(color: kText,
-                    fontSize: SizeConfig.safeBlockHorizontal * 4,
-                    fontWeight: FontWeight.bold)),
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ]),
+            ),
 
-              ),
-
-
-              SizedBox(
-                height: 10.0,
-              ),
-            ],
           ),
-        ),
 
-      ],
+          GestureDetector(
+            onTap: () => Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => ProductScreen(
+                  prodId: prod.prodId,
+                  userId: prod.ownerId,
+                ),
+              ),
+            ),
+            child: CachedImage(prod.shopmediaUrl.first,height: MediaQuery
+                .of(context)
+                .size
+                .height/6,width: MediaQuery
+                .of(context)
+                .size
+                .width/3,),),
+
+          Column(
+
+              children:  [
+                Text(prod.productname, style: TextStyle(
+                    color: kText,
+                    fontWeight: FontWeight.bold),),
+                Text(prod.productname, style: TextStyle(
+                    color: kText,
+                    fontWeight: FontWeight.bold),),
+                Text(prod.productname, style: TextStyle(
+                    color: kText,
+                    fontWeight: FontWeight.bold),),
+
+              ]
+
+          ),
+
+        ],
+
+      ),
     );
   }
 }

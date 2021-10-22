@@ -44,10 +44,6 @@ import 'package:fashow/size_config.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 
-var currencyFormatter =
-currentUser.currency == "INR"?NumberFormat.currency(locale:"HI"):
-currentUser.currency == "EUR"? NumberFormat.currency(locale:" ${currentUser.countryISO}"):
-currentUser.currency == "GBP"?NumberFormat.currency(locale:" ${currentUser.countryISO}"): NumberFormat('#,##0.00', );
 
 class Uploadecom extends StatefulWidget {
   final Users currentUser;
@@ -5181,7 +5177,6 @@ compressImage9() async {
             onPressed: ()
             {
                         Navigator.of(context).maybePop(true);
-            delete();
                       }
     ),
         ],
@@ -7358,6 +7353,4634 @@ Widget sizeGuide(){
    }
 
 }
+  AddSize(){
+    if(dropdownValue=='Men') {
+      return
+        showMaterialModalBottomSheet(
+          expand: true,
+          context: context,
+          builder: (BuildContext context) {
+            SizeConfig().init(context);
+
+            return
+              Container(
+                height: MediaQuery.of(context).size.height * 0.75,
+
+                child: DefaultTabController(
+
+                    length:5,
+                    child: Scaffold(
+                      resizeToAvoidBottomInset:true,
+                      appBar:AppBar(
+                        backgroundColor: kPrimaryColor,
+                        elevation: 0,
+                        bottom: TabBar(
+                          isScrollable: true,
+                          labelColor: Colors.white,
+                          unselectedLabelColor: kIcon,
+
+
+                          tabs:[
+                            Text("Clothing",style: TextStyle(fontSize:  SizeConfig.safeBlockHorizontal *5,),),
+                            Text("Made-to-order",style: TextStyle(fontSize:  SizeConfig.safeBlockHorizontal *5,),),
+                            Text("Free size",style: TextStyle(fontSize:  SizeConfig.safeBlockHorizontal *5),),
+                            Text("Ring(US)",style: TextStyle(fontSize:  SizeConfig.safeBlockHorizontal *5),),
+                            Text("Shoes(US)",style: TextStyle(fontSize:  SizeConfig.safeBlockHorizontal *5),),
+
+                          ],
+                        ),
+                      ),
+
+                      body: Container(
+                        height: MediaQuery.of(context).size.height * 0.75,
+
+                        child: TabBarView(
+                            children:<Widget> [
+                              ListView(
+
+
+                                children: [
+
+
+
+                                  ExpansionTile(
+                                    title: Text('XXXS'),
+                                    maintainState: true,
+                                    children: [
+
+                                      Container(
+                                        margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+                                        child: TextField(
+
+                                          keyboardType: TextInputType.number,
+                                          maxLines: 1,
+                                          controller: xxxscontroller,
+                                          decoration: InputDecoration(
+                                              border: OutlineInputBorder(
+                                                  borderSide: BorderSide(color: kGrey)),
+                                              labelText: 'Quantity in inventory',
+                                              hintText: '0'
+                                          ),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  ExpansionTile(
+                                    title: Text('XXS'),
+                                    maintainState: true,
+                                    children: [
+
+                                      Container(
+                                        margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+                                        child: TextField(
+
+                                          keyboardType: TextInputType.number,
+                                          maxLines: 1,
+                                          controller: xxscontroller,
+                                          decoration: InputDecoration(
+                                              border: OutlineInputBorder(
+                                                  borderSide: BorderSide(color: kGrey)),
+                                              labelText: 'Quantity in inventory',
+                                              hintText: '0'
+                                          ),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  ExpansionTile(
+                                    title: Text('XS'),
+                                    maintainState: true,
+                                    children: [
+
+                                      Container(
+                                        margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+                                        child: TextField(
+
+                                          keyboardType: TextInputType.number,
+                                          maxLines: 1,
+                                          controller: xscontroller,
+                                          decoration: InputDecoration(
+                                              border: OutlineInputBorder(
+                                                  borderSide: BorderSide(color: kGrey)),
+                                              labelText: 'Quantity in inventory',
+                                              hintText: '0'
+                                          ),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  ExpansionTile(
+                                    title: Text('S'),
+                                    maintainState: true,
+                                    children: [
+                                      Container(
+                                        margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+                                        child: TextField(
+
+                                          keyboardType: TextInputType.number,
+                                          maxLines: 1,
+                                          controller: scontroller,
+                                          decoration: InputDecoration(
+                                              border: OutlineInputBorder(
+                                                  borderSide: BorderSide(color: kGrey)),
+                                              labelText: 'Quantity in inventory',
+                                              hintText: '0'
+                                          ),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  ExpansionTile(
+                                    title: Text('M'),
+                                    maintainState: true,
+                                    children: [
+                                      Container(
+                                        margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+                                        child: TextField(
+
+                                          keyboardType: TextInputType.number,
+                                          maxLines: 1,
+                                          controller: mcontroller,
+                                          decoration: InputDecoration(
+                                              border: OutlineInputBorder(
+                                                  borderSide: BorderSide(color: kGrey)),
+                                              labelText: 'Quantity in inventory',
+                                              hintText: '0'
+                                          ),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  ExpansionTile(
+                                    title: Text('L'),
+                                    maintainState: true,
+                                    children: [
+                                      Container(
+                                        margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+                                        child: TextField(
+
+                                          keyboardType: TextInputType.number,
+                                          maxLines: 1,
+                                          controller: lcontroller,
+                                          decoration: InputDecoration(
+                                              border: OutlineInputBorder(
+                                                  borderSide: BorderSide(color: kGrey)),
+                                              labelText: 'Quantity in inventory',
+                                              hintText: '0'
+                                          ),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  ExpansionTile(
+                                    title: Text('XL'),
+                                    maintainState: true,
+                                    children: [
+                                      Container(
+                                        margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+                                        child: TextField(
+
+                                          keyboardType: TextInputType.number,
+                                          maxLines: 1,
+                                          controller: xlcontroller,
+                                          decoration: InputDecoration(
+                                              border: OutlineInputBorder(
+                                                  borderSide: BorderSide(color: kGrey)),
+                                              labelText: 'Quantity in inventory',
+                                              hintText: '0'
+                                          ),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  ExpansionTile(
+                                    title: Text('XXL'),
+                                    maintainState: true,
+                                    children: [
+                                      Container(
+                                        margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+                                        child: TextField(
+
+                                          keyboardType: TextInputType.number,
+                                          maxLines: 1,
+                                          controller: xxlcontroller,
+                                          decoration: InputDecoration(
+                                              border: OutlineInputBorder(
+                                                  borderSide: BorderSide(color: kGrey)),
+                                              labelText: 'Quantity in inventory',
+                                              hintText: '0'
+                                          ),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  ExpansionTile(
+                                    title: Text('XXXL'),
+                                    maintainState: true,
+                                    children: [
+                                      Container(
+                                        margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+                                        child: TextField(
+
+                                          keyboardType: TextInputType.number,
+                                          maxLines: 1,
+                                          controller: xxxlcontroller,
+                                          decoration: InputDecoration(
+                                              border: OutlineInputBorder(
+                                                  borderSide: BorderSide(color: kSubtitle)),
+                                              labelText: 'Quantity in inventory',
+                                              hintText: '0'
+                                          ),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  ExpansionTile(
+                                    title: Text('4XL'),
+                                    maintainState: true,
+                                    children: [
+                                      Container(
+                                        margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+                                        child: TextField(
+
+                                          keyboardType: TextInputType.number,
+                                          maxLines: 1,
+                                          controller: fourxlcontroller,
+                                          decoration: InputDecoration(
+                                              border: OutlineInputBorder(
+                                                  borderSide: BorderSide(color: kSubtitle)),
+                                              labelText: 'Quantity in inventory',
+                                              hintText: '0'
+                                          ),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  ExpansionTile(
+                                    title: Text('5XL'),
+                                    maintainState: true,
+                                    children: [
+                                      Container(
+                                        margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+                                        child: TextField(
+
+                                          keyboardType: TextInputType.number,
+                                          maxLines: 1,
+                                          controller: fivexlcontroller,
+                                          decoration: InputDecoration(
+                                              border: OutlineInputBorder(
+                                                  borderSide: BorderSide(color: kSubtitle)),
+                                              labelText: 'Quantity in inventory',
+                                              hintText: '0'
+                                          ),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  ExpansionTile(
+                                    title: Text('6XL'),
+                                    maintainState: true,
+                                    children: [
+                                      Container(
+                                        margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+                                        child: TextField(
+
+                                          keyboardType: TextInputType.number,
+                                          maxLines: 1,
+                                          controller: sixxlcontroller,
+                                          decoration: InputDecoration(
+                                              border: OutlineInputBorder(
+                                                  borderSide: BorderSide(color: kSubtitle)),
+                                              labelText: 'Quantity in inventory',
+                                              hintText: '0'
+                                          ),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  ExpansionTile(
+                                    title: Text('7XL'),
+                                    maintainState: true,
+                                    children: [
+                                      Container(
+                                        margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+                                        child: TextField(
+
+                                          keyboardType: TextInputType.number,
+                                          maxLines: 1,
+                                          controller: sevenxlcontroller,
+                                          decoration: InputDecoration(
+                                              border: OutlineInputBorder(
+                                                  borderSide: BorderSide(color: kSubtitle)),
+                                              labelText: 'Quantity in inventory',
+                                              hintText: '0'
+                                          ),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  ExpansionTile(
+                                    title: Text('8XL'),
+                                    maintainState: true,
+                                    children: [
+                                      Container(
+                                        margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+                                        child: TextField(
+
+                                          keyboardType: TextInputType.number,
+                                          maxLines: 1,
+                                          controller: eightxlcontroller,
+                                          decoration: InputDecoration(
+                                              border: OutlineInputBorder(
+                                                  borderSide: BorderSide(color: kSubtitle)),
+                                              labelText: 'Quantity in inventory',
+                                              hintText: '0'
+                                          ),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+
+
+                                  // ConstrainedBox(
+                                  //   constraints: new BoxConstraints(
+                                  //     minHeight: 5.0,
+                                  //     maxHeight: 40.0,
+                                  //   ),
+                                  //   child: Expanded(
+                                  //     child: ListView(
+                                  //         shrinkWrap: true,
+                                  //         // scrollDirection: Axis.vertical,
+                                  //         children:[
+                                  //         ],
+                                  //     ),
+                                  //   ),
+                                  // ),
+                                ],
+                              ),
+                              ListView(
+
+
+                                children: [
+
+
+                                  ExpansionTile(
+                                    title: Text('Made-to-order'),
+                                    maintainState: true,
+                                    children: [
+
+                                      Container(
+                                        margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+                                        child: TextField(
+
+                                          keyboardType: TextInputType.number,
+                                          maxLines: 1,
+                                          controller: mtocontroller,
+                                          decoration: InputDecoration(
+                                              border: OutlineInputBorder(
+                                                  borderSide: BorderSide(color: kGrey)),
+                                              labelText: 'Quantity in inventory',
+                                              hintText: '0'
+                                          ),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+
+
+                                ],
+                              ),
+                              ListView(
+
+
+                                children: [
+
+
+                                  ExpansionTile(
+                                    title: Text('Free size'),
+                                    maintainState: true,
+                                    children: [
+
+                                      Container(
+                                        margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+                                        child: TextField(
+
+                                          keyboardType: TextInputType.number,
+                                          maxLines: 1,
+                                          controller: freesizecontroller,
+                                          decoration: InputDecoration(
+                                              border: OutlineInputBorder(
+                                                  borderSide: BorderSide(color: kGrey)),
+                                              labelText: 'Quantity in inventory',
+                                              hintText: '0'
+                                          ),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+
+
+                                ],
+                              ),
+                              ListView(
+                                children: [
+                                  ExpansionTile(
+                                    title: Text('4'),
+                                    maintainState: true,
+                                    children: [
+                                      Container(
+                                        margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+                                        child: TextField(
+
+                                          keyboardType: TextInputType.number,
+                                          maxLines: 1,
+                                          controller: Ring1controller,
+                                          decoration: InputDecoration(
+                                              border: OutlineInputBorder(
+                                                  borderSide: BorderSide(color: kGrey)),
+                                              labelText: 'Quantity in inventory',
+                                              hintText: '0'
+                                          ),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  ExpansionTile(
+                                    title: Text('4.5'),
+                                    maintainState: true,
+                                    children: [
+                                      Container(
+                                        margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+                                        child: TextField(
+
+                                          keyboardType: TextInputType.number,
+                                          maxLines: 1,
+                                          controller: Ring2controller,
+                                          decoration: InputDecoration(
+                                              border: OutlineInputBorder(
+                                                  borderSide: BorderSide(color: kGrey)),
+                                              labelText: 'Quantity in inventory',
+                                              hintText: '0'
+                                          ),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  ExpansionTile(
+                                    title: Text('5'),
+                                    maintainState: true,
+                                    children: [
+                                      Container(
+                                        margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+                                        child: TextField(
+
+                                          keyboardType: TextInputType.number,
+                                          maxLines: 1,
+                                          controller: Ring3controller,
+                                          decoration: InputDecoration(
+                                              border: OutlineInputBorder(
+                                                  borderSide: BorderSide(color: kGrey)),
+                                              labelText: 'Quantity in inventory',
+                                              hintText: '0'
+                                          ),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  ExpansionTile(
+                                    title: Text('5.5'),
+                                    maintainState: true,
+                                    children: [
+                                      Container(
+                                        margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+                                        child: TextField(
+
+                                          keyboardType: TextInputType.number,
+                                          maxLines: 1,
+                                          controller: Ring4controller,
+                                          decoration: InputDecoration(
+                                              border: OutlineInputBorder(
+                                                  borderSide: BorderSide(color: kGrey)),
+                                              labelText: 'Quantity in inventory',
+                                              hintText: '0'
+                                          ),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  ExpansionTile(
+                                    title: Text('6'),
+                                    maintainState: true,
+                                    children: [
+                                      Container(
+                                        margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+                                        child: TextField(
+
+                                          keyboardType: TextInputType.number,
+                                          maxLines: 1,
+                                          controller: Ring5controller,
+                                          decoration: InputDecoration(
+                                              border: OutlineInputBorder(
+                                                  borderSide: BorderSide(color: kGrey)),
+                                              labelText: 'Quantity in inventory',
+                                              hintText: '0'
+                                          ),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  ExpansionTile(
+                                    title: Text('6.5'),
+                                    maintainState: true,
+                                    children: [
+                                      Container(
+                                        margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+                                        child: TextField(
+
+                                          keyboardType: TextInputType.number,
+                                          maxLines: 1,
+                                          controller: Ring6controller,
+                                          decoration: InputDecoration(
+                                              border: OutlineInputBorder(
+                                                  borderSide: BorderSide(color: kGrey)),
+                                              labelText: 'Quantity in inventory',
+                                              hintText: '0'
+                                          ),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  ExpansionTile(
+                                    title: Text('7'),
+                                    maintainState: true,
+                                    children: [
+                                      Container(
+                                        margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+                                        child: TextField(
+
+                                          keyboardType: TextInputType.number,
+                                          maxLines: 1,
+                                          controller: Ring7controller,
+                                          decoration: InputDecoration(
+                                              border: OutlineInputBorder(
+                                                  borderSide: BorderSide(color: kGrey)),
+                                              labelText: 'Quantity in inventory',
+                                              hintText: '0'
+                                          ),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  ExpansionTile(
+                                    title: Text('7.5'),
+                                    maintainState: true,
+                                    children: [
+                                      Container(
+                                        margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+                                        child: TextField(
+
+                                          keyboardType: TextInputType.number,
+                                          maxLines: 1,
+                                          controller: Ring8controller,
+                                          decoration: InputDecoration(
+                                              border: OutlineInputBorder(
+                                                  borderSide: BorderSide(color: kGrey)),
+                                              labelText: 'Quantity in inventory',
+                                              hintText: '0'
+                                          ),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  ExpansionTile(
+                                    title: Text('8'),
+                                    maintainState: true,
+                                    children: [
+                                      Container(
+                                        margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+                                        child: TextField(
+
+                                          keyboardType: TextInputType.number,
+                                          maxLines: 1,
+                                          controller: Ring9controller,
+                                          decoration: InputDecoration(
+                                              border: OutlineInputBorder(
+                                                  borderSide: BorderSide(color: kGrey)),
+                                              labelText: 'Quantity in inventory',
+                                              hintText: '0'
+                                          ),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  ExpansionTile(
+                                    title: Text('8.5'),
+                                    maintainState: true,
+                                    children: [
+                                      Container(
+                                        margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+                                        child: TextField(
+
+                                          keyboardType: TextInputType.number,
+                                          maxLines: 1,
+                                          controller: Ring10controller,
+                                          decoration: InputDecoration(
+                                              border: OutlineInputBorder(
+                                                  borderSide: BorderSide(color: kGrey)),
+                                              labelText: 'Quantity in inventory',
+                                              hintText: '0'
+                                          ),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  ExpansionTile(
+                                    title: Text('9'),
+                                    maintainState: true,
+                                    children: [
+                                      Container(
+                                        margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+                                        child: TextField(
+
+                                          keyboardType: TextInputType.number,
+                                          maxLines: 1,
+                                          controller: Ring11controller,
+                                          decoration: InputDecoration(
+                                              border: OutlineInputBorder(
+                                                  borderSide: BorderSide(color: kGrey)),
+                                              labelText: 'Quantity in inventory',
+                                              hintText: '0'
+                                          ),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  ExpansionTile(
+                                    title: Text('9.5'),
+                                    maintainState: true,
+                                    children: [
+                                      Container(
+                                        margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+                                        child: TextField(
+
+                                          keyboardType: TextInputType.number,
+                                          maxLines: 1,
+                                          controller: Ring12controller,
+                                          decoration: InputDecoration(
+                                              border: OutlineInputBorder(
+                                                  borderSide: BorderSide(color: kGrey)),
+                                              labelText: 'Quantity in inventory',
+                                              hintText: '0'
+                                          ),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  ExpansionTile(
+                                    title: Text('10'),
+                                    maintainState: true,
+                                    children: [
+                                      Container(
+                                        margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+                                        child: TextField(
+
+                                          keyboardType: TextInputType.number,
+                                          maxLines: 1,
+                                          controller: Ring13controller,
+                                          decoration: InputDecoration(
+                                              border: OutlineInputBorder(
+                                                  borderSide: BorderSide(color: kGrey)),
+                                              labelText: 'Quantity in inventory',
+                                              hintText: '0'
+                                          ),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  ExpansionTile(
+                                    title: Text('10.5'),
+                                    maintainState: true,
+                                    children: [
+                                      Container(
+                                        margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+                                        child: TextField(
+
+                                          keyboardType: TextInputType.number,
+                                          maxLines: 1,
+                                          controller: Ring14controller,
+                                          decoration: InputDecoration(
+                                              border: OutlineInputBorder(
+                                                  borderSide: BorderSide(color: kGrey)),
+                                              labelText: 'Quantity in inventory',
+                                              hintText: '0'
+                                          ),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  ExpansionTile(
+                                    title: Text('11'),
+                                    maintainState: true,
+                                    children: [
+                                      Container(
+                                        margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+                                        child: TextField(
+
+                                          keyboardType: TextInputType.number,
+                                          maxLines: 1,
+                                          controller: Ring15controller,
+                                          decoration: InputDecoration(
+                                              border: OutlineInputBorder(
+                                                  borderSide: BorderSide(color: kGrey)),
+                                              labelText: 'Quantity in inventory',
+                                              hintText: '0'
+                                          ),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  ExpansionTile(
+                                    title: Text('11.5'),
+                                    maintainState: true,
+                                    children: [
+                                      Container(
+                                        margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+                                        child: TextField(
+
+                                          keyboardType: TextInputType.number,
+                                          maxLines: 1,
+                                          controller: Ring16controller,
+                                          decoration: InputDecoration(
+                                              border: OutlineInputBorder(
+                                                  borderSide: BorderSide(color: kGrey)),
+                                              labelText: 'Quantity in inventory',
+                                              hintText: '0'
+                                          ),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  ExpansionTile(
+                                    title: Text('12'),
+                                    maintainState: true,
+                                    children: [
+                                      Container(
+                                        margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+                                        child: TextField(
+
+                                          keyboardType: TextInputType.number,
+                                          maxLines: 1,
+                                          controller: Ring17controller,
+                                          decoration: InputDecoration(
+                                              border: OutlineInputBorder(
+                                                  borderSide: BorderSide(color: kGrey)),
+                                              labelText: 'Quantity in inventory',
+                                              hintText: '0'
+                                          ),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  ExpansionTile(
+                                    title: Text('12.5'),
+                                    maintainState: true,
+                                    children: [
+                                      Container(
+                                        margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+                                        child: TextField(
+
+                                          keyboardType: TextInputType.number,
+                                          maxLines: 1,
+                                          controller: Ring18controller,
+                                          decoration: InputDecoration(
+                                              border: OutlineInputBorder(
+                                                  borderSide: BorderSide(color: kGrey)),
+                                              labelText: 'Quantity in inventory',
+                                              hintText: '0'
+                                          ),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  ExpansionTile(
+                                    title: Text('13'),
+                                    maintainState: true,
+                                    children: [
+                                      Container(
+                                        margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+                                        child: TextField(
+
+                                          keyboardType: TextInputType.number,
+                                          maxLines: 1,
+                                          controller: Ring19controller,
+                                          decoration: InputDecoration(
+                                              border: OutlineInputBorder(
+                                                  borderSide: BorderSide(color: kGrey)),
+                                              labelText: 'Quantity in inventory',
+                                              hintText: '0'
+                                          ),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  ExpansionTile(
+                                    title: Text('13.5'),
+                                    maintainState: true,
+                                    children: [
+                                      Container(
+                                        margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+                                        child: TextField(
+
+                                          keyboardType: TextInputType.number,
+                                          maxLines: 1,
+                                          controller: Ring20controller,
+                                          decoration: InputDecoration(
+                                              border: OutlineInputBorder(
+                                                  borderSide: BorderSide(color: kGrey)),
+                                              labelText: 'Quantity in inventory',
+                                              hintText: '0'
+                                          ),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  ExpansionTile(
+                                    title: Text('14'),
+                                    maintainState: true,
+                                    children: [
+                                      Container(
+                                        margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+                                        child: TextField(
+
+                                          keyboardType: TextInputType.number,
+                                          maxLines: 1,
+                                          controller: Ring21controller,
+                                          decoration: InputDecoration(
+                                              border: OutlineInputBorder(
+                                                  borderSide: BorderSide(color: kGrey)),
+                                              labelText: 'Quantity in inventory',
+                                              hintText: '0'
+                                          ),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  ExpansionTile(
+                                    title: Text('14.5'),
+                                    maintainState: true,
+                                    children: [
+                                      Container(
+                                        margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+                                        child: TextField(
+
+                                          keyboardType: TextInputType.number,
+                                          maxLines: 1,
+                                          controller: Ring22controller,
+                                          decoration: InputDecoration(
+                                              border: OutlineInputBorder(
+                                                  borderSide: BorderSide(color: kGrey)),
+                                              labelText: 'Quantity in inventory',
+                                              hintText: '0'
+                                          ),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  ExpansionTile(
+                                    title: Text('15'),
+                                    maintainState: true,
+                                    children: [
+                                      Container(
+                                        margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+                                        child: TextField(
+
+                                          keyboardType: TextInputType.number,
+                                          maxLines: 1,
+                                          controller: Ring23controller,
+                                          decoration: InputDecoration(
+                                              border: OutlineInputBorder(
+                                                  borderSide: BorderSide(color: kGrey)),
+                                              labelText: 'Quantity in inventory',
+                                              hintText: '0'
+                                          ),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+
+                                ],
+                              ),
+
+                              ListView(
+                                children: [
+                                  ExpansionTile(
+                                    title: Text('3 ½'),
+                                    maintainState: true,
+                                    children: [
+                                      Container(
+                                        margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+                                        child: TextField(
+
+                                          keyboardType: TextInputType.number,
+                                          maxLines: 1,
+                                          controller: Shoe1controller,
+                                          decoration: InputDecoration(
+                                              border: OutlineInputBorder(
+                                                  borderSide: BorderSide(color: kGrey)),
+                                              labelText: 'Quantity in inventory',
+                                              hintText: '0'
+                                          ),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  ExpansionTile(
+                                    title: Text('4'),
+                                    maintainState: true,
+                                    children: [
+                                      Container(
+                                        margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+                                        child: TextField(
+
+                                          keyboardType: TextInputType.number,
+                                          maxLines: 1,
+                                          controller: Shoe2controller,
+                                          decoration: InputDecoration(
+                                              border: OutlineInputBorder(
+                                                  borderSide: BorderSide(color: kGrey)),
+                                              labelText: 'Quantity in inventory',
+                                              hintText: '0'
+                                          ),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  ExpansionTile(
+                                    title: Text('4 ½'),
+                                    maintainState: true,
+                                    children: [
+                                      Container(
+                                        margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+                                        child: TextField(
+
+                                          keyboardType: TextInputType.number,
+                                          maxLines: 1,
+                                          controller: Shoe3controller,
+                                          decoration: InputDecoration(
+                                              border: OutlineInputBorder(
+                                                  borderSide: BorderSide(color: kGrey)),
+                                              labelText: 'Quantity in inventory',
+                                              hintText: '0'
+                                          ),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  ExpansionTile(
+                                    title: Text('5'),
+                                    maintainState: true,
+                                    children: [
+                                      Container(
+                                        margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+                                        child: TextField(
+
+                                          keyboardType: TextInputType.number,
+                                          maxLines: 1,
+                                          controller: Shoe4controller,
+                                          decoration: InputDecoration(
+                                              border: OutlineInputBorder(
+                                                  borderSide: BorderSide(color: kGrey)),
+                                              labelText: 'Quantity in inventory',
+                                              hintText: '0'
+                                          ),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  ExpansionTile(
+                                    title: Text('5 ½'),
+                                    maintainState: true,
+                                    children: [
+                                      Container(
+                                        margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+                                        child: TextField(
+
+                                          keyboardType: TextInputType.number,
+                                          maxLines: 1,
+                                          controller: Shoe5controller,
+                                          decoration: InputDecoration(
+                                              border: OutlineInputBorder(
+                                                  borderSide: BorderSide(color: kGrey)),
+                                              labelText: 'Quantity in inventory',
+                                              hintText: '0'
+                                          ),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  ExpansionTile(
+                                    title: Text('6'),
+                                    maintainState: true,
+                                    children: [
+                                      Container(
+                                        margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+                                        child: TextField(
+
+                                          keyboardType: TextInputType.number,
+                                          maxLines: 1,
+                                          controller: Shoe6controller,
+                                          decoration: InputDecoration(
+                                              border: OutlineInputBorder(
+                                                  borderSide: BorderSide(color: kGrey)),
+                                              labelText: 'Quantity in inventory',
+                                              hintText: '0'
+                                          ),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  ExpansionTile(
+                                    title: Text('6 ½'),
+                                    maintainState: true,
+                                    children: [
+                                      Container(
+                                        margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+                                        child: TextField(
+
+                                          keyboardType: TextInputType.number,
+                                          maxLines: 1,
+                                          controller: Shoe7controller,
+                                          decoration: InputDecoration(
+                                              border: OutlineInputBorder(
+                                                  borderSide: BorderSide(color: kGrey)),
+                                              labelText: 'Quantity in inventory',
+                                              hintText: '0'
+                                          ),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  ExpansionTile(
+                                    title: Text('7'),
+                                    maintainState: true,
+                                    children: [
+                                      Container(
+                                        margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+                                        child: TextField(
+
+                                          keyboardType: TextInputType.number,
+                                          maxLines: 1,
+                                          controller: Shoe8controller,
+                                          decoration: InputDecoration(
+                                              border: OutlineInputBorder(
+                                                  borderSide: BorderSide(color: kGrey)),
+                                              labelText: 'Quantity in inventory',
+                                              hintText: '0'
+                                          ),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  ExpansionTile(
+                                    title: Text('7 ½'),
+                                    maintainState: true,
+                                    children: [
+                                      Container(
+                                        margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+                                        child: TextField(
+
+                                          keyboardType: TextInputType.number,
+                                          maxLines: 1,
+                                          controller: Shoe9controller,
+                                          decoration: InputDecoration(
+                                              border: OutlineInputBorder(
+                                                  borderSide: BorderSide(color: kGrey)),
+                                              labelText: 'Quantity in inventory',
+                                              hintText: '0'
+                                          ),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  ExpansionTile(
+                                    title: Text('8'),
+                                    maintainState: true,
+                                    children: [
+                                      Container(
+                                        margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+                                        child: TextField(
+
+                                          keyboardType: TextInputType.number,
+                                          maxLines: 1,
+                                          controller: Shoe10controller,
+                                          decoration: InputDecoration(
+                                              border: OutlineInputBorder(
+                                                  borderSide: BorderSide(color: kGrey)),
+                                              labelText: 'Quantity in inventory',
+                                              hintText: '0'
+                                          ),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  ExpansionTile(
+                                    title: Text('8 ½'),
+                                    maintainState: true,
+                                    children: [
+                                      Container(
+                                        margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+                                        child: TextField(
+
+                                          keyboardType: TextInputType.number,
+                                          maxLines: 1,
+                                          controller: Shoe11controller,
+                                          decoration: InputDecoration(
+                                              border: OutlineInputBorder(
+                                                  borderSide: BorderSide(color: kGrey)),
+                                              labelText: 'Quantity in inventory',
+                                              hintText: '0'
+                                          ),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  ExpansionTile(
+                                    title: Text('9'),
+                                    maintainState: true,
+                                    children: [
+                                      Container(
+                                        margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+                                        child: TextField(
+
+                                          keyboardType: TextInputType.number,
+                                          maxLines: 1,
+                                          controller: Shoe12controller,
+                                          decoration: InputDecoration(
+                                              border: OutlineInputBorder(
+                                                  borderSide: BorderSide(color: kGrey)),
+                                              labelText: 'Quantity in inventory',
+                                              hintText: '0'
+                                          ),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  ExpansionTile(
+                                    title: Text('9 ½'),
+                                    maintainState: true,
+                                    children: [
+                                      Container(
+                                        margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+                                        child: TextField(
+
+                                          keyboardType: TextInputType.number,
+                                          maxLines: 1,
+                                          controller: Shoe13controller,
+                                          decoration: InputDecoration(
+                                              border: OutlineInputBorder(
+                                                  borderSide: BorderSide(color: kGrey)),
+                                              labelText: 'Quantity in inventory',
+                                              hintText: '0'
+                                          ),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  ExpansionTile(
+                                    title: Text('10'),
+                                    maintainState: true,
+                                    children: [
+                                      Container(
+                                        margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+                                        child: TextField(
+
+                                          keyboardType: TextInputType.number,
+                                          maxLines: 1,
+                                          controller: Shoe14controller,
+                                          decoration: InputDecoration(
+                                              border: OutlineInputBorder(
+                                                  borderSide: BorderSide(color: kGrey)),
+                                              labelText: 'Quantity in inventory',
+                                              hintText: '0'
+                                          ),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  ExpansionTile(
+                                    title: Text('10 ½'),
+                                    maintainState: true,
+                                    children: [
+                                      Container(
+                                        margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+                                        child: TextField(
+
+                                          keyboardType: TextInputType.number,
+                                          maxLines: 1,
+                                          controller: Shoe15controller,
+                                          decoration: InputDecoration(
+                                              border: OutlineInputBorder(
+                                                  borderSide: BorderSide(color: kGrey)),
+                                              labelText: 'Quantity in inventory',
+                                              hintText: '0'
+                                          ),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  ExpansionTile(
+                                    title: Text('11'),
+                                    maintainState: true,
+                                    children: [
+                                      Container(
+                                        margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+                                        child: TextField(
+
+                                          keyboardType: TextInputType.number,
+                                          maxLines: 1,
+                                          controller: Shoe16controller,
+                                          decoration: InputDecoration(
+                                              border: OutlineInputBorder(
+                                                  borderSide: BorderSide(color: kGrey)),
+                                              labelText: 'Quantity in inventory',
+                                              hintText: '0'
+                                          ),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  ExpansionTile(
+                                    title: Text('11 ½'),
+                                    maintainState: true,
+                                    children: [
+                                      Container(
+                                        margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+                                        child: TextField(
+
+                                          keyboardType: TextInputType.number,
+                                          maxLines: 1,
+                                          controller: Shoe17controller,
+                                          decoration: InputDecoration(
+                                              border: OutlineInputBorder(
+                                                  borderSide: BorderSide(color: kGrey)),
+                                              labelText: 'Quantity in inventory',
+                                              hintText: '0'
+                                          ),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  ExpansionTile(
+                                    title: Text('12'),
+                                    maintainState: true,
+                                    children: [
+                                      Container(
+                                        margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+                                        child: TextField(
+
+                                          keyboardType: TextInputType.number,
+                                          maxLines: 1,
+                                          controller: Shoe18controller,
+                                          decoration: InputDecoration(
+                                              border: OutlineInputBorder(
+                                                  borderSide: BorderSide(color: kGrey)),
+                                              labelText: 'Quantity in inventory',
+                                              hintText: '0'
+                                          ),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  ExpansionTile(
+                                    title: Text('12 ½'),
+                                    maintainState: true,
+                                    children: [
+                                      Container(
+                                        margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+                                        child: TextField(
+
+                                          keyboardType: TextInputType.number,
+                                          maxLines: 1,
+                                          controller: Shoe19controller,
+                                          decoration: InputDecoration(
+                                              border: OutlineInputBorder(
+                                                  borderSide: BorderSide(color: kGrey)),
+                                              labelText: 'Quantity in inventory',
+                                              hintText: '0'
+                                          ),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  ExpansionTile(
+                                    title: Text('13'),
+                                    maintainState: true,
+                                    children: [
+                                      Container(
+                                        margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+                                        child: TextField(
+
+                                          keyboardType: TextInputType.number,
+                                          maxLines: 1,
+                                          controller: Shoe20controller,
+                                          decoration: InputDecoration(
+                                              border: OutlineInputBorder(
+                                                  borderSide: BorderSide(color: kGrey)),
+                                              labelText: 'Quantity in inventory',
+                                              hintText: '0'
+                                          ),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  ExpansionTile(
+                                    title: Text('13 ½'),
+                                    maintainState: true,
+                                    children: [
+                                      Container(
+                                        margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+                                        child: TextField(
+
+                                          keyboardType: TextInputType.number,
+                                          maxLines: 1,
+                                          controller: Shoe21controller,
+                                          decoration: InputDecoration(
+                                              border: OutlineInputBorder(
+                                                  borderSide: BorderSide(color: kGrey)),
+                                              labelText: 'Quantity in inventory',
+                                              hintText: '0'
+                                          ),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+
+                                ],
+                              ),
+
+                            ]),
+                      ),
+                    )
+                ),
+              );      },
+        );
+    }
+    else if(dropdownValue=='Women') {
+      return
+        showMaterialModalBottomSheet(
+          expand: true,
+          context: context,
+          builder: (BuildContext context) {
+            SizeConfig().init(context);
+
+            return
+              Expanded(
+                child: DefaultTabController(
+
+                    length:5,
+                    child: Scaffold(
+
+                      appBar:AppBar(
+                        backgroundColor: kPrimaryColor,
+                        elevation: 0,
+                        bottom: TabBar(
+                          isScrollable: true,
+                          labelColor: Colors.white,
+                          unselectedLabelColor: kIcon,
+
+
+                          tabs:[
+                            Text("Clothing",style: TextStyle(fontSize:  SizeConfig.safeBlockHorizontal *5,),),
+                            Text("Made-to-order",style: TextStyle(fontSize:  SizeConfig.safeBlockHorizontal *5,),),
+                            Text("Free size",style: TextStyle(fontSize:  SizeConfig.safeBlockHorizontal *5),),
+                            Text("Ring(US)",style: TextStyle(fontSize:  SizeConfig.safeBlockHorizontal *5),),
+                            Text("Shoes(US)",style: TextStyle(fontSize:  SizeConfig.safeBlockHorizontal *5),),
+
+                          ],
+                        ),
+                      ),
+
+                      body: Container(
+
+                        child: TabBarView(
+                            children:<Widget> [
+                              ListView(
+
+
+                                children: [
+
+
+                                  ExpansionTile(
+                                    title: Text('XXXS'),
+                                    maintainState: true,
+                                    children: [
+                                      Container(
+                                        margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+                                        child: TextField(
+
+                                          keyboardType: TextInputType.number,
+                                          maxLines: 1,
+                                          controller: xxxscontroller,
+                                          decoration: InputDecoration(
+                                              border: OutlineInputBorder(
+                                                  borderSide: BorderSide(color: kGrey)),
+                                              labelText: 'Quantity in inventory',
+                                              hintText: '0'
+                                          ),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  ExpansionTile(
+                                    title: Text('XXS'),
+                                    maintainState: true,
+                                    children: [
+                                      Container(
+                                        margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+                                        child: TextField(
+
+                                          keyboardType: TextInputType.number,
+                                          maxLines: 1,
+                                          controller: xxscontroller,
+                                          decoration: InputDecoration(
+                                              border: OutlineInputBorder(
+                                                  borderSide: BorderSide(color: kGrey)),
+                                              labelText: 'Quantity in inventory',
+                                              hintText: '0'
+                                          ),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  ExpansionTile(
+                                    title: Text('XS'),
+                                    maintainState: true,
+                                    children: [
+                                      Container(
+                                        margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+                                        child: TextField(
+
+                                          keyboardType: TextInputType.number,
+                                          maxLines: 1,
+                                          controller: xscontroller,
+                                          decoration: InputDecoration(
+                                              border: OutlineInputBorder(
+                                                  borderSide: BorderSide(color: kGrey)),
+                                              labelText: 'Quantity in inventory',
+                                              hintText: '0'
+                                          ),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  ExpansionTile(
+                                    title: Text('S'),
+                                    maintainState: true,
+                                    children: [
+                                      Container(
+                                        margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+                                        child: TextField(
+
+                                          keyboardType: TextInputType.number,
+                                          maxLines: 1,
+                                          controller: scontroller,
+                                          decoration: InputDecoration(
+                                              border: OutlineInputBorder(
+                                                  borderSide: BorderSide(color: kGrey)),
+                                              labelText: 'Quantity in inventory',
+                                              hintText: '0'
+                                          ),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  ExpansionTile(
+                                    title: Text('M'),
+                                    maintainState: true,
+                                    children: [
+                                      Container(
+                                        margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+                                        child: TextField(
+
+                                          keyboardType: TextInputType.number,
+                                          maxLines: 1,
+                                          controller: mcontroller,
+                                          decoration: InputDecoration(
+                                              border: OutlineInputBorder(
+                                                  borderSide: BorderSide(color: kGrey)),
+                                              labelText: 'Quantity in inventory',
+                                              hintText: '0'
+                                          ),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  ExpansionTile(
+                                    title: Text('L'),
+                                    maintainState: true,
+                                    children: [
+                                      Container(
+                                        margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+                                        child: TextField(
+
+                                          keyboardType: TextInputType.number,
+                                          maxLines: 1,
+                                          controller: lcontroller,
+                                          decoration: InputDecoration(
+                                              border: OutlineInputBorder(
+                                                  borderSide: BorderSide(color: kGrey)),
+                                              labelText: 'Quantity in inventory',
+                                              hintText: '0'
+                                          ),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  ExpansionTile(
+                                    title: Text('XL'),
+                                    maintainState: true,
+                                    children: [
+                                      Container(
+                                        margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+                                        child: TextField(
+
+                                          keyboardType: TextInputType.number,
+                                          maxLines: 1,
+                                          controller: xlcontroller,
+                                          decoration: InputDecoration(
+                                              border: OutlineInputBorder(
+                                                  borderSide: BorderSide(color: kGrey)),
+                                              labelText: 'Quantity in inventory',
+                                              hintText: '0'
+                                          ),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  ExpansionTile(
+                                    title: Text('XXL'),
+                                    maintainState: true,
+                                    children: [
+                                      Container(
+                                        margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+                                        child: TextField(
+
+                                          keyboardType: TextInputType.number,
+                                          maxLines: 1,
+                                          controller: xxlcontroller,
+                                          decoration: InputDecoration(
+                                              border: OutlineInputBorder(
+                                                  borderSide: BorderSide(color: kGrey)),
+                                              labelText: 'Quantity in inventory',
+                                              hintText: '0'
+                                          ),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  ExpansionTile(
+                                    title: Text('XXXL'),
+                                    maintainState: true,
+                                    children: [
+                                      Container(
+                                        margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+                                        child: TextField(
+
+                                          keyboardType: TextInputType.number,
+                                          maxLines: 1,
+                                          controller: xxxlcontroller,
+                                          decoration: InputDecoration(
+                                              border: OutlineInputBorder(
+                                                  borderSide: BorderSide(color: kSubtitle)),
+                                              labelText: 'Quantity in inventory',
+                                              hintText: '0'
+                                          ),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  ExpansionTile(
+                                    title: Text('4XL'),
+                                    maintainState: true,
+                                    children: [
+                                      Container(
+                                        margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+                                        child: TextField(
+
+                                          keyboardType: TextInputType.number,
+                                          maxLines: 1,
+                                          controller: fourxlcontroller,
+                                          decoration: InputDecoration(
+                                              border: OutlineInputBorder(
+                                                  borderSide: BorderSide(color: kSubtitle)),
+                                              labelText: 'Quantity in inventory',
+                                              hintText: '0'
+                                          ),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  ExpansionTile(
+                                    title: Text('5XL'),
+                                    maintainState: true,
+                                    children: [
+                                      Container(
+                                        margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+                                        child: TextField(
+
+                                          keyboardType: TextInputType.number,
+                                          maxLines: 1,
+                                          controller: fivexlcontroller,
+                                          decoration: InputDecoration(
+                                              border: OutlineInputBorder(
+                                                  borderSide: BorderSide(color: kSubtitle)),
+                                              labelText: 'Quantity in inventory',
+                                              hintText: '0'
+                                          ),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  ExpansionTile(
+                                    title: Text('6XL'),
+                                    maintainState: true,
+                                    children: [
+                                      Container(
+                                        margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+                                        child: TextField(
+
+                                          keyboardType: TextInputType.number,
+                                          maxLines: 1,
+                                          controller: sixxlcontroller,
+                                          decoration: InputDecoration(
+                                              border: OutlineInputBorder(
+                                                  borderSide: BorderSide(color: kSubtitle)),
+                                              labelText: 'Quantity in inventory',
+                                              hintText: '0'
+                                          ),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  ExpansionTile(
+                                    title: Text('7XL'),
+                                    maintainState: true,
+                                    children: [
+                                      Container(
+                                        margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+                                        child: TextField(
+
+                                          keyboardType: TextInputType.number,
+                                          maxLines: 1,
+                                          controller: sevenxlcontroller,
+                                          decoration: InputDecoration(
+                                              border: OutlineInputBorder(
+                                                  borderSide: BorderSide(color: kSubtitle)),
+                                              labelText: 'Quantity in inventory',
+                                              hintText: '0'
+                                          ),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  ExpansionTile(
+                                    title: Text('8XL'),
+                                    maintainState: true,
+                                    children: [
+                                      Container(
+                                        margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+                                        child: TextField(
+
+                                          keyboardType: TextInputType.number,
+                                          maxLines: 1,
+                                          controller: eightxlcontroller,
+                                          decoration: InputDecoration(
+                                              border: OutlineInputBorder(
+                                                  borderSide: BorderSide(color: kSubtitle)),
+                                              labelText: 'Quantity in inventory',
+                                              hintText: '0'
+                                          ),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+
+
+                                ],
+                              ),
+                              ListView(
+
+
+                                children: [
+
+
+                                  ExpansionTile(
+                                    title: Text('Made-to-order'),
+                                    maintainState: true,
+                                    children: [
+
+                                      Container(
+                                        margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+                                        child: TextField(
+
+                                          keyboardType: TextInputType.number,
+                                          maxLines: 1,
+                                          controller: mtocontroller,
+                                          decoration: InputDecoration(
+                                              border: OutlineInputBorder(
+                                                  borderSide: BorderSide(color: kGrey)),
+                                              labelText: 'Quantity in inventory',
+                                              hintText: '0'
+                                          ),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+
+
+                                ],
+                              ),
+                              ListView(
+
+
+                                children: [
+
+
+                                  ExpansionTile(
+                                    title: Text('Free size'),
+                                    maintainState: true,
+                                    children: [
+
+                                      Container(
+                                        margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+                                        child: TextField(
+
+                                          keyboardType: TextInputType.number,
+                                          maxLines: 1,
+                                          controller: freesizecontroller,
+                                          decoration: InputDecoration(
+                                              border: OutlineInputBorder(
+                                                  borderSide: BorderSide(color: kGrey)),
+                                              labelText: 'Quantity in inventory',
+                                              hintText: '0'
+                                          ),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+
+
+                                ],
+                              ),
+                              ListView(
+                                children: [
+                                  ExpansionTile(
+                                    title: Text('4'),
+                                    maintainState: true,
+                                    children: [
+                                      Container(
+                                        margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+                                        child: TextField(
+
+                                          keyboardType: TextInputType.number,
+                                          maxLines: 1,
+                                          controller: Ring1controller,
+                                          decoration: InputDecoration(
+                                              border: OutlineInputBorder(
+                                                  borderSide: BorderSide(color: kGrey)),
+                                              labelText: 'Quantity in inventory',
+                                              hintText: '0'
+                                          ),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  ExpansionTile(
+                                    title: Text('4.5'),
+                                    maintainState: true,
+                                    children: [
+                                      Container(
+                                        margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+                                        child: TextField(
+
+                                          keyboardType: TextInputType.number,
+                                          maxLines: 1,
+                                          controller: Ring2controller,
+                                          decoration: InputDecoration(
+                                              border: OutlineInputBorder(
+                                                  borderSide: BorderSide(color: kGrey)),
+                                              labelText: 'Quantity in inventory',
+                                              hintText: '0'
+                                          ),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  ExpansionTile(
+                                    title: Text('5'),
+                                    maintainState: true,
+                                    children: [
+                                      Container(
+                                        margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+                                        child: TextField(
+
+                                          keyboardType: TextInputType.number,
+                                          maxLines: 1,
+                                          controller: Ring3controller,
+                                          decoration: InputDecoration(
+                                              border: OutlineInputBorder(
+                                                  borderSide: BorderSide(color: kGrey)),
+                                              labelText: 'Quantity in inventory',
+                                              hintText: '0'
+                                          ),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  ExpansionTile(
+                                    title: Text('5.5'),
+                                    maintainState: true,
+                                    children: [
+                                      Container(
+                                        margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+                                        child: TextField(
+
+                                          keyboardType: TextInputType.number,
+                                          maxLines: 1,
+                                          controller: Ring4controller,
+                                          decoration: InputDecoration(
+                                              border: OutlineInputBorder(
+                                                  borderSide: BorderSide(color: kGrey)),
+                                              labelText: 'Quantity in inventory',
+                                              hintText: '0'
+                                          ),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  ExpansionTile(
+                                    title: Text('6'),
+                                    maintainState: true,
+                                    children: [
+                                      Container(
+                                        margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+                                        child: TextField(
+
+                                          keyboardType: TextInputType.number,
+                                          maxLines: 1,
+                                          controller: Ring5controller,
+                                          decoration: InputDecoration(
+                                              border: OutlineInputBorder(
+                                                  borderSide: BorderSide(color: kGrey)),
+                                              labelText: 'Quantity in inventory',
+                                              hintText: '0'
+                                          ),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  ExpansionTile(
+                                    title: Text('6.5'),
+                                    maintainState: true,
+                                    children: [
+                                      Container(
+                                        margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+                                        child: TextField(
+
+                                          keyboardType: TextInputType.number,
+                                          maxLines: 1,
+                                          controller: Ring6controller,
+                                          decoration: InputDecoration(
+                                              border: OutlineInputBorder(
+                                                  borderSide: BorderSide(color: kGrey)),
+                                              labelText: 'Quantity in inventory',
+                                              hintText: '0'
+                                          ),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  ExpansionTile(
+                                    title: Text('7'),
+                                    maintainState: true,
+                                    children: [
+                                      Container(
+                                        margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+                                        child: TextField(
+
+                                          keyboardType: TextInputType.number,
+                                          maxLines: 1,
+                                          controller: Ring7controller,
+                                          decoration: InputDecoration(
+                                              border: OutlineInputBorder(
+                                                  borderSide: BorderSide(color: kGrey)),
+                                              labelText: 'Quantity in inventory',
+                                              hintText: '0'
+                                          ),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  ExpansionTile(
+                                    title: Text('7.5'),
+                                    maintainState: true,
+                                    children: [
+                                      Container(
+                                        margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+                                        child: TextField(
+
+                                          keyboardType: TextInputType.number,
+                                          maxLines: 1,
+                                          controller: Ring8controller,
+                                          decoration: InputDecoration(
+                                              border: OutlineInputBorder(
+                                                  borderSide: BorderSide(color: kGrey)),
+                                              labelText: 'Quantity in inventory',
+                                              hintText: '0'
+                                          ),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  ExpansionTile(
+                                    title: Text('8'),
+                                    maintainState: true,
+                                    children: [
+                                      Container(
+                                        margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+                                        child: TextField(
+
+                                          keyboardType: TextInputType.number,
+                                          maxLines: 1,
+                                          controller: Ring9controller,
+                                          decoration: InputDecoration(
+                                              border: OutlineInputBorder(
+                                                  borderSide: BorderSide(color: kGrey)),
+                                              labelText: 'Quantity in inventory',
+                                              hintText: '0'
+                                          ),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  ExpansionTile(
+                                    title: Text('8.5'),
+                                    maintainState: true,
+                                    children: [
+                                      Container(
+                                        margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+                                        child: TextField(
+
+                                          keyboardType: TextInputType.number,
+                                          maxLines: 1,
+                                          controller: Ring10controller,
+                                          decoration: InputDecoration(
+                                              border: OutlineInputBorder(
+                                                  borderSide: BorderSide(color: kGrey)),
+                                              labelText: 'Quantity in inventory',
+                                              hintText: '0'
+                                          ),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  ExpansionTile(
+                                    title: Text('9'),
+                                    maintainState: true,
+                                    children: [
+                                      Container(
+                                        margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+                                        child: TextField(
+
+                                          keyboardType: TextInputType.number,
+                                          maxLines: 1,
+                                          controller: Ring11controller,
+                                          decoration: InputDecoration(
+                                              border: OutlineInputBorder(
+                                                  borderSide: BorderSide(color: kGrey)),
+                                              labelText: 'Quantity in inventory',
+                                              hintText: '0'
+                                          ),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  ExpansionTile(
+                                    title: Text('9.5'),
+                                    maintainState: true,
+                                    children: [
+                                      Container(
+                                        margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+                                        child: TextField(
+
+                                          keyboardType: TextInputType.number,
+                                          maxLines: 1,
+                                          controller: Ring12controller,
+                                          decoration: InputDecoration(
+                                              border: OutlineInputBorder(
+                                                  borderSide: BorderSide(color: kGrey)),
+                                              labelText: 'Quantity in inventory',
+                                              hintText: '0'
+                                          ),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  ExpansionTile(
+                                    title: Text('10'),
+                                    maintainState: true,
+                                    children: [
+                                      Container(
+                                        margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+                                        child: TextField(
+
+                                          keyboardType: TextInputType.number,
+                                          maxLines: 1,
+                                          controller: Ring13controller,
+                                          decoration: InputDecoration(
+                                              border: OutlineInputBorder(
+                                                  borderSide: BorderSide(color: kGrey)),
+                                              labelText: 'Quantity in inventory',
+                                              hintText: '0'
+                                          ),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  ExpansionTile(
+                                    title: Text('10.5'),
+                                    maintainState: true,
+                                    children: [
+                                      Container(
+                                        margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+                                        child: TextField(
+
+                                          keyboardType: TextInputType.number,
+                                          maxLines: 1,
+                                          controller: Ring14controller,
+                                          decoration: InputDecoration(
+                                              border: OutlineInputBorder(
+                                                  borderSide: BorderSide(color: kGrey)),
+                                              labelText: 'Quantity in inventory',
+                                              hintText: '0'
+                                          ),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  ExpansionTile(
+                                    title: Text('11'),
+                                    maintainState: true,
+                                    children: [
+                                      Container(
+                                        margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+                                        child: TextField(
+
+                                          keyboardType: TextInputType.number,
+                                          maxLines: 1,
+                                          controller: Ring15controller,
+                                          decoration: InputDecoration(
+                                              border: OutlineInputBorder(
+                                                  borderSide: BorderSide(color: kGrey)),
+                                              labelText: 'Quantity in inventory',
+                                              hintText: '0'
+                                          ),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  ExpansionTile(
+                                    title: Text('11.5'),
+                                    maintainState: true,
+                                    children: [
+                                      Container(
+                                        margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+                                        child: TextField(
+
+                                          keyboardType: TextInputType.number,
+                                          maxLines: 1,
+                                          controller: Ring16controller,
+                                          decoration: InputDecoration(
+                                              border: OutlineInputBorder(
+                                                  borderSide: BorderSide(color: kGrey)),
+                                              labelText: 'Quantity in inventory',
+                                              hintText: '0'
+                                          ),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  ExpansionTile(
+                                    title: Text('12'),
+                                    maintainState: true,
+                                    children: [
+                                      Container(
+                                        margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+                                        child: TextField(
+
+                                          keyboardType: TextInputType.number,
+                                          maxLines: 1,
+                                          controller: Ring17controller,
+                                          decoration: InputDecoration(
+                                              border: OutlineInputBorder(
+                                                  borderSide: BorderSide(color: kGrey)),
+                                              labelText: 'Quantity in inventory',
+                                              hintText: '0'
+                                          ),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  ExpansionTile(
+                                    title: Text('12.5'),
+                                    maintainState: true,
+                                    children: [
+                                      Container(
+                                        margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+                                        child: TextField(
+
+                                          keyboardType: TextInputType.number,
+                                          maxLines: 1,
+                                          controller: Ring18controller,
+                                          decoration: InputDecoration(
+                                              border: OutlineInputBorder(
+                                                  borderSide: BorderSide(color: kGrey)),
+                                              labelText: 'Quantity in inventory',
+                                              hintText: '0'
+                                          ),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  ExpansionTile(
+                                    title: Text('13'),
+                                    maintainState: true,
+                                    children: [
+                                      Container(
+                                        margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+                                        child: TextField(
+
+                                          keyboardType: TextInputType.number,
+                                          maxLines: 1,
+                                          controller: Ring19controller,
+                                          decoration: InputDecoration(
+                                              border: OutlineInputBorder(
+                                                  borderSide: BorderSide(color: kGrey)),
+                                              labelText: 'Quantity in inventory',
+                                              hintText: '0'
+                                          ),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  ExpansionTile(
+                                    title: Text('13.5'),
+                                    maintainState: true,
+                                    children: [
+                                      Container(
+                                        margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+                                        child: TextField(
+
+                                          keyboardType: TextInputType.number,
+                                          maxLines: 1,
+                                          controller: Ring20controller,
+                                          decoration: InputDecoration(
+                                              border: OutlineInputBorder(
+                                                  borderSide: BorderSide(color: kGrey)),
+                                              labelText: 'Quantity in inventory',
+                                              hintText: '0'
+                                          ),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  ExpansionTile(
+                                    title: Text('14'),
+                                    maintainState: true,
+                                    children: [
+                                      Container(
+                                        margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+                                        child: TextField(
+
+                                          keyboardType: TextInputType.number,
+                                          maxLines: 1,
+                                          controller: Ring21controller,
+                                          decoration: InputDecoration(
+                                              border: OutlineInputBorder(
+                                                  borderSide: BorderSide(color: kGrey)),
+                                              labelText: 'Quantity in inventory',
+                                              hintText: '0'
+                                          ),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  ExpansionTile(
+                                    title: Text('14.5'),
+                                    maintainState: true,
+                                    children: [
+                                      Container(
+                                        margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+                                        child: TextField(
+
+                                          keyboardType: TextInputType.number,
+                                          maxLines: 1,
+                                          controller: Ring22controller,
+                                          decoration: InputDecoration(
+                                              border: OutlineInputBorder(
+                                                  borderSide: BorderSide(color: kGrey)),
+                                              labelText: 'Quantity in inventory',
+                                              hintText: '0'
+                                          ),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  ExpansionTile(
+                                    title: Text('15'),
+                                    maintainState: true,
+                                    children: [
+                                      Container(
+                                        margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+                                        child: TextField(
+
+                                          keyboardType: TextInputType.number,
+                                          maxLines: 1,
+                                          controller: Ring23controller,
+                                          decoration: InputDecoration(
+                                              border: OutlineInputBorder(
+                                                  borderSide: BorderSide(color: kGrey)),
+                                              labelText: 'Quantity in inventory',
+                                              hintText: '0'
+                                          ),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+
+                                ],
+                              ),
+                              ListView(
+                                children: [
+                                  ExpansionTile(
+                                    title: Text('5'),
+                                    maintainState: true,
+                                    children: [
+                                      Container(
+                                        margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+                                        child: TextField(
+
+                                          keyboardType: TextInputType.number,
+                                          maxLines: 1,
+                                          controller: Shoe1controller,
+                                          decoration: InputDecoration(
+                                              border: OutlineInputBorder(
+                                                  borderSide: BorderSide(color: kGrey)),
+                                              labelText: 'Quantity in inventory',
+                                              hintText: '0'
+                                          ),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  ExpansionTile(
+                                    title: Text('5 ½'),
+                                    maintainState: true,
+                                    children: [
+                                      Container(
+                                        margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+                                        child: TextField(
+
+                                          keyboardType: TextInputType.number,
+                                          maxLines: 1,
+                                          controller: Shoe2controller,
+                                          decoration: InputDecoration(
+                                              border: OutlineInputBorder(
+                                                  borderSide: BorderSide(color: kGrey)),
+                                              labelText: 'Quantity in inventory',
+                                              hintText: '0'
+                                          ),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  ExpansionTile(
+                                    title: Text('6'),
+                                    maintainState: true,
+                                    children: [
+                                      Container(
+                                        margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+                                        child: TextField(
+
+                                          keyboardType: TextInputType.number,
+                                          maxLines: 1,
+                                          controller: Shoe3controller,
+                                          decoration: InputDecoration(
+                                              border: OutlineInputBorder(
+                                                  borderSide: BorderSide(color: kGrey)),
+                                              labelText: 'Quantity in inventory',
+                                              hintText: '0'
+                                          ),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  ExpansionTile(
+                                    title: Text('6 ½'),
+                                    maintainState: true,
+                                    children: [
+                                      Container(
+                                        margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+                                        child: TextField(
+
+                                          keyboardType: TextInputType.number,
+                                          maxLines: 1,
+                                          controller: Shoe4controller,
+                                          decoration: InputDecoration(
+                                              border: OutlineInputBorder(
+                                                  borderSide: BorderSide(color: kGrey)),
+                                              labelText: 'Quantity in inventory',
+                                              hintText: '0'
+                                          ),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  ExpansionTile(
+                                    title: Text('7'),
+                                    maintainState: true,
+                                    children: [
+                                      Container(
+                                        margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+                                        child: TextField(
+
+                                          keyboardType: TextInputType.number,
+                                          maxLines: 1,
+                                          controller: Shoe5controller,
+                                          decoration: InputDecoration(
+                                              border: OutlineInputBorder(
+                                                  borderSide: BorderSide(color: kGrey)),
+                                              labelText: 'Quantity in inventory',
+                                              hintText: '0'
+                                          ),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  ExpansionTile(
+                                    title: Text('7 ½'),
+                                    maintainState: true,
+                                    children: [
+                                      Container(
+                                        margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+                                        child: TextField(
+
+                                          keyboardType: TextInputType.number,
+                                          maxLines: 1,
+                                          controller: Shoe6controller,
+                                          decoration: InputDecoration(
+                                              border: OutlineInputBorder(
+                                                  borderSide: BorderSide(color: kGrey)),
+                                              labelText: 'Quantity in inventory',
+                                              hintText: '0'
+                                          ),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  ExpansionTile(
+                                    title: Text('8'),
+                                    maintainState: true,
+                                    children: [
+                                      Container(
+                                        margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+                                        child: TextField(
+
+                                          keyboardType: TextInputType.number,
+                                          maxLines: 1,
+                                          controller: Shoe7controller,
+                                          decoration: InputDecoration(
+                                              border: OutlineInputBorder(
+                                                  borderSide: BorderSide(color: kGrey)),
+                                              labelText: 'Quantity in inventory',
+                                              hintText: '0'
+                                          ),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  ExpansionTile(
+                                    title: Text('8 ½'),
+                                    maintainState: true,
+                                    children: [
+                                      Container(
+                                        margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+                                        child: TextField(
+
+                                          keyboardType: TextInputType.number,
+                                          maxLines: 1,
+                                          controller: Shoe8controller,
+                                          decoration: InputDecoration(
+                                              border: OutlineInputBorder(
+                                                  borderSide: BorderSide(color: kGrey)),
+                                              labelText: 'Quantity in inventory',
+                                              hintText: '0'
+                                          ),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  ExpansionTile(
+                                    title: Text('9'),
+                                    maintainState: true,
+                                    children: [
+                                      Container(
+                                        margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+                                        child: TextField(
+
+                                          keyboardType: TextInputType.number,
+                                          maxLines: 1,
+                                          controller: Shoe9controller,
+                                          decoration: InputDecoration(
+                                              border: OutlineInputBorder(
+                                                  borderSide: BorderSide(color: kGrey)),
+                                              labelText: 'Quantity in inventory',
+                                              hintText: '0'
+                                          ),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  ExpansionTile(
+                                    title: Text('9 ½'),
+                                    maintainState: true,
+                                    children: [
+                                      Container(
+                                        margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+                                        child: TextField(
+
+                                          keyboardType: TextInputType.number,
+                                          maxLines: 1,
+                                          controller: Shoe10controller,
+                                          decoration: InputDecoration(
+                                              border: OutlineInputBorder(
+                                                  borderSide: BorderSide(color: kGrey)),
+                                              labelText: 'Quantity in inventory',
+                                              hintText: '0'
+                                          ),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  ExpansionTile(
+                                    title: Text('10'),
+                                    maintainState: true,
+                                    children: [
+                                      Container(
+                                        margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+                                        child: TextField(
+
+                                          keyboardType: TextInputType.number,
+                                          maxLines: 1,
+                                          controller: Shoe11controller,
+                                          decoration: InputDecoration(
+                                              border: OutlineInputBorder(
+                                                  borderSide: BorderSide(color: kGrey)),
+                                              labelText: 'Quantity in inventory',
+                                              hintText: '0'
+                                          ),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  ExpansionTile(
+                                    title: Text('10 ½'),
+                                    maintainState: true,
+                                    children: [
+                                      Container(
+                                        margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+                                        child: TextField(
+
+                                          keyboardType: TextInputType.number,
+                                          maxLines: 1,
+                                          controller: Shoe12controller,
+                                          decoration: InputDecoration(
+                                              border: OutlineInputBorder(
+                                                  borderSide: BorderSide(color: kGrey)),
+                                              labelText: 'Quantity in inventory',
+                                              hintText: '0'
+                                          ),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  ExpansionTile(
+                                    title: Text('12'),
+                                    maintainState: true,
+                                    children: [
+                                      Container(
+                                        margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+                                        child: TextField(
+
+                                          keyboardType: TextInputType.number,
+                                          maxLines: 1,
+                                          controller: Shoe13controller,
+                                          decoration: InputDecoration(
+                                              border: OutlineInputBorder(
+                                                  borderSide: BorderSide(color: kGrey)),
+                                              labelText: 'Quantity in inventory',
+                                              hintText: '0'
+                                          ),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  ExpansionTile(
+                                    title: Text('13'),
+                                    maintainState: true,
+                                    children: [
+                                      Container(
+                                        margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+                                        child: TextField(
+
+                                          keyboardType: TextInputType.number,
+                                          maxLines: 1,
+                                          controller: Shoe14controller,
+                                          decoration: InputDecoration(
+                                              border: OutlineInputBorder(
+                                                  borderSide: BorderSide(color: kGrey)),
+                                              labelText: 'Quantity in inventory',
+                                              hintText: '0'
+                                          ),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  ExpansionTile(
+                                    title: Text('14'),
+                                    maintainState: true,
+                                    children: [
+                                      Container(
+                                        margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+                                        child: TextField(
+
+                                          keyboardType: TextInputType.number,
+                                          maxLines: 1,
+                                          controller: Shoe15controller,
+                                          decoration: InputDecoration(
+                                              border: OutlineInputBorder(
+                                                  borderSide: BorderSide(color: kGrey)),
+                                              labelText: 'Quantity in inventory',
+                                              hintText: '0'
+                                          ),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  ExpansionTile(
+                                    title: Text('15 ½'),
+                                    maintainState: true,
+                                    children: [
+                                      Container(
+                                        margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+                                        child: TextField(
+
+                                          keyboardType: TextInputType.number,
+                                          maxLines: 1,
+                                          controller: Shoe16controller,
+                                          decoration: InputDecoration(
+                                              border: OutlineInputBorder(
+                                                  borderSide: BorderSide(color: kGrey)),
+                                              labelText: 'Quantity in inventory',
+                                              hintText: '0'
+                                          ),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+
+
+
+                                ],
+                              ),
+                            ]),
+                      ),
+                    )
+                ),
+              );      },
+        );
+    }
+    else if(dropdownValue=='Baby-Boys'||dropdownValue=='Baby-Girls') {
+      return
+        showMaterialModalBottomSheet(
+          expand: true,
+          context: context,
+          builder: (BuildContext context) {
+            SizeConfig().init(context);
+
+            return
+              Expanded(
+                child: DefaultTabController(
+
+                    length:5,
+                    child: Scaffold(
+
+                      appBar:AppBar(
+                        backgroundColor: kPrimaryColor,
+                        elevation: 0,
+                        bottom: TabBar(
+                          isScrollable: true,
+                          labelColor: Colors.white,
+                          unselectedLabelColor: kIcon,
+
+
+                          tabs:[
+                            Text("Clothing",style: TextStyle(fontSize:  SizeConfig.safeBlockHorizontal *5,),),
+                            Text("Made-to-order",style: TextStyle(fontSize:  SizeConfig.safeBlockHorizontal *5,),),
+                            Text("Free size",style: TextStyle(fontSize:  SizeConfig.safeBlockHorizontal *5),),
+                            Text("Shoes(US)",style: TextStyle(fontSize:  SizeConfig.safeBlockHorizontal *5),),
+
+                          ],
+                        ),
+                      ),
+
+                      body: Container(
+
+                        child: TabBarView(
+                            children:<Widget> [
+                              ListView(
+
+
+                                children: [
+
+
+                                  ExpansionTile(
+                                    title: Text('0-3 mth'),
+                                    maintainState: true,
+                                    children: [
+                                      Container(
+                                        margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+                                        child: TextField(
+
+                                          keyboardType: TextInputType.number,
+                                          maxLines: 1,
+                                          controller: xxxscontroller,
+                                          decoration: InputDecoration(
+                                              border: OutlineInputBorder(
+                                                  borderSide: BorderSide(color: kGrey)),
+                                              labelText: 'Quantity in inventory',
+                                              hintText: '0'
+                                          ),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  ExpansionTile(
+                                    title: Text('3-6 mth'),
+                                    maintainState: true,
+                                    children: [
+                                      Container(
+                                        margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+                                        child: TextField(
+
+                                          keyboardType: TextInputType.number,
+                                          maxLines: 1,
+                                          controller: xxscontroller,
+                                          decoration: InputDecoration(
+                                              border: OutlineInputBorder(
+                                                  borderSide: BorderSide(color: kGrey)),
+                                              labelText: 'Quantity in inventory',
+                                              hintText: '0'
+                                          ),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  ExpansionTile(
+                                    title: Text('6-9 mth'),
+                                    maintainState: true,
+                                    children: [
+                                      Container(
+                                        margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+                                        child: TextField(
+
+                                          keyboardType: TextInputType.number,
+                                          maxLines: 1,
+                                          controller: xscontroller,
+                                          decoration: InputDecoration(
+                                              border: OutlineInputBorder(
+                                                  borderSide: BorderSide(color: kGrey)),
+                                              labelText: 'Quantity in inventory',
+                                              hintText: '0'
+                                          ),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  ExpansionTile(
+                                    title: Text('9-12 mth'),
+                                    maintainState: true,
+                                    children: [
+                                      Container(
+                                        margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+                                        child: TextField(
+
+                                          keyboardType: TextInputType.number,
+                                          maxLines: 1,
+                                          controller: scontroller,
+                                          decoration: InputDecoration(
+                                              border: OutlineInputBorder(
+                                                  borderSide: BorderSide(color: kGrey)),
+                                              labelText: 'Quantity in inventory',
+                                              hintText: '0'
+                                          ),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  ExpansionTile(
+                                    title: Text('12-18 mth'),
+                                    maintainState: true,
+                                    children: [
+                                      Container(
+                                        margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+                                        child: TextField(
+
+                                          keyboardType: TextInputType.number,
+                                          maxLines: 1,
+                                          controller: mcontroller,
+                                          decoration: InputDecoration(
+                                              border: OutlineInputBorder(
+                                                  borderSide: BorderSide(color: kGrey)),
+                                              labelText: 'Quantity in inventory',
+                                              hintText: '0'
+                                          ),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  ExpansionTile(
+                                    title: Text('18-24 mth'),
+                                    maintainState: true,
+                                    children: [
+                                      Container(
+                                        margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+                                        child: TextField(
+
+                                          keyboardType: TextInputType.number,
+                                          maxLines: 1,
+                                          controller: lcontroller,
+                                          decoration: InputDecoration(
+                                              border: OutlineInputBorder(
+                                                  borderSide: BorderSide(color: kGrey)),
+                                              labelText: 'Quantity in inventory',
+                                              hintText: '0'
+                                          ),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+
+
+                                ],
+                              ),
+                              ListView(
+
+
+                                children: [
+
+
+                                  ExpansionTile(
+                                    title: Text('Made-to-order'),
+                                    maintainState: true,
+                                    children: [
+
+                                      Container(
+                                        margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+                                        child: TextField(
+
+                                          keyboardType: TextInputType.number,
+                                          maxLines: 1,
+                                          controller: mtocontroller,
+                                          decoration: InputDecoration(
+                                              border: OutlineInputBorder(
+                                                  borderSide: BorderSide(color: kGrey)),
+                                              labelText: 'Quantity in inventory',
+                                              hintText: '0'
+                                          ),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+
+
+                                ],
+                              ),
+                              ListView(
+
+
+                                children: [
+
+
+                                  ExpansionTile(
+                                    title: Text('Free size'),
+                                    maintainState: true,
+                                    children: [
+
+                                      Container(
+                                        margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+                                        child: TextField(
+
+                                          keyboardType: TextInputType.number,
+                                          maxLines: 1,
+                                          controller: freesizecontroller,
+                                          decoration: InputDecoration(
+                                              border: OutlineInputBorder(
+                                                  borderSide: BorderSide(color: kGrey)),
+                                              labelText: 'Quantity in inventory',
+                                              hintText: '0'
+                                          ),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+
+
+                                ],
+                              ),
+                              ListView(
+                                children: [
+                                  ExpansionTile(
+                                    title: Text('0-3 mth'),
+                                    maintainState: true,
+                                    children: [
+                                      Container(
+                                        margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+                                        child: TextField(
+
+                                          keyboardType: TextInputType.number,
+                                          maxLines: 1,
+                                          controller: Shoe1controller,
+                                          decoration: InputDecoration(
+                                              border: OutlineInputBorder(
+                                                  borderSide: BorderSide(color: kGrey)),
+                                              labelText: 'Quantity in inventory',
+                                              hintText: '0'
+                                          ),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  ExpansionTile(
+                                    title: Text('3-6 mth'),
+                                    maintainState: true,
+                                    children: [
+                                      Container(
+                                        margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+                                        child: TextField(
+
+                                          keyboardType: TextInputType.number,
+                                          maxLines: 1,
+                                          controller: Shoe2controller,
+                                          decoration: InputDecoration(
+                                              border: OutlineInputBorder(
+                                                  borderSide: BorderSide(color: kGrey)),
+                                              labelText: 'Quantity in inventory',
+                                              hintText: '0'
+                                          ),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  ExpansionTile(
+                                    title: Text('6 mth'),
+                                    maintainState: true,
+                                    children: [
+                                      Container(
+                                        margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+                                        child: TextField(
+
+                                          keyboardType: TextInputType.number,
+                                          maxLines: 1,
+                                          controller: Shoe3controller,
+                                          decoration: InputDecoration(
+                                              border: OutlineInputBorder(
+                                                  borderSide: BorderSide(color: kGrey)),
+                                              labelText: 'Quantity in inventory',
+                                              hintText: '0'
+                                          ),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  ExpansionTile(
+                                    title: Text('9 mth'),
+                                    maintainState: true,
+                                    children: [
+                                      Container(
+                                        margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+                                        child: TextField(
+
+                                          keyboardType: TextInputType.number,
+                                          maxLines: 1,
+                                          controller: Shoe4controller,
+                                          decoration: InputDecoration(
+                                              border: OutlineInputBorder(
+                                                  borderSide: BorderSide(color: kGrey)),
+                                              labelText: 'Quantity in inventory',
+                                              hintText: '0'
+                                          ),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  ExpansionTile(
+                                    title: Text('9-12 mth'),
+                                    maintainState: true,
+                                    children: [
+                                      Container(
+                                        margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+                                        child: TextField(
+
+                                          keyboardType: TextInputType.number,
+                                          maxLines: 1,
+                                          controller: Shoe5controller,
+                                          decoration: InputDecoration(
+                                              border: OutlineInputBorder(
+                                                  borderSide: BorderSide(color: kGrey)),
+                                              labelText: 'Quantity in inventory',
+                                              hintText: '0'
+                                          ),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  ExpansionTile(
+                                    title: Text('12-18 mth'),
+                                    maintainState: true,
+                                    children: [
+                                      Container(
+                                        margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+                                        child: TextField(
+
+                                          keyboardType: TextInputType.number,
+                                          maxLines: 1,
+                                          controller: Shoe6controller,
+                                          decoration: InputDecoration(
+                                              border: OutlineInputBorder(
+                                                  borderSide: BorderSide(color: kGrey)),
+                                              labelText: 'Quantity in inventory',
+                                              hintText: '0'
+                                          ),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  ExpansionTile(
+                                    title: Text('18-24 mth'),
+                                    maintainState: true,
+                                    children: [
+                                      Container(
+                                        margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+                                        child: TextField(
+
+                                          keyboardType: TextInputType.number,
+                                          maxLines: 1,
+                                          controller: Shoe7controller,
+                                          decoration: InputDecoration(
+                                              border: OutlineInputBorder(
+                                                  borderSide: BorderSide(color: kGrey)),
+                                              labelText: 'Quantity in inventory',
+                                              hintText: '0'
+                                          ),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+
+
+
+
+                                ],
+                              ),
+
+                            ]),
+                      ),
+                    )
+                ),
+              );      },
+        );
+    }
+    else  if(dropdownValue=='Kids-Boys'||dropdownValue=='Kids-Girls') {
+      return
+        showMaterialModalBottomSheet(
+          expand: true,
+          context: context,
+          builder: (BuildContext context) {
+            SizeConfig().init(context);
+
+            return
+              Expanded(
+                child: DefaultTabController(
+
+                    length:6,
+                    child: Scaffold(
+
+                      appBar:AppBar(
+                        backgroundColor: kPrimaryColor,
+                        elevation: 0,
+                        bottom: TabBar(
+                          isScrollable: true,
+                          labelColor: Colors.white,
+                          unselectedLabelColor: kIcon,
+
+
+                          tabs:[
+                            Text("Clothing",style: TextStyle(fontSize:  SizeConfig.safeBlockHorizontal *5,),),
+                            Text("Made-to-order",style: TextStyle(fontSize:  SizeConfig.safeBlockHorizontal *5,),),
+                            Text("Free size",style: TextStyle(fontSize:  SizeConfig.safeBlockHorizontal *5),),
+                            Text("Shoes(US)",style: TextStyle(fontSize:  SizeConfig.safeBlockHorizontal *5),),
+
+                          ],
+                        ),
+                      ),
+
+                      body: Container(
+
+                        child: TabBarView(
+                            children:<Widget> [
+                              ListView(
+
+
+                                children: [
+
+                                  ExpansionTile(
+                                    title: Text('2 Y'),
+                                    maintainState: true,
+                                    children: [
+                                      Container(
+                                        margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+                                        child: TextField(
+
+                                          keyboardType: TextInputType.number,
+                                          maxLines: 1,
+                                          controller: xxxscontroller,
+                                          decoration: InputDecoration(
+                                              border: OutlineInputBorder(
+                                                  borderSide: BorderSide(color: kGrey)),
+                                              labelText: 'Quantity in inventory',
+                                              hintText: '0'
+                                          ),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  ExpansionTile(
+                                    title: Text('3-4 Y'),
+                                    maintainState: true,
+                                    children: [
+                                      Container(
+                                        margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+                                        child: TextField(
+
+                                          keyboardType: TextInputType.number,
+                                          maxLines: 1,
+                                          controller: xxscontroller,
+                                          decoration: InputDecoration(
+                                              border: OutlineInputBorder(
+                                                  borderSide: BorderSide(color: kGrey)),
+                                              labelText: 'Quantity in inventory',
+                                              hintText: '0'
+                                          ),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  ExpansionTile(
+                                    title: Text('4-5 Y'),
+                                    maintainState: true,
+                                    children: [
+                                      Container(
+                                        margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+                                        child: TextField(
+
+                                          keyboardType: TextInputType.number,
+                                          maxLines: 1,
+                                          controller: xscontroller,
+                                          decoration: InputDecoration(
+                                              border: OutlineInputBorder(
+                                                  borderSide: BorderSide(color: kGrey)),
+                                              labelText: 'Quantity in inventory',
+                                              hintText: '0'
+                                          ),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  ExpansionTile(
+                                    title: Text('5-6 Y'),
+                                    maintainState: true,
+                                    children: [
+                                      Container(
+                                        margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+                                        child: TextField(
+
+                                          keyboardType: TextInputType.number,
+                                          maxLines: 1,
+                                          controller: scontroller,
+                                          decoration: InputDecoration(
+                                              border: OutlineInputBorder(
+                                                  borderSide: BorderSide(color: kGrey)),
+                                              labelText: 'Quantity in inventory',
+                                              hintText: '0'
+                                          ),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  ExpansionTile(
+                                    title: Text('6-7 Y'),
+                                    maintainState: true,
+                                    children: [
+                                      Container(
+                                        margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+                                        child: TextField(
+
+                                          keyboardType: TextInputType.number,
+                                          maxLines: 1,
+                                          controller: mcontroller,
+                                          decoration: InputDecoration(
+                                              border: OutlineInputBorder(
+                                                  borderSide: BorderSide(color: kGrey)),
+                                              labelText: 'Quantity in inventory',
+                                              hintText: '0'
+                                          ),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  ExpansionTile(
+                                    title: Text('7-8 Y'),
+                                    maintainState: true,
+                                    children: [
+                                      Container(
+                                        margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+                                        child: TextField(
+
+                                          keyboardType: TextInputType.number,
+                                          maxLines: 1,
+                                          controller: lcontroller,
+                                          decoration: InputDecoration(
+                                              border: OutlineInputBorder(
+                                                  borderSide: BorderSide(color: kGrey)),
+                                              labelText: 'Quantity in inventory',
+                                              hintText: '0'
+                                          ),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  ExpansionTile(
+                                    title: Text('8-9 Y'),
+                                    maintainState: true,
+                                    children: [
+                                      Container(
+                                        margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+                                        child: TextField(
+
+                                          keyboardType: TextInputType.number,
+                                          maxLines: 1,
+                                          controller: xlcontroller,
+                                          decoration: InputDecoration(
+                                              border: OutlineInputBorder(
+                                                  borderSide: BorderSide(color: kGrey)),
+                                              labelText: 'Quantity in inventory',
+                                              hintText: '0'
+                                          ),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  ExpansionTile(
+                                    title: Text('9-10 Y'),
+                                    maintainState: true,
+                                    children: [
+                                      Container(
+                                        margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+                                        child: TextField(
+
+                                          keyboardType: TextInputType.number,
+                                          maxLines: 1,
+                                          controller: xxlcontroller,
+                                          decoration: InputDecoration(
+                                              border: OutlineInputBorder(
+                                                  borderSide: BorderSide(color: kGrey)),
+                                              labelText: 'Quantity in inventory',
+                                              hintText: '0'
+                                          ),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  ExpansionTile(
+                                    title: Text('10-11 Y'),
+                                    maintainState: true,
+                                    children: [
+                                      Container(
+                                        margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+                                        child: TextField(
+
+                                          keyboardType: TextInputType.number,
+                                          maxLines: 1,
+                                          controller: xxxlcontroller,
+                                          decoration: InputDecoration(
+                                              border: OutlineInputBorder(
+                                                  borderSide: BorderSide(color: kGrey)),
+                                              labelText: 'Quantity in inventory',
+                                              hintText: '0'
+                                          ),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  ExpansionTile(
+                                    title: Text('11-12 Y'),
+                                    maintainState: true,
+                                    children: [
+                                      Container(
+                                        margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+                                        child: TextField(
+
+                                          keyboardType: TextInputType.number,
+                                          maxLines: 1,
+                                          controller: fourxlcontroller,
+                                          decoration: InputDecoration(
+                                              border: OutlineInputBorder(
+                                                  borderSide: BorderSide(color: kGrey)),
+                                              labelText: 'Quantity in inventory',
+                                              hintText: '0'
+                                          ),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+
+
+                                ],
+                              ),
+                              ListView(
+
+
+                                children: [
+
+
+                                  ExpansionTile(
+                                    title: Text('Made-to-order'),
+                                    maintainState: true,
+                                    children: [
+
+                                      Container(
+                                        margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+                                        child: TextField(
+
+                                          keyboardType: TextInputType.number,
+                                          maxLines: 1,
+                                          controller: mtocontroller,
+                                          decoration: InputDecoration(
+                                              border: OutlineInputBorder(
+                                                  borderSide: BorderSide(color: kGrey)),
+                                              labelText: 'Quantity in inventory',
+                                              hintText: '0'
+                                          ),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+
+
+                                ],
+                              ),
+                              ListView(
+
+
+                                children: [
+
+
+                                  ExpansionTile(
+                                    title: Text('Free size'),
+                                    maintainState: true,
+                                    children: [
+
+                                      Container(
+                                        margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+                                        child: TextField(
+
+                                          keyboardType: TextInputType.number,
+                                          maxLines: 1,
+                                          controller: freesizecontroller,
+                                          decoration: InputDecoration(
+                                              border: OutlineInputBorder(
+                                                  borderSide: BorderSide(color: kGrey)),
+                                              labelText: 'Quantity in inventory',
+                                              hintText: '0'
+                                          ),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+
+
+                                ],
+                              ),
+                              ListView(
+                                children: [
+                                  ExpansionTile(
+                                    title: Text('2 Y'),
+                                    maintainState: true,
+                                    children: [
+                                      Container(
+                                        margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+                                        child: TextField(
+
+                                          keyboardType: TextInputType.number,
+                                          maxLines: 1,
+                                          controller: Shoe1controller,
+                                          decoration: InputDecoration(
+                                              border: OutlineInputBorder(
+                                                  borderSide: BorderSide(color: kGrey)),
+                                              labelText: 'Quantity in inventory',
+                                              hintText: '0'
+                                          ),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  ExpansionTile(
+                                    title: Text('2 ½ Y'),
+                                    maintainState: true,
+                                    children: [
+                                      Container(
+                                        margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+                                        child: TextField(
+
+                                          keyboardType: TextInputType.number,
+                                          maxLines: 1,
+                                          controller: Shoe2controller,
+                                          decoration: InputDecoration(
+                                              border: OutlineInputBorder(
+                                                  borderSide: BorderSide(color: kGrey)),
+                                              labelText: 'Quantity in inventory',
+                                              hintText: '0'
+                                          ),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  ExpansionTile(
+                                    title: Text('3 Y'),
+                                    maintainState: true,
+                                    children: [
+                                      Container(
+                                        margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+                                        child: TextField(
+
+                                          keyboardType: TextInputType.number,
+                                          maxLines: 1,
+                                          controller: Shoe3controller,
+                                          decoration: InputDecoration(
+                                              border: OutlineInputBorder(
+                                                  borderSide: BorderSide(color: kGrey)),
+                                              labelText: 'Quantity in inventory',
+                                              hintText: '0'
+                                          ),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  ExpansionTile(
+                                    title: Text('3 ½ Y'),
+                                    maintainState: true,
+                                    children: [
+                                      Container(
+                                        margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+                                        child: TextField(
+
+                                          keyboardType: TextInputType.number,
+                                          maxLines: 1,
+                                          controller: Shoe4controller,
+                                          decoration: InputDecoration(
+                                              border: OutlineInputBorder(
+                                                  borderSide: BorderSide(color: kGrey)),
+                                              labelText: 'Quantity in inventory',
+                                              hintText: '0'
+                                          ),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  ExpansionTile(
+                                    title: Text('4 Y'),
+                                    maintainState: true,
+                                    children: [
+                                      Container(
+                                        margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+                                        child: TextField(
+
+                                          keyboardType: TextInputType.number,
+                                          maxLines: 1,
+                                          controller: Shoe5controller,
+                                          decoration: InputDecoration(
+                                              border: OutlineInputBorder(
+                                                  borderSide: BorderSide(color: kGrey)),
+                                              labelText: 'Quantity in inventory',
+                                              hintText: '0'
+                                          ),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  ExpansionTile(
+                                    title: Text('5 Y'),
+                                    maintainState: true,
+                                    children: [
+                                      Container(
+                                        margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+                                        child: TextField(
+
+                                          keyboardType: TextInputType.number,
+                                          maxLines: 1,
+                                          controller: Shoe6controller,
+                                          decoration: InputDecoration(
+                                              border: OutlineInputBorder(
+                                                  borderSide: BorderSide(color: kGrey)),
+                                              labelText: 'Quantity in inventory',
+                                              hintText: '0'
+                                          ),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  ExpansionTile(
+                                    title: Text('6 Y'),
+                                    maintainState: true,
+                                    children: [
+                                      Container(
+                                        margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+                                        child: TextField(
+
+                                          keyboardType: TextInputType.number,
+                                          maxLines: 1,
+                                          controller: Shoe7controller,
+                                          decoration: InputDecoration(
+                                              border: OutlineInputBorder(
+                                                  borderSide: BorderSide(color: kGrey)),
+                                              labelText: 'Quantity in inventory',
+                                              hintText: '0'
+                                          ),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  ExpansionTile(
+                                    title: Text('7 Y'),
+                                    maintainState: true,
+                                    children: [
+                                      Container(
+                                        margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+                                        child: TextField(
+
+                                          keyboardType: TextInputType.number,
+                                          maxLines: 1,
+                                          controller: Shoe8controller,
+                                          decoration: InputDecoration(
+                                              border: OutlineInputBorder(
+                                                  borderSide: BorderSide(color: kGrey)),
+                                              labelText: 'Quantity in inventory',
+                                              hintText: '0'
+                                          ),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  ExpansionTile(
+                                    title: Text('8 Y'),
+                                    maintainState: true,
+                                    children: [
+                                      Container(
+                                        margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+                                        child: TextField(
+
+                                          keyboardType: TextInputType.number,
+                                          maxLines: 1,
+                                          controller: Shoe9controller,
+                                          decoration: InputDecoration(
+                                              border: OutlineInputBorder(
+                                                  borderSide: BorderSide(color: kGrey)),
+                                              labelText: 'Quantity in inventory',
+                                              hintText: '0'
+                                          ),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  ExpansionTile(
+                                    title: Text('8 Y'),
+                                    maintainState: true,
+                                    children: [
+                                      Container(
+                                        margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+                                        child: TextField(
+
+                                          keyboardType: TextInputType.number,
+                                          maxLines: 1,
+                                          controller: Shoe10controller,
+                                          decoration: InputDecoration(
+                                              border: OutlineInputBorder(
+                                                  borderSide: BorderSide(color: kGrey)),
+                                              labelText: 'Quantity in inventory',
+                                              hintText: '0'
+                                          ),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  ExpansionTile(
+                                    title: Text('9 Y'),
+                                    maintainState: true,
+                                    children: [
+                                      Container(
+                                        margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+                                        child: TextField(
+
+                                          keyboardType: TextInputType.number,
+                                          maxLines: 1,
+                                          controller: Shoe11controller,
+                                          decoration: InputDecoration(
+                                              border: OutlineInputBorder(
+                                                  borderSide: BorderSide(color: kGrey)),
+                                              labelText: 'Quantity in inventory',
+                                              hintText: '0'
+                                          ),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  ExpansionTile(
+                                    title: Text('10 Y'),
+                                    maintainState: true,
+                                    children: [
+                                      Container(
+                                        margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+                                        child: TextField(
+
+                                          keyboardType: TextInputType.number,
+                                          maxLines: 1,
+                                          controller: Shoe12controller,
+                                          decoration: InputDecoration(
+                                              border: OutlineInputBorder(
+                                                  borderSide: BorderSide(color: kGrey)),
+                                              labelText: 'Quantity in inventory',
+                                              hintText: '0'
+                                          ),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  ExpansionTile(
+                                    title: Text('11 Y'),
+                                    maintainState: true,
+                                    children: [
+                                      Container(
+                                        margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+                                        child: TextField(
+
+                                          keyboardType: TextInputType.number,
+                                          maxLines: 1,
+                                          controller: Shoe13controller,
+                                          decoration: InputDecoration(
+                                              border: OutlineInputBorder(
+                                                  borderSide: BorderSide(color: kGrey)),
+                                              labelText: 'Quantity in inventory',
+                                              hintText: '0'
+                                          ),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  ExpansionTile(
+                                    title: Text('12 Y'),
+                                    maintainState: true,
+                                    children: [
+                                      Container(
+                                        margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+                                        child: TextField(
+
+                                          keyboardType: TextInputType.number,
+                                          maxLines: 1,
+                                          controller: Shoe14controller,
+                                          decoration: InputDecoration(
+                                              border: OutlineInputBorder(
+                                                  borderSide: BorderSide(color: kGrey)),
+                                              labelText: 'Quantity in inventory',
+                                              hintText: '0'
+                                          ),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+
+
+
+
+                                ],
+                              ),
+
+                            ]),
+                      ),
+                    )
+                ),
+              );      },
+        );
+    }
+    else  if(dropdownValue=='Teen-Boys'||dropdownValue=='Teen-Girls') {
+      return
+        showMaterialModalBottomSheet(
+          expand: true,
+          context: context,
+          builder: (BuildContext context) {
+            SizeConfig().init(context);
+
+            return
+              Expanded(
+                child: DefaultTabController(
+
+                    length:5,
+                    child: Scaffold(
+
+                      appBar:AppBar(
+                        backgroundColor: kPrimaryColor,
+                        elevation: 0,
+                        bottom: TabBar(
+                          isScrollable: true,
+                          labelColor: Colors.white,
+                          unselectedLabelColor: kIcon,
+
+
+                          tabs:[
+                            Text("Clothing",style: TextStyle(fontSize:  SizeConfig.safeBlockHorizontal *5,),),
+                            Text("Made-to-order",style: TextStyle(fontSize:  SizeConfig.safeBlockHorizontal *5,),),
+                            Text("Free size",style: TextStyle(fontSize:  SizeConfig.safeBlockHorizontal *5),),
+                            Text("Ring(US)",style: TextStyle(fontSize:  SizeConfig.safeBlockHorizontal *5),),
+                            Text("Shoes(US)",style: TextStyle(fontSize:  SizeConfig.safeBlockHorizontal *5),),
+
+                          ],
+                        ),
+                      ),
+
+                      body: Container(
+
+                        child: TabBarView(
+                            children:<Widget> [
+                              ListView(
+
+
+                                children: [
+
+                                  ExpansionTile(
+                                    title: Text('13 Y'),
+                                    maintainState: true,
+                                    children: [
+                                      Container(
+                                        margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+                                        child: TextField(
+
+                                          keyboardType: TextInputType.number,
+                                          maxLines: 1,
+                                          controller: xxxscontroller,
+                                          decoration: InputDecoration(
+                                              border: OutlineInputBorder(
+                                                  borderSide: BorderSide(color: kGrey)),
+                                              labelText: 'Quantity in inventory',
+                                              hintText: '0'
+                                          ),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  ExpansionTile(
+                                    title: Text('14 Y'),
+                                    maintainState: true,
+                                    children: [
+                                      Container(
+                                        margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+                                        child: TextField(
+
+                                          keyboardType: TextInputType.number,
+                                          maxLines: 1,
+                                          controller: xxscontroller,
+                                          decoration: InputDecoration(
+                                              border: OutlineInputBorder(
+                                                  borderSide: BorderSide(color: kGrey)),
+                                              labelText: 'Quantity in inventory',
+                                              hintText: '0'
+                                          ),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  ExpansionTile(
+                                    title: Text('15 Y'),
+                                    maintainState: true,
+                                    children: [
+                                      Container(
+                                        margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+                                        child: TextField(
+
+                                          keyboardType: TextInputType.number,
+                                          maxLines: 1,
+                                          controller: xscontroller,
+                                          decoration: InputDecoration(
+                                              border: OutlineInputBorder(
+                                                  borderSide: BorderSide(color: kGrey)),
+                                              labelText: 'Quantity in inventory',
+                                              hintText: '0'
+                                          ),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  ExpansionTile(
+                                    title: Text('16 Y'),
+                                    maintainState: true,
+                                    children: [
+                                      Container(
+                                        margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+                                        child: TextField(
+
+                                          keyboardType: TextInputType.number,
+                                          maxLines: 1,
+                                          controller: scontroller,
+                                          decoration: InputDecoration(
+                                              border: OutlineInputBorder(
+                                                  borderSide: BorderSide(color: kGrey)),
+                                              labelText: 'Quantity in inventory',
+                                              hintText: '0'
+                                          ),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+
+
+                                ],
+                              ),
+                              ListView(
+
+
+                                children: [
+
+
+                                  ExpansionTile(
+                                    title: Text('Made-to-order'),
+                                    maintainState: true,
+                                    children: [
+
+                                      Container(
+                                        margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+                                        child: TextField(
+
+                                          keyboardType: TextInputType.number,
+                                          maxLines: 1,
+                                          controller: mtocontroller,
+                                          decoration: InputDecoration(
+                                              border: OutlineInputBorder(
+                                                  borderSide: BorderSide(color: kGrey)),
+                                              labelText: 'Quantity in inventory',
+                                              hintText: '0'
+                                          ),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+
+
+                                ],
+                              ),
+                              ListView(
+
+
+                                children: [
+
+
+                                  ExpansionTile(
+                                    title: Text('Free size'),
+                                    maintainState: true,
+                                    children: [
+
+                                      Container(
+                                        margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+                                        child: TextField(
+
+                                          keyboardType: TextInputType.number,
+                                          maxLines: 1,
+                                          controller: freesizecontroller,
+                                          decoration: InputDecoration(
+                                              border: OutlineInputBorder(
+                                                  borderSide: BorderSide(color: kGrey)),
+                                              labelText: 'Quantity in inventory',
+                                              hintText: '0'
+                                          ),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+
+
+                                ],
+                              ),
+                              ListView(
+                                children: [
+                                  ExpansionTile(
+                                    title: Text('4'),
+                                    maintainState: true,
+                                    children: [
+                                      Container(
+                                        margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+                                        child: TextField(
+
+                                          keyboardType: TextInputType.number,
+                                          maxLines: 1,
+                                          controller: Ring1controller,
+                                          decoration: InputDecoration(
+                                              border: OutlineInputBorder(
+                                                  borderSide: BorderSide(color: kGrey)),
+                                              labelText: 'Quantity in inventory',
+                                              hintText: '0'
+                                          ),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  ExpansionTile(
+                                    title: Text('4.5'),
+                                    maintainState: true,
+                                    children: [
+                                      Container(
+                                        margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+                                        child: TextField(
+
+                                          keyboardType: TextInputType.number,
+                                          maxLines: 1,
+                                          controller: Ring2controller,
+                                          decoration: InputDecoration(
+                                              border: OutlineInputBorder(
+                                                  borderSide: BorderSide(color: kGrey)),
+                                              labelText: 'Quantity in inventory',
+                                              hintText: '0'
+                                          ),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  ExpansionTile(
+                                    title: Text('5'),
+                                    maintainState: true,
+                                    children: [
+                                      Container(
+                                        margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+                                        child: TextField(
+
+                                          keyboardType: TextInputType.number,
+                                          maxLines: 1,
+                                          controller: Ring3controller,
+                                          decoration: InputDecoration(
+                                              border: OutlineInputBorder(
+                                                  borderSide: BorderSide(color: kGrey)),
+                                              labelText: 'Quantity in inventory',
+                                              hintText: '0'
+                                          ),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  ExpansionTile(
+                                    title: Text('5.5'),
+                                    maintainState: true,
+                                    children: [
+                                      Container(
+                                        margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+                                        child: TextField(
+
+                                          keyboardType: TextInputType.number,
+                                          maxLines: 1,
+                                          controller: Ring4controller,
+                                          decoration: InputDecoration(
+                                              border: OutlineInputBorder(
+                                                  borderSide: BorderSide(color: kGrey)),
+                                              labelText: 'Quantity in inventory',
+                                              hintText: '0'
+                                          ),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  ExpansionTile(
+                                    title: Text('6'),
+                                    maintainState: true,
+                                    children: [
+                                      Container(
+                                        margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+                                        child: TextField(
+
+                                          keyboardType: TextInputType.number,
+                                          maxLines: 1,
+                                          controller: Ring5controller,
+                                          decoration: InputDecoration(
+                                              border: OutlineInputBorder(
+                                                  borderSide: BorderSide(color: kGrey)),
+                                              labelText: 'Quantity in inventory',
+                                              hintText: '0'
+                                          ),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  ExpansionTile(
+                                    title: Text('6.5'),
+                                    maintainState: true,
+                                    children: [
+                                      Container(
+                                        margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+                                        child: TextField(
+
+                                          keyboardType: TextInputType.number,
+                                          maxLines: 1,
+                                          controller: Ring6controller,
+                                          decoration: InputDecoration(
+                                              border: OutlineInputBorder(
+                                                  borderSide: BorderSide(color: kGrey)),
+                                              labelText: 'Quantity in inventory',
+                                              hintText: '0'
+                                          ),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  ExpansionTile(
+                                    title: Text('7'),
+                                    maintainState: true,
+                                    children: [
+                                      Container(
+                                        margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+                                        child: TextField(
+
+                                          keyboardType: TextInputType.number,
+                                          maxLines: 1,
+                                          controller: Ring7controller,
+                                          decoration: InputDecoration(
+                                              border: OutlineInputBorder(
+                                                  borderSide: BorderSide(color: kGrey)),
+                                              labelText: 'Quantity in inventory',
+                                              hintText: '0'
+                                          ),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  ExpansionTile(
+                                    title: Text('7.5'),
+                                    maintainState: true,
+                                    children: [
+                                      Container(
+                                        margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+                                        child: TextField(
+
+                                          keyboardType: TextInputType.number,
+                                          maxLines: 1,
+                                          controller: Ring8controller,
+                                          decoration: InputDecoration(
+                                              border: OutlineInputBorder(
+                                                  borderSide: BorderSide(color: kGrey)),
+                                              labelText: 'Quantity in inventory',
+                                              hintText: '0'
+                                          ),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  ExpansionTile(
+                                    title: Text('8'),
+                                    maintainState: true,
+                                    children: [
+                                      Container(
+                                        margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+                                        child: TextField(
+
+                                          keyboardType: TextInputType.number,
+                                          maxLines: 1,
+                                          controller: Ring9controller,
+                                          decoration: InputDecoration(
+                                              border: OutlineInputBorder(
+                                                  borderSide: BorderSide(color: kGrey)),
+                                              labelText: 'Quantity in inventory',
+                                              hintText: '0'
+                                          ),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  ExpansionTile(
+                                    title: Text('8.5'),
+                                    maintainState: true,
+                                    children: [
+                                      Container(
+                                        margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+                                        child: TextField(
+
+                                          keyboardType: TextInputType.number,
+                                          maxLines: 1,
+                                          controller: Ring10controller,
+                                          decoration: InputDecoration(
+                                              border: OutlineInputBorder(
+                                                  borderSide: BorderSide(color: kGrey)),
+                                              labelText: 'Quantity in inventory',
+                                              hintText: '0'
+                                          ),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  ExpansionTile(
+                                    title: Text('9'),
+                                    maintainState: true,
+                                    children: [
+                                      Container(
+                                        margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+                                        child: TextField(
+
+                                          keyboardType: TextInputType.number,
+                                          maxLines: 1,
+                                          controller: Ring11controller,
+                                          decoration: InputDecoration(
+                                              border: OutlineInputBorder(
+                                                  borderSide: BorderSide(color: kGrey)),
+                                              labelText: 'Quantity in inventory',
+                                              hintText: '0'
+                                          ),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  ExpansionTile(
+                                    title: Text('9.5'),
+                                    maintainState: true,
+                                    children: [
+                                      Container(
+                                        margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+                                        child: TextField(
+
+                                          keyboardType: TextInputType.number,
+                                          maxLines: 1,
+                                          controller: Ring12controller,
+                                          decoration: InputDecoration(
+                                              border: OutlineInputBorder(
+                                                  borderSide: BorderSide(color: kGrey)),
+                                              labelText: 'Quantity in inventory',
+                                              hintText: '0'
+                                          ),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  ExpansionTile(
+                                    title: Text('10'),
+                                    maintainState: true,
+                                    children: [
+                                      Container(
+                                        margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+                                        child: TextField(
+
+                                          keyboardType: TextInputType.number,
+                                          maxLines: 1,
+                                          controller: Ring13controller,
+                                          decoration: InputDecoration(
+                                              border: OutlineInputBorder(
+                                                  borderSide: BorderSide(color: kGrey)),
+                                              labelText: 'Quantity in inventory',
+                                              hintText: '0'
+                                          ),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  ExpansionTile(
+                                    title: Text('10.5'),
+                                    maintainState: true,
+                                    children: [
+                                      Container(
+                                        margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+                                        child: TextField(
+
+                                          keyboardType: TextInputType.number,
+                                          maxLines: 1,
+                                          controller: Ring14controller,
+                                          decoration: InputDecoration(
+                                              border: OutlineInputBorder(
+                                                  borderSide: BorderSide(color: kGrey)),
+                                              labelText: 'Quantity in inventory',
+                                              hintText: '0'
+                                          ),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  ExpansionTile(
+                                    title: Text('11'),
+                                    maintainState: true,
+                                    children: [
+                                      Container(
+                                        margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+                                        child: TextField(
+
+                                          keyboardType: TextInputType.number,
+                                          maxLines: 1,
+                                          controller: Ring15controller,
+                                          decoration: InputDecoration(
+                                              border: OutlineInputBorder(
+                                                  borderSide: BorderSide(color: kGrey)),
+                                              labelText: 'Quantity in inventory',
+                                              hintText: '0'
+                                          ),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  ExpansionTile(
+                                    title: Text('11.5'),
+                                    maintainState: true,
+                                    children: [
+                                      Container(
+                                        margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+                                        child: TextField(
+
+                                          keyboardType: TextInputType.number,
+                                          maxLines: 1,
+                                          controller: Ring16controller,
+                                          decoration: InputDecoration(
+                                              border: OutlineInputBorder(
+                                                  borderSide: BorderSide(color: kGrey)),
+                                              labelText: 'Quantity in inventory',
+                                              hintText: '0'
+                                          ),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  ExpansionTile(
+                                    title: Text('12'),
+                                    maintainState: true,
+                                    children: [
+                                      Container(
+                                        margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+                                        child: TextField(
+
+                                          keyboardType: TextInputType.number,
+                                          maxLines: 1,
+                                          controller: Ring17controller,
+                                          decoration: InputDecoration(
+                                              border: OutlineInputBorder(
+                                                  borderSide: BorderSide(color: kGrey)),
+                                              labelText: 'Quantity in inventory',
+                                              hintText: '0'
+                                          ),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  ExpansionTile(
+                                    title: Text('12.5'),
+                                    maintainState: true,
+                                    children: [
+                                      Container(
+                                        margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+                                        child: TextField(
+
+                                          keyboardType: TextInputType.number,
+                                          maxLines: 1,
+                                          controller: Ring18controller,
+                                          decoration: InputDecoration(
+                                              border: OutlineInputBorder(
+                                                  borderSide: BorderSide(color: kGrey)),
+                                              labelText: 'Quantity in inventory',
+                                              hintText: '0'
+                                          ),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  ExpansionTile(
+                                    title: Text('13'),
+                                    maintainState: true,
+                                    children: [
+                                      Container(
+                                        margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+                                        child: TextField(
+
+                                          keyboardType: TextInputType.number,
+                                          maxLines: 1,
+                                          controller: Ring19controller,
+                                          decoration: InputDecoration(
+                                              border: OutlineInputBorder(
+                                                  borderSide: BorderSide(color: kGrey)),
+                                              labelText: 'Quantity in inventory',
+                                              hintText: '0'
+                                          ),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  ExpansionTile(
+                                    title: Text('13.5'),
+                                    maintainState: true,
+                                    children: [
+                                      Container(
+                                        margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+                                        child: TextField(
+
+                                          keyboardType: TextInputType.number,
+                                          maxLines: 1,
+                                          controller: Ring20controller,
+                                          decoration: InputDecoration(
+                                              border: OutlineInputBorder(
+                                                  borderSide: BorderSide(color: kGrey)),
+                                              labelText: 'Quantity in inventory',
+                                              hintText: '0'
+                                          ),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  ExpansionTile(
+                                    title: Text('14'),
+                                    maintainState: true,
+                                    children: [
+                                      Container(
+                                        margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+                                        child: TextField(
+
+                                          keyboardType: TextInputType.number,
+                                          maxLines: 1,
+                                          controller: Ring21controller,
+                                          decoration: InputDecoration(
+                                              border: OutlineInputBorder(
+                                                  borderSide: BorderSide(color: kGrey)),
+                                              labelText: 'Quantity in inventory',
+                                              hintText: '0'
+                                          ),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  ExpansionTile(
+                                    title: Text('14.5'),
+                                    maintainState: true,
+                                    children: [
+                                      Container(
+                                        margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+                                        child: TextField(
+
+                                          keyboardType: TextInputType.number,
+                                          maxLines: 1,
+                                          controller: Ring22controller,
+                                          decoration: InputDecoration(
+                                              border: OutlineInputBorder(
+                                                  borderSide: BorderSide(color: kGrey)),
+                                              labelText: 'Quantity in inventory',
+                                              hintText: '0'
+                                          ),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  ExpansionTile(
+                                    title: Text('15'),
+                                    maintainState: true,
+                                    children: [
+                                      Container(
+                                        margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+                                        child: TextField(
+
+                                          keyboardType: TextInputType.number,
+                                          maxLines: 1,
+                                          controller: Ring23controller,
+                                          decoration: InputDecoration(
+                                              border: OutlineInputBorder(
+                                                  borderSide: BorderSide(color: kGrey)),
+                                              labelText: 'Quantity in inventory',
+                                              hintText: '0'
+                                          ),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+
+                                ],
+                              ),
+                              ListView(
+                                children: [
+                                  ExpansionTile(
+                                    title: Text('13 Y'),
+                                    maintainState: true,
+                                    children: [
+                                      Container(
+                                        margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+                                        child: TextField(
+
+                                          keyboardType: TextInputType.number,
+                                          maxLines: 1,
+                                          controller: Shoe1controller,
+                                          decoration: InputDecoration(
+                                              border: OutlineInputBorder(
+                                                  borderSide: BorderSide(color: kGrey)),
+                                              labelText: 'Quantity in inventory',
+                                              hintText: '0'
+                                          ),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  ExpansionTile(
+                                    title: Text('14 Y'),
+                                    maintainState: true,
+                                    children: [
+                                      Container(
+                                        margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+                                        child: TextField(
+
+                                          keyboardType: TextInputType.number,
+                                          maxLines: 1,
+                                          controller: Shoe2controller,
+                                          decoration: InputDecoration(
+                                              border: OutlineInputBorder(
+                                                  borderSide: BorderSide(color: kGrey)),
+                                              labelText: 'Quantity in inventory',
+                                              hintText: '0'
+                                          ),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  ExpansionTile(
+                                    title: Text('15 Y'),
+                                    maintainState: true,
+                                    children: [
+                                      Container(
+                                        margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+                                        child: TextField(
+
+                                          keyboardType: TextInputType.number,
+                                          maxLines: 1,
+                                          controller: Shoe3controller,
+                                          decoration: InputDecoration(
+                                              border: OutlineInputBorder(
+                                                  borderSide: BorderSide(color: kGrey)),
+                                              labelText: 'Quantity in inventory',
+                                              hintText: '0'
+                                          ),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  ExpansionTile(
+                                    title: Text('16 Y'),
+                                    maintainState: true,
+                                    children: [
+                                      Container(
+                                        margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
+                                        child: TextField(
+
+                                          keyboardType: TextInputType.number,
+                                          maxLines: 1,
+                                          controller: Shoe4controller,
+                                          decoration: InputDecoration(
+                                              border: OutlineInputBorder(
+                                                  borderSide: BorderSide(color: kGrey)),
+                                              labelText: 'Quantity in inventory',
+                                              hintText: '0'
+                                          ),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+
+
+
+
+
+
+                                ],
+                              ),
+                            ]),
+                      ),
+                    )
+                ),
+              );      },
+        );
+    }
+
+
+
+  }
+
 custom(){
     return
       showMaterialModalBottomSheet(
@@ -8045,4645 +12668,6 @@ tag(){
       );
 
 }
-delete()async{     productsRef
-    .doc(currentUser.id)
-    .collection('userProducts')
-    .doc(prodId)
-    .get()
-    .then((doc) {
-  if (doc.exists) {
-    doc.reference.delete();
-  }
-});
-
-  }
- AddSize(){
-  if(dropdownValue=='Men') {
-return
-  showMaterialModalBottomSheet(
-    expand: true,
-      context: context,
-      builder: (BuildContext context) {
-        SizeConfig().init(context);
-
-        return
-   Container(
-              height: MediaQuery.of(context).size.height * 0.75,
-
-            child: DefaultTabController(
-
-                length:5,
-                child: Scaffold(
-                  resizeToAvoidBottomInset:true,
-                  appBar:AppBar(
-                    backgroundColor: kPrimaryColor,
-                    elevation: 0,
-                    bottom: TabBar(
-                      isScrollable: true,
-                      labelColor: Colors.white,
-                      unselectedLabelColor: kIcon,
-
-
-                      tabs:[
-                        Text("Clothing",style: TextStyle(fontSize:  SizeConfig.safeBlockHorizontal *5,),),
-                        Text("Made-to-order",style: TextStyle(fontSize:  SizeConfig.safeBlockHorizontal *5,),),
-                        Text("Free size",style: TextStyle(fontSize:  SizeConfig.safeBlockHorizontal *5),),
-                       Text("Ring(US)",style: TextStyle(fontSize:  SizeConfig.safeBlockHorizontal *5),),
-                       Text("Shoes(US)",style: TextStyle(fontSize:  SizeConfig.safeBlockHorizontal *5),),
-
-                      ],
-                    ),
-                  ),
-
-                  body: Container(
-                    height: MediaQuery.of(context).size.height * 0.75,
-
-                    child: TabBarView(
-                        children:<Widget> [
-                          ListView(
-
-
-                            children: [
-
-
-
-                              ExpansionTile(
-                                title: Text('XXXS'),
-                                maintainState: true,
-                                children: [
-
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: xxxscontroller,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              ExpansionTile(
-                                title: Text('XXS'),
-                                maintainState: true,
-                                children: [
-
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: xxscontroller,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              ExpansionTile(
-                                title: Text('XS'),
-                                maintainState: true,
-                                children: [
-
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: xscontroller,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              ExpansionTile(
-                                title: Text('S'),
-                                maintainState: true,
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: scontroller,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              ExpansionTile(
-                                title: Text('M'),
-                                maintainState: true,
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: mcontroller,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              ExpansionTile(
-                                title: Text('L'),
-                                maintainState: true,
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: lcontroller,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              ExpansionTile(
-                                title: Text('XL'),
-                                maintainState: true,
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: xlcontroller,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              ExpansionTile(
-                                title: Text('XXL'),
-                                maintainState: true,
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: xxlcontroller,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              ExpansionTile(
-                                title: Text('XXXL'),
-                                maintainState: true,
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: xxxlcontroller,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kSubtitle)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              ExpansionTile(
-                                title: Text('4XL'),
-                                maintainState: true,
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: fourxlcontroller,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kSubtitle)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              ExpansionTile(
-                                title: Text('5XL'),
-                                maintainState: true,
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: fivexlcontroller,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kSubtitle)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              ExpansionTile(
-                                title: Text('6XL'),
-                                maintainState: true,
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: sixxlcontroller,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kSubtitle)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              ExpansionTile(
-                                title: Text('7XL'),
-                                maintainState: true,
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: sevenxlcontroller,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kSubtitle)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              ExpansionTile(
-                                title: Text('8XL'),
-                                maintainState: true,
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: eightxlcontroller,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kSubtitle)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                ],
-                              ),
-
-
-                              // ConstrainedBox(
-                              //   constraints: new BoxConstraints(
-                              //     minHeight: 5.0,
-                              //     maxHeight: 40.0,
-                              //   ),
-                              //   child: Expanded(
-                              //     child: ListView(
-                              //         shrinkWrap: true,
-                              //         // scrollDirection: Axis.vertical,
-                              //         children:[
-                              //         ],
-                              //     ),
-                              //   ),
-                              // ),
-                            ],
-                          ),
-                          ListView(
-
-
-                            children: [
-
-
-                              ExpansionTile(
-                                title: Text('Made-to-order'),
-                                maintainState: true,
-                                children: [
-
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: mtocontroller,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                ],
-                              ),
-
-
-                            ],
-                          ),
-                          ListView(
-
-
-                            children: [
-
-
-                              ExpansionTile(
-                                title: Text('Free size'),
-                                maintainState: true,
-                                children: [
-
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: freesizecontroller,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                ],
-                              ),
-
-
-                            ],
-                          ),
-                          ListView(
-                            children: [
-                              ExpansionTile(
-                                title: Text('4'),
-                                maintainState: true,
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: Ring1controller,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              ExpansionTile(
-                                title: Text('4.5'),
-                                maintainState: true,
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: Ring2controller,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              ExpansionTile(
-                                title: Text('5'),
-                                maintainState: true,
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: Ring3controller,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              ExpansionTile(
-                                title: Text('5.5'),
-                                maintainState: true,
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: Ring4controller,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              ExpansionTile(
-                                title: Text('6'),
-                                maintainState: true,
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: Ring5controller,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              ExpansionTile(
-                                title: Text('6.5'),
-                                maintainState: true,
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: Ring6controller,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              ExpansionTile(
-                                title: Text('7'),
-                                maintainState: true,
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: Ring7controller,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              ExpansionTile(
-                                title: Text('7.5'),
-                                maintainState: true,
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: Ring8controller,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              ExpansionTile(
-                                title: Text('8'),
-                                maintainState: true,
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: Ring9controller,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              ExpansionTile(
-                                title: Text('8.5'),
-                                maintainState: true,
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: Ring10controller,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              ExpansionTile(
-                                title: Text('9'),
-                                maintainState: true,
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: Ring11controller,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              ExpansionTile(
-                                title: Text('9.5'),
-                                maintainState: true,
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: Ring12controller,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              ExpansionTile(
-                                title: Text('10'),
-                                maintainState: true,
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: Ring13controller,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              ExpansionTile(
-                                title: Text('10.5'),
-                                maintainState: true,
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: Ring14controller,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              ExpansionTile(
-                                title: Text('11'),
-                                maintainState: true,
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: Ring15controller,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              ExpansionTile(
-                                title: Text('11.5'),
-                                maintainState: true,
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: Ring16controller,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              ExpansionTile(
-                                title: Text('12'),
-                                maintainState: true,
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: Ring17controller,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              ExpansionTile(
-                                title: Text('12.5'),
-                                maintainState: true,
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: Ring18controller,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              ExpansionTile(
-                                title: Text('13'),
-                                maintainState: true,
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: Ring19controller,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              ExpansionTile(
-                                title: Text('13.5'),
-                                maintainState: true,
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: Ring20controller,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              ExpansionTile(
-                                title: Text('14'),
-                                maintainState: true,
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: Ring21controller,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              ExpansionTile(
-                                title: Text('14.5'),
-                                maintainState: true,
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: Ring22controller,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              ExpansionTile(
-                                title: Text('15'),
-                                maintainState: true,
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: Ring23controller,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                ],
-                              ),
-
-                            ],
-                          ),
-
-                          ListView(
-                            children: [
-                              ExpansionTile(
-                                title: Text('3 ½'),
-                                maintainState: true,
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: Shoe1controller,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              ExpansionTile(
-                                title: Text('4'),
-                                maintainState: true,
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: Shoe2controller,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              ExpansionTile(
-                                title: Text('4 ½'),
-                                maintainState: true,
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: Shoe3controller,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              ExpansionTile(
-                                title: Text('5'),
-                                maintainState: true,
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: Shoe4controller,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              ExpansionTile(
-                                title: Text('5 ½'),
-                                maintainState: true,
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: Shoe5controller,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              ExpansionTile(
-                                title: Text('6'),
-                                maintainState: true,
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: Shoe6controller,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              ExpansionTile(
-                                title: Text('6 ½'),
-                                maintainState: true,
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: Shoe7controller,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              ExpansionTile(
-                                title: Text('7'),
-                                maintainState: true,
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: Shoe8controller,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              ExpansionTile(
-                                title: Text('7 ½'),
-                                maintainState: true,
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: Shoe9controller,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              ExpansionTile(
-                                title: Text('8'),
-                                maintainState: true,
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: Shoe10controller,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              ExpansionTile(
-                                title: Text('8 ½'),
-                                maintainState: true,
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: Shoe11controller,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              ExpansionTile(
-                                title: Text('9'),
-                                maintainState: true,
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: Shoe12controller,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              ExpansionTile(
-                                title: Text('9 ½'),
-                                maintainState: true,
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: Shoe13controller,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              ExpansionTile(
-                                title: Text('10'),
-                                maintainState: true,
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: Shoe14controller,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              ExpansionTile(
-                                title: Text('10 ½'),
-                                maintainState: true,
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: Shoe15controller,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              ExpansionTile(
-                                title: Text('11'),
-                                maintainState: true,
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: Shoe16controller,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              ExpansionTile(
-                                title: Text('11 ½'),
-                                maintainState: true,
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: Shoe17controller,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              ExpansionTile(
-                                title: Text('12'),
-                                maintainState: true,
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: Shoe18controller,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              ExpansionTile(
-                                title: Text('12 ½'),
-                                maintainState: true,
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: Shoe19controller,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              ExpansionTile(
-                                title: Text('13'),
-                                maintainState: true,
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: Shoe20controller,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              ExpansionTile(
-                                title: Text('13 ½'),
-                                maintainState: true,
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: Shoe21controller,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                ],
-                              ),
-
-                            ],
-                          ),
-
-                        ]),
-                  ),
-                )
-            ),
-          );      },
-    );
-  }
-  else if(dropdownValue=='Women') {
-return
-  showMaterialModalBottomSheet(
-    expand: true,
-    context: context,
-      builder: (BuildContext context) {
-        SizeConfig().init(context);
-
-        return
-          Expanded(
-            child: DefaultTabController(
-
-                length:5,
-                child: Scaffold(
-
-                  appBar:AppBar(
-                    backgroundColor: kPrimaryColor,
-                    elevation: 0,
-                    bottom: TabBar(
-                      isScrollable: true,
-                      labelColor: Colors.white,
-                      unselectedLabelColor: kIcon,
-
-
-                      tabs:[
-                        Text("Clothing",style: TextStyle(fontSize:  SizeConfig.safeBlockHorizontal *5,),),
-                        Text("Made-to-order",style: TextStyle(fontSize:  SizeConfig.safeBlockHorizontal *5,),),
-                        Text("Free size",style: TextStyle(fontSize:  SizeConfig.safeBlockHorizontal *5),),
-                       Text("Ring(US)",style: TextStyle(fontSize:  SizeConfig.safeBlockHorizontal *5),),
-                       Text("Shoes(US)",style: TextStyle(fontSize:  SizeConfig.safeBlockHorizontal *5),),
-
-                      ],
-                    ),
-                  ),
-
-                  body: Container(
-
-                    child: TabBarView(
-                        children:<Widget> [
-                          ListView(
-
-
-                            children: [
-
-
-                              ExpansionTile(
-                                title: Text('XXXS'),
-                                maintainState: true,
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: xxxscontroller,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              ExpansionTile(
-                                title: Text('XXS'),
-                                maintainState: true,
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: xxscontroller,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              ExpansionTile(
-                                title: Text('XS'),
-                                maintainState: true,
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: xscontroller,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              ExpansionTile(
-                                title: Text('S'),
-                                maintainState: true,
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: scontroller,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              ExpansionTile(
-                                title: Text('M'),
-                                maintainState: true,
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: mcontroller,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              ExpansionTile(
-                                title: Text('L'),
-                                maintainState: true,
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: lcontroller,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              ExpansionTile(
-                                title: Text('XL'),
-                                maintainState: true,
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: xlcontroller,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              ExpansionTile(
-                                title: Text('XXL'),
-                                maintainState: true,
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: xxlcontroller,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              ExpansionTile(
-                                title: Text('XXXL'),
-                                maintainState: true,
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: xxxlcontroller,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kSubtitle)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              ExpansionTile(
-                                title: Text('4XL'),
-                                maintainState: true,
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: fourxlcontroller,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kSubtitle)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              ExpansionTile(
-                                title: Text('5XL'),
-                                maintainState: true,
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: fivexlcontroller,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kSubtitle)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              ExpansionTile(
-                                title: Text('6XL'),
-                                maintainState: true,
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: sixxlcontroller,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kSubtitle)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              ExpansionTile(
-                                title: Text('7XL'),
-                                maintainState: true,
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: sevenxlcontroller,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kSubtitle)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              ExpansionTile(
-                                title: Text('8XL'),
-                                maintainState: true,
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: eightxlcontroller,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kSubtitle)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                ],
-                              ),
-
-
-                            ],
-                          ),
-                          ListView(
-
-
-                            children: [
-
-
-                              ExpansionTile(
-                                title: Text('Made-to-order'),
-                                maintainState: true,
-                                children: [
-
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: mtocontroller,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                ],
-                              ),
-
-
-                            ],
-                          ),
-                          ListView(
-
-
-                            children: [
-
-
-                              ExpansionTile(
-                                title: Text('Free size'),
-                                maintainState: true,
-                                children: [
-
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: freesizecontroller,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                ],
-                              ),
-
-
-                            ],
-                          ),
-                          ListView(
-                            children: [
-                              ExpansionTile(
-                                title: Text('4'),
-                                maintainState: true,
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: Ring1controller,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              ExpansionTile(
-                                title: Text('4.5'),
-                                maintainState: true,
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: Ring2controller,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              ExpansionTile(
-                                title: Text('5'),
-                                maintainState: true,
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: Ring3controller,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              ExpansionTile(
-                                title: Text('5.5'),
-                                maintainState: true,
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: Ring4controller,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              ExpansionTile(
-                                title: Text('6'),
-                                maintainState: true,
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: Ring5controller,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              ExpansionTile(
-                                title: Text('6.5'),
-                                maintainState: true,
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: Ring6controller,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              ExpansionTile(
-                                title: Text('7'),
-                                maintainState: true,
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: Ring7controller,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              ExpansionTile(
-                                title: Text('7.5'),
-                                maintainState: true,
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: Ring8controller,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              ExpansionTile(
-                                title: Text('8'),
-                                maintainState: true,
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: Ring9controller,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              ExpansionTile(
-                                title: Text('8.5'),
-                                maintainState: true,
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: Ring10controller,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              ExpansionTile(
-                                title: Text('9'),
-                                maintainState: true,
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: Ring11controller,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              ExpansionTile(
-                                title: Text('9.5'),
-                                maintainState: true,
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: Ring12controller,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              ExpansionTile(
-                                title: Text('10'),
-                                maintainState: true,
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: Ring13controller,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              ExpansionTile(
-                                title: Text('10.5'),
-                                maintainState: true,
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: Ring14controller,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              ExpansionTile(
-                                title: Text('11'),
-                                maintainState: true,
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: Ring15controller,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              ExpansionTile(
-                                title: Text('11.5'),
-                                maintainState: true,
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: Ring16controller,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              ExpansionTile(
-                                title: Text('12'),
-                                maintainState: true,
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: Ring17controller,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              ExpansionTile(
-                                title: Text('12.5'),
-                                maintainState: true,
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: Ring18controller,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              ExpansionTile(
-                                title: Text('13'),
-                                maintainState: true,
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: Ring19controller,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              ExpansionTile(
-                                title: Text('13.5'),
-                                maintainState: true,
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: Ring20controller,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              ExpansionTile(
-                                title: Text('14'),
-                                maintainState: true,
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: Ring21controller,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              ExpansionTile(
-                                title: Text('14.5'),
-                                maintainState: true,
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: Ring22controller,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              ExpansionTile(
-                                title: Text('15'),
-                                maintainState: true,
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: Ring23controller,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                ],
-                              ),
-
-                            ],
-                          ),
-                          ListView(
-                            children: [
-                              ExpansionTile(
-                                title: Text('5'),
-                                maintainState: true,
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: Shoe1controller,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              ExpansionTile(
-                                title: Text('5 ½'),
-                                maintainState: true,
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: Shoe2controller,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              ExpansionTile(
-                                title: Text('6'),
-                                maintainState: true,
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: Shoe3controller,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              ExpansionTile(
-                                title: Text('6 ½'),
-                                maintainState: true,
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: Shoe4controller,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              ExpansionTile(
-                                title: Text('7'),
-                                maintainState: true,
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: Shoe5controller,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              ExpansionTile(
-                                title: Text('7 ½'),
-                                maintainState: true,
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: Shoe6controller,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              ExpansionTile(
-                                title: Text('8'),
-                                maintainState: true,
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: Shoe7controller,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              ExpansionTile(
-                                title: Text('8 ½'),
-                                maintainState: true,
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: Shoe8controller,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              ExpansionTile(
-                                title: Text('9'),
-                                maintainState: true,
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: Shoe9controller,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              ExpansionTile(
-                                title: Text('9 ½'),
-                                maintainState: true,
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: Shoe10controller,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              ExpansionTile(
-                                title: Text('10'),
-                                maintainState: true,
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: Shoe11controller,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              ExpansionTile(
-                                title: Text('10 ½'),
-                                maintainState: true,
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: Shoe12controller,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              ExpansionTile(
-                                title: Text('12'),
-                                maintainState: true,
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: Shoe13controller,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              ExpansionTile(
-                                title: Text('13'),
-                                maintainState: true,
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: Shoe14controller,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              ExpansionTile(
-                                title: Text('14'),
-                                maintainState: true,
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: Shoe15controller,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              ExpansionTile(
-                                title: Text('15 ½'),
-                                maintainState: true,
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: Shoe16controller,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                ],
-                              ),
-
-
-
-                            ],
-                          ),
-                        ]),
-                  ),
-                )
-            ),
-          );      },
-    );
-  }
-  else if(dropdownValue=='Baby-Boys'||dropdownValue=='Baby-Girls') {
-return
-  showMaterialModalBottomSheet(
-    expand: true,
-    context: context,
-      builder: (BuildContext context) {
-        SizeConfig().init(context);
-
-        return
-          Expanded(
-            child: DefaultTabController(
-
-                length:5,
-                child: Scaffold(
-
-                  appBar:AppBar(
-                    backgroundColor: kPrimaryColor,
-                    elevation: 0,
-                    bottom: TabBar(
-                      isScrollable: true,
-                      labelColor: Colors.white,
-                      unselectedLabelColor: kIcon,
-
-
-                      tabs:[
-                        Text("Clothing",style: TextStyle(fontSize:  SizeConfig.safeBlockHorizontal *5,),),
-                        Text("Made-to-order",style: TextStyle(fontSize:  SizeConfig.safeBlockHorizontal *5,),),
-                        Text("Free size",style: TextStyle(fontSize:  SizeConfig.safeBlockHorizontal *5),),
-                       Text("Shoes(US)",style: TextStyle(fontSize:  SizeConfig.safeBlockHorizontal *5),),
-
-                      ],
-                    ),
-                  ),
-
-                  body: Container(
-
-                    child: TabBarView(
-                        children:<Widget> [
-                          ListView(
-
-
-                            children: [
-
-
-                              ExpansionTile(
-                                title: Text('0-3 mth'),
-                                maintainState: true,
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: xxxscontroller,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              ExpansionTile(
-                                title: Text('3-6 mth'),
-                                maintainState: true,
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: xxscontroller,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              ExpansionTile(
-                                title: Text('6-9 mth'),
-                                maintainState: true,
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: xscontroller,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              ExpansionTile(
-                                title: Text('9-12 mth'),
-                                maintainState: true,
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: scontroller,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              ExpansionTile(
-                                title: Text('12-18 mth'),
-                                maintainState: true,
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: mcontroller,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              ExpansionTile(
-                                title: Text('18-24 mth'),
-                                maintainState: true,
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: lcontroller,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                ],
-                              ),
-
-
-                            ],
-                          ),
-                          ListView(
-
-
-                            children: [
-
-
-                              ExpansionTile(
-                                title: Text('Made-to-order'),
-                                maintainState: true,
-                                children: [
-
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: mtocontroller,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                ],
-                              ),
-
-
-                            ],
-                          ),
-                          ListView(
-
-
-                            children: [
-
-
-                              ExpansionTile(
-                                title: Text('Free size'),
-                                maintainState: true,
-                                children: [
-
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: freesizecontroller,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                ],
-                              ),
-
-
-                            ],
-                          ),
-                          ListView(
-                            children: [
-                              ExpansionTile(
-                                title: Text('0-3 mth'),
-                                maintainState: true,
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: Shoe1controller,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              ExpansionTile(
-                                title: Text('3-6 mth'),
-                                maintainState: true,
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: Shoe2controller,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              ExpansionTile(
-                                title: Text('6 mth'),
-                                maintainState: true,
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: Shoe3controller,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              ExpansionTile(
-                                title: Text('9 mth'),
-                                maintainState: true,
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: Shoe4controller,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              ExpansionTile(
-                                title: Text('9-12 mth'),
-                                maintainState: true,
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: Shoe5controller,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              ExpansionTile(
-                                title: Text('12-18 mth'),
-                                maintainState: true,
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: Shoe6controller,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              ExpansionTile(
-                                title: Text('18-24 mth'),
-                                maintainState: true,
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: Shoe7controller,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                ],
-                              ),
-
-
-
-
-                            ],
-                          ),
-
-                        ]),
-                  ),
-                )
-            ),
-          );      },
-    );
-  }
-  else  if(dropdownValue=='Kids-Boys'||dropdownValue=='Kids-Girls') {
-return
-  showMaterialModalBottomSheet(
-    expand: true,
-    context: context,
-      builder: (BuildContext context) {
-        SizeConfig().init(context);
-
-        return
-          Expanded(
-            child: DefaultTabController(
-
-                length:6,
-                child: Scaffold(
-
-                  appBar:AppBar(
-                    backgroundColor: kPrimaryColor,
-                    elevation: 0,
-                    bottom: TabBar(
-                      isScrollable: true,
-                      labelColor: Colors.white,
-                      unselectedLabelColor: kIcon,
-
-
-                      tabs:[
-                        Text("Clothing",style: TextStyle(fontSize:  SizeConfig.safeBlockHorizontal *5,),),
-                        Text("Made-to-order",style: TextStyle(fontSize:  SizeConfig.safeBlockHorizontal *5,),),
-                        Text("Free size",style: TextStyle(fontSize:  SizeConfig.safeBlockHorizontal *5),),
-                       Text("Shoes(US)",style: TextStyle(fontSize:  SizeConfig.safeBlockHorizontal *5),),
-
-                      ],
-                    ),
-                  ),
-
-                  body: Container(
-
-                    child: TabBarView(
-                        children:<Widget> [
-                          ListView(
-
-
-                            children: [
-
-                              ExpansionTile(
-                                title: Text('2 Y'),
-                                maintainState: true,
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: xxxscontroller,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              ExpansionTile(
-                                title: Text('3-4 Y'),
-                                maintainState: true,
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: xxscontroller,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              ExpansionTile(
-                                title: Text('4-5 Y'),
-                                maintainState: true,
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: xscontroller,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              ExpansionTile(
-                                title: Text('5-6 Y'),
-                                maintainState: true,
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: scontroller,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              ExpansionTile(
-                                title: Text('6-7 Y'),
-                                maintainState: true,
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: mcontroller,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              ExpansionTile(
-                                title: Text('7-8 Y'),
-                                maintainState: true,
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: lcontroller,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              ExpansionTile(
-                                title: Text('8-9 Y'),
-                                maintainState: true,
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: xlcontroller,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              ExpansionTile(
-                                title: Text('9-10 Y'),
-                                maintainState: true,
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: xxlcontroller,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              ExpansionTile(
-                                title: Text('10-11 Y'),
-                                maintainState: true,
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: xxxlcontroller,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              ExpansionTile(
-                                title: Text('11-12 Y'),
-                                maintainState: true,
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: fourxlcontroller,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                ],
-                              ),
-
-
-                            ],
-                          ),
-                          ListView(
-
-
-                            children: [
-
-
-                              ExpansionTile(
-                                title: Text('Made-to-order'),
-                                maintainState: true,
-                                children: [
-
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: mtocontroller,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                ],
-                              ),
-
-
-                            ],
-                          ),
-                          ListView(
-
-
-                            children: [
-
-
-                              ExpansionTile(
-                                title: Text('Free size'),
-                                maintainState: true,
-                                children: [
-
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: freesizecontroller,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                ],
-                              ),
-
-
-                            ],
-                          ),
-                          ListView(
-                            children: [
-                              ExpansionTile(
-                                title: Text('2 Y'),
-                                maintainState: true,
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: Shoe1controller,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              ExpansionTile(
-                                title: Text('2 ½ Y'),
-                                maintainState: true,
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: Shoe2controller,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              ExpansionTile(
-                                title: Text('3 Y'),
-                                maintainState: true,
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: Shoe3controller,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              ExpansionTile(
-                                title: Text('3 ½ Y'),
-                                maintainState: true,
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: Shoe4controller,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              ExpansionTile(
-                                title: Text('4 Y'),
-                                maintainState: true,
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: Shoe5controller,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              ExpansionTile(
-                                title: Text('5 Y'),
-                                maintainState: true,
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: Shoe6controller,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              ExpansionTile(
-                                title: Text('6 Y'),
-                                maintainState: true,
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: Shoe7controller,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              ExpansionTile(
-                                title: Text('7 Y'),
-                                maintainState: true,
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: Shoe8controller,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              ExpansionTile(
-                                title: Text('8 Y'),
-                                maintainState: true,
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: Shoe9controller,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              ExpansionTile(
-                                title: Text('8 Y'),
-                                maintainState: true,
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: Shoe10controller,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              ExpansionTile(
-                                title: Text('9 Y'),
-                                maintainState: true,
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: Shoe11controller,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              ExpansionTile(
-                                title: Text('10 Y'),
-                                maintainState: true,
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: Shoe12controller,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              ExpansionTile(
-                                title: Text('11 Y'),
-                                maintainState: true,
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: Shoe13controller,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              ExpansionTile(
-                                title: Text('12 Y'),
-                                maintainState: true,
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: Shoe14controller,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                ],
-                              ),
-
-
-
-
-                            ],
-                          ),
-
-                        ]),
-                  ),
-                )
-            ),
-          );      },
-    );
-  }
-  else  if(dropdownValue=='Teen-Boys'||dropdownValue=='Teen-Girls') {
-return
-  showMaterialModalBottomSheet(
-    expand: true,
-    context: context,
-      builder: (BuildContext context) {
-        SizeConfig().init(context);
-
-        return
-          Expanded(
-            child: DefaultTabController(
-
-                length:5,
-                child: Scaffold(
-
-                  appBar:AppBar(
-                    backgroundColor: kPrimaryColor,
-                    elevation: 0,
-                    bottom: TabBar(
-                      isScrollable: true,
-                      labelColor: Colors.white,
-                      unselectedLabelColor: kIcon,
-
-
-                      tabs:[
-                        Text("Clothing",style: TextStyle(fontSize:  SizeConfig.safeBlockHorizontal *5,),),
-                        Text("Made-to-order",style: TextStyle(fontSize:  SizeConfig.safeBlockHorizontal *5,),),
-                        Text("Free size",style: TextStyle(fontSize:  SizeConfig.safeBlockHorizontal *5),),
-                       Text("Ring(US)",style: TextStyle(fontSize:  SizeConfig.safeBlockHorizontal *5),),
-                       Text("Shoes(US)",style: TextStyle(fontSize:  SizeConfig.safeBlockHorizontal *5),),
-
-                      ],
-                    ),
-                  ),
-
-                  body: Container(
-
-                    child: TabBarView(
-                        children:<Widget> [
-                          ListView(
-
-
-                            children: [
-
-                              ExpansionTile(
-                                title: Text('13 Y'),
-                                maintainState: true,
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: xxxscontroller,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              ExpansionTile(
-                                title: Text('14 Y'),
-                                maintainState: true,
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: xxscontroller,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              ExpansionTile(
-                                title: Text('15 Y'),
-                                maintainState: true,
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: xscontroller,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              ExpansionTile(
-                                title: Text('16 Y'),
-                                maintainState: true,
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: scontroller,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                ],
-                              ),
-
-
-                            ],
-                          ),
-                          ListView(
-
-
-                            children: [
-
-
-                              ExpansionTile(
-                                title: Text('Made-to-order'),
-                                maintainState: true,
-                                children: [
-
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: mtocontroller,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                ],
-                              ),
-
-
-                            ],
-                          ),
-                          ListView(
-
-
-                            children: [
-
-
-                              ExpansionTile(
-                                title: Text('Free size'),
-                                maintainState: true,
-                                children: [
-
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: freesizecontroller,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                ],
-                              ),
-
-
-                            ],
-                          ),
-                          ListView(
-                            children: [
-                              ExpansionTile(
-                                title: Text('4'),
-                                maintainState: true,
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: Ring1controller,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              ExpansionTile(
-                                title: Text('4.5'),
-                                maintainState: true,
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: Ring2controller,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              ExpansionTile(
-                                title: Text('5'),
-                                maintainState: true,
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: Ring3controller,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              ExpansionTile(
-                                title: Text('5.5'),
-                                maintainState: true,
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: Ring4controller,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              ExpansionTile(
-                                title: Text('6'),
-                                maintainState: true,
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: Ring5controller,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              ExpansionTile(
-                                title: Text('6.5'),
-                                maintainState: true,
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: Ring6controller,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              ExpansionTile(
-                                title: Text('7'),
-                                maintainState: true,
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: Ring7controller,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              ExpansionTile(
-                                title: Text('7.5'),
-                                maintainState: true,
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: Ring8controller,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              ExpansionTile(
-                                title: Text('8'),
-                                maintainState: true,
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: Ring9controller,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              ExpansionTile(
-                                title: Text('8.5'),
-                                maintainState: true,
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: Ring10controller,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              ExpansionTile(
-                                title: Text('9'),
-                                maintainState: true,
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: Ring11controller,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              ExpansionTile(
-                                title: Text('9.5'),
-                                maintainState: true,
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: Ring12controller,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              ExpansionTile(
-                                title: Text('10'),
-                                maintainState: true,
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: Ring13controller,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              ExpansionTile(
-                                title: Text('10.5'),
-                                maintainState: true,
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: Ring14controller,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              ExpansionTile(
-                                title: Text('11'),
-                                maintainState: true,
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: Ring15controller,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              ExpansionTile(
-                                title: Text('11.5'),
-                                maintainState: true,
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: Ring16controller,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              ExpansionTile(
-                                title: Text('12'),
-                                maintainState: true,
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: Ring17controller,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              ExpansionTile(
-                                title: Text('12.5'),
-                                maintainState: true,
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: Ring18controller,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              ExpansionTile(
-                                title: Text('13'),
-                                maintainState: true,
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: Ring19controller,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              ExpansionTile(
-                                title: Text('13.5'),
-                                maintainState: true,
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: Ring20controller,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              ExpansionTile(
-                                title: Text('14'),
-                                maintainState: true,
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: Ring21controller,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              ExpansionTile(
-                                title: Text('14.5'),
-                                maintainState: true,
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: Ring22controller,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              ExpansionTile(
-                                title: Text('15'),
-                                maintainState: true,
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: Ring23controller,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                ],
-                              ),
-
-                            ],
-                          ),
-                          ListView(
-                            children: [
-                              ExpansionTile(
-                                title: Text('13 Y'),
-                                maintainState: true,
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: Shoe1controller,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              ExpansionTile(
-                                title: Text('14 Y'),
-                                maintainState: true,
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: Shoe2controller,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              ExpansionTile(
-                                title: Text('15 Y'),
-                                maintainState: true,
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: Shoe3controller,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              ExpansionTile(
-                                title: Text('16 Y'),
-                                maintainState: true,
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 8.0),
-                                    child: TextField(
-
-                                      keyboardType: TextInputType.number,
-                                      maxLines: 1,
-                                      controller: Shoe4controller,
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(color: kGrey)),
-                                          labelText: 'Quantity in inventory',
-                                          hintText: '0'
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                ],
-                              ),
-
-
-
-
-
-
-                            ],
-                          ),
-                        ]),
-                  ),
-                )
-            ),
-          );      },
-    );
-  } 
-  
-
-
-}
   AddCustomSize(parentContext){
     return
       showDialog(
@@ -13201,7 +13185,6 @@ color(){
                     Get.back();
                    Get.back();
 
-                  delete();
                   },
                   child: Text("YES"),
                   ),
@@ -13336,18 +13319,13 @@ page0(){
                       children: [
                         Container(
                           margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0,8.0),
-                          child: ElevatedButton(
+                          child: GestureDetector(
 
-                            style: ElevatedButton.styleFrom(
 
-                                                            primary:   Colors.black,
-  
-                         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-
-  ),
-
-                            child: Text('$value',style:TextStyle(color: Colors.white) ,),
-                            onPressed: (){
+                            child: ListTile(title: Text('$value',style:TextStyle(color: Colors.black) ,),
+                                trailing:Icon(Icons.arrow_forward_ios_rounded)
+                            ),
+                            onTap: (){
                               showModalBottomSheet(context: context, builder:(BuildContext context){
 
 
@@ -13822,7 +13800,7 @@ page1(){
                         ],
                       ):Container(),
                       SizedBox( height: 8.0,),
-                      Text('Free shipping',style:TextStyle(color: kText)) ,
+              Text('Free worldwide shipping',style:TextStyle(color: kText)) ,
 
                       SizedBox( height: 8.0,),
 
@@ -16285,8 +16263,6 @@ Container(              height:SizeConfig.screenHeight*0.83,
       ),
     ),
   ),
-
-
 
   SizedBox( height: 8.0,),
   Container(

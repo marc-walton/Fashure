@@ -7,6 +7,9 @@ import 'package:fashow/Categories/Kids/teen/girl/girl.dart';
 import 'package:fashow/Categories/Men/Men.dart';
 import 'package:fashow/Categories/Women/Women.dart';
 import 'package:fashow/Live/upload_bid.dart';
+import 'package:fashow/Resale/Resale.dart';
+import 'package:fashow/Resale/upload_resale.dart';
+import 'package:fashow/chatcached_image.dart';
 import 'package:fashow/fav.dart';
 import 'package:fashow/size_config.dart';
 import 'package:flutter/cupertino.dart';
@@ -51,17 +54,35 @@ new Tabs(title: "Teen-Boys",color: kPrimaryColor),
 new Tabs(title: "Teen-Girls",color: kPrimaryColor),
 
   ];
+    final List<Tabs> _maintabs = [new Tabs(title: "Shop",color: kPrimaryColor),
+    new Tabs(title: "Resale",color: kPrimaryColor),
+
+  ];
+
   Tabs _myHandler ;
+  Tabs _mainHandler ;
+
   TabController _controller ;
+  TabController _Tabcontroller ;
+
   void initState() {
     super.initState();
     _controller = new TabController(length: 8, vsync: this);
+ _Tabcontroller = new TabController(length: 2, vsync: this);
+
     _myHandler = _tabs[1];
     _controller.addListener(_handleSelected);
+ _mainHandler = _maintabs[1];
+    _Tabcontroller.addListener(_mainHandleSelected);
+
   }
   void _handleSelected() {
     setState(() {
       _myHandler= _tabs[_controller.index];
+    });
+  } void _mainHandleSelected() {
+    setState(() {
+      _mainHandler= _maintabs[_Tabcontroller.index];
     });
   }
  final _firestore = FirebaseFirestore.instance;
@@ -97,7 +118,7 @@ new Tabs(title: "Teen-Girls",color: kPrimaryColor),
             child: Container(
               height: 80.0,
               child: new TabBar(
-
+controller: _Tabcontroller,
                 ///filled
                 labelStyle:TextStyle(fontFamily: "AlteroDCURegular" ),
                 ///outline
@@ -555,6 +576,7 @@ new Tabs(title: "Teen-Girls",color: kPrimaryColor),
                             )),
 
                         Container(
+                          color: Colors.white,
                           height: MediaQuery.of(context).size.height*0.65,
                           width:MediaQuery.of(context).size.height*0.97,
                           child: Expanded(
@@ -578,28 +600,46 @@ new Tabs(title: "Teen-Girls",color: kPrimaryColor),
                   ),
                 ],
               ),
-
-              Men(),
+Container(
+),
 
             ],
           ),
 
 
 
-          floatingActionButton: FloatingActionButton(
-            heroTag:'shop',
-            backgroundColor: Colors.black38,
-            onPressed: (){
-              WidgetsBinding.instance.addPostFrameCallback((_){
-              Navigator.push(context, MaterialPageRoute(builder: (context) =>Uploadecom(currentUser:currentUser))) .then((value) {
-                  setState(() {});
-                });
-              },) ;    } ,
-            child: Icon(Icons.add_box),
-          ),
+          floatingActionButton: _bottomButtons()
         ),
       );
   }
+  Widget _bottomButtons() {
+    if(_Tabcontroller.index == 0){return
+      FloatingActionButton(
+        heroTag:'shop',
+        backgroundColor: Colors.black38,
+        onPressed: (){
+          WidgetsBinding.instance.addPostFrameCallback((_){
+            Navigator.push(context, MaterialPageRoute(builder: (context) =>Uploadecom(currentUser:currentUser))) .then((value) {
+              setState(() {});
+            });
+          },) ;    } ,
+        child: Icon(Icons.add_box),
+      );}
+    else if(_Tabcontroller.index == 1){return
+      FloatingActionButton(
+        heroTag:'resale',
+        backgroundColor: Colors.black38,
+        onPressed: (){
+          WidgetsBinding.instance.addPostFrameCallback((_){
+            Navigator.push(context, MaterialPageRoute(builder: (context) =>UploadResale())) .then((value) {
+              setState(() {});
+            });
+          },) ;    } ,
+        child: Icon(Icons.add_box),
+      );}
+
+  }
+
 }
 class Tabs {
   final String title;
@@ -611,4 +651,53 @@ class Filter{
   bool category= false;
   String price;
   Filter({this.category,this.price});
+}
+
+DFF(){
+  return
+Scaffold(
+  body:   FutureBuilder(
+
+    future:    FirebaseFirestore.instance.collection('Resale')
+
+        .doc(currentUser.id)
+
+        .collection('userResale').get(),
+
+    builder: (context,snapshot)
+
+    {
+
+
+
+      return
+
+        ListView.builder(physics: NeverScrollableScrollPhysics(),
+
+    shrinkWrap: true,
+
+    scrollDirection:Axis.vertical,
+
+    itemCount: snapshot.data.docs.length,
+
+    itemBuilder: (BuildContext context, int index) {
+
+          return Container(
+
+            child: CachedImage( snapshot.data.docs[index].data()['shopmediaUrl']
+
+              .first,
+
+          ));
+
+
+
+    });
+
+    },
+
+
+
+  ),
+);
 }
