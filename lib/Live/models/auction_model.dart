@@ -6,7 +6,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fashow/Live/Live.dart';
 import 'package:fashow/Live/countdown_timer/current_remaining_time.dart';
 import 'package:fashow/Live/countdown_timer/flutter_countdown_timer.dart';
-import 'package:fashow/model/address_auction.dart';
+import 'package:fashow/Resale/address_auction.dart';
 import 'package:fashow/size_config.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';

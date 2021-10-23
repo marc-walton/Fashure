@@ -9,6 +9,7 @@ import 'package:fashow/Categories/Women/Women.dart';
 import 'package:fashow/DesignerShop.dart';
 import 'package:fashow/Live/upload_bid.dart';
 import 'package:fashow/Resale/Resale.dart';
+import 'package:fashow/Resale/resaleScreen.dart';
 import 'package:fashow/Resale/upload_resale.dart';
 import 'package:fashow/chatcached_image.dart';
 import 'package:fashow/fav.dart';
@@ -256,11 +257,22 @@ Scaffold(
 
           return Container(
 
-            child: CachedImage( snapshot.data.docs[index].data()['images']
+            child: GestureDetector(
+              onTap: () => Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => ResaleScreen(
+                    postId: snapshot.data.docs[index].data()['resaleId'],
+                    userId: snapshot.data.docs[index].data()['ownerId'],
+                  ),
+                ),
+              ),
+              child: CachedImage( snapshot.data.docs[index].data()['images']
 
-              .first,
+                .first,
 
-          ));
+          ),
+            ));
 
 
 

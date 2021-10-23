@@ -869,7 +869,7 @@ shipCostintern= double.tryParse(shipcostintern.text ??"0.0");
       "freeworldship":freeworldship,
       "freeship":freeship,
       "shipment": shipController.text,
-      "color":int.tryParse(colorController.text) ?? 0,
+      "color":colorController.text,
       "country":  currentUser.country,
       "currency":  currentUser.currency,
       "images":images,

@@ -1,5 +1,7 @@
 import 'package:contained_tab_bar_view/contained_tab_bar_view.dart';
+import 'package:currency_formatter/currency_formatter.dart';
 import 'package:dropdown_formfield/dropdown_formfield.dart';
+import 'package:fashow/Live/Live.dart';
 import 'package:fashow/Product_screen.dart';
 import 'package:fashow/chatcached_image.dart';
 import 'package:fashow/model/addressbuynow.dart';
@@ -37,11 +39,6 @@ import 'package:fashow/methods/dynamic_links_service.dart';
 import 'package:getwidget/components/button/gf_button.dart';
 import 'package:getwidget/shape/gf_button_shape.dart';
 import 'package:getwidget/types/gf_button_type.dart';
-import 'package:currency_formatter/currency_formatter.dart';
-var currencyFormatter =
-currentUser.currency == "INR"?NumberFormat.currency(locale:"HI"):
-currentUser.currency == "EUR"? NumberFormat('#.##0,00',):
- NumberFormat('#,##0.00', );
 
 class Prod extends StatefulWidget {
   final String prodId;
@@ -2329,6 +2326,13 @@ this.currency,
 
     super.initState();
     Views();
+   currentUser.currency =="INR" ?
+   shipcostuser = currentUser.country == country?shipcostinr:shipcostinterinr:
+   currentUser.currency =="EUR" ?
+   shipcostuser = currentUser.country == country?shipcosteur:shipcostintereur:
+   currentUser.currency =="GBP" ?
+   shipcostuser = currentUser.country == country?shipcostgbp:shipcostintergbp:
+ shipcostuser = currentUser.country == country?shipcostusd:shipcostinterusd;
 
 
 
@@ -9801,7 +9805,7 @@ var eur = documentSnapshot.data()['eur'];
                                                 Row(
                                                   children: [
                                                     currentUser.currency == "INR"?Text("${cf.format(inr, CurrencyFormatter.inr)}",):
-                                                    currentUser.currency == "EUR"?Text("€ ${currencyFormatter.format(eur)}",):
+                                                    currentUser.currency == "EUR"?Text("${cf.format(eur, CurrencyFormatter.eur)}",):
                                                     currentUser.currency == "GBP"?Text("${cf.format(gbp, CurrencyFormatter.gbp)}",):
                                                     Text("${cf.format(usd, CurrencyFormatter.usd)}",),
 
@@ -10238,19 +10242,8 @@ backgroundColor: Colors.black,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: <Widget>[
-                      Text("$details", maxLines: 1,softWrap:false,overflow:TextOverflow.fade,style: TextStyle(
-                        color: kText.withOpacity(0.5),
-//                          fontWeight: FontWeight.bold,
-                      ),),SizedBox(height: 8,),
-                      Text("Color:",style: TextStyle(
-                        color: kText.withOpacity(0.5),
-                        fontWeight: FontWeight.bold,
-                        fontSize: 20,
-                      ),),
-                      Text('$color',style: TextStyle(
-                        color: kText.withOpacity(0.5),
-//                          fontWeight: FontWeight.bold,
-                      ),),
+                      ExpandableText("$details",),
+                      SizedBox(height: 8,),
                       SizedBox(height: 8,),
                       Text('Composition:',style: TextStyle(
                         color: kText.withOpacity(0.5),

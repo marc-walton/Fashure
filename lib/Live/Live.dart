@@ -9,7 +9,7 @@ import 'package:fashow/Live/models/video_item.dart';
 import 'package:fashow/Live/upload_bid.dart';
 import 'package:fashow/Live/user_bids.dart';
 import 'package:fashow/Live/wish_auctions.dart';
-import 'package:fashow/model/address_auction.dart';
+import 'package:fashow/Resale/address_auction.dart';
 // import 'package:fashow/Live/video_comments.dart';
 import 'package:flutter_youtube_vimeo/flutter_youtube_vimeo.dart';
 import 'package:fashow/post.dart';

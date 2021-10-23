@@ -1,6 +1,8 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_controller.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:currency_formatter/currency_formatter.dart';
+import 'package:fashow/ActivityFeed.dart';
 import 'package:fashow/Categories/Kids/baby/boy/BOY.dart';
 import 'package:fashow/Categories/Kids/baby/girl/Girl.dart';
 import 'package:fashow/Categories/Kids/kids/boy/Boy.dart';
@@ -9,9 +11,12 @@ import 'package:fashow/Categories/Kids/teen/boy/boy.dart';
 import 'package:fashow/Categories/Kids/teen/girl/girl.dart';
 import 'package:fashow/Categories/Men/Men.dart';
 import 'package:fashow/Categories/Women/Women.dart';
+import 'package:fashow/Live/Live.dart';
 import 'package:fashow/Live/upload_bid.dart';
+import 'package:fashow/Resale/addressResale.dart';
 import 'package:fashow/Resale/upload_resale.dart';
 import 'package:fashow/chatcached_image.dart';
+import 'package:fashow/enum/Variables.dart';
 import 'package:fashow/fav.dart';
 import 'package:fashow/size_config.dart';
 import 'package:firebase_storage/firebase_storage.dart';
@@ -33,6 +38,12 @@ import 'package:getwidget/types/gf_toggle_type.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:photo_view/photo_view.dart';
 
+final List<String> cartNumbers = [
+  "nROwtseY3nSUhoXoT2zf",
+  "Tqd8WNBNZ7ADIWU3P2ci"];
+final List<String> ids = [
+  "nROwtsehoXoT2zf",
+  "Tqd8WNBNZWU3P2ci"];
 
 class Resale extends StatefulWidget {
   final String condition;
@@ -230,8 +241,10 @@ class _ResaleState extends State<Resale> {
   var shipto;
   var shipinterfrom;
   var shipinterto;
-  final String currentUserId = currentUser?.id;
+   var shipcostuser;
 
+  final String currentUserId = currentUser?.id;
+List<String> test = <String>[];
   final List images;
   int likeCount;
   Map likes;
@@ -321,7 +334,7 @@ class _ResaleState extends State<Resale> {
                             .data.docs[index].data()['images'][i]),
                       ));
                     }
-                    return Column(
+                    return Stack(
                       children: <Widget>[
                         Container(
 
@@ -342,7 +355,7 @@ class _ResaleState extends State<Resale> {
                                       _current = index;
                                     });
                                   },
-                                  height: 400,
+                                  height: 300,
 
                                   aspectRatio: 16/9,
                                   viewportFraction: 0.8,
@@ -353,13 +366,38 @@ class _ResaleState extends State<Resale> {
                                   autoPlayInterval: Duration(seconds: 3),
                                   autoPlayAnimationDuration: Duration(milliseconds: 800),
                                   autoPlayCurve: Curves.fastOutSlowIn,
-                                  enlargeCenterPage: true,
+                                  enlargeCenterPage: false,
                                   pauseAutoPlayOnManualNavigate: true,
                                   pauseAutoPlayOnTouch: true,
                                   // onPageChanged: callbackFunction,
                                   scrollDirection: Axis.horizontal,
                                 )
                             )
+                        ),
+                        Positioned.fill(
+                          child: Align(
+                            alignment: Alignment.bottomCenter,
+                            child:            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: images.asMap().entries.map((entry) {
+                                return GestureDetector(
+                                  onTap: () => _ccontroller.animateToPage(entry.key),
+                                  child: Container(
+                                    width: 6.0,
+                                    height: 6.0,
+                                    margin: EdgeInsets.symmetric(vertical: 8.0, horizontal: 4.0),
+                                    decoration: BoxDecoration(
+                                        shape: BoxShape.circle,
+                                        color: (Theme.of(context).brightness == Brightness.dark
+                                            ? Colors.white
+                                            : Colors.black)
+                                            .withOpacity(_current == entry.key ? 0.9 : 0.4)),
+                                  ),
+                                );
+                              }).toList(),
+                            ),
+
+                          ),
                         ),
 
                       ],
@@ -372,6 +410,20 @@ class _ResaleState extends State<Resale> {
             );
 
           });
+
+  }
+  void initState() {
+
+    super.initState();
+    currentUser.currency =="INR" ?
+    shipcostuser = currentUser.country == country?shipcostinr:shipcostinterninr:
+    currentUser.currency =="EUR" ?
+    shipcostuser = currentUser.country == country?shipcosteur:shipcostinterneur:
+    currentUser.currency =="GBP" ?
+    shipcostuser = currentUser.country == country?shipcostgbp:shipcostinterngbp:
+    shipcostuser = currentUser.country == country?shipcostusd:shipcostinternusd;
+
+
 
   }
 
@@ -531,53 +583,587 @@ class _ResaleState extends State<Resale> {
       "timestamp": timestamp,
     });
   }
+  posteurope(){
+    bool isPostOwner = currentUserId == ownerId;
+
+    return Column(
+      children: [
+        Container(
+          margin: EdgeInsets.only(top:10.0,left: 10.0,right: 10.0, bottom: 10.0 ),
+
+          child: Expanded(
+            child: Column(
+              children:  [
+                GestureDetector(
+                  onTap:(){},
+                  onDoubleTap: () {
+                    handleLikePost();
+                    Fluttertoast.showToast(
+                        msg: "Added to Favorites! " , timeInSecForIos: 4);
+
+                  },
+                  child: Stack(
+                    alignment: Alignment.center,
+                    children: <Widget>[
+                      ClipRRect(
+                          borderRadius: BorderRadius.only
+                            (bottomLeft: Radius.circular(20.0),bottomRight: Radius.circular(20.0)),
+                          child: Container(
+                            //  height: MediaQuery.of(context).size.height * 0.65,
+
+                              width:     MediaQuery.of(context).size.width,
+                              child: pics())),
+                      Positioned.fill(
+                        child: Align(
+                          alignment: Alignment.topCenter,
+                          child:   ListTile(
+                            leading:FloatingActionButton(
+                              mini: true,
+                              backgroundColor:Colors.white.withOpacity(0.5),
+                              child:Icon(Icons.arrow_back_ios,color: Colors.white,),
+                              onPressed:() { Navigator.pop(context);},
+                            ),
+                          ),
+                        ),
+                      ),
+
+                    ],
+                  ),
+                ),
+
+                GestureDetector(
+                  onTap: () => showProfile(context, profileId: ownerId),
+                  child: ListTile(
+                    leading: CircleAvatar(
+                      backgroundImage: CachedNetworkImageProvider(photoUrl),
+                      backgroundColor: Colors.grey,
+                    ),
+                    title: Text(
+                      username,
+                      style: TextStyle(
+                        color: kText,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+
+                    trailing: IconButton(icon: Icon(Icons.more_horiz,color: Colors.white,),
+                        onPressed: () {
+                          !isPostOwner?showDialog(
+                              context: context,
+                              builder: (BuildContext context) {
+                                return Dialog(
+                                  backgroundColor: kSecondaryColor,
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius:
+                                      BorderRadius.circular(20.0)), //this right here
+                                  child: GestureDetector(
+                                    onTap: (){report();
+                                    Navigator.pop(context);},
+                                    child: Container(
+                                      height: 100,
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(12.0),
+                                        child: Column(
+                                          mainAxisAlignment: MainAxisAlignment.center,
+                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                          children: [
+                                            Container(
+
+                                              child: Align(
+                                                  alignment: Alignment.center,
+                                                  child: Text('Report this post?',style: TextStyle(
+                                                      color: Colors.blueAccent,
+                                                      fontWeight: FontWeight.bold,
+                                                      fontSize: 20.0),)),),
+
+
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                );
+                                // ignore: unnecessary_statements
+                              }):handleDeletePost(context);
+                        }),
+
+                  ),
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: <Widget>[
+                    Padding(padding: EdgeInsets.only(top: 40.0, left: 20.0)),
+                    IconButton(
+                      onPressed: (){
+                        handleLikePost();
+                        Fluttertoast.showToast(
+                            msg: "Added to Favorites! " , timeInSecForIos: 4);
+                      },
+                      icon: Icon(
+                        isLiked?   Icons.favorite:Icons.favorite_border ,
+                        color:  Colors.black,
+                      ),
+                    ),
+                    Container(
+                      child: Text(
+                        "$likeCount ",
+                        style: TextStyle(
+                          color:kText,
+                          fontSize: 15.0,
+                          //                      fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                    // FutureBuilder<Uri>(
+                    //     future: _dynamicLinkService.createDynamicLink( postId:prodId,ownerId: ownerId,),
+                    //     builder: (context, snapshot) {
+                    //       if(snapshot.hasData) {
+                    //         Uri uri = snapshot.data;
+                    //         return IconButton(
+                    //           color: Colors.black,
+                    //           onPressed: () => Share.share(uri.toString()),
+                    //           icon: Icon(Icons.send),
+                    //         );
+                    //       } else {
+                    //         return Container();
+                    //       }
+                    //
+                    //     }
+                    // ),
+                    Spacer(),
+                    // InkWell(
+                    //   onTap:() => reviews(),
+                    //   child: Row(
+                    //     children: [
+                    //       Icon(
+                    //         Icons.star_border_rounded,
+                    //         color:  Colors.black,
+                    //       ),
+                    //       Icon(
+                    //         Icons.star_border_rounded,
+                    //         color:  Colors.black,
+                    //       ),
+                    //       Icon(
+                    //         Icons.star_border_rounded,
+                    //         color:  Colors.black,
+                    //       ),
+                    //       Icon(
+                    //         Icons.star_border_rounded,
+                    //         color:  Colors.black,
+                    //       ),
+                    //       Icon(
+                    //         Icons.star_border_rounded,
+                    //         color:  Colors.black,
+                    //       ),
+                    //
+                    //
+                    //     ],
+                    //   ),
+                    // ),
+
+                  ],
+                ),
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Expanded(
+                      child: ListTile(
+                        title: Text(
+                          "$title ",
+                          style: TextStyle(
+                            color: kText,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 24.0,
+                          ),
+                        ),
+                        subtitle:    currentUser.country == "$country" ?  Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            currentUser.currency == "INR"? Row(
+                              children: [
+                                Text("${cf.format(inr, CurrencyFormatter.inr)}",
+                                    style: TextStyle(
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 20.0,
+                                    )),
+                              ],
+                            ):
+                            currentUser.currency == "EUR"?Row(
+                              children: [
+                                Text("${cf.format(eur, CurrencyFormatter.eur)}",
+                                    style: TextStyle(
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 20.0,
+                                    )),
+                              ],
+                            ):
+                            currentUser.currency == "GBP"?Row(
+                              children: [
+                                Text("${cf.format(gbp, CurrencyFormatter.gbp)}",
+                                    style: TextStyle(
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 20.0,
+                                    )),
+                              ],
+                            ):Row(
+                              children: [
+                                Text("${cf.format(usd, CurrencyFormatter.usd)}",
+                                    style: TextStyle(
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 20.0,
+                                    )),
+                              ],
+                            ),
+                            freeship?Container(
+                                color:Colors.grey.withOpacity(0.2),
+                                child:   Text(
+                                  "FREE SHIPPING",
+                                  style: TextStyle(
+                                    color: Colors.black,
+
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 14.0,
+                                  ),
+                                )
+                            ) :
+                            currentUser.currency == "INR"? Row(
+                              children: [
+                                Text(" ${cf.format(shipcostinr, CurrencyFormatter.inr)}",
+                                    style: TextStyle(
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 20.0,
+                                    )),
+                              ],
+                            ):
+                            currentUser.currency == "EUR"?Row(
+                              children: [
+                                Text("${cf.format(shipcostusd, CurrencyFormatter.usd)}  €",
+                                    style: TextStyle(
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 20.0,
+                                    )),
+                              ],
+                            ):
+                            currentUser.currency == "GBP"?Row(
+                              children: [
+                                Text(" ${cf.format(shipcostgbp, CurrencyFormatter.gbp)}",
+                                    style: TextStyle(
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 20.0,
+                                    )),
+                              ],
+                            ):Row(
+                              children: [
+                                Text("${cf.format(shipcostusd, CurrencyFormatter.usd)}",
+                                    style: TextStyle(
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 20.0,
+                                    )),
+                              ],
+                            ),
+
+                          ],
+                        ):   Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+
+                          children: [
+                            currentUser.currency == "INR"? Row(
+                              children: [
+                                Text("${cf.format(inr, CurrencyFormatter.inr)}",
+                                    style: TextStyle(
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 20.0,
+                                    )),
+                              ],
+                            ):
+                            currentUser.currency == "EUR"?Row(
+                              children: [
+                                Text("${cf.format(eur, CurrencyFormatter.eur)}",
+                                    style: TextStyle(
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 20.0,
+                                    )),
+                              ],
+                            ):
+                            currentUser.currency == "GBP"?Row(
+                              children: [
+                                Text("${cf.format(gbp, CurrencyFormatter.gbp)}",
+                                    style: TextStyle(
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 20.0,
+                                    )),
+                              ],
+                            ):Row(
+                              children: [
+                                Text("${cf.format(usd, CurrencyFormatter.usd)}",
+                                    style: TextStyle(
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 20.0,
+                                    )),
+                              ],
+                            ),
+                            freeworldship?Container(
+                                color:Colors.grey.withOpacity(0.2),
+                                child:   Text(
+                                  "FREE SHIPPING",
+                                  style: TextStyle(
+                                    color: Colors.black,
+
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 14.0,
+                                  ),
+                                )
+                            ) :
+                            currentUser.currency == "INR"? Row(
+                              children: [
+                                Text("${cf.format(shipcostinterninr, CurrencyFormatter.inr)}",
+                                    style: TextStyle(
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 20.0,
+                                    )),
+                              ],
+                            ):
+                            currentUser.currency == "EUR"?Row(
+                              children: [
+                                Text("${cf.format(shipcostinterneur, CurrencyFormatter.eur)}",
+                                    style: TextStyle(
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 20.0,
+                                    )),
+                              ],
+                            ):
+                            currentUser.currency == "GBP"?Row(
+                              children: [
+                                Text("${cf.format(shipcostinterngbp, CurrencyFormatter.gbp)}",
+                                    style: TextStyle(
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 20.0,
+                                    )),
+                              ],
+                            ):Row(
+                              children: [
+                                Text("${cf.format(shipcostinternusd, CurrencyFormatter.usd)}",
+                                    style: TextStyle(
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 20.0,
+                                    )),
+                              ],
+                            ),
+
+                          ],
+                        ) ,
+                        trailing: FloatingActionButton(
+                          heroTag:null,
+                          backgroundColor: Colors.black,
+                          onPressed: (){
+                            },
+                          child:   Icon(Icons.add_shopping_cart,),
+                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(16.0))),
+                        ),
+                      ),
+                    ),
+
+                  ],
+                ),
+                worldship == false?Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Expanded(
+                      child: ListTile(
+                        leading:  Icon(Icons.cancel, color: Colors.red),
+                        title: Text(
+                          "This product doesn't ship worldwide,check shipping & returns info below ",
+                          style: TextStyle(
+                            color: Colors.red,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 14.0,
+                          ),
+                        ),
+                      ),
+                    ),
+
+                  ],
+                ):Text(''),
+                ListTileTheme(
+                  tileColor:trans,
+                  child: ExpansionTile(
+                    backgroundColor:trans,
+                    title:  Text(
+                      " Description",
+                      style: TextStyle(
+                        color: kText.withOpacity(0.5),
+                        fontWeight: FontWeight.bold,fontSize: 20,
+                      ),),
+                    trailing:Icon(Icons.expand_more,color: kText,),
+
+                    maintainState: true,
+                    children: [
+
+                      Container(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.stretch,
+                          children: <Widget>[
+                            ExpandableText("$description",),
+                            SizedBox(height: 8,),
+                            Text("Color:",style: TextStyle(
+                              color: kText.withOpacity(0.5),
+                              fontWeight: FontWeight.bold,
+                              fontSize: 20,
+                            ),),
+                            Text('$color',style: TextStyle(
+                              color: kText.withOpacity(0.5),
+//                          fontWeight: FontWeight.bold,
+                            ),),
+                            SizedBox(height: 8,),
+
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                ListTileTheme(
+                  tileColor:trans,
+                  child: ExpansionTile(
+                    backgroundColor:trans,
+                    leading: Icon(Icons.local_shipping,color: kText,),
+                    title:  Text(
+                      " Shipping  and Returns:",
+                      style: TextStyle(
+                        color: kText.withOpacity(0.5),
+                        fontWeight: FontWeight.bold,fontSize: 20,
+                      ),),
+                    trailing:Icon(Icons.expand_more,color: kText,),
+                    maintainState: true,
+                    children: [
+
+                      Container(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.stretch,
+                          children: <Widget>[
+
+                            Text('Shipping  and Returns:',style: TextStyle(
+                              color: kText.withOpacity(0.5),
+                              fontWeight: FontWeight.bold,fontSize: 20,
+                            ),),
+                           ListTile(title: Text('Shipping duration to ${country}'),
+                                subtitle:Text("$shipfrom - $shipto")
+                            ),ListTile(title: Text('International shipping duration'),
+                                subtitle:Text("$shipinterfrom - $shipinterto")
+                            ),
+                            Text('$shipment', maxLines: 1,softWrap:false,overflow:TextOverflow.fade,style: TextStyle(
+                              color: kText.withOpacity(0.5),
+//                          fontWeight: FontWeight.bold,
+                            ),),
+                          ],
+                        ),
+                      ),                ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+
+        ),
+      ],
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body:   FutureBuilder(
+    isLiked = (likes[currentUserId] == true);
 
-        future:    FirebaseFirestore.instance.collection('Resale')
+    return Column(children:[posteurope(),
+      Container(height: MediaQuery.of(context).size.height/10,child: Row(
+          mainAxisAlignment:MainAxisAlignment.spaceEvenly,
+          children:[
+            ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                elevation : 0.001,
+                primary: Colors.grey.withOpacity(0.3), ),
+              onPressed: () => update(cartNumbers),
+              child: Text('Post', style: TextStyle(
+                // fontFamily :"MajorMonoDisplay",
+                //   fontSize:  ,
+                  color: Colors.white),),
+            ),
+            ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                elevation : 0.001,
+                primary:  Colors.black, ),
+              onPressed:() {
+                test.add("fuck");
+                Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => AddressResale(
+            Ids:test,
+                  ),
+                ),
+              );},
+              child: Text('Buy Now', style: TextStyle(
+                // fontFamily :"MajorMonoDisplay",
+                //   fontSize:  ,
+                  color: Colors.white),),
+            )
 
-            .doc(currentUser.id)
+          ]
+      ),),
 
-            .collection('userResale').get(),
-
-        builder: (context,snapshot)
-
-        {
-
-
-
-          return
-
-            ListView.builder(physics: NeverScrollableScrollPhysics(),
-
-                shrinkWrap: true,
-
-                scrollDirection:Axis.vertical,
-
-                itemCount: snapshot.data.docs.length,
-
-                itemBuilder: (BuildContext context, int index) {
-
-                  return Container(
-
-                      child: CachedImage( snapshot.data.docs[index].data()['shopimages']
-
-                          .first,
-
-                      ));
-
-
-
-                });
-
-        },
-
-
-
-      ),
-    );
+    ]);
 
   }
+}
+Future update(List<String> cartNumbers) async {
+  WriteBatch batch = FirebaseFirestore.instance.batch();
+
+  // 1. Get all items
+  // 2. Iterate through each item
+  // 3. Parse each document ID
+  // 4. Check if cart_numers contains item
+  // 5. Change quantity
+
+  FirebaseFirestore.instance.collection("test").get().then((querySnapshot) {
+    querySnapshot.docs.forEach((document) {
+      try {
+
+        // Only if DocumentID has only numbers
+        if (cartNumbers.contains(document.id)) {
+          batch.update(document.reference,
+              {"sold": false});
+          for(var i=0;i < ids.length;i++) {
+            FirebaseFirestore.instance.collection("test")
+                .doc(ids[i].toString())
+                .set({
+              "ids":ids[i].toString(),
+              "id": "4",
+              "sold": false,
+            });
+          }
+        }
+      } on FormatException catch (error) {
+
+        // If a document ID is unparsable. Example "lRt931gu83iukSSLwyei" is unparsable.
+        print("The document ${error.source} could not be parsed.");
+        return null;
+      }
+    });
+    return batch.commit();
+  });
 }
