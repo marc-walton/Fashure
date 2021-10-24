@@ -42,8 +42,8 @@ final List<String> cartNumbers = [
   "nROwtseY3nSUhoXoT2zf",
   "Tqd8WNBNZ7ADIWU3P2ci"];
 final List<String> ids = [
-  "nROwtsehoXoT2zf",
-  "Tqd8WNBNZWU3P2ci"];
+  "nROXoT2zf",
+  "Tqd8W2ci"];
 
 class Resale extends StatefulWidget {
   final String condition;
@@ -244,8 +244,23 @@ class _ResaleState extends State<Resale> {
    var shipcostuser;
 
   final String currentUserId = currentUser?.id;
-List<String> test = <String>[];
-  final List images;
+  List<String> OwnerId ;
+  List<String> Amount ;
+  List<String> ResaleId ;
+  List<String> profileimg ;
+  List<String> Username ;
+  List<String> Images ;
+  List<String> Title ;
+  List<String>  Country;
+  List<String>  Size;
+  List<String>  shipcost;
+  List  Usd;
+  List  Eur;
+  List  Gbp;
+  List  Inr;
+  List<bool> ship;
+  bool shipBool;
+  final List<String> images;
   int likeCount;
   Map likes;
   bool isLiked;
@@ -422,6 +437,7 @@ List<String> test = <String>[];
     currentUser.currency =="GBP" ?
     shipcostuser = currentUser.country == country?shipcostgbp:shipcostinterngbp:
     shipcostuser = currentUser.country == country?shipcostusd:shipcostinternusd;
+shipBool = currentUser.country == country?freeship:freeworldship;
 
 
 
@@ -1084,7 +1100,23 @@ List<String> test = <String>[];
       ],
     );
   }
-
+addingToList(){
+   OwnerId.add(ownerId);
+   Amount ;
+   ResaleId.add(resaleId) ;
+   profileimg.add(photoUrl) ;
+   Username.add(username) ;
+   Images.add(images.first) ;
+   Title.add(ownerId) ;
+    Country.add(country);
+    Size.add(size);
+    shipcost.add(shipcostuser);
+    Usd.add(usd);
+    Eur.add(eur);
+    Gbp.add(gbp);
+    Inr.add(inr);
+    ship.add(shipBool);
+}
   @override
   Widget build(BuildContext context) {
     isLiked = (likes[currentUserId] == true);
@@ -1108,12 +1140,23 @@ List<String> test = <String>[];
                 elevation : 0.001,
                 primary:  Colors.black, ),
               onPressed:() {
-                test.add("fuck");
                 Navigator.push(
                 context,
                 MaterialPageRoute(
                   builder: (context) => AddressResale(
-            Ids:test,
+                      OwnerId:OwnerId,
+                       resaleId:ResaleId ,
+                   profileimg: profileimg,
+                  username: Username,
+                   images:Images,
+                   title:Title,
+                    country:Country,
+                   size:Size,
+                shipcost:shipcost,
+                   usd:Usd,
+                  eur:Eur,
+                        gbp:Gbp,
+                     inr:Inr,
                   ),
                 ),
               );},
@@ -1152,6 +1195,7 @@ Future update(List<String> cartNumbers) async {
                 .doc(ids[i].toString())
                 .set({
               "ids":ids[i].toString(),
+              "c":cartNumbers[i].toString(),
               "id": "4",
               "sold": false,
             });
