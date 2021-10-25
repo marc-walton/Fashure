@@ -1,9 +1,11 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:currency_formatter/currency_formatter.dart';
 import 'package:curved_splash_screen/curved_splash_screen.dart';
 import 'package:fashow/Product_screen.dart';
 import 'package:fashow/Support/SupportButton.dart';
 import 'package:fashow/chatcached_image.dart';
+import 'package:fashow/enum/Variables.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -419,7 +421,10 @@ class _PostState extends State<Post> {
                     inr: ds['inr'],
                     eur: ds['eur'],
                     gbp: ds['gbp'],
-
+                       taggerId : ds['taggerId'],
+                   taggerImg : ds['taggerImg'],
+                   taggerName : ds['taggerName'],
+                   taggerCurrency : ds['taggerCurrency'],
                     image: ds['image'],
                     prodId:postId,
 
@@ -688,13 +693,19 @@ class TagItem extends StatelessWidget {
   final inr ;
   final gbp ;
   final eur ;
+ String taggerId;
+  String  taggerImg;
+  String taggerName;
+  String taggerCurrency;
 
-  var currencyFormatter =      currentUser.currency == "USD"? NumberFormat('#,##0.00', ):
-  currentUser.currency == "INR"?NumberFormat.currency(locale:"HI"):
-  currentUser.currency == "EUR"? NumberFormat.currency(locale:" ${currentUser.currencyISO}"):
-  currentUser.currency == "GBP"?NumberFormat.currency(locale:" ${currentUser.currencyISO}"): NumberFormat('#,##0.00', );
+  TagItem({
+    this.ownerId,
+    this.taggerId,
+    this.taggerImg,
+    this.taggerName,
+    this.taggerCurrency,
 
-  TagItem({this.ownerId,this.prodId,this.Id,this.image,this.name,this.usd, this.inr, this.gbp, this.eur});
+    this.prodId,this.Id,this.image,this.name,this.usd, this.inr, this.gbp, this.eur});
 
   @override
   Widget build(BuildContext context) {
@@ -706,7 +717,13 @@ class TagItem extends StatelessWidget {
               Container(
                 height: MediaQuery.of(context).size.height/3 * 1.2,
                 child: InkWell(
-                  onTap: () => Navigator.push(
+                  onTap: () {
+                    TaggerId = taggerId;
+                    TaggerImg = taggerImg ;
+                    TaggerName = taggerName;
+                    TaggerCurrency =  taggerCurrency;
+
+                    Navigator.push(
                     context,
                     MaterialPageRoute(
                       builder: (context) => ProductScreen(
@@ -714,7 +731,7 @@ class TagItem extends StatelessWidget {
                         userId: ownerId,
                       ),
                     ),
-                  ),
+                  );},
                   child: ClipRRect(
                       borderRadius: BorderRadius.circular(20.0),
                       child: CachedImage(image)),
@@ -729,12 +746,45 @@ class TagItem extends StatelessWidget {
               ),
               Row(
                 children: [
-                  currentUser.currency == "USD"?Text("\u0024 ${currencyFormatter.format(usd)}",):
-                  currentUser.currency == "INR"?Text("₹ ${currencyFormatter.format(inr)}",):
-                  currentUser.currency == "EUR"?Text("€ ${currencyFormatter.format(eur)}",):
-                  currentUser.currency == "GBP"?Text("£ ${currencyFormatter.format(gbp)}",):Text("\u0024 ${currencyFormatter.format(usd)}",),
-
-
+                  currentUser.currency == "INR"? Row(
+                    children: [
+                      Text("${cf.format(inr, CurrencyFormatter.inr)}",
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 20.0,
+                          )),
+                    ],
+                  ):
+                  currentUser.currency == "EUR"?Row(
+                    children: [
+                      Text("${cf.format(eur, CurrencyFormatter.eur)}",
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 20.0,
+                          )),
+                    ],
+                  ):
+                  currentUser.currency == "GBP"?Row(
+                    children: [
+                      Text("${cf.format(gbp, CurrencyFormatter.gbp)}",
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 20.0,
+                          )),
+                    ],
+                  ):Row(
+                    children: [
+                      Text("${cf.format(usd, CurrencyFormatter.usd)}",
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 20.0,
+                          )),
+                    ],
+                  ),
                 ],
               ),
 

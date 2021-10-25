@@ -1550,6 +1550,13 @@
 //             "image":prod.shopmediaUrl.first,
 //             "name":prod.productname,
 //             "usd":prod.usd,
+// "eur":prod.eur,
+// "inr":prod.inr,
+// "gbp":prod.gbp,
+// "taggerId":currentUser.id,
+// "taggerImg":currentUser.photoUrl,
+// "taggerName":currentUser.username,
+
 //             "timestamp":timestamp,
 //
 //           });
@@ -1566,7 +1573,9 @@
 //   final String image ;
 //   final String name;
 //   final usd ;
-//   var currencyFormatter = NumberFormat('#,##0.00', );
+// final inr ;
+// final eur ;
+// final gbp ;
 //
 //   TagItem({this.ownerId,this.prodId,this.Id,this.image,this.name,this.usd});
 //
@@ -1602,7 +1611,45 @@
 //               ),
 //               Row(
 //                 children: [
-//                   Text("\u0024 ${currencyFormatter.format(usd)}",),
+//                       currentUser.currency == "INR"? Row(
+//                               children: [
+//                                 Text("${cf.format(inr, CurrencyFormatter.inr)}",
+//                                     style: TextStyle(
+//                                       color: Colors.black,
+//                                       fontWeight: FontWeight.bold,
+//                                       fontSize: 20.0,
+//                                     )),
+//                               ],
+//                             ):
+//                             currentUser.currency == "EUR"?Row(
+//                               children: [
+//                                 Text("${cf.format(eur, CurrencyFormatter.eur)}",
+//                                     style: TextStyle(
+//                                       color: Colors.black,
+//                                       fontWeight: FontWeight.bold,
+//                                       fontSize: 20.0,
+//                                     )),
+//                               ],
+//                             ):
+//                             currentUser.currency == "GBP"?Row(
+//                               children: [
+//                                 Text("${cf.format(gbp, CurrencyFormatter.gbp)}",
+//                                     style: TextStyle(
+//                                       color: Colors.black,
+//                                       fontWeight: FontWeight.bold,
+//                                       fontSize: 20.0,
+//                                     )),
+//                               ],
+//                             ):Row(
+//                               children: [
+//                                 Text("${cf.format(usd, CurrencyFormatter.usd)}",
+//                                     style: TextStyle(
+//                                       color: Colors.black,
+//                                       fontWeight: FontWeight.bold,
+//                                       fontSize: 20.0,
+//                                     )),
+//                               ],
+//                             ),
 //                 ],
 //               ),
 //

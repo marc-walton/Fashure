@@ -97,7 +97,6 @@ class _BuyViewState extends State<BuyView> {
   }
   GetAddress() async{
     adPrefs = await SharedPreferences.getInstance();
-    adPrefs = await SharedPreferences.getInstance();
     setState(() {
       Fullname = adPrefs.getString('fullname') ?? '';
       Type = adPrefs.getString('type') ?? '';
@@ -110,15 +109,7 @@ class _BuyViewState extends State<BuyView> {
       Code = adPrefs.getString('code') ?? '';
 
     });
-    print(Code);
-    print(Fullname);
-    print(Addresss);
-    print(Type);
-    print(City);
-    print(State);
-    print(Zip);
-    print(Phone);
-    print(Country);
+
 
   }
 Widget address()
@@ -216,21 +207,23 @@ SizedBox(height: 8,),
                             borderRadius: BorderRadius.circular(15.0),
                             child: CachedImage(widget.mediaUrl,height:SizeConfig.safeBlockVertical*25,width:SizeConfig.safeBlockVertical*20, )),
                         VerticalDivider(color: Colors.grey,),
-                        RichText(
-                          maxLines: 1,softWrap:false,overflow:TextOverflow.fade,
-                          text: TextSpan(
-                              style:TextStyle(
-                                  color:kText,
-                                  fontSize: 20.0,
-                                  fontWeight: FontWeight.bold),
-                              children: [
-                                TextSpan(
-                                  text: widget.productname,
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.bold, color: Colors.black),
-                                ),
+                        Expanded(
+                          child: RichText(
+                            maxLines: 1,softWrap:false,overflow:TextOverflow.fade,
+                            text: TextSpan(
+                                style:TextStyle(
+                                    color:kText,
+                                    fontSize: 20.0,
+                                    fontWeight: FontWeight.bold),
+                                children: [
+                                  TextSpan(
+                                    text: widget.productname,
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.bold, color: Colors.black),
+                                  ),
 
-                              ]),
+                                ]),
+                          ),
                         ),
                       ],
                     ),

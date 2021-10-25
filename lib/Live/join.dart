@@ -1,7 +1,9 @@
 // import 'dart:async';
 // import 'package:agora_rtm/agora_rtm.dart';
 // import 'package:cloud_firestore/cloud_firestore.dart';
+// import 'package:currency_formatter/currency_formatter.dart';
 // import 'package:fashow/Constants.dart';
+// import 'package:fashow/HomePage.dart';
 // import 'package:fashow/Live/models/firebaseDB.dart';
 // import 'package:fashow/Live/models/message.dart';
 // import 'package:fashow/Live/loading.dart';
@@ -9,6 +11,7 @@
 // import 'package:cached_network_image/cached_network_image.dart';
 // import 'package:fashow/Product_screen.dart';
 // import 'package:fashow/chatcached_image.dart';
+// import 'package:fashow/enum/Variables.dart';
 // import 'package:fashow/size_config.dart';
 // import 'package:flutter/material.dart';
 // import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -754,6 +757,13 @@
 //                     ownerId: ds['ownerId'],
 //                     name: ds['name'],
 //                     usd: ds['usd'],
+//                     inr: ds['inr'],
+//                     eur: ds['eur'],
+//                     gbp: ds['gbp'],
+//                     taggerId : ds['taggerId'],
+//                     taggerImg : ds['taggerImg'],
+//                     taggerName : ds['taggerName'],
+//                     taggerCurrency : ds['taggerCurrency'],
 //                     image: ds['image'],
 //                     prodId: widget.channelId,
 //
@@ -1072,9 +1082,21 @@
 //   final String image ;
 //   final String name;
 //   final usd ;
-//   var currencyFormatter = NumberFormat('#,##0.00', );
+//   final inr ;
+//   final gbp ;
+//   final eur ;
+//   String taggerId;
+//   String  taggerImg;
+//   String taggerName;
+//   String taggerCurrency;
 //
-//   TagItem({this.ownerId,this.prodId,this.Id,this.image,this.name,this.usd});
+//   TagItem({
+//     this.ownerId,
+//     this.taggerId,
+//     this.taggerImg,
+//     this.taggerName,
+//     this.taggerCurrency,
+// this.prodId,this.Id,this.image,this.name,this.usd, this.inr, this.gbp, this.eur});
 //
 //
 //   @override
@@ -1085,17 +1107,23 @@
 //             padding: const EdgeInsets.all(8.0),
 //             child: Column(children:[
 //               Container(
-//                 height: SizeConfig.safeBlockHorizontal * 40,
+//                 height: MediaQuery.of(context).size.height/3 * 1.2,
 //                 child: InkWell(
-//                   onTap: () => Navigator.push(
-//     context,
-//     MaterialPageRoute(
-//     builder: (context) => ProductScreen(
-//     prodId: Id,
-//     userId: ownerId,
-//     ),
-//     ),
-//     ),
+//                   onTap: () {
+//                     TaggerId = taggerId;
+//                     TaggerImg = taggerImg ;
+//                     TaggerName = taggerName;
+//                     TaggerCurrency =  taggerCurrency;
+//
+//                     Navigator.push(
+//                       context,
+//                       MaterialPageRoute(
+//                         builder: (context) => ProductScreen(
+//                           prodId: Id,
+//                           userId: ownerId,
+//                         ),
+//                       ),
+//                     );},
 //                   child: ClipRRect(
 //                       borderRadius: BorderRadius.circular(20.0),
 //                       child: CachedImage(image)),
@@ -1105,13 +1133,50 @@
 //                 children: [
 //                   Text(name,
 //                       style: TextStyle(color: kText,
-//                           fontSize: SizeConfig.safeBlockHorizontal * 4,
 //                           fontWeight: FontWeight.bold))
 //                 ],
 //               ),
 //               Row(
 //                 children: [
-//                   Text("\u0024 ${currencyFormatter.format(usd)}",),
+//                   currentUser.currency == "INR"? Row(
+//                     children: [
+//                       Text("${cf.format(inr, CurrencyFormatter.inr)}",
+//                           style: TextStyle(
+//                             color: Colors.black,
+//                             fontWeight: FontWeight.bold,
+//                             fontSize: 20.0,
+//                           )),
+//                     ],
+//                   ):
+//                   currentUser.currency == "EUR"?Row(
+//                     children: [
+//                       Text("${cf.format(eur, CurrencyFormatter.eur)}",
+//                           style: TextStyle(
+//                             color: Colors.black,
+//                             fontWeight: FontWeight.bold,
+//                             fontSize: 20.0,
+//                           )),
+//                     ],
+//                   ):
+//                   currentUser.currency == "GBP"?Row(
+//                     children: [
+//                       Text("${cf.format(gbp, CurrencyFormatter.gbp)}",
+//                           style: TextStyle(
+//                             color: Colors.black,
+//                             fontWeight: FontWeight.bold,
+//                             fontSize: 20.0,
+//                           )),
+//                     ],
+//                   ):Row(
+//                     children: [
+//                       Text("${cf.format(usd, CurrencyFormatter.usd)}",
+//                           style: TextStyle(
+//                             color: Colors.black,
+//                             fontWeight: FontWeight.bold,
+//                             fontSize: 20.0,
+//                           )),
+//                     ],
+//                   ),
 //                 ],
 //               ),
 //

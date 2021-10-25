@@ -244,23 +244,24 @@ class _ResaleState extends State<Resale> {
    var shipcostuser;
 
   final String currentUserId = currentUser?.id;
-  List<String> OwnerId ;
-  List<String> Amount ;
-  List<String> ResaleId ;
-  List<String> profileimg ;
-  List<String> Username ;
-  List<String> Images ;
-  List<String> Title ;
-  List<String>  Country;
-  List<String>  Size;
-  List<String>  shipcost;
-  List  Usd;
-  List  Eur;
-  List  Gbp;
-  List  Inr;
-  List<bool> ship;
+  List<String> OwnerId  = [];
+  List<String> Amount  = [];
+  List<String> ResaleId  = [];
+  List<String> profileimg  = [];
+  List<String> Username  = [];
+  List<String> Images  = [];
+  List<String> Title  = [];
+  List<String>  Country = [];
+  List<String>  Size = [];
+  List  shipcost = [];
+  List  Usd = [];
+  List  Eur = [];
+  List  Gbp = [];
+  List  Inr = [];
+  List  Color = [];
+  List<bool> ship = [];
   bool shipBool;
-  final List<String> images;
+  final List images;
   int likeCount;
   Map likes;
   bool isLiked;
@@ -1107,7 +1108,7 @@ addingToList(){
    profileimg.add(photoUrl) ;
    Username.add(username) ;
    Images.add(images.first) ;
-   Title.add(ownerId) ;
+   Title.add(title) ;
     Country.add(country);
     Size.add(size);
     shipcost.add(shipcostuser);
@@ -1116,6 +1117,8 @@ addingToList(){
     Gbp.add(gbp);
     Inr.add(inr);
     ship.add(shipBool);
+     Color.add(color);
+
 }
   @override
   Widget build(BuildContext context) {
@@ -1139,7 +1142,7 @@ addingToList(){
               style: ElevatedButton.styleFrom(
                 elevation : 0.001,
                 primary:  Colors.black, ),
-              onPressed:() {
+              onPressed:() async{await addingToList();
                 Navigator.push(
                 context,
                 MaterialPageRoute(
@@ -1157,6 +1160,7 @@ addingToList(){
                   eur:Eur,
                         gbp:Gbp,
                      inr:Inr,
+                    ship: ship,
                   ),
                 ),
               );},

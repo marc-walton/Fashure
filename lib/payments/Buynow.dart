@@ -1,3 +1,4 @@
+import 'package:fashow/Constants.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fashow/HomePage.dart';
@@ -125,6 +126,10 @@ var userSizeQuantity;
         .collection('SellerPayments')
         .doc(orderId)
         .set({
+     "TaggerImg":TaggerImg,
+     "TaggerId":TaggerId,
+     "TaggerName" :TaggerName,
+      "resale":false,
       'ownerId':widget.ownerId,
       'orderId':orderId,
       'eur':widget.eur,
@@ -136,7 +141,7 @@ var userSizeQuantity;
       "mtoText": widget.mtoText??"",
       'shipcostuser':widget.shipcostuser??0,
       'customprice':widget.customprice??0,
-      "total":widget.buynowamount??0,
+      "total":0,
       "size":widget.size,
       "color":widget.color,
       'fulfilled':'false',
@@ -1656,7 +1661,27 @@ subtractCustom(){
 
 
 }
-
+none(){}
+Tagger(){
+  FirebaseFirestore.instance.collection('Influence')
+      .doc(TaggerId)
+      .collection('InfluenceCommission')
+      .doc(orderId).set({
+    'prodId':widget.prodId,
+    'ownerId':widget.ownerId,
+    "shopmediaUrl": widget.mediaUrl,
+    "TaggerImg":TaggerImg,
+    "TaggerId":TaggerId,
+    "TaggerName" :TaggerName,
+    "total":TaggerCurrency == "INR"?0.03*widget.inr:TaggerCurrency == "EUR"?0.03*widget.eur:TaggerCurrency == "GBP"?0.03*widget.gbp:0.03*widget.usd,
+  });
+  setState(() {
+    TaggerImg = "";
+    TaggerId = "";
+    TaggerName = "";
+    TaggerCurrency = "";
+  });
+}
   onSuccess()async{
     adPrefs = await SharedPreferences.getInstance();
     String Fullname = adPrefs.getString('fullname') ?? '';
@@ -1681,7 +1706,9 @@ subtractCustom(){
       'cusId':currentUser.id,
       'cusName':currentUser.displayName,
       'cusImg':currentUser.photoUrl,
-
+      "TaggerImg":TaggerImg,
+      "TaggerId":TaggerId,
+      "TaggerName" :TaggerName,
       'fulfilled':'false',
       'Accepted':'false',
       'orderStatus':'awaiting seller acceptance',
@@ -1703,8 +1730,6 @@ subtractCustom(){
       'courier': "awaiting seller fulfilment",
       'read':'false',
       'Address':'$Fullname\n,$Addresss\n,$City,$State,$Country\n,$Zip\n,$Code $Phone',
-
-
     });
     FirebaseFirestore.instance.collection('ordersCustomer')
         .doc(currentUser.id)
@@ -1732,7 +1757,9 @@ subtractCustom(){
       "shopmediaUrl": widget.mediaUrl,
       'courierId': "awaiting seller fulfillment",
       'courier': "awaiting seller fulfillment",
-
+      "TaggerImg":TaggerImg,
+      "TaggerId":TaggerId,
+      "TaggerName" :TaggerName,
       'fulfilled':'false',
       'Accepted':'false',
       'orderStatus':'awaiting seller acceptance',
@@ -1778,6 +1805,8 @@ payment();
     subtractQuantity();
     subtractColor();
     subtractCustom();
+    TaggerId ==""?none:Tagger();
+
     Get.offAll( ActivityFeed());
   Fluttertoast.showToast(
   msg: "Payment SUCCESS: " + response.paymentId, timeInSecForIos: 4);

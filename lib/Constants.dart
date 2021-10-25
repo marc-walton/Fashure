@@ -2,8 +2,12 @@ import 'package:flutter/material.dart';
 //import 'package:flutter_svg/svg.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:intl/intl.dart';
+String TaggerImg = "";
+String TaggerId = "";
+String TaggerName = "";
+String TaggerCurrency = "";
 
- Color kPrimaryColor = Colors.black;
+Color kPrimaryColor = Colors.black;
  Color Cont = Colors.grey.shade200;
 const Color appbar = Colors.black26;
 const Color trans = Colors.transparent;

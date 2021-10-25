@@ -26,12 +26,13 @@ List<String> images ;
 List<String> title ;
 List<String>  country;
 List<String>  size;
-List<String>  shipcost;
+List shipcost;
 List  usd;
 List  eur;
 List  gbp;
 List  inr;
 List<bool>  ship;
+List  color;
 
 AddressResale({
  this.OwnerId,
@@ -49,6 +50,7 @@ this. eur,
 this. gbp,
 this. usd,
 this. ship,
+this. color,
 
 
 });
@@ -150,7 +152,7 @@ Widget build(BuildContext context) {
                           Zip : ds['zip'],
                           Dialcode: ds['code'],
                           Phone:  ds['phone'],
-
+color:widget.color,
                           eur:widget.eur,
                           usd:widget.usd,
                           inr:widget.inr,
@@ -214,27 +216,6 @@ Widget build(BuildContext context) {
 
   );
 }
-  // Widget build(BuildContext context) {
-  //
-  //   return Container(height: 100,
-  //   child: ListView.builder(
-  //     scrollDirection: Axis.vertical,
-  //     shrinkWrap: true,
-  //     itemCount: widget.OwnerId.length,
-  //     itemBuilder: (context, index) {
-  //       return Card(
-  //           child: ListTile(
-  //
-  //             //same over here
-  //             title: Text('${widget.OwnerId[index]}'),
-  //             subtitle: Text('${widget.resaleId[index]}'),
-  //             trailing: IconButton(
-  //                 icon: Icon(Icons.calendar_today), onPressed: null),
-  //           ));
-  //     },
-  //   ),
-  //   );
-  // }
 }
 class addressview extends StatelessWidget {
   final String Type ;
@@ -255,8 +236,9 @@ class addressview extends StatelessWidget {
   List<String> title ;
   List<String>  country;
   List<String>  size;
-  List<String>  shipcost;
+  List  shipcost;
    List<bool>  ship;
+  List  color;
 
   List  usd;
   List  eur;
@@ -270,6 +252,7 @@ class addressview extends StatelessWidget {
     this.inr,
     this.gbp,
     this.ship,
+ this.color,
 
     this.country,
 
@@ -333,6 +316,7 @@ class addressview extends StatelessWidget {
                                     size:size,
                                     resaleId: resaleId,
                                     OwnerId: OwnerId,
+                                    color:color,
 
                                     profileimg: profileimg,
                                     username: username,

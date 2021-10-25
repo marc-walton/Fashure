@@ -16,9 +16,7 @@ class ResaleScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return StreamBuilder(
       stream:  FirebaseFirestore.instance.collection('Resale')
-
           .doc(currentUser.id)
-
           .collection('userResale')
       .doc(postId)
           .snapshots(),

@@ -1,5 +1,7 @@
+import 'package:currency_formatter/currency_formatter.dart';
 import 'package:fashow/Support/SupportButton.dart';
 import 'package:fashow/chatcached_image.dart';
+import 'package:fashow/enum/Variables.dart';
 import 'package:fashow/size_config.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -423,7 +425,10 @@ return
                     inr: ds['inr'],
                     eur: ds['eur'],
                     gbp: ds['gbp'],
-
+                    taggerId : ds['taggerId'],
+                    taggerImg : ds['taggerImg'],
+                    taggerName : ds['taggerName'],
+                    taggerCurrency : ds['taggerCurrency'],
                     image: ds['image'],
                     prodId: collId,
 
@@ -656,4 +661,124 @@ showComments(BuildContext context,
      blogMediaUrl: mediaUrl,
     );
   }));
+}
+class TagItem extends StatelessWidget {
+  final String ownerId ;
+  final String prodId ;
+
+  final String Id ;
+  final String image ;
+  final String name;
+  final usd ;
+  final inr ;
+  final gbp ;
+  final eur ;
+  String taggerId;
+  String  taggerImg;
+  String taggerName;
+  String taggerCurrency;
+
+  TagItem({
+    this.ownerId,
+    this.taggerId,
+    this.taggerImg,
+    this.taggerName,
+    this.taggerCurrency,
+    this.prodId,this.Id,this.image,this.name,this.usd, this.inr, this.gbp, this.eur});
+
+  delete(){
+    var  docReference =      collRef .doc(currentUser.id)
+        .collection("userCollections")
+        .doc(prodId)
+        .collection('tags')
+        .doc(Id);
+    docReference.delete();
+
+  }
+  @override
+  Widget build(BuildContext context) {
+    return Stack(
+        children:[
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(children:[
+              Container(
+                height: MediaQuery.of(context).size.height/3 * 1.2,
+                child: InkWell(
+                  onTap: () {
+                    TaggerId = taggerId;
+                    TaggerImg = taggerImg ;
+                    TaggerName = taggerName;
+                    TaggerCurrency =  taggerCurrency;
+
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => ProductScreen(
+                          prodId: Id,
+                          userId: ownerId,
+                        ),
+                      ),
+                    );},
+                  child: ClipRRect(
+                      borderRadius: BorderRadius.circular(20.0),
+                      child: CachedImage(image)),
+                ),
+              ),
+              Row(
+                children: [
+                  Text(name,
+                      style: TextStyle(color: kText,
+                          fontWeight: FontWeight.bold))
+                ],
+              ),
+              Row(
+                children: [
+                  currentUser.currency == "INR"? Row(
+                    children: [
+                      Text("${cf.format(inr, CurrencyFormatter.inr)}",
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 20.0,
+                          )),
+                    ],
+                  ):
+                  currentUser.currency == "EUR"?Row(
+                    children: [
+                      Text("${cf.format(eur, CurrencyFormatter.eur)}",
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 20.0,
+                          )),
+                    ],
+                  ):
+                  currentUser.currency == "GBP"?Row(
+                    children: [
+                      Text("${cf.format(gbp, CurrencyFormatter.gbp)}",
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 20.0,
+                          )),
+                    ],
+                  ):Row(
+                    children: [
+                      Text("${cf.format(usd, CurrencyFormatter.usd)}",
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 20.0,
+                          )),
+                    ],
+                  ),
+                ],
+              ),
+
+            ]),
+          ),
+        ]
+    );
+  }
 }

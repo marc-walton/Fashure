@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:alert_dialog/alert_dialog.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:currency_formatter/currency_formatter.dart';
 import 'package:fashow/Categories/BboyEcomUp.dart';
 import 'package:fashow/Categories/BgirlEcomUp.dart';
 import 'package:fashow/Categories/KboyEcomUp.dart';
@@ -18474,6 +18475,14 @@ Widget buprod(BuildContext context, DocumentSnapshot document,prodId) {
             "image":prod.shopmediaUrl.first,
             "name":prod.productname,
             "usd":prod.usd,
+            "eur":prod.eur,
+            "inr":prod.inr,
+            "gbp":prod.gbp,
+            "taggerId":currentUser.id,
+            "taggerImg":currentUser.photoUrl,
+            "taggerName":currentUser.username,
+            "taggerCurrency":currentUser.currency,
+
             "timestamp":timestamp,
 
           });
@@ -18493,13 +18502,18 @@ class TagItem extends StatelessWidget {
  final inr ;
  final gbp ;
  final eur ;
+ String taggerId;
+ String  taggerImg;
+ String taggerName;
+ String taggerCurrency;
 
- var currencyFormatter =      currentUser.currency == "USD"? NumberFormat('#,##0.00', ):
- currentUser.currency == "INR"?NumberFormat.currency(locale:"HI"):
- currentUser.currency == "EUR"? NumberFormat.currency(locale:" ${currentUser.currencyISO}"):
- currentUser.currency == "GBP"?NumberFormat.currency(locale:" ${currentUser.currencyISO}"): NumberFormat('#,##0.00', );
-
- TagItem({this.ownerId,this.prodId,this.Id,this.image,this.name,this.usd, this.inr, this.gbp, this.eur});
+ TagItem({
+ this.ownerId,
+ this.taggerId,
+ this.taggerImg,
+ this.taggerName,
+ this.taggerCurrency,
+ this.prodId,this.Id,this.image,this.name,this.usd, this.inr, this.gbp, this.eur});
 
   delete(){
   var  docReference =  FirebaseFirestore.instance
@@ -18532,11 +18546,45 @@ class TagItem extends StatelessWidget {
     ),
       Row(
         children: [
-          currentUser.currency == "USD"?Text("\u0024 ${currencyFormatter.format(usd)}",):
-          currentUser.currency == "INR"?Text("₹ ${currencyFormatter.format(inr)}",):
-          currentUser.currency == "EUR"?Text("€ ${currencyFormatter.format(eur)}",):
-          currentUser.currency == "GBP"?Text("£ ${currencyFormatter.format(gbp)}",):Text("\u0024 ${currencyFormatter.format(usd)}",),
-
+          currentUser.currency == "INR"? Row(
+            children: [
+              Text("${cf.format(inr, CurrencyFormatter.inr)}",
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 20.0,
+                  )),
+            ],
+          ):
+          currentUser.currency == "EUR"?Row(
+            children: [
+              Text("${cf.format(eur, CurrencyFormatter.eur)}",
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 20.0,
+                  )),
+            ],
+          ):
+          currentUser.currency == "GBP"?Row(
+            children: [
+              Text("${cf.format(gbp, CurrencyFormatter.gbp)}",
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 20.0,
+                  )),
+            ],
+          ):Row(
+            children: [
+              Text("${cf.format(usd, CurrencyFormatter.usd)}",
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 20.0,
+                  )),
+            ],
+          ),
 
         ],
       ),
