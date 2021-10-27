@@ -764,6 +764,8 @@
 //                     taggerImg : ds['taggerImg'],
 //                     taggerName : ds['taggerName'],
 //                     taggerCurrency : ds['taggerCurrency'],
+//                     TaggerProdId: ds['prodId'],
+//                     TaggerOwnerId: ds['ownerId'],
 //                     image: ds['image'],
 //                     prodId: widget.channelId,
 //
@@ -1089,6 +1091,8 @@
 //   String  taggerImg;
 //   String taggerName;
 //   String taggerCurrency;
+//   String TaggerOwnerId;
+//   String TaggerProdId;
 //
 //   TagItem({
 //     this.ownerId,
@@ -1096,8 +1100,10 @@
 //     this.taggerImg,
 //     this.taggerName,
 //     this.taggerCurrency,
-// this.prodId,this.Id,this.image,this.name,this.usd, this.inr, this.gbp, this.eur});
+//     this.TaggerOwnerId,
+//     this.TaggerProdId,
 //
+//     this.prodId,this.Id,this.image,this.name,this.usd, this.inr, this.gbp, this.eur});
 //
 //   @override
 //   Widget build(BuildContext context) {
@@ -1114,7 +1120,8 @@
 //                     TaggerImg = taggerImg ;
 //                     TaggerName = taggerName;
 //                     TaggerCurrency =  taggerCurrency;
-//
+//                     TaggerOwnerId = TaggerOwnerId;
+//                     TaggerProdId = TaggerProdId;
 //                     Navigator.push(
 //                       context,
 //                       MaterialPageRoute(

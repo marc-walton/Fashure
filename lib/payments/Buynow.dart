@@ -129,7 +129,7 @@ var userSizeQuantity;
      "TaggerImg":TaggerImg,
      "TaggerId":TaggerId,
      "TaggerName" :TaggerName,
-      "resale":false,
+      "Tagged":TaggerOwnerId == widget.ownerId?true:false,
       'ownerId':widget.ownerId,
       'orderId':orderId,
       'eur':widget.eur,
@@ -236,6 +236,54 @@ else if (currentUser.currency == 'GBP') {
   }
   }
   }
+Tagger(){
+    var commission;
+    var Earnings;
+  TaggerCurrency == "INR"?commission = 0.03*widget.inr:TaggerCurrency == "EUR"?commission =0.03*widget.eur:TaggerCurrency == "GBP"?
+  commission =0.03*widget.gbp:commission = 0.03*widget.usd;
+    Earnings  = commission.toStringAsFixed(2);
+    commission = double.tryParse(Earnings);
+  FirebaseFirestore.instance.collection('Influence')
+      .doc(TaggerId)
+      .collection('InfluenceCommission')
+      .doc(orderId).set({
+  "ownerId":widget.ownerId,
+    "prodId":widget.productname,
+
+  "shopmediaUrl" : widget.mediaUrl,
+    "Earnings": commission,
+  });
+
+  FirebaseFirestore.instance.collection('users')
+      .doc(TaggerId)
+      .update({
+    "Earnings": currentUser.Earnings + commission,
+"TotalEarnings": currentUser.TotalEarnings + commission,
+
+  });
+    FirebaseFirestore.instance.collection('feed')
+        .doc(TaggerId)
+        .collection('feedItems')
+        .doc(orderId)
+        .set({
+      "type": "Commission",
+      "username": TaggerName,
+      "userId": TaggerId,
+      "userProfileImg": TaggerImg,
+      "mediaUrl":widget.mediaUrl,
+      "postId": widget.prodId,
+      // "mediaUrl": mediaUrl,
+      "timestamp": timestamp,
+      "read": 'false',
+      'message':'Your received a commission!',
+    });
+  setState(() {
+    TaggerImg = "";
+    TaggerId = "";
+    TaggerName = "";
+    TaggerCurrency = "";
+  });
+}
 
   subtractQuantity(){
 
@@ -1662,27 +1710,7 @@ subtractCustom(){
 
 }
 none(){}
-Tagger(){
-  FirebaseFirestore.instance.collection('Influence')
-      .doc(TaggerId)
-      .collection('InfluenceCommission')
-      .doc(orderId).set({
-    'prodId':widget.prodId,
-    'ownerId':widget.ownerId,
-    "shopmediaUrl": widget.mediaUrl,
-    "TaggerImg":TaggerImg,
-    "TaggerId":TaggerId,
-    "TaggerName" :TaggerName,
-    "total":TaggerCurrency == "INR"?0.03*widget.inr:TaggerCurrency == "EUR"?0.03*widget.eur:TaggerCurrency == "GBP"?0.03*widget.gbp:0.03*widget.usd,
-  });
-  setState(() {
-    TaggerImg = "";
-    TaggerId = "";
-    TaggerName = "";
-    TaggerCurrency = "";
-  });
-}
-  onSuccess()async{
+ onSuccess()async{
     adPrefs = await SharedPreferences.getInstance();
     String Fullname = adPrefs.getString('fullname') ?? '';
     String Type = adPrefs.getString('type') ?? '';
@@ -1709,6 +1737,7 @@ Tagger(){
       "TaggerImg":TaggerImg,
       "TaggerId":TaggerId,
       "TaggerName" :TaggerName,
+      "Tagged":TaggerOwnerId == widget.ownerId?true:false,
       'fulfilled':'false',
       'Accepted':'false',
       'orderStatus':'awaiting seller acceptance',
@@ -1760,6 +1789,8 @@ Tagger(){
       "TaggerImg":TaggerImg,
       "TaggerId":TaggerId,
       "TaggerName" :TaggerName,
+      "Tagged":TaggerOwnerId == widget.ownerId?true:false,
+
       'fulfilled':'false',
       'Accepted':'false',
       'orderStatus':'awaiting seller acceptance',

@@ -6,6 +6,8 @@ String TaggerImg = "";
 String TaggerId = "";
 String TaggerName = "";
 String TaggerCurrency = "";
+String TaggerOwnerId = "";
+String TaggerProdId = "";
 
 Color kPrimaryColor = Colors.black;
  Color Cont = Colors.grey.shade200;

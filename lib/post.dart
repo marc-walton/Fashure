@@ -425,6 +425,8 @@ class _PostState extends State<Post> {
                    taggerImg : ds['taggerImg'],
                    taggerName : ds['taggerName'],
                    taggerCurrency : ds['taggerCurrency'],
+                    TaggerProdId: ds['prodId'],
+                    TaggerOwnerId: ds['ownerId'],
                     image: ds['image'],
                     prodId:postId,
 
@@ -697,6 +699,8 @@ class TagItem extends StatelessWidget {
   String  taggerImg;
   String taggerName;
   String taggerCurrency;
+ String TaggerOwnerId;
+ String TaggerProdId;
 
   TagItem({
     this.ownerId,
@@ -704,6 +708,8 @@ class TagItem extends StatelessWidget {
     this.taggerImg,
     this.taggerName,
     this.taggerCurrency,
+    this.TaggerOwnerId,
+    this.TaggerProdId,
 
     this.prodId,this.Id,this.image,this.name,this.usd, this.inr, this.gbp, this.eur});
 
@@ -722,7 +728,8 @@ class TagItem extends StatelessWidget {
                     TaggerImg = taggerImg ;
                     TaggerName = taggerName;
                     TaggerCurrency =  taggerCurrency;
-
+                    TaggerOwnerId = TaggerOwnerId;
+                    TaggerProdId = TaggerProdId;
                     Navigator.push(
                     context,
                     MaterialPageRoute(

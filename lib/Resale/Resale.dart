@@ -1132,7 +1132,7 @@ addingToList(){
               style: ElevatedButton.styleFrom(
                 elevation : 0.001,
                 primary: Colors.grey.withOpacity(0.3), ),
-              onPressed: () => update(cartNumbers),
+              onPressed: () => Tagger(),
               child: Text('Post', style: TextStyle(
                 // fontFamily :"MajorMonoDisplay",
                 //   fontSize:  ,
@@ -1176,6 +1176,29 @@ addingToList(){
     ]);
 
   }
+  Tagger(){
+TaggerId ==""? print(true):print(false);
+    // FirebaseFirestore.instance.collection('Influence')
+    //     .doc("TaggerId")
+    //     .collection('InfluenceCommission')
+    //     .doc("orderId").set({
+    //   "totalEarnings":TaggerCurrency == "INR"?0.03*inr:TaggerCurrency == "EUR"?0.03*eur:TaggerCurrency == "GBP"?0.03*gbp:0.03*usd,
+    // });
+
+    // FirebaseFirestore.instance.collection('Earnings')
+    //     .doc(ownerId)
+    //     .update({
+    //   "Balance": 0,
+    //
+    // });
+    setState(() {
+      TaggerImg = "";
+      TaggerId = "";
+      TaggerName = "";
+      TaggerCurrency = "";
+    });
+  }
+
 }
 Future update(List<String> cartNumbers) async {
   WriteBatch batch = FirebaseFirestore.instance.batch();

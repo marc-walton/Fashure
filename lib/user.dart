@@ -16,6 +16,8 @@ class Users{
    String currencyISO;
    String currency;
  String currencysym;
+ var Earnings;
+ var TotalEarnings;
  var designerInr;
  var illustratorInr;
  var artisansInr;
@@ -97,7 +99,8 @@ bool Bidding;
      this.currencyISO,
      this.currency,
     this.city,
-
+    this.Earnings,
+    this.TotalEarnings,
 this.currencysym,
 this.revenue,
 this.designerInr,
@@ -169,6 +172,8 @@ this.Bidding,
       Bidding: doc.data()['Bidding'],
       countryISO: doc.data()['countryISO'],
       city: doc.data()['city'],
+        Earnings: doc.data()['Earnings'],
+        TotalEarnings: doc.data()['TotalEarnings'],
 
         username :doc.data()['username'],
         email :doc.data()['email'],

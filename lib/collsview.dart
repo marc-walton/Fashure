@@ -429,6 +429,8 @@ return
                     taggerImg : ds['taggerImg'],
                     taggerName : ds['taggerName'],
                     taggerCurrency : ds['taggerCurrency'],
+                    TaggerProdId: ds['prodId'],
+                    TaggerOwnerId: ds['ownerId'],
                     image: ds['image'],
                     prodId: collId,
 
@@ -677,6 +679,8 @@ class TagItem extends StatelessWidget {
   String  taggerImg;
   String taggerName;
   String taggerCurrency;
+  String TaggerOwnerId;
+  String TaggerProdId;
 
   TagItem({
     this.ownerId,
@@ -684,17 +688,11 @@ class TagItem extends StatelessWidget {
     this.taggerImg,
     this.taggerName,
     this.taggerCurrency,
+    this.TaggerOwnerId,
+    this.TaggerProdId,
+
     this.prodId,this.Id,this.image,this.name,this.usd, this.inr, this.gbp, this.eur});
 
-  delete(){
-    var  docReference =      collRef .doc(currentUser.id)
-        .collection("userCollections")
-        .doc(prodId)
-        .collection('tags')
-        .doc(Id);
-    docReference.delete();
-
-  }
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -710,7 +708,8 @@ class TagItem extends StatelessWidget {
                     TaggerImg = taggerImg ;
                     TaggerName = taggerName;
                     TaggerCurrency =  taggerCurrency;
-
+                    TaggerOwnerId = TaggerOwnerId;
+                    TaggerProdId = TaggerProdId;
                     Navigator.push(
                       context,
                       MaterialPageRoute(

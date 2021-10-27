@@ -9,8 +9,8 @@ import 'package:fashow/Products.dart';
 class ProductScreen extends StatelessWidget {
   final String userId;
   final String prodId;
-
-  ProductScreen({this.userId, this.prodId});
+final String lol;
+  ProductScreen({this.userId, this.prodId,this.lol});
 
   @override
   Widget build(BuildContext context) {

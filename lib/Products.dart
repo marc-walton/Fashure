@@ -9674,118 +9674,106 @@ isLive: true,
 
         });
   }
-  Future<bool> _onBackPressed() {
-  TaggerImg = "";
-  TaggerId = "";
-  TaggerName = "";
-  TaggerCurrency = "";
-
-  }
 
 posteurope(){
   bool isPostOwner = currentUserId == ownerId;
 
-  return  WillPopScope(
-    onWillPop:()=>   _onBackPressed(),
-    child: Container(
-      margin: EdgeInsets.only(top:10.0,left: 10.0,right: 10.0, bottom: 10.0 ),
+  return  Container(
+    margin: EdgeInsets.only(top:10.0,left: 10.0,right: 10.0, bottom: 10.0 ),
 
-      child: Expanded(
-        child: Column(
-          children:  [
-            GestureDetector(
-              onTap:(){},
-              onDoubleTap: () {
-                handleLikePost();
-                Fluttertoast.showToast(
-                    msg: "Added to Favorites! " , timeInSecForIos: 4);
+    child: Expanded(
+      child: Column(
+        children:  [
+          GestureDetector(
+            onTap:(){},
+            onDoubleTap: () {
+              handleLikePost();
+              Fluttertoast.showToast(
+                  msg: "Added to Favorites! " , timeInSecForIos: 4);
 
-              },
-              child: Stack(
-                alignment: Alignment.center,
-                children: <Widget>[
-                  ClipRRect(
-                      borderRadius: BorderRadius.only
-                        (bottomLeft: Radius.circular(20.0),bottomRight: Radius.circular(20.0)),
-                      child: Container(
-                        //  height: MediaQuery.of(context).size.height * 0.65,
+            },
+            child: Stack(
+              alignment: Alignment.center,
+              children: <Widget>[
+                ClipRRect(
+                    borderRadius: BorderRadius.only
+                      (bottomLeft: Radius.circular(20.0),bottomRight: Radius.circular(20.0)),
+                    child: Container(
+                      //  height: MediaQuery.of(context).size.height * 0.65,
 
-                          width:     MediaQuery.of(context).size.width,
-                          child: pics(userid:ownerId,prodid:prodId))),
-                  Positioned.fill(
-                    child: Align(
-                      alignment: Alignment.topCenter,
-                      child:   ListTile(
-                        leading:FloatingActionButton(
-                          mini: true,
-                          backgroundColor:Colors.white.withOpacity(0.5),
-                          child:Icon(Icons.arrow_back_ios,color: Colors.white,),
-                          onPressed:() {
-                            TaggerImg = "";
-                            TaggerId = "";
-                            TaggerName = "";
-                            TaggerCurrency = "";
-                            Navigator.pop(context);},
-                        ),
+                        width:     MediaQuery.of(context).size.width,
+                        child: pics(userid:ownerId,prodid:prodId))),
+                Positioned.fill(
+                  child: Align(
+                    alignment: Alignment.topCenter,
+                    child:   ListTile(
+                      leading:FloatingActionButton(
+                        mini: true,
+                        backgroundColor:Colors.white.withOpacity(0.5),
+                        child:Icon(Icons.arrow_back_ios,color: Colors.white,),
+                        onPressed:() {
+
+                          Navigator.pop(context);},
                       ),
                     ),
                   ),
+                ),
 
-                ],
-              ),
+              ],
             ),
+          ),
 
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: shopmediaUrl.asMap().entries.map((entry) {
-                return GestureDetector(
-                  onTap: () => _ccontroller.animateToPage(entry.key),
-                  child: Container(
-                    width: 6.0,
-                    height: 6.0,
-                    margin: EdgeInsets.symmetric(vertical: 8.0, horizontal: 4.0),
-                    decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: (Theme.of(context).brightness == Brightness.dark
-                            ? Colors.white
-                            : Colors.black)
-                            .withOpacity(_current == entry.key ? 0.9 : 0.4)),
-                  ),
-                );
-              }).toList(),
-            ),
-            Row(
-              children: [
-                FutureBuilder(
-                    future:FirebaseFirestore.instance.collection("products").doc(ownerId).collection("userProducts").doc(prodId)
-                        .collection("tags").get(),
-                    builder: (context, snapshot) {
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: shopmediaUrl.asMap().entries.map((entry) {
+              return GestureDetector(
+                onTap: () => _ccontroller.animateToPage(entry.key),
+                child: Container(
+                  width: 6.0,
+                  height: 6.0,
+                  margin: EdgeInsets.symmetric(vertical: 8.0, horizontal: 4.0),
+                  decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: (Theme.of(context).brightness == Brightness.dark
+                          ? Colors.white
+                          : Colors.black)
+                          .withOpacity(_current == entry.key ? 0.9 : 0.4)),
+                ),
+              );
+            }).toList(),
+          ),
+          Row(
+            children: [
+              FutureBuilder(
+                  future:FirebaseFirestore.instance.collection("products").doc(ownerId).collection("userProducts").doc(prodId)
+                      .collection("tags").get(),
+                  builder: (context, snapshot) {
 
-                      if (!snapshot.hasData || snapshot.data.docs.isEmpty){
-                        return
-                          Container();
-                      }
-                      else{
-                        return
+                    if (!snapshot.hasData || snapshot.data.docs.isEmpty){
+                      return
+                        Container();
+                    }
+                    else{
+                      return
 
-                          GestureDetector(
-                            onTap: () =>   showModalBottomSheet(
-                                context: context,
-                                elevation: 0,
-                                builder: (context) {
-                                  return PaginateFirestore(
-                                      emptyDisplay: Center(child: Text("Nothing found",style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 25.0,
-                                      ),)),
-                                      itemBuilderType:
-                                      PaginateBuilderType.listView,
-                                      itemBuilder: (index, context, documentSnapshot)    {
-                                        String ownerId = documentSnapshot.data()['ownerId'];
-                                        String prodId = documentSnapshot.data()['prodId'];
-                                        String image = documentSnapshot.data()['image'];
-                                        String name = documentSnapshot.data()['name'];
-                                        var usd = documentSnapshot.data()['usd'];
+                        GestureDetector(
+                          onTap: () =>   showModalBottomSheet(
+                              context: context,
+                              elevation: 0,
+                              builder: (context) {
+                                return PaginateFirestore(
+                                    emptyDisplay: Center(child: Text("Nothing found",style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 25.0,
+                                    ),)),
+                                    itemBuilderType:
+                                    PaginateBuilderType.listView,
+                                    itemBuilder: (index, context, documentSnapshot)    {
+                                      String ownerId = documentSnapshot.data()['ownerId'];
+                                      String prodId = documentSnapshot.data()['prodId'];
+                                      String image = documentSnapshot.data()['image'];
+                                      String name = documentSnapshot.data()['name'];
+                                      var usd = documentSnapshot.data()['usd'];
 var inr = documentSnapshot.data()['inr'];
 var gbp = documentSnapshot.data()['gbp'];
 var eur = documentSnapshot.data()['eur'];
@@ -9793,585 +9781,587 @@ String taggerId = documentSnapshot.data()['taggerId'];
 String taggerImg = documentSnapshot.data()['taggerImg'];
 String taggerName = documentSnapshot.data()['taggerName'];
 String taggerCurrency = documentSnapshot.data()['taggerCurrency'];
-                                        return
+                                      return
 
-                                          GestureDetector(
-                                              onTap: () {
-                                                setState((){
-                                                   TaggerId = taggerId;
-                                                    TaggerImg = taggerImg ;
-                                                   TaggerName = taggerName;
-                                                 TaggerCurrency =  taggerCurrency;
-                                                });
+                                        GestureDetector(
+                                            onTap: () {
+                                              setState((){
+                                                 TaggerId = taggerId;
+                                                  TaggerImg = taggerImg ;
+                                                 TaggerName = taggerName;
+                                               TaggerCurrency =  taggerCurrency;
+                                               TaggerOwnerId = ownerId;
+                                               TaggerProdId = prodId;
+                                              });
 
-                                                Navigator.push(
-                                                context,
-                                                MaterialPageRoute(
-                                                  builder: (context) => ProductScreen(
-                                                    prodId: prodId,
-                                                    userId: ownerId,
-                                                  ),
+                                              Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                builder: (context) => ProductScreen(
+                                                  prodId: prodId,
+                                                  userId: ownerId,
                                                 ),
-                                              );},
-                                              child:Padding(
-                                                padding: const EdgeInsets.all(8.0),
-                                                child: Column(children:[
-                                                  ClipRRect(
-                                                      borderRadius: BorderRadius.circular(20.0),
-                                                      child: CachedImage(image)),
-                                                  Row(
-                                                    children: [
-                                                      Text(name,
-                                                          style: TextStyle(color: kText,
-                                                              fontSize: SizeConfig.safeBlockHorizontal * 4,
-                                                              fontWeight: FontWeight.bold))
-                                                    ],
-                                                  ),
-                                                  Row(
-                                                    children: [
-                                                      currentUser.currency == "INR"?Text("${cf.format(inr, CurrencyFormatter.inr)}",):
-                                                      currentUser.currency == "EUR"?Text("${cf.format(eur, CurrencyFormatter.eur)}",):
-                                                      currentUser.currency == "GBP"?Text("${cf.format(gbp, CurrencyFormatter.gbp)}",):
-                                                      Text("${cf.format(usd, CurrencyFormatter.usd)}",),
+                                              ),
+                                            );},
+                                            child:Padding(
+                                              padding: const EdgeInsets.all(8.0),
+                                              child: Column(children:[
+                                                ClipRRect(
+                                                    borderRadius: BorderRadius.circular(20.0),
+                                                    child: CachedImage(image)),
+                                                Row(
+                                                  children: [
+                                                    Text(name,
+                                                        style: TextStyle(color: kText,
+                                                            fontSize: SizeConfig.safeBlockHorizontal * 4,
+                                                            fontWeight: FontWeight.bold))
+                                                  ],
+                                                ),
+                                                Row(
+                                                  children: [
+                                                    currentUser.currency == "INR"?Text("${cf.format(inr, CurrencyFormatter.inr)}",):
+                                                    currentUser.currency == "EUR"?Text("${cf.format(eur, CurrencyFormatter.eur)}",):
+                                                    currentUser.currency == "GBP"?Text("${cf.format(gbp, CurrencyFormatter.gbp)}",):
+                                                    Text("${cf.format(usd, CurrencyFormatter.usd)}",),
 
 
-                                                    ],
-                                                  ),
-                                                ]),
-                                              ));
+                                                  ],
+                                                ),
+                                              ]),
+                                            ));
 
 
-                                      },
-                                      query: FirebaseFirestore.instance.collection("products").doc(ownerId).collection("userProducts").doc(prodId)
-                                          .collection("tags")
-                                          .orderBy('timestamp',descending: true)
+                                    },
+                                    query: FirebaseFirestore.instance.collection("products").doc(ownerId).collection("userProducts").doc(prodId)
+                                        .collection("tags")
+                                        .orderBy('timestamp',descending: true)
 
-                                  );
-                                }),
+                                );
+                              }),
 
-                            child:
+                          child:
 
-                                GFButton(
-                                  color: Colors.black,
-                                  shape:  GFButtonShape.pills,
-                                  textColor: Colors.black,
-                                  type : GFButtonType.outline,
-                                  onPressed: null,
-                                  text:"View other Products",
-                                  icon: Icon(
-                                    Icons.add_shopping_cart,
-                                    // color: Colors.white,
-                                    size: 20.0,
-                                  ),
-
+                              GFButton(
+                                color: Colors.black,
+                                shape:  GFButtonShape.pills,
+                                textColor: Colors.black,
+                                type : GFButtonType.outline,
+                                onPressed: null,
+                                text:"View other Products",
+                                icon: Icon(
+                                  Icons.add_shopping_cart,
+                                  // color: Colors.white,
+                                  size: 20.0,
                                 ),
 
+                              ),
+
+                        );
+                    }
+
+                  }
+
+              ),
+
+            ],
+          ),
+          GestureDetector(
+            onTap: () =>
+              showProfile(context, profileId: ownerId),
+            child: ListTile(
+              leading: CircleAvatar(
+                backgroundImage: CachedNetworkImageProvider(photoUrl),
+                backgroundColor: Colors.grey,
+              ),
+              title: Text(
+                username,
+                style: TextStyle(
+                  color: kText,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+
+              trailing: IconButton(icon: Icon(Icons.more_horiz,color: Colors.white,),
+                  onPressed: () {
+                    !isPostOwner?showDialog(
+                        context: context,
+                        builder: (BuildContext context) {
+                          return Dialog(
+                            backgroundColor: kSecondaryColor,
+                            shape: RoundedRectangleBorder(
+                                borderRadius:
+                                BorderRadius.circular(20.0)), //this right here
+                            child: GestureDetector(
+                              onTap: (){report();
+                              Navigator.pop(context);},
+                              child: Container(
+                                height: 100,
+                                child: Padding(
+                                  padding: const EdgeInsets.all(12.0),
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      Container(
+
+                                        child: Align(
+                                            alignment: Alignment.center,
+                                            child: Text('Report this post?',style: TextStyle(
+                                                color: Colors.blueAccent,
+                                                fontWeight: FontWeight.bold,
+                                                fontSize: 20.0),)),),
+
+
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ),
                           );
+                          // ignore: unnecessary_statements
+                        }):handleDeletePost(context);
+                  }),
+
+            ),
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: <Widget>[
+              Padding(padding: EdgeInsets.only(top: 40.0, left: 20.0)),
+              IconButton(
+                onPressed: (){
+                  handleLikePost();
+                  Fluttertoast.showToast(
+                      msg: "Added to Favorites! " , timeInSecForIos: 4);
+                },
+                icon: Icon(
+                  isfav ?   Icons.favorite:Icons.favorite_border ,
+                  color:  Colors.black,
+                ),
+              ),
+              // Container(
+              //   child: Text(
+              //     "$likeCount ",
+              //     style: TextStyle(
+              //       color:kText,
+              //       fontSize: 15.0,
+              //       //                      fontWeight: FontWeight.bold,
+              //     ),
+              //   ),
+              // ),
+             FutureBuilder<Uri>(
+                    future: _dynamicLinkService.createDynamicLink( postId:prodId,ownerId: ownerId,),
+                    builder: (context, snapshot) {
+                      if(snapshot.hasData) {
+                        Uri uri = snapshot.data;
+                        return IconButton(
+                          color: Colors.black,
+                          onPressed: () => Share.share(uri.toString()),
+                          icon: Icon(Icons.send),
+                        );
+                      } else {
+                        return Container();
                       }
 
                     }
-
                 ),
+              Spacer(),
+              InkWell(
+                onTap:() => reviews(),
+                child: Row(
+                  children: [
+                    Icon(
+                      Icons.star_border_rounded,
+                      color:  Colors.black,
+                    ),
+                    Icon(
+                      Icons.star_border_rounded,
+                      color:  Colors.black,
+                    ),
+                    Icon(
+                      Icons.star_border_rounded,
+                      color:  Colors.black,
+                    ),
+                    Icon(
+                      Icons.star_border_rounded,
+                      color:  Colors.black,
+                    ),
+                    Icon(
+                      Icons.star_border_rounded,
+                      color:  Colors.black,
+                    ),
 
-              ],
-            ),
-            GestureDetector(
-              onTap: () => showProfile(context, profileId: ownerId),
-              child: ListTile(
-                leading: CircleAvatar(
-                  backgroundImage: CachedNetworkImageProvider(photoUrl),
-                  backgroundColor: Colors.grey,
+
+                  ],
                 ),
-                title: Text(
-                  username,
-                  style: TextStyle(
-                    color: kText,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-
-                trailing: IconButton(icon: Icon(Icons.more_horiz,color: Colors.white,),
-                    onPressed: () {
-                      !isPostOwner?showDialog(
-                          context: context,
-                          builder: (BuildContext context) {
-                            return Dialog(
-                              backgroundColor: kSecondaryColor,
-                              shape: RoundedRectangleBorder(
-                                  borderRadius:
-                                  BorderRadius.circular(20.0)), //this right here
-                              child: GestureDetector(
-                                onTap: (){report();
-                                Navigator.pop(context);},
-                                child: Container(
-                                  height: 100,
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(12.0),
-                                    child: Column(
-                                      mainAxisAlignment: MainAxisAlignment.center,
-                                      crossAxisAlignment: CrossAxisAlignment.start,
-                                      children: [
-                                        Container(
-
-                                          child: Align(
-                                              alignment: Alignment.center,
-                                              child: Text('Report this post?',style: TextStyle(
-                                                  color: Colors.blueAccent,
-                                                  fontWeight: FontWeight.bold,
-                                                  fontSize: 20.0),)),),
-
-
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            );
-                            // ignore: unnecessary_statements
-                          }):handleDeletePost(context);
-                    }),
-
               ),
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: <Widget>[
-                Padding(padding: EdgeInsets.only(top: 40.0, left: 20.0)),
-                IconButton(
-                  onPressed: (){
-                    handleLikePost();
-                    Fluttertoast.showToast(
-                        msg: "Added to Favorites! " , timeInSecForIos: 4);
-                  },
-                  icon: Icon(
-                    isfav ?   Icons.favorite:Icons.favorite_border ,
-                    color:  Colors.black,
+
+            ],
+          ),
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              Expanded(
+                child: ListTile(
+                  title: Text(
+                    "$productname ",
+                    style: TextStyle(
+                      color: kText,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 24.0,
+                    ),
+                  ),
+                  subtitle:    currentUser.country == "$country" ?  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      currentUser.currency == "INR"? Row(
+                        children: [
+                          Text("${cf.format(inr, CurrencyFormatter.inr)}",
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 20.0,
+                          )),
+                        ],
+                      ):
+                      currentUser.currency == "EUR"?Row(
+                        children: [
+                          Text("${cf.format(eur, CurrencyFormatter.eur)}",
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 20.0,
+                              )),
+                        ],
+                      ):
+                      currentUser.currency == "GBP"?Row(
+                        children: [
+                          Text("${cf.format(gbp, CurrencyFormatter.gbp)}",
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 20.0,
+                              )),
+                        ],
+                      ):Row(
+                        children: [
+                          Text("${cf.format(usd, CurrencyFormatter.usd)}",
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 20.0,
+                              )),
+                        ],
+                      ),
+                      freeship?Container(
+                          color:Colors.grey.withOpacity(0.2),
+                          child:   Text(
+                            "FREE SHIPPING",
+                            style: TextStyle(
+                              color: Colors.black,
+
+                              fontWeight: FontWeight.bold,
+                              fontSize: 14.0,
+                            ),
+                          )
+                      ) :
+                      currentUser.currency == "INR"? Row(
+                        children: [
+                          Text(" ${cf.format(shipcostinr, CurrencyFormatter.inr)}",
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 20.0,
+                              )),
+                        ],
+                      ):
+                      currentUser.currency == "EUR"?Row(
+                        children: [
+                          Text("${cf.format(shipcostusd, CurrencyFormatter.usd)}  €",
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 20.0,
+                              )),
+                        ],
+                      ):
+                      currentUser.currency == "GBP"?Row(
+                        children: [
+                          Text(" ${cf.format(shipcostgbp, CurrencyFormatter.gbp)}",
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 20.0,
+                              )),
+                        ],
+                      ):Row(
+                        children: [
+                          Text("${cf.format(shipcostusd, CurrencyFormatter.usd)}",
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 20.0,
+                              )),
+                        ],
+                      ),
+
+                    ],
+                  ):   Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+
+                    children: [
+                      currentUser.currency == "INR"? Row(
+                        children: [
+                          Text("${cf.format(inr, CurrencyFormatter.inr)}",
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 20.0,
+                              )),
+                        ],
+                      ):
+                      currentUser.currency == "EUR"?Row(
+                        children: [
+                          Text("${cf.format(eur, CurrencyFormatter.eur)}",
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 20.0,
+                              )),
+                        ],
+                      ):
+                      currentUser.currency == "GBP"?Row(
+                        children: [
+                          Text("${cf.format(gbp, CurrencyFormatter.gbp)}",
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 20.0,
+                              )),
+                        ],
+                      ):Row(
+                        children: [
+                          Text("${cf.format(usd, CurrencyFormatter.usd)}",
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 20.0,
+                              )),
+                        ],
+                      ),
+                      freeworldship?Container(
+                          color:Colors.grey.withOpacity(0.2),
+                          child:   Text(
+                            "FREE SHIPPING",
+                            style: TextStyle(
+                              color: Colors.black,
+
+                              fontWeight: FontWeight.bold,
+                              fontSize: 14.0,
+                            ),
+                          )
+                      ) :
+                      currentUser.currency == "INR"? Row(
+                        children: [
+                          Text("${cf.format(shipcostinterinr, CurrencyFormatter.inr)}",
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 20.0,
+                              )),
+                        ],
+                      ):
+                      currentUser.currency == "EUR"?Row(
+                        children: [
+                          Text("${cf.format(shipcostintereur, CurrencyFormatter.eur)}",
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 20.0,
+                              )),
+                        ],
+                      ):
+                      currentUser.currency == "GBP"?Row(
+                        children: [
+                          Text("${cf.format(shipcostintergbp, CurrencyFormatter.gbp)}",
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 20.0,
+                              )),
+                        ],
+                      ):Row(
+                        children: [
+                          Text("${cf.format(shipcostinterusd, CurrencyFormatter.usd)}",
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 20.0,
+                              )),
+                        ],
+                      ),
+
+                    ],
+                  ) ,
+                  trailing: FloatingActionButton(
+                    heroTag:null,
+backgroundColor: Colors.black,
+                    onPressed: (){
+                      isUploading?null:
+                      Buynow(context);},
+                    child:   isUploading?CircularProgressIndicator(): Icon(Icons.add_shopping_cart,),
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(16.0))),
                   ),
                 ),
-                // Container(
-                //   child: Text(
-                //     "$likeCount ",
-                //     style: TextStyle(
-                //       color:kText,
-                //       fontSize: 15.0,
-                //       //                      fontWeight: FontWeight.bold,
-                //     ),
-                //   ),
-                // ),
-               FutureBuilder<Uri>(
-                      future: _dynamicLinkService.createDynamicLink( postId:prodId,ownerId: ownerId,),
-                      builder: (context, snapshot) {
-                        if(snapshot.hasData) {
-                          Uri uri = snapshot.data;
-                          return IconButton(
-                            color: Colors.black,
-                            onPressed: () => Share.share(uri.toString()),
-                            icon: Icon(Icons.send),
-                          );
-                        } else {
-                          return Container();
-                        }
+              ),
 
-                      }
+            ],
+          ),
+          worldship == false?Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              Expanded(
+                child: ListTile(
+                  leading:  Icon(Icons.cancel, color: Colors.red),
+                  title: Text(
+                    "This product doesn't ship worldwide,check shipping & returns info below ",
+                    style: TextStyle(
+                      color: Colors.red,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 14.0,
+                    ),
                   ),
-                Spacer(),
-                InkWell(
-                  onTap:() => reviews(),
-                  child: Row(
-                    children: [
-                      Icon(
-                        Icons.star_border_rounded,
-                        color:  Colors.black,
-                      ),
-                      Icon(
-                        Icons.star_border_rounded,
-                        color:  Colors.black,
-                      ),
-                      Icon(
-                        Icons.star_border_rounded,
-                        color:  Colors.black,
-                      ),
-                      Icon(
-                        Icons.star_border_rounded,
-                        color:  Colors.black,
-                      ),
-                      Icon(
-                        Icons.star_border_rounded,
-                        color:  Colors.black,
-                      ),
+                ),
+              ),
 
+            ],
+          ):Text(''),
+          ListTile(title: Text('Processing time'),
+              subtitle:Text("$processfrom - $processto")
+          ),
+          ListTileTheme(
+            tileColor:trans,
+            child: ExpansionTile(
+              backgroundColor:trans,
+              title:  Text(
+                " Description",
+                style: TextStyle(
+                  color: kText.withOpacity(0.5),
+                  fontWeight: FontWeight.bold,fontSize: 20,
+                ),),
+              trailing:Icon(Icons.expand_more,color: kText,),
 
+              maintainState: true,
+              children: [
+
+                Container(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: <Widget>[
+                      ExpandableText("$details",),
+                      SizedBox(height: 8,),
+                      SizedBox(height: 8,),
+                      Text('Composition:',style: TextStyle(
+                        color: kText.withOpacity(0.5),
+                        fontWeight: FontWeight.bold,fontSize: 20,
+                      ),),
+                      Text('$composition', maxLines: 1,softWrap:false,overflow:TextOverflow.fade,style: TextStyle(
+                        color: kText.withOpacity(0.5),
+//                          fontWeight: FontWeight.bold,
+                      ),),SizedBox(height: 8,),
+                      Text('Wash and Care:',style: TextStyle(
+                        color: kText.withOpacity(0.5),
+                        fontWeight: FontWeight.bold,fontSize: 20,
+                      ),),
+                      Text('$washandcare', maxLines: 1,softWrap:false,overflow:TextOverflow.fade,style: TextStyle(
+                        color: kText.withOpacity(0.5),
+//                          fontWeight: FontWeight.bold,
+                      ),),
                     ],
                   ),
                 ),
-
               ],
             ),
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                Expanded(
-                  child: ListTile(
-                    title: Text(
-                      "$productname ",
-                      style: TextStyle(
-                        color: kText,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 24.0,
-                      ),
-                    ),
-                    subtitle:    currentUser.country == "$country" ?  Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        currentUser.currency == "INR"? Row(
-                          children: [
-                            Text("${cf.format(inr, CurrencyFormatter.inr)}",
-                            style: TextStyle(
-                              color: Colors.black,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 20.0,
-                            )),
-                          ],
-                        ):
-                        currentUser.currency == "EUR"?Row(
-                          children: [
-                            Text("${cf.format(eur, CurrencyFormatter.eur)}",
-                                style: TextStyle(
-                                  color: Colors.black,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 20.0,
-                                )),
-                          ],
-                        ):
-                        currentUser.currency == "GBP"?Row(
-                          children: [
-                            Text("${cf.format(gbp, CurrencyFormatter.gbp)}",
-                                style: TextStyle(
-                                  color: Colors.black,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 20.0,
-                                )),
-                          ],
-                        ):Row(
-                          children: [
-                            Text("${cf.format(usd, CurrencyFormatter.usd)}",
-                                style: TextStyle(
-                                  color: Colors.black,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 20.0,
-                                )),
-                          ],
-                        ),
-                        freeship?Container(
-                            color:Colors.grey.withOpacity(0.2),
-                            child:   Text(
-                              "FREE SHIPPING",
-                              style: TextStyle(
-                                color: Colors.black,
+          ),
+          ListTileTheme(
+            tileColor:trans,
+            child: ExpansionTile(
+              backgroundColor:trans,
+              title:  Text(
+                " Size and Fit:",
+                style: TextStyle(
+                  color: kText.withOpacity(0.5),
+                  fontWeight: FontWeight.bold,fontSize: 20,
+                ),),
+              leading: FaIcon(FontAwesomeIcons.rulerCombined,color: kText,),
+              trailing:Icon(Icons.expand_more,color: kText,),
 
-                                fontWeight: FontWeight.bold,
-                                fontSize: 14.0,
-                              ),
-                            )
-                        ) :
-                        currentUser.currency == "INR"? Row(
-                          children: [
-                            Text(" ${cf.format(shipcostinr, CurrencyFormatter.inr)}",
-                                style: TextStyle(
-                                  color: Colors.black,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 20.0,
-                                )),
-                          ],
-                        ):
-                        currentUser.currency == "EUR"?Row(
-                          children: [
-                            Text("${cf.format(shipcostusd, CurrencyFormatter.usd)}  €",
-                                style: TextStyle(
-                                  color: Colors.black,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 20.0,
-                                )),
-                          ],
-                        ):
-                        currentUser.currency == "GBP"?Row(
-                          children: [
-                            Text(" ${cf.format(shipcostgbp, CurrencyFormatter.gbp)}",
-                                style: TextStyle(
-                                  color: Colors.black,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 20.0,
-                                )),
-                          ],
-                        ):Row(
-                          children: [
-                            Text("${cf.format(shipcostusd, CurrencyFormatter.usd)}",
-                                style: TextStyle(
-                                  color: Colors.black,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 20.0,
-                                )),
-                          ],
-                        ),
+              maintainState: true,
+              children: [
 
-                      ],
-                    ):   Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
+                Container(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: <Widget>[
 
-                      children: [
-                        currentUser.currency == "INR"? Row(
-                          children: [
-                            Text("${cf.format(inr, CurrencyFormatter.inr)}",
-                                style: TextStyle(
-                                  color: Colors.black,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 20.0,
-                                )),
-                          ],
-                        ):
-                        currentUser.currency == "EUR"?Row(
-                          children: [
-                            Text("${cf.format(eur, CurrencyFormatter.eur)}",
-                                style: TextStyle(
-                                  color: Colors.black,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 20.0,
-                                )),
-                          ],
-                        ):
-                        currentUser.currency == "GBP"?Row(
-                          children: [
-                            Text("${cf.format(gbp, CurrencyFormatter.gbp)}",
-                                style: TextStyle(
-                                  color: Colors.black,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 20.0,
-                                )),
-                          ],
-                        ):Row(
-                          children: [
-                            Text("${cf.format(usd, CurrencyFormatter.usd)}",
-                                style: TextStyle(
-                                  color: Colors.black,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 20.0,
-                                )),
-                          ],
-                        ),
-                        freeworldship?Container(
-                            color:Colors.grey.withOpacity(0.2),
-                            child:   Text(
-                              "FREE SHIPPING",
-                              style: TextStyle(
-                                color: Colors.black,
-
-                                fontWeight: FontWeight.bold,
-                                fontSize: 14.0,
-                              ),
-                            )
-                        ) :
-                        currentUser.currency == "INR"? Row(
-                          children: [
-                            Text("${cf.format(shipcostinterinr, CurrencyFormatter.inr)}",
-                                style: TextStyle(
-                                  color: Colors.black,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 20.0,
-                                )),
-                          ],
-                        ):
-                        currentUser.currency == "EUR"?Row(
-                          children: [
-                            Text("${cf.format(shipcostintereur, CurrencyFormatter.eur)}",
-                                style: TextStyle(
-                                  color: Colors.black,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 20.0,
-                                )),
-                          ],
-                        ):
-                        currentUser.currency == "GBP"?Row(
-                          children: [
-                            Text("${cf.format(shipcostintergbp, CurrencyFormatter.gbp)}",
-                                style: TextStyle(
-                                  color: Colors.black,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 20.0,
-                                )),
-                          ],
-                        ):Row(
-                          children: [
-                            Text("${cf.format(shipcostinterusd, CurrencyFormatter.usd)}",
-                                style: TextStyle(
-                                  color: Colors.black,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 20.0,
-                                )),
-                          ],
-                        ),
-
-                      ],
-                    ) ,
-                    trailing: FloatingActionButton(
-                      heroTag:null,
-backgroundColor: Colors.black,
-                      onPressed: (){
-                        isUploading?null:
-                        Buynow(context);},
-                      child:   isUploading?CircularProgressIndicator(): Icon(Icons.add_shopping_cart,),
-                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(16.0))),
-                    ),
+                      Text('Size and Fit:',style: TextStyle(
+                        color: kText.withOpacity(0.5),
+                        fontWeight: FontWeight.bold,fontSize: 20,
+                      ),),
+                      Text('$sizeandfit', maxLines: 1,softWrap:false,overflow:TextOverflow.fade,style: TextStyle(
+                        color: kText.withOpacity(0.5),
+//                          fontWeight: FontWeight.bold,
+                      ),),
+                    ],
                   ),
                 ),
-
               ],
             ),
-            worldship == false?Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                Expanded(
-                  child: ListTile(
-                    leading:  Icon(Icons.cancel, color: Colors.red),
-                    title: Text(
-                      "This product doesn't ship worldwide,check shipping & returns info below ",
-                      style: TextStyle(
-                        color: Colors.red,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 14.0,
+          ),
+          ListTileTheme(
+            tileColor:trans,
+            child: ExpansionTile(
+              backgroundColor:trans,
+              leading: Icon(Icons.local_shipping,color: kText,),
+              title:  Text(
+                " Shipping  and Returns:",
+                style: TextStyle(
+                  color: kText.withOpacity(0.5),
+                  fontWeight: FontWeight.bold,fontSize: 20,
+                ),),
+              trailing:Icon(Icons.expand_more,color: kText,),
+              maintainState: true,
+              children: [
+
+                Container(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: <Widget>[
+
+                      Text('Shipping  and Returns:',style: TextStyle(
+                        color: kText.withOpacity(0.5),
+                        fontWeight: FontWeight.bold,fontSize: 20,
+                      ),),
+                      ListTile(title: Text('Processing time'),
+                          subtitle:Text("$processfrom - $processto")
+                      ),ListTile(title: Text('Shipping duration to ${country}'),
+                          subtitle:Text("$shipfrom - $shipto")
+                      ),ListTile(title: Text('International shipping duration'),
+                          subtitle:Text("$shipinterfrom - $shipinterto")
                       ),
-                    ),
+                      Text('$shipment', maxLines: 1,softWrap:false,overflow:TextOverflow.fade,style: TextStyle(
+                        color: kText.withOpacity(0.5),
+//                          fontWeight: FontWeight.bold,
+                      ),),
+                    ],
                   ),
-                ),
-
-              ],
-            ):Text(''),
-            ListTile(title: Text('Processing time'),
-                subtitle:Text("$processfrom - $processto")
+                ),                ],
             ),
-            ListTileTheme(
-              tileColor:trans,
-              child: ExpansionTile(
-                backgroundColor:trans,
-                title:  Text(
-                  " Description",
-                  style: TextStyle(
-                    color: kText.withOpacity(0.5),
-                    fontWeight: FontWeight.bold,fontSize: 20,
-                  ),),
-                trailing:Icon(Icons.expand_more,color: kText,),
-
-                maintainState: true,
-                children: [
-
-                  Container(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
-                      children: <Widget>[
-                        ExpandableText("$details",),
-                        SizedBox(height: 8,),
-                        SizedBox(height: 8,),
-                        Text('Composition:',style: TextStyle(
-                          color: kText.withOpacity(0.5),
-                          fontWeight: FontWeight.bold,fontSize: 20,
-                        ),),
-                        Text('$composition', maxLines: 1,softWrap:false,overflow:TextOverflow.fade,style: TextStyle(
-                          color: kText.withOpacity(0.5),
-//                          fontWeight: FontWeight.bold,
-                        ),),SizedBox(height: 8,),
-                        Text('Wash and Care:',style: TextStyle(
-                          color: kText.withOpacity(0.5),
-                          fontWeight: FontWeight.bold,fontSize: 20,
-                        ),),
-                        Text('$washandcare', maxLines: 1,softWrap:false,overflow:TextOverflow.fade,style: TextStyle(
-                          color: kText.withOpacity(0.5),
-//                          fontWeight: FontWeight.bold,
-                        ),),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            ListTileTheme(
-              tileColor:trans,
-              child: ExpansionTile(
-                backgroundColor:trans,
-                title:  Text(
-                  " Size and Fit:",
-                  style: TextStyle(
-                    color: kText.withOpacity(0.5),
-                    fontWeight: FontWeight.bold,fontSize: 20,
-                  ),),
-                leading: FaIcon(FontAwesomeIcons.rulerCombined,color: kText,),
-                trailing:Icon(Icons.expand_more,color: kText,),
-
-                maintainState: true,
-                children: [
-
-                  Container(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
-                      children: <Widget>[
-
-                        Text('Size and Fit:',style: TextStyle(
-                          color: kText.withOpacity(0.5),
-                          fontWeight: FontWeight.bold,fontSize: 20,
-                        ),),
-                        Text('$sizeandfit', maxLines: 1,softWrap:false,overflow:TextOverflow.fade,style: TextStyle(
-                          color: kText.withOpacity(0.5),
-//                          fontWeight: FontWeight.bold,
-                        ),),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            ListTileTheme(
-              tileColor:trans,
-              child: ExpansionTile(
-                backgroundColor:trans,
-                leading: Icon(Icons.local_shipping,color: kText,),
-                title:  Text(
-                  " Shipping  and Returns:",
-                  style: TextStyle(
-                    color: kText.withOpacity(0.5),
-                    fontWeight: FontWeight.bold,fontSize: 20,
-                  ),),
-                trailing:Icon(Icons.expand_more,color: kText,),
-                maintainState: true,
-                children: [
-
-                  Container(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
-                      children: <Widget>[
-
-                        Text('Shipping  and Returns:',style: TextStyle(
-                          color: kText.withOpacity(0.5),
-                          fontWeight: FontWeight.bold,fontSize: 20,
-                        ),),
-                        ListTile(title: Text('Processing time'),
-                            subtitle:Text("$processfrom - $processto")
-                        ),ListTile(title: Text('Shipping duration to ${country}'),
-                            subtitle:Text("$shipfrom - $shipto")
-                        ),ListTile(title: Text('International shipping duration'),
-                            subtitle:Text("$shipinterfrom - $shipinterto")
-                        ),
-                        Text('$shipment', maxLines: 1,softWrap:false,overflow:TextOverflow.fade,style: TextStyle(
-                          color: kText.withOpacity(0.5),
-//                          fontWeight: FontWeight.bold,
-                        ),),
-                      ],
-                    ),
-                  ),                ],
-              ),
-            ),
-          ],
-        ),
+          ),
+        ],
       ),
-
     ),
+
   );
 }
 

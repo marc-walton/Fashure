@@ -1110,8 +1110,9 @@ SizedBox(height: 10.0,),
                   GestureDetector(
                     onTap: () async
                     {
-                      Navigator.push(context, MaterialPageRoute(builder: (context) =>
-                          ClientReview(profileId: widget.profileId, )));
+                      print(TaggerId);
+                      // Navigator.push(context, MaterialPageRoute(builder: (context) =>
+                      //     ClientReview(profileId: widget.profileId, )));
                     },
                     child:Column(
                       children: <Widget>[
@@ -1253,6 +1254,13 @@ SizedBox(height: 10.0,),
 
   }
 
+  Future<bool> _onBackPressed() {
+    TaggerImg = "";
+    TaggerId = "";
+    TaggerName = "";
+    TaggerCurrency = "";
+
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -1265,7 +1273,6 @@ SizedBox(height: 10.0,),
 
       appBar: AppBar(
         backgroundColor: kPrimaryColor,
-
         title: FittedBox(
           fit: BoxFit.contain,
           child: Text(
