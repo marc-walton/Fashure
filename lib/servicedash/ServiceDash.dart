@@ -85,31 +85,33 @@ p()  {
         backgroundColor: kSecondaryColor,
         key:  scaffoldKey,
         appBar: PreferredSize(
-          preferredSize: Size.fromHeight(100.0),
+          preferredSize: Size.fromHeight(60.0),
           child: AppBar(
             backgroundColor: kPrimaryColor,
             automaticallyImplyLeading: false,
 
-            title: FittedBox(
-              fit: BoxFit.contain,
-              child: Text(
-                "Freelance Orders",
-                style: TextStyle(color: Colors.white),
-              ),
-            ),
+            // title: FittedBox(
+            //   fit: BoxFit.contain,
+            //   child: Text(
+            //     "Freelance Orders",
+            //     style: TextStyle(color: Colors.white),
+            //   ),
+            // ),
 
             bottom: PreferredSize(
               preferredSize: Size.fromHeight(100.0),
               child: Container(
                 height: 60.0,
                 child: TabBar(
+                  labelStyle:TextStyle(fontFamily: "AlteroDCURegular" ),
+                  ///outline
+                  unselectedLabelStyle:TextStyle(fontFamily:"AlteroDCU" ),
+                  labelPadding: EdgeInsets.only(left:2,right: 8,),
+
                   isScrollable: true,
                   labelColor: Colors.white,
                   unselectedLabelColor: kIcon,
-                  indicatorSize:TabBarIndicatorSize.tab,
-                  indicator:BubbleTabIndicator(indicatorHeight:40.0,
-                    indicatorColor: kblue,
-                  ),
+
 
                   tabs:[
                     FittedBox(

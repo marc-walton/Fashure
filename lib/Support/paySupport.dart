@@ -1,7 +1,9 @@
+import 'package:fashow/user.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fashow/HomePage.dart';
 import 'package:fashow/ActivityFeed.dart';
+import 'package:flutter_currencies_tracker/flutter_currencies_tracker.dart';
 import 'package:get/get.dart';
 import 'package:razorpay_flutter/razorpay_flutter.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -33,8 +35,8 @@ class _PaySupportState extends State<PaySupport>
   String key = 'rzp_test_Ut90sdJd5tSty5';
 
   Razorpay _razorpay;
-
-
+ var userPrice;
+Users UserDetails;
   @override
   void initState() {
     super.initState();
@@ -42,7 +44,8 @@ class _PaySupportState extends State<PaySupport>
     _razorpay.on(Razorpay.EVENT_PAYMENT_SUCCESS, _handlePaymentSuccess);
     _razorpay.on(Razorpay.EVENT_PAYMENT_ERROR, _handlePaymentError);
     _razorpay.on(Razorpay.EVENT_EXTERNAL_WALLET, _handleExternalWallet);
-
+    getUser();
+    INRUSD();
   }
 
   @override
@@ -50,28 +53,108 @@ class _PaySupportState extends State<PaySupport>
     super.dispose();
     _razorpay.clear();
   }
-  payment(){
-    FirebaseFirestore.instance.collection('Payments')
-        .doc(widget.userId)
-        .collection('supportPayments')
-        .doc(Id)
-        .set({
-      'userId':widget.userId,
-      'Id':Id,
-      "amount":widget.buynowamount,
-"userCurrency":widget.currency??"",
-    "senderCurrency":currentUser.currency,
-      "imgUrl":widget.imgUrl,
-      "displayName":widget.displayName,
-         "senderImgUrl":currentUser.photoUrl,
-      "senderDisplayName":currentUser.displayName,
-        "senderUserId":currentUser.id,
-   "mediaUrl":widget.mediaUrl,
+  void INRUSD() async {
+    var I;
+    var INR;
+    var G;
+    var U;
+    var I1;
+    var E1;
+    var G1;
+    var U1;
+    var I2;
+    var E2;
+    var G2;
+    var U2;
+var result;
 
-      'fulfilled':'false',
-      "timestamp": timestamp,
+    if(currentUser.currency == "INR") {
+      if(widget.currency == "EUR") {
+         result = await Currency.getConversion(
+          from: 'INR', to: 'EUR', amount: widget.buynowamount.toString() ?? 0);}
+      else  if(widget.currency == "GBP") {
+         result = await Currency.getConversion(
+          from: 'INR', to: 'GBP', amount: widget.buynowamount.toString() ?? 0);}
+      else{
+         result = await Currency.getConversion(
+          from: 'INR', to: 'USD', amount: widget.buynowamount.toString() ?? 0);}
 
-    });
+
+      setState(() {
+        INR = result.rate ?? 0.001;
+
+        I = INR.toStringAsFixed(2);
+        userPrice = double.tryParse(I);
+
+
+      }); }
+    else if(currentUser.currency == "EUR") {
+      if(widget.currency == "INR") {
+        result = await Currency.getConversion(
+            from: 'EUR', to: 'INR', amount: widget.buynowamount.toString() ?? 0);}
+      else  if(widget.currency == "GBP") {
+        result = await Currency.getConversion(
+            from: 'EUR', to: 'GBP', amount: widget.buynowamount.toString() ?? 0);}
+      else{
+        result = await Currency.getConversion(
+            from: 'EUR', to: 'USD', amount: widget.buynowamount.toString() ?? 0);}
+
+
+      setState(() {
+        INR = result.rate ?? 0.001;
+
+        I = INR.toStringAsFixed(2);
+        userPrice = double.tryParse(I);
+
+
+      }); }
+    else if(currentUser.currency == "GBP") {
+      if(widget.currency == "INR") {
+        result = await Currency.getConversion(
+            from: 'GBP', to: 'INR', amount: widget.buynowamount.toString() ?? 0);}
+      else  if(widget.currency == "EUR") {
+        result = await Currency.getConversion(
+            from: 'GBP', to: 'EUR', amount: widget.buynowamount.toString() ?? 0);}
+      else{
+        result = await Currency.getConversion(
+            from: 'GBP', to: 'USD', amount: widget.buynowamount.toString() ?? 0);}
+
+
+      setState(() {
+        INR = result.rate ?? 0.001;
+
+        I = INR.toStringAsFixed(2);
+        userPrice = double.tryParse(I);
+
+
+      }); }
+    else {
+      if(widget.currency == "INR") {
+        result = await Currency.getConversion(
+            from: 'USD', to: 'INR', amount: widget.buynowamount.toString() ?? 0);}
+      else  if(widget.currency == "EUR") {
+        result = await Currency.getConversion(
+            from: 'USD', to: 'EUR', amount: widget.buynowamount.toString() ?? 0);}
+      else{
+        result = await Currency.getConversion(
+            from: 'USD', to: 'GBP', amount: widget.buynowamount.toString() ?? 0);}
+
+
+      setState(() {
+        INR = result.rate ?? 0.001;
+
+        I = INR.toStringAsFixed(2);
+        userPrice = double.tryParse(I);
+
+
+      }); }
+
+
+
+  }
+  getUser()async{
+    DocumentSnapshot doc = await usersRef.doc(widget.userId).get();
+    UserDetails = Users.fromDocument(doc);
   }
   openCheckout()  {
     if (currentUser.currency == 'INR') {
@@ -157,7 +240,30 @@ if (currentUser.currency == 'EUR') {
       }
     }
   }
+update(){
+  FirebaseFirestore.instance.collection('Earnings')
+      .doc(widget.userId)
+      .collection('support')
+      .doc(Id)
+      .set({
+    "username": currentUser.displayName,
+    "userId": currentUser.id,
+    "userProfileImg": currentUser.photoUrl,
+    "mediaUrl":widget.mediaUrl,
+    "timestamp": timestamp,
+    "read": 'false',
+    "Earnings": UserDetails.currency == currentUser.currency?widget.buynowamount:userPrice,
 
+  });
+  FirebaseFirestore.instance.collection('users')
+      .doc(widget.userId)
+      .update({
+
+    "Earnings":UserDetails.Earnings + UserDetails.currency == currentUser.currency?widget.buynowamount:userPrice,
+    "TotalEarnings":UserDetails.TotalEarnings + UserDetails.currency == currentUser.currency?widget.buynowamount:userPrice,
+
+  });
+}
 
   onSuccess()async{
    FirebaseFirestore.instance.collection('feed')
@@ -191,7 +297,7 @@ if (currentUser.currency == 'EUR') {
       "read": 'false',
       'message':'You received a Support!',
     });
-    payment();
+    update();
   }
   void _handlePaymentSuccess(PaymentSuccessResponse response) {
     onSuccess();

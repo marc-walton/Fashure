@@ -742,19 +742,27 @@ var total = documentSnapshot.data()['total'];
               child: Scaffold(
                 backgroundColor: kPrimaryColor,
                 appBar: AppBar(
-                  toolbarHeight: SizeConfig.safeBlockHorizontal * 8,
+                  toolbarHeight: SizeConfig.safeBlockHorizontal * 9,
                   backgroundColor: kPrimaryColor,
                   elevation: 0,
                   bottom: TabBar(
                     isScrollable: true,
                     labelColor: Colors.white,
                     unselectedLabelColor: kIcon,
-
+                    labelStyle:TextStyle(fontFamily: "AlteroDCURegular" ),
+                    ///outline
+                    unselectedLabelStyle:TextStyle(fontFamily:"AlteroDCU" ),
                     tabs: [
-                      Text("Upcoming Payments", style: TextStyle(
-                        fontSize: SizeConfig.safeBlockHorizontal * 5,),),
-                      Text("Fulfilled Payments", style: TextStyle(
-                          fontSize: SizeConfig.safeBlockHorizontal * 5),),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Text("Upcoming Payments", style: TextStyle(
+                          fontSize: SizeConfig.safeBlockHorizontal * 5,),),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Text("Fulfilled Payments", style: TextStyle(
+                            fontSize: SizeConfig.safeBlockHorizontal * 5),),
+                      ),
 
                     ],
                   ),

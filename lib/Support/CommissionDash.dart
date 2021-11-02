@@ -1,7 +1,9 @@
+
 import 'package:bubble_tab_indicator/bubble_tab_indicator.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:currency_formatter/currency_formatter.dart';
 import 'package:fashow/ActivityFeed.dart';
+import 'package:fashow/Product_screen.dart';
 import 'package:fashow/SellerDash/SellerSettings.dart';
 import 'package:badges/badges.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -13,15 +15,15 @@ import 'package:flutter/material.dart';
 import 'package:fashow/HomePage.dart';
 import 'package:fashow/Constants.dart';
 import 'package:paginate_firestore/paginate_firestore.dart';
-class SupportDash extends StatefulWidget {
+class CommissionDash extends StatefulWidget {
   final  int selectedPage;
 
-  const SupportDash({Key key, this.selectedPage}) : super(key: key);
+  const CommissionDash({Key key, this.selectedPage}) : super(key: key);
   @override
-  _SupportDashState createState() => _SupportDashState();
+  _CommissionDashState createState() => _CommissionDashState();
 }
 
-class _SupportDashState extends State<SupportDash> {
+class _CommissionDashState extends State<CommissionDash> {
   final scaffoldKey = new GlobalKey<ScaffoldState>();
   final _formKey = GlobalKey<FormState>();
   @override
@@ -32,11 +34,14 @@ class _SupportDashState extends State<SupportDash> {
         itemBuilderType:
         PaginateBuilderType.listView,
         itemBuilder: (index, context, documentSnapshot)   {
-          String ownerId = documentSnapshot.data()['userId'];
+          String userId = documentSnapshot.data()['userId'];
+          String ownerId = documentSnapshot.data()['ownerId'];
+          String prodId = documentSnapshot.data()['prodId'];
+
           String userProfileImg = documentSnapshot.data()['userProfileImg'];
-            String username = documentSnapshot.data()['username'];
-            String mediaUrl = documentSnapshot.data()['mediaUrl'];
-            String Earnings = documentSnapshot.data()['Earnings'];
+          String username = documentSnapshot.data()['username'];
+          String mediaUrl = documentSnapshot.data()['mediaUrl'];
+          String Earnings = documentSnapshot.data()['Earnings'];
 
 
           return Padding(
@@ -65,8 +70,19 @@ class _SupportDashState extends State<SupportDash> {
                   ListTile(
 
 
-                    leading: ClipRRect(
-                        borderRadius: BorderRadius.circular(20.0),child: Container(child: CachedImage(mediaUrl,width: 60,))),
+                    leading: GestureDetector(
+                      onTap: () => Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => ProductScreen(
+                            prodId: prodId,
+                            userId: ownerId,
+                          ),
+                        ),
+                      ),
+                      child: ClipRRect(
+                          borderRadius: BorderRadius.circular(20.0),child: Container(child: CachedImage(mediaUrl,width: 60,))),
+                    ),
 
                     trailing:    currentUser.currency == "INR"? Row(
                       children: [
@@ -121,7 +137,7 @@ class _SupportDashState extends State<SupportDash> {
         },
         query:   FirebaseFirestore.instance.collection('Earnings')
             .doc(currentUser.id)
-            .collection('support')
+            .collection('Influence')
             .orderBy('timestamp',descending: true)
 
     );

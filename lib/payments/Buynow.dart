@@ -1,4 +1,5 @@
 import 'package:fashow/Constants.dart';
+import 'package:fashow/user.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fashow/HomePage.dart';
@@ -103,7 +104,7 @@ var userSizeQuantity;
   String key = 'rzp_test_Ut90sdJd5tSty5';
 
   Razorpay _razorpay;
-
+Users UserDetails;
 
   @override
   void initState() {
@@ -112,7 +113,7 @@ var userSizeQuantity;
   _razorpay.on(Razorpay.EVENT_PAYMENT_SUCCESS, _handlePaymentSuccess);
   _razorpay.on(Razorpay.EVENT_PAYMENT_ERROR, _handlePaymentError);
   _razorpay.on(Razorpay.EVENT_EXTERNAL_WALLET, _handleExternalWallet);
-
+  getUser();
   }
 
   @override
@@ -236,6 +237,10 @@ else if (currentUser.currency == 'GBP') {
   }
   }
   }
+getUser()async{
+  DocumentSnapshot doc = await usersRef.doc(TaggerId??widget.ownerId).get();
+  UserDetails = Users.fromDocument(doc);
+}
 Tagger(){
     var commission;
     var Earnings;
@@ -243,22 +248,26 @@ Tagger(){
   commission =0.03*widget.gbp:commission = 0.03*widget.usd;
     Earnings  = commission.toStringAsFixed(2);
     commission = double.tryParse(Earnings);
-  FirebaseFirestore.instance.collection('Influence')
+  FirebaseFirestore.instance.collection('Earnings')
       .doc(TaggerId)
-      .collection('InfluenceCommission')
+      .collection('Influence')
       .doc(orderId).set({
   "ownerId":widget.ownerId,
-    "prodId":widget.productname,
-
-  "shopmediaUrl" : widget.mediaUrl,
+    "prodId":widget.prodId,
+    "username": currentUser.displayName,
+    "userId": currentUser.id,
+    "userProfileImg": currentUser.photoUrl,
+    "mediaUrl":widget.mediaUrl,
+    "timestamp": timestamp,
+    "read": 'false',
     "Earnings": commission,
   });
 
   FirebaseFirestore.instance.collection('users')
       .doc(TaggerId)
       .update({
-    "Earnings": currentUser.Earnings + commission,
-"TotalEarnings": currentUser.TotalEarnings + commission,
+    "Earnings": UserDetails.Earnings + commission,
+"TotalEarnings": UserDetails.TotalEarnings + commission,
 
   });
     FirebaseFirestore.instance.collection('feed')

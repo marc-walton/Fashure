@@ -108,13 +108,15 @@ class _SellerDashState extends State<SellerDash> {
                 child: Container(
                   height: 60.0,
                   child: TabBar(
+                    labelStyle:TextStyle(fontFamily: "AlteroDCURegular" ),
+                    ///outline
+                    unselectedLabelStyle:TextStyle(fontFamily:"AlteroDCU" ),
+                    labelPadding: EdgeInsets.only(left:2,right: 8,),
+
                     isScrollable: true,
                     labelColor: Colors.white,
                     unselectedLabelColor: kIcon,
                     indicatorSize:TabBarIndicatorSize.tab,
-                    indicator:BubbleTabIndicator(indicatorHeight:40.0,
-                      indicatorColor: kblue,
-                    ),
                     tabs:[
                       FittedBox(
                         fit: BoxFit.contain,

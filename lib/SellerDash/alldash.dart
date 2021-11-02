@@ -4,7 +4,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fashow/HomePage.dart';
 import 'package:fashow/Live/dashboard/dashboard.dart';
 import 'package:fashow/SellerDash/sellerdashboard.dart';
+import 'package:fashow/Support/SupportAllDash.dart';
 import 'package:fashow/servicedash/ServiceDash.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fashow/Constants.dart';
 import 'package:fashow/size_config.dart';
@@ -156,7 +158,7 @@ getop() async {
           backgroundColor: kSecondaryColor,
           // key:  scaffoldKey,
           appBar:PreferredSize(
-            preferredSize: Size.fromHeight(100.0),
+            preferredSize: Size.fromHeight(90.0),
             child: AppBar(
               backgroundColor: kPrimaryColor,
 
@@ -172,18 +174,20 @@ getop() async {
                 ),
               ),
               bottom:  PreferredSize(
-                preferredSize: Size.fromHeight(100.0),
-                child: Container(
-                  height: 60.0,
+                preferredSize: Size.fromHeight(50.0),
+                child: Align(
+                  alignment: Alignment.centerLeft,
                   child: TabBar(
-                    ///filled
-                    labelStyle:TextStyle(fontFamily: "AlteroDCURegular" ),
-                    ///outline
-                    unselectedLabelStyle:TextStyle(fontFamily:"AlteroDCU" ),
+                    // ///filled
+                    // labelStyle:TextStyle(fontFamily: "AlteroDCURegular" ),
+                    // ///outline
+                    // unselectedLabelStyle:TextStyle(fontFamily:"AlteroDCU" ),
+                    labelPadding: EdgeInsets.only(left:2,right: 8,),
+
                     isScrollable: true,
                     labelColor: Colors.white,
-                    unselectedLabelColor: kIcon,
-
+                    unselectedLabelColor: Colors.grey,
+                    indicatorColor: trans,
                     tabs:[
                       FittedBox(
                         fit: BoxFit.contain,
@@ -206,7 +210,7 @@ FittedBox(
                         fit: BoxFit.contain,
                         child: Row(
                           children: [
-                            Text('Auction'),
+                            Text('Influence & support'),
                             auctionBadge(),
                           ],
                         ),
@@ -225,7 +229,7 @@ FittedBox(
                 children:<Widget> [
                   SellerDash(),
                   ServiceDash(),
-  AuctionDash(),
+                  EarningsDash(),
 
 
                 ]),
