@@ -262,58 +262,6 @@ class _ServicePaymentsState extends State<ServicePayments> {
 
                   ),
 
-                  total == 0? Container():Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child:
-                    currentUser.currency == "INR"? Row(
-                      children: [
-                        Text('total:',
-                          style: TextStyle(color: kText),),Spacer(),
-                        Text("${cf.format(total, CurrencyFormatter.inr)}",
-                            style: TextStyle(
-                              color: Colors.black,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 20.0,
-                            )),
-                      ],
-                    ):
-                    currentUser.currency == "EUR"?Row(
-                      children: [
-                        Text('total:',
-                          style: TextStyle(color: kText),),Spacer(),
-                        Text("${cf.format(total, CurrencyFormatter.eur)}",
-                            style: TextStyle(
-                              color: Colors.black,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 20.0,
-                            )),
-                      ],
-                    ):
-                    currentUser.currency == "GBP"?Row(
-                      children: [
-                        Text('total:',
-                          style: TextStyle(color: kText),),Spacer(),
-                        Text("${cf.format(total, CurrencyFormatter.gbp)}",
-                            style: TextStyle(
-                              color: Colors.black,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 20.0,
-                            )),
-                      ],
-                    ):
-                    Row(
-                      children: [
-                        Text('total:',
-                          style: TextStyle(color: kText),),Spacer(),
-                        Text("${cf.format(total, CurrencyFormatter.usd)}",
-                            style: TextStyle(
-                              color: Colors.black,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 20.0,
-                            )),
-                      ],
-                    ),
-                  ),
 
                   Padding(
                     padding: const EdgeInsets.all(8.0),
@@ -552,6 +500,41 @@ class _ServicePaymentsState extends State<ServicePayments> {
                                 )),
                           ],
                         ),
+
+                      ],
+                    ),
+                  ),
+                  total == 0? Container():  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Row(
+                      children: [
+                        Text('Total:',
+                          style: TextStyle(color: kText),),
+                        Spacer(),
+                        currentUser.currency == "INR"? Text("${cf.format(total, CurrencyFormatter.inr)}",
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 20.0,
+                            )):
+                        currentUser.currency == "EUR"?Text("${cf.format(total, CurrencyFormatter.eur)}",
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 20.0,
+                            )):
+                        currentUser.currency == "GBP"?Text("${cf.format(total, CurrencyFormatter.gbp)}",
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 20.0,
+                            )):
+                        Text("${cf.format(total, CurrencyFormatter.usd)}",
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 20.0,
+                            )),
 
                       ],
                     ),

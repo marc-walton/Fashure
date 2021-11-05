@@ -67,7 +67,8 @@ class _SellerDashState extends State<SellerDash> {
   }
    ord()  {
 
-    return  Badge(
+    return       shop == 0 ? Container():
+    Badge(
       shape: BadgeShape.circle,
       padding: EdgeInsets.all(7),
       badgeContent: Text('$shop ',style: TextStyle(color: kText),),
@@ -75,7 +76,8 @@ class _SellerDashState extends State<SellerDash> {
   }
   pay()  {
 
-    return  Badge(
+    return        shoppay == 0 ? Container():
+    Badge(
       shape: BadgeShape.circle,
       padding: EdgeInsets.all(7),
       badgeContent: Text('$shoppay ',style: TextStyle(color: kText),),

@@ -277,7 +277,7 @@ String productname = documentSnapshot.data()['productname'];
                               primary:  Colors.black, ),
                             onPressed:(){
                               submit(orderId:orderId ,ownerId: ownerId,shopmediaUrl:shopmediaUrl,prodId:prodId,cusId:cusId);},
-                            child:  Text('Accept order',
+                            child:  Text('Process order',
                               style: TextStyle(color: Colors.white),),)):Container(),
                           fulfilled=='false'?   Center(child: ElevatedButton(
                             style: ElevatedButton.styleFrom(

@@ -1,5 +1,6 @@
 
 
+import 'package:fashow/chatcached_image.dart';
 import 'package:timeago/timeago.dart' as timeago;
 
 import 'package:cached_network_image/cached_network_image.dart';
@@ -46,7 +47,7 @@ class ResaleCommentsState extends State<ResaleComments> {
   buildResaleComments() {
     return StreamBuilder(
       stream: resalecommentsRef
-          .doc(postId)
+          .doc(currentUser.id)
           .collection('comments')
           .orderBy("timestamp", descending: false)
           .snapshots(),
@@ -67,12 +68,14 @@ class ResaleCommentsState extends State<ResaleComments> {
   }
 
   addComment() {
-    resalecommentsRef.doc(postId).collection("comments").add({
+    resalecommentsRef.doc(currentUser.id).collection("comments").add({
       "username": currentUser.displayName,
       "comment": commentController.text,
       "timestamp": timestamp,
       "avatarUrl": currentUser.photoUrl,
-      "userId": currentUser.id
+      "userId": currentUser.id,
+      "postId":postId,
+      "postMediaUrl":postMediaUrl,
     });
     bool isNotPostOwner = postOwnerId != currentUser.id;
     if (isNotPostOwner) {
@@ -144,13 +147,17 @@ class Comment extends StatelessWidget {
   final String userId;
   final String avatarUrl;
   final String comment;
+    final String postMediaUrl;
+
   final Timestamp timestamp;
 
   Comment({
     this.username,
     this.userId,
     this.avatarUrl,
-    this.comment,
+    this.postMediaUrl,
+      this.comment,
+
     this.timestamp,
   });
 
@@ -161,6 +168,8 @@ class Comment extends StatelessWidget {
       comment: doc.data()['comment'],
       timestamp: doc.data()['timestamp'],
       avatarUrl: doc.data()['avatarUrl'],
+      postMediaUrl: doc.data()['postMediaUrl'],
+
     );
   }
 
@@ -172,12 +181,14 @@ class Comment extends StatelessWidget {
           children: <Widget>[
             ListTile(
               title: Text(comment,style: TextStyle(color: kText),),
+
               leading: CircleAvatar(
                 backgroundImage: CachedNetworkImageProvider(avatarUrl),
               ),
               subtitle: Text(
                 timeago.format(timestamp.toDate()),style: TextStyle(color: kSubtitle),
               ),
+              trailing: CachedImage(postMediaUrl),
             ),
             Divider(),
           ],

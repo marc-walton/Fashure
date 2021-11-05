@@ -4,7 +4,9 @@ import 'package:currency_formatter/currency_formatter.dart';
 import 'package:fashow/SellerDash/SellerSettings.dart';
 import 'package:badges/badges.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:fashow/Support/CommissionDash.dart';
 import 'package:fashow/Support/SupportDash.dart';
+import 'package:fashow/Support/SupportPayments.dart';
 import 'package:fashow/enum/Variables.dart';
 import 'package:fashow/servicedash/ServiceORDERS.dart';
 import 'package:fashow/servicedash/Payments_service.dart';
@@ -46,9 +48,9 @@ class _EarningsDashState extends State<EarningsDash> {
   }
 
   gets() async {
-    QuerySnapshot snapshot = await FirebaseFirestore.instance.collection('serviceSeller')
+    QuerySnapshot snapshot = await  FirebaseFirestore.instance.collection('Earnings')
         .doc(currentUser.id)
-        .collection('sellerService')
+        .collection('support')
         .where('read',isEqualTo: 'false')
         .get();
     setState(() {
@@ -56,10 +58,9 @@ class _EarningsDashState extends State<EarningsDash> {
     });
   }
   getsp() async {
-    QuerySnapshot snapshot = await  FirebaseFirestore.instance.collection('Payments')
+    QuerySnapshot snapshot = await  FirebaseFirestore.instance.collection('Earnings')
         .doc(currentUser.id)
-        .collection('ServicePayments')
-        .where('fulfilled',isEqualTo: 'true')
+        .collection('Influence')
         .where('read',isEqualTo: 'false')
         .get();
     setState(() {
@@ -67,20 +68,49 @@ class _EarningsDashState extends State<EarningsDash> {
     });
 
   }
+   getCashOut() async {
+    QuerySnapshot snapshot = await FirebaseFirestore.instance.collection('Payments')
+        .doc(currentUser.id,)
+        .collection('CommissionPayments')
+        .where('fulfilled',isEqualTo: 'true')
+        .where('read',isEqualTo: 'false')
+        .get();
+    setState(() {
+      data = snapshot.docs.length ?? 0;
+    });
+
+  }
+
   s()  {
 
-    return  Badge(
-      shape: BadgeShape.circle,
-      padding: EdgeInsets.all(7),
-      badgeContent: Text('$ser ',style: TextStyle(color: Colors.white),),
-    ); }
+    return
+      ser == 0 ? Container():
+      Badge(
+        shape: BadgeShape.circle,
+        padding: EdgeInsets.all(7),
+        badgeContent: Text('$ser ',style: TextStyle(color: Colors.white),),
+      ); }
   p()  {
 
-    return  Badge(
-      shape: BadgeShape.circle,
-      padding: EdgeInsets.all(7),
-      badgeContent: Text('$serpay ',style: TextStyle(color:  Colors.white),),
-    );
+    return
+      serpay == 0 ? Container():
+
+      Badge(
+        shape: BadgeShape.circle,
+        padding: EdgeInsets.all(7),
+        badgeContent: Text('$serpay ',style: TextStyle(color:  Colors.white),),
+      );
+  }
+ Co()  {
+
+    return
+      data == 0 ? Container():
+
+      Badge(
+        shape: BadgeShape.circle,
+        padding: EdgeInsets.all(7),
+        badgeContent: Text('$data ',style: TextStyle(color:  Colors.white),),
+      );
   }
 
   cashOut(){
@@ -113,7 +143,7 @@ class _EarningsDashState extends State<EarningsDash> {
     return DefaultTabController(
       initialIndex:widget.selectedPage ?? 0,
 
-      length:3,
+      length:4,
       child: Scaffold(
         backgroundColor: kSecondaryColor,
         key:  scaffoldKey,
@@ -259,12 +289,22 @@ class _EarningsDashState extends State<EarningsDash> {
                           s(),
                         ],
                       ),
-                    ),FittedBox(
+                    ),
+                    FittedBox(
                       fit: BoxFit.contain,
                       child: Row(
                         children: [
                           Text('Influence'),
                           p(),
+                        ],
+                      ),
+                    ),
+FittedBox(
+                      fit: BoxFit.contain,
+                      child: Row(
+                        children: [
+                          Text('Withdrawals'),
+                          Co(),
                         ],
                       ),
                     ),
@@ -283,7 +323,8 @@ class _EarningsDashState extends State<EarningsDash> {
         TabBarView(
             children:<Widget> [
               SupportDash(),
-              ServicePayments(),
+              CommissionDash(),
+              CommissionPayments(),
               SellerSetting(),
             ]),
 

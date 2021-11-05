@@ -61,14 +61,19 @@ class _ServiceDashState extends State<ServiceDash> {
   }
  s()  {
 
-    return  Badge(
+    return
+      ser == 0 ? Container():
+      Badge(
       shape: BadgeShape.circle,
       padding: EdgeInsets.all(7),
       badgeContent: Text('$ser ',style: TextStyle(color: Colors.white),),
     ); }
 p()  {
 
-    return  Badge(
+    return
+      serpay == 0 ? Container():
+
+      Badge(
       shape: BadgeShape.circle,
       padding: EdgeInsets.all(7),
       badgeContent: Text('$serpay ',style: TextStyle(color:  Colors.white),),

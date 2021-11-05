@@ -196,7 +196,6 @@ isLive: true,
 
             var paymentPercent = documentSnapshot.data()['paymentPercent'];
             var conversionPercent = documentSnapshot.data()['conversionPercent'];
-            var totalC = documentSnapshot.data()['totalC'];
 var shipcostuser = documentSnapshot.data()['shipcostuser'];
 var customprice = documentSnapshot.data()['customprice'];
 var total = documentSnapshot.data()['total'];
@@ -333,58 +332,6 @@ var total = documentSnapshot.data()['total'];
                             Text('shipping:',
                               style: TextStyle(color: kText),),Spacer(),
                             Text("${cf.format(shipcostuser, CurrencyFormatter.usd)}",
-                                style: TextStyle(
-                                  color: Colors.black,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 20.0,
-                                )),
-                          ],
-                        ),
-                      ),
- total == 0? Container():Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child:
-                        currentUser.currency == "INR"? Row(
-                          children: [
-                            Text('total:',
-                              style: TextStyle(color: kText),),Spacer(),
-                            Text("${cf.format(total, CurrencyFormatter.inr)}",
-                                style: TextStyle(
-                                  color: Colors.black,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 20.0,
-                                )),
-                          ],
-                        ):
-                        currentUser.currency == "EUR"?Row(
-                          children: [
-                            Text('total:',
-                              style: TextStyle(color: kText),),Spacer(),
-                            Text("${cf.format(total, CurrencyFormatter.eur)}",
-                                style: TextStyle(
-                                  color: Colors.black,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 20.0,
-                                )),
-                          ],
-                        ):
-                        currentUser.currency == "GBP"?Row(
-                          children: [
-                            Text('total:',
-                              style: TextStyle(color: kText),),Spacer(),
-                            Text("${cf.format(total, CurrencyFormatter.gbp)}",
-                                style: TextStyle(
-                                  color: Colors.black,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 20.0,
-                                )),
-                          ],
-                        ):
-                        Row(
-                          children: [
-                            Text('total:',
-                              style: TextStyle(color: kText),),Spacer(),
-                            Text("${cf.format(total, CurrencyFormatter.usd)}",
                                 style: TextStyle(
                                   color: Colors.black,
                                   fontWeight: FontWeight.bold,
@@ -635,74 +582,37 @@ var total = documentSnapshot.data()['total'];
                         ],
                       ),
                     ),
-                  Padding(
+                      total == 0? Container():  Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Row(
                         children: [
-                          currentUser.currency == "INR"? Row(
-                            children: [
-                              Row(
-                                children: [
-                                  Text('subtotal:',
-                                    style: TextStyle(color: kText),),
-                                ],
-                              ),Spacer(),
-                              Text("${cf.format(totalC, CurrencyFormatter.inr)}",
-                                  style: TextStyle(
-                                    color: Colors.black,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 20.0,
-                                  )),
-                            ],
-                          ):
-                          currentUser.currency == "EUR"?Row(
-                            children: [
-                              Row(
-                                children: [
-                                  Text('subtotal:',
-                                    style: TextStyle(color: kText),),
-                                ],
-                              ),Spacer(),
-                              Text("${cf.format(totalC, CurrencyFormatter.eur)}",
-                                  style: TextStyle(
-                                    color: Colors.black,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 20.0,
-                                  )),
-                            ],
-                          ):
-                          currentUser.currency == "GBP"?Row(
-                            children: [
-                              Row(
-                                children: [
-                                  Text('subtotal:',
-                                    style: TextStyle(color: kText),),
-                                ],
-                              ),Spacer(),
-                              Text("${cf.format(totalC, CurrencyFormatter.gbp)}",
-                                  style: TextStyle(
-                                    color: Colors.black,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 20.0,
-                                  )),
-                            ],
-                          ):
-                          Row(
-                            children: [
-                              Row(
-                                children: [
-                                  Text('subtotal:',
-                                    style: TextStyle(color: kText),),
-                                ],
-                              ),Spacer(),
-                              Text("${cf.format(totalC, CurrencyFormatter.usd)}",
-                                  style: TextStyle(
-                                    color: Colors.black,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 20.0,
-                                  )),
-                            ],
-                          ),
+                          Text('Total:',
+                            style: TextStyle(color: kText),),
+                          Spacer(),
+                          currentUser.currency == "INR"? Text("${cf.format(total, CurrencyFormatter.inr)}",
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 20.0,
+                              )):
+                          currentUser.currency == "EUR"?Text("${cf.format(total, CurrencyFormatter.eur)}",
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 20.0,
+                              )):
+                          currentUser.currency == "GBP"?Text("${cf.format(total, CurrencyFormatter.gbp)}",
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 20.0,
+                              )):
+                          Text("${cf.format(total, CurrencyFormatter.usd)}",
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 20.0,
+                              )),
 
                         ],
                       ),

@@ -74,6 +74,7 @@ class _ChatScreenState extends State<ChatScreen> {
 
   ImageUploadProvider _imageUploadProvider;
 bool model;
+bool artisan;
 bool Designer;
   bool Illustrator;
   bool Stylist;
@@ -173,8 +174,8 @@ bool Designer;
             ),
             actions: <Widget>[
 
-              model == true|| Photographer == true|| Stylist == true|| Designer == true|| Hair == true || Makeup == true || Illustrator == true || Choreographer == true ?
-              RaisedButton(color:kblue,
+              model == true||   artisan == true|| Photographer == true|| Stylist == true|| Designer == true|| Hair == true || Makeup == true || Illustrator == true || Choreographer == true ?
+              ElevatedButton(
                   child:  Text("Create order",style: TextStyle(color: Colors.white),),onPressed: (){ Navigator.push(
                 context,
                 MaterialPageRoute(
@@ -357,10 +358,10 @@ bool Designer;
     );
   }
   Addorder(){
-    if(model == 'true' || Photographer == 'true' || Stylist == 'true' || Designer == 'true' || Hair == "true" || Makeup == 'true' || Illustrator == 'true' || Choreographer == 'true' )
+    if(model == 'true' ||artisan == 'true' || Photographer == 'true' || Stylist == 'true' || Designer == 'true' || Hair == "true" || Makeup == 'true' || Illustrator == 'true' || Choreographer == 'true' )
       {
         return
-        RaisedButton(child:  Text("Create order",style: TextStyle(color: kText),),onPressed: (){ Navigator.push(
+        ElevatedButton(child:  Text("Create order",style: TextStyle(color: kText),),onPressed: (){ Navigator.push(
           context,
           MaterialPageRoute(
             builder: (context) =>
@@ -399,6 +400,7 @@ model = doc.data()['model'] ?? false;
           Photographer = doc.data()['photographer'] ?? false;
           Stylist = doc.data()['stylist'] ?? false;
           Designer = doc.data()['designer'] ?? false;
+ artisan = doc.data()['artisan'] ?? false;
 
       print('Activity Feed Item: $Illustrator');
 

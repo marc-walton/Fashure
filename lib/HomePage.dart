@@ -365,15 +365,11 @@ class _HomepageState extends State<Homepage> with WidgetsBindingObserver {
         stream:  activityFeedRef
             .doc(currentUser.id)
             .collection('feedItems')
-            .where('read',isEqualTo: 'false').snapshots(),
+            .where('read',isEqualTo: 'false')
+            .snapshots(),
         builder: (context,snapshot){
-          if(!snapshot.hasData){
             if(snapshot.data==null){
-              return Badge(
-                shape: BadgeShape.circle,
-                padding: EdgeInsets.all(7),
-                badgeContent: Text('0',style: TextStyle(color: Colors.white),),
-              );
+              return Container();
 
             }
             else {
@@ -389,15 +385,6 @@ class _HomepageState extends State<Homepage> with WidgetsBindingObserver {
 
             }
 
-          }
-          else {
-            return Badge(
-              shape: BadgeShape.circle,
-              padding: EdgeInsets.all(7),
-              badgeContent: Text('0',style: TextStyle(color: Colors.white),),
-            );
-          }
-
         },
       );
 
@@ -405,31 +392,24 @@ class _HomepageState extends State<Homepage> with WidgetsBindingObserver {
   badgescountmessage()  {
     return
       StreamBuilder(
-        stream: _messageCollection
+        stream:FirebaseFirestore.instance.collection('feed')
             .doc(currentUser.id)
+            .collection('feedItems')
+            .where('type',isEqualTo: 'Chat')
+        .where('read',isEqualTo: 'false')
 
             .snapshots(),
         builder: (context,snapshot){
-          if(!snapshot.hasData)
-          {
+
             if(snapshot.data==null){
-              return Badge(
-                shape: BadgeShape.circle,
-                padding: EdgeInsets.all(7),
-                badgeContent: Text('0',style: TextStyle(color: Colors.white),),
-              );
+              return Container();
 
             }
             else
             {
-              print("dev f fd");
+              data +=  snapshot.data.docs.length;
 
-              String messages = snapshot.data['read'];
-              if(messages == 'false');
-              {
-                setState(() {
-                  data  += messages.length;
-                });
+
                 return
 
                   Badge(
@@ -439,13 +419,6 @@ class _HomepageState extends State<Homepage> with WidgetsBindingObserver {
                   );
               }
 
-            }
-          }
-          else{    return Badge(
-            shape: BadgeShape.circle,
-            padding: EdgeInsets.all(7),
-            badgeContent: Text('0',style: TextStyle(color: Colors.white),),
-          );}
 
         },
       );

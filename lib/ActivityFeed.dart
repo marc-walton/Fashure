@@ -89,37 +89,22 @@ class  _ActivityFeedState extends State<ActivityFeed>  with  TickerProviderState
             .collection('feedItems')
             .where('read',isEqualTo: 'false').snapshots(),
         builder: (context,snapshot){
-          if(!snapshot.hasData){
-            if(snapshot.data==null){
-              return Badge(
-                shape: BadgeShape.circle,
-                padding: EdgeInsets.all(7),
-                badgeContent: Text('0',style: TextStyle(color: Colors.white),),
-              );
 
+          if(snapshot.data==null){
+return Container();
             }
             else {
-              data +=  snapshot.data.docs.length;
+            data += snapshot.data.docs.length;
 
               return
                 Badge(
 
                   shape: BadgeShape.circle,
                   padding: EdgeInsets.all(2),
-                  badgeContent: Text('$data',style: TextStyle(color: Colors.white),),
+                  badgeContent: Text(
+                    '$data', style: TextStyle(color: Colors.white),),
                 );
-
             }
-
-          }
-          else {
-            return Badge(
-              shape: BadgeShape.circle,
-              padding: EdgeInsets.all(7),
-              badgeContent: Text('0',style: TextStyle(color: Colors.white),),
-            );
-          }
-
         },
       );
 
@@ -127,47 +112,33 @@ class  _ActivityFeedState extends State<ActivityFeed>  with  TickerProviderState
   badgescountmessage()  {
     return
       StreamBuilder(
-        stream: _messageCollection
+        stream:FirebaseFirestore.instance.collection('feed')
             .doc(currentUser.id)
+            .collection('feedItems')
+            .where('type',isEqualTo: 'Chat')
+            .where('read',isEqualTo: 'false')
 
             .snapshots(),
         builder: (context,snapshot){
-          if(!snapshot.hasData)
+
+          if(snapshot.data==null){
+            return Container();
+
+          }
+          else
           {
-            if(snapshot.data==null){
-              return Badge(
+            data +=  snapshot.data.docs.length;
+
+
+            return
+
+              Badge(
                 shape: BadgeShape.circle,
                 padding: EdgeInsets.all(7),
-                badgeContent: Text('0',style: TextStyle(color: Colors.white),),
+                badgeContent: Text('$data',style: TextStyle(color: Colors.white),),
               );
-
-            }
-            else
-            {
-              print("dev f fd");
-
-              String messages = snapshot.data['read'];
-              if(messages == 'false');
-              {
-                setState(() {
-                  data  += messages.length;
-                });
-                return
-
-                  Badge(
-                    shape: BadgeShape.circle,
-                    padding: EdgeInsets.all(7),
-                    badgeContent: Text('$data',style: TextStyle(color: Colors.white),),
-                  );
-              }
-
-            }
           }
-          else{    return Badge(
-            shape: BadgeShape.circle,
-            padding: EdgeInsets.all(7),
-            badgeContent: Text('0',style: TextStyle(color: Colors.white),),
-          );}
+
 
         },
       );
@@ -176,11 +147,8 @@ class  _ActivityFeedState extends State<ActivityFeed>  with  TickerProviderState
   dashbadge(){
 
     if(serdata == null||data == null) {
-      return  Badge(
-        shape: BadgeShape.circle,
-        padding: EdgeInsets.all(7),
-        badgeContent: Text('0', style: TextStyle(color: Colors.white),),
-      );
+      return Container();
+
     }else{
       var sum = serdata + data;
       return
@@ -221,24 +189,16 @@ class  _ActivityFeedState extends State<ActivityFeed>  with  TickerProviderState
                           '$data ', style: TextStyle(color: Colors.white),),
                       );
                   }
-                  else {return
-                    Badge(
-                      shape: BadgeShape.circle,
-                      padding: EdgeInsets.all(7),
-                      badgeContent: Text(
-                        '$data ', style: TextStyle(color: Colors.white),),
-                    );
+                  else {
+                    return Container();
+
                   }
                 },
               );
           }
           else {
-            return Badge(
-              shape: BadgeShape.circle,
-              padding: EdgeInsets.all(7),
-              badgeContent: Text(
-                '0 ', style: TextStyle(color: Colors.white),),
-            );
+            return Container();
+
           }
 
         },
@@ -277,24 +237,14 @@ class  _ActivityFeedState extends State<ActivityFeed>  with  TickerProviderState
                       );
                   }
                   else{
-                    return
-                    Badge(
-                      shape: BadgeShape.circle,
-                      padding: EdgeInsets.all(7),
-                      badgeContent: Text(
-                        '$serdata ', style: TextStyle(color: Colors.white),),
-                    );
+                    return Container();
+
                   }
                 },
               );
           }
           else{
-            return  Badge(
-              shape: BadgeShape.circle,
-              padding: EdgeInsets.all(7),
-              badgeContent: Text(
-                '0 ', style: TextStyle(color: Colors.white),),
-            );
+            return Container();
           }
         },
       );

@@ -44,6 +44,10 @@ class Prod extends StatefulWidget {
   final String prodId;
   final String ownerId;
   final String username;
+   final String sizeChart;
+
+  final bool sizechartBool;
+  
    var eur;
    var usd;
    var inr;
@@ -413,6 +417,8 @@ this.shipcostinr,
 this.shipcosteur,
 this.shipcostintergbp,
 this.shipcostgbp,
+this.sizechartBool,
+this.sizeChart,
 
 this.country,
     this.variation1,
@@ -757,6 +763,8 @@ worldship: doc.data()['worldship'],
 freeworldship: doc.data()['freeworldship'],
 freeship: doc.data()['freeship'],
       country: doc.data()['country'],
+      sizechartBool: doc.data()['sizechartBool'],
+      sizeChart: doc.data()['sizeChart'],
 
      eur: doc.data()['eur'],
       usd: doc.data()['usd'],
@@ -1131,6 +1139,8 @@ freeship: doc.data()['freeship'],
     ownerId: this.ownerId,
     username: this.username,
     eur:this.eur,
+    sizechartBool:this.sizechartBool,
+    
     usd:this.usd,
     inr:this.inr,
     cny: this.cny,
@@ -1148,6 +1158,7 @@ freeship: doc.data()['freeship'],
     shipcosteur:this.shipcosteur,
     shipcostintergbp:this.shipcostintergbp,
     shipcostgbp:this.shipcostgbp,
+    sizeChart:this.sizeChart,
 
 country:this.country,
 currency:this.currency,
@@ -1510,10 +1521,13 @@ String currencysymbol;
    final String gender;
  final String shipment;
   final String country;
+  final String sizeChart;
 
 final bool worldship;
 final bool freeworldship;
 final bool freeship;
+final bool sizechartBool;
+
 //
 //   final String custom1img;
 //   final String custom2img;
@@ -1891,6 +1905,8 @@ this.shipcostinr,
 this.shipcosteur,
 this.shipcostintergbp,
 this.shipcostgbp,
+this.sizechartBool,
+this.sizeChart,
 
 this.country,
 this.currency,
@@ -9270,6 +9286,9 @@ elevation : 0.1,
 
   }
   Widget sizeGuide(){
+    sizechartBool? userSizeGuide():standardSizeGuide();
+  }
+  Widget standardSizeGuide(){
 
     if(gender=='Men'){
       showDialog<void>(
@@ -9591,6 +9610,30 @@ elevation : 0.1,
       );
     }
 
+  }
+  Widget userSizeGuide(){
+      showDialog<void>(
+        context: context,
+        // useRootNavigator:true,
+
+        barrierDismissible: true,
+        // false = user must tap button, true = tap outside dialog
+        builder: (BuildContext dialogContext) {
+          return
+            Dialog(
+
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(20),),
+              child:
+              Center(
+                child:        Container(
+                  child:PhotoView(imageProvider: CachedNetworkImageProvider
+                    (sizeChart)),),
+              ),
+
+            );
+        },
+      );
   }
 
   reviews() {
