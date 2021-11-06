@@ -1269,7 +1269,6 @@ shipBool = currentUser.country == country?freeship:freeworldship;
                                     String name = documentSnapshot.data()['name'];
                                     String img = documentSnapshot.data()['img'];
 
-                                  var offer =   documentSnapshot.data()['offer'];
  var usd =   documentSnapshot.data()['usd'];
  var inr =   documentSnapshot.data()['inr'];
  var gbp =   documentSnapshot.data()['gbp'];
@@ -1280,58 +1279,64 @@ bool accepted = documentSnapshot.data()['accepted'];
                                     padding: const EdgeInsets.all(8.0),
                                     child: Column(
                                       children: <Widget>[
-                                        GestureDetector(
-                                          onTap: () => showProfile(context, profileId: ownerId),
-                                          child: ListTile(
-                                            leading: CircleAvatar(
+                                        ListTile(
+                                          leading:        GestureDetector(
+                                            onTap: () => showProfile(context, profileId: ownerId),
+                                            child: CircleAvatar(
                                               backgroundImage: CachedNetworkImageProvider(img),
                                               backgroundColor: Colors.grey,
                                             ),
-                                            title: Text(
+                                          ),
+                                          title:        GestureDetector(
+                                            onTap: () => showProfile(context, profileId: ownerId),
+                                            child: Text(
                                               name,
                                               style: TextStyle(
                                                 color: kText,
                                                 fontWeight: FontWeight.bold,
                                               ),
                                             ),
-                                            subtitle:        currentUser.currency == "INR"? Text("${cf.format(inr, CurrencyFormatter.inr)}",
-                                                ):
-                                            currentUser.currency == "EUR"?Text("${cf.format(eur, CurrencyFormatter.eur)}",
-                                                ):
-                                            currentUser.currency == "GBP"?Text("${cf.format(gbp, CurrencyFormatter.gbp)}",
-                                                ):Text("${cf.format(usd, CurrencyFormatter.usd)}",
-                                                    ) ,
-                                            trailing:isPostOwner?             TextButton(
-
-                                                child:Text("Accept")
-                                            ):
-                                           accepted? TextButton(
-                                                onPressed:() async{await addingToList();
-                                                Navigator.push(
-                                                  context,
-                                                  MaterialPageRoute(
-                                                    builder: (context) => AddressResale(
-                                                      OwnerId:OwnerId,
-                                                      resaleId:ResaleId ,
-                                                      profileimg: profileimg,
-                                                      username: Username,
-                                                      images:Images,
-                                                      title:Title,
-                                                      country:Country,
-                                                      size:Size,
-                                                      shipcost:shipcost,
-                                                      usd:Usd,
-                                                      eur:Eur,
-                                                      gbp:Gbp,
-                                                      inr:Inr,
-                                                      ship: ship,
-                                                    ),
-                                                  ),
-                                                );},
-                                                child:Text("Buy Now")
-                                            ):Container(),
-
                                           ),
+                                          subtitle:        currentUser.currency == "INR"? Text("${cf.format(inr, CurrencyFormatter.inr)}",
+                                              ):
+                                          currentUser.currency == "EUR"?Text("${cf.format(eur, CurrencyFormatter.eur)}",
+                                              ):
+                                          currentUser.currency == "GBP"?Text("${cf.format(gbp, CurrencyFormatter.gbp)}",
+                                              ):Text("${cf.format(usd, CurrencyFormatter.usd)}",
+                                                  ) ,
+                                          trailing:isPostOwner?             TextButton(
+onPressed:(){FirebaseFirestore.instance.collection('Resale')
+    .doc(ownerId)
+    .collection('userResale').doc(resaleId) .collection('offers').doc(ownerId).update(
+    {"accepted":true});},
+                                              child:Text("Accept")
+                                          ):
+                                         accepted? TextButton(
+                                              onPressed:() async{await addingToList();
+                                              Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                  builder: (context) => AddressResale(
+                                                    OwnerId:OwnerId,
+                                                    resaleId:ResaleId ,
+                                                    profileimg: profileimg,
+                                                    username: Username,
+                                                    images:Images,
+                                                    title:Title,
+                                                    country:Country,
+                                                    size:Size,
+                                                    shipcost:shipcost,
+                                                    usd:Usd,
+                                                    eur:Eur,
+                                                    gbp:Gbp,
+                                                    inr:Inr,
+                                                    ship: ship,
+                                                  ),
+                                                ),
+                                              );},
+                                              child:Text("Buy Now")
+                                          ):Container(),
+
                                         ),
 
                                       ],
