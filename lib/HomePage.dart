@@ -368,7 +368,7 @@ class _HomepageState extends State<Homepage> with WidgetsBindingObserver {
             .where('read',isEqualTo: 'false')
             .snapshots(),
         builder: (context,snapshot){
-            if(snapshot.data==null){
+            if(snapshot.data.docs.length == 0){
               return Container();
 
             }

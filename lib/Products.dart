@@ -9645,7 +9645,7 @@ elevation : 0.1,
 
           return  PaginateFirestore(
 isLive: true,
-              emptyDisplay: Center(child: Text("Nothing reviews",style: TextStyle(
+              emptyDisplay: Center(child: Text("No reviews",style: TextStyle(
                 fontWeight: FontWeight.bold,
               ),)),
               itemBuilderType:

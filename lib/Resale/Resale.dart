@@ -14,10 +14,12 @@ import 'package:fashow/Categories/Women/Women.dart';
 import 'package:fashow/Live/Live.dart';
 import 'package:fashow/Live/upload_bid.dart';
 import 'package:fashow/Resale/addressResale.dart';
+import 'package:fashow/Resale/resaleCommenrs.dart';
 import 'package:fashow/Resale/upload_resale.dart';
 import 'package:fashow/chatcached_image.dart';
 import 'package:fashow/enum/Variables.dart';
 import 'package:fashow/fav.dart';
+import 'package:fashow/progress.dart';
 import 'package:fashow/size_config.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/cupertino.dart';
@@ -25,6 +27,7 @@ import 'package:bubble_tab_indicator/bubble_tab_indicator.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:fashow/user.dart';
+import 'package:flutter_currencies_tracker/currency.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 
@@ -36,6 +39,7 @@ import 'package:fashow/Constants.dart';
 import 'package:getwidget/components/toggle/gf_toggle.dart';
 import 'package:getwidget/types/gf_toggle_type.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'package:paginate_firestore/paginate_firestore.dart';
 import 'package:photo_view/photo_view.dart';
 
 final List<String> cartNumbers = [
@@ -207,6 +211,8 @@ class Resale extends StatefulWidget {
 }
 
 class _ResaleState extends State<Resale> {
+  TextEditingController offerController = TextEditingController();
+
   final String condition;
   final String ownerId;
   final String username;
@@ -242,7 +248,12 @@ class _ResaleState extends State<Resale> {
   var shipinterfrom;
   var shipinterto;
    var shipcostuser;
-
+  final _formKey = GlobalKey<FormState>();
+  var price;
+  var USD;
+  var GBP;
+  var EUR;
+  var INR;
   final String currentUserId = currentUser?.id;
   List<String> OwnerId  = [];
   List<String> Amount  = [];
@@ -265,6 +276,8 @@ class _ResaleState extends State<Resale> {
   int likeCount;
   Map likes;
   bool isLiked;
+  bool loading;
+  
   bool showHeart = false;
   List <Widget>listOfImages = <Widget>[];
   String media;
@@ -599,6 +612,165 @@ shipBool = currentUser.country == country?freeship:freeworldship;
       "postId": resaleId,
       "timestamp": timestamp,
     });
+  }
+  void INRUSD() async {
+    var I;
+    var E;
+    var G;
+    var U;
+
+
+    setState(() {
+      loading = true;
+      price = double.tryParse(offerController.text ?? "0.0");
+
+
+    });
+    if(currentUser.currency == "INR") {
+      var resultUSD = await Currency.getConversion(
+          from: 'INR', to: 'USD', amount: offerController.text ?? 0);
+      var resultEUR = await Currency.getConversion(
+          from: 'INR', to: 'EUR', amount: offerController.text ?? 0);
+      var resultGBP = await Currency.getConversion(
+          from: 'INR', to: 'GBP', amount: offerController.text ?? 0);
+    
+
+      setState(() {
+        INR = price ?? 0.001;
+        USD = resultUSD.rate ?? 0.001;
+        EUR = resultEUR.rate ?? 0.001;
+        GBP = resultGBP.rate ?? 0.001;
+      
+
+        I = INR.toStringAsFixed(2);
+        INR = double.tryParse(I);
+      
+        U = USD.toStringAsFixed(2);
+        USD = double.tryParse(U);
+     
+        E = EUR.toStringAsFixed(2);
+        EUR = double.tryParse(E);
+
+        G = GBP.toStringAsFixed(2);
+        GBP = double.tryParse(G);
+      
+      }); }
+    else if(currentUser.currency == "EUR") {
+      var resultUSD = await Currency.getConversion(
+          from: 'EUR', to: 'USD', amount: offerController.text ?? 0);
+      var resultINR = await Currency.getConversion(
+          from: 'EUR', to: 'INR', amount: offerController.text ?? 0);
+      var resultGBP = await Currency.getConversion(
+          from: 'EUR', to: 'GBP', amount: offerController.text ?? 0);
+     
+      setState(() {
+        INR =  resultINR.rate?? 0.001;
+        USD = resultUSD.rate ?? 0.001;
+        EUR = price ?? 0.001;
+        GBP = resultGBP.rate ?? 0.001;
+ 
+        I = INR.toStringAsFixed(2);
+        INR = double.tryParse(I);
+       
+
+        U = USD.toStringAsFixed(2);
+        USD = double.tryParse(U);
+       
+
+        E = EUR.toStringAsFixed(2);
+        EUR = double.tryParse(E);
+        
+
+        G = GBP.toStringAsFixed(2);
+        GBP = double.tryParse(G);
+        
+
+      }); }
+    else if(currentUser.currency == "GBP") {
+      var resultUSD = await Currency.getConversion(
+          from: 'GBP', to: 'USD', amount: offerController.text ?? 0);
+      var resultINR = await Currency.getConversion(
+          from: 'GBP', to: 'INR', amount: offerController.text ?? 0);
+      var resultEUR = await Currency.getConversion(
+          from: 'GBP', to: 'EUR', amount: offerController.text ?? 0);
+
+      setState(() {
+        INR =  resultINR.rate?? 0.001;
+        USD = resultUSD.rate ?? 0.001;
+        EUR = resultEUR.rate  ?? 0.001;
+        GBP =  price ?? 0.001;
+
+
+        I = INR.toStringAsFixed(2);
+        INR = double.tryParse(I);
+       
+
+        U = USD.toStringAsFixed(2);
+        USD = double.tryParse(U);
+       
+
+        E = EUR.toStringAsFixed(2);
+        EUR = double.tryParse(E);
+        
+
+        G = GBP.toStringAsFixed(2);
+        GBP = double.tryParse(G);
+        
+
+      }); }
+    else {
+      var resultGBP = await Currency.getConversion(
+          from: 'USD', to: 'GBP', amount: offerController.text ?? 0);
+      var resultINR = await Currency.getConversion(
+          from: 'USD', to: 'INR', amount: offerController.text ?? 0);
+      var resultEUR = await Currency.getConversion(
+          from: 'USD', to: 'EUR', amount: offerController.text ?? 0);
+
+      setState(() {
+        INR =  resultINR.rate?? 0.001;
+        USD = price ?? 0.001;
+        EUR = resultEUR.rate  ?? 0.001;
+        GBP =   resultGBP.rate ?? 0.001;
+
+
+        I = INR.toStringAsFixed(2);
+        INR = double.tryParse(I);
+       
+
+        U = USD.toStringAsFixed(2);
+        USD = double.tryParse(U);
+       
+
+        E = EUR.toStringAsFixed(2);
+        EUR = double.tryParse(E);
+        
+
+        G = GBP.toStringAsFixed(2);
+        GBP = double.tryParse(G);
+        
+
+      }); }
+
+
+
+  }
+
+  makeOffer(){
+    FirebaseFirestore.instance.collection('Resale')
+        .doc(ownerId)
+        .collection('userResale').doc(resaleId) .collection('offers').doc(currentUser.id).set({
+    'userId':currentUser.id,
+   'name':currentUser.username,
+   'img':currentUser.photoUrl,
+
+    'usd':USD,
+  'inr':INR,
+    'eur':EUR,
+    'gbp':GBP,
+    'accepted' :false,
+      
+    });
+    loading = false;
   }
   posteurope(){
     bool isPostOwner = currentUserId == ownerId;
@@ -1022,6 +1194,169 @@ shipBool = currentUser.country == country?freeship:freeworldship;
                   child: ExpansionTile(
                     backgroundColor:trans,
                     title:  Text(
+                      "Make offer",
+                      style: TextStyle(
+                        color: kText.withOpacity(0.5),
+                        fontWeight: FontWeight.bold,fontSize: 20,
+                      ),),
+                    trailing:Icon(Icons.expand_more,color: kText,),
+
+                    maintainState: true,
+                    children: [
+
+                      Container(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.stretch,
+                          children: <Widget>[
+                         isPostOwner?Container():   Form(
+                              key: _formKey,
+                              child: Row(
+                                children: [
+                                  TextFormField(
+                                    style:TextStyle(color: kText),
+                                    controller: offerController,
+                                    decoration: InputDecoration(
+                                      border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
+                                      enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+                                      focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+
+                                      labelText: 'Make offer',labelStyle: TextStyle(color: kText),
+                                      hintText:
+                                      currentUser.currency == "INR"?'₹':
+                                      currentUser.currency == "EUR"?'€':
+                                      currentUser.currency == "GBP"?'£':'\u0024',                                          ),
+                                    textAlign: TextAlign.center,
+                                    validator: (text) {
+                                      if ( text.isEmpty) {
+                                        return 'should not be  empty';
+                                      }
+                                      return null;
+                                    },
+                                  ),
+                                  FloatingActionButton(
+                                    heroTag:null,
+                                    backgroundColor: Colors.black,
+                                    onPressed: ()async{
+                                      Fluttertoast.showToast(
+                                          msg: "Please wait:Uploading", timeInSecForIos: 4);
+
+
+                                      if(_formKey.currentState.validate()) {
+                                        // ignore: unnecessary_statements
+                                        await INRUSD();
+
+                                        loading?makeOffer():null;
+                                       loading = false;
+                                      }
+                                    },
+                                    child: loading? CircularProgressIndicator():  Icon(Icons.done_outline_rounded,),
+                                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(16.0))),
+                                  ),
+                                ],
+                              ),
+                            ),
+
+                            PaginateFirestore(
+                                isLive: true,
+                                emptyDisplay: Center(child: Text("No reviews",style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                ),)),
+                                itemBuilderType:
+                                PaginateBuilderType.listView,
+                                itemBuilder: (index, context, documentSnapshot)   {
+//        DocumentSnapshot ds = snapshot.data.docs[index];
+                                  String ownerId = documentSnapshot.data()['userId'];
+                                    String name = documentSnapshot.data()['name'];
+                                    String img = documentSnapshot.data()['img'];
+
+                                  var offer =   documentSnapshot.data()['offer'];
+ var usd =   documentSnapshot.data()['usd'];
+ var inr =   documentSnapshot.data()['inr'];
+ var gbp =   documentSnapshot.data()['gbp'];
+ var eur =   documentSnapshot.data()['eur'];
+bool accepted = documentSnapshot.data()['accepted'];
+
+                                  return Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Column(
+                                      children: <Widget>[
+                                        GestureDetector(
+                                          onTap: () => showProfile(context, profileId: ownerId),
+                                          child: ListTile(
+                                            leading: CircleAvatar(
+                                              backgroundImage: CachedNetworkImageProvider(img),
+                                              backgroundColor: Colors.grey,
+                                            ),
+                                            title: Text(
+                                              name,
+                                              style: TextStyle(
+                                                color: kText,
+                                                fontWeight: FontWeight.bold,
+                                              ),
+                                            ),
+                                            subtitle:        currentUser.currency == "INR"? Text("${cf.format(inr, CurrencyFormatter.inr)}",
+                                                ):
+                                            currentUser.currency == "EUR"?Text("${cf.format(eur, CurrencyFormatter.eur)}",
+                                                ):
+                                            currentUser.currency == "GBP"?Text("${cf.format(gbp, CurrencyFormatter.gbp)}",
+                                                ):Text("${cf.format(usd, CurrencyFormatter.usd)}",
+                                                    ) ,
+                                            trailing:isPostOwner?             TextButton(
+
+                                                child:Text("Accept")
+                                            ):
+                                           accepted? TextButton(
+                                                onPressed:() async{await addingToList();
+                                                Navigator.push(
+                                                  context,
+                                                  MaterialPageRoute(
+                                                    builder: (context) => AddressResale(
+                                                      OwnerId:OwnerId,
+                                                      resaleId:ResaleId ,
+                                                      profileimg: profileimg,
+                                                      username: Username,
+                                                      images:Images,
+                                                      title:Title,
+                                                      country:Country,
+                                                      size:Size,
+                                                      shipcost:shipcost,
+                                                      usd:Usd,
+                                                      eur:Eur,
+                                                      gbp:Gbp,
+                                                      inr:Inr,
+                                                      ship: ship,
+                                                    ),
+                                                  ),
+                                                );},
+                                                child:Text("Buy Now")
+                                            ):Container(),
+
+                                          ),
+                                        ),
+
+                                      ],
+
+                                    ),
+                                  );
+                                },
+                                query: FirebaseFirestore.instance.collection('Resale')
+                                    .doc(ownerId)
+                                    .collection('userResale').doc(resaleId) .collection('offers').orderBy('usd',descending: true)
+
+
+                            )
+
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                 ListTileTheme(
+                  tileColor:trans,
+                  child: ExpansionTile(
+                    backgroundColor:trans,
+                    title:  Text(
                       " Description",
                       style: TextStyle(
                         color: kText.withOpacity(0.5),
@@ -1055,11 +1390,12 @@ shipBool = currentUser.country == country?freeship:freeworldship;
                     ],
                   ),
                 ),
+
                 ListTileTheme(
                   tileColor:trans,
                   child: ExpansionTile(
                     backgroundColor:trans,
-                    leading: Icon(Icons.local_shipping,color: kText,),
+                    // leading: Icon(Icons.local_shipping,color: kText,),
                     title:  Text(
                       " Shipping  and Returns:",
                       style: TextStyle(
@@ -1199,6 +1535,16 @@ TaggerId ==""? print(true):print(false);
     });
   }
 
+}
+showComments(BuildContext context,
+    {String postId, String ownerId, String mediaUrl}) {
+  Navigator.push(context, MaterialPageRoute(builder: (context) {
+    return ResaleComments(
+      postId: postId,
+      postOwnerId: ownerId,
+      postMediaUrl: mediaUrl,
+    );
+  }));
 }
 Future update(List<String> cartNumbers) async {
   WriteBatch batch = FirebaseFirestore.instance.batch();

@@ -806,69 +806,92 @@ Widget getImageWidget9() {
     }
   }
 
- //  Widget getImageWidget01() {
- //    if (customImg1 != null) {
- //      return InkWell(
- //        onTap:()=>getImage01(),
- //        child: Image.file(
- //          customImg1,
- //          width: 150,
- //          height: 150,
- //          fit: BoxFit.cover,
- //        ),
- //      );
- //    } else {
- //      return InkWell(
- //        onTap:()=>getImage01(),
- //         child: Column(
- //           children: [
- //             Icon(
- //      Icons.add,
- //        size:50,
- //      ),
- //                    Text("Add image")
- //
- //           ],
- //         ));
- //    }
- //  }
- //  getImage01() async {
- //
- //    this.setState(() {
- //      _inProcess = true;
- //    });
- //    File image = File(await ImagePicker().getImage(source: ImageSource.gallery).then((pickedFile) => pickedFile.path));
- //
- //    if (image != null) {
- //      File cropped = await ImageCropper.cropImage(
- //          sourcePath: image.path,
- //          aspectRatio: CropAspectRatio(
- //              ratioX: 1, ratioY: 1),
- //          compressQuality: 100,
- //          maxWidth: 700,
- //          maxHeight: 700,
- //          compressFormat: ImageCompressFormat.jpg,
- //          androidUiSettings: AndroidUiSettings(
- //            toolbarColor: Colors.deepOrange,
- //            toolbarTitle: "RPS Cropper",
- //            statusBarColor: Colors.deepOrange.shade900,
- //            backgroundColor: Colors.white,
- //          )
- //      );
- //      if (!mounted) {
- //        return;
- //      }
- //      setState(() {
- //        customImg1 = cropped;
- //        _inProcess = true;
- //
- //      });
- //    } else {
- //      this.setState(() {
- //        _inProcess = false;
- //      });
- //    }
- //  }
+  Widget getImageWidget01() {
+    if (customImg1 != null) {
+      return InkWell(
+        onTap:()=>getImage01(),
+        child:
+        Row(
+          children: [
+            Image.file(
+              customImg1,
+              width: 50,
+              height: 50,
+              fit: BoxFit.cover,
+            ),
+            SizedBox(width:4),
+            Text("Add Size Guide") ,
+Spacer(),
+            TextButton(
+//                 style: ElevatedButton.styleFrom(
+// textStyle                ),
+                onPressed: ()=>sizeGuide(),
+
+                child:Text("Default size chart")
+            )
+          ],
+        )
+
+      );
+    } else {
+      return InkWell(
+        onTap:()=>getImage01(),
+         child: Row(
+           children: [
+             Icon(
+      Icons.add,
+        size:50,
+      ),
+             Text("Add Size Guide"),
+             Spacer(),
+             TextButton(
+//                 style: ElevatedButton.styleFrom(
+// textStyle                ),
+                 onPressed: ()=>sizeGuide(),
+
+                 child:Text("Default size chart")
+             )
+           ],
+         ));
+    }
+  }
+  getImage01() async {
+
+    this.setState(() {
+      _inProcess = true;
+    });
+    File image = File(await ImagePicker().getImage(source: ImageSource.gallery).then((pickedFile) => pickedFile.path));
+
+    if (image != null) {
+      File cropped = await ImageCropper.cropImage(
+          sourcePath: image.path,
+          aspectRatio: CropAspectRatio(
+              ratioX: 1, ratioY: 1),
+          compressQuality: 100,
+          maxWidth: 700,
+          maxHeight: 700,
+          compressFormat: ImageCompressFormat.jpg,
+          androidUiSettings: AndroidUiSettings(
+            toolbarColor: Colors.deepOrange,
+            toolbarTitle: "RPS Cropper",
+            statusBarColor: Colors.deepOrange.shade900,
+            backgroundColor: Colors.white,
+          )
+      );
+      if (!mounted) {
+        return;
+      }
+      setState(() {
+        customImg1 = cropped;
+        _inProcess = true;
+
+      });
+    } else {
+      this.setState(() {
+        _inProcess = false;
+      });
+    }
+  }
  //    Widget getImageWidget02() {
  //    if (customImg2 != null) {
  //      return InkWell(
@@ -4102,16 +4125,16 @@ compressImage9() async {
       file9 = compressedImageFile;
     });
   }
-// compressImage01() async {
-//     final tempDir = await getTemporaryDirectory();
-//     final path = tempDir.path;
-//     Im.Image imageFile = Im.decodeImage(customImg1.readAsBytesSync());
-//     final compressedImageFile = File('$path/img01_$prodId.jpg')
-//       ..writeAsBytesSync(Im.encodeJpg(imageFile, quality: 50));
-//     if (!mounted) return; setState(() {
-//       customImg1 = compressedImageFile;
-//     });
-//   }
+compressImage01() async {
+    final tempDir = await getTemporaryDirectory();
+    final path = tempDir.path;
+    Im.Image imageFile = Im.decodeImage(customImg1.readAsBytesSync());
+    final compressedImageFile = File('$path/img01_$prodId.jpg')
+      ..writeAsBytesSync(Im.encodeJpg(imageFile, quality: 50));
+    if (!mounted) return; setState(() {
+      customImg1 = compressedImageFile;
+    });
+  }
 // compressImage02() async {
 //     final tempDir = await getTemporaryDirectory();
 //     final path = tempDir.path;
@@ -4695,16 +4718,16 @@ compressImage9() async {
     String downloadUrl = await storageSnap.ref.getDownloadURL();
     return downloadUrl;
   }
-  //
-  // Future<String> uploadImage01(imageFile) async {
-  //   String fileName = DateTime.now().millisecondsSinceEpoch.toString();
-  //   Reference reference = FirebaseStorage.instance.ref().child("Shop${prodId}").child("$fileName.jpg");
-  //   UploadTask uploadTask = reference.putFile(imageFile);
-  //
-  //   TaskSnapshot storageSnap = await uploadTask;
-  //   String downloadUrl = await storageSnap.ref.getDownloadURL();
-  //   return downloadUrl;
-  // }
+  Future<String> uploadImage01(imageFile) async {
+    String fileName = DateTime.now().millisecondsSinceEpoch.toString();
+    Reference reference = FirebaseStorage.instance.ref().child("Shop${prodId}").child("$fileName.jpg");
+    UploadTask uploadTask = reference.putFile(imageFile);
+
+    TaskSnapshot storageSnap = await uploadTask;
+    String downloadUrl = await storageSnap.ref.getDownloadURL();
+    sizeChart = true;
+    return downloadUrl;
+  }
   // Future<String> uploadImage02(imageFile) async {
   //   String fileName = DateTime.now().millisecondsSinceEpoch.toString();
   //   Reference reference = FirebaseStorage.instance.ref().child("Shop${prodId}").child("$fileName.jpg");
@@ -13314,145 +13337,115 @@ page0(){
                       ),
                     ),
                     SizedBox(height: SizeConfig.safeBlockVertical*0.5,),
-
-                    Row(
-                      mainAxisAlignment:MainAxisAlignment.spaceEvenly,
-                      children: [
-                        Container(
-                          margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0,8.0),
-                          child: GestureDetector(
+                    Container(
+                      margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0,8.0),
+                      child: GestureDetector(
 
 
-                            child: ListTile(title: Text('$value',style:TextStyle(color: Colors.black) ,),
-                                trailing:Icon(Icons.arrow_forward_ios_rounded)
-                            ),
-                            onTap: (){
-                              showModalBottomSheet(context: context, builder:(BuildContext context){
+                        child: ListTile(title: Text('$value',style:TextStyle(color: Colors.black) ,),
+                            trailing:Icon(Icons.arrow_forward_ios_rounded)
+                        ),
+                        onTap: (){
+                          showModalBottomSheet(context: context, builder:(BuildContext context){
 
 
-                                if(dropdownValue=='Women')
-                                {
-                                  return
-                                    WomenCategory();
-                                }
-                                else if(dropdownValue=='Men')
-                                {
-                                  return
-                                    MenCategory();
-                                }
-                                else if(dropdownValue=='Baby-Boys')
-                                {
-                                  return
-                                    BabyBCategory();
-                                }
-                                else if(dropdownValue== 'Baby-Girls'){
-                                  return
-                                    BabyGCategory();
-                                }
-                                else if(dropdownValue=='Kids-Boys'){
-                                  return
-                                    KidBCategory();
-                                }
-                                else if(dropdownValue=='Kids-Girls'){
-                                  return
-                                    KidGCategory();
-                                }
-                                else if(dropdownValue== 'Teen-Boys'){
-                                  return
-                                    TeenBCategory();
-                                }
-                                else if(dropdownValue=='Teen-Girls'){
-                                  return
-                                    TeenGCategory();
-                                }
-                                else{
-                                  return
-                                    Text('text');
-                                }
-                              },
-                              );
+                            if(dropdownValue=='Women')
+                            {
+                              return
+                                WomenCategory();
                             }
-                            ,
-                          ),
+                            else if(dropdownValue=='Men')
+                            {
+                              return
+                                MenCategory();
+                            }
+                            else if(dropdownValue=='Baby-Boys')
+                            {
+                              return
+                                BabyBCategory();
+                            }
+                            else if(dropdownValue== 'Baby-Girls'){
+                              return
+                                BabyGCategory();
+                            }
+                            else if(dropdownValue=='Kids-Boys'){
+                              return
+                                KidBCategory();
+                            }
+                            else if(dropdownValue=='Kids-Girls'){
+                              return
+                                KidGCategory();
+                            }
+                            else if(dropdownValue== 'Teen-Boys'){
+                              return
+                                TeenBCategory();
+                            }
+                            else if(dropdownValue=='Teen-Girls'){
+                              return
+                                TeenGCategory();
+                            }
+                            else{
+                              return
+                                Text('text');
+                            }
+                          },
+                          );
+                        }
+                        ,
+                      ),
+                    ),
+                    SizedBox(height: SizeConfig.safeBlockVertical*0.5,),
+
+                    Container(
+                      margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0,8.0),
+                      child:   GestureDetector(
+
+
+                        onTap: ()=>color(),
+
+
+
+                        child: ListTile(title: Text('Add colors',style:TextStyle(color: Colors.black) ,),
+                            trailing:Icon(Icons.arrow_forward_ios_rounded)
                         ),
-                        Container(
-                          // alignment:Alignment.centerLeft,
-                          child:   ElevatedButton(
 
-                            style: ElevatedButton.styleFrom(
-                                                              primary:   Colors.black,
-  
-                                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-                            ),
-                            onPressed: ()=>color(),
+                      ),
+                    ),
 
-                            child: Text('Add Colors',style:TextStyle(color: Colors.white,fontSize:SizeConfig.safeBlockHorizontal *3.5) ,),
-                          ),
+
+                    SizedBox(height: SizeConfig.safeBlockVertical*0.5,),
+                    Container(
+                      margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0,8.0),
+                      child:   GestureDetector(
+
+                        onTap: ()=>AddSize(),
+                        child: ListTile(title: Text('Specify Quantity',style:TextStyle(color: Colors.black) ,),
+                            trailing:Icon(Icons.arrow_forward_ios_rounded)
                         ),
+                      ),
+                    ),
+ Container(
+                      margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0,8.0),
+                      child:   GestureDetector(
 
-                      ],
+                        onTap: ()=>AddSize(),
+                        child: getImageWidget01()
+                      ),
+                    ),
+
+                    Container(
+                      margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0,8.0),
+                      child:   GestureDetector(
+
+                        onTap: ()=>custom(),
+                        child: ListTile(title: Text('Variations (optional)',style:TextStyle(color: Colors.black) ,),
+                            trailing:Icon(Icons.arrow_forward_ios_rounded)
+                        ),
+                      ),
                     ),
 
                     SizedBox(height: SizeConfig.safeBlockVertical*0.5,),
 
-                    Row(
-                      mainAxisAlignment:MainAxisAlignment.center,
-                      children:[
-                        Container(
-                          // alignment:Alignment.centerLeft,
-                          child:   ElevatedButton(
-
-                            style: ElevatedButton.styleFrom(
-
-                                                           primary:   Colors.black,
-                                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)), // foreground
-                            ),
-                            onPressed: ()=>AddSize(),
-
-                            child: Text('Specify Quantity',style:TextStyle(color:  Colors.white,fontSize:SizeConfig.safeBlockHorizontal *3.5) ,),
-                          ),
-                        ),
-                        SizedBox(width: SizeConfig.safeBlockHorizontal *3),Container(
-                          // alignment:Alignment.centerRight,
-                          child:  ElevatedButton(
-
-                            style: ElevatedButton.styleFrom(
-
-                                                                                         primary:   Colors.black,
-  
-                                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)), // foreground
-                            ),
-                            onPressed: ()=>sizeGuide(),
-                            child: Text('Size Guide',style:TextStyle(color: Colors.white,fontSize:SizeConfig.safeBlockHorizontal *3.5) ,),
-                          ),
-                        ),
-
-                      ],
-                    ),
-
-                    SizedBox(height: SizeConfig.safeBlockVertical*0.5,),
-                    Row(
-                      mainAxisAlignment:MainAxisAlignment.center,
-                      children: [
-                        Container(
-                          // alignment:Alignment.centerLeft,
-                          child:   ElevatedButton(
-
-                            style: ElevatedButton.styleFrom(
-
-                                                                                         primary:   Colors.black,
-  
-                                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)), // foreground
-                            ),
-                            onPressed: ()=>custom(),
-
-                            child:   Text("Variations",style: TextStyle(fontSize:  SizeConfig.safeBlockHorizontal *4,color: Colors.white),),
-                          ),
-                        ),
-         Text("(optional)",style: TextStyle(fontSize:  SizeConfig.safeBlockHorizontal *3.5,color:kText),),
-                      ],
-                    ),
-                    SizedBox(height: SizeConfig.safeBlockVertical*0.5,),
                     //Customised
 
 
@@ -13929,28 +13922,15 @@ page3(){
         child: Column(
           children: <Widget>[
             isUploading ? linearProgress() : Text(""),
-            Row(
-              mainAxisAlignment:MainAxisAlignment.center,
+            Container(
+              margin: EdgeInsets.fromLTRB(30.0, 8.0, 30.0,8.0),
+              child:   GestureDetector(
 
-              children: [
-                ElevatedButton(
-
-                  style: ElevatedButton.styleFrom(
-
-                                                                               primary:   Colors.black,
-  
-                                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)), // foreground
-                  ),
-                  onPressed: () {
-                    tag();
-                  },
-
-                  child:   Text("Tag other products",style: TextStyle(fontSize:  SizeConfig.safeBlockHorizontal *3.5
-                      ,color:Colors.white),),
+                onTap: ()=>tag(),
+                child: ListTile(title: Text('Tag other products (optional)',style:TextStyle(color: Colors.black) ,),
+                    trailing:Icon(Icons.arrow_forward_ios_rounded)
                 ),
-                Text("(optional)",style: TextStyle(fontSize:  SizeConfig.safeBlockHorizontal *2.5
-                    ,color:kText),),
-              ],
+              ),
             ),
             Container(
               height:SizeConfig.screenHeight*0.75,
@@ -17594,8 +17574,8 @@ var resultGBP = await Currency.getConversion(
  file9!=null? await compressImage9():null;
     String mediaUrl9 =  file9!=null?await uploadImage9(file9):"";
 
-    // customImg1!=null? await compressImage01():null;
-    // String mediaUrl01 =  customImg1!=null?await uploadImage01(customImg1):"";
+    customImg1!=null? await compressImage01():null;
+    String mediaUrl01 =  customImg1!=null?await uploadImage01(customImg1):"";
     // customImg2!=null? await compressImage02():null;
     // String mediaUrl02 =  customImg2!=null?await uploadImage02(customImg2):"";
     // customImg3!=null? await compressImage03():null;
@@ -17705,6 +17685,8 @@ var resultGBP = await Currency.getConversion(
               .collection("userProducts")
               .doc(prodId)
               .update({
+            "sizechartBool":mediaUrl01,
+            "sizeChart":sizeChart,
             "colorText1":colorController1.text ?? "",
             "colorText2":colorController2.text ?? "",
             "colorText3":colorController3.text ?? "",
