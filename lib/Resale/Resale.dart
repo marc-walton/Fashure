@@ -1,3 +1,4 @@
+import 'package:bottom_bar/bottom_bar.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_controller.dart';
 import 'package:carousel_slider/carousel_slider.dart';
@@ -15,6 +16,7 @@ import 'package:fashow/Live/Live.dart';
 import 'package:fashow/Live/upload_bid.dart';
 import 'package:fashow/Resale/addressResale.dart';
 import 'package:fashow/Resale/resaleCommenrs.dart';
+import 'package:fashow/Resale/resaleScreen.dart';
 import 'package:fashow/Resale/upload_resale.dart';
 import 'package:fashow/chatcached_image.dart';
 import 'package:fashow/enum/Variables.dart';
@@ -41,6 +43,8 @@ import 'package:getwidget/types/gf_toggle_type.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:paginate_firestore/paginate_firestore.dart';
 import 'package:photo_view/photo_view.dart';
+import 'package:smooth_star_rating/smooth_star_rating.dart';
+import 'package:uuid/uuid.dart';
 
 final List<String> cartNumbers = [
   "nROwtseY3nSUhoXoT2zf",
@@ -277,7 +281,8 @@ class _ResaleState extends State<Resale> {
   Map likes;
   bool isLiked;
   bool loading;
-  
+  String id = Uuid().v4();
+
   bool showHeart = false;
   List <Widget>listOfImages = <Widget>[];
   String media;
@@ -754,6 +759,96 @@ shipBool = currentUser.country == country?freeship:freeworldship;
 
 
   }
+  reviews() {
+    return
+      showModalBottomSheet(
+          backgroundColor: kSecondaryColor,
+          context: context,
+          builder: (BuildContext context) {
+
+            return  PaginateFirestore(
+                isLive: true,
+                emptyDisplay: Center(child: Text("No reviews",style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                ),)),
+                itemBuilderType:
+                PaginateBuilderType.listView,
+                itemBuilder: (index, context, documentSnapshot)   {
+//        DocumentSnapshot ds = snapshot.data.docs[index];
+                  String ownerId = documentSnapshot.data()['userId'];
+                  var rating =   documentSnapshot.data()['rating'];
+                  String review  = documentSnapshot.data()['review'];
+  String prodId  = documentSnapshot.data()['prodId'];
+  String image  = documentSnapshot.data()['image'];
+    String reviewerId  = documentSnapshot.data()['reviewerId'];
+    String reviewerName  = documentSnapshot.data()['reviewerName'];
+    String reviewerImg  = documentSnapshot.data()['reviewerImg'];
+
+                  return Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Column(
+                      children: <Widget>[
+                        GestureDetector(
+                          onTap: () => showProfile(context, profileId:reviewerId),
+                          child: ListTile(
+                            leading: CircleAvatar(
+                              backgroundImage: CachedNetworkImageProvider(reviewerImg),
+                              backgroundColor: Colors.grey,
+                            ),
+                            title: Text(
+                              reviewerName,
+                              style: TextStyle(
+                                color: kText,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            trailing: ClipRRect(
+                              borderRadius: BorderRadius.circular(10.0),
+                              child: GestureDetector(
+                                onTap: () => Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => ResaleScreen(
+                                      userId: ownerId,
+                                      postId: prodId,
+                                    ),
+                                  ),
+                                ),
+                                child: Container(child: CachedImage(image,width: 60,)),
+                              ),
+                            ),
+                          ),
+                        ),
+                        SmoothStarRating(
+                          isReadOnly: true,
+                          filledIconData: Icons.star,
+                          halfFilledIconData: Icons.star_half,
+                          rating: rating,
+                          size: 35,
+                          starCount: 5,
+
+                        ),
+                        SizedBox(height: 8.0,),
+                        Row(
+                          children: [
+                            Text(review,style: TextStyle(color: kText),),
+                          ],
+                        ),
+                        Divider(color: kGrey,),
+                      ],
+
+                    ),
+                  );
+                },
+                query: FirebaseFirestore.instance.collection('ResaleReviews')
+                    .doc(ownerId).collection('resaleReviews')
+                  .orderBy('timestamp',descending: true)
+
+
+            );
+
+          });
+  }
 
   makeOffer(){
     FirebaseFirestore.instance.collection('Resale')
@@ -769,6 +864,19 @@ shipBool = currentUser.country == country?freeship:freeworldship;
     'gbp':GBP,
     'accepted' :false,
       
+    });
+    FirebaseFirestore.instance.collection('feed')
+        .doc(ownerId)
+        .collection('feedItems').doc(id).set({
+      "type": "makeOffer",
+      "username":currentUser.username,
+      "userId": currentUser.id,
+      "userProfileImg": currentUser.photoUrl,
+      "mediaUrl": images.first,
+      "postId": resaleId,
+      "timestamp": timestamp,
+      "read": 'false',
+      'message': '${currentUser.username} has made an offer!',
     });
     loading = false;
   }
@@ -920,35 +1028,35 @@ shipBool = currentUser.country == country?freeship:freeworldship;
                     //     }
                     // ),
                     Spacer(),
-                    // InkWell(
-                    //   onTap:() => reviews(),
-                    //   child: Row(
-                    //     children: [
-                    //       Icon(
-                    //         Icons.star_border_rounded,
-                    //         color:  Colors.black,
-                    //       ),
-                    //       Icon(
-                    //         Icons.star_border_rounded,
-                    //         color:  Colors.black,
-                    //       ),
-                    //       Icon(
-                    //         Icons.star_border_rounded,
-                    //         color:  Colors.black,
-                    //       ),
-                    //       Icon(
-                    //         Icons.star_border_rounded,
-                    //         color:  Colors.black,
-                    //       ),
-                    //       Icon(
-                    //         Icons.star_border_rounded,
-                    //         color:  Colors.black,
-                    //       ),
-                    //
-                    //
-                    //     ],
-                    //   ),
-                    // ),
+                    InkWell(
+                      onTap:() => reviews(),
+                      child: Row(
+                        children: [
+                          Icon(
+                            Icons.star_border_rounded,
+                            color:  Colors.black,
+                          ),
+                          Icon(
+                            Icons.star_border_rounded,
+                            color:  Colors.black,
+                          ),
+                          Icon(
+                            Icons.star_border_rounded,
+                            color:  Colors.black,
+                          ),
+                          Icon(
+                            Icons.star_border_rounded,
+                            color:  Colors.black,
+                          ),
+                          Icon(
+                            Icons.star_border_rounded,
+                            color:  Colors.black,
+                          ),
+
+
+                        ],
+                      ),
+                    ),
 
                   ],
                 ),
@@ -1192,6 +1300,8 @@ shipBool = currentUser.country == country?freeship:freeworldship;
                 ListTileTheme(
                   tileColor:trans,
                   child: ExpansionTile(
+                    initiallyExpanded:true,
+                    maintainState:true,
                     backgroundColor:trans,
                     title:  Text(
                       "Make offer",
@@ -1201,10 +1311,10 @@ shipBool = currentUser.country == country?freeship:freeworldship;
                       ),),
                     trailing:Icon(Icons.expand_more,color: kText,),
 
-                    maintainState: true,
                     children: [
 
                       Container(
+                        height: 150,
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.stretch,
                           children: <Widget>[
@@ -1275,73 +1385,75 @@ shipBool = currentUser.country == country?freeship:freeworldship;
  var eur =   documentSnapshot.data()['eur'];
 bool accepted = documentSnapshot.data()['accepted'];
 
-                                  return Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: Column(
-                                      children: <Widget>[
-                                        ListTile(
-                                          leading:        GestureDetector(
-                                            onTap: () => showProfile(context, profileId: ownerId),
-                                            child: CircleAvatar(
-                                              backgroundImage: CachedNetworkImageProvider(img),
-                                              backgroundColor: Colors.grey,
-                                            ),
-                                          ),
-                                          title:        GestureDetector(
-                                            onTap: () => showProfile(context, profileId: ownerId),
-                                            child: Text(
-                                              name,
-                                              style: TextStyle(
-                                                color: kText,
-                                                fontWeight: FontWeight.bold,
+                                  return ListView(
+                                    children:[ Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Column(
+                                        children: <Widget>[
+                                          ListTile(
+                                            leading:        GestureDetector(
+                                              onTap: () => showProfile(context, profileId: ownerId),
+                                              child: CircleAvatar(
+                                                backgroundImage: CachedNetworkImageProvider(img),
+                                                backgroundColor: Colors.grey,
                                               ),
                                             ),
-                                          ),
-                                          subtitle:        currentUser.currency == "INR"? Text("${cf.format(inr, CurrencyFormatter.inr)}",
-                                              ):
-                                          currentUser.currency == "EUR"?Text("${cf.format(eur, CurrencyFormatter.eur)}",
-                                              ):
-                                          currentUser.currency == "GBP"?Text("${cf.format(gbp, CurrencyFormatter.gbp)}",
-                                              ):Text("${cf.format(usd, CurrencyFormatter.usd)}",
-                                                  ) ,
-                                          trailing:isPostOwner?             TextButton(
+                                            title:        GestureDetector(
+                                              onTap: () => showProfile(context, profileId: ownerId),
+                                              child: Text(
+                                                name,
+                                                style: TextStyle(
+                                                  color: kText,
+                                                  fontWeight: FontWeight.bold,
+                                                ),
+                                              ),
+                                            ),
+                                            subtitle:        currentUser.currency == "INR"? Text("${cf.format(inr, CurrencyFormatter.inr)}",
+                                                ):
+                                            currentUser.currency == "EUR"?Text("${cf.format(eur, CurrencyFormatter.eur)}",
+                                                ):
+                                            currentUser.currency == "GBP"?Text("${cf.format(gbp, CurrencyFormatter.gbp)}",
+                                                ):Text("${cf.format(usd, CurrencyFormatter.usd)}",
+                                                    ) ,
+                                            trailing:isPostOwner?             TextButton(
 onPressed:(){FirebaseFirestore.instance.collection('Resale')
     .doc(ownerId)
     .collection('userResale').doc(resaleId) .collection('offers').doc(ownerId).update(
     {"accepted":true});},
-                                              child:Text("Accept")
-                                          ):
-                                         accepted? TextButton(
-                                              onPressed:() async{await addingToList();
-                                              Navigator.push(
-                                                context,
-                                                MaterialPageRoute(
-                                                  builder: (context) => AddressResale(
-                                                    OwnerId:OwnerId,
-                                                    resaleId:ResaleId ,
-                                                    profileimg: profileimg,
-                                                    username: Username,
-                                                    images:Images,
-                                                    title:Title,
-                                                    country:Country,
-                                                    size:Size,
-                                                    shipcost:shipcost,
-                                                    usd:Usd,
-                                                    eur:Eur,
-                                                    gbp:Gbp,
-                                                    inr:Inr,
-                                                    ship: ship,
+                                                child:Text("Accept")
+                                            ):
+                                           accepted? TextButton(
+                                                onPressed:() async{await addingToList();
+                                                Navigator.push(
+                                                  context,
+                                                  MaterialPageRoute(
+                                                    builder: (context) => AddressResale(
+                                                      OwnerId:OwnerId,
+                                                      resaleId:ResaleId ,
+                                                      profileimg: profileimg,
+                                                      username: Username,
+                                                      images:Images,
+                                                      title:Title,
+                                                      country:Country,
+                                                      size:Size,
+                                                      shipcost:shipcost,
+                                                      usd:Usd,
+                                                      eur:Eur,
+                                                      gbp:Gbp,
+                                                      inr:Inr,
+                                                      ship: ship,
+                                                    ),
                                                   ),
-                                                ),
-                                              );},
-                                              child:Text("Buy Now")
-                                          ):Container(),
+                                                );},
+                                                child:Text("Buy Now")
+                                            ):Container(),
 
-                                        ),
+                                          ),
 
-                                      ],
+                                        ],
 
-                                    ),
+                                      ),
+                                    ),]
                                   );
                                 },
                                 query: FirebaseFirestore.instance.collection('Resale')
@@ -1465,7 +1577,10 @@ addingToList(){
   Widget build(BuildContext context) {
     isLiked = (likes[currentUserId] == true);
 
-    return Column(children:[posteurope(),
+    return Column(children:[
+      posteurope(),
+      BottomAppBar(
+        child:
       Container(height: MediaQuery.of(context).size.height/10,child: Row(
           mainAxisAlignment:MainAxisAlignment.spaceEvenly,
           children:[
@@ -1512,7 +1627,7 @@ addingToList(){
             )
 
           ]
-      ),),
+      ),)),
 
     ]);
 

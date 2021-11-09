@@ -1,4 +1,5 @@
 import 'package:currency_formatter/currency_formatter.dart';
+import 'package:fashow/Resale/resaleScreen.dart';
 import 'package:fashow/chatcached_image.dart';
 import 'package:fashow/enum/Variables.dart';
 import 'package:get/get.dart';
@@ -22,13 +23,15 @@ class Orders extends StatefulWidget {
 class _OrdersState extends State<Orders> {
   String reviewId = Uuid().v4();
   TextEditingController reviewController = TextEditingController();
-  Rating({String fulfill,String ProdId,String OwnerId,parentContext}){
+  Rating({String fulfill,String ProdId,String OwnerId,String mediaUrl,parentContext}){
     if(fulfill=='true') {
 
       return
       showModalBottomSheet(
           context: parentContext,
           builder: (BuildContext context) {
+            String reviewId = Uuid().v4();
+
             return
               Container(
 
@@ -61,7 +64,7 @@ class _OrdersState extends State<Orders> {
                         ),
                         textAlign: TextAlign.start,
                       ),
-                      RaisedButton(
+                      ElevatedButton(
                         onPressed: (){ FirebaseFirestore.instance.collection('Reviews')
                             .doc(ProdId).collection('prodReviews').doc(reviewId)
                             .set({
@@ -70,6 +73,10 @@ class _OrdersState extends State<Orders> {
                           'prodId':ProdId,
                           'rating': rating,
                           'review':reviewController.text,
+                          "reviewerId":currentUser.id,
+                          "reviewerName":currentUser.username,
+                          "reviewerImg":currentUser.photoUrl,
+
                           "timestamp":timestamp,
                         });
                         FirebaseFirestore.instance.collection('feed')
@@ -82,14 +89,17 @@ class _OrdersState extends State<Orders> {
                           "userId": OwnerId,
                           "userProfileImg": currentUser.photoUrl,
                           "postId": ProdId,
-                          // "mediaUrl": mediaUrl,
+                         "mediaUrl": mediaUrl,
                           "timestamp": timestamp,
                           "read": 'false',
                           'message':'Your order received a review!',
                         });
+                        rating = 0.0;
                         Get.back();},
-                        color: kblue,
-                      child: Text('Save',style: TextStyle(color: Colors.white),),)
+                        style: ElevatedButton.styleFrom(
+                          elevation : 0.001,
+                          primary: Colors.grey.withOpacity(0.3), ),
+                      child: Text('Post',style: TextStyle(color: Colors.white),),)
                     ],
                   ),
                 ),
@@ -102,7 +112,100 @@ class _OrdersState extends State<Orders> {
 
     }
     else{return
-      Text('');}
+      Container();}
+  }
+ resaleRating({String fulfill,String ProdId,String OwnerId,String mediaUrl,parentContext}){
+
+    if(fulfill=='true') {
+
+      return
+      showModalBottomSheet(
+          context: parentContext,
+          builder: (BuildContext context) {
+            String reviewId = Uuid().v4();
+
+            return
+              Container(
+
+                child:           Center(
+                  child: Column(
+                    children:[
+                      Text('Please rate the order',style: TextStyle(
+                          color: Colors.white),),
+                      SmoothStarRating(
+                        allowHalfRating: true,
+                        filledIconData: Icons.star,
+                        halfFilledIconData: Icons.star_half,
+                        rating: rating,
+                        size: 35,
+                        starCount: 5,
+                        onRated: (value) {
+                          setState(() {
+                            rating = value;
+                          });
+                        },
+                      ),
+                      TextField(
+                        controller: reviewController,
+                        decoration: InputDecoration(
+                          enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+                          focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+
+                          labelText: 'Review',labelStyle: TextStyle(color: kText),
+                          hintText: 'Review',
+                        ),
+                        textAlign: TextAlign.start,
+                      ),
+                      ElevatedButton(
+                        onPressed: (){ FirebaseFirestore.instance.collection('ResaleReviews')
+                            .doc(OwnerId).collection('resaleReviews').doc(reviewId)
+                            .set({
+                          'userId': OwnerId,
+                          'reviewId' : reviewId,
+                          'prodId':ProdId,
+                          'rating': rating,
+                          'review':reviewController.text,
+                          "reviewerId":currentUser.id,
+                           "reviewerName":currentUser.username,
+                           "reviewerImg":currentUser.photoUrl,
+
+                          "timestamp":timestamp,
+                          "image":mediaUrl,
+                        });
+                        FirebaseFirestore.instance.collection('feed')
+                            .doc(ProdId)
+                            .collection('feedItems')
+                            .doc(reviewId)
+                            .set({
+                          "type": "resaleReview",
+                          "username": currentUser.displayName,
+                          "userId": OwnerId,
+                          "userProfileImg": currentUser.photoUrl,
+                          "postId": ProdId,
+                          "mediaUrl": mediaUrl,
+                          "timestamp": timestamp,
+                          "read": 'false',
+                          'message':'Your order received a review!',
+                        });
+                        rating = 0.0;
+                        Get.back();},
+                        style: ElevatedButton.styleFrom(
+                          elevation : 0.001,
+                          primary: Colors.grey.withOpacity(0.3), ),
+                      child: Text('Post',style: TextStyle(color: Colors.white),),)
+                    ],
+                  ),
+                ),
+
+              );
+
+          }
+      );
+
+
+    }
+    else{return
+     Container();}
   }
 
   var rating = 0.0;
@@ -135,8 +238,11 @@ isLive: true,
 String courier = documentSnapshot.data()['courier'];
       var shipcostuser = documentSnapshot.data()['shipcostuser'];
       var customprice = documentSnapshot.data()['customprice'];
-      var total = documentSnapshot.data()['total'];
-
+ bool resale = documentSnapshot.data()['resale'];
+var total = currentUser.currency == "INR"?inr + shipcostuser +customprice:
+currentUser.currency == "EUR"?eur + shipcostuser +customprice:
+currentUser.currency == "GBP"?gbp + shipcostuser +customprice:
+usd + shipcostuser +customprice;
       if (!documentSnapshot.exists) {
         return  Center(child: Text('No Orders',
           style: TextStyle(
@@ -154,7 +260,13 @@ String courier = documentSnapshot.data()['courier'];
             child: Column(
               children: [
                 ListTile(
-                  leading:GestureDetector(onTap:   ()=>  Navigator.push(
+                  leading:GestureDetector(onTap:   ()=>  resale?Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => ResaleScreen(
+                          postId: prodId,
+                          userId: ownerId,
+                        ),)):Navigator.push(
                       context,
                       MaterialPageRoute(
                         builder: (context) => ProductScreen(
@@ -165,13 +277,19 @@ String courier = documentSnapshot.data()['courier'];
                         borderRadius: BorderRadius.circular(0.1),
                         child: Container(child:  CachedImage(shopmediaUrl,width: 60,))),
                   ),
-                  title: GestureDetector(onTap:   ()=>  Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                  builder: (context) => ProductScreen(
-                  prodId: prodId,
-                  userId: ownerId,
-                  ),)),
+                  title: GestureDetector(onTap:   ()=> resale?Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => ResaleScreen(
+                          postId: prodId,
+                          userId: ownerId,
+                        ),)):Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => ProductScreen(
+                          prodId: prodId,
+                          userId: ownerId,
+                        ),)),
                   child:   RichText(
       maxLines: 1,softWrap:false,overflow:TextOverflow.fade,
       text: TextSpan(
@@ -376,7 +494,9 @@ ElevatedButton(
     primary:  Colors.black, ),
   onPressed:()
 
-   {Rating(fulfill:fulfilled,parentContext: context,OwnerId: ownerId,ProdId: prodId);},child: Text('Rate Order',style:TextStyle(color: Colors.white)),):
+   {
+    resale?  resaleRating(fulfill:fulfilled,mediaUrl:shopmediaUrl,parentContext: context,OwnerId: ownerId,ProdId: prodId):
+     Rating(fulfill:fulfilled,mediaUrl:shopmediaUrl,parentContext: context,OwnerId: ownerId,ProdId: prodId);},child: Text('Rate Order',style:TextStyle(color: Colors.white)),):
                           Container(),
                     ],
                   ),

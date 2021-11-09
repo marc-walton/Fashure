@@ -61,6 +61,67 @@ class _DesignerShopState extends State<DesignerShop>  with  TickerProviderStateM
       _myHandler= _tabs[_controller.index];
     });
   }
+  Filter(){
+    // _controller.index == 0?
+return
+    ExpansionTile(
+        title: Text("Size"),
+        children: [Column(
+          children: [
+            InkWell(
+              onTap: () {
+                setState((){});
+                priceQuery = "0";
+                AQuery = "A0";
+                BQuery = "B0";
+                CQuery = "C0";
+                DQuery = "D0";
+                EQuery = "E0";
+                FQuery = "F0";
+                GQuery = "G0";
+                HQuery = "H0";
+                IQuery = "I0";
+                JQuery = "J0";
+                KQuery = "K0";
+                LQuery = "L0";
+                MQuery = "M0";
+                NQuery = "N0";
+                OQuery = "O0";
+                PQuery = "P0";
+                QQuery = "Q0";
+                RQuery = "R0";
+                SQuery = "S0";
+
+              },
+              child: Container(
+                color: xxxs ?Colors.pink.shade50:Colors.white,
+
+                height: 50,
+                width: MediaQuery.of(context).size.width,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Row(
+                      children: [
+                        FittedBox(
+                            child: Text(
+                              'XXXS',
+                            )),
+                        xxxs?Icon(Icons.done_outline_rounded):Container(),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+            ),
+
+          ],
+        ),
+        ]
+    );
+
+
+  }
   @override
   Widget build(BuildContext context) {
   return  Row(
@@ -313,6 +374,7 @@ class _DesignerShopState extends State<DesignerShop>  with  TickerProviderStateM
                                               ),
                                               ]
                                           ),
+                                          Filter(),
                                           ExpansionTile(
                                               title: Text("Avoid Duties & Taxes"),
                                               children: [Column(

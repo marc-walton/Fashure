@@ -6,8 +6,9 @@ class ServiceFulfill extends StatefulWidget {
   final String ownerId;
   final String orderId;
 final String cusId;
+final String image;
 
-  const ServiceFulfill({Key key, this.ownerId, this.orderId, this.cusId}) : super(key: key);
+  const ServiceFulfill({Key key, this.ownerId, this.orderId, this.cusId,this.image}) : super(key: key);
   @override
   _ServiceFulfillState createState() => _ServiceFulfillState();
 }
@@ -68,7 +69,7 @@ class _ServiceFulfillState extends State<ServiceFulfill> {
       "userId": widget.ownerId,
       "userProfileImg": currentUser.photoUrl,
       "postId": widget.orderId,
-      // "mediaUrl": mediaUrl,
+      "mediaUrl": widget.image,
       "read": 'false',
     });FirebaseFirestore.instance.collection('feed')
         .doc(widget.ownerId)
@@ -81,7 +82,7 @@ class _ServiceFulfillState extends State<ServiceFulfill> {
       "userId": widget.ownerId,
       "userProfileImg": currentUser.photoUrl,
       "postId": widget.orderId,
-      // "mediaUrl": mediaUrl,
+      "mediaUrl": widget.image,
       "read": 'false',
     });
 

@@ -2,6 +2,7 @@ import 'package:badges/badges.dart';
 import 'package:bubble_tab_indicator/bubble_tab_indicator.dart';
 import 'package:fashow/Live/models/auction_model.dart';
 import 'package:fashow/Product_screen.dart';
+import 'package:fashow/Resale/resaleScreen.dart';
 import 'package:fashow/SellerDash/alldash.dart';
 import 'package:fashow/SellerDash/sellerdashboard.dart';
 import 'package:fashow/Settings.dart';
@@ -304,27 +305,27 @@ return Container();
                 iconTheme: new IconThemeData(color: kSecondaryColor),
                 actions: <Widget>[
 
-                  OutlinedButton(
-                    style: ElevatedButton.styleFrom(
-                      side: BorderSide(width: 2.0, color: Colors.blue),
-
-                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20),
-                    ),
-            ),
-                   child: Row(
-                     children: [
-                       Container(
-                         child:dashbadge(),
-                       ),
-                       SizedBox(width:2),
-                       Text('Dashboard',style: TextStyle(color: Colors.white,fontSize: 20.0),),
-                     ],
-                   ),
-                    onPressed: () {
-             Navigator.push(context, MaterialPageRoute(builder: (context) =>AllDash()));
-                      // do something
-                    },
-                  ),
+            //       OutlinedButton(
+            //         style: ElevatedButton.styleFrom(
+            //           side: BorderSide(width: 2.0, color: Colors.blue),
+            //
+            //           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20),
+            //         ),
+            // ),
+            //        child: Row(
+            //          children: [
+            //            Container(
+            //              child:dashbadge(),
+            //            ),
+            //            SizedBox(width:2),
+            //            Text('Dashboard',style: TextStyle(color: Colors.white,fontSize: 20.0),),
+            //          ],
+            //        ),
+            //         onPressed: () {
+            //  Navigator.push(context, MaterialPageRoute(builder: (context) =>AllDash()));
+            //           // do something
+            //         },
+            //       ),
                 ]
             ),
           ),
@@ -500,6 +501,17 @@ showInvoiceView(context) {
         ),
       ),
     );
+  }showCommissionDash(context) {
+
+
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => AllDash(
+            selectedPage:2,
+        ),
+      ),
+    );
   }
 showSellerDash(context) {
     Navigator.push(
@@ -629,7 +641,7 @@ showOrders(context) {
         ),
       );
     }
-    else if (type == 'Payment'||type == 'PaymentO'||type=='fav') {
+    else if (type == 'Payment'||type == 'PaymentO'||type=='fav'||type=='Commission'||type=='ReviewO') {
       return
 
         mediaPreview = GestureDetector(
@@ -652,11 +664,19 @@ showOrders(context) {
         ),
       );
     }
-    else if (type == 'ReviewO'){
+       else if (type == 'PaymentResale'||type == 'PaymentResaleO'||type=='resaleLike'||type=='resaleReview'||type=='makeOffer') {
       return
 
         mediaPreview = GestureDetector(
-        onTap: () => showProduct(context),
+        onTap: () =>  Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (context) => ResaleScreen(
+                postId: postId,
+              userId: userId,
+            ),
+          ),
+        ),
         child: ClipRRect(borderRadius: BorderRadius.circular(15.0),
           child: Container(
             height: 50.0,
@@ -675,6 +695,39 @@ showOrders(context) {
         ),
       );
     }
+  else if (type == 'ReqPayment'||type == 'ReqPaymentI'||type == 'ReviewC'
+        ||type == 'ServicePaymentI'||type == 'ServicePayment') {
+      return
+
+        mediaPreview = GestureDetector(
+        onTap: () =>  Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (context) => InvoiceView(
+                orderId: postId,
+              ownerId: userId,
+            ),
+          ),
+        ),
+        child: ClipRRect(borderRadius: BorderRadius.circular(15.0),
+          child: Container(
+            height: 50.0,
+            width: 50.0,
+            child: AspectRatio(
+              aspectRatio: 16 / 9,
+              child: Container(
+                decoration: BoxDecoration(
+                    image: DecorationImage(
+                      fit: BoxFit.cover,
+                      image: CachedNetworkImageProvider(mediaUrl),
+                    )),
+              ),
+            ),
+          ),
+        ),
+      );
+    }
+
 
     else {
       mediaPreview = Text('');
@@ -701,67 +754,24 @@ showOrders(context) {
       return
       activityItemText = "is following you";
     }
-    else if (type == 'comment') {
-      activityItemText = 'Commented on your post: $commentData';
-    }
-    else if (type == 'Payment') {
+
+
+    else if (type == 'Payment'||type == 'ReqPayment'||type == 'ReqPaymentI'||type == 'ReviewC'||type == 'ReviewO'
+        ||type == 'ServicePaymentI'||type == 'ServicePayment'||type == 'SupportPaymentSender'||type == 'SupportPaymentReceiver'
+        ||type == 'PaymentO'||type == 'PaymentResaleO'||type == 'Commission'||type == 'resaleReview'||
+        type == 'PaymentA'||type == 'PaymentOA'||type == 'topBid'||type == 'makeOffer'||type == 'PaymentResale'
+    ) {
 
       activityItemText = "$message";
     }
-    else if (type == 'ReqPayment') {
-      activityItemText = '$message';
+
+    else if (type == 'collectioncomment'||type == 'Videocomment'||type == 'blogcomment'||type == 'comment') {
+      activityItemText = '$commentData';
     }
-    else if (type == 'ReqPaymentI') {
-      activityItemText = '$message';
-    }
-    else if (type == 'ReviewC') {
-      activityItemText = '$message';
-    }
-    else if (type == 'ReviewO') {
-      activityItemText = '$message';
-    }
-    else if (type == 'ServicePaymentI') {
-      activityItemText = '$message';
-    }
-    else if (type == 'ServicePayment') {
-      activityItemText = '$message';
-    }
-     else if (type == 'SupportPaymentSender') {
-      activityItemText = '$message';
-    }
-    else if (type == 'SupportPaymentReceiver') {
-      activityItemText = '$message';
-    }
-    
-    else if (type == 'PaymentO') {
-      return
-      activityItemText = "$message";
-    }
-    else if (type == 'PaymentA') {
-      activityItemText = '$message';
-    }
-    else if (type == 'PaymentOA') {
-      activityItemText = '$message';
-    }
-    else if (type == 'topBid') {
-      return
-      activityItemText = "$message";
-    }
-    else if (type == 'Videocomment') {
-      activityItemText = 'Commented on your video: $commentData';
-    }
-    else if (type == 'blogcomment') {
-      activityItemText = 'Commented on your Blog: $commentData';
-    }
-    else if (type == 'collectioncomment') {
-      activityItemText = 'Commented on your Collection: $commentData';
-    }
-else if (type == 'fav') {
-      activityItemText = 'Someone wish listed an item from your shop';
-    }else if (type == 'O') {
-      activityItemText = 'Payments sent to your bank account';
-    }else if (type == 'S') {
-      activityItemText = 'Payments sent to your bank account';
+else if (type == 'fav'||type == 'resaleLike') {
+      activityItemText = 'wish listed an item from your shop';
+    }else if (type == 'OrderPayments'||type == 'FreelancePayments'||type == 'CommissionPayments') {
+      activityItemText = 'Payments settled';
     }
 
     else {
@@ -1237,6 +1247,61 @@ child:CircleAvatar(
     );
 
 }
+resale(ParentContext){
+  return
+
+    Padding(
+      padding: EdgeInsets.only(bottom: 2.0),
+      child: ClipRRect(borderRadius: BorderRadius.circular(15.0),
+        child: Container(
+          color: Color(0XFFb3b3ff).withOpacity(0.3),
+          child: ListTile(
+            title: GestureDetector(
+              onTap: () =>   Navigator.push(
+                ParentContext,
+                MaterialPageRoute(
+                  builder: (context) => ResaleScreen(
+                    postId: postId,
+                    userId: userId,
+                  ),
+                ),
+              ),
+              child: RichText(
+                maxLines: 1,softWrap:false,overflow:TextOverflow.visible,                    text: TextSpan(
+                  style: TextStyle(
+                    fontSize: 14.0,
+                    color: kText,
+                  ),
+                  children: [
+                    TextSpan(
+                      text: username,
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold, color: Colors.black),
+                    ),
+                    TextSpan(
+                      text: ' $activityItemText',
+                    )
+                  ]),
+              ),
+            ),
+            leading: GestureDetector(
+              onTap: () => showProfile(ParentContext,profileId: userId),
+child:CircleAvatar(
+              backgroundImage: CachedNetworkImageProvider(userProfileImg),
+            ),
+),
+            subtitle: Text(
+              timeago.format(timestamp.toDate()),
+              overflow: TextOverflow.ellipsis,
+              style: TextStyle(color: kSubtitle),
+            ),
+            trailing: mediaPreview,
+          ),
+        ),
+      ),
+    );
+
+}
 
   ReqPayment(ParentContext){
     return
@@ -1522,6 +1587,168 @@ child:CircleAvatar(
     );
 
 }
+Commission(ParentContext){
+
+  return
+
+    Padding(
+      padding: EdgeInsets.only(bottom: 2.0),
+      child: ClipRRect(borderRadius: BorderRadius.circular(15.0),
+        child: Container(
+          color: Color(0XFFb3b3ff).withOpacity(0.3),
+          child: ListTile(
+            title: GestureDetector(
+              onTap: () => showCommissionDash(ParentContext),
+              child: RichText(
+                maxLines: 1,softWrap:false,overflow:TextOverflow.fade,                    text: TextSpan(
+                  style: TextStyle(
+                    fontSize: 14.0,
+                    color: kText,
+                  ),
+                  children: [
+                    TextSpan(
+                      text: username,
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold, color: Colors.black),
+                    ),
+                    TextSpan(
+                      text: ' $activityItemText',
+                    )
+                  ]),
+              ),
+            ),
+            leading: GestureDetector(
+              onTap: () => showProfile(ParentContext,profileId: userId),
+child:CircleAvatar(
+              backgroundImage: CachedNetworkImageProvider(userProfileImg),
+            ),
+),
+            subtitle: Text(
+              timeago.format(timestamp.toDate()),
+              overflow: TextOverflow.ellipsis,
+              style: TextStyle(color: kSubtitle),
+            ),
+            trailing: mediaPreview,
+          ),
+        ),
+      ),
+    );
+
+}
+  CommissionPayments(ParentContext){
+
+  return
+
+    Padding(
+      padding: EdgeInsets.only(bottom: 2.0),
+      child: ClipRRect(borderRadius: BorderRadius.circular(15.0),
+        child: Container(
+          color: Color(0XFFb3b3ff).withOpacity(0.3),
+          child: ListTile(
+            title: GestureDetector(
+              onTap: () => showCommissionDash(ParentContext),
+              child: RichText(
+                maxLines: 1,softWrap:false,overflow:TextOverflow.fade,                    text: TextSpan(
+                  style: TextStyle(
+                    fontSize: 14.0,
+                    color: kText,
+                  ),
+                  children: [
+
+                    TextSpan(
+                      text: ' $activityItemText',
+                    )
+                  ]),
+              ),
+            ),
+
+            subtitle: Text(
+              timeago.format(timestamp.toDate()),
+              overflow: TextOverflow.ellipsis,
+              style: TextStyle(color: kSubtitle),
+            ),
+          ),
+        ),
+      ),
+    );
+
+}
+  OrderPayments(ParentContext){
+
+  return
+
+    Padding(
+      padding: EdgeInsets.only(bottom: 2.0),
+      child: ClipRRect(borderRadius: BorderRadius.circular(15.0),
+        child: Container(
+          color: Color(0XFFb3b3ff).withOpacity(0.3),
+          child: ListTile(
+            title: GestureDetector(
+              onTap: () => showSellerDash(ParentContext),
+              child: RichText(
+                maxLines: 1,softWrap:false,overflow:TextOverflow.fade,                    text: TextSpan(
+                  style: TextStyle(
+                    fontSize: 14.0,
+                    color: kText,
+                  ),
+                  children: [
+
+                    TextSpan(
+                      text: ' $activityItemText',
+                    )
+                  ]),
+              ),
+            ),
+
+            subtitle: Text(
+              timeago.format(timestamp.toDate()),
+              overflow: TextOverflow.ellipsis,
+              style: TextStyle(color: kSubtitle),
+            ),
+          ),
+        ),
+      ),
+    );
+
+}
+  FreelancePayments(ParentContext){
+
+  return
+
+    Padding(
+      padding: EdgeInsets.only(bottom: 2.0),
+      child: ClipRRect(borderRadius: BorderRadius.circular(15.0),
+        child: Container(
+          color: Color(0XFFb3b3ff).withOpacity(0.3),
+          child: ListTile(
+            title: GestureDetector(
+              onTap: () => showServiceDash(ParentContext),
+              child: RichText(
+                maxLines: 1,softWrap:false,overflow:TextOverflow.fade,                    text: TextSpan(
+                  style: TextStyle(
+                    fontSize: 14.0,
+                    color: kText,
+                  ),
+                  children: [
+
+                    TextSpan(
+                      text: ' $activityItemText',
+                    )
+                  ]),
+              ),
+            ),
+
+            subtitle: Text(
+              timeago.format(timestamp.toDate()),
+              overflow: TextOverflow.ellipsis,
+              style: TextStyle(color: kSubtitle),
+            ),
+          ),
+        ),
+      ),
+    );
+
+}
 
    main(ParentContext){
 
@@ -1584,6 +1811,15 @@ child:CircleAvatar(
     type == 'ReqPayment' ? ReqPayment(context):
       type == 'SupportPaymentSender' ? supportPaymentSender(context):
       type == 'SupportPaymentReceiver' ? supportPaymentReceiver(context):
+ type == 'PaymentResale' ? resale(context):
+ type == 'resaleLike' ? resale(context):
+ type == 'PaymentResaleO' ? resale(context):
+ type == 'makeOffer' ? resale(context):
+ type == 'resaleReview' ? resale(context):
+ type == 'Commission' ? Commission(context):
+ type == 'FreelancePayments' ? FreelancePayments(context):
+ type == 'OrderPayments' ? OrderPayments(context):
+ type == 'CommissionPayments' ? CommissionPayments(context):
 
      type == 'ReqPaymentI' ? ReqPaymentI(context):
      type == 'ReviewC' ? ReviewC(context):

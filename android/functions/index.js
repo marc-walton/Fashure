@@ -191,8 +191,12 @@ exports.onCreateActivityFeedItem = functions.firestore
       switch (activityFeedItem.type) {
         case "Chat":
           body = `${activityFeedItem.username} replied: ${activityFeedItem.message}`;
-          break;case "fav":
-          body = `${activityFeedItem.username} Wishlisted an item`;
+          break;
+          case "fav":
+          body = `${activityFeedItem.username} wishlisted an item`;
+          case "resaleLike":
+          body = `${activityFeedItem.username} wishlisted an item`;
+
           break; case "comment":
           body = `${activityFeedItem.username} commented: ${activityFeedItem.commentData}`;
           break;
@@ -218,6 +222,21 @@ case "payment":
           body = `${activityFeedItem.username} ${activityFeedItem.message}`;
           break;
    case "SupportPaymentReceiver":
+          body = `${activityFeedItem.username} ${activityFeedItem.message}`;
+          break;
+   case "PaymentResaleO":
+          body = `${activityFeedItem.username} ${activityFeedItem.message}`;
+          break;
+   case "PaymentResale":
+          body = `${activityFeedItem.username} ${activityFeedItem.message}`;
+          break;
+ case "resaleReview":
+          body = `${activityFeedItem.username} ${activityFeedItem.message}`;
+          break;
+ case "makeOffer":
+          body = `${activityFeedItem.username} ${activityFeedItem.message}`;
+          break;
+ case "Commission":
           body = `${activityFeedItem.username} ${activityFeedItem.message}`;
           break;
 
@@ -252,13 +271,22 @@ case "collectioncomment":
           body = `${activityFeedItem.username} commented: ${activityFeedItem.commentData}`;
           break;
 case "PaymentA":
-          body = `${activityFeedItem.username} commented: ${activityFeedItem.message}`;
+          body = `${activityFeedItem.username} ${activityFeedItem.message}`;
           break;
 case "PaymentOA":
-          body = `${activityFeedItem.username} commented: ${activityFeedItem.message}`;
+          body = `${activityFeedItem.username}  ${activityFeedItem.message}`;
           break;
 case "topBid":
           body = `${activityFeedItem.username} commented: You have won an auction!`;
+          break;
+case "FreelancePayments":
+          body = `Payments settled!`;
+          break;
+case "CommissionPayments":
+          body = `Payments settled!`;
+          break;
+case "OrderPayments":
+          body = `Payments settled!`;
           break;
 
         default:

@@ -90,7 +90,7 @@ class _ShopState extends State<Shop>  with  TickerProviderStateMixin{
   String ownerId;
   Prod products;
  List<String> followingList = [];
- Filter filter;
+ // Filter filter;
   _ShopState({
     this.prodId, this.products,this.ownerId,
   });
@@ -220,11 +220,7 @@ DFF(),
 //   Tabs({this.title,this.color});
 // }
 
-class Filter{
-  bool category= false;
-  String price;
-  Filter({this.category,this.price});
-}
+
 
 DFF(){
   return
@@ -285,3 +281,309 @@ Scaffold(
   ),
 );
 }
+// sg(){
+//   Container(
+//       height:MediaQuery.of(context).size.height/19,
+//       child:Row(
+//         children: [
+//           InkWell(
+//             onTap: (){        showDialog<void>(
+//               context: context,
+//               // useRootNavigator:true,
+//
+//               barrierDismissible: true,
+//               // false = user must tap button, true = tap outside dialog
+//               builder: (BuildContext dialogContext) {
+//                 return Builder(builder: (BuildContext context) {
+//                   return StatefulBuilder(builder: (BuildContext context, State){
+//                     return Dialog(
+//                       shape: RoundedRectangleBorder(
+//                         borderRadius: BorderRadius.circular(20),
+//                       ),
+//                       child: Container(
+//                         height:MediaQuery.of(context).size.height/2,
+//                         child: SingleChildScrollView(
+//                           child: Column(
+//                             children: [
+//                               ExpansionTile(
+//                                   title: Text("Sort by price"),
+//                                   children: [Column(
+//                                     children: [
+//                                       InkWell(
+//                                         onTap: () {
+//                                           State((){});
+//                                           priceQuery = "0";
+//                                           AQuery = "A0";
+//                                           BQuery = "B0";
+//                                           CQuery = "C0";
+//                                           DQuery = "D0";
+//                                           EQuery = "E0";
+//                                           FQuery = "F0";
+//                                           GQuery = "G0";
+//                                           HQuery = "H0";
+//                                           IQuery = "I0";
+//                                           JQuery = "J0";
+//                                           KQuery = "K0";
+//                                           LQuery = "L0";
+//                                           MQuery = "M0";
+//                                           NQuery = "N0";
+//                                           OQuery = "O0";
+//                                           PQuery = "P0";
+//                                           QQuery = "Q0";
+//                                           RQuery = "R0";
+//                                           SQuery = "S0";
+//
+//                                         },
+//                                         child: Container(
+//                                           color: priceQuery == "0"||priceQuery == "0D"?Colors.pink.shade50:Colors.white,
+//
+//                                           height: 50,
+//                                           width: MediaQuery.of(context).size.width,
+//                                           child: Column(
+//                                             mainAxisAlignment: MainAxisAlignment.center,
+//                                             children: [
+//                                               FittedBox(
+//                                                   child: Text(
+//                                                     'All',
+//                                                   )),
+//                                             ],
+//                                           ),
+//                                         ),
+//                                       ),
+//                                       InkWell(
+//                                         onTap: () {
+//                                           State((){});
+//
+//                                           priceQuery = "low";
+//                                           AQuery = "Alow";
+//                                           BQuery = "Blow";
+//                                           CQuery = "Clow";
+//                                           DQuery = "Dlow";
+//                                           EQuery = "Elow";
+//                                           FQuery = "Flow";
+//                                           GQuery = "Glow";
+//                                           HQuery = "Hlow";
+//                                           IQuery = "Ilow";
+//                                           JQuery = "Jlow";
+//                                           KQuery = "Klow";
+//                                           LQuery = "Llow";
+//                                           MQuery = "Mlow";
+//                                           NQuery = "Nlow";
+//                                           OQuery = "Olow";
+//                                           PQuery = "Plow";
+//                                           QQuery = "Qlow";
+//                                           RQuery = "Rlow";
+//                                           SQuery = "Slow";
+//
+//                                         },
+//                                         child: Container(
+//                                           color: priceQuery == "low"||priceQuery == "lowD"?Colors.pink.shade50:Colors.white,
+//
+//                                           height: 50,
+//                                           width: MediaQuery.of(context).size.width,
+//                                           child: Column(
+//                                             mainAxisAlignment: MainAxisAlignment.center,
+//                                             children: [
+//                                               FittedBox(
+//                                                   child: Text(
+//                                                     'Low to high',
+//                                                   )),
+//                                             ],
+//                                           ),
+//                                         ),
+//                                       ),
+//                                       InkWell(
+//                                         onTap: () {
+//                                           State((){});
+//
+//                                           priceQuery = "high";
+//                                           AQuery = "Ahigh";
+//                                           BQuery = "Bhigh";
+//                                           CQuery = "Chigh";
+//                                           DQuery = "Dhigh";
+//                                           EQuery = "Ehigh";
+//                                           FQuery = "Fhigh";
+//                                           GQuery = "Ghigh";
+//                                           HQuery = "Hhigh";
+//                                           IQuery = "Ihigh";
+//                                           JQuery = "Jhigh";
+//                                           KQuery = "Khigh";
+//                                           LQuery = "Lhigh";
+//                                           MQuery = "Mhigh";
+//                                           NQuery = "Nhigh";
+//                                           OQuery = "Ohigh";
+//                                           PQuery = "Phigh";
+//                                           QQuery = "Qhigh";
+//                                           RQuery = "Rhigh";
+//                                           SQuery = "Shigh";
+//
+//
+//                                         },
+//                                         child: Container(
+//                                           color: priceQuery == "high"||priceQuery == "highD"?Colors.pink.shade50:Colors.white,
+//
+//                                           height: 50,
+//                                           width: MediaQuery.of(context).size.width,
+//                                           child: Column(
+//                                             mainAxisAlignment: MainAxisAlignment.center,
+//                                             children: [
+//                                               FittedBox(
+//                                                   child: Text(
+//                                                     'High to low',
+//                                                   )),
+//                                             ],
+//                                           ),
+//                                         ),
+//                                       ),
+//
+//                                     ],
+//                                   ),
+//                                   ]
+//                               ),
+//                               ExpansionTile(
+//                                   title: Text("Avoid Duties & Taxes"),
+//                                   children: [Column(
+//                                     children: [
+//                                       Text("(Shop within your country)"),
+//                                       GFToggle(
+//                                         onChanged: (val){
+//                                           setState(() {
+//                                             duties = val;
+//                                           });
+//                                         },
+//                                         value: duties,
+//                                         type: GFToggleType.custom,
+//                                       ),
+//                                     ],
+//                                   ),
+//                                   ]
+//                               ),
+//                               FloatingActionButton.extended(onPressed: (){
+//                                 duties? setState((){
+//                                   priceQuery = priceQuery.replaceAll("D","");
+//                                   AQuery =AQuery.replaceAll("D","");
+//                                   BQuery =BQuery.replaceAll("D","");
+//                                   CQuery =CQuery.replaceAll("D","");
+//                                   DQuery =DQuery.replaceAll("D","");
+//                                   EQuery =EQuery.replaceAll("D","");
+//                                   FQuery =FQuery.replaceAll("D","");
+//                                   GQuery =GQuery.replaceAll("D","");
+//                                   HQuery =HQuery.replaceAll("D","");
+//                                   IQuery =IQuery.replaceAll("D","");
+//                                   JQuery =JQuery.replaceAll("D","");
+//                                   KQuery =KQuery.replaceAll("D","");
+//                                   LQuery =LQuery.replaceAll("D","");
+//                                   MQuery =MQuery.replaceAll("D","");
+//                                   NQuery =NQuery.replaceAll("D","");
+//                                   OQuery =OQuery.replaceAll("D","");
+//                                   PQuery =PQuery.replaceAll("D","");
+//                                   QQuery =QQuery.replaceAll("D","");
+//                                   RQuery =RQuery.replaceAll("D","");
+//                                   SQuery =SQuery.replaceAll("D","");
+//                                   priceQuery = priceQuery + "D";
+//                                   AQuery = AQuery + "D";
+//                                   BQuery = BQuery + "D";
+//                                   CQuery = CQuery + "D";
+//                                   DQuery = DQuery + "D";
+//                                   EQuery = EQuery + "D";
+//                                   FQuery = FQuery + "D";
+//                                   GQuery = GQuery + "D";
+//                                   HQuery = HQuery + "D";
+//                                   IQuery = IQuery + "D";
+//                                   JQuery = JQuery + "D";
+//                                   KQuery = KQuery + "D";
+//                                   LQuery = LQuery + "D";
+//                                   MQuery = MQuery + "D";
+//                                   NQuery = NQuery + "D";
+//                                   OQuery = OQuery + "D";
+//                                   PQuery = PQuery + "D";
+//                                   QQuery = QQuery + "D";
+//                                   RQuery = RQuery + "D";
+//                                   SQuery = SQuery + "D";
+//
+//
+//                                 }):
+//                                 setState((){
+//                                   priceQuery = priceQuery.replaceAll("D","");
+//                                   AQuery =AQuery.replaceAll("D","");
+//                                   BQuery =BQuery.replaceAll("D","");
+//                                   CQuery =CQuery.replaceAll("D","");
+//                                   DQuery =DQuery.replaceAll("D","");
+//                                   EQuery =EQuery.replaceAll("D","");
+//                                   FQuery =FQuery.replaceAll("D","");
+//                                   GQuery =GQuery.replaceAll("D","");
+//                                   HQuery =HQuery.replaceAll("D","");
+//                                   IQuery =IQuery.replaceAll("D","");
+//                                   JQuery =JQuery.replaceAll("D","");
+//                                   KQuery =KQuery.replaceAll("D","");
+//                                   LQuery =LQuery.replaceAll("D","");
+//                                   MQuery =MQuery.replaceAll("D","");
+//                                   NQuery =NQuery.replaceAll("D","");
+//                                   OQuery =OQuery.replaceAll("D","");
+//                                   PQuery =PQuery.replaceAll("D","");
+//                                   QQuery =QQuery.replaceAll("D","");
+//                                   RQuery =RQuery.replaceAll("D","");
+//                                   SQuery =SQuery.replaceAll("D","");
+//
+//                                 });
+//
+//                               }, label: Text("Apply"))
+//                             ],
+//                           ),
+//                         ),
+//                       ),
+//                     );
+//                   });
+//                 });
+//               },
+//             );},
+//             child: FittedBox(
+//               fit:  BoxFit.fitHeight,
+//               child: Container(
+//
+//                 width:MediaQuery.of(context).size.height/5,
+//
+//                 //icon: Icon(Icons.drag_handle),
+//                 child:Row(
+//                   mainAxisAlignment: MainAxisAlignment.center,
+//                   children: [
+//                     Icon(Icons.filter_list_outlined),
+//                     SizedBox(width: 5,),
+//                     Text("Filter",style:TextStyle(color: Colors.black)),
+//                   ],
+//                 ),
+//
+//               ),
+//             ),
+//           ),
+//           InkWell(
+//             onTap: (){ setState(() {
+//               tabs = !tabs ;
+//             });   },
+//             child: FittedBox(
+//               fit:  BoxFit.fitHeight,
+//               child: Container(
+//
+//                 width:MediaQuery.of(context).size.height/5,
+//
+//                 //icon: Icon(Icons.drag_handle),
+//                 child:Row(
+//                   mainAxisAlignment: MainAxisAlignment.center,
+//                   children: [
+//                     Text("Category",style:TextStyle(color: Colors.black)),
+//                     SizedBox(width: 5,),
+//
+//                     Icon(Icons.sort),
+//
+//                   ],
+//                 ),
+//
+//               ),
+//             ),
+//           ),
+//
+//
+//         ],
+//       )),
+//
+// }

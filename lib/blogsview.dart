@@ -23,6 +23,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:getwidget/components/button/gf_button.dart';
 import 'package:getwidget/shape/gf_button_shape.dart';
 import 'package:getwidget/types/gf_button_type.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:multi_image_picker/multi_image_picker.dart';
@@ -590,15 +591,9 @@ return  showMaterialModalBottomSheet(
 
         ),
       ),
-        Row(children:[
-          SizedBox(width:12.0),
-          Text(title,
-            style: TextStyle(
-              color:kText,
-              fontWeight: FontWeight.bold,
-              fontSize: 25.0,
-            ),),]),
-      ClipRRect(
+        Text(title,
+          style:  GoogleFonts.balooBhai(fontSize: 20.0,fontWeight: FontWeight.normal),) ,
+        ClipRRect(
           borderRadius: BorderRadius.only
             (bottomLeft: Radius.circular(20.0),bottomRight: Radius.circular(20.0)),
           child: Container(

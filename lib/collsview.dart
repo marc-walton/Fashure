@@ -24,6 +24,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:getwidget/components/button/gf_button.dart';
 import 'package:getwidget/shape/gf_button_shape.dart';
 import 'package:getwidget/types/gf_button_type.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:photo_view/photo_view.dart';
@@ -340,7 +341,7 @@ return
                                     height: 400,
                                     child:PhotoView(imageProvider: CachedNetworkImageProvider
                                       (snapshot
-                                        .data.docs[index].data()['shopmediaUrl'][i])),),
+                                        .data.docs[index].data()['collmediaUrl'][i])),),
                                 );
                             },
                           );
@@ -519,14 +520,8 @@ buildPostHeader() {
                       }):handleDeletePost(context);
                 }),
           ),
-          ListTile(
-            leading:
-            Text(title,
-              style: TextStyle(
-                color: kText,
-                fontWeight: FontWeight.bold,
-              ),),
-          ),
+          Text(title,
+            style:  GoogleFonts.bellotaText(fontSize: 25.0,fontWeight: FontWeight.bold),) ,
 
           pics()  ,
           Row(

@@ -16,6 +16,7 @@ final String finalAmount;
   final String advancepay;
   final String finalpay;
 final String title;
+final String image;
 
   final String username;
   final String profileimg;
@@ -41,6 +42,7 @@ final String title;
     this.inr,
     this.gbp,
 this.title,
+this.image,
 
       this.Fusd,
     this.Feur,
@@ -170,6 +172,7 @@ String usd;
       'inr':widget.inr,
        'gbp':widget.gbp,
       'eur':widget.eur,
+ 'image':widget.image,
 
       'Fusd':widget.Fusd,
       'Finr':widget.Finr,
@@ -215,7 +218,7 @@ String usd;
         "userId": widget.OwnerId,
         "userProfileImg": widget.profileimg,
         "postId": widget.OrderId,
-        // "mediaUrl": mediaUrl,
+        "mediaUrl": widget.image,
         "timestamp": timestamp,
         "read": 'false',
         'message':'Payment Successful on an Invoice!',
@@ -229,7 +232,7 @@ String usd;
         "userId": widget.OwnerId,
         "userProfileImg": currentUser.photoUrl,
         "postId": widget.OrderId,
-        // "mediaUrl": mediaUrl,
+        "mediaUrl": widget.image,
         "timestamp": timestamp,
         "read": 'false',
         'message':'Payment Successful on an Invoice !',
@@ -266,7 +269,7 @@ String usd;
           "userId": widget.OwnerId,
           "userProfileImg": widget.profileimg,
           "postId": widget.OrderId,
-          // "mediaUrl": mediaUrl,
+          "mediaUrl": widget.image,
           "timestamp": timestamp,
           "read": 'false',
           'message': 'Payment Successful on an Invoice!',
@@ -281,7 +284,7 @@ String usd;
           "userId": widget.OwnerId,
           "userProfileImg": currentUser.photoUrl,
           "postId": widget.OrderId,
-          // "mediaUrl": mediaUrl,
+          "mediaUrl": widget.image,
           "timestamp": timestamp,
           "read": 'false',
           'message': 'Payment Successful on an Invoice !',
@@ -324,7 +327,7 @@ String usd;
         "userId": widget.OwnerId,
         "userProfileImg": widget.profileimg,
         "postId": widget.OrderId,
-        // "mediaUrl": mediaUrl,
+        "mediaUrl": widget.image,
         "timestamp": timestamp,
         "read": 'false',
         'message':'Payment Successful on an Invoice!',
@@ -339,7 +342,7 @@ String usd;
         "userProfileImg": currentUser.photoUrl,
         "postId": widget.OrderId,
 
-        // "mediaUrl": mediaUrl,
+        "mediaUrl": widget.image,
         "timestamp": timestamp,
         "read": 'false',
         'message':'Payment Successful on an Invoice !',

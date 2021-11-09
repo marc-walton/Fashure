@@ -9655,59 +9655,51 @@ isLive: true,
                 String ownerId = documentSnapshot.data()['userId'];
                 var rating =   documentSnapshot.data()['rating'];
                 String review  = documentSnapshot.data()['review'];
+                String reviewerId  = documentSnapshot.data()['reviewerId'];
+                String reviewerName  = documentSnapshot.data()['reviewerName'];
+                String reviewerImg  = documentSnapshot.data()['reviewerImg'];
 
-                return
-                  FutureBuilder(
-                    future: usersRef.doc(ownerId).get(),
-                    builder: (context, snapshot) {
-                      if (!snapshot.hasData) {
-                        return circularProgress();
-                      }
-                       Users user = Users.fromDocument(snapshot.data);
-//          bool isPostOwner = currentUserId == ownerId;
-                      return Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Column(
-                          children: <Widget>[
-                            GestureDetector(
-                              onTap: () => showProfile(context, profileId: user.id),
-                              child: ListTile(
-                                leading: CircleAvatar(
-                                  backgroundImage: CachedNetworkImageProvider(user.photoUrl),
-                                  backgroundColor: Colors.grey,
-                                ),
-                                title: Text(
-                                  user.displayName,
-                                  style: TextStyle(
-                                    color: kText,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                    ),
+                return Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Column(
+                    children: <Widget>[
+                      GestureDetector(
+                        onTap: () => showProfile(context, profileId: reviewerId),
+                        child: ListTile(
+                          leading: CircleAvatar(
+                            backgroundImage: CachedNetworkImageProvider(reviewerImg),
+                            backgroundColor: Colors.grey,
+                          ),
+                          title: Text(
+                            reviewerName,
+                            style: TextStyle(
+                              color: kText,
+                              fontWeight: FontWeight.bold,
                             ),
-                            SmoothStarRating(
-                              isReadOnly: true,
-                              filledIconData: Icons.star,
-                              halfFilledIconData: Icons.star_half,
-                              rating: rating,
-                              size: 35,
-                              starCount: 5,
-
-                            ),
-                            SizedBox(height: 8.0,),
-                            Row(
-                              children: [
-                                Text(review,style: TextStyle(color: kText),),
-                              ],
-                            ),
-                            Divider(color: kGrey,),
-                          ],
-
+                          ),
                         ),
-                      );
+                      ),
+                      SmoothStarRating(
+                        isReadOnly: true,
+                        filledIconData: Icons.star,
+                        halfFilledIconData: Icons.star_half,
+                        rating: rating,
+                        size: 35,
+                        starCount: 5,
 
-                    },
-                  );
+                      ),
+                      SizedBox(height: 8.0,),
+                      Row(
+                        children: [
+                          Text(review,style: TextStyle(color: kText),),
+                        ],
+                      ),
+                      Divider(color: kGrey,),
+                    ],
+
+                  ),
+                );
+
               },
               query: FirebaseFirestore.instance.collection('Reviews').doc(prodId)
                   .collection('prodReviews').orderBy('timestamp',descending: true)

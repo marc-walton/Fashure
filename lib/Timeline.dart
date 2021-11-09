@@ -24,6 +24,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:fashow/progress.dart';
 import 'package:fashow/HomePage.dart';
 import 'package:fashow/ActivityFeed.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import 'package:paginate_firestore/paginate_firestore.dart';
 import 'package:get/get.dart';
@@ -242,7 +243,7 @@ TabController _tabController;
 
                       FittedBox(
                         fit:BoxFit.fitWidth,
-                        child: Text(   'Posts',
+                        child: Text(   'Feed',
                           style: TextStyle(
 
                               color: Colors.white),),
@@ -402,41 +403,31 @@ class Collection extends StatelessWidget {
                       ),
                     ),
                    ),
-                  ListTile(
-                    title: Text(documentSnapshot.data()['title'],
-                        maxLines: 3,
-                        style: new TextStyle(
-                            fontWeight: FontWeight.w500,
-                            color:kText,
-                            fontSize: 18.0)),
-                  ),
-                  Column(
-                    children: <Widget>[
-                      GestureDetector(
-                        onTap:() {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => CollScreen(
-                                collId: documentSnapshot.data()['collId'],
-                                userId:  documentSnapshot.data()['ownerId'],
-                              ),
-                            ),
-                          );
-                        },
-                        child: Container(
-                            // decoration: BoxDecoration(
-                            //   color: Colors.white,
-                            // ),
-                            width: MediaQuery.of(context).size.width,
-                            child:
-                            CachedNetworkImage(
-                              imageUrl: images.first,
-                            )
+                Text(documentSnapshot.data()["title"],
+                  style:  GoogleFonts.bellotaText(fontSize: 25.0,fontWeight: FontWeight.bold),) ,
+                GestureDetector(
+                  onTap:() {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => CollScreen(
+                          collId: documentSnapshot.data()['collId'],
+                          userId:  documentSnapshot.data()['ownerId'],
                         ),
                       ),
-                    ],
+                    );
+                  },
+                  child: Container(
+                    // decoration: BoxDecoration(
+                    //   color: Colors.white,
+                    // ),
+                      width: MediaQuery.of(context).size.width,
+                      child:
+                      CachedNetworkImage(
+                        imageUrl: images.first,
+                      )
                   ),
+                ),
 
               ],
 
@@ -489,39 +480,28 @@ class Blog extends StatelessWidget {
                   ),
                 ),
               ),
-              ListTile(
-
-                title: Text(documentSnapshot.data()['title'],
-                    maxLines: 3,
-                    style: new TextStyle(
-                        fontWeight: FontWeight.w500,
-                        color: kText,
-                        fontSize: 18.0)),
-              ),
-              Column(
-                children: <Widget>[
-                  GestureDetector(
-                    onTap:() {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => BlogScreen(
-                            blogId: documentSnapshot.data()['blogId'],
-                            userId:  documentSnapshot.data()['ownerId'],
-                          ),
+                Text(documentSnapshot.data()["title"],
+                  style:  GoogleFonts.balooBhai(fontSize: 20.0,fontWeight: FontWeight.normal),) ,
+                GestureDetector(
+                  onTap:() {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => BlogScreen(
+                          blogId: documentSnapshot.data()['blogId'],
+                          userId:  documentSnapshot.data()['ownerId'],
                         ),
-                      );
-                    },
-                    child: Container(
+                      ),
+                    );
+                  },
+                  child: Container(
 
-                      width: MediaQuery.of(context).size.width,
+                    width: MediaQuery.of(context).size.width,
 
-                      child:  CachedNetworkImage( imageUrl: blogMedia.first),
+                    child:  CachedNetworkImage( imageUrl: blogMedia.first),
 
-                    ),
                   ),
-                ],
-              ),
+                ),
 
         ],
 

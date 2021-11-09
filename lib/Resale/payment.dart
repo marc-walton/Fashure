@@ -268,7 +268,7 @@ SharedPreferences adPrefs;
         'inr': widget.inr[i],
         'gbp': widget.gbp[i],
         'shipcostuser': widget.shipcost[i] ?? 0,
-        'customprice': "",
+        'customprice': 0,
         "timestamp": timestamp,
         "productname": widget.title[i].toString(),
         "shopmediaUrl": widget.images[i].toString(),
@@ -292,13 +292,12 @@ SharedPreferences adPrefs;
           .collection('feedItems')
           .doc("$orderId${id[i].toString()}")
           .set({
-        "type": "Payment",
+        "type": "PaymentResale",
         "username": widget.username[i].toString(),
         "userId": widget.OwnerId[i].toString(),
         "userProfileImg": widget.profileimg[i].toString(),
         "mediaUrl": widget.images[i].toString(),
         "postId": widget.resaleId[i].toString(),
-        "mediaUrl": widget.images[i].toString(),
         "timestamp": timestamp,
         "read": 'false',
         'message': 'Your order has been placed!',
@@ -308,7 +307,7 @@ SharedPreferences adPrefs;
           .collection('feedItems')
           .doc("$orderId${id[i].toString()}")
           .set({
-        "type": "PaymentO",
+        "type": "PaymentResaleO",
         "username": currentUser.displayName,
         "userId": widget.OwnerId[i].toString(),
         "userProfileImg": currentUser.photoUrl,

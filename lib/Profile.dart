@@ -1,6 +1,10 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fashow/Live/Live.dart';
+import 'package:fashow/Resale/Resale.dart';
+import 'package:fashow/Resale/Resaletile.dart';
+import 'package:fashow/Resale/resaleScreen.dart';
+import 'package:fashow/SellerDash/alldash.dart';
 import 'package:fashow/Support/SupportButton.dart';
 import 'package:fashow/chat_screen.dart';
 import 'package:fashow/chatcached_image.dart';
@@ -9,6 +13,8 @@ import 'package:fashow/colltile.dart';
 import 'package:fashow/model/user_model.dart';
 import 'package:fashow/Constants.dart';
 import 'package:fashow/size_config.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:paginate_firestore/paginate_firestore.dart';
 import 'package:sizer/sizer.dart';
 import 'package:fashow/post_screen.dart';
 import 'package:fashow/blog_sceen.dart';
@@ -60,6 +66,8 @@ int blogCount = 0;
   int followingCount = 0;
   List<Post> posts = [];
   List<Prod> products = [];
+   List<Resale> resale = [];
+
   List<Coll> collection = [];
 List<Blog> blogs = [];
   int likeCount;
@@ -158,12 +166,12 @@ photoUrl: peerAvatar,
 getPosts(){
 
 return
-  StreamBuilder(
-    stream: postsRef
+  FutureBuilder(
+    future: postsRef
         .doc(widget.profileId)
         .collection('userPosts')
         .orderBy('timestamp', descending: true)
-        .snapshots(),
+        .get(),
 //       ignore: missing_return
       builder:(context,snapshot) {
       if(!snapshot.hasData){ return Container(
@@ -229,12 +237,12 @@ return
 getcollections(){
 
 return
-  StreamBuilder(
-    stream: collRef
+  FutureBuilder(
+    future: collRef
         .doc(widget.profileId)
         .collection('userCollections')
         .orderBy('timestamp', descending: true)
-        .snapshots(),
+        .get(),
 //       ignore: missing_return
       builder:(context,snapshot) {
         if (!snapshot.hasData) {
@@ -319,12 +327,12 @@ return
 geteditorial(){
 
 return
-  StreamBuilder(
-    stream: blogRef
+  FutureBuilder(
+    future: blogRef
         .doc(widget.profileId)
         .collection('userBlog')
         .orderBy('timestamp', descending: true)
-        .snapshots(),
+        .get(),
 //       ignore: missing_return
       builder:(context,snapshot) {
         if (!snapshot.hasData) {
@@ -536,6 +544,23 @@ else{
 
     });
   }
+   getProfileResale() async {
+    setState(() {
+      isLoading = true;
+    });
+    QuerySnapshot snapshot = await   FirebaseFirestore.instance.collection('Resale')
+        .doc(widget.profileId)
+        .collection('userResale')
+        .orderBy('timestamp', descending: true)
+        .get();
+    setState(() {
+      //  proCount = snapshot.documents.length;
+      resale = snapshot.docs.map((doc) => Resale.fromDocument(doc)).toList();
+      isLoading = false;
+
+    });
+  }
+
   getProfileColl() async {
     setState(() {
       isLoading = true;
@@ -602,6 +627,41 @@ else{
       );
     }
   }
+   buildResale(){
+    if (isLoading) {
+      return circularProgress();
+    } else if (resale.isEmpty) {
+      return Container(
+//        color: kSecondaryColor,
+        child: Padding(
+          padding: EdgeInsets.only(top: 150.0,left:110),
+          child: Text(
+            "No Products",
+            style: TextStyle(
+              color: Colors.redAccent,
+              fontSize: 40.0,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        ),
+      );
+    } else  {
+      List<GridTile> gridTiles = [];
+      resale.forEach((product) {
+        gridTiles.add(GridTile(child: ResaleTile(product)));
+      });
+      return GridView.count(
+        crossAxisCount: 3,
+        childAspectRatio: 1.0,
+        mainAxisSpacing: 1.5,
+        crossAxisSpacing: 1.5,
+        shrinkWrap: true,
+        physics: NeverScrollableScrollPhysics(),
+        children: gridTiles,
+      );
+    }
+  }
+
   buildPosts(){
     if (isLoading) {
       return circularProgress();
@@ -1023,8 +1083,8 @@ Widget rev(){
     });
   }
   buildProfileHeader() {
-    return StreamBuilder(
-      stream: usersRef.doc(widget.profileId).snapshots(),
+    return FutureBuilder(
+      future: usersRef.doc(widget.profileId).get(),
       builder: (context, snapshot) {
         if (!snapshot.hasData) {
           return circularProgress();
@@ -1110,9 +1170,8 @@ SizedBox(height: 10.0,),
                   GestureDetector(
                     onTap: () async
                     {
-                      print(TaggerId);
-                      // Navigator.push(context, MaterialPageRoute(builder: (context) =>
-                      //     ClientReview(profileId: widget.profileId, )));
+                      Navigator.push(context, MaterialPageRoute(builder: (context) =>
+                          ClientReview(profileId: widget.profileId, )));
                     },
                     child:Column(
                       children: <Widget>[
@@ -1139,7 +1198,32 @@ SizedBox(height: 10.0,),
                       ],
                     ),
                   ),
-                  SupportButton(userId: widget.profileId,displayName: user.username,imgUrl: user.photoUrl,mediaUrl: user.photoUrl,currency: user.currency,)
+                  isProfileOwner?          GestureDetector(
+                    onTap: () {
+                      Navigator.push(context, MaterialPageRoute(builder: (context) =>AllDash()));
+                      // do something
+                    },
+                    child: Container(
+                    width: MediaQuery.of(context).size.width/4,
+                    height: MediaQuery.of(context).size.height/20,
+
+                    margin: EdgeInsets.only(top:10.0,left: 10.0,right: 10.0, bottom: 10.0 ),
+                    decoration: BoxDecoration(borderRadius: BorderRadius.circular(10.0),
+                    color: Colors.grey.withOpacity(0.3),
+                    // boxShadow: [BoxShadow(color: Colors.black)],
+                    ),
+                    child:         Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+
+                    children: [
+                    // Icon(Icons.paid_outlined,color: Colors.green,),
+        Text("Dashboard"),
+        ],
+        ),
+
+
+        ),
+                  ):  SupportButton(userId: widget.profileId,displayName: user.username,imgUrl: user.photoUrl,mediaUrl: user.photoUrl,currency: user.currency,)
 
                 ],
               ),
@@ -1253,12 +1337,319 @@ SizedBox(height: 10.0,),
     });
 
   }
+  Posts() {
+    return  PaginateFirestore(
+        isLive: true,
+        emptyDisplay: Center(child: Text("No posts",style: TextStyle(
+          fontWeight: FontWeight.bold,
+        ),)),
+        itemsPerPage : 30,
+        itemBuilderType:
+        PaginateBuilderType.listView,
+        itemBuilder: (index, context, documentSnapshot)   {
+//        DocumentSnapshot ds = snapshot.data.docs[index];
+          String ownerId = documentSnapshot.data()['userId'];
+          List image =   documentSnapshot.data()['mediaUrl'];
 
-  Future<bool> _onBackPressed() {
-    TaggerImg = "";
-    TaggerId = "";
-    TaggerName = "";
-    TaggerCurrency = "";
+          return
+            Container(
+              height: 400,
+              child: GridView(
+
+                  primary: false,
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: (MediaQuery
+                          .of(context)
+                          .orientation == Orientation.portrait) ? 3 : 3),
+                  children: [                      Padding(
+              padding: EdgeInsets.all(5.0),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(20.0),
+                  child: GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) =>
+                                PostScreen(
+                                  postId:  documentSnapshot.data()["postId"],
+                                  userId:  documentSnapshot.data()["ownerId"],
+                                ),
+                          ),
+                        );
+                      },
+                      child: CachedImage(
+                        image.first,)
+                  ),
+                )
+            ),
+          ],
+                ),
+            );
+          },
+        query: postsRef
+            .doc(widget.profileId)
+            .collection('userPosts')
+            .orderBy('timestamp', descending: true)
+
+
+    );
+
+  }
+ Products() {
+    return  PaginateFirestore(
+        isLive: true,
+        emptyDisplay: Center(child: Text("Nothing found",style: TextStyle(
+          fontWeight: FontWeight.bold,
+        ),)),
+        itemsPerPage : 30,
+        itemBuilderType:
+        PaginateBuilderType.listView,
+        itemBuilder: (index, context, documentSnapshot)   {
+//        DocumentSnapshot ds = snapshot.data.docs[index];
+          String ownerId = documentSnapshot.data()['userId'];
+          List image =   documentSnapshot.data()['shopmediaUrl'];
+
+          return
+            Container(
+              height: 400,
+              child: GridView(
+
+                  primary: false,
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: (MediaQuery
+                          .of(context)
+                          .orientation == Orientation.portrait) ? 3 : 3),
+                  children: [                      Padding(
+              padding: EdgeInsets.all(5.0),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(20.0),
+                  child: GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) =>
+                                ProductScreen(
+                                  prodId:  documentSnapshot.data()["prodId"],
+                                  userId:  documentSnapshot.data()["ownerId"],
+                                ),
+                          ),
+                        );
+                      },
+                      child: CachedImage(
+                        image.first,)
+                  ),
+                )
+            ),
+          ],
+                ),
+            );
+          },
+        query: productsRef
+            .doc(widget.profileId)
+            .collection('userProducts')
+            .orderBy('timestamp', descending: true)
+
+    );
+
+  }
+Resales() {
+    return  PaginateFirestore(
+        isLive: true,
+        emptyDisplay: Center(child: Text("Nothing found",style: TextStyle(
+          fontWeight: FontWeight.bold,
+        ),)),
+        itemsPerPage : 30,
+        itemBuilderType:
+        PaginateBuilderType.listView,
+        itemBuilder: (index, context, documentSnapshot)   {
+//        DocumentSnapshot ds = snapshot.data.docs[index];
+          String ownerId = documentSnapshot.data()['userId'];
+          List image =   documentSnapshot.data()['images'];
+
+          return
+            Container(
+              height: 400,
+              child: GridView(
+
+                  primary: false,
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: (MediaQuery
+                          .of(context)
+                          .orientation == Orientation.portrait) ? 3 : 3),
+                  children: [                      Padding(
+              padding: EdgeInsets.all(5.0),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(20.0),
+                  child: GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) =>
+                                ResaleScreen(
+                                  postId:  documentSnapshot.data()["resaleId"],
+                                  userId:  documentSnapshot.data()["ownerId"],
+                                ),
+                          ),
+                        );
+                      },
+                      child: CachedImage(
+                        image.first,)
+                  ),
+                )
+            ),
+          ],
+                ),
+            );
+          },
+        query: FirebaseFirestore.instance.collection('Resale')
+            .doc(widget.profileId)
+            .collection('userResale')
+            .orderBy('timestamp', descending: true)
+
+    );
+
+  }
+Collections() {
+    return  PaginateFirestore(
+        isLive: true,
+        emptyDisplay: Center(child: Text("Nothing found",style: TextStyle(
+          fontWeight: FontWeight.bold,
+        ),)),
+        itemBuilderType:
+        PaginateBuilderType.listView,
+        itemBuilder: (index, context, documentSnapshot)   {
+//        DocumentSnapshot ds = snapshot.data.docs[index];
+          String ownerId = documentSnapshot.data()['userId'];
+          List image =   documentSnapshot.data()['collmediaUrl'];
+
+          return
+
+            Padding(
+                padding: EdgeInsets.all(5.0),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(20.0),
+                  child: GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) =>
+                              CollScreen(
+                                collId: documentSnapshot.data()["collId"],
+                                userId: documentSnapshot.data()["ownerId"],
+                              ),
+                        ),
+                      );
+                    },
+                    child: Card(
+                      child: Column(
+                        children: <Widget>[
+
+                          Container(
+                              margin: EdgeInsets.all(10.0),
+                              height: MediaQuery
+                                  .of(context)
+                                  .size
+                                  .width / 2,
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                              ),
+                              width: MediaQuery
+                                  .of(context)
+                                  .size
+                                  .width,
+                              child:
+                              CachedImage(
+                                image.first,)
+
+                          ),
+                          Text(documentSnapshot.data()["title"],
+                            style:  GoogleFonts.bellotaText(fontSize: 25.0,fontWeight: FontWeight.bold),) ,
+                        ],
+                      ),
+                    ),
+                  ),
+                )
+            );
+          },
+        query: collRef
+            .doc(widget.profileId)
+            .collection('userCollections')
+            .orderBy('timestamp', descending: true)
+
+    );
+
+  }
+Edits() {
+    return  PaginateFirestore(
+        isLive: true,
+        emptyDisplay: Center(child: Text("Nothing found",style: TextStyle(
+          fontWeight: FontWeight.bold,
+        ),)),
+        itemBuilderType:
+        PaginateBuilderType.listView,
+        itemBuilder: (index, context, documentSnapshot)   {
+//        DocumentSnapshot ds = snapshot.data.docs[index];
+          List IM = documentSnapshot.data()["blogmediaUrl"];
+          return
+
+            Padding(
+                padding: EdgeInsets.all(5.0),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(20.0),
+                  child: GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) =>
+                              BlogScreen(
+                                blogId: documentSnapshot.data()["blogId"],
+                                userId: documentSnapshot.data()["ownerId"],
+                              ),
+                        ),
+                      );
+                    },
+                    child: Card(
+                      child: Column(
+                        children: <Widget>[
+
+                          Container(
+                              margin: EdgeInsets.all(10.0),
+                              height: MediaQuery
+                                  .of(context)
+                                  .size
+                                  .width / 2,
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                              ),
+                              width: MediaQuery
+                                  .of(context)
+                                  .size
+                                  .width,
+                              child:
+                              CachedImage(
+                                IM.first,)
+
+                          ),
+                          Text(documentSnapshot.data()["title"],
+                            style:  GoogleFonts.balooBhai(fontSize: 20.0,fontWeight: FontWeight.normal),) ,
+                        ]),
+                      ),
+                    ),
+
+                  ),
+            );
+          },
+        query:  blogRef
+            .doc(widget.profileId)
+            .collection('userBlog')
+            .orderBy('timestamp', descending: true)
+
+    );
 
   }
 
@@ -1294,7 +1685,7 @@ SizedBox(height: 10.0,),
               child: Container(
                 color:Colors.grey.shade200,
                 child: DefaultTabController(
-                  length: 4,
+                  length: 5,
                   child: SizedBox(
                     height:   MediaQuery
                         .of(context)
@@ -1310,8 +1701,10 @@ SizedBox(height: 10.0,),
                          isScrollable:true,
                          indicatorWeight : 0.1,
                           tabs: [
-                            Tab( child: Text("Posts",style: TextStyle(color:Colors.black),)),
+                            Tab( child: Text("Feed",style: TextStyle(color:Colors.black),)),
                             Tab( child: Text("Shop",style: TextStyle(color:Colors.black),)),
+                            Tab( child: Text("Recycle",style: TextStyle(color:Colors.black),)),
+
                             Tab( child: Text("Collections",style: TextStyle(color:Colors.black),)),
                             Tab( child: Text("Editorial",style: TextStyle(color:Colors.black),)),
 
@@ -1323,13 +1716,15 @@ SizedBox(height: 10.0,),
                           child: TabBarView(
                             children: <Widget>[
                               Container(
-                                child:getPosts(),
+                                child:Posts(),
                               ),  Container(
-                                child: getProds(),
+                                child: Products(),
+                              ), Container(
+                                child: Resales(),
                               ),Container(
-                                child: getcollections(),
+                                child: Collections(),
                               ),Container(
-                                child: geteditorial(),
+                                child: Edits(),
                               ),
                             ],
                           ),

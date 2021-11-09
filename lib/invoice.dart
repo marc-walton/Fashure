@@ -344,7 +344,7 @@ List<Widget>  listOfImages = <Widget>[];
                  advancepay: advancepay,
                  finalpay: finalpay,
                  Finr: Finr,
-
+image:images.first,
                  usd: usd,
                  inr: inr,
                  eur: eur,
@@ -379,6 +379,8 @@ Get.to( PaymentSer(              title: widget.title,
   OwnerId: ownerId,profileimg: cusImg,username: cusName,advancepay: advancepay,finalpay: finalpay,Finr: Finr,
   usd:usd,
   inr:inr,
+  image:images.first,
+
   Feur: Feur,
   Fgbp: Fgbp,
   eur: eur,
@@ -409,6 +411,8 @@ Get.to( PaymentSer(              title: widget.title,
                 Fgbp: Fgbp,
                 eur: eur,
                 gbp: gbp,
+                image:images.first,
+
               ));
 
             },
@@ -426,15 +430,19 @@ else{return Container();}
 
   }
   review(){
-    FirebaseFirestore.instance.collection('Reviews')
-        .doc(ownerId).collection('userReviews').doc(reviewId)
+    FirebaseFirestore.instance.collection('FreelanceReviews')
+        .doc(ownerId).collection('Reviews').doc(reviewId)
         .set({
       'userId': ownerId,
        'orderId': orderId,
 'timestamp':timestamp,
       'rating': rating,
       'review':reviewController.text,
-      'reviewId' : reviewId
+      'reviewId' : reviewId,
+      "reviewerId":currentUser.id,
+      "reviewerName":currentUser.username,
+      "reviewerImg":currentUser.photoUrl,
+
     });
     FirebaseFirestore.instance.collection('feed')
         .doc(ownerId)
@@ -446,7 +454,7 @@ else{return Container();}
       "userId": ownerId,
       "userProfileImg": currentUser.photoUrl,
       "postId": reviewId,
-      // "mediaUrl": mediaUrl,
+      "mediaUrl": images.first,
       "timestamp": timestamp,
       "read": 'false',
       'message':'You received a review!',
@@ -508,7 +516,7 @@ else{return Container();}
 
     }
     else{return
-      Text('');}
+      Container();}
   }
 
 

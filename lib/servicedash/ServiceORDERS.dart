@@ -4,7 +4,9 @@ import 'package:currency_formatter/currency_formatter.dart';
 import 'package:fashow/HomePage.dart';
 import 'package:fashow/Live/Live.dart';
 import 'package:fashow/SellerDash/orderFulfill.dart';
+import 'package:fashow/chatcached_image.dart';
 import 'package:fashow/enum/Variables.dart';
+import 'package:fashow/invoiceview.dart';
 import 'package:fashow/servicedash/servicefulfill.dart';
 import 'package:flutter/material.dart';
 
@@ -34,12 +36,27 @@ class _ServiceOrdersState extends State<ServiceOrders> {
     String adavance,
     String finalp,
     String orderId,
-    String ownerId,}){
+    String ownerId,String image,}){
     return
     Column(
       children: <Widget>[
         ListTile(
-          title:RichText(
+
+          leading: ClipRRect(
+            borderRadius: BorderRadius.circular(10.0),
+            child: GestureDetector(
+              onTap: () => Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => InvoiceView(
+                    orderId: orderId,
+                    ownerId: ownerId,
+                  ),
+                ),
+              ),
+              child: Container(child: CachedImage(image,width: 60,)),
+            ),
+          ),          title:RichText(
             maxLines: 1,softWrap:false,overflow:TextOverflow.fade,
             text: TextSpan(
                 style:TextStyle(
@@ -234,6 +251,7 @@ isLive: true,
             String cusId = documentSnapshot.data()['cusId'];
             String cusname = documentSnapshot.data()['cusname'];
             String cusProfileImg = documentSnapshot.data()['cusProfileImg'];
+  List images = documentSnapshot.data()['images'];
 
             String title = documentSnapshot.data()['title'];
             String desciption = documentSnapshot.data()['description'];
@@ -266,7 +284,7 @@ isLive: true,
                     ),
 
                     df(productname:title,
-                      des:desciption,
+                      des:desciption,image: images.first,
                       usd:usd,inr:inr,
                       gbp:gbp,eur:eur,
                       Fusd:Fusd,Finr:Finr,Feur:Feur,Fgbp:Fgbp,
@@ -318,6 +336,7 @@ isLive: true,
             var Finr = documentSnapshot.data()['Finr'];
             var Fgbp = documentSnapshot.data()['Fgbp'];
             var Feur = documentSnapshot.data()['Feur'];
+            List images = documentSnapshot.data()['images'];
 
             String ownerId = documentSnapshot.data()['ownerId'];
             String cusId = documentSnapshot.data()['cusId'];
@@ -349,16 +368,12 @@ String description = documentSnapshot.data()['description'];
                       ),
                     ),
                   ),
-                  ListTile(
-                    leading: Text('Order Details',
-                      style: TextStyle(color: kText),),
-                  ),
 
                   df(productname:title,
                     des:description,
                     usd:usd,inr:inr,
                      gbp:gbp,eur:eur,
-
+image:images.first,
                     Fusd:Fusd,Finr:Finr,Feur:Feur,Fgbp:Fgbp,
                     adavance: advancepay, finalp: finalpay,
                     orderId:orderId, ownerId:ownerId,),
