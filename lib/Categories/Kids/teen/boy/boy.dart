@@ -191,7 +191,27 @@ class TeenBoy extends StatefulWidget {
   _TeenBoyState createState() => _TeenBoyState();
 }
 
-class _TeenBoyState extends State<TeenBoy> {
+class _TeenBoyState extends State<TeenBoy>  with  TickerProviderStateMixin {
+  TabController _Tabcontroller ;
+
+  void initState() {
+    super.initState();
+    _Tabcontroller = new TabController(length: 12, vsync: this,initialIndex: 0);
+
+    // _mainHandler = _maintabs[0];
+    _Tabcontroller.addListener(_handleTabIndex);
+    _Tabcontroller.index == 10?shoesIndex = true:_Tabcontroller.index == 18?ringIndex = true:clothingIndex = true;
+  }
+  @override
+  void dispose() {
+    _Tabcontroller.removeListener(_handleTabIndex);
+    _Tabcontroller.dispose();
+    super.dispose();
+  }
+
+  void _handleTabIndex() {
+    setState(() {});
+  }
   String priceQuery = "0";
   String AQuery = "A0";
   String BQuery = "B0";
@@ -461,63 +481,63 @@ class _TeenBoyState extends State<TeenBoy> {
     return  RotatedBox(
       quarterTurns: 3,
       child: Expanded(
-        child: DefaultTabController(
-            length:12,
-            child: Scaffold(
-              appBar:AppBar(
-                toolbarHeight: SizeConfig.safeBlockHorizontal * 15,
-                backgroundColor: kPrimaryColor,
-                elevation: 0,
-                bottom: TabBar(
-                  isScrollable: true,
-                  labelColor: Colors.white,
-                  unselectedLabelColor: kIcon,
+        child: Scaffold(
+          appBar:AppBar(
+            toolbarHeight: SizeConfig.safeBlockHorizontal * 15,
+            backgroundColor: kPrimaryColor,
+            elevation: 0,
+            bottom: TabBar(
+              isScrollable: true,
+              labelColor: Colors.white,
+              unselectedLabelColor: kIcon,
+              controller: _Tabcontroller,
 
-                  tabs:[
-                    Text("New Arrivals",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5,),),
-                    Text("Indian Ethnic",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5,),),
-                    Text("Tops",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5),),
-                    Text("Coast & Jackets",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5),),
-                    Text("Denim",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5),),
+              tabs:[
+                Text("New Arrivals",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5,),),
+                Text("Indian Ethnic",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5,),),
+                Text("Tops",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5),),
+                Text("Coast & Jackets",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5),),
+                Text("Denim",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5),),
 
-                    Text("Trousers",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5),),
-                    Text("Knitwear",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5),),
-                    Text("Shorts",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5),),
-                    Text("Swimwear",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5),),
+                Text("Trousers",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5),),
+                Text("Knitwear",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5),),
+                Text("Shorts",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5),),
+                Text("Swimwear",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5),),
 
-                    Text("Tracks",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5),),
+                Text("Tracks",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5),),
 
-                    Text("Shoes",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5),),
-                    Text("Accessories",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5),),
-                  ],
-                ),
-              ),
+                Text("Shoes",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5),),
+                Text("Accessories",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5),),
+              ],
+            ),
+          ),
 
-              body: Container(     decoration: BoxDecoration(
-                  gradient: fabGradient
-              ) ,
-                alignment: Alignment.center,
-                child: RotatedBox(
-                  quarterTurns: 1,
-                  child: TabBarView(
-                      children:<Widget> [
-                        Allin(),
-                        TBEthnic(),
-                        TopsGT(),
-                        TCB(),
-                        DenimBT(),
-                        TrouserTM(),
-                        KidTB(),
-                        KidshBT(),
-                        KidswBT(),
-                        TrackBT(),
-                        KidSBT(),
-                        AccessBT(),
+          body: Container(     decoration: BoxDecoration(
+              gradient: fabGradient
+          ) ,
+            alignment: Alignment.center,
+            child: RotatedBox(
+              quarterTurns: 1,
+              child: TabBarView(
+                  controller: _Tabcontroller,
 
-                      ]),
-                ),
-              ),
-            )
+                  children:<Widget> [
+                    Allin(),
+                    TBEthnic(),
+                    TopsGT(),
+                    TCB(),
+                    DenimBT(),
+                    TrouserTM(),
+                    KidTB(),
+                    KidshBT(),
+                    KidswBT(),
+                    TrackBT(),
+                    KidSBT(),
+                    AccessBT(),
+
+                  ]),
+            ),
+          ),
         ),
       ),
     );

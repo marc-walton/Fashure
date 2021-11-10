@@ -202,134 +202,28 @@ class Women extends StatefulWidget {
   _WomenState createState() => _WomenState();
 }
 
-class _WomenState extends State<Women> {
+class _WomenState extends State<Women> with  TickerProviderStateMixin {
+  TabController _Tabcontroller ;
 
   void initState() {
     super.initState();
+    _Tabcontroller = new TabController(length: 21, vsync: this,initialIndex: 0);
 
+    // _mainHandler = _maintabs[0];
+    _Tabcontroller.addListener(_handleTabIndex);
   }
-  String priceQuery = "0";
-  String AQuery = "A0";
-  String BQuery = "B0";
-  String CQuery = "C0";
-  String DQuery = "D0";
-  String EQuery = "E0";
-  String FQuery = "F0";
-  String GQuery = "G0";
-  String HQuery = "H0";
-  String IQuery = "I0";
-  String JQuery = "J0";
-  String KQuery = "K0";
-  String LQuery = "L0";
-
-  all() {
-    return InkWell(
-      onTap: () {
-        priceQuery = "0";
-        AQuery = "A0";
-        BQuery = "B0";
-        CQuery = "C0";
-        DQuery = "D0";
-        EQuery = "E0";
-        FQuery = "F0";
-        GQuery = "G0";
-        HQuery = "H0";
-        IQuery = "I0";
-        JQuery = "J0";
-        KQuery = "K0";
-        LQuery = "L0";
-
-        setState(() {});
-
-        Get.back();
-      },
-      child: Container(
-        height: 50,
-        width: MediaQuery.of(context).size.width,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            FittedBox(
-                child: Text(
-                  'All',
-                )),
-          ],
-        ),
-      ),
-    );
+  @override
+  void dispose() {
+    _Tabcontroller.removeListener(_handleTabIndex);
+    _Tabcontroller.dispose();
+    super.dispose();
   }
-  low() {
-    return InkWell(
-      onTap: () {
-        priceQuery = "low";
-        AQuery = "A50";
-        BQuery = "B50";
-        CQuery = "C50";
-        DQuery = "D50";
-        EQuery = "D50";
-        FQuery = "E50";
-        GQuery = "E50";
-        HQuery = "E50";
-        IQuery = "E50";
-        JQuery = "E50";
-        KQuery = "K50";
-        LQuery = "L50";
 
-        setState(() {});
-
-        Get.back();
-      },
-      child: Container(
-        height: 50,
-        width: MediaQuery.of(context).size.width,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            FittedBox(
-                child: Text(
-                  'Low to high',
-                )),
-          ],
-        ),
-      ),
-    );
+  void _handleTabIndex() {
+    setState(() {    _Tabcontroller.index == 16?shoesIndex = true:_Tabcontroller.index == 19?ringIndex = true:clothingIndex = true;
+    });
   }
-  high() {
-    return InkWell(
-      onTap: () {
-        priceQuery = "high";
-        AQuery = "A50-100";
-        BQuery = "B50-100";
-        CQuery = "C50-100";
-        DQuery = "D50-100";
-        EQuery = "D50-100";
-        FQuery = "E50-100";
-        GQuery = "E50-100";
-        HQuery = "E50-100";
-        IQuery = "E50-100";
-        JQuery = "E50-100";
-        KQuery = "K100";
-        LQuery = "L100";
 
-        setState(() {});
-
-        Get.back();
-      },
-      child: Container(
-        height: 50,
-        width: MediaQuery.of(context).size.width,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            FittedBox(
-                child: Text(
-                  'High to low',
-                )),
-          ],
-        ),
-      ),
-    );
-  }
 
 
   Women(){
@@ -358,9 +252,9 @@ class _WomenState extends State<Women> {
                           title: Text(""),
                           children: [Column(
                             children: [
-                              all(),
-                              low(),
-                              high(),
+                              // all(),
+                              // low(),
+                              // high(),
 
                             ],
                           ),
@@ -475,79 +369,80 @@ class _WomenState extends State<Women> {
    return         RotatedBox(
      quarterTurns: 3,
      child: Expanded(
-       child: DefaultTabController(
-           length:21,
-           child: Scaffold(
-             appBar:AppBar(
-               toolbarHeight: SizeConfig.safeBlockHorizontal * 15,
-               backgroundColor: kPrimaryColor,
-               elevation: 0,
-               bottom: TabBar(
-                 isScrollable: true,
-                 labelColor: Colors.white,
-                 unselectedLabelColor: kIcon,
+       child: Scaffold(
+         appBar:AppBar(
+           toolbarHeight: SizeConfig.safeBlockHorizontal * 15,
+           backgroundColor: kPrimaryColor,
+           elevation: 0,
+           bottom: TabBar(
+             controller: _Tabcontroller,
 
-                 tabs:[
-                   Text("New Arrivals",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 8,),),
-                   Text("Indian Ethnic",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 8,),),
-                   Text("Tops",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 8,),),
-                   Text("Dresses",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 8),),
-                   Text("Jumpsuit",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 8),),
-                   Text("Bridal & Wedding",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 8),),
-                   Text("Coats",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 8),),
-                   Text("Jackets",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 8),),
-                   Text("Knitwear",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 8),),
-                   Text("Denim",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 8),),
-                   Text("Trousers",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 8),),
-                   Text("Shorts",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 8),),
-                   Text("Skirts",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 8),),
-                   Text("Activewear",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 8),),
-                   Text("Beach & Swimwear",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 8),),
-                   Text("Bags",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 8),),
-                   Text("Shoes",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 8),),
-                   Text("Sneakers",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 8),),
-                   Text("Accessories",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 8),),
-                   Text("Jewellery",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 8),),
-                   Text("Watches",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 8),),
-                 ],
-               ),
-             ),
+             isScrollable: true,
+             labelColor: Colors.white,
+             unselectedLabelColor: kIcon,
 
-             body: Container(
-               decoration: BoxDecoration(
-                   gradient: fabGradient
-               ) ,
-               alignment: Alignment.center,
-               child: RotatedBox(
-                 quarterTurns: 1,
-                 child: TabBarView(
-                     children:<Widget> [
-                       Women(),
-                       WEthnic(),
-                       TopsW(),
-                       DressesW(),
-                       JumpsuitW(),
-                       Bridal(),
-                       CapesW(),
-                       JacketW(),
-                       KnitwearW(),
-                       DenimW(),
-                       TrouserW(),
-                       ShortsW(),
-                       SkirtW(),
-                       ActiveWearW(),
-                       BeachwearW(),
-                       BagsW(),
-                       ShoesW(),
-                       SneakersW(),
-                       AccessW(),
-                       JewelW(),
-                       WatchesW(),
+             tabs:[
+               Text("New Arrivals",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 8,),),
+               Text("Indian Ethnic",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 8,),),
+               Text("Tops",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 8,),),
+               Text("Dresses",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 8),),
+               Text("Jumpsuit",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 8),),
+               Text("Bridal & Wedding",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 8),),
+               Text("Coats",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 8),),
+               Text("Jackets",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 8),),
+               Text("Knitwear",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 8),),
+               Text("Denim",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 8),),
+               Text("Trousers",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 8),),
+               Text("Shorts",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 8),),
+               Text("Skirts",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 8),),
+               Text("Activewear",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 8),),
+               Text("Beach & Swimwear",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 8),),
+               Text("Bags",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 8),),
+               Text("Shoes",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 8),),
+               Text("Sneakers",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 8),),
+               Text("Accessories",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 8),),
+               Text("Jewellery",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 8),),
+               Text("Watches",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 8),),
+             ],
+           ),
+         ),
 
-                     ]),
-               ),
-             ),
-           )
+         body: Container(
+           decoration: BoxDecoration(
+               gradient: fabGradient
+           ) ,
+           alignment: Alignment.center,
+           child: RotatedBox(
+             quarterTurns: 1,
+             child: TabBarView(
+                 controller: _Tabcontroller,
+
+                 children:<Widget> [
+                   Women(),
+                   WEthnic(),
+                   TopsW(),
+                   DressesW(),
+                   JumpsuitW(),
+                   Bridal(),
+                   CapesW(),
+                   JacketW(),
+                   KnitwearW(),
+                   DenimW(),
+                   TrouserW(),
+                   ShortsW(),
+                   SkirtW(),
+                   ActiveWearW(),
+                   BeachwearW(),
+                   BagsW(),
+                   ShoesW(),
+                   SneakersW(),
+                   AccessW(),
+                   JewelW(),
+                   WatchesW(),
+
+                 ]),
+           ),
+         ),
        ),
      ),
    );

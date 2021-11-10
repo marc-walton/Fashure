@@ -49,138 +49,29 @@ class Men extends StatefulWidget {
   _MenState createState() => _MenState();
 }
 
-class _MenState extends State<Men> {
-bool a = true;
-bool b= false;
-bool c = true;
+class _MenState extends State<Men> with  TickerProviderStateMixin {
+  TabController _Tabcontroller ;
 
+  void initState() {
+    super.initState();
+    _Tabcontroller = new TabController(length: 20, vsync: this,initialIndex: 0);
 
-  all() {
-    return InkWell(
-      onTap: () {
-        priceQuery = "0";
-        AQuery = "A0";
-        BQuery = "B0";
-        CQuery = "C0";
-        DQuery = "D0";
-        EQuery = "E0";
-        FQuery = "F0";
-        GQuery = "G0";
-        HQuery = "H0";
-        IQuery = "I0";
-        JQuery = "J0";
-        KQuery = "K0";
-        LQuery = "L0";
-         MQuery = "M0";
-         NQuery = "N0";
-         OQuery = "O0";
-         PQuery = "P0";
-         QQuery = "Q0";
-         RQuery = "R0";
-         SQuery = "S0";
-
-      },
-      child: Container(
-        color: priceQuery == "0"?kPrimaryColor:Colors.white,
-
-        height: 50,
-        width: MediaQuery.of(context).size.width,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            FittedBox(
-                child: Text(
-                  'All',
-                )),
-          ],
-        ),
-      ),
-    );
+    // _mainHandler = _maintabs[0];
+    _Tabcontroller.addListener(_handleTabIndex);
   }
-low() {
-    return InkWell(
-      onTap: () {
-        priceQuery = "low";
-        AQuery = "Alow";
-        BQuery = "Blow";
-        CQuery = "Clow";
-        DQuery = "Dlow";
-        EQuery = "Elow";
-        FQuery = "Flow";
-        GQuery = "Glow";
-        HQuery = "Hlow";
-        IQuery = "Ilow";
-        JQuery = "Jlow";
-        KQuery = "Klow";
-        LQuery = "Llow";
-        MQuery = "Mlow";
-        NQuery = "Nlow";
-        OQuery = "Olow";
-        PQuery = "Plow";
-        QQuery = "Qlow";
-        RQuery = "Rlow";
-        SQuery = "Slow";
+  @override
+  // void dispose() {
+  //   _Tabcontroller.removeListener(_handleTabIndex);
+  //   _Tabcontroller.dispose();
+  //   super.dispose();
+  // }
 
-      },
-      child: Container(
-        color: priceQuery == "low"?kPrimaryColor:Colors.white,
-
-        height: 50,
-        width: MediaQuery.of(context).size.width,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            FittedBox(
-                child: Text(
-                  'Low to high',
-                )),
-          ],
-        ),
-      ),
-    );
+  void _handleTabIndex() {
+    setState(() {    _Tabcontroller.index == 14?shoesIndex = true:shoesIndex = false;
+    _Tabcontroller.index == 18?ringIndex = true:ringIndex = false;
+    _Tabcontroller.index == 14||_Tabcontroller.index == 18?clothingIndex = false:clothingIndex = true;
+    });
   }
-   high() {
-    return InkWell(
-      onTap: () {
-        priceQuery = "high";
-        AQuery = "Ahigh";
-        BQuery = "Bhigh";
-        CQuery = "Chigh";
-        DQuery = "Dhigh";
-        EQuery = "Ehigh";
-        FQuery = "Fhigh";
-        GQuery = "Ghigh";
-        HQuery = "Hhigh";
-        IQuery = "Ihigh";
-        JQuery = "Jhigh";
-        KQuery = "Khigh";
-        LQuery = "Lhigh";
-        MQuery = "Mhigh";
-        NQuery = "Nhigh";
-        OQuery = "Ohigh";
-        PQuery = "Phigh";
-        QQuery = "Qhigh";
-        RQuery = "Rhigh";
-        SQuery = "Shigh";
-
-
-      },
-      child: Container(
-        height: 50,
-        width: MediaQuery.of(context).size.width,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            FittedBox(
-                child: Text(
-                  'High to low',
-                )),
-          ],
-        ),
-      ),
-    );
-  }
-
 
 All(){
   return PaginateFirestore(
@@ -350,87 +241,86 @@ height: MediaQuery.of(context).size.height,
       RotatedBox(
         quarterTurns: 1,
         child: Expanded(
-          child: DefaultTabController(
-              length:20,
-              child: Scaffold(
+          child: Scaffold(
 
-               appBar:tabs? AppBar(
-                  toolbarHeight: SizeConfig.screenWidth * 0.3,
-                  backgroundColor: kPrimaryColor,
-                  elevation: 0,
-                  bottom:  PreferredSize(
-                  preferredSize: Size.fromHeight(100.0),
+           appBar:tabs? AppBar(
+              toolbarHeight: SizeConfig.screenWidth * 0.3,
+              backgroundColor: kPrimaryColor,
+              elevation: 0,
+              bottom:  PreferredSize(
+              preferredSize: Size.fromHeight(100.0),
 
-                    child: Container(
-                    height: SizeConfig.safeBlockHorizontal * 30,
-                      child: TabBar(
+                child: Container(
+                height: SizeConfig.safeBlockHorizontal * 30,
+                  child: TabBar(
+                    controller: _Tabcontroller,
 
-                        isScrollable: true,
+                    isScrollable: true,
 
-                        ///filled
-                        labelStyle:TextStyle(fontFamily: "AlteroDCURegular" ),
-                        ///outline
-                        unselectedLabelStyle:TextStyle(fontFamily:"AlteroDCU" ),
-                        tabs:[
-                          RotatedBox(quarterTurns:3,child: Text("New Arrivals",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 3,))),
-                          RotatedBox(quarterTurns:3,child: Text("Indian Ethnic",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 3,),)),
+                    ///filled
+                    labelStyle:TextStyle(fontFamily: "AlteroDCURegular",color: Colors.white ),
+                    ///outline
+                    unselectedLabelStyle:TextStyle(fontFamily:"AlteroDCU",color: Colors.white  ),
+                    tabs:[
+                      RotatedBox(quarterTurns:3,child: Text("New Arrivals",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 3.4,))),
+                      RotatedBox(quarterTurns:3,child: Text("Indian Ethnic",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 3.4,),)),
 
-                          Text("Shirts",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 8,),),
-                          Text("Casual Tops",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 8),),
-                          Text("Coats",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 8),),
-                          Text("Jackets",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 8),),
-                          Text("Sweatshirts & Sweaters",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 8),),
-                          Text("Denim",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 8),),
-                          Text("Suits",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 8),),
-                          Text("Trousers",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 8),),
-                          Text("Shorts",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 8),),
-                          Text("Activewear",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 8),),
-                          Text("Beach & Swimwear",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 8),),
-                          Text("Bags",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 8),),
-                          Text("Shoes",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 8),),
-                          Text("Sneakers",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 8),),
-                          Text("Accessories",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 8),),
-                          Text("Grooming",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 8),),
-                          Text("Jewellery",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 8),),
-                          Text("Watches",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 8),),
-                        ],
-                      ),
-                    ),
+                      RotatedBox(quarterTurns:3,child: Text("Shirts",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 3.4,),)),
+                      RotatedBox(quarterTurns:3,child: Text("Casual Tops",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 3.4),)),
+                      RotatedBox(quarterTurns:3,child: Text("Coats",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 3.4),)),
+                      RotatedBox(quarterTurns:3,child: Text("Jackets",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 3.4),)),
+                      RotatedBox(quarterTurns:3,child: Text("Sweatshirts &  Sweaters",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 3.4),)),
+                      RotatedBox(quarterTurns:3,child: Text("Denim",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 3.4),)),
+                      RotatedBox(quarterTurns:3,child: Text("Suits",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 3.4),)),
+                      RotatedBox(quarterTurns:3,child: Text("Trousers",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 3.4),)),
+                      RotatedBox(quarterTurns:3,child: Text("Shorts",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 3.4),)),
+                      RotatedBox(quarterTurns:3,child: Text("Activewear",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 3.4),)),
+                      RotatedBox(quarterTurns:3,child: Text("Beach & Swimwear",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 3.4),)),
+                      RotatedBox(quarterTurns:3,child: Text("Bags",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 3.4),)),
+                      RotatedBox(quarterTurns:3,child: Text("Shoes",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 3.4),)),
+                      RotatedBox(quarterTurns:3,child: Text("Sneakers",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 3.4),)),
+                      RotatedBox(quarterTurns:3,child: Text("Accessories",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 3.4),)),
+                      RotatedBox(quarterTurns:3,child: Text("Grooming",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 3.4),)),
+                      RotatedBox(quarterTurns:3,child: Text("Jewellery",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 3.4),)),
+                      RotatedBox(quarterTurns:3,child: Text("Watches",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 3.4),)),
+                    ],
                   ),
-                ):null,
-
-                body: Container(
-                  // color:Colors.grey.shade200,
-                  child: RotatedBox(
-                        quarterTurns: 3,
-                        child: TabBarView(
-
-                            children:<Widget> [
-                              All(),
-                              IndianM(),
-                              ShirtM(),
-                              TshirtM(),
-                              CoatsM(),
-                              JacketM(),
-                              SweaterM(),
-                              DenimM(),
-                              SuitsM(),
-                              TrouserM(),
-                              ShortsM(),
-                              ActiveWear(),
-                              BeachwearM(),
-                              Bags(),
-                              ShoesM(),
-                              SneakersM(),
-                              Accessories(),
-                              GroomingM(),
-                              JewelleryM(),
-                              WatchesM(),
-
-                            ]),
-                      ),
                 ),
-              )
+              ),
+            ):null,
+
+            body: Container(
+              // color:Colors.grey.shade200,
+              child: RotatedBox(
+                    quarterTurns: 3,
+                    child: TabBarView(
+                        controller: _Tabcontroller,
+
+                        children:<Widget> [
+                          All(),
+                          IndianM(),
+                          ShirtM(),
+                          TshirtM(),
+                          CoatsM(),
+                          JacketM(),
+                          SweaterM(),
+                          DenimM(),
+                          SuitsM(),
+                          TrouserM(),
+                          ShortsM(),
+                          ActiveWear(),
+                          BeachwearM(),
+                          Bags(),
+                          ShoesM(),
+                          SneakersM(),
+                          Accessories(),
+                          GroomingM(),
+                          JewelleryM(),
+                          WatchesM(),
+
+                        ]),
+                  ),
+            ),
           ),
         ),
       );}

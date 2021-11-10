@@ -192,7 +192,21 @@ class BabyBoy extends StatefulWidget {
   _BabyBoyState createState() => _BabyBoyState();
 }
 
-class _BabyBoyState extends State<BabyBoy> {
+class _BabyBoyState extends State<BabyBoy> with  TickerProviderStateMixin {
+  TabController _Tabcontroller ;
+
+  void initState() {
+    super.initState();
+      _Tabcontroller = new TabController(length: 12, vsync: this,initialIndex: 0);
+
+    // _mainHandler = _maintabs[0];
+    _Tabcontroller.addListener(_handleTabIndex);
+    _Tabcontroller.index == 10?shoesIndex = true:clothingIndex = true;
+  }
+  void _handleTabIndex() {
+    setState(() {});
+  }
+
   df({String productname,String usd,String inr,String cny,String eur,String gbp,String prodId,String ownerId,}){
     if(currentUser.country=='India'){
       return
@@ -690,61 +704,59 @@ isLive: true,
     return  RotatedBox(
       quarterTurns: 3,
       child: Expanded(
-        child: DefaultTabController(
-            length:12,
-            child: Scaffold(
+        child: Scaffold(
 
-              appBar:AppBar(
-                toolbarHeight: SizeConfig.safeBlockHorizontal * 15,
-                backgroundColor: kPrimaryColor,
-                elevation: 0,
-                bottom: TabBar(
-                  isScrollable: true,
-                  labelColor: Colors.white,
-                  unselectedLabelColor: kIcon,
+          appBar:AppBar(
+            toolbarHeight: SizeConfig.safeBlockHorizontal * 15,
+            backgroundColor: kPrimaryColor,
+            elevation: 0,
+            bottom: TabBar(
+              controller: _Tabcontroller,
 
-                  tabs:[
-                    Text("New Arrivals",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5,),),
-                    Text("Indian Ethnic",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5,),),
-                    Text("Babysuits",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5,),),
-                    Text("Coast & Jackets",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5),),
-                    Text("Knitwear",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5),),
-                    Text("Shorts",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5),),
-                    Text("Swimwear",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5),),
-                    Text("Tops",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5),),
-                    Text("Tracksuits",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5),),
-                    Text("Trousers",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5),),
-                    Text("Shoes",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5),),
-                    Text("Accessories",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5),),
-                  ],
-                ),
-              ),
+              isScrollable: true,
+              labelColor: Colors.white,
+              unselectedLabelColor: kIcon,
 
-              body: Container( decoration: BoxDecoration(
-                  gradient: fabGradient
-              ) ,
-                alignment: Alignment.center,
-                child: RotatedBox(
-                  quarterTurns: 1,
-                  child: TabBarView(
-                      children:<Widget> [
-                        Allin(),
-                        BBEthnic(),
-                        BabysB(),
-                        BabyCB(),
-                        BabykB(),
-                        BabyshB(),
-                        BabyswB(),
-                        BabytB(),
-                        BabytrB(),
-                        BabytuB(),
-                        BabySB(),
-                        BabyAcB(),
+              tabs:[
+                Text("New Arrivals",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5,),),
+                Text("Indian Ethnic",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5,),),
+                Text("Babysuits",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5,),),
+                Text("Coast & Jackets",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5),),
+                Text("Knitwear",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5),),
+                Text("Shorts",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5),),
+                Text("Swimwear",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5),),
+                Text("Tops",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5),),
+                Text("Tracksuits",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5),),
+                Text("Trousers",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5),),
+                Text("Shoes",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5),),
+                Text("Accessories",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5),),
+              ],
+            ),
+          ),
 
-                      ]),
-                ),
-              ),
-            )
+          body: Container(
+            child: RotatedBox(
+              quarterTurns: 1,
+              child: TabBarView(
+                  controller: _Tabcontroller,
+
+                  children:<Widget> [
+                    Allin(),
+                    BBEthnic(),
+                    BabysB(),
+                    BabyCB(),
+                    BabykB(),
+                    BabyshB(),
+                    BabyswB(),
+                    BabytB(),
+                    BabytrB(),
+                    BabytuB(),
+                    BabySB(),
+                    BabyAcB(),
+
+                  ]),
+            ),
+          ),
         ),
       ),
     );

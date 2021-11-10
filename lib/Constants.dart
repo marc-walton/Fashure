@@ -109,8 +109,10 @@ bool shoe18 = false;
 bool shoe19 = false;
 bool shoe20 = false;
 bool shoe21 = false;
-
-
+bool  clothingIndex = false;
+bool  shoesIndex = false;
+bool  ringIndex = false;
+String sizeFilter = "";
  final Gradient fabGradient = LinearGradient(
     colors: [ Color(0xff70e1f5),Color(0xffffd194)],
   begin: Alignment.topRight,

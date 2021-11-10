@@ -12692,50 +12692,6 @@ tag(){
       );
 
 }
-  AddCustomSize(parentContext){
-    return
-      showDialog(
-          context: parentContext,
-          builder: (context) {
-            return SimpleDialog(
-              title: Text("Add Size Chart"),
-              children: <Widget>[
-                Form(
-                  key: _formKey,
-                  child: ListView(
-                    children: [
-                      Container(
-                        margin: EdgeInsets.fromLTRB(20.0, 8.0, 20.0,8.0),
-                        child: TextFormField(
-                          keyboardType: TextInputType.name,
-                          maxLines: null,
-                          controller: namecontroller,
-                          decoration: InputDecoration(
-                            border: OutlineInputBorder(borderSide: BorderSide(color: kSubtitle)),
-                            enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
-                            focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
-                            // labelText: 'Full name',labelStyle: TextStyle(color: kText),
-                            hintText: 'Catgeory(Women\'s Clothing)',
-                          ),
-                          textAlign: TextAlign.start,
-                          validator: (text) {
-                            if (text == null || text.isEmpty) {
-                              return 'Name is empty';
-                            }
-                            return null;
-                          },
-                        ),
-                      ),
-
-
-                    ],
-                  ),
-                )
-              ],
-            );
-          });
-
-  }
 color(){
   return
     showMaterialModalBottomSheet(
