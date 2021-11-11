@@ -233,23 +233,1605 @@ class _DesignerShopState extends State<DesignerShop>  with  TickerProviderStateM
                                       ),
                                       ]
                                   ),
+
+                                  shoesIndex ? ExpansionTile(
+                                      title: Text("Shoe Size"),
+                                      children: [Column(
+                                        children: [
+                                          InkWell(
+                                            onTap: () {
+                                              State(() {
+                                                       shoe1 = !shoe1;
+                                        selectedSize = <String>[];
+                                             if (shoe1 == true){
+                                               selectedSize.add("shoe1");
+                                               sizeFilter = "shoe1";
+                                             }
+                                              else{
+sizeFilter = "";
+}
+});
+                                            },
+                                            child: Container(
+                                              color: shoe1
+                                                  ? Colors.pink.shade50
+                                                  : Colors.white,
+
+                                              height: 50,
+                                              width: MediaQuery
+                                                  .of(context)
+                                                  .size
+                                                  .width,
+                                              child: Column(
+                                                mainAxisAlignment: MainAxisAlignment
+                                                    .center,
+                                                children: [
+                                                  FittedBox(
+                                                      child: Text(
+                                                        '3 ½',
+                                                      )),
+                                                ],
+                                              ),
+                                            ),
+                                          ),
+                                          InkWell(
+                                            onTap: () {
+                                              State(() {
+                                                       shoe2 = !shoe2;
+                                        selectedSize = <String>[];
+                                             if (shoe2 == true){
+                                               selectedSize.add("shoe2");
+                                               sizeFilter = "shoe2";
+                                             }
+                                              else{
+sizeFilter = "";
+}
+});
+                                            },
+                                            child: Container(
+                                              color: shoe2
+                                                  ? Colors.pink.shade50
+                                                  : Colors.white,
+
+                                              height: 50,
+                                              width: MediaQuery
+                                                  .of(context)
+                                                  .size
+                                                  .width,
+                                              child: Column(
+                                                mainAxisAlignment: MainAxisAlignment
+                                                    .center,
+                                                children: [
+                                                  FittedBox(
+                                                      child: Text(
+                                                        '4',
+                                                      )),
+                                                ],
+                                              ),
+                                            ),
+                                          ),
+                                          InkWell(
+                                            onTap: () {
+                                              State(() {
+                                                       shoe3 = !shoe3;
+                                        selectedSize = <String>[];
+                                             if (shoe3 == true){
+                                               selectedSize.add("shoe3");
+                                               sizeFilter = "shoe3";
+                                             }
+                                              else{
+sizeFilter = "";
+}
+});
+                                            },
+                                            child: Container(
+                                              color: shoe3
+                                                  ? Colors.pink.shade50
+                                                  : Colors.white,
+
+                                              height: 50,
+                                              width: MediaQuery
+                                                  .of(context)
+                                                  .size
+                                                  .width,
+                                              child: Column(
+                                                mainAxisAlignment: MainAxisAlignment
+                                                    .center,
+                                                children: [
+                                                  FittedBox(
+                                                      child: Text(
+                                                        '4 ½',
+                                                      )),
+                                                ],
+                                              ),
+                                            ),
+                                          ),
+                                          InkWell(
+                                            onTap: () {
+                                              State(() {
+                                                       shoe4 = !shoe4;
+                                        selectedSize = <String>[];
+                                             if (shoe4 == true){
+                                               selectedSize.add("shoe4");
+                                               sizeFilter = "shoe4";
+                                             }
+                                              else{
+sizeFilter = "";
+}
+});
+                                            },
+                                            child: Container(
+                                              color: shoe4
+                                                  ? Colors.pink.shade50
+                                                  : Colors.white,
+
+                                              height: 50,
+                                              width: MediaQuery
+                                                  .of(context)
+                                                  .size
+                                                  .width,
+                                              child: Column(
+                                                mainAxisAlignment: MainAxisAlignment
+                                                    .center,
+                                                children: [
+                                                  FittedBox(
+                                                      child: Text(
+                                                        '5',
+                                                      )),
+                                                ],
+                                              ),
+                                            ),
+                                          ),
+                                          InkWell(
+                                            onTap: () {
+                                              State(() {
+                                                       shoe5 = !shoe5;
+                                        selectedSize = <String>[];
+                                             if (shoe5 == true){
+                                               selectedSize.add("shoe5");
+                                               sizeFilter = "shoe5";
+                                             }
+                                              else{
+sizeFilter = "";
+}
+});
+                                            },
+                                            child: Container(
+                                              color: shoe5
+                                                  ? Colors.pink.shade50
+                                                  : Colors.white,
+
+                                              height: 50,
+                                              width: MediaQuery
+                                                  .of(context)
+                                                  .size
+                                                  .width,
+                                              child: Column(
+                                                mainAxisAlignment: MainAxisAlignment
+                                                    .center,
+                                                children: [
+                                                  FittedBox(
+                                                      child: Text(
+                                                        '5 ½',
+                                                      )),
+                                                ],
+                                              ),
+                                            ),
+                                          ),
+                                          InkWell(
+                                            onTap: () {
+                                              State(() {
+                                                       shoe6 = !shoe6;
+                                        selectedSize = <String>[];
+                                             if (shoe6 == true){
+                                               selectedSize.add("shoe6");
+                                               sizeFilter = "shoe6";
+                                             }
+                                              else{
+sizeFilter = "";
+}
+});
+                                            },
+                                            child: Container(
+                                              color: shoe6
+                                                  ? Colors.pink.shade50
+                                                  : Colors.white,
+
+                                              height: 50,
+                                              width: MediaQuery
+                                                  .of(context)
+                                                  .size
+                                                  .width,
+                                              child: Column(
+                                                mainAxisAlignment: MainAxisAlignment
+                                                    .center,
+                                                children: [
+                                                  FittedBox(
+                                                      child: Text(
+                                                        '6',
+                                                      )),
+                                                ],
+                                              ),
+                                            ),
+                                          ),
+                                          InkWell(
+                                            onTap: () {
+                                              State(() {
+                                                       shoe7 = !shoe7;
+                                        selectedSize = <String>[];
+                                             if (shoe7 == true){
+                                               selectedSize.add("shoe7");
+                                               sizeFilter = "shoe7";
+                                             }
+                                              else{
+sizeFilter = "";
+}
+});
+                                            },
+                                            child: Container(
+                                              color: shoe7
+                                                  ? Colors.pink.shade50
+                                                  : Colors.white,
+
+                                              height: 50,
+                                              width: MediaQuery
+                                                  .of(context)
+                                                  .size
+                                                  .width,
+                                              child: Column(
+                                                mainAxisAlignment: MainAxisAlignment
+                                                    .center,
+                                                children: [
+                                                  FittedBox(
+                                                      child: Text(
+                                                        '6 ½',
+                                                      )),
+                                                ],
+                                              ),
+                                            ),
+                                          ),
+                                          InkWell(
+                                            onTap: () {
+                                              State(() {
+                                                       shoe8 = !shoe8;
+                                        selectedSize = <String>[];
+                                             if (shoe8 == true){
+                                               selectedSize.add("shoe8");
+                                               sizeFilter = "shoe8";
+                                             }
+                                              else{
+sizeFilter = "";
+}
+});
+                                            },
+                                            child: Container(
+                                              color: shoe8
+                                                  ? Colors.pink.shade50
+                                                  : Colors.white,
+
+                                              height: 50,
+                                              width: MediaQuery
+                                                  .of(context)
+                                                  .size
+                                                  .width,
+                                              child: Column(
+                                                mainAxisAlignment: MainAxisAlignment
+                                                    .center,
+                                                children: [
+                                                  FittedBox(
+                                                      child: Text(
+                                                        '7',
+                                                      )),
+                                                ],
+                                              ),
+                                            ),
+                                          ),
+                                          InkWell(
+                                            onTap: () {
+                                              State(() {
+                                                       shoe9 = !shoe9;
+                                        selectedSize = <String>[];
+                                             if (shoe9 == true){
+                                               selectedSize.add("shoe9");
+                                               sizeFilter = "shoe9";
+                                             }
+                                              else{
+sizeFilter = "";
+}
+});
+                                            },
+                                            child: Container(
+                                              color: shoe9
+                                                  ? Colors.pink.shade50
+                                                  : Colors.white,
+
+                                              height: 50,
+                                              width: MediaQuery
+                                                  .of(context)
+                                                  .size
+                                                  .width,
+                                              child: Column(
+                                                mainAxisAlignment: MainAxisAlignment
+                                                    .center,
+                                                children: [
+                                                  FittedBox(
+                                                      child: Text(
+                                                        '7 ½',
+                                                      )),
+                                                ],
+                                              ),
+                                            ),
+                                          ),
+                                          InkWell(
+                                            onTap: () {
+                                              State(() {
+                                                       shoe10 = !shoe10;
+                                        selectedSize = <String>[];
+                                             if (shoe10 == true){
+                                               selectedSize.add("shoe10");
+                                               sizeFilter = "shoe10";
+                                             }
+                                              else{
+sizeFilter = "";
+}
+});
+                                            },
+                                            child: Container(
+                                              color: shoe10 ? Colors.pink
+                                                  .shade50 : Colors.white,
+
+                                              height: 50,
+                                              width: MediaQuery
+                                                  .of(context)
+                                                  .size
+                                                  .width,
+                                              child: Column(
+                                                mainAxisAlignment: MainAxisAlignment
+                                                    .center,
+                                                children: [
+                                                  FittedBox(
+                                                      child: Text(
+                                                        '8',
+                                                      )),
+                                                ],
+                                              ),
+                                            ),
+                                          ),
+                                          InkWell(
+                                            onTap: () {
+                                              State(() {
+                                                       shoe11 = !shoe11;
+                                        selectedSize = <String>[];
+                                             if (shoe11 == true){
+                                               selectedSize.add("shoe11");
+                                               sizeFilter = "shoe11";
+                                             }
+                                              else{
+sizeFilter = "";
+}
+});
+                                            },
+                                            child: Container(
+                                              color: shoe11 ? Colors.pink
+                                                  .shade50 : Colors.white,
+
+                                              height: 50,
+                                              width: MediaQuery
+                                                  .of(context)
+                                                  .size
+                                                  .width,
+                                              child: Column(
+                                                mainAxisAlignment: MainAxisAlignment
+                                                    .center,
+                                                children: [
+                                                  FittedBox(
+                                                      child: Text(
+                                                        '8 ½',
+                                                      )),
+                                                ],
+                                              ),
+                                            ),
+                                          ),
+                                          InkWell(
+                                            onTap: () {
+                                              State(() {
+                                                       shoe12 = !shoe12;
+                                        selectedSize = <String>[];
+                                             if (shoe12 == true){
+                                               selectedSize.add("shoe12");
+                                               sizeFilter = "shoe12";
+                                             }
+                                              else{
+sizeFilter = "";
+}
+});
+                                            },
+                                            child: Container(
+                                              color: shoe12 ? Colors.pink
+                                                  .shade50 : Colors.white,
+
+                                              height: 50,
+                                              width: MediaQuery
+                                                  .of(context)
+                                                  .size
+                                                  .width,
+                                              child: Column(
+                                                mainAxisAlignment: MainAxisAlignment
+                                                    .center,
+                                                children: [
+                                                  FittedBox(
+                                                      child: Text(
+                                                        '9',
+                                                      )),
+                                                ],
+                                              ),
+                                            ),
+                                          ),
+                                          InkWell(
+                                            onTap: () {
+                                              State(() {
+                                                       shoe13 = !shoe13;
+                                        selectedSize = <String>[];
+                                             if (shoe13 == true){
+                                               selectedSize.add("shoe13");
+                                               sizeFilter = "shoe13";
+                                             }
+                                              else{
+sizeFilter = "";
+}
+});
+                                            },
+                                            child: Container(
+                                              color: shoe13 ? Colors.pink
+                                                  .shade50 : Colors.white,
+
+                                              height: 50,
+                                              width: MediaQuery
+                                                  .of(context)
+                                                  .size
+                                                  .width,
+                                              child: Column(
+                                                mainAxisAlignment: MainAxisAlignment
+                                                    .center,
+                                                children: [
+                                                  FittedBox(
+                                                      child: Text(
+                                                        '9 ½',
+                                                      )),
+                                                ],
+                                              ),
+                                            ),
+                                          ),
+                                          InkWell(
+                                            onTap: () {
+                                              State(() {
+                                                       shoe14 = !shoe14;
+                                        selectedSize = <String>[];
+                                             if (shoe14 == true){
+                                               selectedSize.add("shoe14");
+                                               sizeFilter = "shoe14";
+                                             }
+                                              else{
+sizeFilter = "";
+}
+});
+                                            },
+                                            child: Container(
+                                              color: shoe14 ? Colors.pink
+                                                  .shade50 : Colors.white,
+
+                                              height: 50,
+                                              width: MediaQuery
+                                                  .of(context)
+                                                  .size
+                                                  .width,
+                                              child: Column(
+                                                mainAxisAlignment: MainAxisAlignment
+                                                    .center,
+                                                children: [
+                                                  FittedBox(
+                                                      child: Text(
+                                                        '10',
+                                                      )),
+                                                ],
+                                              ),
+                                            ),
+                                          ),
+                                          InkWell(
+                                            onTap: () {
+                                              State(() {
+                                                       shoe15 = !shoe15;
+                                        selectedSize = <String>[];
+                                             if (shoe15== true){
+                                               selectedSize.add("shoe15");
+                                               sizeFilter = "shoe15";
+                                             }
+                                              else{
+sizeFilter = "";
+}
+});
+                                            },
+                                            child: Container(
+                                              color: shoe15 ? Colors.pink
+                                                  .shade50 : Colors.white,
+
+                                              height: 50,
+                                              width: MediaQuery
+                                                  .of(context)
+                                                  .size
+                                                  .width,
+                                              child: Column(
+                                                mainAxisAlignment: MainAxisAlignment
+                                                    .center,
+                                                children: [
+                                                  FittedBox(
+                                                      child: Text(
+                                                        '10 ½',
+                                                      )),
+                                                ],
+                                              ),
+                                            ),
+                                          ),
+                                          InkWell(
+                                            onTap: () {
+                                              State(() {
+                                                       shoe16 = !shoe16;
+                                        selectedSize = <String>[];
+                                             if (shoe16== true){
+                                               selectedSize.add("shoe16");
+                                               sizeFilter = "shoe16";
+                                             }
+                                              else{
+sizeFilter = "";
+}
+});
+                                            },
+                                            child: Container(
+                                              color: shoe16 ? Colors.pink
+                                                  .shade50 : Colors.white,
+
+                                              height: 50,
+                                              width: MediaQuery
+                                                  .of(context)
+                                                  .size
+                                                  .width,
+                                              child: Column(
+                                                mainAxisAlignment: MainAxisAlignment
+                                                    .center,
+                                                children: [
+                                                  FittedBox(
+                                                      child: Text(
+                                                        '11',
+                                                      )),
+                                                ],
+                                              ),
+                                            ),
+                                          ),
+                                          InkWell(
+                                            onTap: () {
+                                              State(() {
+                                                       shoe17 = !shoe17;
+                                        selectedSize = <String>[];
+                                             if (shoe17== true){
+                                               selectedSize.add("shoe17");
+                                               sizeFilter = "shoe17";
+                                             }
+                                              else{
+sizeFilter = "";
+}
+});
+                                            },
+                                            child: Container(
+                                              color: shoe17 ? Colors.pink
+                                                  .shade50 : Colors.white,
+
+                                              height: 50,
+                                              width: MediaQuery
+                                                  .of(context)
+                                                  .size
+                                                  .width,
+                                              child: Column(
+                                                mainAxisAlignment: MainAxisAlignment
+                                                    .center,
+                                                children: [
+                                                  FittedBox(
+                                                      child: Text(
+                                                        '11 ½',
+                                                      )),
+                                                ],
+                                              ),
+                                            ),
+                                          ),
+                                          InkWell(
+                                            onTap: () {
+                                              State(() {
+                                                       shoe18 = !shoe18;
+                                        selectedSize = <String>[];
+                                             if (shoe18== true){
+                                               selectedSize.add("shoe18");
+                                               sizeFilter = "shoe18";
+                                             }
+                                              else{
+sizeFilter = "";
+}
+});
+                                            },
+                                            child: Container(
+                                              color: shoe18 ? Colors.pink
+                                                  .shade50 : Colors.white,
+
+                                              height: 50,
+                                              width: MediaQuery
+                                                  .of(context)
+                                                  .size
+                                                  .width,
+                                              child: Column(
+                                                mainAxisAlignment: MainAxisAlignment
+                                                    .center,
+                                                children: [
+                                                  FittedBox(
+                                                      child: Text(
+                                                        '12',
+                                                      )),
+                                                ],
+                                              ),
+                                            ),
+                                          ),
+                                          InkWell(
+                                            onTap: () {
+                                              State(() {
+                                                       shoe19 = !shoe19;
+                                        selectedSize = <String>[];
+                                             if (shoe19== true){
+                                               selectedSize.add("shoe19");
+                                               sizeFilter = "shoe19";
+                                             }
+                                              else{
+sizeFilter = "";
+}
+});
+                                            },
+                                            child: Container(
+                                              color: shoe19 ? Colors.pink
+                                                  .shade50 : Colors.white,
+
+                                              height: 50,
+                                              width: MediaQuery
+                                                  .of(context)
+                                                  .size
+                                                  .width,
+                                              child: Column(
+                                                mainAxisAlignment: MainAxisAlignment
+                                                    .center,
+                                                children: [
+                                                  FittedBox(
+                                                      child: Text(
+                                                        '12 ½',
+                                                      )),
+                                                ],
+                                              ),
+                                            ),
+                                          ),
+                                          InkWell(
+                                            onTap: () {
+                                              State(() {
+                                                       shoe20 = !shoe20;
+                                        selectedSize = <String>[];
+                                             if (shoe20== true){
+                                               selectedSize.add("shoe20");
+                                               sizeFilter = "shoe20";
+                                             }
+                                              else{
+sizeFilter = "";
+}
+});
+                                            },
+                                            child: Container(
+                                              color: shoe20 ? Colors.pink
+                                                  .shade50 : Colors.white,
+
+                                              height: 50,
+                                              width: MediaQuery
+                                                  .of(context)
+                                                  .size
+                                                  .width,
+                                              child: Column(
+                                                mainAxisAlignment: MainAxisAlignment
+                                                    .center,
+                                                children: [
+                                                  FittedBox(
+                                                      child: Text(
+                                                        '13',
+                                                      )),
+                                                ],
+                                              ),
+                                            ),
+                                          ),
+                                          InkWell(
+                                            onTap: () {
+                                              State(() {
+                                                       shoe21 = !shoe21;
+                                        selectedSize = <String>[];
+                                             if (shoe21== true){
+                                               selectedSize.add("shoe21");
+                                               sizeFilter = "shoe21";
+                                             }
+                                              else{
+sizeFilter = "";
+}
+});
+                                            },
+                                            child: Container(
+                                              color: shoe21 ? Colors.pink
+                                                  .shade50 : Colors.white,
+
+                                              height: 50,
+                                              width: MediaQuery
+                                                  .of(context)
+                                                  .size
+                                                  .width,
+                                              child: Column(
+                                                mainAxisAlignment: MainAxisAlignment
+                                                    .center,
+                                                children: [
+                                                  FittedBox(
+                                                      child: Text(
+                                                        '13 ½',
+                                                      )),
+                                                ],
+                                              ),
+                                            ),
+                                          ),
+
+
+                                        ],
+                                      ),
+                                      ]
+                                  ) :
+                                  ringIndex?  ExpansionTile(
+                                      title: Text("Ring Size"),
+                                      children: [Column(
+                                        children: [
+                                          InkWell(
+                                            onTap: () {
+                                              State(() {
+                                                       ring1 = !ring1;
+                                        selectedSize = <String>[];
+                                             if (ring1== true){
+                                               selectedSize.add("ring1");
+                                               sizeFilter = "ring1";
+                                             }
+                                              else{
+sizeFilter = "";
+}
+});
+                                            },
+                                            child: Container(
+                                              color: ring1
+                                                  ? Colors.pink.shade50
+                                                  : Colors.white,
+
+                                              height: 50,
+                                              width: MediaQuery
+                                                  .of(context)
+                                                  .size
+                                                  .width,
+                                              child: Column(
+                                                mainAxisAlignment: MainAxisAlignment
+                                                    .center,
+                                                children: [
+                                                  FittedBox(
+                                                      child: Text(
+                                                        '4',
+                                                      )),
+                                                ],
+                                              ),
+                                            ),
+                                          ),
+                                          InkWell(
+                                            onTap: () {
+                                              State(() {
+                                                       ring2 = !ring2;
+                                        selectedSize = <String>[];
+                                             if (ring2== true){
+                                               selectedSize.add("ring2");
+                                               sizeFilter = "ring2";
+                                             }
+                                              else{
+sizeFilter = "";
+}
+});
+                                            },
+                                            child: Container(
+                                              color: ring2
+                                                  ? Colors.pink.shade50
+                                                  : Colors.white,
+
+                                              height: 50,
+                                              width: MediaQuery
+                                                  .of(context)
+                                                  .size
+                                                  .width,
+                                              child: Column(
+                                                mainAxisAlignment: MainAxisAlignment
+                                                    .center,
+                                                children: [
+                                                  FittedBox(
+                                                      child: Text(
+                                                        '4.5',
+                                                      )),
+                                                ],
+                                              ),
+                                            ),
+                                          ),
+                                          InkWell(
+                                            onTap: () {
+                                              State(() {
+                                                       ring3 = !ring3;
+                                        selectedSize = <String>[];
+                                             if (ring3== true){
+                                               selectedSize.add("ring3");
+                                               sizeFilter = "ring3";
+                                             }
+                                              else{
+sizeFilter = "";
+}
+});
+                                            },
+                                            child: Container(
+                                              color: ring3
+                                                  ? Colors.pink.shade50
+                                                  : Colors.white,
+
+                                              height: 50,
+                                              width: MediaQuery
+                                                  .of(context)
+                                                  .size
+                                                  .width,
+                                              child: Column(
+                                                mainAxisAlignment: MainAxisAlignment
+                                                    .center,
+                                                children: [
+                                                  FittedBox(
+                                                      child: Text(
+                                                        '5',
+                                                      )),
+                                                ],
+                                              ),
+                                            ),
+                                          ),
+                                          InkWell(
+                                            onTap: () {
+                                              State(() {
+                                                       ring4 = !ring4;
+                                        selectedSize = <String>[];
+                                             if (ring4== true){
+                                               selectedSize.add("ring4");
+                                               sizeFilter = "ring4";
+                                             }
+                                              else{
+sizeFilter = "";
+}
+});
+                                            },
+                                            child: Container(
+                                              color: ring4
+                                                  ? Colors.pink.shade50
+                                                  : Colors.white,
+
+                                              height: 50,
+                                              width: MediaQuery
+                                                  .of(context)
+                                                  .size
+                                                  .width,
+                                              child: Column(
+                                                mainAxisAlignment: MainAxisAlignment
+                                                    .center,
+                                                children: [
+                                                  FittedBox(
+                                                      child: Text(
+                                                        '5.5',
+                                                      )),
+                                                ],
+                                              ),
+                                            ),
+                                          ),
+                                          InkWell(
+                                            onTap: () {
+                                              State(() {
+                                                       ring5 = !ring5;
+                                        selectedSize = <String>[];
+                                             if (ring5== true){
+                                               selectedSize.add("ring5");
+                                               sizeFilter = "ring5";
+                                             }
+                                              else{
+sizeFilter = "";
+}
+});
+                                            },
+                                            child: Container(
+                                              color: ring5
+                                                  ? Colors.pink.shade50
+                                                  : Colors.white,
+
+                                              height: 50,
+                                              width: MediaQuery
+                                                  .of(context)
+                                                  .size
+                                                  .width,
+                                              child: Column(
+                                                mainAxisAlignment: MainAxisAlignment
+                                                    .center,
+                                                children: [
+                                                  FittedBox(
+                                                      child: Text(
+                                                        '6',
+                                                      )),
+                                                ],
+                                              ),
+                                            ),
+                                          ),
+                                          InkWell(
+                                            onTap: () {
+                                              State(() {
+                                                       ring6 = !ring6;
+                                        selectedSize = <String>[];
+                                             if (ring6== true){
+                                               selectedSize.add("ring6");
+                                               sizeFilter = "ring6";
+                                             }
+                                              else{
+sizeFilter = "";
+}
+});
+                                            },
+                                            child: Container(
+                                              color: ring6
+                                                  ? Colors.pink.shade50
+                                                  : Colors.white,
+
+                                              height: 50,
+                                              width: MediaQuery
+                                                  .of(context)
+                                                  .size
+                                                  .width,
+                                              child: Column(
+                                                mainAxisAlignment: MainAxisAlignment
+                                                    .center,
+                                                children: [
+                                                  FittedBox(
+                                                      child: Text(
+                                                        '6.5',
+                                                      )),
+                                                ],
+                                              ),
+                                            ),
+                                          ),
+                                          InkWell(
+                                            onTap: () {
+                                              State(() {
+                                                       ring7 = !ring7;
+                                        selectedSize = <String>[];
+                                             if (ring7== true){
+                                               selectedSize.add("ring7");
+                                               sizeFilter = "ring7";
+                                             }
+                                              else{
+sizeFilter = "";
+}
+});
+                                            },
+                                            child: Container(
+                                              color: ring7
+                                                  ? Colors.pink.shade50
+                                                  : Colors.white,
+
+                                              height: 50,
+                                              width: MediaQuery
+                                                  .of(context)
+                                                  .size
+                                                  .width,
+                                              child: Column(
+                                                mainAxisAlignment: MainAxisAlignment
+                                                    .center,
+                                                children: [
+                                                  FittedBox(
+                                                      child: Text(
+                                                        '7',
+                                                      )),
+                                                ],
+                                              ),
+                                            ),
+                                          ),
+                                          InkWell(
+                                            onTap: () {
+                                              State(() {
+                                                       ring8 = !ring8;
+                                        selectedSize = <String>[];
+                                             if (ring8== true){
+                                               selectedSize.add("ring8");
+                                               sizeFilter = "ring8";
+                                             }
+                                              else{
+sizeFilter = "";
+}
+});
+                                            },
+                                            child: Container(
+                                              color: ring8
+                                                  ? Colors.pink.shade50
+                                                  : Colors.white,
+
+                                              height: 50,
+                                              width: MediaQuery
+                                                  .of(context)
+                                                  .size
+                                                  .width,
+                                              child: Column(
+                                                mainAxisAlignment: MainAxisAlignment
+                                                    .center,
+                                                children: [
+                                                  FittedBox(
+                                                      child: Text(
+                                                        '7.5',
+                                                      )),
+                                                ],
+                                              ),
+                                            ),
+                                          ),
+                                          InkWell(
+                                            onTap: () {
+                                              State(() {
+                                                       ring9 = !ring9;
+                                        selectedSize = <String>[];
+                                             if (ring9== true){
+                                               selectedSize.add("ring9");
+                                               sizeFilter = "ring9";
+                                             }
+                                              else{
+sizeFilter = "";
+}
+});
+                                            },
+                                            child: Container(
+                                              color: ring9
+                                                  ? Colors.pink.shade50
+                                                  : Colors.white,
+
+                                              height: 50,
+                                              width: MediaQuery
+                                                  .of(context)
+                                                  .size
+                                                  .width,
+                                              child: Column(
+                                                mainAxisAlignment: MainAxisAlignment
+                                                    .center,
+                                                children: [
+                                                  FittedBox(
+                                                      child: Text(
+                                                        '8',
+                                                      )),
+                                                ],
+                                              ),
+                                            ),
+                                          ),
+                                          InkWell(
+                                            onTap: () {
+                                              State(() {
+                                                       ring10 = !ring10;
+                                        selectedSize = <String>[];
+                                             if (ring10== true){
+                                               selectedSize.add("ring10");
+                                               sizeFilter = "ring10";
+                                             }
+                                              else{
+sizeFilter = "";
+}
+});
+                                            },
+                                            child: Container(
+                                              color: ring10 ? Colors.pink
+                                                  .shade50 : Colors.white,
+
+                                              height: 50,
+                                              width: MediaQuery
+                                                  .of(context)
+                                                  .size
+                                                  .width,
+                                              child: Column(
+                                                mainAxisAlignment: MainAxisAlignment
+                                                    .center,
+                                                children: [
+                                                  FittedBox(
+                                                      child: Text(
+                                                        '8.5',
+                                                      )),
+                                                ],
+                                              ),
+                                            ),
+                                          ),
+                                          InkWell(
+                                            onTap: () {
+                                              State(() {
+                                                       ring11 = !ring11;
+                                        selectedSize = <String>[];
+                                             if (ring11== true){
+                                               selectedSize.add("ring11");
+                                               sizeFilter = "ring11";
+                                             }
+                                              else{
+sizeFilter = "";
+}
+});
+                                            },
+                                            child: Container(
+                                              color: ring11 ? Colors.pink
+                                                  .shade50 : Colors.white,
+
+                                              height: 50,
+                                              width: MediaQuery
+                                                  .of(context)
+                                                  .size
+                                                  .width,
+                                              child: Column(
+                                                mainAxisAlignment: MainAxisAlignment
+                                                    .center,
+                                                children: [
+                                                  FittedBox(
+                                                      child: Text(
+                                                        '9',
+                                                      )),
+                                                ],
+                                              ),
+                                            ),
+                                          ),
+                                          InkWell(
+                                            onTap: () {
+                                              State(() {
+                                                       ring12 = !ring12;
+                                        selectedSize = <String>[];
+                                             if (ring12== true){
+                                               selectedSize.add("ring12");
+                                               sizeFilter = "ring12";
+                                             }
+                                              else{
+sizeFilter = "";
+}
+});
+                                            },
+                                            child: Container(
+                                              color: ring12 ? Colors.pink
+                                                  .shade50 : Colors.white,
+
+                                              height: 50,
+                                              width: MediaQuery
+                                                  .of(context)
+                                                  .size
+                                                  .width,
+                                              child: Column(
+                                                mainAxisAlignment: MainAxisAlignment
+                                                    .center,
+                                                children: [
+                                                  FittedBox(
+                                                      child: Text(
+                                                        '9.5',
+                                                      )),
+                                                ],
+                                              ),
+                                            ),
+                                          ),
+                                          InkWell(
+                                            onTap: () {
+                                              State(() {
+                                                       ring13 = !ring13;
+                                        selectedSize = <String>[];
+                                             if (ring13== true){
+                                               selectedSize.add("ring13");
+                                               sizeFilter = "ring13";
+                                             }
+                                              else{
+sizeFilter = "";
+}
+});
+                                            },
+                                            child: Container(
+                                              color: ring13 ? Colors.pink
+                                                  .shade50 : Colors.white,
+
+                                              height: 50,
+                                              width: MediaQuery
+                                                  .of(context)
+                                                  .size
+                                                  .width,
+                                              child: Column(
+                                                mainAxisAlignment: MainAxisAlignment
+                                                    .center,
+                                                children: [
+                                                  FittedBox(
+                                                      child: Text(
+                                                        '10',
+                                                      )),
+                                                ],
+                                              ),
+                                            ),
+                                          ),
+                                          InkWell(
+                                            onTap: () {
+                                              State(() {
+                                                       ring14 = !ring14;
+                                        selectedSize = <String>[];
+                                             if (ring14== true){
+                                               selectedSize.add("ring14");
+                                               sizeFilter = "ring14";
+                                             }
+                                              else{
+sizeFilter = "";
+}
+});
+                                            },
+                                            child: Container(
+                                              color: ring14 ? Colors.pink
+                                                  .shade50 : Colors.white,
+
+                                              height: 50,
+                                              width: MediaQuery
+                                                  .of(context)
+                                                  .size
+                                                  .width,
+                                              child: Column(
+                                                mainAxisAlignment: MainAxisAlignment
+                                                    .center,
+                                                children: [
+                                                  FittedBox(
+                                                      child: Text(
+                                                        '10.5',
+                                                      )),
+                                                ],
+                                              ),
+                                            ),
+                                          ),
+                                          InkWell(
+                                            onTap: () {
+                                              State(() {
+                                                       ring15 = !ring15;
+                                        selectedSize = <String>[];
+                                             if (ring15== true){
+                                               selectedSize.add("ring15");
+                                               sizeFilter = "ring15";
+                                             }
+                                              else{
+sizeFilter = "";
+}
+});
+                                            },
+                                            child: Container(
+                                              color: ring15 ? Colors.pink
+                                                  .shade50 : Colors.white,
+
+                                              height: 50,
+                                              width: MediaQuery
+                                                  .of(context)
+                                                  .size
+                                                  .width,
+                                              child: Column(
+                                                mainAxisAlignment: MainAxisAlignment
+                                                    .center,
+                                                children: [
+                                                  FittedBox(
+                                                      child: Text(
+                                                        '11',
+                                                      )),
+                                                ],
+                                              ),
+                                            ),
+                                          ),
+                                          InkWell(
+                                            onTap: () {
+                                              State(() {
+                                                       ring16 = !ring16;
+                                        selectedSize = <String>[];
+                                             if (ring16== true){
+                                               selectedSize.add("ring16");
+                                               sizeFilter = "ring16";
+                                             }
+                                              else{
+sizeFilter = "";
+}
+});
+                                            },
+                                            child: Container(
+                                              color: ring16 ? Colors.pink
+                                                  .shade50 : Colors.white,
+
+                                              height: 50,
+                                              width: MediaQuery
+                                                  .of(context)
+                                                  .size
+                                                  .width,
+                                              child: Column(
+                                                mainAxisAlignment: MainAxisAlignment
+                                                    .center,
+                                                children: [
+                                                  FittedBox(
+                                                      child: Text(
+                                                        '11.5',
+                                                      )),
+                                                ],
+                                              ),
+                                            ),
+                                          ),
+                                          InkWell(
+                                            onTap: () {
+                                              State(() {
+                                                       ring17 = !ring17;
+                                        selectedSize = <String>[];
+                                             if (ring17== true){
+                                               selectedSize.add("ring17");
+                                               sizeFilter = "ring17";
+                                             }
+                                              else{
+sizeFilter = "";
+}
+});
+                                            },
+                                            child: Container(
+                                              color: ring17 ? Colors.pink
+                                                  .shade50 : Colors.white,
+
+                                              height: 50,
+                                              width: MediaQuery
+                                                  .of(context)
+                                                  .size
+                                                  .width,
+                                              child: Column(
+                                                mainAxisAlignment: MainAxisAlignment
+                                                    .center,
+                                                children: [
+                                                  FittedBox(
+                                                      child: Text(
+                                                        '12',
+                                                      )),
+                                                ],
+                                              ),
+                                            ),
+                                          ),
+                                          InkWell(
+                                            onTap: () {
+                                              State(() {
+                                                       ring18 = !ring18;
+                                        selectedSize = <String>[];
+                                             if (ring18== true){
+                                               selectedSize.add("ring18");
+                                               sizeFilter = "ring18";
+                                             }
+                                              else{
+sizeFilter = "";
+}
+});
+                                            },
+                                            child: Container(
+                                              color: ring18 ? Colors.pink
+                                                  .shade50 : Colors.white,
+
+                                              height: 50,
+                                              width: MediaQuery
+                                                  .of(context)
+                                                  .size
+                                                  .width,
+                                              child: Column(
+                                                mainAxisAlignment: MainAxisAlignment
+                                                    .center,
+                                                children: [
+                                                  FittedBox(
+                                                      child: Text(
+                                                        '12.5',
+                                                      )),
+                                                ],
+                                              ),
+                                            ),
+                                          ),
+                                          InkWell(
+                                            onTap: () {
+                                              State(() {
+                                                       ring19 = !ring19;
+                                        selectedSize = <String>[];
+                                             if (ring19== true){
+                                               selectedSize.add("ring19");
+                                               sizeFilter = "ring19";
+                                             }
+                                              else{
+sizeFilter = "";
+}
+});
+                                            },
+                                            child: Container(
+                                              color: ring19 ? Colors.pink
+                                                  .shade50 : Colors.white,
+
+                                              height: 50,
+                                              width: MediaQuery
+                                                  .of(context)
+                                                  .size
+                                                  .width,
+                                              child: Column(
+                                                mainAxisAlignment: MainAxisAlignment
+                                                    .center,
+                                                children: [
+                                                  FittedBox(
+                                                      child: Text(
+                                                        '13',
+                                                      )),
+                                                ],
+                                              ),
+                                            ),
+                                          ),
+                                          InkWell(
+                                            onTap: () {
+                                              State(() {
+                                                       ring20 = !ring20;
+                                        selectedSize = <String>[];
+                                             if (ring20== true){
+                                               selectedSize.add("ring20");
+                                               sizeFilter = "ring20";
+                                             }
+                                              else{
+sizeFilter = "";
+}
+});
+                                            },
+                                            child: Container(
+                                              color: ring20 ? Colors.pink
+                                                  .shade50 : Colors.white,
+
+                                              height: 50,
+                                              width: MediaQuery
+                                                  .of(context)
+                                                  .size
+                                                  .width,
+                                              child: Column(
+                                                mainAxisAlignment: MainAxisAlignment
+                                                    .center,
+                                                children: [
+                                                  FittedBox(
+                                                      child: Text(
+                                                        '13.5',
+                                                      )),
+                                                ],
+                                              ),
+                                            ),
+                                          ),
+                                          InkWell(
+                                            onTap: () {
+                                              State(() {
+                                                       ring21 = !ring21;
+                                        selectedSize = <String>[];
+                                             if (ring21== true){
+                                               selectedSize.add("ring21");
+                                               sizeFilter = "ring21";
+                                             }
+                                              else{
+sizeFilter = "";
+}
+});
+                                            },
+                                            child: Container(
+                                              color: ring21 ? Colors.pink
+                                                  .shade50 : Colors.white,
+
+                                              height: 50,
+                                              width: MediaQuery
+                                                  .of(context)
+                                                  .size
+                                                  .width,
+                                              child: Column(
+                                                mainAxisAlignment: MainAxisAlignment
+                                                    .center,
+                                                children: [
+                                                  FittedBox(
+                                                      child: Text(
+                                                        '14',
+                                                      )),
+                                                ],
+                                              ),
+                                            ),
+                                          ),
+                                          InkWell(
+                                            onTap: () {
+                                              State(() {
+                                                       ring22 = !ring22;
+                                        selectedSize = <String>[];
+                                             if (ring22== true){
+                                               selectedSize.add("ring22");
+                                               sizeFilter = "ring22";
+                                             }
+                                              else{
+sizeFilter = "";
+}
+});
+                                            },
+                                            child: Container(
+                                              color: ring22 ? Colors.pink
+                                                  .shade50 : Colors.white,
+
+                                              height: 50,
+                                              width: MediaQuery
+                                                  .of(context)
+                                                  .size
+                                                  .width,
+                                              child: Column(
+                                                mainAxisAlignment: MainAxisAlignment
+                                                    .center,
+                                                children: [
+                                                  FittedBox(
+                                                      child: Text(
+                                                        '14.5',
+                                                      )),
+                                                ],
+                                              ),
+                                            ),
+                                          ),
+                                          InkWell(
+                                            onTap: () {
+                                              State(() {
+                                                       ring23 = !ring23;
+                                        selectedSize = <String>[];
+                                             if (ring23== true){
+                                               selectedSize.add("ring23");
+                                               sizeFilter = "ring23";
+                                             }
+                                              else{
+sizeFilter = "";
+}
+});
+                                            },
+                                            child: Container(
+                                              color: ring22 ? Colors.pink
+                                                  .shade50 : Colors.white,
+
+                                              height: 50,
+                                              width: MediaQuery
+                                                  .of(context)
+                                                  .size
+                                                  .width,
+                                              child: Column(
+                                                mainAxisAlignment: MainAxisAlignment
+                                                    .center,
+                                                children: [
+                                                  FittedBox(
+                                                      child: Text(
+                                                        '15',
+                                                      )),
+                                                ],
+                                              ),
+                                            ),
+                                          ),
+
+
+                                        ],
+                                      ),
+                                      ]
+                                  ) :
                                   ExpansionTile(
                                       title: Text("Clothing Size"),
                                       children: [Column(
                                         children: [
                                           InkWell(
                                             onTap: ()
-                            {
-                                    State(() {
-                                                     xxxs = !xxxs;
-    selectedSize = <String>[];
-                                             if (xxxs == true){
-                                               selectedSize.add("XXXS");
-                                               sizeFilter = "XXXS";
-                                             }
-                                             
-                                    });
-                            },
+                                            {
+                                              State(() {
+                                                xxxs = !xxxs;
+                                                selectedSize = <String>[];
+                                                if (xxxs == true){
+                                                  selectedSize.add("XXXS");
+                                                  sizeFilter = "XXXS";
+                                                }
+
+                                                else{
+                                                  sizeFilter = "";
+                                                }
+                                              });
+                                            },
                                             child: Container(
                                               color: xxxs
                                                   ? Colors.pink.shade50
@@ -275,12 +1857,15 @@ class _DesignerShopState extends State<DesignerShop>  with  TickerProviderStateM
                                           InkWell(
                                             onTap: () {
                                               State(() {
-                                                        xxs = !xxs;
-                                        selectedSize = <String>[];
-                                             if (xxs == true){
-                                               selectedSize.add("XXS");
-                                               sizeFilter = "XXS";
-                                             }
+                                                xxs = !xxs;
+                                                selectedSize = <String>[];
+                                                if (xxs == true){
+                                                  selectedSize.add("XXS");
+                                                  sizeFilter = "XXS";
+                                                }
+                                                else{
+                                                  sizeFilter = "";
+                                                }
                                               });
                                             },
                                             child: Container(
@@ -308,12 +1893,15 @@ class _DesignerShopState extends State<DesignerShop>  with  TickerProviderStateM
                                           InkWell(
                                             onTap: () {
                                               State(() {
-                                                        xs = !xs;
-                                        selectedSize = <String>[];
-                                             if (xs == true){
-                                               selectedSize.add("XS");
-                                               sizeFilter = "XS";
-                                             }
+                                                xs = !xs;
+                                                selectedSize = <String>[];
+                                                if (xs == true){
+                                                  selectedSize.add("XS");
+                                                  sizeFilter = "XS";
+                                                }
+                                                else{
+                                                  sizeFilter = "";
+                                                }
                                               });
                                             },
                                             child: Container(
@@ -341,12 +1929,15 @@ class _DesignerShopState extends State<DesignerShop>  with  TickerProviderStateM
                                           InkWell(
                                             onTap: () {
                                               State(() {
-                                                        s = !s;
-                                        selectedSize = <String>[];
-                                             if (s == true){
-                                               selectedSize.add("S");
-                                               sizeFilter = "S";
-                                             }
+                                                s = !s;
+                                                selectedSize = <String>[];
+                                                if (s == true){
+                                                  selectedSize.add("S");
+                                                  sizeFilter = "S";
+                                                }
+                                                else{
+                                                  sizeFilter = "";
+                                                }
                                               });
                                             },
                                             child: Container(
@@ -374,13 +1965,16 @@ class _DesignerShopState extends State<DesignerShop>  with  TickerProviderStateM
                                           InkWell(
                                             onTap: () {
                                               State(() {
-                                                                m = !m;
+                                                m = !m;
                                                 selectedSize = <String>[];
                                                 if (m == true){
                                                   selectedSize.add("M");
                                                   sizeFilter = "M";
                                                 }
-                                          
+
+                                                else{
+                                                  sizeFilter = "";
+                                                }
                                               });
                                             },
                                             child: Container(
@@ -408,12 +2002,15 @@ class _DesignerShopState extends State<DesignerShop>  with  TickerProviderStateM
                                           InkWell(
                                             onTap: () {
                                               State(() {
-                                                        l = !l;
-                                        selectedSize = <String>[];
-                                             if (l == true){
-                                               selectedSize.add("L");
-                                               sizeFilter = "L";
-                                             }
+                                                l = !l;
+                                                selectedSize = <String>[];
+                                                if (l == true){
+                                                  selectedSize.add("L");
+                                                  sizeFilter = "L";
+                                                }
+                                                else{
+                                                  sizeFilter = "";
+                                                }
                                               });
                                             },
                                             child: Container(
@@ -447,6 +2044,9 @@ class _DesignerShopState extends State<DesignerShop>  with  TickerProviderStateM
                                                   selectedSize.add("XL");
                                                   sizeFilter = "XL";
                                                 }
+                                                else{
+                                                  sizeFilter = "";
+                                                }
                                               });
                                             },
                                             child: Container(
@@ -471,15 +2071,18 @@ class _DesignerShopState extends State<DesignerShop>  with  TickerProviderStateM
                                               ),
                                             ),
                                           ),
-                                           InkWell(
+                                          InkWell(
                                             onTap: () {
                                               State(() {
-                                                        xxl = !xxl;
-                                        selectedSize = <String>[];
-                                             if (xxl == true){
-                                               selectedSize.add("XXL");
-                                               sizeFilter = "XXL";
-                                             }
+                                                xxl = !xxl;
+                                                selectedSize = <String>[];
+                                                if (xxl == true){
+                                                  selectedSize.add("XXL");
+                                                  sizeFilter = "XXL";
+                                                }
+                                                else{
+                                                  sizeFilter = "";
+                                                }
                                               });
                                             },
                                             child: Container(
@@ -504,16 +2107,19 @@ class _DesignerShopState extends State<DesignerShop>  with  TickerProviderStateM
                                               ),
                                             ),
                                           ),
-                                          
+
                                           InkWell(
                                             onTap: () {
                                               State(() {
-                                                        xxxl = !xxxl;
-                                        selectedSize = <String>[];
-                                             if (xxxl == true){
-                                               selectedSize.add("XXXL");
-                                               sizeFilter = "XXXL";
-                                             }
+                                                xxxl = !xxxl;
+                                                selectedSize = <String>[];
+                                                if (xxxl == true){
+                                                  selectedSize.add("XXXL");
+                                                  sizeFilter = "XXXL";
+                                                }
+                                                else{
+                                                  sizeFilter = "";
+                                                }
                                               });
                                             },
                                             child: Container(
@@ -541,12 +2147,15 @@ class _DesignerShopState extends State<DesignerShop>  with  TickerProviderStateM
                                           InkWell(
                                             onTap: () {
                                               State(() {
-                                                        fourl = !fourl;
-                                        selectedSize = <String>[];
-                                             if (fourl == true){
-                                               selectedSize.add("4XL");
-                                               sizeFilter = "4XL";
-                                             }
+                                                fourl = !fourl;
+                                                selectedSize = <String>[];
+                                                if (fourl == true){
+                                                  selectedSize.add("4XL");
+                                                  sizeFilter = "4XL";
+                                                }
+                                                else{
+                                                  sizeFilter = "";
+                                                }
                                               });
                                             },
                                             child: Container(
@@ -574,12 +2183,15 @@ class _DesignerShopState extends State<DesignerShop>  with  TickerProviderStateM
                                           InkWell(
                                             onTap: () {
                                               State(() {
-                                                        fivel = !fivel;
-                                        selectedSize = <String>[];
-                                             if (fivel == true){
-                                               selectedSize.add("5XL");
-                                               sizeFilter = "5XL";
-                                             }
+                                                fivel = !fivel;
+                                                selectedSize = <String>[];
+                                                if (fivel == true){
+                                                  selectedSize.add("5XL");
+                                                  sizeFilter = "5XL";
+                                                }
+                                                else{
+                                                  sizeFilter = "";
+                                                }
                                               });
                                             },
                                             child: Container(
@@ -607,12 +2219,15 @@ class _DesignerShopState extends State<DesignerShop>  with  TickerProviderStateM
                                           InkWell(
                                             onTap: () {
                                               State(() {
-                                                        sixl = !sixl;
-                                        selectedSize = <String>[];
-                                             if (sixl == true){
-                                               selectedSize.add("6XL");
-                                               sizeFilter = "6XL";
-                                             }
+                                                sixl = !sixl;
+                                                selectedSize = <String>[];
+                                                if (sixl == true){
+                                                  selectedSize.add("6XL");
+                                                  sizeFilter = "6XL";
+                                                }
+                                                else{
+                                                  sizeFilter = "";
+                                                }
                                               });
                                             },
                                             child: Container(
@@ -640,12 +2255,15 @@ class _DesignerShopState extends State<DesignerShop>  with  TickerProviderStateM
                                           InkWell(
                                             onTap: () {
                                               State(() {
-                                                        sevenl = !sevenl;
-                                        selectedSize = <String>[];
-                                             if (sevenl == true){
-                                               selectedSize.add("7XL");
-                                               sizeFilter = "7XL";
-                                             }
+                                                sevenl = !sevenl;
+                                                selectedSize = <String>[];
+                                                if (sevenl == true){
+                                                  selectedSize.add("7XL");
+                                                  sizeFilter = "7XL";
+                                                }
+                                                else{
+                                                  sizeFilter = "";
+                                                }
                                               });
                                             },
                                             child: Container(
@@ -672,12 +2290,15 @@ class _DesignerShopState extends State<DesignerShop>  with  TickerProviderStateM
                                           InkWell(
                                             onTap: () {
                                               State(() {
-                                                        eightl = !eightl;
-                                        selectedSize = <String>[];
-                                             if (eightl == true){
-                                               selectedSize.add("8XL");
-                                               sizeFilter = "8XL";
-                                             }
+                                                eightl = !eightl;
+                                                selectedSize = <String>[];
+                                                if (eightl == true){
+                                                  selectedSize.add("8XL");
+                                                  sizeFilter = "8XL";
+                                                }
+                                                else{
+                                                  sizeFilter = "";
+                                                }
                                               });
                                             },
                                             child: Container(
@@ -706,1453 +2327,6 @@ class _DesignerShopState extends State<DesignerShop>  with  TickerProviderStateM
                                       ),
                                       ]
                                   ),
-
-                                  ExpansionTile(
-                                      title: Text("Shoe Size"),
-                                      children: [Column(
-                                        children: [
-                                          InkWell(
-                                            onTap: () {
-                                              State(() {
-                                                       shoe1 = !shoe1;
-                                        selectedSize = <String>[];
-                                             if (shoe1 == true){
-                                               selectedSize.add("shoe1");
-                                               sizeFilter = "shoe1";
-                                             }
-                                              });
-                                            },
-                                            child: Container(
-                                              color: shoe1
-                                                  ? Colors.pink.shade50
-                                                  : Colors.white,
-
-                                              height: 50,
-                                              width: MediaQuery
-                                                  .of(context)
-                                                  .size
-                                                  .width,
-                                              child: Column(
-                                                mainAxisAlignment: MainAxisAlignment
-                                                    .center,
-                                                children: [
-                                                  FittedBox(
-                                                      child: Text(
-                                                        '3 ½',
-                                                      )),
-                                                ],
-                                              ),
-                                            ),
-                                          ),
-                                          InkWell(
-                                            onTap: () {
-                                              State(() {
-                                                       shoe2 = !shoe2;
-                                        selectedSize = <String>[];
-                                             if (shoe2 == true){
-                                               selectedSize.add("shoe2");
-                                               sizeFilter = "shoe2";
-                                             }
-                                              });
-                                            },
-                                            child: Container(
-                                              color: shoe2
-                                                  ? Colors.pink.shade50
-                                                  : Colors.white,
-
-                                              height: 50,
-                                              width: MediaQuery
-                                                  .of(context)
-                                                  .size
-                                                  .width,
-                                              child: Column(
-                                                mainAxisAlignment: MainAxisAlignment
-                                                    .center,
-                                                children: [
-                                                  FittedBox(
-                                                      child: Text(
-                                                        '4',
-                                                      )),
-                                                ],
-                                              ),
-                                            ),
-                                          ),
-                                          InkWell(
-                                            onTap: () {
-                                              State(() {
-                                                       shoe3 = !shoe3;
-                                        selectedSize = <String>[];
-                                             if (shoe3 == true){
-                                               selectedSize.add("shoe3");
-                                               sizeFilter = "shoe3";
-                                             }
-                                              });
-                                            },
-                                            child: Container(
-                                              color: shoe3
-                                                  ? Colors.pink.shade50
-                                                  : Colors.white,
-
-                                              height: 50,
-                                              width: MediaQuery
-                                                  .of(context)
-                                                  .size
-                                                  .width,
-                                              child: Column(
-                                                mainAxisAlignment: MainAxisAlignment
-                                                    .center,
-                                                children: [
-                                                  FittedBox(
-                                                      child: Text(
-                                                        '4 ½',
-                                                      )),
-                                                ],
-                                              ),
-                                            ),
-                                          ),
-                                          InkWell(
-                                            onTap: () {
-                                              State(() {
-                                                       shoe4 = !shoe4;
-                                        selectedSize = <String>[];
-                                             if (shoe4 == true){
-                                               selectedSize.add("shoe4");
-                                               sizeFilter = "shoe4";
-                                             }
-                                              });
-                                            },
-                                            child: Container(
-                                              color: shoe4
-                                                  ? Colors.pink.shade50
-                                                  : Colors.white,
-
-                                              height: 50,
-                                              width: MediaQuery
-                                                  .of(context)
-                                                  .size
-                                                  .width,
-                                              child: Column(
-                                                mainAxisAlignment: MainAxisAlignment
-                                                    .center,
-                                                children: [
-                                                  FittedBox(
-                                                      child: Text(
-                                                        '5',
-                                                      )),
-                                                ],
-                                              ),
-                                            ),
-                                          ),
-                                          InkWell(
-                                            onTap: () {
-                                              State(() {
-                                                       shoe5 = !shoe5;
-                                        selectedSize = <String>[];
-                                             if (shoe5 == true){
-                                               selectedSize.add("shoe5");
-                                               sizeFilter = "shoe5";
-                                             }
-                                              });
-                                            },
-                                            child: Container(
-                                              color: shoe5
-                                                  ? Colors.pink.shade50
-                                                  : Colors.white,
-
-                                              height: 50,
-                                              width: MediaQuery
-                                                  .of(context)
-                                                  .size
-                                                  .width,
-                                              child: Column(
-                                                mainAxisAlignment: MainAxisAlignment
-                                                    .center,
-                                                children: [
-                                                  FittedBox(
-                                                      child: Text(
-                                                        '5 ½',
-                                                      )),
-                                                ],
-                                              ),
-                                            ),
-                                          ),
-                                          InkWell(
-                                            onTap: () {
-                                              State(() {
-                                                       shoe6 = !shoe6;
-                                        selectedSize = <String>[];
-                                             if (shoe6 == true){
-                                               selectedSize.add("shoe6");
-                                               sizeFilter = "shoe6";
-                                             }
-                                              });
-                                            },
-                                            child: Container(
-                                              color: shoe6
-                                                  ? Colors.pink.shade50
-                                                  : Colors.white,
-
-                                              height: 50,
-                                              width: MediaQuery
-                                                  .of(context)
-                                                  .size
-                                                  .width,
-                                              child: Column(
-                                                mainAxisAlignment: MainAxisAlignment
-                                                    .center,
-                                                children: [
-                                                  FittedBox(
-                                                      child: Text(
-                                                        '6',
-                                                      )),
-                                                ],
-                                              ),
-                                            ),
-                                          ),
-                                          InkWell(
-                                            onTap: () {
-                                              State(() {
-                                                       shoe7 = !shoe7;
-                                        selectedSize = <String>[];
-                                             if (shoe7 == true){
-                                               selectedSize.add("shoe7");
-                                               sizeFilter = "shoe7";
-                                             }
-                                              });
-                                            },
-                                            child: Container(
-                                              color: shoe7
-                                                  ? Colors.pink.shade50
-                                                  : Colors.white,
-
-                                              height: 50,
-                                              width: MediaQuery
-                                                  .of(context)
-                                                  .size
-                                                  .width,
-                                              child: Column(
-                                                mainAxisAlignment: MainAxisAlignment
-                                                    .center,
-                                                children: [
-                                                  FittedBox(
-                                                      child: Text(
-                                                        '6 ½',
-                                                      )),
-                                                ],
-                                              ),
-                                            ),
-                                          ),
-                                          InkWell(
-                                            onTap: () {
-                                              State(() {
-                                                       shoe8 = !shoe8;
-                                        selectedSize = <String>[];
-                                             if (shoe8 == true){
-                                               selectedSize.add("shoe8");
-                                               sizeFilter = "shoe8";
-                                             }
-                                              });
-                                            },
-                                            child: Container(
-                                              color: shoe8
-                                                  ? Colors.pink.shade50
-                                                  : Colors.white,
-
-                                              height: 50,
-                                              width: MediaQuery
-                                                  .of(context)
-                                                  .size
-                                                  .width,
-                                              child: Column(
-                                                mainAxisAlignment: MainAxisAlignment
-                                                    .center,
-                                                children: [
-                                                  FittedBox(
-                                                      child: Text(
-                                                        '7',
-                                                      )),
-                                                ],
-                                              ),
-                                            ),
-                                          ),
-                                          InkWell(
-                                            onTap: () {
-                                              State(() {
-                                                       shoe9 = !shoe9;
-                                        selectedSize = <String>[];
-                                             if (shoe9 == true){
-                                               selectedSize.add("shoe9");
-                                               sizeFilter = "shoe9";
-                                             }
-                                              });
-                                            },
-                                            child: Container(
-                                              color: shoe9
-                                                  ? Colors.pink.shade50
-                                                  : Colors.white,
-
-                                              height: 50,
-                                              width: MediaQuery
-                                                  .of(context)
-                                                  .size
-                                                  .width,
-                                              child: Column(
-                                                mainAxisAlignment: MainAxisAlignment
-                                                    .center,
-                                                children: [
-                                                  FittedBox(
-                                                      child: Text(
-                                                        '7 ½',
-                                                      )),
-                                                ],
-                                              ),
-                                            ),
-                                          ),
-                                          InkWell(
-                                            onTap: () {
-                                              State(() {
-                                                       shoe10 = !shoe10;
-                                        selectedSize = <String>[];
-                                             if (shoe10 == true){
-                                               selectedSize.add("shoe10");
-                                               sizeFilter = "shoe10";
-                                             }
-                                              });
-                                            },
-                                            child: Container(
-                                              color: shoe10 ? Colors.pink
-                                                  .shade50 : Colors.white,
-
-                                              height: 50,
-                                              width: MediaQuery
-                                                  .of(context)
-                                                  .size
-                                                  .width,
-                                              child: Column(
-                                                mainAxisAlignment: MainAxisAlignment
-                                                    .center,
-                                                children: [
-                                                  FittedBox(
-                                                      child: Text(
-                                                        '8',
-                                                      )),
-                                                ],
-                                              ),
-                                            ),
-                                          ),
-                                          InkWell(
-                                            onTap: () {
-                                              State(() {
-                                                       shoe11 = !shoe11;
-                                        selectedSize = <String>[];
-                                             if (shoe11 == true){
-                                               selectedSize.add("shoe11");
-                                               sizeFilter = "shoe11";
-                                             }
-                                              });
-                                            },
-                                            child: Container(
-                                              color: shoe11 ? Colors.pink
-                                                  .shade50 : Colors.white,
-
-                                              height: 50,
-                                              width: MediaQuery
-                                                  .of(context)
-                                                  .size
-                                                  .width,
-                                              child: Column(
-                                                mainAxisAlignment: MainAxisAlignment
-                                                    .center,
-                                                children: [
-                                                  FittedBox(
-                                                      child: Text(
-                                                        '8 ½',
-                                                      )),
-                                                ],
-                                              ),
-                                            ),
-                                          ),
-                                          InkWell(
-                                            onTap: () {
-                                              State(() {
-                                                       shoe12 = !shoe12;
-                                        selectedSize = <String>[];
-                                             if (shoe12 == true){
-                                               selectedSize.add("shoe12");
-                                               sizeFilter = "shoe12";
-                                             }
-                                              });
-                                            },
-                                            child: Container(
-                                              color: shoe12 ? Colors.pink
-                                                  .shade50 : Colors.white,
-
-                                              height: 50,
-                                              width: MediaQuery
-                                                  .of(context)
-                                                  .size
-                                                  .width,
-                                              child: Column(
-                                                mainAxisAlignment: MainAxisAlignment
-                                                    .center,
-                                                children: [
-                                                  FittedBox(
-                                                      child: Text(
-                                                        '9',
-                                                      )),
-                                                ],
-                                              ),
-                                            ),
-                                          ),
-                                          InkWell(
-                                            onTap: () {
-                                              State(() {
-                                                       shoe13 = !shoe13;
-                                        selectedSize = <String>[];
-                                             if (shoe13 == true){
-                                               selectedSize.add("shoe13");
-                                               sizeFilter = "shoe13";
-                                             }
-                                              });
-                                            },
-                                            child: Container(
-                                              color: shoe13 ? Colors.pink
-                                                  .shade50 : Colors.white,
-
-                                              height: 50,
-                                              width: MediaQuery
-                                                  .of(context)
-                                                  .size
-                                                  .width,
-                                              child: Column(
-                                                mainAxisAlignment: MainAxisAlignment
-                                                    .center,
-                                                children: [
-                                                  FittedBox(
-                                                      child: Text(
-                                                        '9 ½',
-                                                      )),
-                                                ],
-                                              ),
-                                            ),
-                                          ),
-                                          InkWell(
-                                            onTap: () {
-                                              State(() {
-                                                       shoe14 = !shoe14;
-                                        selectedSize = <String>[];
-                                             if (shoe14 == true){
-                                               selectedSize.add("shoe14");
-                                               sizeFilter = "shoe14";
-                                             }
-                                              });
-                                            },
-                                            child: Container(
-                                              color: shoe14 ? Colors.pink
-                                                  .shade50 : Colors.white,
-
-                                              height: 50,
-                                              width: MediaQuery
-                                                  .of(context)
-                                                  .size
-                                                  .width,
-                                              child: Column(
-                                                mainAxisAlignment: MainAxisAlignment
-                                                    .center,
-                                                children: [
-                                                  FittedBox(
-                                                      child: Text(
-                                                        '10',
-                                                      )),
-                                                ],
-                                              ),
-                                            ),
-                                          ),
-                                          InkWell(
-                                            onTap: () {
-                                              State(() {
-                                                       shoe15 = !shoe15;
-                                        selectedSize = <String>[];
-                                             if (shoe15== true){
-                                               selectedSize.add("shoe15");
-                                               sizeFilter = "shoe15";
-                                             }
-                                              });
-                                            },
-                                            child: Container(
-                                              color: shoe15 ? Colors.pink
-                                                  .shade50 : Colors.white,
-
-                                              height: 50,
-                                              width: MediaQuery
-                                                  .of(context)
-                                                  .size
-                                                  .width,
-                                              child: Column(
-                                                mainAxisAlignment: MainAxisAlignment
-                                                    .center,
-                                                children: [
-                                                  FittedBox(
-                                                      child: Text(
-                                                        '10 ½',
-                                                      )),
-                                                ],
-                                              ),
-                                            ),
-                                          ),
-                                          InkWell(
-                                            onTap: () {
-                                              State(() {
-                                                       shoe16 = !shoe16;
-                                        selectedSize = <String>[];
-                                             if (shoe16== true){
-                                               selectedSize.add("shoe16");
-                                               sizeFilter = "shoe16";
-                                             }
-                                              });
-                                            },
-                                            child: Container(
-                                              color: shoe16 ? Colors.pink
-                                                  .shade50 : Colors.white,
-
-                                              height: 50,
-                                              width: MediaQuery
-                                                  .of(context)
-                                                  .size
-                                                  .width,
-                                              child: Column(
-                                                mainAxisAlignment: MainAxisAlignment
-                                                    .center,
-                                                children: [
-                                                  FittedBox(
-                                                      child: Text(
-                                                        '11',
-                                                      )),
-                                                ],
-                                              ),
-                                            ),
-                                          ),
-                                          InkWell(
-                                            onTap: () {
-                                              State(() {
-                                                       shoe17 = !shoe17;
-                                        selectedSize = <String>[];
-                                             if (shoe17== true){
-                                               selectedSize.add("shoe17");
-                                               sizeFilter = "shoe17";
-                                             }
-                                              });
-                                            },
-                                            child: Container(
-                                              color: shoe17 ? Colors.pink
-                                                  .shade50 : Colors.white,
-
-                                              height: 50,
-                                              width: MediaQuery
-                                                  .of(context)
-                                                  .size
-                                                  .width,
-                                              child: Column(
-                                                mainAxisAlignment: MainAxisAlignment
-                                                    .center,
-                                                children: [
-                                                  FittedBox(
-                                                      child: Text(
-                                                        '11 ½',
-                                                      )),
-                                                ],
-                                              ),
-                                            ),
-                                          ),
-                                          InkWell(
-                                            onTap: () {
-                                              State(() {
-                                                       shoe18 = !shoe18;
-                                        selectedSize = <String>[];
-                                             if (shoe18== true){
-                                               selectedSize.add("shoe18");
-                                               sizeFilter = "shoe18";
-                                             }
-                                              });
-                                            },
-                                            child: Container(
-                                              color: shoe18 ? Colors.pink
-                                                  .shade50 : Colors.white,
-
-                                              height: 50,
-                                              width: MediaQuery
-                                                  .of(context)
-                                                  .size
-                                                  .width,
-                                              child: Column(
-                                                mainAxisAlignment: MainAxisAlignment
-                                                    .center,
-                                                children: [
-                                                  FittedBox(
-                                                      child: Text(
-                                                        '12',
-                                                      )),
-                                                ],
-                                              ),
-                                            ),
-                                          ),
-                                          InkWell(
-                                            onTap: () {
-                                              State(() {
-                                                       shoe19 = !shoe19;
-                                        selectedSize = <String>[];
-                                             if (shoe19== true){
-                                               selectedSize.add("shoe19");
-                                               sizeFilter = "shoe19";
-                                             }
-                                              });
-                                            },
-                                            child: Container(
-                                              color: shoe19 ? Colors.pink
-                                                  .shade50 : Colors.white,
-
-                                              height: 50,
-                                              width: MediaQuery
-                                                  .of(context)
-                                                  .size
-                                                  .width,
-                                              child: Column(
-                                                mainAxisAlignment: MainAxisAlignment
-                                                    .center,
-                                                children: [
-                                                  FittedBox(
-                                                      child: Text(
-                                                        '12 ½',
-                                                      )),
-                                                ],
-                                              ),
-                                            ),
-                                          ),
-                                          InkWell(
-                                            onTap: () {
-                                              State(() {
-                                                       shoe20 = !shoe20;
-                                        selectedSize = <String>[];
-                                             if (shoe20== true){
-                                               selectedSize.add("shoe20");
-                                               sizeFilter = "shoe20";
-                                             }
-                                              });
-                                            },
-                                            child: Container(
-                                              color: shoe20 ? Colors.pink
-                                                  .shade50 : Colors.white,
-
-                                              height: 50,
-                                              width: MediaQuery
-                                                  .of(context)
-                                                  .size
-                                                  .width,
-                                              child: Column(
-                                                mainAxisAlignment: MainAxisAlignment
-                                                    .center,
-                                                children: [
-                                                  FittedBox(
-                                                      child: Text(
-                                                        '13',
-                                                      )),
-                                                ],
-                                              ),
-                                            ),
-                                          ),
-                                          InkWell(
-                                            onTap: () {
-                                              State(() {
-                                                       shoe21 = !shoe21;
-                                        selectedSize = <String>[];
-                                             if (shoe21== true){
-                                               selectedSize.add("shoe21");
-                                               sizeFilter = "shoe21";
-                                             }
-                                              });
-                                            },
-                                            child: Container(
-                                              color: shoe21 ? Colors.pink
-                                                  .shade50 : Colors.white,
-
-                                              height: 50,
-                                              width: MediaQuery
-                                                  .of(context)
-                                                  .size
-                                                  .width,
-                                              child: Column(
-                                                mainAxisAlignment: MainAxisAlignment
-                                                    .center,
-                                                children: [
-                                                  FittedBox(
-                                                      child: Text(
-                                                        '13 ½',
-                                                      )),
-                                                ],
-                                              ),
-                                            ),
-                                          ),
-
-
-                                        ],
-                                      ),
-                                      ]
-                                  ) ,
-                                 ExpansionTile(
-                                      title: Text("Ring Size"),
-                                      children: [Column(
-                                        children: [
-                                          InkWell(
-                                            onTap: () {
-                                              State(() {
-                                                       ring1 = !ring1;
-                                        selectedSize = <String>[];
-                                             if (ring1== true){
-                                               selectedSize.add("ring1");
-                                               sizeFilter = "ring1";
-                                             }
-                                              });
-                                            },
-                                            child: Container(
-                                              color: ring1
-                                                  ? Colors.pink.shade50
-                                                  : Colors.white,
-
-                                              height: 50,
-                                              width: MediaQuery
-                                                  .of(context)
-                                                  .size
-                                                  .width,
-                                              child: Column(
-                                                mainAxisAlignment: MainAxisAlignment
-                                                    .center,
-                                                children: [
-                                                  FittedBox(
-                                                      child: Text(
-                                                        '4',
-                                                      )),
-                                                ],
-                                              ),
-                                            ),
-                                          ),
-                                          InkWell(
-                                            onTap: () {
-                                              State(() {
-                                                       ring2 = !ring2;
-                                        selectedSize = <String>[];
-                                             if (ring2== true){
-                                               selectedSize.add("ring2");
-                                               sizeFilter = "ring2";
-                                             }
-                                              });
-                                            },
-                                            child: Container(
-                                              color: ring2
-                                                  ? Colors.pink.shade50
-                                                  : Colors.white,
-
-                                              height: 50,
-                                              width: MediaQuery
-                                                  .of(context)
-                                                  .size
-                                                  .width,
-                                              child: Column(
-                                                mainAxisAlignment: MainAxisAlignment
-                                                    .center,
-                                                children: [
-                                                  FittedBox(
-                                                      child: Text(
-                                                        '4.5',
-                                                      )),
-                                                ],
-                                              ),
-                                            ),
-                                          ),
-                                          InkWell(
-                                            onTap: () {
-                                              State(() {
-                                                       ring3 = !ring3;
-                                        selectedSize = <String>[];
-                                             if (ring3== true){
-                                               selectedSize.add("ring3");
-                                               sizeFilter = "ring3";
-                                             }
-                                              });
-                                            },
-                                            child: Container(
-                                              color: ring3
-                                                  ? Colors.pink.shade50
-                                                  : Colors.white,
-
-                                              height: 50,
-                                              width: MediaQuery
-                                                  .of(context)
-                                                  .size
-                                                  .width,
-                                              child: Column(
-                                                mainAxisAlignment: MainAxisAlignment
-                                                    .center,
-                                                children: [
-                                                  FittedBox(
-                                                      child: Text(
-                                                        '5',
-                                                      )),
-                                                ],
-                                              ),
-                                            ),
-                                          ),
-                                          InkWell(
-                                            onTap: () {
-                                              State(() {
-                                                       ring4 = !ring4;
-                                        selectedSize = <String>[];
-                                             if (ring4== true){
-                                               selectedSize.add("ring4");
-                                               sizeFilter = "ring4";
-                                             }
-                                              });
-                                            },
-                                            child: Container(
-                                              color: ring4
-                                                  ? Colors.pink.shade50
-                                                  : Colors.white,
-
-                                              height: 50,
-                                              width: MediaQuery
-                                                  .of(context)
-                                                  .size
-                                                  .width,
-                                              child: Column(
-                                                mainAxisAlignment: MainAxisAlignment
-                                                    .center,
-                                                children: [
-                                                  FittedBox(
-                                                      child: Text(
-                                                        '5.5',
-                                                      )),
-                                                ],
-                                              ),
-                                            ),
-                                          ),
-                                          InkWell(
-                                            onTap: () {
-                                              State(() {
-                                                       ring5 = !ring5;
-                                        selectedSize = <String>[];
-                                             if (ring5== true){
-                                               selectedSize.add("ring5");
-                                               sizeFilter = "ring5";
-                                             }
-                                              });
-                                            },
-                                            child: Container(
-                                              color: ring5
-                                                  ? Colors.pink.shade50
-                                                  : Colors.white,
-
-                                              height: 50,
-                                              width: MediaQuery
-                                                  .of(context)
-                                                  .size
-                                                  .width,
-                                              child: Column(
-                                                mainAxisAlignment: MainAxisAlignment
-                                                    .center,
-                                                children: [
-                                                  FittedBox(
-                                                      child: Text(
-                                                        '6',
-                                                      )),
-                                                ],
-                                              ),
-                                            ),
-                                          ),
-                                          InkWell(
-                                            onTap: () {
-                                              State(() {
-                                                       ring6 = !ring6;
-                                        selectedSize = <String>[];
-                                             if (ring6== true){
-                                               selectedSize.add("ring6");
-                                               sizeFilter = "ring6";
-                                             }
-                                              });
-                                            },
-                                            child: Container(
-                                              color: ring6
-                                                  ? Colors.pink.shade50
-                                                  : Colors.white,
-
-                                              height: 50,
-                                              width: MediaQuery
-                                                  .of(context)
-                                                  .size
-                                                  .width,
-                                              child: Column(
-                                                mainAxisAlignment: MainAxisAlignment
-                                                    .center,
-                                                children: [
-                                                  FittedBox(
-                                                      child: Text(
-                                                        '6.5',
-                                                      )),
-                                                ],
-                                              ),
-                                            ),
-                                          ),
-                                          InkWell(
-                                            onTap: () {
-                                              State(() {
-                                                       ring7 = !ring7;
-                                        selectedSize = <String>[];
-                                             if (ring7== true){
-                                               selectedSize.add("ring7");
-                                               sizeFilter = "ring7";
-                                             }
-                                              });
-                                            },
-                                            child: Container(
-                                              color: ring7
-                                                  ? Colors.pink.shade50
-                                                  : Colors.white,
-
-                                              height: 50,
-                                              width: MediaQuery
-                                                  .of(context)
-                                                  .size
-                                                  .width,
-                                              child: Column(
-                                                mainAxisAlignment: MainAxisAlignment
-                                                    .center,
-                                                children: [
-                                                  FittedBox(
-                                                      child: Text(
-                                                        '7',
-                                                      )),
-                                                ],
-                                              ),
-                                            ),
-                                          ),
-                                          InkWell(
-                                            onTap: () {
-                                              State(() {
-                                                       ring8 = !ring8;
-                                        selectedSize = <String>[];
-                                             if (ring8== true){
-                                               selectedSize.add("ring8");
-                                               sizeFilter = "ring8";
-                                             }
-                                              });
-                                            },
-                                            child: Container(
-                                              color: ring8
-                                                  ? Colors.pink.shade50
-                                                  : Colors.white,
-
-                                              height: 50,
-                                              width: MediaQuery
-                                                  .of(context)
-                                                  .size
-                                                  .width,
-                                              child: Column(
-                                                mainAxisAlignment: MainAxisAlignment
-                                                    .center,
-                                                children: [
-                                                  FittedBox(
-                                                      child: Text(
-                                                        '7.5',
-                                                      )),
-                                                ],
-                                              ),
-                                            ),
-                                          ),
-                                          InkWell(
-                                            onTap: () {
-                                              State(() {
-                                                       ring9 = !ring9;
-                                        selectedSize = <String>[];
-                                             if (ring9== true){
-                                               selectedSize.add("ring9");
-                                               sizeFilter = "ring9";
-                                             }
-                                              });
-                                            },
-                                            child: Container(
-                                              color: ring9
-                                                  ? Colors.pink.shade50
-                                                  : Colors.white,
-
-                                              height: 50,
-                                              width: MediaQuery
-                                                  .of(context)
-                                                  .size
-                                                  .width,
-                                              child: Column(
-                                                mainAxisAlignment: MainAxisAlignment
-                                                    .center,
-                                                children: [
-                                                  FittedBox(
-                                                      child: Text(
-                                                        '8',
-                                                      )),
-                                                ],
-                                              ),
-                                            ),
-                                          ),
-                                          InkWell(
-                                            onTap: () {
-                                              State(() {
-                                                       ring10 = !ring10;
-                                        selectedSize = <String>[];
-                                             if (ring10== true){
-                                               selectedSize.add("ring10");
-                                               sizeFilter = "ring10";
-                                             }
-                                              });
-                                            },
-                                            child: Container(
-                                              color: ring10 ? Colors.pink
-                                                  .shade50 : Colors.white,
-
-                                              height: 50,
-                                              width: MediaQuery
-                                                  .of(context)
-                                                  .size
-                                                  .width,
-                                              child: Column(
-                                                mainAxisAlignment: MainAxisAlignment
-                                                    .center,
-                                                children: [
-                                                  FittedBox(
-                                                      child: Text(
-                                                        '8.5',
-                                                      )),
-                                                ],
-                                              ),
-                                            ),
-                                          ),
-                                          InkWell(
-                                            onTap: () {
-                                              State(() {
-                                                       ring11 = !ring11;
-                                        selectedSize = <String>[];
-                                             if (ring11== true){
-                                               selectedSize.add("ring11");
-                                               sizeFilter = "ring11";
-                                             }
-                                              });
-                                            },
-                                            child: Container(
-                                              color: ring11 ? Colors.pink
-                                                  .shade50 : Colors.white,
-
-                                              height: 50,
-                                              width: MediaQuery
-                                                  .of(context)
-                                                  .size
-                                                  .width,
-                                              child: Column(
-                                                mainAxisAlignment: MainAxisAlignment
-                                                    .center,
-                                                children: [
-                                                  FittedBox(
-                                                      child: Text(
-                                                        '9',
-                                                      )),
-                                                ],
-                                              ),
-                                            ),
-                                          ),
-                                          InkWell(
-                                            onTap: () {
-                                              State(() {
-                                                       ring12 = !ring12;
-                                        selectedSize = <String>[];
-                                             if (ring12== true){
-                                               selectedSize.add("ring12");
-                                               sizeFilter = "ring12";
-                                             }
-                                              });
-                                            },
-                                            child: Container(
-                                              color: ring12 ? Colors.pink
-                                                  .shade50 : Colors.white,
-
-                                              height: 50,
-                                              width: MediaQuery
-                                                  .of(context)
-                                                  .size
-                                                  .width,
-                                              child: Column(
-                                                mainAxisAlignment: MainAxisAlignment
-                                                    .center,
-                                                children: [
-                                                  FittedBox(
-                                                      child: Text(
-                                                        '9.5',
-                                                      )),
-                                                ],
-                                              ),
-                                            ),
-                                          ),
-                                          InkWell(
-                                            onTap: () {
-                                              State(() {
-                                                       ring13 = !ring13;
-                                        selectedSize = <String>[];
-                                             if (ring13== true){
-                                               selectedSize.add("ring13");
-                                               sizeFilter = "ring13";
-                                             }
-                                              });
-                                            },
-                                            child: Container(
-                                              color: ring13 ? Colors.pink
-                                                  .shade50 : Colors.white,
-
-                                              height: 50,
-                                              width: MediaQuery
-                                                  .of(context)
-                                                  .size
-                                                  .width,
-                                              child: Column(
-                                                mainAxisAlignment: MainAxisAlignment
-                                                    .center,
-                                                children: [
-                                                  FittedBox(
-                                                      child: Text(
-                                                        '10',
-                                                      )),
-                                                ],
-                                              ),
-                                            ),
-                                          ),
-                                          InkWell(
-                                            onTap: () {
-                                              State(() {
-                                                       ring14 = !ring14;
-                                        selectedSize = <String>[];
-                                             if (ring14== true){
-                                               selectedSize.add("ring14");
-                                               sizeFilter = "ring14";
-                                             }
-                                              });
-                                            },
-                                            child: Container(
-                                              color: ring14 ? Colors.pink
-                                                  .shade50 : Colors.white,
-
-                                              height: 50,
-                                              width: MediaQuery
-                                                  .of(context)
-                                                  .size
-                                                  .width,
-                                              child: Column(
-                                                mainAxisAlignment: MainAxisAlignment
-                                                    .center,
-                                                children: [
-                                                  FittedBox(
-                                                      child: Text(
-                                                        '10.5',
-                                                      )),
-                                                ],
-                                              ),
-                                            ),
-                                          ),
-                                          InkWell(
-                                            onTap: () {
-                                              State(() {
-                                                       ring15 = !ring15;
-                                        selectedSize = <String>[];
-                                             if (ring15== true){
-                                               selectedSize.add("ring15");
-                                               sizeFilter = "ring15";
-                                             }
-                                              });
-                                            },
-                                            child: Container(
-                                              color: ring15 ? Colors.pink
-                                                  .shade50 : Colors.white,
-
-                                              height: 50,
-                                              width: MediaQuery
-                                                  .of(context)
-                                                  .size
-                                                  .width,
-                                              child: Column(
-                                                mainAxisAlignment: MainAxisAlignment
-                                                    .center,
-                                                children: [
-                                                  FittedBox(
-                                                      child: Text(
-                                                        '11',
-                                                      )),
-                                                ],
-                                              ),
-                                            ),
-                                          ),
-                                          InkWell(
-                                            onTap: () {
-                                              State(() {
-                                                       ring16 = !ring16;
-                                        selectedSize = <String>[];
-                                             if (ring16== true){
-                                               selectedSize.add("ring16");
-                                               sizeFilter = "ring16";
-                                             }
-                                              });
-                                            },
-                                            child: Container(
-                                              color: ring16 ? Colors.pink
-                                                  .shade50 : Colors.white,
-
-                                              height: 50,
-                                              width: MediaQuery
-                                                  .of(context)
-                                                  .size
-                                                  .width,
-                                              child: Column(
-                                                mainAxisAlignment: MainAxisAlignment
-                                                    .center,
-                                                children: [
-                                                  FittedBox(
-                                                      child: Text(
-                                                        '11.5',
-                                                      )),
-                                                ],
-                                              ),
-                                            ),
-                                          ),
-                                          InkWell(
-                                            onTap: () {
-                                              State(() {
-                                                       ring17 = !ring17;
-                                        selectedSize = <String>[];
-                                             if (ring17== true){
-                                               selectedSize.add("ring17");
-                                               sizeFilter = "ring17";
-                                             }
-                                              });
-                                            },
-                                            child: Container(
-                                              color: ring17 ? Colors.pink
-                                                  .shade50 : Colors.white,
-
-                                              height: 50,
-                                              width: MediaQuery
-                                                  .of(context)
-                                                  .size
-                                                  .width,
-                                              child: Column(
-                                                mainAxisAlignment: MainAxisAlignment
-                                                    .center,
-                                                children: [
-                                                  FittedBox(
-                                                      child: Text(
-                                                        '12',
-                                                      )),
-                                                ],
-                                              ),
-                                            ),
-                                          ),
-                                          InkWell(
-                                            onTap: () {
-                                              State(() {
-                                                       ring18 = !ring18;
-                                        selectedSize = <String>[];
-                                             if (ring18== true){
-                                               selectedSize.add("ring18");
-                                               sizeFilter = "ring18";
-                                             }
-                                              });
-                                            },
-                                            child: Container(
-                                              color: ring18 ? Colors.pink
-                                                  .shade50 : Colors.white,
-
-                                              height: 50,
-                                              width: MediaQuery
-                                                  .of(context)
-                                                  .size
-                                                  .width,
-                                              child: Column(
-                                                mainAxisAlignment: MainAxisAlignment
-                                                    .center,
-                                                children: [
-                                                  FittedBox(
-                                                      child: Text(
-                                                        '12.5',
-                                                      )),
-                                                ],
-                                              ),
-                                            ),
-                                          ),
-                                          InkWell(
-                                            onTap: () {
-                                              State(() {
-                                                       ring19 = !ring19;
-                                        selectedSize = <String>[];
-                                             if (ring19== true){
-                                               selectedSize.add("ring19");
-                                               sizeFilter = "ring19";
-                                             }
-                                              });
-                                            },
-                                            child: Container(
-                                              color: ring19 ? Colors.pink
-                                                  .shade50 : Colors.white,
-
-                                              height: 50,
-                                              width: MediaQuery
-                                                  .of(context)
-                                                  .size
-                                                  .width,
-                                              child: Column(
-                                                mainAxisAlignment: MainAxisAlignment
-                                                    .center,
-                                                children: [
-                                                  FittedBox(
-                                                      child: Text(
-                                                        '13',
-                                                      )),
-                                                ],
-                                              ),
-                                            ),
-                                          ),
-                                          InkWell(
-                                            onTap: () {
-                                              State(() {
-                                                       ring20 = !ring20;
-                                        selectedSize = <String>[];
-                                             if (ring20== true){
-                                               selectedSize.add("ring20");
-                                               sizeFilter = "ring20";
-                                             }
-                                              });
-                                            },
-                                            child: Container(
-                                              color: ring20 ? Colors.pink
-                                                  .shade50 : Colors.white,
-
-                                              height: 50,
-                                              width: MediaQuery
-                                                  .of(context)
-                                                  .size
-                                                  .width,
-                                              child: Column(
-                                                mainAxisAlignment: MainAxisAlignment
-                                                    .center,
-                                                children: [
-                                                  FittedBox(
-                                                      child: Text(
-                                                        '13.5',
-                                                      )),
-                                                ],
-                                              ),
-                                            ),
-                                          ),
-                                          InkWell(
-                                            onTap: () {
-                                              State(() {
-                                                       ring21 = !ring21;
-                                        selectedSize = <String>[];
-                                             if (ring21== true){
-                                               selectedSize.add("ring21");
-                                               sizeFilter = "ring21";
-                                             }
-                                              });
-                                            },
-                                            child: Container(
-                                              color: ring21 ? Colors.pink
-                                                  .shade50 : Colors.white,
-
-                                              height: 50,
-                                              width: MediaQuery
-                                                  .of(context)
-                                                  .size
-                                                  .width,
-                                              child: Column(
-                                                mainAxisAlignment: MainAxisAlignment
-                                                    .center,
-                                                children: [
-                                                  FittedBox(
-                                                      child: Text(
-                                                        '14',
-                                                      )),
-                                                ],
-                                              ),
-                                            ),
-                                          ),
-                                          InkWell(
-                                            onTap: () {
-                                              State(() {
-                                                       ring22 = !ring22;
-                                        selectedSize = <String>[];
-                                             if (ring22== true){
-                                               selectedSize.add("ring22");
-                                               sizeFilter = "ring22";
-                                             }
-                                              });
-                                            },
-                                            child: Container(
-                                              color: ring22 ? Colors.pink
-                                                  .shade50 : Colors.white,
-
-                                              height: 50,
-                                              width: MediaQuery
-                                                  .of(context)
-                                                  .size
-                                                  .width,
-                                              child: Column(
-                                                mainAxisAlignment: MainAxisAlignment
-                                                    .center,
-                                                children: [
-                                                  FittedBox(
-                                                      child: Text(
-                                                        '14.5',
-                                                      )),
-                                                ],
-                                              ),
-                                            ),
-                                          ),
-                                          InkWell(
-                                            onTap: () {
-                                              State(() {
-                                                       ring23 = !ring23;
-                                        selectedSize = <String>[];
-                                             if (ring23== true){
-                                               selectedSize.add("ring23");
-                                               sizeFilter = "ring23";
-                                             }
-                                              });
-                                            },
-                                            child: Container(
-                                              color: ring22 ? Colors.pink
-                                                  .shade50 : Colors.white,
-
-                                              height: 50,
-                                              width: MediaQuery
-                                                  .of(context)
-                                                  .size
-                                                  .width,
-                                              child: Column(
-                                                mainAxisAlignment: MainAxisAlignment
-                                                    .center,
-                                                children: [
-                                                  FittedBox(
-                                                      child: Text(
-                                                        '15',
-                                                      )),
-                                                ],
-                                              ),
-                                            ),
-                                          ),
-
-
-                                        ],
-                                      ),
-                                      ]
-                                  ) ,
 
                                   ExpansionTile(
                                       title: Text("Avoid Duties & Taxes"),
@@ -2238,6 +2412,48 @@ class _DesignerShopState extends State<DesignerShop>  with  TickerProviderStateM
                                       QQuery = QQuery.replaceAll("D", "");
                                       RQuery = RQuery.replaceAll("D", "");
                                       SQuery = SQuery.replaceAll("D", "");
+                                    });
+                                    setState(() {
+                                      priceQuery = priceQuery.replaceAll(sizeFilter, "");
+                                      AQuery = AQuery.replaceAll(sizeFilter, "");
+                                      BQuery = BQuery.replaceAll(sizeFilter, "");
+                                      CQuery = CQuery.replaceAll(sizeFilter, "");
+                                      DQuery = DQuery.replaceAll(sizeFilter, "");
+                                      EQuery = EQuery.replaceAll(sizeFilter, "");
+                                      FQuery = FQuery.replaceAll(sizeFilter, "");
+                                      GQuery = GQuery.replaceAll(sizeFilter, "");
+                                      HQuery = HQuery.replaceAll(sizeFilter, "");
+                                      IQuery = IQuery.replaceAll(sizeFilter, "");
+                                      JQuery = JQuery.replaceAll(sizeFilter, "");
+                                      KQuery = KQuery.replaceAll(sizeFilter, "");
+                                      LQuery = LQuery.replaceAll(sizeFilter, "");
+                                      MQuery = MQuery.replaceAll(sizeFilter, "");
+                                      NQuery = NQuery.replaceAll(sizeFilter, "");
+                                      OQuery = OQuery.replaceAll(sizeFilter, "");
+                                      PQuery = PQuery.replaceAll(sizeFilter, "");
+                                      QQuery = QQuery.replaceAll(sizeFilter, "");
+                                      RQuery = RQuery.replaceAll(sizeFilter, "");
+                                      SQuery = SQuery.replaceAll(sizeFilter, "");
+                                      priceQuery = priceQuery + sizeFilter;
+                                      AQuery = AQuery + sizeFilter;
+                                      BQuery = BQuery + sizeFilter;
+                                      CQuery = CQuery + sizeFilter;
+                                      DQuery = DQuery + sizeFilter;
+                                      EQuery = EQuery + sizeFilter;
+                                      FQuery = FQuery + sizeFilter;
+                                      GQuery = GQuery + sizeFilter;
+                                      HQuery = HQuery + sizeFilter;
+                                      IQuery = IQuery + sizeFilter;
+                                      JQuery = JQuery + sizeFilter;
+                                      KQuery = KQuery + sizeFilter;
+                                      LQuery = LQuery + sizeFilter;
+                                      MQuery = MQuery + sizeFilter;
+                                      NQuery = NQuery + sizeFilter;
+                                      OQuery = OQuery + sizeFilter;
+                                      PQuery = PQuery + sizeFilter;
+                                      QQuery = QQuery + sizeFilter;
+                                      RQuery = RQuery + sizeFilter;
+                                      SQuery = SQuery + sizeFilter;
                                     });
                                   }, label: Text("Apply"))
                                 ],
@@ -2462,7 +2678,10 @@ class _DesignerShopState extends State<DesignerShop>  with  TickerProviderStateM
                                                selectedSize.add("shoe1");
                                                sizeFilter = "shoe1";
                                              }
-                                              });
+                                              else{
+sizeFilter = "";
+}
+});
                                             },
                                             child: Container(
                                               color: shoe1
@@ -2495,7 +2714,10 @@ class _DesignerShopState extends State<DesignerShop>  with  TickerProviderStateM
                                                selectedSize.add("shoe2");
                                                sizeFilter = "shoe2";
                                              }
-                                              });
+                                              else{
+sizeFilter = "";
+}
+});
                                             },
                                             child: Container(
                                               color: shoe2
@@ -2528,7 +2750,10 @@ class _DesignerShopState extends State<DesignerShop>  with  TickerProviderStateM
                                                selectedSize.add("shoe3");
                                                sizeFilter = "shoe3";
                                              }
-                                              });
+                                              else{
+sizeFilter = "";
+}
+});
                                             },
                                             child: Container(
                                               color: shoe3
@@ -2561,7 +2786,10 @@ class _DesignerShopState extends State<DesignerShop>  with  TickerProviderStateM
                                                selectedSize.add("shoe4");
                                                sizeFilter = "shoe4";
                                              }
-                                              });
+                                              else{
+sizeFilter = "";
+}
+});
                                             },
                                             child: Container(
                                               color: shoe4
@@ -2594,7 +2822,10 @@ class _DesignerShopState extends State<DesignerShop>  with  TickerProviderStateM
                                                selectedSize.add("shoe5");
                                                sizeFilter = "shoe5";
                                              }
-                                              });
+                                              else{
+sizeFilter = "";
+}
+});
                                             },
                                             child: Container(
                                               color: shoe5
@@ -2627,7 +2858,10 @@ class _DesignerShopState extends State<DesignerShop>  with  TickerProviderStateM
                                                selectedSize.add("shoe6");
                                                sizeFilter = "shoe6";
                                              }
-                                              });
+                                              else{
+sizeFilter = "";
+}
+});
                                             },
                                             child: Container(
                                               color: shoe6
@@ -2660,7 +2894,10 @@ class _DesignerShopState extends State<DesignerShop>  with  TickerProviderStateM
                                                selectedSize.add("shoe7");
                                                sizeFilter = "shoe7";
                                              }
-                                              });
+                                              else{
+sizeFilter = "";
+}
+});
                                             },
                                             child: Container(
                                               color: shoe7
@@ -2693,7 +2930,10 @@ class _DesignerShopState extends State<DesignerShop>  with  TickerProviderStateM
                                                selectedSize.add("shoe8");
                                                sizeFilter = "shoe8";
                                              }
-                                              });
+                                              else{
+sizeFilter = "";
+}
+});
                                             },
                                             child: Container(
                                               color: shoe8
@@ -2726,7 +2966,10 @@ class _DesignerShopState extends State<DesignerShop>  with  TickerProviderStateM
                                                selectedSize.add("shoe9");
                                                sizeFilter = "shoe9";
                                              }
-                                              });
+                                              else{
+sizeFilter = "";
+}
+});
                                             },
                                             child: Container(
                                               color: shoe9
@@ -2759,7 +3002,10 @@ class _DesignerShopState extends State<DesignerShop>  with  TickerProviderStateM
                                                selectedSize.add("shoe10");
                                                sizeFilter = "shoe10";
                                              }
-                                              });
+                                              else{
+sizeFilter = "";
+}
+});
                                             },
                                             child: Container(
                                               color: shoe10 ? Colors.pink
@@ -2791,7 +3037,10 @@ class _DesignerShopState extends State<DesignerShop>  with  TickerProviderStateM
                                                selectedSize.add("shoe11");
                                                sizeFilter = "shoe11";
                                              }
-                                              });
+                                              else{
+sizeFilter = "";
+}
+});
                                             },
                                             child: Container(
                                               color: shoe11 ? Colors.pink
@@ -2823,7 +3072,10 @@ class _DesignerShopState extends State<DesignerShop>  with  TickerProviderStateM
                                                selectedSize.add("shoe12");
                                                sizeFilter = "shoe12";
                                              }
-                                              });
+                                              else{
+sizeFilter = "";
+}
+});
                                             },
                                             child: Container(
                                               color: shoe12 ? Colors.pink
@@ -2855,7 +3107,10 @@ class _DesignerShopState extends State<DesignerShop>  with  TickerProviderStateM
                                                selectedSize.add("shoe13");
                                                sizeFilter = "shoe13";
                                              }
-                                              });
+                                              else{
+sizeFilter = "";
+}
+});
                                             },
                                             child: Container(
                                               color: shoe13 ? Colors.pink
@@ -2887,7 +3142,10 @@ class _DesignerShopState extends State<DesignerShop>  with  TickerProviderStateM
                                                selectedSize.add("shoe14");
                                                sizeFilter = "shoe14";
                                              }
-                                              });
+                                              else{
+sizeFilter = "";
+}
+});
                                             },
                                             child: Container(
                                               color: shoe14 ? Colors.pink
@@ -2919,7 +3177,10 @@ class _DesignerShopState extends State<DesignerShop>  with  TickerProviderStateM
                                                selectedSize.add("shoe15");
                                                sizeFilter = "shoe15";
                                              }
-                                              });
+                                              else{
+sizeFilter = "";
+}
+});
                                             },
                                             child: Container(
                                               color: shoe15 ? Colors.pink
@@ -2951,7 +3212,10 @@ class _DesignerShopState extends State<DesignerShop>  with  TickerProviderStateM
                                                selectedSize.add("shoe16");
                                                sizeFilter = "shoe16";
                                              }
-                                              });
+                                              else{
+sizeFilter = "";
+}
+});
                                             },
                                             child: Container(
                                               color: shoe16 ? Colors.pink
@@ -2994,7 +3258,10 @@ class _DesignerShopState extends State<DesignerShop>  with  TickerProviderStateM
                                                selectedSize.add("ring1");
                                                sizeFilter = "ring1";
                                              }
-                                              });
+                                              else{
+sizeFilter = "";
+}
+});
                                             },
                                             child: Container(
                                               color: ring1
@@ -3027,7 +3294,10 @@ class _DesignerShopState extends State<DesignerShop>  with  TickerProviderStateM
                                                selectedSize.add("ring2");
                                                sizeFilter = "ring2";
                                              }
-                                              });
+                                              else{
+sizeFilter = "";
+}
+});
                                             },
                                             child: Container(
                                               color: ring2
@@ -3060,7 +3330,10 @@ class _DesignerShopState extends State<DesignerShop>  with  TickerProviderStateM
                                                selectedSize.add("ring3");
                                                sizeFilter = "ring3";
                                              }
-                                              });
+                                              else{
+sizeFilter = "";
+}
+});
                                             },
                                             child: Container(
                                               color: ring3
@@ -3093,7 +3366,10 @@ class _DesignerShopState extends State<DesignerShop>  with  TickerProviderStateM
                                                selectedSize.add("ring4");
                                                sizeFilter = "ring4";
                                              }
-                                              });
+                                              else{
+sizeFilter = "";
+}
+});
                                             },
                                             child: Container(
                                               color: ring4
@@ -3126,7 +3402,10 @@ class _DesignerShopState extends State<DesignerShop>  with  TickerProviderStateM
                                                selectedSize.add("ring5");
                                                sizeFilter = "ring5";
                                              }
-                                              });
+                                              else{
+sizeFilter = "";
+}
+});
                                             },
                                             child: Container(
                                               color: ring5
@@ -3159,7 +3438,10 @@ class _DesignerShopState extends State<DesignerShop>  with  TickerProviderStateM
                                                selectedSize.add("ring6");
                                                sizeFilter = "ring6";
                                              }
-                                              });
+                                              else{
+sizeFilter = "";
+}
+});
                                             },
                                             child: Container(
                                               color: ring6
@@ -3192,7 +3474,10 @@ class _DesignerShopState extends State<DesignerShop>  with  TickerProviderStateM
                                                selectedSize.add("ring7");
                                                sizeFilter = "ring7";
                                              }
-                                              });
+                                              else{
+sizeFilter = "";
+}
+});
                                             },
                                             child: Container(
                                               color: ring7
@@ -3225,7 +3510,10 @@ class _DesignerShopState extends State<DesignerShop>  with  TickerProviderStateM
                                                selectedSize.add("ring8");
                                                sizeFilter = "ring8";
                                              }
-                                              });
+                                              else{
+sizeFilter = "";
+}
+});
                                             },
                                             child: Container(
                                               color: ring8
@@ -3258,7 +3546,10 @@ class _DesignerShopState extends State<DesignerShop>  with  TickerProviderStateM
                                                selectedSize.add("ring9");
                                                sizeFilter = "ring9";
                                              }
-                                              });
+                                              else{
+sizeFilter = "";
+}
+});
                                             },
                                             child: Container(
                                               color: ring9
@@ -3291,7 +3582,10 @@ class _DesignerShopState extends State<DesignerShop>  with  TickerProviderStateM
                                                selectedSize.add("ring10");
                                                sizeFilter = "ring10";
                                              }
-                                              });
+                                              else{
+sizeFilter = "";
+}
+});
                                             },
                                             child: Container(
                                               color: ring10 ? Colors.pink
@@ -3323,7 +3617,10 @@ class _DesignerShopState extends State<DesignerShop>  with  TickerProviderStateM
                                                selectedSize.add("ring11");
                                                sizeFilter = "ring11";
                                              }
-                                              });
+                                              else{
+sizeFilter = "";
+}
+});
                                             },
                                             child: Container(
                                               color: ring11 ? Colors.pink
@@ -3355,7 +3652,10 @@ class _DesignerShopState extends State<DesignerShop>  with  TickerProviderStateM
                                                selectedSize.add("ring12");
                                                sizeFilter = "ring12";
                                              }
-                                              });
+                                              else{
+sizeFilter = "";
+}
+});
                                             },
                                             child: Container(
                                               color: ring12 ? Colors.pink
@@ -3387,7 +3687,10 @@ class _DesignerShopState extends State<DesignerShop>  with  TickerProviderStateM
                                                selectedSize.add("ring13");
                                                sizeFilter = "ring13";
                                              }
-                                              });
+                                              else{
+sizeFilter = "";
+}
+});
                                             },
                                             child: Container(
                                               color: ring13 ? Colors.pink
@@ -3419,7 +3722,10 @@ class _DesignerShopState extends State<DesignerShop>  with  TickerProviderStateM
                                                selectedSize.add("ring14");
                                                sizeFilter = "ring14";
                                              }
-                                              });
+                                              else{
+sizeFilter = "";
+}
+});
                                             },
                                             child: Container(
                                               color: ring14 ? Colors.pink
@@ -3451,7 +3757,10 @@ class _DesignerShopState extends State<DesignerShop>  with  TickerProviderStateM
                                                selectedSize.add("ring15");
                                                sizeFilter = "ring15";
                                              }
-                                              });
+                                              else{
+sizeFilter = "";
+}
+});
                                             },
                                             child: Container(
                                               color: ring15 ? Colors.pink
@@ -3483,7 +3792,10 @@ class _DesignerShopState extends State<DesignerShop>  with  TickerProviderStateM
                                                selectedSize.add("ring16");
                                                sizeFilter = "ring16";
                                              }
-                                              });
+                                              else{
+sizeFilter = "";
+}
+});
                                             },
                                             child: Container(
                                               color: ring16 ? Colors.pink
@@ -3515,7 +3827,10 @@ class _DesignerShopState extends State<DesignerShop>  with  TickerProviderStateM
                                                selectedSize.add("ring17");
                                                sizeFilter = "ring17";
                                              }
-                                              });
+                                              else{
+sizeFilter = "";
+}
+});
                                             },
                                             child: Container(
                                               color: ring17 ? Colors.pink
@@ -3547,7 +3862,10 @@ class _DesignerShopState extends State<DesignerShop>  with  TickerProviderStateM
                                                selectedSize.add("ring18");
                                                sizeFilter = "ring18";
                                              }
-                                              });
+                                              else{
+sizeFilter = "";
+}
+});
                                             },
                                             child: Container(
                                               color: ring18 ? Colors.pink
@@ -3579,7 +3897,10 @@ class _DesignerShopState extends State<DesignerShop>  with  TickerProviderStateM
                                                selectedSize.add("ring19");
                                                sizeFilter = "ring19";
                                              }
-                                              });
+                                              else{
+sizeFilter = "";
+}
+});
                                             },
                                             child: Container(
                                               color: ring19 ? Colors.pink
@@ -3611,7 +3932,10 @@ class _DesignerShopState extends State<DesignerShop>  with  TickerProviderStateM
                                                selectedSize.add("ring20");
                                                sizeFilter = "ring20";
                                              }
-                                              });
+                                              else{
+sizeFilter = "";
+}
+});
                                             },
                                             child: Container(
                                               color: ring20 ? Colors.pink
@@ -3643,7 +3967,10 @@ class _DesignerShopState extends State<DesignerShop>  with  TickerProviderStateM
                                                selectedSize.add("ring21");
                                                sizeFilter = "ring21";
                                              }
-                                              });
+                                              else{
+sizeFilter = "";
+}
+});
                                             },
                                             child: Container(
                                               color: ring21 ? Colors.pink
@@ -3675,7 +4002,10 @@ class _DesignerShopState extends State<DesignerShop>  with  TickerProviderStateM
                                                selectedSize.add("ring22");
                                                sizeFilter = "ring22";
                                              }
-                                              });
+                                              else{
+sizeFilter = "";
+}
+});
                                             },
                                             child: Container(
                                               color: ring22 ? Colors.pink
@@ -3707,7 +4037,10 @@ class _DesignerShopState extends State<DesignerShop>  with  TickerProviderStateM
                                                selectedSize.add("ring23");
                                                sizeFilter = "ring23";
                                              }
-                                              });
+                                              else{
+sizeFilter = "";
+}
+});
                                             },
                                             child: Container(
                                               color: ring22 ? Colors.pink
@@ -3751,7 +4084,10 @@ class _DesignerShopState extends State<DesignerShop>  with  TickerProviderStateM
                                                   sizeFilter = "XXXS";
                                                 }
 
-                                              });
+                                              else{
+sizeFilter = "";
+}
+});
                                             },
                                             child: Container(
                                               color: xxxs
@@ -3784,7 +4120,10 @@ class _DesignerShopState extends State<DesignerShop>  with  TickerProviderStateM
                                                   selectedSize.add("XXS");
                                                   sizeFilter = "XXS";
                                                 }
-                                              });
+                                              else{
+sizeFilter = "";
+}
+});
                                             },
                                             child: Container(
                                               color: xxs
@@ -3817,7 +4156,10 @@ class _DesignerShopState extends State<DesignerShop>  with  TickerProviderStateM
                                                   selectedSize.add("XS");
                                                   sizeFilter = "XS";
                                                 }
-                                              });
+                                              else{
+sizeFilter = "";
+}
+});
                                             },
                                             child: Container(
                                               color: xs
@@ -3850,7 +4192,10 @@ class _DesignerShopState extends State<DesignerShop>  with  TickerProviderStateM
                                                   selectedSize.add("S");
                                                   sizeFilter = "S";
                                                 }
-                                              });
+                                              else{
+sizeFilter = "";
+}
+});
                                             },
                                             child: Container(
                                               color: s
@@ -3884,7 +4229,10 @@ class _DesignerShopState extends State<DesignerShop>  with  TickerProviderStateM
                                                   sizeFilter = "M";
                                                 }
 
-                                              });
+                                              else{
+sizeFilter = "";
+}
+});
                                             },
                                             child: Container(
                                               color: m
@@ -3917,7 +4265,10 @@ class _DesignerShopState extends State<DesignerShop>  with  TickerProviderStateM
                                                   selectedSize.add("L");
                                                   sizeFilter = "L";
                                                 }
-                                              });
+                                              else{
+sizeFilter = "";
+}
+});
                                             },
                                             child: Container(
                                               color: l
@@ -3950,7 +4301,10 @@ class _DesignerShopState extends State<DesignerShop>  with  TickerProviderStateM
                                                   selectedSize.add("XL");
                                                   sizeFilter = "XL";
                                                 }
-                                              });
+                                              else{
+sizeFilter = "";
+}
+});
                                             },
                                             child: Container(
                                               color: xl
@@ -3983,7 +4337,10 @@ class _DesignerShopState extends State<DesignerShop>  with  TickerProviderStateM
                                                   selectedSize.add("XXL");
                                                   sizeFilter = "XXL";
                                                 }
-                                              });
+                                              else{
+sizeFilter = "";
+}
+});
                                             },
                                             child: Container(
                                               color: xxl
@@ -4017,7 +4374,10 @@ class _DesignerShopState extends State<DesignerShop>  with  TickerProviderStateM
                                                   selectedSize.add("XXXL");
                                                   sizeFilter = "XXXL";
                                                 }
-                                              });
+                                              else{
+sizeFilter = "";
+}
+});
                                             },
                                             child: Container(
                                               color: xxxl
@@ -4050,7 +4410,10 @@ class _DesignerShopState extends State<DesignerShop>  with  TickerProviderStateM
                                                   selectedSize.add("4XL");
                                                   sizeFilter = "4XL";
                                                 }
-                                              });
+                                              else{
+sizeFilter = "";
+}
+});
                                             },
                                             child: Container(
                                               color: fourl
@@ -4083,7 +4446,10 @@ class _DesignerShopState extends State<DesignerShop>  with  TickerProviderStateM
                                                   selectedSize.add("5XL");
                                                   sizeFilter = "5XL";
                                                 }
-                                              });
+                                              else{
+sizeFilter = "";
+}
+});
                                             },
                                             child: Container(
                                               color: fivel
@@ -4116,7 +4482,10 @@ class _DesignerShopState extends State<DesignerShop>  with  TickerProviderStateM
                                                   selectedSize.add("6XL");
                                                   sizeFilter = "6XL";
                                                 }
-                                              });
+                                              else{
+sizeFilter = "";
+}
+});
                                             },
                                             child: Container(
                                               color: sixl
@@ -4149,7 +4518,10 @@ class _DesignerShopState extends State<DesignerShop>  with  TickerProviderStateM
                                                   selectedSize.add("7XL");
                                                   sizeFilter = "7XL";
                                                 }
-                                              });
+                                              else{
+sizeFilter = "";
+}
+});
                                             },
                                             child: Container(
                                               color: sevenl ? Colors.pink
@@ -4181,7 +4553,10 @@ class _DesignerShopState extends State<DesignerShop>  with  TickerProviderStateM
                                                   selectedSize.add("8XL");
                                                   sizeFilter = "8XL";
                                                 }
-                                              });
+                                              else{
+sizeFilter = "";
+}
+});
                                             },
                                             child: Container(
                                               color: eightl ? Colors.pink
@@ -4295,27 +4670,47 @@ class _DesignerShopState extends State<DesignerShop>  with  TickerProviderStateM
                                       RQuery = RQuery.replaceAll("D", "");
                                       SQuery = SQuery.replaceAll("D", "");
                                     });
-                                    setState((){
-                                      priceQuery = priceQuery + "D";
-                                      AQuery = AQuery + "D";
-                                      BQuery = BQuery + "D";
-                                      CQuery = CQuery + "D";
-                                      DQuery = DQuery + "D";
-                                      EQuery = EQuery + "D";
-                                      FQuery = FQuery + "D";
-                                      GQuery = GQuery + "D";
-                                      HQuery = HQuery + "D";
-                                      IQuery = IQuery + "D";
-                                      JQuery = JQuery + "D";
-                                      KQuery = KQuery + "D";
-                                      LQuery = LQuery + "D";
-                                      MQuery = MQuery + "D";
-                                      NQuery = NQuery + "D";
-                                      OQuery = OQuery + "D";
-                                      PQuery = PQuery + "D";
-                                      QQuery = QQuery + "D";
-                                      RQuery = RQuery + "D";
-                                      SQuery = SQuery + "D";
+                                    setState(() {
+                                      priceQuery = priceQuery.replaceAll(sizeFilter, "");
+                                      AQuery = AQuery.replaceAll(sizeFilter, "");
+                                      BQuery = BQuery.replaceAll(sizeFilter, "");
+                                      CQuery = CQuery.replaceAll(sizeFilter, "");
+                                      DQuery = DQuery.replaceAll(sizeFilter, "");
+                                      EQuery = EQuery.replaceAll(sizeFilter, "");
+                                      FQuery = FQuery.replaceAll(sizeFilter, "");
+                                      GQuery = GQuery.replaceAll(sizeFilter, "");
+                                      HQuery = HQuery.replaceAll(sizeFilter, "");
+                                      IQuery = IQuery.replaceAll(sizeFilter, "");
+                                      JQuery = JQuery.replaceAll(sizeFilter, "");
+                                      KQuery = KQuery.replaceAll(sizeFilter, "");
+                                      LQuery = LQuery.replaceAll(sizeFilter, "");
+                                      MQuery = MQuery.replaceAll(sizeFilter, "");
+                                      NQuery = NQuery.replaceAll(sizeFilter, "");
+                                      OQuery = OQuery.replaceAll(sizeFilter, "");
+                                      PQuery = PQuery.replaceAll(sizeFilter, "");
+                                      QQuery = QQuery.replaceAll(sizeFilter, "");
+                                      RQuery = RQuery.replaceAll(sizeFilter, "");
+                                      SQuery = SQuery.replaceAll(sizeFilter, "");
+                                      priceQuery = priceQuery + sizeFilter;
+                                      AQuery = AQuery + sizeFilter;
+                                      BQuery = BQuery + sizeFilter;
+                                      CQuery = CQuery + sizeFilter;
+                                      DQuery = DQuery + sizeFilter;
+                                      EQuery = EQuery + sizeFilter;
+                                      FQuery = FQuery + sizeFilter;
+                                      GQuery = GQuery + sizeFilter;
+                                      HQuery = HQuery + sizeFilter;
+                                      IQuery = IQuery + sizeFilter;
+                                      JQuery = JQuery + sizeFilter;
+                                      KQuery = KQuery + sizeFilter;
+                                      LQuery = LQuery + sizeFilter;
+                                      MQuery = MQuery + sizeFilter;
+                                      NQuery = NQuery + sizeFilter;
+                                      OQuery = OQuery + sizeFilter;
+                                      PQuery = PQuery + sizeFilter;
+                                      QQuery = QQuery + sizeFilter;
+                                      RQuery = RQuery + sizeFilter;
+                                      SQuery = SQuery + sizeFilter;
                                     });
                                   }, label: Text("Apply"))
                                 ],
@@ -4526,217 +4921,8 @@ class _DesignerShopState extends State<DesignerShop>  with  TickerProviderStateM
                                       ),
                                       ]
                                   ),
-                                  ExpansionTile(
-                                      title: Text("Clothing Size"),
-                                      children: [Column(
-                                        children: [
-                                          InkWell(
-                                            onTap: () {
-                                              State(() {
-                                                        xxxs = !xxxs;
-    selectedSize = <String>[];
-                                             if (xxxs == true){
-                                               selectedSize.add("XXXS");
-                                               sizeFilter = "XXXS";
-                                             }
-                                              });
-                                            },
-                                            child: Container(
-                                              color: xxxs
-                                                  ? Colors.pink.shade50
-                                                  : Colors.white,
 
-                                              height: 50,
-                                              width: MediaQuery
-                                                  .of(context)
-                                                  .size
-                                                  .width,
-                                              child: Column(
-                                                mainAxisAlignment: MainAxisAlignment
-                                                    .center,
-                                                children: [
-                                                  FittedBox(
-                                                      child: Text(
-                                                        '0-3 mth',
-                                                      )),
-                                                ],
-                                              ),
-                                            ),
-                                          ),
-                                          InkWell(
-                                            onTap: () {
-                                              State(() {
-                                                        xxs = !xxs;
-                                        selectedSize = <String>[];
-                                             if (xxs == true){
-                                               selectedSize.add("XXS");
-                                               sizeFilter = "XXS";
-                                             }
-                                              });
-                                            },
-                                            child: Container(
-                                              color: xxs
-                                                  ? Colors.pink.shade50
-                                                  : Colors.white,
-
-                                              height: 50,
-                                              width: MediaQuery
-                                                  .of(context)
-                                                  .size
-                                                  .width,
-                                              child: Column(
-                                                mainAxisAlignment: MainAxisAlignment
-                                                    .center,
-                                                children: [
-                                                  FittedBox(
-                                                      child: Text(
-                                                        '3-6 mth',
-                                                      )),
-                                                ],
-                                              ),
-                                            ),
-                                          ),
-                                          InkWell(
-                                            onTap: () {
-                                              State(() {
-                                                        xs = !xs;
-                                        selectedSize = <String>[];
-                                             if (xs == true){
-                                               selectedSize.add("XS");
-                                               sizeFilter = "XS";
-                                             }
-                                              });
-                                            },
-                                            child: Container(
-                                              color: xs
-                                                  ? Colors.pink.shade50
-                                                  : Colors.white,
-
-                                              height: 50,
-                                              width: MediaQuery
-                                                  .of(context)
-                                                  .size
-                                                  .width,
-                                              child: Column(
-                                                mainAxisAlignment: MainAxisAlignment
-                                                    .center,
-                                                children: [
-                                                  FittedBox(
-                                                      child: Text(
-                                                        '6-9 mth',
-                                                      )),
-                                                ],
-                                              ),
-                                            ),
-                                          ),
-                                          InkWell(
-                                            onTap: () {
-                                              State(() {
-                                                        s = !s;
-                                        selectedSize = <String>[];
-                                             if (s == true){
-                                               selectedSize.add("S");
-                                               sizeFilter = "S";
-                                             }
-                                              });
-                                            },
-                                            child: Container(
-                                              color: s
-                                                  ? Colors.pink.shade50
-                                                  : Colors.white,
-
-                                              height: 50,
-                                              width: MediaQuery
-                                                  .of(context)
-                                                  .size
-                                                  .width,
-                                              child: Column(
-                                                mainAxisAlignment: MainAxisAlignment
-                                                    .center,
-                                                children: [
-                                                  FittedBox(
-                                                      child: Text(
-                                                        '9-12 mth',
-                                                      )),
-                                                ],
-                                              ),
-                                            ),
-                                          ),
-                                          InkWell(
-                                            onTap: () {
-                                              State(() {
-                                                                m = !m;
-                                                selectedSize = <String>[];
-                                                if (m == true){
-                                                  selectedSize.add("M");
-                                                  sizeFilter = "M";
-                                                }
-                                          
-                                              });
-                                            },
-                                            child: Container(
-                                              color: m
-                                                  ? Colors.pink.shade50
-                                                  : Colors.white,
-
-                                              height: 50,
-                                              width: MediaQuery
-                                                  .of(context)
-                                                  .size
-                                                  .width,
-                                              child: Column(
-                                                mainAxisAlignment: MainAxisAlignment
-                                                    .center,
-                                                children: [
-                                                  FittedBox(
-                                                      child: Text(
-                                                        '12-18 mth',
-                                                      )),
-                                                ],
-                                              ),
-                                            ),
-                                          ),
-                                          InkWell(
-                                            onTap: () {
-                                              State(() {
-                                                        l = !l;
-                                        selectedSize = <String>[];
-                                             if (l == true){
-                                               selectedSize.add("L");
-                                               sizeFilter = "L";
-                                             }
-                                              });
-                                            },
-                                            child: Container(
-                                              color: l
-                                                  ? Colors.pink.shade50
-                                                  : Colors.white,
-
-                                              height: 50,
-                                              width: MediaQuery
-                                                  .of(context)
-                                                  .size
-                                                  .width,
-                                              child: Column(
-                                                mainAxisAlignment: MainAxisAlignment
-                                                    .center,
-                                                children: [
-                                                  FittedBox(
-                                                      child: Text(
-                                                        '18-24 mth',
-                                                      )),
-                                                ],
-                                              ),
-                                            ),
-                                          ),
-
-
-                                        ],
-                                      ),
-                                      ]
-                                  ),
-
-                                  ExpansionTile(
+                                  shoesIndex? ExpansionTile(
                                       title: Text("Shoe Size"),
                                       children: [Column(
                                         children: [
@@ -4749,7 +4935,10 @@ class _DesignerShopState extends State<DesignerShop>  with  TickerProviderStateM
                                                selectedSize.add("shoe1");
                                                sizeFilter = "shoe1";
                                              }
-                                              });
+                                              else{
+sizeFilter = "";
+}
+});
                                             },
                                             child: Container(
                                               color: shoe1
@@ -4782,7 +4971,10 @@ class _DesignerShopState extends State<DesignerShop>  with  TickerProviderStateM
                                                selectedSize.add("shoe2");
                                                sizeFilter = "shoe2";
                                              }
-                                              });
+                                              else{
+sizeFilter = "";
+}
+});
                                             },
                                             child: Container(
                                               color: shoe2
@@ -4815,7 +5007,10 @@ class _DesignerShopState extends State<DesignerShop>  with  TickerProviderStateM
                                                selectedSize.add("shoe3");
                                                sizeFilter = "shoe3";
                                              }
-                                              });
+                                              else{
+sizeFilter = "";
+}
+});
                                             },
                                             child: Container(
                                               color: shoe3
@@ -4848,7 +5043,10 @@ class _DesignerShopState extends State<DesignerShop>  with  TickerProviderStateM
                                                selectedSize.add("shoe4");
                                                sizeFilter = "shoe4";
                                              }
-                                              });
+                                              else{
+sizeFilter = "";
+}
+});
                                             },
                                             child: Container(
                                               color: shoe4
@@ -4882,7 +5080,10 @@ class _DesignerShopState extends State<DesignerShop>  with  TickerProviderStateM
                                                selectedSize.add("shoe5");
                                                sizeFilter = "shoe5";
                                              }
-                                              });
+                                              else{
+sizeFilter = "";
+}
+});
                                             },
                                             child: Container(
                                               color: shoe5
@@ -4915,7 +5116,10 @@ class _DesignerShopState extends State<DesignerShop>  with  TickerProviderStateM
                                                selectedSize.add("shoe6");
                                                sizeFilter = "shoe6";
                                              }
-                                              });
+                                              else{
+sizeFilter = "";
+}
+});
                                             },
                                             child: Container(
                                               color: shoe6
@@ -4949,7 +5153,10 @@ class _DesignerShopState extends State<DesignerShop>  with  TickerProviderStateM
                                                selectedSize.add("shoe7");
                                                sizeFilter = "shoe7";
                                              }
-                                              });
+                                              else{
+sizeFilter = "";
+}
+});
                                             },
                                             child: Container(
                                               color: shoe7
@@ -4979,7 +5186,234 @@ class _DesignerShopState extends State<DesignerShop>  with  TickerProviderStateM
                                         ],
                                       ),
                                       ]
-                                  ) ,
+                                  ) :
+                                  ExpansionTile(
+                                      title: Text("Clothing Size"),
+                                      children: [Column(
+                                        children: [
+                                          InkWell(
+                                            onTap: () {
+                                              State(() {
+                                                xxxs = !xxxs;
+                                                selectedSize = <String>[];
+                                                if (xxxs == true){
+                                                  selectedSize.add("XXXS");
+                                                  sizeFilter = "XXXS";
+                                                }
+                                                else{
+                                                  sizeFilter = "";
+                                                }
+                                              });
+                                            },
+                                            child: Container(
+                                              color: xxxs
+                                                  ? Colors.pink.shade50
+                                                  : Colors.white,
+
+                                              height: 50,
+                                              width: MediaQuery
+                                                  .of(context)
+                                                  .size
+                                                  .width,
+                                              child: Column(
+                                                mainAxisAlignment: MainAxisAlignment
+                                                    .center,
+                                                children: [
+                                                  FittedBox(
+                                                      child: Text(
+                                                        '0-3 mth',
+                                                      )),
+                                                ],
+                                              ),
+                                            ),
+                                          ),
+                                          InkWell(
+                                            onTap: () {
+                                              State(() {
+                                                xxs = !xxs;
+                                                selectedSize = <String>[];
+                                                if (xxs == true){
+                                                  selectedSize.add("XXS");
+                                                  sizeFilter = "XXS";
+                                                }
+                                                else{
+                                                  sizeFilter = "";
+                                                }
+                                              });
+                                            },
+                                            child: Container(
+                                              color: xxs
+                                                  ? Colors.pink.shade50
+                                                  : Colors.white,
+
+                                              height: 50,
+                                              width: MediaQuery
+                                                  .of(context)
+                                                  .size
+                                                  .width,
+                                              child: Column(
+                                                mainAxisAlignment: MainAxisAlignment
+                                                    .center,
+                                                children: [
+                                                  FittedBox(
+                                                      child: Text(
+                                                        '3-6 mth',
+                                                      )),
+                                                ],
+                                              ),
+                                            ),
+                                          ),
+                                          InkWell(
+                                            onTap: () {
+                                              State(() {
+                                                xs = !xs;
+                                                selectedSize = <String>[];
+                                                if (xs == true){
+                                                  selectedSize.add("XS");
+                                                  sizeFilter = "XS";
+                                                }
+                                                else{
+                                                  sizeFilter = "";
+                                                }
+                                              });
+                                            },
+                                            child: Container(
+                                              color: xs
+                                                  ? Colors.pink.shade50
+                                                  : Colors.white,
+
+                                              height: 50,
+                                              width: MediaQuery
+                                                  .of(context)
+                                                  .size
+                                                  .width,
+                                              child: Column(
+                                                mainAxisAlignment: MainAxisAlignment
+                                                    .center,
+                                                children: [
+                                                  FittedBox(
+                                                      child: Text(
+                                                        '6-9 mth',
+                                                      )),
+                                                ],
+                                              ),
+                                            ),
+                                          ),
+                                          InkWell(
+                                            onTap: () {
+                                              State(() {
+                                                s = !s;
+                                                selectedSize = <String>[];
+                                                if (s == true){
+                                                  selectedSize.add("S");
+                                                  sizeFilter = "S";
+                                                }
+                                                else{
+                                                  sizeFilter = "";
+                                                }
+                                              });
+                                            },
+                                            child: Container(
+                                              color: s
+                                                  ? Colors.pink.shade50
+                                                  : Colors.white,
+
+                                              height: 50,
+                                              width: MediaQuery
+                                                  .of(context)
+                                                  .size
+                                                  .width,
+                                              child: Column(
+                                                mainAxisAlignment: MainAxisAlignment
+                                                    .center,
+                                                children: [
+                                                  FittedBox(
+                                                      child: Text(
+                                                        '9-12 mth',
+                                                      )),
+                                                ],
+                                              ),
+                                            ),
+                                          ),
+                                          InkWell(
+                                            onTap: () {
+                                              State(() {
+                                                m = !m;
+                                                selectedSize = <String>[];
+                                                if (m == true){
+                                                  selectedSize.add("M");
+                                                  sizeFilter = "M";
+                                                }
+
+                                                else{
+                                                  sizeFilter = "";
+                                                }
+                                              });
+                                            },
+                                            child: Container(
+                                              color: m
+                                                  ? Colors.pink.shade50
+                                                  : Colors.white,
+
+                                              height: 50,
+                                              width: MediaQuery
+                                                  .of(context)
+                                                  .size
+                                                  .width,
+                                              child: Column(
+                                                mainAxisAlignment: MainAxisAlignment
+                                                    .center,
+                                                children: [
+                                                  FittedBox(
+                                                      child: Text(
+                                                        '12-18 mth',
+                                                      )),
+                                                ],
+                                              ),
+                                            ),
+                                          ),
+                                          InkWell(
+                                            onTap: () {
+                                              State(() {
+                                                l = !l;
+                                                selectedSize = <String>[];
+                                                if (l == true){
+                                                  selectedSize.add("L");
+                                                  sizeFilter = "L";
+                                                }
+                                                else{
+                                                  sizeFilter = "";
+                                                }
+                                              });
+                                            },
+                                            child: Container(
+                                              color: l
+                                                  ? Colors.pink.shade50
+                                                  : Colors.white,
+
+                                              height: 50,
+                                              width: MediaQuery
+                                                  .of(context)
+                                                  .size
+                                                  .width,
+                                              child: Column(
+                                                mainAxisAlignment: MainAxisAlignment
+                                                    .center,
+                                                children: [
+                                                  FittedBox(
+                                                      child: Text(
+                                                        '18-24 mth',
+                                                      )),
+                                                ],
+                                              ),
+                                            ),
+                                          ),
+
+
+                                        ],
+                                      ),
+                                      ]
+                                  ),
 
                                   ExpansionTile(
                                       title: Text("Avoid Duties & Taxes"),
@@ -5065,6 +5499,48 @@ class _DesignerShopState extends State<DesignerShop>  with  TickerProviderStateM
                                       QQuery = QQuery.replaceAll("D", "");
                                       RQuery = RQuery.replaceAll("D", "");
                                       SQuery = SQuery.replaceAll("D", "");
+                                    });
+                                    setState(() {
+                                      priceQuery = priceQuery.replaceAll(sizeFilter, "");
+                                      AQuery = AQuery.replaceAll(sizeFilter, "");
+                                      BQuery = BQuery.replaceAll(sizeFilter, "");
+                                      CQuery = CQuery.replaceAll(sizeFilter, "");
+                                      DQuery = DQuery.replaceAll(sizeFilter, "");
+                                      EQuery = EQuery.replaceAll(sizeFilter, "");
+                                      FQuery = FQuery.replaceAll(sizeFilter, "");
+                                      GQuery = GQuery.replaceAll(sizeFilter, "");
+                                      HQuery = HQuery.replaceAll(sizeFilter, "");
+                                      IQuery = IQuery.replaceAll(sizeFilter, "");
+                                      JQuery = JQuery.replaceAll(sizeFilter, "");
+                                      KQuery = KQuery.replaceAll(sizeFilter, "");
+                                      LQuery = LQuery.replaceAll(sizeFilter, "");
+                                      MQuery = MQuery.replaceAll(sizeFilter, "");
+                                      NQuery = NQuery.replaceAll(sizeFilter, "");
+                                      OQuery = OQuery.replaceAll(sizeFilter, "");
+                                      PQuery = PQuery.replaceAll(sizeFilter, "");
+                                      QQuery = QQuery.replaceAll(sizeFilter, "");
+                                      RQuery = RQuery.replaceAll(sizeFilter, "");
+                                      SQuery = SQuery.replaceAll(sizeFilter, "");
+                                      priceQuery = priceQuery + sizeFilter;
+                                      AQuery = AQuery + sizeFilter;
+                                      BQuery = BQuery + sizeFilter;
+                                      CQuery = CQuery + sizeFilter;
+                                      DQuery = DQuery + sizeFilter;
+                                      EQuery = EQuery + sizeFilter;
+                                      FQuery = FQuery + sizeFilter;
+                                      GQuery = GQuery + sizeFilter;
+                                      HQuery = HQuery + sizeFilter;
+                                      IQuery = IQuery + sizeFilter;
+                                      JQuery = JQuery + sizeFilter;
+                                      KQuery = KQuery + sizeFilter;
+                                      LQuery = LQuery + sizeFilter;
+                                      MQuery = MQuery + sizeFilter;
+                                      NQuery = NQuery + sizeFilter;
+                                      OQuery = OQuery + sizeFilter;
+                                      PQuery = PQuery + sizeFilter;
+                                      QQuery = QQuery + sizeFilter;
+                                      RQuery = RQuery + sizeFilter;
+                                      SQuery = SQuery + sizeFilter;
                                     });
                                   }, label: Text("Apply"))
                                 ],
@@ -5275,350 +5751,7 @@ class _DesignerShopState extends State<DesignerShop>  with  TickerProviderStateM
                                       ),
                                       ]
                                   ),
-                                  ExpansionTile(
-                                      title: Text("Clothing Size"),
-                                      children: [Column(
-                                        children: [
-                                          InkWell(
-                                            onTap: () {
-                                              State(() {
-                                                        xxxs = !xxxs;
-    selectedSize = <String>[];
-                                             if (xxxs == true){
-                                               selectedSize.add("XXXS");
-                                               sizeFilter = "XXXS";
-                                             }
-                                              });
-                                            },
-                                            child: Container(
-                                              color: xxxs
-                                                  ? Colors.pink.shade50
-                                                  : Colors.white,
-
-                                              height: 50,
-                                              width: MediaQuery
-                                                  .of(context)
-                                                  .size
-                                                  .width,
-                                              child: Column(
-                                                mainAxisAlignment: MainAxisAlignment
-                                                    .center,
-                                                children: [
-                                                  FittedBox(
-                                                      child: Text(
-                                                        '2 years',
-                                                      )),
-                                                ],
-                                              ),
-                                            ),
-                                          ),
-                                          InkWell(
-                                            onTap: () {
-                                              State(() {
-                                                        xxs = !xxs;
-                                        selectedSize = <String>[];
-                                             if (xxs == true){
-                                               selectedSize.add("XXS");
-                                               sizeFilter = "XXS";
-                                             }
-                                              });
-                                            },
-                                            child: Container(
-                                              color: xxs
-                                                  ? Colors.pink.shade50
-                                                  : Colors.white,
-
-                                              height: 50,
-                                              width: MediaQuery
-                                                  .of(context)
-                                                  .size
-                                                  .width,
-                                              child: Column(
-                                                mainAxisAlignment: MainAxisAlignment
-                                                    .center,
-                                                children: [
-                                                  FittedBox(
-                                                      child: Text(
-                                                        '3-4 years',
-                                                      )),
-                                                ],
-                                              ),
-                                            ),
-                                          ),
-                                          InkWell(
-                                            onTap: () {
-                                              State(() {
-                                                        xs = !xs;
-                                        selectedSize = <String>[];
-                                             if (xs == true){
-                                               selectedSize.add("XS");
-                                               sizeFilter = "XS";
-                                             }
-                                              });
-                                            },
-                                            child: Container(
-                                              color: xs
-                                                  ? Colors.pink.shade50
-                                                  : Colors.white,
-
-                                              height: 50,
-                                              width: MediaQuery
-                                                  .of(context)
-                                                  .size
-                                                  .width,
-                                              child: Column(
-                                                mainAxisAlignment: MainAxisAlignment
-                                                    .center,
-                                                children: [
-                                                  FittedBox(
-                                                      child: Text(
-                                                        '4-5 years',
-                                                      )),
-                                                ],
-                                              ),
-                                            ),
-                                          ),
-                                          InkWell(
-                                            onTap: () {
-                                              State(() {
-                                                        s = !s;
-                                        selectedSize = <String>[];
-                                             if (s == true){
-                                               selectedSize.add("S");
-                                               sizeFilter = "S";
-                                             }
-                                              });
-                                            },
-                                            child: Container(
-                                              color: s
-                                                  ? Colors.pink.shade50
-                                                  : Colors.white,
-
-                                              height: 50,
-                                              width: MediaQuery
-                                                  .of(context)
-                                                  .size
-                                                  .width,
-                                              child: Column(
-                                                mainAxisAlignment: MainAxisAlignment
-                                                    .center,
-                                                children: [
-                                                  FittedBox(
-                                                      child: Text(
-                                                        '5-6 years',
-                                                      )),
-                                                ],
-                                              ),
-                                            ),
-                                          ),
-                                          InkWell(
-                                            onTap: () {
-                                              State(() {
-                                                                m = !m;
-                                                selectedSize = <String>[];
-                                                if (m == true){
-                                                  selectedSize.add("M");
-                                                  sizeFilter = "M";
-                                                }
-                                          
-                                              });
-                                            },
-                                            child: Container(
-                                              color: m
-                                                  ? Colors.pink.shade50
-                                                  : Colors.white,
-
-                                              height: 50,
-                                              width: MediaQuery
-                                                  .of(context)
-                                                  .size
-                                                  .width,
-                                              child: Column(
-                                                mainAxisAlignment: MainAxisAlignment
-                                                    .center,
-                                                children: [
-                                                  FittedBox(
-                                                      child: Text(
-                                                        '6-7 years',
-                                                      )),
-                                                ],
-                                              ),
-                                            ),
-                                          ),
-                                          InkWell(
-                                            onTap: () {
-                                              State(() {
-                                                        l = !l;
-                                        selectedSize = <String>[];
-                                             if (l == true){
-                                               selectedSize.add("L");
-                                               sizeFilter = "L";
-                                             }
-                                              });
-                                            },
-                                            child: Container(
-                                              color: l
-                                                  ? Colors.pink.shade50
-                                                  : Colors.white,
-
-                                              height: 50,
-                                              width: MediaQuery
-                                                  .of(context)
-                                                  .size
-                                                  .width,
-                                              child: Column(
-                                                mainAxisAlignment: MainAxisAlignment
-                                                    .center,
-                                                children: [
-                                                  FittedBox(
-                                                      child: Text(
-                                                        '7-8 years',
-                                                      )),
-                                                ],
-                                              ),
-                                            ),
-                                          ),
-
-                                          InkWell(
-                                            onTap: () {
-                                              State(() {
-                                                        xl = !xl;
-                                        selectedSize = <String>[];
-                                             if (xl == true){
-                                               selectedSize.add("XL");
-                                               sizeFilter = "XL";
-                                             }
-                                              });
-                                            },
-                                            child: Container(
-                                              color: xl
-                                                  ? Colors.pink.shade50
-                                                  : Colors.white,
-
-                                              height: 50,
-                                              width: MediaQuery
-                                                  .of(context)
-                                                  .size
-                                                  .width,
-                                              child: Column(
-                                                mainAxisAlignment: MainAxisAlignment
-                                                    .center,
-                                                children: [
-                                                  FittedBox(
-                                                      child: Text(
-                                                        '8-9 years',
-                                                      )),
-                                                ],
-                                              ),
-                                            ),
-                                          ),
-                                          InkWell(
-                                            onTap: () {
-                                              State(() {
-                                                        xxl = !xxl;
-                                        selectedSize = <String>[];
-                                             if (xxl == true){
-                                               selectedSize.add("XXL");
-                                               sizeFilter = "XXL";
-                                             }
-                                              });
-                                            },
-                                            child: Container(
-                                              color: xxl
-                                                  ? Colors.pink.shade50
-                                                  : Colors.white,
-
-                                              height: 50,
-                                              width: MediaQuery
-                                                  .of(context)
-                                                  .size
-                                                  .width,
-                                              child: Column(
-                                                mainAxisAlignment: MainAxisAlignment
-                                                    .center,
-                                                children: [
-                                                  FittedBox(
-                                                      child: Text(
-                                                        '9-10 years',
-                                                      )),
-                                                ],
-                                              ),
-                                            ),
-                                          ),
-                                          InkWell(
-                                            onTap: () {
-                                              State(() {
-                                                        xxxl = !xxxl;
-                                        selectedSize = <String>[];
-                                             if (xxxl == true){
-                                               selectedSize.add("XXXL");
-                                               sizeFilter = "XXXL";
-                                             }
-                                              });
-                                            },
-                                            child: Container(
-                                              color: xxxl
-                                                  ? Colors.pink.shade50
-                                                  : Colors.white,
-
-                                              height: 50,
-                                              width: MediaQuery
-                                                  .of(context)
-                                                  .size
-                                                  .width,
-                                              child: Column(
-                                                mainAxisAlignment: MainAxisAlignment
-                                                    .center,
-                                                children: [
-                                                  FittedBox(
-                                                      child: Text(
-                                                        '10-11 years',
-                                                      )),
-                                                ],
-                                              ),
-                                            ),
-                                          ),
-                                           InkWell(
-                                            onTap: () {
-                                              State(() {
-                                                        fourl = !fourl;
-                                        selectedSize = <String>[];
-                                             if (fourl == true){
-                                               selectedSize.add("4XL");
-                                               sizeFilter = "4XL";
-                                             }
-                                              });
-                                            },
-                                            child: Container(
-                                              color: fourl
-                                                  ? Colors.pink.shade50
-                                                  : Colors.white,
-
-                                              height: 50,
-                                              width: MediaQuery
-                                                  .of(context)
-                                                  .size
-                                                  .width,
-                                              child: Column(
-                                                mainAxisAlignment: MainAxisAlignment
-                                                    .center,
-                                                children: [
-                                                  FittedBox(
-                                                      child: Text(
-                                                        '11-12 years',
-                                                      )),
-                                                ],
-                                              ),
-                                            ),
-                                          ),
-
-
-
-                                        ],
-                                      ),
-                                      ]
-                                  ),
- ExpansionTile(
+                                  shoesIndex?  ExpansionTile(
                                       title: Text("Shoe Size"),
                                       children: [Column(
                                         children: [
@@ -5631,7 +5764,10 @@ class _DesignerShopState extends State<DesignerShop>  with  TickerProviderStateM
                                                selectedSize.add("shoe1");
                                                sizeFilter = "shoe1";
                                              }
-                                              });
+                                              else{
+sizeFilter = "";
+}
+});
                                             },
                                             child: Container(
                                               color: shoe1
@@ -5664,7 +5800,10 @@ class _DesignerShopState extends State<DesignerShop>  with  TickerProviderStateM
                                                selectedSize.add("shoe2");
                                                sizeFilter = "shoe2";
                                              }
-                                              });
+                                              else{
+sizeFilter = "";
+}
+});
                                             },
                                             child: Container(
                                               color: shoe2
@@ -5697,7 +5836,10 @@ class _DesignerShopState extends State<DesignerShop>  with  TickerProviderStateM
                                                selectedSize.add("shoe3");
                                                sizeFilter = "shoe3";
                                              }
-                                              });
+                                              else{
+sizeFilter = "";
+}
+});
                                             },
                                             child: Container(
                                               color: shoe3
@@ -5730,7 +5872,10 @@ class _DesignerShopState extends State<DesignerShop>  with  TickerProviderStateM
                                                selectedSize.add("shoe4");
                                                sizeFilter = "shoe4";
                                              }
-                                              });
+                                              else{
+sizeFilter = "";
+}
+});
                                             },
                                             child: Container(
                                               color: shoe4
@@ -5763,7 +5908,10 @@ class _DesignerShopState extends State<DesignerShop>  with  TickerProviderStateM
                                                selectedSize.add("shoe5");
                                                sizeFilter = "shoe5";
                                              }
-                                              });
+                                              else{
+sizeFilter = "";
+}
+});
                                             },
                                             child: Container(
                                               color: shoe5
@@ -5796,7 +5944,10 @@ class _DesignerShopState extends State<DesignerShop>  with  TickerProviderStateM
                                                selectedSize.add("shoe6");
                                                sizeFilter = "shoe6";
                                              }
-                                              });
+                                              else{
+sizeFilter = "";
+}
+});
                                             },
                                             child: Container(
                                               color: shoe6
@@ -5829,7 +5980,10 @@ class _DesignerShopState extends State<DesignerShop>  with  TickerProviderStateM
                                                selectedSize.add("shoe7");
                                                sizeFilter = "shoe7";
                                              }
-                                              });
+                                              else{
+sizeFilter = "";
+}
+});
                                             },
                                             child: Container(
                                               color: shoe7
@@ -5862,7 +6016,10 @@ class _DesignerShopState extends State<DesignerShop>  with  TickerProviderStateM
                                                selectedSize.add("shoe8");
                                                sizeFilter = "shoe8";
                                              }
-                                              });
+                                              else{
+sizeFilter = "";
+}
+});
                                             },
                                             child: Container(
                                               color: shoe8
@@ -5895,7 +6052,10 @@ class _DesignerShopState extends State<DesignerShop>  with  TickerProviderStateM
                                                selectedSize.add("shoe9");
                                                sizeFilter = "shoe9";
                                              }
-                                              });
+                                              else{
+sizeFilter = "";
+}
+});
                                             },
                                             child: Container(
                                               color: shoe9
@@ -5928,7 +6088,10 @@ class _DesignerShopState extends State<DesignerShop>  with  TickerProviderStateM
                                                selectedSize.add("shoe10");
                                                sizeFilter = "shoe10";
                                              }
-                                              });
+                                              else{
+sizeFilter = "";
+}
+});
                                             },
                                             child: Container(
                                               color: shoe10 ? Colors.pink
@@ -5960,7 +6123,10 @@ class _DesignerShopState extends State<DesignerShop>  with  TickerProviderStateM
                                                selectedSize.add("shoe11");
                                                sizeFilter = "shoe11";
                                              }
-                                              });
+                                              else{
+sizeFilter = "";
+}
+});
                                             },
                                             child: Container(
                                               color: shoe11 ? Colors.pink
@@ -5992,7 +6158,10 @@ class _DesignerShopState extends State<DesignerShop>  with  TickerProviderStateM
                                                selectedSize.add("shoe12");
                                                sizeFilter = "shoe12";
                                              }
-                                              });
+                                              else{
+sizeFilter = "";
+}
+});
                                             },
                                             child: Container(
                                               color: shoe12 ? Colors.pink
@@ -6024,7 +6193,10 @@ class _DesignerShopState extends State<DesignerShop>  with  TickerProviderStateM
                                                selectedSize.add("shoe13");
                                                sizeFilter = "shoe13";
                                              }
-                                              });
+                                              else{
+sizeFilter = "";
+}
+});
                                             },
                                             child: Container(
                                               color: shoe13 ? Colors.pink
@@ -6056,7 +6228,10 @@ class _DesignerShopState extends State<DesignerShop>  with  TickerProviderStateM
                                                selectedSize.add("shoe14");
                                                sizeFilter = "shoe14";
                                              }
-                                              });
+                                              else{
+sizeFilter = "";
+}
+});
                                             },
                                             child: Container(
                                               color: shoe14 ? Colors.pink
@@ -6085,7 +6260,380 @@ class _DesignerShopState extends State<DesignerShop>  with  TickerProviderStateM
                                         ],
                                       ),
                                       ]
-                                  ) ,
+                                  ) :
+                                  ExpansionTile(
+                                      title: Text("Clothing Size"),
+                                      children: [Column(
+                                        children: [
+                                          InkWell(
+                                            onTap: () {
+                                              State(() {
+                                                xxxs = !xxxs;
+                                                selectedSize = <String>[];
+                                                if (xxxs == true){
+                                                  selectedSize.add("XXXS");
+                                                  sizeFilter = "XXXS";
+                                                }
+                                                else{
+                                                  sizeFilter = "";
+                                                }
+                                              });
+                                            },
+                                            child: Container(
+                                              color: xxxs
+                                                  ? Colors.pink.shade50
+                                                  : Colors.white,
+
+                                              height: 50,
+                                              width: MediaQuery
+                                                  .of(context)
+                                                  .size
+                                                  .width,
+                                              child: Column(
+                                                mainAxisAlignment: MainAxisAlignment
+                                                    .center,
+                                                children: [
+                                                  FittedBox(
+                                                      child: Text(
+                                                        '2 years',
+                                                      )),
+                                                ],
+                                              ),
+                                            ),
+                                          ),
+                                          InkWell(
+                                            onTap: () {
+                                              State(() {
+                                                xxs = !xxs;
+                                                selectedSize = <String>[];
+                                                if (xxs == true){
+                                                  selectedSize.add("XXS");
+                                                  sizeFilter = "XXS";
+                                                }
+                                                else{
+                                                  sizeFilter = "";
+                                                }
+                                              });
+                                            },
+                                            child: Container(
+                                              color: xxs
+                                                  ? Colors.pink.shade50
+                                                  : Colors.white,
+
+                                              height: 50,
+                                              width: MediaQuery
+                                                  .of(context)
+                                                  .size
+                                                  .width,
+                                              child: Column(
+                                                mainAxisAlignment: MainAxisAlignment
+                                                    .center,
+                                                children: [
+                                                  FittedBox(
+                                                      child: Text(
+                                                        '3-4 years',
+                                                      )),
+                                                ],
+                                              ),
+                                            ),
+                                          ),
+                                          InkWell(
+                                            onTap: () {
+                                              State(() {
+                                                xs = !xs;
+                                                selectedSize = <String>[];
+                                                if (xs == true){
+                                                  selectedSize.add("XS");
+                                                  sizeFilter = "XS";
+                                                }
+                                                else{
+                                                  sizeFilter = "";
+                                                }
+                                              });
+                                            },
+                                            child: Container(
+                                              color: xs
+                                                  ? Colors.pink.shade50
+                                                  : Colors.white,
+
+                                              height: 50,
+                                              width: MediaQuery
+                                                  .of(context)
+                                                  .size
+                                                  .width,
+                                              child: Column(
+                                                mainAxisAlignment: MainAxisAlignment
+                                                    .center,
+                                                children: [
+                                                  FittedBox(
+                                                      child: Text(
+                                                        '4-5 years',
+                                                      )),
+                                                ],
+                                              ),
+                                            ),
+                                          ),
+                                          InkWell(
+                                            onTap: () {
+                                              State(() {
+                                                s = !s;
+                                                selectedSize = <String>[];
+                                                if (s == true){
+                                                  selectedSize.add("S");
+                                                  sizeFilter = "S";
+                                                }
+                                                else{
+                                                  sizeFilter = "";
+                                                }
+                                              });
+                                            },
+                                            child: Container(
+                                              color: s
+                                                  ? Colors.pink.shade50
+                                                  : Colors.white,
+
+                                              height: 50,
+                                              width: MediaQuery
+                                                  .of(context)
+                                                  .size
+                                                  .width,
+                                              child: Column(
+                                                mainAxisAlignment: MainAxisAlignment
+                                                    .center,
+                                                children: [
+                                                  FittedBox(
+                                                      child: Text(
+                                                        '5-6 years',
+                                                      )),
+                                                ],
+                                              ),
+                                            ),
+                                          ),
+                                          InkWell(
+                                            onTap: () {
+                                              State(() {
+                                                m = !m;
+                                                selectedSize = <String>[];
+                                                if (m == true){
+                                                  selectedSize.add("M");
+                                                  sizeFilter = "M";
+                                                }
+
+                                                else{
+                                                  sizeFilter = "";
+                                                }
+                                              });
+                                            },
+                                            child: Container(
+                                              color: m
+                                                  ? Colors.pink.shade50
+                                                  : Colors.white,
+
+                                              height: 50,
+                                              width: MediaQuery
+                                                  .of(context)
+                                                  .size
+                                                  .width,
+                                              child: Column(
+                                                mainAxisAlignment: MainAxisAlignment
+                                                    .center,
+                                                children: [
+                                                  FittedBox(
+                                                      child: Text(
+                                                        '6-7 years',
+                                                      )),
+                                                ],
+                                              ),
+                                            ),
+                                          ),
+                                          InkWell(
+                                            onTap: () {
+                                              State(() {
+                                                l = !l;
+                                                selectedSize = <String>[];
+                                                if (l == true){
+                                                  selectedSize.add("L");
+                                                  sizeFilter = "L";
+                                                }
+                                                else{
+                                                  sizeFilter = "";
+                                                }
+                                              });
+                                            },
+                                            child: Container(
+                                              color: l
+                                                  ? Colors.pink.shade50
+                                                  : Colors.white,
+
+                                              height: 50,
+                                              width: MediaQuery
+                                                  .of(context)
+                                                  .size
+                                                  .width,
+                                              child: Column(
+                                                mainAxisAlignment: MainAxisAlignment
+                                                    .center,
+                                                children: [
+                                                  FittedBox(
+                                                      child: Text(
+                                                        '7-8 years',
+                                                      )),
+                                                ],
+                                              ),
+                                            ),
+                                          ),
+
+                                          InkWell(
+                                            onTap: () {
+                                              State(() {
+                                                xl = !xl;
+                                                selectedSize = <String>[];
+                                                if (xl == true){
+                                                  selectedSize.add("XL");
+                                                  sizeFilter = "XL";
+                                                }
+                                                else{
+                                                  sizeFilter = "";
+                                                }
+                                              });
+                                            },
+                                            child: Container(
+                                              color: xl
+                                                  ? Colors.pink.shade50
+                                                  : Colors.white,
+
+                                              height: 50,
+                                              width: MediaQuery
+                                                  .of(context)
+                                                  .size
+                                                  .width,
+                                              child: Column(
+                                                mainAxisAlignment: MainAxisAlignment
+                                                    .center,
+                                                children: [
+                                                  FittedBox(
+                                                      child: Text(
+                                                        '8-9 years',
+                                                      )),
+                                                ],
+                                              ),
+                                            ),
+                                          ),
+                                          InkWell(
+                                            onTap: () {
+                                              State(() {
+                                                xxl = !xxl;
+                                                selectedSize = <String>[];
+                                                if (xxl == true){
+                                                  selectedSize.add("XXL");
+                                                  sizeFilter = "XXL";
+                                                }
+                                                else{
+                                                  sizeFilter = "";
+                                                }
+                                              });
+                                            },
+                                            child: Container(
+                                              color: xxl
+                                                  ? Colors.pink.shade50
+                                                  : Colors.white,
+
+                                              height: 50,
+                                              width: MediaQuery
+                                                  .of(context)
+                                                  .size
+                                                  .width,
+                                              child: Column(
+                                                mainAxisAlignment: MainAxisAlignment
+                                                    .center,
+                                                children: [
+                                                  FittedBox(
+                                                      child: Text(
+                                                        '9-10 years',
+                                                      )),
+                                                ],
+                                              ),
+                                            ),
+                                          ),
+                                          InkWell(
+                                            onTap: () {
+                                              State(() {
+                                                xxxl = !xxxl;
+                                                selectedSize = <String>[];
+                                                if (xxxl == true){
+                                                  selectedSize.add("XXXL");
+                                                  sizeFilter = "XXXL";
+                                                }
+                                                else{
+                                                  sizeFilter = "";
+                                                }
+                                              });
+                                            },
+                                            child: Container(
+                                              color: xxxl
+                                                  ? Colors.pink.shade50
+                                                  : Colors.white,
+
+                                              height: 50,
+                                              width: MediaQuery
+                                                  .of(context)
+                                                  .size
+                                                  .width,
+                                              child: Column(
+                                                mainAxisAlignment: MainAxisAlignment
+                                                    .center,
+                                                children: [
+                                                  FittedBox(
+                                                      child: Text(
+                                                        '10-11 years',
+                                                      )),
+                                                ],
+                                              ),
+                                            ),
+                                          ),
+                                          InkWell(
+                                            onTap: () {
+                                              State(() {
+                                                fourl = !fourl;
+                                                selectedSize = <String>[];
+                                                if (fourl == true){
+                                                  selectedSize.add("4XL");
+                                                  sizeFilter = "4XL";
+                                                }
+                                                else{
+                                                  sizeFilter = "";
+                                                }
+                                              });
+                                            },
+                                            child: Container(
+                                              color: fourl
+                                                  ? Colors.pink.shade50
+                                                  : Colors.white,
+
+                                              height: 50,
+                                              width: MediaQuery
+                                                  .of(context)
+                                                  .size
+                                                  .width,
+                                              child: Column(
+                                                mainAxisAlignment: MainAxisAlignment
+                                                    .center,
+                                                children: [
+                                                  FittedBox(
+                                                      child: Text(
+                                                        '11-12 years',
+                                                      )),
+                                                ],
+                                              ),
+                                            ),
+                                          ),
+
+
+
+                                        ],
+                                      ),
+                                      ]
+                                  ),
 
                                   ExpansionTile(
                                       title: Text("Avoid Duties & Taxes"),
@@ -6171,6 +6719,48 @@ class _DesignerShopState extends State<DesignerShop>  with  TickerProviderStateM
                                       QQuery = QQuery.replaceAll("D", "");
                                       RQuery = RQuery.replaceAll("D", "");
                                       SQuery = SQuery.replaceAll("D", "");
+                                    });
+                                    setState(() {
+                                      priceQuery = priceQuery.replaceAll(sizeFilter, "");
+                                      AQuery = AQuery.replaceAll(sizeFilter, "");
+                                      BQuery = BQuery.replaceAll(sizeFilter, "");
+                                      CQuery = CQuery.replaceAll(sizeFilter, "");
+                                      DQuery = DQuery.replaceAll(sizeFilter, "");
+                                      EQuery = EQuery.replaceAll(sizeFilter, "");
+                                      FQuery = FQuery.replaceAll(sizeFilter, "");
+                                      GQuery = GQuery.replaceAll(sizeFilter, "");
+                                      HQuery = HQuery.replaceAll(sizeFilter, "");
+                                      IQuery = IQuery.replaceAll(sizeFilter, "");
+                                      JQuery = JQuery.replaceAll(sizeFilter, "");
+                                      KQuery = KQuery.replaceAll(sizeFilter, "");
+                                      LQuery = LQuery.replaceAll(sizeFilter, "");
+                                      MQuery = MQuery.replaceAll(sizeFilter, "");
+                                      NQuery = NQuery.replaceAll(sizeFilter, "");
+                                      OQuery = OQuery.replaceAll(sizeFilter, "");
+                                      PQuery = PQuery.replaceAll(sizeFilter, "");
+                                      QQuery = QQuery.replaceAll(sizeFilter, "");
+                                      RQuery = RQuery.replaceAll(sizeFilter, "");
+                                      SQuery = SQuery.replaceAll(sizeFilter, "");
+                                      priceQuery = priceQuery + sizeFilter;
+                                      AQuery = AQuery + sizeFilter;
+                                      BQuery = BQuery + sizeFilter;
+                                      CQuery = CQuery + sizeFilter;
+                                      DQuery = DQuery + sizeFilter;
+                                      EQuery = EQuery + sizeFilter;
+                                      FQuery = FQuery + sizeFilter;
+                                      GQuery = GQuery + sizeFilter;
+                                      HQuery = HQuery + sizeFilter;
+                                      IQuery = IQuery + sizeFilter;
+                                      JQuery = JQuery + sizeFilter;
+                                      KQuery = KQuery + sizeFilter;
+                                      LQuery = LQuery + sizeFilter;
+                                      MQuery = MQuery + sizeFilter;
+                                      NQuery = NQuery + sizeFilter;
+                                      OQuery = OQuery + sizeFilter;
+                                      PQuery = PQuery + sizeFilter;
+                                      QQuery = QQuery + sizeFilter;
+                                      RQuery = RQuery + sizeFilter;
+                                      SQuery = SQuery + sizeFilter;
                                     });
                                   }, label: Text("Apply"))
                                 ],
@@ -6381,150 +6971,8 @@ class _DesignerShopState extends State<DesignerShop>  with  TickerProviderStateM
                                       ),
                                       ]
                                   ),
-                                  ExpansionTile(
-                                      title: Text("Clothing Size"),
-                                      children: [Column(
-                                        children: [
-                                          InkWell(
-                                            onTap: () {
-                                              State(() {
-                                                        xxxs = !xxxs;
-    selectedSize = <String>[];
-                                             if (xxxs == true){
-                                               selectedSize.add("XXXS");
-                                               sizeFilter = "XXXS";
-                                             }
-                                              });
-                                            },
-                                            child: Container(
-                                              color: xxxs
-                                                  ? Colors.pink.shade50
-                                                  : Colors.white,
 
-                                              height: 50,
-                                              width: MediaQuery
-                                                  .of(context)
-                                                  .size
-                                                  .width,
-                                              child: Column(
-                                                mainAxisAlignment: MainAxisAlignment
-                                                    .center,
-                                                children: [
-                                                  FittedBox(
-                                                      child: Text(
-                                                        '13 years',
-                                                      )),
-                                                ],
-                                              ),
-                                            ),
-                                          ),
-                                          InkWell(
-                                            onTap: () {
-                                              State(() {
-                                                        xxs = !xxs;
-                                        selectedSize = <String>[];
-                                             if (xxs == true){
-                                               selectedSize.add("XXS");
-                                               sizeFilter = "XXS";
-                                             }
-                                              });
-                                            },
-                                            child: Container(
-                                              color: xxs
-                                                  ? Colors.pink.shade50
-                                                  : Colors.white,
-
-                                              height: 50,
-                                              width: MediaQuery
-                                                  .of(context)
-                                                  .size
-                                                  .width,
-                                              child: Column(
-                                                mainAxisAlignment: MainAxisAlignment
-                                                    .center,
-                                                children: [
-                                                  FittedBox(
-                                                      child: Text(
-                                                        '14 years',
-                                                      )),
-                                                ],
-                                              ),
-                                            ),
-                                          ),
-                                          InkWell(
-                                            onTap: () {
-                                              State(() {
-                                                        xs = !xs;
-                                        selectedSize = <String>[];
-                                             if (xs == true){
-                                               selectedSize.add("XS");
-                                               sizeFilter = "XS";
-                                             }
-                                              });
-                                            },
-                                            child: Container(
-                                              color: xs
-                                                  ? Colors.pink.shade50
-                                                  : Colors.white,
-
-                                              height: 50,
-                                              width: MediaQuery
-                                                  .of(context)
-                                                  .size
-                                                  .width,
-                                              child: Column(
-                                                mainAxisAlignment: MainAxisAlignment
-                                                    .center,
-                                                children: [
-                                                  FittedBox(
-                                                      child: Text(
-                                                        '15 years',
-                                                      )),
-                                                ],
-                                              ),
-                                            ),
-                                          ),
-                                          InkWell(
-                                            onTap: () {
-                                              State(() {
-                                                        s = !s;
-                                        selectedSize = <String>[];
-                                             if (s == true){
-                                               selectedSize.add("S");
-                                               sizeFilter = "S";
-                                             }
-                                              });
-                                            },
-                                            child: Container(
-                                              color: s
-                                                  ? Colors.pink.shade50
-                                                  : Colors.white,
-
-                                              height: 50,
-                                              width: MediaQuery
-                                                  .of(context)
-                                                  .size
-                                                  .width,
-                                              child: Column(
-                                                mainAxisAlignment: MainAxisAlignment
-                                                    .center,
-                                                children: [
-                                                  FittedBox(
-                                                      child: Text(
-                                                        '16 years',
-                                                      )),
-                                                ],
-                                              ),
-                                            ),
-                                          ),
-
-
-                                        ],
-                                      ),
-                                      ]
-                                  ),
-
-                                  ExpansionTile(
+                                  shoesIndex?   ExpansionTile(
                                       title: Text("Shoe Size"),
                                       children: [Column(
                                         children: [
@@ -6537,7 +6985,10 @@ class _DesignerShopState extends State<DesignerShop>  with  TickerProviderStateM
                                                selectedSize.add("shoe1");
                                                sizeFilter = "shoe1";
                                              }
-                                              });
+                                              else{
+sizeFilter = "";
+}
+});
                                             },
                                             child: Container(
                                               color: shoe1
@@ -6570,7 +7021,10 @@ class _DesignerShopState extends State<DesignerShop>  with  TickerProviderStateM
                                                selectedSize.add("shoe2");
                                                sizeFilter = "shoe2";
                                              }
-                                              });
+                                              else{
+sizeFilter = "";
+}
+});
                                             },
                                             child: Container(
                                               color: shoe2
@@ -6603,7 +7057,10 @@ class _DesignerShopState extends State<DesignerShop>  with  TickerProviderStateM
                                                selectedSize.add("shoe3");
                                                sizeFilter = "shoe3";
                                              }
-                                              });
+                                              else{
+sizeFilter = "";
+}
+});
                                             },
                                             child: Container(
                                               color: shoe3
@@ -6636,7 +7093,10 @@ class _DesignerShopState extends State<DesignerShop>  with  TickerProviderStateM
                                                selectedSize.add("shoe4");
                                                sizeFilter = "shoe4";
                                              }
-                                              });
+                                              else{
+sizeFilter = "";
+}
+});
                                             },
                                             child: Container(
                                               color: shoe4
@@ -6666,8 +7126,8 @@ class _DesignerShopState extends State<DesignerShop>  with  TickerProviderStateM
                                         ],
                                       ),
                                       ]
-                                  ) ,
-                                 ExpansionTile(
+                                  ) :
+                                  ringIndex?  ExpansionTile(
                                       title: Text("Ring Size"),
                                       children: [Column(
                                         children: [
@@ -6680,7 +7140,10 @@ class _DesignerShopState extends State<DesignerShop>  with  TickerProviderStateM
                                                selectedSize.add("ring1");
                                                sizeFilter = "ring1";
                                              }
-                                              });
+                                              else{
+sizeFilter = "";
+}
+});
                                             },
                                             child: Container(
                                               color: ring1
@@ -6713,7 +7176,10 @@ class _DesignerShopState extends State<DesignerShop>  with  TickerProviderStateM
                                                selectedSize.add("ring2");
                                                sizeFilter = "ring2";
                                              }
-                                              });
+                                              else{
+sizeFilter = "";
+}
+});
                                             },
                                             child: Container(
                                               color: ring2
@@ -6746,7 +7212,10 @@ class _DesignerShopState extends State<DesignerShop>  with  TickerProviderStateM
                                                selectedSize.add("ring3");
                                                sizeFilter = "ring3";
                                              }
-                                              });
+                                              else{
+sizeFilter = "";
+}
+});
                                             },
                                             child: Container(
                                               color: ring3
@@ -6779,7 +7248,10 @@ class _DesignerShopState extends State<DesignerShop>  with  TickerProviderStateM
                                                selectedSize.add("ring4");
                                                sizeFilter = "ring4";
                                              }
-                                              });
+                                              else{
+sizeFilter = "";
+}
+});
                                             },
                                             child: Container(
                                               color: ring4
@@ -6812,7 +7284,10 @@ class _DesignerShopState extends State<DesignerShop>  with  TickerProviderStateM
                                                selectedSize.add("ring5");
                                                sizeFilter = "ring5";
                                              }
-                                              });
+                                              else{
+sizeFilter = "";
+}
+});
                                             },
                                             child: Container(
                                               color: ring5
@@ -6845,7 +7320,10 @@ class _DesignerShopState extends State<DesignerShop>  with  TickerProviderStateM
                                                selectedSize.add("ring6");
                                                sizeFilter = "ring6";
                                              }
-                                              });
+                                              else{
+sizeFilter = "";
+}
+});
                                             },
                                             child: Container(
                                               color: ring6
@@ -6878,7 +7356,10 @@ class _DesignerShopState extends State<DesignerShop>  with  TickerProviderStateM
                                                selectedSize.add("ring7");
                                                sizeFilter = "ring7";
                                              }
-                                              });
+                                              else{
+sizeFilter = "";
+}
+});
                                             },
                                             child: Container(
                                               color: ring7
@@ -6911,7 +7392,10 @@ class _DesignerShopState extends State<DesignerShop>  with  TickerProviderStateM
                                                selectedSize.add("ring8");
                                                sizeFilter = "ring8";
                                              }
-                                              });
+                                              else{
+sizeFilter = "";
+}
+});
                                             },
                                             child: Container(
                                               color: ring8
@@ -6944,7 +7428,10 @@ class _DesignerShopState extends State<DesignerShop>  with  TickerProviderStateM
                                                selectedSize.add("ring9");
                                                sizeFilter = "ring9";
                                              }
-                                              });
+                                              else{
+sizeFilter = "";
+}
+});
                                             },
                                             child: Container(
                                               color: ring9
@@ -6977,7 +7464,10 @@ class _DesignerShopState extends State<DesignerShop>  with  TickerProviderStateM
                                                selectedSize.add("ring10");
                                                sizeFilter = "ring10";
                                              }
-                                              });
+                                              else{
+sizeFilter = "";
+}
+});
                                             },
                                             child: Container(
                                               color: ring10 ? Colors.pink
@@ -7009,7 +7499,10 @@ class _DesignerShopState extends State<DesignerShop>  with  TickerProviderStateM
                                                selectedSize.add("ring11");
                                                sizeFilter = "ring11";
                                              }
-                                              });
+                                              else{
+sizeFilter = "";
+}
+});
                                             },
                                             child: Container(
                                               color: ring11 ? Colors.pink
@@ -7041,7 +7534,10 @@ class _DesignerShopState extends State<DesignerShop>  with  TickerProviderStateM
                                                selectedSize.add("ring12");
                                                sizeFilter = "ring12";
                                              }
-                                              });
+                                              else{
+sizeFilter = "";
+}
+});
                                             },
                                             child: Container(
                                               color: ring12 ? Colors.pink
@@ -7073,7 +7569,10 @@ class _DesignerShopState extends State<DesignerShop>  with  TickerProviderStateM
                                                selectedSize.add("ring13");
                                                sizeFilter = "ring13";
                                              }
-                                              });
+                                              else{
+sizeFilter = "";
+}
+});
                                             },
                                             child: Container(
                                               color: ring13 ? Colors.pink
@@ -7105,7 +7604,10 @@ class _DesignerShopState extends State<DesignerShop>  with  TickerProviderStateM
                                                selectedSize.add("ring14");
                                                sizeFilter = "ring14";
                                              }
-                                              });
+                                              else{
+sizeFilter = "";
+}
+});
                                             },
                                             child: Container(
                                               color: ring14 ? Colors.pink
@@ -7137,7 +7639,10 @@ class _DesignerShopState extends State<DesignerShop>  with  TickerProviderStateM
                                                selectedSize.add("ring15");
                                                sizeFilter = "ring15";
                                              }
-                                              });
+                                              else{
+sizeFilter = "";
+}
+});
                                             },
                                             child: Container(
                                               color: ring15 ? Colors.pink
@@ -7169,7 +7674,10 @@ class _DesignerShopState extends State<DesignerShop>  with  TickerProviderStateM
                                                selectedSize.add("ring16");
                                                sizeFilter = "ring16";
                                              }
-                                              });
+                                              else{
+sizeFilter = "";
+}
+});
                                             },
                                             child: Container(
                                               color: ring16 ? Colors.pink
@@ -7201,7 +7709,10 @@ class _DesignerShopState extends State<DesignerShop>  with  TickerProviderStateM
                                                selectedSize.add("ring17");
                                                sizeFilter = "ring17";
                                              }
-                                              });
+                                              else{
+sizeFilter = "";
+}
+});
                                             },
                                             child: Container(
                                               color: ring17 ? Colors.pink
@@ -7233,7 +7744,10 @@ class _DesignerShopState extends State<DesignerShop>  with  TickerProviderStateM
                                                selectedSize.add("ring18");
                                                sizeFilter = "ring18";
                                              }
-                                              });
+                                              else{
+sizeFilter = "";
+}
+});
                                             },
                                             child: Container(
                                               color: ring18 ? Colors.pink
@@ -7265,7 +7779,10 @@ class _DesignerShopState extends State<DesignerShop>  with  TickerProviderStateM
                                                selectedSize.add("ring19");
                                                sizeFilter = "ring19";
                                              }
-                                              });
+                                              else{
+sizeFilter = "";
+}
+});
                                             },
                                             child: Container(
                                               color: ring19 ? Colors.pink
@@ -7297,7 +7814,10 @@ class _DesignerShopState extends State<DesignerShop>  with  TickerProviderStateM
                                                selectedSize.add("ring20");
                                                sizeFilter = "ring20";
                                              }
-                                              });
+                                              else{
+sizeFilter = "";
+}
+});
                                             },
                                             child: Container(
                                               color: ring20 ? Colors.pink
@@ -7329,7 +7849,10 @@ class _DesignerShopState extends State<DesignerShop>  with  TickerProviderStateM
                                                selectedSize.add("ring21");
                                                sizeFilter = "ring21";
                                              }
-                                              });
+                                              else{
+sizeFilter = "";
+}
+});
                                             },
                                             child: Container(
                                               color: ring21 ? Colors.pink
@@ -7361,7 +7884,10 @@ class _DesignerShopState extends State<DesignerShop>  with  TickerProviderStateM
                                                selectedSize.add("ring22");
                                                sizeFilter = "ring22";
                                              }
-                                              });
+                                              else{
+sizeFilter = "";
+}
+});
                                             },
                                             child: Container(
                                               color: ring22 ? Colors.pink
@@ -7393,7 +7919,10 @@ class _DesignerShopState extends State<DesignerShop>  with  TickerProviderStateM
                                                selectedSize.add("ring23");
                                                sizeFilter = "ring23";
                                              }
-                                              });
+                                              else{
+sizeFilter = "";
+}
+});
                                             },
                                             child: Container(
                                               color: ring22 ? Colors.pink
@@ -7411,6 +7940,160 @@ class _DesignerShopState extends State<DesignerShop>  with  TickerProviderStateM
                                                   FittedBox(
                                                       child: Text(
                                                         '15',
+                                                      )),
+                                                ],
+                                              ),
+                                            ),
+                                          ),
+
+
+                                        ],
+                                      ),
+                                      ]
+                                  ):
+                                  ExpansionTile(
+                                      title: Text("Clothing Size"),
+                                      children: [Column(
+                                        children: [
+                                          InkWell(
+                                            onTap: () {
+                                              State(() {
+                                                xxxs = !xxxs;
+                                                selectedSize = <String>[];
+                                                if (xxxs == true){
+                                                  selectedSize.add("XXXS");
+                                                  sizeFilter = "XXXS";
+                                                }
+                                                else{
+                                                  sizeFilter = "";
+                                                }
+                                              });
+                                            },
+                                            child: Container(
+                                              color: xxxs
+                                                  ? Colors.pink.shade50
+                                                  : Colors.white,
+
+                                              height: 50,
+                                              width: MediaQuery
+                                                  .of(context)
+                                                  .size
+                                                  .width,
+                                              child: Column(
+                                                mainAxisAlignment: MainAxisAlignment
+                                                    .center,
+                                                children: [
+                                                  FittedBox(
+                                                      child: Text(
+                                                        '13 years',
+                                                      )),
+                                                ],
+                                              ),
+                                            ),
+                                          ),
+                                          InkWell(
+                                            onTap: () {
+                                              State(() {
+                                                xxs = !xxs;
+                                                selectedSize = <String>[];
+                                                if (xxs == true){
+                                                  selectedSize.add("XXS");
+                                                  sizeFilter = "XXS";
+                                                }
+                                                else{
+                                                  sizeFilter = "";
+                                                }
+                                              });
+                                            },
+                                            child: Container(
+                                              color: xxs
+                                                  ? Colors.pink.shade50
+                                                  : Colors.white,
+
+                                              height: 50,
+                                              width: MediaQuery
+                                                  .of(context)
+                                                  .size
+                                                  .width,
+                                              child: Column(
+                                                mainAxisAlignment: MainAxisAlignment
+                                                    .center,
+                                                children: [
+                                                  FittedBox(
+                                                      child: Text(
+                                                        '14 years',
+                                                      )),
+                                                ],
+                                              ),
+                                            ),
+                                          ),
+                                          InkWell(
+                                            onTap: () {
+                                              State(() {
+                                                xs = !xs;
+                                                selectedSize = <String>[];
+                                                if (xs == true){
+                                                  selectedSize.add("XS");
+                                                  sizeFilter = "XS";
+                                                }
+                                                else{
+                                                  sizeFilter = "";
+                                                }
+                                              });
+                                            },
+                                            child: Container(
+                                              color: xs
+                                                  ? Colors.pink.shade50
+                                                  : Colors.white,
+
+                                              height: 50,
+                                              width: MediaQuery
+                                                  .of(context)
+                                                  .size
+                                                  .width,
+                                              child: Column(
+                                                mainAxisAlignment: MainAxisAlignment
+                                                    .center,
+                                                children: [
+                                                  FittedBox(
+                                                      child: Text(
+                                                        '15 years',
+                                                      )),
+                                                ],
+                                              ),
+                                            ),
+                                          ),
+                                          InkWell(
+                                            onTap: () {
+                                              State(() {
+                                                s = !s;
+                                                selectedSize = <String>[];
+                                                if (s == true){
+                                                  selectedSize.add("S");
+                                                  sizeFilter = "S";
+                                                }
+                                                else{
+                                                  sizeFilter = "";
+                                                }
+                                              });
+                                            },
+                                            child: Container(
+                                              color: s
+                                                  ? Colors.pink.shade50
+                                                  : Colors.white,
+
+                                              height: 50,
+                                              width: MediaQuery
+                                                  .of(context)
+                                                  .size
+                                                  .width,
+                                              child: Column(
+                                                mainAxisAlignment: MainAxisAlignment
+                                                    .center,
+                                                children: [
+                                                  FittedBox(
+                                                      child: Text(
+                                                        '16 years',
                                                       )),
                                                 ],
                                               ),
@@ -7508,6 +8191,48 @@ class _DesignerShopState extends State<DesignerShop>  with  TickerProviderStateM
                                       QQuery = QQuery.replaceAll("D", "");
                                       RQuery = RQuery.replaceAll("D", "");
                                       SQuery = SQuery.replaceAll("D", "");
+                                    });
+                                    setState(() {
+                                      priceQuery = priceQuery.replaceAll(sizeFilter, "");
+                                      AQuery = AQuery.replaceAll(sizeFilter, "");
+                                      BQuery = BQuery.replaceAll(sizeFilter, "");
+                                      CQuery = CQuery.replaceAll(sizeFilter, "");
+                                      DQuery = DQuery.replaceAll(sizeFilter, "");
+                                      EQuery = EQuery.replaceAll(sizeFilter, "");
+                                      FQuery = FQuery.replaceAll(sizeFilter, "");
+                                      GQuery = GQuery.replaceAll(sizeFilter, "");
+                                      HQuery = HQuery.replaceAll(sizeFilter, "");
+                                      IQuery = IQuery.replaceAll(sizeFilter, "");
+                                      JQuery = JQuery.replaceAll(sizeFilter, "");
+                                      KQuery = KQuery.replaceAll(sizeFilter, "");
+                                      LQuery = LQuery.replaceAll(sizeFilter, "");
+                                      MQuery = MQuery.replaceAll(sizeFilter, "");
+                                      NQuery = NQuery.replaceAll(sizeFilter, "");
+                                      OQuery = OQuery.replaceAll(sizeFilter, "");
+                                      PQuery = PQuery.replaceAll(sizeFilter, "");
+                                      QQuery = QQuery.replaceAll(sizeFilter, "");
+                                      RQuery = RQuery.replaceAll(sizeFilter, "");
+                                      SQuery = SQuery.replaceAll(sizeFilter, "");
+                                      priceQuery = priceQuery + sizeFilter;
+                                      AQuery = AQuery + sizeFilter;
+                                      BQuery = BQuery + sizeFilter;
+                                      CQuery = CQuery + sizeFilter;
+                                      DQuery = DQuery + sizeFilter;
+                                      EQuery = EQuery + sizeFilter;
+                                      FQuery = FQuery + sizeFilter;
+                                      GQuery = GQuery + sizeFilter;
+                                      HQuery = HQuery + sizeFilter;
+                                      IQuery = IQuery + sizeFilter;
+                                      JQuery = JQuery + sizeFilter;
+                                      KQuery = KQuery + sizeFilter;
+                                      LQuery = LQuery + sizeFilter;
+                                      MQuery = MQuery + sizeFilter;
+                                      NQuery = NQuery + sizeFilter;
+                                      OQuery = OQuery + sizeFilter;
+                                      PQuery = PQuery + sizeFilter;
+                                      QQuery = QQuery + sizeFilter;
+                                      RQuery = RQuery + sizeFilter;
+                                      SQuery = SQuery + sizeFilter;
                                     });
                                   }, label: Text("Apply"))
                                 ],

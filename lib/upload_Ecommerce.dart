@@ -17640,7 +17640,7 @@ var resultGBP = await Currency.getConversion(
               .doc(widget.currentUser.id)
               .collection("userProducts")
               .doc(prodId)
-              .update({
+              .set({
             "sizechartBool":mediaUrl01,
             "sizeChart":sizeChart,
             "colorText1":colorController1.text ?? "",

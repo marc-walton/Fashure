@@ -1,7 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:currency_formatter/currency_formatter.dart';
-import 'package:fashow/chatcached_image.dart';
-import 'package:fashow/enum/Variables.dart';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_currencies_tracker/currency.dart';
@@ -43,7 +41,9 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:sticky_headers/sticky_headers.dart';
 import 'package:fashow/methods/dynamic_links_service.dart';
 import 'package:share/share.dart';
-// import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'package:currency_formatter/currency_formatter.dart';
+import 'package:fashow/chatcached_image.dart';
+import 'package:fashow/enum/Variables.dart';
 class Men extends StatefulWidget {
   @override
   _MenState createState() => _MenState();
@@ -60,11 +60,11 @@ class _MenState extends State<Men> with  TickerProviderStateMixin {
     _Tabcontroller.addListener(_handleTabIndex);
   }
   @override
-  // void dispose() {
-  //   _Tabcontroller.removeListener(_handleTabIndex);
-  //   _Tabcontroller.dispose();
-  //   super.dispose();
-  // }
+  void dispose() {
+    _Tabcontroller.removeListener(_handleTabIndex);
+    _Tabcontroller.dispose();
+    super.dispose();
+  }
 
   void _handleTabIndex() {
     setState(() {    _Tabcontroller.index == 14?shoesIndex = true:shoesIndex = false;
@@ -95,17 +95,6 @@ All(){
         String prodId = documentSnapshot.data()['prodId'];
         List shopmediaUrl = documentSnapshot.data()['shopmediaUrl'];
 
-        List<CItem> searchResults = [];
-
-
-        Prod prod = Prod.fromDocument(documentSnapshot);
-        CItem searchResult = CItem(prod);
-        searchResults.add(searchResult);
-        //
-        // for (var i = 0; i < documentSnapshot.data().length; i++) {
-        //   CItem searchResult = CItem(prod);
-        //   searchResults.add(searchResult);
-        // }
         return
           Container(
 height: MediaQuery.of(context).size.height,
@@ -221,7 +210,41 @@ height: MediaQuery.of(context).size.height,
           .where('Gender',isEqualTo: 'Men')
           .where('country',isEqualTo: '${currentUser.country}')
 
-          :
+          :priceQuery == "low$sizeFilter"?
+      FirebaseFirestore.instance.collectionGroup('userProducts')
+          .orderBy('round',descending: false)
+          .orderBy('timestamp',descending: true)
+          .where('Gender',isEqualTo: 'Men')
+          .where('$sizeFilter',isGreaterThanOrEqualTo: 1):
+      priceQuery == "high$sizeFilter"?
+      FirebaseFirestore.instance.collectionGroup('userProducts')
+          .orderBy('round',descending: true)
+          .orderBy('timestamp',descending: true)
+          .where('Gender',isEqualTo: 'Men')
+          .where('$sizeFilter',isGreaterThanOrEqualTo: 1)
+          :priceQuery == "0D$sizeFilter"?
+      FirebaseFirestore.instance.collectionGroup('userProducts')
+          .orderBy('timestamp',descending: true)
+          .where('Gender',isEqualTo: 'Men')
+
+          .where('country',isEqualTo: '${currentUser.country}')
+          .where('$sizeFilter',isGreaterThanOrEqualTo: 1)
+          :priceQuery == "lowD$sizeFilter"?
+      FirebaseFirestore.instance.collectionGroup('userProducts')
+          .orderBy('round',descending: false)
+          .orderBy('timestamp',descending: true)
+          .where('Gender',isEqualTo: 'Men')
+
+          .where('country',isEqualTo: '${currentUser.country}')
+          .where('$sizeFilter',isGreaterThanOrEqualTo: 1)
+          :priceQuery == "highD$sizeFilter"?
+      FirebaseFirestore.instance.collectionGroup('userProducts')
+          .orderBy('round',descending: true)
+          .orderBy('timestamp',descending: true)
+          .where('Gender',isEqualTo: 'Men')
+
+          .where('country',isEqualTo: '${currentUser.country}')
+          .where('$sizeFilter',isGreaterThanOrEqualTo: 1) :
 
       FirebaseFirestore.instance.collectionGroup('userProducts')
           .orderBy('timestamp',descending: true)
@@ -328,122 +351,4 @@ height: MediaQuery.of(context).size.height,
 
 
 
-}
-class CItem extends StatefulWidget {
-  final Prod prod;
-  String products;
-  CItem(this.prod);
-  @override
-  _CItemState createState() => _CItemState(this.prod);
-}
-
-class _CItemState extends State<CItem> {
-  final Prod prod;
-  String products;
-  int client;
-  var price = 0.0;
-
-
-  var currencyFormatter = currentUser.countryISO == 'US'?NumberFormat('#,##0.00', ):NumberFormat('#,##0.00', '${currentUser.countryISO}');
-
-  int followerCount = 0;
-  final String currentUserId = currentUser?.id;
-
-  _CItemState(this.prod);
-  @override
-  void initState() {
-    super.initState();
-
-    conversion();
-
-  }
-  conversion()async{
-
-    if(currentUser.currencyISO == "USD") {
-  setState(() {
-
-    price =prod.usd ;
-
-  }); }
-  else {
-  var resultUSD1 = await Currency.getConversion(
-      from: 'USD', to: '${currentUser.currencyISO}', amount: prod.usd.toString());
-  setState(() {
-    price = resultUSD1.rate;
-  });
-}
-
-
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    SizeConfig().init(context);
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Column(
-        children: <Widget>[
-          GestureDetector(
-            onTap: () => showProfile(context, profileId: prod.ownerId),
-            child:Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Row(children:[
-                CircleAvatar(
-                  radius: 10,
-                  backgroundImage: CachedNetworkImageProvider(prod.photoUrl),
-                  backgroundColor: Colors.grey,
-                ),
-                SizedBox(width: 7.0,),
-                Text(
-                  prod.username,
-                  style: TextStyle(
-                    color: kText,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ]),
-            ),
-
-          ),
-
-          GestureDetector(
-            onTap: () => Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => ProductScreen(
-                  prodId: prod.prodId,
-                  userId: prod.ownerId,
-                ),
-              ),
-            ),
-            child: CachedImage(prod.shopmediaUrl.first,height: MediaQuery
-                .of(context)
-                .size
-                .height/6,width: MediaQuery
-                .of(context)
-                .size
-                .width/3,),),
-
-          Column(
-
-              children:  [
-                Text(prod.productname, style: TextStyle(
-                    color: kText,
-                    fontWeight: FontWeight.bold),),
-                Text(prod.productname, style: TextStyle(
-                    color: kText,
-                    fontWeight: FontWeight.bold),),
-                Text(prod.productname, style: TextStyle(
-                    color: kText,
-                    fontWeight: FontWeight.bold),),
-
-              ]
-
-          ),
-
-        ],
-
-      ),
-    );
-  }
 }
