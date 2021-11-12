@@ -36,11 +36,7 @@ import 'package:fashow/Categories/Men/Sneakers.dart';
 import 'package:fashow/Categories/Men/Grooming.dart';
 import 'package:fashow/Categories/Men/Jewellery.dart';
 import 'package:fashow/Categories/Men/watches.dart';
-import 'package:get/get.dart';
-import 'package:carousel_slider/carousel_slider.dart';
-import 'package:sticky_headers/sticky_headers.dart';
-import 'package:fashow/methods/dynamic_links_service.dart';
-import 'package:share/share.dart';
+
 import 'package:currency_formatter/currency_formatter.dart';
 import 'package:fashow/chatcached_image.dart';
 import 'package:fashow/enum/Variables.dart';
