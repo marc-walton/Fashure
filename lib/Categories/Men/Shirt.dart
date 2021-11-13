@@ -29,6 +29,11 @@ class ShirtM extends StatefulWidget {
 }
 
 class _ShirtMState extends State<ShirtM> {
+  void initState() {
+  super.initState();
+  priceQuery = "";
+  sizeFilter = "";
+}
 
   casual(){
     return PaginateFirestore(
@@ -137,8 +142,29 @@ class _ShirtMState extends State<ShirtM> {
           .orderBy('timestamp',descending: true)
           .where('Gender',isEqualTo: 'Men')
           .where('Category',isEqualTo: 'Casual Wear')
-          :priceQuery == "low$sizeFilter"?
+           :priceQuery == "0D"?
       FirebaseFirestore.instance.collectionGroup('userProducts')
+          .orderBy('timestamp',descending: true)
+          .where('Gender',isEqualTo: 'Men')
+          .where('Category',isEqualTo: 'Casual Wear')
+          .where('country',isEqualTo: '${currentUser.country}')
+
+          :priceQuery == "lowD"?
+      FirebaseFirestore.instance.collectionGroup('userProducts')
+          .orderBy('round',descending: false)
+          .orderBy('timestamp',descending: true)
+          .where('Gender',isEqualTo: 'Men')
+          .where('Category',isEqualTo: 'Casual Wear')
+          .where('country',isEqualTo: '${currentUser.country}')
+          :priceQuery == "highD"?
+      FirebaseFirestore.instance.collectionGroup('userProducts')
+          .orderBy('round',descending: true)
+          .orderBy('timestamp',descending: true)
+          .where('Gender',isEqualTo: 'Men')
+          .where('Category',isEqualTo: 'Casual Wear')
+          .where('country',isEqualTo: '${currentUser.country}')
+      :priceQuery == "low$sizeFilter"?
+FirebaseFirestore.instance.collectionGroup('userProducts')
           .orderBy('round',descending: false)
           .orderBy('timestamp',descending: true)
           .where('Gender',isEqualTo: 'Men')
@@ -291,8 +317,29 @@ class _ShirtMState extends State<ShirtM> {
           .orderBy('timestamp',descending: true)
           .where('Gender',isEqualTo: 'Men')
           .where('Category',isEqualTo: 'Formal Wear')
-          :priceQuery == "low$sizeFilter"?
+           :priceQuery == "0D"?
       FirebaseFirestore.instance.collectionGroup('userProducts')
+          .orderBy('timestamp',descending: true)
+          .where('Gender',isEqualTo: 'Men')
+          .where('Category',isEqualTo: 'Casual Wear')
+          .where('country',isEqualTo: '${currentUser.country}')
+
+          :priceQuery == "lowD"?
+      FirebaseFirestore.instance.collectionGroup('userProducts')
+          .orderBy('round',descending: false)
+          .orderBy('timestamp',descending: true)
+          .where('Gender',isEqualTo: 'Men')
+          .where('Category',isEqualTo: 'Casual Wear')
+          .where('country',isEqualTo: '${currentUser.country}')
+          :priceQuery == "highD"?
+      FirebaseFirestore.instance.collectionGroup('userProducts')
+          .orderBy('round',descending: true)
+          .orderBy('timestamp',descending: true)
+          .where('Gender',isEqualTo: 'Men')
+          .where('Category',isEqualTo: 'Casual Wear')
+          .where('country',isEqualTo: '${currentUser.country}')
+      :priceQuery == "low$sizeFilter"?
+FirebaseFirestore.instance.collectionGroup('userProducts')
           .orderBy('round',descending: false)
           .orderBy('timestamp',descending: true)
           .where('Gender',isEqualTo: 'Men')
@@ -345,7 +392,7 @@ class _ShirtMState extends State<ShirtM> {
     SizeConfig().init(context);
     return
       RotatedBox(
-        quarterTurns: 1,
+        quarterTurns: 3,
         child: Expanded(
           child: DefaultTabController(
               initialIndex:widget.selectedPage ?? 0,
@@ -381,7 +428,7 @@ class _ShirtMState extends State<ShirtM> {
                 body: Container(
 
                   child: RotatedBox(
-                    quarterTurns: 3,
+                    quarterTurns: 1,
                     child: TabBarView(
                         children:<Widget> [
                          casual(),

@@ -32,7 +32,11 @@ class AccessW extends StatefulWidget {
 }
 
 class _AccessWState extends State<AccessW> {
- 
+  void initState() {
+    super.initState();
+    priceQuery = "";
+    sizeFilter = "";
+  }
   bridal(){
     return PaginateFirestore(
       emptyDisplay: Center(child: Text("Nothing found",style: TextStyle(

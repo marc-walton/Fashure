@@ -32,11 +32,9 @@ const BeachwearM({Key key, this.selectedPage}) : super(key: key);
 class _BeachwearMState extends State<BeachwearM> {
   void initState() {
     super.initState();
-    setState((){
-      sizeFilter = "";
-    });
+    priceQuery = "";
+    sizeFilter = "";
   }
-
 
 
   Tops(){

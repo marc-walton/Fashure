@@ -31,11 +31,10 @@ class ActiveWear extends StatefulWidget {
 class _ActiveWearState extends State<ActiveWear> {
   void initState() {
     super.initState();
-    setState((){
-      sizeFilter = "";
-    });
-  }
 
+    priceQuery = "";
+    sizeFilter = "";
+  }
   Tops(){
     return  PaginateFirestore(
       emptyDisplay: Center(child: Text("Nothing found",style: TextStyle(

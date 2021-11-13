@@ -50,6 +50,8 @@ class _MenState extends State<Men> with  TickerProviderStateMixin {
 
   void initState() {
     super.initState();
+    priceQuery = "";
+    sizeFilter = "";
     _Tabcontroller = new TabController(length: 20, vsync: this,initialIndex: 0);
 
     // _mainHandler = _maintabs[0];

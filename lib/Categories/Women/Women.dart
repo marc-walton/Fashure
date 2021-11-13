@@ -48,6 +48,9 @@ class _WomenState extends State<Women> with  TickerProviderStateMixin {
 
   void initState() {
     super.initState();
+
+      priceQuery = "";
+      sizeFilter = "";
     _Tabcontroller = new TabController(length: 21, vsync: this,initialIndex: 0);
 
     // _mainHandler = _maintabs[0];
@@ -186,6 +189,24 @@ class _WomenState extends State<Women> with  TickerProviderStateMixin {
           .orderBy('round',descending: true)
           .orderBy('timestamp',descending: true)
           .where('Gender',isEqualTo: 'Women')
+          :priceQuery == "0D"?
+      FirebaseFirestore.instance.collectionGroup('userProducts')
+          .orderBy('timestamp',descending: true)
+          .where('Gender',isEqualTo: 'Women')
+.where('country',isEqualTo: '${currentUser.country}')
+
+          :priceQuery == "lowD"?
+      FirebaseFirestore.instance.collectionGroup('userProducts')
+          .orderBy('round',descending: false)
+          .orderBy('timestamp',descending: true)
+          .where('Gender',isEqualTo: 'Women')
+.where('country',isEqualTo: '${currentUser.country}')
+          :priceQuery == "highD"?
+      FirebaseFirestore.instance.collectionGroup('userProducts')
+          .orderBy('round',descending: true)
+          .orderBy('timestamp',descending: true)
+          .where('Gender',isEqualTo: 'Women')
+.where('country',isEqualTo: '${currentUser.country}')
           :priceQuery == "low$sizeFilter"?
       FirebaseFirestore.instance.collectionGroup('userProducts')
           .orderBy('round',descending: false)

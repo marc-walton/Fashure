@@ -32,9 +32,8 @@ class Braces extends StatefulWidget {
 class _BracesState extends State<Braces> {
   void initState() {
     super.initState();
-    setState((){
-      sizeFilter = "";
-    });
+    priceQuery = "";
+    sizeFilter = "";
   }
 
 

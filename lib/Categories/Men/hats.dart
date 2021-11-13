@@ -30,11 +30,9 @@ class Hats extends StatefulWidget {
 class _HatsState extends State<Hats> {
   void initState() {
     super.initState();
-    setState((){
-      sizeFilter = "";
-    });
+    priceQuery = "";
+    sizeFilter = "";
   }
-
   Caps(){
     return  PaginateFirestore(
       emptyDisplay: Center(child: Text("Nothing found",style: TextStyle(

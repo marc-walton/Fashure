@@ -32,11 +32,9 @@ class DenimM extends StatefulWidget {
 class _DenimMState extends State<DenimM> {
   void initState() {
     super.initState();
-    setState((){
-      sizeFilter = "";
-    });
+    priceQuery = "";
+    sizeFilter = "";
   }
-
   DenimJ(){
     return   PaginateFirestore(
       emptyDisplay: Center(child: Text("Nothing found",style: TextStyle(

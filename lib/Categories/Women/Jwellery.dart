@@ -30,9 +30,8 @@ class JewelW extends StatefulWidget {
 class _JewelWState extends State<JewelW> {
   void initState() {
     super.initState();
-    setState((){
-      sizeFilter = "";
-    });
+    priceQuery = "";
+    sizeFilter = "";
   }
 
 
@@ -573,20 +572,20 @@ class _JewelWState extends State<JewelW> {
       FirebaseFirestore.instance.collectionGroup('userProducts')
           .orderBy('round',descending: false)
           .orderBy('timestamp',descending: true)
-          .where('Gender',isEqualTo: 'Men')
+          .where('Gender',isEqualTo: 'Women')
           .where('Category',isEqualTo: 'WRings')
           .where('$sizeFilter',isGreaterThanOrEqualTo: 1):
       priceQuery == "high$sizeFilter"?
       FirebaseFirestore.instance.collectionGroup('userProducts')
           .orderBy('round',descending: true)
           .orderBy('timestamp',descending: true)
-          .where('Gender',isEqualTo: 'Men')
+          .where('Gender',isEqualTo: 'Women')
           .where('Category',isEqualTo: 'WRings')
           .where('$sizeFilter',isGreaterThanOrEqualTo: 1)
           :priceQuery == "0D$sizeFilter"?
       FirebaseFirestore.instance.collectionGroup('userProducts')
           .orderBy('timestamp',descending: true)
-          .where('Gender',isEqualTo: 'Men')
+          .where('Gender',isEqualTo: 'Women')
           .where('Category',isEqualTo: 'WRings')
 
           .where('country',isEqualTo: '${currentUser.country}')
@@ -595,7 +594,7 @@ class _JewelWState extends State<JewelW> {
       FirebaseFirestore.instance.collectionGroup('userProducts')
           .orderBy('round',descending: false)
           .orderBy('timestamp',descending: true)
-          .where('Gender',isEqualTo: 'Men')
+          .where('Gender',isEqualTo: 'Women')
           .where('Category',isEqualTo: 'WRings')
 
           .where('country',isEqualTo: '${currentUser.country}')
@@ -604,7 +603,7 @@ class _JewelWState extends State<JewelW> {
       FirebaseFirestore.instance.collectionGroup('userProducts')
           .orderBy('round',descending: true)
           .orderBy('timestamp',descending: true)
-          .where('Gender',isEqualTo: 'Men')
+          .where('Gender',isEqualTo: 'Women')
           .where('Category',isEqualTo: 'WRings')
 
           .where('country',isEqualTo: '${currentUser.country}')

@@ -29,11 +29,9 @@ class JewelleryM extends StatefulWidget {
 class _JewelleryMState extends State<JewelleryM> {
   void initState() {
     super.initState();
-    setState((){
-      sizeFilter = "";
-    });
+    priceQuery = "";
+    sizeFilter = "";
   }
-
   Bracelets(){
     return  PaginateFirestore(
       emptyDisplay: Center(child: Text("Nothing found",style: TextStyle(

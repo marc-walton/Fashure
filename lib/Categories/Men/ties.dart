@@ -34,7 +34,11 @@ class Ties extends StatefulWidget {
 
 class _TiesState extends State<Ties> {
 
-
+  void initState() {
+    super.initState();
+    priceQuery = "";
+    sizeFilter = "";
+  }
   Tiesdt(){
     return  PaginateFirestore(
       emptyDisplay: Center(child: Text("Nothing found",style: TextStyle(

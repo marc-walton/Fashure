@@ -27,7 +27,11 @@ class BagsW extends StatefulWidget {
 }
 
 class _BagsWState extends State<BagsW> {
-
+  void initState() {
+    super.initState();
+    priceQuery = "";
+    sizeFilter = "";
+  }
   Backpacks(){
     return  PaginateFirestore(
       emptyDisplay: Center(child: Text("Nothing found",style: TextStyle(

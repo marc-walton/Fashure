@@ -30,9 +30,8 @@ class CoatsM extends StatefulWidget {
 class _CoatsMState extends State<CoatsM> {
   void initState() {
     super.initState();
-    setState((){
-      sizeFilter = "";
-    });
+    priceQuery = "";
+    sizeFilter = "";
   }
 
   Single(){

@@ -32,11 +32,9 @@ class GroomingM extends StatefulWidget {
 class _GroomingMState extends State<GroomingM> {
   void initState() {
     super.initState();
-    setState((){
-      sizeFilter = "";
-    });
+    priceQuery = "";
+    sizeFilter = "";
   }
-
   Fragrance(){
     return   PaginateFirestore(
       emptyDisplay: Center(child: Text("Nothing found",style: TextStyle(

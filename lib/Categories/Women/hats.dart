@@ -29,7 +29,11 @@ class WHats extends StatefulWidget {
 }
 
 class _WHatsState extends State<WHats> {
-
+  void initState() {
+    super.initState();
+    priceQuery = "";
+    sizeFilter = "";
+  }
   WCaps(){
     return   PaginateFirestore(
       emptyDisplay: Center(child: Text("Nothing found",style: TextStyle(

@@ -32,11 +32,10 @@ class Accessories extends StatefulWidget {
 class _AccessoriesState extends State<Accessories> {
   void initState() {
     super.initState();
-    setState((){
-      sizeFilter = "";
-    });
-  }
 
+    priceQuery = "";
+    sizeFilter = "";
+  }
 
   Scarves(){
     return PaginateFirestore(

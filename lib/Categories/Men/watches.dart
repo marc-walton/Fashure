@@ -30,7 +30,12 @@ class WatchesM extends StatefulWidget {
 }
 
 class _WatchesMState extends State<WatchesM> {
-  
+  void initState() {
+    super.initState();
+    priceQuery = "";
+    sizeFilter = "";
+  }
+
   Chronograph(){
     return PaginateFirestore(
       emptyDisplay: Center(child: Text("Nothing found",style: TextStyle(

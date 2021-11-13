@@ -31,11 +31,9 @@ class IndianM extends StatefulWidget {
 class _IndianMState extends State<IndianM> {
   void initState() {
     super.initState();
-    setState((){
-      sizeFilter = "";
-    });
+    priceQuery = "";
+    sizeFilter = "";
   }
-
   Kurtas(){
     return  PaginateFirestore(
       emptyDisplay: Center(child: Text("Nothing found",style: TextStyle(

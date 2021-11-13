@@ -32,11 +32,9 @@ class JacketM extends StatefulWidget {
 class _JacketMState extends State<JacketM> {
   void initState() {
     super.initState();
-    setState((){
-      sizeFilter = "";
-    });
+    priceQuery = "";
+    sizeFilter = "";
   }
-
   SuitJ(){
     return  PaginateFirestore(
       emptyDisplay: Center(child: Text("Nothing found",style: TextStyle(
