@@ -148,7 +148,12 @@ class _EyeTBState extends State<EyeTB> {
             .where('Gender',isEqualTo: 'Teen-Boys')
             .where('Category',isEqualTo: 'TBGlasses & Frames')
             .where('country',isEqualTo: '${currentUser.country}')
-
+            :priceQuery == "0$sizeFilter"?
+        FirebaseFirestore.instance.collectionGroup('userProducts')
+            .orderBy('timestamp',descending: true)
+            .where('Gender',isEqualTo: 'Teen-Boys')
+             .where('Category',isEqualTo: 'TBGlasses & Frames')
+            .where('$sizeFilter',isGreaterThanOrEqualTo: 1)
             :priceQuery == "lowD"?
         FirebaseFirestore.instance.collectionGroup('userProducts')
             .orderBy('round',descending: false)
@@ -323,7 +328,12 @@ class _EyeTBState extends State<EyeTB> {
             .where('Gender',isEqualTo: 'Teen-Boys')
             .where('Category',isEqualTo: 'TBSunglasses')
             .where('country',isEqualTo: '${currentUser.country}')
-
+            :priceQuery == "0$sizeFilter"?
+        FirebaseFirestore.instance.collectionGroup('userProducts')
+            .orderBy('timestamp',descending: true)
+            .where('Gender',isEqualTo: 'Teen-Boys')
+            .where('Category',isEqualTo: 'TBSunglasses')
+            .where('$sizeFilter',isGreaterThanOrEqualTo: 1)
             :priceQuery == "lowD"?
         FirebaseFirestore.instance.collectionGroup('userProducts')
             .orderBy('round',descending: false)

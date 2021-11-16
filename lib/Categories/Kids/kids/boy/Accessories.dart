@@ -154,7 +154,12 @@ class _AccessKBState extends State<AccessKB> {
           .where('Gender',isEqualTo: 'Kids-Boys')
          .where('Category',isEqualTo: 'KBGloves')
           .where('country',isEqualTo: '${currentUser.country}')
-
+          :priceQuery == "0$sizeFilter"?
+      FirebaseFirestore.instance.collectionGroup('userProducts')
+          .orderBy('timestamp',descending: true)
+         .where('Gender',isEqualTo: 'Kids-Boys')
+           .where('Category',isEqualTo: 'KBGloves')
+          .where('$sizeFilter',isGreaterThanOrEqualTo: 1)
           :priceQuery == "lowD"?
       FirebaseFirestore.instance.collectionGroup('userProducts')
           .orderBy('round',descending: false)
@@ -329,7 +334,12 @@ class _AccessKBState extends State<AccessKB> {
           .where('Gender',isEqualTo: 'Kids-Boys')
          .where('Category',isEqualTo: 'KBSocks')
           .where('country',isEqualTo: '${currentUser.country}')
-
+          :priceQuery == "0$sizeFilter"?
+      FirebaseFirestore.instance.collectionGroup('userProducts')
+          .orderBy('timestamp',descending: true)
+         .where('Gender',isEqualTo: 'Kids-Boys')
+           .where('Category',isEqualTo: 'KBSocks')
+          .where('$sizeFilter',isGreaterThanOrEqualTo: 1)
           :priceQuery == "lowD"?
       FirebaseFirestore.instance.collectionGroup('userProducts')
           .orderBy('round',descending: false)
@@ -504,7 +514,12 @@ class _AccessKBState extends State<AccessKB> {
           .where('Gender',isEqualTo: 'Kids-Boys')
          .where('Category',isEqualTo: 'KBTravel')
           .where('country',isEqualTo: '${currentUser.country}')
-
+          :priceQuery == "0$sizeFilter"?
+      FirebaseFirestore.instance.collectionGroup('userProducts')
+          .orderBy('timestamp',descending: true)
+         .where('Gender',isEqualTo: 'Kids-Boys')
+          .where('Category',isEqualTo: 'KBTravel')
+          .where('$sizeFilter',isGreaterThanOrEqualTo: 1)
           :priceQuery == "lowD"?
       FirebaseFirestore.instance.collectionGroup('userProducts')
           .orderBy('round',descending: false)
@@ -679,7 +694,12 @@ class _AccessKBState extends State<AccessKB> {
           .where('Gender',isEqualTo: 'Kids-Boys')
           .where('Category',isEqualTo: 'KBScarves')
           .where('country',isEqualTo: '${currentUser.country}')
-
+          :priceQuery == "0$sizeFilter"?
+      FirebaseFirestore.instance.collectionGroup('userProducts')
+          .orderBy('timestamp',descending: true)
+         .where('Gender',isEqualTo: 'Kids-Boys')
+           .where('Category',isEqualTo: 'KBScarves')
+          .where('$sizeFilter',isGreaterThanOrEqualTo: 1)
           :priceQuery == "lowD"?
       FirebaseFirestore.instance.collectionGroup('userProducts')
           .orderBy('round',descending: false)
