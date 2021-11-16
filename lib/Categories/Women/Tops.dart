@@ -147,7 +147,14 @@ class _TopsWState extends State<TopsW> {
           .where('Gender',isEqualTo: 'Women')
           .where('Category',isEqualTo: 'WBlouses')
           .where('country',isEqualTo: '${currentUser.country}')
+          :priceQuery == "0D$sizeFilter"?
+      FirebaseFirestore.instance.collectionGroup('userProducts')
+          .orderBy('timestamp',descending: true)
+          .where('Gender',isEqualTo: 'Women')
+          .where('Category',isEqualTo: 'WBlouses')
 
+          .where('country',isEqualTo: '${currentUser.country}')
+          .where('$sizeFilter',isGreaterThanOrEqualTo: 1)
           :priceQuery == "lowD"?
       FirebaseFirestore.instance.collectionGroup('userProducts')
           .orderBy('round',descending: false)
@@ -322,7 +329,14 @@ class _TopsWState extends State<TopsW> {
           .where('Gender',isEqualTo: 'Women')
            .where('Category',isEqualTo: 'WTunics')
           .where('country',isEqualTo: '${currentUser.country}')
+          :priceQuery == "0D$sizeFilter"?
+      FirebaseFirestore.instance.collectionGroup('userProducts')
+          .orderBy('timestamp',descending: true)
+          .where('Gender',isEqualTo: 'Women')
+          .where('Category',isEqualTo: 'WTunics')
 
+          .where('country',isEqualTo: '${currentUser.country}')
+          .where('$sizeFilter',isGreaterThanOrEqualTo: 1)
           :priceQuery == "lowD"?
       FirebaseFirestore.instance.collectionGroup('userProducts')
           .orderBy('round',descending: false)
@@ -497,7 +511,14 @@ class _TopsWState extends State<TopsW> {
           .where('Gender',isEqualTo: 'Women')
            .where('Category',isEqualTo: 'WKaftans & ponchos')
           .where('country',isEqualTo: '${currentUser.country}')
+          :priceQuery == "0D$sizeFilter"?
+      FirebaseFirestore.instance.collectionGroup('userProducts')
+          .orderBy('timestamp',descending: true)
+          .where('Gender',isEqualTo: 'Women')
+           .where('Category',isEqualTo: 'WKaftans & ponchos')
 
+          .where('country',isEqualTo: '${currentUser.country}')
+          .where('$sizeFilter',isGreaterThanOrEqualTo: 1)
           :priceQuery == "lowD"?
       FirebaseFirestore.instance.collectionGroup('userProducts')
           .orderBy('round',descending: false)
@@ -672,7 +693,14 @@ class _TopsWState extends State<TopsW> {
           .where('Gender',isEqualTo: 'Women')
           .where('Category',isEqualTo: 'WCrop Tops')
           .where('country',isEqualTo: '${currentUser.country}')
+          :priceQuery == "0D$sizeFilter"?
+      FirebaseFirestore.instance.collectionGroup('userProducts')
+          .orderBy('timestamp',descending: true)
+          .where('Gender',isEqualTo: 'Women')
+          .where('Category',isEqualTo: 'WCrop Tops')
 
+          .where('country',isEqualTo: '${currentUser.country}')
+          .where('$sizeFilter',isGreaterThanOrEqualTo: 1)
           :priceQuery == "lowD"?
       FirebaseFirestore.instance.collectionGroup('userProducts')
           .orderBy('round',descending: false)
@@ -847,7 +875,14 @@ class _TopsWState extends State<TopsW> {
           .where('Gender',isEqualTo: 'Women')
           .where('Category',isEqualTo: 'WPolo Shirts')
           .where('country',isEqualTo: '${currentUser.country}')
+          :priceQuery == "0D$sizeFilter"?
+      FirebaseFirestore.instance.collectionGroup('userProducts')
+          .orderBy('timestamp',descending: true)
+          .where('Gender',isEqualTo: 'Women')
+          .where('Category',isEqualTo: 'WPolo Shirts')
 
+          .where('country',isEqualTo: '${currentUser.country}')
+          .where('$sizeFilter',isGreaterThanOrEqualTo: 1)
           :priceQuery == "lowD"?
       FirebaseFirestore.instance.collectionGroup('userProducts')
           .orderBy('round',descending: false)
@@ -1022,7 +1057,14 @@ class _TopsWState extends State<TopsW> {
           .where('Gender',isEqualTo: 'Women')
           .where('Category',isEqualTo: 'WShirts')
           .where('country',isEqualTo: '${currentUser.country}')
+          :priceQuery == "0D$sizeFilter"?
+      FirebaseFirestore.instance.collectionGroup('userProducts')
+          .orderBy('timestamp',descending: true)
+          .where('Gender',isEqualTo: 'Women')
+           .where('Category',isEqualTo: 'WShirts')
 
+          .where('country',isEqualTo: '${currentUser.country}')
+          .where('$sizeFilter',isGreaterThanOrEqualTo: 1)
           :priceQuery == "lowD"?
       FirebaseFirestore.instance.collectionGroup('userProducts')
           .orderBy('round',descending: false)
@@ -1197,7 +1239,14 @@ class _TopsWState extends State<TopsW> {
           .where('Gender',isEqualTo: 'Women')
           .where('Category',isEqualTo: 'WT-shirts')
           .where('country',isEqualTo: '${currentUser.country}')
+          :priceQuery == "0D$sizeFilter"?
+      FirebaseFirestore.instance.collectionGroup('userProducts')
+          .orderBy('timestamp',descending: true)
+          .where('Gender',isEqualTo: 'Women')
+           .where('Category',isEqualTo: 'WT-shirts')
 
+          .where('country',isEqualTo: '${currentUser.country}')
+          .where('$sizeFilter',isGreaterThanOrEqualTo: 1)
           :priceQuery == "lowD"?
       FirebaseFirestore.instance.collectionGroup('userProducts')
           .orderBy('round',descending: false)
@@ -1372,7 +1421,14 @@ class _TopsWState extends State<TopsW> {
           .where('Gender',isEqualTo: 'Women')
           .where('Category',isEqualTo: 'WSleeveless Tops,vests,Tank-Top')
           .where('country',isEqualTo: '${currentUser.country}')
+          :priceQuery == "0D$sizeFilter"?
+      FirebaseFirestore.instance.collectionGroup('userProducts')
+          .orderBy('timestamp',descending: true)
+          .where('Gender',isEqualTo: 'Women')
+           .where('Category',isEqualTo: 'WSleeveless Tops,vests,Tank-Top')
 
+          .where('country',isEqualTo: '${currentUser.country}')
+          .where('$sizeFilter',isGreaterThanOrEqualTo: 1)
           :priceQuery == "lowD"?
       FirebaseFirestore.instance.collectionGroup('userProducts')
           .orderBy('round',descending: false)
@@ -1547,7 +1603,14 @@ class _TopsWState extends State<TopsW> {
           .where('Gender',isEqualTo: 'Women')
           .where('Category',isEqualTo: 'WHoodies and Sweatshirts')
           .where('country',isEqualTo: '${currentUser.country}')
+          :priceQuery == "0D$sizeFilter"?
+      FirebaseFirestore.instance.collectionGroup('userProducts')
+          .orderBy('timestamp',descending: true)
+          .where('Gender',isEqualTo: 'Women')
+          .where('Category',isEqualTo: 'WHoodies and Sweatshirts')
 
+          .where('country',isEqualTo: '${currentUser.country}')
+          .where('$sizeFilter',isGreaterThanOrEqualTo: 1)
           :priceQuery == "lowD"?
       FirebaseFirestore.instance.collectionGroup('userProducts')
           .orderBy('round',descending: false)

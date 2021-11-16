@@ -148,7 +148,14 @@ class _ShortsWState extends State<ShortsW> {
           .where('Gender',isEqualTo: 'Women')
           .where('Category',isEqualTo: 'WShort-length')
           .where('country',isEqualTo: '${currentUser.country}')
+          :priceQuery == "0D$sizeFilter"?
+      FirebaseFirestore.instance.collectionGroup('userProducts')
+          .orderBy('timestamp',descending: true)
+          .where('Gender',isEqualTo: 'Women')
+          .where('Category',isEqualTo: 'WShort-length')
 
+          .where('country',isEqualTo: '${currentUser.country}')
+          .where('$sizeFilter',isGreaterThanOrEqualTo: 1)
           :priceQuery == "lowD"?
       FirebaseFirestore.instance.collectionGroup('userProducts')
           .orderBy('round',descending: false)
@@ -323,7 +330,14 @@ class _ShortsWState extends State<ShortsW> {
           .where('Gender',isEqualTo: 'Women')
           .where('Category',isEqualTo: 'WKnee-length')
           .where('country',isEqualTo: '${currentUser.country}')
+          :priceQuery == "0D$sizeFilter"?
+      FirebaseFirestore.instance.collectionGroup('userProducts')
+          .orderBy('timestamp',descending: true)
+          .where('Gender',isEqualTo: 'Women')
+            .where('Category',isEqualTo: 'WKnee-length')
 
+          .where('country',isEqualTo: '${currentUser.country}')
+          .where('$sizeFilter',isGreaterThanOrEqualTo: 1)
           :priceQuery == "lowD"?
       FirebaseFirestore.instance.collectionGroup('userProducts')
           .orderBy('round',descending: false)
@@ -498,7 +512,14 @@ class _ShortsWState extends State<ShortsW> {
           .where('Gender',isEqualTo: 'Women')
            .where('Category',isEqualTo: 'WSports Shorts')
           .where('country',isEqualTo: '${currentUser.country}')
+          :priceQuery == "0D$sizeFilter"?
+      FirebaseFirestore.instance.collectionGroup('userProducts')
+          .orderBy('timestamp',descending: true)
+          .where('Gender',isEqualTo: 'Women')
+           .where('Category',isEqualTo: 'WSports Shorts')
 
+          .where('country',isEqualTo: '${currentUser.country}')
+          .where('$sizeFilter',isGreaterThanOrEqualTo: 1)
           :priceQuery == "lowD"?
       FirebaseFirestore.instance.collectionGroup('userProducts')
           .orderBy('round',descending: false)

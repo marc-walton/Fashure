@@ -164,6 +164,12 @@ class _BridalState extends State<Bridal> {
           .where('Gender',isEqualTo: 'Women')
           .where('Category',isEqualTo: 'WBridal')
           .where('country',isEqualTo: '${currentUser.country}')
+          :priceQuery == "0$sizeFilter"?
+      FirebaseFirestore.instance.collectionGroup('userProducts')
+          .orderBy('timestamp',descending: true)
+          .where('Gender',isEqualTo: 'Women')
+          .where('Category',isEqualTo: 'WBridal')
+          .where('$sizeFilter',isGreaterThanOrEqualTo: 1)
           :priceQuery == "low$sizeFilter"?
       FirebaseFirestore.instance.collectionGroup('userProducts')
           .orderBy('round',descending: false)
@@ -211,24 +217,239 @@ class _BridalState extends State<Bridal> {
 
     );
   }
+  bridal(){
+    return PaginateFirestore(
+      emptyDisplay: Center(child: Text("Nothing found",style: TextStyle(
+        fontWeight: FontWeight.bold,
+        fontSize: 25.0,
+      ),)),
+      key:ValueKey<String>(AQuery),
+      itemBuilderType:
+      PaginateBuilderType.listView,
+      itemBuilder: (index, context, documentSnapshot)   {
+        String ownerId = documentSnapshot.data()['ownerId'];
+        String username = documentSnapshot.data()['username'];
+        String productname = documentSnapshot.data()['productname'];
+        var eur = documentSnapshot.data()['eur'];
+        var usd = documentSnapshot.data()['usd'];
+        var inr = documentSnapshot.data()['eur'];
+        var gbp = documentSnapshot.data()['usd'];
+
+        String photoUrl = documentSnapshot.data()['photoUrl'];
+        String prodId = documentSnapshot.data()['prodId'];
+        List shopmediaUrl = documentSnapshot.data()['shopmediaUrl'];
+
+        return
+          Container(
+            height: MediaQuery.of(context).size.height,
+            width: MediaQuery.of(context).size.width,
+
+            child:
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  GestureDetector(
+                    onTap: () => showProfile(context, profileId: ownerId),
+                    child:Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Row(children:[
+                        CircleAvatar(
+                          radius: 15,
+                          backgroundImage: CachedNetworkImageProvider(photoUrl),
+                          backgroundColor: Colors.grey,
+                        ),
+                        SizedBox(width: 7.0,),
+                        Text(
+                          username,
+                          style: TextStyle(
+                            color: kText,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ]),
+                    ),
+
+                  ),
+
+                  GestureDetector(
+                    onTap: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => ProductScreen(
+                          prodId: prodId,
+                          userId: ownerId,
+                        ),
+                      ),
+                    ),
+                    child: CachedImage(shopmediaUrl.first,height: MediaQuery
+                        .of(context)
+                        .size
+                        .height/3,width: MediaQuery
+                        .of(context)
+                        .size
+                        .width,),),
+                  SizedBox(height: 7.0,),
+
+                  Text(productname, style: TextStyle(
+                    color: kText,
+                  ),),
+                  SizedBox(height: 7.0,),
+
+                  currentUser.currency == "INR"?  Text( "${cf.format(inr, CurrencyFormatter.inr)}",style:TextStyle(fontWeight:FontWeight.bold) ):
+                  currentUser.currency == "EUR"?Text("${cf.format(eur, CurrencyFormatter.eur)}",style:TextStyle(fontWeight:FontWeight.bold) ):
+                  currentUser.currency == "GBP"?Text("${cf.format(gbp, CurrencyFormatter.gbp)}",style:TextStyle(fontWeight:FontWeight.bold) ):
+                  Text(
+                      "${cf.format(usd, CurrencyFormatter.usd)}",style:TextStyle(fontWeight:FontWeight.bold))
+
+
+                ],
+
+              ),
+            ),
+
+
+          );
+      },
+      query: priceQuery == "low"?
+      FirebaseFirestore.instance.collectionGroup('userProducts')
+          .orderBy('round',descending: false)
+          .orderBy('timestamp',descending: true)
+          .where('Gender',isEqualTo: 'Women')
+          .where('Category',isEqualTo: 'WBridal & Wedding'):
+      priceQuery == "high"?
+      FirebaseFirestore.instance.collectionGroup('userProducts')
+          .orderBy('round',descending: true)
+          .orderBy('timestamp',descending: true)
+          .where('Gender',isEqualTo: 'Women')
+          .where('Category',isEqualTo: 'WBridal & Wedding')
+          :priceQuery == "0D"?
+      FirebaseFirestore.instance.collectionGroup('userProducts')
+          .orderBy('timestamp',descending: true)
+          .where('Gender',isEqualTo: 'Women')
+          .where('Category',isEqualTo: 'WBridal & Wedding')
+          .where('country',isEqualTo: '${currentUser.country}')
+
+          :priceQuery == "lowD"?
+      FirebaseFirestore.instance.collectionGroup('userProducts')
+          .orderBy('round',descending: false)
+          .orderBy('timestamp',descending: true)
+          .where('Gender',isEqualTo: 'Women')
+          .where('Category',isEqualTo: 'WBridal & Wedding')
+          .where('country',isEqualTo: '${currentUser.country}')
+          :priceQuery == "highD"?
+      FirebaseFirestore.instance.collectionGroup('userProducts')
+          .orderBy('round',descending: true)
+          .orderBy('timestamp',descending: true)
+          .where('Gender',isEqualTo: 'Women')
+          .where('Category',isEqualTo: 'WBridal & Wedding')
+          .where('country',isEqualTo: '${currentUser.country}')
+          :priceQuery == "0$sizeFilter"?
+      FirebaseFirestore.instance.collectionGroup('userProducts')
+          .orderBy('timestamp',descending: true)
+          .where('Gender',isEqualTo: 'Women')
+          .where('Category',isEqualTo: 'WBridal & Wedding')
+          .where('$sizeFilter',isGreaterThanOrEqualTo: 1)
+          :priceQuery == "low$sizeFilter"?
+      FirebaseFirestore.instance.collectionGroup('userProducts')
+          .orderBy('round',descending: false)
+          .orderBy('timestamp',descending: true)
+          .where('Gender',isEqualTo: 'Women')
+          .where('Category',isEqualTo: 'WBridal & Wedding')
+          .where('$sizeFilter',isGreaterThanOrEqualTo: 1):
+      priceQuery == "high$sizeFilter"?
+      FirebaseFirestore.instance.collectionGroup('userProducts')
+          .orderBy('round',descending: true)
+          .orderBy('timestamp',descending: true)
+          .where('Gender',isEqualTo: 'Women')
+          .where('Category',isEqualTo: 'WBridal & Wedding')
+          .where('$sizeFilter',isGreaterThanOrEqualTo: 1)
+          :priceQuery == "0D$sizeFilter"?
+      FirebaseFirestore.instance.collectionGroup('userProducts')
+          .orderBy('timestamp',descending: true)
+          .where('Gender',isEqualTo: 'Women')
+          .where('Category',isEqualTo: 'WBridal & Wedding')
+
+          .where('country',isEqualTo: '${currentUser.country}')
+          .where('$sizeFilter',isGreaterThanOrEqualTo: 1)
+          :priceQuery == "lowD$sizeFilter"?
+      FirebaseFirestore.instance.collectionGroup('userProducts')
+          .orderBy('round',descending: false)
+          .orderBy('timestamp',descending: true)
+          .where('Gender',isEqualTo: 'Women')
+          .where('Category',isEqualTo: 'WBridal & Wedding')
+
+          .where('country',isEqualTo: '${currentUser.country}')
+          .where('$sizeFilter',isGreaterThanOrEqualTo: 1)
+          :priceQuery == "highD$sizeFilter"?
+      FirebaseFirestore.instance.collectionGroup('userProducts')
+          .orderBy('round',descending: true)
+          .orderBy('timestamp',descending: true)
+          .where('Gender',isEqualTo: 'Women')
+          .where('Category',isEqualTo: 'WBridal & Wedding')
+
+          .where('country',isEqualTo: '${currentUser.country}')
+          .where('$sizeFilter',isGreaterThanOrEqualTo: 1)  :
+      FirebaseFirestore.instance.collectionGroup('userProducts')
+          .orderBy('timestamp',descending: true)
+          .where('Gender',isEqualTo: 'Women')
+          .where('Category',isEqualTo: 'WBridal & Wedding'),
+
+    );
+  }
   @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);
     return  RotatedBox(
-      quarterTurns: 3,
+      quarterTurns: 1,
       child: Expanded(
         child: DefaultTabController(
             initialIndex:widget.selectedPage ?? 0,
 
-            length:1,
+            length:2,
             child: Scaffold(
 
+              appBar:tabs? AppBar(
+                toolbarHeight: SizeConfig.screenWidth * 0.3,
+                backgroundColor: kPrimaryColor,
+                elevation: 0,
+                bottom:  PreferredSize(
+                  preferredSize: Size.fromHeight(100.0),
+
+                  child: Container(
+                    height: SizeConfig.safeBlockHorizontal * 30,
+                    child: TabBar(
+
+                      isScrollable: true,
+
+                      ///filled
+                      labelStyle:TextStyle(fontFamily: "AlteroDCURegular",color: Colors.white ),
+                      ///outline
+                      unselectedLabelStyle:TextStyle(fontFamily:"AlteroDCU",color: Colors.white  ),
+                      tabs:[
+                        RotatedBox(quarterTurns:3,child: Text("Bridal wear",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 3.4,))),
+                         RotatedBox(quarterTurns:3,child: Text("Accessories",style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 3.4,))),
+                      ],
+                    ),
+                  ),
+                ),
+              ):null,
 
 
-              body: Container(
+              body:
+              Container(
 
-                child: WBridal(),
+                child: RotatedBox(
+                  quarterTurns: 3,
+                  child: TabBarView(
+                      children:<Widget> [
+                        WBridal(),
+                        bridal(),
 
+
+                      ]),
+                ),
               ),
             )
         ),
