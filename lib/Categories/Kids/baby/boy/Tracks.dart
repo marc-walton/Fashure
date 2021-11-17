@@ -184,7 +184,7 @@ class _BabytrBState extends State<BabytrB> {
 
           .where('country',isEqualTo: '${currentUser.country}')
           .where('$sizeFilter',isGreaterThanOrEqualTo: 1)
-          :priceQuery == "lowD$sizeFilter"?
+          :priceQuery == "lowDS$sizeFilter"?
       FirebaseFirestore.instance.collectionGroup('userProducts')
           .orderBy('round',descending: false)
           .orderBy('timestamp',descending: true)
