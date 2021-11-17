@@ -170,7 +170,7 @@ class _BridalState extends State<Bridal> {
           .where('Gender',isEqualTo: 'Women')
           .where('Category',isEqualTo: 'WBridal')
           .where('$sizeFilter',isGreaterThanOrEqualTo: 1):
-      priceQuery == "high$sizeFilter"?
+      priceQuery == "highS$sizeFilter"?
       FirebaseFirestore.instance.collectionGroup('userProducts')
           .orderBy('round',descending: true)
           .orderBy('timestamp',descending: true)
@@ -351,7 +351,7 @@ class _BridalState extends State<Bridal> {
           .where('Gender',isEqualTo: 'Women')
           .where('Category',isEqualTo: 'WBridal & Wedding')
           .where('$sizeFilter',isGreaterThanOrEqualTo: 1):
-      priceQuery == "high$sizeFilter"?
+      priceQuery == "highS$sizeFilter"?
       FirebaseFirestore.instance.collectionGroup('userProducts')
           .orderBy('round',descending: true)
           .orderBy('timestamp',descending: true)

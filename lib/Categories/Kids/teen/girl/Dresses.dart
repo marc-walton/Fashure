@@ -7,15 +7,8 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:paginate_firestore/paginate_firestore.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fashow/HomePage.dart';
-import 'package:fashow/progress.dart';
-import 'package:fashow/user.dart';
-import 'package:fashow/product_custom.dart';
+
 import 'package:fashow/Product_screen.dart';
-import 'package:carousel_slider/carousel_slider.dart';
-import 'package:sticky_headers/sticky_headers.dart';
-import 'package:flutter_currencies_tracker/currency.dart';
-import 'package:get/get.dart';
-import 'package:fashow/Products.dart';
 import 'package:currency_formatter/currency_formatter.dart';
 import 'package:fashow/chatcached_image.dart';
 import 'package:fashow/enum/Variables.dart';
@@ -176,7 +169,7 @@ class _KiddrGTState extends State<KiddrGT> {
             .where('Gender',isEqualTo: 'Teen-Girls')
             .where('Category',isEqualTo: 'TGGowns')
             .where('$sizeFilter',isGreaterThanOrEqualTo: 1):
-        priceQuery == "high$sizeFilter"?
+        priceQuery == "highS$sizeFilter"?
         FirebaseFirestore.instance.collectionGroup('userProducts')
             .orderBy('round',descending: true)
             .orderBy('timestamp',descending: true)
@@ -356,7 +349,7 @@ class _KiddrGTState extends State<KiddrGT> {
             .where('Gender',isEqualTo: 'Teen-Girls')
              .where('Category',isEqualTo: 'TGParty Dresses')
             .where('$sizeFilter',isGreaterThanOrEqualTo: 1):
-        priceQuery == "high$sizeFilter"?
+        priceQuery == "highS$sizeFilter"?
         FirebaseFirestore.instance.collectionGroup('userProducts')
             .orderBy('round',descending: true)
             .orderBy('timestamp',descending: true)
@@ -536,7 +529,7 @@ class _KiddrGTState extends State<KiddrGT> {
             .where('Gender',isEqualTo: 'Teen-Girls')
             .where('Category',isEqualTo: 'TGOff- Shoulder')
             .where('$sizeFilter',isGreaterThanOrEqualTo: 1):
-        priceQuery == "high$sizeFilter"?
+        priceQuery == "highS$sizeFilter"?
         FirebaseFirestore.instance.collectionGroup('userProducts')
             .orderBy('round',descending: true)
             .orderBy('timestamp',descending: true)
@@ -716,7 +709,7 @@ class _KiddrGTState extends State<KiddrGT> {
             .where('Gender',isEqualTo: 'Teen-Girls')
             .where('Category',isEqualTo: 'TGOne-Shoulder')
             .where('$sizeFilter',isGreaterThanOrEqualTo: 1):
-        priceQuery == "high$sizeFilter"?
+        priceQuery == "highS$sizeFilter"?
         FirebaseFirestore.instance.collectionGroup('userProducts')
             .orderBy('round',descending: true)
             .orderBy('timestamp',descending: true)
@@ -896,7 +889,7 @@ class _KiddrGTState extends State<KiddrGT> {
             .where('Gender',isEqualTo: 'Teen-Girls')
             .where('Category',isEqualTo: 'TGShirt Dresses')
             .where('$sizeFilter',isGreaterThanOrEqualTo: 1):
-        priceQuery == "high$sizeFilter"?
+        priceQuery == "highS$sizeFilter"?
         FirebaseFirestore.instance.collectionGroup('userProducts')
             .orderBy('round',descending: true)
             .orderBy('timestamp',descending: true)
@@ -1076,7 +1069,7 @@ class _KiddrGTState extends State<KiddrGT> {
             .where('Gender',isEqualTo: 'Teen-Girls')
             .where('Category',isEqualTo: 'TGT-Shirt and Jersey Dresses')
             .where('$sizeFilter',isGreaterThanOrEqualTo: 1):
-        priceQuery == "high$sizeFilter"?
+        priceQuery == "highS$sizeFilter"?
         FirebaseFirestore.instance.collectionGroup('userProducts')
             .orderBy('round',descending: true)
             .orderBy('timestamp',descending: true)
@@ -1256,7 +1249,7 @@ class _KiddrGTState extends State<KiddrGT> {
             .where('Gender',isEqualTo: 'Teen-Girls')
             .where('Category',isEqualTo: 'TGShort Dresses')
             .where('$sizeFilter',isGreaterThanOrEqualTo: 1):
-        priceQuery == "high$sizeFilter"?
+        priceQuery == "highS$sizeFilter"?
         FirebaseFirestore.instance.collectionGroup('userProducts')
             .orderBy('round',descending: true)
             .orderBy('timestamp',descending: true)
@@ -1436,7 +1429,7 @@ class _KiddrGTState extends State<KiddrGT> {
             .where('Gender',isEqualTo: 'Teen-Girls')
             .where('Category',isEqualTo: 'TGKaftan Dresses')
             .where('$sizeFilter',isGreaterThanOrEqualTo: 1):
-        priceQuery == "high$sizeFilter"?
+        priceQuery == "highS$sizeFilter"?
         FirebaseFirestore.instance.collectionGroup('userProducts')
             .orderBy('round',descending: true)
             .orderBy('timestamp',descending: true)

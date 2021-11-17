@@ -6,15 +6,9 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:paginate_firestore/paginate_firestore.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fashow/HomePage.dart';
-import 'package:fashow/progress.dart';
-import 'package:fashow/user.dart';
-import 'package:fashow/product_custom.dart';
+
 import 'package:fashow/Product_screen.dart';
-import 'package:carousel_slider/carousel_slider.dart';
-import 'package:sticky_headers/sticky_headers.dart';
-import 'package:flutter_currencies_tracker/currency.dart';
-import 'package:get/get.dart';
-import 'package:fashow/Products.dart';
+
 import 'package:currency_formatter/currency_formatter.dart';
 import 'package:fashow/chatcached_image.dart';
 import 'package:fashow/enum/Variables.dart';
@@ -176,7 +170,7 @@ class _TrouserMState extends State<TrouserM> {
           .where('Gender',isEqualTo: 'Men')
           .where('Category',isEqualTo: 'Skinny fit')
           .where('$sizeFilter',isGreaterThanOrEqualTo: 1):
-      priceQuery == "high$sizeFilter"?
+      priceQuery == "highS$sizeFilter"?
       FirebaseFirestore.instance.collectionGroup('userProducts')
           .orderBy('round',descending: true)
           .orderBy('timestamp',descending: true)
@@ -358,7 +352,7 @@ class _TrouserMState extends State<TrouserM> {
           .where('Gender',isEqualTo: 'Men')
           .where('Category',isEqualTo: 'Slim fit')
           .where('$sizeFilter',isGreaterThanOrEqualTo: 1):
-      priceQuery == "high$sizeFilter"?
+      priceQuery == "highS$sizeFilter"?
       FirebaseFirestore.instance.collectionGroup('userProducts')
           .orderBy('round',descending: true)
           .orderBy('timestamp',descending: true)
@@ -540,7 +534,7 @@ class _TrouserMState extends State<TrouserM> {
           .where('Gender',isEqualTo: 'Men')
           .where('Category',isEqualTo: 'Tapered fit')
           .where('$sizeFilter',isGreaterThanOrEqualTo: 1):
-      priceQuery == "high$sizeFilter"?
+      priceQuery == "highS$sizeFilter"?
       FirebaseFirestore.instance.collectionGroup('userProducts')
           .orderBy('round',descending: true)
           .orderBy('timestamp',descending: true)
@@ -722,7 +716,7 @@ class _TrouserMState extends State<TrouserM> {
           .where('Gender',isEqualTo: 'Men')
           .where('Category',isEqualTo: 'Regular fit')
           .where('$sizeFilter',isGreaterThanOrEqualTo: 1):
-      priceQuery == "high$sizeFilter"?
+      priceQuery == "highS$sizeFilter"?
       FirebaseFirestore.instance.collectionGroup('userProducts')
           .orderBy('round',descending: true)
           .orderBy('timestamp',descending: true)
@@ -904,7 +898,7 @@ class _TrouserMState extends State<TrouserM> {
           .where('Gender',isEqualTo: 'Men')
           .where('Category',isEqualTo: 'Tailored Trousers')
           .where('$sizeFilter',isGreaterThanOrEqualTo: 1):
-      priceQuery == "high$sizeFilter"?
+      priceQuery == "highS$sizeFilter"?
       FirebaseFirestore.instance.collectionGroup('userProducts')
           .orderBy('round',descending: true)
           .orderBy('timestamp',descending: true)
@@ -1086,7 +1080,7 @@ class _TrouserMState extends State<TrouserM> {
           .where('Gender',isEqualTo: 'Men')
            .where('Category',isEqualTo: 'Cargo pants')
           .where('$sizeFilter',isGreaterThanOrEqualTo: 1):
-      priceQuery == "high$sizeFilter"?
+      priceQuery == "highS$sizeFilter"?
       FirebaseFirestore.instance.collectionGroup('userProducts')
           .orderBy('round',descending: true)
           .orderBy('timestamp',descending: true)
@@ -1268,7 +1262,7 @@ class _TrouserMState extends State<TrouserM> {
           .where('Gender',isEqualTo: 'Men')
           .where('Category',isEqualTo: 'Chinos')
           .where('$sizeFilter',isGreaterThanOrEqualTo: 1):
-      priceQuery == "high$sizeFilter"?
+      priceQuery == "highS$sizeFilter"?
       FirebaseFirestore.instance.collectionGroup('userProducts')
           .orderBy('round',descending: true)
           .orderBy('timestamp',descending: true)
@@ -1450,7 +1444,7 @@ class _TrouserMState extends State<TrouserM> {
           .where('Gender',isEqualTo: 'Men')
           .where('Category',isEqualTo: 'Sweatpants')
           .where('$sizeFilter',isGreaterThanOrEqualTo: 1):
-      priceQuery == "high$sizeFilter"?
+      priceQuery == "highS$sizeFilter"?
       FirebaseFirestore.instance.collectionGroup('userProducts')
           .orderBy('round',descending: true)
           .orderBy('timestamp',descending: true)

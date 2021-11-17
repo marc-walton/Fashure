@@ -172,7 +172,7 @@ class _WTiesState extends State<WTies> {
           .where('Gender',isEqualTo: 'Women')
           .where('Category',isEqualTo: 'WTies')
           .where('$sizeFilter',isGreaterThanOrEqualTo: 1):
-      priceQuery == "high$sizeFilter"?
+      priceQuery == "highS$sizeFilter"?
       FirebaseFirestore.instance.collectionGroup('userProducts')
           .orderBy('round',descending: true)
           .orderBy('timestamp',descending: true)
@@ -353,7 +353,7 @@ class _WTiesState extends State<WTies> {
           .where('Gender',isEqualTo: 'Women')
           .where('Category',isEqualTo: 'WCollars')
           .where('$sizeFilter',isGreaterThanOrEqualTo: 1):
-      priceQuery == "high$sizeFilter"?
+      priceQuery == "highS$sizeFilter"?
       FirebaseFirestore.instance.collectionGroup('userProducts')
           .orderBy('round',descending: true)
           .orderBy('timestamp',descending: true)

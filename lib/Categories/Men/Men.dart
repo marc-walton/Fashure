@@ -2,17 +2,12 @@ import 'package:cached_network_image/cached_network_image.dart';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_currencies_tracker/currency.dart';
-import 'package:getwidget/components/toggle/gf_toggle.dart';
-import 'package:getwidget/types/gf_toggle_type.dart';
-import 'package:intl/intl.dart';
+
 
 import 'package:paginate_firestore/paginate_firestore.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fashow/HomePage.dart';
-import 'package:fashow/progress.dart';
-import 'package:fashow/user.dart';
-import 'package:fashow/Products.dart';
+
 import 'package:fashow/Product_screen.dart';
 import 'package:fashow/ActivityFeed.dart';
 import 'package:fashow/Constants.dart';
@@ -220,7 +215,7 @@ height: MediaQuery.of(context).size.height,
           .orderBy('timestamp',descending: true)
           .where('Gender',isEqualTo: 'Men')
           .where('$sizeFilter',isGreaterThanOrEqualTo: 1):
-      priceQuery == "high$sizeFilter"?
+      priceQuery == "highS$sizeFilter"?
       FirebaseFirestore.instance.collectionGroup('userProducts')
           .orderBy('round',descending: true)
           .orderBy('timestamp',descending: true)

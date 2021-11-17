@@ -165,7 +165,7 @@ class _ActiveWearWState extends State<ActiveWearW> {
           .where('Gender',isEqualTo: 'Women')
           .where('Category',isEqualTo: 'WATops')
           .where('$sizeFilter',isGreaterThanOrEqualTo: 1):
-      priceQuery == "high$sizeFilter"?
+      priceQuery == "highS$sizeFilter"?
       FirebaseFirestore.instance.collectionGroup('userProducts')
           .orderBy('round',descending: true)
           .orderBy('timestamp',descending: true)
@@ -340,7 +340,7 @@ class _ActiveWearWState extends State<ActiveWearW> {
           .where('Gender',isEqualTo: 'Women')
           .where('Category',isEqualTo: 'WAJackets')
           .where('$sizeFilter',isGreaterThanOrEqualTo: 1):
-      priceQuery == "high$sizeFilter"?
+      priceQuery == "highS$sizeFilter"?
       FirebaseFirestore.instance.collectionGroup('userProducts')
           .orderBy('round',descending: true)
           .orderBy('timestamp',descending: true)
@@ -515,7 +515,7 @@ class _ActiveWearWState extends State<ActiveWearW> {
           .where('Gender',isEqualTo: 'Women')
           .where('Category',isEqualTo: 'WATrouser')
           .where('$sizeFilter',isGreaterThanOrEqualTo: 1):
-      priceQuery == "high$sizeFilter"?
+      priceQuery == "highS$sizeFilter"?
       FirebaseFirestore.instance.collectionGroup('userProducts')
           .orderBy('round',descending: true)
           .orderBy('timestamp',descending: true)
@@ -690,7 +690,7 @@ class _ActiveWearWState extends State<ActiveWearW> {
           .where('Gender',isEqualTo: 'Women')
           .where('Category',isEqualTo: 'WAShorts')
           .where('$sizeFilter',isGreaterThanOrEqualTo: 1):
-      priceQuery == "high$sizeFilter"?
+      priceQuery == "highS$sizeFilter"?
       FirebaseFirestore.instance.collectionGroup('userProducts')
           .orderBy('round',descending: true)
           .orderBy('timestamp',descending: true)
@@ -865,7 +865,7 @@ class _ActiveWearWState extends State<ActiveWearW> {
           .where('Gender',isEqualTo: 'Women')
           .where('Category',isEqualTo: 'WASkirts')
           .where('$sizeFilter',isGreaterThanOrEqualTo: 1):
-      priceQuery == "high$sizeFilter"?
+      priceQuery == "highS$sizeFilter"?
       FirebaseFirestore.instance.collectionGroup('userProducts')
           .orderBy('round',descending: true)
           .orderBy('timestamp',descending: true)
@@ -1040,7 +1040,7 @@ class _ActiveWearWState extends State<ActiveWearW> {
           .where('Gender',isEqualTo: 'Women')
           .where('Category',isEqualTo: 'WAFootwear')
           .where('$sizeFilter',isGreaterThanOrEqualTo: 1):
-      priceQuery == "high$sizeFilter"?
+      priceQuery == "highS$sizeFilter"?
       FirebaseFirestore.instance.collectionGroup('userProducts')
           .orderBy('round',descending: true)
           .orderBy('timestamp',descending: true)
@@ -1223,7 +1223,7 @@ class _ActiveWearWState extends State<ActiveWearW> {
            .where('Gender',isEqualTo: 'Women')
            .where('Category',isEqualTo: 'wAAccessories')
           .where('$sizeFilter',isGreaterThanOrEqualTo: 1):
-      priceQuery == "high$sizeFilter"?
+      priceQuery == "highS$sizeFilter"?
       FirebaseFirestore.instance.collectionGroup('userProducts')
           .orderBy('round',descending: true)
           .orderBy('timestamp',descending: true)

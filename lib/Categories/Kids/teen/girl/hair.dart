@@ -165,7 +165,7 @@ class _HairTGState extends State<HairTG> {
             .where('Gender',isEqualTo: 'Teen-Girls')
             .where('Category',isEqualTo: 'TGHair Bands')
             .where('$sizeFilter',isGreaterThanOrEqualTo: 1):
-        priceQuery == "high$sizeFilter"?
+        priceQuery == "highS$sizeFilter"?
         FirebaseFirestore.instance.collectionGroup('userProducts')
             .orderBy('round',descending: true)
             .orderBy('timestamp',descending: true)
@@ -351,7 +351,7 @@ class _HairTGState extends State<HairTG> {
             .where('Gender',isEqualTo: 'Teen-Girls')
             .where('Category',isEqualTo: 'TGHair Clips')
             .where('$sizeFilter',isGreaterThanOrEqualTo: 1):
-        priceQuery == "high$sizeFilter"?
+        priceQuery == "highS$sizeFilter"?
         FirebaseFirestore.instance.collectionGroup('userProducts')
             .orderBy('round',descending: true)
             .orderBy('timestamp',descending: true)

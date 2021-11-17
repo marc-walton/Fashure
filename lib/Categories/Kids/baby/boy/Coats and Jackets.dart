@@ -4,19 +4,12 @@ import 'package:fashow/size_config.dart';
 import 'package:fashow/ActivityFeed.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 
-import 'package:image/image.dart';
 import 'package:paginate_firestore/paginate_firestore.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fashow/HomePage.dart';
-import 'package:fashow/progress.dart';
-import 'package:fashow/user.dart';
-import 'package:fashow/product_custom.dart';
+
 import 'package:fashow/Product_screen.dart';
-import 'package:carousel_slider/carousel_slider.dart';
-import 'package:sticky_headers/sticky_headers.dart';
-import 'package:flutter_currencies_tracker/currency.dart';
-import 'package:get/get.dart';
-import 'package:fashow/Products.dart';
+
 import 'package:currency_formatter/currency_formatter.dart';
 import 'package:fashow/chatcached_image.dart';
 import 'package:fashow/enum/Variables.dart';
@@ -175,7 +168,7 @@ class _BabyCBState extends State<BabyCB> {
           .where('Gender',isEqualTo: 'Baby-Boys')
           .where('Category',isEqualTo: 'BBBlazer')
           .where('$sizeFilter',isGreaterThanOrEqualTo: 1):
-      priceQuery == "high$sizeFilter"?
+      priceQuery == "highS$sizeFilter"?
       FirebaseFirestore.instance.collectionGroup('userProducts')
           .orderBy('round',descending: true)
           .orderBy('timestamp',descending: true)
@@ -355,7 +348,7 @@ class _BabyCBState extends State<BabyCB> {
           .where('Gender',isEqualTo: 'Baby-Boys')
           .where('Category',isEqualTo: 'BBDuffle coats')
           .where('$sizeFilter',isGreaterThanOrEqualTo: 1):
-      priceQuery == "high$sizeFilter"?
+      priceQuery == "highS$sizeFilter"?
       FirebaseFirestore.instance.collectionGroup('userProducts')
           .orderBy('round',descending: true)
           .orderBy('timestamp',descending: true)
@@ -535,7 +528,7 @@ class _BabyCBState extends State<BabyCB> {
           .where('Gender',isEqualTo: 'Baby-Boys')
            .where('Category',isEqualTo: 'BBPadded coats')
           .where('$sizeFilter',isGreaterThanOrEqualTo: 1):
-      priceQuery == "high$sizeFilter"?
+      priceQuery == "highS$sizeFilter"?
       FirebaseFirestore.instance.collectionGroup('userProducts')
           .orderBy('round',descending: true)
           .orderBy('timestamp',descending: true)
@@ -715,7 +708,7 @@ class _BabyCBState extends State<BabyCB> {
           .where('Gender',isEqualTo: 'Baby-Boys')
           .where('Category',isEqualTo: 'BBBomber Jackets')
           .where('$sizeFilter',isGreaterThanOrEqualTo: 1):
-      priceQuery == "high$sizeFilter"?
+      priceQuery == "highS$sizeFilter"?
       FirebaseFirestore.instance.collectionGroup('userProducts')
           .orderBy('round',descending: true)
           .orderBy('timestamp',descending: true)
@@ -895,7 +888,7 @@ class _BabyCBState extends State<BabyCB> {
           .where('Gender',isEqualTo: 'Baby-Boys')
           .where('Category',isEqualTo: 'BBWool coats')
           .where('$sizeFilter',isGreaterThanOrEqualTo: 1):
-      priceQuery == "high$sizeFilter"?
+      priceQuery == "highS$sizeFilter"?
       FirebaseFirestore.instance.collectionGroup('userProducts')
           .orderBy('round',descending: true)
           .orderBy('timestamp',descending: true)
@@ -1075,7 +1068,7 @@ class _BabyCBState extends State<BabyCB> {
           .where('Gender',isEqualTo: 'Baby-Boys')
           .where('Category',isEqualTo: 'BBRain Coats')
           .where('$sizeFilter',isGreaterThanOrEqualTo: 1):
-      priceQuery == "high$sizeFilter"?
+      priceQuery == "highS$sizeFilter"?
       FirebaseFirestore.instance.collectionGroup('userProducts')
           .orderBy('round',descending: true)
           .orderBy('timestamp',descending: true)
@@ -1255,7 +1248,7 @@ class _BabyCBState extends State<BabyCB> {
           .where('Gender',isEqualTo: 'Baby-Boys')
          .where('Category',isEqualTo: 'BBWaist Coats & Gilets')
           .where('$sizeFilter',isGreaterThanOrEqualTo: 1):
-      priceQuery == "high$sizeFilter"?
+      priceQuery == "highS$sizeFilter"?
       FirebaseFirestore.instance.collectionGroup('userProducts')
           .orderBy('round',descending: true)
           .orderBy('timestamp',descending: true)

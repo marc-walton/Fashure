@@ -7,15 +7,9 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:paginate_firestore/paginate_firestore.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fashow/HomePage.dart';
-import 'package:fashow/progress.dart';
-import 'package:fashow/user.dart';
-import 'package:fashow/product_custom.dart';
+
 import 'package:fashow/Product_screen.dart';
-import 'package:carousel_slider/carousel_slider.dart';
-import 'package:sticky_headers/sticky_headers.dart';
-import 'package:flutter_currencies_tracker/currency.dart';
-import 'package:get/get.dart';
-import 'package:fashow/Products.dart';
+
 import 'package:currency_formatter/currency_formatter.dart';
 import 'package:fashow/chatcached_image.dart';
 import 'package:fashow/enum/Variables.dart';
@@ -190,7 +184,7 @@ height: MediaQuery.of(context).size.height,
           .where('Gender',isEqualTo: 'Men')
           .where('Category',isEqualTo: 'Backpacks')
           .where('$sizeFilter',isGreaterThanOrEqualTo: 1):
-      priceQuery == "high$sizeFilter"?
+      priceQuery == "highS$sizeFilter"?
       FirebaseFirestore.instance.collectionGroup('userProducts')
           .orderBy('round',descending: true)
           .orderBy('timestamp',descending: true)
@@ -387,7 +381,7 @@ height: MediaQuery.of(context).size.height,
           .where('Gender',isEqualTo: 'Men')
           .where('Category',isEqualTo: 'Briefcase')
           .where('$sizeFilter',isGreaterThanOrEqualTo: 1):
-      priceQuery == "high$sizeFilter"?
+      priceQuery == "highS$sizeFilter"?
       FirebaseFirestore.instance.collectionGroup('userProducts')
           .orderBy('round',descending: true)
           .orderBy('timestamp',descending: true)
@@ -583,7 +577,7 @@ height: MediaQuery.of(context).size.height,
           .where('Gender',isEqualTo: 'Men')
            .where('Category',isEqualTo: 'Laptop Bags')
           .where('$sizeFilter',isGreaterThanOrEqualTo: 1):
-      priceQuery == "high$sizeFilter"?
+      priceQuery == "highS$sizeFilter"?
       FirebaseFirestore.instance.collectionGroup('userProducts')
           .orderBy('round',descending: true)
           .orderBy('timestamp',descending: true)
@@ -779,7 +773,7 @@ height: MediaQuery.of(context).size.height,
           .where('Gender',isEqualTo: 'Men')
           .where('Category',isEqualTo: 'Shoulder Bags')
           .where('$sizeFilter',isGreaterThanOrEqualTo: 1):
-      priceQuery == "high$sizeFilter"?
+      priceQuery == "highS$sizeFilter"?
       FirebaseFirestore.instance.collectionGroup('userProducts')
           .orderBy('round',descending: true)
           .orderBy('timestamp',descending: true)
@@ -975,7 +969,7 @@ height: MediaQuery.of(context).size.height,
           .where('Gender',isEqualTo: 'Men')
            .where('Category',isEqualTo: 'Duffle bags & holdall')
           .where('$sizeFilter',isGreaterThanOrEqualTo: 1):
-      priceQuery == "high$sizeFilter"?
+      priceQuery == "highS$sizeFilter"?
       FirebaseFirestore.instance.collectionGroup('userProducts')
           .orderBy('round',descending: true)
           .orderBy('timestamp',descending: true)
@@ -1171,7 +1165,7 @@ height: MediaQuery.of(context).size.height,
           .where('Gender',isEqualTo: 'Men')
                .where('Category',isEqualTo: 'Belt Bags')
           .where('$sizeFilter',isGreaterThanOrEqualTo: 1):
-      priceQuery == "high$sizeFilter"?
+      priceQuery == "highS$sizeFilter"?
       FirebaseFirestore.instance.collectionGroup('userProducts')
           .orderBy('round',descending: true)
           .orderBy('timestamp',descending: true)
@@ -1367,7 +1361,7 @@ height: MediaQuery.of(context).size.height,
           .where('Gender',isEqualTo: 'Men')
           .where('Category',isEqualTo: 'Clutch Bags')
           .where('$sizeFilter',isGreaterThanOrEqualTo: 1):
-      priceQuery == "high$sizeFilter"?
+      priceQuery == "highS$sizeFilter"?
       FirebaseFirestore.instance.collectionGroup('userProducts')
           .orderBy('round',descending: true)
           .orderBy('timestamp',descending: true)
@@ -1563,7 +1557,7 @@ height: MediaQuery.of(context).size.height,
           .where('Gender',isEqualTo: 'Men')
             .where('Category',isEqualTo: 'Messenger Bags')
           .where('$sizeFilter',isGreaterThanOrEqualTo: 1):
-      priceQuery == "high$sizeFilter"?
+      priceQuery == "highS$sizeFilter"?
       FirebaseFirestore.instance.collectionGroup('userProducts')
           .orderBy('round',descending: true)
           .orderBy('timestamp',descending: true)
@@ -1759,7 +1753,7 @@ height: MediaQuery.of(context).size.height,
           .where('Gender',isEqualTo: 'Men')
           .where('Category',isEqualTo: 'Tote Bags')
           .where('$sizeFilter',isGreaterThanOrEqualTo: 1):
-      priceQuery == "high$sizeFilter"?
+      priceQuery == "highS$sizeFilter"?
       FirebaseFirestore.instance.collectionGroup('userProducts')
           .orderBy('round',descending: true)
           .orderBy('timestamp',descending: true)
@@ -1955,7 +1949,7 @@ height: MediaQuery.of(context).size.height,
           .where('Gender',isEqualTo: 'Men')
           .where('Category',isEqualTo: 'Luggage')
           .where('$sizeFilter',isGreaterThanOrEqualTo: 1):
-      priceQuery == "high$sizeFilter"?
+      priceQuery == "highS$sizeFilter"?
       FirebaseFirestore.instance.collectionGroup('userProducts')
           .orderBy('round',descending: true)
           .orderBy('timestamp',descending: true)
