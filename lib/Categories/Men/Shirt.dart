@@ -178,7 +178,7 @@ FirebaseFirestore.instance.collectionGroup('userProducts')
           .where('Gender',isEqualTo: 'Men')
           .where('Category',isEqualTo: 'Casual Wear')
           .where('$sizeFilter',isGreaterThanOrEqualTo: 1)
-          :priceQuery == "0D$sizeFilter"?
+          :priceQuery == "0DS$sizeFilter"?
       FirebaseFirestore.instance.collectionGroup('userProducts')
           .orderBy('timestamp',descending: true)
           .where('Gender',isEqualTo: 'Men')
@@ -360,7 +360,7 @@ FirebaseFirestore.instance.collectionGroup('userProducts')
           .where('Gender',isEqualTo: 'Men')
           .where('Category',isEqualTo: 'Formal Wear')
           .where('$sizeFilter',isGreaterThanOrEqualTo: 1)
-          :priceQuery == "0D$sizeFilter"?
+          :priceQuery == "0DS$sizeFilter"?
       FirebaseFirestore.instance.collectionGroup('userProducts')
           .orderBy('timestamp',descending: true)
           .where('Gender',isEqualTo: 'Men')

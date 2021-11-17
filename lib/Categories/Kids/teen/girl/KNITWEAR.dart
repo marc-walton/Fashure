@@ -175,7 +175,7 @@ class _KidkGTState extends State<KidkGT> {
             .where('Gender',isEqualTo: 'Teen-Girls')
             .where('Category',isEqualTo: 'TGCardigans')
             .where('$sizeFilter',isGreaterThanOrEqualTo: 1)
-            :priceQuery == "0D$sizeFilter"?
+            :priceQuery == "0DS$sizeFilter"?
         FirebaseFirestore.instance.collectionGroup('userProducts')
             .orderBy('timestamp',descending: true)
             .where('Gender',isEqualTo: 'Teen-Girls')
@@ -355,7 +355,7 @@ class _KidkGTState extends State<KidkGT> {
             .where('Gender',isEqualTo: 'Teen-Girls')
              .where('Category',isEqualTo: 'TGKnitted Tops')
             .where('$sizeFilter',isGreaterThanOrEqualTo: 1)
-            :priceQuery == "0D$sizeFilter"?
+            :priceQuery == "0DS$sizeFilter"?
         FirebaseFirestore.instance.collectionGroup('userProducts')
             .orderBy('timestamp',descending: true)
             .where('Gender',isEqualTo: 'Teen-Girls')

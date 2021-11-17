@@ -176,7 +176,7 @@ class _DenimGTState extends State<DenimGT> {
             .where('Gender',isEqualTo: 'Teen-Girls')
             .where('Category',isEqualTo: 'TGDenim Jackets')
             .where('$sizeFilter',isGreaterThanOrEqualTo: 1)
-            :priceQuery == "0D$sizeFilter"?
+            :priceQuery == "0DS$sizeFilter"?
         FirebaseFirestore.instance.collectionGroup('userProducts')
             .orderBy('timestamp',descending: true)
             .where('Gender',isEqualTo: 'Teen-Girls')
@@ -356,7 +356,7 @@ class _DenimGTState extends State<DenimGT> {
             .where('Gender',isEqualTo: 'Teen-Girls')
             .where('Category',isEqualTo: 'TGDenim Shorts')
             .where('$sizeFilter',isGreaterThanOrEqualTo: 1)
-            :priceQuery == "0D$sizeFilter"?
+            :priceQuery == "0DS$sizeFilter"?
         FirebaseFirestore.instance.collectionGroup('userProducts')
             .orderBy('timestamp',descending: true)
             .where('Gender',isEqualTo: 'Teen-Girls')
@@ -531,7 +531,7 @@ class _DenimGTState extends State<DenimGT> {
             .where('Gender',isEqualTo: 'Teen-Girls')
             .where('Category',isEqualTo: 'TGDenim Skirts')
             .where('$sizeFilter',isGreaterThanOrEqualTo: 1)
-            :priceQuery == "0D$sizeFilter"?
+            :priceQuery == "0DS$sizeFilter"?
         FirebaseFirestore.instance.collectionGroup('userProducts')
             .orderBy('timestamp',descending: true)
             .where('Gender',isEqualTo: 'Teen-Girls')
@@ -717,7 +717,7 @@ class _DenimGTState extends State<DenimGT> {
             .where('Gender',isEqualTo: 'Teen-Girls')
             .where('Category',isEqualTo: 'TGSkinny-fit jeans')
             .where('$sizeFilter',isGreaterThanOrEqualTo: 1)
-            :priceQuery == "0D$sizeFilter"?
+            :priceQuery == "0DS$sizeFilter"?
         FirebaseFirestore.instance.collectionGroup('userProducts')
             .orderBy('timestamp',descending: true)
             .where('Gender',isEqualTo: 'Teen-Girls')
@@ -897,7 +897,7 @@ class _DenimGTState extends State<DenimGT> {
             .where('Gender',isEqualTo: 'Teen-Girls')
             .where('Category',isEqualTo: 'TGSlim-fit jeans')
             .where('$sizeFilter',isGreaterThanOrEqualTo: 1)
-            :priceQuery == "0D$sizeFilter"?
+            :priceQuery == "0DS$sizeFilter"?
         FirebaseFirestore.instance.collectionGroup('userProducts')
             .orderBy('timestamp',descending: true)
             .where('Gender',isEqualTo: 'Teen-Girls')
@@ -1077,7 +1077,7 @@ class _DenimGTState extends State<DenimGT> {
             .where('Gender',isEqualTo: 'Teen-Girls')
             .where('Category',isEqualTo: 'TGStraight-fit jeans')
             .where('$sizeFilter',isGreaterThanOrEqualTo: 1)
-            :priceQuery == "0D$sizeFilter"?
+            :priceQuery == "0DS$sizeFilter"?
         FirebaseFirestore.instance.collectionGroup('userProducts')
             .orderBy('timestamp',descending: true)
             .where('Gender',isEqualTo: 'Teen-Girls')

@@ -177,7 +177,7 @@ class _ShortsMState extends State<ShortsM> {
           .where('Gender',isEqualTo: 'Men')
           .where('Category',isEqualTo: 'Bermuda Shorts')
           .where('$sizeFilter',isGreaterThanOrEqualTo: 1)
-          :priceQuery == "0D$sizeFilter"?
+          :priceQuery == "0DS$sizeFilter"?
       FirebaseFirestore.instance.collectionGroup('userProducts')
           .orderBy('timestamp',descending: true)
           .where('Gender',isEqualTo: 'Men')
@@ -359,7 +359,7 @@ class _ShortsMState extends State<ShortsM> {
           .where('Gender',isEqualTo: 'Men')
           .where('Category',isEqualTo: 'Chino Shorts')
           .where('$sizeFilter',isGreaterThanOrEqualTo: 1)
-          :priceQuery == "0D$sizeFilter"?
+          :priceQuery == "0DS$sizeFilter"?
       FirebaseFirestore.instance.collectionGroup('userProducts')
           .orderBy('timestamp',descending: true)
           .where('Gender',isEqualTo: 'Men')
@@ -541,7 +541,7 @@ class _ShortsMState extends State<ShortsM> {
           .where('Gender',isEqualTo: 'Men')
           .where('Category',isEqualTo: 'Tailored Shorts')
           .where('$sizeFilter',isGreaterThanOrEqualTo: 1)
-          :priceQuery == "0D$sizeFilter"?
+          :priceQuery == "0DS$sizeFilter"?
       FirebaseFirestore.instance.collectionGroup('userProducts')
           .orderBy('timestamp',descending: true)
           .where('Gender',isEqualTo: 'Men')
@@ -723,7 +723,7 @@ class _ShortsMState extends State<ShortsM> {
           .where('Gender',isEqualTo: 'Men')
           .where('Category',isEqualTo: 'Sports Shorts')
           .where('$sizeFilter',isGreaterThanOrEqualTo: 1)
-          :priceQuery == "0D$sizeFilter"?
+          :priceQuery == "0DS$sizeFilter"?
       FirebaseFirestore.instance.collectionGroup('userProducts')
           .orderBy('timestamp',descending: true)
           .where('Gender',isEqualTo: 'Men')
@@ -905,7 +905,7 @@ class _ShortsMState extends State<ShortsM> {
           .where('Gender',isEqualTo: 'Men')
           .where('Category',isEqualTo: 'Cargo Shorts')
           .where('$sizeFilter',isGreaterThanOrEqualTo: 1)
-          :priceQuery == "0D$sizeFilter"?
+          :priceQuery == "0DS$sizeFilter"?
       FirebaseFirestore.instance.collectionGroup('userProducts')
           .orderBy('timestamp',descending: true)
           .where('Gender',isEqualTo: 'Men')
