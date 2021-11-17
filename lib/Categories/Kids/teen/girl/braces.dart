@@ -143,7 +143,7 @@ class _BracesTGState extends State<BracesTG> {
             .where('Gender',isEqualTo: 'Teen-Girls')
             .where('Category',isEqualTo: 'TGBraces')
             .where('country',isEqualTo: '${currentUser.country}')
-            :priceQuery == "0$sizeFilter"?
+            :priceQuery == "0S$sizeFilter"?
         FirebaseFirestore.instance.collectionGroup('userProducts')
             .orderBy('timestamp',descending: true)
             .where('Gender',isEqualTo: 'Teen-Girls')
@@ -323,7 +323,7 @@ class _BracesTGState extends State<BracesTG> {
             .where('Gender',isEqualTo: 'Teen-Girls')
             .where('Category',isEqualTo: 'TGBelts')
             .where('country',isEqualTo: '${currentUser.country}')
-            :priceQuery == "0$sizeFilter"?
+            :priceQuery == "0S$sizeFilter"?
         FirebaseFirestore.instance.collectionGroup('userProducts')
             .orderBy('timestamp',descending: true)
             .where('Gender',isEqualTo: 'Teen-Girls')

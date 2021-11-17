@@ -318,7 +318,7 @@ class _HairTGState extends State<HairTG> {
             .where('Gender',isEqualTo: 'Teen-Girls')
             .where('Category',isEqualTo: 'TGHair Clips')
             .where('country',isEqualTo: '${currentUser.country}')
-            :priceQuery == "0$sizeFilter"?
+            :priceQuery == "0S$sizeFilter"?
         FirebaseFirestore.instance.collectionGroup('userProducts')
             .orderBy('timestamp',descending: true)
             .where('Gender',isEqualTo: 'Teen-Girls')
@@ -331,7 +331,7 @@ class _HairTGState extends State<HairTG> {
             .where('Gender',isEqualTo: 'Teen-Girls')
             .where('Category',isEqualTo: 'TGHair Clips')
             .where('country',isEqualTo: '${currentUser.country}')
-            :priceQuery == "0$sizeFilter"?
+            :priceQuery == "0S$sizeFilter"?
         FirebaseFirestore.instance.collectionGroup('userProducts')
             .orderBy('timestamp',descending: true)
             .where('Gender',isEqualTo: 'Teen-Girls')

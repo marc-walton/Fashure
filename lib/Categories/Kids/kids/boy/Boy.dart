@@ -167,7 +167,7 @@ class _KidBoyState extends State<KidBoy>  with  TickerProviderStateMixin {
            .where('Gender',isEqualTo: 'Kids-Boys')
           
           .where('country',isEqualTo: '${currentUser.country}')
-          :priceQuery == "0$sizeFilter"?
+          :priceQuery == "0S$sizeFilter"?
       FirebaseFirestore.instance.collectionGroup('userProducts')
           .orderBy('timestamp',descending: true)
           .where('Gender',isEqualTo: 'Kids-Boys')

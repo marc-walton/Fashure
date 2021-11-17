@@ -143,7 +143,7 @@ class _TrouserTMState extends State<TrouserTM> {
             .where('Gender',isEqualTo: 'Teen-Boys')
             .where('Category',isEqualTo: 'TBChinos')
             .where('country',isEqualTo: '${currentUser.country}')
-            :priceQuery == "0$sizeFilter"?
+            :priceQuery == "0S$sizeFilter"?
         FirebaseFirestore.instance.collectionGroup('userProducts')
             .orderBy('timestamp',descending: true)
             .where('Gender',isEqualTo: 'Teen-Boys')
@@ -323,7 +323,7 @@ class _TrouserTMState extends State<TrouserTM> {
             .where('Gender',isEqualTo: 'Teen-Boys')
             .where('Category',isEqualTo: 'TBSkinny-fit Trousers')
             .where('country',isEqualTo: '${currentUser.country}')
-            :priceQuery == "0$sizeFilter"?
+            :priceQuery == "0S$sizeFilter"?
         FirebaseFirestore.instance.collectionGroup('userProducts')
             .orderBy('timestamp',descending: true)
             .where('Gender',isEqualTo: 'Teen-Boys')
@@ -503,7 +503,7 @@ class _TrouserTMState extends State<TrouserTM> {
             .where('Gender',isEqualTo: 'Teen-Boys')
             .where('Category',isEqualTo: 'TBSlim-fit Trousers')
             .where('country',isEqualTo: '${currentUser.country}')
-            :priceQuery == "0$sizeFilter"?
+            :priceQuery == "0S$sizeFilter"?
         FirebaseFirestore.instance.collectionGroup('userProducts')
             .orderBy('timestamp',descending: true)
             .where('Gender',isEqualTo: 'Teen-Boys')
@@ -683,7 +683,7 @@ class _TrouserTMState extends State<TrouserTM> {
             .where('Gender',isEqualTo: 'Teen-Boys')
             .where('Category',isEqualTo: 'TBRegular-fit Trousers')
             .where('country',isEqualTo: '${currentUser.country}')
-            :priceQuery == "0$sizeFilter"?
+            :priceQuery == "0S$sizeFilter"?
         FirebaseFirestore.instance.collectionGroup('userProducts')
             .orderBy('timestamp',descending: true)
             .where('Gender',isEqualTo: 'Teen-Boys')
@@ -863,7 +863,7 @@ class _TrouserTMState extends State<TrouserTM> {
             .where('Gender',isEqualTo: 'Teen-Boys')
             .where('Category',isEqualTo: 'TBSweatpants')
             .where('country',isEqualTo: '${currentUser.country}')
-            :priceQuery == "0$sizeFilter"?
+            :priceQuery == "0S$sizeFilter"?
         FirebaseFirestore.instance.collectionGroup('userProducts')
             .orderBy('timestamp',descending: true)
             .where('Gender',isEqualTo: 'Teen-Boys')
@@ -1043,7 +1043,7 @@ class _TrouserTMState extends State<TrouserTM> {
             .where('Gender',isEqualTo: 'Teen-Boys')
             .where('Category',isEqualTo: 'TBTailored Trousers')
             .where('country',isEqualTo: '${currentUser.country}')
-            :priceQuery == "0$sizeFilter"?
+            :priceQuery == "0S$sizeFilter"?
         FirebaseFirestore.instance.collectionGroup('userProducts')
             .orderBy('timestamp',descending: true)
             .where('Gender',isEqualTo: 'Teen-Boys')

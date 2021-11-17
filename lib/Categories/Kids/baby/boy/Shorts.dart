@@ -142,7 +142,7 @@ class _BabyshBState extends State<BabyshB> {
           .where('Gender',isEqualTo: 'Baby-Boys')
          .where('Category',isEqualTo: 'BBCasual Shorts')
           .where('country',isEqualTo: '${currentUser.country}')
-          :priceQuery == "0$sizeFilter"?
+          :priceQuery == "0S$sizeFilter"?
       FirebaseFirestore.instance.collectionGroup('userProducts')
           .orderBy('timestamp',descending: true)
           .where('Gender',isEqualTo: 'Baby-Boys')
@@ -322,7 +322,7 @@ class _BabyshBState extends State<BabyshB> {
           .where('Gender',isEqualTo: 'Baby-Boys')
           .where('Category',isEqualTo: 'BBDenim Shorts')
           .where('country',isEqualTo: '${currentUser.country}')
-          :priceQuery == "0$sizeFilter"?
+          :priceQuery == "0S$sizeFilter"?
       FirebaseFirestore.instance.collectionGroup('userProducts')
           .orderBy('timestamp',descending: true)
           .where('Gender',isEqualTo: 'Baby-Boys')
@@ -502,7 +502,7 @@ class _BabyshBState extends State<BabyshB> {
           .where('Gender',isEqualTo: 'Baby-Boys')
           .where('Category',isEqualTo: 'BBShort Sets')
           .where('country',isEqualTo: '${currentUser.country}')
-          :priceQuery == "0$sizeFilter"?
+          :priceQuery == "0S$sizeFilter"?
       FirebaseFirestore.instance.collectionGroup('userProducts')
           .orderBy('timestamp',descending: true)
           .where('Gender',isEqualTo: 'Baby-Boys')

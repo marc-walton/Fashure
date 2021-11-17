@@ -144,7 +144,7 @@ class _TiesState extends State<Ties> {
           .where('Gender',isEqualTo: 'Men')
           .where('Category',isEqualTo: 'Ties')
           .where('country',isEqualTo: '${currentUser.country}')
-          :priceQuery == "0$sizeFilter"?
+          :priceQuery == "0S$sizeFilter"?
       FirebaseFirestore.instance.collectionGroup('userProducts')
           .orderBy('timestamp',descending: true)
           .where('Gender',isEqualTo: 'Men')
@@ -327,7 +327,7 @@ class _TiesState extends State<Ties> {
            .where('Gender',isEqualTo: 'Men')
           .where('Category',isEqualTo: 'Bow Ties')
           .where('country',isEqualTo: '${currentUser.country}')
-          :priceQuery == "0$sizeFilter"?
+          :priceQuery == "0S$sizeFilter"?
       FirebaseFirestore.instance.collectionGroup('userProducts')
           .orderBy('timestamp',descending: true)
           .where('Gender',isEqualTo: 'Men')

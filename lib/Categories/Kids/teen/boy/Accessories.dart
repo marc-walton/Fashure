@@ -202,7 +202,7 @@ class _AccessBTState extends State<AccessBT> {
 
             .where('country',isEqualTo: '${currentUser.country}')
             .where('$sizeFilter',isGreaterThanOrEqualTo: 1)
-            :priceQuery == "0$sizeFilter"?
+            :priceQuery == "0S$sizeFilter"?
         FirebaseFirestore.instance.collectionGroup('userProducts')
             .orderBy('timestamp',descending: true)
              .where('Gender',isEqualTo: 'Teen-Boys')
@@ -383,7 +383,7 @@ class _AccessBTState extends State<AccessBT> {
 
             .where('country',isEqualTo: '${currentUser.country}')
             .where('$sizeFilter',isGreaterThanOrEqualTo: 1)
-            :priceQuery == "0$sizeFilter"?
+            :priceQuery == "0S$sizeFilter"?
         FirebaseFirestore.instance.collectionGroup('userProducts')
             .orderBy('timestamp',descending: true)
             .where('Gender',isEqualTo: 'Teen-Boys')
@@ -564,7 +564,7 @@ class _AccessBTState extends State<AccessBT> {
 
             .where('country',isEqualTo: '${currentUser.country}')
             .where('$sizeFilter',isGreaterThanOrEqualTo: 1)
-            :priceQuery == "0$sizeFilter"?
+            :priceQuery == "0S$sizeFilter"?
         FirebaseFirestore.instance.collectionGroup('userProducts')
             .orderBy('timestamp',descending: true)
             .where('Gender',isEqualTo: 'Teen-Boys')
@@ -745,7 +745,7 @@ class _AccessBTState extends State<AccessBT> {
 
             .where('country',isEqualTo: '${currentUser.country}')
             .where('$sizeFilter',isGreaterThanOrEqualTo: 1)
-            :priceQuery == "0$sizeFilter"?
+            :priceQuery == "0S$sizeFilter"?
         FirebaseFirestore.instance.collectionGroup('userProducts')
             .orderBy('timestamp',descending: true)
              .where('Gender',isEqualTo: 'Teen-Boys')

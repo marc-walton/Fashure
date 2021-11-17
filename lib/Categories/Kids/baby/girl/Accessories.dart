@@ -143,7 +143,7 @@ class _BabyAcGState extends State<BabyAcG> {
          .where('Gender',isEqualTo: 'Baby-Girls')
           .where('Category',isEqualTo: 'GGScarves')
           .where('country',isEqualTo: '${currentUser.country}')
-          :priceQuery == "0$sizeFilter"?
+          :priceQuery == "0S$sizeFilter"?
       FirebaseFirestore.instance.collectionGroup('userProducts')
           .orderBy('timestamp',descending: true)
           .where('Gender',isEqualTo: 'Baby-Girls')
@@ -323,7 +323,7 @@ class _BabyAcGState extends State<BabyAcG> {
          .where('Gender',isEqualTo: 'Baby-Girls')
           .where('Category',isEqualTo: 'GGGloves')
           .where('country',isEqualTo: '${currentUser.country}')
-          :priceQuery == "0$sizeFilter"?
+          :priceQuery == "0S$sizeFilter"?
       FirebaseFirestore.instance.collectionGroup('userProducts')
           .orderBy('timestamp',descending: true)
           .where('Gender',isEqualTo: 'Baby-Girls')
@@ -503,7 +503,7 @@ class _BabyAcGState extends State<BabyAcG> {
          .where('Gender',isEqualTo: 'Baby-Girls')
           .where('Category',isEqualTo: 'GGSocks')
           .where('country',isEqualTo: '${currentUser.country}')
-          :priceQuery == "0$sizeFilter"?
+          :priceQuery == "0S$sizeFilter"?
       FirebaseFirestore.instance.collectionGroup('userProducts')
           .orderBy('timestamp',descending: true)
           .where('Gender',isEqualTo: 'Baby-Girls')
@@ -683,7 +683,7 @@ class _BabyAcGState extends State<BabyAcG> {
          .where('Gender',isEqualTo: 'Baby-Girls')
           .where('Category',isEqualTo: 'GGTravel')
           .where('country',isEqualTo: '${currentUser.country}')
-          :priceQuery == "0$sizeFilter"?
+          :priceQuery == "0S$sizeFilter"?
       FirebaseFirestore.instance.collectionGroup('userProducts')
           .orderBy('timestamp',descending: true)
           .where('Gender',isEqualTo: 'Baby-Girls')

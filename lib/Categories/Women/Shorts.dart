@@ -141,7 +141,7 @@ class _ShortsWState extends State<ShortsW> {
           .where('Gender',isEqualTo: 'Women')
           .where('Category',isEqualTo: 'WShort-length')
           .where('country',isEqualTo: '${currentUser.country}')
-          :priceQuery == "0D$sizeFilter"?
+          :priceQuery == "0S$sizeFilter"?
       FirebaseFirestore.instance.collectionGroup('userProducts')
           .orderBy('timestamp',descending: true)
           .where('Gender',isEqualTo: 'Women')
@@ -323,7 +323,7 @@ class _ShortsWState extends State<ShortsW> {
           .where('Gender',isEqualTo: 'Women')
           .where('Category',isEqualTo: 'WKnee-length')
           .where('country',isEqualTo: '${currentUser.country}')
-          :priceQuery == "0D$sizeFilter"?
+          :priceQuery == "0S$sizeFilter"?
       FirebaseFirestore.instance.collectionGroup('userProducts')
           .orderBy('timestamp',descending: true)
           .where('Gender',isEqualTo: 'Women')
@@ -505,7 +505,7 @@ class _ShortsWState extends State<ShortsW> {
           .where('Gender',isEqualTo: 'Women')
            .where('Category',isEqualTo: 'WSports Shorts')
           .where('country',isEqualTo: '${currentUser.country}')
-          :priceQuery == "0D$sizeFilter"?
+          :priceQuery == "0S$sizeFilter"?
       FirebaseFirestore.instance.collectionGroup('userProducts')
           .orderBy('timestamp',descending: true)
           .where('Gender',isEqualTo: 'Women')

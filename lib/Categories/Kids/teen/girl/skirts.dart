@@ -142,7 +142,7 @@ class _KidskGTState extends State<KidskGT> {
             .where('Gender',isEqualTo: 'Teen-Girls')
             .where('Category',isEqualTo: 'TGCasual Skirts')
             .where('country',isEqualTo: '${currentUser.country}')
-            :priceQuery == "0$sizeFilter"?
+            :priceQuery == "0S$sizeFilter"?
         FirebaseFirestore.instance.collectionGroup('userProducts')
             .orderBy('timestamp',descending: true)
             .where('Gender',isEqualTo: 'Teen-Girls')
@@ -322,7 +322,7 @@ class _KidskGTState extends State<KidskGT> {
             .where('Gender',isEqualTo: 'Teen-Girls')
            .where('Category',isEqualTo: 'TGParty wear')
             .where('country',isEqualTo: '${currentUser.country}')
-            :priceQuery == "0$sizeFilter"?
+            :priceQuery == "0S$sizeFilter"?
         FirebaseFirestore.instance.collectionGroup('userProducts')
             .orderBy('timestamp',descending: true)
             .where('Gender',isEqualTo: 'Teen-Girls')
@@ -502,7 +502,7 @@ class _KidskGTState extends State<KidskGT> {
             .where('Gender',isEqualTo: 'Teen-Girls')
            .where('Category',isEqualTo: 'TGTutu Skirts')
             .where('country',isEqualTo: '${currentUser.country}')
-            :priceQuery == "0$sizeFilter"?
+            :priceQuery == "0S$sizeFilter"?
         FirebaseFirestore.instance.collectionGroup('userProducts')
             .orderBy('timestamp',descending: true)
             .where('Gender',isEqualTo: 'Teen-Girls')
@@ -682,7 +682,7 @@ class _KidskGTState extends State<KidskGT> {
             .where('Gender',isEqualTo: 'Teen-Girls')
            .where('Category',isEqualTo: 'TGDenim Skirts')
             .where('country',isEqualTo: '${currentUser.country}')
-            :priceQuery == "0$sizeFilter"?
+            :priceQuery == "0S$sizeFilter"?
         FirebaseFirestore.instance.collectionGroup('userProducts')
             .orderBy('timestamp',descending: true)
             .where('Gender',isEqualTo: 'Teen-Girls')
@@ -862,7 +862,7 @@ class _KidskGTState extends State<KidskGT> {
             .where('Gender',isEqualTo: 'Teen-Girls')
            .where('Category',isEqualTo: 'TGSkirt Sets')
             .where('country',isEqualTo: '${currentUser.country}')
-            :priceQuery == "0$sizeFilter"?
+            :priceQuery == "0S$sizeFilter"?
         FirebaseFirestore.instance.collectionGroup('userProducts')
             .orderBy('timestamp',descending: true)
             .where('Gender',isEqualTo: 'Teen-Girls')

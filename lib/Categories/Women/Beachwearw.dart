@@ -858,7 +858,7 @@ class _BeachwearWState extends State<BeachwearW> {
           .where('Gender',isEqualTo: 'Women')
           .where('Category',isEqualTo: 'WBAccessories')
           .where('country',isEqualTo: '${currentUser.country}')
-          :priceQuery == "0$sizeFilter"?
+          :priceQuery == "0S$sizeFilter"?
       FirebaseFirestore.instance.collectionGroup('userProducts')
           .orderBy('timestamp',descending: true)
           .where('Gender',isEqualTo: 'Women')

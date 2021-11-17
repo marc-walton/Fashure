@@ -169,7 +169,7 @@ height: MediaQuery.of(context).size.height,
           .where('Gender',isEqualTo: 'Men')
           .where('Category',isEqualTo: 'Backpacks')
           .where('country',isEqualTo: '${currentUser.country}')
-          :priceQuery == "0$sizeFilter"?
+          :priceQuery == "0S$sizeFilter"?
       FirebaseFirestore.instance.collectionGroup('userProducts')
           .orderBy('timestamp',descending: true)
           .where('Gender',isEqualTo: 'Men')
@@ -366,7 +366,7 @@ height: MediaQuery.of(context).size.height,
           .where('Gender',isEqualTo: 'Men')
           .where('Category',isEqualTo: 'Briefcase')
           .where('country',isEqualTo: '${currentUser.country}')
-          :priceQuery == "0$sizeFilter"?
+          :priceQuery == "0S$sizeFilter"?
       FirebaseFirestore.instance.collectionGroup('userProducts')
           .orderBy('timestamp',descending: true)
           .where('Gender',isEqualTo: 'Men')
@@ -562,7 +562,7 @@ height: MediaQuery.of(context).size.height,
           .where('Gender',isEqualTo: 'Men')
           .where('Category',isEqualTo: 'Laptop Bags')
           .where('country',isEqualTo: '${currentUser.country}')
-          :priceQuery == "0$sizeFilter"?
+          :priceQuery == "0S$sizeFilter"?
       FirebaseFirestore.instance.collectionGroup('userProducts')
           .orderBy('timestamp',descending: true)
           .where('Gender',isEqualTo: 'Men')
@@ -758,7 +758,7 @@ height: MediaQuery.of(context).size.height,
           .where('Gender',isEqualTo: 'Men')
           .where('Category',isEqualTo: 'Shoulder Bags')
           .where('country',isEqualTo: '${currentUser.country}')
-          :priceQuery == "0$sizeFilter"?
+          :priceQuery == "0S$sizeFilter"?
       FirebaseFirestore.instance.collectionGroup('userProducts')
           .orderBy('timestamp',descending: true)
           .where('Gender',isEqualTo: 'Men')
@@ -954,7 +954,7 @@ height: MediaQuery.of(context).size.height,
           .where('Gender',isEqualTo: 'Men')
           .where('Category',isEqualTo: 'Duffle bags & holdall')
           .where('country',isEqualTo: '${currentUser.country}')
-          :priceQuery == "0$sizeFilter"?
+          :priceQuery == "0S$sizeFilter"?
       FirebaseFirestore.instance.collectionGroup('userProducts')
           .orderBy('timestamp',descending: true)
           .where('Gender',isEqualTo: 'Men')
@@ -1150,7 +1150,7 @@ height: MediaQuery.of(context).size.height,
           .where('Gender',isEqualTo: 'Men')
           .where('Category',isEqualTo: 'Belt Bags')
           .where('country',isEqualTo: '${currentUser.country}')
-          :priceQuery == "0$sizeFilter"?
+          :priceQuery == "0S$sizeFilter"?
       FirebaseFirestore.instance.collectionGroup('userProducts')
           .orderBy('timestamp',descending: true)
           .where('Gender',isEqualTo: 'Men')
@@ -1346,7 +1346,7 @@ height: MediaQuery.of(context).size.height,
           .where('Gender',isEqualTo: 'Men')
           .where('Category',isEqualTo: 'Clutch Bags')
           .where('country',isEqualTo: '${currentUser.country}')
-          :priceQuery == "0$sizeFilter"?
+          :priceQuery == "0S$sizeFilter"?
       FirebaseFirestore.instance.collectionGroup('userProducts')
           .orderBy('timestamp',descending: true)
           .where('Gender',isEqualTo: 'Men')
@@ -1542,7 +1542,7 @@ height: MediaQuery.of(context).size.height,
           .where('Gender',isEqualTo: 'Men')
           .where('Category',isEqualTo: 'Messenger Bags')
           .where('country',isEqualTo: '${currentUser.country}')
-          :priceQuery == "0$sizeFilter"?
+          :priceQuery == "0S$sizeFilter"?
       FirebaseFirestore.instance.collectionGroup('userProducts')
           .orderBy('timestamp',descending: true)
           .where('Gender',isEqualTo: 'Men')
@@ -1738,7 +1738,7 @@ height: MediaQuery.of(context).size.height,
           .where('Gender',isEqualTo: 'Men')
           .where('Category',isEqualTo: 'Tote Bags')
           .where('country',isEqualTo: '${currentUser.country}')
-          :priceQuery == "0$sizeFilter"?
+          :priceQuery == "0S$sizeFilter"?
       FirebaseFirestore.instance.collectionGroup('userProducts')
           .orderBy('timestamp',descending: true)
           .where('Gender',isEqualTo: 'Men')
@@ -1934,7 +1934,7 @@ height: MediaQuery.of(context).size.height,
           .where('Gender',isEqualTo: 'Men')
           .where('Category',isEqualTo: 'Luggage')
           .where('country',isEqualTo: '${currentUser.country}')
-          :priceQuery == "0$sizeFilter"?
+          :priceQuery == "0S$sizeFilter"?
       FirebaseFirestore.instance.collectionGroup('userProducts')
           .orderBy('timestamp',descending: true)
           .where('Gender',isEqualTo: 'Men')

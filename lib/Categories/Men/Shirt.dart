@@ -142,7 +142,7 @@ class _ShirtMState extends State<ShirtM> {
           .where('Gender',isEqualTo: 'Men')
           .where('Category',isEqualTo: 'Casual Wear')
           .where('country',isEqualTo: '${currentUser.country}')
-          :priceQuery == "0$sizeFilter"?
+          :priceQuery == "0S$sizeFilter"?
       FirebaseFirestore.instance.collectionGroup('userProducts')
           .orderBy('timestamp',descending: true)
           .where('Gender',isEqualTo: 'Men')
@@ -324,7 +324,7 @@ FirebaseFirestore.instance.collectionGroup('userProducts')
           .where('Gender',isEqualTo: 'Men')
           .where('Category',isEqualTo: 'Formal Wear')
           .where('country',isEqualTo: '${currentUser.country}')
-          :priceQuery == "0$sizeFilter"?
+          :priceQuery == "0S$sizeFilter"?
       FirebaseFirestore.instance.collectionGroup('userProducts')
           .orderBy('timestamp',descending: true)
           .where('Gender',isEqualTo: 'Men')

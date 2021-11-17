@@ -243,7 +243,12 @@ height: MediaQuery.of(context).size.height,
           .where('Gender',isEqualTo: 'Men')
 
           .where('country',isEqualTo: '${currentUser.country}')
-          .where('$sizeFilter',isGreaterThanOrEqualTo: 1) :
+          .where('$sizeFilter',isGreaterThanOrEqualTo: 1)
+          :priceQuery == "0S$sizeFilter"?
+      FirebaseFirestore.instance.collectionGroup('userProducts')
+          .orderBy('timestamp',descending: true)
+          .where('Gender',isEqualTo: 'Men')
+          .where('$sizeFilter',isGreaterThanOrEqualTo: 1):
 
       FirebaseFirestore.instance.collectionGroup('userProducts')
           .orderBy('timestamp',descending: true)

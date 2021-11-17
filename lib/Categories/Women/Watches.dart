@@ -164,7 +164,7 @@ class _WatchesWState extends State<WatchesW> {
           .where('Gender',isEqualTo: 'Women')
           .where('Category',isEqualTo: 'WChronograph Watches')
           .where('$sizeFilter',isGreaterThanOrEqualTo: 1)
-          :priceQuery == "0$sizeFilter"?
+          :priceQuery == "0S$sizeFilter"?
       FirebaseFirestore.instance.collectionGroup('userProducts')
           .orderBy('timestamp',descending: true)
            .where('Gender',isEqualTo: 'Women')
@@ -378,7 +378,7 @@ class _WatchesWState extends State<WatchesW> {
 
           .where('country',isEqualTo: '${currentUser.country}')
           .where('$sizeFilter',isGreaterThanOrEqualTo: 1)
-          :priceQuery == "0$sizeFilter"?
+          :priceQuery == "0S$sizeFilter"?
       FirebaseFirestore.instance.collectionGroup('userProducts')
           .orderBy('timestamp',descending: true)
           .where('Gender',isEqualTo: 'Women')
@@ -504,7 +504,7 @@ class _WatchesWState extends State<WatchesW> {
           .where('Gender',isEqualTo: 'Women')
           .where('Category',isEqualTo: 'WSports & Smart Watches')
           .where('country',isEqualTo: '${currentUser.country}')
-          :priceQuery == "0$sizeFilter"?
+          :priceQuery == "0S$sizeFilter"?
       FirebaseFirestore.instance.collectionGroup('userProducts')
           .orderBy('timestamp',descending: true)
            .where('Gender',isEqualTo: 'Women')
@@ -684,7 +684,7 @@ class _WatchesWState extends State<WatchesW> {
           .where('Gender',isEqualTo: 'Women')
           .where('Category',isEqualTo: 'WHybrid')
           .where('country',isEqualTo: '${currentUser.country}')
-          :priceQuery == "0$sizeFilter"?
+          :priceQuery == "0S$sizeFilter"?
       FirebaseFirestore.instance.collectionGroup('userProducts')
           .orderBy('timestamp',descending: true)
            .where('Gender',isEqualTo: 'Women')
