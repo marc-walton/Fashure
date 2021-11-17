@@ -147,7 +147,14 @@ class _TrouserMState extends State<TrouserM> {
            .where('Gender',isEqualTo: 'Men')
           .where('Category',isEqualTo: 'Skinny fit')
           .where('country',isEqualTo: '${currentUser.country}')
+          :priceQuery == "0$sizeFilter"?
+      FirebaseFirestore.instance.collectionGroup('userProducts')
+          .orderBy('timestamp',descending: true)
+          .where('Gender',isEqualTo: 'Men')
+          .where('Category',isEqualTo: 'Skinny fit')
 
+          .where('country',isEqualTo: '${currentUser.country}')
+          .where('$sizeFilter',isGreaterThanOrEqualTo: 1)
           :priceQuery == "lowD"?
       FirebaseFirestore.instance.collectionGroup('userProducts')
           .orderBy('round',descending: false)
@@ -322,7 +329,14 @@ class _TrouserMState extends State<TrouserM> {
           .where('Gender',isEqualTo: 'Men')
           .where('Category',isEqualTo: 'Slim fit')
           .where('country',isEqualTo: '${currentUser.country}')
+          :priceQuery == "0$sizeFilter"?
+      FirebaseFirestore.instance.collectionGroup('userProducts')
+          .orderBy('timestamp',descending: true)
+          .where('Gender',isEqualTo: 'Men')
+          .where('Category',isEqualTo: 'Slim fit')
 
+          .where('country',isEqualTo: '${currentUser.country}')
+          .where('$sizeFilter',isGreaterThanOrEqualTo: 1)
           :priceQuery == "lowD"?
       FirebaseFirestore.instance.collectionGroup('userProducts')
           .orderBy('round',descending: false)
@@ -497,7 +511,14 @@ class _TrouserMState extends State<TrouserM> {
            .where('Gender',isEqualTo: 'Men')
           .where('Category',isEqualTo: 'Tapered fit')
           .where('country',isEqualTo: '${currentUser.country}')
+          :priceQuery == "0$sizeFilter"?
+      FirebaseFirestore.instance.collectionGroup('userProducts')
+          .orderBy('timestamp',descending: true)
+          .where('Gender',isEqualTo: 'Men')
+           .where('Category',isEqualTo: 'Tapered fit')
 
+          .where('country',isEqualTo: '${currentUser.country}')
+          .where('$sizeFilter',isGreaterThanOrEqualTo: 1)
           :priceQuery == "lowD"?
       FirebaseFirestore.instance.collectionGroup('userProducts')
           .orderBy('round',descending: false)
@@ -672,7 +693,14 @@ class _TrouserMState extends State<TrouserM> {
            .where('Gender',isEqualTo: 'Men')
           .where('Category',isEqualTo: 'Regular fit')
           .where('country',isEqualTo: '${currentUser.country}')
+          :priceQuery == "0$sizeFilter"?
+      FirebaseFirestore.instance.collectionGroup('userProducts')
+          .orderBy('timestamp',descending: true)
+          .where('Gender',isEqualTo: 'Men')
+           .where('Category',isEqualTo: 'Regular fit')
 
+          .where('country',isEqualTo: '${currentUser.country}')
+          .where('$sizeFilter',isGreaterThanOrEqualTo: 1)
           :priceQuery == "lowD"?
       FirebaseFirestore.instance.collectionGroup('userProducts')
           .orderBy('round',descending: false)
@@ -847,7 +875,14 @@ class _TrouserMState extends State<TrouserM> {
           .where('Gender',isEqualTo: 'Men')
           .where('Category',isEqualTo: 'Tailored Trousers')
           .where('country',isEqualTo: '${currentUser.country}')
+          :priceQuery == "0$sizeFilter"?
+      FirebaseFirestore.instance.collectionGroup('userProducts')
+          .orderBy('timestamp',descending: true)
+          .where('Gender',isEqualTo: 'Men')
+           .where('Category',isEqualTo: 'Tailored Trousers')
 
+          .where('country',isEqualTo: '${currentUser.country}')
+          .where('$sizeFilter',isGreaterThanOrEqualTo: 1)
           :priceQuery == "lowD"?
       FirebaseFirestore.instance.collectionGroup('userProducts')
           .orderBy('round',descending: false)
@@ -1022,7 +1057,14 @@ class _TrouserMState extends State<TrouserM> {
            .where('Gender',isEqualTo: 'Men')
           .where('Category',isEqualTo: 'Cargo pants')
           .where('country',isEqualTo: '${currentUser.country}')
+          :priceQuery == "0$sizeFilter"?
+      FirebaseFirestore.instance.collectionGroup('userProducts')
+          .orderBy('timestamp',descending: true)
+          .where('Gender',isEqualTo: 'Men')
+          .where('Category',isEqualTo: 'Cargo pants')
 
+          .where('country',isEqualTo: '${currentUser.country}')
+          .where('$sizeFilter',isGreaterThanOrEqualTo: 1)
           :priceQuery == "lowD"?
       FirebaseFirestore.instance.collectionGroup('userProducts')
           .orderBy('round',descending: false)
@@ -1197,7 +1239,14 @@ class _TrouserMState extends State<TrouserM> {
            .where('Gender',isEqualTo: 'Men')
           .where('Category',isEqualTo: 'Chinos')
           .where('country',isEqualTo: '${currentUser.country}')
+          :priceQuery == "0$sizeFilter"?
+      FirebaseFirestore.instance.collectionGroup('userProducts')
+          .orderBy('timestamp',descending: true)
+          .where('Gender',isEqualTo: 'Men')
+          .where('Category',isEqualTo: 'Chinos')
 
+          .where('country',isEqualTo: '${currentUser.country}')
+          .where('$sizeFilter',isGreaterThanOrEqualTo: 1)
           :priceQuery == "lowD"?
       FirebaseFirestore.instance.collectionGroup('userProducts')
           .orderBy('round',descending: false)
@@ -1372,7 +1421,14 @@ class _TrouserMState extends State<TrouserM> {
           .where('Gender',isEqualTo: 'Men')
           .where('Category',isEqualTo: 'Sweatpants')
           .where('country',isEqualTo: '${currentUser.country}')
+          :priceQuery == "0$sizeFilter"?
+      FirebaseFirestore.instance.collectionGroup('userProducts')
+          .orderBy('timestamp',descending: true)
+          .where('Gender',isEqualTo: 'Men')
+           .where('Category',isEqualTo: 'Sweatpants')
 
+          .where('country',isEqualTo: '${currentUser.country}')
+          .where('$sizeFilter',isGreaterThanOrEqualTo: 1)
           :priceQuery == "lowD"?
       FirebaseFirestore.instance.collectionGroup('userProducts')
           .orderBy('round',descending: false)

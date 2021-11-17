@@ -148,7 +148,54 @@ class _GroomingMState extends State<GroomingM> {
           .where('Gender',isEqualTo: 'Men')
           .where('Category',isEqualTo: 'Fragrance')
           .where('country',isEqualTo: '${currentUser.country}')
+          :priceQuery == "0$sizeFilter"?
+      FirebaseFirestore.instance.collectionGroup('userProducts')
+          .orderBy('timestamp',descending: true)
+          .where('Gender',isEqualTo: 'Men')
+          .where('Category',isEqualTo: 'Fragrance')
 
+          .where('country',isEqualTo: '${currentUser.country}')
+          .where('$sizeFilter',isGreaterThanOrEqualTo: 1)
+          :priceQuery == "low$sizeFilter"?
+      FirebaseFirestore.instance.collectionGroup('userProducts')
+          .orderBy('round',descending: false)
+          .orderBy('timestamp',descending: true)
+          .where('Gender',isEqualTo: 'Men')
+          .where('Category',isEqualTo: 'Fragrance')
+          .where('$sizeFilter',isGreaterThanOrEqualTo: 1):
+      priceQuery == "high$sizeFilter"?
+      FirebaseFirestore.instance.collectionGroup('userProducts')
+          .orderBy('round',descending: true)
+          .orderBy('timestamp',descending: true)
+          .where('Gender',isEqualTo: 'Men')
+          .where('Category',isEqualTo: 'Fragrance')
+          .where('$sizeFilter',isGreaterThanOrEqualTo: 1)
+          :priceQuery == "0D$sizeFilter"?
+      FirebaseFirestore.instance.collectionGroup('userProducts')
+          .orderBy('timestamp',descending: true)
+          .where('Gender',isEqualTo: 'Men')
+          .where('Category',isEqualTo: 'Fragrance')
+
+          .where('country',isEqualTo: '${currentUser.country}')
+          .where('$sizeFilter',isGreaterThanOrEqualTo: 1)
+          :priceQuery == "lowD$sizeFilter"?
+      FirebaseFirestore.instance.collectionGroup('userProducts')
+          .orderBy('round',descending: false)
+          .orderBy('timestamp',descending: true)
+          .where('Gender',isEqualTo: 'Men')
+          .where('Category',isEqualTo: 'Fragrance')
+
+          .where('country',isEqualTo: '${currentUser.country}')
+          .where('$sizeFilter',isGreaterThanOrEqualTo: 1)
+          :priceQuery == "highD$sizeFilter"?
+      FirebaseFirestore.instance.collectionGroup('userProducts')
+          .orderBy('round',descending: true)
+          .orderBy('timestamp',descending: true)
+          .where('Gender',isEqualTo: 'Men')
+          .where('Category',isEqualTo: 'Fragrance')
+
+          .where('country',isEqualTo: '${currentUser.country}')
+          .where('$sizeFilter',isGreaterThanOrEqualTo: 1)
           :priceQuery == "lowD"?
       FirebaseFirestore.instance.collectionGroup('userProducts')
           .orderBy('round',descending: false)
@@ -284,7 +331,54 @@ class _GroomingMState extends State<GroomingM> {
           .where('Gender',isEqualTo: 'Men')
           .where('Category',isEqualTo: 'Skin')
           .where('country',isEqualTo: '${currentUser.country}')
+          :priceQuery == "0$sizeFilter"?
+      FirebaseFirestore.instance.collectionGroup('userProducts')
+          .orderBy('timestamp',descending: true)
+          .where('Gender',isEqualTo: 'Men')
+           .where('Category',isEqualTo: 'Skin')
 
+          .where('country',isEqualTo: '${currentUser.country}')
+          .where('$sizeFilter',isGreaterThanOrEqualTo: 1)
+          :priceQuery == "low$sizeFilter"?
+      FirebaseFirestore.instance.collectionGroup('userProducts')
+          .orderBy('round',descending: false)
+          .orderBy('timestamp',descending: true)
+          .where('Gender',isEqualTo: 'Men')
+           .where('Category',isEqualTo: 'Skin')
+          .where('$sizeFilter',isGreaterThanOrEqualTo: 1):
+      priceQuery == "high$sizeFilter"?
+      FirebaseFirestore.instance.collectionGroup('userProducts')
+          .orderBy('round',descending: true)
+          .orderBy('timestamp',descending: true)
+          .where('Gender',isEqualTo: 'Men')
+           .where('Category',isEqualTo: 'Skin')
+          .where('$sizeFilter',isGreaterThanOrEqualTo: 1)
+          :priceQuery == "0D$sizeFilter"?
+      FirebaseFirestore.instance.collectionGroup('userProducts')
+          .orderBy('timestamp',descending: true)
+          .where('Gender',isEqualTo: 'Men')
+           .where('Category',isEqualTo: 'Skin')
+
+          .where('country',isEqualTo: '${currentUser.country}')
+          .where('$sizeFilter',isGreaterThanOrEqualTo: 1)
+          :priceQuery == "lowD$sizeFilter"?
+      FirebaseFirestore.instance.collectionGroup('userProducts')
+          .orderBy('round',descending: false)
+          .orderBy('timestamp',descending: true)
+          .where('Gender',isEqualTo: 'Men')
+           .where('Category',isEqualTo: 'Skin')
+
+          .where('country',isEqualTo: '${currentUser.country}')
+          .where('$sizeFilter',isGreaterThanOrEqualTo: 1)
+          :priceQuery == "highD$sizeFilter"?
+      FirebaseFirestore.instance.collectionGroup('userProducts')
+          .orderBy('round',descending: true)
+          .orderBy('timestamp',descending: true)
+          .where('Gender',isEqualTo: 'Men')
+           .where('Category',isEqualTo: 'Skin')
+
+          .where('country',isEqualTo: '${currentUser.country}')
+          .where('$sizeFilter',isGreaterThanOrEqualTo: 1)
           :priceQuery == "lowD"?
       FirebaseFirestore.instance.collectionGroup('userProducts')
           .orderBy('round',descending: false)
@@ -420,7 +514,54 @@ class _GroomingMState extends State<GroomingM> {
            .where('Gender',isEqualTo: 'Men')
           .where('Category',isEqualTo: 'Hair')
           .where('country',isEqualTo: '${currentUser.country}')
+          :priceQuery == "0$sizeFilter"?
+      FirebaseFirestore.instance.collectionGroup('userProducts')
+          .orderBy('timestamp',descending: true)
+          .where('Gender',isEqualTo: 'Men')
+           .where('Category',isEqualTo: 'Hair')
 
+          .where('country',isEqualTo: '${currentUser.country}')
+          .where('$sizeFilter',isGreaterThanOrEqualTo: 1)
+          :priceQuery == "low$sizeFilter"?
+      FirebaseFirestore.instance.collectionGroup('userProducts')
+          .orderBy('round',descending: false)
+          .orderBy('timestamp',descending: true)
+          .where('Gender',isEqualTo: 'Men')
+           .where('Category',isEqualTo: 'Hair')
+          .where('$sizeFilter',isGreaterThanOrEqualTo: 1):
+      priceQuery == "high$sizeFilter"?
+      FirebaseFirestore.instance.collectionGroup('userProducts')
+          .orderBy('round',descending: true)
+          .orderBy('timestamp',descending: true)
+          .where('Gender',isEqualTo: 'Men')
+           .where('Category',isEqualTo: 'Hair')
+          .where('$sizeFilter',isGreaterThanOrEqualTo: 1)
+          :priceQuery == "0D$sizeFilter"?
+      FirebaseFirestore.instance.collectionGroup('userProducts')
+          .orderBy('timestamp',descending: true)
+          .where('Gender',isEqualTo: 'Men')
+           .where('Category',isEqualTo: 'Hair')
+
+          .where('country',isEqualTo: '${currentUser.country}')
+          .where('$sizeFilter',isGreaterThanOrEqualTo: 1)
+          :priceQuery == "lowD$sizeFilter"?
+      FirebaseFirestore.instance.collectionGroup('userProducts')
+          .orderBy('round',descending: false)
+          .orderBy('timestamp',descending: true)
+          .where('Gender',isEqualTo: 'Men')
+           .where('Category',isEqualTo: 'Hair')
+
+          .where('country',isEqualTo: '${currentUser.country}')
+          .where('$sizeFilter',isGreaterThanOrEqualTo: 1)
+          :priceQuery == "highD$sizeFilter"?
+      FirebaseFirestore.instance.collectionGroup('userProducts')
+          .orderBy('round',descending: true)
+          .orderBy('timestamp',descending: true)
+          .where('Gender',isEqualTo: 'Men')
+           .where('Category',isEqualTo: 'Hair')
+
+          .where('country',isEqualTo: '${currentUser.country}')
+          .where('$sizeFilter',isGreaterThanOrEqualTo: 1)
           :priceQuery == "lowD"?
       FirebaseFirestore.instance.collectionGroup('userProducts')
           .orderBy('round',descending: false)
@@ -556,7 +697,54 @@ class _GroomingMState extends State<GroomingM> {
           .where('Gender',isEqualTo: 'Men')
           .where('Category',isEqualTo: 'Shave')
           .where('country',isEqualTo: '${currentUser.country}')
+          :priceQuery == "0$sizeFilter"?
+      FirebaseFirestore.instance.collectionGroup('userProducts')
+          .orderBy('timestamp',descending: true)
+          .where('Gender',isEqualTo: 'Men')
+          .where('Category',isEqualTo: 'Shave')
 
+          .where('country',isEqualTo: '${currentUser.country}')
+          .where('$sizeFilter',isGreaterThanOrEqualTo: 1)
+          :priceQuery == "low$sizeFilter"?
+      FirebaseFirestore.instance.collectionGroup('userProducts')
+          .orderBy('round',descending: false)
+          .orderBy('timestamp',descending: true)
+          .where('Gender',isEqualTo: 'Men')
+          .where('Category',isEqualTo: 'Shave')
+          .where('$sizeFilter',isGreaterThanOrEqualTo: 1):
+      priceQuery == "high$sizeFilter"?
+      FirebaseFirestore.instance.collectionGroup('userProducts')
+          .orderBy('round',descending: true)
+          .orderBy('timestamp',descending: true)
+          .where('Gender',isEqualTo: 'Men')
+          .where('Category',isEqualTo: 'Shave')
+          .where('$sizeFilter',isGreaterThanOrEqualTo: 1)
+          :priceQuery == "0D$sizeFilter"?
+      FirebaseFirestore.instance.collectionGroup('userProducts')
+          .orderBy('timestamp',descending: true)
+          .where('Gender',isEqualTo: 'Men')
+          .where('Category',isEqualTo: 'Shave')
+
+          .where('country',isEqualTo: '${currentUser.country}')
+          .where('$sizeFilter',isGreaterThanOrEqualTo: 1)
+          :priceQuery == "lowD$sizeFilter"?
+      FirebaseFirestore.instance.collectionGroup('userProducts')
+          .orderBy('round',descending: false)
+          .orderBy('timestamp',descending: true)
+          .where('Gender',isEqualTo: 'Men')
+          .where('Category',isEqualTo: 'Shave')
+
+          .where('country',isEqualTo: '${currentUser.country}')
+          .where('$sizeFilter',isGreaterThanOrEqualTo: 1)
+          :priceQuery == "highD$sizeFilter"?
+      FirebaseFirestore.instance.collectionGroup('userProducts')
+          .orderBy('round',descending: true)
+          .orderBy('timestamp',descending: true)
+          .where('Gender',isEqualTo: 'Men')
+          .where('Category',isEqualTo: 'Shave')
+
+          .where('country',isEqualTo: '${currentUser.country}')
+          .where('$sizeFilter',isGreaterThanOrEqualTo: 1)
           :priceQuery == "lowD"?
       FirebaseFirestore.instance.collectionGroup('userProducts')
           .orderBy('round',descending: false)
@@ -692,7 +880,54 @@ class _GroomingMState extends State<GroomingM> {
            .where('Gender',isEqualTo: 'Men')
           .where('Category',isEqualTo: 'Bath Essentials')
           .where('country',isEqualTo: '${currentUser.country}')
+          :priceQuery == "0$sizeFilter"?
+      FirebaseFirestore.instance.collectionGroup('userProducts')
+          .orderBy('timestamp',descending: true)
+          .where('Gender',isEqualTo: 'Men')
+           .where('Category',isEqualTo: 'Bath Essentials')
 
+          .where('country',isEqualTo: '${currentUser.country}')
+          .where('$sizeFilter',isGreaterThanOrEqualTo: 1)
+          :priceQuery == "low$sizeFilter"?
+      FirebaseFirestore.instance.collectionGroup('userProducts')
+          .orderBy('round',descending: false)
+          .orderBy('timestamp',descending: true)
+          .where('Gender',isEqualTo: 'Men')
+           .where('Category',isEqualTo: 'Bath Essentials')
+          .where('$sizeFilter',isGreaterThanOrEqualTo: 1):
+      priceQuery == "high$sizeFilter"?
+      FirebaseFirestore.instance.collectionGroup('userProducts')
+          .orderBy('round',descending: true)
+          .orderBy('timestamp',descending: true)
+          .where('Gender',isEqualTo: 'Men')
+           .where('Category',isEqualTo: 'Bath Essentials')
+          .where('$sizeFilter',isGreaterThanOrEqualTo: 1)
+          :priceQuery == "0D$sizeFilter"?
+      FirebaseFirestore.instance.collectionGroup('userProducts')
+          .orderBy('timestamp',descending: true)
+          .where('Gender',isEqualTo: 'Men')
+           .where('Category',isEqualTo: 'Bath Essentials')
+
+          .where('country',isEqualTo: '${currentUser.country}')
+          .where('$sizeFilter',isGreaterThanOrEqualTo: 1)
+          :priceQuery == "lowD$sizeFilter"?
+      FirebaseFirestore.instance.collectionGroup('userProducts')
+          .orderBy('round',descending: false)
+          .orderBy('timestamp',descending: true)
+          .where('Gender',isEqualTo: 'Men')
+           .where('Category',isEqualTo: 'Bath Essentials')
+
+          .where('country',isEqualTo: '${currentUser.country}')
+          .where('$sizeFilter',isGreaterThanOrEqualTo: 1)
+          :priceQuery == "highD$sizeFilter"?
+      FirebaseFirestore.instance.collectionGroup('userProducts')
+          .orderBy('round',descending: true)
+          .orderBy('timestamp',descending: true)
+          .where('Gender',isEqualTo: 'Men')
+           .where('Category',isEqualTo: 'Bath Essentials')
+
+          .where('country',isEqualTo: '${currentUser.country}')
+          .where('$sizeFilter',isGreaterThanOrEqualTo: 1)
           :priceQuery == "lowD"?
       FirebaseFirestore.instance.collectionGroup('userProducts')
           .orderBy('round',descending: false)
@@ -828,7 +1063,54 @@ class _GroomingMState extends State<GroomingM> {
            .where('Gender',isEqualTo: 'Men')
           .where('Category',isEqualTo: 'Body Care')
           .where('country',isEqualTo: '${currentUser.country}')
+          :priceQuery == "0$sizeFilter"?
+      FirebaseFirestore.instance.collectionGroup('userProducts')
+          .orderBy('timestamp',descending: true)
+          .where('Gender',isEqualTo: 'Men')
+          .where('Category',isEqualTo: 'Body Care')
 
+          .where('country',isEqualTo: '${currentUser.country}')
+          .where('$sizeFilter',isGreaterThanOrEqualTo: 1)
+          :priceQuery == "low$sizeFilter"?
+      FirebaseFirestore.instance.collectionGroup('userProducts')
+          .orderBy('round',descending: false)
+          .orderBy('timestamp',descending: true)
+          .where('Gender',isEqualTo: 'Men')
+          .where('Category',isEqualTo: 'Body Care')
+          .where('$sizeFilter',isGreaterThanOrEqualTo: 1):
+      priceQuery == "high$sizeFilter"?
+      FirebaseFirestore.instance.collectionGroup('userProducts')
+          .orderBy('round',descending: true)
+          .orderBy('timestamp',descending: true)
+          .where('Gender',isEqualTo: 'Men')
+          .where('Category',isEqualTo: 'Body Care')
+          .where('$sizeFilter',isGreaterThanOrEqualTo: 1)
+          :priceQuery == "0D$sizeFilter"?
+      FirebaseFirestore.instance.collectionGroup('userProducts')
+          .orderBy('timestamp',descending: true)
+          .where('Gender',isEqualTo: 'Men')
+          .where('Category',isEqualTo: 'Body Care')
+
+          .where('country',isEqualTo: '${currentUser.country}')
+          .where('$sizeFilter',isGreaterThanOrEqualTo: 1)
+          :priceQuery == "lowD$sizeFilter"?
+      FirebaseFirestore.instance.collectionGroup('userProducts')
+          .orderBy('round',descending: false)
+          .orderBy('timestamp',descending: true)
+          .where('Gender',isEqualTo: 'Men')
+          .where('Category',isEqualTo: 'Body Care')
+
+          .where('country',isEqualTo: '${currentUser.country}')
+          .where('$sizeFilter',isGreaterThanOrEqualTo: 1)
+          :priceQuery == "highD$sizeFilter"?
+      FirebaseFirestore.instance.collectionGroup('userProducts')
+          .orderBy('round',descending: true)
+          .orderBy('timestamp',descending: true)
+          .where('Gender',isEqualTo: 'Men')
+          .where('Category',isEqualTo: 'Body Care')
+
+          .where('country',isEqualTo: '${currentUser.country}')
+          .where('$sizeFilter',isGreaterThanOrEqualTo: 1)
           :priceQuery == "lowD"?
       FirebaseFirestore.instance.collectionGroup('userProducts')
           .orderBy('round',descending: false)
