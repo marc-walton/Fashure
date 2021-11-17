@@ -171,7 +171,7 @@ class _BagsTGState extends State<BagsTG> {
             .where('Gender',isEqualTo: 'Teen-Girls')
             .where('Category',isEqualTo: 'TGBackpacks')
             .where('country',isEqualTo: '${currentUser.country}')
-            :priceQuery == "low$sizeFilter"?
+            :priceQuery == "lowS$sizeFilter"?
         FirebaseFirestore.instance.collectionGroup('userProducts')
             .orderBy('round',descending: false)
             .orderBy('timestamp',descending: true)
@@ -352,7 +352,7 @@ class _BagsTGState extends State<BagsTG> {
             .where('Gender',isEqualTo: 'Teen-Girls')
             .where('Category',isEqualTo: 'TGShoulder & Cross body Bags')
             .where('country',isEqualTo: '${currentUser.country}')
-            :priceQuery == "low$sizeFilter"?
+            :priceQuery == "lowS$sizeFilter"?
         FirebaseFirestore.instance.collectionGroup('userProducts')
             .orderBy('round',descending: false)
             .orderBy('timestamp',descending: true)
@@ -534,7 +534,7 @@ class _BagsTGState extends State<BagsTG> {
             .where('Gender',isEqualTo: 'Teen-Girls')
             .where('Category',isEqualTo: 'TGBelt Bags')
             .where('country',isEqualTo: '${currentUser.country}')
-            :priceQuery == "low$sizeFilter"?
+            :priceQuery == "lowS$sizeFilter"?
         FirebaseFirestore.instance.collectionGroup('userProducts')
             .orderBy('round',descending: false)
             .orderBy('timestamp',descending: true)
@@ -719,7 +719,7 @@ class _BagsTGState extends State<BagsTG> {
             .where('Gender',isEqualTo: 'Teen-Girls')
             .where('Category',isEqualTo: 'TGBeach Bags')
             .where('country',isEqualTo: '${currentUser.country}')
-            :priceQuery == "low$sizeFilter"?
+            :priceQuery == "lowS$sizeFilter"?
         FirebaseFirestore.instance.collectionGroup('userProducts')
             .orderBy('round',descending: false)
             .orderBy('timestamp',descending: true)
@@ -907,7 +907,7 @@ class _BagsTGState extends State<BagsTG> {
             .where('Gender',isEqualTo: 'Teen-Girls')
             .where('Category',isEqualTo: 'TGTote Bags')
             .where('country',isEqualTo: '${currentUser.country}')
-            :priceQuery == "low$sizeFilter"?
+            :priceQuery == "lowS$sizeFilter"?
         FirebaseFirestore.instance.collectionGroup('userProducts')
             .orderBy('round',descending: false)
             .orderBy('timestamp',descending: true)

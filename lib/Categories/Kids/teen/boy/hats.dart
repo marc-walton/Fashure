@@ -168,7 +168,7 @@ class _HatsTBState extends State<HatsTB> {
             .where('Gender',isEqualTo: 'Teen-Boys')
             .where('Category',isEqualTo: 'TBCaps')
             .where('country',isEqualTo: '${currentUser.country}')
-            :priceQuery == "low$sizeFilter"?
+            :priceQuery == "lowS$sizeFilter"?
         FirebaseFirestore.instance.collectionGroup('userProducts')
             .orderBy('round',descending: false)
             .orderBy('timestamp',descending: true)
@@ -348,7 +348,7 @@ class _HatsTBState extends State<HatsTB> {
             .where('Gender',isEqualTo: 'Teen-Boys')
             .where('Category',isEqualTo: 'TBKnitted Hats/Beanie')
             .where('country',isEqualTo: '${currentUser.country}')
-            :priceQuery == "low$sizeFilter"?
+            :priceQuery == "lowS$sizeFilter"?
         FirebaseFirestore.instance.collectionGroup('userProducts')
             .orderBy('round',descending: false)
             .orderBy('timestamp',descending: true)

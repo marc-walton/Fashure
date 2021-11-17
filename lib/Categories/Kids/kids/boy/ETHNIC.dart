@@ -168,7 +168,7 @@ class _KBEthnicState extends State<KBEthnic> {
           .where('Gender',isEqualTo: 'Kids-Boys')
           .where('Category',isEqualTo: 'KBKurta Set')
           .where('country',isEqualTo: '${currentUser.country}')
-          :priceQuery == "low$sizeFilter"?
+          :priceQuery == "lowS$sizeFilter"?
       FirebaseFirestore.instance.collectionGroup('userProducts')
           .orderBy('round',descending: false)
           .orderBy('timestamp',descending: true)
@@ -348,7 +348,7 @@ class _KBEthnicState extends State<KBEthnic> {
           .where('Gender',isEqualTo: 'Kids-Boys')
           .where('Category',isEqualTo: 'KBSuit Sets')
           .where('country',isEqualTo: '${currentUser.country}')
-          :priceQuery == "low$sizeFilter"?
+          :priceQuery == "lowS$sizeFilter"?
       FirebaseFirestore.instance.collectionGroup('userProducts')
           .orderBy('round',descending: false)
           .orderBy('timestamp',descending: true)
@@ -528,7 +528,7 @@ class _KBEthnicState extends State<KBEthnic> {
           .where('Gender',isEqualTo: 'Kids-Boys')
           .where('Category',isEqualTo: 'KBKurta and Tops')
           .where('country',isEqualTo: '${currentUser.country}')
-          :priceQuery == "low$sizeFilter"?
+          :priceQuery == "lowS$sizeFilter"?
       FirebaseFirestore.instance.collectionGroup('userProducts')
           .orderBy('round',descending: false)
           .orderBy('timestamp',descending: true)
@@ -708,7 +708,7 @@ class _KBEthnicState extends State<KBEthnic> {
           .where('Gender',isEqualTo: 'Kids-Boys')
           .where('Category',isEqualTo: 'KBEthnic Bottoms')
           .where('country',isEqualTo: '${currentUser.country}')
-          :priceQuery == "low$sizeFilter"?
+          :priceQuery == "lowS$sizeFilter"?
       FirebaseFirestore.instance.collectionGroup('userProducts')
           .orderBy('round',descending: false)
           .orderBy('timestamp',descending: true)
@@ -888,7 +888,7 @@ class _KBEthnicState extends State<KBEthnic> {
           .where('Gender',isEqualTo: 'Kids-Boys')
           .where('Category',isEqualTo: 'KBIndo Western & Fusion Wear')
           .where('country',isEqualTo: '${currentUser.country}')
-          :priceQuery == "low$sizeFilter"?
+          :priceQuery == "lowS$sizeFilter"?
       FirebaseFirestore.instance.collectionGroup('userProducts')
           .orderBy('round',descending: false)
           .orderBy('timestamp',descending: true)
@@ -1068,7 +1068,7 @@ class _KBEthnicState extends State<KBEthnic> {
           .where('Gender',isEqualTo: 'Kids-Boys')
           .where('Category',isEqualTo: 'KBSherwanis')
           .where('country',isEqualTo: '${currentUser.country}')
-          :priceQuery == "low$sizeFilter"?
+          :priceQuery == "lowS$sizeFilter"?
       FirebaseFirestore.instance.collectionGroup('userProducts')
           .orderBy('round',descending: false)
           .orderBy('timestamp',descending: true)
@@ -1248,7 +1248,7 @@ class _KBEthnicState extends State<KBEthnic> {
           .where('Gender',isEqualTo: 'Kids-Boys')
            .where('Category',isEqualTo: 'KBJackets')
           .where('country',isEqualTo: '${currentUser.country}')
-          :priceQuery == "low$sizeFilter"?
+          :priceQuery == "lowS$sizeFilter"?
       FirebaseFirestore.instance.collectionGroup('userProducts')
           .orderBy('round',descending: false)
           .orderBy('timestamp',descending: true)

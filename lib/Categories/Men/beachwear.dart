@@ -181,7 +181,7 @@ height: MediaQuery.of(context).size.height,
           .where('Gender',isEqualTo: 'Men')
           .where('Category',isEqualTo: 'MBTops')
           .where('$sizeFilter',isGreaterThanOrEqualTo: 1)
-          :priceQuery == "low$sizeFilter"?
+          :priceQuery == "lowS$sizeFilter"?
       FirebaseFirestore.instance.collectionGroup('userProducts')
           .orderBy('round',descending: false)
           .orderBy('timestamp',descending: true)
@@ -373,7 +373,7 @@ height: MediaQuery.of(context).size.height,
            .where('Gender',isEqualTo: 'Men')
           .where('Category',isEqualTo: 'MBShorts')
           .where('$sizeFilter',isGreaterThanOrEqualTo: 1)
-          :priceQuery == "low$sizeFilter"?
+          :priceQuery == "lowS$sizeFilter"?
       FirebaseFirestore.instance.collectionGroup('userProducts')
           .orderBy('round',descending: false)
           .orderBy('timestamp',descending: true)
@@ -565,7 +565,7 @@ height: MediaQuery.of(context).size.height,
           .where('Gender',isEqualTo: 'Men')
           .where('Category',isEqualTo: 'MBTrunks')
           .where('$sizeFilter',isGreaterThanOrEqualTo: 1)
-          :priceQuery == "low$sizeFilter"?
+          :priceQuery == "lowS$sizeFilter"?
       FirebaseFirestore.instance.collectionGroup('userProducts')
           .orderBy('round',descending: false)
           .orderBy('timestamp',descending: true)
@@ -757,7 +757,7 @@ height: MediaQuery.of(context).size.height,
            .where('Gender',isEqualTo: 'Men')
           .where('Category',isEqualTo: 'MBFootwear')
           .where('$sizeFilter',isGreaterThanOrEqualTo: 1)
-          :priceQuery == "low$sizeFilter"?
+          :priceQuery == "lowS$sizeFilter"?
       FirebaseFirestore.instance.collectionGroup('userProducts')
           .orderBy('round',descending: false)
           .orderBy('timestamp',descending: true)
@@ -954,7 +954,7 @@ height: MediaQuery.of(context).size.height,
 
           .where('country',isEqualTo: '${currentUser.country}')
           .where('$sizeFilter',isGreaterThanOrEqualTo: 1)
-          :priceQuery == "low$sizeFilter"?
+          :priceQuery == "lowS$sizeFilter"?
       FirebaseFirestore.instance.collectionGroup('userProducts')
           .orderBy('round',descending: false)
           .orderBy('timestamp',descending: true)

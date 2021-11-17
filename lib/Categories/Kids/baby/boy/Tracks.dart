@@ -169,7 +169,7 @@ class _BabytrBState extends State<BabytrB> {
           .where('Gender',isEqualTo: 'Baby-Boys')
          .where('Category',isEqualTo: 'BBTracks')
           .where('country',isEqualTo: '${currentUser.country}')
-          :priceQuery == "low$sizeFilter"?
+          :priceQuery == "lowS$sizeFilter"?
       FirebaseFirestore.instance.collectionGroup('userProducts')
           .orderBy('round',descending: false)
           .orderBy('timestamp',descending: true)

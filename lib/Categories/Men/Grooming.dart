@@ -156,7 +156,7 @@ class _GroomingMState extends State<GroomingM> {
 
           .where('country',isEqualTo: '${currentUser.country}')
           .where('$sizeFilter',isGreaterThanOrEqualTo: 1)
-          :priceQuery == "low$sizeFilter"?
+          :priceQuery == "lowS$sizeFilter"?
       FirebaseFirestore.instance.collectionGroup('userProducts')
           .orderBy('round',descending: false)
           .orderBy('timestamp',descending: true)
@@ -339,7 +339,7 @@ class _GroomingMState extends State<GroomingM> {
 
           .where('country',isEqualTo: '${currentUser.country}')
           .where('$sizeFilter',isGreaterThanOrEqualTo: 1)
-          :priceQuery == "low$sizeFilter"?
+          :priceQuery == "lowS$sizeFilter"?
       FirebaseFirestore.instance.collectionGroup('userProducts')
           .orderBy('round',descending: false)
           .orderBy('timestamp',descending: true)
@@ -522,7 +522,7 @@ class _GroomingMState extends State<GroomingM> {
 
           .where('country',isEqualTo: '${currentUser.country}')
           .where('$sizeFilter',isGreaterThanOrEqualTo: 1)
-          :priceQuery == "low$sizeFilter"?
+          :priceQuery == "lowS$sizeFilter"?
       FirebaseFirestore.instance.collectionGroup('userProducts')
           .orderBy('round',descending: false)
           .orderBy('timestamp',descending: true)
@@ -705,7 +705,7 @@ class _GroomingMState extends State<GroomingM> {
 
           .where('country',isEqualTo: '${currentUser.country}')
           .where('$sizeFilter',isGreaterThanOrEqualTo: 1)
-          :priceQuery == "low$sizeFilter"?
+          :priceQuery == "lowS$sizeFilter"?
       FirebaseFirestore.instance.collectionGroup('userProducts')
           .orderBy('round',descending: false)
           .orderBy('timestamp',descending: true)
@@ -888,7 +888,7 @@ class _GroomingMState extends State<GroomingM> {
 
           .where('country',isEqualTo: '${currentUser.country}')
           .where('$sizeFilter',isGreaterThanOrEqualTo: 1)
-          :priceQuery == "low$sizeFilter"?
+          :priceQuery == "lowS$sizeFilter"?
       FirebaseFirestore.instance.collectionGroup('userProducts')
           .orderBy('round',descending: false)
           .orderBy('timestamp',descending: true)
@@ -1071,7 +1071,7 @@ class _GroomingMState extends State<GroomingM> {
 
           .where('country',isEqualTo: '${currentUser.country}')
           .where('$sizeFilter',isGreaterThanOrEqualTo: 1)
-          :priceQuery == "low$sizeFilter"?
+          :priceQuery == "lowS$sizeFilter"?
       FirebaseFirestore.instance.collectionGroup('userProducts')
           .orderBy('round',descending: false)
           .orderBy('timestamp',descending: true)

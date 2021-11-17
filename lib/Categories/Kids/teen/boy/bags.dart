@@ -167,7 +167,7 @@ class _BagsTBState extends State<BagsTB> {
            .where('Gender',isEqualTo: 'Teen-Boys')
             .where('Category',isEqualTo: 'TBBackpacks')
             .where('country',isEqualTo: '${currentUser.country}')
-            :priceQuery == "low$sizeFilter"?
+            :priceQuery == "lowS$sizeFilter"?
         FirebaseFirestore.instance.collectionGroup('userProducts')
             .orderBy('round',descending: false)
             .orderBy('timestamp',descending: true)
@@ -347,7 +347,7 @@ class _BagsTBState extends State<BagsTB> {
            .where('Gender',isEqualTo: 'Teen-Boys')
             .where('Category',isEqualTo: 'TBShoulder Bags')
             .where('country',isEqualTo: '${currentUser.country}')
-            :priceQuery == "low$sizeFilter"?
+            :priceQuery == "lowS$sizeFilter"?
         FirebaseFirestore.instance.collectionGroup('userProducts')
             .orderBy('round',descending: false)
             .orderBy('timestamp',descending: true)
@@ -527,7 +527,7 @@ class _BagsTBState extends State<BagsTB> {
            .where('Gender',isEqualTo: 'Teen-Boys')
             .where('Category',isEqualTo: 'TBBelt Bags')
             .where('country',isEqualTo: '${currentUser.country}')
-            :priceQuery == "low$sizeFilter"?
+            :priceQuery == "lowS$sizeFilter"?
         FirebaseFirestore.instance.collectionGroup('userProducts')
             .orderBy('round',descending: false)
             .orderBy('timestamp',descending: true)
@@ -707,7 +707,7 @@ class _BagsTBState extends State<BagsTB> {
            .where('Gender',isEqualTo: 'Teen-Boys')
             .where('Category',isEqualTo: 'TBBeach Bags')
             .where('country',isEqualTo: '${currentUser.country}')
-            :priceQuery == "low$sizeFilter"?
+            :priceQuery == "lowS$sizeFilter"?
         FirebaseFirestore.instance.collectionGroup('userProducts')
             .orderBy('round',descending: false)
             .orderBy('timestamp',descending: true)

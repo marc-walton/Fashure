@@ -4,9 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:paginate_firestore/paginate_firestore.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fashow/HomePage.dart';
-import 'package:fashow/progress.dart';
-import 'package:fashow/user.dart';
-import 'package:fashow/product_custom.dart';
+
 import 'package:fashow/Product_screen.dart';
 import 'package:fashow/ActivityFeed.dart';
 import 'package:fashow/Constants.dart';
@@ -207,7 +205,7 @@ class _WomenState extends State<Women> with  TickerProviderStateMixin {
           .orderBy('timestamp',descending: true)
           .where('Gender',isEqualTo: 'Women')
 .where('country',isEqualTo: '${currentUser.country}')
-          :priceQuery == "low$sizeFilter"?
+          :priceQuery == "lowS$sizeFilter"?
       FirebaseFirestore.instance.collectionGroup('userProducts')
           .orderBy('round',descending: false)
           .orderBy('timestamp',descending: true)
